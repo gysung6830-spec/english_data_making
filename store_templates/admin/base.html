@@ -48,6 +48,8 @@
       <div class="sep">처음 한 번만</div>
       <a href="{{ url_for('admin.settings') }}" class="{{ 'on' if request.endpoint == 'admin.settings' }}">
         ⚙️ 가게 정보</a>
+      <a href="{{ url_for('admin.pricing') }}" class="{{ 'on' if request.endpoint == 'admin.pricing' }}">
+        🏷 가격 가이드</a>
       <a href="{{ url_for('admin.seo') }}" class="{{ 'on' if request.endpoint == 'admin.seo' }}">
         🔍 검색 등록</a>
       <a href="{{ url_for('admin.backup') }}" class="{{ 'on' if request.endpoint == 'admin.backup' }}">

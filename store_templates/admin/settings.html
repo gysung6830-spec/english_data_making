@@ -186,27 +186,33 @@
 
   <div class="adm-field">
     <label class="check">
-      <input type="checkbox" name="discount_quantity_enabled" value="1"
-             {{ 'checked' if s.discount.get('quantity_enabled', True) }}>
-      <span><b>수량 할인</b> — 여러 부를 한 번에 받으실 때
-        (학원에서 선생님 여러 분이 나눠 쓰실 때)</span>
+      <input type="checkbox" name="discount_loyalty_enabled" value="1"
+             {{ 'checked' if s.discount.get('loyalty_enabled', True) }}>
+      <span><b>단골 할인</b> — 이 사이트에서 여러 번 사신 분께</span>
     </label>
+    <div class="tip" style="margin-top:6px;">
+      <b>몇 번째 구매인지</b>로 셉니다. 이메일이 열쇠라 회원가입이 필요 없습니다.
+      <b>입금이 확인된 주문만</b> 세기 때문에, 주문만 넣고 안 내신 건은 안 칩니다.
+    </div>
     <div class="wrapbox" style="margin-top:10px;">
       <table class="adm-table">
-        <thead><tr><th style="width:150px;">몇 부부터</th><th>몇 %</th></tr></thead>
+        <thead><tr><th style="width:170px;">몇 번째 구매부터</th><th>몇 %</th></tr></thead>
         <tbody>
-        {% for row in (s.discount.get('quantity', []) + [{}, {}])[:5] %}
+        {% for row in (s.discount.get('loyalty', []) + [{}, {}])[:5] %}
           <tr>
-            <td><input type="number" name="qty_min" min="2" max="99"
-                       value="{{ row.get('min','') }}" placeholder="예: 3" style="width:100%;"></td>
-            <td><input type="number" name="qty_percent" min="0" max="50"
-                       value="{{ row.get('percent','') }}" placeholder="예: 10" style="width:100%;"></td>
+            <td><input type="number" name="loyal_min" min="2" max="99"
+                       value="{{ row.get('min','') }}" placeholder="예: 2"
+                       style="width:100%;"></td>
+            <td><input type="number" name="loyal_percent" min="0" max="50"
+                       value="{{ row.get('percent','') }}" placeholder="예: 5"
+                       style="width:100%;"></td>
           </tr>
         {% endfor %}
         </tbody>
       </table>
     </div>
-    <div class="tip">빈 줄은 자동으로 지워집니다. 조건이 여럿이면 <b>가장 큰 것 하나만</b> 붙습니다.</div>
+    <div class="tip">빈 줄은 자동으로 지워집니다. 조건이 여럿이면 <b>가장 높은 단계 하나만</b> 붙습니다.
+      권장: <b>2번째 5% · 4번째 10% · 7번째 15%</b></div>
   </div>
 
   <div class="adm-field">

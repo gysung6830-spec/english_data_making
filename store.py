@@ -353,16 +353,17 @@ def coupon_check():
 
 
 def quote_for(product: dict, sibling: dict | None, take_both: bool,
-              quantity: int, coupon_code: str) -> dict:
+              email: str, coupon_code: str) -> dict:
     """주문 금액을 한 곳에서 계산합니다. 화면과 접수가 같은 값을 쓰게 하려고 나눠 두었습니다."""
     site = sc.load_site()
-    unit = int(product.get("price", 0)) + (int(sibling.get("price", 0))
-                                           if (take_both and sibling) else 0)
-    subtotal = unit * quantity
-    rows, auto = sc.auto_discounts(site, subtotal, quantity, bool(take_both and sibling))
+    subtotal = int(product.get("price", 0)) + (int(sibling.get("price", 0))
+                                               if (take_both and sibling) else 0)
+    repeat_no = sc.paid_order_count(email) + 1        # 이번이 몇 번째 구매인지
+    rows, auto = sc.auto_discounts(site, subtotal, repeat_no,
+                                   bool(take_both and sibling))
     coupon, coupon_cut, coupon_note = sc.check_coupon(coupon_code, subtotal - auto)
     return {
-        "subtotal": subtotal, "rows": rows, "auto": auto,
+        "subtotal": subtotal, "rows": rows, "auto": auto, "repeat_no": repeat_no,
         "coupon": coupon, "coupon_cut": coupon_cut, "coupon_note": coupon_note,
         "discount": auto + coupon_cut,
         "final": subtotal - auto - coupon_cut,
@@ -381,12 +382,13 @@ def order_quote():
                     and x.get("package") and x.get("package") != product.get("package")), None)
     q = quote_for(product, sibling,
                   request.args.get("also") == "1",
-                  max(1, min(99, sc.to_int(request.args.get("qty"), 1))),
+                  sc.clean(request.args.get("email"), 120),
                   sc.clean(request.args.get("coupon"), 40).upper())
     return {
         "subtotal": q["subtotal"],
         "rows": [{"name": r["name"], "amount": r["amount"], "percent": r["percent"]}
                  for r in q["rows"]],
+        "repeat_no": q["repeat_no"],
         "coupon_ok": bool(q["coupon"]),
         "coupon_cut": q["coupon_cut"],
         "coupon_note": q["coupon_note"],
@@ -419,7 +421,6 @@ def order():
                                form=request.form, errors=errors), 429
 
     data, errors = sc.validate_contact(request.form)
-    quantity = max(1, min(99, sc.to_int(request.form.get("quantity"), 1)))
     depositor = sc.clean(request.form.get("depositor"), 50) or data["name"]
 
     receipt_kind = sc.clean(request.form.get("receipt_kind"), 20)
@@ -431,7 +432,8 @@ def order():
 
     take_both = bool(request.form.get("also")) and sibling is not None
     coupon_code = sc.clean(request.form.get("coupon"), 40).upper()
-    quote = quote_for(product, sibling, take_both, quantity, coupon_code)
+    quote = quote_for(product, sibling, take_both, data["email"], coupon_code)
+    quantity = 1                       # 디지털 자료라 부수 개념이 없습니다
     subtotal, discount = quote["subtotal"], quote["discount"]
     coupon = quote["coupon"]
     if coupon_code and coupon is None:

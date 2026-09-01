@@ -13,6 +13,7 @@
   /admin/free         무료 자료실 — 회차 자료 올리기
   /admin/leads        무료 자료 받아 가신 분 이메일 명단
   /admin/notices      공지 작성
+  /admin/pricing      가격 가이드 — 얼마에 팔지 정하기
   /admin/seo          검색 등록 — 네이버 · 구글에 사이트 알리기
   /admin/settings     가게 정보 · 계좌 · 프리패스 가격
   /admin/backup       백업 내려받기 · 되돌리기
@@ -1323,13 +1324,13 @@ def settings():
     disc = site.setdefault("discount", {})
     disc["bundle_enabled"] = bool(f.get("discount_bundle_enabled"))
     disc["bundle_percent"] = max(0, min(50, sc.to_int(f.get("discount_bundle_percent"), 0)))
-    disc["quantity_enabled"] = bool(f.get("discount_quantity_enabled"))
+    disc["loyalty_enabled"] = bool(f.get("discount_loyalty_enabled"))
     tiers = []
-    for need, pct in zip(f.getlist("qty_min"), f.getlist("qty_percent")):
+    for need, pct in zip(f.getlist("loyal_min"), f.getlist("loyal_percent")):
         need, pct = sc.to_int(need, 0), sc.to_int(pct, 0)
         if need >= 2 and 0 < pct <= 50:
             tiers.append({"min": need, "percent": pct})
-    disc["quantity"] = sorted(tiers, key=lambda t: t["min"])
+    disc["loyalty"] = sorted(tiers, key=lambda t: t["min"])
     disc["max_percent"] = max(0, min(70, sc.to_int(f.get("discount_max_percent"), 25)))
 
     # 시험지 제출 보상
@@ -1397,6 +1398,57 @@ def seo():
                            home_url=url_for("home", _external=True).rstrip("/"),
                            page_count=page_count,
                            free_count=len(freebies))
+
+
+# ---------------------------------------------------------------------------
+# 가격 가이드 — 얼마에 팔지 정할 때 보는 화면
+# ---------------------------------------------------------------------------
+# 지문 하나당 얼마로 잡을지. 지금 사이트의 실제 값에서 뽑은 기준입니다.
+PRICE_GUIDE = {
+    "analysis": {"low": 700, "mid": 800, "high": 950},
+    "problem": {"low": 850, "mid": 950, "high": 1150},
+}
+SMALL_PACK_BONUS = 1.5      # 10지문 미만은 손이 더 가므로 단가를 올립니다
+
+
+def per_passage_rows(catalog: dict) -> list[dict]:
+    """상품마다 '지문 하나에 얼마인지' 를 뽑습니다. 값이 튀는 것을 찾아냅니다."""
+    rows = []
+    for item in catalog["products"]:
+        passages = sc.to_int(item.get("passages"), 0)
+        price = sc.to_int(item.get("price"), 0)
+        if passages <= 0 or price <= 0:
+            continue
+        unit = price // passages
+        guide = PRICE_GUIDE.get(item.get("package"))
+        band = ""
+        if guide and passages >= 10:
+            if unit < guide["low"]:
+                band = "낮음"
+            elif unit > guide["high"]:
+                band = "높음"
+        rows.append({"name": item.get("name", ""), "slug": item.get("slug", ""),
+                     "package": item.get("package", ""), "passages": passages,
+                     "price": price, "unit": unit, "band": band,
+                     "sample": bool(item.get("sample"))})
+    return sorted(rows, key=lambda r: (r["package"], -r["unit"]))
+
+
+@admin_bp.route("/pricing")
+def pricing():
+    catalog = sc.load_raw_catalog()
+    rows = per_passage_rows(catalog)
+    mine = [r for r in rows if not r["sample"]]
+    stats = {}
+    for pid in ("analysis", "problem"):
+        units = sorted(r["unit"] for r in rows if r["package"] == pid and r["passages"] >= 10)
+        if units:
+            stats[pid] = {"min": units[0], "max": units[-1],
+                          "mid": units[len(units) // 2], "count": len(units)}
+    return render_template("admin/pricing.html", rows=rows, stats=stats,
+                           guide=PRICE_GUIDE, packages=sc.package_map(),
+                           mine_count=len(mine),
+                           site=sc.load_site())
 
 
 @admin_bp.route("/backup")

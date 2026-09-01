@@ -279,11 +279,11 @@ def test_order_saves_and_multiplies_amount():
     assert resp.status_code == 302
     done = body(c.get(resp.headers["Location"]))
     assert "22,000원" in done
-    # 여러 선생님이 나눠 쓰실 때를 위해 부수를 고를 수 있습니다.
+    # 디지털 자료라 부수 개념이 없습니다. 대신 몇 번째 구매인지로 깎아 줍니다.
     form = body(client().get("/order?slug=mock-2026-06-g3-analysis"))
-    assert 'name="quantity"' in form and "몇 부 받으실까요" in form
+    assert 'name="quantity"' not in form
     assert "결제하실 금액" in form
-    print("PASS  주문 저장 · 금액 표시 · 부수 고르기")
+    print("PASS  주문 저장 · 금액 표시")
 
 
 def test_order_both_packages_at_once():
@@ -1302,46 +1302,75 @@ def test_no_emoji_on_customer_pages():
 
 
 # ---- 자동 할인 (묶음 · 수량) ----------------------------------------------
-def test_bundle_and_quantity_discounts():
-    """쿠폰 없이도 함께 담거나 여러 부를 받으면 값이 내려가야 합니다."""
+def test_bundle_and_loyalty_discounts():
+    """함께 담거나, 이 사이트에서 여러 번 사면 값이 내려가야 합니다."""
     site = sc.load_site()
     site["discount"] = {"bundle_enabled": True, "bundle_percent": 12,
-                        "quantity_enabled": True,
-                        "quantity": [{"min": 3, "percent": 10}],
+                        "loyalty_enabled": True,
+                        "loyalty": [{"min": 2, "percent": 5}, {"min": 4, "percent": 10}],
                         "max_percent": 25}
     sc.save_site(site)
 
-    q = client().get("/order/quote?slug=mock-2026-06-g3-analysis&also=1&qty=1").get_json()
-    assert q["subtotal"] == 49000
+    q = client().get("/order/quote?slug=mock-2026-06-g3-analysis&also=1").get_json()
+    assert q["subtotal"] == 49000 and q["repeat_no"] == 1
     assert q["rows"][0]["name"] == "두 패키지 함께" and q["rows"][0]["amount"] == 5880
-    assert q["final"] == 43120
+    assert q["final"] == 43120          # 첫 구매라 단골 할인은 없습니다
 
-    q3 = client().get("/order/quote?slug=mock-2026-06-g3-analysis&also=0&qty=3").get_json()
-    assert q3["subtotal"] == 66000 and q3["final"] == 66000 - 6600
+    # 값을 치른 주문을 세 건 만들어 둡니다 → 이번이 4번째
+    email = "regular@example.com"
+    with store.app.app_context():
+        db = sc.get_db()
+        for i in range(3):
+            db.execute(
+                """INSERT INTO orders (order_no, kind, product_name, quantity, amount,
+                                       name, phone, email, status, created_at, updated_at)
+                   VALUES (?, 'product', '지난 주문', 1, 10000, '단골', '010-0000-0000',
+                           ?, '발송완료', ?, ?)""",
+                (f"OR-OLD-{i}", email, sc.stamp(), sc.stamp()))
+        db.commit()
+
+    q4 = client().get(
+        f"/order/quote?slug=mock-2026-06-g3-analysis&email={email}").get_json()
+    assert q4["repeat_no"] == 4
+    assert q4["rows"][0]["name"] == "4번째 구매 · 단골"
+    assert q4["final"] == 22000 - 2200          # 10%
 
     # 접수된 금액도 같아야 합니다
     c = client()
     resp = c.post("/order", data={
-        "slug": "mock-2026-06-g3-analysis", "also": "1", "quantity": "3",
-        "name": "할인", "phone": "010-9999-0000", "email": "sale@example.com",
-        "agree": "1"})
+        "slug": "mock-2026-06-g3-analysis", "name": "단골",
+        "phone": "010-9999-0000", "email": email, "agree": "1"})
     assert resp.status_code == 302
     with store.app.app_context():
         row = sc.get_db().execute(
-            "SELECT * FROM orders WHERE email = 'sale@example.com'").fetchone()
-    assert row["amount"] == 147000 - 17640 - 14700
-    print("PASS  묶음 할인 · 수량 할인")
+            "SELECT * FROM orders WHERE email = ? AND status = '입금대기'",
+            (email,)).fetchone()
+    assert row["amount"] == 19800
+    print("PASS  묶음 할인 · 단골 할인 (몇 번째 구매인지로)")
+
+
+def test_loyalty_counts_only_paid_orders():
+    """주문만 넣고 안 낸 것은 단골 횟수에 안 들어가야 합니다."""
+    email = "unpaid@example.com"
+    c = client()
+    c.post("/order", data={"slug": "mock-2026-06-g3-analysis", "name": "미납",
+                           "phone": "010-1111-2222", "email": email, "agree": "1"})
+    q = client().get(f"/order/quote?slug=mock-2026-06-g3-analysis&email={email}").get_json()
+    assert q["repeat_no"] == 1, "입금 전 주문이 단골 횟수에 들어갔습니다"
+    print("PASS  값을 치른 주문만 단골로 셈")
 
 
 def test_discount_has_a_ceiling():
     """실수로 너무 깎이지 않게 상한이 있어야 합니다."""
     site = sc.load_site()
     site["discount"] = {"bundle_enabled": True, "bundle_percent": 30,
-                        "quantity_enabled": True,
-                        "quantity": [{"min": 2, "percent": 30}],
+                        "loyalty_enabled": True,
+                        "loyalty": [{"min": 2, "percent": 30}],
                         "max_percent": 25}
     sc.save_site(site)
-    q = client().get("/order/quote?slug=mock-2026-06-g3-analysis&also=1&qty=2").get_json()
+    q = client().get(
+        "/order/quote?slug=mock-2026-06-g3-analysis&also=1&email=regular@example.com"
+    ).get_json()
     assert q["final"] == q["subtotal"] - q["subtotal"] * 25 // 100
     print("PASS  할인 상한 (겹쳐도 25%까지)")
 
@@ -1369,6 +1398,33 @@ def test_order_page_shows_download_when_ready():
     print("PASS  주문 확인 화면에서 바로 받기")
 
 
+def test_home_speaks_to_both_audiences():
+    """혼자 하는 학생과 가르치는 선생님, 둘 다에게 말을 걸어야 합니다."""
+    text = body(client().get("/"))
+    assert "혼자 공부하는 학생" in text and "가르치는 선생님" in text
+    assert "필생보 독학용" in text          # 학생 쪽 길
+    assert "학생용 · 강의용 2판본" in text   # 선생님 쪽 길
+    print("PASS  홈이 학생·선생님 두 갈래로 안내")
+
+
+def test_analysis_tagline_updated():
+    """지문분석지 한 줄 소개가 바뀌어야 합니다."""
+    text = body(client().get("/lineup"))
+    assert "시험에 나오는 모든 포인트를 담았습니다" in text
+    assert "어디를 봐야 하는지가 지면에 그려져" not in text
+    print("PASS  지문분석지 소개 문구")
+
+
+def test_admin_pricing_guide():
+    """가격 가이드가 실제 상품에서 지문당 단가를 계산해야 합니다."""
+    text = body(admin().get("/admin/pricing"))
+    assert "우리 손님은 두 부류입니다" in text
+    assert "독학하는 학생" in text and "차별화된 자료를 찾는 강사" in text
+    assert "지문 하나당" in text and "값 계산기" in text
+    assert "800원" in text and "950원" in text     # 지금 걸린 단가
+    print("PASS  가격 가이드 (지문당 단가 · 계산기)")
+
+
 def run_all():
     test_uses_temp_data_only()
     test_public_pages_open()
@@ -1377,6 +1433,8 @@ def run_all():
     test_home_reflects_lineup()
     test_home_shows_live_now_section()
     test_home_previews_every_category()
+    test_home_speaks_to_both_audiences()
+    test_analysis_tagline_updated()
     test_new_product_appears_in_home_updates()
     test_mobile_filters_collapse()
     test_long_pages_have_shortcuts()
@@ -1401,7 +1459,8 @@ def run_all():
     test_order_saves_and_multiplies_amount()
     test_order_both_packages_at_once()
     test_order_rejects_unknown_coupon()
-    test_bundle_and_quantity_discounts()
+    test_bundle_and_loyalty_discounts()
+    test_loyalty_counts_only_paid_orders()
     test_discount_has_a_ceiling()
     test_request_needs_no_passage()
     test_custom_request_accepted()
@@ -1418,6 +1477,7 @@ def run_all():
     test_admin_not_indexed_and_login_is_standalone()
     test_login_next_cannot_leave_admin()
     test_admin_pages_open()
+    test_admin_pricing_guide()
     test_setup_checklist_guides_first_day()
     test_admin_forms_offer_buttons_not_typing()
     test_admin_creates_product_visible_on_site()

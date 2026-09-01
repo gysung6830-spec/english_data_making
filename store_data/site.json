@@ -92,18 +92,18 @@
     "_안내": "자동으로 붙는 할인입니다. 관리자 화면 > 가게 정보 에서 고칩니다.",
     "bundle_enabled": true,
     "bundle_percent": 12,
-    "quantity_enabled": true,
-    "quantity": [
+    "loyalty_enabled": true,
+    "loyalty": [
       {
         "min": 2,
         "percent": 5
       },
       {
-        "min": 3,
+        "min": 4,
         "percent": 10
       },
       {
-        "min": 5,
+        "min": 7,
         "percent": 15
       }
     ],

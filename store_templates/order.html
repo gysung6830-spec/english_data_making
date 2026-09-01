@@ -117,23 +117,6 @@
         </div>
 
         <div class="field">
-          <label for="quantity">몇 부 받으실까요
-            <span class="hint">한 분이 쓰실 거면 1부 그대로 두세요</span></label>
-          <input type="number" id="quantity" name="quantity" min="1" max="99"
-                 value="{{ form.quantity or 1 }}" style="max-width:140px;">
-          <div class="pick-qty">
-            {% for n in [1, 2, 3, 5, 10] %}
-              <button type="button" class="qty-btn" data-qty="{{ n }}">{{ n }}부</button>
-            {% endfor %}
-          </div>
-          <p class="muted mb-0" style="font-size:13.5px;margin-top:8px;">
-            자료는 <b>사신 분 본인의 수업</b>에서 쓰실 수 있습니다.
-            같은 학원에서 여러 선생님이 나눠 쓰시려면 그 인원만큼 받아 두세요.
-            {% if discount.quantity_enabled|default(true) %}여러 부를 받으시면 값이 내려갑니다.{% endif %}
-          </p>
-        </div>
-
-        <div class="field">
           <label for="coupon">할인 쿠폰 코드 <span class="hint">있으면 넣어 주세요</span></label>
           <input type="text" id="coupon" name="coupon" value="{{ form.coupon or '' }}"
                  placeholder="ORT-XXXX-XXXX" autocapitalize="characters">
@@ -149,6 +132,8 @@
               <a href="{{ url_for('guide') }}#privacy" target="_blank">자세히</a></span>
           </label>
         </div>
+
+        <div id="loyalty-note" class="loyalty-note" hidden></div>
 
         <div class="sum-box">
           <div class="sum-row"><span>자료 값</span><b id="sum-subtotal">{{ p.price|won }}</b></div>
@@ -171,8 +156,9 @@
 (function () {
   var slug = {{ p.slug|tojson }};
   var also   = document.getElementById('also');
-  var qty    = document.getElementById('quantity');
+  var email  = document.getElementById('email');
   var coupon = document.getElementById('coupon');
+  var loyal  = document.getElementById('loyalty-note');
   var msg    = document.getElementById('coupon-msg');
   var out    = document.getElementById('total');
   var sub    = document.getElementById('sum-subtotal');
@@ -184,7 +170,7 @@
   function refresh() {
     var url = '/order/quote?slug=' + encodeURIComponent(slug)
             + '&also=' + (also && also.checked ? '1' : '0')
-            + '&qty=' + (qty ? qty.value : 1)
+            + '&email=' + encodeURIComponent(email ? email.value.trim() : '')
             + '&coupon=' + encodeURIComponent(coupon.value.trim());
     fetch(url).then(function (r) { return r.json(); }).then(function (d) {
       sub.textContent = won(d.subtotal);
@@ -199,6 +185,12 @@
       }
       cuts.innerHTML = html;
       out.textContent = won(d.final);
+      if (d.repeat_no > 1) {
+        loyal.hidden = false;
+        loyal.innerHTML = '<b>' + d.repeat_no + '번째 구매</b>시네요. 감사합니다.';
+      } else {
+        loyal.hidden = true;
+      }
       if (coupon.value.trim()) {
         msg.textContent = d.coupon_note;
         msg.style.color = d.coupon_ok ? 'var(--brand)' : 'var(--accent)';
@@ -216,18 +208,7 @@
       refresh();
     });
   }
-  if (qty) {
-    qty.addEventListener('input', later);
-    document.querySelectorAll('.qty-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        qty.value = btn.dataset.qty;
-        document.querySelectorAll('.qty-btn').forEach(function (b) {
-          b.classList.toggle('on', b === btn);
-        });
-        refresh();
-      });
-    });
-  }
+  if (email) { email.addEventListener('input', later); }
   coupon.addEventListener('input', later);
 
   // 증빙을 고르면 번호 칸이 나옵니다.
