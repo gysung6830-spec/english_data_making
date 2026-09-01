@@ -23,29 +23,51 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 .cover .tags b{ color:var(--must); }
 .cover .foot{ margin-top:18px; font-size:11px; opacity:.75; }
 
-/* 목차 */
-.toc{ padding:24mm 24mm; }
-.toc h1{ font-size:30px; font-weight:800; color:var(--deep-d); margin:0 0 3px; }
-.toc .h1sub{ font-size:11.5px; color:var(--muted); margin-bottom:20px; }
-/* 파트 헤더 */
-.pt-hd{ display:flex; align-items:baseline; border-bottom:2.5px solid var(--deep); padding-bottom:6px; margin:0 0 4px; }
-.pt-hd .pt-no{ font-size:11px; font-weight:800; color:#fff; background:var(--deep); border-radius:5px; padding:2px 9px; margin-right:10px; letter-spacing:.5px; }
-.pt-hd .pt-title{ font-size:17px; font-weight:800; color:var(--deep-d); }
-.pt-hd .pt-sub{ font-size:11px; font-weight:700; color:var(--muted); margin-left:8px; }
-.pt-hd .pt-page{ margin-left:auto; font-size:13px; font-weight:800; color:var(--deep); }
-.pt-desc{ font-size:10.5px; color:var(--muted); margin:5px 0 9px 2px; line-height:1.55; }
-.pt-desc b{ color:#2b3a34; }
-/* 유형 행 */
-.trow{ display:flex; align-items:baseline; font-size:13px; padding:4.5px 0; }
-.trow .tno{ flex:none; width:64px; font-size:10.5px; font-weight:800; color:#fff; background:var(--deep); border-radius:4px; padding:2px 0; text-align:center; }
-.trow .tnm{ flex:none; margin-left:11px; font-weight:800; color:#23272e; }
-.trow .tct{ font-size:10px; color:var(--muted); margin-left:7px; }
-.trow .dots{ flex:1; border-bottom:1px dotted #c2d6cd; margin:0 9px; transform:translateY(-3px); }
-.trow .pg{ flex:none; font-weight:800; color:var(--deep-d); min-width:26px; text-align:right; }
-.trow.sub{ padding:3px 0 3px 6px; font-size:12px; }
-.trow.sub .tnm{ font-weight:700; margin-left:0; }
-.grp{ margin:10px 0 2px; font-size:10.5px; font-weight:800; color:var(--deep); letter-spacing:.3px; }
-.toc .note{ margin-top:18px; font-size:10px; color:var(--muted); background:#eaf5f0; border-left:3px solid var(--deep); border-radius:0 5px 5px 0; padding:9px 12px; line-height:1.65; }
+/* ===== 목차 — 편집 디자인 ===== */
+.toc{ padding:22mm 22mm 16mm; font-family:"NanumSquareRound","Liberation Sans","DejaVu Sans",sans-serif; }
+/* 마스트헤드 */
+.toc-hd{ display:flex; align-items:flex-end; justify-content:space-between;
+  border-bottom:3px solid var(--deep-d); padding-bottom:9px; }
+.toc-hd .tl{ display:flex; align-items:flex-end; gap:13px; }
+.toc-hd .ko{ font-size:33px; font-weight:800; color:var(--deep-d); line-height:.95; letter-spacing:-.5px; }
+.toc-hd .en{ font-size:11px; font-weight:800; letter-spacing:7px; color:var(--deep); padding-bottom:4px; }
+.toc-hd .meta{ text-align:right; font-size:9px; color:var(--muted); line-height:1.6; padding-bottom:2px; }
+.toc-hd .meta b{ color:var(--deep-d); font-weight:800; }
+.toc-lead{ font-size:10px; color:#6b7280; margin:8px 1px 4px; line-height:1.5; }
+.toc-lead b{ color:var(--deep-d); }
+/* 파트 밴드 */
+.part{ margin-top:13px; }
+.part-hd{ display:flex; align-items:center; gap:12px; }
+.part-hd .pnum{ flex:none; width:32px; height:32px; background:var(--deep-d); color:#fff;
+  border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:800; }
+.part-hd .pnum.wide{ width:auto; padding:0 9px; font-size:12px; letter-spacing:1px; }
+.part-hd .pttl{ font-size:17.5px; font-weight:800; color:var(--deep-d); letter-spacing:-.3px; }
+.part-hd .psub{ font-size:9.5px; font-weight:700; color:var(--muted); margin-left:3px; }
+.part-hd .ppg{ margin-left:auto; font-size:10px; font-weight:700; color:var(--muted); }
+.part-hd .ppg b{ font-size:14px; color:var(--deep-d); font-weight:800; margin-left:2px; }
+.part-rule{ height:2px; background:linear-gradient(90deg,var(--deep) 0%, #d3e6dd 100%); margin:7px 0 5px 44px; }
+.part-desc{ font-size:9.4px; color:#828a92; margin:0 0 7px 44px; line-height:1.5; }
+.part-desc b{ color:#434b52; font-weight:700; }
+/* 그룹 라벨 */
+.grp{ display:flex; align-items:center; gap:9px; margin:10px 0 2px 44px; }
+.grp .gt{ font-size:9px; font-weight:800; color:var(--deep); letter-spacing:1px; white-space:nowrap; }
+.grp .gl{ flex:1; height:1px; background:#e8eeea; }
+/* 행 */
+.row{ display:flex; align-items:baseline; padding:4.5px 0 4.5px 44px; }
+.row .rn{ flex:none; width:50px; font-size:11px; font-weight:800; color:var(--deep); letter-spacing:.3px; }
+.row .rt{ flex:none; font-size:12.5px; font-weight:700; color:#23272e; }
+.row .rc{ font-size:9px; color:#9aa2ab; margin-left:8px; font-weight:600; }
+.row .rd{ flex:1; border-bottom:1px dotted #c9d5cf; margin:0 10px; transform:translateY(-3px); }
+.row .rp{ flex:none; font-size:13px; font-weight:800; color:var(--deep-d); min-width:32px; text-align:right; font-variant-numeric:tabular-nums; }
+.row.s .rt{ font-size:11px; font-weight:600; color:#39424b; }
+.row.s .rt b{ color:var(--deep-d); font-weight:800; }
+.row.s .rp{ font-size:11.5px; font-weight:700; }
+.row.s .rlead{ flex:none; font-size:10px; color:var(--deep); font-weight:800; margin-right:7px; min-width:14px; }
+/* 일러두기 */
+.toc .note{ margin-top:13px; font-size:9.3px; color:#5c646d; background:#f2f8f5;
+  border:1px solid #d9ebe2; border-radius:7px; padding:9px 13px; line-height:1.65; }
+.toc .note .nt{ font-size:8.5px; font-weight:800; color:#fff; background:var(--deep-d);
+  border-radius:4px; padding:2px 8px; letter-spacing:.5px; margin-right:7px; }
 .toc .note b{ color:var(--deep-d); }
 </style>
 </head>
@@ -66,45 +88,57 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 
   <!-- 목차 -->
   <div class="toc">
-    <h1>목차 <span style="font-size:16px;color:var(--muted)">Contents</span></h1>
-    <div class="h1sub">독해의 원리·사전 → 유형별 훈련(실전 기출 <b>224문항</b>). 문항마다 <b>재진술 훈련</b> 내장.</div>
+    <div class="toc-hd">
+      <div class="tl"><span class="ko">목차</span><span class="en">CONTENTS</span></div>
+      <div class="meta">실제 평가원 기출 <b>2022–2027</b> · <b>224문항</b><br>문항마다 <b>재진술 훈련</b> 내장</div>
+    </div>
+    <div class="toc-lead">독해의 <b>원리와 사전</b>을 먼저 익히고, <b>유형별 실전 기출</b>로 훈련합니다. 각 문항은 <b>직접 풀기 → 통합 해설 → 재진술</b>의 3단계 구성입니다.</div>
 
-    <div class="pt-hd"><span class="pt-no">PART 0</span><span class="pt-title">독해의 원리 · 사전</span><span class="pt-page">p.3</span></div>
-    <div class="pt-desc"><b>태도</b>로 시작 — 완급조절·추론·<b>재진술 원리</b>·글의 구조를 익힌 뒤 <b>신호 사전 · 긍정/부정(±) 어휘 사전 · 논리 관계 구문 사전</b>, 마지막에 <b>활용법</b>.</div>
-    <div class="trow sub"><span class="tnm">독해의 원리 — 태도·완급·추론·재진술·글의 구조</span><span class="dots"></span><span class="pg">3</span></div>
-    <div class="trow sub"><span class="tnm">형광펜 신호 사전(2쪽) — <b>기능 6색</b>으로 25종 영어 신호어 정리</span><span class="dots"></span><span class="pg">9</span></div>
-    <div class="trow sub"><span class="tnm">🔮 신호 예측 훈련 — 앞+신호로 '뒤' 맞히기(실제 기출)</span><span class="dots"></span><span class="pg">11</span></div>
-    <div class="trow sub"><span class="tnm">긍정/부정(±) 어휘 사전 — 방법 · <b>＋긍정</b> · <b>−부정</b>(대표+기출 전수조사, 뜻 병기)</span><span class="dots"></span><span class="pg">12</span></div>
-    <div class="trow sub"><span class="tnm">논리 관계 구문 사전 — 인과·등호·대조·비교·대체(대표+기출 전수조사)</span><span class="dots"></span><span class="pg">15</span></div>
-    <div class="trow sub"><span class="tnm">🖍 이 교재 200% 활용법 — 통합 카드 읽는 법(5분, PART 1 직전)</span><span class="dots"></span><span class="pg">18</span></div>
+    <div class="part">
+      <div class="part-hd"><span class="pnum">0</span><span class="pttl">독해의 원리 · 사전</span><span class="psub">PART</span><span class="ppg">p.<b>3</b></span></div>
+      <div class="part-rule"></div>
+      <div class="part-desc"><b>태도</b>로 시작해 완급조절·추론·<b>재진술 원리</b>·글의 구조를 익힌 뒤, <b>세 가지 사전</b>과 <b>활용법</b>으로 마무리합니다.</div>
+      <div class="row s"><span class="rt">독해의 원리 — 태도·완급·추론·재진술·글의 구조</span><span class="rd"></span><span class="rp">3</span></div>
+      <div class="row s"><span class="rt"><b>형광펜 신호 사전</b> — 기능 6색으로 신호어 정리(2쪽)</span><span class="rd"></span><span class="rp">9</span></div>
+      <div class="row s"><span class="rt">신호 예측 훈련 — 앞+신호로 '뒤' 예측(실제 기출)</span><span class="rd"></span><span class="rp">11</span></div>
+      <div class="row s"><span class="rt"><b>긍정/부정(±) 어휘 사전</b> — 방법·＋긍정·−부정(전수조사·뜻 병기)</span><span class="rd"></span><span class="rp">12</span></div>
+      <div class="row s"><span class="rt"><b>논리 관계 구문 사전</b> — 인과·등호·대조·비교·대체</span><span class="rd"></span><span class="rp">15</span></div>
+      <div class="row s"><span class="rt">이 교재 200% 활용법 — 통합 카드 읽는 법(PART 1 직전)</span><span class="rd"></span><span class="rp">18</span></div>
+    </div>
 
-    <div class="pt-hd" style="margin-top:16px;"><span class="pt-no">PART 1</span><span class="pt-title">유형별 훈련</span><span class="pt-sub">— 224문항 · 문항마다 3단계 + 재진술</span><span class="pt-page">p.22</span></div>
-    <div class="pt-desc">①<b>직접 풀기</b> → ②<b>훈련·해석 통합</b>(형광펜 + <b>전 문장 직독직해</b> + 근거 + <b>재진술</b>). 지문·선지·정답 모두 <b>실제 평가원 기출(2022~2027)</b>. 선지는 <b>영어-한글</b> 병기.</div>
+    <div class="part">
+      <div class="part-hd"><span class="pnum">1</span><span class="pttl">유형별 훈련</span><span class="psub">PART · 224문항</span><span class="ppg">p.<b>22</b></span></div>
+      <div class="part-rule"></div>
+      <div class="part-desc">①<b>직접 풀기</b> → ②<b>통합 해설</b>(형광펜 + 전 문장 직독직해 + 근거 + 재진술). 지문·선지·정답 모두 <b>실제 평가원 기출</b>, 선지 <b>영–한 병기</b>.</div>
 
-    <div class="grp">대의 파악</div>
-    <div class="trow"><span class="tno">21</span><span class="tnm">함축의미</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">22</span></div>
-    <div class="trow"><span class="tno">22</span><span class="tnm">요지</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">51</span></div>
-    <div class="trow"><span class="tno">23</span><span class="tnm">주제</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">80</span></div>
-    <div class="trow"><span class="tno">24</span><span class="tnm">제목</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">110</span></div>
+      <div class="grp"><span class="gt">대의 파악</span><span class="gl"></span></div>
+      <div class="row"><span class="rn">유형 21</span><span class="rt">함축의미</span><span class="rc">14문항</span><span class="rd"></span><span class="rp">22</span></div>
+      <div class="row"><span class="rn">유형 22</span><span class="rt">요지</span><span class="rc">14문항</span><span class="rd"></span><span class="rp">51</span></div>
+      <div class="row"><span class="rn">유형 23</span><span class="rt">주제</span><span class="rc">14문항</span><span class="rd"></span><span class="rp">80</span></div>
+      <div class="row"><span class="rn">유형 24</span><span class="rt">제목</span><span class="rc">14문항</span><span class="rd"></span><span class="rp">110</span></div>
 
-    <div class="grp">어휘 · 빈칸</div>
-    <div class="trow"><span class="tno">30</span><span class="tnm">어휘</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">139</span></div>
-    <div class="trow"><span class="tno">31~34</span><span class="tnm">빈칸추론</span><span class="tct">56문항</span><span class="dots"></span><span class="pg">168</span></div>
+      <div class="grp"><span class="gt">어휘 · 빈칸</span><span class="gl"></span></div>
+      <div class="row"><span class="rn">유형 30</span><span class="rt">어휘</span><span class="rc">14문항</span><span class="rd"></span><span class="rp">139</span></div>
+      <div class="row"><span class="rn">31~34</span><span class="rt">빈칸추론</span><span class="rc">56문항</span><span class="rd"></span><span class="rp">168</span></div>
 
-    <div class="grp">논리 · 구조</div>
-    <div class="trow"><span class="tno">35</span><span class="tnm">무관한 문장</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">281</span></div>
-    <div class="trow"><span class="tno">36~37</span><span class="tnm">글의 순서</span><span class="tct">28문항</span><span class="dots"></span><span class="pg">326</span></div>
-    <div class="trow"><span class="tno">38~39</span><span class="tnm">문장 삽입</span><span class="tct">28문항</span><span class="dots"></span><span class="pg">412</span></div>
-    <div class="trow"><span class="tno">40</span><span class="tnm">요약문</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">497</span></div>
-    <div class="trow"><span class="tno">41</span><span class="tnm">제목 · 장문</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">532</span></div>
+      <div class="grp"><span class="gt">논리 · 구조</span><span class="gl"></span></div>
+      <div class="row"><span class="rn">유형 35</span><span class="rt">무관한 문장</span><span class="rc">14문항</span><span class="rd"></span><span class="rp">281</span></div>
+      <div class="row"><span class="rn">36~37</span><span class="rt">글의 순서</span><span class="rc">28문항</span><span class="rd"></span><span class="rp">326</span></div>
+      <div class="row"><span class="rn">38~39</span><span class="rt">문장 삽입</span><span class="rc">28문항</span><span class="rd"></span><span class="rp">412</span></div>
+      <div class="row"><span class="rn">유형 40</span><span class="rt">요약문</span><span class="rc">14문항</span><span class="rd"></span><span class="rp">497</span></div>
+      <div class="row"><span class="rn">유형 41</span><span class="rt">제목 · 장문</span><span class="rc">14문항</span><span class="rd"></span><span class="rp">532</span></div>
+    </div>
 
-    <div class="pt-hd" style="margin-top:16px;"><span class="pt-no">부록</span><span class="pt-title">부록</span><span class="pt-sub">— 정답 · 재진술 답 · 어휘</span><span class="pt-page">p.572</span></div>
-    <div class="trow sub"><span class="tnm">📋 정답 일람표 — 14회차 × 16문항</span><span class="dots"></span><span class="pg">572</span></div>
-    <div class="trow sub"><span class="tnm">🔁 재진술 답 — 전 문항 재진술 지도(유형·순번·<b>교재 p.</b>·기출 출처)</span><span class="dots"></span><span class="pg">573</span></div>
-    <div class="trow sub"><span class="tnm">📖 어휘 색인 — A~Z 사전식(번호), 뜻 · 교재 페이지 병기</span><span class="dots"></span><span class="pg">601</span></div>
-    <div class="trow sub"><span class="tnm">✍️ 어휘 미니 테스트 — 랜덤 배열, 50개씩 번호별 테스트</span><span class="dots"></span><span class="pg">659</span></div>
+    <div class="part">
+      <div class="part-hd"><span class="pnum wide">부록</span><span class="pttl">부록</span><span class="psub">APPENDIX</span><span class="ppg">p.<b>572</b></span></div>
+      <div class="part-rule"></div>
+      <div class="row s"><span class="rt"><b>정답 일람표</b> — 14회차 × 16문항</span><span class="rd"></span><span class="rp">572</span></div>
+      <div class="row s"><span class="rt"><b>재진술 답</b> — 전 문항 재진술 지도(유형·순번·교재 p.·출처)</span><span class="rd"></span><span class="rp">573</span></div>
+      <div class="row s"><span class="rt"><b>어휘 색인</b> — A~Z 사전식, 뜻·교재 페이지 병기</span><span class="rd"></span><span class="rp">601</span></div>
+      <div class="row s"><span class="rt"><b>어휘 미니 테스트</b> — 50개씩 번호별 테스트</span><span class="rd"></span><span class="rp">659</span></div>
+    </div>
 
-    <div class="note">📖 <b>이렇게 쓰세요</b> — PART 0에서 <b>독해의 원리</b>와 <b>세 가지 사전</b>을 익힌 뒤, PART 1에서 유형마다 <b>①직접 풀기 → ②정답 칠 → ③직독직해·재진술</b>로 훈련합니다. &nbsp;🟡 읽을 문장 · 🔴 칠한 근거(신호) · 🔁 재진술.</div>
+    <div class="note"><span class="nt">일러두기</span>PART 0에서 <b>원리</b>와 <b>세 가지 사전</b>을 익힌 뒤, PART 1에서 유형마다 <b>①직접 풀기 → ②정답 칠 → ③직독직해·재진술</b>로 훈련합니다. &nbsp;🟡 읽을 문장 · 🔴 칠한 근거(신호) · 🔁 재진술.</div>
   </div>
 
 </body>
