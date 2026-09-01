@@ -2,3 +2,9 @@
 # 자료를 만드는 내부 도구(requirements.txt)와 달리 아주 가볍습니다.
 flask>=3.0
 gunicorn>=21.0
+
+# PDF 에 구매자 표시(워터마크)를 새기는 데 씁니다.
+# 없어도 사이트는 돌아갑니다 — 표시 없이 원본이 그대로 나갑니다.
+pypdf>=5.0
+reportlab>=4.0
+fonttools>=4.50

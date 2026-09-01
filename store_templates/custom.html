@@ -89,9 +89,9 @@
           <input type="text" id="name" name="name" value="{{ form.name or '' }}" required>
         </div>
         <div class="field">
-          <label for="phone">연락처<span class="req">*</span></label>
+          <label for="phone">연락처 <span class="hint">선택 — 문제가 생겼을 때만 씁니다</span></label>
           <input type="tel" id="phone" name="phone" value="{{ form.phone or '' }}"
-                 placeholder="010-1234-5678" required>
+                 placeholder="010-1234-5678">
         </div>
         <div class="field">
           <label for="email">이메일<span class="req">*</span>

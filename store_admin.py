@@ -631,6 +631,10 @@ def product_from_form(form, existing: dict | None = None) -> tuple[dict, list[st
     item["delivery"] = sc.clean(form.get("delivery"), 200)
     item["format"] = sc.clean(form.get("format"), 100)
     item["sample_file"] = sc.clean(form.get("sample_file"), 120)
+    # 이 상품이 대신하는 '부분' 상품들. (전권·전회차 상품에만 적습니다)
+    known = {p.get("slug") for p in sc.load_raw_catalog()["products"]}
+    item["covers"] = [x for x in form.getlist("covers")
+                      if x in known and x != item["slug"]]
     # 만든 날짜 — 홈의 '새로 올라왔습니다' 에 이 순서로 나옵니다.
     item.setdefault("added", sc.now_kst().date().isoformat())
     return item, errors
@@ -1319,6 +1323,11 @@ def settings():
         plans.append(plan)
     if plans:
         pass_cfg["plans"] = plans
+
+    # 구매자 표시 (워터마크)
+    mark = site.setdefault("watermark", {})
+    mark["enabled"] = bool(f.get("watermark_enabled"))
+    mark["diagonal"] = bool(f.get("watermark_diagonal"))
 
     # 자동 할인 (묶음 · 수량)
     disc = site.setdefault("discount", {})

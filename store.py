@@ -17,16 +17,18 @@
 """
 from __future__ import annotations
 
+import io
 import json
 import os
 import secrets
 from datetime import timedelta
 
 from flask import (Flask, abort, flash, redirect, render_template, request,
-                   send_from_directory, session, url_for)
+                   send_file, send_from_directory, session, url_for)
 from markupsafe import Markup, escape
 
 import store_common as sc
+import store_watermark as wm
 from store_admin import admin_bp
 
 # static_url_path 를 적어 주지 않으면 폴더 이름을 따라 /store_static 이 됩니다.
@@ -295,8 +297,10 @@ def product_detail(slug):
                and x.get("slug") != slug and x is not sibling][:3]
     sample_ready = bool(product.get("sample_file")
                         and (sc.SAMPLE_DIR / product["sample_file"]).exists())
+    full = sc.full_pack_for(product, catalog)
     return render_template("product.html", p=product, book=book,
-                           sibling=sibling, related=related, sample_ready=sample_ready)
+                           sibling=sibling, related=related, sample_ready=sample_ready,
+                           full=full, full_parts=len(full.get("covers", [])) if full else 0)
 
 
 @app.route("/books/<slug>")
@@ -412,7 +416,8 @@ def cart():
         if mate and mate["slug"] not in have and mate["slug"] not in {s["slug"] for s in suggest}:
             suggest.append(mate)
     return render_template("cart.html", items=items, rows=rows, auto=auto,
-                           subtotal=subtotal, final=subtotal - auto, suggest=suggest[:3])
+                           subtotal=subtotal, final=subtotal - auto, suggest=suggest[:3],
+                           full_offer=sc.full_pack_offer(items, catalog))
 
 
 @app.route("/cart/add", methods=["POST"])
@@ -441,6 +446,21 @@ def cart_remove():
     slug = sc.clean(request.form.get("slug"), 60)
     save_cart([x for x in cart_slugs() if x != slug])
     return redirect(back_to(url_for("cart")))
+
+
+@app.route("/cart/swap", methods=["POST"])
+def cart_swap():
+    """부분 상품 여러 개를 '전체' 상품 하나로 바꿔 담습니다."""
+    catalog = sc.load_catalog()
+    offer = sc.full_pack_offer(cart_items(catalog), catalog)
+    slug = sc.clean(request.form.get("slug"), 60)
+    if not offer or offer["full"]["slug"] != slug:
+        return redirect(url_for("cart"))
+    keep = [x for x in cart_slugs() if x not in offer["covers"]]
+    save_cart(keep + [slug])
+    flash(f"'{offer['full']['name']}' 하나로 바꿨습니다. "
+          f"{offer['saving']:,}원 싸집니다.", "cart")
+    return redirect(url_for("cart"))
 
 
 @app.route("/cart/clear", methods=["POST"])
@@ -957,8 +977,32 @@ def download_file(token, index):
     if not 0 <= index < len(files):
         abort(404)
     sc.count_download(token)
-    return send_from_directory(sc.product_dir(row["product_slug"]),
-                               files[index]["name"], as_attachment=True)
+
+    name = files[index]["name"]
+    path = sc.product_dir(row["product_slug"]) / name
+
+    # 받는 그 자리에서 구매자 표시를 새깁니다. 원본 파일은 그대로 둡니다.
+    stamped = watermark_for(row, path)
+    if stamped is not None:
+        return send_file(io.BytesIO(stamped), mimetype="application/pdf",
+                         as_attachment=True, download_name=name)
+    return send_from_directory(sc.product_dir(row["product_slug"]), name,
+                               as_attachment=True)
+
+
+def watermark_for(row, path):
+    """이 주문의 구매자 표시를 새긴 PDF 바이트. 새길 수 없으면 None."""
+    cfg = sc.load_site().get("watermark") or {}
+    if not cfg.get("enabled", True):
+        return None
+    buyer = sc.get_db().execute(
+        "SELECT name FROM orders WHERE order_no = ?", (row["order_no"],)).fetchone()
+    who = (buyer["name"] if buyer else "") or ""
+    mail = row["email"] or ""
+    brand = sc.load_site().get("brand", "Ortica영어")
+    footer = " · ".join(x for x in (who, mail, row["order_no"],
+                                    f"{brand} 제공 · 재배포 금지") if x)
+    return wm.stamp(path, footer, mail if cfg.get("diagonal", True) else "")
 
 
 @app.route("/guide")

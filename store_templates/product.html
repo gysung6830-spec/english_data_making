@@ -117,6 +117,12 @@
         <p class="muted mb-0" style="font-size:13px;margin-top:8px;">
           여러 회차를 담으면 <b>입금은 한 번</b>만 하시면 됩니다.
         </p>
+        {% if full %}
+          <a class="full-hint" href="{{ url_for('product_detail', slug=full.slug) }}">
+            <b>{{ full.name }}</b>
+            <span>{{ full_parts }}개를 따로 사시는 것보다 쌉니다 · {{ full.price|won }}</span>
+          </a>
+        {% endif %}
         {% if sample_ready %}
           <a class="btn btn-ghost btn-block" style="margin-top:10px;"
              href="{{ url_for('sample_download', filename=p.sample_file) }}">샘플 PDF 먼저 보기</a>

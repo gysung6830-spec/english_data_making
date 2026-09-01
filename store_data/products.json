@@ -358,6 +358,61 @@
       "sample": true
     },
     {
+      "slug": "ebs-2026-tokgang-eng-2-analysis",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "수능특강 영어 · 6~10강 · 지문 분석 패키지",
+      "subtitle": "지문 20개 · 자료 3종",
+      "price": 16000,
+      "passages": 20,
+      "grade": "고3",
+      "sort": 51,
+      "active": true,
+      "materials": [
+        "passage",
+        "analysis",
+        "pilsaengbo"
+      ],
+      "includes": [],
+      "description": "지문을 읽히고, 시험에 나오는 포인트를 짚어 주고, 손으로 채우게 하는 자료입니다. 수업에서도, 혼자 볼 때도 씁니다.",
+      "highlights": [],
+      "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
+      "format": "PDF (A4, 인쇄용)",
+      "sample_file": "sample_analysis.pdf",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-all-analysis",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "수능특강 영어 · 전강(1~10강) · 지문 분석 패키지",
+      "subtitle": "지문 40개 · 자료 3종",
+      "price": 28000,
+      "passages": 40,
+      "grade": "고3",
+      "sort": 52,
+      "active": true,
+      "materials": [
+        "passage",
+        "analysis",
+        "pilsaengbo"
+      ],
+      "includes": [],
+      "description": "1~10강 전 지문을 한 번에 담았습니다. 강별로 따로 사시는 것보다 4,000원 쌉니다.",
+      "highlights": [],
+      "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
+      "format": "PDF (A4, 인쇄용)",
+      "sample_file": "sample_analysis.pdf",
+      "sample": true,
+      "badge": "전강",
+      "covers": [
+        "ebs-2026-tokgang-eng-analysis",
+        "ebs-2026-tokgang-eng-2-analysis"
+      ]
+    },
+    {
       "slug": "ebs-2026-tokgang-eng-problem",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",

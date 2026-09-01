@@ -39,6 +39,34 @@
         {% endfor %}
       </div>
 
+      {% if full_offer %}
+        <div class="card full-offer">
+          <h3>전체를 사시면 더 쌉니다</h3>
+          <p class="muted">지금 담으신 {{ full_offer.covers|length }}개 대신
+            <b>{{ full_offer.full.name }}</b> 하나로 바꾸시면
+            <b class="save">{{ full_offer.saving|won }}</b> 싸집니다.</p>
+          <div class="fo-compare">
+            <div class="fo-side">
+              <small>지금 담은 것</small>
+              <b>{{ full_offer.parts_price|won }}</b>
+              <span class="muted">{{ full_offer.covers|length }}개 따로</span>
+            </div>
+            <div class="fo-arrow">→</div>
+            <div class="fo-side on">
+              <small>전체로 바꾸면</small>
+              <b>{{ full_offer.full.price|won }}</b>
+              <span class="muted">{% if full_offer.full.passages %}지문 {{ full_offer.full.passages }}개{% endif %}</span>
+            </div>
+          </div>
+          <form method="post" action="{{ url_for('cart_swap') }}">
+            <input type="hidden" name="slug" value="{{ full_offer.full.slug }}">
+            <button class="btn btn-primary btn-block" type="submit">전체로 바꿔 담기</button>
+          </form>
+          <p class="hero-note mb-0">필요한 회차만 사셔도 됩니다.
+            여러 개 담으실 때만 이렇게 알려 드립니다.</p>
+        </div>
+      {% endif %}
+
       {% if suggest %}
         <div class="card also-suggest">
           <h3>반대쪽 패키지도 담으면 값이 내려갑니다</h3>

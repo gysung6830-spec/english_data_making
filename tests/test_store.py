@@ -1554,6 +1554,189 @@ def test_cart_add_only_known_products():
     print("PASS  장바구니에 아무거나 못 담음 · 바깥으로 안 보냄")
 
 
+# ---- 구매자 표시 (워터마크) ------------------------------------------------
+def test_watermark_stamps_buyer_on_pdf():
+    """받은 PDF 에 구매자 이메일과 주문번호가 새겨져 있어야 합니다."""
+    import store_watermark as wm
+    if not wm.AVAILABLE:
+        print("SKIP  워터마크 라이브러리 없음")
+        return
+
+    site = sc.load_site()
+    site["watermark"] = {"enabled": True, "diagonal": True}
+    sc.save_site(site)
+
+    slug = "ybm-han-analysis"
+    folder = sc.product_dir(slug)
+    folder.mkdir(parents=True, exist_ok=True)
+    from reportlab.pdfgen import canvas as rl_canvas
+    src = folder / "본문.pdf"
+    page = rl_canvas.Canvas(str(src))
+    page.drawString(72, 700, "passage one")
+    page.showPage()
+    page.save()
+    plain = src.stat().st_size
+
+    c = client()
+    resp = c.post("/order", data={
+        "slug": slug, "name": "새김이", "phone": "010-8888-1111",
+        "email": "mark@example.com", "agree": "1"})
+    with store.app.app_context():
+        row = sc.get_db().execute(
+            "SELECT * FROM orders WHERE email = 'mark@example.com'").fetchone()
+    admin().post(f"/admin/orders/{row['id']}/deliver", follow_redirects=True)
+    with store.app.app_context():
+        dl = sc.get_db().execute(
+            "SELECT token FROM downloads WHERE order_no = ?", (row["order_no"],)).fetchone()
+
+    got = client().get(f"/d/{dl['token']}/0")
+    assert got.status_code == 200
+    assert got.data.startswith(b"%PDF")
+    assert len(got.data) != plain, "원본이 그대로 나왔습니다"
+
+    import io as _io
+    from pypdf import PdfReader
+    text = PdfReader(_io.BytesIO(got.data)).pages[0].extract_text()
+    assert "mark@example.com" in text
+    assert row["order_no"] in text
+    assert "재배포 금지" in text
+    assert "passage one" in text, "원래 내용이 사라졌습니다"
+
+    # 원본 파일은 그대로여야 합니다
+    assert src.stat().st_size == plain
+    print("PASS  받은 PDF 에 구매자 표시가 새겨짐")
+
+
+def test_watermark_can_be_turned_off():
+    import store_watermark as wm
+    if not wm.AVAILABLE:
+        print("SKIP  워터마크 라이브러리 없음")
+        return
+    site = sc.load_site()
+    site["watermark"] = {"enabled": False}
+    sc.save_site(site)
+
+    with store.app.app_context():
+        dl = sc.get_db().execute(
+            """SELECT d.token FROM downloads d JOIN orders o ON o.order_no = d.order_no
+               WHERE o.email = 'mark@example.com'""").fetchone()
+    got = client().get(f"/d/{dl['token']}/0")
+    import io as _io
+    from pypdf import PdfReader
+    text = PdfReader(_io.BytesIO(got.data)).pages[0].extract_text()
+    assert "mark@example.com" not in text
+    site["watermark"] = {"enabled": True, "diagonal": True}
+    sc.save_site(site)
+    print("PASS  워터마크 끄기")
+
+
+def test_watermark_skips_non_pdf():
+    """ZIP·한글 파일은 손대지 않아야 합니다."""
+    import store_watermark as wm
+    if not wm.AVAILABLE:
+        print("SKIP  워터마크 라이브러리 없음")
+        return
+    folder = sc.product_dir("ybm-han-analysis")
+    zipped = folder / "묶음.zip"
+    zipped.write_bytes(b"PK\x03\x04not-a-pdf")
+    assert wm.stamp(zipped, "누구 · 무엇") is None
+    print("PASS  PDF 아닌 파일은 그대로")
+
+
+# ---- 부분 · 전체 가격 -----------------------------------------------------
+def test_full_pack_offer_in_cart():
+    """필요한 강만 사되, 여러 개 담으면 전체가 싸다고 알려 줘야 합니다."""
+    c = client()
+    c.post("/cart/add", data={"slug": "ebs-2026-tokgang-eng-analysis"})
+    one = body(c.get("/cart"))
+    assert "전체를 사시면 더 쌉니다" not in one, "하나만 담았는데 전체를 권했습니다"
+
+    c.post("/cart/add", data={"slug": "ebs-2026-tokgang-eng-2-analysis"})
+    two = body(c.get("/cart"))
+    assert "전체를 사시면 더 쌉니다" in two
+    assert "4,000원" in two                    # 16,000 x 2 - 28,000
+    assert "전강(1~10강)" in two
+
+    c.post("/cart/swap", data={"slug": "ebs-2026-tokgang-eng-all-analysis"})
+    after = body(c.get("/cart"))
+    assert after.count('class="cart-row"') == 1
+    assert "전강(1~10강)" in after and "28,000원" in after
+    print("PASS  부분 여러 개 → 전체가 싸다 → 한 번에 바꾸기")
+
+
+def test_part_page_points_to_full():
+    """부분 상품 화면에서도 전체가 있다는 것을 알려 줘야 합니다."""
+    text = body(client().get("/products/ebs-2026-tokgang-eng-analysis"))
+    assert "전강(1~10강)" in text and "따로 사시는 것보다 쌉니다" in text
+    # 전체 상품 화면에는 그 안내가 없어야 합니다
+    full = body(client().get("/products/ebs-2026-tokgang-eng-all-analysis"))
+    assert "따로 사시는 것보다 쌉니다" not in full
+    print("PASS  부분 화면에서 전체 안내")
+
+
+def test_full_pack_needs_to_be_cheaper():
+    """전체가 부분 합계보다 비싸면 권하지 않아야 합니다."""
+    catalog = sc.load_raw_catalog()
+    full = next(x for x in catalog["products"]
+                if x["slug"] == "ebs-2026-tokgang-eng-all-analysis")
+    keep = full["price"]
+    full["price"] = 99000
+    sc.save_catalog(catalog)
+    try:
+        c = client()
+        for slug in ("ebs-2026-tokgang-eng-analysis", "ebs-2026-tokgang-eng-2-analysis"):
+            c.post("/cart/add", data={"slug": slug})
+        assert "전체를 사시면 더 쌉니다" not in body(c.get("/cart"))
+    finally:
+        full["price"] = keep
+        sc.save_catalog(catalog)
+    print("PASS  전체가 더 비싸면 안 권함")
+
+
+# ---- 개인정보는 최소로 -----------------------------------------------------
+def test_phone_is_optional_email_is_not():
+    """이메일은 자료가 가는 주소라 꼭 받고, 연락처는 안 받아도 됩니다."""
+    c = client()
+    resp = c.post("/order", data={
+        "slug": "ybm-han-analysis", "name": "전화없음",
+        "email": "nophone@example.com", "agree": "1"})
+    assert resp.status_code == 302, "연락처 없이 주문이 막혔습니다"
+
+    bad = c.post("/order", data={
+        "slug": "ybm-han-analysis", "name": "형식",
+        "phone": "전화번호아님", "email": "x@y.com", "agree": "1"})
+    assert bad.status_code == 400 and "숫자와" in body(bad)
+
+    none = c.post("/order", data={"slug": "ybm-han-analysis", "name": "메일없음", "agree": "1"})
+    assert none.status_code == 400 and "자료를 이 주소로" in body(none)
+
+    form = body(client().get("/order?slug=ybm-han-analysis"))
+    assert "선택 — 문제가 생겼을 때만 씁니다" in form
+    assert "이 주소로 자료를 보내 드립니다" in form
+    print("PASS  이메일 필수 · 연락처 선택")
+
+
+def test_watermark_does_not_bloat_the_file():
+    """새긴 뒤 파일이 몇 배로 커지면 안 됩니다."""
+    import store_watermark as wm
+    if not wm.AVAILABLE:
+        print("SKIP  워터마크 라이브러리 없음")
+        return
+    from reportlab.pdfgen import canvas as rl
+    src = sc.DATA_DIR / "bloat-test.pdf"
+    page = rl.Canvas(str(src))
+    for i in range(20):
+        for line in range(40):
+            page.drawString(60, 780 - line * 18, f"page {i} line {line} sample text here")
+        page.showPage()
+    page.save()
+    before = src.stat().st_size
+    after = len(wm.stamp(src, "홍길동 · a@b.com · OR-1", "a@b.com"))
+    assert after < before * 3, f"{before} → {after} 로 너무 커졌습니다"
+    src.unlink()
+    print(f"PASS  새겨도 파일이 안 부풂 ({before // 1024}KB → {after // 1024}KB)")
+
+
 def run_all():
     test_uses_temp_data_only()
     test_public_pages_open()
@@ -1584,6 +1767,7 @@ def run_all():
     test_order_page_shows_what_you_are_buying()
     test_manual_line_break_filter()
     test_no_emoji_on_customer_pages()
+    test_phone_is_optional_email_is_not()
     test_order_rejects_bad_input()
     test_order_saves_and_multiplies_amount()
     test_order_both_packages_at_once()
@@ -1603,8 +1787,15 @@ def run_all():
     test_cart_add_only_known_products()
     test_order_to_download_flow()
     test_cart_order_end_to_end()
+    test_full_pack_offer_in_cart()
+    test_part_page_points_to_full()
+    test_full_pack_needs_to_be_cheaper()
     test_order_page_shows_download_when_ready()
     test_deliver_by_external_link()
+    test_watermark_stamps_buyer_on_pdf()
+    test_watermark_can_be_turned_off()
+    test_watermark_skips_non_pdf()
+    test_watermark_does_not_bloat_the_file()
     test_download_revoke_and_limit()
     test_receipt_request_and_sales()
     test_every_admin_route_is_locked()

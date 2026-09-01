@@ -160,6 +160,52 @@
   </div>
 </div>
 
+<div class="panel" id="watermark">
+  <h2>구매자 표시 (워터마크) <span class="tag tag-on">유출 방지</span></h2>
+  <div class="hint">
+    손님이 자료를 받는 그 순간, <b>그 파일에만</b> 구매자 이름·이메일·주문번호가 새겨집니다.
+    카페나 단톡방에 올리면 누가 올렸는지 바로 드러나서, 애초에 올리지 않게 됩니다.
+    <b>원본 파일은 그대로 있습니다.</b>
+  </div>
+
+  <div class="wrapbox" style="margin-bottom:14px;">
+    <table class="adm-table">
+      <tbody>
+        <tr><th style="width:170px;">쪽 아래 작은 글씨</th>
+            <td><code>홍길동 · teacher@school.com · OR-260901-12345 · {{ s.brand }} 제공 · 재배포 금지</code>
+              <br><small class="muted">회색 7pt. 인쇄해도 지문을 가리지 않습니다.</small></td></tr>
+        <tr><th>가운데 옅은 글씨</th>
+            <td><code>teacher@school.com</code>
+              <br><small class="muted">아주 옅게(7%) 비스듬히. 캡처해도 남습니다.</small></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="adm-field">
+    <label class="check">
+      <input type="checkbox" name="watermark_enabled" value="1"
+             {{ 'checked' if s.watermark.get('enabled', True) }}>
+      <span><b>구매자 표시 새기기</b> — PDF 에만 붙습니다 (ZIP·한글 파일은 그대로)</span>
+    </label>
+  </div>
+  <div class="adm-field">
+    <label class="check">
+      <input type="checkbox" name="watermark_diagonal" value="1"
+             {{ 'checked' if s.watermark.get('diagonal', True) }}>
+      <span>가운데 옅은 글씨도 넣기</span>
+    </label>
+    <div class="tip">끄면 쪽 아래 한 줄만 들어갑니다. 지면이 빽빽한 자료라면 꺼 두세요.</div>
+  </div>
+
+  <div class="panel" style="margin:0; background:#fbfaf7;">
+    <h2 style="font-size:15px;">무료 자료에는 안 새깁니다</h2>
+    <div class="hint" style="margin-bottom:0;">
+      무료 자료실 자료는 <b>퍼질수록 좋습니다.</b> 그래서 표시를 넣지 않습니다.
+      돈 받고 파는 자료에만 들어갑니다.
+    </div>
+  </div>
+</div>
+
 <div class="panel" id="discount">
   <h2>자동 할인 <span class="tag tag-on">쿠폰과 별개</span></h2>
   <div class="hint">

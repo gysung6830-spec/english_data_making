@@ -27,3 +27,6 @@ store_data/deliverables/*
 # 무료 자료실에 올린 파일 (용량이 크고 자료라서 코드에 넣지 않습니다)
 store_data/free/*
 !store_data/free/.gitkeep
+
+# 워터마크용 글꼴 캐시 (자동으로 다시 만들어집니다)
+store_data/.cache/

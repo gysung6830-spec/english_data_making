@@ -231,6 +231,35 @@
 </div>
 
 <div class="panel">
+  <h2>전권 · 전회차 상품인가요 <span class="tag tag-off">해당될 때만</span></h2>
+  <div class="hint">
+    이 상품이 <b>여러 부분을 통째로 담은 것</b>이라면, 그 부분들을 골라 주세요.
+    손님이 부분을 두 개 이상 담으면 장바구니에서
+    <b>"전체로 바꾸면 얼마 싸집니다"</b> 라고 알려 줍니다.<br>
+    <b>부분 상품에는 아무것도 고르지 마세요.</b> (예: '1~5강' 에는 안 고릅니다)
+  </div>
+  {% set others = catalog.products | rejectattr('slug', 'equalto', p.slug or '') | list %}
+  {% if others %}
+    <div class="check-grid" style="gap:10px 18px;">
+      {% for o in others %}
+        <label class="check">
+          <input type="checkbox" name="covers" value="{{ o.slug }}"
+                 {{ 'checked' if o.slug in (p.covers or []) }}>
+          <span>{{ o.name }} <b class="muted">{{ o.price|won }}</b></span>
+        </label>
+      {% endfor %}
+    </div>
+    <div class="tip">
+      값을 정하실 때는 <b>부분 값의 합보다 싸게</b> 잡으세요.
+      그래야 '전체가 이득' 이 됩니다. 자세한 기준은
+      <a href="{{ url_for('admin.pricing') }}">가격 가이드</a>에 있습니다.
+    </div>
+  {% else %}
+    <div class="empty">다른 상품이 아직 없습니다.</div>
+  {% endif %}
+</div>
+
+<div class="panel">
   <div class="form-actions" style="border-top:0; margin-top:0; padding-top:0;">
     <button class="btn btn-primary" type="submit">저장하기</button>
     <a class="btn btn-ghost" href="{{ url_for('admin.products') }}">취소</a>

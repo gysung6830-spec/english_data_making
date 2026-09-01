@@ -510,6 +510,38 @@ def issue_coupon(kind: str, value: int, *, min_amount: int = 0, note: str = "",
     raise RuntimeError("쿠폰 코드를 만들지 못했습니다")
 
 
+def full_pack_offer(items: list[dict], catalog: dict) -> dict | None:
+    """장바구니에 부분 상품이 여러 개면, 그걸 다 덮는 '전체' 상품을 찾아 줍니다.
+
+    필요한 회차·강만 사실 수 있게 두되, 여러 개 담으면
+    '전체를 사는 게 오히려 싸다' 는 것을 그 자리에서 보여 주려는 것입니다.
+    """
+    have = {x["slug"] for x in items}
+    price_of = {x["slug"]: to_int(x.get("price"), 0) for x in items}
+    best = None
+    for full in catalog["products"]:
+        covers = [x for x in (full.get("covers") or []) if x in have]
+        if len(covers) < 2 or full["slug"] in have:
+            continue
+        parts_price = sum(price_of[x] for x in covers)
+        saving = parts_price - to_int(full.get("price"), 0)
+        if saving <= 0:
+            continue
+        if best is None or saving > best["saving"]:
+            best = {"full": full, "covers": covers, "parts_price": parts_price,
+                    "saving": saving}
+    return best
+
+
+def full_pack_for(product: dict, catalog: dict) -> dict | None:
+    """이 부분 상품을 덮는 '전체' 상품 하나. 상품 화면에서 권할 때 씁니다."""
+    slug = product.get("slug")
+    for full in catalog["products"]:
+        if slug and slug in (full.get("covers") or []):
+            return full
+    return None
+
+
 def paid_order_count(email: str) -> int:
     """이 이메일로 값을 치른 주문이 몇 건인지. 단골 할인에 씁니다.
 
@@ -894,10 +926,12 @@ def validate_contact(form) -> tuple[dict, list[str]]:
     errors = []
     if not data["name"]:
         errors.append("성함을 입력해 주세요.")
-    if not PHONE_RE.match(data["phone"]):
-        errors.append("연락처를 숫자와 '-' 로 정확히 입력해 주세요.")
+    # 이메일은 꼭 받습니다 — 자료가 그 주소로 갑니다.
     if not EMAIL_RE.match(data["email"]):
-        errors.append("이메일 주소를 정확히 입력해 주세요.")
+        errors.append("이메일 주소를 정확히 입력해 주세요. 자료를 이 주소로 보내 드립니다.")
+    # 연락처는 선택입니다. 적으셨을 때만 형식을 봅니다.
+    if data["phone"] and not PHONE_RE.match(data["phone"]):
+        errors.append("연락처를 숫자와 '-' 로 적어 주세요. 안 적으셔도 됩니다.")
     if not form.get("agree"):
         errors.append("개인정보 수집·이용에 동의해 주셔야 접수됩니다.")
     return data, errors
