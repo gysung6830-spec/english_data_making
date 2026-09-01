@@ -28,44 +28,61 @@
         교재 {{ groups|length }}권 · 자료 {{ items|length }}개</p>
     {% endif %}
 
-    <div class="filters">
-      <span class="filter-label">분류</span>
-      <a class="filter {{ 'on' if not selected }}"
-         href="{{ url_for('products', package=selected_package, grade=grade, order=order, q=q) }}">전체</a>
-      {% for c in categories %}
-        <a class="filter {{ 'on' if selected == c.id }}"
-           href="{{ url_for('products', category=c.id, package=selected_package, grade=grade, order=order, q=q) }}">{{ c.name }}</a>
-      {% endfor %}
-    </div>
+    {% set picked = [] %}
+    {% if selected %}{% set _ = picked.append(categories | selectattr('id','equalto',selected)
+        | map(attribute='name') | first) %}{% endif %}
+    {% if grade %}{% set _ = picked.append(grade) %}{% endif %}
+    {% if selected_package %}{% set _ = picked.append(packages | selectattr('id','equalto',selected_package)
+        | map(attribute='name') | first) %}{% endif %}
+    {% if order %}{% set _ = picked.append(orders[order]) %}{% endif %}
 
-    {% if grades %}
+    <div class="filterbar{{ ' on' if picked }}">
+      <button class="filter-toggle" type="button" aria-expanded="false">
+        <span>거르기</span>
+        <em>{{ picked | join(' · ') if picked else '분류 · 학년 · 패키지 · 정렬' }}</em>
+        <i aria-hidden="true"></i>
+      </button>
+      <div class="filter-sets">
       <div class="filters">
-        <span class="filter-label">학년</span>
-        <a class="filter {{ 'on' if not grade }}"
-           href="{{ url_for('products', category=selected, package=selected_package, order=order, q=q) }}">전체</a>
-        {% for g in grades %}
-          <a class="filter {{ 'on' if grade == g }}"
-             href="{{ url_for('products', category=selected, package=selected_package, grade=g, order=order, q=q) }}">{{ g }}</a>
+        <span class="filter-label">분류</span>
+        <a class="filter {{ 'on' if not selected }}"
+           href="{{ url_for('products', package=selected_package, grade=grade, order=order, q=q) }}">전체</a>
+        {% for c in categories %}
+          <a class="filter {{ 'on' if selected == c.id }}"
+             href="{{ url_for('products', category=c.id, package=selected_package, grade=grade, order=order, q=q) }}">{{ c.name }}</a>
         {% endfor %}
       </div>
-    {% endif %}
-
-    <div class="filters pkg-filters">
-      <span class="filter-label">패키지</span>
-      <a class="filter {{ 'on' if not selected_package }}"
-         href="{{ url_for('products', category=selected, grade=grade, order=order, q=q) }}">두 가지 모두</a>
-      {% for pkg in packages %}
-        <a class="filter pkg-filter-{{ pkg.id }} {{ 'on' if selected_package == pkg.id }}"
-           href="{{ url_for('products', category=selected, package=pkg.id, grade=grade, order=order, q=q) }}">{{ pkg.name }}</a>
-      {% endfor %}
-    </div>
-
-    <div class="filters">
-      <span class="filter-label">정렬</span>
-      {% for oid, oname in orders.items() %}
-        <a class="filter {{ 'on' if order == oid }}"
-           href="{{ url_for('products', category=selected, package=selected_package, grade=grade, order=oid, q=q) }}">{{ oname }}</a>
-      {% endfor %}
+  
+      {% if grades %}
+        <div class="filters">
+          <span class="filter-label">학년</span>
+          <a class="filter {{ 'on' if not grade }}"
+             href="{{ url_for('products', category=selected, package=selected_package, order=order, q=q) }}">전체</a>
+          {% for g in grades %}
+            <a class="filter {{ 'on' if grade == g }}"
+               href="{{ url_for('products', category=selected, package=selected_package, grade=g, order=order, q=q) }}">{{ g }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+  
+      <div class="filters pkg-filters">
+        <span class="filter-label">패키지</span>
+        <a class="filter {{ 'on' if not selected_package }}"
+           href="{{ url_for('products', category=selected, grade=grade, order=order, q=q) }}">두 가지 모두</a>
+        {% for pkg in packages %}
+          <a class="filter pkg-filter-{{ pkg.id }} {{ 'on' if selected_package == pkg.id }}"
+             href="{{ url_for('products', category=selected, package=pkg.id, grade=grade, order=order, q=q) }}">{{ pkg.name }}</a>
+        {% endfor %}
+      </div>
+  
+      <div class="filters">
+        <span class="filter-label">정렬</span>
+        {% for oid, oname in orders.items() %}
+          <a class="filter {{ 'on' if order == oid }}"
+             href="{{ url_for('products', category=selected, package=selected_package, grade=grade, order=oid, q=q) }}">{{ oname }}</a>
+        {% endfor %}
+      </div>
+      </div>
     </div>
 
     {% if groups or loose %}

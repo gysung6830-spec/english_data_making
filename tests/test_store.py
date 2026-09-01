@@ -1167,10 +1167,51 @@ def test_home_shows_live_now_section():
     """올 때마다 바뀌는 자리가 있어야 다시 찾아옵니다."""
     text = body(client().get("/"))
     assert "지금 오르티카" in text
-    assert "새로 올라왔습니다" in text and "다음 시험까지" in text and "이렇게 올립니다" in text
-    # 업데이트 일정이 홈에 그대로 나와야 합니다
-    assert "지난주 학평·모평 회차 자료 업로드" in text
-    print("PASS  홈에 '지금 오르티카' — 새 자료 · D-day · 업데이트 일정")
+    assert "새로 올라왔습니다" in text and "다음 시험까지" in text
+    # 자료 올리는 일정을 약속하지 않기로 했습니다
+    assert "이렇게 올립니다" not in text
+    print("PASS  홈에 '지금 오르티카' — 새 자료 · 다음 시험 D-day")
+
+
+def test_home_previews_every_category():
+    """첫 화면에서 분류마다 교재를 몇 권씩 미리 보여 줘야 합니다."""
+    text = body(client().get("/"))
+    assert "어떤 자료가 있나" in text
+    for name in ("교과서", "모의고사", "EBS 부교재", "형광펜 독해"):
+        assert name in text, name
+    # 분류마다 '전체 보기' 로 이어져야 합니다
+    for cid in ("textbook", "mock", "ebs", "highlighter"):
+        assert f"category={cid}" in text, cid
+    # 한 분류에 세 권까지만
+    import re
+    rows = re.findall(r'class="cat-books">(.*?)</div>\s*</div>', text, re.S)
+    for row in rows:
+        assert row.count('class="cat-book') <= 3
+    print("PASS  홈이 분류마다 교재를 몇 권씩 미리 보여 줌")
+
+
+def test_mobile_filters_collapse():
+    """폰에서 거르기 버튼이 접혀 있어야 첫 화면에 자료가 보입니다."""
+    for path in ("/products", "/free"):
+        text = body(client().get(path))
+        assert 'class="filter-toggle"' in text, path
+        assert 'class="filter-sets"' in text, path
+    # 고른 값이 버튼에 요약돼 보여야 합니다
+    picked = body(client().get("/products?grade=고1&order=price"))
+    assert "고1 · 가격 낮은 순" in picked
+    print("PASS  폰에서 거르기 접기 · 고른 값 요약")
+
+
+def test_long_pages_have_shortcuts():
+    """긴 화면에서 손가락으로 돌아다닐 수 있어야 합니다."""
+    lineup = body(client().get("/lineup"))
+    assert 'class="lineup-jump"' in lineup
+    assert '#variants' in lineup and '#mocktest' in lineup
+    assert 'class="to-top"' in body(client().get("/"))
+    # 상품 화면에는 폰에서 아래에 붙는 주문 바
+    detail = body(client().get("/products/mock-2026-06-g3-analysis"))
+    assert 'class="buy-bar"' in detail
+    print("PASS  라인업 바로가기 · 맨 위로 · 폰 주문 바")
 
 
 def test_home_counts_dday_to_next_exam():
@@ -1209,6 +1250,21 @@ def test_home_updates_skip_pinned_notice():
     print("PASS  고정 공지가 홈에서 두 번 나오지 않음")
 
 
+def test_new_product_appears_in_home_updates():
+    """새 자료를 등록하면 따로 공지를 쓰지 않아도 홈에 뜹니다."""
+    a = admin()
+    a.post("/admin/products/new", data={
+        "slug": "fresh-item-test", "name": "새로 올린 테스트 자료",
+        "category": "mock", "package": "analysis", "price": "10000",
+        "subtitle": "지문 10개", "grade": "고1", "sort": "10", "active": "1",
+        "materials": ["passage"]}, follow_redirects=True)
+    text = body(client().get("/"))
+    assert "새로 올린 테스트 자료" in text
+    assert "새 자료" in text
+    a.post("/admin/products/fresh-item-test/delete", follow_redirects=True)
+    print("PASS  새 자료가 공지 없이 홈에 뜸")
+
+
 def run_all():
     test_uses_temp_data_only()
     test_public_pages_open()
@@ -1216,6 +1272,10 @@ def run_all():
     test_lineup_shows_all_materials()
     test_home_reflects_lineup()
     test_home_shows_live_now_section()
+    test_home_previews_every_category()
+    test_new_product_appears_in_home_updates()
+    test_mobile_filters_collapse()
+    test_long_pages_have_shortcuts()
     test_home_updates_skip_pinned_notice()
     test_home_counts_dday_to_next_exam()
     test_admin_edits_exam_schedule()

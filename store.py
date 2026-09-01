@@ -113,55 +113,56 @@ def fromjson(value):
 # ---------------------------------------------------------------------------
 # 홈 · 목록 · 상세
 # ---------------------------------------------------------------------------
-def recent_updates(limit: int = 4) -> list[dict]:
-    """새로 올라온 것을 한 줄로 모읍니다 — 무료 자료와 공지를 최신순으로.
+def recent_updates(catalog: dict, limit: int = 4) -> list[dict]:
+    """새로 올라온 것 — 무료 자료와 새 자료에서 자동으로 모읍니다.
 
-    올 때마다 바뀌는 자리가 있어야 다시 찾아옵니다.
+    따로 공지를 쓰지 않아도 자료만 올리면 이 자리가 바뀝니다.
     """
     rows = []
     for x in sc.load_freebies()["items"]:
         if sc.free_ready(x):
-            rows.append({"date": x.get("date", ""), "tag": "무료 자료",
+            rows.append({"date": x.get("date", ""), "tag": "무료",
                          "title": x.get("title", ""), "note": x.get("summary", ""),
                          "url": url_for("free_detail", slug=x["slug"]), "free": True})
-    for n in sc.load_notices()["notices"]:
-        if n.get("pinned"):
-            continue          # 맨 위 띠에 이미 떠 있습니다
-        rows.append({"date": n.get("date", ""), "tag": n.get("tag") or "공지",
-                     "title": n.get("title", ""), "note": "",
-                     "url": url_for("notice"), "free": False})
+    for p in catalog["products"]:
+        if not p.get("added"):
+            continue
+        rows.append({"date": p["added"], "tag": "새 자료",
+                     "title": p.get("name", ""), "note": p.get("subtitle", ""),
+                     "url": url_for("product_detail", slug=p["slug"]), "free": False})
     rows.sort(key=lambda r: r["date"], reverse=True)
     return rows[:limit]
+
+
+def category_preview(catalog: dict, per_category: int = 3) -> list[dict]:
+    """분류마다 교재를 몇 권씩만 보여 줍니다. 첫 화면에서 전체 그림이 잡히도록."""
+    out = []
+    for cat in catalog.get("categories", []):
+        books = sc.books_with_counts(catalog, cat.get("id", ""))
+        if not books:
+            continue
+        out.append({"cat": cat, "books": books[:per_category], "total": len(books)})
+    return out
 
 
 @app.route("/")
 def home():
     catalog = sc.load_catalog()
     products = catalog["products"]
-    featured = [p for p in products if p.get("badge")][:3] or products[:3]
     notices = sc.load_notices()["notices"]
-    # 홈에는 분류마다 최대 2권씩 뽑아 어느 분류도 가려지지 않게 합니다.
-    picked, per_category = [], {}
-    for book in sc.books_with_counts(catalog):
-        key = book.get("category", "")
-        if per_category.get(key, 0) >= 2:
-            continue
-        per_category[key] = per_category.get(key, 0) + 1
-        picked.append(book)
     groups = sc.grouped_materials()
     all_materials = [m for g in groups for m in g["items"]]
     # 무료 자료 — 받을 수 있는 것만 최신 세 건
     free_items = [x for x in sc.load_freebies()["items"] if sc.free_ready(x)][:3]
-    fresh = recent_updates(limit=4)
+    fresh = recent_updates(catalog, limit=4)
     free_ready_count = sum(1 for p in products
                            if p.get("sample_file") and (sc.SAMPLE_DIR / p["sample_file"]).exists())
-    return render_template("home.html", featured=featured, product_count=len(products),
-                           books=picked[:8],
+    return render_template("home.html", product_count=len(products),
                            lineup_groups=groups, lineup_all=all_materials,
                            material_total=len(all_materials),
                            free_items=free_items, free_ready_count=free_ready_count,
                            exams=sc.upcoming_exams(3), fresh=fresh,
-                           schedule=sc.load_notices().get("schedule", []),
+                           cat_preview=category_preview(catalog),
                            latest_notice=notices[0] if notices else None)
 
 

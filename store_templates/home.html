@@ -118,7 +118,9 @@
             {% endfor %}
           </ul>
         {% else %}
-          <p class="muted mb-0">첫 자료를 준비하고 있습니다.</p>
+          <p class="muted mb-0">첫 자료를 준비하고 있습니다.
+            그동안 <a href="{{ url_for('lineup') }}"><b>자료 8종이 어떻게 생겼는지</b></a>
+            먼저 보실 수 있습니다.</p>
         {% endif %}
       </div>
 
@@ -137,19 +139,6 @@
           </ul>
         {% else %}
           <p class="muted mb-0">시험 일정을 준비하고 있습니다.</p>
-        {% endif %}
-      </div>
-
-      <div class="now-card">
-        <div class="now-head"><b>이렇게 올립니다</b></div>
-        {% if schedule %}
-          <ul class="plan-list">
-            {% for row in schedule %}
-              <li><b>{{ row.when }}</b><span>{{ row.what }}</span></li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p class="muted mb-0">업데이트 일정을 준비하고 있습니다.</p>
         {% endif %}
       </div>
 
@@ -224,44 +213,45 @@
 <section class="section">
   <div class="wrap">
     <div class="section-head">
-      <h2>이런 걸 찾으셨다면</h2>
-      <p>많이 찾으시는 자료로 바로 갑니다.</p>
+      <h2>어떤 자료가 있나</h2>
+      <p>분류마다 몇 권씩만 추렸습니다.
+        전체는 <a href="{{ url_for('products') }}"><b>자료 목록</b></a>에서 보실 수 있습니다.</p>
     </div>
-    <div class="seek-grid">
-      <div class="seek">
-        <b>학년으로 찾기</b>
-        <div class="seek-links">
-          {% for g in ['고1', '고2', '고3'] %}
-            <a href="{{ url_for('products', grade=g) }}">{{ g }} 영어 지문분석 자료</a>
+
+    {% for row in cat_preview %}
+      <div class="cat-row">
+        <div class="cat-head">
+          <h3>{{ row.cat.name }}</h3>
+          <span class="cat-count">교재 {{ row.total }}권</span>
+          <a href="{{ url_for('products', category=row.cat.id) }}">전체 보기 ›</a>
+        </div>
+        <div class="cat-books">
+          {% for b in row.books %}
+            <a class="cat-book {{ 'over2' if loop.index0 >= 2 }}"
+               href="{{ url_for('book_detail', slug=b.slug) }}">
+              <span class="cb-pub">{{ b.publisher }}{% if b.author %} · {{ b.author }}{% endif %}</span>
+              <b>{{ b.name }}</b>
+              <span class="cb-meta">
+                {% if b.grade %}<span class="chip">{{ b.grade }}</span>{% endif %}
+                <span class="chip">자료 {{ b.count }}종</span>
+              </span>
+              <span class="cb-price">{{ b.from_price|won }}부터</span>
+            </a>
           {% endfor %}
         </div>
       </div>
-      <div class="seek">
-        <b>자료 종류로 찾기</b>
-        <div class="seek-links">
-          <a href="{{ url_for('products', package='analysis') }}">지문분석지 · 필생보</a>
-          <a href="{{ url_for('products', package='problem') }}">변형문제 · 서술형 대비</a>
-          <a href="{{ url_for('lineup') }}#variants">17종 변형문제란?</a>
-          <a href="{{ url_for('lineup') }}#mocktest">동형모의고사란?</a>
-        </div>
-      </div>
-      <div class="seek">
-        <b>무료로 받기</b>
-        <div class="seek-links">
-          {% for kid, kname in [('oneline_ko','한줄해석'), ('side','좌지문우해석'), ('oneline_en','한줄영어')] %}
-            <a href="{{ url_for('free', kind=kid) }}">{{ kname }} 무료 PDF</a>
-          {% endfor %}
-          <a href="{{ url_for('lineup') }}">자료 샘플 PDF</a>
-        </div>
-      </div>
-      <div class="seek">
-        <b>교재로 찾기</b>
-        <div class="seek-links">
-          {% for c in nav_categories %}
-            <a href="{{ url_for('products', category=c.id) }}">{{ c.name }} 자료</a>
-          {% endfor %}
-          <a href="{{ url_for('custom') }}">찾는 교재가 없어요</a>
-        </div>
+    {% endfor %}
+
+    <div class="cat-more">
+      <span>이렇게도 찾으실 수 있습니다</span>
+      <div class="cat-more-links">
+        {% for g in ['고1', '고2', '고3'] %}
+          <a href="{{ url_for('products', grade=g) }}">{{ g }} 자료</a>
+        {% endfor %}
+        <a href="{{ url_for('products', package='analysis') }}">지문 분석 패키지</a>
+        <a href="{{ url_for('products', package='problem') }}">문제 패키지</a>
+        <a href="{{ url_for('free') }}">무료 자료</a>
+        <a href="{{ url_for('custom') }}">찾는 교재가 없어요</a>
       </div>
     </div>
   </div>
@@ -312,20 +302,6 @@
     </div>
   </div>
 </section>
-
-{% if featured %}
-<section class="section">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>지금 많이 찾는 자료</h2>
-      <p>전체 목록은 <a href="{{ url_for('products') }}"><b>자료 목록</b></a>에서 보실 수 있습니다.</p>
-    </div>
-    <div class="grid grid-3">
-      {% for p in featured %}{{ product_card(p) }}{% endfor %}
-    </div>
-  </div>
-</section>
-{% endif %}
 
 <section class="section">
   <div class="wrap">

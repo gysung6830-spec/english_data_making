@@ -74,7 +74,7 @@
                 {% if m.signature %}<span class="sig">SIGNATURE</span>{% endif %}
                 {% if m.made_to_order %}<span class="mto">주문제작</span>{% endif %}
                 {% if m.tagline %}<br><span class="muted" style="font-size:14.5px;">{{ m.tagline }}</span>{% endif %}
-                <br><a href="{{ url_for('lineup') }}#{{ m.id }}" style="font-size:13.5px;">
+                <br><a class="mat-link" href="{{ url_for('lineup') }}#{{ m.id }}">
                   <b>이 자료가 어떻게 생겼는지 보기 ›</b></a>
               </li>
             {% endif %}
@@ -125,6 +125,17 @@
         </p>
       </div>
     </aside>
+  </div>
+
+  {# 폰에서 늘 손에 닿는 자리에 가격과 주문 버튼을 붙여 둡니다 #}
+  <div class="buy-bar">
+    <div class="bb-price">
+      <span class="price">{{ p.price|won }}</span>
+      {% if p.list_price and p.list_price > p.price %}
+        <span class="price-off">{{ ((1 - p.price / p.list_price) * 100)|round|int }}% ↓</span>
+      {% endif %}
+    </div>
+    <a class="btn btn-primary" href="{{ url_for('order', slug=p.slug) }}">주문서 작성하기</a>
   </div>
 
   {% if sibling %}

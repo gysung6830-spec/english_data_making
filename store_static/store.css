@@ -672,21 +672,52 @@ input[type=file]{
   .bg-picks{grid-template-columns:1fr;}
 }
 
-/* 홈 — 자주 찾는 자료 (검색어가 그대로 링크가 되는 자리) */
-.seek-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
-.seek{
-  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-  padding:18px 20px;
+/* 홈 — 분류마다 조금씩 보여 주는 자리 */
+.cat-row{margin-bottom:26px;}
+.cat-row:last-of-type{margin-bottom:8px;}
+.cat-head{
+  display:flex; align-items:baseline; gap:10px; margin-bottom:12px;
+  padding-bottom:9px; border-bottom:1px solid var(--line);
 }
-.seek > b{display:block; font-size:14px; color:var(--brand); margin-bottom:10px;}
-.seek-links{display:flex; flex-direction:column; gap:7px;}
-.seek-links a{
-  font-size:14.5px; color:var(--ink-2); line-height:1.5;
-  padding:3px 0; border-bottom:1px solid transparent;
+.cat-head h3{font-size:17px; font-weight:800; letter-spacing:-.02em;}
+.cat-count{font-size:13px; color:var(--muted);}
+.cat-head a{margin-left:auto; font-size:13.5px; font-weight:700; color:var(--brand);
+  white-space:nowrap; padding:6px 0;}
+
+.cat-books{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+.cat-book{
+  display:flex; flex-direction:column; gap:6px; padding:16px 18px;
+  background:var(--card); border:1px solid var(--line); border-radius:12px;
+  transition:border-color .15s, transform .15s;
 }
-.seek-links a:hover{color:var(--brand); border-bottom-color:var(--brand);}
-@media (max-width:900px){ .seek-grid{grid-template-columns:repeat(2,1fr);} }
-@media (max-width:520px){ .seek-grid{grid-template-columns:1fr;} }
+.cat-book:hover{border-color:var(--brand); transform:translateY(-2px);}
+.cb-pub{font-size:12.5px; font-weight:700; color:var(--brand);}
+.cat-book b{font-size:15.5px; line-height:1.45; letter-spacing:-.02em; color:var(--ink);
+  word-break:keep-all;}
+.cb-meta{display:flex; gap:6px; flex-wrap:wrap;}
+.cb-price{margin-top:auto; padding-top:6px; font-size:15px; font-weight:800;
+  color:var(--brand-dark);}
+
+.cat-more{
+  margin-top:26px; padding-top:20px; border-top:1px solid var(--line);
+  display:flex; gap:14px; align-items:baseline; flex-wrap:wrap;
+}
+.cat-more > span{font-size:13.5px; font-weight:700; color:var(--muted);}
+.cat-more-links{display:flex; gap:8px; flex-wrap:wrap;}
+.cat-more-links a{
+  font-size:14px; font-weight:600; color:var(--ink-2);
+  border:1px solid var(--line-strong); border-radius:999px; padding:8px 14px;
+  background:#fff;
+}
+.cat-more-links a:hover{border-color:var(--brand); color:var(--brand);}
+
+@media (max-width:860px){
+  .cat-books{grid-template-columns:repeat(2,1fr);}
+  .cat-book.over2{display:none;}      /* 좁은 화면에서는 두 권만 */
+}
+@media (max-width:520px){
+  .cat-books{grid-template-columns:1fr;}
+}
 
 /* 이용 안내 — 규정 표와 허용·금지 상자 */
 .policy-table{margin:14px 0 0; width:100%;}
@@ -968,4 +999,140 @@ input[type=file]{
   .nav-toggle{margin-left:auto;}
   .logo{font-size:16px;}
   .logo-mark{width:21px; height:21px; flex-basis:21px;}
+}
+
+.mat-link{font-size:13.5px;}
+
+/* 상품 화면 — 폰에서 아래에 붙는 주문 바 */
+.buy-bar{
+  display:none; position:fixed; left:0; right:0; bottom:0; z-index:60;
+  align-items:center; gap:12px; padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.97); border-top:1px solid var(--line-strong);
+  box-shadow:0 -4px 16px rgba(20,25,20,.07);
+}
+.buy-bar .bb-price{display:flex; align-items:baseline; gap:7px; min-width:0;}
+.buy-bar .price{font-size:20px;}
+.buy-bar .btn{margin-left:auto; flex:0 0 auto; white-space:nowrap;}
+
+/* ===========================================================================
+   폰에서 쓰기 편하게 — 손가락으로 누를 수 있는 크기, 짧은 스크롤
+   =========================================================================== */
+@media (max-width:640px){
+  /* 1. 세로로 덜 길게 */
+  .section{padding:34px 0;}
+  .section-head{margin-bottom:20px;}
+  .section-head h2{font-size:23px;}
+  .section-head p{font-size:15px;}
+  .card, .form-card, .product-card, .book-group, .now-card, .cat-book{padding:16px;}
+  .grid{gap:12px;}
+
+  /* 2. 거르는 버튼은 한 줄로 옆으로 밀어 봅니다 (줄바꿈으로 화면을 잡아먹지 않게) */
+  .filters{
+    flex-wrap:nowrap; overflow-x:auto; margin-bottom:12px; padding-bottom:6px;
+    scrollbar-width:none; -webkit-overflow-scrolling:touch;
+  }
+  .filters::-webkit-scrollbar{display:none;}
+  .filter{flex:0 0 auto; padding:10px 15px;}
+  .filter-label{
+    flex:0 0 auto; position:sticky; left:0; z-index:1;
+    background:var(--bg); padding:0 8px 0 0;
+  }
+  .pkg-filters{margin-top:0;}
+
+  /* 3. 누를 곳은 손가락이 닿는 크기로 */
+  .site-foot .cols a{display:inline-block; padding:11px 0; font-size:15px;}
+  .foot-links a{padding:11px 14px 11px 0; font-size:14.5px;}
+  .cat-head a, .now-head a, .back-link, .notice-more{padding:10px 0; display:inline-block;}
+  .mat-link, .crumb a, .bg-head h3 a, .product-card h3 a, .free-card h3 a{
+    display:inline-block; padding:8px 0;
+  }
+  .cat-more-links a{padding:11px 16px;}
+  .seek-links a{padding:10px 0;}
+  .btn{padding:13px 18px;}
+  .nav-toggle{padding-top:12px; padding-bottom:12px;}
+  .logo{padding:8px 0;}
+  .btn-sm{padding:10px 14px;}
+
+  /* 4. 너무 작던 글씨 올리기 */
+  .mat-chip, .chip{font-size:12.5px;}
+  .bg-pick-mats .mat-chip{font-size:12px;}
+  .hero-note, .muted{font-size:14px;}
+
+  /* 5. 화면 아래 고정 주문 바 */
+  .buy-bar{display:flex;}
+  body:has(.buy-bar){padding-bottom:76px;}
+}
+
+
+/* 거르기 묶음 — 넓은 화면에서는 늘 펼쳐져 있고, 폰에서는 눌러서 폅니다 */
+.filterbar{margin-bottom:8px;}
+.filter-toggle{display:none;}
+.filter-sets{display:block;}
+
+@media (max-width:640px){
+  .filter-toggle{
+    display:flex; align-items:center; gap:9px; width:100%;
+    padding:13px 15px; margin-bottom:14px;
+    background:#fff; border:1px solid var(--line-strong); border-radius:11px;
+    font-family:inherit; font-size:14.5px; color:var(--ink); cursor:pointer;
+    text-align:left;
+  }
+  .filter-toggle span{font-weight:800; flex:0 0 auto;}
+  .filter-toggle em{
+    font-style:normal; color:var(--muted); font-size:13.5px; min-width:0;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .filter-toggle i{
+    margin-left:auto; flex:0 0 auto; width:9px; height:9px; border-right:2px solid var(--muted);
+    border-bottom:2px solid var(--muted); transform:rotate(45deg) translate(-2px,-2px);
+    transition:transform .18s;
+  }
+  .filterbar.on .filter-toggle{border-color:var(--brand); color:var(--brand-dark);}
+  .filterbar.on .filter-toggle em{color:var(--brand);}
+  .filterbar.open .filter-toggle i{transform:rotate(-135deg) translate(-3px,-3px);}
+  .filter-sets{display:none;}
+  .filterbar.open .filter-sets{display:block;}
+}
+
+/* 라인업 — 자료 바로가기 줄 (긴 화면에서 원하는 자료로 바로) */
+.lineup-jump{
+  position:sticky; top:0; z-index:40;
+  background:rgba(250,249,246,.96); border-bottom:1px solid var(--line);
+  backdrop-filter:saturate(1.4) blur(6px);
+}
+.lineup-jump .wrap{display:flex; align-items:center; gap:12px; padding-top:10px;
+  padding-bottom:10px;}
+.lj-label{flex:0 0 auto; font-size:12.5px; font-weight:800; color:var(--muted);}
+.lj-links{
+  display:flex; gap:7px; overflow-x:auto; scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.lj-links::-webkit-scrollbar{display:none;}
+.lj-links a{
+  flex:0 0 auto; display:inline-flex; align-items:center; gap:6px;
+  padding:8px 13px; border:1px solid var(--line-strong); border-radius:999px;
+  background:#fff; font-size:13.5px; font-weight:600; color:var(--ink-2);
+  white-space:nowrap;
+}
+.lj-links a:hover{border-color:var(--brand); color:var(--brand);}
+.lj-links a b{color:var(--brand); font-weight:800;}
+.mat{scroll-margin-top:64px;}
+
+@media (max-width:640px){
+  .lineup-jump .wrap{gap:9px;}
+  .lj-links a{padding:10px 14px;}
+}
+
+/* 맨 위로 — 긴 화면에서 손가락으로 되돌아오기 */
+.to-top{
+  position:fixed; right:16px; bottom:16px; z-index:55;
+  width:46px; height:46px; border-radius:50%; border:1px solid var(--line-strong);
+  background:rgba(255,255,255,.96); color:var(--ink-2); cursor:pointer;
+  display:none; align-items:center; justify-content:center;
+  box-shadow:0 3px 14px rgba(20,25,20,.12); font-family:inherit; font-size:17px;
+}
+.to-top.show{display:flex;}
+.to-top:hover{border-color:var(--brand); color:var(--brand);}
+@media (max-width:640px){
+  body:has(.buy-bar) .to-top{bottom:84px;}
 }

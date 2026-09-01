@@ -16,6 +16,17 @@
   </div>
 </section>
 
+<nav class="lineup-jump" aria-label="자료 바로가기">
+  <div class="wrap">
+    <span class="lj-label">바로가기</span>
+    <div class="lj-links">
+      {% for g in groups %}{% for m in g['items'] %}
+        <a href="#{{ m.id }}"><b>{{ m.no }}</b>{{ m.name }}</a>
+      {% endfor %}{% endfor %}
+    </div>
+  </div>
+</nav>
+
 {% for g in groups %}
 <section class="lineup-group {{ 'dark' if g.theme == 'dark' }}">
   <div class="wrap">

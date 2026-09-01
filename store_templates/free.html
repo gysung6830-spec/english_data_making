@@ -41,39 +41,53 @@
       {% if q %}<a class="btn btn-ghost" href="{{ url_for('free') }}">지우기</a>{% endif %}
     </form>
 
-    {% if grades %}
+    {% set picked = [] %}
+    {% if grade %}{% set _ = picked.append(grade) %}{% endif %}
+    {% if kind and kind in kinds %}{% set _ = picked.append(kinds[kind]) %}{% endif %}
+    {% if exam %}{% set _ = picked.append(exam) %}{% endif %}
+
+    <div class="filterbar{{ ' on' if picked }}">
+      <button class="filter-toggle" type="button" aria-expanded="false">
+        <span>거르기</span>
+        <em>{{ picked | join(' · ') if picked else '학년 · 종류 · 시험' }}</em>
+        <i aria-hidden="true"></i>
+      </button>
+      <div class="filter-sets">
+      {% if grades %}
+        <div class="filters">
+          <span class="filter-label">학년</span>
+          <a class="filter {{ 'on' if not grade }}"
+             href="{{ url_for('free', kind=kind, exam=exam, q=q) }}">전체</a>
+          {% for g in grades %}
+            <a class="filter {{ 'on' if grade == g }}"
+               href="{{ url_for('free', grade=g, kind=kind, exam=exam, q=q) }}">{{ g }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+  
       <div class="filters">
-        <span class="filter-label">학년</span>
-        <a class="filter {{ 'on' if not grade }}"
-           href="{{ url_for('free', kind=kind, exam=exam, q=q) }}">전체</a>
-        {% for g in grades %}
-          <a class="filter {{ 'on' if grade == g }}"
-             href="{{ url_for('free', grade=g, kind=kind, exam=exam, q=q) }}">{{ g }}</a>
+        <span class="filter-label">종류</span>
+        <a class="filter {{ 'on' if not kind }}"
+           href="{{ url_for('free', grade=grade, exam=exam, q=q) }}">전체</a>
+        {% for kid, kname in kinds.items() %}
+          <a class="filter {{ 'on' if kind == kid }}"
+             href="{{ url_for('free', grade=grade, kind=kid, exam=exam, q=q) }}">{{ kname }}</a>
         {% endfor %}
       </div>
-    {% endif %}
-
-    <div class="filters">
-      <span class="filter-label">종류</span>
-      <a class="filter {{ 'on' if not kind }}"
-         href="{{ url_for('free', grade=grade, exam=exam, q=q) }}">전체</a>
-      {% for kid, kname in kinds.items() %}
-        <a class="filter {{ 'on' if kind == kid }}"
-           href="{{ url_for('free', grade=grade, kind=kid, exam=exam, q=q) }}">{{ kname }}</a>
-      {% endfor %}
+  
+      {% if exams %}
+        <div class="filters">
+          <span class="filter-label">시험</span>
+          <a class="filter {{ 'on' if not exam }}"
+             href="{{ url_for('free', grade=grade, kind=kind, q=q) }}">전체</a>
+          {% for e in exams %}
+            <a class="filter {{ 'on' if exam == e }}"
+               href="{{ url_for('free', grade=grade, kind=kind, exam=e, q=q) }}">{{ e }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+      </div>
     </div>
-
-    {% if exams %}
-      <div class="filters">
-        <span class="filter-label">시험</span>
-        <a class="filter {{ 'on' if not exam }}"
-           href="{{ url_for('free', grade=grade, kind=kind, q=q) }}">전체</a>
-        {% for e in exams %}
-          <a class="filter {{ 'on' if exam == e }}"
-             href="{{ url_for('free', grade=grade, kind=kind, exam=e, q=q) }}">{{ e }}</a>
-        {% endfor %}
-      </div>
-    {% endif %}
 
     {% if items %}
       <p class="search-note" style="margin-top:20px;">

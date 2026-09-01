@@ -630,6 +630,8 @@ def product_from_form(form, existing: dict | None = None) -> tuple[dict, list[st
     item["delivery"] = sc.clean(form.get("delivery"), 200)
     item["format"] = sc.clean(form.get("format"), 100)
     item["sample_file"] = sc.clean(form.get("sample_file"), 120)
+    # 만든 날짜 — 홈의 '새로 올라왔습니다' 에 이 순서로 나옵니다.
+    item.setdefault("added", sc.now_kst().date().isoformat())
     return item, errors
 
 

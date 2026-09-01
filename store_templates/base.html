@@ -76,6 +76,19 @@
     });
   })();
 </script>
+<script>
+/* 폰에서 거르기 버튼 — 눌러야 펼쳐집니다. 넓은 화면에서는 늘 펼쳐져 있습니다. */
+(function () {
+  document.querySelectorAll('.filterbar .filter-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var box = btn.closest('.filterbar');
+      var open = box.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+})();
+</script>
+
 
 <footer class="site-foot">
   <div class="wrap">
@@ -117,5 +130,20 @@
   </div>
 </footer>
 
+<button class="to-top" type="button" aria-label="맨 위로">↑</button>
+
+<script>
+/* 많이 내려가면 '맨 위로' 단추가 나옵니다 */
+(function () {
+  var btn = document.querySelector('.to-top');
+  if (!btn) return;
+  function check() { btn.classList.toggle('show', window.scrollY > 900); }
+  window.addEventListener('scroll', check, {passive: true});
+  btn.addEventListener('click', function () {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+  check();
+})();
+</script>
 </body>
 </html>
