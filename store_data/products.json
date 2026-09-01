@@ -1,14 +1,65 @@
 {
-  "_안내": "여기 있는 상품은 예시입니다. 이름·가격·설명을 실제 자료에 맞게 고치고, 필요 없는 것은 지우세요. 자세한 방법은 STORE.md 참고.",
+  "_안내": "여기 있는 교재와 상품은 예시입니다. 실제 자료에 맞게 고치고, 필요 없는 것은 지우세요. 자세한 방법은 STORE.md 참고.",
+
   "categories": [
     { "id": "textbook", "name": "교과서" },
     { "id": "mock", "name": "모의고사" },
     { "id": "ebs", "name": "EBS 수능특강·수능완성" }
   ],
+
+  "_교재안내": "books = 교재/회차 묶음. 강사는 '내가 쓰는 교재 이름'으로 찾기 때문에 이 단위가 중요합니다.",
+  "books": [
+    {
+      "slug": "neungyule-kim",
+      "category": "textbook",
+      "publisher": "능률(NE)",
+      "author": "김성곤",
+      "name": "능률(김성곤) 공통영어 1",
+      "grade": "고1",
+      "sort": 10,
+      "active": true,
+      "description": "능률 김성곤 공통영어 1 본문 전 지문을 단원별로 분석했습니다. 진도에 맞춰 단원만 골라 쓰셔도 되고, 학기 패키지로 한 번에 받으셔도 됩니다."
+    },
+    {
+      "slug": "ybm-han",
+      "category": "textbook",
+      "publisher": "YBM",
+      "author": "한상호",
+      "name": "YBM(한상호) 공통영어 1",
+      "grade": "고1",
+      "sort": 20,
+      "active": true,
+      "description": "YBM 한상호 공통영어 1 본문 지문 분석 세트입니다."
+    },
+    {
+      "slug": "mock-2026-06",
+      "category": "mock",
+      "publisher": "평가원",
+      "author": "",
+      "name": "2026학년도 6월 모의평가",
+      "grade": "고3",
+      "sort": 30,
+      "active": true,
+      "description": "듣기를 제외한 18~45번 전 지문을 실제 문항 번호 그대로 분석했습니다. 해설 수업에 바로 쓰기 좋습니다."
+    },
+    {
+      "slug": "ebs-2026-dokyeon",
+      "category": "ebs",
+      "publisher": "EBS",
+      "author": "",
+      "name": "2026 수능특강 영어독해연습",
+      "grade": "고3",
+      "sort": 40,
+      "active": true,
+      "description": "EBS 연계 대비용. 논설문과 문학 지문을 각각 다른 구조 분석 틀로 정리했습니다."
+    }
+  ],
+
   "products": [
     {
       "slug": "neungyule-kim-lesson3",
       "category": "textbook",
+      "book": "neungyule-kim",
       "name": "능률(김성곤) 고1 영어 · 3과 전지문 세트",
       "subtitle": "지문 8개 · 3종 자료 24개 파일",
       "price": 18000,
@@ -33,6 +84,7 @@
     {
       "slug": "neungyule-kim-full",
       "category": "textbook",
+      "book": "neungyule-kim",
       "name": "능률(김성곤) 고1 영어 · 1학기 전 단원 패키지",
       "subtitle": "1~4과 · 지문 32개",
       "price": 59000,
@@ -54,8 +106,28 @@
       "sample_file": "sample_textbook.pdf"
     },
     {
+      "slug": "ybm-han-lesson1",
+      "category": "textbook",
+      "book": "ybm-han",
+      "name": "YBM(한상호) 고1 영어 · 1과 전지문 세트",
+      "subtitle": "지문 7개 · 3종 자료 21개 파일",
+      "price": 16000,
+      "list_price": 21000,
+      "passages": 7,
+      "grade": "고1",
+      "sort": 30,
+      "active": true,
+      "includes": ["지문 분석지 (6개 섹션)", "핵심 어휘 리스트", "영단어 시험지 (정답 포함)"],
+      "description": "YBM 한상호 공통영어 1의 1과 본문 전 지문 분석 세트입니다.",
+      "highlights": ["교과서 본문 순서 그대로 정렬되어 진도에 맞춰 쓰기 편합니다"],
+      "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
+      "format": "PDF (A4, 인쇄용)",
+      "sample_file": "sample_textbook.pdf"
+    },
+    {
       "slug": "mock-2026-06-grade3",
       "category": "mock",
+      "book": "mock-2026-06",
       "name": "2026학년도 6월 모의평가 · 고3 전지문 세트",
       "subtitle": "18~45번 지문 전체",
       "price": 22000,
@@ -63,7 +135,7 @@
       "passages": 28,
       "grade": "고3",
       "badge": "신규",
-      "sort": 30,
+      "sort": 40,
       "active": true,
       "includes": ["지문 분석지 (6개 섹션)", "핵심 어휘 리스트", "영단어 시험지 (정답 포함)"],
       "description": "모의고사 원본에서 듣기 영역을 제외하고 18번부터 45번까지 전 지문을 분석했습니다. 문항 번호가 그대로 표시되어 해설 수업에 바로 쓰기 좋습니다.",
@@ -84,7 +156,7 @@
       "price": 6000,
       "passages": 5,
       "grade": "고2~고3",
-      "sort": 40,
+      "sort": 50,
       "active": true,
       "includes": ["지문 분석지 (6개 섹션)", "핵심 어휘 리스트", "영단어 시험지 (정답 포함)"],
       "description": "처음 구매하시는 분을 위한 최소 단위 세트입니다. 원하시는 회차를 요청사항에 적어 주시면 맞춰 보내 드립니다.",
@@ -96,13 +168,14 @@
     {
       "slug": "ebs-suneung-special",
       "category": "ebs",
+      "book": "ebs-2026-dokyeon",
       "name": "수능특강 영어독해연습 · Part 1 세트",
       "subtitle": "지문 20개",
       "price": 29000,
       "list_price": 40000,
       "passages": 20,
       "grade": "고3",
-      "sort": 50,
+      "sort": 60,
       "active": true,
       "includes": ["지문 분석지 (6개 섹션)", "핵심 어휘 리스트", "영단어 시험지 (정답 포함)"],
       "description": "EBS 연계 대비 수업용입니다. 지문 구조 분석에서 논설문·문학 유형을 자동으로 나눠 각각 다른 틀로 정리했습니다.",

@@ -70,9 +70,41 @@ def load_site() -> dict:
 
 
 def load_catalog() -> dict:
-    catalog = _load_json("products.json", {"categories": [], "products": []})
+    catalog = _load_json("products.json", {"categories": [], "books": [], "products": []})
     catalog["products"] = [p for p in catalog.get("products", []) if p.get("active", True)]
+    catalog["books"] = sorted(
+        [b for b in catalog.get("books", []) if b.get("active", True)],
+        key=lambda b: (b.get("sort", 100), b.get("name", "")),
+    )
     return catalog
+
+
+def load_notices() -> dict:
+    """공지사항 · 자료 업데이트 일정. 최신 날짜가 위로 오고 고정 공지가 맨 앞입니다."""
+    data = _load_json("notices.json", {"schedule": [], "notices": []})
+    data["notices"] = sorted(
+        data.get("notices", []),
+        key=lambda n: (not n.get("pinned"), ),
+    )
+    body = sorted([n for n in data["notices"] if not n.get("pinned")],
+                  key=lambda n: n.get("date", ""), reverse=True)
+    data["notices"] = [n for n in data["notices"] if n.get("pinned")] + body
+    return data
+
+
+def books_with_counts(catalog: dict, category: str = "") -> list[dict]:
+    """교재별로 '그 교재에 속한 상품 수 / 최저가'를 붙여 돌려줍니다."""
+    result = []
+    for book in catalog["books"]:
+        if category and book.get("category") != category:
+            continue
+        items = [p for p in catalog["products"] if p.get("book") == book["slug"]]
+        if not items:
+            continue
+        result.append({**book,
+                       "count": len(items),
+                       "from_price": min(p.get("price", 0) for p in items)})
+    return result
 
 
 @app.context_processor
@@ -82,6 +114,8 @@ def inject_globals():
         "site": site,
         "now": datetime.now(KST),
         "nav_categories": load_catalog().get("categories", []),
+        # 'pass' 는 파이썬 예약어라 템플릿에서 site.pass 로 못 씁니다. 따로 넘깁니다.
+        "passcfg": site.get("pass", {}),
     }
 
 
@@ -234,7 +268,10 @@ def home():
     catalog = load_catalog()
     products = catalog["products"]
     featured = [p for p in products if p.get("badge")][:3] or products[:3]
-    return render_template("home.html", featured=featured, product_count=len(products))
+    notices = load_notices()["notices"]
+    return render_template("home.html", featured=featured, product_count=len(products),
+                           books=books_with_counts(catalog)[:4],
+                           latest_notice=notices[0] if notices else None)
 
 
 @app.route("/products")
@@ -248,6 +285,7 @@ def products():
     return render_template(
         "products.html",
         items=items,
+        books=books_with_counts(catalog, selected),
         categories=catalog.get("categories", []),
         selected=selected,
     )
@@ -265,9 +303,98 @@ def product_detail(slug):
     product = find_product(slug)
     if not product:
         abort(404)
-    related = [p for p in load_catalog()["products"]
-               if p.get("category") == product.get("category") and p.get("slug") != slug][:3]
-    return render_template("product.html", p=product, related=related)
+    catalog = load_catalog()
+    book = next((b for b in catalog["books"] if b["slug"] == product.get("book")), None)
+    if book:
+        related = [p for p in catalog["products"]
+                   if p.get("book") == book["slug"] and p.get("slug") != slug][:3]
+    else:
+        related = []
+    if not related:
+        related = [p for p in catalog["products"]
+                   if p.get("category") == product.get("category") and p.get("slug") != slug][:3]
+    return render_template("product.html", p=product, book=book, related=related)
+
+
+def find_book(slug: str) -> dict | None:
+    for book in load_catalog()["books"]:
+        if book.get("slug") == slug:
+            return book
+    return None
+
+
+@app.route("/books/<slug>")
+def book_detail(slug):
+    """교재 한 권의 전용 페이지.
+
+    강사는 '내가 쓰는 교재 이름'으로 자료를 찾기 때문에, 교재 단위 주소를
+    따로 두면 검색으로 들어오기도 쉽고 링크로 공유하기도 편합니다.
+    """
+    book = find_book(slug)
+    if not book:
+        abort(404)
+    catalog = load_catalog()
+    items = sorted([p for p in catalog["products"] if p.get("book") == slug],
+                   key=lambda p: (p.get("sort", 100), p.get("name", "")))
+    others = [b for b in books_with_counts(catalog, book.get("category", ""))
+              if b["slug"] != slug][:3]
+    return render_template("book.html", book=book, items=items, others=others)
+
+
+@app.route("/notice")
+def notice():
+    return render_template("notice.html", **load_notices())
+
+
+@app.route("/pass", methods=["GET", "POST"])
+def pass_page():
+    """프리패스(무제한 이용권) 안내.
+
+    site.json 의 pass.mode 가 'preorder' 면 가격표만 보여 주고 사전 신청을 받습니다.
+    자료가 충분히 쌓인 뒤 'sale' 로 바꾸면 실제 판매 문구로 바뀝니다.
+    """
+    cfg = load_site().get("pass", {})
+    if not cfg.get("enabled"):
+        abort(404)
+
+    if request.method == "GET":
+        return render_template("pass.html", cfg=cfg, form={}, errors=[], done=None)
+
+    data, errors = validate_contact(request.form)
+    plan = clean(request.form.get("plan"), 40)
+    plan_names = [pl["name"] for pl in cfg.get("plans", [])]
+    if plan not in plan_names:
+        errors.append("관심 있는 이용권을 골라 주세요.")
+    if errors:
+        return render_template("pass.html", cfg=cfg, form=request.form,
+                               errors=errors, done=None), 400
+
+    order_no = new_order_no()
+    stamp = datetime.now(KST).isoformat(timespec="seconds")
+    db = get_db()
+    db.execute(
+        """INSERT INTO orders (order_no, kind, product_name, quantity, amount,
+                               name, phone, email, affiliation, message, detail_json,
+                               status, created_at, updated_at)
+           VALUES (?, 'pass', ?, 1, 0, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?)""",
+        (order_no, f"프리패스 사전 신청 · {plan}", data["name"], data["phone"], data["email"],
+         data["affiliation"], data["message"],
+         json.dumps({"관심 이용권": plan}, ensure_ascii=False), stamp, stamp),
+    )
+    db.commit()
+
+    send_order_mail(
+        f"[Ortica영어] 프리패스 사전 신청 {order_no} · {plan}",
+        "\n".join([f"신청번호 : {order_no}",
+                    f"관심 이용권 : {plan}",
+                    f"성함     : {data['name']}",
+                    f"연락처   : {data['phone']}",
+                    f"이메일   : {data['email']}",
+                    f"소속     : {data['affiliation'] or '-'}",
+                    f"하고 싶은 말 : {data['message'] or '-'}",
+                    f"접수시각 : {stamp}"]),
+    )
+    return render_template("pass.html", cfg=cfg, form={}, errors=[], done=order_no)
 
 
 @app.route("/order", methods=["GET", "POST"])

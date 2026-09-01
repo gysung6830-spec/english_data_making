@@ -7,6 +7,12 @@
 <section class="section">
   <div class="wrap detail">
     <div>
+      {% if book %}
+        <nav class="crumb">
+          <a href="{{ url_for('products') }}">자료 목록</a> ›
+          <a href="{{ url_for('book_detail', slug=book.slug) }}">{{ book.name }}</a>
+        </nav>
+      {% endif %}
       {% if p.badge %}<span class="badge">{{ p.badge }}</span>{% endif %}
       <h1>{{ p.name }}</h1>
       <div class="sub">{{ p.subtitle }}</div>
@@ -64,7 +70,7 @@
 
   {% if related %}
   <div class="wrap" style="margin-top:52px;">
-    <div class="section-head"><h2 style="font-size:22px;">함께 보면 좋은 자료</h2></div>
+    <div class="section-head"><h2 style="font-size:22px;">{{ '같은 교재의 다른 자료' if book else '함께 보면 좋은 자료' }}</h2></div>
     <div class="grid grid-3">
       {% for r in related %}{{ product_card(r) }}{% endfor %}
     </div>

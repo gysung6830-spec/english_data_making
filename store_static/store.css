@@ -105,6 +105,7 @@ ul{margin:0; padding-left:1.1em;}
 .grid{display:grid; gap:18px;}
 .grid-3{grid-template-columns:repeat(3,1fr);}
 .grid-2{grid-template-columns:repeat(2,1fr);}
+.grid-4{grid-template-columns:repeat(4,1fr);}
 
 .card{
   background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
@@ -126,6 +127,8 @@ ul{margin:0; padding-left:1.1em;}
   border-radius:999px; background:var(--accent); color:#fff; margin-bottom:10px;
 }
 .badge-soft{background:var(--brand-soft); color:var(--brand-dark);}
+/* flex 컨테이너 안에서는 배지가 폭 전체로 늘어나므로 글자 폭에 맞춥니다. */
+.product-card > .badge, .book-card > .badge{align-self:flex-start;}
 .product-card h3{font-size:17.5px; margin-bottom:6px;}
 .product-card .sub{color:var(--muted); font-size:14px; margin-bottom:14px;}
 .chips{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px;}
@@ -240,6 +243,9 @@ details.faq p:last-child{margin-bottom:0;}
   .hero h1{font-size:31px;}
   .hero-grid, .detail{grid-template-columns:1fr; gap:28px;}
   .grid-3, .grid-2, .steps{grid-template-columns:1fr;}
+  .grid-4{grid-template-columns:repeat(2,1fr);}
+  .notice-strip{margin:12px 20px 0; font-size:13.5px;}
+  .notice-strip .notice-more{display:none;}
   .buybox{position:static;}
   .section{padding:44px 0;}
   .site-head .wrap{height:auto; padding-top:12px; padding-bottom:12px; flex-wrap:wrap; gap:10px 18px;}
@@ -247,3 +253,60 @@ details.faq p:last-child{margin-bottom:0;}
   .head-cta .btn{flex:1;}
   .nav{font-size:14.5px; gap:16px;}
 }
+
+/* ---------- 공지 띠 ---------- */
+.notice-strip{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  max-width:1080px; margin:16px auto 0; padding:11px 18px;
+  background:var(--card); border:1px solid var(--line); border-radius:10px;
+  font-size:14.5px; box-shadow:var(--shadow);
+}
+.notice-strip:hover{border-color:var(--brand);}
+.notice-strip .badge{margin:0;}
+.notice-strip b{font-weight:700;}
+.notice-strip .notice-more{margin-left:auto; color:var(--brand); font-weight:700; font-size:13.5px;}
+
+/* ---------- 빵부스러기 ---------- */
+.crumb{font-size:13.5px; color:var(--muted); margin-bottom:14px;}
+.crumb a{color:var(--ink-2); font-weight:600;}
+.crumb a:hover{color:var(--brand);}
+
+/* ---------- 소제목 ---------- */
+.subhead{margin:0 0 16px;}
+.subhead h3{font-size:19px; font-weight:800; margin-bottom:4px;}
+
+/* ---------- 교재 카드 ---------- */
+.book-card{
+  display:flex; flex-direction:column; background:var(--card);
+  border:1px solid var(--line); border-radius:var(--radius); padding:20px;
+  box-shadow:var(--shadow); transition:.15s;
+}
+.book-card:hover{border-color:var(--brand); transform:translateY(-2px);}
+.book-pub{font-size:12.5px; font-weight:700; color:var(--brand); margin-bottom:6px;}
+.book-card h3{font-size:16px; margin-bottom:12px; line-height:1.4;}
+.book-meta{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;}
+.book-from{margin-top:auto; font-size:15px; font-weight:800; color:var(--ink);}
+
+/* ---------- 공지 목록 ---------- */
+.notice{background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:20px 22px; margin-bottom:12px;}
+.notice-pinned{border-color:var(--brand); background:#fdfdfb;}
+.notice-head{display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:13px;}
+.notice-head .badge{margin:0;}
+.notice h3{font-size:17px; margin-bottom:8px;}
+.notice p{color:var(--ink-2); font-size:15px;}
+
+/* ---------- 프리패스 요금제 ---------- */
+.plans{align-items:stretch;}
+.plan{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:26px 24px; display:flex; flex-direction:column; box-shadow:var(--shadow);
+  text-align:center;
+}
+.plan-best{border:2px solid var(--brand); box-shadow:0 8px 30px -18px rgba(20,107,74,.6);}
+.plan .badge{align-self:center;}
+.plan h3{font-size:17px; color:var(--ink-2); margin-bottom:10px;}
+.plan-price{font-size:30px; font-weight:800; letter-spacing:-.03em;}
+.plan-per{font-size:13.5px; color:var(--muted); margin-bottom:14px;}
+.plan-desc{font-size:14.5px; color:var(--ink-2); min-height:44px;}
+.plan .btn{margin-top:auto;}

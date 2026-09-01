@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import product_card %}
+{% from "_macros.html" import product_card, book_card %}
 {% block title %}자료 목록 · {{ site.brand }}{% endblock %}
 
 {% block body %}
@@ -17,6 +17,17 @@
            href="{{ url_for('products', category=c.id) }}">{{ c.name }}</a>
       {% endfor %}
     </div>
+
+    {% if books %}
+      <div class="subhead">
+        <h3>교재로 찾기</h3>
+        <p class="muted mb-0">쓰시는 교재를 고르면 그 교재의 자료만 모아서 보여 드립니다.</p>
+      </div>
+      <div class="grid grid-4" style="margin-bottom:40px;">
+        {% for b in books %}{{ book_card(b) }}{% endfor %}
+      </div>
+      <div class="subhead"><h3>전체 자료</h3></div>
+    {% endif %}
 
     {% if items %}
       <div class="grid grid-3">

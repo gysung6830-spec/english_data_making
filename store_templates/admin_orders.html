@@ -6,7 +6,7 @@
     <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;">
       <div>
         <h2>주문 관리</h2>
-        <p>입금이 확인되면 상태를 바꾸고, 자료를 보낸 뒤 '발송완료'로 바꿔 주세요.</p>
+        <p>입금이 확인되면 상태를 바꾸고, 자료를 보낸 뒤 '발송완료'로 바꿔 주세요. 맞춤 제작 문의와 프리패스 사전 신청도 여기에 함께 쌓입니다.</p>
       </div>
       <div style="display:flex;gap:8px;">
         <a class="btn btn-ghost btn-sm" href="{{ url_for('admin_csv') }}">CSV로 백업</a>
@@ -51,6 +51,7 @@
             <td style="white-space:nowrap;">{{ r['created_at'][5:16].replace('T', ' ') }}</td>
             <td style="white-space:nowrap;"><b>{{ r['order_no'] }}</b>
               {% if r['kind'] == 'custom' %}<br><span class="pill pill-입금확인">맞춤</span>{% endif %}
+              {% if r['kind'] == 'pass' %}<br><span class="pill pill-발송완료">프리패스</span>{% endif %}
             </td>
             <td>
               {{ r['product_name'] }}{% if r['quantity'] > 1 %} × {{ r['quantity'] }}{% endif %}

@@ -19,7 +19,11 @@
     <nav class="nav">
       <a href="{{ url_for('products') }}" class="{{ 'on' if request.endpoint in ['products','product_detail'] }}">자료 목록</a>
       <a href="{{ url_for('samples') }}" class="{{ 'on' if request.endpoint == 'samples' }}">무료 샘플</a>
+      {% if passcfg.enabled %}
+        <a href="{{ url_for('pass_page') }}" class="{{ 'on' if request.endpoint == 'pass_page' }}">프리패스</a>
+      {% endif %}
       <a href="{{ url_for('custom') }}" class="{{ 'on' if request.endpoint == 'custom' }}">맞춤 제작</a>
+      <a href="{{ url_for('notice') }}" class="{{ 'on' if request.endpoint == 'notice' }}">공지</a>
       <a href="{{ url_for('guide') }}" class="{{ 'on' if request.endpoint == 'guide' }}">이용 안내</a>
     </nav>
     <div class="head-cta">
@@ -52,6 +56,7 @@
         <h4>바로가기</h4>
         <div><a href="{{ url_for('products') }}">자료 목록</a></div>
         <div><a href="{{ url_for('samples') }}">무료 샘플</a></div>
+        <div><a href="{{ url_for('notice') }}">공지사항 · 업데이트 일정</a></div>
         <div><a href="{{ url_for('guide') }}">이용 안내 · 환불 규정</a></div>
       </div>
     </div>

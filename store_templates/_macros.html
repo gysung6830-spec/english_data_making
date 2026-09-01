@@ -19,3 +19,15 @@
   <a class="btn btn-ghost btn-block" href="{{ url_for('product_detail', slug=p.slug) }}">자세히 보기</a>
 </article>
 {% endmacro %}
+
+{% macro book_card(b) %}
+<a class="book-card" href="{{ url_for('book_detail', slug=b.slug) }}">
+  <div class="book-pub">{{ b.publisher }}{% if b.author %} · {{ b.author }}{% endif %}</div>
+  <h3>{{ b.name }}</h3>
+  <div class="book-meta">
+    {% if b.grade %}<span class="chip">{{ b.grade }}</span>{% endif %}
+    <span class="chip">자료 {{ b.count }}종</span>
+  </div>
+  <div class="book-from">{{ b.from_price|won }}부터</div>
+</a>
+{% endmacro %}

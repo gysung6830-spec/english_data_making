@@ -4,7 +4,7 @@
 API 키도, 인터넷도 필요 없습니다. 실제 주문 DB 대신 임시 폴더를 씁니다.
 
 검증 항목:
-  - 고객 페이지가 모두 열리는지
+  - 고객 페이지가 모두 열리는지 (교재별 페이지·공지·프리패스 포함)
   - 주문서 입력값 검증(이메일 형식·개인정보 동의)
   - 주문이 DB에 저장되고 금액이 수량만큼 곱해지는지
   - 맞춤 제작 문의 접수
@@ -39,6 +39,8 @@ def test_public_pages_open():
         ("/", "지문 분석지"),
         ("/products", "자료 목록"),
         ("/samples", "무료 샘플"),
+        ("/notice", "자료 업데이트 일정"),
+        ("/pass", "프리패스"),
         ("/custom", "맞춤 제작 문의"),
         ("/guide", "환불 규정"),
     ]:
@@ -49,11 +51,47 @@ def test_public_pages_open():
     print("PASS  고객 페이지 열림")
 
 
+def test_book_page_lists_only_its_products():
+    resp = client().get("/books/neungyule-kim")
+    assert resp.status_code == 200
+    text = body(resp)
+    assert "능률(김성곤) 공통영어 1" in text
+    assert "3과 전지문 세트" in text and "1학기 전 단원 패키지" in text
+    assert "YBM(한상호)" not in text.split("같은 분류의 다른 교재")[0]  # 다른 교재는 섞이지 않음
+    assert client().get("/books/없는교재").status_code == 404
+    print("PASS  교재별 페이지가 해당 교재 자료만 보여 줌")
+
+
+def test_products_page_shows_book_shortcuts():
+    text = body(client().get("/products"))
+    assert "교재로 찾기" in text
+    assert "/books/neungyule-kim" in text
+    # 분류를 고르면 그 분류의 교재만 남습니다.
+    mock_only = body(client().get("/products?category=mock"))
+    assert "/books/mock-2026-06" in mock_only
+    assert "/books/neungyule-kim" not in mock_only
+    print("PASS  자료 목록의 교재 바로가기 · 분류 필터")
+
+
+def test_pass_preorder_saved():
+    c = client()
+    bad = c.post("/pass", data={"name": "박선생", "phone": "010-1111-2222",
+                                "email": "park@example.com", "agree": "1"})
+    assert bad.status_code == 400 and "이용권을 골라 주세요" in body(bad)
+
+    ok = c.post("/pass", data={"plan": "3개월", "name": "박선생",
+                               "phone": "010-1111-2222", "email": "park@example.com",
+                               "message": "수능특강 먼저 부탁드립니다", "agree": "1"})
+    assert "사전 신청이 접수되었습니다" in body(ok)
+    print("PASS  프리패스 사전 신청 접수")
+
+
 def test_product_detail_shows_price():
     resp = client().get("/products/neungyule-kim-lesson3")
     assert "18,000원" in body(resp)
     assert "주문서 작성하기" in body(resp)
-    print("PASS  상품 상세에 가격·주문 버튼 표시")
+    assert "/books/neungyule-kim" in body(resp)   # 교재 페이지로 돌아가는 링크
+    print("PASS  상품 상세에 가격·주문 버튼·교재 링크 표시")
 
 
 # ---- 2. 주문서 검증 --------------------------------------------------------
@@ -106,6 +144,7 @@ def test_admin_can_update_status():
     assert c.post("/admin/login", data={"password": "test1234"}).status_code == 302
     listed = c.get("/admin")
     assert "홍길동" in body(listed) and "입금대기" in body(listed)
+    assert "프리패스 사전 신청 · 3개월" in body(listed)   # 사전 신청도 함께 쌓임
 
     row = store.sqlite3.connect(store.DB_PATH).execute(
         "SELECT id FROM orders ORDER BY id LIMIT 1").fetchone()
@@ -124,6 +163,9 @@ def test_sample_path_traversal_blocked():
 
 def run_all():
     test_public_pages_open()
+    test_book_page_lists_only_its_products()
+    test_products_page_shows_book_shortcuts()
+    test_pass_preorder_saved()
     test_product_detail_shows_price()
     test_order_rejects_bad_input()
     test_order_saves_and_multiplies_amount()
