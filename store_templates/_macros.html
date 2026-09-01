@@ -29,7 +29,14 @@
       <span class="price-off">{{ ((1 - p.price / p.list_price) * 100)|round|int }}% ↓</span>
     {% endif %}
   </div>
-  <a class="btn btn-ghost btn-block" href="{{ url_for('product_detail', slug=p.slug) }}">자세히 보기</a>
+  <div class="pc-act">
+    <a class="btn btn-ghost" href="{{ url_for('product_detail', slug=p.slug) }}">자세히 보기</a>
+    <form method="post" action="{{ url_for('cart_add') }}">
+      <input type="hidden" name="slug" value="{{ p.slug }}">
+      <input type="hidden" name="next" value="{{ request.full_path }}">
+      <button class="btn btn-primary" type="submit">담기</button>
+    </form>
+  </div>
 </article>
 {% endmacro %}
 
@@ -59,8 +66,9 @@
   <div class="bg-picks">
     {% for p in g['items'] %}
       {% set pkg = package_map.get(p.package) %}
-      <a class="bg-pick pkg-{{ p.package }}" href="{{ url_for('product_detail', slug=p.slug) }}">
-        <span class="bg-pick-name">{{ pkg.name if pkg else p.name }}</span>
+      <div class="bg-pick pkg-{{ p.package }}">
+        <a class="bg-pick-name" href="{{ url_for('product_detail', slug=p.slug) }}">
+          {{ pkg.name if pkg else p.name }}</a>
         {% if p.materials %}
           <span class="bg-pick-mats">
             {% for mid in p.materials %}
@@ -75,9 +83,16 @@
           {% if p.list_price and p.list_price > p.price %}
             <span class="price-off">{{ ((1 - p.price / p.list_price) * 100)|round|int }}% ↓</span>
           {% endif %}
-          <span class="bg-go">자세히 →</span>
         </span>
-      </a>
+        <div class="bg-pick-act">
+          <a class="bg-go" href="{{ url_for('product_detail', slug=p.slug) }}">자세히 →</a>
+          <form method="post" action="{{ url_for('cart_add') }}">
+            <input type="hidden" name="slug" value="{{ p.slug }}">
+            <input type="hidden" name="next" value="{{ request.full_path }}">
+            <button class="bg-cart" type="submit">담기</button>
+          </form>
+        </div>
+      </div>
     {% endfor %}
   </div>
 </article>

@@ -51,13 +51,36 @@
       <a href="{{ url_for('guide') }}" class="{{ 'on' if request.endpoint in ['guide','custom','submit'] }}">안내</a>
     </nav>
     <div class="head-cta">
-      {% if site.contact.kakao_url and 'example' not in site.contact.kakao_url and '여기에' not in site.contact.kakao_url %}
-        <a class="btn btn-ghost btn-sm" href="{{ site.contact.kakao_url }}" target="_blank" rel="noopener">문의하기</a>
-      {% endif %}
+      <a class="cart-link {{ 'has' if cart_count }}" href="{{ url_for('cart') }}"
+         aria-label="장바구니">
+        <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
+          <path d="M3 4h2.2l2.3 10.4a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.5L20.8 8H6.3"
+                fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="10" cy="19.2" r="1.4" fill="currentColor"/>
+          <circle cx="17" cy="19.2" r="1.4" fill="currentColor"/>
+        </svg>
+        {% if cart_count %}<span class="cart-count">{{ cart_count }}</span>{% endif %}
+      </a>
       <a class="btn btn-primary btn-sm" href="{{ url_for('products') }}">자료 보러 가기</a>
     </div>
   </div>
 </header>
+
+{% with notes = get_flashed_messages() %}
+  {% if notes %}
+    <div class="toast-wrap">
+      <div class="wrap">
+        {% for note in notes %}
+          <div class="toast">
+            <span>{{ note }}</span>
+            <a href="{{ url_for('cart') }}">장바구니 보기 ›</a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endwith %}
 
 <main>
   {% block body %}{% endblock %}

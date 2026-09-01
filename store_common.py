@@ -541,23 +541,78 @@ def loyalty_tier(site: dict, repeat_no: int) -> dict | None:
     return best
 
 
-def auto_discounts(site: dict, subtotal: int, repeat_no: int, take_both: bool
+def bundle_pairs(items: list[dict]) -> tuple[int, int]:
+    """같은 교재의 두 갈래(지문 분석 · 문제)를 함께 담은 몫을 셉니다.
+
+    (짝이 맞는 상품들의 값 합계, 짝 세트 수) 를 돌려줍니다.
+    장바구니에 여러 교재가 있어도 짝이 맞는 것만 골라 냅니다.
+    """
+    by_book: dict[str, dict[str, dict]] = {}
+    for item in items:
+        book, pkg = item.get("book"), item.get("package")
+        if book and pkg:
+            by_book.setdefault(book, {})[pkg] = item
+    base = pairs = 0
+    for packages in by_book.values():
+        if len(packages) >= 2:
+            pairs += 1
+            base += sum(to_int(x.get("price"), 0) for x in packages.values())
+    return base, pairs
+
+
+def paid_order_count(email: str) -> int:
+    """이 이메일로 값을 치른 주문이 몇 건인지. 단골 할인에 씁니다.
+
+    회원가입이 없으므로 이메일을 열쇠로 씁니다.
+    입금이 확인된 주문만 셉니다. (주문만 넣고 안 낸 것은 안 칩니다)
+    """
+    email = clean(email, 120).lower()
+    if not EMAIL_RE.match(email):
+        return 0
+    row = get_db().execute(
+        """SELECT COUNT(*) AS n FROM orders
+           WHERE lower(email) = ? AND status IN ('입금확인', '발송완료')""",
+        (email,)).fetchone()
+    return int(row["n"] if row else 0)
+
+
+def loyalty_tier(site: dict, repeat_no: int) -> dict | None:
+    """이번이 몇 번째 구매인지에 맞는 단골 할인 단계를 돌려줍니다."""
+    cfg = (site.get("discount") or {})
+    if not cfg.get("loyalty_enabled", True):
+        return None
+    best = None
+    for tier in cfg.get("loyalty") or []:
+        need = to_int(tier.get("min"), 0)
+        pct = to_int(tier.get("percent"), 0)
+        if need >= 2 and pct > 0 and repeat_no >= need:
+            if best is None or need > to_int(best.get("min"), 0):
+                best = {"min": need, "percent": pct}
+    return best
+
+
+def auto_discounts(site: dict, items: list[dict], repeat_no: int
                    ) -> tuple[list[dict], int]:
     """쿠폰 없이 자동으로 붙는 할인 — 묶음 할인과 단골 할인.
 
     (할인 목록, 총 할인액) 을 돌려줍니다.
+    묶음 할인은 '짝이 맞는 상품들의 값' 에만 붙습니다.
     너무 깊게 깎이지 않도록 합계에 상한(기본 25%)을 둡니다.
     """
     cfg = site.get("discount") or {}
+    subtotal = sum(to_int(x.get("price"), 0) for x in items)
     rows: list[dict] = []
 
     percent = to_int(cfg.get("bundle_percent"), 0)
-    if take_both and cfg.get("bundle_enabled", True) and percent > 0:
-        rows.append({"name": "두 패키지 함께", "percent": percent,
-                     "amount": subtotal * percent // 100})
+    if cfg.get("bundle_enabled", True) and percent > 0:
+        base, pairs = bundle_pairs(items)
+        if base > 0:
+            name = "두 패키지 함께" if pairs == 1 else f"두 패키지 함께 · {pairs}세트"
+            rows.append({"name": name, "percent": percent,
+                         "amount": base * percent // 100})
 
     tier = loyalty_tier(site, repeat_no)
-    if tier:
+    if tier and subtotal > 0:
         rows.append({"name": f"{repeat_no}번째 구매 · 단골", "percent": tier["percent"],
                      "amount": subtotal * tier["percent"] // 100})
 

@@ -1425,6 +1425,135 @@ def test_admin_pricing_guide():
     print("PASS  가격 가이드 (지문당 단가 · 계산기)")
 
 
+def _set_discount(bundle=12, loyalty=None, cap=25):
+    """할인 설정을 이 테스트가 쓰는 값으로 맞춰 둡니다.
+    (다른 테스트가 바꿔 놓았을 수 있어 매번 새로 깝니다)"""
+    site = sc.load_site()
+    site["discount"] = {"bundle_enabled": True, "bundle_percent": bundle,
+                        "loyalty_enabled": bool(loyalty),
+                        "loyalty": loyalty or [], "max_percent": cap}
+    sc.save_site(site)
+
+
+# ---- 장바구니 --------------------------------------------------------------
+def test_cart_add_view_remove():
+    """여러 회차를 담고, 빼고, 비울 수 있어야 합니다."""
+    c = client()
+    assert "담긴 자료가 없습니다" in body(c.get("/cart"))
+
+    c.post("/cart/add", data={"slug": "neungyule-kim-analysis"})
+    c.post("/cart/add", data={"slug": "ebs-2026-tokgang-eng-analysis"})
+    page = body(c.get("/cart"))
+    assert "능률(김성곤)" in page and "수능특강" in page
+    assert "26,000원" in page and "16,000원" in page
+    assert "42,000원" in page          # 26,000 + 16,000
+
+    # 같은 것을 또 담아도 한 번만 들어갑니다
+    c.post("/cart/add", data={"slug": "neungyule-kim-analysis"})
+    assert body(c.get("/cart")).count('class="cart-row"') == 2
+
+    c.post("/cart/remove", data={"slug": "ebs-2026-tokgang-eng-analysis"})
+    left = body(c.get("/cart"))
+    assert left.count('class="cart-row"') == 1 and "수능특강" not in left
+
+    c.post("/cart/clear")
+    assert "담긴 자료가 없습니다" in body(c.get("/cart"))
+    print("PASS  장바구니 담기 · 빼기 · 비우기")
+
+
+def test_cart_bundle_discount_only_on_pairs():
+    """짝이 맞는 것에만 묶음 할인이 붙어야 합니다."""
+    _set_discount(bundle=12)
+    c = client()
+    c.post("/cart/add", data={"slug": "neungyule-kim-analysis"})
+    q1 = c.get("/order/quote?cart=1").get_json()
+    assert q1["rows"] == [], "짝이 없는데 묶음 할인이 붙었습니다"
+
+    c.post("/cart/add", data={"slug": "neungyule-kim-problem"})
+    q2 = c.get("/order/quote?cart=1").get_json()
+    assert q2["subtotal"] == 56000
+    assert q2["rows"][0]["name"] == "두 패키지 함께" and q2["rows"][0]["amount"] == 6720
+    assert q2["final"] == 49280
+
+    # 짝이 아닌 교재를 더 담아도 묶음 할인액은 그대로입니다
+    c.post("/cart/add", data={"slug": "ebs-2026-tokgang-eng-analysis"})
+    q3 = c.get("/order/quote?cart=1").get_json()
+    assert q3["subtotal"] == 72000
+    assert q3["rows"][0]["amount"] == 6720
+    print("PASS  묶음 할인은 짝이 맞는 값에만")
+
+
+def test_cart_two_pairs_counted():
+    """두 교재를 짝으로 담으면 '2세트' 로 세어야 합니다."""
+    _set_discount(bundle=12)
+    c = client()
+    for slug in ("neungyule-kim-analysis", "neungyule-kim-problem",
+                 "ybm-han-analysis", "ybm-han-problem"):
+        c.post("/cart/add", data={"slug": slug})
+    q = c.get("/order/quote?cart=1").get_json()
+    assert "2세트" in q["rows"][0]["name"], q["rows"]
+    assert q["subtotal"] == 56000 + 49000
+    assert q["rows"][0]["amount"] == (56000 + 49000) * 12 // 100
+    print("PASS  짝 두 세트 묶음 할인")
+
+
+def test_cart_order_end_to_end():
+    """장바구니로 주문하면 한 건으로 접수되고, 자료는 전부 나가야 합니다."""
+    _set_discount(bundle=12)
+    c = client()
+    for slug in ("neungyule-kim-analysis", "neungyule-kim-problem"):
+        c.post("/cart/add", data={"slug": slug})
+
+    form = body(c.get("/order?cart=1"))
+    assert form.count('class="order-item"') == 2
+    assert "장바구니에서 고치기" in form
+    assert "문제 패키지도 함께 받기" not in form      # 장바구니에서는 짝 체크박스가 없습니다
+
+    resp = c.post("/order", data={
+        "cart": "1", "name": "장바구니", "phone": "010-3333-4444",
+        "email": "cart@example.com", "agree": "1"})
+    assert resp.status_code == 302
+    assert "담긴 자료가 없습니다" in body(c.get("/cart")), "주문 뒤에도 장바구니가 남았습니다"
+
+    with store.app.app_context():
+        row = sc.get_db().execute(
+            "SELECT * FROM orders WHERE email = 'cart@example.com'").fetchone()
+    assert row["amount"] == 49280
+    assert row["product_slug"] == "neungyule-kim-analysis"
+    assert row["extra_slugs"] == "neungyule-kim-problem"
+
+    # 자료를 내보내면 두 건 모두 링크가 나가야 합니다
+    for slug in ("neungyule-kim-analysis", "neungyule-kim-problem"):
+        folder = sc.product_dir(slug)
+        folder.mkdir(parents=True, exist_ok=True)
+        (folder / "x.pdf").write_bytes(b"%PDF-1.4 x\n")
+    admin().post(f"/admin/orders/{row['id']}/deliver", follow_redirects=True)
+    done = body(client().get(f"/order/done/{row['view_key']}"))
+    assert done.count('href="/d/') == 2, "두 자료 모두 링크가 나오지 않았습니다"
+    print("PASS  장바구니 주문 → 한 번 입금 → 자료 전부 발송")
+
+
+def test_cart_shows_count_in_header():
+    c = client()
+    assert 'class="cart-count"' not in body(c.get("/"))
+    c.post("/cart/add", data={"slug": "neungyule-kim-analysis"})
+    assert '<span class="cart-count">1</span>' in body(c.get("/"))
+    print("PASS  머리말에 장바구니 개수")
+
+
+def test_cart_add_only_known_products():
+    """없는 주소를 넣어도 장바구니가 더러워지지 않아야 합니다."""
+    c = client()
+    c.post("/cart/add", data={"slug": "없는상품"})
+    c.post("/cart/add", data={"slug": "../../etc/passwd"})
+    assert "담긴 자료가 없습니다" in body(c.get("/cart"))
+    # 바깥 주소로 돌려보내지 않습니다
+    resp = c.post("/cart/add", data={"slug": "neungyule-kim-analysis",
+                                     "next": "https://example.com/"})
+    assert resp.headers["Location"].endswith("/cart")
+    print("PASS  장바구니에 아무거나 못 담음 · 바깥으로 안 보냄")
+
+
 def run_all():
     test_uses_temp_data_only()
     test_public_pages_open()
@@ -1467,7 +1596,13 @@ def run_all():
     test_request_requires_wanted()
     test_submission_to_coupon_to_discount()
     test_submission_requires_file_or_link()
+    test_cart_add_view_remove()
+    test_cart_bundle_discount_only_on_pairs()
+    test_cart_two_pairs_counted()
+    test_cart_shows_count_in_header()
+    test_cart_add_only_known_products()
     test_order_to_download_flow()
+    test_cart_order_end_to_end()
     test_order_page_shows_download_when_ready()
     test_deliver_by_external_link()
     test_download_revoke_and_limit()

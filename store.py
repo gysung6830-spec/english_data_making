@@ -22,7 +22,7 @@ import os
 import secrets
 from datetime import timedelta
 
-from flask import (Flask, abort, redirect, render_template, request,
+from flask import (Flask, abort, flash, redirect, render_template, request,
                    send_from_directory, session, url_for)
 from markupsafe import Markup, escape
 
@@ -84,6 +84,7 @@ def inject_globals():
         "passcfg": site.get("pass", {}),
         # 'discount' 도 예약어는 아니지만 같은 자리에 두어 화면에서 바로 씁니다.
         "discount": site.get("discount", {}),
+        "cart_count": len(cart_slugs()),
         "order_kinds": sc.ORDER_KIND_LABELS,
         "material_map": sc.material_map(),
         "package_map": sc.package_map(),
@@ -352,15 +353,108 @@ def coupon_check():
             "final": max(0, amount - discount)}
 
 
-def quote_for(product: dict, sibling: dict | None, take_both: bool,
-              email: str, coupon_code: str) -> dict:
+# ---------------------------------------------------------------------------
+# 장바구니 — 여러 회차를 한 번에 담아 한 번만 입금하시도록
+# ---------------------------------------------------------------------------
+CART_MAX = 20
+
+
+def cart_slugs() -> list[str]:
+    return [x for x in (session.get("cart") or []) if isinstance(x, str)][:CART_MAX]
+
+
+def save_cart(slugs: list[str]) -> None:
+    seen, out = set(), []
+    for slug in slugs:
+        if slug and slug not in seen:
+            seen.add(slug)
+            out.append(slug)
+    session["cart"] = out[:CART_MAX]
+
+
+def cart_items(catalog: dict | None = None) -> list[dict]:
+    """장바구니에 담긴 상품을 담은 순서대로. 없어진 상품은 조용히 빠집니다."""
+    catalog = catalog or sc.load_catalog()
+    known = {p["slug"]: p for p in catalog["products"]}
+    items = [known[slug] for slug in cart_slugs() if slug in known]
+    if len(items) != len(cart_slugs()):
+        save_cart([x["slug"] for x in items])
+    return items
+
+
+def sibling_of(product: dict, catalog: dict) -> dict | None:
+    """같은 교재의 반대쪽 패키지."""
+    return next((x for x in catalog["products"]
+                 if x.get("book") and x.get("book") == product.get("book")
+                 and x.get("package") and x.get("package") != product.get("package")), None)
+
+
+def back_to(default: str) -> str:
+    """돌아갈 곳. 우리 사이트 안으로만 보냅니다."""
+    target = sc.clean(request.form.get("next") or request.args.get("next"), 200)
+    if target.startswith("/") and not target.startswith("//"):
+        return target
+    return default
+
+
+@app.route("/cart")
+def cart():
+    catalog = sc.load_catalog()
+    items = cart_items(catalog)
+    site = sc.load_site()
+    rows, auto = sc.auto_discounts(site, items, 1)
+    subtotal = sum(int(x.get("price", 0)) for x in items)
+    # 짝이 안 맞는 상품에는 '반대쪽도 담으면 싸집니다' 를 권합니다
+    suggest = []
+    have = {x["slug"] for x in items}
+    for item in items:
+        mate = sibling_of(item, catalog)
+        if mate and mate["slug"] not in have and mate["slug"] not in {s["slug"] for s in suggest}:
+            suggest.append(mate)
+    return render_template("cart.html", items=items, rows=rows, auto=auto,
+                           subtotal=subtotal, final=subtotal - auto, suggest=suggest[:3])
+
+
+@app.route("/cart/add", methods=["POST"])
+def cart_add():
+    catalog = sc.load_catalog()
+    known = {p["slug"] for p in catalog["products"]}
+    slugs = cart_slugs()
+    added = 0
+    for slug in request.form.getlist("slug"):
+        slug = sc.clean(slug, 60)
+        if slug in known and slug not in slugs and len(slugs) < CART_MAX:
+            slugs.append(slug)
+            added += 1
+    save_cart(slugs)
+    if added == 1:
+        name = next((p["name"] for p in catalog["products"]
+                     if p["slug"] == slugs[-1]), "자료")
+        flash(f"'{name}' 을(를) 담았습니다.", "cart")
+    elif added > 1:
+        flash(f"자료 {added}개를 담았습니다.", "cart")
+    return redirect(back_to(url_for("cart")))
+
+
+@app.route("/cart/remove", methods=["POST"])
+def cart_remove():
+    slug = sc.clean(request.form.get("slug"), 60)
+    save_cart([x for x in cart_slugs() if x != slug])
+    return redirect(back_to(url_for("cart")))
+
+
+@app.route("/cart/clear", methods=["POST"])
+def cart_clear():
+    session.pop("cart", None)
+    return redirect(back_to(url_for("cart")))
+
+
+def quote_for(items: list[dict], email: str, coupon_code: str) -> dict:
     """주문 금액을 한 곳에서 계산합니다. 화면과 접수가 같은 값을 쓰게 하려고 나눠 두었습니다."""
     site = sc.load_site()
-    subtotal = int(product.get("price", 0)) + (int(sibling.get("price", 0))
-                                               if (take_both and sibling) else 0)
+    subtotal = sum(int(x.get("price", 0)) for x in items)
     repeat_no = sc.paid_order_count(email) + 1        # 이번이 몇 번째 구매인지
-    rows, auto = sc.auto_discounts(site, subtotal, repeat_no,
-                                   bool(take_both and sibling))
+    rows, auto = sc.auto_discounts(site, items, repeat_no)
     coupon, coupon_cut, coupon_note = sc.check_coupon(coupon_code, subtotal - auto)
     return {
         "subtotal": subtotal, "rows": rows, "auto": auto, "repeat_no": repeat_no,
@@ -370,18 +464,30 @@ def quote_for(product: dict, sibling: dict | None, take_both: bool,
     }
 
 
+def order_items(catalog: dict) -> tuple[list[dict], dict | None, dict | None, bool]:
+    """이번 주문에 담긴 상품들.
+
+    (담긴 상품, 낱개로 산 상품, 그 짝, 장바구니로 왔는지) 를 돌려줍니다.
+    """
+    if request.values.get("cart") == "1":
+        return cart_items(catalog), None, None, True
+    product = find_product(sc.clean(request.values.get("slug"), 60))
+    if not product:
+        return [], None, None, False
+    sibling = sibling_of(product, catalog)
+    take_both = bool(request.values.get("also")) and sibling is not None
+    return ([product] + ([sibling] if take_both else []),
+            product, sibling, False)
+
+
 @app.route("/order/quote")
 def order_quote():
     """수량·짝 패키지·쿠폰을 바꿀 때 화면에서 금액을 다시 물어봅니다."""
-    product = find_product(sc.clean(request.args.get("slug"), 60))
-    if not product:
-        abort(404)
     catalog = sc.load_catalog()
-    sibling = next((x for x in catalog["products"]
-                    if x.get("book") and x.get("book") == product.get("book")
-                    and x.get("package") and x.get("package") != product.get("package")), None)
-    q = quote_for(product, sibling,
-                  request.args.get("also") == "1",
+    items, _product, _sibling, _from_cart = order_items(catalog)
+    if not items:
+        abort(404)
+    q = quote_for(items,
                   sc.clean(request.args.get("email"), 120),
                   sc.clean(request.args.get("coupon"), 40).upper())
     return {
@@ -398,27 +504,27 @@ def order_quote():
 
 @app.route("/order", methods=["GET", "POST"])
 def order():
-    slug = request.values.get("slug", "")
-    product = find_product(slug)
-    if not product:
-        abort(404)
-
+    """주문서. 낱개 상품 하나로도, 장바구니 통째로도 옵니다."""
     catalog = sc.load_catalog()
-    # 같은 교재의 반대쪽 패키지 — 한 번에 같이 주문할 수 있게 합니다.
-    sibling = next((x for x in catalog["products"]
-                    if x.get("book") and x.get("book") == product.get("book")
-                    and x.get("package") and x.get("package") != product.get("package")), None)
+    items, product, sibling, from_cart = order_items(catalog)
+    if not items:
+        if from_cart:
+            return redirect(url_for("cart"))
+        abort(404)
+    books = {b["slug"]: b for b in catalog["books"]}
 
-    book = next((b for b in catalog["books"] if b["slug"] == product.get("book")), None)
+    def page(form, errors, status=200):
+        return render_template("order.html", items=items, p=product, sibling=sibling,
+                               books=books, from_cart=from_cart,
+                               form=form, errors=errors), status
 
     if request.method == "GET":
-        return render_template("order.html", p=product, sibling=sibling, book=book,
-                               form={}, errors=[])
+        body, _ = page({}, [])
+        return body
 
     if sc.too_many_submits(request, "order"):
-        errors = ["잠시 뒤에 다시 시도해 주세요. 짧은 시간에 너무 많이 보내셨습니다."]
-        return render_template("order.html", p=product, sibling=sibling, book=book,
-                               form=request.form, errors=errors), 429
+        return page(request.form,
+                    ["잠시 뒤에 다시 시도해 주세요. 짧은 시간에 너무 많이 보내셨습니다."], 429)
 
     data, errors = sc.validate_contact(request.form)
     depositor = sc.clean(request.form.get("depositor"), 50) or data["name"]
@@ -430,19 +536,18 @@ def order():
     if receipt_kind and not receipt_no:
         errors.append("증빙을 받으시려면 사업자등록번호나 휴대폰 번호를 적어 주세요.")
 
-    take_both = bool(request.form.get("also")) and sibling is not None
     coupon_code = sc.clean(request.form.get("coupon"), 40).upper()
-    quote = quote_for(product, sibling, take_both, data["email"], coupon_code)
-    quantity = 1                       # 디지털 자료라 부수 개념이 없습니다
+    quote = quote_for(items, data["email"], coupon_code)
     subtotal, discount = quote["subtotal"], quote["discount"]
     coupon = quote["coupon"]
     if coupon_code and coupon is None:
         errors.append(quote["coupon_note"])
 
     if errors:
-        return render_template("order.html", p=product, sibling=sibling, book=book,
-                               form=request.form, errors=errors), 400
+        return page(request.form, errors, 400)
 
+    names = " + ".join(x["name"] for x in items)
+    slugs = [x["slug"] for x in items]
     amount = quote["final"]
     ts = sc.stamp()
     view_key = sc.new_view_key()
@@ -451,25 +556,26 @@ def order():
                                quantity, amount, discount, coupon_code, name, phone, email,
                                affiliation, depositor, message, receipt_kind, receipt_no,
                                status, created_at, updated_at)
-           VALUES (?, ?, 'product', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?)""",
-        lambda no: (no, view_key, product["slug"], sibling["slug"] if take_both else None,
-                    product["name"] + (" + " + sibling["name"] if take_both else ""),
-                    quantity, amount, discount,
+           VALUES (?, ?, 'product', ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?)""",
+        lambda no: (no, view_key, slugs[0], ",".join(slugs[1:]) or None, names[:400],
+                    amount, discount,
                     coupon["code"] if coupon else None, data["name"], data["phone"],
                     data["email"], data["affiliation"], depositor, data["message"],
                     receipt_kind, receipt_no, ts, ts))
     if coupon:
         sc.redeem_coupon(coupon["code"], order_no)
+    if from_cart:
+        session.pop("cart", None)      # 주문이 들어갔으니 장바구니를 비웁니다
 
     parts = [f"{r['name']} {r['percent']}%" for r in quote["rows"]]
     if coupon:
         parts.append(f"쿠폰 {coupon['code']}")
     discount_note = " / ".join(parts) or "없음"
     sc.send_mail(
-        f"[Ortica영어] 새 주문 {order_no} · {product['name']}",
+        f"[Ortica영어] 새 주문 {order_no} · {items[0]['name']}"
+        + (f" 외 {len(items) - 1}건" if len(items) > 1 else ""),
         "\n".join([f"주문번호 : {order_no}",
-                   f"상품     : {product['name']}"
-                   + (f" + {sibling['name']}" if take_both else "") + f" x {quantity}",
+                   f"상품     : {names}",
                    f"주문금액 : {subtotal:,}원",
                    f"할인     : -{discount:,}원 ({discount_note})",
                    f"결제금액 : {amount:,}원",

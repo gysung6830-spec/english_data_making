@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}주문서 작성 · {{ p.name }}{% endblock %}
+{% block title %}주문서 작성 · {{ p.name if p else '장바구니' }}{% endblock %}
 
 {% block body %}
 <section class="section">
@@ -17,35 +17,45 @@
     {% endif %}
 
     <div class="form-card">
-      <div class="order-item">
-        {% set pkg = package_map.get(p.package) %}
-        <div class="oi-top">
-          {% if pkg %}<span class="pkg-tag pkg-{{ pkg.id }}">{{ pkg.name }}</span>{% endif %}
-          <b>{{ book.name if book else p.name }}</b>
-        </div>
-        <div class="chips">
-          {% if book and book.publisher %}<span class="chip">{{ book.publisher }}</span>{% endif %}
-          {% if p.grade %}<span class="chip">{{ p.grade }}</span>{% endif %}
-          {% if p.passages %}<span class="chip">지문 {{ p.passages }}개</span>{% endif %}
-          {% if p.materials %}<span class="chip">자료 {{ p.materials|length }}종</span>{% endif %}
-          <span class="chip">PDF</span>
-        </div>
-        {% if p.materials %}
-          <div class="mat-chips">
-            {% for mid in p.materials %}
-              {% set m = material_map.get(mid) %}
-              {% if m %}<span class="mat-chip {{ 'sig-chip' if m.signature }}">
-                <span class="n">{{ m.no }}</span>{{ m.name }}</span>{% endif %}
-            {% endfor %}
+      {% for it in items %}
+        {% set pkg = package_map.get(it.package) %}
+        {% set bk = books.get(it.book) %}
+        <div class="order-item">
+          <div class="oi-top">
+            {% if pkg %}<span class="pkg-tag pkg-{{ pkg.id }}">{{ pkg.name }}</span>{% endif %}
+            <b>{{ bk.name if bk else it.name }}</b>
           </div>
-        {% endif %}
-        <div class="oi-price">
-          <span>{{ p.price|won }}</span>
-          <a href="{{ url_for('product_detail', slug=p.slug) }}">자료 다시 보기 ›</a>
+          <div class="chips">
+            {% if bk and bk.publisher %}<span class="chip">{{ bk.publisher }}</span>{% endif %}
+            {% if it.grade %}<span class="chip">{{ it.grade }}</span>{% endif %}
+            {% if it.passages %}<span class="chip">지문 {{ it.passages }}개</span>{% endif %}
+            {% if it.materials %}<span class="chip">자료 {{ it.materials|length }}종</span>{% endif %}
+            <span class="chip">PDF</span>
+          </div>
+          {% if it.materials %}
+            <div class="mat-chips">
+              {% for mid in it.materials %}
+                {% set m = material_map.get(mid) %}
+                {% if m %}<span class="mat-chip {{ 'sig-chip' if m.signature }}">
+                  <span class="n">{{ m.no }}</span>{{ m.name }}</span>{% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+          <div class="oi-price">
+            <span>{{ it.price|won }}</span>
+            <a href="{{ url_for('product_detail', slug=it.slug) }}">자료 다시 보기 ›</a>
+          </div>
         </div>
-      </div>
+      {% endfor %}
 
-      {% if sibling %}
+      {% if from_cart %}
+        <p class="muted" style="margin:-8px 0 20px;font-size:14px;">
+          자료 {{ items|length }}개를 함께 주문합니다.
+          <a href="{{ url_for('cart') }}"><b>장바구니에서 고치기 ›</b></a>
+        </p>
+      {% endif %}
+
+      {% if sibling and not from_cart %}
         {% set spkg = package_map.get(sibling.package) %}
         <label class="also-box {{ 'on' if form.also }}">
           <input type="checkbox" name="also" value="1" id="also" {{ 'checked' if form.also }}>
@@ -59,7 +69,11 @@
       {% endif %}
 
       <form method="post" action="{{ url_for('order') }}">
-        <input type="hidden" name="slug" value="{{ p.slug }}">
+        {% if from_cart %}
+          <input type="hidden" name="cart" value="1">
+        {% else %}
+          <input type="hidden" name="slug" value="{{ p.slug }}">
+        {% endif %}
 
         <div class="field">
           <label for="name">성함<span class="req">*</span></label>
@@ -136,10 +150,11 @@
         <div id="loyalty-note" class="loyalty-note" hidden></div>
 
         <div class="sum-box">
-          <div class="sum-row"><span>자료 값</span><b id="sum-subtotal">{{ p.price|won }}</b></div>
+          {% set start_sum = items | sum(attribute='price') %}
+          <div class="sum-row"><span>자료 값</span><b id="sum-subtotal">{{ start_sum|won }}</b></div>
           <div id="sum-cuts"></div>
           <div class="sum-row sum-final">
-            <span>결제하실 금액</span><b id="total">{{ p.price|won }}</b>
+            <span>결제하실 금액</span><b id="total">{{ start_sum|won }}</b>
           </div>
         </div>
 
@@ -154,7 +169,8 @@
 
 <script>
 (function () {
-  var slug = {{ p.slug|tojson }};
+  var base = {{ ('/order/quote?cart=1' if from_cart
+                 else '/order/quote?slug=' ~ p.slug)|tojson }};
   var also   = document.getElementById('also');
   var email  = document.getElementById('email');
   var coupon = document.getElementById('coupon');
@@ -168,7 +184,7 @@
   function won(n) { return n.toLocaleString('ko-KR') + '원'; }
 
   function refresh() {
-    var url = '/order/quote?slug=' + encodeURIComponent(slug)
+    var url = base
             + '&also=' + (also && also.checked ? '1' : '0')
             + '&email=' + encodeURIComponent(email ? email.value.trim() : '')
             + '&coupon=' + encodeURIComponent(coupon.value.trim());

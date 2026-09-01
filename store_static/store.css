@@ -664,7 +664,10 @@ input[type=file]{
   transition:border-color .15s, background .15s;
 }
 .bg-pick:hover{border-color:var(--brand); background:#fff;}
-.bg-pick-name{font-size:14.5px; font-weight:800; letter-spacing:-.02em; color:var(--ink);}
+.bg-pick-name{
+  font-size:14.5px; font-weight:800; letter-spacing:-.02em; color:var(--ink);
+  line-height:1.4;
+}
 .bg-pick.pkg-analysis .bg-pick-name{color:#1e4bb8;}
 .bg-pick.pkg-problem .bg-pick-name{color:#a3450f;}
 .bg-pick-mats{display:flex; flex-wrap:wrap; gap:5px;}
@@ -674,7 +677,16 @@ input[type=file]{
   gap:7px; flex-wrap:wrap;
 }
 .bg-pick-foot .price{font-size:17px;}
-.bg-go{margin-left:auto; font-size:13px; font-weight:700; color:var(--brand);}
+.bg-pick-act{display:flex; align-items:center; gap:10px; padding-top:2px;}
+.bg-pick-act form{margin-left:auto;}
+.bg-go{font-size:13px; font-weight:700; color:var(--brand);}
+.bg-cart{
+  border:1px solid var(--line-strong); border-radius:999px; background:#fff;
+  padding:6px 14px; font-family:inherit; font-size:13px; font-weight:700;
+  color:var(--ink-2); cursor:pointer; white-space:nowrap;
+}
+.bg-cart:hover{border-color:var(--brand); color:var(--brand);}
+@media (max-width:640px){ .bg-cart{padding:9px 16px;} }
 
 @media (max-width:860px){
   .group-grid{grid-template-columns:1fr;}
@@ -997,6 +1009,7 @@ input[type=file]{
   .head-cta{margin-left:0; width:auto;}
   .head-cta .btn{flex:none; padding:9px 14px;}
   .head-cta .btn-ghost{display:none;}            /* 좁은 화면에선 버튼 하나만 */
+  .head-cta{gap:6px;}
   .logo{font-size:17px;}
 
   /* 화면 맨 아래 링크도 손가락으로 누를 만하게 */
@@ -1006,7 +1019,8 @@ input[type=file]{
 
 @media (max-width:520px){
   .site-head .wrap{gap:8px;}
-  .head-cta{display:none;}          /* 히어로에 같은 버튼이 바로 있으므로 */
+  .head-cta{margin-left:0;}
+  .head-cta .btn{display:none;}     /* 히어로에 같은 버튼이 바로 있으므로 */
   .nav-toggle{margin-left:auto;}
   .logo{font-size:16px;}
   .logo-mark{width:21px; height:21px; flex-basis:21px;}
@@ -1228,3 +1242,83 @@ input[type=file]{
   border-radius:50%; background:var(--brand);
 }
 .who-card .hero-actions{margin-top:auto; padding-top:6px;}
+
+/* 머리말의 장바구니 */
+.cart-link{
+  position:relative; display:inline-flex; align-items:center; justify-content:center;
+  width:40px; height:40px; border-radius:10px; color:var(--ink-2);
+  border:1px solid transparent;
+}
+.cart-link:hover{color:var(--brand); border-color:var(--line-strong);}
+.cart-link.has{color:var(--brand);}
+.cart-count{
+  position:absolute; top:2px; right:0; min-width:17px; height:17px; padding:0 4px;
+  border-radius:999px; background:var(--accent); color:#fff;
+  font-size:11px; font-weight:800; line-height:17px; text-align:center;
+}
+
+/* 장바구니 화면 */
+.cart-list{display:flex; flex-direction:column; gap:10px; margin-bottom:20px;}
+.cart-row{
+  display:flex; gap:14px; align-items:flex-start;
+  background:var(--card); border:1px solid var(--line); border-radius:12px;
+  padding:16px 18px;
+}
+.cr-main{flex:1; min-width:0; display:flex; flex-direction:column; gap:7px;}
+.cr-name{font-size:15.5px; font-weight:700; color:var(--ink); line-height:1.45;
+  word-break:keep-all;}
+.cr-name:hover{color:var(--brand);}
+.cr-side{display:flex; flex-direction:column; align-items:flex-end; gap:6px;}
+.cr-side b{font-size:16.5px; font-weight:800; white-space:nowrap;}
+.cr-del{
+  background:none; border:0; padding:6px 0; font-family:inherit; font-size:13px;
+  color:var(--muted); cursor:pointer; text-decoration:underline;
+}
+.cr-del:hover{color:var(--accent);}
+
+.also-suggest{margin-bottom:18px;}
+.also-suggest h3{font-size:17px; margin-bottom:6px;}
+.suggest-list{display:flex; flex-direction:column; gap:8px; margin:14px 0;}
+.suggest-row{
+  display:flex; align-items:center; gap:12px; cursor:pointer;
+  border:1px solid var(--line); border-radius:10px; padding:12px 14px; background:#fff;
+}
+.suggest-row input{width:18px; height:18px; accent-color:var(--brand); flex:0 0 auto;}
+.suggest-row > span{flex:1; min-width:0; display:flex; flex-direction:column; gap:2px;}
+.suggest-row b{font-size:14.5px; line-height:1.45; word-break:keep-all;}
+.suggest-row small{color:var(--ink-2); font-size:13px;}
+.suggest-row em{font-style:normal; font-weight:800; white-space:nowrap;}
+
+.cart-foot{
+  display:flex; align-items:center; gap:14px; margin-top:16px; flex-wrap:wrap;
+  font-size:14px;
+}
+.cart-foot > a{color:var(--brand); font-weight:700;}
+.cart-foot form{margin-left:auto;}
+
+@media (max-width:640px){
+  .cart-row{padding:14px 16px;}
+  /* 값이 옆에 붙어 있으면 글이 한 글자짜리 칸에 끼어 세로로 흐릅니다.
+     .also-box 와 같은 방식으로, 값을 아래로 내리고 글에 폭을 다 줍니다. */
+  .suggest-row{flex-wrap:wrap; align-items:flex-start; row-gap:8px;}
+  .suggest-row > span{flex:1 1 0; min-width:0;}
+  .suggest-row em{
+    flex:1 0 100%; text-align:right; padding-top:8px;
+    border-top:1px solid var(--line); color:var(--brand-dark);
+  }
+}
+
+/* 상품 카드 아래 두 버튼 */
+.pc-act{display:flex; gap:8px; margin-top:auto; padding-top:12px;}
+.pc-act > a{flex:1; text-align:center;}
+.pc-act form{flex:0 0 auto;}
+.pc-act .btn{padding:11px 16px; font-size:14.5px;}
+
+/* 장바구니에 담았을 때 잠깐 뜨는 알림 */
+.toast-wrap{background:var(--brand-soft); border-bottom:1px solid #cfe4d9;}
+.toast{
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  padding:12px 0; font-size:14.5px; color:var(--brand-dark); font-weight:600;
+}
+.toast a{margin-left:auto; font-weight:800; color:var(--brand); white-space:nowrap;
+  padding:6px 0;}

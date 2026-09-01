@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}장바구니 · {{ site.brand }}{% endblock %}
+{% block robots %}<meta name="robots" content="noindex">{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap narrow">
+    <div class="section-head">
+      <h2>장바구니</h2>
+      {% if items %}
+        <p>여러 회차를 함께 담으시면 <b>입금은 한 번</b>만 하시면 됩니다.</p>
+      {% else %}
+        <p>담긴 자료가 없습니다.</p>
+      {% endif %}
+    </div>
+
+    {% if items %}
+      <div class="cart-list">
+        {% for it in items %}
+          {% set pkg = package_map.get(it.package) %}
+          <div class="cart-row">
+            <div class="cr-main">
+              {% if pkg %}<span class="pkg-tag pkg-{{ pkg.id }}">{{ pkg.name }}</span>{% endif %}
+              <a class="cr-name" href="{{ url_for('product_detail', slug=it.slug) }}">{{ it.name }}</a>
+              <div class="chips">
+                {% if it.grade %}<span class="chip">{{ it.grade }}</span>{% endif %}
+                {% if it.passages %}<span class="chip">지문 {{ it.passages }}개</span>{% endif %}
+                {% if it.materials %}<span class="chip">자료 {{ it.materials|length }}종</span>{% endif %}
+              </div>
+            </div>
+            <div class="cr-side">
+              <b>{{ it.price|won }}</b>
+              <form method="post" action="{{ url_for('cart_remove') }}">
+                <input type="hidden" name="slug" value="{{ it.slug }}">
+                <button class="cr-del" type="submit">빼기</button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if suggest %}
+        <div class="card also-suggest">
+          <h3>반대쪽 패키지도 담으면 값이 내려갑니다</h3>
+          <p class="muted">같은 교재의 두 갈래를 함께 담으면
+            <b>{{ discount.bundle_percent|default(12) }}% 묶음 할인</b>이 자동으로 붙습니다.</p>
+          <form method="post" action="{{ url_for('cart_add') }}">
+            <input type="hidden" name="next" value="{{ url_for('cart') }}">
+            <div class="suggest-list">
+              {% for x in suggest %}
+                {% set spkg = package_map.get(x.package) %}
+                <label class="suggest-row">
+                  <input type="checkbox" name="slug" value="{{ x.slug }}" checked>
+                  <span>
+                    <b>{{ x.name }}</b>
+                    <small>{{ spkg.tagline if spkg else '' }}</small>
+                  </span>
+                  <em>+{{ x.price|won }}</em>
+                </label>
+              {% endfor %}
+            </div>
+            <button class="btn btn-ghost btn-block" type="submit">고른 자료 함께 담기</button>
+          </form>
+        </div>
+      {% endif %}
+
+      <div class="sum-box">
+        <div class="sum-row"><span>자료 {{ items|length }}개</span><b>{{ subtotal|won }}</b></div>
+        {% for r in rows %}
+          <div class="sum-row cut"><span>{{ r.name }} {{ r.percent }}%</span>
+            <b>-{{ r.amount|won }}</b></div>
+        {% endfor %}
+        <div class="sum-row sum-final"><span>예상 금액</span><b>{{ final|won }}</b></div>
+      </div>
+      <p class="muted" style="font-size:13.5px;margin:-6px 0 18px;">
+        단골 할인과 쿠폰은 주문서에서 이메일을 적으시면 더 붙습니다.
+      </p>
+
+      <a class="btn btn-primary btn-block" href="{{ url_for('order', cart=1) }}">주문서 작성하기</a>
+      <div class="cart-foot">
+        <a href="{{ url_for('products') }}">자료 더 담으러 가기</a>
+        <form method="post" action="{{ url_for('cart_clear') }}"
+              onsubmit="return confirm('장바구니를 비울까요?');">
+          <button class="cr-del" type="submit">전부 비우기</button>
+        </form>
+      </div>
+
+    {% else %}
+      <div class="card center">
+        <h3 class="mb-0">담긴 자료가 없습니다</h3>
+        <p class="muted">여러 회차를 함께 담으면 입금을 한 번만 하시면 되고,
+          같은 교재의 두 패키지를 함께 담으면 값도 내려갑니다.</p>
+        <div class="hero-actions" style="justify-content:center;margin-top:16px;">
+          <a class="btn btn-primary" href="{{ url_for('products') }}">자료 목록 보기</a>
+          <a class="btn btn-ghost" href="{{ url_for('free') }}">무료 자료 받기</a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
