@@ -20,6 +20,55 @@
 <form method="post">
 
 <div class="panel">
+  <h2>0단계 — 검색 결과에 뜰 제목 <span class="tag" style="background:#fef3c7;color:#92400e;">먼저 정하세요</span></h2>
+  <div class="hint">
+    네이버·구글에서 우리 사이트가 나올 때 <b>파란 글씨로 뜨는 한 줄</b>입니다.
+    아래에 적으면 그대로 뜹니다. (검색엔진이 더 어울린다고 판단하면 가끔 바꿔 보일 수도 있습니다)
+  </div>
+
+  <div class="serp">
+    <div class="serp-label">이렇게 뜹니다</div>
+    <div class="serp-card">
+      <div class="serp-url">{{ home_url }}</div>
+      <div class="serp-title" id="serp-title">{{ seo.title or '' }}</div>
+      <div class="serp-desc" id="serp-desc">{{ seo.description or '' }}</div>
+    </div>
+  </div>
+
+  <div class="adm-field">
+    <label for="seo_title">제목 <span class="hint" style="display:inline;">글자 수가
+      <b id="title-count">0</b>자 — 30자 안쪽이 잘리지 않습니다</span></label>
+    <input type="text" id="seo_title" name="seo_title" maxlength="70"
+           value="{{ seo.title or '' }}"
+           placeholder="시험에 적합한 고등영어자료 : 오르티카 영어">
+    <div class="pick" data-target="seo_title">
+      <span class="pick-label">골라 쓰기</span>
+      <button class="pick-btn" data-value="시험에 적합한 고등영어자료 : 오르티카 영어">
+        시험에 적합한 고등영어자료 : 오르티카 영어</button>
+      <button class="pick-btn" data-value="고등영어 지문분석지 · 변형문제 : 오르티카 영어">
+        고등영어 지문분석지 · 변형문제 : 오르티카 영어</button>
+      <button class="pick-btn" data-value="모의고사 · EBS 영어자료 : 오르티카 영어">
+        모의고사 · EBS 영어자료 : 오르티카 영어</button>
+    </div>
+    <div class="tip">
+      👉 <b>사람들이 검색창에 치는 말</b>을 앞에 두고, <b>브랜드 이름을 뒤에</b> 두세요.
+      '고등영어자료'처럼 실제로 치는 말이 들어가야 검색에 걸립니다.
+    </div>
+  </div>
+
+  <div class="adm-field">
+    <label for="seo_description">설명 <span class="hint" style="display:inline;">
+      <b id="desc-count">0</b>자 — 80자 안쪽이 잘리지 않습니다</span></label>
+    <textarea id="seo_description" name="seo_description" rows="3" maxlength="200"
+              placeholder="어떤 자료를 파는지 한두 문장으로">{{ seo.description or '' }}</textarea>
+    <div class="tip">
+      제목 아래 회색 글씨입니다. <b>여기에 자료 이름을 다 넣으세요.</b>
+      지문분석지 · 변형문제 · 동형모의고사 · 한줄해석처럼요.
+    </div>
+  </div>
+</div>
+
+<div class="panel">
   <h2>1단계 — 네이버 <span class="tag" style="background:#e6f6ec;color:#0a6b30;">가장 중요</span></h2>
   <div class="hint">한국 선생님들은 대부분 네이버로 찾습니다. 여기부터 하세요.</div>
   <ol class="seo-steps">
@@ -117,4 +166,27 @@
     지금 {{ free_count }}건 올려 두셨습니다.
   </div>
 </div>
+<script>
+(function () {
+  function bind(inputId, viewId, countId, limit, empty) {
+    var input = document.getElementById(inputId);
+    var view  = document.getElementById(viewId);
+    var count = document.getElementById(countId);
+    if (!input || !view) return;
+    function paint() {
+      var v = input.value.trim();
+      view.textContent = v || empty;
+      view.classList.toggle('faint', !v);
+      if (count) {
+        count.textContent = v.length;
+        count.style.color = v.length > limit ? '#b91c1c' : '';
+      }
+    }
+    input.addEventListener('input', paint);
+    paint();
+  }
+  bind('seo_title', 'serp-title', 'title-count', 30, '(제목을 적어 주세요)');
+  bind('seo_description', 'serp-desc', 'desc-count', 80, '(설명을 적어 주세요)');
+})();
+</script>
 {% endblock %}

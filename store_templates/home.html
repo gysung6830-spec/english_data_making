@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% from "_macros.html" import product_card, book_card with context %}
-{% block title %}{{ site.brand }} — 지문분석지 · 17종 변형문제 · 동형모의고사 PDF{% endblock %}
-{% block desc %}모의고사·EBS 수능특강·교과서 지문의 지문분석지, 통합 워크북, 서술형 대비, 17종 변형문제, 동형모의고사를 교재·회차 단위로 만들어 드립니다. 한줄해석·좌지문우해석은 무료로 공개합니다.{% endblock %}
+{# 검색 결과에 뜨는 제목·설명입니다. 관리자 > 검색 등록 에서 고칩니다. #}
+{% block title %}{{ (site.seo.title if site.seo and site.seo.title
+   else '시험에 적합한 고등영어자료 : ' ~ site.brand) }}{% endblock %}
+{% block desc %}{{ (site.seo.description if site.seo and site.seo.description
+   else site.description) }}{% endblock %}
 
 {% block jsonld %}
 <script type="application/ld+json">

@@ -1139,6 +1139,29 @@ def test_request_menu_renamed_to_jaryo():
     print("PASS  '교재 요청' → '자료 요청'")
 
 
+def test_search_result_title_is_editable():
+    """검색 결과에 뜰 제목·설명을 관리자 화면에서 정할 수 있어야 합니다."""
+    import re
+    home = body(client().get("/"))
+    title = re.search(r"<title>(.*?)</title>", home, re.S).group(1).strip()
+    assert title == "시험에 적합한 고등영어자료 : 오르티카 영어", title
+    assert 'property="og:title" content="시험에 적합한' in home   # 카톡 공유도 같은 제목
+    import re as _re
+    desc = _re.search(r'name="description" content="(.*?)"', home).group(1)
+    assert len(desc) <= 90, f"설명이 {len(desc)}자입니다. 검색 결과에서 잘립니다"
+
+    a = admin()
+    a.post("/admin/seo", data={"seo_title": "바꾼 제목 : 오르티카 영어",
+                               "seo_description": "바꾼 설명입니다.",
+                               "naver": "", "google": ""}, follow_redirects=True)
+    home = body(client().get("/"))
+    assert "<title>바꾼 제목 : 오르티카 영어</title>" in home
+    assert 'name="description" content="바꾼 설명입니다."' in home
+    # 관리자 화면에 미리보기가 있어야 합니다
+    assert "이렇게 뜹니다" in body(a.get("/admin/seo"))
+    print("PASS  검색 결과 제목·설명을 화면에서 정하기")
+
+
 def run_all():
     test_uses_temp_data_only()
     test_public_pages_open()
@@ -1195,6 +1218,7 @@ def run_all():
     test_free_kind_suggests_email_gate()
     test_seo_tags_on_public_pages()
     test_seo_verification_code_paste()
+    test_search_result_title_is_editable()
     test_sitemap_lists_free_items()
     test_lineup_offers_sample_pdf()
     test_free_search_and_filters()

@@ -1329,6 +1329,12 @@ def seo():
     site = sc.load_site()
     if request.method == "POST":
         seo_cfg = dict(site.get("seo") or {})
+        # 검색 결과에 뜨는 제목·설명.
+        # 폼에 그 칸이 없을 때(다른 화면에서 저장할 때)는 지우지 않고 그대로 둡니다.
+        if "seo_title" in request.form:
+            seo_cfg["title"] = sc.clean(request.form.get("seo_title"), 70)
+        if "seo_description" in request.form:
+            seo_cfg["description"] = sc.clean(request.form.get("seo_description"), 200)
         seo_cfg["naver"] = verify_code(request.form.get("naver"))
         seo_cfg["google"] = verify_code(request.form.get("google"))
         seo_cfg["done_naver"] = bool(request.form.get("done_naver"))
