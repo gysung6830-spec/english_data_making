@@ -87,5 +87,26 @@
     "done_daum": false,
     "title": "시험에 적합한 고등영어자료 : 오르티카 영어",
     "description": "고등영어 지문분석지, 17종 변형문제, 동형모의고사를 교재·회차 단위로 만듭니다. 한줄해석·좌지문우해석은 무료."
+  },
+  "discount": {
+    "_안내": "자동으로 붙는 할인입니다. 관리자 화면 > 가게 정보 에서 고칩니다.",
+    "bundle_enabled": true,
+    "bundle_percent": 12,
+    "quantity_enabled": true,
+    "quantity": [
+      {
+        "min": 2,
+        "percent": 5
+      },
+      {
+        "min": 3,
+        "percent": 10
+      },
+      {
+        "min": 5,
+        "percent": 15
+      }
+    ],
+    "max_percent": 25
   }
 }

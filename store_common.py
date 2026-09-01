@@ -510,6 +510,42 @@ def issue_coupon(kind: str, value: int, *, min_amount: int = 0, note: str = "",
     raise RuntimeError("쿠폰 코드를 만들지 못했습니다")
 
 
+def auto_discounts(site: dict, subtotal: int, quantity: int, take_both: bool
+                   ) -> tuple[list[dict], int]:
+    """쿠폰 없이 자동으로 붙는 할인 — 묶음 할인과 수량 할인.
+
+    (할인 목록, 총 할인액) 을 돌려줍니다.
+    너무 깊게 깎이지 않도록 합계에 상한(기본 25%)을 둡니다.
+    """
+    cfg = site.get("discount") or {}
+    rows: list[dict] = []
+
+    percent = to_int(cfg.get("bundle_percent"), 0)
+    if take_both and cfg.get("bundle_enabled", True) and percent > 0:
+        rows.append({"name": "두 패키지 함께", "percent": percent,
+                     "amount": subtotal * percent // 100})
+
+    if cfg.get("quantity_enabled", True):
+        tiers = sorted((cfg.get("quantity") or []),
+                       key=lambda t: to_int(t.get("min"), 0), reverse=True)
+        for tier in tiers:
+            need = to_int(tier.get("min"), 0)
+            pct = to_int(tier.get("percent"), 0)
+            if need >= 2 and pct > 0 and quantity >= need:
+                rows.append({"name": f"{need}부 이상", "percent": pct,
+                             "amount": subtotal * pct // 100})
+                break
+
+    total = sum(r["amount"] for r in rows)
+    cap = subtotal * to_int(cfg.get("max_percent"), 25) // 100
+    if total > cap:                      # 상한을 넘으면 마지막 줄에서 깎습니다
+        over = total - cap
+        rows[-1]["amount"] -= over
+        rows[-1]["capped"] = True
+        total = cap
+    return [r for r in rows if r["amount"] > 0], total
+
+
 def check_coupon(code: str, amount: int) -> tuple[sqlite3.Row | None, int, str]:
     """(쿠폰, 할인금액, 안내문) 을 돌려줍니다. 쓸 수 없으면 쿠폰이 None 입니다."""
     code = (code or "").strip().upper()

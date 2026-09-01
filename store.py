@@ -82,6 +82,8 @@ def inject_globals():
         "nav_categories": sc.load_catalog().get("categories", []),
         # 'pass' 는 파이썬 예약어라 템플릿에서 site.pass 로 못 씁니다. 따로 넘깁니다.
         "passcfg": site.get("pass", {}),
+        # 'discount' 도 예약어는 아니지만 같은 자리에 두어 화면에서 바로 씁니다.
+        "discount": site.get("discount", {}),
         "order_kinds": sc.ORDER_KIND_LABELS,
         "material_map": sc.material_map(),
         "package_map": sc.package_map(),
@@ -350,6 +352,48 @@ def coupon_check():
             "final": max(0, amount - discount)}
 
 
+def quote_for(product: dict, sibling: dict | None, take_both: bool,
+              quantity: int, coupon_code: str) -> dict:
+    """주문 금액을 한 곳에서 계산합니다. 화면과 접수가 같은 값을 쓰게 하려고 나눠 두었습니다."""
+    site = sc.load_site()
+    unit = int(product.get("price", 0)) + (int(sibling.get("price", 0))
+                                           if (take_both and sibling) else 0)
+    subtotal = unit * quantity
+    rows, auto = sc.auto_discounts(site, subtotal, quantity, bool(take_both and sibling))
+    coupon, coupon_cut, coupon_note = sc.check_coupon(coupon_code, subtotal - auto)
+    return {
+        "subtotal": subtotal, "rows": rows, "auto": auto,
+        "coupon": coupon, "coupon_cut": coupon_cut, "coupon_note": coupon_note,
+        "discount": auto + coupon_cut,
+        "final": subtotal - auto - coupon_cut,
+    }
+
+
+@app.route("/order/quote")
+def order_quote():
+    """수량·짝 패키지·쿠폰을 바꿀 때 화면에서 금액을 다시 물어봅니다."""
+    product = find_product(sc.clean(request.args.get("slug"), 60))
+    if not product:
+        abort(404)
+    catalog = sc.load_catalog()
+    sibling = next((x for x in catalog["products"]
+                    if x.get("book") and x.get("book") == product.get("book")
+                    and x.get("package") and x.get("package") != product.get("package")), None)
+    q = quote_for(product, sibling,
+                  request.args.get("also") == "1",
+                  max(1, min(99, sc.to_int(request.args.get("qty"), 1))),
+                  sc.clean(request.args.get("coupon"), 40).upper())
+    return {
+        "subtotal": q["subtotal"],
+        "rows": [{"name": r["name"], "amount": r["amount"], "percent": r["percent"]}
+                 for r in q["rows"]],
+        "coupon_ok": bool(q["coupon"]),
+        "coupon_cut": q["coupon_cut"],
+        "coupon_note": q["coupon_note"],
+        "final": q["final"],
+    }
+
+
 @app.route("/order", methods=["GET", "POST"])
 def order():
     slug = request.values.get("slug", "")
@@ -386,18 +430,18 @@ def order():
         errors.append("증빙을 받으시려면 사업자등록번호나 휴대폰 번호를 적어 주세요.")
 
     take_both = bool(request.form.get("also")) and sibling is not None
-    unit = int(product.get("price", 0)) + (int(sibling.get("price", 0)) if take_both else 0)
-    subtotal = unit * quantity
     coupon_code = sc.clean(request.form.get("coupon"), 40).upper()
-    coupon, discount, coupon_note = sc.check_coupon(coupon_code, subtotal)
+    quote = quote_for(product, sibling, take_both, quantity, coupon_code)
+    subtotal, discount = quote["subtotal"], quote["discount"]
+    coupon = quote["coupon"]
     if coupon_code and coupon is None:
-        errors.append(coupon_note)
+        errors.append(quote["coupon_note"])
 
     if errors:
         return render_template("order.html", p=product, sibling=sibling, book=book,
                                form=request.form, errors=errors), 400
 
-    amount = subtotal - discount
+    amount = quote["final"]
     ts = sc.stamp()
     view_key = sc.new_view_key()
     order_no = sc.insert_numbered(
@@ -415,13 +459,17 @@ def order():
     if coupon:
         sc.redeem_coupon(coupon["code"], order_no)
 
+    parts = [f"{r['name']} {r['percent']}%" for r in quote["rows"]]
+    if coupon:
+        parts.append(f"쿠폰 {coupon['code']}")
+    discount_note = " / ".join(parts) or "없음"
     sc.send_mail(
         f"[Ortica영어] 새 주문 {order_no} · {product['name']}",
         "\n".join([f"주문번호 : {order_no}",
                    f"상품     : {product['name']}"
                    + (f" + {sibling['name']}" if take_both else "") + f" x {quantity}",
                    f"주문금액 : {subtotal:,}원",
-                   f"할인     : -{discount:,}원 ({coupon['code'] if coupon else '없음'})",
+                   f"할인     : -{discount:,}원 ({discount_note})",
                    f"결제금액 : {amount:,}원",
                    f"성함     : {data['name']}",
                    f"입금자명 : {depositor}",
@@ -441,10 +489,17 @@ def order_done(key):
     주소에 주문번호가 아니라 긴 열쇠를 씁니다. 주문번호(OR-260901-12345)로 열게 두면
     번호를 하나씩 바꿔 가며 남의 이름·연락처를 훔쳐볼 수 있기 때문입니다.
     """
-    row = sc.get_db().execute("SELECT * FROM orders WHERE view_key = ?", (key,)).fetchone()
+    db = sc.get_db()
+    row = db.execute("SELECT * FROM orders WHERE view_key = ?", (key,)).fetchone()
     if not row:
         abort(404)
-    return render_template("order_done.html", o=row)
+    # 자료가 나가면 이 화면에서 바로 받으실 수 있게 링크를 보여 줍니다.
+    # (메일을 기다리지 않고 이 주소만 다시 열면 됩니다)
+    links = db.execute(
+        """SELECT token, product_name FROM downloads
+           WHERE order_no = ? AND revoked_at IS NULL ORDER BY id""",
+        (row["order_no"],)).fetchall()
+    return render_template("order_done.html", o=row, links=links)
 
 
 # ---------------------------------------------------------------------------

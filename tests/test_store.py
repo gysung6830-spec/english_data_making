@@ -279,11 +279,11 @@ def test_order_saves_and_multiplies_amount():
     assert resp.status_code == 302
     done = body(c.get(resp.headers["Location"]))
     assert "22,000원" in done
-    # 디지털 자료라 수량 칸은 없어야 합니다. (하나 사면 반 전체가 씁니다)
+    # 여러 선생님이 나눠 쓰실 때를 위해 부수를 고를 수 있습니다.
     form = body(client().get("/order?slug=mock-2026-06-g3-analysis"))
-    assert 'name="quantity"' not in form
+    assert 'name="quantity"' in form and "몇 부 받으실까요" in form
     assert "결제하실 금액" in form
-    print("PASS  주문 저장 · 금액 표시 · 수량 칸 없음")
+    print("PASS  주문 저장 · 금액 표시 · 부수 고르기")
 
 
 def test_order_both_packages_at_once():
@@ -297,7 +297,8 @@ def test_order_both_packages_at_once():
         "phone": "010-1212-3434", "email": "both@example.com", "agree": "1"})
     assert resp.status_code == 302
     done = body(c.get(resp.headers["Location"]))
-    assert "49,000원" in done          # 22,000 + 27,000
+    # 22,000 + 27,000 = 49,000 에서 묶음 할인 12% (5,880원) 가 자동으로 빠집니다
+    assert "43,120원" in done
     assert "지문 분석 패키지" in done and "문제 패키지" in done
 
     key = resp.headers["Location"].rsplit("/", 1)[-1]
@@ -1300,6 +1301,74 @@ def test_no_emoji_on_customer_pages():
     print("PASS  고객 화면에 이모지 없음")
 
 
+# ---- 자동 할인 (묶음 · 수량) ----------------------------------------------
+def test_bundle_and_quantity_discounts():
+    """쿠폰 없이도 함께 담거나 여러 부를 받으면 값이 내려가야 합니다."""
+    site = sc.load_site()
+    site["discount"] = {"bundle_enabled": True, "bundle_percent": 12,
+                        "quantity_enabled": True,
+                        "quantity": [{"min": 3, "percent": 10}],
+                        "max_percent": 25}
+    sc.save_site(site)
+
+    q = client().get("/order/quote?slug=mock-2026-06-g3-analysis&also=1&qty=1").get_json()
+    assert q["subtotal"] == 49000
+    assert q["rows"][0]["name"] == "두 패키지 함께" and q["rows"][0]["amount"] == 5880
+    assert q["final"] == 43120
+
+    q3 = client().get("/order/quote?slug=mock-2026-06-g3-analysis&also=0&qty=3").get_json()
+    assert q3["subtotal"] == 66000 and q3["final"] == 66000 - 6600
+
+    # 접수된 금액도 같아야 합니다
+    c = client()
+    resp = c.post("/order", data={
+        "slug": "mock-2026-06-g3-analysis", "also": "1", "quantity": "3",
+        "name": "할인", "phone": "010-9999-0000", "email": "sale@example.com",
+        "agree": "1"})
+    assert resp.status_code == 302
+    with store.app.app_context():
+        row = sc.get_db().execute(
+            "SELECT * FROM orders WHERE email = 'sale@example.com'").fetchone()
+    assert row["amount"] == 147000 - 17640 - 14700
+    print("PASS  묶음 할인 · 수량 할인")
+
+
+def test_discount_has_a_ceiling():
+    """실수로 너무 깎이지 않게 상한이 있어야 합니다."""
+    site = sc.load_site()
+    site["discount"] = {"bundle_enabled": True, "bundle_percent": 30,
+                        "quantity_enabled": True,
+                        "quantity": [{"min": 2, "percent": 30}],
+                        "max_percent": 25}
+    sc.save_site(site)
+    q = client().get("/order/quote?slug=mock-2026-06-g3-analysis&also=1&qty=2").get_json()
+    assert q["final"] == q["subtotal"] - q["subtotal"] * 25 // 100
+    print("PASS  할인 상한 (겹쳐도 25%까지)")
+
+
+def test_order_page_shows_download_when_ready():
+    """계좌이체라도, 자료가 나가면 주문 확인 화면에서 바로 받을 수 있어야 합니다."""
+    c = client()
+    resp = c.post("/order", data={
+        "slug": "mock-2026-06-g3-analysis", "name": "기다림",
+        "phone": "010-7777-0000", "email": "wait@example.com", "agree": "1"})
+    where = resp.headers["Location"]
+    before = body(client().get(where))
+    assert "입금 확인" in before and "받으실 자료" not in before
+
+    with store.app.app_context():
+        row = sc.get_db().execute(
+            "SELECT * FROM orders WHERE email = 'wait@example.com'").fetchone()
+    folder = sc.product_dir("mock-2026-06-g3-analysis")
+    folder.mkdir(parents=True, exist_ok=True)
+    (folder / "ready.pdf").write_bytes(b"%PDF-1.4 ready\n")
+    admin().post(f"/admin/orders/{row['id']}/deliver", follow_redirects=True)
+
+    after = body(client().get(where))
+    assert "받으실 자료" in after and "/d/" in after
+    print("PASS  주문 확인 화면에서 바로 받기")
+
+
 def run_all():
     test_uses_temp_data_only()
     test_public_pages_open()
@@ -1332,12 +1401,15 @@ def run_all():
     test_order_saves_and_multiplies_amount()
     test_order_both_packages_at_once()
     test_order_rejects_unknown_coupon()
+    test_bundle_and_quantity_discounts()
+    test_discount_has_a_ceiling()
     test_request_needs_no_passage()
     test_custom_request_accepted()
     test_request_requires_wanted()
     test_submission_to_coupon_to_discount()
     test_submission_requires_file_or_link()
     test_order_to_download_flow()
+    test_order_page_shows_download_when_ready()
     test_deliver_by_external_link()
     test_download_revoke_and_limit()
     test_receipt_request_and_sales()

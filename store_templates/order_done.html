@@ -5,9 +5,40 @@
 <section class="section">
   <div class="wrap narrow">
     <div class="section-head center">
-      <h2>주문이 접수되었습니다</h2>
-      <p>아직 결제 전입니다. 아래 계좌로 입금해 주시면 처리해 드립니다.</p>
+      {% if links %}
+        <h2>자료가 준비되었습니다</h2>
+        <p>아래에서 바로 받으실 수 있습니다.</p>
+      {% else %}
+        <h2>주문이 접수되었습니다</h2>
+        <p>아직 결제 전입니다. 아래 계좌로 입금해 주시면 처리해 드립니다.</p>
+      {% endif %}
     </div>
+
+    {% if links %}
+      <div class="card get-box" style="margin-bottom:20px;">
+        <h2>받으실 자료</h2>
+        <div class="dl-list">
+          {% for l in links %}
+            <a class="dl-item" href="{{ url_for('download_page', token=l['token']) }}">
+              <span class="dl-name">{{ l['product_name'] }}</span>
+              <span class="dl-go">받으러 가기 →</span>
+            </a>
+          {% endfor %}
+        </div>
+        <p class="hero-note mb-0">같은 링크를 이메일로도 보내 드렸습니다.
+          받는 기한은 30일입니다.</p>
+      </div>
+    {% else %}
+      <div class="wait-box">
+        <div class="wait-steps">
+          <span class="on">주문 접수</span>
+          <span class="{{ 'on' if o['status'] != '입금대기' }}">입금 확인</span>
+          <span class="{{ 'on' if o['status'] == '발송완료' }}">자료 발송</span>
+        </div>
+        <p class="mb-0">입금이 확인되면 <b>이 화면에서 바로 받으실 수 있습니다.</b>
+          이 주소를 즐겨찾기 해 두시면 메일을 기다리지 않으셔도 됩니다.</p>
+      </div>
+    {% endif %}
 
     <div class="card" style="margin-bottom:20px;">
       <table class="spec" style="margin:0;">

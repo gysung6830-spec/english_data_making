@@ -1319,6 +1319,19 @@ def settings():
     if plans:
         pass_cfg["plans"] = plans
 
+    # 자동 할인 (묶음 · 수량)
+    disc = site.setdefault("discount", {})
+    disc["bundle_enabled"] = bool(f.get("discount_bundle_enabled"))
+    disc["bundle_percent"] = max(0, min(50, sc.to_int(f.get("discount_bundle_percent"), 0)))
+    disc["quantity_enabled"] = bool(f.get("discount_quantity_enabled"))
+    tiers = []
+    for need, pct in zip(f.getlist("qty_min"), f.getlist("qty_percent")):
+        need, pct = sc.to_int(need, 0), sc.to_int(pct, 0)
+        if need >= 2 and 0 < pct <= 50:
+            tiers.append({"min": need, "percent": pct})
+    disc["quantity"] = sorted(tiers, key=lambda t: t["min"])
+    disc["max_percent"] = max(0, min(70, sc.to_int(f.get("discount_max_percent"), 25)))
+
     # 시험지 제출 보상
     reward = site.setdefault("submit_reward", {})
     reward["enabled"] = bool(f.get("reward_enabled"))
