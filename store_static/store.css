@@ -2,7 +2,19 @@
    Ortica영어 판매 사이트 스타일
    색·글꼴을 바꾸고 싶으면 맨 위 :root 의 값만 고치면 됩니다.
    ========================================================================== */
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+/* 나눔스퀘어라운드 — 저장소에 들어 있는 파일을 그대로 씁니다.
+   외부 CDN에 기대지 않으므로 인터넷 사정과 상관없이 항상 같은 글꼴로 보입니다.
+   굵기가 R(보통)·B(굵게) 두 가지뿐이라, 400~600은 R 로 700~900은 B 로 묶어 둡니다. */
+@font-face{
+  font-family:"NanumSquareRound";
+  src:url("fonts/NanumSquareRoundR.woff") format("woff");
+  font-weight:300 600; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"NanumSquareRound";
+  src:url("fonts/NanumSquareRoundB.woff") format("woff");
+  font-weight:700 900; font-style:normal; font-display:swap;
+}
 
 :root{
   --brand:#146b4a;          /* 기본 브랜드 색 (쐐기풀 그린) */
@@ -18,8 +30,8 @@
   --line-strong:#d6d2c8;
   --radius:14px;
   --shadow:0 1px 2px rgba(20,25,20,.05), 0 8px 24px -16px rgba(20,25,20,.28);
-  --font:"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
-         "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font:"NanumSquareRound", "NanumSquareRoundR", "Nanum Gothic", -apple-system,
+         BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
 }
 
 *{box-sizing:border-box;}

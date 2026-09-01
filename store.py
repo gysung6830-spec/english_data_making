@@ -37,9 +37,13 @@ DB_PATH = Path(os.environ.get("STORE_DB") or (DATA_DIR / "store.db"))
 
 KST = timezone(timedelta(hours=9))
 
-app = Flask(__name__, template_folder="store_templates", static_folder="store_static")
+# static_url_path 를 적어 주지 않으면 폴더 이름을 따라 /store_static 이 됩니다.
+app = Flask(__name__, template_folder="store_templates",
+            static_folder="store_static", static_url_path="/static")
 app.secret_key = os.environ.get("STORE_SECRET") or secrets.token_hex(16)
 app.config["JSON_AS_ASCII"] = False
+# 글꼴 파일이 800KB 가까이 되므로 브라우저가 오래 캐시하도록 합니다(30일).
+app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 60 * 60 * 24 * 30
 
 # 관리자 페이지 비밀번호 (환경변수로 지정). 없으면 관리자 페이지가 잠깁니다.
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
@@ -269,8 +273,16 @@ def home():
     products = catalog["products"]
     featured = [p for p in products if p.get("badge")][:3] or products[:3]
     notices = load_notices()["notices"]
+    # 홈에는 분류마다 최대 2권씩 뽑아 어느 분류도 가려지지 않게 합니다.
+    picked, per_category = [], {}
+    for book in books_with_counts(catalog):
+        key = book.get("category", "")
+        if per_category.get(key, 0) >= 2:
+            continue
+        per_category[key] = per_category.get(key, 0) + 1
+        picked.append(book)
     return render_template("home.html", featured=featured, product_count=len(products),
-                           books=books_with_counts(catalog)[:4],
+                           books=picked[:8],
                            latest_notice=notices[0] if notices else None)
 
 

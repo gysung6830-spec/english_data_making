@@ -41,13 +41,13 @@
         <div class="field">
           <label for="course">교재 · 과정 <span class="hint">선택</span></label>
           <input type="text" id="course" name="course" value="{{ form.course or '' }}"
-                 placeholder="예: 학원 자체 독해 교재 / 2026 7월 학평 고2">
+                 placeholder="예: 2026 7월 학평 고2 / 학원 자체 독해 교재">
         </div>
 
         <div class="field">
           <label for="passage_count">지문 수<span class="req">*</span></label>
           <input type="text" id="passage_count" name="passage_count"
-                 value="{{ form.passage_count or '' }}" placeholder="예: 20개 정도 / 한 단원 전체" required>
+                 value="{{ form.passage_count or '' }}" placeholder="예: 20개 정도 / 한 회차 전체" required>
         </div>
 
         <div class="field">
