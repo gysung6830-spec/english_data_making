@@ -32,6 +32,8 @@
   <a class="todo {{ 'hot' if todo.시험지검토 else 'zero' }}"
      href="{{ url_for('admin.submissions', status='검토대기') }}">
     <b>{{ todo.시험지검토 }}</b><small>검토할 시험지</small></a>
+  <a class="todo {{ 'hot' if todo.증빙발행 else 'zero' }}" href="{{ url_for('admin.sales') }}">
+    <b>{{ todo.증빙발행 }}</b><small>발행할 세금계산서 · 현금영수증</small></a>
 </div>
 
 <div class="panel">

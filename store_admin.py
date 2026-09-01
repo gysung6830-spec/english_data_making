@@ -90,6 +90,9 @@ def dashboard():
         "문의답변": one("SELECT COUNT(*) FROM orders WHERE kind IN ('request','custom','pass')"
                     " AND status='입금대기'"),
         "시험지검토": one("SELECT COUNT(*) FROM submissions WHERE status='검토대기'"),
+        "증빙발행": one("SELECT COUNT(*) FROM orders WHERE receipt_kind IS NOT NULL"
+                     " AND receipt_kind != '' AND receipt_done = 0"
+                     " AND status IN ('입금확인','발송완료')"),
     }
     money = {
         "대기": one("SELECT COALESCE(SUM(amount),0) FROM orders WHERE status='입금대기'"),
@@ -186,19 +189,148 @@ def orders_csv():
     rows = sc.get_db().execute("SELECT * FROM orders ORDER BY id DESC").fetchall()
     buf = io.StringIO()
     writer = csv.writer(buf)
-    writer.writerow(["주문번호", "종류", "상품", "수량", "결제금액", "할인", "쿠폰", "성함",
+    writer.writerow(["주문번호", "종류", "상품", "수량", "결제금액", "공급가액", "부가세",
+                     "할인", "쿠폰", "증빙종류", "증빙번호", "증빙발행", "성함",
                      "연락처", "이메일", "소속", "입금자명", "요청사항", "상세", "상태",
                      "메모", "접수시각"])
     for r in rows:
+        supply, vat = sc.split_vat(r["amount"])
         writer.writerow([r["order_no"], sc.ORDER_KIND_LABELS.get(r["kind"], r["kind"]),
-                         r["product_name"], r["quantity"], r["amount"], r["discount"],
-                         r["coupon_code"], r["name"], r["phone"], r["email"],
-                         r["affiliation"], r["depositor"], r["message"], r["detail_json"],
-                         r["status"], r["admin_memo"], r["created_at"]])
+                         r["product_name"], r["quantity"], r["amount"], supply, vat,
+                         r["discount"], r["coupon_code"],
+                         sc.RECEIPT_KINDS.get(r["receipt_kind"] or "", ""), r["receipt_no"],
+                         "완료" if r["receipt_done"] else "", r["name"], r["phone"],
+                         r["email"], r["affiliation"], r["depositor"], r["message"],
+                         r["detail_json"], r["status"], r["admin_memo"], r["created_at"]])
     body = ("﻿" + buf.getvalue()).encode("utf-8")  # 엑셀 한글 깨짐 방지
     return body, 200, {"Content-Type": "text/csv; charset=utf-8",
                        "Content-Disposition":
                        f'attachment; filename="ortica-orders-{sc.now_kst():%Y%m%d}.csv"'}
+
+
+# ---------------------------------------------------------------------------
+# 상품 파일 · 다운로드 링크 발급
+# ---------------------------------------------------------------------------
+@admin_bp.route("/products/<slug>/files", methods=["GET", "POST"])
+def product_files(slug):
+    """손님에게 보낼 파일을 상품마다 올려 둡니다."""
+    catalog = sc.load_raw_catalog()
+    product = next((p for p in catalog["products"] if p.get("slug") == slug), None)
+    if product is None:
+        abort(404)
+
+    if request.method == "POST":
+        folder = sc.product_dir(slug)
+        folder.mkdir(parents=True, exist_ok=True)
+        saved = 0
+        for upload in request.files.getlist("files"):
+            if not upload or not upload.filename:
+                continue
+            name = os.path.basename(upload.filename).replace("\\", "")
+            if os.path.splitext(name)[1].lower() not in sc.DELIVER_EXTS:
+                flash(f"'{name}' 은 올릴 수 없는 형식입니다. PDF·ZIP·한글 파일만 됩니다.", "err")
+                continue
+            upload.save(folder / name)
+            saved += 1
+        if saved:
+            flash(f"파일 {saved}개를 올렸습니다. 이제 이 상품 주문에 다운로드 링크를 낼 수 있습니다.", "ok")
+        return redirect(url_for("admin.product_files", slug=slug))
+
+    return render_template("admin/product_files.html", p=product,
+                           files=sc.product_files(slug))
+
+
+@admin_bp.route("/products/<slug>/files/delete", methods=["POST"])
+def product_file_delete(slug):
+    name = os.path.basename(sc.clean(request.form.get("name"), 200))
+    target = (sc.product_dir(slug) / name).resolve()
+    if sc.product_dir(slug).resolve() in target.parents and target.is_file():
+        target.unlink()
+        flash(f"'{name}' 을 지웠습니다.", "ok")
+    return redirect(url_for("admin.product_files", slug=slug))
+
+
+@admin_bp.route("/orders/<int:order_id>/deliver", methods=["POST"])
+def order_deliver(order_id):
+    """입금이 확인된 주문에 다운로드 링크를 내고 메일로 보냅니다."""
+    db = sc.get_db()
+    row = db.execute("SELECT * FROM orders WHERE id = ?", (order_id,)).fetchone()
+    if not row:
+        abort(404)
+    slug = row["product_slug"]
+    if not slug:
+        flash("이 주문에는 상품이 없어 링크를 낼 수 없습니다.", "err")
+        return redirect(request.referrer or url_for("admin.orders"))
+    if not sc.product_files(slug):
+        flash("이 상품에 올려 둔 파일이 없습니다. 먼저 상품 > 파일에서 올려 주세요.", "err")
+        return redirect(url_for("admin.product_files", slug=slug))
+
+    token = sc.issue_download(row, slug, row["product_name"])
+    link = url_for("download_page", token=token, _external=True)
+    sent = sc.send_mail(
+        f"[Ortica영어] 주문하신 자료입니다 ({row['order_no']})",
+        "\n".join([f"{row['name']}님, 입금 확인했습니다. 감사합니다.", "",
+                    f"주문 : {row['product_name']}",
+                    "", "아래 주소로 들어가시면 자료를 받으실 수 있습니다.", link, "",
+                    f"· 사용 기한 : {sc.DOWNLOAD_DAYS}일",
+                    f"· 받을 수 있는 횟수 : {sc.DOWNLOAD_LIMIT}회",
+                    "· 링크를 다른 분께 넘기지 말아 주세요. 구매하신 분의 수업에서만 쓰실 수 있습니다.",
+                    "", "기한이 지났거나 다시 받아야 하면 편하게 문의해 주세요."]),
+        to_addr=row["email"])
+    db.execute("UPDATE orders SET status = '발송완료', updated_at = ? WHERE id = ?",
+               (sc.stamp(), order_id))
+    db.commit()
+    flash(("다운로드 링크를 만들어 " + row["email"] + " 로 보냈습니다. 주문은 발송완료로 바꿨습니다.")
+          if sent else
+          ("다운로드 링크를 만들었습니다. 메일 설정이 없어 자동 발송은 못 했으니 "
+           "아래 주소를 손님께 직접 알려 주세요: " + link), "ok")
+    return redirect(request.referrer or url_for("admin.orders"))
+
+
+@admin_bp.route("/downloads/<int:dl_id>/revoke", methods=["POST"])
+def download_revoke(dl_id):
+    db = sc.get_db()
+    db.execute("UPDATE downloads SET revoked_at = ? WHERE id = ?", (sc.stamp(), dl_id))
+    db.commit()
+    flash("링크를 막았습니다. 이제 그 주소로는 받을 수 없습니다.", "ok")
+    return redirect(request.referrer or url_for("admin.orders"))
+
+
+# ---------------------------------------------------------------------------
+# 매출 · 세금
+# ---------------------------------------------------------------------------
+@admin_bp.route("/sales")
+def sales():
+    """월별 매출과 증빙 발행 대기 목록. 종합소득세·부가세 신고 때 그대로 씁니다."""
+    db = sc.get_db()
+    rows = db.execute(
+        """SELECT substr(created_at, 1, 7) AS ym, COUNT(*) AS cnt,
+                  COALESCE(SUM(amount), 0) AS total,
+                  COALESCE(SUM(discount), 0) AS discount
+           FROM orders WHERE status IN ('입금확인', '발송완료')
+           GROUP BY ym ORDER BY ym DESC""").fetchall()
+    months = []
+    for r in rows:
+        supply, vat = sc.split_vat(r["total"])
+        months.append({"ym": r["ym"], "cnt": r["cnt"], "total": r["total"],
+                       "discount": r["discount"], "supply": supply, "vat": vat})
+    pending = db.execute(
+        """SELECT * FROM orders
+           WHERE receipt_kind IS NOT NULL AND receipt_kind != '' AND receipt_done = 0
+             AND status IN ('입금확인', '발송완료')
+           ORDER BY id DESC""").fetchall()
+    return render_template("admin/sales.html", months=months, pending=pending,
+                           receipt_kinds=sc.RECEIPT_KINDS)
+
+
+@admin_bp.route("/orders/<int:order_id>/receipt", methods=["POST"])
+def order_receipt_done(order_id):
+    db = sc.get_db()
+    db.execute("UPDATE orders SET receipt_done = 1, updated_at = ? WHERE id = ?",
+               (sc.stamp(), order_id))
+    db.commit()
+    flash("증빙 발행 완료로 표시했습니다.", "ok")
+    return redirect(request.referrer or url_for("admin.sales"))
 
 
 # ---------------------------------------------------------------------------
@@ -369,8 +501,9 @@ def products():
     # 샘플 파일이 실제로 폴더에 있는지 미리 확인해 화면에 표시해 줍니다.
     ready = {p["sample_file"] for p in items
              if p.get("sample_file") and (sc.SAMPLE_DIR / p["sample_file"]).exists()}
+    counts = {x["slug"]: len(sc.product_files(x["slug"])) for x in items if x.get("slug")}
     return render_template("admin/products.html", items=items, catalog=catalog,
-                           sample_ready=ready)
+                           sample_ready=ready, file_counts=counts)
 
 
 @admin_bp.route("/products/new", methods=["GET", "POST"])

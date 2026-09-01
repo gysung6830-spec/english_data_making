@@ -30,9 +30,11 @@ os.environ.setdefault("ADMIN_PASSWORD", "test1234")
 
 import store_common as sc  # noqa: E402
 
+# 파일을 쓰는 경로는 하나도 빠짐없이 임시 폴더로 돌려 놓아야 합니다.
 sc.DATA_DIR = _TMP / "store_data"
 sc.SAMPLE_DIR = sc.DATA_DIR / "samples"
 sc.SUBMIT_DIR = sc.DATA_DIR / "submissions"
+sc.DELIVER_DIR = sc.DATA_DIR / "deliverables"
 sc.DB_PATH = sc.DATA_DIR / "store.db"
 
 import store  # noqa: E402
@@ -290,10 +292,127 @@ def test_submission_requires_file_or_link():
     print("PASS  파일도 링크도 없으면 반려")
 
 
+# ---- 4-2. 입금 확인 → 다운로드 링크 → 파일 받기 ---------------------------
+def test_order_to_download_flow():
+    """자료를 올리고, 주문을 받고, 링크를 내고, 실제로 파일을 받기까지."""
+    a = admin()
+    slug = "mock-2026-06-g3-analysis"
+
+    # 파일이 없으면 링크를 낼 수 없어야 합니다.
+    c = client()
+    resp = c.post("/order", data={
+        "slug": slug, "name": "다운로드테스트", "phone": "010-5555-6666",
+        "email": "dl@example.com", "agree": "1"})
+    assert resp.status_code == 302
+    order_no = resp.headers["Location"].rsplit("/", 1)[-1]
+    row = sc.sqlite3.connect(sc.DB_PATH).execute(
+        "SELECT id FROM orders WHERE order_no = ?", (order_no,)).fetchone()
+    a.post(f"/admin/orders/{row[0]}/deliver")
+    assert sc.sqlite3.connect(sc.DB_PATH).execute(
+        "SELECT COUNT(*) FROM downloads").fetchone()[0] == 0, "파일 없이 링크가 나갔습니다"
+
+    # 파일을 올립니다.
+    up = a.post(f"/admin/products/{slug}/files", data={
+        "files": [(io.BytesIO(b"%PDF-1.4 analysis"), "지문분석지.pdf"),
+                  (io.BytesIO(b"PK\x03\x04zip"), "묶음.zip")]},
+        content_type="multipart/form-data")
+    assert up.status_code == 302
+    assert "지문분석지.pdf" in body(a.get(f"/admin/products/{slug}/files"))
+
+    # 올릴 수 없는 형식은 막힙니다.
+    bad = a.post(f"/admin/products/{slug}/files", data={
+        "files": (io.BytesIO(b"nope"), "hack.exe")}, content_type="multipart/form-data")
+    assert bad.status_code == 302
+    # 거부 안내에는 파일 이름이 나오므로, 실제로 저장됐는지로 확인합니다.
+    assert "hack.exe" not in [f["name"] for f in sc.product_files(slug)]
+
+    # 이제 링크를 냅니다. 주문은 발송완료가 되어야 합니다.
+    assert a.post(f"/admin/orders/{row[0]}/deliver").status_code == 302
+    dl = sc.sqlite3.connect(sc.DB_PATH).execute(
+        "SELECT token, order_no FROM downloads ORDER BY id DESC LIMIT 1").fetchone()
+    assert dl and dl[1] == order_no
+    status = sc.sqlite3.connect(sc.DB_PATH).execute(
+        "SELECT status FROM orders WHERE order_no = ?", (order_no,)).fetchone()[0]
+    assert status == "발송완료"
+
+    # 손님이 링크로 들어가 파일을 받습니다.
+    page = client().get(f"/d/{dl[0]}")
+    assert page.status_code == 200
+    assert "지문분석지.pdf" in body(page) and order_no in body(page)
+    # 파일은 이름 순으로 매겨지므로 PDF 가 몇 번째인지 찾아서 받습니다.
+    names = [f["name"] for f in sc.product_files(slug)]
+    idx = names.index("지문분석지.pdf")
+    got = client().get(f"/d/{dl[0]}/{idx}")
+    assert got.status_code == 200, got.status_code
+    assert got.data.startswith(b"%PDF"), got.data[:20]
+    assert sc.sqlite3.connect(sc.DB_PATH).execute(
+        "SELECT download_count FROM downloads WHERE token = ?", (dl[0],)).fetchone()[0] == 1
+
+    # 엉뚱한 토큰과 폴더 밖 요청은 막힙니다.
+    assert client().get("/d/없는토큰").status_code == 404
+    assert client().get(f"/d/{dl[0]}/99").status_code == 404
+    print("PASS  파일 올리기 → 링크 발급 → 손님이 받기")
+
+
+def test_download_revoke_and_limit():
+    a = admin()
+    dl = sc.sqlite3.connect(sc.DB_PATH).execute(
+        "SELECT id, token FROM downloads ORDER BY id DESC LIMIT 1").fetchone()
+
+    # 횟수를 다 쓰면 막힙니다.
+    conn = sc.sqlite3.connect(sc.DB_PATH)
+    conn.execute("UPDATE downloads SET download_count = max_downloads WHERE id = ?", (dl[0],))
+    conn.commit()
+    assert "횟수를 다 쓰셨습니다" in body(client().get(f"/d/{dl[1]}"))
+    conn.execute("UPDATE downloads SET download_count = 0 WHERE id = ?", (dl[0],))
+    conn.commit()
+
+    # 관리자가 막으면 못 받습니다.
+    assert a.post(f"/admin/downloads/{dl[0]}/revoke").status_code == 302
+    assert client().get(f"/d/{dl[1]}").status_code == 404
+    assert client().get(f"/d/{dl[1]}/0").status_code == 404
+    print("PASS  다운로드 횟수 제한 · 링크 차단")
+
+
+# ---- 4-3. 세금 · 증빙 ------------------------------------------------------
+def test_receipt_request_and_sales():
+    c = client()
+    # 증빙을 고르고 번호를 안 적으면 반려됩니다.
+    bad = c.post("/order", data={
+        "slug": "mock-2026-06-g3-problem", "name": "학원장", "phone": "010-7777-8888",
+        "email": "academy@example.com", "agree": "1", "receipt_kind": "tax_invoice"})
+    assert bad.status_code == 400 and "사업자등록번호나 휴대폰 번호" in body(bad)
+
+    resp = c.post("/order", data={
+        "slug": "mock-2026-06-g3-problem", "name": "학원장", "phone": "010-7777-8888",
+        "email": "academy@example.com", "affiliation": "오르티카학원", "agree": "1",
+        "receipt_kind": "tax_invoice", "receipt_no": "123-45-67890"})
+    assert resp.status_code == 302
+    order_no = resp.headers["Location"].rsplit("/", 1)[-1]
+
+    a = admin()
+    conn = sc.sqlite3.connect(sc.DB_PATH)
+    oid = conn.execute("SELECT id FROM orders WHERE order_no = ?", (order_no,)).fetchone()[0]
+    a.post(f"/admin/orders/{oid}", data={"status": "입금확인"})
+
+    page = body(a.get("/admin/sales"))
+    assert "123-45-67890" in page and "세금계산서" in page
+    assert "27,000원" in page                       # 문제 패키지 결제금액
+    assert "24,545원" in page and "2,455원" in page  # 공급가액 · 부가세
+
+    assert a.post(f"/admin/orders/{oid}/receipt").status_code == 302
+    assert "123-45-67890" not in body(a.get("/admin/sales"))   # 발행 대기에서 빠짐
+
+    csv = body(a.get("/admin/orders.csv"))
+    assert "공급가액" in csv and "부가세" in csv and "증빙종류" in csv
+    print("PASS  증빙 요청 → 매출 집계 → 발행 처리 → CSV")
+
+
 # ---- 5. 관리자 잠금 --------------------------------------------------------
 def test_admin_requires_login():
     c = client()
-    for path in ("/admin", "/admin/products", "/admin/settings", "/admin/backup"):
+    for path in ("/admin", "/admin/products", "/admin/settings", "/admin/backup",
+                 "/admin/sales"):
         assert c.get(path).status_code == 302, path
     assert c.post("/admin/login", data={"password": "틀린비번"}).status_code == 401
     print("PASS  관리자 페이지 잠김")
@@ -308,6 +427,8 @@ def test_admin_pages_open():
         ("/admin/coupons", "할인 쿠폰"),
         ("/admin/products", "새 상품 만들기"),
         ("/admin/books", "교재 · 분류"),
+        ("/admin/sales", "월별 매출"),
+        ("/admin/products/mock-2026-06-g3-analysis/files", "손님에게 보낼 파일"),
         ("/admin/materials", "자료 라인업"),
         ("/admin/materials/analysis", "특징 묶음 제목"),
         ("/admin/notices", "새 공지 쓰기"),
@@ -489,7 +610,16 @@ def test_file_path_traversal_blocked():
     print("PASS  폴더 밖 파일 요청 차단")
 
 
+def test_uses_temp_data_only():
+    """테스트가 진짜 store_data 를 건드리면 안 됩니다."""
+    real = Path(__file__).resolve().parent.parent / "store_data"
+    for path in (sc.DATA_DIR, sc.SAMPLE_DIR, sc.SUBMIT_DIR, sc.DELIVER_DIR, sc.DB_PATH):
+        assert real not in Path(path).resolve().parents and Path(path).resolve() != real, path
+    print("PASS  실제 데이터 폴더를 건드리지 않음")
+
+
 def run_all():
+    test_uses_temp_data_only()
     test_public_pages_open()
     test_categories_include_textbook()
     test_lineup_shows_all_materials()
@@ -509,6 +639,9 @@ def run_all():
     test_request_requires_wanted()
     test_submission_to_coupon_to_discount()
     test_submission_requires_file_or_link()
+    test_order_to_download_flow()
+    test_download_revoke_and_limit()
+    test_receipt_request_and_sales()
     test_admin_requires_login()
     test_admin_pages_open()
     test_admin_creates_product_visible_on_site()

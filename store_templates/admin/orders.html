@@ -6,7 +6,8 @@
   <div class="row">
     <div>
       <h1>주문 · 문의</h1>
-      <p>돈을 받았으면 <b>입금확인</b>, 자료를 보냈으면 <b>발송완료</b> 로 바꿔 주세요.</p>
+      <p>입금을 확인했으면 <b>📤 자료 보내기</b> 를 누르세요.
+        손님 메일로 다운로드 링크가 자동으로 가고, 주문은 발송완료가 됩니다.</p>
     </div>
     <div class="spacer"></div>
     <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.orders_csv') }}">엑셀(CSV)로 내려받기</a>
@@ -57,6 +58,10 @@
               </small>
             {% endif %}
             {% if r['message'] %}<br><small class="muted">💬 {{ r['message'] }}</small>{% endif %}
+            {% if r['receipt_kind'] %}
+              <br><small class="tag">{{ r['receipt_kind'] == 'tax_invoice' and '세금계산서' or '현금영수증' }}
+                {{ r['receipt_no'] }}{{ ' ✅' if r['receipt_done'] }}</small>
+            {% endif %}
           </td>
           <td class="num">
             {{ r['amount']|won }}
@@ -76,6 +81,12 @@
             <div style="margin-bottom:7px;">
               <span class="pill pill-{{ r['status'] }}">{{ r['status'] }}</span>
             </div>
+            {% if r['kind'] == 'product' and r['product_slug'] %}
+              <form method="post" style="margin-bottom:7px;"
+                    action="{{ url_for('admin.order_deliver', order_id=r['id']) }}">
+                <button class="btn btn-primary btn-sm" type="submit">📤 자료 보내기</button>
+              </form>
+            {% endif %}
             <form class="inline-form" method="post"
                   action="{{ url_for('admin.order_update', order_id=r['id']) }}">
               <select name="status">

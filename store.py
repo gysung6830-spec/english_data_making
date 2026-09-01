@@ -34,8 +34,8 @@ app.secret_key = os.environ.get("STORE_SECRET") or secrets.token_hex(16)
 app.config["JSON_AS_ASCII"] = False
 # 글꼴 파일이 800KB 가까이 되므로 브라우저가 오래 캐시하도록 합니다(30일).
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 60 * 60 * 24 * 30
-# 시험지 파일 업로드 상한
-app.config["MAX_CONTENT_LENGTH"] = 25 * 1024 * 1024
+# 업로드 상한 (상품 자료 ZIP · 시험지 사진)
+app.config["MAX_CONTENT_LENGTH"] = 200 * 1024 * 1024
 
 app.register_blueprint(admin_bp)
 app.teardown_appcontext(sc.close_db)
@@ -66,6 +66,11 @@ def won(value) -> str:
         return f"{int(value):,}원"
     except (TypeError, ValueError):
         return str(value)
+
+
+@app.template_filter("filesize")
+def filesize(value):
+    return sc.human_size(int(value or 0))
 
 
 @app.template_filter("fromjson")
@@ -215,6 +220,13 @@ def order():
     quantity = max(1, min(99, sc.to_int(request.form.get("quantity"), 1)))
     depositor = sc.clean(request.form.get("depositor"), 50) or data["name"]
 
+    receipt_kind = sc.clean(request.form.get("receipt_kind"), 20)
+    if receipt_kind not in sc.RECEIPT_KINDS:
+        receipt_kind = ""
+    receipt_no = sc.clean(request.form.get("receipt_no"), 40)
+    if receipt_kind and not receipt_no:
+        errors.append("증빙을 받으시려면 사업자등록번호나 휴대폰 번호를 적어 주세요.")
+
     subtotal = int(product.get("price", 0)) * quantity
     coupon_code = sc.clean(request.form.get("coupon"), 40).upper()
     coupon, discount, coupon_note = sc.check_coupon(coupon_code, subtotal)
@@ -224,19 +236,18 @@ def order():
     if errors:
         return render_template("order.html", p=product, form=request.form, errors=errors), 400
 
-    order_no = sc.new_order_no()
     amount = subtotal - discount
     ts = sc.stamp()
-    db = sc.get_db()
-    db.execute(
+    order_no = sc.insert_numbered(
         """INSERT INTO orders (order_no, kind, product_slug, product_name, quantity,
                                amount, discount, coupon_code, name, phone, email,
-                               affiliation, depositor, message, status, created_at, updated_at)
-           VALUES (?, 'product', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?)""",
-        (order_no, product["slug"], product["name"], quantity, amount, discount,
-         coupon["code"] if coupon else None, data["name"], data["phone"], data["email"],
-         data["affiliation"], depositor, data["message"], ts, ts))
-    db.commit()
+                               affiliation, depositor, message, receipt_kind, receipt_no,
+                               status, created_at, updated_at)
+           VALUES (?, 'product', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?)""",
+        lambda no: (no, product["slug"], product["name"], quantity, amount, discount,
+                    coupon["code"] if coupon else None, data["name"], data["phone"],
+                    data["email"], data["affiliation"], depositor, data["message"],
+                    receipt_kind, receipt_no, ts, ts))
     if coupon:
         sc.redeem_coupon(coupon["code"], order_no)
 
@@ -252,6 +263,7 @@ def order():
                    f"연락처   : {data['phone']}",
                    f"이메일   : {data['email']}",
                    f"소속     : {data['affiliation'] or '-'}",
+                   f"증빙     : {sc.RECEIPT_KINDS.get(receipt_kind, '-')} {receipt_no}",
                    f"요청사항 : {data['message'] or '-'}",
                    f"접수시각 : {ts}"]))
     return redirect(url_for("order_done", order_no=order_no))
@@ -298,19 +310,16 @@ def custom():
     if errors:
         return render_template("custom.html", form=request.form, errors=errors), 400
 
-    order_no = sc.new_order_no()
     label = "교재 요청" if mode == "request" else "맞춤 제작 의뢰"
     ts = sc.stamp()
-    db = sc.get_db()
-    db.execute(
+    order_no = sc.insert_numbered(
         """INSERT INTO orders (order_no, kind, product_name, quantity, amount,
                                name, phone, email, affiliation, message, detail_json,
                                status, created_at, updated_at)
            VALUES (?, ?, ?, 1, 0, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?)""",
-        (order_no, mode, label, data["name"], data["phone"], data["email"],
-         data["affiliation"], data["message"],
-         json.dumps(detail, ensure_ascii=False), ts, ts))
-    db.commit()
+        lambda no: (no, mode, label, data["name"], data["phone"], data["email"],
+                    data["affiliation"], data["message"],
+                    json.dumps(detail, ensure_ascii=False), ts, ts))
 
     sc.send_mail(
         f"[Ortica영어] {label} {order_no} · {wanted[:40]}",
@@ -359,6 +368,9 @@ def submit():
                                errors=errors, done=None), 400
 
     submit_no = sc.new_submit_no()
+    while sc.get_db().execute("SELECT 1 FROM submissions WHERE submit_no = ?",
+                              (submit_no,)).fetchone():
+        submit_no = sc.new_submit_no()
     if upload and upload.filename:
         ext = os.path.splitext(upload.filename)[1].lower()
         sc.SUBMIT_DIR.mkdir(parents=True, exist_ok=True)
@@ -421,18 +433,15 @@ def pass_page():
         return render_template("pass.html", cfg=cfg, form=request.form,
                                errors=errors, done=None), 400
 
-    order_no = sc.new_order_no()
     ts = sc.stamp()
-    db = sc.get_db()
-    db.execute(
+    order_no = sc.insert_numbered(
         """INSERT INTO orders (order_no, kind, product_name, quantity, amount,
                                name, phone, email, affiliation, message, detail_json,
                                status, created_at, updated_at)
            VALUES (?, 'pass', ?, 1, 0, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?)""",
-        (order_no, f"프리패스 사전 신청 · {plan}", data["name"], data["phone"], data["email"],
-         data["affiliation"], data["message"],
-         json.dumps({"관심 이용권": plan}, ensure_ascii=False), ts, ts))
-    db.commit()
+        lambda no: (no, f"프리패스 사전 신청 · {plan}", data["name"], data["phone"],
+                    data["email"], data["affiliation"], data["message"],
+                    json.dumps({"관심 이용권": plan}, ensure_ascii=False), ts, ts))
 
     sc.send_mail(
         f"[Ortica영어] 프리패스 사전 신청 {order_no} · {plan}",
@@ -461,6 +470,32 @@ def sample_download(filename):
     if sc.SAMPLE_DIR.resolve() not in target.parents or not target.is_file():
         abort(404)
     return send_from_directory(sc.SAMPLE_DIR, filename, as_attachment=True)
+
+
+# ---------------------------------------------------------------------------
+# 결제 확인 후 받는 다운로드 링크
+# ---------------------------------------------------------------------------
+@app.route("/d/<token>")
+def download_page(token):
+    """메일로 보내 드린 링크. 이 주소를 아는 사람만 파일을 받을 수 있습니다."""
+    row, reason = sc.check_download(token)
+    if row is None:
+        return render_template("download.html", d=None, files=[], reason=reason), 404
+    files = sc.product_files(row["product_slug"])
+    return render_template("download.html", d=row, files=files, reason="")
+
+
+@app.route("/d/<token>/<int:index>")
+def download_file(token, index):
+    row, _ = sc.check_download(token)
+    if row is None:
+        abort(404)
+    files = sc.product_files(row["product_slug"])
+    if not 0 <= index < len(files):
+        abort(404)
+    sc.count_download(token)
+    return send_from_directory(sc.product_dir(row["product_slug"]),
+                               files[index]["name"], as_attachment=True)
 
 
 @app.route("/guide")

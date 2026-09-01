@@ -535,3 +535,15 @@ input[type=file]{
 .pair-buy{text-align:center; min-width:180px;}
 .pair-buy .price{font-size:24px; font-weight:800; margin-bottom:10px;}
 @media (max-width:640px){ .pair-buy{width:100%;} }
+
+/* ---------- 자료 받기 화면 ---------- */
+.dl-list{display:flex; flex-direction:column; gap:10px;}
+.dl-item{
+  display:flex; align-items:center; gap:14px; background:var(--card);
+  border:1px solid var(--line); border-radius:12px; padding:16px 18px;
+  box-shadow:var(--shadow); transition:.15s;
+}
+.dl-item:hover{border-color:var(--brand);}
+.dl-ico{font-size:20px;}
+.dl-name{font-weight:700; flex:1; min-width:0; word-break:break-all;}
+.dl-size{color:var(--muted); font-size:13.5px; white-space:nowrap;}

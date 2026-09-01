@@ -1,0 +1,64 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ p.name }} 파일{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <h1>손님에게 보낼 파일</h1>
+  <p><b>{{ p.name }}</b></p>
+</div>
+
+<div class="steps-help">
+  <b>이 파일이 판매되는 실물입니다</b>
+  <ol>
+    <li>여기에 자료 PDF(또는 묶음 ZIP)를 올려 둡니다.</li>
+    <li>주문이 들어와 입금을 확인하면, 주문 목록에서 <b>'자료 보내기'</b> 를 누릅니다.</li>
+    <li>손님 메일로 <b>다운로드 링크</b>가 자동으로 갑니다. 파일을 직접 첨부할 필요가 없습니다.</li>
+  </ol>
+</div>
+
+<div class="panel">
+  <h2>파일 올리기</h2>
+  <div class="hint">PDF · ZIP · 한글(HWP) · 워드 · 파워포인트. 한 번에 여러 개 고를 수 있습니다.
+    파일이 많으면 <b>ZIP 하나로 묶어 올리는 편</b>이 손님도 받기 편합니다.</div>
+  <form method="post" enctype="multipart/form-data">
+    <div class="adm-field" style="max-width:520px;">
+      <input type="file" name="files" multiple accept=".pdf,.zip,.hwp,.hwpx,.docx,.pptx">
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">올리기</button>
+      <a class="btn btn-ghost" href="{{ url_for('admin.products') }}">상품 목록으로</a>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>올려 둔 파일 {{ files|length }}개</h2>
+  {% if files %}
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th>파일 이름</th><th class="num">크기</th><th></th></tr></thead>
+        <tbody>
+        {% for f in files %}
+          <tr>
+            <td>{{ f.name }}</td>
+            <td class="num">{{ f.size | filesize }}</td>
+            <td>
+              <form method="post" action="{{ url_for('admin.product_file_delete', slug=p.slug) }}"
+                    onsubmit="return confirm('{{ f.name }} 을 지울까요?');">
+                <input type="hidden" name="name" value="{{ f.name }}">
+                <button class="btn btn-sm danger" type="submit">지우기</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty">
+      <b>아직 올린 파일이 없습니다.</b>
+      파일이 없으면 이 상품 주문에 다운로드 링크를 낼 수 없습니다.
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

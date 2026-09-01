@@ -1,0 +1,88 @@
+{% extends "admin/base.html" %}
+{% block title %}매출 · 세금{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <div class="row">
+    <div>
+      <h1>매출 · 세금</h1>
+      <p>입금이 확인된 주문만 셉니다. 종합소득세·부가세 신고 때 이 숫자를 그대로 쓰시면 됩니다.</p>
+    </div>
+    <div class="spacer"></div>
+    <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.orders_csv') }}">전체 내역 CSV</a>
+  </div>
+</div>
+
+<div class="steps-help">
+  <b>세금 신고를 쉽게 하는 세 가지</b>
+  <ol>
+    <li><b>사업용 계좌를 따로 만들어 홈택스에 등록</b>하세요. 개인 통장과 섞이면 나중에 정리가 지옥입니다.</li>
+    <li>매달 한 번 <b>CSV를 내려받아 보관</b>하세요. 통장 내역과 대조할 때 이게 장부가 됩니다.</li>
+    <li>학원·학교에 파시면 <b>세금계산서</b>를 요구받습니다. 아래 '증빙 발행 대기'를 보고
+      홈택스에서 발행하시면 됩니다.</li>
+  </ol>
+</div>
+
+<div class="panel">
+  <h2>증빙 발행 대기 {% if pending %}<span class="tag tag-on">{{ pending|length }}건</span>{% endif %}</h2>
+  <div class="hint">손님이 주문서에서 요청한 것입니다. 홈택스에서 발행한 뒤 '발행했음'을 눌러 주세요.</div>
+  {% if pending %}
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th>접수</th><th>주문번호</th><th>증빙 종류</th><th>번호</th>
+                   <th class="num">공급가액</th><th class="num">부가세</th><th class="num">합계</th>
+                   <th>주문자</th><th></th></tr></thead>
+        <tbody>
+        {% for r in pending %}
+          <tr>
+            <td>{{ r['created_at'][:10] }}</td>
+            <td><b>{{ r['order_no'] }}</b></td>
+            <td>{{ receipt_kinds.get(r['receipt_kind'], r['receipt_kind']) }}</td>
+            <td><span class="code">{{ r['receipt_no'] }}</span></td>
+            <td class="num">{{ (r['amount'] / 1.1) | round | int | won }}</td>
+            <td class="num">{{ (r['amount'] - (r['amount'] / 1.1) | round | int) | won }}</td>
+            <td class="num"><b>{{ r['amount']|won }}</b></td>
+            <td>{{ r['name'] }}<br><small class="muted">{{ r['affiliation'] or '' }}</small></td>
+            <td>
+              <form method="post" action="{{ url_for('admin.order_receipt_done', order_id=r['id']) }}">
+                <button class="btn btn-primary btn-sm" type="submit">발행했음</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty"><b>발행할 증빙이 없습니다.</b></div>
+  {% endif %}
+</div>
+
+<div class="panel">
+  <h2>월별 매출</h2>
+  <div class="hint">결제금액은 부가세가 포함된 금액입니다. 공급가액과 부가세를 나눠 두었습니다.</div>
+  {% if months %}
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th>월</th><th class="num">건수</th><th class="num">공급가액</th>
+                   <th class="num">부가세</th><th class="num">매출(결제금액)</th>
+                   <th class="num">쿠폰 할인</th></tr></thead>
+        <tbody>
+        {% for m in months %}
+          <tr>
+            <td><b>{{ m.ym }}</b></td>
+            <td class="num">{{ m.cnt }}건</td>
+            <td class="num">{{ m.supply|won }}</td>
+            <td class="num">{{ m.vat|won }}</td>
+            <td class="num"><b>{{ m.total|won }}</b></td>
+            <td class="num muted">{{ m.discount|won }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty"><b>아직 확인된 매출이 없습니다.</b>입금을 확인한 주문부터 여기에 쌓입니다.</div>
+  {% endif %}
+</div>
+{% endblock %}

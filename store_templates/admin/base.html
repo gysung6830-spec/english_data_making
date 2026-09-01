@@ -28,6 +28,8 @@
         📄 시험지 제출</a>
       <a href="{{ url_for('admin.coupons') }}" class="{{ 'on' if request.endpoint == 'admin.coupons' }}">
         🎟 할인 쿠폰</a>
+      <a href="{{ url_for('admin.sales') }}" class="{{ 'on' if request.endpoint == 'admin.sales' }}">
+        💰 매출 · 세금</a>
 
       <div class="sep">사이트 내용</div>
       <a href="{{ url_for('admin.products') }}" class="{{ 'on' if request.endpoint in ['admin.products','admin.product_form'] }}">

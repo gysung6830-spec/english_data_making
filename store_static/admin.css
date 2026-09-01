@@ -51,7 +51,7 @@
 .panel > .hint{color:var(--muted); font-size:13.5px; margin-bottom:16px;}
 
 /* ---------- 오늘 할 일 ---------- */
-.todo-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:20px;}
+.todo-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-bottom:20px;}
 .todo{
   background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 20px;
   display:block; transition:.15s;

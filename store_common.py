@@ -28,6 +28,7 @@ ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "store_data"
 SAMPLE_DIR = DATA_DIR / "samples"
 SUBMIT_DIR = DATA_DIR / "submissions"
+DELIVER_DIR = DATA_DIR / "deliverables"   # 상품별로 손님에게 보낼 파일
 DB_PATH = Path(os.environ.get("STORE_DB") or (DATA_DIR / "store.db"))
 
 KST = timezone(timedelta(hours=9))
@@ -36,6 +37,17 @@ ORDER_STATUSES = ["입금대기", "입금확인", "발송완료", "취소"]
 SUBMIT_STATUSES = ["검토대기", "승인", "반려"]
 ORDER_KIND_LABELS = {"product": "자료 주문", "custom": "맞춤 제작",
                      "request": "교재 요청", "pass": "프리패스"}
+
+# 세금 신고에 필요한 증빙 종류
+RECEIPT_KINDS = {
+    "": "필요 없음",
+    "cash_personal": "현금영수증 (소득공제·개인)",
+    "cash_business": "현금영수증 (지출증빙·사업자)",
+    "tax_invoice": "세금계산서 (사업자)",
+}
+
+DOWNLOAD_DAYS = 30      # 다운로드 링크가 살아 있는 기간
+DOWNLOAD_LIMIT = 20     # 한 링크로 받을 수 있는 횟수
 
 
 def now_kst() -> datetime:
@@ -238,6 +250,21 @@ CREATE TABLE IF NOT EXISTS coupons (
     created_at    TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS downloads (
+    id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    token          TEXT UNIQUE NOT NULL,
+    order_no       TEXT NOT NULL,
+    product_slug   TEXT NOT NULL,
+    product_name   TEXT,
+    email          TEXT,
+    expires_at     TEXT,
+    max_downloads  INTEGER NOT NULL DEFAULT 20,
+    download_count INTEGER NOT NULL DEFAULT 0,
+    revoked_at     TEXT,
+    created_at     TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_dl_order ON downloads(order_no);
+
 CREATE TABLE IF NOT EXISTS submissions (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     submit_no     TEXT UNIQUE NOT NULL,
@@ -265,6 +292,10 @@ CREATE INDEX IF NOT EXISTS idx_sub_created ON submissions(created_at DESC);
 MIGRATIONS = [
     ("orders", "discount", "INTEGER NOT NULL DEFAULT 0"),
     ("orders", "coupon_code", "TEXT"),
+    # 세금 증빙
+    ("orders", "receipt_kind", "TEXT"),
+    ("orders", "receipt_no", "TEXT"),
+    ("orders", "receipt_done", "INTEGER NOT NULL DEFAULT 0"),
 ]
 
 
@@ -294,11 +325,29 @@ def close_db(_exc=None):
 
 
 def new_order_no() -> str:
-    return f"OR-{now_kst():%y%m%d}-{secrets.randbelow(9000) + 1000}"
+    return f"OR-{now_kst():%y%m%d}-{secrets.randbelow(90000) + 10000}"
 
 
 def new_submit_no() -> str:
-    return f"SB-{now_kst():%y%m%d}-{secrets.randbelow(9000) + 1000}"
+    return f"SB-{now_kst():%y%m%d}-{secrets.randbelow(90000) + 10000}"
+
+
+def insert_numbered(sql: str, params_for, make_no=new_order_no) -> str:
+    """번호를 뽑아 넣되, 어쩌다 번호가 겹치면 다시 뽑아 넣습니다.
+
+    번호는 날짜 + 무작위 다섯 자리라 겹칠 일이 드물지만, 겹쳤을 때
+    손님 화면에 오류가 뜨고 주문이 사라지면 안 되므로 여기서 막습니다.
+    """
+    db = get_db()
+    for _ in range(12):
+        number = make_no()
+        try:
+            db.execute(sql, params_for(number))
+            db.commit()
+            return number
+        except sqlite3.IntegrityError:
+            continue
+    raise RuntimeError("번호를 만들지 못했습니다")
 
 
 # ---------------------------------------------------------------------------
@@ -359,6 +408,93 @@ def redeem_coupon(code: str, order_no: str) -> None:
         "UPDATE coupons SET used_at = ?, used_order_no = ? WHERE code = ? AND used_at IS NULL",
         (stamp(), order_no, code))
     get_db().commit()
+
+
+# ---------------------------------------------------------------------------
+# 상품 파일 · 다운로드 링크
+# ---------------------------------------------------------------------------
+DELIVER_EXTS = {".pdf", ".zip", ".hwp", ".hwpx", ".docx", ".pptx"}
+
+
+def product_dir(slug: str) -> Path:
+    """상품 하나의 파일이 들어가는 폴더. 슬러그만 폴더 이름이 됩니다."""
+    safe = re.sub(r"[^a-z0-9\-]", "", (slug or "").lower())[:60]
+    if not safe:
+        raise ValueError("상품 주소 이름이 이상합니다")
+    return DELIVER_DIR / safe
+
+
+def product_files(slug: str) -> list[dict]:
+    """상품에 올려 둔 파일 목록 (이름 순)."""
+    try:
+        folder = product_dir(slug)
+    except ValueError:
+        return []
+    if not folder.is_dir():
+        return []
+    out = []
+    for path in sorted(folder.iterdir()):
+        if path.is_file() and not path.name.startswith("."):
+            out.append({"name": path.name, "size": path.stat().st_size})
+    return out
+
+
+def human_size(num: int) -> str:
+    for unit in ("B", "KB", "MB", "GB"):
+        if num < 1024 or unit == "GB":
+            return f"{num:.0f}{unit}" if unit == "B" else f"{num:.1f}{unit}"
+        num /= 1024.0
+    return f"{num:.1f}GB"
+
+
+def issue_download(order_row, product_slug: str, product_name: str) -> str:
+    """주문 하나에 대한 다운로드 링크를 만들고 토큰을 돌려줍니다."""
+    db = get_db()
+    expires = (now_kst() + timedelta(days=DOWNLOAD_DAYS)).date().isoformat()
+    for _ in range(10):
+        token = secrets.token_urlsafe(24)
+        try:
+            db.execute(
+                """INSERT INTO downloads (token, order_no, product_slug, product_name,
+                                          email, expires_at, max_downloads, created_at)
+                   VALUES (?,?,?,?,?,?,?,?)""",
+                (token, order_row["order_no"], product_slug, product_name,
+                 order_row["email"], expires, DOWNLOAD_LIMIT, stamp()))
+            db.commit()
+            return token
+        except sqlite3.IntegrityError:
+            continue
+    raise RuntimeError("다운로드 링크를 만들지 못했습니다")
+
+
+def check_download(token: str) -> tuple[sqlite3.Row | None, str]:
+    """(링크, 안 되는 이유). 쓸 수 있으면 이유가 빈 문자열입니다."""
+    row = get_db().execute("SELECT * FROM downloads WHERE token = ?", (token,)).fetchone()
+    if row is None:
+        return None, "링크가 올바르지 않습니다. 주소를 다시 확인해 주세요."
+    if row["revoked_at"]:
+        return None, "이 링크는 더 이상 쓸 수 없습니다. 문의해 주세요."
+    if row["expires_at"] and row["expires_at"] < now_kst().date().isoformat():
+        return None, f"링크 사용 기한이 지났습니다. (기한 {row['expires_at']}) 문의 주시면 다시 보내 드립니다."
+    if row["download_count"] >= row["max_downloads"]:
+        return None, "받을 수 있는 횟수를 다 쓰셨습니다. 문의 주시면 다시 보내 드립니다."
+    return row, ""
+
+
+def count_download(token: str) -> None:
+    db = get_db()
+    db.execute("UPDATE downloads SET download_count = download_count + 1 WHERE token = ?",
+               (token,))
+    db.commit()
+
+
+# ---------------------------------------------------------------------------
+# 세금 — 공급가액과 부가세를 나눠 둡니다
+# ---------------------------------------------------------------------------
+def split_vat(total: int) -> tuple[int, int]:
+    """결제금액에서 공급가액과 부가세(10%)를 나눕니다. 부가세는 버림 기준으로 맞춥니다."""
+    supply = int(round(total / 1.1))
+    return supply, total - supply
 
 
 # ---------------------------------------------------------------------------

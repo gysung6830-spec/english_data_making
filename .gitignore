@@ -20,3 +20,6 @@ store_data/*.json.tmp
 # 손님이 올린 시험지 — 개인 자료라 저장소에 올리지 않습니다
 store_data/submissions/*
 !store_data/submissions/.gitkeep
+# 판매하는 자료 원본 — 저장소에 올리면 누구나 받을 수 있으니 넣지 않습니다
+store_data/deliverables/*
+!store_data/deliverables/.gitkeep
