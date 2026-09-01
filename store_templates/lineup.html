@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}자료 라인업 · {{ site.brand }}{% endblock %}
+{% block desc %}{{ intro.lead }}{% endblock %}
+
+{% block body %}
+<section class="lineup-hero">
+  <div class="wrap">
+    <span class="lineup-eyebrow">{{ intro.eyebrow or '자료 라인업' }}</span>
+    <h1>{% for line in (intro.headline or '').split('\n') %}{{ line }}<br>{% endfor %}</h1>
+    <p class="lineup-lead">
+      {{ intro.lead }}
+      {% if intro.signature_note %}<em class="sig-note">{{ intro.signature_note }}</em>{% endif %}
+    </p>
+  </div>
+</section>
+
+{% for g in groups %}
+<section class="lineup-group">
+  <div class="wrap">
+    <div class="group-head">
+      <div class="group-label">
+        <span>{{ g.range }}{% if g.range and g.name %} · {% endif %}{{ g.name }}</span>
+        <span class="group-count">{{ loop.index }} / {{ groups|length }}</span>
+      </div>
+      {% if g.headline %}<h2>{{ g.headline }}</h2>{% endif %}
+      {% if g.lead %}<p>{{ g.lead }}</p>{% endif %}
+    </div>
+
+    {% for m in g['items'] %}
+      <article class="mat" id="{{ m.id }}">
+        <div class="mat-head">
+          <span class="mat-no">{{ m.no }}</span>
+          <h3>{{ m.name }}</h3>
+          {% if m.en %}<span class="mat-en">{{ m.en }}</span>{% endif %}
+          {% if m.signature %}<span class="sig">SIGNATURE</span>{% endif %}
+          {% if m.made_to_order %}<span class="mto">주문제작자료</span>{% endif %}
+        </div>
+        {% if m.tagline %}<p class="mat-tagline">{{ m.tagline }}</p>{% endif %}
+        {% if m.subline %}<p class="mat-subline">{{ m.subline }}</p>{% endif %}
+
+        {% if m.image %}
+          <figure class="mat-shot">
+            <img src="{{ url_for('static', filename='lineup/' + m.image) }}"
+                 alt="{{ m.name }} 실제 자료 지면" loading="lazy">
+            <figcaption>실제 자료 지면</figcaption>
+          </figure>
+          {% if m.sheet_note %}<p class="sheet-note">{{ m.sheet_note }}</p>{% endif %}
+        {% endif %}
+
+        {% if m.variants %}
+          <div class="variants">
+            {% for v in m.variants %}
+              <div class="variant">
+                <b>{{ v.name }}</b>
+                <p>{{ v.desc }}</p>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if m.features %}
+          {% if m.features_headline %}<h4 class="feat-head">{{ m.features_headline }}</h4>{% endif %}
+          <ul class="feat-list">
+            {% for f in m.features %}
+              <li><b>{{ f.title }}</b>{% if f.body %} <span>{{ f.body }}</span>{% endif %}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        {% if m.for_whom %}
+          <div class="for-whom">
+            <b>이런 분께</b>
+            <ul>{% for w in m.for_whom %}<li>{{ w }}</li>{% endfor %}</ul>
+          </div>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+
+<section class="section">
+  <div class="wrap center">
+    <div class="section-head center">
+      <h2>어떤 자료가 들어가는지는 상품마다 표시해 두었습니다</h2>
+      <p>교재·회차를 고르시면 그 세트에 어떤 자료가 들어가는지 상세 페이지에서 확인하실 수 있습니다.</p>
+    </div>
+    <a class="btn btn-primary" href="{{ url_for('products') }}">자료 목록 보기</a>
+    <a class="btn btn-ghost" href="{{ url_for('samples') }}">무료 샘플 받기</a>
+  </div>
+</section>
+{% endblock %}

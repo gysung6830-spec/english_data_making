@@ -343,3 +343,118 @@ input[type=file]{
 @media (max-width:860px){
   .mode-pick{grid-template-columns:1fr;}
 }
+
+/* ==========================================================================
+   자료 라인업 페이지 — 보내 주신 라인업 지면의 짜임을 그대로 옮겼습니다.
+   ========================================================================== */
+.lineup-hero{
+  background:#123227; color:#fff; padding:64px 0 56px; position:relative; overflow:hidden;
+}
+.lineup-hero::after{
+  content:""; position:absolute; right:-80px; top:-60px; width:340px; height:340px;
+  border-radius:50%; background:rgba(255,255,255,.035);
+}
+.lineup-eyebrow{
+  display:inline-block; color:#7fd8ab; font-size:14px; font-weight:700;
+  letter-spacing:.18em; margin-bottom:18px;
+}
+.lineup-hero h1{font-size:44px; font-weight:800; letter-spacing:-.035em; line-height:1.28;}
+.lineup-lead{
+  margin-top:22px; max-width:760px; color:#bdd3c8; font-size:16.5px; line-height:1.8;
+}
+.sig-note{font-style:normal; color:#e0a458;}
+
+.lineup-group{padding:56px 0 20px; border-top:1px solid var(--line);}
+.lineup-group:first-of-type{border-top:0;}
+.group-head{margin-bottom:34px;}
+.group-label{
+  display:flex; align-items:baseline; gap:12px; color:var(--brand);
+  font-size:14.5px; font-weight:700; letter-spacing:.06em; margin-bottom:10px;
+}
+.group-count{margin-left:auto; color:var(--muted); font-weight:600; letter-spacing:0;}
+.group-head h2{font-size:30px; font-weight:800; letter-spacing:-.03em; margin-bottom:10px;}
+.group-head p{color:var(--ink-2); max-width:760px; margin:0;}
+
+.mat{
+  border-top:1px solid var(--line); padding:34px 0 8px;
+}
+.group-head + .mat{border-top:0; padding-top:0;}
+.mat-head{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:8px;}
+.mat-no{color:var(--brand); font-size:15px; font-weight:800;}
+.mat-head h3{font-size:26px; font-weight:800; letter-spacing:-.03em;}
+.mat-en{color:var(--muted); font-size:15px; letter-spacing:.06em;}
+.sig{
+  font-size:11.5px; font-weight:800; letter-spacing:.1em; color:var(--brand-dark);
+  border:1.5px solid var(--brand); border-radius:999px; padding:2px 10px;
+}
+.mto{
+  font-size:11.5px; font-weight:800; color:#8a5a12;
+  background:#fdf3e2; border:1px solid #eed7ac; border-radius:999px; padding:3px 10px;
+}
+.mat-tagline{font-size:17px; font-weight:700; color:var(--ink); margin:0 0 10px;}
+.mat-subline{
+  color:var(--brand-dark); background:var(--brand-soft); border-left:3px solid var(--brand);
+  border-radius:0 8px 8px 0; padding:11px 16px; font-size:14.5px; margin:0 0 18px;
+}
+
+.mat-shot{margin:0 0 14px;}
+.mat-shot img{border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow);}
+.mat-shot figcaption{color:var(--muted); font-size:13px; margin-top:8px;}
+.sheet-note{color:var(--ink-2); font-size:14.5px; margin-bottom:20px;}
+
+.variants{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:6px 0 22px;}
+.variant{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px;}
+.variant b{display:block; font-size:16px; margin-bottom:6px;}
+.variant p{color:var(--ink-2); font-size:14.5px; margin:0; line-height:1.65;}
+
+.feat-head{
+  font-size:19px; font-weight:800; margin:22px 0 14px; padding-bottom:10px;
+  border-bottom:2px solid var(--ink);
+}
+.feat-list{list-style:none; padding:0; margin:0 0 6px;}
+.feat-list li{
+  position:relative; padding-left:16px; margin-bottom:14px; color:var(--ink-2);
+  font-size:15.5px; line-height:1.75;
+}
+.feat-list li::before{content:"·"; position:absolute; left:0; color:var(--muted); font-weight:800;}
+.feat-list b{color:var(--ink);}
+.feat-list span{color:var(--ink-2);}
+
+.for-whom{
+  background:#f3f1ea; border-radius:12px; padding:18px 22px; margin:20px 0 4px;
+}
+.for-whom > b{display:block; font-size:16px; margin-bottom:10px;}
+.for-whom ul{list-style:none; padding:0; margin:0;}
+.for-whom li{position:relative; padding-left:16px; color:var(--ink-2); font-size:15px;
+  margin-bottom:7px;}
+.for-whom li::before{content:"·"; position:absolute; left:0; color:var(--muted); font-weight:800;}
+
+/* 상품에 붙는 자료 배지 */
+.mat-chips{display:flex; flex-wrap:wrap; gap:6px; margin:14px 0;}
+.mat-chip{
+  font-size:12.5px; font-weight:700; color:var(--brand-dark); background:var(--brand-soft);
+  border-radius:6px; padding:4px 10px;
+}
+.mat-chip .n{color:var(--brand); margin-right:4px;}
+.mat-chip.sig-chip{background:#fdf3e2; color:#8a5a12;}
+
+@media (max-width:860px){
+  .lineup-hero{padding:44px 0 40px;}
+  .lineup-hero h1{font-size:30px;}
+  .group-head h2{font-size:24px;}
+  .mat-head h3{font-size:21px;}
+  .variants{grid-template-columns:1fr;}
+  .group-label{flex-wrap:wrap;}
+}
+
+/* 홈의 자료 8종 타일 */
+.mat-tile{
+  display:flex; flex-direction:column; gap:6px; background:var(--card);
+  border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px;
+  box-shadow:var(--shadow); transition:.15s;
+}
+.mat-tile:hover{border-color:var(--brand); transform:translateY(-2px);}
+.mat-tile .mat-no{font-size:13px;}
+.mat-tile .sig{align-self:flex-start; font-size:10.5px; padding:1px 8px;}
+.mat-tile b{font-size:16.5px; letter-spacing:-.02em;}
+.mat-tile small{color:var(--muted); font-size:13.5px; line-height:1.55;}

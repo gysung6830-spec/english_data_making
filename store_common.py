@@ -118,6 +118,43 @@ def load_catalog() -> dict:
     return catalog
 
 
+MATERIALS_FALLBACK = {"intro": {}, "groups": [], "materials": []}
+
+
+def load_materials() -> dict:
+    """자료 라인업(지문자료 · 지문분석지 · 워크북 …)."""
+    data = load_json("materials.json", MATERIALS_FALLBACK)
+    for key in ("groups", "materials"):
+        data.setdefault(key, [])
+    data.setdefault("intro", {})
+    return data
+
+
+def save_materials(data: dict) -> None:
+    save_json("materials.json", data)
+
+
+def material_map() -> dict:
+    """상품에 붙은 자료 id 를 이름으로 바꿀 때 씁니다."""
+    return {m["id"]: m for m in load_materials()["materials"] if m.get("active", True)}
+
+
+def grouped_materials() -> list[dict]:
+    """그룹마다 그 그룹의 자료를 담아 돌려줍니다. 라인업 페이지가 이 모양으로 그립니다."""
+    data = load_materials()
+    items = [m for m in data["materials"] if m.get("active", True)]
+    out = []
+    for group in data["groups"]:
+        picked = [m for m in items if m.get("group") == group.get("id")]
+        if picked:
+            out.append({**group, "items": picked})
+    orphan = [m for m in items if m.get("group") not in {g.get("id") for g in data["groups"]}]
+    if orphan:
+        out.append({"id": "", "range": "", "name": "그 밖의 자료",
+                    "headline": "", "lead": "", "items": orphan})
+    return out
+
+
 def load_notices() -> dict:
     """공지 · 자료 업데이트 일정. 고정 공지가 맨 앞, 그다음 최신순."""
     data = load_json("notices.json", NOTICE_FALLBACK)

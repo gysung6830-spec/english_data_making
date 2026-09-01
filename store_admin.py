@@ -33,7 +33,7 @@ admin_bp = Blueprint("admin", __name__, url_prefix="/admin")
 # 관리자 페이지 비밀번호 (환경변수). 없으면 관리자 페이지가 통째로 잠깁니다.
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 
-MANAGED_FILES = ["site.json", "products.json", "notices.json"]
+MANAGED_FILES = ["site.json", "products.json", "notices.json", "materials.json"]
 
 
 # ---------------------------------------------------------------------------
@@ -101,6 +101,7 @@ def dashboard():
         "상품": len([p for p in catalog["products"] if p.get("active", True)]),
         "교재": len([b for b in catalog["books"] if b.get("active", True)]),
         "공지": len(sc.load_notices()["notices"]),
+        "자료": len(sc.material_map()),
         "쿠폰": one("SELECT COUNT(*) FROM coupons WHERE used_at IS NULL"),
     }
     recent = db.execute("SELECT * FROM orders ORDER BY id DESC LIMIT 6").fetchall()
@@ -348,6 +349,9 @@ def product_from_form(form, existing: dict | None = None) -> tuple[dict, list[st
     item["sort"] = sc.to_int(form.get("sort"), 100)
     item["active"] = bool(form.get("active"))
     item["description"] = sc.clean(form.get("description"), 2000)
+    # 라인업 8종 중 이 상품에 들어가는 자료 (체크박스)
+    known = set(sc.material_map())
+    item["materials"] = [m for m in form.getlist("materials") if m in known]
     item["includes"] = parse_lines(form.get("includes"))
     item["highlights"] = parse_lines(form.get("highlights"))
     item["delivery"] = sc.clean(form.get("delivery"), 200)
@@ -376,12 +380,13 @@ def product_form(slug=None):
         abort(404)
 
     if request.method == "GET":
-        blank = {"active": True, "sort": 100,
-                 "includes": ["지문 분석지 (6개 섹션)", "핵심 어휘 리스트", "영단어 시험지 (정답 포함)"],
+        blank = {"active": True, "sort": 100, "includes": [],
+                 "materials": ["passage", "analysis"],
                  "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
                  "format": "PDF (A4, 인쇄용)"}
         return render_template("admin/product_form.html", p=existing or blank,
-                               catalog=catalog, errors=[], is_new=existing is None)
+                               catalog=catalog, errors=[], is_new=existing is None,
+                               all_materials=list(sc.material_map().values()))
 
     item, errors = product_from_form(request.form, existing)
     clash = [p for p in catalog["products"]
@@ -390,7 +395,8 @@ def product_form(slug=None):
         errors.append(f"주소 이름 '{item['slug']}' 은 이미 다른 상품이 쓰고 있습니다.")
     if errors:
         return render_template("admin/product_form.html", p=item, catalog=catalog,
-                               errors=errors, is_new=existing is None), 400
+                               errors=errors, is_new=existing is None,
+                               all_materials=list(sc.material_map().values())), 400
 
     if existing is None:
         catalog["products"].append(item)
@@ -539,6 +545,89 @@ def category_save():
             flash("분류를 지웠습니다.", "ok")
 
     return redirect(url_for("admin.books"))
+
+
+# ---------------------------------------------------------------------------
+# 자료 라인업
+# ---------------------------------------------------------------------------
+def parse_pairs(titles, bodies) -> list[dict]:
+    """'제목 / 설명' 두 줄짜리 항목들을 모읍니다. 제목이 비면 그 줄은 버립니다."""
+    out = []
+    for title, body in zip(titles, bodies):
+        title = sc.clean(title, 120)
+        if title:
+            out.append({"title": title, "body": sc.clean(body, 1200)})
+    return out
+
+
+@admin_bp.route("/materials")
+def materials():
+    data = sc.load_materials()
+    used = {}
+    for product in sc.load_raw_catalog()["products"]:
+        for mid in product.get("materials", []):
+            used[mid] = used.get(mid, 0) + 1
+    return render_template("admin/materials.html", data=data, used=used)
+
+
+@admin_bp.route("/materials/intro", methods=["POST"])
+def materials_intro():
+    data = sc.load_materials()
+    f = request.form
+    data["intro"] = {
+        "eyebrow": sc.clean(f.get("eyebrow"), 40),
+        "headline": sc.clean(f.get("headline"), 200),
+        "lead": sc.clean(f.get("lead"), 600),
+        "signature_note": sc.clean(f.get("signature_note"), 200),
+    }
+    groups = []
+    for gid, rng, name, headline, lead in zip(
+            f.getlist("group_id"), f.getlist("group_range"), f.getlist("group_name"),
+            f.getlist("group_headline"), f.getlist("group_lead")):
+        gid = sc.clean(gid, 40)
+        if gid:
+            groups.append({"id": gid, "range": sc.clean(rng, 20), "name": sc.clean(name, 40),
+                           "headline": sc.clean(headline, 150), "lead": sc.clean(lead, 600)})
+    if groups:
+        data["groups"] = groups
+    sc.save_materials(data)
+    flash("라인업 소개와 묶음을 저장했습니다.", "ok")
+    return redirect(url_for("admin.materials"))
+
+
+@admin_bp.route("/materials/<mid>", methods=["GET", "POST"])
+def material_form(mid):
+    data = sc.load_materials()
+    item = next((m for m in data["materials"] if m.get("id") == mid), None)
+    if item is None:
+        abort(404)
+
+    if request.method == "GET":
+        return render_template("admin/material_form.html", m=item, groups=data["groups"])
+
+    f = request.form
+    item["no"] = sc.clean(f.get("no"), 6)
+    item["name"] = sc.clean(f.get("name"), 60) or item["name"]
+    item["en"] = sc.clean(f.get("en"), 60)
+    item["group"] = sc.clean(f.get("group"), 40)
+    item["tagline"] = sc.clean(f.get("tagline"), 200)
+    item["subline"] = sc.clean(f.get("subline"), 600)
+    item["sheet_note"] = sc.clean(f.get("sheet_note"), 800)
+    item["features_headline"] = sc.clean(f.get("features_headline"), 120)
+    item["image"] = sc.clean(f.get("image"), 120)
+    item["signature"] = bool(f.get("signature"))
+    item["made_to_order"] = bool(f.get("made_to_order"))
+    item["active"] = bool(f.get("active"))
+    item["variants"] = [{"name": v["title"], "desc": v["body"]}
+                        for v in parse_pairs(f.getlist("variant_name"),
+                                             f.getlist("variant_desc"))]
+    item["features"] = parse_pairs(f.getlist("feature_title"), f.getlist("feature_body"))
+    item["for_whom"] = parse_lines(f.get("for_whom"))
+
+    data["materials"] = [item if m.get("id") == mid else m for m in data["materials"]]
+    sc.save_materials(data)
+    flash(f"'{item['name']}' 을(를) 저장했습니다. 라인업 페이지에 바로 반영됐습니다.", "ok")
+    return redirect(url_for("admin.materials"))
 
 
 # ---------------------------------------------------------------------------

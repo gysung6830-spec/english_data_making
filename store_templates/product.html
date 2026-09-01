@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import product_card %}
+{% from "_macros.html" import product_card with context %}
 {% block title %}{{ p.name }} · {{ site.brand }}{% endblock %}
 {% block desc %}{{ p.description }}{% endblock %}
 
@@ -26,10 +26,29 @@
         </ul>
       {% endif %}
 
-      <h3 style="font-size:18px;margin:28px 0 12px;">구성</h3>
-      <ul class="checklist">
-        {% for inc in p.includes %}<li>{{ inc }}</li>{% endfor %}
-      </ul>
+      <h3 style="font-size:18px;margin:28px 0 12px;">이 세트에 들어가는 자료</h3>
+      {% if p.materials %}
+        <ul class="checklist">
+          {% for mid in p.materials %}
+            {% set m = material_map.get(mid) %}
+            {% if m %}
+              <li>
+                <b>{{ m.no }} {{ m.name }}</b>
+                {% if m.signature %}<span class="sig">SIGNATURE</span>{% endif %}
+                {% if m.made_to_order %}<span class="mto">주문제작</span>{% endif %}
+                {% if m.tagline %}<br><span class="muted" style="font-size:14.5px;">{{ m.tagline }}</span>{% endif %}
+                <br><a href="{{ url_for('lineup') }}#{{ m.id }}" style="font-size:13.5px;">
+                  <b>이 자료가 어떻게 생겼는지 보기 ›</b></a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+      {% if p.includes %}
+        <ul class="checklist">
+          {% for inc in p.includes %}<li>{{ inc }}</li>{% endfor %}
+        </ul>
+      {% endif %}
 
       <table class="spec">
         {% if p.grade %}<tr><th>대상</th><td>{{ p.grade }}</td></tr>{% endif %}

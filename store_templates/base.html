@@ -17,6 +17,7 @@
   <div class="wrap">
     <a class="logo" href="{{ url_for('home') }}">🌿 Ortica<span>영어</span></a>
     <nav class="nav">
+      <a href="{{ url_for('lineup') }}" class="{{ 'on' if request.endpoint == 'lineup' }}">자료 라인업</a>
       <a href="{{ url_for('products') }}" class="{{ 'on' if request.endpoint in ['products','product_detail'] }}">자료 목록</a>
       <a href="{{ url_for('samples') }}" class="{{ 'on' if request.endpoint == 'samples' }}">무료 샘플</a>
       {% if passcfg.enabled %}
@@ -57,6 +58,7 @@
       </div>
       <div>
         <h4>바로가기</h4>
+        <div><a href="{{ url_for('lineup') }}">자료 라인업</a></div>
         <div><a href="{{ url_for('products') }}">자료 목록</a></div>
         <div><a href="{{ url_for('samples') }}">무료 샘플</a></div>
         <div><a href="{{ url_for('notice') }}">공지사항 · 업데이트 일정</a></div>

@@ -126,18 +126,14 @@
       "category": "textbook",
       "book": "neungyule-kim",
       "name": "능률(김성곤) 고1 영어 · 3과 전지문 세트",
-      "subtitle": "지문 8개 · 3종 자료 24개 파일",
+      "subtitle": "지문 8개 · 자료 4종",
       "price": 18000,
       "list_price": 24000,
       "passages": 8,
       "grade": "고1",
       "sort": 5,
       "active": true,
-      "includes": [
-        "지문 분석지 (6개 섹션)",
-        "핵심 어휘 리스트",
-        "영단어 시험지 (정답 포함)"
-      ],
+      "includes": [],
       "description": "3과 본문 전 지문을 하나도 빼지 않고 분석했습니다. 내신 대비 수업 한 단원을 그대로 진행할 수 있는 분량입니다.",
       "highlights": [
         "전체 요약 + 문단별 요약으로 흐름부터 잡습니다",
@@ -146,7 +142,13 @@
       ],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_textbook.pdf"
+      "sample_file": "sample_textbook.pdf",
+      "materials": [
+        "passage",
+        "analysis",
+        "workbook",
+        "variants"
+      ]
     },
     {
       "slug": "neungyule-kim-full",
@@ -161,11 +163,7 @@
       "sort": 6,
       "active": true,
       "badge": "가장 많이 삼",
-      "includes": [
-        "지문 분석지 (6개 섹션)",
-        "핵심 어휘 리스트",
-        "영단어 시험지 (정답 포함)"
-      ],
+      "includes": [],
       "description": "한 학기 내신 수업을 한 번에 준비하는 패키지입니다. 단원별로 폴더가 나뉘어 있어 진도에 맞춰 바로 꺼내 쓸 수 있습니다.",
       "highlights": [
         "단원별 낱개로 사는 것보다 38% 저렴합니다",
@@ -173,32 +171,41 @@
       ],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_textbook.pdf"
+      "sample_file": "sample_textbook.pdf",
+      "materials": [
+        "passage",
+        "analysis",
+        "workbook",
+        "descriptive",
+        "variants"
+      ]
     },
     {
       "slug": "ybm-han-lesson1",
       "category": "textbook",
       "book": "ybm-han",
       "name": "YBM(한상호) 고1 영어 · 1과 전지문 세트",
-      "subtitle": "지문 7개 · 3종 자료 21개 파일",
+      "subtitle": "지문 7개 · 자료 4종",
       "price": 16000,
       "list_price": 21000,
       "passages": 7,
       "grade": "고1",
       "sort": 7,
       "active": true,
-      "includes": [
-        "지문 분석지 (6개 섹션)",
-        "핵심 어휘 리스트",
-        "영단어 시험지 (정답 포함)"
-      ],
+      "includes": [],
       "description": "YBM 한상호 공통영어 1의 1과 본문 전 지문 분석 세트입니다.",
       "highlights": [
         "교과서 본문 순서 그대로 정렬되어 진도에 맞춰 쓰기 편합니다"
       ],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_textbook.pdf"
+      "sample_file": "sample_textbook.pdf",
+      "materials": [
+        "passage",
+        "analysis",
+        "workbook",
+        "variants"
+      ]
     },
     {
       "slug": "mock-2026-06-g3-full",
@@ -213,11 +220,7 @@
       "badge": "인기",
       "sort": 10,
       "active": true,
-      "includes": [
-        "지문 분석지 (6개 섹션)",
-        "핵심 어휘 리스트",
-        "영단어 시험지 (정답 포함)"
-      ],
+      "includes": [],
       "description": "모의고사 원본에서 듣기 영역을 제외하고 18번부터 45번까지 전 지문을 분석했습니다. 문항 번호가 그대로 표시되어 해설 수업에 바로 쓰기 좋습니다.",
       "highlights": [
         "자료마다 실제 문항 번호가 붙어 있어 찾기 쉽습니다",
@@ -226,7 +229,14 @@
       ],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_mock.pdf"
+      "sample_file": "sample_mock.pdf",
+      "materials": [
+        "passage",
+        "analysis",
+        "workbook",
+        "descriptive",
+        "variants"
+      ]
     },
     {
       "slug": "mock-2026-06-g3-starter",
@@ -240,11 +250,7 @@
       "grade": "고3",
       "sort": 20,
       "active": true,
-      "includes": [
-        "지문 분석지 (6개 섹션)",
-        "핵심 어휘 리스트",
-        "영단어 시험지 (정답 포함)"
-      ],
+      "includes": [],
       "description": "학생들이 가장 많이 틀리는 고난도 유형만 뽑았습니다. 전 지문이 부담스러우실 때 이 세트부터 써 보세요.",
       "highlights": [
         "빈칸·순서·문장삽입 지문만 모았습니다",
@@ -252,7 +258,13 @@
       ],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_mock.pdf"
+      "sample_file": "sample_mock.pdf",
+      "materials": [
+        "passage",
+        "analysis",
+        "workbook",
+        "variants"
+      ]
     },
     {
       "slug": "mock-2026-03-g2-full",
@@ -266,11 +278,7 @@
       "grade": "고2",
       "sort": 30,
       "active": true,
-      "includes": [
-        "지문 분석지 (6개 섹션)",
-        "핵심 어휘 리스트",
-        "영단어 시험지 (정답 포함)"
-      ],
+      "includes": [],
       "description": "고2 3월 학력평가 전 지문 세트입니다. 학기 초 수준 점검과 오답 해설 수업에 그대로 쓰실 수 있습니다.",
       "highlights": [
         "문항 번호 그대로 표시",
@@ -278,7 +286,13 @@
       ],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_mock.pdf"
+      "sample_file": "sample_mock.pdf",
+      "materials": [
+        "passage",
+        "analysis",
+        "workbook",
+        "variants"
+      ]
     },
     {
       "slug": "mock-taste",
@@ -290,18 +304,18 @@
       "grade": "고2~고3",
       "sort": 40,
       "active": true,
-      "includes": [
-        "지문 분석지 (6개 섹션)",
-        "핵심 어휘 리스트",
-        "영단어 시험지 (정답 포함)"
-      ],
+      "includes": [],
       "description": "처음 구매하시는 분을 위한 최소 단위 세트입니다. 원하시는 회차를 요청사항에 적어 주시면 맞춰 보내 드립니다.",
       "highlights": [
         "원하는 회차·문항 번호를 지정할 수 있습니다"
       ],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_mock.pdf"
+      "sample_file": "sample_mock.pdf",
+      "materials": [
+        "passage",
+        "analysis"
+      ]
     },
     {
       "slug": "ebs-tokgang-eng-part1",
@@ -316,11 +330,7 @@
       "badge": "신규",
       "sort": 50,
       "active": true,
-      "includes": [
-        "지문 분석지 (6개 섹션)",
-        "핵심 어휘 리스트",
-        "영단어 시험지 (정답 포함)"
-      ],
+      "includes": [],
       "description": "수능특강 영어 1~5강 전 지문 세트입니다. 강별 폴더로 나뉘어 있어 진도에 맞춰 꺼내 쓰실 수 있습니다.",
       "highlights": [
         "강별 폴더 + 전체 어휘 통합본 포함",
@@ -328,7 +338,14 @@
       ],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_ebs.pdf"
+      "sample_file": "sample_ebs.pdf",
+      "materials": [
+        "passage",
+        "analysis",
+        "workbook",
+        "descriptive",
+        "variants"
+      ]
     },
     {
       "slug": "ebs-tokgang-dokhae-part1",
@@ -342,18 +359,20 @@
       "grade": "고3",
       "sort": 60,
       "active": true,
-      "includes": [
-        "지문 분석지 (6개 섹션)",
-        "핵심 어휘 리스트",
-        "영단어 시험지 (정답 포함)"
-      ],
+      "includes": [],
       "description": "EBS 연계 대비 수업용입니다. 지문 구조 분석에서 논설문·문학 유형을 자동으로 나눠 각각 다른 틀로 정리했습니다.",
       "highlights": [
         "논설문은 Logic Flow, 문학은 Emotional Flow 로 구조를 정리합니다"
       ],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_ebs.pdf"
+      "sample_file": "sample_ebs.pdf",
+      "materials": [
+        "passage",
+        "analysis",
+        "workbook",
+        "variants"
+      ]
     },
     {
       "slug": "ebs-wansung-round1",
@@ -367,11 +386,7 @@
       "grade": "고3",
       "sort": 70,
       "active": true,
-      "includes": [
-        "지문 분석지 (6개 섹션)",
-        "핵심 어휘 리스트",
-        "영단어 시험지 (정답 포함)"
-      ],
+      "includes": [],
       "description": "파이널 수업용 실전 회차 묶음입니다. 회차별로 폴더가 나뉘어 있습니다.",
       "highlights": [
         "회차 낱개로 사는 것보다 32% 저렴합니다",
@@ -379,7 +394,14 @@
       ],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_ebs.pdf"
+      "sample_file": "sample_ebs.pdf",
+      "materials": [
+        "passage",
+        "analysis",
+        "workbook",
+        "descriptive",
+        "variants"
+      ]
     },
     {
       "slug": "highlighter-basic-full",
@@ -394,12 +416,7 @@
       "badge": "자체 교재",
       "sort": 80,
       "active": true,
-      "includes": [
-        "형광펜 표시 지문",
-        "지문 분석지 (6개 섹션)",
-        "핵심 어휘 리스트",
-        "영단어 시험지 (정답 포함)"
-      ],
+      "includes": [],
       "description": "지문에서 반드시 짚어야 할 자리를 형광펜으로 표시해 둔 오르티카 자체 교재입니다. 처음 구문을 잡는 학생이 무엇을 봐야 하는지 눈으로 익히게 만듭니다.",
       "highlights": [
         "형광펜 표시본과 무표시본이 함께 들어 있어 수업·복습에 나눠 쓸 수 있습니다",
@@ -408,7 +425,13 @@
       ],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_highlighter.pdf"
+      "sample_file": "sample_highlighter.pdf",
+      "materials": [
+        "passage",
+        "analysis",
+        "workbook",
+        "variants"
+      ]
     },
     {
       "slug": "highlighter-master-full",
@@ -422,12 +445,7 @@
       "grade": "고2~고3",
       "sort": 90,
       "active": true,
-      "includes": [
-        "형광펜 표시 지문",
-        "지문 분석지 (6개 섹션)",
-        "핵심 어휘 리스트",
-        "영단어 시험지 (정답 포함)"
-      ],
+      "includes": [],
       "description": "BASIC 다음 단계입니다. 수능 수준 지문에서 논리 흐름과 함정을 표시하며 읽는 훈련을 합니다.",
       "highlights": [
         "빈칸·순서·삽입 유형에서 근거가 되는 자리를 표시합니다",
@@ -435,7 +453,13 @@
       ],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_highlighter.pdf"
+      "sample_file": "sample_highlighter.pdf",
+      "materials": [
+        "passage",
+        "analysis",
+        "workbook",
+        "variants"
+      ]
     }
   ]
 }

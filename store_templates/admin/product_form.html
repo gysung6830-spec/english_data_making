@@ -110,10 +110,25 @@
       <textarea id="description" name="description"
                 placeholder="상세 페이지 첫 문단에 나옵니다.">{{ p.description or '' }}</textarea>
     </div>
+    <div class="adm-field full">
+      <label>이 세트에 들어가는 자료 <span class="tip" style="display:inline;">라인업 8종에서 고르세요</span></label>
+      <div class="check-grid" style="gap:10px 18px;">
+        {% for m in all_materials %}
+          <label class="check">
+            <input type="checkbox" name="materials" value="{{ m.id }}"
+                   {{ 'checked' if m.id in (p.materials or []) }}>
+            <span>{{ m.no }} {{ m.name }}{% if m.signature %} ★{% endif %}</span>
+          </label>
+        {% endfor %}
+      </div>
+      <div class="tip">고른 자료가 상품 카드와 상세 페이지에 배지로 붙고, 라인업 설명으로 연결됩니다.
+        자료 목록을 바꾸려면 <a href="{{ url_for('admin.materials') }}">자료 라인업</a>에서 고치세요.</div>
+    </div>
+
     <div class="adm-field">
-      <label for="includes">구성 <span class="tip" style="display:inline;">한 줄에 하나씩</span></label>
+      <label for="includes">그 밖의 구성 <span class="tip" style="display:inline;">한 줄에 하나씩 · 선택</span></label>
       <textarea id="includes" name="includes">{{ (p.includes or []) | join('\n') }}</textarea>
-      <div class="tip">체크(✓) 표시가 붙어 나옵니다.</div>
+      <div class="tip">위 8종 말고 따로 적을 게 있을 때만 쓰세요. 체크(✓) 표시가 붙습니다.</div>
     </div>
     <div class="adm-field">
       <label for="highlights">이런 점이 좋습니다 <span class="tip" style="display:inline;">한 줄에 하나씩</span></label>

@@ -6,9 +6,20 @@
   <div class="chips">
     {% if p.grade %}<span class="chip">{{ p.grade }}</span>{% endif %}
     {% if p.passages %}<span class="chip">지문 {{ p.passages }}개</span>{% endif %}
-    <span class="chip">자료 3종</span>
+    {% if p.materials %}<span class="chip">자료 {{ p.materials|length }}종</span>{% endif %}
     <span class="chip">PDF</span>
   </div>
+  {% if p.materials %}
+    <div class="mat-chips">
+      {% for mid in p.materials %}
+        {% set m = material_map.get(mid) %}
+        {% if m %}
+          <span class="mat-chip {{ 'sig-chip' if m.signature }}">
+            <span class="n">{{ m.no }}</span>{{ m.name }}</span>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
   <div class="price-row">
     <span class="price">{{ p.price|won }}</span>
     {% if p.list_price and p.list_price > p.price %}

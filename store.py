@@ -54,6 +54,7 @@ def inject_globals():
         # 'pass' 는 파이썬 예약어라 템플릿에서 site.pass 로 못 씁니다. 따로 넘깁니다.
         "passcfg": site.get("pass", {}),
         "order_kinds": sc.ORDER_KIND_LABELS,
+        "material_map": sc.material_map(),
     }
 
 
@@ -92,8 +93,12 @@ def home():
             continue
         per_category[key] = per_category.get(key, 0) + 1
         picked.append(book)
+    groups = sc.grouped_materials()
+    all_materials = [m for g in groups for m in g["items"]]
     return render_template("home.html", featured=featured, product_count=len(products),
                            books=picked[:8],
+                           lineup_groups=groups, lineup_all=all_materials,
+                           material_total=len(all_materials),
                            latest_notice=notices[0] if notices else None)
 
 
@@ -155,6 +160,14 @@ def book_detail(slug):
     others = [b for b in sc.books_with_counts(catalog, book.get("category", ""))
               if b["slug"] != slug][:3]
     return render_template("book.html", book=book, items=items, others=others)
+
+
+@app.route("/lineup")
+def lineup():
+    """자료 라인업 — 우리가 만드는 자료 8종을 한 장에 보여 주는 페이지."""
+    data = sc.load_materials()
+    return render_template("lineup.html", intro=data.get("intro", {}),
+                           groups=sc.grouped_materials())
 
 
 @app.route("/notice")

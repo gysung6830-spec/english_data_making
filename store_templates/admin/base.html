@@ -34,6 +34,8 @@
         📦 상품</a>
       <a href="{{ url_for('admin.books') }}" class="{{ 'on' if request.endpoint in ['admin.books','admin.book_form'] }}">
         📚 교재 · 분류</a>
+      <a href="{{ url_for('admin.materials') }}" class="{{ 'on' if request.endpoint in ['admin.materials','admin.material_form'] }}">
+        🧩 자료 라인업</a>
       <a href="{{ url_for('admin.notices') }}" class="{{ 'on' if request.endpoint == 'admin.notices' }}">
         📢 공지</a>
 

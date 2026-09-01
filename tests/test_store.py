@@ -58,8 +58,9 @@ def body(resp) -> str:
 def test_public_pages_open():
     c = client()
     for path, must in [
-        ("/", "지문 분석지"),
+        ("/", "지문분석지"),
         ("/products", "자료 목록"),
+        ("/lineup", "자료 라인업"),
         ("/samples", "무료 샘플"),
         ("/custom", "교재 요청"),
         ("/submit", "시험지"),
@@ -80,6 +81,41 @@ def test_categories_include_textbook():
     for name in ("교과서", "모의고사", "EBS 부교재", "형광펜 독해"):
         assert name in text, name
     print("PASS  분류 4종(교과서 포함) 노출")
+
+
+def test_lineup_shows_all_materials():
+    """보내 주신 라인업 8종이 그룹별로 다 나와야 합니다."""
+    text = body(client().get("/lineup"))
+    for name in ("지문자료", "지문분석지", "통합 영어 워크북", "서술형 대비 교재",
+                 "17종 변형문제", "동형모의고사 2회"):
+        assert name in text, name
+    assert "지문 이해" in text and "시험 대비" in text          # 묶음 이름
+    assert "SIGNATURE" in text and "주문제작자료" in text        # 표시
+    assert "읽고 · 뜯어보고" in text                             # 머리말
+    # 지문자료의 세 판형
+    for v in ("원문만", "위아래 해석", "좌우 해석"):
+        assert v in text, v
+    print("PASS  자료 라인업 8종 · 묶음 · 표시 노출")
+
+
+def test_home_reflects_lineup():
+    text = body(client().get("/"))
+    assert "읽고 · 뜯어보고" in text
+    assert "17종 변형문제" in text and "/lineup#variants" in text
+    assert "3종 세트" not in text     # 옛 문구가 남아 있으면 안 됩니다
+    print("PASS  홈이 라인업을 반영")
+
+
+def test_product_shows_its_materials():
+    text = body(client().get("/products/mock-2026-06-g3-full"))
+    assert "이 세트에 들어가는 자료" in text
+    for name in ("지문자료", "지문분석지", "통합 영어 워크북", "17종 변형문제"):
+        assert name in text, name
+    assert "/lineup#variants" in text        # 라인업 설명으로 이어지는 링크
+    assert "서술형 대비 교재" in text
+    # 고르지 않은 자료는 나오지 않습니다
+    assert "동형모의고사" not in text
+    print("PASS  상품 상세에 포함 자료와 라인업 링크")
 
 
 def test_book_page_lists_only_its_products():
@@ -233,6 +269,8 @@ def test_admin_pages_open():
         ("/admin/coupons", "할인 쿠폰"),
         ("/admin/products", "새 상품 만들기"),
         ("/admin/books", "교재 · 분류"),
+        ("/admin/materials", "자료 라인업"),
+        ("/admin/materials/analysis", "특징 묶음 제목"),
         ("/admin/notices", "새 공지 쓰기"),
         ("/admin/settings", "입금 계좌"),
         ("/admin/backup", "백업 내려받기"),
@@ -267,6 +305,38 @@ def test_admin_creates_product_visible_on_site():
     assert a.post("/admin/products/test-new-set/delete").status_code == 302
     assert "test-new-set" not in body(a.get("/admin/products"))
     print("PASS  상품 만들기 → 사이트 반영 → 숨김 → 삭제")
+
+
+def test_admin_edits_material_and_site_reflects():
+    a = admin()
+    resp = a.post("/admin/materials/passage", data={
+        "no": "01", "name": "지문자료", "en": "Passage", "group": "understand",
+        "tagline": "테스트로 바꾼 한 줄 소개", "active": "1",
+        "variant_name": ["원문만", ""], "variant_desc": ["설명", ""],
+        "feature_title": ["새 특징"], "feature_body": ["새 특징 설명"],
+        "for_whom": "테스트 대상자"})
+    assert resp.status_code == 302
+    text = body(client().get("/lineup"))
+    assert "테스트로 바꾼 한 줄 소개" in text and "새 특징" in text
+    print("PASS  자료 라인업 수정 → 고객 화면 반영")
+
+
+def test_admin_product_materials_saved():
+    a = admin()
+    assert a.post("/admin/products/new", data={
+        "slug": "test-mat-set", "name": "자료 선택 테스트", "category": "mock",
+        "price": "10000", "sort": "1", "active": "1",
+        "materials": ["analysis", "mocktest", "없는자료"],   # 없는 것은 걸러져야 합니다
+        "format": "PDF", "delivery": "24시간"}).status_code == 302
+
+    saved = next(x for x in sc.load_raw_catalog()["products"] if x["slug"] == "test-mat-set")
+    assert saved["materials"] == ["analysis", "mocktest"]
+
+    detail = body(client().get("/products/test-mat-set"))
+    assert "지문분석지" in detail and "동형모의고사 2회" in detail
+    assert "주문제작" in detail                    # 08 의 표시가 따라옵니다
+    a.post("/admin/products/test-mat-set/delete")
+    print("PASS  상품의 포함 자료 저장 · 없는 자료 걸러냄")
 
 
 def test_admin_rejects_duplicate_slug():
@@ -383,6 +453,9 @@ def test_file_path_traversal_blocked():
 def run_all():
     test_public_pages_open()
     test_categories_include_textbook()
+    test_lineup_shows_all_materials()
+    test_home_reflects_lineup()
+    test_product_shows_its_materials()
     test_book_page_lists_only_its_products()
     test_home_shows_every_category()
     test_pass_twelve_month_price()
@@ -397,6 +470,8 @@ def run_all():
     test_admin_requires_login()
     test_admin_pages_open()
     test_admin_creates_product_visible_on_site()
+    test_admin_edits_material_and_site_reflects()
+    test_admin_product_materials_saved()
     test_admin_rejects_duplicate_slug()
     test_admin_book_and_category_flow()
     test_admin_notice_appears_on_home()
