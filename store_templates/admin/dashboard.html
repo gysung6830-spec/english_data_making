@@ -7,15 +7,50 @@
   <p>숫자를 누르면 바로 그 목록으로 갑니다. 숫자가 0이면 지금 할 일이 없다는 뜻입니다.</p>
 </div>
 
-{% if warnings %}
-  <div class="panel">
-    <h2>⚠️ 문 열기 전에 채워야 할 것</h2>
-    <div class="hint">아래 항목이 남아 있으면 손님이 주문해도 돈을 못 받거나 신뢰를 잃습니다.</div>
-    <ul class="warn-list">
-      {% for w in warnings %}
-        <li><span>{{ w.text }}</span><a href="{{ w.url }}">{{ w.label }} →</a></li>
+{% if done_count < steps|length %}
+  <div class="panel setup">
+    <div class="setup-head">
+      <div>
+        <h2>문 열기까지 {{ steps|length - done_count }}단계 남았습니다</h2>
+        <div class="hint">위에서부터 하나씩 하시면 됩니다. 다 끝나면 이 상자는 사라집니다.</div>
+      </div>
+      <div class="setup-count">{{ done_count }} <span>/ {{ steps|length }}</span></div>
+    </div>
+    <div class="setup-bar"><i style="width:{{ (done_count / steps|length * 100)|round|int }}%"></i></div>
+
+    <ol class="setup-list">
+      {% for s in steps %}
+        <li class="{{ 'ok' if s.done }}">
+          <span class="setup-no">{{ '✓' if s.done else loop.index }}</span>
+          <div class="setup-body">
+            <b>{{ s.title }}</b>
+            <small>{{ s.why }}</small>
+          </div>
+          {% if not s.done %}
+            <a class="btn btn-primary btn-sm" href="{{ s.url }}">{{ s.label }} →</a>
+          {% else %}
+            <span class="setup-done">끝났습니다</span>
+          {% endif %}
+        </li>
       {% endfor %}
-    </ul>
+    </ol>
+  </div>
+{% endif %}
+
+{% if sample_count %}
+  <div class="panel" style="border:1px solid #f0d4c4; background:#fff8f4;">
+    <h2>⚠️ 지금 사이트에 보이는 상품은 예시입니다</h2>
+    <div class="hint">
+      제가 구조를 보여 드리려고 만들어 둔 <b>가짜 상품 {{ sample_count }}개</b>가 손님 화면에 그대로 보입니다.
+      실제 자료로 바꾸시거나, 아래 버튼으로 한 번에 지우고 새로 만드세요.
+    </div>
+    <div class="inline-form">
+      <a class="btn btn-primary btn-sm" href="{{ url_for('admin.products') }}">상품 화면에서 고치기</a>
+      <form method="post" action="{{ url_for('admin.clear_samples') }}"
+            onsubmit="return confirm('예시 상품과 예시 교재를 모두 지웁니다. 직접 만드신 것은 남습니다. 진행할까요?');">
+        <button class="btn btn-ghost btn-sm danger" type="submit">예시 {{ sample_count }}개 한 번에 지우기</button>
+      </form>
+    </div>
   </div>
 {% endif %}
 
@@ -41,7 +76,8 @@
   <div class="mini-grid">
     <div class="mini"><b>{{ money.대기|won }}</b><small>아직 안 들어온 돈</small></div>
     <div class="mini"><b>{{ money.확인|won }}</b><small>지금까지 받은 돈</small></div>
-    <div class="mini"><b>{{ counts.상품 }}개</b><small>판매 중인 상품</small></div>
+    <div class="mini"><b>{{ counts.상품 }}개</b>
+      <small>판매 중인 상품{% if sample_count %} <span style="color:#c2410c;">(예시 {{ sample_count }})</span>{% endif %}</small></div>
     <div class="mini"><b>{{ counts.쿠폰 }}장</b><small>아직 안 쓴 쿠폰</small></div>
   </div>
 </div>
@@ -49,12 +85,14 @@
 <div class="panel">
   <h2>처리 순서가 헷갈리실 때</h2>
   <div class="steps-help" style="margin-bottom:0;">
-    <b>자료 주문이 들어오면</b>
+    <b>자료 주문이 들어오면 — 두 번이면 끝납니다</b>
     <ol>
-      <li>통장에서 입금을 확인합니다 → 주문 상태를 <b>입금확인</b> 으로 바꿉니다.</li>
-      <li>손님 이메일로 자료 PDF를 보냅니다.</li>
-      <li>주문 상태를 <b>발송완료</b> 로 바꿉니다. 끝입니다.</li>
+      <li>통장에서 <b>입금을 확인</b>합니다.</li>
+      <li>주문 목록에서 <b>📤 자료 보내기</b> 를 누릅니다.
+        → 손님 메일로 다운로드 링크가 자동으로 가고, 주문은 발송완료가 됩니다.</li>
     </ol>
+    <div style="margin-top:8px;">파일을 첨부하실 필요가 없습니다. 미리 <b>상품 &gt; 📁 파일</b>에
+      자료를 올려 두기만 하면 됩니다.</div>
   </div>
 </div>
 

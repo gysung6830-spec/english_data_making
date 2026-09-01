@@ -29,7 +29,8 @@
       "grade": "고1",
       "sort": 5,
       "active": true,
-      "description": "능률 김성곤 공통영어 1 본문 전 지문을 단원별로 분석했습니다. 진도에 맞춰 단원만 골라 쓰셔도 되고, 학기 패키지로 한 번에 받으셔도 됩니다."
+      "description": "능률 김성곤 공통영어 1 본문 전 지문을 단원별로 분석했습니다. 진도에 맞춰 단원만 골라 쓰셔도 되고, 학기 패키지로 한 번에 받으셔도 됩니다.",
+      "sample": true
     },
     {
       "slug": "ybm-han",
@@ -40,7 +41,8 @@
       "grade": "고1",
       "sort": 6,
       "active": true,
-      "description": "YBM 한상호 공통영어 1 본문 지문 분석 세트입니다."
+      "description": "YBM 한상호 공통영어 1 본문 지문 분석 세트입니다.",
+      "sample": true
     },
     {
       "slug": "mock-2026-06-g3",
@@ -51,7 +53,8 @@
       "grade": "고3",
       "sort": 10,
       "active": true,
-      "description": "듣기를 제외한 18~45번 전 지문을 실제 문항 번호 그대로 분석했습니다. 해설 수업에 바로 쓰기 좋습니다."
+      "description": "듣기를 제외한 18~45번 전 지문을 실제 문항 번호 그대로 분석했습니다. 해설 수업에 바로 쓰기 좋습니다.",
+      "sample": true
     },
     {
       "slug": "mock-2026-03-g2",
@@ -62,7 +65,8 @@
       "grade": "고2",
       "sort": 20,
       "active": true,
-      "description": "고2 3월 학평 전 지문 세트입니다. 학기 초 수준 점검 수업에 맞춰 구성했습니다."
+      "description": "고2 3월 학평 전 지문 세트입니다. 학기 초 수준 점검 수업에 맞춰 구성했습니다.",
+      "sample": true
     },
     {
       "slug": "ebs-2026-tokgang-eng",
@@ -73,7 +77,8 @@
       "grade": "고3",
       "sort": 30,
       "active": true,
-      "description": "EBS 연계 대비의 기본 교재입니다. 강별로 나눠 두어 진도에 맞춰 꺼내 쓰기 편합니다."
+      "description": "EBS 연계 대비의 기본 교재입니다. 강별로 나눠 두어 진도에 맞춰 꺼내 쓰기 편합니다.",
+      "sample": true
     },
     {
       "slug": "ebs-2026-tokgang-dokhae",
@@ -84,7 +89,8 @@
       "grade": "고3",
       "sort": 40,
       "active": true,
-      "description": "논설문과 문학 지문을 각각 다른 구조 분석 틀로 정리했습니다."
+      "description": "논설문과 문학 지문을 각각 다른 구조 분석 틀로 정리했습니다.",
+      "sample": true
     },
     {
       "slug": "ebs-2026-wansung",
@@ -95,7 +101,8 @@
       "grade": "고3",
       "sort": 50,
       "active": true,
-      "description": "실전편 지문을 회차 단위로 묶었습니다. 파이널 수업용입니다."
+      "description": "실전편 지문을 회차 단위로 묶었습니다. 파이널 수업용입니다.",
+      "sample": true
     },
     {
       "slug": "highlighter-basic",
@@ -106,7 +113,8 @@
       "grade": "고1~고2",
       "sort": 60,
       "active": true,
-      "description": "지문에서 반드시 짚어야 할 자리를 형광펜으로 표시해 두는 오르티카 자체 교재입니다. 처음 구문을 잡는 학생용입니다."
+      "description": "지문에서 반드시 짚어야 할 자리를 형광펜으로 표시해 두는 오르티카 자체 교재입니다. 처음 구문을 잡는 학생용입니다.",
+      "sample": true
     },
     {
       "slug": "highlighter-master",
@@ -117,7 +125,8 @@
       "grade": "고2~고3",
       "sort": 70,
       "active": true,
-      "description": "BASIC 다음 단계입니다. 수능 수준 지문에서 논리 흐름과 함정을 표시하며 읽는 훈련을 합니다."
+      "description": "BASIC 다음 단계입니다. 수능 수준 지문에서 논리 흐름과 함정을 표시하며 읽는 훈련을 합니다.",
+      "sample": true
     }
   ],
   "products": [
@@ -144,7 +153,8 @@
       "highlights": [],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_analysis.pdf"
+      "sample_file": "sample_analysis.pdf",
+      "sample": true
     },
     {
       "slug": "neungyule-kim-problem",
@@ -169,7 +179,8 @@
       "highlights": [],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_problem.pdf"
+      "sample_file": "sample_problem.pdf",
+      "sample": true
     },
     {
       "slug": "ybm-han-analysis",
@@ -194,7 +205,8 @@
       "highlights": [],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_analysis.pdf"
+      "sample_file": "sample_analysis.pdf",
+      "sample": true
     },
     {
       "slug": "ybm-han-problem",
@@ -219,7 +231,8 @@
       "highlights": [],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_problem.pdf"
+      "sample_file": "sample_problem.pdf",
+      "sample": true
     },
     {
       "slug": "mock-2026-06-g3-analysis",
@@ -245,7 +258,8 @@
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
       "sample_file": "sample_analysis.pdf",
-      "badge": "인기"
+      "badge": "인기",
+      "sample": true
     },
     {
       "slug": "mock-2026-06-g3-problem",
@@ -271,7 +285,8 @@
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
       "sample_file": "sample_problem.pdf",
-      "badge": "신규"
+      "badge": "신규",
+      "sample": true
     },
     {
       "slug": "mock-2026-03-g2-analysis",
@@ -296,7 +311,8 @@
       "highlights": [],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_analysis.pdf"
+      "sample_file": "sample_analysis.pdf",
+      "sample": true
     },
     {
       "slug": "mock-2026-03-g2-problem",
@@ -321,7 +337,8 @@
       "highlights": [],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_problem.pdf"
+      "sample_file": "sample_problem.pdf",
+      "sample": true
     },
     {
       "slug": "ebs-2026-tokgang-eng-analysis",
@@ -346,7 +363,8 @@
       "highlights": [],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_analysis.pdf"
+      "sample_file": "sample_analysis.pdf",
+      "sample": true
     },
     {
       "slug": "ebs-2026-tokgang-eng-problem",
@@ -371,7 +389,8 @@
       "highlights": [],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_problem.pdf"
+      "sample_file": "sample_problem.pdf",
+      "sample": true
     },
     {
       "slug": "ebs-2026-tokgang-dokhae-analysis",
@@ -396,7 +415,8 @@
       "highlights": [],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_analysis.pdf"
+      "sample_file": "sample_analysis.pdf",
+      "sample": true
     },
     {
       "slug": "ebs-2026-tokgang-dokhae-problem",
@@ -421,7 +441,8 @@
       "highlights": [],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_problem.pdf"
+      "sample_file": "sample_problem.pdf",
+      "sample": true
     },
     {
       "slug": "ebs-2026-wansung-analysis",
@@ -446,7 +467,8 @@
       "highlights": [],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_analysis.pdf"
+      "sample_file": "sample_analysis.pdf",
+      "sample": true
     },
     {
       "slug": "ebs-2026-wansung-problem",
@@ -471,7 +493,8 @@
       "highlights": [],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_problem.pdf"
+      "sample_file": "sample_problem.pdf",
+      "sample": true
     },
     {
       "slug": "highlighter-basic-analysis",
@@ -497,7 +520,8 @@
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
       "sample_file": "sample_analysis.pdf",
-      "badge": "자체 교재"
+      "badge": "자체 교재",
+      "sample": true
     },
     {
       "slug": "highlighter-basic-problem",
@@ -523,7 +547,8 @@
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
       "sample_file": "sample_problem.pdf",
-      "badge": "자체 교재"
+      "badge": "자체 교재",
+      "sample": true
     },
     {
       "slug": "highlighter-master-analysis",
@@ -548,7 +573,8 @@
       "highlights": [],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_analysis.pdf"
+      "sample_file": "sample_analysis.pdf",
+      "sample": true
     },
     {
       "slug": "highlighter-master-problem",
@@ -573,7 +599,8 @@
       "highlights": [],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_problem.pdf"
+      "sample_file": "sample_problem.pdf",
+      "sample": true
     },
     {
       "slug": "taste-analysis",
@@ -599,7 +626,8 @@
       ],
       "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
       "format": "PDF (A4, 인쇄용)",
-      "sample_file": "sample_analysis.pdf"
+      "sample_file": "sample_analysis.pdf",
+      "sample": true
     }
   ],
   "_패키지안내": "판매 단위는 교재·회차마다 '지문 분석 패키지'와 '문제 패키지' 두 개입니다.",

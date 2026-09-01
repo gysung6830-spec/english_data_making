@@ -152,3 +152,34 @@
 @media (max-width:560px){
   .todo-grid, .mini-grid, .form-grid{grid-template-columns:1fr;}
 }
+
+/* ---------- 문 열기까지 몇 단계 ---------- */
+.setup{border:2px solid var(--brand);}
+.setup-head{display:flex; align-items:flex-start; gap:16px; margin-bottom:12px;}
+.setup-head > div:first-child{flex:1;}
+.setup-count{font-size:28px; font-weight:800; color:var(--brand); white-space:nowrap;}
+.setup-count span{font-size:16px; color:var(--muted); font-weight:600;}
+.setup-bar{height:8px; border-radius:999px; background:#e7e4dd; overflow:hidden; margin-bottom:18px;}
+.setup-bar i{display:block; height:100%; background:var(--brand); border-radius:999px;
+  transition:width .3s;}
+.setup-list{list-style:none; padding:0; margin:0;}
+.setup-list li{
+  display:flex; align-items:center; gap:14px; padding:14px 0;
+  border-top:1px solid var(--line);
+}
+.setup-list li:first-child{border-top:0;}
+.setup-no{
+  flex:0 0 30px; height:30px; border-radius:50%; background:#f0eee8; color:var(--ink-2);
+  font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center;
+}
+.setup-list li.ok .setup-no{background:var(--brand); color:#fff;}
+.setup-body{flex:1; min-width:0;}
+.setup-body b{display:block; font-size:15.5px;}
+.setup-body small{color:var(--muted); font-size:13.5px; line-height:1.5;}
+.setup-list li.ok .setup-body b{color:var(--muted); text-decoration:line-through;}
+.setup-list li.ok .setup-body small{display:none;}
+.setup-done{color:var(--brand); font-size:13.5px; font-weight:700; white-space:nowrap;}
+@media (max-width:640px){
+  .setup-list li{flex-wrap:wrap;}
+  .setup-list li .btn{margin-left:44px;}
+}

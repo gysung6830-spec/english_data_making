@@ -110,31 +110,57 @@ def dashboard():
     recent = db.execute("SELECT * FROM orders ORDER BY id DESC LIMIT 6").fetchall()
     subs = db.execute("SELECT * FROM submissions WHERE status='검토대기'"
                       " ORDER BY id DESC LIMIT 5").fetchall()
-    warnings = check_setup(sc.load_site(), catalog)
+    steps = setup_steps(sc.load_site(), catalog)
     return render_template("admin/dashboard.html", todo=todo, money=money, counts=counts,
-                           recent=recent, subs=subs, warnings=warnings)
+                           recent=recent, subs=subs, steps=steps,
+                           done_count=sum(1 for s in steps if s["done"]),
+                           sample_count=len([p for p in catalog["products"] if p.get("sample")]))
 
 
-def check_setup(site: dict, catalog: dict) -> list[dict]:
-    """문 열기 전에 빠뜨리기 쉬운 것을 잡아 줍니다."""
-    out = []
+def setup_steps(site: dict, catalog: dict) -> list[dict]:
+    """문을 열기까지 해야 할 일을 순서대로. 끝난 것은 체크 표시가 붙습니다."""
     contact = site.get("contact", {})
     payment = site.get("payment", {})
-    if "example" in contact.get("email", "") or "여기에" in contact.get("email", ""):
-        out.append({"text": "문의 이메일이 아직 예시값입니다.",
-                    "url": url_for("admin.settings"), "label": "가게 정보에서 고치기"})
-    if "0000" in payment.get("bank_account", ""):
-        out.append({"text": "입금 계좌가 아직 예시값입니다. 이대로면 돈을 못 받습니다.",
-                    "url": url_for("admin.settings"), "label": "계좌 입력하기"})
-    if "0000" in site.get("business", {}).get("reg_no", ""):
-        out.append({"text": "사업자 정보가 예시값입니다. 온라인 판매는 표기 의무가 있습니다.",
-                    "url": url_for("admin.settings"), "label": "사업자 정보 입력"})
-    ready = [p for p in catalog["products"]
-             if p.get("sample_file") and (sc.SAMPLE_DIR / p["sample_file"]).exists()]
-    if not ready:
-        out.append({"text": "무료 샘플 PDF가 하나도 없습니다. 샘플이 있어야 잘 팔립니다.",
-                    "url": url_for("admin.products"), "label": "상품 목록 보기"})
-    return out
+    business = site.get("business", {})
+    products = catalog["products"]
+
+    email_ok = bool(contact.get("email")) and not any(
+        x in contact.get("email", "") for x in ("example", "여기에"))
+    bank_ok = bool(payment.get("bank_account")) and "0000" not in payment["bank_account"]
+    biz_ok = bool(business.get("reg_no")) and "0000" not in business["reg_no"]
+    mine = [p for p in products if not p.get("sample")]
+    with_files = [p for p in products if sc.product_files(p.get("slug", ""))]
+    with_sample = [p for p in products
+                   if p.get("sample_file") and (sc.SAMPLE_DIR / p["sample_file"]).exists()]
+    mail_ok = bool(os.environ.get("SMTP_HOST") and os.environ.get("ORDER_EMAIL_TO"))
+
+    return [
+        {"done": email_ok and bank_ok,
+         "title": "연락처와 입금 계좌 넣기",
+         "why": "계좌가 예시값이면 주문을 받아도 돈이 안 들어옵니다.",
+         "url": url_for("admin.settings"), "label": "가게 정보 열기"},
+        {"done": biz_ok,
+         "title": "사업자 정보 넣기",
+         "why": "온라인으로 팔면 상호·사업자등록번호를 화면에 적어야 합니다.",
+         "url": url_for("admin.settings"), "label": "사업자 정보 열기"},
+        {"done": bool(mine),
+         "title": "내 상품 등록하기",
+         "why": (f"지금 보이는 {len(products)}개는 제가 넣어 둔 견본입니다. 실제 자료로 바꿔 주세요."
+                 if not mine else "실제 자료를 등록하셨습니다."),
+         "url": url_for("admin.products"), "label": "상품 화면 열기"},
+        {"done": bool(with_files),
+         "title": "상품에 판매할 파일 올리기",
+         "why": "이 파일이 실제로 팔리는 물건입니다. 없으면 주문이 와도 보낼 수 없습니다.",
+         "url": url_for("admin.products"), "label": "상품 > 📁 파일"},
+        {"done": bool(with_sample),
+         "title": "무료 샘플 올리기",
+         "why": "사기 전에 눈으로 봐야 지갑이 열립니다. 매출에 가장 크게 영향을 줍니다.",
+         "url": url_for("admin.products"), "label": "상품 화면 열기"},
+        {"done": mail_ok,
+         "title": "주문 알림 메일 켜기",
+         "why": "주문이 오면 바로 알 수 있고, 메일함이 주문 장부가 됩니다.",
+         "url": url_for("admin.backup"), "label": "설정 방법 보기"},
+    ]
 
 
 # ---------------------------------------------------------------------------
@@ -503,7 +529,8 @@ def products():
              if p.get("sample_file") and (sc.SAMPLE_DIR / p["sample_file"]).exists()}
     counts = {x["slug"]: len(sc.product_files(x["slug"])) for x in items if x.get("slug")}
     return render_template("admin/products.html", items=items, catalog=catalog,
-                           sample_ready=ready, file_counts=counts)
+                           sample_ready=ready, file_counts=counts,
+                           sample_count=len([x for x in items if x.get("sample")]))
 
 
 @admin_bp.route("/products/new", methods=["GET", "POST"])
@@ -545,6 +572,20 @@ def product_form(slug=None):
         catalog["products"] = [item if p is existing else p for p in catalog["products"]]
         flash(f"상품 '{item['name']}' 을(를) 저장했습니다.", "ok")
     sc.save_catalog(catalog)
+    return redirect(url_for("admin.products"))
+
+
+@admin_bp.route("/products/clear-samples", methods=["POST"])
+def clear_samples():
+    """제가 넣어 둔 예시 상품·교재를 한 번에 지웁니다. 직접 만드신 것은 그대로 둡니다."""
+    catalog = sc.load_raw_catalog()
+    gone_p = len([p for p in catalog["products"] if p.get("sample")])
+    gone_b = len([b for b in catalog["books"] if b.get("sample")])
+    catalog["products"] = [p for p in catalog["products"] if not p.get("sample")]
+    catalog["books"] = [b for b in catalog["books"] if not b.get("sample")]
+    sc.save_catalog(catalog)
+    flash(f"예시 상품 {gone_p}개와 예시 교재 {gone_b}개를 지웠습니다. "
+          f"이제 실제 자료를 등록해 주세요.", "ok")
     return redirect(url_for("admin.products"))
 
 

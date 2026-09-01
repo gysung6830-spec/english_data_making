@@ -21,7 +21,7 @@
       <a href="{{ url_for('admin.dashboard') }}" class="{{ 'on' if request.endpoint == 'admin.dashboard' }}">
         🏠 오늘 할 일</a>
 
-      <div class="sep">주문 처리</div>
+      <div class="sep">매일 하는 일</div>
       <a href="{{ url_for('admin.orders') }}" class="{{ 'on' if request.endpoint == 'admin.orders' }}">
         🧾 주문 · 문의</a>
       <a href="{{ url_for('admin.submissions') }}" class="{{ 'on' if request.endpoint == 'admin.submissions' }}">
@@ -31,7 +31,7 @@
       <a href="{{ url_for('admin.sales') }}" class="{{ 'on' if request.endpoint == 'admin.sales' }}">
         💰 매출 · 세금</a>
 
-      <div class="sep">사이트 내용</div>
+      <div class="sep">가게 꾸미기</div>
       <a href="{{ url_for('admin.products') }}" class="{{ 'on' if request.endpoint in ['admin.products','admin.product_form'] }}">
         📦 상품</a>
       <a href="{{ url_for('admin.books') }}" class="{{ 'on' if request.endpoint in ['admin.books','admin.book_form'] }}">
@@ -41,7 +41,7 @@
       <a href="{{ url_for('admin.notices') }}" class="{{ 'on' if request.endpoint == 'admin.notices' }}">
         📢 공지</a>
 
-      <div class="sep">설정</div>
+      <div class="sep">처음 한 번만</div>
       <a href="{{ url_for('admin.settings') }}" class="{{ 'on' if request.endpoint == 'admin.settings' }}">
         ⚙️ 가게 정보</a>
       <a href="{{ url_for('admin.backup') }}" class="{{ 'on' if request.endpoint == 'admin.backup' }}">

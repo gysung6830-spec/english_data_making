@@ -13,6 +13,17 @@
   </div>
 </div>
 
+{% if sample_count %}
+  <div class="panel" style="border:1px solid #f0d4c4; background:#fff8f4;">
+    <h2>⚠️ 아래 {{ sample_count }}개는 제가 만든 예시입니다</h2>
+    <div class="hint">손님 화면에 그대로 보입니다. 실제 자료로 고치시거나 한 번에 지우고 새로 만드세요.</div>
+    <form method="post" action="{{ url_for('admin.clear_samples') }}"
+          onsubmit="return confirm('예시 상품과 예시 교재를 모두 지웁니다. 직접 만드신 것은 남습니다. 진행할까요?');">
+      <button class="btn btn-ghost btn-sm danger" type="submit">예시 한 번에 지우기</button>
+    </form>
+  </div>
+{% endif %}
+
 <div class="steps-help">
   <b>순서가 헷갈리시면</b>
   <ol>
@@ -35,6 +46,7 @@
           <td class="muted">{{ p.sort or 100 }}</td>
           <td>
             <b>{{ p.name }}</b>
+            {% if p.sample %}<span class="tag" style="background:#fdece2;color:#a3450f;">예시</span>{% endif %}
             {% if p.badge %}<span class="tag tag-on">{{ p.badge }}</span>{% endif %}
             <br><small class="muted">{{ p.subtitle or '' }}</small>
             <br><small class="code">{{ p.slug }}</small>
@@ -61,6 +73,9 @@
             {% if p.active is not defined or p.active %}
               <span class="tag tag-on">판매 중</span>
             {% else %}<span class="tag tag-off">숨김</span>{% endif %}
+            {% if not file_counts.get(p.slug) %}
+              <br><span class="tag" style="background:#fdeceb;color:#b91c1c;">파일 없음</span>
+            {% endif %}
           </td>
           <td>
             <div class="inline-form">

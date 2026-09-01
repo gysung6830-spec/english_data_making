@@ -418,6 +418,36 @@ def test_admin_requires_login():
     print("PASS  관리자 페이지 잠김")
 
 
+def test_setup_checklist_guides_first_day():
+    """첫날 관리자 화면이 '무엇부터 하라'를 순서로 보여 줘야 합니다."""
+    text = body(admin().get("/admin"))
+    assert "문 열기까지" in text and "단계 남았습니다" in text
+    for step in ("연락처와 입금 계좌 넣기", "내 상품 등록하기",
+                 "상품에 판매할 파일 올리기", "무료 샘플 올리기"):
+        assert step in text, step
+    assert "지금 사이트에 보이는 상품은 예시입니다" in text     # 예시 데이터 경고 상자
+    print("PASS  첫날 준비 체크리스트")
+
+
+def test_clear_sample_data():
+    a = admin()
+    before = len(sc.load_raw_catalog()["products"])
+    assert before and any(p.get("sample") for p in sc.load_raw_catalog()["products"])
+
+    # 내가 만든 상품은 남아야 합니다.
+    a.post("/admin/products/new", data={
+        "slug": "my-real-product", "name": "진짜 상품", "category": "mock",
+        "price": "10000", "active": "1", "package": "analysis"})
+    assert a.post("/admin/products/clear-samples").status_code == 302
+
+    left = sc.load_raw_catalog()["products"]
+    assert [p["slug"] for p in left] == ["my-real-product"]
+    assert not sc.load_raw_catalog()["books"]
+    # 예시가 없어지면 경고 상자도 사라집니다.
+    assert "지금 사이트에 보이는 상품은 예시입니다" not in body(a.get("/admin"))
+    print("PASS  예시 데이터 한 번에 지우기 (내 상품은 남김)")
+
+
 def test_admin_pages_open():
     a = admin()
     for path, must in [
@@ -644,6 +674,7 @@ def run_all():
     test_receipt_request_and_sales()
     test_admin_requires_login()
     test_admin_pages_open()
+    test_setup_checklist_guides_first_day()
     test_admin_creates_product_visible_on_site()
     test_admin_edits_material_and_site_reflects()
     test_admin_product_materials_saved()
@@ -652,6 +683,7 @@ def run_all():
     test_admin_notice_appears_on_home()
     test_admin_settings_change_reaches_customer()
     test_backup_download_and_restore()
+    test_clear_sample_data()
     test_nanumsquareround_font_is_served()
     test_file_path_traversal_blocked()
     print("\n판매 사이트 테스트 통과 ✅")
