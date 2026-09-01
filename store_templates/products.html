@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% from "_macros.html" import product_card %}
+{% block title %}자료 목록 · {{ site.brand }}{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>자료 목록</h2>
+      <p>모든 세트에는 <b>분석지 · 어휘 리스트 · 어휘 시험지</b> 3종이 함께 들어갑니다.</p>
+    </div>
+
+    <div class="filters">
+      <a class="filter {{ 'on' if not selected }}" href="{{ url_for('products') }}">전체</a>
+      {% for c in categories %}
+        <a class="filter {{ 'on' if selected == c.id }}"
+           href="{{ url_for('products', category=c.id) }}">{{ c.name }}</a>
+      {% endfor %}
+    </div>
+
+    {% if items %}
+      <div class="grid grid-3">
+        {% for p in items %}{{ product_card(p) }}{% endfor %}
+      </div>
+    {% else %}
+      <div class="card center">
+        <p>이 분류에는 아직 등록된 자료가 없습니다.</p>
+        <a class="btn btn-primary" href="{{ url_for('custom') }}">맞춤 제작으로 문의하기</a>
+      </div>
+    {% endif %}
+
+    <div class="card" style="margin-top:32px;">
+      <h3 style="font-size:18px;margin-bottom:8px;">찾으시는 교재가 없나요?</h3>
+      <p class="muted">쓰시는 교재·프린트를 보내 주시면 같은 형식으로 제작해 드립니다.</p>
+      <a class="btn btn-ghost" href="{{ url_for('custom') }}">맞춤 제작 문의</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

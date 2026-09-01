@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}이용 안내 · {{ site.brand }}{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap narrow">
+    <div class="section-head">
+      <h2>이용 안내</h2>
+      <p>구매 절차, 환불 규정, 자료 이용 범위를 정리했습니다.</p>
+    </div>
+
+    <h3 style="font-size:20px;margin-bottom:14px;">구매 절차</h3>
+    <div class="steps" style="grid-template-columns:1fr 1fr;">
+      <div class="step"><b>STEP 1</b><p>자료를 고르고 주문서를 작성합니다. (회원가입 없음)</p></div>
+      <div class="step"><b>STEP 2</b><p>주문 완료 화면의 계좌로 입금합니다.</p></div>
+      <div class="step"><b>STEP 3</b><p>입금이 확인되면 자료를 준비합니다.</p></div>
+      <div class="step"><b>STEP 4</b><p>주문서에 적어 주신 이메일로 PDF가 발송됩니다.</p></div>
+    </div>
+
+    <h3 style="font-size:20px;margin:40px 0 14px;">자주 묻는 질문</h3>
+
+    <details class="faq" open>
+      <summary>자료는 언제 받을 수 있나요?</summary>
+      <p>{{ site.payment.notice }} 마감이 급하시면 주문서 요청사항에 적어 주세요. 가능한 한 맞춰 드립니다.</p>
+    </details>
+    <details class="faq">
+      <summary>파일은 어떤 형식인가요?</summary>
+      <p>A4 인쇄 기준으로 판을 잡은 <b>PDF</b> 입니다. 편집 없이 그대로 인쇄해 배포하실 수 있습니다.
+        한 지문마다 분석지·어휘 리스트·어휘 시험지 파일이 따로 나옵니다.</p>
+    </details>
+    <details class="faq">
+      <summary>학생들에게 나눠 줘도 되나요?</summary>
+      <p>네. 구매하신 분이 <b>직접 가르치는 학생</b>에게 인쇄해서 배포하는 것은 자유롭게 하실 수 있습니다.
+        다만 다른 강사에게 파일을 넘기거나, 온라인에 올리거나, 되파는 것은 안 됩니다.</p>
+    </details>
+    <details class="faq">
+      <summary>원하는 교재가 목록에 없어요.</summary>
+      <p><a href="{{ url_for('custom') }}"><b>맞춤 제작 문의</b></a>를 이용해 주세요.
+        지문을 보내 주시면 견적과 일정을 회신드립니다. 학원 자체 교재도 가능합니다.</p>
+    </details>
+    <details class="faq">
+      <summary>세금계산서 · 현금영수증 발행이 되나요?</summary>
+      <p>가능합니다. 주문서 요청사항에 <b>사업자등록번호 또는 휴대폰 번호</b>를 적어 주시면
+        입금 확인 후 발행해 드립니다.</p>
+    </details>
+    <details class="faq">
+      <summary>카드로 결제할 수는 없나요?</summary>
+      <p>현재는 계좌이체{% if site.payment.kakaopay_url %} 와 카카오페이 송금{% endif %}만 받고 있습니다.
+        카드 결제는 준비 중입니다.</p>
+    </details>
+
+    <h3 id="refund" style="font-size:20px;margin:40px 0 12px;">환불 규정</h3>
+    <div class="card">
+      <p>{{ site.policy.refund }}</p>
+      <ul style="color:var(--ink-2);margin-bottom:0;">
+        <li>파일 발송 전(입금대기 · 입금확인 상태): <b>전액 환불</b></li>
+        <li>파일 발송 후: 디지털 자료 특성상 환불이 어렵습니다.</li>
+        <li>다만 <b>자료에 명백한 오류·누락</b>이 있는 경우에는 수정본을 다시 보내 드리거나 환불해 드립니다.</li>
+      </ul>
+    </div>
+
+    <h3 id="license" style="font-size:20px;margin:40px 0 12px;">자료 이용 범위</h3>
+    <div class="card">
+      <p class="mb-0">{{ site.policy.license }}</p>
+    </div>
+
+    <h3 id="privacy" style="font-size:20px;margin:40px 0 12px;">개인정보 처리방침</h3>
+    <div class="card">
+      <p><b>수집 항목</b> · 성함, 연락처, 이메일, (선택) 소속</p>
+      <p><b>수집 목적</b> · 주문 확인, 입금 확인, 자료 발송, 문의 응대</p>
+      <p><b>보관 기간</b> · {{ site.policy.privacy }}</p>
+      <p class="mb-0"><b>제3자 제공</b> · 제공하지 않습니다. 열람·삭제를 원하시면
+        {{ site.contact.email }} 으로 요청해 주세요.</p>
+    </div>
+
+    <h3 style="font-size:20px;margin:40px 0 12px;">문의</h3>
+    <div class="card">
+      <table class="spec" style="margin:0;">
+        <tr><th>이메일</th><td>{{ site.contact.email }}</td></tr>
+        <tr><th>전화</th><td>{{ site.contact.phone }}</td></tr>
+        <tr><th>운영 시간</th><td>{{ site.contact.hours }}</td></tr>
+        {% if site.contact.kakao_url and '여기에' not in site.contact.kakao_url %}
+        <tr><th>카카오톡</th><td><a href="{{ site.contact.kakao_url }}" target="_blank" rel="noopener">
+          {{ site.contact.kakao_label }}</a></td></tr>
+        {% endif %}
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}

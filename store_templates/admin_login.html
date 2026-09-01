@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}관리자 · {{ site.brand }}{% endblock %}
+{% block body %}
+<section class="section">
+  <div class="wrap narrow">
+    <div class="section-head"><h2>관리자 로그인</h2></div>
+    {% if locked %}
+      <div class="alert alert-error">
+        <b>관리자 비밀번호가 설정되어 있지 않습니다.</b>
+        <p class="mb-0" style="margin-top:8px;">
+          서버의 환경변수 <code>ADMIN_PASSWORD</code> 를 정한 뒤 다시 실행해 주세요.
+          (자세한 방법은 STORE.md 참고)
+        </p>
+      </div>
+    {% else %}
+      {% if error %}<div class="alert alert-error">{{ error }}</div>{% endif %}
+      <div class="form-card">
+        <form method="post">
+          <div class="field">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password" autofocus required>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">로그인</button>
+        </form>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

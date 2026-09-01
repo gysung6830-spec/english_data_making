@@ -1,0 +1,115 @@
+{
+  "_안내": "여기 있는 상품은 예시입니다. 이름·가격·설명을 실제 자료에 맞게 고치고, 필요 없는 것은 지우세요. 자세한 방법은 STORE.md 참고.",
+  "categories": [
+    { "id": "textbook", "name": "교과서" },
+    { "id": "mock", "name": "모의고사" },
+    { "id": "ebs", "name": "EBS 수능특강·수능완성" }
+  ],
+  "products": [
+    {
+      "slug": "neungyule-kim-lesson3",
+      "category": "textbook",
+      "name": "능률(김성곤) 고1 영어 · 3과 전지문 세트",
+      "subtitle": "지문 8개 · 3종 자료 24개 파일",
+      "price": 18000,
+      "list_price": 24000,
+      "passages": 8,
+      "grade": "고1",
+      "badge": "인기",
+      "sort": 10,
+      "active": true,
+      "includes": ["지문 분석지 (6개 섹션)", "핵심 어휘 리스트", "영단어 시험지 (정답 포함)"],
+      "description": "3과 본문 전 지문을 하나도 빼지 않고 분석했습니다. 내신 대비 수업 한 단원을 그대로 진행할 수 있는 분량입니다.",
+      "highlights": [
+        "전체 요약 + 문단별 요약으로 흐름부터 잡습니다",
+        "직독직해는 2단 표로, 왼쪽 원문·오른쪽 해석을 나란히 봅니다",
+        "지문에서 실제로 나온 문장으로 핵심 문법 10개를 뽑았습니다",
+        "내신 빈출 출제 포인트 체크리스트가 마지막에 붙습니다"
+      ],
+      "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
+      "format": "PDF (A4, 인쇄용)",
+      "sample_file": "sample_textbook.pdf"
+    },
+    {
+      "slug": "neungyule-kim-full",
+      "category": "textbook",
+      "name": "능률(김성곤) 고1 영어 · 1학기 전 단원 패키지",
+      "subtitle": "1~4과 · 지문 32개",
+      "price": 59000,
+      "list_price": 96000,
+      "passages": 32,
+      "grade": "고1",
+      "badge": "가장 많이 삼",
+      "sort": 20,
+      "active": true,
+      "includes": ["지문 분석지 (6개 섹션)", "핵심 어휘 리스트", "영단어 시험지 (정답 포함)"],
+      "description": "한 학기 내신 수업을 한 번에 준비하는 패키지입니다. 단원별로 폴더가 나뉘어 있어 진도에 맞춰 바로 꺼내 쓸 수 있습니다.",
+      "highlights": [
+        "단원별 낱개로 사는 것보다 38% 저렴합니다",
+        "단원 폴더 + 전체 어휘 통합본이 함께 들어갑니다",
+        "학기 중 오탈자 수정본이 나오면 다시 보내 드립니다"
+      ],
+      "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
+      "format": "PDF (A4, 인쇄용)",
+      "sample_file": "sample_textbook.pdf"
+    },
+    {
+      "slug": "mock-2026-06-grade3",
+      "category": "mock",
+      "name": "2026학년도 6월 모의평가 · 고3 전지문 세트",
+      "subtitle": "18~45번 지문 전체",
+      "price": 22000,
+      "list_price": 30000,
+      "passages": 28,
+      "grade": "고3",
+      "badge": "신규",
+      "sort": 30,
+      "active": true,
+      "includes": ["지문 분석지 (6개 섹션)", "핵심 어휘 리스트", "영단어 시험지 (정답 포함)"],
+      "description": "모의고사 원본에서 듣기 영역을 제외하고 18번부터 45번까지 전 지문을 분석했습니다. 문항 번호가 그대로 표시되어 해설 수업에 바로 쓰기 좋습니다.",
+      "highlights": [
+        "자료마다 실제 문항 번호가 붙어 있어 찾기 쉽습니다",
+        "순서·문장삽입 지문은 재구성된 원문으로 분석했습니다",
+        "어휘 시험지는 회차 전체 통합본도 함께 드립니다"
+      ],
+      "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
+      "format": "PDF (A4, 인쇄용)",
+      "sample_file": "sample_mock.pdf"
+    },
+    {
+      "slug": "mock-2026-starter",
+      "category": "mock",
+      "name": "맛보기 · 모의고사 5지문 세트",
+      "subtitle": "부담 없이 품질만 확인해 보세요",
+      "price": 6000,
+      "passages": 5,
+      "grade": "고2~고3",
+      "sort": 40,
+      "active": true,
+      "includes": ["지문 분석지 (6개 섹션)", "핵심 어휘 리스트", "영단어 시험지 (정답 포함)"],
+      "description": "처음 구매하시는 분을 위한 최소 단위 세트입니다. 원하시는 회차를 요청사항에 적어 주시면 맞춰 보내 드립니다.",
+      "highlights": ["원하는 회차·문항 번호를 지정할 수 있습니다"],
+      "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
+      "format": "PDF (A4, 인쇄용)",
+      "sample_file": "sample_mock.pdf"
+    },
+    {
+      "slug": "ebs-suneung-special",
+      "category": "ebs",
+      "name": "수능특강 영어독해연습 · Part 1 세트",
+      "subtitle": "지문 20개",
+      "price": 29000,
+      "list_price": 40000,
+      "passages": 20,
+      "grade": "고3",
+      "sort": 50,
+      "active": true,
+      "includes": ["지문 분석지 (6개 섹션)", "핵심 어휘 리스트", "영단어 시험지 (정답 포함)"],
+      "description": "EBS 연계 대비 수업용입니다. 지문 구조 분석에서 논설문·문학 유형을 자동으로 나눠 각각 다른 틀로 정리했습니다.",
+      "highlights": ["논설문은 Logic Flow, 문학은 Emotional Flow 로 구조를 정리합니다"],
+      "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
+      "format": "PDF (A4, 인쇄용)",
+      "sample_file": "sample_ebs.pdf"
+    }
+  ]
+}

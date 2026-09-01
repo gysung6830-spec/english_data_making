@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ site.brand }}{% endblock %}</title>
+<meta name="description" content="{% block desc %}{{ site.description }}{% endblock %}">
+<meta property="og:title" content="{{ self.title() }}">
+<meta property="og:description" content="{{ self.desc() }}">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+<link rel="stylesheet" href="{{ url_for('static', filename='store.css') }}">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="{{ url_for('home') }}">🌿 Ortica<span>영어</span></a>
+    <nav class="nav">
+      <a href="{{ url_for('products') }}" class="{{ 'on' if request.endpoint in ['products','product_detail'] }}">자료 목록</a>
+      <a href="{{ url_for('samples') }}" class="{{ 'on' if request.endpoint == 'samples' }}">무료 샘플</a>
+      <a href="{{ url_for('custom') }}" class="{{ 'on' if request.endpoint == 'custom' }}">맞춤 제작</a>
+      <a href="{{ url_for('guide') }}" class="{{ 'on' if request.endpoint == 'guide' }}">이용 안내</a>
+    </nav>
+    <div class="head-cta">
+      {% if site.contact.kakao_url and 'example' not in site.contact.kakao_url and '여기에' not in site.contact.kakao_url %}
+        <a class="btn btn-ghost btn-sm" href="{{ site.contact.kakao_url }}" target="_blank" rel="noopener">문의하기</a>
+      {% endif %}
+      <a class="btn btn-primary btn-sm" href="{{ url_for('products') }}">자료 보러 가기</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  {% block body %}{% endblock %}
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>{{ site.brand }}</h4>
+        <div>{{ site.tagline }}</div>
+      </div>
+      <div>
+        <h4>문의</h4>
+        <div>이메일 · {{ site.contact.email }}</div>
+        <div>전화 · {{ site.contact.phone }}</div>
+        <div>{{ site.contact.hours }}</div>
+      </div>
+      <div>
+        <h4>바로가기</h4>
+        <div><a href="{{ url_for('products') }}">자료 목록</a></div>
+        <div><a href="{{ url_for('samples') }}">무료 샘플</a></div>
+        <div><a href="{{ url_for('guide') }}">이용 안내 · 환불 규정</a></div>
+      </div>
+    </div>
+    <div class="foot-links">
+      <a href="{{ url_for('guide') }}#refund">환불 규정</a>
+      <a href="{{ url_for('guide') }}#privacy">개인정보 처리방침</a>
+      <a href="{{ url_for('guide') }}#license">이용 범위</a>
+    </div>
+    <div class="biz">
+      {{ site.business.company }} · 대표 {{ site.business.owner }} ·
+      사업자등록번호 {{ site.business.reg_no }} ·
+      통신판매업신고 {{ site.business.mailorder_no }}<br>
+      {{ site.business.address }}<br>
+      © {{ now.year }} {{ site.brand }}. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

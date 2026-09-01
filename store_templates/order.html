@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}주문서 작성 · {{ p.name }}{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap narrow">
+    <div class="section-head">
+      <h2>주문서 작성</h2>
+      <p>회원가입 없이 아래 내용만 적어 주시면 됩니다. 결제는 작성 후 안내되는 계좌로 입금해 주세요.</p>
+    </div>
+
+    {% if errors %}
+      <div class="alert alert-error">
+        <b>아래 내용을 확인해 주세요.</b>
+        <ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>
+      </div>
+    {% endif %}
+
+    <div class="form-card">
+      <div class="alert alert-info" style="margin-bottom:24px;">
+        <b>{{ p.name }}</b><br>
+        {{ p.subtitle }} · 단가 <b>{{ p.price|won }}</b>
+      </div>
+
+      <form method="post" action="{{ url_for('order') }}">
+        <input type="hidden" name="slug" value="{{ p.slug }}">
+
+        <div class="field">
+          <label for="quantity">수량</label>
+          <input type="number" id="quantity" name="quantity" min="1" max="99"
+                 value="{{ form.quantity or 1 }}">
+          <p class="muted mb-0" style="font-size:14px;margin-top:8px;">
+            결제하실 금액: <b id="total">{{ p.price|won }}</b>
+          </p>
+        </div>
+
+        <div class="field">
+          <label for="name">성함<span class="req">*</span></label>
+          <input type="text" id="name" name="name" value="{{ form.name or '' }}"
+                 placeholder="홍길동" required>
+        </div>
+
+        <div class="field">
+          <label for="depositor">입금자명 <span class="hint">성함과 다를 때만 적어 주세요</span></label>
+          <input type="text" id="depositor" name="depositor" value="{{ form.depositor or '' }}"
+                 placeholder="비워 두면 성함으로 확인합니다">
+        </div>
+
+        <div class="field">
+          <label for="phone">연락처<span class="req">*</span></label>
+          <input type="tel" id="phone" name="phone" value="{{ form.phone or '' }}"
+                 placeholder="010-1234-5678" required>
+        </div>
+
+        <div class="field">
+          <label for="email">이메일<span class="req">*</span>
+            <span class="hint">이 주소로 자료가 발송됩니다</span></label>
+          <input type="email" id="email" name="email" value="{{ form.email or '' }}"
+                 placeholder="teacher@example.com" required>
+        </div>
+
+        <div class="field">
+          <label for="affiliation">소속 <span class="hint">선택</span></label>
+          <input type="text" id="affiliation" name="affiliation" value="{{ form.affiliation or '' }}"
+                 placeholder="○○학원 / ○○고등학교 / 과외">
+        </div>
+
+        <div class="field">
+          <label for="message">요청사항 <span class="hint">선택</span></label>
+          <textarea id="message" name="message"
+                    placeholder="원하시는 회차·단원이나 세금계산서 발행 등 요청이 있으면 적어 주세요.">{{ form.message or '' }}</textarea>
+        </div>
+
+        <div class="field">
+          <label class="check">
+            <input type="checkbox" name="agree" value="1" required>
+            <span>주문 처리와 자료 발송을 위한 개인정보 수집·이용에 동의합니다.
+              <a href="{{ url_for('guide') }}#privacy" target="_blank">자세히</a></span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">주문서 제출하기</button>
+        <p class="muted center mb-0" style="font-size:13px;margin-top:12px;">
+          제출해도 바로 결제되지 않습니다. 다음 화면에서 입금 계좌를 안내해 드립니다.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  // 수량을 바꾸면 결제 금액을 바로 보여 줍니다.
+  (function () {
+    var unit = {{ p.price|int }};
+    var qty = document.getElementById('quantity');
+    var out = document.getElementById('total');
+    function update() {
+      var n = Math.max(1, Math.min(99, parseInt(qty.value, 10) || 1));
+      out.textContent = (unit * n).toLocaleString('ko-KR') + '원';
+    }
+    qty.addEventListener('input', update);
+    update();
+  })();
+</script>
+{% endblock %}

@@ -1,0 +1,4 @@
+# 판매 사이트(store.py)만 돌리는 데 필요한 라이브러리입니다.
+# 자료를 만드는 내부 도구(requirements.txt)와 달리 아주 가볍습니다.
+flask>=3.0
+gunicorn>=21.0

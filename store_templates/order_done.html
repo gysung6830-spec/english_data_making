@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}주문 접수 완료 · {{ site.brand }}{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap narrow">
+    <div class="section-head center">
+      <h2>주문이 접수되었습니다</h2>
+      <p>아직 결제 전입니다. 아래 계좌로 입금해 주시면 처리해 드립니다.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;">
+      <table class="spec" style="margin:0;">
+        <tr><th>주문번호</th><td><b>{{ o['order_no'] }}</b></td></tr>
+        <tr><th>상품</th><td>{{ o['product_name'] }} × {{ o['quantity'] }}</td></tr>
+        <tr><th>결제 금액</th><td><b style="color:var(--brand);font-size:18px;">{{ o['amount']|won }}</b></td></tr>
+        <tr><th>입금자명</th><td>{{ o['depositor'] }}</td></tr>
+        <tr><th>받으실 곳</th><td>{{ o['email'] }}</td></tr>
+      </table>
+    </div>
+
+    <div class="pay-box">
+      <div class="muted" style="font-size:14px;">입금 계좌</div>
+      <div class="pay-account">{{ site.payment.bank_name }} {{ site.payment.bank_account }}</div>
+      <div>예금주 · {{ site.payment.bank_holder }}</div>
+      <p style="margin:14px 0 0;font-size:14.5px;">
+        입금하실 때 <b>입금자명을 "{{ o['depositor'] }}"</b> 으로 해 주시면 확인이 빠릅니다.
+      </p>
+      {% if site.payment.kakaopay_url %}
+        <a class="btn btn-primary" style="margin-top:16px;"
+           href="{{ site.payment.kakaopay_url }}" target="_blank" rel="noopener">카카오페이로 송금하기</a>
+      {% endif %}
+    </div>
+
+    <div class="alert alert-info" style="margin-top:20px;">
+      {{ site.payment.notice }}
+      <br><br>
+      입금 후에도 하루가 지나도록 메일이 오지 않으면
+      <b>{{ site.contact.email }}</b> 또는 <b>{{ site.contact.phone }}</b> 으로
+      주문번호 <b>{{ o['order_no'] }}</b> 와 함께 알려 주세요.
+    </div>
+
+    <div class="center" style="margin-top:28px;">
+      <a class="btn btn-ghost" href="{{ url_for('products') }}">다른 자료 더 보기</a>
+      <a class="btn btn-primary" href="{{ url_for('home') }}">홈으로</a>
+    </div>
+    <p class="muted center" style="font-size:13px;margin-top:16px;">
+      이 화면은 주문번호로 다시 열 수 있습니다. 주소를 저장해 두셔도 됩니다.
+    </p>
+  </div>
+</section>
+{% endblock %}

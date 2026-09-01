@@ -1,5 +1,10 @@
 # Render.com 배포 설정 (Blueprint)
 # render.com 에서 이 저장소를 연결하면 자동으로 이 설정대로 배포됩니다.
+#
+# 서비스가 2개입니다.
+#   1) english-passage-analyzer : 자료를 만드는 내부 도구 (webapp.py) — 비밀번호로 잠금
+#   2) ortica-store             : 고객이 보는 판매 사이트 (store.py) — 누구나 접속
+# 판매 사이트만 올리고 싶으면 아래 첫 번째 서비스 블록을 지우면 됩니다.
 services:
   - type: web
     name: english-passage-analyzer
@@ -12,3 +17,31 @@ services:
         sync: false
       - key: APP_SECRET          # 세션 암호화용 (자동 생성)
         generateValue: true
+
+  - type: web
+    name: ortica-store
+    runtime: python
+    plan: free
+    buildCommand: pip install -r store_requirements.txt
+    startCommand: gunicorn store:app --bind 0.0.0.0:$PORT
+    healthCheckPath: /healthz
+    envVars:
+      - key: ADMIN_PASSWORD      # 주문 관리 페이지(/admin) 비밀번호 — 반드시 정하세요
+        sync: false
+      - key: STORE_SECRET        # 로그인 세션 암호화용 (자동 생성)
+        generateValue: true
+      - key: BANK_ACCOUNT        # 입금 계좌번호 (비워 두면 site.json 값을 씁니다)
+        sync: false
+      # --- 주문 알림 메일 (선택이지만 강력 권장) ---------------------------
+      # 무료 요금제는 재배포하면 저장 공간이 초기화됩니다.
+      # 아래를 채워 두면 주문이 들어올 때마다 메일로도 남아 안전합니다.
+      - key: ORDER_EMAIL_TO      # 주문 알림을 받을 내 메일 주소
+        sync: false
+      - key: SMTP_HOST           # 예: smtp.gmail.com
+        sync: false
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USER           # 보내는 계정 (예: 내 지메일 주소)
+        sync: false
+      - key: SMTP_PASS           # 지메일이면 '앱 비밀번호'
+        sync: false

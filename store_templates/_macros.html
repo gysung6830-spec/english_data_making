@@ -1,0 +1,21 @@
+{% macro product_card(p) %}
+<article class="product-card">
+  {% if p.badge %}<span class="badge">{{ p.badge }}</span>{% endif %}
+  <h3><a href="{{ url_for('product_detail', slug=p.slug) }}">{{ p.name }}</a></h3>
+  <div class="sub">{{ p.subtitle }}</div>
+  <div class="chips">
+    {% if p.grade %}<span class="chip">{{ p.grade }}</span>{% endif %}
+    {% if p.passages %}<span class="chip">지문 {{ p.passages }}개</span>{% endif %}
+    <span class="chip">자료 3종</span>
+    <span class="chip">PDF</span>
+  </div>
+  <div class="price-row">
+    <span class="price">{{ p.price|won }}</span>
+    {% if p.list_price and p.list_price > p.price %}
+      <span class="price-was">{{ p.list_price|won }}</span>
+      <span class="price-off">{{ ((1 - p.price / p.list_price) * 100)|round|int }}% ↓</span>
+    {% endif %}
+  </div>
+  <a class="btn btn-ghost btn-block" href="{{ url_for('product_detail', slug=p.slug) }}">자세히 보기</a>
+</article>
+{% endmacro %}

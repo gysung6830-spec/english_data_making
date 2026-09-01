@@ -12,3 +12,6 @@ output/*.png
 output/*.jpg
 output/*.json
 web_uploads/
+
+# 판매 사이트
+store_data/store.db
