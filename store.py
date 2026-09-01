@@ -554,6 +554,7 @@ def order():
 
     data, errors = sc.validate_contact(request.form)
     typo = data.get("email_typo", "")
+    # 성함은 선택이라 비어 있을 수 있습니다. 입금 확인은 입금자명 → 성함 순으로 봅니다.
     depositor = sc.clean(request.form.get("depositor"), 50) or data["name"]
 
     receipt_kind = sc.clean(request.form.get("receipt_kind"), 20)
@@ -607,11 +608,10 @@ def order():
                    f"주문금액 : {subtotal:,}원",
                    f"할인     : -{discount:,}원 ({discount_note})",
                    f"결제금액 : {amount:,}원",
-                   f"성함     : {data['name']}",
+                   f"성함     : {data['name'] or '(안 적음)'}",
                    f"입금자명 : {depositor}",
                    f"연락처   : {data['phone']}",
                    f"이메일   : {data['email']}",
-                   f"소속     : {data['affiliation'] or '-'}",
                    f"증빙     : {sc.RECEIPT_KINDS.get(receipt_kind, '-')} {receipt_no}",
                    f"요청사항 : {data['message'] or '-'}",
                    f"접수시각 : {ts}"]))
@@ -688,8 +688,8 @@ def custom():
     sc.send_mail(
         f"[Ortica영어] {label} {order_no} · {wanted[:40]}",
         "\n".join([f"접수번호 : {order_no}", f"종류     : {label}",
-                   f"성함     : {data['name']}", f"연락처   : {data['phone']}",
-                   f"이메일   : {data['email']}", f"소속     : {data['affiliation'] or '-'}"]
+                   f"성함     : {data['name'] or '(안 적음)'}", f"연락처   : {data['phone']}",
+                   f"이메일   : {data['email']}"]
                   + [f"{k} : {v}" for k, v in detail.items()]
                   + [f"요청사항 : {data['message'] or '-'}", f"접수시각 : {ts}"]))
     return render_template("custom_done.html", order_no=order_no, mode=mode, wanted=wanted)
@@ -767,7 +767,7 @@ def submit():
                    f"{request.form.get('exam_term') or ''}",
                    f"범위     : {request.form.get('scope') or '-'}",
                    f"파일     : {saved_name or file_link or '-'}",
-                   f"성함     : {data['name']}", f"연락처   : {data['phone']}",
+                   f"성함     : {data['name'] or '(안 적음)'}", f"연락처   : {data['phone']}",
                    f"이메일   : {data['email']}",
                    f"하고 싶은 말 : {data['message'] or '-'}",
                    f"접수시각 : {ts}",
@@ -813,8 +813,8 @@ def pass_page():
     sc.send_mail(
         f"[Ortica영어] 프리패스 사전 신청 {order_no} · {plan}",
         "\n".join([f"신청번호 : {order_no}", f"관심 이용권 : {plan}",
-                   f"성함     : {data['name']}", f"연락처   : {data['phone']}",
-                   f"이메일   : {data['email']}", f"소속     : {data['affiliation'] or '-'}",
+                   f"성함     : {data['name'] or '(안 적음)'}", f"연락처   : {data['phone']}",
+                   f"이메일   : {data['email']}",
                    f"하고 싶은 말 : {data['message'] or '-'}", f"접수시각 : {ts}"]))
     return render_template("pass.html", cfg=cfg, form={}, errors=[], done=order_no)
 

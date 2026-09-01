@@ -1718,26 +1718,66 @@ def test_full_pack_needs_to_be_cheaper():
 
 
 # ---- 개인정보는 최소로 -----------------------------------------------------
-def test_phone_is_optional_email_is_not():
-    """이메일은 자료가 가는 주소라 꼭 받고, 연락처는 안 받아도 됩니다."""
+def test_contact_rules_email_and_phone_required():
+    """이메일(자료가 가는 곳)과 연락처(못 받으셨을 때 연락할 곳)만 받습니다."""
     c = client()
-    resp = c.post("/order", data={
-        "slug": "ybm-han-analysis", "name": "전화없음",
+
+    # 성함은 안 적으셔도 됩니다
+    ok = c.post("/order", data={
+        "slug": "ybm-han-analysis", "phone": "010-1111-2222",
+        "email": "noname@example.com", "agree": "1"})
+    assert ok.status_code == 302, "성함 없이 주문이 막혔습니다"
+    done = body(c.get(ok.headers["Location"]))
+    assert "010-1111-2222" in done and "성함을 안 적으셔서" in done
+
+    # 연락처는 꼭 받습니다
+    nophone = c.post("/order", data={
+        "slug": "ybm-han-analysis", "name": "이름만",
         "email": "nophone@example.com", "agree": "1"})
-    assert resp.status_code == 302, "연락처 없이 주문이 막혔습니다"
+    assert nophone.status_code == 400
+    assert "연락드릴 데가 필요합니다" in body(nophone)
 
-    bad = c.post("/order", data={
-        "slug": "ybm-han-analysis", "name": "형식",
-        "phone": "전화번호아님", "email": "x@y.com", "agree": "1"})
-    assert bad.status_code == 400 and "숫자와" in body(bad)
+    # 형식이 틀리면 알려 줍니다
+    weird = c.post("/order", data={
+        "slug": "ybm-han-analysis", "phone": "전화번호아님",
+        "email": "x@y.com", "agree": "1"})
+    assert weird.status_code == 400 and "숫자와" in body(weird)
 
-    none = c.post("/order", data={"slug": "ybm-han-analysis", "name": "메일없음", "agree": "1"})
-    assert none.status_code == 400 and "자료를 이 주소로" in body(none)
+    # 이메일은 여전히 꼭 받습니다
+    nomail = c.post("/order", data={
+        "slug": "ybm-han-analysis", "phone": "010-0000-0000", "agree": "1"})
+    assert nomail.status_code == 400 and "자료를 이 주소로" in body(nomail)
 
+    # 화면 문구도 그렇게 되어 있어야 합니다
     form = body(client().get("/order?slug=ybm-han-analysis"))
-    assert "선택 — 문제가 생겼을 때만 씁니다" in form
-    assert "이 주소로 자료를 보내 드립니다" in form
-    print("PASS  이메일 필수 · 연락처 선택")
+    assert "자료가 안 갔을 때 연락드리기 위해 받습니다" in form
+    assert '성함 <span class="hint">선택</span>' in form
+    print("PASS  이메일·연락처는 필수 · 성함은 선택")
+
+
+def test_affiliation_is_not_collected():
+    """소속은 이제 받지 않습니다."""
+    for path in ("/order?slug=ybm-han-analysis", "/custom", "/submit", "/pass"):
+        page = body(client().get(path))
+        assert "affiliation" not in page and "소속" not in page, path
+
+    # 보내도 저장되지 않아야 합니다
+    c = client()
+    c.post("/order", data={"slug": "ybm-han-analysis", "phone": "010-5555-1111",
+                           "email": "noaff@example.com", "affiliation": "○○학원",
+                           "agree": "1"})
+    with store.app.app_context():
+        row = sc.get_db().execute(
+            "SELECT affiliation FROM orders WHERE email = 'noaff@example.com'").fetchone()
+    assert not row["affiliation"], f"소속이 저장됐습니다: {row['affiliation']}"
+
+    # 개인정보 안내도 맞춰져 있어야 합니다
+    guide = body(client().get("/guide"))
+    collected = guide.split("1. 수집하는 항목과 목적")[1].split("2. 보유 기간")[0]
+    assert "(선택) 소속" not in collected, "수집 항목에 소속이 남아 있습니다"
+    assert "소속은 받지 않습니다" in guide
+    assert "자료가 안 갔을 때 연락드리려고" in guide
+    print("PASS  소속은 받지 않음")
 
 
 def test_watermark_does_not_bloat_the_file():
@@ -1803,6 +1843,7 @@ def test_watermark_optout_costs_extra():
 
     c = client()
     c.post("/order", data={"slug": "ybm-han-analysis", "no_mark": "1", "name": "표시없이",
+                           "phone": "010-4444-5555",
                            "email": "clean@example.com", "agree": "1"})
     with store.app.app_context():
         row = sc.get_db().execute(
@@ -1833,6 +1874,7 @@ def test_email_typo_is_caught_once():
 
     c = client()
     asked = c.post("/order", data={"slug": "ybm-han-analysis", "name": "오타",
+                                   "phone": "010-2222-3333",
                                    "email": "teacher@gmail.co", "agree": "1"})
     assert asked.status_code == 400
     page = body(asked)
@@ -1840,11 +1882,13 @@ def test_email_typo_is_caught_once():
 
     # 맞다고 표시하면 그대로 접수됩니다
     ok = c.post("/order", data={"slug": "ybm-han-analysis", "name": "오타",
+                                "phone": "010-2222-3333",
                                 "email": "teacher@gmail.co", "agree": "1", "email_ok": "1"})
     assert ok.status_code == 302
 
     # 멀쩡한 주소는 되묻지 않습니다
     fine = c.post("/order", data={"slug": "ybm-han-analysis", "name": "정상",
+                                  "phone": "010-2222-3333",
                                   "email": "fine@gmail.com", "agree": "1"})
     assert fine.status_code == 302
     print("PASS  이메일 오타 한 번 되묻기")
@@ -1888,7 +1932,8 @@ def run_all():
     test_order_page_shows_what_you_are_buying()
     test_manual_line_break_filter()
     test_no_emoji_on_customer_pages()
-    test_phone_is_optional_email_is_not()
+    test_contact_rules_email_and_phone_required()
+    test_affiliation_is_not_collected()
     test_email_typo_is_caught_once()
     test_order_rejects_bad_input()
     test_order_saves_and_multiplies_amount()
