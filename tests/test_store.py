@@ -66,7 +66,7 @@ def test_public_pages_open():
     for path, must in [
         ("/", "지문분석지"),
         ("/products", "자료 목록"),
-        ("/lineup", "자료 라인업"),
+        ("/lineup", "오르티카 라인업"),
         ("/samples", "무료 샘플"),
         ("/custom", "교재 요청"),
         ("/submit", "시험지"),
@@ -104,7 +104,7 @@ def test_lineup_shows_all_materials():
     # 지문자료의 세 판형
     for v in ("원문만", "위아래 해석", "좌우 해석"):
         assert v in text, v
-    print("PASS  자료 라인업 8종 · 묶음 · 표시 노출")
+    print("PASS  오르티카 라인업 8종 · 묶음 · 표시 노출")
 
 
 def test_home_reflects_lineup():
@@ -554,7 +554,7 @@ def test_admin_not_indexed_and_login_is_standalone():
 
     login = body(client().get("/admin/login"))
     assert 'name="robots"' in login and "noindex" in login
-    assert "자료 라인업" not in login       # 고객 메뉴가 딸려 나오지 않아야 함
+    assert "오르티카 라인업" not in login       # 고객 메뉴가 딸려 나오지 않아야 함
 
     robots = body(client().get("/robots.txt"))
     assert "Disallow: /admin" in robots and "Disallow: /d/" in robots
@@ -613,7 +613,7 @@ def test_admin_pages_open():
         ("/admin/books", "교재 · 분류"),
         ("/admin/sales", "월별 매출"),
         ("/admin/products/mock-2026-06-g3-analysis/files", "손님에게 보낼 파일"),
-        ("/admin/materials", "자료 라인업"),
+        ("/admin/materials", "오르티카 라인업"),
         ("/admin/materials/analysis", "특징 묶음 제목"),
         ("/admin/notices", "새 공지 쓰기"),
         ("/admin/settings", "입금 계좌"),
@@ -691,7 +691,7 @@ def test_admin_edits_material_and_site_reflects():
     assert resp.status_code == 302
     text = body(client().get("/lineup"))
     assert "테스트로 바꾼 한 줄 소개" in text and "새 특징" in text
-    print("PASS  자료 라인업 수정 → 고객 화면 반영")
+    print("PASS  오르티카 라인업 수정 → 고객 화면 반영")
 
 
 def test_admin_product_materials_saved():

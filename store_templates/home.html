@@ -23,7 +23,7 @@
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="{{ url_for('products') }}">자료 목록 보기</a>
-        <a class="btn btn-ghost" href="{{ url_for('lineup') }}">자료 라인업 보기</a>
+        <a class="btn btn-ghost" href="{{ url_for('lineup') }}">오르티카 라인업 보기</a>
       </div>
       <p class="hero-note">
         지금 {{ product_count }}종의 세트를 판매 중입니다 ·
@@ -54,7 +54,7 @@
     <div class="section-head">
       <h2>우리가 만드는 자료</h2>
       <p>지문을 읽히는 자료부터 시험지 한 회차까지. 자료마다 무엇이 다른지는
-        <a href="{{ url_for('lineup') }}"><b>자료 라인업</b></a>에 적어 두었습니다.</p>
+        <a href="{{ url_for('lineup') }}"><b>오르티카 라인업</b></a>에 적어 두었습니다.</p>
     </div>
     <div class="grid grid-4">
       {% for m in lineup_all %}

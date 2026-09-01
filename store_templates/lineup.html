@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% block title %}자료 라인업 · {{ site.brand }}{% endblock %}
+{% block title %}오르티카 라인업 · {{ site.brand }}{% endblock %}
 {% block desc %}{{ intro.lead }}{% endblock %}
 
 {% block body %}
 <section class="lineup-hero">
   <div class="wrap">
-    <span class="lineup-eyebrow">{{ intro.eyebrow or '자료 라인업' }}</span>
+    <span class="lineup-eyebrow">{{ intro.eyebrow or '오르티카 라인업' }}</span>
     <h1>{% for line in (intro.headline or '').split('\n') %}{{ line }}<br>{% endfor %}</h1>
     <p class="lineup-lead">
       {{ intro.lead }}

@@ -227,7 +227,7 @@ def book_detail(slug):
 
 @app.route("/lineup")
 def lineup():
-    """자료 라인업 — 우리가 만드는 자료 8종을 한 장에 보여 주는 페이지."""
+    """오르티카 라인업 — 우리가 만드는 자료 8종을 한 장에 보여 주는 페이지."""
     data = sc.load_materials()
     return render_template("lineup.html", intro=data.get("intro", {}),
                            groups=sc.grouped_materials())

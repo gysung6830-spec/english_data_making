@@ -135,7 +135,7 @@ MATERIALS_FALLBACK = {"intro": {}, "groups": [], "materials": []}
 
 
 def load_materials() -> dict:
-    """자료 라인업(지문자료 · 지문분석지 · 워크북 …)."""
+    """오르티카 라인업(지문자료 · 지문분석지 · 워크북 …)."""
     data = load_json("materials.json", MATERIALS_FALLBACK)
     for key in ("groups", "materials"):
         data.setdefault(key, [])
