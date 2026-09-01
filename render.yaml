@@ -1,47 +1,55 @@
-# Render.com 배포 설정 (Blueprint)
-# render.com 에서 이 저장소를 연결하면 자동으로 이 설정대로 배포됩니다.
-#
-# 서비스가 2개입니다.
-#   1) english-passage-analyzer : 자료를 만드는 내부 도구 (webapp.py) — 비밀번호로 잠금
-#   2) ortica-store             : 고객이 보는 판매 사이트 (store.py) — 누구나 접속
-# 판매 사이트만 올리고 싶으면 아래 첫 번째 서비스 블록을 지우면 됩니다.
+# ============================================================
+#  Render.com 배포 설정 (Blueprint)
+#  render.com 에서 이 저장소를 연결하면 이 파일대로 자동 배포됩니다.
+#  처음 올리실 때는 아무것도 고치지 마시고 그대로 두세요.
+# ============================================================
 services:
-  - type: web
-    name: english-passage-analyzer
-    runtime: docker
-    plan: free            # 무료 요금제 (일정 시간 미사용 시 잠자기 → 첫 접속 느릴 수 있음)
-    envVars:
-      - key: ANTHROPIC_API_KEY   # 본인 API 키 (Render 대시보드에서 입력)
-        sync: false
-      - key: APP_PASSWORD        # 웹앱 접속 비밀번호 (직접 정해서 입력)
-        sync: false
-      - key: APP_SECRET          # 세션 암호화용 (자동 생성)
-        generateValue: true
-
+  # ---- 고객이 보는 판매 사이트 (store.py) --------------------
   - type: web
     name: ortica-store
     runtime: python
-    plan: free
+    plan: free               # 무료. 한동안 접속이 없으면 잠들어 첫 접속이 30초쯤 느립니다.
     buildCommand: pip install -r store_requirements.txt
     startCommand: gunicorn store:app --bind 0.0.0.0:$PORT
     healthCheckPath: /healthz
     envVars:
-      - key: ADMIN_PASSWORD      # 주문 관리 페이지(/admin) 비밀번호 — 반드시 정하세요
+      # --- 꼭 넣어야 하는 값 ---------------------------------
+      - key: ADMIN_PASSWORD    # 관리자 화면(/admin) 비밀번호. 안 넣으면 관리자 화면이 잠깁니다.
         sync: false
-      - key: STORE_SECRET        # 로그인 세션 암호화용 (자동 생성)
+      # --- 자동으로 만들어지는 값 (건드리지 마세요) ----------
+      - key: STORE_SECRET
         generateValue: true
-      - key: BANK_ACCOUNT        # 입금 계좌번호 (비워 두면 site.json 값을 씁니다)
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      # --- 넣어 두면 좋은 값 ---------------------------------
+      - key: BANK_ACCOUNT      # 입금 계좌번호. 비우면 관리자 화면에서 넣은 값을 씁니다.
         sync: false
-      # --- 주문 알림 메일 (선택이지만 강력 권장) ---------------------------
-      # 무료 요금제는 재배포하면 저장 공간이 초기화됩니다.
-      # 아래를 채워 두면 주문이 들어올 때마다 메일로도 남아 안전합니다.
-      - key: ORDER_EMAIL_TO      # 주문 알림을 받을 내 메일 주소
+      # 주문 알림 메일 — 무료 요금제는 다시 배포하면 저장 공간이 초기화되므로,
+      # 메일로도 주문을 남겨 두면 안전합니다. (설정법은 STORE.md 10번)
+      - key: ORDER_EMAIL_TO    # 알림을 받을 내 메일 주소
         sync: false
-      - key: SMTP_HOST           # 예: smtp.gmail.com
+      - key: SMTP_HOST         # 지메일이면 smtp.gmail.com
         sync: false
       - key: SMTP_PORT
         value: "587"
-      - key: SMTP_USER           # 보내는 계정 (예: 내 지메일 주소)
+      - key: SMTP_USER         # 보내는 계정 (내 지메일 주소)
         sync: false
-      - key: SMTP_PASS           # 지메일이면 '앱 비밀번호'
+      - key: SMTP_PASS         # 지메일 '앱 비밀번호' 16자리
         sync: false
+
+# ------------------------------------------------------------
+#  자료를 만드는 내부 도구(webapp.py)도 인터넷에 올리고 싶다면,
+#  아래 여덟 줄 앞의 '# ' 를 지우고 다시 배포하세요.
+#  API 키가 들어가는 도구이니 APP_PASSWORD 를 꼭 정해 주세요.
+# ------------------------------------------------------------
+#  - type: web
+#    name: english-passage-analyzer
+#    runtime: docker
+#    plan: free
+#    envVars:
+#      - key: ANTHROPIC_API_KEY
+#        sync: false
+#      - key: APP_PASSWORD
+#        sync: false
+#      - key: APP_SECRET
+#        generateValue: true
