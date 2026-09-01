@@ -1,0 +1,49 @@
+{% extends "admin/base.html" %}
+{% block title %}백업{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <h1>백업</h1>
+  <p>상품·교재·공지·가게 정보를 파일 하나로 내려받아 두는 곳입니다.</p>
+</div>
+
+<div class="steps-help">
+  <b>왜 백업이 필요한가요?</b>
+  <ol>
+    <li>무료 서버(Render)는 <b>사이트를 다시 배포하면 저장 공간이 초기화</b>될 수 있습니다.</li>
+    <li>그때 여기서 받아 둔 파일을 다시 올리면 그대로 되돌아옵니다.</li>
+    <li><b>상품을 크게 고친 날에는 한 번씩 받아 두세요.</b> 1초면 됩니다.</li>
+  </ol>
+</div>
+
+<div class="panel">
+  <h2>1. 백업 내려받기</h2>
+  <div class="hint">아래 내용이 파일 하나(.json)로 저장됩니다:
+    {{ files | join(' · ') }}</div>
+  <a class="btn btn-primary" href="{{ url_for('admin.backup_download') }}">지금 백업 받기</a>
+</div>
+
+<div class="panel">
+  <h2>2. 백업으로 되돌리기</h2>
+  <div class="hint">여기서 받은 파일을 올리면 그 시점으로 되돌아갑니다.
+    <b>지금 내용은 덮어써집니다.</b> 되돌리기 전에 한 번 더 백업을 받아 두시면 안전합니다.</div>
+  <form method="post" action="{{ url_for('admin.backup_restore') }}" enctype="multipart/form-data"
+        onsubmit="return confirm('지금 상품·교재·공지·가게 정보가 이 파일 내용으로 덮어써집니다. 진행할까요?');">
+    <div class="adm-field" style="max-width:460px;">
+      <label for="file">백업 파일 고르기</label>
+      <input type="file" id="file" name="file" accept="application/json,.json" required>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-ghost danger" type="submit">이 파일로 되돌리기</button>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>주문 내역은 따로입니다</h2>
+  <div class="hint">주문·쿠폰·시험지 기록은 위 백업에 들어가지 않습니다.
+    주문은 <a href="{{ url_for('admin.orders_csv') }}">엑셀(CSV)</a>로 따로 받아 두세요.
+    주문이 들어올 때마다 사장님 메일로도 보내지므로, 메일함이 또 하나의 백업이 됩니다.</div>
+  <a class="btn btn-ghost" href="{{ url_for('admin.orders_csv') }}">주문 내역 CSV 받기</a>
+</div>
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "admin/base.html" %}
+{% block title %}주문 · 문의{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <div class="row">
+    <div>
+      <h1>주문 · 문의</h1>
+      <p>돈을 받았으면 <b>입금확인</b>, 자료를 보냈으면 <b>발송완료</b> 로 바꿔 주세요.</p>
+    </div>
+    <div class="spacer"></div>
+    <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.orders_csv') }}">엑셀(CSV)로 내려받기</a>
+  </div>
+</div>
+
+<div class="panel">
+  <form class="inline-form" method="get" style="margin-bottom:14px;">
+    <input type="text" name="q" value="{{ q }}" placeholder="이름·전화·이메일·주문번호 검색"
+           style="min-width:230px;">
+    <select name="kind">
+      <option value="">전체 종류</option>
+      {% for k, label in kinds.items() %}
+        <option value="{{ k }}" {{ 'selected' if selected_kind == k }}>{{ label }}</option>
+      {% endfor %}
+    </select>
+    <select name="status">
+      <option value="">전체 상태</option>
+      {% for s in statuses %}
+        <option value="{{ s }}" {{ 'selected' if selected == s }}>{{ s }} ({{ counts[s] }})</option>
+      {% endfor %}
+    </select>
+    <button class="btn btn-primary btn-sm" type="submit">찾기</button>
+    <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.orders') }}">초기화</a>
+  </form>
+
+  {% if rows %}
+  <div class="wrapbox">
+    <table class="adm-table">
+      <thead>
+        <tr><th>접수</th><th>번호 · 종류</th><th>내용</th><th class="num">금액</th>
+            <th>주문자</th><th>연락처</th><th style="min-width:250px;">처리</th></tr>
+      </thead>
+      <tbody>
+      {% for r in rows %}
+        <tr>
+          <td>{{ r['created_at'][5:16].replace('T', ' ') }}</td>
+          <td>
+            <b>{{ r['order_no'] }}</b><br>
+            <span class="tag {{ 'tag-on' if r['kind'] != 'product' }}">
+              {{ order_kinds.get(r['kind'], r['kind']) }}</span>
+          </td>
+          <td>
+            {{ r['product_name'] }}{% if r['quantity'] > 1 %} × {{ r['quantity'] }}{% endif %}
+            {% if r['detail_json'] %}
+              <br><small class="muted">
+              {% for k, v in (r['detail_json']|fromjson).items() %}{{ k }}: {{ v }}<br>{% endfor %}
+              </small>
+            {% endif %}
+            {% if r['message'] %}<br><small class="muted">💬 {{ r['message'] }}</small>{% endif %}
+          </td>
+          <td class="num">
+            {{ r['amount']|won }}
+            {% if r['discount'] %}
+              <br><small class="muted">쿠폰 -{{ r['discount']|won }}</small>
+              <br><small class="code">{{ r['coupon_code'] }}</small>
+            {% endif %}
+          </td>
+          <td>
+            {{ r['name'] }}
+            {% if r['depositor'] and r['depositor'] != r['name'] %}
+              <br><small class="muted">입금자 {{ r['depositor'] }}</small>{% endif %}
+            {% if r['affiliation'] %}<br><small class="muted">{{ r['affiliation'] }}</small>{% endif %}
+          </td>
+          <td>{{ r['phone'] }}<br><small class="muted">{{ r['email'] }}</small></td>
+          <td>
+            <div style="margin-bottom:7px;">
+              <span class="pill pill-{{ r['status'] }}">{{ r['status'] }}</span>
+            </div>
+            <form class="inline-form" method="post"
+                  action="{{ url_for('admin.order_update', order_id=r['id']) }}">
+              <select name="status">
+                {% for s in statuses %}
+                  <option value="{{ s }}" {{ 'selected' if s == r['status'] }}>{{ s }}</option>
+                {% endfor %}
+              </select>
+              <input type="text" name="admin_memo" value="{{ r['admin_memo'] or '' }}"
+                     placeholder="메모" style="width:110px;">
+              <button class="btn btn-primary btn-sm" type="submit">저장</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <div class="empty"><b>해당하는 주문이 없습니다.</b>검색 조건을 바꿔 보세요.</div>
+  {% endif %}
+</div>
+{% endblock %}

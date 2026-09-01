@@ -1,0 +1,118 @@
+{% extends "admin/base.html" %}
+{% block title %}공지{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <h1>공지</h1>
+  <p>새 자료를 올릴 때마다 한 줄씩 남겨 주세요. <b>맨 위 공지는 홈 화면 최상단에 띠로</b> 나옵니다.
+    손님이 다시 찾아올 이유가 됩니다.</p>
+</div>
+
+<div class="panel">
+  <h2>새 공지 쓰기</h2>
+  <form method="post" action="{{ url_for('admin.notice_save') }}">
+    <div class="form-grid">
+      <div class="adm-field">
+        <label for="date">날짜</label>
+        <input type="date" id="date" name="date" value="{{ now.strftime('%Y-%m-%d') }}">
+      </div>
+      <div class="adm-field">
+        <label for="tag">말머리</label>
+        <input type="text" id="tag" name="tag" placeholder="예: 업데이트 / 안내 / 예정">
+      </div>
+      <div class="adm-field full">
+        <label for="title">제목 <span style="color:#c2410c">*</span></label>
+        <input type="text" id="title" name="title"
+               placeholder="예: 2026학년도 9월 모의평가 전지문 세트 업로드" required>
+      </div>
+      <div class="adm-field full">
+        <label for="body">내용</label>
+        <textarea id="body" name="body" placeholder="무엇이 올라왔는지 한두 문장이면 충분합니다."></textarea>
+      </div>
+      <div class="adm-field full">
+        <label class="switch">
+          <input type="checkbox" name="pinned" value="1">
+          <span>맨 위에 고정하기 (초록 테두리로 강조됩니다)</span>
+        </label>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">공지 올리기</button>
+      <a class="btn btn-ghost" href="{{ url_for('notice') }}" target="_blank" rel="noopener">
+        고객 화면에서 보기 ↗</a>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>올린 공지</h2>
+  {% if notices %}
+    {% for n in notices %}
+      <details class="faq" style="margin-bottom:10px;">
+        <summary style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+          {% if n.pinned %}<span class="tag tag-on">고정</span>{% endif %}
+          {% if n.tag %}<span class="tag">{{ n.tag }}</span>{% endif %}
+          <span class="muted" style="font-size:13px;">{{ n.date }}</span>
+          <b>{{ n.title }}</b>
+        </summary>
+        <form method="post" action="{{ url_for('admin.notice_save') }}" style="margin-top:12px;">
+          <input type="hidden" name="index" value="{{ loop.index0 }}">
+          <div class="form-grid">
+            <div class="adm-field">
+              <label>날짜</label>
+              <input type="date" name="date" value="{{ n.date }}">
+            </div>
+            <div class="adm-field">
+              <label>말머리</label>
+              <input type="text" name="tag" value="{{ n.tag or '' }}">
+            </div>
+            <div class="adm-field full">
+              <label>제목</label>
+              <input type="text" name="title" value="{{ n.title }}">
+            </div>
+            <div class="adm-field full">
+              <label>내용</label>
+              <textarea name="body">{{ n.body or '' }}</textarea>
+            </div>
+            <div class="adm-field full">
+              <label class="switch">
+                <input type="checkbox" name="pinned" value="1" {{ 'checked' if n.pinned }}>
+                <span>맨 위에 고정</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary btn-sm" type="submit">이 공지 저장</button>
+          </div>
+        </form>
+        <form method="post" action="{{ url_for('admin.notice_delete', index=loop.index0) }}"
+              onsubmit="return confirm('이 공지를 지울까요?');" style="margin-top:8px;">
+          <button class="btn btn-sm danger" type="submit">이 공지 지우기</button>
+        </form>
+      </details>
+    {% endfor %}
+  {% else %}
+    <div class="empty"><b>아직 공지가 없습니다.</b>위에서 첫 공지를 써 보세요.</div>
+  {% endif %}
+</div>
+
+<div class="panel">
+  <h2>자료 업데이트 일정</h2>
+  <div class="hint">"매주 월요일에 지난주 학평 올림" 처럼 <b>실제로 지킬 수 있는</b> 주기만 적으세요.
+    못 지키면 오히려 신뢰를 잃습니다. 비워 두면 이 표가 안 나옵니다.</div>
+  <form method="post" action="{{ url_for('admin.schedule_save') }}">
+    {% for row in (schedule + [{'when':'','what':''}, {'when':'','what':''}]) %}
+      <div class="inline-form" style="margin-bottom:8px;">
+        <input type="text" name="when" value="{{ row.when }}" placeholder="언제 (예: 매주 월요일)"
+               style="width:200px;">
+        <input type="text" name="what" value="{{ row.what }}" placeholder="무엇을 (예: 지난주 학평 업로드)"
+               style="flex:1; min-width:240px;">
+      </div>
+    {% endfor %}
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">일정 저장</button>
+      <span class="muted" style="font-size:13px;">빈 줄은 자동으로 지워집니다.</span>
+    </div>
+  </form>
+</div>
+{% endblock %}

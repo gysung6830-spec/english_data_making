@@ -36,14 +36,15 @@
     {% else %}
       <div class="card center">
         <p>이 분류에는 아직 등록된 자료가 없습니다.</p>
-        <a class="btn btn-primary" href="{{ url_for('custom') }}">맞춤 제작으로 문의하기</a>
+        <a class="btn btn-primary" href="{{ url_for('custom') }}">교재 요청하기</a>
       </div>
     {% endif %}
 
     <div class="card" style="margin-top:32px;">
       <h3 style="font-size:18px;margin-bottom:8px;">찾으시는 교재가 없나요?</h3>
-      <p class="muted">쓰시는 교재·프린트를 보내 주시면 같은 형식으로 제작해 드립니다.</p>
-      <a class="btn btn-ghost" href="{{ url_for('custom') }}">맞춤 제작 문의</a>
+      <p class="muted"><b>교재 이름만 적어 두시면 됩니다.</b> 지문을 보내지 않으셔도 되고,
+        그 교재를 만든 뒤 연락드리겠습니다.</p>
+      <a class="btn btn-primary" href="{{ url_for('custom') }}">교재 요청하기</a>
     </div>
   </div>
 </section>

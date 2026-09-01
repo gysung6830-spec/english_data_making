@@ -1,0 +1,94 @@
+{% extends "admin/base.html" %}
+{% block title %}상품{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <div class="row">
+    <div>
+      <h1>상품</h1>
+      <p>여기서 저장하면 <b>고객 화면에 바로 반영</b>됩니다. 파일을 따로 고칠 필요 없습니다.</p>
+    </div>
+    <div class="spacer"></div>
+    <a class="btn btn-primary" href="{{ url_for('admin.product_form') }}">＋ 새 상품 만들기</a>
+  </div>
+</div>
+
+<div class="steps-help">
+  <b>순서가 헷갈리시면</b>
+  <ol>
+    <li><a href="{{ url_for('admin.books') }}"><b>교재 · 분류</b></a>에서 교재를 먼저 만듭니다. (예: 2026 9월 모의평가)</li>
+    <li>여기서 그 교재에 속한 상품을 만듭니다. (예: 전지문 세트 22,000원)</li>
+    <li>무료 샘플 PDF를 <code>store_data/samples/</code> 에 넣고 상품의 '샘플 파일 이름'에 적습니다.</li>
+  </ol>
+</div>
+
+<div class="panel">
+  {% if items %}
+  <div class="wrapbox">
+    <table class="adm-table">
+      <thead><tr><th>순서</th><th>상품</th><th>분류 · 교재</th><th class="num">가격</th>
+                 <th>샘플</th><th>상태</th><th style="min-width:210px;"></th></tr></thead>
+      <tbody>
+      {% for p in items %}
+        <tr>
+          <td class="muted">{{ p.sort or 100 }}</td>
+          <td>
+            <b>{{ p.name }}</b>
+            {% if p.badge %}<span class="tag tag-on">{{ p.badge }}</span>{% endif %}
+            <br><small class="muted">{{ p.subtitle or '' }}</small>
+            <br><small class="code">{{ p.slug }}</small>
+          </td>
+          <td>
+            <small>{{ catalog.categories | selectattr('id','equalto',p.category) | map(attribute='name') | first | default('-') }}</small>
+            {% if p.book %}
+              <br><small class="muted">{{ catalog.books | selectattr('slug','equalto',p.book) | map(attribute='name') | first | default(p.book) }}</small>
+            {% else %}<br><small class="muted">교재 없음</small>{% endif %}
+          </td>
+          <td class="num">
+            {{ p.price|won }}
+            {% if p.list_price %}<br><small class="muted">정가 {{ p.list_price|won }}</small>{% endif %}
+          </td>
+          <td>
+            {% if p.sample_file %}
+              {% if p.sample_file in sample_ready %}
+                <span class="tag tag-on">있음</span>
+              {% else %}<span class="tag tag-off">파일 없음</span>{% endif %}
+              <br><small class="muted">{{ p.sample_file }}</small>
+            {% else %}<span class="tag tag-off">없음</span>{% endif %}
+          </td>
+          <td>
+            {% if p.active is not defined or p.active %}
+              <span class="tag tag-on">판매 중</span>
+            {% else %}<span class="tag tag-off">숨김</span>{% endif %}
+          </td>
+          <td>
+            <div class="inline-form">
+              <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.product_form', slug=p.slug) }}">고치기</a>
+              <a class="btn btn-ghost btn-sm" href="{{ url_for('product_detail', slug=p.slug) }}"
+                 target="_blank" rel="noopener">보기 ↗</a>
+              <form method="post" action="{{ url_for('admin.product_toggle', slug=p.slug) }}">
+                <button class="btn btn-ghost btn-sm" type="submit">
+                  {{ '숨기기' if (p.active is not defined or p.active) else '다시 노출' }}</button>
+              </form>
+              <form method="post" action="{{ url_for('admin.product_delete', slug=p.slug) }}"
+                    onsubmit="return confirm('{{ p.name }} 을(를) 완전히 지울까요? 되돌릴 수 없습니다.');">
+                <button class="btn btn-sm danger" type="submit">지우기</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <div class="empty">
+      <b>아직 등록한 상품이 없습니다.</b>
+      먼저 교재를 만들고, 그 교재에 상품을 넣으세요.
+      <div style="margin-top:16px;">
+        <a class="btn btn-primary btn-sm" href="{{ url_for('admin.books') }}">교재 만들러 가기</a>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

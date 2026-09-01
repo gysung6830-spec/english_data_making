@@ -1,0 +1,98 @@
+{% extends "admin/base.html" %}
+{% block title %}할인 쿠폰{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <h1>할인 쿠폰</h1>
+  <p>쿠폰 코드를 만들어 손님에게 알려 주면, 주문서에 코드를 넣어 할인을 받습니다.
+    시험지 제출 보상 쿠폰은 <a href="{{ url_for('admin.submissions') }}">시험지 제출</a> 화면에서
+    자동으로 만들어집니다.</p>
+</div>
+
+<div class="panel">
+  <h2>새 쿠폰 만들기</h2>
+  <div class="hint">만들면 코드가 화면에 나옵니다. 그 코드를 손님에게 알려 주세요.</div>
+  <form method="post">
+    <div class="form-grid">
+      <div class="adm-field">
+        <label for="kind">할인 방식</label>
+        <select id="kind" name="kind">
+          <option value="amount">원 단위로 깎기 (예: 5000원)</option>
+          <option value="percent">퍼센트로 깎기 (예: 10%)</option>
+        </select>
+      </div>
+      <div class="adm-field">
+        <label for="value">할인 값</label>
+        <input type="number" id="value" name="value" min="1" value="5000" required>
+        <div class="tip">'원 단위'면 깎을 금액, '퍼센트'면 숫자만 (10 = 10%)</div>
+      </div>
+      <div class="adm-field">
+        <label for="min_amount">최소 주문 금액</label>
+        <input type="number" id="min_amount" name="min_amount" min="0" value="0">
+        <div class="tip">0 이면 금액 제한 없이 씁니다.</div>
+      </div>
+      <div class="adm-field">
+        <label for="days_valid">유효 기간(일)</label>
+        <input type="number" id="days_valid" name="days_valid" min="0" value="90">
+        <div class="tip">0 이면 기한 없음.</div>
+      </div>
+      <div class="adm-field">
+        <label for="issued_to">받는 사람 <span class="tip" style="display:inline;">선택</span></label>
+        <input type="text" id="issued_to" name="issued_to" placeholder="이메일이나 이름">
+      </div>
+      <div class="adm-field">
+        <label for="note">메모 <span class="tip" style="display:inline;">선택</span></label>
+        <input type="text" id="note" name="note" placeholder="예: 첫 구매 감사 쿠폰">
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">쿠폰 만들기</button>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>쿠폰 목록</h2>
+  {% if rows %}
+  <div class="wrapbox">
+    <table class="adm-table">
+      <thead><tr><th>코드</th><th>할인</th><th>조건</th><th>기한</th><th>상태</th>
+                 <th>메모 · 받는 사람</th><th></th></tr></thead>
+      <tbody>
+      {% for r in rows %}
+        <tr>
+          <td><span class="code">{{ r['code'] }}</span></td>
+          <td>{% if r['kind'] == 'percent' %}{{ r['value'] }}%{% else %}{{ r['value']|won }}{% endif %}</td>
+          <td>{% if r['min_amount'] %}{{ r['min_amount']|won }} 이상{% else %}제한 없음{% endif %}</td>
+          <td>
+            {% if r['expires_at'] %}
+              {{ r['expires_at'] }}
+              {% if not r['used_at'] and r['expires_at'] < today %}
+                <br><span class="tag tag-off">기한 지남</span>{% endif %}
+            {% else %}없음{% endif %}
+          </td>
+          <td>
+            {% if r['used_at'] %}
+              <span class="tag">사용됨</span><br>
+              <small class="muted">{{ r['used_order_no'] }}</small>
+            {% else %}<span class="tag tag-on">사용 가능</span>{% endif %}
+          </td>
+          <td><small>{{ r['note'] or '-' }}{% if r['issued_to'] %}<br class="muted">{{ r['issued_to'] }}{% endif %}</small></td>
+          <td>
+            {% if not r['used_at'] %}
+              <form method="post" action="{{ url_for('admin.coupon_delete', coupon_id=r['id']) }}"
+                    onsubmit="return confirm('이 쿠폰을 지울까요? 이미 알려 준 손님은 못 쓰게 됩니다.');">
+                <button class="btn btn-sm danger" type="submit">지우기</button>
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <div class="empty"><b>아직 만든 쿠폰이 없습니다.</b>위에서 첫 쿠폰을 만들어 보세요.</div>
+  {% endif %}
+</div>
+{% endblock %}

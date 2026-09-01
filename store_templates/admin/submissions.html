@@ -1,0 +1,90 @@
+{% extends "admin/base.html" %}
+{% block title %}시험지 제출{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <h1>시험지 제출</h1>
+  <p>동형 모의고사 제작에 쓸 학교 시험지입니다. 쓸 만하면 <b>승인</b>을 누르세요 —
+    할인 쿠폰이 자동으로 만들어져 제출자 메일로 갑니다.</p>
+</div>
+
+<div class="steps-help">
+  현재 보상 설정 ·
+  {% if reward.coupon_kind == 'percent' %}<b>{{ reward.coupon_value }}% 할인</b>
+  {% else %}<b>{{ reward.coupon_value|won }} 할인</b>{% endif %}
+  쿠폰 / 유효기간 {{ reward.days_valid or 90 }}일
+  {% if reward.min_amount %} / {{ reward.min_amount|won }} 이상 주문 시 사용{% endif %}
+  &nbsp; <a href="{{ url_for('admin.settings') }}#reward"><b>보상 바꾸기 →</b></a>
+</div>
+
+<div class="panel">
+  <div class="inline-form" style="margin-bottom:14px;">
+    <a class="filter {{ 'on' if not selected }}" href="{{ url_for('admin.submissions') }}">전체</a>
+    {% for s in statuses %}
+      <a class="filter {{ 'on' if selected == s }}"
+         href="{{ url_for('admin.submissions', status=s) }}">{{ s }} ({{ counts[s] }})</a>
+    {% endfor %}
+  </div>
+
+  {% if rows %}
+  <div class="wrapbox">
+    <table class="adm-table">
+      <thead>
+        <tr><th>접수</th><th>학교 · 시험</th><th>범위</th><th>파일</th><th>제출자</th>
+            <th style="min-width:250px;">처리</th></tr>
+      </thead>
+      <tbody>
+      {% for r in rows %}
+        <tr>
+          <td>{{ r['created_at'][5:10] }}<br><b>{{ r['submit_no'] }}</b></td>
+          <td>
+            <b>{{ r['school'] }}</b> {{ r['grade'] or '' }}<br>
+            <small class="muted">{{ r['exam_type'] or '-' }} {{ r['exam_term'] or '' }}</small>
+          </td>
+          <td><small>{{ r['scope'] or '-' }}</small>
+            {% if r['message'] %}<br><small class="muted">💬 {{ r['message'] }}</small>{% endif %}</td>
+          <td>
+            {% if r['file_name'] %}
+              <a class="btn btn-ghost btn-sm"
+                 href="{{ url_for('admin.submission_file', filename=r['file_name']) }}">내려받기</a>
+            {% endif %}
+            {% if r['file_link'] %}
+              <div style="margin-top:5px;"><a href="{{ r['file_link'] }}" target="_blank"
+                 rel="noopener noreferrer nofollow"><small>링크 열기 ↗</small></a></div>
+            {% endif %}
+          </td>
+          <td>{{ r['name'] }}<br><small class="muted">{{ r['email'] }}<br>{{ r['phone'] }}</small></td>
+          <td>
+            <div style="margin-bottom:7px;">
+              <span class="pill pill-{{ '발송완료' if r['status'] == '승인' else ('취소' if r['status'] == '반려' else '입금대기') }}">
+                {{ r['status'] }}</span>
+              {% if r['coupon_code'] %}<br><span class="code">{{ r['coupon_code'] }}</span>{% endif %}
+            </div>
+            <form class="inline-form" method="post"
+                  action="{{ url_for('admin.submission_update', sub_id=r['id']) }}">
+              <select name="status">
+                {% for s in statuses %}
+                  <option value="{{ s }}" {{ 'selected' if s == r['status'] }}>{{ s }}</option>
+                {% endfor %}
+              </select>
+              <input type="text" name="admin_memo" value="{{ r['admin_memo'] or '' }}"
+                     placeholder="메모" style="width:100px;">
+              <button class="btn btn-primary btn-sm" type="submit">저장</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <div class="empty">
+      <b>아직 제출된 시험지가 없습니다.</b>
+      고객 화면의 '시험지 주고 할인받기' 페이지를 안내해 보세요.
+      <div style="margin-top:14px;">
+        <a class="btn btn-ghost btn-sm" href="{{ url_for('submit') }}" target="_blank">그 페이지 보기 ↗</a>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

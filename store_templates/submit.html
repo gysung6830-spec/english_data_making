@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block title %}시험지 주고 할인받기 · {{ site.brand }}{% endblock %}
+{% block desc %}{{ reward.lead }}{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap narrow">
+    {% if done %}
+      <div class="section-head center">
+        <h2>시험지 잘 받았습니다</h2>
+        <p>접수번호 <b>{{ done }}</b></p>
+      </div>
+      <div class="alert alert-info">
+        확인이 끝나면 <b>할인 쿠폰 코드</b>를 적어 주신 이메일로 보내 드립니다.
+        보통 영업일 기준 1~2일 걸립니다.<br><br>
+        받으신 쿠폰 코드는 <b>주문서 아래쪽 '할인 쿠폰 코드' 칸</b>에 넣으시면 바로 적용됩니다.<br><br>
+        보내 주신 시험지는 <b>동형 모의고사 제작 참고용으로만</b> 쓰며, 원본은 재배포하지 않습니다.
+      </div>
+      <div class="center" style="margin-top:26px;">
+        <a class="btn btn-primary" href="{{ url_for('products') }}">자료 보러 가기</a>
+      </div>
+
+    {% else %}
+      <div class="section-head">
+        <span class="eyebrow">시험지 나눔</span>
+        <h2>{{ reward.headline or '우리 학교 시험지 주시면, 할인 쿠폰 드립니다' }}</h2>
+        <p>{{ reward.lead }}</p>
+      </div>
+
+      <div class="grid grid-2" style="margin-bottom:26px;">
+        <div class="card">
+          <h3 style="font-size:17px;margin-bottom:8px;">받으시는 것</h3>
+          <div class="price" style="color:var(--brand);">
+            {% if reward.coupon_kind == 'percent' %}{{ reward.coupon_value }}% 할인
+            {% else %}{{ reward.coupon_value|won }} 할인{% endif %}
+          </div>
+          <p class="muted mb-0" style="font-size:14.5px;margin-top:8px;">
+            쿠폰 코드로 보내 드립니다. 유효기간 {{ reward.days_valid or 90 }}일
+            {%- if reward.min_amount %} · {{ reward.min_amount|won }} 이상 주문 시 사용{% endif %}.
+          </p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:17px;margin-bottom:8px;">이렇게 진행됩니다</h3>
+          <ol style="padding-left:18px;margin:0;color:var(--ink-2);font-size:15px;">
+            <li>아래에 시험지를 올려 주세요.</li>
+            <li>내용을 확인합니다. (1~2일)</li>
+            <li>쿠폰 코드를 메일로 보내 드립니다.</li>
+          </ol>
+        </div>
+      </div>
+
+      {% if errors %}
+        <div class="alert alert-error">
+          <b>아래 내용을 확인해 주세요.</b>
+          <ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>
+        </div>
+      {% endif %}
+
+      <div class="form-card">
+        <form method="post" action="{{ url_for('submit') }}" enctype="multipart/form-data">
+          <div class="field">
+            <label for="school">학교 이름<span class="req">*</span></label>
+            <input type="text" id="school" name="school" value="{{ form.school or '' }}"
+                   placeholder="예: 대치고등학교" required>
+          </div>
+          <div class="field">
+            <label for="grade">학년</label>
+            <select id="grade" name="grade">
+              {% for g in ['고1', '고2', '고3', '중등'] %}
+                <option value="{{ g }}" {{ 'selected' if form.grade == g }}>{{ g }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="exam_type">시험 종류</label>
+            <select id="exam_type" name="exam_type">
+              {% for t in ['중간고사', '기말고사', '수행평가', '기타'] %}
+                <option value="{{ t }}" {{ 'selected' if form.exam_type == t }}>{{ t }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="exam_term">시행 시기</label>
+            <input type="text" id="exam_term" name="exam_term" value="{{ form.exam_term or '' }}"
+                   placeholder="예: 2026년 1학기">
+          </div>
+          <div class="field">
+            <label for="scope">시험 범위 <span class="hint">선택</span></label>
+            <input type="text" id="scope" name="scope" value="{{ form.scope or '' }}"
+                   placeholder="예: 능률(김성곤) 1~3과 + 3월 학평">
+          </div>
+
+          <div class="field">
+            <label for="file">시험지 파일</label>
+            <input type="file" id="file" name="file"
+                   accept=".pdf,.jpg,.jpeg,.png,.hwp,.hwpx,.zip">
+            <p class="muted mb-0" style="font-size:13.5px;margin-top:6px;">
+              PDF · 사진(JPG/PNG) · 한글(HWP) · ZIP · 최대 25MB.
+              사진으로 찍어 올리셔도 됩니다.
+            </p>
+          </div>
+          <div class="field">
+            <label for="file_link">또는 파일 링크</label>
+            <input type="text" id="file_link" name="file_link" value="{{ form.file_link or '' }}"
+                   placeholder="구글 드라이브 / 네이버 MYBOX 공유 링크">
+            <p class="muted mb-0" style="font-size:13.5px;margin-top:6px;">
+              파일이 크면 링크로 주셔도 됩니다. 둘 중 하나만 있으면 됩니다.
+            </p>
+          </div>
+
+          <div class="field">
+            <label for="name">성함<span class="req">*</span></label>
+            <input type="text" id="name" name="name" value="{{ form.name or '' }}" required>
+          </div>
+          <div class="field">
+            <label for="phone">연락처<span class="req">*</span></label>
+            <input type="tel" id="phone" name="phone" value="{{ form.phone or '' }}"
+                   placeholder="010-1234-5678" required>
+          </div>
+          <div class="field">
+            <label for="email">이메일<span class="req">*</span>
+              <span class="hint">쿠폰 코드를 이 주소로 보내 드립니다</span></label>
+            <input type="email" id="email" name="email" value="{{ form.email or '' }}" required>
+          </div>
+          <div class="field">
+            <label for="message">하고 싶은 말 <span class="hint">선택</span></label>
+            <textarea id="message" name="message">{{ form.message or '' }}</textarea>
+          </div>
+
+          <div class="field">
+            <label class="check">
+              <input type="checkbox" name="agree_source" value="1" required>
+              <span>보내는 시험지는 <b>제가 응시했거나 정당하게 가지고 있는 자료</b>이며,
+                Ortica영어가 <b>동형 모의고사 제작 참고용으로만</b> 쓰고
+                원본을 재배포하지 않는 데 동의합니다.</span>
+            </label>
+          </div>
+          <div class="field">
+            <label class="check">
+              <input type="checkbox" name="agree" value="1" required>
+              <span>쿠폰 발송을 위한 개인정보 수집·이용에 동의합니다.
+                <a href="{{ url_for('guide') }}#privacy" target="_blank">자세히</a></span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">시험지 보내기</button>
+        </form>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

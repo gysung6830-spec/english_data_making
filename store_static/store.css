@@ -322,3 +322,24 @@ details.faq p:last-child{margin-bottom:0;}
 .plan-per{font-size:13.5px; color:var(--muted); margin-bottom:14px;}
 .plan-desc{font-size:14.5px; color:var(--ink-2); min-height:44px;}
 .plan .btn{margin-top:auto;}
+
+/* ---------- 교재 요청 / 맞춤 제작 고르기 ---------- */
+.mode-pick{display:grid; grid-template-columns:repeat(2,1fr); gap:12px;}
+.mode{
+  display:block; border:2px solid var(--line-strong); border-radius:12px; padding:16px 18px;
+  cursor:pointer; background:#fff; transition:.15s;
+}
+.mode:hover{border-color:var(--brand);}
+.mode.on{border-color:var(--brand); background:var(--brand-soft);}
+.mode input{margin-right:7px; accent-color:var(--brand);}
+.mode b{font-size:15.5px;}
+.mode small{display:block; color:var(--ink-2); font-size:13.5px; line-height:1.5; margin-top:6px;}
+
+input[type=file]{
+  width:100%; padding:9px 11px; border:1px dashed var(--line-strong); border-radius:9px;
+  font-family:inherit; font-size:14px; background:#fafbfa;
+}
+
+@media (max-width:860px){
+  .mode-pick{grid-template-columns:1fr;}
+}

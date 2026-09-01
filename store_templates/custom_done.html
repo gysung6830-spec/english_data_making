@@ -1,21 +1,29 @@
 {% extends "base.html" %}
-{% block title %}문의 접수 완료 · {{ site.brand }}{% endblock %}
+{% block title %}접수 완료 · {{ site.brand }}{% endblock %}
 
 {% block body %}
 <section class="section">
   <div class="wrap narrow center">
     <div class="section-head center">
-      <h2>문의가 접수되었습니다</h2>
-      <p>문의번호 <b>{{ order_no }}</b></p>
+      <h2>{{ '교재 요청이 접수되었습니다' if mode == 'request' else '맞춤 제작 문의가 접수되었습니다' }}</h2>
+      <p>접수번호 <b>{{ order_no }}</b></p>
     </div>
     <div class="alert alert-info" style="text-align:left;">
-      지문을 확인한 뒤 <b>견적과 일정</b>을 적어 주신 이메일로 회신드립니다.
-      영업일 기준 1일 이내에 답을 드리고 있습니다.<br><br>
-      지문 파일을 아직 안 보내셨다면 <b>{{ site.contact.email }}</b> 으로
-      문의번호와 함께 보내 주세요.
+      {% if mode == 'request' %}
+        <b>{{ wanted }}</b><br><br>
+        적어 주신 교재를 목록에 넣어 두었습니다.
+        <b>작업이 끝나면 적어 주신 이메일로 가장 먼저 알려 드리겠습니다.</b>
+        따로 보내실 자료는 없습니다.<br><br>
+        요청이 많은 교재부터 먼저 만듭니다. 급하시면 아래 연락처로 말씀해 주세요.
+      {% else %}
+        지문을 확인한 뒤 <b>견적과 일정</b>을 적어 주신 이메일로 회신드립니다.
+        영업일 기준 1일 이내에 답을 드리고 있습니다.<br><br>
+        지문 파일을 아직 안 보내셨다면 <b>{{ site.contact.email }}</b> 으로
+        접수번호와 함께 보내 주세요.
+      {% endif %}
     </div>
     <div style="margin-top:26px;">
-      <a class="btn btn-ghost" href="{{ url_for('products') }}">판매 중인 자료 보기</a>
+      <a class="btn btn-ghost" href="{{ url_for('products') }}">지금 있는 자료 보기</a>
       <a class="btn btn-primary" href="{{ url_for('home') }}">홈으로</a>
     </div>
   </div>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>{% block title %}관리자{% endblock %} · {{ site.brand }}</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠</text></svg>">
+<link rel="stylesheet" href="{{ url_for('static', filename='store.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+<div class="adm">
+
+  <aside class="adm-side">
+    <a class="adm-brand" href="{{ url_for('admin.dashboard') }}">
+      🛠 관리자 화면
+      <small>{{ site.brand }}</small>
+    </a>
+    <nav class="adm-nav">
+      <a href="{{ url_for('admin.dashboard') }}" class="{{ 'on' if request.endpoint == 'admin.dashboard' }}">
+        🏠 오늘 할 일</a>
+
+      <div class="sep">주문 처리</div>
+      <a href="{{ url_for('admin.orders') }}" class="{{ 'on' if request.endpoint == 'admin.orders' }}">
+        🧾 주문 · 문의</a>
+      <a href="{{ url_for('admin.submissions') }}" class="{{ 'on' if request.endpoint == 'admin.submissions' }}">
+        📄 시험지 제출</a>
+      <a href="{{ url_for('admin.coupons') }}" class="{{ 'on' if request.endpoint == 'admin.coupons' }}">
+        🎟 할인 쿠폰</a>
+
+      <div class="sep">사이트 내용</div>
+      <a href="{{ url_for('admin.products') }}" class="{{ 'on' if request.endpoint in ['admin.products','admin.product_form'] }}">
+        📦 상품</a>
+      <a href="{{ url_for('admin.books') }}" class="{{ 'on' if request.endpoint in ['admin.books','admin.book_form'] }}">
+        📚 교재 · 분류</a>
+      <a href="{{ url_for('admin.notices') }}" class="{{ 'on' if request.endpoint == 'admin.notices' }}">
+        📢 공지</a>
+
+      <div class="sep">설정</div>
+      <a href="{{ url_for('admin.settings') }}" class="{{ 'on' if request.endpoint == 'admin.settings' }}">
+        ⚙️ 가게 정보</a>
+      <a href="{{ url_for('admin.backup') }}" class="{{ 'on' if request.endpoint == 'admin.backup' }}">
+        💾 백업</a>
+    </nav>
+    <div class="adm-side-foot">
+      <a href="{{ url_for('home') }}" target="_blank" rel="noopener">고객 화면 보기 ↗</a><br>
+      <a href="{{ url_for('admin.logout') }}">로그아웃</a>
+    </div>
+  </aside>
+
+  <main class="adm-main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category or 'ok' }}">
+          <span>{{ '✅' if category != 'err' else '⚠️' }}</span><span>{{ message }}</span>
+        </div>
+      {% endfor %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+  </main>
+
+</div>
+</body>
+</html>

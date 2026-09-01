@@ -60,11 +60,20 @@
       },
       {
         "name": "12개월",
-        "price": 290000,
-        "per_month": 24167,
+        "price": 220000,
+        "per_month": 18333,
         "period": "365일",
         "desc": "학원에서 상시로 쓰실 때. 월 환산이 가장 쌉니다"
       }
     ]
+  },
+  "submit_reward": {
+    "enabled": true,
+    "coupon_kind": "amount",
+    "coupon_value": 5000,
+    "min_amount": 0,
+    "days_valid": 90,
+    "headline": "우리 학교 시험지 주시면, 할인 쿠폰 드립니다",
+    "lead": "동형 모의고사를 만들려면 실제 학교 시험지가 필요합니다. 본인이 응시한 시험지를 보내 주시면 확인 후 할인 쿠폰을 보내 드립니다."
   }
 }

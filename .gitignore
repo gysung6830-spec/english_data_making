@@ -15,3 +15,8 @@ web_uploads/
 
 # 판매 사이트
 store_data/store.db
+store_data/store.db.tmp
+store_data/*.json.tmp
+# 손님이 올린 시험지 — 개인 자료라 저장소에 올리지 않습니다
+store_data/submissions/*
+!store_data/submissions/.gitkeep

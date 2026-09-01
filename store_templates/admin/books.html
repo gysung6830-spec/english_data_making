@@ -1,0 +1,113 @@
+{% extends "admin/base.html" %}
+{% block title %}교재 · 분류{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <div class="row">
+    <div>
+      <h1>교재 · 분류</h1>
+      <p><b>분류</b>는 메뉴의 큰 갈래(모의고사·EBS·교과서), <b>교재</b>는 그 안의 책·회차입니다.
+        상품은 항상 교재 아래에 넣습니다.</p>
+    </div>
+    <div class="spacer"></div>
+    <a class="btn btn-primary" href="{{ url_for('admin.book_form') }}">＋ 새 교재 만들기</a>
+  </div>
+</div>
+
+<div class="panel">
+  <h2>교재</h2>
+  <div class="hint">교재를 만들면 <code>/books/주소이름</code> 페이지가 자동으로 생깁니다.
+    강사분들이 교재 이름으로 검색해 들어오는 통로가 됩니다.</div>
+  {% if items %}
+  <div class="wrapbox">
+    <table class="adm-table">
+      <thead><tr><th>순서</th><th>교재</th><th>분류</th><th>출판사 · 저자</th>
+                 <th>상품 수</th><th>상태</th><th style="min-width:200px;"></th></tr></thead>
+      <tbody>
+      {% for b in items %}
+        <tr>
+          <td class="muted">{{ b.sort or 100 }}</td>
+          <td><b>{{ b.name }}</b><br><small class="code">{{ b.slug }}</small></td>
+          <td><small>{{ catalog.categories | selectattr('id','equalto',b.category) | map(attribute='name') | first | default('-') }}</small></td>
+          <td><small>{{ b.publisher or '-' }}{% if b.author %} · {{ b.author }}{% endif %}
+            {% if b.grade %}<br class="muted">{{ b.grade }}{% endif %}</small></td>
+          <td>
+            {% if counts.get(b.slug) %}{{ counts[b.slug] }}개
+            {% else %}<span class="tag tag-off">0개 · 사이트에 안 보임</span>{% endif %}
+          </td>
+          <td>{% if b.active is not defined or b.active %}<span class="tag tag-on">노출</span>
+              {% else %}<span class="tag tag-off">숨김</span>{% endif %}</td>
+          <td>
+            <div class="inline-form">
+              <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.book_form', slug=b.slug) }}">고치기</a>
+              {% if counts.get(b.slug) %}
+                <a class="btn btn-ghost btn-sm" href="{{ url_for('book_detail', slug=b.slug) }}"
+                   target="_blank" rel="noopener">보기 ↗</a>
+              {% endif %}
+              <form method="post" action="{{ url_for('admin.book_delete', slug=b.slug) }}"
+                    onsubmit="return confirm('{{ b.name }} 교재를 지울까요?');">
+                <button class="btn btn-sm danger" type="submit">지우기</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <div class="empty"><b>아직 교재가 없습니다.</b>오른쪽 위 '새 교재 만들기'로 시작하세요.</div>
+  {% endif %}
+</div>
+
+<div class="panel">
+  <h2>분류</h2>
+  <div class="hint">사이트 위쪽 메뉴와 목록 필터에 쓰이는 큰 갈래입니다. 보통 3~5개면 충분합니다.</div>
+  <div class="wrapbox" style="margin-bottom:16px;">
+    <table class="adm-table">
+      <thead><tr><th>아이디</th><th>화면에 보이는 이름</th><th></th></tr></thead>
+      <tbody>
+      {% for c in catalog.categories %}
+        <tr>
+          <td><span class="code">{{ c.id }}</span></td>
+          <td>
+            <form class="inline-form" method="post" action="{{ url_for('admin.category_save') }}">
+              <input type="hidden" name="action" value="rename">
+              <input type="hidden" name="id" value="{{ c.id }}">
+              <input type="text" name="name" value="{{ c.name }}" style="width:200px;">
+              <button class="btn btn-ghost btn-sm" type="submit">이름 저장</button>
+            </form>
+          </td>
+          <td>
+            <form method="post" action="{{ url_for('admin.category_save') }}"
+                  onsubmit="return confirm('{{ c.name }} 분류를 지울까요?');">
+              <input type="hidden" name="action" value="delete">
+              <input type="hidden" name="id" value="{{ c.id }}">
+              <button class="btn btn-sm danger" type="submit">지우기</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <form method="post" action="{{ url_for('admin.category_save') }}">
+    <input type="hidden" name="action" value="add">
+    <div class="form-grid">
+      <div class="adm-field">
+        <label for="cat_name">새 분류 이름</label>
+        <input type="text" id="cat_name" name="name" placeholder="예: 교과서">
+      </div>
+      <div class="adm-field">
+        <label for="cat_id">아이디 (영문)</label>
+        <input type="text" id="cat_id" name="id" placeholder="textbook">
+        <div class="tip">영문 소문자·숫자·하이픈. 한 번 정하면 바꾸지 마세요.</div>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">분류 추가</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
