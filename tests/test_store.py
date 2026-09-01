@@ -164,6 +164,40 @@ def test_book_page_splits_lanes():
     print("PASS  교재 페이지가 두 갈래로 갈림")
 
 
+def test_search_finds_by_publisher_and_book():
+    """강사는 '능률' 처럼 교재 이름 일부만 칩니다. 그걸로 찾아져야 합니다."""
+    import re
+    def names(html):                       # 검색 결과에 실제로 뜬 상품 이름만
+        head = html.split("찾으시는 교재가 없나요")[0]
+        return re.findall(r"<h3><a [^>]*>([^<]+)</a></h3>", head)
+
+    hit = names(body(client().get("/products?q=능률")))
+    assert hit and all("능률" in n for n in hit), hit
+
+    # 출판사(EBS)로도 찾아집니다
+    ebs = names(body(client().get("/products?q=EBS")))
+    assert ebs and all(("수능특강" in n or "수능완성" in n) for n in ebs), ebs
+
+    # 없는 것을 치면 교재 요청으로 안내
+    miss = body(client().get("/products?q=없는교재이름"))
+    assert "찾은 자료가 없습니다" in miss and "교재 요청하기" in miss
+    print("PASS  교재·출판사 검색")
+
+
+def test_share_and_branding():
+    """카톡·밴드에 링크를 뿌렸을 때 제대로 보여야 합니다."""
+    home = body(client().get("/"))
+    assert 'property="og:image"' in home and "og.png" in home
+    assert 'name="twitter:card"' in home
+    assert 'property="og:url"' in home and 'property="og:site_name"' in home
+    assert "🌿" not in home                      # 이모지 로고를 걷어냈는지
+    assert 'class="logo-mark"' in home           # 자체 마크로 바뀌었는지
+
+    assert client().get("/static/og.png").status_code == 200
+    assert client().get("/static/favicon.svg").status_code == 200
+    print("PASS  공유 썸네일 · 자체 로고")
+
+
 def test_book_page_lists_only_its_products():
     text = body(client().get("/books/mock-2026-06-g3"))
     assert "2026학년도 6월 모의평가" in text
@@ -772,6 +806,17 @@ def test_backup_download_and_restore():
 
 
 # ---- 7. 글꼴 · 보안 --------------------------------------------------------
+def test_mobile_menu_exists():
+    """폰에서는 메뉴가 접혀 있어야 첫 화면을 다 먹지 않습니다."""
+    home = body(client().get("/"))
+    assert 'class="nav-toggle"' in home and 'aria-controls="main-nav"' in home
+    assert 'id="main-nav"' in home
+    css = body(client().get("/static/store.css"))
+    assert ".nav.open{display:flex;}" in css        # 눌렀을 때만 펼쳐짐
+    assert ".nav-toggle{display:none;}" in css      # 데스크톱에선 버튼이 안 보임
+    print("PASS  폰에서 접히는 메뉴")
+
+
 def test_nanumsquareround_font_is_served():
     """모든 글자가 나눔스퀘어라운드로 나와야 합니다(외부 CDN 없이 자체 제공)."""
     css = body(client().get("/static/store.css"))
@@ -858,6 +903,8 @@ def run_all():
     test_sibling_package_cross_sell()
     test_package_filter()
     test_book_page_splits_lanes()
+    test_search_finds_by_publisher_and_book()
+    test_share_and_branding()
     test_book_page_lists_only_its_products()
     test_home_shows_every_category()
     test_pass_twelve_month_price()
@@ -894,6 +941,7 @@ def run_all():
     test_public_forms_are_rate_limited()
     # 예시 데이터를 지우는 테스트는 다른 테스트가 그 상품을 쓰므로 맨 뒤에 둡니다.
     test_clear_sample_data()
+    test_mobile_menu_exists()
     test_nanumsquareround_font_is_served()
     test_file_path_traversal_blocked()
     print("\n판매 사이트 테스트 통과 ✅")

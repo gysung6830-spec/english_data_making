@@ -12,21 +12,35 @@
         자료 하나하나는 <a href="{{ url_for('lineup') }}"><b>자료 라인업</b></a>에서 보실 수 있습니다.</p>
     </div>
 
+    <form class="searchbar" method="get" action="{{ url_for('products') }}">
+      <input type="search" name="q" value="{{ q }}"
+             placeholder="교재 이름으로 찾기 — 예: 능률, 6월 모평, 수능특강">
+      {% if selected %}<input type="hidden" name="category" value="{{ selected }}">{% endif %}
+      {% if selected_package %}<input type="hidden" name="package" value="{{ selected_package }}">{% endif %}
+      <button class="btn btn-primary" type="submit">찾기</button>
+      {% if q %}<a class="btn btn-ghost" href="{{ url_for('products') }}">지우기</a>{% endif %}
+    </form>
+
+    {% if q %}
+      <p class="search-note"><b>'{{ q }}'</b> 로 찾은 결과 —
+        교재 {{ books|length }}개 · 자료 {{ items|length }}개</p>
+    {% endif %}
+
     <div class="filters">
       <a class="filter {{ 'on' if not selected }}"
-         href="{{ url_for('products', package=selected_package) }}">전체</a>
+         href="{{ url_for('products', package=selected_package, q=q) }}">전체</a>
       {% for c in categories %}
         <a class="filter {{ 'on' if selected == c.id }}"
-           href="{{ url_for('products', category=c.id, package=selected_package) }}">{{ c.name }}</a>
+           href="{{ url_for('products', category=c.id, package=selected_package, q=q) }}">{{ c.name }}</a>
       {% endfor %}
     </div>
 
     <div class="filters pkg-filters">
       <a class="filter {{ 'on' if not selected_package }}"
-         href="{{ url_for('products', category=selected) }}">두 가지 모두</a>
+         href="{{ url_for('products', category=selected, q=q) }}">두 가지 모두</a>
       {% for pkg in packages %}
         <a class="filter pkg-filter-{{ pkg.id }} {{ 'on' if selected_package == pkg.id }}"
-           href="{{ url_for('products', category=selected, package=pkg.id) }}">{{ pkg.name }}</a>
+           href="{{ url_for('products', category=selected, package=pkg.id, q=q) }}">{{ pkg.name }}</a>
       {% endfor %}
     </div>
 
@@ -47,7 +61,13 @@
       </div>
     {% else %}
       <div class="card center">
-        <p>이 분류에는 아직 등록된 자료가 없습니다.</p>
+        {% if q %}
+          <p><b>'{{ q }}'</b> 로는 찾은 자료가 없습니다.</p>
+          <p class="muted">아직 안 만든 교재일 수 있습니다.
+            <b>교재 이름만 적어 두시면</b> 만든 뒤 연락드리겠습니다.</p>
+        {% else %}
+          <p>이 분류에는 아직 등록된 자료가 없습니다.</p>
+        {% endif %}
         <a class="btn btn-primary" href="{{ url_for('custom') }}">교재 요청하기</a>
       </div>
     {% endif %}

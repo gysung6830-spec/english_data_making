@@ -141,15 +141,31 @@ def products():
     catalog = sc.load_catalog()
     selected = request.args.get("category", "")
     package = request.args.get("package", "")
+    q = sc.clean(request.args.get("q"), 60)
+
     items = catalog["products"]
+    books = sc.books_with_counts(catalog, selected)
     if selected:
         items = [p for p in items if p.get("category") == selected]
     if package:
         items = [p for p in items if p.get("package") == package]
-    return render_template("products.html", items=items,
-                           books=sc.books_with_counts(catalog, selected),
+    if q:
+        # 교재 이름·출판사로도 찾히게 합니다. ("능률" 만 쳐도 그 교재 상품이 나오도록)
+        needle = q.lower()
+        book_hit = {b["slug"] for b in catalog["books"]
+                    if needle in f"{b.get('name','')} {b.get('publisher','')} "
+                                 f"{b.get('author','')}".lower()}
+        items = [p for p in items
+                 if needle in f"{p.get('name','')} {p.get('subtitle','')} "
+                              f"{p.get('grade','')}".lower()
+                 or p.get("book") in book_hit]
+        books = [b for b in books
+                 if needle in f"{b.get('name','')} {b.get('publisher','')} "
+                              f"{b.get('author','')}".lower()]
+    return render_template("products.html", items=items, books=books,
                            categories=catalog.get("categories", []), selected=selected,
-                           packages=catalog.get("packages", []), selected_package=package)
+                           packages=catalog.get("packages", []), selected_package=package,
+                           q=q)
 
 
 def find_product(slug: str) -> dict | None:

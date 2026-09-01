@@ -5,19 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}{{ site.brand }}{% endblock %}</title>
 <meta name="description" content="{% block desc %}{{ site.description }}{% endblock %}">
+<meta property="og:site_name" content="{{ site.brand }}">
 <meta property="og:title" content="{{ self.title() }}">
 <meta property="og:description" content="{{ self.desc() }}">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:image" content="{{ url_for('static', filename='og.png', _external=True) }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#146b4a">
 {% block robots %}{% endblock %}
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+<link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='og.png') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='store.css') }}">
 </head>
 <body>
 
 <header class="site-head">
   <div class="wrap">
-    <a class="logo" href="{{ url_for('home') }}">🌿 Ortica<span>영어</span></a>
-    <nav class="nav">
+    <a class="logo" href="{{ url_for('home') }}"><svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M27 4C15.4 4 6 10.7 6 21.4c0 2.2.5 4.3 1.4 6.1l3.4-3.4c-.3-.9-.4-1.8-.4-2.7C10.4 14 17.1 8.9 25 8.3c-1.6 7.8-7.4 13-14.6 14.2l-4.9 4.9a1.6 1.6 0 1 0 2.3 2.3l3.3-3.3C20.6 27.6 27 20 27 8.9V4z" fill="currentColor"/><path d="M18.6 12.6c-2.6 1-4.8 2.7-6.3 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".55"/></svg>Ortica<span>영어</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+      <span></span><span></span><span></span>
+      <em>메뉴</em>
+    </button>
+    <nav class="nav" id="main-nav">
       <a href="{{ url_for('lineup') }}" class="{{ 'on' if request.endpoint == 'lineup' }}">자료 라인업</a>
       <a href="{{ url_for('products') }}" class="{{ 'on' if request.endpoint in ['products','product_detail'] }}">자료 목록</a>
       <a href="{{ url_for('samples') }}" class="{{ 'on' if request.endpoint == 'samples' }}">무료 샘플</a>
@@ -43,6 +56,20 @@
 <main>
   {% block body %}{% endblock %}
 </main>
+
+<script>
+  // 폰에서는 메뉴를 접어 두고, '메뉴'를 누르면 펼칩니다.
+  (function () {
+    var btn = document.querySelector('.nav-toggle');
+    var nav = document.getElementById('main-nav');
+    if (!btn || !nav) return;
+    btn.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.classList.toggle('on', open);
+    });
+  })();
+</script>
 
 <footer class="site-foot">
   <div class="wrap">
