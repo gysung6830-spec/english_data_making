@@ -107,6 +107,13 @@
   font-family:inherit; font-size:14.5px; background:#fff; color:var(--ink);
 }
 .adm-field textarea{min-height:90px; resize:vertical;}
+/* 체크박스까지 100% 로 늘어나면 글자가 아래로 밀려 내려갑니다 */
+.adm-field input[type=checkbox], .adm-field input[type=radio]{
+  width:17px; height:17px; flex:0 0 17px; accent-color:var(--brand);
+}
+.adm-field .check{display:inline-flex; align-items:center; gap:8px; font-weight:600;}
+.panel > .check{display:inline-flex; align-items:center; gap:8px; font-weight:600; font-size:14.5px;}
+.panel > .check input[type=checkbox]{width:17px; height:17px; accent-color:var(--brand);}
 .adm-field input:focus,.adm-field select:focus,.adm-field textarea:focus{
   outline:none; border-color:var(--brand); box-shadow:0 0 0 3px rgba(20,107,74,.12);
 }
