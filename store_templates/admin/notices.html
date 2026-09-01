@@ -18,12 +18,26 @@
       </div>
       <div class="adm-field">
         <label for="tag">말머리</label>
-        <input type="text" id="tag" name="tag" placeholder="예: 업데이트 / 안내 / 예정">
+        <input type="text" id="tag" name="tag" hidden>
+        <div class="pick" data-target="tag" style="margin-top:0;">
+          {% for v in ['업데이트', '안내', '예정', '이벤트', '휴무'] %}
+            <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
+          {% endfor %}
+          <button class="pick-btn clear" data-value="">없음</button>
+        </div>
       </div>
       <div class="adm-field full">
         <label for="title">제목 <span style="color:#c2410c">*</span></label>
         <input type="text" id="title" name="title"
                placeholder="예: 2026학년도 9월 모의평가 전지문 세트 업로드" required>
+        <div class="pick" data-target="title">
+          <span class="pick-label">자주 쓰는 문장</span>
+          {% for v in ['새 자료를 올렸습니다', '이번 주 업로드 안내',
+                       '다음 주 업로드 예정입니다', '자료를 수정해 다시 올렸습니다'] %}
+            <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
+          {% endfor %}
+        </div>
+        <div class="tip">눌러서 넣은 뒤 교재 이름만 바꿔 쓰시면 빠릅니다.</div>
       </div>
       <div class="adm-field full">
         <label for="body">내용</label>
@@ -100,11 +114,17 @@
   <h2>자료 업데이트 일정</h2>
   <div class="hint">"매주 월요일에 지난주 학평 올림" 처럼 <b>실제로 지킬 수 있는</b> 주기만 적으세요.
     못 지키면 오히려 신뢰를 잃습니다. 비워 두면 이 표가 안 나옵니다.</div>
+  <datalist id="when-list">
+    {% for v in ['매주 월요일', '매주 금요일', '매월 1일', '매월 15일',
+                 '시험 3주 전', '모의고사 다음 주', '수시로'] %}
+      <option value="{{ v }}"></option>
+    {% endfor %}
+  </datalist>
   <form method="post" action="{{ url_for('admin.schedule_save') }}">
     {% for row in (schedule + [{'when':'','what':''}, {'when':'','what':''}]) %}
       <div class="inline-form" style="margin-bottom:8px;">
         <input type="text" name="when" value="{{ row.when }}" placeholder="언제 (예: 매주 월요일)"
-               style="width:200px;">
+               style="width:200px;" list="when-list">
         <input type="text" name="what" value="{{ row.what }}" placeholder="무엇을 (예: 지난주 학평 업로드)"
                style="flex:1; min-width:240px;">
       </div>

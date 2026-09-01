@@ -189,3 +189,29 @@
 .adm-head p, .panel > .hint, .setup-body small, .adm-field .tip,
 .steps-help li, .warn-list li, .empty { text-wrap:pretty; }
 .adm-head p, .panel > .hint, .steps-help, .setup-body small { max-width:60em; }
+
+/* ==========================================================================
+   고르는 버튼 — 직접 타이핑하는 대신 눌러서 채웁니다.
+   ========================================================================== */
+.pick{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;}
+.pick-btn{
+  border:1px solid var(--line-strong); background:#fff; color:var(--ink-2);
+  border-radius:999px; padding:6px 13px; font-size:13.5px; font-weight:600;
+  font-family:inherit; cursor:pointer; transition:.12s; white-space:nowrap;
+}
+.pick-btn:hover{border-color:var(--brand); color:var(--brand);}
+.pick-btn.on{background:var(--brand); border-color:var(--brand); color:#fff;}
+.pick-btn.clear{color:var(--muted);}
+.pick-label{font-size:12.5px; color:var(--muted); align-self:center; margin-right:2px;}
+
+/* 자동으로 채워지는 칸은 회색으로 눕혀 두고, '직접 고치기'를 누르면 깨어납니다. */
+.auto-field input{background:#f4f2ed; color:var(--ink-2);}
+.auto-field.edit input{background:#fff; color:var(--ink);}
+.auto-note{
+  display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--muted);
+  margin-top:6px; flex-wrap:wrap;
+}
+.auto-note button{
+  border:0; background:none; color:var(--brand); font-weight:700; font-size:12.5px;
+  cursor:pointer; text-decoration:underline; font-family:inherit; padding:0;
+}

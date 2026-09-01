@@ -53,6 +53,14 @@
     <div class="adm-field full">
       <label for="contact_hours">상담 시간</label>
       <input type="text" id="contact_hours" name="contact_hours" value="{{ s.contact.hours or '' }}">
+      <div class="pick" data-target="contact_hours">
+        {% for v in ['평일 10:00 ~ 19:00 (주말·공휴일 휴무)',
+                     '평일 09:00 ~ 18:00 (주말·공휴일 휴무)',
+                     '매일 10:00 ~ 22:00',
+                     '언제든 문의 주세요 (답변은 평일에 드립니다)'] %}
+          <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>
@@ -64,7 +72,13 @@
     <div class="adm-field">
       <label for="payment_bank_name">은행</label>
       <input type="text" id="payment_bank_name" name="payment_bank_name"
-             value="{{ s.payment.bank_name or '' }}" placeholder="국민은행">
+             value="{{ s.payment.bank_name or '' }}" placeholder="아래에서 고르세요">
+      <div class="pick" data-target="payment_bank_name">
+        {% for v in ['국민은행', '신한은행', '우리은행', '하나은행', '농협', '기업은행',
+                     'SC제일', '카카오뱅크', '토스뱅크', '새마을금고', '우체국'] %}
+          <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
+        {% endfor %}
+      </div>
     </div>
     <div class="adm-field">
       <label for="payment_bank_account">계좌번호</label>
@@ -85,6 +99,13 @@
     <div class="adm-field full">
       <label for="payment_notice">발송 안내 문구</label>
       <input type="text" id="payment_notice" name="payment_notice" value="{{ s.payment.notice or '' }}">
+      <div class="pick" data-target="payment_notice">
+        {% for v in ['입금이 확인되면 영업일 기준 24시간 이내에 주문서에 적어 주신 이메일로 자료를 보내 드립니다.',
+                     '입금이 확인되는 대로 바로 자료를 보내 드립니다.',
+                     '입금 확인은 평일 오전·오후 두 번 합니다.'] %}
+          <button class="pick-btn" data-value="{{ v }}">{{ v[:22] }}…</button>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>
@@ -123,6 +144,10 @@
     <div class="adm-field full">
       <label for="policy_refund">환불 규정</label>
       <textarea id="policy_refund" name="policy_refund">{{ s.policy.refund or '' }}</textarea>
+      <div class="pick" data-target="policy_refund">
+        <button class="pick-btn" data-value="디지털 자료 특성상 파일이 발송된 이후에는 환불이 어렵습니다. 발송 전(입금대기·입금확인 상태)에는 전액 환불해 드립니다.">
+          기본 문구 넣기</button>
+      </div>
     </div>
     <div class="adm-field full">
       <label for="policy_license">자료 이용 범위</label>

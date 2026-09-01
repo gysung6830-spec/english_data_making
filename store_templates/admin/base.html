@@ -65,5 +65,47 @@
   </main>
 
 </div>
+
+<script>
+/* 고르는 버튼: 누르면 짝지어진 칸에 값이 들어갑니다.
+   버튼에 data-target="칸id" data-value="넣을값" 을 달아 두면 됩니다. */
+(function () {
+  function syncGroup(group) {
+    var target = document.getElementById(group.dataset.target);
+    if (!target) return;
+    group.querySelectorAll('.pick-btn').forEach(function (btn) {
+      btn.classList.toggle('on', String(btn.dataset.value) === String(target.value));
+    });
+  }
+  document.querySelectorAll('.pick[data-target]').forEach(function (group) {
+    var target = document.getElementById(group.dataset.target);
+    if (!target) return;
+    group.querySelectorAll('.pick-btn').forEach(function (btn) {
+      btn.type = 'button';
+      btn.addEventListener('click', function () {
+        target.value = btn.dataset.value;
+        target.dispatchEvent(new Event('input', {bubbles: true}));
+        target.dispatchEvent(new Event('change', {bubbles: true}));
+        syncGroup(group);
+      });
+    });
+    target.addEventListener('input', function () { syncGroup(group); });
+    syncGroup(group);
+  });
+
+  /* 자동으로 채워지는 칸을 손으로 고치고 싶을 때 */
+  document.querySelectorAll('[data-unlock]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var box = document.getElementById(btn.dataset.unlock);
+      if (!box) return;
+      box.classList.add('edit');
+      box.querySelectorAll('input, textarea').forEach(function (el) {
+        el.readOnly = false; el.dataset.manual = '1'; el.focus();
+      });
+      btn.remove();
+    });
+  });
+})();
+</script>
 </body>
 </html>

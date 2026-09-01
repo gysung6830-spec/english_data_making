@@ -592,6 +592,35 @@ def test_admin_pages_open():
 
 
 # ---- 6. 관리자에서 고친 내용이 고객 화면에 반영되는지 ----------------------
+def test_admin_forms_offer_buttons_not_typing():
+    """관리자에서 직접 타이핑할 일이 최대한 없어야 합니다."""
+    a = admin()
+    form = body(a.get("/admin/products/new"))
+    # 학년·배지·형식·발송·가격이 버튼으로 나와야 합니다.
+    for label in ("고3", "인기", "PDF (A4, 인쇄용)", "자주 쓰는 값", "맨 위"):
+        assert label in form, label
+    assert 'data-target="grade"' in form and 'data-target="badge"' in form
+    # 이름·주소는 자동으로 만들어지므로 처음엔 못 쓰게 잠겨 있어야 합니다.
+    assert "교재와 패키지를 고르면 자동으로 만들어집니다" in form
+    assert form.count("readonly") >= 3
+
+    bookform = body(a.get("/admin/books/new"))
+    for label in ("평가원", "EBS", "능률(NE)", "고1~고2"):
+        assert label in bookform, label
+
+    coupon = body(a.get("/admin/coupons"))
+    for label in ("5,000원", "10%", "석 달", "기한 없음", "첫 구매 감사"):
+        assert label in coupon, label
+
+    notice = body(a.get("/admin/notices"))
+    assert "자주 쓰는 문장" in notice and 'data-target="tag"' in notice
+
+    settings = body(a.get("/admin/settings"))
+    for label in ("카카오뱅크", "기본 문구 넣기"):
+        assert label in settings, label
+    print("PASS  관리자 폼이 타이핑 대신 버튼으로")
+
+
 def test_admin_creates_product_visible_on_site():
     a = admin()
     resp = a.post("/admin/products/new", data={
@@ -851,6 +880,7 @@ def run_all():
     test_login_next_cannot_leave_admin()
     test_admin_pages_open()
     test_setup_checklist_guides_first_day()
+    test_admin_forms_offer_buttons_not_typing()
     test_admin_creates_product_visible_on_site()
     test_admin_edits_material_and_site_reflects()
     test_admin_product_materials_saved()

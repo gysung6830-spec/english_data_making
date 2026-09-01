@@ -622,6 +622,20 @@ def products():
                            sample_count=len([x for x in items if x.get("sample")]))
 
 
+def form_hints(catalog: dict) -> dict:
+    """상품 폼에서 이름·주소를 자동으로 만들 때 쓰는 표."""
+    return {
+        "books": {b["slug"]: {"name": b.get("name", ""), "grade": b.get("grade", ""),
+                              "category": b.get("category", "")}
+                  for b in catalog["books"]},
+        "packages": {p["id"]: {"name": p.get("name", ""), "short": p.get("short", ""),
+                               "desc": p.get("desc", ""),
+                               "materials": p.get("materials", []),
+                               "count": len(p.get("materials", []))}
+                     for p in catalog["packages"]},
+    }
+
+
 @admin_bp.route("/products/new", methods=["GET", "POST"])
 @admin_bp.route("/products/<slug>/edit", methods=["GET", "POST"])
 def product_form(slug=None):
@@ -641,7 +655,10 @@ def product_form(slug=None):
         return render_template("admin/product_form.html", p=existing or blank,
                                catalog=catalog, errors=[], is_new=existing is None,
                                all_materials=list(sc.material_map().values()),
-                               packages=list(sc.package_map().values()))
+                               packages=list(sc.package_map().values()),
+                               sample_files=[f.name for f in sorted(sc.SAMPLE_DIR.glob("*"))
+                                             if f.is_file() and not f.name.startswith(".")],
+                               hints=form_hints(catalog))
 
     item, errors = product_from_form(request.form, existing)
     clash = [p for p in catalog["products"]
@@ -652,7 +669,10 @@ def product_form(slug=None):
         return render_template("admin/product_form.html", p=item, catalog=catalog,
                                errors=errors, is_new=existing is None,
                                all_materials=list(sc.material_map().values()),
-                               packages=list(sc.package_map().values())), 400
+                               packages=list(sc.package_map().values()),
+                               sample_files=[f.name for f in sorted(sc.SAMPLE_DIR.glob("*"))
+                                             if f.is_file() and not f.name.startswith(".")],
+                               hints=form_hints(catalog)), 400
 
     if existing is None:
         catalog["products"].append(item)

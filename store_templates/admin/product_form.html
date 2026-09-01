@@ -22,16 +22,24 @@
 <div class="panel">
   <h2>기본</h2>
   <div class="form-grid">
-    <div class="adm-field full">
+    <div class="adm-field full auto-field" id="name-box">
       <label for="name">상품 이름 <span style="color:#c2410c">*</span></label>
       <input type="text" id="name" name="name" value="{{ p.name or '' }}"
-             placeholder="예: 2026학년도 9월 모의평가 · 고3 전지문 세트" required>
+             placeholder="교재와 패키지를 고르면 자동으로 만들어집니다" required
+             {{ 'readonly' if is_new }}>
+      <div class="auto-note">
+        <span>👇 아래에서 <b>교재</b>와 <b>패키지</b>를 고르면 자동으로 채워집니다.</span>
+        {% if is_new %}<button type="button" data-unlock="name-box">직접 쓰기</button>{% endif %}
+      </div>
     </div>
-    <div class="adm-field full">
+    <div class="adm-field full auto-field" id="subtitle-box">
       <label for="subtitle">한 줄 설명</label>
       <input type="text" id="subtitle" name="subtitle" value="{{ p.subtitle or '' }}"
-             placeholder="예: 18~45번 지문 전체 · 28지문">
-      <div class="tip">상품 이름 바로 아래 회색 글씨로 나옵니다.</div>
+             placeholder="지문 수를 넣으면 자동으로 만들어집니다" {{ 'readonly' if is_new }}>
+      <div class="auto-note">
+        <span>상품 이름 아래 회색 글씨.</span>
+        {% if is_new %}<button type="button" data-unlock="subtitle-box">직접 쓰기</button>{% endif %}
+      </div>
     </div>
     <div class="adm-field">
       <label for="category">분류 <span style="color:#c2410c">*</span></label>
@@ -63,11 +71,14 @@
       </select>
       <div class="tip">고르면 그 교재 페이지에 함께 묶여 나옵니다.</div>
     </div>
-    <div class="adm-field">
+    <div class="adm-field auto-field" id="slug-box">
       <label for="slug">주소 이름 <span style="color:#c2410c">*</span></label>
       <input type="text" id="slug" name="slug" value="{{ p.slug or '' }}"
-             placeholder="mock-2026-09-g3-full" required>
-      <div class="tip">영문 소문자·숫자·하이픈만. 인터넷 주소에 쓰입니다. 한 번 정하면 바꾸지 마세요.</div>
+             placeholder="자동으로 만들어집니다" required {{ 'readonly' if is_new }}>
+      <div class="auto-note">
+        <span>인터넷 주소에 쓰입니다. 손댈 일이 거의 없습니다.</span>
+        {% if is_new %}<button type="button" data-unlock="slug-box">직접 쓰기</button>{% endif %}
+      </div>
     </div>
     <div class="adm-field">
       <label class="switch" style="margin-top:26px;">
@@ -85,23 +96,47 @@
     <div class="adm-field">
       <label for="price">판매 가격 <span style="color:#c2410c">*</span></label>
       <input type="number" id="price" name="price" min="0" value="{{ p.price or 0 }}" required>
-      <div class="tip">숫자만. 예: 22000</div>
+      <div class="pick" data-target="price">
+        <span class="pick-label">자주 쓰는 값</span>
+        {% for v in [6000, 9000, 12000, 16000, 20000, 22000, 27000, 39000, 45000, 59000] %}
+          <button class="pick-btn" data-value="{{ v }}">{{ '{:,}'.format(v) }}</button>
+        {% endfor %}
+      </div>
+      <div class="tip">지문 수를 넣으면 아래에 <b>추천 가격</b>도 나옵니다.</div>
     </div>
     <div class="adm-field">
       <label for="list_price">정가</label>
       <input type="number" id="list_price" name="list_price" min="0" value="{{ p.list_price or '' }}">
-      <div class="tip">적으면 할인율이 자동으로 계산돼 빨갛게 표시됩니다. 없으면 비워 두세요.</div>
+      <div class="pick" id="listpick">
+        <span class="pick-label">할인해 보이기</span>
+        <button class="pick-btn" type="button" data-off="20">20%</button>
+        <button class="pick-btn" type="button" data-off="25">25%</button>
+        <button class="pick-btn" type="button" data-off="30">30%</button>
+        <button class="pick-btn clear" type="button" data-off="0">안 함</button>
+      </div>
+      <div class="tip">누르면 판매가에 맞춰 정가가 자동으로 계산됩니다.</div>
     </div>
     <div class="adm-field">
       <label for="badge">배지</label>
-      <input type="text" id="badge" name="badge" value="{{ p.badge or '' }}"
-             placeholder="예: 인기 / 신규 / 자체 교재">
-      <div class="tip">상품 카드 위에 주황색으로 붙습니다. 없으면 비워 두세요.</div>
+      <input type="text" id="badge" name="badge" value="{{ p.badge or '' }}" hidden>
+      <div class="pick" data-target="badge" style="margin-top:0;">
+        {% for v in ['인기', '신규', '추천', '베스트', '자체 교재', '마감 임박'] %}
+          <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
+        {% endfor %}
+        <button class="pick-btn clear" data-value="">없음</button>
+      </div>
+      <div class="tip">상품 카드 위에 주황색으로 붙습니다.</div>
     </div>
     <div class="adm-field">
       <label for="sort">목록 순서</label>
       <input type="number" id="sort" name="sort" value="{{ p.sort or 100 }}">
-      <div class="tip">숫자가 작을수록 위에 나옵니다. 10, 20, 30 처럼 띄워 두면 나중에 끼우기 좋습니다.</div>
+      <div class="pick" data-target="sort">
+        <button class="pick-btn" data-value="10">맨 위</button>
+        <button class="pick-btn" data-value="50">중간</button>
+        <button class="pick-btn" data-value="100">기본</button>
+        <button class="pick-btn" data-value="900">맨 아래</button>
+      </div>
+      <div class="tip">숫자가 작을수록 위에 나옵니다.</div>
     </div>
   </div>
 </div>
@@ -111,7 +146,13 @@
   <div class="form-grid">
     <div class="adm-field">
       <label for="grade">대상 학년</label>
-      <input type="text" id="grade" name="grade" value="{{ p.grade or '' }}" placeholder="예: 고3">
+      <input type="text" id="grade" name="grade" value="{{ p.grade or '' }}" hidden>
+      <div class="pick" data-target="grade" style="margin-top:0;">
+        {% for v in ['고1', '고2', '고3', '고1~고2', '고2~고3', '중등', '전 학년'] %}
+          <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
+        {% endfor %}
+        <button class="pick-btn clear" data-value="">없음</button>
+      </div>
     </div>
     <div class="adm-field">
       <label for="passages">지문 수</label>
@@ -149,20 +190,41 @@
     </div>
     <div class="adm-field">
       <label for="format">파일 형식</label>
-      <input type="text" id="format" name="format" value="{{ p.format or 'PDF (A4, 인쇄용)' }}">
+      <input type="text" id="format" name="format" value="{{ p.format or 'PDF (A4, 인쇄용)' }}" hidden>
+      <div class="pick" data-target="format" style="margin-top:0;">
+        {% for v in ['PDF (A4, 인쇄용)', 'PDF + 한글(HWP)', 'ZIP 묶음', 'PDF (교사용·학생용)'] %}
+          <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
+        {% endfor %}
+      </div>
     </div>
     <div class="adm-field">
       <label for="delivery">발송 안내</label>
       <input type="text" id="delivery" name="delivery"
-             value="{{ p.delivery or '입금 확인 후 영업일 기준 24시간 이내 이메일 발송' }}">
+             value="{{ p.delivery or '입금 확인 후 영업일 기준 24시간 이내 이메일 발송' }}" hidden>
+      <div class="pick" data-target="delivery" style="margin-top:0;">
+        {% for v in ['입금 확인 후 영업일 기준 24시간 이내 이메일 발송',
+                     '입금 확인 즉시 이메일 발송',
+                     '입금 확인 후 영업일 기준 2일 이내 발송',
+                     '주문 확인 후 개별 안내'] %}
+          <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
+        {% endfor %}
+      </div>
     </div>
     <div class="adm-field full">
       <label for="sample_file">무료 샘플 파일 이름</label>
       <input type="text" id="sample_file" name="sample_file" value="{{ p.sample_file or '' }}"
-             placeholder="sample_mock.pdf">
+             placeholder="{{ '아래에서 고르세요' if sample_files else 'samples 폴더에 PDF를 먼저 넣어 주세요' }}">
+      {% if sample_files %}
+        <div class="pick" data-target="sample_file">
+          <span class="pick-label">폴더에 있는 파일</span>
+          {% for f in sample_files %}
+            <button class="pick-btn" data-value="{{ f }}">{{ f }}</button>
+          {% endfor %}
+          <button class="pick-btn clear" data-value="">없음</button>
+        </div>
+      {% endif %}
       <div class="tip">
-        <code>store_data/samples/</code> 폴더에 넣은 PDF의 <b>파일 이름 그대로</b> 적으세요.
-        파일이 없으면 '샘플 준비 중'으로 표시됩니다.
+        <code>store_data/samples/</code> 폴더에 PDF를 넣으면 여기 버튼으로 나옵니다.
       </div>
     </div>
   </div>
@@ -182,18 +244,98 @@
 </form>
 
 <script>
-  // 패키지 종류를 바꾸면 그 패키지의 기본 자료를 자동으로 체크해 줍니다.
-  (function () {
-    var sel = document.getElementById('package');
-    if (!sel) return;
-    sel.addEventListener('change', function () {
-      var opt = sel.options[sel.selectedIndex];
-      var want = (opt.dataset.materials || '').split(',').filter(Boolean);
-      if (!want.length) return;
-      document.querySelectorAll('input[name=materials]').forEach(function (box) {
-        box.checked = want.indexOf(box.value) !== -1;
+/* 교재·패키지·지문 수를 고르면 이름·주소·설명·가격을 대신 만들어 줍니다.
+   '직접 쓰기'를 누른 칸은 건드리지 않습니다. */
+(function () {
+  var HINTS = {{ hints | tojson }};
+  var isNew = {{ 'true' if is_new else 'false' }};
+
+  var book = document.getElementById('book');
+  var pkg = document.getElementById('package');
+  var passages = document.getElementById('passages');
+  var name = document.getElementById('name');
+  var slug = document.getElementById('slug');
+  var subtitle = document.getElementById('subtitle');
+  var desc = document.getElementById('description');
+  var price = document.getElementById('price');
+  var listPrice = document.getElementById('list_price');
+  var grade = document.getElementById('grade');
+  var category = document.getElementById('category');
+
+  function auto(el) { return el && !el.dataset.manual; }
+
+  function fillMaterials() {
+    var want = (HINTS.packages[pkg.value] || {}).materials || [];
+    if (!want.length) return;
+    document.querySelectorAll('input[name=materials]').forEach(function (box) {
+      box.checked = want.indexOf(box.value) !== -1;
+    });
+  }
+
+  function rebuild() {
+    var b = HINTS.books[book.value];
+    var k = HINTS.packages[pkg.value];
+
+    if (isNew && auto(name)) {
+      name.value = b && k ? b.name + ' · ' + k.name : (k ? k.name : '');
+    }
+    if (isNew && auto(slug) && book.value && pkg.value) {
+      slug.value = book.value + '-' + pkg.value;
+    }
+    if (isNew && auto(subtitle)) {
+      var bits = [];
+      if (passages.value > 0) bits.push('지문 ' + passages.value + '개');
+      if (k) bits.push('자료 ' + k.count + '종');
+      subtitle.value = bits.join(' · ');
+    }
+    if (isNew && desc && !desc.value.trim() && k) desc.value = k.desc || '';
+    if (isNew && grade && !grade.value && b && b.grade) {
+      grade.value = b.grade;
+      grade.dispatchEvent(new Event('input', {bubbles: true}));
+    }
+    if (isNew && category && b && b.category) category.value = b.category;
+
+    // 지문 수를 넣으면 추천 가격을 알려 줍니다.
+    var tip = document.getElementById('price-tip');
+    if (passages.value > 0 && k) {
+      var unit = pkg.value === 'problem' ? 950 : 800;
+      var suggest = Math.round(passages.value * unit / 1000) * 1000;
+      if (!tip) {
+        tip = document.createElement('div');
+        tip.id = 'price-tip'; tip.className = 'pick';
+        price.parentNode.insertBefore(tip, price.nextSibling);
+      }
+      tip.innerHTML = '<span class="pick-label">추천</span>' +
+        '<button type="button" class="pick-btn on">' +
+        suggest.toLocaleString('ko-KR') + '원 (지문 ' + passages.value + '개 기준)</button>';
+      tip.querySelector('button').onclick = function () {
+        price.value = suggest;
+        price.dispatchEvent(new Event('input', {bubbles: true}));
+      };
+    } else if (tip) { tip.remove(); }
+  }
+
+  [book, pkg, passages].forEach(function (el) {
+    if (el) el.addEventListener('change', function () { rebuild(); fillMaterials(); });
+    if (el) el.addEventListener('input', rebuild);
+  });
+
+  // 정가 = 판매가 ÷ (1 - 할인율)
+  document.querySelectorAll('#listpick .pick-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var off = parseInt(btn.dataset.off, 10);
+      if (!off) { listPrice.value = ''; }
+      else {
+        var v = parseInt(price.value, 10) || 0;
+        listPrice.value = v ? Math.round(v / (1 - off / 100) / 1000) * 1000 : '';
+      }
+      document.querySelectorAll('#listpick .pick-btn').forEach(function (x) {
+        x.classList.toggle('on', x === btn);
       });
     });
-  })();
+  });
+
+  rebuild();
+})();
 </script>
 {% endblock %}
