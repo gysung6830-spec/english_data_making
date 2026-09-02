@@ -188,7 +188,8 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
 #    ('Unit 10 - 1번' 처럼 단원-문제 구분의 ' - '를 범위 '10~1'로 오인하지 않도록.)
 _NUM = r"\d{1,3}(?:\s*[~∼〜]\s*\d{1,3}|[－\-–—]\d{1,3})?"
 _PROBNO_COLON = re.compile(rf"({_NUM})\s*번\s*[:：]")
-_PROBNO_LINE = re.compile(rf"(?m)^\s*({_NUM})\s*번(?![가-힣:：])")
+# 줄 맨 앞 'N번'. '[18번]'·'(41~42번)'처럼 괄호로 감싼 머리글(.txt 붙여넣기)도 인식한다.
+_PROBNO_LINE = re.compile(rf"(?m)^\s*[\[\(【]?\s*({_NUM})\s*번(?![가-힣:：])")
 
 
 def _norm_probno(s: str) -> str:

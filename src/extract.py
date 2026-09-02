@@ -15,6 +15,8 @@ import pdfplumber
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
 # 한글(HWP) 문서 확장자
 HWP_EXTS = {".hwp", ".hwpx"}
+# 일반 텍스트 확장자(지문을 그대로 붙여넣은 .txt)
+TXT_EXTS = {".txt", ".text"}
 
 
 def is_image(path: str | Path) -> bool:
@@ -23,6 +25,25 @@ def is_image(path: str | Path) -> bool:
 
 def is_hwp(path: str | Path) -> bool:
     return Path(path).suffix.lower() in HWP_EXTS
+
+
+def is_txt(path: str | Path) -> bool:
+    return Path(path).suffix.lower() in TXT_EXTS
+
+
+def extract_txt_text(path: str | Path) -> str:
+    """.txt 파일 본문을 그대로 읽는다(UTF-8 우선, 실패 시 CP949/Latin-1).
+
+    지문이 '[18번] …' 처럼 문제 머리글과 함께 붙여넣어진 텍스트를 가정한다.
+    추가 정제 없이 원문을 돌려주고, 지문 분리·한글 제거는 상위 파이프라인이 처리한다.
+    """
+    data = Path(path).read_bytes()
+    for enc in ("utf-8-sig", "utf-8", "cp949", "euc-kr", "latin-1"):
+        try:
+            return data.decode(enc)
+        except (UnicodeDecodeError, LookupError):
+            continue
+    return data.decode("utf-8", errors="ignore")
 
 # 문제/보기/정답으로 보이는 줄을 걸러내기 위한 패턴
 _NOISE_PATTERNS = [
@@ -66,8 +87,10 @@ def strip_korean_keep_english(raw: str) -> str:
 
 
 def extract_raw_text(pdf_path: str | Path) -> str:
-    """PDF 전체에서 텍스트를 뽑는다."""
+    """PDF(또는 .txt) 전체에서 텍스트를 뽑는다."""
     pdf_path = Path(pdf_path)
+    if is_txt(pdf_path):
+        return extract_txt_text(pdf_path)     # .txt 는 그대로 원문 반환
     parts: list[str] = []
     with pdfplumber.open(str(pdf_path)) as pdf:
         for page in pdf.pages:

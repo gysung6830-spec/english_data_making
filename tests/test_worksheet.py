@@ -777,6 +777,36 @@ def test_student_modes_render():
     print("PASS  학생용 3모드 렌더(slash/blank/interp)")
 
 
+def test_txt_ingest_and_bracket_problem_spans(tmp_path):
+    # .txt 붙여넣기 지문: 파일을 그대로 읽고, '[NN번]' 대괄호 머리글로 문제 단위 분리.
+    from src import extract
+    from src.worksheet.pipeline import _problem_spans, _detect_problem_numbers
+    import worksheet_app
+
+    txt = ("[18번]\nDear Parents, we share information about the field trip.\n\n"
+           "[19번]\nMaggie stood up, her hands gripping the seat in front.\n\n"
+           "[41~42번]\nThe role of slang in popular culture has changed a lot.\n\n"
+           "[43~45번]\nOnce upon a time in Persia, there was a merchant here.\n")
+    p = tmp_path / "mock_2026_09.txt"
+    p.write_text(txt, encoding="utf-8")
+
+    assert extract.is_txt(p)
+    assert ".txt" in extract.TXT_EXTS
+    raw = extract.extract_raw_text(p)          # .txt 는 원문 그대로
+    assert "[18번]" in raw and "[43~45번]" in raw
+    # 한글 제거 후 본문 후보(영어)는 비어있지 않음
+    assert not extract.looks_empty(extract.extract_passage_text_any(p))
+
+    # '[18번]'·'[41~42번]' 대괄호 머리글 → 문제 4개, 범위는 한 라벨로
+    spans = _problem_spans(raw)
+    assert [lbl for lbl, _ in spans] == ["18", "19", "41~42", "43~45"], spans
+    assert _detect_problem_numbers(p) == ["18", "19", "41~42", "43~45"]
+
+    # 웹앱이 .txt 업로드를 허용
+    assert ".txt" in worksheet_app.ALLOWED_WS
+    print("PASS  .txt 지문 읽기 + '[NN번]' 대괄호 문제 분리")
+
+
 def test_reading_alignment_detect():
     from src.worksheet import quality
 
