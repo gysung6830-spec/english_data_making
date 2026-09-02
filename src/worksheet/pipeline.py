@@ -613,6 +613,12 @@ def _stamp_footer(path: Path, footer_note: str = "", meta: str = "") -> None:
             buf.seek(0)
             page.merge_page(PdfReader(buf).pages[0])
             writer.add_page(page)
+        # 섹션(가이드·앞·뒤·테스트·정답·학습용·원문)을 이어 붙이며 한글 폰트가 페이지마다
+        # 중복 임베드돼 다지문 합본이 수십 MB로 커진다 → 동일 객체(폰트 등) 통합으로 대폭 축소.
+        try:
+            writer.compress_identical_objects()
+        except Exception:
+            pass
         with open(path, "wb") as f:
             writer.write(f)
     except Exception:
