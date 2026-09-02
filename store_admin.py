@@ -1533,6 +1533,38 @@ def backup_download():
                        f'attachment; filename="ortica-backup-{sc.now_kst():%Y%m%d-%H%M}.json"'}
 
 
+@admin_bp.route("/backup/full")
+def backup_full():
+    """전부 담은 백업 — 설정 · 주문 내역 · 이메일 명단 · 주문 장부 원본을 한 묶음으로.
+
+    설정만 받아 두면 주문이 날아갑니다. 주문은 되돌릴 수 없는 기록이라 함께 담습니다.
+    """
+    import zipfile
+    stamp = f"{sc.now_kst():%Y%m%d-%H%M}"
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+        for name in MANAGED_FILES:
+            z.writestr(f"설정/{name}",
+                       json.dumps(sc.load_json(name, {}), ensure_ascii=False, indent=2))
+        z.writestr("주문내역.csv", orders_csv()[0])
+        z.writestr("이메일명단.csv", leads_csv()[0])
+        if sc.DB_PATH.exists():                       # 장부 원본 (되살릴 때 이것만 있으면 됩니다)
+            z.write(sc.DB_PATH, "store.db")
+        z.writestr("읽어주세요.txt",
+                   f"오르티카 영어 전체 백업 · {sc.stamp()}\n\n"
+                   "· 설정/ 안의 파일들 → 관리자 > 백업 에서 '되돌리기'로 올리면 복구됩니다.\n"
+                   "  (되돌리기는 json 파일 하나를 받으므로, 관리자 > 백업 의 '설정만 받기'로\n"
+                   "   받은 파일을 쓰시는 편이 간단합니다.)\n"
+                   "· 주문내역.csv → 엑셀로 바로 열립니다.\n"
+                   "· store.db → 주문 장부 원본입니다. 서버가 초기화됐을 때 이 파일을\n"
+                   "  store_data/ 에 그대로 넣으면 주문이 모두 살아납니다.\n\n"
+                   "이 묶음에 들어 있지 않은 것: 무료 자료실에 올린 PDF, 상품 전달 파일,\n"
+                   "라인업 지면 사진. 원본을 컴퓨터에 갖고 계신 파일들입니다.\n")
+    return buf.getvalue(), 200, {
+        "Content-Type": "application/zip",
+        "Content-Disposition": f'attachment; filename="ortica-backup-{stamp}.zip"'}
+
+
 @admin_bp.route("/backup/restore", methods=["POST"])
 def backup_restore():
     upload = request.files.get("file")

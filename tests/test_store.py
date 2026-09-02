@@ -721,7 +721,7 @@ def test_admin_pages_open():
         ("/admin/materials/analysis", "특징 묶음 제목"),
         ("/admin/notices", "새 공지 쓰기"),
         ("/admin/settings", "입금 계좌"),
-        ("/admin/backup", "백업 내려받기"),
+        ("/admin/backup", "전체 백업 받기"),
     ]:
         resp = a.get(path)
         assert resp.status_code == 200, f"{path} [{resp.status_code}]"
@@ -907,6 +907,27 @@ def test_backup_download_and_restore():
     assert resp.status_code == 302
     assert len(sc.load_raw_catalog()["products"]) == keep
     print("PASS  백업 내려받기 → 되돌리기")
+
+
+def test_full_backup_has_orders():
+    """전체 백업에는 주문 기록이 함께 들어가야 합니다. 설정만 받으면 주문이 날아갑니다."""
+    import zipfile
+    a = admin()
+    # 주문을 하나 만들어 둡니다
+    client().post("/order", data={
+        "slug": "mock-2026-06-g3-analysis", "name": "백업테스트",
+        "phone": "010-9999-8888", "email": "backup@example.com", "agree": "1"},
+        follow_redirects=True)
+    resp = a.get("/admin/backup/full")
+    assert resp.status_code == 200
+    assert resp.headers["Content-Type"] == "application/zip"
+    with zipfile.ZipFile(io.BytesIO(resp.data)) as z:
+        names = z.namelist()
+        for want in ("설정/site.json", "주문내역.csv", "이메일명단.csv", "store.db", "읽어주세요.txt"):
+            assert want in names, f"{want} 가 백업에 없습니다 — {names}"
+        assert "백업테스트" in z.read("주문내역.csv").decode("utf-8")
+        assert z.read("store.db")[:15] == b"SQLite format 3"
+    print("PASS  전체 백업에 설정 · 주문 · 장부 원본이 다 들어감")
 
 
 # ---- 7. 글꼴 · 보안 --------------------------------------------------------
@@ -2117,6 +2138,7 @@ def run_all():
     test_admin_notice_appears_on_home()
     test_admin_settings_change_reaches_customer()
     test_backup_download_and_restore()
+    test_full_backup_has_orders()
     test_order_page_cannot_be_enumerated()
     test_security_headers_everywhere()
     test_public_forms_are_rate_limited()
