@@ -10,6 +10,7 @@
 from __future__ import annotations
 
 import os
+import re
 import traceback
 import uuid
 from pathlib import Path
@@ -326,10 +327,18 @@ def build_route():
                     client, cfg, tmp, base_header,
                     max_retries=cfg.processing.max_retries, layout=layout)
             # 수동 시작 문항 번호: 지문마다 start, start+1, … 로 리본 라벨을 덮어씀(자동 증가).
+            # ⚠️ 장문(자동감지 라벨이 '41~42'·'43~45' 같은 범위)은 폭만큼 번호를 소비하고
+            #    범위를 유지한다 → 시작번호를 넣어도 41~42/43~45 가 41,42 로 납작해지지 않음.
             if start_no is not None:
                 for a in analyses:
-                    a.lecture_label = str(counter)
-                    counter += 1
+                    m = re.fullmatch(r"\s*(\d+)\s*[~∼〜\-–—]\s*(\d+)\s*", a.lecture_label or "")
+                    if m:
+                        width = abs(int(m.group(2)) - int(m.group(1))) + 1
+                        a.lecture_label = f"{counter}~{counter + width - 1}"
+                        counter += width
+                    else:
+                        a.lecture_label = str(counter)
+                        counter += 1
             # 뱃지 '파일명+지문번호'용 파일명: 지문명(basename) 있으면 그걸, 없으면 올린 파일 이름.
             src_label = raw_name or Path(f.filename).stem
             for a in analyses:

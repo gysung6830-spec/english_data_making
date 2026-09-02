@@ -547,6 +547,47 @@ def test_webapp_start_number_autoincrement():
     print("PASS  웹앱 수동 시작 문항 번호(30→30·31·32 자동 증가)")
 
 
+def test_webapp_start_number_keeps_ranges():
+    # 시작 문항 번호를 넣어도 장문(자동감지 '41~42'·'43~45')은 폭만큼 유지되어야 한다.
+    import worksheet_app as wa
+    from src.worksheet.models import Analysis, Sentence, Token
+
+    def _mk():
+        # 자동감지 라벨: 39, 40, 41~42, 43~45 (장문 2개 포함)
+        labels = ["39", "40", "41~42", "43~45"]
+        return [Analysis(title_en="T", title_ko="ㅌ", lecture_label=lb,
+                         sentences=[Sentence(index=1, lines=[[Token(text="x")]],
+                                             translation="ㅋ")])
+                for lb in labels]
+
+    captured = {}
+
+    def fake_build(client, cfg, tmp, header, **k):
+        return _mk()
+
+    def fake_pair(analyses, out, **k):
+        captured["labels"] = [a.lecture_label for a in analyses]
+        out.write_bytes(b"%PDF-1.4\n%%EOF")
+
+    orig_build, orig_pair = wa.ws_pipeline.build_analyses_for_file, wa.ws_pipeline.render_worksheet_pair
+    orig_assess = wa.ws_quality.assess
+    wa.ws_pipeline.build_analyses_for_file = fake_build
+    wa.ws_pipeline.render_worksheet_pair = fake_pair
+    wa.ws_quality.assess = lambda *a, **k: {"ok": True, "reasons": []}
+    try:
+        c = wa.app.test_client()
+        data = {"start_no": "39", "api_key": "sk-ant-test",
+                "files": (io.BytesIO(b"x"), "wb.txt")}
+        c.post("/build", data=data, content_type="multipart/form-data")
+    finally:
+        wa.ws_pipeline.build_analyses_for_file = orig_build
+        wa.ws_pipeline.render_worksheet_pair = orig_pair
+        wa.ws_quality.assess = orig_assess
+    # 39, 40, 41~42, 43~45 — 범위가 41,42 로 납작해지지 않음
+    assert captured.get("labels") == ["39", "40", "41~42", "43~45"], captured
+    print("PASS  웹앱 시작번호 + 장문 범위 라벨 유지(41~42·43~45)")
+
+
 def _make_hwpx(path, paragraphs):
     """테스트용 최소 HWPX(section0.xml 만 있는 zip) 파일 작성."""
     import zipfile
