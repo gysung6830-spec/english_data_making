@@ -2,293 +2,738 @@
  "item_no": "31",
  "theme": "입맛은 사회적 — 사람 사이로 퍼지는 취향",
  "overview": {
-   "theme_ko": "사회적으로 퍼지는 입맛",
-   "topic": "🔎 사람 사이로 전염되듯 퍼지는 음식 취향",
-   "stance": "중립적",
-   "stance_reason": "취향이 사회적으로 형성·전파되는 현상을 관찰·설명함(Our tastes are social)",
-   "structure": "주장→근거·예시",
-   "structure_reason": "'Our tastes are social' 주장 뒤 우유·가족·마을 사례로 뒷받침",
-   "key_grammar": {
-     "point": "비교급 than",
-     "source_sentence": "Nothing turns me off something quicker than the wrong people liking it, by which I mean people almost identical to me in every respect, in a way that doesn't flatter me.",
-     "explanation": [
-       {"chip":"쉽게 말하면","text":"형용사·부사에 -er(또는 more)을 붙인 '비교급' 뒤에는 비교 대상을 than으로 잇는다."},
-       {"chip":"형태","text":"quick → quicker처럼 짧은 말은 -er, 긴 말은 more ~로 만든다."},
-       {"chip":"than 뒤","text":"than 뒤에는 비교되는 대상이 온다: 여기서는 the wrong people liking it."},
-       {"chip":"구문 포인트","text":"Nothing ~ quicker than ...은 '어떤 것도 …보다 빨리 ~하지 못한다'로 사실상 최상급의 의미."}
-     ],
-     "example_analysis": "quicker(비교급)와 than the wrong people liking it(비교 대상)이 짝을 이룬 구조",
-     "drills": [
-       {
-         "kind":"밑줄형",
-         "question":"다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
-         "sentence":"Nothing [[1|turns]] me off something [[2|quickest]] [[3|than]] the wrong people liking it, [[4|by which]] I mean people almost identical to me in every respect, in a way [[5|that]] doesn't flatter me.",
-         "options":["① turns","② quickest","③ than","④ by which","⑤ that"],
-         "answer":"②",
-         "fix":"quickest는 than과 함께 쓸 수 없다. 원문의 비교급 quicker로 고쳐야 한다(비교급 + than).",
-         "words":[],
-         "from_passage":false
-       },
-       {
-         "kind":"네모형",
-         "question":"각 네모 안에서 어법에 맞는 것을 고르시오.",
-         "sentence":"Even when you first drank milk, there [[was/were]] the milk, yes, but there was also the person behind the milk [[who/which]] will have presumably either made [[or/nor]] messed up your relationship with food for the couple of decades after that.",
-         "answer":"was / who / or",
-         "fix":"단수 주어 the milk에 was, 사람 선행사에 who, either와 짝을 이루는 상관접속사는 or.",
-         "options":[],
-         "words":[],
-         "from_passage":false
-       },
-       {
-         "kind":"오류찾기",
-         "question":"다음 중 어법상 틀린 문장은?",
-         "options":[
-           "Our tastes are social.",
-           "We learn to eat from our families and friends, at school and in work.",
-           "We observe other people in their food lives, often judgmentally.",
-           "Tastes spreads like this, person to person, like viruses, almost irrespective of the qualities of the food involved.",
-           "We want these things not just because of what they are, but who we are."
-         ],
-         "answer":"Tastes spreads like this, person to person, like viruses, almost irrespective of the qualities of the food involved.",
-         "fix":"spreads → spread. 주어 Tastes가 복수이므로 동사도 복수형 spread여야 한다.",
-         "words":[],
-         "from_passage":false
-       },
-       {
-         "kind":"영작",
-         "question":"이 소문은 어떤 바이러스보다도 더 빠르게 사람들 사이로 퍼진다. (비교급 + than)",
-         "answer":"This rumor spreads faster than any virus among people.",
-         "words":["This rumor","spreads","faster than","any virus","among people"],
-         "options":[],
-         "from_passage":false
-       },
-       {
-         "kind":"영작",
-         "question":"우리는 가족과 친구에게서, 학교와 직장에서 먹는 법을 배운다.",
-         "answer":"We learn to eat from our families and friends, at school and in work.",
-         "words":["We","learn","to eat","from our families and friends","at school and in work"],
-         "options":[],
-         "from_passage":true
-       }
-     ]
-   },
-   "restatement_chains": [
-     {"label":"취향은 사회적","expressions":["Our tastes are social","Tastes spread like this"],"variation":"입맛은 개인의 것이 아니라 사람 사이로 번진다"}
+  "theme_ko": "사회적으로 퍼지는 입맛",
+  "topic": "🔎 사람 사이로 전염되듯 퍼지는 음식 취향",
+  "stance": "중립적",
+  "stance_reason": "취향이 사회적으로 형성·전파되는 현상을 관찰·설명함(Our tastes are social)",
+  "structure": "주장→근거·예시",
+  "structure_reason": "'Our tastes are social' 주장 뒤 우유·가족·마을 사례로 뒷받침",
+  "key_grammar": {
+   "point": "비교급 than",
+   "source_sentence": "Nothing turns me off something quicker than the wrong people liking it, by which I mean people almost identical to me in every respect, in a way that doesn't flatter me.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "형용사·부사에 -er(또는 more)을 붙인 '비교급' 뒤에는 비교 대상을 than으로 잇는다."
+    },
+    {
+     "chip": "형태",
+     "text": "quick → quicker처럼 짧은 말은 -er, 긴 말은 more ~로 만든다."
+    },
+    {
+     "chip": "than 뒤",
+     "text": "than 뒤에는 비교되는 대상이 온다: 여기서는 the wrong people liking it."
+    },
+    {
+     "chip": "구문 포인트",
+     "text": "Nothing ~ quicker than ...은 '어떤 것도 …보다 빨리 ~하지 못한다'로 사실상 최상급의 의미."
+    }
    ],
-   "flow_blocks": [
-     {"stage":"주장","sentence_range":"1","summary":"입맛은 [[사회적]]이다","easy_example":"좋아하는 음식은 대개 누군가에게서 물려받은 것"},
-     {"stage":"사례","sentence_range":"2~3","summary":"우유·가족·학교·직장에서 먹는 법을 [[배움]]","easy_example":"엄마가 자주 해 준 반찬이 평생 입맛이 됨"},
-     {"stage":"사례","sentence_range":"4~5","summary":"마을 고유 [[레시피]], '무엇'이 아니라 '누구'인지 때문에 원함","easy_example":"우리 동네에서만 인기인 분식집 메뉴"},
-     {"stage":"일반화","sentence_range":"6~7","summary":"취향은 [[바이러스]]처럼 사람 사이로 퍼지고 남을 관찰·평가","easy_example":"친구 따라 유행 음식을 먹게 됨"},
-     {"stage":"결론","sentence_range":"8~9","summary":"싫은 사람이 좋아하면 흥미가 떨어짐; 유행 샐러드 겨우 피함","easy_example":"별로인 사람이 좋아하면 괜히 하기 싫어짐"}
+   "example_analysis": "quicker(비교급)와 than the wrong people liking it(비교 대상)이 짝을 이룬 구조",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "Nothing [[1|turns]] me off something [[2|quickest]] [[3|than]] the wrong people liking it, [[4|by which]] I mean people almost identical to me in every respect, in a way [[5|that]] doesn't flatter me.",
+     "options": [
+      "① turns",
+      "② quickest",
+      "③ than",
+      "④ by which",
+      "⑤ that"
+     ],
+     "answer": "②",
+     "fix": "quickest는 than과 함께 쓸 수 없다. 원문의 비교급 quicker로 고쳐야 한다(비교급 + than).",
+     "words": [],
+     "from_passage": false
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "Even when you first drank milk, there [[was/were]] the milk, yes, but there was also the person behind the milk [[who/which]] will have presumably either made [[or/nor]] messed up your relationship with food for the couple of decades after that.",
+     "answer": "was / who / or",
+     "fix": "단수 주어 the milk에 was, 사람 선행사에 who, either와 짝을 이루는 상관접속사는 or.",
+     "options": [],
+     "words": [],
+     "from_passage": false
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "options": [
+      "Our tastes are social.",
+      "We learn to eat from our families and friends, at school and in work.",
+      "We observe other people in their food lives, often judgmentally.",
+      "Tastes spreads like this, person to person, like viruses, almost irrespective of the qualities of the food involved.",
+      "We want these things not just because of what they are, but who we are."
+     ],
+     "answer": "Tastes spreads like this, person to person, like viruses, almost irrespective of the qualities of the food involved.",
+     "fix": "spreads → spread. 주어 Tastes가 복수이므로 동사도 복수형 spread여야 한다.",
+     "words": [],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "이 소문은 어떤 바이러스보다도 더 빠르게 사람들 사이로 퍼진다. (비교급 + than)",
+     "answer": "This rumor spreads faster than any virus among people.",
+     "words": [
+      "This rumor",
+      "spreads",
+      "faster than",
+      "any virus",
+      "among people"
+     ],
+     "options": [],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "우리는 가족과 친구에게서, 학교와 직장에서 먹는 법을 배운다.",
+     "answer": "We learn to eat from our families and friends, at school and in work.",
+     "words": [
+      "We",
+      "learn",
+      "to eat",
+      "from our families and friends",
+      "at school and in work"
+     ],
+     "options": [],
+     "from_passage": true
+    }
    ]
+  },
+  "restatement_chains": [
+   {
+    "label": "취향은 사회적",
+    "expressions": [
+     "Our tastes are social",
+     "Tastes spread like this"
+    ],
+    "variation": "입맛은 개인의 것이 아니라 사람 사이로 번진다"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "주장",
+    "sentence_range": "1",
+    "summary": "입맛은 [[사회적]]이다",
+    "easy_example": "좋아하는 음식은 대개 누군가에게서 물려받은 것"
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "2~3",
+    "summary": "우유·가족·학교·직장에서 먹는 법을 [[배움]]",
+    "easy_example": "엄마가 자주 해 준 반찬이 평생 입맛이 됨"
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "4~5",
+    "summary": "마을 고유 [[레시피]], '무엇'이 아니라 '누구'인지 때문에 원함",
+    "easy_example": "우리 동네에서만 인기인 분식집 메뉴"
+   },
+   {
+    "stage": "일반화",
+    "sentence_range": "6~7",
+    "summary": "취향은 [[바이러스]]처럼 사람 사이로 퍼지고 남을 관찰·평가",
+    "easy_example": "친구 따라 유행 음식을 먹게 됨"
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "8~9",
+    "summary": "싫은 사람이 좋아하면 흥미가 떨어짐; 유행 샐러드 겨우 피함",
+    "easy_example": "별로인 사람이 좋아하면 괜히 하기 싫어짐"
+   }
+  ]
  },
  "sentences": [
-   {
-     "id": 1,
-     "english": "Our tastes are social.",
-     "grammar": [
-       {"tag":"주어-동사 수일치","note":"복수 주어 tastes에 be동사 복수형 are","spans":["are"]},
-       {"tag":"2형식(주어+be+보어)","note":"are 뒤 social이 주격보어","spans":["are social"]}
-     ],
-     "vocab": [
-       {"word":"tastes","meaning":"취향, 입맛"},
-       {"word":"social","meaning":"사회적인"}
-     ],
-     "chunks": [
-       {"en":"Our tastes are [[social]].","ko":"우리의 입맛은 [[사회적]]이다."}
-     ],
-     "misreads": [
-       {"statement":"글쓴이는 입맛이 순전히 개인적 취향이 아니라 사회적으로 형성된다고 본다.","verdict":"O"}
-     ],
-     "mistips": []
-   },
-   {
-     "id": 2,
-     "english": "Even when you first drank milk, there was the milk, yes, but there was also the person behind the milk who will have presumably either made or messed up your relationship with food for the couple of decades after that.",
-     "grammar": [
-       {"tag":"시간 부사절(when)","note":"'when ~'은 시간을 나타내는 부사절","spans":["when"]},
-       {"tag":"there is/are 구문(유도부사)","note":"there was 뒤에 실제 주어가 옴","spans":["there was"]},
-       {"tag":"미래완료(will have p.p.)","note":"그 이후에 이미 만들어 놓았을 것이라는 미래완료","spans":["will have"]},
-       {"tag":"상관접속사(either A or B)","note":"either와 or이 짝을 이룸","spans":["either","or"]},
-       {"tag":"주격 관계대명사(who)","note":"선행사 the person을 수식하는 주격 관계사","spans":["who"]}
-     ],
-     "vocab": [
-       {"word":"presumably","meaning":"아마, 짐작건대"},
-       {"word":"mess up","meaning":"망쳐 놓다, 엉망으로 만들다"},
-       {"word":"decade","meaning":"10년"}
-     ],
-     "chunks": [
-       {"en":"Even when you first drank [[milk]],","ko":"당신이 처음 [[우유]]를 마셨을 때조차,"},
-       {"en":"there was the [[milk]], yes,","ko":"[[우유]]가 있었다, 그렇다,"},
-       {"en":"but there was also the [[person]] behind the milk","ko":"하지만 우유 뒤에 있는 [[사람]]도 있었다"},
-       {"en":"[[who will have presumably either made or messed up]]","ko":"[[아마 만들었거나 망쳐 놓았을]]"},
-       {"en":"your [[relationship]] with food for the couple of decades after that.","ko":"그 이후 수십 년 동안 당신의 음식과의 [[관계]]를."}
-     ],
-     "misreads": [
-       {"statement":"우유를 처음 마셨을 때 음식과의 관계를 만들거나 망친 것은 우유 그 자체였다.","verdict":"X","trap_type":"주체대상","anchor":"there was also the person behind the milk","why":"음식과의 관계를 좌우한 것은 우유가 아니라 그 우유 뒤의 사람이다."}
-     ],
-     "mistips": ["will have made는 '미래완료'로 '(그 이후) 만들어 놓았을 것이다'라는 뜻이며, 단순 과거로 오해하지 말 것."]
-   },
-   {
-     "id": 3,
-     "english": "We learn to eat from our families and friends, at school and in work.",
-     "grammar": [
-       {"tag":"to부정사(명사적·목적어)","note":"learn의 목적어로 쓰인 to부정사","spans":["to eat"]},
-       {"tag":"등위접속사(A and B)","note":"families and friends, school and work를 대등하게 연결","spans":["and"]}
-     ],
-     "vocab": [
-       {"word":"learn to+동사원형","meaning":"~하는 법을 배우다"},
-       {"word":"in work","meaning":"직장에서, 일하면서"}
-     ],
-     "chunks": [
-       {"en":"We learn to [[eat]]","ko":"우리는 [[먹는]] 법을 배운다"},
-       {"en":"from our [[families]] and friends,","ko":"우리의 [[가족]]과 친구에게서,"},
-       {"en":"at school and in [[work]].","ko":"학교와 [[직장]]에서."}
-     ],
-     "misreads": [
-       {"statement":"우리는 가족·친구·학교·직장 등 주변으로부터 먹는 법을 배운다.","verdict":"O"}
-     ],
-     "mistips": []
-   },
-   {
-     "id": 4,
-     "english": "A village develops a particular recipe for an apple pie―one that nobody outside the village likes, but who cares?",
-     "grammar": [
-       {"tag":"부정대명사 one","note":"앞의 a recipe를 대신하는 one","spans":["one"]},
-       {"tag":"목적격 관계대명사(that)","note":"one that nobody ... likes에서 likes의 목적어","spans":["that"]},
-       {"tag":"수사의문문","note":"'but who cares?'는 '아무도 신경 안 쓴다'는 반어","spans":["who cares"]}
-     ],
-     "vocab": [
-       {"word":"particular","meaning":"특정한, 특별한"},
-       {"word":"recipe","meaning":"조리법, 레시피"},
-       {"word":"who cares?","meaning":"누가 신경 쓰나?, 상관없다"}
-     ],
-     "chunks": [
-       {"en":"A village develops a particular [[recipe]]","ko":"한 마을은 특정한 [[조리법]]을 발전시킨다"},
-       {"en":"for an apple pie―one that [[nobody]] outside the village likes,","ko":"사과 파이에 대한―그 마을 밖의 [[아무도]] 좋아하지 않는 것,"},
-       {"en":"but who [[cares]]?","ko":"하지만 누가 [[신경 쓰나]]?"}
-     ],
-     "misreads": [
-       {"statement":"글쓴이는 사과 파이가 그 마을을 대표하는 가장 유명한 음식이라고 설명한다.","verdict":"X","trap_type":"무관정보","anchor":"A village develops a particular recipe for an apple pie","why":"사과 파이는 취향이 사람 따라 형성되는 한 예시일 뿐 대표 음식이라는 언급은 없다."}
-     ],
-     "mistips": []
-   },
-   {
-     "id": 5,
-     "english": "We want these things not just because of what they are, but who we are.",
-     "grammar": [
-       {"tag":"상관접속사(not just A but B)","note":"not just A but B: 'A뿐 아니라 B'","spans":["not just","but"]},
-       {"tag":"전치사 because of","note":"because of 뒤에는 명사(구)가 옴","spans":["because of"]},
-       {"tag":"관계대명사 what","note":"what they are: '그것들이 무엇인지'","spans":["what"]},
-       {"tag":"의문사절/명사절(who)","note":"who we are: '우리가 누구인지'","spans":["who"]}
-     ],
-     "vocab": [
-       {"word":"not just A but B","meaning":"단지 A가 아니라 B"},
-       {"word":"because of","meaning":"~때문에"}
-     ],
-     "chunks": [
-       {"en":"We [[want]] these things","ko":"우리는 이것들을 [[원한다]]"},
-       {"en":"not just because of [[what]] they are,","ko":"단지 그것들이 [[무엇인지]] 때문이 아니라,"},
-       {"en":"but who we are.","ko":"우리가 누구인지 때문이다."}
-     ],
-     "misreads": [
-       {"statement":"글쓴이는 우리가 어떤 음식을 원하는 이유가 오직 그 음식 자체의 특성 때문이라고 본다.","verdict":"X","trap_type":"필자관점","anchor":"not just because of what they are, but who we are","why":"글쓴이는 음식 자체(무엇)만이 아니라 '우리가 누구인지'도 이유라고 본다."}
-     ],
-     "mistips": []
-   },
-   {
-     "id": 6,
-     "english": "Tastes spread like this, person to person, like viruses, almost irrespective of the qualities of the food involved.",
-     "grammar": [
-       {"tag":"주어-동사 수일치","note":"복수 주어 Tastes에 동사원형 spread","spans":["spread"]},
-       {"tag":"지시대명사 this","note":"앞서 말한 '사람에게서 배우는' 방식을 가리킴","spans":["this"]},
-       {"tag":"과거분사 후치수식(involved)","note":"the food involved: '관련된 음식'","spans":["involved"]},
-       {"tag":"전치사(irrespective of)","note":"irrespective of: '~와 상관없이'","spans":["irrespective of"]}
-     ],
-     "vocab": [
-       {"word":"spread","meaning":"퍼지다, 확산되다"},
-       {"word":"irrespective of","meaning":"~와 상관없이"},
-       {"word":"quality","meaning":"특성, 품질"}
-     ],
-     "chunks": [
-       {"en":"Tastes [[spread]] like this,","ko":"입맛은 이처럼 [[퍼진다]],"},
-       {"en":"person to person, like [[viruses]],","ko":"사람에서 사람으로, [[바이러스]]처럼,"},
-       {"en":"[[almost irrespective of the qualities of the food involved]].","ko":"[[관련된 음식의 특성과는 거의 상관없이]]."}
-     ],
-     "misreads": [
-       {"statement":"여기서 'this'는 바이러스가 몸속에서 퍼지는 생물학적 방식을 가리킨다.","verdict":"X","trap_type":"지칭","anchor":"Tastes spread like this","why":"'this'는 앞 문장들에서 말한, 취향이 사람 사이로 전해지는 방식을 가리킨다."}
-     ],
-     "mistips": []
-   },
-   {
-     "id": 7,
-     "english": "We observe other people in their food lives, often judgmentally.",
-     "grammar": [
-       {"tag":"소유격 대명사 their","note":"other people를 가리키는 소유격","spans":["their"]},
-       {"tag":"부사(문장 수식·judgmentally)","note":"observe하는 방식을 꾸미는 부사","spans":["judgmentally"]}
-     ],
-     "vocab": [
-       {"word":"observe","meaning":"관찰하다"},
-       {"word":"judgmentally","meaning":"재단하듯이, 비판적으로"}
-     ],
-     "chunks": [
-       {"en":"We [[observe]] other people","ko":"우리는 다른 사람들을 [[관찰한다]]"},
-       {"en":"in their [[food]] lives,","ko":"그들의 [[음식]] 생활 속에서,"},
-       {"en":"often [[judgmentally]].","ko":"종종 [[재단하듯이]]."}
-     ],
-     "misreads": [
-       {"statement":"글쓴이는 다른 사람들이 자기 음식 생활을 자주 판단한다고 말한다.","verdict":"X","trap_type":"구조수식","anchor":"We observe other people in their food lives, often judgmentally.","why":"판단하듯 관찰하는 주체는 '우리'이지 관찰당하는 다른 사람들이 아니다."}
-     ],
-     "mistips": []
-   },
-   {
-     "id": 8,
-     "english": "Nothing turns me off something quicker than the wrong people liking it, by which I mean people almost identical to me in every respect, in a way that doesn't flatter me.",
-     "grammar": [
-       {"tag":"부정 주어(Nothing)","note":"'Nothing ~ quicker than'은 사실상 최상급 의미","spans":["Nothing"]},
-       {"tag":"비교급(비교급+than)","note":"quicker than: '~보다 더 빨리'","spans":["quicker","than"]},
-       {"tag":"동명사(의미상 주어)","note":"the wrong people liking it: liking의 의미상 주어가 the wrong people","spans":["liking"]},
-       {"tag":"전치사+관계대명사(by which)","note":"앞 내용을 받아 부연 설명","spans":["by which"]},
-       {"tag":"관계대명사(that)","note":"a way that doesn't flatter me에서 way를 수식","spans":["that"]}
-     ],
-     "vocab": [
-       {"word":"turn off","meaning":"흥미를 잃게 하다, 정 떨어지게 하다"},
-       {"word":"identical to","meaning":"~와 똑같은"},
-       {"word":"in every respect","meaning":"모든 면에서"},
-       {"word":"flatter","meaning":"돋보이게 하다, 치켜세우다"}
-     ],
-     "chunks": [
-       {"en":"Nothing turns me off something [[quicker]]","ko":"그 무엇도 나를 더 [[빨리]] 흥미 잃게 하지 못한다"},
-       {"en":"than the wrong people [[liking]] it,","ko":"엉뚱한 사람들이 그것을 [[좋아하는]] 것보다,"},
-       {"en":"[[by which I mean people almost identical to me in every respect]],","ko":"[[내 말은 모든 면에서 나와 거의 똑같은 사람들이라는 뜻인데]],"},
-       {"en":"in a way that doesn't [[flatter]] me.","ko":"나를 [[돋보이게]] 하지 않는 방식으로."}
-     ],
-     "misreads": [
-       {"statement":"글쓴이는 자신과 전혀 다른 부류의 사람들이 어떤 음식을 좋아할 때 그 음식에 흥미를 잃는다.","verdict":"X","trap_type":"인과조건","anchor":"people almost identical to me in every respect","why":"흥미를 잃게 하는 조건은 나와 '거의 똑같은' 사람들이 좋아할 때이지 전혀 다른 사람들이 아니다.","killer":true}
-     ],
-     "mistips": ["Nothing ~ quicker than ...은 '어떤 것도 …보다 빨리 ~하지 못한다'로, 사실상 '가장 빨리'라는 최상급 의미이다."]
-   },
-   {
-     "id": 9,
-     "english": "I avoided the viral chopped salad moment of 2024 by the skin of my teeth.",
-     "grammar": [
-       {"tag":"과거분사(형용사적·chopped)","note":"chopped salad: '잘게 썬 샐러드'","spans":["chopped"]},
-       {"tag":"숙어(by the skin of one's teeth)","note":"가까스로, 간신히","spans":["by the skin of my teeth"]}
-     ],
-     "vocab": [
-       {"word":"viral","meaning":"입소문으로 급속히 퍼진, 유행하는"},
-       {"word":"avoid","meaning":"피하다"},
-       {"word":"by the skin of my teeth","meaning":"가까스로, 간신히"}
-     ],
-     "chunks": [
-       {"en":"I [[avoided]] the viral chopped salad moment of 2024","ko":"나는 2024년의 유행하던 다진 샐러드 열풍을 [[피했다]]"},
-       {"en":"[[by the skin of my teeth]].","ko":"[[가까스로]]."}
-     ],
-     "misreads": [
-       {"statement":"글쓴이는 2024년 유행한 다진 샐러드를 결국 피했는데, 그 음식이 맛없다고 판단했기 때문이다.","verdict":"△","trap_type":"인과조건","anchor":"I avoided the viral chopped salad moment of 2024 by the skin of my teeth.","why":"피한 것은 맞지만 이유는 맛이 아니라 엉뚱한 사람들이 좋아하는 유행이었기 때문이다."}
-     ],
-     "mistips": []
-   }
+  {
+   "id": 1,
+   "english": "Our tastes are social.",
+   "grammar": [
+    {
+     "tag": "주어-동사 수일치",
+     "note": "복수 주어 tastes에 be동사 복수형 are",
+     "spans": [
+      "are"
+     ]
+    },
+    {
+     "tag": "2형식(주어+be+보어)",
+     "note": "are 뒤 social이 주격보어",
+     "spans": [
+      "are social"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "tastes",
+     "meaning": "취향, 입맛"
+    },
+    {
+     "word": "social",
+     "meaning": "사회적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Our tastes are [[social]].",
+     "ko": "우리의 입맛은 [[사회적]]이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "글쓴이는 입맛이 순전히 개인적 취향이 아니라 사회적으로 형성된다고 본다.",
+     "verdict": "O"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "Even when you first drank milk, there was the milk, yes, but there was also the person behind the milk who will have presumably either made or messed up your relationship with food for the couple of decades after that.",
+   "grammar": [
+    {
+     "tag": "시간 부사절(when)",
+     "note": "'when ~'은 시간을 나타내는 부사절",
+     "spans": [
+      "when"
+     ]
+    },
+    {
+     "tag": "there is/are 구문(유도부사)",
+     "note": "there was 뒤에 실제 주어가 옴",
+     "spans": [
+      "there was"
+     ]
+    },
+    {
+     "tag": "미래완료(will have p.p.)",
+     "note": "그 이후에 이미 만들어 놓았을 것이라는 미래완료",
+     "spans": [
+      "will have"
+     ]
+    },
+    {
+     "tag": "상관접속사(either A or B)",
+     "note": "either와 or이 짝을 이룸",
+     "spans": [
+      "either",
+      "or"
+     ]
+    },
+    {
+     "tag": "주격 관계대명사(who)",
+     "note": "선행사 the person을 수식하는 주격 관계사",
+     "spans": [
+      "who"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "presumably",
+     "meaning": "아마, 짐작건대"
+    },
+    {
+     "word": "mess up",
+     "meaning": "망쳐 놓다, 엉망으로 만들다"
+    },
+    {
+     "word": "decade",
+     "meaning": "10년"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Even when you first drank [[milk]],",
+     "ko": "당신이 처음 [[우유]]를 마셨을 때조차,"
+    },
+    {
+     "en": "there was the [[milk]], yes,",
+     "ko": "[[우유]]가 있었다, 그렇다,"
+    },
+    {
+     "en": "but there was also the [[person]] behind the milk",
+     "ko": "하지만 우유 뒤에 있는 [[사람]]도 있었다"
+    },
+    {
+     "en": "[[who will have presumably either made or messed up]]",
+     "ko": "[[아마 만들었거나 망쳐 놓았을]]"
+    },
+    {
+     "en": "your [[relationship]] with food for the couple of decades after that.",
+     "ko": "그 이후 수십 년 동안 당신의 음식과의 [[관계]]를."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "우유를 처음 마셨을 때 음식과의 관계를 만들거나 망친 것은 우유 그 자체였다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "there was also the person behind the milk",
+     "why": "음식과의 관계를 좌우한 것은 우유가 아니라 그 우유 뒤의 사람이다."
+    }
+   ],
+   "mistips": [
+    "will have made는 '미래완료'로 '(그 이후) 만들어 놓았을 것이다'라는 뜻이며, 단순 과거로 오해하지 말 것."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "We learn to eat from our families and friends, at school and in work.",
+   "grammar": [
+    {
+     "tag": "to부정사(명사적·목적어)",
+     "note": "learn의 목적어로 쓰인 to부정사",
+     "spans": [
+      "to eat"
+     ]
+    },
+    {
+     "tag": "등위접속사(A and B)",
+     "note": "families and friends, school and work를 대등하게 연결",
+     "spans": [
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "learn to+동사원형",
+     "meaning": "~하는 법을 배우다"
+    },
+    {
+     "word": "in work",
+     "meaning": "직장에서, 일하면서"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "We learn to [[eat]]",
+     "ko": "우리는 [[먹는]] 법을 배운다"
+    },
+    {
+     "en": "from our [[families]] and friends,",
+     "ko": "우리의 [[가족]]과 친구에게서,"
+    },
+    {
+     "en": "at school and in [[work]].",
+     "ko": "학교와 [[직장]]에서."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "우리는 가족·친구·학교·직장 등 주변으로부터 먹는 법을 배운다.",
+     "verdict": "O"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "A village develops a particular recipe for an apple pie―one that nobody outside the village likes, but who cares?",
+   "grammar": [
+    {
+     "tag": "부정대명사 one",
+     "note": "앞의 a recipe를 대신하는 one",
+     "spans": [
+      "one"
+     ]
+    },
+    {
+     "tag": "목적격 관계대명사(that)",
+     "note": "one that nobody ... likes에서 likes의 목적어",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "수사의문문",
+     "note": "'but who cares?'는 '아무도 신경 안 쓴다'는 반어",
+     "spans": [
+      "who cares"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "particular",
+     "meaning": "특정한, 특별한"
+    },
+    {
+     "word": "recipe",
+     "meaning": "조리법, 레시피"
+    },
+    {
+     "word": "who cares?",
+     "meaning": "누가 신경 쓰나?, 상관없다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "A village develops a particular [[recipe]]",
+     "ko": "한 마을은 특정한 [[조리법]]을 발전시킨다"
+    },
+    {
+     "en": "for an apple pie―one that [[nobody]] outside the village likes,",
+     "ko": "사과 파이에 대한―그 마을 밖의 [[아무도]] 좋아하지 않는 것,"
+    },
+    {
+     "en": "but who [[cares]]?",
+     "ko": "하지만 누가 [[신경 쓰나]]?"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "글쓴이는 사과 파이가 그 마을을 대표하는 가장 유명한 음식이라고 설명한다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "A village develops a particular recipe for an apple pie",
+     "why": "사과 파이는 취향이 사람 따라 형성되는 한 예시일 뿐 대표 음식이라는 언급은 없다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "We want these things not just because of what they are, but who we are.",
+   "grammar": [
+    {
+     "tag": "상관접속사(not just A but B)",
+     "note": "not just A but B: 'A뿐 아니라 B'",
+     "spans": [
+      "not just",
+      "but"
+     ]
+    },
+    {
+     "tag": "전치사 because of",
+     "note": "because of 뒤에는 명사(구)가 옴",
+     "spans": [
+      "because of"
+     ]
+    },
+    {
+     "tag": "관계대명사 what",
+     "note": "what they are: '그것들이 무엇인지'",
+     "spans": [
+      "what"
+     ]
+    },
+    {
+     "tag": "의문사절/명사절(who)",
+     "note": "who we are: '우리가 누구인지'",
+     "spans": [
+      "who"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "not just A but B",
+     "meaning": "단지 A가 아니라 B"
+    },
+    {
+     "word": "because of",
+     "meaning": "~때문에"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "We [[want]] these things",
+     "ko": "우리는 이것들을 [[원한다]]"
+    },
+    {
+     "en": "not just because of [[what]] they are,",
+     "ko": "단지 그것들이 [[무엇인지]] 때문이 아니라,"
+    },
+    {
+     "en": "but who we are.",
+     "ko": "우리가 누구인지 때문이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "글쓴이는 우리가 어떤 음식을 원하는 이유가 오직 그 음식 자체의 특성 때문이라고 본다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "not just because of what they are, but who we are",
+     "why": "글쓴이는 음식 자체(무엇)만이 아니라 '우리가 누구인지'도 이유라고 본다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "Tastes spread like this, person to person, like viruses, almost irrespective of the qualities of the food involved.",
+   "grammar": [
+    {
+     "tag": "주어-동사 수일치",
+     "note": "복수 주어 Tastes에 동사원형 spread",
+     "spans": [
+      "spread"
+     ]
+    },
+    {
+     "tag": "지시대명사 this",
+     "note": "앞서 말한 '사람에게서 배우는' 방식을 가리킴",
+     "spans": [
+      "this"
+     ]
+    },
+    {
+     "tag": "과거분사 후치수식(involved)",
+     "note": "the food involved: '관련된 음식'",
+     "spans": [
+      "involved"
+     ]
+    },
+    {
+     "tag": "전치사(irrespective of)",
+     "note": "irrespective of: '~와 상관없이'",
+     "spans": [
+      "irrespective of"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "spread",
+     "meaning": "퍼지다, 확산되다"
+    },
+    {
+     "word": "irrespective of",
+     "meaning": "~와 상관없이"
+    },
+    {
+     "word": "quality",
+     "meaning": "특성, 품질"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Tastes [[spread]] like this,",
+     "ko": "입맛은 이처럼 [[퍼진다]],"
+    },
+    {
+     "en": "person to person, like [[viruses]],",
+     "ko": "사람에서 사람으로, [[바이러스]]처럼,"
+    },
+    {
+     "en": "[[almost irrespective of the qualities of the food involved]].",
+     "ko": "[[관련된 음식의 특성과는 거의 상관없이]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "여기서 'this'는 바이러스가 몸속에서 퍼지는 생물학적 방식을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "Tastes spread like this",
+     "why": "'this'는 앞 문장들에서 말한, 취향이 사람 사이로 전해지는 방식을 가리킨다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 7,
+   "english": "We observe other people in their food lives, often judgmentally.",
+   "grammar": [
+    {
+     "tag": "소유격 대명사 their",
+     "note": "other people를 가리키는 소유격",
+     "spans": [
+      "their"
+     ]
+    },
+    {
+     "tag": "부사(문장 수식·judgmentally)",
+     "note": "observe하는 방식을 꾸미는 부사",
+     "spans": [
+      "judgmentally"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "observe",
+     "meaning": "관찰하다"
+    },
+    {
+     "word": "judgmentally",
+     "meaning": "재단하듯이, 비판적으로"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "We [[observe]] other people",
+     "ko": "우리는 다른 사람들을 [[관찰한다]]"
+    },
+    {
+     "en": "in their [[food]] lives,",
+     "ko": "그들의 [[음식]] 생활 속에서,"
+    },
+    {
+     "en": "often [[judgmentally]].",
+     "ko": "종종 [[재단하듯이]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "글쓴이는 다른 사람들이 자기 음식 생활을 자주 판단한다고 말한다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "We observe other people in their food lives, often judgmentally.",
+     "why": "판단하듯 관찰하는 주체는 '우리'이지 관찰당하는 다른 사람들이 아니다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "Nothing turns me off something quicker than the wrong people liking it, by which I mean people almost identical to me in every respect, in a way that doesn't flatter me.",
+   "grammar": [
+    {
+     "tag": "부정 주어(Nothing)",
+     "note": "'Nothing ~ quicker than'은 사실상 최상급 의미",
+     "spans": [
+      "Nothing"
+     ]
+    },
+    {
+     "tag": "비교급(비교급+than)",
+     "note": "quicker than: '~보다 더 빨리'",
+     "spans": [
+      "quicker",
+      "than"
+     ]
+    },
+    {
+     "tag": "동명사(의미상 주어)",
+     "note": "the wrong people liking it: liking의 의미상 주어가 the wrong people",
+     "spans": [
+      "liking"
+     ]
+    },
+    {
+     "tag": "전치사+관계대명사(by which)",
+     "note": "앞 내용을 받아 부연 설명",
+     "spans": [
+      "by which"
+     ]
+    },
+    {
+     "tag": "관계대명사(that)",
+     "note": "a way that doesn't flatter me에서 way를 수식",
+     "spans": [
+      "that"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "turn off",
+     "meaning": "흥미를 잃게 하다, 정 떨어지게 하다"
+    },
+    {
+     "word": "identical to",
+     "meaning": "~와 똑같은"
+    },
+    {
+     "word": "in every respect",
+     "meaning": "모든 면에서"
+    },
+    {
+     "word": "flatter",
+     "meaning": "돋보이게 하다, 치켜세우다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Nothing turns me off something [[quicker]]",
+     "ko": "그 무엇도 나를 더 [[빨리]] 흥미 잃게 하지 못한다"
+    },
+    {
+     "en": "than the wrong people [[liking]] it,",
+     "ko": "엉뚱한 사람들이 그것을 [[좋아하는]] 것보다,"
+    },
+    {
+     "en": "[[by which I mean people almost identical to me in every respect]],",
+     "ko": "[[내 말은 모든 면에서 나와 거의 똑같은 사람들이라는 뜻인데]],"
+    },
+    {
+     "en": "in a way that doesn't [[flatter]] me.",
+     "ko": "나를 [[돋보이게]] 하지 않는 방식으로."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "글쓴이는 자신과 전혀 다른 부류의 사람들이 어떤 음식을 좋아할 때 그 음식에 흥미를 잃는다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "people almost identical to me in every respect",
+     "why": "흥미를 잃게 하는 조건은 나와 '거의 똑같은' 사람들이 좋아할 때이지 전혀 다른 사람들이 아니다.",
+     "killer": true
+    }
+   ],
+   "mistips": [
+    "Nothing ~ quicker than A은 '어떤 것도 A보다 빨리 ~하지 못한다'로, 사실상 '가장 빨리'라는 최상급 의미이다."
+   ]
+  },
+  {
+   "id": 9,
+   "english": "I avoided the viral chopped salad moment of 2024 by the skin of my teeth.",
+   "grammar": [
+    {
+     "tag": "과거분사(형용사적·chopped)",
+     "note": "chopped salad: '잘게 썬 샐러드'",
+     "spans": [
+      "chopped"
+     ]
+    },
+    {
+     "tag": "숙어(by the skin of one's teeth)",
+     "note": "가까스로, 간신히",
+     "spans": [
+      "by the skin of my teeth"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "viral",
+     "meaning": "입소문으로 급속히 퍼진, 유행하는"
+    },
+    {
+     "word": "avoid",
+     "meaning": "피하다"
+    },
+    {
+     "word": "by the skin of my teeth",
+     "meaning": "가까스로, 간신히"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "I [[avoided]] the viral chopped salad moment of 2024",
+     "ko": "나는 2024년의 유행하던 다진 샐러드 열풍을 [[피했다]]"
+    },
+    {
+     "en": "[[by the skin of my teeth]].",
+     "ko": "[[가까스로]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "글쓴이는 2024년 유행한 다진 샐러드를 결국 피했는데, 그 음식이 맛없다고 판단했기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "I avoided the viral chopped salad moment of 2024 by the skin of my teeth.",
+     "why": "피한 것은 맞지만 이유는 맛이 아니라 엉뚱한 사람들이 좋아하는 유행이었기 때문이다."
+    }
+   ],
+   "mistips": []
+  }
  ]
 }

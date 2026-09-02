@@ -1,376 +1,914 @@
 {
-  "item_no": "24",
-  "theme": "통제욕을 내려놓고 불확실성을 마주하는 용기",
-  "overview": {
-    "theme_ko": "통제욕을 내려놓고 불확실성을 마주하는 용기",
-    "topic": "🔎 통제 욕구를 내려놓고 불확실성을 받아들이기",
-    "stance": "긍정적",
-    "stance_reason": "there's nothing wrong with having plans / try our best to be all right with that 등 불확실성 수용을 권함",
-    "structure": "주장→근거·예시",
-    "structure_reason": "통제욕을 내려놓으라는 주장 뒤 아이젠하워 인용과 연필 비유로 뒷받침",
-    "key_grammar": {
-      "point": "동명사",
-      "source_sentence": "Letting go of our need for control, being aware, is a lot about gathering the courage to face uncertainty.",
-      "explanation": [
-        {"chip": "쉽게 말하면", "text": "동명사는 동사원형+-ing가 명사처럼 쓰여 주어·목적어·보어·전치사의 목적어 자리에 온다."},
-        {"chip": "여기서는", "text": "Letting go ~와 being aware가 문장의 주어 역할을 한다."},
-        {"chip": "전치사 뒤", "text": "about 뒤의 gathering도 전치사의 목적어로 쓰인 동명사다."},
-        {"chip": "수 일치", "text": "동명사 주어는 단수 취급하므로 동사 is가 쓰였다."},
-        {"chip": "비교", "text": "to부정사도 명사 역할이 가능하지만, 전치사 뒤에는 동명사만 온다."}
-      ],
-      "example_analysis": "동명사구 Letting go ~ being aware가 주어이고 단수 동사 is가 이를 받는다.",
-      "drills": [
-        {
-          "kind": "밑줄형",
-          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
-          "sentence": "[[1|Letting]] go of our need for control, [[2|being]] aware, [[3|is]] a lot about [[4|gather]] the courage [[5|to face]] uncertainty.",
-          "answer": "④",
-          "fix": "전치사 about 뒤에는 명사 역할을 하는 동명사가 와야 하므로 gather를 gathering으로 고쳐야 한다.",
-          "options": ["① Letting", "② being", "③ is", "④ gather", "⑤ to face"],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "네모형",
-          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
-          "sentence": "But there's a difference between [[planning/plan]] and [[thinking/think]] all your plans have to come to fruition.",
-          "answer": "planning / thinking",
-          "fix": "전치사 between의 목적어이자 병렬 구조이므로 두 자리 모두 동명사 planning, thinking이 옳다.",
-          "options": [],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "오류찾기",
-          "question": "다음 중 어법상 틀린 문장은?",
-          "sentence": "American president Eisenhower once said: 'Plans are worthless, but planning are everything.'",
-          "answer": "American president Eisenhower once said: 'Plans are worthless, but planning are everything.'",
-          "fix": "동명사 주어 planning은 단수 취급하므로 are를 is로 고쳐야 한다.",
-          "options": [
-            "Human beings want to know.",
-            "And there's nothing wrong with having plans.",
-            "American president Eisenhower once said: 'Plans are worthless, but planning are everything.'",
-            "I think it's a beautiful thing.",
-            "And if we could try our best to be all right with that."
-          ],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "영작",
-          "question": "불확실성을 마주하는 것은 용기를 모으는 것에 관한 것이다.",
-          "answer": "Facing uncertainty is about gathering courage.",
-          "fix": "",
-          "options": [],
-          "words": ["Facing", "uncertainty", "is", "about", "gathering", "courage"],
-          "from_passage": false
-        },
-        {
-          "kind": "영작",
-          "question": "그리고 계획을 갖는 것에는 아무런 잘못이 없다.",
-          "answer": "And there's nothing wrong with having plans.",
-          "fix": "",
-          "options": [],
-          "words": ["And", "there's", "nothing", "wrong", "with", "having", "plans"],
-          "from_passage": true
-        }
-      ]
-    },
-    "restatement_chains": [
-      {
-        "label": "불확실성을 받아들이기",
-        "expressions": ["face uncertainty", "enormous uncertainty"],
-        "variation": "예측하려는 집착을 내려놓고 불확실성을 있는 그대로 인정함."
-      },
-      {
-        "label": "계획에 집착하지 않기",
-        "expressions": ["cling to our plans", "all your plans have to come to fruition"],
-        "variation": "계획은 세우되 반드시 이뤄져야 한다는 생각과는 구분함."
-      }
-    ],
-    "flow_blocks": [
-      {"stage": "도입", "sentence_range": "1", "summary": "통제욕을 내려놓고 [[불확실성]]을 마주하는 용기", "easy_example": "우산 없이 나선 날 비가 올 수도 있음을 받아들이기"},
-      {"stage": "전개", "sentence_range": "2~4", "summary": "인간은 알고 싶어 하고, 모르면 [[경직]]되어 예측 가능한 척함", "easy_example": "시험 결과를 모를 때 괜히 다 안다는 듯 굴기"},
-      {"stage": "전환", "sentence_range": "5~8", "summary": "계획 자체는 좋지만 반드시 [[이뤄져야]] 한다는 집착과는 다름", "easy_example": "여행 계획은 세우되 변경도 받아들이기"},
-      {"stage": "사례", "sentence_range": "9~11", "summary": "아이젠하워의 말과 [[연필]] 비유로 유연함을 강조", "easy_example": "지울 수 있는 연필로 일정을 적어 두기"},
-      {"stage": "결론", "sentence_range": "12~13", "summary": "적은 것이 실제와 다를 수 있음을 [[명심]]하고 받아들이기", "easy_example": "예정과 다르게 흘러도 괜찮다고 여기기"}
-    ]
-  },
-  "sentences": [
+ "item_no": "24",
+ "theme": "통제욕을 내려놓고 불확실성을 마주하는 용기",
+ "overview": {
+  "theme_ko": "통제욕을 내려놓고 불확실성을 마주하는 용기",
+  "topic": "🔎 통제 욕구를 내려놓고 불확실성을 받아들이기",
+  "stance": "긍정적",
+  "stance_reason": "there's nothing wrong with having plans / try our best to be all right with that 등 불확실성 수용을 권함",
+  "structure": "주장→근거·예시",
+  "structure_reason": "통제욕을 내려놓으라는 주장 뒤 아이젠하워 인용과 연필 비유로 뒷받침",
+  "key_grammar": {
+   "point": "동명사",
+   "source_sentence": "Letting go of our need for control, being aware, is a lot about gathering the courage to face uncertainty.",
+   "explanation": [
     {
-      "id": 1,
-      "english": "Letting go of our need for control, being aware, is a lot about gathering the courage to face uncertainty.",
-      "grammar": [
-        {"tag": "동명사(주어)", "note": "Letting go ~가 문장의 주어 역할을 한다.", "spans": ["Letting"]},
-        {"tag": "동명사(전치사의 목적어)", "note": "전치사 about 뒤에 온 동명사.", "spans": ["gathering"]},
-        {"tag": "to부정사(형용사적 용법)", "note": "the courage를 수식한다.", "spans": ["to face"]}
-      ],
-      "vocab": [
-        {"word": "let go of", "meaning": "~을 내려놓다, 놓아주다"},
-        {"word": "aware", "meaning": "자각하는, 알아차리는"},
-        {"word": "courage", "meaning": "용기"},
-        {"word": "uncertainty", "meaning": "불확실성"}
-      ],
-      "chunks": [
-        {"en": "Letting go of our need for control, being aware, is", "ko": "우리의 [[통제 욕구]]를 내려놓는 것은, 자각하는 것은, ~이다"},
-        {"en": "a lot about gathering the courage to face uncertainty.", "ko": "불확실성을 마주할 [[용기]]를 모으는 것에 관한 많은 것"}
-      ],
-      "misreads": [
-        {"statement": "통제하려는 욕구를 내려놓고 자각하는 것은 불확실성에 맞설 용기를 기르는 일과 크게 관련된다.", "verdict": "O", "trap_type": "필자관점"}
-      ],
-      "mistips": ["Letting go ~ being aware가 통째로 긴 주어이고 is가 본동사임을 놓치기 쉽다."]
+     "chip": "쉽게 말하면",
+     "text": "동명사는 동사원형+-ing가 명사처럼 쓰여 주어·목적어·보어·전치사의 목적어 자리에 온다."
     },
     {
-      "id": 2,
-      "english": "Human beings want to know.",
-      "grammar": [
-        {"tag": "to부정사(명사적, 목적어)", "note": "want의 목적어로 쓰인 to부정사.", "spans": ["to know"]}
-      ],
-      "vocab": [
-        {"word": "human being", "meaning": "인간"},
-        {"word": "want to", "meaning": "~하기를 원하다"}
-      ],
-      "chunks": [
-        {"en": "Human beings want to know.", "ko": "[[인간]]은 알고 싶어 한다"}
-      ],
-      "misreads": [
-        {"statement": "Human beings prefer to remain in the dark.", "verdict": "X", "trap_type": "주체대상", "anchor": "Human beings want to know.", "why": "인간은 오히려 알고 싶어 한다고 했다.", "english": true}
-      ],
-      "mistips": []
+     "chip": "여기서는",
+     "text": "Letting go ~와 being aware가 문장의 주어 역할을 한다."
     },
     {
-      "id": 3,
-      "english": "When we don't know, when things are uncertain, we often feel frightened and become inflexible.",
-      "grammar": [
-        {"tag": "부사절(시간·조건 When)", "note": "When ~ 상황을 나타내는 부사절.", "spans": ["When"]},
-        {"tag": "감정분사(과거분사)", "note": "feel의 보어로 쓰인 frightened(겁먹은).", "spans": ["frightened"]},
-        {"tag": "등위접속사 and(병렬)", "note": "feel ~ and become ~ 두 동사를 병렬한다.", "spans": ["and"]}
-      ],
-      "vocab": [
-        {"word": "uncertain", "meaning": "불확실한"},
-        {"word": "frightened", "meaning": "겁먹은, 두려워하는"},
-        {"word": "inflexible", "meaning": "경직된, 융통성 없는"}
-      ],
-      "chunks": [
-        {"en": "When we don't know, when things are uncertain,", "ko": "우리가 모를 때, 상황이 [[불확실]]할 때,"},
-        {"en": "we often feel frightened and become inflexible.", "ko": "우리는 종종 [[겁먹은]] 기분이 들고 경직된다"}
-      ],
-      "misreads": [
-        {"statement": "우리가 겁을 먹고 경직되기 때문에 상황이 불확실해진다.", "verdict": "X", "trap_type": "인과조건", "anchor": "we often feel frightened and become inflexible", "why": "불확실할 때 겁먹고 경직되는 것이지 인과가 반대가 아니다.", "english": false}
-      ],
-      "mistips": []
+     "chip": "전치사 뒤",
+     "text": "about 뒤의 gathering도 전치사의 목적어로 쓰인 동명사다."
     },
     {
-      "id": 4,
-      "english": "So we pretend that things are more predictable than they really are, even though we actually live with enormous uncertainty all the time.",
-      "grammar": [
-        {"tag": "명사절 접속사 that(목적어절)", "note": "pretend의 목적어절을 이끈다.", "spans": ["that"]},
-        {"tag": "비교급(than)", "note": "more predictable than ~ 비교 구문.", "spans": ["more", "than"]},
-        {"tag": "양보 부사절(even though)", "note": "비록 ~일지라도.", "spans": ["even though"]}
-      ],
-      "vocab": [
-        {"word": "pretend", "meaning": "~인 척하다"},
-        {"word": "predictable", "meaning": "예측 가능한"},
-        {"word": "enormous", "meaning": "막대한, 거대한"},
-        {"word": "all the time", "meaning": "늘, 항상"}
-      ],
-      "chunks": [
-        {"en": "So we pretend that things are more predictable", "ko": "그래서 우리는 상황이 더 [[예측 가능]]하다고 ~인 척한다"},
-        {"en": "than they really are,", "ko": "실제보다"},
-        {"en": "even though we actually live with enormous uncertainty all the time.", "ko": "비록 우리가 실제로는 늘 [[막대한]] 불확실성 속에 살지만"}
-      ],
-      "misreads": [
-        {"statement": "우리는 상황이 실제보다 덜 예측 가능하다고 여기며 살아간다.", "verdict": "X", "trap_type": "구조수식", "anchor": "more predictable than they really are", "why": "덜이 아니라 실제보다 더 예측 가능한 척한다고 했다.", "killer": true, "english": false}
-      ],
-      "mistips": ["more predictable than they really are를 '실제만큼 예측 가능'으로 오독하기 쉽다."]
+     "chip": "수 일치",
+     "text": "동명사 주어는 단수 취급하므로 동사 is가 쓰였다."
     },
     {
-      "id": 5,
-      "english": "We cling to our plans and ideas about how things should be and turn out ever so desperately.",
-      "grammar": [
-        {"tag": "cling to", "note": "숙어: ~에 매달리다, 집착하다.", "spans": ["cling to"]},
-        {"tag": "의문사절(how)", "note": "about의 목적어절, 방법·상태를 나타낸다.", "spans": ["how"]},
-        {"tag": "조동사 should", "note": "should be and turn out, ~해야 한다는 당위.", "spans": ["should"]}
-      ],
-      "vocab": [
-        {"word": "cling to", "meaning": "~에 매달리다, 집착하다"},
-        {"word": "turn out", "meaning": "~로 판명되다, 밝혀지다"},
-        {"word": "desperately", "meaning": "필사적으로, 절박하게"}
-      ],
-      "chunks": [
-        {"en": "We cling to our plans and ideas", "ko": "우리는 우리의 [[계획]]과 생각에 매달린다"},
-        {"en": "about how things should be and turn out ever so desperately.", "ko": "일이 어떻게 되고 판명되어야 하는지에 대해 그토록 [[필사적으로]]"}
-      ],
-      "misreads": [
-        {"statement": "우리는 일이 어떻게 되어야 하는지에 대한 계획과 생각에 필사적으로 매달린다.", "verdict": "O", "trap_type": "주체대상"}
-      ],
-      "mistips": []
-    },
-    {
-      "id": 6,
-      "english": "And there's nothing wrong with having plans.",
-      "grammar": [
-        {"tag": "동명사(전치사의 목적어)", "note": "with 뒤에 온 동명사 having.", "spans": ["having"]},
-        {"tag": "there is 구문", "note": "존재·유무를 나타낸다.", "spans": ["there's"]}
-      ],
-      "vocab": [
-        {"word": "there's nothing wrong with", "meaning": "~하는 것에 아무 잘못이 없다"},
-        {"word": "have plans", "meaning": "계획을 가지다, 세우다"}
-      ],
-      "chunks": [
-        {"en": "And there's nothing wrong with having plans.", "ko": "그리고 [[계획]]을 갖는 데에는 아무런 잘못도 없다"}
-      ],
-      "misreads": [
-        {"statement": "필자는 계획을 세우는 것 자체에는 아무런 문제가 없다고 본다.", "verdict": "O", "trap_type": "필자관점"}
-      ],
-      "mistips": []
-    },
-    {
-      "id": 7,
-      "english": "I think it's a beautiful thing.",
-      "grammar": [
-        {"tag": "명사절(that 생략)", "note": "think 뒤 목적어절에서 접속사 that이 생략됨.", "spans": []}
-      ],
-      "vocab": [
-        {"word": "I think (that)", "meaning": "나는 ~라고 생각한다"},
-        {"word": "a beautiful thing", "meaning": "멋진, 훌륭한 것"}
-      ],
-      "chunks": [
-        {"en": "I think it's a beautiful thing.", "ko": "나는 그것이 [[아름다운]] 것이라고 생각한다"}
-      ],
-      "misreads": [
-        {"statement": "필자가 아름답다고 여기는 것(it)은 불확실성 그 자체이다.", "verdict": "X", "trap_type": "지칭", "anchor": "it's a beautiful thing", "why": "여기서 it은 앞 문장의 계획을 갖는 것을 가리킨다.", "integrative": true, "english": false}
-      ],
-      "mistips": []
-    },
-    {
-      "id": 8,
-      "english": "But there's a difference between planning and thinking all your plans have to come to fruition.",
-      "grammar": [
-        {"tag": "동명사(between A and B 병렬)", "note": "between planning and thinking, 동명사 병렬.", "spans": ["planning", "thinking"]},
-        {"tag": "have to", "note": "~해야 한다(의무).", "spans": ["have to"]}
-      ],
-      "vocab": [
-        {"word": "difference between A and B", "meaning": "A와 B의 차이"},
-        {"word": "come to fruition", "meaning": "결실을 맺다, 실현되다"},
-        {"word": "have to", "meaning": "~해야 한다"}
-      ],
-      "chunks": [
-        {"en": "But there's a difference between planning and thinking", "ko": "그러나 [[계획하는 것]]과 생각하는 것 사이에는 차이가 있다"},
-        {"en": "all your plans have to come to fruition.", "ko": "즉 당신의 모든 계획이 [[결실을 맺어야]] 한다고 생각하는 것"}
-      ],
-      "misreads": [
-        {"statement": "계획하는 것과 모든 계획이 반드시 이뤄져야 한다고 생각하는 것 사이에는 차이가 있지만, 그 차이는 실현 가능성의 정도 차이일 뿐이다.", "verdict": "△", "trap_type": "구조수식", "anchor": "there's a difference between planning and thinking", "why": "차이는 정도 문제가 아니라 계획 자체와 실현 집착을 구분하는 것이다.", "english": false}
-      ],
-      "mistips": []
-    },
-    {
-      "id": 9,
-      "english": "American president Eisenhower once said: 'Plans are worthless, but planning is everything.'",
-      "grammar": [
-        {"tag": "동명사(주어)", "note": "planning이 주어로 쓰인 동명사.", "spans": ["planning"]},
-        {"tag": "등위접속사 but(대조)", "note": "worthless but planning, 대조를 나타낸다.", "spans": ["but"]}
-      ],
-      "vocab": [
-        {"word": "worthless", "meaning": "가치 없는, 무가치한"},
-        {"word": "planning", "meaning": "계획을 세우기, 계획하는 일"},
-        {"word": "once", "meaning": "한때, 한 번은"}
-      ],
-      "chunks": [
-        {"en": "American president Eisenhower once said:", "ko": "미국 대통령 아이젠하워는 한때 [[말했다]]"},
-        {"en": "'Plans are worthless, but planning is everything.'", "ko": "'계획은 [[무가치]]하지만, 계획하기가 전부다'"}
-      ],
-      "misreads": [
-        {"statement": "아이젠하워는 대통령 재임 시절 전쟁을 겪으며 이 말을 남겼다고 본문은 설명한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "American president Eisenhower once said", "why": "발언한 시기·배경은 본문에 언급되지 않는다.", "english": false}
-      ],
-      "mistips": []
-    },
-    {
-      "id": 10,
-      "english": "Imagine if we all used pencil instead of ink to write in our calendars and planners.",
-      "grammar": [
-        {"tag": "명령문(Imagine)", "note": "동사원형으로 시작하는 명령문.", "spans": ["Imagine"]},
-        {"tag": "가정법(if 조건)", "note": "if we all used ~, 가정을 나타낸다.", "spans": ["if"]},
-        {"tag": "instead of", "note": "~ 대신에.", "spans": ["instead of"]},
-        {"tag": "to부정사(부사적, 목적)", "note": "쓰기 위해서.", "spans": ["to write"]}
-      ],
-      "vocab": [
-        {"word": "imagine", "meaning": "상상하다"},
-        {"word": "instead of", "meaning": "~ 대신에"},
-        {"word": "calendar", "meaning": "달력, 일정표"},
-        {"word": "planner", "meaning": "일정 수첩"}
-      ],
-      "chunks": [
-        {"en": "Imagine if we all used pencil instead of ink", "ko": "우리 모두가 잉크 대신 [[연필]]을 썼다고 상상해 보라"},
-        {"en": "to write in our calendars and planners.", "ko": "우리의 [[달력]]과 일정 수첩에 쓰기 위해"}
-      ],
-      "misreads": [
-        {"statement": "우리 모두가 잉크로 달력에 써야 한다고 상상해 보라는 것이다.", "verdict": "X", "trap_type": "구조수식", "anchor": "used pencil instead of ink", "why": "잉크가 아니라 지울 수 있는 연필을 쓰는 것을 상상하라고 한다.", "english": false}
-      ],
-      "mistips": []
-    },
-    {
-      "id": 11,
-      "english": "Both figuratively and literally.",
-      "grammar": [
-        {"tag": "상관접속사(both A and B)", "note": "both ~ and ~ 병렬.", "spans": ["Both", "and"]}
-      ],
-      "vocab": [
-        {"word": "figuratively", "meaning": "비유적으로"},
-        {"word": "literally", "meaning": "문자 그대로"}
-      ],
-      "chunks": [
-        {"en": "Both figuratively and literally.", "ko": "[[비유적으로]]도 문자 그대로도 둘 다"}
-      ],
-      "misreads": [
-        {"statement": "이는 비유적으로도, 문자 그대로도 해당된다는 뜻이다.", "verdict": "O", "trap_type": "필자관점"}
-      ],
-      "mistips": []
-    },
-    {
-      "id": 12,
-      "english": "Imagine if we could bear in mind that what we write down, what we think is going to happen, might not be what actually happens.",
-      "grammar": [
-        {"tag": "bear in mind", "note": "숙어: 명심하다.", "spans": ["bear in mind"]},
-        {"tag": "명사절 접속사 that", "note": "bear in mind의 목적어절을 이끈다.", "spans": ["that"]},
-        {"tag": "관계대명사 what(선행사 포함)", "note": "~하는 것, 명사절을 이끈다.", "spans": ["what"]},
-        {"tag": "부분부정(might not)", "note": "might not ~, 반드시 ~인 것은 아니다.", "spans": ["might not"]}
-      ],
-      "vocab": [
-        {"word": "bear in mind", "meaning": "명심하다"},
-        {"word": "write down", "meaning": "적어 두다, 기록하다"},
-        {"word": "be going to", "meaning": "~할 것이다"},
-        {"word": "actually", "meaning": "실제로"}
-      ],
-      "chunks": [
-        {"en": "Imagine if we could bear in mind that", "ko": "우리가 ~을 [[명심]]할 수 있다면 상상해 보라"},
-        {"en": "what we write down, what we think is going to happen,", "ko": "우리가 [[적어 둔 것]], 우리가 일어나리라 생각하는 것이"},
-        {"en": "might not be what actually happens.", "ko": "실제로 일어나는 일이 [[아닐 수도]] 있다는 것을"}
-      ],
-      "misreads": [
-        {"statement": "우리가 적어 둔 것은 반드시 실제로 일어나는 일과 일치한다는 점을 명심하라는 뜻이다.", "verdict": "X", "trap_type": "구조수식", "anchor": "might not be what actually happens", "why": "적은 것이 실제와 다를 수 있음을 명심하라는 것이다.", "english": false}
-      ],
-      "mistips": ["what ~ what ~이 나란히 이어져 주어부가 긴 구조임에 주의한다."]
-    },
-    {
-      "id": 13,
-      "english": "And if we could try our best to be all right with that.",
-      "grammar": [
-        {"tag": "가정법(if)", "note": "if we could ~, 가정을 나타낸다.", "spans": ["if"]},
-        {"tag": "to부정사(명사적, 목적어)", "note": "try의 목적어로 쓰인 to be.", "spans": ["to be"]}
-      ],
-      "vocab": [
-        {"word": "try one's best", "meaning": "최선을 다하다"},
-        {"word": "be all right with", "meaning": "~을 괜찮게 여기다, 받아들이다"}
-      ],
-      "chunks": [
-        {"en": "And if we could try our best", "ko": "그리고 우리가 [[최선]]을 다할 수 있다면"},
-        {"en": "to be all right with that.", "ko": "그것을 [[괜찮게]] 여길 수 있도록"}
-      ],
-      "misreads": [
-        {"statement": "여기서 that은 우리가 세운 계획 그 자체를 뜻한다.", "verdict": "X", "trap_type": "지칭", "anchor": "be all right with that", "why": "that은 적은 것이 실제와 다를 수 있다는 앞 내용을 가리킨다.", "integrative": true, "english": false}
-      ],
-      "mistips": []
+     "chip": "비교",
+     "text": "to부정사도 명사 역할이 가능하지만, 전치사 뒤에는 동명사만 온다."
     }
+   ],
+   "example_analysis": "동명사구 Letting go ~ being aware가 주어이고 단수 동사 is가 이를 받는다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "[[1|Letting]] go of our need for control, [[2|being]] aware, [[3|is]] a lot about [[4|gather]] the courage [[5|to face]] uncertainty.",
+     "answer": "④",
+     "fix": "전치사 about 뒤에는 명사 역할을 하는 동명사가 와야 하므로 gather를 gathering으로 고쳐야 한다.",
+     "options": [
+      "① Letting",
+      "② being",
+      "③ is",
+      "④ gather",
+      "⑤ to face"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "But there's a difference between [[planning/plan]] and [[thinking/think]] all your plans have to come to fruition.",
+     "answer": "planning / thinking",
+     "fix": "전치사 between의 목적어이자 병렬 구조이므로 두 자리 모두 동명사 planning, thinking이 옳다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "American president Eisenhower once said: 'Plans are worthless, but planning are everything.'",
+     "answer": "American president Eisenhower once said: 'Plans are worthless, but planning are everything.'",
+     "fix": "동명사 주어 planning은 단수 취급하므로 are를 is로 고쳐야 한다.",
+     "options": [
+      "Human beings want to know.",
+      "And there's nothing wrong with having plans.",
+      "American president Eisenhower once said: 'Plans are worthless, but planning are everything.'",
+      "I think it's a beautiful thing.",
+      "And if we could try our best to be all right with that."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "불확실성을 마주하는 것은 용기를 모으는 것에 관한 것이다.",
+     "answer": "Facing uncertainty is about gathering courage.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Facing",
+      "uncertainty",
+      "is",
+      "about",
+      "gathering",
+      "courage"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "그리고 계획을 갖는 것에는 아무런 잘못이 없다.",
+     "answer": "And there's nothing wrong with having plans.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "And",
+      "there's",
+      "nothing",
+      "wrong",
+      "with",
+      "having",
+      "plans"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "불확실성을 받아들이기",
+    "expressions": [
+     "face uncertainty",
+     "enormous uncertainty"
+    ],
+    "variation": "예측하려는 집착을 내려놓고 불확실성을 있는 그대로 인정함."
+   },
+   {
+    "label": "계획에 집착하지 않기",
+    "expressions": [
+     "cling to our plans",
+     "all your plans have to come to fruition"
+    ],
+    "variation": "계획은 세우되 반드시 이뤄져야 한다는 생각과는 구분함."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입",
+    "sentence_range": "1",
+    "summary": "통제욕을 내려놓고 [[불확실성]]을 마주하는 용기",
+    "easy_example": "우산 없이 나선 날 비가 올 수도 있음을 받아들이기"
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "2~4",
+    "summary": "인간은 알고 싶어 하고, 모르면 [[경직]]되어 예측 가능한 척함",
+    "easy_example": "시험 결과를 모를 때 괜히 다 안다는 듯 굴기"
+   },
+   {
+    "stage": "전환",
+    "sentence_range": "5~8",
+    "summary": "계획 자체는 좋지만 반드시 [[이뤄져야]] 한다는 집착과는 다름",
+    "easy_example": "여행 계획은 세우되 변경도 받아들이기"
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "9~11",
+    "summary": "아이젠하워의 말과 [[연필]] 비유로 유연함을 강조",
+    "easy_example": "지울 수 있는 연필로 일정을 적어 두기"
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "12~13",
+    "summary": "적은 것이 실제와 다를 수 있음을 [[명심]]하고 받아들이기",
+    "easy_example": "예정과 다르게 흘러도 괜찮다고 여기기"
+   }
   ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Letting go of our need for control, being aware, is a lot about gathering the courage to face uncertainty.",
+   "grammar": [
+    {
+     "tag": "동명사(주어)",
+     "note": "Letting go ~가 문장의 주어 역할을 한다.",
+     "spans": [
+      "Letting"
+     ]
+    },
+    {
+     "tag": "동명사(전치사의 목적어)",
+     "note": "전치사 about 뒤에 온 동명사.",
+     "spans": [
+      "gathering"
+     ]
+    },
+    {
+     "tag": "to부정사(형용사적 용법)",
+     "note": "the courage를 수식한다.",
+     "spans": [
+      "to face"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "let go of",
+     "meaning": "~을 내려놓다, 놓아주다"
+    },
+    {
+     "word": "aware",
+     "meaning": "자각하는, 알아차리는"
+    },
+    {
+     "word": "courage",
+     "meaning": "용기"
+    },
+    {
+     "word": "uncertainty",
+     "meaning": "불확실성"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Letting go of our need for control, being aware, is",
+     "ko": "우리의 [[통제 욕구]]를 내려놓는 것은, 자각하는 것은, ~이다"
+    },
+    {
+     "en": "a lot about gathering the courage to face uncertainty.",
+     "ko": "불확실성을 마주할 [[용기]]를 모으는 것에 관한 많은 것"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "통제하려는 욕구를 내려놓고 자각하는 것은 불확실성에 맞설 용기를 기르는 일과 크게 관련된다.",
+     "verdict": "O",
+     "trap_type": "필자관점"
+    }
+   ],
+   "mistips": [
+    "Letting go ~ being aware가 통째로 긴 주어이고 is가 본동사임을 놓치기 쉽다."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "Human beings want to know.",
+   "grammar": [
+    {
+     "tag": "to부정사(명사적, 목적어)",
+     "note": "want의 목적어로 쓰인 to부정사.",
+     "spans": [
+      "to know"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "human being",
+     "meaning": "인간"
+    },
+    {
+     "word": "want to",
+     "meaning": "~하기를 원하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Human beings want to know.",
+     "ko": "[[인간]]은 알고 싶어 한다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Human beings prefer to remain in the dark.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "Human beings want to know.",
+     "why": "인간은 오히려 알고 싶어 한다고 했다.",
+     "english": true
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "When we don't know, when things are uncertain, we often feel frightened and become inflexible.",
+   "grammar": [
+    {
+     "tag": "부사절(시간·조건 When)",
+     "note": "When ~ 상황을 나타내는 부사절.",
+     "spans": [
+      "When"
+     ]
+    },
+    {
+     "tag": "감정분사(과거분사)",
+     "note": "feel의 보어로 쓰인 frightened(겁먹은).",
+     "spans": [
+      "frightened"
+     ]
+    },
+    {
+     "tag": "등위접속사 and(병렬)",
+     "note": "feel ~ and become ~ 두 동사를 병렬한다.",
+     "spans": [
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "uncertain",
+     "meaning": "불확실한"
+    },
+    {
+     "word": "frightened",
+     "meaning": "겁먹은, 두려워하는"
+    },
+    {
+     "word": "inflexible",
+     "meaning": "경직된, 융통성 없는"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When we don't know, when things are uncertain,",
+     "ko": "우리가 모를 때, 상황이 [[불확실]]할 때,"
+    },
+    {
+     "en": "we often feel frightened and become inflexible.",
+     "ko": "우리는 종종 [[겁먹은]] 기분이 들고 경직된다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "우리가 겁을 먹고 경직되기 때문에 상황이 불확실해진다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "we often feel frightened and become inflexible",
+     "why": "불확실할 때 겁먹고 경직되는 것이지 인과가 반대가 아니다.",
+     "english": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "So we pretend that things are more predictable than they really are, even though we actually live with enormous uncertainty all the time.",
+   "grammar": [
+    {
+     "tag": "명사절 접속사 that(목적어절)",
+     "note": "pretend의 목적어절을 이끈다.",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "비교급(than)",
+     "note": "more predictable than ~ 비교 구문.",
+     "spans": [
+      "more",
+      "than"
+     ]
+    },
+    {
+     "tag": "양보 부사절(even though)",
+     "note": "비록 ~일지라도.",
+     "spans": [
+      "even though"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "pretend",
+     "meaning": "~인 척하다"
+    },
+    {
+     "word": "predictable",
+     "meaning": "예측 가능한"
+    },
+    {
+     "word": "enormous",
+     "meaning": "막대한, 거대한"
+    },
+    {
+     "word": "all the time",
+     "meaning": "늘, 항상"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "So we pretend that things are more predictable",
+     "ko": "그래서 우리는 상황이 더 [[예측 가능]]하다고 ~인 척한다"
+    },
+    {
+     "en": "than they really are,",
+     "ko": "[[실제]]보다"
+    },
+    {
+     "en": "even though we actually live with enormous uncertainty all the time.",
+     "ko": "비록 우리가 실제로는 늘 [[막대한]] 불확실성 속에 살지만"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "우리는 상황이 실제보다 덜 예측 가능하다고 여기며 살아간다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "more predictable than they really are",
+     "why": "덜이 아니라 실제보다 더 예측 가능한 척한다고 했다.",
+     "killer": true,
+     "english": false
+    }
+   ],
+   "mistips": [
+    "more predictable than they really are를 '실제만큼 예측 가능'으로 오독하기 쉽다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "We cling to our plans and ideas about how things should be and turn out ever so desperately.",
+   "grammar": [
+    {
+     "tag": "cling to",
+     "note": "숙어: ~에 매달리다, 집착하다.",
+     "spans": [
+      "cling to"
+     ]
+    },
+    {
+     "tag": "의문사절(how)",
+     "note": "about의 목적어절, 방법·상태를 나타낸다.",
+     "spans": [
+      "how"
+     ]
+    },
+    {
+     "tag": "조동사 should",
+     "note": "should be and turn out, ~해야 한다는 당위.",
+     "spans": [
+      "should"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "cling to",
+     "meaning": "~에 매달리다, 집착하다"
+    },
+    {
+     "word": "turn out",
+     "meaning": "~로 판명되다, 밝혀지다"
+    },
+    {
+     "word": "desperately",
+     "meaning": "필사적으로, 절박하게"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "We cling to our plans and ideas",
+     "ko": "우리는 우리의 [[계획]]과 생각에 매달린다"
+    },
+    {
+     "en": "about how things should be and turn out ever so desperately.",
+     "ko": "일이 어떻게 되고 판명되어야 하는지에 대해 그토록 [[필사적으로]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "우리는 일이 어떻게 되어야 하는지에 대한 계획과 생각에 필사적으로 매달린다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "And there's nothing wrong with having plans.",
+   "grammar": [
+    {
+     "tag": "동명사(전치사의 목적어)",
+     "note": "with 뒤에 온 동명사 having.",
+     "spans": [
+      "having"
+     ]
+    },
+    {
+     "tag": "there is 구문",
+     "note": "존재·유무를 나타낸다.",
+     "spans": [
+      "there's"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "there's nothing wrong with",
+     "meaning": "~하는 것에 아무 잘못이 없다"
+    },
+    {
+     "word": "have plans",
+     "meaning": "계획을 가지다, 세우다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "And there's nothing wrong with having plans.",
+     "ko": "그리고 [[계획]]을 갖는 데에는 아무런 잘못도 없다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 계획을 세우는 것 자체에는 아무런 문제가 없다고 본다.",
+     "verdict": "O",
+     "trap_type": "필자관점"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 7,
+   "english": "I think it's a beautiful thing.",
+   "grammar": [
+    {
+     "tag": "명사절(that 생략)",
+     "note": "think 뒤 목적어절에서 접속사 that이 생략됨.",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "I think (that)",
+     "meaning": "나는 ~라고 생각한다"
+    },
+    {
+     "word": "a beautiful thing",
+     "meaning": "멋진, 훌륭한 것"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "I think it's a beautiful thing.",
+     "ko": "나는 그것이 [[아름다운]] 것이라고 생각한다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자가 아름답다고 여기는 것(it)은 불확실성 그 자체이다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "it's a beautiful thing",
+     "why": "여기서 it은 앞 문장의 계획을 갖는 것을 가리킨다.",
+     "integrative": true,
+     "english": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "But there's a difference between planning and thinking all your plans have to come to fruition.",
+   "grammar": [
+    {
+     "tag": "동명사(between A and B 병렬)",
+     "note": "between planning and thinking, 동명사 병렬.",
+     "spans": [
+      "planning",
+      "thinking"
+     ]
+    },
+    {
+     "tag": "have to",
+     "note": "~해야 한다(의무).",
+     "spans": [
+      "have to"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "difference between A and B",
+     "meaning": "A와 B의 차이"
+    },
+    {
+     "word": "come to fruition",
+     "meaning": "결실을 맺다, 실현되다"
+    },
+    {
+     "word": "have to",
+     "meaning": "~해야 한다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "But there's a difference between planning and thinking",
+     "ko": "그러나 [[계획하는 것]]과 생각하는 것 사이에는 차이가 있다"
+    },
+    {
+     "en": "all your plans have to come to fruition.",
+     "ko": "즉 당신의 모든 계획이 [[결실을 맺어야]] 한다고 생각하는 것"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "계획하는 것과 모든 계획이 반드시 이뤄져야 한다고 생각하는 것 사이에는 차이가 있지만, 그 차이는 실현 가능성의 정도 차이일 뿐이다.",
+     "verdict": "△",
+     "trap_type": "구조수식",
+     "anchor": "there's a difference between planning and thinking",
+     "why": "차이는 정도 문제가 아니라 계획 자체와 실현 집착을 구분하는 것이다.",
+     "english": false
+    },
+    {
+     "statement": "필자는 세운 계획이 반드시 결실을 맺어야 한다고 여기는 태도를 바람직하게 본다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "there's a difference between planning and thinking all your plans have to come to fruition",
+     "why": "필자는 '계획하기'와 '모든 계획이 실현돼야 한다는 생각'을 구별하며 후자를 경계하므로, 그 태도를 바람직하다고 보는 것은 관점과 반대다.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 9,
+   "english": "American president Eisenhower once said: 'Plans are worthless, but planning is everything.'",
+   "grammar": [
+    {
+     "tag": "동명사(주어)",
+     "note": "planning이 주어로 쓰인 동명사.",
+     "spans": [
+      "planning"
+     ]
+    },
+    {
+     "tag": "등위접속사 but(대조)",
+     "note": "worthless but planning, 대조를 나타낸다.",
+     "spans": [
+      "but"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "worthless",
+     "meaning": "가치 없는, 무가치한"
+    },
+    {
+     "word": "planning",
+     "meaning": "계획을 세우기, 계획하는 일"
+    },
+    {
+     "word": "once",
+     "meaning": "한때, 한 번은"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "American president Eisenhower once said:",
+     "ko": "미국 대통령 아이젠하워는 한때 [[말했다]]"
+    },
+    {
+     "en": "'Plans are worthless, but planning is everything.'",
+     "ko": "'계획은 [[무가치]]하지만, 계획하기가 전부다'"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "아이젠하워는 대통령 재임 시절 전쟁을 겪으며 이 말을 남겼다고 본문은 설명한다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "American president Eisenhower once said",
+     "why": "발언한 시기·배경은 본문에 언급되지 않는다.",
+     "english": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 10,
+   "english": "Imagine if we all used pencil instead of ink to write in our calendars and planners.",
+   "grammar": [
+    {
+     "tag": "명령문(Imagine)",
+     "note": "동사원형으로 시작하는 명령문.",
+     "spans": [
+      "Imagine"
+     ]
+    },
+    {
+     "tag": "가정법(if 조건)",
+     "note": "if we all used ~, 가정을 나타낸다.",
+     "spans": [
+      "if"
+     ]
+    },
+    {
+     "tag": "instead of",
+     "note": "~ 대신에.",
+     "spans": [
+      "instead of"
+     ]
+    },
+    {
+     "tag": "to부정사(부사적, 목적)",
+     "note": "쓰기 위해서.",
+     "spans": [
+      "to write"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "imagine",
+     "meaning": "상상하다"
+    },
+    {
+     "word": "instead of",
+     "meaning": "~ 대신에"
+    },
+    {
+     "word": "calendar",
+     "meaning": "달력, 일정표"
+    },
+    {
+     "word": "planner",
+     "meaning": "일정 수첩"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Imagine if we all used pencil instead of ink",
+     "ko": "우리 모두가 잉크 대신 [[연필]]을 썼다고 상상해 보라"
+    },
+    {
+     "en": "to write in our calendars and planners.",
+     "ko": "우리의 [[달력]]과 일정 수첩에 쓰기 위해"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "우리 모두가 잉크로 달력에 써야 한다고 상상해 보라는 것이다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "used pencil instead of ink",
+     "why": "잉크가 아니라 지울 수 있는 연필을 쓰는 것을 상상하라고 한다.",
+     "english": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 11,
+   "english": "Both figuratively and literally.",
+   "grammar": [
+    {
+     "tag": "상관접속사(both A and B)",
+     "note": "both ~ and ~ 병렬.",
+     "spans": [
+      "Both",
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "figuratively",
+     "meaning": "비유적으로"
+    },
+    {
+     "word": "literally",
+     "meaning": "문자 그대로"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Both figuratively and literally.",
+     "ko": "[[비유적으로]]도 문자 그대로도 둘 다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이는 비유적으로도, 문자 그대로도 해당된다는 뜻이다.",
+     "verdict": "O",
+     "trap_type": "필자관점"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 12,
+   "english": "Imagine if we could bear in mind that what we write down, what we think is going to happen, might not be what actually happens.",
+   "grammar": [
+    {
+     "tag": "bear in mind",
+     "note": "숙어: 명심하다.",
+     "spans": [
+      "bear in mind"
+     ]
+    },
+    {
+     "tag": "명사절 접속사 that",
+     "note": "bear in mind의 목적어절을 이끈다.",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "관계대명사 what(선행사 포함)",
+     "note": "~하는 것, 명사절을 이끈다.",
+     "spans": [
+      "what"
+     ]
+    },
+    {
+     "tag": "부분부정(might not)",
+     "note": "might not ~, 반드시 ~인 것은 아니다.",
+     "spans": [
+      "might not"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "bear in mind",
+     "meaning": "명심하다"
+    },
+    {
+     "word": "write down",
+     "meaning": "적어 두다, 기록하다"
+    },
+    {
+     "word": "be going to",
+     "meaning": "~할 것이다"
+    },
+    {
+     "word": "actually",
+     "meaning": "실제로"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Imagine if we could bear in mind that",
+     "ko": "우리가 ~을 [[명심]]할 수 있다면 상상해 보라"
+    },
+    {
+     "en": "what we write down, what we think is going to happen,",
+     "ko": "우리가 [[적어 둔 것]], 우리가 일어나리라 생각하는 것이"
+    },
+    {
+     "en": "might not be what actually happens.",
+     "ko": "실제로 일어나는 일이 [[아닐 수도]] 있다는 것을"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "우리가 적어 둔 것은 반드시 실제로 일어나는 일과 일치한다는 점을 명심하라는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "might not be what actually happens",
+     "why": "적은 것이 실제와 다를 수 있음을 명심하라는 것이다.",
+     "english": false
+    }
+   ],
+   "mistips": [
+    "what ~ what ~이 나란히 이어져 주어부가 긴 구조임에 주의한다."
+   ]
+  },
+  {
+   "id": 13,
+   "english": "And if we could try our best to be all right with that.",
+   "grammar": [
+    {
+     "tag": "가정법(if)",
+     "note": "if we could ~, 가정을 나타낸다.",
+     "spans": [
+      "if"
+     ]
+    },
+    {
+     "tag": "to부정사(명사적, 목적어)",
+     "note": "try의 목적어로 쓰인 to be.",
+     "spans": [
+      "to be"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "try one's best",
+     "meaning": "최선을 다하다"
+    },
+    {
+     "word": "be all right with",
+     "meaning": "~을 괜찮게 여기다, 받아들이다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "And if we could try our best",
+     "ko": "그리고 우리가 [[최선]]을 다할 수 있다면"
+    },
+    {
+     "en": "to be all right with that.",
+     "ko": "그것을 [[괜찮게]] 여길 수 있도록"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "여기서 that은 우리가 세운 계획 그 자체를 뜻한다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "be all right with that",
+     "why": "that은 적은 것이 실제와 다를 수 있다는 앞 내용을 가리킨다.",
+     "integrative": true,
+     "english": false
+    }
+   ],
+   "mistips": []
+  }
+ ]
 }
