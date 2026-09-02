@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>{{ title }}</title>
+<style>
+  /* 문법 누적 시트 전용 (styles.css 의 공통 클래스를 그대로 재사용) */
+  .gs-group { margin: 0 0 9px 0; break-inside: avoid; }
+  .gs-head { display: flex; align-items: baseline; gap: 6px;
+             border-left: 4px solid #1f5fbf; padding: 3px 0 3px 7px;
+             background: #f2f6fd; }
+  .gs-point { font-weight: 700; font-size: 10.5pt; color: #14356e; }
+  .gs-count { font-size: 8pt; color: #5b7196; }
+  .gs-star  { color: #c0392b; font-weight: 700; }
+  .gs-ex { margin: 3px 0 0 11px; font-size: 9pt; line-height: 1.45; }
+  .gs-en { color: #16233a; }
+  .gs-why { color: #4a5b73; }
+  .gs-from { color: #8494a8; font-size: 7.5pt; }
+  .gs-empty { color: #8494a8; padding: 12px 0; }
+</style>
+</head>
+<body>
+  <div class="doc-header">
+    <span class="doc-badge">Grammar Sheet</span>
+    <div class="doc-title">{{ title }}</div>
+    <div class="doc-source">
+      지문 {{ passage_count }}편 · 문법 포인트 {{ groups|length }}개
+      {%- if key_only %} · 핵심 어법만{% endif %}
+    </div>
+  </div>
+
+  {% if groups %}
+  {% for g in groups %}
+  <div class="gs-group">
+    <div class="gs-head">
+      <span class="gs-point">{{ loop.index }}. {{ g.point }}</span>
+      {% if g.key %}<span class="gs-star">★</span>{% endif %}
+      <span class="gs-count">지문 {{ g.count }}편에서 등장</span>
+    </div>
+    {% for ex in g.examples %}
+    <div class="gs-ex">
+      <span class="gs-en">{{ ex.english }}</span><br>
+      <span class="gs-why">└ {{ ex.explanation }}</span>
+      <span class="gs-from">［{{ ex.source }}］</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+  {% else %}
+  <div class="gs-empty">묶을 문법 항목이 없습니다.</div>
+  {% endif %}
+
+  {% if footer_note %}<div class="footer-note">{{ footer_note }}</div>{% endif %}
+</body>
+</html>

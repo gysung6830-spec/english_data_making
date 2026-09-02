@@ -58,6 +58,15 @@ class OutputsCfg:
 
 
 @dataclass
+class LibraryCfg:
+    """분석 결과를 자료 라이브러리(library/)에 자동 적재할지."""
+    enabled: bool = True
+    default_level: str = ""        # 비우면 지문 길이로 레벨을 추천해 넣는다
+    default_category: str = "custom"
+    default_status: str = "ready"
+
+
+@dataclass
 class Config:
     model: str = "claude-opus-4-8"
     input_dir: Path = field(default_factory=lambda: ROOT / "input")
@@ -68,6 +77,7 @@ class Config:
     extraction: ExtractionCfg = field(default_factory=ExtractionCfg)
     design: DesignCfg = field(default_factory=DesignCfg)
     outputs: OutputsCfg = field(default_factory=OutputsCfg)
+    library: LibraryCfg = field(default_factory=LibraryCfg)
     api_key: str | None = None
 
     @property
@@ -94,6 +104,7 @@ def load_config(path: str | Path | None = None) -> Config:
     extraction = data.get("extraction", {})
     design = data.get("design", {})
     outputs = data.get("outputs", {})
+    library = data.get("library", {})
 
     cfg = Config(
         model=data.get("model", "claude-opus-4-8"),
@@ -122,6 +133,12 @@ def load_config(path: str | Path | None = None) -> Config:
             student=bool(outputs.get("student", False)),
             vocablist=bool(outputs.get("vocablist", True)),
             vocabtest=bool(outputs.get("vocabtest", True)),
+        ),
+        library=LibraryCfg(
+            enabled=bool(library.get("enabled", True)),
+            default_level=str(library.get("default_level", "") or "").upper(),
+            default_category=str(library.get("default_category", "custom")),
+            default_status=str(library.get("default_status", "ready")),
         ),
         api_key=os.environ.get("ANTHROPIC_API_KEY") or None,
     )

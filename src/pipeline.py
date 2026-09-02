@@ -162,6 +162,45 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
     return recs
 
 
+def archive_reports(cfg: Config, reports: list[Report], source: str = "") -> list[dict]:
+    """분석 결과를 자료 라이브러리에 등록한다(config 의 library.enabled 가 true 일 때).
+
+    라이브러리 적재가 실패해도 PDF 생성 자체는 이미 끝났으므로 예외를 던지지 않고
+    결과에 사유만 담아 돌려준다 — 1000개 배치가 이것 때문에 멈추면 안 된다.
+    """
+    if not cfg.library.enabled:
+        return []
+    from .library import Library
+
+    lib = Library()
+    level_hint = cfg.library.default_level
+    cur = None
+    if not level_hint:
+        try:
+            from .curriculum import load_curriculum
+            cur = load_curriculum()
+        except Exception:
+            cur = None
+
+    out: list[dict] = []
+    for rep in reports:
+        try:
+            level = level_hint
+            if not level and cur is not None:
+                from .curriculum import level_of_passage
+                from .library import passage_metrics
+
+                _, st = passage_metrics(rep)
+                level = level_of_passage(cur, st.words, st.avg_sentence)
+            mat, created = lib.add(
+                rep, level=level or "", category=cfg.library.default_category,
+                source=source or rep.source, status=cfg.library.default_status)
+            out.append({"id": mat.id, "created": created, "level": mat.level})
+        except Exception as e:
+            out.append({"id": "", "created": False, "error": str(e)})
+    return out
+
+
 def _mock_reports_for_pdf(cfg: Config, pdf: Path) -> list[Report]:
     """목 모드: 실제 API 없이 샘플 Report(들)를 반환."""
     from samples.sample_mock import mock_report
@@ -213,11 +252,14 @@ def run_folder(cfg: Config, mock: bool = False) -> dict:
                        else build_reports_for_pdf(client, cfg, pdf))
             recs = render_outputs(cfg, reports, _safe_stem(pdf))
             outputs.extend(r["path"] for r in recs)
+            archived = archive_reports(cfg, reports, source=pdf.name)
             a_paths = [r["path"] for r in recs if r["kind"] == "analysis"]
             analysis_outputs.extend(a_paths)
             manifest.record_success(str(pdf), str(a_paths[0]) if a_paths else "",
                                     {"passages": len(reports),
-                                     "outputs": [r["path"].name for r in recs]})
+                                     "outputs": [r["path"].name for r in recs],
+                                     "library": [a.get("id") for a in archived
+                                                 if a.get("id")]})
             success += 1
             logger.info("[%d/%d] 완료: %s (지문 %d개) -> %s",
                         i, total, pdf.name, len(reports),
@@ -232,6 +274,14 @@ def run_folder(cfg: Config, mock: bool = False) -> dict:
         combined = cfg.output_dir / "ALL_passages_analysis.pdf"
         render.combine_pdfs(analysis_outputs, combined)
         logger.info("합본 PDF 생성: %s", combined.name)
+
+    if cfg.library.enabled and success:
+        try:
+            from .library import Library
+            Library().rebuild_catalog()
+            logger.info("자료 라이브러리 색인 갱신: library/CATALOG.md")
+        except Exception as e:
+            logger.warning("라이브러리 색인 갱신 실패(무시하고 진행): %s", e)
 
     logger.info("처리 요약 — 성공 %d, 실패 %d (총 %d)", success, failed, total)
     return {"total": total, "success": success, "failed": failed,

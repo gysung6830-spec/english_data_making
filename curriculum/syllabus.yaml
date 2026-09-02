@@ -1,0 +1,47 @@
+# ============================================================
+#  수업 운영 규격 — "한 주가 어떻게 굴러가는가"의 표준형
+#  levels.yaml 의 grammar_sequence 와 결합해 주차별 진도표가 자동 생성된다.
+#     python manage.py curriculum plan H1
+# ============================================================
+
+# 한 주에 몇 회, 한 회에 몇 분
+schedule:
+  sessions_per_week: 2
+  minutes_per_session: 90
+  passages_per_week: 2        # 주당 소화하는 지문 수 (자료 소요량의 기준)
+
+# 한 회차(90분) 구성 — 이 순서를 고정해야 강사가 바뀌어도 수업이 같다
+session_blocks:
+  - {minutes: 10, name: "어휘 확인 테스트", material: "vocabtest", note: "지난 회차 어휘 + 누적 20%"}
+  - {minutes: 15, name: "어휘·배경 도입",   material: "vocablist", note: "핵심 어휘 리스트로 선행 학습"}
+  - {minutes: 30, name: "지문 정독 · 직독직해", material: "analysis", note: "분석지 ②번 섹션 중심"}
+  - {minutes: 20, name: "문법 포인트 강의", material: "analysis", note: "분석지 ③번 + 주차 문법 주제"}
+  - {minutes: 10, name: "구조 · 출제 포인트", material: "analysis", note: "분석지 ⑤⑥번 섹션"}
+  - {minutes: 5,  name: "과제 안내",        material: "homework",  note: "학생용 빈칸 분석지 + 어휘 암기"}
+
+# 주기적으로 도는 평가
+assessments:
+  - {every_weeks: 1,  name: "어휘 테스트",     kind: "vocabtest",  scope: "직전 2지문"}
+  - {every_weeks: 4,  name: "누적 어휘 시험",  kind: "vocabtest",  scope: "직전 8지문 누적"}
+  - {every_weeks: 8,  name: "중간 점검 테스트", kind: "review",     scope: "직전 16지문 + 문법"}
+  - {every_weeks: 16, name: "학기 총괄 평가",   kind: "review",     scope: "학기 전체"}
+
+# 학부모 소통 주기
+reporting:
+  - {every_weeks: 4, name: "월간 학습 리포트", note: "출결·어휘 성취율·취약 유형"}
+  - {every_weeks: 16, name: "학기 상담",       note: "레벨 이동 여부 결정"}
+
+# 자료 산출물 정의 — 무엇을 언제 쓰는지
+outputs:
+  analysis:   {label: "분석지(교사용)",   audience: "강사", when: "수업 전 인쇄"}
+  student:    {label: "분석지(학생용·빈칸)", audience: "학생", when: "수업 중 배부"}
+  vocablist:  {label: "핵심 어휘 리스트", audience: "학생", when: "수업 전날 배부"}
+  vocabtest:  {label: "핵심 어휘 시험지", audience: "학생", when: "다음 회차 도입"}
+  grammar:    {label: "문법 누적 시트",   audience: "학생", when: "4주 단위 정리"}
+  review:     {label: "누적 복습 테스트", audience: "학생", when: "4·8·16주차"}
+
+# 레벨 이동(승급) 기준 — 상담 때 근거로 쓰는 숫자
+promotion:
+  vocab_mastery: 0.85      # 누적 어휘 테스트 평균 정답률
+  attendance: 0.85         # 출석률
+  min_passages: 48         # 그 레벨에서 소화한 최소 지문 수

@@ -57,3 +57,12 @@ outputs:
   student: false      # 학생용 분석지(정답 빈칸) — 필요하면 true
   wordlist: true
   quiz: true
+
+# 자료 라이브러리 (library/) — 분석 결과를 자산으로 쌓아 두는 곳
+#   enabled 가 true 면 지문을 분석할 때마다 library/passages/ 에 자동 등록되고,
+#   나중에 API 비용 없이 누적 시험지·문법 시트로 재활용할 수 있습니다.
+library:
+  enabled: true
+  default_level: ""          # 예: "H1". 비우면 지문 길이로 레벨을 추천해 넣습니다.
+  default_category: custom   # textbook / school / mock / csat / ebs / book / custom
+  default_status: ready      # draft(검토 전) / ready(수업 투입 가능) / retired(사용 중지)

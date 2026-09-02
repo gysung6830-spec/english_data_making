@@ -1,0 +1,255 @@
+# ============================================================
+#  레벨 체계 — 교습소 커리큘럼의 뼈대
+#  이 파일 하나가 "무슨 자료를 얼마나 만들어야 하는가"의 기준이 된다.
+#    - grammar_sequence : 그 레벨에서 16주 동안 다루는 문법 순서(= 주차별 진도)
+#    - material_target  : 그 레벨을 굴리려면 라이브러리에 있어야 할 지문 수
+#    - source_mix       : 그 레벨 지문을 어디서 가져올지(비중 %)
+#  숫자/문구만 고치면 진도표·자료 목표치가 전부 따라 바뀝니다.
+# ============================================================
+
+# 한 학기 = 16주 (주 2회 기준 32차시)
+term_weeks: 16
+
+levels:
+  - code: E1
+    name: "초등 기초"
+    grades: "초3~초4"
+    vocab_target: 800          # 이 레벨을 마칠 때 누적 목표 어휘 수
+    sentence_words: [6, 12]    # 지문 문장당 적정 단어 수
+    passage_words: [60, 110]   # 지문 1편 적정 길이
+    material_target: 64        # 필요한 지문 자료 수 (16주 × 주 2편 × 2학기)
+    source_mix: {textbook: 40, custom: 50, book: 10}
+    focus: "소리-철자 연결, 문장 통째 읽기, 기초 어순 감각"
+    grammar_sequence:
+      - "be동사 현재형"
+      - "일반동사 현재형"
+      - "명사의 단수·복수"
+      - "관사 a/an/the"
+      - "인칭대명사와 소유격"
+      - "형용사의 자리"
+      - "There is / There are"
+      - "의문사 의문문(who/what/where)"
+      - "현재진행형"
+      - "빈도부사와 위치"
+      - "조동사 can / can't"
+      - "명령문과 청유문"
+      - "전치사(장소·시간)"
+      - "be동사 과거형"
+      - "일반동사 과거형(규칙)"
+      - "1학기 총정리 · 문장 만들기"
+
+  - code: E2
+    name: "초등 발전"
+    grades: "초5"
+    vocab_target: 1200
+    sentence_words: [8, 14]
+    passage_words: [90, 140]
+    material_target: 64
+    source_mix: {textbook: 35, custom: 45, book: 20}
+    focus: "문장 확장, 시제 구분, 문단 단위 읽기"
+    grammar_sequence:
+      - "일반동사 과거형(불규칙)"
+      - "미래표현 will / be going to"
+      - "과거진행형"
+      - "조동사 must / have to"
+      - "조동사 should / may"
+      - "감각동사 + 형용사"
+      - "수여동사(4형식)"
+      - "to부정사 명사적 용법"
+      - "동명사의 기초"
+      - "비교급"
+      - "최상급"
+      - "접속사 and/but/or/so"
+      - "접속사 when/because/if"
+      - "부가의문문"
+      - "대명사 it의 여러 쓰임"
+      - "1학기 총정리 · 문단 쓰기"
+
+  - code: E3
+    name: "예비중"
+    grades: "초6"
+    vocab_target: 1600
+    sentence_words: [10, 16]
+    passage_words: [110, 170]
+    material_target: 64
+    source_mix: {textbook: 30, school: 10, custom: 40, book: 20}
+    focus: "중등 문법 용어에 적응, 지문 구조 인식 시작"
+    grammar_sequence:
+      - "문장의 5형식 개관"
+      - "1·2형식과 보어"
+      - "3·4형식 전환"
+      - "5형식과 목적격보어"
+      - "to부정사 형용사적 용법"
+      - "to부정사 부사적 용법"
+      - "동명사 vs to부정사"
+      - "현재완료 기초(경험·완료)"
+      - "현재완료 계속·결과"
+      - "수동태 기초"
+      - "관계대명사 who/which/that"
+      - "접속사 that과 명사절"
+      - "간접의문문"
+      - "원급 비교 as~as"
+      - "연결어와 글의 흐름"
+      - "1학기 총정리 · 서술형 대비"
+
+  - code: M1
+    name: "중1"
+    grades: "중1"
+    vocab_target: 2000
+    sentence_words: [12, 18]
+    passage_words: [130, 190]
+    material_target: 80        # 내신 대비로 교과서 지문 물량이 커짐
+    source_mix: {textbook: 45, school: 20, custom: 20, book: 15}
+    focus: "교과서 본문 완전 장악 + 서술형 기초"
+    grammar_sequence:
+      - "시제 총정리(현재·과거·미래)"
+      - "진행형과 상태동사"
+      - "현재완료 심화"
+      - "조동사 총정리"
+      - "to부정사 3용법 구분"
+      - "동명사 관용표현"
+      - "분사의 형용사 역할"
+      - "수동태 시제 변화"
+      - "관계대명사 주격·목적격"
+      - "관계대명사 소유격 whose"
+      - "관계부사 기초"
+      - "비교 구문 심화"
+      - "명사절 접속사"
+      - "부사절 접속사"
+      - "문장 연결과 대명사 지칭"
+      - "내신 서술형 유형 정리"
+
+  - code: M2
+    name: "중2"
+    grades: "중2"
+    vocab_target: 2600
+    sentence_words: [14, 20]
+    passage_words: [150, 210]
+    material_target: 80
+    source_mix: {textbook: 40, school: 25, custom: 15, book: 20}
+    focus: "긴 문장 끊어읽기, 내신 지문 변형 대비"
+    grammar_sequence:
+      - "5형식 사역·지각동사"
+      - "분사구문 기초"
+      - "분사구문 심화(시간·이유·조건)"
+      - "관계대명사 계속적 용법"
+      - "관계대명사 what"
+      - "복합관계사"
+      - "가정법 과거"
+      - "가정법 과거완료"
+      - "I wish / as if"
+      - "도치 구문"
+      - "강조 구문 It ~ that"
+      - "비교 관용표현"
+      - "부정 표현과 부분부정"
+      - "동격과 삽입절"
+      - "긴 문장 끊어읽기 훈련"
+      - "내신 변형문항 대비 정리"
+
+  - code: M3
+    name: "중3 · 예비고"
+    grades: "중3"
+    vocab_target: 3200
+    sentence_words: [16, 24]
+    passage_words: [170, 240]
+    material_target: 96
+    source_mix: {textbook: 30, school: 25, mock: 20, custom: 10, book: 15}
+    focus: "고1 모의고사 진입, 글의 논리 구조 훈련"
+    grammar_sequence:
+      - "구문 독해의 원리(주어·동사 찾기)"
+      - "긴 주어와 가주어·진주어"
+      - "삽입·동격 처리"
+      - "관계사 총정리"
+      - "분사구문 총정리"
+      - "가정법 총정리"
+      - "특수구문(도치·강조·생략)"
+      - "병렬 구조"
+      - "대명사·대동사 지칭"
+      - "연결어 추론"
+      - "글의 주제·요지 찾기"
+      - "빈칸 추론 입문"
+      - "순서 배열 입문"
+      - "문장 삽입 입문"
+      - "어법 문제 유형 정리"
+      - "고1 3월 모의고사 실전"
+
+  - code: H1
+    name: "고1"
+    grades: "고1"
+    vocab_target: 4000
+    sentence_words: [18, 28]
+    passage_words: [180, 260]
+    material_target: 128       # 내신 + 모의고사 병행
+    source_mix: {school: 30, mock: 35, textbook: 15, ebs: 10, book: 10}
+    focus: "내신 심층 분석 + 모의고사 유형 정착"
+    grammar_sequence:
+      - "문장 구조 분석 총론"
+      - "준동사 총정리(부정사·동명사·분사)"
+      - "관계사 심화"
+      - "접속사 vs 전치사 vs 관계사"
+      - "수일치와 시제일치"
+      - "태와 수동 의미"
+      - "가정법과 조동사+have p.p."
+      - "비교·부정·강조 구문"
+      - "요지·주제·제목 유형"
+      - "빈칸 추론(단어·구)"
+      - "빈칸 추론(문장)"
+      - "순서 배열"
+      - "문장 삽입"
+      - "함축 의미·지칭 추론"
+      - "어법·어휘 유형"
+      - "내신 서술형 심화"
+
+  - code: H2
+    name: "고2"
+    grades: "고2"
+    vocab_target: 5000
+    sentence_words: [20, 32]
+    passage_words: [200, 280]
+    material_target: 128
+    source_mix: {school: 30, mock: 30, ebs: 20, csat: 10, book: 10}
+    focus: "추상 지문 독해, 시간 관리, EBS 연계 대비"
+    grammar_sequence:
+      - "추상 명사구 해석"
+      - "긴 수식어구 처리"
+      - "복잡한 병렬·생략"
+      - "논증 구조 파악(주장-근거)"
+      - "대조·양보 구조"
+      - "예시·부연 구조"
+      - "인과 구조"
+      - "실험·연구 지문 독해"
+      - "철학·심리 지문 독해"
+      - "경제·사회 지문 독해"
+      - "과학·기술 지문 독해"
+      - "문학·수필 지문 독해"
+      - "빈칸 추론 고난도"
+      - "순서·삽입 고난도"
+      - "요약문 완성"
+      - "시간 관리 실전 훈련"
+
+  - code: H3
+    name: "고3 · 수능"
+    grades: "고3·N수"
+    vocab_target: 6000
+    sentence_words: [20, 34]
+    passage_words: [200, 300]
+    material_target: 160
+    source_mix: {csat: 35, mock: 30, ebs: 25, school: 10}
+    focus: "수능 실전, 오답 유형별 개인 처방"
+    grammar_sequence:
+      - "수능 어법 출제 포인트 총정리"
+      - "고난도 구문 해부"
+      - "18~24번 유형 정착"
+      - "빈칸 31~34번 전략"
+      - "순서 36~37번 전략"
+      - "삽입 38~39번 전략"
+      - "요약 40번 전략"
+      - "장문 41~45번 전략"
+      - "오답 유형 개인 진단"
+      - "EBS 연계 지문 정리(1)"
+      - "EBS 연계 지문 정리(2)"
+      - "기출 회차별 실전(1)"
+      - "기출 회차별 실전(2)"
+      - "기출 회차별 실전(3)"
+      - "취약 유형 집중 보강"
+      - "최종 점검 · 시험 운영 전략"

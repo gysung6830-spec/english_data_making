@@ -726,6 +726,81 @@ def render_vocabtest_pdf(reports, out_path: str | Path,
     return out_path
 
 
+# ---------------------------------------------------------------------------
+# 문법 누적 시트 — 여러 지문의 ③번 섹션을 포인트별로 묶어 한 장으로
+# ---------------------------------------------------------------------------
+def _norm_point(text: str) -> str:
+    """'관계대명사 주격(who)' 과 '관계대명사 주격' 을 같은 포인트로 묶기 위한 키."""
+    t = re.sub(r"[\(\)\[\]{}<>·,/]", " ", (text or "").lower())
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def collect_grammar_groups(reports, key_only: bool = False,
+                           max_examples: int = 3) -> list[dict]:
+    """여러 지문의 문법 항목을 같은 포인트끼리 묶는다.
+
+    많이 나온 포인트가 위로 온다 — 4주치를 모아 보면 '무엇이 반복되는 뼈대인지'가
+    한눈에 보이고, 그게 곧 복습 우선순위가 된다.
+    """
+    reps = _as_list(reports)
+    groups: dict[str, dict] = {}
+    for idx, rep in enumerate(reps):
+        title = _display_title(rep)
+        for g in rep.grammar.items:
+            point = (g.point or "").strip()
+            if not point:
+                continue
+            is_key = bool(g.key) or _is_key_grammar(point)
+            if key_only and not is_key:
+                continue
+            key = _norm_point(point)
+            slot = groups.setdefault(key, {
+                "point": point, "key": is_key, "count": 0,
+                "sources": set(), "seen": set(), "examples": [],
+            })
+            slot["key"] = slot["key"] or is_key
+            slot["sources"].add(idx)        # 제목이 같아도 다른 지문으로 센다
+            example = (g.example or "").strip()
+            # 같은 예문이 여러 지문에 겹치면 한 번만 싣는다(지면 낭비 방지)
+            if example and example.lower() not in slot["seen"] \
+                    and len(slot["examples"]) < max_examples:
+                slot["seen"].add(example.lower())
+                slot["examples"].append({
+                    "english": example,
+                    "explanation": (g.explanation or "").strip(),
+                    "source": title,
+                })
+    out = []
+    for slot in groups.values():
+        slot["count"] = len(slot["sources"])
+        slot.pop("sources", None)
+        slot.pop("seen", None)
+        out.append(slot)
+    # 자주 나온 것 → 핵심 어법 → 이름순
+    out.sort(key=lambda g: (-g["count"], not g["key"], g["point"]))
+    return out
+
+
+def render_grammar_sheet_pdf(reports, out_path: str | Path,
+                             title: str = "문법 누적 시트",
+                             footer_note: str = "",
+                             key_only: bool = False) -> Path:
+    """여러 지문의 문법 포인트를 하나로 묶은 정리 시트 PDF."""
+    from weasyprint import CSS, HTML
+
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    reps = _as_list(reports)
+    groups = collect_grammar_groups(reps, key_only=key_only)
+    tmpl = _env.get_template("grammar_sheet.html.j2")
+    html = tmpl.render(title=title, groups=groups, passage_count=len(reps),
+                       key_only=key_only, footer_note=footer_note)
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path),
+                                                            stylesheets=[css])
+    return out_path
+
+
 def combine_pdfs(pdf_paths: list[Path], out_path: Path) -> Path:
     """여러 지문 PDF 를 하나로 합친다 (pypdf 사용, 없으면 개별 유지)."""
     try:

@@ -12,3 +12,8 @@ output/*.png
 output/*.jpg
 output/*.json
 web_uploads/
+
+# --- 교습소 운영 데이터(개인정보) — 예시 파일만 저장소에 남긴다 ---
+school/students.yaml
+school/classes.yaml
+school/*.jsonl

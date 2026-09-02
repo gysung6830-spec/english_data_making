@@ -1,0 +1,35 @@
+# ------------------------------------------------------------
+#  학생 명단 (예시)
+#  실제 운영 시 이 파일을 students.yaml 로 복사해 쓰세요.
+#  students.yaml 은 .gitignore 에 걸려 있어 저장소에 올라가지 않습니다.
+#
+#  code : 학생코드. 성적·진도 기록은 전부 이 코드로만 남습니다(개인정보 최소화).
+#  level: curriculum/levels.yaml 의 레벨 코드
+# ------------------------------------------------------------
+students:
+  - code: S001
+    name: "학생A"
+    level: H1
+    school: "○○고등학교"
+    grade: "1"
+    enrolled: "2026-03-02"
+    active: true
+    note: "빈칸 추론 취약, 어휘 암기 성실"
+
+  - code: S002
+    name: "학생B"
+    level: H1
+    school: "○○고등학교"
+    grade: "1"
+    enrolled: "2026-03-02"
+    active: true
+    note: ""
+
+  - code: S003
+    name: "학생C"
+    level: M3
+    school: "○○중학교"
+    grade: "3"
+    enrolled: "2026-03-09"
+    active: true
+    note: "구문 분석 훈련 필요"

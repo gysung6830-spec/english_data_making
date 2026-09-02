@@ -12,6 +12,59 @@
 
 ---
 
+## 🏫 교습소 자료·운영 시스템 (`manage.py`)
+
+지문 1편을 자료 3종으로 바꾸는 게 `run.py` 라면, **쌓인 자료를 굴리는 일**은
+`manage.py` 가 합니다. 몇 년에 걸쳐 자료를 모으고, 그걸 그대로 수업으로
+연결하기 위한 층입니다.
+
+```bash
+python manage.py status                       # 전체 현황 한 장
+python manage.py curriculum gap               # 어느 레벨 자료가 비었나
+python manage.py class next H1A               # 다음 회차 준비물
+python manage.py pack review --class H1A --last 8   # 4주 누적 복습 자료
+```
+
+### 네 개의 층
+
+| 층 | 폴더 | 하는 일 |
+|---|---|---|
+| **자료 라이브러리** | `library/` | 분석 결과(`report.json`)를 메타데이터와 함께 보관. 중복 지문 자동 차단, 검색·통계·카탈로그 |
+| **커리큘럼** | `curriculum/` | 레벨 9단계 + 문법 시퀀스. 주차 진도표와 자료 부족분을 **계산해서** 뽑아 줌 |
+| **자료 팩** | `src/packs.py` | 여러 지문을 가로질러 누적 어휘 시험지·문법 시트·개인 오답 시험지 생성 (**API 비용 0원**) |
+| **운영** | `school/` | 반·학생·진도·성적. 진도 기록이 다음 회차 자료 추천으로 이어짐 |
+
+### 왜 이렇게 쌓는가
+
+PDF 는 결과물이지 자산이 아닙니다. 지문을 분석할 때마다 **분석 결과 원본**이
+`library/passages/<자료ID>/report.json` 으로 저장되므로, 나중에 디자인을 바꾸거나
+여러 지문을 묶어 새 자료를 만들 때 **API 를 다시 태울 필요가 없습니다.**
+
+`run.py` 를 돌리면 자동으로 등록됩니다 (`config.yaml` 의 `library.enabled`).
+
+### 하루 루틴
+
+```bash
+python manage.py class next H1A                       # 수업 전: 준비물 확인
+python manage.py class log H1A --materials H1-MOCK-0007 --absent S002   # 수업 후: 기록
+python manage.py student score S001 --score 16 --total 20 --wrong "vital,retain"
+python manage.py pack personal S001                   # 그 학생 오답만 모은 시험지
+```
+
+### 문서
+
+| 문서 | 내용 |
+|---|---|
+| [docs/ROADMAP.md](docs/ROADMAP.md) | 개원까지 단계별 자료 구축 계획 (총 864편 · 페이스 계산 · 행정 체크리스트) |
+| [docs/CURRICULUM.md](docs/CURRICULUM.md) | 레벨 9단계, 16주 진도, 90분 수업 구성, 승급 기준 |
+| [docs/LIBRARY.md](docs/LIBRARY.md) | 자료 ID·메타데이터 규칙, 등록 워크플로, 저작권 |
+| [docs/OPERATIONS.md](docs/OPERATIONS.md) | 수업 전/후, 4주, 학기말 루틴 + 개인정보 취급 |
+
+> 학생 정보(`school/students.yaml` 등)는 `.gitignore` 로 막혀 있어 저장소에
+> 올라가지 않습니다. 예시 파일(`*.example.yaml`)만 커밋됩니다.
+
+---
+
 ## 🖼 결과물 미리보기 (API 키 없이)
 
 API 키가 아직 없어도, 샘플 데이터로 **디자인을 미리 볼 수 있습니다.**
@@ -162,16 +215,21 @@ PDF → 텍스트 추출 → (전처리로 문제/정답 제거)
 ## 📁 폴더 구조
 
 ```
-input/      분석할 지문 PDF를 넣는 곳
-output/     완성된 분석 PDF가 나오는 곳
-logs/       처리 성공/실패 기록
-config.yaml 설정
-.env        API 키 (직접 만들며 git에 올라가지 않음)
-run.py      실행 진입점
-src/        핵심 코드
-templates/  PDF 디자인(HTML/CSS)
-samples/    테스트용 샘플/목 데이터
-tests/      오프라인 자동 테스트
+input/       분석할 지문 PDF를 넣는 곳
+output/      완성된 분석 PDF가 나오는 곳
+logs/        처리 성공/실패 기록
+library/     자료 라이브러리 — 분석 결과 원본 + 메타데이터 (자산)
+curriculum/  레벨 정의 · 수업 운영 규격
+school/      반·학생·진도·성적 (실데이터는 git 제외)
+docs/        로드맵 · 커리큘럼 · 자료 규칙 · 운영 루틴
+config.yaml  설정
+.env         API 키 (직접 만들며 git에 올라가지 않음)
+run.py       지문 분석 실행 진입점
+manage.py    자료·운영 관리 CLI
+src/         핵심 코드
+templates/   PDF 디자인(HTML/CSS)
+samples/     테스트용 샘플/목 데이터
+tests/       오프라인 자동 테스트
 ```
 
 ---
@@ -187,7 +245,9 @@ tests/      오프라인 자동 테스트
 ## 🧪 개발자용: 오프라인 테스트
 
 ```bash
-python -m tests.test_offline
+python -m tests.test_offline    # 전처리 · 스키마 검증 · 재시도 · 렌더링
+python -m tests.test_system     # 라이브러리 · 커리큘럼 · 운영 · 자료 팩
 ```
 
-전처리 · 스키마 검증 · 재시도 · 렌더링을 API 없이 검증합니다.
+둘 다 API 키 없이 돌아갑니다. `test_system` 은 임시 폴더에서만 동작하므로
+실제 `library/`·`school/` 데이터를 건드리지 않습니다.

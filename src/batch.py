@@ -16,7 +16,7 @@ from . import extract, hwp, prompts, render, schemas
 from .client import ClaudeClient, build_request, parse_response_text
 from .config import Config
 from .logutil import Manifest, setup_logging
-from .pipeline import _safe_stem, list_pdfs, render_outputs
+from .pipeline import _safe_stem, archive_reports, list_pdfs, render_outputs
 
 POLL_SECONDS = 30
 
@@ -210,11 +210,14 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
             pdf = files[fid]
             recs = render_outputs(cfg, reports, _safe_stem(pdf))
             outputs.extend(r["path"] for r in recs)
+            archived = archive_reports(cfg, reports, source=pdf.name)
             a_paths = [r["path"] for r in recs if r["kind"] == "analysis"]
             analysis_outputs.extend(a_paths)
             manifest.record_success(str(pdf), str(a_paths[0]) if a_paths else "",
                                     {"passages": len(reports),
-                                     "outputs": [r["path"].name for r in recs]})
+                                     "outputs": [r["path"].name for r in recs],
+                                     "library": [a.get("id") for a in archived
+                                                 if a.get("id")]})
             success += 1
         except Exception as e:
             failed.setdefault(fid, f"assemble: {e}")
@@ -225,6 +228,14 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
     if analysis_outputs and not cfg.design.one_pdf_per_passage:
         combined = cfg.output_dir / "ALL_passages_analysis.pdf"
         render.combine_pdfs(analysis_outputs, combined)
+
+    if cfg.library.enabled and success:
+        try:
+            from .library import Library
+            Library().rebuild_catalog()
+            logger.info("자료 라이브러리 색인 갱신: library/CATALOG.md")
+        except Exception as e:
+            logger.warning("라이브러리 색인 갱신 실패(무시하고 진행): %s", e)
 
     logger.info("Batch 처리 요약 — 성공 %d, 실패 %d (총 %d)", success, len(failed), total)
     logger.info("실패 파일은 logs/failed.jsonl 참고. 동기 모드(python run.py)로 재시도 가능.")
