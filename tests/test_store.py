@@ -899,15 +899,23 @@ def test_backup_download_and_restore():
 
 
 # ---- 7. 글꼴 · 보안 --------------------------------------------------------
-def test_mobile_menu_exists():
-    """폰에서는 메뉴가 접혀 있어야 첫 화면을 다 먹지 않습니다."""
+def test_mobile_quick_bar():
+    """폰에서 메뉴를 누르지 않아도 갈 곳이 다 보여야 합니다."""
     home = body(client().get("/"))
-    assert 'class="nav-toggle"' in home and 'aria-controls="main-nav"' in home
-    assert 'id="main-nav"' in home
+    assert 'class="quick-bar"' in home
+    # 무료 자료 · 자료 목록 · 분류 4종 · 라인업 · 프리패스 · 공지 · 안내
+    track = home.split('class="qb-track"', 1)[1].split("</nav>", 1)[0]
+    for word in ("무료 자료", "자료 목록", "교과서", "모의고사", "EBS 부교재",
+                 "형광펜 독해", "오르티카 라인업", "프리패스", "공지", "안내"):
+        assert word in track, word
+    # 지금 보고 있는 자리를 표시해 줍니다
+    picked = body(client().get("/products?category=mock"))
+    assert 'class="on">모의고사' in picked
+    # 햄버거 버튼은 없앴습니다
+    assert "nav-toggle" not in home
     css = body(client().get("/static/store.css"))
-    assert ".nav.open{display:flex;}" in css        # 눌렀을 때만 펼쳐짐
-    assert ".nav-toggle{display:none;}" in css      # 데스크톱에선 버튼이 안 보임
-    print("PASS  폰에서 접히는 메뉴")
+    assert ".quick-bar{display:none;}" in css       # 넓은 화면에선 띠가 안 보임
+    print("PASS  폰에서 카테고리 줄띠")
 
 
 def test_nanumsquareround_font_is_served():
@@ -1452,13 +1460,17 @@ def test_order_page_shows_download_when_ready():
     print("PASS  주문 확인 화면에서 바로 받기")
 
 
-def test_home_speaks_to_both_audiences():
+def test_speaks_to_both_audiences():
     """혼자 하는 학생과 가르치는 선생님, 둘 다에게 말을 걸어야 합니다."""
-    text = body(client().get("/"))
+    # 첫 화면은 히어로 한 문단으로 두 쪽을 다 부릅니다
+    home = body(client().get("/"))
+    assert "혼자 공부하는 학생은" in home and "가르치는 선생님은" in home
+    # 자세한 두 갈래 안내는 오르티카 라인업에 있습니다
+    text = body(client().get("/lineup"))
     assert "혼자 공부하는 학생" in text and "가르치는 선생님" in text
     assert "필생보 독학용" in text          # 학생 쪽 길
     assert "학생용 · 강의용 2판본" in text   # 선생님 쪽 길
-    print("PASS  홈이 학생·선생님 두 갈래로 안내")
+    print("PASS  히어로가 두 쪽을 부르고, 라인업이 두 갈래로 안내")
 
 
 def test_analysis_tagline_updated():
@@ -1964,7 +1976,7 @@ def run_all():
     test_home_reflects_lineup()
     test_notice_shows_live_now_section()
     test_home_previews_every_category()
-    test_home_speaks_to_both_audiences()
+    test_speaks_to_both_audiences()
     test_analysis_tagline_updated()
     test_new_product_appears_in_home_updates()
     test_mobile_filters_collapse()
@@ -2059,7 +2071,7 @@ def run_all():
     test_request_menu_renamed_to_jaryo()
     # 예시 데이터를 지우는 테스트는 다른 테스트가 그 상품을 쓰므로 맨 뒤에 둡니다.
     test_clear_sample_data()
-    test_mobile_menu_exists()
+    test_mobile_quick_bar()
     test_nanumsquareround_font_is_served()
     test_file_path_traversal_blocked()
     print("\n판매 사이트 테스트 통과 ✅")
