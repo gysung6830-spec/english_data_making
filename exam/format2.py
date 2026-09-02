@@ -128,7 +128,10 @@ def D_q(tokens: list[str], cues: list[str], korean: str = "") -> str:
             if (korean or "").strip() else "")
     return (head
             + f'<div class="boki"><span class="boki-title">&lt;보기&gt;</span> {" / ".join(toks)}</div>'
-            + F.write_lines(1))   # 답 쓰는 칸
+            # 정답은 문장 하나를 통째로 옮겨 적는 것이라 한 줄로는 손으로 못 쓴다
+            # (실제 정답이 열일곱 낱말짜리였다). 세 줄을 준다 — 쓸 자리도 생기고
+            # 이 유형만 쪽이 휑하게 비던 것도 함께 메워진다.
+            + F.write_lines(3))   # 답 쓰는 칸
 
 
 def D_a(sentence: str, reason: str = "") -> str:
