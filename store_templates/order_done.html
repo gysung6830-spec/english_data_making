@@ -46,10 +46,7 @@
         <tr><th>상품</th><td>{{ o['product_name'] }}</td></tr>
         <tr><th>결제 금액</th><td><b style="color:var(--brand);font-size:18px;">{{ o['amount']|won }}</b></td></tr>
         <tr><th>입금자명</th>
-            <td>{{ o['depositor'] or o['phone'] }}
-              {%- if not o['depositor'] %}
-                <br><small class="muted">성함을 안 적으셔서 연락처로 확인합니다.
-                  입금자명이 다르면 알려 주세요.</small>{% endif %}</td></tr>
+            <td>{{ o['depositor'] or o['phone'] or '-' }}</td></tr>
         <tr><th>받으실 곳</th><td>{{ o['email'] }}</td></tr>
       </table>
     </div>

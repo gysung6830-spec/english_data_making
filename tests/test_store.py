@@ -1718,41 +1718,40 @@ def test_full_pack_needs_to_be_cheaper():
 
 
 # ---- 개인정보는 최소로 -----------------------------------------------------
-def test_contact_rules_email_and_phone_required():
-    """이메일(자료가 가는 곳)과 연락처(못 받으셨을 때 연락할 곳)만 받습니다."""
+def test_contact_rules_name_and_email_required():
+    """성함(입금자 확인)과 이메일(자료가 가는 곳)만 꼭 받습니다."""
     c = client()
 
-    # 성함은 안 적으셔도 됩니다
+    # 연락처는 안 적으셔도 됩니다
     ok = c.post("/order", data={
+        "slug": "ybm-han-analysis", "name": "연락처없음",
+        "email": "nophone@example.com", "agree": "1"})
+    assert ok.status_code == 302, "연락처 없이 주문이 막혔습니다"
+
+    # 성함은 꼭 받습니다
+    noname = c.post("/order", data={
         "slug": "ybm-han-analysis", "phone": "010-1111-2222",
         "email": "noname@example.com", "agree": "1"})
-    assert ok.status_code == 302, "성함 없이 주문이 막혔습니다"
-    done = body(c.get(ok.headers["Location"]))
-    assert "010-1111-2222" in done and "성함을 안 적으셔서" in done
+    assert noname.status_code == 400
+    assert "입금하신 분을 확인하는 데 씁니다" in body(noname)
 
-    # 연락처는 꼭 받습니다
-    nophone = c.post("/order", data={
-        "slug": "ybm-han-analysis", "name": "이름만",
-        "email": "nophone@example.com", "agree": "1"})
-    assert nophone.status_code == 400
-    assert "연락드릴 데가 필요합니다" in body(nophone)
-
-    # 형식이 틀리면 알려 줍니다
+    # 적으셨는데 형식이 틀리면 알려 줍니다
     weird = c.post("/order", data={
-        "slug": "ybm-han-analysis", "phone": "전화번호아님",
+        "slug": "ybm-han-analysis", "name": "형식", "phone": "전화번호아님",
         "email": "x@y.com", "agree": "1"})
     assert weird.status_code == 400 and "숫자와" in body(weird)
 
     # 이메일은 여전히 꼭 받습니다
     nomail = c.post("/order", data={
-        "slug": "ybm-han-analysis", "phone": "010-0000-0000", "agree": "1"})
+        "slug": "ybm-han-analysis", "name": "메일없음", "agree": "1"})
     assert nomail.status_code == 400 and "자료를 이 주소로" in body(nomail)
 
     # 화면 문구도 그렇게 되어 있어야 합니다
     form = body(client().get("/order?slug=ybm-han-analysis"))
-    assert "자료가 안 갔을 때 연락드리기 위해 받습니다" in form
-    assert '성함 <span class="hint">선택</span>' in form
-    print("PASS  이메일·연락처는 필수 · 성함은 선택")
+    assert "입금하신 분을 확인하는 데 씁니다" in form
+    assert "적어 주시면 문제가 생겼을 때 곧바로 연락드릴 수 있습니다" in form
+    assert '연락처 <span class="hint">선택</span>' in form
+    print("PASS  성함·이메일은 필수 · 연락처는 선택")
 
 
 def test_affiliation_is_not_collected():
@@ -1763,7 +1762,8 @@ def test_affiliation_is_not_collected():
 
     # 보내도 저장되지 않아야 합니다
     c = client()
-    c.post("/order", data={"slug": "ybm-han-analysis", "phone": "010-5555-1111",
+    c.post("/order", data={"slug": "ybm-han-analysis", "name": "소속없이",
+                           "phone": "010-5555-1111",
                            "email": "noaff@example.com", "affiliation": "○○학원",
                            "agree": "1"})
     with store.app.app_context():
@@ -1776,7 +1776,7 @@ def test_affiliation_is_not_collected():
     collected = guide.split("1. 수집하는 항목과 목적")[1].split("2. 보유 기간")[0]
     assert "(선택) 소속" not in collected, "수집 항목에 소속이 남아 있습니다"
     assert "소속은 받지 않습니다" in guide
-    assert "자료가 안 갔을 때 연락드리려고" in guide
+    assert "입금하신 분을 알아보려면 성함이 필요합니다" in guide
     print("PASS  소속은 받지 않음")
 
 
@@ -1932,7 +1932,7 @@ def run_all():
     test_order_page_shows_what_you_are_buying()
     test_manual_line_break_filter()
     test_no_emoji_on_customer_pages()
-    test_contact_rules_email_and_phone_required()
+    test_contact_rules_name_and_email_required()
     test_affiliation_is_not_collected()
     test_email_typo_is_caught_once()
     test_order_rejects_bad_input()

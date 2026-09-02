@@ -1007,11 +1007,9 @@ def validate_contact(form) -> tuple[dict, list[str]]:
         "message": clean(form.get("message"), 2000),
     }
     errors = []
-    # 연락처는 꼭 받습니다 — 자료가 안 갔을 때 연락드릴 데가 있어야 합니다.
-    if not data["phone"]:
-        errors.append("연락처를 입력해 주세요. 자료가 안 갔을 때 연락드릴 데가 필요합니다.")
-    elif not PHONE_RE.match(data["phone"]):
-        errors.append("연락처를 숫자와 '-' 로 적어 주세요. 예: 010-1234-5678")
+    # 성함은 꼭 받습니다 — 입금하신 분을 알아봐야 자료를 보내 드릴 수 있습니다.
+    if not data["name"]:
+        errors.append("성함을 입력해 주세요. 입금하신 분을 확인하는 데 씁니다.")
     # 이메일은 꼭 받습니다 — 자료가 그 주소로 갑니다.
     if not EMAIL_RE.match(data["email"]):
         errors.append("이메일 주소를 정확히 입력해 주세요. 자료를 이 주소로 보내 드립니다.")
@@ -1023,6 +1021,9 @@ def validate_contact(form) -> tuple[dict, list[str]]:
                           f"맞으면 이메일 칸을 고쳐 주시고, 적으신 주소가 맞으면 "
                           f"아래 '적은 주소가 맞습니다' 에 표시하고 다시 눌러 주세요.")
             data["email_typo"] = maybe
+    # 연락처는 선택입니다. 적으셨을 때만 형식을 봅니다.
+    if data["phone"] and not PHONE_RE.match(data["phone"]):
+        errors.append("연락처를 숫자와 '-' 로 적어 주세요. 예: 010-1234-5678")
 
     if not form.get("agree"):
         errors.append("개인정보 수집·이용에 동의해 주셔야 접수됩니다.")
