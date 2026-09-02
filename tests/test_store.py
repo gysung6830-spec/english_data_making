@@ -931,6 +931,43 @@ def test_full_backup_has_orders():
 
 
 # ---- 7. 글꼴 · 보안 --------------------------------------------------------
+def test_contact_page():
+    """문의 창구 — 급한 분은 바로 연락, 기록이 남아야 하면 폼으로."""
+    text = body(client().get("/contact"))
+    assert "문의하기" in text
+    # 폼을 채우기 전에 카카오톡·이메일이 먼저 보여야 합니다
+    assert 'class="contact-ways"' in text
+    assert text.index('class="contact-ways"') < text.index('class="form-card"')
+    for label in ("주문 · 입금 · 영수증", "자료가 안 왔어요", "학원 제휴 · 대량 구매"):
+        assert label in text, label
+    assert "주문번호" in text                       # 자료 미도착 문의를 바로 찾기 위해
+
+    # 메뉴 · 폰 줄띠 · 바닥글에서 갈 수 있어야 합니다
+    home = body(client().get("/"))
+    assert home.count('href="/contact"') >= 3
+
+    # 내용을 안 적으면 반려
+    bad = client().post("/contact", data={"topic": "order", "name": "홍길동",
+                                          "email": "a@b.com", "agree": "1"})
+    assert bad.status_code == 400 and "문의하실 내용을 적어" in body(bad)
+
+    resp = client().post("/contact", data={
+        "topic": "delivery", "order_no": "OR-260902-11111", "name": "김선생",
+        "email": "teacher@example.com", "body": "자료가 아직 안 왔습니다.",
+        "agree": "1"}, follow_redirects=True)
+    assert resp.status_code == 200 and "문의가 접수되었습니다" in body(resp)
+    row = sc.sqlite3.connect(sc.DB_PATH).execute(
+        "SELECT product_name, message, detail_json FROM orders "
+        "WHERE kind='inquiry' ORDER BY id DESC LIMIT 1").fetchone()
+    assert "자료가 안 왔어요" in row[0] and "아직 안 왔습니다" in row[1]
+    assert "OR-260902-11111" in row[2]
+    # 관리자 주문 화면에서 '문의'로 걸러 볼 수 있어야 합니다
+    assert "문의" in body(admin().get("/admin/orders?kind=inquiry"))
+    # 사이트맵에도 들어갑니다
+    assert "/contact" in body(client().get("/sitemap.xml"))
+    print("PASS  문의 창구 — 바로 연락 · 문의 폼 · 관리자에서 확인")
+
+
 def test_mobile_quick_bar():
     """폰에서 메뉴를 누르지 않아도 갈 곳이 다 보여야 합니다."""
     home = body(client().get("/"))
@@ -2158,6 +2195,7 @@ def run_all():
     test_request_menu_renamed_to_jaryo()
     # 예시 데이터를 지우는 테스트는 다른 테스트가 그 상품을 쓰므로 맨 뒤에 둡니다.
     test_clear_sample_data()
+    test_contact_page()
     test_mobile_quick_bar()
     test_nanumsquareround_font_is_served()
     test_file_path_traversal_blocked()

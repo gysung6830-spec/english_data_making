@@ -1436,3 +1436,18 @@ input[type=file]{
   background:#fff; border:1px solid var(--line); border-radius:6px;
   padding:1px 7px; font-size:14px;
 }
+
+/* ---------- 문의 — 바로 연락하는 갈래 ---------- */
+/* 고르는 줄이 둘씩 짝지어 붙으면 마지막 줄만 남아 어색합니다. 한 줄에 하나씩. */
+.check-grid.col{flex-direction:column; gap:2px;}
+.contact-ways{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+  gap:12px; margin-bottom:22px;}
+.cw{display:flex; flex-direction:column; gap:3px; padding:15px 17px; border-radius:12px;
+  border:1px solid var(--line-strong); background:var(--card); min-height:44px;}
+.cw b{font-size:15.5px; color:var(--ink); word-break:break-all;}
+.cw small{font-size:13px; color:var(--muted);}
+.cw:hover{border-color:var(--brand);}
+.cw.kakao{background:#fef6d8; border-color:#e8d68f;}
+.cw.kakao b{color:#6b5300;}
+.cw.plain{background:var(--bg); cursor:default;}
+.cw.plain:hover{border-color:var(--line-strong);}

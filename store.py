@@ -88,6 +88,7 @@ def inject_globals():
         "discount": site.get("discount", {}),
         "cart_count": len(cart_slugs()),
         "order_kinds": sc.ORDER_KIND_LABELS,
+        "inquiry_kinds": sc.INQUIRY_KINDS,
         "material_map": sc.material_map(),
         "package_map": sc.package_map(),
     }
@@ -701,6 +702,49 @@ def custom():
     return render_template("custom_done.html", order_no=order_no, mode=mode, wanted=wanted)
 
 
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    """문의하기. 급한 분은 카카오톡·이메일로, 기록이 남아야 하는 분은 이 폼으로."""
+    if request.method == "GET":
+        return render_template("contact.html", form={}, errors=[], done=None)
+
+    if sc.too_many_submits(request, "contact"):
+        return render_template("contact.html", form=request.form,
+                               errors=["잠시 뒤에 다시 시도해 주세요."], done=None), 429
+
+    data, errors = sc.validate_contact(request.form)
+    topic = request.form.get("topic", "")
+    if topic not in sc.INQUIRY_KINDS:
+        topic = "etc"
+    body = sc.clean(request.form.get("body"), 2000)
+    if not body:
+        errors.append("문의하실 내용을 적어 주세요.")
+    if errors:
+        return render_template("contact.html", form=request.form,
+                               errors=errors, done=None), 400
+
+    label = sc.INQUIRY_KINDS[topic]
+    detail = {"문의 종류": label,
+              "주문번호": sc.clean(request.form.get("order_no"), 40) or "-"}
+    ts = sc.stamp()
+    order_no = sc.insert_numbered(
+        """INSERT INTO orders (order_no, kind, product_name, quantity, amount,
+                               name, phone, email, affiliation, message, detail_json,
+                               status, created_at, updated_at)
+           VALUES (?, 'inquiry', ?, 1, 0, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?)""",
+        lambda no: (no, f"문의 · {label}", data["name"], data["phone"], data["email"],
+                    data["affiliation"], body,
+                    json.dumps(detail, ensure_ascii=False), ts, ts))
+
+    sc.send_mail(
+        f"[Ortica영어] 문의 {order_no} · {label}",
+        "\n".join([f"접수번호 : {order_no}", f"문의 종류 : {label}",
+                    f"주문번호 : {detail['주문번호']}",
+                    f"성함     : {data['name']}", f"연락처   : {data['phone'] or '-'}",
+                    f"이메일   : {data['email']}", "", body, "", f"접수시각 : {ts}"]))
+    return render_template("contact.html", form={}, errors=[], done=order_no)
+
+
 # ---------------------------------------------------------------------------
 # 시험지 제출 → 할인 쿠폰
 # ---------------------------------------------------------------------------
@@ -1090,7 +1134,8 @@ def sitemap():
             url_for("lineup", _external=True),
             url_for("products", _external=True), url_for("samples", _external=True),
             url_for("notice", _external=True), url_for("guide", _external=True),
-            url_for("custom", _external=True), url_for("submit", _external=True)]
+            url_for("custom", _external=True), url_for("submit", _external=True),
+            url_for("contact", _external=True)]
     urls += [url_for("free_detail", slug=x["slug"], _external=True)
              for x in sc.load_freebies()["items"]]
     urls += [url_for("book_detail", slug=b["slug"], _external=True) for b in catalog["books"]]

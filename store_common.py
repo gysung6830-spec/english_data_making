@@ -39,7 +39,16 @@ KST = timezone(timedelta(hours=9))
 ORDER_STATUSES = ["입금대기", "입금확인", "발송완료", "취소"]
 SUBMIT_STATUSES = ["검토대기", "승인", "반려"]
 ORDER_KIND_LABELS = {"product": "자료 주문", "custom": "맞춤 제작",
-                     "request": "자료 요청", "pass": "프리패스"}
+                     "request": "자료 요청", "pass": "프리패스", "inquiry": "문의"}
+
+# 문의 종류 — 무엇에 관한 문의인지 골라 주시면 답이 빨라집니다.
+INQUIRY_KINDS = {
+    "order": "주문 · 입금 · 영수증",
+    "delivery": "자료가 안 왔어요 · 파일이 안 열려요",
+    "content": "자료 내용이 궁금해요",
+    "partner": "학원 제휴 · 대량 구매",
+    "etc": "그 밖의 문의",
+}
 
 # 세금 신고에 필요한 증빙 종류
 RECEIPT_KINDS = {
