@@ -258,11 +258,13 @@ def free_ready(item: dict) -> bool:
 def preorder_price(cfg: dict, plan: dict) -> int:
     """사전 신청가. 정가에서 pass.preorder_discount 만큼 깎습니다.
 
-    사전 신청을 받는 동안(mode == 'preorder')에만 깎습니다. 실제 판매로 바꾸면
-    정가로 돌아갑니다. 값이 정가보다 커도 0원 밑으로는 내려가지 않습니다.
+    깎는 조건은 두 가지입니다. 사전 신청을 받는 동안(mode == 'preorder')이어야 하고,
+    그 요금제에 early 표시가 있어야 합니다. 짧은 요금제까지 같은 금액을 깎으면
+    한 달만 끊어 전부 내려받고 끝내는 쪽이 이득이 되어 버립니다.
+    값이 정가보다 커도 0원 밑으로는 내려가지 않습니다.
     """
     price = to_int(plan.get("price"), 0)
-    if cfg.get("mode") != "preorder":
+    if cfg.get("mode") != "preorder" or not plan.get("early"):
         return price
     return max(0, price - to_int(cfg.get("preorder_discount"), 0))
 

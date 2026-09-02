@@ -1313,14 +1313,15 @@ def settings():
     pass_cfg["note"] = sc.clean(f.get("pass_note"), 500)
     pass_cfg["preorder_discount"] = max(0, sc.to_int(f.get("pass_preorder_discount"), 0))
     plans = []
-    for name, price, per, period, badge, desc in zip(
+    for name, price, per, period, early, badge, desc in zip(
             f.getlist("plan_name"), f.getlist("plan_price"), f.getlist("plan_per_month"),
-            f.getlist("plan_period"), f.getlist("plan_badge"), f.getlist("plan_desc")):
+            f.getlist("plan_period"), f.getlist("plan_early"),
+            f.getlist("plan_badge"), f.getlist("plan_desc")):
         if not sc.clean(name, 40):
             continue
         plan = {"name": sc.clean(name, 40), "price": sc.to_int(price, 0),
                 "per_month": sc.to_int(per, 0), "period": sc.clean(period, 30),
-                "desc": sc.clean(desc, 200)}
+                "early": early == "1", "desc": sc.clean(desc, 200)}
         if sc.clean(badge, 20):
             plan["badge"] = sc.clean(badge, 20)
         plans.append(plan)

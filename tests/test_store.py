@@ -275,13 +275,20 @@ def test_pass_twelve_month_price():
 
 
 def test_pass_preorder_discount():
-    """사전 신청을 받는 동안에는 정가에 줄을 긋고 깎인 값을 보여 줍니다."""
+    """사전 신청 할인은 12개월권에만 붙습니다.
+
+    짧은 요금제까지 같은 금액을 깎으면 한 달만 끊어 전부 내려받는 쪽이 이득이 됩니다.
+    """
     text = body(client().get("/pass"))
-    assert "30,000원을 깎아 드립니다" in text
-    assert "정가 220,000원" in text and "190,000원" in text      # 12개월
-    assert "정가 99,000원" in text and "69,000원" in text        # 3개월
-    # 신청서에도 사전 신청가로 뜹니다
-    assert "사전 신청 −30,000원" in text
+    assert "12개월권을 사전 신청하시면" in text and "30,000원을 깎아 드립니다" in text
+    assert "정가 220,000원" in text and "190,000원" in text      # 12개월 — 깎임
+    assert "정가 99,000원" not in text and "69,000원" not in text   # 3개월 — 정가 그대로
+    assert "39,000원" in text and "정가 39,000원" not in text       # 1개월 — 정가 그대로
+    assert text.count("사전 신청 −30,000원") == 1
+    # 월 환산도 깎인 값 기준이어야 합니다 (220,000 → 190,000 이면 18,333 → 15,833)
+    assert "월 15,833원 꼴" in text and "월 18,333원 꼴" not in text
+    # 배지가 없는 요금제는 자리만 비워 둡니다 (동그라미가 보이면 안 됩니다)
+    assert 'class="badge" style="visibility:hidden;"' in text
 
     # 실제 판매로 바꾸면 정가로 돌아가야 합니다
     site = json.loads((sc.DATA_DIR / "site.json").read_text(encoding="utf-8"))
@@ -297,14 +304,14 @@ def test_pass_preorder_discount():
 def test_pass_preorder_records_promised_price():
     """사전 신청을 받으면 약속한 가격이 주문 기록에 남아야 합니다."""
     resp = client().post("/pass", data={
-        "plan": "3개월", "name": "김선생", "email": "teacher@example.com",
+        "plan": "12개월", "name": "김선생", "email": "teacher@example.com",
         "phone": "010-2222-3333", "agree": "1"}, follow_redirects=True)
     assert resp.status_code == 200
     assert "사전 신청이 접수되었습니다" in body(resp)
     row = sc.sqlite3.connect(sc.DB_PATH).execute(
         "SELECT detail_json FROM orders WHERE kind='pass' ORDER BY id DESC LIMIT 1").fetchone()
     detail = json.loads(row[0])
-    assert detail["정가"] == 99000 and detail["사전 신청가"] == 69000
+    assert detail["정가"] == 220000 and detail["사전 신청가"] == 190000
     assert detail["약속한 할인"] == 30000
     print("PASS  사전 신청에 약속한 가격이 기록됨")
 
@@ -1253,6 +1260,20 @@ def test_home_previews_every_category():
     print("PASS  라인업이 분류마다 교재를 몇 권씩 미리 보여 줌")
 
 
+def test_book_groups_fold_on_phone():
+    """폰에서 자료 목록이 열 화면씩 길어지지 않게, 교재를 한 칸으로 접습니다."""
+    text = body(client().get("/products"))
+    assert 'class="bg-fold"' in text
+    # 접힌 채로도 자료 수와 최저가는 보여야 합니다
+    assert "자료 2종 · 22,000원부터" in text
+    css = body(client().get("/static/store.css"))
+    assert ".bg-fold{display:none;}" in css                 # 넓은 화면에선 안 씀
+    assert ".book-group.folded .bg-picks{display:none;}" in css
+    # 자바스크립트가 꺼져 있으면 늘 펼쳐진 채여야 합니다 (접는 표시는 스크립트가 답니다)
+    assert "book-group folded" not in text
+    print("PASS  폰에서 교재 목록 접기")
+
+
 def test_mobile_filters_collapse():
     """폰에서 거르기 버튼이 접혀 있어야 첫 화면에 자료가 보입니다."""
     for path in ("/products", "/free"):
@@ -1979,6 +2000,7 @@ def run_all():
     test_speaks_to_both_audiences()
     test_analysis_tagline_updated()
     test_new_product_appears_in_home_updates()
+    test_book_groups_fold_on_phone()
     test_mobile_filters_collapse()
     test_long_pages_have_shortcuts()
     test_home_updates_skip_pinned_notice()

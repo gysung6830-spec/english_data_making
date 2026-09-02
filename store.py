@@ -794,11 +794,21 @@ def pass_page():
         abort(404)
 
     # 사전 신청가를 미리 계산해 화면에 넘깁니다.
-    plans = [dict(pl, now=sc.preorder_price(cfg, pl)) for pl in cfg.get("plans", [])]
-    early = sc.to_int(cfg.get("preorder_discount"), 0) if cfg.get("mode") == "preorder" else 0
+    plans = []
+    for pl in cfg.get("plans", []):
+        now = sc.preorder_price(cfg, pl)
+        price = sc.to_int(pl.get("price"), 0)
+        per = sc.to_int(pl.get("per_month"), 0)
+        # 깎인 값으로 사면 월 환산도 그만큼 내려갑니다. 정가 기준 숫자를 그대로 두면 앞뒤가 맞지 않습니다.
+        plans.append(dict(pl, now=now,
+                          per_month_now=round(per * now / price) if price and now < price else per))
+    # early = 깎아 드리는 금액. early_names = 그 할인이 붙는 요금제 이름들.
+    discounted = [pl for pl in plans if pl["now"] < pl["price"]]
+    early = sc.to_int(cfg.get("preorder_discount"), 0) if discounted else 0
+    early_names = [pl["name"] for pl in discounted]
 
     if request.method == "GET":
-        return render_template("pass.html", cfg=cfg, plans=plans, early=early,
+        return render_template("pass.html", cfg=cfg, plans=plans, early=early, early_names=early_names,
                                form={}, errors=[], done=None)
 
     data, errors = sc.validate_contact(request.form)
@@ -807,7 +817,7 @@ def pass_page():
     if picked is None:
         errors.append("관심 있는 이용권을 골라 주세요.")
     if errors:
-        return render_template("pass.html", cfg=cfg, plans=plans, early=early,
+        return render_template("pass.html", cfg=cfg, plans=plans, early=early, early_names=early_names,
                                form=request.form, errors=errors, done=None), 400
 
     ts = sc.stamp()
@@ -831,7 +841,7 @@ def pass_page():
                    f"성함     : {data['name'] or '(안 적음)'}", f"연락처   : {data['phone']}",
                    f"이메일   : {data['email']}",
                    f"하고 싶은 말 : {data['message'] or '-'}", f"접수시각 : {ts}"]))
-    return render_template("pass.html", cfg=cfg, plans=plans, early=early,
+    return render_template("pass.html", cfg=cfg, plans=plans, early=early, early_names=early_names,
                            form={}, errors=[], done=order_no)
 
 

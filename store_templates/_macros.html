@@ -53,6 +53,9 @@
 {% endmacro %}
 
 {% macro book_group(g) %}
+{# 폰에서는 교재 한 권이 한 칸으로 접힙니다. 접힌 채로도 자료 수·최저가는 보입니다.
+   접기는 자바스크립트가 켜졌을 때만 걸립니다(꺼져 있으면 늘 펼쳐진 채). #}
+{% set from_price = g['items'] | map(attribute='price') | min %}
 <article class="book-group">
   <div class="bg-head">
     <div class="bg-pub">{{ g.book.publisher }}{% if g.book.author %} · {{ g.book.author }}{% endif %}</div>
@@ -62,6 +65,10 @@
       {% if g.passages %}<span class="chip">지문 {{ g.passages }}개</span>{% endif %}
       <span class="chip">PDF</span>
     </div>
+    <button class="bg-fold" type="button" aria-expanded="true">
+      <span class="bf-sum">자료 {{ g['items']|length }}종 · {{ from_price|won }}부터</span>
+      <span class="bf-go">펼치기</span>
+    </button>
   </div>
   <div class="bg-picks">
     {% for p in g['items'] %}

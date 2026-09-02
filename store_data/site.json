@@ -50,7 +50,8 @@
         "price": 39000,
         "per_month": 39000,
         "period": "30일",
-        "desc": "한 학기 중 급한 시기에만 짧게 쓰실 때"
+        "desc": "한 학기 중 급한 시기에만 짧게 쓰실 때",
+        "early": false
       },
       {
         "name": "3개월",
@@ -58,18 +59,20 @@
         "per_month": 33000,
         "period": "90일",
         "badge": "가장 추천",
-        "desc": "한 학기를 통째로 준비하실 때"
+        "desc": "한 학기를 통째로 준비하실 때",
+        "early": false
       },
       {
         "name": "12개월",
         "price": 220000,
         "per_month": 18333,
         "period": "365일",
-        "desc": "학원에서 상시로 쓰실 때. 월 환산이 가장 쌉니다"
+        "desc": "학원에서 상시로 쓰실 때. 월 환산이 가장 쌉니다",
+        "early": true
       }
     ],
     "preorder_discount": 30000,
-    "_preorder_discount안내": "사전 신청하신 분께 여는 날 깎아 드리는 금액(원). 0 이면 할인 문구가 사라집니다."
+    "_preorder_discount안내": "사전 신청하신 분께 여는 날 깎아 드리는 금액(원). 0 이면 할인 문구가 사라집니다. 어느 요금제에 적용할지는 아래 요금제 표의 '사전 할인' 칸에서 고릅니다."
   },
   "submit_reward": {
     "enabled": true,

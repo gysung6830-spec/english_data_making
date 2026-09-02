@@ -192,8 +192,10 @@
         {% if passcfg.mode == 'preorder' %}<span class="badge badge-soft">준비 중</span>{% endif %}
         <h2 style="font-size:22px;margin-bottom:10px;">프리패스 · 전 자료 무제한</h2>
         <p class="muted">{{ passcfg.lead }}</p>
-        {% if passcfg.mode == 'preorder' and passcfg.preorder_discount %}
-          <p class="muted"><b>지금 사전 신청하시면 {{ passcfg.preorder_discount|won }} 할인.</b>
+        {% set early_plans = passcfg.plans | selectattr('early') | map(attribute='name') | list %}
+        {% if passcfg.mode == 'preorder' and passcfg.preorder_discount and early_plans %}
+          <p class="muted"><b>{{ early_plans|join(' · ') }}권을 지금 사전 신청하시면
+            {{ passcfg.preorder_discount|won }} 할인.</b>
             신청은 무료이고, 지금 결제하시는 것이 아닙니다.</p>
         {% endif %}
         <a class="btn btn-ghost" href="{{ url_for('pass_page') }}">

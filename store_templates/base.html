@@ -101,6 +101,40 @@
 </main>
 
 <script>
+/* 폰에서 교재 목록을 접어 둡니다. 자료 목록이 열 화면씩 길어지면
+   아래쪽 교재는 아예 보이지 않기 때문입니다. 첫 권만 펼쳐 두어
+   안에 무엇이 들었는지 바로 보이게 합니다. */
+(function () {
+  var groups = document.querySelectorAll('.book-group');
+  if (!groups.length) return;
+  var phone = window.matchMedia('(max-width: 640px)');
+
+  function fold(on) {
+    groups.forEach(function (g, i) {
+      var btn = g.querySelector('.bg-fold');
+      var shut = on && i > 0;                 // 첫 권은 펼친 채로 둡니다
+      g.classList.toggle('folded', shut);
+      if (btn) {
+        btn.setAttribute('aria-expanded', shut ? 'false' : 'true');
+        btn.querySelector('.bf-go').textContent = shut ? '펼치기' : '접기';
+      }
+    });
+  }
+  fold(phone.matches);
+  phone.addEventListener('change', function (e) { fold(e.matches); });
+
+  groups.forEach(function (g) {
+    var btn = g.querySelector('.bg-fold');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var shut = g.classList.toggle('folded');
+      btn.setAttribute('aria-expanded', shut ? 'false' : 'true');
+      btn.querySelector('.bf-go').textContent = shut ? '펼치기' : '접기';
+    });
+  });
+})();
+</script>
+<script>
 /* 폰에서 거르기 버튼 — 눌러야 펼쳐집니다. 넓은 화면에서는 늘 펼쳐져 있습니다. */
 (function () {
   document.querySelectorAll('.filterbar .filter-toggle').forEach(function (btn) {

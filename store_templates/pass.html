@@ -10,7 +10,8 @@
         <span class="eyebrow">준비 중 · 사전 신청 받는 중</span>
       {% endif %}
       {% if early %}
-        <p class="early-banner"><b>지금 사전 신청하시면 {{ early|won }}을 깎아 드립니다.</b>
+        <p class="early-banner"><b>지금 {{ early_names|join(' · ') }}권을 사전 신청하시면
+          {{ early|won }}을 깎아 드립니다.</b>
           여는 날 이 가격 그대로 열어 드립니다. 신청은 무료입니다.</p>
       {% endif %}
       <h2 style="font-size:32px;">{{ cfg.headline }}</h2>
@@ -21,17 +22,17 @@
       {% for pl in plans %}
         <div class="plan {{ 'plan-best' if pl.badge }}">
           {# 배지 없는 요금제도 같은 높이를 차지하도록 자리만 비워 둡니다. #}
-          <span class="badge" {{ '' if pl.badge else 'style="visibility:hidden;"' }}>{{ pl.badge or '·' }}</span>
+          <span class="badge"{% if not pl.badge %} style="visibility:hidden;"{% endif %}>{{ pl.badge or '·' }}</span>
           <h3>{{ pl.name }}</h3>
-          {% if early %}
+          {% if pl.now < pl.price %}
             <div class="plan-was">정가 {{ pl.price|won }}</div>
             <div class="plan-price">{{ pl.now|won }}</div>
-            <div class="plan-save">사전 신청 −{{ early|won }}</div>
+            <div class="plan-save">사전 신청 −{{ (pl.price - pl.now)|won }}</div>
           {% else %}
             <div class="plan-price">{{ pl.price|won }}</div>
           {% endif %}
           <div class="plan-per">
-            {{ pl.period }} · 월 {{ pl.per_month|won }} 꼴
+            {{ pl.period }} · 월 {{ pl.per_month_now|won }} 꼴
           </div>
           <p class="plan-desc">{{ pl.desc }}</p>
           <a class="btn {{ 'btn-primary' if pl.badge else 'btn-ghost' }} btn-block"
@@ -66,8 +67,7 @@
       </div>
       <div class="alert alert-info">
         프리패스를 여는 날 적어 주신 이메일로 가장 먼저 알려 드리고,
-        {% if early %}<b>{{ early|won }} 깎인 사전 신청가</b>{% else %}보고 계신 얼리버드 가격{% endif %}를
-        그대로 적용해 드립니다.<br><br>
+        보고 계신 사전 신청가를 그대로 적용해 드립니다.<br><br>
         그때까지는 <a href="{{ url_for('products') }}"><b>낱개 세트</b></a>로 필요한 자료만
         받아 보실 수 있습니다.
       </div>
@@ -78,7 +78,7 @@
       <div class="section-head">
         <h2>{{ '사전 신청' if cfg.mode == 'preorder' else '이용권 신청' }}</h2>
         <p>결제는 아직 진행되지 않습니다. 여는 날 안내만 보내 드립니다.{% if early %}
-          그때 <b>{{ early|won }} 깎인 가격</b>으로 열어 드립니다.{% endif %}</p>
+          {{ early_names|join(' · ') }}권은 그때 <b>{{ early|won }} 깎인 가격</b>으로 열어 드립니다.{% endif %}</p>
       </div>
 
       {% if errors %}
@@ -97,7 +97,7 @@
                 <label class="check">
                   <input type="radio" name="plan" id="plan-{{ loop.index }}" value="{{ pl.name }}"
                          {{ 'checked' if form.plan == pl.name or (not form.plan and pl.badge) }}>
-                  <span>{{ pl.name }} · {{ pl.now|won }}{% if early %}
+                  <span>{{ pl.name }} · {{ pl.now|won }}{% if pl.now < pl.price %}
                     <small class="muted">(정가 {{ pl.price|won }})</small>{% endif %}</span>
                 </label>
               {% endfor %}

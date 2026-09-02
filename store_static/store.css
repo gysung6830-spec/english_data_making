@@ -694,9 +694,26 @@ input[type=file]{
   color:var(--ink-2); cursor:pointer; white-space:nowrap;
 }
 .bg-cart:hover{border-color:var(--brand); color:var(--brand);}
+/* 폰에서 교재 한 권을 한 칸으로 접기 — 넓은 화면에서는 쓰지 않습니다. */
+.bg-fold{display:none;}
+
 /* 폰에서는 '자세히'와 '담기'를 손가락 크기 버튼 두 개로 나란히 놓습니다.
    목록에서 바로 담을 수 있어야 하므로 '담기'를 눈에 띄는 색으로 채웁니다. */
 @media (max-width:640px){
+  .bg-fold{
+    display:flex; align-items:center; gap:10px; width:100%; margin-top:12px;
+    padding:11px 14px; border:1px solid var(--line-strong); border-radius:10px;
+    background:var(--bg); font-family:inherit; font-size:14px; font-weight:700;
+    color:var(--ink-2); cursor:pointer; min-height:44px; text-align:left;
+  }
+  .bf-sum{flex:1 1 auto;}
+  .bf-go{flex:0 0 auto; color:var(--brand);}
+  .bf-go::after{content:' ▾';}
+  .book-group.folded .bg-picks{display:none;}
+  /* 접혀 있으면 아래를 가르는 줄이 뜰 자리가 없습니다. */
+  .book-group.folded .bg-head{border-bottom:0; padding-bottom:0; margin-bottom:0;}
+  .book-group:not(.folded) .bf-go::after{content:' ▴';}
+
   .bg-pick-act{gap:8px; padding-top:10px;}
   .bg-pick-act form{margin-left:0; flex:1 1 0;}
   .bg-go{
