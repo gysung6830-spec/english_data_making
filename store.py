@@ -181,7 +181,6 @@ def home():
                            material_total=len(all_materials),
                            free_items=free_items, free_ready_count=free_ready_count,
                            exams=sc.upcoming_exams(3), fresh=fresh,
-                           cat_preview=category_preview(catalog),
                            latest_notice=notices[0] if notices else None)
 
 
@@ -337,6 +336,7 @@ def lineup():
              if m.get("sample_file") and (sc.SAMPLE_DIR / m["sample_file"]).exists()}
     return render_template("lineup.html", intro=data.get("intro", {}),
                            groups=sc.grouped_materials(),
+                           cat_preview=category_preview(sc.load_catalog()),
                            ready_samples=ready, sample_count=len(ready))
 
 

@@ -16,6 +16,17 @@
   </div>
 </section>
 
+<section class="proof">
+  <div class="wrap">
+    <div class="proof-row">
+      <div class="proof-item"><b>9개년</b><span>평가원 기출 분석으로<br>오답을 설계합니다</span></div>
+      <div class="proof-item"><b>17종</b><span>한 지문에서 낼 수 있는<br>출제 각도를 다 폅니다</span></div>
+      <div class="proof-item"><b>전 지문</b><span>회차·강 범위를<br>빠짐없이 담습니다</span></div>
+      <div class="proof-item"><b>2판본</b><span>학생용과 강의용이<br>같은 지면으로 나옵니다</span></div>
+    </div>
+  </div>
+</section>
+
 <nav class="lineup-jump" aria-label="자료 바로가기">
   <div class="wrap">
     <span class="lj-label">바로가기</span>
@@ -100,6 +111,99 @@
   </div>
 </section>
 {% endfor %}
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">제작 기준</span>
+      <h2>만드는 기준이 다릅니다</h2>
+      <p>자료를 빨리 찍어 내는 것보다, <b>한 지문을 끝까지 책임지는 것</b>을 기준으로 삼았습니다.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card feature">
+        <h3>오답을 설계합니다</h3>
+        <p>변형문제의 오답은 임의로 만들지 않습니다.
+          <b>범위 · 방향 · 표면 어휘 · 근거 없음 · 초점 이동</b> —
+          평가원이 실제로 쓰는 다섯 가지 설계를 그대로 씁니다.
+          정답과 한 곳만 다른 선지까지 넣습니다.</p>
+      </div>
+      <div class="card feature">
+        <h3>근거를 지면에서 잇습니다</h3>
+        <p>본문의 색 표시와 오른쪽 해설 박스를 <b>번호로 짝지었습니다.</b>
+          '무엇을 가리키는지 생각해 보라'로 끝내지 않고,
+          어법·지칭·함축의 근거가 어디에 있는지를 지면이 가리킵니다.</p>
+      </div>
+      <div class="card feature">
+        <h3>한 지문을 17가지 각도로 폅니다</h3>
+        <p>주제 · 제목 · 함의추론 · 어법 3종 · 어휘 3종 · 빈칸 · 연결어 ·
+          순서 · 삽입 · 요약 · 어순까지.
+          <b>학교가 무엇을 내든 이미 풀어 본 형태</b>가 됩니다.</p>
+      </div>
+      <div class="card feature">
+        <h3>학생용과 강의용이 따로 나옵니다</h3>
+        <p>학생용은 채우도록 비워 두고, 강의용은 답과 <b>왜 그런지</b>까지 채워져 있습니다.
+          같은 지면이라 수업 중에 쪽을 맞추실 필요가 없습니다.</p>
+      </div>
+      <div class="card feature">
+        <h3>범위의 전 지문을 넣습니다</h3>
+        <p>회차·강 단위 패키지는 그 범위를 <b>빠짐없이</b> 담습니다.
+          필요한 지문이 빠져서 다른 자료를 다시 찾아 헤매는 시간이 없습니다.</p>
+      </div>
+      <div class="card feature">
+        <h3>인쇄해서 그대로 나눠 줍니다</h3>
+        <p>A4 기준으로 판을 잡았고, 모의고사 자료는 <b>실제 문항 번호(18~45번)</b>를 그대로 씁니다.
+          편집 없이 뽑아서 바로 배포하실 수 있습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>어떤 자료가 있나</h2>
+      <p>분류마다 몇 권씩만 추렸습니다.
+        전체는 <a href="{{ url_for('products') }}"><b>자료 목록</b></a>에서 보실 수 있습니다.</p>
+    </div>
+
+    {% for row in cat_preview %}
+      <div class="cat-row">
+        <div class="cat-head">
+          <h3>{{ row.cat.name }}</h3>
+          <span class="cat-count">교재 {{ row.total }}권</span>
+          <a href="{{ url_for('products', category=row.cat.id) }}">전체 보기 ›</a>
+        </div>
+        <div class="cat-books">
+          {% for b in row.books %}
+            <a class="cat-book {{ 'over2' if loop.index0 >= 2 }}"
+               href="{{ url_for('book_detail', slug=b.slug) }}">
+              <span class="cb-pub">{{ b.publisher }}{% if b.author %} · {{ b.author }}{% endif %}</span>
+              <b>{{ b.name }}</b>
+              <span class="cb-meta">
+                {% if b.grade %}<span class="chip">{{ b.grade }}</span>{% endif %}
+                <span class="chip">자료 {{ b.count }}종</span>
+              </span>
+              <span class="cb-price">{{ b.from_price|won }}부터</span>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+
+    <div class="cat-more">
+      <span>이렇게도 찾으실 수 있습니다</span>
+      <div class="cat-more-links">
+        {% for g in ['고1', '고2', '고3'] %}
+          <a href="{{ url_for('products', grade=g) }}">{{ g }} 자료</a>
+        {% endfor %}
+        <a href="{{ url_for('products', package='analysis') }}">지문 분석 패키지</a>
+        <a href="{{ url_for('products', package='problem') }}">문제 패키지</a>
+        <a href="{{ url_for('free') }}">무료 자료</a>
+        <a href="{{ url_for('custom') }}">찾는 교재가 없어요</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="section">
   <div class="wrap center">

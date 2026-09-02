@@ -1189,8 +1189,8 @@ def test_home_shows_live_now_section():
 
 
 def test_home_previews_every_category():
-    """첫 화면에서 분류마다 교재를 몇 권씩 미리 보여 줘야 합니다."""
-    text = body(client().get("/"))
+    """분류마다 교재를 몇 권씩 미리 보여 주는 자리는 오르티카 라인업입니다."""
+    text = body(client().get("/lineup"))
     assert "어떤 자료가 있나" in text
     for name in ("교과서", "모의고사", "EBS 부교재", "형광펜 독해"):
         assert name in text, name
@@ -1202,7 +1202,7 @@ def test_home_previews_every_category():
     rows = re.findall(r'class="cat-books">(.*?)</div>\s*</div>', text, re.S)
     for row in rows:
         assert row.count('class="cat-book') <= 3
-    print("PASS  홈이 분류마다 교재를 몇 권씩 미리 보여 줌")
+    print("PASS  라인업이 분류마다 교재를 몇 권씩 미리 보여 줌")
 
 
 def test_mobile_filters_collapse():
