@@ -255,6 +255,18 @@ def free_ready(item: dict) -> bool:
     return bool(free_files(item.get("slug", "")) or free_links(item))
 
 
+def preorder_price(cfg: dict, plan: dict) -> int:
+    """사전 신청가. 정가에서 pass.preorder_discount 만큼 깎습니다.
+
+    사전 신청을 받는 동안(mode == 'preorder')에만 깎습니다. 실제 판매로 바꾸면
+    정가로 돌아갑니다. 값이 정가보다 커도 0원 밑으로는 내려가지 않습니다.
+    """
+    price = to_int(plan.get("price"), 0)
+    if cfg.get("mode") != "preorder":
+        return price
+    return max(0, price - to_int(cfg.get("preorder_discount"), 0))
+
+
 def load_notices() -> dict:
     """공지 · 자료 업데이트 일정. 고정 공지가 맨 앞, 그다음 최신순."""
     data = load_json("notices.json", NOTICE_FALLBACK)

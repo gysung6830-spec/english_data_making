@@ -166,61 +166,6 @@
   </div>
 </section>
 
-<section class="section now-sec">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>지금 오르티카</h2>
-      <p>새로 올라온 자료와 다음 시험까지 남은 날짜입니다.
-        <span class="muted">{{ now.strftime('%Y년 %m월 %d일') }} 기준</span></p>
-    </div>
-    <div class="now-grid">
-
-      <div class="now-card wide">
-        <div class="now-head">
-          <b>새로 올라왔습니다</b>
-          <a href="{{ url_for('free') }}">무료 자료 전체 ›</a>
-        </div>
-        {% if fresh %}
-          <ul class="fresh-list">
-            {% for f in fresh %}
-              <li>
-                <a href="{{ f.url }}">
-                  <span class="fresh-tag {{ 'free' if f.free }}">{{ f.tag }}</span>
-                  <span class="fresh-title">{{ f.title }}</span>
-                  <span class="fresh-date">{{ f.date }}</span>
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p class="muted mb-0">첫 자료를 준비하고 있습니다.
-            그동안 <a href="{{ url_for('lineup') }}"><b>자료 8종이 어떻게 생겼는지</b></a>
-            먼저 보실 수 있습니다.</p>
-        {% endif %}
-      </div>
-
-      <div class="now-card">
-        <div class="now-head"><b>다음 시험까지</b></div>
-        {% if exams %}
-          <ul class="dday-list">
-            {% for e in exams %}
-              <li>
-                <span class="dday">{{ e.label }}</span>
-                <span class="dday-name">{{ e.name }}
-                  <small>{{ e.date }}{% if e.grades %} · {{ e.grades|join(' ') }}{% endif %}</small>
-                </span>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p class="muted mb-0">시험 일정을 준비하고 있습니다.</p>
-        {% endif %}
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <section class="section">
   <div class="wrap">
     <div class="section-head">
@@ -286,6 +231,10 @@
         {% if passcfg.mode == 'preorder' %}<span class="badge badge-soft">준비 중</span>{% endif %}
         <h2 style="font-size:22px;margin-bottom:10px;">프리패스 · 전 자료 무제한</h2>
         <p class="muted">{{ passcfg.lead }}</p>
+        {% if passcfg.mode == 'preorder' and passcfg.preorder_discount %}
+          <p class="muted"><b>지금 사전 신청하시면 {{ passcfg.preorder_discount|won }} 할인.</b>
+            신청은 무료이고, 지금 결제하시는 것이 아닙니다.</p>
+        {% endif %}
         <a class="btn btn-ghost" href="{{ url_for('pass_page') }}">
           {{ '가격 보고 사전 신청하기' if passcfg.mode == 'preorder' else '프리패스 보기' }}</a>
       </div>

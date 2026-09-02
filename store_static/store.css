@@ -356,6 +356,14 @@ details.faq p:last-child{margin-bottom:0;}
 .plan .badge{align-self:center;}
 .plan h3{font-size:17px; color:var(--ink-2); margin-bottom:10px;}
 .plan-price{font-size:30px; font-weight:800; letter-spacing:-.03em;}
+/* 사전 신청 할인 — 정가는 지우고, 깎인 값을 크게 */
+.plan-was{font-size:13.5px; color:var(--muted); text-decoration:line-through;}
+.plan-save{display:inline-block; margin:2px 0 4px; padding:2px 8px; border-radius:999px;
+  background:var(--brand-soft); color:var(--brand); font-size:12.5px; font-weight:700;}
+.early-banner{max-width:640px; margin:0 auto 14px; padding:12px 16px; border-radius:12px;
+  background:var(--brand-soft); border:1px solid #cfe4d9; color:var(--ink-2);
+  font-size:14.5px; line-height:1.6; word-break:keep-all;}
+.early-banner b{color:var(--brand); display:block; font-size:16px; margin-bottom:2px;}
 .plan-per{font-size:13.5px; color:var(--muted); margin-bottom:14px;}
 .plan-desc{font-size:14.5px; color:var(--ink-2); min-height:44px;}
 .plan .btn{margin-top:auto;}

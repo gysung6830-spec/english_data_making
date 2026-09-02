@@ -392,6 +392,14 @@
       <label for="pass_lead">설명</label>
       <textarea id="pass_lead" name="pass_lead">{{ s['pass'].get('lead','') }}</textarea>
     </div>
+    <div class="adm-field">
+      <label for="pass_preorder_discount">사전 신청 할인 (원)</label>
+      <input type="number" id="pass_preorder_discount" name="pass_preorder_discount" min="0" step="1000"
+             value="{{ s['pass'].get('preorder_discount', 0) }}">
+      <div class="tip">사전 신청하신 분께 여는 날 깎아 드릴 금액입니다.
+        가격표에 <b>정가에 줄을 긋고 깎인 값</b>이 뜹니다. 0 을 넣으면 할인 문구가 사라집니다.
+        '실제 판매하기'로 바꾸면 자동으로 정가로 돌아갑니다.</div>
+    </div>
     <div class="adm-field full">
       <label for="pass_note">아래쪽 안내 상자</label>
       <textarea id="pass_note" name="pass_note">{{ s['pass'].get('note','') }}</textarea>

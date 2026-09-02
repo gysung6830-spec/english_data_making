@@ -9,17 +9,27 @@
       {% if cfg.mode == 'preorder' %}
         <span class="eyebrow">준비 중 · 사전 신청 받는 중</span>
       {% endif %}
+      {% if early %}
+        <p class="early-banner"><b>지금 사전 신청하시면 {{ early|won }}을 깎아 드립니다.</b>
+          여는 날 이 가격 그대로 열어 드립니다. 신청은 무료입니다.</p>
+      {% endif %}
       <h2 style="font-size:32px;">{{ cfg.headline }}</h2>
       <p style="max-width:640px;margin:0 auto;">{{ cfg.lead }}</p>
     </div>
 
     <div class="grid grid-3 plans">
-      {% for pl in cfg.plans %}
+      {% for pl in plans %}
         <div class="plan {{ 'plan-best' if pl.badge }}">
           {# 배지 없는 요금제도 같은 높이를 차지하도록 자리만 비워 둡니다. #}
           <span class="badge" {{ '' if pl.badge else 'style="visibility:hidden;"' }}>{{ pl.badge or '·' }}</span>
           <h3>{{ pl.name }}</h3>
-          <div class="plan-price">{{ pl.price|won }}</div>
+          {% if early %}
+            <div class="plan-was">정가 {{ pl.price|won }}</div>
+            <div class="plan-price">{{ pl.now|won }}</div>
+            <div class="plan-save">사전 신청 −{{ early|won }}</div>
+          {% else %}
+            <div class="plan-price">{{ pl.price|won }}</div>
+          {% endif %}
           <div class="plan-per">
             {{ pl.period }} · 월 {{ pl.per_month|won }} 꼴
           </div>
@@ -56,7 +66,8 @@
       </div>
       <div class="alert alert-info">
         프리패스를 여는 날 적어 주신 이메일로 가장 먼저 알려 드리고,
-        보고 계신 얼리버드 가격을 그대로 적용해 드립니다.<br><br>
+        {% if early %}<b>{{ early|won }} 깎인 사전 신청가</b>{% else %}보고 계신 얼리버드 가격{% endif %}를
+        그대로 적용해 드립니다.<br><br>
         그때까지는 <a href="{{ url_for('products') }}"><b>낱개 세트</b></a>로 필요한 자료만
         받아 보실 수 있습니다.
       </div>
@@ -66,7 +77,8 @@
     {% else %}
       <div class="section-head">
         <h2>{{ '사전 신청' if cfg.mode == 'preorder' else '이용권 신청' }}</h2>
-        <p>결제는 아직 진행되지 않습니다. 여는 날 안내만 보내 드립니다.</p>
+        <p>결제는 아직 진행되지 않습니다. 여는 날 안내만 보내 드립니다.{% if early %}
+          그때 <b>{{ early|won }} 깎인 가격</b>으로 열어 드립니다.{% endif %}</p>
       </div>
 
       {% if errors %}
@@ -81,11 +93,12 @@
           <div class="field">
             <label>관심 있는 이용권<span class="req">*</span></label>
             <div class="check-grid">
-              {% for pl in cfg.plans %}
+              {% for pl in plans %}
                 <label class="check">
                   <input type="radio" name="plan" id="plan-{{ loop.index }}" value="{{ pl.name }}"
                          {{ 'checked' if form.plan == pl.name or (not form.plan and pl.badge) }}>
-                  <span>{{ pl.name }} · {{ pl.price|won }}</span>
+                  <span>{{ pl.name }} · {{ pl.now|won }}{% if early %}
+                    <small class="muted">(정가 {{ pl.price|won }})</small>{% endif %}</span>
                 </label>
               {% endfor %}
             </div>

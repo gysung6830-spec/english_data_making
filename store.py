@@ -173,14 +173,13 @@ def home():
     all_materials = [m for g in groups for m in g["items"]]
     # 무료 자료 — 받을 수 있는 것만 최신 세 건
     free_items = [x for x in sc.load_freebies()["items"] if sc.free_ready(x)][:3]
-    fresh = recent_updates(catalog, limit=4)
     free_ready_count = sum(1 for p in products
                            if p.get("sample_file") and (sc.SAMPLE_DIR / p["sample_file"]).exists())
     return render_template("home.html", product_count=len(products),
                            lineup_groups=groups, lineup_all=all_materials,
                            material_total=len(all_materials),
                            free_items=free_items, free_ready_count=free_ready_count,
-                           exams=sc.upcoming_exams(3), fresh=fresh,
+                           exams=sc.upcoming_exams(3),
                            latest_notice=notices[0] if notices else None)
 
 
@@ -342,7 +341,12 @@ def lineup():
 
 @app.route("/notice")
 def notice():
-    return render_template("notice.html", **sc.load_notices())
+    """공지 · 자료 업데이트 일정. '지금 오르티카'(새 자료 · 다음 시험)도 여기 있습니다."""
+    data = sc.load_notices()
+    # notices.json 의 'exams' 는 원본 일정입니다. 화면에는 D-day 를 붙인 쪽을 씁니다.
+    data["exams"] = sc.upcoming_exams(3)
+    return render_template("notice.html", **data,
+                           fresh=recent_updates(sc.load_catalog(), limit=6))
 
 
 # ---------------------------------------------------------------------------
@@ -789,16 +793,22 @@ def pass_page():
     if not cfg.get("enabled"):
         abort(404)
 
+    # 사전 신청가를 미리 계산해 화면에 넘깁니다.
+    plans = [dict(pl, now=sc.preorder_price(cfg, pl)) for pl in cfg.get("plans", [])]
+    early = sc.to_int(cfg.get("preorder_discount"), 0) if cfg.get("mode") == "preorder" else 0
+
     if request.method == "GET":
-        return render_template("pass.html", cfg=cfg, form={}, errors=[], done=None)
+        return render_template("pass.html", cfg=cfg, plans=plans, early=early,
+                               form={}, errors=[], done=None)
 
     data, errors = sc.validate_contact(request.form)
     plan = sc.clean(request.form.get("plan"), 40)
-    if plan not in [pl["name"] for pl in cfg.get("plans", [])]:
+    picked = next((pl for pl in plans if pl["name"] == plan), None)
+    if picked is None:
         errors.append("관심 있는 이용권을 골라 주세요.")
     if errors:
-        return render_template("pass.html", cfg=cfg, form=request.form,
-                               errors=errors, done=None), 400
+        return render_template("pass.html", cfg=cfg, plans=plans, early=early,
+                               form=request.form, errors=errors, done=None), 400
 
     ts = sc.stamp()
     order_no = sc.insert_numbered(
@@ -808,15 +818,21 @@ def pass_page():
            VALUES (?, 'pass', ?, 1, 0, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?)""",
         lambda no: (no, f"프리패스 사전 신청 · {plan}", data["name"], data["phone"],
                     data["email"], data["affiliation"], data["message"],
-                    json.dumps({"관심 이용권": plan}, ensure_ascii=False), ts, ts))
+                    json.dumps({"관심 이용권": plan,
+                                "정가": picked["price"],
+                                "사전 신청가": picked["now"],
+                                "약속한 할인": early}, ensure_ascii=False), ts, ts))
 
     sc.send_mail(
         f"[Ortica영어] 프리패스 사전 신청 {order_no} · {plan}",
-        "\n".join([f"신청번호 : {order_no}", f"관심 이용권 : {plan}",
+        "\n".join([f"신청번호 : {order_no}",
+                   f"관심 이용권 : {plan} · 사전 신청가 {picked['now']:,}원"
+                   + (f" (정가 {picked['price']:,}원 − {early:,}원)" if early else ""),
                    f"성함     : {data['name'] or '(안 적음)'}", f"연락처   : {data['phone']}",
                    f"이메일   : {data['email']}",
                    f"하고 싶은 말 : {data['message'] or '-'}", f"접수시각 : {ts}"]))
-    return render_template("pass.html", cfg=cfg, form={}, errors=[], done=order_no)
+    return render_template("pass.html", cfg=cfg, plans=plans, early=early,
+                           form={}, errors=[], done=order_no)
 
 
 # ---------------------------------------------------------------------------

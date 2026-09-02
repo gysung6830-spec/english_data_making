@@ -274,6 +274,41 @@ def test_pass_twelve_month_price():
     print("PASS  프리패스 12개월 220,000원")
 
 
+def test_pass_preorder_discount():
+    """사전 신청을 받는 동안에는 정가에 줄을 긋고 깎인 값을 보여 줍니다."""
+    text = body(client().get("/pass"))
+    assert "30,000원을 깎아 드립니다" in text
+    assert "정가 220,000원" in text and "190,000원" in text      # 12개월
+    assert "정가 99,000원" in text and "69,000원" in text        # 3개월
+    # 신청서에도 사전 신청가로 뜹니다
+    assert "사전 신청 −30,000원" in text
+
+    # 실제 판매로 바꾸면 정가로 돌아가야 합니다
+    site = json.loads((sc.DATA_DIR / "site.json").read_text(encoding="utf-8"))
+    site["pass"]["mode"] = "sale"
+    (sc.DATA_DIR / "site.json").write_text(json.dumps(site, ensure_ascii=False), encoding="utf-8")
+    sale = body(client().get("/pass"))
+    assert "깎아 드립니다" not in sale and "정가 220,000원" not in sale
+    site["pass"]["mode"] = "preorder"
+    (sc.DATA_DIR / "site.json").write_text(json.dumps(site, ensure_ascii=False), encoding="utf-8")
+    print("PASS  프리패스 사전 신청 30,000원 할인")
+
+
+def test_pass_preorder_records_promised_price():
+    """사전 신청을 받으면 약속한 가격이 주문 기록에 남아야 합니다."""
+    resp = client().post("/pass", data={
+        "plan": "3개월", "name": "김선생", "email": "teacher@example.com",
+        "phone": "010-2222-3333", "agree": "1"}, follow_redirects=True)
+    assert resp.status_code == 200
+    assert "사전 신청이 접수되었습니다" in body(resp)
+    row = sc.sqlite3.connect(sc.DB_PATH).execute(
+        "SELECT detail_json FROM orders WHERE kind='pass' ORDER BY id DESC LIMIT 1").fetchone()
+    detail = json.loads(row[0])
+    assert detail["정가"] == 99000 and detail["사전 신청가"] == 69000
+    assert detail["약속한 할인"] == 30000
+    print("PASS  사전 신청에 약속한 가격이 기록됨")
+
+
 # ---- 2. 주문 --------------------------------------------------------------
 def test_order_rejects_bad_input():
     resp = client().post("/order", data={
@@ -1177,15 +1212,20 @@ def test_search_result_title_is_editable():
     print("PASS  검색 결과 제목·설명을 화면에서 정하기")
 
 
-# ---- 홈이 '다시 오고 싶은 화면' 인가 ---------------------------------------
-def test_home_shows_live_now_section():
-    """올 때마다 바뀌는 자리가 있어야 다시 찾아옵니다."""
-    text = body(client().get("/"))
+# ---- 올 때마다 바뀌는 자리 -------------------------------------------------
+def test_notice_shows_live_now_section():
+    """'지금 오르티카'(새 자료 · 다음 시험)는 공지 화면에 둡니다."""
+    text = body(client().get("/notice"))
     assert "지금 오르티카" in text
     assert "새로 올라왔습니다" in text and "다음 시험까지" in text
     # 자료 올리는 일정을 약속하지 않기로 했습니다
     assert "이렇게 올립니다" not in text
-    print("PASS  홈에 '지금 오르티카' — 새 자료 · 다음 시험 D-day")
+    # 첫 화면은 가볍게 — 같은 자리를 두 번 두지 않습니다
+    home = body(client().get("/"))
+    assert "지금 오르티카" not in home
+    # 다만 히어로의 D-day 배지는 공지의 시험 일정으로 이어져야 합니다
+    assert 'href="/notice#exams"' in home
+    print("PASS  공지에 '지금 오르티카' — 새 자료 · 다음 시험 D-day")
 
 
 def test_home_previews_every_category():
@@ -1260,24 +1300,24 @@ def test_admin_edits_exam_schedule():
 
 def test_home_updates_skip_pinned_notice():
     """맨 위 띠에 이미 뜬 고정 공지가 '새로 올라왔습니다'에 또 나오면 안 됩니다."""
-    text = body(client().get("/"))
+    text = body(client().get("/notice"))
     assert text.count("Ortica영어 자료 판매를 시작합니다") == 1
-    print("PASS  고정 공지가 홈에서 두 번 나오지 않음")
+    print("PASS  고정 공지가 '새로 올라왔습니다'에 두 번 나오지 않음")
 
 
 def test_new_product_appears_in_home_updates():
-    """새 자료를 등록하면 따로 공지를 쓰지 않아도 홈에 뜹니다."""
+    """새 자료를 등록하면 따로 공지를 쓰지 않아도 '새로 올라왔습니다'에 뜹니다."""
     a = admin()
     a.post("/admin/products/new", data={
         "slug": "fresh-item-test", "name": "새로 올린 테스트 자료",
         "category": "mock", "package": "analysis", "price": "10000",
         "subtitle": "지문 10개", "grade": "고1", "sort": "10", "active": "1",
         "materials": ["passage"]}, follow_redirects=True)
-    text = body(client().get("/"))
+    text = body(client().get("/notice"))
     assert "새로 올린 테스트 자료" in text
     assert "새 자료" in text
     a.post("/admin/products/fresh-item-test/delete", follow_redirects=True)
-    print("PASS  새 자료가 공지 없이 홈에 뜸")
+    print("PASS  새 자료가 공지 없이 '새로 올라왔습니다'에 뜸")
 
 
 def test_order_page_shows_what_you_are_buying():
@@ -1922,7 +1962,7 @@ def run_all():
     test_categories_include_textbook()
     test_lineup_shows_all_materials()
     test_home_reflects_lineup()
-    test_home_shows_live_now_section()
+    test_notice_shows_live_now_section()
     test_home_previews_every_category()
     test_home_speaks_to_both_audiences()
     test_analysis_tagline_updated()
@@ -1943,6 +1983,8 @@ def run_all():
     test_book_page_lists_only_its_products()
     test_home_links_every_category_and_search_word()
     test_pass_twelve_month_price()
+    test_pass_preorder_discount()
+    test_pass_preorder_records_promised_price()
     test_order_page_shows_what_you_are_buying()
     test_manual_line_break_filter()
     test_no_emoji_on_customer_pages()

@@ -1311,6 +1311,7 @@ def settings():
     pass_cfg["headline"] = sc.clean(f.get("pass_headline"), 150)
     pass_cfg["lead"] = sc.clean(f.get("pass_lead"), 400)
     pass_cfg["note"] = sc.clean(f.get("pass_note"), 500)
+    pass_cfg["preorder_discount"] = max(0, sc.to_int(f.get("pass_preorder_discount"), 0))
     plans = []
     for name, price, per, period, badge, desc in zip(
             f.getlist("plan_name"), f.getlist("plan_price"), f.getlist("plan_per_month"),
