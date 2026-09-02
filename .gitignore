@@ -11,4 +11,5 @@ scratchpad/
 output/*.png
 output/*.jpg
 output/*.json
+output/*.zip
 web_uploads/
