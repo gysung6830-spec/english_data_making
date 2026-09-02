@@ -65,8 +65,23 @@
       {% if g.passages %}<span class="chip">지문 {{ g.passages }}개</span>{% endif %}
       <span class="chip">PDF</span>
     </div>
+    {# 접혀 있을 때 값부터 보이면 안 됩니다. 무엇이 들어가는지가 먼저입니다.
+       같은 교재의 두 패키지에 겹쳐 들어가는 자료는 한 번만 셉니다. #}
+    {% set mat_ids = [] %}
+    {% for p in g['items'] %}{% for mid in p.materials or [] %}
+      {% if mid not in mat_ids %}{% set _ = mat_ids.append(mid) %}{% endif %}
+    {% endfor %}{% endfor %}
+    {% if mat_ids %}
+      <div class="bg-mats">
+        {% for mid in mat_ids %}
+          {% set m = material_map.get(mid) %}
+          {% if m %}<span class="mat-chip {{ 'sig-chip' if m.signature }}">
+            <span class="n">{{ m.no }}</span>{{ m.name }}</span>{% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
     <button class="bg-fold" type="button" aria-expanded="true">
-      <span class="bf-sum">자료 {{ g['items']|length }}종 · {{ from_price|won }}부터</span>
+      <span class="bf-sum">패키지 {{ g['items']|length }}종 · {{ from_price|won }}부터</span>
       <span class="bf-go">펼치기</span>
     </button>
   </div>

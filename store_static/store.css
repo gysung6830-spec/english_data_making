@@ -61,7 +61,7 @@ p, li, .hint, .tip, .lead, small, figcaption {
 
 :root{ --measure:46em; }   /* 한글 본문 한 줄의 최대 길이 */
 
-.hero .lead, .hero-note, .section-head p, .group-head p, .lineup-lead,
+.hero .lead, .hero-note, .hero-claim, .section-head p, .group-head p, .lineup-lead,
 .mat-tagline, .mat-subline, .sheet-note,
 .feat-list li, .for-whom li, .checklist li,
 .faq p, .notice p, .alert, .steps-help,
@@ -124,6 +124,10 @@ ul{margin:0; padding-left:1.1em;}
 .hero h1 em{font-style:normal; color:var(--brand);}
 .hero .lead{font-size:18px; color:var(--ink-2); margin-bottom:28px;}
 .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
+.hero-claim{
+  margin:-10px 0 26px; padding-left:14px; border-left:3px solid var(--brand);
+  font-size:15.5px; line-height:1.72; color:var(--ink-2); font-weight:600;
+}
 .hero-note{margin-top:18px; font-size:14px; color:var(--muted);}
 
 .stack-card{
@@ -694,8 +698,10 @@ input[type=file]{
   color:var(--ink-2); cursor:pointer; white-space:nowrap;
 }
 .bg-cart:hover{border-color:var(--brand); color:var(--brand);}
-/* 폰에서 교재 한 권을 한 칸으로 접기 — 넓은 화면에서는 쓰지 않습니다. */
-.bg-fold{display:none;}
+/* 폰에서 교재 한 권을 한 칸으로 접기 — 넓은 화면에서는 쓰지 않습니다.
+   접힌 칸에서만 '무엇이 들어가는지'를 칩으로 보여 줍니다. 펼치면 패키지마다
+   같은 칩이 또 나오므로 그때는 감춥니다. */
+.bg-fold, .bg-mats{display:none;}
 
 /* 폰에서는 '자세히'와 '담기'를 손가락 크기 버튼 두 개로 나란히 놓습니다.
    목록에서 바로 담을 수 있어야 하므로 '담기'를 눈에 띄는 색으로 채웁니다. */
@@ -710,6 +716,10 @@ input[type=file]{
   .bf-go{flex:0 0 auto; color:var(--brand);}
   .bf-go::after{content:' ▾';}
   .book-group.folded .bg-picks{display:none;}
+  .book-group.folded .bg-mats{
+    display:flex; flex-wrap:wrap; gap:5px; margin-top:11px;
+  }
+  .book-group.folded .bg-fold{margin-top:11px;}
   /* 접혀 있으면 아래를 가르는 줄이 뜰 자리가 없습니다. */
   .book-group.folded .bg-head{border-bottom:0; padding-bottom:0; margin-bottom:0;}
   .book-group:not(.folded) .bf-go::after{content:' ▴';}
@@ -779,6 +789,13 @@ input[type=file]{
 }
 @media (max-width:520px){
   .cat-books{grid-template-columns:1fr;}
+}
+
+/* 아주 좁은 폰(360px)에서도 히어로의 줄바꿈이 적어 넣은 그대로 유지되도록
+   글자만 한 단계 줄입니다. 줄이 흘러넘치면 문구가 헝클어져 보입니다. */
+@media (max-width:380px){
+  .hero .lead{font-size:16.5px;}
+  .hero-claim{font-size:14.5px; padding-left:12px;}
 }
 
 /* 이용 안내 — 규정 표와 허용·금지 상자 */

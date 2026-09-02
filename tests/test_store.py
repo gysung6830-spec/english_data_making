@@ -127,7 +127,10 @@ def test_lineup_shows_all_materials():
 
 def test_home_reflects_lineup():
     text = body(client().get("/"))
-    assert "읽고 · 뜯어보고" in text
+    assert "고등영어자료는" in text and "오르티카" in text          # 머리말
+    assert "곁에 두는 선생님 같은 자료" in text                     # 학생 쪽
+    assert "이것만 해도 충분하다는 확신" in text                    # 선생님 쪽
+    assert "평가원 9개년의 설계 원리" in text
     assert "17종 변형문제" in text and "/lineup#variants" in text
     assert "3종 세트" not in text     # 옛 문구가 남아 있으면 안 됩니다
     print("PASS  홈이 라인업을 반영")
@@ -1265,9 +1268,12 @@ def test_book_groups_fold_on_phone():
     text = body(client().get("/products"))
     assert 'class="bg-fold"' in text
     # 접힌 채로도 자료 수와 최저가는 보여야 합니다
-    assert "자료 2종 · 22,000원부터" in text
+    # 값보다 '무엇이 들어가는지'가 먼저 보여야 합니다
+    assert 'class="bg-mats"' in text
+    assert "패키지 2종 · 22,000원부터" in text
+    assert text.index('class="bg-mats"') < text.index("패키지 2종 · 22,000원부터")
     css = body(client().get("/static/store.css"))
-    assert ".bg-fold{display:none;}" in css                 # 넓은 화면에선 안 씀
+    assert ".bg-fold, .bg-mats{display:none;}" in css        # 넓은 화면에선 안 씀
     assert ".book-group.folded .bg-picks{display:none;}" in css
     # 자바스크립트가 꺼져 있으면 늘 펼쳐진 채여야 합니다 (접는 표시는 스크립트가 답니다)
     assert "book-group folded" not in text
@@ -1485,7 +1491,7 @@ def test_speaks_to_both_audiences():
     """혼자 하는 학생과 가르치는 선생님, 둘 다에게 말을 걸어야 합니다."""
     # 첫 화면은 히어로 한 문단으로 두 쪽을 다 부릅니다
     home = body(client().get("/"))
-    assert "혼자 공부하는 학생은" in home and "가르치는 선생님은" in home
+    assert "혼자 공부하는 학생에게는" in home and "가르치는 선생님에게는" in home
     # 자세한 두 갈래 안내는 오르티카 라인업에 있습니다
     text = body(client().get("/lineup"))
     assert "혼자 공부하는 학생" in text and "가르치는 선생님" in text
