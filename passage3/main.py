@@ -327,8 +327,13 @@ def _launch_chromium(pw):
         raise
 
 
-def html_to_pdf(html_str: str, out_pdf, autofit: bool = True) -> None:
-    """Playwright(Chromium)로 HTML 렌더 → auto-fit 축소 → A4 PDF 출력."""
+def html_to_pdf(html_str: str, out_pdf, autofit: bool = True,
+                fill_page: bool = False) -> None:
+    """Playwright(Chromium)로 HTML 렌더 → auto-fit 축소 → A4 PDF 출력.
+
+    fill_page=False(기본): 한 페이지로 압축만 하고 하단 여백은 그대로 둔다.
+    True: 남는 여백을 문장 간격에 나눠 페이지를 꽉 채운다.
+    """
     from playwright.sync_api import sync_playwright
 
     out_pdf = str(out_pdf)
@@ -339,7 +344,7 @@ def html_to_pdf(html_str: str, out_pdf, autofit: bool = True) -> None:
         page.set_content(html_str, wait_until="networkidle")
 
         if autofit:
-            _apply_autofit(page)
+            _apply_autofit(page, fill_page=fill_page)
 
         # 하단 왼쪽=저작권, 하단 오른쪽=페이지 번호 (모든 페이지 반복)
         # 푸터 템플릿은 본문 CSS를 상속받지 않으므로 폰트를 여기에도 임베드.
@@ -371,8 +376,13 @@ def html_to_pdf(html_str: str, out_pdf, autofit: bool = True) -> None:
         browser.close()
 
 
-def _apply_autofit(page) -> None:
-    """각 지문 블록의 실제 렌더 높이를 재어 알맞은 축소 클래스를 확정한다."""
+def _apply_autofit(page, fill_page: bool = False) -> None:
+    """각 지문 블록의 실제 렌더 높이를 재어 알맞은 축소 클래스를 확정한다.
+
+    fill_page=True 이면 압축 후 남는 세로 여백을 문장 사이 간격에 고르게 나눠
+    페이지를 위→아래로 꽉 채운다. False(기본)면 문장은 기본 간격 그대로 위쪽에
+    모이고 하단에 자연스러운 여백이 남는다. (한 페이지 압축 자체는 항상 적용.)
+    """
     # 지문 개수
     count = page.eval_on_selector_all(".passage", "els => els.length")
     if not count:
@@ -410,7 +420,10 @@ def _apply_autofit(page) -> None:
                 break
         _set_passage_class(page, sel, chosen)
 
-        # 2) 남는 공간을 문장 사이 간격에 고르게 나눠 페이지를 '채운다'.
+        # 2) (옵션) 남는 공간을 문장 사이 간격에 고르게 나눠 페이지를 '채운다'.
+        #    기본(fill_page=False)은 채우지 않고 하단 여백을 그대로 둔다.
+        if not fill_page:
+            continue
         h = page.eval_on_selector(
             sel, "el => el.getBoundingClientRect().height"
         )
@@ -449,7 +462,7 @@ def _set_passage_class(page, selector: str, step: str,
 def run(input_path, out_dir, header: str = "", formats: str = "abc",
         do_translate: bool = True, theme: str = "modern",
         docname: str = "", api_key: str = None, start_no=None,
-        drop_practical: bool = True) -> List[Path]:
+        drop_practical: bool = True, fill_page: bool = False) -> List[Path]:
     """입력 → 3형식 PDF 생성. 생성된 파일 경로 리스트 반환."""
     input_path = Path(input_path)
     out_dir = Path(out_dir)
@@ -516,7 +529,7 @@ def run(input_path, out_dir, header: str = "", formats: str = "abc",
                              doc_name=disp_name)
         out_pdf = out_dir / f"{doc}_{suffix}.pdf"
         print(f"  · {out_pdf.name}")
-        html_to_pdf(html_str, out_pdf, autofit=True)
+        html_to_pdf(html_str, out_pdf, autofit=True, fill_page=fill_page)
         produced.append(out_pdf)
 
     print(f"완료: {len(produced)}개 PDF → {out_dir}")
@@ -542,6 +555,9 @@ def _build_argparser() -> argparse.ArgumentParser:
                     help="문항 시작 번호. 지정 시 지문마다 시작번호부터 1씩 증가")
     ap.add_argument("--keep-2728", action="store_true",
                     help="모의고사 27·28번(실용문) 제외 안 함(기본은 제외)")
+    ap.add_argument("--fill-page", action="store_true",
+                    help="남는 여백을 문장 간격에 나눠 페이지를 꽉 채움"
+                         "(기본은 꺼짐: 하단 여백 유지)")
     ap.add_argument("--api-key", default="",
                     help="Claude API 키(영어만 있는 자료 자동 번역·비전 OCR용). "
                          "미지정 시 환경변수 ANTHROPIC_API_KEY 사용")
@@ -561,6 +577,7 @@ def main(argv=None) -> int:
         api_key=args.api_key or None,
         start_no=args.start_no or None,
         drop_practical=not args.keep_2728,
+        fill_page=args.fill_page,
     )
     return 0 if produced else 1
 

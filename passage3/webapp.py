@@ -177,6 +177,13 @@ PAGE = """
           <span><b>모의고사로 판별될 때만</b> 27·28번(안내문·광고)을 자동 제외합니다.
             교재 등 다른 자료는 그대로 둡니다. 포함하려면 체크 해제.</span></span>
       </label>
+      <label class="fmt" style="margin-top:10px;margin-bottom:0">
+        <input type="checkbox" name="fillpage" value="1">
+        <span><b>페이지 꽉 채우기</b>
+          <span>지문마다 남는 세로 여백을 문장 간격에 나눠 페이지를 아래까지 채웁니다.
+            <b>기본은 꺼짐</b>(문장은 기본 간격, 하단 여백 유지). 한 페이지 압축은
+            항상 적용됩니다. ※ 좌지문우해석(b)은 표 구조라 이 옵션과 무관합니다.</span></span>
+      </label>
     </div>
 
     <div class="card">
@@ -280,6 +287,7 @@ def generate():
     start_no = request.form.get("startno", "").strip() or None
     save_json = request.form.get("savejson") == "1"
     drop_2728 = request.form.get("drop2728") == "1"
+    fill_page = request.form.get("fillpage") == "1"
 
     if not file or not file.filename:
         flash("지문 파일을 선택하세요.")
@@ -407,7 +415,8 @@ def generate():
             html_str = render_fn(passages, header_text=header, doc_name=disp_name)
             out_pdf = tmp_path / f"{doc}_{suffix}.pdf"
             try:
-                html_to_pdf(html_str, out_pdf, autofit=True)
+                html_to_pdf(html_str, out_pdf, autofit=True,
+                            fill_page=fill_page)
             except Exception:
                 traceback.print_exc()
                 flash("PDF 렌더링 중 오류가 발생했습니다. (Playwright/Chromium 설치 확인)")
