@@ -1,0 +1,283 @@
+{
+  "item_no": "26",
+  "theme": "빈민 의료에 헌신한 의료인류학자 Paul Farmer",
+  "overview": {
+    "theme_ko": "빈민 의료에 헌신한 의료인류학자 Paul Farmer",
+    "topic": "🔎 Paul Farmer의 생애와 빈민 의료 헌신",
+    "stance": "긍정적",
+    "stance_reason": "honored ~ for his lifelong work to improve health for the poor 등 그의 헌신을 기림",
+    "structure": "시간·순서(나열)",
+    "structure_reason": "born in 1959 → During his time → After graduating → In 1987 → after his death 순의 연대기적 서술",
+    "key_grammar": {
+      "point": "상관접속사(both A and B)",
+      "source_sentence": "He later returned to the United States and earned both a master's degree and a PhD in medical anthropology at Harvard University.",
+      "explanation": [
+        {"chip": "쉽게 말하면", "text": "both A and B는 'A와 B 둘 다'라는 뜻으로, A와 B 자리에 문법적으로 같은 형태가 온다."},
+        {"chip": "짝을 이룬다", "text": "both는 반드시 and와 짝을 이루며 or·nor과는 함께 쓰지 않는다."},
+        {"chip": "여기서는", "text": "a master's degree와 a PhD라는 두 명사구를 both ~ and ~로 묶었다."},
+        {"chip": "수 일치", "text": "both A and B가 주어로 쓰이면 복수 취급한다."},
+        {"chip": "비교", "text": "either A or B(둘 중 하나), neither A nor B(둘 다 아님)와 구별한다."}
+      ],
+      "example_analysis": "both와 and가 a master's degree, a PhD 두 명사구를 대등하게 연결한다.",
+      "drills": [
+        {
+          "kind": "밑줄형",
+          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+          "sentence": "He later [[1|returned]] to the United States and [[2|earned]] [[3|both]] a master's degree [[4|or]] a PhD in medical anthropology [[5|at]] Harvard University.",
+          "answer": "④",
+          "fix": "both는 상관접속사로서 반드시 and와 짝을 이루므로 or를 and로 고쳐야 한다.",
+          "options": ["① returned", "② earned", "③ both", "④ or", "⑤ at"],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "네모형",
+          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+          "sentence": "In 1987, he co-founded Partners In Health, an organization [[that/what]] [[works/work]] in countries like Haiti, Rwanda, and Peru to provide medical treatment and [[strengthen/strengthens]] public health systems.",
+          "answer": "that / works / strengthen",
+          "fix": "선행사 organization을 받는 주격 관계대명사 that, 단수 선행사에 맞춘 works, to provide와 병렬을 이루는 원형 strengthen이 옳다.",
+          "options": [],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "오류찾기",
+          "question": "다음 중 어법상 틀린 문장은?",
+          "sentence": "Throughout his life, he writing more than ten books and over a hundred academic papers.",
+          "answer": "Throughout his life, he writing more than ten books and over a hundred academic papers.",
+          "fix": "문장의 본동사가 필요하므로 준동사 writing을 정동사 wrote로 고쳐야 한다.",
+          "options": [
+            "Paul Farmer was an American medical anthropologist and physician.",
+            "After graduating from Duke University, he began volunteer work at a hospital in Cangé, Haiti.",
+            "Throughout his life, he writing more than ten books and over a hundred academic papers.",
+            "He was born in 1959 in Massachusetts and grew up with an early awareness of social inequality.",
+            "During his time at Duke University, he lived in Paris for half a year and became fluent in French, which benefited him in his future work in Haiti."
+          ],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "영작",
+          "question": "그녀는 석사 학위와 박사 학위를 둘 다 취득했다.",
+          "answer": "She earned both a master's degree and a PhD.",
+          "fix": "",
+          "options": [],
+          "words": ["She", "earned", "both", "a master's degree", "and", "a PhD"],
+          "from_passage": false
+        },
+        {
+          "kind": "영작",
+          "question": "그는 나중에 미국으로 돌아와 하버드 대학교에서 의료 인류학 석사 학위와 박사 학위를 둘 다 취득했다.",
+          "answer": "He later returned to the United States and earned both a master's degree and a PhD in medical anthropology at Harvard University.",
+          "fix": "",
+          "options": [],
+          "words": ["He", "later", "returned", "to the United States", "and", "earned", "both", "a master's degree", "and", "a PhD", "in medical anthropology", "at Harvard University"],
+          "from_passage": true
+        }
+      ]
+    },
+    "restatement_chains": [
+      {
+        "label": "빈민을 위한 의료 헌신",
+        "expressions": ["provide medical treatment", "improve health for the poor"],
+        "variation": "치료 제공과 공중보건 강화를 통해 가난한 이들의 건강을 향상시킴."
+      },
+      {
+        "label": "학문적 성취",
+        "expressions": ["a master's degree and a PhD", "more than ten books"],
+        "variation": "석·박사 학위 취득과 다수의 저술로 이어진 학문적 이력."
+      }
+    ],
+    "flow_blocks": [
+      {"stage": "도입", "sentence_range": "1~2", "summary": "미국의 [[의료인류학자]]이자 의사, 어려서부터 사회 불평등을 자각", "easy_example": "어릴 때부터 불공평함에 눈뜬 한 사람"},
+      {"stage": "전개", "sentence_range": "3~4", "summary": "듀크 대학 시절 [[프랑스어]] 습득 후 아이티 병원 자원봉사", "easy_example": "배운 외국어가 훗날 봉사에 그대로 쓰임"},
+      {"stage": "전개", "sentence_range": "5~6", "summary": "하버드 [[석·박사]] 취득, 1987년 Partners In Health 공동 설립", "easy_example": "여러 나라에서 치료와 보건을 돕는 단체를 만듦"},
+      {"stage": "결론", "sentence_range": "7~8", "summary": "다수의 저술과 상, 사후 [[WHO 상]] — 빈민 건강 향상에 헌신", "easy_example": "평생의 노력을 사후에까지 인정받음"}
+    ]
+  },
+  "sentences": [
+    {
+      "id": 1,
+      "english": "Paul Farmer was an American medical anthropologist and physician.",
+      "grammar": [
+        {"tag": "be동사 보어(2형식)", "note": "was + 명사(구) 보어.", "spans": ["was"]},
+        {"tag": "등위접속사 and(병렬)", "note": "anthropologist and physician 두 명사를 병렬한다.", "spans": ["and"]}
+      ],
+      "vocab": [
+        {"word": "medical anthropologist", "meaning": "의료인류학자"},
+        {"word": "physician", "meaning": "의사, 내과의사"}
+      ],
+      "chunks": [
+        {"en": "Paul Farmer was an American medical anthropologist and physician.", "ko": "Paul Farmer는 미국의 [[의료인류학자]]이자 의사였다"}
+      ],
+      "misreads": [
+        {"statement": "Paul Farmer는 미국의 의료인류학자이자 의사였다.", "verdict": "O", "trap_type": "주체대상"}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 2,
+      "english": "He was born in 1959 in Massachusetts and grew up with an early awareness of social inequality.",
+      "grammar": [
+        {"tag": "수동태(be born)", "note": "be born: 태어나다.", "spans": ["was born"]},
+        {"tag": "등위접속사 and(동사 병렬)", "note": "was born ~ and grew up ~ 병렬.", "spans": ["and"]}
+      ],
+      "vocab": [
+        {"word": "be born", "meaning": "태어나다"},
+        {"word": "grow up", "meaning": "성장하다, 자라다"},
+        {"word": "awareness", "meaning": "인식, 자각"},
+        {"word": "inequality", "meaning": "불평등"}
+      ],
+      "chunks": [
+        {"en": "He was born in 1959 in Massachusetts", "ko": "그는 1959년 매사추세츠에서 [[태어났다]]"},
+        {"en": "and grew up with an early awareness of social inequality.", "ko": "그리고 [[사회 불평등]]을 일찍부터 자각하며 자랐다"}
+      ],
+      "misreads": [
+        {"statement": "그는 1959년 매사추세츠에서 태어나 부유한 환경에서 자랐다.", "verdict": "X", "trap_type": "무관정보", "anchor": "grew up with an early awareness of social inequality", "why": "부유함이 아니라 사회 불평등을 일찍 자각하며 자랐다고 했다.", "english": false}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 3,
+      "english": "During his time at Duke University, he lived in Paris for half a year and became fluent in French, which benefited him in his future work in Haiti.",
+      "grammar": [
+        {"tag": "전치사 During", "note": "~ 동안(기간 명사 앞).", "spans": ["During"]},
+        {"tag": "등위접속사 and(동사 병렬)", "note": "lived ~ and became ~ 병렬.", "spans": ["and"]},
+        {"tag": "관계대명사 계속적 용법(which)", "note": "앞 절 내용을 부연 설명한다.", "spans": ["which"]}
+      ],
+      "vocab": [
+        {"word": "fluent", "meaning": "유창한"},
+        {"word": "benefit", "meaning": "~을 이롭게 하다, 도움이 되다"},
+        {"word": "half a year", "meaning": "반년"}
+      ],
+      "chunks": [
+        {"en": "During his time at Duke University,", "ko": "듀크 대학교에서 지내는 [[동안]],"},
+        {"en": "he lived in Paris for half a year", "ko": "그는 [[반년]] 동안 파리에서 살았고"},
+        {"en": "and became fluent in French,", "ko": "프랑스어에 [[유창]]해졌다"},
+        {"en": "which benefited him in his future work in Haiti.", "ko": "그리고 이는 아이티에서의 이후 [[활동]]에 그에게 도움이 되었다"}
+      ],
+      "misreads": [
+        {"statement": "프랑스어에 유창해진 것이 이후 아이티 활동에 도움이 되었는데, 여기서 which가 가리키는 것은 Duke University에서의 시간이다.", "verdict": "X", "trap_type": "지칭", "anchor": "which benefited him in his future work in Haiti", "why": "which는 프랑스어에 유창해진 것을 가리킨다.", "english": false}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 4,
+      "english": "After graduating from Duke University, he began volunteer work at a hospital in Cangé, Haiti.",
+      "grammar": [
+        {"tag": "전치사+동명사(After graduating)", "note": "전치사 After 뒤에 온 동명사.", "spans": ["graduating"]},
+        {"tag": "graduate from", "note": "~을 졸업하다.", "spans": ["graduating from"]}
+      ],
+      "vocab": [
+        {"word": "graduate from", "meaning": "~을 졸업하다"},
+        {"word": "volunteer work", "meaning": "자원봉사"}
+      ],
+      "chunks": [
+        {"en": "After graduating from Duke University,", "ko": "듀크 대학교를 [[졸업한]] 후,"},
+        {"en": "he began volunteer work at a hospital in Cangé, Haiti.", "ko": "그는 아이티 Cangé의 한 병원에서 [[자원봉사]]를 시작했다"}
+      ],
+      "misreads": [
+        {"statement": "그는 듀크 대학교를 졸업하기 전에 아이티 Cangé의 병원에서 자원봉사를 시작했다.", "verdict": "X", "trap_type": "인과조건", "anchor": "After graduating from Duke University, he began volunteer work", "why": "졸업하기 전이 아니라 졸업한 뒤에 자원봉사를 시작했다.", "killer": true, "english": false}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 5,
+      "english": "He later returned to the United States and earned both a master's degree and a PhD in medical anthropology at Harvard University.",
+      "grammar": [
+        {"tag": "등위접속사 and(동사 병렬)", "note": "returned와 earned를 연결한다.", "spans": ["and"]},
+        {"tag": "상관접속사(both A and B)", "note": "석사와 박사 두 학위를 both ~ and ~로 묶는다.", "spans": ["both"]}
+      ],
+      "vocab": [
+        {"word": "earn", "meaning": "(학위 등을) 취득하다, 얻다"},
+        {"word": "master's degree", "meaning": "석사 학위"},
+        {"word": "PhD", "meaning": "박사 학위"},
+        {"word": "anthropology", "meaning": "인류학"}
+      ],
+      "chunks": [
+        {"en": "He later returned to the United States", "ko": "그는 나중에 [[미국]]으로 돌아왔다"},
+        {"en": "and earned both a master's degree and a PhD", "ko": "그리고 [[석사 학위]]와 박사 학위를 모두 취득했다"},
+        {"en": "in medical anthropology at Harvard University.", "ko": "하버드 대학교에서 [[의료 인류학]] 분야로"}
+      ],
+      "misreads": [
+        {"statement": "그는 미국으로 돌아와 하버드에서 학위를 취득했는데, 석사 학위만 받았다.", "verdict": "△", "trap_type": "구조수식", "anchor": "earned both a master's degree and a PhD", "why": "석사만이 아니라 석사와 박사를 모두 취득했다.", "english": false}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 6,
+      "english": "In 1987, he co-founded Partners In Health, an organization that works in countries like Haiti, Rwanda, and Peru to provide medical treatment and strengthen public health systems.",
+      "grammar": [
+        {"tag": "동격(콤마+명사구)", "note": "Partners In Health = an organization, 동격 관계.", "spans": ["an organization"]},
+        {"tag": "주격 관계대명사 that", "note": "organization을 수식, 뒤 동사 works.", "spans": ["that"]},
+        {"tag": "to부정사(부사적, 목적)", "note": "~하기 위해, provide/strengthen을 이끈다.", "spans": ["to provide"]}
+      ],
+      "vocab": [
+        {"word": "co-found", "meaning": "공동 설립하다"},
+        {"word": "organization", "meaning": "단체, 기관"},
+        {"word": "provide", "meaning": "제공하다"},
+        {"word": "strengthen", "meaning": "강화하다"},
+        {"word": "public health", "meaning": "공중보건"}
+      ],
+      "chunks": [
+        {"en": "In 1987, he co-founded Partners In Health,", "ko": "1987년에 그는 Partners In Health를 [[공동 설립]]했는데,"},
+        {"en": "an organization that works in countries like Haiti, Rwanda, and Peru", "ko": "이는 아이티, 르완다, 페루 같은 나라에서 활동하는 [[단체]]로"},
+        {"en": "to provide medical treatment and strengthen public health systems.", "ko": "[[의료]]를 제공하고 공중보건 체계를 강화하기 위한 것이다"}
+      ],
+      "misreads": [
+        {"statement": "그는 1987년에 Partners In Health를 단독으로 설립했다.", "verdict": "X", "trap_type": "주체대상", "anchor": "he co-founded Partners In Health", "why": "단독이 아니라 공동으로 설립했다.", "english": false},
+        {"statement": "Partners In Health works only in Haiti.", "verdict": "X", "trap_type": "무관정보", "anchor": "countries like Haiti, Rwanda, and Peru", "why": "아이티만이 아니라 르완다, 페루 등 여러 나라에서 활동한다.", "english": true}
+      ],
+      "mistips": ["that works ~는 organization을 수식하는 관계사절이고 to provide 이하가 목적을 나타낸다."]
+    },
+    {
+      "id": 7,
+      "english": "Throughout his life, he wrote more than ten books and over a hundred academic papers.",
+      "grammar": [
+        {"tag": "전치사 Throughout", "note": "~ 내내(기간).", "spans": ["Throughout"]},
+        {"tag": "등위접속사 and(명사구 병렬)", "note": "more than ten books and over a hundred ~ 병렬.", "spans": ["and"]},
+        {"tag": "수량 표현(more than)", "note": "~ 이상, 수를 수식한다.", "spans": ["more than"]}
+      ],
+      "vocab": [
+        {"word": "throughout", "meaning": "~ 내내, ~ 동안 죽"},
+        {"word": "academic paper", "meaning": "학술 논문"},
+        {"word": "more than", "meaning": "~ 이상, ~보다 많은"}
+      ],
+      "chunks": [
+        {"en": "Throughout his life, he wrote more than ten books", "ko": "평생 동안 그는 [[열 권]]이 넘는 책을 썼다"},
+        {"en": "and over a hundred academic papers.", "ko": "그리고 백 편이 넘는 [[학술 논문]]도 썼다"}
+      ],
+      "misreads": [
+        {"statement": "그는 평생 학술 논문을 먼저 출간한 뒤에 책을 썼다.", "verdict": "X", "trap_type": "무관정보", "anchor": "he wrote more than ten books and over a hundred academic papers", "why": "책과 논문의 집필 순서는 본문에 언급되지 않는다.", "english": false}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 8,
+      "english": "He received many major awards during his career, and after his death, he was also honored with the WHO Director-General's Global Health Leaders Award for his lifelong work to improve health for the poor.",
+      "grammar": [
+        {"tag": "등위접속사 and(절 병렬)", "note": "received ~ and ~ was honored, 두 절을 연결한다.", "spans": ["and"]},
+        {"tag": "수동태(was honored)", "note": "그가 상을 수여받았다.", "spans": ["was", "honored"]},
+        {"tag": "to부정사(형용사적 용법)", "note": "work를 수식, ~하기 위한 일.", "spans": ["to improve"]},
+        {"tag": "the+형용사(the poor)", "note": "가난한 사람들(복수 보통명사).", "spans": ["the poor"]}
+      ],
+      "vocab": [
+        {"word": "award", "meaning": "상"},
+        {"word": "honor", "meaning": "기리다, (상을) 수여하다"},
+        {"word": "Director-General", "meaning": "사무총장"},
+        {"word": "lifelong", "meaning": "평생의"},
+        {"word": "the poor", "meaning": "가난한 사람들"}
+      ],
+      "chunks": [
+        {"en": "He received many major awards during his career,", "ko": "그는 경력 동안 여러 주요 [[상]]을 받았고,"},
+        {"en": "and after his death, he was also honored", "ko": "그리고 그의 사후에도 그는 또한 [[영예를 얻었다]]"},
+        {"en": "with the WHO Director-General's Global Health Leaders Award", "ko": "WHO 사무총장 [[글로벌 보건 리더상]]으로"},
+        {"en": "for his lifelong work to improve health for the poor.", "ko": "[[가난한 이들]]의 건강을 향상시키기 위한 평생의 노력에 대해"}
+      ],
+      "misreads": [
+        {"statement": "본문은 그의 삶을 빈민의 건강을 향상시키기 위한 헌신으로 긍정적으로 평가한다.", "verdict": "O", "trap_type": "필자관점"}
+      ],
+      "mistips": []
+    }
+  ]
+}

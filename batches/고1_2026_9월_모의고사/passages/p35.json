@@ -1,0 +1,234 @@
+{
+  "item_no": "35",
+  "theme": "반려견 목욕 — 내가 원하는 것보다 개에게 필요한 것",
+  "overview": {
+    "theme_ko": "반려견 목욕, 주인의 바람보다 개의 필요",
+    "topic": "🔎 반려동물 돌봄의 기준과 개의 적정 목욕 빈도",
+    "stance": "부정적·비판적",
+    "stance_reason": "veterinary dermatologists warn against such practices",
+    "structure": "주장→근거·예시",
+    "structure_reason": "돌봄의 기준을 제시한 뒤 잦은 목욕 사례와 수의학적 근거로 뒷받침한다",
+    "key_grammar": {
+      "point": "수동태 (need to be p.p.)",
+      "source_sentence": "Unless they have a skin condition for which a vet has prescribed medicated baths, most dogs don't need to be bathed on a regular basis.",
+      "explanation": [
+        {"chip": "쉽게 말하면", "text": "'need to be+과거분사'는 주어가 그 동작을 '당하는' 수동의 의미로, '~되어질 필요가 있다'로 해석한다."},
+        {"chip": "형태", "text": "need + to be + p.p. 구조이며, 여기서는 to be bathed(목욕되다)가 핵심이다."},
+        {"chip": "주어 관계", "text": "most dogs는 목욕을 '하는' 주체가 아니라 '당하는' 대상이므로 수동태를 쓴다."},
+        {"chip": "능동과 비교", "text": "능동 need to bathe(목욕시키다)와 달리 need to be bathed는 '목욕될'이라는 뜻이다."},
+        {"chip": "부정", "text": "don't need to be bathed는 '목욕될 필요가 없다'이다."}
+      ],
+      "example_analysis": "동사 need 뒤에 to be bathed(be+p.p.)가 와서 most dogs가 목욕을 당하는 수동 관계를 나타낸다.",
+      "drills": [
+        {
+          "kind": "밑줄형",
+          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+          "sentence": "[[1|Unless]] they have a skin condition for [[2|which]] a vet [[3|has prescribed]] medicated baths, most dogs don't need [[4|to bathe]] on a [[5|regular]] basis.",
+          "answer": "④",
+          "fix": "to bathe → to be bathed: most dogs는 목욕을 당하는 대상이므로 need 뒤에 수동태 to be bathed를 써야 한다.",
+          "options": ["① Unless", "② which", "③ has prescribed", "④ to bathe", "⑤ regular"],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "네모형",
+          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+          "sentence": "[[If/Unless]] someone is really concerned about their dog's smell they can use waterless shampoo and [[thoroughly/thorough]] brush their dog every day but [[keep/keeping]] the baths down to once or twice a week at most.",
+          "answer": "If / thoroughly / keep",
+          "fix": "조건의 If, brush를 수식하는 부사 thoroughly, use·brush와 병렬을 이루는 동사원형 keep이 옳다.",
+          "options": [],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "오류찾기",
+          "question": "다음 중 어법상 틀린 문장은?",
+          "sentence": "",
+          "answer": "Even dogs with thick, heavy coats generally only needs baths every 6 to 8 weeks.",
+          "fix": "needs → need: 주어 dogs가 복수이므로 동사는 need를 써야 한다.",
+          "options": [
+            "① Unless they have a skin condition for which a vet has prescribed medicated baths, most dogs don't need to be bathed on a regular basis.",
+            "② For example, we have encountered many dog owners who bathe their dogs religiously multiple times a week because they want to avoid the 'doggy' smell, but veterinary dermatologists warn against such practices, as they are not good for a dog's skin.",
+            "③ Even dogs with thick, heavy coats generally only needs baths every 6 to 8 weeks.",
+            "④ If someone is really concerned about their dog's smell they can use waterless shampoo and thoroughly brush their dog every day but keep the baths down to once or twice a week at most.",
+            "⑤ Our number one criterion for how we care for our pets should be, \"Is this what they actually need? How is it impacting them?\" rather than, \"What do I want?\""
+          ],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "영작",
+          "question": "이 상처들은 매일 소독될 필요가 있다. (수동태 need to be p.p. 사용)",
+          "sentence": "",
+          "answer": "These wounds need to be disinfected every day.",
+          "fix": "",
+          "options": [],
+          "words": ["These", "wounds", "need", "to", "be", "disinfected", "every", "day"],
+          "from_passage": false
+        },
+        {
+          "kind": "영작",
+          "question": "수의사가 약용 목욕을 처방한 피부 질환이 있는 경우가 아니라면, 대부분의 개는 정기적으로 목욕될 필요가 없다.",
+          "sentence": "",
+          "answer": "Unless they have a skin condition for which a vet has prescribed medicated baths, most dogs don't need to be bathed on a regular basis.",
+          "fix": "",
+          "options": [],
+          "words": ["Unless", "they", "have", "a", "skin", "condition", "for", "which", "a", "vet", "has", "prescribed", "medicated", "baths,", "most", "dogs", "don't", "need", "to", "be", "bathed", "on", "a", "regular", "basis."],
+          "from_passage": true
+        }
+      ]
+    },
+    "restatement_chains": [
+      {
+        "label": "개에게 정말 필요한 것",
+        "expressions": ["what they actually need", "not good for a dog's skin", "don't need to be bathed on a regular basis"],
+        "variation": "주인의 바람이 아니라 개의 필요와 피부 건강을 기준으로 삼아야 한다."
+      },
+      {
+        "label": "과도한 목욕이라는 관행",
+        "expressions": ["bathe their dogs religiously multiple times a week", "warn against such practices"],
+        "variation": "잦은 목욕은 전문가가 경고하는, 피해야 할 관행이다."
+      }
+    ],
+    "flow_blocks": [
+      {"stage": "주장(도입)", "sentence_range": "1", "summary": "돌봄의 최우선 [[기준]]은 '주인의 바람'이 아니라 '개의 필요'", "easy_example": "장난감을 고를 때 내 취향이 아니라 아이에게 맞는지를 먼저 보는 것과 같다."},
+      {"stage": "사례", "sentence_range": "2", "summary": "냄새를 없애려 [[잦은 목욕]]을 시키지만 전문가는 반대", "easy_example": "손을 너무 자주 씻으면 오히려 피부가 트는 것과 비슷하다."},
+      {"stage": "방안", "sentence_range": "3", "summary": "냄새가 걱정되면 [[물 없는 샴푸]]·매일 빗질, 목욕은 주 1~2회", "easy_example": "머리를 매일 감는 대신 빗질로 관리하는 셈이다."},
+      {"stage": "결론(일반화)", "sentence_range": "4~5", "summary": "특별한 [[피부 질환]]이 없으면 정기 목욕 불필요, 두꺼운 털도 6~8주에 한 번", "easy_example": "겉옷은 매일이 아니라 가끔만 세탁해도 되는 것과 같다."}
+    ]
+  },
+  "sentences": [
+    {
+      "id": 1,
+      "english": "Our number one criterion for how we care for our pets should be, \"Is this what they actually need? How is it impacting them?\" rather than, \"What do I want?\"",
+      "grammar": [
+        {"tag": "명사절 접속사(의문사 how)", "note": "'how+주어+동사'가 전치사 for의 목적어인 명사절을 이끎", "spans": ["how"]},
+        {"tag": "관계대명사 what", "note": "선행사를 포함하여 '~하는 것'이라는 명사절을 이끎", "spans": ["what"]},
+        {"tag": "조동사 should", "note": "'~여야 한다'는 당위·의무를 나타냄", "spans": ["should"]}
+      ],
+      "vocab": [
+        {"word": "criterion", "meaning": "기준"},
+        {"word": "care for", "meaning": "~을 돌보다"},
+        {"word": "impact", "meaning": "~에 영향을 미치다"}
+      ],
+      "chunks": [
+        {"en": "Our number one criterion", "ko": "우리의 첫 번째 [[기준]]은"},
+        {"en": "for how we care for our pets", "ko": "우리가 반려동물을 [[돌보는]] 방식에 대한"},
+        {"en": "should be, \"Is this what they actually need?", "ko": "~여야 한다, \"이것이 그들이 실제로 [[필요로 하는]] 것인가?"},
+        {"en": "How is it impacting them?\"", "ko": "그것이 그들에게 어떤 [[영향을 미치는가]]?\""},
+        {"en": "rather than, \"What do I want?\"", "ko": "\"내가 무엇을 [[원하는가]]?\"가 아니라"}
+      ],
+      "misreads": [
+        {"statement": "반려동물을 돌보는 최우선 기준은 주인이 원하는 것이 아니라 반려동물이 실제로 필요로 하는 것이어야 한다.", "verdict": "O", "trap_type": "필자관점"},
+        {"statement": "반려동물을 어떻게 돌볼지 판단하는 주체는 반려동물 자신이다.", "verdict": "X", "trap_type": "주체대상", "anchor": "how we care for our pets", "why": "돌봄의 기준을 세우는 주체는 반려동물이 아니라 주인(we)이다."}
+      ],
+      "mistips": ["should be 다음의 큰따옴표 두 부분이 기준의 내용이며, rather than 뒤의 \"What do I want?\"는 배제 대상이다."]
+    },
+    {
+      "id": 2,
+      "english": "For example, we have encountered many dog owners who bathe their dogs religiously multiple times a week because they want to avoid the 'doggy' smell, but veterinary dermatologists warn against such practices, as they are not good for a dog's skin.",
+      "grammar": [
+        {"tag": "현재완료", "note": "have+p.p., 과거부터 지금까지의 경험", "spans": ["have encountered"]},
+        {"tag": "주격 관계대명사 who", "note": "선행사 dog owners를 수식하는 관계사절을 이끎", "spans": ["who"]},
+        {"tag": "부사절 접속사 because", "note": "이유를 나타내는 부사절을 이끎", "spans": ["because"]},
+        {"tag": "to부정사(명사적)", "note": "want의 목적어로 쓰인 to부정사", "spans": ["to avoid"]},
+        {"tag": "부사절 접속사 as", "note": "'~ 때문에'라는 이유의 부사절을 이끎", "spans": ["as"]}
+      ],
+      "vocab": [
+        {"word": "encounter", "meaning": "마주치다, 만나다"},
+        {"word": "religiously", "meaning": "규칙적으로, 열심히"},
+        {"word": "dermatologist", "meaning": "피부과 전문의"},
+        {"word": "warn against", "meaning": "~에 대해 경고하다, 반대하다"},
+        {"word": "practice", "meaning": "관행, 관례"}
+      ],
+      "chunks": [
+        {"en": "For example, we have encountered many dog owners", "ko": "예를 들어, 우리는 많은 개 주인들을 [[만나 왔다]]"},
+        {"en": "who bathe their dogs religiously multiple times a week", "ko": "일주일에 여러 번 규칙적으로 개를 [[목욕시키는]]"},
+        {"en": "[[because they want to avoid the 'doggy' smell,]]", "ko": "[['개 냄새'를 피하고 싶어서,]]"},
+        {"en": "but veterinary dermatologists warn against such practices,", "ko": "하지만 수의 피부과 전문의들은 그런 관행에 [[반대한다]],"},
+        {"en": "as they are not good for a dog's skin.", "ko": "그것이 개의 피부에 [[좋지 않기]] 때문에."}
+      ],
+      "misreads": [
+        {"statement": "개를 자주 목욕시키는 관행이 권장되지 않는데, 그 이유는 시간이 많이 들기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "they are not good for a dog's skin", "why": "권장되지 않는 이유는 시간이 아니라 개의 피부에 좋지 않기 때문이다."},
+        {"statement": "개의 피부에 좋지 않은 것(they)은 반려견들 자신을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "warn against such practices, as they are not good for a dog's skin", "why": "they는 잦은 목욕이라는 such practices를 가리키며 개를 가리키지 않는다."}
+      ],
+      "mistips": ["문장 끝의 they는 앞의 such practices(잦은 목욕)를 받는 대명사이다."]
+    },
+    {
+      "id": 3,
+      "english": "If someone is really concerned about their dog's smell they can use waterless shampoo and thoroughly brush their dog every day but keep the baths down to once or twice a week at most.",
+      "grammar": [
+        {"tag": "부사절 접속사 If", "note": "조건을 나타내는 부사절을 이끎", "spans": ["If"]},
+        {"tag": "조동사 can", "note": "'~할 수 있다'는 가능을 나타냄", "spans": ["can"]},
+        {"tag": "등위접속사 but(병렬)", "note": "use·brush와 keep을 대등하게 이어 주는 병렬 구조", "spans": ["but"]}
+      ],
+      "vocab": [
+        {"word": "concerned", "meaning": "걱정하는"},
+        {"word": "waterless shampoo", "meaning": "물 없는 샴푸"},
+        {"word": "thoroughly", "meaning": "꼼꼼히, 철저히"},
+        {"word": "at most", "meaning": "기껏해야, 많아야"}
+      ],
+      "chunks": [
+        {"en": "[[If someone is really concerned about their dog's smell]]", "ko": "[[만약 누군가가 자기 개의 냄새를 정말로 걱정한다면]]"},
+        {"en": "they can use waterless shampoo", "ko": "그들은 [[물 없는]] 샴푸를 사용하고"},
+        {"en": "and thoroughly brush their dog every day", "ko": "매일 개를 꼼꼼히 [[빗질할]] 수 있다"},
+        {"en": "but keep the baths down", "ko": "하지만 목욕은 [[줄여서]]"},
+        {"en": "to once or twice a week at most.", "ko": "기껏해야 일주일에 [[한두 번]]으로."}
+      ],
+      "misreads": [
+        {"statement": "개 냄새가 걱정되는 사람은 개를 매일 목욕시켜야 한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "thoroughly brush their dog every day but keep the baths down to once or twice a week at most", "why": "'매일'은 빗질에 해당하며 목욕은 주 1~2회로 제한하라고 했다."}
+      ],
+      "mistips": ["every day는 brush를 수식하며, 목욕(baths)의 빈도는 once or twice a week at most로 따로 제한된다."]
+    },
+    {
+      "id": 4,
+      "english": "Unless they have a skin condition for which a vet has prescribed medicated baths, most dogs don't need to be bathed on a regular basis.",
+      "grammar": [
+        {"tag": "부사절 접속사 Unless", "note": "'~하지 않는 한'이라는 조건을 나타냄", "spans": ["Unless"]},
+        {"tag": "전치사+관계대명사 for which", "note": "선행사 a skin condition을 수식, prescribed medicated baths for the condition의 의미", "spans": ["for which"]},
+        {"tag": "현재완료", "note": "has+p.p., 처방했고 그 결과가 유효함", "spans": ["has prescribed"]},
+        {"tag": "수동태(to be+p.p.)", "note": "need 뒤에서 개가 목욕을 '당하는' 수동 관계", "spans": ["be bathed"]}
+      ],
+      "vocab": [
+        {"word": "skin condition", "meaning": "피부 질환"},
+        {"word": "vet", "meaning": "수의사"},
+        {"word": "prescribe", "meaning": "처방하다"},
+        {"word": "medicated", "meaning": "약을 넣은, 약용의"},
+        {"word": "on a regular basis", "meaning": "정기적으로"}
+      ],
+      "chunks": [
+        {"en": "[[Unless they have a skin condition]]", "ko": "[[그들이 피부 질환을 가지고 있지 않는 한]]"},
+        {"en": "for which a vet has prescribed medicated baths,", "ko": "수의사가 약용 목욕을 [[처방한]],"},
+        {"en": "most dogs don't need to be bathed", "ko": "대부분의 개는 [[목욕될]] 필요가 없다"},
+        {"en": "on a regular basis.", "ko": "[[정기적으로]]."}
+      ],
+      "misreads": [
+        {"statement": "수의사가 약용 목욕을 처방한 피부 질환이 있는 경우가 아니라면, 대부분의 개는 정기적으로 목욕시킬 필요가 없다.", "verdict": "O", "trap_type": "인과조건"},
+        {"statement": "피부 질환이 있어 수의사가 약용 목욕을 처방한 경우라 하더라도, 대부분의 개는 정기적으로 목욕시킬 필요가 없다.", "verdict": "X", "trap_type": "인과조건", "anchor": "Unless they have a skin condition for which a vet has prescribed medicated baths", "why": "약용 목욕을 처방받은 피부 질환은 예외 조건이므로 그 경우엔 정기 목욕이 필요하다.", "killer": true}
+      ],
+      "mistips": ["Unless(=If ~ not)가 예외 조건을 만든다: '약용 목욕을 처방받은 경우'만 정기 목욕이 필요하다."]
+    },
+    {
+      "id": 5,
+      "english": "Even dogs with thick, heavy coats generally only need baths every 6 to 8 weeks.",
+      "grammar": [
+        {"tag": "전치사구 후치수식(with)", "note": "with thick, heavy coats가 앞의 dogs를 뒤에서 수식", "spans": ["with"]},
+        {"tag": "빈도 표현(every)", "note": "'every+기간'은 '~마다'라는 빈도를 나타냄", "spans": ["every"]}
+      ],
+      "vocab": [
+        {"word": "coat", "meaning": "(동물의) 털"},
+        {"word": "generally", "meaning": "일반적으로"}
+      ],
+      "chunks": [
+        {"en": "Even dogs with thick, heavy coats", "ko": "두껍고 무거운 [[털]]을 가진 개조차도"},
+        {"en": "generally only need baths", "ko": "일반적으로 [[목욕]]이 필요할 뿐이다"},
+        {"en": "every 6 to 8 weeks.", "ko": "[[6주에서 8주]]마다 한 번씩."}
+      ],
+      "misreads": [
+        {"statement": "두껍고 무거운 털을 가진 개조차도 일반적으로 6~8주에 한 번씩만 목욕하면 된다.", "verdict": "O", "trap_type": "구조수식"},
+        {"statement": "털이 두꺼운 개는 얇은 털을 가진 개보다 더 자주 목욕시켜야 한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "Even dogs with thick, heavy coats generally only need baths every 6 to 8 weeks", "why": "털이 두꺼운 개조차 6~8주에 한 번이면 되며, 얇은 털과 비교해 더 자주 씻겨야 한다는 내용은 없다.", "english": "Dogs with thick coats need baths more often than others."}
+      ],
+      "mistips": ["Even은 '~조차도'로, 털이 두꺼워 자주 씻겨야 할 것 같은 개마저 6~8주면 충분하다는 점을 강조한다."]
+    }
+  ]
+}

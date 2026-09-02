@@ -1,0 +1,316 @@
+{
+ "item_no": "29",
+ "theme": "호흡이 운동 수행에 미치는 영향 — 유산소·무산소 호흡",
+ "overview": {
+  "theme_ko": "호흡과 운동 수행: 유산소·무산소 호흡",
+  "topic": "🔎 호흡이 운동 수행에 미치는 영향과 몸의 에너지 생성 방식",
+  "stance": "중립적",
+  "stance_reason": "두 호흡 방식을 객관적으로 설명·대조한다",
+  "structure": "비교·대조",
+  "structure_reason": "aerobic respiration(유산소)과 anaerobic respiration(무산소)을 대조하여 설명한다",
+  "key_grammar": {
+   "point": "분사 형용사적 용법(후치 수식, known as/called)",
+   "source_sentence": "There are two options: with oxygen, a process known as aerobic respiration, and without it, which is called anaerobic respiration.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "명사 뒤에 분사(구)를 붙여 '~된/~하는 (명사)'처럼 뒤에서 꾸며 준다."},
+    {"chip": "핵심", "text": "과거분사(known, called)는 수동·완료(~라고 알려진/불리는)를, 현재분사는 능동을 나타낸다."},
+    {"chip": "연결", "text": "'a process known as ~'는 'a process (which is) known as ~'에서 관계사+be가 생략된 형태로 볼 수 있다."},
+    {"chip": "주의", "text": "수식받는 명사와 분사의 관계가 수동이면 과거분사, 능동이면 현재분사를 쓴다."}
+   ],
+   "example_analysis": "a process를 과거분사구 known as aerobic respiration이 뒤에서 수식한다(수동: ~라고 알려진 과정).",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "There [[1|are]] two options: with oxygen, a process [[2|knowing]] as aerobic respiration, and without it, [[3|which]] [[4|is]] [[5|called]] anaerobic respiration.",
+     "options": ["① are", "② knowing", "③ which", "④ is", "⑤ called"],
+     "answer": "②",
+     "fix": "knowing → known: 앞의 명사 a process를 뒤에서 수식하며 '~라고 알려진'이라는 수동의 의미이므로 과거분사 known이 맞다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "Anaerobic energy [[is generated/generates]] only with glucose (a simple sugar), and it's quicker and [[easier/easiest]] for our bodies [[to access/accessing]].",
+     "options": [],
+     "answer": "is generated / easier / to access",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "options": [
+      "① It's a kind of backup system and turbo boost when the body doesn't have enough oxygen.",
+      "② But anaerobic energy is inefficient and can be toxic, created too much lactic acid.",
+      "③ This process explains why the first few minutes of an intense workout are often so miserable.",
+      "④ This also explains why, after we're warmed up, exercise feels easier.",
+      "⑤ The body has switched from anaerobic to aerobic respiration."
+     ],
+     "answer": "But anaerobic energy is inefficient and can be toxic, created too much lactic acid.",
+     "fix": "created → creating: 주어(anaerobic energy)가 젖산을 '만들어내는' 능동·결과의 분사구문이므로 현재분사 creating을 써야 한다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "포도당이라고 불리는 단순한 당은 빠른 에너지를 제공한다. (분사의 후치 수식을 사용하여)",
+     "sentence": "",
+     "answer": "A simple sugar called glucose provides quick energy.",
+     "options": [],
+     "words": ["A", "simple", "sugar", "called", "glucose", "provides", "quick", "energy."],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "두 가지 선택지가 있다: 산소를 이용하는, 유산소 호흡이라고 알려진 과정과, 산소 없이 하는, 무산소 호흡이라고 불리는 것이다.",
+     "sentence": "",
+     "answer": "There are two options: with oxygen, a process known as aerobic respiration, and without it, which is called anaerobic respiration.",
+     "options": [],
+     "words": ["There", "are", "two", "options:", "with", "oxygen,", "a", "process", "known", "as", "aerobic", "respiration,", "and", "without", "it,", "which", "is", "called", "anaerobic", "respiration."],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {"label": "무산소 에너지의 특성", "expressions": ["quicker and easier", "inefficient and can be toxic"], "variation": "빨리 쓸 수 있지만 비효율적이고 유독하다"},
+   {"label": "호흡 방식의 전환", "expressions": ["switched from anaerobic to aerobic", "from anaerobic to aerobic respiration"], "variation": "몸이 풀리면 무산소에서 유산소로 바뀐다"}
+  ],
+  "flow_blocks": [
+   {"stage": "도입", "sentence_range": "1", "summary": "운동 수행 이해를 위해 [[에너지 생성 방식]]부터 알아야 함", "easy_example": "차가 어떻게 달리는지 알려면 먼저 연료가 어떻게 쓰이는지 알아야 한다"},
+   {"stage": "전개", "sentence_range": "2", "summary": "산소 유무로 나뉘는 [[유산소·무산소 호흡]]", "easy_example": "불을 피울 때 바람을 넣느냐 마느냐로 나뉘는 셈"},
+   {"stage": "설명", "sentence_range": "3~6", "summary": "무산소 에너지는 빠르지만 [[비효율적·유독]]", "easy_example": "급할 때 쓰는 비상 배터리는 오래 못 가고 열이 난다"},
+   {"stage": "전개", "sentence_range": "7~8", "summary": "운동 초반이 괴로운 이유는 [[산소 공급 지연]]", "easy_example": "출발 직후 숨이 차는 것과 같다"},
+   {"stage": "결론", "sentence_range": "9~10", "summary": "몸이 풀리면 [[유산소 호흡으로 전환]]되어 편해짐", "easy_example": "예열이 끝난 엔진이 부드럽게 도는 것과 같다"}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "To understand how breathing affects athletic performance, we first need to understand how the body makes energy from air and food.",
+   "grammar": [
+    {"tag": "to부정사 부사적 용법(목적)", "note": "'~하기 위해' 목적을 나타내는 부사적 to부정사", "spans": ["To understand"]},
+    {"tag": "의문사절(간접의문문)", "note": "how이 이끄는 명사절이 첫 understand의 목적어", "spans": ["how"]},
+    {"tag": "need+to부정사", "note": "need to-V: ~할 필요가 있다", "spans": ["to understand"]},
+    {"tag": "의문사절(간접의문문)", "note": "how이 이끄는 명사절이 뒤 understand의 목적어", "spans": ["how"]}
+   ],
+   "vocab": [
+    {"word": "affect", "meaning": "영향을 미치다"},
+    {"word": "athletic", "meaning": "운동의, 육상 경기의"},
+    {"word": "performance", "meaning": "수행, 수행 능력"}
+   ],
+   "chunks": [
+    {"en": "To understand how breathing affects athletic performance,", "ko": "호흡이 [[운동 수행]]에 어떻게 영향을 미치는지 이해하기 위해,"},
+    {"en": "we first need to understand", "ko": "우리는 먼저 [[이해할]] 필요가 있다"},
+    {"en": "[[how the body makes energy from air and food.]]", "ko": "[[몸이 공기와 음식으로부터 어떻게 에너지를 만드는지를]]"}
+   ],
+   "misreads": [
+    {"statement": "호흡이 운동 수행에 미치는 영향을 이해하려면 먼저 몸이 공기와 음식으로 에너지를 만드는 방식을 알아야 한다.", "verdict": "O", "trap_type": "인과조건"}
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "There are two options: with oxygen, a process known as aerobic respiration, and without it, which is called anaerobic respiration.",
+   "grammar": [
+    {"tag": "수일치", "note": "복수 주어 two options에 맞춘 be동사 are", "spans": ["are"]},
+    {"tag": "분사 형용사적 용법(후치 수식)", "note": "과거분사 known이 앞의 a process를 뒤에서 수식(수동)", "spans": ["known"]},
+    {"tag": "관계대명사 계속적 용법", "note": "which이 앞 내용(산소 없는 방식)을 이어받아 부연", "spans": ["which"]},
+    {"tag": "수동태", "note": "is called: ~라고 불리다", "spans": ["is called"]}
+   ],
+   "vocab": [
+    {"word": "oxygen", "meaning": "산소"},
+    {"word": "aerobic respiration", "meaning": "유산소 호흡"},
+    {"word": "anaerobic respiration", "meaning": "무산소 호흡"},
+    {"word": "process", "meaning": "과정"}
+   ],
+   "chunks": [
+    {"en": "There are two options:", "ko": "두 가지 [[선택지]]가 있다:"},
+    {"en": "[[with oxygen, a process known as aerobic respiration,]]", "ko": "[[산소를 이용하는, 유산소 호흡이라고 알려진 과정과,]]"},
+    {"en": "and without it, which is called anaerobic respiration.", "ko": "산소 없이 하는, [[무산소 호흡]]이라고 불리는 것이다."}
+   ],
+   "misreads": [
+    {"statement": "산소를 이용하는 과정은 무산소 호흡이라고 불린다.", "verdict": "X", "trap_type": "구조수식", "anchor": "a process known as aerobic respiration", "why": "산소를 이용하는 과정은 무산소가 아니라 유산소 호흡이라고 불린다"},
+    {"statement": "두 가지 에너지 생성 방식은 산소를 쓰느냐 안 쓰느냐로 나뉜다.", "verdict": "O", "trap_type": "주체대상"}
+   ],
+   "mistips": ["which의 선행사는 앞 절 전체(산소 없는 방식)이며 a process를 직접 받는 것이 아니다."]
+  },
+  {
+   "id": 3,
+   "english": "Anaerobic energy is generated only with glucose (a simple sugar), and it's quicker and easier for our bodies to access.",
+   "grammar": [
+    {"tag": "수동태", "note": "is generated: 만들어지다(수동)", "spans": ["is generated"]},
+    {"tag": "비교급", "note": "quicker and easier: 더 빠르고 더 쉬운", "spans": ["quicker and easier"]},
+    {"tag": "난이형용사+for+to부정사", "note": "easy+for+목적격+to-V: ~가 …하기에 쉬운", "spans": ["to access"]}
+   ],
+   "vocab": [
+    {"word": "generate", "meaning": "생성하다, 만들어내다"},
+    {"word": "glucose", "meaning": "포도당"},
+    {"word": "access", "meaning": "이용하다, 접근하다"}
+   ],
+   "chunks": [
+    {"en": "Anaerobic energy is generated only with glucose (a simple sugar),", "ko": "무산소 에너지는 [[포도당]](단순한 당)으로만 만들어지고,"},
+    {"en": "and it's quicker and easier", "ko": "그것은 더 빠르고 더 [[쉬우며]]"},
+    {"en": "for our bodies to access.", "ko": "우리 몸이 [[이용하기에]] 좋다."}
+   ],
+   "misreads": [
+    {"statement": "포도당은 우리 몸에 가장 건강한 에너지원이라고 언급된다.", "verdict": "X", "trap_type": "무관정보", "anchor": "generated only with glucose (a simple sugar)", "why": "포도당은 무산소 에너지의 재료일 뿐 가장 건강한 원천이라는 언급은 없다"}
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "It's a kind of backup system and turbo boost when the body doesn't have enough oxygen.",
+   "grammar": [
+    {"tag": "부사절(시간·조건)", "note": "when이 이끄는 부사절: ~할 때", "spans": ["when"]},
+    {"tag": "수량형용사", "note": "enough+명사: 충분한 ~", "spans": ["enough"]}
+   ],
+   "vocab": [
+    {"word": "backup system", "meaning": "예비(보조) 시스템"},
+    {"word": "turbo boost", "meaning": "순간 가속(추진력)"}
+   ],
+   "chunks": [
+    {"en": "It's a kind of backup system and turbo boost", "ko": "그것은 일종의 [[예비 시스템]]이자 순간 가속이다"},
+    {"en": "when the body doesn't have enough oxygen.", "ko": "몸이 [[충분한 산소]]를 갖지 못할 때"}
+   ],
+   "misreads": [
+    {"statement": "무산소 에너지는 몸에 산소가 부족할 때 작동하는 예비 수단 역할을 한다.", "verdict": "O", "trap_type": "인과조건"}
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "But anaerobic energy is inefficient and can be toxic, creating too much lactic acid.",
+   "grammar": [
+    {"tag": "조동사", "note": "can be: ~일 수 있다(가능성)", "spans": ["can be"]},
+    {"tag": "분사구문(결과)", "note": "creating: 그 결과 ~을 만들어내며(능동)", "spans": ["creating"]}
+   ],
+   "vocab": [
+    {"word": "inefficient", "meaning": "비효율적인"},
+    {"word": "toxic", "meaning": "유독한"},
+    {"word": "lactic acid", "meaning": "젖산"}
+   ],
+   "chunks": [
+    {"en": "But anaerobic energy is inefficient and can be toxic,", "ko": "그러나 무산소 에너지는 [[비효율적]]이고 유독할 수 있으며,"},
+    {"en": "creating too much lactic acid.", "ko": "너무 많은 [[젖산]]을 만들어낸다."}
+   ],
+   "misreads": [
+    {"statement": "무산소 에너지는 효율적이어서 젖산을 거의 만들지 않는다.", "verdict": "X", "trap_type": "인과조건", "anchor": "inefficient and can be toxic, creating too much lactic acid", "why": "무산소 에너지는 비효율적이고 젖산을 너무 많이 만들어낸다고 했다"}
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "The sickness, muscle weakness, and sweating you experience after you've pushed it too hard at the gym is the feeling of anaerobic overload.",
+   "grammar": [
+    {"tag": "목적격 관계대명사 생략", "note": "sweating 뒤 you 앞에 관계대명사(that)가 생략되어 앞 명사구를 수식", "spans": []},
+    {"tag": "현재완료", "note": "you've pushed: 완료(~해 온 결과)", "spans": ["you've pushed"]},
+    {"tag": "수일치", "note": "긴 주어가 '하나의 느낌'으로 묶여 단수 취급, 동사는 is", "spans": ["is"]}
+   ],
+   "vocab": [
+    {"word": "muscle weakness", "meaning": "근육 약화"},
+    {"word": "sweating", "meaning": "땀 흘림, 발한"},
+    {"word": "overload", "meaning": "과부하"}
+   ],
+   "chunks": [
+    {"en": "The sickness, muscle weakness, and sweating", "ko": "당신이 겪는 [[메스꺼움]], 근육 약화, 땀 흘림은"},
+    {"en": "[[you experience after you've pushed it too hard at the gym]]", "ko": "[[체육관에서 너무 심하게 몰아붙인 뒤에 당신이 겪는]]"},
+    {"en": "is the feeling of anaerobic overload.", "ko": "[[무산소 과부하]]의 느낌이다."}
+   ],
+   "misreads": [
+    {"statement": "체육관에서 무리한 뒤 겪는 메스꺼움과 땀은 유산소 호흡이 주는 상쾌함을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "is the feeling of anaerobic overload", "why": "그 증상들은 유산소가 아니라 무산소 과부하의 느낌을 가리킨다"}
+   ],
+   "mistips": ["주어는 The sickness, muscle weakness, and sweating을 하나의 느낌으로 묶어 단수 취급하므로 동사가 is이다."]
+  },
+  {
+   "id": 7,
+   "english": "This process explains why the first few minutes of an intense workout are often so miserable.",
+   "grammar": [
+    {"tag": "의문사절(간접의문문)", "note": "why절이 explains의 목적어", "spans": ["why"]},
+    {"tag": "수일치", "note": "복수 주어 the first few minutes에 맞춘 are", "spans": ["are"]}
+   ],
+   "vocab": [
+    {"word": "intense", "meaning": "격렬한, 강도 높은"},
+    {"word": "workout", "meaning": "운동"},
+    {"word": "miserable", "meaning": "비참한, 괴로운"}
+   ],
+   "chunks": [
+    {"en": "This process explains why", "ko": "이 과정은 [[왜]] ~인지 설명한다"},
+    {"en": "the first few minutes of an intense workout", "ko": "[[격렬한 운동]]의 첫 몇 분이"},
+    {"en": "are often so miserable.", "ko": "종종 그토록 [[괴로운]] 이유를"}
+   ],
+   "misreads": [
+    {"statement": "격렬한 운동 초반이 괴로운 것은 몸이 이미 유산소 호흡으로 전환했기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "the body has to use anaerobic respiration", "why": "초반이 괴로운 이유는 산소 공급이 못 따라가 무산소 호흡을 쓰기 때문이다", "integrative": true}
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "Our lungs and respiratory system haven't caught up to supply the oxygen our bodies need, and so the body has to use anaerobic respiration.",
+   "grammar": [
+    {"tag": "현재완료", "note": "haven't caught up: 아직 따라잡지 못했다(완료)", "spans": ["haven't caught up"]},
+    {"tag": "to부정사 부사적 용법(목적)", "note": "to supply: 공급하기 위해", "spans": ["to supply"]},
+    {"tag": "목적격 관계대명사 생략", "note": "the oxygen 뒤 our bodies 앞에 관계대명사(that) 생략", "spans": []},
+    {"tag": "조동사 표현(have to)", "note": "has to use: ~해야 한다(의무)", "spans": ["has to"]}
+   ],
+   "vocab": [
+    {"word": "respiratory system", "meaning": "호흡계"},
+    {"word": "catch up", "meaning": "따라잡다"},
+    {"word": "supply", "meaning": "공급하다"}
+   ],
+   "chunks": [
+    {"en": "Our lungs and respiratory system haven't caught up", "ko": "우리 폐와 호흡계가 아직 [[따라잡지]] 못했다"},
+    {"en": "[[to supply the oxygen our bodies need,]]", "ko": "[[우리 몸이 필요로 하는 산소를 공급하도록,]]"},
+    {"en": "and so the body has to use anaerobic respiration.", "ko": "그래서 몸은 [[무산소 호흡]]을 사용해야 한다."}
+   ],
+   "misreads": [
+    {"statement": "운동 초반에는 폐와 호흡계가 이미 필요한 산소를 충분히 공급하고 있다.", "verdict": "X", "trap_type": "주체대상", "anchor": "haven't caught up to supply the oxygen our bodies need", "why": "호흡계가 아직 필요한 산소 공급을 따라잡지 못했다고 했다"}
+   ],
+   "mistips": ["the oxygen (that) our bodies need — 목적격 관계대명사 that이 생략된 구조이다."]
+  },
+  {
+   "id": 9,
+   "english": "This also explains why, after we're warmed up, exercise feels easier.",
+   "grammar": [
+    {"tag": "의문사절(간접의문문)", "note": "why절이 explains의 목적어", "spans": ["why"]},
+    {"tag": "부사절(시간)", "note": "after절: 준비운동이 된 후에", "spans": ["after"]},
+    {"tag": "수일치", "note": "단수 주어 exercise에 맞춘 feels", "spans": ["feels"]}
+   ],
+   "vocab": [
+    {"word": "warm up", "meaning": "준비운동을 하다, 몸을 풀다"},
+    {"word": "feels easier", "meaning": "더 쉽게 느껴지다"}
+   ],
+   "chunks": [
+    {"en": "This also explains why,", "ko": "이것은 또한 [[왜]]인지 설명한다,"},
+    {"en": "after we're warmed up,", "ko": "우리가 [[몸을 푼]] 후에는,"},
+    {"en": "exercise feels easier.", "ko": "운동이 더 [[쉽게 느껴지는]] 이유를."}
+   ],
+   "misreads": [
+    {"statement": "필자는 준비운동이 운동을 더 힘들게 만들므로 피해야 한다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "after we're warmed up, exercise feels easier", "why": "필자는 몸이 풀린 뒤 운동이 오히려 더 쉬워진다고 설명한다"}
+   ],
+   "mistips": []
+  },
+  {
+   "id": 10,
+   "english": "The body has switched from anaerobic to aerobic respiration.",
+   "grammar": [
+    {"tag": "현재완료", "note": "has switched: 전환을 완료했다(완료)", "spans": ["has switched"]},
+    {"tag": "전치사구(from A to B)", "note": "from ~ to ~: A에서 B로", "spans": ["from anaerobic to aerobic"]}
+   ],
+   "vocab": [
+    {"word": "switch", "meaning": "전환하다, 바꾸다"},
+    {"word": "aerobic respiration", "meaning": "유산소 호흡"}
+   ],
+   "chunks": [
+    {"en": "The body has switched", "ko": "몸이 [[전환했다]]"},
+    {"en": "from anaerobic to aerobic respiration.", "ko": "무산소에서 [[유산소 호흡으로]]."}
+   ],
+   "misreads": [
+    {"statement": "몸이 풀린 뒤에는 유산소에서 무산소 호흡으로 전환한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "switched from anaerobic to aerobic respiration", "why": "방향이 반대로, 무산소에서 유산소 호흡으로 전환한다", "killer": true}
+   ],
+   "mistips": []
+  }
+ ]
+}

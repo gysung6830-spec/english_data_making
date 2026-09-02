@@ -1,0 +1,366 @@
+{
+  "item_no": "41-42",
+  "theme": "인터넷이 바꾼 속어의 역할 — 규범의 민주화",
+  "overview": {
+    "theme_ko": "인터넷이 바꾼 속어의 위상과 규범의 민주화",
+    "topic": "🔎 인터넷·소셜미디어가 바꾼 속어(slang)의 역할과 언어 규범의 민주화",
+    "stance": "긍정적",
+    "stance_reason": "public access is democratized, our influence both legitimizes these terms 등 변화를 긍정적으로 서술한다.",
+    "structure": "비교·대조",
+    "structure_reason": "인터넷 이전 규칙 제정자의 규범 지배와 이후 소셜 미디어로 인한 민주화·속어 확산을 과거-현재로 대조한다.",
+    "key_grammar": {
+      "point": "조동사+완료 (might (not) have been)",
+      "source_sentence": "TV presenters and journalists might not have been able to use slang, but content creators can.",
+      "explanation": [
+        {"chip": "쉽게 말하면", "text": "'might have p.p.'는 과거에 대한 추측이에요: '~했을지도 모른다'."},
+        {"chip": "구조", "text": "조동사 might + (not) + have + been: 과거의 상태를 추측할 때 have p.p.를 씁니다."},
+        {"chip": "의미", "text": "might not have been able to use = '사용할 수 없었을지도 모른다'(과거의 불가능 추측)."},
+        {"chip": "비교", "text": "현재 능력은 can(content creators can), 과거 추측은 might have been able to로 시제가 달라요."},
+        {"chip": "주의", "text": "have 뒤에는 반드시 과거분사(been)가 오며, had been(과거완료)과 혼동하면 안 됩니다."}
+      ],
+      "example_analysis": "'might not have been able to use'에서 조동사 might에 have p.p.(have been)가 결합해 과거의 불가능을 추측하고, 이어 be able to+동사원형(to use)이 연결됨.",
+      "drills": [
+        {
+          "kind": "밑줄형",
+          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+          "sentence": "We regularly [[1|use]] words like 'function' and 'side-eye,' and our influence [[2|both]] [[3|legitimize]] these terms and gives them a large platform [[4|to spread]] quicker [[5|than]] they could have before.",
+          "answer": "③",
+          "fix": "legitimize → legitimizes: 주어 our influence가 단수이므로 3인칭 단수 동사 legitimizes여야 하며, 뒤의 gives와 병렬을 이룬다.",
+          "options": ["① use", "② both", "③ legitimize", "④ to spread", "⑤ than"],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "네모형",
+          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+          "sentence": "TV presenters and journalists might not [[have been/had been]] able [[to use/using]] slang, but content creators can.",
+          "answer": "have been / to use",
+          "fix": "조동사 might 뒤에는 have+p.p.(have been)가 오고, be able to 뒤에는 동사원형(to use)이 온다.",
+          "options": [],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "오류찾기",
+          "question": "다음 중 어법상 틀린 문장은?",
+          "sentence": "This means that slang can more naturally go beyond the economic and social barriers that once limiting its growth.",
+          "answer": "This means that slang can more naturally go beyond the economic and social barriers that once limiting its growth.",
+          "fix": "limiting → limited: 관계대명사 that절의 정동사가 필요하므로 과거시제 limited가 되어야 한다.",
+          "options": [
+            "① The role of 'slang' in popular culture has fundamentally changed because of the internet.",
+            "② Social media completely broke that barrier.",
+            "③ The playing field is now level, and public access is democratized.",
+            "④ This means that slang can more naturally go beyond the economic and social barriers that once limiting its growth.",
+            "⑤ Content creators also come from a greater variety of backgrounds than people working in traditional media."
+          ],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "영작",
+          "question": "그때 그들은 그 규칙들을 어길 수 없었을지도 모른다.",
+          "answer": "They might not have been able to break the rules then.",
+          "fix": "",
+          "options": [],
+          "words": ["They", "might", "not", "have", "been", "able", "to break", "the rules", "then"],
+          "from_passage": false
+        },
+        {
+          "kind": "영작",
+          "question": "TV 진행자와 기자들은 속어를 사용할 수 없었을지도 모르지만, 콘텐츠 크리에이터들은 할 수 있다.",
+          "answer": "TV presenters and journalists might not have been able to use slang, but content creators can.",
+          "fix": "",
+          "options": [],
+          "words": ["TV presenters", "and", "journalists", "might", "not", "have", "been", "able", "to use", "slang", "but", "content creators", "can"],
+          "from_passage": true
+        }
+      ]
+    },
+    "restatement_chains": [
+      {
+        "label": "규범 장벽의 붕괴와 민주화",
+        "expressions": ["Social media completely broke that barrier", "The playing field is now level", "public access is democratized"],
+        "variation": "권위자가 독점하던 규범이 무너지고 누구나 공적 발언을 할 수 있게 됨"
+      },
+      {
+        "label": "속어를 정당화·확산시키는 콘텐츠 크리에이터",
+        "expressions": ["content creators can", "our influence both legitimizes these terms"],
+        "variation": "새 플랫폼의 크리에이터들이 속어에 정당성과 확산의 발판을 제공함"
+      }
+    ],
+    "flow_blocks": [
+      {"stage": "도입", "sentence_range": "1", "summary": "인터넷이 대중문화 속 [[속어]]의 역할을 근본적으로 바꿈", "easy_example": "옛날엔 방송국이 유행어를 정했다면, 지금은 온라인이 정한다."},
+      {"stage": "전개(과거)", "sentence_range": "2~3", "summary": "표준 영어 이후 [[규칙 제정자]]의 규범이 소통을 지배, 대중은 매체의 엄격한 기대에 순응", "easy_example": "신문·방송에 실리려면 정해진 문법 틀 안에서만 말해야 했다."},
+      {"stage": "전환", "sentence_range": "4~6", "summary": "소셜 미디어가 [[장벽]]을 무너뜨려 접근이 민주화되고 규칙 강제자가 사라짐", "easy_example": "누구나 계정만 있으면 공적 인물이 될 수 있는 시대."},
+      {"stage": "사례", "sentence_range": "7~9", "summary": "[[콘텐츠 크리에이터]]가 속어를 쓰고 정당화하며, 더 다양한 배경에서 나옴", "easy_example": "'function', 'side-eye' 같은 말이 크리에이터를 통해 빠르게 퍼진다."},
+      {"stage": "결론", "sentence_range": "10~11", "summary": "속어가 경제·사회적 [[장벽]]을 넘어 확산하고 온라인 관계망이 더 강해짐", "easy_example": "밈이 국경·계층을 넘어 순식간에 퍼지는 오늘날."}
+    ]
+  },
+  "sentences": [
+    {
+      "id": 1,
+      "english": "The role of 'slang' in popular culture has fundamentally changed because of the internet.",
+      "grammar": [
+        {"tag": "현재완료", "note": "has+p.p., 과거부터 현재까지 이어진 변화·결과", "spans": ["has fundamentally changed"]},
+        {"tag": "전치사 because of", "note": "because of+명사(구) '~때문에'; 접속사 because와 구별", "spans": ["because of"]}
+      ],
+      "vocab": [
+        {"word": "slang", "meaning": "속어, 은어"},
+        {"word": "popular culture", "meaning": "대중문화"},
+        {"word": "fundamentally", "meaning": "근본적으로"}
+      ],
+      "chunks": [
+        {"en": "The role of 'slang' in popular culture has fundamentally changed", "ko": "대중문화 속 '속어'의 역할이 근본적으로 [[바뀌었다]]"},
+        {"en": "because of the internet.", "ko": "인터넷 [[때문에]]"}
+      ],
+      "misreads": [
+        {"statement": "인터넷의 등장으로 대중문화 속 속어의 역할이 근본적으로 달라졌다.", "verdict": "O", "trap_type": "인과조건"}
+      ],
+      "mistips": ["because of는 전치사(구)로 뒤에 명사가 오고, because는 접속사로 뒤에 「주어+동사」가 온다."]
+    },
+    {
+      "id": 2,
+      "english": "Since the emergence of Standard English, the rule makers of language have been in charge, and their prescriptive norms about a 'correct' version of the English language have dominated our channels of communication.",
+      "grammar": [
+        {"tag": "전치사 since", "note": "since+명사구 '~이래로'; 현재완료와 호응", "spans": ["Since"]},
+        {"tag": "주어-동사 수일치", "note": "복수주어 the rule makers → have been", "spans": ["have been"]},
+        {"tag": "현재완료", "note": "복수주어 norms → 과거부터 현재까지 지배해 옴", "spans": ["have dominated"]}
+      ],
+      "vocab": [
+        {"word": "emergence", "meaning": "출현, 등장"},
+        {"word": "in charge", "meaning": "담당하는, 지배하는"},
+        {"word": "prescriptive", "meaning": "규범적인, 규정하는"},
+        {"word": "norms", "meaning": "규범"}
+      ],
+      "chunks": [
+        {"en": "Since the emergence of Standard English,", "ko": "표준 영어의 [[출현]] 이래로,"},
+        {"en": "the rule makers of language have been in charge,", "ko": "언어의 규칙 제정자들이 [[담당해]] 왔고,"},
+        {"en": "and their prescriptive norms", "ko": "그리고 그들의 [[규범적]] 규범이"},
+        {"en": "about a 'correct' version of the English language", "ko": "영어의 '올바른' [[형태]]에 관한"},
+        {"en": "have dominated our channels of communication.", "ko": "우리의 의사소통 [[채널]]을 지배해 왔다."}
+      ],
+      "misreads": [
+        {"statement": "their prescriptive norms의 their는 '표준 영어(Standard English)'를 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "the rule makers of language have been in charge", "why": "their는 앞에 나온 규칙 제정자들을 가리키므로 표준 영어가 아니다."}
+      ],
+      "mistips": ["have been in charge와 have dominated는 각각 복수주어에 맞춘 현재완료로, 과거~현재의 지속·결과를 나타낸다."]
+    },
+    {
+      "id": 3,
+      "english": "If you wanted your voice to be heard by the public, you had to work within their limits, conforming to the strict expectations of either print or broadcast media.",
+      "grammar": [
+        {"tag": "부사절 접속사 if", "note": "조건절 '만약 ~라면'", "spans": ["If"]},
+        {"tag": "to부정사 수동태", "note": "want+목적어+to be p.p., '목소리가 들려지기를'", "spans": ["to be heard"]},
+        {"tag": "had to", "note": "have to의 과거, '~해야 했다'", "spans": ["had to"]},
+        {"tag": "분사구문", "note": "conforming ~, 동시상황 '~하면서'", "spans": ["conforming"]},
+        {"tag": "상관접속사 either A or B", "note": "either+A+or+B, 'A나 B 둘 중 하나'", "spans": ["either", "or"]}
+      ],
+      "vocab": [
+        {"word": "conform to", "meaning": "순응하다, 따르다"},
+        {"word": "strict", "meaning": "엄격한"},
+        {"word": "expectations", "meaning": "기대, 요구"},
+        {"word": "broadcast media", "meaning": "방송 매체"}
+      ],
+      "chunks": [
+        {"en": "If you wanted your voice to be heard", "ko": "만약 당신의 목소리가 대중에게 [[들려지기를]] 원했다면"},
+        {"en": "by the public, you had to work within their limits,", "ko": "당신은 그들의 [[한계]] 안에서 일해야 했고,"},
+        {"en": "conforming to the strict expectations", "ko": "엄격한 [[기대]]에 순응하면서"},
+        {"en": "of either print or broadcast media.", "ko": "인쇄 매체나 방송 매체 [[둘 중 하나]]의"}
+      ],
+      "misreads": [
+        {"statement": "과거에는 목소리를 대중에게 전하려면 자신만의 방식대로 자유롭게 일하면 되었다.", "verdict": "X", "trap_type": "인과조건", "anchor": "you had to work within their limits", "why": "자유롭게가 아니라 그들의 한계 안에서 일해야 했다."}
+      ],
+      "mistips": ["conforming은 앞 절과 주어가 같은 분사구문으로, '~에 순응하면서'라고 동시 동작으로 해석한다."]
+    },
+    {
+      "id": 4,
+      "english": "Social media completely broke that barrier.",
+      "grammar": [
+        {"tag": "과거시제", "note": "broke, break의 과거형", "spans": ["broke"]},
+        {"tag": "지시형용사 that", "note": "that barrier, 앞서 언급한 장벽을 가리킴", "spans": ["that"]}
+      ],
+      "vocab": [
+        {"word": "barrier", "meaning": "장벽, 장애물"},
+        {"word": "completely", "meaning": "완전히"}
+      ],
+      "chunks": [
+        {"en": "Social media completely broke", "ko": "소셜 미디어가 완전히 [[깨뜨렸다]]"},
+        {"en": "that barrier.", "ko": "[[그 장벽]]을"}
+      ],
+      "misreads": [
+        {"statement": "소셜 미디어가 기존의 장벽을 완전히 무너뜨렸다.", "verdict": "O", "trap_type": "인과조건"}
+      ],
+      "mistips": ["that barrier는 앞 문장에서 말한 '매체의 엄격한 제한'이라는 장벽을 지시한다."]
+    },
+    {
+      "id": 5,
+      "english": "The playing field is now level, and public access is democratized.",
+      "grammar": [
+        {"tag": "수동태", "note": "is democratized, be+p.p. '민주화되다'", "spans": ["is democratized"]},
+        {"tag": "등위접속사 and", "note": "두 절을 대등하게 연결", "spans": ["and"]}
+      ],
+      "vocab": [
+        {"word": "playing field", "meaning": "경쟁의 장 (level playing field: 공평한 경쟁의 장)"},
+        {"word": "level", "meaning": "평평한, 대등한"},
+        {"word": "democratize", "meaning": "민주화하다"},
+        {"word": "public access", "meaning": "대중의 접근(권)"}
+      ],
+      "chunks": [
+        {"en": "The playing field is now level,", "ko": "이제 경쟁의 장이 [[공평해졌고]],"},
+        {"en": "and public access is democratized.", "ko": "대중의 [[접근]]이 민주화되었다."}
+      ],
+      "misreads": [
+        {"statement": "필자는 대중의 접근이 민주화된 이러한 변화를 부정적으로 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "public access is democratized", "why": "필자는 장벽이 무너지고 접근이 민주화된 것을 긍정적 변화로 제시한다."}
+      ],
+      "mistips": ["level은 여기서 형용사 '대등한'으로, level playing field(공평한 경쟁의 장)라는 표현을 풀어 쓴 것이다."]
+    },
+    {
+      "id": 6,
+      "english": "Anybody and everybody can become a public figure on the new communicative platforms, meaning that nobody's left to enforce the old rules.",
+      "grammar": [
+        {"tag": "조동사 can", "note": "가능 '~할 수 있다'", "spans": ["can"]},
+        {"tag": "분사구문", "note": "meaning that ~, 앞 절의 결과 '그 결과 ~을 의미한다'", "spans": ["meaning"]},
+        {"tag": "명사절 접속사 that", "note": "meaning의 목적어절을 이끎", "spans": ["that"]},
+        {"tag": "to부정사 형용사적 용법", "note": "nobody left to enforce, '규칙을 강제할' 사람", "spans": ["to enforce"]}
+      ],
+      "vocab": [
+        {"word": "public figure", "meaning": "공인, 유명 인사"},
+        {"word": "communicative platform", "meaning": "소통 플랫폼"},
+        {"word": "enforce", "meaning": "시행하다, 강제하다"}
+      ],
+      "chunks": [
+        {"en": "Anybody and everybody can become a public figure", "ko": "누구나 다 [[공인]]이 될 수 있는데"},
+        {"en": "on the new communicative platforms,", "ko": "새로운 소통 [[플랫폼]] 위에서,"},
+        {"en": "meaning that nobody's left", "ko": "그 결과 [[아무도]] 남지 않았음을 의미한다"},
+        {"en": "to enforce the old rules.", "ko": "옛 [[규칙]]을 시행할"}
+      ],
+      "misreads": [
+        {"statement": "누구나 공인이 될 수 있게 되면서, 옛 규칙을 시행할 새로운 감시자들이 늘어났다.", "verdict": "X", "trap_type": "주체대상", "anchor": "nobody's left to enforce the old rules", "why": "규칙을 시행할 사람이 늘어난 것이 아니라 아무도 남지 않았다."}
+      ],
+      "mistips": ["nobody's left에서 's는 is의 축약으로 'nobody is left(아무도 남아 있지 않다)'이며, 뒤의 to enforce가 nobody를 수식한다."]
+    },
+    {
+      "id": 7,
+      "english": "TV presenters and journalists might not have been able to use slang, but content creators can.",
+      "grammar": [
+        {"tag": "조동사+완료 (might have p.p.)", "note": "might not have been, 과거에 대한 추측 '~할 수 없었을지도 모른다'", "spans": ["might not have been"]},
+        {"tag": "be able to", "note": "'~할 수 있다', 여기서 완료형·부정과 결합", "spans": ["able to use"]},
+        {"tag": "등위접속사 but", "note": "대조 연결", "spans": ["but"]},
+        {"tag": "대동사 can", "note": "content creators can (use slang), 반복 회피 조동사", "spans": ["can"]}
+      ],
+      "vocab": [
+        {"word": "TV presenters", "meaning": "TV 진행자"},
+        {"word": "journalists", "meaning": "기자"},
+        {"word": "content creators", "meaning": "콘텐츠 크리에이터"}
+      ],
+      "chunks": [
+        {"en": "TV presenters and journalists", "ko": "TV [[진행자]]와 기자들은"},
+        {"en": "[[might not have been able to use slang]],", "ko": "[[속어를 사용할 수 없었을지도 모르지만]],"},
+        {"en": "but content creators can.", "ko": "하지만 [[콘텐츠 크리에이터]]들은 할 수 있다."}
+      ],
+      "misreads": [
+        {"statement": "과거 TV 진행자나 기자들은 속어를 쓰기 어려웠지만, 콘텐츠 크리에이터들은 속어를 쓸 수 있다.", "verdict": "O", "trap_type": "주체대상"}
+      ],
+      "mistips": ["문장 끝 can 뒤에는 use slang이 생략된 대동사 용법으로, 과거 추측(might have been)과 현재 가능(can)의 시제 대조에 주목한다."]
+    },
+    {
+      "id": 8,
+      "english": "We regularly use words like 'function' and 'side-eye,' and our influence both legitimizes these terms and gives them a large platform to spread quicker than they could have before.",
+      "grammar": [
+        {"tag": "주어-동사 수일치", "note": "단수주어 our influence → legitimizes, gives", "spans": ["legitimizes"]},
+        {"tag": "상관접속사 both A and B", "note": "both+동사구+and+동사구, 'A뿐만 아니라 B도'", "spans": ["both", "and"]},
+        {"tag": "to부정사 형용사적 용법", "note": "a large platform to spread, '퍼질 발판'", "spans": ["to spread"]},
+        {"tag": "비교급", "note": "quicker than, '더 빠르게'", "spans": ["quicker than"]},
+        {"tag": "조동사+완료 (could have)", "note": "than they could have before, 과거 가능 '그럴 수 있었던 것보다'", "spans": ["could have"]}
+      ],
+      "vocab": [
+        {"word": "legitimize", "meaning": "정당화하다, 정당성을 부여하다"},
+        {"word": "terms", "meaning": "용어"},
+        {"word": "platform", "meaning": "발판, (확산의) 장"},
+        {"word": "spread", "meaning": "퍼지다"}
+      ],
+      "chunks": [
+        {"en": "We regularly use words like 'function' and 'side-eye,'", "ko": "우리는 'function'과 'side-eye' 같은 단어를 자주 [[사용하고]],"},
+        {"en": "and our influence both legitimizes these terms", "ko": "우리의 영향력은 이 [[용어]]들을 정당화할 뿐만 아니라"},
+        {"en": "and gives them a large platform", "ko": "그것들에게 큰 [[발판]]을 주어"},
+        {"en": "to spread quicker than they could have before.", "ko": "이전에 그럴 수 있었던 것보다 더 [[빠르게]] 퍼지게 한다."}
+      ],
+      "misreads": [
+        {"statement": "우리의 영향력은 이 용어들을 정당화하지만, 그것들이 퍼지는 속도는 예전보다 오히려 느려졌다.", "verdict": "X", "trap_type": "구조수식", "anchor": "to spread quicker than they could have before", "why": "용어가 예전보다 더 빠르게 퍼지지, 느려진 것이 아니다.", "killer": true}
+      ],
+      "mistips": ["both A and B에서 A=legitimizes these terms, B=gives them a large platform으로 두 동사구가 병렬을 이룬다."]
+    },
+    {
+      "id": 9,
+      "english": "Content creators also come from a greater variety of backgrounds than people working in traditional media.",
+      "grammar": [
+        {"tag": "비교급 than", "note": "a greater variety ... than, '~보다 더 다양한'", "spans": ["greater", "than"]},
+        {"tag": "현재분사 후치수식", "note": "people working in traditional media, '~에서 일하는 사람들'", "spans": ["working"]}
+      ],
+      "vocab": [
+        {"word": "variety", "meaning": "다양성"},
+        {"word": "backgrounds", "meaning": "배경, 출신"},
+        {"word": "traditional media", "meaning": "전통 매체"}
+      ],
+      "chunks": [
+        {"en": "Content creators also come", "ko": "콘텐츠 크리에이터들은 또한 [[나온다]]"},
+        {"en": "from a greater variety of backgrounds", "ko": "더 다양한 [[배경]]에서"},
+        {"en": "than people working in traditional media.", "ko": "전통 매체에서 [[일하는]] 사람들보다"}
+      ],
+      "misreads": [
+        {"statement": "콘텐츠 크리에이터들이 속어를 더 잘 퍼뜨리는 것은, 그들이 전통 매체 종사자보다 더 높은 교육을 받았기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "come from a greater variety of backgrounds than people working in traditional media", "why": "배경이 더 '다양'하다는 것이지 교육 수준이 더 높다는 근거는 본문에 없다."}
+      ],
+      "mistips": ["working in traditional media는 people을 뒤에서 꾸미는 현재분사구로, '전통 매체에서 일하는 사람들'로 해석한다."]
+    },
+    {
+      "id": 10,
+      "english": "This means that slang can more naturally go beyond the economic and social barriers that once limited its growth.",
+      "grammar": [
+        {"tag": "지시대명사 This", "note": "앞 문장 전체 내용을 받음", "spans": ["This"]},
+        {"tag": "명사절 접속사 that", "note": "means의 목적어절을 이끎", "spans": ["that"]},
+        {"tag": "조동사 can", "note": "가능 '~할 수 있다'", "spans": ["can"]},
+        {"tag": "관계대명사 that", "note": "barriers that once limited, 주격 관계대명사", "spans": ["that"]}
+      ],
+      "vocab": [
+        {"word": "go beyond", "meaning": "넘어서다"},
+        {"word": "economic", "meaning": "경제적인"},
+        {"word": "barriers", "meaning": "장벽"},
+        {"word": "growth", "meaning": "성장, 확산"}
+      ],
+      "chunks": [
+        {"en": "This means that slang can more naturally go beyond", "ko": "이것은 속어가 더 자연스럽게 [[넘어설]] 수 있음을 의미한다"},
+        {"en": "the economic and social barriers", "ko": "경제적·사회적 [[장벽]]을"},
+        {"en": "that once limited its growth.", "ko": "한때 그 [[성장]]을 제한했던"}
+      ],
+      "misreads": [
+        {"statement": "속어가 장벽을 넘을 수 있는 것은, 이제 정부가 학교에서 속어 사용을 공식적으로 승인했기 때문이다.", "verdict": "X", "trap_type": "무관정보", "anchor": "slang can more naturally go beyond the economic and social barriers that once limited its growth", "why": "정부의 공식 승인 같은 내용은 본문에 전혀 없다."}
+      ],
+      "mistips": ["두 개의 that 중 앞은 means의 목적어절(명사절), 뒤는 barriers를 꾸미는 주격 관계대명사이다."]
+    },
+    {
+      "id": 11,
+      "english": "The loose social networks that previously connected us geographically are simply stronger online, and memes are now transmitted at rapid pace.",
+      "grammar": [
+        {"tag": "관계대명사 that", "note": "networks that previously connected, 주격 관계대명사", "spans": ["that"]},
+        {"tag": "주어-동사 수일치", "note": "복수주어 The loose social networks → are", "spans": ["are"]},
+        {"tag": "수동태", "note": "memes are transmitted, be+p.p. '전달되다'", "spans": ["transmitted"]},
+        {"tag": "등위접속사 and", "note": "두 절을 대등하게 연결", "spans": ["and"]}
+      ],
+      "vocab": [
+        {"word": "loose", "meaning": "느슨한"},
+        {"word": "social networks", "meaning": "사회적 관계망"},
+        {"word": "geographically", "meaning": "지리적으로"},
+        {"word": "memes", "meaning": "밈"},
+        {"word": "transmit", "meaning": "전달되다, 퍼지다"}
+      ],
+      "chunks": [
+        {"en": "The loose social networks that previously connected us geographically", "ko": "이전에 우리를 지리적으로 [[연결했던]] 느슨한 사회적 관계망은"},
+        {"en": "are simply stronger online,", "ko": "온라인에서 그저 더 [[강할]] 뿐이고,"},
+        {"en": "and memes are now transmitted at rapid pace.", "ko": "밈은 이제 빠른 속도로 [[전달된다]]."}
+      ],
+      "misreads": [
+        {"statement": "지리적으로 우리를 연결하던 느슨한 관계망은 온라인에서 더 강해졌고, 밈은 빠른 속도로 퍼진다.", "verdict": "O", "trap_type": "주체대상"}
+      ],
+      "mistips": ["that previously connected us geographically가 The loose social networks를 꾸미는 주격 관계대명사절이라 주어가 길다."]
+    }
+  ]
+}

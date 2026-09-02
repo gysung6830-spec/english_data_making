@@ -1,0 +1,248 @@
+{
+  "item_no": "22",
+  "theme": "끌어당김의 법칙에서 가장 강력한 끌개는 신념 체계",
+  "overview": {
+    "theme_ko": "끌어당김의 법칙과 신념 체계의 힘",
+    "topic": "🔎 끌어당김에서 가장 강력한 끌개인 신념 체계",
+    "stance": "중립적",
+    "stance_reason": "the most powerful attractor is our belief system",
+    "structure": "통념→반박(반전)",
+    "structure_reason": "생각·시각화만으로 실현된다는 흔한 오류(The common flaw)를 지적하고 가장 강력한 끌개는 신념 체계임을 제시",
+    "key_grammar": {
+      "point": "관계사 계속적 용법 (콤마 + which)",
+      "source_sentence": "Perhaps you have heard of the Law of Attraction, which states that 'like attracts like' and that by focusing on positive or negative thoughts, one can bring about positive or negative results.",
+      "explanation": [
+        {"chip": "쉽게 말하면", "text": "콤마 뒤의 which는 앞의 명사(the Law of Attraction)를 '그런데 그것은~'으로 보충 설명한다."},
+        {"chip": "핵심 규칙", "text": "계속적 용법(콤마+관계사)에는 관계대명사 that을 쓸 수 없고 which를 쓴다."},
+        {"chip": "해석 요령", "text": "제한적 용법처럼 '~하는 명사'로 앞에서 걸어 해석하지 말고, '명사, 그리고 그것은~'으로 뒤에서 이어 해석한다."},
+        {"chip": "여기서는", "text": "which states that ~ and that ~ 처럼 which의 동사 states가 두 개의 that 명사절을 목적어로 받는다."}
+      ],
+      "example_analysis": "선행사 the Law of Attraction를 콤마 뒤 which가 계속적으로 부연하고, states의 목적어로 두 개의 that절이 병렬 연결된다.",
+      "drills": [
+        {
+          "kind": "밑줄형",
+          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+          "sentence": "Perhaps you [[1|have heard]] of the Law of Attraction, [[2|that]] states [[3|that]] 'like attracts like' and that by [[4|focusing]] on positive or negative thoughts, one [[5|can]] bring about positive or negative results.",
+          "answer": "②",
+          "fix": "콤마 뒤의 계속적 용법에는 관계대명사 that을 쓸 수 없다. that → which(원문). 나머지 네 곳은 원문 그대로 옳다.",
+          "options": ["① have heard", "② that", "③ that", "④ focusing", "⑤ can"],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "네모형",
+          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+          "sentence": "It is true [[that/what]] we attract at the level of our own vibration and [[that/which]] our thoughts and words [[are/is]] extremely magnetic.",
+          "answer": "that / that / are",
+          "fix": "완전한 절을 이끄는 진주어·병렬 명사절은 that, 주어 our thoughts and words가 복수이므로 are.",
+          "options": [],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "오류찾기",
+          "question": "다음 중 어법상 틀린 문장은?",
+          "sentence": "",
+          "answer": "Consider what limiting beliefs you have that contradicts your desires and upgrade them to beliefs that are in line with what you want to attract.",
+          "fix": "선행사 limiting beliefs는 복수이므로 관계대명사 that의 동사는 contradicts가 아니라 contradict(원문)이어야 한다.",
+          "options": [
+            "① It is true that we attract at the level of our own vibration and that our thoughts and words are extremely magnetic.",
+            "② But the most powerful attractor is our belief system.",
+            "③ Consider what limiting beliefs you have that contradicts your desires and upgrade them to beliefs that are in line with what you want to attract.",
+            "④ The common flaw in our understanding of this law is that we believe all we have to do is think about or visualize something to manifest it.",
+            "⑤ Perhaps you have heard of the Law of Attraction, which states that 'like attracts like' and that by focusing on positive or negative thoughts, one can bring about positive or negative results."
+          ],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "영작",
+          "question": "그는 새 스마트폰을 샀는데, 그것은 매우 비쌌다. (계속적 용법 which 사용)",
+          "sentence": "",
+          "answer": "He bought a new smartphone, which was very expensive.",
+          "fix": "",
+          "options": [],
+          "words": ["He", "bought", "a", "new", "smartphone,", "which", "was", "very", "expensive."],
+          "from_passage": false
+        },
+        {
+          "kind": "영작",
+          "question": "그러나 가장 강력한 끌개는 우리의 신념 체계이다.",
+          "sentence": "",
+          "answer": "But the most powerful attractor is our belief system.",
+          "fix": "",
+          "options": [],
+          "words": ["But", "the", "most", "powerful", "attractor", "is", "our", "belief", "system."],
+          "from_passage": true
+        }
+      ]
+    },
+    "restatement_chains": [
+      {
+        "label": "신념이 끌어당김을 좌우함",
+        "expressions": ["the most powerful attractor is our belief system", "if you don't truly believe you are enough"],
+        "variation": "생각·시각화보다 스스로에 대한 진짜 믿음이 핵심이다."
+      }
+    ],
+    "flow_blocks": [
+      {"stage": "도입", "sentence_range": "1", "summary": "[[끌어당김의 법칙]]: 유유상종, 생각의 방향이 결과를 부른다", "easy_example": "웃으며 인사하면 웃는 인사가 돌아오는 것과 비슷하다."},
+      {"stage": "반박", "sentence_range": "2", "summary": "흔한 [[오류]]: 생각·시각화만 하면 실현된다는 믿음", "easy_example": "여행을 상상만 한다고 비행기표가 생기지는 않는다."},
+      {"stage": "전개", "sentence_range": "3~4", "summary": "생각·말도 자석 같지만 가장 강력한 것은 [[신념 체계]]", "easy_example": "구호를 외쳐도 마음속으로 안 믿으면 힘이 안 실린다."},
+      {"stage": "사례", "sentence_range": "5", "summary": "포스터·확언을 해도 스스로를 믿지 않으면 [[더 어려움]]", "easy_example": "합격을 붙여둬도 '난 부족해'라 여기면 손이 안 나간다."},
+      {"stage": "결론", "sentence_range": "6", "summary": "[[제한적 신념]]을 원하는 것과 일치하는 신념으로 바꿔라", "easy_example": "'난 안 돼'를 '난 배우는 중'으로 갈아끼우기."}
+    ]
+  },
+  "sentences": [
+    {
+      "id": 1,
+      "english": "Perhaps you have heard of the Law of Attraction, which states that 'like attracts like' and that by focusing on positive or negative thoughts, one can bring about positive or negative results.",
+      "grammar": [
+        {"tag": "현재완료 (경험)", "note": "have + p.p.로 '들어본 적 있다'는 경험을 나타냄", "spans": ["have heard"]},
+        {"tag": "관계대명사 계속적 용법", "note": "콤마 뒤 which가 the Law of Attraction를 보충 설명(that 불가)", "spans": ["which"]},
+        {"tag": "명사절 접속사 that", "note": "states의 목적어절 두 개를 and로 병렬 연결", "spans": ["that", "that"]},
+        {"tag": "전치사 + 동명사", "note": "by 뒤에는 동명사 focusing", "spans": ["focusing"]}
+      ],
+      "vocab": [
+        {"word": "the Law of Attraction", "meaning": "끌어당김의 법칙"},
+        {"word": "state", "meaning": "진술하다, 말하다"},
+        {"word": "focus on", "meaning": "~에 집중하다"},
+        {"word": "bring about", "meaning": "~을 초래하다, 야기하다"}
+      ],
+      "chunks": [
+        {"en": "Perhaps you have heard of the Law of Attraction,", "ko": "아마 당신은 [[끌어당김의 법칙]]에 대해 들어봤을 것이다,"},
+        {"en": "[[which states that 'like attracts like']]", "ko": "[[그것은 '유유상종'이라고 말한다]]"},
+        {"en": "and that by focusing on positive or negative thoughts,", "ko": "그리고 긍정적 또는 부정적 [[생각]]에 집중함으로써,"},
+        {"en": "one can bring about positive or negative results.", "ko": "사람은 긍정적 또는 부정적 [[결과]]를 초래할 수 있다."}
+      ],
+      "misreads": [
+        {"statement": "필자는 긍정적·부정적 생각 모두 그에 상응하는 결과를 낳을 수 있다고 본다.", "verdict": "O", "trap_type": "인과조건"},
+        {"statement": "이 글은 끌어당김의 법칙이 언제 처음 제안되었는지 그 역사적 기원을 설명한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "Perhaps you have heard of the Law of Attraction", "why": "법칙의 기원·역사는 언급되지 않고 그 내용만 소개함."}
+      ],
+      "mistips": ["콤마 뒤 which의 선행사는 the Law of Attraction 전체이며, '그런데 그것은~'으로 뒤에서 이어 해석한다."]
+    },
+    {
+      "id": 2,
+      "english": "The common flaw in our understanding of this law is that we believe all we have to do is think about or visualize something to manifest it.",
+      "grammar": [
+        {"tag": "명사절 접속사 that (보어절)", "note": "is의 보어절을 이끎", "spans": ["that"]},
+        {"tag": "목적격 관계대명사 생략", "note": "all (that) we have to do에서 목적격 관계대명사 생략", "spans": []},
+        {"tag": "보어 원형부정사", "note": "all we have to do is think처럼 do가 있으면 be동사 뒤 to 없이 원형", "spans": ["think"]},
+        {"tag": "to부정사 (목적)", "note": "'~을 실현하기 위해'라는 목적", "spans": ["to manifest"]}
+      ],
+      "vocab": [
+        {"word": "flaw", "meaning": "결함, 흠"},
+        {"word": "visualize", "meaning": "시각화하다, 마음속에 그리다"},
+        {"word": "manifest", "meaning": "실현하다, 구현하다"}
+      ],
+      "chunks": [
+        {"en": "The common flaw in our understanding of this law", "ko": "이 법칙에 대한 우리의 이해에서 [[흔한 결함]]은"},
+        {"en": "is that we believe all we have to do", "ko": "우리가 해야 할 전부가 ~라고 [[믿는]] 것이다"},
+        {"en": "is think about or visualize something to manifest it.", "ko": "무언가를 [[생각]]하거나 시각화해 그것을 실현하는 것이라고."}
+      ],
+      "misreads": [
+        {"statement": "필자는 무언가를 생각하거나 시각화하기만 하면 그것을 실현할 수 있다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "The common flaw in our understanding of this law", "why": "그 믿음은 필자가 지적하는 '흔한 오류'이므로 필자의 견해가 아님."}
+      ],
+      "mistips": ["all we have to do is think: is 뒤에 원형부정사(to 생략) — '우리가 해야 할 전부는 ~하는 것'."]
+    },
+    {
+      "id": 3,
+      "english": "It is true that we attract at the level of our own vibration and that our thoughts and words are extremely magnetic.",
+      "grammar": [
+        {"tag": "가주어 It - 진주어 that절", "note": "It은 가주어, that절이 진주어", "spans": ["It is", "that"]},
+        {"tag": "명사절 접속사 that 병렬", "note": "진주어 that절 두 개를 and로 병렬", "spans": ["and", "that"]},
+        {"tag": "주어-동사 수일치", "note": "our thoughts and words(복수)-are", "spans": ["are"]}
+      ],
+      "vocab": [
+        {"word": "attract", "meaning": "끌어당기다"},
+        {"word": "vibration", "meaning": "진동"},
+        {"word": "magnetic", "meaning": "자석 같은, 끌어당기는"},
+        {"word": "extremely", "meaning": "극도로, 매우"}
+      ],
+      "chunks": [
+        {"en": "It is true that we attract", "ko": "우리가 [[끌어당긴다]]는 것은 사실이다"},
+        {"en": "at the level of our own vibration", "ko": "우리 자신의 [[진동]] 수준에서"},
+        {"en": "and that our thoughts and words are extremely magnetic.", "ko": "그리고 우리의 생각과 말이 극도로 [[자석 같다]]는 것도."}
+      ],
+      "misreads": [
+        {"statement": "우리의 생각과 말은 매우 자석 같은(끌어당기는) 성질을 지닌다.", "verdict": "O", "trap_type": "주체대상"}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 4,
+      "english": "But the most powerful attractor is our belief system.",
+      "grammar": [
+        {"tag": "최상급 the most + 형용사", "note": "'가장 강력한'을 나타내는 최상급", "spans": ["the most powerful"]}
+      ],
+      "vocab": [
+        {"word": "powerful", "meaning": "강력한"},
+        {"word": "attractor", "meaning": "끌개, 끌어당기는 것"},
+        {"word": "belief system", "meaning": "신념 체계"}
+      ],
+      "chunks": [
+        {"en": "But the most powerful attractor", "ko": "그러나 [[가장 강력한 끌개]]는"},
+        {"en": "is our belief system.", "ko": "우리의 [[신념 체계]]이다."}
+      ],
+      "misreads": [
+        {"statement": "가장 강력한 끌개는 우리의 생각과 말이다.", "verdict": "X", "trap_type": "주체대상", "anchor": "the most powerful attractor is our belief system", "why": "가장 강력한 끌개는 신념 체계이지 생각·말이 아님.", "killer": true}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 5,
+      "english": "You can create beautiful poster boards full of images of what you want and affirm every day that you are available for an incredibly successful, passionate career or a loving relationship; but if you don't truly believe you are enough, worthy, lovable, and deserving, then attracting a great career or relationship into your life may be more challenging.",
+      "grammar": [
+        {"tag": "관계대명사 what", "note": "선행사를 포함해 '~하는 것'; images of what you want", "spans": ["what"]},
+        {"tag": "명사절 접속사 that", "note": "affirm의 목적어절을 이끎", "spans": ["that"]},
+        {"tag": "조건 부사절 접속사 if", "note": "'만약 ~라면'의 조건", "spans": ["but if"]},
+        {"tag": "동명사 주어", "note": "attracting ~이 주어로 단수 취급", "spans": ["attracting"]},
+        {"tag": "비교급", "note": "'더 어려운'을 나타내는 비교급", "spans": ["more challenging"]}
+      ],
+      "vocab": [
+        {"word": "affirm", "meaning": "확언하다, 단언하다"},
+        {"word": "available", "meaning": "준비된, 받아들일 여지가 있는"},
+        {"word": "passionate", "meaning": "열정적인"},
+        {"word": "worthy", "meaning": "가치 있는, ~할 만한"},
+        {"word": "deserving", "meaning": "받을 자격이 있는"}
+      ],
+      "chunks": [
+        {"en": "You can create beautiful poster boards full of images of what you want and affirm every day", "ko": "당신은 원하는 것의 이미지로 가득한 아름다운 [[포스터 보드]]를 만들고 매일 확언할 수 있다"},
+        {"en": "that you are available for an incredibly successful, passionate career or a loving relationship;", "ko": "당신이 놀랍도록 성공적이고 열정적인 경력이나 사랑스러운 관계를 맞을 [[준비가 되어 있다]]고;"},
+        {"en": "but if you don't truly believe you are enough, worthy, lovable, and deserving,", "ko": "그러나 만약 당신이 스스로 충분하고 가치 있고 사랑받을 만하고 자격 있다고 [[진정 믿지]] 않는다면,"},
+        {"en": "then attracting a great career or relationship into your life", "ko": "그러면 당신의 삶에 훌륭한 경력이나 관계를 [[끌어당기는 것]]이"},
+        {"en": "may be more challenging.", "ko": "[[더 어려울]] 수도 있다."}
+      ],
+      "misreads": [
+        {"statement": "이미지로 가득한 포스터 보드를 만들고 매일 확언하면 원하는 경력이나 관계를 반드시 끌어당길 수 있다.", "verdict": "X", "trap_type": "인과조건", "anchor": "if you don't truly believe you are enough, worthy, lovable, and deserving", "why": "스스로를 진정 믿지 않으면 끌어당기기가 오히려 더 어려워짐."}
+      ],
+      "mistips": ["동명사구 attracting ~ into your life가 주어이므로 동사는 단수 취급(may be)."]
+    },
+    {
+      "id": 6,
+      "english": "Consider what limiting beliefs you have that contradict your desires and upgrade them to beliefs that are in line with what you want to attract.",
+      "grammar": [
+        {"tag": "명령문 (등위)", "note": "Consider ~ and upgrade ~ 두 명령문을 and로 연결", "spans": ["Consider", "upgrade"]},
+        {"tag": "관계형용사 what", "note": "what+명사로 '어떤 ~인지'의 명사절", "spans": ["what"]},
+        {"tag": "주격 관계대명사 that", "note": "선행사 limiting beliefs를 수식(복수→contradict)", "spans": ["that"]},
+        {"tag": "to부정사", "note": "want의 목적어; '끌어당기고 싶은'", "spans": ["to attract"]}
+      ],
+      "vocab": [
+        {"word": "limiting belief", "meaning": "제한하는 신념"},
+        {"word": "contradict", "meaning": "모순되다, 배치되다"},
+        {"word": "desire", "meaning": "욕망, 바람"},
+        {"word": "in line with", "meaning": "~와 일치하는, 부합하는"}
+      ],
+      "chunks": [
+        {"en": "Consider what limiting beliefs you have", "ko": "당신이 지닌 [[제한적 신념]]이 무엇인지 살펴보라"},
+        {"en": "that contradict your desires", "ko": "당신의 욕망과 [[모순되는]]"},
+        {"en": "and upgrade them to beliefs", "ko": "그리고 그것들을 신념으로 [[바꿔라]]"},
+        {"en": "that are in line with what you want to attract.", "ko": "당신이 끌어당기고 싶은 것과 [[일치하는]]."}
+      ],
+      "misreads": [
+        {"statement": "밑줄 친 them이 가리키는 것은 your desires이다.", "verdict": "X", "trap_type": "지칭", "anchor": "upgrade them to beliefs", "why": "them은 앞의 limiting beliefs를 가리킴."},
+        {"statement": "that contradict your desires가 수식하는 대상은 your desires이다.", "verdict": "X", "trap_type": "구조수식", "anchor": "what limiting beliefs you have that contradict your desires", "why": "that절은 limiting beliefs를 수식함(복수 동사 contradict가 근거)."}
+      ],
+      "mistips": []
+    }
+  ]
+}

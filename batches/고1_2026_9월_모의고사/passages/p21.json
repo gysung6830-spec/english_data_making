@@ -1,0 +1,844 @@
+{
+ "item_no": "21",
+ "theme": "움직이도록 설계된 인간, 움직임이 곧 삶",
+ "overview": {
+  "theme_ko": "움직이도록 설계된 인간과 움직임의 가치",
+  "topic": "🔎 움직이도록 만들어졌으나 점점 움직이지 않는 현대인",
+  "stance": "부정적·비판적",
+  "stance_reason": "we are getting further and further away from our design",
+  "structure": "주장→근거·예시",
+  "structure_reason": "인간은 움직이도록 만들어졌다는 주장을 좌식 생활과 아이들 사례로 뒷받침",
+  "key_grammar": {
+   "point": "전치사+관계대명사(for which)",
+   "source_sentence": "We are wonderfully made, yet we don't allow ourselves to participate in the wonder for which we were created.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "'전치사+관계대명사'는 관계사절 안에 있던 전치사를 관계대명사 앞으로 당겨 쓴 형태예요."
+    },
+    {
+     "chip": "핵심",
+     "text": "the wonder for which we were created = we were created for the wonder에서 for가 which 앞으로 이동한 것이에요."
+    },
+    {
+     "chip": "확인법",
+     "text": "'전치사+which' 뒤에는 '완전한 절'이 오고, 그 관계사절은 앞의 명사(the wonder)를 꾸며요."
+    },
+    {
+     "chip": "비교",
+     "text": "for which는 that으로 바꿔 쓸 수 없고, which만 남기면 문장 끝에 전치사 for가 남아야 해요."
+    }
+   ],
+   "example_analysis": "the wonder를 수식하는 for which절; we were created for the wonder에서 전치사 for가 관계대명사 which 앞으로 이동했다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "We are wonderfully [[1|made]], yet we [[2|don't]] allow ourselves [[3|to participate]] in the wonder [[4|for that]] we [[5|were created]].",
+     "options": [
+      "① made",
+      "② don't",
+      "③ to participate",
+      "④ for that",
+      "⑤ were created"
+     ],
+     "answer": "④",
+     "fix": "전치사 뒤에는 관계대명사 that을 쓸 수 없으므로 for that을 for which로 고쳐야 한다."
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "Instead of [[moving/move]] anywhere and everywhere, most of us spend our time [[moving/to move]] nowhere.",
+     "answer": "moving / moving",
+     "options": [],
+     "words": []
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "options": [
+      "We occupy the same square footage of a chair for hours and hours every day.",
+      "They are not even learning how to run, how to skip, or how to climb.",
+      "Many kids today are being holding captive by 'smart' devices like phones and tablets.",
+      "The point is we are getting further and further away from our design.",
+      "Movement is life to us."
+     ],
+     "answer": "Many kids today are being holding captive by 'smart' devices like phones and tablets.",
+     "fix": "수동태이므로 are being holding이 아니라 are being held(be being p.p.)가 되어야 한다."
+    },
+    {
+     "kind": "영작",
+     "question": "이곳이 바로 내가 태어난 도시이다. (전치사+관계대명사 in which를 사용하여)",
+     "answer": "This is the city in which I was born.",
+     "words": [
+      "This",
+      "is",
+      "the city",
+      "in which",
+      "I",
+      "was born"
+     ],
+     "options": [],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "우리는 놀랍게 만들어졌지만, 우리가 창조된 목적인 그 경이로움에 참여하도록 스스로를 허락하지 않는다.",
+     "answer": "We are wonderfully made, yet we don't allow ourselves to participate in the wonder for which we were created.",
+     "words": [
+      "We are wonderfully made,",
+      "yet",
+      "we don't allow ourselves",
+      "to participate in",
+      "the wonder",
+      "for which",
+      "we were created."
+     ],
+     "options": [],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "정적인 삶의 모습",
+    "expressions": [
+     "moving nowhere",
+     "occupy the same square footage of a chair"
+    ],
+    "variation": "어디로도 움직이지 않고 하루 종일 같은 의자에 붙어 있는 좌식 생활"
+   },
+   {
+    "label": "움직임=삶",
+    "expressions": [
+     "Movement is life to us",
+     "meant to live extraordinary lives"
+    ],
+    "variation": "움직임을 통해 비범한 삶을 살도록 되어 있음"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입(주장)",
+    "sentence_range": "1~3",
+    "summary": "인간은 놀랍게 [[made]]졌으나 창조된 경이에 참여하지 못한 채 [[moving nowhere]] 상태로 의자에 붙어 있음",
+    "easy_example": "날개 달린 새가 새장에 갇혀 날지 못하는 것과 같다"
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "4~5",
+    "summary": "아이들은 [['smart' devices]]에 붙잡혀 밖에서 놀지도, 사회적 신호를 배우지도 못함",
+    "easy_example": "온종일 태블릿만 보는 아이는 친구와 뛰노는 법을 놓친다"
+   },
+   {
+    "stage": "전개(결과)",
+    "sentence_range": "6~8",
+    "summary": "움직임 레퍼토리를 못 쌓아 달리기·오르기도 못 배우고 [[anxiety, depression]]와 함께 사는 법을 익힘",
+    "easy_example": "기본기를 안 쌓은 운동선수가 정작 필요한 동작을 못 하는 것과 같다"
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "9~11",
+    "summary": "우리는 [[our design]]에서 점점 멀어지고 있으며, 움직임이 곧 삶이다",
+    "easy_example": "설계도와 다르게 지은 집처럼 우리는 본래 모습에서 벗어나고 있다"
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "We are wonderfully made, yet we don't allow ourselves to participate in the wonder for which we were created.",
+   "grammar": [
+    {
+     "tag": "수동태",
+     "note": "are (wonderfully) made, '만들어지다'",
+     "spans": [
+      "made"
+     ]
+    },
+    {
+     "tag": "5형식(allow+목적어+to부정사)",
+     "note": "allow ourselves to participate, '~가 …하도록 허락하다'",
+     "spans": [
+      "allow",
+      "to participate"
+     ]
+    },
+    {
+     "tag": "재귀대명사",
+     "note": "주어 we와 동일 대상이라 ourselves 사용",
+     "spans": [
+      "ourselves"
+     ]
+    },
+    {
+     "tag": "전치사+관계대명사(for which)",
+     "note": "the wonder를 수식; we were created for the wonder",
+     "spans": [
+      "for which"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "were created, '창조되었다'",
+     "spans": [
+      "created"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "wonderfully",
+     "meaning": "놀랍게, 훌륭하게"
+    },
+    {
+     "word": "allow oneself to",
+     "meaning": "스스로 ~하도록 허락하다"
+    },
+    {
+     "word": "participate in",
+     "meaning": "~에 참여하다"
+    },
+    {
+     "word": "wonder",
+     "meaning": "경이로움, 경이"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "We are wonderfully [[made]], yet",
+     "ko": "우리는 놀랍게 [[만들어졌지만]],"
+    },
+    {
+     "en": "we don't allow ourselves to [[participate]] in the wonder",
+     "ko": "우리는 그 경이로움에 [[참여하도록]] 스스로를 허락하지 않는다"
+    },
+    {
+     "en": "[[for which we were created.]]",
+     "ko": "[[우리가 창조된 목적인]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "우리는 놀랍게 만들어졌지만, 창조된 목적인 그 경이로움에 스스로 참여하지 않는다.",
+     "verdict": "O"
+    }
+   ],
+   "mistips": [
+    "for which we were created는 the wonder를 꾸미는 관계사절로, 'we were created for the wonder'가 원래 형태이다."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "Instead of moving anywhere and everywhere, most of us spend our time moving nowhere.",
+   "grammar": [
+    {
+     "tag": "전치사+동명사",
+     "note": "Instead of moving, 전치사 of 뒤 동명사",
+     "spans": [
+      "moving"
+     ]
+    },
+    {
+     "tag": "spend+시간+동명사",
+     "note": "spend our time moving, '~하며 시간을 보내다'",
+     "spans": [
+      "spend",
+      "moving"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "instead of",
+     "meaning": "~하는 대신에"
+    },
+    {
+     "word": "anywhere and everywhere",
+     "meaning": "어디로든 모든 곳으로"
+    },
+    {
+     "word": "nowhere",
+     "meaning": "아무 데도 (아니다)"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Instead of [[moving]] anywhere and everywhere,",
+     "ko": "어디로든 모든 곳으로 [[움직이는]] 대신에,"
+    },
+    {
+     "en": "most of us spend our time [[moving nowhere.]]",
+     "ko": "대부분의 우리는 [[아무 데도 안 움직이며]] 시간을 보낸다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "대부분의 사람들은 어디로든 부지런히 움직이며 시간을 보낸다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "most of us spend our time moving nowhere",
+     "why": "'Instead of ~ nowhere' 구조로, 대부분은 어디로도 움직이지 않으며(nowhere) 시간을 보낸다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "We occupy the same square footage of a chair for hours and hours every day.",
+   "grammar": [
+    {
+     "tag": "동사 occupy",
+     "note": "(공간을) 차지하다",
+     "spans": [
+      "occupy"
+     ]
+    },
+    {
+     "tag": "for+기간",
+     "note": "for hours and hours, '몇 시간이고 계속'",
+     "spans": [
+      "for hours and hours"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "occupy",
+     "meaning": "차지하다"
+    },
+    {
+     "word": "square footage",
+     "meaning": "면적(제곱피트)"
+    },
+    {
+     "word": "for hours and hours",
+     "meaning": "몇 시간이고 계속"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "We [[occupy]] the same square footage of a chair",
+     "ko": "우리는 의자의 같은 [[면적]]을 차지한다"
+    },
+    {
+     "en": "for hours and hours [[every day.]]",
+     "ko": "[[매일]] 몇 시간이고 계속"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "우리는 매일 여러 시간 동안 서서 움직이며 의자를 거의 쓰지 않는다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "occupy the same square footage of a chair for hours and hours",
+     "why": "우리는 서 있는 것이 아니라 매일 여러 시간 같은 의자 자리를 차지하고 앉아 있다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "Many kids today are being held captive by 'smart' devices like phones and tablets.",
+   "grammar": [
+    {
+     "tag": "진행형 수동태(be being p.p.)",
+     "note": "are being held, '사로잡혀 있는 중이다'",
+     "spans": [
+      "are being held"
+     ]
+    },
+    {
+     "tag": "전치사 like",
+     "note": "like phones and tablets, '~와 같은'",
+     "spans": [
+      "like"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "hold captive",
+     "meaning": "사로잡다, 포로로 붙잡다"
+    },
+    {
+     "word": "device",
+     "meaning": "기기, 장치"
+    },
+    {
+     "word": "captive",
+     "meaning": "사로잡힌 (상태의)"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Many kids today [[are being held]] captive",
+     "ko": "오늘날 많은 아이들이 [[사로잡혀 있다]]"
+    },
+    {
+     "en": "by 'smart' [[devices]] like phones and tablets.",
+     "ko": "폰과 태블릿 같은 '스마트' [[기기들]]에"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "오늘날 많은 아이들이 폰·태블릿 같은 '스마트' 기기에 사로잡혀 있다.",
+     "verdict": "O"
+    },
+    {
+     "statement": "아이들은 스마트 기기 때문에 시력이 점점 나빠지고 있다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "being held captive by 'smart' devices",
+     "why": "본문은 시력 문제를 언급하지 않으며, 기기에 사로잡혀 밖에서 놀지 못한다고만 말한다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "They are not going outside to play, they are not learning how to socialize and read physical cues from others.",
+   "grammar": [
+    {
+     "tag": "현재진행형",
+     "note": "are (not) going, 진행 중인 상황",
+     "spans": [
+      "going"
+     ]
+    },
+    {
+     "tag": "to부정사(부사적·목적)",
+     "note": "to play, '놀기 위해'",
+     "spans": [
+      "to play"
+     ]
+    },
+    {
+     "tag": "의문사+to부정사",
+     "note": "how to socialize, '어울리는 법'",
+     "spans": [
+      "how to socialize"
+     ]
+    },
+    {
+     "tag": "병렬구조(and)",
+     "note": "how to socialize and (how to) read, 대등 연결",
+     "spans": [
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "socialize",
+     "meaning": "사회적으로 어울리다"
+    },
+    {
+     "word": "physical cue",
+     "meaning": "신체적 신호"
+    },
+    {
+     "word": "cue",
+     "meaning": "신호, 단서"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "They are not [[going]] outside to play,",
+     "ko": "그들은 밖에 나가 놀지 [[않고]],"
+    },
+    {
+     "en": "they are not learning [[how to socialize]]",
+     "ko": "그들은 [[어울리는 법]]을 배우지 않으며"
+    },
+    {
+     "en": "and [[read physical cues]] from others.",
+     "ko": "다른 사람의 [[신체적 신호를 읽는 법]]도 배우지 않는다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "여기서 They는 스마트 기기를 가리키며, 기기들이 밖에 나가지 않는다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "integrative": true,
+     "anchor": "Many kids today are being held captive",
+     "why": "They는 앞 문장의 kids(아이들)를 가리키며, 밖에 나가 놀지 못하는 주체는 아이들이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "As a result they are not learning or building their movement repertoire, the very thing that will help them learn, communicate, create, and become emotionally mature.",
+   "grammar": [
+    {
+     "tag": "연결어(As a result)",
+     "note": "'그 결과'로 앞뒤 인과 연결",
+     "spans": [
+      "As a result"
+     ]
+    },
+    {
+     "tag": "현재진행형(병렬)",
+     "note": "are not learning or building, 두 동사 대등",
+     "spans": [
+      "learning or building"
+     ]
+    },
+    {
+     "tag": "관계대명사 that",
+     "note": "the very thing을 수식하는 주격 관계대명사",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "5형식(help+목적어+원형)",
+     "note": "help them learn ..., '~가 …하도록 돕다'",
+     "spans": [
+      "help",
+      "learn"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "as a result",
+     "meaning": "그 결과"
+    },
+    {
+     "word": "repertoire",
+     "meaning": "레퍼토리, (가진) 목록"
+    },
+    {
+     "word": "emotionally mature",
+     "meaning": "감정적으로 성숙한"
+    },
+    {
+     "word": "communicate",
+     "meaning": "소통하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "As a result they are not [[learning or building]] their movement repertoire,",
+     "ko": "그 결과 그들은 자신의 움직임 레퍼토리를 [[배우거나 쌓지]] 못한다,"
+    },
+    {
+     "en": "the very thing [[that will help them]]",
+     "ko": "바로 그것은 그들이 [[하도록 돕는]] 것이다"
+    },
+    {
+     "en": "learn, communicate, create, and become emotionally [[mature.]]",
+     "ko": "배우고, 소통하고, 창조하고, 감정적으로 [[성숙해지도록]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "움직임 레퍼토리는 아이들이 감정적으로 미성숙해지도록 돕는 바로 그것이다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "killer": true,
+     "anchor": "become emotionally mature",
+     "why": "그것은 아이들이 감정적으로 '성숙해지도록' 돕는 것이지 미성숙해지도록 돕는 것이 아니다."
+    }
+   ],
+   "mistips": [
+    "the very thing 이하는 movement repertoire를 다시 설명하는 동격 어구이다."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "They are not even learning how to run, how to skip, or how to climb.",
+   "grammar": [
+    {
+     "tag": "현재진행형",
+     "note": "are not even learning, 진행 중인 상황",
+     "spans": [
+      "learning"
+     ]
+    },
+    {
+     "tag": "의문사+to부정사",
+     "note": "how to run, '달리는 법'",
+     "spans": [
+      "how to run"
+     ]
+    },
+    {
+     "tag": "병렬구조(or)",
+     "note": "how to run, how to skip, or how to climb 대등 연결",
+     "spans": [
+      "or"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "skip",
+     "meaning": "깡충깡충 뛰다, 건너뛰다"
+    },
+    {
+     "word": "climb",
+     "meaning": "오르다, 기어오르다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "They are not even [[learning]]",
+     "ko": "그들은 심지어 [[배우지]] 못한다"
+    },
+    {
+     "en": "[[how to run, how to skip, or how to climb.]]",
+     "ko": "[[달리는 법, 깡충 뛰는 법, 오르는 법을]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "그들은 달리기, 깡충 뛰기, 오르기를 하는 법조차 배우지 못하고 있다.",
+     "verdict": "O"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "Instead, they are learning how to live with anxiety, depression, and even diseases they were never meant to have.",
+   "grammar": [
+    {
+     "tag": "현재진행형",
+     "note": "are learning, 진행 중인 상황",
+     "spans": [
+      "learning"
+     ]
+    },
+    {
+     "tag": "의문사+to부정사",
+     "note": "how to live, '사는 법'",
+     "spans": [
+      "how to live"
+     ]
+    },
+    {
+     "tag": "목적격 관계대명사 생략",
+     "note": "diseases (which) they were never meant to have — 목적격 관계대명사 생략",
+     "spans": []
+    },
+    {
+     "tag": "be meant to",
+     "note": "'~하게 되어 있다'; never와 함께 '결코 ~할 리 없던'",
+     "spans": [
+      "meant to"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "anxiety",
+     "meaning": "불안"
+    },
+    {
+     "word": "depression",
+     "meaning": "우울(증)"
+    },
+    {
+     "word": "be meant to",
+     "meaning": "~하기로 되어 있다"
+    },
+    {
+     "word": "disease",
+     "meaning": "질병"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Instead, they are [[learning]] how to live",
+     "ko": "대신, 그들은 함께 사는 [[법을 배우고]] 있다"
+    },
+    {
+     "en": "with [[anxiety, depression,]] and even diseases",
+     "ko": "[[불안, 우울,]] 그리고 심지어 질병과"
+    },
+    {
+     "en": "they were never [[meant to have.]]",
+     "ko": "그들이 결코 [[겪지 않아도 될]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 아이들이 불안·우울과 함께 사는 법을 배우는 것을 바람직하게 여긴다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "diseases they were never meant to have",
+     "why": "필자는 이를 부정적으로 보며, 그것은 원래 겪지 않아도 될(never meant to have) 질병들이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 9,
+   "english": "The point is we are getting further and further away from our design.",
+   "grammar": [
+    {
+     "tag": "명사절 접속사 that 생략(보어절)",
+     "note": "The point is (that) we are ... — 보어절 that 생략",
+     "spans": []
+    },
+    {
+     "tag": "현재진행형",
+     "note": "are getting, '점점 ~해지고 있다'",
+     "spans": [
+      "getting"
+     ]
+    },
+    {
+     "tag": "비교급 반복(점점 더)",
+     "note": "further and further, '점점 더 멀리'",
+     "spans": [
+      "further and further"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "the point is",
+     "meaning": "요점은 ~이다"
+    },
+    {
+     "word": "further and further",
+     "meaning": "점점 더 멀리"
+    },
+    {
+     "word": "design",
+     "meaning": "설계, 본디 모습"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The point is we are [[getting]]",
+     "ko": "요점은 우리가 [[되어 가고]] 있다는 것이다"
+    },
+    {
+     "en": "[[further and further away]] from our design.",
+     "ko": "우리의 설계로부터 [[점점 더 멀어지고]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "요점은 우리가 우리 본래의 설계로부터 점점 더 멀어지고 있다는 것이다.",
+     "verdict": "O"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 10,
+   "english": "We were made to move―and through movement, we are meant to live extraordinary lives.",
+   "grammar": [
+    {
+     "tag": "be made to+동사원형",
+     "note": "were made to move, '움직이도록 만들어지다'",
+     "spans": [
+      "made to move"
+     ]
+    },
+    {
+     "tag": "전치사 through",
+     "note": "through movement, '움직임을 통해'",
+     "spans": [
+      "through"
+     ]
+    },
+    {
+     "tag": "be meant to",
+     "note": "are meant to live, '살도록 되어 있다'",
+     "spans": [
+      "meant to live"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "be made to",
+     "meaning": "~하도록 만들어지다"
+    },
+    {
+     "word": "through movement",
+     "meaning": "움직임을 통해"
+    },
+    {
+     "word": "extraordinary",
+     "meaning": "비범한, 놀라운"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "We were [[made to move]]―and",
+     "ko": "우리는 [[움직이도록 만들어졌다]]―그리고"
+    },
+    {
+     "en": "through [[movement,]] we are meant to live",
+     "ko": "[[움직임을 통해]], 우리는 살도록 되어 있다"
+    },
+    {
+     "en": "[[extraordinary lives.]]",
+     "ko": "[[비범한 삶을]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "우리는 움직이도록 만들어졌으므로, 가만히 있어도 비범한 삶을 살 수 있다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "through movement, we are meant to live extraordinary lives",
+     "why": "비범한 삶은 가만히 있음이 아니라 바로 '움직임을 통해(through movement)' 사는 것이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 11,
+   "english": "Movement is life to us.",
+   "grammar": [
+    {
+     "tag": "2형식(be동사+보어)",
+     "note": "Movement is life, 'A는 B이다'",
+     "spans": [
+      "is"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "movement",
+     "meaning": "움직임, 운동"
+    },
+    {
+     "word": "to us",
+     "meaning": "우리에게(는)"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Movement is [[life]] to us.",
+     "ko": "움직임은 우리에게 [[삶]]이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "움직임은 우리에게 곧 삶이다.",
+     "verdict": "O"
+    },
+    {
+     "statement": "Movement is unrelated to our lives.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "Movement is life to us",
+     "why": "본문은 움직임이 우리에게 곧 삶이라고 단언하므로 삶과 무관하다는 진술은 틀리다."
+    }
+   ],
+   "mistips": []
+  }
+ ]
+}

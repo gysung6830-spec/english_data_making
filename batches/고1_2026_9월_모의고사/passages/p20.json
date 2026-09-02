@@ -1,0 +1,788 @@
+{
+ "item_no": "20",
+ "theme": "학습게임은 오락이 아닌 '학습 목표 달성'이 목적",
+ "overview": {
+  "theme_ko": "오락이 아닌 학습이 목적인 학습 게임",
+  "topic": "🔎 학습 게임 설계에서 오락보다 우선해야 할 학습 목표",
+  "stance": "부정적·비판적",
+  "stance_reason": "that often makes learning harder rather than easier",
+  "structure": "통념→반박(반전)",
+  "structure_reason": "오락 게임을 만들려는 개발자들의 통념을 반박하고 학습 목표를 강조",
+  "key_grammar": {
+   "point": "관계대명사 what",
+   "source_sentence": "Research shows that what makes games instructional is the level of interactivity and engagement the learners have with the content.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "what은 '~하는 것'이라는 뜻으로, 선행사(the thing)를 이미 품고 있는 관계대명사예요."
+    },
+    {
+     "chip": "핵심",
+     "text": "what 뒤에는 주어나 목적어가 빠진 불완전한 절이 오고, 그 절 전체가 명사 역할(주어·목적어·보어)을 해요."
+    },
+    {
+     "chip": "비교",
+     "text": "that·which는 앞에 선행사가 필요하지만, what은 선행사 없이 홀로 쓰여요."
+    },
+    {
+     "chip": "이 문장에서",
+     "text": "what makes games instructional 전체가 is의 주어가 되는 명사절이고, what은 그 절 안에서 makes의 주어예요."
+    }
+   ],
+   "example_analysis": "what makes games instructional이 명사절로 문장의 주어가 되고, 단수 취급되어 is와 연결된다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "Research [[1|shows]] that [[2|what]] makes games [[3|instructional]] [[4|are]] the level of interactivity and engagement the learners [[5|have]] with the content.",
+     "options": [
+      "① shows",
+      "② what",
+      "③ instructional",
+      "④ are",
+      "⑤ have"
+     ],
+     "answer": "④",
+     "fix": "문장의 주어인 명사절 what makes games instructional은 단수 취급하므로, ④ are를 원문대로 is로 고쳐야 한다."
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "Given those parameters, [[making/to make]] sure the learners are engaged and active [[is/are]] far more important [[than/as]] making sure they are entertained.",
+     "answer": "making / is / than",
+     "options": [],
+     "words": []
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "options": [
+      "Many new learning-game developers try to design an entertaining game.",
+      "Unfortunately, that often makes learning more hard rather than easier.",
+      "Focus on engagement rather than entertainment.",
+      "The goals of the game play should be interactivity and engagement.",
+      "Yes, the game should be engaging with a mild level of fun, but learning should be the goal."
+     ],
+     "answer": "Unfortunately, that often makes learning more hard rather than easier.",
+     "fix": "형용사 hard의 비교급은 more hard가 아니라 harder이므로 harder로 고쳐야 한다."
+    },
+    {
+     "kind": "영작",
+     "question": "게임을 교육적으로 만드는 것은 상호작용성이다. (관계대명사 what을 사용하여)",
+     "answer": "What makes a game instructional is interactivity.",
+     "words": [
+      "What",
+      "makes",
+      "a game",
+      "instructional",
+      "is",
+      "interactivity"
+     ],
+     "options": [],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "학습 게임은 우리가 '충분히 재미있는' 것이라고 부르는 것이 되어야 한다.",
+     "answer": "Learning games need to be what we call 'fun enough.'",
+     "words": [
+      "Learning games",
+      "need to be",
+      "what",
+      "we call",
+      "'fun enough.'"
+     ],
+     "options": [],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "참여 vs 오락",
+    "expressions": [
+     "engagement rather than entertainment",
+     "interactivity and engagement"
+    ],
+    "variation": "오락보다 참여·상호작용을 우선하라는 반복 강조"
+   },
+   {
+    "label": "학습 목표",
+    "expressions": [
+     "learning should be the goal",
+     "the achievement of learning outcomes"
+    ],
+    "variation": "게임의 진짜 목적은 학습 성과의 달성"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입(통념)",
+    "sentence_range": "1~3",
+    "summary": "학습 게임은 [[fun enough]]이면 되는데, 오락성만 좇으면 학습이 더 어려워짐",
+    "easy_example": "양념이 과하면 오히려 재료 본래의 맛을 해치는 것과 같다"
+   },
+   {
+    "stage": "전개(반박)",
+    "sentence_range": "4~5",
+    "summary": "목표는 상업 게임이 아니라 [[learning outcomes]] 달성; 규칙·요소·역학 과잉을 경계하라",
+    "easy_example": "공부 앱에 미니게임을 잔뜩 넣으면 정작 공부는 뒷전이 된다"
+   },
+   {
+    "stage": "주장",
+    "sentence_range": "6~8",
+    "summary": "약간의 재미는 좋되 [[learning should be the goal]], 목표는 참여와 상호작용성",
+    "easy_example": "놀이터 같은 수업이라도 결국 배우는 게 있어야 좋은 수업이다"
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "9~10",
+    "summary": "게임을 교육적으로 만드는 것은 [[interactivity and engagement]]; 참여가 오락보다 훨씬 중요",
+    "easy_example": "손을 들고 직접 풀어 보는 학생이 그냥 구경만 하는 학생보다 더 배운다"
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Learning games need to be what we call 'fun enough.'",
+   "grammar": [
+    {
+     "tag": "to부정사(보어)",
+     "note": "need 뒤 to be, '~이 될 필요가 있다'",
+     "spans": [
+      "to be"
+     ]
+    },
+    {
+     "tag": "관계대명사 what",
+     "note": "선행사를 포함한 what; call의 목적어이자 be동사의 보어절",
+     "spans": [
+      "what"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "need to",
+     "meaning": "~할 필요가 있다"
+    },
+    {
+     "word": "what we call",
+     "meaning": "이른바, 우리가 ~라고 부르는 것"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Learning games [[need]] to be",
+     "ko": "학습 게임은 ~이 될 [[필요가]] 있다"
+    },
+    {
+     "en": "[[what we call 'fun enough.']]",
+     "ko": "[[우리가 '충분히 재미있는'이라고 부르는 것]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "학습 게임은 이른바 '충분히 재미있는' 수준이면 된다.",
+     "verdict": "O"
+    }
+   ],
+   "mistips": [
+    "what we call 'fun enough'은 '우리가 ~라 부르는 것'이라는 하나의 명사 덩어리로, 통째로 be동사의 보어이다."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "Many new learning-game developers try to design an entertaining game.",
+   "grammar": [
+    {
+     "tag": "to부정사(목적어)",
+     "note": "try to+동사원형, '~하려고 애쓰다'",
+     "spans": [
+      "to design"
+     ]
+    },
+    {
+     "tag": "감정분사(entertaining)",
+     "note": "재미를 '유발하는' 능동 의미의 현재분사",
+     "spans": [
+      "entertaining"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "developer",
+     "meaning": "개발자"
+    },
+    {
+     "word": "entertaining",
+     "meaning": "재미있는, 즐겁게 하는"
+    },
+    {
+     "word": "try to",
+     "meaning": "~하려고 애쓰다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Many new learning-game [[developers]]",
+     "ko": "많은 신규 [[학습 게임 개발자들]]은"
+    },
+    {
+     "en": "try to [[design]] an entertaining game.",
+     "ko": "재미있는 게임을 [[설계하려고]] 한다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "많은 신규 개발자들은 교육 효과가 뛰어난 게임을 설계하려 한다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "try to design an entertaining game",
+     "why": "개발자들이 설계하려는 것은 교육적 게임이 아니라 '오락적(entertaining)' 게임이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "Unfortunately, that often makes learning harder rather than easier.",
+   "grammar": [
+    {
+     "tag": "5형식(make+목적어+형용사)",
+     "note": "makes learning harder, '학습을 ~하게 만들다'",
+     "spans": [
+      "makes",
+      "harder"
+     ]
+    },
+    {
+     "tag": "비교급 대조(rather than)",
+     "note": "harder rather than easier, '더 쉽게가 아니라 더 어렵게'",
+     "spans": [
+      "rather than"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "unfortunately",
+     "meaning": "불행하게도"
+    },
+    {
+     "word": "rather than",
+     "meaning": "~라기보다는, ~가 아니라"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Unfortunately, that often [[makes]] learning",
+     "ko": "불행하게도, 그것은 흔히 학습을 [[만든다]]"
+    },
+    {
+     "en": "[[harder rather than easier.]]",
+     "ko": "[[더 쉽게가 아니라 더 어렵게]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "여기서 that은 학습을 더 쉽게 만들어 주는 요소를 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "integrative": true,
+     "anchor": "try to design an entertaining game",
+     "why": "that은 앞 문장의 '오락적 게임을 설계하려는 시도'를 가리키며, 그것은 학습을 더 어렵게 만든다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "Remember, you are not creating the next great commercial game to entertain your learners; you are creating a learning game in which success will be measured by the achievement of learning outcomes.",
+   "grammar": [
+    {
+     "tag": "현재진행형",
+     "note": "are (not) creating, 진행 중인 상황 강조",
+     "spans": [
+      "creating"
+     ]
+    },
+    {
+     "tag": "to부정사(부사적·목적)",
+     "note": "to entertain, '즐겁게 하기 위해'",
+     "spans": [
+      "to entertain"
+     ]
+    },
+    {
+     "tag": "전치사+관계대명사",
+     "note": "in which=in a learning game, 뒤에 완전한 절",
+     "spans": [
+      "in which"
+     ]
+    },
+    {
+     "tag": "수동태(미래)",
+     "note": "will be measured, '측정될 것이다'",
+     "spans": [
+      "be measured"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "commercial",
+     "meaning": "상업적인, 상업용의"
+    },
+    {
+     "word": "measure",
+     "meaning": "측정하다, 평가하다"
+    },
+    {
+     "word": "achievement",
+     "meaning": "달성, 성취"
+    },
+    {
+     "word": "outcome",
+     "meaning": "성과, 결과"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Remember, you are not [[creating]] the next great commercial game",
+     "ko": "기억하라, 당신은 차세대 대단한 상업용 게임을 [[만드는]] 것이 아니라"
+    },
+    {
+     "en": "to [[entertain]] your learners;",
+     "ko": "학습자를 [[즐겁게 하려고]];"
+    },
+    {
+     "en": "you are [[creating]] a learning game",
+     "ko": "당신은 학습 게임을 [[만들고]] 있다"
+    },
+    {
+     "en": "[[in which success will be measured]] by the achievement of learning outcomes.",
+     "ko": "[[그 안에서 성공은 측정될 것이다]] 학습 성과의 달성으로"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "당신이 만드는 학습 게임에서 성공은 학습 성과의 달성으로 측정된다.",
+     "verdict": "O"
+    },
+    {
+     "statement": "학습 게임의 성공은 게임의 판매량으로 측정된다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "measured by the achievement of learning outcomes",
+     "why": "성공의 척도는 판매량이 아니라 '학습 성과의 달성'이며, 판매량은 본문에 없다."
+    }
+   ],
+   "mistips": [
+    "세미콜론(;) 앞뒤가 'A가 아니라 B이다'로 대조되는 구조임에 유의한다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Resist the temptation to create a ton of rules, pile on different game elements, and incorporate multiple dynamics to keep player interest high.",
+   "grammar": [
+    {
+     "tag": "명령문",
+     "note": "동사원형 Resist로 시작하는 명령문",
+     "spans": [
+      "Resist"
+     ]
+    },
+    {
+     "tag": "to부정사(형용사적)",
+     "note": "the temptation to create, 'the temptation'을 수식",
+     "spans": [
+      "to create"
+     ]
+    },
+    {
+     "tag": "to부정사(부사적·목적)",
+     "note": "to keep, '유지하기 위해'",
+     "spans": [
+      "to keep"
+     ]
+    },
+    {
+     "tag": "5형식(keep+목적어+형용사)",
+     "note": "keep player interest high, '흥미를 높게 유지하다'",
+     "spans": [
+      "keep",
+      "high"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "resist the temptation",
+     "meaning": "유혹에 저항하다"
+    },
+    {
+     "word": "a ton of",
+     "meaning": "다량의, 아주 많은"
+    },
+    {
+     "word": "incorporate",
+     "meaning": "포함시키다, 통합하다"
+    },
+    {
+     "word": "dynamics",
+     "meaning": "역학, 역동적 요소"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Resist the [[temptation]] to create a ton of rules,",
+     "ko": "많은 규칙을 만들려는 [[유혹]]에 저항하라,"
+    },
+    {
+     "en": "[[pile on different game elements,]]",
+     "ko": "[[다양한 게임 요소를 잔뜩 쌓고,]]"
+    },
+    {
+     "en": "and [[incorporate]] multiple dynamics",
+     "ko": "그리고 여러 역학을 [[포함시켜라]]"
+    },
+    {
+     "en": "to keep player [[interest]] high.",
+     "ko": "플레이어의 [[흥미]]를 높게 유지하도록"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 규칙과 게임 요소를 많이 추가해 플레이어의 흥미를 높이라고 권한다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "Resist the temptation to create a ton of rules",
+     "why": "필자는 규칙을 잔뜩 만들려는 유혹에 '저항하라'고 조언하며, 요소를 늘리라는 것이 아니다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "Yes, the game should be engaging with a mild level of fun, but learning should be the goal.",
+   "grammar": [
+    {
+     "tag": "조동사 should",
+     "note": "should be, '~여야 한다(당위)'",
+     "spans": [
+      "should be"
+     ]
+    },
+    {
+     "tag": "감정분사(engaging)",
+     "note": "몰입을 '유발하는' 능동 의미의 현재분사",
+     "spans": [
+      "engaging"
+     ]
+    },
+    {
+     "tag": "등위접속사 but",
+     "note": "앞뒤 절을 대조로 연결",
+     "spans": [
+      "but"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "engaging",
+     "meaning": "몰입시키는, 매력적인"
+    },
+    {
+     "word": "mild",
+     "meaning": "약간의, 순한"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Yes, the game should be [[engaging]] with a mild level of fun,",
+     "ko": "그렇다, 게임은 약간의 재미로 [[몰입감이 있어야]] 하지만,"
+    },
+    {
+     "en": "but learning should be the [[goal]].",
+     "ko": "학습이 [[목표]]가 되어야 한다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "게임은 약간의 재미로 몰입감이 있어야 한다.",
+     "verdict": "O"
+    },
+    {
+     "statement": "게임에 재미가 전혀 없어야 학습이 목표가 될 수 있다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "the game should be engaging with a mild level of fun",
+     "why": "재미를 완전히 없애라는 것이 아니라, 약간의 재미(mild level)는 두되 학습을 목표로 하라는 것이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 7,
+   "english": "Focus on engagement rather than entertainment.",
+   "grammar": [
+    {
+     "tag": "명령문(구동사 focus on)",
+     "note": "Focus on ~, '~에 집중하라'",
+     "spans": [
+      "Focus on"
+     ]
+    },
+    {
+     "tag": "대조 표현(rather than)",
+     "note": "A rather than B, 'B가 아니라 A'",
+     "spans": [
+      "rather than"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "focus on",
+     "meaning": "~에 집중하다"
+    },
+    {
+     "word": "engagement",
+     "meaning": "참여, 몰입"
+    },
+    {
+     "word": "entertainment",
+     "meaning": "오락, 즐거움"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[Focus on engagement]]",
+     "ko": "[[참여에 집중하라]]"
+    },
+    {
+     "en": "rather than [[entertainment.]]",
+     "ko": "[[오락]]보다는"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "오락에 집중하고 참여는 부차적으로 다루라는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "engagement rather than entertainment",
+     "why": "engagement rather than entertainment는 오락이 아니라 '참여'에 집중하라는 뜻이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "The goals of the game play should be interactivity and engagement.",
+   "grammar": [
+    {
+     "tag": "조동사 should",
+     "note": "should be, '~여야 한다'",
+     "spans": [
+      "should be"
+     ]
+    },
+    {
+     "tag": "등위접속사 and(병렬)",
+     "note": "interactivity and engagement, 두 명사를 대등 연결",
+     "spans": [
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "interactivity",
+     "meaning": "상호작용성"
+    },
+    {
+     "word": "engagement",
+     "meaning": "참여, 몰입"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The [[goals]] of the game play should be",
+     "ko": "게임 플레이의 [[목표]]는 ~여야 한다"
+    },
+    {
+     "en": "[[interactivity and engagement.]]",
+     "ko": "[[상호작용성과 참여]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "게임 플레이의 목표는 상호작용성과 참여여야 한다.",
+     "verdict": "O"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 9,
+   "english": "Research shows that what makes games instructional is the level of interactivity and engagement the learners have with the content.",
+   "grammar": [
+    {
+     "tag": "수일치",
+     "note": "Research는 단수 취급 → shows",
+     "spans": [
+      "shows"
+     ]
+    },
+    {
+     "tag": "명사절 접속사 that",
+     "note": "shows의 목적어절을 이끎",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "관계대명사 what",
+     "note": "선행사 포함; makes의 주어이자 절 전체가 is의 주어",
+     "spans": [
+      "what"
+     ]
+    },
+    {
+     "tag": "목적격 관계대명사 생략",
+     "note": "engagement (which) the learners have — 목적격 관계대명사가 생략됨",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "instructional",
+     "meaning": "교육적인, 교육용의"
+    },
+    {
+     "word": "interactivity",
+     "meaning": "상호작용성"
+    },
+    {
+     "word": "engagement",
+     "meaning": "참여, 몰입"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Research [[shows]] that",
+     "ko": "연구는 ~을 [[보여준다]]"
+    },
+    {
+     "en": "[[what makes games instructional]]",
+     "ko": "[[게임을 교육적으로 만드는 것]]"
+    },
+    {
+     "en": "is the level of [[interactivity and engagement]]",
+     "ko": "~은 [[상호작용성과 참여]]의 수준이라는 것을"
+    },
+    {
+     "en": "the learners [[have]] with the content.",
+     "ko": "학습자가 그 내용과 [[가지는]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "연구에 따르면 게임을 교육적으로 만드는 것은 재미의 수준이다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "killer": true,
+     "anchor": "what makes games instructional is the level of interactivity and engagement",
+     "why": "게임을 교육적으로 만드는 것은 재미가 아니라 '상호작용성과 참여'의 수준이다."
+    }
+   ],
+   "mistips": [
+    "what makes games instructional 전체가 하나의 주어(명사절)이며 단수 취급되어 is로 받는다."
+   ]
+  },
+  {
+   "id": 10,
+   "english": "Given those parameters, making sure the learners are engaged and active is far more important than making sure they are entertained.",
+   "grammar": [
+    {
+     "tag": "분사구문(Given)",
+     "note": "Given ~, '~을 고려하면'",
+     "spans": [
+      "Given"
+     ]
+    },
+    {
+     "tag": "동명사 주어",
+     "note": "making sure ...가 주어, 단수 취급 → is",
+     "spans": [
+      "making"
+     ]
+    },
+    {
+     "tag": "비교급 강조(far)",
+     "note": "far more important, 비교급을 '훨씬'으로 강조",
+     "spans": [
+      "far"
+     ]
+    },
+    {
+     "tag": "비교급(than)",
+     "note": "more important than ~, '~보다 더 중요한'",
+     "spans": [
+      "than"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "given",
+     "meaning": "~을 고려하면"
+    },
+    {
+     "word": "parameter",
+     "meaning": "매개변수, 조건"
+    },
+    {
+     "word": "far more",
+     "meaning": "훨씬 더"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[Given those parameters,]]",
+     "ko": "[[그러한 조건들을 고려하면,]]"
+    },
+    {
+     "en": "making sure the learners are [[engaged]] and active",
+     "ko": "학습자가 [[참여하고]] 능동적이도록 하는 것이"
+    },
+    {
+     "en": "is far more [[important]] than",
+     "ko": "~보다 훨씬 더 [[중요하다]]"
+    },
+    {
+     "en": "making sure they are [[entertained.]]",
+     "ko": "그들을 [[즐겁게 하도록]] 하는 것"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "학습자가 참여하고 능동적이게 하는 것이 그들을 즐겁게 하는 것보다 훨씬 중요하다.",
+     "verdict": "O"
+    },
+    {
+     "statement": "It is more important that learners are entertained than that they are engaged.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "making sure the learners are engaged and active is far more important than making sure they are entertained",
+     "why": "즐겁게 하는 것보다 학습자를 참여·능동적이게 하는 것이 훨씬 더 중요하다(진술은 반대로 뒤집힘)."
+    }
+   ],
+   "mistips": []
+  }
+ ]
+}
