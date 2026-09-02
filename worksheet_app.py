@@ -285,7 +285,6 @@ def build_route():
 
     layout = "A"       # 학습지는 포인트박스형 한 종류(직독직해 B형은 미노출)
     density = "auto"   # 한 지문을 최대한 1페이지로 자동 압축
-    kind = "포인트박스"   # 저장 파일명: (지문명)_포인트박스.pdf
     strength = "full"    # 태깅 강도는 항상 '전체'로 고정
 
     # 시작 문항 번호(수동): 있으면 지문마다 start, start+1, … 로 리본 라벨을 자동 증가.
@@ -347,19 +346,18 @@ def build_route():
                 stem = custom_base if len(files) == 1 else f"{custom_base}_{idx}"
             else:
                 stem = _safe_name(Path(f.filename).stem)
-            out = OUTPUT_DIR / f"{stem}_{kind}.pdf"
             make_student = getattr(cfg.design, "make_student", True)
-            ws_pipeline._progress(f"지문 {len(analyses)}개 분석 완료 → PDF 렌더링 중…")
-            # 합본 1개 PDF: 교사용 전체 지문 → 학생용 전체 지문(설정 make_student).
-            ws_pipeline.render_worksheet_pair(
-                analyses, out, layout=layout, footer_note=footer, density=density,
-                make_student=make_student,
+            ws_pipeline._progress(f"지문 {len(analyses)}개 분석 완료 → 별도 파일 추출 중…")
+            # 섹션별 '별도 파일 4종'으로 추출:
+            #   ①분석+정리(지문별 인접)  ②단어테스트+정답  ③학습용  ④원문·해석
+            made = ws_pipeline.render_worksheet_files(
+                analyses, OUTPUT_DIR / stem, layout=layout, footer_note=footer,
+                density=density, make_student=make_student,
                 slevel=getattr(cfg.design, "student_level", "blank"),
                 boxmode=getattr(cfg.design, "box_align", "even"),
                 bw=getattr(cfg.design, "print_mode", True))   # 웹앱 기본=인쇄용(흑백 친화)
-            ws_pipeline._progress(f"저장 완료 → {out.name}")
-            label = "✏️ 교사용+학생용(합본)" if make_student else "✏️ 교사용"
-            outfiles = [{"label": label, "out": out.name}]
+            ws_pipeline._progress(f"저장 완료 → {len(made)}개 파일")
+            outfiles = [{"label": lbl, "out": p.name} for lbl, p in made]
             # 분석 데이터(JSON) 저장 — 나중에 제목·헤더만 고쳐 재출력할 때 재분석(API) 없이 씀.
             try:
                 json_name = f"{stem}_분석데이터.json"

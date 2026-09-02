@@ -558,6 +558,105 @@ def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
     return out_path
 
 
+def render_worksheet_files(analyses, out_stem: str | Path, layout: str = "A",
+                           footer_note: str = "", density: str = "auto",
+                           make_student: bool = True, slevel: str = "blank",
+                           boxmode: str = "", bw: bool = False
+                           ) -> list[tuple[str, Path]]:
+    """섹션을 '별도 파일 4종'으로 추출한다. 반환: [(라벨, 경로), …] (순서 보존).
+
+      ① {stem}_분석정리.pdf : 활용 가이드 + 지문별 '분석→정리' 인접 배치(한 파일)
+      ② {stem}_단어테스트.pdf : 단어 테스트 + 정답
+      ③ {stem}_학습용.pdf     : 빈칸 학습용
+      ④ {stem}_원문해석.pdf   : 원문 · 전체 해석(지문별 페이지 나눔)
+
+    ①은 '18 분석→18 정리→19 분석→19 정리…'처럼 지문마다 분석 바로 뒤에 그 지문의
+    정리가 오도록, 지문 하나씩 (only_front+only_summary) 로 렌더해 이어 붙인다.
+    make_student=False 면 ③을 생략한다. 빈 섹션(해당 데이터 없음)은 파일을 만들지 않는다.
+    """
+    import tempfile
+
+    from pypdf import PdfReader, PdfWriter
+
+    out_stem = Path(out_stem)
+    out_stem.parent.mkdir(parents=True, exist_ok=True)
+    meta = next((a.source_name for a in analyses if getattr(a, "source_name", "")), "")
+    has_test = any(getattr(a, "vocab", None) for a in analyses)
+    has_source = any(getattr(a, "sentences", None) for a in analyses)
+
+    def _pages(p: Path) -> int:
+        try:
+            return len(PdfReader(str(p)).pages)
+        except Exception:
+            return 0
+
+    def _concat(parts: list[Path], dest: Path) -> Path | None:
+        parts = [p for p in parts if p and _pages(p) > 0]
+        if not parts:
+            return None
+        w = PdfWriter()
+        for p in parts:
+            w.append(str(p))
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        with open(dest, "wb") as f:
+            w.write(f)
+        _stamp_footer(dest, footer_note, meta)   # 파일마다 자체 페이지번호(1/N)
+        return dest
+
+    def _one(a, path, **kw):
+        render_worksheet([a] if not isinstance(a, list) else a, path, layout=layout,
+                         footer_note=footer_note, include_guide=False,
+                         boxmode=boxmode, bw=bw, **kw)
+        return path
+
+    results: list[tuple[str, Path]] = []
+    with tempfile.TemporaryDirectory() as d:
+        dd = Path(d)
+
+        # ── ① 분석 + 정리 : 가이드 → [지문별 분석→정리] ──
+        _progress("① 분석+정리 파일 만드는 중… (지문별 분석→정리 인접 배치)")
+        gp = dd / "guide.pdf"
+        render_worksheet(analyses, gp, layout=layout, footer_note=footer_note,
+                         include_guide=True, only_guide=True, bw=bw)
+        parts = [gp]
+        for i, a in enumerate(analyses):
+            # 한 지문의 '분석(front)+정리(summary)'만 한 번에 렌더(원문·테스트 제외).
+            parts.append(_one(a, dd / f"ab_{i}.pdf", density=density, student=False,
+                              only_front=True, only_summary=True))
+        f1 = _concat(parts, out_stem.parent / f"{out_stem.name}_분석정리.pdf")
+        if f1:
+            results.append(("📘 분석+정리 (지문별 분석→정리)", f1))
+
+        # ── ② 단어 테스트 + 정답 ──
+        if has_test:
+            _progress("② 단어 테스트 파일 만드는 중…")
+            tp = _one(analyses, dd / "test.pdf", only_test=True)
+            ap = _one(analyses, dd / "answer.pdf", only_answer=True)
+            f2 = _concat([tp, ap], out_stem.parent / f"{out_stem.name}_단어테스트.pdf")
+            if f2:
+                results.append(("📝 단어 테스트 (+정답)", f2))
+
+        # ── ③ 학습용(빈칸) ──
+        if make_student:
+            _progress("③ 학습용 파일 만드는 중…")
+            sp = _one(analyses, dd / "student.pdf", density=density, student=True,
+                      slevel=slevel, only_front=True)
+            f3 = _concat([sp], out_stem.parent / f"{out_stem.name}_학습용.pdf")
+            if f3:
+                results.append(("✏️ 학습용 (빈칸)", f3))
+
+        # ── ④ 원문 · 해석 ──
+        if has_source:
+            _progress("④ 원문·해석 파일 만드는 중…")
+            srcp = _one(analyses, dd / "source.pdf", only_source=True)
+            f4 = _concat([srcp], out_stem.parent / f"{out_stem.name}_원문해석.pdf")
+            if f4:
+                results.append(("📖 원문·해석", f4))
+
+    _progress(f"별도 파일 {len(results)}종 추출 완료")
+    return results
+
+
 def _stamp_footer(path: Path, footer_note: str = "", meta: str = "") -> None:
     """완성된 PDF 하단 여백에 저작권(왼쪽)·교재명·단원(가운데)·페이지 번호(오른쪽)를 찍는다.
 

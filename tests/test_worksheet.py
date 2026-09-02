@@ -499,11 +499,11 @@ def test_webapp_worksheet_flow():
             "files": (io.BytesIO(b"x"), "s_ws.pdf")}
     r = c.post("/build", data=data, content_type="multipart/form-data")
     assert r.status_code == 200 and "완료".encode("utf-8") in r.data
-    # 교사용+학생용 합본 PDF 가 나온다
-    assert "학생용".encode("utf-8") in r.data and "합본".encode("utf-8") in r.data
+    # 섹션별 '별도 파일'이 나온다(분석+정리 / 학습용)
+    assert "분석+정리".encode("utf-8") in r.data and "학습용".encode("utf-8") in r.data
     # 폼에 '시작 문항 번호(자동 증가)' 입력이 있다
     assert "start_no".encode("utf-8") in c.get("/").data
-    print("PASS  웹앱 학습지 플로우(worksheet_app, 목) — 교사용+학생용 합본")
+    print("PASS  웹앱 학습지 플로우(worksheet_app, 목) — 섹션별 별도 파일 추출")
 
 
 def test_webapp_start_number_autoincrement():
@@ -524,14 +524,17 @@ def test_webapp_start_number_autoincrement():
     def fake_build(client, cfg, tmp, header, **k):
         return _mk(3)                     # 한 파일에 지문 3개
 
-    def fake_pair(analyses, out, **k):
+    def fake_files(analyses, out_stem, **k):
         captured["labels"] = [a.lecture_label for a in analyses]
-        out.write_bytes(b"%PDF-1.4\n%%EOF")   # 렌더 생략(가짜 PDF)
+        from pathlib import Path
+        p = Path(f"{out_stem}_분석정리.pdf")
+        p.write_bytes(b"%PDF-1.4\n%%EOF")     # 렌더 생략(가짜 PDF)
+        return [("📘 분석+정리", p)]
 
-    orig_build, orig_pair = wa.ws_pipeline.build_analyses_for_file, wa.ws_pipeline.render_worksheet_pair
+    orig_build, orig_files = wa.ws_pipeline.build_analyses_for_file, wa.ws_pipeline.render_worksheet_files
     orig_assess = wa.ws_quality.assess
     wa.ws_pipeline.build_analyses_for_file = fake_build
-    wa.ws_pipeline.render_worksheet_pair = fake_pair
+    wa.ws_pipeline.render_worksheet_files = fake_files
     wa.ws_quality.assess = lambda *a, **k: {"ok": True, "reasons": []}
     try:
         c = wa.app.test_client()
@@ -541,7 +544,7 @@ def test_webapp_start_number_autoincrement():
         c.post("/build", data=data, content_type="multipart/form-data")
     finally:
         wa.ws_pipeline.build_analyses_for_file = orig_build
-        wa.ws_pipeline.render_worksheet_pair = orig_pair
+        wa.ws_pipeline.render_worksheet_files = orig_files
         wa.ws_quality.assess = orig_assess
     assert captured.get("labels") == ["30", "31", "32"], captured
     print("PASS  웹앱 수동 시작 문항 번호(30→30·31·32 자동 증가)")
@@ -565,14 +568,17 @@ def test_webapp_start_number_keeps_ranges():
     def fake_build(client, cfg, tmp, header, **k):
         return _mk()
 
-    def fake_pair(analyses, out, **k):
+    def fake_files(analyses, out_stem, **k):
         captured["labels"] = [a.lecture_label for a in analyses]
-        out.write_bytes(b"%PDF-1.4\n%%EOF")
+        from pathlib import Path
+        p = Path(f"{out_stem}_분석정리.pdf")
+        p.write_bytes(b"%PDF-1.4\n%%EOF")
+        return [("📘 분석+정리", p)]
 
-    orig_build, orig_pair = wa.ws_pipeline.build_analyses_for_file, wa.ws_pipeline.render_worksheet_pair
+    orig_build, orig_files = wa.ws_pipeline.build_analyses_for_file, wa.ws_pipeline.render_worksheet_files
     orig_assess = wa.ws_quality.assess
     wa.ws_pipeline.build_analyses_for_file = fake_build
-    wa.ws_pipeline.render_worksheet_pair = fake_pair
+    wa.ws_pipeline.render_worksheet_files = fake_files
     wa.ws_quality.assess = lambda *a, **k: {"ok": True, "reasons": []}
     try:
         c = wa.app.test_client()
@@ -581,11 +587,36 @@ def test_webapp_start_number_keeps_ranges():
         c.post("/build", data=data, content_type="multipart/form-data")
     finally:
         wa.ws_pipeline.build_analyses_for_file = orig_build
-        wa.ws_pipeline.render_worksheet_pair = orig_pair
+        wa.ws_pipeline.render_worksheet_files = orig_files
         wa.ws_quality.assess = orig_assess
     # 39, 40, 41~42, 43~45 — 범위가 41,42 로 납작해지지 않음
     assert captured.get("labels") == ["39", "40", "41~42", "43~45"], captured
     print("PASS  웹앱 시작번호 + 장문 범위 라벨 유지(41~42·43~45)")
+
+
+def test_render_worksheet_files_separate(tmp_path):
+    # 섹션별 '별도 파일 4종' 추출: 분석정리 / 단어테스트 / 학습용 / 원문해석
+    from src.worksheet.pipeline import render_worksheet_files
+    from src.worksheet.mock import mock_analysis
+
+    a = mock_analysis(lecture_label="18")
+    made = render_worksheet_files([a], tmp_path / "샘플", make_student=True, bw=True)
+    labels = [lbl for lbl, _ in made]
+    names = {p.name for _, p in made}
+    # 4개 파일 라벨(정리·단어테스트·학습용·원문해석)이 모두 나온다
+    assert any("분석+정리" in l for l in labels), labels
+    assert any("단어" in l for l in labels), labels
+    assert any("학습용" in l for l in labels), labels
+    assert any("원문" in l for l in labels), labels
+    # 파일명 접미사가 섹션별로 구분된다
+    assert "샘플_분석정리.pdf" in names, names
+    assert "샘플_단어테스트.pdf" in names and "샘플_학습용.pdf" in names, names
+    assert "샘플_원문해석.pdf" in names, names
+    # 각 파일이 실제로 페이지를 가진다(빈 파일 아님)
+    from pypdf import PdfReader
+    for _lbl, p in made:
+        assert p.exists() and len(PdfReader(str(p)).pages) >= 1, p
+    print("PASS  섹션별 별도 파일 4종 추출(분석정리/단어테스트/학습용/원문해석)")
 
 
 def _make_hwpx(path, paragraphs):
