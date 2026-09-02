@@ -25,7 +25,21 @@ from pathlib import Path
 # 실제 store_data 를 건드리지 않도록, 복사본을 만들어 그쪽을 보게 합니다.
 _TMP = Path(tempfile.mkdtemp())
 _SRC = Path(__file__).resolve().parent.parent / "store_data"
-shutil.copytree(_SRC, _TMP / "store_data", dirs_exist_ok=True)
+
+
+def _skip_real_files(folder, names):
+    """설정(JSON)만 복사하고, 실제로 파는·나눠 주는 파일은 가져오지 않습니다.
+
+    사장님이 자료를 넣어 두시면 그게 테스트 결과를 바꿔 버립니다.
+    파일이 필요한 테스트는 각자 만들어 씁니다.
+    """
+    here = Path(folder).name
+    if here in ("free", "deliverables", "samples", "submissions", ".cache"):
+        return [n for n in names if n != ".gitkeep"]
+    return []
+
+
+shutil.copytree(_SRC, _TMP / "store_data", dirs_exist_ok=True, ignore=_skip_real_files)
 os.environ["STORE_DB"] = str(_TMP / "store_data" / "store.db")
 os.environ.setdefault("ADMIN_PASSWORD", "test1234")
 
