@@ -31,6 +31,7 @@ SAMPLE_DIR = DATA_DIR / "samples"
 SUBMIT_DIR = DATA_DIR / "submissions"
 DELIVER_DIR = DATA_DIR / "deliverables"   # 상품별로 손님에게 보낼 파일
 FREE_DIR = DATA_DIR / "free"              # 무료 자료실에 올린 파일
+SHOT_DIR = DATA_DIR / "lineup"            # 라인업에 거는 자료 지면 사진
 DB_PATH = Path(os.environ.get("STORE_DB") or (DATA_DIR / "store.db"))
 
 KST = timezone(timedelta(hours=9))
@@ -763,6 +764,22 @@ def redeem_coupon(code: str, order_no: str) -> None:
 # 상품 파일 · 다운로드 링크
 # ---------------------------------------------------------------------------
 DELIVER_EXTS = {".pdf", ".zip", ".hwp", ".hwpx", ".docx", ".pptx"}
+IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp"}
+
+
+def shot_dir(mid: str) -> Path:
+    """자료 하나의 지면 사진이 들어가는 폴더."""
+    return SHOT_DIR / mid
+
+
+def shot_files(mid: str) -> list[str]:
+    """올려 둔 지면 사진 이름. 이름 순으로 나오니 01_, 02_ 로 붙이면 순서를 정하실 수 있습니다."""
+    folder = shot_dir(mid)
+    if not folder.is_dir():
+        return []
+    return sorted(f.name for f in folder.iterdir()
+                  if f.is_file() and not f.name.startswith(".")
+                  and f.suffix.lower() in IMAGE_EXTS)
 
 
 def product_dir(slug: str) -> Path:

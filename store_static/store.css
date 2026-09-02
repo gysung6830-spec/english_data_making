@@ -446,9 +446,19 @@ input[type=file]{
   border-radius:0 8px 8px 0; padding:11px 16px; font-size:14.5px; margin:0 0 18px;
 }
 
+/* 지면 사진 — 여러 장이면 옆으로 밀어 봅니다. 한 장이면 폭을 다 씁니다. */
+.mat-shots{display:flex; gap:14px; overflow-x:auto; padding-bottom:6px; margin-bottom:14px;
+  scrollbar-width:thin; -webkit-overflow-scrolling:touch;}
+.mat-shots.one{display:block; overflow:visible;}
+.mat-shots .mat-shot{flex:0 0 78%; max-width:520px;}
+.mat-shots.one .mat-shot{flex:none; max-width:none;}
 .mat-shot{margin:0 0 14px;}
-.mat-shot img{border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow);}
+.mat-shot img{
+  width:100%; display:block; background:#fff;
+  border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow);
+}
 .mat-shot figcaption{color:var(--muted); font-size:13px; margin-top:8px;}
+@media (min-width:861px){ .mat-shots .mat-shot{flex:0 0 46%;} }
 .sheet-note{color:var(--ink-2); font-size:14.5px; margin-bottom:20px;}
 
 .variants{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:6px 0 22px;}

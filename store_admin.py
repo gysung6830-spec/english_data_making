@@ -986,6 +986,47 @@ def material_form(mid):
     return redirect(url_for("admin.materials"))
 
 
+@admin_bp.route("/materials/<mid>/shots", methods=["GET", "POST"])
+def material_shots(mid):
+    """자료 지면 사진 올리기. 여기서 올리면 오르티카 라인업에 바로 걸립니다."""
+    data = sc.load_materials()
+    item = next((m for m in data["materials"] if m.get("id") == mid), None)
+    if item is None:
+        abort(404)
+
+    if request.method == "POST":
+        folder = sc.shot_dir(mid)
+        folder.mkdir(parents=True, exist_ok=True)
+        saved = 0
+        # 올린 순서대로 번호를 붙입니다. 라인업에는 이름 순으로 걸립니다.
+        start = len(sc.shot_files(mid)) + 1
+        for upload in request.files.getlist("files"):
+            if not upload or not upload.filename:
+                continue
+            raw = os.path.basename(upload.filename).replace("\\", "")
+            ext = os.path.splitext(raw)[1].lower()
+            if ext not in sc.IMAGE_EXTS:
+                flash(f"'{raw}' 은 올릴 수 없는 형식입니다. PNG·JPG·WEBP 만 됩니다.", "err")
+                continue
+            upload.save(folder / f"{start + saved:02d}{ext}")
+            saved += 1
+        if saved:
+            flash(f"지면 사진 {saved}장을 올렸습니다. 오르티카 라인업에 바로 걸렸습니다.", "ok")
+        return redirect(url_for("admin.material_shots", mid=mid))
+
+    return render_template("admin/material_shots.html", m=item, files=sc.shot_files(mid))
+
+
+@admin_bp.route("/materials/<mid>/shots/<filename>/delete", methods=["POST"])
+def material_shot_delete(mid, filename):
+    folder = sc.shot_dir(mid)
+    target = (folder / filename).resolve()
+    if folder.is_dir() and folder.resolve() in target.parents and target.is_file():
+        target.unlink()
+        flash(f"'{filename}' 을 지웠습니다.", "ok")
+    return redirect(url_for("admin.material_shots", mid=mid))
+
+
 # ---------------------------------------------------------------------------
 # 공지
 # ---------------------------------------------------------------------------

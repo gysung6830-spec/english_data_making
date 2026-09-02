@@ -1,0 +1,59 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ m.name }} 지면 사진{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <h1>자료 지면 사진</h1>
+  <p><b>{{ m.no }} {{ m.name }}</b> — 올리시면 <b>오르티카 라인업</b>의 이 자료 자리에 바로 걸립니다.</p>
+</div>
+
+<div class="steps-help">
+  <b>지면 사진이 가장 크게 팔립니다</b>
+  <ol>
+    <li>손님은 "어떻게 생긴 자료인가"를 보고 삽니다. 글 설명만으로는 잘 사지 않습니다.</li>
+    <li>PDF 를 화면에 띄우고 캡처하시면 됩니다. <b>가로 1000px 이상</b>이면 또렷합니다.</li>
+    <li>여러 장 올리면 옆으로 미는 사진첩이 됩니다. <b>올린 순서대로</b> 걸립니다.</li>
+    <li>PNG · JPG · WEBP 만 됩니다.</li>
+  </ol>
+</div>
+
+<div class="panel">
+  <h2>사진 올리기</h2>
+  <form method="post" enctype="multipart/form-data">
+    <div class="adm-field full">
+      <label for="files">사진 고르기 <span class="muted">(한 번에 여러 장 됩니다)</span></label>
+      <input type="file" id="files" name="files" multiple accept=".png,.jpg,.jpeg,.webp">
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">올리기</button>
+      <a class="btn btn-ghost" href="{{ url_for('admin.material_form', mid=m.id) }}">자료 설명 고치기</a>
+      <a class="btn btn-ghost" href="{{ url_for('admin.materials') }}">라인업 목록</a>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>올려 둔 사진 {{ files|length }}장</h2>
+  {% if files %}
+    <div class="shot-grid">
+      {% for f in files %}
+        <div class="shot-card">
+          <a href="{{ url_for('lineup_shot', mid=m.id, filename=f) }}" target="_blank" rel="noopener">
+            <img src="{{ url_for('lineup_shot', mid=m.id, filename=f) }}" alt="{{ m.name }} 지면 {{ loop.index }}">
+          </a>
+          <div class="shot-foot">
+            <span class="muted">{{ loop.index }}. {{ f }}</span>
+            <form method="post"
+                  action="{{ url_for('admin.material_shot_delete', mid=m.id, filename=f) }}"
+                  onsubmit="return confirm('이 사진을 지울까요? 되돌릴 수 없습니다.');">
+              <button type="submit" class="btn btn-ghost btn-sm">지우기</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="hint">아직 올린 사진이 없습니다. 지금은 이 자료가 글 설명만으로 나옵니다.</div>
+  {% endif %}
+</div>
+{% endblock %}

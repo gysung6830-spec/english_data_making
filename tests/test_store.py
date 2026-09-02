@@ -34,7 +34,7 @@ def _skip_real_files(folder, names):
     파일이 필요한 테스트는 각자 만들어 씁니다.
     """
     here = Path(folder).name
-    if here in ("free", "deliverables", "samples", "submissions", ".cache"):
+    if here in ("free", "deliverables", "samples", "submissions", "lineup", ".cache"):
         return [n for n in names if n != ".gitkeep"]
     return []
 
@@ -51,6 +51,7 @@ sc.SAMPLE_DIR = sc.DATA_DIR / "samples"
 sc.SUBMIT_DIR = sc.DATA_DIR / "submissions"
 sc.DELIVER_DIR = sc.DATA_DIR / "deliverables"
 sc.FREE_DIR = sc.DATA_DIR / "free"
+sc.SHOT_DIR = sc.DATA_DIR / "lineup"
 sc.DB_PATH = sc.DATA_DIR / "store.db"
 
 import store  # noqa: E402
@@ -1280,6 +1281,41 @@ def test_book_groups_fold_on_phone():
     print("PASS  폰에서 교재 목록 접기")
 
 
+def test_lineup_shots_upload_and_show():
+    """지면 사진을 관리자에서 올리면 오르티카 라인업에 바로 걸려야 합니다."""
+    import io as _io
+    a = admin()
+    png = (b"\x89PNG\r\n\x1a\n" + b"0" * 60)          # 내용은 상관없습니다
+    resp = a.post("/admin/materials/analysis/shots",
+                  data={"files": [(_io.BytesIO(png), "지면.png"),
+                                  (_io.BytesIO(png), "지면2.PNG")]},
+                  content_type="multipart/form-data", follow_redirects=True)
+    assert resp.status_code == 200 and "2장을 올렸습니다" in body(resp)
+    # 올린 순서대로 번호가 붙습니다
+    assert sc.shot_files("analysis") == ["01.png", "02.png"]
+
+    text = body(client().get("/lineup"))
+    assert "/lineup/shot/analysis/01.png" in text
+    assert "실제 자료 지면 1 / 2" in text
+
+    pic = client().get("/lineup/shot/analysis/01.png")
+    assert pic.status_code == 200 and pic.data.startswith(b"\x89PNG")
+    # 폴더 밖 · 사진이 아닌 파일 요청은 막습니다
+    assert client().get("/lineup/shot/analysis/..%2f..%2fsite.json").status_code == 404
+    assert client().get("/lineup/shot/analysis/없는파일.png").status_code == 404
+
+    # 이미지가 아닌 파일은 반려합니다
+    bad = a.post("/admin/materials/analysis/shots",
+                 data={"files": [(_io.BytesIO(b"x"), "몰래.exe")]},
+                 content_type="multipart/form-data", follow_redirects=True)
+    assert "올릴 수 없는 형식" in body(bad)
+
+    a.post("/admin/materials/analysis/shots/01.png/delete", follow_redirects=True)
+    a.post("/admin/materials/analysis/shots/02.png/delete", follow_redirects=True)
+    assert sc.shot_files("analysis") == []
+    print("PASS  자료 지면 사진 올리기 → 라인업 → 지우기")
+
+
 def test_mobile_filters_collapse():
     """폰에서 거르기 버튼이 접혀 있어야 첫 화면에 자료가 보입니다."""
     for path in ("/products", "/free"):
@@ -2007,6 +2043,7 @@ def run_all():
     test_analysis_tagline_updated()
     test_new_product_appears_in_home_updates()
     test_book_groups_fold_on_phone()
+    test_lineup_shots_upload_and_show()
     test_mobile_filters_collapse()
     test_long_pages_have_shortcuts()
     test_home_updates_skip_pinned_notice()

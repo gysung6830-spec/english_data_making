@@ -36,8 +36,12 @@
             {% if not (m.active is not defined or m.active) %}<span class="tag tag-off">숨김</span>{% endif %}
           </td>
           <td>{% if used.get(m.id) %}{{ used[m.id] }}개{% else %}<span class="tag tag-off">0개</span>{% endif %}</td>
-          <td><a class="btn btn-ghost btn-sm"
-                 href="{{ url_for('admin.material_form', mid=m.id) }}">고치기</a></td>
+          <td>
+            <a class="btn btn-ghost btn-sm"
+               href="{{ url_for('admin.material_form', mid=m.id) }}">고치기</a>
+            <a class="btn btn-ghost btn-sm"
+               href="{{ url_for('admin.material_shots', mid=m.id) }}">사진</a>
+          </td>
         </tr>
       {% endfor %}
       </tbody>

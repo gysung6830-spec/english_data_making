@@ -333,9 +333,11 @@ def lineup():
     # 샘플 파일이 실제로 올라와 있는 자료에만 받기 버튼을 답니다.
     ready = {m["sample_file"] for m in data["materials"]
              if m.get("sample_file") and (sc.SAMPLE_DIR / m["sample_file"]).exists()}
+    shots = {m["id"]: sc.shot_files(m["id"]) for m in data["materials"] if m.get("id")}
     return render_template("lineup.html", intro=data.get("intro", {}),
                            groups=sc.grouped_materials(),
                            cat_preview=category_preview(sc.load_catalog()),
+                           shots=shots,
                            ready_samples=ready, sample_count=len(ready))
 
 
@@ -988,6 +990,18 @@ def sample_download(filename):
 # ---------------------------------------------------------------------------
 # 결제 확인 후 받는 다운로드 링크
 # ---------------------------------------------------------------------------
+@app.route("/lineup/shot/<mid>/<filename>")
+def lineup_shot(mid, filename):
+    """라인업에 거는 자료 지면 사진. 폴더 밖 파일 요청은 막습니다."""
+    folder = sc.shot_dir(mid)
+    target = (folder / filename).resolve()
+    if not folder.is_dir() or folder.resolve() not in target.parents or not target.is_file():
+        abort(404)
+    if target.suffix.lower() not in sc.IMAGE_EXTS:
+        abort(404)
+    return send_from_directory(folder, filename, max_age=86400)
+
+
 @app.route("/d/<token>")
 def download_page(token):
     """메일로 보내 드린 링크. 이 주소를 아는 사람만 파일을 받을 수 있습니다."""

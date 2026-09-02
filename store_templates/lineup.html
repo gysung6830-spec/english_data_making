@@ -104,12 +104,22 @@
         {% if m.tagline %}<p class="mat-tagline">{{ m.tagline }}</p>{% endif %}
         {% if m.subline %}<p class="mat-subline">{{ m.subline }}</p>{% endif %}
 
-        {% if m.image %}
-          <figure class="mat-shot">
-            <img src="{{ url_for('static', filename='lineup/' + m.image) }}"
-                 alt="{{ m.name }} 실제 자료 지면" loading="lazy">
-            <figcaption>실제 자료 지면</figcaption>
-          </figure>
+        {% set pics = shots.get(m.id, []) %}
+        {% if pics %}
+          {# 지면이 여러 장이면 옆으로 밀어 봅니다. 눌러서 크게 볼 수 있습니다. #}
+          <div class="mat-shots {{ 'one' if pics|length == 1 }}">
+            {% for f in pics %}
+              <figure class="mat-shot">
+                <a href="{{ url_for('lineup_shot', mid=m.id, filename=f) }}" target="_blank"
+                   rel="noopener" aria-label="{{ m.name }} 지면 {{ loop.index }} 크게 보기">
+                  <img src="{{ url_for('lineup_shot', mid=m.id, filename=f) }}"
+                       alt="{{ m.name }} 실제 자료 지면 {{ loop.index }}" loading="lazy">
+                </a>
+                <figcaption>실제 자료 지면
+                  {%- if pics|length > 1 %} {{ loop.index }} / {{ pics|length }}{% endif %}</figcaption>
+              </figure>
+            {% endfor %}
+          </div>
           {% if m.sheet_note %}<p class="sheet-note">{{ m.sheet_note }}</p>{% endif %}
         {% endif %}
 
