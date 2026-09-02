@@ -317,6 +317,7 @@ def build_route():
             continue
         tmp = UPLOAD_DIR / f"{uuid.uuid4().hex}{ext}"
         f.save(str(tmp))
+        ws_pipeline._progress(f"[파일 {idx}/{len(files)}] '{f.filename}' 처리 시작")
         try:
             if mock:
                 analyses = ws_pipeline.mock_analyses_for_file(tmp, base_header)
@@ -339,6 +340,7 @@ def build_route():
                 stem = _safe_name(Path(f.filename).stem)
             out = OUTPUT_DIR / f"{stem}_{kind}.pdf"
             make_student = getattr(cfg.design, "make_student", True)
+            ws_pipeline._progress(f"지문 {len(analyses)}개 분석 완료 → PDF 렌더링 중…")
             # 합본 1개 PDF: 교사용 전체 지문 → 학생용 전체 지문(설정 make_student).
             ws_pipeline.render_worksheet_pair(
                 analyses, out, layout=layout, footer_note=footer, density=density,
@@ -346,6 +348,7 @@ def build_route():
                 slevel=getattr(cfg.design, "student_level", "blank"),
                 boxmode=getattr(cfg.design, "box_align", "even"),
                 bw=getattr(cfg.design, "print_mode", True))   # 웹앱 기본=인쇄용(흑백 친화)
+            ws_pipeline._progress(f"저장 완료 → {out.name}")
             label = "✏️ 교사용+학생용(합본)" if make_student else "✏️ 교사용"
             outfiles = [{"label": label, "out": out.name}]
             # 분석 데이터(JSON) 저장 — 나중에 제목·헤더만 고쳐 재출력할 때 재분석(API) 없이 씀.

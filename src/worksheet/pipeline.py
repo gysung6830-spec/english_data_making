@@ -7,7 +7,10 @@ API 없이 배관을 확인할 수 있는 규칙기반/목 경로도 함께 제�
 """
 from __future__ import annotations
 
+import os
 import re
+import sys
+import time
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
@@ -16,6 +19,16 @@ from typing import TYPE_CHECKING
 from . import (analyzer, literal_builder, overview_builder, point_builder,
                renderer, splitter)
 from .models import Analysis, Sentence
+
+
+def _progress(msg: str) -> None:
+    """웹앱을 실행한 터미널에 작업 현황을 한 줄씩 실시간 출력한다.
+
+    환경변수 WS_QUIET=1 이면 조용히(테스트·배치 등). 기본은 켜짐.
+    """
+    if os.environ.get("WS_QUIET") == "1":
+        return
+    print(f"[학습지 {time.strftime('%H:%M:%S')}] {msg}", file=sys.stderr, flush=True)
 
 if TYPE_CHECKING:  # 타입 힌트 전용 (런타임 무거운 임포트 회피)
     from ..client import ClaudeClient
@@ -122,6 +135,7 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
     from .. import analyze, extract  # 지연 임포트(pdfplumber/anthropic 무거움)
     from . import quality
 
+    _progress(f"'{src.name}' 열기 — 지문 분리·추출 중…")
     smart_labels: list[str] | None = None
     if extract.is_image(src):
         pset = analyze.extract_passages_image(client, cfg, str(src))
@@ -170,13 +184,21 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
         pnums = smart_labels
     else:
         pnums = _detect_problem_numbers(src) if not extract.is_image(src) else []
+    _detected = pnums if len(pnums) == total else []
+    _progress(f"지문 {total}개 감지"
+              + (f" — 문항 {', '.join(_detected)}" if any(_detected) else "")
+              + " · 문장 분석 시작")
     out: list[Analysis] = []
     for i, ex in enumerate(pset.passages, start=1):
         h = header.for_passage(ex, i, total)
         if len(pnums) == total and pnums[i - 1]:
             h.lecture_label = pnums[i - 1]      # 실제 문제 번호(예: 31, 32)
-        out.append(analyze_text(client, ex.body, h, max_retries=max_retries,
-                                with_back=not is_b, with_literal=is_b))
+        lbl = h.lecture_label or str(i)
+        _progress(f"  ({i}/{total}) {lbl}번 분석 중…")
+        a = analyze_text(client, ex.body, h, max_retries=max_retries,
+                         with_back=not is_b, with_literal=is_b)
+        out.append(a)
+        _progress(f"  ({i}/{total}) {lbl}번 ✓ 완료 · 문장 {len(a.sentences)}개")
     return out
 
 
