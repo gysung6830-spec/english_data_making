@@ -177,10 +177,28 @@ python -m src.wordtest data/wordbook/suneung2000/*.json --out-dir output --seed 
 | `--footer` | 하단 저작권 문구 |
 
 - 기본값은 원본 시험지와 **방향을 서로 바꿔서** 출제합니다. (원본에서 뜻을 물었던 단어는 이번엔 영단어를 쓰게)
+### 교재 묶음(ZIP·폴더) 한 번에 넣기
+
+시험지 PDF 가 여러 개면 `tools/import_wordbook.py` 로 한 번에 읽습니다. PDF 안의 `Day 1~2` 를
+읽어 파일 이름을 자동으로 정하고, 정답 면(뒤쪽 절반 페이지)에서 단어를 뽑습니다.
+
+```bash
+python tools/import_wordbook.py "시험지묶음.zip" --book neungyul_eowon \
+    --source "능률보카 어원편 고등" --make-pdf
+```
+
 - 단어 목록은 교재별 폴더에 둡니다. 수업용 자료라 저장소 안에만 두고 배포하지 마세요.
-  - `data/wordbook/suneung2000/` — 워드마스터 수능2000, Day 1~50 전 범위(2,000단어, 회당 80단어)
-  - `data/wordbook/jungdeung/` — 워드마스터 중등고난도(표제어만), 회당 60단어
-- 회당 단어 수는 자동으로 절반씩 나뉩니다. (80단어 → 40+40, 60단어 → 30+30)
+
+| 폴더 | 교재 | 범위 | 회당 단어 |
+|---|---|---|---|
+| `suneung2000/` | 워드마스터 수능2000 | Day 1~50 | 80 |
+| `jungdeung/` | 워드마스터 중등고난도(표제어만) | Day 1~30 | 60 |
+| `neungyul_eowon/` | 능률보카 어원편 고등(파생어 포함) | Day 1~60 | 65~80 |
+| `neungyul_pilsu/` | 능률보카 수능필수(표제어만) | Day 1~60 | 20~40 |
+| `wm_complete/` | Word Master 고등 Complete | Day 1~40 | 60 |
+
+- 회당 단어 수는 자동으로 절반씩 나뉘고(80 → 40+40, 60 → 30+30), **문항 수에 맞춰
+  단 수(1단/2단)와 줄 높이가 자동으로 정해져** 어느 교재든 한 면에 고르게 들어갑니다.
 
 ---
 
