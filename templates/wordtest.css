@@ -86,11 +86,3 @@ table.ht-grid { width: 100%; border-collapse: collapse; table-layout: fixed; }
 .ht-grid.ans.ko td.ht-a { font-size: 9pt; white-space: nowrap; }
 .ht-grid.ans tr { height: 28pt; }
 .ht-akmark { color: var(--ht-green); letter-spacing: 0.04em; }
-
-/* ---- 하단 안내(오답 재시험) ---- */
-.ht-foot {
-  margin-top: 12pt; padding: 6pt 11pt; border-radius: 8pt;
-  background: var(--ht-tint); border: 0.8pt solid var(--ht-tint-bd);
-  font-size: 8.4pt; color: #23272e;
-}
-.ht-foot b { color: var(--ht-green); }
