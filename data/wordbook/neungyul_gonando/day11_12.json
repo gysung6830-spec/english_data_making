@@ -1,0 +1,506 @@
+{
+  "title": "Day 11~12",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "absurdity",
+      "meaning": "부조리, 모순"
+    },
+    {
+      "no": 2,
+      "word": "adverse",
+      "meaning": "불리한; 거스르는"
+    },
+    {
+      "no": 3,
+      "word": "correspond to",
+      "meaning": "~에 해당하다, ~와 일치하다"
+    },
+    {
+      "no": 4,
+      "word": "outlet",
+      "meaning": "(가스·감정 등의) 배출구; 직판점; 콘센트"
+    },
+    {
+      "no": 5,
+      "word": "distinctively",
+      "meaning": "특징적으로"
+    },
+    {
+      "no": 6,
+      "word": "inquiry",
+      "meaning": "문의, 질문; 조사"
+    },
+    {
+      "no": 7,
+      "word": "divert",
+      "meaning": "(방향을) 바꾸다, 우회시키다; (관심 등을) 다른 데로 돌리다"
+    },
+    {
+      "no": 8,
+      "word": "arguably",
+      "meaning": "주장하건대, 거의 틀림없이"
+    },
+    {
+      "no": 9,
+      "word": "intrinsic",
+      "meaning": "본질적인, 고유한"
+    },
+    {
+      "no": 10,
+      "word": "significantly",
+      "meaning": "상당히; 중요하게"
+    },
+    {
+      "no": 11,
+      "word": "esteem",
+      "meaning": "존경, 존중; 존경[존중]하다, 높이 평가하다"
+    },
+    {
+      "no": 12,
+      "word": "come about",
+      "meaning": "(우연히) 발생하다, 일어나다"
+    },
+    {
+      "no": 13,
+      "word": "assimilate",
+      "meaning": "완전히 이해하다; 동화되다[시키다]"
+    },
+    {
+      "no": 14,
+      "word": "authority",
+      "meaning": "권위, 권한; 당국; 권위자"
+    },
+    {
+      "no": 15,
+      "word": "induction",
+      "meaning": "유도, 유발; 귀납법"
+    },
+    {
+      "no": 16,
+      "word": "epidemic",
+      "meaning": "유행병, 전염병; (병·범죄 등의) 유행, 확산; 유행성의"
+    },
+    {
+      "no": 17,
+      "word": "immensely",
+      "meaning": "엄청나게, 대단히"
+    },
+    {
+      "no": 18,
+      "word": "complication",
+      "meaning": "문제; 합병증"
+    },
+    {
+      "no": 19,
+      "word": "numerous",
+      "meaning": "다수의, 많은"
+    },
+    {
+      "no": 20,
+      "word": "refugee",
+      "meaning": "난민, 망명자"
+    },
+    {
+      "no": 21,
+      "word": "constantly",
+      "meaning": "끊임없이"
+    },
+    {
+      "no": 22,
+      "word": "dissolve",
+      "meaning": "녹다, 녹이다; 해산하다"
+    },
+    {
+      "no": 23,
+      "word": "anonymously",
+      "meaning": "익명으로"
+    },
+    {
+      "no": 24,
+      "word": "paddle",
+      "meaning": "(보트의) 노; 노를 젓다"
+    },
+    {
+      "no": 25,
+      "word": "break into",
+      "meaning": "(건물에) 침입하다; 갑자기 ~하기 시작하다"
+    },
+    {
+      "no": 26,
+      "word": "significant",
+      "meaning": "중요한, 의미 있는; 상당한"
+    },
+    {
+      "no": 27,
+      "word": "testimony",
+      "meaning": "증언; 증거"
+    },
+    {
+      "no": 28,
+      "word": "attainment",
+      "meaning": "성취, 달성"
+    },
+    {
+      "no": 29,
+      "word": "reassure",
+      "meaning": "안심시키다"
+    },
+    {
+      "no": 30,
+      "word": "computational",
+      "meaning": "컴퓨터를 사용하는, 계산의"
+    },
+    {
+      "no": 31,
+      "word": "inquire",
+      "meaning": "묻다, 문의하다; 조사하다"
+    },
+    {
+      "no": 32,
+      "word": "accustomed",
+      "meaning": "익숙한; 평소의"
+    },
+    {
+      "no": 33,
+      "word": "allot",
+      "meaning": "할당[배당]하다"
+    },
+    {
+      "no": 34,
+      "word": "indigenous",
+      "meaning": "토착의, 원산의"
+    },
+    {
+      "no": 35,
+      "word": "compute",
+      "meaning": "계산[산출]하다"
+    },
+    {
+      "no": 36,
+      "word": "shake off",
+      "meaning": "~을 떨쳐 버리다, 따돌리다"
+    },
+    {
+      "no": 37,
+      "word": "align",
+      "meaning": "정렬하다, 나란히 하다; 조정하다"
+    },
+    {
+      "no": 38,
+      "word": "bound",
+      "meaning": "~할 가능성이 큰; ~할 (법적) 의무가 있는; ~행의; 껑충 뛰다; 경계를 이루다"
+    },
+    {
+      "no": 39,
+      "word": "draw on",
+      "meaning": "(지식·경험 등을) 활용하다"
+    },
+    {
+      "no": 40,
+      "word": "assessment",
+      "meaning": "평가; 과세, 산정"
+    },
+    {
+      "no": 41,
+      "word": "deductive",
+      "meaning": "연역적인"
+    },
+    {
+      "no": 42,
+      "word": "allotment",
+      "meaning": "할당, 배당"
+    },
+    {
+      "no": 43,
+      "word": "testimonial",
+      "meaning": "추천서; 기념물"
+    },
+    {
+      "no": 44,
+      "word": "sack",
+      "meaning": "자루, 부대; 약탈; 약탈하다"
+    },
+    {
+      "no": 45,
+      "word": "cite",
+      "meaning": "인용하다; (예·이유를) 들다, 언급하다"
+    },
+    {
+      "no": 46,
+      "word": "offense",
+      "meaning": "범죄, 위반; 모욕, 불쾌하게 하는 것; 공격"
+    },
+    {
+      "no": 47,
+      "word": "desire",
+      "meaning": "갈망, 욕구; 바라다"
+    },
+    {
+      "no": 48,
+      "word": "complicate",
+      "meaning": "복잡하게 만들다"
+    },
+    {
+      "no": 49,
+      "word": "manifest",
+      "meaning": "(감정 등을) 나타내다, 드러내다; 명백한, 분명한"
+    },
+    {
+      "no": 50,
+      "word": "assimilation",
+      "meaning": "동화, 흡수"
+    },
+    {
+      "no": 51,
+      "word": "offensive",
+      "meaning": "불쾌한, 모욕적인; 공격의"
+    },
+    {
+      "no": 52,
+      "word": "original",
+      "meaning": "원래의; 독창적인; 원본"
+    },
+    {
+      "no": 53,
+      "word": "adversely",
+      "meaning": "부정적으로, 불리하게"
+    },
+    {
+      "no": 54,
+      "word": "numerical",
+      "meaning": "수의, 수와 관련된"
+    },
+    {
+      "no": 55,
+      "word": "reassurance",
+      "meaning": "안심시키기; 안심시키는 말[행동]"
+    },
+    {
+      "no": 56,
+      "word": "aspect",
+      "meaning": "측면; 양상"
+    },
+    {
+      "no": 57,
+      "word": "computation",
+      "meaning": "계산"
+    },
+    {
+      "no": 58,
+      "word": "copyright",
+      "meaning": "저작권; 저작권 보호를 받는; 저작권을 얻다"
+    },
+    {
+      "no": 59,
+      "word": "excavation",
+      "meaning": "발굴(지); 땅파기"
+    },
+    {
+      "no": 60,
+      "word": "lateral",
+      "meaning": "옆[측면]의, 옆[측면]으로의"
+    },
+    {
+      "no": 61,
+      "word": "charity",
+      "meaning": "자선 단체; 자선 (행위); 관용, 자비"
+    },
+    {
+      "no": 62,
+      "word": "implementation",
+      "meaning": "이행, 실행"
+    },
+    {
+      "no": 63,
+      "word": "reassuring",
+      "meaning": "안심시키는, 위안을 주는"
+    },
+    {
+      "no": 64,
+      "word": "tactical",
+      "meaning": "작전[전술]의; 전략적인"
+    },
+    {
+      "no": 65,
+      "word": "diversion",
+      "meaning": "전환; 오락"
+    },
+    {
+      "no": 66,
+      "word": "deduce",
+      "meaning": "추론[추정]하다, 연역하다"
+    },
+    {
+      "no": 67,
+      "word": "deduction",
+      "meaning": "추론, 연역; 공제(액)"
+    },
+    {
+      "no": 68,
+      "word": "authoritative",
+      "meaning": "(책 등이) 권위 있는, 믿을 만한; 권위적인"
+    },
+    {
+      "no": 69,
+      "word": "hesitant",
+      "meaning": "망설이는, 주저하는"
+    },
+    {
+      "no": 70,
+      "word": "boundary",
+      "meaning": "경계(선); 한계, 범위"
+    },
+    {
+      "no": 71,
+      "word": "diagnose",
+      "meaning": "(질병·문제의 원인을) 진단하다"
+    },
+    {
+      "no": 72,
+      "word": "proliferation",
+      "meaning": "급증, 확산"
+    },
+    {
+      "no": 73,
+      "word": "attain",
+      "meaning": "이루다; (특정 수준 등에) 도달하다"
+    },
+    {
+      "no": 74,
+      "word": "perseverance",
+      "meaning": "인내, 끈기"
+    },
+    {
+      "no": 75,
+      "word": "anonymous",
+      "meaning": "익명의"
+    },
+    {
+      "no": 76,
+      "word": "weed out",
+      "meaning": "(불필요한 대상 등을) 제거하다, 뽑아 버리다"
+    },
+    {
+      "no": 77,
+      "word": "expenditure",
+      "meaning": "지출; (시간·노력 등의) 소비, 소모"
+    },
+    {
+      "no": 78,
+      "word": "profess",
+      "meaning": "공언하다"
+    },
+    {
+      "no": 79,
+      "word": "originality",
+      "meaning": "독창성"
+    },
+    {
+      "no": 80,
+      "word": "assess",
+      "meaning": "평가하다; 산정하다, 부과하다"
+    },
+    {
+      "no": 81,
+      "word": "constant",
+      "meaning": "끊임없는; 일정한, 변함없는; 상수"
+    },
+    {
+      "no": 82,
+      "word": "get along",
+      "meaning": "(~와) 잘 지내다; (일 등을) 잘해내다"
+    },
+    {
+      "no": 83,
+      "word": "enlightening",
+      "meaning": "계몽적인, 깨우침을 주는"
+    },
+    {
+      "no": 84,
+      "word": "elevate",
+      "meaning": "(정도를) 높이다; (들어) 올리다; 승진시키다"
+    },
+    {
+      "no": 85,
+      "word": "overriding",
+      "meaning": "최우선의, 가장 중요한"
+    },
+    {
+      "no": 86,
+      "word": "persevering",
+      "meaning": "인내심이 강한, 불굴의"
+    },
+    {
+      "no": 87,
+      "word": "mumble",
+      "meaning": "중얼거리다; 중얼거림"
+    },
+    {
+      "no": 88,
+      "word": "inventory",
+      "meaning": "물품 목록; 재고(품)"
+    },
+    {
+      "no": 89,
+      "word": "proliferate",
+      "meaning": "급증하다, (빠르게) 확산되다"
+    },
+    {
+      "no": 90,
+      "word": "hesitation",
+      "meaning": "망설임, 주저"
+    },
+    {
+      "no": 91,
+      "word": "neural",
+      "meaning": "신경(계)의"
+    },
+    {
+      "no": 92,
+      "word": "anonymity",
+      "meaning": "익명(성); 특색 없음"
+    },
+    {
+      "no": 93,
+      "word": "continual",
+      "meaning": "거듭되는, 반복되는"
+    },
+    {
+      "no": 94,
+      "word": "self-esteem",
+      "meaning": "자존감"
+    },
+    {
+      "no": 95,
+      "word": "emigration",
+      "meaning": "(타국으로의) 이민, 이주"
+    },
+    {
+      "no": 96,
+      "word": "manifestation",
+      "meaning": "징후, 표명"
+    },
+    {
+      "no": 97,
+      "word": "endeavor",
+      "meaning": "노력, 시도; 노력하다, 시도하다"
+    },
+    {
+      "no": 98,
+      "word": "absurd",
+      "meaning": "터무니없는, 불합리한"
+    },
+    {
+      "no": 99,
+      "word": "trivial",
+      "meaning": "사소한, 하찮은"
+    },
+    {
+      "no": 100,
+      "word": "elevated",
+      "meaning": "높은; 고상한"
+    }
+  ]
+}

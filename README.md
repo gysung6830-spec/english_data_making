@@ -196,6 +196,8 @@ python tools/import_wordbook.py "시험지묶음.zip" --book neungyul_eowon \
 | `neungyul_eowon/` | 능률보카 어원편 고등(파생어 포함) | Day 1~60 | 65~80 |
 | `neungyul_pilsu/` | 능률보카 수능필수(표제어만) | Day 1~60 | 20~40 |
 | `wm_complete/` | Word Master 고등 Complete | Day 1~40 | 60 |
+| `neungyul_gonando/` | 능률보카 수능 고난도 | Day 1~50 | 100 |
+| `neungyul_gibon/` | 능률보카 고등 기본(파생어 포함) | Day 1~40 | 75~80 |
 
 - 회당 단어 수는 자동으로 절반씩 나뉘고(80 → 40+40, 60 → 30+30), **문항 수에 맞춰
   단 수(1단/2단)와 줄 높이가 자동으로 정해져** 어느 교재든 한 면에 고르게 들어갑니다.

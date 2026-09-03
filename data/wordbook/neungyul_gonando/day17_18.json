@@ -1,0 +1,506 @@
+{
+  "title": "Day 17~18",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "hypothetical",
+      "meaning": "가설의, 가정의"
+    },
+    {
+      "no": 2,
+      "word": "hypothesis",
+      "meaning": "가설; 추정, 가정"
+    },
+    {
+      "no": 3,
+      "word": "confidentially",
+      "meaning": "비밀리에; 은밀하게"
+    },
+    {
+      "no": 4,
+      "word": "weigh down",
+      "meaning": "(물리적·심리적으로) 짓누르다, 압박하다"
+    },
+    {
+      "no": 5,
+      "word": "representative",
+      "meaning": "대표자, 대리인; 대표하는; 전형적인"
+    },
+    {
+      "no": 6,
+      "word": "coverage",
+      "meaning": "보도; (광고·보험 등의) 도달[보장] 범위"
+    },
+    {
+      "no": 7,
+      "word": "potent",
+      "meaning": "강력한, 효과적인"
+    },
+    {
+      "no": 8,
+      "word": "flourish",
+      "meaning": "번창[번성]하다; (동식물이) 잘 자라다"
+    },
+    {
+      "no": 9,
+      "word": "procrastination",
+      "meaning": "꾸물거림; 지연"
+    },
+    {
+      "no": 10,
+      "word": "negligence",
+      "meaning": "태만, 부주의"
+    },
+    {
+      "no": 11,
+      "word": "substance",
+      "meaning": "물질; 본질, 핵심; 실체"
+    },
+    {
+      "no": 12,
+      "word": "outrageous",
+      "meaning": "충격적인; 터무니없는"
+    },
+    {
+      "no": 13,
+      "word": "disguise",
+      "meaning": "변장[위장]하다; (감정 등을) 숨기다; 변장, 위장"
+    },
+    {
+      "no": 14,
+      "word": "controversy",
+      "meaning": "논란, 논쟁"
+    },
+    {
+      "no": 15,
+      "word": "alienation",
+      "meaning": "멀어짐, 소외; 양도"
+    },
+    {
+      "no": 16,
+      "word": "straightforward",
+      "meaning": "간단한, 쉬운; 솔직한"
+    },
+    {
+      "no": 17,
+      "word": "industrious",
+      "meaning": "근면한, 부지런한"
+    },
+    {
+      "no": 18,
+      "word": "manipulation",
+      "meaning": "(교묘한) 조종, 조작"
+    },
+    {
+      "no": 19,
+      "word": "dread",
+      "meaning": "두려워하다; 두려움"
+    },
+    {
+      "no": 20,
+      "word": "triumphant",
+      "meaning": "크게 승리한; 의기양양한"
+    },
+    {
+      "no": 21,
+      "word": "congested",
+      "meaning": "혼잡한; (신체 일부가) 충혈된, 막힌"
+    },
+    {
+      "no": 22,
+      "word": "skyscraper",
+      "meaning": "고층 건물, 마천루"
+    },
+    {
+      "no": 23,
+      "word": "reigning",
+      "meaning": "군림하는; (스포츠에서) 현 챔피언인"
+    },
+    {
+      "no": 24,
+      "word": "available",
+      "meaning": "구할[이용할] 수 있는; (~에 응할) 시간이 있는"
+    },
+    {
+      "no": 25,
+      "word": "phenomenon",
+      "meaning": "현상; 경이로운 사람[것]"
+    },
+    {
+      "no": 26,
+      "word": "rule out",
+      "meaning": "~을 배제하다, 제외하다"
+    },
+    {
+      "no": 27,
+      "word": "marginal",
+      "meaning": "미미한; 주변부의"
+    },
+    {
+      "no": 28,
+      "word": "straightforwardly",
+      "meaning": "솔직하게; 간단하게, 쉽게"
+    },
+    {
+      "no": 29,
+      "word": "comply",
+      "meaning": "따르다, 준수하다"
+    },
+    {
+      "no": 30,
+      "word": "progression",
+      "meaning": "진전, 진행"
+    },
+    {
+      "no": 31,
+      "word": "itinerary",
+      "meaning": "여행 일정(표), 여정"
+    },
+    {
+      "no": 32,
+      "word": "flourishing",
+      "meaning": "번창하는, 번성하는"
+    },
+    {
+      "no": 33,
+      "word": "compliance",
+      "meaning": "준수, 순응"
+    },
+    {
+      "no": 34,
+      "word": "manipulative",
+      "meaning": "(교묘하게) 조종하는; 손으로 다루는"
+    },
+    {
+      "no": 35,
+      "word": "procrastinate",
+      "meaning": "(해야 할 일을) 미루다, 질질 끌다"
+    },
+    {
+      "no": 36,
+      "word": "fascinating",
+      "meaning": "매혹적인, 흥미로운"
+    },
+    {
+      "no": 37,
+      "word": "exclusive",
+      "meaning": "독점적인; 배타적인"
+    },
+    {
+      "no": 38,
+      "word": "capable",
+      "meaning": "~할 수 있는; 유능한"
+    },
+    {
+      "no": 39,
+      "word": "subtly",
+      "meaning": "미묘하게"
+    },
+    {
+      "no": 40,
+      "word": "get away with",
+      "meaning": "처벌을 모면하다, 그냥 넘어가다"
+    },
+    {
+      "no": 41,
+      "word": "phenomenal",
+      "meaning": "놀랄 만한, 경이로운"
+    },
+    {
+      "no": 42,
+      "word": "fascination",
+      "meaning": "매력, 매혹"
+    },
+    {
+      "no": 43,
+      "word": "controversial",
+      "meaning": "논란이 많은"
+    },
+    {
+      "no": 44,
+      "word": "wicked",
+      "meaning": "못된, 사악한; 짓궂은"
+    },
+    {
+      "no": 45,
+      "word": "interplay",
+      "meaning": "상호 작용"
+    },
+    {
+      "no": 46,
+      "word": "correlation",
+      "meaning": "연관성, 상관관계"
+    },
+    {
+      "no": 47,
+      "word": "intermediate",
+      "meaning": "중급의, 중간의; 중급자"
+    },
+    {
+      "no": 48,
+      "word": "staple",
+      "meaning": "주된, 주요한; 주식; 주요 산물"
+    },
+    {
+      "no": 49,
+      "word": "legalize",
+      "meaning": "합법화하다"
+    },
+    {
+      "no": 50,
+      "word": "set aside",
+      "meaning": "~을 따로 떼어 두다; ~을 고려하지 않다, 무시하다"
+    },
+    {
+      "no": 51,
+      "word": "leisurely",
+      "meaning": "느긋하게, 유유히; 한가한, 느긋한"
+    },
+    {
+      "no": 52,
+      "word": "catastrophic",
+      "meaning": "큰 재앙의; 비극적인"
+    },
+    {
+      "no": 53,
+      "word": "potency",
+      "meaning": "힘, 효능"
+    },
+    {
+      "no": 54,
+      "word": "progressive",
+      "meaning": "진보적인; 점진적인"
+    },
+    {
+      "no": 55,
+      "word": "coincidence",
+      "meaning": "(우연의) 일치; 동시 발생"
+    },
+    {
+      "no": 56,
+      "word": "cosmopolitan",
+      "meaning": "세계적인, 국제적인; 범세계주의자, 세계인"
+    },
+    {
+      "no": 57,
+      "word": "relevant",
+      "meaning": "관련 있는, 적절한"
+    },
+    {
+      "no": 58,
+      "word": "ecologist",
+      "meaning": "생태학자"
+    },
+    {
+      "no": 59,
+      "word": "appropriately",
+      "meaning": "적당하게, 알맞게"
+    },
+    {
+      "no": 60,
+      "word": "coincidental",
+      "meaning": "우연의 일치인, 우연의"
+    },
+    {
+      "no": 61,
+      "word": "hypothesize",
+      "meaning": "가설을 세우다"
+    },
+    {
+      "no": 62,
+      "word": "fascinate",
+      "meaning": "매료시키다"
+    },
+    {
+      "no": 63,
+      "word": "revolution",
+      "meaning": "혁명; (행성의) 공전; 회전"
+    },
+    {
+      "no": 64,
+      "word": "identical",
+      "meaning": "동일한, 똑같은"
+    },
+    {
+      "no": 65,
+      "word": "confidentiality",
+      "meaning": "비밀, 비밀리"
+    },
+    {
+      "no": 66,
+      "word": "affirmative",
+      "meaning": "긍정[동의]의; 긍정(의 말)"
+    },
+    {
+      "no": 67,
+      "word": "bulk",
+      "meaning": "대부분; 부피, 크기"
+    },
+    {
+      "no": 68,
+      "word": "revolving",
+      "meaning": "회전하는"
+    },
+    {
+      "no": 69,
+      "word": "fascinated",
+      "meaning": "매료된, 매혹된"
+    },
+    {
+      "no": 70,
+      "word": "prehistoric",
+      "meaning": "선사 시대의"
+    },
+    {
+      "no": 71,
+      "word": "progress",
+      "meaning": "진보, 진전, 발전; 진전되다, 나아가다"
+    },
+    {
+      "no": 72,
+      "word": "apparatus",
+      "meaning": "기구, 장치; (정부 등의) 조직체, 기관"
+    },
+    {
+      "no": 73,
+      "word": "exploitation",
+      "meaning": "착취; (자원) 개발"
+    },
+    {
+      "no": 74,
+      "word": "affirm",
+      "meaning": "단언[확언]하다"
+    },
+    {
+      "no": 75,
+      "word": "radioactive",
+      "meaning": "방사성의, 방사능이 있는"
+    },
+    {
+      "no": 76,
+      "word": "industrial",
+      "meaning": "산업의, 공업의; 공업용의"
+    },
+    {
+      "no": 77,
+      "word": "availability",
+      "meaning": "이용 가능성; 시간을 낼 수 있음"
+    },
+    {
+      "no": 78,
+      "word": "industry",
+      "meaning": "산업, 공업"
+    },
+    {
+      "no": 79,
+      "word": "correlate",
+      "meaning": "연관성이 있다; 서로 연관시키다"
+    },
+    {
+      "no": 80,
+      "word": "succumb",
+      "meaning": "굴복하다; (병 등으로) 쓰러지다, 죽다"
+    },
+    {
+      "no": 81,
+      "word": "leisure",
+      "meaning": "여가, 자유 시간"
+    },
+    {
+      "no": 82,
+      "word": "disgust",
+      "meaning": "혐오감을 주다, 역겹게 하다; 혐오감, 역겨움"
+    },
+    {
+      "no": 83,
+      "word": "substantial",
+      "meaning": "상당한; 본질[실질]적인"
+    },
+    {
+      "no": 84,
+      "word": "diameter",
+      "meaning": "지름, 직경"
+    },
+    {
+      "no": 85,
+      "word": "radioactivity",
+      "meaning": "방사능"
+    },
+    {
+      "no": 86,
+      "word": "coincide",
+      "meaning": "동시에 일어나다; (생각 등이) 일치하다"
+    },
+    {
+      "no": 87,
+      "word": "substantive",
+      "meaning": "실질적인"
+    },
+    {
+      "no": 88,
+      "word": "neglect",
+      "meaning": "방치하다, 소홀히 하다; 무시[경시]하다; 방치; 무시, 경시"
+    },
+    {
+      "no": 89,
+      "word": "margin",
+      "meaning": "(책의) 여백; (득표수 등의) 차이; 마진, 이윤; 여유, 여지"
+    },
+    {
+      "no": 90,
+      "word": "catastrophe",
+      "meaning": "재앙, 참사"
+    },
+    {
+      "no": 91,
+      "word": "alienated",
+      "meaning": "소외된"
+    },
+    {
+      "no": 92,
+      "word": "alienate",
+      "meaning": "소원하게[멀어지게] 하다"
+    },
+    {
+      "no": 93,
+      "word": "correlative",
+      "meaning": "상관관계가 있는"
+    },
+    {
+      "no": 94,
+      "word": "viewpoint",
+      "meaning": "관점, 견해"
+    },
+    {
+      "no": 95,
+      "word": "act out",
+      "meaning": "~을 연기[재연]하다; (감정 등을) 표출하다"
+    },
+    {
+      "no": 96,
+      "word": "triumph",
+      "meaning": "승리, 업적; 승리감; 승리하다"
+    },
+    {
+      "no": 97,
+      "word": "capacity",
+      "meaning": "수용력, 용량; 능력"
+    },
+    {
+      "no": 98,
+      "word": "dreadful",
+      "meaning": "끔찍한, 지독한"
+    },
+    {
+      "no": 99,
+      "word": "legal",
+      "meaning": "법률의; 합법적인"
+    },
+    {
+      "no": 100,
+      "word": "turn away",
+      "meaning": "~을 돌려보내다; ~을 외면하다, ~에서 멀어지게 하다"
+    }
+  ]
+}

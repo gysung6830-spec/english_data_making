@@ -1,0 +1,506 @@
+{
+  "title": "Day 23~24",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "arctic",
+      "meaning": "북극의; 몹시 추운; 북극 (지방)"
+    },
+    {
+      "no": 2,
+      "word": "tragically",
+      "meaning": "비극적으로"
+    },
+    {
+      "no": 3,
+      "word": "modification",
+      "meaning": "변경, 수정; 수식"
+    },
+    {
+      "no": 4,
+      "word": "relative",
+      "meaning": "상대적인; 관련된; 친척"
+    },
+    {
+      "no": 5,
+      "word": "shortage",
+      "meaning": "부족, 결핍"
+    },
+    {
+      "no": 6,
+      "word": "consecutively",
+      "meaning": "연속적으로"
+    },
+    {
+      "no": 7,
+      "word": "circulate",
+      "meaning": "순환하다[시키다]; 유포하다[되다]"
+    },
+    {
+      "no": 8,
+      "word": "mischievous",
+      "meaning": "장난기 많은, 짓궂은; 해를 끼치는"
+    },
+    {
+      "no": 9,
+      "word": "immunize",
+      "meaning": "면역력을 갖게 하다"
+    },
+    {
+      "no": 10,
+      "word": "physiological",
+      "meaning": "생리학의; 생리적인"
+    },
+    {
+      "no": 11,
+      "word": "consecutive",
+      "meaning": "연속적인, 잇따른"
+    },
+    {
+      "no": 12,
+      "word": "soar",
+      "meaning": "급등하다, 치솟다; 날아오르다"
+    },
+    {
+      "no": 13,
+      "word": "hollow",
+      "meaning": "속이 빈; 공허한; 움푹 들어간 곳"
+    },
+    {
+      "no": 14,
+      "word": "reckless",
+      "meaning": "무모한, 신중하지 못한"
+    },
+    {
+      "no": 15,
+      "word": "circular",
+      "meaning": "원형의, 둥근; 순회[순환]하는"
+    },
+    {
+      "no": 16,
+      "word": "electronic",
+      "meaning": "전자의, 전자 공학의"
+    },
+    {
+      "no": 17,
+      "word": "illustration",
+      "meaning": "삽화; 실례"
+    },
+    {
+      "no": 18,
+      "word": "constraint",
+      "meaning": "제약; 제한, 통제"
+    },
+    {
+      "no": 19,
+      "word": "reproduce",
+      "meaning": "재생[재현]하다; 복제[복사]하다; 번식하다"
+    },
+    {
+      "no": 20,
+      "word": "physiology",
+      "meaning": "생리학; 생리 (기능)"
+    },
+    {
+      "no": 21,
+      "word": "ensure",
+      "meaning": "확실하게 하다, 보장하다"
+    },
+    {
+      "no": 22,
+      "word": "approximately",
+      "meaning": "거의, 대략"
+    },
+    {
+      "no": 23,
+      "word": "monetary",
+      "meaning": "통화의, 화폐의"
+    },
+    {
+      "no": 24,
+      "word": "be up to",
+      "meaning": "~에 달려 있다, ~의 책임이다; 무언가를 하고 있다"
+    },
+    {
+      "no": 25,
+      "word": "provide",
+      "meaning": "제공[공급]하다; 규정하다"
+    },
+    {
+      "no": 26,
+      "word": "sufficiently",
+      "meaning": "충분히"
+    },
+    {
+      "no": 27,
+      "word": "kin",
+      "meaning": "친족, 친척"
+    },
+    {
+      "no": 28,
+      "word": "tragic",
+      "meaning": "비극적인, 비참한; 비극의"
+    },
+    {
+      "no": 29,
+      "word": "quest",
+      "meaning": "탐구, 탐색, 추구; 모험, 원정"
+    },
+    {
+      "no": 30,
+      "word": "misfortune",
+      "meaning": "불운, 불행"
+    },
+    {
+      "no": 31,
+      "word": "necessitate",
+      "meaning": "필요로 하다, 요하다"
+    },
+    {
+      "no": 32,
+      "word": "vulnerability",
+      "meaning": "취약성"
+    },
+    {
+      "no": 33,
+      "word": "empowerment",
+      "meaning": "권한 부여"
+    },
+    {
+      "no": 34,
+      "word": "systematization",
+      "meaning": "조직화, 체계화"
+    },
+    {
+      "no": 35,
+      "word": "illustrate",
+      "meaning": "(예를 들어) 설명하다, 분명히 보여 주다; 삽화를 넣다"
+    },
+    {
+      "no": 36,
+      "word": "approximate",
+      "meaning": "대략의, 근사치의; (수량 등이) ~에 가깝다, 어림잡다"
+    },
+    {
+      "no": 37,
+      "word": "elicitation",
+      "meaning": "끌어내기, 유도"
+    },
+    {
+      "no": 38,
+      "word": "cram",
+      "meaning": "(억지로) 밀어 넣다; 벼락치기 공부를 하다"
+    },
+    {
+      "no": 39,
+      "word": "competence",
+      "meaning": "능력, 능숙도, 역량"
+    },
+    {
+      "no": 40,
+      "word": "give off",
+      "meaning": "(냄새·빛 등을) 내다, 발산하다; (분위기를) 풍기다"
+    },
+    {
+      "no": 41,
+      "word": "premise",
+      "meaning": "(주장의) 전제, 가정; 구내, 건물 부지; 전제로 하다"
+    },
+    {
+      "no": 42,
+      "word": "arbitrarily",
+      "meaning": "임의로; 독단적으로"
+    },
+    {
+      "no": 43,
+      "word": "sedentary",
+      "meaning": "주로 앉아서 하는[지내는]; 정착해 사는"
+    },
+    {
+      "no": 44,
+      "word": "pull back",
+      "meaning": "후퇴하다, 물러나다; 철회[취소]하다"
+    },
+    {
+      "no": 45,
+      "word": "literal",
+      "meaning": "문자 그대로의; 직역의"
+    },
+    {
+      "no": 46,
+      "word": "arbitrary",
+      "meaning": "임의의; 독단적인"
+    },
+    {
+      "no": 47,
+      "word": "neurological",
+      "meaning": "신경의, 신경학의"
+    },
+    {
+      "no": 48,
+      "word": "obese",
+      "meaning": "비만인"
+    },
+    {
+      "no": 49,
+      "word": "mischief",
+      "meaning": "장난, 못된 짓; 피해"
+    },
+    {
+      "no": 50,
+      "word": "tragedy",
+      "meaning": "비극, 참사; 비극 작품"
+    },
+    {
+      "no": 51,
+      "word": "constrain",
+      "meaning": "강요하다; 제한하다"
+    },
+    {
+      "no": 52,
+      "word": "neurology",
+      "meaning": "신경학"
+    },
+    {
+      "no": 53,
+      "word": "immunization",
+      "meaning": "면역 조치, 예방[면역] 접종"
+    },
+    {
+      "no": 54,
+      "word": "articulate",
+      "meaning": "분명히 표현하다; 또렷이 말하다; 분명히 표현하는; 또렷한"
+    },
+    {
+      "no": 55,
+      "word": "separate",
+      "meaning": "분리하다"
+    },
+    {
+      "no": 56,
+      "word": "figuratively",
+      "meaning": "비유적으로"
+    },
+    {
+      "no": 57,
+      "word": "electrical",
+      "meaning": "전기의; 전기를 이용하는"
+    },
+    {
+      "no": 58,
+      "word": "enhancement",
+      "meaning": "향상, 강화"
+    },
+    {
+      "no": 59,
+      "word": "aquatic",
+      "meaning": "물속에 사는, 수생의; 수상의, 수중의"
+    },
+    {
+      "no": 60,
+      "word": "systematize",
+      "meaning": "체계화하다, 조직화하다"
+    },
+    {
+      "no": 61,
+      "word": "intersect",
+      "meaning": "교차하다; 가로지르다"
+    },
+    {
+      "no": 62,
+      "word": "notify",
+      "meaning": "알리다, 통지하다"
+    },
+    {
+      "no": 63,
+      "word": "set about",
+      "meaning": "~을 시작하다, ~에 착수하다"
+    },
+    {
+      "no": 64,
+      "word": "notification",
+      "meaning": "통지, 알림"
+    },
+    {
+      "no": 65,
+      "word": "relatively",
+      "meaning": "상대적으로, 비교적"
+    },
+    {
+      "no": 66,
+      "word": "vain",
+      "meaning": "헛된, 소용없는; 허영심이 많은, 자만하는"
+    },
+    {
+      "no": 67,
+      "word": "competent",
+      "meaning": "능숙한, 유능한"
+    },
+    {
+      "no": 68,
+      "word": "fit in",
+      "meaning": "~와 어울리다, 조화를 이루다; ~할 시간을 내다"
+    },
+    {
+      "no": 69,
+      "word": "necessity",
+      "meaning": "필요(성); 필수품"
+    },
+    {
+      "no": 70,
+      "word": "habitat",
+      "meaning": "서식지, 거주지"
+    },
+    {
+      "no": 71,
+      "word": "mastery",
+      "meaning": "숙달, 통달; 지배(력), 통제(력)"
+    },
+    {
+      "no": 72,
+      "word": "intersection",
+      "meaning": "교차로, 교차 지점"
+    },
+    {
+      "no": 73,
+      "word": "nourishing",
+      "meaning": "영양가 있는"
+    },
+    {
+      "no": 74,
+      "word": "immunity",
+      "meaning": "면역(력); 면제"
+    },
+    {
+      "no": 75,
+      "word": "sewage",
+      "meaning": "하수, 오물"
+    },
+    {
+      "no": 76,
+      "word": "figurative",
+      "meaning": "비유적인; 구상[조형]의"
+    },
+    {
+      "no": 77,
+      "word": "reproduction",
+      "meaning": "생식, 번식; 복사, 복제; 재생, 재현"
+    },
+    {
+      "no": 78,
+      "word": "systematic",
+      "meaning": "체계적인"
+    },
+    {
+      "no": 79,
+      "word": "atmosphere",
+      "meaning": "(지구의) 대기; 공기; 분위기"
+    },
+    {
+      "no": 80,
+      "word": "makeup",
+      "meaning": "구성, 조합; 화장, 분장; 보충, 보강"
+    },
+    {
+      "no": 81,
+      "word": "interior",
+      "meaning": "내부; 내부의"
+    },
+    {
+      "no": 82,
+      "word": "upstream",
+      "meaning": "상류로; 상류의"
+    },
+    {
+      "no": 83,
+      "word": "neurologist",
+      "meaning": "신경학자, 신경과 전문의"
+    },
+    {
+      "no": 84,
+      "word": "provision",
+      "meaning": "공급, 제공; 식량; (법률) 조항"
+    },
+    {
+      "no": 85,
+      "word": "envision",
+      "meaning": "마음속에 그리다, 상상하다"
+    },
+    {
+      "no": 86,
+      "word": "devastated",
+      "meaning": "엄청난 충격을 받은"
+    },
+    {
+      "no": 87,
+      "word": "devastating",
+      "meaning": "파괴적인; 충격적인"
+    },
+    {
+      "no": 88,
+      "word": "assembly",
+      "meaning": "의회, 입법 기관; 집회; (기계 등의) 조립"
+    },
+    {
+      "no": 89,
+      "word": "pension",
+      "meaning": "연금, 생활 보조금"
+    },
+    {
+      "no": 90,
+      "word": "go around",
+      "meaning": "(병·소문 등이) 퍼지다; 모두에게 돌아가다"
+    },
+    {
+      "no": 91,
+      "word": "nourishment",
+      "meaning": "(영양가 있는) 음식물, 영양(분), 자양분"
+    },
+    {
+      "no": 92,
+      "word": "kinship",
+      "meaning": "친족 (관계); 연대감, 유대감"
+    },
+    {
+      "no": 93,
+      "word": "vanity",
+      "meaning": "허영심, 자만심"
+    },
+    {
+      "no": 94,
+      "word": "decline",
+      "meaning": "감소[하락]하다, 쇠퇴하다; 거절하다; 감소, 하락, 쇠퇴"
+    },
+    {
+      "no": 95,
+      "word": "circulation",
+      "meaning": "(혈액) 순환; 유통, 유포"
+    },
+    {
+      "no": 96,
+      "word": "confrontation",
+      "meaning": "대치, 대립"
+    },
+    {
+      "no": 97,
+      "word": "come out",
+      "meaning": "출시[출간]되다; (사실 등이) 알려지다, 드러나다"
+    },
+    {
+      "no": 98,
+      "word": "deforestation",
+      "meaning": "삼림 벌채[파괴]"
+    },
+    {
+      "no": 99,
+      "word": "empower",
+      "meaning": "권한을 주다; 자율권을 주다"
+    },
+    {
+      "no": 100,
+      "word": "elicit",
+      "meaning": "(반응·감정을) 이끌어 내다, 유도하다"
+    }
+  ]
+}

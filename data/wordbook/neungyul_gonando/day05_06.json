@@ -1,0 +1,506 @@
+{
+  "title": "Day 5~6",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "inevitably",
+      "meaning": "불가피하게, 필연적으로"
+    },
+    {
+      "no": 2,
+      "word": "instinct",
+      "meaning": "본능; 직감"
+    },
+    {
+      "no": 3,
+      "word": "dispersion",
+      "meaning": "확산, 분산"
+    },
+    {
+      "no": 4,
+      "word": "summarize",
+      "meaning": "요약하다, 간추리다"
+    },
+    {
+      "no": 5,
+      "word": "acquainted",
+      "meaning": "정통한; 안면이 있는"
+    },
+    {
+      "no": 6,
+      "word": "interact",
+      "meaning": "소통[교류]하다; 상호 작용을 하다"
+    },
+    {
+      "no": 7,
+      "word": "intrude",
+      "meaning": "침입[침범]하다; 방해하다"
+    },
+    {
+      "no": 8,
+      "word": "applaud",
+      "meaning": "박수갈채하다; 칭찬하다"
+    },
+    {
+      "no": 9,
+      "word": "analyst",
+      "meaning": "분석가"
+    },
+    {
+      "no": 10,
+      "word": "mutant",
+      "meaning": "돌연변이의; 돌연변이체, 변종"
+    },
+    {
+      "no": 11,
+      "word": "desperately",
+      "meaning": "필사적으로, 절실히"
+    },
+    {
+      "no": 12,
+      "word": "confined",
+      "meaning": "좁고 사방이 막힌"
+    },
+    {
+      "no": 13,
+      "word": "extent",
+      "meaning": "정도, 범위; 규모, 크기"
+    },
+    {
+      "no": 14,
+      "word": "statistics",
+      "meaning": "통계, 통계 자료; 통계학"
+    },
+    {
+      "no": 15,
+      "word": "conspicuous",
+      "meaning": "눈에 잘 띄는, 뚜렷한"
+    },
+    {
+      "no": 16,
+      "word": "statistician",
+      "meaning": "통계학자"
+    },
+    {
+      "no": 17,
+      "word": "mutually",
+      "meaning": "서로, 공통으로"
+    },
+    {
+      "no": 18,
+      "word": "disperse",
+      "meaning": "흩어지다, 해산하다[시키다]; 확산하다[시키다]"
+    },
+    {
+      "no": 19,
+      "word": "leakage",
+      "meaning": "누출, 새어나감"
+    },
+    {
+      "no": 20,
+      "word": "empirically",
+      "meaning": "경험적으로"
+    },
+    {
+      "no": 21,
+      "word": "intruder",
+      "meaning": "침입자"
+    },
+    {
+      "no": 22,
+      "word": "ecosystem",
+      "meaning": "생태계"
+    },
+    {
+      "no": 23,
+      "word": "expand",
+      "meaning": "확장[확대]하다, 늘리다; 자세히 설명하다"
+    },
+    {
+      "no": 24,
+      "word": "universality",
+      "meaning": "보편성"
+    },
+    {
+      "no": 25,
+      "word": "astronomer",
+      "meaning": "천문학자"
+    },
+    {
+      "no": 26,
+      "word": "intrusive",
+      "meaning": "거슬리는"
+    },
+    {
+      "no": 27,
+      "word": "prospect",
+      "meaning": "가망, 가능성; 전망, 예상"
+    },
+    {
+      "no": 28,
+      "word": "credit",
+      "meaning": "신용(거래), 신뢰; 칭찬; 학점; 입금하다; 공으로 인정하다"
+    },
+    {
+      "no": 29,
+      "word": "intrusion",
+      "meaning": "침범, 침해; (무단) 침입"
+    },
+    {
+      "no": 30,
+      "word": "rotate",
+      "meaning": "회전하다[시키다]; 교대로 근무하다"
+    },
+    {
+      "no": 31,
+      "word": "symbol",
+      "meaning": "상징(물); 기호, 부호"
+    },
+    {
+      "no": 32,
+      "word": "trait",
+      "meaning": "(성격적·신체적) 특성, 특징"
+    },
+    {
+      "no": 33,
+      "word": "crafty",
+      "meaning": "술수가 뛰어난, 교활한"
+    },
+    {
+      "no": 34,
+      "word": "universally",
+      "meaning": "보편적으로"
+    },
+    {
+      "no": 35,
+      "word": "extensive",
+      "meaning": "광범위한, 폭넓은"
+    },
+    {
+      "no": 36,
+      "word": "extension",
+      "meaning": "연장; 확장, 확대; 내선 전화"
+    },
+    {
+      "no": 37,
+      "word": "barrier",
+      "meaning": "장애물, 장벽"
+    },
+    {
+      "no": 38,
+      "word": "conspicuously",
+      "meaning": "두드러지게, 현저히"
+    },
+    {
+      "no": 39,
+      "word": "leaky",
+      "meaning": "새는"
+    },
+    {
+      "no": 40,
+      "word": "criterion",
+      "meaning": "표준, 기준, 척도"
+    },
+    {
+      "no": 41,
+      "word": "summary",
+      "meaning": "요약, 개요"
+    },
+    {
+      "no": 42,
+      "word": "mobilization",
+      "meaning": "동원"
+    },
+    {
+      "no": 43,
+      "word": "symbolize",
+      "meaning": "상징하다"
+    },
+    {
+      "no": 44,
+      "word": "diabetic",
+      "meaning": "당뇨병의, 당뇨병이 있는; 당뇨병 환자"
+    },
+    {
+      "no": 45,
+      "word": "thoroughly",
+      "meaning": "면밀히, 철저히"
+    },
+    {
+      "no": 46,
+      "word": "confinement",
+      "meaning": "감금"
+    },
+    {
+      "no": 47,
+      "word": "sustain",
+      "meaning": "유지[지속]하다; 지탱하다; (피해 등을) 입다"
+    },
+    {
+      "no": 48,
+      "word": "oppose",
+      "meaning": "반대하다; 겨루다"
+    },
+    {
+      "no": 49,
+      "word": "literature",
+      "meaning": "문학"
+    },
+    {
+      "no": 50,
+      "word": "expansive",
+      "meaning": "광활한; 포괄적인"
+    },
+    {
+      "no": 51,
+      "word": "statistical",
+      "meaning": "통계의, 통계적인"
+    },
+    {
+      "no": 52,
+      "word": "get by",
+      "meaning": "그럭저럭 살아가다"
+    },
+    {
+      "no": 53,
+      "word": "astronomical",
+      "meaning": "천문학의; (수량이) 천문학적인, 엄청난"
+    },
+    {
+      "no": 54,
+      "word": "applause",
+      "meaning": "박수(갈채)"
+    },
+    {
+      "no": 55,
+      "word": "affinity",
+      "meaning": "친밀감, 좋아함; 유사성"
+    },
+    {
+      "no": 56,
+      "word": "desperate",
+      "meaning": "절망적인; 절박한, 필사적인; 간절히 원하는"
+    },
+    {
+      "no": 57,
+      "word": "equitable",
+      "meaning": "공정한, 공평한"
+    },
+    {
+      "no": 58,
+      "word": "instinctive",
+      "meaning": "본능적인, 본능[직감]에 따른"
+    },
+    {
+      "no": 59,
+      "word": "slippery",
+      "meaning": "미끄러운; (사람이) 믿기 어려운; 파악하기 힘든"
+    },
+    {
+      "no": 60,
+      "word": "equivalent",
+      "meaning": "동등한, 상당하는; 동등한 것"
+    },
+    {
+      "no": 61,
+      "word": "equity",
+      "meaning": "공평, 공정; 자기 자본, 순자산"
+    },
+    {
+      "no": 62,
+      "word": "diabetes",
+      "meaning": "당뇨병"
+    },
+    {
+      "no": 63,
+      "word": "carry on",
+      "meaning": "~을 계속하다"
+    },
+    {
+      "no": 64,
+      "word": "drawback",
+      "meaning": "결점, 문제점"
+    },
+    {
+      "no": 65,
+      "word": "mutual",
+      "meaning": "상호 간의, 서로의; 공통의, 공동의"
+    },
+    {
+      "no": 66,
+      "word": "stand for",
+      "meaning": "~을 나타내다, 의미하다; ~을지지[옹호]하다"
+    },
+    {
+      "no": 67,
+      "word": "interaction",
+      "meaning": "상호 작용"
+    },
+    {
+      "no": 68,
+      "word": "adequate",
+      "meaning": "충분한, 적절한"
+    },
+    {
+      "no": 69,
+      "word": "feature",
+      "meaning": "특징; 이목구비; 특집 (기사[방송]); 특징으로 삼다, 포함하다"
+    },
+    {
+      "no": 70,
+      "word": "humiliation",
+      "meaning": "창피, 굴욕"
+    },
+    {
+      "no": 71,
+      "word": "prospective",
+      "meaning": "장래의, 유망한; 곧 있을"
+    },
+    {
+      "no": 72,
+      "word": "bump into",
+      "meaning": "(우연히) ~와 마주치다; ~에 부딪치다"
+    },
+    {
+      "no": 73,
+      "word": "fragment",
+      "meaning": "파편, 조각; 산산이 부수다[부서지다]"
+    },
+    {
+      "no": 74,
+      "word": "dedicate",
+      "meaning": "바치다, 헌신[전념]하다; 헌정하다"
+    },
+    {
+      "no": 75,
+      "word": "expend",
+      "meaning": "(많은 돈·시간·에너지를) 소비하다"
+    },
+    {
+      "no": 76,
+      "word": "analyze",
+      "meaning": "분석하다"
+    },
+    {
+      "no": 77,
+      "word": "rotary",
+      "meaning": "회전하는"
+    },
+    {
+      "no": 78,
+      "word": "range",
+      "meaning": "범위; 다양성; 산맥; (범위가 ~에) 이르다"
+    },
+    {
+      "no": 79,
+      "word": "thorough",
+      "meaning": "철저한, 빈틈없는"
+    },
+    {
+      "no": 80,
+      "word": "craft",
+      "meaning": "(수)공예; 기술; 배, 비행기, 우주선; 공들여 만들다"
+    },
+    {
+      "no": 81,
+      "word": "adequately",
+      "meaning": "충분히, 적절히"
+    },
+    {
+      "no": 82,
+      "word": "withdraw",
+      "meaning": "철수하다; 철회[취소]하다; 인출하다"
+    },
+    {
+      "no": 83,
+      "word": "interpretation",
+      "meaning": "해석, 이해"
+    },
+    {
+      "no": 84,
+      "word": "variance",
+      "meaning": "변화[변동](량)"
+    },
+    {
+      "no": 85,
+      "word": "look down on",
+      "meaning": "~을 업신여기다"
+    },
+    {
+      "no": 86,
+      "word": "astronomy",
+      "meaning": "천문학"
+    },
+    {
+      "no": 87,
+      "word": "reference",
+      "meaning": "언급; 참조, 참고; 추천서"
+    },
+    {
+      "no": 88,
+      "word": "symbolic",
+      "meaning": "상징적인, 상징하는"
+    },
+    {
+      "no": 89,
+      "word": "variation",
+      "meaning": "변화, 차이; 변형; 변주곡"
+    },
+    {
+      "no": 90,
+      "word": "document",
+      "meaning": "서류, 문서; 기록하다"
+    },
+    {
+      "no": 91,
+      "word": "dedicated",
+      "meaning": "전념하는, 헌신적인"
+    },
+    {
+      "no": 92,
+      "word": "wandering",
+      "meaning": "돌아다니는; 산만한"
+    },
+    {
+      "no": 93,
+      "word": "interactive",
+      "meaning": "상호적인, 상호 작용을 하는"
+    },
+    {
+      "no": 94,
+      "word": "vary",
+      "meaning": "바꾸다; 서로 다르다"
+    },
+    {
+      "no": 95,
+      "word": "universal",
+      "meaning": "보편적인, 일반적인; 전 세계적인"
+    },
+    {
+      "no": 96,
+      "word": "expense",
+      "meaning": "지출, 비용"
+    },
+    {
+      "no": 97,
+      "word": "withdrawal",
+      "meaning": "철수, 탈퇴; 철회, 취소; 인출"
+    },
+    {
+      "no": 98,
+      "word": "leak",
+      "meaning": "새다; 누설하다; 새는 곳; 유출, 누설"
+    },
+    {
+      "no": 99,
+      "word": "canal",
+      "meaning": "수로, 운하"
+    },
+    {
+      "no": 100,
+      "word": "democratic",
+      "meaning": "민주주의의, 민주적인; 평등한"
+    }
+  ]
+}

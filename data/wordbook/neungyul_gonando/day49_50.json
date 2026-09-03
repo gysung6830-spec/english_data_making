@@ -1,0 +1,506 @@
+{
+  "title": "Day 49~50",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "vacancy",
+      "meaning": "빈자리, 공석; 빈방; 멍함"
+    },
+    {
+      "no": 2,
+      "word": "thrust",
+      "meaning": "밀다, 밀치다; 찌르다; 요점; 밀침, 찌름; 추진력"
+    },
+    {
+      "no": 3,
+      "word": "work out",
+      "meaning": "운동하다; (문제를) 해결하다; (일이) 잘 풀리다, 진행되다"
+    },
+    {
+      "no": 4,
+      "word": "slanted",
+      "meaning": "비스듬한; 편파적인"
+    },
+    {
+      "no": 5,
+      "word": "custom",
+      "meaning": "관습, 풍습; 습관; 관세, 세관; 주문한, 맞춤의"
+    },
+    {
+      "no": 6,
+      "word": "pastor",
+      "meaning": "목회자, 목사"
+    },
+    {
+      "no": 7,
+      "word": "stagnation",
+      "meaning": "침체, 정체"
+    },
+    {
+      "no": 8,
+      "word": "slavery",
+      "meaning": "노예 (신분); 노예 제도"
+    },
+    {
+      "no": 9,
+      "word": "sophomore",
+      "meaning": "(고교·대학의) 2학년생"
+    },
+    {
+      "no": 10,
+      "word": "single out",
+      "meaning": "~을 선발[선정]하다"
+    },
+    {
+      "no": 11,
+      "word": "remnant",
+      "meaning": "남은 부분, 나머지; 자투리"
+    },
+    {
+      "no": 12,
+      "word": "sculpt",
+      "meaning": "조각하다"
+    },
+    {
+      "no": 13,
+      "word": "involve",
+      "meaning": "수반[포함]하다; 관련시키다; 참여시키다"
+    },
+    {
+      "no": 14,
+      "word": "starvation",
+      "meaning": "굶주림, 기아"
+    },
+    {
+      "no": 15,
+      "word": "involvement",
+      "meaning": "관련, 개입; 몰두"
+    },
+    {
+      "no": 16,
+      "word": "compilation",
+      "meaning": "편집(본), 모음집"
+    },
+    {
+      "no": 17,
+      "word": "remarkably",
+      "meaning": "놀랍게도"
+    },
+    {
+      "no": 18,
+      "word": "wreck",
+      "meaning": "난파선; 사고 잔해; 망가뜨리다, 파괴하다"
+    },
+    {
+      "no": 19,
+      "word": "uphold",
+      "meaning": "(법·원칙 등을) 수호[옹호]하다"
+    },
+    {
+      "no": 20,
+      "word": "involved",
+      "meaning": "관련된; 복잡한"
+    },
+    {
+      "no": 21,
+      "word": "accentuate",
+      "meaning": "강조하다, 두드러지게 하다"
+    },
+    {
+      "no": 22,
+      "word": "laborious",
+      "meaning": "힘든, 고된"
+    },
+    {
+      "no": 23,
+      "word": "jury",
+      "meaning": "배심원단; 심사 위원단"
+    },
+    {
+      "no": 24,
+      "word": "pledge",
+      "meaning": "약속, 맹세, 서약; 담보(물), 저당(물); 약속[맹세]하다"
+    },
+    {
+      "no": 25,
+      "word": "supernaturally",
+      "meaning": "초자연적으로, 불가사의하게"
+    },
+    {
+      "no": 26,
+      "word": "subsequent",
+      "meaning": "그 다음의, 이후의"
+    },
+    {
+      "no": 27,
+      "word": "slant",
+      "meaning": "기울다, 기울이다; 편향되게 제시하다; 경사, 기울기; (편향된) 관점"
+    },
+    {
+      "no": 28,
+      "word": "plead",
+      "meaning": "간청[애원]하다; 변론하다"
+    },
+    {
+      "no": 29,
+      "word": "exceed",
+      "meaning": "넘다, 초과하다"
+    },
+    {
+      "no": 30,
+      "word": "optical",
+      "meaning": "시각의; 빛의, 광학의"
+    },
+    {
+      "no": 31,
+      "word": "attorney",
+      "meaning": "변호사; 법정 대리인"
+    },
+    {
+      "no": 32,
+      "word": "scorn",
+      "meaning": "경멸하다, 멸시하다; 경멸, 멸시"
+    },
+    {
+      "no": 33,
+      "word": "fertile",
+      "meaning": "비옥한, 기름진; 생식력 있는"
+    },
+    {
+      "no": 34,
+      "word": "exclaim",
+      "meaning": "소리치다, 외치다"
+    },
+    {
+      "no": 35,
+      "word": "tenancy",
+      "meaning": "임차 (기간); 임차권"
+    },
+    {
+      "no": 36,
+      "word": "lease",
+      "meaning": "임대차 계약; 임대[임차]하다"
+    },
+    {
+      "no": 37,
+      "word": "sterilize",
+      "meaning": "살균[소독]하다"
+    },
+    {
+      "no": 38,
+      "word": "solemn",
+      "meaning": "엄숙한, 진지한"
+    },
+    {
+      "no": 39,
+      "word": "compile",
+      "meaning": "엮다, 편집[편찬]하다; (자료를) 수집하다"
+    },
+    {
+      "no": 40,
+      "word": "revenue",
+      "meaning": "수입, 수익, 세입"
+    },
+    {
+      "no": 41,
+      "word": "catch up with",
+      "meaning": "~을 따라잡다; 근황을 나누다; (문제가) ~의 발목을 잡다"
+    },
+    {
+      "no": 42,
+      "word": "harbor",
+      "meaning": "항구; 피난처; (감정 등을) 품다; (죄인 등을) 숨겨 주다"
+    },
+    {
+      "no": 43,
+      "word": "perplexity",
+      "meaning": "당혹감; 당혹스러운 것"
+    },
+    {
+      "no": 44,
+      "word": "massive",
+      "meaning": "거대한, 대규모[대량]의; (정도가) 심한"
+    },
+    {
+      "no": 45,
+      "word": "sensory",
+      "meaning": "감각의"
+    },
+    {
+      "no": 46,
+      "word": "dazzle",
+      "meaning": "눈부시게[황홀하게] 하다, 현혹시키다"
+    },
+    {
+      "no": 47,
+      "word": "supernatural",
+      "meaning": "초자연적인"
+    },
+    {
+      "no": 48,
+      "word": "redeem",
+      "meaning": "(명예·실수 등을) 회복[만회]하다; (상품권 등을) 현금[상품]으로 교환하다; (빚을) 상환하다"
+    },
+    {
+      "no": 49,
+      "word": "temperate",
+      "meaning": "(기후·지역이) 온화한, 온대성의; 절제하는"
+    },
+    {
+      "no": 50,
+      "word": "satirical",
+      "meaning": "풍자적인, 비꼬는"
+    },
+    {
+      "no": 51,
+      "word": "tenant",
+      "meaning": "세입자, 임차인"
+    },
+    {
+      "no": 52,
+      "word": "unveil",
+      "meaning": "(신제품 등을) 발표[공개]하다; (덮개를) 벗기다"
+    },
+    {
+      "no": 53,
+      "word": "weariness",
+      "meaning": "피로, 권태"
+    },
+    {
+      "no": 54,
+      "word": "outline",
+      "meaning": "개요; 윤곽; 개요를 서술하다; 윤곽을 나타내다"
+    },
+    {
+      "no": 55,
+      "word": "dilemma",
+      "meaning": "딜레마, 진퇴양난, 궁지"
+    },
+    {
+      "no": 56,
+      "word": "slave",
+      "meaning": "노예; 노예처럼[고되게] 일하다"
+    },
+    {
+      "no": 57,
+      "word": "satire",
+      "meaning": "풍자"
+    },
+    {
+      "no": 58,
+      "word": "discharge",
+      "meaning": "방출하다[되다]; 퇴원시키다, 제대시키다, 석방하다; 방출, 배출; 퇴원, 제대, 석방"
+    },
+    {
+      "no": 59,
+      "word": "methodology",
+      "meaning": "방법론"
+    },
+    {
+      "no": 60,
+      "word": "starve",
+      "meaning": "굶주리다[굶기다], 굶어 죽다"
+    },
+    {
+      "no": 61,
+      "word": "sculptor",
+      "meaning": "조각가"
+    },
+    {
+      "no": 62,
+      "word": "remarkable",
+      "meaning": "주목할 만한, 놀랄 만한"
+    },
+    {
+      "no": 63,
+      "word": "wrecked",
+      "meaning": "난파된, 망가진"
+    },
+    {
+      "no": 64,
+      "word": "pungent",
+      "meaning": "(맛·냄새가) 톡 쏘는, 자극적인; 신랄한"
+    },
+    {
+      "no": 65,
+      "word": "divine",
+      "meaning": "신의, 신성한"
+    },
+    {
+      "no": 66,
+      "word": "weary",
+      "meaning": "지친, 피곤한; 싫증이 난; 지치게 하다"
+    },
+    {
+      "no": 67,
+      "word": "divisive",
+      "meaning": "분열[불화]을 일으키는"
+    },
+    {
+      "no": 68,
+      "word": "wreckage",
+      "meaning": "잔해"
+    },
+    {
+      "no": 69,
+      "word": "framework",
+      "meaning": "(건물 등의) 뼈대, 골조; (결정등을 위한) 틀; 체제, 체계"
+    },
+    {
+      "no": 70,
+      "word": "probable",
+      "meaning": "있음 직한, 개연성 있는"
+    },
+    {
+      "no": 71,
+      "word": "downpour",
+      "meaning": "폭우, 호우"
+    },
+    {
+      "no": 72,
+      "word": "setback",
+      "meaning": "좌절, 차질"
+    },
+    {
+      "no": 73,
+      "word": "sterile",
+      "meaning": "불모의, 메마른; 살균한, 소독한"
+    },
+    {
+      "no": 74,
+      "word": "methodologically",
+      "meaning": "방법론적으로"
+    },
+    {
+      "no": 75,
+      "word": "differentiation",
+      "meaning": "차별, 구별"
+    },
+    {
+      "no": 76,
+      "word": "get into",
+      "meaning": "~에 연루되다; ~에 입학하다; (활동 등을) 시작하다"
+    },
+    {
+      "no": 77,
+      "word": "lead to",
+      "meaning": "~로 이어지다, ~을 초래하다"
+    },
+    {
+      "no": 78,
+      "word": "fertility",
+      "meaning": "비옥함; 생식력"
+    },
+    {
+      "no": 79,
+      "word": "sprain",
+      "meaning": "(발목·손목 등을) 삐다, 접질리다; 염좌"
+    },
+    {
+      "no": 80,
+      "word": "sculpture",
+      "meaning": "조각품; 조각, 조소"
+    },
+    {
+      "no": 81,
+      "word": "excess",
+      "meaning": "초과, 과잉; 초과한"
+    },
+    {
+      "no": 82,
+      "word": "probably",
+      "meaning": "아마도"
+    },
+    {
+      "no": 83,
+      "word": "customary",
+      "meaning": "관례적인, 관습의; 습관적인"
+    },
+    {
+      "no": 84,
+      "word": "excessive",
+      "meaning": "지나친, 과도한"
+    },
+    {
+      "no": 85,
+      "word": "stern",
+      "meaning": "근엄한, 엄격한, 단호한"
+    },
+    {
+      "no": 86,
+      "word": "scornful",
+      "meaning": "경멸하는, 멸시하는"
+    },
+    {
+      "no": 87,
+      "word": "impoverished",
+      "meaning": "빈곤한; (질적으로) 저하된"
+    },
+    {
+      "no": 88,
+      "word": "exclamation",
+      "meaning": "외침; 감탄(사)"
+    },
+    {
+      "no": 89,
+      "word": "relish",
+      "meaning": "즐기다, 좋아하다; 큰 즐거움"
+    },
+    {
+      "no": 90,
+      "word": "stagnate",
+      "meaning": "침체되다; (물이) 고이다"
+    },
+    {
+      "no": 91,
+      "word": "predecessor",
+      "meaning": "전임자; 이전의 것[모델]"
+    },
+    {
+      "no": 92,
+      "word": "pastoral",
+      "meaning": "전원 (생활)의, 목가적인; 목회자의"
+    },
+    {
+      "no": 93,
+      "word": "heir",
+      "meaning": "상속인; 후계자, 계승자"
+    },
+    {
+      "no": 94,
+      "word": "posterity",
+      "meaning": "후세, 후대"
+    },
+    {
+      "no": 95,
+      "word": "solemnity",
+      "meaning": "엄숙함"
+    },
+    {
+      "no": 96,
+      "word": "sternly",
+      "meaning": "엄격하게, 단호하게"
+    },
+    {
+      "no": 97,
+      "word": "pedestrian",
+      "meaning": "보행자; 보행자의, 도보의; (문체등이) 평범한"
+    },
+    {
+      "no": 98,
+      "word": "redemption",
+      "meaning": "구원; 현금화, 상품 교환"
+    },
+    {
+      "no": 99,
+      "word": "substantial",
+      "meaning": "상당한; 본질[실질]적인"
+    },
+    {
+      "no": 100,
+      "word": "proclamation",
+      "meaning": "선언서; 선언, 선포"
+    }
+  ]
+}

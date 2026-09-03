@@ -1,0 +1,506 @@
+{
+  "title": "Day 41~42",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "synonymous",
+      "meaning": "(밀접한 관계가 있어) 동의어와 같은; 동의어[유의어]인"
+    },
+    {
+      "no": 2,
+      "word": "inexcusable",
+      "meaning": "변명의 여지가 없는, 용서[용납]할 수 없는"
+    },
+    {
+      "no": 3,
+      "word": "studious",
+      "meaning": "열심히 공부하는, 학구적인"
+    },
+    {
+      "no": 4,
+      "word": "enlarge",
+      "meaning": "확대하다[되다], 확장하다[되다]"
+    },
+    {
+      "no": 5,
+      "word": "peasant",
+      "meaning": "소작농, 농민"
+    },
+    {
+      "no": 6,
+      "word": "valueless",
+      "meaning": "무가치한, 쓸모없는"
+    },
+    {
+      "no": 7,
+      "word": "presumably",
+      "meaning": "아마, 짐작건대"
+    },
+    {
+      "no": 8,
+      "word": "intelligibility",
+      "meaning": "이해하기 쉬움, 명료함"
+    },
+    {
+      "no": 9,
+      "word": "colonial",
+      "meaning": "식민(지)의; 식민지 주민"
+    },
+    {
+      "no": 10,
+      "word": "colony",
+      "meaning": "식민지; 집단, 군집"
+    },
+    {
+      "no": 11,
+      "word": "magnification",
+      "meaning": "확대; 확대율, 배율"
+    },
+    {
+      "no": 12,
+      "word": "reform",
+      "meaning": "개혁하다, 개선하다; 개혁, 개선"
+    },
+    {
+      "no": 13,
+      "word": "savory",
+      "meaning": "풍미 있는; 짭짤한"
+    },
+    {
+      "no": 14,
+      "word": "distortion",
+      "meaning": "비틀림; 왜곡(된 사실)"
+    },
+    {
+      "no": 15,
+      "word": "insertion",
+      "meaning": "삽입, 끼워 넣기; 삽입된 것"
+    },
+    {
+      "no": 16,
+      "word": "simultaneously",
+      "meaning": "동시에"
+    },
+    {
+      "no": 17,
+      "word": "regress",
+      "meaning": "퇴보[퇴행]하다, 회귀하다"
+    },
+    {
+      "no": 18,
+      "word": "nasty",
+      "meaning": "불쾌한, 역겨운; 못된, 심술궂은"
+    },
+    {
+      "no": 19,
+      "word": "demolition",
+      "meaning": "철거, 파괴"
+    },
+    {
+      "no": 20,
+      "word": "anatomical",
+      "meaning": "해부(학)의"
+    },
+    {
+      "no": 21,
+      "word": "distort",
+      "meaning": "일그러뜨리다, 비틀다; (사실 등을) 왜곡하다"
+    },
+    {
+      "no": 22,
+      "word": "spontaneity",
+      "meaning": "자발성, 즉흥성; 자연스러움"
+    },
+    {
+      "no": 23,
+      "word": "glorification",
+      "meaning": "미화; 찬미, 찬양"
+    },
+    {
+      "no": 24,
+      "word": "insert",
+      "meaning": "삽입하다, 끼워 넣다; 삽입물, 삽입 광고"
+    },
+    {
+      "no": 25,
+      "word": "disobedience",
+      "meaning": "불복종, 반항"
+    },
+    {
+      "no": 26,
+      "word": "nucleus",
+      "meaning": "원자핵; 세포핵; 핵심"
+    },
+    {
+      "no": 27,
+      "word": "altruism",
+      "meaning": "이타주의, 이타심"
+    },
+    {
+      "no": 28,
+      "word": "pollinate",
+      "meaning": "수분하다"
+    },
+    {
+      "no": 29,
+      "word": "pollination",
+      "meaning": "수분 (작용)"
+    },
+    {
+      "no": 30,
+      "word": "anatomy",
+      "meaning": "해부학; (해부학적) 구조"
+    },
+    {
+      "no": 31,
+      "word": "acclamation",
+      "meaning": "환호, 갈채"
+    },
+    {
+      "no": 32,
+      "word": "uniformity",
+      "meaning": "획일성, 균일성"
+    },
+    {
+      "no": 33,
+      "word": "tranquility",
+      "meaning": "평온, 고요함"
+    },
+    {
+      "no": 34,
+      "word": "spontaneous",
+      "meaning": "자발적인; 즉흥적인"
+    },
+    {
+      "no": 35,
+      "word": "sanction",
+      "meaning": "제재, 처벌; 승인, 인가; 승인[인가]하다; 제재[처벌]하다"
+    },
+    {
+      "no": 36,
+      "word": "uniform",
+      "meaning": "제복; 획일적인, 균일한"
+    },
+    {
+      "no": 37,
+      "word": "dispel",
+      "meaning": "(근심 등을) 떨쳐 버리다, 없애다"
+    },
+    {
+      "no": 38,
+      "word": "carry over",
+      "meaning": "(다른 상황에도) 계속 이어지다; ~을 넘기다, 이월하다"
+    },
+    {
+      "no": 39,
+      "word": "install",
+      "meaning": "설치[설비]하다"
+    },
+    {
+      "no": 40,
+      "word": "terse",
+      "meaning": "간결한"
+    },
+    {
+      "no": 41,
+      "word": "delegation",
+      "meaning": "대표단; 위임"
+    },
+    {
+      "no": 42,
+      "word": "keep off",
+      "meaning": "~에 가까이 가지 않다, 가까이 못 오게 하다"
+    },
+    {
+      "no": 43,
+      "word": "disobey",
+      "meaning": "거역하다, 불복종하다"
+    },
+    {
+      "no": 44,
+      "word": "aviation",
+      "meaning": "항공(술), 비행(술)"
+    },
+    {
+      "no": 45,
+      "word": "regressive",
+      "meaning": "퇴보[퇴행]하는"
+    },
+    {
+      "no": 46,
+      "word": "proactive",
+      "meaning": "상황을 앞서서 주도하는, 선제적인"
+    },
+    {
+      "no": 47,
+      "word": "stain",
+      "meaning": "얼룩, 자국; 얼룩지게 하다, 더럽히다[더러워지다]"
+    },
+    {
+      "no": 48,
+      "word": "municipal",
+      "meaning": "지방 자치(제)의, 시의"
+    },
+    {
+      "no": 49,
+      "word": "let in on",
+      "meaning": "(비밀 등을) 알려 주다"
+    },
+    {
+      "no": 50,
+      "word": "gaze",
+      "meaning": "응시하다, 바라보다; 응시"
+    },
+    {
+      "no": 51,
+      "word": "polarize",
+      "meaning": "양극화되다[시키다]"
+    },
+    {
+      "no": 52,
+      "word": "sacrifice",
+      "meaning": "희생하다; 제물로 바치다; 희생(물); 제물"
+    },
+    {
+      "no": 53,
+      "word": "resign",
+      "meaning": "사임[사직]하다; 체념[단념]하다"
+    },
+    {
+      "no": 54,
+      "word": "orbit",
+      "meaning": "궤도; 영향권, 세력권; 궤도를돌다"
+    },
+    {
+      "no": 55,
+      "word": "glorious",
+      "meaning": "영광스러운; 장엄한"
+    },
+    {
+      "no": 56,
+      "word": "extinguisher",
+      "meaning": "소화기"
+    },
+    {
+      "no": 57,
+      "word": "dwindle",
+      "meaning": "(점차) 줄어들다, 감소하다"
+    },
+    {
+      "no": 58,
+      "word": "yield",
+      "meaning": "산출[생산]하다; 굴복하다; 양보하다; 산출[수확]량; 수익"
+    },
+    {
+      "no": 59,
+      "word": "provincial",
+      "meaning": "주[도]의; 지방의"
+    },
+    {
+      "no": 60,
+      "word": "momentarily",
+      "meaning": "잠시; 곧, 금방"
+    },
+    {
+      "no": 61,
+      "word": "disproof",
+      "meaning": "반증, 논박"
+    },
+    {
+      "no": 62,
+      "word": "enlargement",
+      "meaning": "확대, 확장"
+    },
+    {
+      "no": 63,
+      "word": "facade",
+      "meaning": "(건물의) 정면, 전면; 겉모습, 허울"
+    },
+    {
+      "no": 64,
+      "word": "patent",
+      "meaning": "특허(권); 특허의; 명백한, 뻔한; 특허를 받다"
+    },
+    {
+      "no": 65,
+      "word": "sacrificial",
+      "meaning": "희생적인; 제물의"
+    },
+    {
+      "no": 66,
+      "word": "disposable",
+      "meaning": "일회용의; (자유롭게) 이용[처분] 가능한"
+    },
+    {
+      "no": 67,
+      "word": "unsuited",
+      "meaning": "부적합한, 어울리지 않는"
+    },
+    {
+      "no": 68,
+      "word": "uniformly",
+      "meaning": "획일적으로, 균일하게"
+    },
+    {
+      "no": 69,
+      "word": "considerate",
+      "meaning": "사려 깊은, 배려하는"
+    },
+    {
+      "no": 70,
+      "word": "demolish",
+      "meaning": "철거하다, 파괴하다; (이론 등을) 뒤집다"
+    },
+    {
+      "no": 71,
+      "word": "compatibility",
+      "meaning": "양립[공존] 가능성; 호환성"
+    },
+    {
+      "no": 72,
+      "word": "glorify",
+      "meaning": "미화하다; (신 등을) 찬미[찬양] 하다"
+    },
+    {
+      "no": 73,
+      "word": "indubitable",
+      "meaning": "의심할 여지가 없는, 명백한"
+    },
+    {
+      "no": 74,
+      "word": "sprawl",
+      "meaning": "팔다리를 쭉 뻗고 눕다[앉다]; (도시 등이) 무질서하게 퍼지다; 난개발"
+    },
+    {
+      "no": 75,
+      "word": "convergent",
+      "meaning": "수렴하는"
+    },
+    {
+      "no": 76,
+      "word": "compatible",
+      "meaning": "양립할 수 있는; 호환되는"
+    },
+    {
+      "no": 77,
+      "word": "idle",
+      "meaning": "게으른; (기계·사람이) 일이 없는, 놀고 있는; 빈둥거리다; 공회전하다"
+    },
+    {
+      "no": 78,
+      "word": "convergence",
+      "meaning": "(의견·목표 등의) 수렴, 일치; (기술 등의) 융합"
+    },
+    {
+      "no": 79,
+      "word": "invaluable",
+      "meaning": "매우 유용한, 매우 귀중한"
+    },
+    {
+      "no": 80,
+      "word": "synonym",
+      "meaning": "동의어, 유의어"
+    },
+    {
+      "no": 81,
+      "word": "savor",
+      "meaning": "맛보다, 음미하다; (경험 등을) 즐기다; 맛, 풍미"
+    },
+    {
+      "no": 82,
+      "word": "pass out",
+      "meaning": "의식을 잃다, 기절하다; ~을 나누어 주다"
+    },
+    {
+      "no": 83,
+      "word": "colonization",
+      "meaning": "식민지화"
+    },
+    {
+      "no": 84,
+      "word": "recharge",
+      "meaning": "(배터리 등을) 충전하다; (에너지 등을) 재충전하다"
+    },
+    {
+      "no": 85,
+      "word": "altruistic",
+      "meaning": "이타적인"
+    },
+    {
+      "no": 86,
+      "word": "retreat",
+      "meaning": "후퇴하다, 물러나다; 후퇴, 철수; 도피; 휴식처"
+    },
+    {
+      "no": 87,
+      "word": "magnify",
+      "meaning": "확대하다; 과장하다"
+    },
+    {
+      "no": 88,
+      "word": "converge",
+      "meaning": "모여들다; 수렴하다"
+    },
+    {
+      "no": 89,
+      "word": "intelligible",
+      "meaning": "(쉽게) 이해할 수 있는, 명료한"
+    },
+    {
+      "no": 90,
+      "word": "regression",
+      "meaning": "퇴행, 퇴보"
+    },
+    {
+      "no": 91,
+      "word": "reformation",
+      "meaning": "개혁, 개선"
+    },
+    {
+      "no": 92,
+      "word": "reach for",
+      "meaning": "~에 손을 뻗다; (목표 등을) 추구하다, 시도하다"
+    },
+    {
+      "no": 93,
+      "word": "nuclear",
+      "meaning": "원자력의; 핵(무기)의"
+    },
+    {
+      "no": 94,
+      "word": "presume",
+      "meaning": "추정[가정]하다"
+    },
+    {
+      "no": 95,
+      "word": "foretell",
+      "meaning": "예언하다, 예지하다"
+    },
+    {
+      "no": 96,
+      "word": "province",
+      "meaning": "주, 도; 지방; 분야"
+    },
+    {
+      "no": 97,
+      "word": "accommodation",
+      "meaning": "숙박 시설; 편의; 화해, 합의"
+    },
+    {
+      "no": 98,
+      "word": "acclaim",
+      "meaning": "찬사, 호평; 칭송하다, 환호를보내다"
+    },
+    {
+      "no": 99,
+      "word": "await",
+      "meaning": "기다리다, 대기하다"
+    },
+    {
+      "no": 100,
+      "word": "indeed",
+      "meaning": "실제로, 사실은; 정말, 참으로"
+    }
+  ]
+}

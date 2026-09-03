@@ -1,0 +1,406 @@
+{
+  "title": "Day 31~32",
+  "source": "능률보카 고등 기본",
+  "words": [
+    {
+      "no": 1,
+      "word": "extinction",
+      "meaning": "멸종"
+    },
+    {
+      "no": 2,
+      "word": "manufacture",
+      "meaning": "제조; 제품; 제작하다"
+    },
+    {
+      "no": 3,
+      "word": "bush",
+      "meaning": "관목, 덤불"
+    },
+    {
+      "no": 4,
+      "word": "profitable",
+      "meaning": "수익성이 좋은"
+    },
+    {
+      "no": 5,
+      "word": "earthquake",
+      "meaning": "지진"
+    },
+    {
+      "no": 6,
+      "word": "invest",
+      "meaning": "투자하다; 쓰다, 쏟다"
+    },
+    {
+      "no": 7,
+      "word": "pollutant",
+      "meaning": "오염 물질"
+    },
+    {
+      "no": 8,
+      "word": "investigation",
+      "meaning": "수사, 조사"
+    },
+    {
+      "no": 9,
+      "word": "sustainability",
+      "meaning": "지속 가능성"
+    },
+    {
+      "no": 10,
+      "word": "citizenship",
+      "meaning": "시민권"
+    },
+    {
+      "no": 11,
+      "word": "recycling",
+      "meaning": "재활용"
+    },
+    {
+      "no": 12,
+      "word": "hatch",
+      "meaning": "부화하다"
+    },
+    {
+      "no": 13,
+      "word": "guilty",
+      "meaning": "죄책감이 드는; 유죄의"
+    },
+    {
+      "no": 14,
+      "word": "investment",
+      "meaning": "투자"
+    },
+    {
+      "no": 15,
+      "word": "employer",
+      "meaning": "고용주"
+    },
+    {
+      "no": 16,
+      "word": "refund",
+      "meaning": "환불, 반환; 환불하다, 반환하다"
+    },
+    {
+      "no": 17,
+      "word": "stream",
+      "meaning": "개울, 시내; 줄줄 흐르다"
+    },
+    {
+      "no": 18,
+      "word": "guilt",
+      "meaning": "죄책감; 유죄"
+    },
+    {
+      "no": 19,
+      "word": "species",
+      "meaning": "종"
+    },
+    {
+      "no": 20,
+      "word": "shore",
+      "meaning": "해안"
+    },
+    {
+      "no": 21,
+      "word": "loan",
+      "meaning": "대출, 빚; 빌려주다"
+    },
+    {
+      "no": 22,
+      "word": "policy",
+      "meaning": "정책, 제도"
+    },
+    {
+      "no": 23,
+      "word": "labor",
+      "meaning": "노동, 근로; 일하다"
+    },
+    {
+      "no": 24,
+      "word": "pollution",
+      "meaning": "오염, 공해"
+    },
+    {
+      "no": 25,
+      "word": "purchase",
+      "meaning": "구매하다; 구매"
+    },
+    {
+      "no": 26,
+      "word": "ecosystem",
+      "meaning": "생태계"
+    },
+    {
+      "no": 27,
+      "word": "pollute",
+      "meaning": "더럽히다, 오염시키다"
+    },
+    {
+      "no": 28,
+      "word": "employment",
+      "meaning": "고용, 취업"
+    },
+    {
+      "no": 29,
+      "word": "industrialize",
+      "meaning": "산업화하다"
+    },
+    {
+      "no": 30,
+      "word": "pest",
+      "meaning": "해충, 유해 동물"
+    },
+    {
+      "no": 31,
+      "word": "industrious",
+      "meaning": "근면한"
+    },
+    {
+      "no": 32,
+      "word": "expense",
+      "meaning": "비용, 지출, 소비"
+    },
+    {
+      "no": 33,
+      "word": "politics",
+      "meaning": "정치"
+    },
+    {
+      "no": 34,
+      "word": "expend",
+      "meaning": "들이다, 소비하다"
+    },
+    {
+      "no": 35,
+      "word": "manufacturer",
+      "meaning": "제조업체, 생산자"
+    },
+    {
+      "no": 36,
+      "word": "sustain",
+      "meaning": "지속하다; 떠받치다, 견디다"
+    },
+    {
+      "no": 37,
+      "word": "exchange",
+      "meaning": "교환하다; 환전하다; 교환; 환전"
+    },
+    {
+      "no": 38,
+      "word": "criminal",
+      "meaning": "범죄자, 범인; 범죄의"
+    },
+    {
+      "no": 39,
+      "word": "seed",
+      "meaning": "씨, 종자; 근원; 씨를 뿌리다"
+    },
+    {
+      "no": 40,
+      "word": "inhabitant",
+      "meaning": "주민, 거주자"
+    },
+    {
+      "no": 41,
+      "word": "investigate",
+      "meaning": "수사하다; 조사하다"
+    },
+    {
+      "no": 42,
+      "word": "violate",
+      "meaning": "위반하다; 침해하다"
+    },
+    {
+      "no": 43,
+      "word": "conserve",
+      "meaning": "보존하다; 절약하다, 아끼다"
+    },
+    {
+      "no": 44,
+      "word": "predatory",
+      "meaning": "약탈하는"
+    },
+    {
+      "no": 45,
+      "word": "soil",
+      "meaning": "흙, 토양; 땅, 국토"
+    },
+    {
+      "no": 46,
+      "word": "root",
+      "meaning": "뿌리; 근원, 원인"
+    },
+    {
+      "no": 47,
+      "word": "unemployment",
+      "meaning": "실업"
+    },
+    {
+      "no": 48,
+      "word": "emit",
+      "meaning": "방출하다, 내뿜다"
+    },
+    {
+      "no": 49,
+      "word": "witness",
+      "meaning": "목격하다; 목격자"
+    },
+    {
+      "no": 50,
+      "word": "drought",
+      "meaning": "가뭄"
+    },
+    {
+      "no": 51,
+      "word": "recycle",
+      "meaning": "재활용하다"
+    },
+    {
+      "no": 52,
+      "word": "tolerant",
+      "meaning": "관대한"
+    },
+    {
+      "no": 53,
+      "word": "profit",
+      "meaning": "이익, 수익"
+    },
+    {
+      "no": 54,
+      "word": "democratic",
+      "meaning": "민주주의의, 민주적인"
+    },
+    {
+      "no": 55,
+      "word": "habitat",
+      "meaning": "서식지"
+    },
+    {
+      "no": 56,
+      "word": "sustainable",
+      "meaning": "지속 가능한"
+    },
+    {
+      "no": 57,
+      "word": "political",
+      "meaning": "정치의, 정치에 관한"
+    },
+    {
+      "no": 58,
+      "word": "inhabit",
+      "meaning": "거주하다, 서식하다"
+    },
+    {
+      "no": 59,
+      "word": "laborer",
+      "meaning": "노동자"
+    },
+    {
+      "no": 60,
+      "word": "valley",
+      "meaning": "계곡, 골짜기"
+    },
+    {
+      "no": 61,
+      "word": "environment",
+      "meaning": "환경, 상황"
+    },
+    {
+      "no": 62,
+      "word": "emission",
+      "meaning": "배출; 배출물, 배기가스"
+    },
+    {
+      "no": 63,
+      "word": "hire",
+      "meaning": "고용하다"
+    },
+    {
+      "no": 64,
+      "word": "litter",
+      "meaning": "쓰레기, 잡동사니; 어지르다, 쓰레기를 버리다"
+    },
+    {
+      "no": 65,
+      "word": "industry",
+      "meaning": "산업, 공업"
+    },
+    {
+      "no": 66,
+      "word": "environmental",
+      "meaning": "환경의"
+    },
+    {
+      "no": 67,
+      "word": "climate",
+      "meaning": "기후"
+    },
+    {
+      "no": 68,
+      "word": "violation",
+      "meaning": "위반, 침해"
+    },
+    {
+      "no": 69,
+      "word": "refundable",
+      "meaning": "환불 가능한"
+    },
+    {
+      "no": 70,
+      "word": "temperature",
+      "meaning": "온도, 기온; 체온"
+    },
+    {
+      "no": 71,
+      "word": "predator",
+      "meaning": "포식자, 약탈자"
+    },
+    {
+      "no": 72,
+      "word": "investor",
+      "meaning": "투자자"
+    },
+    {
+      "no": 73,
+      "word": "desert",
+      "meaning": "사막; 버리다, 떠나다"
+    },
+    {
+      "no": 74,
+      "word": "crime",
+      "meaning": "범죄, 죄"
+    },
+    {
+      "no": 75,
+      "word": "citizen",
+      "meaning": "시민, 국민"
+    },
+    {
+      "no": 76,
+      "word": "industrialization",
+      "meaning": "산업화"
+    },
+    {
+      "no": 77,
+      "word": "fossil",
+      "meaning": "화석"
+    },
+    {
+      "no": 78,
+      "word": "incentive",
+      "meaning": "장려책"
+    },
+    {
+      "no": 79,
+      "word": "financial",
+      "meaning": "금융의, 재정상의"
+    },
+    {
+      "no": 80,
+      "word": "tolerate",
+      "meaning": "용인하다; 참다"
+    }
+  ]
+}

@@ -1,0 +1,506 @@
+{
+  "title": "Day 19~20",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "pull over",
+      "meaning": "차를 길가에 대다"
+    },
+    {
+      "no": 2,
+      "word": "arise",
+      "meaning": "발생하다, 생기다"
+    },
+    {
+      "no": 3,
+      "word": "miserable",
+      "meaning": "불행한, 비참한; (날씨·상태 등이) 형편없는"
+    },
+    {
+      "no": 4,
+      "word": "opt for",
+      "meaning": "~을 선택하다"
+    },
+    {
+      "no": 5,
+      "word": "suspend",
+      "meaning": "(일시) 중단[유예]하다; 매달다, 걸다; 정직[정학]시키다"
+    },
+    {
+      "no": 6,
+      "word": "violate",
+      "meaning": "어기다, 위반하다; 침해하다"
+    },
+    {
+      "no": 7,
+      "word": "assign",
+      "meaning": "맡기다, 배정하다"
+    },
+    {
+      "no": 8,
+      "word": "artificially",
+      "meaning": "인공적으로, 인위적으로"
+    },
+    {
+      "no": 9,
+      "word": "landscape",
+      "meaning": "풍경, 경치; 풍경화; (사회·정치적) 환경, 정세"
+    },
+    {
+      "no": 10,
+      "word": "durability",
+      "meaning": "내구성, 내구력"
+    },
+    {
+      "no": 11,
+      "word": "sparkling",
+      "meaning": "반짝이는; 거품이 이는, 탄산이 든; 생기 넘치는"
+    },
+    {
+      "no": 12,
+      "word": "instant",
+      "meaning": "즉각적인; 즉석요리의; 즉시, 찰나"
+    },
+    {
+      "no": 13,
+      "word": "garment",
+      "meaning": "옷, 의복"
+    },
+    {
+      "no": 14,
+      "word": "erosion",
+      "meaning": "침식, 부식; 약화"
+    },
+    {
+      "no": 15,
+      "word": "retailer",
+      "meaning": "소매상, 소매업"
+    },
+    {
+      "no": 16,
+      "word": "liable",
+      "meaning": "(법적) 책임이 있는; ~하기 쉬운"
+    },
+    {
+      "no": 17,
+      "word": "expedition",
+      "meaning": "원정(대), 탐험(대)"
+    },
+    {
+      "no": 18,
+      "word": "retail",
+      "meaning": "소매; 소매로 팔다"
+    },
+    {
+      "no": 19,
+      "word": "proportion",
+      "meaning": "비율, 부분; 균형, 조화"
+    },
+    {
+      "no": 20,
+      "word": "misery",
+      "meaning": "비참함, 고통"
+    },
+    {
+      "no": 21,
+      "word": "estimation",
+      "meaning": "판단, 평가; 평가치"
+    },
+    {
+      "no": 22,
+      "word": "arousal",
+      "meaning": "각성, 자극"
+    },
+    {
+      "no": 23,
+      "word": "segment",
+      "meaning": "부분; (과일의) 조각; 나누다"
+    },
+    {
+      "no": 24,
+      "word": "in light of",
+      "meaning": "~에 비추어 볼 때, ~을 고려하여"
+    },
+    {
+      "no": 25,
+      "word": "favorably",
+      "meaning": "호의적으로; 유리하게"
+    },
+    {
+      "no": 26,
+      "word": "strip",
+      "meaning": "옷을 벗다[벗기다]; (껍질 등을) 벗기다; (자격 등을) 박탈하다; 가느다란 조각"
+    },
+    {
+      "no": 27,
+      "word": "unnerve",
+      "meaning": "불안하게 만들다"
+    },
+    {
+      "no": 28,
+      "word": "hygiene",
+      "meaning": "위생; 위생학"
+    },
+    {
+      "no": 29,
+      "word": "inhibition",
+      "meaning": "억제, 방해"
+    },
+    {
+      "no": 30,
+      "word": "diverge",
+      "meaning": "갈라지다; (의견 등이) 나뉘다"
+    },
+    {
+      "no": 31,
+      "word": "shift",
+      "meaning": "이동하다, 옮기다; (의견 등이) 바뀌다[바꾸다]; 변화, 전환; 교대 (근무)"
+    },
+    {
+      "no": 32,
+      "word": "conscious",
+      "meaning": "의식하는; 의식이 있는; 의도적인"
+    },
+    {
+      "no": 33,
+      "word": "duration",
+      "meaning": "지속 기간[시간]"
+    },
+    {
+      "no": 34,
+      "word": "certificate",
+      "meaning": "자격증, 증명서"
+    },
+    {
+      "no": 35,
+      "word": "execute",
+      "meaning": "실행[수행]하다; 처형하다"
+    },
+    {
+      "no": 36,
+      "word": "intimidating",
+      "meaning": "위협적인, 겁을 주는"
+    },
+    {
+      "no": 37,
+      "word": "graceful",
+      "meaning": "우아한, 품위 있는"
+    },
+    {
+      "no": 38,
+      "word": "instantaneously",
+      "meaning": "즉각적으로"
+    },
+    {
+      "no": 39,
+      "word": "consent",
+      "meaning": "동의, 허락; 동의하다, 허락하다"
+    },
+    {
+      "no": 40,
+      "word": "certification",
+      "meaning": "증명"
+    },
+    {
+      "no": 41,
+      "word": "proportional",
+      "meaning": "비례하는"
+    },
+    {
+      "no": 42,
+      "word": "hold off",
+      "meaning": "~을 미루다, 연기하다; (공격·위험 등을) 막아내다"
+    },
+    {
+      "no": 43,
+      "word": "impersonal",
+      "meaning": "인간미 없는, 비인격적인; 비개인적인"
+    },
+    {
+      "no": 44,
+      "word": "segmentation",
+      "meaning": "분할(된 부분)"
+    },
+    {
+      "no": 45,
+      "word": "certify",
+      "meaning": "증명하다; 자격증을 주다"
+    },
+    {
+      "no": 46,
+      "word": "miserably",
+      "meaning": "비참하게"
+    },
+    {
+      "no": 47,
+      "word": "undergraduate",
+      "meaning": "대학생, 학부생; 학부의, 대학생의"
+    },
+    {
+      "no": 48,
+      "word": "rage",
+      "meaning": "분노, 격노; 격노하다"
+    },
+    {
+      "no": 49,
+      "word": "suspension",
+      "meaning": "보류, 중단; 정직, 정학"
+    },
+    {
+      "no": 50,
+      "word": "let on",
+      "meaning": "(비밀 등을) 털어놓다, 발설하다"
+    },
+    {
+      "no": 51,
+      "word": "sparkle",
+      "meaning": "반짝이다; 생기 넘치다; 반짝거림; 생기"
+    },
+    {
+      "no": 52,
+      "word": "resume",
+      "meaning": "재개하다; 다시 자리를 잡다"
+    },
+    {
+      "no": 53,
+      "word": "recollection",
+      "meaning": "기억, 회상; 기억력"
+    },
+    {
+      "no": 54,
+      "word": "ritual",
+      "meaning": "(종교적) 의식, 의례; 의례적인일; 의식적인; 의례적인"
+    },
+    {
+      "no": 55,
+      "word": "favorable",
+      "meaning": "호의적인, 우호적인; 유리한"
+    },
+    {
+      "no": 56,
+      "word": "durable",
+      "meaning": "내구성이 있는, 오래가는"
+    },
+    {
+      "no": 57,
+      "word": "eventually",
+      "meaning": "결국, 마침내"
+    },
+    {
+      "no": 58,
+      "word": "intimidate",
+      "meaning": "위협하다, 겁주다"
+    },
+    {
+      "no": 59,
+      "word": "executive",
+      "meaning": "(기업의) 경영진, 간부; 행정부; 경영의; 행정의"
+    },
+    {
+      "no": 60,
+      "word": "microbe",
+      "meaning": "미생물"
+    },
+    {
+      "no": 61,
+      "word": "myriad",
+      "meaning": "무수함; 무수한"
+    },
+    {
+      "no": 62,
+      "word": "stroke",
+      "meaning": "타격; 뇌졸중; 수영법; 쓰다듬기; (글씨·그림의) 획; 쓰다듬다"
+    },
+    {
+      "no": 63,
+      "word": "excellence",
+      "meaning": "뛰어남, 아주 우수함"
+    },
+    {
+      "no": 64,
+      "word": "result in",
+      "meaning": "(결과적으로) ~을 낳다, 초래하다"
+    },
+    {
+      "no": 65,
+      "word": "eventual",
+      "meaning": "최종[궁극]적인"
+    },
+    {
+      "no": 66,
+      "word": "infancy",
+      "meaning": "유아기; 초창기"
+    },
+    {
+      "no": 67,
+      "word": "erode",
+      "meaning": "침식하다[되다]; (서서히) 약화시키다[되다]"
+    },
+    {
+      "no": 68,
+      "word": "linkage",
+      "meaning": "연결, 관련(성)"
+    },
+    {
+      "no": 69,
+      "word": "egocentric",
+      "meaning": "자기중심적인, 이기적인"
+    },
+    {
+      "no": 70,
+      "word": "disposal",
+      "meaning": "처리, 처분"
+    },
+    {
+      "no": 71,
+      "word": "earnestly",
+      "meaning": "진지하게, 진심으로, 열심히"
+    },
+    {
+      "no": 72,
+      "word": "indispensable",
+      "meaning": "필수적인, 없어서는 안 되는"
+    },
+    {
+      "no": 73,
+      "word": "domain",
+      "meaning": "영역, 분야; 소유지, 영토; 도메인"
+    },
+    {
+      "no": 74,
+      "word": "respectfully",
+      "meaning": "공손하게"
+    },
+    {
+      "no": 75,
+      "word": "impersonally",
+      "meaning": "인간미 없게, 냉담하게"
+    },
+    {
+      "no": 76,
+      "word": "infant",
+      "meaning": "유아; 유아의; 초창기의, 초기의"
+    },
+    {
+      "no": 77,
+      "word": "estimated",
+      "meaning": "견적의, 추측의"
+    },
+    {
+      "no": 78,
+      "word": "vigorous",
+      "meaning": "(논쟁·활동 등이) 활발한, 격렬한; 원기 왕성한"
+    },
+    {
+      "no": 79,
+      "word": "vigorously",
+      "meaning": "힘차게, 활발하게"
+    },
+    {
+      "no": 80,
+      "word": "conscience",
+      "meaning": "양심; (양심의) 가책"
+    },
+    {
+      "no": 81,
+      "word": "adrift",
+      "meaning": "표류하는"
+    },
+    {
+      "no": 82,
+      "word": "consciousness",
+      "meaning": "의식, 자각"
+    },
+    {
+      "no": 83,
+      "word": "grant",
+      "meaning": "(정식으로) 주다, 수여하다; 승인하다; 수여; 보조금"
+    },
+    {
+      "no": 84,
+      "word": "aural",
+      "meaning": "청각의"
+    },
+    {
+      "no": 85,
+      "word": "turn to",
+      "meaning": "~에 의지하다; (다른 주제·활동으로) 전환하다"
+    },
+    {
+      "no": 86,
+      "word": "respectful",
+      "meaning": "존경하는, 공손한"
+    },
+    {
+      "no": 87,
+      "word": "contradictory",
+      "meaning": "모순되는, 상반되는"
+    },
+    {
+      "no": 88,
+      "word": "rhetorical",
+      "meaning": "수사적인; 미사여구의"
+    },
+    {
+      "no": 89,
+      "word": "consciously",
+      "meaning": "의식적으로"
+    },
+    {
+      "no": 90,
+      "word": "assignment",
+      "meaning": "과제, 임무; 배정, 배치"
+    },
+    {
+      "no": 91,
+      "word": "consensus",
+      "meaning": "의견 일치, 합의"
+    },
+    {
+      "no": 92,
+      "word": "genuinely",
+      "meaning": "진정으로"
+    },
+    {
+      "no": 93,
+      "word": "earnest",
+      "meaning": "성실한, 진심 어린"
+    },
+    {
+      "no": 94,
+      "word": "protagonist",
+      "meaning": "주인공"
+    },
+    {
+      "no": 95,
+      "word": "shrinkage",
+      "meaning": "감소, 수축; 감소량"
+    },
+    {
+      "no": 96,
+      "word": "liability",
+      "meaning": "법적 책임; 부채; 골칫거리"
+    },
+    {
+      "no": 97,
+      "word": "gratitude",
+      "meaning": "고마움, 감사"
+    },
+    {
+      "no": 98,
+      "word": "conscientious",
+      "meaning": "양심적인, 성실한"
+    },
+    {
+      "no": 99,
+      "word": "subordinate",
+      "meaning": "(지위가) 하위의; 부수[부차]적인; 하급자; 하위에 두다"
+    },
+    {
+      "no": 100,
+      "word": "rhetoric",
+      "meaning": "미사여구; 수사법, 수사학"
+    }
+  ]
+}

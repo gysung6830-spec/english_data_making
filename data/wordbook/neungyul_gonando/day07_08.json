@@ -1,0 +1,506 @@
+{
+  "title": "Day 7~8",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "exclusion",
+      "meaning": "제외; 차단"
+    },
+    {
+      "no": 2,
+      "word": "generation",
+      "meaning": "세대; (열·전기 등의) 발생"
+    },
+    {
+      "no": 3,
+      "word": "permanently",
+      "meaning": "영구적으로"
+    },
+    {
+      "no": 4,
+      "word": "permanent",
+      "meaning": "영구적인, 영속적인"
+    },
+    {
+      "no": 5,
+      "word": "haul",
+      "meaning": "(힘들여) 끌다, 운반하다; 많은 양; 거리, 여정"
+    },
+    {
+      "no": 6,
+      "word": "aggressive",
+      "meaning": "공격적인; 매우 적극적인"
+    },
+    {
+      "no": 7,
+      "word": "equilibrium",
+      "meaning": "균형, 평형 (상태); (마음의) 평정"
+    },
+    {
+      "no": 8,
+      "word": "brutality",
+      "meaning": "잔혹성, 잔인성; 만행"
+    },
+    {
+      "no": 9,
+      "word": "previously",
+      "meaning": "이전에, 미리"
+    },
+    {
+      "no": 10,
+      "word": "paradox",
+      "meaning": "역설, 역설적인 것"
+    },
+    {
+      "no": 11,
+      "word": "nurture",
+      "meaning": "키우다, 양육하다; 육성[양성]하다; 양육; 양성"
+    },
+    {
+      "no": 12,
+      "word": "mammal",
+      "meaning": "포유동물, 포유류"
+    },
+    {
+      "no": 13,
+      "word": "root out",
+      "meaning": "~을 뿌리 뽑다, 근절하다; (원인을) 찾아내다"
+    },
+    {
+      "no": 14,
+      "word": "exclusively",
+      "meaning": "독점적으로, 오로지"
+    },
+    {
+      "no": 15,
+      "word": "regulatory",
+      "meaning": "규제력을 지닌"
+    },
+    {
+      "no": 16,
+      "word": "surge",
+      "meaning": "밀려들다; 급등[급증]하다; 급증, 급등; 동요"
+    },
+    {
+      "no": 17,
+      "word": "strengthen",
+      "meaning": "강화하다, 강화되다"
+    },
+    {
+      "no": 18,
+      "word": "hang around",
+      "meaning": "어슬렁거리다, 서성거리다; (~와) 어울리다"
+    },
+    {
+      "no": 19,
+      "word": "correlation",
+      "meaning": "연관성, 상관관계"
+    },
+    {
+      "no": 20,
+      "word": "offset",
+      "meaning": "상쇄[벌충]하다; 상쇄하는 것"
+    },
+    {
+      "no": 21,
+      "word": "discard",
+      "meaning": "버리다, 폐기하다"
+    },
+    {
+      "no": 22,
+      "word": "distinctly",
+      "meaning": "뚜렷이"
+    },
+    {
+      "no": 23,
+      "word": "correlative",
+      "meaning": "상관관계가 있는"
+    },
+    {
+      "no": 24,
+      "word": "misleading",
+      "meaning": "오도하는, 오해의 소지가 있는"
+    },
+    {
+      "no": 25,
+      "word": "conceptual",
+      "meaning": "개념의, 개념적인"
+    },
+    {
+      "no": 26,
+      "word": "diverse",
+      "meaning": "다양한"
+    },
+    {
+      "no": 27,
+      "word": "call off",
+      "meaning": "(예정된 행사 등을) 취소하다, 중지하다"
+    },
+    {
+      "no": 28,
+      "word": "correlate",
+      "meaning": "(밀접한) 연관성이 있다"
+    },
+    {
+      "no": 29,
+      "word": "profound",
+      "meaning": "(영향 등이) 엄청난; 깊은, 심오한"
+    },
+    {
+      "no": 30,
+      "word": "permanence",
+      "meaning": "영구, 영속성"
+    },
+    {
+      "no": 31,
+      "word": "gradual",
+      "meaning": "점진적인"
+    },
+    {
+      "no": 32,
+      "word": "distinct",
+      "meaning": "뚜렷한, 분명한; 뚜렷이 다른, 별개의"
+    },
+    {
+      "no": 33,
+      "word": "displace",
+      "meaning": "대신[대체]하다; 쫓아내다"
+    },
+    {
+      "no": 34,
+      "word": "isolated",
+      "meaning": "외딴; 고립된"
+    },
+    {
+      "no": 35,
+      "word": "misbehavior",
+      "meaning": "나쁜 행실; 부정행위"
+    },
+    {
+      "no": 36,
+      "word": "replicate",
+      "meaning": "모사[복제]하다, 재현하다"
+    },
+    {
+      "no": 37,
+      "word": "skepticism",
+      "meaning": "회의론"
+    },
+    {
+      "no": 38,
+      "word": "reflection",
+      "meaning": "비친 것, 반사; 반영; 숙고"
+    },
+    {
+      "no": 39,
+      "word": "foster",
+      "meaning": "촉진하다, 조성하다; 위탁 양육하다; 위탁의, 양의"
+    },
+    {
+      "no": 40,
+      "word": "exclusive",
+      "meaning": "독점적인; 배타적인; 고급의, 고가의; 독점 기사"
+    },
+    {
+      "no": 41,
+      "word": "dominate",
+      "meaning": "지배하다; 우위를 차지하다"
+    },
+    {
+      "no": 42,
+      "word": "contextual",
+      "meaning": "전후 관계상의; 문맥상의"
+    },
+    {
+      "no": 43,
+      "word": "collision",
+      "meaning": "충돌 (사고); 상충"
+    },
+    {
+      "no": 44,
+      "word": "spatial",
+      "meaning": "공간의, 공간적인"
+    },
+    {
+      "no": 45,
+      "word": "diversity",
+      "meaning": "다양성"
+    },
+    {
+      "no": 46,
+      "word": "let out",
+      "meaning": "(소리 등을) 내다, 지르다"
+    },
+    {
+      "no": 47,
+      "word": "overlap",
+      "meaning": "겹치다, 중복되다; 겹침, 중복"
+    },
+    {
+      "no": 48,
+      "word": "conceptualize",
+      "meaning": "개념화하다, 구상하다"
+    },
+    {
+      "no": 49,
+      "word": "commute",
+      "meaning": "통근하다; 통근 (거리)"
+    },
+    {
+      "no": 50,
+      "word": "intuition",
+      "meaning": "직관(력), 직감"
+    },
+    {
+      "no": 51,
+      "word": "distract",
+      "meaning": "(주의 등을) 흐트러뜨리다, 산만하게 하다"
+    },
+    {
+      "no": 52,
+      "word": "hazardous",
+      "meaning": "위험한"
+    },
+    {
+      "no": 53,
+      "word": "isolate",
+      "meaning": "격리하다, 고립시키다; 분리하다"
+    },
+    {
+      "no": 54,
+      "word": "livelihood",
+      "meaning": "생계 (수단)"
+    },
+    {
+      "no": 55,
+      "word": "displacement",
+      "meaning": "(강제에 의한) 이동, 추방; 바꾸어 놓기"
+    },
+    {
+      "no": 56,
+      "word": "brutal",
+      "meaning": "잔혹한, 야만적인; 인정사정없는"
+    },
+    {
+      "no": 57,
+      "word": "forager",
+      "meaning": "약탈자"
+    },
+    {
+      "no": 58,
+      "word": "thereby",
+      "meaning": "그렇게 함으로써, 그것 때문에"
+    },
+    {
+      "no": 59,
+      "word": "brutally",
+      "meaning": "잔혹하게"
+    },
+    {
+      "no": 60,
+      "word": "temporal",
+      "meaning": "시간의, 한시적인; 세속적인, 현세의"
+    },
+    {
+      "no": 61,
+      "word": "generator",
+      "meaning": "발전기; 발생시키는 것"
+    },
+    {
+      "no": 62,
+      "word": "conform",
+      "meaning": "(규칙 등에) 따르다, 순응하다; 일치하다"
+    },
+    {
+      "no": 63,
+      "word": "gradually",
+      "meaning": "점차적으로, 서서히"
+    },
+    {
+      "no": 64,
+      "word": "occupied",
+      "meaning": "사용 중인; 바쁜"
+    },
+    {
+      "no": 65,
+      "word": "derive",
+      "meaning": "(이익 등을) 얻다; 유래[파생]하다"
+    },
+    {
+      "no": 66,
+      "word": "acoustic",
+      "meaning": "청각의, 음향의; 전자 장치를 쓰지 않는"
+    },
+    {
+      "no": 67,
+      "word": "integrate",
+      "meaning": "통합하다, 통합되다"
+    },
+    {
+      "no": 68,
+      "word": "turn down",
+      "meaning": "~을 거절하다; (소리·온도 등을) 낮추다"
+    },
+    {
+      "no": 69,
+      "word": "facilitation",
+      "meaning": "용이하게 함"
+    },
+    {
+      "no": 70,
+      "word": "dominant",
+      "meaning": "지배적인, 우세한; 우성의"
+    },
+    {
+      "no": 71,
+      "word": "supplementary",
+      "meaning": "보충의, 추가의"
+    },
+    {
+      "no": 72,
+      "word": "misbehave",
+      "meaning": "나쁜 짓을 하다"
+    },
+    {
+      "no": 73,
+      "word": "collide",
+      "meaning": "충돌하다, 부딪치다; (의견 등이) 상충하다"
+    },
+    {
+      "no": 74,
+      "word": "occupy",
+      "meaning": "(공간·시간을) 차지하다; 점령하다; 전념하다"
+    },
+    {
+      "no": 75,
+      "word": "concept",
+      "meaning": "개념"
+    },
+    {
+      "no": 76,
+      "word": "reflective",
+      "meaning": "숙고하는; 반사하는; 반영하는"
+    },
+    {
+      "no": 77,
+      "word": "profoundly",
+      "meaning": "깊이, 심오하게"
+    },
+    {
+      "no": 78,
+      "word": "entail",
+      "meaning": "수반하다, 포함하다"
+    },
+    {
+      "no": 79,
+      "word": "summons",
+      "meaning": "(법원) 소환장"
+    },
+    {
+      "no": 80,
+      "word": "abruptly",
+      "meaning": "갑자기, 불쑥; 퉁명스럽게"
+    },
+    {
+      "no": 81,
+      "word": "strength",
+      "meaning": "힘; 내구력; 강점, 장점"
+    },
+    {
+      "no": 82,
+      "word": "geometry",
+      "meaning": "기하학"
+    },
+    {
+      "no": 83,
+      "word": "metaphorical",
+      "meaning": "은유[비유]의, 은유[비유]를 쓴"
+    },
+    {
+      "no": 84,
+      "word": "previous",
+      "meaning": "이전의, 앞의"
+    },
+    {
+      "no": 85,
+      "word": "feasible",
+      "meaning": "실행[실현] 가능한"
+    },
+    {
+      "no": 86,
+      "word": "abrupt",
+      "meaning": "돌연한, 갑작스러운; 퉁명스러운"
+    },
+    {
+      "no": 87,
+      "word": "diversify",
+      "meaning": "다각화하다, 다양화하다, 다양해지다"
+    },
+    {
+      "no": 88,
+      "word": "spatially",
+      "meaning": "공간적으로"
+    },
+    {
+      "no": 89,
+      "word": "replicable",
+      "meaning": "반복 가능한; 복제 가능한"
+    },
+    {
+      "no": 90,
+      "word": "intuitive",
+      "meaning": "직관적인, 직감에 의한"
+    },
+    {
+      "no": 91,
+      "word": "prestige",
+      "meaning": "위신, 명성"
+    },
+    {
+      "no": 92,
+      "word": "feasibility",
+      "meaning": "실현 가능성"
+    },
+    {
+      "no": 93,
+      "word": "astonished",
+      "meaning": "깜짝 놀란"
+    },
+    {
+      "no": 94,
+      "word": "isolation",
+      "meaning": "고립(감); 분리"
+    },
+    {
+      "no": 95,
+      "word": "facilitator",
+      "meaning": "조력자; 촉진제"
+    },
+    {
+      "no": 96,
+      "word": "eruption",
+      "meaning": "분출, 폭발; 발발"
+    },
+    {
+      "no": 97,
+      "word": "regulate",
+      "meaning": "규제[통제]하다; 조절[조정]하다"
+    },
+    {
+      "no": 98,
+      "word": "paradoxical",
+      "meaning": "역설적인"
+    },
+    {
+      "no": 99,
+      "word": "regulation",
+      "meaning": "규정; 규제, 통제"
+    },
+    {
+      "no": 100,
+      "word": "conceal",
+      "meaning": "감추다, 숨기다"
+    }
+  ]
+}

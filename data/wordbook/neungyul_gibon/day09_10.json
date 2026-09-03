@@ -1,0 +1,406 @@
+{
+  "title": "Day 9~10",
+  "source": "능률보카 고등 기본",
+  "words": [
+    {
+      "no": 1,
+      "word": "generation",
+      "meaning": "세대, 대"
+    },
+    {
+      "no": 2,
+      "word": "emerge",
+      "meaning": "나타나다, 모습을 드러내다; 드러나다"
+    },
+    {
+      "no": 3,
+      "word": "series",
+      "meaning": "일련, 연속; 시리즈, 연속 출판물"
+    },
+    {
+      "no": 4,
+      "word": "donor",
+      "meaning": "기부자"
+    },
+    {
+      "no": 5,
+      "word": "threat",
+      "meaning": "위협, 협박"
+    },
+    {
+      "no": 6,
+      "word": "peak",
+      "meaning": "절정, 최고조; 꼭대기, 정상; 절정에 달하다"
+    },
+    {
+      "no": 7,
+      "word": "empathetic",
+      "meaning": "감정 이입의"
+    },
+    {
+      "no": 8,
+      "word": "threaten",
+      "meaning": "위협하다, 위태롭게 하다"
+    },
+    {
+      "no": 9,
+      "word": "wealth",
+      "meaning": "부, 재산"
+    },
+    {
+      "no": 10,
+      "word": "edit",
+      "meaning": "편집하다"
+    },
+    {
+      "no": 11,
+      "word": "officially",
+      "meaning": "공식적으로"
+    },
+    {
+      "no": 12,
+      "word": "announce",
+      "meaning": "발표하다, 알리다"
+    },
+    {
+      "no": 13,
+      "word": "tragic",
+      "meaning": "비극적인, 안타까운"
+    },
+    {
+      "no": 14,
+      "word": "edition",
+      "meaning": "판"
+    },
+    {
+      "no": 15,
+      "word": "boost",
+      "meaning": "신장시키다, 북돋우다; 밀어 올리기; 힘, 격려"
+    },
+    {
+      "no": 16,
+      "word": "personality",
+      "meaning": "성격"
+    },
+    {
+      "no": 17,
+      "word": "generally",
+      "meaning": "일반적으로, 대개"
+    },
+    {
+      "no": 18,
+      "word": "logical",
+      "meaning": "논리적인"
+    },
+    {
+      "no": 19,
+      "word": "aim",
+      "meaning": "노리다, 목표로 삼다; 겨누다; 목표, 목적; 조준"
+    },
+    {
+      "no": 20,
+      "word": "announcer",
+      "meaning": "아나운서, 해설자"
+    },
+    {
+      "no": 21,
+      "word": "bother",
+      "meaning": "귀찮게 굴다, 괴롭히다; 성가심, 수고"
+    },
+    {
+      "no": 22,
+      "word": "factor",
+      "meaning": "요인, 요소"
+    },
+    {
+      "no": 23,
+      "word": "comfort",
+      "meaning": "위로하다, 안심시키다; 위로"
+    },
+    {
+      "no": 24,
+      "word": "accept",
+      "meaning": "받아들이다, 수락하다"
+    },
+    {
+      "no": 25,
+      "word": "empathy",
+      "meaning": "공감, 감정 이입"
+    },
+    {
+      "no": 26,
+      "word": "set off",
+      "meaning": "출발하다; ~을 폭발시키다; ~을 작동시키다"
+    },
+    {
+      "no": 27,
+      "word": "account for",
+      "meaning": "~을 설명하다; ~의 원인이 되다; 차지하다"
+    },
+    {
+      "no": 28,
+      "word": "donate",
+      "meaning": "기부하다"
+    },
+    {
+      "no": 29,
+      "word": "severe",
+      "meaning": "극심한, 심각한; 가혹한; 엄격한"
+    },
+    {
+      "no": 30,
+      "word": "acceptable",
+      "meaning": "허용할 수 있는"
+    },
+    {
+      "no": 31,
+      "word": "empathize",
+      "meaning": "감정 이입을 하다"
+    },
+    {
+      "no": 32,
+      "word": "nevertheless",
+      "meaning": "그럼에도 불구하고"
+    },
+    {
+      "no": 33,
+      "word": "tragedy",
+      "meaning": "비극, 참사"
+    },
+    {
+      "no": 34,
+      "word": "hesitant",
+      "meaning": "망설이는, 주저하는"
+    },
+    {
+      "no": 35,
+      "word": "punishment",
+      "meaning": "처벌, 징계"
+    },
+    {
+      "no": 36,
+      "word": "rely on",
+      "meaning": "~에 의지하다"
+    },
+    {
+      "no": 37,
+      "word": "deliver",
+      "meaning": "배달하다; 하다; 출산하다"
+    },
+    {
+      "no": 38,
+      "word": "celebrity",
+      "meaning": "유명 인사; 명성"
+    },
+    {
+      "no": 39,
+      "word": "department",
+      "meaning": "부서, 부문"
+    },
+    {
+      "no": 40,
+      "word": "donation",
+      "meaning": "기부"
+    },
+    {
+      "no": 41,
+      "word": "source",
+      "meaning": "근원, 원천; 출처"
+    },
+    {
+      "no": 42,
+      "word": "hesitate",
+      "meaning": "망설이다, 주저하다"
+    },
+    {
+      "no": 43,
+      "word": "personal",
+      "meaning": "개인의, 사적인"
+    },
+    {
+      "no": 44,
+      "word": "basis",
+      "meaning": "기초, 기반; 근거, 이유; 기준"
+    },
+    {
+      "no": 45,
+      "word": "basic",
+      "meaning": "기본적인"
+    },
+    {
+      "no": 46,
+      "word": "logically",
+      "meaning": "논리적으로"
+    },
+    {
+      "no": 47,
+      "word": "hesitation",
+      "meaning": "망설임"
+    },
+    {
+      "no": 48,
+      "word": "installation",
+      "meaning": "설치"
+    },
+    {
+      "no": 49,
+      "word": "distant",
+      "meaning": "먼"
+    },
+    {
+      "no": 50,
+      "word": "resolution",
+      "meaning": "결의, 결단; 해결"
+    },
+    {
+      "no": 51,
+      "word": "official",
+      "meaning": "공무원, 관계자; 공무상의, 공식적인"
+    },
+    {
+      "no": 52,
+      "word": "emergence",
+      "meaning": "등장, 발생"
+    },
+    {
+      "no": 53,
+      "word": "oddly",
+      "meaning": "이상하게"
+    },
+    {
+      "no": 54,
+      "word": "organization",
+      "meaning": "조직, 단체"
+    },
+    {
+      "no": 55,
+      "word": "chase",
+      "meaning": "뒤쫓다, 추격하다; 추구하다; 추적; 추구"
+    },
+    {
+      "no": 56,
+      "word": "apology",
+      "meaning": "사과, 사죄"
+    },
+    {
+      "no": 57,
+      "word": "logic",
+      "meaning": "논리"
+    },
+    {
+      "no": 58,
+      "word": "basically",
+      "meaning": "기본적으로"
+    },
+    {
+      "no": 59,
+      "word": "handle",
+      "meaning": "손잡이; 다루다, 처리하다"
+    },
+    {
+      "no": 60,
+      "word": "prejudice",
+      "meaning": "편견, 선입관; 편견을 갖게 하다"
+    },
+    {
+      "no": 61,
+      "word": "injured",
+      "meaning": "상처 입은"
+    },
+    {
+      "no": 62,
+      "word": "artificial",
+      "meaning": "인공의, 인위적인"
+    },
+    {
+      "no": 63,
+      "word": "varied",
+      "meaning": "가지각색의"
+    },
+    {
+      "no": 64,
+      "word": "acceptance",
+      "meaning": "수용, 수락"
+    },
+    {
+      "no": 65,
+      "word": "organize",
+      "meaning": "조직하다; 정리하다"
+    },
+    {
+      "no": 66,
+      "word": "comfortable",
+      "meaning": "편안한"
+    },
+    {
+      "no": 67,
+      "word": "measure",
+      "meaning": "측정하다; 판단하다; 기준, 척도; 조치, 방책"
+    },
+    {
+      "no": 68,
+      "word": "various",
+      "meaning": "다양한"
+    },
+    {
+      "no": 69,
+      "word": "mature",
+      "meaning": "성숙한, 어른스러운; 잘 익은, 숙성한; 성숙해지다; 잘 익다, 숙성하다"
+    },
+    {
+      "no": 70,
+      "word": "accessible",
+      "meaning": "접근할 수 있는"
+    },
+    {
+      "no": 71,
+      "word": "resolve",
+      "meaning": "결심하다; 해결하다"
+    },
+    {
+      "no": 72,
+      "word": "isolation",
+      "meaning": "고립, 격리"
+    },
+    {
+      "no": 73,
+      "word": "majority",
+      "meaning": "대다수, 과반수"
+    },
+    {
+      "no": 74,
+      "word": "be known for",
+      "meaning": "~로 알려져 있다"
+    },
+    {
+      "no": 75,
+      "word": "offend",
+      "meaning": "기분을 상하게 하다"
+    },
+    {
+      "no": 76,
+      "word": "path",
+      "meaning": "길, 보도; 방향, 진로"
+    },
+    {
+      "no": 77,
+      "word": "proper",
+      "meaning": "적절한, 알맞은"
+    },
+    {
+      "no": 78,
+      "word": "properly",
+      "meaning": "적절하게, 알맞게"
+    },
+    {
+      "no": 79,
+      "word": "situation",
+      "meaning": "상황, 처지; 위치"
+    },
+    {
+      "no": 80,
+      "word": "announcement",
+      "meaning": "발표, 공지"
+    }
+  ]
+}

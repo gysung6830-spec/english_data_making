@@ -1,0 +1,506 @@
+{
+  "title": "Day 21~22",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "overwhelming",
+      "meaning": "압도적인, 굉장한"
+    },
+    {
+      "no": 2,
+      "word": "steer",
+      "meaning": "(탈것을) 조종하다, 몰다; 이끌다, 유도하다"
+    },
+    {
+      "no": 3,
+      "word": "duration",
+      "meaning": "지속 기간[시간]"
+    },
+    {
+      "no": 4,
+      "word": "resonate",
+      "meaning": "공명하다, 울려 퍼지다; 반향을 불러일으키다"
+    },
+    {
+      "no": 5,
+      "word": "restrictive",
+      "meaning": "제한[구속]하는"
+    },
+    {
+      "no": 6,
+      "word": "vein",
+      "meaning": "정맥; (식물의) 잎맥; 방식, 태도"
+    },
+    {
+      "no": 7,
+      "word": "adolescence",
+      "meaning": "청소년기"
+    },
+    {
+      "no": 8,
+      "word": "furiously",
+      "meaning": "몹시 화가 나서; 맹렬히"
+    },
+    {
+      "no": 9,
+      "word": "financial",
+      "meaning": "재무의, 재정의"
+    },
+    {
+      "no": 10,
+      "word": "exceptional",
+      "meaning": "매우 뛰어난; 예외적인, 이례적인"
+    },
+    {
+      "no": 11,
+      "word": "count out",
+      "meaning": "~을 제외하다; (하나씩) 세다"
+    },
+    {
+      "no": 12,
+      "word": "pasture",
+      "meaning": "목초지, 목장; 방목하다"
+    },
+    {
+      "no": 13,
+      "word": "guardian",
+      "meaning": "보호자, 수호자; 후견인"
+    },
+    {
+      "no": 14,
+      "word": "involuntary",
+      "meaning": "자기도 모르게 하는, 비자발적인; 원치 않는, 본의 아닌"
+    },
+    {
+      "no": 15,
+      "word": "roam",
+      "meaning": "돌아다니다, 배회하다"
+    },
+    {
+      "no": 16,
+      "word": "notion",
+      "meaning": "개념, 관념, 생각"
+    },
+    {
+      "no": 17,
+      "word": "exceptionally",
+      "meaning": "유난히; 예외적으로"
+    },
+    {
+      "no": 18,
+      "word": "get through",
+      "meaning": "(힘든 시기 등을) 극복하다; (일 등을) 끝내다; (전화가) 연결되다"
+    },
+    {
+      "no": 19,
+      "word": "continental",
+      "meaning": "대륙의, 대륙성의"
+    },
+    {
+      "no": 20,
+      "word": "nostalgic",
+      "meaning": "향수를 불러일으키는"
+    },
+    {
+      "no": 21,
+      "word": "refutation",
+      "meaning": "반박, 논박"
+    },
+    {
+      "no": 22,
+      "word": "drown",
+      "meaning": "익사하다[시키다]; (액체에) 잠기게 하다"
+    },
+    {
+      "no": 23,
+      "word": "backfire",
+      "meaning": "역효과를 낳다"
+    },
+    {
+      "no": 24,
+      "word": "arithmetic",
+      "meaning": "산수, 산술, 계산"
+    },
+    {
+      "no": 25,
+      "word": "involuntarily",
+      "meaning": "무의식적으로, 무심결에"
+    },
+    {
+      "no": 26,
+      "word": "barter",
+      "meaning": "물물 교환하다, 교역하다; 물물 교환"
+    },
+    {
+      "no": 27,
+      "word": "sensibly",
+      "meaning": "분별 있게, 현명하게; 실용적으로"
+    },
+    {
+      "no": 28,
+      "word": "shy away",
+      "meaning": "~을 피하다, 꺼리다"
+    },
+    {
+      "no": 29,
+      "word": "rainforest",
+      "meaning": "열대 우림"
+    },
+    {
+      "no": 30,
+      "word": "disclose",
+      "meaning": "(비밀 등을) 밝히다, 폭로하다; 드러내다"
+    },
+    {
+      "no": 31,
+      "word": "asset",
+      "meaning": "재산, 자산; (사람의) 강점, 장점"
+    },
+    {
+      "no": 32,
+      "word": "benign",
+      "meaning": "상냥한; 양성의; (기후 등이) 온화한"
+    },
+    {
+      "no": 33,
+      "word": "mimicry",
+      "meaning": "흉내"
+    },
+    {
+      "no": 34,
+      "word": "sensible",
+      "meaning": "분별 있는, 합리적인; (옷 등이) 실용적인"
+    },
+    {
+      "no": 35,
+      "word": "preceding",
+      "meaning": "이전의, 앞선"
+    },
+    {
+      "no": 36,
+      "word": "resonant",
+      "meaning": "(소리가) 깊이 울리는, 낭랑한; 공감을 불러일으키는"
+    },
+    {
+      "no": 37,
+      "word": "rebellion",
+      "meaning": "반란; 반항, 저항"
+    },
+    {
+      "no": 38,
+      "word": "carrier",
+      "meaning": "항공사, 운송 회사; 보균자; 항공모함"
+    },
+    {
+      "no": 39,
+      "word": "misconception",
+      "meaning": "오해"
+    },
+    {
+      "no": 40,
+      "word": "nutrition",
+      "meaning": "영양 (섭취)"
+    },
+    {
+      "no": 41,
+      "word": "cut out",
+      "meaning": "~을 잘라 내다; (습관·행동 등을) 그만두다; (기계 등이) 작동을 멈추다"
+    },
+    {
+      "no": 42,
+      "word": "surplus",
+      "meaning": "잉여, 과잉; 흑자; 잉여의, 과잉의"
+    },
+    {
+      "no": 43,
+      "word": "nutritional",
+      "meaning": "영양(상)의"
+    },
+    {
+      "no": 44,
+      "word": "conflict",
+      "meaning": "갈등, 충돌; 싸움, 전투; 충돌[상충]하다"
+    },
+    {
+      "no": 45,
+      "word": "liberation",
+      "meaning": "해방, 석방"
+    },
+    {
+      "no": 46,
+      "word": "taboo",
+      "meaning": "금기 (사항); 금기시되는"
+    },
+    {
+      "no": 47,
+      "word": "disclosure",
+      "meaning": "폭로; 밝혀진 사실"
+    },
+    {
+      "no": 48,
+      "word": "emphatic",
+      "meaning": "강한, 단호한; 강조하는"
+    },
+    {
+      "no": 49,
+      "word": "liberate",
+      "meaning": "해방시키다, 자유롭게 하다"
+    },
+    {
+      "no": 50,
+      "word": "precede",
+      "meaning": "(~에) 앞서다, 선행하다; (~의) 앞에 가다"
+    },
+    {
+      "no": 51,
+      "word": "legitimate",
+      "meaning": "합법적인, 적법한; 타당한, 정당한"
+    },
+    {
+      "no": 52,
+      "word": "refute",
+      "meaning": "논박[반박]하다; 부인하다"
+    },
+    {
+      "no": 53,
+      "word": "overstatement",
+      "meaning": "과장"
+    },
+    {
+      "no": 54,
+      "word": "surpass",
+      "meaning": "능가하다, 뛰어넘다"
+    },
+    {
+      "no": 55,
+      "word": "visualization",
+      "meaning": "시각화"
+    },
+    {
+      "no": 56,
+      "word": "exception",
+      "meaning": "예외, 이례"
+    },
+    {
+      "no": 57,
+      "word": "residence",
+      "meaning": "주택, 거주(지)"
+    },
+    {
+      "no": 58,
+      "word": "dwell on",
+      "meaning": "~을 곱씹다, 계속 생각하다"
+    },
+    {
+      "no": 59,
+      "word": "mindset",
+      "meaning": "사고방식"
+    },
+    {
+      "no": 60,
+      "word": "sociable",
+      "meaning": "사교적인, 붙임성 있는"
+    },
+    {
+      "no": 61,
+      "word": "lengthen",
+      "meaning": "길게 하다, 늘이다"
+    },
+    {
+      "no": 62,
+      "word": "vanish",
+      "meaning": "사라지다, 소멸되다"
+    },
+    {
+      "no": 63,
+      "word": "overwhelm",
+      "meaning": "압도하다, 제압하다; 어쩔 줄 모르게 하다"
+    },
+    {
+      "no": 64,
+      "word": "paste",
+      "meaning": "반죽; (접착용) 풀; (풀로) 붙이다; 붙여 넣다"
+    },
+    {
+      "no": 65,
+      "word": "adolescent",
+      "meaning": "청소년; 청소년기의"
+    },
+    {
+      "no": 66,
+      "word": "restriction",
+      "meaning": "제한, 규제, 제약"
+    },
+    {
+      "no": 67,
+      "word": "nutritious",
+      "meaning": "영양분이 많은"
+    },
+    {
+      "no": 68,
+      "word": "molecule",
+      "meaning": "분자"
+    },
+    {
+      "no": 69,
+      "word": "stroll",
+      "meaning": "거닐다, 산책하다; 산책"
+    },
+    {
+      "no": 70,
+      "word": "finance",
+      "meaning": "재정, 재무; 자금을 대다"
+    },
+    {
+      "no": 71,
+      "word": "fury",
+      "meaning": "분노, 격노"
+    },
+    {
+      "no": 72,
+      "word": "emphasis",
+      "meaning": "강조, 역점"
+    },
+    {
+      "no": 73,
+      "word": "overstate",
+      "meaning": "과장하다"
+    },
+    {
+      "no": 74,
+      "word": "outbreak",
+      "meaning": "(전쟁·질병 등의) 발생, 발발"
+    },
+    {
+      "no": 75,
+      "word": "resident",
+      "meaning": "거주자; 레지던트; 거주하는"
+    },
+    {
+      "no": 76,
+      "word": "liberty",
+      "meaning": "자유"
+    },
+    {
+      "no": 77,
+      "word": "perceive",
+      "meaning": "감지[인지]하다; 여기다"
+    },
+    {
+      "no": 78,
+      "word": "resonance",
+      "meaning": "울림, 공명"
+    },
+    {
+      "no": 79,
+      "word": "embody",
+      "meaning": "구체화[구현]하다, 상징하다; 포함하다"
+    },
+    {
+      "no": 80,
+      "word": "drowning",
+      "meaning": "익사"
+    },
+    {
+      "no": 81,
+      "word": "outspoken",
+      "meaning": "거침없이 말하는, 솔직한"
+    },
+    {
+      "no": 82,
+      "word": "rebel",
+      "meaning": "반역자; 반대자; 반란을 일으키다; 반항[저항]하다"
+    },
+    {
+      "no": 83,
+      "word": "slope",
+      "meaning": "경사(면), 비탈; 기울기; 경사지다, 기울다"
+    },
+    {
+      "no": 84,
+      "word": "perception",
+      "meaning": "지각, 인식"
+    },
+    {
+      "no": 85,
+      "word": "visualize",
+      "meaning": "마음속에 그리다, 상상하다; 시각화하다"
+    },
+    {
+      "no": 86,
+      "word": "legitimacy",
+      "meaning": "합법성, 정당성"
+    },
+    {
+      "no": 87,
+      "word": "mimic",
+      "meaning": "흉내 내다, 모방하다; 모방자, 흉내쟁이"
+    },
+    {
+      "no": 88,
+      "word": "financially",
+      "meaning": "재정적으로"
+    },
+    {
+      "no": 89,
+      "word": "interval",
+      "meaning": "간격, 사이; 중간 휴식 시간"
+    },
+    {
+      "no": 90,
+      "word": "furious",
+      "meaning": "몹시 화가 난; 맹렬한"
+    },
+    {
+      "no": 91,
+      "word": "govern",
+      "meaning": "통치하다; (행동 등을) 결정하다"
+    },
+    {
+      "no": 92,
+      "word": "chew over",
+      "meaning": "~을 심사숙고하다"
+    },
+    {
+      "no": 93,
+      "word": "continent",
+      "meaning": "대륙, 육지"
+    },
+    {
+      "no": 94,
+      "word": "orientation",
+      "meaning": "방향, 지향; 예비 교육"
+    },
+    {
+      "no": 95,
+      "word": "afloat",
+      "meaning": "물에 뜬; (사업 등이) 빚은 안 질정도의"
+    },
+    {
+      "no": 96,
+      "word": "precondition",
+      "meaning": "전제 조건"
+    },
+    {
+      "no": 97,
+      "word": "precedent",
+      "meaning": "전례, 선례"
+    },
+    {
+      "no": 98,
+      "word": "molecular",
+      "meaning": "분자의"
+    },
+    {
+      "no": 99,
+      "word": "spine",
+      "meaning": "척추, 등뼈; (동식물의) 가시; (책의) 등"
+    },
+    {
+      "no": 100,
+      "word": "embodiment",
+      "meaning": "구체화, 구현; 전형, 화신"
+    }
+  ]
+}

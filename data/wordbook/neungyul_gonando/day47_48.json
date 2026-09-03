@@ -1,0 +1,506 @@
+{
+  "title": "Day 47~48",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "precaution",
+      "meaning": "예방책, 예방 조치"
+    },
+    {
+      "no": 2,
+      "word": "causal",
+      "meaning": "인과 관계의"
+    },
+    {
+      "no": 3,
+      "word": "illusion",
+      "meaning": "환상, 환각; 착각, 오해"
+    },
+    {
+      "no": 4,
+      "word": "downfall",
+      "meaning": "몰락; 몰락의 원인"
+    },
+    {
+      "no": 5,
+      "word": "indulgence",
+      "meaning": "멋대로 하게 함; 탐닉, 사치"
+    },
+    {
+      "no": 6,
+      "word": "trace",
+      "meaning": "자취, 흔적; 극소량; 추적하다, 밝혀내다; 거슬러 올라가다"
+    },
+    {
+      "no": 7,
+      "word": "condemn",
+      "meaning": "비난하다; 형을 선고하다; (좋지 않은 상황에) 처하게 하다"
+    },
+    {
+      "no": 8,
+      "word": "imprint",
+      "meaning": "각인시키다; 찍다, 새겨 넣다; (누른) 자국, 흔적; 인상"
+    },
+    {
+      "no": 9,
+      "word": "harassment",
+      "meaning": "괴롭힘, 희롱"
+    },
+    {
+      "no": 10,
+      "word": "harass",
+      "meaning": "괴롭히다, 귀찮게 하다"
+    },
+    {
+      "no": 11,
+      "word": "preserve",
+      "meaning": "보호하다, 지키다; 보존하다, 유지하다"
+    },
+    {
+      "no": 12,
+      "word": "exquisite",
+      "meaning": "매우 아름다운, 정교한; (감정·고통 등이) 강렬한"
+    },
+    {
+      "no": 13,
+      "word": "gratification",
+      "meaning": "만족감(을 주는 것)"
+    },
+    {
+      "no": 14,
+      "word": "inflow",
+      "meaning": "유입(량)"
+    },
+    {
+      "no": 15,
+      "word": "drowsiness",
+      "meaning": "졸음"
+    },
+    {
+      "no": 16,
+      "word": "flush",
+      "meaning": "(얼굴이) 상기되다; (변기의) 물을 내리다; 홍조; 물 내림"
+    },
+    {
+      "no": 17,
+      "word": "condemnation",
+      "meaning": "비난, 규탄"
+    },
+    {
+      "no": 18,
+      "word": "delicacy",
+      "meaning": "연약함; 섬세함; 진미, 별미"
+    },
+    {
+      "no": 19,
+      "word": "inflict",
+      "meaning": "(고통 등을) 안기다, 가하다"
+    },
+    {
+      "no": 20,
+      "word": "refugee",
+      "meaning": "난민, 망명자"
+    },
+    {
+      "no": 21,
+      "word": "fermentation",
+      "meaning": "발효 (작용)"
+    },
+    {
+      "no": 22,
+      "word": "refuge",
+      "meaning": "피난(처), 도피(처); 보호 시설, 보호소"
+    },
+    {
+      "no": 23,
+      "word": "gratifying",
+      "meaning": "흐뭇한, 만족한"
+    },
+    {
+      "no": 24,
+      "word": "nomadic",
+      "meaning": "유목의, 유목 생활을 하는"
+    },
+    {
+      "no": 25,
+      "word": "revenge",
+      "meaning": "복수, 보복"
+    },
+    {
+      "no": 26,
+      "word": "essence",
+      "meaning": "본질, 정수"
+    },
+    {
+      "no": 27,
+      "word": "eloquently",
+      "meaning": "웅변[능변]으로"
+    },
+    {
+      "no": 28,
+      "word": "overrun",
+      "meaning": "넘치다, 압도하다; (시간·비용 등을) 초과하다; 초과"
+    },
+    {
+      "no": 29,
+      "word": "conserve",
+      "meaning": "보호[보존]하다; 절약하다"
+    },
+    {
+      "no": 30,
+      "word": "establishment",
+      "meaning": "기관, 시설; 설립"
+    },
+    {
+      "no": 31,
+      "word": "terminate",
+      "meaning": "끝나다[끝내다], 종결하다[시키다]"
+    },
+    {
+      "no": 32,
+      "word": "bypass",
+      "meaning": "우회하다; (절차 등을) 건너뛰다; 우회로"
+    },
+    {
+      "no": 33,
+      "word": "deliberately",
+      "meaning": "고의로; 신중하게"
+    },
+    {
+      "no": 34,
+      "word": "clarity",
+      "meaning": "명료성, 명확성; 선명도, 투명도"
+    },
+    {
+      "no": 35,
+      "word": "frontier",
+      "meaning": "국경 (지역); (지식 등의) 한계, 최전선"
+    },
+    {
+      "no": 36,
+      "word": "inflame",
+      "meaning": "흥분시키다, 자극하다; 악화시키다; 염증을 일으키다"
+    },
+    {
+      "no": 37,
+      "word": "duplication",
+      "meaning": "중복; 복사, 복제"
+    },
+    {
+      "no": 38,
+      "word": "detergent",
+      "meaning": "세제, 세정제"
+    },
+    {
+      "no": 39,
+      "word": "inflammatory",
+      "meaning": "선동적인; 염증을 일으키는"
+    },
+    {
+      "no": 40,
+      "word": "disseminate",
+      "meaning": "(정보·지식 등을) 퍼뜨리다, 전파하다"
+    },
+    {
+      "no": 41,
+      "word": "intricacy",
+      "meaning": "복잡함; 복잡한 사항"
+    },
+    {
+      "no": 42,
+      "word": "get back to",
+      "meaning": "다시 연락하다, 회신하다; 복귀하다"
+    },
+    {
+      "no": 43,
+      "word": "crave",
+      "meaning": "갈망하다, 열망하다"
+    },
+    {
+      "no": 44,
+      "word": "ferment",
+      "meaning": "발효되다[시키다]; (정치·사회적) 소란, 동요"
+    },
+    {
+      "no": 45,
+      "word": "vague",
+      "meaning": "모호한, 막연한; 흐릿한, 희미한"
+    },
+    {
+      "no": 46,
+      "word": "delicate",
+      "meaning": "연약한, 깨지기 쉬운; 섬세한; 미묘한"
+    },
+    {
+      "no": 47,
+      "word": "aboriginal",
+      "meaning": "(특히 호주) 원주민의; 토착의; (특히 호주) 원주민"
+    },
+    {
+      "no": 48,
+      "word": "allowance",
+      "meaning": "용돈, (특정 목적을 위한) 수당; 허용량, 허용치"
+    },
+    {
+      "no": 49,
+      "word": "versus",
+      "meaning": "~ 대; ~에 비해, ~와 대조적으로"
+    },
+    {
+      "no": 50,
+      "word": "sarcastic",
+      "meaning": "빈정대는, 비꼬는"
+    },
+    {
+      "no": 51,
+      "word": "indulgent",
+      "meaning": "멋대로 하게 하는, 관대한"
+    },
+    {
+      "no": 52,
+      "word": "property",
+      "meaning": "재산, 소유물; 부동산; 속성, 특성"
+    },
+    {
+      "no": 53,
+      "word": "craving",
+      "meaning": "갈망, 열망"
+    },
+    {
+      "no": 54,
+      "word": "deem",
+      "meaning": "(~로) 여기다, 생각하다"
+    },
+    {
+      "no": 55,
+      "word": "deliberate",
+      "meaning": "고의의, 의도적인; 신중한; 숙고하다"
+    },
+    {
+      "no": 56,
+      "word": "prerequisite",
+      "meaning": "전제[필수] 조건; 필수적인"
+    },
+    {
+      "no": 57,
+      "word": "sarcasm",
+      "meaning": "빈정댐, 비꼼"
+    },
+    {
+      "no": 58,
+      "word": "forefather",
+      "meaning": "조상, 선조"
+    },
+    {
+      "no": 59,
+      "word": "masculinity",
+      "meaning": "남성성"
+    },
+    {
+      "no": 60,
+      "word": "formidable",
+      "meaning": "가공할; (문제·과제 등이) 버거운"
+    },
+    {
+      "no": 61,
+      "word": "haunted",
+      "meaning": "귀신[유령]이 나오는; 불안한, 괴로운"
+    },
+    {
+      "no": 62,
+      "word": "haunt",
+      "meaning": "(유령 등이) 출몰하다; (생각 등이) 계속 떠오르다"
+    },
+    {
+      "no": 63,
+      "word": "masculine",
+      "meaning": "남자의, 남자다운"
+    },
+    {
+      "no": 64,
+      "word": "come down to",
+      "meaning": "결국 ~로 귀결되다"
+    },
+    {
+      "no": 65,
+      "word": "dissemination",
+      "meaning": "보급, 유포"
+    },
+    {
+      "no": 66,
+      "word": "vaguely",
+      "meaning": "모호하게; 희미하게"
+    },
+    {
+      "no": 67,
+      "word": "determinant",
+      "meaning": "결정 요인"
+    },
+    {
+      "no": 68,
+      "word": "crucially",
+      "meaning": "결정적으로"
+    },
+    {
+      "no": 69,
+      "word": "vocation",
+      "meaning": "천직, 소명; 소명 의식, 사명감"
+    },
+    {
+      "no": 70,
+      "word": "scope",
+      "meaning": "범위, 영역; 기회, 여지"
+    },
+    {
+      "no": 71,
+      "word": "inhabitant",
+      "meaning": "주민, 거주자; 서식 동물"
+    },
+    {
+      "no": 72,
+      "word": "nomad",
+      "meaning": "유목민"
+    },
+    {
+      "no": 73,
+      "word": "causality",
+      "meaning": "인과 관계"
+    },
+    {
+      "no": 74,
+      "word": "entrust",
+      "meaning": "(책임·임무 등을) 맡기다, 위임하다"
+    },
+    {
+      "no": 75,
+      "word": "anniversary",
+      "meaning": "(해마다 돌아오는) 기념일"
+    },
+    {
+      "no": 76,
+      "word": "delicately",
+      "meaning": "정교하게; 조심스럽게"
+    },
+    {
+      "no": 77,
+      "word": "preservation",
+      "meaning": "보존, 보호; 유지"
+    },
+    {
+      "no": 78,
+      "word": "drowsy",
+      "meaning": "졸린; 나른하게 만드는"
+    },
+    {
+      "no": 79,
+      "word": "established",
+      "meaning": "확립된, 인정받는"
+    },
+    {
+      "no": 80,
+      "word": "precautionary",
+      "meaning": "예방의"
+    },
+    {
+      "no": 81,
+      "word": "insomnia",
+      "meaning": "불면증"
+    },
+    {
+      "no": 82,
+      "word": "hold to",
+      "meaning": "~을 지키다, 고수하다"
+    },
+    {
+      "no": 83,
+      "word": "conservation",
+      "meaning": "보호, 보존"
+    },
+    {
+      "no": 84,
+      "word": "vocational",
+      "meaning": "직업상의"
+    },
+    {
+      "no": 85,
+      "word": "poverty",
+      "meaning": "가난, 빈곤; 결핍, 부족"
+    },
+    {
+      "no": 86,
+      "word": "inhabit",
+      "meaning": "살다, 서식하다"
+    },
+    {
+      "no": 87,
+      "word": "infliction",
+      "meaning": "(고통 등을) 가함"
+    },
+    {
+      "no": 88,
+      "word": "come of",
+      "meaning": "~의 결과로 일어나다"
+    },
+    {
+      "no": 89,
+      "word": "break down",
+      "meaning": "고장 나다; (감정적으로) 무너지다; ~을 부수다, 허물다; ~을 분해하다"
+    },
+    {
+      "no": 90,
+      "word": "determine",
+      "meaning": "결정하다; 알아내다"
+    },
+    {
+      "no": 91,
+      "word": "essentially",
+      "meaning": "본질적으로"
+    },
+    {
+      "no": 92,
+      "word": "get carried away",
+      "meaning": "(감정에) 휩쓸리다, 흥분하다"
+    },
+    {
+      "no": 93,
+      "word": "allocate",
+      "meaning": "할당하다, 배분하다"
+    },
+    {
+      "no": 94,
+      "word": "martial",
+      "meaning": "군대의, 전쟁의"
+    },
+    {
+      "no": 95,
+      "word": "crucial",
+      "meaning": "중대한, 결정적인"
+    },
+    {
+      "no": 96,
+      "word": "withhold",
+      "meaning": "주지 않다, 보류하다"
+    },
+    {
+      "no": 97,
+      "word": "terminal",
+      "meaning": "(병 등이) 말기의; 끝의, 최종적인; 터미널"
+    },
+    {
+      "no": 98,
+      "word": "frantic",
+      "meaning": "제정신이 아닌, 미친 듯한"
+    },
+    {
+      "no": 99,
+      "word": "secondhand",
+      "meaning": "중고의; 간접적인, 전해 들은; 간접적으로, 전해 들어"
+    },
+    {
+      "no": 100,
+      "word": "combat",
+      "meaning": "전투, 싸움; 싸우다"
+    }
+  ]
+}

@@ -1,0 +1,406 @@
+{
+  "title": "Day 39~40",
+  "source": "능률보카 고등 기본",
+  "words": [
+    {
+      "no": 1,
+      "word": "block",
+      "meaning": "블록, 구획; 큰 덩어리; 막다, 차단하다"
+    },
+    {
+      "no": 2,
+      "word": "commit",
+      "meaning": "저지르다; 전념하다, 헌신하다"
+    },
+    {
+      "no": 3,
+      "word": "observance",
+      "meaning": "준수"
+    },
+    {
+      "no": 4,
+      "word": "due",
+      "meaning": "~하기로 예정된; ~로 인한, ~ 때문에"
+    },
+    {
+      "no": 5,
+      "word": "grant",
+      "meaning": "보조금; 수여하다, 주다; 인정하다, 승인하다"
+    },
+    {
+      "no": 6,
+      "word": "tough",
+      "meaning": "단단한, 튼튼한; 고된, 어려운; 엄한, 냉정한"
+    },
+    {
+      "no": 7,
+      "word": "commander",
+      "meaning": "사령관, 지휘관"
+    },
+    {
+      "no": 8,
+      "word": "facility",
+      "meaning": "시설, 설비; 재능, 솜씨"
+    },
+    {
+      "no": 9,
+      "word": "scale",
+      "meaning": "저울, 눈금; 규모; 비늘"
+    },
+    {
+      "no": 10,
+      "word": "committed",
+      "meaning": "헌신적인"
+    },
+    {
+      "no": 11,
+      "word": "statement",
+      "meaning": "발표, 진술"
+    },
+    {
+      "no": 12,
+      "word": "complexity",
+      "meaning": "복잡"
+    },
+    {
+      "no": 13,
+      "word": "release",
+      "meaning": "석방하다; 석방; 방출하다; 방출; 개봉하다, 발매하다; 개봉, 발매"
+    },
+    {
+      "no": 14,
+      "word": "stressful",
+      "meaning": "스트레스가 많은"
+    },
+    {
+      "no": 15,
+      "word": "discipline",
+      "meaning": "훈련, 단련; 훈련하다; 규율, 질서; 훈육하다, 벌하다; 훈육"
+    },
+    {
+      "no": 16,
+      "word": "launch",
+      "meaning": "시작하다; 시작; 출시하다; 발표, 발매; 발사하다; 발사"
+    },
+    {
+      "no": 17,
+      "word": "decline",
+      "meaning": "감소하다; 감소, 쇠퇴; 거절하다"
+    },
+    {
+      "no": 18,
+      "word": "bear",
+      "meaning": "참다, 견디다; 견디다, 지탱하다; 낳다, 출산하다; 곰"
+    },
+    {
+      "no": 19,
+      "word": "swear",
+      "meaning": "맹세하다, 선언하다; 욕을 하다, 악담하다"
+    },
+    {
+      "no": 20,
+      "word": "apply",
+      "meaning": "신청하다, 지원하다; 적용되다; 바르다"
+    },
+    {
+      "no": 21,
+      "word": "interestingly",
+      "meaning": "흥미롭게도, 놀랍게도"
+    },
+    {
+      "no": 22,
+      "word": "tissue",
+      "meaning": "조직; 티슈, 화장지"
+    },
+    {
+      "no": 23,
+      "word": "plain",
+      "meaning": "분명한, 명백한; 소박한, 꾸미지 않은; 평원, 평야"
+    },
+    {
+      "no": 24,
+      "word": "sentence",
+      "meaning": "문장; 판결, 선고; 선고하다, 판결을 내리다"
+    },
+    {
+      "no": 25,
+      "word": "submission",
+      "meaning": "제출; 복종"
+    },
+    {
+      "no": 26,
+      "word": "amount",
+      "meaning": "양, 액수; 총액, 총계; 합계가 ~에 달하다"
+    },
+    {
+      "no": 27,
+      "word": "fair",
+      "meaning": "공평한, 정당한; 상당한; 박람회"
+    },
+    {
+      "no": 28,
+      "word": "engagement",
+      "meaning": "약혼; 약속, 계약; 참여"
+    },
+    {
+      "no": 29,
+      "word": "subjective",
+      "meaning": "주관적인"
+    },
+    {
+      "no": 30,
+      "word": "operate",
+      "meaning": "작동하다; 운영하다; 수술하다"
+    },
+    {
+      "no": 31,
+      "word": "press",
+      "meaning": "누르다, 밀다; 언론, 보도 기관"
+    },
+    {
+      "no": 32,
+      "word": "arrange",
+      "meaning": "결정하다, 정하다; 배열하다, 정돈하다"
+    },
+    {
+      "no": 33,
+      "word": "engage",
+      "meaning": "관여하다; 사로잡다"
+    },
+    {
+      "no": 34,
+      "word": "branch",
+      "meaning": "가지, 나뭇가지; 지점, 지부; 분과, 부문, 분야; 갈라지다, 나뉘다"
+    },
+    {
+      "no": 35,
+      "word": "commitment",
+      "meaning": "약속; 몰입, 전념"
+    },
+    {
+      "no": 36,
+      "word": "major",
+      "meaning": "주요한, 중대한; 전공하다; 전공; 소령"
+    },
+    {
+      "no": 37,
+      "word": "majority",
+      "meaning": "대다수, 대부분"
+    },
+    {
+      "no": 38,
+      "word": "humble",
+      "meaning": "겸손한; 겸손하게 하다; 보잘것없는, 미천한"
+    },
+    {
+      "no": 39,
+      "word": "refer",
+      "meaning": "언급하다, 인용하다; 나타내다, 가리키다; 참조하다"
+    },
+    {
+      "no": 40,
+      "word": "pupil",
+      "meaning": "학생, 문하생; 동공, 눈동자"
+    },
+    {
+      "no": 41,
+      "word": "fit",
+      "meaning": "꼭 맞다; 건강한; 알맞은, 적합한; 적합하다; 맞음새"
+    },
+    {
+      "no": 42,
+      "word": "reference",
+      "meaning": "언급; 참고 , 참조"
+    },
+    {
+      "no": 43,
+      "word": "cast",
+      "meaning": "던지다; 배역을 맡기다; 배역, 출연진; 드리우다"
+    },
+    {
+      "no": 44,
+      "word": "state",
+      "meaning": "상태; 국가, 정부; 국가의, 정부의; 주; 주립의; 진술하다, 명시하다"
+    },
+    {
+      "no": 45,
+      "word": "interesting",
+      "meaning": "흥미로운"
+    },
+    {
+      "no": 46,
+      "word": "submit",
+      "meaning": "제출하다; 복종하다"
+    },
+    {
+      "no": 47,
+      "word": "interest",
+      "meaning": "흥미, 관심; 흥미를 끌다; 이자, 이율"
+    },
+    {
+      "no": 48,
+      "word": "arrangement",
+      "meaning": "배열, 정리; 협정; 준비"
+    },
+    {
+      "no": 49,
+      "word": "application",
+      "meaning": "적용; 지원; 응용 프로그램"
+    },
+    {
+      "no": 50,
+      "word": "character",
+      "meaning": "성격; 특징, 특성; 등장인물; 문자, 부호"
+    },
+    {
+      "no": 51,
+      "word": "craft",
+      "meaning": "기술, 기능; 공예; 공예품을 만들다, 공들여 만들다; 배, 비행기, 우주선"
+    },
+    {
+      "no": 52,
+      "word": "operation",
+      "meaning": "작동, 운용; 수술"
+    },
+    {
+      "no": 53,
+      "word": "charge",
+      "meaning": "청구하다, 부과하다; 요금; 고소하다; 고소; 충전하다; 책임, 담당"
+    },
+    {
+      "no": 54,
+      "word": "margin",
+      "meaning": "여백; 차이; 수익, 마진; 여지, 허용 범위"
+    },
+    {
+      "no": 55,
+      "word": "bar",
+      "meaning": "술집, 바; 빗장, 창살; 덩어리; 막다, 금하다"
+    },
+    {
+      "no": 56,
+      "word": "fine",
+      "meaning": "건강한; 훌륭한, 우수한, 고급의; 미세한; 벌금; 벌금을 부과하다"
+    },
+    {
+      "no": 57,
+      "word": "disciplined",
+      "meaning": "훈련된, 단련된"
+    },
+    {
+      "no": 58,
+      "word": "observer",
+      "meaning": "관측자"
+    },
+    {
+      "no": 59,
+      "word": "interested",
+      "meaning": "흥미를 가진, 관심이 있는"
+    },
+    {
+      "no": 60,
+      "word": "presentation",
+      "meaning": "발표; 제출, 제시"
+    },
+    {
+      "no": 61,
+      "word": "feature",
+      "meaning": "특징; 특징을 이루다; 용모, 이목구비"
+    },
+    {
+      "no": 62,
+      "word": "content",
+      "meaning": "만족하는; 만족시키다; 내용; 함량, 함유량"
+    },
+    {
+      "no": 63,
+      "word": "suitable",
+      "meaning": "적합한, 알맞은"
+    },
+    {
+      "no": 64,
+      "word": "subjection",
+      "meaning": "복종"
+    },
+    {
+      "no": 65,
+      "word": "contract",
+      "meaning": "계약; 계약하다; 줄어들다, 수축하다"
+    },
+    {
+      "no": 66,
+      "word": "complex",
+      "meaning": "복잡한; 복합 건물, 단지; 콤플렉스, 열등감"
+    },
+    {
+      "no": 67,
+      "word": "command",
+      "meaning": "명령; 명령하다; 통솔, 지휘; 통솔하다"
+    },
+    {
+      "no": 68,
+      "word": "present",
+      "meaning": "선물; 출석해 있는; 현재의; 현재; 발표하다; 제시하다, 보여주다"
+    },
+    {
+      "no": 69,
+      "word": "subject",
+      "meaning": "주제, 화제, 논제; 과목, 교과; 대상; ~의 권한 아래에 있는; ~될수 있는"
+    },
+    {
+      "no": 70,
+      "word": "bond",
+      "meaning": "결속, 유대; 유대감을 형성하다; 접착; 접합하다; 보석금, 보증"
+    },
+    {
+      "no": 71,
+      "word": "conduct",
+      "meaning": "실시하다, 하다; 지휘하다; 안내하다; 전도하다; 행동, 품행; 행동하다"
+    },
+    {
+      "no": 72,
+      "word": "observatory",
+      "meaning": "관측소, 천문대"
+    },
+    {
+      "no": 73,
+      "word": "statesman",
+      "meaning": "정치인"
+    },
+    {
+      "no": 74,
+      "word": "dismiss",
+      "meaning": "묵살하다; 해고하다; 해산시키다"
+    },
+    {
+      "no": 75,
+      "word": "applicant",
+      "meaning": "지원자"
+    },
+    {
+      "no": 76,
+      "word": "term",
+      "meaning": "기간, 임기; 용어; 조건, 조항"
+    },
+    {
+      "no": 77,
+      "word": "presence",
+      "meaning": "존재, 출석"
+    },
+    {
+      "no": 78,
+      "word": "observe",
+      "meaning": "관찰하다; 보다, 목격하다; 준수하다, 지키다"
+    },
+    {
+      "no": 79,
+      "word": "article",
+      "meaning": "기사, 논문; 조항, 항목"
+    },
+    {
+      "no": 80,
+      "word": "firmly",
+      "meaning": "강하게, 확고하게"
+    }
+  ]
+}

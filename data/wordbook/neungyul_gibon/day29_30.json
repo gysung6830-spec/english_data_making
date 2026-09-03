@@ -1,0 +1,406 @@
+{
+  "title": "Day 29~30",
+  "source": "능률보카 고등 기본",
+  "words": [
+    {
+      "no": 1,
+      "word": "scientifically",
+      "meaning": "과학적으로"
+    },
+    {
+      "no": 2,
+      "word": "poisonous",
+      "meaning": "독성의"
+    },
+    {
+      "no": 3,
+      "word": "innovate",
+      "meaning": "혁신하다"
+    },
+    {
+      "no": 4,
+      "word": "recovery",
+      "meaning": "회복"
+    },
+    {
+      "no": 5,
+      "word": "hypothesize",
+      "meaning": "가설을 세우다"
+    },
+    {
+      "no": 6,
+      "word": "hypothesis",
+      "meaning": "가설; 추정, 추측"
+    },
+    {
+      "no": 7,
+      "word": "digestion",
+      "meaning": "소화; 이해, 터득"
+    },
+    {
+      "no": 8,
+      "word": "genetic",
+      "meaning": "유전의"
+    },
+    {
+      "no": 9,
+      "word": "organ",
+      "meaning": "장기, 기관"
+    },
+    {
+      "no": 10,
+      "word": "nutrient",
+      "meaning": "영양"
+    },
+    {
+      "no": 11,
+      "word": "disease",
+      "meaning": "질환, 병"
+    },
+    {
+      "no": 12,
+      "word": "chronic",
+      "meaning": "만성의"
+    },
+    {
+      "no": 13,
+      "word": "pregnant",
+      "meaning": "임신한"
+    },
+    {
+      "no": 14,
+      "word": "diagnose",
+      "meaning": "진단하다"
+    },
+    {
+      "no": 15,
+      "word": "electricity",
+      "meaning": "전기"
+    },
+    {
+      "no": 16,
+      "word": "molecule",
+      "meaning": "분자"
+    },
+    {
+      "no": 17,
+      "word": "laboratory",
+      "meaning": "연구실, 실험실"
+    },
+    {
+      "no": 18,
+      "word": "medically",
+      "meaning": "의학적으로"
+    },
+    {
+      "no": 19,
+      "word": "electronic",
+      "meaning": "전자의, 전자 공학의"
+    },
+    {
+      "no": 20,
+      "word": "cure",
+      "meaning": "치료; 치료하다"
+    },
+    {
+      "no": 21,
+      "word": "patient",
+      "meaning": "환자; 참을성이 있는"
+    },
+    {
+      "no": 22,
+      "word": "infectious",
+      "meaning": "전염성의"
+    },
+    {
+      "no": 23,
+      "word": "treatment",
+      "meaning": "치료; 처리; 대우, 취급"
+    },
+    {
+      "no": 24,
+      "word": "nerve",
+      "meaning": "신경; 긴장; 용기"
+    },
+    {
+      "no": 25,
+      "word": "infect",
+      "meaning": "감염시키다; 오염시키다"
+    },
+    {
+      "no": 26,
+      "word": "diet",
+      "meaning": "식단, 음식; 규정식, 다이어트"
+    },
+    {
+      "no": 27,
+      "word": "digestive",
+      "meaning": "소화의"
+    },
+    {
+      "no": 28,
+      "word": "dietary",
+      "meaning": "음식의, 식이 요법의"
+    },
+    {
+      "no": 29,
+      "word": "wound",
+      "meaning": "상처, 부상; 상처를 입히다"
+    },
+    {
+      "no": 30,
+      "word": "input",
+      "meaning": "입력하다; 입력, 투입"
+    },
+    {
+      "no": 31,
+      "word": "gene",
+      "meaning": "유전자"
+    },
+    {
+      "no": 32,
+      "word": "scarcely",
+      "meaning": "거의 ~ 않다; 겨우"
+    },
+    {
+      "no": 33,
+      "word": "molecular",
+      "meaning": "분자의"
+    },
+    {
+      "no": 34,
+      "word": "symptom",
+      "meaning": "증상; 징후"
+    },
+    {
+      "no": 35,
+      "word": "heal",
+      "meaning": "치유되다, 치료하다"
+    },
+    {
+      "no": 36,
+      "word": "purification",
+      "meaning": "정화"
+    },
+    {
+      "no": 37,
+      "word": "automatic",
+      "meaning": "자동의, 자동적인"
+    },
+    {
+      "no": 38,
+      "word": "surgery",
+      "meaning": "수술"
+    },
+    {
+      "no": 39,
+      "word": "purify",
+      "meaning": "정화하다, 깨끗이 하다"
+    },
+    {
+      "no": 40,
+      "word": "wrinkle",
+      "meaning": "주름; 주름지게 하다, 주름지다"
+    },
+    {
+      "no": 41,
+      "word": "coal",
+      "meaning": "석탄"
+    },
+    {
+      "no": 42,
+      "word": "muscular",
+      "meaning": "근육의"
+    },
+    {
+      "no": 43,
+      "word": "invent",
+      "meaning": "발명하다, 고안하다"
+    },
+    {
+      "no": 44,
+      "word": "resource",
+      "meaning": "자원; 자산"
+    },
+    {
+      "no": 45,
+      "word": "carbon",
+      "meaning": "탄소"
+    },
+    {
+      "no": 46,
+      "word": "electric",
+      "meaning": "전기의"
+    },
+    {
+      "no": 47,
+      "word": "medical",
+      "meaning": "의학의; 내과의"
+    },
+    {
+      "no": 48,
+      "word": "chemist",
+      "meaning": "화학자"
+    },
+    {
+      "no": 49,
+      "word": "inventor",
+      "meaning": "발명가"
+    },
+    {
+      "no": 50,
+      "word": "muscle",
+      "meaning": "근육"
+    },
+    {
+      "no": 51,
+      "word": "prescription",
+      "meaning": "처방; 처방 약"
+    },
+    {
+      "no": 52,
+      "word": "cancer",
+      "meaning": "암"
+    },
+    {
+      "no": 53,
+      "word": "supplementary",
+      "meaning": "보충의, 추가의"
+    },
+    {
+      "no": 54,
+      "word": "diagnosis",
+      "meaning": "진단"
+    },
+    {
+      "no": 55,
+      "word": "fluid",
+      "meaning": "유동성의; 액체"
+    },
+    {
+      "no": 56,
+      "word": "invention",
+      "meaning": "발명"
+    },
+    {
+      "no": 57,
+      "word": "particle",
+      "meaning": "입자; 미량, 극소"
+    },
+    {
+      "no": 58,
+      "word": "recover",
+      "meaning": "회복하다, 낫다; 돌아오다"
+    },
+    {
+      "no": 59,
+      "word": "cellular",
+      "meaning": "세포의"
+    },
+    {
+      "no": 60,
+      "word": "protein",
+      "meaning": "단백질"
+    },
+    {
+      "no": 61,
+      "word": "chemical",
+      "meaning": "화학적인; 화학 물질"
+    },
+    {
+      "no": 62,
+      "word": "poison",
+      "meaning": "독; 독을 넣다, 독살하다"
+    },
+    {
+      "no": 63,
+      "word": "innovative",
+      "meaning": "획기적인, 혁신적인"
+    },
+    {
+      "no": 64,
+      "word": "steel",
+      "meaning": "강철"
+    },
+    {
+      "no": 65,
+      "word": "prescribe",
+      "meaning": "처방하다; 규정하다"
+    },
+    {
+      "no": 66,
+      "word": "infection",
+      "meaning": "감염, 전염"
+    },
+    {
+      "no": 67,
+      "word": "immunity",
+      "meaning": "면역; 면제"
+    },
+    {
+      "no": 68,
+      "word": "atom",
+      "meaning": "원자"
+    },
+    {
+      "no": 69,
+      "word": "genetically",
+      "meaning": "유전적으로"
+    },
+    {
+      "no": 70,
+      "word": "liquid",
+      "meaning": "액체의, 유동성의; 액체"
+    },
+    {
+      "no": 71,
+      "word": "pure",
+      "meaning": "순수한, 불순물이 없는"
+    },
+    {
+      "no": 72,
+      "word": "solid",
+      "meaning": "고체의, 단단한; 고체"
+    },
+    {
+      "no": 73,
+      "word": "nervous",
+      "meaning": "긴장한"
+    },
+    {
+      "no": 74,
+      "word": "therapy",
+      "meaning": "치료, 요법"
+    },
+    {
+      "no": 75,
+      "word": "chemistry",
+      "meaning": "화학 ; 궁합"
+    },
+    {
+      "no": 76,
+      "word": "rubber",
+      "meaning": "고무"
+    },
+    {
+      "no": 77,
+      "word": "metal",
+      "meaning": "금속"
+    },
+    {
+      "no": 78,
+      "word": "acidity",
+      "meaning": "산성"
+    },
+    {
+      "no": 79,
+      "word": "immune",
+      "meaning": "면역의, 면역이 된; 영향을 받지않는"
+    },
+    {
+      "no": 80,
+      "word": "digest",
+      "meaning": "소화하다; 이해하다"
+    }
+  ]
+}

@@ -1,0 +1,406 @@
+{
+  "title": "Day 35~36",
+  "source": "능률보카 고등 기본",
+  "words": [
+    {
+      "no": 1,
+      "word": "relatively",
+      "meaning": "비교적, 상대적으로"
+    },
+    {
+      "no": 2,
+      "word": "distribution",
+      "meaning": "분배, 분포"
+    },
+    {
+      "no": 3,
+      "word": "quantity",
+      "meaning": "양, 수량"
+    },
+    {
+      "no": 4,
+      "word": "region",
+      "meaning": "지역, 지방"
+    },
+    {
+      "no": 5,
+      "word": "emergency",
+      "meaning": "비상사태, 응급 상황"
+    },
+    {
+      "no": 6,
+      "word": "personal",
+      "meaning": "개인의, 사적인"
+    },
+    {
+      "no": 7,
+      "word": "sensitively",
+      "meaning": "민감하게, 예민하게"
+    },
+    {
+      "no": 8,
+      "word": "phrasal",
+      "meaning": "구의, 구로 된"
+    },
+    {
+      "no": 9,
+      "word": "industry",
+      "meaning": "산업, 공업"
+    },
+    {
+      "no": 10,
+      "word": "status",
+      "meaning": "상태; 지위, 신분"
+    },
+    {
+      "no": 11,
+      "word": "contribution",
+      "meaning": "기여, 공헌"
+    },
+    {
+      "no": 12,
+      "word": "evolution",
+      "meaning": "진화; 발전"
+    },
+    {
+      "no": 13,
+      "word": "relevance",
+      "meaning": "관련"
+    },
+    {
+      "no": 14,
+      "word": "defend",
+      "meaning": "방어하다, 지키다; 옹호하다, 변호하다"
+    },
+    {
+      "no": 15,
+      "word": "leap",
+      "meaning": "뛰다; 상승하다; 뛰기, 도약; 상승"
+    },
+    {
+      "no": 16,
+      "word": "generosity",
+      "meaning": "관대함"
+    },
+    {
+      "no": 17,
+      "word": "principle",
+      "meaning": "원리, 원칙"
+    },
+    {
+      "no": 18,
+      "word": "recently",
+      "meaning": "최근에"
+    },
+    {
+      "no": 19,
+      "word": "naturally",
+      "meaning": "자연스럽게, 당연히"
+    },
+    {
+      "no": 20,
+      "word": "respect",
+      "meaning": "존경하다"
+    },
+    {
+      "no": 21,
+      "word": "neutral",
+      "meaning": "중립의"
+    },
+    {
+      "no": 22,
+      "word": "general",
+      "meaning": "일반적인; 대체적인, 대강의; 장군"
+    },
+    {
+      "no": 23,
+      "word": "religion",
+      "meaning": "종교"
+    },
+    {
+      "no": 24,
+      "word": "industrialization",
+      "meaning": "산업화"
+    },
+    {
+      "no": 25,
+      "word": "loyal",
+      "meaning": "충성스러운, 충실한"
+    },
+    {
+      "no": 26,
+      "word": "initiative",
+      "meaning": "계획, 개시; 주도권"
+    },
+    {
+      "no": 27,
+      "word": "spontaneously",
+      "meaning": "자발적으로; 자연스럽게"
+    },
+    {
+      "no": 28,
+      "word": "cruelty",
+      "meaning": "잔인함"
+    },
+    {
+      "no": 29,
+      "word": "hostility",
+      "meaning": "적대감, 적의"
+    },
+    {
+      "no": 30,
+      "word": "popular",
+      "meaning": "인기 있는; 대중의"
+    },
+    {
+      "no": 31,
+      "word": "emerge",
+      "meaning": "나타나다; 드러나다, 알려지다"
+    },
+    {
+      "no": 32,
+      "word": "flame",
+      "meaning": "화염, 불꽃; 활활 타오르다"
+    },
+    {
+      "no": 33,
+      "word": "generous",
+      "meaning": "관대한, 너그러운"
+    },
+    {
+      "no": 34,
+      "word": "involved",
+      "meaning": "관련된; 몰두한"
+    },
+    {
+      "no": 35,
+      "word": "statue",
+      "meaning": "조각상"
+    },
+    {
+      "no": 36,
+      "word": "prey",
+      "meaning": "먹이; 희생자, 피해자; 잡아먹다"
+    },
+    {
+      "no": 37,
+      "word": "emergence",
+      "meaning": "출현, 발생"
+    },
+    {
+      "no": 38,
+      "word": "sensitive",
+      "meaning": "민감한, 예민한; 감수성이 풍부한"
+    },
+    {
+      "no": 39,
+      "word": "respectively",
+      "meaning": "각각"
+    },
+    {
+      "no": 40,
+      "word": "cruel",
+      "meaning": "잔인한, 무자비한"
+    },
+    {
+      "no": 41,
+      "word": "respectable",
+      "meaning": "존경할 만한"
+    },
+    {
+      "no": 42,
+      "word": "imitation",
+      "meaning": "모방; 모조품"
+    },
+    {
+      "no": 43,
+      "word": "phrase",
+      "meaning": "구; 구절, 문구, 말; 말하다, 표현하다"
+    },
+    {
+      "no": 44,
+      "word": "popularity",
+      "meaning": "인기, 평판"
+    },
+    {
+      "no": 45,
+      "word": "industrial",
+      "meaning": "산업의; 공업용의"
+    },
+    {
+      "no": 46,
+      "word": "pole",
+      "meaning": "막대기, 기둥; 극, 극지방"
+    },
+    {
+      "no": 47,
+      "word": "prayer",
+      "meaning": "기도"
+    },
+    {
+      "no": 48,
+      "word": "sensible",
+      "meaning": "분별 있는, 현명한"
+    },
+    {
+      "no": 49,
+      "word": "frame",
+      "meaning": "뼈대, 체격; 액자, 틀; 안경테"
+    },
+    {
+      "no": 50,
+      "word": "populate",
+      "meaning": "살다, 거주하다; 이주시키다"
+    },
+    {
+      "no": 51,
+      "word": "evolve",
+      "meaning": "진화하다; 발전하다"
+    },
+    {
+      "no": 52,
+      "word": "resent",
+      "meaning": "분개하다, 화내다"
+    },
+    {
+      "no": 53,
+      "word": "quality",
+      "meaning": "품질; 특성, 속성"
+    },
+    {
+      "no": 54,
+      "word": "personnel",
+      "meaning": "인원; 인사과"
+    },
+    {
+      "no": 55,
+      "word": "spontaneous",
+      "meaning": "자발적인; 자연스러운"
+    },
+    {
+      "no": 56,
+      "word": "initiate",
+      "meaning": "시작하다"
+    },
+    {
+      "no": 57,
+      "word": "phase",
+      "meaning": "단계, 국면; 양상"
+    },
+    {
+      "no": 58,
+      "word": "resentful",
+      "meaning": "분개한"
+    },
+    {
+      "no": 59,
+      "word": "relevant",
+      "meaning": "관련 있는; 의의가 있는, 유의미한"
+    },
+    {
+      "no": 60,
+      "word": "respective",
+      "meaning": "각자의, 각각의"
+    },
+    {
+      "no": 61,
+      "word": "depend",
+      "meaning": "의존하다; 달려 있다"
+    },
+    {
+      "no": 62,
+      "word": "involve",
+      "meaning": "포함하다, 수반하다; 관련시키다; 참여시키다"
+    },
+    {
+      "no": 63,
+      "word": "generously",
+      "meaning": "관대하게"
+    },
+    {
+      "no": 64,
+      "word": "royalty",
+      "meaning": "왕정; 인세, 저작권 사용료"
+    },
+    {
+      "no": 65,
+      "word": "imitate",
+      "meaning": "모방하다, 흉내 내다"
+    },
+    {
+      "no": 66,
+      "word": "distribute",
+      "meaning": "분배하다, 나눠 주다"
+    },
+    {
+      "no": 67,
+      "word": "attribute",
+      "meaning": "~의 탓으로 여기다; 특성, 속성"
+    },
+    {
+      "no": 68,
+      "word": "loyalty",
+      "meaning": "충성, 성실"
+    },
+    {
+      "no": 69,
+      "word": "relative",
+      "meaning": "비교적인, 상대적인; 친척"
+    },
+    {
+      "no": 70,
+      "word": "contribute",
+      "meaning": "기여하다; 기부하다; 원인이 되다"
+    },
+    {
+      "no": 71,
+      "word": "reap",
+      "meaning": "거두다; 수확하다, 거두다"
+    },
+    {
+      "no": 72,
+      "word": "hospitality",
+      "meaning": "환대, 대접"
+    },
+    {
+      "no": 73,
+      "word": "simultaneous",
+      "meaning": "동시의"
+    },
+    {
+      "no": 74,
+      "word": "royal",
+      "meaning": "국왕의, 왕실의"
+    },
+    {
+      "no": 75,
+      "word": "natural",
+      "meaning": "자연의; 자연스러운; 타고난"
+    },
+    {
+      "no": 76,
+      "word": "industrious",
+      "meaning": "근면한, 부지런한"
+    },
+    {
+      "no": 77,
+      "word": "destination",
+      "meaning": "목적지, 도착지"
+    },
+    {
+      "no": 78,
+      "word": "crucial",
+      "meaning": "중대한, 아주 중요한, 결정적인"
+    },
+    {
+      "no": 79,
+      "word": "mass",
+      "meaning": "덩어리; 많은; 무리, 집단; 질량; 대량의, 대중의"
+    },
+    {
+      "no": 80,
+      "word": "messy",
+      "meaning": "지저분한, 엉망인"
+    }
+  ]
+}

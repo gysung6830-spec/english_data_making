@@ -1,0 +1,506 @@
+{
+  "title": "Day 31~32",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "scale up",
+      "meaning": "(규모·양 등을) 확대하다, 늘리다"
+    },
+    {
+      "no": 2,
+      "word": "put across",
+      "meaning": "(생각·의견 등을) 전달하다, 이해시키다"
+    },
+    {
+      "no": 3,
+      "word": "soak",
+      "meaning": "흠뻑 적시다; 담그다, 담기다"
+    },
+    {
+      "no": 4,
+      "word": "confirmation",
+      "meaning": "확인, 확정"
+    },
+    {
+      "no": 5,
+      "word": "competitive",
+      "meaning": "경쟁의; 경쟁력 있는"
+    },
+    {
+      "no": 6,
+      "word": "obstruction",
+      "meaning": "방해(물), 장애(물)"
+    },
+    {
+      "no": 7,
+      "word": "sympathy",
+      "meaning": "동정, 연민; 공감, 지지"
+    },
+    {
+      "no": 8,
+      "word": "inclusive",
+      "meaning": "포함한; 포괄적인; 포용적인"
+    },
+    {
+      "no": 9,
+      "word": "flock",
+      "meaning": "떼, 무리; 떼 지어 가다, 모이다"
+    },
+    {
+      "no": 10,
+      "word": "morale",
+      "meaning": "사기, 의욕"
+    },
+    {
+      "no": 11,
+      "word": "incorporated",
+      "meaning": "법인 조직의"
+    },
+    {
+      "no": 12,
+      "word": "overturn",
+      "meaning": "뒤집다, 뒤집히다; (결정·체제 등을) 뒤엎다"
+    },
+    {
+      "no": 13,
+      "word": "deficient",
+      "meaning": "부족한, 결핍된"
+    },
+    {
+      "no": 14,
+      "word": "diplomacy",
+      "meaning": "외교(술)"
+    },
+    {
+      "no": 15,
+      "word": "legacy",
+      "meaning": "유산, 유물"
+    },
+    {
+      "no": 16,
+      "word": "inverse",
+      "meaning": "역[반대]의"
+    },
+    {
+      "no": 17,
+      "word": "presumption",
+      "meaning": "추정; 건방짐"
+    },
+    {
+      "no": 18,
+      "word": "unlettered",
+      "meaning": "글을 못 읽는, 문맹의"
+    },
+    {
+      "no": 19,
+      "word": "ethically",
+      "meaning": "윤리[도덕]적으로"
+    },
+    {
+      "no": 20,
+      "word": "protest",
+      "meaning": "항의, 반대, 시위; 항의[반대]하다"
+    },
+    {
+      "no": 21,
+      "word": "fractional",
+      "meaning": "아주 적은; 분수의"
+    },
+    {
+      "no": 22,
+      "word": "diplomatic",
+      "meaning": "외교(상)의; 외교에 능한, 요령 있는"
+    },
+    {
+      "no": 23,
+      "word": "unconditionally",
+      "meaning": "무조건으로, 절대적으로"
+    },
+    {
+      "no": 24,
+      "word": "migration",
+      "meaning": "이동; 이주"
+    },
+    {
+      "no": 25,
+      "word": "inclusion",
+      "meaning": "포함; 함유(물)"
+    },
+    {
+      "no": 26,
+      "word": "candid",
+      "meaning": "솔직한"
+    },
+    {
+      "no": 27,
+      "word": "externalize",
+      "meaning": "(생각·감정을) 표면화[구체화]하다"
+    },
+    {
+      "no": 28,
+      "word": "commit",
+      "meaning": "(범죄 등을) 저지르다; 약속하다; 전념[헌신]하다"
+    },
+    {
+      "no": 29,
+      "word": "incorporate",
+      "meaning": "포함하다, 통합하다; 법인으로 만들다"
+    },
+    {
+      "no": 30,
+      "word": "conceited",
+      "meaning": "자만하는, 우쭐한"
+    },
+    {
+      "no": 31,
+      "word": "severity",
+      "meaning": "심각성; 가혹함, 엄격함"
+    },
+    {
+      "no": 32,
+      "word": "missionary",
+      "meaning": "선교사"
+    },
+    {
+      "no": 33,
+      "word": "unanimously",
+      "meaning": "만장일치로"
+    },
+    {
+      "no": 34,
+      "word": "autobiography",
+      "meaning": "자서전"
+    },
+    {
+      "no": 35,
+      "word": "stack",
+      "meaning": "무더기, 더미; 쌓다, 쌓이다"
+    },
+    {
+      "no": 36,
+      "word": "deadlock",
+      "meaning": "교착 상태"
+    },
+    {
+      "no": 37,
+      "word": "comparable",
+      "meaning": "비슷한; 필적하는, 비길 만한"
+    },
+    {
+      "no": 38,
+      "word": "temptation",
+      "meaning": "유혹(적인 것)"
+    },
+    {
+      "no": 39,
+      "word": "accompany",
+      "meaning": "동행[동반]하다; 수반하다; 반주하다"
+    },
+    {
+      "no": 40,
+      "word": "externally",
+      "meaning": "외부적으로"
+    },
+    {
+      "no": 41,
+      "word": "contemptuous",
+      "meaning": "경멸하는, 업신여기는"
+    },
+    {
+      "no": 42,
+      "word": "banish",
+      "meaning": "추방하다; (생각 등을) 떨쳐 버리다"
+    },
+    {
+      "no": 43,
+      "word": "speak for",
+      "meaning": "~을 대변하다, 대신하여 말하다"
+    },
+    {
+      "no": 44,
+      "word": "tempting",
+      "meaning": "유혹적인, 구미가 당기는"
+    },
+    {
+      "no": 45,
+      "word": "acquire",
+      "meaning": "얻다, 습득하다; 취득하다"
+    },
+    {
+      "no": 46,
+      "word": "diplomat",
+      "meaning": "외교관"
+    },
+    {
+      "no": 47,
+      "word": "diminish",
+      "meaning": "줄어들다, 줄이다; 깎아내리다, 폄하하다"
+    },
+    {
+      "no": 48,
+      "word": "fiber",
+      "meaning": "섬유, 섬유질"
+    },
+    {
+      "no": 49,
+      "word": "sociology",
+      "meaning": "사회학"
+    },
+    {
+      "no": 50,
+      "word": "blossom",
+      "meaning": "(특히 과실수의) 꽃; 꽃이 피다; (형편 등이) 좋아지다, 발전하다"
+    },
+    {
+      "no": 51,
+      "word": "pivotal",
+      "meaning": "중심이 되는, 중추적인"
+    },
+    {
+      "no": 52,
+      "word": "confession",
+      "meaning": "자백, 고백"
+    },
+    {
+      "no": 53,
+      "word": "sentimental",
+      "meaning": "정서적인, 감상적인"
+    },
+    {
+      "no": 54,
+      "word": "unconditional",
+      "meaning": "무조건적인, 절대적인"
+    },
+    {
+      "no": 55,
+      "word": "migrate",
+      "meaning": "이동하다; 이주하다"
+    },
+    {
+      "no": 56,
+      "word": "undergo",
+      "meaning": "겪다, 경험하다"
+    },
+    {
+      "no": 57,
+      "word": "put down",
+      "meaning": "~을 적어 두다; ~을 진압하다"
+    },
+    {
+      "no": 58,
+      "word": "fraction",
+      "meaning": "부분, 일부; 분수"
+    },
+    {
+      "no": 59,
+      "word": "compare",
+      "meaning": "비교하다; 비유하다"
+    },
+    {
+      "no": 60,
+      "word": "obstruct",
+      "meaning": "(진로·일의 진행 등을) 막다, 방해하다"
+    },
+    {
+      "no": 61,
+      "word": "tempt",
+      "meaning": "유혹하다, 꾀다"
+    },
+    {
+      "no": 62,
+      "word": "valid",
+      "meaning": "유효한, 정당한; 타당한"
+    },
+    {
+      "no": 63,
+      "word": "casualty",
+      "meaning": "사상자, 피해자"
+    },
+    {
+      "no": 64,
+      "word": "presumably",
+      "meaning": "아마, 짐작건대"
+    },
+    {
+      "no": 65,
+      "word": "give in",
+      "meaning": "굴복[항복]하다"
+    },
+    {
+      "no": 66,
+      "word": "presume",
+      "meaning": "추정[가정]하다; 주제넘게 ~하다"
+    },
+    {
+      "no": 67,
+      "word": "beforehand",
+      "meaning": "미리, 사전에"
+    },
+    {
+      "no": 68,
+      "word": "sympathize",
+      "meaning": "동정하다; 지지하다"
+    },
+    {
+      "no": 69,
+      "word": "ascribe A to B",
+      "meaning": "A를 B의 원인[탓]으로 돌리다"
+    },
+    {
+      "no": 70,
+      "word": "county",
+      "meaning": "(미국 행정 구역의) 카운티, 군"
+    },
+    {
+      "no": 71,
+      "word": "contemporary",
+      "meaning": "동시대의; 현대의, 당대의; 동시대인, 동년배"
+    },
+    {
+      "no": 72,
+      "word": "incorporation",
+      "meaning": "포함, 통합; 법인 설립"
+    },
+    {
+      "no": 73,
+      "word": "intertwine",
+      "meaning": "뒤얽히다, 서로 엮다; 밀접하게관련되다"
+    },
+    {
+      "no": 74,
+      "word": "loan",
+      "meaning": "대출(금), 융자(금); 대여; (돈 등을) 빌려주다"
+    },
+    {
+      "no": 75,
+      "word": "competition",
+      "meaning": "경쟁; 대회, 시합"
+    },
+    {
+      "no": 76,
+      "word": "conceit",
+      "meaning": "자만심"
+    },
+    {
+      "no": 77,
+      "word": "sidestep",
+      "meaning": "(문제 등을) 회피하다; (옆으로) 피하다"
+    },
+    {
+      "no": 78,
+      "word": "faculty",
+      "meaning": "교수진, 교직원; (대학의) 학부; 재능, 능력"
+    },
+    {
+      "no": 79,
+      "word": "unanimous",
+      "meaning": "만장일치의"
+    },
+    {
+      "no": 80,
+      "word": "external",
+      "meaning": "외부의, 밖의; 대외적인"
+    },
+    {
+      "no": 81,
+      "word": "disdain",
+      "meaning": "업신여기다, 경멸하다; 업신여김, 경멸"
+    },
+    {
+      "no": 82,
+      "word": "disparate",
+      "meaning": "서로 전혀 다른, 이질적인"
+    },
+    {
+      "no": 83,
+      "word": "migratory",
+      "meaning": "이주[이동]하는"
+    },
+    {
+      "no": 84,
+      "word": "disparity",
+      "meaning": "격차, 불균형"
+    },
+    {
+      "no": 85,
+      "word": "ethics",
+      "meaning": "윤리학; 도덕, 윤리"
+    },
+    {
+      "no": 86,
+      "word": "recruitment",
+      "meaning": "신규 모집[채용]"
+    },
+    {
+      "no": 87,
+      "word": "deficit",
+      "meaning": "적자; 부족(액), 결핍"
+    },
+    {
+      "no": 88,
+      "word": "adjacent",
+      "meaning": "인접한, 가까운"
+    },
+    {
+      "no": 89,
+      "word": "counterpart",
+      "meaning": "상대, 대응물"
+    },
+    {
+      "no": 90,
+      "word": "confess",
+      "meaning": "(죄 등을) 자백하다; (감정·사실등을) 인정[고백]하다"
+    },
+    {
+      "no": 91,
+      "word": "migrant",
+      "meaning": "이주자; 철새"
+    },
+    {
+      "no": 92,
+      "word": "acquisition",
+      "meaning": "습득; 취득(물); 인수"
+    },
+    {
+      "no": 93,
+      "word": "contempt",
+      "meaning": "경멸, 멸시"
+    },
+    {
+      "no": 94,
+      "word": "ethical",
+      "meaning": "도덕상의, 윤리적인"
+    },
+    {
+      "no": 95,
+      "word": "betrayal",
+      "meaning": "배신, 배반"
+    },
+    {
+      "no": 96,
+      "word": "recruit",
+      "meaning": "모집하다; 징집하다; 신입 사원; 신병"
+    },
+    {
+      "no": 97,
+      "word": "competitor",
+      "meaning": "경쟁자; (시합) 참가자"
+    },
+    {
+      "no": 98,
+      "word": "span",
+      "meaning": "기간, 시간; 폭, 범위; (기간·범위등에) 걸치다"
+    },
+    {
+      "no": 99,
+      "word": "extinct",
+      "meaning": "멸종된, 사라진; (화산 등이) 활동을 멈춘"
+    },
+    {
+      "no": 100,
+      "word": "disdainful",
+      "meaning": "업신여기는, 경멸하는"
+    }
+  ]
+}

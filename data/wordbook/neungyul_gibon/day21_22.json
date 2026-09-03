@@ -1,0 +1,406 @@
+{
+  "title": "Day 21~22",
+  "source": "능률보카 고등 기본",
+  "words": [
+    {
+      "no": 1,
+      "word": "warning",
+      "meaning": "경고, 주의"
+    },
+    {
+      "no": 2,
+      "word": "pitiful",
+      "meaning": "가엾은, 불쌍한"
+    },
+    {
+      "no": 3,
+      "word": "impatient",
+      "meaning": "참을성 없는; 몹시 ~하고 싶어 하는"
+    },
+    {
+      "no": 4,
+      "word": "warn",
+      "meaning": "경고하다, 주의를 주다"
+    },
+    {
+      "no": 5,
+      "word": "visual",
+      "meaning": "시각의"
+    },
+    {
+      "no": 6,
+      "word": "thrilled",
+      "meaning": "흥분한, 감격한"
+    },
+    {
+      "no": 7,
+      "word": "confidence",
+      "meaning": "자신감"
+    },
+    {
+      "no": 8,
+      "word": "converter",
+      "meaning": "변환기"
+    },
+    {
+      "no": 9,
+      "word": "suburban",
+      "meaning": "교외의"
+    },
+    {
+      "no": 10,
+      "word": "embarrassed",
+      "meaning": "부끄러운, 당황한"
+    },
+    {
+      "no": 11,
+      "word": "prevention",
+      "meaning": "예방, 방지"
+    },
+    {
+      "no": 12,
+      "word": "enthusiasm",
+      "meaning": "열정, 열광"
+    },
+    {
+      "no": 13,
+      "word": "device",
+      "meaning": "장치, 기기"
+    },
+    {
+      "no": 14,
+      "word": "individual",
+      "meaning": "개개의, 개인적인; 개성 있는, 독특한; 개인"
+    },
+    {
+      "no": 15,
+      "word": "obtainable",
+      "meaning": "획득할 수 있는"
+    },
+    {
+      "no": 16,
+      "word": "thoughtful",
+      "meaning": "사려 깊은, 신중한; 생각에 잠긴"
+    },
+    {
+      "no": 17,
+      "word": "reverse",
+      "meaning": "반대의, 거꾸로 된; 뒤의; 반대; 뒤; 뒤집다"
+    },
+    {
+      "no": 18,
+      "word": "provide",
+      "meaning": "제공하다"
+    },
+    {
+      "no": 19,
+      "word": "confused",
+      "meaning": "혼란스러운"
+    },
+    {
+      "no": 20,
+      "word": "division",
+      "meaning": "분할; 나눗셈; 부분, 부서"
+    },
+    {
+      "no": 21,
+      "word": "convey",
+      "meaning": "나르다, 운반하다; 전하다"
+    },
+    {
+      "no": 22,
+      "word": "diverse",
+      "meaning": "다양한, 가지각색의"
+    },
+    {
+      "no": 23,
+      "word": "confuse",
+      "meaning": "혼란스럽게 하다; 혼동하다"
+    },
+    {
+      "no": 24,
+      "word": "arrogant",
+      "meaning": "오만한, 거만한"
+    },
+    {
+      "no": 25,
+      "word": "visible",
+      "meaning": "눈에 보이는"
+    },
+    {
+      "no": 26,
+      "word": "previously",
+      "meaning": "이전에, 과거에"
+    },
+    {
+      "no": 27,
+      "word": "responsibility",
+      "meaning": "책임"
+    },
+    {
+      "no": 28,
+      "word": "helpless",
+      "meaning": "무력한, 속수무책인"
+    },
+    {
+      "no": 29,
+      "word": "passion",
+      "meaning": "열정, 흥미"
+    },
+    {
+      "no": 30,
+      "word": "individually",
+      "meaning": "개별적으로"
+    },
+    {
+      "no": 31,
+      "word": "provision",
+      "meaning": "제공, 준비"
+    },
+    {
+      "no": 32,
+      "word": "confident",
+      "meaning": "자신 있는, 자신만만한; 확신하는"
+    },
+    {
+      "no": 33,
+      "word": "confidently",
+      "meaning": "자신 있게"
+    },
+    {
+      "no": 34,
+      "word": "vividly",
+      "meaning": "선명하게, 생생하게"
+    },
+    {
+      "no": 35,
+      "word": "container",
+      "meaning": "그릇, 용기; 컨테이너"
+    },
+    {
+      "no": 36,
+      "word": "caution",
+      "meaning": "조심, 신중"
+    },
+    {
+      "no": 37,
+      "word": "embarrass",
+      "meaning": "당황하게 하다"
+    },
+    {
+      "no": 38,
+      "word": "despair",
+      "meaning": "절망; 절망하다"
+    },
+    {
+      "no": 39,
+      "word": "suburb",
+      "meaning": "교외, 근교"
+    },
+    {
+      "no": 40,
+      "word": "helplessly",
+      "meaning": "무력하게"
+    },
+    {
+      "no": 41,
+      "word": "impatience",
+      "meaning": "성급함, 초조함"
+    },
+    {
+      "no": 42,
+      "word": "frustrated",
+      "meaning": "좌절감을 느끼는, 불만스러워하는"
+    },
+    {
+      "no": 43,
+      "word": "irritate",
+      "meaning": "짜증 나게 하다"
+    },
+    {
+      "no": 44,
+      "word": "ridiculous",
+      "meaning": "우스꽝스러운, 터무니없는"
+    },
+    {
+      "no": 45,
+      "word": "embarrassment",
+      "meaning": "부끄러움, 당황"
+    },
+    {
+      "no": 46,
+      "word": "embarrassing",
+      "meaning": "당황스럽게 하는"
+    },
+    {
+      "no": 47,
+      "word": "sympathetic",
+      "meaning": "동정적인, 공감하는"
+    },
+    {
+      "no": 48,
+      "word": "indifference",
+      "meaning": "무관심"
+    },
+    {
+      "no": 49,
+      "word": "evidently",
+      "meaning": "분명히, 명백하게"
+    },
+    {
+      "no": 50,
+      "word": "entire",
+      "meaning": "전체의"
+    },
+    {
+      "no": 51,
+      "word": "supervisor",
+      "meaning": "감독자"
+    },
+    {
+      "no": 52,
+      "word": "confusing",
+      "meaning": "혼란스럽게 하는"
+    },
+    {
+      "no": 53,
+      "word": "cautiously",
+      "meaning": "신중히, 조심하여"
+    },
+    {
+      "no": 54,
+      "word": "grateful",
+      "meaning": "감사하는, 고마워하는"
+    },
+    {
+      "no": 55,
+      "word": "responsible",
+      "meaning": "책임이 있는; 책임감 있는"
+    },
+    {
+      "no": 56,
+      "word": "souvenir",
+      "meaning": "기념품, 기념 선물"
+    },
+    {
+      "no": 57,
+      "word": "aware",
+      "meaning": "알고 있는"
+    },
+    {
+      "no": 58,
+      "word": "obtain",
+      "meaning": "얻다, 획득하다"
+    },
+    {
+      "no": 59,
+      "word": "thrill",
+      "meaning": "전율, 스릴; 열광시키다, 전율케하다"
+    },
+    {
+      "no": 60,
+      "word": "vertically",
+      "meaning": "수직으로"
+    },
+    {
+      "no": 61,
+      "word": "devise",
+      "meaning": "고안하다"
+    },
+    {
+      "no": 62,
+      "word": "desperate",
+      "meaning": "절망적인; 필사적인, 절실한; 극심한"
+    },
+    {
+      "no": 63,
+      "word": "awareness",
+      "meaning": "인식, 자각"
+    },
+    {
+      "no": 64,
+      "word": "vitality",
+      "meaning": "활력, 생명력"
+    },
+    {
+      "no": 65,
+      "word": "convenience",
+      "meaning": "편의, 편리"
+    },
+    {
+      "no": 66,
+      "word": "disappointed",
+      "meaning": "실망한"
+    },
+    {
+      "no": 67,
+      "word": "vertical",
+      "meaning": "수직의"
+    },
+    {
+      "no": 68,
+      "word": "vital",
+      "meaning": "중대한, 매우 중요한; 생명 유지에 필수적인; 활기 있는"
+    },
+    {
+      "no": 69,
+      "word": "attainable",
+      "meaning": "달성할 수 있는"
+    },
+    {
+      "no": 70,
+      "word": "revision",
+      "meaning": "개정, 수정"
+    },
+    {
+      "no": 71,
+      "word": "selfish",
+      "meaning": "이기적인, 자기중심적인"
+    },
+    {
+      "no": 72,
+      "word": "frustration",
+      "meaning": "불만, 좌절감"
+    },
+    {
+      "no": 73,
+      "word": "evidence",
+      "meaning": "증거, 근거; 흔적, 징후"
+    },
+    {
+      "no": 74,
+      "word": "neglect",
+      "meaning": "무시하다, 방치하다; 무시, 방치"
+    },
+    {
+      "no": 75,
+      "word": "divide",
+      "meaning": "나누다, 분리하다"
+    },
+    {
+      "no": 76,
+      "word": "gratitude",
+      "meaning": "감사, 감사하는 마음"
+    },
+    {
+      "no": 77,
+      "word": "conversion",
+      "meaning": "전환, 전향"
+    },
+    {
+      "no": 78,
+      "word": "vivid",
+      "meaning": "선명한, 생생한"
+    },
+    {
+      "no": 79,
+      "word": "diversity",
+      "meaning": "다양성"
+    },
+    {
+      "no": 80,
+      "word": "irritating",
+      "meaning": "짜증 나게 하는"
+    }
+  ]
+}

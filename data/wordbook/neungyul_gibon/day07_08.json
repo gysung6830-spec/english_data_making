@@ -1,0 +1,406 @@
+{
+  "title": "Day 7~8",
+  "source": "능률보카 고등 기본",
+  "words": [
+    {
+      "no": 1,
+      "word": "recommendation",
+      "meaning": "추천, 권고"
+    },
+    {
+      "no": 2,
+      "word": "improvement",
+      "meaning": "개선, 발전"
+    },
+    {
+      "no": 3,
+      "word": "migration",
+      "meaning": "이주"
+    },
+    {
+      "no": 4,
+      "word": "lose",
+      "meaning": "잃다; 지다"
+    },
+    {
+      "no": 5,
+      "word": "competition",
+      "meaning": "경쟁; 대회, 시합"
+    },
+    {
+      "no": 6,
+      "word": "comparison",
+      "meaning": "비교"
+    },
+    {
+      "no": 7,
+      "word": "flexibility",
+      "meaning": "융통성, 신축성"
+    },
+    {
+      "no": 8,
+      "word": "symbolic",
+      "meaning": "상징적인"
+    },
+    {
+      "no": 9,
+      "word": "prohibit",
+      "meaning": "금지하다"
+    },
+    {
+      "no": 10,
+      "word": "honor",
+      "meaning": "명예, 영광; 존경; 영예를 주다; 존경하다"
+    },
+    {
+      "no": 11,
+      "word": "determined",
+      "meaning": "결심한; 단호한"
+    },
+    {
+      "no": 12,
+      "word": "flexible",
+      "meaning": "융통성 있는, 탄력적인; 유연한"
+    },
+    {
+      "no": 13,
+      "word": "estimated",
+      "meaning": "추측의, 어림잡은"
+    },
+    {
+      "no": 14,
+      "word": "concept",
+      "meaning": "개념, 관념"
+    },
+    {
+      "no": 15,
+      "word": "compete",
+      "meaning": "경쟁하다"
+    },
+    {
+      "no": 16,
+      "word": "go through",
+      "meaning": "경험하다, 겪다; ~을 살펴보다, ~을 조사하다"
+    },
+    {
+      "no": 17,
+      "word": "rural",
+      "meaning": "시골의"
+    },
+    {
+      "no": 18,
+      "word": "migrant",
+      "meaning": "이주자; 철새"
+    },
+    {
+      "no": 19,
+      "word": "essentially",
+      "meaning": "본질적으로"
+    },
+    {
+      "no": 20,
+      "word": "struggle",
+      "meaning": "투쟁하다, 열심히 노력하다; 투쟁"
+    },
+    {
+      "no": 21,
+      "word": "host",
+      "meaning": "주인, 주최자; 주최하다"
+    },
+    {
+      "no": 22,
+      "word": "preserve",
+      "meaning": "지키다, 보호하다; 보존하다"
+    },
+    {
+      "no": 23,
+      "word": "convince",
+      "meaning": "납득시키다; 설득하다"
+    },
+    {
+      "no": 24,
+      "word": "strengthen",
+      "meaning": "강화하다"
+    },
+    {
+      "no": 25,
+      "word": "haste",
+      "meaning": "급함, 서두름"
+    },
+    {
+      "no": 26,
+      "word": "hasty",
+      "meaning": "성급한"
+    },
+    {
+      "no": 27,
+      "word": "relief",
+      "meaning": "완화; 구제"
+    },
+    {
+      "no": 28,
+      "word": "especially",
+      "meaning": "특히"
+    },
+    {
+      "no": 29,
+      "word": "forbid",
+      "meaning": "금지하다"
+    },
+    {
+      "no": 30,
+      "word": "conceptual",
+      "meaning": "개념의, 개념적인"
+    },
+    {
+      "no": 31,
+      "word": "determine",
+      "meaning": "결정하다; 알아내다"
+    },
+    {
+      "no": 32,
+      "word": "seek",
+      "meaning": "찾다; 추구하다; 노력하다"
+    },
+    {
+      "no": 33,
+      "word": "comparable",
+      "meaning": "비교할 만한, 필적하는"
+    },
+    {
+      "no": 34,
+      "word": "migrate",
+      "meaning": "이주하다; 이동하다"
+    },
+    {
+      "no": 35,
+      "word": "loss",
+      "meaning": "손실, 상실; 패배"
+    },
+    {
+      "no": 36,
+      "word": "blame",
+      "meaning": "탓하다, 비난하다"
+    },
+    {
+      "no": 37,
+      "word": "document",
+      "meaning": "문서, 서류; 기록하다"
+    },
+    {
+      "no": 38,
+      "word": "ruin",
+      "meaning": "파괴하다, 망치다; 몰락, 파멸; 잔해, 유적"
+    },
+    {
+      "no": 39,
+      "word": "recall",
+      "meaning": "상기하다, 회상하다; 회수하다"
+    },
+    {
+      "no": 40,
+      "word": "chore",
+      "meaning": "허드렛일, 잡일; 집안일"
+    },
+    {
+      "no": 41,
+      "word": "pay off",
+      "meaning": "완전히 갚다; 성과를 올리다"
+    },
+    {
+      "no": 42,
+      "word": "deserve",
+      "meaning": "~할 만하다"
+    },
+    {
+      "no": 43,
+      "word": "dead",
+      "meaning": "죽은"
+    },
+    {
+      "no": 44,
+      "word": "notice",
+      "meaning": "주의, 주목; 통지, 공고문; 알아차리다; 주목하다"
+    },
+    {
+      "no": 45,
+      "word": "harm",
+      "meaning": "해, 손상; 해치다, 손상하다"
+    },
+    {
+      "no": 46,
+      "word": "noticeable",
+      "meaning": "눈에 띄는, 두드러진"
+    },
+    {
+      "no": 47,
+      "word": "harmful",
+      "meaning": "해로운"
+    },
+    {
+      "no": 48,
+      "word": "destruction",
+      "meaning": "파괴, 파멸"
+    },
+    {
+      "no": 49,
+      "word": "migratory",
+      "meaning": "이주하는"
+    },
+    {
+      "no": 50,
+      "word": "ultimate",
+      "meaning": "궁극적인, 최종의"
+    },
+    {
+      "no": 51,
+      "word": "spoil",
+      "meaning": "망치다; 버릇없게 키우다; 상하다"
+    },
+    {
+      "no": 52,
+      "word": "convinced",
+      "meaning": "확신하는"
+    },
+    {
+      "no": 53,
+      "word": "resolve",
+      "meaning": "결심하다; 해결하다; 굳은 결심"
+    },
+    {
+      "no": 54,
+      "word": "conflict",
+      "meaning": "갈등, 대립, 충돌; 대립하다"
+    },
+    {
+      "no": 55,
+      "word": "definitely",
+      "meaning": "분명히"
+    },
+    {
+      "no": 56,
+      "word": "reduce",
+      "meaning": "줄이다, 낮추다"
+    },
+    {
+      "no": 57,
+      "word": "pressure",
+      "meaning": "압력, 압박; 압력을 가하다"
+    },
+    {
+      "no": 58,
+      "word": "harmless",
+      "meaning": "무해한"
+    },
+    {
+      "no": 59,
+      "word": "preservation",
+      "meaning": "보존, 유지"
+    },
+    {
+      "no": 60,
+      "word": "deadly",
+      "meaning": "치명적인; 극단적인; 극도로"
+    },
+    {
+      "no": 61,
+      "word": "smoothly",
+      "meaning": "매끄럽게, 원활하게"
+    },
+    {
+      "no": 62,
+      "word": "improve",
+      "meaning": "개선하다"
+    },
+    {
+      "no": 63,
+      "word": "occur",
+      "meaning": "생기다; 떠오르다"
+    },
+    {
+      "no": 64,
+      "word": "reduction",
+      "meaning": "감소, 감축"
+    },
+    {
+      "no": 65,
+      "word": "comparative",
+      "meaning": "비교의, 상대적인"
+    },
+    {
+      "no": 66,
+      "word": "resolute",
+      "meaning": "결의에 찬"
+    },
+    {
+      "no": 67,
+      "word": "standardize",
+      "meaning": "표준화하다"
+    },
+    {
+      "no": 68,
+      "word": "prohibition",
+      "meaning": "금지"
+    },
+    {
+      "no": 69,
+      "word": "destructive",
+      "meaning": "파괴적인"
+    },
+    {
+      "no": 70,
+      "word": "recommend",
+      "meaning": "추천하다, 권고하다"
+    },
+    {
+      "no": 71,
+      "word": "spot",
+      "meaning": "장소, 지점; 점, 얼룩; 발견하다; 더럽히다"
+    },
+    {
+      "no": 72,
+      "word": "compare",
+      "meaning": "비교하다; 비유하다; 필적하다"
+    },
+    {
+      "no": 73,
+      "word": "convincing",
+      "meaning": "설득력 있는"
+    },
+    {
+      "no": 74,
+      "word": "fortunate",
+      "meaning": "운 좋은, 행운인"
+    },
+    {
+      "no": 75,
+      "word": "dynamically",
+      "meaning": "역동적으로, 다이내믹하게"
+    },
+    {
+      "no": 76,
+      "word": "come across",
+      "meaning": "~을 우연히 마주치다, ~을 우연히 발견하다"
+    },
+    {
+      "no": 77,
+      "word": "period",
+      "meaning": "기간, 시기; 마침표"
+    },
+    {
+      "no": 78,
+      "word": "essential",
+      "meaning": "필수의, 매우 중요한; 본질적인"
+    },
+    {
+      "no": 79,
+      "word": "relieve",
+      "meaning": "완화시키다; 구제하다"
+    },
+    {
+      "no": 80,
+      "word": "standard",
+      "meaning": "표준, 기준, 규범; 표준의"
+    }
+  ]
+}

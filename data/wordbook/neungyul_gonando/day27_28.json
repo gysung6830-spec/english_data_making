@@ -1,0 +1,506 @@
+{
+  "title": "Day 27~28",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "monopolize",
+      "meaning": "독점하다; 독차지하다"
+    },
+    {
+      "no": 2,
+      "word": "decisive",
+      "meaning": "결정적인, 중대한; 결단력 있는, 단호한"
+    },
+    {
+      "no": 3,
+      "word": "keen",
+      "meaning": "열망하는; 열정적인; 예리한, 예민한"
+    },
+    {
+      "no": 4,
+      "word": "mend",
+      "meaning": "수선하다, 고치다; (상황·관계 등을) 해결하다, 개선하다"
+    },
+    {
+      "no": 5,
+      "word": "dimension",
+      "meaning": "크기, 치수; 측면, 관점; 차원"
+    },
+    {
+      "no": 6,
+      "word": "monopoly",
+      "meaning": "독점(권), 전매(권)"
+    },
+    {
+      "no": 7,
+      "word": "victimize",
+      "meaning": "희생시키다, 부당하게 괴롭히다"
+    },
+    {
+      "no": 8,
+      "word": "configure",
+      "meaning": "(시스템 등을) 설정하다"
+    },
+    {
+      "no": 9,
+      "word": "deduction",
+      "meaning": "추론, 연역; 공제(액)"
+    },
+    {
+      "no": 10,
+      "word": "successive",
+      "meaning": "연속적인, 연이은"
+    },
+    {
+      "no": 11,
+      "word": "spectrum",
+      "meaning": "(빛 등의) 스펙트럼; 범위, 영역"
+    },
+    {
+      "no": 12,
+      "word": "fling",
+      "meaning": "내던지다, 내팽개치다"
+    },
+    {
+      "no": 13,
+      "word": "look through",
+      "meaning": "~을 살펴보다, 훑어보다"
+    },
+    {
+      "no": 14,
+      "word": "expulsion",
+      "meaning": "추방; 퇴학, 제명"
+    },
+    {
+      "no": 15,
+      "word": "maternal",
+      "meaning": "어머니의, 모성의"
+    },
+    {
+      "no": 16,
+      "word": "plague",
+      "meaning": "전염병, 역병; 괴롭히다, 시달리게 하다"
+    },
+    {
+      "no": 17,
+      "word": "naive",
+      "meaning": "순진한, 천진난만한"
+    },
+    {
+      "no": 18,
+      "word": "negotiate",
+      "meaning": "협상[교섭]하다; 성사시키다"
+    },
+    {
+      "no": 19,
+      "word": "succession",
+      "meaning": "연속; 계승"
+    },
+    {
+      "no": 20,
+      "word": "despicable",
+      "meaning": "비열한, 야비한"
+    },
+    {
+      "no": 21,
+      "word": "enrich",
+      "meaning": "풍요롭게 하다; (질·가치 등을) 높이다"
+    },
+    {
+      "no": 22,
+      "word": "coherence",
+      "meaning": "일관성"
+    },
+    {
+      "no": 23,
+      "word": "flee",
+      "meaning": "달아나다, 도망치다"
+    },
+    {
+      "no": 24,
+      "word": "mourn",
+      "meaning": "슬퍼하다, 애도하다"
+    },
+    {
+      "no": 25,
+      "word": "transcend",
+      "meaning": "초월하다, 뛰어넘다"
+    },
+    {
+      "no": 26,
+      "word": "demonstrate",
+      "meaning": "입증하다; 설명하다, 시연하다; 시위하다"
+    },
+    {
+      "no": 27,
+      "word": "council",
+      "meaning": "(지방) 의회; 협의회, 위원회"
+    },
+    {
+      "no": 28,
+      "word": "affordability",
+      "meaning": "감당 가능성, 감당할 수 있는 비용"
+    },
+    {
+      "no": 29,
+      "word": "edible",
+      "meaning": "먹을 수 있는, 식용의"
+    },
+    {
+      "no": 30,
+      "word": "wilderness",
+      "meaning": "황야, 황무지"
+    },
+    {
+      "no": 31,
+      "word": "expel",
+      "meaning": "퇴학시키다, 제명하다; 추방하다, 내쫓다"
+    },
+    {
+      "no": 32,
+      "word": "erroneously",
+      "meaning": "잘못되게, 틀리게"
+    },
+    {
+      "no": 33,
+      "word": "coherently",
+      "meaning": "일관되게, 조리 있게"
+    },
+    {
+      "no": 34,
+      "word": "break up",
+      "meaning": "(관계 등이) 끝나다; 부서지다; (신호 등이) 끊기다"
+    },
+    {
+      "no": 35,
+      "word": "successively",
+      "meaning": "연속하여, 잇따라"
+    },
+    {
+      "no": 36,
+      "word": "naively",
+      "meaning": "순진하게"
+    },
+    {
+      "no": 37,
+      "word": "variability",
+      "meaning": "변동성, 가변성"
+    },
+    {
+      "no": 38,
+      "word": "negotiator",
+      "meaning": "협상가"
+    },
+    {
+      "no": 39,
+      "word": "discipline",
+      "meaning": "규율, 훈육; 훈련, 단련; 학문 분야, 학과; 징계하다; 훈육하다"
+    },
+    {
+      "no": 40,
+      "word": "dynamics",
+      "meaning": "역학 (관계); 동력, 원동력"
+    },
+    {
+      "no": 41,
+      "word": "launch into",
+      "meaning": "(갑자기 혹은 열정적으로) 시작하다"
+    },
+    {
+      "no": 42,
+      "word": "disciplinary",
+      "meaning": "징계의"
+    },
+    {
+      "no": 43,
+      "word": "victim",
+      "meaning": "희생자, 피해자; 제물, 희생물"
+    },
+    {
+      "no": 44,
+      "word": "outdated",
+      "meaning": "시대에 뒤떨어진, 구식의"
+    },
+    {
+      "no": 45,
+      "word": "revive",
+      "meaning": "소생[회복]시키다, 소생[회복]하다, 부흥시키다"
+    },
+    {
+      "no": 46,
+      "word": "critique",
+      "meaning": "비평, 평론; 비평[평론]하다"
+    },
+    {
+      "no": 47,
+      "word": "transcendence",
+      "meaning": "초월(성)"
+    },
+    {
+      "no": 48,
+      "word": "despise",
+      "meaning": "경멸하다, 혐오하다"
+    },
+    {
+      "no": 49,
+      "word": "unprecedentedly",
+      "meaning": "전례 없이"
+    },
+    {
+      "no": 50,
+      "word": "radiant",
+      "meaning": "빛나는; 복사의"
+    },
+    {
+      "no": 51,
+      "word": "satellite",
+      "meaning": "(인공)위성; (행성의) 위성; 위성국가, 위성 도시"
+    },
+    {
+      "no": 52,
+      "word": "deduct",
+      "meaning": "빼다, 공제하다"
+    },
+    {
+      "no": 53,
+      "word": "underlie",
+      "meaning": "(~의) 기초가 되다; (~의) 아래에 있다"
+    },
+    {
+      "no": 54,
+      "word": "cohesive",
+      "meaning": "응집력 있는, 결속된"
+    },
+    {
+      "no": 55,
+      "word": "disciplined",
+      "meaning": "훈련받은"
+    },
+    {
+      "no": 56,
+      "word": "elastic",
+      "meaning": "탄력 있는, 탄성의; 융통성 있는; 고무 밴드"
+    },
+    {
+      "no": 57,
+      "word": "wrestle",
+      "meaning": "몸싸움을 벌이다; (문제 등과) 씨름하다"
+    },
+    {
+      "no": 58,
+      "word": "humanitarian",
+      "meaning": "인도주의적인; 인도주의자"
+    },
+    {
+      "no": 59,
+      "word": "adversely",
+      "meaning": "부정적으로, 불리하게"
+    },
+    {
+      "no": 60,
+      "word": "jeopardize",
+      "meaning": "위태롭게 하다, 위험에 빠뜨리다"
+    },
+    {
+      "no": 61,
+      "word": "demonstration",
+      "meaning": "시위; (시범) 설명; 입증"
+    },
+    {
+      "no": 62,
+      "word": "negotiation",
+      "meaning": "협상, 교섭"
+    },
+    {
+      "no": 63,
+      "word": "afford",
+      "meaning": "~할 여유가 있다"
+    },
+    {
+      "no": 64,
+      "word": "diversity",
+      "meaning": "다양성"
+    },
+    {
+      "no": 65,
+      "word": "cue",
+      "meaning": "신호, 암시; (연극 등의) 큐 사인; 신호를 주다"
+    },
+    {
+      "no": 66,
+      "word": "contagion",
+      "meaning": "(접촉) 전염[감염]; 전염병"
+    },
+    {
+      "no": 67,
+      "word": "maternity",
+      "meaning": "어머니[임부]인 상태, 모성"
+    },
+    {
+      "no": 68,
+      "word": "predetermine",
+      "meaning": "미리 결정하다, 예정하다"
+    },
+    {
+      "no": 69,
+      "word": "adverse",
+      "meaning": "부정적인, 불리한; 반대의, 거스르는"
+    },
+    {
+      "no": 70,
+      "word": "masterpiece",
+      "meaning": "걸작, 명작"
+    },
+    {
+      "no": 71,
+      "word": "portion",
+      "meaning": "부분, 일부; (음식의) 1인분; 몫"
+    },
+    {
+      "no": 72,
+      "word": "undermine",
+      "meaning": "(자신감·권위 등을) 약화시키다"
+    },
+    {
+      "no": 73,
+      "word": "agenda",
+      "meaning": "의제, 안건"
+    },
+    {
+      "no": 74,
+      "word": "alter",
+      "meaning": "변경하다, 바꾸다[바뀌다]"
+    },
+    {
+      "no": 75,
+      "word": "transcendent",
+      "meaning": "초월적인; 탁월한"
+    },
+    {
+      "no": 76,
+      "word": "configuration",
+      "meaning": "배열, 배치; (시스템의) 환경 설정"
+    },
+    {
+      "no": 77,
+      "word": "predetermined",
+      "meaning": "미리 결정된, 예정된"
+    },
+    {
+      "no": 78,
+      "word": "unprecedented",
+      "meaning": "전례 없는"
+    },
+    {
+      "no": 79,
+      "word": "predetermination",
+      "meaning": "미리 결정함, 예정"
+    },
+    {
+      "no": 80,
+      "word": "spectator",
+      "meaning": "(특히 스포츠 행사의) 관중, 구경꾼"
+    },
+    {
+      "no": 81,
+      "word": "dynamic",
+      "meaning": "역동적인, 활발한"
+    },
+    {
+      "no": 82,
+      "word": "humanity",
+      "meaning": "인류, 인간; 인간성"
+    },
+    {
+      "no": 83,
+      "word": "peninsula",
+      "meaning": "반도"
+    },
+    {
+      "no": 84,
+      "word": "affordable",
+      "meaning": "가격이 알맞은, 감당할 수 있는"
+    },
+    {
+      "no": 85,
+      "word": "physician",
+      "meaning": "(내과) 의사"
+    },
+    {
+      "no": 86,
+      "word": "mourning",
+      "meaning": "애도"
+    },
+    {
+      "no": 87,
+      "word": "variable",
+      "meaning": "변동이 심한, 가변적인; 변수"
+    },
+    {
+      "no": 88,
+      "word": "comet",
+      "meaning": "혜성"
+    },
+    {
+      "no": 89,
+      "word": "leave out",
+      "meaning": "~을 빼놓다, 제외[생략]하다"
+    },
+    {
+      "no": 90,
+      "word": "bonding",
+      "meaning": "긴밀한 유대"
+    },
+    {
+      "no": 91,
+      "word": "abstract",
+      "meaning": "추상적인; 추상 (개념); 개요, 요약; 추출하다; 요약하다"
+    },
+    {
+      "no": 92,
+      "word": "friction",
+      "meaning": "마찰; 갈등, 불화"
+    },
+    {
+      "no": 93,
+      "word": "wholehearted",
+      "meaning": "전폭적인, 전적인"
+    },
+    {
+      "no": 94,
+      "word": "widespread",
+      "meaning": "광범위한, 널리 퍼진"
+    },
+    {
+      "no": 95,
+      "word": "naivety",
+      "meaning": "순진함"
+    },
+    {
+      "no": 96,
+      "word": "revival",
+      "meaning": "회복, 부활; 부흥, 재유행"
+    },
+    {
+      "no": 97,
+      "word": "preliminary",
+      "meaning": "예비의, 준비의; 예비 단계, 예선전"
+    },
+    {
+      "no": 98,
+      "word": "elasticity",
+      "meaning": "탄성, 신축성"
+    },
+    {
+      "no": 99,
+      "word": "cohesion",
+      "meaning": "화합, 결속력, 응집력"
+    },
+    {
+      "no": 100,
+      "word": "physics",
+      "meaning": "물리학"
+    }
+  ]
+}

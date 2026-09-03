@@ -1,0 +1,506 @@
+{
+  "title": "Day 39~40",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "designate",
+      "meaning": "지정[임명]하다"
+    },
+    {
+      "no": 2,
+      "word": "altitude",
+      "meaning": "(해발) 고도; 고지, 높은 곳"
+    },
+    {
+      "no": 3,
+      "word": "classification",
+      "meaning": "분류; 유형"
+    },
+    {
+      "no": 4,
+      "word": "superstitious",
+      "meaning": "미신을 믿는, 미신적인"
+    },
+    {
+      "no": 5,
+      "word": "venture",
+      "meaning": "벤처 사업, (사업상의) 모험; (위험을 무릅쓰고) 가다, 하다"
+    },
+    {
+      "no": 6,
+      "word": "amend",
+      "meaning": "(법 등을) 개정하다, 수정하다"
+    },
+    {
+      "no": 7,
+      "word": "inherently",
+      "meaning": "선천적으로, 본질적으로"
+    },
+    {
+      "no": 8,
+      "word": "socialization",
+      "meaning": "사회화"
+    },
+    {
+      "no": 9,
+      "word": "besiege",
+      "meaning": "포위하다, 에워싸다; (질문 등을) 퍼붓다"
+    },
+    {
+      "no": 10,
+      "word": "call out",
+      "meaning": "~을 부르다, 외치다; ~을 지적[비판]하다"
+    },
+    {
+      "no": 11,
+      "word": "segregation",
+      "meaning": "차별 (정책); 분리, 격리"
+    },
+    {
+      "no": 12,
+      "word": "illumination",
+      "meaning": "(불)빛, 조명"
+    },
+    {
+      "no": 13,
+      "word": "furnished",
+      "meaning": "가구가 비치된"
+    },
+    {
+      "no": 14,
+      "word": "recede",
+      "meaning": "멀어지다, 물러나다; 희미해지다, 약해지다"
+    },
+    {
+      "no": 15,
+      "word": "enterprise",
+      "meaning": "기업, 회사; (모험성) 사업; 진취성"
+    },
+    {
+      "no": 16,
+      "word": "transmission",
+      "meaning": "전달, 전송, 송신; 전염"
+    },
+    {
+      "no": 17,
+      "word": "renowned",
+      "meaning": "유명한, 명성 있는"
+    },
+    {
+      "no": 18,
+      "word": "immigration",
+      "meaning": "(타국으로부터의) 이민, 이주"
+    },
+    {
+      "no": 19,
+      "word": "brush up",
+      "meaning": "(배운 것을) 다시 익히다, 복습하다"
+    },
+    {
+      "no": 20,
+      "word": "territorial",
+      "meaning": "영토의"
+    },
+    {
+      "no": 21,
+      "word": "segregate",
+      "meaning": "(인종 등에 따라) 차별하다; 분리[격리]하다"
+    },
+    {
+      "no": 22,
+      "word": "immigrant",
+      "meaning": "이민자"
+    },
+    {
+      "no": 23,
+      "word": "tolerate",
+      "meaning": "용인하다; 견디다; (약물 등에) 내성이 있다"
+    },
+    {
+      "no": 24,
+      "word": "superstition",
+      "meaning": "미신"
+    },
+    {
+      "no": 25,
+      "word": "torment",
+      "meaning": "고통, 고뇌; 괴롭히다"
+    },
+    {
+      "no": 26,
+      "word": "stereotype",
+      "meaning": "고정 관념; 고정 관념을 형성하다"
+    },
+    {
+      "no": 27,
+      "word": "lose out",
+      "meaning": "손해를 보다, (기회 등을) 놓치다"
+    },
+    {
+      "no": 28,
+      "word": "root for",
+      "meaning": "~을 응원[지지]하다"
+    },
+    {
+      "no": 29,
+      "word": "swap",
+      "meaning": "교환하다, 맞바꾸다; 교환, 교체"
+    },
+    {
+      "no": 30,
+      "word": "shelter",
+      "meaning": "피신(처); 보호소; 주거, 집; 보호하다; 피하다"
+    },
+    {
+      "no": 31,
+      "word": "piracy",
+      "meaning": "해적 행위; 저작권 침해, 불법 복제"
+    },
+    {
+      "no": 32,
+      "word": "territory",
+      "meaning": "지역, 영토; 영역, 분야"
+    },
+    {
+      "no": 33,
+      "word": "pirate",
+      "meaning": "해적; 저작권 침해자; 저작권을 침해하다, 불법 복제하다"
+    },
+    {
+      "no": 34,
+      "word": "transmit",
+      "meaning": "전송[송신]하다; 전염시키다; (열·전기 등을) 전도하다"
+    },
+    {
+      "no": 35,
+      "word": "constitutional",
+      "meaning": "헌법(상)의; 체질상의"
+    },
+    {
+      "no": 36,
+      "word": "skim",
+      "meaning": "훑어보다; (액체에서) 걷어 내다; (표면을) 스쳐 지나가다"
+    },
+    {
+      "no": 37,
+      "word": "constitution",
+      "meaning": "헌법; 체질; 구성, 구조"
+    },
+    {
+      "no": 38,
+      "word": "stride",
+      "meaning": "성큼성큼 걷다; 큰 걸음; 진보, 진전"
+    },
+    {
+      "no": 39,
+      "word": "showcase",
+      "meaning": "전시[진열]하다, 선보이다; 공개 행사; 진열장"
+    },
+    {
+      "no": 40,
+      "word": "bankrupt",
+      "meaning": "파산한; 파산자"
+    },
+    {
+      "no": 41,
+      "word": "currency",
+      "meaning": "통화, 화폐; 통용, 유통"
+    },
+    {
+      "no": 42,
+      "word": "classified",
+      "meaning": "분류된; 기밀의"
+    },
+    {
+      "no": 43,
+      "word": "contractor",
+      "meaning": "계약자, 도급업자"
+    },
+    {
+      "no": 44,
+      "word": "siege",
+      "meaning": "포위 (작전)"
+    },
+    {
+      "no": 45,
+      "word": "intermittently",
+      "meaning": "간간이, 간헐적으로"
+    },
+    {
+      "no": 46,
+      "word": "submerge",
+      "meaning": "물속에 넣다[잠기다], 잠수하다"
+    },
+    {
+      "no": 47,
+      "word": "inherit",
+      "meaning": "상속받다, 물려받다"
+    },
+    {
+      "no": 48,
+      "word": "merchant",
+      "meaning": "상인, 무역상"
+    },
+    {
+      "no": 49,
+      "word": "burrow",
+      "meaning": "(토끼 등의) 굴; 굴을 파다; 깊이 파고들다"
+    },
+    {
+      "no": 50,
+      "word": "stereotypical",
+      "meaning": "고정 관념적인, 정형화된"
+    },
+    {
+      "no": 51,
+      "word": "hardship",
+      "meaning": "어려움, 고난"
+    },
+    {
+      "no": 52,
+      "word": "trim",
+      "meaning": "다듬다, 손질하다; 줄이다, 삭감하다; 다듬기"
+    },
+    {
+      "no": 53,
+      "word": "acceleration",
+      "meaning": "가속, 촉진; 가속도"
+    },
+    {
+      "no": 54,
+      "word": "imperialism",
+      "meaning": "제국주의"
+    },
+    {
+      "no": 55,
+      "word": "vibrate",
+      "meaning": "떨다, 진동하다, 흔들리다"
+    },
+    {
+      "no": 56,
+      "word": "tedious",
+      "meaning": "지루한, 지겨운"
+    },
+    {
+      "no": 57,
+      "word": "plunge",
+      "meaning": "뛰어들다, 추락하다; 급락하다; 급락, 낙하; 돌진"
+    },
+    {
+      "no": 58,
+      "word": "playback",
+      "meaning": "(녹음·녹화의) 재생, 재생된 내용"
+    },
+    {
+      "no": 59,
+      "word": "accelerate",
+      "meaning": "가속화하다[되다], 촉진하다"
+    },
+    {
+      "no": 60,
+      "word": "merchandise",
+      "meaning": "물품, 상품; 판매하다"
+    },
+    {
+      "no": 61,
+      "word": "partition",
+      "meaning": "칸막이; 분할, 분리; 분할하다, 나누다"
+    },
+    {
+      "no": 62,
+      "word": "break off",
+      "meaning": "(관계 등을) 끊다; (말 등을) 멈추다"
+    },
+    {
+      "no": 63,
+      "word": "inherent",
+      "meaning": "내재하는, 고유의"
+    },
+    {
+      "no": 64,
+      "word": "designated",
+      "meaning": "지정된, 임명된"
+    },
+    {
+      "no": 65,
+      "word": "abbreviate",
+      "meaning": "줄여 쓰다, 축약하다"
+    },
+    {
+      "no": 66,
+      "word": "scribble",
+      "meaning": "휘갈겨 쓰다, 낙서하다; 휘갈겨쓴 글씨, 낙서"
+    },
+    {
+      "no": 67,
+      "word": "income",
+      "meaning": "소득, 수입"
+    },
+    {
+      "no": 68,
+      "word": "elimination",
+      "meaning": "제거; (경쟁에서의) 탈락"
+    },
+    {
+      "no": 69,
+      "word": "inheritance",
+      "meaning": "상속 재산, 유산; 유전(적 성질)"
+    },
+    {
+      "no": 70,
+      "word": "verdict",
+      "meaning": "(배심원단의) 평결; 의견, 결정"
+    },
+    {
+      "no": 71,
+      "word": "generalize",
+      "meaning": "일반화하다"
+    },
+    {
+      "no": 72,
+      "word": "vibrant",
+      "meaning": "활기찬; (색채가) 선명한"
+    },
+    {
+      "no": 73,
+      "word": "corrupt",
+      "meaning": "부패한, 타락한; 타락시키다"
+    },
+    {
+      "no": 74,
+      "word": "subtract",
+      "meaning": "빼다, 공제하다"
+    },
+    {
+      "no": 75,
+      "word": "intriguing",
+      "meaning": "흥미를 자아내는"
+    },
+    {
+      "no": 76,
+      "word": "cargo",
+      "meaning": "(선박·비행기의) 화물, 짐"
+    },
+    {
+      "no": 77,
+      "word": "designation",
+      "meaning": "지정, 임명; 명칭, 직함"
+    },
+    {
+      "no": 78,
+      "word": "recession",
+      "meaning": "불경기, 불황; 후퇴, 물러남"
+    },
+    {
+      "no": 79,
+      "word": "amendment",
+      "meaning": "(법 등의) 개정, 수정(안)"
+    },
+    {
+      "no": 80,
+      "word": "recitation",
+      "meaning": "암송, 낭독; 열거"
+    },
+    {
+      "no": 81,
+      "word": "detract",
+      "meaning": "(가치 등을) 떨어뜨리다, 손상시키다"
+    },
+    {
+      "no": 82,
+      "word": "terminology",
+      "meaning": "전문 용어"
+    },
+    {
+      "no": 83,
+      "word": "eliminate",
+      "meaning": "없애다, 제거하다; 탈락시키다"
+    },
+    {
+      "no": 84,
+      "word": "classify",
+      "meaning": "분류하다, 구분하다"
+    },
+    {
+      "no": 85,
+      "word": "enterprising",
+      "meaning": "진취적인"
+    },
+    {
+      "no": 86,
+      "word": "subsidize",
+      "meaning": "보조금을 주다"
+    },
+    {
+      "no": 87,
+      "word": "subsidy",
+      "meaning": "보조금, 장려금"
+    },
+    {
+      "no": 88,
+      "word": "intermittent",
+      "meaning": "간헐적인, 간간이 일어나는"
+    },
+    {
+      "no": 89,
+      "word": "mound",
+      "meaning": "흙더미, 언덕; 더미"
+    },
+    {
+      "no": 90,
+      "word": "stumble",
+      "meaning": "발이 걸리다; 비틀거리다; 말을더듬다"
+    },
+    {
+      "no": 91,
+      "word": "intrigued",
+      "meaning": "아주 흥미로워하는"
+    },
+    {
+      "no": 92,
+      "word": "consistency",
+      "meaning": "일관성; 농도, 밀도"
+    },
+    {
+      "no": 93,
+      "word": "decompose",
+      "meaning": "부패하다[시키다]; 분해하다[되다]"
+    },
+    {
+      "no": 94,
+      "word": "tolerant",
+      "meaning": "관대한; 잘 견디는, 내성이 있는"
+    },
+    {
+      "no": 95,
+      "word": "intrigue",
+      "meaning": "흥미를 끌다; 음모를 꾸미다; 음모"
+    },
+    {
+      "no": 96,
+      "word": "imperial",
+      "meaning": "제국의, 황제의, 황실의"
+    },
+    {
+      "no": 97,
+      "word": "constitute",
+      "meaning": "구성하다; (~로) 간주되다"
+    },
+    {
+      "no": 98,
+      "word": "abbreviation",
+      "meaning": "축약(형), 약어"
+    },
+    {
+      "no": 99,
+      "word": "thrifty",
+      "meaning": "절약하는, 검소한"
+    },
+    {
+      "no": 100,
+      "word": "tolerance",
+      "meaning": "관용; 내성"
+    }
+  ]
+}

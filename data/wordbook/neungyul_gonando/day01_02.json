@@ -1,0 +1,506 @@
+{
+  "title": "Day 1~2",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "command",
+      "meaning": "명령하다; (존경 등을) 받다; (경치 등을) 내려다보다; 명령; 통솔, 지휘(권)"
+    },
+    {
+      "no": 2,
+      "word": "set out",
+      "meaning": "출발하다, 길을 떠나다; (일·과제 등에) 착수하다"
+    },
+    {
+      "no": 3,
+      "word": "appliance",
+      "meaning": "(가정용) 기기, 전기 제품"
+    },
+    {
+      "no": 4,
+      "word": "additional",
+      "meaning": "추가의, 부가적인"
+    },
+    {
+      "no": 5,
+      "word": "ambiguously",
+      "meaning": "모호하게"
+    },
+    {
+      "no": 6,
+      "word": "collectively",
+      "meaning": "집단으로, 총체적으로"
+    },
+    {
+      "no": 7,
+      "word": "breeding",
+      "meaning": "번식; 사육"
+    },
+    {
+      "no": 8,
+      "word": "set forth",
+      "meaning": "~을 설명[제시]하다; (여행을) 떠나다"
+    },
+    {
+      "no": 9,
+      "word": "autonomy",
+      "meaning": "자치권; 자주성, 자율성"
+    },
+    {
+      "no": 10,
+      "word": "limb",
+      "meaning": "팔다리, 사지; 나뭇가지"
+    },
+    {
+      "no": 11,
+      "word": "innovation",
+      "meaning": "혁신, 쇄신"
+    },
+    {
+      "no": 12,
+      "word": "term",
+      "meaning": "용어; 기간, 임기; 조건, 조항; 학기"
+    },
+    {
+      "no": 13,
+      "word": "blurry",
+      "meaning": "흐릿한, 모호한"
+    },
+    {
+      "no": 14,
+      "word": "evident",
+      "meaning": "명백한, 분명한"
+    },
+    {
+      "no": 15,
+      "word": "distinction",
+      "meaning": "차이, 대조; 뛰어남"
+    },
+    {
+      "no": 16,
+      "word": "infinitely",
+      "meaning": "무한히; 대단히, 매우"
+    },
+    {
+      "no": 17,
+      "word": "stockholder",
+      "meaning": "주주"
+    },
+    {
+      "no": 18,
+      "word": "convince",
+      "meaning": "납득[확신]시키다; 설득하다"
+    },
+    {
+      "no": 19,
+      "word": "cluster",
+      "meaning": "무리, 송이; 무리를 이루다, 모이다"
+    },
+    {
+      "no": 20,
+      "word": "distinguished",
+      "meaning": "유명한, 성공한; 기품 있는"
+    },
+    {
+      "no": 21,
+      "word": "stand up for",
+      "meaning": "~을 옹호하다, 지지하다"
+    },
+    {
+      "no": 22,
+      "word": "convincing",
+      "meaning": "설득력 있는"
+    },
+    {
+      "no": 23,
+      "word": "efficiency",
+      "meaning": "효율(성), 능률"
+    },
+    {
+      "no": 24,
+      "word": "found",
+      "meaning": "설립하다; ~에 기반을 두다"
+    },
+    {
+      "no": 25,
+      "word": "quantify",
+      "meaning": "수량화하다"
+    },
+    {
+      "no": 26,
+      "word": "clarification",
+      "meaning": "설명, 해명"
+    },
+    {
+      "no": 27,
+      "word": "rehearsal",
+      "meaning": "리허설, 예행연습"
+    },
+    {
+      "no": 28,
+      "word": "infinity",
+      "meaning": "무한성; 무한대"
+    },
+    {
+      "no": 29,
+      "word": "navigator",
+      "meaning": "항해사, 조종사"
+    },
+    {
+      "no": 30,
+      "word": "clarify",
+      "meaning": "명확하게 하다, 분명히 하다"
+    },
+    {
+      "no": 31,
+      "word": "commitment",
+      "meaning": "약속; 전념, 헌신"
+    },
+    {
+      "no": 32,
+      "word": "fertilizer",
+      "meaning": "비료"
+    },
+    {
+      "no": 33,
+      "word": "adhesion",
+      "meaning": "접착(력)"
+    },
+    {
+      "no": 34,
+      "word": "bring about",
+      "meaning": "~을 유발하다, 초래하다"
+    },
+    {
+      "no": 35,
+      "word": "intense",
+      "meaning": "극심한; 치열한; 열정적인"
+    },
+    {
+      "no": 36,
+      "word": "aesthetic",
+      "meaning": "미학적인, 미적인; 미적 특징; 미학"
+    },
+    {
+      "no": 37,
+      "word": "continuous",
+      "meaning": "끊임없는, 계속되는"
+    },
+    {
+      "no": 38,
+      "word": "tiresome",
+      "meaning": "성가신, 귀찮은"
+    },
+    {
+      "no": 39,
+      "word": "bystander",
+      "meaning": "구경꾼, 행인"
+    },
+    {
+      "no": 40,
+      "word": "surrender",
+      "meaning": "항복[굴복]하다; (권리 등을) 넘겨주다; 항복, 굴복; 양도"
+    },
+    {
+      "no": 41,
+      "word": "glacier",
+      "meaning": "빙하"
+    },
+    {
+      "no": 42,
+      "word": "account for",
+      "meaning": "~을 설명하다; (부분·비율을) 차지하다"
+    },
+    {
+      "no": 43,
+      "word": "addition",
+      "meaning": "첨가, 추가(된 것); 덧셈"
+    },
+    {
+      "no": 44,
+      "word": "ambitious",
+      "meaning": "야심 찬, 야망 있는; (계획 등이) 야심적인, 대대적인"
+    },
+    {
+      "no": 45,
+      "word": "breed",
+      "meaning": "번식하다; 사육하다, 재배하다; 초래하다; 품종"
+    },
+    {
+      "no": 46,
+      "word": "retrieval",
+      "meaning": "회복, 만회, 복구; 검색"
+    },
+    {
+      "no": 47,
+      "word": "innovative",
+      "meaning": "혁신적인, 획기적인"
+    },
+    {
+      "no": 48,
+      "word": "adhere",
+      "meaning": "들러붙다; 고수하다, 충실하다"
+    },
+    {
+      "no": 49,
+      "word": "subconsciously",
+      "meaning": "잠재의식적으로"
+    },
+    {
+      "no": 50,
+      "word": "aesthetically",
+      "meaning": "미적으로"
+    },
+    {
+      "no": 51,
+      "word": "commercial",
+      "meaning": "상업의; 상업적인; 광고 방송"
+    },
+    {
+      "no": 52,
+      "word": "concerned",
+      "meaning": "걱정하는; 관련된"
+    },
+    {
+      "no": 53,
+      "word": "ambitiously",
+      "meaning": "야심차게"
+    },
+    {
+      "no": 54,
+      "word": "animated",
+      "meaning": "활기찬"
+    },
+    {
+      "no": 55,
+      "word": "commercialize",
+      "meaning": "상업화하다"
+    },
+    {
+      "no": 56,
+      "word": "identity",
+      "meaning": "신원, 정체; 독자성"
+    },
+    {
+      "no": 57,
+      "word": "biology",
+      "meaning": "생물학; 생명 작용, 생태"
+    },
+    {
+      "no": 58,
+      "word": "capture",
+      "meaning": "붙잡다; (마음을) 사로잡다; (장면 등을) 포착하다"
+    },
+    {
+      "no": 59,
+      "word": "nutrition",
+      "meaning": "영양 (섭취); 영양학"
+    },
+    {
+      "no": 60,
+      "word": "implicit",
+      "meaning": "암묵적인, 내포된"
+    },
+    {
+      "no": 61,
+      "word": "fertility",
+      "meaning": "비옥함; 생식력"
+    },
+    {
+      "no": 62,
+      "word": "pervade",
+      "meaning": "만연하다, 스며들다"
+    },
+    {
+      "no": 63,
+      "word": "ambition",
+      "meaning": "야심, 야망, 포부"
+    },
+    {
+      "no": 64,
+      "word": "subconscious",
+      "meaning": "잠재의식의; 잠재의식"
+    },
+    {
+      "no": 65,
+      "word": "rehearse",
+      "meaning": "리허설하다, 예행연습하다"
+    },
+    {
+      "no": 66,
+      "word": "nutritious",
+      "meaning": "영양분이 풍부한"
+    },
+    {
+      "no": 67,
+      "word": "commit",
+      "meaning": "(범죄 등을) 저지르다; 약속하다; 전념[헌신]하다"
+    },
+    {
+      "no": 68,
+      "word": "stable",
+      "meaning": "안정된; 차분한; 마구간"
+    },
+    {
+      "no": 69,
+      "word": "advanced",
+      "meaning": "진보한; 고급의"
+    },
+    {
+      "no": 70,
+      "word": "retrieve",
+      "meaning": "회수하다, 되찾다; 검색하다; (사태를) 수습하다"
+    },
+    {
+      "no": 71,
+      "word": "consequent",
+      "meaning": "결과의, 결과로 일어나는"
+    },
+    {
+      "no": 72,
+      "word": "marginalize",
+      "meaning": "하찮게 만들다, 소외시키다"
+    },
+    {
+      "no": 73,
+      "word": "appeal to",
+      "meaning": "~에게 호소[간청]하다; ~의 흥미를 끌다"
+    },
+    {
+      "no": 74,
+      "word": "cognitive",
+      "meaning": "인식[인지]의"
+    },
+    {
+      "no": 75,
+      "word": "caterpillar",
+      "meaning": "애벌레"
+    },
+    {
+      "no": 76,
+      "word": "contaminate",
+      "meaning": "오염시키다; 악영향을 주다"
+    },
+    {
+      "no": 77,
+      "word": "identification",
+      "meaning": "신분 증명(서), 신원 확인; 동일시"
+    },
+    {
+      "no": 78,
+      "word": "attentively",
+      "meaning": "조심스럽게, 신경 써서"
+    },
+    {
+      "no": 79,
+      "word": "adherent",
+      "meaning": "지지자"
+    },
+    {
+      "no": 80,
+      "word": "regarding",
+      "meaning": "~에 관하여"
+    },
+    {
+      "no": 81,
+      "word": "celestial",
+      "meaning": "하늘의, 천체의, 천상의"
+    },
+    {
+      "no": 82,
+      "word": "incline",
+      "meaning": "(마음이) 내키게 하다, 내키다; 경사지다; 경사, 비탈"
+    },
+    {
+      "no": 83,
+      "word": "intensify",
+      "meaning": "심해지다, 심화시키다, 강화하다"
+    },
+    {
+      "no": 84,
+      "word": "attentive",
+      "meaning": "주의를 기울이는; 배려하는, 신경을 쓰는"
+    },
+    {
+      "no": 85,
+      "word": "cognitively",
+      "meaning": "인지적으로"
+    },
+    {
+      "no": 86,
+      "word": "nutritional",
+      "meaning": "영양(상)의"
+    },
+    {
+      "no": 87,
+      "word": "innate",
+      "meaning": "타고난, 선천적인"
+    },
+    {
+      "no": 88,
+      "word": "particular",
+      "meaning": "특정한; 특별한; 까다로운"
+    },
+    {
+      "no": 89,
+      "word": "inclination",
+      "meaning": "경향, 성향; 경사(도)"
+    },
+    {
+      "no": 90,
+      "word": "efficiently",
+      "meaning": "효율적으로, 능률적으로"
+    },
+    {
+      "no": 91,
+      "word": "commander",
+      "meaning": "사령관, 지휘관"
+    },
+    {
+      "no": 92,
+      "word": "adhesive",
+      "meaning": "접착제; 잘 들러붙는"
+    },
+    {
+      "no": 93,
+      "word": "fossilize",
+      "meaning": "화석화하다[되다]; 고착되다[시키다]"
+    },
+    {
+      "no": 94,
+      "word": "particularly",
+      "meaning": "특히, 특별히"
+    },
+    {
+      "no": 95,
+      "word": "navigation",
+      "meaning": "항해(술), 비행(술)"
+    },
+    {
+      "no": 96,
+      "word": "animation",
+      "meaning": "생기; 만화 영화"
+    },
+    {
+      "no": 97,
+      "word": "blur",
+      "meaning": "흐릿해지다, 흐릿하게 하다; 흐릿한 것"
+    },
+    {
+      "no": 98,
+      "word": "innovate",
+      "meaning": "혁신하다, 쇄신하다"
+    },
+    {
+      "no": 99,
+      "word": "defective",
+      "meaning": "결함이 있는"
+    },
+    {
+      "no": 100,
+      "word": "animate",
+      "meaning": "생기를 불어넣다; 만화 영화로만들다; 살아 있는, 생물인"
+    }
+  ]
+}

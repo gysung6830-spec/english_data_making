@@ -1,0 +1,506 @@
+{
+  "title": "Day 43~44",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "aggravate",
+      "meaning": "악화시키다; 화나게 하다"
+    },
+    {
+      "no": 2,
+      "word": "eradication",
+      "meaning": "근절, 박멸"
+    },
+    {
+      "no": 3,
+      "word": "prudent",
+      "meaning": "신중한, 분별력 있는, 현명한"
+    },
+    {
+      "no": 4,
+      "word": "fortify",
+      "meaning": "요새화하다; 강화하다"
+    },
+    {
+      "no": 5,
+      "word": "mistakenly",
+      "meaning": "잘못하여, 실수로"
+    },
+    {
+      "no": 6,
+      "word": "censor",
+      "meaning": "검열하다; 검열관"
+    },
+    {
+      "no": 7,
+      "word": "fortification",
+      "meaning": "방어 시설; 요새화"
+    },
+    {
+      "no": 8,
+      "word": "fictive",
+      "meaning": "상상의, 허구의; 소설의"
+    },
+    {
+      "no": 9,
+      "word": "aptly",
+      "meaning": "적절히"
+    },
+    {
+      "no": 10,
+      "word": "destroy",
+      "meaning": "파괴하다; 망치다"
+    },
+    {
+      "no": 11,
+      "word": "scarcity",
+      "meaning": "부족, 결핍"
+    },
+    {
+      "no": 12,
+      "word": "ridicule",
+      "meaning": "비웃음, 조롱; 비웃다, 조롱하다"
+    },
+    {
+      "no": 13,
+      "word": "outburst",
+      "meaning": "폭발, 분출; (활동 등의) 급격한 증가"
+    },
+    {
+      "no": 14,
+      "word": "swamp",
+      "meaning": "늪, 습지; (일 등이) 쇄도[압도]하다; 침수시키다"
+    },
+    {
+      "no": 15,
+      "word": "reversible",
+      "meaning": "뒤집을 수 있는; 되돌릴 수 있는"
+    },
+    {
+      "no": 16,
+      "word": "temperamental",
+      "meaning": "신경질적인; 기질적인"
+    },
+    {
+      "no": 17,
+      "word": "fabulously",
+      "meaning": "엄청나게, 굉장히"
+    },
+    {
+      "no": 18,
+      "word": "demeanor",
+      "meaning": "태도, 품행, 행실"
+    },
+    {
+      "no": 19,
+      "word": "restructure",
+      "meaning": "구조 조정[개혁]을 하다, 재구성하다"
+    },
+    {
+      "no": 20,
+      "word": "destruction",
+      "meaning": "파괴, 파멸"
+    },
+    {
+      "no": 21,
+      "word": "temperament",
+      "meaning": "기질, 성질"
+    },
+    {
+      "no": 22,
+      "word": "tap into",
+      "meaning": "~을 활용[이용]하다; (감정·상황 등에) 접근하다"
+    },
+    {
+      "no": 23,
+      "word": "incubate",
+      "meaning": "(알을) 품다; (세균 등을) 배양하다; (병이) 잠복하다"
+    },
+    {
+      "no": 24,
+      "word": "bewilderment",
+      "meaning": "당황, 어리둥절함"
+    },
+    {
+      "no": 25,
+      "word": "breathtaking",
+      "meaning": "(아름답거나 놀라워서) 숨이 막히는"
+    },
+    {
+      "no": 26,
+      "word": "enormously",
+      "meaning": "엄청나게, 대단히"
+    },
+    {
+      "no": 27,
+      "word": "irrigation",
+      "meaning": "관개, (땅에) 물 대기"
+    },
+    {
+      "no": 28,
+      "word": "yearn",
+      "meaning": "갈망하다, 동경하다"
+    },
+    {
+      "no": 29,
+      "word": "agonize",
+      "meaning": "고뇌[고민]하다"
+    },
+    {
+      "no": 30,
+      "word": "virtually",
+      "meaning": "사실상, 거의; 가상으로"
+    },
+    {
+      "no": 31,
+      "word": "get down",
+      "meaning": "내려오다; ~을 적다, 기록하다"
+    },
+    {
+      "no": 32,
+      "word": "majestically",
+      "meaning": "당당하게, 장엄하게"
+    },
+    {
+      "no": 33,
+      "word": "fraught",
+      "meaning": "(문제·위험 등이) 따르는, 가득한"
+    },
+    {
+      "no": 34,
+      "word": "prolific",
+      "meaning": "다작하는; 다산하는, 열매를 많이 맺는"
+    },
+    {
+      "no": 35,
+      "word": "agony",
+      "meaning": "(극심한) 고통, 고뇌"
+    },
+    {
+      "no": 36,
+      "word": "cut back",
+      "meaning": "(비용·자원 등을) 줄이다, 삭감하다"
+    },
+    {
+      "no": 37,
+      "word": "shred",
+      "meaning": "(갈가리) 찢다, 자르다; 조각, 파편; 아주 조금"
+    },
+    {
+      "no": 38,
+      "word": "incubation",
+      "meaning": "부화 (기간); (질병의) 잠복기; (세균 등의) 배양"
+    },
+    {
+      "no": 39,
+      "word": "observance",
+      "meaning": "(법률 등의) 준수; (전통·종교) 의식, 행사"
+    },
+    {
+      "no": 40,
+      "word": "futile",
+      "meaning": "헛된, 소용없는"
+    },
+    {
+      "no": 41,
+      "word": "solidarity",
+      "meaning": "연대, 결속"
+    },
+    {
+      "no": 42,
+      "word": "versatile",
+      "meaning": "다재다능한; 다용도[다목적]의"
+    },
+    {
+      "no": 43,
+      "word": "versatility",
+      "meaning": "다재다능함"
+    },
+    {
+      "no": 44,
+      "word": "scarce",
+      "meaning": "부족한, 드문"
+    },
+    {
+      "no": 45,
+      "word": "aggravation",
+      "meaning": "악화(시키는 것)"
+    },
+    {
+      "no": 46,
+      "word": "commonplace",
+      "meaning": "평범한, 아주 흔한; 평범한[흔한] 일"
+    },
+    {
+      "no": 47,
+      "word": "haste",
+      "meaning": "서두름, 급함"
+    },
+    {
+      "no": 48,
+      "word": "blunder",
+      "meaning": "(어리석은) 실수; 실수하다"
+    },
+    {
+      "no": 49,
+      "word": "instructive",
+      "meaning": "교육적인, 유익한"
+    },
+    {
+      "no": 50,
+      "word": "impart",
+      "meaning": "(정보·지식 등을) 전하다; (특성 등을) 주다, 부여하다"
+    },
+    {
+      "no": 51,
+      "word": "comprehension",
+      "meaning": "이해(력)"
+    },
+    {
+      "no": 52,
+      "word": "prominent",
+      "meaning": "두드러진, 현저한; 유명한, 저명한"
+    },
+    {
+      "no": 53,
+      "word": "instruct",
+      "meaning": "지시하다; 가르치다"
+    },
+    {
+      "no": 54,
+      "word": "prudence",
+      "meaning": "신중, 분별"
+    },
+    {
+      "no": 55,
+      "word": "legislate",
+      "meaning": "법률을 제정하다"
+    },
+    {
+      "no": 56,
+      "word": "lean",
+      "meaning": "기대다, 의지하다; 기울(이)다; 마른"
+    },
+    {
+      "no": 57,
+      "word": "fabulous",
+      "meaning": "굉장한, 아주 멋진"
+    },
+    {
+      "no": 58,
+      "word": "roar",
+      "meaning": "으르렁거리다[포효하다]; 고함치다; 폭소를 터뜨리다; 포효; 고함; 굉음"
+    },
+    {
+      "no": 59,
+      "word": "outreach",
+      "meaning": "(지역 주민에 대한) 봉사[원조] 활동"
+    },
+    {
+      "no": 60,
+      "word": "reverse",
+      "meaning": "뒤집다, 뒤바꾸다; (정)반대; 뒤(쪽); 반대의"
+    },
+    {
+      "no": 61,
+      "word": "majesty",
+      "meaning": "위엄, 장엄; 폐하"
+    },
+    {
+      "no": 62,
+      "word": "hold up",
+      "meaning": "~을 떠받치다; ~을 지연시키다"
+    },
+    {
+      "no": 63,
+      "word": "kin",
+      "meaning": "친척, 친족"
+    },
+    {
+      "no": 64,
+      "word": "reciprocation",
+      "meaning": "보답, 답례"
+    },
+    {
+      "no": 65,
+      "word": "lay by",
+      "meaning": "(돈 등을) 저축하다, 비축하다"
+    },
+    {
+      "no": 66,
+      "word": "comprehensive",
+      "meaning": "포괄적인, 종합적인"
+    },
+    {
+      "no": 67,
+      "word": "prominence",
+      "meaning": "명성, 유명함; 현저함"
+    },
+    {
+      "no": 68,
+      "word": "comprehensible",
+      "meaning": "이해할 수 있는, 알기 쉬운"
+    },
+    {
+      "no": 69,
+      "word": "mighty",
+      "meaning": "강력한, 힘센; 장대한, 웅장한"
+    },
+    {
+      "no": 70,
+      "word": "breathtakingly",
+      "meaning": "숨이 턱 막힐 듯이, 놀랄 만큼"
+    },
+    {
+      "no": 71,
+      "word": "destructive",
+      "meaning": "파괴적인, 해로운"
+    },
+    {
+      "no": 72,
+      "word": "legislation",
+      "meaning": "(제정된) 법률, 법령; 법률 제정, 입법 행위"
+    },
+    {
+      "no": 73,
+      "word": "legislator",
+      "meaning": "입법자, 국회의원"
+    },
+    {
+      "no": 74,
+      "word": "strikingly",
+      "meaning": "눈에 띄게, 두드러지게"
+    },
+    {
+      "no": 75,
+      "word": "desirous",
+      "meaning": "바라는, 원하는"
+    },
+    {
+      "no": 76,
+      "word": "domestic",
+      "meaning": "국내의; 가정의; (동물이) 길들여진"
+    },
+    {
+      "no": 77,
+      "word": "vow",
+      "meaning": "맹세[서약]하다; 맹세, 서약"
+    },
+    {
+      "no": 78,
+      "word": "commonality",
+      "meaning": "공통점, 공통성"
+    },
+    {
+      "no": 79,
+      "word": "immature",
+      "meaning": "미숙한, 미성숙한; 다 자라지 못한"
+    },
+    {
+      "no": 80,
+      "word": "virtual",
+      "meaning": "사실상의, 실제의; 가상의"
+    },
+    {
+      "no": 81,
+      "word": "bewilder",
+      "meaning": "어리둥절하게 하다"
+    },
+    {
+      "no": 82,
+      "word": "reciprocate",
+      "meaning": "보답[답례]하다"
+    },
+    {
+      "no": 83,
+      "word": "phase",
+      "meaning": "단계, 국면, 양상; (달의) 상[모습]; 단계적으로 실행하다"
+    },
+    {
+      "no": 84,
+      "word": "yearning",
+      "meaning": "갈망, 동경"
+    },
+    {
+      "no": 85,
+      "word": "foresee",
+      "meaning": "예견하다"
+    },
+    {
+      "no": 86,
+      "word": "work away",
+      "meaning": "계속 부지런히 일하다"
+    },
+    {
+      "no": 87,
+      "word": "abound",
+      "meaning": "풍부하다, 많이 있다"
+    },
+    {
+      "no": 88,
+      "word": "foreseeable",
+      "meaning": "예측[예견]할 수 있는"
+    },
+    {
+      "no": 89,
+      "word": "enormous",
+      "meaning": "막대한, 거대한, 엄청난"
+    },
+    {
+      "no": 90,
+      "word": "scarcely",
+      "meaning": "거의 ~ 않다"
+    },
+    {
+      "no": 91,
+      "word": "deceptive",
+      "meaning": "기만적인, 현혹하는"
+    },
+    {
+      "no": 92,
+      "word": "resent",
+      "meaning": "분개하다"
+    },
+    {
+      "no": 93,
+      "word": "keystone",
+      "meaning": "핵심, 근본 원리; 쐐기돌"
+    },
+    {
+      "no": 94,
+      "word": "hectic",
+      "meaning": "정신없이 바쁜, 빡빡한"
+    },
+    {
+      "no": 95,
+      "word": "ornamental",
+      "meaning": "장식(용)의"
+    },
+    {
+      "no": 96,
+      "word": "majestic",
+      "meaning": "위엄 있는, 장엄한"
+    },
+    {
+      "no": 97,
+      "word": "censorship",
+      "meaning": "검열 (제도)"
+    },
+    {
+      "no": 98,
+      "word": "idealize",
+      "meaning": "이상화하다"
+    },
+    {
+      "no": 99,
+      "word": "resentful",
+      "meaning": "분개하는"
+    },
+    {
+      "no": 100,
+      "word": "ridiculously",
+      "meaning": "우스꽝스럽게, 터무니없이"
+    }
+  ]
+}

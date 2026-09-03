@@ -1,0 +1,506 @@
+{
+  "title": "Day 3~4",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "enact",
+      "meaning": "(법을) 제정하다; 상연[연기]하다"
+    },
+    {
+      "no": 2,
+      "word": "mere",
+      "meaning": "단지 ~에 불과한, 단순한"
+    },
+    {
+      "no": 3,
+      "word": "stem from",
+      "meaning": "~에서 비롯[유래]되다"
+    },
+    {
+      "no": 4,
+      "word": "fulfill",
+      "meaning": "실현[성취]하다; 이행[수행]하다; 충족[만족]시키다"
+    },
+    {
+      "no": 5,
+      "word": "conception",
+      "meaning": "개념, 생각; 구상, 창안"
+    },
+    {
+      "no": 6,
+      "word": "motivate",
+      "meaning": "자극하다, 동기를 부여하다"
+    },
+    {
+      "no": 7,
+      "word": "slam",
+      "meaning": "쾅 닫다[닫히다]; 세게 내려놓다; 맹비난하다"
+    },
+    {
+      "no": 8,
+      "word": "consent",
+      "meaning": "동의, 허락; 동의[허락]하다"
+    },
+    {
+      "no": 9,
+      "word": "federal",
+      "meaning": "연방(제)의; 연방 정부의"
+    },
+    {
+      "no": 10,
+      "word": "consolidate",
+      "meaning": "(권력 등을) 강화하다; 통합[합병]하다"
+    },
+    {
+      "no": 11,
+      "word": "personnel",
+      "meaning": "(조직의) 인원, 직원들; (회사의) 인사과"
+    },
+    {
+      "no": 12,
+      "word": "compelling",
+      "meaning": "설득력 있는; 흥미를 돋우는"
+    },
+    {
+      "no": 13,
+      "word": "crude",
+      "meaning": "천연 그대로의; 대충의, 조잡한"
+    },
+    {
+      "no": 14,
+      "word": "decency",
+      "meaning": "품위, 체면; 예절"
+    },
+    {
+      "no": 15,
+      "word": "motivational",
+      "meaning": "동기를 주는"
+    },
+    {
+      "no": 16,
+      "word": "hibernate",
+      "meaning": "동면하다, 겨울잠을 자다"
+    },
+    {
+      "no": 17,
+      "word": "entrepreneurship",
+      "meaning": "기업가 정신"
+    },
+    {
+      "no": 18,
+      "word": "distressed",
+      "meaning": "괴로워하는"
+    },
+    {
+      "no": 19,
+      "word": "compulsion",
+      "meaning": "강요; 충동"
+    },
+    {
+      "no": 20,
+      "word": "characteristic",
+      "meaning": "독특한; 특성"
+    },
+    {
+      "no": 21,
+      "word": "immersion",
+      "meaning": "담금; 몰두, 몰입"
+    },
+    {
+      "no": 22,
+      "word": "narrate",
+      "meaning": "이야기하다; 내레이션하다"
+    },
+    {
+      "no": 23,
+      "word": "motivation",
+      "meaning": "자극, 동기 부여"
+    },
+    {
+      "no": 24,
+      "word": "merely",
+      "meaning": "단지, 한낱, 그저"
+    },
+    {
+      "no": 25,
+      "word": "renew",
+      "meaning": "갱신[연장]하다; 재개하다"
+    },
+    {
+      "no": 26,
+      "word": "villain",
+      "meaning": "악당, 악인, 악역"
+    },
+    {
+      "no": 27,
+      "word": "connotation",
+      "meaning": "함축 (의미)"
+    },
+    {
+      "no": 28,
+      "word": "sector",
+      "meaning": "(산업 등의) 부문, 분야, 영역"
+    },
+    {
+      "no": 29,
+      "word": "distressing",
+      "meaning": "괴로움을 주는"
+    },
+    {
+      "no": 30,
+      "word": "paradigm",
+      "meaning": "전형적인 예, 패러다임"
+    },
+    {
+      "no": 31,
+      "word": "prescribe",
+      "meaning": "(의사가 약을) 처방하다; 규정[지시]하다"
+    },
+    {
+      "no": 32,
+      "word": "motivated",
+      "meaning": "자극받은, 동기가 부여된"
+    },
+    {
+      "no": 33,
+      "word": "turn around",
+      "meaning": "몸을 돌리다; (상황 등을) 호전시키다, 반전시키다"
+    },
+    {
+      "no": 34,
+      "word": "ultimately",
+      "meaning": "궁극적으로, 결국; 근본적으로"
+    },
+    {
+      "no": 35,
+      "word": "prescriptive",
+      "meaning": "지시하는; 규범적인"
+    },
+    {
+      "no": 36,
+      "word": "authoritative",
+      "meaning": "권위 있는; 권위적인"
+    },
+    {
+      "no": 37,
+      "word": "ratio",
+      "meaning": "비, 비율"
+    },
+    {
+      "no": 38,
+      "word": "narration",
+      "meaning": "이야기하기; 내레이션"
+    },
+    {
+      "no": 39,
+      "word": "authorize",
+      "meaning": "권한을 부여하다"
+    },
+    {
+      "no": 40,
+      "word": "justifiable",
+      "meaning": "정당한 (이유가 있는)"
+    },
+    {
+      "no": 41,
+      "word": "entity",
+      "meaning": "독립체, 실체"
+    },
+    {
+      "no": 42,
+      "word": "skyrocket",
+      "meaning": "급등하다"
+    },
+    {
+      "no": 43,
+      "word": "fulfilling",
+      "meaning": "성취감을 주는"
+    },
+    {
+      "no": 44,
+      "word": "narrative",
+      "meaning": "이야기; 서술; 이야기의; 서술의"
+    },
+    {
+      "no": 45,
+      "word": "specifically",
+      "meaning": "분명히; 특별히; 구체적으로 말하면"
+    },
+    {
+      "no": 46,
+      "word": "disapproval",
+      "meaning": "반감, 못마땅함"
+    },
+    {
+      "no": 47,
+      "word": "archaeology",
+      "meaning": "고고학"
+    },
+    {
+      "no": 48,
+      "word": "distress",
+      "meaning": "고통, 괴로움; 곤경, 곤궁; 괴롭게 하다"
+    },
+    {
+      "no": 49,
+      "word": "seeming",
+      "meaning": "외관상의, 겉보기의"
+    },
+    {
+      "no": 50,
+      "word": "strive",
+      "meaning": "노력하다, 애쓰다"
+    },
+    {
+      "no": 51,
+      "word": "privilege",
+      "meaning": "특권, 특혜; 특권[특혜]를 주다"
+    },
+    {
+      "no": 52,
+      "word": "shed",
+      "meaning": "없애다; (눈물 등을) 흘리다; (잎등을) 떨어뜨리다; (빛을) 비추다; 헛간, 창고"
+    },
+    {
+      "no": 53,
+      "word": "anthropology",
+      "meaning": "인류학"
+    },
+    {
+      "no": 54,
+      "word": "infer",
+      "meaning": "추론하다, 추측하다"
+    },
+    {
+      "no": 55,
+      "word": "utopia",
+      "meaning": "유토피아, 이상향"
+    },
+    {
+      "no": 56,
+      "word": "archaeologist",
+      "meaning": "고고학자"
+    },
+    {
+      "no": 57,
+      "word": "artifact",
+      "meaning": "(문화) 유물; 인공물"
+    },
+    {
+      "no": 58,
+      "word": "speculative",
+      "meaning": "추측에 근거한; 투기적인"
+    },
+    {
+      "no": 59,
+      "word": "communal",
+      "meaning": "공동의, 공용의; 공동체의, 지역사회의"
+    },
+    {
+      "no": 60,
+      "word": "fulfillment",
+      "meaning": "이행; 성취(감)"
+    },
+    {
+      "no": 61,
+      "word": "precisely",
+      "meaning": "정확히, 정밀하게; 바로, 꼭"
+    },
+    {
+      "no": 62,
+      "word": "craftsmanship",
+      "meaning": "손재주, 솜씨"
+    },
+    {
+      "no": 63,
+      "word": "inflation",
+      "meaning": "인플레이션; 팽창"
+    },
+    {
+      "no": 64,
+      "word": "decently",
+      "meaning": "점잖게"
+    },
+    {
+      "no": 65,
+      "word": "character",
+      "meaning": "성격; 특성; (등장)인물"
+    },
+    {
+      "no": 66,
+      "word": "mercury",
+      "meaning": "수은"
+    },
+    {
+      "no": 67,
+      "word": "speculation",
+      "meaning": "추측; 투기"
+    },
+    {
+      "no": 68,
+      "word": "exhale",
+      "meaning": "숨을 내쉬다, (연기 등을) 내뿜다"
+    },
+    {
+      "no": 69,
+      "word": "craftsman",
+      "meaning": "장인, 공예가"
+    },
+    {
+      "no": 70,
+      "word": "seemingly",
+      "meaning": "외견상으로, 겉보기에는; 보아하니"
+    },
+    {
+      "no": 71,
+      "word": "resource",
+      "meaning": "자원, 재원, 자산; 원천"
+    },
+    {
+      "no": 72,
+      "word": "come across",
+      "meaning": "~을 (우연히) 마주치다, 발견하다; ~라는 인상을 주다; 전달되다, 이해되다"
+    },
+    {
+      "no": 73,
+      "word": "hibernation",
+      "meaning": "동면, 겨울잠"
+    },
+    {
+      "no": 74,
+      "word": "intervene",
+      "meaning": "개입[중재]하다; (대화 중에) 끼어들다"
+    },
+    {
+      "no": 75,
+      "word": "federation",
+      "meaning": "연방 국가; 연합[연맹]체"
+    },
+    {
+      "no": 76,
+      "word": "intervention",
+      "meaning": "개입, 중재; 간섭"
+    },
+    {
+      "no": 77,
+      "word": "immerse",
+      "meaning": "담그다; 몰두하다[시키다]"
+    },
+    {
+      "no": 78,
+      "word": "decent",
+      "meaning": "(수준·질이) 괜찮은; 점잖은, 예의 바른; (상황에) 적절한"
+    },
+    {
+      "no": 79,
+      "word": "archaeological",
+      "meaning": "고고학적인"
+    },
+    {
+      "no": 80,
+      "word": "cease",
+      "meaning": "중단되다, 중단시키다"
+    },
+    {
+      "no": 81,
+      "word": "anthropologist",
+      "meaning": "인류학자"
+    },
+    {
+      "no": 82,
+      "word": "conduce",
+      "meaning": "(좋은 결과로) 이끌다"
+    },
+    {
+      "no": 83,
+      "word": "depth",
+      "meaning": "깊이; 심오함"
+    },
+    {
+      "no": 84,
+      "word": "cosmic",
+      "meaning": "우주의; 거대한, 어마어마한"
+    },
+    {
+      "no": 85,
+      "word": "relate",
+      "meaning": "관련시키다, 관련되다; 이야기하다; 이해[공감]하다"
+    },
+    {
+      "no": 86,
+      "word": "in-depth",
+      "meaning": "면밀한, 상세한"
+    },
+    {
+      "no": 87,
+      "word": "incredibly",
+      "meaning": "믿을 수 없을 정도로, 엄청나게"
+    },
+    {
+      "no": 88,
+      "word": "come off",
+      "meaning": "떨어져 나가다; 성공하다; ~한인상을 주다"
+    },
+    {
+      "no": 89,
+      "word": "weave",
+      "meaning": "(실·천을) 짜다, 엮다; (이야기 등을) 엮다"
+    },
+    {
+      "no": 90,
+      "word": "inflated",
+      "meaning": "(물가가) 폭등한; 부풀린, 과장된"
+    },
+    {
+      "no": 91,
+      "word": "speculate",
+      "meaning": "추측[짐작]하다; 투기하다"
+    },
+    {
+      "no": 92,
+      "word": "put through",
+      "meaning": "전화를 연결해 주다; (곤경 등을) 겪게 하다"
+    },
+    {
+      "no": 93,
+      "word": "wipe out",
+      "meaning": "~을 완전히 파괴하다, 없애 버리다"
+    },
+    {
+      "no": 94,
+      "word": "incidental",
+      "meaning": "부수적인; 수반되는"
+    },
+    {
+      "no": 95,
+      "word": "compel",
+      "meaning": "강요[강제]하다; (어떤 반응을) 자아내다"
+    },
+    {
+      "no": 96,
+      "word": "relation",
+      "meaning": "관계, 관련"
+    },
+    {
+      "no": 97,
+      "word": "formulate",
+      "meaning": "(세심하게) 만들어 내다; (명확하게) 표현하다"
+    },
+    {
+      "no": 98,
+      "word": "consensus",
+      "meaning": "의견 일치, 합의"
+    },
+    {
+      "no": 99,
+      "word": "captive",
+      "meaning": "사로잡힌, 억류된; 자리를 뜰 수없는; 포로"
+    },
+    {
+      "no": 100,
+      "word": "authority",
+      "meaning": "권위, 권한; 당국; 권위자"
+    }
+  ]
+}

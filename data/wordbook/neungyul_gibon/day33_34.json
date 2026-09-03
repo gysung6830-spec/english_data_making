@@ -1,0 +1,406 @@
+{
+  "title": "Day 33~34",
+  "source": "능률보카 고등 기본",
+  "words": [
+    {
+      "no": 1,
+      "word": "physically",
+      "meaning": "육체적으로; 물리적으로"
+    },
+    {
+      "no": 2,
+      "word": "inquiry",
+      "meaning": "문의, 질문; 조사"
+    },
+    {
+      "no": 3,
+      "word": "subjective",
+      "meaning": "주관적인"
+    },
+    {
+      "no": 4,
+      "word": "classical",
+      "meaning": "고전주의의; 클래식의"
+    },
+    {
+      "no": 5,
+      "word": "cease",
+      "meaning": "중단하다, 그만두다"
+    },
+    {
+      "no": 6,
+      "word": "appropriate",
+      "meaning": "적절한, 적합한"
+    },
+    {
+      "no": 7,
+      "word": "classified",
+      "meaning": "분류된; 기밀의"
+    },
+    {
+      "no": 8,
+      "word": "attractive",
+      "meaning": "매력적인"
+    },
+    {
+      "no": 9,
+      "word": "superior",
+      "meaning": "위의, 상급의; 뛰어난, 우수한; 윗사람, 상관"
+    },
+    {
+      "no": 10,
+      "word": "complimentary",
+      "meaning": "칭찬하는; 무료의"
+    },
+    {
+      "no": 11,
+      "word": "obvious",
+      "meaning": "분명한"
+    },
+    {
+      "no": 12,
+      "word": "ambiguously",
+      "meaning": "애매모호하게"
+    },
+    {
+      "no": 13,
+      "word": "latter",
+      "meaning": "후자의; 후반의, 마지막의; 후자"
+    },
+    {
+      "no": 14,
+      "word": "decreasingly",
+      "meaning": "점점 감소하여"
+    },
+    {
+      "no": 15,
+      "word": "mentally",
+      "meaning": "정신적으로"
+    },
+    {
+      "no": 16,
+      "word": "external",
+      "meaning": "외부의"
+    },
+    {
+      "no": 17,
+      "word": "considerate",
+      "meaning": "사려 깊은, 배려하는"
+    },
+    {
+      "no": 18,
+      "word": "complement",
+      "meaning": "보완하다; 보완"
+    },
+    {
+      "no": 19,
+      "word": "distract",
+      "meaning": "산만하게 하다, 주의를 빼앗다"
+    },
+    {
+      "no": 20,
+      "word": "increase",
+      "meaning": "증가하다, 늘리다; 증가"
+    },
+    {
+      "no": 21,
+      "word": "arouse",
+      "meaning": "유발하다, 불러일으키다; 깨우다"
+    },
+    {
+      "no": 22,
+      "word": "obviously",
+      "meaning": "분명하게"
+    },
+    {
+      "no": 23,
+      "word": "acquisition",
+      "meaning": "획득, 습득; 구입한 것"
+    },
+    {
+      "no": 24,
+      "word": "subjectively",
+      "meaning": "주관적으로"
+    },
+    {
+      "no": 25,
+      "word": "permanently",
+      "meaning": "영구적으로"
+    },
+    {
+      "no": 26,
+      "word": "addiction",
+      "meaning": "중독"
+    },
+    {
+      "no": 27,
+      "word": "expand",
+      "meaning": "확대하다, 팽창시키다"
+    },
+    {
+      "no": 28,
+      "word": "broaden",
+      "meaning": "넓어지다"
+    },
+    {
+      "no": 29,
+      "word": "concrete",
+      "meaning": "구체적인, 실재적인; 콘크리트로 된; 콘크리트"
+    },
+    {
+      "no": 30,
+      "word": "inquire",
+      "meaning": "문의하다, 묻다; 조사하다"
+    },
+    {
+      "no": 31,
+      "word": "aptitude",
+      "meaning": "적성, 소질"
+    },
+    {
+      "no": 32,
+      "word": "extension",
+      "meaning": "확장; 연장"
+    },
+    {
+      "no": 33,
+      "word": "arise",
+      "meaning": "발생하다"
+    },
+    {
+      "no": 34,
+      "word": "adapt",
+      "meaning": "적응하다"
+    },
+    {
+      "no": 35,
+      "word": "mental",
+      "meaning": "마음의, 정신의"
+    },
+    {
+      "no": 36,
+      "word": "passive",
+      "meaning": "수동적인, 소극적인"
+    },
+    {
+      "no": 37,
+      "word": "conceal",
+      "meaning": "숨기다, 감추다"
+    },
+    {
+      "no": 38,
+      "word": "continue",
+      "meaning": "계속하다"
+    },
+    {
+      "no": 39,
+      "word": "astronaut",
+      "meaning": "우주 비행사"
+    },
+    {
+      "no": 40,
+      "word": "attract",
+      "meaning": "끌어들이다, 끌어당기다; 끌다"
+    },
+    {
+      "no": 41,
+      "word": "clarification",
+      "meaning": "정화; 설명, 해명"
+    },
+    {
+      "no": 42,
+      "word": "narrow",
+      "meaning": "좁은; 좁아지다"
+    },
+    {
+      "no": 43,
+      "word": "additional",
+      "meaning": "추가적인, 부가의"
+    },
+    {
+      "no": 44,
+      "word": "actively",
+      "meaning": "적극적으로"
+    },
+    {
+      "no": 45,
+      "word": "classification",
+      "meaning": "분류, 등급"
+    },
+    {
+      "no": 46,
+      "word": "decrease",
+      "meaning": "감소하다, 줄이다; 감소"
+    },
+    {
+      "no": 47,
+      "word": "astronomer",
+      "meaning": "천문학자"
+    },
+    {
+      "no": 48,
+      "word": "former",
+      "meaning": "이전의, 과거의; 전자의; 전자"
+    },
+    {
+      "no": 49,
+      "word": "supply",
+      "meaning": "공급하다; 공급"
+    },
+    {
+      "no": 50,
+      "word": "classify",
+      "meaning": "분류하다"
+    },
+    {
+      "no": 51,
+      "word": "broad",
+      "meaning": "넓은, 광범위한"
+    },
+    {
+      "no": 52,
+      "word": "adaptable",
+      "meaning": "적응할 수 있는"
+    },
+    {
+      "no": 53,
+      "word": "inferior",
+      "meaning": "하위의; 열등한, 못한; 아랫사람, 하급자"
+    },
+    {
+      "no": 54,
+      "word": "addicted",
+      "meaning": "중독된"
+    },
+    {
+      "no": 55,
+      "word": "appreciation",
+      "meaning": "감상, 감탄; 감사; 평가"
+    },
+    {
+      "no": 56,
+      "word": "demand",
+      "meaning": "요구하다; 요구; 수요"
+    },
+    {
+      "no": 57,
+      "word": "temporary",
+      "meaning": "일시적인, 임시의"
+    },
+    {
+      "no": 58,
+      "word": "ambiguous",
+      "meaning": "애매모호한, 여러 가지로 해석이 가능한"
+    },
+    {
+      "no": 59,
+      "word": "extend",
+      "meaning": "늘이다; 연장하다; 확장하다"
+    },
+    {
+      "no": 60,
+      "word": "internal",
+      "meaning": "내부의"
+    },
+    {
+      "no": 61,
+      "word": "addict",
+      "meaning": "중독자"
+    },
+    {
+      "no": 62,
+      "word": "active",
+      "meaning": "적극적인, 능동적인; 활동적인; 진행 중인"
+    },
+    {
+      "no": 63,
+      "word": "expend",
+      "meaning": "소비하다, 쓰다"
+    },
+    {
+      "no": 64,
+      "word": "abstract",
+      "meaning": "추상적인; 추상화; 요약, 발췌"
+    },
+    {
+      "no": 65,
+      "word": "adopt",
+      "meaning": "채택하다; 입양하다"
+    },
+    {
+      "no": 66,
+      "word": "altitude",
+      "meaning": "고도"
+    },
+    {
+      "no": 67,
+      "word": "distracted",
+      "meaning": "주의가 산만한"
+    },
+    {
+      "no": 68,
+      "word": "objectively",
+      "meaning": "객관적으로"
+    },
+    {
+      "no": 69,
+      "word": "continuous",
+      "meaning": "지속적인"
+    },
+    {
+      "no": 70,
+      "word": "complementary",
+      "meaning": "보완하는"
+    },
+    {
+      "no": 71,
+      "word": "requirement",
+      "meaning": "요건"
+    },
+    {
+      "no": 72,
+      "word": "objective",
+      "meaning": "객관적인; 목적, 목표"
+    },
+    {
+      "no": 73,
+      "word": "attraction",
+      "meaning": "매력; 명소"
+    },
+    {
+      "no": 74,
+      "word": "permanent",
+      "meaning": "영구적인"
+    },
+    {
+      "no": 75,
+      "word": "adoption",
+      "meaning": "입양; 채택"
+    },
+    {
+      "no": 76,
+      "word": "reveal",
+      "meaning": "폭로하다, 밝히다; 보이다, 드러내다"
+    },
+    {
+      "no": 77,
+      "word": "classic",
+      "meaning": "일류의, 최고 수준의; 전형적인; 고전, 명작"
+    },
+    {
+      "no": 78,
+      "word": "abroad",
+      "meaning": "해외로, 해외에"
+    },
+    {
+      "no": 79,
+      "word": "ambiguity",
+      "meaning": "애매모호함"
+    },
+    {
+      "no": 80,
+      "word": "expense",
+      "meaning": "비용, 지출"
+    }
+  ]
+}

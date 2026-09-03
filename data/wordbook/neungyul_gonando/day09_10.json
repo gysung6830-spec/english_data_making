@@ -1,0 +1,506 @@
+{
+  "title": "Day 9~10",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "declaration",
+      "meaning": "선언, 포고; 신고(서)"
+    },
+    {
+      "no": 2,
+      "word": "overlook",
+      "meaning": "간과하다; 눈감아 주다; 내려다보다"
+    },
+    {
+      "no": 3,
+      "word": "patron",
+      "meaning": "후원자; 단골손님, 고객"
+    },
+    {
+      "no": 4,
+      "word": "reluctance",
+      "meaning": "꺼림, 마지못해 함"
+    },
+    {
+      "no": 5,
+      "word": "descent",
+      "meaning": "하강; 내리막"
+    },
+    {
+      "no": 6,
+      "word": "patronage",
+      "meaning": "후원; 단골 거래, 애용"
+    },
+    {
+      "no": 7,
+      "word": "appoint",
+      "meaning": "임명[지명]하다; (시간·장소 등을) 정하다"
+    },
+    {
+      "no": 8,
+      "word": "persuade",
+      "meaning": "설득하다; 납득시키다"
+    },
+    {
+      "no": 9,
+      "word": "penetrate",
+      "meaning": "관통하다; (시장 등에) 침투하다; 간파하다"
+    },
+    {
+      "no": 10,
+      "word": "persuasion",
+      "meaning": "설득"
+    },
+    {
+      "no": 11,
+      "word": "gravity",
+      "meaning": "중력; 심각성, 중대성; 엄숙함"
+    },
+    {
+      "no": 12,
+      "word": "rigorous",
+      "meaning": "(시험 등이) 철저한; (태도·규율 등이) 엄격한, 혹독한"
+    },
+    {
+      "no": 13,
+      "word": "impaired",
+      "meaning": "손상된; 장애가 있는"
+    },
+    {
+      "no": 14,
+      "word": "penetrating",
+      "meaning": "꿰뚫어 보는 듯한"
+    },
+    {
+      "no": 15,
+      "word": "tip over",
+      "meaning": "뒤집다, 뒤집히다, 넘어지다"
+    },
+    {
+      "no": 16,
+      "word": "conversely",
+      "meaning": "정반대로, 역으로"
+    },
+    {
+      "no": 17,
+      "word": "carve",
+      "meaning": "조각하다; 새기다; (고기를) 썰다"
+    },
+    {
+      "no": 18,
+      "word": "call up",
+      "meaning": "(기억 등을) 불러일으키다; (군대에) ~을 소집하다"
+    },
+    {
+      "no": 19,
+      "word": "profiling",
+      "meaning": "정보[자료] 수집, 프로파일링"
+    },
+    {
+      "no": 20,
+      "word": "escalation",
+      "meaning": "확대, 증가"
+    },
+    {
+      "no": 21,
+      "word": "descend",
+      "meaning": "내려오다, 내려가다; (어둠 등이) 내려앉다"
+    },
+    {
+      "no": 22,
+      "word": "sign up for",
+      "meaning": "~에 등록하다, ~을 신청하다"
+    },
+    {
+      "no": 23,
+      "word": "safeguard",
+      "meaning": "보호하다; 보호책, 보호 수단"
+    },
+    {
+      "no": 24,
+      "word": "hierarchy",
+      "meaning": "계급, 계층, 서열"
+    },
+    {
+      "no": 25,
+      "word": "extraction",
+      "meaning": "뽑아내기, 추출"
+    },
+    {
+      "no": 26,
+      "word": "combination",
+      "meaning": "결합, 조합"
+    },
+    {
+      "no": 27,
+      "word": "penetration",
+      "meaning": "관통; 침투"
+    },
+    {
+      "no": 28,
+      "word": "underlying",
+      "meaning": "근본적인; (다른 것의) 밑에 있는"
+    },
+    {
+      "no": 29,
+      "word": "exaggeration",
+      "meaning": "과장(법)"
+    },
+    {
+      "no": 30,
+      "word": "overtake",
+      "meaning": "앞지르다, 능가하다; (불행 등이) 덮치다"
+    },
+    {
+      "no": 31,
+      "word": "bring out",
+      "meaning": "(특징·재능을) 끌어내다, 발휘되게 하다; ~을 출시[출간]하다"
+    },
+    {
+      "no": 32,
+      "word": "divide",
+      "meaning": "나누다"
+    },
+    {
+      "no": 33,
+      "word": "alliance",
+      "meaning": "동맹, 연합; 제휴"
+    },
+    {
+      "no": 34,
+      "word": "icon",
+      "meaning": "아이콘, 우상"
+    },
+    {
+      "no": 35,
+      "word": "imagery",
+      "meaning": "심상, 이미지, 형상화"
+    },
+    {
+      "no": 36,
+      "word": "divisive",
+      "meaning": "분열[불화]을 일으키는"
+    },
+    {
+      "no": 37,
+      "word": "compression",
+      "meaning": "압축, 압박"
+    },
+    {
+      "no": 38,
+      "word": "stimulate",
+      "meaning": "자극[촉진]하다"
+    },
+    {
+      "no": 39,
+      "word": "attach",
+      "meaning": "붙이다, 첨부하다; (가치 등을) 부여하다"
+    },
+    {
+      "no": 40,
+      "word": "comprise",
+      "meaning": "~로 구성되다; 구성[차지]하다"
+    },
+    {
+      "no": 41,
+      "word": "impulse",
+      "meaning": "충동, 욕구; 자극"
+    },
+    {
+      "no": 42,
+      "word": "superior",
+      "meaning": "(~보다) 우수한, 우세한; 상급의; 윗사람, 상사"
+    },
+    {
+      "no": 43,
+      "word": "escalate",
+      "meaning": "(갈등·비용 등이 점차) 확대되다[하다], 증가하다[시키다]"
+    },
+    {
+      "no": 44,
+      "word": "ally",
+      "meaning": "동맹국; 협력자; 동맹을 맺다, 연합하다"
+    },
+    {
+      "no": 45,
+      "word": "endowment",
+      "meaning": "기부(금); (타고난) 자질"
+    },
+    {
+      "no": 46,
+      "word": "transcript",
+      "meaning": "필기록; 성적 증명서"
+    },
+    {
+      "no": 47,
+      "word": "inferior",
+      "meaning": "(~보다) 못한, 열등한; 하급의, 하위의"
+    },
+    {
+      "no": 48,
+      "word": "tariff",
+      "meaning": "관세"
+    },
+    {
+      "no": 49,
+      "word": "compound",
+      "meaning": "화합물, 혼합물; 합성어; 합성의; 혼합하다; 악화시키다"
+    },
+    {
+      "no": 50,
+      "word": "preconception",
+      "meaning": "예상; 선입견"
+    },
+    {
+      "no": 51,
+      "word": "colleague",
+      "meaning": "(직장) 동료"
+    },
+    {
+      "no": 52,
+      "word": "linear",
+      "meaning": "직선의, 선으로 된; 선형적인"
+    },
+    {
+      "no": 53,
+      "word": "discern",
+      "meaning": "알아차리다; 식별[분간]하다"
+    },
+    {
+      "no": 54,
+      "word": "reluctant",
+      "meaning": "꺼리는, 마지못해 하는"
+    },
+    {
+      "no": 55,
+      "word": "simulate",
+      "meaning": "모의실험하다, 모방하다; (감정·행동 등을) 가장하다, ~인 체하다"
+    },
+    {
+      "no": 56,
+      "word": "stimulus",
+      "meaning": "자극제, 자극"
+    },
+    {
+      "no": 57,
+      "word": "linguistic",
+      "meaning": "언어의; 언어학의"
+    },
+    {
+      "no": 58,
+      "word": "vegetation",
+      "meaning": "초목, 식물"
+    },
+    {
+      "no": 59,
+      "word": "alert",
+      "meaning": "방심하지 않는, 기민한; 경계, 경보; (위험 등을) 알리다"
+    },
+    {
+      "no": 60,
+      "word": "stake",
+      "meaning": "말뚝; 지분, 이해관계; (내기 등에) 건 돈"
+    },
+    {
+      "no": 61,
+      "word": "credibility",
+      "meaning": "신뢰성"
+    },
+    {
+      "no": 62,
+      "word": "impair",
+      "meaning": "손상시키다, 악화시키다"
+    },
+    {
+      "no": 63,
+      "word": "magnitude",
+      "meaning": "(엄청난) 규모, 중요도; (지진의) 규모"
+    },
+    {
+      "no": 64,
+      "word": "stakeholder",
+      "meaning": "이해 당사자, 주주"
+    },
+    {
+      "no": 65,
+      "word": "fallacy",
+      "meaning": "잘못된 생각[믿음]; (인식상의) 오류"
+    },
+    {
+      "no": 66,
+      "word": "rigorously",
+      "meaning": "엄격히, 철저히"
+    },
+    {
+      "no": 67,
+      "word": "appointment",
+      "meaning": "약속, 예약; 임명"
+    },
+    {
+      "no": 68,
+      "word": "insight",
+      "meaning": "통찰력, 통찰"
+    },
+    {
+      "no": 69,
+      "word": "extract",
+      "meaning": "뽑다, 추출하다; 발췌하다; 추출물; 발췌(문)"
+    },
+    {
+      "no": 70,
+      "word": "rigor",
+      "meaning": "엄격함; 혹독함"
+    },
+    {
+      "no": 71,
+      "word": "exaggerate",
+      "meaning": "과장하다"
+    },
+    {
+      "no": 72,
+      "word": "high-profile",
+      "meaning": "인지도가 높은"
+    },
+    {
+      "no": 73,
+      "word": "reluctantly",
+      "meaning": "마지못해"
+    },
+    {
+      "no": 74,
+      "word": "deficient",
+      "meaning": "부족한, 결핍된"
+    },
+    {
+      "no": 75,
+      "word": "impulsive",
+      "meaning": "충동적인"
+    },
+    {
+      "no": 76,
+      "word": "sake",
+      "meaning": "(~을 위한) 목적, 이익"
+    },
+    {
+      "no": 77,
+      "word": "struggle",
+      "meaning": "애쓰다, 분투하다; 싸우다; 분투; 싸움"
+    },
+    {
+      "no": 78,
+      "word": "pastime",
+      "meaning": "취미, 오락"
+    },
+    {
+      "no": 79,
+      "word": "institutional",
+      "meaning": "기관의, 제도의"
+    },
+    {
+      "no": 80,
+      "word": "endow",
+      "meaning": "기부하다; (재능 등을) 부여하다"
+    },
+    {
+      "no": 81,
+      "word": "compress",
+      "meaning": "압축하다, 꾹 누르다; 요약하다"
+    },
+    {
+      "no": 82,
+      "word": "pioneer",
+      "meaning": "개척자, 선구자; 개척[선도]하다"
+    },
+    {
+      "no": 83,
+      "word": "registration",
+      "meaning": "등록, 기재"
+    },
+    {
+      "no": 84,
+      "word": "solitary",
+      "meaning": "혼자의, 혼자 하는; 외딴, 고립된"
+    },
+    {
+      "no": 85,
+      "word": "preconceived",
+      "meaning": "사전에 형성된, 선입견을 가진"
+    },
+    {
+      "no": 86,
+      "word": "solitude",
+      "meaning": "고독, 외로움"
+    },
+    {
+      "no": 87,
+      "word": "breakthrough",
+      "meaning": "돌파구, 획기적인 발전"
+    },
+    {
+      "no": 88,
+      "word": "register",
+      "meaning": "등록[기재]하다; 기록하다, 나타내다; 명부"
+    },
+    {
+      "no": 89,
+      "word": "institute",
+      "meaning": "기관, 협회; (제도·정책 등을) 도입하다"
+    },
+    {
+      "no": 90,
+      "word": "theoretical",
+      "meaning": "이론의, 이론적인"
+    },
+    {
+      "no": 91,
+      "word": "insightful",
+      "meaning": "통찰력 있는"
+    },
+    {
+      "no": 92,
+      "word": "impulsively",
+      "meaning": "충동적으로"
+    },
+    {
+      "no": 93,
+      "word": "wind up",
+      "meaning": "(모임 등을) 마무리 짓다; 결국~하게 되다"
+    },
+    {
+      "no": 94,
+      "word": "disorder",
+      "meaning": "무질서, 혼란; (신체 기능의) 장애, 질환"
+    },
+    {
+      "no": 95,
+      "word": "stimulation",
+      "meaning": "자극, 고무"
+    },
+    {
+      "no": 96,
+      "word": "inferiority",
+      "meaning": "열등, 열세"
+    },
+    {
+      "no": 97,
+      "word": "converse",
+      "meaning": "정반대; 반대의; 대화하다"
+    },
+    {
+      "no": 98,
+      "word": "biodiversity",
+      "meaning": "생물 다양성"
+    },
+    {
+      "no": 99,
+      "word": "linguistics",
+      "meaning": "언어학"
+    },
+    {
+      "no": 100,
+      "word": "pioneering",
+      "meaning": "개척적인, 선구적인"
+    }
+  ]
+}

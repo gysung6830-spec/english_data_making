@@ -1,0 +1,406 @@
+{
+  "title": "Day 1~2",
+  "source": "능률보카 고등 기본",
+  "words": [
+    {
+      "no": 1,
+      "word": "weigh",
+      "meaning": "무게를 달다; 무게가 ~이다"
+    },
+    {
+      "no": 2,
+      "word": "familiar",
+      "meaning": "익숙한, 낯익은; 잘 아는, 정통한"
+    },
+    {
+      "no": 3,
+      "word": "regular",
+      "meaning": "규칙적인, 정기적인; 보통의"
+    },
+    {
+      "no": 4,
+      "word": "rare",
+      "meaning": "드문, 희귀한"
+    },
+    {
+      "no": 5,
+      "word": "impressive",
+      "meaning": "인상적인, 감명 깊은"
+    },
+    {
+      "no": 6,
+      "word": "attention",
+      "meaning": "주의, 주목; 관심, 흥미"
+    },
+    {
+      "no": 7,
+      "word": "be supposed to",
+      "meaning": "~하기로 되어 있다"
+    },
+    {
+      "no": 8,
+      "word": "mutually",
+      "meaning": "상호 간에, 서로"
+    },
+    {
+      "no": 9,
+      "word": "quit",
+      "meaning": "그만두다; 단념하다"
+    },
+    {
+      "no": 10,
+      "word": "household",
+      "meaning": "가정, 가족; 가정의, 가족의"
+    },
+    {
+      "no": 11,
+      "word": "reputation",
+      "meaning": "명성, 평판"
+    },
+    {
+      "no": 12,
+      "word": "consciously",
+      "meaning": "의식적으로"
+    },
+    {
+      "no": 13,
+      "word": "regularly",
+      "meaning": "규칙적으로, 정기적으로"
+    },
+    {
+      "no": 14,
+      "word": "dramatically",
+      "meaning": "극적으로"
+    },
+    {
+      "no": 15,
+      "word": "respond",
+      "meaning": "반응하다; 응답하다"
+    },
+    {
+      "no": 16,
+      "word": "probable",
+      "meaning": "있음 직한"
+    },
+    {
+      "no": 17,
+      "word": "delay",
+      "meaning": "연기하다, 미루다; 지연, 지체"
+    },
+    {
+      "no": 18,
+      "word": "reject",
+      "meaning": "거절하다"
+    },
+    {
+      "no": 19,
+      "word": "promote",
+      "meaning": "증진하다; 홍보하다; 승진시키다"
+    },
+    {
+      "no": 20,
+      "word": "procedure",
+      "meaning": "절차, 과정"
+    },
+    {
+      "no": 21,
+      "word": "survive",
+      "meaning": "살아남다, 생존하다; 견뎌 내다"
+    },
+    {
+      "no": 22,
+      "word": "rarely",
+      "meaning": "드물게, 거의 ~하지 않는"
+    },
+    {
+      "no": 23,
+      "word": "slight",
+      "meaning": "약간의; 가냘픈; 무시하다"
+    },
+    {
+      "no": 24,
+      "word": "interruption",
+      "meaning": "방해"
+    },
+    {
+      "no": 25,
+      "word": "familiarity",
+      "meaning": "익숙함, 친근함"
+    },
+    {
+      "no": 26,
+      "word": "promotion",
+      "meaning": "승진; 홍보, 판촉"
+    },
+    {
+      "no": 27,
+      "word": "reward",
+      "meaning": "보상, 대가; 보상하다"
+    },
+    {
+      "no": 28,
+      "word": "suppose",
+      "meaning": "가정하다; 믿다, 생각하다"
+    },
+    {
+      "no": 29,
+      "word": "excessive",
+      "meaning": "과도한, 지나친"
+    },
+    {
+      "no": 30,
+      "word": "award",
+      "meaning": "상; 수여하다"
+    },
+    {
+      "no": 31,
+      "word": "rewarding",
+      "meaning": "보람 있는"
+    },
+    {
+      "no": 32,
+      "word": "switch",
+      "meaning": "스위치; 전환, 변경; 전환하다, 바꾸다"
+    },
+    {
+      "no": 33,
+      "word": "opportunity",
+      "meaning": "기회"
+    },
+    {
+      "no": 34,
+      "word": "exceed",
+      "meaning": "넘다, 초과하다"
+    },
+    {
+      "no": 35,
+      "word": "valuable",
+      "meaning": "가치 있는, 귀중한"
+    },
+    {
+      "no": 36,
+      "word": "insist",
+      "meaning": "주장하다, 고집하다; 요구하다"
+    },
+    {
+      "no": 37,
+      "word": "behave",
+      "meaning": "행동하다"
+    },
+    {
+      "no": 38,
+      "word": "survival",
+      "meaning": "생존"
+    },
+    {
+      "no": 39,
+      "word": "lower",
+      "meaning": "낮추다, 내리다; 더 낮은 쪽의"
+    },
+    {
+      "no": 40,
+      "word": "defeat",
+      "meaning": "패배시키다, 이기다; 패배; 정복"
+    },
+    {
+      "no": 41,
+      "word": "process",
+      "meaning": "과정; 공정; 가공하다"
+    },
+    {
+      "no": 42,
+      "word": "decorative",
+      "meaning": "장식의"
+    },
+    {
+      "no": 43,
+      "word": "insistent",
+      "meaning": "고집하는, 주장하는"
+    },
+    {
+      "no": 44,
+      "word": "carry out",
+      "meaning": "~을 수행하다, ~을 이행하다"
+    },
+    {
+      "no": 45,
+      "word": "excess",
+      "meaning": "지나침, 과잉; 초과의, 여분의"
+    },
+    {
+      "no": 46,
+      "word": "probably",
+      "meaning": "아마"
+    },
+    {
+      "no": 47,
+      "word": "occasional",
+      "meaning": "가끔의"
+    },
+    {
+      "no": 48,
+      "word": "worth",
+      "meaning": "~의 값어치가 있는, ~할 가치가 있는; 가치, 진가"
+    },
+    {
+      "no": 49,
+      "word": "develop",
+      "meaning": "발달하다, 발달시키다; 개발하다; 생기다"
+    },
+    {
+      "no": 50,
+      "word": "blend",
+      "meaning": "섞다; 어울리다; 혼합"
+    },
+    {
+      "no": 51,
+      "word": "responsive",
+      "meaning": "반응을 보이는"
+    },
+    {
+      "no": 52,
+      "word": "caution",
+      "meaning": "조심; 주의; 주의를 주다"
+    },
+    {
+      "no": 53,
+      "word": "shift",
+      "meaning": "옮기다; 바꾸다; 변화; 교대"
+    },
+    {
+      "no": 54,
+      "word": "cope with",
+      "meaning": "대처하다"
+    },
+    {
+      "no": 55,
+      "word": "private",
+      "meaning": "사적인, 개인의"
+    },
+    {
+      "no": 56,
+      "word": "rush",
+      "meaning": "서두르다; 돌진하다; 돌진"
+    },
+    {
+      "no": 57,
+      "word": "dramatic",
+      "meaning": "극적인; 연극의"
+    },
+    {
+      "no": 58,
+      "word": "detective",
+      "meaning": "탐정, 형사"
+    },
+    {
+      "no": 59,
+      "word": "cautious",
+      "meaning": "신중한, 조심스러운"
+    },
+    {
+      "no": 60,
+      "word": "weight",
+      "meaning": "무게, 체중; 부담, 책임"
+    },
+    {
+      "no": 61,
+      "word": "figure out",
+      "meaning": "~을 이해하다, ~을 알아내다"
+    },
+    {
+      "no": 62,
+      "word": "publish",
+      "meaning": "출판하다; 발표하다"
+    },
+    {
+      "no": 63,
+      "word": "impression",
+      "meaning": "인상; 감명, 감동"
+    },
+    {
+      "no": 64,
+      "word": "mutual",
+      "meaning": "상호 간의, 서로의"
+    },
+    {
+      "no": 65,
+      "word": "response",
+      "meaning": "응답"
+    },
+    {
+      "no": 66,
+      "word": "define",
+      "meaning": "정의하다; 규정하다, 분명히 밝히다"
+    },
+    {
+      "no": 67,
+      "word": "conscious",
+      "meaning": "의식하고 있는"
+    },
+    {
+      "no": 68,
+      "word": "atmosphere",
+      "meaning": "대기, 공기; 분위기"
+    },
+    {
+      "no": 69,
+      "word": "encouragement",
+      "meaning": "격려, 장려"
+    },
+    {
+      "no": 70,
+      "word": "relate",
+      "meaning": "관련시키다; 이야기하다"
+    },
+    {
+      "no": 71,
+      "word": "definition",
+      "meaning": "정의, 개념"
+    },
+    {
+      "no": 72,
+      "word": "development",
+      "meaning": "발달; 개발"
+    },
+    {
+      "no": 73,
+      "word": "decoration",
+      "meaning": "장식"
+    },
+    {
+      "no": 74,
+      "word": "related",
+      "meaning": "관련된"
+    },
+    {
+      "no": 75,
+      "word": "multiple",
+      "meaning": "다수의"
+    },
+    {
+      "no": 76,
+      "word": "encourage",
+      "meaning": "격려하다, 장려하다"
+    },
+    {
+      "no": 77,
+      "word": "interrupt",
+      "meaning": "방해하다"
+    },
+    {
+      "no": 78,
+      "word": "knowledge",
+      "meaning": "지식; 알고 있음"
+    },
+    {
+      "no": 79,
+      "word": "value",
+      "meaning": "가치; 가치 있게 여기다, 평가하다"
+    },
+    {
+      "no": 80,
+      "word": "boundary",
+      "meaning": "경계; 한계, 범위"
+    }
+  ]
+}

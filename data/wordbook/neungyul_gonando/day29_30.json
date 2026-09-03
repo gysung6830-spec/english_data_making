@@ -1,0 +1,506 @@
+{
+  "title": "Day 29~30",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "enclose",
+      "meaning": "둘러싸다, 에워싸다; 동봉하다"
+    },
+    {
+      "no": 2,
+      "word": "dispute",
+      "meaning": "논쟁, 분쟁; 반박하다; 다투다, 논쟁하다"
+    },
+    {
+      "no": 3,
+      "word": "preoccupy",
+      "meaning": "마음을 빼앗다, 몰두하게 하다"
+    },
+    {
+      "no": 4,
+      "word": "agricultural",
+      "meaning": "농업[농사]의"
+    },
+    {
+      "no": 5,
+      "word": "intellectually",
+      "meaning": "지적으로"
+    },
+    {
+      "no": 6,
+      "word": "hold down",
+      "meaning": "~을 억제하다; (일자리 등을) 계속 유지하다"
+    },
+    {
+      "no": 7,
+      "word": "multiple",
+      "meaning": "다수의, 다양한; 배수"
+    },
+    {
+      "no": 8,
+      "word": "opponent",
+      "meaning": "상대, 적수; 반대자"
+    },
+    {
+      "no": 9,
+      "word": "specification",
+      "meaning": "설명서, 사양"
+    },
+    {
+      "no": 10,
+      "word": "prophet",
+      "meaning": "예언자"
+    },
+    {
+      "no": 11,
+      "word": "permeation",
+      "meaning": "침투, 삼투; 보급, 확산"
+    },
+    {
+      "no": 12,
+      "word": "linger",
+      "meaning": "오래 남다, 계속되다; (떠나기 싫어) 오래 머물다"
+    },
+    {
+      "no": 13,
+      "word": "pillar",
+      "meaning": "기둥, 기념비; (조직·제도 등의) 핵심"
+    },
+    {
+      "no": 14,
+      "word": "flicker",
+      "meaning": "깜박이다; (감정 등이) 스치다; (빛의) 깜박임; (감정의) 스침"
+    },
+    {
+      "no": 15,
+      "word": "amount to",
+      "meaning": "(합계가) ~에 달하다; ~와 같다, ~에 해당하다"
+    },
+    {
+      "no": 16,
+      "word": "outgrow",
+      "meaning": "몸이 커져서 맞지 않게 되다; (성장하여 습관 등을) 벗어나다"
+    },
+    {
+      "no": 17,
+      "word": "injustice",
+      "meaning": "불평등, 부당함"
+    },
+    {
+      "no": 18,
+      "word": "entitle",
+      "meaning": "권리[자격]를 주다; (책 등에) 제목을 붙이다"
+    },
+    {
+      "no": 19,
+      "word": "supremacy",
+      "meaning": "우위, 패권"
+    },
+    {
+      "no": 20,
+      "word": "entanglement",
+      "meaning": "복잡한 관계; 얽힘, 걸려듦"
+    },
+    {
+      "no": 21,
+      "word": "clumsily",
+      "meaning": "어색하게, 서투르게"
+    },
+    {
+      "no": 22,
+      "word": "recess",
+      "meaning": "휴회, 휴정; 쉬는 시간; 휴회[휴정]하다"
+    },
+    {
+      "no": 23,
+      "word": "probe",
+      "meaning": "캐묻다, 조사하다; 탐사하다; 조사; (우주) 탐사선"
+    },
+    {
+      "no": 24,
+      "word": "dictation",
+      "meaning": "받아쓰기, 구술; 명령"
+    },
+    {
+      "no": 25,
+      "word": "entitlement",
+      "meaning": "권리, 자격"
+    },
+    {
+      "no": 26,
+      "word": "laden",
+      "meaning": "잔뜩 실은, 가득한"
+    },
+    {
+      "no": 27,
+      "word": "dictate",
+      "meaning": "받아쓰게 하다; 지시[명령]하다; 영향을 주다"
+    },
+    {
+      "no": 28,
+      "word": "carry through",
+      "meaning": "~을 완수하다, 해내다"
+    },
+    {
+      "no": 29,
+      "word": "internalize",
+      "meaning": "(신념·가치 등을) 내면화[내재화]하다"
+    },
+    {
+      "no": 30,
+      "word": "specify",
+      "meaning": "(구체적으로) 명시하다"
+    },
+    {
+      "no": 31,
+      "word": "outgrowth",
+      "meaning": "결과물, 부산물"
+    },
+    {
+      "no": 32,
+      "word": "dictator",
+      "meaning": "독재자"
+    },
+    {
+      "no": 33,
+      "word": "consult",
+      "meaning": "상담하다; 상의하다; 참고하다"
+    },
+    {
+      "no": 34,
+      "word": "initiate",
+      "meaning": "시작하다, 착수하다"
+    },
+    {
+      "no": 35,
+      "word": "immediate",
+      "meaning": "즉각적인; 당면한; 바로 옆의, 직접적인"
+    },
+    {
+      "no": 36,
+      "word": "encode",
+      "meaning": "암호로 바꾸다, 부호화하다"
+    },
+    {
+      "no": 37,
+      "word": "supreme",
+      "meaning": "최고의, 최상의"
+    },
+    {
+      "no": 38,
+      "word": "pinpoint",
+      "meaning": "정확히 찾아내다[지적하다]; 정확한, 정밀한"
+    },
+    {
+      "no": 39,
+      "word": "affiliate",
+      "meaning": "제휴하다, 연계하다; 가입하다; 계열사, 지부"
+    },
+    {
+      "no": 40,
+      "word": "prestigious",
+      "meaning": "명망 있는, 일류의"
+    },
+    {
+      "no": 41,
+      "word": "objection",
+      "meaning": "반대, 이의"
+    },
+    {
+      "no": 42,
+      "word": "investigate",
+      "meaning": "조사[연구]하다; 수사하다"
+    },
+    {
+      "no": 43,
+      "word": "propagate",
+      "meaning": "전파[선전]하다; 번식시키다"
+    },
+    {
+      "no": 44,
+      "word": "consultant",
+      "meaning": "상담가, 컨설턴트"
+    },
+    {
+      "no": 45,
+      "word": "project",
+      "meaning": "계획, 프로젝트; 계획하다; 예상[추정]하다; 투영[투사]하다"
+    },
+    {
+      "no": 46,
+      "word": "boundary",
+      "meaning": "경계(선); 한계, 범위"
+    },
+    {
+      "no": 47,
+      "word": "objectively",
+      "meaning": "객관적으로"
+    },
+    {
+      "no": 48,
+      "word": "democratize",
+      "meaning": "민주화하다; 대중화하다"
+    },
+    {
+      "no": 49,
+      "word": "refined",
+      "meaning": "정제된; 세련된"
+    },
+    {
+      "no": 50,
+      "word": "enrollment",
+      "meaning": "등록, 입학; 등록자 수"
+    },
+    {
+      "no": 51,
+      "word": "curricular",
+      "meaning": "교육 과정의"
+    },
+    {
+      "no": 52,
+      "word": "combustion",
+      "meaning": "연소, 불이 탐"
+    },
+    {
+      "no": 53,
+      "word": "immediately",
+      "meaning": "즉시, 바로; 바로 옆에, 가까이에"
+    },
+    {
+      "no": 54,
+      "word": "regime",
+      "meaning": "정권; 제도, 체제"
+    },
+    {
+      "no": 55,
+      "word": "consultation",
+      "meaning": "상의, 협의; 상담, 진찰"
+    },
+    {
+      "no": 56,
+      "word": "refinement",
+      "meaning": "정제; 개선; 세련"
+    },
+    {
+      "no": 57,
+      "word": "securely",
+      "meaning": "안전하게; 확실하게"
+    },
+    {
+      "no": 58,
+      "word": "agriculture",
+      "meaning": "농업, 농사"
+    },
+    {
+      "no": 59,
+      "word": "probing",
+      "meaning": "속을 캐보는, 철저히 조사하는"
+    },
+    {
+      "no": 60,
+      "word": "multiply",
+      "meaning": "곱하다; 크게 증가하다[시키다]"
+    },
+    {
+      "no": 61,
+      "word": "permeate",
+      "meaning": "스며들다, 침투하다; (영향 등이) 퍼지다"
+    },
+    {
+      "no": 62,
+      "word": "falsify",
+      "meaning": "위조하다, 조작하다"
+    },
+    {
+      "no": 63,
+      "word": "live out",
+      "meaning": "(예전에 생각만 하던 것을) 실현하다"
+    },
+    {
+      "no": 64,
+      "word": "intonation",
+      "meaning": "억양, 어조"
+    },
+    {
+      "no": 65,
+      "word": "democratization",
+      "meaning": "민주화"
+    },
+    {
+      "no": 66,
+      "word": "pictogram",
+      "meaning": "그림 문자, 그림 그래프"
+    },
+    {
+      "no": 67,
+      "word": "internalization",
+      "meaning": "내면화, 내재화"
+    },
+    {
+      "no": 68,
+      "word": "preoccupied",
+      "meaning": "몰두한, 정신이 팔린"
+    },
+    {
+      "no": 69,
+      "word": "terrestrial",
+      "meaning": "지구상의; 육지에 사는"
+    },
+    {
+      "no": 70,
+      "word": "persecute",
+      "meaning": "박해하다; 귀찮게[못살게]굴다"
+    },
+    {
+      "no": 71,
+      "word": "transform",
+      "meaning": "변형시키다, 완전히 바꾸다"
+    },
+    {
+      "no": 72,
+      "word": "insolvency",
+      "meaning": "지급 불능, 파산"
+    },
+    {
+      "no": 73,
+      "word": "insolvent",
+      "meaning": "파산한, 지급 불능의"
+    },
+    {
+      "no": 74,
+      "word": "literate",
+      "meaning": "읽고 쓸 줄 아는; (특정 분야의) 지식이 있는"
+    },
+    {
+      "no": 75,
+      "word": "assure",
+      "meaning": "장담하다, 보증하다; 확실하게하다"
+    },
+    {
+      "no": 76,
+      "word": "preoccupation",
+      "meaning": "몰두; 집착"
+    },
+    {
+      "no": 77,
+      "word": "enthusiasm",
+      "meaning": "열정, 열의"
+    },
+    {
+      "no": 78,
+      "word": "occupant",
+      "meaning": "거주자, 입주자"
+    },
+    {
+      "no": 79,
+      "word": "encounter",
+      "meaning": "(우연히) 만나다; (곤란 등에) 부딪히다; (우연한) 만남"
+    },
+    {
+      "no": 80,
+      "word": "disregard",
+      "meaning": "무시하다, 묵살하다; 무시, 묵살"
+    },
+    {
+      "no": 81,
+      "word": "dietary",
+      "meaning": "음식물의, 식이 요법의"
+    },
+    {
+      "no": 82,
+      "word": "intelligence",
+      "meaning": "지능, 사고력, 이해력; 첩보, (기밀) 정보"
+    },
+    {
+      "no": 83,
+      "word": "prophesy",
+      "meaning": "예언하다"
+    },
+    {
+      "no": 84,
+      "word": "intellect",
+      "meaning": "지성, 사고력"
+    },
+    {
+      "no": 85,
+      "word": "affiliation",
+      "meaning": "가입, 소속; 제휴"
+    },
+    {
+      "no": 86,
+      "word": "clumsiness",
+      "meaning": "어색함, 서투름"
+    },
+    {
+      "no": 87,
+      "word": "refrain from",
+      "meaning": "~을 삼가다, 자제하다"
+    },
+    {
+      "no": 88,
+      "word": "propaganda",
+      "meaning": "(정치적·사회적) 선전"
+    },
+    {
+      "no": 89,
+      "word": "recreate",
+      "meaning": "되살리다, 재현하다"
+    },
+    {
+      "no": 90,
+      "word": "diet",
+      "meaning": "식단, 식이 요법; 다이어트; 식이 요법[다이어트]을 하다"
+    },
+    {
+      "no": 91,
+      "word": "clumsy",
+      "meaning": "어설픈, 서투른"
+    },
+    {
+      "no": 92,
+      "word": "transformation",
+      "meaning": "(완전한) 변화, 변형"
+    },
+    {
+      "no": 93,
+      "word": "objective",
+      "meaning": "객관적인; 목적, 목표"
+    },
+    {
+      "no": 94,
+      "word": "oppose",
+      "meaning": "반대하다; 겨루다"
+    },
+    {
+      "no": 95,
+      "word": "strategy",
+      "meaning": "전략, 계획"
+    },
+    {
+      "no": 96,
+      "word": "intelligent",
+      "meaning": "똑똑한, 지적인; 지능이 있는"
+    },
+    {
+      "no": 97,
+      "word": "enthusiastic",
+      "meaning": "열광적인, 열렬한"
+    },
+    {
+      "no": 98,
+      "word": "parasitic",
+      "meaning": "기생하는; 기생충의"
+    },
+    {
+      "no": 99,
+      "word": "initiative",
+      "meaning": "계획; 주도권; 진취성"
+    },
+    {
+      "no": 100,
+      "word": "enroll",
+      "meaning": "등록하다[시키다], 입학하다[시키다]"
+    }
+  ]
+}

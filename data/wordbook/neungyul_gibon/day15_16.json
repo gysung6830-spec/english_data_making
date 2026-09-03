@@ -1,0 +1,406 @@
+{
+  "title": "Day 15~16",
+  "source": "능률보카 고등 기본",
+  "words": [
+    {
+      "no": 1,
+      "word": "elaborate",
+      "meaning": "정교한, 공들인; 자세히 말하다; 정교하게 만들어 내다"
+    },
+    {
+      "no": 2,
+      "word": "sufficiently",
+      "meaning": "충분히"
+    },
+    {
+      "no": 3,
+      "word": "dedication",
+      "meaning": "전념, 헌신"
+    },
+    {
+      "no": 4,
+      "word": "decision",
+      "meaning": "결정, 판단"
+    },
+    {
+      "no": 5,
+      "word": "navigator",
+      "meaning": "조종사, 항해사"
+    },
+    {
+      "no": 6,
+      "word": "incredibly",
+      "meaning": "믿을 수 없을 만큼; 엄청나게"
+    },
+    {
+      "no": 7,
+      "word": "equally",
+      "meaning": "똑같이, 평등하게"
+    },
+    {
+      "no": 8,
+      "word": "agent",
+      "meaning": "대리인, 중개인; 에이전트; 직원, 요원"
+    },
+    {
+      "no": 9,
+      "word": "famous",
+      "meaning": "유명한"
+    },
+    {
+      "no": 10,
+      "word": "guard",
+      "meaning": "지키다, 보호하다; 경비원; 경계, 감시"
+    },
+    {
+      "no": 11,
+      "word": "profound",
+      "meaning": "심오한; 강한; 깊은"
+    },
+    {
+      "no": 12,
+      "word": "recreate",
+      "meaning": "되살리다, 재현하다; 기분을 전환시키다"
+    },
+    {
+      "no": 13,
+      "word": "cherish",
+      "meaning": "소중히 하다"
+    },
+    {
+      "no": 14,
+      "word": "infancy",
+      "meaning": "유아기"
+    },
+    {
+      "no": 15,
+      "word": "grip",
+      "meaning": "꽉 잡음, 움켜쥠; 통제, 지배; 꽉 잡다, 움켜잡다"
+    },
+    {
+      "no": 16,
+      "word": "equal",
+      "meaning": "동일한, 평등한; 동등한 사람; 같다"
+    },
+    {
+      "no": 17,
+      "word": "exclude",
+      "meaning": "제외하다, 배제하다"
+    },
+    {
+      "no": 18,
+      "word": "guardian",
+      "meaning": "보호자, 수호자"
+    },
+    {
+      "no": 19,
+      "word": "include",
+      "meaning": "포함하다"
+    },
+    {
+      "no": 20,
+      "word": "alter",
+      "meaning": "변경하다, 바꾸다"
+    },
+    {
+      "no": 21,
+      "word": "concerned",
+      "meaning": "걱정스러운; 관련된"
+    },
+    {
+      "no": 22,
+      "word": "effort",
+      "meaning": "노력, 수고"
+    },
+    {
+      "no": 23,
+      "word": "regarding",
+      "meaning": "~에 대하여"
+    },
+    {
+      "no": 24,
+      "word": "reinforcement",
+      "meaning": "보강, 강화"
+    },
+    {
+      "no": 25,
+      "word": "charity",
+      "meaning": "자선 ; 너그러움, 자비심"
+    },
+    {
+      "no": 26,
+      "word": "reaction",
+      "meaning": "반응"
+    },
+    {
+      "no": 27,
+      "word": "dedicate",
+      "meaning": "헌신하다, 바치다"
+    },
+    {
+      "no": 28,
+      "word": "inclusive",
+      "meaning": "포괄적인"
+    },
+    {
+      "no": 29,
+      "word": "found",
+      "meaning": "설립하다, 세우다; ~에 기초를 두다"
+    },
+    {
+      "no": 30,
+      "word": "anniversary",
+      "meaning": "기념일"
+    },
+    {
+      "no": 31,
+      "word": "conclusion",
+      "meaning": "결론"
+    },
+    {
+      "no": 32,
+      "word": "efficiency",
+      "meaning": "효율, 능률"
+    },
+    {
+      "no": 33,
+      "word": "formulate",
+      "meaning": "만들어 내다, 공식화하다"
+    },
+    {
+      "no": 34,
+      "word": "except",
+      "meaning": "~을 제외하고, ~ 이외에는; ~라는 점만 제외하고"
+    },
+    {
+      "no": 35,
+      "word": "annually",
+      "meaning": "매년, 1년에 한 번"
+    },
+    {
+      "no": 36,
+      "word": "foundation",
+      "meaning": "창립; 기반"
+    },
+    {
+      "no": 37,
+      "word": "capture",
+      "meaning": "잡다, 포획하다; 점유하다; 포획; 점령"
+    },
+    {
+      "no": 38,
+      "word": "domestic",
+      "meaning": "국내의; 가정의"
+    },
+    {
+      "no": 39,
+      "word": "capable",
+      "meaning": "유능한, 역량 있는; 할 수 있는"
+    },
+    {
+      "no": 40,
+      "word": "collaborate",
+      "meaning": "공동으로 하다, 협력하다"
+    },
+    {
+      "no": 41,
+      "word": "alternative",
+      "meaning": "대안, 대체; 대신하는, 대체의"
+    },
+    {
+      "no": 42,
+      "word": "precisely",
+      "meaning": "정확하게"
+    },
+    {
+      "no": 43,
+      "word": "efficiently",
+      "meaning": "효율적으로"
+    },
+    {
+      "no": 44,
+      "word": "participant",
+      "meaning": "참가자"
+    },
+    {
+      "no": 45,
+      "word": "reinforce",
+      "meaning": "보강하다, 강화하다"
+    },
+    {
+      "no": 46,
+      "word": "founder",
+      "meaning": "설립자, 창시자"
+    },
+    {
+      "no": 47,
+      "word": "equality",
+      "meaning": "평등, 동등"
+    },
+    {
+      "no": 48,
+      "word": "regard",
+      "meaning": "~을 여기다; 존경, 경의; 관심, 고려; 안부"
+    },
+    {
+      "no": 49,
+      "word": "react",
+      "meaning": "반응하다"
+    },
+    {
+      "no": 50,
+      "word": "fate",
+      "meaning": "운명"
+    },
+    {
+      "no": 51,
+      "word": "sufficient",
+      "meaning": "충분한"
+    },
+    {
+      "no": 52,
+      "word": "grab",
+      "meaning": "붙잡다, 움켜쥐다; 잡아채다; 움켜잡으려고 함"
+    },
+    {
+      "no": 53,
+      "word": "adequately",
+      "meaning": "적당히, 충분히"
+    },
+    {
+      "no": 54,
+      "word": "efficient",
+      "meaning": "효율적인, 능률적인"
+    },
+    {
+      "no": 55,
+      "word": "occupy",
+      "meaning": "차지하다, 점유하다; 점령하다"
+    },
+    {
+      "no": 56,
+      "word": "indicate",
+      "meaning": "가리키다, 지적하다; 나타내다, 암시하다"
+    },
+    {
+      "no": 57,
+      "word": "participation",
+      "meaning": "참여"
+    },
+    {
+      "no": 58,
+      "word": "indicator",
+      "meaning": "지표, 지수"
+    },
+    {
+      "no": 59,
+      "word": "equivalence",
+      "meaning": "같음, 동등함"
+    },
+    {
+      "no": 60,
+      "word": "recognition",
+      "meaning": "인식, 알아봄; 승인, 인정"
+    },
+    {
+      "no": 61,
+      "word": "occupant",
+      "meaning": "점유자"
+    },
+    {
+      "no": 62,
+      "word": "collaboration",
+      "meaning": "협력, 합작"
+    },
+    {
+      "no": 63,
+      "word": "formula",
+      "meaning": "공식, 식; 방식"
+    },
+    {
+      "no": 64,
+      "word": "nobly",
+      "meaning": "고귀하게"
+    },
+    {
+      "no": 65,
+      "word": "adequate",
+      "meaning": "적당한, 충분한"
+    },
+    {
+      "no": 66,
+      "word": "concerning",
+      "meaning": "~에 대해"
+    },
+    {
+      "no": 67,
+      "word": "domain",
+      "meaning": "영토; 분야, 영역; 도메인"
+    },
+    {
+      "no": 68,
+      "word": "occupation",
+      "meaning": "직업; 점령"
+    },
+    {
+      "no": 69,
+      "word": "circuit",
+      "meaning": "순환, 순회; 회로"
+    },
+    {
+      "no": 70,
+      "word": "precise",
+      "meaning": "정확한, 정밀한; 꼼꼼한, 세밀한"
+    },
+    {
+      "no": 71,
+      "word": "benefit",
+      "meaning": "이익, 혜택; 득을 보다"
+    },
+    {
+      "no": 72,
+      "word": "alteration",
+      "meaning": "변화, 변경"
+    },
+    {
+      "no": 73,
+      "word": "perception",
+      "meaning": "지각, 인지"
+    },
+    {
+      "no": 74,
+      "word": "concern",
+      "meaning": "우려, 걱정; 관심사; 관계; 걱정하다; 관심을 갖다; 관여하다"
+    },
+    {
+      "no": 75,
+      "word": "perceive",
+      "meaning": "인지하다, 알아차리다"
+    },
+    {
+      "no": 76,
+      "word": "indication",
+      "meaning": "표시, 징후"
+    },
+    {
+      "no": 77,
+      "word": "infant",
+      "meaning": "유아; 입문자; 유아의; 초기의"
+    },
+    {
+      "no": 78,
+      "word": "domestically",
+      "meaning": "국내에서; 가정적으로"
+    },
+    {
+      "no": 79,
+      "word": "inclusion",
+      "meaning": "통합, 포함"
+    },
+    {
+      "no": 80,
+      "word": "precision",
+      "meaning": "정확"
+    }
+  ]
+}

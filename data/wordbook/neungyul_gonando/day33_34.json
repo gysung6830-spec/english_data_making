@@ -1,0 +1,506 @@
+{
+  "title": "Day 33~34",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "psychic",
+      "meaning": "초자연적인; 정신의; 심령술사, 초능력자"
+    },
+    {
+      "no": 2,
+      "word": "redundancy",
+      "meaning": "불필요한 중복[반복]"
+    },
+    {
+      "no": 3,
+      "word": "plantation",
+      "meaning": "(대규모) 농장, 플랜테이션"
+    },
+    {
+      "no": 4,
+      "word": "interpersonal",
+      "meaning": "대인 관계의"
+    },
+    {
+      "no": 5,
+      "word": "tribe",
+      "meaning": "부족, 종족"
+    },
+    {
+      "no": 6,
+      "word": "ingenious",
+      "meaning": "독창적인, 기발한"
+    },
+    {
+      "no": 7,
+      "word": "mandate",
+      "meaning": "권한; 명령, 지시; 위임 통치; 권한을 주다; 명령하다"
+    },
+    {
+      "no": 8,
+      "word": "alleviation",
+      "meaning": "완화, 경감"
+    },
+    {
+      "no": 9,
+      "word": "ingenuity",
+      "meaning": "독창성, 창의력"
+    },
+    {
+      "no": 10,
+      "word": "equally",
+      "meaning": "동등하게"
+    },
+    {
+      "no": 11,
+      "word": "nominal",
+      "meaning": "명목상의, 이름뿐인; 아주 적은, 하찮은"
+    },
+    {
+      "no": 12,
+      "word": "spell out",
+      "meaning": "철자를 하나하나 말하다[쓰다]; ~을 분명히 설명하다"
+    },
+    {
+      "no": 13,
+      "word": "radically",
+      "meaning": "근본적으로"
+    },
+    {
+      "no": 14,
+      "word": "bureaucrat",
+      "meaning": "(정부) 관료"
+    },
+    {
+      "no": 15,
+      "word": "suppress",
+      "meaning": "진압[억압]하다; 참다, 억누르다; 은폐하다"
+    },
+    {
+      "no": 16,
+      "word": "predominate",
+      "meaning": "지배하다, 우위를 차지하다"
+    },
+    {
+      "no": 17,
+      "word": "portable",
+      "meaning": "휴대용의, 들고 다닐 수 있는"
+    },
+    {
+      "no": 18,
+      "word": "psyche",
+      "meaning": "마음, 정신, 심령"
+    },
+    {
+      "no": 19,
+      "word": "cut across",
+      "meaning": "~을 가로지르다; ~에 걸치다, ~을 아우르다"
+    },
+    {
+      "no": 20,
+      "word": "dissent",
+      "meaning": "반대 (의견), 이의; 반대하다"
+    },
+    {
+      "no": 21,
+      "word": "fatigue",
+      "meaning": "(심신의) 피로, 피곤"
+    },
+    {
+      "no": 22,
+      "word": "impartiality",
+      "meaning": "공정함"
+    },
+    {
+      "no": 23,
+      "word": "flatter",
+      "meaning": "아첨하다, 알랑거리다; (실제보다) 돋보이게 하다"
+    },
+    {
+      "no": 24,
+      "word": "beneficial",
+      "meaning": "유익한, 이로운"
+    },
+    {
+      "no": 25,
+      "word": "come away with",
+      "meaning": "(어떤 인상·느낌을) 갖고 떠나다"
+    },
+    {
+      "no": 26,
+      "word": "oppress",
+      "meaning": "억압[탄압]하다; 압박감을 주다"
+    },
+    {
+      "no": 27,
+      "word": "interruption",
+      "meaning": "중단, 방해(물)"
+    },
+    {
+      "no": 28,
+      "word": "debilitating",
+      "meaning": "쇠약하게 하는"
+    },
+    {
+      "no": 29,
+      "word": "contributor",
+      "meaning": "기부자; 기고자"
+    },
+    {
+      "no": 30,
+      "word": "eminence",
+      "meaning": "명성"
+    },
+    {
+      "no": 31,
+      "word": "conclusion",
+      "meaning": "결론; 결말; 체결, 타결"
+    },
+    {
+      "no": 32,
+      "word": "resort",
+      "meaning": "(부득이하게) 의지하다; 휴양지, 리조트; 수단, 방편; 의지, 호소"
+    },
+    {
+      "no": 33,
+      "word": "substitution",
+      "meaning": "대체(품)"
+    },
+    {
+      "no": 34,
+      "word": "tribal",
+      "meaning": "부족의, 종족의"
+    },
+    {
+      "no": 35,
+      "word": "alongside",
+      "meaning": "~ 옆에, 나란히; ~와 함께, 동시에"
+    },
+    {
+      "no": 36,
+      "word": "outlook",
+      "meaning": "전망, 예측; 관점; 조망, 경치"
+    },
+    {
+      "no": 37,
+      "word": "peculiarity",
+      "meaning": "특이한 점; 특성"
+    },
+    {
+      "no": 38,
+      "word": "peril",
+      "meaning": "위험(물)"
+    },
+    {
+      "no": 39,
+      "word": "flattering",
+      "meaning": "아첨하는; 돋보이게 하는"
+    },
+    {
+      "no": 40,
+      "word": "fatigued",
+      "meaning": "(심신이) 지친, 피로한"
+    },
+    {
+      "no": 41,
+      "word": "skeletal",
+      "meaning": "골격의; 해골 같은"
+    },
+    {
+      "no": 42,
+      "word": "predominance",
+      "meaning": "우위, 우세"
+    },
+    {
+      "no": 43,
+      "word": "bribery",
+      "meaning": "뇌물 수수"
+    },
+    {
+      "no": 44,
+      "word": "correspondent",
+      "meaning": "기자, 특파원"
+    },
+    {
+      "no": 45,
+      "word": "conversion",
+      "meaning": "전환, 개조; 개종"
+    },
+    {
+      "no": 46,
+      "word": "skeleton",
+      "meaning": "골격, 해골; (건물의) 골조; (글 등의) 윤곽"
+    },
+    {
+      "no": 47,
+      "word": "stalker",
+      "meaning": "스토커, 남을 따라다니며 괴롭히는 사람"
+    },
+    {
+      "no": 48,
+      "word": "renovation",
+      "meaning": "개조, 보수"
+    },
+    {
+      "no": 49,
+      "word": "redundant",
+      "meaning": "불필요한, 쓸모없는"
+    },
+    {
+      "no": 50,
+      "word": "monument",
+      "meaning": "기념비; 기념비적인[역사적인] 건축물"
+    },
+    {
+      "no": 51,
+      "word": "reptile",
+      "meaning": "파충류"
+    },
+    {
+      "no": 52,
+      "word": "bribe",
+      "meaning": "뇌물; 뇌물을 주다, 매수하다"
+    },
+    {
+      "no": 53,
+      "word": "liberalism",
+      "meaning": "자유주의, 진보주의"
+    },
+    {
+      "no": 54,
+      "word": "fabrication",
+      "meaning": "날조, 위조; 제작"
+    },
+    {
+      "no": 55,
+      "word": "bureaucracy",
+      "meaning": "관료제, 관료(조직)"
+    },
+    {
+      "no": 56,
+      "word": "predominant",
+      "meaning": "두드러진; 우세한"
+    },
+    {
+      "no": 57,
+      "word": "tell on",
+      "meaning": "~을 고자질하다; ~에 (안 좋은) 영향을 미치다"
+    },
+    {
+      "no": 58,
+      "word": "prosecute",
+      "meaning": "기소하다, 공소를 제기하다"
+    },
+    {
+      "no": 59,
+      "word": "fabricate",
+      "meaning": "조작[날조]하다; 제작[조립]하다"
+    },
+    {
+      "no": 60,
+      "word": "prosecution",
+      "meaning": "기소, 공소"
+    },
+    {
+      "no": 61,
+      "word": "oppressive",
+      "meaning": "억압적인; (날씨가) 답답한"
+    },
+    {
+      "no": 62,
+      "word": "renovate",
+      "meaning": "개조하다, 보수하다"
+    },
+    {
+      "no": 63,
+      "word": "oppression",
+      "meaning": "억압, 탄압; 압박감"
+    },
+    {
+      "no": 64,
+      "word": "marital",
+      "meaning": "결혼 (생활)의, 부부의"
+    },
+    {
+      "no": 65,
+      "word": "quarrel",
+      "meaning": "다투다, 언쟁을 벌이다; 말다툼, 언쟁"
+    },
+    {
+      "no": 66,
+      "word": "resilience",
+      "meaning": "회복력; 탄력, 탄성"
+    },
+    {
+      "no": 67,
+      "word": "contribute",
+      "meaning": "기여하다; 기부[기증]하다; (~의) 원인이 되다; 기고하다"
+    },
+    {
+      "no": 68,
+      "word": "pitfall",
+      "meaning": "(숨겨진) 위험, 함정"
+    },
+    {
+      "no": 69,
+      "word": "boost",
+      "meaning": "신장시키다, 북돋우다; 격려, 힘, 부양책; 증가"
+    },
+    {
+      "no": 70,
+      "word": "adornment",
+      "meaning": "꾸미기, 장식; 장식품"
+    },
+    {
+      "no": 71,
+      "word": "benevolence",
+      "meaning": "자비심; 선행, 자선"
+    },
+    {
+      "no": 72,
+      "word": "ranch",
+      "meaning": "(대규모) 목장"
+    },
+    {
+      "no": 73,
+      "word": "monumental",
+      "meaning": "기념비적인, 대단한"
+    },
+    {
+      "no": 74,
+      "word": "proximity",
+      "meaning": "(거리·시간상으로) 가까움, 근접"
+    },
+    {
+      "no": 75,
+      "word": "emperor",
+      "meaning": "황제"
+    },
+    {
+      "no": 76,
+      "word": "deprive A of B",
+      "meaning": "A에게서 B를 빼앗다"
+    },
+    {
+      "no": 77,
+      "word": "bureaucratic",
+      "meaning": "관료(주의)적인"
+    },
+    {
+      "no": 78,
+      "word": "convert",
+      "meaning": "전환하다, 개조하다; 개종하다"
+    },
+    {
+      "no": 79,
+      "word": "substitute",
+      "meaning": "대용품, 대리인; 대체[대신]하다"
+    },
+    {
+      "no": 80,
+      "word": "peculiarly",
+      "meaning": "특히; 독특하게"
+    },
+    {
+      "no": 81,
+      "word": "debilitate",
+      "meaning": "(심신·조직 등을) 약화시키다"
+    },
+    {
+      "no": 82,
+      "word": "alleviate",
+      "meaning": "완화하다, 경감시키다"
+    },
+    {
+      "no": 83,
+      "word": "radical",
+      "meaning": "근본적인; 급진적인; 급진주의자"
+    },
+    {
+      "no": 84,
+      "word": "infamous",
+      "meaning": "악명 높은"
+    },
+    {
+      "no": 85,
+      "word": "correspond",
+      "meaning": "일치[부합]하다; 해당[상응]하다; 서신을 주고받다"
+    },
+    {
+      "no": 86,
+      "word": "waterproof",
+      "meaning": "방수의; 방수 처리를 하다"
+    },
+    {
+      "no": 87,
+      "word": "inborn",
+      "meaning": "타고난, 선천적인"
+    },
+    {
+      "no": 88,
+      "word": "attribute",
+      "meaning": "결과[탓/덕분]로 보다; 속성, 특성"
+    },
+    {
+      "no": 89,
+      "word": "imminent",
+      "meaning": "임박한, 곧 닥칠"
+    },
+    {
+      "no": 90,
+      "word": "germ",
+      "meaning": "세균, 미생물; 기원, 시초"
+    },
+    {
+      "no": 91,
+      "word": "mandatory",
+      "meaning": "법에 정해진, 의무적인"
+    },
+    {
+      "no": 92,
+      "word": "compartment",
+      "meaning": "칸, 구획; (기차 등의) 객실"
+    },
+    {
+      "no": 93,
+      "word": "beneficent",
+      "meaning": "자비로운, 인정 많은"
+    },
+    {
+      "no": 94,
+      "word": "whereby",
+      "meaning": "(그것에 의하여) ~하는, 그로써"
+    },
+    {
+      "no": 95,
+      "word": "convertible",
+      "meaning": "전환 가능한"
+    },
+    {
+      "no": 96,
+      "word": "prosecutor",
+      "meaning": "검찰관, 검사, 기소자"
+    },
+    {
+      "no": 97,
+      "word": "transit",
+      "meaning": "운송, 수송; (대중)교통; 통과, 통행"
+    },
+    {
+      "no": 98,
+      "word": "stalk",
+      "meaning": "(식물의) 줄기[대]; 몰래 접근하다"
+    },
+    {
+      "no": 99,
+      "word": "peculiar",
+      "meaning": "별난, 기이한; 고유한, 특유의"
+    },
+    {
+      "no": 100,
+      "word": "downturn",
+      "meaning": "(경기 등의) 침체, 하락"
+    }
+  ]
+}

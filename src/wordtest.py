@@ -33,6 +33,7 @@ _env = Environment(
 SINGLE_COL_MAX = 20      # 이 개수 이하면 한 단(1열)으로 배치해 쓰는 칸을 넓게 준다
 ROW_SPACE = 600          # 한 쪽에서 문항 줄이 쓸 수 있는 높이(pt) — 머리말·안내 박스 제외
 ROW_SPACE_ANS = 560      # 답지는 정답이 인쇄되므로 조금 더 촘촘해도 된다
+ROW_MIN, ROW_MIN_ANS = 22, 20   # 문항이 많은 교재(회당 100단어 등)에서 허용하는 최소 줄 높이
 
 
 def _row_height(rows: int, space: int, lo: int, hi: int) -> int:
@@ -89,8 +90,8 @@ def build_sections(words: list[dict], seed: int | None = 1, shuffle: bool = True
             "ans_desc": f"정답이 채워진 답지입니다. (총 {len(en2ko)}문항)",
             "questions": en2ko, "rows": _rows(en2ko),
             "single": len(en2ko) <= SINGLE_COL_MAX,
-            "row_h": _row_height(len(_rows(en2ko)), ROW_SPACE, 30, 56),
-            "row_h_ans": _row_height(len(_rows(en2ko)), ROW_SPACE_ANS, 28, 50),
+            "row_h": _row_height(len(_rows(en2ko)), ROW_SPACE, ROW_MIN, 56),
+            "row_h_ans": _row_height(len(_rows(en2ko)), ROW_SPACE_ANS, ROW_MIN_ANS, 50),
         })
     if ko2en:
         sections.append({
@@ -100,8 +101,8 @@ def build_sections(words: list[dict], seed: int | None = 1, shuffle: bool = True
             "ans_desc": f"정답이 채워진 답지입니다. (총 {len(ko2en)}문항)",
             "questions": ko2en, "rows": _rows(ko2en),
             "single": len(ko2en) <= SINGLE_COL_MAX,
-            "row_h": _row_height(len(_rows(ko2en)), ROW_SPACE, 30, 56),
-            "row_h_ans": _row_height(len(_rows(ko2en)), ROW_SPACE_ANS, 28, 50),
+            "row_h": _row_height(len(_rows(ko2en)), ROW_SPACE, ROW_MIN, 56),
+            "row_h_ans": _row_height(len(_rows(ko2en)), ROW_SPACE_ANS, ROW_MIN_ANS, 50),
         })
     return sections
 

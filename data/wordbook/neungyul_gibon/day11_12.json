@@ -1,0 +1,406 @@
+{
+  "title": "Day 11~12",
+  "source": "능률보카 고등 기본",
+  "words": [
+    {
+      "no": 1,
+      "word": "anticipate",
+      "meaning": "예상하다; 기대하다"
+    },
+    {
+      "no": 2,
+      "word": "absolutely",
+      "meaning": "완전히, 확실히"
+    },
+    {
+      "no": 3,
+      "word": "enable",
+      "meaning": "~할 수 있게 하다, 가능하게 하다"
+    },
+    {
+      "no": 4,
+      "word": "admire",
+      "meaning": "존경하다; 감탄하다"
+    },
+    {
+      "no": 5,
+      "word": "confrontation",
+      "meaning": "대결, 직면"
+    },
+    {
+      "no": 6,
+      "word": "endurable",
+      "meaning": "참을 수 있는"
+    },
+    {
+      "no": 7,
+      "word": "disagreement",
+      "meaning": "이견; 불일치"
+    },
+    {
+      "no": 8,
+      "word": "ensure",
+      "meaning": "확실히 하다, 보장하다"
+    },
+    {
+      "no": 9,
+      "word": "discouraged",
+      "meaning": "낙담한"
+    },
+    {
+      "no": 10,
+      "word": "declaration",
+      "meaning": "선언, 발표; 신고"
+    },
+    {
+      "no": 11,
+      "word": "endurance",
+      "meaning": "인내"
+    },
+    {
+      "no": 12,
+      "word": "interaction",
+      "meaning": "상호 작용"
+    },
+    {
+      "no": 13,
+      "word": "anticipation",
+      "meaning": "예상; 기대"
+    },
+    {
+      "no": 14,
+      "word": "independent",
+      "meaning": "독립한; 독립심이 강한"
+    },
+    {
+      "no": 15,
+      "word": "expose",
+      "meaning": "드러내다, 노출시키다; 폭로하다"
+    },
+    {
+      "no": 16,
+      "word": "amazing",
+      "meaning": "놀라운, 멋진"
+    },
+    {
+      "no": 17,
+      "word": "advantage",
+      "meaning": "이점, 유리한 점, 우위"
+    },
+    {
+      "no": 18,
+      "word": "union",
+      "meaning": "결합, 합체; 연합, 조합"
+    },
+    {
+      "no": 19,
+      "word": "depart",
+      "meaning": "출발하다, 떠나다"
+    },
+    {
+      "no": 20,
+      "word": "declare",
+      "meaning": "선언하다; 단언하다; 신고하다"
+    },
+    {
+      "no": 21,
+      "word": "exhausted",
+      "meaning": "지친; 고갈된"
+    },
+    {
+      "no": 22,
+      "word": "interpretation",
+      "meaning": "해석; 통역"
+    },
+    {
+      "no": 23,
+      "word": "approach",
+      "meaning": "다가가다, 접근하다; 가까워지다; 접근"
+    },
+    {
+      "no": 24,
+      "word": "unite",
+      "meaning": "결합하다, 단결하다"
+    },
+    {
+      "no": 25,
+      "word": "interact",
+      "meaning": "소통하다, 상호 작용하다"
+    },
+    {
+      "no": 26,
+      "word": "endure",
+      "meaning": "견디다, 참다; 지속하다"
+    },
+    {
+      "no": 27,
+      "word": "amaze",
+      "meaning": "놀라게 하다"
+    },
+    {
+      "no": 28,
+      "word": "export",
+      "meaning": "수출하다; 수출"
+    },
+    {
+      "no": 29,
+      "word": "confront",
+      "meaning": "직면하다, 맞서다"
+    },
+    {
+      "no": 30,
+      "word": "informal",
+      "meaning": "격식을 차리지 않는, 비공식의"
+    },
+    {
+      "no": 31,
+      "word": "debate",
+      "meaning": "논의, 토론; 논의하다, 토론하다"
+    },
+    {
+      "no": 32,
+      "word": "disposal",
+      "meaning": "폐기"
+    },
+    {
+      "no": 33,
+      "word": "disappear",
+      "meaning": "사라지다, 없어지다"
+    },
+    {
+      "no": 34,
+      "word": "interactive",
+      "meaning": "상호적인"
+    },
+    {
+      "no": 35,
+      "word": "combine",
+      "meaning": "결합하다; 겸비하다"
+    },
+    {
+      "no": 36,
+      "word": "contrast",
+      "meaning": "대조하다; 대조"
+    },
+    {
+      "no": 37,
+      "word": "disagree",
+      "meaning": "동의하지 않다, 일치하지 않다"
+    },
+    {
+      "no": 38,
+      "word": "affordable",
+      "meaning": "알맞은, 감당할 수 있는"
+    },
+    {
+      "no": 39,
+      "word": "exaggeration",
+      "meaning": "과장"
+    },
+    {
+      "no": 40,
+      "word": "interval",
+      "meaning": "간격"
+    },
+    {
+      "no": 41,
+      "word": "admirable",
+      "meaning": "감탄할 만한"
+    },
+    {
+      "no": 42,
+      "word": "interfere",
+      "meaning": "간섭하다; 방해하다"
+    },
+    {
+      "no": 43,
+      "word": "exposure",
+      "meaning": "노출; 폭로"
+    },
+    {
+      "no": 44,
+      "word": "difference",
+      "meaning": "차이, 다름"
+    },
+    {
+      "no": 45,
+      "word": "illustrate",
+      "meaning": "설명하다; 삽화를 넣다"
+    },
+    {
+      "no": 46,
+      "word": "excessive",
+      "meaning": "과도한"
+    },
+    {
+      "no": 47,
+      "word": "confirm",
+      "meaning": "사실임을 보여주다; 확정하다"
+    },
+    {
+      "no": 48,
+      "word": "intake",
+      "meaning": "섭취"
+    },
+    {
+      "no": 49,
+      "word": "interpret",
+      "meaning": "해석하다; 통역하다"
+    },
+    {
+      "no": 50,
+      "word": "embrace",
+      "meaning": "포옹하다; 받아들이다; 포옹; 수락, 용인"
+    },
+    {
+      "no": 51,
+      "word": "discourage",
+      "meaning": "낙담시키다"
+    },
+    {
+      "no": 52,
+      "word": "international",
+      "meaning": "국제적인, 국가 간의"
+    },
+    {
+      "no": 53,
+      "word": "exceed",
+      "meaning": "넘다, 초과하다"
+    },
+    {
+      "no": 54,
+      "word": "dispose",
+      "meaning": "폐기하다; 배치하다"
+    },
+    {
+      "no": 55,
+      "word": "differ",
+      "meaning": "다르다"
+    },
+    {
+      "no": 56,
+      "word": "complaint",
+      "meaning": "불평, 불만"
+    },
+    {
+      "no": 57,
+      "word": "twist",
+      "meaning": "비틀기, 꼬임; 굽이; 꼬다, 감다, 비틀다; 삐다, 접질리다; 왜곡하다"
+    },
+    {
+      "no": 58,
+      "word": "departure",
+      "meaning": "출발, 떠남"
+    },
+    {
+      "no": 59,
+      "word": "compromise",
+      "meaning": "타협; 타협하다"
+    },
+    {
+      "no": 60,
+      "word": "accompany",
+      "meaning": "동행하다; 반주하다; 수반하다"
+    },
+    {
+      "no": 61,
+      "word": "adjust",
+      "meaning": "적응하다; 조절하다"
+    },
+    {
+      "no": 62,
+      "word": "illustration",
+      "meaning": "삽화; 실례"
+    },
+    {
+      "no": 63,
+      "word": "enrich",
+      "meaning": "풍부하게 하다, 질을 높이다; 부유하게 하다"
+    },
+    {
+      "no": 64,
+      "word": "outstanding",
+      "meaning": "두드러진; 훌륭한, 뛰어난"
+    },
+    {
+      "no": 65,
+      "word": "interference",
+      "meaning": "간섭, 방해"
+    },
+    {
+      "no": 66,
+      "word": "insight",
+      "meaning": "통찰"
+    },
+    {
+      "no": 67,
+      "word": "enhancement",
+      "meaning": "향상, 증대"
+    },
+    {
+      "no": 68,
+      "word": "amazed",
+      "meaning": "놀란"
+    },
+    {
+      "no": 69,
+      "word": "balance",
+      "meaning": "균형, 평형; 잔고; 균형을 잡다; 상쇄하다"
+    },
+    {
+      "no": 70,
+      "word": "alike",
+      "meaning": "서로 같은, 비슷한; 비슷하게, 똑같이"
+    },
+    {
+      "no": 71,
+      "word": "discount",
+      "meaning": "할인하다; 무시하다; 할인"
+    },
+    {
+      "no": 72,
+      "word": "inevitable",
+      "meaning": "피할 수 없는, 필연적인"
+    },
+    {
+      "no": 73,
+      "word": "admiration",
+      "meaning": "존경; 감탄"
+    },
+    {
+      "no": 74,
+      "word": "combination",
+      "meaning": "조합, 결합"
+    },
+    {
+      "no": 75,
+      "word": "united",
+      "meaning": "합친, 결합한"
+    },
+    {
+      "no": 76,
+      "word": "absolute",
+      "meaning": "완전한; 절대적인; 확실한"
+    },
+    {
+      "no": 77,
+      "word": "afford",
+      "meaning": "~할 여유가 있다; 제공하다, 주다"
+    },
+    {
+      "no": 78,
+      "word": "appoint",
+      "meaning": "임명하다; 정하다"
+    },
+    {
+      "no": 79,
+      "word": "different",
+      "meaning": "다른"
+    },
+    {
+      "no": 80,
+      "word": "complain",
+      "meaning": "불평하다; 호소하다"
+    }
+  ]
+}

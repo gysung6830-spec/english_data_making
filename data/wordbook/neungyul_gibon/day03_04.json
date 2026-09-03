@@ -1,0 +1,406 @@
+{
+  "title": "Day 3~4",
+  "source": "능률보카 고등 기본",
+  "words": [
+    {
+      "no": 1,
+      "word": "relate to",
+      "meaning": "~와 관련되다; ~을 이해하다"
+    },
+    {
+      "no": 2,
+      "word": "enormous",
+      "meaning": "엄청난, 거대한"
+    },
+    {
+      "no": 3,
+      "word": "cooperate",
+      "meaning": "협력하다, 협동하다"
+    },
+    {
+      "no": 4,
+      "word": "regretful",
+      "meaning": "유감인, 후회하는"
+    },
+    {
+      "no": 5,
+      "word": "brief",
+      "meaning": "잠시의, 짧은; 간결한"
+    },
+    {
+      "no": 6,
+      "word": "device",
+      "meaning": "장치, 기기"
+    },
+    {
+      "no": 7,
+      "word": "procedure",
+      "meaning": "절차, 과정"
+    },
+    {
+      "no": 8,
+      "word": "regret",
+      "meaning": "후회하다; 유감, 후회"
+    },
+    {
+      "no": 9,
+      "word": "cooperative",
+      "meaning": "협력적인, 협동하는"
+    },
+    {
+      "no": 10,
+      "word": "belief",
+      "meaning": "신념, 확신; 생각, 믿음"
+    },
+    {
+      "no": 11,
+      "word": "challenge",
+      "meaning": "도전, 난제; 도전하다, 이의를 제기하다"
+    },
+    {
+      "no": 12,
+      "word": "practical",
+      "meaning": "실용적인; 실제적인"
+    },
+    {
+      "no": 13,
+      "word": "category",
+      "meaning": "범주"
+    },
+    {
+      "no": 14,
+      "word": "protect",
+      "meaning": "보호하다, 지키다"
+    },
+    {
+      "no": 15,
+      "word": "negotiation",
+      "meaning": "협상"
+    },
+    {
+      "no": 16,
+      "word": "take over",
+      "meaning": "인계받다, 이어받다"
+    },
+    {
+      "no": 17,
+      "word": "functional",
+      "meaning": "기능의; 작동하는"
+    },
+    {
+      "no": 18,
+      "word": "accurate",
+      "meaning": "정확한"
+    },
+    {
+      "no": 19,
+      "word": "categorize",
+      "meaning": "분류하다"
+    },
+    {
+      "no": 20,
+      "word": "original",
+      "meaning": "원래의, 최초의; 독창적인; 원본, 원작"
+    },
+    {
+      "no": 21,
+      "word": "description",
+      "meaning": "묘사, 서술"
+    },
+    {
+      "no": 22,
+      "word": "revolutionary",
+      "meaning": "혁명의; 혁명적인"
+    },
+    {
+      "no": 23,
+      "word": "conversation",
+      "meaning": "대화"
+    },
+    {
+      "no": 24,
+      "word": "cooperation",
+      "meaning": "협력, 협동"
+    },
+    {
+      "no": 25,
+      "word": "revolution",
+      "meaning": "혁명; 대변혁, 개혁"
+    },
+    {
+      "no": 26,
+      "word": "explosion",
+      "meaning": "폭발"
+    },
+    {
+      "no": 27,
+      "word": "extraordinary",
+      "meaning": "대단한, 비범한; 기이한, 놀라운"
+    },
+    {
+      "no": 28,
+      "word": "explode",
+      "meaning": "폭발하다, 터지다"
+    },
+    {
+      "no": 29,
+      "word": "deal with",
+      "meaning": "~을 다루다, ~을 처리하다; ~와 거래하다"
+    },
+    {
+      "no": 30,
+      "word": "formally",
+      "meaning": "공식적으로"
+    },
+    {
+      "no": 31,
+      "word": "formal",
+      "meaning": "격식을 차린; 공식적인; 형식적인"
+    },
+    {
+      "no": 32,
+      "word": "negotiate",
+      "meaning": "협상하다"
+    },
+    {
+      "no": 33,
+      "word": "rescue",
+      "meaning": "구조하다; 구조"
+    },
+    {
+      "no": 34,
+      "word": "operation",
+      "meaning": "작동; 수술"
+    },
+    {
+      "no": 35,
+      "word": "enormously",
+      "meaning": "엄청나게"
+    },
+    {
+      "no": 36,
+      "word": "strategy",
+      "meaning": "전략"
+    },
+    {
+      "no": 37,
+      "word": "colleague",
+      "meaning": "동료"
+    },
+    {
+      "no": 38,
+      "word": "originally",
+      "meaning": "원래"
+    },
+    {
+      "no": 39,
+      "word": "overall",
+      "meaning": "전반적인, 전체의; 전반적으로, 전부"
+    },
+    {
+      "no": 40,
+      "word": "cheat",
+      "meaning": "속이다, 사기 치다; 부정행위를 하다; 사기"
+    },
+    {
+      "no": 41,
+      "word": "shelter",
+      "meaning": "대피소, 피난처; 보호하다"
+    },
+    {
+      "no": 42,
+      "word": "realize",
+      "meaning": "깨닫다; 실현하다"
+    },
+    {
+      "no": 43,
+      "word": "literally",
+      "meaning": "글자 그대로"
+    },
+    {
+      "no": 44,
+      "word": "inherit",
+      "meaning": "상속하다, 물려받다"
+    },
+    {
+      "no": 45,
+      "word": "protection",
+      "meaning": "보호"
+    },
+    {
+      "no": 46,
+      "word": "challenging",
+      "meaning": "도전할 만한, 어려운"
+    },
+    {
+      "no": 47,
+      "word": "entertainer",
+      "meaning": "연예인"
+    },
+    {
+      "no": 48,
+      "word": "direction",
+      "meaning": "방향; 지시, 명령"
+    },
+    {
+      "no": 49,
+      "word": "consistently",
+      "meaning": "일관되게"
+    },
+    {
+      "no": 50,
+      "word": "inheritor",
+      "meaning": "상속인, 후계자"
+    },
+    {
+      "no": 51,
+      "word": "evidently",
+      "meaning": "명백히, 분명히"
+    },
+    {
+      "no": 52,
+      "word": "evident",
+      "meaning": "명백한, 분명한"
+    },
+    {
+      "no": 53,
+      "word": "briefly",
+      "meaning": "잠시 동안; 간략하게"
+    },
+    {
+      "no": 54,
+      "word": "enrollment",
+      "meaning": "등록"
+    },
+    {
+      "no": 55,
+      "word": "operate",
+      "meaning": "작동하다; 조작하다; 수술하다"
+    },
+    {
+      "no": 56,
+      "word": "suitable",
+      "meaning": "적합한, 적절한"
+    },
+    {
+      "no": 57,
+      "word": "equipment",
+      "meaning": "장비"
+    },
+    {
+      "no": 58,
+      "word": "entertainment",
+      "meaning": "오락, 연예"
+    },
+    {
+      "no": 59,
+      "word": "senior",
+      "meaning": "선임의, 상급의; 연상의; 선임, 상급자; 연장자"
+    },
+    {
+      "no": 60,
+      "word": "reality",
+      "meaning": "현실, 실제"
+    },
+    {
+      "no": 61,
+      "word": "literal",
+      "meaning": "글자 그대로의"
+    },
+    {
+      "no": 62,
+      "word": "argue",
+      "meaning": "언쟁하다; 주장하다"
+    },
+    {
+      "no": 63,
+      "word": "argument",
+      "meaning": "논쟁; 말다툼, 언쟁"
+    },
+    {
+      "no": 64,
+      "word": "pause",
+      "meaning": "중지; 중지하다, 멈추다"
+    },
+    {
+      "no": 65,
+      "word": "protector",
+      "meaning": "보호자"
+    },
+    {
+      "no": 66,
+      "word": "detail",
+      "meaning": "세부"
+    },
+    {
+      "no": 67,
+      "word": "insurance",
+      "meaning": "보험"
+    },
+    {
+      "no": 68,
+      "word": "function",
+      "meaning": "기능; 함수; 기능하다"
+    },
+    {
+      "no": 69,
+      "word": "explosive",
+      "meaning": "폭발성의"
+    },
+    {
+      "no": 70,
+      "word": "fare",
+      "meaning": "운임, 요금"
+    },
+    {
+      "no": 71,
+      "word": "consistent",
+      "meaning": "일관된, 한결같은; ~와 일치하는"
+    },
+    {
+      "no": 72,
+      "word": "request",
+      "meaning": "요청, 요구; 부탁하다, 요청하다"
+    },
+    {
+      "no": 73,
+      "word": "describe",
+      "meaning": "묘사하다, 서술하다"
+    },
+    {
+      "no": 74,
+      "word": "rapidly",
+      "meaning": "급속히, 빠르게"
+    },
+    {
+      "no": 75,
+      "word": "cut down on",
+      "meaning": "줄이다"
+    },
+    {
+      "no": 76,
+      "word": "sight",
+      "meaning": "시력; 광경, 풍경"
+    },
+    {
+      "no": 77,
+      "word": "rapid",
+      "meaning": "급속한, 빠른"
+    },
+    {
+      "no": 78,
+      "word": "surface",
+      "meaning": "표면"
+    },
+    {
+      "no": 79,
+      "word": "realistic",
+      "meaning": "현실적인"
+    },
+    {
+      "no": 80,
+      "word": "contact",
+      "meaning": "접촉; 연락; 접촉하다; 연락하다"
+    }
+  ]
+}

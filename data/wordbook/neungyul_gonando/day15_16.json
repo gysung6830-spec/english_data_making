@@ -1,0 +1,506 @@
+{
+  "title": "Day 15~16",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "spherical",
+      "meaning": "구 모양의"
+    },
+    {
+      "no": 2,
+      "word": "transactional",
+      "meaning": "거래의, 업무적인"
+    },
+    {
+      "no": 3,
+      "word": "subscribe",
+      "meaning": "구독[가입]하다; 서명하다"
+    },
+    {
+      "no": 4,
+      "word": "committee",
+      "meaning": "위원회"
+    },
+    {
+      "no": 5,
+      "word": "chamber",
+      "meaning": "회의실; ~실, 방"
+    },
+    {
+      "no": 6,
+      "word": "standardize",
+      "meaning": "표준화[규격화]하다"
+    },
+    {
+      "no": 7,
+      "word": "shortcut",
+      "meaning": "지름길; 손쉬운 방법"
+    },
+    {
+      "no": 8,
+      "word": "expire",
+      "meaning": "(기간이) 만료되다, 끝나다"
+    },
+    {
+      "no": 9,
+      "word": "verifiable",
+      "meaning": "입증[검증]할 수 있는"
+    },
+    {
+      "no": 10,
+      "word": "appreciation",
+      "meaning": "감상; 감사"
+    },
+    {
+      "no": 11,
+      "word": "assortment",
+      "meaning": "모음, 종합"
+    },
+    {
+      "no": 12,
+      "word": "point out",
+      "meaning": "~을 가리키다; (사실·실수 등을) 지적하다"
+    },
+    {
+      "no": 13,
+      "word": "questionable",
+      "meaning": "의심스러운, 미심쩍은"
+    },
+    {
+      "no": 14,
+      "word": "polish",
+      "meaning": "닦다, 광내다; 다듬다; 광택(제); 세련"
+    },
+    {
+      "no": 15,
+      "word": "mitigation",
+      "meaning": "완화, 경감"
+    },
+    {
+      "no": 16,
+      "word": "paralyze",
+      "meaning": "마비시키다; 무력하게 만들다"
+    },
+    {
+      "no": 17,
+      "word": "corporate",
+      "meaning": "기업[법인]의; 공동의"
+    },
+    {
+      "no": 18,
+      "word": "bring forth",
+      "meaning": "~을 낳다, 불러일으키다; (증거 등을) 제시하다"
+    },
+    {
+      "no": 19,
+      "word": "pass by",
+      "meaning": "~을 그냥 지나치다; (시간이) 흐르다"
+    },
+    {
+      "no": 20,
+      "word": "automate",
+      "meaning": "(일을) 자동화하다"
+    },
+    {
+      "no": 21,
+      "word": "glow",
+      "meaning": "빛나다, 타다; 상기되다; 불빛; 홍조"
+    },
+    {
+      "no": 22,
+      "word": "expiration",
+      "meaning": "만료, 만기"
+    },
+    {
+      "no": 23,
+      "word": "consistently",
+      "meaning": "일관되게"
+    },
+    {
+      "no": 24,
+      "word": "transact",
+      "meaning": "거래하다"
+    },
+    {
+      "no": 25,
+      "word": "extermination",
+      "meaning": "근절, 몰살"
+    },
+    {
+      "no": 26,
+      "word": "interdependence",
+      "meaning": "상호 의존"
+    },
+    {
+      "no": 27,
+      "word": "assorted",
+      "meaning": "여러 가지의, 갖은"
+    },
+    {
+      "no": 28,
+      "word": "vessel",
+      "meaning": "(대형) 선박, 배; 그릇, 용기; 혈관"
+    },
+    {
+      "no": 29,
+      "word": "atomic",
+      "meaning": "원자의; 원자력의"
+    },
+    {
+      "no": 30,
+      "word": "assume",
+      "meaning": "추정하다; (책임 등을) 떠맡다; (태도 등을) 취하다"
+    },
+    {
+      "no": 31,
+      "word": "prior",
+      "meaning": "이전의, 사전의; (~에) 우선하는"
+    },
+    {
+      "no": 32,
+      "word": "appreciate",
+      "meaning": "진가를 알다, 인식하다; 감상하다; 감사하다; (가치 등이) 오르다"
+    },
+    {
+      "no": 33,
+      "word": "verification",
+      "meaning": "확인, 검증"
+    },
+    {
+      "no": 34,
+      "word": "respond",
+      "meaning": "응답하다; 반응하다"
+    },
+    {
+      "no": 35,
+      "word": "advocate",
+      "meaning": "지지하다, 옹호하다; 지지자, 옹호자; 변호사"
+    },
+    {
+      "no": 36,
+      "word": "sneak",
+      "meaning": "살금살금[몰래] 가다; 몰래 ~하다"
+    },
+    {
+      "no": 37,
+      "word": "subscription",
+      "meaning": "구독(료)"
+    },
+    {
+      "no": 38,
+      "word": "embed",
+      "meaning": "(단단히) 박다, 끼워 넣다"
+    },
+    {
+      "no": 39,
+      "word": "standard",
+      "meaning": "기준, 표준; 표준의, 일반적인"
+    },
+    {
+      "no": 40,
+      "word": "mechanism",
+      "meaning": "(기계) 장치; 방식; (생물의) 구조, 기제"
+    },
+    {
+      "no": 41,
+      "word": "embark",
+      "meaning": "(배 등에) 승선하다[시키다]; 시작[착수]하다"
+    },
+    {
+      "no": 42,
+      "word": "discreteness",
+      "meaning": "분리됨, 개별성"
+    },
+    {
+      "no": 43,
+      "word": "get across",
+      "meaning": "(생각 등을) 전달하다, 이해시키다; ~을 건너다"
+    },
+    {
+      "no": 44,
+      "word": "advocacy",
+      "meaning": "지지, 옹호"
+    },
+    {
+      "no": 45,
+      "word": "reunion",
+      "meaning": "재회, 재결합; 모임, 동창회"
+    },
+    {
+      "no": 46,
+      "word": "imagine",
+      "meaning": "상상하다; 생각하다"
+    },
+    {
+      "no": 47,
+      "word": "glowing",
+      "meaning": "빛나는; 극찬하는"
+    },
+    {
+      "no": 48,
+      "word": "sprint",
+      "meaning": "전력 질주하다; 단거리 경주; 전력 질주"
+    },
+    {
+      "no": 49,
+      "word": "commonsense",
+      "meaning": "상식적인"
+    },
+    {
+      "no": 50,
+      "word": "oversee",
+      "meaning": "(작업을) 감독하다, 관리하다"
+    },
+    {
+      "no": 51,
+      "word": "consistency",
+      "meaning": "일관성; 농도, 밀도"
+    },
+    {
+      "no": 52,
+      "word": "spectacular",
+      "meaning": "장관의, 극적인"
+    },
+    {
+      "no": 53,
+      "word": "impose",
+      "meaning": "(세금·의무 등을) 부과하다; (의견 등을) 강요하다"
+    },
+    {
+      "no": 54,
+      "word": "oversight",
+      "meaning": "실수, 간과; 감독, 감시"
+    },
+    {
+      "no": 55,
+      "word": "take down",
+      "meaning": "~을 내리다, 철거하다; ~을 받아 적다"
+    },
+    {
+      "no": 56,
+      "word": "banquet",
+      "meaning": "연회, 만찬"
+    },
+    {
+      "no": 57,
+      "word": "scent",
+      "meaning": "냄새, 향기; 냄새로 찾아내다; (기운 등을) 감지하다"
+    },
+    {
+      "no": 58,
+      "word": "chronic",
+      "meaning": "(병이) 만성적인; (문제 등이) 상습적인, 고질적인"
+    },
+    {
+      "no": 59,
+      "word": "naughty",
+      "meaning": "개구쟁이의, 버릇없는, 말을 안듣는"
+    },
+    {
+      "no": 60,
+      "word": "hang on",
+      "meaning": "꼭 붙잡다; 기다리다; 견디다, 버티다"
+    },
+    {
+      "no": 61,
+      "word": "discrete",
+      "meaning": "별개의, 분리된"
+    },
+    {
+      "no": 62,
+      "word": "consistent",
+      "meaning": "일관된, 한결같은; 일치하는"
+    },
+    {
+      "no": 63,
+      "word": "atom",
+      "meaning": "원자"
+    },
+    {
+      "no": 64,
+      "word": "response",
+      "meaning": "응답; 반응"
+    },
+    {
+      "no": 65,
+      "word": "concord",
+      "meaning": "화합, 조화; (문법적) 일치"
+    },
+    {
+      "no": 66,
+      "word": "gigantic",
+      "meaning": "거대한"
+    },
+    {
+      "no": 67,
+      "word": "standardization",
+      "meaning": "표준화"
+    },
+    {
+      "no": 68,
+      "word": "dismissal",
+      "meaning": "해고; 묵살, 일축; 기각"
+    },
+    {
+      "no": 69,
+      "word": "counteract",
+      "meaning": "(악영향에) 대응하다, 상쇄하다; (효력 등을) 중화하다"
+    },
+    {
+      "no": 70,
+      "word": "imposition",
+      "meaning": "시행, 도입; 폐, 부담"
+    },
+    {
+      "no": 71,
+      "word": "conceivable",
+      "meaning": "상상[생각]할 수 있는"
+    },
+    {
+      "no": 72,
+      "word": "mainstream",
+      "meaning": "주류, 대세; 주류의"
+    },
+    {
+      "no": 73,
+      "word": "priority",
+      "meaning": "우선 사항; 우선(권)"
+    },
+    {
+      "no": 74,
+      "word": "domesticate",
+      "meaning": "(동물을) 길들이다, 사육하다; (작물을) 재배하다"
+    },
+    {
+      "no": 75,
+      "word": "spectacle",
+      "meaning": "장관, 구경거리; 안경"
+    },
+    {
+      "no": 76,
+      "word": "instruction",
+      "meaning": "설명(서); 지시, 명령; 가르침"
+    },
+    {
+      "no": 77,
+      "word": "infrastructure",
+      "meaning": "사회[공공] 기반 시설"
+    },
+    {
+      "no": 78,
+      "word": "interdependent",
+      "meaning": "상호 의존적인"
+    },
+    {
+      "no": 79,
+      "word": "dismiss",
+      "meaning": "묵살하다; 해고하다; 해산시키다"
+    },
+    {
+      "no": 80,
+      "word": "imaginary",
+      "meaning": "상상의, 가상의"
+    },
+    {
+      "no": 81,
+      "word": "uncover",
+      "meaning": "(비밀 등을) 알아내다, 폭로하다; 덮개를 벗기다"
+    },
+    {
+      "no": 82,
+      "word": "uncovered",
+      "meaning": "아무것도 덮여 있지 않은"
+    },
+    {
+      "no": 83,
+      "word": "prioritize",
+      "meaning": "우선순위를 매기다; 우선시하다"
+    },
+    {
+      "no": 84,
+      "word": "mitigate",
+      "meaning": "완화[경감]시키다"
+    },
+    {
+      "no": 85,
+      "word": "mechanical",
+      "meaning": "기계(상)의; 기계적인"
+    },
+    {
+      "no": 86,
+      "word": "pest",
+      "meaning": "해충; 성가신 것[사람]"
+    },
+    {
+      "no": 87,
+      "word": "optimal",
+      "meaning": "최선의, 최적의"
+    },
+    {
+      "no": 88,
+      "word": "offspring",
+      "meaning": "자식, 자손; (동물의) 새끼"
+    },
+    {
+      "no": 89,
+      "word": "compost",
+      "meaning": "퇴비, 혼합 비료"
+    },
+    {
+      "no": 90,
+      "word": "infection",
+      "meaning": "감염; 전염병"
+    },
+    {
+      "no": 91,
+      "word": "grazing",
+      "meaning": "목초지, 방목지"
+    },
+    {
+      "no": 92,
+      "word": "automation",
+      "meaning": "자동화"
+    },
+    {
+      "no": 93,
+      "word": "transplantation",
+      "meaning": "이식 (수술)"
+    },
+    {
+      "no": 94,
+      "word": "stationary",
+      "meaning": "움직이지 않는, 정지된"
+    },
+    {
+      "no": 95,
+      "word": "stunned",
+      "meaning": "깜짝 놀란"
+    },
+    {
+      "no": 96,
+      "word": "spill out",
+      "meaning": "쏟아져 나오다; (감정 등이) 터져 나오다"
+    },
+    {
+      "no": 97,
+      "word": "exterminate",
+      "meaning": "근절하다, 몰살하다"
+    },
+    {
+      "no": 98,
+      "word": "instruct",
+      "meaning": "지시하다; 가르치다"
+    },
+    {
+      "no": 99,
+      "word": "chronically",
+      "meaning": "만성적으로"
+    },
+    {
+      "no": 100,
+      "word": "graze",
+      "meaning": "(가축이) 풀을 뜯다; 방목하다; (피부를) 긁히게 하다"
+    }
+  ]
+}

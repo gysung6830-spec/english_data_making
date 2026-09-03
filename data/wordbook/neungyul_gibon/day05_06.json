@@ -1,0 +1,406 @@
+{
+  "title": "Day 5~6",
+  "source": "능률보카 고등 기본",
+  "words": [
+    {
+      "no": 1,
+      "word": "run out of",
+      "meaning": "~을 다 써 버리다"
+    },
+    {
+      "no": 2,
+      "word": "otherwise",
+      "meaning": "다르게; 그렇지 않으면; 그 외에는"
+    },
+    {
+      "no": 3,
+      "word": "concentration",
+      "meaning": "집중 ; 응축, 농축"
+    },
+    {
+      "no": 4,
+      "word": "examine",
+      "meaning": "검토하다; 시험하다"
+    },
+    {
+      "no": 5,
+      "word": "violent",
+      "meaning": "폭력적인, 격렬한"
+    },
+    {
+      "no": 6,
+      "word": "affect",
+      "meaning": "영향을 미치다; 충격을 주다"
+    },
+    {
+      "no": 7,
+      "word": "sacrifice",
+      "meaning": "희생하다; 희생; 제물"
+    },
+    {
+      "no": 8,
+      "word": "unique",
+      "meaning": "유일한; 독특한, 특별한"
+    },
+    {
+      "no": 9,
+      "word": "refuse",
+      "meaning": "거절하다"
+    },
+    {
+      "no": 10,
+      "word": "exploration",
+      "meaning": "탐사, 탐험"
+    },
+    {
+      "no": 11,
+      "word": "delight",
+      "meaning": "기쁨, 즐거움; 기쁘게 하다"
+    },
+    {
+      "no": 12,
+      "word": "spread",
+      "meaning": "확산되다; 펴다; 바르다"
+    },
+    {
+      "no": 13,
+      "word": "keep up with",
+      "meaning": "~을 따라가다, 유행을 따르다; ~와 계속 연락하고 지내다"
+    },
+    {
+      "no": 14,
+      "word": "exist",
+      "meaning": "존재하다; 살아가다"
+    },
+    {
+      "no": 15,
+      "word": "disaster",
+      "meaning": "재난, 참사, 천재지변"
+    },
+    {
+      "no": 16,
+      "word": "extreme",
+      "meaning": "극단적인, 극도의; 지나친, 과도한; 극단, 극도"
+    },
+    {
+      "no": 17,
+      "word": "adolescent",
+      "meaning": "청소년"
+    },
+    {
+      "no": 18,
+      "word": "examination",
+      "meaning": "검사; 시험"
+    },
+    {
+      "no": 19,
+      "word": "fund",
+      "meaning": "기금, 자금; 자금을 대다"
+    },
+    {
+      "no": 20,
+      "word": "apparently",
+      "meaning": "분명히, 명백히"
+    },
+    {
+      "no": 21,
+      "word": "disastrous",
+      "meaning": "피해가 막심한"
+    },
+    {
+      "no": 22,
+      "word": "tendency",
+      "meaning": "경향, 추세; 소질, 체질"
+    },
+    {
+      "no": 23,
+      "word": "obey",
+      "meaning": "따르다, 복종하다"
+    },
+    {
+      "no": 24,
+      "word": "devote",
+      "meaning": "바치다, 헌신하다"
+    },
+    {
+      "no": 25,
+      "word": "immediately",
+      "meaning": "즉시, 바로"
+    },
+    {
+      "no": 26,
+      "word": "surrounding",
+      "meaning": "둘러싸는, 주변의; 환경"
+    },
+    {
+      "no": 27,
+      "word": "explore",
+      "meaning": "탐험하다; 연구하다"
+    },
+    {
+      "no": 28,
+      "word": "attempt",
+      "meaning": "시도; 시도하다"
+    },
+    {
+      "no": 29,
+      "word": "sign up",
+      "meaning": "등록하다, 가입하다, 신청하다"
+    },
+    {
+      "no": 30,
+      "word": "attachment",
+      "meaning": "부착"
+    },
+    {
+      "no": 31,
+      "word": "numerous",
+      "meaning": "많은"
+    },
+    {
+      "no": 32,
+      "word": "immediate",
+      "meaning": "즉각적인"
+    },
+    {
+      "no": 33,
+      "word": "journey",
+      "meaning": "여행, 여정; 여행하다"
+    },
+    {
+      "no": 34,
+      "word": "routine",
+      "meaning": "일상적인 일, 일과; 일상적인"
+    },
+    {
+      "no": 35,
+      "word": "violence",
+      "meaning": "폭력; 격렬함, 격함"
+    },
+    {
+      "no": 36,
+      "word": "examiner",
+      "meaning": "조사관, 심사 위원"
+    },
+    {
+      "no": 37,
+      "word": "trigger",
+      "meaning": "방아쇠; 자극, 계기; 촉발하다"
+    },
+    {
+      "no": 38,
+      "word": "voluntary",
+      "meaning": "자발적인, 자원봉사의"
+    },
+    {
+      "no": 39,
+      "word": "volunteer",
+      "meaning": "자원하다; 자원봉사자"
+    },
+    {
+      "no": 40,
+      "word": "explorer",
+      "meaning": "탐험가"
+    },
+    {
+      "no": 41,
+      "word": "desirable",
+      "meaning": "바람직한"
+    },
+    {
+      "no": 42,
+      "word": "experiment",
+      "meaning": "실험, 시험; 실험하다, 시험하다"
+    },
+    {
+      "no": 43,
+      "word": "barely",
+      "meaning": "간신히, 겨우; 거의 ~ 않다"
+    },
+    {
+      "no": 44,
+      "word": "initial",
+      "meaning": "처음의, 초기의; 머리글자, 첫글자"
+    },
+    {
+      "no": 45,
+      "word": "escape",
+      "meaning": "도망치다, 벗어나다, 모면하다; 도망, 탈출"
+    },
+    {
+      "no": 46,
+      "word": "verbally",
+      "meaning": "언어로, 구두로"
+    },
+    {
+      "no": 47,
+      "word": "delighted",
+      "meaning": "기쁜, 즐거워하는"
+    },
+    {
+      "no": 48,
+      "word": "devotion",
+      "meaning": "헌신, 정성"
+    },
+    {
+      "no": 49,
+      "word": "rotate",
+      "meaning": "회전하다, 순환하다; 교대로 하다"
+    },
+    {
+      "no": 50,
+      "word": "remarkable",
+      "meaning": "주목할 만한, 놀라운"
+    },
+    {
+      "no": 51,
+      "word": "numerously",
+      "meaning": "많이"
+    },
+    {
+      "no": 52,
+      "word": "achievement",
+      "meaning": "성취, 업적"
+    },
+    {
+      "no": 53,
+      "word": "remarkably",
+      "meaning": "놀랍게도, 매우"
+    },
+    {
+      "no": 54,
+      "word": "rotation",
+      "meaning": "회전, 순환; 교대"
+    },
+    {
+      "no": 55,
+      "word": "intelligent",
+      "meaning": "총명한, 지적인"
+    },
+    {
+      "no": 56,
+      "word": "registration",
+      "meaning": "등록, 기재"
+    },
+    {
+      "no": 57,
+      "word": "eventual",
+      "meaning": "최후의, 궁극적인"
+    },
+    {
+      "no": 58,
+      "word": "reserve",
+      "meaning": "예약하다; 따로 남겨 두다; 비축"
+    },
+    {
+      "no": 59,
+      "word": "merit",
+      "meaning": "가치 , 우수함; 장점"
+    },
+    {
+      "no": 60,
+      "word": "accomplish",
+      "meaning": "완수하다, 성취하다"
+    },
+    {
+      "no": 61,
+      "word": "accomplishment",
+      "meaning": "성취, 업적"
+    },
+    {
+      "no": 62,
+      "word": "break down",
+      "meaning": "고장 나다; ~을 부수다; ~을 분해하다"
+    },
+    {
+      "no": 63,
+      "word": "utilize",
+      "meaning": "활용하다"
+    },
+    {
+      "no": 64,
+      "word": "extremely",
+      "meaning": "매우, 극도로"
+    },
+    {
+      "no": 65,
+      "word": "violently",
+      "meaning": "격렬히, 난폭하게"
+    },
+    {
+      "no": 66,
+      "word": "register",
+      "meaning": "등록하다, 기재하다; 등록부, 명부"
+    },
+    {
+      "no": 67,
+      "word": "devoted",
+      "meaning": "헌신적인, 전념하는"
+    },
+    {
+      "no": 68,
+      "word": "intelligence",
+      "meaning": "지능, 지성"
+    },
+    {
+      "no": 69,
+      "word": "damage",
+      "meaning": "손해, 손상; 손해를 입히다, 해치다"
+    },
+    {
+      "no": 70,
+      "word": "achieve",
+      "meaning": "성취하다"
+    },
+    {
+      "no": 71,
+      "word": "threat",
+      "meaning": "위협, 협박; 조짐, 징조"
+    },
+    {
+      "no": 72,
+      "word": "apparent",
+      "meaning": "분명한, 명백한"
+    },
+    {
+      "no": 73,
+      "word": "threaten",
+      "meaning": "위협하다"
+    },
+    {
+      "no": 74,
+      "word": "refusal",
+      "meaning": "거절, 거부"
+    },
+    {
+      "no": 75,
+      "word": "frequently",
+      "meaning": "자주"
+    },
+    {
+      "no": 76,
+      "word": "existence",
+      "meaning": "존재; 생활"
+    },
+    {
+      "no": 77,
+      "word": "normal",
+      "meaning": "보통의, 평범한, 정상적인"
+    },
+    {
+      "no": 78,
+      "word": "visualize",
+      "meaning": "시각화하다"
+    },
+    {
+      "no": 79,
+      "word": "concentrate",
+      "meaning": "집중하다; 응축하다"
+    },
+    {
+      "no": 80,
+      "word": "reservation",
+      "meaning": "예약; 보호 구역"
+    }
+  ]
+}

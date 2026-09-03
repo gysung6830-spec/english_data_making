@@ -1,0 +1,506 @@
+{
+  "title": "Day 35~36",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "contemplation",
+      "meaning": "사색, 명상; 응시"
+    },
+    {
+      "no": 2,
+      "word": "obligatory",
+      "meaning": "의무적인, 필수의"
+    },
+    {
+      "no": 3,
+      "word": "eternity",
+      "meaning": "영원, 영구"
+    },
+    {
+      "no": 4,
+      "word": "conqueror",
+      "meaning": "정복자"
+    },
+    {
+      "no": 5,
+      "word": "degrade",
+      "meaning": "(질적으로) 저하시키다; 비하하다; (화학적으로) 분해되다[하다]"
+    },
+    {
+      "no": 6,
+      "word": "conquest",
+      "meaning": "정복; 점령지"
+    },
+    {
+      "no": 7,
+      "word": "provoke",
+      "meaning": "(반응 등을) 유발하다; 화나게 하다, 도발하다"
+    },
+    {
+      "no": 8,
+      "word": "moderate",
+      "meaning": "보통의, 적당한; 중도의, 온건한; 완화하다[되다]"
+    },
+    {
+      "no": 9,
+      "word": "mediation",
+      "meaning": "중재, 조정"
+    },
+    {
+      "no": 10,
+      "word": "spouse",
+      "meaning": "배우자"
+    },
+    {
+      "no": 11,
+      "word": "eligible",
+      "meaning": "자격이 있는, 적격[적임]의"
+    },
+    {
+      "no": 12,
+      "word": "feat",
+      "meaning": "위업, 공적; (뛰어난) 솜씨, 재주"
+    },
+    {
+      "no": 13,
+      "word": "clutch",
+      "meaning": "움켜잡다, 꽉 쥐다; 움켜쥠"
+    },
+    {
+      "no": 14,
+      "word": "forge",
+      "meaning": "(관계 등을) 구축하다; 위조하다"
+    },
+    {
+      "no": 15,
+      "word": "startling",
+      "meaning": "깜짝 놀라게 하는, 놀라운"
+    },
+    {
+      "no": 16,
+      "word": "hostile",
+      "meaning": "적대적인; 적(군)의; (환경이) 부적합한"
+    },
+    {
+      "no": 17,
+      "word": "worship",
+      "meaning": "예배하다, 숭배하다; 예배, 숭배"
+    },
+    {
+      "no": 18,
+      "word": "startled",
+      "meaning": "깜짝 놀란"
+    },
+    {
+      "no": 19,
+      "word": "defiance",
+      "meaning": "반항, 저항"
+    },
+    {
+      "no": 20,
+      "word": "prevail",
+      "meaning": "이기다, 승리하다; 만연[팽배]하다"
+    },
+    {
+      "no": 21,
+      "word": "exemplary",
+      "meaning": "모범적인, 본이 되는"
+    },
+    {
+      "no": 22,
+      "word": "alienate",
+      "meaning": "소원하게[멀어지게] 하다"
+    },
+    {
+      "no": 23,
+      "word": "embrace",
+      "meaning": "포옹하다; 수용하다; 포옹; 수용"
+    },
+    {
+      "no": 24,
+      "word": "come down with",
+      "meaning": "(병에) 걸리다"
+    },
+    {
+      "no": 25,
+      "word": "via",
+      "meaning": "~을 경유하여[거쳐]; ~을 통하여"
+    },
+    {
+      "no": 26,
+      "word": "evaporation",
+      "meaning": "증발 (작용); (희망 등의) 소멸"
+    },
+    {
+      "no": 27,
+      "word": "empathize",
+      "meaning": "공감하다"
+    },
+    {
+      "no": 28,
+      "word": "alternately",
+      "meaning": "번갈아 가며, 교대로"
+    },
+    {
+      "no": 29,
+      "word": "rationally",
+      "meaning": "이성적으로, 합리적으로"
+    },
+    {
+      "no": 30,
+      "word": "eternal",
+      "meaning": "영원한, 끝없는"
+    },
+    {
+      "no": 31,
+      "word": "hostility",
+      "meaning": "적대감, 적개심"
+    },
+    {
+      "no": 32,
+      "word": "put in for",
+      "meaning": "~을 신청하다"
+    },
+    {
+      "no": 33,
+      "word": "intentional",
+      "meaning": "의도적인"
+    },
+    {
+      "no": 34,
+      "word": "cosmic",
+      "meaning": "우주의; 거대한, 어마어마한"
+    },
+    {
+      "no": 35,
+      "word": "bump",
+      "meaning": "충돌하다; 덜컹거리며 가다; 혹, 타박상; (도로 등의) 융기, 턱"
+    },
+    {
+      "no": 36,
+      "word": "rational",
+      "meaning": "이성적인, 합리적인"
+    },
+    {
+      "no": 37,
+      "word": "parliament",
+      "meaning": "의회, 국회"
+    },
+    {
+      "no": 38,
+      "word": "magnificent",
+      "meaning": "웅장한, 장엄한, 훌륭한"
+    },
+    {
+      "no": 39,
+      "word": "administration",
+      "meaning": "관리, 행정(부); 집행; (약물) 투여"
+    },
+    {
+      "no": 40,
+      "word": "moderately",
+      "meaning": "알맞게, 적당히"
+    },
+    {
+      "no": 41,
+      "word": "hospitable",
+      "meaning": "환대하는; 쾌적한"
+    },
+    {
+      "no": 42,
+      "word": "headquarters",
+      "meaning": "본사, 본부 (직원들)"
+    },
+    {
+      "no": 43,
+      "word": "magnificence",
+      "meaning": "웅장, 장엄"
+    },
+    {
+      "no": 44,
+      "word": "parliamentary",
+      "meaning": "의회의; 의회에서 제정한"
+    },
+    {
+      "no": 45,
+      "word": "intent",
+      "meaning": "강한 관심을 보이는, 몰두하는; 작정한; 의도, 목적"
+    },
+    {
+      "no": 46,
+      "word": "reputation",
+      "meaning": "평판, 명성"
+    },
+    {
+      "no": 47,
+      "word": "restrain",
+      "meaning": "저지[제지]하다; 억누르다, 참다"
+    },
+    {
+      "no": 48,
+      "word": "prevailing",
+      "meaning": "우세한, 지배적인"
+    },
+    {
+      "no": 49,
+      "word": "administrative",
+      "meaning": "관리[행정]상의"
+    },
+    {
+      "no": 50,
+      "word": "commemoration",
+      "meaning": "기념(식)"
+    },
+    {
+      "no": 51,
+      "word": "practicable",
+      "meaning": "실행[실현] 가능한"
+    },
+    {
+      "no": 52,
+      "word": "obligation",
+      "meaning": "의무, 책임"
+    },
+    {
+      "no": 53,
+      "word": "diploma",
+      "meaning": "수료증, 졸업장"
+    },
+    {
+      "no": 54,
+      "word": "lament",
+      "meaning": "한탄하다; 애도하다; 애가; 한탄"
+    },
+    {
+      "no": 55,
+      "word": "startle",
+      "meaning": "깜짝 놀라게 하다, 깜짝 놀라다"
+    },
+    {
+      "no": 56,
+      "word": "defiant",
+      "meaning": "반항적인"
+    },
+    {
+      "no": 57,
+      "word": "disrupt",
+      "meaning": "지장을 주다, 방해하다"
+    },
+    {
+      "no": 58,
+      "word": "optimistic",
+      "meaning": "낙관[낙천]적인, 낙관주의의"
+    },
+    {
+      "no": 59,
+      "word": "fragility",
+      "meaning": "부서지기 쉬움, 허약"
+    },
+    {
+      "no": 60,
+      "word": "reinforcement",
+      "meaning": "강화, 보강"
+    },
+    {
+      "no": 61,
+      "word": "alternatively",
+      "meaning": "그 대신에"
+    },
+    {
+      "no": 62,
+      "word": "dismal",
+      "meaning": "음울한, 우울한; 형편없는"
+    },
+    {
+      "no": 63,
+      "word": "undertaking",
+      "meaning": "(중요한) 일; 약속, 동의"
+    },
+    {
+      "no": 64,
+      "word": "administer",
+      "meaning": "관리[운영]하다; 집행하다; (약을) 투여하다"
+    },
+    {
+      "no": 65,
+      "word": "convenient",
+      "meaning": "편리한, 간편한"
+    },
+    {
+      "no": 66,
+      "word": "contend",
+      "meaning": "겨루다, 다투다; 주장하다"
+    },
+    {
+      "no": 67,
+      "word": "pessimistic",
+      "meaning": "비관적인"
+    },
+    {
+      "no": 68,
+      "word": "contemplate",
+      "meaning": "고려[숙고]하다; 응시하다"
+    },
+    {
+      "no": 69,
+      "word": "fragile",
+      "meaning": "부서지기[깨지기] 쉬운; 취약한, 허약한"
+    },
+    {
+      "no": 70,
+      "word": "persistent",
+      "meaning": "끈질긴; 지속되는"
+    },
+    {
+      "no": 71,
+      "word": "district",
+      "meaning": "지역, 구역"
+    },
+    {
+      "no": 72,
+      "word": "encompass",
+      "meaning": "포함하다, 아우르다; 둘러싸다"
+    },
+    {
+      "no": 73,
+      "word": "exemplar",
+      "meaning": "모범, 전형"
+    },
+    {
+      "no": 74,
+      "word": "prevalence",
+      "meaning": "널리 퍼짐, 유행"
+    },
+    {
+      "no": 75,
+      "word": "contention",
+      "meaning": "논쟁; 주장"
+    },
+    {
+      "no": 76,
+      "word": "stick out",
+      "meaning": "~을 내밀다, ~가 튀어나오다; 눈에 띄다"
+    },
+    {
+      "no": 77,
+      "word": "antibiotic",
+      "meaning": "항생제, 항생 물질"
+    },
+    {
+      "no": 78,
+      "word": "contemplative",
+      "meaning": "숙고하는, 사색하는"
+    },
+    {
+      "no": 79,
+      "word": "empathy",
+      "meaning": "감정 이입, 공감"
+    },
+    {
+      "no": 80,
+      "word": "alternate",
+      "meaning": "번갈아 하는, 교대의; 번갈아 하다[일어나다]"
+    },
+    {
+      "no": 81,
+      "word": "restraint",
+      "meaning": "억제, 자제; 제한, 규제"
+    },
+    {
+      "no": 82,
+      "word": "evaporate",
+      "meaning": "증발하다[시키다]; (감정·희망 등이) 사라지다"
+    },
+    {
+      "no": 83,
+      "word": "alien",
+      "meaning": "외국(인)의; 생경한; 외계의; 외국인; 외계인"
+    },
+    {
+      "no": 84,
+      "word": "disruptive",
+      "meaning": "지장을 주는"
+    },
+    {
+      "no": 85,
+      "word": "intention",
+      "meaning": "의도, 목적"
+    },
+    {
+      "no": 86,
+      "word": "exemplify",
+      "meaning": "전형적인 예를 보여 주다; 예를들다"
+    },
+    {
+      "no": 87,
+      "word": "bumpy",
+      "meaning": "(바닥이) 울퉁불퉁한"
+    },
+    {
+      "no": 88,
+      "word": "cherish",
+      "meaning": "소중히 여기다; (기억·감정 등을) 간직하다"
+    },
+    {
+      "no": 89,
+      "word": "trustworthy",
+      "meaning": "신뢰할[믿을] 만한"
+    },
+    {
+      "no": 90,
+      "word": "sacred",
+      "meaning": "성스러운, 신성한"
+    },
+    {
+      "no": 91,
+      "word": "step up",
+      "meaning": "~을 강화하다, 올리다; (책임 등을) 맡다, 나서다"
+    },
+    {
+      "no": 92,
+      "word": "degradation",
+      "meaning": "비하; 저하; (화합물의) 분해"
+    },
+    {
+      "no": 93,
+      "word": "cosmos",
+      "meaning": "우주"
+    },
+    {
+      "no": 94,
+      "word": "conveniently",
+      "meaning": "편리하게"
+    },
+    {
+      "no": 95,
+      "word": "eligibility",
+      "meaning": "적격, 적임"
+    },
+    {
+      "no": 96,
+      "word": "medieval",
+      "meaning": "중세의, 중세풍의"
+    },
+    {
+      "no": 97,
+      "word": "empathetic",
+      "meaning": "감정 이입의, 공감의"
+    },
+    {
+      "no": 98,
+      "word": "organ",
+      "meaning": "(신체의) 장기, 기관; 오르간; (공식적인) 기관"
+    },
+    {
+      "no": 99,
+      "word": "mediate",
+      "meaning": "중재[조정]하다"
+    },
+    {
+      "no": 100,
+      "word": "oblige",
+      "meaning": "(~할) 의무를 지우다"
+    }
+  ]
+}

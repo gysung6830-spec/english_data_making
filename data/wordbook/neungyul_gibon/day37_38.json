@@ -1,0 +1,406 @@
+{
+  "title": "Day 37~38",
+  "source": "능률보카 고등 기본",
+  "words": [
+    {
+      "no": 1,
+      "word": "sticky",
+      "meaning": "끈적거리는, 달라붙는"
+    },
+    {
+      "no": 2,
+      "word": "counsel",
+      "meaning": "조언, 충고; 충고하다"
+    },
+    {
+      "no": 3,
+      "word": "council",
+      "meaning": "의회; 평의회, 협의회"
+    },
+    {
+      "no": 4,
+      "word": "spiritual",
+      "meaning": "정신의; 종교의"
+    },
+    {
+      "no": 5,
+      "word": "wonderful",
+      "meaning": "멋진, 놀라운"
+    },
+    {
+      "no": 6,
+      "word": "spirit",
+      "meaning": "정신, 영혼; 기분, 마음"
+    },
+    {
+      "no": 7,
+      "word": "successive",
+      "meaning": "연속적인"
+    },
+    {
+      "no": 8,
+      "word": "capital",
+      "meaning": "수도, 중심지; 대문자; 대문자의; 자본; 자본의"
+    },
+    {
+      "no": 9,
+      "word": "issue",
+      "meaning": "쟁점, 문제; ~호, 발행물; 발행하다"
+    },
+    {
+      "no": 10,
+      "word": "property",
+      "meaning": "재산, 소유물; 땅, 부동산; 특성, 속성"
+    },
+    {
+      "no": 11,
+      "word": "terrific",
+      "meaning": "아주 좋은, 훌륭한; 엄청난"
+    },
+    {
+      "no": 12,
+      "word": "drawer",
+      "meaning": "서랍"
+    },
+    {
+      "no": 13,
+      "word": "vocation",
+      "meaning": "직업, 천직; 사명감"
+    },
+    {
+      "no": 14,
+      "word": "cite",
+      "meaning": "인용하다; 예로 들다, 언급하다"
+    },
+    {
+      "no": 15,
+      "word": "aspire",
+      "meaning": "갈망하다"
+    },
+    {
+      "no": 16,
+      "word": "inspire",
+      "meaning": "고무하다; 영감을 주다"
+    },
+    {
+      "no": 17,
+      "word": "aspiration",
+      "meaning": "열망, 포부"
+    },
+    {
+      "no": 18,
+      "word": "successfully",
+      "meaning": "성공적으로"
+    },
+    {
+      "no": 19,
+      "word": "bow",
+      "meaning": "고개를 숙이다, 절하다; 절, 경례; 활; 나비매듭"
+    },
+    {
+      "no": 20,
+      "word": "site",
+      "meaning": "장소, 현장; 웹 사이트"
+    },
+    {
+      "no": 21,
+      "word": "section",
+      "meaning": "부분, 구획; 구역"
+    },
+    {
+      "no": 22,
+      "word": "degree",
+      "meaning": "정도, 단계; 도; 학위"
+    },
+    {
+      "no": 23,
+      "word": "currently",
+      "meaning": "현재, 지금"
+    },
+    {
+      "no": 24,
+      "word": "calculator",
+      "meaning": "계산기"
+    },
+    {
+      "no": 25,
+      "word": "variable",
+      "meaning": "변하기 쉬운; 변덕스러운; 변수"
+    },
+    {
+      "no": 26,
+      "word": "session",
+      "meaning": "기간, 시간; 회의"
+    },
+    {
+      "no": 27,
+      "word": "certain",
+      "meaning": "확신하는; 확실한, 틀림없는; 정해진, 특정한"
+    },
+    {
+      "no": 28,
+      "word": "stiff",
+      "meaning": "뻣뻣한, 굳은; 빳빳한, 딱딱한"
+    },
+    {
+      "no": 29,
+      "word": "successively",
+      "meaning": "연속적으로"
+    },
+    {
+      "no": 30,
+      "word": "condition",
+      "meaning": "상태; 상황, 환경; 조건"
+    },
+    {
+      "no": 31,
+      "word": "object",
+      "meaning": "물건, 물체; 대상; 목적, 목표; 반대하다"
+    },
+    {
+      "no": 32,
+      "word": "stick",
+      "meaning": "찌르다; 붙이다; 막대기, 나뭇가지; 채, 스틱"
+    },
+    {
+      "no": 33,
+      "word": "deal",
+      "meaning": "거래, 계약, 합의; 다루다, 취급하다"
+    },
+    {
+      "no": 34,
+      "word": "chef",
+      "meaning": "요리사, 주방장"
+    },
+    {
+      "no": 35,
+      "word": "rating",
+      "meaning": "순위; 시청률; 등급"
+    },
+    {
+      "no": 36,
+      "word": "order",
+      "meaning": "순서, 차례; 명령; 명령하다; 주문; 주문하다; 정돈, 질서"
+    },
+    {
+      "no": 37,
+      "word": "stuff",
+      "meaning": "물건, 것; 재료, 원료; 채우다"
+    },
+    {
+      "no": 38,
+      "word": "capitalism",
+      "meaning": "자본주의"
+    },
+    {
+      "no": 39,
+      "word": "drawing",
+      "meaning": "그림, 그림 그리기"
+    },
+    {
+      "no": 40,
+      "word": "conditional",
+      "meaning": "조건부의"
+    },
+    {
+      "no": 41,
+      "word": "terrible",
+      "meaning": "끔찍한, 무서운; 심한, 지독한"
+    },
+    {
+      "no": 42,
+      "word": "calculate",
+      "meaning": "계산하다; 추정하다"
+    },
+    {
+      "no": 43,
+      "word": "counselor",
+      "meaning": "상담자, 조언자"
+    },
+    {
+      "no": 44,
+      "word": "draw",
+      "meaning": "그리다; 끌다, 끌어당기다; 무승부, 동점; 추첨, 제비뽑기; 추첨하다"
+    },
+    {
+      "no": 45,
+      "word": "solution",
+      "meaning": "해결책, 해답; 용액, 용해"
+    },
+    {
+      "no": 46,
+      "word": "variation",
+      "meaning": "변화; 변형"
+    },
+    {
+      "no": 47,
+      "word": "successful",
+      "meaning": "성공한, 성공적인"
+    },
+    {
+      "no": 48,
+      "word": "current",
+      "meaning": "현재의, 지금의; 흐름"
+    },
+    {
+      "no": 49,
+      "word": "reflection",
+      "meaning": "모습; 반영"
+    },
+    {
+      "no": 50,
+      "word": "circular",
+      "meaning": "원형의, 순환하는"
+    },
+    {
+      "no": 51,
+      "word": "wonder",
+      "meaning": "궁금해하다; ~일까 생각하다; 놀라다; 경이로운 것, 불가사의; 놀라움"
+    },
+    {
+      "no": 52,
+      "word": "ethic",
+      "meaning": "윤리"
+    },
+    {
+      "no": 53,
+      "word": "trial",
+      "meaning": "재판; 시험; 시련, 고난"
+    },
+    {
+      "no": 54,
+      "word": "rate",
+      "meaning": "비율; 요금, 가격; 평가하다"
+    },
+    {
+      "no": 55,
+      "word": "certainly",
+      "meaning": "분명히, 확실히"
+    },
+    {
+      "no": 56,
+      "word": "asset",
+      "meaning": "재산, 자산; 강점, 이점"
+    },
+    {
+      "no": 57,
+      "word": "vocational",
+      "meaning": "직업의, 직업과 관련된"
+    },
+    {
+      "no": 58,
+      "word": "reason",
+      "meaning": "이유, 원인; 이성; 추론하다, 판단하다"
+    },
+    {
+      "no": 59,
+      "word": "chief",
+      "meaning": "주요한; 가장 높은, 최고의; 우두머리, 장"
+    },
+    {
+      "no": 60,
+      "word": "poverty",
+      "meaning": "빈곤, 가난"
+    },
+    {
+      "no": 61,
+      "word": "circulate",
+      "meaning": "순환하다, 돌다; 퍼지다, 유포되다"
+    },
+    {
+      "no": 62,
+      "word": "ethical",
+      "meaning": "윤리적인, 도덕에 관계된; 도덕적인, 도덕적으로 옳은"
+    },
+    {
+      "no": 63,
+      "word": "inspiration",
+      "meaning": "영감, 자극"
+    },
+    {
+      "no": 64,
+      "word": "vary",
+      "meaning": "다르다; 바꾸다"
+    },
+    {
+      "no": 65,
+      "word": "grave",
+      "meaning": "무덤, 묘; 중대한, 심각한"
+    },
+    {
+      "no": 66,
+      "word": "row",
+      "meaning": "열, 줄; 노를 젓다"
+    },
+    {
+      "no": 67,
+      "word": "demonstration",
+      "meaning": "입증; 설명; 시위"
+    },
+    {
+      "no": 68,
+      "word": "reflective",
+      "meaning": "반사하는"
+    },
+    {
+      "no": 69,
+      "word": "demonstrate",
+      "meaning": "입증하다; 보여 주다, 설명하다; 시위하다"
+    },
+    {
+      "no": 70,
+      "word": "reflect",
+      "meaning": "비추다; 반사하다; 반영하다; 곰곰이 생각하다, 심사숙고하다"
+    },
+    {
+      "no": 71,
+      "word": "figure",
+      "meaning": "숫자; 수치; 인물; 모습, 체격; 생각하다"
+    },
+    {
+      "no": 72,
+      "word": "orderly",
+      "meaning": "정돈된, 단정한, 질서 정연한"
+    },
+    {
+      "no": 73,
+      "word": "custom",
+      "meaning": "관습, 풍습; 습관; 관세, 세관; 맞춘, 주문 제작한"
+    },
+    {
+      "no": 74,
+      "word": "split",
+      "meaning": "쪼개다; 분열시키다; 분리, 균열"
+    },
+    {
+      "no": 75,
+      "word": "wander",
+      "meaning": "돌아다니다, 배회하다; 거닐기"
+    },
+    {
+      "no": 76,
+      "word": "vacation",
+      "meaning": "휴가, 방학"
+    },
+    {
+      "no": 77,
+      "word": "identity",
+      "meaning": "신원, 정체"
+    },
+    {
+      "no": 78,
+      "word": "citation",
+      "meaning": "인용구"
+    },
+    {
+      "no": 79,
+      "word": "company",
+      "meaning": "회사; 함께 있음"
+    },
+    {
+      "no": 80,
+      "word": "calculation",
+      "meaning": "계산"
+    }
+  ]
+}

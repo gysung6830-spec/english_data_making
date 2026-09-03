@@ -1,0 +1,506 @@
+{
+  "title": "Day 25~26",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "coordinate",
+      "meaning": "조정하다, 조직하다; 조화를 이루다"
+    },
+    {
+      "no": 2,
+      "word": "norm",
+      "meaning": "표준, 일반적인 것; 규범"
+    },
+    {
+      "no": 3,
+      "word": "apprehensive",
+      "meaning": "걱정[염려]하는"
+    },
+    {
+      "no": 4,
+      "word": "undo",
+      "meaning": "(잠긴 것을) 풀다, 열다; 원상태로 돌리다"
+    },
+    {
+      "no": 5,
+      "word": "particle",
+      "meaning": "(아주 작은) 조각, 입자"
+    },
+    {
+      "no": 6,
+      "word": "blast",
+      "meaning": "폭발; 강한 바람, 돌풍; 폭파하다"
+    },
+    {
+      "no": 7,
+      "word": "inscribe",
+      "meaning": "새기다, 써넣다"
+    },
+    {
+      "no": 8,
+      "word": "fleeting",
+      "meaning": "순식간의, 잠깐 동안의"
+    },
+    {
+      "no": 9,
+      "word": "interference",
+      "meaning": "간섭, 방해"
+    },
+    {
+      "no": 10,
+      "word": "back off",
+      "meaning": "뒤로 물러나다; (간섭하지 않고) 물러서다, 그만두다"
+    },
+    {
+      "no": 11,
+      "word": "coexistence",
+      "meaning": "공존"
+    },
+    {
+      "no": 12,
+      "word": "intensive",
+      "meaning": "집중적인; 철저한"
+    },
+    {
+      "no": 13,
+      "word": "expert",
+      "meaning": "전문가; 전문가의, 숙련된"
+    },
+    {
+      "no": 14,
+      "word": "bombardment",
+      "meaning": "포격, 폭격"
+    },
+    {
+      "no": 15,
+      "word": "asymmetric(al)",
+      "meaning": "비대칭의; 불균형한"
+    },
+    {
+      "no": 16,
+      "word": "concentration",
+      "meaning": "집중; 농도, 농축"
+    },
+    {
+      "no": 17,
+      "word": "fatal",
+      "meaning": "치명적인; 결정적인, 중대한"
+    },
+    {
+      "no": 18,
+      "word": "concentrate",
+      "meaning": "집중하다[시키다]; 농축하다"
+    },
+    {
+      "no": 19,
+      "word": "piecemeal",
+      "meaning": "단편적인, 조금씩 하는; 조금씩, 점차로"
+    },
+    {
+      "no": 20,
+      "word": "synthesize",
+      "meaning": "합성하다; 종합하다"
+    },
+    {
+      "no": 21,
+      "word": "humility",
+      "meaning": "겸손"
+    },
+    {
+      "no": 22,
+      "word": "exotic",
+      "meaning": "이국적인, 색다른; 외국의, 외래의"
+    },
+    {
+      "no": 23,
+      "word": "intimate",
+      "meaning": "친밀한, 친숙한; 사적인"
+    },
+    {
+      "no": 24,
+      "word": "tremendous",
+      "meaning": "엄청난, 막대한; 아주 훌륭한, 멋진"
+    },
+    {
+      "no": 25,
+      "word": "explode",
+      "meaning": "폭발[폭파]하다; (감정을) 터뜨리다; 급격히 증가하다"
+    },
+    {
+      "no": 26,
+      "word": "go along with",
+      "meaning": "~에 동의하다, ~을 따르다; ~와 동행하다"
+    },
+    {
+      "no": 27,
+      "word": "inspection",
+      "meaning": "점검, 검사"
+    },
+    {
+      "no": 28,
+      "word": "drainage",
+      "meaning": "배수 (시설)"
+    },
+    {
+      "no": 29,
+      "word": "inspector",
+      "meaning": "조사관, 감독관"
+    },
+    {
+      "no": 30,
+      "word": "intense",
+      "meaning": "극심한, 강렬한; 치열한; 열정적인"
+    },
+    {
+      "no": 31,
+      "word": "outlaw",
+      "meaning": "불법화하다, 금지하다; 무법자, 도망자"
+    },
+    {
+      "no": 32,
+      "word": "plausibly",
+      "meaning": "그럴듯하게, 타당하게"
+    },
+    {
+      "no": 33,
+      "word": "inspect",
+      "meaning": "점검하다, 검사하다"
+    },
+    {
+      "no": 34,
+      "word": "bilingual",
+      "meaning": "두 개 언어를 할 줄 아는; 두 개 언어의; 두 개 언어를 하는 사람"
+    },
+    {
+      "no": 35,
+      "word": "convince A of B",
+      "meaning": "A에게 B를 납득시키다"
+    },
+    {
+      "no": 36,
+      "word": "initial",
+      "meaning": "처음의, 초기의; 이름의 첫 글자"
+    },
+    {
+      "no": 37,
+      "word": "crisis",
+      "meaning": "위기, 중대한 국면"
+    },
+    {
+      "no": 38,
+      "word": "discrimination",
+      "meaning": "차별; 식별(력)"
+    },
+    {
+      "no": 39,
+      "word": "abnormally",
+      "meaning": "비정상적으로, 이상하게"
+    },
+    {
+      "no": 40,
+      "word": "definite",
+      "meaning": "명확한, 확고한"
+    },
+    {
+      "no": 41,
+      "word": "keep away",
+      "meaning": "~에 가까이 가지 않다, 가까이 못 오게 하다, 멀리하다"
+    },
+    {
+      "no": 42,
+      "word": "heritage",
+      "meaning": "(문화)유산, 전통"
+    },
+    {
+      "no": 43,
+      "word": "inorganic",
+      "meaning": "무기물의, 무기질의"
+    },
+    {
+      "no": 44,
+      "word": "shallow",
+      "meaning": "얕은; 얄팍한, 피상적인; (호흡이) 약한"
+    },
+    {
+      "no": 45,
+      "word": "retain",
+      "meaning": "유지[보유]하다; 기억하다"
+    },
+    {
+      "no": 46,
+      "word": "parallel",
+      "meaning": "평행한; 유사한; 유사한[상응하는] 것; 평행선; (~와) 유사하다; (~와) 평행하다"
+    },
+    {
+      "no": 47,
+      "word": "tangibly",
+      "meaning": "명백히; 만져서 알 수 있게"
+    },
+    {
+      "no": 48,
+      "word": "definitely",
+      "meaning": "분명히, 확실히"
+    },
+    {
+      "no": 49,
+      "word": "lay off",
+      "meaning": "~을 해고하다; (행동을) 그만두다"
+    },
+    {
+      "no": 50,
+      "word": "venue",
+      "meaning": "(행사 등의) 장소, 개최지"
+    },
+    {
+      "no": 51,
+      "word": "explosive",
+      "meaning": "폭발성의, 폭발적인; 폭발물, 폭약"
+    },
+    {
+      "no": 52,
+      "word": "flawless",
+      "meaning": "흠이 없는, 완벽한"
+    },
+    {
+      "no": 53,
+      "word": "hold over",
+      "meaning": "~을 미루다, 연기하다; 연장 상영하다"
+    },
+    {
+      "no": 54,
+      "word": "plausible",
+      "meaning": "그럴듯한, 타당해 보이는"
+    },
+    {
+      "no": 55,
+      "word": "import",
+      "meaning": "수입하다; 수입, 수입품; 중요성"
+    },
+    {
+      "no": 56,
+      "word": "cultivate",
+      "meaning": "경작[재배]하다; (능력 등을) 함양[계발]하다"
+    },
+    {
+      "no": 57,
+      "word": "aspiration",
+      "meaning": "열망, 포부"
+    },
+    {
+      "no": 58,
+      "word": "abnormality",
+      "meaning": "기형, 이상"
+    },
+    {
+      "no": 59,
+      "word": "synthetic",
+      "meaning": "합성의, 인조의"
+    },
+    {
+      "no": 60,
+      "word": "interfere",
+      "meaning": "간섭[참견]하다; 방해하다"
+    },
+    {
+      "no": 61,
+      "word": "decay",
+      "meaning": "부패, 부식; 쇠퇴; 부패하다, 썩다; 쇠퇴하다"
+    },
+    {
+      "no": 62,
+      "word": "uninterested",
+      "meaning": "흥미가 없는, 무관심한"
+    },
+    {
+      "no": 63,
+      "word": "evaluation",
+      "meaning": "평가, 감정"
+    },
+    {
+      "no": 64,
+      "word": "definitive",
+      "meaning": "확정적인, 최종적인"
+    },
+    {
+      "no": 65,
+      "word": "coordination",
+      "meaning": "조직(화); (신체의) 조정력"
+    },
+    {
+      "no": 66,
+      "word": "equate",
+      "meaning": "동일시하다"
+    },
+    {
+      "no": 67,
+      "word": "static",
+      "meaning": "정적인, 고정된; (수신기의) 잡음; 정전기"
+    },
+    {
+      "no": 68,
+      "word": "endangered",
+      "meaning": "멸종 위기에 처한"
+    },
+    {
+      "no": 69,
+      "word": "cultivation",
+      "meaning": "경작, 재배; 함양"
+    },
+    {
+      "no": 70,
+      "word": "asymmetry",
+      "meaning": "비대칭; 불균형"
+    },
+    {
+      "no": 71,
+      "word": "normalize",
+      "meaning": "정상화되다[하다]"
+    },
+    {
+      "no": 72,
+      "word": "fatality",
+      "meaning": "사망자 (수); 치사율; 숙명"
+    },
+    {
+      "no": 73,
+      "word": "despair",
+      "meaning": "절망, 체념; 절망하다, 체념하다"
+    },
+    {
+      "no": 74,
+      "word": "affluent",
+      "meaning": "부유한, 풍족한"
+    },
+    {
+      "no": 75,
+      "word": "endanger",
+      "meaning": "위험에 빠뜨리다, 위태롭게 하다"
+    },
+    {
+      "no": 76,
+      "word": "affluence",
+      "meaning": "풍요, 부유함"
+    },
+    {
+      "no": 77,
+      "word": "flaw",
+      "meaning": "결점, 결함"
+    },
+    {
+      "no": 78,
+      "word": "evaluate",
+      "meaning": "평가하다, 판단하다"
+    },
+    {
+      "no": 79,
+      "word": "plausibility",
+      "meaning": "그럴듯함, 타당성"
+    },
+    {
+      "no": 80,
+      "word": "auction",
+      "meaning": "경매; 경매에 부치다, 경매로 팔다"
+    },
+    {
+      "no": 81,
+      "word": "flawed",
+      "meaning": "흠[결함]이 있는"
+    },
+    {
+      "no": 82,
+      "word": "memorial",
+      "meaning": "기념비, 기념물; 기념의; 추모의"
+    },
+    {
+      "no": 83,
+      "word": "discriminate",
+      "meaning": "차별하다; 식별[구별]하다"
+    },
+    {
+      "no": 84,
+      "word": "memorable",
+      "meaning": "기억할 만한, 인상적인"
+    },
+    {
+      "no": 85,
+      "word": "qualify",
+      "meaning": "자격을 주다[얻다]; 예선을 통과하다"
+    },
+    {
+      "no": 86,
+      "word": "inscription",
+      "meaning": "비문, 새겨진 글"
+    },
+    {
+      "no": 87,
+      "word": "tissue",
+      "meaning": "조직; 화장지, 얇은 종이"
+    },
+    {
+      "no": 88,
+      "word": "normally",
+      "meaning": "보통, 정상적으로"
+    },
+    {
+      "no": 89,
+      "word": "explosion",
+      "meaning": "폭발; (감정의) 폭발; 폭발적 증가"
+    },
+    {
+      "no": 90,
+      "word": "intimately",
+      "meaning": "친밀하게"
+    },
+    {
+      "no": 91,
+      "word": "abnormal",
+      "meaning": "비정상적인, 이상한"
+    },
+    {
+      "no": 92,
+      "word": "conviction",
+      "meaning": "유죄 선고[판결]; 확신, 신념"
+    },
+    {
+      "no": 93,
+      "word": "premium",
+      "meaning": "보험료; 할증료; 고급의, 아주높은"
+    },
+    {
+      "no": 94,
+      "word": "take over",
+      "meaning": "~을 넘겨받다, 인수하다; (정권등을) 장악하다"
+    },
+    {
+      "no": 95,
+      "word": "tremendously",
+      "meaning": "엄청나게, 굉장히"
+    },
+    {
+      "no": 96,
+      "word": "convict",
+      "meaning": "유죄를 선고하다; 죄수, 수감자"
+    },
+    {
+      "no": 97,
+      "word": "drained",
+      "meaning": "진이 빠진"
+    },
+    {
+      "no": 98,
+      "word": "unparalleled",
+      "meaning": "비할 데 없는"
+    },
+    {
+      "no": 99,
+      "word": "unify",
+      "meaning": "통합[통일]하다"
+    },
+    {
+      "no": 100,
+      "word": "outweigh",
+      "meaning": "(~보다) 더 크다, 중대하다; (~보다) 더 무겁다"
+    }
+  ]
+}

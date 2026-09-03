@@ -1,0 +1,506 @@
+{
+  "title": "Day 13~14",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "insulation",
+      "meaning": "절연 (처리), 단열(재)"
+    },
+    {
+      "no": 2,
+      "word": "arrogantly",
+      "meaning": "거만하게"
+    },
+    {
+      "no": 3,
+      "word": "spark",
+      "meaning": "촉발시키다; 불꽃을 일으키다; 불꽃, 불똥"
+    },
+    {
+      "no": 4,
+      "word": "fluid",
+      "meaning": "유체, 유동체; 유동적인, 가변적인; 유동성의, 유체의"
+    },
+    {
+      "no": 5,
+      "word": "imprisonment",
+      "meaning": "투옥, 감금"
+    },
+    {
+      "no": 6,
+      "word": "defense",
+      "meaning": "방어(물); 변호; 수비"
+    },
+    {
+      "no": 7,
+      "word": "acknowledge",
+      "meaning": "인정하다; 감사를 표하다"
+    },
+    {
+      "no": 8,
+      "word": "behalf",
+      "meaning": "측, 편, 이익"
+    },
+    {
+      "no": 9,
+      "word": "scattered",
+      "meaning": "흩어진, 간간이 있는"
+    },
+    {
+      "no": 10,
+      "word": "ragged",
+      "meaning": "(옷이) 다 해진, 누더기의; (표면 등이) 고르지 못한"
+    },
+    {
+      "no": 11,
+      "word": "readily",
+      "meaning": "손쉽게; 기꺼이, 선뜻"
+    },
+    {
+      "no": 12,
+      "word": "rigid",
+      "meaning": "(규칙 등이) 엄격한; (사람이) 융통성 없는; 뻣뻣한"
+    },
+    {
+      "no": 13,
+      "word": "location",
+      "meaning": "위치, 장소"
+    },
+    {
+      "no": 14,
+      "word": "primitive",
+      "meaning": "원시 사회의; 원시적인 단계의, 초기의"
+    },
+    {
+      "no": 15,
+      "word": "deplete",
+      "meaning": "고갈시키다, 격감시키다"
+    },
+    {
+      "no": 16,
+      "word": "metabolic",
+      "meaning": "신진대사의"
+    },
+    {
+      "no": 17,
+      "word": "rag",
+      "meaning": "해진 천, 누더기"
+    },
+    {
+      "no": 18,
+      "word": "generic",
+      "meaning": "일반적인, 포괄적인"
+    },
+    {
+      "no": 19,
+      "word": "bias",
+      "meaning": "편견, 편향; 성향; 편견을 갖게 하다"
+    },
+    {
+      "no": 20,
+      "word": "mortgage",
+      "meaning": "담보 대출(금), 융자(금); 저당 잡히다"
+    },
+    {
+      "no": 21,
+      "word": "insurer",
+      "meaning": "보험 회사"
+    },
+    {
+      "no": 22,
+      "word": "prolonged",
+      "meaning": "오래 계속되는, 장기적인"
+    },
+    {
+      "no": 23,
+      "word": "frustrate",
+      "meaning": "좌절시키다"
+    },
+    {
+      "no": 24,
+      "word": "proficient",
+      "meaning": "능숙한, 숙달된"
+    },
+    {
+      "no": 25,
+      "word": "prolong",
+      "meaning": "연장하다, 늘이다"
+    },
+    {
+      "no": 26,
+      "word": "anchor",
+      "meaning": "닻; 앵커, 진행자; (정신적) 버팀목; 닻을 내리다; 고정시키다"
+    },
+    {
+      "no": 27,
+      "word": "refrain",
+      "meaning": "삼가다; 자주 반복되는 말[불평]; 후렴"
+    },
+    {
+      "no": 28,
+      "word": "genetically",
+      "meaning": "유전적으로"
+    },
+    {
+      "no": 29,
+      "word": "suburb",
+      "meaning": "교외, 근교"
+    },
+    {
+      "no": 30,
+      "word": "indication",
+      "meaning": "표시, 징후"
+    },
+    {
+      "no": 31,
+      "word": "novel",
+      "meaning": "소설; 기발한, 참신한"
+    },
+    {
+      "no": 32,
+      "word": "defensive",
+      "meaning": "방어의; 방어적인; 수비의"
+    },
+    {
+      "no": 33,
+      "word": "initiate",
+      "meaning": "시작[착수]하다"
+    },
+    {
+      "no": 34,
+      "word": "insulate",
+      "meaning": "절연[단열/방음]하다; (~로부터) 보호[격리]하다"
+    },
+    {
+      "no": 35,
+      "word": "evoke",
+      "meaning": "(감정·기억 등을) 불러일으키다"
+    },
+    {
+      "no": 36,
+      "word": "immortality",
+      "meaning": "불멸(성); 불후의 명성"
+    },
+    {
+      "no": 37,
+      "word": "shattered",
+      "meaning": "엄청난 충격을 받은; 산산이 조각난"
+    },
+    {
+      "no": 38,
+      "word": "shatter",
+      "meaning": "(물체·희망 등이) 산산이 부서지다[부수다]"
+    },
+    {
+      "no": 39,
+      "word": "depletion",
+      "meaning": "(자원 등의) 고갈, 소모"
+    },
+    {
+      "no": 40,
+      "word": "complement",
+      "meaning": "보완[보충]하다; 보완물, 보충물"
+    },
+    {
+      "no": 41,
+      "word": "scatter",
+      "meaning": "(흩)뿌리다; (군중 등이) 흩어지다, 흩어지게 하다"
+    },
+    {
+      "no": 42,
+      "word": "rigidity",
+      "meaning": "단단함, 경직(성); 엄격"
+    },
+    {
+      "no": 43,
+      "word": "intact",
+      "meaning": "손상되지 않은, 온전한"
+    },
+    {
+      "no": 44,
+      "word": "abandonment",
+      "meaning": "유기, 버림; 포기"
+    },
+    {
+      "no": 45,
+      "word": "prejudiced",
+      "meaning": "편견이 있는"
+    },
+    {
+      "no": 46,
+      "word": "strained",
+      "meaning": "긴장한; 껄끄러운; 부자연스러운"
+    },
+    {
+      "no": 47,
+      "word": "novelty",
+      "meaning": "새로움, 참신함; 새로운[신기한] 것"
+    },
+    {
+      "no": 48,
+      "word": "sole",
+      "meaning": "단 하나의, 유일한; 단독의"
+    },
+    {
+      "no": 49,
+      "word": "immortal",
+      "meaning": "불사의, 불멸의; 불멸의 존재"
+    },
+    {
+      "no": 50,
+      "word": "concretely",
+      "meaning": "구체적으로, 명확하게"
+    },
+    {
+      "no": 51,
+      "word": "genetics",
+      "meaning": "유전학"
+    },
+    {
+      "no": 52,
+      "word": "abandon",
+      "meaning": "버리다, 유기하다; 그만두다, 포기하다"
+    },
+    {
+      "no": 53,
+      "word": "initiative",
+      "meaning": "계획; 주도권; 진취성"
+    },
+    {
+      "no": 54,
+      "word": "complimentary",
+      "meaning": "무료의; 칭찬하는"
+    },
+    {
+      "no": 55,
+      "word": "locate",
+      "meaning": "위치를 찾아내다; 두다, 설치하다"
+    },
+    {
+      "no": 56,
+      "word": "sequential",
+      "meaning": "순차적인, 연속적인"
+    },
+    {
+      "no": 57,
+      "word": "vertebra",
+      "meaning": "척추뼈"
+    },
+    {
+      "no": 58,
+      "word": "manuscript",
+      "meaning": "원고; 필사본, 사본"
+    },
+    {
+      "no": 59,
+      "word": "assert",
+      "meaning": "주장하다, 단언하다; (권리 등을) 행사하다"
+    },
+    {
+      "no": 60,
+      "word": "flesh",
+      "meaning": "(사람·동물의) 살, 고기; 피부; (과일의) 과육"
+    },
+    {
+      "no": 61,
+      "word": "obsolete",
+      "meaning": "더는 쓸모가 없는, 구식의"
+    },
+    {
+      "no": 62,
+      "word": "fundamentally",
+      "meaning": "근본적으로, 완전히"
+    },
+    {
+      "no": 63,
+      "word": "sequence",
+      "meaning": "연속, 연속적인 사건들; 순서, 차례; (영화 등의) 연속 장면"
+    },
+    {
+      "no": 64,
+      "word": "budget",
+      "meaning": "예산(안); 예산을 세우다; 저렴한"
+    },
+    {
+      "no": 65,
+      "word": "representative",
+      "meaning": "대표(자); 대리인; 대표하는"
+    },
+    {
+      "no": 66,
+      "word": "solely",
+      "meaning": "혼자서; 오로지, 단지"
+    },
+    {
+      "no": 67,
+      "word": "seal off",
+      "meaning": "~을 봉쇄하다"
+    },
+    {
+      "no": 68,
+      "word": "conventional",
+      "meaning": "관습적인; 종래의, 전통적인"
+    },
+    {
+      "no": 69,
+      "word": "gene",
+      "meaning": "유전자"
+    },
+    {
+      "no": 70,
+      "word": "halt",
+      "meaning": "정지, 중단; 정지시키다, 멈추다"
+    },
+    {
+      "no": 71,
+      "word": "turn in",
+      "meaning": "~을 제출하다; 잠자리에 들다; (경찰 등에) 넘기다"
+    },
+    {
+      "no": 72,
+      "word": "defend",
+      "meaning": "방어하다; 변호하다"
+    },
+    {
+      "no": 73,
+      "word": "fundamental",
+      "meaning": "근본[기본]적인; 필수적인; 기본원칙"
+    },
+    {
+      "no": 74,
+      "word": "acknowledgment",
+      "meaning": "인정; 감사"
+    },
+    {
+      "no": 75,
+      "word": "activate",
+      "meaning": "작동시키다; (화학 작용 등을) 활성화하다"
+    },
+    {
+      "no": 76,
+      "word": "frustrated",
+      "meaning": "좌절한, 불만스러워하는"
+    },
+    {
+      "no": 77,
+      "word": "gourmet",
+      "meaning": "미식가; (음식·식당 등이) 고급의"
+    },
+    {
+      "no": 78,
+      "word": "complementary",
+      "meaning": "상호 보완적인"
+    },
+    {
+      "no": 79,
+      "word": "frustration",
+      "meaning": "좌절(감), 불만"
+    },
+    {
+      "no": 80,
+      "word": "biased",
+      "meaning": "편향된, 편견을 가진"
+    },
+    {
+      "no": 81,
+      "word": "hindrance",
+      "meaning": "방해, 저해; 방해물, 장애물"
+    },
+    {
+      "no": 82,
+      "word": "rigidly",
+      "meaning": "엄격하게; 완고하게"
+    },
+    {
+      "no": 83,
+      "word": "tackle",
+      "meaning": "(문제 등을) 다루다; 태클하다; 맞붙다; 태클; 도구"
+    },
+    {
+      "no": 84,
+      "word": "proficiency",
+      "meaning": "능숙, 숙달"
+    },
+    {
+      "no": 85,
+      "word": "obstacle",
+      "meaning": "장애(물), 방해(물)"
+    },
+    {
+      "no": 86,
+      "word": "accord",
+      "meaning": "일치, 합의; 일치하다; (권위 등을) 부여하다"
+    },
+    {
+      "no": 87,
+      "word": "represent",
+      "meaning": "대표하다; 대변하다; 표현하다, 나타내다"
+    },
+    {
+      "no": 88,
+      "word": "concrete",
+      "meaning": "구체적인; 콘크리트로 된; 콘크리트"
+    },
+    {
+      "no": 89,
+      "word": "shiver",
+      "meaning": "(추위·공포 등으로) 떨다; 떨림, 전율"
+    },
+    {
+      "no": 90,
+      "word": "nominate",
+      "meaning": "지명[추천]하다; 임명하다"
+    },
+    {
+      "no": 91,
+      "word": "activation",
+      "meaning": "활성화"
+    },
+    {
+      "no": 92,
+      "word": "cater",
+      "meaning": "(행사에) 음식을 제공하다; (요구 등을) 충족시키다"
+    },
+    {
+      "no": 93,
+      "word": "companion",
+      "meaning": "동반자, 동행, 친구; (책 등의) 안내서"
+    },
+    {
+      "no": 94,
+      "word": "metabolism",
+      "meaning": "신진대사, 물질대사"
+    },
+    {
+      "no": 95,
+      "word": "arrogant",
+      "meaning": "오만한, 거만한"
+    },
+    {
+      "no": 96,
+      "word": "soothe",
+      "meaning": "달래다, 진정시키다; (통증 등을) 완화하다"
+    },
+    {
+      "no": 97,
+      "word": "compliment",
+      "meaning": "칭찬, 찬사; 칭찬하다"
+    },
+    {
+      "no": 98,
+      "word": "look to",
+      "meaning": "~에게 (도움 등을) 기대하다, ~에 기대다; ~을 고려하다"
+    },
+    {
+      "no": 99,
+      "word": "indicator",
+      "meaning": "지표; 계기, 장치"
+    },
+    {
+      "no": 100,
+      "word": "hinder",
+      "meaning": "방해[저해]하다"
+    }
+  ]
+}

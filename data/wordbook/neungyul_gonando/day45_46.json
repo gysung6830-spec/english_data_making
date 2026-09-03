@@ -1,0 +1,506 @@
+{
+  "title": "Day 45~46",
+  "source": "능률보카 수능 고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "evacuate",
+      "meaning": "대피하다[시키다]; (건물 등을) 비우다"
+    },
+    {
+      "no": 2,
+      "word": "agitation",
+      "meaning": "불안, 동요; 선동, 시위"
+    },
+    {
+      "no": 3,
+      "word": "testimony",
+      "meaning": "증언; 증거"
+    },
+    {
+      "no": 4,
+      "word": "surveillance",
+      "meaning": "감시"
+    },
+    {
+      "no": 5,
+      "word": "adore",
+      "meaning": "아주 좋아하다, 흠모하다"
+    },
+    {
+      "no": 6,
+      "word": "patch",
+      "meaning": "부분, 조각; 텃밭; 덧대다, 수선하다"
+    },
+    {
+      "no": 7,
+      "word": "forbid",
+      "meaning": "금지하다"
+    },
+    {
+      "no": 8,
+      "word": "adjoin",
+      "meaning": "인접하다, 붙어 있다"
+    },
+    {
+      "no": 9,
+      "word": "condense",
+      "meaning": "응결[농축]되다[시키다]; 요약하다"
+    },
+    {
+      "no": 10,
+      "word": "vertical",
+      "meaning": "수직의, 세로의; 수직(선)"
+    },
+    {
+      "no": 11,
+      "word": "horizontally",
+      "meaning": "수평으로, 가로로"
+    },
+    {
+      "no": 12,
+      "word": "adjournment",
+      "meaning": "휴회, 휴정"
+    },
+    {
+      "no": 13,
+      "word": "abstain",
+      "meaning": "(투표를) 기권하다; 자제하다"
+    },
+    {
+      "no": 14,
+      "word": "civilization",
+      "meaning": "문명 (사회)"
+    },
+    {
+      "no": 15,
+      "word": "adjourn",
+      "meaning": "(회의·재판 등을) 휴회하다, 휴정하다"
+    },
+    {
+      "no": 16,
+      "word": "dwelling",
+      "meaning": "주거(지), 주택"
+    },
+    {
+      "no": 17,
+      "word": "evasive",
+      "meaning": "회피하는, 얼버무리는"
+    },
+    {
+      "no": 18,
+      "word": "adorable",
+      "meaning": "사랑스러운, 귀여운"
+    },
+    {
+      "no": 19,
+      "word": "glaring",
+      "meaning": "확연한; 눈부신; 노려보는"
+    },
+    {
+      "no": 20,
+      "word": "utilize",
+      "meaning": "활용하다, 이용하다"
+    },
+    {
+      "no": 21,
+      "word": "thread",
+      "meaning": "실; (이야기 등의) 줄거리, 맥락; (실 등을) 꿰다"
+    },
+    {
+      "no": 22,
+      "word": "whiny",
+      "meaning": "불평하는, 투덜대는"
+    },
+    {
+      "no": 23,
+      "word": "invader",
+      "meaning": "침입자, 침략자"
+    },
+    {
+      "no": 24,
+      "word": "devour",
+      "meaning": "게걸스럽게 먹다; 몰두하여 읽다"
+    },
+    {
+      "no": 25,
+      "word": "adoration",
+      "meaning": "흠모; 경배"
+    },
+    {
+      "no": 26,
+      "word": "abstention",
+      "meaning": "기권; 자제, 절제"
+    },
+    {
+      "no": 27,
+      "word": "deference",
+      "meaning": "존경, 경의"
+    },
+    {
+      "no": 28,
+      "word": "cumulatively",
+      "meaning": "누적적으로"
+    },
+    {
+      "no": 29,
+      "word": "abolish",
+      "meaning": "(법률·제도 등을) 폐지하다"
+    },
+    {
+      "no": 30,
+      "word": "vicious",
+      "meaning": "악랄한, 포악한"
+    },
+    {
+      "no": 31,
+      "word": "collaborate",
+      "meaning": "공동으로 일하다, 협력[협동]하다"
+    },
+    {
+      "no": 32,
+      "word": "vertically",
+      "meaning": "수직으로, 세로로"
+    },
+    {
+      "no": 33,
+      "word": "preach",
+      "meaning": "설교하다; (지루하게) 훈계하다"
+    },
+    {
+      "no": 34,
+      "word": "supervisor",
+      "meaning": "감독관, 관리자"
+    },
+    {
+      "no": 35,
+      "word": "swollen",
+      "meaning": "부은; (강물이) 불어난"
+    },
+    {
+      "no": 36,
+      "word": "diffusion",
+      "meaning": "발산; 보급, 전파"
+    },
+    {
+      "no": 37,
+      "word": "virtue",
+      "meaning": "덕, 미덕, 선; 장점"
+    },
+    {
+      "no": 38,
+      "word": "abolition",
+      "meaning": "폐지"
+    },
+    {
+      "no": 39,
+      "word": "come over",
+      "meaning": "들르다, 방문하다; (감정 등이) 엄습하다"
+    },
+    {
+      "no": 40,
+      "word": "virtuous",
+      "meaning": "덕이 있는, 고결한"
+    },
+    {
+      "no": 41,
+      "word": "forbidden",
+      "meaning": "금지된"
+    },
+    {
+      "no": 42,
+      "word": "dignify",
+      "meaning": "위엄[품위] 있게 하다; 그럴듯하게 꾸미다"
+    },
+    {
+      "no": 43,
+      "word": "supervision",
+      "meaning": "감독, 관리"
+    },
+    {
+      "no": 44,
+      "word": "specialist",
+      "meaning": "전문가, 전공자; 전문의"
+    },
+    {
+      "no": 45,
+      "word": "aristocratic",
+      "meaning": "귀족의, 귀족적인"
+    },
+    {
+      "no": 46,
+      "word": "respiratory",
+      "meaning": "호흡의, 호흡기의"
+    },
+    {
+      "no": 47,
+      "word": "collapse",
+      "meaning": "붕괴하다, 무너지다; 쓰러지다; 붕괴, 실패"
+    },
+    {
+      "no": 48,
+      "word": "congress",
+      "meaning": "국회, 의회; (공식적인) 회의"
+    },
+    {
+      "no": 49,
+      "word": "deviance",
+      "meaning": "일탈, 탈선"
+    },
+    {
+      "no": 50,
+      "word": "downside",
+      "meaning": "부정적인[불리한] 면"
+    },
+    {
+      "no": 51,
+      "word": "aristocrat",
+      "meaning": "귀족"
+    },
+    {
+      "no": 52,
+      "word": "curb",
+      "meaning": "억제[제한]하다; 억제[제한](책); (도로의) 연석"
+    },
+    {
+      "no": 53,
+      "word": "consolation",
+      "meaning": "위로, 위안"
+    },
+    {
+      "no": 54,
+      "word": "give away",
+      "meaning": "(무료로) 나누어 주다; (비밀 등을) 누설하다"
+    },
+    {
+      "no": 55,
+      "word": "upturn",
+      "meaning": "(가격·경기 등의) 상승, 호전"
+    },
+    {
+      "no": 56,
+      "word": "glare",
+      "meaning": "노려보다; 눈부시게 빛나다; 노려봄; 눈부신 빛"
+    },
+    {
+      "no": 57,
+      "word": "utter",
+      "meaning": "(입 밖에) 내다, 말하다; 완전한, 전적인"
+    },
+    {
+      "no": 58,
+      "word": "straighten out",
+      "meaning": "(상황 등을) 바로잡다, 해결하다"
+    },
+    {
+      "no": 59,
+      "word": "invasion",
+      "meaning": "침입, 침략; 침해"
+    },
+    {
+      "no": 60,
+      "word": "feminine",
+      "meaning": "여자의, 여성의"
+    },
+    {
+      "no": 61,
+      "word": "gross",
+      "meaning": "총합의; 중대한; 역겨운; 총수익을 올리다"
+    },
+    {
+      "no": 62,
+      "word": "dignity",
+      "meaning": "위엄, 품위; 존엄성"
+    },
+    {
+      "no": 63,
+      "word": "fraud",
+      "meaning": "사기(죄), 기만; 사기꾼"
+    },
+    {
+      "no": 64,
+      "word": "supervise",
+      "meaning": "감독하다, 관리하다"
+    },
+    {
+      "no": 65,
+      "word": "courtesy",
+      "meaning": "공손함, 정중함"
+    },
+    {
+      "no": 66,
+      "word": "condensed",
+      "meaning": "응결한, 농축된; 요약한, 간결한"
+    },
+    {
+      "no": 67,
+      "word": "unruly",
+      "meaning": "다루기 힘든, 제멋대로 구는"
+    },
+    {
+      "no": 68,
+      "word": "remote",
+      "meaning": "외진, 외딴; (시간·거리상으로) 먼; 원격의"
+    },
+    {
+      "no": 69,
+      "word": "warehouse",
+      "meaning": "창고"
+    },
+    {
+      "no": 70,
+      "word": "kinetic",
+      "meaning": "운동의, 운동에 의해 생기는"
+    },
+    {
+      "no": 71,
+      "word": "invasive",
+      "meaning": "침습적인; (병 등이) 급속히 퍼지는; 침해하는"
+    },
+    {
+      "no": 72,
+      "word": "courteously",
+      "meaning": "예의 바르게, 공손하게"
+    },
+    {
+      "no": 73,
+      "word": "utilization",
+      "meaning": "활용, 이용"
+    },
+    {
+      "no": 74,
+      "word": "deviant",
+      "meaning": "(정상에서) 벗어난, 일탈적인"
+    },
+    {
+      "no": 75,
+      "word": "condensation",
+      "meaning": "응결; 물방울, 응결된 것; 요약"
+    },
+    {
+      "no": 76,
+      "word": "verge",
+      "meaning": "(도로의) 가장자리, 변두리; (일이 일어나기) 직전"
+    },
+    {
+      "no": 77,
+      "word": "diffuse",
+      "meaning": "분산[확산]시키다, 퍼지다; 분산된, 널리 퍼진"
+    },
+    {
+      "no": 78,
+      "word": "export",
+      "meaning": "수출하다; 수출, 수출품"
+    },
+    {
+      "no": 79,
+      "word": "prosperity",
+      "meaning": "번영, 번창"
+    },
+    {
+      "no": 80,
+      "word": "testify",
+      "meaning": "(법정에서) 증언[진술]하다; 증명하다"
+    },
+    {
+      "no": 81,
+      "word": "deferential",
+      "meaning": "경의를 표하는, 공손한"
+    },
+    {
+      "no": 82,
+      "word": "respiration",
+      "meaning": "호흡"
+    },
+    {
+      "no": 83,
+      "word": "fraudulent",
+      "meaning": "사기의, 사기를 치는"
+    },
+    {
+      "no": 84,
+      "word": "compensation",
+      "meaning": "보상(금)"
+    },
+    {
+      "no": 85,
+      "word": "amplification",
+      "meaning": "증폭, 확대"
+    },
+    {
+      "no": 86,
+      "word": "underestimation",
+      "meaning": "과소평가"
+    },
+    {
+      "no": 87,
+      "word": "afflict",
+      "meaning": "괴롭히다, 시달리게 하다"
+    },
+    {
+      "no": 88,
+      "word": "defeat",
+      "meaning": "패배시키다; 좌절시키다; 패배; 타도, 타파"
+    },
+    {
+      "no": 89,
+      "word": "savage",
+      "meaning": "야만적인, 매우 사나운; (비판등이) 맹렬한; 야만인"
+    },
+    {
+      "no": 90,
+      "word": "utterance",
+      "meaning": "발언, 입 밖에 냄"
+    },
+    {
+      "no": 91,
+      "word": "deviate",
+      "meaning": "(진로·원칙 등에서) 벗어나다, 일탈하다"
+    },
+    {
+      "no": 92,
+      "word": "prosper",
+      "meaning": "번영하다, 번창하다"
+    },
+    {
+      "no": 93,
+      "word": "examine",
+      "meaning": "조사[검토]하다; 검사[진찰]하다"
+    },
+    {
+      "no": 94,
+      "word": "preacher",
+      "meaning": "전도사, 설교자, 목사"
+    },
+    {
+      "no": 95,
+      "word": "thrive",
+      "meaning": "번창[번영]하다; 잘 자라다"
+    },
+    {
+      "no": 96,
+      "word": "witness",
+      "meaning": "목격자, 증인; 목격하다; (법정에서) 증언하다"
+    },
+    {
+      "no": 97,
+      "word": "savagery",
+      "meaning": "야만성, 흉포성; 야만적 행위, 만행"
+    },
+    {
+      "no": 98,
+      "word": "ballot",
+      "meaning": "(무기명) 투표; 투표용지; (무기명) 투표하다"
+    },
+    {
+      "no": 99,
+      "word": "thriving",
+      "meaning": "번창[번영]하는"
+    },
+    {
+      "no": 100,
+      "word": "pull out of",
+      "meaning": "(사업 등에서) 손을 떼다, 철수하다"
+    }
+  ]
+}

@@ -1,0 +1,406 @@
+{
+  "title": "Day 27~28",
+  "source": "능률보카 고등 기본",
+  "words": [
+    {
+      "no": 1,
+      "word": "poetic",
+      "meaning": "시적인, 시의"
+    },
+    {
+      "no": 2,
+      "word": "impress",
+      "meaning": "인상을 주다"
+    },
+    {
+      "no": 3,
+      "word": "expressive",
+      "meaning": "표현하는, 나타내는"
+    },
+    {
+      "no": 4,
+      "word": "civil",
+      "meaning": "시민의; 국가의"
+    },
+    {
+      "no": 5,
+      "word": "tribe",
+      "meaning": "부족, 집단"
+    },
+    {
+      "no": 6,
+      "word": "tale",
+      "meaning": "이야기"
+    },
+    {
+      "no": 7,
+      "word": "privilege",
+      "meaning": "특권, 특혜; 특권을 주다"
+    },
+    {
+      "no": 8,
+      "word": "expression",
+      "meaning": "표현, 표정"
+    },
+    {
+      "no": 9,
+      "word": "impression",
+      "meaning": "인상"
+    },
+    {
+      "no": 10,
+      "word": "dominate",
+      "meaning": "지배하다, 우위를 차지하다"
+    },
+    {
+      "no": 11,
+      "word": "faithful",
+      "meaning": "충실한, 신의 있는"
+    },
+    {
+      "no": 12,
+      "word": "summarize",
+      "meaning": "요약하다"
+    },
+    {
+      "no": 13,
+      "word": "sacred",
+      "meaning": "신성한, 성스러운"
+    },
+    {
+      "no": 14,
+      "word": "associate",
+      "meaning": "관련시키다; 동료"
+    },
+    {
+      "no": 15,
+      "word": "liberal",
+      "meaning": "자유주의의; 진보적인"
+    },
+    {
+      "no": 16,
+      "word": "express",
+      "meaning": "표현하다, 나타내다; 고속의, 급행의; 급행"
+    },
+    {
+      "no": 17,
+      "word": "performer",
+      "meaning": "연기자, 연주자"
+    },
+    {
+      "no": 18,
+      "word": "author",
+      "meaning": "작가, 저자; 저술하다"
+    },
+    {
+      "no": 19,
+      "word": "legendary",
+      "meaning": "전설적인"
+    },
+    {
+      "no": 20,
+      "word": "poet",
+      "meaning": "시인"
+    },
+    {
+      "no": 21,
+      "word": "survey",
+      "meaning": "조사; 조사하다; 살피다"
+    },
+    {
+      "no": 22,
+      "word": "fiction",
+      "meaning": "소설; 허구"
+    },
+    {
+      "no": 23,
+      "word": "privileged",
+      "meaning": "특권을 가진"
+    },
+    {
+      "no": 24,
+      "word": "architecture",
+      "meaning": "건축, 건축 양식; 건축학"
+    },
+    {
+      "no": 25,
+      "word": "dominant",
+      "meaning": "지배적인, 우세한"
+    },
+    {
+      "no": 26,
+      "word": "myth",
+      "meaning": "신화; 통념"
+    },
+    {
+      "no": 27,
+      "word": "architectural",
+      "meaning": "건축학의"
+    },
+    {
+      "no": 28,
+      "word": "contextual",
+      "meaning": "문맥상의"
+    },
+    {
+      "no": 29,
+      "word": "biased",
+      "meaning": "편향된, 치우친"
+    },
+    {
+      "no": 30,
+      "word": "worshipper",
+      "meaning": "예배자, 숭배자"
+    },
+    {
+      "no": 31,
+      "word": "institution",
+      "meaning": "기관, 협회; 제도, 관습"
+    },
+    {
+      "no": 32,
+      "word": "literature",
+      "meaning": "문학"
+    },
+    {
+      "no": 33,
+      "word": "civilize",
+      "meaning": "문명화하다"
+    },
+    {
+      "no": 34,
+      "word": "composition",
+      "meaning": "구성; 작곡; 작문"
+    },
+    {
+      "no": 35,
+      "word": "morality",
+      "meaning": "도덕성"
+    },
+    {
+      "no": 36,
+      "word": "outline",
+      "meaning": "윤곽; 개요; 윤곽을 그리다; 개요를 말하다"
+    },
+    {
+      "no": 37,
+      "word": "performance",
+      "meaning": "수행; 공연"
+    },
+    {
+      "no": 38,
+      "word": "liberate",
+      "meaning": "해방하다"
+    },
+    {
+      "no": 39,
+      "word": "fictional",
+      "meaning": "허구의"
+    },
+    {
+      "no": 40,
+      "word": "faith",
+      "meaning": "믿음, 신뢰; 신앙"
+    },
+    {
+      "no": 41,
+      "word": "metaphoric",
+      "meaning": "은유적인, 비유적인"
+    },
+    {
+      "no": 42,
+      "word": "association",
+      "meaning": "협회, 단체, 연합"
+    },
+    {
+      "no": 43,
+      "word": "celebration",
+      "meaning": "축하"
+    },
+    {
+      "no": 44,
+      "word": "linguistic",
+      "meaning": "언어의, 언어적인"
+    },
+    {
+      "no": 45,
+      "word": "bias",
+      "meaning": "편견; 편견을 갖게 하다"
+    },
+    {
+      "no": 46,
+      "word": "exhibit",
+      "meaning": "전시하다, 보여 주다; 전시품, 진열품"
+    },
+    {
+      "no": 47,
+      "word": "perform",
+      "meaning": "수행하다, 행하다; 공연하다, 연기하다"
+    },
+    {
+      "no": 48,
+      "word": "collectively",
+      "meaning": "집단적으로"
+    },
+    {
+      "no": 49,
+      "word": "race",
+      "meaning": "인종; 경주"
+    },
+    {
+      "no": 50,
+      "word": "exhibition",
+      "meaning": "전시회"
+    },
+    {
+      "no": 51,
+      "word": "novel",
+      "meaning": "소설; 기발한, 참신한"
+    },
+    {
+      "no": 52,
+      "word": "contemporary",
+      "meaning": "현대의; 동시대의; 동시대 사람"
+    },
+    {
+      "no": 53,
+      "word": "integration",
+      "meaning": "통합"
+    },
+    {
+      "no": 54,
+      "word": "organize",
+      "meaning": "조직하다"
+    },
+    {
+      "no": 55,
+      "word": "morally",
+      "meaning": "도덕적으로"
+    },
+    {
+      "no": 56,
+      "word": "summary",
+      "meaning": "요약"
+    },
+    {
+      "no": 57,
+      "word": "novelist",
+      "meaning": "소설가"
+    },
+    {
+      "no": 58,
+      "word": "structural",
+      "meaning": "구조의, 구조적인"
+    },
+    {
+      "no": 59,
+      "word": "structure",
+      "meaning": "구조; 건축물; 체계화하다"
+    },
+    {
+      "no": 60,
+      "word": "liberty",
+      "meaning": "자유, 해방"
+    },
+    {
+      "no": 61,
+      "word": "collapse",
+      "meaning": "무너지다, 붕괴하다; 쓰러지다, 의식을 잃다; 붕괴; 좌절, 실패"
+    },
+    {
+      "no": 62,
+      "word": "poem",
+      "meaning": "시"
+    },
+    {
+      "no": 63,
+      "word": "architect",
+      "meaning": "건축가"
+    },
+    {
+      "no": 64,
+      "word": "institutional",
+      "meaning": "협회의"
+    },
+    {
+      "no": 65,
+      "word": "interior",
+      "meaning": "내부의, 안쪽의; 내부; 인테리어"
+    },
+    {
+      "no": 66,
+      "word": "racism",
+      "meaning": "인종 차별"
+    },
+    {
+      "no": 67,
+      "word": "advocate",
+      "meaning": "옹호하다, 지지하다; 옹호자, 지지자"
+    },
+    {
+      "no": 68,
+      "word": "collective",
+      "meaning": "집단적인, 집단의"
+    },
+    {
+      "no": 69,
+      "word": "portrait",
+      "meaning": "초상화, 인물 사진; 묘사"
+    },
+    {
+      "no": 70,
+      "word": "linguist",
+      "meaning": "언어학자"
+    },
+    {
+      "no": 71,
+      "word": "racial",
+      "meaning": "인종의"
+    },
+    {
+      "no": 72,
+      "word": "construct",
+      "meaning": "건설하다; 구성하다; 건축물"
+    },
+    {
+      "no": 73,
+      "word": "legend",
+      "meaning": "전설, 신화; 전설적인 인물"
+    },
+    {
+      "no": 74,
+      "word": "humanity",
+      "meaning": "인류, 인간; 인간성; 인류애"
+    },
+    {
+      "no": 75,
+      "word": "literary",
+      "meaning": "문학의, 문학적인"
+    },
+    {
+      "no": 76,
+      "word": "injustice",
+      "meaning": "부정, 부당, 불공평"
+    },
+    {
+      "no": 77,
+      "word": "novelty",
+      "meaning": "새로움, 참신함"
+    },
+    {
+      "no": 78,
+      "word": "conform",
+      "meaning": "따르다, 순응하다; 일치시키다"
+    },
+    {
+      "no": 79,
+      "word": "portray",
+      "meaning": "그리다, 묘사하다"
+    },
+    {
+      "no": 80,
+      "word": "dominance",
+      "meaning": "지배, 우월"
+    }
+  ]
+}
