@@ -1,0 +1,406 @@
+{
+  "title": "Day 15~16",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "receipt",
+      "meaning": "영수증"
+    },
+    {
+      "no": 2,
+      "word": "split",
+      "meaning": "찢다, (세로로) 쪼개다; 틈, 분열"
+    },
+    {
+      "no": 3,
+      "word": "deprive",
+      "meaning": "박탈하다"
+    },
+    {
+      "no": 4,
+      "word": "sensitive",
+      "meaning": "민감한, 예민한, 세심한"
+    },
+    {
+      "no": 5,
+      "word": "debate",
+      "meaning": "토론; 토론하다"
+    },
+    {
+      "no": 6,
+      "word": "dim",
+      "meaning": "흐릿한, 어두운; (불빛이) 흐려지다"
+    },
+    {
+      "no": 7,
+      "word": "conscious",
+      "meaning": "의식하고 있는, 의도적인"
+    },
+    {
+      "no": 8,
+      "word": "nutrition",
+      "meaning": "영양"
+    },
+    {
+      "no": 9,
+      "word": "address",
+      "meaning": "연설하다; 연설, 인사말"
+    },
+    {
+      "no": 10,
+      "word": "crew",
+      "meaning": "승무원"
+    },
+    {
+      "no": 11,
+      "word": "defect",
+      "meaning": "결점; (국가·당 등을) 버리다"
+    },
+    {
+      "no": 12,
+      "word": "abandon",
+      "meaning": "버리다, 포기하다"
+    },
+    {
+      "no": 13,
+      "word": "inhabit",
+      "meaning": "살다, 거주하다"
+    },
+    {
+      "no": 14,
+      "word": "inner",
+      "meaning": "내부의"
+    },
+    {
+      "no": 15,
+      "word": "scream",
+      "meaning": "절규하다, 비명 지르다, 소리치다; 비명, 절규"
+    },
+    {
+      "no": 16,
+      "word": "swallow",
+      "meaning": "삼키다; 삼킴, 제비"
+    },
+    {
+      "no": 17,
+      "word": "virtual",
+      "meaning": "가상의, 사실상의"
+    },
+    {
+      "no": 18,
+      "word": "modest",
+      "meaning": "겸손한, 알맞은"
+    },
+    {
+      "no": 19,
+      "word": "enroll",
+      "meaning": "입학하다, 등록하다"
+    },
+    {
+      "no": 20,
+      "word": "appear",
+      "meaning": "나타나다"
+    },
+    {
+      "no": 21,
+      "word": "irritate",
+      "meaning": "짜증 나게 하다, 화나게 하다"
+    },
+    {
+      "no": 22,
+      "word": "general",
+      "meaning": "일반적인; (육군·공군·해병대의) 대장"
+    },
+    {
+      "no": 23,
+      "word": "tradition",
+      "meaning": "전통, 관습"
+    },
+    {
+      "no": 24,
+      "word": "elegant",
+      "meaning": "고상한, 우아한"
+    },
+    {
+      "no": 25,
+      "word": "barrier",
+      "meaning": "장벽, 장애물"
+    },
+    {
+      "no": 26,
+      "word": "drought",
+      "meaning": "가뭄"
+    },
+    {
+      "no": 27,
+      "word": "harsh",
+      "meaning": "거친, 가혹한"
+    },
+    {
+      "no": 28,
+      "word": "register",
+      "meaning": "등록하다, 기재하다; 등록"
+    },
+    {
+      "no": 29,
+      "word": "prejudice",
+      "meaning": "편견, 선입관"
+    },
+    {
+      "no": 30,
+      "word": "spill",
+      "meaning": "엎지르다, 흘리다; 엎질러짐, 유출"
+    },
+    {
+      "no": 31,
+      "word": "eliminate",
+      "meaning": "제거하다, 배제하다"
+    },
+    {
+      "no": 32,
+      "word": "council",
+      "meaning": "협의회, 회의, 의회"
+    },
+    {
+      "no": 33,
+      "word": "priest",
+      "meaning": "성직자"
+    },
+    {
+      "no": 34,
+      "word": "statement",
+      "meaning": "진술, 성명서"
+    },
+    {
+      "no": 35,
+      "word": "agency",
+      "meaning": "대리점"
+    },
+    {
+      "no": 36,
+      "word": "arctic",
+      "meaning": "북극의"
+    },
+    {
+      "no": 37,
+      "word": "adolescent",
+      "meaning": "청소년; 청소년기의"
+    },
+    {
+      "no": 38,
+      "word": "usual",
+      "meaning": "보통의, 통상의"
+    },
+    {
+      "no": 39,
+      "word": "greed",
+      "meaning": "탐욕"
+    },
+    {
+      "no": 40,
+      "word": "dilute",
+      "meaning": "묽은; 희석시키다"
+    },
+    {
+      "no": 41,
+      "word": "fold",
+      "meaning": "접다, 포개다; 주름, (동물의) 우리"
+    },
+    {
+      "no": 42,
+      "word": "associate",
+      "meaning": "연관 짓다, 교제하다; 동료"
+    },
+    {
+      "no": 43,
+      "word": "trait",
+      "meaning": "특성, 특징"
+    },
+    {
+      "no": 44,
+      "word": "interfere",
+      "meaning": "방해하다, 간섭하다"
+    },
+    {
+      "no": 45,
+      "word": "neighbor",
+      "meaning": "이웃의, 근처에 사는; 이웃 (사람)"
+    },
+    {
+      "no": 46,
+      "word": "glance",
+      "meaning": "흘긋 보다; 흘긋 봄"
+    },
+    {
+      "no": 47,
+      "word": "masterpiece",
+      "meaning": "명작, 대작"
+    },
+    {
+      "no": 48,
+      "word": "contract",
+      "meaning": "계약하다, 수축하다; 계약서"
+    },
+    {
+      "no": 49,
+      "word": "conquer",
+      "meaning": "정복하다, 극복하다"
+    },
+    {
+      "no": 50,
+      "word": "compare",
+      "meaning": "비교하다"
+    },
+    {
+      "no": 51,
+      "word": "figure",
+      "meaning": "생각[판단]하다, 계산하다; 수치, 계산, 형"
+    },
+    {
+      "no": 52,
+      "word": "cruel",
+      "meaning": "잔인한, 고통을 주는"
+    },
+    {
+      "no": 53,
+      "word": "contrary",
+      "meaning": "반대의, 불리한; 반대의 것"
+    },
+    {
+      "no": 54,
+      "word": "errand",
+      "meaning": "심부름, 잡일"
+    },
+    {
+      "no": 55,
+      "word": "tribe",
+      "meaning": "부족, 종족"
+    },
+    {
+      "no": 56,
+      "word": "deny",
+      "meaning": "부인하다, 거절하다"
+    },
+    {
+      "no": 57,
+      "word": "capture",
+      "meaning": "붙잡다, 포획하다; 포획"
+    },
+    {
+      "no": 58,
+      "word": "seal",
+      "meaning": "도장, 봉인, 바다표범; 봉인하다"
+    },
+    {
+      "no": 59,
+      "word": "temporary",
+      "meaning": "일시적인, 임시의"
+    },
+    {
+      "no": 60,
+      "word": "criteria",
+      "meaning": "(pl.) 기준, 표준"
+    },
+    {
+      "no": 61,
+      "word": "attack",
+      "meaning": "공격하다; 공격"
+    },
+    {
+      "no": 62,
+      "word": "commute",
+      "meaning": "통근; 통근하다"
+    },
+    {
+      "no": 63,
+      "word": "impose",
+      "meaning": "부과하다, 강요하다"
+    },
+    {
+      "no": 64,
+      "word": "ensure",
+      "meaning": "확실하게 하다, 보증하다"
+    },
+    {
+      "no": 65,
+      "word": "supervise",
+      "meaning": "감독하다, 관리하다, 통제하다"
+    },
+    {
+      "no": 66,
+      "word": "nurture",
+      "meaning": "양육하다, 교육하다; 양육, 교육"
+    },
+    {
+      "no": 67,
+      "word": "retail",
+      "meaning": "소매; 소매하다"
+    },
+    {
+      "no": 68,
+      "word": "extraordinary",
+      "meaning": "비범한, 놀라운"
+    },
+    {
+      "no": 69,
+      "word": "profound",
+      "meaning": "깊은, 심오한"
+    },
+    {
+      "no": 70,
+      "word": "nevertheless",
+      "meaning": "그럼에도 불구하고"
+    },
+    {
+      "no": 71,
+      "word": "earthquake",
+      "meaning": "지진, (사회·정치적) 대변동"
+    },
+    {
+      "no": 72,
+      "word": "routine",
+      "meaning": "일상적인 일, 일과; 일상적인"
+    },
+    {
+      "no": 73,
+      "word": "trial",
+      "meaning": "재판, 실험, 시도"
+    },
+    {
+      "no": 74,
+      "word": "prevail",
+      "meaning": "우세하다, 만연하다"
+    },
+    {
+      "no": 75,
+      "word": "tragic",
+      "meaning": "비극의, 비참한"
+    },
+    {
+      "no": 76,
+      "word": "welfare",
+      "meaning": "복지"
+    },
+    {
+      "no": 77,
+      "word": "pedestrian",
+      "meaning": "보행자; 보행자의"
+    },
+    {
+      "no": 78,
+      "word": "arise",
+      "meaning": "발생하다, 생겨나다"
+    },
+    {
+      "no": 79,
+      "word": "distinguish",
+      "meaning": "구별하다, 식별하다"
+    },
+    {
+      "no": 80,
+      "word": "glare",
+      "meaning": "(눈부시게) 빛나다, 노려보다; 눈부신 빛,"
+    }
+  ]
+}

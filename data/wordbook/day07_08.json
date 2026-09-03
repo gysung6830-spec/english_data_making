@@ -1,0 +1,406 @@
+{
+  "title": "Day 7~8",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "device",
+      "meaning": "장치, 고안, 방책"
+    },
+    {
+      "no": 2,
+      "word": "gap",
+      "meaning": "격차, 틈"
+    },
+    {
+      "no": 3,
+      "word": "consult",
+      "meaning": "상담하다, 참고하다"
+    },
+    {
+      "no": 4,
+      "word": "committee",
+      "meaning": "(상급 기관에 소속된) 위원회"
+    },
+    {
+      "no": 5,
+      "word": "operation",
+      "meaning": "작업, 운영, 수술"
+    },
+    {
+      "no": 6,
+      "word": "mass",
+      "meaning": "많은 양, 덩어리, 집단, 대중"
+    },
+    {
+      "no": 7,
+      "word": "label",
+      "meaning": "꼬리표, 상표; 라벨을 붙이다, ~을 …이라고 부르다"
+    },
+    {
+      "no": 8,
+      "word": "wealth",
+      "meaning": "부, 재산"
+    },
+    {
+      "no": 9,
+      "word": "preserve",
+      "meaning": "보존하다, 보호하다"
+    },
+    {
+      "no": 10,
+      "word": "atmosphere",
+      "meaning": "대기, 분위기"
+    },
+    {
+      "no": 11,
+      "word": "ethic",
+      "meaning": "윤리"
+    },
+    {
+      "no": 12,
+      "word": "recover",
+      "meaning": "회복하다, 되찾다"
+    },
+    {
+      "no": 13,
+      "word": "downtown",
+      "meaning": "도심; 도심의; 도심지에"
+    },
+    {
+      "no": 14,
+      "word": "mood",
+      "meaning": "기분, 분위기"
+    },
+    {
+      "no": 15,
+      "word": "aspect",
+      "meaning": "관점, 양상, 면"
+    },
+    {
+      "no": 16,
+      "word": "facility",
+      "meaning": "시설, 편의, 재능"
+    },
+    {
+      "no": 17,
+      "word": "owe",
+      "meaning": "빚지고 있다, (명예·성공 등을) ~에 돌리다"
+    },
+    {
+      "no": 18,
+      "word": "comment",
+      "meaning": "논평, 주석; 논평하다"
+    },
+    {
+      "no": 19,
+      "word": "borrow",
+      "meaning": "빌리다"
+    },
+    {
+      "no": 20,
+      "word": "unique",
+      "meaning": "독특한, 유일한"
+    },
+    {
+      "no": 21,
+      "word": "previous",
+      "meaning": "앞의, 이전의"
+    },
+    {
+      "no": 22,
+      "word": "rural",
+      "meaning": "시골의"
+    },
+    {
+      "no": 23,
+      "word": "produce",
+      "meaning": "생산하다, 제조하다"
+    },
+    {
+      "no": 24,
+      "word": "consequence",
+      "meaning": "결과, 중요성"
+    },
+    {
+      "no": 25,
+      "word": "except",
+      "meaning": "~을 제외하고는; 제외하다"
+    },
+    {
+      "no": 26,
+      "word": "attach",
+      "meaning": "붙이다, 붙다, 첨부하다, 소속시키다"
+    },
+    {
+      "no": 27,
+      "word": "reward",
+      "meaning": "보상; 보답하다"
+    },
+    {
+      "no": 28,
+      "word": "potential",
+      "meaning": "잠재적인; 잠재력"
+    },
+    {
+      "no": 29,
+      "word": "suppose",
+      "meaning": "가정하다, 추측하다"
+    },
+    {
+      "no": 30,
+      "word": "urban",
+      "meaning": "도시의"
+    },
+    {
+      "no": 31,
+      "word": "awful",
+      "meaning": "끔찍한, 지독한"
+    },
+    {
+      "no": 32,
+      "word": "spark",
+      "meaning": "불꽃, 불똥; 불꽃을 일으키다, 촉발하다"
+    },
+    {
+      "no": 33,
+      "word": "include",
+      "meaning": "포함하다"
+    },
+    {
+      "no": 34,
+      "word": "leap",
+      "meaning": "뛰다, 도약하다; 도약"
+    },
+    {
+      "no": 35,
+      "word": "typical",
+      "meaning": "전형적인, 대표적인"
+    },
+    {
+      "no": 36,
+      "word": "intend",
+      "meaning": "(~할) 작정이다, 의도하다"
+    },
+    {
+      "no": 37,
+      "word": "delay",
+      "meaning": "연기하다, 미루다; 지연"
+    },
+    {
+      "no": 38,
+      "word": "reveal",
+      "meaning": "드러내다, 폭로하다; 출현, 폭로"
+    },
+    {
+      "no": 39,
+      "word": "exhausted",
+      "meaning": "고갈된, 기진맥진한"
+    },
+    {
+      "no": 40,
+      "word": "approve",
+      "meaning": "찬성하다, 승인하다"
+    },
+    {
+      "no": 41,
+      "word": "underground",
+      "meaning": "지하의, 비밀의; 지하"
+    },
+    {
+      "no": 42,
+      "word": "remain",
+      "meaning": "여전히 ~이다, 남다"
+    },
+    {
+      "no": 43,
+      "word": "entitle",
+      "meaning": "자격[권리]을 주다, 제목을 붙이다"
+    },
+    {
+      "no": 44,
+      "word": "muscle",
+      "meaning": "근육, 힘, 강제"
+    },
+    {
+      "no": 45,
+      "word": "slip",
+      "meaning": "미끄러지다, 실수하다; 종잇조각"
+    },
+    {
+      "no": 46,
+      "word": "enormous",
+      "meaning": "엄청난, 거대한"
+    },
+    {
+      "no": 47,
+      "word": "plain",
+      "meaning": "평범한, 명백한; 평원, 평야"
+    },
+    {
+      "no": 48,
+      "word": "instant",
+      "meaning": "즉각의, 즉석의; 순간"
+    },
+    {
+      "no": 49,
+      "word": "survey",
+      "meaning": "설문 조사; 조사하다, 둘러보다"
+    },
+    {
+      "no": 50,
+      "word": "survival",
+      "meaning": "생존"
+    },
+    {
+      "no": 51,
+      "word": "finance",
+      "meaning": "재정, 재무, 금융; 자금을 조달하다"
+    },
+    {
+      "no": 52,
+      "word": "policy",
+      "meaning": "정책, 수단, 방법"
+    },
+    {
+      "no": 53,
+      "word": "civilization",
+      "meaning": "문명"
+    },
+    {
+      "no": 54,
+      "word": "award",
+      "meaning": "수여하다; 상"
+    },
+    {
+      "no": 55,
+      "word": "journey",
+      "meaning": "여행, 여정"
+    },
+    {
+      "no": 56,
+      "word": "series",
+      "meaning": "연속, 시리즈물"
+    },
+    {
+      "no": 57,
+      "word": "spot",
+      "meaning": "지점, 얼룩; 발견하다, 얼룩지게 하다"
+    },
+    {
+      "no": 58,
+      "word": "accurate",
+      "meaning": "정확한"
+    },
+    {
+      "no": 59,
+      "word": "accomplish",
+      "meaning": "이루다, 성취하다"
+    },
+    {
+      "no": 60,
+      "word": "mere",
+      "meaning": "단지 ~에 불과한"
+    },
+    {
+      "no": 61,
+      "word": "absolute",
+      "meaning": "완전한, 절대적인"
+    },
+    {
+      "no": 62,
+      "word": "row",
+      "meaning": "열, 줄; 배를 젓다"
+    },
+    {
+      "no": 63,
+      "word": "seek",
+      "meaning": "찾다, 추구하다, 노력하다"
+    },
+    {
+      "no": 64,
+      "word": "witness",
+      "meaning": "목격자, 증인; 목격하다"
+    },
+    {
+      "no": 65,
+      "word": "slight",
+      "meaning": "약간의, 경미한"
+    },
+    {
+      "no": 66,
+      "word": "display",
+      "meaning": "전시하다, 나타내다; 전시"
+    },
+    {
+      "no": 67,
+      "word": "decorate",
+      "meaning": "장식하다, ~에게 훈장을 주다"
+    },
+    {
+      "no": 68,
+      "word": "leisure",
+      "meaning": "여가, 자유 시간; 한가한"
+    },
+    {
+      "no": 69,
+      "word": "adopt",
+      "meaning": "채택하다, 입양하다"
+    },
+    {
+      "no": 70,
+      "word": "arrange",
+      "meaning": "정리하다, 준비하다, 각색하다"
+    },
+    {
+      "no": 71,
+      "word": "surround",
+      "meaning": "둘러싸다"
+    },
+    {
+      "no": 72,
+      "word": "target",
+      "meaning": "목표, 표적; 목표로 삼다"
+    },
+    {
+      "no": 73,
+      "word": "elementary",
+      "meaning": "초보의, 기초적인"
+    },
+    {
+      "no": 74,
+      "word": "crime",
+      "meaning": "범죄"
+    },
+    {
+      "no": 75,
+      "word": "mechanic",
+      "meaning": "기계공, 정비공"
+    },
+    {
+      "no": 76,
+      "word": "file",
+      "meaning": "서류철, 파일; 파일에 철하다, (소송) 제기"
+    },
+    {
+      "no": 77,
+      "word": "admit",
+      "meaning": "인정하다, 입장을 허락하다"
+    },
+    {
+      "no": 78,
+      "word": "domestic",
+      "meaning": "국내의, 가정의"
+    },
+    {
+      "no": 79,
+      "word": "horizon",
+      "meaning": "수평선, 지평선"
+    },
+    {
+      "no": 80,
+      "word": "refer",
+      "meaning": "언급하다, 위탁하다"
+    }
+  ]
+}

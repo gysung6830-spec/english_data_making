@@ -115,6 +115,22 @@ def test_retry_recovers():
 
 
 # ---- 5. 렌더링 ------------------------------------------------------------
+def test_wordtest_sections():
+    """단어 시험지: 80개 → 영→한 40 / 한→영 40, 방향 교체 + 첫 글자 힌트."""
+    from src import wordtest
+
+    words = [{"no": i + 1, "word": f"word{i+1}", "meaning": f"뜻{i+1}"} for i in range(80)]
+    secs = wordtest.build_sections(words, seed=1)
+    assert [s["dir"] for s in secs] == ["en2ko", "ko2en"]
+    assert len(secs[0]["questions"]) == 40 and len(secs[1]["questions"]) == 40
+    # 원본 뒤쪽 절반(41~80)이 영→한, 앞쪽 절반(1~40)이 한→영 으로 방향이 바뀐다
+    assert {q["prompt"] for q in secs[0]["questions"]} == {w["word"] for w in words[40:]}
+    assert {q["answer"] for q in secs[1]["questions"]} == {w["word"] for w in words[:40]}
+    assert all(q["hint"] == q["answer"][0] for q in secs[1]["questions"])
+    assert [q["qno"] for q in secs[0]["questions"]] == list(range(1, 41))
+    print("PASS  단어 시험지 문항 구성")
+
+
 def test_render_html():
     from samples.sample_mock import mock_report
     html = render.render_html(mock_report(), footer_note="테스트", brand="테스트브랜드")
@@ -131,6 +147,7 @@ def run_all():
     test_vocab_count_range()
     test_retry_recovers()
     test_render_html()
+    test_wordtest_sections()
     print("\n모든 오프라인 테스트 통과 ✅")
 
 

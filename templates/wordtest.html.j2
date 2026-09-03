@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>{{ badge }} 단어 시험지</title></head>
+<body>
+  {% if footer_note %}<div class="pg-copyright">{{ footer_note }}</div>{% endif %}
+
+  {# ── 문제 면: 섹션(영→한 / 한→영)마다 한 쪽 ── #}
+  {% for sec in sections %}
+  <div class="ht-page">
+    <div class="ht-top">
+      <span class="ht-badge">{{ badge }}</span>
+      <span class="ht-meta">이름 <span class="ht-line"></span> 점수 <span class="ht-line short"></span> / {{ sec.questions|length }}</span>
+    </div>
+
+    <div class="ht-guide">
+      <span class="ht-gtitle">{{ sec.no }}. {{ sec.title }}</span>
+      <span class="ht-gsub">{{ sec.desc }}</span>
+    </div>
+
+    <table class="ht-grid{{ ' ko' if sec.dir == 'ko2en' }}">
+      {% if sec.dir == 'ko2en' %}
+      <colgroup>
+        <col style="width:20pt"><col><col style="width:88pt">
+        <col style="width:16pt">
+        <col style="width:20pt"><col><col style="width:88pt">
+      </colgroup>
+      {% else %}
+      <colgroup>
+        <col style="width:20pt"><col style="width:86pt"><col>
+        <col style="width:16pt">
+        <col style="width:20pt"><col style="width:86pt"><col>
+      </colgroup>
+      {% endif %}
+      <tbody>
+      {% for l, r in sec.rows %}
+        <tr>
+          <td class="ht-no">{{ "%02d"|format(l.qno) }}</td>
+          <td class="ht-q{{ ' ko' if sec.dir == 'ko2en' }}">{{ l.prompt }}</td>
+          <td class="ht-a">{% if l.hint %}<span class="ht-hint">{{ l.hint }}</span>{% endif %}</td>
+          <td class="ht-mid"></td>
+          {% if r %}
+          <td class="ht-no">{{ "%02d"|format(r.qno) }}</td>
+          <td class="ht-q{{ ' ko' if sec.dir == 'ko2en' }}">{{ r.prompt }}</td>
+          <td class="ht-a">{% if r.hint %}<span class="ht-hint">{{ r.hint }}</span>{% endif %}</td>
+          {% else %}<td class="ht-no"></td><td class="ht-q"></td><td class="ht-a"></td>{% endif %}
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endfor %}
+
+  {# ── 정답 면 ── #}
+  <div class="ht-page">
+    <div class="ht-top">
+      <span class="ht-badge">{{ badge }} · 정답</span>
+      <span class="ht-meta">ANSWER KEY</span>
+    </div>
+
+    {% for sec in sections %}
+    <div class="ht-ak-sub">{{ sec.no }}. {{ sec.title }} ({{ sec.questions|length }}문항)</div>
+    <table class="ht-ak">
+      {% if sec.dir == 'ko2en' %}
+      <colgroup>
+        <col style="width:18pt"><col><col style="width:64pt">
+        <col style="width:14pt">
+        <col style="width:18pt"><col><col style="width:64pt">
+      </colgroup>
+      {% else %}
+      <colgroup>
+        <col style="width:18pt"><col style="width:70pt"><col>
+        <col style="width:14pt">
+        <col style="width:18pt"><col style="width:70pt"><col>
+      </colgroup>
+      {% endif %}
+      <tbody>
+      {% for l, r in sec.rows %}
+        <tr>
+          <td class="ht-no">{{ "%02d"|format(l.qno) }}</td>
+          <td class="ht-w">{{ l.prompt }}</td><td class="ht-m">{{ l.answer }}</td>
+          <td class="ht-mid"></td>
+          {% if r %}
+          <td class="ht-no">{{ "%02d"|format(r.qno) }}</td>
+          <td class="ht-w">{{ r.prompt }}</td><td class="ht-m">{{ r.answer }}</td>
+          {% else %}<td></td><td></td><td></td>{% endif %}
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endfor %}
+
+    <div class="ht-foot">틀린 단어는 <b>3회 이상</b> 다시 쓰고, 다음 수업 시간에 <b>재시험</b>을 봅니다.</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,406 @@
+{
+  "title": "Day 9~10",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "physics",
+      "meaning": "물리학"
+    },
+    {
+      "no": 2,
+      "word": "emergency",
+      "meaning": "비상(사태)"
+    },
+    {
+      "no": 3,
+      "word": "symphony",
+      "meaning": "교향곡, (소리의) 조화"
+    },
+    {
+      "no": 4,
+      "word": "impact",
+      "meaning": "충격, 영향; 충격[영향]을 주다"
+    },
+    {
+      "no": 5,
+      "word": "distribute",
+      "meaning": "분배하다, 분포시키다"
+    },
+    {
+      "no": 6,
+      "word": "scale",
+      "meaning": "규모, 저울, 비늘"
+    },
+    {
+      "no": 7,
+      "word": "principle",
+      "meaning": "원칙, 원리"
+    },
+    {
+      "no": 8,
+      "word": "resolve",
+      "meaning": "결심하다, 해결하다, 분해하다"
+    },
+    {
+      "no": 9,
+      "word": "rid",
+      "meaning": "제거하다"
+    },
+    {
+      "no": 10,
+      "word": "stink",
+      "meaning": "역겹다, 악취를 풍기다; 악취"
+    },
+    {
+      "no": 11,
+      "word": "innocence",
+      "meaning": "결백, 무죄, 순진"
+    },
+    {
+      "no": 12,
+      "word": "addict",
+      "meaning": "중독시키다; 중독자"
+    },
+    {
+      "no": 13,
+      "word": "annoy",
+      "meaning": "괴롭히다, 귀찮게 하다"
+    },
+    {
+      "no": 14,
+      "word": "disappoint",
+      "meaning": "실망시키다"
+    },
+    {
+      "no": 15,
+      "word": "possess",
+      "meaning": "소유하다, ~의 마음을 사로잡다"
+    },
+    {
+      "no": 16,
+      "word": "permanent",
+      "meaning": "영원한, 영구적인"
+    },
+    {
+      "no": 17,
+      "word": "entrance",
+      "meaning": "입장, 입구, 입학"
+    },
+    {
+      "no": 18,
+      "word": "persuade",
+      "meaning": "설득하다"
+    },
+    {
+      "no": 19,
+      "word": "corporate",
+      "meaning": "회사의, 법인의"
+    },
+    {
+      "no": 20,
+      "word": "rank",
+      "meaning": "등급, 지위; 매기다, (등급을) 차지하다"
+    },
+    {
+      "no": 21,
+      "word": "retire",
+      "meaning": "은퇴하다"
+    },
+    {
+      "no": 22,
+      "word": "curve",
+      "meaning": "곡선(길), 속임수"
+    },
+    {
+      "no": 23,
+      "word": "standard",
+      "meaning": "기준, 표준; 기준의, 표준의"
+    },
+    {
+      "no": 24,
+      "word": "offer",
+      "meaning": "제공하다, 제안하다; 제공, 제안"
+    },
+    {
+      "no": 25,
+      "word": "empower",
+      "meaning": "권한을 주다"
+    },
+    {
+      "no": 26,
+      "word": "recite",
+      "meaning": "암송하다"
+    },
+    {
+      "no": 27,
+      "word": "grant",
+      "meaning": "승인하다, 수여하다"
+    },
+    {
+      "no": 28,
+      "word": "differ",
+      "meaning": "다르다, 의견을 달리하다"
+    },
+    {
+      "no": 29,
+      "word": "frighten",
+      "meaning": "겁먹게 하다"
+    },
+    {
+      "no": 30,
+      "word": "location",
+      "meaning": "장소, 위치"
+    },
+    {
+      "no": 31,
+      "word": "request",
+      "meaning": "요청; 요청하다"
+    },
+    {
+      "no": 32,
+      "word": "rainforest",
+      "meaning": "(열대) 우림"
+    },
+    {
+      "no": 33,
+      "word": "identify",
+      "meaning": "(신원 등을) 확인하다, 식별하다, 동일시하다"
+    },
+    {
+      "no": 34,
+      "word": "investment",
+      "meaning": "투자"
+    },
+    {
+      "no": 35,
+      "word": "emit",
+      "meaning": "(빛·열·소리 등을) 방출하다"
+    },
+    {
+      "no": 36,
+      "word": "alternative",
+      "meaning": "대안; 대안의"
+    },
+    {
+      "no": 37,
+      "word": "guarantee",
+      "meaning": "보증하다; 보증"
+    },
+    {
+      "no": 38,
+      "word": "perceive",
+      "meaning": "인지하다, 인식하다"
+    },
+    {
+      "no": 39,
+      "word": "encounter",
+      "meaning": "(우연히) 만나다; 마주침"
+    },
+    {
+      "no": 40,
+      "word": "cabin",
+      "meaning": "오두막집, 객실, 선실"
+    },
+    {
+      "no": 41,
+      "word": "circumstance",
+      "meaning": "상황, 환경"
+    },
+    {
+      "no": 42,
+      "word": "region",
+      "meaning": "지역"
+    },
+    {
+      "no": 43,
+      "word": "spread",
+      "meaning": "퍼짐, 확산; 퍼지다, 펼치다"
+    },
+    {
+      "no": 44,
+      "word": "envy",
+      "meaning": "부러움; 부러워하다"
+    },
+    {
+      "no": 45,
+      "word": "theme",
+      "meaning": "주제, 화제, 논제"
+    },
+    {
+      "no": 46,
+      "word": "gear",
+      "meaning": "장비, 기어; 맞게 조정하다"
+    },
+    {
+      "no": 47,
+      "word": "refuse",
+      "meaning": "거절하다"
+    },
+    {
+      "no": 48,
+      "word": "memorize",
+      "meaning": "기억하다, 암기하다"
+    },
+    {
+      "no": 49,
+      "word": "seldom",
+      "meaning": "거의 ~ 않는"
+    },
+    {
+      "no": 50,
+      "word": "basis",
+      "meaning": "기초, 원리, 기준"
+    },
+    {
+      "no": 51,
+      "word": "resist",
+      "meaning": "저항하다"
+    },
+    {
+      "no": 52,
+      "word": "evident",
+      "meaning": "명백한"
+    },
+    {
+      "no": 53,
+      "word": "release",
+      "meaning": "놓아주다, 방출하다, 발표하다; 석방, 발표"
+    },
+    {
+      "no": 54,
+      "word": "cooperate",
+      "meaning": "협력하다"
+    },
+    {
+      "no": 55,
+      "word": "evaluate",
+      "meaning": "평가하다"
+    },
+    {
+      "no": 56,
+      "word": "fulfill",
+      "meaning": "달성하다, 이행하다, 실현하다"
+    },
+    {
+      "no": 57,
+      "word": "ray",
+      "meaning": "광선"
+    },
+    {
+      "no": 58,
+      "word": "slave",
+      "meaning": "노예"
+    },
+    {
+      "no": 59,
+      "word": "automatic",
+      "meaning": "자동적인, 기계적인"
+    },
+    {
+      "no": 60,
+      "word": "autograph",
+      "meaning": "서명, 사인; 서명하다"
+    },
+    {
+      "no": 61,
+      "word": "vote",
+      "meaning": "투표; 투표하다"
+    },
+    {
+      "no": 62,
+      "word": "estimate",
+      "meaning": "견적, 평가; 평가하다"
+    },
+    {
+      "no": 63,
+      "word": "organism",
+      "meaning": "유기체, 생물, 생명체"
+    },
+    {
+      "no": 64,
+      "word": "authority",
+      "meaning": "권위, 당국"
+    },
+    {
+      "no": 65,
+      "word": "interpret",
+      "meaning": "해석하다, 통역하다"
+    },
+    {
+      "no": 66,
+      "word": "rely",
+      "meaning": "의지하다, 믿다"
+    },
+    {
+      "no": 67,
+      "word": "identical",
+      "meaning": "동일한, 일란성의"
+    },
+    {
+      "no": 68,
+      "word": "suitable",
+      "meaning": "적절한, 적합한"
+    },
+    {
+      "no": 69,
+      "word": "secretary",
+      "meaning": "비서, 서기관, 장관"
+    },
+    {
+      "no": 70,
+      "word": "application",
+      "meaning": "적용, 신청"
+    },
+    {
+      "no": 71,
+      "word": "appeal",
+      "meaning": "호소하다, 항의하다, 관심을 끌다; 호소,"
+    },
+    {
+      "no": 72,
+      "word": "artificial",
+      "meaning": "인공적인, 인조의"
+    },
+    {
+      "no": 73,
+      "word": "realistic",
+      "meaning": "현실적인, 현실주의의"
+    },
+    {
+      "no": 74,
+      "word": "harm",
+      "meaning": "손해, 손상; 해치다"
+    },
+    {
+      "no": 75,
+      "word": "tremendous",
+      "meaning": "굉장한, 무시무시한"
+    },
+    {
+      "no": 76,
+      "word": "rub",
+      "meaning": "문질러 닦다, 문지르다"
+    },
+    {
+      "no": 77,
+      "word": "hesitate",
+      "meaning": "주저하다, 망설이다"
+    },
+    {
+      "no": 78,
+      "word": "substance",
+      "meaning": "물질, 본질, 실체"
+    },
+    {
+      "no": 79,
+      "word": "restrict",
+      "meaning": "제한하다, 한정하다"
+    },
+    {
+      "no": 80,
+      "word": "adventure",
+      "meaning": "모험; 위험에 빠뜨리다"
+    }
+  ]
+}
