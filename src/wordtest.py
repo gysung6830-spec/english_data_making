@@ -3,7 +3,7 @@
 단어 JSON( tools/extract_wordbook.py 로 만든 것 )을 넣으면
   1쪽: Ⅰ. 영단어 → 우리말 뜻 쓰기
   2쪽: Ⅱ. 우리말 뜻 → 영단어 쓰기 (첫 글자 힌트)
-  3쪽: 정답
+  3~4쪽: 답지(문제지와 같은 자리에 정답이 채워진 형태)
 순서의 PDF 를 만든다.
 
 사용 예)
@@ -74,6 +74,7 @@ def build_sections(words: list[dict], seed: int | None = 1, shuffle: bool = True
         sections.append({
             "no": "Ⅰ", "dir": "en2ko", "title": "영단어 → 우리말 뜻",
             "desc": f"다음 영단어의 우리말 뜻을 쓰세요. (총 {len(en2ko)}문항)",
+            "ans_desc": f"정답이 채워진 답지입니다. (총 {len(en2ko)}문항)",
             "questions": en2ko, "rows": _rows(en2ko),
         })
     if ko2en:
@@ -81,6 +82,7 @@ def build_sections(words: list[dict], seed: int | None = 1, shuffle: bool = True
             "no": "Ⅱ", "dir": "ko2en", "title": "우리말 뜻 → 영단어",
             "desc": ("다음 뜻에 해당하는 영단어를 쓰세요. (총 %d문항%s)"
                      % (len(ko2en), " · 첫 글자 힌트 제공" if hint else "")),
+            "ans_desc": f"정답이 채워진 답지입니다. (총 {len(ko2en)}문항)",
             "questions": ko2en, "rows": _rows(ko2en),
         })
     return sections
@@ -89,7 +91,7 @@ def build_sections(words: list[dict], seed: int | None = 1, shuffle: bool = True
 def render_wordtest_pdf(words: list[dict], out_path: str | Path, badge: str,
                         footer_note: str = FOOTER_NOTE, seed: int | None = 1,
                         shuffle: bool = True, hint: bool = True) -> Path:
-    """단어 목록 → 시험지 PDF(문제 2쪽 + 정답 1쪽)."""
+    """단어 목록 → 시험지 PDF(문제 2쪽 + 답지 2쪽)."""
     from weasyprint import CSS, HTML
     from weasyprint.text.fonts import FontConfiguration
 

@@ -4,6 +4,41 @@
 <body>
   {% if footer_note %}<div class="pg-copyright">{{ footer_note }}</div>{% endif %}
 
+{#- 문항 표: ans=true 면 쓰는 칸에 정답이 인쇄된 '답지'가 된다 -#}
+{% macro grid(sec, ans) %}
+    <table class="ht-grid{{ ' ko' if sec.dir == 'ko2en' }}{{ ' ans' if ans }}">
+      {% if sec.dir == 'ko2en' %}
+      <colgroup>
+        <col style="width:20pt"><col><col style="width:88pt">
+        <col style="width:16pt">
+        <col style="width:20pt"><col><col style="width:88pt">
+      </colgroup>
+      {% else %}
+      <colgroup>
+        <col style="width:20pt"><col style="width:86pt"><col>
+        <col style="width:16pt">
+        <col style="width:20pt"><col style="width:86pt"><col>
+      </colgroup>
+      {% endif %}
+      <tbody>
+      {% for l, r in sec.rows %}
+        <tr>
+          {% for q in (l, r) %}
+            {% if not loop.first %}<td class="ht-mid"></td>{% endif %}
+            {% if q %}
+          <td class="ht-no">{{ "%02d"|format(q.qno) }}</td>
+          <td class="ht-q{{ ' ko' if sec.dir == 'ko2en' }}">{{ q.prompt }}</td>
+          <td class="ht-a">{% if ans %}<span class="ht-ans">{{ q.answer }}</span>{% elif q.hint %}<span class="ht-hint">{{ q.hint }}</span>{% endif %}</td>
+            {% else %}
+          <td class="ht-no"></td><td class="ht-q"></td><td class="ht-a"></td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+{% endmacro %}
+
   {# ── 문제 면: 섹션(영→한 / 한→영)마다 한 쪽 ── #}
   {% for sec in sections %}
   <div class="ht-page">
@@ -17,79 +52,29 @@
       <span class="ht-gsub">{{ sec.desc }}</span>
     </div>
 
-    <table class="ht-grid{{ ' ko' if sec.dir == 'ko2en' }}">
-      {% if sec.dir == 'ko2en' %}
-      <colgroup>
-        <col style="width:20pt"><col><col style="width:88pt">
-        <col style="width:16pt">
-        <col style="width:20pt"><col><col style="width:88pt">
-      </colgroup>
-      {% else %}
-      <colgroup>
-        <col style="width:20pt"><col style="width:86pt"><col>
-        <col style="width:16pt">
-        <col style="width:20pt"><col style="width:86pt"><col>
-      </colgroup>
-      {% endif %}
-      <tbody>
-      {% for l, r in sec.rows %}
-        <tr>
-          <td class="ht-no">{{ "%02d"|format(l.qno) }}</td>
-          <td class="ht-q{{ ' ko' if sec.dir == 'ko2en' }}">{{ l.prompt }}</td>
-          <td class="ht-a">{% if l.hint %}<span class="ht-hint">{{ l.hint }}</span>{% endif %}</td>
-          <td class="ht-mid"></td>
-          {% if r %}
-          <td class="ht-no">{{ "%02d"|format(r.qno) }}</td>
-          <td class="ht-q{{ ' ko' if sec.dir == 'ko2en' }}">{{ r.prompt }}</td>
-          <td class="ht-a">{% if r.hint %}<span class="ht-hint">{{ r.hint }}</span>{% endif %}</td>
-          {% else %}<td class="ht-no"></td><td class="ht-q"></td><td class="ht-a"></td>{% endif %}
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
+    {{ grid(sec, false) }}
   </div>
   {% endfor %}
 
-  {# ── 정답 면 ── #}
+  {# ── 답지: 문제지와 같은 자리에 정답이 채워진 형태 ── #}
+  {% for sec in sections %}
   <div class="ht-page">
     <div class="ht-top">
       <span class="ht-badge">{{ badge }} · 정답</span>
-      <span class="ht-meta">ANSWER KEY</span>
+      <span class="ht-meta ht-akmark">ANSWER KEY</span>
     </div>
 
-    {% for sec in sections %}
-    <div class="ht-ak-sub">{{ sec.no }}. {{ sec.title }} ({{ sec.questions|length }}문항)</div>
-    <table class="ht-ak">
-      {% if sec.dir == 'ko2en' %}
-      <colgroup>
-        <col style="width:18pt"><col><col style="width:64pt">
-        <col style="width:14pt">
-        <col style="width:18pt"><col><col style="width:64pt">
-      </colgroup>
-      {% else %}
-      <colgroup>
-        <col style="width:18pt"><col style="width:70pt"><col>
-        <col style="width:14pt">
-        <col style="width:18pt"><col style="width:70pt"><col>
-      </colgroup>
-      {% endif %}
-      <tbody>
-      {% for l, r in sec.rows %}
-        <tr>
-          <td class="ht-no">{{ "%02d"|format(l.qno) }}</td>
-          <td class="ht-w">{{ l.prompt }}</td><td class="ht-m">{{ l.answer }}</td>
-          <td class="ht-mid"></td>
-          {% if r %}
-          <td class="ht-no">{{ "%02d"|format(r.qno) }}</td>
-          <td class="ht-w">{{ r.prompt }}</td><td class="ht-m">{{ r.answer }}</td>
-          {% else %}<td></td><td></td><td></td>{% endif %}
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-    {% endfor %}
+    <div class="ht-guide">
+      <span class="ht-gtitle">{{ sec.no }}. {{ sec.title }}</span>
+      <span class="ht-gsub">{{ sec.ans_desc }}</span>
+    </div>
 
+    {{ grid(sec, true) }}
+
+    {% if loop.last %}
     <div class="ht-foot">틀린 단어는 <b>3회 이상</b> 다시 쓰고, 다음 수업 시간에 <b>재시험</b>을 봅니다.</div>
+    {% endif %}
   </div>
+  {% endfor %}
 </body>
 </html>

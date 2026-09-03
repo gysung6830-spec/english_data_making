@@ -161,7 +161,7 @@ PDF → 텍스트 추출 → (전처리로 문제/정답 제거)
 # 1) 단어 추출: 시험지 PDF 의 정답 면(보통 2페이지) → JSON
 python tools/extract_wordbook.py "워드마스터_Day_3~4.pdf" --page 2     --day "Day 3~4" --source "워드마스터 수능2000" --out data/wordbook/day03_04.json
 
-# 2) 시험지 PDF 생성 (문제 2쪽 + 정답 1쪽)
+# 2) 시험지 PDF 생성 (문제 2쪽 + 답지 2쪽 · 답지는 문제지와 같은 자리에 정답이 채워진 형태)
 python -m src.wordtest data/wordbook/day03_04.json --out output/Day3-4_단어test.pdf
 
 # 여러 개를 한 번에 (회차마다 --seed 를 바꾸면 문항 순서가 달라집니다)
