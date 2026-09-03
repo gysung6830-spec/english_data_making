@@ -391,6 +391,23 @@ def _reading_ko_aligned(lines: list[list[Token]], chunks: list[str]) -> str:
     return " / ".join(chunks)
 
 
+def _heal_reading_short_by_one(lines: list[list[Token]], n_ko: int) -> list[list[Token]]:
+    """한글 직독직해 조각이 영어보다 '정확히 1개' 적을 때(off-by-one) 정렬 교정.
+
+    LLM 이 영어 끊기(slash)를 하나 더 찍고 한글은 그 마지막 두 조각을 한 덩어리로 옮기는
+    실수가 잦다(예: 'by the ambiguity / of the rhythm' ↔ '리듬의 모호함 때문에'). 이때 영어
+    '마지막 끊기'를 제거해 영어 조각 수를 한글에 맞춘다(마지막 두 조각을 한 덩어리로). 한글은
+    그대로 두므로 해석 손실이 없다. 2개 이상 어긋남은 건드리지 않는다(_reading_ko_aligned 처리).
+    """
+    e = _english_chunk_count(lines)
+    if e >= 2 and n_ko == e - 1:
+        for t in reversed([t for ln in lines for t in ln]):
+            if t.slash:
+                t.slash = False
+                break
+    return lines
+
+
 def _to_sentence(index: int, sa: SentenceAnalysis) -> Sentence:
     # LLM 이 여러 줄로 쪼개 보내도 한 줄로 펼쳐 자연스럽게 흐르게(화면 폭에 맞춰 자동 줄바꿈).
     flat = [_tok(t) for ln in sa.lines for t in ln.tokens]
@@ -401,6 +418,9 @@ def _to_sentence(index: int, sa: SentenceAnalysis) -> Sentence:
     reading = getattr(sa, "reading_ko", []) or []
     if isinstance(reading, str):         # 방어: 문자열이면 분해
         reading = [c for c in reading.split("/")]
+    # 한글이 영어보다 1개 적으면 영어 마지막 끊기를 제거해 정렬(해석 손실 없음).
+    _n_ko = len([c for c in reading if c and str(c).strip()])
+    lines = _heal_reading_short_by_one(lines, _n_ko)
     return Sentence(
         index=index,
         lines=lines,

@@ -879,6 +879,34 @@ def test_txt_ingest_and_bracket_problem_spans(tmp_path):
     print("PASS  .txt 지문 읽기 + '[NN번]' 대괄호 문제 분리")
 
 
+def test_reading_alignment_heal_off_by_one():
+    # 한글 조각이 영어보다 1개 적으면(off-by-one) 영어 '마지막 끊기'를 제거해 정렬.
+    from src.worksheet.analyzer import _heal_reading_short_by_one, _english_chunk_count
+    from src.worksheet.models import Token
+
+    def mk():   # 영어 4조각(끊기 3): a/ b/ c/ d
+        return [[Token(text="a", slash=True), Token(text="b", slash=True),
+                 Token(text="c", slash=True), Token(text="d")]]
+
+    lines = mk()
+    assert _english_chunk_count(lines) == 4
+    _heal_reading_short_by_one(lines, 3)               # 한글 3개 → 영어도 3조각으로
+    assert _english_chunk_count(lines) == 3
+    # 제거된 건 '마지막' 끊기(c) — 마지막 두 조각 c,d 가 한 덩어리
+    toks = [t for ln in lines for t in ln]
+    assert [t.text for t in toks if t.slash] == ["a", "b"]
+
+    # 2개 이상 어긋나면 건드리지 않음(정렬 실패는 _reading_ko_aligned 가 처리)
+    lines2 = mk()
+    _heal_reading_short_by_one(lines2, 2)
+    assert _english_chunk_count(lines2) == 4
+    # 정확히 맞으면 그대로
+    lines3 = mk()
+    _heal_reading_short_by_one(lines3, 4)
+    assert _english_chunk_count(lines3) == 4
+    print("PASS  직독직해 off-by-one 자동 교정(영어 마지막 끊기 제거)")
+
+
 def test_reading_alignment_detect():
     from src.worksheet import quality
 
