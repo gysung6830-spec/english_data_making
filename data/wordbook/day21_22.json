@@ -1,0 +1,406 @@
+{
+  "title": "Day 21~22",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "ban",
+      "meaning": "금지하다; 금지"
+    },
+    {
+      "no": 2,
+      "word": "vessel",
+      "meaning": "(물건을 담는) 용기, 배, 선박, 혈관"
+    },
+    {
+      "no": 3,
+      "word": "shrug",
+      "meaning": "(어깨를) 으쓱하다"
+    },
+    {
+      "no": 4,
+      "word": "string",
+      "meaning": "끈, 줄, 일련"
+    },
+    {
+      "no": 5,
+      "word": "stuff",
+      "meaning": "것(들), 물건; (빽빽이) 채워 넣다, 쑤셔 넣다"
+    },
+    {
+      "no": 6,
+      "word": "loyal",
+      "meaning": "충성스러운, 성실한"
+    },
+    {
+      "no": 7,
+      "word": "passive",
+      "meaning": "수동적인, 수동형의"
+    },
+    {
+      "no": 8,
+      "word": "majesty",
+      "meaning": "위엄, 장엄, (M-) 왕"
+    },
+    {
+      "no": 9,
+      "word": "procedure",
+      "meaning": "절차, 과정"
+    },
+    {
+      "no": 10,
+      "word": "compact",
+      "meaning": "소형의, 조밀한; 꽉 채우다"
+    },
+    {
+      "no": 11,
+      "word": "famine",
+      "meaning": "굶주림, 기아"
+    },
+    {
+      "no": 12,
+      "word": "caution",
+      "meaning": "조심, 주의; 주의를 주다"
+    },
+    {
+      "no": 13,
+      "word": "discard",
+      "meaning": "버리다, 처분하다"
+    },
+    {
+      "no": 14,
+      "word": "classify",
+      "meaning": "분류하다"
+    },
+    {
+      "no": 15,
+      "word": "via",
+      "meaning": "~을 거쳐[경유해서], ~을 통해"
+    },
+    {
+      "no": 16,
+      "word": "physician",
+      "meaning": "의사, 내과 의사"
+    },
+    {
+      "no": 17,
+      "word": "cope",
+      "meaning": "대처하다, 잘 처리하다"
+    },
+    {
+      "no": 18,
+      "word": "graduate",
+      "meaning": "졸업하다; 졸업생, 대학원 학생"
+    },
+    {
+      "no": 19,
+      "word": "colleague",
+      "meaning": "동료"
+    },
+    {
+      "no": 20,
+      "word": "immune",
+      "meaning": "면역성의, 면제된"
+    },
+    {
+      "no": 21,
+      "word": "hence",
+      "meaning": "그러므로, 지금부터"
+    },
+    {
+      "no": 22,
+      "word": "delicate",
+      "meaning": "섬세한"
+    },
+    {
+      "no": 23,
+      "word": "pretend",
+      "meaning": "~인 척하다, 주장하다"
+    },
+    {
+      "no": 24,
+      "word": "enhance",
+      "meaning": "향상하다"
+    },
+    {
+      "no": 25,
+      "word": "attract",
+      "meaning": "(주의·흥미 등을) 끌다"
+    },
+    {
+      "no": 26,
+      "word": "radical",
+      "meaning": "과격한, 급진적인, 근본적인; 급진주의자"
+    },
+    {
+      "no": 27,
+      "word": "bond",
+      "meaning": "유대, 결속, 속박, 계약, 채권"
+    },
+    {
+      "no": 28,
+      "word": "obedient",
+      "meaning": "순종하는, 유순한"
+    },
+    {
+      "no": 29,
+      "word": "reception",
+      "meaning": "환영회, 접수"
+    },
+    {
+      "no": 30,
+      "word": "skeleton",
+      "meaning": "골격, 뼈대"
+    },
+    {
+      "no": 31,
+      "word": "prefer",
+      "meaning": "선호하다"
+    },
+    {
+      "no": 32,
+      "word": "restore",
+      "meaning": "회복하다, 복구하다, 돌려주다"
+    },
+    {
+      "no": 33,
+      "word": "panic",
+      "meaning": "갑작스러운 공포, 공황; 공황적인"
+    },
+    {
+      "no": 34,
+      "word": "intimate",
+      "meaning": "친밀한"
+    },
+    {
+      "no": 35,
+      "word": "subtle",
+      "meaning": "미묘한, 교묘한"
+    },
+    {
+      "no": 36,
+      "word": "alert",
+      "meaning": "기민한, 경계하는; 경계 (태세); 경고하다"
+    },
+    {
+      "no": 37,
+      "word": "flush",
+      "meaning": "(얼굴이) 붉어지다, 물이 쏟아져 나오다"
+    },
+    {
+      "no": 38,
+      "word": "dwindle",
+      "meaning": "점점 줄어들다, 저하되다"
+    },
+    {
+      "no": 39,
+      "word": "eternal",
+      "meaning": "영원한"
+    },
+    {
+      "no": 40,
+      "word": "wilderness",
+      "meaning": "황무지, 황야"
+    },
+    {
+      "no": 41,
+      "word": "cherish",
+      "meaning": "소중히 하다"
+    },
+    {
+      "no": 42,
+      "word": "handle",
+      "meaning": "다루다"
+    },
+    {
+      "no": 43,
+      "word": "astonish",
+      "meaning": "놀라게 하다"
+    },
+    {
+      "no": 44,
+      "word": "superior",
+      "meaning": "우월한; 상사"
+    },
+    {
+      "no": 45,
+      "word": "despair",
+      "meaning": "절망; 절망하다"
+    },
+    {
+      "no": 46,
+      "word": "humid",
+      "meaning": "(날씨가) 습기 있는, 눅눅한"
+    },
+    {
+      "no": 47,
+      "word": "loan",
+      "meaning": "대출, 대출금; 대출하다"
+    },
+    {
+      "no": 48,
+      "word": "depict",
+      "meaning": "묘사하다, 그리다"
+    },
+    {
+      "no": 49,
+      "word": "joint",
+      "meaning": "공동의, 연합의; 이음매, 관절"
+    },
+    {
+      "no": 50,
+      "word": "transmit",
+      "meaning": "전달하다"
+    },
+    {
+      "no": 51,
+      "word": "optimistic",
+      "meaning": "낙관적인, 낙천적인"
+    },
+    {
+      "no": 52,
+      "word": "coincidence",
+      "meaning": "우연의 일치, 동시에 일어난 사건"
+    },
+    {
+      "no": 53,
+      "word": "copper",
+      "meaning": "구리; 구리의, 구릿빛의"
+    },
+    {
+      "no": 54,
+      "word": "architecture",
+      "meaning": "건축, 건축물"
+    },
+    {
+      "no": 55,
+      "word": "passage",
+      "meaning": "통로, (시간의) 경과, (인용문의) 한 절"
+    },
+    {
+      "no": 56,
+      "word": "angle",
+      "meaning": "각도, 모서리"
+    },
+    {
+      "no": 57,
+      "word": "funeral",
+      "meaning": "장례식; 장례의"
+    },
+    {
+      "no": 58,
+      "word": "humiliation",
+      "meaning": "창피함, 굴욕"
+    },
+    {
+      "no": 59,
+      "word": "murder",
+      "meaning": "살인; 살인하다"
+    },
+    {
+      "no": 60,
+      "word": "persist",
+      "meaning": "고집하다, 지속하다"
+    },
+    {
+      "no": 61,
+      "word": "accuse",
+      "meaning": "고발하다, 비난하다"
+    },
+    {
+      "no": 62,
+      "word": "category",
+      "meaning": "범주"
+    },
+    {
+      "no": 63,
+      "word": "raw",
+      "meaning": "날것의, 가공하지 않은"
+    },
+    {
+      "no": 64,
+      "word": "reverse",
+      "meaning": "역(逆), 반대; 역의, 반대의; 뒤바꾸다"
+    },
+    {
+      "no": 65,
+      "word": "overwhelm",
+      "meaning": "압도하다, 당황하게 하다"
+    },
+    {
+      "no": 66,
+      "word": "outcome",
+      "meaning": "결과"
+    },
+    {
+      "no": 67,
+      "word": "vicious",
+      "meaning": "사악한, 악의 있는"
+    },
+    {
+      "no": 68,
+      "word": "marble",
+      "meaning": "대리석, 구슬; 대리석의"
+    },
+    {
+      "no": 69,
+      "word": "strategy",
+      "meaning": "전략"
+    },
+    {
+      "no": 70,
+      "word": "therapy",
+      "meaning": "치료, 요법"
+    },
+    {
+      "no": 71,
+      "word": "omit",
+      "meaning": "생략하다, 빼다"
+    },
+    {
+      "no": 72,
+      "word": "adequate",
+      "meaning": "적당한"
+    },
+    {
+      "no": 73,
+      "word": "orbit",
+      "meaning": "궤도; 궤도를 그리며 돌다"
+    },
+    {
+      "no": 74,
+      "word": "pill",
+      "meaning": "알약"
+    },
+    {
+      "no": 75,
+      "word": "shrink",
+      "meaning": "축소하다, 수축하다"
+    },
+    {
+      "no": 76,
+      "word": "conference",
+      "meaning": "회담, 회의"
+    },
+    {
+      "no": 77,
+      "word": "fundamental",
+      "meaning": "근본적인, 기본적인; 근본"
+    },
+    {
+      "no": 78,
+      "word": "inflate",
+      "meaning": "부풀리다, 과장하다, (물가 등을) 인상하다"
+    },
+    {
+      "no": 79,
+      "word": "merit",
+      "meaning": "장점, 공로; 받을 만하다"
+    },
+    {
+      "no": 80,
+      "word": "likewise",
+      "meaning": "마찬가지로, 게다가"
+    }
+  ]
+}

@@ -1,0 +1,406 @@
+{
+  "title": "Day 37~38",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "patriot",
+      "meaning": "애국자"
+    },
+    {
+      "no": 2,
+      "word": "skinny",
+      "meaning": "피골이 상접한, 마른"
+    },
+    {
+      "no": 3,
+      "word": "erect",
+      "meaning": "세우다; 똑바로 선"
+    },
+    {
+      "no": 4,
+      "word": "manipulate",
+      "meaning": "조종하다, 조작하다"
+    },
+    {
+      "no": 5,
+      "word": "flour",
+      "meaning": "밀가루"
+    },
+    {
+      "no": 6,
+      "word": "canal",
+      "meaning": "수로, 운하"
+    },
+    {
+      "no": 7,
+      "word": "contemplate",
+      "meaning": "숙고하다, 응시하다"
+    },
+    {
+      "no": 8,
+      "word": "govern",
+      "meaning": "통치하다, 지배[좌우]하다"
+    },
+    {
+      "no": 9,
+      "word": "restrain",
+      "meaning": "억제하다, 구속하다"
+    },
+    {
+      "no": 10,
+      "word": "drowsy",
+      "meaning": "졸리는"
+    },
+    {
+      "no": 11,
+      "word": "appreciate",
+      "meaning": "이해하다, 감상하다, 고맙게 생각하다"
+    },
+    {
+      "no": 12,
+      "word": "cemetery",
+      "meaning": "공동묘지"
+    },
+    {
+      "no": 13,
+      "word": "intriguing",
+      "meaning": "아주 흥미로운"
+    },
+    {
+      "no": 14,
+      "word": "mentor",
+      "meaning": "조언자"
+    },
+    {
+      "no": 15,
+      "word": "underlying",
+      "meaning": "밑에 놓인, 근본적인"
+    },
+    {
+      "no": 16,
+      "word": "commemorate",
+      "meaning": "기념하다"
+    },
+    {
+      "no": 17,
+      "word": "constrict",
+      "meaning": "죄다, 위축시키다"
+    },
+    {
+      "no": 18,
+      "word": "measurement",
+      "meaning": "측정, 측량, 치수"
+    },
+    {
+      "no": 19,
+      "word": "enclose",
+      "meaning": "동봉하다, 에워싸다"
+    },
+    {
+      "no": 20,
+      "word": "inspect",
+      "meaning": "검사하다, 점검하다"
+    },
+    {
+      "no": 21,
+      "word": "transport",
+      "meaning": "수송[운송]하다; 수송"
+    },
+    {
+      "no": 22,
+      "word": "censorship",
+      "meaning": "검열"
+    },
+    {
+      "no": 23,
+      "word": "originate",
+      "meaning": "시작되다, 비롯하다"
+    },
+    {
+      "no": 24,
+      "word": "feminine",
+      "meaning": "여성의, 여성스러운"
+    },
+    {
+      "no": 25,
+      "word": "norm",
+      "meaning": "규범, 기준, 표준"
+    },
+    {
+      "no": 26,
+      "word": "verbal",
+      "meaning": "말의, 구두의"
+    },
+    {
+      "no": 27,
+      "word": "pasture",
+      "meaning": "목초지, 목장"
+    },
+    {
+      "no": 28,
+      "word": "primitive",
+      "meaning": "원시의, 초기의, 미개의"
+    },
+    {
+      "no": 29,
+      "word": "nasty",
+      "meaning": "더러운, 불쾌한"
+    },
+    {
+      "no": 30,
+      "word": "curse",
+      "meaning": "저주; 저주하다"
+    },
+    {
+      "no": 31,
+      "word": "stare",
+      "meaning": "응시하다, 노려보다"
+    },
+    {
+      "no": 32,
+      "word": "random",
+      "meaning": "무작위의, 임의의"
+    },
+    {
+      "no": 33,
+      "word": "bundle",
+      "meaning": "묶음, 꾸러미"
+    },
+    {
+      "no": 34,
+      "word": "keen",
+      "meaning": "날카로운, 예민한, 간절히 ~하고 싶은"
+    },
+    {
+      "no": 35,
+      "word": "toxic",
+      "meaning": "유독한, 중독의"
+    },
+    {
+      "no": 36,
+      "word": "chronic",
+      "meaning": "만성적인, 장기간의"
+    },
+    {
+      "no": 37,
+      "word": "aid",
+      "meaning": "돕다; 도움, 조력"
+    },
+    {
+      "no": 38,
+      "word": "deed",
+      "meaning": "행위, 업적"
+    },
+    {
+      "no": 39,
+      "word": "superficial",
+      "meaning": "표면상의, 피상적인"
+    },
+    {
+      "no": 40,
+      "word": "irrigation",
+      "meaning": "관개, 물 대기"
+    },
+    {
+      "no": 41,
+      "word": "garment",
+      "meaning": "의복"
+    },
+    {
+      "no": 42,
+      "word": "adverse",
+      "meaning": "거스르는, 반대의, 부정적인"
+    },
+    {
+      "no": 43,
+      "word": "endeavor",
+      "meaning": "노력; 노력하다"
+    },
+    {
+      "no": 44,
+      "word": "compress",
+      "meaning": "압축하다"
+    },
+    {
+      "no": 45,
+      "word": "carriage",
+      "meaning": "마차, 탈것"
+    },
+    {
+      "no": 46,
+      "word": "reputation",
+      "meaning": "평판, 명성"
+    },
+    {
+      "no": 47,
+      "word": "designate",
+      "meaning": "지정하다, 가리키다"
+    },
+    {
+      "no": 48,
+      "word": "flaw",
+      "meaning": "결점, 흠"
+    },
+    {
+      "no": 49,
+      "word": "interchange",
+      "meaning": "교환, 교차점; 교환하다"
+    },
+    {
+      "no": 50,
+      "word": "outgoing",
+      "meaning": "외향적인"
+    },
+    {
+      "no": 51,
+      "word": "leverage",
+      "meaning": "이용하다; 지레의 작용, 영향력"
+    },
+    {
+      "no": 52,
+      "word": "swear",
+      "meaning": "맹세하다, 욕하다"
+    },
+    {
+      "no": 53,
+      "word": "intense",
+      "meaning": "강렬한"
+    },
+    {
+      "no": 54,
+      "word": "stem",
+      "meaning": "생기다, 일어나다; 줄기, 대"
+    },
+    {
+      "no": 55,
+      "word": "propaganda",
+      "meaning": "선전 활동, 선전"
+    },
+    {
+      "no": 56,
+      "word": "consecutive",
+      "meaning": "연속적인, 일관된"
+    },
+    {
+      "no": 57,
+      "word": "advance",
+      "meaning": "나아가게 하다, 진척시키다; 전진, 증진"
+    },
+    {
+      "no": 58,
+      "word": "refuge",
+      "meaning": "피난, 피난처, 위안"
+    },
+    {
+      "no": 59,
+      "word": "crust",
+      "meaning": "껍질, (지질) 지각"
+    },
+    {
+      "no": 60,
+      "word": "feast",
+      "meaning": "즐겁게[기쁘게] 하다; 축제(일), 잔치"
+    },
+    {
+      "no": 61,
+      "word": "intuitive",
+      "meaning": "직관적인, 직관에 의한"
+    },
+    {
+      "no": 62,
+      "word": "testify",
+      "meaning": "검증하다, 증명하다, 증언하다"
+    },
+    {
+      "no": 63,
+      "word": "spontaneous",
+      "meaning": "자발적인, 자연히 일어나는"
+    },
+    {
+      "no": 64,
+      "word": "dramatic",
+      "meaning": "연극의, 극적인"
+    },
+    {
+      "no": 65,
+      "word": "allergy",
+      "meaning": "알레르기"
+    },
+    {
+      "no": 66,
+      "word": "insert",
+      "meaning": "삽입하다"
+    },
+    {
+      "no": 67,
+      "word": "academic",
+      "meaning": "학문적인, 학구적인"
+    },
+    {
+      "no": 68,
+      "word": "segregation",
+      "meaning": "인종 차별, 분리"
+    },
+    {
+      "no": 69,
+      "word": "vertical",
+      "meaning": "수직의"
+    },
+    {
+      "no": 70,
+      "word": "exaggerate",
+      "meaning": "과장하다, 과장해서 말하다"
+    },
+    {
+      "no": 71,
+      "word": "multitask",
+      "meaning": "다중 작업을 하다"
+    },
+    {
+      "no": 72,
+      "word": "steep",
+      "meaning": "가파른, 경사가 급한"
+    },
+    {
+      "no": 73,
+      "word": "comprehend",
+      "meaning": "이해하다, 포함하다"
+    },
+    {
+      "no": 74,
+      "word": "liberate",
+      "meaning": "해방하다, 자유롭게 하다"
+    },
+    {
+      "no": 75,
+      "word": "strip",
+      "meaning": "박탈하다, (옷이나 껍질을) 벗기다"
+    },
+    {
+      "no": 76,
+      "word": "appetite",
+      "meaning": "식욕, 욕망, 욕구"
+    },
+    {
+      "no": 77,
+      "word": "vivid",
+      "meaning": "생생한"
+    },
+    {
+      "no": 78,
+      "word": "experiment",
+      "meaning": "실험; 실험하다"
+    },
+    {
+      "no": 79,
+      "word": "plunge",
+      "meaning": "뛰어들다, 던져 넣다"
+    },
+    {
+      "no": 80,
+      "word": "grill",
+      "meaning": "석쇠; 석쇠로 굽다, 심문하다"
+    }
+  ]
+}

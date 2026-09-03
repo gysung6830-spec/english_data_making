@@ -1,0 +1,406 @@
+{
+  "title": "Day 35~36",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "sector",
+      "meaning": "분야, 지역, 부채꼴"
+    },
+    {
+      "no": 2,
+      "word": "inborn",
+      "meaning": "타고난"
+    },
+    {
+      "no": 3,
+      "word": "lyric",
+      "meaning": "노래 가사, 서정시; 서정적인"
+    },
+    {
+      "no": 4,
+      "word": "vacant",
+      "meaning": "빈, 비어 있는"
+    },
+    {
+      "no": 5,
+      "word": "technical",
+      "meaning": "기술[기법]의, 전문적인"
+    },
+    {
+      "no": 6,
+      "word": "cling",
+      "meaning": "달라붙다, 집착하다"
+    },
+    {
+      "no": 7,
+      "word": "vaccine",
+      "meaning": "백신, (컴퓨터) 바이러스 예방 프로그램"
+    },
+    {
+      "no": 8,
+      "word": "simulate",
+      "meaning": "가장하다, 모의실험[훈련]하다"
+    },
+    {
+      "no": 9,
+      "word": "odd",
+      "meaning": "이상한, 홀수의"
+    },
+    {
+      "no": 10,
+      "word": "anonymous",
+      "meaning": "익명의"
+    },
+    {
+      "no": 11,
+      "word": "beloved",
+      "meaning": "사랑스러운"
+    },
+    {
+      "no": 12,
+      "word": "integration",
+      "meaning": "통합, (수학) 적분"
+    },
+    {
+      "no": 13,
+      "word": "spade",
+      "meaning": "삽"
+    },
+    {
+      "no": 14,
+      "word": "tread",
+      "meaning": "밟다, 걷다; 밟음"
+    },
+    {
+      "no": 15,
+      "word": "mole",
+      "meaning": "사마귀, 점"
+    },
+    {
+      "no": 16,
+      "word": "bury",
+      "meaning": "파묻다"
+    },
+    {
+      "no": 17,
+      "word": "proportion",
+      "meaning": "비율, 부분"
+    },
+    {
+      "no": 18,
+      "word": "mutation",
+      "meaning": "돌연변이, 변화"
+    },
+    {
+      "no": 19,
+      "word": "fad",
+      "meaning": "일시적 유행"
+    },
+    {
+      "no": 20,
+      "word": "solitary",
+      "meaning": "혼자의, 외로운, 고독한"
+    },
+    {
+      "no": 21,
+      "word": "implement",
+      "meaning": "도구; 실행하다"
+    },
+    {
+      "no": 22,
+      "word": "clone",
+      "meaning": "복제 생물, 클론; 복제하다"
+    },
+    {
+      "no": 23,
+      "word": "stool",
+      "meaning": "(등받이가 없는) 의자, 변기"
+    },
+    {
+      "no": 24,
+      "word": "thrill",
+      "meaning": "스릴, 전율; 몹시 신나게 하다, 감동시키다"
+    },
+    {
+      "no": 25,
+      "word": "literature",
+      "meaning": "문학, 문예, 문헌"
+    },
+    {
+      "no": 26,
+      "word": "vacuum",
+      "meaning": "진공, 진공청소기; 진공청소기로 청소하다"
+    },
+    {
+      "no": 27,
+      "word": "obscure",
+      "meaning": "불분명한, 이해하기 어려운, 무명의"
+    },
+    {
+      "no": 28,
+      "word": "inhale",
+      "meaning": "(숨을) 들이쉬다"
+    },
+    {
+      "no": 29,
+      "word": "ease",
+      "meaning": "진정시키다; 편함, 용이함"
+    },
+    {
+      "no": 30,
+      "word": "overcome",
+      "meaning": "극복하다, 압도하다"
+    },
+    {
+      "no": 31,
+      "word": "wander",
+      "meaning": "(정처 없이) 돌아다니다; 유랑, 방랑"
+    },
+    {
+      "no": 32,
+      "word": "anchor",
+      "meaning": "닻, 앵커; 닻을 내리다"
+    },
+    {
+      "no": 33,
+      "word": "referee",
+      "meaning": "심판; 심판하다"
+    },
+    {
+      "no": 34,
+      "word": "fatigue",
+      "meaning": "피로; 피곤하게 하다"
+    },
+    {
+      "no": 35,
+      "word": "antibiotic",
+      "meaning": "항생 물질, 항생제"
+    },
+    {
+      "no": 36,
+      "word": "surplus",
+      "meaning": "과잉, 나머지; 과잉의, 나머지의"
+    },
+    {
+      "no": 37,
+      "word": "withstand",
+      "meaning": "견디다"
+    },
+    {
+      "no": 38,
+      "word": "skyscraper",
+      "meaning": "마천루, 고층 건물"
+    },
+    {
+      "no": 39,
+      "word": "overtake",
+      "meaning": "따라잡다"
+    },
+    {
+      "no": 40,
+      "word": "affirm",
+      "meaning": "단언하다"
+    },
+    {
+      "no": 41,
+      "word": "fund",
+      "meaning": "기금; 자금을 제공하다"
+    },
+    {
+      "no": 42,
+      "word": "inquire",
+      "meaning": "묻다, 조사하다"
+    },
+    {
+      "no": 43,
+      "word": "rust",
+      "meaning": "녹; 녹슬다, 녹이 슬게 하다"
+    },
+    {
+      "no": 44,
+      "word": "tariff",
+      "meaning": "관세; 관세를 부과하다"
+    },
+    {
+      "no": 45,
+      "word": "orchard",
+      "meaning": "과수원"
+    },
+    {
+      "no": 46,
+      "word": "wicked",
+      "meaning": "사악한"
+    },
+    {
+      "no": 47,
+      "word": "gymnastics",
+      "meaning": "체육, 체조"
+    },
+    {
+      "no": 48,
+      "word": "compound",
+      "meaning": "화합물; 합성의; 혼합하다"
+    },
+    {
+      "no": 49,
+      "word": "asymmetry",
+      "meaning": "비대칭, 불균형"
+    },
+    {
+      "no": 50,
+      "word": "divide",
+      "meaning": "나누다, 분리하다, 나누어지다; 분할"
+    },
+    {
+      "no": 51,
+      "word": "collide",
+      "meaning": "충돌하다"
+    },
+    {
+      "no": 52,
+      "word": "tyrant",
+      "meaning": "폭군, 전제 군주"
+    },
+    {
+      "no": 53,
+      "word": "spectacle",
+      "meaning": "광경"
+    },
+    {
+      "no": 54,
+      "word": "reed",
+      "meaning": "갈대; 갈대의"
+    },
+    {
+      "no": 55,
+      "word": "boost",
+      "meaning": "상승, 밀어 올림; 밀어 올리다, (생산량을) 증가하다"
+    },
+    {
+      "no": 56,
+      "word": "fortress",
+      "meaning": "(대규모의) 요새"
+    },
+    {
+      "no": 57,
+      "word": "prospect",
+      "meaning": "가능성, 전망"
+    },
+    {
+      "no": 58,
+      "word": "correspond",
+      "meaning": "일치하다, 서신 왕래하다"
+    },
+    {
+      "no": 59,
+      "word": "migrate",
+      "meaning": "이동하다, 이주하다"
+    },
+    {
+      "no": 60,
+      "word": "resemble",
+      "meaning": "닮다, 비슷[유사]하다"
+    },
+    {
+      "no": 61,
+      "word": "bias",
+      "meaning": "편견"
+    },
+    {
+      "no": 62,
+      "word": "compassion",
+      "meaning": "연민, 동정"
+    },
+    {
+      "no": 63,
+      "word": "loop",
+      "meaning": "고리"
+    },
+    {
+      "no": 64,
+      "word": "preoccupation",
+      "meaning": "몰두, 집착, 선취"
+    },
+    {
+      "no": 65,
+      "word": "sprain",
+      "meaning": "(발목·손목 등을) 삐다"
+    },
+    {
+      "no": 66,
+      "word": "disrupt",
+      "meaning": "혼란에 빠뜨리다, 방해하다"
+    },
+    {
+      "no": 67,
+      "word": "quote",
+      "meaning": "인용하다"
+    },
+    {
+      "no": 68,
+      "word": "hypothesis",
+      "meaning": "가설"
+    },
+    {
+      "no": 69,
+      "word": "vomit",
+      "meaning": "토하다; 구토"
+    },
+    {
+      "no": 70,
+      "word": "paste",
+      "meaning": "풀, 반죽; 풀칠하다, 붙이다"
+    },
+    {
+      "no": 71,
+      "word": "yeast",
+      "meaning": "효모; 발효하다"
+    },
+    {
+      "no": 72,
+      "word": "gross",
+      "meaning": "엄청난, 총합의; 총합; ~의 총이익을 올리다"
+    },
+    {
+      "no": 73,
+      "word": "prophecy",
+      "meaning": "예언"
+    },
+    {
+      "no": 74,
+      "word": "memorial",
+      "meaning": "기념물, 기념관"
+    },
+    {
+      "no": 75,
+      "word": "overlap",
+      "meaning": "겹치다; 중복"
+    },
+    {
+      "no": 76,
+      "word": "provoke",
+      "meaning": "선동하다, 자극하다"
+    },
+    {
+      "no": 77,
+      "word": "cue",
+      "meaning": "단서, 신호"
+    },
+    {
+      "no": 78,
+      "word": "peel",
+      "meaning": "(과일 등의) 껍질을 벗기다; 껍질"
+    },
+    {
+      "no": 79,
+      "word": "sequence",
+      "meaning": "순서, 결과, 연속"
+    },
+    {
+      "no": 80,
+      "word": "last",
+      "meaning": "계속되다"
+    }
+  ]
+}

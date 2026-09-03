@@ -1,0 +1,406 @@
+{
+  "title": "Day 31~32",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "cluster",
+      "meaning": "무리, (과일·꽃의) 송이, 성단"
+    },
+    {
+      "no": 2,
+      "word": "explore",
+      "meaning": "탐험하다, 탐구하다"
+    },
+    {
+      "no": 3,
+      "word": "cognitive",
+      "meaning": "인식의, 인지력 있는"
+    },
+    {
+      "no": 4,
+      "word": "upcoming",
+      "meaning": "다가오는"
+    },
+    {
+      "no": 5,
+      "word": "corrupt",
+      "meaning": "부정한, 부패한; 타락시키다"
+    },
+    {
+      "no": 6,
+      "word": "depth",
+      "meaning": "깊이"
+    },
+    {
+      "no": 7,
+      "word": "swamp",
+      "meaning": "늪, 습지"
+    },
+    {
+      "no": 8,
+      "word": "storage",
+      "meaning": "저장, 저장고"
+    },
+    {
+      "no": 9,
+      "word": "evaporate",
+      "meaning": "증발하다"
+    },
+    {
+      "no": 10,
+      "word": "rush",
+      "meaning": "돌진하다, 갑자기 일어나다; 돌진, 황급한 움직임"
+    },
+    {
+      "no": 11,
+      "word": "abnormal",
+      "meaning": "비정상적인"
+    },
+    {
+      "no": 12,
+      "word": "gorgeous",
+      "meaning": "아주 멋진, 화려한"
+    },
+    {
+      "no": 13,
+      "word": "deluxe",
+      "meaning": "호화로운, 사치스러운"
+    },
+    {
+      "no": 14,
+      "word": "regard",
+      "meaning": "~으로 여기다; 관계, 고려"
+    },
+    {
+      "no": 15,
+      "word": "equator",
+      "meaning": "적도"
+    },
+    {
+      "no": 16,
+      "word": "license",
+      "meaning": "면허, 인가; 면허[인가]를 내주다"
+    },
+    {
+      "no": 17,
+      "word": "trace",
+      "meaning": "흔적; 흔적을 쫓다"
+    },
+    {
+      "no": 18,
+      "word": "embrace",
+      "meaning": "포옹; 포옹하다, 받아들이다"
+    },
+    {
+      "no": 19,
+      "word": "convey",
+      "meaning": "전달하다, 나르다"
+    },
+    {
+      "no": 20,
+      "word": "extract",
+      "meaning": "추출하다; 추출물"
+    },
+    {
+      "no": 21,
+      "word": "factual",
+      "meaning": "실제의"
+    },
+    {
+      "no": 22,
+      "word": "stroke",
+      "meaning": "뇌졸중, 강타"
+    },
+    {
+      "no": 23,
+      "word": "trivial",
+      "meaning": "사소한"
+    },
+    {
+      "no": 24,
+      "word": "consistent",
+      "meaning": "일관된, 모순이 없는"
+    },
+    {
+      "no": 25,
+      "word": "carbon",
+      "meaning": "탄소"
+    },
+    {
+      "no": 26,
+      "word": "warrant",
+      "meaning": "보증, 영장; 보증하다"
+    },
+    {
+      "no": 27,
+      "word": "blade",
+      "meaning": "칼날"
+    },
+    {
+      "no": 28,
+      "word": "reconciliation",
+      "meaning": "화해"
+    },
+    {
+      "no": 29,
+      "word": "enlist",
+      "meaning": "(군인을) 모집하다, 도움을 얻다"
+    },
+    {
+      "no": 30,
+      "word": "humble",
+      "meaning": "겸손한, 비천한"
+    },
+    {
+      "no": 31,
+      "word": "external",
+      "meaning": "외부의; 외부"
+    },
+    {
+      "no": 32,
+      "word": "divine",
+      "meaning": "신의, 신성한"
+    },
+    {
+      "no": 33,
+      "word": "lame",
+      "meaning": "다리를 저는"
+    },
+    {
+      "no": 34,
+      "word": "derive",
+      "meaning": "이끌어 내다, ~에서 비롯되다"
+    },
+    {
+      "no": 35,
+      "word": "plea",
+      "meaning": "탄원, 간청, 변명"
+    },
+    {
+      "no": 36,
+      "word": "herd",
+      "meaning": "(짐승의) 떼"
+    },
+    {
+      "no": 37,
+      "word": "ultrasound",
+      "meaning": "초음파"
+    },
+    {
+      "no": 38,
+      "word": "ceramic",
+      "meaning": "도자기; 도자기의"
+    },
+    {
+      "no": 39,
+      "word": "complement",
+      "meaning": "보완하다; 보충물"
+    },
+    {
+      "no": 40,
+      "word": "emerge",
+      "meaning": "나타나다, 드러나다"
+    },
+    {
+      "no": 41,
+      "word": "intelligence",
+      "meaning": "지능, 지성"
+    },
+    {
+      "no": 42,
+      "word": "hygiene",
+      "meaning": "위생, 위생학"
+    },
+    {
+      "no": 43,
+      "word": "burglar",
+      "meaning": "(주거 침입) 강도"
+    },
+    {
+      "no": 44,
+      "word": "expedition",
+      "meaning": "탐험(대)"
+    },
+    {
+      "no": 45,
+      "word": "sour",
+      "meaning": "신맛이 나는"
+    },
+    {
+      "no": 46,
+      "word": "submit",
+      "meaning": "복종시키다, 복종하다, 제출하다"
+    },
+    {
+      "no": 47,
+      "word": "repetitive",
+      "meaning": "반복성의"
+    },
+    {
+      "no": 48,
+      "word": "transplant",
+      "meaning": "이식; 이식하다"
+    },
+    {
+      "no": 49,
+      "word": "sewage",
+      "meaning": "하수"
+    },
+    {
+      "no": 50,
+      "word": "locate",
+      "meaning": "(수동태로) ~에 위치하다, (위치를) 찾아내다"
+    },
+    {
+      "no": 51,
+      "word": "halt",
+      "meaning": "정지, 일시 멈춤; 정지하다, 정지시키다"
+    },
+    {
+      "no": 52,
+      "word": "imprison",
+      "meaning": "투옥하다"
+    },
+    {
+      "no": 53,
+      "word": "lottery",
+      "meaning": "복권, 추첨"
+    },
+    {
+      "no": 54,
+      "word": "convenience",
+      "meaning": "편의, 편리"
+    },
+    {
+      "no": 55,
+      "word": "pierce",
+      "meaning": "꿰뚫다, ~에 구멍을 뚫다"
+    },
+    {
+      "no": 56,
+      "word": "confess",
+      "meaning": "고백하다"
+    },
+    {
+      "no": 57,
+      "word": "contaminate",
+      "meaning": "오염시키다"
+    },
+    {
+      "no": 58,
+      "word": "plague",
+      "meaning": "전염병"
+    },
+    {
+      "no": 59,
+      "word": "oppress",
+      "meaning": "억압하다"
+    },
+    {
+      "no": 60,
+      "word": "mention",
+      "meaning": "언급하다; 언급"
+    },
+    {
+      "no": 61,
+      "word": "flattery",
+      "meaning": "아첨"
+    },
+    {
+      "no": 62,
+      "word": "subjective",
+      "meaning": "주관적인, 주격의"
+    },
+    {
+      "no": 63,
+      "word": "bounce",
+      "meaning": "(공이) 튀다, 되튀다, 뛰어오르다"
+    },
+    {
+      "no": 64,
+      "word": "certificate",
+      "meaning": "증명서, 자격[면허]증"
+    },
+    {
+      "no": 65,
+      "word": "revive",
+      "meaning": "되살아나다"
+    },
+    {
+      "no": 66,
+      "word": "revenue",
+      "meaning": "수입, 수익"
+    },
+    {
+      "no": 67,
+      "word": "virtue",
+      "meaning": "미덕"
+    },
+    {
+      "no": 68,
+      "word": "motion",
+      "meaning": "운동, 움직임, 몸짓; 몸짓으로 지시[신호]하다"
+    },
+    {
+      "no": 69,
+      "word": "leftover",
+      "meaning": "나머지의, 남은; 나머지, 남은 음식"
+    },
+    {
+      "no": 70,
+      "word": "hinder",
+      "meaning": "방해하다"
+    },
+    {
+      "no": 71,
+      "word": "immense",
+      "meaning": "막대한"
+    },
+    {
+      "no": 72,
+      "word": "patent",
+      "meaning": "특허, 특허권; ~의 특허를 얻다"
+    },
+    {
+      "no": 73,
+      "word": "ponder",
+      "meaning": "심사숙고하다"
+    },
+    {
+      "no": 74,
+      "word": "pulse",
+      "meaning": "맥박"
+    },
+    {
+      "no": 75,
+      "word": "allocate",
+      "meaning": "할당하다, 분배하다"
+    },
+    {
+      "no": 76,
+      "word": "arithmetic",
+      "meaning": "산수, 연산"
+    },
+    {
+      "no": 77,
+      "word": "accord",
+      "meaning": "일치하다, 주다, 부여하다; 일치, 협정"
+    },
+    {
+      "no": 78,
+      "word": "regret",
+      "meaning": "후회하다, 한탄하다; 유감, 후회"
+    },
+    {
+      "no": 79,
+      "word": "controversy",
+      "meaning": "논란, 논쟁"
+    },
+    {
+      "no": 80,
+      "word": "acknowledge",
+      "meaning": "인정하다"
+    }
+  ]
+}

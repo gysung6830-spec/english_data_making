@@ -1,0 +1,406 @@
+{
+  "title": "Day 23~24",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "behalf",
+      "meaning": "이익, 자기편"
+    },
+    {
+      "no": 2,
+      "word": "rod",
+      "meaning": "막대기, 회초리"
+    },
+    {
+      "no": 3,
+      "word": "principal",
+      "meaning": "주요한, 제1의; (단체의) 장, 주역"
+    },
+    {
+      "no": 4,
+      "word": "casual",
+      "meaning": "우연한, 무심결의, 격식을 차리지 않는"
+    },
+    {
+      "no": 5,
+      "word": "distraction",
+      "meaning": "주의 산만, (정신을) 산만하게 하는 것, 기분 전환"
+    },
+    {
+      "no": 6,
+      "word": "exclude",
+      "meaning": "배제하다, 제외하다"
+    },
+    {
+      "no": 7,
+      "word": "tenant",
+      "meaning": "세입자, 주민"
+    },
+    {
+      "no": 8,
+      "word": "sacred",
+      "meaning": "신성한, 성스러운"
+    },
+    {
+      "no": 9,
+      "word": "sufficient",
+      "meaning": "충분한"
+    },
+    {
+      "no": 10,
+      "word": "nominate",
+      "meaning": "(후보자로) 지명[추천]하다, 임명하다"
+    },
+    {
+      "no": 11,
+      "word": "municipal",
+      "meaning": "지방(자치제)의, 시의"
+    },
+    {
+      "no": 12,
+      "word": "symbolic",
+      "meaning": "상징적인"
+    },
+    {
+      "no": 13,
+      "word": "outlook",
+      "meaning": "전망, 조망"
+    },
+    {
+      "no": 14,
+      "word": "distortion",
+      "meaning": "왜곡, 찌그러뜨림"
+    },
+    {
+      "no": 15,
+      "word": "liquid",
+      "meaning": "액체; 액체의"
+    },
+    {
+      "no": 16,
+      "word": "prompt",
+      "meaning": "즉각적인, 신속한; 촉구하다, 자극하다"
+    },
+    {
+      "no": 17,
+      "word": "roam",
+      "meaning": "배회하다, 돌아다니다"
+    },
+    {
+      "no": 18,
+      "word": "anxiety",
+      "meaning": "걱정, 불안, 열망"
+    },
+    {
+      "no": 19,
+      "word": "tablet",
+      "meaning": "(의학) 정제, 알약, (평평한) 판"
+    },
+    {
+      "no": 20,
+      "word": "resent",
+      "meaning": "분개하다, 화를 내다"
+    },
+    {
+      "no": 21,
+      "word": "partial",
+      "meaning": "부분적인, 편파적인"
+    },
+    {
+      "no": 22,
+      "word": "peasant",
+      "meaning": "농민, 소작농"
+    },
+    {
+      "no": 23,
+      "word": "mammal",
+      "meaning": "포유동물"
+    },
+    {
+      "no": 24,
+      "word": "anticipate",
+      "meaning": "예상하다, 기대하다"
+    },
+    {
+      "no": 25,
+      "word": "dynamic",
+      "meaning": "동적인, 역학의"
+    },
+    {
+      "no": 26,
+      "word": "industry",
+      "meaning": "산업, 공업"
+    },
+    {
+      "no": 27,
+      "word": "pavement",
+      "meaning": "보도, 포장도로"
+    },
+    {
+      "no": 28,
+      "word": "suspend",
+      "meaning": "매달다, 중지하다"
+    },
+    {
+      "no": 29,
+      "word": "trigger",
+      "meaning": "촉발하다, 유발하다; 방아쇠, 계기"
+    },
+    {
+      "no": 30,
+      "word": "prescribe",
+      "meaning": "규정하다, (약을) 처방하다"
+    },
+    {
+      "no": 31,
+      "word": "suggest",
+      "meaning": "암시하다, 넌지시 말하다"
+    },
+    {
+      "no": 32,
+      "word": "gaze",
+      "meaning": "뚫어지게 보다, 응시하다"
+    },
+    {
+      "no": 33,
+      "word": "control",
+      "meaning": "지배하다, 제어하다; 지배, 제어"
+    },
+    {
+      "no": 34,
+      "word": "phenomenon",
+      "meaning": "현상, 사건, 비범한 인물"
+    },
+    {
+      "no": 35,
+      "word": "deliberate",
+      "meaning": "의도적인, 신중한; 숙고하다"
+    },
+    {
+      "no": 36,
+      "word": "erupt",
+      "meaning": "분출하다, 폭발하다"
+    },
+    {
+      "no": 37,
+      "word": "suffer",
+      "meaning": "고통받다, 겪다"
+    },
+    {
+      "no": 38,
+      "word": "refine",
+      "meaning": "정제하다, 개선하다"
+    },
+    {
+      "no": 39,
+      "word": "decent",
+      "meaning": "제대로 된, 품위 있는"
+    },
+    {
+      "no": 40,
+      "word": "pursue",
+      "meaning": "추구하다, 쫓다"
+    },
+    {
+      "no": 41,
+      "word": "infinite",
+      "meaning": "무한한"
+    },
+    {
+      "no": 42,
+      "word": "by-product",
+      "meaning": "부산물"
+    },
+    {
+      "no": 43,
+      "word": "flexible",
+      "meaning": "융통성 있는, 유연한"
+    },
+    {
+      "no": 44,
+      "word": "iceberg",
+      "meaning": "빙산"
+    },
+    {
+      "no": 45,
+      "word": "monologue",
+      "meaning": "독백"
+    },
+    {
+      "no": 46,
+      "word": "federal",
+      "meaning": "연방의, 연합의"
+    },
+    {
+      "no": 47,
+      "word": "stable",
+      "meaning": "안정된; 마구간"
+    },
+    {
+      "no": 48,
+      "word": "supreme",
+      "meaning": "최고의"
+    },
+    {
+      "no": 49,
+      "word": "booth",
+      "meaning": "칸막이한 공간, 부스, 노점"
+    },
+    {
+      "no": 50,
+      "word": "gloom",
+      "meaning": "어둠, 우울"
+    },
+    {
+      "no": 51,
+      "word": "judge",
+      "meaning": "판단하다; 재판관"
+    },
+    {
+      "no": 52,
+      "word": "trade",
+      "meaning": "거래[교환]하다; 무역"
+    },
+    {
+      "no": 53,
+      "word": "prepare",
+      "meaning": "준비하다"
+    },
+    {
+      "no": 54,
+      "word": "diminish",
+      "meaning": "감소하다"
+    },
+    {
+      "no": 55,
+      "word": "collapse",
+      "meaning": "무너지다, 붕괴하다; 붕괴"
+    },
+    {
+      "no": 56,
+      "word": "revise",
+      "meaning": "변경하다, 개정[수정]하다"
+    },
+    {
+      "no": 57,
+      "word": "bud",
+      "meaning": "싹; 싹트다"
+    },
+    {
+      "no": 58,
+      "word": "plot",
+      "meaning": "줄거리, 음모; 음모를 꾸미다"
+    },
+    {
+      "no": 59,
+      "word": "sympathy",
+      "meaning": "동정, 공감"
+    },
+    {
+      "no": 60,
+      "word": "worthwhile",
+      "meaning": "~할 가치가 있는"
+    },
+    {
+      "no": 61,
+      "word": "internal",
+      "meaning": "내부의"
+    },
+    {
+      "no": 62,
+      "word": "fate",
+      "meaning": "운명"
+    },
+    {
+      "no": 63,
+      "word": "martial",
+      "meaning": "전쟁의, 군대의"
+    },
+    {
+      "no": 64,
+      "word": "nerve",
+      "meaning": "신경"
+    },
+    {
+      "no": 65,
+      "word": "support",
+      "meaning": "지지하다, 받치다, 부양하다; 지지, 지탱함, 부양"
+    },
+    {
+      "no": 66,
+      "word": "diverse",
+      "meaning": "다른, 다양한"
+    },
+    {
+      "no": 67,
+      "word": "mutual",
+      "meaning": "서로의, 공통의"
+    },
+    {
+      "no": 68,
+      "word": "transaction",
+      "meaning": "거래, 처리"
+    },
+    {
+      "no": 69,
+      "word": "abrupt",
+      "meaning": "갑작스러운"
+    },
+    {
+      "no": 70,
+      "word": "Atlantic",
+      "meaning": "대서양; 대서양의"
+    },
+    {
+      "no": 71,
+      "word": "edible",
+      "meaning": "먹을 수 있는, 식용의"
+    },
+    {
+      "no": 72,
+      "word": "characteristic",
+      "meaning": "특징, 특색; 독특한, 특징적인"
+    },
+    {
+      "no": 73,
+      "word": "devote",
+      "meaning": "(노력·시간 등을) 바치다"
+    },
+    {
+      "no": 74,
+      "word": "insult",
+      "meaning": "모욕하다; 모욕"
+    },
+    {
+      "no": 75,
+      "word": "desert",
+      "meaning": "사막; 사막의, 불모의; 버리다, 도주하다"
+    },
+    {
+      "no": 76,
+      "word": "priceless",
+      "meaning": "대단히 귀중한"
+    },
+    {
+      "no": 77,
+      "word": "weird",
+      "meaning": "이상한, 기묘한"
+    },
+    {
+      "no": 78,
+      "word": "monetary",
+      "meaning": "화폐의"
+    },
+    {
+      "no": 79,
+      "word": "concern",
+      "meaning": "관련되다, 걱정하게 하다; 걱정, 관심사"
+    },
+    {
+      "no": 80,
+      "word": "jealous",
+      "meaning": "질투하는"
+    }
+  ]
+}

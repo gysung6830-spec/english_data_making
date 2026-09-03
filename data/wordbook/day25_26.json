@@ -1,0 +1,406 @@
+{
+  "title": "Day 25~26",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "paralysis",
+      "meaning": "마비"
+    },
+    {
+      "no": 2,
+      "word": "stun",
+      "meaning": "놀라게 하다, 기절시키다"
+    },
+    {
+      "no": 3,
+      "word": "dominate",
+      "meaning": "지배하다"
+    },
+    {
+      "no": 4,
+      "word": "dictator",
+      "meaning": "독재자, 구술하는 사람"
+    },
+    {
+      "no": 5,
+      "word": "sermon",
+      "meaning": "설교"
+    },
+    {
+      "no": 6,
+      "word": "force",
+      "meaning": "힘, 영향력; 강요하다"
+    },
+    {
+      "no": 7,
+      "word": "aggressive",
+      "meaning": "공격적인, 적극적인"
+    },
+    {
+      "no": 8,
+      "word": "race",
+      "meaning": "경주[경쟁]하다, 질주하다; 경주, 경쟁, 인종"
+    },
+    {
+      "no": 9,
+      "word": "dawn",
+      "meaning": "새벽; 이해되기 시작하다, 날이 새다"
+    },
+    {
+      "no": 10,
+      "word": "crucial",
+      "meaning": "중대한, 중요한"
+    },
+    {
+      "no": 11,
+      "word": "overlook",
+      "meaning": "간과하다, 너그럽게 봐주다, 내려다보다"
+    },
+    {
+      "no": 12,
+      "word": "frown",
+      "meaning": "눈살을 찌푸리다; 찡그린 얼굴"
+    },
+    {
+      "no": 13,
+      "word": "attribute",
+      "meaning": "~의 결과로 여기다; 속성"
+    },
+    {
+      "no": 14,
+      "word": "maintain",
+      "meaning": "유지하다, 지지하다"
+    },
+    {
+      "no": 15,
+      "word": "startle",
+      "meaning": "깜짝 놀라게 하다"
+    },
+    {
+      "no": 16,
+      "word": "nourish",
+      "meaning": "영양분을 주다, 기르다"
+    },
+    {
+      "no": 17,
+      "word": "disguise",
+      "meaning": "변장하다, 숨기다; 변장, 은폐"
+    },
+    {
+      "no": 18,
+      "word": "curriculum",
+      "meaning": "교육 과정, 커리큘럼"
+    },
+    {
+      "no": 19,
+      "word": "postpone",
+      "meaning": "연기하다, 뒤로 미루다"
+    },
+    {
+      "no": 20,
+      "word": "sew",
+      "meaning": "꿰매다, 바느질하다"
+    },
+    {
+      "no": 21,
+      "word": "bulletin",
+      "meaning": "게시, 게시물"
+    },
+    {
+      "no": 22,
+      "word": "rear",
+      "meaning": "뒤; 뒤의, 후방의; 기르다"
+    },
+    {
+      "no": 23,
+      "word": "workshop",
+      "meaning": "워크숍, 작업장, 연구 집회"
+    },
+    {
+      "no": 24,
+      "word": "blueprint",
+      "meaning": "청사진"
+    },
+    {
+      "no": 25,
+      "word": "convention",
+      "meaning": "집회, 총회, 관습"
+    },
+    {
+      "no": 26,
+      "word": "cheer",
+      "meaning": "환호, 갈채; 환호[성원]하다"
+    },
+    {
+      "no": 27,
+      "word": "recruit",
+      "meaning": "모집하다, 징집하다, 신병, 신입 사원"
+    },
+    {
+      "no": 28,
+      "word": "deal",
+      "meaning": "다루다, 대처하다(with); 거래"
+    },
+    {
+      "no": 29,
+      "word": "contend",
+      "meaning": "싸우다, 주장하다, 경쟁하다"
+    },
+    {
+      "no": 30,
+      "word": "abuse",
+      "meaning": "남용, 욕설, 학대; 남용하다, 학대하다"
+    },
+    {
+      "no": 31,
+      "word": "nest",
+      "meaning": "둥지, 보금자리; 둥지를 틀다, (둥지에서) 살다"
+    },
+    {
+      "no": 32,
+      "word": "satisfy",
+      "meaning": "만족시키다, 충족시키다"
+    },
+    {
+      "no": 33,
+      "word": "gain",
+      "meaning": "얻다; 이익"
+    },
+    {
+      "no": 34,
+      "word": "devastate",
+      "meaning": "황폐시키다"
+    },
+    {
+      "no": 35,
+      "word": "substitute",
+      "meaning": "대리자, 대체물; 대체하다"
+    },
+    {
+      "no": 36,
+      "word": "context",
+      "meaning": "전후 관계, 맥락, 문맥"
+    },
+    {
+      "no": 37,
+      "word": "rob",
+      "meaning": "훔치다, 강탈하다"
+    },
+    {
+      "no": 38,
+      "word": "await",
+      "meaning": "기다리다"
+    },
+    {
+      "no": 39,
+      "word": "assessment",
+      "meaning": "평가, 판단"
+    },
+    {
+      "no": 40,
+      "word": "perseverance",
+      "meaning": "인내심"
+    },
+    {
+      "no": 41,
+      "word": "rule",
+      "meaning": "지배, 규칙; 지배하다, 통치하다"
+    },
+    {
+      "no": 42,
+      "word": "deliver",
+      "meaning": "배달하다, 전달하다"
+    },
+    {
+      "no": 43,
+      "word": "psychologist",
+      "meaning": "심리학자"
+    },
+    {
+      "no": 44,
+      "word": "reject",
+      "meaning": "거부하다, 거절하다"
+    },
+    {
+      "no": 45,
+      "word": "brochure",
+      "meaning": "(안내·광고용) 소책자, 브로슈어"
+    },
+    {
+      "no": 46,
+      "word": "literate",
+      "meaning": "읽고 쓸 수 있는"
+    },
+    {
+      "no": 47,
+      "word": "lease",
+      "meaning": "임대; 임대하다"
+    },
+    {
+      "no": 48,
+      "word": "compensate",
+      "meaning": "보상하다"
+    },
+    {
+      "no": 49,
+      "word": "variable",
+      "meaning": "변수; 변하기 쉬운, 변덕스러운"
+    },
+    {
+      "no": 50,
+      "word": "bystander",
+      "meaning": "방관자, 행인, 구경꾼"
+    },
+    {
+      "no": 51,
+      "word": "sprout",
+      "meaning": "싹이 트다, 자라나다; 싹"
+    },
+    {
+      "no": 52,
+      "word": "carve",
+      "meaning": "조각하다, 새기다"
+    },
+    {
+      "no": 53,
+      "word": "respect",
+      "meaning": "존중하다; 존경, 관련"
+    },
+    {
+      "no": 54,
+      "word": "complain",
+      "meaning": "불평하다, 항의하다"
+    },
+    {
+      "no": 55,
+      "word": "affair",
+      "meaning": "사건, 일"
+    },
+    {
+      "no": 56,
+      "word": "foster",
+      "meaning": "육성하다, 촉진하다; 수양의, 위탁의"
+    },
+    {
+      "no": 57,
+      "word": "concrete",
+      "meaning": "구체적인; 콘크리트"
+    },
+    {
+      "no": 58,
+      "word": "discourage",
+      "meaning": "낙담시키다, 단념시키다"
+    },
+    {
+      "no": 59,
+      "word": "tension",
+      "meaning": "긴장, 불안; 긴장시키다"
+    },
+    {
+      "no": 60,
+      "word": "complete",
+      "meaning": "완전한, 완벽한, 완료된; 완료하다"
+    },
+    {
+      "no": 61,
+      "word": "cure",
+      "meaning": "치료하다, 해결하다; 치유, 회복"
+    },
+    {
+      "no": 62,
+      "word": "reap",
+      "meaning": "수확하다"
+    },
+    {
+      "no": 63,
+      "word": "output",
+      "meaning": "생산(량), 산출(량)"
+    },
+    {
+      "no": 64,
+      "word": "crack",
+      "meaning": "갈라진 틈; 금 가다"
+    },
+    {
+      "no": 65,
+      "word": "tin",
+      "meaning": "양철, 주석"
+    },
+    {
+      "no": 66,
+      "word": "fatal",
+      "meaning": "치명적인"
+    },
+    {
+      "no": 67,
+      "word": "tease",
+      "meaning": "괴롭히다, 약 올리다"
+    },
+    {
+      "no": 68,
+      "word": "particular",
+      "meaning": "특정한, 개개의; 사항, (-s) 상세"
+    },
+    {
+      "no": 69,
+      "word": "reform",
+      "meaning": "개혁; 개혁하다"
+    },
+    {
+      "no": 70,
+      "word": "astound",
+      "meaning": "놀라게 하다"
+    },
+    {
+      "no": 71,
+      "word": "masculine",
+      "meaning": "남자의, 남자다운"
+    },
+    {
+      "no": 72,
+      "word": "patient",
+      "meaning": "환자; 인내심 있는"
+    },
+    {
+      "no": 73,
+      "word": "vehicle",
+      "meaning": "탈것, 수단, 매개체"
+    },
+    {
+      "no": 74,
+      "word": "breakdown",
+      "meaning": "고장, 쇠약"
+    },
+    {
+      "no": 75,
+      "word": "reign",
+      "meaning": "통치 기간, 치세; 군림하다"
+    },
+    {
+      "no": 76,
+      "word": "hostile",
+      "meaning": "적대적인"
+    },
+    {
+      "no": 77,
+      "word": "fluid",
+      "meaning": "유동체(액체·기체의 총칭); 유동체의, 유동적인"
+    },
+    {
+      "no": 78,
+      "word": "invert",
+      "meaning": "(위치·순서 등을) 거꾸로 하다, 뒤집다"
+    },
+    {
+      "no": 79,
+      "word": "deck",
+      "meaning": "갑판"
+    },
+    {
+      "no": 80,
+      "word": "bay",
+      "meaning": "만(灣)"
+    }
+  ]
+}

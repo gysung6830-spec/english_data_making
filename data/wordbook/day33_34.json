@@ -1,0 +1,406 @@
+{
+  "title": "Day 33~34",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "blend",
+      "meaning": "혼합; 섞다, 혼합하다"
+    },
+    {
+      "no": 2,
+      "word": "shield",
+      "meaning": "방패, 보호물; 보호하다"
+    },
+    {
+      "no": 3,
+      "word": "auditorium",
+      "meaning": "강당"
+    },
+    {
+      "no": 4,
+      "word": "expel",
+      "meaning": "쫓아내다"
+    },
+    {
+      "no": 5,
+      "word": "impair",
+      "meaning": "손상하다"
+    },
+    {
+      "no": 6,
+      "word": "attorney",
+      "meaning": "변호사"
+    },
+    {
+      "no": 7,
+      "word": "undo",
+      "meaning": "원상태로 돌리다, (매듭을) 풀다"
+    },
+    {
+      "no": 8,
+      "word": "linger",
+      "meaning": "오래 머물다, 계속되다"
+    },
+    {
+      "no": 9,
+      "word": "outbreak",
+      "meaning": "(전쟁·질병 등의) 발발, 폭동"
+    },
+    {
+      "no": 10,
+      "word": "rational",
+      "meaning": "이성적인, 합리적인"
+    },
+    {
+      "no": 11,
+      "word": "discreet",
+      "meaning": "분별 있는, 사려 깊은"
+    },
+    {
+      "no": 12,
+      "word": "arrogant",
+      "meaning": "거만한"
+    },
+    {
+      "no": 13,
+      "word": "retain",
+      "meaning": "유지[보유]하다"
+    },
+    {
+      "no": 14,
+      "word": "machinery",
+      "meaning": "(집합적) 기계"
+    },
+    {
+      "no": 15,
+      "word": "toss",
+      "meaning": "던지다"
+    },
+    {
+      "no": 16,
+      "word": "speculate",
+      "meaning": "사색하다, 투기하다"
+    },
+    {
+      "no": 17,
+      "word": "elaborate",
+      "meaning": "정교한, 공들인"
+    },
+    {
+      "no": 18,
+      "word": "foundation",
+      "meaning": "기초, 토대, 재단"
+    },
+    {
+      "no": 19,
+      "word": "prolong",
+      "meaning": "연장하다"
+    },
+    {
+      "no": 20,
+      "word": "exotic",
+      "meaning": "이국적인"
+    },
+    {
+      "no": 21,
+      "word": "accommodate",
+      "meaning": "수용하다, 숙박시키다"
+    },
+    {
+      "no": 22,
+      "word": "induce",
+      "meaning": "유도하다, 설득하다"
+    },
+    {
+      "no": 23,
+      "word": "altitude",
+      "meaning": "고도, 높이"
+    },
+    {
+      "no": 24,
+      "word": "fluent",
+      "meaning": "유창한"
+    },
+    {
+      "no": 25,
+      "word": "assert",
+      "meaning": "주장하다, 행사하다"
+    },
+    {
+      "no": 26,
+      "word": "suitor",
+      "meaning": "소송인, 구혼자"
+    },
+    {
+      "no": 27,
+      "word": "radioactive",
+      "meaning": "방사성의"
+    },
+    {
+      "no": 28,
+      "word": "versus",
+      "meaning": "~대, ~과 대비하여"
+    },
+    {
+      "no": 29,
+      "word": "shrub",
+      "meaning": "관목"
+    },
+    {
+      "no": 30,
+      "word": "sacrifice",
+      "meaning": "희생하다, 희생시키다; 희생, 제물"
+    },
+    {
+      "no": 31,
+      "word": "conflict",
+      "meaning": "충돌하다; 갈등, 충돌"
+    },
+    {
+      "no": 32,
+      "word": "predominant",
+      "meaning": "뛰어난, 우세한"
+    },
+    {
+      "no": 33,
+      "word": "ripe",
+      "meaning": "(과일 등이) 익은"
+    },
+    {
+      "no": 34,
+      "word": "obsess",
+      "meaning": "강박 관념을 갖다, (망상이) 사로잡다"
+    },
+    {
+      "no": 35,
+      "word": "coverage",
+      "meaning": "(점유) 범위, (신문·텔레비전·라디오의) 보도"
+    },
+    {
+      "no": 36,
+      "word": "vapor",
+      "meaning": "증기; 증발하다"
+    },
+    {
+      "no": 37,
+      "word": "neglect",
+      "meaning": "무시하다; 소홀, 무시"
+    },
+    {
+      "no": 38,
+      "word": "slice",
+      "meaning": "얇은 조각; 얇게 썰다"
+    },
+    {
+      "no": 39,
+      "word": "breathtaking",
+      "meaning": "아슬아슬한, 숨 막히는"
+    },
+    {
+      "no": 40,
+      "word": "beverage",
+      "meaning": "음료"
+    },
+    {
+      "no": 41,
+      "word": "grief",
+      "meaning": "큰 슬픔"
+    },
+    {
+      "no": 42,
+      "word": "bruise",
+      "meaning": "타박상, 멍; 타박상을 입히다, 멍들게 하다"
+    },
+    {
+      "no": 43,
+      "word": "cozy",
+      "meaning": "아늑한"
+    },
+    {
+      "no": 44,
+      "word": "naive",
+      "meaning": "순진한"
+    },
+    {
+      "no": 45,
+      "word": "sanitation",
+      "meaning": "위생"
+    },
+    {
+      "no": 46,
+      "word": "metropolitan",
+      "meaning": "수도권의, 대도시의"
+    },
+    {
+      "no": 47,
+      "word": "maximize",
+      "meaning": "최대화하다, 최대한으로 활용하다"
+    },
+    {
+      "no": 48,
+      "word": "precede",
+      "meaning": "~에 앞서다, 먼저 일어나다"
+    },
+    {
+      "no": 49,
+      "word": "spoil",
+      "meaning": "망치다, 상하게 하다, 버릇없게 키우다"
+    },
+    {
+      "no": 50,
+      "word": "margin",
+      "meaning": "가장자리"
+    },
+    {
+      "no": 51,
+      "word": "plow",
+      "meaning": "쟁기; 쟁기질하다"
+    },
+    {
+      "no": 52,
+      "word": "urgent",
+      "meaning": "긴급한, 다급한"
+    },
+    {
+      "no": 53,
+      "word": "recommend",
+      "meaning": "추천하다"
+    },
+    {
+      "no": 54,
+      "word": "feedback",
+      "meaning": "반응, 피드백"
+    },
+    {
+      "no": 55,
+      "word": "pregnant",
+      "meaning": "임신한"
+    },
+    {
+      "no": 56,
+      "word": "fabric",
+      "meaning": "구조, 조직, 직물"
+    },
+    {
+      "no": 57,
+      "word": "probe",
+      "meaning": "조사하다; 탐사선"
+    },
+    {
+      "no": 58,
+      "word": "vibrate",
+      "meaning": "진동하다, 흔들다"
+    },
+    {
+      "no": 59,
+      "word": "pioneer",
+      "meaning": "개척자, 선구자; 개척자의; 개척하다"
+    },
+    {
+      "no": 60,
+      "word": "ecology",
+      "meaning": "생태학"
+    },
+    {
+      "no": 61,
+      "word": "inevitable",
+      "meaning": "피할 수 없는"
+    },
+    {
+      "no": 62,
+      "word": "vanish",
+      "meaning": "사라지다"
+    },
+    {
+      "no": 63,
+      "word": "swell",
+      "meaning": "부풀다; 팽창"
+    },
+    {
+      "no": 64,
+      "word": "settle",
+      "meaning": "정착하다, 정착시키다, 결정하다"
+    },
+    {
+      "no": 65,
+      "word": "duplicate",
+      "meaning": "복제품; 이중으로 하다, 복제하다"
+    },
+    {
+      "no": 66,
+      "word": "shed",
+      "meaning": "(눈물 등을) 흘리다, 발산하다, (털 등을) 떨어뜨리다"
+    },
+    {
+      "no": 67,
+      "word": "ornament",
+      "meaning": "장식품; 장식하다"
+    },
+    {
+      "no": 68,
+      "word": "warrior",
+      "meaning": "전사, 용사"
+    },
+    {
+      "no": 69,
+      "word": "auction",
+      "meaning": "경매; 경매에 부치다"
+    },
+    {
+      "no": 70,
+      "word": "framework",
+      "meaning": "뼈대, 틀, 체제"
+    },
+    {
+      "no": 71,
+      "word": "overturn",
+      "meaning": "전복시키다; 전복"
+    },
+    {
+      "no": 72,
+      "word": "metaphor",
+      "meaning": "은유, 은유법"
+    },
+    {
+      "no": 73,
+      "word": "buildup",
+      "meaning": "축적"
+    },
+    {
+      "no": 74,
+      "word": "tuition",
+      "meaning": "수업료"
+    },
+    {
+      "no": 75,
+      "word": "heredity",
+      "meaning": "유전, 유전 형질"
+    },
+    {
+      "no": 76,
+      "word": "interior",
+      "meaning": "내부; 내부의"
+    },
+    {
+      "no": 77,
+      "word": "epidemic",
+      "meaning": "전염병, 유행병"
+    },
+    {
+      "no": 78,
+      "word": "abundant",
+      "meaning": "풍부한"
+    },
+    {
+      "no": 79,
+      "word": "stimulate",
+      "meaning": "자극하다, 고무하다"
+    },
+    {
+      "no": 80,
+      "word": "glimpse",
+      "meaning": "흘긋 봄; 흘긋 보다, 깨닫다"
+    }
+  ]
+}

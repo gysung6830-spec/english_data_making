@@ -1,0 +1,406 @@
+{
+  "title": "Day 27~28",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "weep",
+      "meaning": "울다"
+    },
+    {
+      "no": 2,
+      "word": "era",
+      "meaning": "시대"
+    },
+    {
+      "no": 3,
+      "word": "evolve",
+      "meaning": "진화하다, 발전하다"
+    },
+    {
+      "no": 4,
+      "word": "undergo",
+      "meaning": "겪다"
+    },
+    {
+      "no": 5,
+      "word": "promote",
+      "meaning": "증진하다, 승진시키다"
+    },
+    {
+      "no": 6,
+      "word": "overall",
+      "meaning": "전반적인, 전체의; 작업복"
+    },
+    {
+      "no": 7,
+      "word": "superstition",
+      "meaning": "미신"
+    },
+    {
+      "no": 8,
+      "word": "prone",
+      "meaning": "~하는 경향이 있는"
+    },
+    {
+      "no": 9,
+      "word": "conduct",
+      "meaning": "수행하다, 실시하다; 행위, 안내"
+    },
+    {
+      "no": 10,
+      "word": "supernatural",
+      "meaning": "초자연적인"
+    },
+    {
+      "no": 11,
+      "word": "heritage",
+      "meaning": "유산, 세습 재산"
+    },
+    {
+      "no": 12,
+      "word": "tender",
+      "meaning": "부드러운; 입찰하다; 입찰"
+    },
+    {
+      "no": 13,
+      "word": "suppress",
+      "meaning": "억압하다, 참다"
+    },
+    {
+      "no": 14,
+      "word": "dignity",
+      "meaning": "존엄(성)"
+    },
+    {
+      "no": 15,
+      "word": "discriminate",
+      "meaning": "구별하다, 차별하다"
+    },
+    {
+      "no": 16,
+      "word": "simultaneously",
+      "meaning": "동시에"
+    },
+    {
+      "no": 17,
+      "word": "choke",
+      "meaning": "질식시키다, 숨이 막히다"
+    },
+    {
+      "no": 18,
+      "word": "empirical",
+      "meaning": "경험적인, 실증적인"
+    },
+    {
+      "no": 19,
+      "word": "peculiar",
+      "meaning": "독특한"
+    },
+    {
+      "no": 20,
+      "word": "coherent",
+      "meaning": "통일성 있는, 조리 있는"
+    },
+    {
+      "no": 21,
+      "word": "alter",
+      "meaning": "바꾸다, 변경하다"
+    },
+    {
+      "no": 22,
+      "word": "dormitory",
+      "meaning": "기숙사"
+    },
+    {
+      "no": 23,
+      "word": "exemplify",
+      "meaning": "예시하다, ~의 좋은 예가 되다"
+    },
+    {
+      "no": 24,
+      "word": "colony",
+      "meaning": "식민지, (새·개미·꿀벌 등의) 집단"
+    },
+    {
+      "no": 25,
+      "word": "compulsive",
+      "meaning": "강제적인, 강박의"
+    },
+    {
+      "no": 26,
+      "word": "adhere",
+      "meaning": "고수하다, 충실하다, 집착하다"
+    },
+    {
+      "no": 27,
+      "word": "retreat",
+      "meaning": "후퇴하다, 물러서다; 퇴각, 후퇴"
+    },
+    {
+      "no": 28,
+      "word": "afflict",
+      "meaning": "괴롭히다"
+    },
+    {
+      "no": 29,
+      "word": "summit",
+      "meaning": "꼭대기, 정상"
+    },
+    {
+      "no": 30,
+      "word": "shallow",
+      "meaning": "얕은, 얇은, 피상적인, 천박한"
+    },
+    {
+      "no": 31,
+      "word": "renowned",
+      "meaning": "유명한, 명성 있는"
+    },
+    {
+      "no": 32,
+      "word": "malnutrition",
+      "meaning": "영양실조"
+    },
+    {
+      "no": 33,
+      "word": "convert",
+      "meaning": "전환하다, 바꾸다"
+    },
+    {
+      "no": 34,
+      "word": "float",
+      "meaning": "뜨다, 떠다니다; 부유물"
+    },
+    {
+      "no": 35,
+      "word": "sensation",
+      "meaning": "감각, 느낌, 대사건(센세이션)"
+    },
+    {
+      "no": 36,
+      "word": "folktale",
+      "meaning": "민간 설화, 전설"
+    },
+    {
+      "no": 37,
+      "word": "compliment",
+      "meaning": "칭찬; 칭찬하다"
+    },
+    {
+      "no": 38,
+      "word": "notify",
+      "meaning": "통지하다, 알리다"
+    },
+    {
+      "no": 39,
+      "word": "superb",
+      "meaning": "최고의, 훌륭한"
+    },
+    {
+      "no": 40,
+      "word": "incentive",
+      "meaning": "자극, 장려책, 동기; 격려하는, 자극하는"
+    },
+    {
+      "no": 41,
+      "word": "sake",
+      "meaning": "위함, 목적"
+    },
+    {
+      "no": 42,
+      "word": "conceive",
+      "meaning": "생각해 내다, 마음속에 그리다"
+    },
+    {
+      "no": 43,
+      "word": "grasp",
+      "meaning": "붙잡다, 이해하다, 파악하다; 꽉 쥐기, 이해"
+    },
+    {
+      "no": 44,
+      "word": "mow",
+      "meaning": "(풀 등을) 베다"
+    },
+    {
+      "no": 45,
+      "word": "meditate",
+      "meaning": "명상하다"
+    },
+    {
+      "no": 46,
+      "word": "bold",
+      "meaning": "대담한, 선이 굵은"
+    },
+    {
+      "no": 47,
+      "word": "vow",
+      "meaning": "맹세; 맹세하다"
+    },
+    {
+      "no": 48,
+      "word": "boast",
+      "meaning": "자랑하다, 떠벌리다"
+    },
+    {
+      "no": 49,
+      "word": "animate",
+      "meaning": "생기 있게 하다, 고무하다; 살아 있는"
+    },
+    {
+      "no": 50,
+      "word": "instinct",
+      "meaning": "본능"
+    },
+    {
+      "no": 51,
+      "word": "prevent",
+      "meaning": "막다, 예방하다"
+    },
+    {
+      "no": 52,
+      "word": "applause",
+      "meaning": "박수갈채"
+    },
+    {
+      "no": 53,
+      "word": "groom",
+      "meaning": "신랑"
+    },
+    {
+      "no": 54,
+      "word": "separate",
+      "meaning": "분리하다; 갈라진, 개개의"
+    },
+    {
+      "no": 55,
+      "word": "face",
+      "meaning": "직면하다; 얼굴, 표면"
+    },
+    {
+      "no": 56,
+      "word": "clinic",
+      "meaning": "전문 병원, 개인 병원"
+    },
+    {
+      "no": 57,
+      "word": "Confucian",
+      "meaning": "공자의, 유교의"
+    },
+    {
+      "no": 58,
+      "word": "contribute",
+      "meaning": "기여하다, 공헌하다, 기부하다"
+    },
+    {
+      "no": 59,
+      "word": "fountain",
+      "meaning": "분수, 근원"
+    },
+    {
+      "no": 60,
+      "word": "mischief",
+      "meaning": "장난, 해악"
+    },
+    {
+      "no": 61,
+      "word": "wrestle",
+      "meaning": "싸우다, (일과) 씨름하다, 레슬링하다"
+    },
+    {
+      "no": 62,
+      "word": "withdraw",
+      "meaning": "철수하다, 철회하다, (돈을) 인출하다"
+    },
+    {
+      "no": 63,
+      "word": "banner",
+      "meaning": "깃발, 현수막"
+    },
+    {
+      "no": 64,
+      "word": "intolerable",
+      "meaning": "참을 수 없는"
+    },
+    {
+      "no": 65,
+      "word": "neutral",
+      "meaning": "중립의, 공평한"
+    },
+    {
+      "no": 66,
+      "word": "tendency",
+      "meaning": "경향, 추세"
+    },
+    {
+      "no": 67,
+      "word": "spear",
+      "meaning": "창"
+    },
+    {
+      "no": 68,
+      "word": "formulate",
+      "meaning": "만들어 내다, 공식화하다"
+    },
+    {
+      "no": 69,
+      "word": "absurd",
+      "meaning": "불합리한, 우스꽝스러운"
+    },
+    {
+      "no": 70,
+      "word": "strike",
+      "meaning": "치다, (머릿속에) 떠오르다; 치기, 동맹 파업"
+    },
+    {
+      "no": 71,
+      "word": "chase",
+      "meaning": "쫓다, 추적하다"
+    },
+    {
+      "no": 72,
+      "word": "range",
+      "meaning": "범위; 정렬시키다"
+    },
+    {
+      "no": 73,
+      "word": "destroy",
+      "meaning": "파괴하다"
+    },
+    {
+      "no": 74,
+      "word": "conceal",
+      "meaning": "숨기다"
+    },
+    {
+      "no": 75,
+      "word": "durability",
+      "meaning": "내구성"
+    },
+    {
+      "no": 76,
+      "word": "core",
+      "meaning": "핵심; 핵심의"
+    },
+    {
+      "no": 77,
+      "word": "troop",
+      "meaning": "무리, 떼, 군대, 군사"
+    },
+    {
+      "no": 78,
+      "word": "stain",
+      "meaning": "얼룩; 얼룩지게 하다"
+    },
+    {
+      "no": 79,
+      "word": "gigantic",
+      "meaning": "거대한"
+    },
+    {
+      "no": 80,
+      "word": "bilingual",
+      "meaning": "2개 국어의"
+    }
+  ]
+}
