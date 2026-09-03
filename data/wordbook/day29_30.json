@@ -1,0 +1,406 @@
+{
+  "title": "Day 29~30",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "sophomore",
+      "meaning": "(대학·고등학교의) 2학년생"
+    },
+    {
+      "no": 2,
+      "word": "violate",
+      "meaning": "위반하다, 침해하다"
+    },
+    {
+      "no": 3,
+      "word": "lay",
+      "meaning": "(물건을) 놓다, (알을) 낳다"
+    },
+    {
+      "no": 4,
+      "word": "script",
+      "meaning": "손으로 쓰기, 대본"
+    },
+    {
+      "no": 5,
+      "word": "panel",
+      "meaning": "토론자단, 패널, 넓은 직사각형의 합판"
+    },
+    {
+      "no": 6,
+      "word": "conform",
+      "meaning": "순응하다, 일치하다"
+    },
+    {
+      "no": 7,
+      "word": "diameter",
+      "meaning": "지름, 직경"
+    },
+    {
+      "no": 8,
+      "word": "embody",
+      "meaning": "구현하다, 구체화하다"
+    },
+    {
+      "no": 9,
+      "word": "sole",
+      "meaning": "유일한"
+    },
+    {
+      "no": 10,
+      "word": "manage",
+      "meaning": "잘 해내다, 다루다"
+    },
+    {
+      "no": 11,
+      "word": "modify",
+      "meaning": "변형하다, 수정하다"
+    },
+    {
+      "no": 12,
+      "word": "earn",
+      "meaning": "(신용·평판 등을) 얻다, (돈을) 벌다"
+    },
+    {
+      "no": 13,
+      "word": "crude",
+      "meaning": "가공하지 않은, 조잡한"
+    },
+    {
+      "no": 14,
+      "word": "spatial",
+      "meaning": "공간의, 공간적인"
+    },
+    {
+      "no": 15,
+      "word": "remedy",
+      "meaning": "치료, 요법"
+    },
+    {
+      "no": 16,
+      "word": "detect",
+      "meaning": "발견하다, 감지하다"
+    },
+    {
+      "no": 17,
+      "word": "expose",
+      "meaning": "드러내다, (비밀을) 폭로하다, 노출시키다"
+    },
+    {
+      "no": 18,
+      "word": "breed",
+      "meaning": "낳다, 양육하다"
+    },
+    {
+      "no": 19,
+      "word": "equity",
+      "meaning": "공평"
+    },
+    {
+      "no": 20,
+      "word": "prominent",
+      "meaning": "현저한, 저명한"
+    },
+    {
+      "no": 21,
+      "word": "tame",
+      "meaning": "길들이다; 길들여진"
+    },
+    {
+      "no": 22,
+      "word": "discuss",
+      "meaning": "토론하다"
+    },
+    {
+      "no": 23,
+      "word": "velocity",
+      "meaning": "속도"
+    },
+    {
+      "no": 24,
+      "word": "geology",
+      "meaning": "지질학"
+    },
+    {
+      "no": 25,
+      "word": "ambitious",
+      "meaning": "야심 있는"
+    },
+    {
+      "no": 26,
+      "word": "rigid",
+      "meaning": "엄격한, 융통성이 없는"
+    },
+    {
+      "no": 27,
+      "word": "attend",
+      "meaning": "출석하다, 보살피다"
+    },
+    {
+      "no": 28,
+      "word": "cost",
+      "meaning": "(비용이) 들다; 비용, 대가"
+    },
+    {
+      "no": 29,
+      "word": "adapt",
+      "meaning": "적응하다, 적응시키다"
+    },
+    {
+      "no": 30,
+      "word": "weave",
+      "meaning": "엮다, 짜다, (생각 등을) 엮어 넣다"
+    },
+    {
+      "no": 31,
+      "word": "accumulate",
+      "meaning": "모으다, 축적하다"
+    },
+    {
+      "no": 32,
+      "word": "invent",
+      "meaning": "발명하다"
+    },
+    {
+      "no": 33,
+      "word": "disclose",
+      "meaning": "드러내다, 폭로하다"
+    },
+    {
+      "no": 34,
+      "word": "damp",
+      "meaning": "축축한; 습기"
+    },
+    {
+      "no": 35,
+      "word": "feed",
+      "meaning": "먹이를 주다, 부양하다"
+    },
+    {
+      "no": 36,
+      "word": "motive",
+      "meaning": "동기(행동의 원인)"
+    },
+    {
+      "no": 37,
+      "word": "molecule",
+      "meaning": "분자"
+    },
+    {
+      "no": 38,
+      "word": "discharge",
+      "meaning": "배출, 내보냄, 방전; 배출하다, 내보내다, 해고하다"
+    },
+    {
+      "no": 39,
+      "word": "tangible",
+      "meaning": "유형적인, 유형의, 만질 수 있는"
+    },
+    {
+      "no": 40,
+      "word": "dismay",
+      "meaning": "실망시키다, 낙담시키다; 걱정, 실망"
+    },
+    {
+      "no": 41,
+      "word": "boundary",
+      "meaning": "경계, 경계선"
+    },
+    {
+      "no": 42,
+      "word": "spacious",
+      "meaning": "넓은, 훤히 트인"
+    },
+    {
+      "no": 43,
+      "word": "utmost",
+      "meaning": "최대한의, 최고의; 최대한도"
+    },
+    {
+      "no": 44,
+      "word": "imprint",
+      "meaning": "(도장 등을) 찍다, 감명시키다; 찍은 자국, 인상"
+    },
+    {
+      "no": 45,
+      "word": "symptom",
+      "meaning": "증상"
+    },
+    {
+      "no": 46,
+      "word": "linguistic",
+      "meaning": "언어의, 언어학의"
+    },
+    {
+      "no": 47,
+      "word": "awkward",
+      "meaning": "어색한, 서투른"
+    },
+    {
+      "no": 48,
+      "word": "signify",
+      "meaning": "의미하다, 중요하다"
+    },
+    {
+      "no": 49,
+      "word": "undertake",
+      "meaning": "수행하다, (일을) 떠맡다, 착수하다"
+    },
+    {
+      "no": 50,
+      "word": "blame",
+      "meaning": "비난하다, ~의 탓으로 돌리다; 비난, 책망"
+    },
+    {
+      "no": 51,
+      "word": "pledge",
+      "meaning": "약속, 맹세; 약속하다, 맹세하다"
+    },
+    {
+      "no": 52,
+      "word": "subtract",
+      "meaning": "빼다"
+    },
+    {
+      "no": 53,
+      "word": "draft",
+      "meaning": "원고, 초안; 초안을 그리다"
+    },
+    {
+      "no": 54,
+      "word": "proficient",
+      "meaning": "숙달된"
+    },
+    {
+      "no": 55,
+      "word": "archaeology",
+      "meaning": "고고학"
+    },
+    {
+      "no": 56,
+      "word": "supplement",
+      "meaning": "보충, 보충물; 보충하다"
+    },
+    {
+      "no": 57,
+      "word": "confine",
+      "meaning": "제한하다, 가두다; 한계"
+    },
+    {
+      "no": 58,
+      "word": "surveillance",
+      "meaning": "감시"
+    },
+    {
+      "no": 59,
+      "word": "illusion",
+      "meaning": "환상, 착각"
+    },
+    {
+      "no": 60,
+      "word": "anecdote",
+      "meaning": "일화, 비화"
+    },
+    {
+      "no": 61,
+      "word": "grind",
+      "meaning": "갈다, 빻다"
+    },
+    {
+      "no": 62,
+      "word": "trim",
+      "meaning": "다듬다, 잘라 내다, 장식하다"
+    },
+    {
+      "no": 63,
+      "word": "soar",
+      "meaning": "높이 치솟다"
+    },
+    {
+      "no": 64,
+      "word": "diagnose",
+      "meaning": "진단하다"
+    },
+    {
+      "no": 65,
+      "word": "consist",
+      "meaning": "(부분·요소로) 이루어지다"
+    },
+    {
+      "no": 66,
+      "word": "reservoir",
+      "meaning": "저장소, 저수지"
+    },
+    {
+      "no": 67,
+      "word": "navigate",
+      "meaning": "길을 찾다, 항해[비행]하다"
+    },
+    {
+      "no": 68,
+      "word": "thorough",
+      "meaning": "철저한"
+    },
+    {
+      "no": 69,
+      "word": "intact",
+      "meaning": "온전한, 손상되지 않은"
+    },
+    {
+      "no": 70,
+      "word": "explode",
+      "meaning": "폭발하다"
+    },
+    {
+      "no": 71,
+      "word": "dispatch",
+      "meaning": "급파하다, 발송하다; 급파, 발송"
+    },
+    {
+      "no": 72,
+      "word": "closet",
+      "meaning": "벽장"
+    },
+    {
+      "no": 73,
+      "word": "remind",
+      "meaning": "생각나게 하다, 상기시키다"
+    },
+    {
+      "no": 74,
+      "word": "impulse",
+      "meaning": "충동, 추진"
+    },
+    {
+      "no": 75,
+      "word": "pillar",
+      "meaning": "기둥"
+    },
+    {
+      "no": 76,
+      "word": "exhibit",
+      "meaning": "전시하다, 보여 주다; 전시, 전시품"
+    },
+    {
+      "no": 77,
+      "word": "mock",
+      "meaning": "조롱하다; 가짜의"
+    },
+    {
+      "no": 78,
+      "word": "flourish",
+      "meaning": "번영하다, 번창하다"
+    },
+    {
+      "no": 79,
+      "word": "sibling",
+      "meaning": "형제자매, 동기"
+    },
+    {
+      "no": 80,
+      "word": "temperate",
+      "meaning": "(기후가) 온화한, 절제하는"
+    }
+  ]
+}
