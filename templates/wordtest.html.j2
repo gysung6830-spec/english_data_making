@@ -6,7 +6,7 @@
 
 {#- 문항 표: ans=true 면 쓰는 칸에 정답이 인쇄된 '답지'가 된다 -#}
 {% macro grid(sec, ans) %}
-    <table class="ht-grid{{ ' ko' if sec.dir == 'ko2en' }}{{ ' ans' if ans }}">
+    <table class="ht-grid{{ ' ko' if sec.dir == 'ko2en' }}{{ ' ans' if ans }}{{ ' sparse' if sec.rows|length <= 16 }}">
       {% if sec.dir == 'ko2en' %}
       <colgroup>
         <col style="width:20pt"><col><col style="width:88pt">

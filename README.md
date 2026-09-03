@@ -159,13 +159,13 @@ PDF → 텍스트 추출 → (전처리로 문제/정답 제거)
 
 ```bash
 # 1) 단어 추출: 시험지 PDF 의 정답 면(보통 2페이지) → JSON
-python tools/extract_wordbook.py "워드마스터_Day_3~4.pdf" --page 2     --day "Day 3~4" --source "워드마스터 수능2000" --out data/wordbook/day03_04.json
+python tools/extract_wordbook.py "워드마스터_Day_3~4.pdf" --page 2     --day "Day 3~4" --source "워드마스터 수능2000" --out data/wordbook/suneung2000/day03_04.json
 
 # 2) 시험지 PDF 생성 (문제 2쪽 + 답지 2쪽 · 답지는 문제지와 같은 자리에 정답이 채워진 형태)
-python -m src.wordtest data/wordbook/day03_04.json --out output/Day3-4_단어test.pdf
+python -m src.wordtest data/wordbook/suneung2000/day03_04.json --out output/Day3-4_단어test.pdf
 
 # 여러 개를 한 번에 (회차마다 --seed 를 바꾸면 문항 순서가 달라집니다)
-python -m src.wordtest data/wordbook/*.json --out-dir output --seed 2
+python -m src.wordtest data/wordbook/suneung2000/*.json --out-dir output --seed 2
 ```
 
 | 옵션 | 설명 |
@@ -177,8 +177,10 @@ python -m src.wordtest data/wordbook/*.json --out-dir output --seed 2
 | `--footer` | 하단 저작권 문구 |
 
 - 기본값은 원본 시험지와 **방향을 서로 바꿔서** 출제합니다. (원본에서 뜻을 물었던 단어는 이번엔 영단어를 쓰게)
-- `data/wordbook/*.json` 은 교재에서 뽑은 단어 목록입니다(워드마스터 수능2000 **Day 1~50 전 범위**, 2,000단어).
-  수업용 자료라 저장소 안에만 두고 배포하지 마세요.
+- 단어 목록은 교재별 폴더에 둡니다. 수업용 자료라 저장소 안에만 두고 배포하지 마세요.
+  - `data/wordbook/suneung2000/` — 워드마스터 수능2000, Day 1~50 전 범위(2,000단어, 회당 80단어)
+  - `data/wordbook/jungdeung/` — 워드마스터 중등고난도(표제어만), 회당 60단어
+- 회당 단어 수는 자동으로 절반씩 나뉩니다. (80단어 → 40+40, 60단어 → 30+30)
 
 ---
 

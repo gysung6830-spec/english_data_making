@@ -1,0 +1,306 @@
+{
+  "title": "Day 1~2",
+  "source": "워드마스터 중등고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "nurture",
+      "meaning": "양육하다, 키우다"
+    },
+    {
+      "no": 2,
+      "word": "interact",
+      "meaning": "상호작용 하다, 서로 영향을 미치다"
+    },
+    {
+      "no": 3,
+      "word": "confident",
+      "meaning": "자신만만한; 확신하는"
+    },
+    {
+      "no": 4,
+      "word": "active",
+      "meaning": "적극적인, 활동적인"
+    },
+    {
+      "no": 5,
+      "word": "lifetime",
+      "meaning": "일생, 생애; 일생의"
+    },
+    {
+      "no": 6,
+      "word": "engage",
+      "meaning": "약혼시키다; 약속하다, 계약하다; 종사시키다"
+    },
+    {
+      "no": 7,
+      "word": "oval",
+      "meaning": "타원형의, 달걀형의; 달걀 모양, 타원체"
+    },
+    {
+      "no": 8,
+      "word": "typical",
+      "meaning": "전형적인"
+    },
+    {
+      "no": 9,
+      "word": "attractive",
+      "meaning": "매력적인; 사람을 끄는"
+    },
+    {
+      "no": 10,
+      "word": "anniversary",
+      "meaning": "기념일"
+    },
+    {
+      "no": 11,
+      "word": "forehead",
+      "meaning": "이마"
+    },
+    {
+      "no": 12,
+      "word": "contact",
+      "meaning": "연락; 접촉; ~와 연락하다"
+    },
+    {
+      "no": 13,
+      "word": "stand out",
+      "meaning": "눈에 띄다, 빼어나다"
+    },
+    {
+      "no": 14,
+      "word": "daycare",
+      "meaning": "탁아소의, 보육의"
+    },
+    {
+      "no": 15,
+      "word": "capable",
+      "meaning": "유능한; ~할 능력이 있는"
+    },
+    {
+      "no": 16,
+      "word": "ambitious",
+      "meaning": "야망이 있는, 야심 찬"
+    },
+    {
+      "no": 17,
+      "word": "impression",
+      "meaning": "인상; 감동, 감명"
+    },
+    {
+      "no": 18,
+      "word": "relationship",
+      "meaning": "관계, 관련, 연관"
+    },
+    {
+      "no": 19,
+      "word": "accompany",
+      "meaning": "동행하다, 함께 가다; (악기로) 반주하다"
+    },
+    {
+      "no": 20,
+      "word": "obedient",
+      "meaning": "순종하는, 말을 잘 듣는"
+    },
+    {
+      "no": 21,
+      "word": "gender",
+      "meaning": "성별"
+    },
+    {
+      "no": 22,
+      "word": "bring up",
+      "meaning": "~을 기르다, 양육하다"
+    },
+    {
+      "no": 23,
+      "word": "parental",
+      "meaning": "부모의, 부모다운"
+    },
+    {
+      "no": 24,
+      "word": "kindness",
+      "meaning": "친절, 다정함"
+    },
+    {
+      "no": 25,
+      "word": "resemble",
+      "meaning": "~와 닮다"
+    },
+    {
+      "no": 26,
+      "word": "elder",
+      "meaning": "나이가 위인, 선배의; 연장자, 선배"
+    },
+    {
+      "no": 27,
+      "word": "treat",
+      "meaning": "다루다, 대우하다; 치료하다"
+    },
+    {
+      "no": 28,
+      "word": "mature",
+      "meaning": "성숙한"
+    },
+    {
+      "no": 29,
+      "word": "impatient",
+      "meaning": "성급한, 참을성 없는"
+    },
+    {
+      "no": 30,
+      "word": "background",
+      "meaning": "(환경적·문화적) 배경"
+    },
+    {
+      "no": 31,
+      "word": "pregnant",
+      "meaning": "임신한"
+    },
+    {
+      "no": 32,
+      "word": "personality",
+      "meaning": "성격, 인성; 개성"
+    },
+    {
+      "no": 33,
+      "word": "elegant",
+      "meaning": "우아한, 품위 있는"
+    },
+    {
+      "no": 34,
+      "word": "generation",
+      "meaning": "세대, 1대; 같은 시대의 사람들"
+    },
+    {
+      "no": 35,
+      "word": "celebrate",
+      "meaning": "기념하다, 축하하다"
+    },
+    {
+      "no": 36,
+      "word": "arrogant",
+      "meaning": "오만한, 거만한"
+    },
+    {
+      "no": 37,
+      "word": "funeral",
+      "meaning": "장례식"
+    },
+    {
+      "no": 38,
+      "word": "brilliant",
+      "meaning": "훌륭한, 눈부신, (재능이) 뛰어난; 빛나는"
+    },
+    {
+      "no": 39,
+      "word": "advise",
+      "meaning": "충고하다, 조언하다"
+    },
+    {
+      "no": 40,
+      "word": "aggressive",
+      "meaning": "공격적인; 매우 적극적인"
+    },
+    {
+      "no": 41,
+      "word": "behave",
+      "meaning": "행동하다, 처신하다"
+    },
+    {
+      "no": 42,
+      "word": "shape",
+      "meaning": "모양, 꼴, 모습"
+    },
+    {
+      "no": 43,
+      "word": "spouse",
+      "meaning": "배우자, 남편, 아내"
+    },
+    {
+      "no": 44,
+      "word": "diligent",
+      "meaning": "근면 성실한, 부지런한"
+    },
+    {
+      "no": 45,
+      "word": "ignorant",
+      "meaning": "무지한, 무식한; (정보가 없어) 모르는"
+    },
+    {
+      "no": 46,
+      "word": "fate",
+      "meaning": "운명, 숙명; 죽음"
+    },
+    {
+      "no": 47,
+      "word": "bold",
+      "meaning": "대담한, 용감한; (문자·선 등이) 굵은"
+    },
+    {
+      "no": 48,
+      "word": "odd",
+      "meaning": "이상한, 기묘한; 홀수의"
+    },
+    {
+      "no": 49,
+      "word": "wrinkle",
+      "meaning": "주름; 주름지게 하다"
+    },
+    {
+      "no": 50,
+      "word": "greed",
+      "meaning": "욕심, 탐욕"
+    },
+    {
+      "no": 51,
+      "word": "break up with",
+      "meaning": "~와 헤어지다, 관계를 끊다"
+    },
+    {
+      "no": 52,
+      "word": "passive",
+      "meaning": "소극적인, 수동적인"
+    },
+    {
+      "no": 53,
+      "word": "breed",
+      "meaning": "(동물이) 새끼를 낳다; 기르다; 품종"
+    },
+    {
+      "no": 54,
+      "word": "niece",
+      "meaning": "조카딸"
+    },
+    {
+      "no": 55,
+      "word": "appearance",
+      "meaning": "출현, 나타남; 외관, 겉모습"
+    },
+    {
+      "no": 56,
+      "word": "take after",
+      "meaning": "~을 닮다"
+    },
+    {
+      "no": 57,
+      "word": "sibling",
+      "meaning": "형제자매"
+    },
+    {
+      "no": 58,
+      "word": "fierce",
+      "meaning": "사나운, 흉포한; 격렬한"
+    },
+    {
+      "no": 59,
+      "word": "supporter",
+      "meaning": "지지자, 후원자, 부양자"
+    },
+    {
+      "no": 60,
+      "word": "humble",
+      "meaning": "겸손한; 초라한, 소박한"
+    }
+  ]
+}

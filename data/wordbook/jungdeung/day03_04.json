@@ -1,0 +1,306 @@
+{
+  "title": "Day 3~4",
+  "source": "워드마스터 중등고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "mood",
+      "meaning": "기분, 분위기"
+    },
+    {
+      "no": 2,
+      "word": "rotten",
+      "meaning": "썩은, 부패한"
+    },
+    {
+      "no": 3,
+      "word": "kettle",
+      "meaning": "주전자"
+    },
+    {
+      "no": 4,
+      "word": "annoy",
+      "meaning": "짜증 나게 하다, 귀찮게 하다"
+    },
+    {
+      "no": 5,
+      "word": "anxious",
+      "meaning": "불안해하는, 걱정하는; 갈망하는"
+    },
+    {
+      "no": 6,
+      "word": "roast",
+      "meaning": "굽다, 볶다; 구운"
+    },
+    {
+      "no": 7,
+      "word": "feed on",
+      "meaning": "~을 먹고 살다"
+    },
+    {
+      "no": 8,
+      "word": "depression",
+      "meaning": "우울; 불경기"
+    },
+    {
+      "no": 9,
+      "word": "temper",
+      "meaning": "성질, 기질, 화"
+    },
+    {
+      "no": 10,
+      "word": "ashamed",
+      "meaning": "부끄러워하는"
+    },
+    {
+      "no": 11,
+      "word": "nerve",
+      "meaning": "신경; 용기"
+    },
+    {
+      "no": 12,
+      "word": "raw",
+      "meaning": "날것의; 가공하지 않은"
+    },
+    {
+      "no": 13,
+      "word": "seasoning",
+      "meaning": "조미료, 양념"
+    },
+    {
+      "no": 14,
+      "word": "frighten",
+      "meaning": "겁먹게 하다, 놀라게 하다"
+    },
+    {
+      "no": 15,
+      "word": "resent",
+      "meaning": "화를 내다, 분개하다"
+    },
+    {
+      "no": 16,
+      "word": "vegetarian",
+      "meaning": "채식주의자; 채식주의(자)의"
+    },
+    {
+      "no": 17,
+      "word": "nourish",
+      "meaning": "영양분을 공급하다, (사람·생물을) 기르다"
+    },
+    {
+      "no": 18,
+      "word": "grill",
+      "meaning": "석쇠; 석쇠에 굽다"
+    },
+    {
+      "no": 19,
+      "word": "instant",
+      "meaning": "즉석요리의, 인스턴트의; 즉각적인; 순간"
+    },
+    {
+      "no": 20,
+      "word": "beverage",
+      "meaning": "음료"
+    },
+    {
+      "no": 21,
+      "word": "peel",
+      "meaning": "껍질을 벗기다; 벗겨지다; 과일 껍질"
+    },
+    {
+      "no": 22,
+      "word": "jealous",
+      "meaning": "부러워하는, 질투하는"
+    },
+    {
+      "no": 23,
+      "word": "put up with",
+      "meaning": "~을 참다, 참고 견디다"
+    },
+    {
+      "no": 24,
+      "word": "burst into",
+      "meaning": "갑자기 ~을 터뜨리다, 내뿜다"
+    },
+    {
+      "no": 25,
+      "word": "blend",
+      "meaning": "섞다; 조화되다"
+    },
+    {
+      "no": 26,
+      "word": "miserable",
+      "meaning": "비참한, 불행한"
+    },
+    {
+      "no": 27,
+      "word": "fiber",
+      "meaning": "섬유, 섬유질"
+    },
+    {
+      "no": 28,
+      "word": "envy",
+      "meaning": "부러워하다; 부러움, 질투"
+    },
+    {
+      "no": 29,
+      "word": "warm-hearted",
+      "meaning": "마음이 따뜻한, 친절한"
+    },
+    {
+      "no": 30,
+      "word": "ridicule",
+      "meaning": "비웃다, 조롱하다; 비웃음, 조롱"
+    },
+    {
+      "no": 31,
+      "word": "chop",
+      "meaning": "자르다, 썰다"
+    },
+    {
+      "no": 32,
+      "word": "ripen",
+      "meaning": "익다; 익히다"
+    },
+    {
+      "no": 33,
+      "word": "squeeze",
+      "meaning": "짜다, 압착하다"
+    },
+    {
+      "no": 34,
+      "word": "emotion",
+      "meaning": "감정"
+    },
+    {
+      "no": 35,
+      "word": "awful",
+      "meaning": "지독한, 아주 심한"
+    },
+    {
+      "no": 36,
+      "word": "scent",
+      "meaning": "향기"
+    },
+    {
+      "no": 37,
+      "word": "edible",
+      "meaning": "먹을 수 있는"
+    },
+    {
+      "no": 38,
+      "word": "panic",
+      "meaning": "당황하다; 당황, 공포; 당황한, 겁먹은"
+    },
+    {
+      "no": 39,
+      "word": "paste",
+      "meaning": "반죽; 풀; 붙이다"
+    },
+    {
+      "no": 40,
+      "word": "astound",
+      "meaning": "놀라게 하다"
+    },
+    {
+      "no": 41,
+      "word": "tray",
+      "meaning": "쟁반"
+    },
+    {
+      "no": 42,
+      "word": "contain",
+      "meaning": "담고 있다, 포함하다"
+    },
+    {
+      "no": 43,
+      "word": "flavor",
+      "meaning": "(재료 특유의) 맛과 향; 풍미를더하다"
+    },
+    {
+      "no": 44,
+      "word": "desperate",
+      "meaning": "필사적인, 절망적인"
+    },
+    {
+      "no": 45,
+      "word": "grind",
+      "meaning": "잘게 갈다[빻다], 가루로 만들다"
+    },
+    {
+      "no": 46,
+      "word": "relieve",
+      "meaning": "완화하다, 긴장을 풀게 하다"
+    },
+    {
+      "no": 47,
+      "word": "disgust",
+      "meaning": "역겹게 하다; 반감, 혐오감"
+    },
+    {
+      "no": 48,
+      "word": "nutrition",
+      "meaning": "영양, 영양물 섭취"
+    },
+    {
+      "no": 49,
+      "word": "scream",
+      "meaning": "비명; 소리 지르다"
+    },
+    {
+      "no": 50,
+      "word": "leftover",
+      "meaning": "남은; 남은 음식"
+    },
+    {
+      "no": 51,
+      "word": "sentiment",
+      "meaning": "감정, 정서"
+    },
+    {
+      "no": 52,
+      "word": "sympathy",
+      "meaning": "동정, 공감"
+    },
+    {
+      "no": 53,
+      "word": "be tired of",
+      "meaning": "~에 싫증이 나다, 넌더리 나다"
+    },
+    {
+      "no": 54,
+      "word": "sorrow",
+      "meaning": "슬픔, 비애"
+    },
+    {
+      "no": 55,
+      "word": "swallow",
+      "meaning": "삼키다; 삼키기"
+    },
+    {
+      "no": 56,
+      "word": "amaze",
+      "meaning": "놀라게 하다"
+    },
+    {
+      "no": 57,
+      "word": "weep",
+      "meaning": "울다"
+    },
+    {
+      "no": 58,
+      "word": "go off",
+      "meaning": "(음식 등이) 상하다, 부패하다"
+    },
+    {
+      "no": 59,
+      "word": "dairy",
+      "meaning": "우유의, 유제품의; 유제품 판매점"
+    },
+    {
+      "no": 60,
+      "word": "cuisine",
+      "meaning": "요리"
+    }
+  ]
+}

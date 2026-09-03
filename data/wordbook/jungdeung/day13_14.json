@@ -1,0 +1,306 @@
+{
+  "title": "Day 13~14",
+  "source": "워드마스터 중등고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "goods",
+      "meaning": "상품"
+    },
+    {
+      "no": 2,
+      "word": "ability",
+      "meaning": "능력, 할 수 있음"
+    },
+    {
+      "no": 3,
+      "word": "satisfy",
+      "meaning": "만족시키다; (조건을) 충족시키다"
+    },
+    {
+      "no": 4,
+      "word": "label",
+      "meaning": "꼬리표, 상표"
+    },
+    {
+      "no": 5,
+      "word": "call off",
+      "meaning": "~을 취소하다, 철회하다"
+    },
+    {
+      "no": 6,
+      "word": "foul",
+      "meaning": "반칙하다, 파울을 범하다; 반칙인, 규칙 위반인"
+    },
+    {
+      "no": 7,
+      "word": "defeat",
+      "meaning": "패배; 패배시키다, 물리치다"
+    },
+    {
+      "no": 8,
+      "word": "outdoor",
+      "meaning": "야외의, 집 밖의"
+    },
+    {
+      "no": 9,
+      "word": "value",
+      "meaning": "가치 있게 여기다, 평가하다; 가치"
+    },
+    {
+      "no": 10,
+      "word": "necessity",
+      "meaning": "필요(성); 필수품"
+    },
+    {
+      "no": 11,
+      "word": "beat",
+      "meaning": "이기다; 심장이 뛰다"
+    },
+    {
+      "no": 12,
+      "word": "referee",
+      "meaning": "(경기·시합의) 심판, 중재자"
+    },
+    {
+      "no": 13,
+      "word": "add up",
+      "meaning": "합산하다"
+    },
+    {
+      "no": 14,
+      "word": "retail",
+      "meaning": "소매"
+    },
+    {
+      "no": 15,
+      "word": "refund",
+      "meaning": "환불(액); 환불하다"
+    },
+    {
+      "no": 16,
+      "word": "glide",
+      "meaning": "미끄러지다, 활주하다; 미끄러짐"
+    },
+    {
+      "no": 17,
+      "word": "rival",
+      "meaning": "경쟁자, 경쟁 상대; ~와 경쟁하다"
+    },
+    {
+      "no": 18,
+      "word": "wrap",
+      "meaning": "감싸다, 포장하다"
+    },
+    {
+      "no": 19,
+      "word": "penalty",
+      "meaning": "(스포츠 경기에서) 벌칙, 페널티; 처벌, 형벌"
+    },
+    {
+      "no": 20,
+      "word": "athletic",
+      "meaning": "운동 경기의, 운동선수다운"
+    },
+    {
+      "no": 21,
+      "word": "compete",
+      "meaning": "경쟁하다, 겨루다"
+    },
+    {
+      "no": 22,
+      "word": "claim",
+      "meaning": "요구하다; 주장하다; 요구; 주장"
+    },
+    {
+      "no": 23,
+      "word": "purchase",
+      "meaning": "사다; 구입, 구입품"
+    },
+    {
+      "no": 24,
+      "word": "mound",
+      "meaning": "(투수의) 마운드"
+    },
+    {
+      "no": 25,
+      "word": "bargain",
+      "meaning": "싼 물건; 값싼 물건의"
+    },
+    {
+      "no": 26,
+      "word": "reasonable",
+      "meaning": "합리적인, 적절한"
+    },
+    {
+      "no": 27,
+      "word": "tag",
+      "meaning": "꼬리표"
+    },
+    {
+      "no": 28,
+      "word": "quantity",
+      "meaning": "양"
+    },
+    {
+      "no": 29,
+      "word": "tournament",
+      "meaning": "토너먼트, 승자 진출전"
+    },
+    {
+      "no": 30,
+      "word": "exchange",
+      "meaning": "교환하다; 교환(물)"
+    },
+    {
+      "no": 31,
+      "word": "extreme",
+      "meaning": "극단적인"
+    },
+    {
+      "no": 32,
+      "word": "applaud",
+      "meaning": "박수 치다"
+    },
+    {
+      "no": 33,
+      "word": "take place",
+      "meaning": "개최되다, 열리다"
+    },
+    {
+      "no": 34,
+      "word": "merchandise",
+      "meaning": "상품"
+    },
+    {
+      "no": 35,
+      "word": "match",
+      "meaning": "경기; ~와 대결하다; ~에 어울리다"
+    },
+    {
+      "no": 36,
+      "word": "auction",
+      "meaning": "경매에서 팔다; 경매"
+    },
+    {
+      "no": 37,
+      "word": "leave out",
+      "meaning": "~을 빠뜨리다, 생략하다"
+    },
+    {
+      "no": 38,
+      "word": "pay for",
+      "meaning": "대금을 지불하다; ~의 대가를치르다"
+    },
+    {
+      "no": 39,
+      "word": "reduce",
+      "meaning": "줄이다, 낮추다"
+    },
+    {
+      "no": 40,
+      "word": "champion",
+      "meaning": "챔피언, 우승자; 우승한"
+    },
+    {
+      "no": 41,
+      "word": "trend",
+      "meaning": "유행; 경향, 흐름"
+    },
+    {
+      "no": 42,
+      "word": "pastime",
+      "meaning": "취미, 오락"
+    },
+    {
+      "no": 43,
+      "word": "guarantee",
+      "meaning": "보증(서); 보증하다"
+    },
+    {
+      "no": 44,
+      "word": "encourage",
+      "meaning": "용기를 북돋다, 격려하다"
+    },
+    {
+      "no": 45,
+      "word": "quality",
+      "meaning": "질; 특성; 양질의, 고급의"
+    },
+    {
+      "no": 46,
+      "word": "opponent",
+      "meaning": "적수, 반대자; 반대하는"
+    },
+    {
+      "no": 47,
+      "word": "insert",
+      "meaning": "집어넣다"
+    },
+    {
+      "no": 48,
+      "word": "fair",
+      "meaning": "공평한, 정정당당한"
+    },
+    {
+      "no": 49,
+      "word": "receipt",
+      "meaning": "영수증; 받음, 영수"
+    },
+    {
+      "no": 50,
+      "word": "amateur",
+      "meaning": "아마추어, 비전문가; 비전문가의"
+    },
+    {
+      "no": 51,
+      "word": "participate",
+      "meaning": "참여하다, 참가하다"
+    },
+    {
+      "no": 52,
+      "word": "coach",
+      "meaning": "(스포츠 팀의) 코치, 감독; 코치하다, 지도하다"
+    },
+    {
+      "no": 53,
+      "word": "total",
+      "meaning": "합계, 전체; 전체의; 완전한"
+    },
+    {
+      "no": 54,
+      "word": "steady",
+      "meaning": "안정된, 꾸준한"
+    },
+    {
+      "no": 55,
+      "word": "luxury",
+      "meaning": "호화, 사치(품); 사치(품)의"
+    },
+    {
+      "no": 56,
+      "word": "outstanding",
+      "meaning": "눈에 띄는, 우수한"
+    },
+    {
+      "no": 57,
+      "word": "rank",
+      "meaning": "(순위를) 매기다; 순위, 계급"
+    },
+    {
+      "no": 58,
+      "word": "serve",
+      "meaning": "공을 서브하다; (식당·상점에서) 손님을 응대하다"
+    },
+    {
+      "no": 59,
+      "word": "exclude",
+      "meaning": "배제하다"
+    },
+    {
+      "no": 60,
+      "word": "leisure",
+      "meaning": "여가, 레저, 자유 시간; 한가한"
+    }
+  ]
+}

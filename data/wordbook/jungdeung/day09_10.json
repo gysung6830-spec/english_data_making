@@ -1,0 +1,306 @@
+{
+  "title": "Day 9~10",
+  "source": "워드마스터 중등고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "frequent",
+      "meaning": "자주 일어나는, 빈번한"
+    },
+    {
+      "no": 2,
+      "word": "expert",
+      "meaning": "전문가, 숙련가, 달인; 숙련된, 노련한"
+    },
+    {
+      "no": 3,
+      "word": "colleague",
+      "meaning": "(같은 직장이나 직종에 종사하는) 동료"
+    },
+    {
+      "no": 4,
+      "word": "misplace",
+      "meaning": "잘못 두다, 둔 곳을 잊다"
+    },
+    {
+      "no": 5,
+      "word": "personnel",
+      "meaning": "전 직원, 인원; 인사과; 직원의"
+    },
+    {
+      "no": 6,
+      "word": "requirement",
+      "meaning": "필요조건, 자격; 필요한 것"
+    },
+    {
+      "no": 7,
+      "word": "profession",
+      "meaning": "직업, 전문직"
+    },
+    {
+      "no": 8,
+      "word": "retire",
+      "meaning": "퇴직하다, 은퇴하다"
+    },
+    {
+      "no": 9,
+      "word": "staple",
+      "meaning": "스테이플러 철사 침; 스테이플러로 고정시키다"
+    },
+    {
+      "no": 10,
+      "word": "psychologist",
+      "meaning": "심리학자"
+    },
+    {
+      "no": 11,
+      "word": "accomplish",
+      "meaning": "달성하다, 이루다"
+    },
+    {
+      "no": 12,
+      "word": "prompt",
+      "meaning": "신속한; 시간을 엄수하는"
+    },
+    {
+      "no": 13,
+      "word": "senior",
+      "meaning": "선임의, 선배의, 손위의; 선임자, 선배, 연장자"
+    },
+    {
+      "no": 14,
+      "word": "attach",
+      "meaning": "붙이다, 첨부하다"
+    },
+    {
+      "no": 15,
+      "word": "appoint",
+      "meaning": "임명하다, 지명하다; 약속하다, 정하다"
+    },
+    {
+      "no": 16,
+      "word": "operate",
+      "meaning": "관리하다, 운영하다; 움직이다, 작동하다"
+    },
+    {
+      "no": 17,
+      "word": "document",
+      "meaning": "문서, 서류"
+    },
+    {
+      "no": 18,
+      "word": "firm",
+      "meaning": "회사; 굳은, 확고한"
+    },
+    {
+      "no": 19,
+      "word": "notify",
+      "meaning": "통지[통보]하다"
+    },
+    {
+      "no": 20,
+      "word": "classify",
+      "meaning": "분류하다"
+    },
+    {
+      "no": 21,
+      "word": "barber",
+      "meaning": "이발사"
+    },
+    {
+      "no": 22,
+      "word": "secretary",
+      "meaning": "비서; 장관"
+    },
+    {
+      "no": 23,
+      "word": "index",
+      "meaning": "지수, 지표; 색인"
+    },
+    {
+      "no": 24,
+      "word": "career",
+      "meaning": "경력, 이력; (전문성이 있는) 직업"
+    },
+    {
+      "no": 25,
+      "word": "take over",
+      "meaning": "인계받다, 일을 넘겨받다"
+    },
+    {
+      "no": 26,
+      "word": "commute",
+      "meaning": "통근하다, 통학하다"
+    },
+    {
+      "no": 27,
+      "word": "supervise",
+      "meaning": "감독하다, 관리하다, 지휘하다"
+    },
+    {
+      "no": 28,
+      "word": "salary",
+      "meaning": "봉급, 급여"
+    },
+    {
+      "no": 29,
+      "word": "assign",
+      "meaning": "할당하다; 임명하다"
+    },
+    {
+      "no": 30,
+      "word": "get ahead",
+      "meaning": "성공하다, 출세하다, ~을 앞서다"
+    },
+    {
+      "no": 31,
+      "word": "booth",
+      "meaning": "부스(칸막이한 작은 공간)"
+    },
+    {
+      "no": 32,
+      "word": "detail",
+      "meaning": "세부 사항"
+    },
+    {
+      "no": 33,
+      "word": "make up for",
+      "meaning": "만회하다, 보충하다"
+    },
+    {
+      "no": 34,
+      "word": "turn down",
+      "meaning": "거절하다, 거부하다"
+    },
+    {
+      "no": 35,
+      "word": "manufacture",
+      "meaning": "제조하다; (이야기) 지어내다; 제조"
+    },
+    {
+      "no": 36,
+      "word": "counselor",
+      "meaning": "지도 교사, 카운슬러; 상담역, 조언자"
+    },
+    {
+      "no": 37,
+      "word": "basis",
+      "meaning": "기준 (단위); 기초"
+    },
+    {
+      "no": 38,
+      "word": "proficient",
+      "meaning": "익숙한, 능숙한"
+    },
+    {
+      "no": 39,
+      "word": "shift",
+      "meaning": "교체, 교대, 교대조; 바꾸다, 이동시키다"
+    },
+    {
+      "no": 40,
+      "word": "division",
+      "meaning": "부서; 분열"
+    },
+    {
+      "no": 41,
+      "word": "wage",
+      "meaning": "임금, 급료; 임금의"
+    },
+    {
+      "no": 42,
+      "word": "brochure",
+      "meaning": "안내 소책자"
+    },
+    {
+      "no": 43,
+      "word": "insist on",
+      "meaning": "~을 주장하다, ~을 (강력히) 고집[요구]하다"
+    },
+    {
+      "no": 44,
+      "word": "superior",
+      "meaning": "상사, 윗사람; 우수한, 상위의"
+    },
+    {
+      "no": 45,
+      "word": "distribute",
+      "meaning": "분배하다"
+    },
+    {
+      "no": 46,
+      "word": "confirm",
+      "meaning": "승인하다, 확인하다"
+    },
+    {
+      "no": 47,
+      "word": "manage",
+      "meaning": "경영하다, 운영하다; 그럭저럭해내다"
+    },
+    {
+      "no": 48,
+      "word": "vend",
+      "meaning": "행상하다, 팔다"
+    },
+    {
+      "no": 49,
+      "word": "architect",
+      "meaning": "건축가, 설계자; 설계하다"
+    },
+    {
+      "no": 50,
+      "word": "experienced",
+      "meaning": "경험이 있는, 숙달한"
+    },
+    {
+      "no": 51,
+      "word": "stationery",
+      "meaning": "문방구, 문구류"
+    },
+    {
+      "no": 52,
+      "word": "agency",
+      "meaning": "대리점, 대행 회사"
+    },
+    {
+      "no": 53,
+      "word": "application",
+      "meaning": "신청서, 원서, 응모"
+    },
+    {
+      "no": 54,
+      "word": "procedure",
+      "meaning": "절차, 순서"
+    },
+    {
+      "no": 55,
+      "word": "deny",
+      "meaning": "거절하다; 부인하다"
+    },
+    {
+      "no": 56,
+      "word": "pile",
+      "meaning": "더미; 쌓아 올리다; 쌓이다"
+    },
+    {
+      "no": 57,
+      "word": "labor",
+      "meaning": "노동, 일, 업무"
+    },
+    {
+      "no": 58,
+      "word": "photocopy",
+      "meaning": "사진 복사물; 사진 복사하다"
+    },
+    {
+      "no": 59,
+      "word": "client",
+      "meaning": "의뢰인, 고객"
+    },
+    {
+      "no": 60,
+      "word": "reward",
+      "meaning": "보상, 보수; 보답하다, 보수를주다"
+    }
+  ]
+}

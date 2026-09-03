@@ -1,0 +1,306 @@
+{
+  "title": "Day 7~8",
+  "source": "워드마스터 중등고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "theory",
+      "meaning": "이론, 학설"
+    },
+    {
+      "no": 2,
+      "word": "content",
+      "meaning": "내용, 목차; 만족하는; 만족시키다"
+    },
+    {
+      "no": 3,
+      "word": "essence",
+      "meaning": "본질, 기초"
+    },
+    {
+      "no": 4,
+      "word": "portfolio",
+      "meaning": "(그림·사진 등의) 작품 모음, 포트폴리오"
+    },
+    {
+      "no": 5,
+      "word": "term",
+      "meaning": "학기; 기간; 용어"
+    },
+    {
+      "no": 6,
+      "word": "insight",
+      "meaning": "통찰력, 간파"
+    },
+    {
+      "no": 7,
+      "word": "lecture",
+      "meaning": "강의; 훈계; 강의하다; 훈계하다"
+    },
+    {
+      "no": 8,
+      "word": "dwell on",
+      "meaning": "~을 깊이 생각하다, ~을 자세히 이야기하다"
+    },
+    {
+      "no": 9,
+      "word": "improve",
+      "meaning": "향상시키다, 나아지다"
+    },
+    {
+      "no": 10,
+      "word": "attendance",
+      "meaning": "출석, 참석"
+    },
+    {
+      "no": 11,
+      "word": "diameter",
+      "meaning": "지름"
+    },
+    {
+      "no": 12,
+      "word": "inspire",
+      "meaning": "격려하다, 영감을 주다"
+    },
+    {
+      "no": 13,
+      "word": "linguistics",
+      "meaning": "언어학"
+    },
+    {
+      "no": 14,
+      "word": "memorize",
+      "meaning": "기억하다, 암기하다"
+    },
+    {
+      "no": 15,
+      "word": "calculate",
+      "meaning": "계산하다"
+    },
+    {
+      "no": 16,
+      "word": "intelligence",
+      "meaning": "지능, 이해력, 영리함"
+    },
+    {
+      "no": 17,
+      "word": "principal",
+      "meaning": "(학교 등의) 장; 주된"
+    },
+    {
+      "no": 18,
+      "word": "literate",
+      "meaning": "읽고 쓸 줄 아는, 교양 있는"
+    },
+    {
+      "no": 19,
+      "word": "literal",
+      "meaning": "글자 그대로의, 정확한"
+    },
+    {
+      "no": 20,
+      "word": "statistics",
+      "meaning": "통계학, 통계 자료"
+    },
+    {
+      "no": 21,
+      "word": "solve",
+      "meaning": "풀다, 해결하다"
+    },
+    {
+      "no": 22,
+      "word": "fluent",
+      "meaning": "(말·글이) 유창한"
+    },
+    {
+      "no": 23,
+      "word": "geology",
+      "meaning": "지질학"
+    },
+    {
+      "no": 24,
+      "word": "expose",
+      "meaning": "노출시키다, 드러내다"
+    },
+    {
+      "no": 25,
+      "word": "scholar",
+      "meaning": "학자, 장학생"
+    },
+    {
+      "no": 26,
+      "word": "examine",
+      "meaning": "시험하다; 검사[조사]하다; 진찰하다"
+    },
+    {
+      "no": 27,
+      "word": "entrance",
+      "meaning": "입학; 입장; 입구"
+    },
+    {
+      "no": 28,
+      "word": "motivate",
+      "meaning": "동기를 부여하다"
+    },
+    {
+      "no": 29,
+      "word": "grant",
+      "meaning": "장학금; 주다; 허가하다"
+    },
+    {
+      "no": 30,
+      "word": "review",
+      "meaning": "복습하다, 다시 검토하다; 비평, 평론"
+    },
+    {
+      "no": 31,
+      "word": "demonstrate",
+      "meaning": "보여 주다, 증명하다, 설명하다; 시위하다"
+    },
+    {
+      "no": 32,
+      "word": "absent",
+      "meaning": "결석한, 불참한"
+    },
+    {
+      "no": 33,
+      "word": "multiply",
+      "meaning": "곱하다; 증식하다, 증식시키다"
+    },
+    {
+      "no": 34,
+      "word": "physics",
+      "meaning": "물리학"
+    },
+    {
+      "no": 35,
+      "word": "instruct",
+      "meaning": "교육하다, 가르치다; 지시하다"
+    },
+    {
+      "no": 36,
+      "word": "conclude",
+      "meaning": "끝내다, 결론 내리다"
+    },
+    {
+      "no": 37,
+      "word": "get along with",
+      "meaning": "~와 잘 지내다"
+    },
+    {
+      "no": 38,
+      "word": "concept",
+      "meaning": "개념, 발상"
+    },
+    {
+      "no": 39,
+      "word": "look up",
+      "meaning": "(사전·컴퓨터 등에서 정보를) 찾아보다, 조사하다"
+    },
+    {
+      "no": 40,
+      "word": "eager",
+      "meaning": "열성적인, 간절히 ~하고자 하는"
+    },
+    {
+      "no": 41,
+      "word": "due",
+      "meaning": "기일이 다 된"
+    },
+    {
+      "no": 42,
+      "word": "submit",
+      "meaning": "제출하다; (어쩔 수 없이) 따르다, 굴복하다"
+    },
+    {
+      "no": 43,
+      "word": "scholarship",
+      "meaning": "장학금"
+    },
+    {
+      "no": 44,
+      "word": "academic",
+      "meaning": "학업의, 학구적인"
+    },
+    {
+      "no": 45,
+      "word": "principle",
+      "meaning": "원리, 원칙"
+    },
+    {
+      "no": 46,
+      "word": "attitude",
+      "meaning": "태도, 마음가짐"
+    },
+    {
+      "no": 47,
+      "word": "drop out",
+      "meaning": "중퇴하다; 빠지다, 손을 떼다"
+    },
+    {
+      "no": 48,
+      "word": "award",
+      "meaning": "상; 상을 주다"
+    },
+    {
+      "no": 49,
+      "word": "peer",
+      "meaning": "(나이·신분 등이) 동등한 사람, 또래"
+    },
+    {
+      "no": 50,
+      "word": "figure",
+      "meaning": "그림; 수치; (사람의) 모습, 인물"
+    },
+    {
+      "no": 51,
+      "word": "catch up with",
+      "meaning": "따라잡다, 만회하다"
+    },
+    {
+      "no": 52,
+      "word": "go over",
+      "meaning": "~을 점검[검토]하다, ~을 주의깊게 살피다"
+    },
+    {
+      "no": 53,
+      "word": "laboratory",
+      "meaning": "실험실, 연구실"
+    },
+    {
+      "no": 54,
+      "word": "dormitory",
+      "meaning": "기숙사"
+    },
+    {
+      "no": 55,
+      "word": "aisle",
+      "meaning": "(교실·극장·버스 등의) 통로, 복도"
+    },
+    {
+      "no": 56,
+      "word": "define",
+      "meaning": "정의하다, 명확히 하다"
+    },
+    {
+      "no": 57,
+      "word": "educate",
+      "meaning": "교육하다"
+    },
+    {
+      "no": 58,
+      "word": "semester",
+      "meaning": "학기"
+    },
+    {
+      "no": 59,
+      "word": "institute",
+      "meaning": "(교육·연구 등을 위한) 협회, 연구소, 대학"
+    },
+    {
+      "no": 60,
+      "word": "refer",
+      "meaning": "언급하다, 참고하다"
+    }
+  ]
+}

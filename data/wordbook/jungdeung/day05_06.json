@@ -1,0 +1,306 @@
+{
+  "title": "Day 5~6",
+  "source": "워드마스터 중등고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "trim",
+      "meaning": "다듬다, 손질하다; 정돈(된 상태); 잘 정돈된"
+    },
+    {
+      "no": 2,
+      "word": "thread",
+      "meaning": "실; 실을 꿰다"
+    },
+    {
+      "no": 3,
+      "word": "suit",
+      "meaning": "정장; 어울리다, 잘 맞다"
+    },
+    {
+      "no": 4,
+      "word": "fold",
+      "meaning": "(종이·천 등을) 접다"
+    },
+    {
+      "no": 5,
+      "word": "wear out",
+      "meaning": "많이 써서 낡게 하다, 닳다; 지치게 하다"
+    },
+    {
+      "no": 6,
+      "word": "premium",
+      "meaning": "고가의, 고급의; 할증금, 포상금"
+    },
+    {
+      "no": 7,
+      "word": "hang up",
+      "meaning": "~을 걸다[매달다]; 전화를 끊다"
+    },
+    {
+      "no": 8,
+      "word": "alter",
+      "meaning": "변경하다, (옷을) 고쳐 만들다"
+    },
+    {
+      "no": 9,
+      "word": "rely",
+      "meaning": "믿다, 의지[의존]하다"
+    },
+    {
+      "no": 10,
+      "word": "formal",
+      "meaning": "공식적인, 격식을 차린"
+    },
+    {
+      "no": 11,
+      "word": "cotton",
+      "meaning": "솜, 면화; 면직물, 무명실"
+    },
+    {
+      "no": 12,
+      "word": "rubbish",
+      "meaning": "쓰레기, 폐물"
+    },
+    {
+      "no": 13,
+      "word": "sew",
+      "meaning": "바느질하다, (바느질로) 만들다"
+    },
+    {
+      "no": 14,
+      "word": "alarm",
+      "meaning": "경보기; 자명종; 놀람, 공포; 놀라게 하다"
+    },
+    {
+      "no": 15,
+      "word": "chore",
+      "meaning": "(집안의) 자질구레한 일, 허드렛일"
+    },
+    {
+      "no": 16,
+      "word": "spacious",
+      "meaning": "넓은, 광대한"
+    },
+    {
+      "no": 17,
+      "word": "cleanse",
+      "meaning": "세척하다, 씻다; 정화하다"
+    },
+    {
+      "no": 18,
+      "word": "priceless",
+      "meaning": "값을 매길 수 없는, 대단히 귀중한"
+    },
+    {
+      "no": 19,
+      "word": "routine",
+      "meaning": "판에 박힌 일, 일과; 일상적인, 판에 박힌"
+    },
+    {
+      "no": 20,
+      "word": "comfort",
+      "meaning": "편안함; 위로, 위안; 편하게 하다; 위로하다"
+    },
+    {
+      "no": 21,
+      "word": "show off",
+      "meaning": "~을 과시하다"
+    },
+    {
+      "no": 22,
+      "word": "mop",
+      "meaning": "(대걸레로) 닦다; 대걸레"
+    },
+    {
+      "no": 23,
+      "word": "mess",
+      "meaning": "어질러진 것, 쓰레기 더미; 어수선함, 혼잡"
+    },
+    {
+      "no": 24,
+      "word": "tap",
+      "meaning": "(수도 등의) 꼭지, (통의) 주둥이, 마개"
+    },
+    {
+      "no": 25,
+      "word": "laundry",
+      "meaning": "세탁물; 세탁소"
+    },
+    {
+      "no": 26,
+      "word": "length",
+      "meaning": "길이, 기간"
+    },
+    {
+      "no": 27,
+      "word": "appliance",
+      "meaning": "(가정용) 기구, 장치, 전기 제품"
+    },
+    {
+      "no": 28,
+      "word": "run out of",
+      "meaning": "~을 다 써 버리다, ~을 바닥내다"
+    },
+    {
+      "no": 29,
+      "word": "stair",
+      "meaning": "(보통 복수형) 계단"
+    },
+    {
+      "no": 30,
+      "word": "dress up",
+      "meaning": "옷을 갖춰[격식을 차려] 입다"
+    },
+    {
+      "no": 31,
+      "word": "fur",
+      "meaning": "모피"
+    },
+    {
+      "no": 32,
+      "word": "spread",
+      "meaning": "펴다, 펼치다, 퍼지다"
+    },
+    {
+      "no": 33,
+      "word": "cottage",
+      "meaning": "(시골의) 작은 집, 오두막집; 작은 주택[별장]"
+    },
+    {
+      "no": 34,
+      "word": "outfit",
+      "meaning": "(특별한 날 입는) 옷, 의상 한 벌"
+    },
+    {
+      "no": 35,
+      "word": "nap",
+      "meaning": "낮잠, 선잠; 선잠을 자다, 졸다"
+    },
+    {
+      "no": 36,
+      "word": "fabric",
+      "meaning": "천, 직물; 직물의 짜임새"
+    },
+    {
+      "no": 37,
+      "word": "detergent",
+      "meaning": "세탁 세제, 세정제"
+    },
+    {
+      "no": 38,
+      "word": "drawer",
+      "meaning": "서랍; (항상 복수형) 장롱"
+    },
+    {
+      "no": 39,
+      "word": "collar",
+      "meaning": "깃, 칼라"
+    },
+    {
+      "no": 40,
+      "word": "costume",
+      "meaning": "의상, 복장; 분장"
+    },
+    {
+      "no": 41,
+      "word": "trousers",
+      "meaning": "바지"
+    },
+    {
+      "no": 42,
+      "word": "dispose",
+      "meaning": "처리하다, 처분하다"
+    },
+    {
+      "no": 43,
+      "word": "casual",
+      "meaning": "격식을 차리지 않은, 평상복의; 우연의"
+    },
+    {
+      "no": 44,
+      "word": "flush",
+      "meaning": "(물·액체로) 씻어 내리다; 붉히다, 상기시키다"
+    },
+    {
+      "no": 45,
+      "word": "discard",
+      "meaning": "(불필요한 것을) 버리다, 처분하다"
+    },
+    {
+      "no": 46,
+      "word": "uniform",
+      "meaning": "유니폼, 제복; 일정한, 균등한"
+    },
+    {
+      "no": 47,
+      "word": "fancy",
+      "meaning": "화려한, 장식적인; 값비싼"
+    },
+    {
+      "no": 48,
+      "word": "crack",
+      "meaning": "깨지다, 금이 가다; 갈라진 금, 틈"
+    },
+    {
+      "no": 49,
+      "word": "polish",
+      "meaning": "닦다, 광[윤]을 내다; (문장 등을) 다듬다"
+    },
+    {
+      "no": 50,
+      "word": "wipe",
+      "meaning": "닦다, 훔치다, 가볍게 문지르다"
+    },
+    {
+      "no": 51,
+      "word": "dust",
+      "meaning": "먼지를 털다; 먼지, 흙"
+    },
+    {
+      "no": 52,
+      "word": "fashion",
+      "meaning": "유행, 인기; 패션"
+    },
+    {
+      "no": 53,
+      "word": "fade",
+      "meaning": "(색이) 바래다, (색을) 바래게 하다"
+    },
+    {
+      "no": 54,
+      "word": "leak",
+      "meaning": "새어나옴, 누출; 새다, 누출하다"
+    },
+    {
+      "no": 55,
+      "word": "stripe",
+      "meaning": "줄무늬"
+    },
+    {
+      "no": 56,
+      "word": "outlet",
+      "meaning": "코드 구멍, 콘센트; 할인점"
+    },
+    {
+      "no": 57,
+      "word": "plain",
+      "meaning": "(의복) 수수한; 무늬가 없는; 명백한, 분명한"
+    },
+    {
+      "no": 58,
+      "word": "usual",
+      "meaning": "평소의, 일상의"
+    },
+    {
+      "no": 59,
+      "word": "vest",
+      "meaning": "조끼"
+    },
+    {
+      "no": 60,
+      "word": "loose",
+      "meaning": "헐거운, 느슨한; 풀린, 벗겨진"
+    }
+  ]
+}

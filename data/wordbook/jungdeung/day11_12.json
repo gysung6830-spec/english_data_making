@@ -1,0 +1,306 @@
+{
+  "title": "Day 11~12",
+  "source": "워드마스터 중등고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "obscure",
+      "meaning": "애매한, 분명하지 않은"
+    },
+    {
+      "no": 2,
+      "word": "ultimate",
+      "meaning": "궁극적인, 최후의"
+    },
+    {
+      "no": 3,
+      "word": "script",
+      "meaning": "(방송의) 대본, 각본; 필기 문자"
+    },
+    {
+      "no": 4,
+      "word": "symbolic",
+      "meaning": "상징적인"
+    },
+    {
+      "no": 5,
+      "word": "focus",
+      "meaning": "초점을 맞추다, 관심을 집중하다(on); 초점"
+    },
+    {
+      "no": 6,
+      "word": "bulletin",
+      "meaning": "보고, 게시; 뉴스 속보"
+    },
+    {
+      "no": 7,
+      "word": "precious",
+      "meaning": "소중한, 값비싼"
+    },
+    {
+      "no": 8,
+      "word": "criticize",
+      "meaning": "비판하다, 혹평하다"
+    },
+    {
+      "no": 9,
+      "word": "marvel",
+      "meaning": "놀라운 일; 놀라다, 감탄하다"
+    },
+    {
+      "no": 10,
+      "word": "faint",
+      "meaning": "희미한, 어렴풋한; 기절하다"
+    },
+    {
+      "no": 11,
+      "word": "differ from",
+      "meaning": "~와 다르다"
+    },
+    {
+      "no": 12,
+      "word": "gigantic",
+      "meaning": "거인 같은, 거대한"
+    },
+    {
+      "no": 13,
+      "word": "fame",
+      "meaning": "명성, 평판"
+    },
+    {
+      "no": 14,
+      "word": "delicate",
+      "meaning": "연약한, 허약한; 섬세한, 우아한"
+    },
+    {
+      "no": 15,
+      "word": "report",
+      "meaning": "보도하다, 전하다; 보도, 보고"
+    },
+    {
+      "no": 16,
+      "word": "broad",
+      "meaning": "폭 넓은, 광범위한"
+    },
+    {
+      "no": 17,
+      "word": "reveal",
+      "meaning": "드러내다, 폭로하다"
+    },
+    {
+      "no": 18,
+      "word": "column",
+      "meaning": "신문의 칸, 특정 기고를 하는 공간[란]"
+    },
+    {
+      "no": 19,
+      "word": "panel",
+      "meaning": "패널, (토론회의) 토론자단, 심사위원단"
+    },
+    {
+      "no": 20,
+      "word": "enormous",
+      "meaning": "엄청난, 거대한"
+    },
+    {
+      "no": 21,
+      "word": "compliment",
+      "meaning": "칭찬, 칭찬의 말; 칭찬하다"
+    },
+    {
+      "no": 22,
+      "word": "release",
+      "meaning": "발매하다, 개봉하다; 발표하다, 공개하다"
+    },
+    {
+      "no": 23,
+      "word": "variety",
+      "meaning": "다양성, 변화"
+    },
+    {
+      "no": 24,
+      "word": "square",
+      "meaning": "정사각형; 제곱; 광장; 정사각형의"
+    },
+    {
+      "no": 25,
+      "word": "press",
+      "meaning": "신문, 잡지, 언론; 언론인, 기자"
+    },
+    {
+      "no": 26,
+      "word": "argue over",
+      "meaning": "~을 두고 논쟁하다, 왈가왈부하다"
+    },
+    {
+      "no": 27,
+      "word": "poll",
+      "meaning": "투표, 여론 조사; 투표하다, 여론 조사를 하다"
+    },
+    {
+      "no": 28,
+      "word": "feature",
+      "meaning": "특집 기사; 특징; 대서특필하다; 특색으로 삼다"
+    },
+    {
+      "no": 29,
+      "word": "series",
+      "meaning": "연속물, (TV 프로그램의) 연속 프로"
+    },
+    {
+      "no": 30,
+      "word": "brief",
+      "meaning": "간단한, 짧은"
+    },
+    {
+      "no": 31,
+      "word": "appropriate",
+      "meaning": "적당한, 알맞은"
+    },
+    {
+      "no": 32,
+      "word": "channel",
+      "meaning": "채널; 수로, 해협"
+    },
+    {
+      "no": 33,
+      "word": "paradox",
+      "meaning": "역설, 패러독스"
+    },
+    {
+      "no": 34,
+      "word": "survey",
+      "meaning": "조사, 검사, 측량; 조사하다, 살펴보다"
+    },
+    {
+      "no": 35,
+      "word": "flexible",
+      "meaning": "유연성 있는, 융통성 있는"
+    },
+    {
+      "no": 36,
+      "word": "post",
+      "meaning": "게시[공고]하다; 게시글, 포스트"
+    },
+    {
+      "no": 37,
+      "word": "broadcast",
+      "meaning": "방송하다, 방영하다; 방송, 방영"
+    },
+    {
+      "no": 38,
+      "word": "steep",
+      "meaning": "가파른, 경사가 급한"
+    },
+    {
+      "no": 39,
+      "word": "audience",
+      "meaning": "청중, 관중, 관객"
+    },
+    {
+      "no": 40,
+      "word": "announce",
+      "meaning": "알리다, 공표하다, 공고하다"
+    },
+    {
+      "no": 41,
+      "word": "sharp",
+      "meaning": "날카로운; 급격한; 예리한"
+    },
+    {
+      "no": 42,
+      "word": "journal",
+      "meaning": "잡지, 정기 간행물; (일간) 신문; 일기, 일지"
+    },
+    {
+      "no": 43,
+      "word": "monotonous",
+      "meaning": "단조로운, 변화 없는, 지루한"
+    },
+    {
+      "no": 44,
+      "word": "glitter",
+      "meaning": "반짝이다; 반짝거림"
+    },
+    {
+      "no": 45,
+      "word": "shallow",
+      "meaning": "얕은, 얄팍한"
+    },
+    {
+      "no": 46,
+      "word": "describe",
+      "meaning": "묘사하다"
+    },
+    {
+      "no": 47,
+      "word": "article",
+      "meaning": "(신문·잡지의) 기사, 논설; (문법) 관사"
+    },
+    {
+      "no": 48,
+      "word": "fundamental",
+      "meaning": "근본[기본]적인, 중요한; 근본"
+    },
+    {
+      "no": 49,
+      "word": "artificial",
+      "meaning": "인공적인; 가짜의"
+    },
+    {
+      "no": 50,
+      "word": "pose",
+      "meaning": "(사진 등을 위한) 자세를 취하다; 자세, 포즈"
+    },
+    {
+      "no": 51,
+      "word": "factual",
+      "meaning": "사실의, 사실에 입각한"
+    },
+    {
+      "no": 52,
+      "word": "drawback",
+      "meaning": "결점, 문제점"
+    },
+    {
+      "no": 53,
+      "word": "preview",
+      "meaning": "(영화의) 시사회, 미리보기, 예고편; 예습하다"
+    },
+    {
+      "no": 54,
+      "word": "flat",
+      "meaning": "편평한; (英) 플랫, 아파트"
+    },
+    {
+      "no": 55,
+      "word": "mass",
+      "meaning": "대중, 집단; 다수 대중의"
+    },
+    {
+      "no": 56,
+      "word": "compact",
+      "meaning": "소형의, 간편한; 빽빽한, 촘촘한"
+    },
+    {
+      "no": 57,
+      "word": "scene",
+      "meaning": "(연극·영화의) 장면, 무대; 현장"
+    },
+    {
+      "no": 58,
+      "word": "stand for",
+      "meaning": "~을 상징하다, 나타내다; ~을옹호[찬성]하다"
+    },
+    {
+      "no": 59,
+      "word": "moderate",
+      "meaning": "중간 정도의, 적당한"
+    },
+    {
+      "no": 60,
+      "word": "come up with",
+      "meaning": "~을 생각해 내다, 창안하다"
+    }
+  ]
+}

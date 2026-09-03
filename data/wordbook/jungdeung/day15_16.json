@@ -1,0 +1,306 @@
+{
+  "title": "Day 15~16",
+  "source": "워드마스터 중등고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "tip",
+      "meaning": "사례금, 팁; 끝; 조언; 사례금을 주다"
+    },
+    {
+      "no": 2,
+      "word": "transport",
+      "meaning": "운송, 운송 수단; 운반하다"
+    },
+    {
+      "no": 3,
+      "word": "depart",
+      "meaning": "출발하다"
+    },
+    {
+      "no": 4,
+      "word": "live up to",
+      "meaning": "(다른 사람의 기대에) 부응하다"
+    },
+    {
+      "no": 5,
+      "word": "journey",
+      "meaning": "여행, 여정; 여행하다"
+    },
+    {
+      "no": 6,
+      "word": "navigate",
+      "meaning": "항해하다, (강·바다 등을) 건너다"
+    },
+    {
+      "no": 7,
+      "word": "context",
+      "meaning": "문맥, 전후 관계; 정황, 주변 상황"
+    },
+    {
+      "no": 8,
+      "word": "transfer",
+      "meaning": "갈아타다; 이동하다, 옮기다"
+    },
+    {
+      "no": 9,
+      "word": "director",
+      "meaning": "감독, 연출자, 지도자"
+    },
+    {
+      "no": 10,
+      "word": "line up",
+      "meaning": "줄을 서다"
+    },
+    {
+      "no": 11,
+      "word": "ride",
+      "meaning": "(말·탈것 등을) 타다; (탈것을) 타기, 승차"
+    },
+    {
+      "no": 12,
+      "word": "cabin",
+      "meaning": "(배·비행기의) 선실, 객실; 오두막"
+    },
+    {
+      "no": 13,
+      "word": "conduct",
+      "meaning": "지휘하다; 행동하다, 실시하다; 지휘; 행동"
+    },
+    {
+      "no": 14,
+      "word": "vehicle",
+      "meaning": "탈것, 운송 수단"
+    },
+    {
+      "no": 15,
+      "word": "craft",
+      "meaning": "공예(품), 기교, 기술"
+    },
+    {
+      "no": 16,
+      "word": "compose",
+      "meaning": "작곡하다, 작문하다; 구성하다; 가라앉히다"
+    },
+    {
+      "no": 17,
+      "word": "highway",
+      "meaning": "고속 도로, 간선 도로"
+    },
+    {
+      "no": 18,
+      "word": "noble",
+      "meaning": "고귀한, 고상한; 귀족의; 귀족"
+    },
+    {
+      "no": 19,
+      "word": "accommodate",
+      "meaning": "수용하다, 숙박시키다"
+    },
+    {
+      "no": 20,
+      "word": "cruise",
+      "meaning": "크루즈, 유람선 (여행); 순항; 순항하다"
+    },
+    {
+      "no": 21,
+      "word": "masterpiece",
+      "meaning": "걸작, 명작"
+    },
+    {
+      "no": 22,
+      "word": "exclaim",
+      "meaning": "(감동하여) 외치다"
+    },
+    {
+      "no": 23,
+      "word": "come across",
+      "meaning": "(우연히) 마주치다, 발견하다"
+    },
+    {
+      "no": 24,
+      "word": "exhibit",
+      "meaning": "전시하다, 전시회를 열다; 전시, 전람"
+    },
+    {
+      "no": 25,
+      "word": "delay",
+      "meaning": "지연시키다; 지연"
+    },
+    {
+      "no": 26,
+      "word": "monologue",
+      "meaning": "(극의) 독백"
+    },
+    {
+      "no": 27,
+      "word": "sightseeing",
+      "meaning": "관광, 유람; 관광의, 유람의"
+    },
+    {
+      "no": 28,
+      "word": "theme",
+      "meaning": "주제, 테마"
+    },
+    {
+      "no": 29,
+      "word": "pull over",
+      "meaning": "차를 길 한쪽에 대다"
+    },
+    {
+      "no": 30,
+      "word": "locate",
+      "meaning": "(어떤 장소에) 정하다, 두다"
+    },
+    {
+      "no": 31,
+      "word": "tragedy",
+      "meaning": "비극 (작품); 재난, 참사"
+    },
+    {
+      "no": 32,
+      "word": "imitate",
+      "meaning": "모방하다; 모조하다, 모사하다"
+    },
+    {
+      "no": 33,
+      "word": "spectacle",
+      "meaning": "(인상적인) 광경, 구경거리"
+    },
+    {
+      "no": 34,
+      "word": "chorus",
+      "meaning": "합창, 합창곡; 합창단"
+    },
+    {
+      "no": 35,
+      "word": "creature",
+      "meaning": "생물, 창조물; 동물"
+    },
+    {
+      "no": 36,
+      "word": "tradition",
+      "meaning": "전통, 관례"
+    },
+    {
+      "no": 37,
+      "word": "classic",
+      "meaning": "일류의; 고전의; 일류 작가, 일류 작품"
+    },
+    {
+      "no": 38,
+      "word": "tone",
+      "meaning": "어조; 음색, 음조"
+    },
+    {
+      "no": 39,
+      "word": "appreciate",
+      "meaning": "감상하다, 평가하다; 감사하다"
+    },
+    {
+      "no": 40,
+      "word": "distinct",
+      "meaning": "다른, 별개의; 뚜렷한"
+    },
+    {
+      "no": 41,
+      "word": "rehearse",
+      "meaning": "(연극·연설·음악의) 예행연습을하다"
+    },
+    {
+      "no": 42,
+      "word": "copyright",
+      "meaning": "판권, 저작권; 저작권이 있는; 저작권을 취득하다"
+    },
+    {
+      "no": 43,
+      "word": "available",
+      "meaning": "이용 가능한; 입수 가능한"
+    },
+    {
+      "no": 44,
+      "word": "convey",
+      "meaning": "(물건·승객 등을) 나르다; 전달하다"
+    },
+    {
+      "no": 45,
+      "word": "destination",
+      "meaning": "목적지"
+    },
+    {
+      "no": 46,
+      "word": "head for",
+      "meaning": "~로 향해 가다"
+    },
+    {
+      "no": 47,
+      "word": "baggage",
+      "meaning": "(배·비행기 여행의) 수하물"
+    },
+    {
+      "no": 48,
+      "word": "aboard",
+      "meaning": "(배·기차·비행기 등에) 탄, 탑승[승선]한"
+    },
+    {
+      "no": 49,
+      "word": "crew",
+      "meaning": "(배·비행기·열차 등의) 승무원"
+    },
+    {
+      "no": 50,
+      "word": "literature",
+      "meaning": "문학"
+    },
+    {
+      "no": 51,
+      "word": "check-out",
+      "meaning": "(호텔의) 퇴실, 체크아웃 체크인; 계산(대)"
+    },
+    {
+      "no": 52,
+      "word": "passenger",
+      "meaning": "승객"
+    },
+    {
+      "no": 53,
+      "word": "downtown",
+      "meaning": "도심의; 도심지에"
+    },
+    {
+      "no": 54,
+      "word": "version",
+      "meaning": "번역, 번역서; 각색, 개작"
+    },
+    {
+      "no": 55,
+      "word": "underground",
+      "meaning": "(英) 지하철; 지하의"
+    },
+    {
+      "no": 56,
+      "word": "abroad",
+      "meaning": "해외로"
+    },
+    {
+      "no": 57,
+      "word": "sculpture",
+      "meaning": "조각(술); 조각하다"
+    },
+    {
+      "no": 58,
+      "word": "tune",
+      "meaning": "조율하다, (TV·라디오에) 맞추다; 곡조, 가락"
+    },
+    {
+      "no": 59,
+      "word": "interval",
+      "meaning": "(연극·연주) 막간, 휴식 시간; (시간) 간격"
+    },
+    {
+      "no": 60,
+      "word": "be into",
+      "meaning": "~에 푹 빠져 있다, ~에 관심이많다"
+    }
+  ]
+}

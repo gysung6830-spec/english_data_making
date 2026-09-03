@@ -1,0 +1,306 @@
+{
+  "title": "Day 19~20",
+  "source": "워드마스터 중등고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "deed",
+      "meaning": "업적; 행위"
+    },
+    {
+      "no": 2,
+      "word": "potential",
+      "meaning": "잠재적인, 발전 가능성이 있는"
+    },
+    {
+      "no": 3,
+      "word": "temporary",
+      "meaning": "일시적인, 임시의"
+    },
+    {
+      "no": 4,
+      "word": "asset",
+      "meaning": "자산, 재산"
+    },
+    {
+      "no": 5,
+      "word": "budget",
+      "meaning": "예산, 예산안"
+    },
+    {
+      "no": 6,
+      "word": "indifferent",
+      "meaning": "무관심한"
+    },
+    {
+      "no": 7,
+      "word": "collapse",
+      "meaning": "붕괴되다, 무너지다, 폭락하다; 붕괴, 실패"
+    },
+    {
+      "no": 8,
+      "word": "lay off",
+      "meaning": "~을 해고하다"
+    },
+    {
+      "no": 9,
+      "word": "cabinet",
+      "meaning": "(정치) 내각; 장식장, 캐비닛"
+    },
+    {
+      "no": 10,
+      "word": "insist",
+      "meaning": "고집하다, 주장하다, 요구하다"
+    },
+    {
+      "no": 11,
+      "word": "elect",
+      "meaning": "선거하다, 선출하다, 고르다"
+    },
+    {
+      "no": 12,
+      "word": "negotiate",
+      "meaning": "협상하다"
+    },
+    {
+      "no": 13,
+      "word": "union",
+      "meaning": "연합, 합병; (노동) 조합"
+    },
+    {
+      "no": 14,
+      "word": "reputation",
+      "meaning": "평판; 명성, 덕망"
+    },
+    {
+      "no": 15,
+      "word": "decline",
+      "meaning": "(가격) 하락; (가격·가치가) 하락하다"
+    },
+    {
+      "no": 16,
+      "word": "outcome",
+      "meaning": "결과, (구체적인) 성과"
+    },
+    {
+      "no": 17,
+      "word": "commerce",
+      "meaning": "상업, 통상, 교섭"
+    },
+    {
+      "no": 18,
+      "word": "party",
+      "meaning": "정당; 파티, 회합"
+    },
+    {
+      "no": 19,
+      "word": "session",
+      "meaning": "(국회의) 회기, 기간; (대학) 학기, 수업"
+    },
+    {
+      "no": 20,
+      "word": "federal",
+      "meaning": "연방의, 연방제의"
+    },
+    {
+      "no": 21,
+      "word": "pay off",
+      "meaning": "(빚 등을) 다 갚다; 성공하다, 성과를 올리다"
+    },
+    {
+      "no": 22,
+      "word": "declare",
+      "meaning": "선언하다, 공표하다; 단언하다"
+    },
+    {
+      "no": 23,
+      "word": "democracy",
+      "meaning": "민주주의, 민주제"
+    },
+    {
+      "no": 24,
+      "word": "campaign",
+      "meaning": "선거 운동, 유세, 캠페인"
+    },
+    {
+      "no": 25,
+      "word": "unemployed",
+      "meaning": "실업의, 무직의"
+    },
+    {
+      "no": 26,
+      "word": "risk",
+      "meaning": "위험, 모험"
+    },
+    {
+      "no": 27,
+      "word": "stock",
+      "meaning": "주식, 주; 재고(품)"
+    },
+    {
+      "no": 28,
+      "word": "economic",
+      "meaning": "경제학의, 경제(상)의"
+    },
+    {
+      "no": 29,
+      "word": "finance",
+      "meaning": "재정, 재무"
+    },
+    {
+      "no": 30,
+      "word": "expense",
+      "meaning": "지출, 비용, 경비"
+    },
+    {
+      "no": 31,
+      "word": "immediate",
+      "meaning": "즉각적인; 직접적인, 가장 가까운"
+    },
+    {
+      "no": 32,
+      "word": "currency",
+      "meaning": "통화, 화폐; 유통"
+    },
+    {
+      "no": 33,
+      "word": "hostile",
+      "meaning": "적대적인"
+    },
+    {
+      "no": 34,
+      "word": "convince",
+      "meaning": "(설득하여) 납득시키다.; 확신시키다"
+    },
+    {
+      "no": 35,
+      "word": "account",
+      "meaning": "거래, 예금 계좌; 계산, 회계"
+    },
+    {
+      "no": 36,
+      "word": "command",
+      "meaning": "지휘하다; 명령; 지휘권; 언어구사 능력"
+    },
+    {
+      "no": 37,
+      "word": "fortune",
+      "meaning": "재산, 부; 행운"
+    },
+    {
+      "no": 38,
+      "word": "strategy",
+      "meaning": "전략, 계획"
+    },
+    {
+      "no": 39,
+      "word": "loan",
+      "meaning": "대출(금), 대여"
+    },
+    {
+      "no": 40,
+      "word": "official",
+      "meaning": "공무원, 관리; 공무상의, 공식의"
+    },
+    {
+      "no": 41,
+      "word": "boost",
+      "meaning": "증대하다; 경기 부양, (가격의) 상승"
+    },
+    {
+      "no": 42,
+      "word": "in need",
+      "meaning": "어려움에 처한, 궁핍한"
+    },
+    {
+      "no": 43,
+      "word": "candidate",
+      "meaning": "(선거의) 후보자[출마자]; 지원자, 응시자"
+    },
+    {
+      "no": 44,
+      "word": "run for",
+      "meaning": "~에 입후보하다, 출마하다"
+    },
+    {
+      "no": 45,
+      "word": "conservative",
+      "meaning": "보수적인"
+    },
+    {
+      "no": 46,
+      "word": "unify",
+      "meaning": "통일하다, 단일화하다"
+    },
+    {
+      "no": 47,
+      "word": "approve",
+      "meaning": "찬성하다, 승인하다"
+    },
+    {
+      "no": 48,
+      "word": "possess",
+      "meaning": "소유하다, 가지다"
+    },
+    {
+      "no": 49,
+      "word": "oppose",
+      "meaning": "반대하다, 대항하다"
+    },
+    {
+      "no": 50,
+      "word": "income",
+      "meaning": "수입, 소득"
+    },
+    {
+      "no": 51,
+      "word": "estimate",
+      "meaning": "평가하다, 견적하다; 평가, 견적"
+    },
+    {
+      "no": 52,
+      "word": "annual",
+      "meaning": "1년의, 해마다의"
+    },
+    {
+      "no": 53,
+      "word": "capital",
+      "meaning": "자본; 수도; 대문자; 자본의; 주요한"
+    },
+    {
+      "no": 54,
+      "word": "postpone",
+      "meaning": "연기하다, 뒤로 미루다"
+    },
+    {
+      "no": 55,
+      "word": "persuade",
+      "meaning": "설득하다"
+    },
+    {
+      "no": 56,
+      "word": "property",
+      "meaning": "재산, 소유물; 부동산, 토지"
+    },
+    {
+      "no": 57,
+      "word": "authority",
+      "meaning": "권위, 권한; (pl.) 당국"
+    },
+    {
+      "no": 58,
+      "word": "speak for",
+      "meaning": "~을 대변하다"
+    },
+    {
+      "no": 59,
+      "word": "dispute",
+      "meaning": "논쟁; 논쟁하다"
+    },
+    {
+      "no": 60,
+      "word": "assume",
+      "meaning": "추측하다, 사실이라고 생각하다"
+    }
+  ]
+}
