@@ -879,6 +879,29 @@ def test_txt_ingest_and_bracket_problem_spans(tmp_path):
     print("PASS  .txt 지문 읽기 + '[NN번]' 대괄호 문제 분리")
 
 
+def test_merge_contractions():
+    # 축약형 꼬리 토큰(''m',''ve' …)을 앞 토큰에 붙이고 slash 승계.
+    from src.worksheet.analyzer import _merge_contractions
+    from src.worksheet.models import Token
+
+    lines = [[Token(text="I"), Token(text="'m sorry", slash=True), Token(text="now.")]]
+    _merge_contractions(lines)
+    toks = lines[0]
+    assert toks[0].text == "I'm sorry" and toks[0].slash is True   # 병합 + 끊기 승계
+    assert len(toks) == 2 and toks[1].text == "now."
+
+    # we + 've → we've
+    l2 = [[Token(text="we"), Token(text="'ve")]]
+    _merge_contractions(l2)
+    assert l2[0][0].text == "we've" and len(l2[0]) == 1
+
+    # 맨 앞 축약꼬리는 병합 안 함(앞 토큰 없음)
+    l3 = [[Token(text="'s")]]
+    _merge_contractions(l3)
+    assert len(l3[0]) == 1
+    print("PASS  축약형 토큰 병합('I'+''m'→'I'm', slash 승계)")
+
+
 def test_reading_alignment_heal_off_by_one():
     # 한글 조각이 영어보다 1개 적으면(off-by-one) 영어 '마지막 끊기'를 제거해 정렬.
     from src.worksheet.analyzer import _heal_reading_short_by_one, _english_chunk_count

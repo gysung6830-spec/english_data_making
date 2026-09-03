@@ -289,6 +289,29 @@ def _merge_trailing_punct(lines: list[list[Token]]) -> list[list[Token]]:
     return lines
 
 
+_CONTRACTION_TAIL = re.compile(r"^'(m|ve|s|re|ll|d|t)\b", re.I)
+
+
+def _merge_contractions(lines: list[list[Token]]) -> list[list[Token]]:
+    """축약형 꼬리 토큰(''m', ''ve', ''s' …)을 앞 토큰에 붙인다('I' + ''m sorry' → 'I'm sorry').
+
+    LLM 이 축약형을 'I' + ''m' 으로 쪼개면 렌더 시 'I 'm sorry' 처럼 공백이 생긴다.
+    꼬리 토큰을 앞 단어에 병합하고, 그 토큰의 slash(끊기)는 앞 토큰으로 승계한다.
+    앞 토큰이 없으면(맨 앞) 병합하지 않는다.
+    """
+    for line in lines:
+        merged: list[Token] = []
+        for t in line:
+            if merged and _CONTRACTION_TAIL.match((t.text or "")):
+                prev = merged[-1]
+                prev.text = (prev.text or "") + (t.text or "")
+                prev.slash = prev.slash or bool(getattr(t, "slash", False))
+            else:
+                merged.append(t)
+        line[:] = merged
+    return lines
+
+
 def _strip_trailing_slash(lines: list[list[Token]]) -> list[list[Token]]:
     """문장 '맨 끝' 토큰의 slash 를 제거한다.
 
@@ -412,6 +435,7 @@ def _to_sentence(index: int, sa: SentenceAnalysis) -> Sentence:
     # LLM 이 여러 줄로 쪼개 보내도 한 줄로 펼쳐 자연스럽게 흐르게(화면 폭에 맞춰 자동 줄바꿈).
     flat = [_tok(t) for ln in sa.lines for t in ln.tokens]
     lines = _merge_trailing_punct([flat]) if flat else []
+    lines = _merge_contractions(lines)     # 'I' + ''m' → 'I'm' (축약형 공백 제거)
     lines = _strip_trailing_slash(lines)   # 문장 끝의 무의미한 '/' 제거
     if not lines:  # LLM 이 lines 를 비우면 원문을 통째로 한 줄로
         lines = [[Token(text=sa.translation or "")]]

@@ -388,8 +388,16 @@ def _extract_passages_by_problem(client, cfg, src: Path, max_retries: int = 1):
     except Exception:
         return None
     passages, labels = [], []
-    for (label, _chunk), m in zip(spans, merged):
+    for (label, chunk), m in zip(spans, merged):
         if m is not None:
+            # 추출 누락 감지: 원문 청크의 영어 대비 회수율이 낮으면(안내문 표 등 통째 누락)
+            # 자동 수정 대신 경고만(오검출 시 원문 훼손 방지). 사용자가 원문 대조하도록 알림.
+            chunk_en = re.findall(r"[A-Za-z]+", chunk)
+            body_en = re.findall(r"[A-Za-z]+", " ".join(getattr(m, "paragraphs", []) or []))
+            if len(chunk_en) >= 40 and len(body_en) < 0.75 * len(chunk_en):
+                _progress(f"  ⚠️ {label or '(선두)'}번: 추출 누락 의심 — "
+                          f"원문 대비 {len(body_en) * 100 // max(1, len(chunk_en))}% "
+                          f"(안내문 표 등 확인 · 원문 대조 권장)")
             passages.append(m)
             labels.append(label)
     if len(passages) < 2:               # 문제 단위 추출이 의미 있으려면 최소 2개
