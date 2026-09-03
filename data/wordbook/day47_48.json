@@ -1,0 +1,406 @@
+{
+  "title": "Day 47~48",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "manuscript",
+      "meaning": "손으로 쓴 것, 필사본, 원고"
+    },
+    {
+      "no": 2,
+      "word": "degrade",
+      "meaning": "저하시키다, 강등시키다, 분해하다"
+    },
+    {
+      "no": 3,
+      "word": "plausible",
+      "meaning": "그럴듯한, 말재주 있는"
+    },
+    {
+      "no": 4,
+      "word": "detergent",
+      "meaning": "세제"
+    },
+    {
+      "no": 5,
+      "word": "console",
+      "meaning": "위로하다"
+    },
+    {
+      "no": 6,
+      "word": "enact",
+      "meaning": "법제화하다, 제정하다"
+    },
+    {
+      "no": 7,
+      "word": "thorn",
+      "meaning": "가시, 괴로움의 원인"
+    },
+    {
+      "no": 8,
+      "word": "monotonous",
+      "meaning": "단조로운, 지루한"
+    },
+    {
+      "no": 9,
+      "word": "eloquent",
+      "meaning": "웅변의, 표현이 풍부한"
+    },
+    {
+      "no": 10,
+      "word": "aviate",
+      "meaning": "비행하다, (비행기를) 조종하다"
+    },
+    {
+      "no": 11,
+      "word": "interval",
+      "meaning": "간격, 틈"
+    },
+    {
+      "no": 12,
+      "word": "stack",
+      "meaning": "더미, 쌓아올림, (도서관의) 서가; 쌓다, 쌓이다"
+    },
+    {
+      "no": 13,
+      "word": "hazardous",
+      "meaning": "위험한, 모험적인"
+    },
+    {
+      "no": 14,
+      "word": "delegate",
+      "meaning": "파견하다; 사절, 대표"
+    },
+    {
+      "no": 15,
+      "word": "shudder",
+      "meaning": "떨다, 몸서리치다"
+    },
+    {
+      "no": 16,
+      "word": "skull",
+      "meaning": "두개골"
+    },
+    {
+      "no": 17,
+      "word": "empathize",
+      "meaning": "공감하다, 감정 이입을 하다"
+    },
+    {
+      "no": 18,
+      "word": "dispersal",
+      "meaning": "분산, 확산"
+    },
+    {
+      "no": 19,
+      "word": "hierarchy",
+      "meaning": "계급(제), 위계"
+    },
+    {
+      "no": 20,
+      "word": "perpetual",
+      "meaning": "영구의, 끊임없는"
+    },
+    {
+      "no": 21,
+      "word": "despise",
+      "meaning": "경멸하다"
+    },
+    {
+      "no": 22,
+      "word": "dread",
+      "meaning": "공포; 무서워하다"
+    },
+    {
+      "no": 23,
+      "word": "dispense",
+      "meaning": "나누어 주다, 내놓다"
+    },
+    {
+      "no": 24,
+      "word": "cripple",
+      "meaning": "불구로 만들다; 지체 부자유자"
+    },
+    {
+      "no": 25,
+      "word": "arbitrary",
+      "meaning": "임의적인, 독단적인"
+    },
+    {
+      "no": 26,
+      "word": "staple",
+      "meaning": "주요한; 주요 산물"
+    },
+    {
+      "no": 27,
+      "word": "landslide",
+      "meaning": "산사태, 압도적인 승리"
+    },
+    {
+      "no": 28,
+      "word": "verify",
+      "meaning": "검증하다, 입증하다"
+    },
+    {
+      "no": 29,
+      "word": "shuffle",
+      "meaning": "질질 끌며 걷다, 뒤섞다"
+    },
+    {
+      "no": 30,
+      "word": "simplicity",
+      "meaning": "간단, 단순, 소박"
+    },
+    {
+      "no": 31,
+      "word": "intersection",
+      "meaning": "교차(로), 횡단"
+    },
+    {
+      "no": 32,
+      "word": "exert",
+      "meaning": "(힘·지식 등을) 쓰다, 발휘하다"
+    },
+    {
+      "no": 33,
+      "word": "estate",
+      "meaning": "소유지, 재산"
+    },
+    {
+      "no": 34,
+      "word": "eject",
+      "meaning": "쫓아내다, 배출하다"
+    },
+    {
+      "no": 35,
+      "word": "linear",
+      "meaning": "직선의, 길이의, 1차(원)의"
+    },
+    {
+      "no": 36,
+      "word": "hospitality",
+      "meaning": "환대, 후한 대접"
+    },
+    {
+      "no": 37,
+      "word": "quest",
+      "meaning": "탐색, 탐구"
+    },
+    {
+      "no": 38,
+      "word": "barrel",
+      "meaning": "통, (석유) 1배럴"
+    },
+    {
+      "no": 39,
+      "word": "headquarters",
+      "meaning": "본부 (단수 취급)"
+    },
+    {
+      "no": 40,
+      "word": "overload",
+      "meaning": "과부하, 과적; 과중하게 부담시키다, 과적하다"
+    },
+    {
+      "no": 41,
+      "word": "displace",
+      "meaning": "옮겨 놓다, 대신하다, 쫓아내다"
+    },
+    {
+      "no": 42,
+      "word": "subordinate",
+      "meaning": "하급의, 부차적인; 하급자; 경시하다"
+    },
+    {
+      "no": 43,
+      "word": "tactics",
+      "meaning": "방안, 전술"
+    },
+    {
+      "no": 44,
+      "word": "fume",
+      "meaning": "연기; 연기 나다"
+    },
+    {
+      "no": 45,
+      "word": "melancholy",
+      "meaning": "우울한; 우울함"
+    },
+    {
+      "no": 46,
+      "word": "cynical",
+      "meaning": "냉소적인, 비꼬는"
+    },
+    {
+      "no": 47,
+      "word": "innermost",
+      "meaning": "가장 깊숙한; 가장 깊은 부분"
+    },
+    {
+      "no": 48,
+      "word": "renovate",
+      "meaning": "새롭게 하다, 수리하다"
+    },
+    {
+      "no": 49,
+      "word": "bulk",
+      "meaning": "크기, 부피, 대부분"
+    },
+    {
+      "no": 50,
+      "word": "drawback",
+      "meaning": "문제점, 장애"
+    },
+    {
+      "no": 51,
+      "word": "rash",
+      "meaning": "발진, 뾰루지; 무분별한, 성급한"
+    },
+    {
+      "no": 52,
+      "word": "pinch",
+      "meaning": "꼬집다, 집다, 괴롭히다"
+    },
+    {
+      "no": 53,
+      "word": "expertise",
+      "meaning": "전문 지식[기술]"
+    },
+    {
+      "no": 54,
+      "word": "reprove",
+      "meaning": "꾸짖다, 책망하다"
+    },
+    {
+      "no": 55,
+      "word": "legitimate",
+      "meaning": "타당한, 정당한, 합법의"
+    },
+    {
+      "no": 56,
+      "word": "summarize",
+      "meaning": "요약하다"
+    },
+    {
+      "no": 57,
+      "word": "coexist",
+      "meaning": "공존하다"
+    },
+    {
+      "no": 58,
+      "word": "realm",
+      "meaning": "왕국, 영역"
+    },
+    {
+      "no": 59,
+      "word": "predecessor",
+      "meaning": "앞서 있었던 것, 선배, 전임자"
+    },
+    {
+      "no": 60,
+      "word": "flee",
+      "meaning": "달아나다, 도망치다"
+    },
+    {
+      "no": 61,
+      "word": "furnish",
+      "meaning": "(필요한 것을) 제공하다, 갖추다"
+    },
+    {
+      "no": 62,
+      "word": "dispute",
+      "meaning": "논쟁, 분쟁; 토의하다"
+    },
+    {
+      "no": 63,
+      "word": "elect",
+      "meaning": "선출하다"
+    },
+    {
+      "no": 64,
+      "word": "retort",
+      "meaning": "반박, 말대꾸; 반박하다, 말대꾸하다"
+    },
+    {
+      "no": 65,
+      "word": "punctual",
+      "meaning": "시간을 지키는, 기한을 지키는"
+    },
+    {
+      "no": 66,
+      "word": "engross",
+      "meaning": "열중하게 하다"
+    },
+    {
+      "no": 67,
+      "word": "eligible",
+      "meaning": "적격의; 적임자"
+    },
+    {
+      "no": 68,
+      "word": "brutal",
+      "meaning": "야만적인, 짐승 같은, 잔혹한"
+    },
+    {
+      "no": 69,
+      "word": "catastrophe",
+      "meaning": "대참사, 큰 재앙"
+    },
+    {
+      "no": 70,
+      "word": "wrench",
+      "meaning": "렌치(너트를 죄는 기구), 비틀기; 비틀다, 삐다"
+    },
+    {
+      "no": 71,
+      "word": "legacy",
+      "meaning": "유산"
+    },
+    {
+      "no": 72,
+      "word": "bypass",
+      "meaning": "우회하다; 우회로"
+    },
+    {
+      "no": 73,
+      "word": "alienate",
+      "meaning": "소외시키다, 멀리하다"
+    },
+    {
+      "no": 74,
+      "word": "segment",
+      "meaning": "부문, 부분; 분할하다"
+    },
+    {
+      "no": 75,
+      "word": "prehistoric",
+      "meaning": "선사 시대의"
+    },
+    {
+      "no": 76,
+      "word": "rectangular",
+      "meaning": "직사각형의, 직각의"
+    },
+    {
+      "no": 77,
+      "word": "proclaim",
+      "meaning": "선언하다, 증명하다"
+    },
+    {
+      "no": 78,
+      "word": "tact",
+      "meaning": "재치, 기지"
+    },
+    {
+      "no": 79,
+      "word": "burnout",
+      "meaning": "극도의 피로, 쇠진, 연소 종료"
+    },
+    {
+      "no": 80,
+      "word": "dimension",
+      "meaning": "크기, 치수, 규모, 차원"
+    }
+  ]
+}

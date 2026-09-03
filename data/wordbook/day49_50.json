@@ -1,0 +1,406 @@
+{
+  "title": "Day 49~50",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "limb",
+      "meaning": "사지, 팔다리"
+    },
+    {
+      "no": 2,
+      "word": "misplace",
+      "meaning": "잘못 두다"
+    },
+    {
+      "no": 3,
+      "word": "wound",
+      "meaning": "부상을 입히다; 부상"
+    },
+    {
+      "no": 4,
+      "word": "offspring",
+      "meaning": "자식, 새끼, 성과"
+    },
+    {
+      "no": 5,
+      "word": "subsidy",
+      "meaning": "보조금, 장려금"
+    },
+    {
+      "no": 6,
+      "word": "ambiguous",
+      "meaning": "애매모호한, 두 가지 뜻으로 해석 가능한"
+    },
+    {
+      "no": 7,
+      "word": "grumble",
+      "meaning": "불평하다, 으르렁거리다; 불평"
+    },
+    {
+      "no": 8,
+      "word": "scrutiny",
+      "meaning": "(면밀한) 조사"
+    },
+    {
+      "no": 9,
+      "word": "creed",
+      "meaning": "신념, (종교의) 교의"
+    },
+    {
+      "no": 10,
+      "word": "fluctuation",
+      "meaning": "변동, 오르내림, 요동"
+    },
+    {
+      "no": 11,
+      "word": "prosper",
+      "meaning": "번영하다, 번창하다"
+    },
+    {
+      "no": 12,
+      "word": "merchandise",
+      "meaning": "(집합적) 상품"
+    },
+    {
+      "no": 13,
+      "word": "reckless",
+      "meaning": "부주의한, 무모한"
+    },
+    {
+      "no": 14,
+      "word": "thrust",
+      "meaning": "밀다, 밀치다"
+    },
+    {
+      "no": 15,
+      "word": "bankruptcy",
+      "meaning": "파산"
+    },
+    {
+      "no": 16,
+      "word": "merge",
+      "meaning": "합병하다, 차차 변하다"
+    },
+    {
+      "no": 17,
+      "word": "entail",
+      "meaning": "수반하다, 의미하다, 필요로 하다"
+    },
+    {
+      "no": 18,
+      "word": "reckon",
+      "meaning": "세다, 계산하다, 생각하다"
+    },
+    {
+      "no": 19,
+      "word": "detest",
+      "meaning": "혐오하다, 미워하다"
+    },
+    {
+      "no": 20,
+      "word": "infrastructure",
+      "meaning": "사회 기반 시설, (단체 등의) 하부 조직[구조]"
+    },
+    {
+      "no": 21,
+      "word": "secondhand",
+      "meaning": "중고의, 간접적인"
+    },
+    {
+      "no": 22,
+      "word": "kidnap",
+      "meaning": "유괴; 납치하다"
+    },
+    {
+      "no": 23,
+      "word": "frantic",
+      "meaning": "광란의, 미친"
+    },
+    {
+      "no": 24,
+      "word": "dusk",
+      "meaning": "땅거미, 어스름"
+    },
+    {
+      "no": 25,
+      "word": "extrinsic",
+      "meaning": "외적인, 비본질적인"
+    },
+    {
+      "no": 26,
+      "word": "grudge",
+      "meaning": "원한, 유감"
+    },
+    {
+      "no": 27,
+      "word": "insane",
+      "meaning": "정신 이상의, 비상식적인"
+    },
+    {
+      "no": 28,
+      "word": "multiple",
+      "meaning": "복합적인, 다수의, 다양한; (수학) 배수"
+    },
+    {
+      "no": 29,
+      "word": "moan",
+      "meaning": "신음; 신음하다, 불평하다"
+    },
+    {
+      "no": 30,
+      "word": "inference",
+      "meaning": "추론"
+    },
+    {
+      "no": 31,
+      "word": "prudent",
+      "meaning": "신중한, 빈틈없는"
+    },
+    {
+      "no": 32,
+      "word": "respectively",
+      "meaning": "각각, 저마다"
+    },
+    {
+      "no": 33,
+      "word": "conviction",
+      "meaning": "확신, 유죄 판결"
+    },
+    {
+      "no": 34,
+      "word": "feat",
+      "meaning": "위업, 공적"
+    },
+    {
+      "no": 35,
+      "word": "veterinarian",
+      "meaning": "수의사"
+    },
+    {
+      "no": 36,
+      "word": "setback",
+      "meaning": "좌절, 차질"
+    },
+    {
+      "no": 37,
+      "word": "missionary",
+      "meaning": "선교사"
+    },
+    {
+      "no": 38,
+      "word": "productive",
+      "meaning": "생산적인, 다산의"
+    },
+    {
+      "no": 39,
+      "word": "intrude",
+      "meaning": "방해하다, 침범하다"
+    },
+    {
+      "no": 40,
+      "word": "phase",
+      "meaning": "단계, 상, 면, 양상"
+    },
+    {
+      "no": 41,
+      "word": "penetrate",
+      "meaning": "침투하다, 꿰뚫다"
+    },
+    {
+      "no": 42,
+      "word": "equate",
+      "meaning": "동일시하다, 일치하다"
+    },
+    {
+      "no": 43,
+      "word": "degenerate",
+      "meaning": "퇴보하다, 타락하다"
+    },
+    {
+      "no": 44,
+      "word": "cosmopolitan",
+      "meaning": "세계적인, 세계주의의; 세계인, 국제인"
+    },
+    {
+      "no": 45,
+      "word": "rage",
+      "meaning": "격노"
+    },
+    {
+      "no": 46,
+      "word": "cumulative",
+      "meaning": "누적되는, 점증적인"
+    },
+    {
+      "no": 47,
+      "word": "notable",
+      "meaning": "주목할 만한, 유명한"
+    },
+    {
+      "no": 48,
+      "word": "pollination",
+      "meaning": "(식물) 수분 (작용)"
+    },
+    {
+      "no": 49,
+      "word": "stout",
+      "meaning": "뚱뚱한, (옷 등이) 튼튼한"
+    },
+    {
+      "no": 50,
+      "word": "solidify",
+      "meaning": "굳어지다, 굳히다, 확고히 하다"
+    },
+    {
+      "no": 51,
+      "word": "pitfall",
+      "meaning": "함정, 위험"
+    },
+    {
+      "no": 52,
+      "word": "hybrid",
+      "meaning": "혼합, 잡종"
+    },
+    {
+      "no": 53,
+      "word": "radius",
+      "meaning": "반지름"
+    },
+    {
+      "no": 54,
+      "word": "liable",
+      "meaning": "책임이 있는, ~할 것 같은, ~하기 쉬운"
+    },
+    {
+      "no": 55,
+      "word": "tackle",
+      "meaning": "(일·문제를) 다루다; 도구, (축구의) 태클"
+    },
+    {
+      "no": 56,
+      "word": "auditory",
+      "meaning": "귀의, 청각의"
+    },
+    {
+      "no": 57,
+      "word": "tangle",
+      "meaning": "얽히게 하다, 혼란시키다"
+    },
+    {
+      "no": 58,
+      "word": "demolish",
+      "meaning": "파괴하다, 폐지하다"
+    },
+    {
+      "no": 59,
+      "word": "discrete",
+      "meaning": "분리된, 별개의"
+    },
+    {
+      "no": 60,
+      "word": "enchant",
+      "meaning": "매혹하다, ~에 마법을 걸다"
+    },
+    {
+      "no": 61,
+      "word": "counterattack",
+      "meaning": "반격, 역습; 반격하다, 역습하다"
+    },
+    {
+      "no": 62,
+      "word": "subdue",
+      "meaning": "정복하다, 진압하다, 완화하다"
+    },
+    {
+      "no": 63,
+      "word": "uncover",
+      "meaning": "폭로하다, (비밀 등을) 알아내다"
+    },
+    {
+      "no": 64,
+      "word": "erosion",
+      "meaning": "부식, 침식"
+    },
+    {
+      "no": 65,
+      "word": "sentiment",
+      "meaning": "감상, 정서"
+    },
+    {
+      "no": 66,
+      "word": "synthetic",
+      "meaning": "(화학) 합성의"
+    },
+    {
+      "no": 67,
+      "word": "transcend",
+      "meaning": "초월하다"
+    },
+    {
+      "no": 68,
+      "word": "landfill",
+      "meaning": "쓰레기 매립지"
+    },
+    {
+      "no": 69,
+      "word": "outset",
+      "meaning": "착수, 시작"
+    },
+    {
+      "no": 70,
+      "word": "detach",
+      "meaning": "떼어 내다, 분리하다"
+    },
+    {
+      "no": 71,
+      "word": "embed",
+      "meaning": "깊숙이 박다, 깊이 간직하다"
+    },
+    {
+      "no": 72,
+      "word": "refraction",
+      "meaning": "(빛·소리 따위의) 굴절"
+    },
+    {
+      "no": 73,
+      "word": "utensil",
+      "meaning": "가정용품, 기구, 도구"
+    },
+    {
+      "no": 74,
+      "word": "reptile",
+      "meaning": "파충류"
+    },
+    {
+      "no": 75,
+      "word": "defy",
+      "meaning": "물리치다, (공공연히) 반항하다, 무시하다"
+    },
+    {
+      "no": 76,
+      "word": "peril",
+      "meaning": "위험, 위기"
+    },
+    {
+      "no": 77,
+      "word": "endow",
+      "meaning": "부여하다, 기부하다"
+    },
+    {
+      "no": 78,
+      "word": "antagonist",
+      "meaning": "적대자, 라이벌"
+    },
+    {
+      "no": 79,
+      "word": "enthusiasm",
+      "meaning": "열광, 열정, 열의"
+    },
+    {
+      "no": 80,
+      "word": "propel",
+      "meaning": "나아가게 하다, 추진하다"
+    }
+  ]
+}

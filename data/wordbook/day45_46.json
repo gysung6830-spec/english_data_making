@@ -1,0 +1,406 @@
+{
+  "title": "Day 45~46",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "bribe",
+      "meaning": "뇌물; 뇌물을 주다"
+    },
+    {
+      "no": 2,
+      "word": "perspiration",
+      "meaning": "땀, 노력"
+    },
+    {
+      "no": 3,
+      "word": "outrage",
+      "meaning": "화나게 하다; 분노, 화"
+    },
+    {
+      "no": 4,
+      "word": "appoint",
+      "meaning": "임명[지명]하다, (시간·장소를) 정하다"
+    },
+    {
+      "no": 5,
+      "word": "poise",
+      "meaning": "균형을 잡다; 균형, 평정"
+    },
+    {
+      "no": 6,
+      "word": "condense",
+      "meaning": "농축하다, 요약하다"
+    },
+    {
+      "no": 7,
+      "word": "withhold",
+      "meaning": "억누르다, 억제하다, 보류하다"
+    },
+    {
+      "no": 8,
+      "word": "currency",
+      "meaning": "통화, 통용"
+    },
+    {
+      "no": 9,
+      "word": "declare",
+      "meaning": "선포하다, 선언하다"
+    },
+    {
+      "no": 10,
+      "word": "exile",
+      "meaning": "망명, 망명자; 망명시키다"
+    },
+    {
+      "no": 11,
+      "word": "nursery",
+      "meaning": "육아실, 탁아소, 양성소"
+    },
+    {
+      "no": 12,
+      "word": "relevant",
+      "meaning": "관련이 있는, 적절한"
+    },
+    {
+      "no": 13,
+      "word": "deterioration",
+      "meaning": "악화, (가치의) 하락"
+    },
+    {
+      "no": 14,
+      "word": "predator",
+      "meaning": "포식자, 약탈자, 육식 동물"
+    },
+    {
+      "no": 15,
+      "word": "countless",
+      "meaning": "셀 수 없는, 무수한"
+    },
+    {
+      "no": 16,
+      "word": "contagious",
+      "meaning": "전염성의, 감염성의"
+    },
+    {
+      "no": 17,
+      "word": "ascent",
+      "meaning": "상승, 오름"
+    },
+    {
+      "no": 18,
+      "word": "dare",
+      "meaning": "감히 ~하다"
+    },
+    {
+      "no": 19,
+      "word": "clarify",
+      "meaning": "분명히 하다, 명료하게 하다"
+    },
+    {
+      "no": 20,
+      "word": "notion",
+      "meaning": "개념, 의견"
+    },
+    {
+      "no": 21,
+      "word": "constraint",
+      "meaning": "강제, 압박, 거북스러움"
+    },
+    {
+      "no": 22,
+      "word": "obesity",
+      "meaning": "(병적인) 비만, 비대"
+    },
+    {
+      "no": 23,
+      "word": "posture",
+      "meaning": "태도, 자세"
+    },
+    {
+      "no": 24,
+      "word": "fragment",
+      "meaning": "일부분, 부서진 조각"
+    },
+    {
+      "no": 25,
+      "word": "deviation",
+      "meaning": "변경, 일탈"
+    },
+    {
+      "no": 26,
+      "word": "hail",
+      "meaning": "싸락눈, 우박; 우박이 내리다"
+    },
+    {
+      "no": 27,
+      "word": "advocate",
+      "meaning": "옹호자, 지지자; 지지하다"
+    },
+    {
+      "no": 28,
+      "word": "collective",
+      "meaning": "집합적인, 집단적인; 집단"
+    },
+    {
+      "no": 29,
+      "word": "delude",
+      "meaning": "속이다, 착각하게 하다"
+    },
+    {
+      "no": 30,
+      "word": "solvent",
+      "meaning": "용해력이 있는, 지불 능력이 있는; 용제"
+    },
+    {
+      "no": 31,
+      "word": "outburst",
+      "meaning": "분출, 폭발"
+    },
+    {
+      "no": 32,
+      "word": "scheme",
+      "meaning": "계획, 체계; 계획하다"
+    },
+    {
+      "no": 33,
+      "word": "janitor",
+      "meaning": "문지기, 관리인, 잡역부"
+    },
+    {
+      "no": 34,
+      "word": "frontier",
+      "meaning": "국경; 국경의, 최첨단의"
+    },
+    {
+      "no": 35,
+      "word": "spur",
+      "meaning": "박차, 자극(제); 박차를 가하다"
+    },
+    {
+      "no": 36,
+      "word": "discern",
+      "meaning": "식별하다, 분별하다, 인식하다"
+    },
+    {
+      "no": 37,
+      "word": "drain",
+      "meaning": "물을 빼내다, 소모시키다"
+    },
+    {
+      "no": 38,
+      "word": "outdated",
+      "meaning": "시대에 뒤진, 구식의"
+    },
+    {
+      "no": 39,
+      "word": "bother",
+      "meaning": "일부러 ~하다, 괴롭히다"
+    },
+    {
+      "no": 40,
+      "word": "disgust",
+      "meaning": "혐오감; 역겹게 하다"
+    },
+    {
+      "no": 41,
+      "word": "oversee",
+      "meaning": "감독하다, 감시하다"
+    },
+    {
+      "no": 42,
+      "word": "brisk",
+      "meaning": "활발한, 번창하는, 상쾌한"
+    },
+    {
+      "no": 43,
+      "word": "gust",
+      "meaning": "돌풍, 질풍"
+    },
+    {
+      "no": 44,
+      "word": "apparatus",
+      "meaning": "장치, 기구, 조직"
+    },
+    {
+      "no": 45,
+      "word": "itch",
+      "meaning": "가려움, (~하고 싶은) 욕구; 가렵다, (~하고 싶어) 못 견디다"
+    },
+    {
+      "no": 46,
+      "word": "cuisine",
+      "meaning": "(독특한) 요리, 요리법"
+    },
+    {
+      "no": 47,
+      "word": "nomad",
+      "meaning": "유목민, 방랑자"
+    },
+    {
+      "no": 48,
+      "word": "static",
+      "meaning": "정적인, 고정된"
+    },
+    {
+      "no": 49,
+      "word": "render",
+      "meaning": "~이 되게 하다, 주다, 표현하다"
+    },
+    {
+      "no": 50,
+      "word": "underneath",
+      "meaning": "~의 아래에, 밑에"
+    },
+    {
+      "no": 51,
+      "word": "distress",
+      "meaning": "고민, 고통; 괴롭히다"
+    },
+    {
+      "no": 52,
+      "word": "cultivate",
+      "meaning": "경작하다, 양성하다, 계발하다"
+    },
+    {
+      "no": 53,
+      "word": "retention",
+      "meaning": "보유, 기억(력)"
+    },
+    {
+      "no": 54,
+      "word": "publicity",
+      "meaning": "널리 알려짐, 명성, 광고, 선전"
+    },
+    {
+      "no": 55,
+      "word": "weigh",
+      "meaning": "무게를 달다"
+    },
+    {
+      "no": 56,
+      "word": "dilemma",
+      "meaning": "진퇴양난, 딜레마, 궁지"
+    },
+    {
+      "no": 57,
+      "word": "firsthand",
+      "meaning": "직접, 바로; 직접의"
+    },
+    {
+      "no": 58,
+      "word": "creep",
+      "meaning": "기다, (덩굴 등이) 얽히다; 포복, 서행"
+    },
+    {
+      "no": 59,
+      "word": "stall",
+      "meaning": "마구간, 우리, 핑계; 핑계를 대다"
+    },
+    {
+      "no": 60,
+      "word": "intervene",
+      "meaning": "사이에 끼어들다, 개입하다, 방해하다"
+    },
+    {
+      "no": 61,
+      "word": "border",
+      "meaning": "가장자리, 국경; 접하다"
+    },
+    {
+      "no": 62,
+      "word": "scope",
+      "meaning": "(관찰·활동의) 범위, 시야; 조사하다"
+    },
+    {
+      "no": 63,
+      "word": "vanity",
+      "meaning": "허영심, 허무함"
+    },
+    {
+      "no": 64,
+      "word": "counteract",
+      "meaning": "(효력을) 중화시키다, 약화시키다"
+    },
+    {
+      "no": 65,
+      "word": "dehydrate",
+      "meaning": "탈수하다, 건조시키다"
+    },
+    {
+      "no": 66,
+      "word": "encircle",
+      "meaning": "에워싸다, 둘러싸다"
+    },
+    {
+      "no": 67,
+      "word": "whisper",
+      "meaning": "속삭이다; 속삭임"
+    },
+    {
+      "no": 68,
+      "word": "fling",
+      "meaning": "내던지다, 돌진하다"
+    },
+    {
+      "no": 69,
+      "word": "juggle",
+      "meaning": "잘 처리하다, 저글링하다"
+    },
+    {
+      "no": 70,
+      "word": "compatible",
+      "meaning": "양립할 수 있는, 모순이 없는"
+    },
+    {
+      "no": 71,
+      "word": "dissolve",
+      "meaning": "용해하다, 해산하다, 해소하다"
+    },
+    {
+      "no": 72,
+      "word": "blush",
+      "meaning": "얼굴을 붉히다, 부끄러워하다"
+    },
+    {
+      "no": 73,
+      "word": "indispensable",
+      "meaning": "필수 불가결한; 없어서는 안 될 것"
+    },
+    {
+      "no": 74,
+      "word": "unanimous",
+      "meaning": "만장일치의, 합의의"
+    },
+    {
+      "no": 75,
+      "word": "discourse",
+      "meaning": "담화, 강연"
+    },
+    {
+      "no": 76,
+      "word": "sustain",
+      "meaning": "지탱하다, 유지하다"
+    },
+    {
+      "no": 77,
+      "word": "metabolism",
+      "meaning": "물질대사, 신진대사"
+    },
+    {
+      "no": 78,
+      "word": "verdict",
+      "meaning": "판결, 결정"
+    },
+    {
+      "no": 79,
+      "word": "post",
+      "meaning": "(벽 따위에) 붙이다; 우편"
+    },
+    {
+      "no": 80,
+      "word": "disciple",
+      "meaning": "제자, 문하생"
+    }
+  ]
+}
