@@ -1,0 +1,215 @@
+{
+ "item_no": "20",
+ "theme": "가까운 이가 아닌 비평적 안목을 가진 독자에게 피드백을 구하라",
+ "overview": {
+   "theme_ko": "비평적 안목을 지닌 독자에게 피드백 구하기",
+   "topic": "🔎 글쓰기 피드백을 받을 독자를 고르는 기준",
+   "stance": "중립적",
+   "stance_reason": "가까운 이('that's fine')와 비평적 독자를 견주며 조언하는 균형 잡힌 논조",
+   "structure": "주장→근거·예시",
+   "structure_reason": "값진 피드백은 비평적 통찰에서 온다는 주장 뒤 동료 작가·작가 모임 예시로 뒷받침",
+   "key_grammar": {
+     "point": "도치(only+부사절 문두 도치)",
+     "source_sentence": "Only when you're happy that you've done the best you can for your story should you show it to someone else.",
+     "explanation": [
+       {"chip":"쉽게 말하면","text":"'Only+부사절'이 문장 맨 앞으로 나가면, 그 뒤 주어와 (조)동사의 자리를 뒤바꿔야 한다."},
+       {"chip":"핵심 규칙","text":"부정·제한의 부사어(Only, Not until 등)가 문두에 오면 '조동사+주어+동사' 어순으로 도치된다."},
+       {"chip":"이 문장에서는","text":"'Only when ~ your story'가 앞에 나오자 조동사 should가 주어 you 앞으로 나와 should you show가 되었다."},
+       {"chip":"주의","text":"도치는 조동사(should)만 주어 앞으로 가고, 본동사(show)는 원형으로 뒤에 남는다."}
+     ],
+     "example_analysis": "Only when ~ story가 문두로 강조되자 조동사 should가 주어 you 앞으로 도치됨(should you show).",
+     "drills": [
+       {"kind":"밑줄형",
+        "question":"다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+        "sentence":"The most valuable feedback [[1|are]] likely [[2|to come]] from other sources: you should [[3|choose]] readers for their [[4|critical]] insight, not their [[5|closeness]] to you.",
+        "options":["① are","② to come","③ choose","④ critical","⑤ closeness"],
+        "answer":"①",
+        "fix":"주어 feedback은 단수(불가산) 취급이므로 동사는 is가 맞다; are→is.",
+        "words":[],
+        "from_passage":true},
+       {"kind":"네모형",
+        "question":"각 네모 안에서 어법에 맞는 것을 고르시오.",
+        "sentence":"Only when you're happy [[that/what]] you've done [[the best/the most]] you can for your story [[should you show/you should show]] it to someone else.",
+        "answer":"that / the best / should you show",
+        "fix":"happy 뒤 감정의 근거를 이끄는 접속사 that; do the best one can(관용) → the best; 제한 부사어 Only when이 문두에 왔으므로 조동사 도치 should you show.",
+        "options":[],
+        "words":[],
+        "from_passage":true},
+       {"kind":"오류찾기",
+        "question":"다음 중 어법상 틀린 문장은?",
+        "options":[
+          "Only when you're happy that you've done the best you can for your story should you show it to someone else.",
+          "You may well want to show it to your nearest and dearest, and that's fine, but in most cases you shouldn't looking to their reading for any great benefit to your work.",
+          "The most valuable feedback is likely to come from other sources: you should choose readers for their critical insight, not their closeness to you.",
+          "Fellow writers are ideal, but don't imagine that any writer will do.",
+          "If you are part of a writers' circle or class, you'll know whose writing you admire, and if you've had feedback in the past you'll know whose opinions have been helpful ― and whose have not."
+        ],
+        "answer":"You may well want to show it to your nearest and dearest, and that's fine, but in most cases you shouldn't looking to their reading for any great benefit to your work.",
+        "fix":"조동사 shouldn't 뒤에는 동사원형이 와야 하므로 looking→look.",
+        "words":[],
+        "from_passage":true},
+       {"kind":"영작",
+        "question":"네가 충분히 준비되었을 때에만 그 시험에 응시해야 한다. (Only를 문두에 둔 도치 구문으로)",
+        "answer":"Only when you are fully ready should you take the test.",
+        "sentence":"",
+        "fix":"",
+        "options":[],
+        "words":["Only","when","you","are","fully","ready","should","you","take","the","test"],
+        "from_passage":false},
+       {"kind":"영작",
+        "question":"너의 이야기를 위해 할 수 있는 최선을 다했다고 만족할 때에만 그것을 다른 사람에게 보여주어야 한다.",
+        "answer":"Only when you're happy that you've done the best you can for your story should you show it to someone else.",
+        "sentence":"",
+        "fix":"",
+        "options":[],
+        "words":["Only","when","you're","happy","that","you've","done","the best","you can","for","your","story","should you show","it","to","someone","else"],
+        "from_passage":true}
+     ]
+   },
+   "restatement_chains": [
+     {"label":"값진 피드백의 출처",
+      "expressions":["The most valuable feedback","other sources","critical insight"],
+      "variation":"가까움이 아니라 비평적 안목을 기준으로 독자를 고르라."}
+   ],
+   "flow_blocks": [
+     {"stage":"도입(조건 제시)","sentence_range":"1","summary":"스스로 [[최선]]을 다해 만족할 때에만 남에게 보여라","easy_example":"요리를 완성했다고 스스로 만족한 뒤에야 손님을 부르는 것과 같다."},
+     {"stage":"전개(대조)","sentence_range":"2~3","summary":"가까운 이의 반응 대신 [[비평적 통찰]]을 가진 독자를 골라라","easy_example":"응원만 하는 가족보다 냉정히 봐 주는 코치가 실력을 키워 준다."},
+     {"stage":"예시(구체화)","sentence_range":"4~5","summary":"동료 작가가 이상적이나 아무나가 아니라 [[신뢰할]] 사람으로","easy_example":"같은 반이라도 조언이 도움 됐던 친구만 골라 물어보는 것과 같다."}
+   ]
+ },
+ "sentences": [
+   {
+     "id": 1,
+     "english": "Only when you're happy that you've done the best you can for your story should you show it to someone else.",
+     "grammar": [
+       {"tag":"도치(부사구 문두 강조)","note":"제한 부사어 Only when절이 문두에 오자 조동사가 주어 앞으로","spans":["should you show"]},
+       {"tag":"감정형용사+that절","note":"happy 뒤 만족의 근거를 밝히는 that절","spans":["that"]},
+       {"tag":"현재완료","note":"you've done: 지금까지 해 온 상태","spans":["you've done"]},
+       {"tag":"목적격 관계대명사 생략","note":"the best (that) you can — 목적격 관계사 생략","spans":[]}
+     ],
+     "vocab": [
+       {"word":"be happy that","meaning":"~해서 만족하다/흡족해하다"},
+       {"word":"do the best one can","meaning":"할 수 있는 최선을 다하다"}
+     ],
+     "chunks": [
+       {"en":"Only when you're [[happy]]","ko":"네가 [[만족할]] 때에만"},
+       {"en":"that you've done the [[best]] you can","ko":"할 수 있는 [[최선을]] 다했다는 것에"},
+       {"en":"for your [[story]]","ko":"네 [[이야기]]를 위해"},
+       {"en":"should you [[show]] it","ko":"그것을 [[보여줘야]] 한다"},
+       {"en":"to [[someone]] else.","ko":"다른 [[누군가]]에게."}
+     ],
+     "misreads": [
+       {"statement":"자기 이야기를 위해 할 수 있는 최선을 다했다고 스스로 만족할 때에야 비로소 남에게 보여 주어야 한다.","verdict":"O"},
+       {"statement":"필자는 글이 완성되기 전이라도 되도록 빨리 남에게 보여 주는 것이 좋다고 조언한다.","verdict":"X","trap_type":"필자관점","anchor":"Only when you're happy that you've done the best you can","why":"최선을 다해 만족할 때에만 보여 주라고 했으므로 '되도록 빨리'는 필자 주장과 정반대다."}
+     ],
+     "mistips": ["'should you show'는 의문문이 아니라 Only when이 문두로 와서 생긴 도치이므로 '~해야 한다'로 읽는다."]
+   },
+   {
+     "id": 2,
+     "english": "You may well want to show it to your nearest and dearest, and that's fine, but in most cases you shouldn't look to their reading for any great benefit to your work.",
+     "grammar": [
+       {"tag":"may well+동사원형","note":"충분히 ~할 만하다, 아마 ~일 것이다","spans":["may well"]},
+       {"tag":"want to+동사원형","note":"~하고 싶어하다","spans":["to show"]},
+       {"tag":"최상급 관용구","note":"nearest and dearest: 가장 가깝고 소중한 이들","spans":["nearest and dearest"]},
+       {"tag":"look to A for B","note":"B를 얻으려고 A에 기대다/의존하다","spans":["look to"]}
+     ],
+     "vocab": [
+       {"word":"may well","meaning":"충분히 ~할 만하다, 아마 ~일 것이다"},
+       {"word":"nearest and dearest","meaning":"가장 가깝고 소중한 이들(가족·친지)"},
+       {"word":"look to A for B","meaning":"B를 A에게 기대하다/의지하다"},
+       {"word":"in most cases","meaning":"대부분의 경우"}
+     ],
+     "chunks": [
+       {"en":"You may well want to [[show]] it","ko":"그것을 [[보여주고]] 싶을 만도 하다"},
+       {"en":"to your nearest and [[dearest]], and that's fine,","ko":"가장 가깝고 [[소중한 이들]]에게, 그것도 괜찮지만,"},
+       {"en":"but in [[most cases]]","ko":"하지만 [[대부분의 경우]]에는"},
+       {"en":"you shouldn't look to their [[reading]]","ko":"그들의 [[읽기]]에 기대선 안 된다"},
+       {"en":"for any great [[benefit]] to your work.","ko":"네 글에 큰 [[이득]]을 바라며."}
+     ],
+     "misreads": [
+       {"statement":"'their reading'에서 their는 글을 쓴 필자 자신을 가리킨다.","verdict":"X","trap_type":"지칭","anchor":"your nearest and dearest","why":"their는 앞의 nearest and dearest(가까운 이들)를 가리키므로 필자 자신이 아니다."},
+       {"statement":"가까운 이들에게 글을 보여 주는 것 자체는 괜찮지만, 대부분의 경우 그들의 반응에서 큰 도움을 기대해선 안 된다.","verdict":"O"}
+     ],
+     "mistips": ["'that's fine, but ~' 구조에서 필자의 진짜 강조점은 but 뒤에 있으므로 '괜찮다'가 결론이 아니다."]
+   },
+   {
+     "id": 3,
+     "english": "The most valuable feedback is likely to come from other sources: you should choose readers for their critical insight, not their closeness to you.",
+     "grammar": [
+       {"tag":"최상급(the most+형용사)","note":"가장 가치 있는 피드백","spans":["most valuable"]},
+       {"tag":"be likely to+동사원형","note":"~할 가능성이 높다","spans":["likely to come"]},
+       {"tag":"조동사 should+동사원형","note":"~해야 한다(조언)","spans":["should choose"]},
+       {"tag":"상관/대조 not","note":"A for B, not C: C가 아니라 B를 기준으로","spans":["not"]}
+     ],
+     "vocab": [
+       {"word":"valuable","meaning":"가치 있는, 소중한"},
+       {"word":"be likely to","meaning":"~할 가능성이 있다"},
+       {"word":"critical insight","meaning":"비평적 통찰(력)"},
+       {"word":"closeness","meaning":"가까움, 친밀함"}
+     ],
+     "chunks": [
+       {"en":"The most [[valuable]] feedback","ko":"가장 [[가치 있는]] 피드백은"},
+       {"en":"is likely to come from other [[sources]]:","ko":"다른 [[출처]]에서 나올 가능성이 높다:"},
+       {"en":"you should choose [[readers]]","ko":"너는 [[독자]]를 골라야 한다"},
+       {"en":"for their [[critical insight]],","ko":"그들의 [[비평적 통찰]] 때문에,"},
+       {"en":"not their [[closeness]] to you.","ko":"너와의 [[가까움]] 때문이 아니라."}
+     ],
+     "misreads": [
+       {"statement":"필자는 값진 피드백을 얻으려면 독자에게 사례(보수)를 지불해야 한다고 조언한다.","verdict":"X","trap_type":"무관정보","anchor":"you should choose readers for their critical insight","why":"보수 지급은 언급이 없으며, 독자 선택 기준은 비평적 통찰이지 금전이 아니다."},
+       {"statement":"독자를 고를 때 자신과 얼마나 친한지가 아니라 비평적 안목을 기준으로 삼아야 한다.","verdict":"O"}
+     ],
+     "mistips": ["콜론(:) 뒤 문장은 앞 문장 'other sources'를 구체적으로 풀어 주는 부연 설명이다."]
+   },
+   {
+     "id": 4,
+     "english": "Fellow writers are ideal, but don't imagine that any writer will do.",
+     "grammar": [
+       {"tag":"명령문(don't+동사원형)","note":"~하지 마라(부정 명령)","spans":["don't imagine"]},
+       {"tag":"명사절 접속사 that","note":"imagine의 목적어절을 이끄는 that","spans":["that"]},
+       {"tag":"자동사 do(충분하다)","note":"will do: 충분하다/적합하다","spans":["will do"]}
+     ],
+     "vocab": [
+       {"word":"fellow writers","meaning":"동료 작가들"},
+       {"word":"ideal","meaning":"이상적인"},
+       {"word":"will do","meaning":"충분하다, 적합하다"}
+     ],
+     "chunks": [
+       {"en":"Fellow [[writers]] are ideal,","ko":"동료 [[작가]]들이 이상적이지만,"},
+       {"en":"but don't [[imagine]]","ko":"하지만 [[생각하지]] 마라"},
+       {"en":"that any writer [[will do]].","ko":"어떤 작가든 [[괜찮으]]리라고는."}
+     ],
+     "misreads": [
+       {"statement":"동료 작가라면 누구든 좋은 피드백을 주므로 아무 작가에게나 맡겨도 된다.","verdict":"△","trap_type":"주체대상","anchor":"don't imagine that any writer will do","why":"동료 작가가 이상적이라는 방향은 맞지만, 아무 작가나 괜찮은 것은 아니라고 반박한다."},
+       {"statement":"동료 작가가 피드백을 주기에 이상적이지만, 그렇다고 아무 작가나 다 적합한 것은 아니다.","verdict":"O"}
+     ],
+     "mistips": []
+   },
+   {
+     "id": 5,
+     "english": "If you are part of a writers' circle or class, you'll know whose writing you admire, and if you've had feedback in the past you'll know whose opinions have been helpful ― and whose have not.",
+     "grammar": [
+       {"tag":"조건 부사절 if","note":"만약 ~라면(가정)","spans":["If"]},
+       {"tag":"소유격 관계사 whose","note":"whose+명사: 누구의 ~인지","spans":["whose"]},
+       {"tag":"현재완료","note":"have been helpful: 지금까지 도움이 되어 온","spans":["have been"]},
+       {"tag":"생략(공통요소)","note":"and whose (opinions) have not (been helpful)","spans":["whose have not"]}
+     ],
+     "vocab": [
+       {"word":"writers' circle","meaning":"작가 모임/동인"},
+       {"word":"admire","meaning":"높이 평가하다, 존경하다"},
+       {"word":"opinion","meaning":"의견, 견해"}
+     ],
+     "chunks": [
+       {"en":"If you are part of a [[writers' circle]] or class,","ko":"네가 [[작가 모임]]이나 수업의 일원이라면,"},
+       {"en":"you'll know whose [[writing]] you admire,","ko":"네가 누구의 [[글]]을 높이 평가하는지 알 것이고,"},
+       {"en":"and if you've had [[feedback]] in the past","ko":"그리고 과거에 [[피드백]]을 받았다면"},
+       {"en":"you'll know whose [[opinions]] have been helpful","ko":"누구의 [[의견]]이 도움이 되었는지 알 것이다"},
+       {"en":"― and whose [[have not]].","ko":"― 그리고 [[누구의 것이 아니었는지도]]."}
+     ],
+     "misreads": [
+       {"statement":"과거에 받은 피드백은 모두 도움이 되었으므로 그 조언자들을 계속 찾으면 된다.","verdict":"X","trap_type":"인과조건","anchor":"whose opinions have been helpful ― and whose have not","killer":true,"why":"도움이 된 의견과 그렇지 않은 의견을 구분한다고 했으므로 '모두 도움'은 성립하지 않는다."},
+       {"statement":"글쓰기 모임이나 수업에 속해 있으면 누구의 글이 훌륭한지, 누구의 의견이 유용했는지 알게 된다.","verdict":"O"}
+     ],
+     "mistips": ["문미 'and whose have not'은 'and whose (opinions) have not (been helpful)'에서 반복어가 생략된 것이다."]
+   }
+ ]
+}

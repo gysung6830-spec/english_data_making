@@ -1,0 +1,1679 @@
+{
+ "item_no": "43-45",
+ "theme": "가사를 붙인 소년과 청각장애 기타리스트 Ridge 이야기",
+ "overview": {
+  "theme_ko": "즉흥 가사를 붙인 소년과 청각장애 기타리스트의 만남",
+  "topic": "🔎 매일 밤 이웃의 기타 연주에 즉흥 가사를 붙이던 Ridge와, 알고 보니 청각장애가 있던 기타리스트의 문자 교류",
+  "stance": "중립적",
+  "stance_reason": "인물의 경험을 시간 순서로 전달하는 이야기 (It turned out he was a deaf guitarist)",
+  "structure": "시간·순서(나열)",
+  "structure_reason": "One night → suddenly stopped → texting → A few days later → It turned out 으로 이어지는 사건 전개",
+  "key_grammar": {
+   "point": "과거완료(had p.p.)와 시제 — 과거 그 이전의 일·경험 나타내기",
+   "source_sentence": "He had never thought the man had noticed him singing along to his music.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "이야기의 과거 시점보다 '더 이전'에 일어난 일·경험은 had + 과거분사(과거완료)로 나타낸다."
+    },
+    {
+     "chip": "이 문장에서",
+     "text": "Ridge가 '생각한' 과거 시점보다 남자가 그를 '알아챈' 일이 더 앞서므로 두 동사 모두 had p.p.로 썼다."
+    },
+    {
+     "chip": "had never",
+     "text": "'그때까지 한 번도 ~한 적 없다'는 경험의 부정 — had never thought."
+    },
+    {
+     "chip": "주의",
+     "text": "현재완료(has p.p.)와 달리 기준이 '현재'가 아니라 '과거'다. 이야기가 과거 시제면 그 이전 일은 had p.p.로 쓴다."
+    }
+   ],
+   "example_analysis": "주절 had never thought, 목적어절 had noticed 가 모두 과거완료 — 서술 시점(과거)보다 더 이전의 경험·행위를 나타내는 이중 과거완료.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "Ridge [[1|loved]] [[2|writing]] lyrics, but he [[3|has]] never shared anything he'd [[4|written]] with [[5|anyone]].",
+     "options": [
+      "① loved",
+      "② writing",
+      "③ has",
+      "④ written",
+      "⑤ anyone"
+     ],
+     "answer": "③",
+     "fix": "이야기가 과거 시제(loved)이므로 그 이전까지의 경험은 현재완료 has가 아니라 과거완료 had로 써야 한다 → he had never shared.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "He [[had/has]] never thought the man [[had noticed/has noticed]] him [[singing/to sing]] along to his music.",
+     "options": [],
+     "answer": "had / had noticed / singing",
+     "fix": "과거 이야기의 그 이전 일이므로 had(과거완료), 그보다 더 이전 일도 had noticed(과거완료). 지각동사 notice의 목적격보어는 진행·능동을 나타내는 현재분사 singing.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "options": [
+      "One night, Ridge slid open the balcony door and stepped outside.",
+      "He told his mom he was going out to the balcony to do his homework.",
+      "He has never stopped in the middle of a song, so naturally Ridge looked in his direction.",
+      "Ridge was greatly surprised.",
+      "A few days later, a new message came from the man."
+     ],
+     "answer": "He has never stopped in the middle of a song, so naturally Ridge looked in his direction.",
+     "fix": "has never stopped → had never stopped: 과거 이야기(looked) 속 그 이전까지의 경험이므로 과거완료(had p.p.)로 써야 한다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그녀는 전에 그 영화를 본 적이 결코 없었다고 말했다.",
+     "sentence": "",
+     "options": [],
+     "answer": "She said that she had never seen the movie before.",
+     "fix": "",
+     "words": [
+      "She",
+      "said",
+      "that",
+      "she",
+      "had",
+      "never",
+      "seen",
+      "the movie",
+      "before"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "그는 그 남자가 자신이 음악을 따라 부르는 것을 알아챘다고는 결코 생각해 본 적이 없었다.",
+     "sentence": "",
+     "options": [],
+     "answer": "He had never thought the man had noticed him singing along to his music.",
+     "fix": "",
+     "words": [
+      "He",
+      "had",
+      "never",
+      "thought",
+      "the man",
+      "had",
+      "noticed",
+      "him",
+      "singing",
+      "along",
+      "to",
+      "his music"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "따라 부르기",
+    "expressions": [
+     "follow the rhythm",
+     "singing along to the music",
+     "singing along to his music"
+    ],
+    "variation": "리듬을 무심코 따라가다 → 음악에 맞춰 함께 노래하다"
+   },
+   {
+    "label": "가사 짓기",
+    "expressions": [
+     "attach his own made-up lyrics",
+     "writing lyrics",
+     "his favorite lyrics"
+    ],
+    "variation": "노래에 즉흥 가사를 붙이다 → 아끼는 가사를 써서 건네다"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입",
+    "sentence_range": "1~3",
+    "summary": "음악 전공을 꿈꾸는 [[Ridge]]가 매일 밤 이웃 남자의 기타 연주에 [[즉흥 가사]]를 붙임",
+    "easy_example": "라디오 멜로디에 자기 말로 가사를 붙여 흥얼거리는 것처럼"
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "4~6",
+    "summary": "어느 밤 숙제 핑계로 [[발코니]]에 나가 리듬을 따라 흥얼거림",
+    "easy_example": "창밖 음악에 저도 모르게 몸을 흔드는 것처럼"
+   },
+   {
+    "stage": "전환",
+    "sentence_range": "7~9",
+    "summary": "남자가 갑자기 연주를 멈추고 [[검지]]를 들어 '기다려'라고 신호함",
+    "easy_example": "대화를 멈추고 '잠깐만' 하며 손을 드는 것처럼"
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "10~15",
+    "summary": "종이에 적힌 [[전화번호]]로 문자를 주고받으며 남자가 '아직 가사를 안 붙였다'고 물음",
+    "easy_example": "메모지로 번호를 건네 문자로 이야기를 시작하는 것처럼"
+   },
+   {
+    "stage": "반전",
+    "sentence_range": "16~19",
+    "summary": "Ridge는 몹시 놀라며 남자가 자신을 [[봤을]] 줄 몰랐음을 깨닫고, 남자가 가사를 보내 달라 함",
+    "easy_example": "보고 있는 줄 몰랐던 사람이 나를 지켜봤음을 알게 되는 순간처럼"
+   },
+   {
+    "stage": "결말",
+    "sentence_range": "20~25",
+    "summary": "망설이던 Ridge가 가사를 보내고, 남자가 [[청각장애]] 기타리스트였음이 드러남",
+    "easy_example": "뜻밖의 사실이 마지막에 밝혀지는 반전처럼"
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Ridge was a high school student who wanted to major in music in college.",
+   "grammar": [
+    {
+     "tag": "주격 관계대명사 who",
+     "note": "선행사 student를 수식하는 주격 관계대명사",
+     "spans": [
+      "who"
+     ]
+    },
+    {
+     "tag": "to부정사(명사적 용법)",
+     "note": "want의 목적어로 쓰인 to부정사",
+     "spans": [
+      "to major"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "major in",
+     "meaning": "~을 전공하다"
+    },
+    {
+     "word": "college",
+     "meaning": "대학"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Ridge was a high school student",
+     "ko": "Ridge는 [[고등학생]]이었다"
+    },
+    {
+     "en": "who wanted to major in music",
+     "ko": "음악을 [[전공하고]] 싶어 한"
+    },
+    {
+     "en": "in college.",
+     "ko": "[[대학]]에서"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Ridge는 대학에서 음악을 전공하고 싶어 한 고등학생이었다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "For weeks, on his balcony, every night he listened to a man playing the guitar in the apartment across the courtyard.",
+   "grammar": [
+    {
+     "tag": "지각동사+목적격보어(현재분사)",
+     "note": "listen to A ~ing: A가 ~하는 것을 듣다",
+     "spans": [
+      "listened to",
+      "playing"
+     ]
+    },
+    {
+     "tag": "전치사 across",
+     "note": "across the courtyard: 안뜰 건너편에",
+     "spans": [
+      "across"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "courtyard",
+     "meaning": "안뜰, 마당"
+    },
+    {
+     "word": "balcony",
+     "meaning": "발코니"
+    },
+    {
+     "word": "apartment",
+     "meaning": "아파트"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "For weeks, on his balcony,",
+     "ko": "몇 주 동안 [[발코니]]에서"
+    },
+    {
+     "en": "every night he listened to a man",
+     "ko": "매일 밤 그는 [[한 남자]]의 소리를 들었다"
+    },
+    {
+     "en": "playing the guitar",
+     "ko": "[[기타를]] 연주하는"
+    },
+    {
+     "en": "in the apartment across the courtyard.",
+     "ko": "[[안뜰]] 건너편 아파트에 있는"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "매일 밤 발코니에서 기타를 연주한 사람은 Ridge였다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "a man playing the guitar",
+     "why": "기타를 연주한 사람은 안뜰 건너편 아파트의 한 남자이고 Ridge는 그 소리를 듣는 쪽이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "Although the songs the man played were all new to Ridge, he somehow managed to attach his own made-up lyrics to them.",
+   "grammar": [
+    {
+     "tag": "양보 부사절 접속사 although",
+     "note": "비록 ~이지만",
+     "spans": [
+      "Although"
+     ]
+    },
+    {
+     "tag": "목적격 관계대명사 생략",
+     "note": "the songs (that) the man played — 목적격 관계대명사가 생략됨",
+     "spans": []
+    },
+    {
+     "tag": "주어-동사 수일치",
+     "note": "주어 the songs(복수)에 맞춘 were",
+     "spans": [
+      "were"
+     ]
+    },
+    {
+     "tag": "to부정사(목적어)",
+     "note": "manage의 목적어로 쓰인 to attach",
+     "spans": [
+      "to attach"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "made-up",
+     "meaning": "지어낸, 꾸며 낸"
+    },
+    {
+     "word": "lyrics",
+     "meaning": "가사"
+    },
+    {
+     "word": "manage to",
+     "meaning": "어떻게든 ~해내다"
+    },
+    {
+     "word": "somehow",
+     "meaning": "어떻게든, 왠지"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Although the songs the man played",
+     "ko": "비록 남자가 연주한 [[노래들]]은"
+    },
+    {
+     "en": "were all new to Ridge,",
+     "ko": "Ridge에게 모두 [[새로웠]]지만"
+    },
+    {
+     "en": "he somehow managed to attach",
+     "ko": "그는 어떻게든 [[붙일]] 수 있었다"
+    },
+    {
+     "en": "his own made-up lyrics to them.",
+     "ko": "자신만의 [[지어낸 가사]]를 그것들에"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Ridge는 남자가 연주한 노래들을 이미 알고 있었기 때문에 쉽게 가사를 붙일 수 있었다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "were all new to Ridge",
+     "why": "노래들은 Ridge에게 모두 새로웠는데도 어떻게든 가사를 붙인 것이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "One night, Ridge slid open the balcony door and stepped outside.",
+   "grammar": [
+    {
+     "tag": "등위접속사 and(동사 병렬)",
+     "note": "slid open ... and stepped 병렬",
+     "spans": [
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "slide open (slid)",
+     "meaning": "밀어서 열다"
+    },
+    {
+     "word": "step outside",
+     "meaning": "밖으로 나가다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "One night, Ridge slid open",
+     "ko": "어느 밤 Ridge는 [[밀어]] 열었다"
+    },
+    {
+     "en": "the balcony door",
+     "ko": "[[발코니 문]]을"
+    },
+    {
+     "en": "and stepped outside.",
+     "ko": "그리고 [[밖으로]] 나갔다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "어느 밤 Ridge는 발코니 문을 밀어 열고 밖으로 나갔다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "He told his mom he was going out to the balcony to do his homework.",
+   "grammar": [
+    {
+     "tag": "4형식 tell + 목적어절",
+     "note": "told + 간접목적어 + (that) 직접목적어절",
+     "spans": [
+      "told"
+     ]
+    },
+    {
+     "tag": "과거진행 was going",
+     "note": "was going out — 과거진행형",
+     "spans": [
+      "was going"
+     ]
+    },
+    {
+     "tag": "to부정사(부사적·목적)",
+     "note": "~하기 위해 — to do",
+     "spans": [
+      "to do"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "go out",
+     "meaning": "밖으로 나가다"
+    },
+    {
+     "word": "do one's homework",
+     "meaning": "숙제를 하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "He told his mom",
+     "ko": "그는 [[엄마]]에게 말했다"
+    },
+    {
+     "en": "he was going out to the balcony",
+     "ko": "발코니로 [[나간다]]고"
+    },
+    {
+     "en": "to do his homework.",
+     "ko": "[[숙제]]를 하러"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Ridge는 엄마에게 남자의 기타 연주를 들으러 발코니에 나간다고 말했다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "to do his homework",
+     "why": "엄마에게는 숙제를 하러 나간다고 둘러대며 말했다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "The man was playing the guitar on his balcony as usual and Ridge started to mindlessly follow the rhythm.",
+   "grammar": [
+    {
+     "tag": "과거진행 was playing",
+     "note": "과거진행형",
+     "spans": [
+      "was playing"
+     ]
+    },
+    {
+     "tag": "start to V",
+     "note": "~하기 시작하다",
+     "spans": [
+      "to mindlessly follow"
+     ]
+    },
+    {
+     "tag": "등위접속사 and",
+     "note": "두 상황을 연결",
+     "spans": [
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "as usual",
+     "meaning": "평소처럼"
+    },
+    {
+     "word": "mindlessly",
+     "meaning": "무심코, 아무 생각 없이"
+    },
+    {
+     "word": "rhythm",
+     "meaning": "리듬"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The man was playing the guitar",
+     "ko": "남자는 [[기타를]] 연주하고 있었다"
+    },
+    {
+     "en": "on his balcony as usual",
+     "ko": "[[평소처럼]] 자기 발코니에서"
+    },
+    {
+     "en": "and Ridge started to mindlessly follow",
+     "ko": "그리고 Ridge는 무심코 [[따라가기]] 시작했다"
+    },
+    {
+     "en": "the rhythm.",
+     "ko": "[[리듬]]을"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Ridge는 평소처럼 리듬을 따라 흥얼거리기 시작했다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "on his balcony as usual",
+     "why": "as usual은 남자가 '평소처럼' 연주하고 있음을 수식하며, Ridge의 행동을 꾸미는 말이 아니다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 7,
+   "english": "While Ridge was singing along to the music, the man suddenly stopped playing.",
+   "grammar": [
+    {
+     "tag": "시간 부사절 접속사 while",
+     "note": "~하는 동안",
+     "spans": [
+      "While"
+     ]
+    },
+    {
+     "tag": "과거진행 was singing",
+     "note": "과거진행형",
+     "spans": [
+      "was singing"
+     ]
+    },
+    {
+     "tag": "stop ~ing(동명사)",
+     "note": "stop + ~ing: ~하던 것을 멈추다",
+     "spans": [
+      "stopped playing"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "sing along",
+     "meaning": "따라 부르다"
+    },
+    {
+     "word": "suddenly",
+     "meaning": "갑자기"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "While Ridge was singing along to the music,",
+     "ko": "Ridge가 음악에 맞춰 [[따라 부르는]] 동안"
+    },
+    {
+     "en": "the man suddenly stopped playing.",
+     "ko": "남자가 갑자기 연주를 [[멈췄다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "남자는 곡을 다 연주해서 마지막에 자연스럽게 연주를 멈췄다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "suddenly stopped playing",
+     "why": "곡을 다 끝내서가 아니라 노래 도중 갑자기 멈춘 것이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "He had never stopped in the middle of a song, so naturally Ridge looked in his direction.",
+   "grammar": [
+    {
+     "tag": "과거완료 had p.p.(경험)",
+     "note": "과거 그 시점 이전까지의 경험 — had never stopped",
+     "spans": [
+      "had never stopped"
+     ]
+    },
+    {
+     "tag": "결과의 접속사 so",
+     "note": "그래서 ~하다",
+     "spans": [
+      "so"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "in the middle of",
+     "meaning": "~의 도중에"
+    },
+    {
+     "word": "direction",
+     "meaning": "방향, 쪽"
+    },
+    {
+     "word": "naturally",
+     "meaning": "자연히, 당연히"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "He had never stopped",
+     "ko": "그는 [[멈춘]] 적이 없었다"
+    },
+    {
+     "en": "in the middle of a song,",
+     "ko": "노래 [[중간]]에"
+    },
+    {
+     "en": "so naturally Ridge looked",
+     "ko": "그래서 자연히 Ridge는 [[바라봤다]]"
+    },
+    {
+     "en": "in his direction.",
+     "ko": "그의 [[쪽]]을"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "남자는 곡 중간에 자주 멈추곤 했기 때문에 Ridge는 그가 멈춰도 신경 쓰지 않았다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "had never stopped in the middle of a song",
+     "why": "남자는 곡 중간에 멈춘 적이 한 번도 없었기에 Ridge가 자연히 그쪽을 바라본 것이다."
+    }
+   ],
+   "mistips": [
+    "so는 여기서 '그래서'(결과)의 접속사 — 앞이 원인, 뒤가 결과다."
+   ]
+  },
+  {
+   "id": 9,
+   "english": "The man held up his index finger as if to say, \"Hold on.\"",
+   "grammar": [
+    {
+     "tag": "구동사 hold up",
+     "note": "들어 올리다",
+     "spans": [
+      "held up"
+     ]
+    },
+    {
+     "tag": "as if to V",
+     "note": "as if + to부정사: 마치 ~하려는 듯이",
+     "spans": [
+      "as if to say"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "hold up",
+     "meaning": "들어 올리다"
+    },
+    {
+     "word": "index finger",
+     "meaning": "검지, 집게손가락"
+    },
+    {
+     "word": "hold on",
+     "meaning": "잠깐 기다리다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The man held up his index finger",
+     "ko": "남자는 [[검지]]를 들어 올렸다"
+    },
+    {
+     "en": "as if to say, \"Hold on.\"",
+     "ko": "마치 '[[기다려]]'라고 말하듯이"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "남자는 검지를 들어 Ridge에게 노래를 그만두라는 뜻을 전했다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "Hold on",
+     "why": "검지를 든 것은 '잠깐 기다리라'는 뜻이지 노래를 그만두라는 뜻이 아니다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 10,
+   "english": "He lifted one sheet of paper, and Ridge narrowed his eyes to get a good look at what was written on it.",
+   "grammar": [
+    {
+     "tag": "to부정사(부사적·목적)",
+     "note": "~하기 위해 — to get",
+     "spans": [
+      "to get"
+     ]
+    },
+    {
+     "tag": "관계대명사 what",
+     "note": "선행사를 포함하는 관계대명사 — ~하는 것",
+     "spans": [
+      "what"
+     ]
+    },
+    {
+     "tag": "수동태 was written",
+     "note": "be + p.p. — 적혀 있는",
+     "spans": [
+      "was written"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "narrow one's eyes",
+     "meaning": "눈을 가늘게 뜨다"
+    },
+    {
+     "word": "sheet of paper",
+     "meaning": "종이 한 장"
+    },
+    {
+     "word": "get a good look",
+     "meaning": "잘 살펴보다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "He lifted one sheet of paper,",
+     "ko": "그는 [[종이]] 한 장을 들어 올렸고"
+    },
+    {
+     "en": "and Ridge narrowed his eyes",
+     "ko": "Ridge는 눈을 [[가늘게]] 떴다"
+    },
+    {
+     "en": "to get a good look at",
+     "ko": "[[잘 보려고]]"
+    },
+    {
+     "en": "what was written on it.",
+     "ko": "그 위에 [[적힌 것]]을"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Ridge는 종이에 적힌 것을 잘 보려고 눈을 크게 떴다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "killer": true,
+     "anchor": "narrowed his eyes",
+     "why": "Ridge는 눈을 '가늘게' 떴지 크게 뜬 것이 아니다."
+    }
+   ],
+   "mistips": [
+    "what was written on it = '그 위에 적혀 있던 것' — what은 선행사를 포함한 관계대명사다."
+   ]
+  },
+  {
+   "id": 11,
+   "english": "His phone number and \"Text me\" were written on the sheet.",
+   "grammar": [
+    {
+     "tag": "수동태 were written",
+     "note": "be + p.p. 수동태",
+     "spans": [
+      "were written"
+     ]
+    },
+    {
+     "tag": "주어-동사 수일치",
+     "note": "A and B(복수 주어) → were",
+     "spans": [
+      "were"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "be written",
+     "meaning": "적혀 있다"
+    },
+    {
+     "word": "sheet",
+     "meaning": "(종이) 한 장"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "His phone number and \"Text me\"",
+     "ko": "그의 [[전화번호]]와 'Text me'가"
+    },
+    {
+     "en": "were written on the sheet.",
+     "ko": "종이에 [[적혀]] 있었다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "종이에 적힌 전화번호와 'Text me'는 Ridge가 미리 적어 둔 것이었다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "His phone number",
+     "why": "His는 남자를 가리키며, 그 번호는 남자의 것이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 12,
+   "english": "Then he flipped the paper over and wrote, \"I have a question.\"",
+   "grammar": [
+    {
+     "tag": "구동사 flip over",
+     "note": "뒤집다",
+     "spans": [
+      "flipped",
+      "over"
+     ]
+    },
+    {
+     "tag": "등위접속사 and",
+     "note": "flipped ... and wrote 병렬",
+     "spans": [
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "flip over",
+     "meaning": "뒤집다"
+    },
+    {
+     "word": "have a question",
+     "meaning": "질문이 있다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Then he flipped the paper over",
+     "ko": "그러고 나서 그는 종이를 [[뒤집었]]다"
+    },
+    {
+     "en": "and wrote, \"I have a question.\"",
+     "ko": "그리고 '[[질문]]이 있어요'라고 적었다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "그런 다음 남자는 종이를 뒤집어 'I have a question'이라고 적었다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 13,
+   "english": "Curious about the man's question, and wondering why he had asked for a text instead of a call, Ridge pulled out his phone and entered the number.",
+   "grammar": [
+    {
+     "tag": "분사구문(형용사구 Curious)",
+     "note": "이유·상황을 나타내는 분사구문(Being 생략)",
+     "spans": [
+      "Curious"
+     ]
+    },
+    {
+     "tag": "분사구문 wondering",
+     "note": "동시상황 분사구문",
+     "spans": [
+      "wondering"
+     ]
+    },
+    {
+     "tag": "간접의문문 why S+V",
+     "note": "의문사 why + 주어+동사 어순",
+     "spans": [
+      "why he had asked"
+     ]
+    },
+    {
+     "tag": "과거완료 had asked",
+     "note": "궁금해한 시점보다 더 이전 — had p.p.",
+     "spans": [
+      "had asked"
+     ]
+    },
+    {
+     "tag": "구동사 pull out",
+     "note": "꺼내다",
+     "spans": [
+      "pulled out"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "wonder",
+     "meaning": "궁금해하다"
+    },
+    {
+     "word": "instead of",
+     "meaning": "~ 대신에"
+    },
+    {
+     "word": "pull out",
+     "meaning": "꺼내다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Curious about the man's question,",
+     "ko": "남자의 [[질문]]이 궁금하고"
+    },
+    {
+     "en": "and wondering why he had asked for a text",
+     "ko": "왜 그가 [[문자]]를 요청했는지 궁금해하며"
+    },
+    {
+     "en": "instead of a call,",
+     "ko": "[[전화]] 대신"
+    },
+    {
+     "en": "Ridge pulled out his phone",
+     "ko": "Ridge는 [[휴대폰]]을 꺼냈다"
+    },
+    {
+     "en": "and entered the number.",
+     "ko": "그리고 번호를 [[입력했다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Ridge는 남자가 전화 대신 문자를 요청한 것이 궁금해서 남자에게 곧바로 전화를 걸었다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "pulled out his phone and entered the number",
+     "why": "Ridge는 전화를 건 것이 아니라 휴대폰을 꺼내 번호를 입력해 문자를 보내려 했다."
+    }
+   ],
+   "mistips": [
+    "문두 Curious ~, wondering ~ 은 모두 주어 Ridge를 꾸미는 분사구문 — 콤마로 길게 나열되었다."
+   ]
+  },
+  {
+   "id": 14,
+   "english": "He typed, \"What's your question?\"",
+   "grammar": [
+    {
+     "tag": "동사 type(과거형)",
+     "note": "typed — (글자를) 입력했다",
+     "spans": [
+      "typed"
+     ]
+    },
+    {
+     "tag": "의문사 의문문 what",
+     "note": "What's your question? 직접 의문문",
+     "spans": [
+      "What's"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "type",
+     "meaning": "(글자를) 입력하다"
+    },
+    {
+     "word": "question",
+     "meaning": "질문"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "He typed,",
+     "ko": "그는 [[입력했다]]"
+    },
+    {
+     "en": "\"What's your question?\"",
+     "ko": "'[[질문]]이 뭐예요?'라고"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Ridge는 'What's your question?'이라고 입력해 보냈다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 15,
+   "english": "The man texted, \"I want to know how you're singing lyrics to my songs when I haven't even added lyrics to them yet.\"",
+   "grammar": [
+    {
+     "tag": "간접의문문 how S+V",
+     "note": "know의 목적어 — how + 주어+동사",
+     "spans": [
+      "how you're singing"
+     ]
+    },
+    {
+     "tag": "시간·양보 부사절 when",
+     "note": "~인데도/~할 때",
+     "spans": [
+      "when"
+     ]
+    },
+    {
+     "tag": "현재완료 haven't added",
+     "note": "현재완료(아직 ~하지 않았다) + yet",
+     "spans": [
+      "haven't",
+      "added"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "text",
+     "meaning": "문자를 보내다"
+    },
+    {
+     "word": "add",
+     "meaning": "덧붙이다, 추가하다"
+    },
+    {
+     "word": "yet",
+     "meaning": "아직"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The man texted,",
+     "ko": "남자가 [[문자를 보냈다]]"
+    },
+    {
+     "en": "\"I want to know how you're singing lyrics",
+     "ko": "'네가 어떻게 [[가사]]를 부르고 있는지 알고 싶어"
+    },
+    {
+     "en": "to my songs",
+     "ko": "내 [[노래]]에"
+    },
+    {
+     "en": "when I haven't even added lyrics to them yet.\"",
+     "ko": "나는 아직 [[가사를 붙이지도]] 않았는데'"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "남자는 자신이 이미 가사를 붙여 둔 노래를 Ridge가 어떻게 아는지 물었다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "I haven't even added lyrics to them yet",
+     "why": "남자는 아직 자기 노래에 가사를 붙이지 않은 상태였다."
+    }
+   ],
+   "mistips": [
+    "how you're singing ~ 은 know의 목적어(간접의문문), when절은 '~인데도'로 해석하면 자연스럽다."
+   ]
+  },
+  {
+   "id": 16,
+   "english": "Ridge was greatly surprised.",
+   "grammar": [
+    {
+     "tag": "감정 분사(과거분사) surprised",
+     "note": "감정을 느낄 때는 과거분사 — 놀란",
+     "spans": [
+      "surprised"
+     ]
+    },
+    {
+     "tag": "정도 강조 부사 greatly",
+     "note": "정도를 강조",
+     "spans": [
+      "greatly"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "greatly",
+     "meaning": "몹시, 대단히"
+    },
+    {
+     "word": "surprised",
+     "meaning": "놀란"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Ridge was greatly surprised.",
+     "ko": "Ridge는 몹시 [[놀랐다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "글쓴이는 이 장면에서 Ridge가 남자의 질문에 크게 실망했음을 보여 준다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "greatly surprised",
+     "why": "Ridge는 실망한 것이 아니라 몹시 '놀란' 상태로 그려진다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 17,
+   "english": "Why hadn't he thought the man could see him sitting out there?",
+   "grammar": [
+    {
+     "tag": "과거완료 부정 의문 hadn't thought",
+     "note": "과거완료(그때까지 생각 못함)의 의문문",
+     "spans": [
+      "hadn't",
+      "thought"
+     ]
+    },
+    {
+     "tag": "지각동사 see O ~ing",
+     "note": "see + 목적어 + 현재분사",
+     "spans": [
+      "see",
+      "sitting"
+     ]
+    },
+    {
+     "tag": "조동사 could",
+     "note": "~할 수 있다(가능)",
+     "spans": [
+      "could"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "could see",
+     "meaning": "볼 수 있었다"
+    },
+    {
+     "word": "out there",
+     "meaning": "바깥 저기에"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Why hadn't he thought",
+     "ko": "왜 그는 [[생각하지]] 못했을까"
+    },
+    {
+     "en": "the man could see him",
+     "ko": "남자가 자신을 [[볼 수]] 있다는 것을"
+    },
+    {
+     "en": "sitting out there?",
+     "ko": "밖에 [[앉아]] 있는"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Ridge는 남자가 자신을 볼 수 있다는 것을 처음부터 알고 있었다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "hadn't he thought the man could see him",
+     "why": "Ridge는 남자가 자신을 볼 수 있다고 전혀 생각하지 못했다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 18,
+   "english": "He had never thought the man had noticed him singing along to his music.",
+   "grammar": [
+    {
+     "tag": "과거완료 had thought(경험)",
+     "note": "그때까지 한 번도 ~생각하지 못함",
+     "spans": [
+      "had never thought"
+     ]
+    },
+    {
+     "tag": "과거완료 had noticed(대과거)",
+     "note": "생각한 시점보다 더 이전 — had p.p.",
+     "spans": [
+      "had noticed"
+     ]
+    },
+    {
+     "tag": "지각동사 notice O ~ing",
+     "note": "notice + 목적어 + 현재분사",
+     "spans": [
+      "noticed",
+      "singing"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "notice",
+     "meaning": "알아채다"
+    },
+    {
+     "word": "sing along",
+     "meaning": "따라 부르다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "He had never thought",
+     "ko": "그는 [[생각한]] 적이 전혀 없었다"
+    },
+    {
+     "en": "the man had noticed him",
+     "ko": "남자가 자신을 [[알아챘]]다는 것을"
+    },
+    {
+     "en": "singing along to his music.",
+     "ko": "음악을 [[따라 부르는]] 것을"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Ridge는 남자가 자신을 알아차리지 못했다고 여겼는데, 이는 그 남자가 앞을 보지 못하는 사람이었기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "integrative": true,
+     "anchor": "a deaf guitarist",
+     "why": "남자가 Ridge를 알아채지 못했다고 여긴 방향은 맞지만, 남자는 시각장애가 아니라 청각장애(deaf)였고 실제로는 그를 보고 있었으므로 이유가 틀렸다."
+    }
+   ],
+   "mistips": [
+    "had never thought(주절)와 had noticed(목적어절)가 모두 과거완료 — 과거보다 앞선 일을 겹쳐 나타낸다."
+   ]
+  },
+  {
+   "id": 19,
+   "english": "The man sent another message asking, \"Will you send them to me?\"",
+   "grammar": [
+    {
+     "tag": "분사구문 asking",
+     "note": "동시상황 — 물으며",
+     "spans": [
+      "asking"
+     ]
+    },
+    {
+     "tag": "조동사 will(요청 의문)",
+     "note": "Will you ~? 요청·부탁",
+     "spans": [
+      "Will"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "another message",
+     "meaning": "또 다른 메시지"
+    },
+    {
+     "word": "ask",
+     "meaning": "묻다, 요청하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The man sent another message",
+     "ko": "남자는 또 다른 [[메시지]]를 보냈다"
+    },
+    {
+     "en": "asking, \"Will you send them to me?\"",
+     "ko": "'그것들을 나에게 [[보내]] 줄래?'라고 물으며"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "남자가 보내 달라고 한 'them'은 남자 자신의 노래들을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "Will you send them to me",
+     "why": "them은 Ridge가 붙인 가사를 가리킨다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 20,
+   "english": "After reading the man's message asking for his lyrics, Ridge hesitated.",
+   "grammar": [
+    {
+     "tag": "전치사 After + 동명사",
+     "note": "after reading — ~한 뒤에",
+     "spans": [
+      "After reading"
+     ]
+    },
+    {
+     "tag": "현재분사 asking(후치수식)",
+     "note": "message를 뒤에서 수식",
+     "spans": [
+      "asking"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "ask for",
+     "meaning": "~을 요청하다"
+    },
+    {
+     "word": "hesitate",
+     "meaning": "망설이다"
+    },
+    {
+     "word": "lyrics",
+     "meaning": "가사"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "After reading the man's message",
+     "ko": "남자의 [[메시지]]를 읽은 뒤"
+    },
+    {
+     "en": "asking for his lyrics,",
+     "ko": "자기 [[가사]]를 요청하는"
+    },
+    {
+     "en": "Ridge hesitated.",
+     "ko": "Ridge는 [[망설였다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Ridge는 자기 가사를 보내 달라는 남자의 메시지를 읽고 망설였다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 21,
+   "english": "Ridge loved writing lyrics, but he had never shared anything he'd written with anyone.",
+   "grammar": [
+    {
+     "tag": "동명사(목적어) writing",
+     "note": "love + 동명사",
+     "spans": [
+      "writing"
+     ]
+    },
+    {
+     "tag": "역접 접속사 but",
+     "note": "대조",
+     "spans": [
+      "but"
+     ]
+    },
+    {
+     "tag": "과거완료 had shared(경험)",
+     "note": "그때까지 공유한 적 없음",
+     "spans": [
+      "had never shared"
+     ]
+    },
+    {
+     "tag": "목적격 관계대명사 생략 + 과거완료",
+     "note": "anything (that) he'd written — he had written",
+     "spans": [
+      "he'd written"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "share",
+     "meaning": "공유하다, 나누다"
+    },
+    {
+     "word": "anything",
+     "meaning": "(부정문) 어떤 것도"
+    },
+    {
+     "word": "had written",
+     "meaning": "(그 전에) 썼다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Ridge loved writing lyrics,",
+     "ko": "Ridge는 [[가사 쓰는]] 것을 좋아했다"
+    },
+    {
+     "en": "but he had never shared",
+     "ko": "하지만 그는 결코 [[공유한]] 적이 없었다"
+    },
+    {
+     "en": "anything he'd written with anyone.",
+     "ko": "자신이 쓴 [[어떤 것]]도 누구와도"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Ridge는 가사 쓰기를 좋아해서 자신이 쓴 것을 여러 사람과 자주 나눠 왔다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "had never shared anything he'd written with anyone",
+     "why": "그는 자신이 쓴 것을 누구와도 공유한 적이 없었다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 22,
+   "english": "Eventually, he wrote down one of his favorite lyrics and sent it to him.",
+   "grammar": [
+    {
+     "tag": "구동사 write down",
+     "note": "적어 두다",
+     "spans": [
+      "wrote down"
+     ]
+    },
+    {
+     "tag": "one of the+복수명사",
+     "note": "~ 중 하나",
+     "spans": [
+      "one of his favorite lyrics"
+     ]
+    },
+    {
+     "tag": "등위접속사 and",
+     "note": "wrote down ... and sent 병렬",
+     "spans": [
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "eventually",
+     "meaning": "결국, 마침내"
+    },
+    {
+     "word": "write down",
+     "meaning": "적어 두다"
+    },
+    {
+     "word": "favorite",
+     "meaning": "가장 좋아하는"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Eventually, he wrote down",
+     "ko": "[[마침내]] 그는 적었다"
+    },
+    {
+     "en": "one of his favorite lyrics",
+     "ko": "자신이 [[아끼는 가사]] 하나를"
+    },
+    {
+     "en": "and sent it to him.",
+     "ko": "그리고 그것을 [[남자]]에게 보냈다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "결국 Ridge는 자신이 아끼는 가사 하나를 적어 남자에게 보냈다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 23,
+   "english": "A few days later, a new message came from the man.",
+   "grammar": [
+    {
+     "tag": "시간 부사구 later",
+     "note": "~ 뒤에",
+     "spans": [
+      "later"
+     ]
+    },
+    {
+     "tag": "자동사 come from",
+     "note": "~로부터 오다",
+     "spans": [
+      "came from"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "a few days later",
+     "meaning": "며칠 뒤"
+    },
+    {
+     "word": "come from",
+     "meaning": "~로부터 오다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "A few days later,",
+     "ko": "[[며칠]] 뒤"
+    },
+    {
+     "en": "a new message came from the man.",
+     "ko": "남자로부터 새 [[메시지]]가 왔다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "며칠 뒤 남자는 새 앨범의 발매 날짜를 알리는 메시지를 보냈다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "a new message came from the man",
+     "why": "새 메시지가 왔다고만 했을 뿐 앨범 발매 날짜에 대한 언급은 없다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 24,
+   "english": "He wanted to use Ridge's lyrics for his new album.",
+   "grammar": [
+    {
+     "tag": "want to V",
+     "note": "~하고 싶어 하다",
+     "spans": [
+      "wanted to use"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "album",
+     "meaning": "앨범"
+    },
+    {
+     "word": "lyrics",
+     "meaning": "가사"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "He wanted to use Ridge's lyrics",
+     "ko": "그는 Ridge의 [[가사]]를 쓰고 싶어 했다"
+    },
+    {
+     "en": "for his new album.",
+     "ko": "자신의 새 [[앨범]]에"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "여기서 'He'는 Ridge를 가리키며, Ridge가 남자의 가사를 자기 앨범에 쓰고 싶어 했다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "use Ridge's lyrics for his new album",
+     "why": "He는 남자를 가리키고, 남자가 Ridge의 가사를 자기 새 앨범에 쓰려 한 것이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 25,
+   "english": "It turned out he was a deaf guitarist and songwriter in a band called Brennan's Band.",
+   "grammar": [
+    {
+     "tag": "turn out (that) — 판명되다",
+     "note": "It turned out (that) S+V: ~로 밝혀지다",
+     "spans": [
+      "turned out"
+     ]
+    },
+    {
+     "tag": "과거분사 called(후치수식)",
+     "note": "a band called ~ : ~라고 불리는 밴드",
+     "spans": [
+      "called"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "turn out",
+     "meaning": "~로 밝혀지다"
+    },
+    {
+     "word": "deaf",
+     "meaning": "청각장애가 있는, 귀가 들리지 않는"
+    },
+    {
+     "word": "songwriter",
+     "meaning": "작곡가, 작사가"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "It turned out he was",
+     "ko": "[[알고 보니]] 그는 ~였다"
+    },
+    {
+     "en": "a deaf guitarist and songwriter",
+     "ko": "[[청각장애]]가 있는 기타리스트이자 작곡가"
+    },
+    {
+     "en": "in a band called Brennan's Band.",
+     "ko": "Brennan's Band라는 [[밴드]]의"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "알고 보니 그 남자는 앞이 보이지 않는 시각장애 기타리스트였다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "a deaf guitarist",
+     "why": "남자는 시각장애가 아니라 청각장애(deaf)가 있는 사람이었다.",
+     "english": "It turned out he was a blind guitarist and songwriter."
+    },
+    {
+     "statement": "Ridge도 Brennan's Band의 정식 멤버로 합류하게 되었다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "in a band called Brennan's Band",
+     "why": "Ridge가 그 밴드에 합류했다는 언급은 지문에 없다."
+    }
+   ],
+   "mistips": []
+  }
+ ]
+}

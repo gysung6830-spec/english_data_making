@@ -1,0 +1,299 @@
+{
+ "item_no": "21",
+ "theme": "유연한 시간 문화의 회의는 예측 불가능하게 자라는 상록수 같다",
+ "overview": {
+   "theme_ko": "상록수처럼 자라는 유연한 시간 문화의 회의",
+   "topic": "🔎 유연한 시간 문화에서 예측 불가능하게 자라는 회의",
+   "stance": "긍정적",
+   "stance_reason": "예측 불가능하게 자라는 회의를 '가장 생산적(most productive)'이며 자연스럽고 필요하다고 평가함",
+   "structure": "예시→일반화(결론)",
+   "structure_reason": "상록수 비유(줄기·가지)를 전개한 뒤 '가장 생산적인 회의'라는 결론으로 일반화",
+   "key_grammar": {
+     "point": "관계대명사 what",
+     "source_sentence": "What seemed like a priority last week when the agenda was crafted is not necessarily the priority right now ― so discussion may branch off in a new direction.",
+     "explanation": [
+       {"chip":"쉽게 말하면","text":"관계대명사 what은 선행사(the thing)를 이미 품고 있어 '~하는 것'으로 해석되는 명사절을 만든다."},
+       {"chip":"핵심 규칙","text":"what 앞에는 꾸밈을 받는 명사(선행사)가 없으며, what절은 문장에서 주어·목적어·보어 자리에 온다."},
+       {"chip":"이 문장에서는","text":"What ~ crafted 전체가 문장의 주어이며, 단수 취급되어 동사 is를 받는다."},
+       {"chip":"비교 포인트","text":"앞에 선행사가 있으면 which/that을, 없으면 what을 쓴다 — expectation that…의 동격 that과 혼동하지 말 것."}
+     ],
+     "example_analysis": "선행사를 포함한 what이 명사절 주어(What ~ crafted)를 이끌고, 단수 취급되어 is를 받음.",
+     "drills": [
+       {"kind":"밑줄형",
+        "question":"다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+        "sentence":"[[1|Which]] seemed like a priority last week [[2|when]] the agenda [[3|was crafted]] [[4|is]] not necessarily the priority right now ― so discussion may [[5|branch off]] in a new direction.",
+        "options":["① Which","② when","③ was crafted","④ is","⑤ branch off"],
+        "answer":"①",
+        "fix":"선행사 없이 명사절 주어를 이끌려면 선행사를 포함하는 관계대명사 What이어야 하므로 Which→What.",
+        "words":[],
+        "from_passage":true},
+       {"kind":"네모형",
+        "question":"각 네모 안에서 어법에 맞는 것을 고르시오.",
+        "sentence":"A meeting in a flexible-time culture like those [[found/finding]] in South America, parts of Europe, Africa, and the Middle East [[is/are]] more like an evergreen tree.",
+        "answer":"found / is",
+        "fix":"those (that are) found: 수동의 과거분사 found; 삽입어구를 걸러낸 핵심 주어는 단수 A meeting이므로 is.",
+        "options":[],
+        "words":[],
+        "from_passage":true},
+       {"kind":"오류찾기",
+        "question":"다음 중 어법상 틀린 문장은?",
+        "options":[
+          "This will serve as the trunk of the tree.",
+          "Interruptions, agenda changes, and frequent shifts in direction are seen as natural and necessary.",
+          "But there's no expectation what the meeting will progress in a linear manner.",
+          "Other branches may sprout as some members have urgent phone calls that take them in and out of the meeting.",
+          "Or sub-groups may form within the room to discuss timely subjects linked in some way to the main meeting trunk."
+        ],
+        "answer":"But there's no expectation what the meeting will progress in a linear manner.",
+        "fix":"expectation의 내용을 밝히는 동격절은 접속사 that이 이끌어야 하므로 what→that.",
+        "words":[],
+        "from_passage":true},
+       {"kind":"영작",
+        "question":"네가 어제 산 것은 오늘 아무 쓸모가 없다. (관계대명사 what을 주어로)",
+        "answer":"What you bought yesterday is useless today.",
+        "sentence":"",
+        "fix":"",
+        "options":[],
+        "words":["What","you","bought","yesterday","is","useless","today"],
+        "from_passage":false},
+       {"kind":"영작",
+        "question":"지난주 의제를 짤 때 우선 사항처럼 보였던 것이 지금은 반드시 우선 사항인 것은 아니다 ― 그래서 논의는 새로운 방향으로 갈라질 수도 있다.",
+        "answer":"What seemed like a priority last week when the agenda was crafted is not necessarily the priority right now ― so discussion may branch off in a new direction.",
+        "sentence":"",
+        "fix":"",
+        "options":[],
+        "words":["What","seemed like","a priority","last week","when","the agenda","was crafted","is","not necessarily","the priority","right now","―","so","discussion","may branch off","in a new direction"],
+        "from_passage":true}
+     ]
+   },
+   "restatement_chains": [
+     {"label":"예측 불가능하게 자라는 회의",
+      "expressions":["grow in unpredictable ways","branch off in a new direction","natural and necessary"],
+      "variation":"회의는 상록수처럼 예측 못 한 방향으로 뻗어 나간다."}
+   ],
+   "flow_blocks": [
+     {"stage":"도입(비유 제시)","sentence_range":"1","summary":"유연한 시간 문화의 회의는 [[상록수]]에 더 가깝다","easy_example":"정해진 길로만 가는 기차가 아니라 사방으로 뻗는 나무 같다."},
+     {"stage":"전개(줄기)","sentence_range":"2~3","summary":"미리 배부되는 [[의제]]가 나무의 줄기 역할을 한다","easy_example":"여행 큰 일정표가 줄기라면 그날그날 즉흥 코스는 가지다."},
+     {"stage":"전개(가지)","sentence_range":"4~7","summary":"우선순위 변화·전화·소그룹으로 논의가 [[가지처럼]] 뻗는다","easy_example":"회의 중 긴급 전화나 소모임이 새 가지처럼 돋아난다."},
+     {"stage":"결론(일반화)","sentence_range":"8~9","summary":"가장 생산적인 회의는 예측 불가능하게 자라며 [[자연스럽고 필요한]] 것","easy_example":"유능한 관리자는 변화를 방해가 아니라 활용할 기회로 삼는다."}
+   ]
+ },
+ "sentences": [
+   {
+     "id": 1,
+     "english": "A meeting in a flexible-time culture like those found in South America, parts of Europe, Africa, and the Middle East is more like an evergreen tree.",
+     "grammar": [
+       {"tag":"주어-동사 수일치(핵심주어)","note":"삽입어구를 걸러낸 단수 주어 A meeting에 is 일치","spans":["is"]},
+       {"tag":"과거분사 후치수식","note":"those (that are) found ~ : 분사가 those 수식","spans":["found"]},
+       {"tag":"비교 표현 more like","note":"~에 더 가깝다/비슷하다","spans":["more like"]}
+     ],
+     "vocab": [
+       {"word":"flexible-time culture","meaning":"유연한 시간 문화"},
+       {"word":"evergreen tree","meaning":"상록수"},
+       {"word":"the Middle East","meaning":"중동"}
+     ],
+     "chunks": [
+       {"en":"A meeting in a [[flexible-time culture]]","ko":"[[유연한 시간 문화]] 속의 회의는"},
+       {"en":"like those [[found]] in South America,","ko":"남아메리카에서 [[볼 수 있는]] 그런 문화처럼,"},
+       {"en":"parts of Europe, Africa, and the [[Middle East]]","ko":"유럽 일부, 아프리카, [[중동]] 같은 곳의,"},
+       {"en":"is more like an [[evergreen tree]].","ko":"[[상록수]]에 더 가깝다."}
+     ],
+     "misreads": [
+       {"statement":"남미·유럽 일부·아프리카·중동 같은 유연한 시간 문화의 회의는 상록수에 비유된다.","verdict":"O"},
+       {"statement":"'like those found ~'에서 those는 앞의 evergreen tree들을 가리킨다.","verdict":"X","trap_type":"지칭","anchor":"like those found in South America","why":"those는 flexible-time culture(유연한 시간 문화)를 가리키며 상록수가 아니다."}
+     ],
+     "mistips": ["긴 삽입어구(like those ~ Middle East)를 걸러내면 핵심은 'A meeting ~ is more like an evergreen tree'이다."]
+   },
+   {
+     "id": 2,
+     "english": "An agenda with a meeting start time and a topic will probably be circulated before the meeting.",
+     "grammar": [
+       {"tag":"미래 수동태(will be+p.p.)","note":"will be circulated: 배부될 것이다","spans":["be circulated"]},
+       {"tag":"전치사구 후치수식(with)","note":"An agenda [with ~ topic]가 agenda 수식","spans":["with"]}
+     ],
+     "vocab": [
+       {"word":"agenda","meaning":"의제, 안건 목록"},
+       {"word":"circulate","meaning":"배부하다, 회람시키다"},
+       {"word":"probably","meaning":"아마"}
+     ],
+     "chunks": [
+       {"en":"An agenda with a meeting [[start time]] and a topic","ko":"회의 [[시작 시간]]과 주제를 담은 의제가"},
+       {"en":"will probably be [[circulated]] before the meeting.","ko":"회의 전에 아마 [[배부될]] 것이다."}
+     ],
+     "misreads": [
+       {"statement":"회의 시작 시간과 주제를 담은 의제가 회의 전에 배부될 것이다.","verdict":"O"},
+       {"statement":"의제는 회의가 끝난 뒤에 참석자들에게 배부된다.","verdict":"X","trap_type":"인과조건","anchor":"circulated before the meeting","why":"의제는 회의 '전에(before)' 배부된다고 했으므로 '끝난 뒤'는 시점이 틀리다."}
+     ],
+     "mistips": []
+   },
+   {
+     "id": 3,
+     "english": "This will serve as the trunk of the tree.",
+     "grammar": [
+       {"tag":"지시대명사 주어 This","note":"This=앞 문장의 의제(agenda)","spans":["This"]},
+       {"tag":"serve as","note":"~의 역할을 하다","spans":["serve as"]}
+     ],
+     "vocab": [
+       {"word":"serve as","meaning":"~의 역할을 하다"},
+       {"word":"trunk","meaning":"(나무의) 줄기"}
+     ],
+     "chunks": [
+       {"en":"This will [[serve]] as","ko":"이것은 [[역할을 할]] 것이다"},
+       {"en":"the [[trunk]] of the tree.","ko":"나무의 [[줄기]]로서."}
+     ],
+     "misreads": [
+       {"statement":"배부된 의제는 나무의 줄기 역할을 한다.","verdict":"O"},
+       {"statement":"의제는 회의의 줄기이므로 회의는 그 의제 순서를 벗어나지 않고 진행된다.","verdict":"△","trap_type":"구조수식","anchor":"discussion may branch off in a new direction","integrative":true,"why":"의제가 줄기라는 방향은 맞지만, 논의는 새로운 방향으로 갈라질 수 있다고 했다."}
+     ],
+     "mistips": ["This는 바로 앞 문장 전체가 아니라 그 문장의 'An agenda(의제)'를 가리킨다."]
+   },
+   {
+     "id": 4,
+     "english": "But there's no expectation that the meeting will progress in a linear manner.",
+     "grammar": [
+       {"tag":"there is 구문","note":"there's no ~: ~이 없다","spans":["there's"]},
+       {"tag":"동격 that(명사+that절)","note":"expectation의 내용을 밝히는 동격 that절","spans":["that"]},
+       {"tag":"미래 will","note":"진행될 것이라는 예상","spans":["will progress"]}
+     ],
+     "vocab": [
+       {"word":"expectation","meaning":"기대, 예상"},
+       {"word":"progress","meaning":"진행되다, 나아가다"},
+       {"word":"in a linear manner","meaning":"직선적인/선형적인 방식으로"}
+     ],
+     "chunks": [
+       {"en":"But there's no [[expectation]]","ko":"하지만 [[기대]]는 없다"},
+       {"en":"that the meeting will [[progress]]","ko":"회의가 [[진행되리라는]]"},
+       {"en":"in a [[linear manner]].","ko":"[[직선적인 방식]]으로."}
+     ],
+     "misreads": [
+       {"statement":"회의가 반드시 직선적(선형적)으로 진행되리라는 기대는 없다.","verdict":"O"},
+       {"statement":"필자는 회의가 정해진 순서대로 곧장 진행되어야 한다고 주장한다.","verdict":"X","trap_type":"필자관점","anchor":"there's no expectation that the meeting will progress in a linear manner","why":"선형적 진행에 대한 기대가 없다고 했으므로 '곧장 진행되어야'는 필자 관점과 반대다."}
+     ],
+     "mistips": []
+   },
+   {
+     "id": 5,
+     "english": "What seemed like a priority last week when the agenda was crafted is not necessarily the priority right now ― so discussion may branch off in a new direction.",
+     "grammar": [
+       {"tag":"관계대명사 what(선행사 포함)","note":"What ~ crafted가 명사절 주어, 'the thing that'","spans":["What"]},
+       {"tag":"관계부사 when","note":"last week [when ~ crafted]: 시간 수식","spans":["when"]},
+       {"tag":"수동태(was+p.p.)","note":"the agenda was crafted: 의제가 짜여진","spans":["was crafted"]},
+       {"tag":"부분부정(not necessarily)","note":"반드시 ~인 것은 아니다","spans":["not necessarily"]}
+     ],
+     "vocab": [
+       {"word":"priority","meaning":"우선 사항, 우선순위"},
+       {"word":"craft","meaning":"공들여 만들다, 작성하다"},
+       {"word":"not necessarily","meaning":"반드시 ~인 것은 아닌"},
+       {"word":"branch off","meaning":"갈라져 나가다, 옆길로 새다"}
+     ],
+     "chunks": [
+       {"en":"What seemed like a [[priority]] last week","ko":"지난주에 [[우선 사항]]처럼 보였던 것이"},
+       {"en":"when the agenda was [[crafted]]","ko":"의제가 [[작성되었을]] 때"},
+       {"en":"is [[not necessarily]] the priority right now","ko":"지금은 [[반드시]] 우선 사항인 것은 아니다"},
+       {"en":"― so discussion may branch off in a new [[direction]].","ko":"― 그래서 논의는 새로운 [[방향]]으로 갈라질 수도 있다."}
+     ],
+     "misreads": [
+       {"statement":"지난주 의제를 짤 때 우선순위였던 것이 지금은 꼭 우선순위가 아닐 수 있어 논의가 새 방향으로 갈라진다.","verdict":"O"},
+       {"statement":"지난주 의제를 짤 때의 우선 사항은 지금도 반드시 최우선 사항으로 남는다.","verdict":"X","trap_type":"인과조건","anchor":"is not necessarily the priority right now","killer":true,"why":"지금은 '반드시(necessarily)' 우선 사항인 것은 아니라고 했으므로 진술과 정반대다."}
+     ],
+     "mistips": ["문두 What은 의문사가 아니라 선행사를 포함한 관계대명사로, 'What ~ crafted'가 통째로 단수 주어다."]
+   },
+   {
+     "id": 6,
+     "english": "Other branches may sprout as some members have urgent phone calls that take them in and out of the meeting.",
+     "grammar": [
+       {"tag":"조동사 may(추측)","note":"돋아날 수도 있다","spans":["may sprout"]},
+       {"tag":"부사절 접속사 as","note":"~함에 따라/~하면서(동시·이유)","spans":["as"]},
+       {"tag":"주격 관계대명사 that","note":"calls [that take ~]: calls 수식","spans":["that"]}
+     ],
+     "vocab": [
+       {"word":"sprout","meaning":"싹트다, 돋아나다"},
+       {"word":"urgent","meaning":"긴급한"},
+       {"word":"in and out of","meaning":"~을 들락날락하는"}
+     ],
+     "chunks": [
+       {"en":"Other [[branches]] may sprout","ko":"다른 [[가지]]가 돋아날 수도 있다"},
+       {"en":"as some members have [[urgent phone calls]]","ko":"일부 구성원이 [[긴급한 전화]]를 받으면서"},
+       {"en":"that take them [[in and out]] of the meeting.","ko":"그들을 회의에 [[들락날락하게]] 만드는."}
+     ],
+     "misreads": [
+       {"statement":"일부 구성원이 긴급 전화를 받아 회의를 들락거리면서 또 다른 가지가 생겨날 수 있다.","verdict":"O"},
+       {"statement":"'that take them ~'에서 them은 걸려 온 전화(phone calls)를 가리킨다.","verdict":"X","trap_type":"지칭","anchor":"some members have urgent phone calls that take them","why":"them은 전화를 받는 some members(일부 구성원)를 가리키며 phone calls가 아니다."}
+     ],
+     "mistips": []
+   },
+   {
+     "id": 7,
+     "english": "Or sub-groups may form within the room to discuss timely subjects linked in some way to the main meeting trunk.",
+     "grammar": [
+       {"tag":"조동사 may(추측)","note":"소그룹이 형성될 수도 있다","spans":["may form"]},
+       {"tag":"to부정사 부사적 용법(목적)","note":"to discuss: 논의하기 위해","spans":["to discuss"]},
+       {"tag":"과거분사 후치수식","note":"subjects (that are) linked ~ : 분사가 subjects 수식","spans":["linked"]}
+     ],
+     "vocab": [
+       {"word":"sub-group","meaning":"소그룹, 하위 집단"},
+       {"word":"timely","meaning":"시의적절한, 때맞은"},
+       {"word":"be linked to","meaning":"~와 연결되다"}
+     ],
+     "chunks": [
+       {"en":"Or [[sub-groups]] may form within the room","ko":"혹은 방 안에서 [[소그룹]]이 만들어질 수도 있다"},
+       {"en":"to discuss [[timely]] subjects","ko":"[[시의적절한]] 주제를 논의하려고"},
+       {"en":"linked in some way to the main meeting [[trunk]].","ko":"회의의 주된 [[줄기]]와 어떤 식으로든 연결된."}
+     ],
+     "misreads": [
+       {"statement":"방 안에서 소그룹이 형성되어 주된 회의 줄기와 연결된 시의적절한 주제를 논의할 수도 있다.","verdict":"O"},
+       {"statement":"소그룹은 회의 주제와 무관한 사적인 잡담을 나누기 위해 형성된다.","verdict":"X","trap_type":"무관정보","anchor":"subjects linked in some way to the main meeting trunk","why":"소그룹은 주된 회의와 연결된 주제를 논의한다고 했으므로 '무관한 잡담'은 틀리다."}
+     ],
+     "mistips": ["linked ~는 앞의 subjects를 꾸미는 과거분사구로 '연결된 주제'로 읽는다."]
+   },
+   {
+     "id": 8,
+     "english": "In flexible-time cultures, it seems clear that the most productive meetings grow in unpredictable ways, and the effective manager is flexible and professional enough to capitalize on priorities and changing needs as they arise.",
+     "grammar": [
+       {"tag":"가주어 it-진주어 that절","note":"it seems clear that ~ : that절이 진주어","spans":["it seems clear that"]},
+       {"tag":"최상급(the most+형용사)","note":"가장 생산적인 회의","spans":["most productive"]},
+       {"tag":"형용사+enough to부정사","note":"충분히 ~해서 …할 수 있는","spans":["enough to capitalize"]},
+       {"tag":"부사절 접속사 as","note":"as they arise: 생겨남에 따라","spans":["as they arise"]}
+     ],
+     "vocab": [
+       {"word":"productive","meaning":"생산적인"},
+       {"word":"unpredictable","meaning":"예측할 수 없는"},
+       {"word":"capitalize on","meaning":"~을 활용하다, 이용하다"},
+       {"word":"arise","meaning":"생기다, 발생하다"}
+     ],
+     "chunks": [
+       {"en":"In flexible-time cultures, it seems [[clear]]","ko":"유연한 시간 문화에서는 [[분명해]] 보인다"},
+       {"en":"that the most [[productive meetings]] grow in unpredictable ways,","ko":"가장 [[생산적인 회의]]가 예측 불가능하게 자란다는 것이,"},
+       {"en":"and the effective manager is [[flexible and professional]] enough","ko":"그리고 유능한 관리자는 충분히 [[유연하고 전문적]]이어서"},
+       {"en":"to capitalize on priorities and changing [[needs]] as they arise.","ko":"우선 사항과 변화하는 [[요구]]를 생겨나는 대로 활용할 수 있다."}
+     ],
+     "misreads": [
+       {"statement":"유연한 시간 문화에서는 가장 생산적인 회의가 예측 불가능하게 자라며, 유능한 관리자는 변화하는 우선순위를 활용할 만큼 유연하다.","verdict":"O"},
+       {"statement":"유연하고 전문적이어야 하는 것은 회의 자체이지 관리자가 아니다.","verdict":"X","trap_type":"구조수식","anchor":"the effective manager is flexible and professional enough","why":"유연·전문적이라고 서술되는 주체는 the effective manager(유능한 관리자)이다."}
+     ],
+     "mistips": ["it seems clear that ~에서 it은 가주어이고, that절 전체가 진주어이므로 'that절 내용이 분명해 보인다'로 읽는다."]
+   },
+   {
+     "id": 9,
+     "english": "Interruptions, agenda changes, and frequent shifts in direction are seen as natural and necessary.",
+     "grammar": [
+       {"tag":"주어-동사 수일치(복수주어)","note":"Interruptions, changes, shifts(복수 병렬)-are","spans":["are seen"]},
+       {"tag":"수동태 be seen as","note":"~로 여겨지다/간주되다","spans":["are seen as"]}
+     ],
+     "vocab": [
+       {"word":"interruption","meaning":"중단, 방해"},
+       {"word":"frequent","meaning":"잦은, 빈번한"},
+       {"word":"be seen as","meaning":"~로 여겨지다"}
+     ],
+     "chunks": [
+       {"en":"Interruptions, agenda changes, and frequent [[shifts in direction]]","ko":"중단, 의제 변경, 잦은 [[방향 전환]]은"},
+       {"en":"are seen as [[natural and necessary]].","ko":"[[자연스럽고 필요한]] 것으로 여겨진다."}
+     ],
+     "misreads": [
+       {"statement":"중단, 의제 변경, 잦은 방향 전환은 자연스럽고 필요한 것으로 여겨진다.","verdict":"O"},
+       {"statement":"필자는 회의 중의 중단과 방향 전환을 되도록 없애야 할 방해 요소로 본다.","verdict":"X","trap_type":"필자관점","anchor":"are seen as natural and necessary","why":"이런 요소들을 자연스럽고 필요하다고 보므로 '없애야 할 방해'는 필자 관점과 반대다."}
+     ],
+     "mistips": []
+   }
+ ]
+}

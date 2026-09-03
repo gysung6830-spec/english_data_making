@@ -1,0 +1,669 @@
+{
+ "item_no": "24",
+ "theme": "주의력 문해력 — 설계된 산만함을 인식하는 교육",
+ "overview": {
+  "theme_ko": "주의력 문해력 교육",
+  "topic": "🔎 설계된 산만함을 인식하도록 가르치는 주의력 문해력",
+  "stance": "긍정적",
+  "stance_reason": "young people become more critical users rather than passive consumers",
+  "structure": "주장→근거·예시",
+  "structure_reason": "attention literacy 개념 제시 후 미디어 리터러시 수업·앱 설계 사례로 뒷받침",
+  "key_grammar": {
+   "point": "간접의문문(의문사절 how/why)",
+   "source_sentence": "This means helping students recognize, for example, how the architecture of a social media feed or a news site is deliberately designed to distract or provoke them.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "의문사(how/why/what)가 이끄는 절이 문장 속에서 동사·전치사의 목적어가 되는 것이 간접의문문이다."
+    },
+    {
+     "chip": "핵심",
+     "text": "직접의문문과 달리 어순이 '의문사+주어+동사'로 평서문 어순이며 do/does 조동사를 쓰지 않는다."
+    },
+    {
+     "chip": "예문에서",
+     "text": "recognize의 목적어로 how가 이끄는 절이 오고, how the architecture ... is designed 처럼 주어+동사 어순을 지킨다."
+    },
+    {
+     "chip": "주의",
+     "text": "how many times they switch, what content is served up 처럼 how·what 뒤에도 반드시 '주어+동사' 어순을 유지한다."
+    },
+    {
+     "chip": "비교",
+     "text": "how to evaluate 처럼 '의문사+to부정사'도 명사 역할을 하며 '~하는 방법'으로 해석된다."
+    }
+   ],
+   "example_analysis": "recognize의 목적어로 how가 이끄는 명사절(간접의문문)이 오고, how+주어(the architecture...)+동사(is designed)의 평서문 어순을 지킨다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "This means [[1|helping]] students [[2|recognize]], for example, [[3|how]] the architecture of a social media feed or a news site [[4|are]] deliberately designed [[5|to distract]] or provoke them.",
+     "options": [
+      "① helping",
+      "② recognize",
+      "③ how",
+      "④ are",
+      "⑤ to distract"
+     ],
+     "answer": "④",
+     "fix": "주어의 핵심은 단수 명사 the architecture이므로 복수 동사 are가 아니라 원문의 is가 맞다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "A student might be tasked with [[tracking/to track]] how many times they [[switch/switches]] tasks or check their phone in an hour of homework, [[to raise/raising]] self-awareness about fragmentation.",
+     "options": [],
+     "answer": "tracking / switch / to raise",
+     "fix": "전치사 with의 목적어는 동명사 tracking, 주어 they에 맞춰 switch, 목적을 나타내는 부사적 용법 to raise가 옳다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "options": [
+      "Progressive educators and librarians are developing curricula to teach what we might call attention literacy.",
+      "Why do notifications appear with specific colors and sounds?",
+      "A student might be tasked with tracking how many times do they switch tasks or check their phone in an hour of homework, to raise self-awareness about fragmentation.",
+      "By treating these as deliberate design choices (often rooted in psychology and profit motives), young people become more critical users rather than passive consumers.",
+      "Another lesson might involve unpacking the design of popular apps: Why does an app use infinite scrolling instead of pages?"
+     ],
+     "answer": "A student might be tasked with tracking how many times do they switch tasks or check their phone in an hour of homework, to raise self-awareness about fragmentation.",
+     "fix": "간접의문문이므로 do 조동사 없이 how many times they switch 처럼 '의문사+주어+동사' 어순이 맞다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "나는 그 앱이 왜 알림을 사용하는지 이해하고 싶다.",
+     "sentence": "",
+     "options": [],
+     "answer": "I want to understand why the app uses notifications.",
+     "fix": "",
+     "words": [
+      "I",
+      "want",
+      "to understand",
+      "why",
+      "the app",
+      "uses",
+      "notifications"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "한 학생은 자신이 한 시간의 숙제 동안 몇 번이나 과제를 전환하거나 휴대전화를 확인하는지 추적하는 과제를 받아, 주의 파편화에 대한 자기 인식을 높이도록 할 수 있다.",
+     "sentence": "",
+     "options": [],
+     "answer": "A student might be tasked with tracking how many times they switch tasks or check their phone in an hour of homework, to raise self-awareness about fragmentation.",
+     "fix": "",
+     "words": [
+      "A student",
+      "might be tasked with",
+      "tracking",
+      "how many times",
+      "they switch tasks",
+      "or check their phone",
+      "in an hour of homework,",
+      "to raise self-awareness",
+      "about fragmentation."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "의도적으로 설계된 산만함",
+    "expressions": [
+     "deliberately designed to distract or provoke them",
+     "patterns of distraction",
+     "deliberate design choices"
+    ],
+    "variation": "SNS·뉴스·앱이 사용자의 주의를 흩뜨리도록 의도적으로 설계됨"
+   },
+   {
+    "label": "비판적 사용자 되기",
+    "expressions": [
+     "more critical users rather than passive consumers",
+     "raise self-awareness"
+    ],
+    "variation": "산만함 인식 교육을 통해 수동적 소비자에서 비판적 사용자로"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입",
+    "sentence_range": "1",
+    "summary": "진보적 교육자·사서가 [[attention literacy]] 교육과정 개발",
+    "easy_example": "광고가 어떻게 시선을 끄는지 배우는 미디어 수업처럼"
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "2~3",
+    "summary": "피드·사이트의 [[deliberately designed]] 산만함 인식, 미디어 리터러시 확장",
+    "easy_example": "뉴스 앱의 낚시성 제목을 알아채는 연습"
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "4~6",
+    "summary": "과제 전환 횟수 추적, 무한 스크롤·알림 설계 [[unpacking]]",
+    "easy_example": "1시간에 폰을 몇 번 보는지 세어 보기"
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "7",
+    "summary": "의도적 설계로 보면 [[critical users]]가 됨",
+    "easy_example": "게임 규칙을 알면 덜 휘둘리는 것처럼"
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Progressive educators and librarians are developing curricula to teach what we might call attention literacy.",
+   "grammar": [
+    {
+     "tag": "현재진행형",
+     "note": "are+developing으로 진행 중임을 표현",
+     "spans": [
+      "are developing"
+     ]
+    },
+    {
+     "tag": "부사적 용법 to부정사(목적)",
+     "note": "~을 가르치기 위해",
+     "spans": [
+      "to teach"
+     ]
+    },
+    {
+     "tag": "관계대명사 what",
+     "note": "선행사를 포함, call의 목적어절",
+     "spans": [
+      "what"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "progressive",
+     "meaning": "진보적인"
+    },
+    {
+     "word": "curricula",
+     "meaning": "교육과정(curriculum의 복수)"
+    },
+    {
+     "word": "attention literacy",
+     "meaning": "주의력 문해력"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Progressive educators and librarians are developing curricula",
+     "ko": "진보적인 교육자와 사서들은 [[교육과정]]을 개발하고 있다"
+    },
+    {
+     "en": "to teach what we might call attention literacy.",
+     "ko": "우리가 [[주의력 문해력]]이라 부를 만한 것을 가르치기 위해"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "진보적인 교육자와 사서들이 주의력 문해력을 가르치기 위한 교육과정을 개발하고 있다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": [
+    "what we might call attention literacy는 teach의 목적어인 관계대명사 what절"
+   ]
+  },
+  {
+   "id": 2,
+   "english": "This means helping students recognize, for example, how the architecture of a social media feed or a news site is deliberately designed to distract or provoke them.",
+   "grammar": [
+    {
+     "tag": "동명사(mean+동명사)",
+     "note": "mean+doing은 '~을 수반·의미하다'",
+     "spans": [
+      "helping"
+     ]
+    },
+    {
+     "tag": "준사역동사 help+O+원형",
+     "note": "help+목적어+원형부정사(recognize)",
+     "spans": [
+      "recognize"
+     ]
+    },
+    {
+     "tag": "간접의문문(의문사절)",
+     "note": "recognize의 목적어절, how+주어+동사 어순",
+     "spans": [
+      "how"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "is designed, 설계되다",
+     "spans": [
+      "is",
+      "designed"
+     ]
+    },
+    {
+     "tag": "부사적 용법 to부정사(목적)",
+     "note": "~하도록",
+     "spans": [
+      "to distract"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "architecture",
+     "meaning": "구조, 설계"
+    },
+    {
+     "word": "deliberately",
+     "meaning": "의도적으로"
+    },
+    {
+     "word": "distract",
+     "meaning": "산만하게 하다"
+    },
+    {
+     "word": "provoke",
+     "meaning": "자극하다, 유발하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "This means helping students recognize,",
+     "ko": "이것은 학생들이 [[인식하도록]] 돕는 것을 의미한다,"
+    },
+    {
+     "en": "for example, how the architecture",
+     "ko": "예를 들어 어떻게 그 [[구조가]]"
+    },
+    {
+     "en": "of a social media feed or a news site",
+     "ko": "소셜 미디어 [[피드]]나 뉴스 사이트의"
+    },
+    {
+     "en": "is deliberately designed to distract or provoke them.",
+     "ko": "그들을 산만하게 하거나 자극하도록 [[의도적으로]] 설계되는지"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "밑줄 친 them은 소셜 미디어를 설계한 교육자들을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "designed to distract or provoke them",
+     "why": "them은 산만하게 만들 대상인 학생들(students)을 가리킨다",
+     "english": "The word 'them' refers to the educators."
+    }
+   ],
+   "mistips": [
+    "how절은 recognize의 목적어인 간접의문문 — 'how the architecture ~ is designed' 어순(주어+동사)에 유의"
+   ]
+  },
+  {
+   "id": 3,
+   "english": "Classes in media literacy traditionally cover how to evaluate the credibility of sources ― now they also include recognizing clickbait, understanding the role of algorithms in what content is served up, and observing one's own patterns of distraction.",
+   "grammar": [
+    {
+     "tag": "의문사+to부정사",
+     "note": "how to V, '~하는 방법'",
+     "spans": [
+      "how to evaluate"
+     ]
+    },
+    {
+     "tag": "동명사(병렬 목적어)",
+     "note": "include의 목적어로 recognizing/understanding/observing 병렬",
+     "spans": [
+      "recognizing",
+      "understanding",
+      "observing"
+     ]
+    },
+    {
+     "tag": "간접의문문(의문사절)",
+     "note": "in의 목적어절 what content is served up",
+     "spans": [
+      "what"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "is served up, 제공되다",
+     "spans": [
+      "is",
+      "served"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "credibility",
+     "meaning": "신뢰성"
+    },
+    {
+     "word": "clickbait",
+     "meaning": "클릭베이트, 낚시성 콘텐츠"
+    },
+    {
+     "word": "algorithm",
+     "meaning": "알고리즘"
+    },
+    {
+     "word": "serve up",
+     "meaning": "제공하다, 내놓다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Classes in media literacy traditionally cover",
+     "ko": "미디어 리터러시 수업은 전통적으로 [[다룬다]]"
+    },
+    {
+     "en": "how to evaluate the credibility of sources ―",
+     "ko": "출처의 [[신뢰성]]을 평가하는 법을 —"
+    },
+    {
+     "en": "now they also include recognizing clickbait,",
+     "ko": "이제는 [[클릭베이트]]를 알아채는 것도 포함한다,"
+    },
+    {
+     "en": "understanding the role of algorithms in what content is served up,",
+     "ko": "어떤 콘텐츠가 제공되는지에서 [[알고리즘]]의 역할을 이해하는 것,"
+    },
+    {
+     "en": "and observing one's own patterns of distraction.",
+     "ko": "그리고 자신의 [[산만함]] 패턴을 관찰하는 것"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "미디어 리터러시 수업은 소셜 미디어 회사의 광고 수익을 계산하는 법을 다룬다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "recognizing clickbait, understanding the role of algorithms",
+     "why": "본문은 클릭베이트·알고리즘·산만함 패턴을 다룰 뿐 광고 수익 계산은 언급이 없다"
+    }
+   ],
+   "mistips": [
+    "what content is served up는 전치사 in의 목적어인 명사절(간접의문문)"
+   ]
+  },
+  {
+   "id": 4,
+   "english": "A student might be tasked with tracking how many times they switch tasks or check their phone in an hour of homework, to raise self-awareness about fragmentation.",
+   "grammar": [
+    {
+     "tag": "수동태",
+     "note": "be tasked with, ~하는 과제를 받다",
+     "spans": [
+      "be tasked"
+     ]
+    },
+    {
+     "tag": "전치사+동명사",
+     "note": "with+tracking",
+     "spans": [
+      "tracking"
+     ]
+    },
+    {
+     "tag": "간접의문문(의문사절)",
+     "note": "tracking의 목적어절 how many times+주어+동사",
+     "spans": [
+      "how many times"
+     ]
+    },
+    {
+     "tag": "부사적 용법 to부정사(목적)",
+     "note": "~하기 위해",
+     "spans": [
+      "to raise"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "be tasked with",
+     "meaning": "~의 임무를 맡다"
+    },
+    {
+     "word": "switch tasks",
+     "meaning": "과제를 전환하다"
+    },
+    {
+     "word": "self-awareness",
+     "meaning": "자기 인식"
+    },
+    {
+     "word": "fragmentation",
+     "meaning": "파편화, 분열"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "A student might be tasked with tracking",
+     "ko": "한 학생은 [[추적하는]] 과제를 받을 수 있다"
+    },
+    {
+     "en": "how many times they switch tasks",
+     "ko": "자신이 몇 번이나 [[과제를 전환하는지]]"
+    },
+    {
+     "en": "or check their phone in an hour of homework,",
+     "ko": "혹은 한 시간의 숙제 동안 [[휴대전화]]를 확인하는지를,"
+    },
+    {
+     "en": "to raise self-awareness about fragmentation.",
+     "ko": "주의 [[파편화]]에 대한 자기 인식을 높이기 위해"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "학생이 과제 전환 횟수를 추적하는 것은 성적을 올리기 위해서다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "to raise self-awareness about fragmentation",
+     "why": "추적의 목적은 성적 향상이 아니라 주의 파편화에 대한 자기 인식 제고이다"
+    }
+   ],
+   "mistips": [
+    "how many times는 tracking의 목적어절을 이끄는 간접의문문 — 이후 they switch, (they) check가 병렬"
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Another lesson might involve unpacking the design of popular apps: Why does an app use infinite scrolling instead of pages?",
+   "grammar": [
+    {
+     "tag": "동명사(목적어)",
+     "note": "involve+동명사 unpacking",
+     "spans": [
+      "unpacking"
+     ]
+    },
+    {
+     "tag": "의문문 도치(do조동사)",
+     "note": "Why does an app use, 직접의문문 어순",
+     "spans": [
+      "does"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "unpack",
+     "meaning": "파헤치다, 자세히 분석하다"
+    },
+    {
+     "word": "infinite scrolling",
+     "meaning": "무한 스크롤"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Another lesson might involve unpacking the design of popular apps:",
+     "ko": "또 다른 수업은 인기 [[앱]]들의 설계를 파헤치는 것을 포함할 수 있다:"
+    },
+    {
+     "en": "Why does an app use infinite scrolling instead of pages?",
+     "ko": "왜 앱은 페이지 대신 [[무한 스크롤]]을 사용하는가?"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "또 다른 수업은 인기 앱들이 페이지를 사용하도록 다시 설계하는 일을 다룬다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "unpacking the design of popular apps",
+     "why": "수업은 앱을 재설계하는 것이 아니라 그 설계를 파헤쳐 분석하는 것이다"
+    }
+   ],
+   "mistips": [
+    "콜론(:) 뒤 Why does ~는 수업에서 던지는 직접의문문 예시로 do/does 어순을 씀"
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Why do notifications appear with specific colors and sounds?",
+   "grammar": [
+    {
+     "tag": "의문문 도치(do조동사)",
+     "note": "Why do notifications appear, 직접의문문 어순",
+     "spans": [
+      "do"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "notification",
+     "meaning": "알림"
+    },
+    {
+     "word": "specific",
+     "meaning": "특정한"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Why do notifications appear",
+     "ko": "왜 [[알림]]은 나타나는가"
+    },
+    {
+     "en": "with specific colors and sounds?",
+     "ko": "특정한 [[색]]과 소리로?"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "본문은 알림이 특정한 색과 소리로 나타나는 이유를 따져 보게 한다.",
+     "verdict": "O",
+     "trap_type": "구조수식"
+    }
+   ],
+   "mistips": [
+    "directquestion이므로 do 조동사+동사원형 appear 어순을 지킨다"
+   ]
+  },
+  {
+   "id": 7,
+   "english": "By treating these as deliberate design choices (often rooted in psychology and profit motives), young people become more critical users rather than passive consumers.",
+   "grammar": [
+    {
+     "tag": "전치사+동명사",
+     "note": "By treating, ~함으로써",
+     "spans": [
+      "treating"
+     ]
+    },
+    {
+     "tag": "과거분사(후치수식)",
+     "note": "rooted in ~, choices를 수식",
+     "spans": [
+      "rooted"
+     ]
+    },
+    {
+     "tag": "비교급",
+     "note": "more critical, 더 비판적인",
+     "spans": [
+      "more critical"
+     ]
+    },
+    {
+     "tag": "선택 표현 rather than",
+     "note": "A rather than B, B보다는 A",
+     "spans": [
+      "rather than"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "deliberate",
+     "meaning": "의도적인"
+    },
+    {
+     "word": "rooted in",
+     "meaning": "~에 뿌리를 둔"
+    },
+    {
+     "word": "profit motive",
+     "meaning": "이윤 동기"
+    },
+    {
+     "word": "passive",
+     "meaning": "수동적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "By treating these as deliberate design choices",
+     "ko": "이것들을 [[의도적인]] 설계 선택으로 다룸으로써"
+    },
+    {
+     "en": "(often rooted in psychology and profit motives),",
+     "ko": "(흔히 [[심리]]와 이윤 동기에 뿌리를 둔),"
+    },
+    {
+     "en": "young people become more critical users",
+     "ko": "젊은이들은 더 [[비판적인]] 사용자가 된다"
+    },
+    {
+     "en": "rather than passive consumers.",
+     "ko": "[[수동적인]] 소비자가 아니라"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 앱의 설계 선택을 그대로 받아들이는 수동적 소비자가 되는 것이 바람직하다고 본다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "become more critical users rather than passive consumers",
+     "why": "필자는 수동적 소비자가 아니라 비판적 사용자가 되기를 지지한다",
+     "killer": true
+    }
+   ],
+   "mistips": [
+    "By treating ~ = 전치사+동명사(수단), 주절 주어는 young people로 이어짐"
+   ]
+  }
+ ]
+}

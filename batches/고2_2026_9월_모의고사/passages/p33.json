@@ -1,0 +1,301 @@
+{
+  "item_no": "33",
+  "theme": "상실을 애도하는 일 — 사랑과 삶을 강화하는 슬픔",
+  "overview": {
+    "theme_ko": "상실을 애도하는 일의 가치",
+    "topic": "🔎 상실에 대한 애도(grief work)가 지닌 심리적 중요성",
+    "stance": "긍정적",
+    "stance_reason": "슬픔을 'a dynamic emotional process essential to consciousness'라 규정하며 삶과 사랑을 강화한다고 봄",
+    "structure": "주장→근거·예시",
+    "structure_reason": "애도의 중요성 주장 후 그것이 자기 변형·사랑·행동을 강화한다는 근거를 제시",
+    "key_grammar": {
+      "point": "원급 비교 as many ~ as (수의 동등 비교)",
+      "source_sentence": "In time this may build a desire to make good from the loss by repairing as many damages as we can and/or compensating for them.",
+      "explanation": [
+        {"chip": "쉽게 말하면", "text": "'as ~ as'는 두 대상이 같은 정도임을 나타내는 원급 비교예요."},
+        {"chip": "핵심", "text": "셀 수 있는 명사의 '수'를 비교할 때는 as many + 복수명사 + as 형태를 써요."},
+        {"chip": "구조", "text": "as many damages as we can = '우리가 할 수 있는 한 많은 손상'."},
+        {"chip": "주의", "text": "양(불가산)을 비교할 때는 as much + 단수명사 + as를 써요(as much water as)."},
+        {"chip": "비교", "text": "뒤의 as는 접속사라서 as we can처럼 '주어+동사'가 이어져요."}
+      ],
+      "example_analysis": "as many와 as 사이에 damages(복수명사)가 들어가 '수'의 동등 비교를 이루며, 뒤의 as는 we can을 이끄는 접속사이다.",
+      "drills": [
+        {
+          "kind": "밑줄형",
+          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+          "sentence": "In time this may build a desire [[1|to make]] good from the loss by [[2|repairing]] [[3|as much]] damages [[4|as]] we can and/or [[5|compensating]] for them.",
+          "answer": "③",
+          "fix": "damages는 셀 수 있는 복수명사이므로 much가 아니라 원문의 as many로 고쳐야 한다(as many + 복수명사 + as).",
+          "options": ["① to make", "② repairing", "③ as much", "④ as", "⑤ compensating"],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "네모형",
+          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+          "sentence": "Grief can [[make/to make]] us both very sad and very [[motivated/motivating]] to act.",
+          "answer": "make / motivated",
+          "fix": "조동사 can 뒤에는 동사원형 make가, '동기가 부여된' 대상은 과거분사 motivated가 알맞다.",
+          "options": [],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "오류찾기",
+          "question": "다음 중 어법상 틀린 문장은?",
+          "sentence": "",
+          "answer": "In time this may build a desire to make good from the loss by repairing as many damage as we can and/or compensating for them.",
+          "fix": "many 뒤에는 복수명사가 와야 하므로 damage를 원문의 damages로 고쳐야 한다.",
+          "options": [
+            "Psychological theories across the field agree on the importance of grieving our losses, from the highly personal through to the broadly collective.",
+            "Grief is a dynamic emotional process essential to consciousness.",
+            "Grief work honours the loss, the sadness and the experience of diminishment or absence, while also setting up the ground for self-transformation and the continuation of life.",
+            "In time this may build a desire to make good from the loss by repairing as many damage as we can and/or compensating for them.",
+            "When we grieve for what is lost, it clears the way towards a strengthening of love and commitment for what remains."
+          ],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "영작",
+          "question": "그는 가능한 한 많은 책을 읽으려고 노력했다.",
+          "sentence": "",
+          "answer": "He tried to read as many books as he could.",
+          "fix": "",
+          "options": [],
+          "words": ["He", "tried", "to read", "as many", "books", "as", "he could"],
+          "from_passage": false
+        },
+        {
+          "kind": "영작",
+          "question": "시간이 지나면 이것은 우리가 할 수 있는 한 많은 손상을 복구하고/하거나 그것들을 보상함으로써 손실로부터 선을 이루려는 욕구를 키울 수 있다.",
+          "sentence": "",
+          "answer": "In time this may build a desire to make good from the loss by repairing as many damages as we can and/or compensating for them.",
+          "fix": "",
+          "options": [],
+          "words": ["In time", "this", "may build", "a desire", "to make good", "from the loss", "by repairing", "as many", "damages", "as", "we can", "and/or", "compensating", "for them"],
+          "from_passage": true
+        }
+      ]
+    },
+    "restatement_chains": [
+      {
+        "label": "애도 작업",
+        "expressions": ["grieving our losses", "Grief work"],
+        "variation": "상실을 '애도하는 일'을 하나의 능동적 작업(work)으로 개념화한다."
+      },
+      {
+        "label": "애도의 결실",
+        "expressions": ["a strengthening of love and commitment", "very motivated to act"],
+        "variation": "슬픔이 사랑을 강화하고 행동의 동기로 이어진다는 긍정적 귀결로 변주된다."
+      }
+    ],
+    "flow_blocks": [
+      {"stage": "도입", "sentence_range": "1~2", "summary": "심리학 이론들이 [[상실의 애도]]가 지닌 중요성에 동의함", "easy_example": "감기 뒤에 몸조리가 필요하듯, 마음의 상실에도 애도라는 회복 과정이 필요하다."},
+      {"stage": "전개", "sentence_range": "3~4", "summary": "애도는 취약성 직면과 [[자기 변형]]의 토대를 놓음", "easy_example": "넘어진 자리를 잘 살펴야 다시 잘 걸을 수 있는 것과 같다."},
+      {"stage": "사례(인용)", "sentence_range": "5", "summary": "Fran Weller는 애도 작업을 사랑과 연민에 뿌리내린 [[헌신의 행위]]로 규정", "easy_example": "아픈 이의 곁을 오래 지키는 간병처럼 정성과 지속이 필요하다."},
+      {"stage": "결론", "sentence_range": "6~8", "summary": "애도는 [[사랑]]과 헌신을 강화하고 우리를 행동하게 만듦", "easy_example": "잃은 것을 되새길수록 남은 사람을 더 아끼게 되는 마음과 같다."}
+    ]
+  },
+  "sentences": [
+    {
+      "id": 1,
+      "english": "Psychological theories across the field agree on the importance of grieving our losses, from the highly personal through to the broadly collective.",
+      "grammar": [
+        {"tag": "구동사 agree on", "note": "~에 동의하다", "spans": ["agree on"]},
+        {"tag": "동명사(전치사 목적어)", "note": "of의 목적어로 쓰인 동명사", "spans": ["grieving"]}
+      ],
+      "vocab": [
+        {"word": "theory", "meaning": "이론"},
+        {"word": "across the field", "meaning": "그 분야 전반에 걸쳐"},
+        {"word": "grieve", "meaning": "비통해하다, 애도하다"},
+        {"word": "collective", "meaning": "집단적인"}
+      ],
+      "chunks": [
+        {"en": "Psychological theories across the field", "ko": "그 분야 전반의 [[심리학]] 이론들은"},
+        {"en": "agree on the importance", "ko": "그 [[중요성]]에 동의한다"},
+        {"en": "of grieving our losses,", "ko": "우리의 상실을 [[애도하는]] 것의,"},
+        {"en": "from the highly personal", "ko": "매우 [[개인적인]] 것에서부터"},
+        {"en": "through to the broadly collective.", "ko": "폭넓게 [[집단적인]] 것에 이르기까지"}
+      ],
+      "misreads": [
+        {"statement": "그 분야 전반의 심리학 이론들이 상실을 애도하는 일의 중요성에 동의한다.", "verdict": "O"}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 2,
+      "english": "Grief is a dynamic emotional process essential to consciousness.",
+      "grammar": [
+        {"tag": "주격보어(2형식)", "note": "be동사 뒤 명사구가 주격보어", "spans": ["is"]},
+        {"tag": "형용사구 후치수식", "note": "essential 이하가 앞 명사 process를 뒤에서 수식", "spans": ["essential"]}
+      ],
+      "vocab": [
+        {"word": "dynamic", "meaning": "역동적인"},
+        {"word": "emotional", "meaning": "정서적인"},
+        {"word": "essential", "meaning": "필수적인"},
+        {"word": "consciousness", "meaning": "의식"}
+      ],
+      "chunks": [
+        {"en": "Grief is a dynamic emotional process", "ko": "슬픔은 [[역동적인]] 정서적 과정이다"},
+        {"en": "essential to consciousness.", "ko": "[[의식]]에 필수적인"}
+      ],
+      "misreads": [
+        {"statement": "슬픔은 의식에 필수적인 역동적 과정이 아니라 스쳐 지나가는 일시적 반응일 뿐이다.", "verdict": "X", "trap_type": "구조수식", "anchor": "a dynamic emotional process essential to consciousness", "why": "본문은 슬픔을 의식에 필수적인 역동적 과정으로 규정한다.", "killer": true}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 3,
+      "english": "At a psychological level, it supports us to both face into our own and others' vulnerability, transience and mortality, and to repair life energy after significant loss.",
+      "grammar": [
+        {"tag": "지시대명사 it", "note": "it은 앞 문장의 Grief를 가리킴", "spans": ["it"]},
+        {"tag": "상관접속사 both A and B", "note": "both ... and ...로 두 to부정사를 병렬", "spans": ["both", "and"]},
+        {"tag": "to부정사(병렬)", "note": "support O to V 구조의 to부정사 두 개가 병렬", "spans": ["to both face", "to repair"]}
+      ],
+      "vocab": [
+        {"word": "vulnerability", "meaning": "취약성"},
+        {"word": "transience", "meaning": "덧없음, 일시성"},
+        {"word": "mortality", "meaning": "죽음을 피할 수 없음"},
+        {"word": "repair", "meaning": "회복시키다"},
+        {"word": "significant", "meaning": "중대한"}
+      ],
+      "chunks": [
+        {"en": "At a psychological level, it supports us", "ko": "심리적 차원에서, 그것은 우리를 [[돕는다]]"},
+        {"en": "to both face into our own and others' vulnerability,", "ko": "우리 자신과 타인의 [[취약성]]을 직면하도록"},
+        {"en": "transience and mortality, and to repair life energy", "ko": "덧없음과 죽음을, 그리고 삶의 [[에너지]]를 회복하도록"},
+        {"en": "after significant loss.", "ko": "중대한 [[상실]] 이후에"}
+      ],
+      "misreads": [
+        {"statement": "애도는 우리가 타인의 취약성을 직면하도록 도와 삶의 에너지를 회복시킨다.", "verdict": "△", "trap_type": "주체대상", "anchor": "our own and others' vulnerability", "why": "타인만이 아니라 자신과 타인의 취약성을 함께 직면하도록 돕는다."}
+      ],
+      "mistips": ["both A and B가 to face와 to repair 두 to부정사를 병렬로 잇는 구조에 유의."]
+    },
+    {
+      "id": 4,
+      "english": "Grief work honours the loss, the sadness and the experience of diminishment or absence, while also setting up the ground for self-transformation and the continuation of life.",
+      "grammar": [
+        {"tag": "접속사 while", "note": "~하면서(동시·부대상황)", "spans": ["while"]},
+        {"tag": "분사구문", "note": "while (grief work is) also setting up ...의 분사구문", "spans": ["setting"]}
+      ],
+      "vocab": [
+        {"word": "honour", "meaning": "기리다, 존중하다"},
+        {"word": "diminishment", "meaning": "축소, 약화"},
+        {"word": "absence", "meaning": "부재"},
+        {"word": "self-transformation", "meaning": "자기 변형"},
+        {"word": "continuation", "meaning": "지속"}
+      ],
+      "chunks": [
+        {"en": "Grief work honours the loss,", "ko": "애도 작업은 [[상실]]을 기린다,"},
+        {"en": "the sadness and the experience", "ko": "슬픔과 그 [[경험]]을"},
+        {"en": "of diminishment or absence,", "ko": "축소나 [[부재]]의,"},
+        {"en": "while also setting up the ground", "ko": "또한 그 [[토대]]를 마련하면서"},
+        {"en": "for self-transformation and the continuation of life.", "ko": "자기 [[변형]]과 삶의 지속을 위한"}
+      ],
+      "misreads": [
+        {"statement": "애도 작업은 상실과 슬픔을 기리는 동시에 자기 변형과 삶의 지속을 위한 토대를 놓는다.", "verdict": "O"}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 5,
+      "english": "Psychotherapist Fran Weller describes grief work is \"an act of devotion, rooted in love and compassion\" that requires \"an ongoing practice of deepening, attending and listening.\"",
+      "grammar": [
+        {"tag": "과거분사 후치수식", "note": "rooted 이하가 an act of devotion을 뒤에서 수식", "spans": ["rooted"]},
+        {"tag": "주격 관계대명사 that", "note": "선행사 an act of devotion을 수식하는 관계절", "spans": ["that"]}
+      ],
+      "vocab": [
+        {"word": "psychotherapist", "meaning": "심리치료사"},
+        {"word": "devotion", "meaning": "헌신"},
+        {"word": "compassion", "meaning": "연민"},
+        {"word": "ongoing", "meaning": "계속 진행 중인"},
+        {"word": "attend", "meaning": "주의를 기울이다"}
+      ],
+      "chunks": [
+        {"en": "Psychotherapist Fran Weller describes grief work", "ko": "심리치료사 Fran Weller는 [[애도 작업]]을 설명한다"},
+        {"en": "is \"an act of devotion,", "ko": "'[[헌신]]의 행위'라고"},
+        {"en": "rooted in love and compassion\"", "ko": "사랑과 [[연민]]에 뿌리를 둔"},
+        {"en": "that requires \"an ongoing practice", "ko": "'지속적인 [[실천]]'을 요구하는"},
+        {"en": "of deepening, attending and listening.\"", "ko": "깊어지고, 주의를 기울이고 [[경청하는]]"}
+      ],
+      "misreads": [
+        {"statement": "Fran Weller는 애도 작업이 전문 치료사의 도움 없이는 결코 이루어질 수 없다고 규정한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "an act of devotion, rooted in love and compassion", "why": "본문은 애도를 헌신의 행위로 규정할 뿐 전문 치료사의 필요성은 언급하지 않는다."}
+      ],
+      "mistips": ["describes (that) grief work is ~ 처럼 목적어 명사절의 that이 생략된 구조로 읽으면 매끄럽다."]
+    },
+    {
+      "id": 6,
+      "english": "When we grieve for what is lost, it clears the way towards a strengthening of love and commitment for what remains.",
+      "grammar": [
+        {"tag": "부사절 접속사 when", "note": "~할 때", "spans": ["When"]},
+        {"tag": "관계대명사 what", "note": "선행사를 포함한 what절, '~하는 것'", "spans": ["what"]},
+        {"tag": "지시대명사 it", "note": "it은 앞의 '애도하는 행위(grieving)'를 가리킴", "spans": ["it"]}
+      ],
+      "vocab": [
+        {"word": "grieve", "meaning": "애도하다"},
+        {"word": "clear the way", "meaning": "길을 열다"},
+        {"word": "strengthening", "meaning": "강화"},
+        {"word": "commitment", "meaning": "헌신"},
+        {"word": "remain", "meaning": "남다"}
+      ],
+      "chunks": [
+        {"en": "When we grieve for what is lost,", "ko": "우리가 잃은 것을 [[애도할]] 때,"},
+        {"en": "it clears the way", "ko": "그것은 [[길을 연다]]"},
+        {"en": "towards a strengthening of love and commitment", "ko": "사랑과 [[헌신]]의 강화를 향해"},
+        {"en": "for what remains.", "ko": "[[남아있는]] 것에 대한"}
+      ],
+      "misreads": [
+        {"statement": "이 문장에서 it은 '남아있는 것(what remains)'을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "When we grieve for what is lost, it clears the way", "why": "it은 남아있는 것이 아니라 앞의 '애도하는 행위'를 가리킨다.", "english": "In this sentence, 'it' refers to what remains."}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 7,
+      "english": "In time this may build a desire to make good from the loss by repairing as many damages as we can and/or compensating for them.",
+      "grammar": [
+        {"tag": "to부정사(형용사적 용법)", "note": "a desire를 수식하는 to부정사", "spans": ["to make"]},
+        {"tag": "동명사(전치사 by 목적어)", "note": "by + 동명사로 '수단'을 나타냄", "spans": ["repairing"]},
+        {"tag": "원급 비교 as many ~ as", "note": "as many + 복수명사 + as로 '수'의 동등 비교", "spans": ["as many", "as"]}
+      ],
+      "vocab": [
+        {"word": "in time", "meaning": "시간이 지나면"},
+        {"word": "build a desire", "meaning": "욕구를 키우다"},
+        {"word": "make good", "meaning": "(손실을) 보상하다, 선을 이루다"},
+        {"word": "damage", "meaning": "손상, 피해"},
+        {"word": "compensate", "meaning": "보상하다"}
+      ],
+      "chunks": [
+        {"en": "In time this may build a desire", "ko": "시간이 지나면 이것은 [[욕구]]를 키울 수 있다"},
+        {"en": "to make good from the loss", "ko": "손실로부터 [[선을 이루려는]]"},
+        {"en": "by repairing as many damages as we can", "ko": "우리가 할 수 있는 한 많은 [[손상]]을 복구함으로써"},
+        {"en": "and/or compensating for them.", "ko": "그리고/또는 그것들을 [[보상함]]으로써"}
+      ],
+      "misreads": [
+        {"statement": "이것은 가능한 한 적은 손상만 복구하려는 욕구를 키운다.", "verdict": "X", "trap_type": "구조수식", "anchor": "repairing as many damages as we can", "why": "적은 손상이 아니라 '할 수 있는 한 많은' 손상을 복구하려는 욕구다."}
+      ],
+      "mistips": ["as many damages as we can = '우리가 할 수 있는 한 많은 손상'으로 뒤 as는 접속사."]
+    },
+    {
+      "id": 8,
+      "english": "Grief can make us both very sad and very motivated to act.",
+      "grammar": [
+        {"tag": "5형식 목적격보어(형용사)", "note": "make + us + 형용사보어(sad/motivated)", "spans": ["make"]},
+        {"tag": "상관접속사 both A and B", "note": "both ... and ...로 두 보어를 병렬", "spans": ["both", "and"]},
+        {"tag": "과거분사(감정)", "note": "motivated: 동기가 부여된", "spans": ["motivated"]}
+      ],
+      "vocab": [
+        {"word": "grief", "meaning": "비탄, 슬픔"},
+        {"word": "motivated", "meaning": "동기가 부여된"},
+        {"word": "act", "meaning": "행동하다"}
+      ],
+      "chunks": [
+        {"en": "Grief can make us both very sad", "ko": "슬픔은 우리를 [[매우 슬프게]] 만들 수 있다"},
+        {"en": "and very motivated to act.", "ko": "그리고 매우 [[동기부여되어]] 행동하게"}
+      ],
+      "misreads": [
+        {"statement": "필자는 슬픔을 사람을 무기력하게 만들 뿐 행동과는 무관한 부정적 감정으로만 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "very motivated to act", "why": "필자는 슬픔이 우리를 행동하도록 동기부여한다고도 본다."}
+      ],
+      "mistips": []
+    }
+  ]
+}

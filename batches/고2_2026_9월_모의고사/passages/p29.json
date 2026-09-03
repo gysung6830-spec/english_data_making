@@ -1,0 +1,645 @@
+{
+ "item_no": "29",
+ "theme": "자본주의 — 값싼 자연의 바다 속 현금 교환의 섬들",
+ "overview": {
+  "theme_ko": "값싼 자연의 바다와 현금의 섬 — 자본주의의 작동 방식",
+  "topic": "🔎 값싼 자연에 의존하는 자본주의와 그 비용의 상승",
+  "stance": "부정적·비판적",
+  "stance_reason": "the cheap work of humans and other natures can be forcefully taken (강제로 빼앗김)",
+  "structure": "주장→근거·예시",
+  "structure_reason": "자본주의를 정의한 뒤 임금·노동·에너지·작물 사례로 비용 상승을 뒷받침",
+  "key_grammar": {
+   "point": "전치사 + 관계대명사 (in which)",
+   "source_sentence": "Capitalism is not a system where cash is everywhere but rather one in which islands of cash exchange exist within oceans of cheap―or potentially cheap―natures.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "'in which'는 '전치사 in + 관계대명사 which'가 합쳐진 형태로, 뒤 절을 앞 명사(one=a system)에 연결한다."
+    },
+    {
+     "chip": "왜 in?",
+     "text": "원래 'islands ... exist in one(=a system)'에서 전치사 in이 관계대명사 which 앞으로 이동한 것."
+    },
+    {
+     "chip": "where와 비교",
+     "text": "앞의 'a system where cash is everywhere'의 where도 in which로 바꿔 쓸 수 있다(관계부사=전치사+관계대명사)."
+    },
+    {
+     "chip": "뒤에 완전한 절",
+     "text": "in which 뒤에는 'islands of cash exchange exist'라는 주어·동사를 갖춘 완전한 절이 온다."
+    }
+   ],
+   "example_analysis": "선행사 one(=a system)을 수식하며, 전치사 in이 관계대명사 which 앞으로 나온 구조.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "Capitalism is not a system [[1|where]] cash is everywhere [[2|but]] rather one [[3|in which]] islands of cash exchange [[4|exists]] [[5|within]] oceans of cheap―or potentially cheap―natures.",
+     "answer": "④",
+     "fix": "주어 islands(복수)에 맞춰 동사는 exist가 옳다; exists는 수 일치 오류.",
+     "options": [
+      "① where",
+      "② but",
+      "③ in which",
+      "④ exists",
+      "⑤ within"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "The climate changes, and crops can no longer [[grow/to grow]] [[as/so]] abundantly as they once [[did/were]].",
+     "answer": "grow / as / did",
+     "fix": "조동사 can 뒤에는 원형 grow, 원급 비교는 as ~ as, 앞의 grow를 대신하는 대동사는 did.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "answer": "Workers demand dignity, and their labor become expensive.",
+     "fix": "their labor(단수 주어)에 맞춰 become → becomes.",
+     "options": [
+      "Reproducing life within the cash nexus is expensive, and it grows more expensive over time.",
+      "Production processes burn through an island, and energy is no longer cheap.",
+      "Workers demand dignity, and their labor become expensive.",
+      "The climate changes, and crops can no longer grow as abundantly as they once did.",
+      "Frontiers are so important in these processes because they offer places where the new cheap things can be seized―and the cheap work of humans and other natures can be forcefully taken."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "이곳은 다양한 문화가 공존하는 도시이다. (in which 사용)",
+     "sentence": "",
+     "answer": "This is a city in which various cultures coexist.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "This",
+      "is",
+      "a",
+      "city",
+      "in which",
+      "various",
+      "cultures",
+      "coexist"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "노동자들은 존엄을 요구하고, 그들의 노동은 비싸진다.",
+     "sentence": "",
+     "answer": "Workers demand dignity, and their labor becomes expensive.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Workers",
+      "demand",
+      "dignity",
+      "and",
+      "their",
+      "labor",
+      "becomes",
+      "expensive"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "값싼 자연 (cheap natures)",
+    "expressions": [
+     "cheap―or potentially cheap―natures",
+     "the new cheap things",
+     "energy is no longer cheap"
+    ],
+    "variation": "값싼 자연이 시간이 갈수록 더는 값싸지 않게 됨"
+   },
+   {
+    "label": "비싸짐 (becoming expensive)",
+    "expressions": [
+     "is expensive",
+     "becomes expensive"
+    ],
+    "variation": "현금 관계 속 삶의 재생산 비용이 계속 상승"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입·주장",
+    "sentence_range": "1",
+    "summary": "자본주의는 [[값싼 자연]]의 바다 속에 떠 있는 현금 교환의 섬들",
+    "easy_example": "넓은 바다(값싼 자연) 위에 떠 있는 작은 섬(현금)"
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "2~4",
+    "summary": "현금 관계 속 삶의 재생산은 [[비싸지고]], 임금 동결도 불평등→위기→시위로, 노동도 비싸짐",
+    "easy_example": "월급은 묶여도 생활비는 계속 오르는 상황"
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "5~6",
+    "summary": "생산이 섬을 소진→에너지도 작물도 더는 [[값싸지·풍성하지]] 않음",
+    "easy_example": "같은 밭을 계속 갈면 흙심이 빠져 수확이 주는 것"
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "7",
+    "summary": "[[프런티어]]는 새로운 값싼 것과 노동을 강제로 취하는 장소라 중요",
+    "easy_example": "새 땅을 찾아 값싼 자원을 확보하려는 개척"
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Capitalism is not a system where cash is everywhere but rather one in which islands of cash exchange exist within oceans of cheap―or potentially cheap―natures.",
+   "grammar": [
+    {
+     "tag": "상관구조 not A but B",
+     "note": "A가 아니라 (오히려) B이다",
+     "spans": [
+      "not",
+      "but"
+     ]
+    },
+    {
+     "tag": "관계부사 where",
+     "note": "장소·상황의 선행사 a system을 수식",
+     "spans": [
+      "where"
+     ]
+    },
+    {
+     "tag": "전치사 + 관계대명사 (in which)",
+     "note": "in one(=a system)에서 in이 관계대명사 앞으로 이동",
+     "spans": [
+      "in which"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "capitalism",
+     "meaning": "자본주의"
+    },
+    {
+     "word": "exchange",
+     "meaning": "교환"
+    },
+    {
+     "word": "potentially",
+     "meaning": "잠재적으로"
+    },
+    {
+     "word": "natures",
+     "meaning": "자연(자원)"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Capitalism is not a system",
+     "ko": "[[자본주의]]는 (~한) 체제가 아니라"
+    },
+    {
+     "en": "where cash is everywhere",
+     "ko": "[[현금]]이 어디에나 있는"
+    },
+    {
+     "en": "but rather one in which",
+     "ko": "[[오히려]] (~한) 것(체제)이다"
+    },
+    {
+     "en": "islands of cash exchange exist",
+     "ko": "현금 교환의 [[섬들]]이 존재하는"
+    },
+    {
+     "en": "[[within oceans of cheap―or potentially cheap―natures.]]",
+     "ko": "[[값싼—혹은 잠재적으로 값싼—자연의 바다 속에]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "자본주의는 현금이 도처에 존재하는 체제가 아니라, 값싼 자연의 바다에 현금 교환의 섬들이 떠 있는 체제로 묘사된다.",
+     "verdict": "O"
+    },
+    {
+     "statement": "자본주의는 현금 교환의 섬들 속에 값싼 자연의 바다가 들어 있는 체제다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "islands of cash exchange exist within oceans of cheap―or potentially cheap―natures",
+     "why": "현금의 섬이 값싼 자연의 바다 '속에' 존재하는 것이지 그 반대가 아님."
+    }
+   ],
+   "mistips": [
+    "not A but rather B: 'A가 아니라 오히려 B'로 해석",
+    "one = a system (앞 명사를 대신하는 부정대명사)"
+   ]
+  },
+  {
+   "id": 2,
+   "english": "Reproducing life within the cash nexus is expensive, and it grows more expensive over time.",
+   "grammar": [
+    {
+     "tag": "동명사 주어",
+     "note": "Reproducing ... nexus가 단수 주어(동사 is)",
+     "spans": [
+      "Reproducing"
+     ]
+    },
+    {
+     "tag": "비교급",
+     "note": "more + 형용사로 정도 증가",
+     "spans": [
+      "more expensive"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "reproduce",
+     "meaning": "재생산하다"
+    },
+    {
+     "word": "cash nexus",
+     "meaning": "현금(금전) 관계"
+    },
+    {
+     "word": "over time",
+     "meaning": "시간이 지나면서"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Reproducing life within the cash nexus is expensive,",
+     "ko": "현금 관계 속에서 삶을 [[재생산]]하는 일은 비싸고,"
+    },
+    {
+     "en": "and it grows more expensive over time.",
+     "ko": "그리고 그것은 시간이 갈수록 더 [[비싸진다]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "두 번째 문장의 it은 '현금(cash)'을 가리키며, 현금 자체가 시간이 갈수록 비싸진다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "Reproducing life within the cash nexus is expensive, and it grows more expensive over time.",
+     "why": "it은 '현금 관계 속에서 삶을 재생산하는 일'을 가리킴."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "Workers' wages can be frozen, even rolled back, but in the end inequality leads to crises of the kind we've recently seen bring about populist protests in the United States and the United Kingdom.",
+   "grammar": [
+    {
+     "tag": "수동태",
+     "note": "조동사 can + be p.p.",
+     "spans": [
+      "be frozen"
+     ]
+    },
+    {
+     "tag": "과거분사(수동)",
+     "note": "(being) rolled back로 be frozen과 병렬",
+     "spans": [
+      "rolled back"
+     ]
+    },
+    {
+     "tag": "현재완료",
+     "note": "경험·최근의 결과를 나타냄",
+     "spans": [
+      "we've recently seen"
+     ]
+    },
+    {
+     "tag": "지각동사 see + O + 원형부정사",
+     "note": "we've seen (crises) bring about ~",
+     "spans": [
+      "bring"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "wages",
+     "meaning": "임금"
+    },
+    {
+     "word": "roll back",
+     "meaning": "(임금 등을) 삭감하다"
+    },
+    {
+     "word": "inequality",
+     "meaning": "불평등"
+    },
+    {
+     "word": "populist",
+     "meaning": "대중영합적인, 포퓰리즘의"
+    },
+    {
+     "word": "bring about",
+     "meaning": "야기하다, 초래하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Workers' wages can be frozen, even rolled back,",
+     "ko": "노동자의 임금은 동결되거나, 심지어 [[삭감]]될 수도 있지만,"
+    },
+    {
+     "en": "but in the end inequality leads to crises",
+     "ko": "결국 [[불평등]]은 위기로 이어지는데"
+    },
+    {
+     "en": "of the kind we've recently seen",
+     "ko": "우리가 최근에 [[목격한]] 종류의"
+    },
+    {
+     "en": "bring about populist protests",
+     "ko": "대중영합적 [[시위]]를 불러일으키는"
+    },
+    {
+     "en": "in the United States and the United Kingdom.",
+     "ko": "[[미국]]과 영국에서."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "임금은 동결되거나 삭감될 수 있지만, 결국 불평등은 미국과 영국에서 목격한 것과 같은 위기를 낳는다.",
+     "verdict": "O"
+    }
+   ],
+   "mistips": [
+    "seen (crises) bring about: 지각동사+목적어+원형부정사 구조"
+   ]
+  },
+  {
+   "id": 4,
+   "english": "Workers demand dignity, and their labor becomes expensive.",
+   "grammar": [
+    {
+     "tag": "2형식 become + 보어",
+     "note": "become + 형용사(주격보어)",
+     "spans": [
+      "becomes"
+     ]
+    },
+    {
+     "tag": "소유격 대명사(지칭)",
+     "note": "their = Workers'",
+     "spans": [
+      "their"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "demand",
+     "meaning": "요구하다"
+    },
+    {
+     "word": "dignity",
+     "meaning": "존엄(성)"
+    },
+    {
+     "word": "labor",
+     "meaning": "노동"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Workers demand dignity,",
+     "ko": "노동자들은 [[존엄]]을 요구하고,"
+    },
+    {
+     "en": "and their labor becomes expensive.",
+     "ko": "그들의 [[노동]]은 비싸진다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "노동자들은 존엄을 요구하며, 더 긴 근무 시간을 통해 임금을 보전하려 한다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "Workers demand dignity, and their labor becomes expensive.",
+     "why": "근무 시간 연장은 지문에 없는 정보이며, 노동이 비싸진다고만 함."
+    },
+    {
+     "statement": "Workers' labor becomes expensive when they demand dignity.",
+     "verdict": "O",
+     "english": true
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "Production processes burn through an island, and energy is no longer cheap.",
+   "grammar": [
+    {
+     "tag": "구동사 burn through",
+     "note": "~을 다 써버리다, 소진하다",
+     "spans": [
+      "burn through"
+     ]
+    },
+    {
+     "tag": "no longer",
+     "note": "더 이상 ~아니다",
+     "spans": [
+      "no longer"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "production",
+     "meaning": "생산"
+    },
+    {
+     "word": "burn through",
+     "meaning": "소진하다, 다 써버리다"
+    },
+    {
+     "word": "no longer",
+     "meaning": "더 이상 ~아닌"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Production processes burn through an island,",
+     "ko": "생산 과정은 [[섬]]을 다 태워 없애고,"
+    },
+    {
+     "en": "and energy is no longer cheap.",
+     "ko": "에너지는 더 이상 [[값싸지]] 않다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "생산 과정이 자원의 섬을 소진하여 에너지가 더는 값싸지 않게 되는데, 이는 노동자들이 존엄을 요구했기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "Production processes burn through an island, and energy is no longer cheap.",
+     "why": "에너지가 비싸진 것은 섬(자원)을 소진했기 때문이지 임금 요구 때문이 아님."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "The climate changes, and crops can no longer grow as abundantly as they once did.",
+   "grammar": [
+    {
+     "tag": "no longer",
+     "note": "더 이상 ~아니다",
+     "spans": [
+      "no longer"
+     ]
+    },
+    {
+     "tag": "원급 비교 as ~ as",
+     "note": "as + 부사 + as로 동등 비교",
+     "spans": [
+      "as abundantly as"
+     ]
+    },
+    {
+     "tag": "대동사 do",
+     "note": "did = grew(앞 동사 대신)",
+     "spans": [
+      "did"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "climate",
+     "meaning": "기후"
+    },
+    {
+     "word": "crops",
+     "meaning": "작물"
+    },
+    {
+     "word": "abundantly",
+     "meaning": "풍부하게"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The climate changes,",
+     "ko": "[[기후]]가 변하고,"
+    },
+    {
+     "en": "and crops can no longer grow",
+     "ko": "작물은 더 이상 [[자랄]] 수 없다"
+    },
+    {
+     "en": "[[as abundantly as they once did.]]",
+     "ko": "[[한때 그랬던 것만큼 풍성하게]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "기후가 변하면서 작물은 예전보다 더 풍성하게 자랄 수 있게 되었다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "crops can no longer grow as abundantly as they once did",
+     "why": "작물이 예전만큼 '더 이상' 풍성히 자랄 수 없다고 함(반대).",
+     "killer": true
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 7,
+   "english": "Frontiers are so important in these processes because they offer places where the new cheap things can be seized―and the cheap work of humans and other natures can be forcefully taken.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사 because",
+     "note": "이유를 이끄는 부사절",
+     "spans": [
+      "because"
+     ]
+    },
+    {
+     "tag": "관계부사 where",
+     "note": "장소 선행사 places를 수식",
+     "spans": [
+      "where"
+     ]
+    },
+    {
+     "tag": "수동태(조동사 + be p.p.)",
+     "note": "can be + p.p. 두 개가 병렬",
+     "spans": [
+      "be seized",
+      "be forcefully taken"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "frontier",
+     "meaning": "변경, 개척지"
+    },
+    {
+     "word": "seize",
+     "meaning": "탈취하다, 장악하다"
+    },
+    {
+     "word": "forcefully",
+     "meaning": "강제로, 강력하게"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Frontiers are so important in these processes",
+     "ko": "[[변경(프런티어)]]이 이 과정에서 매우 중요한 것은"
+    },
+    {
+     "en": "because they offer places",
+     "ko": "그것들이 [[장소]]를 제공하기 때문이다"
+    },
+    {
+     "en": "where the new cheap things can be seized―and",
+     "ko": "새로운 값싼 것들이 [[탈취]]될 수 있고"
+    },
+    {
+     "en": "the cheap work of humans and other natures",
+     "ko": "인간과 다른 [[자연]]의 값싼 노동이"
+    },
+    {
+     "en": "can be forcefully taken.",
+     "ko": "강제로 [[빼앗길]] 수 있는 곳이기 때문이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 프런티어에서 값싼 것들을 강제로 취하는 방식을 자본주의의 바람직한 해결책으로 제시한다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "the cheap work of humans and other natures can be forcefully taken",
+     "why": "'강제로 빼앗긴다'는 비판적 서술이지 바람직한 해결책 제시가 아님."
+    }
+   ],
+   "mistips": [
+    "seized―and 사이의 ―는 붙임표가 아니라 문장 부호(대시)"
+   ]
+  }
+ ]
+}

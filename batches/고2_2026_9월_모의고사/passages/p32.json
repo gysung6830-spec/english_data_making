@@ -1,0 +1,761 @@
+{
+ "item_no": "32",
+ "theme": "공유된 의미의 필요 — 불확실성이라는 문제",
+ "overview": {
+  "theme_ko": "공유된 의미의 필요와 불확실성이라는 문제",
+  "topic": "🔎 안정된 집단 소속이 주는 공유된 사회적 이해의 중요성",
+  "stance": "중립적",
+  "stance_reason": "왜 캠퍼스 호텔 생활이 문제인지 '안정된 집단·공유된 이해의 결여'로 분석·설명함",
+  "structure": "주장→근거·예시",
+  "structure_reason": "사람들이 공유된 의미를 선호한다는 주장을 캠퍼스 호텔 사례로 뒷받침하고 '불확실성이 문제'라 결론짓는다",
+  "key_grammar": {
+   "point": "5형식 목적격보어(encourage + 목적어 + to부정사)",
+   "source_sentence": "Of the cognitive motivations, the most fundamental one encourages people to understand their environment to predict what is going to happen in case of uncertainties.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "encourage/allow/enable처럼 '~가 …하도록'을 뜻하는 동사는 목적어 뒤에 목적격보어로 to부정사를 취한다."
+    },
+    {
+     "chip": "구조",
+     "text": "encourage + 목적어(people) + to부정사(to understand) = 5형식(S+V+O+O.C)."
+    },
+    {
+     "chip": "표지",
+     "text": "목적어 다음에 곧바로 to-V가 오면 그 자리를 목적격보어로 본다."
+    },
+    {
+     "chip": "주의",
+     "text": "make/let/have 같은 사역동사는 원형부정사를 쓰지만 encourage는 반드시 to가 필요하다."
+    }
+   ],
+   "example_analysis": "encourages people to understand에서 encourage의 목적어 people 뒤에 목적격보어로 to부정사(to understand)가 온 5형식이다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "Of the cognitive motivations, the most fundamental one [[1|encourages]] people [[2|understand]] their environment [[3|to predict]] what is going to [[4|happen]] in case of [[5|uncertainties]].",
+     "options": [
+      "① encourages",
+      "② understand",
+      "③ to predict",
+      "④ happen",
+      "⑤ uncertainties"
+     ],
+     "answer": "②",
+     "fix": "understand → to understand: encourage는 목적격보어로 to부정사를 취하는 5형식 동사이므로 to understand가 옳다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "Most important, people prefer [[to develop/developing]] meanings [[that/what]] [[are shared/is shared]] with other people.",
+     "options": [],
+     "answer": "to develop / that / are shared",
+     "fix": "prefer는 to부정사를 목적어로 취하므로 to develop, 선행사 meanings가 있으므로 관계대명사 that, 선행사가 복수이므로 are shared가 옳다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "options": [
+      "① Most important, people prefer to develop meanings that are shared with other people.",
+      "② But what is wrong with a room at campus hotels?",
+      "③ The uncertainty itself is the problem.",
+      "④ People lack a shared social understanding, normally developing from membership in a stable group.",
+      "⑤ It is easy to understand why living in the lounge is problematic (no closet, for one thing)."
+     ],
+     "answer": "People lack a shared social understanding, normally developing from membership in a stable group.",
+     "fix": "developing → developed: understanding이 '발전되는' 수동 대상이므로 과거분사 developed가 옳다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그 교사는 학생들이 매일 책을 읽도록 격려한다. (encourage를 사용하여)",
+     "sentence": "",
+     "answer": "The teacher encourages students to read books every day.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "The teacher",
+      "encourages",
+      "students",
+      "to read",
+      "books",
+      "every day."
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "가장 근본적인 것은 사람들이 자신의 환경을 이해하도록 부추긴다.",
+     "sentence": "",
+     "answer": "the most fundamental one encourages people to understand their environment",
+     "fix": "",
+     "options": [],
+     "words": [
+      "the most fundamental one",
+      "encourages",
+      "people",
+      "to understand",
+      "their environment"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "공유된 사회적 이해",
+    "expressions": [
+     "meanings that are shared with other people",
+     "a shared social understanding",
+     "a stable group"
+    ],
+    "variation": "안정된 집단에서 나오는 '공유된 의미·이해'라는 핵심 개념의 반복"
+   },
+   {
+    "label": "불확실성이라는 문제",
+    "expressions": [
+     "in case of uncertainties",
+     "wait in uncertainty",
+     "The uncertainty itself is the problem"
+    ],
+    "variation": "예측 불가·불확실성이 곧 문제라는 논지의 강화"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입·주장",
+    "sentence_range": "1~2",
+    "summary": "사람들은 예측을 위해 [[공유된 의미]]를 선호한다",
+    "easy_example": "친구들과 같은 규칙을 공유해야 다음 상황을 예상할 수 있다."
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "3~4",
+    "summary": "초과 입학→[[휴게실]] 거주는 문제임이 명백",
+    "easy_example": "옷장도 없는 휴게실살이가 불편한 건 누구나 안다."
+   },
+   {
+    "stage": "전환·반문",
+    "sentence_range": "5~6",
+    "summary": "시설 좋은 [[호텔]] 방은 뭐가 문제일까?",
+    "easy_example": "개인 욕실에 큰 방이면 오히려 좋아 보인다."
+   },
+   {
+    "stage": "핵심",
+    "sentence_range": "7~8",
+    "summary": "[[안정된 집단]]이 없어 불확실성이 곧 문제",
+    "easy_example": "1년 내내 함께할 이웃이 없어 자리를 못 잡는다."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "9",
+    "summary": "안정된 집단 소속에서 오는 [[공유된 이해]]의 결여",
+    "easy_example": "소속이 있어야 생기는 '우리끼리 통하는 이해'가 없다."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Of the cognitive motivations, the most fundamental one encourages people to understand their environment to predict what is going to happen in case of uncertainties.",
+   "grammar": [
+    {
+     "tag": "최상급",
+     "note": "'가장 ~한'을 나타내는 the most",
+     "spans": [
+      "most"
+     ]
+    },
+    {
+     "tag": "5형식 목적격보어(to부정사)",
+     "note": "encourage + 목적어 + to부정사",
+     "spans": [
+      "encourages",
+      "to understand"
+     ]
+    },
+    {
+     "tag": "to부정사 부사적 용법(목적)",
+     "note": "'~하기 위해'의 목적",
+     "spans": [
+      "to predict"
+     ]
+    },
+    {
+     "tag": "명사절 의문사 what",
+     "note": "predict의 목적어절을 이끄는 what",
+     "spans": [
+      "what"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "cognitive",
+     "meaning": "인지의, 인식의"
+    },
+    {
+     "word": "motivation",
+     "meaning": "동기"
+    },
+    {
+     "word": "fundamental",
+     "meaning": "근본적인"
+    },
+    {
+     "word": "predict",
+     "meaning": "예측하다"
+    },
+    {
+     "word": "uncertainty",
+     "meaning": "불확실성"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Of the cognitive motivations, the most fundamental one encourages",
+     "ko": "인지적 동기 중, 가장 [[근본적인]] 것은 사람들이 ~하도록 부추긴다"
+    },
+    {
+     "en": "[[people to understand their environment]]",
+     "ko": "[[사람들이 자신의 환경을 이해하도록]]"
+    },
+    {
+     "en": "to predict what is going to happen",
+     "ko": "무슨 일이 일어날지 [[예측]]하기 위해"
+    },
+    {
+     "en": "in case of uncertainties.",
+     "ko": "[[불확실성]]에 대비하여."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "인지적 동기 중 가장 근본적인 것은 사람들이 환경을 이해해 불확실한 상황에서 벌어질 일을 예측하도록 부추긴다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": [
+    "to predict는 '예측하기 위해서'라는 목적의 부사적 용법으로, encourage의 두 번째 목적어가 아니다."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "Most important, people prefer to develop meanings that are shared with other people.",
+   "grammar": [
+    {
+     "tag": "to부정사 명사적 용법(목적어)",
+     "note": "prefer의 목적어로 쓰인 to부정사",
+     "spans": [
+      "to develop"
+     ]
+    },
+    {
+     "tag": "주격 관계대명사 that",
+     "note": "선행사 meanings를 수식하는 절을 이끔",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "'공유되는' 수동 관계",
+     "spans": [
+      "are shared"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "prefer",
+     "meaning": "선호하다"
+    },
+    {
+     "word": "develop",
+     "meaning": "발전시키다, 만들어내다"
+    },
+    {
+     "word": "shared",
+     "meaning": "공유되는"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Most important, people prefer to develop meanings",
+     "ko": "가장 중요하게, 사람들은 [[의미]]를 발전시키기를 선호한다"
+    },
+    {
+     "en": "[[that are shared with other people.]]",
+     "ko": "[[다른 사람들과 공유되는.]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "People prefer to develop private meanings that are not shared with others.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "english": true,
+     "anchor": "people prefer to develop meanings that are shared with other people",
+     "why": "사람들은 '다른 사람과 공유되는' 의미를 선호한다고 했으므로 정반대이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "For example, if in a given year more people accept offers of admission than a college expects, quite a few students end up living in dorm lounges or campus hotels.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사 if(조건)",
+     "note": "'만약 ~하면'의 조건절",
+     "spans": [
+      "if"
+     ]
+    },
+    {
+     "tag": "비교급(more ~ than)",
+     "note": "'~보다 더 많은'의 비교",
+     "spans": [
+      "than"
+     ]
+    },
+    {
+     "tag": "동명사(end up + -ing)",
+     "note": "'결국 ~하게 되다'의 표현",
+     "spans": [
+      "end up living"
+     ]
+    },
+    {
+     "tag": "수량표현(quite a few)",
+     "note": "'꽤 많은'의 가산 다수",
+     "spans": [
+      "quite a few"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "admission",
+     "meaning": "입학 (허가)"
+    },
+    {
+     "word": "end up",
+     "meaning": "결국 ~하게 되다"
+    },
+    {
+     "word": "dorm",
+     "meaning": "기숙사"
+    },
+    {
+     "word": "lounge",
+     "meaning": "휴게실"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "For example, if in a given year more people accept",
+     "ko": "예를 들어, 어떤 해에 더 많은 사람들이 [[받아들이면]]"
+    },
+    {
+     "en": "offers of admission than a college expects,",
+     "ko": "대학이 예상하는 것보다 많은 [[입학 허가]]를,"
+    },
+    {
+     "en": "[[quite a few students end up living]]",
+     "ko": "[[꽤 많은 학생들이 결국 살게 된다]]"
+    },
+    {
+     "en": "in dorm lounges or campus hotels.",
+     "ko": "기숙사 [[휴게실]]이나 캠퍼스 호텔에서."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "대학이 예상한 것보다 더 적은 학생이 입학을 수락하면 많은 학생이 기숙사 휴게실이나 호텔에 살게 된다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "more people accept offers of admission than a college expects, quite a few students end up living in dorm lounges or campus hotels",
+     "why": "예상보다 '더 많은' 학생이 수락할 때 생기는 일이므로 '더 적은'은 조건을 뒤집은 것이다.",
+     "killer": true
+    }
+   ],
+   "mistips": [
+    "more ~ than a college expects는 '대학이 예상한 수보다 많이'라는 뜻이다."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "It is easy to understand why living in the lounge is problematic (no closet, for one thing).",
+   "grammar": [
+    {
+     "tag": "가주어-진주어",
+     "note": "It이 가주어, to부정사가 진주어",
+     "spans": [
+      "It",
+      "to understand"
+     ]
+    },
+    {
+     "tag": "명사절 의문사 why",
+     "note": "understand의 목적어절을 이끄는 why",
+     "spans": [
+      "why"
+     ]
+    },
+    {
+     "tag": "동명사(주어)",
+     "note": "'~하며 사는 것'이 절의 주어",
+     "spans": [
+      "living"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "problematic",
+     "meaning": "문제가 있는"
+    },
+    {
+     "word": "closet",
+     "meaning": "옷장, 벽장"
+    },
+    {
+     "word": "for one thing",
+     "meaning": "우선 한 가지로는"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "It is easy to understand",
+     "ko": "이해하기는 [[쉽다]]"
+    },
+    {
+     "en": "[[why living in the lounge is problematic]]",
+     "ko": "[[왜 휴게실에서 사는 것이 문제인지]]"
+    },
+    {
+     "en": "(no closet, for one thing).",
+     "ko": "(우선 한 가지로, [[옷장]]이 없다)."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "휴게실 생활이 문제인 이유는, 예컨대 옷장이 없다는 점에서 쉽게 이해된다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "But what is wrong with a room at campus hotels?",
+   "grammar": [
+    {
+     "tag": "의문사 의문문(what)",
+     "note": "'무엇이 문제인가'를 묻는 의문문",
+     "spans": [
+      "what"
+     ]
+    },
+    {
+     "tag": "be wrong with(~에 문제가 있다)",
+     "note": "'~에 잘못·문제가 있다'는 관용 표현",
+     "spans": [
+      "wrong with"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "wrong",
+     "meaning": "잘못된, 문제가 있는"
+    },
+    {
+     "word": "campus",
+     "meaning": "교내, 캠퍼스"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "But what is wrong",
+     "ko": "하지만 무엇이 [[잘못]]인가"
+    },
+    {
+     "en": "with a room at campus hotels?",
+     "ko": "캠퍼스 호텔의 [[방]]에는?"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "지문은 캠퍼스 호텔 방의 비싼 요금을 그 방의 문제점으로 지적한다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "what is wrong with a room at campus hotels?",
+     "why": "호텔 방의 문제는 요금이 아니라 안정된 집단의 부재이며, 요금은 언급되지 않는다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "After all, students in a hotel get private bathrooms, their own TV, and larger rooms.",
+   "grammar": [
+    {
+     "tag": "재귀·소유 강조(own)",
+     "note": "'자기 자신의'를 강조하는 their own",
+     "spans": [
+      "their own"
+     ]
+    },
+    {
+     "tag": "병렬구조(A, B, and C)",
+     "note": "get의 목적어 세 개를 대등하게 연결",
+     "spans": [
+      "and"
+     ]
+    },
+    {
+     "tag": "비교급",
+     "note": "'더 큰'을 나타내는 비교급",
+     "spans": [
+      "larger"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "after all",
+     "meaning": "결국, 어쨌든"
+    },
+    {
+     "word": "private",
+     "meaning": "개인의, 사적인"
+    },
+    {
+     "word": "bathroom",
+     "meaning": "욕실, 화장실"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "After all, students in a hotel get",
+     "ko": "결국, 호텔에 있는 학생들은 [[얻는다]]"
+    },
+    {
+     "en": "[[private bathrooms, their own TV, and larger rooms.]]",
+     "ko": "[[개인 욕실, 자신만의 TV, 그리고 더 큰 방을.]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "'their own TV'에서 their는 호텔 방을 소유한 대학을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "students in a hotel get private bathrooms, their own TV, and larger rooms",
+     "why": "their는 개인 시설을 받는 '학생들(students)'을 가리킨다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 7,
+   "english": "In fact, living in those hotels is problematic because the student residents are not a part of a stable group with people who will be their neighbors for the year; they must wait in uncertainty before finding their social niche.",
+   "grammar": [
+    {
+     "tag": "동명사(주어)",
+     "note": "'~에 사는 것'이 절의 주어",
+     "spans": [
+      "living"
+     ]
+    },
+    {
+     "tag": "부사절 접속사 because(이유)",
+     "note": "'~이기 때문에'의 이유절",
+     "spans": [
+      "because"
+     ]
+    },
+    {
+     "tag": "주격 관계대명사 who",
+     "note": "선행사 people을 수식하는 절을 이끔",
+     "spans": [
+      "who"
+     ]
+    },
+    {
+     "tag": "전치사 + 동명사",
+     "note": "'~하기 전에'의 before + -ing",
+     "spans": [
+      "finding"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "resident",
+     "meaning": "거주자"
+    },
+    {
+     "word": "stable",
+     "meaning": "안정적인"
+    },
+    {
+     "word": "neighbor",
+     "meaning": "이웃"
+    },
+    {
+     "word": "niche",
+     "meaning": "적합한 자리, 입지"
+    },
+    {
+     "word": "uncertainty",
+     "meaning": "불확실성"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In fact, living in those hotels is problematic",
+     "ko": "사실, 그 호텔에서 사는 것은 [[문제]]가 된다"
+    },
+    {
+     "en": "[[because the student residents are not a part of a stable group]]",
+     "ko": "[[학생 거주자들이 안정적인 집단의 일부가 아니기 때문에]]"
+    },
+    {
+     "en": "with people who will be their neighbors for the year;",
+     "ko": "그 해 동안 그들의 [[이웃]]이 될 사람들과 함께하는;"
+    },
+    {
+     "en": "[[they must wait in uncertainty before finding their social niche.]]",
+     "ko": "[[그들은 자신의 사회적 자리를 찾기 전에 불확실성 속에서 기다려야 한다.]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 캠퍼스 호텔 생활이 사생활이 보장되어 학생에게 바람직하다고 본다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "living in those hotels is problematic because the student residents are not a part of a stable group",
+     "why": "필자는 호텔 생활을 '문제가 있다'고 보므로 바람직하다는 평가는 관점을 뒤집은 것이다."
+    },
+    {
+     "statement": "호텔 생활이 문제인 것은 방이 좁기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "the student residents are not a part of a stable group with people who will be their neighbors for the year",
+     "why": "문제라는 방향은 맞지만 원인은 좁은 방이 아니라 안정된 집단·이웃의 부재이다(방은 오히려 더 크다)."
+    }
+   ],
+   "mistips": [
+    "problematic의 이유는 because절 이하 '안정된 집단의 부재'이지 앞의 시설이 아니다."
+   ]
+  },
+  {
+   "id": 8,
+   "english": "The uncertainty itself is the problem.",
+   "grammar": [
+    {
+     "tag": "재귀대명사(강조 용법)",
+     "note": "명사를 강조하는 '~ 자체'",
+     "spans": [
+      "itself"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "uncertainty",
+     "meaning": "불확실성"
+    },
+    {
+     "word": "itself",
+     "meaning": "그 자체"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The uncertainty itself is the problem.",
+     "ko": "[[불확실성]] 그 자체가 문제이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "결국 불확실성 그 자체가 문제이다.",
+     "verdict": "O",
+     "trap_type": "구조수식"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 9,
+   "english": "People lack a shared social understanding, normally developed from membership in a stable group.",
+   "grammar": [
+    {
+     "tag": "과거분사(형용사적)",
+     "note": "'공유된' 수동 의미로 명사 수식",
+     "spans": [
+      "shared"
+     ]
+    },
+    {
+     "tag": "과거분사(분사구문, being 생략)",
+     "note": "'보통 ~에서 발전되는'의 수동 분사구",
+     "spans": [
+      "developed"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "lack",
+     "meaning": "부족하다, ~이 없다"
+    },
+    {
+     "word": "understanding",
+     "meaning": "이해"
+    },
+    {
+     "word": "membership",
+     "meaning": "구성원 자격, 소속"
+    },
+    {
+     "word": "stable",
+     "meaning": "안정적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "People lack a shared social understanding,",
+     "ko": "사람들은 공유된 사회적 [[이해]]가 없는데,"
+    },
+    {
+     "en": "[[normally developed from membership in a stable group.]]",
+     "ko": "[[그것은 보통 안정적인 집단의 구성원 자격에서 발전된다.]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "사람들은 안정된 집단의 소속을 통해 공유된 사회적 이해를 이미 충분히 갖추고 있다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "People lack a shared social understanding",
+     "why": "사람들은 공유된 사회적 이해가 '없다(lack)'고 했으므로 갖추고 있다는 것은 정반대이다."
+    }
+   ],
+   "mistips": [
+    "developed는 understanding을 뒤에서 수식하는 과거분사로 '발전되는'의 수동 의미이다."
+   ]
+  }
+ ]
+}

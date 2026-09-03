@@ -1,0 +1,234 @@
+{
+  "item_no": "36",
+  "theme": "미래의 필요를 내다보는 동물의 서식지 선택",
+  "overview": {
+    "theme_ko": "미래의 필요를 내다보는 동물의 서식지 선택",
+    "topic": "🔎 동물은 현재가 아니라 미래의 필요에 맞춰 최적의 서식지를 선택한다",
+    "stance": "중립적",
+    "stance_reason": "동물의 서식지 선택 능력을 연구 결과와 사례로 설명·소개함",
+    "structure": "주장→근거·예시",
+    "structure_reason": "Many studies have shown that ... For example, the black-throated green warbler ...",
+    "key_grammar": {
+      "point": "상관접속사 not only ~ but (also) + 도치",
+      "source_sentence": "Many studies have shown that not only do animals have a remarkable ability to seek out the best available locations for the necessities of life, but that they are able to anticipate how a setting will serve their future needs.",
+      "explanation": [
+        {"chip": "쉽게 말하면", "text": "'not only A but (also) B'는 'A뿐만 아니라 B도'라는 뜻의 상관접속사예요."},
+        {"chip": "핵심", "text": "부정어구 not only가 절 앞으로 나오면 뒤의 주어와 (조)동사가 도치돼요."},
+        {"chip": "형태", "text": "not only + 조동사(do/does/did/be/have) + 주어 + 동사 ~, but (also) + 주어 + 동사."},
+        {"chip": "본문", "text": "본문에서는 'not only do animals have ~'처럼 조동사 do가 주어 animals 앞으로 나와 도치됐어요."},
+        {"chip": "주의", "text": "A와 B는 문법적으로 대등해야 해요. 본문은 'that절 ~ but that절 ~'로 균형을 맞췄습니다."}
+      ],
+      "example_analysis": "부정어구 not only가 that절 앞으로 나오면서 조동사 do가 주어 animals 앞으로 도치되었다.",
+      "drills": [
+        {
+          "kind": "밑줄형",
+          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+          "sentence": "Many studies [[1|have shown]] that not only [[2|animals have]] a remarkable ability [[3|to seek out]] the best available locations for the necessities of life, but that they [[4|are able to]] anticipate [[5|how]] a setting will serve their future needs.",
+          "answer": "②",
+          "fix": "부정어구 not only가 절 앞에 나오면 조동사 do가 주어 앞으로 도치되어야 하므로 animals have를 do animals have로 고쳐야 한다. 나머지 have shown, to seek out, are able to, how는 원문 그대로 옳다.",
+          "options": ["① have shown", "② animals have", "③ to seek out", "④ are able to", "⑤ how"],
+          "words": []
+        },
+        {
+          "kind": "네모형",
+          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+          "sentence": "Later, though, [[when/during]] nests [[are built/built]] and hungry baby birds need nourishment, it is the red spruce forest [[that/what]] offers the easier pickings.",
+          "answer": "when / are built / that",
+          "options": [],
+          "words": []
+        },
+        {
+          "kind": "오류찾기",
+          "question": "다음 중 어법상 틀린 문장은?",
+          "sentence": "",
+          "answer": "④ Somehow, the warbler has been guided to settle in locations what will suit its future parenting needs better than its present ones.",
+          "fix": "선행사 locations를 수식하는 주격 관계대명사가 필요하므로 what을 that으로 고쳐야 한다.",
+          "options": [
+            "① The ability to select a set of surroundings suitable for foraging, shelter from predators, and the availability of mates is one of the most important determinants of biological success ― measured as survival to reproductive age and the production of offspring.",
+            "② For example, the black-throated green warbler, a small songbird that nests in spruce forests of eastern North America, establishes territories preferentially among the red spruce trees early in the summer months, even though these trees offer less food than the neighboring white spruce trees.",
+            "③ Many studies have shown that not only do animals have a remarkable ability to seek out the best available locations for the necessities of life, but that they are able to anticipate how a setting will serve their future needs.",
+            "④ Somehow, the warbler has been guided to settle in locations what will suit its future parenting needs better than its present ones.",
+            "⑤ Later, though, when nests are built and hungry baby birds need nourishment, it is the red spruce forest that offers the easier pickings."
+          ],
+          "words": []
+        },
+        {
+          "kind": "영작",
+          "question": "그녀는 두 개의 언어를 말할 뿐만 아니라 세 개의 악기도 연주한다.",
+          "answer": "Not only does she speak two languages, but she also plays three instruments.",
+          "words": ["Not", "only", "does", "she", "speak", "two", "languages", "but", "she", "also", "plays", "three", "instruments"],
+          "options": [],
+          "from_passage": false
+        },
+        {
+          "kind": "영작",
+          "question": "많은 연구는 동물이 삶의 필수 요소를 위한 최적의 장소를 찾아내는 놀라운 능력을 지닐 뿐만 아니라, 어떤 환경이 자신의 미래 필요에 어떻게 도움이 될지도 예측할 수 있음을 보여 주었다.",
+          "answer": "Many studies have shown that not only do animals have a remarkable ability to seek out the best available locations for the necessities of life, but that they are able to anticipate how a setting will serve their future needs.",
+          "words": ["Many", "studies", "have", "shown", "that", "not", "only", "do", "animals", "have", "a", "remarkable", "ability", "to", "seek", "out", "the", "best", "available", "locations", "for", "the", "necessities", "of", "life", "but", "that", "they", "are", "able", "to", "anticipate", "how", "a", "setting", "will", "serve", "their", "future", "needs"],
+          "options": [],
+          "from_passage": true
+        }
+      ]
+    },
+    "restatement_chains": [
+      {
+        "label": "최적 장소 선택",
+        "expressions": ["seek out the best available locations", "establishes territories preferentially"],
+        "variation": "동물이 최적의 장소를 우선적으로 골라 자리 잡음"
+      },
+      {
+        "label": "미래 필요 예측",
+        "expressions": ["anticipate how a setting will serve their future needs", "suit its future parenting needs better than its present ones"],
+        "variation": "현재가 아니라 미래의 필요에 맞춰 장소를 선택함"
+      }
+    ],
+    "flow_blocks": [
+      {"stage": "도입(주장)", "sentence_range": "1", "summary": "좋은 [[서식지 선택]] 능력이 생물학적 성공을 좌우", "easy_example": "좋은 집터를 고르는 것이 잘 사는 첫걸음"},
+      {"stage": "주장 강화", "sentence_range": "2", "summary": "동물은 최적 장소를 찾을 뿐 아니라 [[미래 필요]]까지 예측", "easy_example": "지금 좋은 집이 아니라 나중에 좋을 집을 고름"},
+      {"stage": "사례", "sentence_range": "3~4", "summary": "휘파람새는 먹이 적은 붉은 가문비나무에 먼저 자리 잡음", "easy_example": "지금은 불편해도 나중을 보고 미리 자리 잡는 셈"},
+      {"stage": "결론", "sentence_range": "5", "summary": "미래 [[양육 필요]]에 더 맞는 곳으로 인도됨", "easy_example": "아이 키울 때를 미리 생각해 동네를 고르는 부모처럼"}
+    ]
+  },
+  "sentences": [
+    {
+      "id": 1,
+      "english": "The ability to select a set of surroundings suitable for foraging, shelter from predators, and the availability of mates is one of the most important determinants of biological success ― measured as survival to reproductive age and the production of offspring.",
+      "grammar": [
+        {"tag": "to부정사(형용사적 용법)", "note": "ability를 뒤에서 수식", "spans": ["to select"]},
+        {"tag": "형용사구 후치 수식", "note": "suitable ~ 이 surroundings를 뒤에서 수식", "spans": ["suitable"]},
+        {"tag": "최상급(one of the + 최상급)", "note": "'가장 ~한 것들 중 하나'", "spans": ["most important"]},
+        {"tag": "과거분사(분사구문)", "note": "measured ~ 이 앞 내용을 보충 설명", "spans": ["measured"]}
+      ],
+      "vocab": [
+        {"word": "surroundings", "meaning": "환경, 주변 상황"},
+        {"word": "foraging", "meaning": "먹이 찾기"},
+        {"word": "predator", "meaning": "포식자"},
+        {"word": "determinant", "meaning": "결정 요인"},
+        {"word": "offspring", "meaning": "자손, 새끼"}
+      ],
+      "chunks": [
+        {"en": "The ability to select a set of surroundings", "ko": "환경을 선택하는 [[능력]]은"},
+        {"en": "suitable for foraging, shelter from predators, and the availability of mates", "ko": "먹이 찾기, 포식자로부터의 은신처, 짝의 이용 가능성에 [[적합한]]"},
+        {"en": "is one of the most important determinants of biological success", "ko": "생물학적 [[성공]]의 가장 중요한 결정 요인 중 하나이다"},
+        {"en": "― measured as survival to reproductive age and the production of offspring.", "ko": "― 즉 생식 연령까지의 [[생존]]과 자손 생산으로 측정되는"}
+      ],
+      "misreads": [
+        {"statement": "먹이 찾기, 포식자로부터의 은신처, 짝의 이용 가능성에 알맞은 환경을 고르는 능력은 생물학적 성공의 가장 중요한 결정 요인 중 하나이다.", "verdict": "O", "trap_type": "주체대상"}
+      ],
+      "mistips": ["measured 이하는 biological success를 보충 설명하는 분사구이다."]
+    },
+    {
+      "id": 2,
+      "english": "Many studies have shown that not only do animals have a remarkable ability to seek out the best available locations for the necessities of life, but that they are able to anticipate how a setting will serve their future needs.",
+      "grammar": [
+        {"tag": "현재완료", "note": "여러 연구가 밝혀 온 결과", "spans": ["have shown"]},
+        {"tag": "명사절 접속사 that", "note": "shown의 목적어절을 이끎", "spans": ["that"]},
+        {"tag": "상관접속사(not only ~ but)", "note": "'~뿐만 아니라 ~도'", "spans": ["not only", "but"]},
+        {"tag": "도치(부정어구 not only 문두)", "note": "조동사 do가 주어 앞으로 도치", "spans": ["do animals have"]},
+        {"tag": "간접의문문(의문사절)", "note": "how ~ 이 anticipate의 목적어", "spans": ["how"]}
+      ],
+      "vocab": [
+        {"word": "remarkable", "meaning": "놀라운, 주목할 만한"},
+        {"word": "seek out", "meaning": "찾아내다"},
+        {"word": "necessities", "meaning": "필수 요소, 필수품"},
+        {"word": "anticipate", "meaning": "예측하다, 예상하다"},
+        {"word": "setting", "meaning": "환경, 배경"}
+      ],
+      "chunks": [
+        {"en": "Many studies have shown that", "ko": "많은 [[연구]]가 밝혀 온 것은"},
+        {"en": "not only do animals have a remarkable ability", "ko": "동물이 놀라운 [[능력]]을 지닐 뿐만 아니라"},
+        {"en": "to seek out the best available locations for the necessities of life,", "ko": "삶의 필수 요소를 위한 최적의 장소를 [[찾아내는]]"},
+        {"en": "but that they are able to anticipate", "ko": "그들이 [[예측]]할 수 있다는 것도이다"},
+        {"en": "how a setting will serve their future needs.", "ko": "환경이 미래의 필요에 어떻게 [[기여할지]]를"}
+      ],
+      "misreads": [
+        {"statement": "많은 연구는 동물이 최적의 장소를 찾아낼 뿐 아니라 그 장소가 미래의 필요에 어떻게 도움이 될지 예측한다는 점을 보여 준다.", "verdict": "O", "trap_type": "구조수식"},
+        {"statement": "필자는 동물의 장소 선택이 순전히 우연의 결과라고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "a remarkable ability to seek out the best available locations", "why": "필자는 그것을 놀라운 능력으로 보며 우연으로 보지 않는다."}
+      ],
+      "mistips": ["not only 뒤 do animals have는 도치된 어순으로 의미는 'animals have'와 같다.", "but that ~ 의 that은 앞의 shown that과 병렬을 이루는 명사절 접속사이다."]
+    },
+    {
+      "id": 3,
+      "english": "For example, the black-throated green warbler, a small songbird that nests in spruce forests of eastern North America, establishes territories preferentially among the red spruce trees early in the summer months, even though these trees offer less food than the neighboring white spruce trees.",
+      "grammar": [
+        {"tag": "동격(콤마)", "note": "warbler = a small songbird 를 동격으로 설명", "spans": ["a small songbird"]},
+        {"tag": "주격 관계대명사 that", "note": "a small songbird를 수식", "spans": ["that"]},
+        {"tag": "양보 부사절(even though)", "note": "'~인데도'라는 양보", "spans": ["even though"]},
+        {"tag": "비교급(less ~ than)", "note": "먹이를 '더 적게' 제공", "spans": ["less", "than"]}
+      ],
+      "vocab": [
+        {"word": "warbler", "meaning": "휘파람새류의 명금"},
+        {"word": "songbird", "meaning": "명금, 우는 새"},
+        {"word": "nest", "meaning": "둥지를 틀다"},
+        {"word": "territory", "meaning": "영역, 세력권"},
+        {"word": "preferentially", "meaning": "우선적으로"}
+      ],
+      "chunks": [
+        {"en": "For example, the black-throated green warbler,", "ko": "예를 들어, 검은목초록[[휘파람새]]는"},
+        {"en": "a small songbird that nests in spruce forests of eastern North America,", "ko": "동부 북아메리카 가문비나무 숲에 둥지를 트는 작은 [[명금]]인데"},
+        {"en": "establishes territories preferentially among the red spruce trees", "ko": "붉은 가문비나무들 사이에 우선적으로 [[영역]]을 정한다"},
+        {"en": "early in the summer months,", "ko": "여름철 [[초]]에"},
+        {"en": "even though these trees offer less food than the neighboring white spruce trees.", "ko": "비록 이 나무들이 이웃한 흰 가문비나무보다 먹이를 [[덜]] 제공하는데도"}
+      ],
+      "misreads": [
+        {"statement": "여름 초에 이 새가 우선적으로 자리 잡는 나무는 이웃한 흰 가문비나무이다.", "verdict": "X", "trap_type": "지칭", "anchor": "among the red spruce trees", "why": "우선적으로 자리 잡는 곳은 붉은 가문비나무이다."},
+        {"statement": "이 새는 붉은 가문비나무가 더 많은 먹이를 제공하기 때문에 여름 초에 그곳에 자리 잡는다.", "verdict": "X", "trap_type": "인과조건", "anchor": "these trees offer less food than the neighboring white spruce trees", "why": "붉은 가문비나무는 먹이가 더 적은데도 그곳을 선택한다.", "killer": true}
+      ],
+      "mistips": ["콤마로 둘러싸인 a small songbird ~ 는 warbler를 동격으로 부연 설명한다."]
+    },
+    {
+      "id": 4,
+      "english": "Later, though, when nests are built and hungry baby birds need nourishment, it is the red spruce forest that offers the easier pickings.",
+      "grammar": [
+        {"tag": "부사절 접속사 when(시간)", "note": "'~할 때'라는 시간 부사절", "spans": ["when"]},
+        {"tag": "수동태", "note": "둥지가 '지어지는' 대상", "spans": ["are built"]},
+        {"tag": "It ~ that 강조구문", "note": "the red spruce forest를 강조", "spans": ["it is", "that"]},
+        {"tag": "비교급", "note": "'더 쉬운' 먹거리", "spans": ["easier"]}
+      ],
+      "vocab": [
+        {"word": "nourishment", "meaning": "영양분, 자양분"},
+        {"word": "pickings", "meaning": "얻을 것, 먹거리"},
+        {"word": "spruce", "meaning": "가문비나무"}
+      ],
+      "chunks": [
+        {"en": "Later, though, when nests are built", "ko": "그렇지만 나중에, 둥지가 [[지어지고]]"},
+        {"en": "and hungry baby birds need nourishment,", "ko": "배고픈 새끼 새들이 [[영양분]]을 필요로 할 때"},
+        {"en": "it is the red spruce forest", "ko": "바로 붉은 가문비나무 [[숲]]이다"},
+        {"en": "that offers the easier pickings.", "ko": "더 쉬운 [[먹거리]]를 제공하는 곳은"}
+      ],
+      "misreads": [
+        {"statement": "나중에 새끼 새들이 영양분을 필요로 할 때 더 쉬운 먹거리를 제공하는 곳은 붉은 가문비나무 숲인데, 이는 그 숲의 나무가 더 크기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "it is the red spruce forest that offers the easier pickings", "why": "붉은 가문비 숲이 더 쉬운 먹거리를 준다는 방향은 맞지만 나무 크기가 이유라는 근거는 본문에 없다."},
+        {"statement": "The warbler settles in the red spruce forest only after the nests are built.", "verdict": "X", "trap_type": "인과조건", "anchor": "establishes territories preferentially among the red spruce trees early in the summer months", "why": "둥지를 짓기 전 초여름에 이미 붉은 가문비나무에 자리 잡는다.", "english": true, "integrative": true}
+      ],
+      "mistips": ["it is ~ that 강조구문으로, 강조되는 것은 the red spruce forest이다."]
+    },
+    {
+      "id": 5,
+      "english": "Somehow, the warbler has been guided to settle in locations that will suit its future parenting needs better than its present ones.",
+      "grammar": [
+        {"tag": "현재완료 수동태", "note": "'인도되어 왔다'는 수동", "spans": ["has been guided"]},
+        {"tag": "to부정사(부사적 용법)", "note": "'정착하도록'이라는 결과·목적", "spans": ["to settle"]},
+        {"tag": "주격 관계대명사 that", "note": "locations를 수식", "spans": ["that"]},
+        {"tag": "비교급(better ~ than)", "note": "현재보다 '더 잘' 맞음", "spans": ["better", "than"]},
+        {"tag": "부정대명사 one(s)", "note": "ones = present needs (반복 회피)", "spans": ["ones"]}
+      ],
+      "vocab": [
+        {"word": "somehow", "meaning": "어떻게든, 왠지"},
+        {"word": "guide", "meaning": "이끌다, 인도하다"},
+        {"word": "settle", "meaning": "정착하다, 자리 잡다"},
+        {"word": "parenting", "meaning": "양육, 육아"},
+        {"word": "present", "meaning": "현재의"}
+      ],
+      "chunks": [
+        {"en": "Somehow, the warbler has been guided", "ko": "어떻게든, 그 휘파람새는 [[인도되어]] 왔다"},
+        {"en": "to settle in locations", "ko": "어떤 장소에 [[정착하도록]]"},
+        {"en": "that will suit its future parenting needs", "ko": "미래의 [[양육]] 필요에 맞을"},
+        {"en": "better than its present ones.", "ko": "현재의 것보다 더 [[잘]]"}
+      ],
+      "misreads": [
+        {"statement": "결국 이 휘파람새는 미래의 양육 필요에 더 잘 맞는 장소를 얻기 위해 다른 새들과 협력한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "the warbler has been guided to settle in locations that will suit its future parenting needs", "why": "다른 새와의 협력은 본문에 언급되지 않는다."}
+      ],
+      "mistips": ["its present ones에서 ones는 앞의 needs를 대신하는 부정대명사이다."]
+    }
+  ]
+}

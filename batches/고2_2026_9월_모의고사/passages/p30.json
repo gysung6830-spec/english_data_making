@@ -1,0 +1,274 @@
+{
+ "item_no": "30",
+ "theme": "도덕적 면허 효과 — 친환경 행동 뒤의 심리",
+ "overview": {
+   "theme_ko": "도덕적 면허와 환경 죄책감 — 친환경 행동 뒤의 심리",
+   "topic": "🔎 도덕적 면허 효과와 eco-guilt가 이끄는 친환경 행동",
+   "stance": "중립적",
+   "stance_reason": "Moral licensing has also been observed ... (현상을 관찰·설명하는 서술)",
+   "structure": "주장→근거·예시",
+   "structure_reason": "도덕적 면허 개념을 제시하고 eco-guilt 기제와 청원 서명 사례로 뒷받침",
+   "key_grammar": {
+     "point": "목적격 관계대명사의 생략",
+     "source_sentence": "When people are reminded of deeds they have done that they know were harmful to the environment, they might be left with a feeling of \"eco-guilt.\"",
+     "explanation": [
+       {"chip":"쉽게 말하면","text":"'deeds they have done'은 'deeds (that/which) they have done'에서 목적격 관계대명사 that/which가 생략된 형태다."},
+       {"chip":"어떻게 아나","text":"명사(deeds) 뒤에 '주어+동사(they have done)'가 목적어 없이 바로 이어지면 목적격 관계대명사가 생략된 것."},
+       {"chip":"목적어 자리가 비어 있음","text":"done의 목적어가 비어 있고, 그 자리가 선행사 deeds에 해당한다."},
+       {"chip":"주격은 생략 불가","text":"같은 문장의 'that they know were harmful'의 that은 주격이라 생략할 수 없다."}
+     ],
+     "example_analysis": "선행사 deeds 뒤 목적격 관계대명사(that/which)가 생략되고 'they have done'이 바로 수식하는 구조.",
+     "drills": [
+       {
+         "kind": "밑줄형",
+         "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+         "sentence": "People [[1|who]] [[2|experience]] eco-guilt [[3|seek]] pro-environmental actions [[4|to compensate]] for this guilt and [[5|restoring]] balance.",
+         "answer": "⑤",
+         "fix": "to compensate와 병렬 구조이므로 원형 restore가 옳다; restoring은 병렬 오류.",
+         "options": ["① who","② experience","③ seek","④ to compensate","⑤ restoring"],
+         "words": [],
+         "from_passage": true
+       },
+       {
+         "kind": "네모형",
+         "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+         "sentence": "For instance, people are [[more/very]] likely to sign a petition [[addressing/addressed]] environmental damage after [[viewing/to view]] evidence of human-caused environmental damage.",
+         "answer": "more / addressing / viewing",
+         "fix": "likely to는 more로 수식, petition을 능동으로 수식하는 현재분사 addressing, 전치사 after 뒤에는 동명사 viewing.",
+         "options": [],
+         "words": [],
+         "from_passage": true
+       },
+       {
+         "kind": "오류찾기",
+         "question": "다음 중 어법상 틀린 문장은?",
+         "sentence": "",
+         "answer": "In their search for such a balance, people are inclined to believing in \"quick-fixes,\" because they want to re-establish the moral balance and escape the guilt as quickly and easily as possible.",
+         "fix": "be inclined to 뒤에는 동사원형 believe가 와야 함; believing은 오류.",
+         "options": [
+           "Moral licensing has also been observed in the context of cooperation for the good of the environment.",
+           "People who experience eco-guilt seek pro-environmental actions to compensate for this guilt and restore balance.",
+           "For instance, people are more likely to sign a petition addressing environmental damage after viewing evidence of human-caused environmental damage.",
+           "In their search for such a balance, people are inclined to believing in \"quick-fixes,\" because they want to re-establish the moral balance and escape the guilt as quickly and easily as possible.",
+           "When people are reminded of deeds they have done that they know were harmful to the environment, they might be left with a feeling of \"eco-guilt.\""
+         ],
+         "words": [],
+         "from_passage": true
+       },
+       {
+         "kind": "영작",
+         "question": "그가 어제 쓴 그 편지는 사라졌다. (목적격 관계대명사 생략)",
+         "sentence": "",
+         "answer": "The letter he wrote yesterday disappeared.",
+         "fix": "",
+         "options": [],
+         "words": ["The","letter","he","wrote","yesterday","disappeared"],
+         "from_passage": false
+       },
+       {
+         "kind": "영작",
+         "question": "환경 죄책감을 느끼는 사람들은 이 죄책감을 보상하고 균형을 되찾기 위해 친환경적 행동을 추구한다.",
+         "sentence": "",
+         "answer": "People who experience eco-guilt seek pro-environmental actions to compensate for this guilt and restore balance.",
+         "fix": "",
+         "options": [],
+         "words": ["People","who","experience","eco-guilt","seek","pro-environmental","actions","to","compensate","for","this","guilt","and","restore","balance"],
+         "from_passage": true
+       }
+     ]
+   },
+   "restatement_chains": [
+     {"label":"도덕적 균형 회복 (restoring moral balance)","expressions":["restore balance","re-establish the moral balance","compensate for this guilt"],"variation":"죄책감을 상쇄하려는 시도"},
+     {"label":"친환경 행동 (pro-environmental action)","expressions":["pro-environmental actions","future environmentally friendly behaviors","sign a petition addressing environmental damage"],"variation":"죄책감 뒤 친환경 행동이 늘어남"}
+   ],
+   "flow_blocks": [
+     {"stage":"도입·사례","sentence_range":"1","summary":"친환경 제품 구매 후 [[도덕적 면허]]로 부정행위가 늘어남","easy_example":"착한 일을 했으니 좀 게을러도 된다는 마음"},
+     {"stage":"개념","sentence_range":"2","summary":"도덕적 면허는 [[환경 협력]] 맥락에서도 관찰됨","easy_example":"기부한 뒤 다른 데선 인색해지는 것"},
+     {"stage":"전개(기제)","sentence_range":"3~5","summary":"[[환경 죄책감]]→친환경 행동으로 균형 회복→'빠른 해결책' 선호","easy_example":"죄책감을 빨리 털려고 손쉬운 방법을 찾기"},
+     {"stage":"일반화","sentence_range":"6","summary":"태도 불일치를 줄이듯 과거·미래 행동 [[평가]]도 바꿈","easy_example":"내 행동에 맞춰 생각을 바꾸는 합리화"},
+     {"stage":"예시","sentence_range":"7","summary":"환경 피해 [[증거]]를 보면 청원 서명 가능성↑","easy_example":"다큐를 보고 서명 운동에 참여하는 것"}
+   ]
+ },
+ "sentences": [
+   {
+     "id": 1,
+     "english": "Some people are more likely to cheat and steal after purchasing \"eco-friendly\" products, probably because they feel licensed to do so since they morally account the \"eco-friendly\" choice as a \"good\" deed.",
+     "grammar": [
+       {"tag":"전치사 + 동명사","note":"after 뒤에 동명사 purchasing","spans":["purchasing"]},
+       {"tag":"부사절 접속사 because","note":"이유를 이끄는 부사절","spans":["because"]},
+       {"tag":"부사절 접속사 since","note":"'~하기 때문에'의 이유","spans":["since"]},
+       {"tag":"account A as B","note":"A를 B로 여기다·간주하다","spans":["account","as"]}
+     ],
+     "vocab": [
+       {"word":"cheat","meaning":"속이다, 부정행위를 하다"},
+       {"word":"purchase","meaning":"구매하다"},
+       {"word":"licensed","meaning":"허가받은, 면허를 받은"},
+       {"word":"morally","meaning":"도덕적으로"},
+       {"word":"deed","meaning":"행위, 행동"}
+     ],
+     "chunks": [
+       {"en":"Some people are more likely to cheat and steal","ko":"일부 사람들은 속이고 [[훔칠]] 가능성이 더 높은데"},
+       {"en":"after purchasing \"eco-friendly\" products,","ko":"'친환경' 제품을 [[구매한]] 뒤에,"},
+       {"en":"probably because they feel licensed to do so","ko":"아마도 그렇게 해도 된다는 [[면허(허가)]]를 느끼기 때문이다"},
+       {"en":"since they morally account the \"eco-friendly\" choice","ko":"그들이 '친환경' 선택을 도덕적으로 [[여기기]] 때문에"},
+       {"en":"as a \"good\" deed.","ko":"'선한' [[행위]]로."}
+     ],
+     "misreads": [
+       {"statement":"일부 사람들은 '친환경' 제품을 산 뒤 부정행위나 도둑질을 할 가능성이 더 높은데, 그 선택을 '선한' 행위로 여겨 그래도 된다는 면허를 느끼기 때문이다.","verdict":"O"},
+       {"statement":"사람들이 부정행위를 하는 이유는 친환경 제품이 실제로 품질이 나빠 화가 나기 때문이다.","verdict":"X","trap_type":"인과조건","anchor":"they feel licensed to do so since they morally account the \"eco-friendly\" choice as a \"good\" deed","why":"제품 품질이 아니라 '선한 행위'라는 도덕적 면허 심리 때문."}
+     ],
+     "mistips": ["feel licensed to do so: '그렇게 해도 된다는 허가를 느끼다'","account A as B: A를 B로 여기다"]
+   },
+   {
+     "id": 2,
+     "english": "Moral licensing has also been observed in the context of cooperation for the good of the environment.",
+     "grammar": [
+       {"tag":"현재완료 수동태","note":"has (also) been + p.p.","spans":["has also been observed"]},
+       {"tag":"in the context of","note":"~의 맥락에서","spans":["in the context of"]}
+     ],
+     "vocab": [
+       {"word":"moral licensing","meaning":"도덕적 면허(효과)"},
+       {"word":"observe","meaning":"관찰하다"},
+       {"word":"cooperation","meaning":"협력"},
+       {"word":"context","meaning":"맥락, 상황"}
+     ],
+     "chunks": [
+       {"en":"Moral licensing has also been observed","ko":"도덕적 [[면허]] 효과 역시 관찰되어 왔다"},
+       {"en":"in the context of cooperation","ko":"[[협력]]의 맥락에서"},
+       {"en":"for the good of the environment.","ko":"[[환경]]을 위한."}
+     ],
+     "misreads": [
+       {"statement":"도덕적 면허 효과는 오직 소비 상황에서만 나타나며 환경을 위한 협력과는 무관하다.","verdict":"X","trap_type":"무관정보","anchor":"Moral licensing has also been observed in the context of cooperation for the good of the environment.","why":"환경을 위한 협력 맥락에서도 관찰된다고 명시(무관하지 않음)."}
+     ],
+     "mistips": []
+   },
+   {
+     "id": 3,
+     "english": "When people are reminded of deeds they have done that they know were harmful to the environment, they might be left with a feeling of \"eco-guilt.\"",
+     "grammar": [
+       {"tag":"부사절 접속사 when","note":"'~할 때'의 시간 부사절","spans":["When"]},
+       {"tag":"수동태 be reminded of","note":"~을 상기하게 되다","spans":["are reminded of"]},
+       {"tag":"목적격 관계대명사 생략","note":"deeds (that/which) they have done","spans":[]},
+       {"tag":"관계대명사 that","note":"주격 that, 선행사 deeds를 수식","spans":["that"]}
+     ],
+     "vocab": [
+       {"word":"remind","meaning":"상기시키다"},
+       {"word":"harmful","meaning":"해로운"},
+       {"word":"eco-guilt","meaning":"환경 죄책감"}
+     ],
+     "chunks": [
+       {"en":"When people are reminded of deeds","ko":"사람들이 [[행동]]들을 상기하게 될 때"},
+       {"en":"they have done","ko":"자신이 [[한]]"},
+       {"en":"that they know were harmful to the environment,","ko":"환경에 [[해로웠다]]고 아는"},
+       {"en":"they might be left with a feeling","ko":"그들은 어떤 [[감정]]에 사로잡힐 수 있다"},
+       {"en":"of \"eco-guilt.\"","ko":"즉 '[[환경 죄책감]]'이라는."}
+     ],
+     "misreads": [
+       {"statement":"사람들이 상기하는 deeds는 남들이 저지른 해로운 행동을 뜻한다.","verdict":"X","trap_type":"지칭","anchor":"deeds they have done that they know were harmful to the environment","why":"'they have done'은 자신이 한 행동을 가리킴(남의 행동이 아님)."},
+       {"statement":"자신이 한, 환경에 해로운 행동을 상기하면 '환경 죄책감'을 느낄 수 있다.","verdict":"O"}
+     ],
+     "mistips": ["deeds (that) they have done: 목적격 관계대명사 생략","that they know were harmful: know와 were 사이에 관계사절이 삽입된 형태"]
+   },
+   {
+     "id": 4,
+     "english": "People who experience eco-guilt seek pro-environmental actions to compensate for this guilt and restore balance.",
+     "grammar": [
+       {"tag":"주격 관계대명사 who","note":"선행사 People을 수식","spans":["who"]},
+       {"tag":"to부정사(목적)","note":"~하기 위해; to compensate와 (to) restore 병렬","spans":["to compensate"]},
+       {"tag":"compensate for","note":"~을 보상하다, 벌충하다","spans":["compensate for"]}
+     ],
+     "vocab": [
+       {"word":"pro-environmental","meaning":"친환경적인"},
+       {"word":"compensate","meaning":"보상하다, 벌충하다"},
+       {"word":"restore","meaning":"회복하다, 되찾다"},
+       {"word":"balance","meaning":"균형"}
+     ],
+     "chunks": [
+       {"en":"People who experience eco-guilt","ko":"[[환경 죄책감]]을 느끼는 사람들은"},
+       {"en":"seek pro-environmental actions","ko":"[[친환경적]] 행동을 추구한다"},
+       {"en":"to compensate for this guilt and restore balance.","ko":"이 죄책감을 [[보상]]하고 균형을 되찾기 위해."}
+     ],
+     "misreads": [
+       {"statement":"환경 죄책감을 느끼는 사람들은 균형을 되찾기 위해 오히려 반환경적 행동을 추구한다.","verdict":"X","trap_type":"주체대상","anchor":"seek pro-environmental actions to compensate for this guilt and restore balance","why":"친환경적(pro-environmental) 행동을 추구한다고 함(반환경이 아님).","killer":true}
+     ],
+     "mistips": []
+   },
+   {
+     "id": 5,
+     "english": "In their search for such a balance, people are inclined to believe in \"quick-fixes,\" because they want to re-establish the moral balance and escape the guilt as quickly and easily as possible.",
+     "grammar": [
+       {"tag":"be inclined to","note":"~하는 경향이 있다","spans":["inclined to"]},
+       {"tag":"부사절 접속사 because","note":"이유를 이끄는 부사절","spans":["because"]},
+       {"tag":"원급 as ~ as possible","note":"'가능한 한 ~하게'","spans":["as quickly and easily as possible"]}
+     ],
+     "vocab": [
+       {"word":"inclined","meaning":"~하는 경향이 있는"},
+       {"word":"quick-fix","meaning":"임시방편, 빠른 해결책"},
+       {"word":"re-establish","meaning":"다시 세우다, 회복하다"},
+       {"word":"escape","meaning":"벗어나다, 탈출하다"}
+     ],
+     "chunks": [
+       {"en":"In their search for such a balance,","ko":"그러한 [[균형]]을 찾는 과정에서,"},
+       {"en":"people are inclined to believe in \"quick-fixes,\"","ko":"사람들은 '[[빠른 해결책]]'을 믿는 경향이 있다"},
+       {"en":"because they want to re-establish the moral balance","ko":"도덕적 균형을 [[다시 세우고]]"},
+       {"en":"and escape the guilt","ko":"죄책감에서 [[벗어나]]고 싶어서다"},
+       {"en":"[[as quickly and easily as possible.]]","ko":"[[가능한 한 빠르고 쉽게]]"}
+     ],
+     "misreads": [
+       {"statement":"사람들이 '빠른 해결책'을 믿는 경향이 있는 것은, 죄책감에서 최대한 천천히 그리고 신중하게 벗어나고 싶어서다.","verdict":"△","trap_type":"인과조건","anchor":"escape the guilt as quickly and easily as possible","why":"가능한 한 '빠르고 쉽게' 벗어나려는 것이지 천천히·신중히가 아님."}
+     ],
+     "mistips": []
+   },
+   {
+     "id": 6,
+     "english": "In the same way that people may change their attitudes to reduce inconsistencies between attitudes and behavior, people may also change their evaluation of past environmentally burdening behaviors and future environmentally friendly behaviors.",
+     "grammar": [
+       {"tag":"in the same way that","note":"~와 똑같은 방식으로","spans":["In the same way that"]},
+       {"tag":"조동사 may","note":"'~할 수도 있다'의 가능성","spans":["may"]},
+       {"tag":"to부정사(목적)","note":"~을 줄이기 위해","spans":["to reduce"]}
+     ],
+     "vocab": [
+       {"word":"attitude","meaning":"태도"},
+       {"word":"inconsistency","meaning":"불일치, 모순"},
+       {"word":"evaluation","meaning":"평가"},
+       {"word":"burdening","meaning":"부담을 주는"}
+     ],
+     "chunks": [
+       {"en":"In the same way that people may change their attitudes","ko":"사람들이 [[태도]]를 바꾸는 것과 같은 방식으로"},
+       {"en":"to reduce inconsistencies between attitudes and behavior,","ko":"태도와 행동 사이의 [[불일치]]를 줄이기 위해"},
+       {"en":"people may also change their evaluation","ko":"사람들은 [[평가]] 또한 바꿀 수 있다"},
+       {"en":"of past environmentally burdening behaviors","ko":"과거의 환경에 [[부담을 주는]] 행동과"},
+       {"en":"and future environmentally friendly behaviors.","ko":"미래의 [[친환경적]] 행동에 대한."}
+     ],
+     "misreads": [
+       {"statement":"사람들은 '미래에' 환경에 부담을 준 행동과 '과거의' 친환경 행동에 대한 평가를 바꾼다.","verdict":"X","trap_type":"구조수식","anchor":"past environmentally burdening behaviors and future environmentally friendly behaviors","why":"과거=부담 행동, 미래=친환경 행동으로 짝지어짐(순서가 뒤바뀜)."}
+     ],
+     "mistips": ["In the same way that ~: ~와 똑같은 방식으로"]
+   },
+   {
+     "id": 7,
+     "english": "For instance, people are more likely to sign a petition addressing environmental damage after viewing evidence of human-caused environmental damage.",
+     "grammar": [
+       {"tag":"be more likely to","note":"~할 가능성이 더 높다","spans":["more likely to"]},
+       {"tag":"현재분사 후치수식","note":"addressing이 a petition을 능동으로 수식","spans":["addressing"]},
+       {"tag":"전치사 + 동명사","note":"after 뒤에 동명사 viewing","spans":["viewing"]}
+     ],
+     "vocab": [
+       {"word":"petition","meaning":"청원(서)"},
+       {"word":"address","meaning":"다루다, 대응하다"},
+       {"word":"evidence","meaning":"증거"},
+       {"word":"human-caused","meaning":"인간이 초래한"}
+     ],
+     "chunks": [
+       {"en":"For instance, people are more likely to sign a petition","ko":"예를 들어, 사람들은 [[청원서]]에 서명할 가능성이 더 높다"},
+       {"en":"addressing environmental damage","ko":"환경 [[피해]]를 다루는"},
+       {"en":"after viewing evidence of human-caused environmental damage.","ko":"인간이 초래한 환경 피해의 [[증거]]를 본 뒤에."}
+     ],
+     "misreads": [
+       {"statement":"필자는 환경 피해의 증거를 보여주는 것이 오히려 청원 서명을 줄인다고 본다.","verdict":"X","trap_type":"필자관점","anchor":"people are more likely to sign a petition addressing environmental damage after viewing evidence","why":"증거를 본 뒤 서명할 가능성이 '더 높다'고 함."},
+       {"statement":"People often seek pro-environmental actions to reduce their eco-guilt.","verdict":"O","english":true}
+     ],
+     "mistips": []
+   }
+ ]
+}

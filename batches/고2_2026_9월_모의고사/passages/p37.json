@@ -1,0 +1,702 @@
+{
+ "item_no": "37",
+ "theme": "언어는 문화의 발현 — 직접적/간접적 소통 양식",
+ "overview": {
+  "theme_ko": "문화의 발현으로서의 언어",
+  "topic": "🔎 언어는 문화가 드러난 것이며, 문화마다 직접적/간접적 소통 양식이 다르다",
+  "stance": "중립적",
+  "stance_reason": "문화별 소통 양식의 차이를 가치판단 없이 설명함(direct and explicit / indirect and implicit)",
+  "structure": "주장→근거·예시",
+  "structure_reason": "핵심 주장(Language is a manifestation of culture) 뒤에 개인·집단주의 어휘, capital I, Japanese 예시가 이어짐",
+  "key_grammar": {
+   "point": "분사의 형용사적 용법(후치 수식, linked with)",
+   "source_sentence": "Examples of words linked with the direct style are categorical words like absolutely, certainly, or positively.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "명사 뒤에 분사(구)를 붙여 '~된/~하는 명사'처럼 그 명사를 꾸며 주는 것이다."
+    },
+    {
+     "chip": "이 문장에선",
+     "text": "linked with the direct style가 앞의 words를 뒤에서 꾸며 '직접적 방식과 연결된 단어들'이 된다."
+    },
+    {
+     "chip": "왜 과거분사?",
+     "text": "words가 스스로 '연결하는' 게 아니라 '연결되는' 대상이므로 수동 의미의 과거분사 linked를 쓴다."
+    },
+    {
+     "chip": "진짜 동사 찾기",
+     "text": "linked는 준동사(분사)일 뿐이고 문장의 본동사는 뒤에 나오는 are이다."
+    },
+    {
+     "chip": "관계절로 풀면",
+     "text": "words linked with ~ = words that are linked with ~ 와 같다(주격 관계대명사+be의 생략)."
+    }
+   ],
+   "example_analysis": "과거분사구 linked with the direct style가 명사 words를 뒤에서 수식(후치)하고, 문장의 본동사는 are이다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "Examples of words [[1|linking]] with the direct style [[2|are]] categorical words [[3|like]] absolutely, [[4|certainly]], or [[5|positively]].",
+     "answer": "①",
+     "fix": "words는 스스로 연결하는 것이 아니라 '연결되는' 대상이므로 현재분사 linking이 아니라 과거분사 linked로 고쳐야 한다.",
+     "options": [
+      "① linking",
+      "② are",
+      "③ like",
+      "④ certainly",
+      "⑤ positively"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "Examples of words [[linked/linking]] with the direct style [[are/is]] categorical words like absolutely, certainly, or positively.",
+     "answer": "linked / are",
+     "fix": "words를 뒤에서 수동으로 수식하므로 linked, 주어의 핵심어가 복수 Examples이므로 are가 맞다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "The English language is the only language in the world that spell I with a capital letter.",
+     "answer": "The English language is the only language in the world that spell I with a capital letter.",
+     "fix": "선행사가 단수 the only language이고 관계대명사 that이 주어 역할을 하므로 동사는 spell이 아니라 spells가 되어야 한다.",
+     "options": [
+      "Language is a manifestation of culture.",
+      "This phenomenon may reflect the fact that the roots of individualism are in England.",
+      "The English language is the only language in the world that spell I with a capital letter.",
+      "There is no Japanese equivalent for the English I.",
+      "Examples of words linked with the direct style are categorical words like absolutely, certainly, or positively."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "개인주의와 연결된 그 가치들은 서양에서 흔하다. (분사의 형용사적 용법을 활용하여)",
+     "answer": "The values linked with individualism are common in the West.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "The values",
+      "linked",
+      "with individualism",
+      "are",
+      "common",
+      "in the West"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "직접적인 방식과 연결된 단어들의 예로는 absolutely, certainly, positively와 같은 단정적인 단어들이 있다.",
+     "answer": "Examples of words linked with the direct style are categorical words like absolutely, certainly, or positively.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Examples",
+      "of words",
+      "linked",
+      "with the direct style",
+      "are",
+      "categorical words",
+      "like",
+      "absolutely, certainly, or positively"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "직접적 소통 방식",
+    "expressions": [
+     "direct and explicit",
+     "categorical words",
+     "absolutely, certainly, or positively"
+    ],
+    "variation": "개인주의 문화의 단정적이고 분명한 말하기"
+   },
+   {
+    "label": "간접적 소통 방식",
+    "expressions": [
+     "indirect and implicit",
+     "implicit and even ambiguous",
+     "maybe, perhaps, or probably"
+    ],
+    "variation": "집단주의 문화의 모호하고 완곡한 말하기"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입(주제)",
+    "sentence_range": "1",
+    "summary": "[[언어]]는 [[문화]]가 겉으로 드러난 것",
+    "easy_example": "같은 상황도 나라마다 다른 말투로 표현되는 것과 같다."
+   },
+   {
+    "stage": "전개(습득)",
+    "sentence_range": "2~3",
+    "summary": "아이들은 언어 자체가 아니라 문화 특유의 상호작용 방식을 배움",
+    "easy_example": "젓가락질을 배우듯 그 문화의 대화 방식을 몸에 익힌다."
+   },
+   {
+    "stage": "사례(어휘)",
+    "sentence_range": "4~5",
+    "summary": "개인주의는 단정적 단어, 집단주의는 모호한 단어를 사용",
+    "easy_example": "'절대'라고 딱 잘라 말하기 vs '아마'라고 여지를 두기."
+   },
+   {
+    "stage": "사례(대문자 I)",
+    "sentence_range": "6~7",
+    "summary": "영어만 I를 대문자로 쓰며 이는 개인주의의 뿌리를 반영할 수 있음",
+    "easy_example": "'나'를 늘 크게 쓰는 습관이 개인 중시 문화를 보여 준다."
+   },
+   {
+    "stage": "결론(자기지칭)",
+    "sentence_range": "8~9",
+    "summary": "일본어엔 영어 I가 없고, 상황·성별·나이에 따라 지칭어가 달라짐",
+    "easy_example": "상대에 따라 '저·나·본인'을 골라 쓰는 것과 비슷하다."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Language is a manifestation of culture.",
+   "grammar": [
+    {
+     "tag": "2형식(주격보어)",
+     "note": "be동사 뒤 명사(구)가 보어로 주어를 설명함",
+     "spans": [
+      "is"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "manifestation",
+     "meaning": "발현, (구체적으로) 나타난 것"
+    },
+    {
+     "word": "a manifestation of",
+     "meaning": "~이 드러난 것, ~의 표현"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Language is a manifestation of culture.",
+     "ko": "언어는 문화의 [[발현]]이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "언어는 문화가 겉으로 드러난 표현으로 제시된다.",
+     "verdict": "O"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "At different language acquisition stages, children do not learn language per se; rather they learn the various patterns and styles of language interaction that enable them to function as competent communicators in different situational contexts.",
+   "grammar": [
+    {
+     "tag": "라틴어 부사구 per se",
+     "note": "'그 자체로'라는 뜻으로 앞의 명사 language를 한정함",
+     "spans": [
+      "per se"
+     ]
+    },
+    {
+     "tag": "주격 관계대명사 that",
+     "note": "선행사 patterns and styles를 수식하며 절의 주어 역할",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "enable+목적어+to부정사",
+     "note": "'~가 …하도록 가능하게 하다'로 to부정사가 목적격 보어",
+     "spans": [
+      "to function"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "language acquisition",
+     "meaning": "언어 습득"
+    },
+    {
+     "word": "per se",
+     "meaning": "그 자체로"
+    },
+    {
+     "word": "competent",
+     "meaning": "유능한, 능숙한"
+    },
+    {
+     "word": "situational context",
+     "meaning": "상황적 맥락"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "At different language acquisition stages, children do not learn",
+     "ko": "서로 다른 언어 [[습득]] 단계에서, 아이들은 배우지 않는다"
+    },
+    {
+     "en": "language per se; rather they learn",
+     "ko": "언어 [[그 자체]]를; 오히려 그들은 배운다"
+    },
+    {
+     "en": "the various patterns and styles of language interaction",
+     "ko": "언어 [[상호작용]]의 다양한 패턴과 방식을"
+    },
+    {
+     "en": "[[that enable them to function as competent communicators]]",
+     "ko": "[[그들이 유능한 의사소통자로서 기능할 수 있게 하는]]"
+    },
+    {
+     "en": "in different situational contexts.",
+     "ko": "서로 다른 상황적 [[맥락]]에서"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "아이들은 무엇보다 언어 그 자체를 규칙으로서 먼저 배운다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "children do not learn language per se",
+     "why": "아이들은 언어 자체가 아니라 상호작용의 패턴·방식을 배운다고 했으므로 방향이 반대이다."
+    }
+   ],
+   "mistips": [
+    "per se(그 자체로)는 앞의 language를 한정하는 라틴어 부사구이고, that절의 본동사는 enable이다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "They develop a culture-specific communication style that is, for example, direct and explicit in individualistic cultures or indirect and implicit in collectivistic cultures.",
+   "grammar": [
+    {
+     "tag": "주격 관계대명사 that",
+     "note": "선행사 style을 수식하며 절의 주어 역할",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "등위접속사 or 병렬",
+     "note": "direct and explicit와 indirect and implicit를 or로 대등하게 연결",
+     "spans": [
+      "indirect"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "culture-specific",
+     "meaning": "문화 특유의"
+    },
+    {
+     "word": "explicit",
+     "meaning": "명시적인, 분명한"
+    },
+    {
+     "word": "individualistic",
+     "meaning": "개인주의적인"
+    },
+    {
+     "word": "implicit",
+     "meaning": "암시적인, 함축적인"
+    },
+    {
+     "word": "collectivistic",
+     "meaning": "집단주의적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "They develop a culture-specific communication style",
+     "ko": "그들은 문화 [[특유의]] 의사소통 방식을 발전시킨다"
+    },
+    {
+     "en": "that is, for example, direct and explicit",
+     "ko": "가령, 직접적이고 [[명시적인]]"
+    },
+    {
+     "en": "[[in individualistic cultures or indirect and implicit in collectivistic cultures.]]",
+     "ko": "[[개인주의 문화에서는 (그러하고) 혹은 집단주의 문화에서는 간접적이고 암시적인]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Indirect and implicit styles are typical of individualistic cultures.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "indirect and implicit in collectivistic cultures",
+     "why": "간접적·암시적 방식은 집단주의(collectivistic) 문화의 특징이라 했으므로 개인주의와 짝지으면 틀린다.",
+     "english": "Indirect and implicit styles are typical of individualistic cultures."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "Examples of words linked with the direct style are categorical words like absolutely, certainly, or positively.",
+   "grammar": [
+    {
+     "tag": "분사 형용사적 용법(후치 수식)",
+     "note": "linked with the direct style가 앞의 words를 뒤에서 수식(수동 의미)",
+     "spans": [
+      "linked"
+     ]
+    },
+    {
+     "tag": "수일치(주어 Examples ↔ are)",
+     "note": "주어의 핵심어가 복수 Examples이므로 동사는 are",
+     "spans": [
+      "are"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "categorical",
+     "meaning": "단정적인, 명확한"
+    },
+    {
+     "word": "linked with",
+     "meaning": "~와 연결된, 관련된"
+    },
+    {
+     "word": "positively",
+     "meaning": "분명히, 단호하게"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Examples of words linked with the direct style are",
+     "ko": "직접적인 방식과 [[연결된]] 단어들의 예로는 ~이 있다"
+    },
+    {
+     "en": "categorical words like absolutely, certainly, or positively.",
+     "ko": "absolutely, certainly, positively 같은 [[단정적인]] 단어들이다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "absolutely, certainly, positively는 간접적 방식을 보여 주는 예이다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "words linked with the direct style",
+     "why": "이 단어들은 직접적(direct) 방식과 연결된 예로 제시되었으므로 간접적과 짝지으면 틀린다."
+    }
+   ],
+   "mistips": [
+    "linked ~ style은 words를 뒤에서 꾸미는 분사구이고, 문장의 진짜 동사는 are이다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "By contrast, the cultural assumptions of interdependence and harmony require that collectivists limit themselves to implicit and even ambiguous use of words, using terms like maybe, perhaps, or probably.",
+   "grammar": [
+    {
+     "tag": "당위 require+that(should 생략)",
+     "note": "요구·주장 동사 require 뒤 that절의 동사는 (should) 원형 limit",
+     "spans": []
+    },
+    {
+     "tag": "재귀대명사",
+     "note": "주어 collectivists와 목적어가 같아 themselves 사용",
+     "spans": [
+      "themselves"
+     ]
+    },
+    {
+     "tag": "분사구문(동시동작)",
+     "note": "using terms ~가 '~하면서'의 뜻으로 앞 절과 동시 상황",
+     "spans": [
+      "using"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "by contrast",
+     "meaning": "그에 반해, 대조적으로"
+    },
+    {
+     "word": "interdependence",
+     "meaning": "상호의존"
+    },
+    {
+     "word": "assumption",
+     "meaning": "가정, 전제"
+    },
+    {
+     "word": "ambiguous",
+     "meaning": "모호한, 애매한"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "By contrast, the cultural assumptions of interdependence and harmony require",
+     "ko": "그에 반해, [[상호의존]]과 조화라는 문화적 가정은 요구한다"
+    },
+    {
+     "en": "[[that collectivists limit themselves to implicit and even ambiguous]]",
+     "ko": "[[집단주의자들이 암시적이고 심지어 모호한 것에 자신을 국한하도록]]"
+    },
+    {
+     "en": "use of words, using terms like maybe, perhaps, or probably.",
+     "ko": "maybe, perhaps, probably 같은 [[표현]]을 사용하여 단어를 쓰도록"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "상호의존과 조화의 가정 때문에 집단주의자들은 오히려 명시적인 표현을 선호한다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "limit themselves to implicit and even ambiguous use of words",
+     "why": "조화의 가정 때문에 명시적이 아니라 암시적·모호한 표현에 자신을 국한한다고 했으므로 틀린다."
+    }
+   ],
+   "mistips": [
+    "require that절에서 조동사 should가 생략되어 동사원형 limit이 쓰였다."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "The English language is the only language in the world that spells I with a capital letter.",
+   "grammar": [
+    {
+     "tag": "주격 관계대명사 that",
+     "note": "선행사 the only language를 수식하며 절의 주어 역할(the only 뒤 that 선호)",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "수일치(단수 선행사 ↔ spells)",
+     "note": "선행사가 단수 the only language이므로 관계절 동사는 spells",
+     "spans": [
+      "spells"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "spell",
+     "meaning": "철자를 (…로) 쓰다"
+    },
+    {
+     "word": "capital letter",
+     "meaning": "대문자"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The English language is the only language in the world",
+     "ko": "영어는 세계에서 [[유일한]] 언어이다"
+    },
+    {
+     "en": "that spells I with a capital letter.",
+     "ko": "I를 [[대문자]]로 철자하는"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "영어는 I를 대문자로 쓰는 세계 유일의 언어라고 언급된다.",
+     "verdict": "O"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 7,
+   "english": "This phenomenon may reflect the fact that the roots of individualism are in England.",
+   "grammar": [
+    {
+     "tag": "조동사 may(추측)",
+     "note": "'~일지도 모른다'는 불확실한 추측을 나타냄",
+     "spans": [
+      "may"
+     ]
+    },
+    {
+     "tag": "동격 that",
+     "note": "the fact의 구체적 내용을 that절이 동격으로 설명",
+     "spans": [
+      "that"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "phenomenon",
+     "meaning": "현상"
+    },
+    {
+     "word": "reflect",
+     "meaning": "반영하다, 나타내다"
+    },
+    {
+     "word": "individualism",
+     "meaning": "개인주의"
+    },
+    {
+     "word": "roots",
+     "meaning": "뿌리, 기원"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "This phenomenon may reflect the fact",
+     "ko": "이 [[현상]]은 그 사실을 반영할지도 모른다"
+    },
+    {
+     "en": "[[that the roots of individualism are in England.]]",
+     "ko": "[[개인주의의 뿌리가 영국에 있다는]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 개인주의의 기원이 영국에 있다고 단정한다.",
+     "verdict": "△",
+     "trap_type": "필자관점",
+     "anchor": "This phenomenon may reflect the fact",
+     "why": "필자는 may reflect로 추측했을 뿐 단정하지 않았으므로 확신의 정도가 다르다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "There is no Japanese equivalent for the English I.",
+   "grammar": [
+    {
+     "tag": "there is 구문",
+     "note": "'~이 있다/없다'의 존재를 나타내는 유도부사 there",
+     "spans": [
+      "There is"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "equivalent",
+     "meaning": "상응하는 것, 대응어"
+    },
+    {
+     "word": "There is no ~",
+     "meaning": "~이 (전혀) 없다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "There is no Japanese equivalent",
+     "ko": "일본어에는 [[상응어]]가 없다"
+    },
+    {
+     "en": "for the English I.",
+     "ko": "영어의 [[I]]에 해당하는"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "영어의 I에 정확히 대응하는 일본어 단어가 하나 존재한다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "There is no Japanese equivalent for the English I.",
+     "why": "일본어에는 영어 I에 상응하는 대응어가 '없다'고 했으므로 하나 있다고 하면 틀린다.",
+     "killer": true
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 9,
+   "english": "Different words are used to refer to the self, depending on the social situation, the speaker's gender, age, and the other social attributes relative to the listener.",
+   "grammar": [
+    {
+     "tag": "수동태",
+     "note": "단어들이 '사용되는' 대상이므로 be+p.p.",
+     "spans": [
+      "are used"
+     ]
+    },
+    {
+     "tag": "to부정사(목적)",
+     "note": "'~을 가리키기 위해'라는 목적의 부사적 용법",
+     "spans": [
+      "to refer"
+     ]
+    },
+    {
+     "tag": "분사구문(부대상황)",
+     "note": "depending on ~이 '~에 따라'로 상황을 덧붙임",
+     "spans": [
+      "depending"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "refer to",
+     "meaning": "~을 가리키다, 지칭하다"
+    },
+    {
+     "word": "depending on",
+     "meaning": "~에 따라"
+    },
+    {
+     "word": "attribute",
+     "meaning": "속성, 특성"
+    },
+    {
+     "word": "relative to",
+     "meaning": "~와 관련하여, ~에 상대적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[Different words are used to refer to the self,]]",
+     "ko": "[[자기 자신을 가리키기 위해 서로 다른 단어들이 사용된다,]]"
+    },
+    {
+     "en": "depending on the social situation, the speaker's gender, age,",
+     "ko": "사회적 상황, 화자의 [[성별]], 나이에 따라"
+    },
+    {
+     "en": "and the other social attributes relative to the listener.",
+     "ko": "그리고 청자와 관련된 다른 사회적 [[속성]]에 따라"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "자기를 지칭하는 단어는 사회적 상황과 화자의 특성에 따라 달라진다.",
+     "verdict": "O"
+    },
+    {
+     "statement": "일본에서는 나이가 많을수록 더 격식 있는 존댓말을 써야 한다고 설명한다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "depending on the social situation, the speaker's gender, age",
+     "why": "지문은 상황·성별·나이 등에 따라 지칭어가 달라진다고만 했고 존댓말 격식은 언급이 없다."
+    }
+   ],
+   "mistips": [
+    "are used는 수동태이며, to refer to the self는 '목적'을 나타내는 부사적 용법이다."
+   ]
+  }
+ ]
+}

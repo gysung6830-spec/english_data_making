@@ -1,0 +1,284 @@
+{
+ "item_no": "26",
+ "theme": "미국 조경 건축의 아버지 Frederick Law Olmsted",
+ "overview": {
+   "theme_ko": "조경 건축가 Frederick Law Olmsted의 생애",
+   "topic": "🔎 미국 조경 건축의 아버지 Olmsted의 일생과 업적",
+   "stance": "긍정적",
+   "stance_reason": "known as the father of American landscape architecture / to honor his legacy",
+   "structure": "시간·순서(나열)",
+   "structure_reason": "1822년 출생부터 1979년 국가 사적 지정까지 연대순으로 서술",
+   "key_grammar": {
+     "point": "관계대명사 계속적 용법(, who)",
+     "source_sentence": "When Olmsted was young, he often went on trips to the countryside with his father, who loved scenery.",
+     "explanation": [
+       {"chip":"쉽게 말하면","text":"콤마 뒤의 who/which는 앞의 명사(선행사)를 '추가로 설명'하는 계속적 용법이다."},
+       {"chip":"핵심","text":"'접속사+대명사'로 풀 수 있어 , who loved scenery = and he(=his father) loved scenery 로 해석된다."},
+       {"chip":"제한 vs 계속","text":"콤마가 없으면 선행사를 한정(제한적)하지만, 콤마가 있으면 부가 설명(계속적)이 된다."},
+       {"chip":"주의","text":"계속적 용법에는 that을 쓸 수 없고, 사람 선행사에는 who, 사물에는 which를 쓴다."},
+       {"chip":"예문에서","text":"선행사 his father(사람)를 콤마+who로 이어 '풍경을 사랑한 아버지'라는 정보를 덧붙인다."}
+     ],
+     "example_analysis": "선행사 his father를 콤마+who로 계속적으로 부연 설명한다(= and he loved scenery).",
+     "drills": [
+       {
+         "kind":"밑줄형",
+         "question":"다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+         "sentence":"At age 14, he [[1|was preparing]] [[2|himself]] [[3|to study]] at Yale College, but he could not enter [[4|due to]] a severe sumac poisoning [[5|what]] damaged his eyesight.",
+         "options":["① was preparing","② himself","③ to study","④ due to","⑤ what"],
+         "answer":"⑤",
+         "fix":"선행사 a severe sumac poisoning가 있으므로 what이 아니라 주격 관계대명사 that(또는 which)이 맞다.",
+         "words":[],
+         "from_passage":true
+       },
+       {
+         "kind":"네모형",
+         "question":"각 네모 안에서 어법에 맞는 것을 고르시오.",
+         "sentence":"When Olmsted was young, he often [[went/goes]] on trips to the countryside with his father, [[who/which]] [[loved/loving]] scenery.",
+         "options":[],
+         "answer":"went / who / loved",
+         "fix":"과거 시점이므로 went, 사람 선행사 his father의 계속적 용법이므로 who, 관계절의 정동사이므로 loved가 옳다.",
+         "words":[],
+         "from_passage":true
+       },
+       {
+         "kind":"오류찾기",
+         "question":"다음 중 어법상 틀린 문장은?",
+         "sentence":"",
+         "options":[
+           "Frederick Law Olmsted, known as the father of American landscape architecture, was born in 1822.",
+           "Instead of attending a college, he gained experience working as a clerk, a sailor, and a farmer.",
+           "During the Civil War, Olmsted served as General Secretary of the United States Sanitary Commission.",
+           "When Olmsted was young, he often went on trips to the countryside with his father, which loved scenery.",
+           "Although he passed away in 1903, his sons and successors continued his design philosophy."
+         ],
+         "answer":"When Olmsted was young, he often went on trips to the countryside with his father, which loved scenery.",
+         "fix":"선행사 his father는 사람이므로 which를 계속적 용법의 who로 고쳐야 한다.",
+         "words":[],
+         "from_passage":true
+       },
+       {
+         "kind":"영작",
+         "question":"그는 자신의 삼촌과 함께 여행을 갔는데, 그 삼촌은 예술을 사랑했다.",
+         "sentence":"",
+         "options":[],
+         "answer":"He went on a trip with his uncle, who loved art.",
+         "fix":"",
+         "words":["He","went on a trip","with his uncle,","who","loved","art."],
+         "from_passage":false
+       },
+       {
+         "kind":"영작",
+         "question":"Olmsted가 어렸을 때, 그는 풍경을 사랑한 아버지와 함께 종종 시골로 여행을 갔다.",
+         "sentence":"",
+         "options":[],
+         "answer":"When Olmsted was young, he often went on trips to the countryside with his father, who loved scenery.",
+         "fix":"",
+         "words":["When Olmsted was young,","he often went","on trips","to the countryside","with his father,","who","loved scenery."],
+         "from_passage":true
+       }
+     ]
+   },
+   "restatement_chains": [
+       {
+         "label":"미국 조경 건축의 아버지",
+         "expressions":["the father of American landscape architecture","his design philosophy","his legacy"],
+         "variation":"조경 건축가로서의 명성과 사후에도 이어진 유산"
+       },
+       {
+         "label":"대학 대신 얻은 실무 경험",
+         "expressions":["gained experience","working as a clerk, a sailor, and a farmer"],
+         "variation":"예일 진학 좌절 후 여러 직업으로 쌓은 경험"
+       }
+     ],
+     "flow_blocks": [
+       {"stage":"도입","sentence_range":"1","summary":"1822년 출생, [[father of American landscape architecture]]로 알려짐","easy_example":"위인전 첫 장의 출생 소개처럼"},
+       {"stage":"성장","sentence_range":"2~3","summary":"풍경 사랑한 아버지와 시골 여행, [[sumac poisoning]]으로 예일 진학 좌절","easy_example":"눈병으로 진학이 막힌 소년"},
+       {"stage":"경력","sentence_range":"4~6","summary":"서기·선원·농부 경험, [[Central Park]] 설계 당선, 위생위원회 총무","easy_example":"여러 일을 거쳐 대표작을 남긴 과정"},
+       {"stage":"유산","sentence_range":"7~8","summary":"사후 아들·후계자가 [[design philosophy]] 계승, 1979년 국가 사적 지정","easy_example":"세상을 떠난 뒤에도 이어진 업적"}
+     ]
+ },
+ "sentences": [
+   {
+     "id": 1,
+     "english": "Frederick Law Olmsted, known as the father of American landscape architecture, was born in 1822.",
+     "grammar": [
+       {"tag":"과거분사(삽입 수식)","note":"known as ~, 주어를 부연 수식하는 분사구","spans":["known"]},
+       {"tag":"수동태(과거)","note":"was born, 태어나다","spans":["was born"]}
+     ],
+     "vocab": [
+       {"word":"landscape architecture","meaning":"조경 건축"},
+       {"word":"be known as","meaning":"~로 알려지다"}
+     ],
+     "chunks": [
+       {"en":"Frederick Law Olmsted, known as the father of American landscape architecture,","ko":"미국 [[조경 건축]]의 아버지로 알려진 Frederick Law Olmsted는,"},
+       {"en":"was born in 1822.","ko":"1822년에 [[태어났다]]"}
+     ],
+     "misreads": [
+       {"statement":"Frederick Law Olmsted는 미국 조경 건축의 아버지로 알려졌으며 1822년에 태어났다.","verdict":"O","trap_type":"주체대상"}
+     ],
+     "mistips": ["known as ~는 콤마 사이에 삽입된 분사구로 주어 Olmsted를 부연한다"]
+   },
+   {
+     "id": 2,
+     "english": "When Olmsted was young, he often went on trips to the countryside with his father, who loved scenery.",
+     "grammar": [
+       {"tag":"시간 부사절 접속사 when","note":"~할 때","spans":["When"]},
+       {"tag":"관계대명사 계속적 용법(, who)","note":"콤마+who, 선행사 his father를 부연(= and he)","spans":["who"]}
+     ],
+     "vocab": [
+       {"word":"go on trips","meaning":"여행을 가다"},
+       {"word":"countryside","meaning":"시골"},
+       {"word":"scenery","meaning":"풍경, 경치"}
+     ],
+     "chunks": [
+       {"en":"When Olmsted was young,","ko":"Olmsted가 [[어렸을]] 때,"},
+       {"en":"he often went on trips to the countryside","ko":"그는 종종 [[시골]]로 여행을 갔다"},
+       {"en":"with his father, who loved scenery.","ko":"[[풍경]]을 사랑한 그의 아버지와 함께"}
+     ],
+     "misreads": [
+       {"statement":"밑줄 친 who는 여행을 간 Olmsted 자신을 가리킨다.","verdict":"X","trap_type":"지칭","anchor":"with his father, who loved scenery","why":"who는 바로 앞 선행사 his father(아버지)를 가리킨다","english":"The relative pronoun 'who' refers to Olmsted."},
+       {"statement":"풍경을 사랑한 것은 그들이 여행 간 시골(the countryside)이라는 뜻이다.","verdict":"X","trap_type":"구조수식","anchor":"his father, who loved scenery","why":"who절은 the countryside가 아니라 바로 앞의 his father를 수식한다"}
+     ],
+     "mistips": ["who는 콤마 뒤 계속적 용법 — 'and his father loved scenery'로 풀며 앞 명사 father만 가리킨다"]
+   },
+   {
+     "id": 3,
+     "english": "At age 14, he was preparing himself to study at Yale College, but he could not enter due to a severe sumac poisoning that damaged his eyesight.",
+     "grammar": [
+       {"tag":"과거진행형","note":"was preparing, 준비하고 있었다","spans":["was preparing"]},
+       {"tag":"재귀대명사","note":"prepare oneself, 주어=목적어(he)","spans":["himself"]},
+       {"tag":"부사적 용법 to부정사(목적)","note":"to study, 공부하기 위해","spans":["to study"]},
+       {"tag":"전치사구 due to","note":"~때문에(=because of)+명사","spans":["due to"]},
+       {"tag":"관계대명사 that(주격)","note":"선행사 poisoning을 수식, that+동사","spans":["that"]}
+     ],
+     "vocab": [
+       {"word":"prepare oneself","meaning":"~할 준비를 하다"},
+       {"word":"severe","meaning":"심각한"},
+       {"word":"sumac poisoning","meaning":"옻나무 중독"},
+       {"word":"eyesight","meaning":"시력"}
+     ],
+     "chunks": [
+       {"en":"At age 14, he was preparing himself","ko":"14세에 그는 스스로 [[준비하고]] 있었다"},
+       {"en":"to study at Yale College,","ko":"[[예일 대학]]에서 공부하려고,"},
+       {"en":"but he could not enter","ko":"그러나 그는 [[입학하지]] 못했다"},
+       {"en":"due to a severe sumac poisoning","ko":"심각한 [[옻나무 중독]] 때문에"},
+       {"en":"that damaged his eyesight.","ko":"그의 [[시력]]을 해친"}
+     ],
+     "misreads": [
+       {"statement":"그는 입학시험에 떨어져서 예일 대학에 들어가지 못했다.","verdict":"X","trap_type":"인과조건","anchor":"he could not enter due to a severe sumac poisoning","why":"입학하지 못한 이유는 시험 낙방이 아니라 시력을 해친 옻나무 중독 때문이다","killer":true}
+     ],
+     "mistips": ["that damaged his eyesight는 a severe sumac poisoning을 수식하는 주격 관계대명사절"]
+   },
+   {
+     "id": 4,
+     "english": "Instead of attending a college, he gained experience working as a clerk, a sailor, and a farmer.",
+     "grammar": [
+       {"tag":"전치사+동명사","note":"Instead of attending, ~하는 대신","spans":["attending"]},
+       {"tag":"분사구문(동시동작)","note":"working as ~, ~로 일하면서","spans":["working"]}
+     ],
+     "vocab": [
+       {"word":"instead of","meaning":"~대신에"},
+       {"word":"gain experience","meaning":"경험을 쌓다"},
+       {"word":"clerk","meaning":"서기, 점원"}
+     ],
+     "chunks": [
+       {"en":"Instead of attending a college,","ko":"대학에 [[다니는]] 대신,"},
+       {"en":"he gained experience working","ko":"그는 [[일하면서]] 경험을 쌓았다"},
+       {"en":"as a clerk, a sailor, and a farmer.","ko":"[[서기]], 선원, 농부로서"}
+     ],
+     "misreads": [
+       {"statement":"그가 서기·선원·농부로 일한 것은 조경 건축가가 되기 위한 계획이었다.","verdict":"△","trap_type":"인과조건","anchor":"Instead of attending a college, he gained experience","why":"대학 대신 여러 일을 한 것은 맞지만 조경가가 되려는 의도였다는 근거는 없다"}
+     ],
+     "mistips": ["working as ~는 gained experience에 이어지는 분사구문으로 '일하면서 경험을 쌓았다'"]
+   },
+   {
+     "id": 5,
+     "english": "In 1858, he worked with Calvert Vaux and won the design competition for New York City's Central Park with the \"Greensward Plan.\"",
+     "grammar": [
+       {"tag":"등위접속사 and(술어 병렬)","note":"worked ~ and won ~, 동사구 병렬","spans":["and"]},
+       {"tag":"소유격","note":"New York City's, ~의","spans":["New York City's"]}
+     ],
+     "vocab": [
+       {"word":"design competition","meaning":"설계 공모전"},
+       {"word":"win","meaning":"이기다, 우승하다(win-won-won)"}
+     ],
+     "chunks": [
+       {"en":"In 1858, he worked with Calvert Vaux","ko":"1858년에 그는 [[Calvert Vaux]]와 함께 일했다"},
+       {"en":"and won the design competition","ko":"그리고 [[설계 공모전]]에서 우승했다"},
+       {"en":"for New York City's Central Park","ko":"뉴욕시의 [[센트럴 파크]]를 위한"},
+       {"en":"with the \"Greensward Plan.\"","ko":"'[[Greensward Plan]]'으로"}
+     ],
+     "misreads": [
+       {"statement":"1858년 Olmsted는 Calvert Vaux와 함께 'Greensward Plan'으로 센트럴 파크 설계 공모전에서 우승했다.","verdict":"O","trap_type":"주체대상"}
+     ],
+     "mistips": ["worked와 won이 and로 병렬 연결된 술어이며 주어는 모두 he"]
+   },
+   {
+     "id": 6,
+     "english": "During the Civil War, Olmsted served as General Secretary of the United States Sanitary Commission.",
+     "grammar": [
+       {"tag":"전치사 during","note":"during+명사(기간), ~동안","spans":["During"]},
+       {"tag":"serve as","note":"~로서 복무·일하다","spans":["served as"]}
+     ],
+     "vocab": [
+       {"word":"the Civil War","meaning":"(미국) 남북 전쟁"},
+       {"word":"General Secretary","meaning":"사무총장, 총무"},
+       {"word":"Sanitary Commission","meaning":"위생 위원회"}
+     ],
+     "chunks": [
+       {"en":"During the Civil War,","ko":"[[남북 전쟁]] 동안,"},
+       {"en":"Olmsted served as General Secretary","ko":"Olmsted는 [[총무]]로 일했다"},
+       {"en":"of the United States Sanitary Commission.","ko":"미국 [[위생 위원회]]의"}
+     ],
+     "misreads": [
+       {"statement":"Olmsted는 남북 전쟁에서 군대를 지휘한 장군으로 전투에 참여했다.","verdict":"X","trap_type":"무관정보","anchor":"served as General Secretary of the United States Sanitary Commission","why":"그는 위생 위원회 총무로 일했을 뿐 전투를 지휘한 장군이었다는 내용은 없다"}
+     ],
+     "mistips": ["General Secretary는 직책 이름으로 serve as의 보어이며 '장군'을 뜻하지 않는다"]
+   },
+   {
+     "id": 7,
+     "english": "Although he passed away in 1903, his sons and successors continued his design philosophy.",
+     "grammar": [
+       {"tag":"양보 부사절 접속사 although","note":"비록 ~일지라도","spans":["Although"]},
+       {"tag":"주어 수일치(복수)","note":"his sons and successors → continued(복수 주어)","spans":["sons and successors"]}
+     ],
+     "vocab": [
+       {"word":"pass away","meaning":"세상을 떠나다"},
+       {"word":"successor","meaning":"후계자"},
+       {"word":"design philosophy","meaning":"설계 철학"}
+     ],
+     "chunks": [
+       {"en":"Although he passed away in 1903,","ko":"비록 그는 1903년에 [[세상을 떠났지만]],"},
+       {"en":"his sons and successors continued","ko":"그의 아들들과 [[후계자들]]이 이어갔다"},
+       {"en":"his design philosophy.","ko":"그의 [[설계 철학]]을"}
+     ],
+     "misreads": [
+       {"statement":"1903년 이후에도 Olmsted가 직접 자신의 설계 철학을 계속 이어 나갔다.","verdict":"X","trap_type":"주체대상","anchor":"his sons and successors continued his design philosophy","why":"설계 철학을 계승한 주체는 이미 세상을 떠난 Olmsted가 아니라 그의 아들과 후계자들이다"}
+     ],
+     "mistips": ["주어 his sons and successors가 복수이므로 continued의 주체는 Olmsted가 아니다"]
+   },
+   {
+     "id": 8,
+     "english": "In 1979, the National Park Service designated his home and office in Brookline, Massachusetts, as a National Historic Site to honor his legacy.",
+     "grammar": [
+       {"tag":"5형식 designate A as B","note":"A를 B로 지정하다","spans":["designated","as"]},
+       {"tag":"부사적 용법 to부정사(목적)","note":"to honor, 기리기 위해","spans":["to honor"]}
+     ],
+     "vocab": [
+       {"word":"designate","meaning":"지정하다"},
+       {"word":"National Historic Site","meaning":"국가 사적지"},
+       {"word":"legacy","meaning":"유산"}
+     ],
+     "chunks": [
+       {"en":"In 1979, the National Park Service designated","ko":"1979년에 [[국립공원관리청]]이 지정했다"},
+       {"en":"his home and office in Brookline, Massachusetts,","ko":"[[매사추세츠]]주 브루클린에 있는 그의 집과 사무실을,"},
+       {"en":"as a National Historic Site","ko":"[[국가 사적지]]로"},
+       {"en":"to honor his legacy.","ko":"그의 [[유산]]을 기리기 위해"}
+     ],
+     "misreads": [
+       {"statement":"필자는 Olmsted의 업적을 대수롭지 않게 여긴다.","verdict":"X","trap_type":"필자관점","anchor":"to honor his legacy","why":"집과 사무실을 국가 사적지로 지정해 유산을 기린 것은 필자가 그의 업적을 높이 평가함을 보여준다"}
+     ],
+     "mistips": ["designated A as B 구조 — his home and office를 National Historic Site로 지정"]
+   }
+ ]
+}

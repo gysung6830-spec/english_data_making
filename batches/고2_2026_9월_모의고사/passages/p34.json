@@ -1,0 +1,340 @@
+{
+  "item_no": "34",
+  "theme": "전자레인지의 숨은 장기 영향 — 가족 저녁 식사의 소멸",
+  "overview": {
+    "theme_ko": "전자레인지의 보이지 않는 장기 영향",
+    "topic": "🔎 매체·기술의 눈에 띄지 않는 장기적 변화 (전자레인지 사례)",
+    "stance": "중립적",
+    "stance_reason": "명백한 측면에 집중하면 미묘한 장기 변화를 놓친다는 현상을 분석적으로 서술",
+    "structure": "주장→근거·예시",
+    "structure_reason": "일반 원리를 먼저 제시한 뒤 전자레인지를 사례로 들어 예증",
+    "key_grammar": {
+      "point": "가목적어-진목적어 (make it + 형용사 + to부정사)",
+      "source_sentence": "But the short-term, obvious implications of greater convenience made it easy to overlook the long-term implications of no longer having one person fix food for the family to eat together at an evening meal.",
+      "explanation": [
+        {"chip": "쉽게 말하면", "text": "목적어로 올 to부정사가 길어서, 그 자리에 임시로 it을 놓고 진짜 목적어를 뒤로 보내요."},
+        {"chip": "구조", "text": "made it easy to overlook ... = made + it(가목적어) + easy(목적격보어) + to overlook...(진목적어)."},
+        {"chip": "핵심", "text": "이때 it은 '그것'이라 해석하지 않아요. 진짜 목적어는 to부정사 이하예요."},
+        {"chip": "자주 쓰는 동사", "text": "make/find/think/believe + it + 형용사 + to V 형태로 자주 나와요."},
+        {"chip": "확장", "text": "뒤에 having, fix 같은 사역·동명사 구조가 이어지며 문장이 길어져요."}
+      ],
+      "example_analysis": "made it easy to overlook에서 it은 가목적어이고 to overlook the long-term implications 이하가 진짜 목적어이며, easy는 목적격보어이다.",
+      "drills": [
+        {
+          "kind": "밑줄형",
+          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+          "sentence": "But the short-term, obvious implications of greater convenience [[1|made]] [[2|them]] easy [[3|to overlook]] the long-term implications of no longer [[4|having]] one person [[5|fix]] food for the family to eat together at an evening meal.",
+          "answer": "②",
+          "fix": "진목적어(to overlook 이하)를 대신하는 가목적어 자리이므로 them이 아니라 원문의 it으로 고쳐야 한다.",
+          "options": ["① made", "② them", "③ to overlook", "④ having", "⑤ fix"],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "네모형",
+          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+          "sentence": "Now, [[it/that]] was possible to prepare foods very quickly, and this shortening of preparation time was liberating for the cooks in the family, most of [[whom/who]] tended to be women.",
+          "answer": "it / whom",
+          "fix": "to prepare를 진주어로 받는 가주어 it이 알맞고, 전치사 of의 목적어이자 the cooks를 부연하는 목적격 관계대명사 whom이 알맞다.",
+          "options": [],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "오류찾기",
+          "question": "다음 중 어법상 틀린 문장은?",
+          "sentence": "",
+          "answer": "Most of us notice the obvious aspects of a new medium or technology while missed the more subtle aspects.",
+          "fix": "분사구문이므로 missed가 아니라 원문의 missing으로 고쳐야 한다(while (we are) missing).",
+          "options": [
+            "When we focus on the obvious aspects of media, we miss the changes that accumulate over time but are not apparent day to day.",
+            "It was introduced in the early 1980s and revolutionized food preparation.",
+            "Most of us notice the obvious aspects of a new medium or technology while missed the more subtle aspects.",
+            "As time went on, fewer and fewer families sat down together to eat dinner.",
+            "The effects of the microwave oven on family life were not anticipated and would have been difficult to foresee."
+          ],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "영작",
+          "question": "인터넷은 우리가 정보를 빠르게 찾는 것을 쉽게 만들었다.",
+          "sentence": "",
+          "answer": "The Internet made it easy to find information quickly.",
+          "fix": "",
+          "options": [],
+          "words": ["The Internet", "made", "it", "easy", "to find", "information", "quickly"],
+          "from_passage": false
+        },
+        {
+          "kind": "영작",
+          "question": "하지만 더 큰 편의의 단기적이고 명백한 영향은, 저녁 식사로 가족이 함께 먹도록 한 사람이 음식을 준비하는 일이 더 이상 없어지는 것의 장기적 영향을 간과하기 쉽게 만들었다.",
+          "sentence": "",
+          "answer": "But the short-term, obvious implications of greater convenience made it easy to overlook the long-term implications of no longer having one person fix food for the family to eat together at an evening meal.",
+          "fix": "",
+          "options": [],
+          "words": ["But", "the short-term, obvious implications", "of greater convenience", "made", "it", "easy", "to overlook", "the long-term implications", "of no longer having", "one person", "fix", "food", "for the family", "to eat together", "at an evening meal"],
+          "from_passage": true
+        }
+      ]
+    },
+    "restatement_chains": [
+      {
+        "label": "명백함 vs 미묘함",
+        "expressions": ["the obvious aspects", "the more subtle aspects"],
+        "variation": "눈에 띄는 측면과 놓치기 쉬운 미묘한 측면의 대비로 반복된다."
+      },
+      {
+        "label": "단기 편익 vs 장기 영향",
+        "expressions": ["the short-term, obvious implications", "the long-term implications"],
+        "variation": "즉각적 편익과 서서히 드러나는 장기적 결과의 대조로 변주된다."
+      }
+    ],
+    "flow_blocks": [
+      {"stage": "도입(주장)", "sentence_range": "1~2", "summary": "명백한 측면에 집중하면 서서히 [[축적되는]] 미묘한 변화를 놓침", "easy_example": "큰 파도만 보다가 조금씩 깎여 나가는 해안선의 변화를 놓치는 것과 같다."},
+      {"stage": "사례 도입", "sentence_range": "3~4", "summary": "예로 든 [[전자레인지]]는 1980년대 초 도입되어 음식 준비를 혁신함", "easy_example": "새 스마트폰이 처음엔 '빠르고 편하다'는 점만 눈에 들어오는 것과 같다."},
+      {"stage": "전개", "sentence_range": "5~6", "summary": "전통적 저녁 준비가 빠른 조리로 바뀌어 [[요리사]]를 해방시킴", "easy_example": "손빨래가 세탁기로 바뀌며 시간이 크게 줄어든 것과 같다."},
+      {"stage": "전환(핵심)", "sentence_range": "7", "summary": "단기 편익이 [[장기적 영향]]을 간과하기 쉽게 만듦", "easy_example": "당장의 편함에 취해 잃어버리는 것을 못 보는 상황과 같다."},
+      {"stage": "결과·결론", "sentence_range": "8~10", "summary": "함께하는 저녁 식사가 줄고, 그 영향은 [[예견하기]] 어려웠음", "easy_example": "작은 습관 변화가 쌓여 어느새 가족 문화가 달라진 셈이다."}
+    ]
+  },
+  "sentences": [
+    {
+      "id": 1,
+      "english": "When we focus on the obvious aspects of media, we miss the changes that accumulate over time but are not apparent day to day.",
+      "grammar": [
+        {"tag": "부사절 접속사 when", "note": "~할 때(시간·조건)", "spans": ["When"]},
+        {"tag": "주격 관계대명사 that", "note": "선행사 the changes를 수식하는 관계절", "spans": ["that"]},
+        {"tag": "등위접속사 but(병렬)", "note": "accumulate ... but are not ...로 두 동사를 병렬", "spans": ["but"]}
+      ],
+      "vocab": [
+        {"word": "focus on", "meaning": "~에 집중하다"},
+        {"word": "obvious", "meaning": "명백한"},
+        {"word": "aspect", "meaning": "측면"},
+        {"word": "accumulate", "meaning": "축적되다"},
+        {"word": "apparent", "meaning": "뚜렷한, 분명한"}
+      ],
+      "chunks": [
+        {"en": "When we focus on the obvious aspects of media,", "ko": "우리가 매체의 [[명백한]] 측면에 집중할 때,"},
+        {"en": "we miss the changes", "ko": "우리는 그 [[변화]]를 놓친다"},
+        {"en": "that accumulate over time", "ko": "시간이 지나며 [[축적되는]]"},
+        {"en": "but are not apparent day to day.", "ko": "하지만 매일매일 [[뚜렷하지]]는 않은"}
+      ],
+      "misreads": [
+        {"statement": "매체의 명백한 측면에 집중하면 서서히 축적되어 매일은 잘 드러나지 않는 변화를 놓친다.", "verdict": "O"}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 2,
+      "english": "Most of us notice the obvious aspects of a new medium or technology while missing the more subtle aspects.",
+      "grammar": [
+        {"tag": "접속사 while", "note": "~하면서(대조·동시)", "spans": ["while"]},
+        {"tag": "분사구문(동시동작)", "note": "while (we are) missing ...의 분사구문", "spans": ["missing"]},
+        {"tag": "비교급", "note": "the more subtle: more + 형용사 비교급", "spans": ["more"]}
+      ],
+      "vocab": [
+        {"word": "notice", "meaning": "알아차리다"},
+        {"word": "medium", "meaning": "매체"},
+        {"word": "subtle", "meaning": "미묘한"}
+      ],
+      "chunks": [
+        {"en": "Most of us notice the obvious aspects", "ko": "우리 대부분은 [[명백한]] 측면을 알아차린다"},
+        {"en": "of a new medium or technology", "ko": "새로운 [[매체]]나 기술의"},
+        {"en": "while missing the more subtle aspects.", "ko": "더 [[미묘한]] 측면은 놓치면서"}
+      ],
+      "misreads": [
+        {"statement": "우리 대부분은 새로운 기술의 미묘한 측면을 알아차리는 대신 명백한 측면을 놓친다.", "verdict": "X", "trap_type": "구조수식", "anchor": "notice the obvious aspects of a new medium or technology while missing the more subtle aspects", "why": "알아차리는 것은 명백한 측면이고 놓치는 것은 미묘한 측면으로, 방향이 뒤바뀌었다.", "killer": true}
+      ],
+      "mistips": ["while missing = while we are missing으로 주어+be가 생략된 분사구문."]
+    },
+    {
+      "id": 3,
+      "english": "Take, for example, the microwave oven.",
+      "grammar": [
+        {"tag": "명령문", "note": "동사원형 Take로 시작하는 명령문", "spans": ["Take"]}
+      ],
+      "vocab": [
+        {"word": "for example", "meaning": "예를 들어"},
+        {"word": "microwave oven", "meaning": "전자레인지"}
+      ],
+      "chunks": [
+        {"en": "Take, for example,", "ko": "[[예를]] 들어,"},
+        {"en": "the microwave oven.", "ko": "[[전자레인지]]를 살펴보자"}
+      ],
+      "misreads": [
+        {"statement": "필자는 논지를 뒷받침할 사례로 전자레인지를 든다.", "verdict": "O"}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 4,
+      "english": "It was introduced in the early 1980s and revolutionized food preparation.",
+      "grammar": [
+        {"tag": "지시대명사 It", "note": "It은 앞 문장의 the microwave oven을 가리킴", "spans": ["It"]},
+        {"tag": "수동태", "note": "be + p.p.로 '도입되었다'", "spans": ["was introduced"]},
+        {"tag": "등위접속사 and(병렬)", "note": "was introduced ... and revolutionized로 술어 병렬", "spans": ["and"]}
+      ],
+      "vocab": [
+        {"word": "introduce", "meaning": "도입하다"},
+        {"word": "revolutionize", "meaning": "혁신하다, 대변혁을 일으키다"},
+        {"word": "food preparation", "meaning": "음식 준비"}
+      ],
+      "chunks": [
+        {"en": "It was introduced in the early 1980s", "ko": "그것은 [[1980년대 초]]에 도입되었다"},
+        {"en": "and revolutionized food preparation.", "ko": "그리고 [[음식 준비]]를 혁신했다"}
+      ],
+      "misreads": [
+        {"statement": "이 문장에서 It이 가리키는 것은 media이다.", "verdict": "X", "trap_type": "지칭", "anchor": "Take, for example, the microwave oven.", "why": "It은 media가 아니라 바로 앞에서 예로 든 전자레인지를 가리킨다.", "integrative": true}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 5,
+      "english": "Traditionally, one person spent the better part of an afternoon fixing an evening meal for a family.",
+      "grammar": [
+        {"tag": "spend 시간 v-ing", "note": "~하는 데 (시간)을 쓰다", "spans": ["fixing"]}
+      ],
+      "vocab": [
+        {"word": "traditionally", "meaning": "전통적으로"},
+        {"word": "the better part of", "meaning": "~의 대부분"},
+        {"word": "fix a meal", "meaning": "식사를 준비하다"},
+        {"word": "evening meal", "meaning": "저녁 식사"}
+      ],
+      "chunks": [
+        {"en": "Traditionally, one person spent", "ko": "전통적으로, 한 사람이 [[썼다]]"},
+        {"en": "the better part of an afternoon", "ko": "오후의 [[대부분]]을"},
+        {"en": "fixing an evening meal for a family.", "ko": "가족을 위한 [[저녁 식사]]를 준비하는 데"}
+      ],
+      "misreads": [
+        {"statement": "전통적으로 온 가족이 함께 오후의 대부분을 들여 저녁 식사를 준비했다.", "verdict": "△", "trap_type": "주체대상", "anchor": "one person spent the better part of an afternoon", "why": "온 가족이 아니라 '한 사람'이 오후의 대부분을 들여 준비했다."}
+      ],
+      "mistips": ["spend + 시간 + v-ing = '~하는 데 (시간)을 쓰다'로 fixing은 동명사."]
+    },
+    {
+      "id": 6,
+      "english": "Now, it was possible to prepare foods very quickly, and this shortening of preparation time was liberating for the cooks in the family, most of whom tended to be women.",
+      "grammar": [
+        {"tag": "가주어-진주어", "note": "it 가주어, to prepare 이하가 진주어", "spans": ["it", "to prepare"]},
+        {"tag": "관계대명사 계속적 용법(most of whom)", "note": ", most of whom ...로 앞의 the cooks를 부연", "spans": ["whom"]},
+        {"tag": "구동사 tend to", "note": "~하는 경향이 있다", "spans": ["tended to"]}
+      ],
+      "vocab": [
+        {"word": "prepare", "meaning": "준비하다"},
+        {"word": "shortening", "meaning": "단축"},
+        {"word": "liberating", "meaning": "해방시키는"},
+        {"word": "tend to", "meaning": "~하는 경향이 있다"},
+        {"word": "cook", "meaning": "요리하는 사람"}
+      ],
+      "chunks": [
+        {"en": "Now, it was possible", "ko": "이제, [[가능]]해졌다"},
+        {"en": "to prepare foods very quickly,", "ko": "음식을 매우 [[빠르게]] 준비하는 것이"},
+        {"en": "and this shortening of preparation time", "ko": "그리고 준비 시간의 이 [[단축]]은"},
+        {"en": "was liberating for the cooks in the family,", "ko": "가족 내 요리사들에게 [[해방적]]이었다,"},
+        {"en": "most of whom tended to be women.", "ko": "그들 대부분은 [[여성]]인 경향이 있었다"}
+      ],
+      "misreads": [
+        {"statement": "이제 음식을 빠르게 준비할 수 있게 되어 요리사들이 새로운 요리법을 배우게 되었다.", "verdict": "X", "trap_type": "무관정보", "anchor": "this shortening of preparation time was liberating for the cooks", "why": "본문은 새로운 요리법 학습이 아니라 준비 시간 단축이 요리사를 해방시켰다고 말한다."}
+      ],
+      "mistips": ["most of whom = and most of them으로 the cooks를 부연하는 계속적 관계절."]
+    },
+    {
+      "id": 7,
+      "english": "But the short-term, obvious implications of greater convenience made it easy to overlook the long-term implications of no longer having one person fix food for the family to eat together at an evening meal.",
+      "grammar": [
+        {"tag": "5형식 make + 목적어 + 형용사", "note": "make + it(목적어) + easy(목적격보어)", "spans": ["made"]},
+        {"tag": "가목적어-진목적어", "note": "it 가목적어, to overlook 이하가 진목적어", "spans": ["it", "to overlook"]},
+        {"tag": "동명사(전치사 of 목적어)", "note": "of no longer having ...로 쓰인 동명사", "spans": ["having"]},
+        {"tag": "사역동사 have + 목적어 + 원형", "note": "having one person fix: have + O + 동사원형", "spans": ["fix"]}
+      ],
+      "vocab": [
+        {"word": "short-term", "meaning": "단기의"},
+        {"word": "implication", "meaning": "영향, 함의"},
+        {"word": "convenience", "meaning": "편의"},
+        {"word": "overlook", "meaning": "간과하다"},
+        {"word": "no longer", "meaning": "더 이상 ~않다"}
+      ],
+      "chunks": [
+        {"en": "But the short-term, obvious implications of greater convenience", "ko": "하지만 더 큰 편의의 단기적이고 명백한 [[영향]]은"},
+        {"en": "made it easy to overlook the long-term implications", "ko": "그 [[장기적]] 영향을 간과하기 쉽게 만들었다"},
+        {"en": "of no longer having one person fix food", "ko": "더 이상 한 사람이 [[음식]]을 준비하게 하지 않는 것의"},
+        {"en": "for the family to eat together at an evening meal.", "ko": "가족이 [[저녁 식사]]로 함께 먹도록"}
+      ],
+      "misreads": [
+        {"statement": "편의의 장기적 영향이 단기적 편익을 간과하기 쉽게 만들었다.", "verdict": "X", "trap_type": "인과조건", "anchor": "the short-term, obvious implications of greater convenience made it easy to overlook the long-term implications", "why": "간과하게 만든 것은 단기적 편익이고, 간과된 대상이 장기적 영향으로 원인·결과가 뒤바뀌었다.", "english": "The long-term implications made short-term benefits easy to overlook."}
+      ],
+      "mistips": ["made it easy to overlook에서 it은 가목적어, to overlook 이하가 진목적어."]
+    },
+    {
+      "id": 8,
+      "english": "As time went on, fewer and fewer families sat down together to eat dinner.",
+      "grammar": [
+        {"tag": "부사절 접속사 as", "note": "~함에 따라(시간의 경과)", "spans": ["As"]},
+        {"tag": "비교급 반복(fewer and fewer)", "note": "'점점 더 적은'을 나타내는 비교급 반복", "spans": ["fewer and fewer"]},
+        {"tag": "to부정사(부사적·목적)", "note": "to eat: ~하기 위해", "spans": ["to eat"]}
+      ],
+      "vocab": [
+        {"word": "as time went on", "meaning": "시간이 지남에 따라"},
+        {"word": "fewer and fewer", "meaning": "점점 더 적은"},
+        {"word": "sit down", "meaning": "자리에 앉다"}
+      ],
+      "chunks": [
+        {"en": "As time went on,", "ko": "시간이 [[지남]]에 따라,"},
+        {"en": "fewer and fewer families", "ko": "점점 더 [[적은]] 가족들이"},
+        {"en": "sat down together to eat dinner.", "ko": "함께 앉아 [[저녁]]을 먹었다"}
+      ],
+      "misreads": [
+        {"statement": "시간이 지날수록 함께 앉아 저녁을 먹는 가족이 점점 줄어들었다.", "verdict": "O"}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 9,
+      "english": "Meals that took a long time to prepare became a luxury of the past, except perhaps for special occasions.",
+      "grammar": [
+        {"tag": "주격 관계대명사 that", "note": "선행사 Meals를 수식하는 관계절", "spans": ["that"]},
+        {"tag": "to부정사(형용사 time 수식)", "note": "took a long time to prepare: 준비하는 데 오래 걸리다", "spans": ["to prepare"]}
+      ],
+      "vocab": [
+        {"word": "take a long time", "meaning": "오래 걸리다"},
+        {"word": "luxury", "meaning": "사치"},
+        {"word": "of the past", "meaning": "과거의"},
+        {"word": "except for", "meaning": "~을 제외하고"},
+        {"word": "occasion", "meaning": "경우, 때"}
+      ],
+      "chunks": [
+        {"en": "Meals that took a long time to prepare", "ko": "준비하는 데 오래 걸리는 [[식사]]는"},
+        {"en": "became a luxury of the past,", "ko": "과거의 [[사치]]가 되었다,"},
+        {"en": "except perhaps for special occasions.", "ko": "아마 특별한 [[경우]]를 제외하고는"}
+      ],
+      "misreads": [
+        {"statement": "필자는 정성껏 오래 준비한 식사가 여전히 일상적으로 흔하다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "became a luxury of the past", "why": "필자는 정성 들인 식사가 특별한 경우를 빼면 과거의 사치가 되었다고 본다."}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 10,
+      "english": "The effects of the microwave oven on family life were not anticipated and would have been difficult to foresee.",
+      "grammar": [
+        {"tag": "수동태", "note": "were not anticipated: be + p.p.의 수동태", "spans": ["anticipated"]},
+        {"tag": "조동사 + have p.p.", "note": "would have been: 과거에 대한 추측 '~였을 것이다'", "spans": ["would have been"]},
+        {"tag": "to부정사(형용사 difficult 수식)", "note": "difficult to foresee: 예견하기 어려운", "spans": ["to foresee"]}
+      ],
+      "vocab": [
+        {"word": "effect", "meaning": "영향, 효과"},
+        {"word": "anticipate", "meaning": "예상하다"},
+        {"word": "foresee", "meaning": "예견하다"},
+        {"word": "family life", "meaning": "가정 생활"}
+      ],
+      "chunks": [
+        {"en": "The effects of the microwave oven on family life", "ko": "가정 생활에 대한 전자레인지의 [[영향]]은"},
+        {"en": "were not anticipated", "ko": "[[예상되지]] 않았고"},
+        {"en": "and would have been difficult to foresee.", "ko": "[[예견하기]] 어려웠을 것이다"}
+      ],
+      "misreads": [
+        {"statement": "전자레인지가 가정 생활에 미친 영향은 미리 예상되지 못했다.", "verdict": "O"}
+      ],
+      "mistips": []
+    }
+  ]
+}
