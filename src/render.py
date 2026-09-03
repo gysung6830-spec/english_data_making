@@ -19,6 +19,21 @@ _env = Environment(
     autoescape=select_autoescape(["html", "xml", "j2"]),
 )
 
+# 시험지 브랜드 헤더 기본값 (config.yaml 의 design.brand_name 으로 바꿀 수 있음)
+DEFAULT_BRAND_NAME = "Ortica영어"
+
+
+def _brand_mark(brand_name: str) -> str:
+    """브랜드명에서 로고 마크에 넣을 머리글자 1자를 뽑는다.
+
+    'Ortica영어' → 'O' / '오르티카영어' → '오' (영문은 대문자로)
+    """
+    for ch in (brand_name or ""):
+        if ch.isalnum():
+            return ch.upper() if ch.isascii() else ch
+    return ""
+
+
 # 특히 중요한 핵심 어법 키워드 (부각 표시용)
 KEY_GRAMMAR = ["관계", "분사", "가정법", "비교", "도치", "강조", "5형식", "5 형식", "사역", "지각"]
 
@@ -673,8 +688,13 @@ def _match_block(pairs: list[dict], rng: random.Random) -> dict:
 
 def render_vocabtest_pdf(reports, out_path: str | Path,
                          title: str = "핵심 어휘 시험지", footer_note: str = "",
-                         seed: int | None = None) -> Path:
-    """핵심 어휘 리스트 기반 시험지: ①단어 뜻쓰기 ②유의어 줄긋기 ③반의어 줄긋기 (+정답)."""
+                         seed: int | None = None,
+                         brand_name: str | None = None) -> Path:
+    """핵심 어휘 리스트 기반 시험지: ①단어 뜻쓰기 ②유의어 줄긋기 ③반의어 줄긋기 (+정답).
+
+    brand_name: 시험지 헤더에 넣는 브랜드 이름(로고 마크 + 워드마크).
+                None 이면 기본값(Ortica영어), "" 이면 브랜드 표시 없이 문서 라벨만 나온다.
+    """
     from weasyprint import CSS, HTML
 
     out_path = Path(out_path)
@@ -719,8 +739,10 @@ def render_vocabtest_pdf(reports, out_path: str | Path,
             "ant": _match_block(ant_pairs, rng) if ant_pairs else None,
             "answers": items,
         })
+    brand = DEFAULT_BRAND_NAME if brand_name is None else brand_name
     tmpl = _env.get_template("vocabtest.html.j2")
-    html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
+    html = tmpl.render(title=title, passages=passages, footer_note=footer_note,
+                       brand_name=brand, brand_mark=_brand_mark(brand))
     css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
     return out_path

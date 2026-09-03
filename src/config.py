@@ -44,6 +44,8 @@ class DesignCfg:
     footer_note: str = ""
     one_pdf_per_passage: bool = True
     brand: str = ""   # 직독직해 'made by ~' 에 넣는 브랜드 이름(footer 와 무관, 비우면 미표시)
+    # 시험지 헤더(로고 마크 + 워드마크)에 넣는 브랜드 이름. 비우면 브랜드 표시 없이 문서 라벨만.
+    brand_name: str = "Ortica영어"
 
 
 @dataclass
@@ -114,6 +116,7 @@ def load_config(path: str | Path | None = None) -> Config:
             footer_note=str(design.get("footer_note", "")),
             one_pdf_per_passage=bool(design.get("one_pdf_per_passage", True)),
             brand=str(design.get("brand", "")),
+            brand_name=str(design.get("brand_name", "Ortica영어")),
         ),
         outputs=OutputsCfg(
             analysis=bool(outputs.get("analysis", True)),

@@ -156,7 +156,8 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
     # 핵심 어휘 시험지(뜻쓰기 + 유의어/반의어 줄긋기)
     if getattr(sel, "vocabtest", False):
         p = cfg.output_dir / f"{stem}_핵심어휘test.pdf"
-        render.render_vocabtest_pdf(reports, p, title=f"{title} — 핵심 어휘 시험", footer_note=fn)
+        render.render_vocabtest_pdf(reports, p, title=f"{title} — 핵심 어휘 시험", footer_note=fn,
+                                    brand_name=cfg.design.brand_name)
         recs.append({"kind": "vocabtest", "label": "🧩 핵심 어휘 시험지", "path": p})
 
     return recs

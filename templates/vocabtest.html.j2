@@ -2,20 +2,41 @@
 <html lang="ko">
 <head><meta charset="utf-8"><title>핵심 어휘 시험지</title></head>
 <body>
+  {# 모든 페이지 하단에 반복되는 브랜드 저작권 (running element) #}
+  {% if footer_note %}<div class="pg-copyright">{{ footer_note }}</div>{% endif %}
+  {# ── 브랜드 헤더(오르티카 스타일): 로고 마크 + 워드마크 + 문서 라벨 ── #}
+  {% macro ot_head(pg, kind_en, kind_ko, fields) %}
+  <div class="ot-head">
+    <div class="ot-id">
+      {% if brand_mark %}<span class="ot-mark">{{ brand_mark }}</span>{% endif %}
+      <span class="ot-idtext">
+        {% if brand_name %}<span class="ot-word">{{ brand_name }}</span>{% endif %}
+        <span class="ot-kicker">{{ kind_en }} · {{ kind_ko }}</span>
+      </span>
+    </div>
+    {% if fields %}
+    <div class="ot-fields">
+      <span class="ot-field">이름 <span class="ot-line"></span></span>
+      <span class="ot-field">점수 <span class="ot-line short"></span></span>
+    </div>
+    {% else %}
+    <div class="ot-akchip">정답 · ANSWER KEY</div>
+    {% endif %}
+  </div>
+  <div class="ot-titlebar">
+    <span class="ot-title">{{ pg.title }}</span>
+    {% if pg.item_no %}<span class="ot-tag">{{ pg.item_no }}번</span>
+    {% elif pg.total > 1 %}<span class="ot-tag">지문 {{ pg.no }} / {{ pg.total }}</span>{% endif %}
+  </div>
+  {% endmacro %}
+
   {# 지문별: 문제(뜻쓰기 → 유의어 줄긋기 → 반의어 줄긋기) #}
   {% for pg in passages %}
   <div class="wl-passage vt-page{{ ' pgbreak' if not loop.first }}">
-    <div class="doc-header">
-      <span class="doc-badge">Vocabulary Test</span>
-      {% if pg.item_no %}<span class="passage-tag">{{ pg.item_no }}번</span>{% elif pg.total > 1 %}<span class="passage-tag">지문 {{ pg.no }} / {{ pg.total }}</span>{% endif %}
-      <div class="doc-title">{{ pg.title }}</div>
-      <div class="quiz-meta">
-        이름 <span class="ql">&nbsp;</span>　　　점수 <span class="ql short">&nbsp;</span>
-      </div>
-    </div>
+    {{ ot_head(pg, "VOCABULARY TEST", "핵심 어휘 시험", true) }}
 
     {# ① 단어 뜻 쓰기 #}
-    <div class="vt-part">Ⅰ. 다음 단어의 뜻을 쓰세요. (순서 무작위)</div>
+    <div class="vt-part"><span class="vt-pno">Ⅰ</span>다음 단어의 뜻을 쓰세요. <span class="vt-hint">(순서 무작위)</span></div>
     {% if pg.mean %}
     <table class="grid t-quiz">
       <thead><tr>
@@ -37,7 +58,7 @@
 
     {# ② 유의어 줄긋기 #}
     {% if pg.syn %}
-    <div class="vt-part">Ⅱ. 단어와 <b>유의어</b>를 선으로 이으세요.</div>
+    <div class="vt-part"><span class="vt-pno">Ⅱ</span>단어와 <b>유의어</b>를 선으로 이으세요.</div>
     <table class="match">
       <tbody>
       {% for i in range(pg.syn.L|length) %}
@@ -53,7 +74,7 @@
 
     {# ③ 반의어 줄긋기 #}
     {% if pg.ant %}
-    <div class="vt-part">Ⅲ. 단어와 <b>반의어</b>를 선으로 이으세요.</div>
+    <div class="vt-part"><span class="vt-pno">Ⅲ</span>단어와 <b>반의어</b>를 선으로 이으세요.</div>
     <table class="match">
       <tbody>
       {% for i in range(pg.ant.L|length) %}
@@ -66,35 +87,34 @@
       </tbody>
     </table>
     {% endif %}
-
-    {% if footer_note %}<div class="footer-note">{{ footer_note }}</div>{% endif %}
   </div>
   {% endfor %}
 
   {# 정답: 문제 뒤에 지문별로 모아서 #}
   {% for pg in passages %}
   <div class="answer-key pgbreak">
-    <div class="ak-title">정답 (Answer Key){% if pg.item_no %} · {{ pg.item_no }}번{% elif pg.total > 1 %} · 지문 {{ pg.no }}{% endif %}</div>
+    {{ ot_head(pg, "ANSWER KEY", "정답", false) }}
 
-    <div class="ak-sub">Ⅰ. 단어 뜻</div>
+    <div class="ak-sub"><span class="ak-pno">Ⅰ</span>단어 뜻</div>
     <div class="ak-list">
       {% for w in pg.answers %}<span class="ak-item"><b>{{ w.word }}</b> — {{ w.meaning }}</span>{% endfor %}
     </div>
 
     {% if pg.syn %}
-    <div class="ak-sub">Ⅱ. 유의어 줄긋기</div>
+    <div class="ak-sub"><span class="ak-pno">Ⅱ</span>유의어 줄긋기</div>
     <div class="ak-list">
       {% for l in pg.syn.L %}<span class="ak-item"><b>{{ l.no }}.</b> {{ l.word }} → {{ l.ans_sym }}</span>{% endfor %}
     </div>
     {% endif %}
 
     {% if pg.ant %}
-    <div class="ak-sub">Ⅲ. 반의어 줄긋기</div>
+    <div class="ak-sub"><span class="ak-pno">Ⅲ</span>반의어 줄긋기</div>
     <div class="ak-list">
       {% for l in pg.ant.L %}<span class="ak-item"><b>{{ l.no }}.</b> {{ l.word }} → {{ l.ans_sym }}</span>{% endfor %}
     </div>
     {% endif %}
   </div>
   {% endfor %}
+
 </body>
 </html>

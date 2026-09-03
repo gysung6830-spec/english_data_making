@@ -47,6 +47,9 @@ design:
   # 분석지의 '직독직해 made by ~' 문구에 넣는 브랜드 이름.
   #   비우면("") 브랜드 문구 없이 나옵니다. (하단 저작권 footer_note 와는 무관)
   brand: ""
+  # 어휘 시험지 헤더에 들어가는 브랜드 이름(로고 마크 = 머리글자 + 워드마크).
+  #   비우면("") 브랜드 없이 'VOCABULARY TEST' 라벨만 나옵니다.
+  brand_name: "Ortica영어"
 
 # 어떤 PDF 를 만들지 선택 (true=생성 / false=건너뜀)
 #   - analysis : 지문 분석지 (6개 섹션)

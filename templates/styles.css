@@ -416,35 +416,109 @@ table.lit2 td {
 /* 어휘 리스트: 페이지 나눔 없이 지문을 몰아서 이어붙일 때 지문 간 간격 */
 .wl-gap { margin-top: 20px; }
 
-/* 시험지: 뜻 쓰는 빈칸 */
+/* ============================================================
+   오르티카 브랜드 시험지 (Ortica style)
+   로고 마크 + 워드마크 헤더 · 브랜드 그린 단색 · 라운드 서체
+   ============================================================ */
+
+/* ---- 브랜드 헤더: 로고 마크 / 워드마크 / 문서 라벨 / 이름·점수 ---- */
+.ot-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 12px; padding-bottom: 5px;
+  border-bottom: 2.5px solid var(--c-green);
+}
+.ot-id { display: flex; align-items: center; gap: 7px; }
+/* 로고 마크: 브랜드 그린 라운드 사각형 + 머리글자 */
+.ot-mark {
+  display: inline-block; width: 21px; height: 21px; line-height: 21px;
+  text-align: center; border-radius: 7px;
+  background: var(--sum); color: #fff;
+  font-size: 13px; font-weight: 800; letter-spacing: -0.5px;
+}
+.ot-idtext { display: block; line-height: 1.15; }
+.ot-word { display: block; font-size: 12px; font-weight: 800; color: var(--sum); }
+.ot-kicker {
+  display: block; font-size: 7.5px; font-weight: 800; color: var(--c-green);
+  letter-spacing: 0.5px; white-space: nowrap;
+}
+/* 이름·점수 기입란(브랜드 카드) */
+.ot-fields {
+  display: flex; align-items: baseline; gap: 14px;
+  background: var(--voc-bg); border: 1px solid #cfe6d6; border-radius: 7px;
+  padding: 4px 11px; margin-bottom: 2px;
+}
+.ot-field { font-size: 9.5px; font-weight: 800; color: var(--sum); white-space: nowrap; }
+.ot-line {
+  display: inline-block; min-width: 88px; height: 0.95em;
+  border-bottom: 1px solid #8fbfa1; vertical-align: baseline; margin-left: 4px;
+}
+.ot-line.short { min-width: 40px; }
+/* 정답 페이지 표시 칩 */
+.ot-akchip {
+  background: var(--sum); color: #fff; font-size: 9px; font-weight: 800;
+  letter-spacing: 0.3px; padding: 2px 10px; border-radius: 11px; margin-bottom: 1px;
+}
+/* 브랜드 헤더 아래 얇은 보조선(브랜드 더블 룰) + 지문 제목 */
+.ot-titlebar {
+  border-top: 1px solid #cfe6d6; padding: 5px 0 0; margin-bottom: 7px;
+}
+.ot-title { font-size: 13.5px; font-weight: 800; color: #23272e; }
+.ot-tag {
+  display: inline-block; background: var(--voc-bg); color: var(--sum);
+  border: 1px solid #bfe0c9; font-size: 8.5px; font-weight: 800;
+  padding: 1px 8px; border-radius: 10px; margin-left: 6px; vertical-align: 2px;
+}
+
+/* ---- 시험지: 뜻 쓰는 빈칸 ---- */
 .q-blank { min-height: 20px; }
 .t-quiz tbody td { height: 22px; }
 .quiz-meta { font-size: 11px; font-weight: 700; margin: 3px 0 2px; }
 .quiz-meta .ql {
-  display: inline-block; border-bottom: 1px solid #111827; min-width: 120px;
+  display: inline-block; border-bottom: 1px solid var(--c-green); min-width: 120px;
 }
 .quiz-meta .ql.short { min-width: 46px; }
 
-/* 시험지 정답 (마지막에 별도 페이지) */
-.answer-key { margin-top: 10px; }
+/* ---- 시험지 정답 (별도 페이지) ---- */
+.answer-key { margin-top: 0; }
 .ak-title {
-  display: inline-block; background: #111827; color: #fff;
-  font-size: 11px; font-weight: 800; padding: 2px 10px; border-radius: 4px; margin-bottom: 8px;
+  display: inline-block; background: var(--sum); color: #fff;
+  font-size: 11px; font-weight: 800; padding: 2px 10px; border-radius: 11px; margin-bottom: 8px;
 }
 .ak-list { columns: 2; column-gap: 22px; font-size: 9.5px; line-height: 1.7; }
 .ak-item { display: block; break-inside: avoid; color: #23272e; }
-.ak-item b { color: var(--voc); }
-.ak-sub { font-size: 10px; font-weight: 800; color: var(--voc); margin: 8px 0 3px; }
+.ak-item b { color: var(--sum); }
+.ak-sub {
+  font-size: 10px; font-weight: 800; color: var(--sum); margin: 9px 0 3px;
+  padding-bottom: 2px; border-bottom: 1px solid #dfeee5;
+}
+/* 정답 파트 번호(Ⅰ·Ⅱ·Ⅲ) 칩 */
+.ak-pno {
+  display: inline-block; min-width: 14px; text-align: center;
+  background: var(--voc-bg); color: var(--sum); border: 1px solid #bfe0c9;
+  border-radius: 5px; font-size: 8.5px; font-weight: 800; padding: 0 3px; margin-right: 5px;
+}
 
 /* 핵심 어휘 리스트 단어 열 폭 */
 .vl-word { width: 108px; font-weight: 700; color: #111827; }
 
-/* 핵심 어휘 시험지: 파트 안내 + 줄긋기(matching) */
-.vt-part { font-size: 10.5px; font-weight: 800; color: var(--voc); margin: 11px 0 5px; }
+/* ---- 핵심 어휘 시험지: 파트 안내 바 + 줄긋기(matching) ---- */
+.vt-part {
+  font-size: 10.5px; font-weight: 800; color: var(--sum);
+  margin: 11px 0 5px; padding: 3px 9px;
+  background: var(--voc-bg); border-left: 3px solid var(--c-green);
+  border-radius: 0 5px 5px 0;
+}
 .vt-part b { color: #c0342c; }
+.vt-part .vt-pno {
+  display: inline-block; min-width: 13px; text-align: center;
+  background: var(--sum); color: #fff; border-radius: 50%;
+  font-size: 8px; font-weight: 800; padding: 1px 0; margin-right: 6px; vertical-align: 1px;
+}
+.vt-part .vt-hint { font-weight: 700; color: var(--muted); }
 table.match { width: 100%; border-collapse: collapse; table-layout: fixed; margin-bottom: 4px; }
 .match td { padding: 5px 4px; vertical-align: middle; font-size: 10px; }
 .mt-left { text-align: right; color: #1f2937; }
+.mt-left .mt-no { float: left; }
 .mt-right { text-align: left; color: #1f2937; }
 .mt-gap { width: 34%; }
 .mt-no {
@@ -457,13 +531,13 @@ table.match { width: 100%; border-collapse: collapse; table-layout: fixed; margi
 }
 .mt-dot { color: var(--voc); font-weight: 800; }
 
-/* 핵심 어휘 시험지: 한 지문당 문제를 1쪽에 담기 위한 압축 배치 */
-.vt-page .doc-header { padding-bottom: 3px; margin-bottom: 6px; }
-.vt-page .quiz-meta { margin: 2px 0 1px; }
-.vt-page .vt-part { margin: 7px 0 3px; font-size: 9.5px; }
+/* ---- 핵심 어휘 시험지: 한 지문당 문제를 1쪽에 담기 위한 압축 배치 ---- */
+.vt-page .ot-head { padding-bottom: 4px; }
+.vt-page .ot-titlebar { padding-top: 4px; margin-bottom: 5px; }
+.vt-page .vt-part { margin: 7px 0 3px; font-size: 9.5px; padding: 2px 8px; }
 .vt-page table.t-quiz td { padding: 2px 8px; }
-.vt-page .t-quiz tbody td { height: 15px; }
-.vt-page table.match td { padding: 1.5px 4px; font-size: 9px; }
+.vt-page .t-quiz tbody td { height: 28px; }
+.vt-page table.match td { padding: 5px 4px; font-size: 9.5px; }
 .vt-page .mt-no, .vt-page .mt-sym { font-size: 8px; }
 
 /* ============================================================
