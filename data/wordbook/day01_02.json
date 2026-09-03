@@ -1,0 +1,406 @@
+{
+  "title": "Day 1~2",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "ride",
+      "meaning": "(탈것을) 타다; 타기, 타고 가기"
+    },
+    {
+      "no": 2,
+      "word": "recognize",
+      "meaning": "인지하다, 인정하다"
+    },
+    {
+      "no": 3,
+      "word": "therefore",
+      "meaning": "그러므로, 그 결과"
+    },
+    {
+      "no": 4,
+      "word": "essence",
+      "meaning": "(사물의) 본질, 정수"
+    },
+    {
+      "no": 5,
+      "word": "provide",
+      "meaning": "제공하다, 공급하다, 준비하다"
+    },
+    {
+      "no": 6,
+      "word": "profession",
+      "meaning": "전문직, 직종"
+    },
+    {
+      "no": 7,
+      "word": "contact",
+      "meaning": "접촉; 접촉하다"
+    },
+    {
+      "no": 8,
+      "word": "chemistry",
+      "meaning": "화학, 교감"
+    },
+    {
+      "no": 9,
+      "word": "encourage",
+      "meaning": "촉구하다, 격려하다"
+    },
+    {
+      "no": 10,
+      "word": "generate",
+      "meaning": "일으키다, 발생시키다"
+    },
+    {
+      "no": 11,
+      "word": "proud",
+      "meaning": "자랑스러워하는, 자만하는"
+    },
+    {
+      "no": 12,
+      "word": "aware",
+      "meaning": "인지하는, 알고 있는"
+    },
+    {
+      "no": 13,
+      "word": "challenge",
+      "meaning": "도전, 난제; 도전하다"
+    },
+    {
+      "no": 14,
+      "word": "background",
+      "meaning": "배경, 배경 지식, 이유"
+    },
+    {
+      "no": 15,
+      "word": "individual",
+      "meaning": "개인; 개인의, 개인적인"
+    },
+    {
+      "no": 16,
+      "word": "complex",
+      "meaning": "복잡한; 복합체"
+    },
+    {
+      "no": 17,
+      "word": "employ",
+      "meaning": "고용하다, (기술·방법 등을) 쓰다"
+    },
+    {
+      "no": 18,
+      "word": "participate",
+      "meaning": "참여하다, 참가하다 (in)"
+    },
+    {
+      "no": 19,
+      "word": "opportunity",
+      "meaning": "기회"
+    },
+    {
+      "no": 20,
+      "word": "focus",
+      "meaning": "초점; 초점을 맞추다, 집중하다"
+    },
+    {
+      "no": 21,
+      "word": "secure",
+      "meaning": "안전한; 안전하게 하다, 확보하다"
+    },
+    {
+      "no": 22,
+      "word": "audience",
+      "meaning": "청중, 관객"
+    },
+    {
+      "no": 23,
+      "word": "expense",
+      "meaning": "비용, 지출"
+    },
+    {
+      "no": 24,
+      "word": "inform",
+      "meaning": "알리다, 통지하다"
+    },
+    {
+      "no": 25,
+      "word": "involve",
+      "meaning": "포함하다, 관련되다, (사건 등에) 말려들게 하다"
+    },
+    {
+      "no": 26,
+      "word": "attitude",
+      "meaning": "태도, 입장"
+    },
+    {
+      "no": 27,
+      "word": "detail",
+      "meaning": "세부적인 것; 상술하다"
+    },
+    {
+      "no": 28,
+      "word": "demand",
+      "meaning": "요구하다; 수요"
+    },
+    {
+      "no": 29,
+      "word": "proper",
+      "meaning": "적절한, 알맞은"
+    },
+    {
+      "no": 30,
+      "word": "local",
+      "meaning": "지방의, 지역의, 장소의"
+    },
+    {
+      "no": 31,
+      "word": "solution",
+      "meaning": "해결, 해결책, 용액"
+    },
+    {
+      "no": 32,
+      "word": "career",
+      "meaning": "직업, 경력"
+    },
+    {
+      "no": 33,
+      "word": "discover",
+      "meaning": "발견하다"
+    },
+    {
+      "no": 34,
+      "word": "approach",
+      "meaning": "접근하다; 접근, 접근법"
+    },
+    {
+      "no": 35,
+      "word": "amaze",
+      "meaning": "놀라게 하다"
+    },
+    {
+      "no": 36,
+      "word": "social",
+      "meaning": "사회의, 사교적인"
+    },
+    {
+      "no": 37,
+      "word": "research",
+      "meaning": "연구; 연구하다, 조사하다"
+    },
+    {
+      "no": 38,
+      "word": "improve",
+      "meaning": "향상시키다, 향상하다"
+    },
+    {
+      "no": 39,
+      "word": "decide",
+      "meaning": "결심하다, 결정하다"
+    },
+    {
+      "no": 40,
+      "word": "disappear",
+      "meaning": "사라지다"
+    },
+    {
+      "no": 41,
+      "word": "relationship",
+      "meaning": "관계"
+    },
+    {
+      "no": 42,
+      "word": "contain",
+      "meaning": "함유하다, 포함하다, 억제하다"
+    },
+    {
+      "no": 43,
+      "word": "volunteer",
+      "meaning": "자원봉사, 지원자; 자원하다"
+    },
+    {
+      "no": 44,
+      "word": "average",
+      "meaning": "평균; 평균의; 평균 ~이다"
+    },
+    {
+      "no": 45,
+      "word": "require",
+      "meaning": "필요로 하다, 요구하다"
+    },
+    {
+      "no": 46,
+      "word": "influence",
+      "meaning": "영향, 영향을 미치는 것[사람]; 영향을 끼치다"
+    },
+    {
+      "no": 47,
+      "word": "cell",
+      "meaning": "세포, 작은 방, 독방"
+    },
+    {
+      "no": 48,
+      "word": "level",
+      "meaning": "수준, 수평; 수평의; 평평하게 하다"
+    },
+    {
+      "no": 49,
+      "word": "positive",
+      "meaning": "긍정적인, 확신하는"
+    },
+    {
+      "no": 50,
+      "word": "performance",
+      "meaning": "공연, 성적, 성과"
+    },
+    {
+      "no": 51,
+      "word": "material",
+      "meaning": "자료, 재료, 물질"
+    },
+    {
+      "no": 52,
+      "word": "amount",
+      "meaning": "총액, 총계, 액수, 양; 총계가 ~이 되다"
+    },
+    {
+      "no": 53,
+      "word": "consume",
+      "meaning": "소비하다, 먹다[마시다]"
+    },
+    {
+      "no": 54,
+      "word": "emotion",
+      "meaning": "감정"
+    },
+    {
+      "no": 55,
+      "word": "environment",
+      "meaning": "환경"
+    },
+    {
+      "no": 56,
+      "word": "issue",
+      "meaning": "화제, 문제, 발행(물); 발행하다"
+    },
+    {
+      "no": 57,
+      "word": "stress",
+      "meaning": "스트레스, 강조; 강조하다, 압력을 주다"
+    },
+    {
+      "no": 58,
+      "word": "affect",
+      "meaning": "영향을 미치다, ~인 체하다"
+    },
+    {
+      "no": 59,
+      "word": "benefit",
+      "meaning": "이익; 이익이 되다"
+    },
+    {
+      "no": 60,
+      "word": "occur",
+      "meaning": "(사건이) 일어나다, 발생하다"
+    },
+    {
+      "no": 61,
+      "word": "develop",
+      "meaning": "개발하다, 발달[발전]하다"
+    },
+    {
+      "no": 62,
+      "word": "international",
+      "meaning": "국제의, 국제적인"
+    },
+    {
+      "no": 63,
+      "word": "thus",
+      "meaning": "그러므로, 따라서"
+    },
+    {
+      "no": 64,
+      "word": "immediate",
+      "meaning": "즉각적인, 가까이에 있는"
+    },
+    {
+      "no": 65,
+      "word": "function",
+      "meaning": "기능; 기능하다, 작용하다"
+    },
+    {
+      "no": 66,
+      "word": "commodity",
+      "meaning": "상품, 물품"
+    },
+    {
+      "no": 67,
+      "word": "economic",
+      "meaning": "경제의, 경제학의"
+    },
+    {
+      "no": 68,
+      "word": "available",
+      "meaning": "이용 가능한, 쓸모 있는"
+    },
+    {
+      "no": 69,
+      "word": "define",
+      "meaning": "정의하다, 한계 짓다, 한정하다"
+    },
+    {
+      "no": 70,
+      "word": "package",
+      "meaning": "꾸러미, 포장; 포장하다"
+    },
+    {
+      "no": 71,
+      "word": "novel",
+      "meaning": "(장편) 소설; 참신한"
+    },
+    {
+      "no": 72,
+      "word": "determine",
+      "meaning": "결정하다, 결심하다"
+    },
+    {
+      "no": 73,
+      "word": "eventually",
+      "meaning": "결국"
+    },
+    {
+      "no": 74,
+      "word": "despite",
+      "meaning": "~에도 불구하고"
+    },
+    {
+      "no": 75,
+      "word": "behave",
+      "meaning": "(예의 바르게) 행동하다"
+    },
+    {
+      "no": 76,
+      "word": "object",
+      "meaning": "물체, 목표; 반대하다"
+    },
+    {
+      "no": 77,
+      "word": "reduce",
+      "meaning": "줄이다, 낮추다"
+    },
+    {
+      "no": 78,
+      "word": "impress",
+      "meaning": "깊은 인상을 주다, 감동시키다"
+    },
+    {
+      "no": 79,
+      "word": "cultural",
+      "meaning": "문화의, 문화적인"
+    },
+    {
+      "no": 80,
+      "word": "comfort",
+      "meaning": "편안하게 하다, 위로하다; 편안, 위로"
+    }
+  ]
+}

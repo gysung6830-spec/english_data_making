@@ -1,0 +1,406 @@
+{
+  "title": "Day 17~18",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "reinforcement",
+      "meaning": "강화, 보강"
+    },
+    {
+      "no": 2,
+      "word": "shift",
+      "meaning": "변화, 이동, 교대; 바꾸다, 이동하다"
+    },
+    {
+      "no": 3,
+      "word": "valid",
+      "meaning": "타당한, 유효한"
+    },
+    {
+      "no": 4,
+      "word": "ecosystem",
+      "meaning": "생태계"
+    },
+    {
+      "no": 5,
+      "word": "ethnic",
+      "meaning": "인종의, 민족의"
+    },
+    {
+      "no": 6,
+      "word": "infection",
+      "meaning": "감염, 전염(병)"
+    },
+    {
+      "no": 7,
+      "word": "ideal",
+      "meaning": "이상적인; 이상"
+    },
+    {
+      "no": 8,
+      "word": "entire",
+      "meaning": "전체의, 완전한; 전부, 전체"
+    },
+    {
+      "no": 9,
+      "word": "stiffen",
+      "meaning": "굳어지다"
+    },
+    {
+      "no": 10,
+      "word": "beard",
+      "meaning": "턱수염"
+    },
+    {
+      "no": 11,
+      "word": "escape",
+      "meaning": "탈출하다, 벗어나다; 탈출, 도망"
+    },
+    {
+      "no": 12,
+      "word": "confront",
+      "meaning": "직면하다"
+    },
+    {
+      "no": 13,
+      "word": "review",
+      "meaning": "재검토, 논평; 재검토하다"
+    },
+    {
+      "no": 14,
+      "word": "pile",
+      "meaning": "쌓아 올린 더미, 많은 양; 쌓아 올리다, 축적하다"
+    },
+    {
+      "no": 15,
+      "word": "adjust",
+      "meaning": "조절하다, 조정하다"
+    },
+    {
+      "no": 16,
+      "word": "realize",
+      "meaning": "깨닫다, 실현하다"
+    },
+    {
+      "no": 17,
+      "word": "gamble",
+      "meaning": "도박하다, 모험하다; 도박, 모험"
+    },
+    {
+      "no": 18,
+      "word": "outstanding",
+      "meaning": "뛰어난, 두드러진, 미해결의"
+    },
+    {
+      "no": 19,
+      "word": "haste",
+      "meaning": "급함, 서두름"
+    },
+    {
+      "no": 20,
+      "word": "exist",
+      "meaning": "부, 재산"
+    },
+    {
+      "no": 21,
+      "word": "mislead",
+      "meaning": "잘못 인도하다, 오해하게 하다"
+    },
+    {
+      "no": 22,
+      "word": "soak",
+      "meaning": "적시다, 젖다, 흡수하다"
+    },
+    {
+      "no": 23,
+      "word": "progress",
+      "meaning": "진보하다, 전진하다; 진전, 진보"
+    },
+    {
+      "no": 24,
+      "word": "undoubtedly",
+      "meaning": "의심할 여지 없이, 확실히"
+    },
+    {
+      "no": 25,
+      "word": "wonder",
+      "meaning": "궁금해하다, 놀라다; 경탄, 경이"
+    },
+    {
+      "no": 26,
+      "word": "optimal",
+      "meaning": "최상의, 최적의"
+    },
+    {
+      "no": 27,
+      "word": "temper",
+      "meaning": "성질, 기질; 완화시키다"
+    },
+    {
+      "no": 28,
+      "word": "perspective",
+      "meaning": "관점, 견해, 원근법, 전망"
+    },
+    {
+      "no": 29,
+      "word": "erase",
+      "meaning": "지우다, 없애다"
+    },
+    {
+      "no": 30,
+      "word": "atom",
+      "meaning": "원자"
+    },
+    {
+      "no": 31,
+      "word": "dynasty",
+      "meaning": "왕조, 왕가"
+    },
+    {
+      "no": 32,
+      "word": "solar",
+      "meaning": "태양의, 태양열을 이용한"
+    },
+    {
+      "no": 33,
+      "word": "craft",
+      "meaning": "(수)공예, 기술, 선박, 비행기"
+    },
+    {
+      "no": 34,
+      "word": "candidate",
+      "meaning": "후보자"
+    },
+    {
+      "no": 35,
+      "word": "fame",
+      "meaning": "명성"
+    },
+    {
+      "no": 36,
+      "word": "fade",
+      "meaning": "사라지다, 희미해지다"
+    },
+    {
+      "no": 37,
+      "word": "representative",
+      "meaning": "대표, 국회의원(R-); 대표하는"
+    },
+    {
+      "no": 38,
+      "word": "wholesale",
+      "meaning": "도매; 도매의"
+    },
+    {
+      "no": 39,
+      "word": "peer",
+      "meaning": "동료, 또래"
+    },
+    {
+      "no": 40,
+      "word": "noble",
+      "meaning": "귀족의, 고결한"
+    },
+    {
+      "no": 41,
+      "word": "minimal",
+      "meaning": "최소의, 아주 적은"
+    },
+    {
+      "no": 42,
+      "word": "unify",
+      "meaning": "통합하다, 통일하다"
+    },
+    {
+      "no": 43,
+      "word": "scatter",
+      "meaning": "흩뿌리다, 분산시키다"
+    },
+    {
+      "no": 44,
+      "word": "protect",
+      "meaning": "보호하다"
+    },
+    {
+      "no": 45,
+      "word": "sink",
+      "meaning": "가라앉다"
+    },
+    {
+      "no": 46,
+      "word": "result",
+      "meaning": "결과; (결과로) 생기다"
+    },
+    {
+      "no": 47,
+      "word": "command",
+      "meaning": "명령, 지배력; 명령하다, 지휘하다"
+    },
+    {
+      "no": 48,
+      "word": "debt",
+      "meaning": "빚, 부채"
+    },
+    {
+      "no": 49,
+      "word": "raft",
+      "meaning": "뗏목, 고무보트"
+    },
+    {
+      "no": 50,
+      "word": "hydrogen",
+      "meaning": "수소"
+    },
+    {
+      "no": 51,
+      "word": "renew",
+      "meaning": "새롭게 하다, 갱신하다"
+    },
+    {
+      "no": 52,
+      "word": "thread",
+      "meaning": "실; 실을 꿰다"
+    },
+    {
+      "no": 53,
+      "word": "cease",
+      "meaning": "그만두다, 중지하다"
+    },
+    {
+      "no": 54,
+      "word": "hardship",
+      "meaning": "고난, 어려움"
+    },
+    {
+      "no": 55,
+      "word": "widespread",
+      "meaning": "널리 퍼진"
+    },
+    {
+      "no": 56,
+      "word": "dedicate",
+      "meaning": "헌납하다, 바치다"
+    },
+    {
+      "no": 57,
+      "word": "genre",
+      "meaning": "장르, 유형, 형식"
+    },
+    {
+      "no": 58,
+      "word": "foretell",
+      "meaning": "예언하다, 예고하다"
+    },
+    {
+      "no": 59,
+      "word": "drastic",
+      "meaning": "격렬한, 과감한"
+    },
+    {
+      "no": 60,
+      "word": "primary",
+      "meaning": "주요한, 최초[초기]의"
+    },
+    {
+      "no": 61,
+      "word": "initial",
+      "meaning": "처음의, 초기의; 머리글자(이니셜)"
+    },
+    {
+      "no": 62,
+      "word": "ceiling",
+      "meaning": "천장, 상한선"
+    },
+    {
+      "no": 63,
+      "word": "bump",
+      "meaning": "부딪치다; 충돌, 혹"
+    },
+    {
+      "no": 64,
+      "word": "dispose",
+      "meaning": "배치하다, 처리하다, 경향을 갖게 하다"
+    },
+    {
+      "no": 65,
+      "word": "germ",
+      "meaning": "미생물, 세균"
+    },
+    {
+      "no": 66,
+      "word": "weapon",
+      "meaning": "무기, 병기"
+    },
+    {
+      "no": 67,
+      "word": "doom",
+      "meaning": "(~할) 운명이다 (to); 운명, 비운, 파멸"
+    },
+    {
+      "no": 68,
+      "word": "appliance",
+      "meaning": "(가정용) 기구, 장치"
+    },
+    {
+      "no": 69,
+      "word": "crush",
+      "meaning": "으깨다, 밀어 넣다"
+    },
+    {
+      "no": 70,
+      "word": "furthermore",
+      "meaning": "게다가, 더욱이"
+    },
+    {
+      "no": 71,
+      "word": "strict",
+      "meaning": "엄한, 엄격한"
+    },
+    {
+      "no": 72,
+      "word": "enrich",
+      "meaning": "풍성하게 하다, 부유하게 하다"
+    },
+    {
+      "no": 73,
+      "word": "oral",
+      "meaning": "구두(口頭)의, 구술의"
+    },
+    {
+      "no": 74,
+      "word": "destiny",
+      "meaning": "운명"
+    },
+    {
+      "no": 75,
+      "word": "repair",
+      "meaning": "수선하다, (건강 등을) 회복하다; 수선, 회복"
+    },
+    {
+      "no": 76,
+      "word": "drift",
+      "meaning": "표류; 표류하다"
+    },
+    {
+      "no": 77,
+      "word": "endanger",
+      "meaning": "위험에 빠뜨리다"
+    },
+    {
+      "no": 78,
+      "word": "excess",
+      "meaning": "초과, 초과량, 과도함; 초과한, 여분의"
+    },
+    {
+      "no": 79,
+      "word": "combat",
+      "meaning": "싸우다; 전투"
+    },
+    {
+      "no": 80,
+      "word": "crop",
+      "meaning": "작물, 수확"
+    }
+  ]
+}

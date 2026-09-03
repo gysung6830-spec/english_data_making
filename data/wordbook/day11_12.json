@@ -1,0 +1,406 @@
+{
+  "title": "Day 11~12",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "whereas",
+      "meaning": "~인 반면에"
+    },
+    {
+      "no": 2,
+      "word": "treat",
+      "meaning": "여기다, 대우하다, 처리하다, 치료하다"
+    },
+    {
+      "no": 3,
+      "word": "demonstrate",
+      "meaning": "논증하다, 설명하다, 시위하다, 보여 주다"
+    },
+    {
+      "no": 4,
+      "word": "ignorant",
+      "meaning": "무식한, 모르는"
+    },
+    {
+      "no": 5,
+      "word": "broad",
+      "meaning": "넓은, 광범위한, (빛 등이) 가득한"
+    },
+    {
+      "no": 6,
+      "word": "departure",
+      "meaning": "출발"
+    },
+    {
+      "no": 7,
+      "word": "spare",
+      "meaning": "여분의, 검소한; 용서하다, 남겨주다"
+    },
+    {
+      "no": 8,
+      "word": "conserve",
+      "meaning": "보존하다"
+    },
+    {
+      "no": 9,
+      "word": "cancel",
+      "meaning": "취소하다"
+    },
+    {
+      "no": 10,
+      "word": "remote",
+      "meaning": "멀리 떨어진, 희박한, 드문"
+    },
+    {
+      "no": 11,
+      "word": "reproduce",
+      "meaning": "재생하다, 복제하다, 번식하다"
+    },
+    {
+      "no": 12,
+      "word": "visual",
+      "meaning": "시각의"
+    },
+    {
+      "no": 13,
+      "word": "institute",
+      "meaning": "연구소, 협회; 설립하다, 제정하다"
+    },
+    {
+      "no": 14,
+      "word": "legal",
+      "meaning": "법률의, 합법의"
+    },
+    {
+      "no": 15,
+      "word": "brilliant",
+      "meaning": "훌륭한, 명석한"
+    },
+    {
+      "no": 16,
+      "word": "distinct",
+      "meaning": "별개의, 뚜렷한"
+    },
+    {
+      "no": 17,
+      "word": "pure",
+      "meaning": "순수한"
+    },
+    {
+      "no": 18,
+      "word": "commit",
+      "meaning": "(죄를) 저지르다, 전념[충실]하다, 맡기다"
+    },
+    {
+      "no": 19,
+      "word": "faith",
+      "meaning": "신념, 믿음"
+    },
+    {
+      "no": 20,
+      "word": "marriage",
+      "meaning": "결혼, 혼인"
+    },
+    {
+      "no": 21,
+      "word": "transfer",
+      "meaning": "이동하다, 옮기다, 갈아타다"
+    },
+    {
+      "no": 22,
+      "word": "sensible",
+      "meaning": "분별 있는, 현명한"
+    },
+    {
+      "no": 23,
+      "word": "concept",
+      "meaning": "개념"
+    },
+    {
+      "no": 24,
+      "word": "accept",
+      "meaning": "받아들이다, (설명·학설 등을) 인정하다"
+    },
+    {
+      "no": 25,
+      "word": "annual",
+      "meaning": "연례의, 1년의, 1년간의"
+    },
+    {
+      "no": 26,
+      "word": "component",
+      "meaning": "구성 요소; 구성하는"
+    },
+    {
+      "no": 27,
+      "word": "precise",
+      "meaning": "정확한"
+    },
+    {
+      "no": 28,
+      "word": "trend",
+      "meaning": "추세, 경향"
+    },
+    {
+      "no": 29,
+      "word": "logic",
+      "meaning": "논리, 논리학"
+    },
+    {
+      "no": 30,
+      "word": "portion",
+      "meaning": "일부, 부분; 분할하다"
+    },
+    {
+      "no": 31,
+      "word": "aim",
+      "meaning": "겨냥하다; 조준"
+    },
+    {
+      "no": 32,
+      "word": "rescue",
+      "meaning": "구조하다; 구조"
+    },
+    {
+      "no": 33,
+      "word": "extinct",
+      "meaning": "멸종된, 꺼진"
+    },
+    {
+      "no": 34,
+      "word": "receive",
+      "meaning": "받다"
+    },
+    {
+      "no": 35,
+      "word": "infant",
+      "meaning": "유아; 유아의, 미발달의"
+    },
+    {
+      "no": 36,
+      "word": "charity",
+      "meaning": "자비, 자선 단체, 구호물자"
+    },
+    {
+      "no": 37,
+      "word": "leak",
+      "meaning": "새는 곳[구멍]; 새다, 누설하다"
+    },
+    {
+      "no": 38,
+      "word": "companion",
+      "meaning": "동료, 동반자"
+    },
+    {
+      "no": 39,
+      "word": "oppose",
+      "meaning": "반대하다"
+    },
+    {
+      "no": 40,
+      "word": "apparent",
+      "meaning": "분명한, 명백한"
+    },
+    {
+      "no": 41,
+      "word": "agriculture",
+      "meaning": "농업"
+    },
+    {
+      "no": 42,
+      "word": "depend",
+      "meaning": "의지하다"
+    },
+    {
+      "no": 43,
+      "word": "return",
+      "meaning": "돌아오다, 돌려주다; 귀환, 반납, 수익"
+    },
+    {
+      "no": 44,
+      "word": "compete",
+      "meaning": "경쟁하다"
+    },
+    {
+      "no": 45,
+      "word": "status",
+      "meaning": "상태, 지위, 현상"
+    },
+    {
+      "no": 46,
+      "word": "offend",
+      "meaning": "기분을 상하게 하다, (범죄를) 저지르다"
+    },
+    {
+      "no": 47,
+      "word": "tone",
+      "meaning": "어조, 말투, 음, 색조; 어떤 어조로 하다"
+    },
+    {
+      "no": 48,
+      "word": "lately",
+      "meaning": "최근에"
+    },
+    {
+      "no": 49,
+      "word": "expand",
+      "meaning": "확장하다"
+    },
+    {
+      "no": 50,
+      "word": "dense",
+      "meaning": "조밀한, 밀집한"
+    },
+    {
+      "no": 51,
+      "word": "sculpture",
+      "meaning": "조각; 조각하다"
+    },
+    {
+      "no": 52,
+      "word": "invitation",
+      "meaning": "초대, 초대장"
+    },
+    {
+      "no": 53,
+      "word": "refund",
+      "meaning": "반환, 환불; 환불하다"
+    },
+    {
+      "no": 54,
+      "word": "universal",
+      "meaning": "보편적인, 우주의"
+    },
+    {
+      "no": 55,
+      "word": "mature",
+      "meaning": "성숙한, 익은, 지불 만기의; 성숙해지다"
+    },
+    {
+      "no": 56,
+      "word": "poverty",
+      "meaning": "빈곤, 가난"
+    },
+    {
+      "no": 57,
+      "word": "desperate",
+      "meaning": "필사적인, 절망적인"
+    },
+    {
+      "no": 58,
+      "word": "destination",
+      "meaning": "목적지"
+    },
+    {
+      "no": 59,
+      "word": "descend",
+      "meaning": "내려오다, 물려주다"
+    },
+    {
+      "no": 60,
+      "word": "awake",
+      "meaning": "깨어 있는; 깨우다, 깨다"
+    },
+    {
+      "no": 61,
+      "word": "surface",
+      "meaning": "표면, 수면, 지면"
+    },
+    {
+      "no": 62,
+      "word": "current",
+      "meaning": "현재의; 해류, 흐름"
+    },
+    {
+      "no": 63,
+      "word": "military",
+      "meaning": "군대의; 군대"
+    },
+    {
+      "no": 64,
+      "word": "democracy",
+      "meaning": "민주주의, 민주주의 국가"
+    },
+    {
+      "no": 65,
+      "word": "evolution",
+      "meaning": "진화"
+    },
+    {
+      "no": 66,
+      "word": "ashamed",
+      "meaning": "부끄러워하는"
+    },
+    {
+      "no": 67,
+      "word": "isolate",
+      "meaning": "고립시키다"
+    },
+    {
+      "no": 68,
+      "word": "eager",
+      "meaning": "갈망하는"
+    },
+    {
+      "no": 69,
+      "word": "continue",
+      "meaning": "계속하다"
+    },
+    {
+      "no": 70,
+      "word": "trap",
+      "meaning": "함정; 덫을 놓다, 막다"
+    },
+    {
+      "no": 71,
+      "word": "formal",
+      "meaning": "공식적인, 정식의"
+    },
+    {
+      "no": 72,
+      "word": "gravity",
+      "meaning": "중력"
+    },
+    {
+      "no": 73,
+      "word": "sum",
+      "meaning": "총합, 합계; 합계하다"
+    },
+    {
+      "no": 74,
+      "word": "particle",
+      "meaning": "입자, 극소량"
+    },
+    {
+      "no": 75,
+      "word": "household",
+      "meaning": "가정; 가정[가족]의"
+    },
+    {
+      "no": 76,
+      "word": "hire",
+      "meaning": "고용하다"
+    },
+    {
+      "no": 77,
+      "word": "swing",
+      "meaning": "흔들(리)다, 진동하다; 그네"
+    },
+    {
+      "no": 78,
+      "word": "rite",
+      "meaning": "(종교적) 의식, 의례"
+    },
+    {
+      "no": 79,
+      "word": "calculate",
+      "meaning": "계산하다"
+    },
+    {
+      "no": 80,
+      "word": "genuine",
+      "meaning": "진짜의, 성실한"
+    }
+  ]
+}

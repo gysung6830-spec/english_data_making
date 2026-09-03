@@ -1,0 +1,406 @@
+{
+  "title": "Day 13~14",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "scarce",
+      "meaning": "부족한, 드문"
+    },
+    {
+      "no": 2,
+      "word": "generous",
+      "meaning": "관대한, 넉넉한"
+    },
+    {
+      "no": 3,
+      "word": "transform",
+      "meaning": "변형시키다, 변환하다"
+    },
+    {
+      "no": 4,
+      "word": "client",
+      "meaning": "고객, (변호사 등의) 의뢰인"
+    },
+    {
+      "no": 5,
+      "word": "measure",
+      "meaning": "측정하다; 측정, 수단"
+    },
+    {
+      "no": 6,
+      "word": "insight",
+      "meaning": "통찰, 통찰력"
+    },
+    {
+      "no": 7,
+      "word": "prior",
+      "meaning": "이전의, 우선하는"
+    },
+    {
+      "no": 8,
+      "word": "fuse",
+      "meaning": "퓨즈, 도화선; 융합하다"
+    },
+    {
+      "no": 9,
+      "word": "triumph",
+      "meaning": "승리; 승리하다"
+    },
+    {
+      "no": 10,
+      "word": "bless",
+      "meaning": "축복하다, 감사하다"
+    },
+    {
+      "no": 11,
+      "word": "utility",
+      "meaning": "유용(성), (수도·가스 등의) 공익사업"
+    },
+    {
+      "no": 12,
+      "word": "chief",
+      "meaning": "주요한, 우두머리의; 우두머리"
+    },
+    {
+      "no": 13,
+      "word": "mindset",
+      "meaning": "마음가짐, 사고방식"
+    },
+    {
+      "no": 14,
+      "word": "civil",
+      "meaning": "시민의, 민간의"
+    },
+    {
+      "no": 15,
+      "word": "tempt",
+      "meaning": "유혹하다, (관심을) 끌다"
+    },
+    {
+      "no": 16,
+      "word": "shortage",
+      "meaning": "부족, 결함"
+    },
+    {
+      "no": 17,
+      "word": "pupil",
+      "meaning": "학생, 눈동자"
+    },
+    {
+      "no": 18,
+      "word": "laundry",
+      "meaning": "세탁물"
+    },
+    {
+      "no": 19,
+      "word": "assign",
+      "meaning": "할당하다, 지정하다"
+    },
+    {
+      "no": 20,
+      "word": "evil",
+      "meaning": "사악한; 악"
+    },
+    {
+      "no": 21,
+      "word": "apply",
+      "meaning": "적용하다, 지원하다"
+    },
+    {
+      "no": 22,
+      "word": "worship",
+      "meaning": "예배하다, 숭배하다; 예배, 숭배"
+    },
+    {
+      "no": 23,
+      "word": "explain",
+      "meaning": "설명하다"
+    },
+    {
+      "no": 24,
+      "word": "cottage",
+      "meaning": "오두막집"
+    },
+    {
+      "no": 25,
+      "word": "royal",
+      "meaning": "왕족의, 왕의"
+    },
+    {
+      "no": 26,
+      "word": "digest",
+      "meaning": "소화하다, (완전히) 이해하다; 요약"
+    },
+    {
+      "no": 27,
+      "word": "install",
+      "meaning": "설치하다"
+    },
+    {
+      "no": 28,
+      "word": "vigor",
+      "meaning": "활력"
+    },
+    {
+      "no": 29,
+      "word": "lecture",
+      "meaning": "강의; 강의하다"
+    },
+    {
+      "no": 30,
+      "word": "grab",
+      "meaning": "움켜쥐다; 움켜쥠"
+    },
+    {
+      "no": 31,
+      "word": "ruin",
+      "meaning": "파멸, 파산; 망치다, 파멸[파산]시키다"
+    },
+    {
+      "no": 32,
+      "word": "bet",
+      "meaning": "돈을 걸다, 내기를 하다, ~이 틀림없다; 내기"
+    },
+    {
+      "no": 33,
+      "word": "insure",
+      "meaning": "보험을 계약하다, 안전하게 하다"
+    },
+    {
+      "no": 34,
+      "word": "thrive",
+      "meaning": "번영하다, 발전하다, 잘되다"
+    },
+    {
+      "no": 35,
+      "word": "prohibit",
+      "meaning": "금지하다"
+    },
+    {
+      "no": 36,
+      "word": "resort",
+      "meaning": "휴양지, 의지; 의지하다, 자주 가다"
+    },
+    {
+      "no": 37,
+      "word": "tolerate",
+      "meaning": "참다, 용인하다"
+    },
+    {
+      "no": 38,
+      "word": "propose",
+      "meaning": "제안하다, 청혼하다"
+    },
+    {
+      "no": 39,
+      "word": "document",
+      "meaning": "문서, 서류; 기록하다"
+    },
+    {
+      "no": 40,
+      "word": "prey",
+      "meaning": "먹이, 희생자"
+    },
+    {
+      "no": 41,
+      "word": "complicated",
+      "meaning": "복잡한"
+    },
+    {
+      "no": 42,
+      "word": "defeat",
+      "meaning": "패배시키다; 패배"
+    },
+    {
+      "no": 43,
+      "word": "spice",
+      "meaning": "향신료, 양념"
+    },
+    {
+      "no": 44,
+      "word": "stream",
+      "meaning": "흐름, 경향, 개울"
+    },
+    {
+      "no": 45,
+      "word": "imitate",
+      "meaning": "모방하다"
+    },
+    {
+      "no": 46,
+      "word": "yield",
+      "meaning": "생산하다, 양도하다, 굴복하다; 수확(물)"
+    },
+    {
+      "no": 47,
+      "word": "regulate",
+      "meaning": "규제하다, 조절하다"
+    },
+    {
+      "no": 48,
+      "word": "inspire",
+      "meaning": "영감을 주다, 고무시키다, 격려하다"
+    },
+    {
+      "no": 49,
+      "word": "achieve",
+      "meaning": "이루다, 달성하다"
+    },
+    {
+      "no": 50,
+      "word": "duty",
+      "meaning": "의무, 관세"
+    },
+    {
+      "no": 51,
+      "word": "wreck",
+      "meaning": "난파선, 사고; 난파시키다"
+    },
+    {
+      "no": 52,
+      "word": "organize",
+      "meaning": "조직하다, 구성하다, 정리하다"
+    },
+    {
+      "no": 53,
+      "word": "minor",
+      "meaning": "사소한, 소수의; 미성년자, 부전공; 부전공하다"
+    },
+    {
+      "no": 54,
+      "word": "abstract",
+      "meaning": "추상적인; 추상, 개요"
+    },
+    {
+      "no": 55,
+      "word": "illustrate",
+      "meaning": "설명하다, 예증하다, 삽화를 넣다"
+    },
+    {
+      "no": 56,
+      "word": "forbid",
+      "meaning": "금지하다"
+    },
+    {
+      "no": 57,
+      "word": "necessity",
+      "meaning": "필수, 필수품, 필요"
+    },
+    {
+      "no": 58,
+      "word": "prove",
+      "meaning": "입증하다, (~임이) 판명되다"
+    },
+    {
+      "no": 59,
+      "word": "fancy",
+      "meaning": "공상, (일시적인) 기호; 공상하다; 화려한"
+    },
+    {
+      "no": 60,
+      "word": "scholarship",
+      "meaning": "학문, 장학금"
+    },
+    {
+      "no": 61,
+      "word": "afterward",
+      "meaning": "나중에, 그 후에"
+    },
+    {
+      "no": 62,
+      "word": "dine",
+      "meaning": "만찬을 대접하다, 식사하다"
+    },
+    {
+      "no": 63,
+      "word": "decline",
+      "meaning": "감소, 쇠퇴; 감소하다, 쇠퇴하다, 거절하다"
+    },
+    {
+      "no": 64,
+      "word": "alien",
+      "meaning": "외국인, 외계인; 외국의, 이질적인"
+    },
+    {
+      "no": 65,
+      "word": "literally",
+      "meaning": "문자 그대로"
+    },
+    {
+      "no": 66,
+      "word": "correct",
+      "meaning": "올바른, 정확한; 바로잡다, 정정하다"
+    },
+    {
+      "no": 67,
+      "word": "laboratory",
+      "meaning": "실험실; 실험(실)의"
+    },
+    {
+      "no": 68,
+      "word": "appropriate",
+      "meaning": "적절한"
+    },
+    {
+      "no": 69,
+      "word": "fiction",
+      "meaning": "허구, 소설"
+    },
+    {
+      "no": 70,
+      "word": "aside",
+      "meaning": "한쪽으로, 제쳐 두고"
+    },
+    {
+      "no": 71,
+      "word": "intellect",
+      "meaning": "지성"
+    },
+    {
+      "no": 72,
+      "word": "ultimate",
+      "meaning": "궁극적인, 최후의"
+    },
+    {
+      "no": 73,
+      "word": "execute",
+      "meaning": "실행하다, 처형하다"
+    },
+    {
+      "no": 74,
+      "word": "option",
+      "meaning": "선택, 선택권"
+    },
+    {
+      "no": 75,
+      "word": "discipline",
+      "meaning": "훈련, 규율, 학과, 학문 분야"
+    },
+    {
+      "no": 76,
+      "word": "surgery",
+      "meaning": "외과 수술"
+    },
+    {
+      "no": 77,
+      "word": "suspect",
+      "meaning": "의심하다; 용의자"
+    },
+    {
+      "no": 78,
+      "word": "confirm",
+      "meaning": "입증[확인]하다, (결심을) 굳게 하다"
+    },
+    {
+      "no": 79,
+      "word": "pause",
+      "meaning": "중단; 중단하다, 잠시 멈추다"
+    },
+    {
+      "no": 80,
+      "word": "contemporary",
+      "meaning": "동시대의, 현대의"
+    }
+  ]
+}

@@ -1,0 +1,406 @@
+{
+  "title": "Day 5~6",
+  "source": "워드마스터 수능2000",
+  "words": [
+    {
+      "no": 1,
+      "word": "pose",
+      "meaning": "자세를 취하다, (문제를) 제기하다; 자세"
+    },
+    {
+      "no": 2,
+      "word": "purchase",
+      "meaning": "구매하다; 구매"
+    },
+    {
+      "no": 3,
+      "word": "engage",
+      "meaning": "관여하다, 약속하다, 약혼하다"
+    },
+    {
+      "no": 4,
+      "word": "obtain",
+      "meaning": "얻다, 획득하다"
+    },
+    {
+      "no": 5,
+      "word": "import",
+      "meaning": "수입하다, 의미하다; 수입"
+    },
+    {
+      "no": 6,
+      "word": "grain",
+      "meaning": "곡물, 낟알"
+    },
+    {
+      "no": 7,
+      "word": "tide",
+      "meaning": "조수(潮水), 흐름"
+    },
+    {
+      "no": 8,
+      "word": "salary",
+      "meaning": "급료, 봉급"
+    },
+    {
+      "no": 9,
+      "word": "alarm",
+      "meaning": "놀람, 경보"
+    },
+    {
+      "no": 10,
+      "word": "revolution",
+      "meaning": "혁명, 갑작스러운 변화, 회전"
+    },
+    {
+      "no": 11,
+      "word": "treatment",
+      "meaning": "취급, 대우, 치료(법)"
+    },
+    {
+      "no": 12,
+      "word": "resource",
+      "meaning": "자원, (-s) 지략"
+    },
+    {
+      "no": 13,
+      "word": "meaningful",
+      "meaning": "의미 있는, 의미심장한"
+    },
+    {
+      "no": 14,
+      "word": "personality",
+      "meaning": "개성, 성격, 특색"
+    },
+    {
+      "no": 15,
+      "word": "recall",
+      "meaning": "상기하다, 철회하다, 회수하다; 상기, 철회, 회수"
+    },
+    {
+      "no": 16,
+      "word": "labor",
+      "meaning": "노동, 산고; 노동하다"
+    },
+    {
+      "no": 17,
+      "word": "assume",
+      "meaning": "추정하다, (태도 등을) 취하다"
+    },
+    {
+      "no": 18,
+      "word": "interact",
+      "meaning": "상호 작용하다"
+    },
+    {
+      "no": 19,
+      "word": "claim",
+      "meaning": "주장하다; 요구, 주장"
+    },
+    {
+      "no": 20,
+      "word": "assist",
+      "meaning": "도움을 주다"
+    },
+    {
+      "no": 21,
+      "word": "confuse",
+      "meaning": "혼동하다, 혼란시키다"
+    },
+    {
+      "no": 22,
+      "word": "resident",
+      "meaning": "거주하는; 거주자, 레지던트(전문의 수련자)"
+    },
+    {
+      "no": 23,
+      "word": "disaster",
+      "meaning": "재앙, 재난, 재해"
+    },
+    {
+      "no": 24,
+      "word": "electronic",
+      "meaning": "전자의, 전자 공학의"
+    },
+    {
+      "no": 25,
+      "word": "psychology",
+      "meaning": "심리, 심리학"
+    },
+    {
+      "no": 26,
+      "word": "interrupt",
+      "meaning": "방해하다, 중단하다"
+    },
+    {
+      "no": 27,
+      "word": "react",
+      "meaning": "반응하다, 반작용하다"
+    },
+    {
+      "no": 28,
+      "word": "incredible",
+      "meaning": "믿을 수 없는, (믿기 어려울 만큼) 굉장한"
+    },
+    {
+      "no": 29,
+      "word": "motivate",
+      "meaning": "동기를 부여하다"
+    },
+    {
+      "no": 30,
+      "word": "deserve",
+      "meaning": "(보수·벌 등을) 받을 만하다[가치가 있다]"
+    },
+    {
+      "no": 31,
+      "word": "stock",
+      "meaning": "재고품, 저장, 가축; 저장하다, (물품을) 들여놓다"
+    },
+    {
+      "no": 32,
+      "word": "instruction",
+      "meaning": "지시, 제품 사용 설명서, 가르침"
+    },
+    {
+      "no": 33,
+      "word": "absorb",
+      "meaning": "흡수하다, (사람·마음을) 열중시키다"
+    },
+    {
+      "no": 34,
+      "word": "convince",
+      "meaning": "확신시키다, 납득시키다"
+    },
+    {
+      "no": 35,
+      "word": "establish",
+      "meaning": "설립하다, 확립하다, 제정하다"
+    },
+    {
+      "no": 36,
+      "word": "embarrassed",
+      "meaning": "당황한"
+    },
+    {
+      "no": 37,
+      "word": "advantage",
+      "meaning": "유리한 점, 이익"
+    },
+    {
+      "no": 38,
+      "word": "indicate",
+      "meaning": "가리키다, 나타내다"
+    },
+    {
+      "no": 39,
+      "word": "theory",
+      "meaning": "이론"
+    },
+    {
+      "no": 40,
+      "word": "conscience",
+      "meaning": "양심"
+    },
+    {
+      "no": 41,
+      "word": "violent",
+      "meaning": "난폭한, 폭력적인"
+    },
+    {
+      "no": 42,
+      "word": "donate",
+      "meaning": "기부하다"
+    },
+    {
+      "no": 43,
+      "word": "conclude",
+      "meaning": "결론짓다, 끝내다"
+    },
+    {
+      "no": 44,
+      "word": "passion",
+      "meaning": "열정"
+    },
+    {
+      "no": 45,
+      "word": "stranger",
+      "meaning": "낯선 사람, 문외한"
+    },
+    {
+      "no": 46,
+      "word": "depress",
+      "meaning": "우울하게 하다, 의기소침[낙담]하게 하다"
+    },
+    {
+      "no": 47,
+      "word": "consider",
+      "meaning": "숙고하다, 고려하다"
+    },
+    {
+      "no": 48,
+      "word": "skip",
+      "meaning": "거르다, 깡충깡충 뛰다"
+    },
+    {
+      "no": 49,
+      "word": "acquire",
+      "meaning": "습득하다"
+    },
+    {
+      "no": 50,
+      "word": "fascinate",
+      "meaning": "매료시키다, 마음을 빼앗다"
+    },
+    {
+      "no": 51,
+      "word": "length",
+      "meaning": "길이"
+    },
+    {
+      "no": 52,
+      "word": "heal",
+      "meaning": "치료하다, 낫게 하다"
+    },
+    {
+      "no": 53,
+      "word": "risk",
+      "meaning": "위험; 위험을 감수하다"
+    },
+    {
+      "no": 54,
+      "word": "feature",
+      "meaning": "특징, 특집 기사, 생김새; 특징으로 하다, 주연하다"
+    },
+    {
+      "no": 55,
+      "word": "creature",
+      "meaning": "생물, 피조물"
+    },
+    {
+      "no": 56,
+      "word": "clue",
+      "meaning": "실마리, 단서"
+    },
+    {
+      "no": 57,
+      "word": "struggle",
+      "meaning": "싸우다, 노력하다; 투쟁, 노력"
+    },
+    {
+      "no": 58,
+      "word": "independent",
+      "meaning": "독립적인"
+    },
+    {
+      "no": 59,
+      "word": "efficient",
+      "meaning": "효율적인, 유능한"
+    },
+    {
+      "no": 60,
+      "word": "brief",
+      "meaning": "간단한; 간단한 보고; 간단히 알리다"
+    },
+    {
+      "no": 61,
+      "word": "route",
+      "meaning": "길, 통로, 항로"
+    },
+    {
+      "no": 62,
+      "word": "variety",
+      "meaning": "다양, 다양성"
+    },
+    {
+      "no": 63,
+      "word": "remark",
+      "meaning": "의견을 말하다, ~에 주목하다; 의견, 주목"
+    },
+    {
+      "no": 64,
+      "word": "decade",
+      "meaning": "10년, 10년간"
+    },
+    {
+      "no": 65,
+      "word": "occupy",
+      "meaning": "(시간·장소를) 차지하다, 전념하다"
+    },
+    {
+      "no": 66,
+      "word": "terrific",
+      "meaning": "굉장한, 훌륭한"
+    },
+    {
+      "no": 67,
+      "word": "attempt",
+      "meaning": "시도하다; 시도"
+    },
+    {
+      "no": 68,
+      "word": "reasonable",
+      "meaning": "논리적인, 분별력이 있는"
+    },
+    {
+      "no": 69,
+      "word": "observe",
+      "meaning": "관찰하다, 보다, 준수하다"
+    },
+    {
+      "no": 70,
+      "word": "limit",
+      "meaning": "제한하다, 한정하다; 제한(점)"
+    },
+    {
+      "no": 71,
+      "word": "severe",
+      "meaning": "심한, 엄격한"
+    },
+    {
+      "no": 72,
+      "word": "poetry",
+      "meaning": "시, 운문"
+    },
+    {
+      "no": 73,
+      "word": "criticize",
+      "meaning": "비난하다, 비평하다"
+    },
+    {
+      "no": 74,
+      "word": "enable",
+      "meaning": "가능하게 하다"
+    },
+    {
+      "no": 75,
+      "word": "specific",
+      "meaning": "구체적인, 특정한"
+    },
+    {
+      "no": 76,
+      "word": "edge",
+      "meaning": "가장자리, 날카로움, 우위"
+    },
+    {
+      "no": 77,
+      "word": "probable",
+      "meaning": "가능한, 개연성이 있는, 그럴싸한"
+    },
+    {
+      "no": 78,
+      "word": "moral",
+      "meaning": "도덕적인"
+    },
+    {
+      "no": 79,
+      "word": "analyze",
+      "meaning": "분석하다"
+    },
+    {
+      "no": 80,
+      "word": "qualify",
+      "meaning": "자격을 얻다"
+    }
+  ]
+}
