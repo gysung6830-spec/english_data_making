@@ -1,0 +1,647 @@
+{
+ "item_no": "33",
+ "theme": "움직이는 몸에 묶은 묘사 — Balzac의 서술 기법",
+ "overview": {
+  "theme_ko": "움직이는 몸에 묶은 묘사: Balzac의 서술 기법",
+  "topic": "🔎 장소를 묘사하되 독자를 잃지 않게 하는 Balzac의 서술 전략",
+  "stance": "긍정적",
+  "stance_reason": "묘사가 the descriptions never threaten the reader's sense of orientation 한다고 평가함",
+  "structure": "문제→해결(방안)",
+  "structure_reason": "독자를 묘사의 숲에서 잃는 문제를 제기하고 Balzac의 해결책을 제시해 그 효과를 설명함",
+  "key_grammar": {
+   "point": "분사구문",
+   "source_sentence": "When the novel describes a house, the narrator inspects the building in a systematic manner, approaching it from the street, examining the garden and the front, entering through the main door, and walking from room to room, as would a real estate agent or a prospective resident.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "접속사와 주어를 없애고 동사를 -ing로 바꿔 '~하면서'라는 부가 상황을 주절에 덧붙이는 것이 분사구문이다."
+    },
+    {
+     "chip": "핵심",
+     "text": "approaching, examining, entering, walking 네 개가 모두 the narrator를 의미상 주어로 공유하는 연속 분사구문이다."
+    },
+    {
+     "chip": "형태",
+     "text": "부대상황(동시동작)을 나타내며 주절 the narrator inspects...에 콤마로 이어진다."
+    },
+    {
+     "chip": "주의",
+     "text": "분사의 의미상 주어가 주절 주어와 같을 때에만 주어를 생략할 수 있다."
+    },
+    {
+     "chip": "비교",
+     "text": "문장 끝 as would a real estate agent는 as절에서 조동사-주어가 도치된 것으로 분사구문과는 별개다."
+    }
+   ],
+   "example_analysis": "접속사와 주어(as the narrator)가 생략되고 동사가 approaching/examining/entering/walking의 현재분사로 바뀐 연속 분사구문이다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "When the novel [[1|describes]] a house, the narrator [[2|inspects]] the building in a systematic manner, [[3|approaching]] it from the street, examining the garden and the front, [[4|enter]] through the main door, and walking from room to room, as [[5|would]] a real estate agent or a prospective resident.",
+     "options": [
+      "① describes",
+      "② inspects",
+      "③ approaching",
+      "④ enter",
+      "⑤ would"
+     ],
+     "answer": "④",
+     "fix": "앞의 approaching, examining, walking과 병렬을 이루는 분사구문이므로 enter가 아니라 원문 entering이 맞다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "Balzac's novels open with [[detailed/detailing]] portrayals of the setting, but the descriptions never [[threaten/threatens]] the reader's sense of orientation because they trace a precise path through the fictional world.",
+     "options": [],
+     "answer": "detailed / threaten",
+     "fix": "portrayals는 '상세히 그려진' 대상이므로 과거분사 detailed, 주어 the descriptions가 복수이므로 threaten이 맞다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "options": [
+      "① How can a literary work capture the feel of a place in both its atmosphere and its topography without losing the reader in a descriptive forest?",
+      "② One solution, proposed by Balzac, is to tie description to a moving body.",
+      "③ While a picture transports the spectator almost instantly into a landscape, language can only describe it detail by detail, brought it slowly into the reader's mind.",
+      "④ Balzac's novels open with detailed portrayals of the setting, but the descriptions never threaten the reader's sense of orientation because they trace a precise path through the fictional world.",
+      "⑤ The reader ends up with a precise notion of the layout of the building, all the way down to the floor plan."
+     ],
+     "answer": "③ While a picture transports the spectator almost instantly into a landscape, language can only describe it detail by detail, brought it slowly into the reader's mind.",
+     "fix": "주절에 부대상황을 더하는 분사구문이므로 과거분사 brought가 아니라 원문 현재분사 bringing이 맞다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "창밖을 바라보며, 그녀는 다가오는 폭풍을 지켜보았다.",
+     "sentence": "",
+     "answer": "Looking out the window, she watched the approaching storm.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Looking",
+      "out",
+      "the",
+      "window,",
+      "she",
+      "watched",
+      "the",
+      "approaching",
+      "storm."
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "Balzac이 제안한 한 가지 해결책은 묘사를 움직이는 몸에 묶는 것이다.",
+     "sentence": "",
+     "answer": "One solution, proposed by Balzac, is to tie description to a moving body.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "One",
+      "solution,",
+      "proposed",
+      "by",
+      "Balzac,",
+      "is",
+      "to",
+      "tie",
+      "description",
+      "to",
+      "a",
+      "moving",
+      "body."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "움직이는 몸에 묶은 묘사",
+    "expressions": [
+     "to tie description to a moving body",
+     "trace a precise path through the fictional world"
+    ],
+    "variation": "묘사를 이동 경로에 실어 독자의 방향 감각을 유지시킴"
+   },
+   {
+    "label": "체계적 관찰 경로",
+    "expressions": [
+     "inspects the building in a systematic manner",
+     "approaching it from the street"
+    ],
+    "variation": "부동산 중개인처럼 순서대로 훑는 시선"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입(대조)",
+    "sentence_range": "1",
+    "summary": "[[그림]]은 즉각적, [[언어]]는 세부적·점진적",
+    "easy_example": "사진 한 장은 순간이지만 글은 한 줄씩 읽어야 장면이 그려진다."
+   },
+   {
+    "stage": "문제제기",
+    "sentence_range": "2",
+    "summary": "묘사의 숲에서 독자를 잃지 않고 장소감을 담는 법",
+    "easy_example": "설명이 너무 많으면 길을 잃는 미로 같은 안내문."
+   },
+   {
+    "stage": "해결책",
+    "sentence_range": "3",
+    "summary": "Balzac의 답: 묘사를 [[움직이는 몸]]에 묶기",
+    "easy_example": "카메라를 든 사람이 걸으며 찍는 영상."
+   },
+   {
+    "stage": "전개(원리)",
+    "sentence_range": "4",
+    "summary": "정확한 경로 추적 덕에 [[방향 감각]] 유지",
+    "easy_example": "내비게이션이 경로대로 안내하면 헷갈리지 않는다."
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "5",
+    "summary": "집 묘사: 거리→정원→정문→방, 중개인처럼",
+    "easy_example": "부동산 중개인이 순서대로 집을 보여주는 동선."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "6",
+    "summary": "독자는 [[평면도]]까지 정확히 파악",
+    "easy_example": "다 읽고 나면 집 구조도가 머릿속에 그려진다."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "While a picture transports the spectator almost instantly into a landscape, language can only describe it detail by detail, bringing it slowly into the reader's mind.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사 while(대조)",
+     "note": "주절과 대조되는 상황을 이끄는 접속사",
+     "spans": [
+      "While"
+     ]
+    },
+    {
+     "tag": "조동사 can(가능)",
+     "note": "'~할 수 있을 뿐'을 나타내며 only와 결합",
+     "spans": [
+      "can"
+     ]
+    },
+    {
+     "tag": "분사구문(부대상황)",
+     "note": "language를 의미상 주어로 하는 동시동작 현재분사구문",
+     "spans": [
+      "bringing"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "transport",
+     "meaning": "실어 나르다, 이동시키다"
+    },
+    {
+     "word": "spectator",
+     "meaning": "관객, 구경꾼"
+    },
+    {
+     "word": "instantly",
+     "meaning": "즉각적으로"
+    },
+    {
+     "word": "landscape",
+     "meaning": "풍경, 경치"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "While a picture transports the spectator",
+     "ko": "한 폭의 그림이 관객을 [[실어 나르는]] 동안"
+    },
+    {
+     "en": "almost instantly into a landscape,",
+     "ko": "거의 즉각적으로 [[풍경]] 속으로,"
+    },
+    {
+     "en": "language can only describe it detail by detail,",
+     "ko": "언어는 그것을 오직 하나하나 [[묘사할]] 수 있을 뿐,"
+    },
+    {
+     "en": "[[bringing it slowly into the reader's mind.]]",
+     "ko": "[[그것을 서서히 독자의 마음속으로 데려가면서.]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "그림은 관객을 거의 즉각적으로 풍경 속으로 옮기지만, 언어는 그것을 서서히 전달한다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    },
+    {
+     "statement": "Language captures a place as instantly as a picture does.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "language can only describe it detail by detail",
+     "why": "언어는 그림처럼 즉각적이지 않고 하나하나 세세히 서술한다고 했음.",
+     "english": true
+    }
+   ],
+   "mistips": [
+    "bringing의 의미상 주어는 the picture가 아니라 앞 절의 language이다."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "How can a literary work capture the feel of a place in both its atmosphere and its topography without losing the reader in a descriptive forest?",
+   "grammar": [
+    {
+     "tag": "의문사 의문문(How+조동사 도치)",
+     "note": "방법을 묻는 how 뒤에서 can이 주어 앞으로 도치",
+     "spans": [
+      "How"
+     ]
+    },
+    {
+     "tag": "상관접속사 both A and B",
+     "note": "'A와 B 둘 다'를 연결",
+     "spans": [
+      "both",
+      "and"
+     ]
+    },
+    {
+     "tag": "전치사+동명사",
+     "note": "전치사 without의 목적어로 쓰인 동명사",
+     "spans": [
+      "losing"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "literary",
+     "meaning": "문학의"
+    },
+    {
+     "word": "capture",
+     "meaning": "포착하다, 담아내다"
+    },
+    {
+     "word": "atmosphere",
+     "meaning": "분위기"
+    },
+    {
+     "word": "topography",
+     "meaning": "지형"
+    },
+    {
+     "word": "descriptive",
+     "meaning": "묘사적인, 서술적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "How can a literary work capture the feel",
+     "ko": "어떻게 문학 작품이 그 느낌을 [[포착할]] 수 있을까"
+    },
+    {
+     "en": "of a place in both its atmosphere and its topography",
+     "ko": "어떤 장소의 분위기와 [[지형]] 둘 다에서"
+    },
+    {
+     "en": "[[without losing the reader in a descriptive forest?]]",
+     "ko": "[[독자를 묘사의 숲 속에서 잃지 않으면서?]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "문학 작품은 장소의 분위기와 지형 중 어느 한쪽만 포착하면 된다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "in both its atmosphere and its topography",
+     "why": "분위기와 지형 둘 다를 담아야 한다고 했으므로 한쪽만은 틀림."
+    },
+    {
+     "statement": "필자에 따르면 its가 가리키는 것은 문학 작품(a literary work)이다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "both its atmosphere and its topography",
+     "why": "its는 앞의 a place(장소)를 가리키며 문학 작품이 아니다.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "without losing ~는 '~을 잃지 않고서'라는 조건·양상으로 capture를 수식한다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "One solution, proposed by Balzac, is to tie description to a moving body.",
+   "grammar": [
+    {
+     "tag": "과거분사(후치 수식)",
+     "note": "명사 solution을 수식하며 '제안된'이라는 수동 의미",
+     "spans": [
+      "proposed"
+     ]
+    },
+    {
+     "tag": "to부정사 명사적 용법(보어)",
+     "note": "be동사의 주격보어로 쓰인 to부정사",
+     "spans": [
+      "to tie"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "solution",
+     "meaning": "해결책"
+    },
+    {
+     "word": "propose",
+     "meaning": "제안하다"
+    },
+    {
+     "word": "tie A to B",
+     "meaning": "A를 B에 묶다·연결하다"
+    },
+    {
+     "word": "description",
+     "meaning": "묘사, 서술"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "One solution, proposed by Balzac, is",
+     "ko": "Balzac이 [[제안한]] 한 가지 해결책은"
+    },
+    {
+     "en": "to tie description to a moving body.",
+     "ko": "묘사를 움직이는 몸에 [[묶는]] 것이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Balzac이 제시한 해결책은 묘사를 움직이는 몸에 연결하는 것이다.",
+     "verdict": "O",
+     "trap_type": "지칭"
+    },
+    {
+     "statement": "묘사가 독자를 혼란시키지 않는 것은 Balzac이 묘사를 정적인 사물에 묶기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "to tie description to a moving body",
+     "why": "혼란을 막는 비결은 정적 사물이 아니라 '움직이는 몸'에 묶는 것임."
+    }
+   ],
+   "mistips": [
+    "proposed by Balzac는 삽입된 과거분사구로 주어 One solution을 뒤에서 꾸민다."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "Balzac's novels open with detailed portrayals of the setting, but the descriptions never threaten the reader's sense of orientation because they trace a precise path through the fictional world.",
+   "grammar": [
+    {
+     "tag": "등위접속사 but",
+     "note": "앞뒤 절을 대조로 연결",
+     "spans": [
+      "but"
+     ]
+    },
+    {
+     "tag": "부정부사 never",
+     "note": "'결코 ~하지 않다'로 동사를 부정",
+     "spans": [
+      "never"
+     ]
+    },
+    {
+     "tag": "부사절 접속사 because(이유)",
+     "note": "묘사가 방향 감각을 해치지 않는 이유를 제시",
+     "spans": [
+      "because"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "portrayal",
+     "meaning": "묘사"
+    },
+    {
+     "word": "orientation",
+     "meaning": "방향 감각"
+    },
+    {
+     "word": "trace",
+     "meaning": "따라가다, 추적하다"
+    },
+    {
+     "word": "precise",
+     "meaning": "정확한"
+    },
+    {
+     "word": "fictional",
+     "meaning": "허구의"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Balzac's novels open with detailed portrayals of the setting,",
+     "ko": "Balzac의 소설들은 배경에 대한 상세한 [[묘사]]로 시작하지만,"
+    },
+    {
+     "en": "but the descriptions never threaten the reader's sense of orientation",
+     "ko": "하지만 묘사는 독자의 방향 감각을 결코 [[위협하지]] 않는데"
+    },
+    {
+     "en": "[[because they trace a precise path through the fictional world.]]",
+     "ko": "[[그것들이 허구 세계를 관통하는 정확한 경로를 따라가기 때문이다.]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Balzac 소설의 상세한 묘사는 오히려 독자의 방향 감각을 위협한다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "the descriptions never threaten the reader's sense of orientation",
+     "why": "묘사는 결코 방향 감각을 위협하지 않는다고 필자가 밝힘.",
+     "killer": true
+    },
+    {
+     "statement": "묘사가 방향 감각을 해치지 않는 것은 그것이 허구 세계를 관통하는 정확한 경로를 따라가기 때문이다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    }
+   ],
+   "mistips": [
+    "they와 the descriptions가 동일 대상이며, trace의 주어는 the descriptions이다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "When the novel describes a house, the narrator inspects the building in a systematic manner, approaching it from the street, examining the garden and the front, entering through the main door, and walking from room to room, as would a real estate agent or a prospective resident.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사 when(시간)",
+     "note": "'~할 때'로 주절의 상황을 한정",
+     "spans": [
+      "When"
+     ]
+    },
+    {
+     "tag": "분사구문(연속동작)",
+     "note": "the narrator를 의미상 주어로 하는 네 개의 병렬 현재분사구문",
+     "spans": [
+      "approaching",
+      "examining",
+      "entering",
+      "walking"
+     ]
+    },
+    {
+     "tag": "as절 도치",
+     "note": "유사관계 as 뒤에서 조동사 would가 주어 앞으로 도치",
+     "spans": [
+      "as would"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "narrator",
+     "meaning": "화자, 서술자"
+    },
+    {
+     "word": "inspect",
+     "meaning": "살펴보다, 점검하다"
+    },
+    {
+     "word": "systematic",
+     "meaning": "체계적인"
+    },
+    {
+     "word": "prospective",
+     "meaning": "잠재적인, 장차 ~가 될"
+    },
+    {
+     "word": "resident",
+     "meaning": "거주자"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When the novel describes a house,",
+     "ko": "소설이 어떤 [[집]]을 묘사할 때,"
+    },
+    {
+     "en": "the narrator inspects the building in a systematic manner,",
+     "ko": "화자는 그 건물을 [[체계적인]] 방식으로 살펴본다,"
+    },
+    {
+     "en": "[[approaching it from the street, examining the garden and the front,]]",
+     "ko": "[[거리에서 그것에 접근하고, 정원과 앞면을 살피고,]]"
+    },
+    {
+     "en": "[[entering through the main door, and walking from room to room,]]",
+     "ko": "[[정문을 통해 들어가고, 이 방 저 방을 걸어 다니면서,]]"
+    },
+    {
+     "en": "as would a real estate agent or a prospective resident.",
+     "ko": "마치 부동산 중개인이나 잠재적 [[거주자]]가 그러하듯이."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 소설의 화자는 실제로 부동산 중개업에 종사한 경험이 있다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "as would a real estate agent or a prospective resident",
+     "why": "부동산 중개인은 관찰 방식의 비유일 뿐 화자의 실제 직업 정보는 없음."
+    },
+    {
+     "statement": "화자는 건물을 거리에서 접근해 정원과 앞면을 살핀 뒤 정문으로 들어간다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": [
+    "approaching·examining·entering·walking은 모두 the narrator를 의미상 주어로 하는 분사구문이다."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "The reader ends up with a precise notion of the layout of the building, all the way down to the floor plan.",
+   "grammar": [
+    {
+     "tag": "end up with(구동사)",
+     "note": "'결국 ~을 갖게 되다'",
+     "spans": [
+      "ends up with"
+     ]
+    },
+    {
+     "tag": "all the way down to(관용구)",
+     "note": "'~에 이르기까지 죽·낱낱이'",
+     "spans": [
+      "all the way down to"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "notion",
+     "meaning": "개념, 생각"
+    },
+    {
+     "word": "layout",
+     "meaning": "배치, 배열"
+    },
+    {
+     "word": "floor plan",
+     "meaning": "평면도"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The reader ends up with a precise notion",
+     "ko": "독자는 결국 [[정확한]] 개념을 갖게 된다"
+    },
+    {
+     "en": "of the layout of the building,",
+     "ko": "그 건물의 [[배치]]에 대한,"
+    },
+    {
+     "en": "all the way down to the floor plan.",
+     "ko": "심지어 [[평면도]]에 이르기까지 낱낱이."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "독자는 결국 건물의 배치에 대한 정확한 개념을 평면도에 이르기까지 갖게 된다.",
+     "verdict": "O",
+     "trap_type": "구조수식"
+    }
+   ],
+   "mistips": [
+    "all the way down to the floor plan은 notion의 정밀함을 강조하는 부가 어구이다."
+   ]
+  }
+ ]
+}

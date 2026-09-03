@@ -1,0 +1,1715 @@
+{
+ "item_no": "43-45",
+ "theme": "Tim과 강아지 Mickey — 산책이 준 우정",
+ "overview": {
+  "theme_ko": "산책이 이어준 우정과 깨달음",
+  "topic": "🔎 개 산책을 계기로 우정과 보람을 얻게 된 Tim의 이야기",
+  "stance": "중립적",
+  "stance_reason": "인물의 경험을 시간 순서로 서술하는 이야기글",
+  "structure": "시간·순서(나열)",
+  "structure_reason": "입양→훈련·조언→매일 산책→공원에서의 만남→깨달음으로 시간 흐름을 따라 전개",
+  "key_grammar": {
+   "point": "과거완료 시제 (had p.p. — 대과거)",
+   "source_sentence": "Tim thought that taking care of a dog was much harder than he had expected.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "과거의 어느 시점(thought·was)보다 '더 이전'에 일어난 일을 나타낼 때 had p.p.를 쓴다."
+    },
+    {
+     "chip": "왜 과거완료?",
+     "text": "예상한 것(expected)은 힘들다고 '생각한' 과거 시점보다 앞서므로 had expected로 대과거를 표시한다."
+    },
+    {
+     "chip": "짝 비교",
+     "text": "than he had expected는 '그가 (전에) 예상했던 것보다'로, 현재완료 has expected를 쓰면 시제 일치가 깨진다."
+    },
+    {
+     "chip": "지문의 다른 예",
+     "text": "the park Jack had recommended도 도착한 과거보다 먼저 추천한 일이라 had recommended를 썼다."
+    },
+    {
+     "chip": "비교급과 함께",
+     "text": "much harder than ... had expected처럼 비교급 뒤 than절에서 대과거가 자주 나온다."
+    }
+   ],
+   "example_analysis": "주절 thought/was(과거)보다 앞선 '예상' 시점을 나타내기 위해 than절에서 had expected(과거완료)를 사용했다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "Tim thought [[1|that]] [[2|taking]] care of a dog [[3|was]] much [[4|harder]] than he [[5|has expected]].",
+     "answer": "⑤",
+     "fix": "주절 thought가 과거이고 '예상'은 그보다 앞선 일이므로 대과거인 had expected가 맞다. has expected(현재완료)는 시제가 맞지 않는다.",
+     "options": [
+      "① that",
+      "② taking",
+      "③ was",
+      "④ harder",
+      "⑤ has expected"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "When Tim and Mickey [[arrived/arriving]] at the park Jack [[had recommended/have recommended]], dozens of dogs were already [[jumping and playing/jump and play]].",
+     "answer": "arrived / had recommended / jumping and playing",
+     "fix": "",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "answer": "Over the next few weeks, the boys and their dogs become great friends.",
+     "fix": "become을 became로 고쳐야 한다. 이야기 전체가 과거 시제로 서술되므로 과거형 became가 맞다.",
+     "options": [
+      "Tim adopted a dog a few months ago.",
+      "At the training center, he met an instructor named Jack.",
+      "Mickey looked nervous in the unfamiliar surroundings.",
+      "Over the next few weeks, the boys and their dogs become great friends.",
+      "Gathering his courage, Tim walked over to him."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그녀는 그 시험이 자신이 예상했던 것보다 훨씬 더 쉬웠다고 말했다.",
+     "sentence": "",
+     "answer": "She said that the exam was much easier than she had expected.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "She",
+      "said",
+      "that",
+      "the exam",
+      "was",
+      "much",
+      "easier",
+      "than",
+      "she",
+      "had",
+      "expected"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "Tim과 Mickey가 Jack이 추천했던 공원에 도착했을 때, 수십 마리의 개들이 이미 뛰어놀고 있었다.",
+     "sentence": "",
+     "answer": "When Tim and Mickey arrived at the park Jack had recommended, dozens of dogs were already jumping and playing.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "When",
+      "Tim and Mickey",
+      "arrived",
+      "at the park",
+      "Jack",
+      "had recommended",
+      "dozens of",
+      "dogs",
+      "were",
+      "already",
+      "jumping and playing"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "부담에서 보람으로",
+    "expressions": [
+     "seemed like a burden",
+     "can be great for me"
+    ],
+    "variation": "귀찮은 의무처럼 느껴지던 일이 결국 자신에게도 좋은 일로 바뀜"
+   },
+   {
+    "label": "매일 산책의 실천",
+    "expressions": [
+     "walk your dog daily",
+     "for a walk every day"
+    ],
+    "variation": "Jack의 조언을 그대로 실행에 옮기는 Tim"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입",
+    "sentence_range": "1~6",
+    "summary": "[[Tim]]이 개 Mickey를 입양했으나 돌봄이 예상보다 힘들어 [[훈련 과정]]에 등록하고 강사 Jack을 만남",
+    "easy_example": "새 반려동물을 처음 키우면 서툴러서 전문가의 도움을 찾게 된다"
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "7~9",
+    "summary": "Jack이 [[매일 산책]]을 강조하고 Tim은 따르지만 곧 부담과 피로를 느낌",
+    "easy_example": "매일 해야 하는 숙제가 처음엔 무겁게 느껴지는 것과 같다"
+   },
+   {
+    "stage": "전환",
+    "sentence_range": "10~15",
+    "summary": "Jack의 전화로 같은 길이 지루하다는 고민을 나누고 [[Happy Dog Park]]를 제안받음",
+    "easy_example": "매일 같은 길로 걷다 보면 새로운 장소가 반가운 법이다"
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "16~24",
+    "summary": "공원에서 개들이 어울리고 Tim이 또래 [[Daniel]]과 친해져 함께 산책하기로 함",
+    "easy_example": "취미가 같은 사람과는 금방 친구가 되기 쉽다"
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "25~27",
+    "summary": "몇 주 뒤 모두 좋은 친구가 되고 Tim은 개를 위한 일이 [[자신에게도 좋음]]을 깨달음",
+    "easy_example": "남을 위한 노력이 결국 나에게 기쁨으로 돌아온다"
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Tim adopted a dog a few months ago.",
+   "grammar": [
+    {
+     "tag": "과거시제",
+     "note": "이야기의 시작 사건을 과거형으로 서술",
+     "spans": [
+      "adopted"
+     ]
+    },
+    {
+     "tag": "수량표현",
+     "note": "a few + 복수명사: '약간의, 몇'",
+     "spans": [
+      "a few"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "adopt",
+     "meaning": "입양하다, 들이다"
+    },
+    {
+     "word": "a few",
+     "meaning": "약간의, 몇몇의"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Tim adopted a dog",
+     "ko": "Tim은 개를 [[입양했다]]"
+    },
+    {
+     "en": "a few months ago.",
+     "ko": "[[몇 달]] 전에"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Tim이 개를 들인 것은 몇 달 전의 일이다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "When he met his dog for the first time, he named him after his favorite character, Mickey.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사(때)",
+     "note": "When: '~할 때'를 이끄는 시간 부사절",
+     "spans": [
+      "When"
+     ]
+    },
+    {
+     "tag": "숙어 for the first time",
+     "note": "'처음으로'라는 뜻의 부사구",
+     "spans": [
+      "for the first time"
+     ]
+    },
+    {
+     "tag": "숙어 name A after B",
+     "note": "'B를 따서 A의 이름을 짓다'",
+     "spans": [
+      "named",
+      "after"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "for the first time",
+     "meaning": "처음으로"
+    },
+    {
+     "word": "name A after B",
+     "meaning": "B를 따서 A의 이름을 짓다"
+    },
+    {
+     "word": "favorite",
+     "meaning": "가장 좋아하는"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When he met his dog",
+     "ko": "그가 자기 개를 [[만났을]] 때"
+    },
+    {
+     "en": "for the first time,",
+     "ko": "[[처음]]으로"
+    },
+    {
+     "en": "he named him",
+     "ko": "그는 그에게 [[이름을 지어 주었다]]"
+    },
+    {
+     "en": "after his favorite character, Mickey.",
+     "ko": "그가 [[가장 좋아하는]] 캐릭터인 Mickey를 따서"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "his favorite character에서 his는 개(Mickey)를 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "he named him after his favorite character, Mickey",
+     "why": "his는 이름을 지어 준 Tim을 가리키며, Mickey는 그 개에게 붙여 준 이름이다."
+    }
+   ],
+   "mistips": [
+    "named him after ~는 '~을 따서 그에게 이름을 지었다'로, him(개)과 이름(Mickey)을 구분해 읽어야 한다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "Mickey was a healthy dog, but he soon seemed to lack energy.",
+   "grammar": [
+    {
+     "tag": "등위접속사 but",
+     "note": "대조되는 두 절을 연결",
+     "spans": [
+      "but"
+     ]
+    },
+    {
+     "tag": "seem to+동사원형",
+     "note": "'~인 것처럼 보이다'",
+     "spans": [
+      "to lack"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "healthy",
+     "meaning": "건강한"
+    },
+    {
+     "word": "seem to",
+     "meaning": "~인 것처럼 보이다"
+    },
+    {
+     "word": "lack",
+     "meaning": "부족하다, 결여하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Mickey was a healthy dog,",
+     "ko": "Mickey는 [[건강한]] 개였다"
+    },
+    {
+     "en": "but he soon seemed to lack energy.",
+     "ko": "하지만 그는 곧 [[기운]]이 없어 보였다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Mickey는 원래 병약한 개여서 곧 기운이 없어 보였다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "Mickey was a healthy dog",
+     "why": "Mickey는 원래 건강한 개였는데 곧 기운이 없어 보이게 된 것이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "Tim thought that taking care of a dog was much harder than he had expected.",
+   "grammar": [
+    {
+     "tag": "명사절 접속사 that",
+     "note": "thought의 목적어절을 이끎",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "동명사 주어",
+     "note": "taking care of a dog가 that절의 주어",
+     "spans": [
+      "taking"
+     ]
+    },
+    {
+     "tag": "비교급 강조 much",
+     "note": "비교급 harder를 강조: '훨씬'",
+     "spans": [
+      "much"
+     ]
+    },
+    {
+     "tag": "비교급 than",
+     "note": "harder than: '~보다 더 힘든'",
+     "spans": [
+      "harder",
+      "than"
+     ]
+    },
+    {
+     "tag": "과거완료(대과거)",
+     "note": "생각한 과거보다 앞선 '예상' 시점",
+     "spans": [
+      "had expected"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "take care of",
+     "meaning": "~을 돌보다"
+    },
+    {
+     "word": "much harder",
+     "meaning": "훨씬 더 힘든"
+    },
+    {
+     "word": "expect",
+     "meaning": "예상하다, 기대하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Tim thought",
+     "ko": "Tim은 [[생각했다]]"
+    },
+    {
+     "en": "that taking care of a dog",
+     "ko": "개를 [[돌보는]] 것이"
+    },
+    {
+     "en": "was much harder",
+     "ko": "훨씬 더 [[힘들다는]] 것을"
+    },
+    {
+     "en": "than he had expected.",
+     "ko": "그가 [[예상했던]] 것보다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Tim은 개를 돌보는 일이 자신이 예상했던 것보다 훨씬 더 힘들다고 느꼈다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    }
+   ],
+   "mistips": [
+    "than he had expected는 '그가 (그 전에) 예상했던 것보다'로, 대과거가 비교의 기준 시점임을 유의한다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "So, he decided to sign up for a dog training course.",
+   "grammar": [
+    {
+     "tag": "to부정사(명사적)",
+     "note": "decided의 목적어 역할",
+     "spans": [
+      "to sign"
+     ]
+    },
+    {
+     "tag": "구동사 sign up for",
+     "note": "'~에 등록·신청하다'",
+     "spans": [
+      "sign up for"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "decide to",
+     "meaning": "~하기로 결심하다"
+    },
+    {
+     "word": "sign up for",
+     "meaning": "~에 등록하다, 신청하다"
+    },
+    {
+     "word": "training course",
+     "meaning": "훈련 과정"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "So, he decided",
+     "ko": "그래서 그는 [[결심했다]]"
+    },
+    {
+     "en": "to sign up for a dog training course.",
+     "ko": "개 [[훈련]] 과정에 등록하기로"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Tim은 돌보기가 힘들자 개를 돌려주기로 하고 훈련 과정을 그만두었다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "he decided to sign up for a dog training course",
+     "why": "Tim은 개 훈련 과정에 '등록'하기로 결심한 것이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "At the training center, he met an instructor named Jack.",
+   "grammar": [
+    {
+     "tag": "과거분사(형용사적)",
+     "note": "named Jack이 instructor를 후치 수식",
+     "spans": [
+      "named"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "training center",
+     "meaning": "훈련 센터"
+    },
+    {
+     "word": "instructor",
+     "meaning": "강사, 지도자"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "At the training center,",
+     "ko": "그 [[훈련]] 센터에서"
+    },
+    {
+     "en": "he met an instructor",
+     "ko": "그는 한 [[강사]]를 만났다"
+    },
+    {
+     "en": "named Jack.",
+     "ko": "Jack이라는 [[이름의]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Tim은 훈련 센터에서 Jack이라는 강사를 만났다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 7,
+   "english": "He emphasized to Tim, \"Be sure to walk your dog daily. Dogs need regular exercise to be happy and healthy.\"",
+   "grammar": [
+    {
+     "tag": "명령문",
+     "note": "Be sure to ~: '반드시 ~해라'",
+     "spans": [
+      "Be sure"
+     ]
+    },
+    {
+     "tag": "to부정사(부사적·목적)",
+     "note": "'행복하고 건강하기 위해'",
+     "spans": [
+      "to be"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "emphasize",
+     "meaning": "강조하다"
+    },
+    {
+     "word": "be sure to",
+     "meaning": "반드시 ~하다"
+    },
+    {
+     "word": "regular exercise",
+     "meaning": "규칙적인 운동"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "He emphasized to Tim,",
+     "ko": "그는 Tim에게 [[강조했다]]"
+    },
+    {
+     "en": "\"Be sure to walk your dog daily.",
+     "ko": "\"반드시 매일 개를 [[산책시켜라]]"
+    },
+    {
+     "en": "Dogs need regular exercise",
+     "ko": "개는 규칙적인 [[운동]]이 필요하다"
+    },
+    {
+     "en": "to be happy and healthy.\"",
+     "ko": "[[행복하]]고 건강하려면"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Jack은 개를 일주일에 한 번만 산책시키라고 조언했다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "Be sure to walk your dog daily",
+     "why": "Jack은 '매일(daily)' 반드시 산책시키라고 강조했다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "Being sure to follow Jack's advice, Tim took Mickey for a walk every day.",
+   "grammar": [
+    {
+     "tag": "분사구문",
+     "note": "'~하면서/~하려고'의 동시·부대상황",
+     "spans": [
+      "Being"
+     ]
+    },
+    {
+     "tag": "to부정사(형용사·목적)",
+     "note": "sure to follow: '따르려고'",
+     "spans": [
+      "to follow"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "follow one's advice",
+     "meaning": "~의 조언을 따르다"
+    },
+    {
+     "word": "take ~ for a walk",
+     "meaning": "~을 산책시키다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Being sure to follow Jack's advice,",
+     "ko": "Jack의 [[조언]]을 반드시 따르며"
+    },
+    {
+     "en": "Tim took Mickey for a walk",
+     "ko": "Tim은 Mickey를 [[산책시켰다]]"
+    },
+    {
+     "en": "every day.",
+     "ko": "[[매일]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Tim은 Jack의 조언을 따라 매일 Mickey를 산책시켰다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 9,
+   "english": "However, this extra responsibility soon seemed like a burden, and Tim felt exhausted.",
+   "grammar": [
+    {
+     "tag": "seem like+명사",
+     "note": "'~처럼 보이다/느껴지다'",
+     "spans": [
+      "seemed like"
+     ]
+    },
+    {
+     "tag": "등위접속사 and",
+     "note": "두 절을 연결",
+     "spans": [
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "extra responsibility",
+     "meaning": "추가적인 책임"
+    },
+    {
+     "word": "burden",
+     "meaning": "부담, 짐"
+    },
+    {
+     "word": "exhausted",
+     "meaning": "기진맥진한, 지친"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "However, this extra responsibility",
+     "ko": "하지만 이 [[추가적인]] 책임은"
+    },
+    {
+     "en": "soon seemed like a burden,",
+     "ko": "곧 [[부담]]처럼 느껴졌다"
+    },
+    {
+     "en": "and Tim felt exhausted.",
+     "ko": "그리고 Tim은 [[기진맥진]]해졌다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "매일 산책을 시키게 되자 Tim은 오히려 활력을 되찾았다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "Tim felt exhausted",
+     "why": "추가된 책임이 부담이 되어 Tim은 오히려 지쳤다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 10,
+   "english": "One day, Tim got a call from Jack.",
+   "grammar": [
+    {
+     "tag": "get a call from",
+     "note": "'~로부터 전화를 받다'(방향: from Jack)",
+     "spans": [
+      "got a call from"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "get a call from",
+     "meaning": "~에게서 전화를 받다"
+    },
+    {
+     "word": "one day",
+     "meaning": "(과거의) 어느 날"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "One day,",
+     "ko": "[[어느 날]]"
+    },
+    {
+     "en": "Tim got a call from Jack.",
+     "ko": "Tim은 Jack에게서 [[전화]]를 받았다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "어느 날 Tim이 먼저 Jack에게 전화를 걸었다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "Tim got a call from Jack",
+     "why": "전화를 받은 쪽이 Tim이고 건 쪽은 Jack이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 11,
+   "english": "\"Hello, Tim. How's everything going with Mickey?\"",
+   "grammar": [
+    {
+     "tag": "현재진행형",
+     "note": "How is everything going: 진행 중 상황을 물음",
+     "spans": [
+      "going"
+     ]
+    },
+    {
+     "tag": "의문사 how",
+     "note": "상태·방식을 묻는 의문문",
+     "spans": [
+      "How"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "How's everything going?",
+     "meaning": "다 어떻게 되어 가니?"
+    },
+    {
+     "word": "go with",
+     "meaning": "~와 (잘) 되어 가다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "\"Hello, Tim. How's everything",
+     "ko": "\"안녕, Tim. 모든 것이 [[어떻게]]"
+    },
+    {
+     "en": "going with Mickey?\"",
+     "ko": "Mickey와 [[되어 가고]] 있니?\""
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Jack은 전화로 Mickey와 잘 지내는지 안부를 물었다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 12,
+   "english": "Tim replied, \"Actually, it's pretty hard walking him every day. We've been taking the same route, and it has become a little boring.\"",
+   "grammar": [
+    {
+     "tag": "가주어 it",
+     "note": "it은 형식상 주어, walking him이 실제 내용",
+     "spans": [
+      "it"
+     ]
+    },
+    {
+     "tag": "현재완료진행",
+     "note": "have been -ing: 과거부터 지금까지 계속",
+     "spans": [
+      "been taking"
+     ]
+    },
+    {
+     "tag": "현재완료(결과)",
+     "note": "has become: '~해졌다'",
+     "spans": [
+      "has become"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "reply",
+     "meaning": "대답하다"
+    },
+    {
+     "word": "route",
+     "meaning": "길, 경로"
+    },
+    {
+     "word": "boring",
+     "meaning": "지루한"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Tim replied,",
+     "ko": "Tim이 [[대답했다]]"
+    },
+    {
+     "en": "\"Actually, it's pretty hard",
+     "ko": "\"사실, 그를 [[꽤]] 힘들어"
+    },
+    {
+     "en": "walking him every day.",
+     "ko": "매일 [[산책]]시키는 게"
+    },
+    {
+     "en": "We've been taking the same route,",
+     "ko": "우리는 [[같은]] 길로만 다녀왔고"
+    },
+    {
+     "en": "and it has become a little boring.\"",
+     "ko": "그것이 조금 [[지루해]]졌어.\""
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Tim이 산책을 힘들어한 것은 맞지만, 그 이유는 Mickey가 자꾸 아팠기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "We've been taking the same route, and it has become a little boring",
+     "why": "힘들어한 것은 맞으나 이유는 같은 길만 반복해 지루해졌기 때문이지 개가 아파서가 아니다."
+    }
+   ],
+   "mistips": [
+    "it's pretty hard walking him에서 it은 가주어이고 walking him이 실제 힘든 대상이다."
+   ]
+  },
+  {
+   "id": 13,
+   "english": "Jack offered him a new idea.",
+   "grammar": [
+    {
+     "tag": "4형식(수여동사)",
+     "note": "offer + 간접목적어(him) + 직접목적어(a new idea)",
+     "spans": [
+      "offered"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "offer",
+     "meaning": "제안하다, 제공하다"
+    },
+    {
+     "word": "offer A B",
+     "meaning": "A에게 B를 제안하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Jack offered him",
+     "ko": "Jack은 그에게 [[제안했다]]"
+    },
+    {
+     "en": "a new idea.",
+     "ko": "[[새로운]] 아이디어를"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Jack은 Tim에게 새로운 제안을 했다.",
+     "verdict": "O",
+     "trap_type": "지칭"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 14,
+   "english": "\"How about going to Happy Dog Park?\"",
+   "grammar": [
+    {
+     "tag": "How about -ing",
+     "note": "'~하는 게 어때?'라는 제안 표현",
+     "spans": [
+      "How about",
+      "going"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "How about ~ing?",
+     "meaning": "~하는 게 어때?"
+    },
+    {
+     "word": "go to",
+     "meaning": "~에 가다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "\"How about going",
+     "ko": "\"[[가는 게]] 어때"
+    },
+    {
+     "en": "to Happy Dog Park?\"",
+     "ko": "Happy Dog [[공원]]에?\""
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Jack은 Tim에게 개를 다른 훈련 센터로 데려가라고 제안했다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "How about going to Happy Dog Park?",
+     "why": "Jack은 Happy Dog 공원에 가 보라고 제안했을 뿐 다른 센터 언급은 없다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 15,
+   "english": "Tim said, \"That's a great idea!\"",
+   "grammar": [
+    {
+     "tag": "지시대명사 that",
+     "note": "That은 앞서 나온 Jack의 제안을 가리킴",
+     "spans": [
+      "That"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "say",
+     "meaning": "말하다"
+    },
+    {
+     "word": "great idea",
+     "meaning": "아주 좋은 생각"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Tim said,",
+     "ko": "Tim이 [[말했다]]"
+    },
+    {
+     "en": "\"That's a great idea!\"",
+     "ko": "\"[[정말 좋은]] 생각이야!\""
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Tim은 Jack의 제안을 좋은 생각이라며 반겼다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 16,
+   "english": "When Tim and Mickey arrived at the park Jack had recommended, dozens of dogs were already jumping and playing.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사(때)",
+     "note": "When: 시간 부사절",
+     "spans": [
+      "When"
+     ]
+    },
+    {
+     "tag": "목적격 관계대명사 생략",
+     "note": "the park (that) Jack had recommended",
+     "spans": []
+    },
+    {
+     "tag": "과거완료(대과거)",
+     "note": "도착한 과거보다 먼저 추천한 일",
+     "spans": [
+      "had recommended"
+     ]
+    },
+    {
+     "tag": "과거진행형",
+     "note": "were jumping and playing: 그때 진행 중",
+     "spans": [
+      "were"
+     ]
+    },
+    {
+     "tag": "수량표현 dozens of",
+     "note": "'수십의' + 복수명사",
+     "spans": [
+      "dozens of"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "arrive at",
+     "meaning": "~에 도착하다"
+    },
+    {
+     "word": "recommend",
+     "meaning": "추천하다"
+    },
+    {
+     "word": "dozens of",
+     "meaning": "수십의, 많은"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When Tim and Mickey arrived",
+     "ko": "Tim과 Mickey가 [[도착했을]] 때"
+    },
+    {
+     "en": "at the park Jack had recommended,",
+     "ko": "Jack이 [[추천했던]] 공원에"
+    },
+    {
+     "en": "dozens of dogs were already",
+     "ko": "[[수십 마리]]의 개들이 이미"
+    },
+    {
+     "en": "jumping and playing.",
+     "ko": "[[뛰어놀고]] 있었다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Tim과 Mickey는 Tim이 스스로 고른 공원에 도착했다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "the park Jack had recommended",
+     "why": "그곳은 Jack이 추천했던 공원이지 Tim이 직접 고른 곳이 아니다.",
+     "killer": true
+    }
+   ],
+   "mistips": [
+    "the park Jack had recommended에는 목적격 관계대명사 that/which가 생략되어 있다."
+   ]
+  },
+  {
+   "id": 17,
+   "english": "Mickey looked nervous in the unfamiliar surroundings.",
+   "grammar": [
+    {
+     "tag": "2형식(감각동사+형용사)",
+     "note": "look + 형용사(nervous): '~해 보이다'",
+     "spans": [
+      "nervous"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "nervous",
+     "meaning": "불안한, 초조한"
+    },
+    {
+     "word": "unfamiliar",
+     "meaning": "낯선, 익숙하지 않은"
+    },
+    {
+     "word": "surroundings",
+     "meaning": "환경, 주변"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Mickey looked nervous",
+     "ko": "Mickey는 [[불안해]] 보였다"
+    },
+    {
+     "en": "in the unfamiliar surroundings.",
+     "ko": "[[낯선]] 환경 속에서"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "익숙한 환경에 있었기 때문에 Mickey는 편안해 보였다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "Mickey looked nervous in the unfamiliar surroundings",
+     "why": "낯선 환경이었기에 Mickey는 편안한 것이 아니라 불안해 보였다.",
+     "english": "Mickey looked relaxed because the surroundings were familiar."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 18,
+   "english": "Tim said, \"Don't worry, Mickey. It'll be fun.\"",
+   "grammar": [
+    {
+     "tag": "부정 명령문",
+     "note": "Don't + 동사원형: '~하지 마라'",
+     "spans": [
+      "Don't"
+     ]
+    },
+    {
+     "tag": "미래 조동사 will",
+     "note": "It'll be: 'It will be'의 축약",
+     "spans": [
+      "'ll"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "worry",
+     "meaning": "걱정하다"
+    },
+    {
+     "word": "It'll be fun",
+     "meaning": "재미있을 거야"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Tim said,",
+     "ko": "Tim이 [[말했다]]"
+    },
+    {
+     "en": "\"Don't worry, Mickey.",
+     "ko": "\"[[걱정하지]] 마, Mickey."
+    },
+    {
+     "en": "It'll be fun.\"",
+     "ko": "[[재밌을]] 거야.\""
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Tim은 Mickey를 안심시키며 재미있을 거라고 말했다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 19,
+   "english": "Just then, Tim saw a boy about his age standing with a small dog.",
+   "grammar": [
+    {
+     "tag": "지각동사 5형식",
+     "note": "see + 목적어 + 현재분사(standing): '~가 …하는 것을 보다'",
+     "spans": [
+      "saw"
+     ]
+    },
+    {
+     "tag": "현재분사(목적격보어)",
+     "note": "standing이 a boy를 보충 설명",
+     "spans": [
+      "standing"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "just then",
+     "meaning": "바로 그때"
+    },
+    {
+     "word": "about his age",
+     "meaning": "그와 비슷한 나이의"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Just then, Tim saw a boy",
+     "ko": "[[바로 그때]], Tim은 한 소년을 보았다"
+    },
+    {
+     "en": "about his age",
+     "ko": "그와 [[비슷한 나이]]의"
+    },
+    {
+     "en": "standing with a small dog.",
+     "ko": "작은 개와 함께 [[서 있는]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Tim은 작은 개를 데리고 서 있는, 자신보다 나이가 훨씬 많은 소년을 보았다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "a boy about his age",
+     "why": "about his age는 '자신과 비슷한 나이의'라는 뜻으로, 나이가 훨씬 많다는 것은 오독이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 20,
+   "english": "Gathering his courage, Tim walked over to him.",
+   "grammar": [
+    {
+     "tag": "분사구문",
+     "note": "'~하면서/~하고서'의 동시상황",
+     "spans": [
+      "Gathering"
+     ]
+    },
+    {
+     "tag": "구동사 walk over to",
+     "note": "'~에게 걸어가다, 다가가다'",
+     "spans": [
+      "walked over to"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "gather one's courage",
+     "meaning": "용기를 내다"
+    },
+    {
+     "word": "walk over to",
+     "meaning": "~에게 다가가다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Gathering his courage,",
+     "ko": "[[용기]]를 내어"
+    },
+    {
+     "en": "Tim walked over to him.",
+     "ko": "Tim은 그에게 [[걸어갔다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Tim은 용기를 내어 그 소년에게 다가갔다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 21,
+   "english": "\"Hi, I'm Tim. Can I introduce my dog to yours?\"",
+   "grammar": [
+    {
+     "tag": "조동사 can(요청·허락)",
+     "note": "Can I ~?: '~해도 될까?'",
+     "spans": [
+      "Can"
+     ]
+    },
+    {
+     "tag": "소유대명사 yours",
+     "note": "yours = your dog",
+     "spans": [
+      "yours"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "introduce A to B",
+     "meaning": "A를 B에게 소개하다"
+    },
+    {
+     "word": "yours",
+     "meaning": "너의 것(여기서는 네 개)"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "\"Hi, I'm Tim.",
+     "ko": "\"안녕, 나는 Tim이야."
+    },
+    {
+     "en": "Can I introduce my dog",
+     "ko": "내 개를 [[소개해]]도 될까"
+    },
+    {
+     "en": "to yours?\"",
+     "ko": "네 [[개에게]]?\""
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Tim은 자기 개를 소년의 개에게 소개해도 되는지 물었다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 22,
+   "english": "The boy replied, \"Sure. I'm Daniel. Oh, it looks like they like each other already!\"",
+   "grammar": [
+    {
+     "tag": "look like+주어+동사",
+     "note": "'~인 것 같다' (뒤에 that절 접속사 생략)",
+     "spans": [
+      "looks like"
+     ]
+    },
+    {
+     "tag": "상호대명사 each other",
+     "note": "'서로'를 뜻함",
+     "spans": [
+      "each other"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "reply",
+     "meaning": "대답하다"
+    },
+    {
+     "word": "look like",
+     "meaning": "~인 것 같다, ~처럼 보이다"
+    },
+    {
+     "word": "each other",
+     "meaning": "서로"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The boy replied,",
+     "ko": "그 소년이 [[대답했다]]"
+    },
+    {
+     "en": "\"Sure. I'm Daniel.",
+     "ko": "\"물론이지. 나는 [[Daniel]]이야."
+    },
+    {
+     "en": "Oh, it looks like",
+     "ko": "오, ~인 것 [[같아]]"
+    },
+    {
+     "en": "they like each other already!\"",
+     "ko": "그들이 벌써 [[서로]] 좋아하는!\""
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "they like each other에서 they는 Tim과 Daniel 두 사람을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "it looks like they like each other already",
+     "why": "they는 서로 좋아하는 것처럼 보이는 두 마리의 개를 가리킨다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 23,
+   "english": "Having something in common as dog owners, Tim and Daniel enjoyed talking to each other.",
+   "grammar": [
+    {
+     "tag": "분사구문(이유)",
+     "note": "'~라는 공통점이 있어서'",
+     "spans": [
+      "Having"
+     ]
+    },
+    {
+     "tag": "동명사(목적어)",
+     "note": "enjoy + -ing: talking",
+     "spans": [
+      "talking"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "have ~ in common",
+     "meaning": "~라는 공통점이 있다"
+    },
+    {
+     "word": "owner",
+     "meaning": "주인, 소유자"
+    },
+    {
+     "word": "enjoy -ing",
+     "meaning": "~하기를 즐기다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Having something in common",
+     "ko": "[[공통점]]을 지녔기에"
+    },
+    {
+     "en": "as dog owners,",
+     "ko": "개 [[주인]]으로서"
+    },
+    {
+     "en": "Tim and Daniel enjoyed talking",
+     "ko": "Tim과 Daniel은 [[이야기하기]]를 즐겼다"
+    },
+    {
+     "en": "to each other.",
+     "ko": "[[서로]]에게"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Tim과 Daniel은 개 주인이라는 공통점 덕분에 즐겁게 대화를 나눴다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 24,
+   "english": "They spent the next two hours pleasantly chatting and decided to walk their dogs together regularly.",
+   "grammar": [
+    {
+     "tag": "spend+시간+-ing",
+     "note": "'~하며 (시간)을 보내다'",
+     "spans": [
+      "chatting"
+     ]
+    },
+    {
+     "tag": "to부정사(명사적)",
+     "note": "decided의 목적어",
+     "spans": [
+      "to walk"
+     ]
+    },
+    {
+     "tag": "등위접속사 and",
+     "note": "spent와 decided를 병렬 연결",
+     "spans": [
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "spend time -ing",
+     "meaning": "~하며 시간을 보내다"
+    },
+    {
+     "word": "chat",
+     "meaning": "수다 떨다, 이야기하다"
+    },
+    {
+     "word": "regularly",
+     "meaning": "정기적으로"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "They spent the next two hours",
+     "ko": "그들은 [[다음]] 두 시간을 보냈다"
+    },
+    {
+     "en": "pleasantly chatting",
+     "ko": "즐겁게 [[수다 떨며]]"
+    },
+    {
+     "en": "and decided to walk their dogs",
+     "ko": "그리고 그들의 개를 [[산책시키기로]] 결심했다"
+    },
+    {
+     "en": "together regularly.",
+     "ko": "함께 [[정기적으로]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "그들은 두 시간 동안 즐겁게 이야기한 뒤 개를 정기적으로 함께 산책시키기로 했다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 25,
+   "english": "\"See you soon,\" said Tim as he and Mickey left the park.",
+   "grammar": [
+    {
+     "tag": "주어·동사 도치",
+     "note": "인용문 뒤 said Tim처럼 동사+주어 어순",
+     "spans": [
+      "said"
+     ]
+    },
+    {
+     "tag": "부사절 접속사 as",
+     "note": "'~하면서'의 동시상황",
+     "spans": [
+      "as"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "See you soon",
+     "meaning": "곧 보자"
+    },
+    {
+     "word": "leave",
+     "meaning": "떠나다, 나가다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "\"See you soon,\"",
+     "ko": "\"[[곧]] 보자\""
+    },
+    {
+     "en": "said Tim",
+     "ko": "Tim이 [[말했다]]"
+    },
+    {
+     "en": "as he and Mickey left the park.",
+     "ko": "그와 Mickey가 공원을 [[떠나면서]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "'곧 보자'고 말하며 공원을 떠난 사람은 Daniel이었다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "said Tim as he and Mickey left the park",
+     "why": "그렇게 말하고 Mickey와 함께 공원을 떠난 사람은 Tim이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 26,
+   "english": "Over the next few weeks, the boys and their dogs became great friends.",
+   "grammar": [
+    {
+     "tag": "2형식(become+명사)",
+     "note": "'~가 되다'",
+     "spans": [
+      "became"
+     ]
+    },
+    {
+     "tag": "전치사 over(기간)",
+     "note": "'~에 걸쳐, ~동안'",
+     "spans": [
+      "Over"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "over the next few weeks",
+     "meaning": "다음 몇 주에 걸쳐"
+    },
+    {
+     "word": "become",
+     "meaning": "~가 되다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Over the next few weeks,",
+     "ko": "[[다음]] 몇 주에 걸쳐"
+    },
+    {
+     "en": "the boys and their dogs",
+     "ko": "그 [[소년들]]과 그들의 개들은"
+    },
+    {
+     "en": "became great friends.",
+     "ko": "[[좋은]] 친구가 되었다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "몇 주에 걸쳐 두 소년과 그들의 개들은 좋은 친구가 되었다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 27,
+   "english": "After returning from a walk one day, Tim said to Mickey, \"Walking you felt like a burden at first, but now I see doing things for you can be great for me, too!\"",
+   "grammar": [
+    {
+     "tag": "전치사+동명사",
+     "note": "After returning: '돌아온 뒤에'",
+     "spans": [
+      "returning"
+     ]
+    },
+    {
+     "tag": "동명사 주어",
+     "note": "Walking you가 주어",
+     "spans": [
+      "Walking"
+     ]
+    },
+    {
+     "tag": "feel like+명사",
+     "note": "'~처럼 느껴지다'",
+     "spans": [
+      "felt like"
+     ]
+    },
+    {
+     "tag": "조동사 can",
+     "note": "doing things ... can be great: 가능성",
+     "spans": [
+      "can"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "return from",
+     "meaning": "~에서 돌아오다"
+    },
+    {
+     "word": "feel like",
+     "meaning": "~처럼 느껴지다"
+    },
+    {
+     "word": "at first",
+     "meaning": "처음에는"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "After returning from a walk one day,",
+     "ko": "어느 날 산책에서 [[돌아온]] 후"
+    },
+    {
+     "en": "Tim said to Mickey,",
+     "ko": "Tim은 Mickey에게 [[말했다]]"
+    },
+    {
+     "en": "\"Walking you felt like a burden at first,",
+     "ko": "\"너를 [[산책시키는]] 것이 처음엔 부담 같았어"
+    },
+    {
+     "en": "but now I see doing things for you",
+     "ko": "하지만 이제 너를 위해 [[뭔가 하는]] 것이"
+    },
+    {
+     "en": "can be great for me, too!\"",
+     "ko": "나에게도 [[좋을]] 수 있음을 알아!\""
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 이야기에서 Tim은 결국 개를 돌보는 일이 여전히 부담일 뿐이라고 결론짓는다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "doing things for you can be great for me, too",
+     "why": "Tim은 개를 위해 하는 일이 자신에게도 좋을 수 있음을 깨닫는다."
+    }
+   ],
+   "mistips": [
+    "Walking you felt like a burden에서 Walking you(동명사구)가 주어이며 felt가 본동사이다."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,718 @@
+{
+ "item_no": "39",
+ "theme": "주의의 한계 — 반복과 다양성의 균형",
+ "overview": {
+  "theme_ko": "주의의 한계와 반복·다양성의 균형",
+  "topic": "🔎 음악에서 집중의 한계와 반복·다양성 사이의 균형",
+  "stance": "중립적",
+  "stance_reason": "find the right balance between repetition and diversity처럼 원리를 설명적으로 제시한다",
+  "structure": "주장→근거·예시",
+  "structure_reason": "도입에서 집중 배분 원리를 주장한 뒤 For instance로 예시를 들어 뒷받침한다",
+  "key_grammar": {
+   "point": "관계부사 where",
+   "source_sentence": "In most Western musical styles, this unfolding results from a network of relationships between musical attributes that combine in different ways to create situations where contrasts can take place.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "where는 장소·상황을 나타내는 선행사를 꾸미는 관계부사이다."
+    },
+    {
+     "chip": "언제 써요",
+     "text": "관계부사 뒤에는 「주어+동사」가 다 갖춰진 완전한 절이 온다."
+    },
+    {
+     "chip": "여기서는",
+     "text": "선행사 situations를 받아 'contrasts can take place'라는 완전한 절을 이어 준다."
+    },
+    {
+     "chip": "비교 포인트",
+     "text": "뒤 절이 완전하면 where, 주어·목적어가 빠진 불완전한 절이면 관계대명사 which/that을 쓴다."
+    }
+   ],
+   "example_analysis": "선행사 situations 뒤에 완전한 절이 이어져 관계대명사가 아니라 관계부사 where가 쓰였다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "In most Western musical styles, this unfolding [[1|results]] from a network of relationships between musical attributes [[2|that]] combine in different ways [[3|to create]] situations [[4|which]] contrasts [[5|can take]] place.",
+     "options": [
+      "① results",
+      "② that",
+      "③ to create",
+      "④ which",
+      "⑤ can take"
+     ],
+     "answer": "④",
+     "fix": "뒤에 완전한 절(contrasts can take place)이 오므로 관계대명사 which가 아니라 원문의 관계부사 where로 고쳐야 한다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "Such contrasts are normally [[preceded/preceding]] by a preparatory stage, [[which/what]] [[builds/build]] upon the listener's expectations.",
+     "answer": "preceded / which / builds",
+     "fix": "'~에 의해 앞서진다'는 수동태 are preceded, 선행사 stage를 받는 계속적 관계대명사 which, 단수 주어에 맞는 builds가 적절하다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "options": [
+      "Regardless of musical style, an increase of focus on certain parameters in a musical passage should be accompanied by a decrease in focus on others.",
+      "However, melody alone would not normally keep the listener's attention for long because a piece of music needs some variety and contrasting elements from time to time.",
+      "The human mind has an attention limit, beyond that music is most likely to be perceived as lacking order or direction.",
+      "One of the most difficult issues in the practice of composition is to find the right balance between repetition and diversity: a well-balanced piece of music should unfold naturally to listeners.",
+      "Such contrasts are normally preceded by a preparatory stage, which builds upon the listener's expectations."
+     ],
+     "answer": "The human mind has an attention limit, beyond that music is most likely to be perceived as lacking order or direction.",
+     "fix": "beyond that → beyond which. 전치사 뒤에는 관계대명사 that을 쓸 수 없으므로 which로 고쳐야 한다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "이곳은 음악가들이 새로운 아이디어를 시도할 수 있는 무대이다.",
+     "sentence": "",
+     "answer": "This is a stage where musicians can try new ideas.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "This",
+      "is",
+      "a",
+      "stage",
+      "where",
+      "musicians",
+      "can",
+      "try",
+      "new",
+      "ideas"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "대부분의 서양 음악 양식에서, 이러한 전개는 대비가 일어날 수 있는 상황을 만들기 위해 다양한 방식으로 결합하는 음악적 속성들 간의 관계망에서 비롯된다.",
+     "sentence": "",
+     "answer": "In most Western musical styles, this unfolding results from a network of relationships between musical attributes that combine in different ways to create situations where contrasts can take place.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "In",
+      "most",
+      "Western",
+      "musical",
+      "styles,",
+      "this",
+      "unfolding",
+      "results",
+      "from",
+      "a",
+      "network",
+      "of",
+      "relationships",
+      "between",
+      "musical",
+      "attributes",
+      "that",
+      "combine",
+      "in",
+      "different",
+      "ways",
+      "to",
+      "create",
+      "situations",
+      "where",
+      "contrasts",
+      "can",
+      "take",
+      "place."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "주의의 한계와 균형",
+    "expressions": [
+     "an attention limit",
+     "the right balance between repetition and diversity"
+    ],
+    "variation": "주의는 한계가 있어 반복과 다양성의 균형이 필요함"
+   },
+   {
+    "label": "대비 요소",
+    "expressions": [
+     "contrasting elements",
+     "contrasts can take place"
+    ],
+    "variation": "음악은 때때로 대비되는 요소로 흐름을 만듦"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입(원리)",
+    "sentence_range": "1~2",
+    "summary": "어떤 [[parameter]]에 집중이 늘면 다른 것엔 줄어야 하고, 마음엔 [[attention limit]]이 있음",
+    "easy_example": "한 과목만 파고들면 다른 과목엔 소홀해지는 것과 같다."
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "3",
+    "summary": "선율에 집중하려면 지나친 [[timbre]] 변화를 피해야 함",
+    "easy_example": "주인공 대사를 살리려 배경음악을 낮추는 것과 같다."
+   },
+   {
+    "stage": "전환",
+    "sentence_range": "4",
+    "summary": "그러나 선율만으로는 주의를 오래 못 끌어 [[variety]]가 필요함",
+    "easy_example": "같은 반찬만 나오면 금세 물리는 것과 같다."
+   },
+   {
+    "stage": "주장",
+    "sentence_range": "5",
+    "summary": "작곡의 핵심은 [[repetition]]과 [[diversity]]의 균형",
+    "easy_example": "후렴 반복과 새 멜로디를 적절히 섞는 것."
+   },
+   {
+    "stage": "전개·결론",
+    "sentence_range": "6~7",
+    "summary": "대비는 속성들의 관계망에서 나오고 [[preparatory stage]]가 앞섬",
+    "easy_example": "조용한 부분 뒤에 큰 클라이맥스가 오면 더 극적이다."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Regardless of musical style, an increase of focus on certain parameters in a musical passage should be accompanied by a decrease in focus on others.",
+   "grammar": [
+    {
+     "tag": "전치사구 regardless of",
+     "note": "'~과 상관없이'라는 전치사구",
+     "spans": [
+      "Regardless of"
+     ]
+    },
+    {
+     "tag": "조동사+수동태",
+     "note": "should be p.p. — '~되어야 한다'",
+     "spans": [
+      "be accompanied"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "parameter",
+     "meaning": "매개변수, 요소"
+    },
+    {
+     "word": "be accompanied by",
+     "meaning": "~을 동반하다"
+    },
+    {
+     "word": "passage",
+     "meaning": "(음악의) 악구, 한 구절"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Regardless of musical style,",
+     "ko": "음악 [[양식]]과 상관없이,"
+    },
+    {
+     "en": "an increase of focus on certain parameters",
+     "ko": "특정 [[매개변수]]에 대한 집중의 증가는"
+    },
+    {
+     "en": "in a musical passage",
+     "ko": "한 음악 [[악구]] 안에서"
+    },
+    {
+     "en": "should be accompanied by a decrease",
+     "ko": "[[감소]]를 동반해야 한다"
+    },
+    {
+     "en": "in focus on others.",
+     "ko": "[[다른]] 것들에 대한 집중의."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "한 매개변수에 대한 집중이 늘면 다른 매개변수에 대한 집중도 함께 늘어야 한다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "should be accompanied by a decrease in focus on others",
+     "why": "한 곳에 대한 집중이 늘면 다른 곳 집중은 오히려 줄어야 한다고 했다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "The human mind has an attention limit, beyond which music is most likely to be perceived as lacking order or direction.",
+   "grammar": [
+    {
+     "tag": "전치사+관계대명사",
+     "note": "beyond which — 앞의 attention limit를 받음",
+     "spans": [
+      "beyond which"
+     ]
+    },
+    {
+     "tag": "be likely to",
+     "note": "'~할 가능성이 높다'",
+     "spans": [
+      "most likely to"
+     ]
+    },
+    {
+     "tag": "to부정사 수동태",
+     "note": "to be p.p. — '인식되는'",
+     "spans": [
+      "to be perceived"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "perceive",
+     "meaning": "인지하다, 인식하다"
+    },
+    {
+     "word": "be most likely to",
+     "meaning": "~할 가능성이 매우 높다"
+    },
+    {
+     "word": "lacking",
+     "meaning": "~이 결여된, 부족한"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The human mind has an attention limit,",
+     "ko": "인간의 마음은 주의 [[한계]]를 지니는데,"
+    },
+    {
+     "en": "beyond which music is most likely",
+     "ko": "그 지점을 넘어서면 [[음악]]은 아마"
+    },
+    {
+     "en": "to be perceived as lacking order or direction.",
+     "ko": "[[질서]]나 방향이 없는 것으로 인식되기 쉽다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "'beyond which'의 which가 가리키는 것은 인간의 마음이 지닌 주의 한계(attention limit)이다.",
+     "verdict": "O",
+     "trap_type": "지칭"
+    }
+   ],
+   "mistips": [
+    "beyond which는 '그 한계를 넘어서면'으로, 선행사 an attention limit를 전치사 beyond와 함께 받는다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "For instance, if the intention is to focus on melodic lines, then one should avoid making too many contrasting timbre variations while the melodies are unfolding; otherwise, the timbre may distract attention away from the pitch.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사 if",
+     "note": "조건의 부사절 'if ~ then'",
+     "spans": [
+      "if"
+     ]
+    },
+    {
+     "tag": "to부정사(보어)",
+     "note": "is to focus — 주격보어",
+     "spans": [
+      "to focus"
+     ]
+    },
+    {
+     "tag": "동명사(avoid+-ing)",
+     "note": "avoid는 동명사를 목적어로 취함",
+     "spans": [
+      "making"
+     ]
+    },
+    {
+     "tag": "부사절 접속사 while",
+     "note": "'~하는 동안'의 시간 부사절",
+     "spans": [
+      "while"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "intention",
+     "meaning": "의도"
+    },
+    {
+     "word": "timbre",
+     "meaning": "음색"
+    },
+    {
+     "word": "distract",
+     "meaning": "주의를 딴 데로 돌리다"
+    },
+    {
+     "word": "pitch",
+     "meaning": "음높이, 음의 높낮이"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "For instance, if the intention is",
+     "ko": "예를 들어, 만약 [[의도]]가"
+    },
+    {
+     "en": "to focus on melodic lines,",
+     "ko": "[[선율]] 라인에 집중하는 것이라면,"
+    },
+    {
+     "en": "then one should avoid making too many contrasting timbre variations",
+     "ko": "너무 많은 대비되는 [[음색]] 변화를 만드는 것을 피해야 한다"
+    },
+    {
+     "en": "while the melodies are unfolding; otherwise,",
+     "ko": "선율이 [[전개]]되는 동안; 그렇지 않으면,"
+    },
+    {
+     "en": "the timbre may distract attention away from the pitch.",
+     "ko": "음색이 [[음높이]]에서 주의를 딴 데로 돌릴 수 있다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "음색에 지나치게 대비를 주면, 음높이가 음색으로부터 주의를 빼앗을 수 있다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "the timbre may distract attention away from the pitch",
+     "why": "주의를 빼앗는 주체는 음색이며 대상이 음높이이다.",
+     "killer": true
+    }
+   ],
+   "mistips": [
+    "otherwise는 '그렇지 않으면'으로 앞 조건을 뒤집어 결과를 제시한다."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "However, melody alone would not normally keep the listener's attention for long because a piece of music needs some variety and contrasting elements from time to time.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사 because",
+     "note": "이유의 부사절(because of와 구별)",
+     "spans": [
+      "because"
+     ]
+    },
+    {
+     "tag": "현재분사(형용사적)",
+     "note": "contrasting이 elements를 수식",
+     "spans": [
+      "contrasting"
+     ]
+    },
+    {
+     "tag": "from time to time",
+     "note": "'때때로'라는 숙어",
+     "spans": [
+      "from time to time"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "variety",
+     "meaning": "다양성"
+    },
+    {
+     "word": "contrasting",
+     "meaning": "대비되는, 대조적인"
+    },
+    {
+     "word": "from time to time",
+     "meaning": "때때로, 이따금"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "However, melody alone would not normally keep",
+     "ko": "그러나, [[선율]]만으로는 보통 유지하지 못한다"
+    },
+    {
+     "en": "the listener's attention for long",
+     "ko": "청자의 [[주의]]를 오래"
+    },
+    {
+     "en": "because a piece of music needs some variety",
+     "ko": "왜냐하면 한 곡의 음악은 어느 정도 [[다양성]]이 필요하기 때문이다"
+    },
+    {
+     "en": "and contrasting elements from time to time.",
+     "ko": "그리고 때때로 [[대비]]되는 요소들이."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 대비 요소가 필요하다고 보는데, 그 근거는 선율만으로도 청자의 주의를 오래 끌 수 있기 때문이다.",
+     "verdict": "△",
+     "trap_type": "필자관점",
+     "anchor": "melody alone would not normally keep the listener's attention for long",
+     "why": "선율만으로는 주의를 오래 못 끌기에 다양성이 필요하다는 것이 근거이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "One of the most difficult issues in the practice of composition is to find the right balance between repetition and diversity: a well-balanced piece of music should unfold naturally to listeners.",
+   "grammar": [
+    {
+     "tag": "최상급",
+     "note": "the most difficult — '가장 ~한'",
+     "spans": [
+      "most difficult"
+     ]
+    },
+    {
+     "tag": "주어-동사 수일치",
+     "note": "One of the ... issues 뒤 단수동사 is",
+     "spans": [
+      "is"
+     ]
+    },
+    {
+     "tag": "to부정사(보어)",
+     "note": "is to find — 주격보어",
+     "spans": [
+      "to find"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "composition",
+     "meaning": "작곡"
+    },
+    {
+     "word": "repetition",
+     "meaning": "반복"
+    },
+    {
+     "word": "diversity",
+     "meaning": "다양성"
+    },
+    {
+     "word": "well-balanced",
+     "meaning": "균형 잡힌"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "One of the most difficult issues",
+     "ko": "가장 [[어려운]] 문제 중 하나는"
+    },
+    {
+     "en": "in the practice of composition is",
+     "ko": "[[작곡]] 실무에서"
+    },
+    {
+     "en": "to find the right balance between repetition and diversity:",
+     "ko": "반복과 다양성 사이의 올바른 [[균형]]을 찾는 것이다:"
+    },
+    {
+     "en": "a well-balanced piece of music",
+     "ko": "잘 균형 잡힌 한 곡의 [[음악]]은"
+    },
+    {
+     "en": "should unfold naturally to listeners.",
+     "ko": "청자에게 [[자연스럽게]] 전개되어야 한다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "작곡 실무에서 가장 어려운 문제 중 하나는 반복과 다양성 사이의 올바른 균형을 찾는 것이다.",
+     "verdict": "O",
+     "trap_type": "구조수식"
+    }
+   ],
+   "mistips": [
+    "One of the + 최상급 + 복수명사 뒤 동사는 단수(is)로 받는다."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "In most Western musical styles, this unfolding results from a network of relationships between musical attributes that combine in different ways to create situations where contrasts can take place.",
+   "grammar": [
+    {
+     "tag": "동명사(주어)",
+     "note": "this unfolding — 동명사 주어",
+     "spans": [
+      "unfolding"
+     ]
+    },
+    {
+     "tag": "구동사 result from",
+     "note": "'~에서 비롯되다'",
+     "spans": [
+      "results from"
+     ]
+    },
+    {
+     "tag": "주격 관계대명사 that",
+     "note": "attributes를 선행사로 받음",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "관계부사 where",
+     "note": "situations를 수식, 뒤에 완전한 절",
+     "spans": [
+      "where"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "network",
+     "meaning": "관계망, 망"
+    },
+    {
+     "word": "attribute",
+     "meaning": "속성, 특성"
+    },
+    {
+     "word": "combine",
+     "meaning": "결합하다"
+    },
+    {
+     "word": "contrast",
+     "meaning": "대비, 대조"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In most Western musical styles,",
+     "ko": "대부분의 [[서양]] 음악 양식에서,"
+    },
+    {
+     "en": "this unfolding results from a network of relationships",
+     "ko": "이러한 전개는 [[관계망]]에서 비롯된다"
+    },
+    {
+     "en": "between musical attributes that combine in different ways",
+     "ko": "다양한 방식으로 결합하는 음악적 [[속성]]들 사이의"
+    },
+    {
+     "en": "to create situations where contrasts can take place.",
+     "ko": "[[대비]]가 일어날 수 있는 상황을 만들기 위해."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "서양 음악 양식에서 대비가 일어나려면 반드시 비서양 음악의 기법을 차용해야 한다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "this unfolding results from a network of relationships between musical attributes",
+     "why": "대비는 음악적 속성들의 관계망에서 나오며 비서양 기법 차용은 언급되지 않았다."
+    }
+   ],
+   "mistips": [
+    "where는 앞의 situations를 수식하는 관계부사이며 뒤에 완전한 절이 온다."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Such contrasts are normally preceded by a preparatory stage, which builds upon the listener's expectations.",
+   "grammar": [
+    {
+     "tag": "수동태",
+     "note": "are (normally) preceded by — '~에 의해 앞서진다'",
+     "spans": [
+      "preceded"
+     ]
+    },
+    {
+     "tag": "계속적 관계대명사 which",
+     "note": "앞의 preparatory stage를 부연",
+     "spans": [
+      "which"
+     ]
+    },
+    {
+     "tag": "구동사 build upon",
+     "note": "'~을 바탕으로 하다'",
+     "spans": [
+      "builds upon"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "precede",
+     "meaning": "~에 앞서다, 선행하다"
+    },
+    {
+     "word": "preparatory",
+     "meaning": "준비의, 예비의"
+    },
+    {
+     "word": "build upon",
+     "meaning": "~을 바탕으로 하다"
+    },
+    {
+     "word": "expectation",
+     "meaning": "기대"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Such contrasts are normally preceded",
+     "ko": "그러한 [[대비]]는 보통 앞서 온다"
+    },
+    {
+     "en": "by a preparatory stage,",
+     "ko": "[[준비]] 단계에 의해,"
+    },
+    {
+     "en": "which builds upon the listener's expectations.",
+     "ko": "그것은 청자의 [[기대]]를 바탕으로 한다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "준비 단계는 대비가 일어난 뒤에 뒤따라온다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "Such contrasts are normally preceded by a preparatory stage",
+     "why": "준비 단계가 먼저 오고 그 뒤에 대비가 나타난다.",
+     "english": "The preparatory stage follows the contrasts."
+    },
+    {
+     "statement": "이 문장의 which가 가리키는 것은 앞의 contrasts(대비)이다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "which builds upon the listener's expectations",
+     "why": "계속적 which의 선행사는 a preparatory stage(준비 단계)이며 contrasts가 아니다.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  }
+ ]
+}

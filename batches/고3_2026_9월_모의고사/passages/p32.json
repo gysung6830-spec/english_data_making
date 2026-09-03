@@ -1,0 +1,795 @@
+{
+ "item_no": "32",
+ "theme": "예상 밖 자극에 민감한 감각 — 간지럼의 원리",
+ "overview": {
+  "theme_ko": "예상 밖 자극에 민감한 감각과 간지럼의 원리",
+  "topic": "🔎 감각계는 예측하지 못한 자극에 더 민감하며, 이것이 간지럼과 방어 기제를 설명한다",
+  "stance": "중립적",
+  "stance_reason": "appears to be a defense mechanism that has adaptive significance 처럼 현상을 분석·설명하는 과학적 어조",
+  "structure": "주장→근거·예시",
+  "structure_reason": "감각계가 예상 밖 자극에 가장 민감하다는 원리 제시 → 다리 교차·고양이·간지럼 사례로 뒷받침",
+  "key_grammar": {
+   "point": "부정어(구) 문두 도치 (Not only ~ but also)",
+   "source_sentence": "Not only are our sensory systems organized to detect change, but they are most tuned to stimuli that are unexpected and surprising.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "부정의 뜻을 지닌 Not only가 문장 맨 앞에 오면 주어와 (조)동사의 자리가 바뀐다."
+    },
+    {
+     "chip": "형태",
+     "text": "Not only + 동사 + 주어 ~, but (also) + 주어 + 동사 ~ 의 형태가 된다."
+    },
+    {
+     "chip": "이 문장에선",
+     "text": "Not only are our sensory systems organized ~ 에서 be동사 are가 주어 our sensory systems 앞으로 도치되었다."
+    },
+    {
+     "chip": "짝",
+     "text": "Not only A but (also) B 상관구조로, 뒤 절 but they are ~ 와 호응한다."
+    },
+    {
+     "chip": "주의",
+     "text": "도치는 앞 절에서만 일어나고, but 이하 they are ~ 는 정상 어순이다."
+    }
+   ],
+   "example_analysis": "부정어구 Not only가 문두에 와서 be동사 are가 주어 our sensory systems 앞으로 도치되었다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "Not only [[1|is]] our sensory systems [[2|organized]] [[3|to detect]] change, but they are most tuned to stimuli [[4|that]] [[5|are]] unexpected and surprising.",
+     "options": [
+      "① is",
+      "② organized",
+      "③ to detect",
+      "④ that",
+      "⑤ are"
+     ],
+     "answer": "①",
+     "fix": "is → are. 주어 our sensory systems가 복수이므로, Not only 도치 구문에서도 be동사는 원문대로 are여야 한다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "When you move your body and [[produce/producing]] tactile sensations, these stimuli are [[less/least]] noticeable to you than [[are/is]] sensations produced by another individual.",
+     "answer": "produce / less / are",
+     "fix": "move와 병렬을 이루는 produce, 두 대상을 비교하는 비교급 less, 도치된 뒤 주어 sensations(복수)에 맞춘 are가 옳다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "options": [
+      "This differential response to surprising tactile stimuli appears to be a defense mechanism that has adaptive significance.",
+      "Our enjoyment of being tickled generally diminishes as we age.",
+      "It is probably also the reason why being tickled by someone else is more effective at produce an emotional reaction than trying to tickle yourself.",
+      "Likewise, your reaction to your cat jumping onto your lap is likely to be much greater if you have your eyes closed when it happens.",
+      "This is likely due to the fact that adults are better at anticipating stimuli, and hence are more difficult to surprise, than are children."
+     ],
+     "answer": "It is probably also the reason why being tickled by someone else is more effective at produce an emotional reaction than trying to tickle yourself.",
+     "fix": "produce → producing. 전치사 at의 목적어이므로 원문대로 동명사 producing이 되어야 한다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그는 열심히 공부할 뿐만 아니라, 다른 학생들도 돕는다. (Not only로 시작할 것)",
+     "sentence": "",
+     "answer": "Not only does he study hard, but he also helps other students.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Not only",
+      "does",
+      "he",
+      "study hard",
+      "but",
+      "he",
+      "also",
+      "helps",
+      "other students"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "우리의 감각계는 변화를 감지하도록 구성되어 있을 뿐만 아니라, 예상 밖이고 놀라운 자극에 가장 잘 맞춰져 있다.",
+     "sentence": "",
+     "answer": "Not only are our sensory systems organized to detect change, but they are most tuned to stimuli that are unexpected and surprising.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Not only",
+      "are",
+      "our sensory systems",
+      "organized",
+      "to detect",
+      "change",
+      "but",
+      "they",
+      "are",
+      "most tuned",
+      "to stimuli",
+      "that",
+      "are",
+      "unexpected and surprising"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "예상 밖 자극에 대한 민감성",
+    "expressions": [
+     "unexpected and surprising",
+     "surprising tactile stimuli",
+     "difficult to surprise"
+    ],
+    "variation": "예측 불가한 자극일수록 감각이 더 강하게 반응"
+   },
+   {
+    "label": "덜 뚜렷한 자기 유발 감각",
+    "expressions": [
+     "less noticeable to you",
+     "generally less noticeable"
+    ],
+    "variation": "스스로 만든 자극은 덜 뚜렷하게 느껴짐"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입(원리)",
+    "sentence_range": "1",
+    "summary": "감각계는 변화, 특히 [[예상 밖이고 놀라운]] 자극에 가장 민감",
+    "easy_example": "갑자기 튀어나온 소리에 더 크게 놀라는 것과 같다."
+   },
+   {
+    "stage": "사례1",
+    "sentence_range": "2~3",
+    "summary": "스스로 만든 [[촉각]]은 남이 준 감각보다 덜 뚜렷",
+    "easy_example": "내가 내 팔을 만질 때보다 남이 만질 때 더 확 느껴진다."
+   },
+   {
+    "stage": "사례2",
+    "sentence_range": "4",
+    "summary": "눈을 감고 있을 때 고양이 반응이 [[훨씬 더 큼]]",
+    "easy_example": "눈 감고 있다 뭔가 툭 닿으면 더 놀란다."
+   },
+   {
+    "stage": "일반화",
+    "sentence_range": "5~6",
+    "summary": "이는 적응적 [[방어 기제]]이며, 남이 간지럽힐 때 더 효과적",
+    "easy_example": "내가 나를 간지럽히면 하나도 안 웃긴다."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "7~8",
+    "summary": "나이 들수록 자극을 잘 [[예측]]해 간지럼 즐거움 감소",
+    "easy_example": "어른은 놀랄 일을 미리 알아채서 잘 안 놀란다."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Not only are our sensory systems organized to detect change, but they are most tuned to stimuli that are unexpected and surprising.",
+   "grammar": [
+    {
+     "tag": "부정어 문두 도치 (Not only)",
+     "note": "부정어구가 앞으로 와 be동사가 주어 앞으로",
+     "spans": [
+      "Not only are"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "are organized(구성되어 있다)",
+     "spans": [
+      "organized"
+     ]
+    },
+    {
+     "tag": "부사적 용법 to부정사(목적)",
+     "note": "감지하도록/감지하기 위해",
+     "spans": [
+      "to detect"
+     ]
+    },
+    {
+     "tag": "주격 관계대명사 that",
+     "note": "선행사 stimuli를 수식",
+     "spans": [
+      "that"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "sensory system",
+     "meaning": "감각계"
+    },
+    {
+     "word": "detect",
+     "meaning": "감지하다, 탐지하다"
+    },
+    {
+     "word": "be tuned to",
+     "meaning": "~에 맞춰지다, ~에 민감하다"
+    },
+    {
+     "word": "stimuli",
+     "meaning": "자극(stimulus의 복수)"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Not only are our sensory systems organized to detect change,",
+     "ko": "우리의 감각계는 변화를 감지하도록 [[구성되어]] 있을 뿐만 아니라,"
+    },
+    {
+     "en": "but they are most tuned to stimuli",
+     "ko": "그것들은 자극에 가장 잘 [[맞춰져]] 있다"
+    },
+    {
+     "en": "[[that are unexpected and surprising.]]",
+     "ko": "[[예상 밖이고 놀라운]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "감각계는 변화뿐 아니라 예상 밖이고 놀라운 자극에 가장 잘 맞춰져 있다고 본다.",
+     "verdict": "O",
+     "trap_type": "구조수식"
+    }
+   ],
+   "mistips": [
+    "문두 부정어구 Not only 때문에 be동사 are가 주어 our sensory systems 앞으로 도치되었고, but 이하는 정상 어순이다."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "When you move your body and produce tactile sensations, these stimuli are less noticeable to you than are sensations produced by another individual.",
+   "grammar": [
+    {
+     "tag": "시간 부사절 when",
+     "note": "~할 때",
+     "spans": [
+      "When"
+     ]
+    },
+    {
+     "tag": "비교급 less",
+     "note": "덜 ~한",
+     "spans": [
+      "less noticeable"
+     ]
+    },
+    {
+     "tag": "비교 구문 도치(than+동사+주어)",
+     "note": "than 뒤 주어-동사 도치",
+     "spans": [
+      "than are sensations"
+     ]
+    },
+    {
+     "tag": "과거분사 후치수식",
+     "note": "sensations produced by ~ (~에 의해 만들어진)",
+     "spans": [
+      "produced"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "tactile",
+     "meaning": "촉각의"
+    },
+    {
+     "word": "sensation",
+     "meaning": "감각, 느낌"
+    },
+    {
+     "word": "noticeable",
+     "meaning": "눈에 띄는, 뚜렷한"
+    },
+    {
+     "word": "individual",
+     "meaning": "개인, 사람"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When you move your body and produce tactile sensations,",
+     "ko": "네가 몸을 움직여 [[촉각 감각]]을 만들어 낼 때,"
+    },
+    {
+     "en": "these stimuli are less noticeable to you",
+     "ko": "이 자극들은 네게 덜 [[뚜렷하게]] 느껴진다"
+    },
+    {
+     "en": "[[than are sensations produced by another individual.]]",
+     "ko": "[[다른 사람이 만들어 낸 감각보다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "네가 스스로 만든 촉각 자극이 남이 준 감각보다 더 뚜렷하게 느껴진다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "these stimuli are less noticeable to you than are sensations produced by another individual",
+     "why": "자기 몸이 만든 자극이 남이 준 것보다 덜 뚜렷하다고 했다."
+    },
+    {
+     "statement": "produced by another individual은 these stimuli를 수식한다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "than are sensations produced by another individual",
+     "why": "produced by another individual이 수식하는 것은 sensations이다."
+    }
+   ],
+   "mistips": [
+    "than are sensations는 비교절에서 주어(sensations)와 동사(are)가 도치된 형태이다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "The sensations of your own legs touching one another when you cross your legs, for example, are generally less noticeable than a similar touch on your leg would be if someone sitting next to you brushed their leg against yours.",
+   "grammar": [
+    {
+     "tag": "현재분사 후치수식",
+     "note": "your own legs touching one another(서로 닿는)",
+     "spans": [
+      "touching"
+     ]
+    },
+    {
+     "tag": "비교급 less",
+     "note": "덜 ~한",
+     "spans": [
+      "less noticeable"
+     ]
+    },
+    {
+     "tag": "가정법 과거",
+     "note": "if ... brushed ~, would be(현재 사실 반대의 가정)",
+     "spans": [
+      "would be",
+      "brushed"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "cross one's legs",
+     "meaning": "다리를 꼬다"
+    },
+    {
+     "word": "brush against",
+     "meaning": "~에 스치다"
+    },
+    {
+     "word": "similar",
+     "meaning": "비슷한, 유사한"
+    },
+    {
+     "word": "one another",
+     "meaning": "서로"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The sensations of your own legs touching one another",
+     "ko": "네 [[두 다리]]가 서로 닿는 감각은"
+    },
+    {
+     "en": "when you cross your legs, for example,",
+     "ko": "예를 들어 네가 [[다리를 꼬을]] 때,"
+    },
+    {
+     "en": "are generally less noticeable",
+     "ko": "대체로 덜 [[뚜렷하다]]"
+    },
+    {
+     "en": "[[than a similar touch on your leg would be]]",
+     "ko": "[[네 다리에 닿는 비슷한 접촉보다]]"
+    },
+    {
+     "en": "[[if someone sitting next to you brushed their leg against yours.]]",
+     "ko": "[[옆에 앉은 사람이 자기 다리를 네 다리에 스친다면]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "다리를 꼬을 때 두 다리가 닿는 감각이 대체로 덜 뚜렷한 것은, 그 접촉의 세기가 약하기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "are generally less noticeable",
+     "why": "덜 뚜렷하다는 결론은 맞지만, 접촉 세기 때문이 아니라 스스로 유발한 자극이기 때문이다."
+    }
+   ],
+   "mistips": [
+    "than a similar touch ~ would be if ~ brushed는 'would+동사원형 ~ if+과거동사'의 가정법 과거 구조이다."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "Likewise, your reaction to your cat jumping onto your lap is likely to be much greater if you have your eyes closed when it happens.",
+   "grammar": [
+    {
+     "tag": "소유격+동명사",
+     "note": "your cat jumping ~ (고양이가 뛰어오르는 것)",
+     "spans": [
+      "jumping"
+     ]
+    },
+    {
+     "tag": "be likely to부정사",
+     "note": "~할 가능성이 높다",
+     "spans": [
+      "is likely to be"
+     ]
+    },
+    {
+     "tag": "비교급 강조 much",
+     "note": "훨씬 더(비교급 강조)",
+     "spans": [
+      "much greater"
+     ]
+    },
+    {
+     "tag": "조건 부사절 if",
+     "note": "~라면",
+     "spans": [
+      "if"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "likewise",
+     "meaning": "마찬가지로, 비슷하게"
+    },
+    {
+     "word": "reaction",
+     "meaning": "반응"
+    },
+    {
+     "word": "lap",
+     "meaning": "무릎(앉았을 때 허벅지 윗부분)"
+    },
+    {
+     "word": "be likely to",
+     "meaning": "~할 가능성이 높다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Likewise, your reaction to your cat jumping onto your lap",
+     "ko": "마찬가지로, 고양이가 네 무릎으로 [[뛰어오르는]] 것에 대한 너의 반응은"
+    },
+    {
+     "en": "is likely to be much greater",
+     "ko": "훨씬 더 [[클]] 가능성이 높다"
+    },
+    {
+     "en": "[[if you have your eyes closed when it happens.]]",
+     "ko": "[[그 일이 일어날 때 네가 눈을 감고 있으면]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "고양이가 뛰어오를 때 눈을 뜨고 있으면 반응이 훨씬 더 커진다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "your reaction to your cat jumping onto your lap is likely to be much greater if you have your eyes closed",
+     "why": "반응이 훨씬 커지는 것은 눈을 감고 있을 때다.",
+     "killer": true
+    }
+   ],
+   "mistips": [
+    "have your eyes closed는 'have+목적어+과거분사(눈이 감긴 상태로 두다)'의 5형식 구조이다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "This differential response to surprising tactile stimuli appears to be a defense mechanism that has adaptive significance.",
+   "grammar": [
+    {
+     "tag": "appear to부정사",
+     "note": "~인 것으로 보이다",
+     "spans": [
+      "appears to be"
+     ]
+    },
+    {
+     "tag": "주격 관계대명사 that",
+     "note": "선행사 a defense mechanism을 수식",
+     "spans": [
+      "that"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "differential",
+     "meaning": "차이가 나는, 차등적인"
+    },
+    {
+     "word": "defense mechanism",
+     "meaning": "방어 기제"
+    },
+    {
+     "word": "adaptive",
+     "meaning": "적응에 도움이 되는, 적응적인"
+    },
+    {
+     "word": "significance",
+     "meaning": "의의, 중요성"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "This differential response to surprising tactile stimuli",
+     "ko": "놀라운 촉각 자극에 대한 이 [[차이 나는 반응]]은"
+    },
+    {
+     "en": "appears to be a defense mechanism",
+     "ko": "[[방어 기제]]인 것으로 보인다"
+    },
+    {
+     "en": "[[that has adaptive significance.]]",
+     "ko": "[[적응적 의의를 지닌]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 놀라운 촉각에 대한 이 반응을 우연한 현상으로 볼 뿐 적응적 의미는 없다고 본다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "appears to be a defense mechanism that has adaptive significance",
+     "why": "필자는 이 반응을 적응적 의의를 지닌 방어 기제로 본다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "It is probably also the reason why being tickled by someone else is more effective at producing an emotional reaction than trying to tickle yourself.",
+   "grammar": [
+    {
+     "tag": "관계부사 why",
+     "note": "선행사 the reason을 수식(이유)",
+     "spans": [
+      "why"
+     ]
+    },
+    {
+     "tag": "동명사 주어(수동)",
+     "note": "being tickled ~ 가 주어(수동 동명사)",
+     "spans": [
+      "being tickled"
+     ]
+    },
+    {
+     "tag": "전치사+동명사",
+     "note": "전치사 at의 목적어인 동명사",
+     "spans": [
+      "at producing"
+     ]
+    },
+    {
+     "tag": "비교 대상 병치(than+동명사)",
+     "note": "비교 대상이 동명사 trying ~",
+     "spans": [
+      "than trying"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "tickle",
+     "meaning": "간지럽히다"
+    },
+    {
+     "word": "effective",
+     "meaning": "효과적인"
+    },
+    {
+     "word": "emotional",
+     "meaning": "정서적인, 감정의"
+    },
+    {
+     "word": "reason why",
+     "meaning": "~한 이유"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "It is probably also the reason why",
+     "ko": "그것은 아마 ~인 [[이유]]이기도 하다"
+    },
+    {
+     "en": "[[being tickled by someone else]]",
+     "ko": "[[남에게 간지럼을 당하는 것이]]"
+    },
+    {
+     "en": "is more effective at producing an emotional reaction",
+     "ko": "정서적 반응을 일으키는 데 더 [[효과적이라는]]"
+    },
+    {
+     "en": "[[than trying to tickle yourself.]]",
+     "ko": "[[스스로 간지럽히려는 것보다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "문장 앞의 It이 가리키는 것은 고양이가 뛰어오를 때의 놀람이다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "It is probably also the reason why",
+     "why": "It은 앞서 말한 예상 밖 자극에 대한 차이 나는 반응(방어 기제)을 가리킨다.",
+     "integrative": true
+    }
+   ],
+   "mistips": [
+    "being tickled by someone else가 주어(동명사구)이고, than 뒤의 trying to tickle yourself와 비교된다."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Our enjoyment of being tickled generally diminishes as we age.",
+   "grammar": [
+    {
+     "tag": "동명사(수동) 전치사 목적어",
+     "note": "of의 목적어인 수동 동명사(간지럼 당하는 것)",
+     "spans": [
+      "being tickled"
+     ]
+    },
+    {
+     "tag": "부사절 as (~함에 따라)",
+     "note": "우리가 나이 들수록",
+     "spans": [
+      "as"
+     ]
+    },
+    {
+     "tag": "주어-동사 수일치",
+     "note": "단수 주어 enjoyment에 맞춘 diminishes",
+     "spans": [
+      "diminishes"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "enjoyment",
+     "meaning": "즐거움, 향유"
+    },
+    {
+     "word": "diminish",
+     "meaning": "줄어들다, 감소하다"
+    },
+    {
+     "word": "age",
+     "meaning": "나이가 들다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Our enjoyment of being tickled",
+     "ko": "간지럼을 당하는 것에 대한 우리의 [[즐거움]]은"
+    },
+    {
+     "en": "generally diminishes as we age.",
+     "ko": "우리가 나이 들수록 대체로 [[줄어든다]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "나이가 들수록 간지럼을 당하는 즐거움이 대체로 줄어든다고 말한다.",
+     "verdict": "O",
+     "trap_type": "무관정보"
+    },
+    {
+     "statement": "Adults enjoy being tickled just as much as children do.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "Our enjoyment of being tickled generally diminishes as we age",
+     "why": "나이가 들수록 간지럼의 즐거움이 줄어든다고 했다.",
+     "english": "Adults enjoy being tickled just as much as children do."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "This is likely due to the fact that adults are better at anticipating stimuli, and hence are more difficult to surprise, than are children.",
+   "grammar": [
+    {
+     "tag": "동격 that (the fact that)",
+     "note": "the fact의 내용을 설명하는 동격절",
+     "spans": [
+      "the fact that"
+     ]
+    },
+    {
+     "tag": "전치사+동명사",
+     "note": "전치사 at의 목적어인 동명사",
+     "spans": [
+      "at anticipating"
+     ]
+    },
+    {
+     "tag": "형용사+to부정사(난이형용사)",
+     "note": "놀라게 하기 어려운",
+     "spans": [
+      "difficult to surprise"
+     ]
+    },
+    {
+     "tag": "비교 구문 도치(than+동사+주어)",
+     "note": "than 뒤 주어-동사 도치",
+     "spans": [
+      "than are children"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "due to",
+     "meaning": "~ 때문에"
+    },
+    {
+     "word": "anticipate",
+     "meaning": "예측하다, 예상하다"
+    },
+    {
+     "word": "hence",
+     "meaning": "따라서, 그러므로"
+    },
+    {
+     "word": "the fact that",
+     "meaning": "~라는 사실"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "This is likely due to the fact that",
+     "ko": "이것은 아마 ~라는 [[사실]] 때문일 것이다"
+    },
+    {
+     "en": "adults are better at anticipating stimuli,",
+     "ko": "어른은 자극을 [[예측하는]] 데 더 능하고,"
+    },
+    {
+     "en": "[[and hence are more difficult to surprise,]]",
+     "ko": "[[그래서 더 놀라게 하기 어렵다는]]"
+    },
+    {
+     "en": "[[than are children.]]",
+     "ko": "[[아이들보다]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "어른이 아이보다 간지럼을 덜 타는 것은 나이가 들며 피부 감각이 둔해지기 때문이다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "adults are better at anticipating stimuli, and hence are more difficult to surprise",
+     "why": "본문은 피부가 둔해져서가 아니라 어른이 자극을 더 잘 예측하기 때문이라고 한다."
+    }
+   ],
+   "mistips": [
+    "문미 than are children은 than children are에서 주어-동사가 도치된 비교절이다."
+   ]
+  }
+ ]
+}

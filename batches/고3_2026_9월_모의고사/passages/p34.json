@@ -1,0 +1,786 @@
+{
+ "item_no": "34",
+ "theme": "농담의 핵심은 놀라움 — 협곡을 뛰어넘기",
+ "overview": {
+  "theme_ko": "농담의 핵심은 놀라움: 협곡 건너뛰기",
+  "topic": "🔎 농담이 웃긴 이유와 성공하는 농담의 조건",
+  "stance": "중립적",
+  "stance_reason": "Surprise is the fundamental joke mechanism이라며 원리를 분석적으로 설명함",
+  "structure": "주장→근거·예시",
+  "structure_reason": "놀라움이 농담의 핵심이라는 주장을 Seinfeld의 협곡 비유로 뒷받침함",
+  "key_grammar": {
+   "point": "간접의문문(의문사절 how)",
+   "source_sentence": "The joke-teller's skill lies in judging exactly how much of a surprise the audience is prepared to take.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "의문사(how 등)가 이끄는 절이 문장 속에서 목적어나 주어로 들어간 것을 간접의문문이라 한다."
+    },
+    {
+     "chip": "핵심 어순",
+     "text": "간접의문문은 「의문사+주어+동사」 어순으로, 직접의문문의 조동사-주어 도치가 풀린다."
+    },
+    {
+     "chip": "이 문장",
+     "text": "judging의 목적어로 how much of a surprise the audience is prepared to take가 통째로 쓰였다."
+    },
+    {
+     "chip": "how의 역할",
+     "text": "how much of a surprise가 하나의 의문사구로 '얼마만큼의 놀라움을'을 뜻한다."
+    },
+    {
+     "chip": "주의",
+     "text": "is the audience처럼 도치하면 안 되고 the audience is 어순을 지켜야 한다."
+    }
+   ],
+   "example_analysis": "의문사 how가 이끄는 절이 전치사 in의 목적어인 동명사 judging의 목적어로 쓰였고, 절 내부는 「의문사(how much of a surprise)+주어(the audience)+동사(is prepared to take)」 어순이다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "The joke-teller's skill [[1|lies]] in [[2|judging]] exactly [[3|how]] much of a surprise the audience [[4|is]] prepared [[5|taking]].",
+     "options": [
+      "① lies",
+      "② judging",
+      "③ how",
+      "④ is",
+      "⑤ taking"
+     ],
+     "answer": "⑤",
+     "fix": "be prepared는 to부정사와 결합하므로 taking이 아니라 원문 to take가 맞다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "He must make a series of assumptions about [[what they will understand/what will they understand]], what their reference points are, and [[how relaxed they appear/how relaxed do they appear]] to be.",
+     "options": [],
+     "answer": "what they will understand / how relaxed they appear",
+     "fix": "전치사 about의 목적어인 간접의문문은 「의문사+주어+동사」 어순이므로 도치되지 않은 형태가 맞다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "options": [
+      "① Surprise is the fundamental joke mechanism.",
+      "② The joke-teller's skill lies in judging exactly how much of a surprise is the audience prepared to take.",
+      "③ The setup to the joke is the near-side cliff, and the punch line is the far side.",
+      "④ If they're too far apart, the listeners don't make it to the other side.",
+      "⑤ The joke-hearers get far more pleasure from the joke if they have to do a little work."
+     ],
+     "answer": "② The joke-teller's skill lies in judging exactly how much of a surprise is the audience prepared to take.",
+     "fix": "간접의문문은 「의문사+주어+동사」 어순이므로 is the audience가 아니라 원문 the audience is가 맞다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "나는 그 문제가 얼마나 어려운지 몰랐다.",
+     "sentence": "",
+     "answer": "I didn't know how difficult the problem was.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "I",
+      "didn't",
+      "know",
+      "how",
+      "difficult",
+      "the",
+      "problem",
+      "was."
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "농담꾼의 기술은 청중이 얼마만큼의 놀라움을 받아들일 준비가 되어 있는지를 정확히 판단하는 데 있다.",
+     "sentence": "",
+     "answer": "The joke-teller's skill lies in judging exactly how much of a surprise the audience is prepared to take.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "The",
+      "joke-teller's",
+      "skill",
+      "lies",
+      "in",
+      "judging",
+      "exactly",
+      "how",
+      "much",
+      "of",
+      "a",
+      "surprise",
+      "the",
+      "audience",
+      "is",
+      "prepared",
+      "to",
+      "take."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "놀라움이 농담의 핵심",
+    "expressions": [
+     "Surprise is the fundamental joke mechanism",
+     "rely on an element of surprise"
+    ],
+    "variation": "예상 밖의 반전이 웃음을 만든다"
+   },
+   {
+    "label": "협곡 뛰어넘기 비유",
+    "expressions": [
+     "attempting to leap a metaphorical canyon",
+     "a thrilling leap of any kind"
+    ],
+    "variation": "셋업과 급소 사이의 적정 간격이 스릴을 만든다"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "주제 제시",
+    "sentence_range": "1~2",
+    "summary": "[[놀라움]]이 농담의 근본 원리, 반복되면 안 웃김",
+    "easy_example": "이미 아는 반전은 김빠진 사이다 같다."
+   },
+   {
+    "stage": "전개(기술)",
+    "sentence_range": "3~4",
+    "summary": "농담꾼은 청중이 감당할 [[놀라움의 정도]]를 판단",
+    "easy_example": "관객 수준을 재고 수위를 조절하는 개그맨."
+   },
+   {
+    "stage": "비유 도입",
+    "sentence_range": "5~6",
+    "summary": "Seinfeld의 [[협곡]] 비유: 셋업=이쪽 절벽, 급소=저쪽",
+    "easy_example": "멀리뛰기의 도움닫기와 착지 지점."
+   },
+   {
+    "stage": "조건 분석",
+    "sentence_range": "7~8",
+    "summary": "너무 멀면 못 건너고 너무 가까우면 [[짜릿함]] 없음",
+    "easy_example": "적당한 거리라야 점프가 스릴 있다."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "9",
+    "summary": "약간의 [[수고]]가 있어야 더 큰 즐거움",
+    "easy_example": "조금 고민해 푼 수수께끼가 더 통쾌하다."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Surprise is the fundamental joke mechanism.",
+   "grammar": [
+    {
+     "tag": "주격보어(2형식)",
+     "note": "be동사 뒤 명사구가 주어 Surprise를 보충 설명",
+     "spans": [
+      "is"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "fundamental",
+     "meaning": "근본적인"
+    },
+    {
+     "word": "mechanism",
+     "meaning": "원리, 기제"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Surprise is the fundamental joke mechanism.",
+     "ko": "[[놀라움]]이 근본적인 농담의 원리다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "놀라움은 농담을 작동시키는 근본 원리다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": [
+    "fundamental은 mechanism을 꾸미는 형용사로 '핵심적인 원리'의 뜻이다."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "Most punch lines rely on an element of surprise for their effect ― that's why they're not funny the third time you hear them.",
+   "grammar": [
+    {
+     "tag": "rely on(구동사)",
+     "note": "'~에 의존하다'",
+     "spans": [
+      "rely on"
+     ]
+    },
+    {
+     "tag": "관계부사 why(결과)",
+     "note": "that's why ~는 '그래서 ~하다'로 결과를 이끎",
+     "spans": [
+      "why"
+     ]
+    },
+    {
+     "tag": "관계부사 생략(the third time)",
+     "note": "the third time 뒤에 관계부사 when이 생략되고 you hear them이 수식",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "punch line",
+     "meaning": "급소 대사, 결정적 한마디"
+    },
+    {
+     "word": "rely on",
+     "meaning": "~에 의존하다"
+    },
+    {
+     "word": "element",
+     "meaning": "요소"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Most punch lines rely on an element of surprise",
+     "ko": "대부분의 급소 대사는 [[놀라움]]의 요소에 의존한다"
+    },
+    {
+     "en": "for their effect ― that's why they're not funny",
+     "ko": "그 효과를 위해 ― 그래서 그것들은 [[웃기지]] 않다"
+    },
+    {
+     "en": "the third time you hear them.",
+     "ko": "당신이 그것들을 [[세 번째]]로 들을 때는."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "농담이 세 번째로 들어도 여전히 웃긴 이유는 놀라움 때문이다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "they're not funny the third time you hear them",
+     "why": "세 번째로 들으면 놀라움이 사라져 웃기지 않다고 했음.",
+     "killer": true
+    }
+   ],
+   "mistips": [
+    "that's why 뒤에는 '결과'가, that's because 뒤에는 '원인'이 온다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "The joke-teller's skill lies in judging exactly how much of a surprise the audience is prepared to take.",
+   "grammar": [
+    {
+     "tag": "lie in(구동사)",
+     "note": "'(본질이) ~에 있다'",
+     "spans": [
+      "lies in"
+     ]
+    },
+    {
+     "tag": "전치사+동명사",
+     "note": "전치사 in의 목적어로 쓰인 동명사",
+     "spans": [
+      "judging"
+     ]
+    },
+    {
+     "tag": "간접의문문(의문사 how)",
+     "note": "judging의 목적어인 의문사절, 「의문사+주어+동사」 어순",
+     "spans": [
+      "how"
+     ]
+    },
+    {
+     "tag": "be prepared to-V",
+     "note": "'~할 준비가 되어 있다'",
+     "spans": [
+      "prepared to take"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "joke-teller",
+     "meaning": "농담하는 사람"
+    },
+    {
+     "word": "lie in",
+     "meaning": "~에 (본질이) 있다"
+    },
+    {
+     "word": "judge",
+     "meaning": "판단하다, 가늠하다"
+    },
+    {
+     "word": "be prepared to",
+     "meaning": "~할 준비가 되어 있다"
+    },
+    {
+     "word": "audience",
+     "meaning": "청중, 관객"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The joke-teller's skill lies in judging exactly",
+     "ko": "농담꾼의 기술은 정확히 [[판단하는]] 데 있다"
+    },
+    {
+     "en": "how much of a surprise the audience",
+     "ko": "청중이 얼마만큼의 [[놀라움]]을"
+    },
+    {
+     "en": "is prepared to take.",
+     "ko": "받아들일 [[준비가]] 되어 있는지를."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "농담꾼의 기술은 청중이 감당할 수 있는 놀라움의 정도를 정확히 가늠하는 데 있다.",
+     "verdict": "O",
+     "trap_type": "구조수식"
+    }
+   ],
+   "mistips": [
+    "how much of a surprise ~는 judging의 목적어인 간접의문문으로 「의문사+주어+동사」 평서문 어순이다."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "He must make a series of assumptions about what they will understand, what their reference points are, and how relaxed they appear to be.",
+   "grammar": [
+    {
+     "tag": "조동사 must(의무)",
+     "note": "'~해야 한다'로 필요·의무를 나타냄",
+     "spans": [
+      "must"
+     ]
+    },
+    {
+     "tag": "간접의문문 병렬(what·what·how)",
+     "note": "전치사 about의 목적어인 세 의문사절이 병렬",
+     "spans": [
+      "what",
+      "what",
+      "how"
+     ]
+    },
+    {
+     "tag": "병렬구조(A, B, and C)",
+     "note": "세 개의 명사절을 대등하게 연결",
+     "spans": [
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "assumption",
+     "meaning": "가정, 추정"
+    },
+    {
+     "word": "reference point",
+     "meaning": "준거점, 기준점"
+    },
+    {
+     "word": "relaxed",
+     "meaning": "편안한, 느긋한"
+    },
+    {
+     "word": "appear",
+     "meaning": "~처럼 보이다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "He must make a series of assumptions about",
+     "ko": "그는 일련의 [[가정]]을 세워야 한다"
+    },
+    {
+     "en": "what they will understand,",
+     "ko": "그들이 무엇을 [[이해할]]지,"
+    },
+    {
+     "en": "what their reference points are,",
+     "ko": "그들의 [[준거점]]이 무엇인지,"
+    },
+    {
+     "en": "[[and how relaxed they appear to be.]]",
+     "ko": "[[그리고 그들이 얼마나 편안해 보이는지를.]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "농담꾼이 가정을 세우는 대상인 they는 청중을 가리킨다.",
+     "verdict": "O",
+     "trap_type": "지칭"
+    },
+    {
+     "statement": "필자에 따르면 they가 가리키는 것은 농담을 하는 사람(the joke-teller)이다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "what they will understand",
+     "why": "they는 앞의 the audience(청중)를 가리키며 농담하는 사람이 아니다.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "what·what·how가 이끄는 세 절이 전치사 about의 목적어로 병렬을 이룬다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Jerry Seinfeld once compared telling a joke to attempting to leap a metaphorical canyon, taking the audience with you.",
+   "grammar": [
+    {
+     "tag": "compare A to B(구문)",
+     "note": "'A를 B에 비유하다'",
+     "spans": [
+      "compared",
+      "to"
+     ]
+    },
+    {
+     "tag": "동명사(목적어)",
+     "note": "compared의 목적어(A)로 쓰인 동명사",
+     "spans": [
+      "telling"
+     ]
+    },
+    {
+     "tag": "분사구문(부대상황)",
+     "note": "you를 의미상 주어로 하는 동시동작 현재분사구문",
+     "spans": [
+      "taking"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "compare A to B",
+     "meaning": "A를 B에 비유하다"
+    },
+    {
+     "word": "attempt",
+     "meaning": "시도하다"
+    },
+    {
+     "word": "leap",
+     "meaning": "뛰어넘다, 도약(하다)"
+    },
+    {
+     "word": "metaphorical",
+     "meaning": "은유적인, 비유적인"
+    },
+    {
+     "word": "canyon",
+     "meaning": "협곡"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Jerry Seinfeld once compared telling a joke",
+     "ko": "Jerry Seinfeld는 언젠가 농담하는 것을 [[비유했다]]"
+    },
+    {
+     "en": "[[to attempting to leap a metaphorical canyon,]]",
+     "ko": "[[은유적인 협곡을 뛰어넘으려는 시도에,]]"
+    },
+    {
+     "en": "taking the audience with you.",
+     "ko": "[[청중]]을 데리고 가면서."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Jerry Seinfeld는 실제로 협곡을 뛰어넘는 활동을 즐긴다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "attempting to leap a metaphorical canyon",
+     "why": "협곡은 은유일 뿐 그의 실제 취미에 관한 정보는 없음."
+    }
+   ],
+   "mistips": [
+    "compare A to B 구조에서 A=telling a joke, B=attempting to leap a metaphorical canyon이다."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "The setup to the joke is the near-side cliff, and the punch line is the far side.",
+   "grammar": [
+    {
+     "tag": "주격보어(2형식)",
+     "note": "be동사 뒤 명사구가 주어와 등가 관계",
+     "spans": [
+      "is"
+     ]
+    },
+    {
+     "tag": "등위접속사 and(절 병렬)",
+     "note": "두 개의 완전한 절을 대등하게 연결",
+     "spans": [
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "setup",
+     "meaning": "도입부, 밑밥"
+    },
+    {
+     "word": "near-side",
+     "meaning": "가까운 쪽의"
+    },
+    {
+     "word": "cliff",
+     "meaning": "절벽"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The setup to the joke is the near-side cliff,",
+     "ko": "농담의 도입부는 가까운 쪽 [[절벽]]이고,"
+    },
+    {
+     "en": "and the punch line is the far side.",
+     "ko": "급소 대사는 [[먼]] 쪽이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "농담의 도입부는 먼 쪽 절벽이고 급소 대사는 가까운 쪽이다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "The setup to the joke is the near-side cliff",
+     "why": "도입부가 가까운 쪽, 급소가 먼 쪽인데 서로 뒤바뀌었음."
+    }
+   ],
+   "mistips": [
+    "near-side와 far side가 각각 셋업과 급소에 대응됨을 놓치지 말 것."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "If they're too far apart, the listeners don't make it to the other side.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사 if(조건)",
+     "note": "'만약 ~라면'으로 조건을 제시",
+     "spans": [
+      "If"
+     ]
+    },
+    {
+     "tag": "too+형용사",
+     "note": "'너무 ~한'으로 과도함을 나타냄",
+     "spans": [
+      "too"
+     ]
+    },
+    {
+     "tag": "make it to(관용)",
+     "note": "'~에 도달하다·해내다'",
+     "spans": [
+      "make it to"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "apart",
+     "meaning": "떨어져"
+    },
+    {
+     "word": "listener",
+     "meaning": "청자, 듣는 사람"
+    },
+    {
+     "word": "make it to",
+     "meaning": "~에 도달하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "If they're too far apart,",
+     "ko": "만약 그것들이 너무 멀리 [[떨어져]] 있으면,"
+    },
+    {
+     "en": "the listeners don't make it to the other side.",
+     "ko": "청자들은 반대편에 [[도달하지]] 못한다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "셋업과 급소가 너무 멀리 떨어져 있으면 청자들은 반대편에 이르지 못한다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    },
+    {
+     "statement": "청자들이 반대편에 도달하지 못하는 것은 셋업과 급소가 너무 가깝기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "If they're too far apart, the listeners don't make it to the other side",
+     "why": "도달 실패의 원인은 너무 가까워서가 아니라 너무 멀어서임."
+    }
+   ],
+   "mistips": [
+    "they는 앞 문장의 the near-side cliff와 the far side, 즉 셋업과 급소를 가리킨다."
+   ]
+  },
+  {
+   "id": 8,
+   "english": "And if they are too close together, the audience just steps across the gap and doesn't experience a thrilling leap of any kind.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사 if(조건)",
+     "note": "'만약 ~라면'으로 반대 상황의 조건을 제시",
+     "spans": [
+      "if"
+     ]
+    },
+    {
+     "tag": "동사구 병렬(and)",
+     "note": "steps across ~와 doesn't experience ~를 대등하게 연결",
+     "spans": [
+      "and"
+     ]
+    },
+    {
+     "tag": "전면 부정(of any kind)",
+     "note": "'어떤 종류의 ~도 아니다'로 전면 부정을 강조",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "gap",
+     "meaning": "틈, 간극"
+    },
+    {
+     "word": "thrilling",
+     "meaning": "짜릿한, 스릴 있는"
+    },
+    {
+     "word": "leap",
+     "meaning": "도약, 뛰기"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "And if they are too close together,",
+     "ko": "그리고 만약 그것들이 너무 [[가까이]] 붙어 있으면,"
+    },
+    {
+     "en": "the audience just steps across the gap",
+     "ko": "청중은 그저 그 [[틈]]을 건너 밟고"
+    },
+    {
+     "en": "[[and doesn't experience a thrilling leap of any kind.]]",
+     "ko": "[[어떤 종류의 짜릿한 도약도 경험하지 못한다.]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 셋업과 급소가 가까울수록 청중이 더 짜릿함을 느낀다고 본다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "doesn't experience a thrilling leap of any kind",
+     "why": "너무 가까우면 짜릿한 도약을 전혀 경험하지 못한다고 필자가 봄."
+    }
+   ],
+   "mistips": [
+    "steps across와 doesn't experience가 and로 병렬된 주어 the audience의 두 술어다."
+   ]
+  },
+  {
+   "id": 9,
+   "english": "The joke-hearers get far more pleasure from the joke if they have to do a little work.",
+   "grammar": [
+    {
+     "tag": "비교급 강조 far",
+     "note": "비교급 more를 강조하는 부사 far(훨씬)",
+     "spans": [
+      "far more"
+     ]
+    },
+    {
+     "tag": "부사절 접속사 if(조건)",
+     "note": "'만약 ~라면'으로 조건을 제시",
+     "spans": [
+      "if"
+     ]
+    },
+    {
+     "tag": "have to(조동사구)",
+     "note": "'~해야 한다'로 필요를 나타냄",
+     "spans": [
+      "have to"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "joke-hearer",
+     "meaning": "농담을 듣는 사람"
+    },
+    {
+     "word": "pleasure",
+     "meaning": "즐거움, 기쁨"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The joke-hearers get far more pleasure from the joke",
+     "ko": "농담을 듣는 사람들은 그 농담에서 훨씬 더 많은 [[즐거움]]을 얻는다"
+    },
+    {
+     "en": "if they have to do a little work.",
+     "ko": "만약 그들이 약간의 [[수고]]를 해야 한다면."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "청중은 아무 수고도 하지 않을 때 농담에서 가장 큰 즐거움을 얻는다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "if they have to do a little work",
+     "why": "약간의 수고를 해야 즐거움이 더 커진다고 했음.",
+     "english": false
+    },
+    {
+     "statement": "Jokes are more enjoyable when the listeners do no work at all.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "if they have to do a little work",
+     "why": "약간의 수고가 있을 때 즐거움이 더 커진다고 했음.",
+     "english": true
+    }
+   ],
+   "mistips": [
+    "far는 비교급 more를 강조하는 부사로 very로 바꿔 쓸 수 없다."
+   ]
+  }
+ ]
+}

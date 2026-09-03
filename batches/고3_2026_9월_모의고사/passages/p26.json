@@ -1,0 +1,718 @@
+{
+ "item_no": "26",
+ "theme": "애니메이션을 빚은 감독 Chuck Jones",
+ "overview": {
+  "theme_ko": "애니메이션을 빚은 Chuck Jones",
+  "topic": "🔎 애니메이션 감독 Chuck Jones의 생애와 업적",
+  "stance": "긍정적",
+  "stance_reason": "an influential director, famous characters, an Honorary Academy Award 등 업적 중심의 서술",
+  "structure": "시간·순서(나열)",
+  "structure_reason": "born in 1912 → 1930 경력 시작 → 1940s 캐릭터 → 1970 회사 → 1996 수상 → late in his life 순서로 전개",
+  "key_grammar": {
+   "point": "소유격 관계대명사 (whose)",
+   "source_sentence": "Chuck Jones was an influential director and artist whose work shaped animated films and cartoon production.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "whose는 '그 사람의/그것의'라는 소유의 뜻을 지닌 관계대명사로, 두 문장을 하나로 잇는다."
+    },
+    {
+     "chip": "형태",
+     "text": "선행사(사람·사물) + whose + 명사: whose 바로 뒤에 '소유되는 명사'가 관사 없이 온다."
+    },
+    {
+     "chip": "본문에서",
+     "text": "artist whose work = an artist and his work: 예술가(선행사)가 work(작품)를 소유하는 관계다."
+    },
+    {
+     "chip": "주의",
+     "text": "who's(=who is/has)와 혼동하지 않는다. 뒤에 명사가 오면 소유격 whose다."
+    },
+    {
+     "chip": "헷갈리면",
+     "text": "of which로도 풀 수 있다: an artist the work of whom / of which shaped ~."
+    }
+   ],
+   "example_analysis": "whose work shaped ~ = 선행사 artist가 work를 소유하고, 그 work가 shaped의 주어가 되는 소유격 관계사절.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "Chuck Jones [[1|was]] an influential director [[2|and]] artist [[3|who]] work [[4|shaped]] [[5|animated]] films and cartoon production.",
+     "answer": "③",
+     "fix": "who → whose: 뒤 명사 work를 수식하며 선행사 artist가 그것을 소유하는 관계이므로 소유격 관계대명사 whose가 옳다.",
+     "options": [
+      "① was",
+      "② and",
+      "③ who",
+      "④ shaped",
+      "⑤ animated"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "He used the leftover pencils and paper [[that/what]] his father [[brought/brought to]] him from work.",
+     "answer": "that / brought",
+     "fix": "",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "answer": "Chuck Jones was an influential director and artist whom work shaped animated films and cartoon production.",
+     "fix": "whom → whose: 뒤 명사 work를 수식하는 소유 관계이므로 소유격 관계대명사 whose가 옳다.",
+     "options": [
+      "Jones began his career in animation in 1930 and was quickly promoted.",
+      "Chuck Jones was an influential director and artist whom work shaped animated films and cartoon production.",
+      "In the 1940s, he created famous characters such as Wile E. Coyote and the Road Runner.",
+      "He directed the famous cartoon film How the Grinch Stole Christmas, which is still enjoyed by many people today.",
+      "For his contribution to the field of animation, he received an Honorary Academy Award in 1996."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그는 소설이 여러 언어로 번역된 작가를 만났다.",
+     "sentence": "",
+     "answer": "He met a writer whose novels were translated into several languages.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "He met",
+      "a writer",
+      "whose",
+      "novels",
+      "were translated",
+      "into several languages"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "Chuck Jones는 자신의 작품이 애니메이션 영화와 만화 제작을 형성한 영향력 있는 감독이자 예술가였다.",
+     "sentence": "",
+     "answer": "Chuck Jones was an influential director and artist whose work shaped animated films and cartoon production.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Chuck Jones",
+      "was",
+      "an influential director and artist",
+      "whose",
+      "work",
+      "shaped",
+      "animated films and cartoon production."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "애니메이션에 남긴 업적",
+    "expressions": [
+     "shaped animated films and cartoon production",
+     "created famous characters",
+     "contribution to the field of animation"
+    ],
+    "variation": "작품·캐릭터·수상으로 이어지는 애니메이션 분야 기여의 흐름"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입",
+    "sentence_range": "1",
+    "summary": "작품으로 애니메이션을 [[shaped]] 영향력 있는 감독 Chuck Jones",
+    "easy_example": "'이 분야를 만든 사람'이라고 소개되는 인물"
+   },
+   {
+    "stage": "성장",
+    "sentence_range": "2~4",
+    "summary": "1912년 출생·[[Los Angeles]] 성장, 아버지가 준 연필·종이로 그림 그릴 기회를 누림",
+    "easy_example": "집에서 남는 재료로 그림 연습하던 어린 시절"
+   },
+   {
+    "stage": "초기 경력",
+    "sentence_range": "5~6",
+    "summary": "1930년 경력 시작·빠른 승진, 1940년대 [[famous characters]] 창작",
+    "easy_example": "Wile E. Coyote·Road Runner를 만든 시기"
+   },
+   {
+    "stage": "대표작",
+    "sentence_range": "7",
+    "summary": "How the Grinch Stole Christmas를 감독, 오늘날에도 사랑받음",
+    "easy_example": "지금도 명절에 보는 고전 애니메이션"
+   },
+   {
+    "stage": "후기 업적",
+    "sentence_range": "8~10",
+    "summary": "1970년 회사 설립, 1996년 [[Honorary Academy Award]] 수상, 말년에 비영리 단체 설립",
+    "easy_example": "자기 회사와 예술 교육 단체를 남긴 노년"
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Chuck Jones was an influential director and artist whose work shaped animated films and cartoon production.",
+   "grammar": [
+    {
+     "tag": "소유격 관계대명사(whose)",
+     "note": "whose work = 선행사(artist)의 작품 — 소유 관계",
+     "spans": [
+      "whose"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "influential",
+     "meaning": "영향력 있는"
+    },
+    {
+     "word": "director",
+     "meaning": "감독"
+    },
+    {
+     "word": "shape",
+     "meaning": "형성하다, 빚다"
+    },
+    {
+     "word": "animated",
+     "meaning": "애니메이션의"
+    },
+    {
+     "word": "cartoon production",
+     "meaning": "만화 제작"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Chuck Jones was an influential director and artist",
+     "ko": "Chuck Jones는 영향력 있는 [[감독]]이자 예술가였다"
+    },
+    {
+     "en": "whose work shaped animated films and cartoon production.",
+     "ko": "그의 작품이 애니메이션 영화와 만화 제작을 [[형성했다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Chuck Jones는 애니메이션 영화와 만화 제작에 영향을 준 감독이자 예술가였다.",
+     "verdict": "O",
+     "trap_type": "구조수식"
+    },
+    {
+     "statement": "필자는 Chuck Jones를 높이 평가하지만, 그 근거를 그의 상업적 흥행 수익 때문이라고 본다.",
+     "verdict": "△",
+     "trap_type": "필자관점",
+     "anchor": "an influential director and artist whose work shaped animated films and cartoon production",
+     "why": "긍정적 평가는 맞지만 근거는 수익이 아니라 작품이 이 분야를 형성한 영향력이다."
+    }
+   ],
+   "mistips": [
+    "whose 뒤에는 관사 없이 명사(work)가 바로 온다."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "He was born in Spokane, Washington, in 1912, though he grew up in Los Angeles.",
+   "grammar": [
+    {
+     "tag": "수동태",
+     "note": "was born = 태어났다(수동 표현)",
+     "spans": [
+      "was born"
+     ]
+    },
+    {
+     "tag": "양보 부사절(though)",
+     "note": "though ~ = 비록 ~이지만",
+     "spans": [
+      "though"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "be born",
+     "meaning": "태어나다"
+    },
+    {
+     "word": "grow up",
+     "meaning": "자라다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "He was born in Spokane, Washington, in 1912,",
+     "ko": "그는 1912년 워싱턴주 Spokane에서 [[태어났다]],"
+    },
+    {
+     "en": "though he grew up in Los Angeles.",
+     "ko": "비록 그는 Los Angeles에서 [[자랐지만]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Chuck Jones가 어린 시절을 보낸 곳은 그가 태어난 도시인 Spokane이다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "though he grew up in Los Angeles",
+     "why": "태어난 곳은 Spokane이지만 자란 곳은 Los Angeles로 서로 다른 도시다."
+    }
+   ],
+   "mistips": [
+    "born in ~(태어난 곳)과 grew up in ~(자란 곳)을 분리해 읽는다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "As a child, Jones had many opportunities to draw.",
+   "grammar": [
+    {
+     "tag": "to부정사(형용사적 용법)",
+     "note": "opportunities to draw = 그릴 기회(명사 수식)",
+     "spans": [
+      "to draw"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "opportunity",
+     "meaning": "기회"
+    },
+    {
+     "word": "draw",
+     "meaning": "그리다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "As a child, Jones had",
+     "ko": "[[어린]] 시절, Jones는 가졌다"
+    },
+    {
+     "en": "many opportunities to draw.",
+     "ko": "그림을 그릴 많은 [[기회를]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Jones는 어린 시절 정식 미술 학교에 다니며 그림 그릴 기회를 얻었다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "Jones had many opportunities to draw",
+     "why": "많은 기회를 가졌다고만 했을 뿐 정식 미술 학교 언급은 없다."
+    }
+   ],
+   "mistips": [
+    "opportunities to draw : to draw가 앞 명사를 꾸미는 형용사적 용법이다."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "He used the leftover pencils and paper that his father brought him from work.",
+   "grammar": [
+    {
+     "tag": "목적격 관계대명사(that)",
+     "note": "that = pencils and paper를 선행사로 받는 목적격 관계사",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "수여동사(4형식)",
+     "note": "brought him ... = 그에게 ~을 가져다주었다",
+     "spans": [
+      "brought him"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "leftover",
+     "meaning": "쓰다 남은, 남은"
+    },
+    {
+     "word": "bring",
+     "meaning": "가져다주다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "He used the leftover pencils and paper",
+     "ko": "그는 쓰다 남은 [[연필과]] 종이를 사용했다"
+    },
+    {
+     "en": "that his father brought him from work.",
+     "ko": "그의 [[아버지가]] 직장에서 그에게 가져다준"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Jones는 아버지가 직장에서 가져다준 남은 연필과 종이를 사용했다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": [
+    "that ~ brought : 목적어가 빠진 목적격 관계사절로 앞 명사를 수식한다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Jones began his career in animation in 1930 and was quickly promoted.",
+   "grammar": [
+    {
+     "tag": "등위접속(and) 병렬",
+     "note": "began ... and was promoted = 술어 병렬",
+     "spans": [
+      "and"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "was quickly promoted = 승진되었다(수동)",
+     "spans": [
+      "was quickly promoted"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "career",
+     "meaning": "경력, 직업"
+    },
+    {
+     "word": "animation",
+     "meaning": "애니메이션"
+    },
+    {
+     "word": "promote",
+     "meaning": "승진시키다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Jones began his career in animation in 1930",
+     "ko": "Jones는 1930년 애니메이션 분야에서 [[경력을]] 시작했고"
+    },
+    {
+     "en": "and was quickly promoted.",
+     "ko": "그리고 빠르게 [[승진했다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Jones는 자신의 회사를 차린 덕분에 애니메이션 경력을 빠르게 시작할 수 있었다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "began his career in animation in 1930",
+     "why": "경력 시작(1930)은 자기 회사 설립(1970)보다 앞서므로 회사 덕분이라는 인과가 성립하지 않는다.",
+     "integrative": true
+    }
+   ],
+   "mistips": [
+    "began ~ and was promoted : and가 두 술어를 병렬로 이어 준다."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "In the 1940s, he created famous characters such as Wile E. Coyote and the Road Runner.",
+   "grammar": [
+    {
+     "tag": "과거시제 능동",
+     "note": "created = (직접) 만들었다",
+     "spans": [
+      "created"
+     ]
+    },
+    {
+     "tag": "예시(such as)",
+     "note": "such as ~ = ~와 같은(예시)",
+     "spans": [
+      "such as"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "create",
+     "meaning": "만들어내다, 창작하다"
+    },
+    {
+     "word": "famous",
+     "meaning": "유명한"
+    },
+    {
+     "word": "character",
+     "meaning": "캐릭터, 등장인물"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In the 1940s, he created famous characters",
+     "ko": "1940년대에 그는 유명한 [[캐릭터들을]] 만들었다"
+    },
+    {
+     "en": "such as Wile E. Coyote and the Road Runner.",
+     "ko": "Wile E. Coyote와 [[Road Runner]] 같은"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Jones adapted the Road Runner from another studio's work.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "he created famous characters such as Wile E. Coyote and the Road Runner",
+     "why": "이 캐릭터들은 Jones가 직접 created(창작)한 것으로 다른 스튜디오의 각색이 아니다.",
+     "english": true
+    }
+   ],
+   "mistips": [
+    "such as 뒤는 앞 명사(characters)의 구체적 예시다."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "He directed the famous cartoon film How the Grinch Stole Christmas, which is still enjoyed by many people today.",
+   "grammar": [
+    {
+     "tag": "관계대명사 계속적 용법(, which)",
+     "note": ", which = 앞의 film을 부연 설명(계속적)",
+     "spans": [
+      "which"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "is still enjoyed by = 즐겨진다(현재 수동)",
+     "spans": [
+      "is still enjoyed"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "direct",
+     "meaning": "감독하다"
+    },
+    {
+     "word": "enjoy",
+     "meaning": "즐기다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "He directed the famous cartoon film",
+     "ko": "그는 유명한 만화 영화를 [[감독했다]]"
+    },
+    {
+     "en": "How the Grinch Stole Christmas,",
+     "ko": "How the [[Grinch]] Stole Christmas라는,"
+    },
+    {
+     "en": "which is still enjoyed by many people today.",
+     "ko": "오늘날에도 많은 사람들이 여전히 [[즐기는]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "How the Grinch Stole Christmas는 오늘날에는 거의 잊혀 사람들에게 즐겨지지 않는다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "which is still enjoyed by many people today",
+     "why": "여전히(still) 많은 사람이 즐긴다고 했으므로 잊혔다는 것은 반대다."
+    }
+   ],
+   "mistips": [
+    ", which : 콤마 뒤 which는 앞의 영화를 보충 설명하는 계속적 용법이다."
+   ]
+  },
+  {
+   "id": 8,
+   "english": "Jones started his own company, Chuck Jones Enterprises, in 1970.",
+   "grammar": [
+    {
+     "tag": "동격 명사",
+     "note": "his own company, Chuck Jones Enterprises = 동격",
+     "spans": [
+      "Chuck Jones Enterprises"
+     ]
+    },
+    {
+     "tag": "소유 강조(own)",
+     "note": "his own company = 자기 자신의 회사",
+     "spans": [
+      "his own"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "company",
+     "meaning": "회사"
+    },
+    {
+     "word": "enterprise",
+     "meaning": "기업"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Jones started his own company,",
+     "ko": "Jones는 자신의 [[회사를]] 차렸다,"
+    },
+    {
+     "en": "Chuck Jones Enterprises, in 1970.",
+     "ko": "즉 Chuck Jones Enterprises를 [[1970년]]에"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Jones는 명예 아카데미상을 받은 뒤 자신의 회사를 설립했다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "Jones started his own company, Chuck Jones Enterprises, in 1970",
+     "why": "회사 설립은 1970년, 명예상 수상은 1996년으로 회사 설립이 먼저다.",
+     "killer": true,
+     "integrative": true
+    }
+   ],
+   "mistips": [
+    "his own company와 Chuck Jones Enterprises는 같은 대상을 가리키는 동격이다."
+   ]
+  },
+  {
+   "id": 9,
+   "english": "For his contribution to the field of animation, he received an Honorary Academy Award in 1996.",
+   "grammar": [
+    {
+     "tag": "전치사구(이유 For)",
+     "note": "For his contribution = ~에 대한 공로로",
+     "spans": [
+      "For"
+     ]
+    },
+    {
+     "tag": "과거시제 능동",
+     "note": "received = 받았다",
+     "spans": [
+      "received"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "contribution",
+     "meaning": "공헌, 기여"
+    },
+    {
+     "word": "field",
+     "meaning": "분야"
+    },
+    {
+     "word": "honorary",
+     "meaning": "명예의"
+    },
+    {
+     "word": "receive",
+     "meaning": "받다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "For his contribution to the field of animation,",
+     "ko": "애니메이션 분야에 대한 그의 [[공로로]],"
+    },
+    {
+     "en": "he received an Honorary Academy Award in 1996.",
+     "ko": "그는 1996년 [[명예 아카데미상]]을 받았다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Jones는 애니메이션 분야에 대한 공로로 1996년 명예 아카데미상을 받았다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    }
+   ],
+   "mistips": [
+    "For his contribution : For는 '~에 대한 공로로'라는 이유를 나타낸다."
+   ]
+  },
+  {
+   "id": 10,
+   "english": "Late in his life, he established a non-profit organization supporting art education and other creative skills.",
+   "grammar": [
+    {
+     "tag": "과거시제 능동",
+     "note": "established = 설립했다",
+     "spans": [
+      "established"
+     ]
+    },
+    {
+     "tag": "분사(현재분사 수식)",
+     "note": "organization supporting ~ = 단체를 수식하는 분사",
+     "spans": [
+      "supporting"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "establish",
+     "meaning": "설립하다"
+    },
+    {
+     "word": "non-profit organization",
+     "meaning": "비영리 단체"
+    },
+    {
+     "word": "support",
+     "meaning": "지원하다"
+    },
+    {
+     "word": "creative",
+     "meaning": "창의적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Late in his life,",
+     "ko": "생애 [[말년]]에,"
+    },
+    {
+     "en": "he established a non-profit organization",
+     "ko": "그는 비영리 [[단체를]] 설립했다"
+    },
+    {
+     "en": "supporting art education and other creative skills.",
+     "ko": "[[미술 교육]]과 그 밖의 창의적 기술을 지원하는"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Jones가 말년에 세운 비영리 단체는 은퇴한 애니메이터들의 생계를 지원하기 위한 것이었다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "supporting art education and other creative skills",
+     "why": "단체는 미술 교육과 창의적 기술을 지원하는 것으로 은퇴자 생계 지원은 언급이 없다."
+    }
+   ],
+   "mistips": [
+    "organization supporting ~ : 분사 supporting이 앞의 단체를 뒤에서 꾸민다."
+   ]
+  }
+ ]
+}

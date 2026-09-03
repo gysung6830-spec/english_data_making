@@ -1,0 +1,595 @@
+{
+ "item_no": "22",
+ "theme": "앞자리 효과 — 자리 배치가 참여와 기억에 미치는 영향",
+ "overview": {
+  "theme_ko": "자리 배치가 참여와 기억에 미치는 영향",
+  "topic": "🔎 청중의 좌석 위치와 학습·참여도의 관계",
+  "stance": "중립적",
+  "stance_reason": "Studies show와 In one experiment we conducted처럼 관찰·실험 결과를 그대로 보고함",
+  "structure": "주장→근거·예시",
+  "structure_reason": "앞줄이 가장 잘 배운다는 주장을 제시한 뒤 자리를 바꾼 실험으로 뒷받침함",
+  "key_grammar": {
+   "point": "to부정사의 부사적 용법 (목적, in order to)",
+   "source_sentence": "Studies show that people who sit in the front row learn and retain more than others in the audience, partially because those in the front row are more eager to learn, and they show more attention to the speaker in order to avoid being called on.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "'in order to + 동사원형'은 '~하기 위해서'라는 목적을 나타내는 to부정사의 부사적 용법이다."
+    },
+    {
+     "chip": "핵심",
+     "text": "in order to는 목적을 나타내는 to부정사를 더 분명히 한 형태로, in order to avoid는 '피하기 위해서'로 해석한다."
+    },
+    {
+     "chip": "주의",
+     "text": "in order to 뒤에는 반드시 동사원형이 오고, 그 뒤의 avoid는 목적어로 동명사(being called)를 취한다."
+    },
+    {
+     "chip": "비교",
+     "text": "부정의 목적(~하지 않기 위해)은 in order not to로 나타낸다."
+    }
+   ],
+   "example_analysis": "they show more attention ... in order to avoid being called on에서 in order to avoid가 '지목당함을 피하기 위해'라는 목적을 나타내며 앞 절을 수식한다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "Studies show that people [[1|who]] sit in the front row learn and retain more [[2|than]] others in the audience, partially [[3|because]] those in the front row [[4|are]] more eager to learn, and they show more attention to the speaker in order to avoid [[5|to be called]] on.",
+     "answer": "⑤",
+     "fix": "avoid는 목적어로 동명사를 취하므로 to be called이 아니라 being called이 되어야 한다(원문: being called).",
+     "options": [
+      "① who",
+      "② than",
+      "③ because",
+      "④ are",
+      "⑤ to be called"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "We found [[that/what]] this strategy not only increased the participation and recall of the normally negative participants [[who/which]] sat up front, it also decreased the participation and recall of the usually positive participants who [[had been sent/had sent]] to the back.",
+     "answer": "that / who / had been sent",
+     "fix": "완전한 절을 이끄는 명사절 접속사 that, 사람 선행사의 주격 관계대명사 who, '보내진'이라는 수동·과거완료의 had been sent가 옳다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "answer": "In one experiment we conducted, we placed name cards on participants' seats so they could not took their usual positions.",
+     "fix": "조동사 could 뒤에는 동사원형이 와야 하므로 took이 아니라 take가 되어야 한다(원문: could not take).",
+     "options": [
+      "① Those in the middle sections are the next most attentive and ask the most questions, as the middle section is considered a safe area, surrounded by others.",
+      "② The side areas and back are the least responsive and attentive.",
+      "③ In one experiment we conducted, we placed name cards on participants' seats so they could not took their usual positions.",
+      "④ We intentionally sat enthusiastic people to the sides and rear of the room, and well-known back-row hermits sat in the front.",
+      "⑤ We found that this strategy not only increased the participation and recall of the normally negative participants who sat up front, it also decreased the participation and recall of the usually positive participants who had been sent to the back."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그녀는 시험에 합격하기 위해 매일 밤 열심히 공부했다.",
+     "sentence": "",
+     "answer": "She studied hard every night in order to pass the exam.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "She",
+      "studied",
+      "hard",
+      "every",
+      "night",
+      "in order to",
+      "pass",
+      "the",
+      "exam."
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "측면 구역들과 뒷자리는 가장 반응이 적고 주의도 적다.",
+     "sentence": "",
+     "answer": "The side areas and back are the least responsive and attentive.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "The side areas",
+      "and",
+      "back",
+      "are",
+      "the least",
+      "responsive",
+      "and",
+      "attentive."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "좌석별 주의 집중도",
+    "expressions": [
+     "are more eager to learn",
+     "the next most attentive",
+     "the least responsive and attentive"
+    ],
+    "variation": "앞→가운데→측면·뒤로 갈수록 주의와 참여가 낮아진다"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입·주장",
+    "sentence_range": "1",
+    "summary": "[[앞줄]]에 앉는 사람이 가장 잘 배우고 기억함",
+    "easy_example": "교실 맨 앞자리 학생이 필기를 가장 열심히 하는 것과 같다"
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "2~3",
+    "summary": "가운데는 다음으로 주의 깊고, [[측면·뒤]]는 가장 반응이 적음",
+    "easy_example": "콘서트에서 무대 가까운 자리일수록 더 몰입하는 모습"
+   },
+   {
+    "stage": "사례(실험)",
+    "sentence_range": "4~5",
+    "summary": "이름표로 자리를 바꿔 [[열정적·소극적]] 사람의 위치를 뒤바꿈",
+    "easy_example": "지정석 표를 붙여 늘 앉던 자리에 못 앉게 한 상황"
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "6",
+    "summary": "자리 배치가 [[참여와 회상]]을 양방향으로 바꿈",
+    "easy_example": "앞으로 오니 조용하던 사람이 발표에 끼어드는 변화"
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Studies show that people who sit in the front row learn and retain more than others in the audience, partially because those in the front row are more eager to learn, and they show more attention to the speaker in order to avoid being called on.",
+   "grammar": [
+    {
+     "tag": "주격 관계대명사",
+     "note": "people을 수식하는 관계사절을 이끈다",
+     "spans": [
+      "who"
+     ]
+    },
+    {
+     "tag": "비교급 (more ~ than)",
+     "note": "'다른 이들보다 더'라는 비교를 나타낸다",
+     "spans": [
+      "more",
+      "than"
+     ]
+    },
+    {
+     "tag": "부사절 접속사 (이유)",
+     "note": "'~때문에'라는 이유를 이끈다",
+     "spans": [
+      "because"
+     ]
+    },
+    {
+     "tag": "to부정사 (부사적 용법·목적)",
+     "note": "'~하기 위해서'라는 목적을 나타낸다",
+     "spans": [
+      "in order to"
+     ]
+    },
+    {
+     "tag": "동명사의 수동태 (being p.p.)",
+     "note": "avoid의 목적어로 '지목당하는 것'을 나타낸다",
+     "spans": [
+      "being called"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "retain",
+     "meaning": "(기억을) 유지하다"
+    },
+    {
+     "word": "eager",
+     "meaning": "열망하는, 간절한"
+    },
+    {
+     "word": "attention",
+     "meaning": "주의, 주목"
+    },
+    {
+     "word": "be called on",
+     "meaning": "(발표·답변을 하도록) 지목당하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Studies show that people who sit in the front row",
+     "ko": "연구들은 보여준다, [[앞줄]]에 앉는 사람들이"
+    },
+    {
+     "en": "[[learn and retain more than others in the audience,]]",
+     "ko": "[[청중 속 다른 이들보다 더 많이 배우고 기억한다는 것을]]"
+    },
+    {
+     "en": "partially because those in the front row",
+     "ko": "부분적으로는 [[앞줄]]에 앉은 사람들이"
+    },
+    {
+     "en": "are more eager to learn,",
+     "ko": "더 [[배우고]] 싶어 하기 때문에"
+    },
+    {
+     "en": "and they show more attention to the speaker",
+     "ko": "그리고 그들은 발표자에게 더 많은 [[주의]]를 기울인다"
+    },
+    {
+     "en": "[[in order to avoid being called on.]]",
+     "ko": "[[지목당하는 것을 피하기 위해서]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "앞줄에 앉는 사람들은 지목당하는 것을 피하려고 발표자에게 더 많은 주의를 기울인다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    },
+    {
+     "statement": "앞줄에 앉은 사람들이 더 많이 배우는 것은 그들이 발표자에게 지목당하기 때문이다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "in order to avoid being called on",
+     "why": "지목을 피하려 주의할 뿐, 지목당함 자체가 더 배우는 원인은 아니다."
+    }
+   ],
+   "mistips": [
+    "in order to + 동사원형 = ~하기 위해서(목적), 뒤의 avoid는 동명사 목적어(being called)를 취한다."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "Those in the middle sections are the next most attentive and ask the most questions, as the middle section is considered a safe area, surrounded by others.",
+   "grammar": [
+    {
+     "tag": "최상급",
+     "note": "'가장 ~한'을 나타내는 최상급 표지",
+     "spans": [
+      "most attentive",
+      "the most questions"
+     ]
+    },
+    {
+     "tag": "부사절 접속사 (이유)",
+     "note": "'~때문에'라는 이유를 이끈다",
+     "spans": [
+      "as"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "'~로 여겨진다'라는 수동 의미",
+     "spans": [
+      "is considered"
+     ]
+    },
+    {
+     "tag": "분사구문 (과거분사)",
+     "note": "'~에 둘러싸인 채'로 부대상황을 나타낸다",
+     "spans": [
+      "surrounded"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "attentive",
+     "meaning": "주의 깊은, 경청하는"
+    },
+    {
+     "word": "consider",
+     "meaning": "~라고 여기다"
+    },
+    {
+     "word": "surround",
+     "meaning": "둘러싸다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Those in the middle sections are the next most attentive",
+     "ko": "가운데 구역에 있는 사람들은 다음으로 가장 [[주의]] 깊고"
+    },
+    {
+     "en": "and ask the most questions,",
+     "ko": "그리고 [[질문]]을 가장 많이 한다"
+    },
+    {
+     "en": "[[as the middle section is considered a safe area, surrounded by others.]]",
+     "ko": "[[가운데 구역은 다른 사람들에게 둘러싸인 안전한 지대로 여겨지기 때문에]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "가운데 구역 사람들은 앞줄 다음으로 주의 깊으며 질문을 가장 많이 한다.",
+     "verdict": "O",
+     "trap_type": "구조수식"
+    },
+    {
+     "statement": "가운데 자리 사람들이 질문을 가장 많이 하는 것은 그들이 청중 가운데 가장 주의 깊기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "the middle section is considered a safe area",
+     "why": "질문이 많은 이유는 안전지대로 여겨져서지, 가장 주의 깊어서가 아니다."
+    }
+   ],
+   "mistips": [
+    "the next most attentive = '(앞줄) 다음으로 가장 주의 깊은'; next가 최상급 순위를 한 단계 낮춘다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "The side areas and back are the least responsive and attentive.",
+   "grammar": [
+    {
+     "tag": "최상급 (the least)",
+     "note": "'가장 ~하지 않은'을 나타낸다",
+     "spans": [
+      "least"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "responsive",
+     "meaning": "반응을 잘 보이는"
+    },
+    {
+     "word": "attentive",
+     "meaning": "주의 깊은"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The side areas and back are",
+     "ko": "[[측면]] 구역들과 뒷자리는"
+    },
+    {
+     "en": "[[the least responsive and attentive.]]",
+     "ko": "[[가장 반응이 적고 주의도 적다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "측면과 뒷자리가 가장 반응이 없는 이유는 그 자리들이 발표자에게서 가장 멀리 떨어져 있기 때문이다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "The side areas and back are the least responsive and attentive",
+     "why": "발표자와의 거리(멀다)에 대한 언급은 지문에 없다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "In one experiment we conducted, we placed name cards on participants' seats so they could not take their usual positions.",
+   "grammar": [
+    {
+     "tag": "목적격 관계대명사 생략",
+     "note": "experiment 뒤 (that) we conducted에서 목적격 관계대명사가 생략됨",
+     "spans": []
+    },
+    {
+     "tag": "부사절 (목적) so (that)",
+     "note": "'~하도록/못하도록'이라는 목적을 나타낸다",
+     "spans": [
+      "so"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "conduct",
+     "meaning": "(실험을) 수행하다"
+    },
+    {
+     "word": "participant",
+     "meaning": "참가자"
+    },
+    {
+     "word": "usual position",
+     "meaning": "평소의 자리"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In one experiment we conducted, we placed name cards on participants' seats",
+     "ko": "우리가 수행한 한 실험에서, 우리는 참가자들의 자리에 [[이름표]]를 놓았다"
+    },
+    {
+     "en": "[[so they could not take their usual positions.]]",
+     "ko": "[[그들이 평소 자리에 앉지 못하도록]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "In the experiment, participants freely chose their usual seats.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "so they could not take their usual positions",
+     "why": "이름표 때문에 참가자들은 평소 자리에 앉지 못했다.",
+     "english": "In the experiment, participants freely chose their usual seats."
+    }
+   ],
+   "mistips": [
+    "so (that) 절의 목적 표현; could not take = '앉을 수 없었다'."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "We intentionally sat enthusiastic people to the sides and rear of the room, and well-known back-row hermits sat in the front.",
+   "grammar": [
+    {
+     "tag": "등위접속사 and (절 병렬)",
+     "note": "두 개의 절을 대등하게 잇는다",
+     "spans": [
+      "and"
+     ]
+    },
+    {
+     "tag": "복합형용사 (과거분사)",
+     "note": "'잘 알려진'이라는 복합 형용사",
+     "spans": [
+      "well-known"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "intentionally",
+     "meaning": "의도적으로"
+    },
+    {
+     "word": "enthusiastic",
+     "meaning": "열정적인"
+    },
+    {
+     "word": "rear",
+     "meaning": "뒤쪽"
+    },
+    {
+     "word": "hermit",
+     "meaning": "은둔자"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "We intentionally sat enthusiastic people",
+     "ko": "우리는 의도적으로 [[열정적인]] 사람들을 앉혔다"
+    },
+    {
+     "en": "[[to the sides and rear of the room,]]",
+     "ko": "[[방의 측면과 뒤쪽에]]"
+    },
+    {
+     "en": "and well-known back-row hermits sat in the front.",
+     "ko": "그리고 잘 알려진 뒷줄 [[은둔자]]들은 앞줄에 앉았다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "실험자들은 의도적으로 열정적인 사람들을 앞줄에 앉히고, 뒷자리 은둔자들을 방의 측면과 뒤쪽에 앉혔다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "sat enthusiastic people to the sides and rear of the room",
+     "why": "열정적인 사람을 측면·뒤로, 은둔자를 앞으로 보내 위치를 반대로 배치했다.",
+     "killer": true
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "We found that this strategy not only increased the participation and recall of the normally negative participants who sat up front, it also decreased the participation and recall of the usually positive participants who had been sent to the back.",
+   "grammar": [
+    {
+     "tag": "명사절 접속사 that",
+     "note": "found의 목적어가 되는 명사절을 이끈다",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "상관접속사 (not only ~ also)",
+     "note": "'~뿐 아니라 ~도'라는 상관구조",
+     "spans": [
+      "not only",
+      "also"
+     ]
+    },
+    {
+     "tag": "주격 관계대명사",
+     "note": "participants를 수식하는 관계사절",
+     "spans": [
+      "who"
+     ]
+    },
+    {
+     "tag": "과거완료 수동태 (had been p.p.)",
+     "note": "'보내졌던'이라는 과거완료 수동",
+     "spans": [
+      "had been sent"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "strategy",
+     "meaning": "전략"
+    },
+    {
+     "word": "participation",
+     "meaning": "참여"
+    },
+    {
+     "word": "recall",
+     "meaning": "회상, 기억해 냄"
+    },
+    {
+     "word": "negative",
+     "meaning": "소극적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "We found that this strategy not only increased",
+     "ko": "우리는 이 전략이 ~뿐 아니라 [[증가]]시켰음을 발견했다"
+    },
+    {
+     "en": "[[the participation and recall of the normally negative participants]]",
+     "ko": "[[평소 소극적이던 참가자들의 참여와 회상을]]"
+    },
+    {
+     "en": "who sat up front,",
+     "ko": "[[앞줄]]에 앉은"
+    },
+    {
+     "en": "it also decreased the participation and recall",
+     "ko": "그것은 또한 참여와 회상을 [[감소]]시켰다"
+    },
+    {
+     "en": "[[of the usually positive participants who had been sent to the back.]]",
+     "ko": "[[뒤로 보내졌던 평소 적극적이던 참가자들의]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "뒤로 보내진 사람들은 원래 소극적이던 참가자들이었다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "the usually positive participants who had been sent to the back",
+     "why": "뒤로 보내진 사람들은 원래 적극적이던 참가자들이다."
+    },
+    {
+     "statement": "필자는 자리 배치가 참여도와 회상에 영향을 주지 않는다고 본다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "increased the participation and recall",
+     "why": "필자는 자리 배치가 참여와 회상을 실제로 바꾼다고 본다."
+    }
+   ],
+   "mistips": [
+    "not only A, it also B = 'A뿐 아니라 B도'; 두 절이 대조적 결과(증가↔감소)를 이룬다."
+   ]
+  }
+ ]
+}

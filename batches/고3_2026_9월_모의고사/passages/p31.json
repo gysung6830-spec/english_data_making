@@ -1,0 +1,791 @@
+{
+ "item_no": "31",
+ "theme": "발표 공포증 — 집단 배제에 대한 진화적 민감성",
+ "overview": {
+  "theme_ko": "발표 공포증과 집단 배제에 대한 진화적 민감성",
+  "topic": "🔎 남들 앞에서 말하는 공포(glossophobia)와 그 진화적 뿌리",
+  "stance": "중립적",
+  "stance_reason": "The explanation for why it's uncomfortable ... is probably that ~ 처럼 현상을 분석·설명하는 어조",
+  "structure": "주장→근거·예시",
+  "structure_reason": "발표 공포 현상 제시 → 집단 배제 회피의 진화적 중요성으로 설명 → 과거 생사 문제로 일반화",
+  "key_grammar": {
+   "point": "가주어-진주어 구문 (it ~ to)",
+   "source_sentence": "The explanation for why it's uncomfortable to have everyone's eyes on you is probably that, for almost all of our evolution, it's been extremely important not to be excluded from the group.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "진짜 주어인 to부정사가 길어서 뒤로 보내고, 그 빈자리에 가짜 주어 it을 세운 구문이다."
+    },
+    {
+     "chip": "형태",
+     "text": "It + be동사 + 형용사/명사 + to부정사(진주어)의 형태를 갖는다."
+    },
+    {
+     "chip": "이 문장에선",
+     "text": "it's uncomfortable to have ~ 와 it's been extremely important not to be excluded ~ 두 번 쓰였다."
+    },
+    {
+     "chip": "해석 순서",
+     "text": "가주어 it은 해석하지 않고 뒤의 to부정사를 주어로 옮겨 '~하는 것은'으로 푼다."
+    },
+    {
+     "chip": "주의",
+     "text": "가운데 that절은 is의 보어인 명사절이며, 그 안에서 다시 it~to 구문이 쓰인다."
+    }
+   ],
+   "example_analysis": "가주어 it이 앞에 오고 진주어인 to have everyone's eyes on you와 not to be excluded from the group이 뒤로 갔다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "The explanation for [[1|why]] it's uncomfortable [[2|having]] everyone's eyes on you is probably [[3|that]], for almost all of our evolution, [[4|it's]] been extremely important not [[5|to be excluded]] from the group.",
+     "options": [
+      "① why",
+      "② having",
+      "③ that",
+      "④ it's",
+      "⑤ to be excluded"
+     ],
+     "answer": "②",
+     "fix": "having → to have. 가주어 it의 진주어는 to부정사이므로 원문대로 to have가 되어야 한다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "To prepare for [[what/that]] might happen if you [[are evaluated/evaluate]] and socially shamed ― and thus alienated from the group ― your brain fires up the stress system and your heart [[begins/begin]] to beat harder.",
+     "answer": "what / are evaluated / begins",
+     "fix": "선행사를 포함해 might happen의 주어가 되는 what, 주어 you가 '평가받는' 수동태 are evaluated, 단수 주어 your heart에 맞춘 begins가 옳다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "options": [
+      "Belonging was not merely a matter of safety but also of survival.",
+      "You simply couldn't make it on your own.",
+      "But in the world we long ago evolved for, exclusion from the group could be a matter of life and death.",
+      "If we give a bad presentation at work, we are unlikely to lose our job and thus risk to starve to death.",
+      "Our natural sensitivity to being evaluated by other people is another example of our brain not being adapted to the modern world."
+     ],
+     "answer": "If we give a bad presentation at work, we are unlikely to lose our job and thus risk to starve to death.",
+     "fix": "risk to starve → risk starving. risk는 동명사를 목적어로 취하므로 원문대로 starving이 되어야 한다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "혼자 힘으로 그것을 해내는 것은 쉽지 않다. (가주어 it을 사용할 것)",
+     "sentence": "",
+     "answer": "It is not easy to make it on your own.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "It",
+      "is",
+      "not",
+      "easy",
+      "to make it",
+      "on your own"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "만약 우리가 직장에서 나쁜 발표를 한다면, 우리는 직업을 잃고 그래서 굶어 죽을 위험을 무릅쓸 것 같지는 않다.",
+     "sentence": "",
+     "answer": "If we give a bad presentation at work, we are unlikely to lose our job and thus risk starving to death.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "If",
+      "we",
+      "give",
+      "a bad presentation",
+      "at work",
+      "we",
+      "are",
+      "unlikely",
+      "to lose",
+      "our job",
+      "and thus",
+      "risk",
+      "starving",
+      "to death"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "집단으로부터의 배제",
+    "expressions": [
+     "excluded from the group",
+     "alienated from the group",
+     "exclusion from the group"
+    ],
+    "variation": "집단에서 밀려나는 상황을 여러 표현으로 반복"
+   },
+   {
+    "label": "평가에 대한 민감성",
+    "expressions": [
+     "everyone's eyes on you",
+     "being evaluated by other people"
+    ],
+    "variation": "남에게 평가받고 주목받는 상황을 반복 표현"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입(현상)",
+    "sentence_range": "1~3",
+    "summary": "가장 큰 스트레스는 [[남들 앞에서 말하기]], 이름까지 있는 glossophobia",
+    "easy_example": "많은 사람이 발표 순서만 다가와도 심장이 두근거린다."
+   },
+   {
+    "stage": "전개(설명)",
+    "sentence_range": "4~5",
+    "summary": "진화적으로 [[집단 배제]]를 피하는 것이 중요했기에 뇌가 스트레스 반응을 켬",
+    "easy_example": "무리에서 쫓겨날까 봐 몸이 먼저 긴장한다."
+   },
+   {
+    "stage": "일반화",
+    "sentence_range": "6~7",
+    "summary": "평가 민감성은 [[현대에 적응하지 못한]] 뇌의 한 예, 지금은 발표가 생사와 무관",
+    "easy_example": "발표를 망쳐도 굶어 죽지는 않는데 몸은 옛날처럼 반응한다."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "8~10",
+    "summary": "과거엔 배제가 [[생사의 문제]], 소속은 안전을 넘어 생존이었음",
+    "easy_example": "옛날엔 무리를 떠나면 혼자서는 살아남을 수 없었다."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "What stresses you out more than anything?",
+   "grammar": [
+    {
+     "tag": "구동사 stress out",
+     "note": "~을 몹시 스트레스 받게 하다",
+     "spans": [
+      "stresses",
+      "out"
+     ]
+    },
+    {
+     "tag": "비교 구문 more than",
+     "note": "~보다 더",
+     "spans": [
+      "more than"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "stress out",
+     "meaning": "~을 스트레스 받게 하다, 괴롭히다"
+    },
+    {
+     "word": "more than anything",
+     "meaning": "그 무엇보다도, 무엇보다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "What stresses you out more than anything?",
+     "ko": "무엇이 그 무엇보다 너를 [[스트레스 받게]] 하는가?"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "글쓴이는 무엇이 독자를 가장 스트레스 받게 하는지 물으며 글을 연다.",
+     "verdict": "O",
+     "trap_type": "무관정보"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "Perhaps it's speaking in front of others.",
+   "grammar": [
+    {
+     "tag": "동명사 주격보어",
+     "note": "it's = it is, speaking이 보어",
+     "spans": [
+      "speaking"
+     ]
+    },
+    {
+     "tag": "전치사구 in front of",
+     "note": "~ 앞에서",
+     "spans": [
+      "in front of"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "in front of",
+     "meaning": "~ 앞에서"
+    },
+    {
+     "word": "perhaps",
+     "meaning": "아마, 어쩌면"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Perhaps it's speaking in front of others.",
+     "ko": "아마 그것은 다른 사람들 [[앞에서 말하는]] 것이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "많은 사람에게 그 답은 남들 앞에서 말하는 것일 수 있다.",
+     "verdict": "O",
+     "trap_type": "구조수식"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "For many, this is so stressful it even has a name: glossophobia.",
+   "grammar": [
+    {
+     "tag": "so ~ (that) 생략",
+     "note": "너무 ~해서 …하다(접속사 that 생략)",
+     "spans": [
+      "so"
+     ]
+    },
+    {
+     "tag": "부사 even",
+     "note": "심지어",
+     "spans": [
+      "even"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "stressful",
+     "meaning": "스트레스가 많은, 스트레스를 주는"
+    },
+    {
+     "word": "glossophobia",
+     "meaning": "발표 공포증, 대중 연설 공포증"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "For many, this is so stressful",
+     "ko": "많은 이들에게, 이것은 너무 [[스트레스가 심해서]]"
+    },
+    {
+     "en": "it even has a name: glossophobia.",
+     "ko": "심지어 [[이름]]까지 있다: 글로소포비아."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "many가 가리키는 대상은 발표를 직업으로 하는 특정 전문가 집단이다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "For many",
+     "why": "본문의 many는 특정 직업군이 아니라 다수의 일반 사람들을 가리킨다."
+    }
+   ],
+   "mistips": [
+    "so stressful (that) it even has a name처럼 stressful 뒤에 접속사 that이 생략된 결과절이 이어진다."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "The explanation for why it's uncomfortable to have everyone's eyes on you is probably that, for almost all of our evolution, it's been extremely important not to be excluded from the group.",
+   "grammar": [
+    {
+     "tag": "의문사절 why",
+     "note": "explanation의 내용을 이루는 이유의 why절",
+     "spans": [
+      "why"
+     ]
+    },
+    {
+     "tag": "가주어-진주어 (it ~ to)",
+     "note": "it이 가주어, to have ~가 진주어",
+     "spans": [
+      "it's",
+      "to have"
+     ]
+    },
+    {
+     "tag": "명사절 접속사 that",
+     "note": "is의 보어가 되는 명사절을 이끎",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "가주어-진주어 (it ~ to)",
+     "note": "뒤 절의 it도 가주어, not to be excluded가 진주어",
+     "spans": [
+      "not to be excluded"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "explanation",
+     "meaning": "설명, 해명"
+    },
+    {
+     "word": "uncomfortable",
+     "meaning": "불편한, 거북한"
+    },
+    {
+     "word": "evolution",
+     "meaning": "진화"
+    },
+    {
+     "word": "exclude",
+     "meaning": "배제하다, 제외하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The explanation for why",
+     "ko": "무엇 때문에 ~인지에 대한 그 [[설명]]은"
+    },
+    {
+     "en": "[[it's uncomfortable to have everyone's eyes on you]]",
+     "ko": "[[모두의 시선이 너에게 쏠리는 것이 불편한지에 대한]]"
+    },
+    {
+     "en": "is probably that, for almost all of our evolution,",
+     "ko": "아마, 우리 [[진화]]의 거의 대부분 동안"
+    },
+    {
+     "en": "it's been extremely important",
+     "ko": "극도로 [[중요]]했다는 것이다"
+    },
+    {
+     "en": "[[not to be excluded from the group.]]",
+     "ko": "[[집단에서 배제되지 않는 것이]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "발표가 불편한 이유는 진화 과정에서 집단에서 배제되는 편이 오히려 유리했기 때문이다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "it's been extremely important not to be excluded from the group",
+     "why": "배제되지 않는 것이 극도로 중요했던 것이지 배제가 유리했던 것이 아니다."
+    }
+   ],
+   "mistips": [
+    "that절 앞의 is는 The explanation ~ is that ~ 구조의 본동사이며, that은 지시가 아니라 보어 명사절 접속사이다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "To prepare for what might happen if you are evaluated and socially shamed ― and thus alienated from the group ― your brain fires up the stress system and your heart begins to beat harder.",
+   "grammar": [
+    {
+     "tag": "부사적 용법 to부정사(목적)",
+     "note": "~에 대비하기 위해",
+     "spans": [
+      "To prepare"
+     ]
+    },
+    {
+     "tag": "관계대명사 what",
+     "note": "선행사를 포함해 '일어날 일'을 이끎",
+     "spans": [
+      "what"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "네가 평가받는(수동)",
+     "spans": [
+      "are evaluated"
+     ]
+    },
+    {
+     "tag": "과거분사(수동)",
+     "note": "and thus (being) alienated로 이어지는 수동 분사",
+     "spans": [
+      "alienated"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "prepare for",
+     "meaning": "~에 대비하다"
+    },
+    {
+     "word": "evaluate",
+     "meaning": "평가하다"
+    },
+    {
+     "word": "shame",
+     "meaning": "수치심을 주다, 창피를 주다"
+    },
+    {
+     "word": "alienate",
+     "meaning": "소외시키다, 멀어지게 하다"
+    },
+    {
+     "word": "fire up",
+     "meaning": "작동시키다, 활성화하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[To prepare for what might happen]]",
+     "ko": "[[무슨 일이 일어날지에 대비하기 위해]]"
+    },
+    {
+     "en": "if you are evaluated and socially shamed",
+     "ko": "네가 [[평가받고]] 사회적으로 수치를 당한다면"
+    },
+    {
+     "en": "― and thus alienated from the group ―",
+     "ko": "― 그리하여 집단에서 [[소외된다면]] ―"
+    },
+    {
+     "en": "your brain fires up the stress system",
+     "ko": "너의 뇌는 스트레스 [[시스템을 작동시키고]]"
+    },
+    {
+     "en": "and your heart begins to beat harder.",
+     "ko": "너의 심장은 더 세게 [[뛰기 시작한다]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "평가와 수치를 당할 상황에 대비해 심장이 스트레스 시스템을 작동시킨다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "your brain fires up the stress system and your heart begins to beat harder",
+     "why": "스트레스 시스템을 작동시키는 것은 뇌이며 심장은 더 세게 뛸 뿐이다.",
+     "killer": true
+    }
+   ],
+   "mistips": [
+    "두 개의 ― ― 사이 and thus alienated from the group은 앞의 shamed와 병렬되는 삽입 수동 분사구이다."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Our natural sensitivity to being evaluated by other people is another example of our brain not being adapted to the modern world.",
+   "grammar": [
+    {
+     "tag": "전치사+동명사(수동)",
+     "note": "전치사 to의 목적어인 수동 동명사",
+     "spans": [
+      "being evaluated"
+     ]
+    },
+    {
+     "tag": "동명사의 부정",
+     "note": "동명사 앞 not으로 부정(적응되지 않음)",
+     "spans": [
+      "not being adapted"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "sensitivity",
+     "meaning": "민감성, 예민함"
+    },
+    {
+     "word": "adapt",
+     "meaning": "적응하다, 적응시키다"
+    },
+    {
+     "word": "modern world",
+     "meaning": "현대 세계"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Our natural sensitivity to being evaluated by other people",
+     "ko": "다른 사람들에게 [[평가받는 것]]에 대한 우리의 타고난 민감성은"
+    },
+    {
+     "en": "is another example of our brain",
+     "ko": "우리 뇌의 또 다른 [[예]]이다"
+    },
+    {
+     "en": "[[not being adapted to the modern world.]]",
+     "ko": "[[현대 세계에 적응하지 못한]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 평가에 대한 민감성을 현대 세계와 맞지 않는 뇌의 특성으로 보는데, 이는 그 기능이 현대에 새로 진화했기 때문이다.",
+     "verdict": "△",
+     "trap_type": "필자관점",
+     "anchor": "our brain not being adapted to the modern world",
+     "why": "현대와 맞지 않는다는 방향은 옳지만, 새로 진화해서가 아니라 현대에 적응하지 못했기 때문이다."
+    }
+   ],
+   "mistips": [
+    "of our brain not being adapted은 '동명사의 의미상 주어(our brain) + 부정 not + 동명사(being adapted)' 구조이다."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "If we give a bad presentation at work, we are unlikely to lose our job and thus risk starving to death.",
+   "grammar": [
+    {
+     "tag": "조건 부사절 if",
+     "note": "만약 ~라면",
+     "spans": [
+      "If"
+     ]
+    },
+    {
+     "tag": "be unlikely to부정사",
+     "note": "~할 것 같지 않다",
+     "spans": [
+      "unlikely to lose"
+     ]
+    },
+    {
+     "tag": "동명사 목적어(risk -ing)",
+     "note": "risk는 동명사를 목적어로 취함",
+     "spans": [
+      "starving"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "presentation",
+     "meaning": "발표, 프레젠테이션"
+    },
+    {
+     "word": "unlikely",
+     "meaning": "~할 것 같지 않은"
+    },
+    {
+     "word": "risk",
+     "meaning": "~의 위험을 무릅쓰다"
+    },
+    {
+     "word": "starve",
+     "meaning": "굶주리다, 굶어 죽다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "If we give a bad presentation at work,",
+     "ko": "만약 우리가 직장에서 [[나쁜 발표]]를 한다면,"
+    },
+    {
+     "en": "we are unlikely to lose our job",
+     "ko": "우리가 [[직업을 잃을]] 것 같지는 않고"
+    },
+    {
+     "en": "and thus risk starving to death.",
+     "ko": "그래서 [[굶어 죽을]] 위험을 무릅쓰지도 않는다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "현대 직장에서 나쁜 발표를 해도 직업을 잃고 굶어 죽을 위험이 크지는 않다고 본다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "But in the world we long ago evolved for, exclusion from the group could be a matter of life and death.",
+   "grammar": [
+    {
+     "tag": "관계대명사 생략(전치사 후치)",
+     "note": "the world (which) we evolved for에서 관계사 생략, 전치사 for가 뒤에 남음",
+     "spans": [
+      "for"
+     ]
+    },
+    {
+     "tag": "조동사 could",
+     "note": "~일 수 있었다(과거의 가능성)",
+     "spans": [
+      "could"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "evolve",
+     "meaning": "진화하다"
+    },
+    {
+     "word": "exclusion",
+     "meaning": "배제, 제외"
+    },
+    {
+     "word": "a matter of life and death",
+     "meaning": "생사가 걸린 문제"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[But in the world we long ago evolved for,]]",
+     "ko": "[[그러나 우리가 오래전 진화해 온 세계에서는,]]"
+    },
+    {
+     "en": "exclusion from the group",
+     "ko": "집단으로부터의 [[배제]]는"
+    },
+    {
+     "en": "[[could be a matter of life and death.]]",
+     "ko": "[[삶과 죽음의 문제]]가 될 수 있었다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "오래전 진화한 세계에서 집단은 식량을 공평하게 나눠 주었기 때문에 생존에 유리했다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "exclusion from the group could be a matter of life and death",
+     "why": "본문에 식량 분배 이야기는 없고 집단 배제가 생사의 문제였다고만 한다."
+    }
+   ],
+   "mistips": [
+    "the world we long ago evolved for는 the world (which) we ~ evolved for로, 목적격 관계대명사가 생략되고 전치사 for가 문미에 남은 형태이다."
+   ]
+  },
+  {
+   "id": 9,
+   "english": "Belonging was not merely a matter of safety but also of survival.",
+   "grammar": [
+    {
+     "tag": "상관접속사 not merely A but also B",
+     "note": "A뿐만 아니라 B도",
+     "spans": [
+      "not merely",
+      "but also"
+     ]
+    },
+    {
+     "tag": "전치사구 a matter of",
+     "note": "~의 문제",
+     "spans": [
+      "a matter of"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "belonging",
+     "meaning": "소속(감)"
+    },
+    {
+     "word": "merely",
+     "meaning": "단지, 그저"
+    },
+    {
+     "word": "safety",
+     "meaning": "안전"
+    },
+    {
+     "word": "survival",
+     "meaning": "생존"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Belonging was not merely a matter of safety",
+     "ko": "소속은 단지 [[안전]]의 문제였을 뿐 아니라"
+    },
+    {
+     "en": "but also of survival.",
+     "ko": "[[생존]]의 문제이기도 했다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "소속은 단지 안전의 문제였을 뿐 생존과는 관련이 없었다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "Belonging was not merely a matter of safety but also of survival",
+     "why": "not merely A but also B 구문이므로 안전뿐 아니라 생존의 문제이기도 했다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 10,
+   "english": "You simply couldn't make it on your own.",
+   "grammar": [
+    {
+     "tag": "조동사 과거 부정 couldn't",
+     "note": "~할 수 없었다",
+     "spans": [
+      "couldn't"
+     ]
+    },
+    {
+     "tag": "관용표현 make it",
+     "note": "해내다, 살아남다",
+     "spans": [
+      "make it"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "make it",
+     "meaning": "해내다, 살아남다, 성공하다"
+    },
+    {
+     "word": "on one's own",
+     "meaning": "혼자 힘으로, 혼자서"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "You simply couldn't make it on your own.",
+     "ko": "너는 그저 혼자 힘으로는 [[해낼]] 수 없었다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "과거에도 사람은 혼자서 충분히 살아남을 수 있었다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "You simply couldn't make it on your own.",
+     "why": "혼자 힘으로는 결코 해낼 수 없었다고 말한다."
+    },
+    {
+     "statement": "Back then, you could easily survive completely on your own.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "You simply couldn't make it on your own.",
+     "why": "본문은 혼자서는 결코 해낼 수 없었다고 분명히 말한다.",
+     "english": "Back then, you could easily survive completely on your own."
+    }
+   ],
+   "mistips": []
+  }
+ ]
+}

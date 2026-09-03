@@ -1,0 +1,802 @@
+{
+ "item_no": "40",
+ "theme": "조명의 진화 — 가시성에서 선택적 가시성으로",
+ "overview": {
+  "theme_ko": "조명의 진화 — 가시성에서 선택적 가시성으로",
+  "topic": "🔎 무대 조명의 목표 변화: 가시성에서 선택적 가시성으로",
+  "stance": "중립적",
+  "stance_reason": "가시성에서 selective visibility로의 변화를 시간 흐름에 따라 설명적으로 서술한다",
+  "structure": "시간·순서(나열)",
+  "structure_reason": "In the early days, Since the 1950s, later 등 시간 표지로 조명 개념의 변화를 나열한다",
+  "key_grammar": {
+   "point": "부사절 so that(목적)",
+   "source_sentence": "In the early days, the job of the designer was nothing more than to create enough light so that the audience or occupants of a space could see.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "so that은 '~하도록, ~하기 위해'라는 목적을 나타내는 부사절을 이끈다."
+    },
+    {
+     "chip": "형태",
+     "text": "so that 뒤에는 「주어+(can/could 등 조동사)+동사」가 오는 완전한 절이 온다."
+    },
+    {
+     "chip": "여기서는",
+     "text": "'충분한 빛을 만드는' 목적이 the audience ... could see(볼 수 있도록)로 이어진다."
+    },
+    {
+     "chip": "헷갈리지 마요",
+     "text": "so that(목적, 절)과 so ~ that(너무 ~해서 …하다, 결과) 구문을 구별해야 한다."
+    }
+   ],
+   "example_analysis": "so that이 '관객이 볼 수 있도록'이라는 목적을 나타내는 부사절을 이끈다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "In the early days, the job of the designer [[1|was]] nothing more than [[2|to create]] enough light [[3|so as]] the audience or occupants of a space [[4|could]] [[5|see]].",
+     "options": [
+      "① was",
+      "② to create",
+      "③ so as",
+      "④ could",
+      "⑤ see"
+     ],
+     "answer": "③",
+     "fix": "목적을 나타내며 뒤에 「주어+동사」가 오므로 so as가 아니라 원문의 so that으로 고쳐야 한다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "[[While/During]] stage lighting designs in the early days focused on [[maximizing/to maximize]] visibility, they later shifted to strategic illumination [[to enhance/enhancing]] dramatic effect.",
+     "answer": "While / maximizing / to enhance",
+     "fix": "뒤에 절이 오는 접속사 While, 전치사 on의 목적어인 동명사 maximizing, 목적을 나타내는 to부정사 to enhance가 적절하다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "options": [
+      "Some even refer to it as the primary function of lighting.",
+      "Hence, a less-revealing image on stage might be more appropriate for the dramatic action than a fully illuminated stage.",
+      "In selective visibility, areas of low intensity, shadows, silhouettes, and high contrast can become effective elements in a lighting designer's set of tools.",
+      "Visibility simply refers to the principle of use light to reveal or illuminate objects.",
+      "Since the 1950s or '60s, theatrical designing moved toward a concept that we call selective visibility, which simply refers to revealing to an audience only what needs to be seen."
+     ],
+     "answer": "Visibility simply refers to the principle of use light to reveal or illuminate objects.",
+     "fix": "of use → of using. 전치사 of의 목적어이므로 동명사 using이 되어야 한다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그는 모두가 그 무대를 볼 수 있도록 조명을 켰다.",
+     "sentence": "",
+     "answer": "He turned on the lights so that everyone could see the stage.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "He",
+      "turned",
+      "on",
+      "the",
+      "lights",
+      "so that",
+      "everyone",
+      "could",
+      "see",
+      "the",
+      "stage"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "초기 시절에, 설계자의 일은 관객이나 한 공간의 사람들이 볼 수 있도록 충분한 빛을 만드는 것에 지나지 않았다.",
+     "sentence": "",
+     "answer": "In the early days, the job of the designer was nothing more than to create enough light so that the audience or occupants of a space could see.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "In",
+      "the",
+      "early",
+      "days,",
+      "the",
+      "job",
+      "of",
+      "the",
+      "designer",
+      "was",
+      "nothing",
+      "more",
+      "than",
+      "to",
+      "create",
+      "enough",
+      "light",
+      "so that",
+      "the",
+      "audience",
+      "or",
+      "occupants",
+      "of",
+      "a",
+      "space",
+      "could",
+      "see."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "선택적 가시성",
+    "expressions": [
+     "selective visibility",
+     "revealing to an audience only what needs to be seen"
+    ],
+    "variation": "보여야 할 것만 드러내는 조명 개념"
+   },
+   {
+    "label": "가시성 중심",
+    "expressions": [
+     "the primary function of lighting",
+     "maximizing visibility"
+    ],
+    "variation": "빛으로 보이게 하는 것을 조명의 핵심으로 봄"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입(통념)",
+    "sentence_range": "1~3",
+    "summary": "조명의 가장 중요한 요소는 [[visibility]], 즉 빛으로 사물을 드러내는 것",
+    "easy_example": "무대가 잘 보이게 불을 켜는 것이 기본이라는 생각."
+   },
+   {
+    "stage": "전개(과거 철학)",
+    "sentence_range": "4~5",
+    "summary": "초기엔 볼 수 있도록 빛을 많이 만들면 좋다고 여김: [[more was better]]",
+    "easy_example": "방을 최대한 밝게 하는 것이 좋다고 믿던 시절."
+   },
+   {
+    "stage": "전환(개념 변화)",
+    "sentence_range": "6~7",
+    "summary": "1950~60년대 이후 [[selective visibility]]로 이동, 덜 밝힌 무대가 더 극적",
+    "easy_example": "핵심 인물에게만 스포트라이트를 주는 연출."
+   },
+   {
+    "stage": "전개·결론",
+    "sentence_range": "8~9",
+    "summary": "저강도·그림자·대비가 도구가 되고, 초점이 [[strategic illumination]]으로 이동",
+    "easy_example": "어둠과 그림자를 활용해 긴장감을 만드는 연극 조명."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Many designers would argue that the most important element of lighting is visibility.",
+   "grammar": [
+    {
+     "tag": "명사절 접속사 that",
+     "note": "argue의 목적어절을 이끔",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "최상급",
+     "note": "the most important — '가장 ~한'",
+     "spans": [
+      "most important"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "argue",
+     "meaning": "주장하다"
+    },
+    {
+     "word": "element",
+     "meaning": "요소"
+    },
+    {
+     "word": "visibility",
+     "meaning": "가시성, 눈에 보이는 정도"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Many designers would argue",
+     "ko": "많은 [[설계자]]들은 주장할 것이다"
+    },
+    {
+     "en": "that the most important element",
+     "ko": "가장 중요한 [[요소]]가"
+    },
+    {
+     "en": "of lighting is visibility.",
+     "ko": "조명의, [[가시성]]이라고."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "많은 설계자들은 조명의 가장 중요한 요소를 가시성이라고 본다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "Some even refer to it as the primary function of lighting.",
+   "grammar": [
+    {
+     "tag": "refer to A as B",
+     "note": "'A를 B로 여기다/부르다'",
+     "spans": [
+      "refer to",
+      "as"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "refer to A as B",
+     "meaning": "A를 B로 여기다, 부르다"
+    },
+    {
+     "word": "primary",
+     "meaning": "주요한, 주된"
+    },
+    {
+     "word": "function",
+     "meaning": "기능"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Some even refer to it",
+     "ko": "일부는 심지어 그것을 [[여긴다]]"
+    },
+    {
+     "en": "as the primary function of lighting.",
+     "ko": "조명의 주된 [[기능]]으로."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장의 it이 가리키는 것은 앞 문장의 가시성(visibility)이다.",
+     "verdict": "O",
+     "trap_type": "지칭"
+    },
+    {
+     "statement": "이 문장의 it이 가리키는 것은 조명(lighting) 자체이다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "refer to it as the primary function",
+     "why": "it은 앞 문장의 visibility(가시성)를 가리키며 lighting 자체가 아니다.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "refer to it as ~ 는 'it을 ~로 여기다'로, it은 앞 문장의 visibility를 가리킨다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "Visibility simply refers to the principle of using light to reveal or illuminate objects.",
+   "grammar": [
+    {
+     "tag": "구동사 refer to",
+     "note": "'~을 가리키다'(주어 Visibility에 맞춘 단수 refers)",
+     "spans": [
+      "refers to"
+     ]
+    },
+    {
+     "tag": "동명사(전치사 목적어)",
+     "note": "of + using",
+     "spans": [
+      "using"
+     ]
+    },
+    {
+     "tag": "to부정사(목적)",
+     "note": "to reveal or illuminate — '드러내거나 비추기 위해'",
+     "spans": [
+      "to reveal"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "principle",
+     "meaning": "원리, 원칙"
+    },
+    {
+     "word": "reveal",
+     "meaning": "드러내다"
+    },
+    {
+     "word": "illuminate",
+     "meaning": "비추다, 밝히다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Visibility simply refers to the principle",
+     "ko": "가시성은 단순히 [[원리]]를 가리킨다"
+    },
+    {
+     "en": "of using light to reveal or illuminate objects.",
+     "ko": "빛을 사용해 [[사물]]을 드러내거나 비추는."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "가시성은 빛을 가려 사물을 감추는 원리를 뜻한다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "using light to reveal or illuminate objects",
+     "why": "빛으로 사물을 드러내거나 비추는 원리를 뜻한다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "In the early days, the job of the designer was nothing more than to create enough light so that the audience or occupants of a space could see.",
+   "grammar": [
+    {
+     "tag": "nothing more than",
+     "note": "'~에 지나지 않는'",
+     "spans": [
+      "nothing more than"
+     ]
+    },
+    {
+     "tag": "to부정사(보어)",
+     "note": "was to create — 주격보어",
+     "spans": [
+      "to create"
+     ]
+    },
+    {
+     "tag": "부사절 so that(목적)",
+     "note": "'~하도록'의 목적 부사절",
+     "spans": [
+      "so that"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "nothing more than",
+     "meaning": "~에 지나지 않는, ~에 불과한"
+    },
+    {
+     "word": "occupant",
+     "meaning": "(공간의) 사용자, 거주자"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In the early days,",
+     "ko": "[[초기]] 시절에는,"
+    },
+    {
+     "en": "the job of the designer",
+     "ko": "[[설계자]]의 일은"
+    },
+    {
+     "en": "was nothing more than to create enough light",
+     "ko": "충분한 [[빛]]을 만드는 것에 불과했다"
+    },
+    {
+     "en": "so that the audience or occupants",
+     "ko": "[[관객]]이나 사용자들이 ~하도록"
+    },
+    {
+     "en": "of a space could see.",
+     "ko": "한 [[공간]]의, 볼 수 있도록."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "초기 설계자의 일은 관객이 무대를 보지 못하도록 빛을 제한하는 것이었다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "so that the audience or occupants of a space could see",
+     "why": "관객이 볼 수 있도록 충분한 빛을 만드는 것이 목적이었다.",
+     "killer": true
+    }
+   ],
+   "mistips": [
+    "so that + 주어 + can/could 는 '~하도록'이라는 목적을 나타낸다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "In many ways, this philosophy of lighting was based on the premise that more was better, and many believed that the more footcandles or lumens placed on a stage or in a room, the better visibility that you had.",
+   "grammar": [
+    {
+     "tag": "수동태 be based on",
+     "note": "'~에 기반하다'",
+     "spans": [
+      "was based"
+     ]
+    },
+    {
+     "tag": "동격 that",
+     "note": "the premise that ~ — premise의 내용을 설명",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "the 비교급 the 비교급",
+     "note": "'~할수록 더 …하다'",
+     "spans": [
+      "the more",
+      "the better"
+     ]
+    },
+    {
+     "tag": "과거분사(후치수식)",
+     "note": "placed가 footcandles or lumens를 수식",
+     "spans": [
+      "placed"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "philosophy",
+     "meaning": "철학, 사고방식"
+    },
+    {
+     "word": "premise",
+     "meaning": "전제"
+    },
+    {
+     "word": "footcandle",
+     "meaning": "풋캔들(조도 단위)"
+    },
+    {
+     "word": "lumen",
+     "meaning": "루멘(광속 단위)"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In many ways, this philosophy of lighting",
+     "ko": "여러 면에서, 조명에 대한 이 [[철학]]은"
+    },
+    {
+     "en": "was based on the premise that more was better,",
+     "ko": "'많을수록 좋다'는 [[전제]]에 기반했다,"
+    },
+    {
+     "en": "and many believed that the more footcandles or lumens",
+     "ko": "그리고 많은 이들은 풋캔들이나 [[루멘]]이 많을수록 ~라고 믿었다"
+    },
+    {
+     "en": "placed on a stage or in a room,",
+     "ko": "[[무대]]나 방에 놓일수록,"
+    },
+    {
+     "en": "the better visibility that you had.",
+     "ko": "당신이 갖는 [[가시성]]이 더 좋아진다고."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "과거 철학에서는 무대에 놓인 풋캔들이나 루멘이 적을수록 가시성이 더 좋다고 믿었다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "the more footcandles or lumens placed on a stage or in a room, the better visibility that you had",
+     "why": "빛(풋캔들·루멘)이 많을수록 가시성이 더 좋아진다고 믿었다."
+    }
+   ],
+   "mistips": [
+    "the more ~, the better ~ 는 '~할수록 더 ~하다'의 비례 구문이다."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Since the 1950s or '60s, theatrical designing moved toward a concept that we call selective visibility, which simply refers to revealing to an audience only what needs to be seen.",
+   "grammar": [
+    {
+     "tag": "동명사(주어)",
+     "note": "theatrical designing — 동명사 주어",
+     "spans": [
+      "designing"
+     ]
+    },
+    {
+     "tag": "목적격 관계대명사 that",
+     "note": "a concept를 받고 call의 목적어",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "계속적 관계대명사 which",
+     "note": "앞의 selective visibility를 부연",
+     "spans": [
+      "which"
+     ]
+    },
+    {
+     "tag": "관계대명사 what",
+     "note": "'~하는 것'(선행사 포함)",
+     "spans": [
+      "what"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "theatrical",
+     "meaning": "연극의, 무대의"
+    },
+    {
+     "word": "concept",
+     "meaning": "개념"
+    },
+    {
+     "word": "selective",
+     "meaning": "선택적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Since the 1950s or '60s,",
+     "ko": "[[1950년대]]나 60년대 이후,"
+    },
+    {
+     "en": "theatrical designing moved toward a concept",
+     "ko": "무대 조명 설계는 한 [[개념]]으로 옮겨갔다"
+    },
+    {
+     "en": "that we call selective visibility,",
+     "ko": "우리가 [[선택적]] 가시성이라 부르는,"
+    },
+    {
+     "en": "which simply refers to revealing to an audience",
+     "ko": "그것은 단순히 [[관객]]에게 드러내는 것을 가리킨다"
+    },
+    {
+     "en": "only what needs to be seen.",
+     "ko": "오직 [[보여야]] 할 것만을."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 선택적 가시성을 지지하는데, 그것이 무대의 모든 부분을 똑같이 밝히기 때문이다.",
+     "verdict": "△",
+     "trap_type": "필자관점",
+     "anchor": "revealing to an audience only what needs to be seen",
+     "why": "선택적 가시성은 필요한 것만 보여주는 것이지 전체를 밝히는 것이 아니다."
+    }
+   ],
+   "mistips": [
+    ", which는 앞 절 전체가 아니라 selective visibility를 부연하는 계속적 관계대명사이다."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Hence, a less-revealing image on stage might be more appropriate for the dramatic action than a fully illuminated stage.",
+   "grammar": [
+    {
+     "tag": "비교급 more ~ than",
+     "note": "'…보다 더 ~한'",
+     "spans": [
+      "more appropriate",
+      "than"
+     ]
+    },
+    {
+     "tag": "과거분사(형용사적)",
+     "note": "fully illuminated가 stage를 수식",
+     "spans": [
+      "illuminated"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "less-revealing",
+     "meaning": "덜 드러내는"
+    },
+    {
+     "word": "appropriate",
+     "meaning": "적절한, 알맞은"
+    },
+    {
+     "word": "dramatic",
+     "meaning": "극적인"
+    },
+    {
+     "word": "illuminated",
+     "meaning": "밝혀진, 조명된"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Hence, a less-revealing image on stage",
+     "ko": "따라서, 덜 드러내는 무대 [[이미지]]가"
+    },
+    {
+     "en": "might be more appropriate for the dramatic action",
+     "ko": "극적 연기에 더 [[적절]]할 수 있다"
+    },
+    {
+     "en": "than a fully illuminated stage.",
+     "ko": "완전히 [[밝혀진]] 무대보다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "완전히 밝혀진 무대가 덜 드러내는 이미지보다 극적 연기에 더 적절하다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "a less-revealing image on stage might be more appropriate for the dramatic action than a fully illuminated stage",
+     "why": "덜 드러내는 이미지가 완전히 밝혀진 무대보다 더 적절할 수 있다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "In selective visibility, areas of low intensity, shadows, silhouettes, and high contrast can become effective elements in a lighting designer's set of tools.",
+   "grammar": [
+    {
+     "tag": "병렬구조",
+     "note": "areas, shadows, silhouettes, and high contrast가 등위로 나열",
+     "spans": [
+      "and"
+     ]
+    },
+    {
+     "tag": "2형식 become+보어",
+     "note": "'~이 되다'(become+명사)",
+     "spans": [
+      "become"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "intensity",
+     "meaning": "강도, 세기"
+    },
+    {
+     "word": "silhouette",
+     "meaning": "실루엣, 윤곽"
+    },
+    {
+     "word": "contrast",
+     "meaning": "대비, 대조"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In selective visibility, areas of low intensity,",
+     "ko": "선택적 가시성에서, 낮은 [[강도]]의 영역,"
+    },
+    {
+     "en": "shadows, silhouettes, and high contrast",
+     "ko": "그림자, 실루엣, 그리고 높은 [[대비]]가"
+    },
+    {
+     "en": "can become effective elements",
+     "ko": "효과적인 [[요소]]가 될 수 있다"
+    },
+    {
+     "en": "in a lighting designer's set of tools.",
+     "ko": "조명 설계자의 [[도구]] 모음 속에서."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "선택적 가시성에서는 색 온도와 컬러 필터가 조명 설계자의 주요 도구가 된다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "areas of low intensity, shadows, silhouettes, and high contrast can become effective elements",
+     "why": "본문이 든 도구는 저강도·그림자·실루엣·대비이며 색 필터는 언급되지 않았다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 9,
+   "english": "While stage lighting designs in the early days focused on maximizing visibility, they later shifted to strategic illumination to enhance dramatic effect.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사 While",
+     "note": "'~인 반면에'의 대조 부사절",
+     "spans": [
+      "While"
+     ]
+    },
+    {
+     "tag": "동명사(전치사 목적어)",
+     "note": "focused on + maximizing",
+     "spans": [
+      "maximizing"
+     ]
+    },
+    {
+     "tag": "to부정사(목적)",
+     "note": "to enhance — '높이기 위해'",
+     "spans": [
+      "to enhance"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "maximize",
+     "meaning": "극대화하다"
+    },
+    {
+     "word": "shift",
+     "meaning": "옮기다, 전환하다"
+    },
+    {
+     "word": "strategic",
+     "meaning": "전략적인"
+    },
+    {
+     "word": "enhance",
+     "meaning": "향상시키다, 높이다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "While stage lighting designs in the early days",
+     "ko": "초기 시절 무대 [[조명]] 설계는"
+    },
+    {
+     "en": "focused on maximizing visibility,",
+     "ko": "가시성 [[극대화]]에 초점을 두었지만,"
+    },
+    {
+     "en": "they later shifted to strategic illumination",
+     "ko": "그것들은 나중에 [[전략적]] 조명으로 옮겨갔다"
+    },
+    {
+     "en": "to enhance dramatic effect.",
+     "ko": "극적 [[효과]]를 높이기 위해."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "초기 무대 조명은 극적 효과를 노렸고, 이후 가시성 극대화로 옮겨갔다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "stage lighting designs in the early days focused on maximizing visibility",
+     "why": "초기에는 가시성 극대화에 초점을 두었고 이후 전략적 조명으로 이동했다.",
+     "english": "Early stage lighting aimed at dramatic effect, then shifted to maximizing visibility."
+    }
+   ],
+   "mistips": [
+    "While은 여기서 '~인 반면에'로 앞뒤 시기를 대조한다."
+   ]
+  }
+ ]
+}

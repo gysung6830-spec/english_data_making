@@ -1,0 +1,673 @@
+{
+ "item_no": "30",
+ "theme": "허브와 해충 — 생태계와 함께 일하는 정원 가꾸기",
+ "overview": {
+  "theme_ko": "생태계와 함께하는 정원 가꾸기",
+  "topic": "🔎 허브로 해충을 조절하고 생태계 균형과 함께 일하는 정원 관리",
+  "stance": "긍정적",
+  "stance_reason": "There is good news about pests and medicinal herbs",
+  "structure": "문제→해결(방안)",
+  "structure_reason": "새 정원 초기에 해충이 밀려오는 문제 → 생태계와 함께 균형을 이루는 해결책 제시",
+  "key_grammar": {
+   "point": "the 비교급 ~, the 비교급 ~ (~할수록 더 …하다)",
+   "source_sentence": "So the more herbs you grow, the more you will attract pollinators and \"good\" bugs that like to eat the more destructive pests, which will lead to a more successful garden!",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "'the + 비교급 ~, the + 비교급 ~'은 '~하면 할수록 더 …하다'라는 비례 관계를 나타낸다."
+    },
+    {
+     "chip": "구조",
+     "text": "the more herbs you grow(조건절)와 the more you will attract(주절)가 짝을 이룬다."
+    },
+    {
+     "chip": "어순",
+     "text": "각 절에서 비교급 어구가 the와 함께 절의 맨 앞으로 나온다: the more herbs, the more."
+    },
+    {
+     "chip": "주의",
+     "text": "뒤의 the more destructive pests와 a more successful garden의 more는 이 구문이 아니라 일반 비교급이다."
+    },
+    {
+     "chip": "함께 보기",
+     "text": ", which는 앞 절 전체를 받는 계속적 용법의 관계대명사이다."
+    }
+   ],
+   "example_analysis": "the more herbs you grow와 the more you will attract가 짝을 이루는 'the 비교급 the 비교급' 구문이다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "So [[1|the more]] herbs you grow, [[2|the more]] you will attract pollinators and \"good\" bugs [[3|what]] like to eat the more destructive pests, [[4|which]] will [[5|lead]] to a more successful garden!",
+     "options": [
+      "① the more",
+      "② the more",
+      "③ what",
+      "④ which",
+      "⑤ lead"
+     ],
+     "answer": "③",
+     "fix": "선행사 bugs가 있는 주격 관계대명사가 필요하므로 what이 아니라 원문대로 that이어야 한다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "There is good news about pests and medicinal herbs: Most herbs either repel pests [[or/nor]] attract beneficial insects [[that/what]] help [[keep/keeping]] pest populations in check.",
+     "answer": "or / that / keep",
+     "fix": "either와 짝을 이루는 or, 선행사 insects가 있는 주격 관계대명사 that, 준사역동사 help 뒤 원형부정사 keep이 맞다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "options": [
+      "So the first couple years in a new garden can feel like wave after wave of pests are overtaking your plants.",
+      "Immediately attempting to remove a new pest entirely from your garden will only further these initial imbalances and lengthen the process of helping your garden grows better on its own.",
+      "There is good news about pests and medicinal herbs: Most herbs either repel pests or attract beneficial insects that help keep pest populations in check.",
+      "When it comes to managing pests in the garden, it's important to remember that you are altering the ecosystem of an area that existed on its own before you planted anything into it.",
+      "The goal of a long-term healthy garden is to work with the environment you are trying to cultivate to allow the plants, pollinators, and even the annoying pests to balance out."
+     ],
+     "answer": "Immediately attempting to remove a new pest entirely from your garden will only further these initial imbalances and lengthen the process of helping your garden grows better on its own.",
+     "fix": "help+목적어(your garden) 뒤에는 원형부정사가 오므로 grows가 아니라 원문대로 grow가 되어야 한다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "네가 더 많이 연습할수록, 너는 더 빨리 향상될 것이다.",
+     "sentence": "",
+     "answer": "The more you practice, the faster you will improve.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "The more",
+      "you",
+      "practice,",
+      "the faster",
+      "you",
+      "will",
+      "improve"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "허브를 더 많이 기를수록, 당신은 더 파괴적인 해충을 먹기 좋아하는 수분 매개자와 '좋은' 벌레들을 더 많이 끌어들일 것이고, 이는 더 성공적인 정원으로 이어질 것이다!",
+     "sentence": "",
+     "answer": "So the more herbs you grow, the more you will attract pollinators and \"good\" bugs that like to eat the more destructive pests, which will lead to a more successful garden!",
+     "fix": "",
+     "options": [],
+     "words": [
+      "So",
+      "the more",
+      "herbs",
+      "you",
+      "grow,",
+      "the more",
+      "you",
+      "will",
+      "attract",
+      "pollinators",
+      "and",
+      "\"good\"",
+      "bugs",
+      "that",
+      "like",
+      "to",
+      "eat",
+      "the more",
+      "destructive",
+      "pests,",
+      "which",
+      "will",
+      "lead",
+      "to",
+      "a",
+      "more",
+      "successful",
+      "garden!"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "허브의 이로움",
+    "expressions": [
+     "repel pests",
+     "attract beneficial insects"
+    ],
+    "variation": "해충은 막고 이로운 곤충은 불러들임"
+   },
+   {
+    "label": "생태계와 함께하기",
+    "expressions": [
+     "altering the ecosystem",
+     "work with the environment"
+    ],
+    "variation": "환경을 거스르지 않고 함께 균형을 맞춤"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입(주장)",
+    "sentence_range": "1~2",
+    "summary": "허브가 많을수록 [[이로운]] 곤충을 끌어들여 더 성공적인 정원",
+    "easy_example": "허브를 많이 심으면 좋은 벌레가 찾아와 해충을 잡아먹는다."
+   },
+   {
+    "stage": "전개(원리)",
+    "sentence_range": "3~5",
+    "summary": "정원 가꾸기는 원래 있던 [[생태계]]를 바꾸는 일, 초기 해충 유입은 정상",
+    "easy_example": "새로 살림을 차리면 처음엔 어수선한 것이 당연하다."
+   },
+   {
+    "stage": "결론(방안)",
+    "sentence_range": "6~7",
+    "summary": "환경과 함께 [[균형]]을 맞춰야 하며, 즉시 박멸은 역효과",
+    "easy_example": "잡초를 다 뽑으려 서두르면 오히려 흙이 더 망가진다."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "There is good news about pests and medicinal herbs: Most herbs either repel pests or attract beneficial insects that help keep pest populations in check.",
+   "grammar": [
+    {
+     "tag": "유도부사 there is",
+     "note": "There is + 단수 주어",
+     "spans": [
+      "There is"
+     ]
+    },
+    {
+     "tag": "상관접속사 either A or B",
+     "note": "둘 중 하나를 연결",
+     "spans": [
+      "either",
+      "or"
+     ]
+    },
+    {
+     "tag": "주격 관계대명사 that",
+     "note": "beneficial insects를 수식",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "준사역동사 help+원형",
+     "note": "help 뒤 원형부정사",
+     "spans": [
+      "help keep"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "medicinal",
+     "meaning": "약효가 있는, 약용의"
+    },
+    {
+     "word": "repel",
+     "meaning": "쫓아내다, 물리치다"
+    },
+    {
+     "word": "beneficial",
+     "meaning": "이로운, 유익한"
+    },
+    {
+     "word": "keep ~ in check",
+     "meaning": "~을 억제하다, 견제하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "There is good news about pests and medicinal herbs:",
+     "ko": "해충과 약용 [[허브]]에 관한 좋은 소식이 있다:"
+    },
+    {
+     "en": "Most herbs either repel pests",
+     "ko": "대부분의 허브는 해충을 [[쫓아내거나]]"
+    },
+    {
+     "en": "or attract beneficial insects",
+     "ko": "[[이로운]] 곤충을 끌어들인다"
+    },
+    {
+     "en": "that help keep pest populations in check.",
+     "ko": "해충 [[개체 수]]를 억제하는 데 도움이 되는."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "대부분의 허브는 해충을 쫓아내거나 이로운 곤충을 끌어들인다.",
+     "verdict": "O",
+     "trap_type": "구조수식"
+    },
+    {
+     "statement": "Most herbs can help control pests.",
+     "verdict": "O",
+     "english": "Most herbs can help control pests."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "So the more herbs you grow, the more you will attract pollinators and \"good\" bugs that like to eat the more destructive pests, which will lead to a more successful garden!",
+   "grammar": [
+    {
+     "tag": "the 비교급 the 비교급",
+     "note": "~할수록 더 …하다",
+     "spans": [
+      "the more",
+      "the more"
+     ]
+    },
+    {
+     "tag": "주격 관계대명사 that",
+     "note": "\"good\" bugs를 수식",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "관계대명사 계속적 용법",
+     "note": "앞 절 전체를 받음(, which)",
+     "spans": [
+      "which"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "pollinator",
+     "meaning": "수분 매개자(꽃가루받이 곤충)"
+    },
+    {
+     "word": "destructive",
+     "meaning": "파괴적인, 해로운"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "So the more herbs you grow,",
+     "ko": "그래서 허브를 더 많이 [[기를수록]],"
+    },
+    {
+     "en": "the more you will attract pollinators and \"good\" bugs",
+     "ko": "[[수분 매개자]]와 '좋은' 벌레들을 더 많이 끌어들일 것이다"
+    },
+    {
+     "en": "that like to eat the more destructive pests,",
+     "ko": "더 [[파괴적인]] 해충을 먹기 좋아하는,"
+    },
+    {
+     "en": "which will lead to a more successful garden!",
+     "ko": "이는 더 [[성공적인]] 정원으로 이어질 것이다!"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "허브를 적게 기를수록 더 많은 수분 매개자를 끌어들이게 된다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "the more herbs you grow, the more you will attract pollinators",
+     "why": "허브를 많이 기를수록 더 많이 끌어들인다고 했다.",
+     "killer": true
+    },
+    {
+     "statement": "'좋은' 벌레들은 더 성공적인 정원을 먹기 좋아한다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "bugs that like to eat the more destructive pests",
+     "why": "'좋은' 벌레가 먹기 좋아하는 대상은 더 파괴적인 해충이다."
+    }
+   ],
+   "mistips": [
+    "the more ~, the more ~ 는 '~할수록 더 ~하다'의 비례 구문이며, 뒤의 , which는 앞 절 전체를 받는다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "When it comes to managing pests in the garden, it's important to remember that you are altering the ecosystem of an area that existed on its own before you planted anything into it.",
+   "grammar": [
+    {
+     "tag": "When it comes to -ing",
+     "note": "~에 관해서라면",
+     "spans": [
+      "When it comes to"
+     ]
+    },
+    {
+     "tag": "가주어-진주어",
+     "note": "it이 to remember를 대신함",
+     "spans": [
+      "it's important",
+      "to remember"
+     ]
+    },
+    {
+     "tag": "명사절 접속사 that",
+     "note": "remember의 목적어절",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "주격 관계대명사 that",
+     "note": "an area를 수식",
+     "spans": [
+      "that"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "when it comes to",
+     "meaning": "~에 관해서라면, ~라면"
+    },
+    {
+     "word": "alter",
+     "meaning": "바꾸다, 변경하다"
+    },
+    {
+     "word": "ecosystem",
+     "meaning": "생태계"
+    },
+    {
+     "word": "on its own",
+     "meaning": "스스로, 저절로"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When it comes to managing pests in the garden,",
+     "ko": "정원의 해충을 [[관리]]하는 것에 관해서라면,"
+    },
+    {
+     "en": "it's important to remember",
+     "ko": "[[기억]]하는 것이 중요하다"
+    },
+    {
+     "en": "that you are altering the ecosystem of an area",
+     "ko": "당신이 어떤 지역의 [[생태계]]를 바꾸고 있다는 것을"
+    },
+    {
+     "en": "that existed on its own",
+     "ko": "[[스스로]] 존재해 온"
+    },
+    {
+     "en": "before you planted anything into it.",
+     "ko": "당신이 무엇을 [[심기]] 전에."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 정원을 가꿀 때 기존 생태계를 바꾼다는 사실은 중요하지 않다고 본다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "it's important to remember that you are altering the ecosystem",
+     "why": "기존 생태계를 바꾸고 있음을 기억하는 것이 중요하다고 했다."
+    }
+   ],
+   "mistips": [
+    "the environment을 수식하듯, an area that existed on its own은 '당신이 무엇을 심기 전에 스스로 존재해 온 지역'으로 푼다."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "So the first couple years in a new garden can feel like wave after wave of pests are overtaking your plants.",
+   "grammar": [
+    {
+     "tag": "feel like + 절",
+     "note": "~인 것처럼 느껴지다",
+     "spans": [
+      "feel like"
+     ]
+    },
+    {
+     "tag": "wave after wave of",
+     "note": "연이어 밀려오는 ~",
+     "spans": [
+      "wave after wave of"
+     ]
+    },
+    {
+     "tag": "진행형",
+     "note": "뒤덮고 있는 중(현재진행)",
+     "spans": [
+      "are overtaking"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "wave after wave of",
+     "meaning": "연이어 밀려오는 ~"
+    },
+    {
+     "word": "overtake",
+     "meaning": "뒤덮다, 압도하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "So the first couple years in a new garden",
+     "ko": "그래서 새 정원에서의 첫 몇 [[해]]는"
+    },
+    {
+     "en": "can feel like wave after wave of pests",
+     "ko": "[[파도]]처럼 밀려오는 해충들이"
+    },
+    {
+     "en": "are overtaking your plants.",
+     "ko": "당신의 [[식물]]을 뒤덮고 있는 것처럼 느껴질 수 있다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "새 정원의 첫 몇 해에는 해충이 파도처럼 밀려오는 것처럼 느껴질 수 있다.",
+     "verdict": "O",
+     "trap_type": "무관정보"
+    },
+    {
+     "statement": "새 정원에서 첫 몇 해 동안 식물이 해충을 뒤덮는다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "pests are overtaking your plants",
+     "why": "뒤덮는 주체는 식물이 아니라 해충이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "This is normal.",
+   "grammar": [
+    {
+     "tag": "2형식 be동사",
+     "note": "주어+be+보어",
+     "spans": [
+      "is"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "normal",
+     "meaning": "정상적인, 흔한"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "This is normal.",
+     "ko": "이것은 [[정상적]]이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "밑줄 친 This가 가리키는 것은 성공적인 정원이다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "wave after wave of pests are overtaking your plants",
+     "why": "This는 초기에 해충이 밀려오는 것처럼 느껴지는 현상을 가리킨다.",
+     "integrative": true
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "The goal of a long-term healthy garden is to work with the environment you are trying to cultivate to allow the plants, pollinators, and even the annoying pests to balance out.",
+   "grammar": [
+    {
+     "tag": "주격보어 to부정사",
+     "note": "목표는 ~하는 것(be+to부정사)",
+     "spans": [
+      "to work"
+     ]
+    },
+    {
+     "tag": "목적격 관계대명사 생략",
+     "note": "the environment 뒤 관계사 생략",
+     "spans": []
+    },
+    {
+     "tag": "5형식 allow+O+to부정사",
+     "note": "allow+목적어+to balance out",
+     "spans": [
+      "to allow",
+      "to balance"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "long-term",
+     "meaning": "장기적인"
+    },
+    {
+     "word": "cultivate",
+     "meaning": "가꾸다, 경작하다"
+    },
+    {
+     "word": "balance out",
+     "meaning": "균형을 이루다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The goal of a long-term healthy garden is",
+     "ko": "장기적으로 건강한 정원의 [[목표]]는"
+    },
+    {
+     "en": "to work with the environment you are trying to cultivate",
+     "ko": "당신이 가꾸려는 [[환경]]과 함께 일하는 것이다"
+    },
+    {
+     "en": "to allow the plants, pollinators, and even the annoying pests to balance out.",
+     "ko": "식물, 수분 매개자, 심지어 성가신 [[해충]]들까지 균형을 이루도록 허용하기 위해."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "장기적으로 건강한 정원을 만들려면 환경과 함께 일해야 하는데, 이는 해충을 즉시 박멸해야 하기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "to allow the plants, pollinators, and even the annoying pests to balance out",
+     "why": "목표는 해충까지 균형을 이루도록 허용하는 것이므로 즉시 박멸이 이유가 될 수 없다."
+    }
+   ],
+   "mistips": [
+    "to allow ~ to balance out은 'allow+목적어+to부정사(~가 ~하도록 허용하다)' 구조이다."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Immediately attempting to remove a new pest entirely from your garden will only further these initial imbalances and lengthen the process of helping your garden grow better on its own.",
+   "grammar": [
+    {
+     "tag": "동명사 주어",
+     "note": "attempting~이 주어(단수 취급)",
+     "spans": [
+      "attempting"
+     ]
+    },
+    {
+     "tag": "to부정사 명사적 용법(목적어)",
+     "note": "attempt의 목적어",
+     "spans": [
+      "to remove"
+     ]
+    },
+    {
+     "tag": "동명사(전치사 목적어)",
+     "note": "of+helping",
+     "spans": [
+      "helping"
+     ]
+    },
+    {
+     "tag": "준사역동사 help+원형",
+     "note": "help+목적어+원형부정사",
+     "spans": [
+      "grow"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "entirely",
+     "meaning": "완전히, 전적으로"
+    },
+    {
+     "word": "further",
+     "meaning": "(동사) 심화시키다, 조장하다"
+    },
+    {
+     "word": "imbalance",
+     "meaning": "불균형"
+    },
+    {
+     "word": "lengthen",
+     "meaning": "길게 하다, 늘이다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Immediately attempting to remove a new pest entirely from your garden",
+     "ko": "새로운 해충을 정원에서 즉시 완전히 [[제거]]하려는 시도는"
+    },
+    {
+     "en": "will only further these initial imbalances",
+     "ko": "이 초기의 [[불균형]]을 더 심화시킬 뿐이다"
+    },
+    {
+     "en": "and lengthen the process of helping your garden grow better on its own.",
+     "ko": "그리고 정원이 스스로 더 잘 자라도록 돕는 [[과정]]을 늘릴 뿐이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "새 해충을 제거할 때는 화학 살충제를 사용해야 한다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "Immediately attempting to remove a new pest entirely from your garden will only further these initial imbalances",
+     "why": "본문은 살충제 사용을 언급하지 않았고, 즉시 완전한 제거는 오히려 역효과라고 했다."
+    }
+   ],
+   "mistips": [
+    "helping your garden grow better는 'help+목적어(your garden)+원형(grow)' 구조이다."
+   ]
+  }
+ ]
+}

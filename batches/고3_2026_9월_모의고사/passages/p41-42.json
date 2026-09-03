@@ -1,0 +1,972 @@
+{
+ "item_no": "41-42",
+ "theme": "호기심 어린 불신 — 가장 효과적인 신제품 광고",
+ "overview": {
+  "theme_ko": "호기심 어린 불신과 신제품 광고 효과",
+  "topic": "🔎 과장 광고에 대한 불신을 호기심이 압도해 제품 시도로 이어지는 현상",
+  "stance": "중립적",
+  "stance_reason": "Maloney의 연구 결과를 근거로 사실을 설명·제시하며 주관적 찬반을 드러내지 않음",
+  "structure": "주장→근거·예시",
+  "structure_reason": "Maloney의 제안(주장) → 주부 표본 대상 study와 18%·44%·34% 결과(근거) → 결론",
+  "key_grammar": {
+   "point": "목적격 관계대명사 생략",
+   "source_sentence": "In a consumer research classic, Maloney proposed that the disbelief most people experience when encountering exaggerated product claims is often overwhelmed by a natural curiosity.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "'the disbelief most people experience'는 the disbelief 뒤에 목적격 관계대명사 that/which가 생략된 형태로, most people experience가 앞의 disbelief를 꾸며 준다(목적격 관계대명사 생략)."
+    },
+    {
+     "chip": "핵심 규칙",
+     "text": "관계대명사가 관계절 안에서 목적어 역할을 하면 생략할 수 있다(주격은 원칙적으로 생략 불가)."
+    },
+    {
+     "chip": "신호",
+     "text": "명사 바로 뒤에 '주어+동사'가 이어지고 그 동사의 목적어 자리가 비어 있으면 목적격 관계대명사가 생략된 것이다(experience의 목적어가 없음)."
+    },
+    {
+     "chip": "주의",
+     "text": "수식어구 most people experience ... claims를 걷어내면 문장의 진짜 주어는 단수 the disbelief이므로 동사는 is로 수일치한다."
+    },
+    {
+     "chip": "비교",
+     "text": "주격 관계대명사가 쓰인 who clearly disbelieved the message(7번 문장)와 달리, 여기서는 목적격이라 생략이 가능하다."
+    }
+   ],
+   "example_analysis": "the disbelief와 most people experience 사이에 목적격 관계대명사 that(which)이 생략되어 있다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "In a consumer research classic, Maloney proposed [[1|that]] the disbelief most people [[2|experience]] when [[3|encountering]] exaggerated product claims [[4|are]] often [[5|overwhelmed]] by a natural curiosity.",
+     "answer": "④",
+     "fix": "문장의 진짜 주어는 단수명사 the disbelief이고 most people experience ... claims는 이를 꾸미는 수식어이므로, are가 아니라 원문대로 is가 맞다.",
+     "options": [
+      "① that",
+      "② experience",
+      "③ encountering",
+      "④ are",
+      "⑤ overwhelmed"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "This is often [[done/doing]] by yielding to the message and [[trying/tried]] out the product in an attempt [[to readjust/readjusting]] personal attitudes toward the brand.",
+     "answer": "done / trying / to readjust",
+     "fix": "is 뒤이므로 수동태 done, 전치사 by의 목적어로 yielding과 병렬을 이루는 동명사 trying, an attempt를 수식하는 to부정사 to readjust가 옳다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "answer": "Convincing consumers that the claims about a new product are true are not necessary to create interest in product trial.",
+     "fix": "문장의 주어는 동명사구 Convincing consumers ...(단수 취급)이므로 술어동사는 are가 아니라 원문대로 is가 맞다.",
+     "options": [
+      "① When advertising information conflicts with existing beliefs, the resulting disagreement must be somehow resolved.",
+      "② The latter was tied into beliefs that actual product experience was necessary to fully judge the claims.",
+      "③ Convincing consumers that the claims about a new product are true are not necessary to create interest in product trial.",
+      "④ Few consumers who clearly disbelieved the message were interested in trying the product (18%).",
+      "⑤ The results suggest that advertising that causes consumers not to believe the message claims but makes them curious may be the most effective form of new product advertising."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "소비자들이 접하는 그 광고는 종종 과장된 주장을 담고 있다. (관계대명사를 쓰지 말고 배열)",
+     "sentence": "",
+     "answer": "The advertisement consumers encounter often contains exaggerated claims.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "The advertisement",
+      "consumers",
+      "encounter",
+      "often",
+      "contains",
+      "exaggerated claims."
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "한 소비자 연구의 고전에서, Maloney는 대부분의 사람들이 과장된 제품 주장을 접할 때 경험하는 불신이 종종 자연스러운 호기심에 압도된다고 제안했다.",
+     "sentence": "",
+     "answer": "In a consumer research classic, Maloney proposed that the disbelief most people experience when encountering exaggerated product claims is often overwhelmed by a natural curiosity.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "In",
+      "a",
+      "consumer research classic,",
+      "Maloney",
+      "proposed",
+      "that",
+      "the disbelief",
+      "most people experience",
+      "when encountering",
+      "exaggerated product claims",
+      "is",
+      "often",
+      "overwhelmed",
+      "by",
+      "a natural curiosity."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "호기심 어린 불신",
+    "expressions": [
+     "a natural curiosity",
+     "a curious nonbelief",
+     "curious nonbelief group",
+     "makes them curious"
+    ],
+    "variation": "불신하면서도 궁금해하는 상태가 결국 제품 시도로 이어진다."
+   },
+   {
+    "label": "제품 시도 의향",
+    "expressions": [
+     "trying out the product",
+     "trying the product",
+     "try the product",
+     "product trial"
+    ],
+    "variation": "여러 표현이 '제품을 실제로 써 보려는 행동'을 가리킨다."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입(주장)",
+    "sentence_range": "1",
+    "summary": "Maloney: 과장 광고에 대한 [[불신]]은 흔히 [[호기심]]에 압도된다",
+    "easy_example": "'설마' 싶다가도 '그래도 궁금한데?' 하며 손이 가는 것."
+   },
+   {
+    "stage": "전개(기제)",
+    "sentence_range": "2~3",
+    "summary": "광고와 기존 신념의 [[충돌]]은 메시지에 굴복해 제품을 시도함으로써 해소된다",
+    "easy_example": "믿기지 않는 광고라도 일단 한번 써 보며 마음을 맞춰 가는 것."
+   },
+   {
+    "stage": "사례(연구)",
+    "sentence_range": "4~6",
+    "summary": "주부 표본을 믿은 집단/못 믿은 집단으로, 후자를 다시 [[확신 불신]]과 [[호기심 어린 불신]]으로 구분",
+    "easy_example": "'절대 안 믿어' 팀과 '안 믿지만 궁금해' 팀으로 나눠 보기."
+   },
+   {
+    "stage": "결과",
+    "sentence_range": "7~8",
+    "summary": "확신 불신 18%, 호기심 어린 불신 44%, 믿은 집단 34%가 제품 시도 의향",
+    "easy_example": "궁금증이 있는 쪽이 오히려 가장 많이 사 보려 함."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "9~10",
+    "summary": "믿게 하기보다 [[호기심]]을 유발하는 광고가 신제품에 가장 효과적",
+    "easy_example": "'진짜야'라고 설득하기보다 '궁금하지?'를 남기는 편이 낫다."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "In a consumer research classic, Maloney proposed that the disbelief most people experience when encountering exaggerated product claims is often overwhelmed by a natural curiosity.",
+   "grammar": [
+    {
+     "tag": "명사절 접속사 that",
+     "note": "proposed의 목적어절을 이끄는 접속사 that",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "목적격 관계대명사 생략",
+     "note": "the disbelief 뒤 목적격 관계대명사 that/which 생략, most people experience가 수식",
+     "spans": []
+    },
+    {
+     "tag": "분사구문(when+현재분사)",
+     "note": "when + 현재분사, 주어(they) 생략된 시간 부사절",
+     "spans": [
+      "encountering"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "be동사+p.p., 불신이 호기심에 '압도되는' 수동",
+     "spans": [
+      "is often overwhelmed"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "disbelief",
+     "meaning": "불신, 믿지 않음"
+    },
+    {
+     "word": "exaggerated",
+     "meaning": "과장된"
+    },
+    {
+     "word": "overwhelm",
+     "meaning": "압도하다"
+    },
+    {
+     "word": "curiosity",
+     "meaning": "호기심"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In a consumer research classic,",
+     "ko": "한 [[소비자]] 연구의 고전에서,"
+    },
+    {
+     "en": "Maloney proposed that the disbelief most people experience",
+     "ko": "Maloney는 대부분의 사람들이 경험하는 [[불신]]이"
+    },
+    {
+     "en": "when encountering exaggerated product claims",
+     "ko": "[[과장된]] 제품 주장을 접할 때"
+    },
+    {
+     "en": "is often overwhelmed by a natural curiosity.",
+     "ko": "종종 자연스러운 [[호기심]]에 압도된다고 제안했다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Maloney에 따르면, 사람들이 과장된 제품 주장에 대해 느끼는 불신이 대개 자연스러운 호기심을 억눌러 버린다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "is often overwhelmed by a natural curiosity",
+     "why": "불신이 호기심을 억누르는 것이 아니라 호기심에 '압도되는' 것으로, 주체·대상이 뒤바뀜",
+     "killer": true
+    },
+    {
+     "statement": "'most people experience'는 a natural curiosity를 수식하여, 사람들이 자연스러운 호기심을 경험한다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "the disbelief most people experience",
+     "why": "most people experience는 curiosity가 아니라 앞의 disbelief(불신)를 꾸미는 관계절이다"
+    }
+   ],
+   "mistips": [
+    "the disbelief 뒤에 목적격 관계대명사 that/which가 생략됨 → most people experience가 disbelief를 수식하고, 문장의 진짜 주어는 단수 the disbelief라 동사는 is."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "When advertising information conflicts with existing beliefs, the resulting disagreement must be somehow resolved.",
+   "grammar": [
+    {
+     "tag": "시간·조건 부사절 when",
+     "note": "'~할 때'를 이끄는 부사절 접속사",
+     "spans": [
+      "When"
+     ]
+    },
+    {
+     "tag": "현재분사(형용사적 용법)",
+     "note": "resulting이 명사 disagreement를 앞에서 수식",
+     "spans": [
+      "resulting"
+     ]
+    },
+    {
+     "tag": "조동사+수동태",
+     "note": "must be + p.p., '해소되어야 한다'는 조동사 수동",
+     "spans": [
+      "must be",
+      "resolved"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "conflict with",
+     "meaning": "~와 충돌하다"
+    },
+    {
+     "word": "existing",
+     "meaning": "기존의"
+    },
+    {
+     "word": "disagreement",
+     "meaning": "불일치, 의견 충돌"
+    },
+    {
+     "word": "resolve",
+     "meaning": "해소하다, 해결하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When advertising information conflicts with existing beliefs,",
+     "ko": "광고 정보가 기존 [[신념]]과 충돌할 때,"
+    },
+    {
+     "en": "the resulting disagreement must be somehow resolved.",
+     "ko": "그 결과로 생긴 [[불일치]]는 어떻게든 해소되어야 한다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "광고 정보가 기존 신념과 충돌하면, 그로 인해 생긴 불일치는 어떻게든 해소되어야 한다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "This is often done by yielding to the message and trying out the product in an attempt to readjust personal attitudes toward the brand.",
+   "grammar": [
+    {
+     "tag": "수동태",
+     "note": "be동사+p.p., '이루어지다'는 수동",
+     "spans": [
+      "is often done"
+     ]
+    },
+    {
+     "tag": "전치사+동명사(by -ing)",
+     "note": "by의 목적어로 yielding과 trying이 병렬",
+     "spans": [
+      "yielding",
+      "trying"
+     ]
+    },
+    {
+     "tag": "to부정사(형용사적 용법)",
+     "note": "an attempt를 수식하는 to부정사",
+     "spans": [
+      "to readjust"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "yield to",
+     "meaning": "~에 굴복하다, 따르다"
+    },
+    {
+     "word": "try out",
+     "meaning": "시험 삼아 써 보다"
+    },
+    {
+     "word": "attempt",
+     "meaning": "시도"
+    },
+    {
+     "word": "readjust",
+     "meaning": "재조정하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "This is often done",
+     "ko": "이는 흔히 [[이루어진다]]"
+    },
+    {
+     "en": "by yielding to the message",
+     "ko": "[[메시지]]에 굴복함으로써"
+    },
+    {
+     "en": "and trying out the product",
+     "ko": "그리고 [[제품]]을 시험 삼아 써 봄으로써"
+    },
+    {
+     "en": "in an attempt to readjust personal attitudes toward the brand.",
+     "ko": "[[브랜드]]에 대한 개인적 태도를 재조정하려는 시도로."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 불일치 해소는 대개 메시지를 거부하고 제품 구매를 미룸으로써 이루어진다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "yielding to the message and trying out the product",
+     "why": "메시지를 거부하는 게 아니라 메시지에 굴복(수용)하고 제품을 시도함으로써 해소한다"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "In his study, a sample of housewives was exposed to advertisements for food products and then divided into two groups: those participants that found the ad claims to be believable and the others that thought they were hard to believe.",
+   "grammar": [
+    {
+     "tag": "수동태",
+     "note": "be동사+p.p., '노출되었다'는 수동",
+     "spans": [
+      "was",
+      "exposed"
+     ]
+    },
+    {
+     "tag": "관계대명사 주격 that",
+     "note": "those participants를 수식하는 주격 관계대명사",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "5형식 목적격보어(to be)",
+     "note": "found+목적어+to be 보어 구조",
+     "spans": [
+      "to be"
+     ]
+    },
+    {
+     "tag": "관계대명사 주격 that",
+     "note": "the others를 수식하는 주격 관계대명사",
+     "spans": [
+      "that"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "sample",
+     "meaning": "표본"
+    },
+    {
+     "word": "expose",
+     "meaning": "노출시키다"
+    },
+    {
+     "word": "believable",
+     "meaning": "믿을 만한"
+    },
+    {
+     "word": "housewife",
+     "meaning": "주부"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In his study, a sample of housewives",
+     "ko": "그의 연구에서, [[주부]]들의 표본이"
+    },
+    {
+     "en": "was exposed to advertisements for food products",
+     "ko": "[[식품]] 광고에 노출된 뒤"
+    },
+    {
+     "en": "and then divided into two groups:",
+     "ko": "두 [[집단]]으로 나뉘었다:"
+    },
+    {
+     "en": "those participants that found the ad claims to be believable",
+     "ko": "광고 주장이 [[믿을 만하다]]고 여긴 참가자들과"
+    },
+    {
+     "en": "and the others that thought they were hard to believe.",
+     "ko": "그것을 [[믿기 어렵다]]고 생각한 나머지 사람들로."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "'thought they were hard to believe'에서 they는 광고를 본 주부들을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "the others that thought they were hard to believe",
+     "why": "they는 주부가 아니라 앞의 the ad claims(광고 주장)를 가리킨다"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "The latter group was further divided into two groups, those who confidently disbelieved the claims and those who had what Maloney described as a curious nonbelief.",
+   "grammar": [
+    {
+     "tag": "수동태",
+     "note": "be동사+p.p., '나뉘었다'는 수동",
+     "spans": [
+      "was",
+      "divided"
+     ]
+    },
+    {
+     "tag": "관계대명사 주격 who",
+     "note": "those를 수식하는 주격 관계대명사",
+     "spans": [
+      "who"
+     ]
+    },
+    {
+     "tag": "관계대명사 주격 who",
+     "note": "뒤의 those를 수식하는 주격 관계대명사",
+     "spans": [
+      "who"
+     ]
+    },
+    {
+     "tag": "관계대명사 what",
+     "note": "선행사를 포함해 '~하는 것'을 뜻하는 명사절, had의 목적어",
+     "spans": [
+      "what"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "latter",
+     "meaning": "후자의"
+    },
+    {
+     "word": "confidently",
+     "meaning": "확신을 갖고"
+    },
+    {
+     "word": "disbelieve",
+     "meaning": "불신하다, 믿지 않다"
+    },
+    {
+     "word": "nonbelief",
+     "meaning": "불신, 믿지 않음"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The latter group was further divided into two groups,",
+     "ko": "[[후자]]의 집단은 다시 두 집단으로 나뉘었다,"
+    },
+    {
+     "en": "those who confidently disbelieved the claims",
+     "ko": "주장을 [[확신을 갖고]] 불신한 사람들과"
+    },
+    {
+     "en": "and those who had",
+     "ko": "그리고 ~을 [[지녔던]] 사람들이다"
+    },
+    {
+     "en": "what Maloney described as a curious nonbelief.",
+     "ko": "Maloney가 [[호기심 어린 불신]]이라고 묘사한 것을."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "여기서 'The latter group'은 광고 주장을 믿을 만하다고 여긴 참가자들을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "the others that thought they were hard to believe",
+     "why": "the latter group은 믿은 집단이 아니라 믿기 어렵다고 여긴 집단을 가리킨다",
+     "integrative": true
+    }
+   ],
+   "mistips": [
+    "what Maloney described as a curious nonbelief는 선행사 없이 what이 이끄는 명사절로, 앞 동사 had의 목적어다."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "The latter was tied into beliefs that actual product experience was necessary to fully judge the claims.",
+   "grammar": [
+    {
+     "tag": "수동태",
+     "note": "be동사+p.p., '연결되어 있었다'는 수동",
+     "spans": [
+      "was",
+      "tied"
+     ]
+    },
+    {
+     "tag": "동격 that",
+     "note": "beliefs의 내용을 설명하는 동격절 접속사",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "to부정사(부사적 목적)",
+     "note": "'~하기 위해'를 뜻하는 목적의 to부정사",
+     "spans": [
+      "to fully judge"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "be tied into",
+     "meaning": "~와 연결되어 있다"
+    },
+    {
+     "word": "actual",
+     "meaning": "실제의"
+    },
+    {
+     "word": "necessary",
+     "meaning": "필요한"
+    },
+    {
+     "word": "judge",
+     "meaning": "판단하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The latter was tied into beliefs",
+     "ko": "[[후자]]는 믿음과 연결되어 있었다"
+    },
+    {
+     "en": "that actual product experience was necessary",
+     "ko": "실제 [[제품 경험]]이 필요하다는"
+    },
+    {
+     "en": "to fully judge the claims.",
+     "ko": "그 [[주장]]을 온전히 판단하려면."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 지문은 주부들이 실제로 어떤 식품 브랜드를 더 선호했는지 구체적 상표명까지 밝히고 있다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "actual product experience was necessary to fully judge the claims",
+     "why": "본문은 실제 제품 경험이 필요하다는 믿음만 언급하며 구체적 선호 상표는 다루지 않는다"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 7,
+   "english": "Few consumers who clearly disbelieved the message were interested in trying the product (18%).",
+   "grammar": [
+    {
+     "tag": "수량표현(few)",
+     "note": "few=거의 없는(부정 의미)",
+     "spans": [
+      "Few"
+     ]
+    },
+    {
+     "tag": "관계대명사 주격 who",
+     "note": "consumers를 수식하는 주격 관계대명사",
+     "spans": [
+      "who"
+     ]
+    },
+    {
+     "tag": "be interested in -ing",
+     "note": "전치사 in의 목적어로 동명사",
+     "spans": [
+      "interested in",
+      "trying"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "few",
+     "meaning": "거의 없는"
+    },
+    {
+     "word": "disbelieve",
+     "meaning": "불신하다"
+    },
+    {
+     "word": "be interested in",
+     "meaning": "~에 관심이 있다"
+    },
+    {
+     "word": "consumer",
+     "meaning": "소비자"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Few consumers who clearly disbelieved the message",
+     "ko": "메시지를 [[분명히]] 불신한 소비자는 거의 없었다"
+    },
+    {
+     "en": "were interested in trying the product (18%).",
+     "ko": "[[제품]]을 시도하는 데 관심이 있는 경우가 (18%)."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "메시지를 분명히 불신한 소비자 중 제품을 시도하려는 사람은 극소수(18%)였다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    },
+    {
+     "statement": "확고히 불신한 소비자 다수가 결국 제품을 시도했다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "Few consumers who clearly disbelieved the message were interested in trying the product",
+     "why": "Few(극소수)이므로 다수가 시도했다는 것은 틀림",
+     "english": "Most consumers who firmly disbelieved the message ended up trying the product."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "However, Maloney's results showed that more consumers who were in the curious nonbelief group were ready to try the product (44%) than in the group that expressed no concerns about (i.e., believed) the advertising claims (34%).",
+   "grammar": [
+    {
+     "tag": "명사절 접속사 that",
+     "note": "showed의 목적어절을 이끄는 접속사",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "비교급 구문(more ~ than)",
+     "note": "두 집단의 시도 의향을 비교",
+     "spans": [
+      "more",
+      "than"
+     ]
+    },
+    {
+     "tag": "관계대명사 주격 who",
+     "note": "consumers를 수식하는 주격 관계대명사",
+     "spans": [
+      "who"
+     ]
+    },
+    {
+     "tag": "to부정사(be ready to)",
+     "note": "'~할 준비가 된'의 to부정사",
+     "spans": [
+      "to try"
+     ]
+    },
+    {
+     "tag": "관계대명사 주격 that",
+     "note": "the group을 수식하는 주격 관계대명사",
+     "spans": [
+      "that"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "results",
+     "meaning": "결과"
+    },
+    {
+     "word": "be ready to",
+     "meaning": "~할 준비가 된"
+    },
+    {
+     "word": "express",
+     "meaning": "표현하다, 나타내다"
+    },
+    {
+     "word": "concern",
+     "meaning": "우려, 걱정"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "However, Maloney's results showed that",
+     "ko": "그러나, Maloney의 [[결과]]는 ~을 보여 주었다"
+    },
+    {
+     "en": "more consumers who were in the curious nonbelief group",
+     "ko": "[[호기심 어린 불신 집단]]에 있던 더 많은 소비자가"
+    },
+    {
+     "en": "were ready to try the product (44%)",
+     "ko": "제품을 [[시도할 준비]]가 되어 있었다(44%)"
+    },
+    {
+     "en": "than in the group that expressed no concerns about",
+     "ko": "[[우려]]를 표하지 않은(즉, 믿은) 집단보다"
+    },
+    {
+     "en": "(i.e., believed) the advertising claims (34%).",
+     "ko": "그 [[광고 주장]]에 대해 (34%)."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "호기심 어린 불신 집단(44%)이 광고를 믿은 집단(34%)보다 제품을 시도할 의향이 더 높았다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": [
+    "'more consumers ~ (44%) than in the group ~ (34%)'는 more ~ than 비교 구문으로, 44% 집단과 34% 집단을 비교하고 있다."
+   ]
+  },
+  {
+   "id": 9,
+   "english": "The results suggest that advertising that causes consumers not to believe the message claims but makes them curious may be the most effective form of new product advertising.",
+   "grammar": [
+    {
+     "tag": "명사절 접속사 that",
+     "note": "suggest의 목적어절을 이끄는 접속사",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "관계대명사 주격 that",
+     "note": "advertising을 수식하는 주격 관계대명사",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "5형식(cause+O+to부정사)",
+     "note": "cause 목적어를 '~하지 않게 하다', not이 부정사 부정",
+     "spans": [
+      "not to believe"
+     ]
+    },
+    {
+     "tag": "병렬구조(but)",
+     "note": "causes ~ but makes로 두 동사가 병렬",
+     "spans": [
+      "but"
+     ]
+    },
+    {
+     "tag": "최상급",
+     "note": "the most effective, '가장 효과적인'",
+     "spans": [
+      "most"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "suggest",
+     "meaning": "시사하다, 암시하다"
+    },
+    {
+     "word": "cause",
+     "meaning": "~하게 하다, 야기하다"
+    },
+    {
+     "word": "curious",
+     "meaning": "궁금해하는, 호기심 있는"
+    },
+    {
+     "word": "effective",
+     "meaning": "효과적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The results suggest that advertising",
+     "ko": "그 [[결과]]는 ~한 광고가 ~라고 시사한다"
+    },
+    {
+     "en": "that causes consumers not to believe the message claims",
+     "ko": "소비자가 메시지 주장을 [[믿지 않게]] 만들지만"
+    },
+    {
+     "en": "but makes them curious",
+     "ko": "그들을 [[궁금하게]] 만드는"
+    },
+    {
+     "en": "may be the most effective form of new product advertising.",
+     "ko": "가장 [[효과적인]] 신제품 광고 형태일 수 있다고."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 소비자가 광고를 믿지 않게 만드는 광고가 가장 효과적이라고 보는데, 그 이유는 불신 자체가 제품 구매를 강제하기 때문이다.",
+     "verdict": "△",
+     "trap_type": "필자관점",
+     "anchor": "but makes them curious may be the most effective form of new product advertising",
+     "why": "효과적인 이유는 불신 자체가 아니라 호기심을 유발하기 때문이다"
+    }
+   ],
+   "mistips": [
+    "that causes ~ not to believe ~ but makes them curious에서 causes와 makes가 병렬로, 둘 다 advertising을 선행사로 하는 관계절 동사다."
+   ]
+  },
+  {
+   "id": 10,
+   "english": "Convincing consumers that the claims about a new product are true is not necessary to create interest in product trial.",
+   "grammar": [
+    {
+     "tag": "동명사 주어(단수 취급)",
+     "note": "Convincing이 이끄는 동명사구가 주어",
+     "spans": [
+      "Convincing"
+     ]
+    },
+    {
+     "tag": "명사절 접속사 that",
+     "note": "convince A that ~ 구조의 명사절",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "수일치",
+     "note": "동명사 주어는 단수 → is",
+     "spans": [
+      "is"
+     ]
+    },
+    {
+     "tag": "to부정사(부사적 목적)",
+     "note": "'~하는 데'를 뜻하는 목적의 to부정사",
+     "spans": [
+      "to create"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "convince",
+     "meaning": "납득시키다, 확신시키다"
+    },
+    {
+     "word": "claim",
+     "meaning": "주장"
+    },
+    {
+     "word": "necessary",
+     "meaning": "필요한"
+    },
+    {
+     "word": "trial",
+     "meaning": "시도, 시험 삼아 해 봄"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Convincing consumers that the claims about a new product are true",
+     "ko": "신제품에 관한 주장이 [[사실]]임을 소비자에게 납득시키는 것은"
+    },
+    {
+     "en": "is not necessary to create interest in product trial.",
+     "ko": "제품 시도에 대한 [[관심]]을 만드는 데 필요하지 않다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 신제품 시도 관심을 이끌어내려면 소비자에게 광고 주장이 사실임을 반드시 납득시켜야 한다고 본다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "is not necessary to create interest in product trial",
+     "why": "주장이 사실임을 납득시키는 것은 필요하지 않다고 필자는 말한다"
+    }
+   ],
+   "mistips": []
+  }
+ ]
+}

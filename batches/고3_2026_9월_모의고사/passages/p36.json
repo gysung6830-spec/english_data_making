@@ -1,0 +1,306 @@
+{
+  "item_no": "36",
+  "theme": "가치의 신호 — 무엇을 보상할 것인가",
+  "overview": {
+    "theme_ko": "가치의 신호와 보상",
+    "topic": "🔎 보상 방식이 전하는 가치의 신호",
+    "stance": "부정적·비판적",
+    "stance_reason": "'Such mixed signals leave the employees confused'처럼 혼재된 신호의 문제를 지적함",
+    "structure": "주장→근거·예시",
+    "structure_reason": "가치 신호 주장 뒤 'Consider a manager'로 콜센터 사례를 근거로 제시함",
+    "key_grammar": {
+      "point": "명사절 접속사 that",
+      "source_sentence": "Consider a manager who communicates to her employees in a call center that \"customer care is the most important thing for our company.\"",
+      "explanation": [
+        {"chip": "쉽게 말하면", "text": "동사 뒤 that은 '~라고/~라는 것을'처럼 한 문장을 통째로 목적어(명사) 자리에 넣어줘요."},
+        {"chip": "핵심", "text": "communicates that ~: '~라고 전달하다'. that절이 동사의 목적어인 명사절입니다."},
+        {"chip": "비교", "text": "명사절 that 뒤에는 완전한 절이 오고, 관계대명사 that 뒤에는 빠진 자리가 있어요."},
+        {"chip": "주의", "text": "이 that은 생략되기도 하지만, 명료함을 위해 남겨 둘 수도 있어요."}
+      ],
+      "example_analysis": "communicates 의 목적어로 that절(customer care is the most important thing for our company)이 통째로 들어갔다.",
+      "drills": [
+        {
+          "kind": "밑줄형",
+          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+          "sentence": "[[1|Consider]] a manager [[2|who]] [[3|communicates]] to her employees in a call center [[4|what]] \"customer care is [[5|the most important thing]] for our company.\"",
+          "answer": "④",
+          "fix": "뒤에 완전한 절이 오므로 관계대명사 what이 아니라 명사절 접속사 that이 필요함(communicates의 목적어절).",
+          "options": ["① Consider", "② who", "③ communicates", "④ what", "⑤ the most important thing"],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "네모형",
+          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+          "sentence": "Now, imagine [[that / what]] the manager sets the incentives such that employees [[are paid / are paying]] by the [[number / amount]] of calls they answer.",
+          "answer": "that / are paid / number",
+          "fix": "",
+          "options": [],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "오류찾기",
+          "question": "다음 중 어법상 틀린 문장은?",
+          "sentence": "",
+          "answer": "Such mixed signals leaves the employees confused about the manager's values and expectations.",
+          "fix": "leaves → leave: 주어 Such mixed signals(복수)에 수일치.",
+          "options": [
+            "Our choices and actions send messages to others about our values.",
+            "That's a signal to others regarding values.",
+            "Such mixed signals leaves the employees confused about the manager's values and expectations.",
+            "This mixed signals problem is channeled into a simple question: what should be rewarded?",
+            "Simple \"one-aspect\" compensation sends a clear message to the workers: concentrate on what we're paying you for and ignore everything else."
+          ],
+          "words": [],
+          "from_passage": true
+        },
+        {
+          "kind": "영작",
+          "question": "그녀는 그 계획이 성공할 것이라고 믿는다.",
+          "sentence": "",
+          "answer": "She believes that the plan will succeed.",
+          "fix": "",
+          "options": [],
+          "words": ["She", "believes", "that", "the plan", "will", "succeed"],
+          "from_passage": false
+        },
+        {
+          "kind": "영작",
+          "question": "우리의 선택과 행동은 우리의 가치에 관해 다른 사람들에게 메시지를 보낸다.",
+          "sentence": "",
+          "answer": "Our choices and actions send messages to others about our values.",
+          "fix": "",
+          "options": [],
+          "words": ["Our", "choices and actions", "send", "messages", "to others", "about our values."],
+          "from_passage": true
+        }
+      ]
+    },
+    "restatement_chains": [
+      {"label": "가치의 신호", "expressions": ["send messages to others about our values", "a signal to others regarding values"], "variation": "행동이 가치를 알린다"},
+      {"label": "혼재된 신호", "expressions": ["a very different signal", "Such mixed signals"], "variation": "말과 보상이 서로 어긋난다"}
+    ],
+    "flow_blocks": [
+      {"stage": "주장", "sentence_range": "1", "summary": "선택과 행동은 [[values]]에 관한 메시지를 전한다", "easy_example": "무엇을 칭찬하는지가 곧 가치관을 보여준다"},
+      {"stage": "사례 도입", "sentence_range": "2~3", "summary": "'[[customer care]]가 최우선'이라 말하는 관리자", "easy_example": "사장이 '친절이 제일'이라고 선언한다"},
+      {"stage": "반전(모순)", "sentence_range": "4~5", "summary": "보상은 [[통화 수]]에 따라 → 속도 중시라는 다른 신호", "easy_example": "말은 친절, 보상은 통화량이면 속도만 챙긴다"},
+      {"stage": "문제 제기", "sentence_range": "6~7", "summary": "혼재된 신호가 혼란 → '[[what should be rewarded]]?'", "easy_example": "직원은 무엇에 맞춰야 할지 헷갈린다"},
+      {"stage": "일반화", "sentence_range": "8~9", "summary": "측정 쉬운 [[one aspect]]만 보상 → 나머지 무시 신호", "easy_example": "측정 쉬운 지표만 보상하면 나머지는 방치된다"}
+    ]
+  },
+  "sentences": [
+    {
+      "id": 1,
+      "english": "Our choices and actions send messages to others about our values.",
+      "grammar": [
+        {"tag": "수일치", "note": "복수 주어 choices and actions에 동사 send", "spans": ["send"]},
+        {"tag": "관용표현", "note": "send a message to ~: ~에게 메시지를 보내다", "spans": ["send messages to"]}
+      ],
+      "vocab": [
+        {"word": "value", "meaning": "가치, 가치관"},
+        {"word": "action", "meaning": "행동"},
+        {"word": "message", "meaning": "메시지, 전언"}
+      ],
+      "chunks": [
+        {"en": "Our choices and actions", "ko": "우리의 [[선택]]과 행동은"},
+        {"en": "send messages to others about our values.", "ko": "우리의 [[가치]]에 관해 다른 사람들에게 메시지를 보낸다"}
+      ],
+      "misreads": [
+        {"statement": "우리의 선택과 행동은 우리의 가치에 관해 다른 사람들에게 메시지를 보낸다.", "verdict": "O", "trap_type": "주체대상"}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 2,
+      "english": "Consider a manager who communicates to her employees in a call center that \"customer care is the most important thing for our company.\"",
+      "grammar": [
+        {"tag": "명령문", "note": "Consider ~: 동사원형으로 시작하는 명령문", "spans": ["Consider"]},
+        {"tag": "주격 관계대명사", "note": "who: 선행사 a manager 수식 (뒤 주어 없음)", "spans": ["who"]},
+        {"tag": "명사절 접속사 that", "note": "communicates that ~: '~라고 전달하다'의 목적어 명사절", "spans": ["that"]},
+        {"tag": "최상급", "note": "the most important: 가장 ~한", "spans": ["the most important"]}
+      ],
+      "vocab": [
+        {"word": "communicate", "meaning": "전달하다, 알리다"},
+        {"word": "employee", "meaning": "직원"},
+        {"word": "customer care", "meaning": "고객 관리"}
+      ],
+      "chunks": [
+        {"en": "Consider a manager who communicates", "ko": "~라고 전달하는 한 [[관리자]]를 생각해 보라"},
+        {"en": "to her employees in a call center", "ko": "[[콜센터]]에서 자기 직원들에게"},
+        {"en": "that \"customer care is", "ko": "'[[고객 관리]]가"},
+        {"en": "the most important thing for our company.\"", "ko": "우리 회사에 가장 [[중요한]] 것'이라고"}
+      ],
+      "misreads": [
+        {"statement": "콜센터 관리자는 직원들에게 고객 만족도 점수를 매달 공개하겠다고 전달한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "customer care is the most important thing for our company", "why": "관리자가 전한 것은 '고객 관리가 가장 중요하다'는 말이지 점수 공개가 아님 — 지문에 없는 정보"}
+      ],
+      "mistips": ["communicates that는 '~라고 전달하다'. that절이 동사 communicates의 목적어(명사절)이다."]
+    },
+    {
+      "id": 3,
+      "english": "That's a signal to others regarding values.",
+      "grammar": [
+        {"tag": "지시대명사", "note": "That = 앞 문장(관리자의 발언)을 지칭", "spans": ["That's"]},
+        {"tag": "분사", "note": "regarding: ~에 관하여 (분사가 전치사처럼)", "spans": ["regarding"]}
+      ],
+      "vocab": [
+        {"word": "signal", "meaning": "신호"},
+        {"word": "regarding", "meaning": "~에 관하여"}
+      ],
+      "chunks": [
+        {"en": "That's a signal", "ko": "그것은 하나의 [[신호]]이다"},
+        {"en": "to others regarding values.", "ko": "[[가치]]에 관해 다른 사람들에게"}
+      ],
+      "misreads": [
+        {"statement": "'That'은 고객 관리를 최우선으로 여긴다는 관리자의 말이 가치에 관한 신호임을 가리킨다.", "verdict": "O", "trap_type": "지칭", "english": "That statement is a signal to others about values."}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 4,
+      "english": "Now, imagine that the manager sets the incentives such that employees are paid by the number of calls they answer.",
+      "grammar": [
+        {"tag": "명령문", "note": "imagine ~: 동사원형 명령문", "spans": ["imagine"]},
+        {"tag": "명사절 접속사 that", "note": "imagine that ~: '~라고 상상하다'의 목적어 명사절", "spans": ["imagine that"]},
+        {"tag": "부사절(such that)", "note": "such that ~: ~하도록/~하게 (결과·정도)", "spans": ["such that"]},
+        {"tag": "수동태", "note": "are paid: 급여를 받다 (be+p.p.)", "spans": ["are paid"]},
+        {"tag": "수량표현", "note": "the number of ~: ~의 수", "spans": ["the number of"]},
+        {"tag": "목적격 관계대명사 생략", "note": "calls (that) they answer: calls 뒤 목적격 관계사 생략", "spans": ["they answer"]}
+      ],
+      "vocab": [
+        {"word": "incentive", "meaning": "성과급, 유인책"},
+        {"word": "be paid", "meaning": "급여를 받다"},
+        {"word": "the number of calls", "meaning": "전화(통화)의 수"}
+      ],
+      "chunks": [
+        {"en": "Now, imagine that the manager", "ko": "이제, [[관리자]]가 ~한다고 상상해 보라"},
+        {"en": "sets the incentives such that", "ko": "다음과 같이 [[성과급]]을 설정한다"},
+        {"en": "[[employees are paid by the number of calls they answer.]]", "ko": "[[직원들이 그들이 응답한 전화 수에 따라 급여를 받도록]]"}
+      ],
+      "misreads": [
+        {"statement": "관리자는 직원들이 받는 전화 수를 줄이도록 성과급을 설정한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "employees are paid by the number of calls they answer", "why": "응답한 통화 '수에 따라' 급여를 주는 것이지 통화를 줄이게 하는 것이 아님"}
+      ],
+      "mistips": ["such that는 '~하도록/~하게'로, 앞의 imagine that의 that과 역할이 다르다.", "calls they answer는 calls (that) they answer로 목적격 관계사가 생략된 구조다."]
+    },
+    {
+      "id": 5,
+      "english": "This incentive sends a very different signal about what the manager is looking for: it's about being fast, which comes at the expense of quality of care.",
+      "grammar": [
+        {"tag": "의문사절(what)", "note": "what the manager is looking for: 전치사 about의 목적어 명사절", "spans": ["what"]},
+        {"tag": "관용표현", "note": "look for ~: ~을 찾다/원하다", "spans": ["looking for"]},
+        {"tag": "동명사", "note": "being fast: 전치사 about의 목적어 동명사", "spans": ["being fast"]},
+        {"tag": "관계대명사 계속적 용법", "note": ", which: 앞 절 내용을 부연 (계속적)", "spans": ["which"]},
+        {"tag": "관용표현", "note": "at the expense of ~: ~을 희생하여", "spans": ["at the expense of"]}
+      ],
+      "vocab": [
+        {"word": "look for", "meaning": "찾다, 원하다"},
+        {"word": "at the expense of", "meaning": "~을 희생하여"},
+        {"word": "quality", "meaning": "질, 품질"}
+      ],
+      "chunks": [
+        {"en": "This incentive sends a very different signal", "ko": "이 성과급은 매우 다른 [[신호]]를 보낸다"},
+        {"en": "about what the manager is looking for:", "ko": "관리자가 무엇을 [[원하는지]]에 관해"},
+        {"en": "it's about being fast,", "ko": "그것은 [[빠른]] 것에 관한 것이다"},
+        {"en": "[[which comes at the expense of quality of care.]]", "ko": "[[그리고 그것은 돌봄의 질을 희생시킨다]]"}
+      ],
+      "misreads": [
+        {"statement": "속도를 높이면 돌봄의 질도 함께 향상되므로 이 성과급은 일관된 신호를 준다.", "verdict": "X", "trap_type": "인과조건", "anchor": "which comes at the expense of quality of care", "why": "속도는 돌봄의 질을 '희생시키며(at the expense of)' 향상시키지 않음 — 인과 왜곡", "killer": true}
+      ],
+      "mistips": [", which는 앞 절 전체(속도 중시)를 받아 부연하는 계속적 용법이다.", "being fast는 전치사 about의 목적어인 동명사구다."]
+    },
+    {
+      "id": 6,
+      "english": "Such mixed signals leave the employees confused about the manager's values and expectations.",
+      "grammar": [
+        {"tag": "5형식", "note": "leave+O+형용사보어: ~을 (혼란한) 상태로 두다", "spans": ["leave", "confused"]},
+        {"tag": "감정분사", "note": "confused: (사람이) 혼란스러운 (과거분사 보어)", "spans": ["confused"]},
+        {"tag": "소유격", "note": "the manager's: 관리자의 (소유격)", "spans": ["manager's"]}
+      ],
+      "vocab": [
+        {"word": "mixed", "meaning": "혼재된, 뒤섞인"},
+        {"word": "confused", "meaning": "혼란스러운"},
+        {"word": "expectation", "meaning": "기대"}
+      ],
+      "chunks": [
+        {"en": "Such mixed signals leave the employees confused", "ko": "그러한 [[혼재된]] 신호는 직원들을 혼란스럽게 만든다"},
+        {"en": "about the manager's values and expectations.", "ko": "관리자의 [[가치]]와 기대에 대해"}
+      ],
+      "misreads": [
+        {"statement": "혼재된 신호 때문에 관리자가 직원들의 가치와 기대에 대해 혼란스러워한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "leave the employees confused about the manager's values and expectations", "why": "혼란스러워하는 주체는 관리자가 아니라 직원들임"}
+      ],
+      "mistips": ["leave the employees confused는 5형식(leave+목적어+형용사보어)이며, 혼란스러운 주체는 employees다."]
+    },
+    {
+      "id": 7,
+      "english": "This mixed signals problem is channeled into a simple question: what should be rewarded?",
+      "grammar": [
+        {"tag": "수동태", "note": "is channeled into: ~으로 귀결되다 (be+p.p.)", "spans": ["is channeled"]},
+        {"tag": "간접의문문", "note": "what should be rewarded: 의문사절이 명사처럼", "spans": ["what"]},
+        {"tag": "조동사 수동", "note": "should be rewarded: 보상받아야 한다 (조동사+be p.p.)", "spans": ["should be rewarded"]}
+      ],
+      "vocab": [
+        {"word": "be channeled into", "meaning": "~으로 귀결되다, 모아지다"},
+        {"word": "reward", "meaning": "보상하다"}
+      ],
+      "chunks": [
+        {"en": "This mixed signals problem is channeled", "ko": "이 혼재된 신호 [[문제]]는 귀결된다"},
+        {"en": "into a simple question:", "ko": "하나의 단순한 [[질문]]으로"},
+        {"en": "what should be rewarded?", "ko": "무엇이 [[보상]]되어야 하는가?"}
+      ],
+      "misreads": [
+        {"statement": "필자는 무엇을 보상해야 하는지 정답이 하나로 분명하게 정해져 있다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "what should be rewarded?", "why": "필자는 이를 '단순한 질문(problem)'으로 던질 뿐 정답을 하나로 단정하지 않음"}
+      ],
+      "mistips": []
+    },
+    {
+      "id": 8,
+      "english": "In many cases, performance is multidimensional, but compensation is only given to one aspect of performance, typically the one that is easiest to measure.",
+      "grammar": [
+        {"tag": "등위접속사", "note": "but: 대조 (그러나)", "spans": ["but"]},
+        {"tag": "수동태", "note": "is only given: 주어지다 (be+p.p.)", "spans": ["is only given"]},
+        {"tag": "부정대명사", "note": "the one = the aspect (앞 명사 대신)", "spans": ["the one"]},
+        {"tag": "주격 관계대명사", "note": "that: 선행사 the one 수식", "spans": ["that"]},
+        {"tag": "최상급", "note": "the easiest to measure: 가장 측정하기 쉬운", "spans": ["easiest"]}
+      ],
+      "vocab": [
+        {"word": "performance", "meaning": "성과, 수행"},
+        {"word": "multidimensional", "meaning": "다차원적인"},
+        {"word": "compensation", "meaning": "보상"},
+        {"word": "aspect", "meaning": "측면"},
+        {"word": "measure", "meaning": "측정하다"}
+      ],
+      "chunks": [
+        {"en": "In many cases, performance is multidimensional,", "ko": "많은 경우, 성과는 [[다차원적]]이다"},
+        {"en": "but compensation is only given", "ko": "그러나 [[보상]]은 오직 주어진다"},
+        {"en": "to one aspect of performance,", "ko": "성과의 한 [[측면]]에만"},
+        {"en": "typically the one that is easiest to measure.", "ko": "보통 [[측정]]하기 가장 쉬운 측면에"}
+      ],
+      "misreads": [
+        {"statement": "성과가 다차원적이므로 보상도 여러 측면에 골고루 주어진다.", "verdict": "△", "trap_type": "구조수식", "anchor": "compensation is only given to one aspect of performance", "why": "성과는 다차원적이지만 보상은 '오직 한 측면'에만 주어진다 — 골고루가 아님"}
+      ],
+      "mistips": ["the one = one aspect. that is easiest to measure가 the one을 수식한다."]
+    },
+    {
+      "id": 9,
+      "english": "Simple \"one-aspect\" compensation sends a clear message to the workers: concentrate on what we're paying you for and ignore everything else.",
+      "grammar": [
+        {"tag": "관용표현", "note": "send a message to ~: ~에게 메시지를 전하다", "spans": ["sends a clear message to"]},
+        {"tag": "명령문", "note": "concentrate와 ignore: 동사원형 명령문 (콜론 뒤 메시지 내용)", "spans": ["concentrate", "ignore"]},
+        {"tag": "관계사 what", "note": "what we're paying you for: 전치사 on의 목적어 (선행사 포함 관계사)", "spans": ["what"]}
+      ],
+      "vocab": [
+        {"word": "concentrate on", "meaning": "~에 집중하다"},
+        {"word": "ignore", "meaning": "무시하다"}
+      ],
+      "chunks": [
+        {"en": "Simple \"one-aspect\" compensation sends a clear message to the workers:", "ko": "단순한 '한 측면' 보상은 노동자에게 분명한 [[메시지]]를 보낸다"},
+        {"en": "concentrate on what we're paying you for", "ko": "우리가 당신에게 [[급여]]를 주는 것에 집중하라"},
+        {"en": "and ignore everything else.", "ko": "그리고 나머지는 모두 [[무시]]하라"}
+      ],
+      "misreads": [
+        {"statement": "위 문장에서 'what we're paying you for'는 측정하기 어려운 성과 측면을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "concentrate on what we're paying you for and ignore everything else", "why": "'급여를 주는 대상'은 (측정 쉬운) 보상되는 한 측면을 가리키며, 나머지는 무시하라는 신호임"}
+      ],
+      "mistips": ["what we're paying you for = 우리가 당신에게 (급여를) 지불하는 것. 선행사를 포함한 관계사 what이다."]
+    }
+  ]
+}

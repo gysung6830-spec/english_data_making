@@ -1,0 +1,688 @@
+{
+ "item_no": "24",
+ "theme": "나이의 경계가 흐려지다 — 연령 중심 사회의 약화",
+ "overview": {
+  "theme_ko": "흐려지는 나이의 경계",
+  "topic": "🔎 노화에 대한 통념 약화와 연령 중심 사회의 쇠퇴",
+  "stance": "중립적",
+  "stance_reason": "the preconceptions surrounding aging were weakening 을 관찰·보고하는 서술 중심",
+  "structure": "주장→근거·예시",
+  "structure_reason": "'선입견이 약해진다'는 관찰을 제시하고 야구선수·중년 출산·최고령 대통령·쉰 살 사례로 뒷받침",
+  "key_grammar": {
+   "point": "진행형 수동태 (be being p.p.)",
+   "source_sentence": "As baby boomers entered midlife, the idea of oldness was being pushed back, and the expectations for what people should or should not be doing at a particular age broadened.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "'be being + p.p.'는 '~되고 있는 중'이라는 진행의 뜻에 '~당하다'라는 수동을 합친 형태다."
+    },
+    {
+     "chip": "형태",
+     "text": "be동사 + being + 과거분사. 시제는 앞의 be가 담당한다(was/were being p.p. = ~되고 있었다)."
+    },
+    {
+     "chip": "본문에서",
+     "text": "was being pushed back(늙음의 관념이 뒤로 밀려나고 있었다), were being expanded or relaxed(경계가 확장·완화되고 있었다)."
+    },
+    {
+     "chip": "주의",
+     "text": "being을 빼면 단순 수동(was pushed=밀려났다)이 되어 '진행 중'의 뉘앙스가 사라진다."
+    },
+    {
+     "chip": "헷갈리면",
+     "text": "has been pushed(완료수동)와 달리 was being pushed는 그 시점에 '진행 중'이던 수동이다."
+    }
+   ],
+   "example_analysis": "was being pushed back = [was](시제·be) + [being] + [pushed](p.p.): 뒤로 밀려나고 있던 진행 중의 수동.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "As baby boomers [[1|entered]] midlife, the idea of oldness [[2|was being pushed]] back, and the expectations for [[3|what]] people should or should not [[4|be doing]] at a particular age [[5|broadening]].",
+     "answer": "⑤",
+     "fix": "broadening → broadened: 등위절의 정동사가 필요하므로 과거형 broadened가 옳다.",
+     "options": [
+      "① entered",
+      "② was being pushed",
+      "③ what",
+      "④ be doing",
+      "⑤ broadening"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "\"Something strange is happening in America,\" [[wrote/written]] Marj Jackson Levin for the St. Louis Post-Dispatch in 1988, [[finding/found]] that what she called \"the former boundaries of age\" [[were/was]] being expanded or relaxed in many arenas.",
+     "answer": "wrote / finding / were",
+     "fix": "",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "answer": "The new views about and questions being asked about aging could be detect across society.",
+     "fix": "could be detect → could be detected: 조동사 뒤 수동태는 be+과거분사이므로 detected가 옳다.",
+     "options": [
+      "Whether it was fortysomething baseball players, midlife women having babies, or the oldest president in the nation's history, it did indeed appear that the preconceptions surrounding aging were weakening.",
+      "Turning fifty had only recently been commonly viewed as the unofficial turning of the corner into one's senior years, for example, but now that number did not automatically mean one could not start a new career or family.",
+      "The new views about and questions being asked about aging could be detect across society.",
+      "As baby boomers entered midlife, the idea of oldness was being pushed back, and the expectations for what people should or should not be doing at a particular age broadened.",
+      "In a good number of cases, at least, age was becoming less significant, a clear victory for those lobbying for a less age-centric society."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그 오래된 다리는 지금 새로운 자재로 재건되고 있다.",
+     "sentence": "",
+     "answer": "The old bridge is being rebuilt with new materials.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "The old bridge",
+      "is",
+      "being",
+      "rebuilt",
+      "with",
+      "new materials"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "노화에 대해 제기되는 새로운 견해와 질문들이 사회 전반에 걸쳐 감지될 수 있었다.",
+     "sentence": "",
+     "answer": "The new views about and questions being asked about aging could be detected across society.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "The new views",
+      "about",
+      "and questions",
+      "being asked",
+      "about aging",
+      "could be detected",
+      "across society"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "나이 경계의 완화",
+    "expressions": [
+     "being expanded or relaxed",
+     "was being pushed back",
+     "becoming less significant"
+    ],
+    "variation": "나이의 구획이 확장·후퇴하며 그 중요성이 약해진다는 흐름"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입",
+    "sentence_range": "1",
+    "summary": "노화에 관한 새로운 [[견해]]와 질문이 사회 전반에서 감지됨",
+    "easy_example": "신문·방송에서 '나이 이야기'가 예전과 달라졌다고 느끼는 것"
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "2~3",
+    "summary": "[[the former boundaries of age]]가 확장·완화되고 노화 선입견이 약해지는 여러 사례",
+    "easy_example": "40대 현역 선수, 중년 출산, 최고령 대통령 같은 장면들"
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "4~5",
+    "summary": "베이비붐 세대의 중년 진입으로 '늙음' 관념이 밀려나고 나이별 [[기대]]가 넓어짐",
+    "easy_example": "쉰 살에 새 직업을 시작하는 것이 더는 이상하지 않은 분위기"
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "6",
+    "summary": "나이가 덜 중요해지는 것은 [[less age-centric society]]를 바라는 이들의 성과",
+    "easy_example": "'나이가 뭐가 중요해'라는 인식이 자리 잡는 것"
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "The new views about and questions being asked about aging could be detected across society.",
+   "grammar": [
+    {
+     "tag": "분사(현재분사 수동)",
+     "note": "questions를 뒤에서 수식하는 being+p.p.",
+     "spans": [
+      "being asked"
+     ]
+    },
+    {
+     "tag": "조동사 수동태",
+     "note": "could + be + p.p. = 감지될 수 있었다",
+     "spans": [
+      "be detected"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "views",
+     "meaning": "견해, 관점"
+    },
+    {
+     "word": "aging",
+     "meaning": "노화"
+    },
+    {
+     "word": "detect",
+     "meaning": "감지하다, 발견하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The new views about and questions",
+     "ko": "노화에 관한 새로운 [[견해]]와 질문들"
+    },
+    {
+     "en": "being asked about aging",
+     "ko": "[[노화]]에 대해 제기되는"
+    },
+    {
+     "en": "could be detected",
+     "ko": "[[감지될]] 수 있었다"
+    },
+    {
+     "en": "across society.",
+     "ko": "[[사회]] 전반에 걸쳐"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "노화에 관한 새로운 견해와 질문이 사회 전반에서 감지될 수 있었다.",
+     "verdict": "O",
+     "trap_type": "구조수식"
+    }
+   ],
+   "mistips": [
+    "views about (aging) and questions ~ : about의 목적어(aging)가 뒤로 미뤄진 공통구조로 읽는다."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "\"Something strange is happening in America,\" wrote Marj Jackson Levin for the St. Louis Post-Dispatch in 1988, finding that what she called \"the former boundaries of age\" were being expanded or relaxed in many arenas.",
+   "grammar": [
+    {
+     "tag": "도치",
+     "note": "인용문 뒤 wrote+주어 어순 도치",
+     "spans": [
+      "wrote"
+     ]
+    },
+    {
+     "tag": "분사구문",
+     "note": "finding = 부대상황 분사구문(주어 Levin)",
+     "spans": [
+      "finding"
+     ]
+    },
+    {
+     "tag": "관계대명사 what",
+     "note": "what she called = 선행사 포함 관계사절(~라고 부른 것)",
+     "spans": [
+      "what"
+     ]
+    },
+    {
+     "tag": "진행형 수동태",
+     "note": "were being + p.p. = 확장·완화되고 있던 진행 중 수동",
+     "spans": [
+      "were being expanded"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "former",
+     "meaning": "이전의, 과거의"
+    },
+    {
+     "word": "boundary",
+     "meaning": "경계"
+    },
+    {
+     "word": "expand",
+     "meaning": "확장하다"
+    },
+    {
+     "word": "relax",
+     "meaning": "완화하다, 느슨하게 하다"
+    },
+    {
+     "word": "arena",
+     "meaning": "영역, 무대"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "\"Something strange is happening in America,\"",
+     "ko": "\"미국에서 [[이상한]] 일이 일어나고 있다\"라고"
+    },
+    {
+     "en": "wrote Marj Jackson Levin",
+     "ko": "Marj Jackson [[Levin]]이 썼다"
+    },
+    {
+     "en": "for the St. Louis Post-Dispatch in 1988,",
+     "ko": "[[1988년]] St. Louis Post-Dispatch에"
+    },
+    {
+     "en": "finding that what she called",
+     "ko": "그녀가 [[부른]] 것이"
+    },
+    {
+     "en": "\"the former boundaries of age\"",
+     "ko": "\"나이의 이전 [[경계]]\"가"
+    },
+    {
+     "en": "were being expanded or relaxed",
+     "ko": "[[확장되거나]] 완화되고 있음을"
+    },
+    {
+     "en": "in many arenas.",
+     "ko": "많은 [[영역]]에서"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "본문에서 '나이의 이전 경계'라는 표현은 St. Louis Post-Dispatch 편집진이 붙인 명칭이다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "what she called",
+     "why": "그 표현은 she(=Levin)가 부른 것이므로 편집진이 붙인 명칭이 아니다."
+    }
+   ],
+   "mistips": [
+    "\"~,\" wrote 주어 : 인용문이 문두로 나가면서 뒤가 도치된 구조다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "Whether it was fortysomething baseball players, midlife women having babies, or the oldest president in the nation's history, it did indeed appear that the preconceptions surrounding aging were weakening.",
+   "grammar": [
+    {
+     "tag": "양보의 부사절(whether)",
+     "note": "Whether A, B, or C = ~이든 (양보)",
+     "spans": [
+      "Whether"
+     ]
+    },
+    {
+     "tag": "분사(현재분사 수식)",
+     "note": "women having babies = women을 수식",
+     "spans": [
+      "having"
+     ]
+    },
+    {
+     "tag": "강조(do 조동사)",
+     "note": "did indeed appear = 강조의 do",
+     "spans": [
+      "did"
+     ]
+    },
+    {
+     "tag": "명사절 that",
+     "note": "appear that ~ = 보문절(진주어)",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "분사(현재분사 수식)",
+     "note": "preconceptions surrounding aging = 수식",
+     "spans": [
+      "surrounding"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "fortysomething",
+     "meaning": "40대의"
+    },
+    {
+     "word": "midlife",
+     "meaning": "중년의"
+    },
+    {
+     "word": "preconception",
+     "meaning": "선입견"
+    },
+    {
+     "word": "surrounding",
+     "meaning": "~을 둘러싼"
+    },
+    {
+     "word": "weaken",
+     "meaning": "약해지다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Whether it was fortysomething baseball players,",
+     "ko": "그것이 40대의 [[야구]] 선수든,"
+    },
+    {
+     "en": "midlife women having babies,",
+     "ko": "아이를 낳는 [[중년]] 여성이든,"
+    },
+    {
+     "en": "or the oldest president in the nation's history,",
+     "ko": "국가 역사상 최고령 [[대통령]]이든,"
+    },
+    {
+     "en": "it did indeed appear that",
+     "ko": "실제로 ~인 것처럼 [[보였다]]"
+    },
+    {
+     "en": "the preconceptions surrounding aging",
+     "ko": "노화를 둘러싼 [[선입견]]이"
+    },
+    {
+     "en": "were weakening.",
+     "ko": "[[약해지고]] 있다는 것이"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "본문은 40대 야구 선수, 중년 출산 여성, 최고령 대통령이 서로 협력해 노화 인식을 바꾸었다고 설명한다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "the preconceptions surrounding aging were weakening",
+     "why": "이들은 선입견이 약해지는 예시일 뿐 협력 주체로 서술되지 않는다."
+    }
+   ],
+   "mistips": [
+    "did indeed appear : did는 조동사 강조로 '정말/실제로'의 뜻을 더한다."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "As baby boomers entered midlife, the idea of oldness was being pushed back, and the expectations for what people should or should not be doing at a particular age broadened.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사(as)",
+     "note": "As ~ = ~하면서/함에 따라",
+     "spans": [
+      "As"
+     ]
+    },
+    {
+     "tag": "진행형 수동태",
+     "note": "was being + pushed back = 밀려나고 있던 진행 중 수동",
+     "spans": [
+      "was being pushed"
+     ]
+    },
+    {
+     "tag": "의문사절(간접의문문)",
+     "note": "what people ... be doing = 명사절(무엇을)",
+     "spans": [
+      "what"
+     ]
+    },
+    {
+     "tag": "조동사",
+     "note": "should or should not be doing = 당위/의무",
+     "spans": [
+      "should or should not"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "baby boomer",
+     "meaning": "베이비붐 세대"
+    },
+    {
+     "word": "midlife",
+     "meaning": "중년"
+    },
+    {
+     "word": "oldness",
+     "meaning": "늙음, 노령"
+    },
+    {
+     "word": "push back",
+     "meaning": "뒤로 밀어내다, 미루다"
+    },
+    {
+     "word": "broaden",
+     "meaning": "넓어지다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "As baby boomers entered midlife,",
+     "ko": "베이비붐 세대가 [[중년]]에 접어들면서,"
+    },
+    {
+     "en": "the idea of oldness was being pushed back,",
+     "ko": "늙음이라는 관념이 뒤로 [[밀려나고]] 있었고,"
+    },
+    {
+     "en": "and the expectations for",
+     "ko": "그리고 ~에 대한 [[기대]]가"
+    },
+    {
+     "en": "what people should or should not be doing",
+     "ko": "사람들이 무엇을 [[해야]] 하고 하지 말아야 하는지"
+    },
+    {
+     "en": "at a particular age",
+     "ko": "특정 [[나이]]에"
+    },
+    {
+     "en": "broadened.",
+     "ko": "[[넓어졌다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "특정 나이에 무엇을 해야 하는지에 대한 사람들의 기대는 오히려 좁아졌다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "at a particular age broadened",
+     "why": "기대는 broadened(넓어졌다)로 서술되므로 좁아진 것이 아니다.",
+     "killer": true
+    }
+   ],
+   "mistips": [
+    "was being pushed back : 단순 수동 was pushed(밀려났다)와 달리 '밀려나고 있는 중'의 진행 수동이다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Turning fifty had only recently been commonly viewed as the unofficial turning of the corner into one's senior years, for example, but now that number did not automatically mean one could not start a new career or family.",
+   "grammar": [
+    {
+     "tag": "동명사(주어)",
+     "note": "Turning fifty = 주어 역할 동명사구",
+     "spans": [
+      "Turning"
+     ]
+    },
+    {
+     "tag": "과거완료 수동태",
+     "note": "had ... been ... viewed = 과거완료 수동",
+     "spans": [
+      "been commonly viewed"
+     ]
+    },
+    {
+     "tag": "등위접속사 대조(but)",
+     "note": "but now = 과거 통념 vs 현재 대조",
+     "spans": [
+      "but"
+     ]
+    },
+    {
+     "tag": "조동사 부정",
+     "note": "did not ... could not = 못 하는 것은 아니다(의미 약화)",
+     "spans": [
+      "did not"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "unofficial",
+     "meaning": "비공식적인"
+    },
+    {
+     "word": "senior years",
+     "meaning": "노년기"
+    },
+    {
+     "word": "automatically",
+     "meaning": "자동으로, 당연히"
+    },
+    {
+     "word": "career",
+     "meaning": "직업, 경력"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Turning fifty had only recently been commonly viewed",
+     "ko": "쉰이 되는 것은 최근까지 흔히 [[여겨졌다]]"
+    },
+    {
+     "en": "as the unofficial turning of the corner",
+     "ko": "비공식적인 [[전환점]](고비)으로"
+    },
+    {
+     "en": "into one's senior years, for example,",
+     "ko": "[[노년기]]로 접어드는, 예컨대,"
+    },
+    {
+     "en": "but now that number did not automatically mean",
+     "ko": "그러나 이제 그 숫자가 [[자동으로]] 의미하지는 않았다"
+    },
+    {
+     "en": "one could not start a new career or family.",
+     "ko": "새 [[직업]]이나 가정을 시작할 수 없다는 것을"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "과거에는 쉰 살이 노년기로 접어드는 비공식적 고비로 흔히 여겨졌다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    },
+    {
+     "statement": "Now turning fifty automatically means one cannot start a new career.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "did not automatically mean one could not start a new career or family",
+     "why": "본문은 그 숫자가 자동으로 그런 뜻은 아니라고 했으므로 반대 진술이다.",
+     "english": true
+    }
+   ],
+   "mistips": [
+    "did not ~ mean one could not ~ : '~할 수 없다는 뜻이 자동으로 되지는 않았다'로 이중부정 뉘앙스를 읽는다."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "In a good number of cases, at least, age was becoming less significant, a clear victory for those lobbying for a less age-centric society.",
+   "grammar": [
+    {
+     "tag": "과거진행",
+     "note": "was becoming = 되어가고 있었다(진행)",
+     "spans": [
+      "was becoming"
+     ]
+    },
+    {
+     "tag": "비교급(열등비교)",
+     "note": "less significant = 덜 중요한",
+     "spans": [
+      "less significant"
+     ]
+    },
+    {
+     "tag": "동격 명사구",
+     "note": "a clear victory = 앞 절 전체를 부연하는 동격",
+     "spans": [
+      "a clear victory"
+     ]
+    },
+    {
+     "tag": "분사(현재분사 수식)",
+     "note": "those lobbying for = 사람들을 수식",
+     "spans": [
+      "lobbying"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "significant",
+     "meaning": "중요한"
+    },
+    {
+     "word": "lobby for",
+     "meaning": "~을 위해 운동하다"
+    },
+    {
+     "word": "age-centric",
+     "meaning": "연령 중심의"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In a good number of cases, at least,",
+     "ko": "적어도 [[상당수]] 경우에,"
+    },
+    {
+     "en": "age was becoming less significant,",
+     "ko": "나이는 덜 [[중요해지고]] 있었다,"
+    },
+    {
+     "en": "a clear victory for those",
+     "ko": "~한 사람들에게 명백한 [[성과]]였다"
+    },
+    {
+     "en": "lobbying for a less age-centric society.",
+     "ko": "덜 연령 중심적인 [[사회]]를 위해 운동하는"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "많은 경우에 나이는 점차 덜 중요해지고 있었다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    },
+    {
+     "statement": "필자는 나이가 덜 중요해지는 변화를 긍정적으로 보지만, 그 근거로 베이비붐 세대의 은퇴를 든다.",
+     "verdict": "△",
+     "trap_type": "필자관점",
+     "anchor": "a clear victory for those lobbying for a less age-centric society",
+     "why": "긍정적 평가는 맞지만 근거는 은퇴가 아니라 연령 중심성의 약화이다."
+    }
+   ],
+   "mistips": [
+    "a clear victory ~ : 콤마 뒤 명사구가 앞 문장 전체를 다시 규정하는 동격이다."
+   ]
+  }
+ ]
+}

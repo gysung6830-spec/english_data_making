@@ -1,0 +1,255 @@
+{
+ "item_no": "20",
+ "theme": "평생학습은 생존과 성공의 필수 — 교육에 대한 근본적 재고",
+ "overview": {
+   "theme_ko": "평생학습, 생존과 성공의 필수 조건",
+   "topic": "🔎 기술 변화 시대에 평생학습·평생교육이 왜 필수인가",
+   "stance": "긍정적",
+   "stance_reason": "lifelong learning is no longer optional; it is essential 등 평생학습의 필요성을 거듭 강조함",
+   "structure": "주장→근거·예시",
+   "structure_reason": "평생학습이 필수라는 주장 뒤에 성장·생산성·사회 통합 등 근거를 나열함",
+   "key_grammar": {
+     "point": "상관접속사 (not only ~ but also)",
+     "source_sentence": "If we can enhance lifelong learning initiatives, we will not only promote personal growth and well-being but also sustain national productivity and global competitiveness.",
+     "explanation": [
+       {"chip":"쉽게 말하면","text":"not only A but also B는 'A뿐만 아니라 B도'라는 뜻의 상관접속사다."},
+       {"chip":"병렬이 핵심","text":"A와 B의 문법 형태가 같아야 한다 — 여기서는 동사원형 promote와 sustain이 짝을 이룬다."},
+       {"chip":"위치 주의","text":"not only와 but also는 연결하는 두 요소 바로 앞에 각각 놓인다."},
+       {"chip":"바꿔 쓰기","text":"but also는 but ~ as well이나 as well as로도 바꿔 쓸 수 있다."}
+     ],
+     "example_analysis": "조동사 will 뒤에서 not only promote ~ but also sustain으로 두 동사원형이 병렬을 이룬다.",
+     "drills": [
+       {
+         "kind":"밑줄형",
+         "question":"다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+         "sentence":"If we [[1|can enhance]] lifelong learning initiatives, we will [[2|not only]] [[3|promote]] personal growth and well-being [[4|but also]] [[5|sustaining]] national productivity and global competitiveness.",
+         "options":["① can enhance","② not only","③ promote","④ but also","⑤ sustaining"],
+         "answer":"⑤",
+         "fix":"상관접속사 not only A but also B는 A(promote)와 B가 병렬이어야 하므로 sustaining을 동사원형 sustain으로 고쳐야 한다."
+       },
+       {
+         "kind":"네모형",
+         "question":"각 네모 안에서 어법에 맞는 것을 고르시오.",
+         "sentence":"We must recognize [[that/what]] the rapidly evolving socioeconomic ecology [[requires/require]] individuals [[to engage/engaging]] in constant upskilling and self-transformation.",
+         "answer":"that / requires / to engage",
+         "options":[],
+         "words":[]
+       },
+       {
+         "kind":"오류찾기",
+         "question":"다음 중 어법상 틀린 문장은?",
+         "options":[
+           "① Current social changes driven by technological advancements demand a fundamental rethinking in our approach to education.",
+           "② In particular, lifelong learning is no longer optional; it is essential.",
+           "③ Furthermore, our efforts will support social integration by provide opportunities for people from various backgrounds to connect and move on together.",
+           "④ Investing in lifelong education thus is not simply an extra expense; we must consider it a necessity for survival and success as we encounter significant changes in the years ahead.",
+           "⑤ By prioritizing lifelong education, we will be able to navigate this changing world with confidence and a sense of fulfillment."
+         ],
+         "answer":"Furthermore, our efforts will support social integration by provide opportunities for people from various backgrounds to connect and move on together.",
+         "fix":"전치사 by 다음에는 동명사가 와야 하므로 provide를 providing으로 고쳐야 한다."
+       },
+       {
+         "kind":"영작",
+         "question":"그 프로그램은 비용을 줄일 뿐만 아니라 효율성도 높인다. (not only ~ but also 사용)",
+         "answer":"The program not only reduces costs but also improves efficiency.",
+         "words":["The program","not only","reduces","costs","but also","improves","efficiency"],
+         "options":[],
+         "from_passage":false
+       },
+       {
+         "kind":"영작",
+         "question":"만약 우리가 평생학습 계획을 강화할 수 있다면, 우리는 개인의 성장과 안녕을 촉진할 뿐만 아니라 국가 생산성과 국제 경쟁력도 지속시킬 것이다.",
+         "answer":"If we can enhance lifelong learning initiatives, we will not only promote personal growth and well-being but also sustain national productivity and global competitiveness.",
+         "words":["If","we","can enhance","lifelong learning initiatives","we","will","not only","promote","personal growth and well-being","but also","sustain","national productivity","and","global competitiveness"],
+         "options":[],
+         "from_passage":true
+       }
+     ]
+   },
+   "restatement_chains": [
+     {"label":"평생학습의 필수성","expressions":["essential","a necessity for survival and success"],"variation":"선택이 아니라 반드시 필요한 것으로 재진술"}
+   ],
+   "flow_blocks": [
+     {"stage":"도입","sentence_range":"1","summary":"기술 발전이 교육의 근본적 [[재고]]를 요구함","easy_example":"길이 바뀌면 지도도 새로 그려야 하듯 교육도 다시 봐야 한다"},
+     {"stage":"주장","sentence_range":"2~3","summary":"평생학습은 선택이 아니라 [[필수]]이며 끊임없는 자기 향상이 요구됨","easy_example":"휴대폰 소프트웨어처럼 사람도 계속 업데이트가 필요하다"},
+     {"stage":"근거","sentence_range":"4~5","summary":"개인 성장·국가 생산성뿐 아니라 [[사회 통합]]까지 촉진","easy_example":"한 사람이 배우면 그 주변 공동체도 함께 성장한다"},
+     {"stage":"결론","sentence_range":"6~7","summary":"평생교육 투자는 생존·성공의 [[필수]]이며 자신감으로 미래에 대응","easy_example":"비상금이 아니라 매달 내는 보험료처럼 반드시 있어야 한다"}
+   ]
+ },
+ "sentences": [
+   {
+     "id": 1,
+     "english": "Current social changes driven by technological advancements demand a fundamental rethinking in our approach to education.",
+     "grammar": [
+       {"tag":"과거분사(형용사적 용법)","note":"driven by ~가 앞의 명사 changes를 뒤에서 수식","spans":["driven"]},
+       {"tag":"수일치(복수주어-동사)","note":"주어 changes(복수)에 맞춰 동사원형 demand","spans":["demand"]}
+     ],
+     "vocab": [
+       {"word":"technological advancements","meaning":"기술 발전"},
+       {"word":"fundamental","meaning":"근본적인"},
+       {"word":"rethinking","meaning":"재고, 다시 생각함"},
+       {"word":"approach","meaning":"접근법"}
+     ],
+     "chunks": [
+       {"en":"Current social [[changes]]","ko":"현재의 사회적 [[변화]]는"},
+       {"en":"[[driven by technological advancements]]","ko":"[[기술 발전에 의해 초래된]]"},
+       {"en":"demand a fundamental [[rethinking]]","ko":"근본적인 [[재고]]를 요구한다"},
+       {"en":"in our [[approach]] to education.","ko":"교육에 대한 우리의 [[접근]]에서"}
+     ],
+     "misreads": [
+       {"statement":"기술 발전이 이끈 사회 변화가 교육 접근법의 근본적 재고를 요구한다.","verdict":"O"}
+     ],
+     "mistips": ["driven by ~는 '~에 의해 초래된'으로, changes를 꾸미는 [[분사]]이지 문장의 본동사가 아니다"]
+   },
+   {
+     "id": 2,
+     "english": "In particular, lifelong learning is no longer optional; it is essential.",
+     "grammar": [
+       {"tag":"no longer (더 이상 ~아닌)","note":"부정의 시점을 나타내는 부사구","spans":["no longer"]},
+       {"tag":"대명사 지칭(it)","note":"it은 앞의 lifelong learning을 가리킴","spans":["it"]}
+     ],
+     "vocab": [
+       {"word":"lifelong learning","meaning":"평생학습"},
+       {"word":"no longer","meaning":"더 이상 ~아닌"},
+       {"word":"optional","meaning":"선택적인"},
+       {"word":"essential","meaning":"필수적인"}
+     ],
+     "chunks": [
+       {"en":"In particular, lifelong [[learning]]","ko":"특히 평생 [[학습]]은"},
+       {"en":"is no longer [[optional]];","ko":"더 이상 [[선택]]이 아니라"},
+       {"en":"it is [[essential]].","ko":"그것은 [[필수]]이다"}
+     ],
+     "misreads": [
+       {"statement":"여기서 'it'은 '개인의 성장(personal growth)'을 가리킨다.","verdict":"X","trap_type":"지칭","anchor":"lifelong learning is no longer optional","why":"it은 바로 앞의 lifelong learning을 가리키며 개인의 성장이 아니다.","killer":false}
+     ],
+     "mistips": ["세미콜론(;)은 앞뒤 두 문장을 잇는 표지로, 여기서는 '선택이 아니라 [[필수]]'라는 대조를 강조한다"]
+   },
+   {
+     "id": 3,
+     "english": "We must recognize that the rapidly evolving socioeconomic ecology requires individuals to engage in constant upskilling and self-transformation.",
+     "grammar": [
+       {"tag":"조동사 must (의무)","note":"'~해야 한다'는 강한 의무","spans":["must"]},
+       {"tag":"명사절 접속사 that","note":"recognize의 목적어절을 이끄는 that","spans":["that"]},
+       {"tag":"현재분사(형용사적 용법)","note":"evolving이 뒤의 명사 ecology를 수식","spans":["evolving"]},
+       {"tag":"require + 목적어 + to부정사","note":"require A to V(A가 ~하도록 요구하다) 구조","spans":["to engage"]}
+     ],
+     "vocab": [
+       {"word":"rapidly evolving","meaning":"빠르게 진화하는"},
+       {"word":"socioeconomic","meaning":"사회경제적"},
+       {"word":"ecology","meaning":"생태(계)"},
+       {"word":"upskilling","meaning":"역량 향상"},
+       {"word":"self-transformation","meaning":"자기 변혁"}
+     ],
+     "chunks": [
+       {"en":"We must [[recognize]] that","ko":"우리는 ~라는 것을 [[인식]]해야 한다"},
+       {"en":"the rapidly evolving socioeconomic [[ecology]]","ko":"빠르게 진화하는 사회경제적 [[생태계]]가"},
+       {"en":"requires individuals [[to engage]]","ko":"개인들이 [[참여하도록]] 요구한다는 것을"},
+       {"en":"in constant upskilling and [[self-transformation]].","ko":"끊임없는 역량 향상과 [[자기 변혁]]에"}
+     ],
+     "misreads": [
+       {"statement":"개인이 사회경제적 생태계에게 끊임없는 역량 향상을 요구한다.","verdict":"X","trap_type":"주체대상","anchor":"requires individuals to engage in constant upskilling","why":"요구하는 주체는 사회경제적 생태계이고 개인은 그 요구를 받는 대상이다.","killer":false}
+     ],
+     "mistips": ["require A to V는 'A가 ~하도록 요구하다'로, 요구하는 쪽과 [[참여하는]] 쪽이 다름에 주의한다"]
+   },
+   {
+     "id": 4,
+     "english": "If we can enhance lifelong learning initiatives, we will not only promote personal growth and well-being but also sustain national productivity and global competitiveness.",
+     "grammar": [
+       {"tag":"조건 부사절 접속사 if","note":"'만약 ~라면'의 조건을 제시","spans":["If"]},
+       {"tag":"상관접속사 not only ~ but also","note":"'A뿐만 아니라 B도' — promote와 sustain의 병렬","spans":["not only","but also"]}
+     ],
+     "vocab": [
+       {"word":"enhance","meaning":"강화하다"},
+       {"word":"initiatives","meaning":"계획, 프로그램"},
+       {"word":"well-being","meaning":"안녕, 복지"},
+       {"word":"sustain","meaning":"지속시키다"},
+       {"word":"competitiveness","meaning":"경쟁력"}
+     ],
+     "chunks": [
+       {"en":"If we can [[enhance]] lifelong learning initiatives,","ko":"만약 우리가 평생학습 계획을 [[강화]]할 수 있다면"},
+       {"en":"we will not only promote personal [[growth]] and well-being","ko":"우리는 개인의 [[성장]]과 안녕을 촉진할 뿐만 아니라"},
+       {"en":"but also sustain national [[productivity]] and global competitiveness.","ko":"국가 [[생산성]]과 국제 경쟁력도 지속시킬 것이다"}
+     ],
+     "misreads": [
+       {"statement":"평생학습을 강화하면 개인의 성장뿐 아니라 국가 생산성도 지속시킨다.","verdict":"O"}
+     ],
+     "mistips": ["not only A but also B에서 A(promote)와 B(sustain)의 [[형태]]가 같아야 한다"]
+   },
+   {
+     "id": 5,
+     "english": "Furthermore, our efforts will support social integration by providing opportunities for people from various backgrounds to connect and move on together.",
+     "grammar": [
+       {"tag":"전치사 by + 동명사","note":"'~함으로써'의 수단·방법","spans":["by providing"]},
+       {"tag":"to부정사(형용사적 용법)","note":"opportunities를 수식하는 to connect ~","spans":["to connect"]}
+     ],
+     "vocab": [
+       {"word":"social integration","meaning":"사회 통합"},
+       {"word":"opportunities","meaning":"기회"},
+       {"word":"various backgrounds","meaning":"다양한 배경"},
+       {"word":"move on","meaning":"나아가다"}
+     ],
+     "chunks": [
+       {"en":"Furthermore, our [[efforts]] will support social integration","ko":"게다가 우리의 [[노력]]은 사회 통합을 뒷받침할 것이다"},
+       {"en":"by providing [[opportunities]]","ko":"[[기회]]를 제공함으로써"},
+       {"en":"for people from various [[backgrounds]]","ko":"다양한 [[배경]]의 사람들에게"},
+       {"en":"to connect and [[move on]] together.","ko":"연결되고 함께 [[나아가도록]]"}
+     ],
+     "misreads": [
+       {"statement":"우리의 노력은 다양한 배경의 사람들에게 재정 지원을 제공해 사회 통합을 돕는다.","verdict":"X","trap_type":"무관정보","anchor":"providing opportunities for people from various backgrounds to connect","why":"본문은 재정 지원이 아니라 연결·동행의 기회를 제공한다고 말한다.","killer":true}
+     ],
+     "mistips": []
+   },
+   {
+     "id": 6,
+     "english": "Investing in lifelong education thus is not simply an extra expense; we must consider it a necessity for survival and success as we encounter significant changes in the years ahead.",
+     "grammar": [
+       {"tag":"동명사 주어","note":"Investing in ~이 문장의 주어","spans":["Investing"]},
+       {"tag":"not simply (단지 ~만은 아닌)","note":"'단지 ~인 것은 아니다'로 뒤 내용을 강조","spans":["not simply"]},
+       {"tag":"5형식 consider + 목적어 + 명사보어","note":"consider it a necessity(그것을 필수로 여기다)","spans":["consider","a necessity"]},
+       {"tag":"시간·조건 부사절 as","note":"'~함에 따라'의 부사절","spans":["as we encounter"]}
+     ],
+     "vocab": [
+       {"word":"extra expense","meaning":"추가 비용"},
+       {"word":"necessity","meaning":"필수 요소"},
+       {"word":"survival","meaning":"생존"},
+       {"word":"encounter","meaning":"마주하다"},
+       {"word":"significant","meaning":"상당한, 중요한"}
+     ],
+     "chunks": [
+       {"en":"Investing in lifelong [[education]] thus","ko":"따라서 평생 [[교육]]에 투자하는 것은"},
+       {"en":"is not simply an extra [[expense]];","ko":"단지 추가 [[비용]]인 것만은 아니다"},
+       {"en":"we must consider it a [[necessity]]","ko":"우리는 그것을 [[필수]]로 여겨야 한다"},
+       {"en":"for survival and [[success]]","ko":"생존과 [[성공]]을 위한"},
+       {"en":"as we encounter significant [[changes]] in the years ahead.","ko":"앞으로 다가올 상당한 [[변화]]를 마주함에 따라"}
+     ],
+     "misreads": [
+       {"statement":"필자는 평생교육 투자를 반드시 필요하다고 보지만, 그 이유를 단지 추가 비용 절감이라고 여긴다.","verdict":"△","trap_type":"필자관점","anchor":"we must consider it a necessity for survival and success","why":"필요성의 근거는 비용 절감이 아니라 생존과 성공을 위해서다.","killer":false}
+     ],
+     "mistips": ["consider it a necessity는 'it을 a necessity로 여기다'로, it과 a necessity는 [[목적어-목적격보어]] 관계다"]
+   },
+   {
+     "id": 7,
+     "english": "By prioritizing lifelong education, we will be able to navigate this changing world with confidence and a sense of fulfillment.",
+     "grammar": [
+       {"tag":"전치사 By + 동명사","note":"'~함으로써'의 수단","spans":["By prioritizing"]},
+       {"tag":"be able to (~할 수 있다)","note":"미래 will과 결합해 능력·가능을 표현","spans":["be able to"]},
+       {"tag":"현재분사(형용사적 용법)","note":"changing이 world를 수식","spans":["changing"]}
+     ],
+     "vocab": [
+       {"word":"prioritize","meaning":"우선시하다"},
+       {"word":"navigate","meaning":"헤쳐 나가다"},
+       {"word":"confidence","meaning":"자신감"},
+       {"word":"fulfillment","meaning":"성취감"}
+     ],
+     "chunks": [
+       {"en":"By prioritizing lifelong [[education]],","ko":"평생 [[교육]]을 우선시함으로써"},
+       {"en":"we will be able to [[navigate]] this changing world","ko":"우리는 이 변화하는 세상을 [[헤쳐 나갈]] 수 있을 것이다"},
+       {"en":"with confidence and a sense of [[fulfillment]].","ko":"자신감과 [[성취감]]을 가지고"}
+     ],
+     "misreads": [
+       {"statement":"Prioritizing lifelong education keeps the world from changing.","verdict":"X","trap_type":"인과조건","anchor":"navigate this changing world with confidence","why":"평생교육 우선시는 세상 변화를 막는 것이 아니라 자신감 있게 세상을 헤쳐 나가게 한다.","killer":false}
+     ],
+     "mistips": ["be able to는 조동사 will과 함께 쓰여 '~할 수 있을 것이다'라는 [[미래의 가능]]을 나타낸다"]
+   }
+ ]
+}
