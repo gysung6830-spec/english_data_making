@@ -59,17 +59,40 @@ def _pair(col: list[dict], eng_first: bool) -> tuple[int, str, str] | None:
     return int(no_txt), eng.strip(), ko.strip()
 
 
+def _join(head: str, tail: str) -> str:
+    """줄바꿈으로 잘린 한글 뜻을 이어 붙인다.
+
+    '눈부신 빛,' + '노려봄' → '눈부신 빛, 노려봄'   (구두점 뒤에서 끊긴 경우)
+    '수치, 계산, 형' + '태'  → '수치, 계산, 형태'    (단어 중간에서 끊긴 경우)
+    """
+    return f"{head} {tail}" if head.endswith((",", ";", ")", "]", ".")) else head + tail
+
+
 def extract(pdf: Path, page_no: int, x_split: float = 300.0) -> list[dict]:
     import pymupdf
 
     doc = pymupdf.open(str(pdf))
     page = doc[page_no - 1]
     words: list[dict] = []
+    last: dict[str, dict | None] = {"L": None, "R": None}   # 단별 직전 항목(이어붙이기용)
     for left, right in _rows(page, x_split):
-        for col, eng_first in ((left, True), (right, False)):
+        for side, col, eng_first in (("L", left, True), ("R", right, False)):
             got = _pair(col, eng_first)
             if got:
-                words.append({"no": got[0], "word": got[1], "meaning": got[2]})
+                item = {"no": got[0], "word": got[1], "meaning": got[2],
+                        "_y": col[0]["y"]}
+                words.append(item)
+                last[side] = item
+                continue
+            # 번호가 없는 줄 = 바로 위 항목의 뜻이 다음 줄로 넘어간 것
+            prev = last[side]
+            if not prev or not col:
+                continue
+            tail = " ".join(c["text"] for c in col).strip()
+            if re.search(r"[가-힣]", tail) and 0 < col[0]["y"] - prev["_y"] <= 12:
+                prev["meaning"] = _join(prev["meaning"], tail)
+    for w in words:
+        w.pop("_y", None)
     words.sort(key=lambda w: w["no"])
     return words
 

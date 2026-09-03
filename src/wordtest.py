@@ -91,15 +91,20 @@ def render_wordtest_pdf(words: list[dict], out_path: str | Path, badge: str,
                         shuffle: bool = True, hint: bool = True) -> Path:
     """단어 목록 → 시험지 PDF(문제 2쪽 + 정답 1쪽)."""
     from weasyprint import CSS, HTML
+    from weasyprint.text.fonts import FontConfiguration
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     sections = build_sections(words, seed=seed, shuffle=shuffle, hint=hint)
     html = _env.get_template("wordtest.html.j2").render(
         badge=badge, sections=sections, footer_note=footer_note)
-    css = [CSS(filename=str(TEMPLATE_DIR / "styles.css")),      # 폰트 임베드
-           CSS(filename=str(TEMPLATE_DIR / "wordtest.css"))]    # 하우스 서식(뒤가 우선)
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=css)
+    # font_config 를 넘겨야 styles.css 의 @font-face(나눔스퀘어라운드 임베드)가 실제로 적용된다.
+    # (넘기지 않으면 폰트가 깔려 있지 않은 컴퓨터/서버에서 다른 글꼴로 대체되어 인쇄된다)
+    font_config = FontConfiguration()
+    css = [CSS(filename=str(TEMPLATE_DIR / "styles.css"), font_config=font_config),   # 폰트 임베드
+           CSS(filename=str(TEMPLATE_DIR / "wordtest.css"), font_config=font_config)]  # 하우스 서식(뒤가 우선)
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(
+        str(out_path), stylesheets=css, font_config=font_config)
     return out_path
 
 

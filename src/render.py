@@ -386,12 +386,14 @@ def render_pdf(reports, out_path: str | Path, footer_note: str = "",
                fit_pages: bool = True, min_vocab: int = 8,
                brand: str = "", student: bool = False, source_label: str = "") -> Path:
     from weasyprint import CSS, HTML  # 지연 임포트 (무거움)
+    from weasyprint.text.fonts import FontConfiguration
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
+    _fc = FontConfiguration()   # @font-face(나눔스퀘어라운드) 를 실제로 쓰게 하는 설정
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"), font_config=_fc)
     _render_document(reports, footer_note, brand, student, fit_pages,
-                     min_vocab, css, HTML, source_label).write_pdf(str(out_path))
+                     min_vocab, css, HTML, source_label).write_pdf(str(out_path), font_config=_fc)
     return out_path
 
 
@@ -404,18 +406,20 @@ def render_analysis_pdf(reports, out_path: str | Path, footer_note: str = "",
               [False, True]=교사 전체 지문 → 학생 전체 지문 순서로 합본.
     """
     from weasyprint import CSS, HTML
+    from weasyprint.text.fonts import FontConfiguration
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
+    _fc = FontConfiguration()   # @font-face(나눔스퀘어라운드) 를 실제로 쓰게 하는 설정
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"), font_config=_fc)
     docs = [_render_document(reports, footer_note, brand, s, True, min_vocab, css, HTML,
                              source_label)
             for s in variants]
     if len(docs) == 1:
-        docs[0].write_pdf(str(out_path))
+        docs[0].write_pdf(str(out_path), font_config=_fc)
     else:
         all_pages = [pg for d in docs for pg in d.pages]
-        docs[0].copy(all_pages).write_pdf(str(out_path))
+        docs[0].copy(all_pages).write_pdf(str(out_path), font_config=_fc)
     return out_path
 
 
@@ -531,6 +535,7 @@ def render_wordlist_pdf(reports, out_path: str | Path,
                         title: str = "핵심 어휘 리스트", footer_note: str = "") -> Path:
     """PDF 1개 안에서 지문별로 페이지를 나눠 어휘 리스트를 만든다."""
     from weasyprint import CSS, HTML
+    from weasyprint.text.fonts import FontConfiguration
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -542,8 +547,9 @@ def render_wordlist_pdf(reports, out_path: str | Path,
                          "words": words, "rows": _pair_rows(words)})
     tmpl = _env.get_template("wordlist.html.j2")
     html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
-    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    _fc = FontConfiguration()   # @font-face(나눔스퀘어라운드) 를 실제로 쓰게 하는 설정
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"), font_config=_fc)
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css], font_config=_fc)
     return out_path
 
 
@@ -552,6 +558,7 @@ def render_quiz_pdf(reports, out_path: str | Path,
                     seed: int | None = None) -> Path:
     """PDF 1개 안에서 지문별로 페이지를 나눠 영단어 시험지를 만든다(지문마다 정답 포함)."""
     from weasyprint import CSS, HTML
+    from weasyprint.text.fonts import FontConfiguration
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -568,8 +575,9 @@ def render_quiz_pdf(reports, out_path: str | Path,
                          "words": shuffled, "rows": _pair_rows(shuffled)})
     tmpl = _env.get_template("quiz.html.j2")
     html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
-    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    _fc = FontConfiguration()   # @font-face(나눔스퀘어라운드) 를 실제로 쓰게 하는 설정
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"), font_config=_fc)
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css], font_config=_fc)
     return out_path
 
 
@@ -647,6 +655,7 @@ def render_vocablist_pdf(reports, out_path: str | Path,
     (직독직해 단어 기반 '어휘리스트'와는 별개의 산출물)
     """
     from weasyprint import CSS, HTML
+    from weasyprint.text.fonts import FontConfiguration
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -658,8 +667,9 @@ def render_vocablist_pdf(reports, out_path: str | Path,
                          "vocab": _collect_vocab_one(rep)})
     tmpl = _env.get_template("vocablist.html.j2")
     html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
-    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    _fc = FontConfiguration()   # @font-face(나눔스퀘어라운드) 를 실제로 쓰게 하는 설정
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"), font_config=_fc)
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css], font_config=_fc)
     return out_path
 
 
@@ -696,6 +706,7 @@ def render_vocabtest_pdf(reports, out_path: str | Path,
                 None 이면 기본값(Ortica영어), "" 이면 브랜드 표시 없이 문서 라벨만 나온다.
     """
     from weasyprint import CSS, HTML
+    from weasyprint.text.fonts import FontConfiguration
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -743,8 +754,9 @@ def render_vocabtest_pdf(reports, out_path: str | Path,
     tmpl = _env.get_template("vocabtest.html.j2")
     html = tmpl.render(title=title, passages=passages, footer_note=footer_note,
                        brand_name=brand, brand_mark=_brand_mark(brand))
-    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    _fc = FontConfiguration()   # @font-face(나눔스퀘어라운드) 를 실제로 쓰게 하는 설정
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"), font_config=_fc)
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css], font_config=_fc)
     return out_path
 
 
