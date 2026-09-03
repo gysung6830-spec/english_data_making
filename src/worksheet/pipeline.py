@@ -122,13 +122,31 @@ def analyze_text_rule_only(raw_text: str, header: Header, tag: bool = True) -> A
     )
 
 
+# 모의고사 실용문(안내문) 문항 — 구문분석에서 제외(Ortica 한줄해석/한줄영어 관례).
+_MOCK_EXCLUDE = {"27", "28"}
+
+
+def _is_mock_exam(labels: list[str]) -> bool:
+    """라벨들이 '수능/모의고사 형식(18~45)'인지. 18~45 정수 문항이 5개 이상이면 True."""
+    cnt = 0
+    for lb in labels:
+        m = re.match(r"^\s*(\d{1,3})", lb or "")
+        if m and 18 <= int(m.group(1)) <= 45:
+            cnt += 1
+    return cnt >= 5
+
+
 # ---------------------------------------------------------------------------
 # 파일(PDF/사진) → Analysis 목록 (복수 지문 지원)
 # ---------------------------------------------------------------------------
 def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
                             header: Header, max_retries: int = 1,
-                            layout: str = "A") -> list[Analysis]:
+                            layout: str = "A",
+                            exclude_practical: bool = True) -> list[Analysis]:
     """한 파일에서 지문(들)을 추출해 각각 Analysis 로.
+
+    exclude_practical=True 면 '모의고사 형식(18~45)'일 때 27·28번(안내문/실용문)을
+    구문분석에서 제외한다(Ortica 한줄해석/한줄영어 관례).
 
     layout='B' 면 뒷페이지 대신 직독직해(청크·핵심 문법·핵심 단어)를 생성한다.
     """
@@ -184,12 +202,24 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
         pnums = smart_labels
     else:
         pnums = _detect_problem_numbers(src) if not extract.is_image(src) else []
+
+    # 모의고사 형식(18~45)이면 27·28번(안내문/실용문)은 구문분석 제외.
+    _passages = list(pset.passages)
+    if (exclude_practical and len(pnums) == total and _is_mock_exam(pnums)):
+        keep = [i for i in range(total) if (pnums[i] or "").strip() not in _MOCK_EXCLUDE]
+        if 0 < len(keep) < total:
+            dropped = [pnums[i] for i in range(total) if i not in keep]
+            _passages = [_passages[i] for i in keep]
+            pnums = [pnums[i] for i in keep]
+            total = len(_passages)
+            _progress(f"모의고사 형식 감지 — {', '.join(dropped)}번(안내문) 제외 → {total}개 지문")
+
     _detected = pnums if len(pnums) == total else []
     _progress(f"지문 {total}개 감지"
               + (f" — 문항 {', '.join(_detected)}" if any(_detected) else "")
               + " · 문장 분석 시작")
     out: list[Analysis] = []
-    for i, ex in enumerate(pset.passages, start=1):
+    for i, ex in enumerate(_passages, start=1):
         h = header.for_passage(ex, i, total)
         if len(pnums) == total and pnums[i - 1]:
             h.lecture_label = pnums[i - 1]      # 실제 문제 번호(예: 31, 32)

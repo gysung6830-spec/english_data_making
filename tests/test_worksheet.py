@@ -879,6 +879,24 @@ def test_txt_ingest_and_bracket_problem_spans(tmp_path):
     print("PASS  .txt 지문 읽기 + '[NN번]' 대괄호 문제 분리")
 
 
+def test_mock_exam_excludes_practical():
+    # 모의고사 형식(18~45) 감지 + 27·28번(안내문) 제외 대상 확인.
+    from src.worksheet.pipeline import _is_mock_exam, _MOCK_EXCLUDE
+
+    full = [str(n) for n in range(18, 41)] + ["41~42", "43~45"]
+    assert _is_mock_exam(full) is True
+    assert _MOCK_EXCLUDE == {"27", "28"}
+    # 제외 적용 시 27·28 만 빠지고 나머지·범위는 유지
+    kept = [l for l in full if l not in _MOCK_EXCLUDE]
+    assert "27" not in kept and "28" not in kept
+    assert "26" in kept and "29" in kept and "41~42" in kept and "43~45" in kept
+    assert len(kept) == len(full) - 2
+    # 모의고사가 아닌 경우(교재 단원 등)는 감지 안 됨 → 제외 로직 미적용
+    assert _is_mock_exam(["10-1", "10-2", "10-A"]) is False
+    assert _is_mock_exam(["1", "2", "3"]) is False
+    print("PASS  모의고사 형식 감지 + 27·28(안내문) 제외")
+
+
 def test_merge_contractions():
     # 축약형 꼬리 토큰(''m',''ve' …)을 앞 토큰에 붙이고 slash 승계.
     from src.worksheet.analyzer import _merge_contractions
