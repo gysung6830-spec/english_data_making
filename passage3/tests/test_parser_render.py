@@ -176,6 +176,55 @@ def test_cid_marker_restored_from_pair():
     assert "cid" not in by[21].en and "cid" not in by[22].en
 
 
+def test_fill_chunk_meanings():
+    """뜻(ko)이 빈 청크를 조각 번역으로 채우는 보강 패스(긴 문장 직독직해 뜻
+    누락 대비). 개수·순서가 맞으면 빈 곳만 채우고, 이미 있는 뜻은 보존한다."""
+    import json as _json
+    from chunker import _fill_chunk_meanings
+    from parser import Chunk
+
+    class _Blk:
+        type = "text"
+        def __init__(self, t): self.text = t
+    class _Resp:
+        def __init__(self, t): self.content = [_Blk(t)]
+    class _Msgs:
+        def create(self, **kw):
+            return _Resp(_json.dumps({"ko": ["첫째 뜻", "둘째 뜻", "셋째 뜻"]}))
+    class _Client:
+        messages = _Msgs()
+
+    chunks = [Chunk(en="A", ko=""), Chunk(en="B", ko="이미 있음"),
+              Chunk(en="C", ko="")]
+    out = _fill_chunk_meanings(_Client(), "m", chunks)
+    assert out[0].ko == "첫째 뜻"          # 빈 곳 채움
+    assert out[1].ko == "이미 있음"         # 기존 뜻 보존
+    assert out[2].ko == "셋째 뜻"
+    assert all(c.ko.strip() for c in out)  # 빈 뜻 없음
+
+
+def test_fill_chunk_meanings_count_mismatch():
+    """번역 배열 개수가 청크 수와 다르면 반영하지 않는다(잘못된 정렬 방지)."""
+    import json as _json
+    from chunker import _fill_chunk_meanings
+    from parser import Chunk
+
+    class _Blk:
+        type = "text"
+        def __init__(self, t): self.text = t
+    class _Resp:
+        def __init__(self, t): self.content = [_Blk(t)]
+    class _Msgs:
+        def create(self, **kw):
+            return _Resp(_json.dumps({"ko": ["하나만"]}))  # 개수 불일치
+    class _Client:
+        messages = _Msgs()
+
+    chunks = [Chunk(en="A", ko=""), Chunk(en="B", ko="")]
+    out = _fill_chunk_meanings(_Client(), "m", chunks, attempts=1)
+    assert out[0].ko == "" and out[1].ko == ""  # 개수 안 맞으면 그대로
+
+
 def test_renderers_produce_html():
     passages = split_passages(SAMPLE)
     for fn in (render_format_a, render_format_c, render_format_b):

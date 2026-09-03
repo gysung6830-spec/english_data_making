@@ -6,6 +6,7 @@
 """
 from __future__ import annotations
 
+import json
 import os
 from typing import List
 
@@ -82,6 +83,58 @@ _SYSTEM = (
 )
 
 
+_FILL_SYSTEM = (
+    "You are an English teacher writing a 직독직해 (sense-group reading) worksheet "
+    "for Korean students. You are given the sense units of ONE sentence already split "
+    "IN ENGLISH ORDER. Give each unit its Korean meaning — translate ONLY that unit's "
+    "words (no more, no less), in English order. TONE: natural 직독직해, plain written "
+    "style (문어체 평서형, 반말), NOT 존댓말, and NOT stiff translationese (번역투 금지). "
+    "Non-final units end with a natural connective 조사/어미 (~하는데/~하고/~해서/~하며/"
+    "~할 때/~하기 위해) or the natural phrase itself; the last unit closes the sentence "
+    "naturally. Translate EVERY English word (proper nouns/titles may stay). Return "
+    'ONLY JSON: {"ko":["뜻1","뜻2", ...]} with EXACTLY one string per unit, same order.'
+)
+
+
+def _fill_chunk_meanings(client, model, chunks, s_en: str = "",
+                         attempts: int = 2):
+    """청크 영어는 있는데 '뜻(ko)'이 빈 청크를, 그 조각만 번역해 채운다.
+
+    긴 문장 등에서 본 직독직해 호출이 뜻을 못 채우고 조각만 남았을 때의 보강.
+    이미 나뉜 조각 경계를 그대로 두고 '이 조각들을 순서대로 번역'만 시키므로
+    (본 청킹보다 쉬운 작업) 실패 확률이 낮다. 개수·순서가 맞을 때만 반영한다.
+    """
+    if not any(not c.ko.strip() for c in chunks):
+        return chunks
+    units = [c.en for c in chunks]
+    ctx = f"(Full sentence for context: {s_en.strip()})\n\n" if s_en else ""
+    user_msg = (
+        ctx + "Units in order:\n" +
+        json.dumps(units, ensure_ascii=False)
+    )
+    max_tokens = min(4096, max(800, 200 + len(" ".join(units).split()) * 40))
+    for _ in range(attempts):
+        try:
+            resp = client.messages.create(
+                model=model, max_tokens=max_tokens, system=_FILL_SYSTEM,
+                messages=[{"role": "user", "content": user_msg}],
+            )
+            text = "".join(b.text for b in resp.content
+                           if getattr(b, "type", "") == "text")
+            data = _extract_json(text)
+            arr = data.get("ko") if isinstance(data, dict) else data
+            if isinstance(arr, list) and len(arr) == len(chunks):
+                for i, k in enumerate(arr):
+                    if not chunks[i].ko.strip() and isinstance(k, str) and k.strip():
+                        chunks[i].ko = k.strip()
+                if all(c.ko.strip() for c in chunks):
+                    break
+        except Exception:
+            pass
+        max_tokens = min(4096, max_tokens + 800)
+    return chunks
+
+
 def needs_chunks(s) -> bool:
     """이 문장이 직독직해 청크를 (다시) 생성해야 하는 상태인가.
 
@@ -124,10 +177,12 @@ def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
             )
             # 긴 문장은 청크가 많아 응답이 길다 → 길이에 비례해 토큰 확보
             # (부족하면 JSON이 잘려 파싱 실패 → 청크 0개가 되던 문제 방지)
+            # 긴 문장(뜻 누락이 잦음)은 상한을 8192까지 열고 시도도 한 번 더.
             n_words = len(s.en.split())
-            max_tokens = min(4096, max(1200, 400 + n_words * 60))
+            max_tokens = min(8192, max(1200, 500 + n_words * 70))
+            attempts = 4 if n_words >= 25 else 3
             # 실패(잘림/일시 오류/뜻 누락) 시 재시도
-            for attempt in range(3):
+            for attempt in range(attempts):
                 try:
                     resp = client.messages.create(
                         model=model, max_tokens=max_tokens, system=_SYSTEM,
@@ -156,13 +211,17 @@ def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
                         s.chunks = got  # 뜻은 없지만 최소한 조각은 보존(폴백 대비)
                 except Exception:
                     pass  # 재시도
-                max_tokens = min(4096, max_tokens + 1200)  # 다음 시도는 더 넉넉히
+                max_tokens = min(8192, max_tokens + 1500)  # 다음 시도는 더 넉넉히
             # 그래도 실패하면 규칙 기반으로 대략 끊는다(끊어읽기 누락 방지).
             # 청크별 뜻은 못 달지만(ko 비움), 렌더러가 문장 전체 해석을 보여 준다.
             if not s.chunks:
                 pieces = rough_sense_split(s.en)
                 s.chunks = [Chunk(en=p, ko="") for p in pieces] or \
                     [Chunk(en=s.en.strip(), ko="")]
+            # 뜻이 빈 청크가 남았으면(긴 문장 등), 그 조각들만 번역해 채운다.
+            # (이미 나뉜 경계는 두고 '조각 번역'만 하는 더 쉬운 작업 → 성공률 높음)
+            if any(not c.ko.strip() for c in s.chunks):
+                s.chunks = _fill_chunk_meanings(client, model, s.chunks, s.en)
             # 조각 텍스트를 원문에서 그대로 다시 잘라 100% 일치시킴
             s.chunks = realign_chunks(s.en, s.chunks)
             done += 1
