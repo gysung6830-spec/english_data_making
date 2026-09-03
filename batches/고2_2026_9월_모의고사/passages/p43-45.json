@@ -271,7 +271,7 @@
     },
     {
      "en": "every night he listened to a man",
-     "ko": "매일 밤 그는 [[한 남자]]의 소리를 들었다"
+     "ko": "매일 밤 그는 [[한 남자]]의 소리를 [[들었다]]"
     },
     {
      "en": "playing the guitar",
@@ -345,7 +345,7 @@
    "chunks": [
     {
      "en": "Although the songs the man played",
-     "ko": "비록 남자가 연주한 [[노래들]]은"
+     "ko": "비록 남자가 [[연주한]] [[노래들]]은"
     },
     {
      "en": "were all new to Ridge,",
@@ -396,7 +396,7 @@
    "chunks": [
     {
      "en": "One night, Ridge slid open",
-     "ko": "어느 밤 Ridge는 [[밀어]] 열었다"
+     "ko": "어느 밤 Ridge는 [[밀어]] [[열었다]]"
     },
     {
      "en": "the balcony door",
@@ -459,7 +459,7 @@
     },
     {
      "en": "he was going out to the balcony",
-     "ko": "발코니로 [[나간다]]고"
+     "ko": "[[발코니]]로 [[나간다]]고"
     },
     {
      "en": "to do his homework.",
@@ -520,7 +520,7 @@
    "chunks": [
     {
      "en": "The man was playing the guitar",
-     "ko": "남자는 [[기타를]] 연주하고 있었다"
+     "ko": "남자는 [[기타를]] [[연주하고]] 있었다"
     },
     {
      "en": "on his balcony as usual",
@@ -585,7 +585,7 @@
    "chunks": [
     {
      "en": "While Ridge was singing along to the music,",
-     "ko": "Ridge가 음악에 맞춰 [[따라 부르는]] 동안"
+     "ko": "Ridge가 음악에 맞춰 [[따라 부르는]] [[동안]]"
     },
     {
      "en": "the man suddenly stopped playing.",
@@ -643,7 +643,7 @@
     },
     {
      "en": "in the middle of a song,",
-     "ko": "노래 [[중간]]에"
+     "ko": "[[노래]] [[중간]]에"
     },
     {
      "en": "so naturally Ridge looked",
@@ -703,7 +703,7 @@
    "chunks": [
     {
      "en": "The man held up his index finger",
-     "ko": "남자는 [[검지]]를 들어 올렸다"
+     "ko": "남자는 [[검지]]를 들어 [[올렸다]]"
     },
     {
      "en": "as if to say, \"Hold on.\"",
@@ -764,7 +764,7 @@
    "chunks": [
     {
      "en": "He lifted one sheet of paper,",
-     "ko": "그는 [[종이]] 한 장을 들어 올렸고"
+     "ko": "그는 [[종이]] 한 장을 들어 [[올렸고]]"
     },
     {
      "en": "and Ridge narrowed his eyes",
@@ -876,7 +876,7 @@
    "chunks": [
     {
      "en": "Then he flipped the paper over",
-     "ko": "그러고 나서 그는 종이를 [[뒤집었]]다"
+     "ko": "[[그러고]] 나서 그는 종이를 [[뒤집었]]다"
     },
     {
      "en": "and wrote, \"I have a question.\"",
@@ -953,7 +953,7 @@
     },
     {
      "en": "and wondering why he had asked for a text",
-     "ko": "왜 그가 [[문자]]를 요청했는지 궁금해하며"
+     "ko": "왜 그가 [[문자]]를 요청했는지 [[궁금해하며]]"
     },
     {
      "en": "instead of a call,",
@@ -1085,7 +1085,7 @@
     },
     {
      "en": "when I haven't even added lyrics to them yet.\"",
-     "ko": "나는 아직 [[가사를 붙이지도]] 않았는데'"
+     "ko": "나는 아직 [[가사를 붙이지도]] [[않았는데']]"
     }
    ],
    "misreads": [
@@ -1192,7 +1192,7 @@
     },
     {
      "en": "the man could see him",
-     "ko": "남자가 자신을 [[볼 수]] 있다는 것을"
+     "ko": "남자가 자신을 [[볼 수]] [[있다]]는 것을"
     },
     {
      "en": "sitting out there?",
@@ -1254,7 +1254,7 @@
     },
     {
      "en": "the man had noticed him",
-     "ko": "남자가 자신을 [[알아챘]]다는 것을"
+     "ko": "[[남자]]가 자신을 [[알아챘]]다는 것을"
     },
     {
      "en": "singing along to his music.",
@@ -1311,7 +1311,7 @@
     },
     {
      "en": "asking, \"Will you send them to me?\"",
-     "ko": "'그것들을 나에게 [[보내]] 줄래?'라고 물으며"
+     "ko": "'그것들을 나에게 [[보내]] 줄래?'라고 [[물으며]]"
     }
    ],
    "misreads": [
@@ -1361,7 +1361,7 @@
    "chunks": [
     {
      "en": "After reading the man's message",
-     "ko": "남자의 [[메시지]]를 읽은 뒤"
+     "ko": "[[남자]]의 [[메시지]]를 읽은 뒤"
     },
     {
      "en": "asking for his lyrics,",
@@ -1435,7 +1435,7 @@
     },
     {
      "en": "but he had never shared",
-     "ko": "하지만 그는 결코 [[공유한]] 적이 없었다"
+     "ko": "하지만 그는 결코 [[공유한]] 적이 [[없었다]]"
     },
     {
      "en": "anything he'd written with anyone.",
@@ -1500,7 +1500,7 @@
     },
     {
      "en": "one of his favorite lyrics",
-     "ko": "자신이 [[아끼는 가사]] 하나를"
+     "ko": "자신이 [[아끼는 가사]] [[하나]]를"
     },
     {
      "en": "and sent it to him.",
@@ -1552,7 +1552,7 @@
     },
     {
      "en": "a new message came from the man.",
-     "ko": "남자로부터 새 [[메시지]]가 왔다"
+     "ko": "[[남자로]]부터 새 [[메시지]]가 왔다"
     }
    ],
    "misreads": [
@@ -1591,7 +1591,7 @@
    "chunks": [
     {
      "en": "He wanted to use Ridge's lyrics",
-     "ko": "그는 Ridge의 [[가사]]를 쓰고 싶어 했다"
+     "ko": "그는 Ridge의 [[가사]]를 쓰고 싶어 [[했다]]"
     },
     {
      "en": "for his new album.",

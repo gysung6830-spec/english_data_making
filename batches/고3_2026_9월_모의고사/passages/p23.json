@@ -2,287 +2,735 @@
  "item_no": "23",
  "theme": "도파민의 진짜 역할 — 기대와 가능성의 분자",
  "overview": {
-   "theme_ko": "도파민 — 쾌락이 아닌 기대와 가능성의 분자",
-   "topic": "🔎 도파민의 실제 기능: 보상의 쾌감이 아니라 기대·동기",
-   "stance": "긍정적",
-   "stance_reason": "science reveals a richer, more nuanced reality라며 도파민의 역할을 풍부하고 긍정적으로 조명함",
-   "structure": "통념→반박(반전)",
-   "structure_reason": "Popular culture loves to label ... yet science reveals ...로 통념을 제시한 뒤 반박함",
-   "key_grammar": {
-     "point": "관계대명사 what (선행사를 포함하는 관계대명사)",
-     "source_sentence": "It's what sharpens focus and fills ordinary moments with potential.",
-     "explanation": [
-       {"chip":"쉽게 말하면","text":"관계대명사 what은 선행사를 포함해 'the thing(s) which'와 같으며 '~하는 것'으로 해석한다."},
-       {"chip":"핵심","text":"what 앞에는 선행사(명사)가 없고, what이 이끄는 명사절이 문장에서 주어·목적어·보어 역할을 한다."},
-       {"chip":"구별","text":"앞에 선행사가 있으면 that/which를, 없으면 관계대명사 what을 쓴다: It's what sharpens focus에서 what은 보어절을 이끈다."},
-       {"chip":"주의","text":"what절 안에서 what은 sharpens의 주어 역할을 하므로 생략할 수 없다."}
-     ],
-     "example_analysis": "It's what sharpens focus and fills ...에서 what은 선행사를 포함한 관계대명사로 be동사의 보어가 되는 명사절을 이끈다.",
-     "drills": [
-       {
-         "kind": "밑줄형",
-         "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
-         "sentence": "Critically, dopamine [[1|rewards]] the process, [[2|not just]] the [[3|finished]] result. It's [[4|that]] sharpens focus and [[5|fills]] ordinary moments with potential.",
-         "answer": "④",
-         "fix": "선행사가 없고 sharpens의 주어 역할을 하는 관계사가 필요하므로 that이 아니라 what이 되어야 한다(원문: what).",
-         "options": ["① rewards","② not just","③ finished","④ that","⑤ fills"],
-         "words": [],
-         "from_passage": true
-       },
-       {
-         "kind": "네모형",
-         "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
-         "sentence": "The rush of motivation [[that/what]] energizes you at the start of a new day, the focus that allows you [[to solve/solving]] complex problems, and the curiosity that fuels ambition [[are/is]] all orchestrated by dopamine.",
-         "answer": "that / to solve / are",
-         "fix": "선행사 motivation이 있으므로 주격 관계대명사 that, allow는 목적격보어로 to부정사를 취하므로 to solve, 복수 주어(rush·focus·curiosity)에 맞춰 are가 옳다.",
-         "options": [],
-         "words": [],
-         "from_passage": true
-       },
-       {
-         "kind": "오류찾기",
-         "question": "다음 중 어법상 틀린 문장은?",
-         "sentence": "",
-         "answer": "It's which sharpens focus and fills ordinary moments with potential.",
-         "fix": "선행사 없이 주어 역할을 하는 관계사가 필요하므로 which가 아니라 관계대명사 what이 되어야 한다(원문: what).",
-         "options": [
-           "① Popular culture loves to label dopamine as the \"pleasure molecule,\" yet science reveals a richer, more nuanced reality.",
-           "② It's which sharpens focus and fills ordinary moments with potential.",
-           "③ Dopamine doesn't give contentment; it delivers possibility.",
-           "④ Critically, dopamine rewards the process, not just the finished result.",
-           "⑤ It sets the stage for new challenges, frames future goals as attainable, and propels you to ask \"What if?\" about new opportunities, relationships, or aspirations."
-         ],
-         "words": [],
-         "from_passage": true
-       },
-       {
-         "kind": "영작",
-         "question": "내가 정말로 원하는 것은 약간의 휴식이다.",
-         "sentence": "",
-         "answer": "What I really want is some rest.",
-         "fix": "",
-         "options": [],
-         "words": ["What","I","really","want","is","some","rest."],
-         "from_passage": false
-       },
-       {
-         "kind": "영작",
-         "question": "그것은 집중을 예리하게 하고 평범한 순간을 잠재력으로 채우는 것이다.",
-         "sentence": "",
-         "answer": "It's what sharpens focus and fills ordinary moments with potential.",
-         "fix": "",
-         "options": [],
-         "words": ["It's","what","sharpens","focus","and","fills","ordinary moments","with","potential."],
-         "from_passage": true
-       }
-     ]
-   },
-   "restatement_chains": [
-     {
-       "label": "미래 보상에 대한 기대",
-       "expressions": ["the dance of anticipation","it delivers possibility","dopamine's drive for future reward"],
-       "variation": "도파민은 얻은 쾌감이 아니라 앞으로 올 것에 대한 기대에서 작동한다"
-     }
+  "theme_ko": "도파민 — 쾌락이 아닌 기대와 가능성의 분자",
+  "topic": "🔎 도파민의 실제 기능: 보상의 쾌감이 아니라 기대·동기",
+  "stance": "긍정적",
+  "stance_reason": "science reveals a richer, more nuanced reality라며 도파민의 역할을 풍부하고 긍정적으로 조명함",
+  "structure": "통념→반박(반전)",
+  "structure_reason": "Popular culture loves to label ... yet science reveals ...로 통념을 제시한 뒤 반박함",
+  "key_grammar": {
+   "point": "관계대명사 what (선행사를 포함하는 관계대명사)",
+   "source_sentence": "It's what sharpens focus and fills ordinary moments with potential.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "관계대명사 what은 선행사를 포함해 'the thing(s) which'와 같으며 '~하는 것'으로 해석한다."
+    },
+    {
+     "chip": "핵심",
+     "text": "what 앞에는 선행사(명사)가 없고, what이 이끄는 명사절이 문장에서 주어·목적어·보어 역할을 한다."
+    },
+    {
+     "chip": "구별",
+     "text": "앞에 선행사가 있으면 that/which를, 없으면 관계대명사 what을 쓴다: It's what sharpens focus에서 what은 보어절을 이끈다."
+    },
+    {
+     "chip": "주의",
+     "text": "what절 안에서 what은 sharpens의 주어 역할을 하므로 생략할 수 없다."
+    }
    ],
-   "flow_blocks": [
-     {"stage":"도입·통념 반박","sentence_range":"1~2","summary":"'[[쾌락 분자]]'라는 통념과 달리 도파민의 참 역할은 기대·분투·상상에 있음","easy_example":"맛집 사진을 볼 때의 설렘이 실제 먹는 순간보다 더 큰 것과 비슷하다"},
-     {"stage":"전개","sentence_range":"3~4","summary":"동기·집중·호기심을 [[조율]]하며 만족이 아니라 가능성을 줌","easy_example":"새 프로젝트를 시작하기 전 밤잠 설치게 하는 설렘"},
-     {"stage":"전개","sentence_range":"5~6","summary":"새로운 도전의 장을 열고 [[미래 보상]]을 향한 기대를 촉발함","easy_example":"'만약에 잘되면?' 하는 상상이 계획을 밀고 나가게 하는 것"},
-     {"stage":"결론","sentence_range":"7~8","summary":"결과가 아니라 [[과정]]을 보상하며 평범한 순간을 잠재력으로 채움","easy_example":"목표에 도달하는 순간보다 준비하는 과정이 더 짜릿한 경험"}
+   "example_analysis": "It's what sharpens focus and fills ...에서 what은 선행사를 포함한 관계대명사로 be동사의 보어가 되는 명사절을 이끈다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "Critically, dopamine [[1|rewards]] the process, [[2|not just]] the [[3|finished]] result. It's [[4|that]] sharpens focus and [[5|fills]] ordinary moments with potential.",
+     "answer": "④",
+     "fix": "선행사가 없고 sharpens의 주어 역할을 하는 관계사가 필요하므로 that이 아니라 what이 되어야 한다(원문: what).",
+     "options": [
+      "① rewards",
+      "② not just",
+      "③ finished",
+      "④ that",
+      "⑤ fills"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "The rush of motivation [[that/what]] energizes you at the start of a new day, the focus that allows you [[to solve/solving]] complex problems, and the curiosity that fuels ambition [[are/is]] all orchestrated by dopamine.",
+     "answer": "that / to solve / are",
+     "fix": "선행사 motivation이 있으므로 주격 관계대명사 that, allow는 목적격보어로 to부정사를 취하므로 to solve, 복수 주어(rush·focus·curiosity)에 맞춰 are가 옳다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "answer": "It's which sharpens focus and fills ordinary moments with potential.",
+     "fix": "선행사 없이 주어 역할을 하는 관계사가 필요하므로 which가 아니라 관계대명사 what이 되어야 한다(원문: what).",
+     "options": [
+      "① Popular culture loves to label dopamine as the \"pleasure molecule,\" yet science reveals a richer, more nuanced reality.",
+      "② It's which sharpens focus and fills ordinary moments with potential.",
+      "③ Dopamine doesn't give contentment; it delivers possibility.",
+      "④ Critically, dopamine rewards the process, not just the finished result.",
+      "⑤ It sets the stage for new challenges, frames future goals as attainable, and propels you to ask \"What if?\" about new opportunities, relationships, or aspirations."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "내가 정말로 원하는 것은 약간의 휴식이다.",
+     "sentence": "",
+     "answer": "What I really want is some rest.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "What",
+      "I",
+      "really",
+      "want",
+      "is",
+      "some",
+      "rest."
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "그것은 집중을 예리하게 하고 평범한 순간을 잠재력으로 채우는 것이다.",
+     "sentence": "",
+     "answer": "It's what sharpens focus and fills ordinary moments with potential.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "It's",
+      "what",
+      "sharpens",
+      "focus",
+      "and",
+      "fills",
+      "ordinary moments",
+      "with",
+      "potential."
+     ],
+     "from_passage": true
+    }
    ]
+  },
+  "restatement_chains": [
+   {
+    "label": "미래 보상에 대한 기대",
+    "expressions": [
+     "the dance of anticipation",
+     "it delivers possibility",
+     "dopamine's drive for future reward"
+    ],
+    "variation": "도파민은 얻은 쾌감이 아니라 앞으로 올 것에 대한 기대에서 작동한다"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입·통념 반박",
+    "sentence_range": "1~2",
+    "summary": "'[[쾌락 분자]]'라는 통념과 달리 도파민의 참 역할은 기대·분투·상상에 있음",
+    "easy_example": "맛집 사진을 볼 때의 설렘이 실제 먹는 순간보다 더 큰 것과 비슷하다"
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "3~4",
+    "summary": "동기·집중·호기심을 [[조율]]하며 만족이 아니라 가능성을 줌",
+    "easy_example": "새 프로젝트를 시작하기 전 밤잠 설치게 하는 설렘"
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "5~6",
+    "summary": "새로운 도전의 장을 열고 [[미래 보상]]을 향한 기대를 촉발함",
+    "easy_example": "'만약에 잘되면?' 하는 상상이 계획을 밀고 나가게 하는 것"
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "7~8",
+    "summary": "결과가 아니라 [[과정]]을 보상하며 평범한 순간을 잠재력으로 채움",
+    "easy_example": "목표에 도달하는 순간보다 준비하는 과정이 더 짜릿한 경험"
+   }
+  ]
  },
  "sentences": [
-   {
-     "id": 1,
-     "english": "Popular culture loves to label dopamine as the \"pleasure molecule,\" yet science reveals a richer, more nuanced reality.",
-     "grammar": [
-       {"tag":"to부정사 (명사적 용법)","note":"loves의 목적어로 '이름 붙이기를'을 나타낸다","spans":["to label"]},
-       {"tag":"label A as B","note":"'A를 B로 칭하다'라는 구문","spans":["as"]},
-       {"tag":"접속사 yet (대조)","note":"'그러나'라는 역접을 나타낸다","spans":["yet"]},
-       {"tag":"비교급 병렬","note":"'더 풍부하고 더 미묘한'이라는 비교급 두 개","spans":["richer","more nuanced"]}
-     ],
-     "vocab": [
-       {"word":"label","meaning":"~라고 이름 붙이다"},
-       {"word":"reveal","meaning":"드러내다, 밝히다"},
-       {"word":"nuanced","meaning":"미묘한, 뉘앙스가 있는"},
-       {"word":"reality","meaning":"실상, 현실"}
-     ],
-     "chunks": [
-       {"en":"Popular culture loves to label dopamine","ko":"대중문화는 [[도파민]]을 이름 붙이기를 좋아한다"},
-       {"en":"as the \"pleasure molecule,\"","ko":"'[[쾌락]] 분자'라고"},
-       {"en":"[[yet science reveals a richer, more nuanced reality.]]","ko":"[[그러나 과학은 더 풍부하고 미묘한 실상을 드러낸다]]"}
-     ],
-     "misreads": [
-       {"statement":"필자는 도파민을 '쾌락 분자'라고 부르는 것이 정확하다고 본다.","verdict":"X","trap_type":"필자관점","anchor":"yet science reveals a richer, more nuanced reality","why":"필자는 그 통념을 반박하며 더 미묘한 실상을 강조한다."}
-     ],
-     "mistips": ["label A as B = 'A를 B라고 칭하다'; yet은 앞뒤를 대조한다."]
-   },
-   {
-     "id": 2,
-     "english": "Dopamine's true role is found not simply in the thrill of reward, but in the dance of anticipation, striving, and imagining what could be.",
-     "grammar": [
-       {"tag":"수동태","note":"'~에서 발견된다'라는 수동 의미","spans":["is found"]},
-       {"tag":"상관접속사 (not simply ~ but)","note":"'단순히 A가 아니라 B'라는 상관구조","spans":["not simply","but"]},
-       {"tag":"동명사 병렬","note":"전치사 in의 목적어로 동명사들이 병렬됨","spans":["striving","imagining"]},
-       {"tag":"관계대명사 what","note":"'무엇이 ~일지'라는 선행사 포함 명사절","spans":["what"]}
-     ],
-     "vocab": [
-       {"word":"thrill","meaning":"전율, 짜릿함"},
-       {"word":"anticipation","meaning":"기대, 예상"},
-       {"word":"striving","meaning":"분투, 애씀"}
-     ],
-     "chunks": [
-       {"en":"Dopamine's true role is found","ko":"도파민의 진정한 [[역할]]은 발견된다"},
-       {"en":"[[not simply in the thrill of reward,]]","ko":"[[단순히 보상의 전율에서가 아니라]]"},
-       {"en":"[[but in the dance of anticipation, striving, and imagining what could be.]]","ko":"[[기대와 분투, 그리고 무엇이 될 수 있을지 상상하는 춤 속에서]]"}
-     ],
-     "misreads": [
-       {"statement":"도파민의 진정한 역할은 보상의 전율보다 기대와 분투, 상상 속에서 발견된다.","verdict":"O","trap_type":"구조수식"},
-       {"statement":"Dopamine's role is only about the thrill of reward.","verdict":"X","trap_type":"구조수식","anchor":"not simply in the thrill of reward","why":"전율만이 아니라 기대·분투·상상에 진짜 역할이 있다.","english":"Dopamine's role is only about the thrill of reward."}
-     ],
-     "mistips": ["not simply A but B = '단순히 A가 아니라 B'; imagining what could be에서 what은 선행사를 포함한다."]
-   },
-   {
-     "id": 3,
-     "english": "The rush of motivation that energizes you at the start of a new day, the focus that allows you to solve complex problems, and the curiosity that fuels ambition are all orchestrated by dopamine.",
-     "grammar": [
-       {"tag":"주격 관계대명사","note":"motivation을 수식하는 관계사절","spans":["that"]},
-       {"tag":"5형식 (allow O to V)","note":"'O가 ~하게 하다'라는 목적격보어 to부정사","spans":["to solve"]},
-       {"tag":"주격 관계대명사","note":"curiosity를 수식하는 관계사절","spans":["that"]},
-       {"tag":"수동태 + 수일치","note":"복수 주어에 맞춰 are, '~에 의해 조율된다'","spans":["are","orchestrated"]}
-     ],
-     "vocab": [
-       {"word":"rush","meaning":"(감정의) 솟구침, 북받침"},
-       {"word":"energize","meaning":"활력을 불어넣다"},
-       {"word":"fuel","meaning":"부추기다, 자극하다"},
-       {"word":"ambition","meaning":"야망, 포부"},
-       {"word":"orchestrate","meaning":"조율하다, 편성하다"}
-     ],
-     "chunks": [
-       {"en":"The rush of motivation that energizes you","ko":"당신에게 활력을 주는 [[동기]]의 솟구침"},
-       {"en":"at the start of a new day,","ko":"새로운 [[하루]]의 시작에"},
-       {"en":"[[the focus that allows you to solve complex problems,]]","ko":"[[복잡한 문제를 풀게 해 주는 집중력]]"},
-       {"en":"and the curiosity that fuels ambition","ko":"그리고 야망을 부추기는 [[호기심]]은"},
-       {"en":"[[are all orchestrated by dopamine.]]","ko":"[[모두 도파민에 의해 조율된다]]"}
-     ],
-     "misreads": [
-       {"statement":"복잡한 문제를 풀게 하는 집중력은 도파민이 아니라 세로토닌에 의해 조율된다.","verdict":"X","trap_type":"무관정보","anchor":"are all orchestrated by dopamine","why":"세로토닌은 언급되지 않으며, 셋 모두 도파민이 조율한다."}
-     ],
-     "mistips": ["allow O to V = 'O가 ~하게 하다'; 세 개의 명사구 주어에 맞춰 동사는 are."]
-   },
-   {
-     "id": 4,
-     "english": "Dopamine doesn't give contentment; it delivers possibility.",
-     "grammar": [
-       {"tag":"조동사 부정 (does not)","note":"'주지 않는다'라는 3인칭 단수 부정","spans":["doesn't"]},
-       {"tag":"지시대명사 it","note":"앞의 Dopamine을 가리킨다","spans":["it"]}
-     ],
-     "vocab": [
-       {"word":"contentment","meaning":"만족(감)"},
-       {"word":"deliver","meaning":"주다, 전하다"},
-       {"word":"possibility","meaning":"가능성"}
-     ],
-     "chunks": [
-       {"en":"Dopamine doesn't give contentment;","ko":"도파민은 [[만족감]]을 주지 않는다"},
-       {"en":"it delivers possibility.","ko":"그것은 [[가능성]]을 전한다"}
-     ],
-     "misreads": [
-       {"statement":"도파민은 만족감을 주지만 가능성은 전하지 않는다.","verdict":"X","trap_type":"주체대상","anchor":"it delivers possibility","why":"도파민은 만족이 아니라 가능성을 전한다."}
-     ],
-     "mistips": ["세미콜론이 만족(부정)↔가능성(긍정)의 대조를 이룬다."]
-   },
-   {
-     "id": 5,
-     "english": "It sets the stage for new challenges, frames future goals as attainable, and propels you to ask \"What if?\" about new opportunities, relationships, or aspirations.",
-     "grammar": [
-       {"tag":"동사 병렬 구조","note":"주어 It에 걸리는 세 동사가 병렬됨","spans":["sets","frames","propels"]},
-       {"tag":"frame A as B","note":"'A를 B로 규정하다'라는 구문","spans":["as"]},
-       {"tag":"5형식 (propel O to V)","note":"'O가 ~하도록 내몰다'라는 목적격보어 to부정사","spans":["to ask"]}
-     ],
-     "vocab": [
-       {"word":"attainable","meaning":"달성 가능한"},
-       {"word":"propel","meaning":"내몰다, 나아가게 하다"},
-       {"word":"opportunity","meaning":"기회"},
-       {"word":"aspiration","meaning":"열망, 포부"}
-     ],
-     "chunks": [
-       {"en":"It sets the stage for new challenges,","ko":"그것은 새로운 [[도전]]을 위한 장을 마련한다"},
-       {"en":"[[frames future goals as attainable,]]","ko":"[[미래 목표를 달성 가능한 것으로 규정한다]]"},
-       {"en":"and propels you to ask \"What if?\"","ko":"그리고 당신이 '[[만약에]]?'라고 묻게 내몬다"},
-       {"en":"about new opportunities, relationships, or aspirations.","ko":"새로운 [[기회]]나 관계, 열망에 대해"}
-     ],
-     "misreads": [
-       {"statement":"도파민은 새로운 도전의 장을 열고 미래 목표를 달성 가능한 것으로 여기게 한다.","verdict":"O","trap_type":"구조수식"}
-     ],
-     "mistips": ["propel O to V = 'O가 ~하도록 내몰다'; frame A as B = 'A를 B로 규정하다'."]
-   },
-   {
-     "id": 6,
-     "english": "The anticipation of a meaningful conversation, the excitement for a fresh project, and even just the temptation of a delicious meal are all sparked by dopamine's drive for future reward.",
-     "grammar": [
-       {"tag":"명사구 병렬 (주어)","note":"세 개의 명사구가 주어로 병렬됨","spans":["and"]},
-       {"tag":"수동태 + 수일치","note":"복수 주어에 맞춰 are, '~에 의해 촉발된다'","spans":["are","sparked"]},
-       {"tag":"소유격","note":"'도파민의 추동력'이라는 소유 관계","spans":["dopamine's"]}
-     ],
-     "vocab": [
-       {"word":"anticipation","meaning":"기대"},
-       {"word":"temptation","meaning":"유혹, 끌림"},
-       {"word":"spark","meaning":"촉발하다, 불러일으키다"},
-       {"word":"drive","meaning":"추동력, 욕구"}
-     ],
-     "chunks": [
-       {"en":"The anticipation of a meaningful conversation,","ko":"의미 있는 대화에 대한 [[기대]]"},
-       {"en":"the excitement for a fresh project,","ko":"새로운 프로젝트에 대한 [[설렘]]"},
-       {"en":"[[and even just the temptation of a delicious meal]]","ko":"[[그리고 심지어 맛있는 식사의 유혹까지]]"},
-       {"en":"[[are all sparked by dopamine's drive for future reward.]]","ko":"[[모두 미래 보상을 향한 도파민의 추동력에 의해 촉발된다]]"}
-     ],
-     "misreads": [
-       {"statement":"의미 있는 대화나 새 프로젝트에 대한 기대는 과거의 보상 때문에 생긴다.","verdict":"X","trap_type":"인과조건","anchor":"dopamine's drive for future reward","why":"과거가 아니라 미래 보상을 향한 도파민의 추동력이 이를 촉발한다.","killer":true}
-     ],
-     "mistips": ["세 개의 명사구 주어에 맞춰 동사는 are; sparked by는 '~에 의해 촉발되다'."]
-   },
-   {
-     "id": 7,
-     "english": "Critically, dopamine rewards the process, not just the finished result.",
-     "grammar": [
-       {"tag":"상관구조 (A, not just B)","note":"'B만이 아니라 A'라는 대조·부분부정","spans":["not just"]},
-       {"tag":"과거분사 형용사","note":"'완성된 결과'를 수식하는 과거분사","spans":["finished"]}
-     ],
-     "vocab": [
-       {"word":"critically","meaning":"결정적으로, 중요하게도"},
-       {"word":"reward","meaning":"보상하다"},
-       {"word":"process","meaning":"과정"}
-     ],
-     "chunks": [
-       {"en":"Critically, dopamine rewards the process,","ko":"결정적으로, 도파민은 [[과정]]을 보상한다"},
-       {"en":"[[not just the finished result.]]","ko":"[[완성된 결과만이 아니라]]"}
-     ],
-     "misreads": [
-       {"statement":"도파민이 과정을 보상하는 것은 완성된 결과에는 전혀 관여하지 않기 때문이다.","verdict":"△","trap_type":"구조수식","anchor":"not just the finished result","why":"결과를 배제하는 게 아니라 결과'만'이 아니라는 뜻으로, 과정도 함께 보상한다."}
-     ],
-     "mistips": ["not just B = 'B만이 아니라'; 결과를 배제하지 않는다."]
-   },
-   {
-     "id": 8,
-     "english": "It's what sharpens focus and fills ordinary moments with potential.",
-     "grammar": [
-       {"tag":"관계대명사 what","note":"선행사를 포함해 be동사의 보어절을 이끈다","spans":["what"]},
-       {"tag":"동사 병렬","note":"what절 안에서 두 동사가 병렬됨","spans":["sharpens","fills"]},
-       {"tag":"fill A with B","note":"'A를 B로 채우다'라는 구문","spans":["with"]}
-     ],
-     "vocab": [
-       {"word":"sharpen","meaning":"예리하게 하다"},
-       {"word":"ordinary","meaning":"평범한"},
-       {"word":"potential","meaning":"잠재력, 가능성"}
-     ],
-     "chunks": [
-       {"en":"It's what sharpens focus","ko":"그것은 [[집중]]을 예리하게 하는 것이다"},
-       {"en":"[[and fills ordinary moments with potential.]]","ko":"[[그리고 평범한 순간을 잠재력으로 채우는]]"}
-     ],
-     "misreads": [
-       {"statement":"여기서 It은 완성된 결과를 가리킨다.","verdict":"X","trap_type":"지칭","anchor":"It's what sharpens focus","why":"It은 도파민을 가리키며, 집중을 예리하게 하는 것이다."}
-     ],
-     "mistips": ["what = the thing which; sharpens의 주어 역할을 하므로 생략할 수 없다."]
-   }
+  {
+   "id": 1,
+   "english": "Popular culture loves to label dopamine as the \"pleasure molecule,\" yet science reveals a richer, more nuanced reality.",
+   "grammar": [
+    {
+     "tag": "to부정사 (명사적 용법)",
+     "note": "loves의 목적어로 '이름 붙이기를'을 나타낸다",
+     "spans": [
+      "to label"
+     ]
+    },
+    {
+     "tag": "label A as B",
+     "note": "'A를 B로 칭하다'라는 구문",
+     "spans": [
+      "as"
+     ]
+    },
+    {
+     "tag": "접속사 yet (대조)",
+     "note": "'그러나'라는 역접을 나타낸다",
+     "spans": [
+      "yet"
+     ]
+    },
+    {
+     "tag": "비교급 병렬",
+     "note": "'더 풍부하고 더 미묘한'이라는 비교급 두 개",
+     "spans": [
+      "richer",
+      "more nuanced"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "label",
+     "meaning": "~라고 이름 붙이다"
+    },
+    {
+     "word": "reveal",
+     "meaning": "드러내다, 밝히다"
+    },
+    {
+     "word": "nuanced",
+     "meaning": "미묘한, 뉘앙스가 있는"
+    },
+    {
+     "word": "reality",
+     "meaning": "실상, 현실"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Popular culture loves to label dopamine",
+     "ko": "대중문화는 [[도파민]]을 이름 붙이기를 [[좋아한다]]"
+    },
+    {
+     "en": "as the \"pleasure molecule,\"",
+     "ko": "'[[쾌락]] 분자'라고"
+    },
+    {
+     "en": "[[yet science reveals a richer, more nuanced reality.]]",
+     "ko": "[[그러나 과학은 더 풍부하고 미묘한 실상을 드러낸다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 도파민을 '쾌락 분자'라고 부르는 것이 정확하다고 본다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "yet science reveals a richer, more nuanced reality",
+     "why": "필자는 그 통념을 반박하며 더 미묘한 실상을 강조한다."
+    }
+   ],
+   "mistips": [
+    "label A as B = 'A를 B라고 칭하다'; yet은 앞뒤를 대조한다."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "Dopamine's true role is found not simply in the thrill of reward, but in the dance of anticipation, striving, and imagining what could be.",
+   "grammar": [
+    {
+     "tag": "수동태",
+     "note": "'~에서 발견된다'라는 수동 의미",
+     "spans": [
+      "is found"
+     ]
+    },
+    {
+     "tag": "상관접속사 (not simply ~ but)",
+     "note": "'단순히 A가 아니라 B'라는 상관구조",
+     "spans": [
+      "not simply",
+      "but"
+     ]
+    },
+    {
+     "tag": "동명사 병렬",
+     "note": "전치사 in의 목적어로 동명사들이 병렬됨",
+     "spans": [
+      "striving",
+      "imagining"
+     ]
+    },
+    {
+     "tag": "관계대명사 what",
+     "note": "'무엇이 ~일지'라는 선행사 포함 명사절",
+     "spans": [
+      "what"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "thrill",
+     "meaning": "전율, 짜릿함"
+    },
+    {
+     "word": "anticipation",
+     "meaning": "기대, 예상"
+    },
+    {
+     "word": "striving",
+     "meaning": "분투, 애씀"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Dopamine's true role is found",
+     "ko": "도파민의 진정한 [[역할]]은 [[발견된다]]"
+    },
+    {
+     "en": "[[not simply in the thrill of reward,]]",
+     "ko": "[[단순히 보상의 전율에서가 아니라]]"
+    },
+    {
+     "en": "[[but in the dance of anticipation, striving, and imagining what could be.]]",
+     "ko": "[[기대와 분투, 그리고 무엇이 될 수 있을지 상상하는 춤 속에서]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "도파민의 진정한 역할은 보상의 전율보다 기대와 분투, 상상 속에서 발견된다.",
+     "verdict": "O",
+     "trap_type": "구조수식"
+    },
+    {
+     "statement": "Dopamine's role is only about the thrill of reward.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "not simply in the thrill of reward",
+     "why": "전율만이 아니라 기대·분투·상상에 진짜 역할이 있다.",
+     "english": "Dopamine's role is only about the thrill of reward."
+    }
+   ],
+   "mistips": [
+    "not simply A but B = '단순히 A가 아니라 B'; imagining what could be에서 what은 선행사를 포함한다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "The rush of motivation that energizes you at the start of a new day, the focus that allows you to solve complex problems, and the curiosity that fuels ambition are all orchestrated by dopamine.",
+   "grammar": [
+    {
+     "tag": "주격 관계대명사",
+     "note": "motivation을 수식하는 관계사절",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "5형식 (allow O to V)",
+     "note": "'O가 ~하게 하다'라는 목적격보어 to부정사",
+     "spans": [
+      "to solve"
+     ]
+    },
+    {
+     "tag": "주격 관계대명사",
+     "note": "curiosity를 수식하는 관계사절",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "수동태 + 수일치",
+     "note": "복수 주어에 맞춰 are, '~에 의해 조율된다'",
+     "spans": [
+      "are",
+      "orchestrated"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "rush",
+     "meaning": "(감정의) 솟구침, 북받침"
+    },
+    {
+     "word": "energize",
+     "meaning": "활력을 불어넣다"
+    },
+    {
+     "word": "fuel",
+     "meaning": "부추기다, 자극하다"
+    },
+    {
+     "word": "ambition",
+     "meaning": "야망, 포부"
+    },
+    {
+     "word": "orchestrate",
+     "meaning": "조율하다, 편성하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The rush of motivation that energizes you",
+     "ko": "당신에게 활력을 주는 [[동기]]의 [[솟구침]]"
+    },
+    {
+     "en": "at the start of a new day,",
+     "ko": "새로운 [[하루]]의 시작에"
+    },
+    {
+     "en": "[[the focus that allows you to solve complex problems,]]",
+     "ko": "[[복잡한 문제를 풀게 해 주는 집중력]]"
+    },
+    {
+     "en": "and the curiosity that fuels ambition",
+     "ko": "그리고 야망을 부추기는 [[호기심]]은"
+    },
+    {
+     "en": "[[are all orchestrated by dopamine.]]",
+     "ko": "[[모두 도파민에 의해 조율된다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "복잡한 문제를 풀게 하는 집중력은 도파민이 아니라 세로토닌에 의해 조율된다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "are all orchestrated by dopamine",
+     "why": "세로토닌은 언급되지 않으며, 셋 모두 도파민이 조율한다."
+    }
+   ],
+   "mistips": [
+    "allow O to V = 'O가 ~하게 하다'; 세 개의 명사구 주어에 맞춰 동사는 are."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "Dopamine doesn't give contentment; it delivers possibility.",
+   "grammar": [
+    {
+     "tag": "조동사 부정 (does not)",
+     "note": "'주지 않는다'라는 3인칭 단수 부정",
+     "spans": [
+      "doesn't"
+     ]
+    },
+    {
+     "tag": "지시대명사 it",
+     "note": "앞의 Dopamine을 가리킨다",
+     "spans": [
+      "it"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "contentment",
+     "meaning": "만족(감)"
+    },
+    {
+     "word": "deliver",
+     "meaning": "주다, 전하다"
+    },
+    {
+     "word": "possibility",
+     "meaning": "가능성"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Dopamine doesn't give contentment;",
+     "ko": "도파민은 [[만족감]]을 주지 않는다"
+    },
+    {
+     "en": "it delivers possibility.",
+     "ko": "그것은 [[가능성]]을 전한다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "도파민은 만족감을 주지만 가능성은 전하지 않는다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "it delivers possibility",
+     "why": "도파민은 만족이 아니라 가능성을 전한다."
+    }
+   ],
+   "mistips": [
+    "세미콜론이 만족(부정)↔가능성(긍정)의 대조를 이룬다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "It sets the stage for new challenges, frames future goals as attainable, and propels you to ask \"What if?\" about new opportunities, relationships, or aspirations.",
+   "grammar": [
+    {
+     "tag": "동사 병렬 구조",
+     "note": "주어 It에 걸리는 세 동사가 병렬됨",
+     "spans": [
+      "sets",
+      "frames",
+      "propels"
+     ]
+    },
+    {
+     "tag": "frame A as B",
+     "note": "'A를 B로 규정하다'라는 구문",
+     "spans": [
+      "as"
+     ]
+    },
+    {
+     "tag": "5형식 (propel O to V)",
+     "note": "'O가 ~하도록 내몰다'라는 목적격보어 to부정사",
+     "spans": [
+      "to ask"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "attainable",
+     "meaning": "달성 가능한"
+    },
+    {
+     "word": "propel",
+     "meaning": "내몰다, 나아가게 하다"
+    },
+    {
+     "word": "opportunity",
+     "meaning": "기회"
+    },
+    {
+     "word": "aspiration",
+     "meaning": "열망, 포부"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "It sets the stage for new challenges,",
+     "ko": "그것은 새로운 [[도전]]을 위한 장을 [[마련한다]]"
+    },
+    {
+     "en": "[[frames future goals as attainable,]]",
+     "ko": "[[미래 목표를 달성 가능한 것으로 규정한다]]"
+    },
+    {
+     "en": "and propels you to ask \"What if?\"",
+     "ko": "그리고 당신이 '[[만약에]]?'라고 묻게 내몬다"
+    },
+    {
+     "en": "about new opportunities, relationships, or aspirations.",
+     "ko": "새로운 [[기회]]나 관계, 열망에 대해"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "도파민은 새로운 도전의 장을 열고 미래 목표를 달성 가능한 것으로 여기게 한다.",
+     "verdict": "O",
+     "trap_type": "구조수식"
+    }
+   ],
+   "mistips": [
+    "propel O to V = 'O가 ~하도록 내몰다'; frame A as B = 'A를 B로 규정하다'."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "The anticipation of a meaningful conversation, the excitement for a fresh project, and even just the temptation of a delicious meal are all sparked by dopamine's drive for future reward.",
+   "grammar": [
+    {
+     "tag": "명사구 병렬 (주어)",
+     "note": "세 개의 명사구가 주어로 병렬됨",
+     "spans": [
+      "and"
+     ]
+    },
+    {
+     "tag": "수동태 + 수일치",
+     "note": "복수 주어에 맞춰 are, '~에 의해 촉발된다'",
+     "spans": [
+      "are",
+      "sparked"
+     ]
+    },
+    {
+     "tag": "소유격",
+     "note": "'도파민의 추동력'이라는 소유 관계",
+     "spans": [
+      "dopamine's"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "anticipation",
+     "meaning": "기대"
+    },
+    {
+     "word": "temptation",
+     "meaning": "유혹, 끌림"
+    },
+    {
+     "word": "spark",
+     "meaning": "촉발하다, 불러일으키다"
+    },
+    {
+     "word": "drive",
+     "meaning": "추동력, 욕구"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The anticipation of a meaningful conversation,",
+     "ko": "의미 있는 대화에 [[대한]] [[기대]]"
+    },
+    {
+     "en": "the excitement for a fresh project,",
+     "ko": "새로운 프로젝트에 대한 [[설렘]]"
+    },
+    {
+     "en": "[[and even just the temptation of a delicious meal]]",
+     "ko": "[[그리고 심지어 맛있는 식사의 유혹까지]]"
+    },
+    {
+     "en": "[[are all sparked by dopamine's drive for future reward.]]",
+     "ko": "[[모두 미래 보상을 향한 도파민의 추동력에 의해 촉발된다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "의미 있는 대화나 새 프로젝트에 대한 기대는 과거의 보상 때문에 생긴다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "dopamine's drive for future reward",
+     "why": "과거가 아니라 미래 보상을 향한 도파민의 추동력이 이를 촉발한다.",
+     "killer": true
+    }
+   ],
+   "mistips": [
+    "세 개의 명사구 주어에 맞춰 동사는 are; sparked by는 '~에 의해 촉발되다'."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Critically, dopamine rewards the process, not just the finished result.",
+   "grammar": [
+    {
+     "tag": "상관구조 (A, not just B)",
+     "note": "'B만이 아니라 A'라는 대조·부분부정",
+     "spans": [
+      "not just"
+     ]
+    },
+    {
+     "tag": "과거분사 형용사",
+     "note": "'완성된 결과'를 수식하는 과거분사",
+     "spans": [
+      "finished"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "critically",
+     "meaning": "결정적으로, 중요하게도"
+    },
+    {
+     "word": "reward",
+     "meaning": "보상하다"
+    },
+    {
+     "word": "process",
+     "meaning": "과정"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Critically, dopamine rewards the process,",
+     "ko": "[[결정적으로,]] 도파민은 [[과정]]을 보상한다"
+    },
+    {
+     "en": "[[not just the finished result.]]",
+     "ko": "[[완성된 결과만이 아니라]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "도파민이 과정을 보상하는 것은 완성된 결과에는 전혀 관여하지 않기 때문이다.",
+     "verdict": "△",
+     "trap_type": "구조수식",
+     "anchor": "not just the finished result",
+     "why": "결과를 배제하는 게 아니라 결과'만'이 아니라는 뜻으로, 과정도 함께 보상한다."
+    }
+   ],
+   "mistips": [
+    "not just B = 'B만이 아니라'; 결과를 배제하지 않는다."
+   ]
+  },
+  {
+   "id": 8,
+   "english": "It's what sharpens focus and fills ordinary moments with potential.",
+   "grammar": [
+    {
+     "tag": "관계대명사 what",
+     "note": "선행사를 포함해 be동사의 보어절을 이끈다",
+     "spans": [
+      "what"
+     ]
+    },
+    {
+     "tag": "동사 병렬",
+     "note": "what절 안에서 두 동사가 병렬됨",
+     "spans": [
+      "sharpens",
+      "fills"
+     ]
+    },
+    {
+     "tag": "fill A with B",
+     "note": "'A를 B로 채우다'라는 구문",
+     "spans": [
+      "with"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "sharpen",
+     "meaning": "예리하게 하다"
+    },
+    {
+     "word": "ordinary",
+     "meaning": "평범한"
+    },
+    {
+     "word": "potential",
+     "meaning": "잠재력, 가능성"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "It's what sharpens focus",
+     "ko": "그것은 [[집중]]을 예리하게 하는 것이다"
+    },
+    {
+     "en": "[[and fills ordinary moments with potential.]]",
+     "ko": "[[그리고 평범한 순간을 잠재력으로 채우는]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "여기서 It은 완성된 결과를 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "It's what sharpens focus",
+     "why": "It은 도파민을 가리키며, 집중을 예리하게 하는 것이다."
+    }
+   ],
+   "mistips": [
+    "what = the thing which; sharpens의 주어 역할을 하므로 생략할 수 없다."
+   ]
+  }
  ]
 }

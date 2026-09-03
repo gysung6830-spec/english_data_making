@@ -1,274 +1,692 @@
 {
-  "item_no": "38",
-  "theme": "밀도와 혼잡 — 기분에 따라 증폭되는 심리적 경험",
-  "overview": {
-    "theme_ko": "밀도와 혼잡, 그리고 기분의 증폭 효과",
-    "topic": "🔎 물리적 밀도와 심리적 혼잡의 구분, 그리고 기분에 따라 증폭되는 혼잡 경험",
-    "stance": "중립적",
-    "stance_reason": "혼잡을 '언제나 부정적'이 아니라 중립적으로 보는 관점을 소개함(neutral rather than invariably negative)",
-    "structure": "비교·대조",
-    "structure_reason": "density와 crowding을 구분하고, 콘서트 기대(enhances)와 행사 두려움(even worse)을 대조함",
-    "key_grammar": {
-      "point": "비교급 강조(even worse)",
-      "source_sentence": "But if they are dreading an event, crowding will make the person's experience of it even worse.",
-      "explanation": [
-        {"chip": "쉽게 말하면", "text": "비교급 앞에 even/much/far/still/a lot을 붙이면 '훨씬'이라는 강조가 된다."},
-        {"chip": "이 문장에선", "text": "even worse는 '훨씬 더 나쁜'이라는 뜻으로 worse(bad의 비교급)를 강조한다."},
-        {"chip": "very는 안 돼요", "text": "very는 원급을 강조하므로 비교급 worse에는 쓸 수 없고 even/much 등을 써야 한다."},
-        {"chip": "worse의 정체", "text": "worse는 bad/badly의 비교급으로 '더 나쁜/나쁘게'라는 뜻이다."},
-        {"chip": "문장 구조", "text": "make the person's experience even worse = '경험을 훨씬 더 나쁘게 만들다'(make+목적어+형용사보어)."}
-      ],
-      "example_analysis": "부사 even이 비교급 형용사 worse를 강조해 '훨씬 더 나쁜'이 되고, 이 worse는 make의 목적격 보어이다.",
-      "drills": [
-        {
-          "kind": "밑줄형",
-          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
-          "sentence": "But [[1|if]] they [[2|are dreading]] an event, crowding will [[3|make]] the person's experience of it [[4|very]] [[5|worse]].",
-          "answer": "④",
-          "fix": "비교급 worse를 강조할 때는 very를 쓸 수 없고 even(또는 much, far)을 써야 한다. 원문은 even worse이다.",
-          "options": ["① if", "② are dreading", "③ make", "④ very", "⑤ worse"],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "네모형",
-          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
-          "sentence": "But if they are dreading an event, crowding will make the person's experience of it [[even/very]] [[worse/worst]].",
-          "answer": "even / worse",
-          "fix": "비교급을 강조하는 부사는 even(very 불가)이고, 둘을 비교하는 문맥이므로 최상급 worst가 아니라 비교급 worse가 맞다.",
-          "options": [],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "오류찾기",
-          "question": "다음 중 어법상 틀린 문장은?",
-          "sentence": "Usually, high density is needed for the phenomenon of crowding, which make people experience sensory overload, a lack of control, and rising stress and anxiety.",
-          "answer": "Usually, high density is needed for the phenomenon of crowding, which make people experience sensory overload, a lack of control, and rising stress and anxiety.",
-          "fix": "관계대명사 which의 선행사가 단수 the phenomenon of crowding이므로 동사는 make가 아니라 makes가 되어야 한다.",
-          "options": [
-            "Conversely, creating positive social spaces such as parks and pedestrian areas in high-density urban environments may help to lift the general mood and defuse tension.",
-            "So if an individual is looking forward to a concert, say, the feeling of crowding enhances their enjoyment of the performance.",
-            "Put into a community setting, crowding may accentuate the dominant behavior ― an aggressive group may turn violent as density rises.",
-            "Usually, high density is needed for the phenomenon of crowding, which make people experience sensory overload, a lack of control, and rising stress and anxiety.",
-            "But if they are dreading an event, crowding will make the person's experience of it even worse."
-          ],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "영작",
-          "question": "그 소음은 상황을 훨씬 더 나쁘게 만들었다. (비교급 강조를 활용하여)",
-          "answer": "The noise made the situation even worse.",
-          "fix": "",
-          "options": [],
-          "words": ["The noise", "made", "the situation", "even", "worse"],
-          "from_passage": false
-        },
-        {
-          "kind": "영작",
-          "question": "그러나 만약 그들이 어떤 행사를 두려워하고 있다면, 혼잡함은 그것에 대한 그 사람의 경험을 훨씬 더 나쁘게 만들 것이다.",
-          "answer": "But if they are dreading an event, crowding will make the person's experience of it even worse.",
-          "fix": "",
-          "options": [],
-          "words": ["But", "if they are dreading an event,", "crowding", "will make", "the person's experience of it", "even worse."],
-          "from_passage": true
-        }
-      ]
-    },
-    "restatement_chains": [
-      {
-        "label": "혼잡의 부정적 결과",
-        "expressions": ["sensory overload", "a lack of control", "rising stress and anxiety"],
-        "variation": "높은 밀도가 부를 수 있는 심리적 부담들"
-      },
-      {
-        "label": "기분이 혼잡 경험을 좌우함",
-        "expressions": ["people's moods and behaviors intensify", "enhances their enjoyment", "even worse"],
-        "variation": "같은 혼잡도 기대하면 즐거움, 두려우면 더 나쁜 경험"
-      }
-    ],
-    "flow_blocks": [
-      {"stage": "도입(개념 구분)", "sentence_range": "1", "summary": "[[밀도]](물리적 측정)와 [[혼잡]](심리적 느낌)의 구분", "easy_example": "같은 지하철 칸이라도 '몇 명'과 '답답한 느낌'은 다른 문제다."},
-      {"stage": "전개(부정적 통념)", "sentence_range": "2", "summary": "높은 밀도의 혼잡은 감각 과부하·통제력 상실·스트레스를 유발", "easy_example": "붐비는 곳에서 정신이 없고 짜증이 나는 상태."},
-      {"stage": "전환(중립적 관점)", "sentence_range": "3", "summary": "일부 학자는 혼잡을 중립적으로 보고, 기분·행동이 밀도에 따라 증폭된다고 봄", "easy_example": "붐빔이 기분을 '더 세게' 만들어 주는 증폭기 같은 역할."},
-      {"stage": "사례 대조", "sentence_range": "4~5", "summary": "기대하면 즐거움이 커지고, 두려우면 경험이 더 나빠짐", "easy_example": "좋아하는 공연은 만원이라 더 신나고, 싫은 행사는 붐벼서 더 괴롭다."},
-      {"stage": "확장·결론", "sentence_range": "6~7", "summary": "혼잡은 지배적 행동을 증폭하지만, 긍정적 공간은 기분을 높이고 긴장을 완화", "easy_example": "공원·보행로 같은 좋은 공간이 붐빔의 긴장을 풀어 준다."}
-    ]
-  },
-  "sentences": [
+ "item_no": "38",
+ "theme": "밀도와 혼잡 — 기분에 따라 증폭되는 심리적 경험",
+ "overview": {
+  "theme_ko": "밀도와 혼잡, 그리고 기분의 증폭 효과",
+  "topic": "🔎 물리적 밀도와 심리적 혼잡의 구분, 그리고 기분에 따라 증폭되는 혼잡 경험",
+  "stance": "중립적",
+  "stance_reason": "혼잡을 '언제나 부정적'이 아니라 중립적으로 보는 관점을 소개함(neutral rather than invariably negative)",
+  "structure": "비교·대조",
+  "structure_reason": "density와 crowding을 구분하고, 콘서트 기대(enhances)와 행사 두려움(even worse)을 대조함",
+  "key_grammar": {
+   "point": "비교급 강조(even worse)",
+   "source_sentence": "But if they are dreading an event, crowding will make the person's experience of it even worse.",
+   "explanation": [
     {
-      "id": 1,
-      "english": "Environmental psychologists make a distinction between the physical measurement of density (how many people are in a particular space) and crowding (the psychological feeling of not having enough space).",
-      "grammar": [
-        {"tag": "상관어구 between A and B", "note": "density와 crowding 두 대상을 대등하게 짝지어 구별함", "spans": ["between", "and"]},
-        {"tag": "간접의문문(명사절)", "note": "'얼마나 많은 사람이 있는가'가 명사절로 앞의 measurement를 부연", "spans": ["how"]},
-        {"tag": "동명사(전치사 of의 목적어)", "note": "of 뒤에 동명사 having이 오고 not이 이를 부정함", "spans": ["having"]}
-      ],
-      "vocab": [
-        {"word": "make a distinction between", "meaning": "~을 구별하다"},
-        {"word": "density", "meaning": "밀도"},
-        {"word": "crowding", "meaning": "혼잡(함)"},
-        {"word": "psychological", "meaning": "심리적인"}
-      ],
-      "chunks": [
-        {"en": "Environmental psychologists make a distinction between", "ko": "환경 심리학자들은 ~을 [[구별한다]]"},
-        {"en": "the physical measurement of density", "ko": "밀도의 물리적 [[측정]]"},
-        {"en": "[[(how many people are in a particular space)]]", "ko": "[[(특정 공간에 얼마나 많은 사람이 있는가)]]"},
-        {"en": "and crowding (the psychological feeling of", "ko": "그리고 [[혼잡함]](심리적 느낌"},
-        {"en": "not having enough space).", "ko": "충분한 [[공간]]이 없다는)"}
-      ],
-      "misreads": [
-        {"statement": "환경 심리학자들은 밀도(물리적 측정)와 혼잡(심리적 느낌)을 구분한다.", "verdict": "O"},
-        {"statement": "Environmental psychologists distinguish density from crowding.", "verdict": "O", "english": "Environmental psychologists distinguish density from crowding."}
-      ],
-      "mistips": ["괄호 안의 how ~ space는 measurement를, 두 번째 괄호는 crowding을 각각 부연 설명한다."]
+     "chip": "쉽게 말하면",
+     "text": "비교급 앞에 even/much/far/still/a lot을 붙이면 '훨씬'이라는 강조가 된다."
     },
     {
-      "id": 2,
-      "english": "Usually, high density is needed for the phenomenon of crowding, which makes people experience sensory overload, a lack of control, and rising stress and anxiety.",
-      "grammar": [
-        {"tag": "수동태", "note": "밀도가 '요구되는' 대상이므로 be+p.p.", "spans": ["is needed"]},
-        {"tag": "계속적 용법 관계대명사 which", "note": "앞 절 전체/crowding을 부연 설명(콤마 뒤 which)", "spans": ["which"]},
-        {"tag": "사역동사 make+목적어+원형", "note": "'사람들이 ~을 경험하게 만들다'로 목적격 보어에 동사원형", "spans": ["experience"]}
-      ],
-      "vocab": [
-        {"word": "phenomenon", "meaning": "현상"},
-        {"word": "sensory overload", "meaning": "감각 과부하"},
-        {"word": "a lack of control", "meaning": "통제력의 결여"},
-        {"word": "anxiety", "meaning": "불안"}
-      ],
-      "chunks": [
-        {"en": "Usually, high density is needed for the phenomenon of crowding,", "ko": "보통, 혼잡함이라는 현상에는 높은 [[밀도]]가 필요하며,"},
-        {"en": "[[which makes people experience sensory overload,]]", "ko": "[[그것은 사람들이 감각 과부하를 경험하게 만들며,]]"},
-        {"en": "a lack of control, and rising stress and anxiety.", "ko": "[[통제력]] 상실, 그리고 커지는 스트레스와 불안을"}
-      ],
-      "misreads": [
-        {"statement": "낮은 밀도에서도 혼잡이라는 현상은 쉽게 나타난다.", "verdict": "X", "trap_type": "인과조건", "anchor": "high density is needed for the phenomenon of crowding", "why": "혼잡 현상에는 보통 '높은' 밀도가 필요하다고 했으므로 낮은 밀도라는 조건은 틀린다."}
-      ],
-      "mistips": ["which의 선행사는 단수 the phenomenon of crowding이므로 동사가 makes; make people experience는 '사역동사+목적어+원형' 구조이다."]
+     "chip": "이 문장에선",
+     "text": "even worse는 '훨씬 더 나쁜'이라는 뜻으로 worse(bad의 비교급)를 강조한다."
     },
     {
-      "id": 3,
-      "english": "However, some psychologists see crowding as neutral rather than invariably negative, and believe that people's moods and behaviors intensify as density increases.",
-      "grammar": [
-        {"tag": "see A as B(5형식류)", "note": "'A를 B로 여기다'로 as 뒤가 목적격 보어", "spans": ["as"]},
-        {"tag": "상관어구 rather than", "note": "'~라기보다'로 neutral과 negative를 대비", "spans": ["rather than"]},
-        {"tag": "명사절 접속사 that", "note": "believe의 목적어가 되는 명사절을 이끎", "spans": ["that"]},
-        {"tag": "부사절 접속사 as(비례)", "note": "'~함에 따라'로 밀도 증가와 기분·행동 심화를 연결", "spans": ["as"]}
-      ],
-      "vocab": [
-        {"word": "neutral", "meaning": "중립적인"},
-        {"word": "invariably", "meaning": "변함없이, 언제나"},
-        {"word": "intensify", "meaning": "심해지다, 강해지다"},
-        {"word": "mood", "meaning": "기분"}
-      ],
-      "chunks": [
-        {"en": "However, some psychologists see crowding as neutral", "ko": "그러나, 일부 심리학자들은 혼잡함을 [[중립적]]인 것으로 본다"},
-        {"en": "rather than invariably negative, and believe", "ko": "[[변함없이]] 부정적이라기보다는, 그리고 믿는다"},
-        {"en": "[[that people's moods and behaviors intensify as density increases.]]", "ko": "[[밀도가 증가함에 따라 사람들의 기분과 행동이 심화된다고]]"}
-      ],
-      "misreads": [
-        {"statement": "이 글은 혼잡함이 언제나 부정적인 경험이라고 결론짓는다.", "verdict": "X", "trap_type": "필자관점", "anchor": "some psychologists see crowding as neutral rather than invariably negative", "why": "일부 학자는 혼잡을 '언제나 부정적'이 아니라 중립적으로 본다고 소개하므로 단정은 틀린다."}
-      ],
-      "mistips": []
+     "chip": "very는 안 돼요",
+     "text": "very는 원급을 강조하므로 비교급 worse에는 쓸 수 없고 even/much 등을 써야 한다."
     },
     {
-      "id": 4,
-      "english": "So if an individual is looking forward to a concert, say, the feeling of crowding enhances their enjoyment of the performance.",
-      "grammar": [
-        {"tag": "부사절 접속사 if(조건)", "note": "'만약 ~라면'으로 조건을 나타내는 부사절", "spans": ["if"]},
-        {"tag": "현재진행형", "note": "look forward to의 진행형으로 지금 고대하고 있는 상태", "spans": ["is looking"]},
-        {"tag": "수일치(단수주어 feeling ↔ enhances)", "note": "주어의 핵심어가 단수 the feeling이므로 동사는 enhances", "spans": ["enhances"]}
-      ],
-      "vocab": [
-        {"word": "look forward to", "meaning": "~을 고대하다, 기대하다"},
-        {"word": "enhance", "meaning": "높이다, 향상시키다"},
-        {"word": "enjoyment", "meaning": "즐거움"}
-      ],
-      "chunks": [
-        {"en": "[[So if an individual is looking forward to a concert,]]", "ko": "[[그래서 만약 어떤 사람이 콘서트를 고대하고 있다면,]]"},
-        {"en": "say, the feeling of crowding enhances", "ko": "말하자면, 혼잡함의 느낌은 [[높인다]]"},
-        {"en": "their enjoyment of the performance.", "ko": "공연에 대한 그들의 [[즐거움]]을"}
-      ],
-      "misreads": [
-        {"statement": "콘서트를 기대하는 사람에게 혼잡함이 즐거움을 높여 주므로, 혼잡함은 그 자체로 늘 즐거운 것이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "the feeling of crowding enhances their enjoyment", "why": "혼잡이 즐거움을 높이는 것은 '기대할 때'라는 조건에서지 혼잡 자체가 늘 즐거운 것은 아니다."}
-      ],
-      "mistips": ["문장의 주어는 the feeling(단수)이므로 동사가 enhances; if절이 조건, 주절이 결과이다."]
+     "chip": "worse의 정체",
+     "text": "worse는 bad/badly의 비교급으로 '더 나쁜/나쁘게'라는 뜻이다."
     },
     {
-      "id": 5,
-      "english": "But if they are dreading an event, crowding will make the person's experience of it even worse.",
-      "grammar": [
-        {"tag": "부사절 접속사 if(조건)", "note": "'만약 ~라면'으로 조건을 나타내는 부사절", "spans": ["if"]},
-        {"tag": "현재진행형", "note": "지금 그 행사를 두려워하고 있는 상태를 나타냄", "spans": ["are dreading"]},
-        {"tag": "사역동사 make+목적어+형용사보어", "note": "'경험을 ~한 상태로 만들다'로 worse가 목적격 보어", "spans": ["make"]},
-        {"tag": "비교급 강조 even", "note": "부사 even이 비교급 worse를 강조해 '훨씬 더 나쁜'", "spans": ["even"]}
-      ],
-      "vocab": [
-        {"word": "dread", "meaning": "몹시 두려워하다, 걱정하다"},
-        {"word": "even worse", "meaning": "훨씬 더 나쁜"},
-        {"word": "make A worse", "meaning": "A를 더 나쁘게 만들다"}
-      ],
-      "chunks": [
-        {"en": "[[But if they are dreading an event,]]", "ko": "[[그러나 만약 그들이 어떤 행사를 두려워하고 있다면,]]"},
-        {"en": "crowding will make the person's experience", "ko": "혼잡함은 그 사람의 [[경험]]을 만들 것이다"},
-        {"en": "of it even worse.", "ko": "그것에 대해 [[훨씬]] 더 나쁘게"}
-      ],
-      "misreads": [
-        {"statement": "행사를 두려워하는 사람에게도 혼잡함은 그 경험을 오히려 더 좋게 만든다.", "verdict": "X", "trap_type": "주체대상", "anchor": "crowding will make the person's experience of it even worse", "why": "행사를 두려워할 때 혼잡은 경험을 '더 나쁘게' 만든다고 했으므로 정반대이다.", "killer": true},
-        {"statement": "여기서 of it의 it은 혼잡함(crowding)을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "the person's experience of it", "why": "it은 앞의 an event(행사)를 가리키며 crowding을 가리키는 것이 아니다."}
-      ],
-      "mistips": ["make+목적어+형용사(worse)의 5형식이며, even은 비교급 worse를 강조하는 부사(much/far도 가능)이다."]
-    },
-    {
-      "id": 6,
-      "english": "Put into a community setting, crowding may accentuate the dominant behavior ― an aggressive group may turn violent as density rises.",
-      "grammar": [
-        {"tag": "과거분사 분사구문(수동)", "note": "Being이 생략된 수동 분사구문으로 '~에 놓이면'의 뜻", "spans": ["Put"]},
-        {"tag": "조동사 may(추측·가능)", "note": "'~할 수도 있다'는 가능성을 나타냄", "spans": ["may"]},
-        {"tag": "불완전자동사 turn+형용사", "note": "'~한 상태로 변하다'로 violent가 주격 보어", "spans": ["turn"]},
-        {"tag": "부사절 접속사 as(비례)", "note": "'~함에 따라'로 밀도 상승과 폭력화를 연결", "spans": ["as"]}
-      ],
-      "vocab": [
-        {"word": "accentuate", "meaning": "두드러지게 하다, 강조하다"},
-        {"word": "dominant", "meaning": "지배적인, 우세한"},
-        {"word": "aggressive", "meaning": "공격적인"},
-        {"word": "turn violent", "meaning": "폭력적으로 변하다"}
-      ],
-      "chunks": [
-        {"en": "Put into a community setting, crowding may accentuate", "ko": "공동체 환경에 놓이면, 혼잡함은 [[두드러지게]] 할 수 있다"},
-        {"en": "the dominant behavior ― an aggressive group", "ko": "[[지배적인]] 행동을 ― 공격적인 집단은"},
-        {"en": "may turn violent as density rises.", "ko": "밀도가 높아짐에 따라 [[폭력적으로]] 변할 수 있다"}
-      ],
-      "misreads": [
-        {"statement": "밀도가 높아지면 긍정적인 집단이 폭력적으로 변한다고 설명한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "an aggressive group may turn violent as density rises", "why": "폭력적으로 변하는 것은 긍정적 집단이 아니라 '공격적(aggressive)' 집단이라고 했으므로 수식이 틀린다."}
-      ],
-      "mistips": ["Put into ~는 Being이 생략된 수동 분사구문이고, turn violent는 'turn+형용사'의 2형식이다."]
-    },
-    {
-      "id": 7,
-      "english": "Conversely, creating positive social spaces such as parks and pedestrian areas in high-density urban environments may help to lift the general mood and defuse tension.",
-      "grammar": [
-        {"tag": "동명사구 주어", "note": "creating ~ environments가 단수 취급 주어이므로 동사는 may help", "spans": ["creating"]},
-        {"tag": "to부정사(help의 목적어)", "note": "help (to) V 구조로 to lift가 이어짐", "spans": ["to lift"]}
-      ],
-      "vocab": [
-        {"word": "conversely", "meaning": "반대로, 역으로"},
-        {"word": "pedestrian", "meaning": "보행자의"},
-        {"word": "defuse", "meaning": "(긴장을) 완화하다, 진정시키다"},
-        {"word": "tension", "meaning": "긴장"}
-      ],
-      "chunks": [
-        {"en": "Conversely, creating positive social spaces such as parks", "ko": "반대로, 공원과 같은 긍정적인 사회적 [[공간]]을 만드는 것은"},
-        {"en": "and pedestrian areas in high-density urban environments may help", "ko": "그리고 고밀도 도시 환경의 [[보행자]] 구역은 도움이 될 수 있다"},
-        {"en": "[[to lift the general mood and defuse tension.]]", "ko": "[[전반적인 기분을 끌어올리고 긴장을 완화하는 데]]"}
-      ],
-      "misreads": [
-        {"statement": "공원이나 보행자 구역 같은 긍정적 공간은 전반적 기분을 높이고 긴장을 완화하는 데 도움이 될 수 있다.", "verdict": "O"},
-        {"statement": "고밀도 도시에서 공원을 늘리면 범죄율이 직접적으로 감소한다고 밝힌다.", "verdict": "X", "trap_type": "무관정보", "anchor": "may help to lift the general mood and defuse tension", "why": "지문은 기분 향상과 긴장 완화만 언급했고 범죄율 감소는 언급된 바가 없다."}
-      ],
-      "mistips": ["creating ~ environments가 동명사구 주어로 단수 취급되어 may help; help는 (to)부정사를 목적어로 취한다."]
+     "chip": "문장 구조",
+     "text": "make the person's experience even worse = '경험을 훨씬 더 나쁘게 만들다'(make+목적어+형용사보어)."
     }
+   ],
+   "example_analysis": "부사 even이 비교급 형용사 worse를 강조해 '훨씬 더 나쁜'이 되고, 이 worse는 make의 목적격 보어이다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "But [[1|if]] they [[2|are dreading]] an event, crowding will [[3|make]] the person's experience of it [[4|very]] [[5|worse]].",
+     "answer": "④",
+     "fix": "비교급 worse를 강조할 때는 very를 쓸 수 없고 even(또는 much, far)을 써야 한다. 원문은 even worse이다.",
+     "options": [
+      "① if",
+      "② are dreading",
+      "③ make",
+      "④ very",
+      "⑤ worse"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "But if they are dreading an event, crowding will make the person's experience of it [[even/very]] [[worse/worst]].",
+     "answer": "even / worse",
+     "fix": "비교급을 강조하는 부사는 even(very 불가)이고, 둘을 비교하는 문맥이므로 최상급 worst가 아니라 비교급 worse가 맞다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "Usually, high density is needed for the phenomenon of crowding, which make people experience sensory overload, a lack of control, and rising stress and anxiety.",
+     "answer": "Usually, high density is needed for the phenomenon of crowding, which make people experience sensory overload, a lack of control, and rising stress and anxiety.",
+     "fix": "관계대명사 which의 선행사가 단수 the phenomenon of crowding이므로 동사는 make가 아니라 makes가 되어야 한다.",
+     "options": [
+      "Conversely, creating positive social spaces such as parks and pedestrian areas in high-density urban environments may help to lift the general mood and defuse tension.",
+      "So if an individual is looking forward to a concert, say, the feeling of crowding enhances their enjoyment of the performance.",
+      "Put into a community setting, crowding may accentuate the dominant behavior ― an aggressive group may turn violent as density rises.",
+      "Usually, high density is needed for the phenomenon of crowding, which make people experience sensory overload, a lack of control, and rising stress and anxiety.",
+      "But if they are dreading an event, crowding will make the person's experience of it even worse."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그 소음은 상황을 훨씬 더 나쁘게 만들었다. (비교급 강조를 활용하여)",
+     "answer": "The noise made the situation even worse.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "The noise",
+      "made",
+      "the situation",
+      "even",
+      "worse"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "그러나 만약 그들이 어떤 행사를 두려워하고 있다면, 혼잡함은 그것에 대한 그 사람의 경험을 훨씬 더 나쁘게 만들 것이다.",
+     "answer": "But if they are dreading an event, crowding will make the person's experience of it even worse.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "But",
+      "if they are dreading an event,",
+      "crowding",
+      "will make",
+      "the person's experience of it",
+      "even worse."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "혼잡의 부정적 결과",
+    "expressions": [
+     "sensory overload",
+     "a lack of control",
+     "rising stress and anxiety"
+    ],
+    "variation": "높은 밀도가 부를 수 있는 심리적 부담들"
+   },
+   {
+    "label": "기분이 혼잡 경험을 좌우함",
+    "expressions": [
+     "people's moods and behaviors intensify",
+     "enhances their enjoyment",
+     "even worse"
+    ],
+    "variation": "같은 혼잡도 기대하면 즐거움, 두려우면 더 나쁜 경험"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입(개념 구분)",
+    "sentence_range": "1",
+    "summary": "[[밀도]](물리적 측정)와 [[혼잡]](심리적 느낌)의 구분",
+    "easy_example": "같은 지하철 칸이라도 '몇 명'과 '답답한 느낌'은 다른 문제다."
+   },
+   {
+    "stage": "전개(부정적 통념)",
+    "sentence_range": "2",
+    "summary": "높은 밀도의 혼잡은 감각 과부하·통제력 상실·스트레스를 유발",
+    "easy_example": "붐비는 곳에서 정신이 없고 짜증이 나는 상태."
+   },
+   {
+    "stage": "전환(중립적 관점)",
+    "sentence_range": "3",
+    "summary": "일부 학자는 혼잡을 중립적으로 보고, 기분·행동이 밀도에 따라 증폭된다고 봄",
+    "easy_example": "붐빔이 기분을 '더 세게' 만들어 주는 증폭기 같은 역할."
+   },
+   {
+    "stage": "사례 대조",
+    "sentence_range": "4~5",
+    "summary": "기대하면 즐거움이 커지고, 두려우면 경험이 더 나빠짐",
+    "easy_example": "좋아하는 공연은 만원이라 더 신나고, 싫은 행사는 붐벼서 더 괴롭다."
+   },
+   {
+    "stage": "확장·결론",
+    "sentence_range": "6~7",
+    "summary": "혼잡은 지배적 행동을 증폭하지만, 긍정적 공간은 기분을 높이고 긴장을 완화",
+    "easy_example": "공원·보행로 같은 좋은 공간이 붐빔의 긴장을 풀어 준다."
+   }
   ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Environmental psychologists make a distinction between the physical measurement of density (how many people are in a particular space) and crowding (the psychological feeling of not having enough space).",
+   "grammar": [
+    {
+     "tag": "상관어구 between A and B",
+     "note": "density와 crowding 두 대상을 대등하게 짝지어 구별함",
+     "spans": [
+      "between",
+      "and"
+     ]
+    },
+    {
+     "tag": "간접의문문(명사절)",
+     "note": "'얼마나 많은 사람이 있는가'가 명사절로 앞의 measurement를 부연",
+     "spans": [
+      "how"
+     ]
+    },
+    {
+     "tag": "동명사(전치사 of의 목적어)",
+     "note": "of 뒤에 동명사 having이 오고 not이 이를 부정함",
+     "spans": [
+      "having"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "make a distinction between",
+     "meaning": "~을 구별하다"
+    },
+    {
+     "word": "density",
+     "meaning": "밀도"
+    },
+    {
+     "word": "crowding",
+     "meaning": "혼잡(함)"
+    },
+    {
+     "word": "psychological",
+     "meaning": "심리적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Environmental psychologists make a distinction between",
+     "ko": "환경 [[심리학자들]]은 ~을 [[구별한다]]"
+    },
+    {
+     "en": "the physical measurement of density",
+     "ko": "밀도의 물리적 [[측정]]"
+    },
+    {
+     "en": "[[(how many people are in a particular space)]]",
+     "ko": "[[(특정 공간에 얼마나 많은 사람이 있는가)]]"
+    },
+    {
+     "en": "and crowding (the psychological feeling of",
+     "ko": "그리고 [[혼잡함]](심리적 느낌"
+    },
+    {
+     "en": "not having enough space).",
+     "ko": "충분한 [[공간]]이 없다는)"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "환경 심리학자들은 밀도(물리적 측정)와 혼잡(심리적 느낌)을 구분한다.",
+     "verdict": "O"
+    },
+    {
+     "statement": "Environmental psychologists distinguish density from crowding.",
+     "verdict": "O",
+     "english": "Environmental psychologists distinguish density from crowding."
+    }
+   ],
+   "mistips": [
+    "괄호 안의 how ~ space는 measurement를, 두 번째 괄호는 crowding을 각각 부연 설명한다."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "Usually, high density is needed for the phenomenon of crowding, which makes people experience sensory overload, a lack of control, and rising stress and anxiety.",
+   "grammar": [
+    {
+     "tag": "수동태",
+     "note": "밀도가 '요구되는' 대상이므로 be+p.p.",
+     "spans": [
+      "is needed"
+     ]
+    },
+    {
+     "tag": "계속적 용법 관계대명사 which",
+     "note": "앞 절 전체/crowding을 부연 설명(콤마 뒤 which)",
+     "spans": [
+      "which"
+     ]
+    },
+    {
+     "tag": "사역동사 make+목적어+원형",
+     "note": "'사람들이 ~을 경험하게 만들다'로 목적격 보어에 동사원형",
+     "spans": [
+      "experience"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "phenomenon",
+     "meaning": "현상"
+    },
+    {
+     "word": "sensory overload",
+     "meaning": "감각 과부하"
+    },
+    {
+     "word": "a lack of control",
+     "meaning": "통제력의 결여"
+    },
+    {
+     "word": "anxiety",
+     "meaning": "불안"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Usually, high density is needed for the phenomenon of crowding,",
+     "ko": "보통, 혼잡함이라는 현상에는 높은 [[밀도]]가 [[필요하며,]]"
+    },
+    {
+     "en": "[[which makes people experience sensory overload,]]",
+     "ko": "[[그것은 사람들이 감각 과부하를 경험하게 만들며,]]"
+    },
+    {
+     "en": "a lack of control, and rising stress and anxiety.",
+     "ko": "[[통제력]] 상실, 그리고 커지는 스트레스와 불안을"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "낮은 밀도에서도 혼잡이라는 현상은 쉽게 나타난다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "high density is needed for the phenomenon of crowding",
+     "why": "혼잡 현상에는 보통 '높은' 밀도가 필요하다고 했으므로 낮은 밀도라는 조건은 틀린다."
+    }
+   ],
+   "mistips": [
+    "which의 선행사는 단수 the phenomenon of crowding이므로 동사가 makes; make people experience는 '사역동사+목적어+원형' 구조이다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "However, some psychologists see crowding as neutral rather than invariably negative, and believe that people's moods and behaviors intensify as density increases.",
+   "grammar": [
+    {
+     "tag": "see A as B(5형식류)",
+     "note": "'A를 B로 여기다'로 as 뒤가 목적격 보어",
+     "spans": [
+      "as"
+     ]
+    },
+    {
+     "tag": "상관어구 rather than",
+     "note": "'~라기보다'로 neutral과 negative를 대비",
+     "spans": [
+      "rather than"
+     ]
+    },
+    {
+     "tag": "명사절 접속사 that",
+     "note": "believe의 목적어가 되는 명사절을 이끎",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "부사절 접속사 as(비례)",
+     "note": "'~함에 따라'로 밀도 증가와 기분·행동 심화를 연결",
+     "spans": [
+      "as"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "neutral",
+     "meaning": "중립적인"
+    },
+    {
+     "word": "invariably",
+     "meaning": "변함없이, 언제나"
+    },
+    {
+     "word": "intensify",
+     "meaning": "심해지다, 강해지다"
+    },
+    {
+     "word": "mood",
+     "meaning": "기분"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "However, some psychologists see crowding as neutral",
+     "ko": "그러나, 일부 [[심리학자들]]은 혼잡함을 [[중립적]]인 것으로 본다"
+    },
+    {
+     "en": "rather than invariably negative, and believe",
+     "ko": "[[변함없이]] 부정적이라기보다는, 그리고 믿는다"
+    },
+    {
+     "en": "[[that people's moods and behaviors intensify as density increases.]]",
+     "ko": "[[밀도가 증가함에 따라 사람들의 기분과 행동이 심화된다고]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 글은 혼잡함이 언제나 부정적인 경험이라고 결론짓는다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "some psychologists see crowding as neutral rather than invariably negative",
+     "why": "일부 학자는 혼잡을 '언제나 부정적'이 아니라 중립적으로 본다고 소개하므로 단정은 틀린다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "So if an individual is looking forward to a concert, say, the feeling of crowding enhances their enjoyment of the performance.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사 if(조건)",
+     "note": "'만약 ~라면'으로 조건을 나타내는 부사절",
+     "spans": [
+      "if"
+     ]
+    },
+    {
+     "tag": "현재진행형",
+     "note": "look forward to의 진행형으로 지금 고대하고 있는 상태",
+     "spans": [
+      "is looking"
+     ]
+    },
+    {
+     "tag": "수일치(단수주어 feeling ↔ enhances)",
+     "note": "주어의 핵심어가 단수 the feeling이므로 동사는 enhances",
+     "spans": [
+      "enhances"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "look forward to",
+     "meaning": "~을 고대하다, 기대하다"
+    },
+    {
+     "word": "enhance",
+     "meaning": "높이다, 향상시키다"
+    },
+    {
+     "word": "enjoyment",
+     "meaning": "즐거움"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[So if an individual is looking forward to a concert,]]",
+     "ko": "[[그래서 만약 어떤 사람이 콘서트를 고대하고 있다면,]]"
+    },
+    {
+     "en": "say, the feeling of crowding enhances",
+     "ko": "말하자면, 혼잡함의 느낌은 [[높인다]]"
+    },
+    {
+     "en": "their enjoyment of the performance.",
+     "ko": "공연에 대한 그들의 [[즐거움]]을"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "콘서트를 기대하는 사람에게 혼잡함이 즐거움을 높여 주므로, 혼잡함은 그 자체로 늘 즐거운 것이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "the feeling of crowding enhances their enjoyment",
+     "why": "혼잡이 즐거움을 높이는 것은 '기대할 때'라는 조건에서지 혼잡 자체가 늘 즐거운 것은 아니다."
+    }
+   ],
+   "mistips": [
+    "문장의 주어는 the feeling(단수)이므로 동사가 enhances; if절이 조건, 주절이 결과이다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "But if they are dreading an event, crowding will make the person's experience of it even worse.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사 if(조건)",
+     "note": "'만약 ~라면'으로 조건을 나타내는 부사절",
+     "spans": [
+      "if"
+     ]
+    },
+    {
+     "tag": "현재진행형",
+     "note": "지금 그 행사를 두려워하고 있는 상태를 나타냄",
+     "spans": [
+      "are dreading"
+     ]
+    },
+    {
+     "tag": "사역동사 make+목적어+형용사보어",
+     "note": "'경험을 ~한 상태로 만들다'로 worse가 목적격 보어",
+     "spans": [
+      "make"
+     ]
+    },
+    {
+     "tag": "비교급 강조 even",
+     "note": "부사 even이 비교급 worse를 강조해 '훨씬 더 나쁜'",
+     "spans": [
+      "even"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "dread",
+     "meaning": "몹시 두려워하다, 걱정하다"
+    },
+    {
+     "word": "even worse",
+     "meaning": "훨씬 더 나쁜"
+    },
+    {
+     "word": "make A worse",
+     "meaning": "A를 더 나쁘게 만들다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[But if they are dreading an event,]]",
+     "ko": "[[그러나 만약 그들이 어떤 행사를 두려워하고 있다면,]]"
+    },
+    {
+     "en": "crowding will make the person's experience",
+     "ko": "혼잡함은 그 사람의 [[경험]]을 만들 [[것이다]]"
+    },
+    {
+     "en": "of it even worse.",
+     "ko": "그것에 대해 [[훨씬]] 더 나쁘게"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "행사를 두려워하는 사람에게도 혼잡함은 그 경험을 오히려 더 좋게 만든다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "crowding will make the person's experience of it even worse",
+     "why": "행사를 두려워할 때 혼잡은 경험을 '더 나쁘게' 만든다고 했으므로 정반대이다.",
+     "killer": true
+    },
+    {
+     "statement": "여기서 of it의 it은 혼잡함(crowding)을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "the person's experience of it",
+     "why": "it은 앞의 an event(행사)를 가리키며 crowding을 가리키는 것이 아니다."
+    }
+   ],
+   "mistips": [
+    "make+목적어+형용사(worse)의 5형식이며, even은 비교급 worse를 강조하는 부사(much/far도 가능)이다."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Put into a community setting, crowding may accentuate the dominant behavior ― an aggressive group may turn violent as density rises.",
+   "grammar": [
+    {
+     "tag": "과거분사 분사구문(수동)",
+     "note": "Being이 생략된 수동 분사구문으로 '~에 놓이면'의 뜻",
+     "spans": [
+      "Put"
+     ]
+    },
+    {
+     "tag": "조동사 may(추측·가능)",
+     "note": "'~할 수도 있다'는 가능성을 나타냄",
+     "spans": [
+      "may"
+     ]
+    },
+    {
+     "tag": "불완전자동사 turn+형용사",
+     "note": "'~한 상태로 변하다'로 violent가 주격 보어",
+     "spans": [
+      "turn"
+     ]
+    },
+    {
+     "tag": "부사절 접속사 as(비례)",
+     "note": "'~함에 따라'로 밀도 상승과 폭력화를 연결",
+     "spans": [
+      "as"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "accentuate",
+     "meaning": "두드러지게 하다, 강조하다"
+    },
+    {
+     "word": "dominant",
+     "meaning": "지배적인, 우세한"
+    },
+    {
+     "word": "aggressive",
+     "meaning": "공격적인"
+    },
+    {
+     "word": "turn violent",
+     "meaning": "폭력적으로 변하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Put into a community setting, crowding may accentuate",
+     "ko": "공동체 환경에 놓이면, [[혼잡함]]은 [[두드러지게]] 할 수 있다"
+    },
+    {
+     "en": "the dominant behavior ― an aggressive group",
+     "ko": "[[지배적인]] 행동을 ― 공격적인 집단은"
+    },
+    {
+     "en": "may turn violent as density rises.",
+     "ko": "밀도가 높아짐에 따라 [[폭력적으로]] 변할 수 있다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "밀도가 높아지면 긍정적인 집단이 폭력적으로 변한다고 설명한다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "an aggressive group may turn violent as density rises",
+     "why": "폭력적으로 변하는 것은 긍정적 집단이 아니라 '공격적(aggressive)' 집단이라고 했으므로 수식이 틀린다."
+    }
+   ],
+   "mistips": [
+    "Put into ~는 Being이 생략된 수동 분사구문이고, turn violent는 'turn+형용사'의 2형식이다."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Conversely, creating positive social spaces such as parks and pedestrian areas in high-density urban environments may help to lift the general mood and defuse tension.",
+   "grammar": [
+    {
+     "tag": "동명사구 주어",
+     "note": "creating ~ environments가 단수 취급 주어이므로 동사는 may help",
+     "spans": [
+      "creating"
+     ]
+    },
+    {
+     "tag": "to부정사(help의 목적어)",
+     "note": "help (to) V 구조로 to lift가 이어짐",
+     "spans": [
+      "to lift"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "conversely",
+     "meaning": "반대로, 역으로"
+    },
+    {
+     "word": "pedestrian",
+     "meaning": "보행자의"
+    },
+    {
+     "word": "defuse",
+     "meaning": "(긴장을) 완화하다, 진정시키다"
+    },
+    {
+     "word": "tension",
+     "meaning": "긴장"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Conversely, creating positive social spaces such as parks",
+     "ko": "반대로, 공원과 같은 긍정적인 사회적 [[공간]]을 만드는 것은"
+    },
+    {
+     "en": "and pedestrian areas in high-density urban environments may help",
+     "ko": "그리고 고밀도 도시 환경의 [[보행자]] 구역은 도움이 될 수 [[있다]]"
+    },
+    {
+     "en": "[[to lift the general mood and defuse tension.]]",
+     "ko": "[[전반적인 기분을 끌어올리고 긴장을 완화하는 데]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "공원이나 보행자 구역 같은 긍정적 공간은 전반적 기분을 높이고 긴장을 완화하는 데 도움이 될 수 있다.",
+     "verdict": "O"
+    },
+    {
+     "statement": "고밀도 도시에서 공원을 늘리면 범죄율이 직접적으로 감소한다고 밝힌다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "may help to lift the general mood and defuse tension",
+     "why": "지문은 기분 향상과 긴장 완화만 언급했고 범죄율 감소는 언급된 바가 없다."
+    }
+   ],
+   "mistips": [
+    "creating ~ environments가 동명사구 주어로 단수 취급되어 may help; help는 (to)부정사를 목적어로 취한다."
+   ]
+  }
+ ]
 }

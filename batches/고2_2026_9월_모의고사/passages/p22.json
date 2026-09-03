@@ -294,7 +294,7 @@
    "chunks": [
     {
      "en": "If we do it while we are eating,",
-     "ko": "만약 우리가 [[먹는]] 동안 그것을 한다면,"
+     "ko": "만약 우리가 [[먹는]] 동안 그것을 [[한다면,]]"
     },
     {
      "en": "our multi-tasking is overloading us.",
@@ -371,7 +371,7 @@
    "chunks": [
     {
      "en": "As our will attempts to digest the virtual content",
-     "ko": "우리의 [[의지]]가 가상의 콘텐츠를 소화하려 시도할 때"
+     "ko": "우리의 [[의지]]가 가상의 콘텐츠를 [[소화하려]] 시도할 때"
     },
     {
      "en": "its forces are diverted from the physical content,",
@@ -433,7 +433,7 @@
     },
     {
      "en": "in a minute while talking on the phone.",
-     "ko": "전화 통화를 하면서 [[1분]] 만에."
+     "ko": "전화 통화를 [[하면서]] [[1분]] 만에."
     }
    ],
    "misreads": [
@@ -476,7 +476,7 @@
    "chunks": [
     {
      "en": "Some people are skilled at doing both",
-     "ko": "어떤 사람들은 [[둘 다]]를 하는 데 능숙하다"
+     "ko": "어떤 사람들은 [[둘 다]]를 하는 데 [[능숙하다]]"
     },
     {
      "en": "at the same time.",
@@ -531,7 +531,7 @@
    "chunks": [
     {
      "en": "Others write a half-hearted, shorthand text",
-     "ko": "다른 사람들은 [[성의 없고]] 약식인 문자를 쓴다"
+     "ko": "다른 사람들은 [[성의 없고]] [[약식인]] 문자를 쓴다"
     },
     {
      "en": "while they hurriedly eat their sandwich",
@@ -601,7 +601,7 @@
    "chunks": [
     {
      "en": "The result can be a misunderstood text",
-     "ko": "그 결과는 [[오해받은]] 문자일 수 있다"
+     "ko": "그 결과는 [[오해받은]] [[문자일]] 수 있다"
     },
     {
      "en": "with the need for further clarifying texts",

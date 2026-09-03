@@ -1,279 +1,711 @@
 {
-  "item_no": "37",
-  "theme": "양식 연어 육종 — 빠르게 만들어진 새로운 품종",
-  "overview": {
-    "theme_ko": "양식 대서양 연어의 선택적 교배와 빠른 품종화",
-    "topic": "🔎 원래 40개 강의 연어를 교배·재교배해 빠르게 자라는 새 양식 품종을 만든 과정",
-    "stance": "중립적",
-    "stance_reason": "육종 과정을 사실 위주로 기술함(took place, the first salmon farmers realized)",
-    "structure": "시간·순서(나열)",
-    "structure_reason": "초기 선택→강별 적응 차이→교배로 빠른 성장 확인→새 품종의 빠른 형성 순으로 전개",
-    "key_grammar": {
-      "point": "전치사+관계대명사 (to which)",
-      "source_sentence": "Every salmon river has its own unique set of challenges to which fish must adapt.",
-      "explanation": [
-        {"chip": "쉽게 말하면", "text": "관계절 안의 'fish must adapt to (the challenges)'에서 to가 관계대명사 which 앞으로 통째로 옮겨간 형태예요."},
-        {"chip": "왜 to가 붙나", "text": "동사 adapt는 전치사 to와 짝을 이루므로(adapt to ~), 그 to가 관계사와 함께 앞으로 나옵니다."},
-        {"chip": "구분법", "text": "선행사(challenges)가 관계절 안에서 전치사의 목적어이면 '전치사+관계대명사' 형태가 됩니다."},
-        {"chip": "바꿔 쓰면", "text": "to which fish must adapt = which fish must adapt to = that fish must adapt to (구어)."},
-        {"chip": "주의", "text": "전치사 뒤에는 that을 쓸 수 없어요. 'to that'은 틀립니다."}
-      ],
-      "example_analysis": "adapt to의 전치사 to가 관계대명사 which 앞으로 이동해 challenges를 수식한다.",
-      "drills": [
-        {
-          "kind": "밑줄형",
-          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
-          "sentence": "And [[1|because]] salmon, [[2|unlike]] cattle and sheep, [[3|can produce]] many thousands of offspring in the course of their lives, once favorable individuals [[4|was found]], just a few strong males and females [[5|could form]] the basis of a whole new race of highly productive fish.",
-          "answer": "④",
-          "fix": "주어 favorable individuals가 복수이므로 was found → were found(원문)로 고쳐야 한다.",
-          "options": ["① because", "② unlike", "③ can produce", "④ was found", "⑤ could form"],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "네모형",
-          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
-          "sentence": "Every salmon river [[has/have]] its own unique set of challenges [[to which/to that]] fish must adapt.",
-          "answer": "has / to which",
-          "fix": "",
-          "options": [],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "오류찾기",
-          "question": "다음 중 어법상 틀린 문장은?",
-          "sentence": "",
-          "answer": "Others are very far north, with only a short season of warmer temperatures, and require a fish that can maximizes growth, particularly during its younger phase.",
-          "fix": "조동사 can 뒤에는 동사원형이 와야 하므로 maximizes → maximize(원문)로 고쳐야 한다.",
-          "options": [
-            "① The initial selection of farmed Atlantic salmon took place from fish drawn from forty different river systems.",
-            "② Some rivers are very long, like the Yukon, and require animals that can build up massive fat reserves in order to survive the extended journey.",
-            "③ Others are very far north, with only a short season of warmer temperatures, and require a fish that can maximizes growth, particularly during its younger phase.",
-            "④ And because salmon, unlike cattle and sheep, can produce many thousands of offspring in the course of their lives, once favorable individuals were found, just a few strong males and females could form the basis of a whole new race of highly productive fish.",
-            "⑤ A domestic population could be created quickly that would be quite different from the initial wild ancestors."
-          ],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "영작",
-          "question": "모든 생태계는 생물들이 적응해야 하는 자기만의 고유한 조건을 가지고 있다.",
-          "answer": "Every ecosystem has its own unique conditions to which organisms must adapt.",
-          "fix": "",
-          "options": [],
-          "words": ["Every", "ecosystem", "has", "its own", "unique", "conditions", "to which", "organisms", "must", "adapt"],
-          "from_passage": false
-        },
-        {
-          "kind": "영작",
-          "question": "모든 연어 강은 물고기가 적응해야 하는 자기만의 고유한 도전 과제를 지니고 있다.",
-          "answer": "Every salmon river has its own unique set of challenges to which fish must adapt.",
-          "fix": "",
-          "options": [],
-          "words": ["Every", "salmon", "river", "has", "its own", "unique", "set of", "challenges", "to which", "fish", "must", "adapt"],
-          "from_passage": true
-        }
-      ]
-    },
-    "restatement_chains": [
-      {
-        "label": "빠른 성장·높은 생산성",
-        "expressions": ["salmon that grew faster", "highly productive fish"],
-        "variation": "육종의 목표는 결국 '더 빨리 자라고 생산성 높은' 개체를 얻는 것."
-      },
-      {
-        "label": "원래 40개 강",
-        "expressions": ["forty different river systems", "the original forty rivers"],
-        "variation": "출발점은 서로 다른 40개 수계에서 끌어온 물고기 집단이었다."
-      }
-    ],
-    "flow_blocks": [
-      {"stage": "도입", "sentence_range": "1", "summary": "양식 연어의 [[초기 선택]]은 40개 강의 물고기에서 시작", "easy_example": "여러 지역에서 씨앗을 모아 밭에 심는 것처럼."},
-      {"stage": "전개", "sentence_range": "2~4", "summary": "강마다 [[고유한 도전 과제]]가 있어 물고기가 서로 다르게 적응", "easy_example": "긴 강엔 지구력, 추운 강엔 빠른 성장이 필요한 식."},
-      {"stage": "전환", "sentence_range": "5", "summary": "특정 가문을 교배하면 [[더 빨리 자라는]] 연어가 나옴을 발견", "easy_example": "잘 자라는 것끼리 계속 짝지어 더 나은 품종을 만드는 것."},
-      {"stage": "결론", "sentence_range": "6~7", "summary": "많은 새끼 덕에 소수 개체로 [[새 품종]]을 빠르게 형성", "easy_example": "우수한 몇 마리가 순식간에 새 계통의 뿌리가 됨."}
-    ]
-  },
-  "sentences": [
+ "item_no": "37",
+ "theme": "양식 연어 육종 — 빠르게 만들어진 새로운 품종",
+ "overview": {
+  "theme_ko": "양식 대서양 연어의 선택적 교배와 빠른 품종화",
+  "topic": "🔎 원래 40개 강의 연어를 교배·재교배해 빠르게 자라는 새 양식 품종을 만든 과정",
+  "stance": "중립적",
+  "stance_reason": "육종 과정을 사실 위주로 기술함(took place, the first salmon farmers realized)",
+  "structure": "시간·순서(나열)",
+  "structure_reason": "초기 선택→강별 적응 차이→교배로 빠른 성장 확인→새 품종의 빠른 형성 순으로 전개",
+  "key_grammar": {
+   "point": "전치사+관계대명사 (to which)",
+   "source_sentence": "Every salmon river has its own unique set of challenges to which fish must adapt.",
+   "explanation": [
     {
-      "id": 1,
-      "english": "The initial selection of farmed Atlantic salmon took place from fish drawn from forty different river systems.",
-      "grammar": [
-        {"tag": "과거분사 형용사적 용법", "note": "drawn 이하가 fish를 뒤에서 수식(끌어온 물고기)", "spans": ["drawn"]},
-        {"tag": "take place (숙어)", "note": "일어나다·이루어지다", "spans": ["took place"]}
-      ],
-      "vocab": [
-        {"word": "initial", "meaning": "처음의, 초기의"},
-        {"word": "selection", "meaning": "선택, 선발"},
-        {"word": "farmed", "meaning": "양식된"},
-        {"word": "draw (drawn)", "meaning": "끌어오다, 뽑아내다"},
-        {"word": "river system", "meaning": "수계, 강 유역"}
-      ],
-      "chunks": [
-        {"en": "The initial selection of farmed Atlantic salmon", "ko": "양식 대서양 연어의 초기 [[선택]]은"},
-        {"en": "took place from fish", "ko": "물고기로부터 [[이루어졌다]]"},
-        {"en": "drawn from forty different river systems.", "ko": "40개의 서로 다른 수계에서 [[끌어온]]"}
-      ],
-      "misreads": [
-        {"statement": "양식 대서양 연어의 초기 선발은 서로 다른 40개 수계에서 끌어온 물고기들로부터 이루어졌다.", "verdict": "O", "trap_type": "주체대상"}
-      ],
-      "mistips": []
+     "chip": "쉽게 말하면",
+     "text": "관계절 안의 'fish must adapt to (the challenges)'에서 to가 관계대명사 which 앞으로 통째로 옮겨간 형태예요."
     },
     {
-      "id": 2,
-      "english": "Every salmon river has its own unique set of challenges to which fish must adapt.",
-      "grammar": [
-        {"tag": "주어-동사 수일치", "note": "Every+단수명사 river → 단수동사 has", "spans": ["Every", "has"]},
-        {"tag": "전치사+관계대명사", "note": "adapt to의 to가 which 앞으로: challenges를 수식", "spans": ["to which"]}
-      ],
-      "vocab": [
-        {"word": "unique", "meaning": "고유한, 독특한"},
-        {"word": "a set of", "meaning": "일련의 ~"},
-        {"word": "challenge", "meaning": "도전 과제, 난제"},
-        {"word": "adapt", "meaning": "적응하다"}
-      ],
-      "chunks": [
-        {"en": "Every salmon river has its own unique set of challenges", "ko": "모든 연어 강은 고유한 도전 [[과제들]]을 지닌다"},
-        {"en": "[[to which fish must adapt.]]", "ko": "[[물고기가 적응해야 하는]]"}
-      ],
-      "misreads": [
-        {"statement": "모든 연어 강은 물고기가 적응할 필요가 없는, 서로 공통된 도전 과제를 지닌다.", "verdict": "X", "trap_type": "구조수식", "anchor": "its own unique set of challenges to which fish must adapt", "why": "각 강은 고유한 과제를 지니며 물고기는 거기에 적응해야 한다.", "english": "Every salmon river shares the same challenges, so fish need not adapt."}
-      ],
-      "mistips": ["to which = 관계사 앞으로 나온 전치사(adapt to → to which); '적응해야 할 과제'로 해석."]
+     "chip": "왜 to가 붙나",
+     "text": "동사 adapt는 전치사 to와 짝을 이루므로(adapt to ~), 그 to가 관계사와 함께 앞으로 나옵니다."
     },
     {
-      "id": 3,
-      "english": "Some rivers are very long, like the Yukon, and require animals that can build up massive fat reserves in order to survive the extended journey.",
-      "grammar": [
-        {"tag": "관계대명사 주격 that", "note": "animals를 수식하는 주격 관계절", "spans": ["that"]},
-        {"tag": "build up (구동사)", "note": "쌓아 올리다·축적하다", "spans": ["build up"]},
-        {"tag": "to부정사 부사적 용법(목적)", "note": "~하기 위해(in order to)", "spans": ["in order to"]}
-      ],
-      "vocab": [
-        {"word": "massive", "meaning": "거대한, 막대한"},
-        {"word": "fat reserves", "meaning": "지방 비축분"},
-        {"word": "in order to", "meaning": "~하기 위해"},
-        {"word": "extended", "meaning": "길어진, 장기간의"},
-        {"word": "journey", "meaning": "여정, 이동"}
-      ],
-      "chunks": [
-        {"en": "Some rivers are very long, like the Yukon,", "ko": "어떤 강은 [[Yukon]]처럼 매우 길어서,"},
-        {"en": "and require animals that can build up massive fat reserves", "ko": "많은 [[지방]]을 축적할 수 있는 동물을 필요로 한다"},
-        {"en": "in order to survive the extended journey.", "ko": "그 긴 [[여정]]을 살아남기 위해"}
-      ],
-      "misreads": [
-        {"statement": "Yukon처럼 긴 강에 사는 연어가 많은 지방을 축적하는 것은 물이 차갑기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "require animals that can build up massive fat reserves in order to survive the extended journey", "why": "지방 축적은 긴 여정을 살아남기 위한 것이지 수온 때문이 아니다."}
-      ],
-      "mistips": []
+     "chip": "구분법",
+     "text": "선행사(challenges)가 관계절 안에서 전치사의 목적어이면 '전치사+관계대명사' 형태가 됩니다."
     },
     {
-      "id": 4,
-      "english": "Others are very far north, with only a short season of warmer temperatures, and require a fish that can maximize growth, particularly during its younger phase.",
-      "grammar": [
-        {"tag": "부정대명사 Others", "note": "앞의 Some rivers와 대비되는 '다른 강들'", "spans": ["Others"]},
-        {"tag": "비교급", "note": "warm의 비교급 warmer(더 따뜻한)", "spans": ["warmer"]},
-        {"tag": "관계대명사 주격 that", "note": "a fish를 수식하는 주격 관계절", "spans": ["that"]}
-      ],
-      "vocab": [
-        {"word": "far north", "meaning": "북쪽 멀리"},
-        {"word": "temperature", "meaning": "기온, 온도"},
-        {"word": "maximize", "meaning": "극대화하다"},
-        {"word": "growth", "meaning": "성장"},
-        {"word": "phase", "meaning": "시기, 단계"}
-      ],
-      "chunks": [
-        {"en": "Others are very far north,", "ko": "다른 강들은 매우 [[북쪽]]에 있고,"},
-        {"en": "with only a short season of warmer temperatures,", "ko": "[[따뜻한]] 시기가 짧아서,"},
-        {"en": "and require a fish that can maximize growth,", "ko": "[[성장]]을 극대화할 수 있는 물고기를 필요로 한다"},
-        {"en": "particularly during its younger phase.", "ko": "특히 [[어린]] 시기 동안"}
-      ],
-      "misreads": [
-        {"statement": "북쪽 강의 연어는 짧은 온난기 동안 성장을 극대화하며, 이는 관광객 유치에도 기여한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "require a fish that can maximize growth, particularly during its younger phase", "why": "관광객 유치는 지문에 없는 무관한 정보이다."}
-      ],
-      "mistips": []
+     "chip": "바꿔 쓰면",
+     "text": "to which fish must adapt = which fish must adapt to = that fish must adapt to (구어)."
     },
     {
-      "id": 5,
-      "english": "But whatever the manifestation of difference that occurred in different species of salmon, the first salmon farmers realized that crossing and recrossing the specific families from the original forty rivers would result in salmon that grew faster.",
-      "grammar": [
-        {"tag": "복합관계사 whatever(양보 부사절)", "note": "'무엇이 ~하든' 양보의 부사절", "spans": ["whatever"]},
-        {"tag": "명사절 접속사 that", "note": "realized의 목적어절을 이끎", "spans": ["that"]},
-        {"tag": "동명사 주어", "note": "that절 안 주어(crossing and recrossing ~)", "spans": ["crossing", "recrossing"]},
-        {"tag": "result in (숙어)", "note": "~라는 결과를 낳다", "spans": ["result in"]}
-      ],
-      "vocab": [
-        {"word": "manifestation", "meaning": "발현, 나타남"},
-        {"word": "occur", "meaning": "일어나다, 나타나다"},
-        {"word": "species", "meaning": "종(種)"},
-        {"word": "cross / recross", "meaning": "교배하다 / 재교배하다"},
-        {"word": "result in", "meaning": "~를 낳다, 초래하다"}
-      ],
-      "chunks": [
-        {"en": "But whatever the manifestation of difference", "ko": "그러나 차이의 [[발현]]이 무엇이든"},
-        {"en": "that occurred in different species of salmon,", "ko": "서로 다른 연어 [[종]]에서 나타난"},
-        {"en": "the first salmon farmers realized", "ko": "최초의 연어 [[양식업자]]들은 깨달았다"},
-        {"en": "[[that crossing and recrossing the specific families from the original forty rivers]]", "ko": "[[원래 40개 강의 특정 가문들을 교배하고 재교배하는 것이]]"},
-        {"en": "would result in salmon that grew faster.", "ko": "더 [[빠르게]] 자라는 연어를 낳으리라는 것을"}
-      ],
-      "misreads": [
-        {"statement": "특정 가문들을 교배하고 재교배하면 더 느리게 자라는 연어가 나온다는 것을 양식업자들이 알게 되었다.", "verdict": "X", "trap_type": "인과조건", "anchor": "would result in salmon that grew faster", "why": "교배·재교배는 더 빠르게 자라는 연어를 낳는다(느리게가 아님).", "killer": true}
-      ],
-      "mistips": ["whatever ~ = '무엇이 ~하든' 양보 부사절; 주절 주어는 the first salmon farmers."]
-    },
-    {
-      "id": 6,
-      "english": "And because salmon, unlike cattle and sheep, can produce many thousands of offspring in the course of their lives, once favorable individuals were found, just a few strong males and females could form the basis of a whole new race of highly productive fish.",
-      "grammar": [
-        {"tag": "부사절 접속사 because", "note": "이유의 부사절을 이끎", "spans": ["because"]},
-        {"tag": "전치사 unlike(대조 삽입구)", "note": "~와 달리(cattle and sheep와 대조)", "spans": ["unlike"]},
-        {"tag": "부사절 접속사 once", "note": "일단 ~하면(시간·조건)", "spans": ["once"]},
-        {"tag": "수동태", "note": "favorable individuals가 발견됨(were found)", "spans": ["were", "found"]},
-        {"tag": "form the basis of (표현)", "note": "~의 토대를 이루다", "spans": ["form the basis of"]}
-      ],
-      "vocab": [
-        {"word": "cattle", "meaning": "소(가축)"},
-        {"word": "offspring", "meaning": "새끼, 자손"},
-        {"word": "in the course of", "meaning": "~하는 동안, 과정에서"},
-        {"word": "favorable", "meaning": "유리한, 알맞은"},
-        {"word": "race", "meaning": "품종, 계통"}
-      ],
-      "chunks": [
-        {"en": "And because salmon, unlike cattle and sheep,", "ko": "그리고 연어는 [[소]]나 양과 달리,"},
-        {"en": "can produce many thousands of offspring in the course of their lives,", "ko": "평생에 걸쳐 수천 마리의 [[새끼]]를 낳을 수 있기 때문에,"},
-        {"en": "once favorable individuals were found,", "ko": "일단 유리한 [[개체]]가 발견되면,"},
-        {"en": "just a few strong males and females could form the basis of", "ko": "단지 몇 마리의 튼튼한 수컷과 암컷이 [[토대]]를 이룰 수 있었다"},
-        {"en": "a whole new race of highly productive fish.", "ko": "[[생산성]] 높은 물고기의 완전히 새로운 품종의"}
-      ],
-      "misreads": [
-        {"statement": "연어는 소·양과 달리 평생 수천 마리의 새끼를 낳을 수 있어, 유리한 개체 몇 마리만으로도 새로운 품종의 토대를 만들 수 있었다.", "verdict": "O", "trap_type": "인과조건"},
-        {"statement": "여기서 '유리한 개체(favorable individuals)'는 소와 양을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "salmon, unlike cattle and sheep, can produce many thousands of offspring", "why": "유리한 개체는 연어를 가리키며, 소·양은 대조 대상일 뿐이다."}
-      ],
-      "mistips": ["unlike cattle and sheep는 삽입구; 주어는 salmon, 동사는 can produce."]
-    },
-    {
-      "id": 7,
-      "english": "A domestic population could be created quickly that would be quite different from the initial wild ancestors.",
-      "grammar": [
-        {"tag": "조동사+be+과거분사(수동태)", "note": "만들어질 수 있었다(could be created)", "spans": ["be created"]},
-        {"tag": "관계대명사 주격 that", "note": "선행사 A domestic population을 수식(뒤로 분리)", "spans": ["that"]},
-        {"tag": "different from (표현)", "note": "~와 다른", "spans": ["different from"]}
-      ],
-      "vocab": [
-        {"word": "domestic", "meaning": "사육된, 길들여진"},
-        {"word": "population", "meaning": "개체군, 집단"},
-        {"word": "wild", "meaning": "야생의"},
-        {"word": "ancestor", "meaning": "조상, 선조"}
-      ],
-      "chunks": [
-        {"en": "A domestic population could be created quickly", "ko": "[[사육]] 개체군은 빠르게 만들어질 수 있었다"},
-        {"en": "that would be quite different", "ko": "상당히 [[다른]]"},
-        {"en": "from the initial wild ancestors.", "ko": "처음의 야생 [[조상]]과"}
-      ],
-      "misreads": [
-        {"statement": "필자는 야생 조상과 크게 달라진 사육 개체군의 탄생을 인위적 훼손이라고 비판한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "could be created quickly", "why": "필자는 이를 빠르게 만들 수 있다는 중립·긍정적 서술로 다룰 뿐 비판하지 않는다."}
-      ],
-      "mistips": []
+     "chip": "주의",
+     "text": "전치사 뒤에는 that을 쓸 수 없어요. 'to that'은 틀립니다."
     }
+   ],
+   "example_analysis": "adapt to의 전치사 to가 관계대명사 which 앞으로 이동해 challenges를 수식한다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "And [[1|because]] salmon, [[2|unlike]] cattle and sheep, [[3|can produce]] many thousands of offspring in the course of their lives, once favorable individuals [[4|was found]], just a few strong males and females [[5|could form]] the basis of a whole new race of highly productive fish.",
+     "answer": "④",
+     "fix": "주어 favorable individuals가 복수이므로 was found → were found(원문)로 고쳐야 한다.",
+     "options": [
+      "① because",
+      "② unlike",
+      "③ can produce",
+      "④ was found",
+      "⑤ could form"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "Every salmon river [[has/have]] its own unique set of challenges [[to which/to that]] fish must adapt.",
+     "answer": "has / to which",
+     "fix": "",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "answer": "Others are very far north, with only a short season of warmer temperatures, and require a fish that can maximizes growth, particularly during its younger phase.",
+     "fix": "조동사 can 뒤에는 동사원형이 와야 하므로 maximizes → maximize(원문)로 고쳐야 한다.",
+     "options": [
+      "① The initial selection of farmed Atlantic salmon took place from fish drawn from forty different river systems.",
+      "② Some rivers are very long, like the Yukon, and require animals that can build up massive fat reserves in order to survive the extended journey.",
+      "③ Others are very far north, with only a short season of warmer temperatures, and require a fish that can maximizes growth, particularly during its younger phase.",
+      "④ And because salmon, unlike cattle and sheep, can produce many thousands of offspring in the course of their lives, once favorable individuals were found, just a few strong males and females could form the basis of a whole new race of highly productive fish.",
+      "⑤ A domestic population could be created quickly that would be quite different from the initial wild ancestors."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "모든 생태계는 생물들이 적응해야 하는 자기만의 고유한 조건을 가지고 있다.",
+     "answer": "Every ecosystem has its own unique conditions to which organisms must adapt.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Every",
+      "ecosystem",
+      "has",
+      "its own",
+      "unique",
+      "conditions",
+      "to which",
+      "organisms",
+      "must",
+      "adapt"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "모든 연어 강은 물고기가 적응해야 하는 자기만의 고유한 도전 과제를 지니고 있다.",
+     "answer": "Every salmon river has its own unique set of challenges to which fish must adapt.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Every",
+      "salmon",
+      "river",
+      "has",
+      "its own",
+      "unique",
+      "set of",
+      "challenges",
+      "to which",
+      "fish",
+      "must",
+      "adapt"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "빠른 성장·높은 생산성",
+    "expressions": [
+     "salmon that grew faster",
+     "highly productive fish"
+    ],
+    "variation": "육종의 목표는 결국 '더 빨리 자라고 생산성 높은' 개체를 얻는 것."
+   },
+   {
+    "label": "원래 40개 강",
+    "expressions": [
+     "forty different river systems",
+     "the original forty rivers"
+    ],
+    "variation": "출발점은 서로 다른 40개 수계에서 끌어온 물고기 집단이었다."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입",
+    "sentence_range": "1",
+    "summary": "양식 연어의 [[초기 선택]]은 40개 강의 물고기에서 시작",
+    "easy_example": "여러 지역에서 씨앗을 모아 밭에 심는 것처럼."
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "2~4",
+    "summary": "강마다 [[고유한 도전 과제]]가 있어 물고기가 서로 다르게 적응",
+    "easy_example": "긴 강엔 지구력, 추운 강엔 빠른 성장이 필요한 식."
+   },
+   {
+    "stage": "전환",
+    "sentence_range": "5",
+    "summary": "특정 가문을 교배하면 [[더 빨리 자라는]] 연어가 나옴을 발견",
+    "easy_example": "잘 자라는 것끼리 계속 짝지어 더 나은 품종을 만드는 것."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "6~7",
+    "summary": "많은 새끼 덕에 소수 개체로 [[새 품종]]을 빠르게 형성",
+    "easy_example": "우수한 몇 마리가 순식간에 새 계통의 뿌리가 됨."
+   }
   ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "The initial selection of farmed Atlantic salmon took place from fish drawn from forty different river systems.",
+   "grammar": [
+    {
+     "tag": "과거분사 형용사적 용법",
+     "note": "drawn 이하가 fish를 뒤에서 수식(끌어온 물고기)",
+     "spans": [
+      "drawn"
+     ]
+    },
+    {
+     "tag": "take place (숙어)",
+     "note": "일어나다·이루어지다",
+     "spans": [
+      "took place"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "initial",
+     "meaning": "처음의, 초기의"
+    },
+    {
+     "word": "selection",
+     "meaning": "선택, 선발"
+    },
+    {
+     "word": "farmed",
+     "meaning": "양식된"
+    },
+    {
+     "word": "draw (drawn)",
+     "meaning": "끌어오다, 뽑아내다"
+    },
+    {
+     "word": "river system",
+     "meaning": "수계, 강 유역"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The initial selection of farmed Atlantic salmon",
+     "ko": "양식 [[대서양]] 연어의 초기 [[선택]]은"
+    },
+    {
+     "en": "took place from fish",
+     "ko": "물고기로부터 [[이루어졌다]]"
+    },
+    {
+     "en": "drawn from forty different river systems.",
+     "ko": "40개의 서로 다른 수계에서 [[끌어온]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "양식 대서양 연어의 초기 선발은 서로 다른 40개 수계에서 끌어온 물고기들로부터 이루어졌다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "Every salmon river has its own unique set of challenges to which fish must adapt.",
+   "grammar": [
+    {
+     "tag": "주어-동사 수일치",
+     "note": "Every+단수명사 river → 단수동사 has",
+     "spans": [
+      "Every",
+      "has"
+     ]
+    },
+    {
+     "tag": "전치사+관계대명사",
+     "note": "adapt to의 to가 which 앞으로: challenges를 수식",
+     "spans": [
+      "to which"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "unique",
+     "meaning": "고유한, 독특한"
+    },
+    {
+     "word": "a set of",
+     "meaning": "일련의 ~"
+    },
+    {
+     "word": "challenge",
+     "meaning": "도전 과제, 난제"
+    },
+    {
+     "word": "adapt",
+     "meaning": "적응하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Every salmon river has its own unique set of challenges",
+     "ko": "모든 연어 강은 고유한 도전 [[과제들]]을 [[지닌다]]"
+    },
+    {
+     "en": "[[to which fish must adapt.]]",
+     "ko": "[[물고기가 적응해야 하는]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "모든 연어 강은 물고기가 적응할 필요가 없는, 서로 공통된 도전 과제를 지닌다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "its own unique set of challenges to which fish must adapt",
+     "why": "각 강은 고유한 과제를 지니며 물고기는 거기에 적응해야 한다.",
+     "english": "Every salmon river shares the same challenges, so fish need not adapt."
+    }
+   ],
+   "mistips": [
+    "to which = 관계사 앞으로 나온 전치사(adapt to → to which); '적응해야 할 과제'로 해석."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "Some rivers are very long, like the Yukon, and require animals that can build up massive fat reserves in order to survive the extended journey.",
+   "grammar": [
+    {
+     "tag": "관계대명사 주격 that",
+     "note": "animals를 수식하는 주격 관계절",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "build up (구동사)",
+     "note": "쌓아 올리다·축적하다",
+     "spans": [
+      "build up"
+     ]
+    },
+    {
+     "tag": "to부정사 부사적 용법(목적)",
+     "note": "~하기 위해(in order to)",
+     "spans": [
+      "in order to"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "massive",
+     "meaning": "거대한, 막대한"
+    },
+    {
+     "word": "fat reserves",
+     "meaning": "지방 비축분"
+    },
+    {
+     "word": "in order to",
+     "meaning": "~하기 위해"
+    },
+    {
+     "word": "extended",
+     "meaning": "길어진, 장기간의"
+    },
+    {
+     "word": "journey",
+     "meaning": "여정, 이동"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Some rivers are very long, like the Yukon,",
+     "ko": "어떤 강은 [[Yukon]]처럼 매우 길어서,"
+    },
+    {
+     "en": "and require animals that can build up massive fat reserves",
+     "ko": "많은 [[지방]]을 [[축적할]] 수 있는 동물을 필요로 한다"
+    },
+    {
+     "en": "in order to survive the extended journey.",
+     "ko": "그 긴 [[여정]]을 살아남기 위해"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Yukon처럼 긴 강에 사는 연어가 많은 지방을 축적하는 것은 물이 차갑기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "require animals that can build up massive fat reserves in order to survive the extended journey",
+     "why": "지방 축적은 긴 여정을 살아남기 위한 것이지 수온 때문이 아니다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "Others are very far north, with only a short season of warmer temperatures, and require a fish that can maximize growth, particularly during its younger phase.",
+   "grammar": [
+    {
+     "tag": "부정대명사 Others",
+     "note": "앞의 Some rivers와 대비되는 '다른 강들'",
+     "spans": [
+      "Others"
+     ]
+    },
+    {
+     "tag": "비교급",
+     "note": "warm의 비교급 warmer(더 따뜻한)",
+     "spans": [
+      "warmer"
+     ]
+    },
+    {
+     "tag": "관계대명사 주격 that",
+     "note": "a fish를 수식하는 주격 관계절",
+     "spans": [
+      "that"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "far north",
+     "meaning": "북쪽 멀리"
+    },
+    {
+     "word": "temperature",
+     "meaning": "기온, 온도"
+    },
+    {
+     "word": "maximize",
+     "meaning": "극대화하다"
+    },
+    {
+     "word": "growth",
+     "meaning": "성장"
+    },
+    {
+     "word": "phase",
+     "meaning": "시기, 단계"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Others are very far north,",
+     "ko": "다른 강들은 매우 [[북쪽]]에 있고,"
+    },
+    {
+     "en": "with only a short season of warmer temperatures,",
+     "ko": "[[따뜻한]] 시기가 짧아서,"
+    },
+    {
+     "en": "and require a fish that can maximize growth,",
+     "ko": "[[성장]]을 극대화할 수 있는 물고기를 필요로 한다"
+    },
+    {
+     "en": "particularly during its younger phase.",
+     "ko": "특히 [[어린]] 시기 동안"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "북쪽 강의 연어는 짧은 온난기 동안 성장을 극대화하며, 이는 관광객 유치에도 기여한다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "require a fish that can maximize growth, particularly during its younger phase",
+     "why": "관광객 유치는 지문에 없는 무관한 정보이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "But whatever the manifestation of difference that occurred in different species of salmon, the first salmon farmers realized that crossing and recrossing the specific families from the original forty rivers would result in salmon that grew faster.",
+   "grammar": [
+    {
+     "tag": "복합관계사 whatever(양보 부사절)",
+     "note": "'무엇이 ~하든' 양보의 부사절",
+     "spans": [
+      "whatever"
+     ]
+    },
+    {
+     "tag": "명사절 접속사 that",
+     "note": "realized의 목적어절을 이끎",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "동명사 주어",
+     "note": "that절 안 주어(crossing and recrossing ~)",
+     "spans": [
+      "crossing",
+      "recrossing"
+     ]
+    },
+    {
+     "tag": "result in (숙어)",
+     "note": "~라는 결과를 낳다",
+     "spans": [
+      "result in"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "manifestation",
+     "meaning": "발현, 나타남"
+    },
+    {
+     "word": "occur",
+     "meaning": "일어나다, 나타나다"
+    },
+    {
+     "word": "species",
+     "meaning": "종(種)"
+    },
+    {
+     "word": "cross / recross",
+     "meaning": "교배하다 / 재교배하다"
+    },
+    {
+     "word": "result in",
+     "meaning": "~를 낳다, 초래하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "But whatever the manifestation of difference",
+     "ko": "그러나 차이의 [[발현]]이 무엇이든"
+    },
+    {
+     "en": "that occurred in different species of salmon,",
+     "ko": "서로 다른 연어 [[종]]에서 [[나타난]]"
+    },
+    {
+     "en": "the first salmon farmers realized",
+     "ko": "최초의 연어 [[양식업자]]들은 깨달았다"
+    },
+    {
+     "en": "[[that crossing and recrossing the specific families from the original forty rivers]]",
+     "ko": "[[원래 40개 강의 특정 가문들을 교배하고 재교배하는 것이]]"
+    },
+    {
+     "en": "would result in salmon that grew faster.",
+     "ko": "더 [[빠르게]] 자라는 연어를 낳으리라는 것을"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "특정 가문들을 교배하고 재교배하면 더 느리게 자라는 연어가 나온다는 것을 양식업자들이 알게 되었다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "would result in salmon that grew faster",
+     "why": "교배·재교배는 더 빠르게 자라는 연어를 낳는다(느리게가 아님).",
+     "killer": true
+    }
+   ],
+   "mistips": [
+    "whatever ~ = '무엇이 ~하든' 양보 부사절; 주절 주어는 the first salmon farmers."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "And because salmon, unlike cattle and sheep, can produce many thousands of offspring in the course of their lives, once favorable individuals were found, just a few strong males and females could form the basis of a whole new race of highly productive fish.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사 because",
+     "note": "이유의 부사절을 이끎",
+     "spans": [
+      "because"
+     ]
+    },
+    {
+     "tag": "전치사 unlike(대조 삽입구)",
+     "note": "~와 달리(cattle and sheep와 대조)",
+     "spans": [
+      "unlike"
+     ]
+    },
+    {
+     "tag": "부사절 접속사 once",
+     "note": "일단 ~하면(시간·조건)",
+     "spans": [
+      "once"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "favorable individuals가 발견됨(were found)",
+     "spans": [
+      "were",
+      "found"
+     ]
+    },
+    {
+     "tag": "form the basis of (표현)",
+     "note": "~의 토대를 이루다",
+     "spans": [
+      "form the basis of"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "cattle",
+     "meaning": "소(가축)"
+    },
+    {
+     "word": "offspring",
+     "meaning": "새끼, 자손"
+    },
+    {
+     "word": "in the course of",
+     "meaning": "~하는 동안, 과정에서"
+    },
+    {
+     "word": "favorable",
+     "meaning": "유리한, 알맞은"
+    },
+    {
+     "word": "race",
+     "meaning": "품종, 계통"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "And because salmon, unlike cattle and sheep,",
+     "ko": "그리고 연어는 [[소]]나 양과 달리,"
+    },
+    {
+     "en": "can produce many thousands of offspring in the course of their lives,",
+     "ko": "평생에 걸쳐 수천 마리의 [[새끼]]를 낳을 수 [[있기]] 때문에,"
+    },
+    {
+     "en": "once favorable individuals were found,",
+     "ko": "일단 유리한 [[개체]]가 발견되면,"
+    },
+    {
+     "en": "just a few strong males and females could form the basis of",
+     "ko": "단지 몇 마리의 튼튼한 수컷과 암컷이 [[토대]]를 이룰 수 있었다"
+    },
+    {
+     "en": "a whole new race of highly productive fish.",
+     "ko": "[[생산성]] 높은 물고기의 완전히 새로운 품종의"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "연어는 소·양과 달리 평생 수천 마리의 새끼를 낳을 수 있어, 유리한 개체 몇 마리만으로도 새로운 품종의 토대를 만들 수 있었다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    },
+    {
+     "statement": "여기서 '유리한 개체(favorable individuals)'는 소와 양을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "salmon, unlike cattle and sheep, can produce many thousands of offspring",
+     "why": "유리한 개체는 연어를 가리키며, 소·양은 대조 대상일 뿐이다."
+    }
+   ],
+   "mistips": [
+    "unlike cattle and sheep는 삽입구; 주어는 salmon, 동사는 can produce."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "A domestic population could be created quickly that would be quite different from the initial wild ancestors.",
+   "grammar": [
+    {
+     "tag": "조동사+be+과거분사(수동태)",
+     "note": "만들어질 수 있었다(could be created)",
+     "spans": [
+      "be created"
+     ]
+    },
+    {
+     "tag": "관계대명사 주격 that",
+     "note": "선행사 A domestic population을 수식(뒤로 분리)",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "different from (표현)",
+     "note": "~와 다른",
+     "spans": [
+      "different from"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "domestic",
+     "meaning": "사육된, 길들여진"
+    },
+    {
+     "word": "population",
+     "meaning": "개체군, 집단"
+    },
+    {
+     "word": "wild",
+     "meaning": "야생의"
+    },
+    {
+     "word": "ancestor",
+     "meaning": "조상, 선조"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "A domestic population could be created quickly",
+     "ko": "[[사육]] 개체군은 빠르게 [[만들어질]] 수 있었다"
+    },
+    {
+     "en": "that would be quite different",
+     "ko": "상당히 [[다른]]"
+    },
+    {
+     "en": "from the initial wild ancestors.",
+     "ko": "처음의 야생 [[조상]]과"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 야생 조상과 크게 달라진 사육 개체군의 탄생을 인위적 훼손이라고 비판한다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "could be created quickly",
+     "why": "필자는 이를 빠르게 만들 수 있다는 중립·긍정적 서술로 다룰 뿐 비판하지 않는다."
+    }
+   ],
+   "mistips": []
+  }
+ ]
 }

@@ -1,229 +1,613 @@
 {
-  "item_no": "35",
-  "theme": "관광객을 위한 문화자산의 선택 — 가장 인상적인 것만",
-  "overview": {
-    "theme_ko": "관광객을 위한 문화자산의 선별",
-    "topic": "🔎 관광객을 위한 문화자산의 선별적 이용",
-    "stance": "중립적",
-    "stance_reason": "'a process of selection of cultural assets takes place'처럼 현상을 객관적으로 설명·분석함",
-    "structure": "주장→근거·예시",
-    "structure_reason": "관광객이 제한된 자산만 이용한다는 주장 뒤 'The reason is to be found in the fact that'로 근거를 제시함",
-    "key_grammar": {
-      "point": "동격의 that (the fact that)",
-      "source_sentence": "The reason is to be found in the fact that tourist experience in cities is measured in days and hours, even in minutes in the case of cultural attractions or seconds in particular sites.",
-      "explanation": [
-        {"chip": "쉽게 말하면", "text": "the fact 뒤의 that은 '~라는'으로 the fact의 내용을 그대로 풀어주는 동격 접속사예요."},
-        {"chip": "핵심", "text": "동격 that 뒤에는 주어·동사가 다 갖춰진 '완전한 절'이 옵니다."},
-        {"chip": "비교", "text": "관계대명사 that/which는 뒤 문장에 빠진 자리가 있지만, 동격 that은 빠진 자리가 없어요."},
-        {"chip": "주의", "text": "동격 that은 관계대명사 which로 바꿀 수 없습니다."}
-      ],
-      "example_analysis": "the fact 를 뒤의 완전한 절(tourist experience in cities is measured in days and hours)이 동격으로 부연 설명한다.",
-      "drills": [
-        {
-          "kind": "밑줄형",
-          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
-          "sentence": "The reason [[1|is to be found]] in [[2|the fact which]] tourist experience in cities [[3|is measured]] in days and hours, even in minutes [[4|in the case of]] cultural attractions or seconds in [[5|particular]] sites.",
-          "answer": "②",
-          "fix": "뒤에 완전한 절이 오는 동격절 자리이므로 관계대명사 which가 아니라 the fact that의 that이어야 함.",
-          "options": ["① is to be found", "② the fact which", "③ is measured", "④ in the case of", "⑤ particular"],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "네모형",
-          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
-          "sentence": "The main difference between the selection of cultural assets [[made / making]] for locals and the one made for tourists is [[that / what]] in the second case, only a small choice [[is made / makes]] among the largest, most impressive and unique resources.",
-          "answer": "made / that / is made",
-          "fix": "",
-          "options": [],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "오류찾기",
-          "question": "다음 중 어법상 틀린 문장은?",
-          "sentence": "",
-          "answer": "As a result of this, a process of selection of cultural assets take place since only a few buildings and only a small number of social representations are able to be adapted to the tourist visit.",
-          "fix": "take → takes: 주어 a process(단수)에 수일치.",
-          "options": [
-            "Tourists make intense and short-term use of a very limited number of historical assets and cultural attractions, including material and non-material ones.",
-            "The reason is to be found in the fact that tourist experience in cities is measured in days and hours, even in minutes in the case of cultural attractions or seconds in particular sites.",
-            "In addition, cultural tourists do not often repeat their visit to the same place, and therefore they are continuously looking for new attractions.",
-            "As a result of this, a process of selection of cultural assets take place since only a few buildings and only a small number of social representations are able to be adapted to the tourist visit.",
-            "The main difference between the selection of cultural assets made for locals and the one made for tourists is that in the second case, only a small choice is made among the largest, most impressive and unique resources."
-          ],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "영작",
-          "question": "그가 늦었다는 사실이 모두를 놀라게 했다.",
-          "sentence": "",
-          "answer": "The fact that he was late surprised everyone.",
-          "fix": "",
-          "options": [],
-          "words": ["The fact", "that", "he", "was", "late", "surprised", "everyone"],
-          "from_passage": false
-        },
-        {
-          "kind": "영작",
-          "question": "게다가, 문화 관광객은 같은 장소를 자주 반복 방문하지 않으며, 따라서 그들은 끊임없이 새로운 명소를 찾는다.",
-          "sentence": "",
-          "answer": "In addition, cultural tourists do not often repeat their visit to the same place, and therefore they are continuously looking for new attractions.",
-          "fix": "",
-          "options": [],
-          "words": ["In addition,", "cultural tourists", "do not", "often", "repeat", "their visit", "to the same place,", "and therefore", "they", "are continuously", "looking for", "new attractions."],
-          "from_passage": true
-        }
-      ]
-    },
-    "restatement_chains": [
-      {"label": "문화자산 선별", "expressions": ["a process of selection of cultural assets", "only a small choice is made"], "variation": "제한된 자산만 골라 이용한다"},
-      {"label": "짧은 관광 경험", "expressions": ["tourist experience in cities is measured in days and hours", "in minutes in the case of cultural attractions"], "variation": "관광 체류 시간이 매우 짧다"}
-    ],
-    "flow_blocks": [
-      {"stage": "도입(주장)", "sentence_range": "1", "summary": "관광객은 [[제한된]] 수의 문화자산만 집중 이용", "easy_example": "여행 가면 유명 명소 몇 곳만 골라 본다"},
-      {"stage": "근거", "sentence_range": "2", "summary": "관광 경험은 [[days and hours]] 등 짧은 시간으로 측정됨", "easy_example": "미술관을 몇 분 만에 훑고 지나간다"},
-      {"stage": "전개", "sentence_range": "3", "summary": "재방문이 적어 늘 [[new attractions]]를 탐색", "easy_example": "같은 도시를 또 가기보다 새 도시를 찾는다"},
-      {"stage": "결과", "sentence_range": "4", "summary": "소수 건물·표상만 관광에 맞춰지는 [[선별]] 발생", "easy_example": "수많은 건물 중 랜드마크만 코스에 들어간다"},
-      {"stage": "결론(대조)", "sentence_range": "5", "summary": "관광객용 선별은 [[가장 인상적인]] 자원 중 소수만", "easy_example": "가이드북은 최고 명소만 추려 소개한다"}
-    ]
-  },
-  "sentences": [
+ "item_no": "35",
+ "theme": "관광객을 위한 문화자산의 선택 — 가장 인상적인 것만",
+ "overview": {
+  "theme_ko": "관광객을 위한 문화자산의 선별",
+  "topic": "🔎 관광객을 위한 문화자산의 선별적 이용",
+  "stance": "중립적",
+  "stance_reason": "'a process of selection of cultural assets takes place'처럼 현상을 객관적으로 설명·분석함",
+  "structure": "주장→근거·예시",
+  "structure_reason": "관광객이 제한된 자산만 이용한다는 주장 뒤 'The reason is to be found in the fact that'로 근거를 제시함",
+  "key_grammar": {
+   "point": "동격의 that (the fact that)",
+   "source_sentence": "The reason is to be found in the fact that tourist experience in cities is measured in days and hours, even in minutes in the case of cultural attractions or seconds in particular sites.",
+   "explanation": [
     {
-      "id": 1,
-      "english": "Tourists make intense and short-term use of a very limited number of historical assets and cultural attractions, including material and non-material ones.",
-      "grammar": [
-        {"tag": "수량표현", "note": "a (very limited) number of ~: (매우 제한된) 수의 ~", "spans": ["a very limited number of"]},
-        {"tag": "관용표현", "note": "make use of ~: ~을 이용하다", "spans": ["use of"]},
-        {"tag": "분사", "note": "including: ~을 포함하여 (분사가 전치사처럼 쓰임)", "spans": ["including"]}
-      ],
-      "vocab": [
-        {"word": "intense", "meaning": "강렬한, 집중적인"},
-        {"word": "asset", "meaning": "자산"},
-        {"word": "attraction", "meaning": "명소, 명물"},
-        {"word": "non-material", "meaning": "비물질적인"}
-      ],
-      "chunks": [
-        {"en": "Tourists make intense and short-term use", "ko": "관광객은 강렬하고 단기적인 [[이용]]을 한다"},
-        {"en": "of a very limited number", "ko": "매우 [[제한된]] 수의"},
-        {"en": "of historical assets and cultural attractions,", "ko": "역사적 [[자산]]과 문화적 명소의"},
-        {"en": "including material and non-material ones.", "ko": "물질적·[[비물질적]]인 것을 포함하여"}
-      ],
-      "misreads": [
-        {"statement": "관광객은 물질적·비물질적인 것을 포함해 매우 제한된 수의 역사·문화 자산만 집중적으로 이용한다.", "verdict": "O", "trap_type": "주체대상"},
-        {"statement": "관광객이 소수의 자산만 이용하는 이유는 입장료가 비싸기 때문이다.", "verdict": "X", "trap_type": "무관정보", "anchor": "tourist experience in cities is measured in days and hours", "why": "제한 이용의 이유는 관광 시간이 짧기 때문이지 입장료는 지문에 언급이 없음", "integrative": true}
-      ],
-      "mistips": ["make use of는 make와 use of가 형용사 때문에 떨어져 있어도 한 덩어리('이용하다')로 읽는다."]
+     "chip": "쉽게 말하면",
+     "text": "the fact 뒤의 that은 '~라는'으로 the fact의 내용을 그대로 풀어주는 동격 접속사예요."
     },
     {
-      "id": 2,
-      "english": "The reason is to be found in the fact that tourist experience in cities is measured in days and hours, even in minutes in the case of cultural attractions or seconds in particular sites.",
-      "grammar": [
-        {"tag": "부정사(수동)", "note": "is to be found: be동사+to부정사 수동형", "spans": ["to be found"]},
-        {"tag": "동격의 that", "note": "the fact that ~: ~라는 사실 (동격절, 뒤에 완전한 절)", "spans": ["that"]},
-        {"tag": "수동태", "note": "is measured: 측정되다 (be+p.p.)", "spans": ["is measured"]},
-        {"tag": "전치사구", "note": "in the case of ~: ~의 경우에", "spans": ["in the case of"]}
-      ],
-      "vocab": [
-        {"word": "reason", "meaning": "이유"},
-        {"word": "measure", "meaning": "측정하다"},
-        {"word": "particular", "meaning": "특정한"},
-        {"word": "site", "meaning": "장소, 유적"}
-      ],
-      "chunks": [
-        {"en": "The reason is to be found", "ko": "그 [[이유]]는 발견된다"},
-        {"en": "[[in the fact that tourist experience in cities]]", "ko": "[[도시에서의 관광 경험이라는 사실에서]]"},
-        {"en": "is measured in days and hours,", "ko": "날과 [[시간]]으로 측정된다"},
-        {"en": "even in minutes in the case of cultural attractions", "ko": "심지어 문화 명소의 경우 [[분]] 단위로"},
-        {"en": "or seconds in particular sites.", "ko": "혹은 특정 장소에서는 [[초]] 단위로"}
-      ],
-      "misreads": [
-        {"statement": "관광 경험이 날·시간 단위로 측정되는 것은 관광객이 소수의 자산만 이용한 결과이다.", "verdict": "X", "trap_type": "인과조건", "anchor": "The reason is to be found in the fact that", "why": "짧은 관광 시간이 제한 이용의 '원인(이유)'이지 그 결과가 아님 — 인과 역전", "killer": true}
-      ],
-      "mistips": ["is to be found는 '찾아진다/발견된다'는 수동 의미이고, the fact that 이하가 그 내용을 동격으로 설명한다."]
+     "chip": "핵심",
+     "text": "동격 that 뒤에는 주어·동사가 다 갖춰진 '완전한 절'이 옵니다."
     },
     {
-      "id": 3,
-      "english": "In addition, cultural tourists do not often repeat their visit to the same place, and therefore they are continuously looking for new attractions.",
-      "grammar": [
-        {"tag": "부사구", "note": "In addition: 게다가 (첨가 연결어)", "spans": ["In addition"]},
-        {"tag": "진행형", "note": "are continuously looking: 현재진행 (be+-ing)", "spans": ["are continuously looking"]},
-        {"tag": "관용표현", "note": "look for ~: ~을 찾다", "spans": ["looking for"]}
-      ],
-      "vocab": [
-        {"word": "repeat one's visit", "meaning": "재방문하다"},
-        {"word": "continuously", "meaning": "끊임없이"},
-        {"word": "attraction", "meaning": "명소, 볼거리"}
-      ],
-      "chunks": [
-        {"en": "In addition, cultural tourists", "ko": "게다가, 문화 [[관광객]]은"},
-        {"en": "do not often repeat their visit", "ko": "자신의 방문을 자주 [[반복]]하지 않는다"},
-        {"en": "to the same place,", "ko": "[[같은]] 장소로"},
-        {"en": "and therefore they are continuously looking for new attractions.", "ko": "그래서 그들은 끊임없이 새로운 [[명소]]를 찾고 있다"}
-      ],
-      "misreads": [
-        {"statement": "문화 관광객은 같은 장소를 자주 재방문하지 않아 계속 새로운 명소를 찾는다.", "verdict": "O", "trap_type": "주체대상", "english": "Cultural tourists rarely revisit the same place, so they keep seeking new attractions."},
-        {"statement": "필자는 관광객이 끊임없이 새 명소만 좇는 태도를 경솔하다고 비판한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "they are continuously looking for new attractions", "why": "필자는 현상을 객관적으로 설명할 뿐 비판적 평가를 드러내지 않음"}
-      ],
-      "mistips": ["are continuously looking은 부사 continuously가 be와 -ing 사이에 낀 진행형이다."]
+     "chip": "비교",
+     "text": "관계대명사 that/which는 뒤 문장에 빠진 자리가 있지만, 동격 that은 빠진 자리가 없어요."
     },
     {
-      "id": 4,
-      "english": "As a result of this, a process of selection of cultural assets takes place since only a few buildings and only a small number of social representations are able to be adapted to the tourist visit.",
-      "grammar": [
-        {"tag": "연결어", "note": "As a result of ~: ~의 결과로", "spans": ["As a result of"]},
-        {"tag": "수일치", "note": "단수 주어 a process에 단수동사 takes", "spans": ["takes"]},
-        {"tag": "부사절 접속사", "note": "since: ~ 때문에 (이유)", "spans": ["since"]},
-        {"tag": "수량표현", "note": "a small number of ~: 소수의 ~", "spans": ["a small number of"]},
-        {"tag": "부정사(수동)", "note": "be able to be adapted: 조정될 수 있다 (수동 부정사)", "spans": ["to be adapted"]}
-      ],
-      "vocab": [
-        {"word": "process", "meaning": "과정"},
-        {"word": "selection", "meaning": "선별, 선택"},
-        {"word": "representation", "meaning": "표상, 표현"},
-        {"word": "adapt", "meaning": "맞추다, 조정하다"}
-      ],
-      "chunks": [
-        {"en": "As a result of this,", "ko": "이 [[결과]]로,"},
-        {"en": "[[a process of selection of cultural assets takes place]]", "ko": "[[문화 자산 선별의 과정이 일어난다]]"},
-        {"en": "since only a few buildings", "ko": "오직 소수의 [[건물]]과"},
-        {"en": "and only a small number of social representations", "ko": "오직 소수의 [[사회적 표상]]만이"},
-        {"en": "are able to be adapted to the tourist visit.", "ko": "관광 방문에 [[맞춰질]] 수 있기 때문에"}
-      ],
-      "misreads": [
-        {"statement": "관광객의 방문에 맞춰질 수 있는 것은 소수의 건물뿐이고 사회적 표상은 전혀 포함되지 않는다.", "verdict": "X", "trap_type": "구조수식", "anchor": "only a small number of social representations are able to be adapted to the tourist visit", "why": "사회적 표상도 '소수'는 관광 방문에 맞춰질 수 있다고 했으므로 전무는 아님"}
-      ],
-      "mistips": ["takes place의 주어는 앞의 a process (단수)이므로 takes. 사이의 수식어(of selection of cultural assets)에 속지 말 것."]
-    },
-    {
-      "id": 5,
-      "english": "The main difference between the selection of cultural assets made for locals and the one made for tourists is that in the second case, only a small choice is made among the largest, most impressive and unique resources.",
-      "grammar": [
-        {"tag": "분사", "note": "made for locals/tourists: 과거분사가 명사 수식 (~을 위해 만들어진)", "spans": ["made for locals", "made for tourists"]},
-        {"tag": "부정대명사", "note": "the one = the selection (앞 명사 대신)", "spans": ["the one"]},
-        {"tag": "명사절 that", "note": "is that ~: ~라는 것 (보어 명사절)", "spans": ["that"]},
-        {"tag": "수동태", "note": "a small choice is made: 선택이 이루어지다 (be+p.p.)", "spans": ["is made"]},
-        {"tag": "최상급", "note": "the largest, most impressive: 가장 ~한 (최상급)", "spans": ["the largest", "most impressive"]}
-      ],
-      "vocab": [
-        {"word": "difference", "meaning": "차이"},
-        {"word": "impressive", "meaning": "인상적인"},
-        {"word": "unique", "meaning": "독특한, 유일한"},
-        {"word": "resource", "meaning": "자원"}
-      ],
-      "chunks": [
-        {"en": "The main difference between the selection of cultural assets", "ko": "문화 자산 선택 간의 주요 [[차이]]는"},
-        {"en": "[[made for locals and the one made for tourists]]", "ko": "[[지역민을 위한 것과 관광객을 위한 것]]"},
-        {"en": "is that in the second case,", "ko": "[[두 번째]] 경우에는 ~라는 것이다"},
-        {"en": "only a small choice is made", "ko": "오직 소수의 [[선택]]만이 이루어진다"},
-        {"en": "among the largest, most impressive and unique resources.", "ko": "가장 크고 [[인상적]]이며 독특한 자원들 중에서"}
-      ],
-      "misreads": [
-        {"statement": "지역민용 선택과 관광객용 선택은 다르며, 관광객용은 자원의 규모와 무관하게 무작위로 이루어진다.", "verdict": "△", "trap_type": "구조수식", "anchor": "only a small choice is made among the largest, most impressive and unique resources", "why": "차이가 있다는 방향은 맞지만, 관광객용은 '가장 크고 인상적인' 자원 중 소수를 고르는 것이지 무작위가 아님"},
-        {"statement": "위 문장에서 the second case는 지역민을 위한 선택을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "the one made for tourists is that in the second case", "why": "the second case는 두 번째로 언급된 '관광객을 위한 선택'을 가리킴"}
-      ],
-      "mistips": ["the one made for tourists = the selection made for tourists. one은 앞의 selection을 대신한다.", "the second case는 뒤에 나온 관광객용 선택(두 번째로 언급된 것)을 가리킨다."]
+     "chip": "주의",
+     "text": "동격 that은 관계대명사 which로 바꿀 수 없습니다."
     }
+   ],
+   "example_analysis": "the fact 를 뒤의 완전한 절(tourist experience in cities is measured in days and hours)이 동격으로 부연 설명한다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "The reason [[1|is to be found]] in [[2|the fact which]] tourist experience in cities [[3|is measured]] in days and hours, even in minutes [[4|in the case of]] cultural attractions or seconds in [[5|particular]] sites.",
+     "answer": "②",
+     "fix": "뒤에 완전한 절이 오는 동격절 자리이므로 관계대명사 which가 아니라 the fact that의 that이어야 함.",
+     "options": [
+      "① is to be found",
+      "② the fact which",
+      "③ is measured",
+      "④ in the case of",
+      "⑤ particular"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "The main difference between the selection of cultural assets [[made / making]] for locals and the one made for tourists is [[that / what]] in the second case, only a small choice [[is made / makes]] among the largest, most impressive and unique resources.",
+     "answer": "made / that / is made",
+     "fix": "",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "answer": "As a result of this, a process of selection of cultural assets take place since only a few buildings and only a small number of social representations are able to be adapted to the tourist visit.",
+     "fix": "take → takes: 주어 a process(단수)에 수일치.",
+     "options": [
+      "Tourists make intense and short-term use of a very limited number of historical assets and cultural attractions, including material and non-material ones.",
+      "The reason is to be found in the fact that tourist experience in cities is measured in days and hours, even in minutes in the case of cultural attractions or seconds in particular sites.",
+      "In addition, cultural tourists do not often repeat their visit to the same place, and therefore they are continuously looking for new attractions.",
+      "As a result of this, a process of selection of cultural assets take place since only a few buildings and only a small number of social representations are able to be adapted to the tourist visit.",
+      "The main difference between the selection of cultural assets made for locals and the one made for tourists is that in the second case, only a small choice is made among the largest, most impressive and unique resources."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그가 늦었다는 사실이 모두를 놀라게 했다.",
+     "sentence": "",
+     "answer": "The fact that he was late surprised everyone.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "The fact",
+      "that",
+      "he",
+      "was",
+      "late",
+      "surprised",
+      "everyone"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "게다가, 문화 관광객은 같은 장소를 자주 반복 방문하지 않으며, 따라서 그들은 끊임없이 새로운 명소를 찾는다.",
+     "sentence": "",
+     "answer": "In addition, cultural tourists do not often repeat their visit to the same place, and therefore they are continuously looking for new attractions.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "In addition,",
+      "cultural tourists",
+      "do not",
+      "often",
+      "repeat",
+      "their visit",
+      "to the same place,",
+      "and therefore",
+      "they",
+      "are continuously",
+      "looking for",
+      "new attractions."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "문화자산 선별",
+    "expressions": [
+     "a process of selection of cultural assets",
+     "only a small choice is made"
+    ],
+    "variation": "제한된 자산만 골라 이용한다"
+   },
+   {
+    "label": "짧은 관광 경험",
+    "expressions": [
+     "tourist experience in cities is measured in days and hours",
+     "in minutes in the case of cultural attractions"
+    ],
+    "variation": "관광 체류 시간이 매우 짧다"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입(주장)",
+    "sentence_range": "1",
+    "summary": "관광객은 [[제한된]] 수의 문화자산만 집중 이용",
+    "easy_example": "여행 가면 유명 명소 몇 곳만 골라 본다"
+   },
+   {
+    "stage": "근거",
+    "sentence_range": "2",
+    "summary": "관광 경험은 [[days and hours]] 등 짧은 시간으로 측정됨",
+    "easy_example": "미술관을 몇 분 만에 훑고 지나간다"
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "3",
+    "summary": "재방문이 적어 늘 [[new attractions]]를 탐색",
+    "easy_example": "같은 도시를 또 가기보다 새 도시를 찾는다"
+   },
+   {
+    "stage": "결과",
+    "sentence_range": "4",
+    "summary": "소수 건물·표상만 관광에 맞춰지는 [[선별]] 발생",
+    "easy_example": "수많은 건물 중 랜드마크만 코스에 들어간다"
+   },
+   {
+    "stage": "결론(대조)",
+    "sentence_range": "5",
+    "summary": "관광객용 선별은 [[가장 인상적인]] 자원 중 소수만",
+    "easy_example": "가이드북은 최고 명소만 추려 소개한다"
+   }
   ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Tourists make intense and short-term use of a very limited number of historical assets and cultural attractions, including material and non-material ones.",
+   "grammar": [
+    {
+     "tag": "수량표현",
+     "note": "a (very limited) number of ~: (매우 제한된) 수의 ~",
+     "spans": [
+      "a very limited number of"
+     ]
+    },
+    {
+     "tag": "관용표현",
+     "note": "make use of ~: ~을 이용하다",
+     "spans": [
+      "use of"
+     ]
+    },
+    {
+     "tag": "분사",
+     "note": "including: ~을 포함하여 (분사가 전치사처럼 쓰임)",
+     "spans": [
+      "including"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "intense",
+     "meaning": "강렬한, 집중적인"
+    },
+    {
+     "word": "asset",
+     "meaning": "자산"
+    },
+    {
+     "word": "attraction",
+     "meaning": "명소, 명물"
+    },
+    {
+     "word": "non-material",
+     "meaning": "비물질적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Tourists make intense and short-term use",
+     "ko": "관광객은 강렬하고 [[단기적인]] [[이용]]을 한다"
+    },
+    {
+     "en": "of a very limited number",
+     "ko": "매우 [[제한된]] 수의"
+    },
+    {
+     "en": "of historical assets and cultural attractions,",
+     "ko": "역사적 [[자산]]과 문화적 명소의"
+    },
+    {
+     "en": "including material and non-material ones.",
+     "ko": "물질적·[[비물질적]]인 것을 포함하여"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "관광객은 물질적·비물질적인 것을 포함해 매우 제한된 수의 역사·문화 자산만 집중적으로 이용한다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    },
+    {
+     "statement": "관광객이 소수의 자산만 이용하는 이유는 입장료가 비싸기 때문이다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "tourist experience in cities is measured in days and hours",
+     "why": "제한 이용의 이유는 관광 시간이 짧기 때문이지 입장료는 지문에 언급이 없음",
+     "integrative": true
+    }
+   ],
+   "mistips": [
+    "make use of는 make와 use of가 형용사 때문에 떨어져 있어도 한 덩어리('이용하다')로 읽는다."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "The reason is to be found in the fact that tourist experience in cities is measured in days and hours, even in minutes in the case of cultural attractions or seconds in particular sites.",
+   "grammar": [
+    {
+     "tag": "부정사(수동)",
+     "note": "is to be found: be동사+to부정사 수동형",
+     "spans": [
+      "to be found"
+     ]
+    },
+    {
+     "tag": "동격의 that",
+     "note": "the fact that ~: ~라는 사실 (동격절, 뒤에 완전한 절)",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "is measured: 측정되다 (be+p.p.)",
+     "spans": [
+      "is measured"
+     ]
+    },
+    {
+     "tag": "전치사구",
+     "note": "in the case of ~: ~의 경우에",
+     "spans": [
+      "in the case of"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "reason",
+     "meaning": "이유"
+    },
+    {
+     "word": "measure",
+     "meaning": "측정하다"
+    },
+    {
+     "word": "particular",
+     "meaning": "특정한"
+    },
+    {
+     "word": "site",
+     "meaning": "장소, 유적"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The reason is to be found",
+     "ko": "그 [[이유]]는 발견된다"
+    },
+    {
+     "en": "[[in the fact that tourist experience in cities]]",
+     "ko": "[[도시에서의 관광 경험이라는 사실에서]]"
+    },
+    {
+     "en": "is measured in days and hours,",
+     "ko": "날과 [[시간]]으로 측정된다"
+    },
+    {
+     "en": "even in minutes in the case of cultural attractions",
+     "ko": "심지어 문화 명소의 경우 [[분]] [[단위]]로"
+    },
+    {
+     "en": "or seconds in particular sites.",
+     "ko": "혹은 특정 장소에서는 [[초]] 단위로"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "관광 경험이 날·시간 단위로 측정되는 것은 관광객이 소수의 자산만 이용한 결과이다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "The reason is to be found in the fact that",
+     "why": "짧은 관광 시간이 제한 이용의 '원인(이유)'이지 그 결과가 아님 — 인과 역전",
+     "killer": true
+    }
+   ],
+   "mistips": [
+    "is to be found는 '찾아진다/발견된다'는 수동 의미이고, the fact that 이하가 그 내용을 동격으로 설명한다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "In addition, cultural tourists do not often repeat their visit to the same place, and therefore they are continuously looking for new attractions.",
+   "grammar": [
+    {
+     "tag": "부사구",
+     "note": "In addition: 게다가 (첨가 연결어)",
+     "spans": [
+      "In addition"
+     ]
+    },
+    {
+     "tag": "진행형",
+     "note": "are continuously looking: 현재진행 (be+-ing)",
+     "spans": [
+      "are continuously looking"
+     ]
+    },
+    {
+     "tag": "관용표현",
+     "note": "look for ~: ~을 찾다",
+     "spans": [
+      "looking for"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "repeat one's visit",
+     "meaning": "재방문하다"
+    },
+    {
+     "word": "continuously",
+     "meaning": "끊임없이"
+    },
+    {
+     "word": "attraction",
+     "meaning": "명소, 볼거리"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In addition, cultural tourists",
+     "ko": "게다가, 문화 [[관광객]]은"
+    },
+    {
+     "en": "do not often repeat their visit",
+     "ko": "자신의 방문을 자주 [[반복]]하지 않는다"
+    },
+    {
+     "en": "to the same place,",
+     "ko": "[[같은]] 장소로"
+    },
+    {
+     "en": "and therefore they are continuously looking for new attractions.",
+     "ko": "그래서 그들은 끊임없이 [[새로운]] [[명소]]를 찾고 있다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "문화 관광객은 같은 장소를 자주 재방문하지 않아 계속 새로운 명소를 찾는다.",
+     "verdict": "O",
+     "trap_type": "주체대상",
+     "english": "Cultural tourists rarely revisit the same place, so they keep seeking new attractions."
+    },
+    {
+     "statement": "필자는 관광객이 끊임없이 새 명소만 좇는 태도를 경솔하다고 비판한다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "they are continuously looking for new attractions",
+     "why": "필자는 현상을 객관적으로 설명할 뿐 비판적 평가를 드러내지 않음"
+    }
+   ],
+   "mistips": [
+    "are continuously looking은 부사 continuously가 be와 -ing 사이에 낀 진행형이다."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "As a result of this, a process of selection of cultural assets takes place since only a few buildings and only a small number of social representations are able to be adapted to the tourist visit.",
+   "grammar": [
+    {
+     "tag": "연결어",
+     "note": "As a result of ~: ~의 결과로",
+     "spans": [
+      "As a result of"
+     ]
+    },
+    {
+     "tag": "수일치",
+     "note": "단수 주어 a process에 단수동사 takes",
+     "spans": [
+      "takes"
+     ]
+    },
+    {
+     "tag": "부사절 접속사",
+     "note": "since: ~ 때문에 (이유)",
+     "spans": [
+      "since"
+     ]
+    },
+    {
+     "tag": "수량표현",
+     "note": "a small number of ~: 소수의 ~",
+     "spans": [
+      "a small number of"
+     ]
+    },
+    {
+     "tag": "부정사(수동)",
+     "note": "be able to be adapted: 조정될 수 있다 (수동 부정사)",
+     "spans": [
+      "to be adapted"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "process",
+     "meaning": "과정"
+    },
+    {
+     "word": "selection",
+     "meaning": "선별, 선택"
+    },
+    {
+     "word": "representation",
+     "meaning": "표상, 표현"
+    },
+    {
+     "word": "adapt",
+     "meaning": "맞추다, 조정하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "As a result of this,",
+     "ko": "이 [[결과]]로,"
+    },
+    {
+     "en": "[[a process of selection of cultural assets takes place]]",
+     "ko": "[[문화 자산 선별의 과정이 일어난다]]"
+    },
+    {
+     "en": "since only a few buildings",
+     "ko": "오직 소수의 [[건물]]과"
+    },
+    {
+     "en": "and only a small number of social representations",
+     "ko": "오직 소수의 [[사회적 표상]]만이"
+    },
+    {
+     "en": "are able to be adapted to the tourist visit.",
+     "ko": "관광 방문에 [[맞춰질]] 수 있기 [[때문]]에"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "관광객의 방문에 맞춰질 수 있는 것은 소수의 건물뿐이고 사회적 표상은 전혀 포함되지 않는다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "only a small number of social representations are able to be adapted to the tourist visit",
+     "why": "사회적 표상도 '소수'는 관광 방문에 맞춰질 수 있다고 했으므로 전무는 아님"
+    }
+   ],
+   "mistips": [
+    "takes place의 주어는 앞의 a process (단수)이므로 takes. 사이의 수식어(of selection of cultural assets)에 속지 말 것."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "The main difference between the selection of cultural assets made for locals and the one made for tourists is that in the second case, only a small choice is made among the largest, most impressive and unique resources.",
+   "grammar": [
+    {
+     "tag": "분사",
+     "note": "made for locals/tourists: 과거분사가 명사 수식 (~을 위해 만들어진)",
+     "spans": [
+      "made for locals",
+      "made for tourists"
+     ]
+    },
+    {
+     "tag": "부정대명사",
+     "note": "the one = the selection (앞 명사 대신)",
+     "spans": [
+      "the one"
+     ]
+    },
+    {
+     "tag": "명사절 that",
+     "note": "is that ~: ~라는 것 (보어 명사절)",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "a small choice is made: 선택이 이루어지다 (be+p.p.)",
+     "spans": [
+      "is made"
+     ]
+    },
+    {
+     "tag": "최상급",
+     "note": "the largest, most impressive: 가장 ~한 (최상급)",
+     "spans": [
+      "the largest",
+      "most impressive"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "difference",
+     "meaning": "차이"
+    },
+    {
+     "word": "impressive",
+     "meaning": "인상적인"
+    },
+    {
+     "word": "unique",
+     "meaning": "독특한, 유일한"
+    },
+    {
+     "word": "resource",
+     "meaning": "자원"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The main difference between the selection of cultural assets",
+     "ko": "문화 자산 선택 간의 [[주요]] [[차이]]는"
+    },
+    {
+     "en": "[[made for locals and the one made for tourists]]",
+     "ko": "[[지역민을 위한 것과 관광객을 위한 것]]"
+    },
+    {
+     "en": "is that in the second case,",
+     "ko": "[[두 번째]] 경우에는 ~라는 것이다"
+    },
+    {
+     "en": "only a small choice is made",
+     "ko": "오직 소수의 [[선택]]만이 이루어진다"
+    },
+    {
+     "en": "among the largest, most impressive and unique resources.",
+     "ko": "가장 크고 [[인상적]]이며 독특한 자원들 중에서"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "지역민용 선택과 관광객용 선택은 다르며, 관광객용은 자원의 규모와 무관하게 무작위로 이루어진다.",
+     "verdict": "△",
+     "trap_type": "구조수식",
+     "anchor": "only a small choice is made among the largest, most impressive and unique resources",
+     "why": "차이가 있다는 방향은 맞지만, 관광객용은 '가장 크고 인상적인' 자원 중 소수를 고르는 것이지 무작위가 아님"
+    },
+    {
+     "statement": "위 문장에서 the second case는 지역민을 위한 선택을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "the one made for tourists is that in the second case",
+     "why": "the second case는 두 번째로 언급된 '관광객을 위한 선택'을 가리킴"
+    }
+   ],
+   "mistips": [
+    "the one made for tourists = the selection made for tourists. one은 앞의 selection을 대신한다.",
+    "the second case는 뒤에 나온 관광객용 선택(두 번째로 언급된 것)을 가리킨다."
+   ]
+  }
+ ]
 }

@@ -1,274 +1,699 @@
 {
-  "item_no": "38",
-  "theme": "시민 과학과 시민 참여 — 인터넷이 연 대규모 협력",
-  "overview": {
-    "theme_ko": "인터넷·모바일 기술이 가능하게 한 시민 과학과 시민 참여",
-    "topic": "🔎 인터넷과 모바일 기술이 전 세계 수백만 명의 시민 과학·시민 참여를 가능하게 함",
-    "stance": "긍정적",
-    "stance_reason": "성장과 성공이 기술로 '가능해졌다'고 긍정 서술(has been made possible, instrumental in expanding)",
-    "structure": "주장→근거·예시",
-    "structure_reason": "인터넷이 시민 과학을 가능케 했다는 주장 뒤 정의와 구체적 활동·사례를 나열",
-    "key_grammar": {
-      "point": "동명사 (전치사의 목적어, by/such as -ing)",
-      "source_sentence": "They do so by participating in scientific activities such as monitoring plants and wildlife, collecting air and water samples, categorizing galaxies, and analyzing DNA sequences.",
-      "explanation": [
-        {"chip": "쉽게 말하면", "text": "전치사 by, such as, in 뒤에는 동사가 그대로 오지 못하고 동명사(-ing)로 바뀌어 목적어가 됩니다."},
-        {"chip": "by -ing", "text": "'by participating' = ~에 참여함으로써(수단·방법)."},
-        {"chip": "such as -ing", "text": "예시를 들 때도 such as 뒤 동명사들이 병렬로 이어집니다(monitoring, collecting, categorizing, analyzing)."},
-        {"chip": "병렬 규칙", "text": "and로 연결되는 예시들은 모두 -ing 형태로 형태를 맞춰야 해요."},
-        {"chip": "주의", "text": "전치사 뒤에 to부정사나 동사원형을 쓰면 틀립니다(by to participate ✗)."}
-      ],
-      "example_analysis": "전치사 by와 such as 뒤에 동명사(participating, monitoring, collecting, categorizing, analyzing)가 목적어·병렬 예시로 온다.",
-      "drills": [
-        {
-          "kind": "밑줄형",
-          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
-          "sentence": "They do so by [[1|participating]] in scientific activities such as [[2|monitoring]] plants and wildlife, [[3|collect]] air and water samples, [[4|categorizing]] galaxies, and [[5|analyzing]] DNA sequences.",
-          "answer": "③",
-          "fix": "such as 뒤 예시들은 동명사로 병렬을 이뤄야 하므로 collect → collecting(원문)으로 고쳐야 한다.",
-          "options": ["① participating", "② monitoring", "③ collect", "④ categorizing", "⑤ analyzing"],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "네모형",
-          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
-          "sentence": "Websites, smartphone apps, and social media [[have/has]] been instrumental in [[expanding/expand]] the reach and impact of a diversity of citizen science projects across time and geographical zones.",
-          "answer": "have / expanding",
-          "fix": "",
-          "options": [],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "오류찾기",
-          "question": "다음 중 어법상 틀린 문장은?",
-          "sentence": "",
-          "answer": "Examples include to set up and managing a website that offers local services for community disasters and creating an emergency response team when a disaster occurs.",
-          "fix": "include는 동명사를 목적어로 취하므로 to set up → setting up(원문)으로 고쳐야 한다.",
-          "options": [
-            "① The growth and success of citizen science and citizen engagement has been made possible by the Internet and mobile technology, encouraging and coordinating the efforts of millions of people throughout the world.",
-            "② Citizen science involves local people helping scientists carry out a scientific project at scale.",
-            "③ Currently, thousands of such projects have been set up all over the world, whereby volunteers help out in a number of research areas, including biodiversity, air quality, astronomy, and environmental issues.",
-            "④ Citizen engagement involves people helping governments, rather than scientists, to improve public services and policies in their communities.",
-            "⑤ Examples include to set up and managing a website that offers local services for community disasters and creating an emergency response team when a disaster occurs."
-          ],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "영작",
-          "question": "우리는 폐기물을 재활용하고 나무를 심는 것과 같은 활동에 참여함으로써 환경을 돕는다.",
-          "answer": "We help the environment by participating in activities such as recycling waste and planting trees.",
-          "fix": "",
-          "options": [],
-          "words": ["We", "help", "the environment", "by", "participating", "in", "activities", "such as", "recycling", "waste", "and", "planting", "trees"],
-          "from_passage": false
-        },
-        {
-          "kind": "영작",
-          "question": "그들은 식물과 야생동물을 관찰하고, 공기와 물 시료를 수집하고, 은하를 분류하고, DNA 서열을 분석하는 것과 같은 과학 활동에 참여함으로써 그렇게 한다.",
-          "answer": "They do so by participating in scientific activities such as monitoring plants and wildlife, collecting air and water samples, categorizing galaxies, and analyzing DNA sequences.",
-          "fix": "",
-          "options": [],
-          "words": ["They", "do so", "by", "participating", "in", "scientific", "activities", "such as", "monitoring", "plants and wildlife", "collecting", "air and water samples", "categorizing", "galaxies", "and", "analyzing", "DNA sequences"],
-          "from_passage": true
-        }
-      ]
-    },
-    "restatement_chains": [
-      {
-        "label": "시민 과학과 시민 참여",
-        "expressions": ["citizen science", "citizen engagement"],
-        "variation": "일반 시민이 과학자를 돕느냐(science) 정부를 돕느냐(engagement)로 갈린다."
-      },
-      {
-        "label": "가능·확장의 원동력",
-        "expressions": ["has been made possible", "instrumental in expanding"],
-        "variation": "인터넷·모바일 기술이 그 성장과 도달 범위를 가능·확장케 했다."
-      }
-    ],
-    "flow_blocks": [
-      {"stage": "주장", "sentence_range": "1~2", "summary": "[[인터넷·모바일 기술]]이 시민 과학·참여의 성장과 도달 범위를 가능·확장", "easy_example": "앱 하나로 전 세계 사람들이 한 프로젝트에 손을 보태는 것."},
-      {"stage": "정의·사례1", "sentence_range": "3~5", "summary": "[[시민 과학]]: 주민이 과학자를 도와 관찰·수집·분류·분석에 참여", "easy_example": "동네 사람들이 새 개체 수를 세어 연구자에게 보내는 것."},
-      {"stage": "정의·사례2", "sentence_range": "6~7", "summary": "[[시민 참여]]: 주민이 정부를 도와 공공 서비스·정책을 개선", "easy_example": "재난용 서비스 웹사이트를 만들고 대응팀을 꾸리는 것."}
-    ]
-  },
-  "sentences": [
+ "item_no": "38",
+ "theme": "시민 과학과 시민 참여 — 인터넷이 연 대규모 협력",
+ "overview": {
+  "theme_ko": "인터넷·모바일 기술이 가능하게 한 시민 과학과 시민 참여",
+  "topic": "🔎 인터넷과 모바일 기술이 전 세계 수백만 명의 시민 과학·시민 참여를 가능하게 함",
+  "stance": "긍정적",
+  "stance_reason": "성장과 성공이 기술로 '가능해졌다'고 긍정 서술(has been made possible, instrumental in expanding)",
+  "structure": "주장→근거·예시",
+  "structure_reason": "인터넷이 시민 과학을 가능케 했다는 주장 뒤 정의와 구체적 활동·사례를 나열",
+  "key_grammar": {
+   "point": "동명사 (전치사의 목적어, by/such as -ing)",
+   "source_sentence": "They do so by participating in scientific activities such as monitoring plants and wildlife, collecting air and water samples, categorizing galaxies, and analyzing DNA sequences.",
+   "explanation": [
     {
-      "id": 1,
-      "english": "The growth and success of citizen science and citizen engagement has been made possible by the Internet and mobile technology, encouraging and coordinating the efforts of millions of people throughout the world.",
-      "grammar": [
-        {"tag": "주어-동사 수일치", "note": "growth and success를 하나의 개념으로 봐 단수 has", "spans": ["has been"]},
-        {"tag": "현재완료 수동태", "note": "가능해져 왔다(has been made)", "spans": ["has been made"]},
-        {"tag": "수동태 행위자 by", "note": "~에 의해(the Internet and mobile technology)", "spans": ["by"]},
-        {"tag": "분사구문(부대상황)", "note": "그리고 ~하면서(앞 절을 부연)", "spans": ["encouraging", "coordinating"]}
-      ],
-      "vocab": [
-        {"word": "engagement", "meaning": "참여, 관여"},
-        {"word": "made possible", "meaning": "가능해진"},
-        {"word": "coordinate", "meaning": "조율하다, 조정하다"},
-        {"word": "effort", "meaning": "노력, 활동"},
-        {"word": "throughout", "meaning": "~ 전역에 걸쳐"}
-      ],
-      "chunks": [
-        {"en": "The growth and success of citizen science and citizen engagement", "ko": "시민 과학과 시민 참여의 성장과 [[성공]]은"},
-        {"en": "has been made possible by the Internet and mobile technology,", "ko": "[[인터넷]]과 모바일 기술에 의해 가능해졌고,"},
-        {"en": "encouraging and coordinating the efforts of millions of people throughout the world.", "ko": "전 세계 수백만 명의 [[노력]]을 북돋우고 조율하면서"}
-      ],
-      "misreads": [
-        {"statement": "인터넷·모바일 기술이 시민 과학의 성장에 기여했지만, 그 성공은 주로 각국 정부의 예산 확대 때문이었다.", "verdict": "△", "trap_type": "인과조건", "anchor": "has been made possible by the Internet and mobile technology", "why": "성장·성공을 가능케 한 것은 인터넷·모바일 기술이며 정부 예산 언급은 없다.", "english": "Its success was mainly due to increased government budgets."}
-      ],
-      "mistips": ["encouraging and coordinating은 분사구문; 앞 절 전체를 부연한다."]
+     "chip": "쉽게 말하면",
+     "text": "전치사 by, such as, in 뒤에는 동사가 그대로 오지 못하고 동명사(-ing)로 바뀌어 목적어가 됩니다."
     },
     {
-      "id": 2,
-      "english": "Websites, smartphone apps, and social media have been instrumental in expanding the reach and impact of a diversity of citizen science projects across time and geographical zones.",
-      "grammar": [
-        {"tag": "주어-동사 수일치", "note": "복수 주어(A, B, and C) → 복수동사 have", "spans": ["have been"]},
-        {"tag": "be instrumental in -ing", "note": "~하는 데 중요한 역할을 하다; in 뒤 동명사", "spans": ["in expanding"]},
-        {"tag": "동명사(전치사 in의 목적어)", "note": "expanding이 in의 목적어", "spans": ["expanding"]}
-      ],
-      "vocab": [
-        {"word": "instrumental", "meaning": "중요한 역할을 하는, 도움이 되는"},
-        {"word": "reach", "meaning": "도달 범위"},
-        {"word": "impact", "meaning": "영향(력)"},
-        {"word": "a diversity of", "meaning": "다양한 ~"},
-        {"word": "geographical zone", "meaning": "지리적 영역"}
-      ],
-      "chunks": [
-        {"en": "Websites, smartphone apps, and social media", "ko": "웹사이트, 스마트폰 [[앱]], 소셜 미디어는"},
-        {"en": "have been instrumental in expanding the reach and impact", "ko": "도달 범위와 [[영향력]]을 확장하는 데 중요한 역할을 해 왔다"},
-        {"en": "of a diversity of citizen science projects", "ko": "다양한 [[시민 과학]] 프로젝트의"},
-        {"en": "across time and geographical zones.", "ko": "시간과 [[지리적]] 영역을 넘어"}
-      ],
-      "misreads": [
-        {"statement": "웹사이트, 스마트폰 앱, 소셜 미디어는 다양한 시민 과학 프로젝트의 도달 범위와 영향력을 확장하는 데 중요한 역할을 해 왔다.", "verdict": "O", "trap_type": "주체대상"}
-      ],
-      "mistips": []
+     "chip": "by -ing",
+     "text": "'by participating' = ~에 참여함으로써(수단·방법)."
     },
     {
-      "id": 3,
-      "english": "Citizen science involves local people helping scientists carry out a scientific project at scale.",
-      "grammar": [
-        {"tag": "involve + 목적어 + 분사(-ing)", "note": "involves의 목적어 people을 helping이 서술", "spans": ["helping"]},
-        {"tag": "help + 목적어 + 원형부정사", "note": "help는 목적격보어로 to 없는 원형(carry out)", "spans": ["carry out"]}
-      ],
-      "vocab": [
-        {"word": "involve", "meaning": "포함하다, 수반하다"},
-        {"word": "carry out", "meaning": "수행하다, 실행하다"},
-        {"word": "at scale", "meaning": "대규모로"},
-        {"word": "scientific project", "meaning": "과학 프로젝트"}
-      ],
-      "chunks": [
-        {"en": "Citizen science involves local people", "ko": "[[시민 과학]]은 지역 주민들이"},
-        {"en": "helping scientists carry out a scientific project at scale.", "ko": "과학자들이 과학 [[프로젝트]]를 대규모로 수행하도록 돕는 것을 포함한다"}
-      ],
-      "misreads": [
-        {"statement": "시민 과학에서 지역 주민들은 과학자들을 대신해 과학 프로젝트를 직접 설계·수행한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "involves local people helping scientists carry out a scientific project", "why": "주민은 과학자를 '돕는' 것이지 대체하거나 직접 설계하는 것이 아니다.", "killer": true}
-      ],
-      "mistips": ["helping ~ carry out: help + 목적어 + 원형부정사(to 생략)."]
+     "chip": "such as -ing",
+     "text": "예시를 들 때도 such as 뒤 동명사들이 병렬로 이어집니다(monitoring, collecting, categorizing, analyzing)."
     },
     {
-      "id": 4,
-      "english": "Currently, thousands of such projects have been set up all over the world, whereby volunteers help out in a number of research areas, including biodiversity, air quality, astronomy, and environmental issues.",
-      "grammar": [
-        {"tag": "현재완료 수동태", "note": "구축되어 왔다(have been set up)", "spans": ["have been set up"]},
-        {"tag": "관계부사 whereby", "note": "'그것을 통해' = by which", "spans": ["whereby"]},
-        {"tag": "help out (구동사)", "note": "거들다, 도움을 주다", "spans": ["help out"]},
-        {"tag": "전치사화된 분사 including", "note": "~을 포함하여(예시 나열)", "spans": ["including"]}
-      ],
-      "vocab": [
-        {"word": "set up", "meaning": "설립하다, 구축하다"},
-        {"word": "whereby", "meaning": "그것을 통해, 그로써"},
-        {"word": "a number of", "meaning": "여러, 다수의"},
-        {"word": "biodiversity", "meaning": "생물다양성"},
-        {"word": "astronomy", "meaning": "천문학"}
-      ],
-      "chunks": [
-        {"en": "Currently, thousands of such projects have been set up all over the world,", "ko": "현재 그러한 프로젝트 수천 개가 전 세계에 [[구축]]되어,"},
-        {"en": "whereby volunteers help out in a number of research areas,", "ko": "이를 통해 [[자원봉사자]]들이 여러 연구 분야에서 돕는다"},
-        {"en": "including biodiversity, air quality, astronomy, and environmental issues.", "ko": "[[생물다양성]], 대기질, 천문학, 환경 문제를 포함하여"}
-      ],
-      "misreads": [
-        {"statement": "그러한 프로젝트 수천 개가 전 세계에 구축되었으며, 대부분 정부의 직접 자금 지원으로 운영된다.", "verdict": "X", "trap_type": "무관정보", "anchor": "thousands of such projects have been set up all over the world", "why": "정부의 자금 지원 여부는 지문에 없는 무관한 정보이다."}
-      ],
-      "mistips": []
+     "chip": "병렬 규칙",
+     "text": "and로 연결되는 예시들은 모두 -ing 형태로 형태를 맞춰야 해요."
     },
     {
-      "id": 5,
-      "english": "They do so by participating in scientific activities such as monitoring plants and wildlife, collecting air and water samples, categorizing galaxies, and analyzing DNA sequences.",
-      "grammar": [
-        {"tag": "대명사 They(지칭)", "note": "앞 문장의 volunteers를 가리킴", "spans": ["They"]},
-        {"tag": "동명사(전치사 by의 목적어)", "note": "by 뒤에 동명사 participating(~함으로써)", "spans": ["by participating"]},
-        {"tag": "such as + 동명사(예시 병렬)", "note": "such as 뒤 동명사들이 병렬로 예시", "spans": ["such as", "monitoring", "collecting", "categorizing", "analyzing"]}
-      ],
-      "vocab": [
-        {"word": "participate in", "meaning": "~에 참여하다"},
-        {"word": "wildlife", "meaning": "야생동물"},
-        {"word": "sample", "meaning": "시료, 표본"},
-        {"word": "categorize", "meaning": "분류하다"},
-        {"word": "DNA sequence", "meaning": "DNA 서열"}
-      ],
-      "chunks": [
-        {"en": "They do so by participating in scientific activities", "ko": "그들은 과학 활동에 [[참여]]함으로써 그렇게 한다"},
-        {"en": "such as monitoring plants and wildlife,", "ko": "식물과 [[야생동물]]을 관찰하고,"},
-        {"en": "collecting air and water samples,", "ko": "공기와 물 [[시료]]를 수집하고,"},
-        {"en": "categorizing galaxies, and analyzing DNA sequences.", "ko": "[[은하]]를 분류하고, DNA 서열을 분석하는 것과 같은"}
-      ],
-      "misreads": [
-        {"statement": "이 문장의 'They(그들)'는 뒤에 나오는 정부(governments)를 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "whereby volunteers help out in a number of research areas", "why": "They는 앞 문장의 자원봉사자(volunteers)를 가리킨다.", "integrative": true}
-      ],
-      "mistips": ["by + 동명사(participating), such as + 동명사 나열: 예시는 모두 -ing로 병렬."]
-    },
-    {
-      "id": 6,
-      "english": "Citizen engagement involves people helping governments, rather than scientists, to improve public services and policies in their communities.",
-      "grammar": [
-        {"tag": "involve + 목적어 + 분사(-ing)", "note": "involves의 목적어 people을 helping이 서술", "spans": ["helping"]},
-        {"tag": "help + 목적어 + to부정사", "note": "help는 to부정사도 가능(to improve)", "spans": ["to improve"]},
-        {"tag": "rather than", "note": "~가 아니라(대조)", "spans": ["rather than"]}
-      ],
-      "vocab": [
-        {"word": "engagement", "meaning": "참여, 관여"},
-        {"word": "government", "meaning": "정부"},
-        {"word": "improve", "meaning": "개선하다"},
-        {"word": "public services", "meaning": "공공 서비스"},
-        {"word": "policy", "meaning": "정책"}
-      ],
-      "chunks": [
-        {"en": "Citizen engagement involves people helping governments, rather than scientists,", "ko": "시민 참여는 사람들이 과학자가 아니라 [[정부]]를 돕는 것을 포함한다"},
-        {"en": "to improve public services and policies in their communities.", "ko": "자기 지역사회의 [[공공 서비스]]와 정책을 개선하도록"}
-      ],
-      "misreads": [
-        {"statement": "필자는 시민들이 정부 일에 관여하는 것을 공공 서비스의 질을 떨어뜨리는 요인으로 우려한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "to improve public services and policies in their communities", "why": "필자는 시민 참여를 공공 서비스와 정책을 '개선'하는 것으로 긍정 서술한다."}
-      ],
-      "mistips": []
-    },
-    {
-      "id": 7,
-      "english": "Examples include setting up and managing a website that offers local services for community disasters and creating an emergency response team when a disaster occurs.",
-      "grammar": [
-        {"tag": "동명사(include의 목적어, 병렬)", "note": "include 뒤 동명사 setting up/managing/creating 병렬", "spans": ["setting up", "managing", "creating"]},
-        {"tag": "관계대명사 주격 that", "note": "a website를 수식하는 주격 관계절", "spans": ["that"]},
-        {"tag": "부사절 접속사 when(시간)", "note": "재난이 발생할 때", "spans": ["when"]}
-      ],
-      "vocab": [
-        {"word": "set up", "meaning": "만들다, 구축하다"},
-        {"word": "manage", "meaning": "운영하다, 관리하다"},
-        {"word": "offer", "meaning": "제공하다"},
-        {"word": "emergency response team", "meaning": "긴급 대응팀"},
-        {"word": "occur", "meaning": "발생하다"}
-      ],
-      "chunks": [
-        {"en": "Examples include setting up and managing a website", "ko": "예로는 [[웹사이트]]를 구축하고 운영하는 것과"},
-        {"en": "that offers local services for community disasters", "ko": "[[지역 재난]]을 위한 지역 서비스를 제공하는"},
-        {"en": "and creating an emergency response team when a disaster occurs.", "ko": "재난이 발생할 때 [[긴급 대응팀]]을 꾸리는 것이 있다"}
-      ],
-      "misreads": [
-        {"statement": "시민 참여의 예로는 지역 재난용 서비스를 제공하는 웹사이트를 구축·운영하는 것과 재난 발생 시 긴급 대응팀을 꾸리는 것이 있다.", "verdict": "O", "trap_type": "주체대상"}
-      ],
-      "mistips": []
+     "chip": "주의",
+     "text": "전치사 뒤에 to부정사나 동사원형을 쓰면 틀립니다(by to participate ✗)."
     }
+   ],
+   "example_analysis": "전치사 by와 such as 뒤에 동명사(participating, monitoring, collecting, categorizing, analyzing)가 목적어·병렬 예시로 온다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "They do so by [[1|participating]] in scientific activities such as [[2|monitoring]] plants and wildlife, [[3|collect]] air and water samples, [[4|categorizing]] galaxies, and [[5|analyzing]] DNA sequences.",
+     "answer": "③",
+     "fix": "such as 뒤 예시들은 동명사로 병렬을 이뤄야 하므로 collect → collecting(원문)으로 고쳐야 한다.",
+     "options": [
+      "① participating",
+      "② monitoring",
+      "③ collect",
+      "④ categorizing",
+      "⑤ analyzing"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "Websites, smartphone apps, and social media [[have/has]] been instrumental in [[expanding/expand]] the reach and impact of a diversity of citizen science projects across time and geographical zones.",
+     "answer": "have / expanding",
+     "fix": "",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "answer": "Examples include to set up and managing a website that offers local services for community disasters and creating an emergency response team when a disaster occurs.",
+     "fix": "include는 동명사를 목적어로 취하므로 to set up → setting up(원문)으로 고쳐야 한다.",
+     "options": [
+      "① The growth and success of citizen science and citizen engagement has been made possible by the Internet and mobile technology, encouraging and coordinating the efforts of millions of people throughout the world.",
+      "② Citizen science involves local people helping scientists carry out a scientific project at scale.",
+      "③ Currently, thousands of such projects have been set up all over the world, whereby volunteers help out in a number of research areas, including biodiversity, air quality, astronomy, and environmental issues.",
+      "④ Citizen engagement involves people helping governments, rather than scientists, to improve public services and policies in their communities.",
+      "⑤ Examples include to set up and managing a website that offers local services for community disasters and creating an emergency response team when a disaster occurs."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "우리는 폐기물을 재활용하고 나무를 심는 것과 같은 활동에 참여함으로써 환경을 돕는다.",
+     "answer": "We help the environment by participating in activities such as recycling waste and planting trees.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "We",
+      "help",
+      "the environment",
+      "by",
+      "participating",
+      "in",
+      "activities",
+      "such as",
+      "recycling",
+      "waste",
+      "and",
+      "planting",
+      "trees"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "그들은 식물과 야생동물을 관찰하고, 공기와 물 시료를 수집하고, 은하를 분류하고, DNA 서열을 분석하는 것과 같은 과학 활동에 참여함으로써 그렇게 한다.",
+     "answer": "They do so by participating in scientific activities such as monitoring plants and wildlife, collecting air and water samples, categorizing galaxies, and analyzing DNA sequences.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "They",
+      "do so",
+      "by",
+      "participating",
+      "in",
+      "scientific",
+      "activities",
+      "such as",
+      "monitoring",
+      "plants and wildlife",
+      "collecting",
+      "air and water samples",
+      "categorizing",
+      "galaxies",
+      "and",
+      "analyzing",
+      "DNA sequences"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "시민 과학과 시민 참여",
+    "expressions": [
+     "citizen science",
+     "citizen engagement"
+    ],
+    "variation": "일반 시민이 과학자를 돕느냐(science) 정부를 돕느냐(engagement)로 갈린다."
+   },
+   {
+    "label": "가능·확장의 원동력",
+    "expressions": [
+     "has been made possible",
+     "instrumental in expanding"
+    ],
+    "variation": "인터넷·모바일 기술이 그 성장과 도달 범위를 가능·확장케 했다."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "주장",
+    "sentence_range": "1~2",
+    "summary": "[[인터넷·모바일 기술]]이 시민 과학·참여의 성장과 도달 범위를 가능·확장",
+    "easy_example": "앱 하나로 전 세계 사람들이 한 프로젝트에 손을 보태는 것."
+   },
+   {
+    "stage": "정의·사례1",
+    "sentence_range": "3~5",
+    "summary": "[[시민 과학]]: 주민이 과학자를 도와 관찰·수집·분류·분석에 참여",
+    "easy_example": "동네 사람들이 새 개체 수를 세어 연구자에게 보내는 것."
+   },
+   {
+    "stage": "정의·사례2",
+    "sentence_range": "6~7",
+    "summary": "[[시민 참여]]: 주민이 정부를 도와 공공 서비스·정책을 개선",
+    "easy_example": "재난용 서비스 웹사이트를 만들고 대응팀을 꾸리는 것."
+   }
   ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "The growth and success of citizen science and citizen engagement has been made possible by the Internet and mobile technology, encouraging and coordinating the efforts of millions of people throughout the world.",
+   "grammar": [
+    {
+     "tag": "주어-동사 수일치",
+     "note": "growth and success를 하나의 개념으로 봐 단수 has",
+     "spans": [
+      "has been"
+     ]
+    },
+    {
+     "tag": "현재완료 수동태",
+     "note": "가능해져 왔다(has been made)",
+     "spans": [
+      "has been made"
+     ]
+    },
+    {
+     "tag": "수동태 행위자 by",
+     "note": "~에 의해(the Internet and mobile technology)",
+     "spans": [
+      "by"
+     ]
+    },
+    {
+     "tag": "분사구문(부대상황)",
+     "note": "그리고 ~하면서(앞 절을 부연)",
+     "spans": [
+      "encouraging",
+      "coordinating"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "engagement",
+     "meaning": "참여, 관여"
+    },
+    {
+     "word": "made possible",
+     "meaning": "가능해진"
+    },
+    {
+     "word": "coordinate",
+     "meaning": "조율하다, 조정하다"
+    },
+    {
+     "word": "effort",
+     "meaning": "노력, 활동"
+    },
+    {
+     "word": "throughout",
+     "meaning": "~ 전역에 걸쳐"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The growth and success of citizen science and citizen engagement",
+     "ko": "시민 과학과 시민 참여의 성장과 [[성공]]은"
+    },
+    {
+     "en": "has been made possible by the Internet and mobile technology,",
+     "ko": "[[인터넷]]과 모바일 기술에 의해 가능해졌고,"
+    },
+    {
+     "en": "encouraging and coordinating the efforts of millions of people throughout the world.",
+     "ko": "전 세계 수백만 명의 [[노력]]을 북돋우고 [[조율하면서]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "인터넷·모바일 기술이 시민 과학의 성장에 기여했지만, 그 성공은 주로 각국 정부의 예산 확대 때문이었다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "has been made possible by the Internet and mobile technology",
+     "why": "성장·성공을 가능케 한 것은 인터넷·모바일 기술이며 정부 예산 언급은 없다.",
+     "english": "Its success was mainly due to increased government budgets."
+    }
+   ],
+   "mistips": [
+    "encouraging and coordinating은 분사구문; 앞 절 전체를 부연한다."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "Websites, smartphone apps, and social media have been instrumental in expanding the reach and impact of a diversity of citizen science projects across time and geographical zones.",
+   "grammar": [
+    {
+     "tag": "주어-동사 수일치",
+     "note": "복수 주어(A, B, and C) → 복수동사 have",
+     "spans": [
+      "have been"
+     ]
+    },
+    {
+     "tag": "be instrumental in -ing",
+     "note": "~하는 데 중요한 역할을 하다; in 뒤 동명사",
+     "spans": [
+      "in expanding"
+     ]
+    },
+    {
+     "tag": "동명사(전치사 in의 목적어)",
+     "note": "expanding이 in의 목적어",
+     "spans": [
+      "expanding"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "instrumental",
+     "meaning": "중요한 역할을 하는, 도움이 되는"
+    },
+    {
+     "word": "reach",
+     "meaning": "도달 범위"
+    },
+    {
+     "word": "impact",
+     "meaning": "영향(력)"
+    },
+    {
+     "word": "a diversity of",
+     "meaning": "다양한 ~"
+    },
+    {
+     "word": "geographical zone",
+     "meaning": "지리적 영역"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Websites, smartphone apps, and social media",
+     "ko": "웹사이트, 스마트폰 [[앱]], 소셜 미디어는"
+    },
+    {
+     "en": "have been instrumental in expanding the reach and impact",
+     "ko": "도달 범위와 [[영향력]]을 확장하는 데 [[중요한]] 역할을 해 왔다"
+    },
+    {
+     "en": "of a diversity of citizen science projects",
+     "ko": "다양한 [[시민 과학]] 프로젝트의"
+    },
+    {
+     "en": "across time and geographical zones.",
+     "ko": "시간과 [[지리적]] 영역을 넘어"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "웹사이트, 스마트폰 앱, 소셜 미디어는 다양한 시민 과학 프로젝트의 도달 범위와 영향력을 확장하는 데 중요한 역할을 해 왔다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "Citizen science involves local people helping scientists carry out a scientific project at scale.",
+   "grammar": [
+    {
+     "tag": "involve + 목적어 + 분사(-ing)",
+     "note": "involves의 목적어 people을 helping이 서술",
+     "spans": [
+      "helping"
+     ]
+    },
+    {
+     "tag": "help + 목적어 + 원형부정사",
+     "note": "help는 목적격보어로 to 없는 원형(carry out)",
+     "spans": [
+      "carry out"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "involve",
+     "meaning": "포함하다, 수반하다"
+    },
+    {
+     "word": "carry out",
+     "meaning": "수행하다, 실행하다"
+    },
+    {
+     "word": "at scale",
+     "meaning": "대규모로"
+    },
+    {
+     "word": "scientific project",
+     "meaning": "과학 프로젝트"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Citizen science involves local people",
+     "ko": "[[시민 과학]]은 지역 주민들이"
+    },
+    {
+     "en": "helping scientists carry out a scientific project at scale.",
+     "ko": "과학자들이 과학 [[프로젝트]]를 대규모로 [[수행하도록]] 돕는 것을 포함한다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "시민 과학에서 지역 주민들은 과학자들을 대신해 과학 프로젝트를 직접 설계·수행한다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "involves local people helping scientists carry out a scientific project",
+     "why": "주민은 과학자를 '돕는' 것이지 대체하거나 직접 설계하는 것이 아니다.",
+     "killer": true
+    }
+   ],
+   "mistips": [
+    "helping ~ carry out: help + 목적어 + 원형부정사(to 생략)."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "Currently, thousands of such projects have been set up all over the world, whereby volunteers help out in a number of research areas, including biodiversity, air quality, astronomy, and environmental issues.",
+   "grammar": [
+    {
+     "tag": "현재완료 수동태",
+     "note": "구축되어 왔다(have been set up)",
+     "spans": [
+      "have been set up"
+     ]
+    },
+    {
+     "tag": "관계부사 whereby",
+     "note": "'그것을 통해' = by which",
+     "spans": [
+      "whereby"
+     ]
+    },
+    {
+     "tag": "help out (구동사)",
+     "note": "거들다, 도움을 주다",
+     "spans": [
+      "help out"
+     ]
+    },
+    {
+     "tag": "전치사화된 분사 including",
+     "note": "~을 포함하여(예시 나열)",
+     "spans": [
+      "including"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "set up",
+     "meaning": "설립하다, 구축하다"
+    },
+    {
+     "word": "whereby",
+     "meaning": "그것을 통해, 그로써"
+    },
+    {
+     "word": "a number of",
+     "meaning": "여러, 다수의"
+    },
+    {
+     "word": "biodiversity",
+     "meaning": "생물다양성"
+    },
+    {
+     "word": "astronomy",
+     "meaning": "천문학"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Currently, thousands of such projects have been set up all over the world,",
+     "ko": "현재 그러한 [[프로젝트]] 수천 개가 전 세계에 [[구축]]되어,"
+    },
+    {
+     "en": "whereby volunteers help out in a number of research areas,",
+     "ko": "이를 통해 [[자원봉사자]]들이 여러 연구 분야에서 돕는다"
+    },
+    {
+     "en": "including biodiversity, air quality, astronomy, and environmental issues.",
+     "ko": "[[생물다양성]], 대기질, 천문학, 환경 문제를 포함하여"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "그러한 프로젝트 수천 개가 전 세계에 구축되었으며, 대부분 정부의 직접 자금 지원으로 운영된다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "thousands of such projects have been set up all over the world",
+     "why": "정부의 자금 지원 여부는 지문에 없는 무관한 정보이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "They do so by participating in scientific activities such as monitoring plants and wildlife, collecting air and water samples, categorizing galaxies, and analyzing DNA sequences.",
+   "grammar": [
+    {
+     "tag": "대명사 They(지칭)",
+     "note": "앞 문장의 volunteers를 가리킴",
+     "spans": [
+      "They"
+     ]
+    },
+    {
+     "tag": "동명사(전치사 by의 목적어)",
+     "note": "by 뒤에 동명사 participating(~함으로써)",
+     "spans": [
+      "by participating"
+     ]
+    },
+    {
+     "tag": "such as + 동명사(예시 병렬)",
+     "note": "such as 뒤 동명사들이 병렬로 예시",
+     "spans": [
+      "such as",
+      "monitoring",
+      "collecting",
+      "categorizing",
+      "analyzing"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "participate in",
+     "meaning": "~에 참여하다"
+    },
+    {
+     "word": "wildlife",
+     "meaning": "야생동물"
+    },
+    {
+     "word": "sample",
+     "meaning": "시료, 표본"
+    },
+    {
+     "word": "categorize",
+     "meaning": "분류하다"
+    },
+    {
+     "word": "DNA sequence",
+     "meaning": "DNA 서열"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "They do so by participating in scientific activities",
+     "ko": "그들은 과학 활동에 [[참여]]함으로써 [[그렇게]] 한다"
+    },
+    {
+     "en": "such as monitoring plants and wildlife,",
+     "ko": "식물과 [[야생동물]]을 관찰하고,"
+    },
+    {
+     "en": "collecting air and water samples,",
+     "ko": "공기와 물 [[시료]]를 수집하고,"
+    },
+    {
+     "en": "categorizing galaxies, and analyzing DNA sequences.",
+     "ko": "[[은하]]를 분류하고, DNA 서열을 분석하는 것과 같은"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장의 'They(그들)'는 뒤에 나오는 정부(governments)를 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "whereby volunteers help out in a number of research areas",
+     "why": "They는 앞 문장의 자원봉사자(volunteers)를 가리킨다.",
+     "integrative": true
+    }
+   ],
+   "mistips": [
+    "by + 동명사(participating), such as + 동명사 나열: 예시는 모두 -ing로 병렬."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Citizen engagement involves people helping governments, rather than scientists, to improve public services and policies in their communities.",
+   "grammar": [
+    {
+     "tag": "involve + 목적어 + 분사(-ing)",
+     "note": "involves의 목적어 people을 helping이 서술",
+     "spans": [
+      "helping"
+     ]
+    },
+    {
+     "tag": "help + 목적어 + to부정사",
+     "note": "help는 to부정사도 가능(to improve)",
+     "spans": [
+      "to improve"
+     ]
+    },
+    {
+     "tag": "rather than",
+     "note": "~가 아니라(대조)",
+     "spans": [
+      "rather than"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "engagement",
+     "meaning": "참여, 관여"
+    },
+    {
+     "word": "government",
+     "meaning": "정부"
+    },
+    {
+     "word": "improve",
+     "meaning": "개선하다"
+    },
+    {
+     "word": "public services",
+     "meaning": "공공 서비스"
+    },
+    {
+     "word": "policy",
+     "meaning": "정책"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Citizen engagement involves people helping governments, rather than scientists,",
+     "ko": "시민 참여는 사람들이 과학자가 아니라 [[정부]]를 돕는 것을 [[포함한다]]"
+    },
+    {
+     "en": "to improve public services and policies in their communities.",
+     "ko": "자기 지역사회의 [[공공 서비스]]와 정책을 개선하도록"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 시민들이 정부 일에 관여하는 것을 공공 서비스의 질을 떨어뜨리는 요인으로 우려한다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "to improve public services and policies in their communities",
+     "why": "필자는 시민 참여를 공공 서비스와 정책을 '개선'하는 것으로 긍정 서술한다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 7,
+   "english": "Examples include setting up and managing a website that offers local services for community disasters and creating an emergency response team when a disaster occurs.",
+   "grammar": [
+    {
+     "tag": "동명사(include의 목적어, 병렬)",
+     "note": "include 뒤 동명사 setting up/managing/creating 병렬",
+     "spans": [
+      "setting up",
+      "managing",
+      "creating"
+     ]
+    },
+    {
+     "tag": "관계대명사 주격 that",
+     "note": "a website를 수식하는 주격 관계절",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "부사절 접속사 when(시간)",
+     "note": "재난이 발생할 때",
+     "spans": [
+      "when"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "set up",
+     "meaning": "만들다, 구축하다"
+    },
+    {
+     "word": "manage",
+     "meaning": "운영하다, 관리하다"
+    },
+    {
+     "word": "offer",
+     "meaning": "제공하다"
+    },
+    {
+     "word": "emergency response team",
+     "meaning": "긴급 대응팀"
+    },
+    {
+     "word": "occur",
+     "meaning": "발생하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Examples include setting up and managing a website",
+     "ko": "예로는 [[웹사이트]]를 구축하고 운영하는 것과"
+    },
+    {
+     "en": "that offers local services for community disasters",
+     "ko": "[[지역 재난]]을 위한 지역 서비스를 제공하는"
+    },
+    {
+     "en": "and creating an emergency response team when a disaster occurs.",
+     "ko": "재난이 [[발생할]] 때 [[긴급 대응팀]]을 꾸리는 것이 있다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "시민 참여의 예로는 지역 재난용 서비스를 제공하는 웹사이트를 구축·운영하는 것과 재난 발생 시 긴급 대응팀을 꾸리는 것이 있다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  }
+ ]
 }

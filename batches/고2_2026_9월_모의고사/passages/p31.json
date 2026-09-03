@@ -1,243 +1,584 @@
 {
-  "item_no": "31",
-  "theme": "불분명해지는 인간 지리 — 양자적 인간",
-  "overview": {
-    "theme_ko": "불분명해지는 인간 지리와 양자적 인간",
-    "topic": "🔎 끊임없이 이동하는 시대의 유동적인 인간 지리",
-    "stance": "중립적",
-    "stance_reason": "현상을 진단·기술하며 안정으로의 회귀는 불가능하다고 봄('that's not how things work')",
-    "structure": "주장→근거·예시",
-    "structure_reason": "인간 지리의 유동성을 주장하고 상전이·양자 비유와 다양한 이동 인구로 뒷받침한다",
-    "key_grammar": {
-      "point": "분사구문",
-      "source_sentence": "As people find themselves regularly on the move, we are experiencing a phase shift like when matter transitions from solid to liquid to gas: molecules heat up and loosen from one another, vibrating more rapidly.",
-      "explanation": [
-        {"chip": "쉽게 말하면", "text": "접속사와 주어를 없애고 동사를 -ing로 바꿔 '~하면서/~한 채로' 부가 정보를 덧붙이는 구조이다."},
-        {"chip": "표지", "text": "vibrating처럼 문장 뒤에 콤마와 함께 붙는 현재분사가 분사구문의 신호이다."},
-        {"chip": "의미", "text": "여기서는 '분자들이 느슨해지면서, 동시에 더 빠르게 진동한다'는 동시동작을 나타낸다."},
-        {"chip": "주의", "text": "주절 주어(molecules)와 분사의 의미상 주어가 같아 생략됐고, 다르면 독립분사구문이 된다."}
-      ],
-      "example_analysis": "molecules ... loosen ..., vibrating more rapidly에서 접속사+주어를 생략하고 현재분사 vibrating으로 동시동작을 나타낸 분사구문이다.",
-      "drills": [
-        {
-          "kind": "밑줄형",
-          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
-          "sentence": "As people [[1|find]] themselves regularly on the move, we [[2|are experiencing]] a phase shift like when matter [[3|transitions]] from solid to liquid to gas: molecules heat up and [[4|loosen]] from one another, [[5|vibrate]] more rapidly.",
-          "options": ["① find", "② are experiencing", "③ transitions", "④ loosen", "⑤ vibrate"],
-          "answer": "⑤",
-          "fix": "vibrate → vibrating: 접속사 없이 주절과 동시동작을 나타내는 분사구문이므로 현재분사 vibrating이 옳다.",
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "네모형",
-          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
-          "sentence": "Highly [[paid/paying]] digital nomads and billionaires with multiple passports as well as migratory workers [[are/is]] all part of the diverse and [[growing/grown]] global demographic of quantum people.",
-          "options": [],
-          "answer": "paid / are / growing",
-          "fix": "nomads는 '보수를 받는' 대상이므로 과거분사 paid, 복수 주어이므로 are, demographic은 '증가하는' 능동 의미이므로 현재분사 growing이 옳다.",
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "오류찾기",
-          "question": "다음 중 어법상 틀린 문장은?",
-          "sentence": "",
-          "options": [
-            "① Human geography is becoming unclear.",
-            "② It would be nice to return to some form of stability, but that's not how things work in a quantum world.",
-            "③ Highly paying digital nomads and billionaires with multiple passports as well as migratory workers are all part of the diverse and growing global demographic of quantum people.",
-            "④ One might even say that humans are becoming like particles in quantum physics, their velocity and location always in flux.",
-            "⑤ Instead, the complexity of today's world makes it increasingly difficult to permanently settle anywhere."
-          ],
-          "answer": "Highly paying digital nomads and billionaires with multiple passports as well as migratory workers are all part of the diverse and growing global demographic of quantum people.",
-          "fix": "paying → paid: nomads가 '보수를 받는' 대상이므로 능동의 현재분사가 아니라 과거분사 paid가 옳다.",
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "영작",
-          "question": "문을 닫으면서, 그녀는 방을 나갔다. (분사구문을 사용하여)",
-          "sentence": "",
-          "answer": "Closing the door, she left the room.",
-          "fix": "",
-          "options": [],
-          "words": ["Closing", "the", "door,", "she", "left", "the", "room."],
-          "from_passage": false
-        },
-        {
-          "kind": "영작",
-          "question": "분자들은 열을 받아 서로에게서 느슨해지며, 더 빠르게 진동한다.",
-          "sentence": "",
-          "answer": "molecules heat up and loosen from one another, vibrating more rapidly.",
-          "fix": "",
-          "options": [],
-          "words": ["molecules", "heat up", "and", "loosen", "from one another,", "vibrating", "more rapidly."],
-          "from_passage": true
-        }
-      ]
-    },
-    "restatement_chains": [
-      {
-        "label": "유동성·이동성",
-        "expressions": ["on the move", "always in flux", "increasingly difficult to permanently settle"],
-        "variation": "고정된 위치가 사라지고 사람의 자리가 끊임없이 변한다는 개념의 반복"
-      },
-      {
-        "label": "양자 비유",
-        "expressions": ["like particles in quantum physics", "in a quantum world", "quantum people"],
-        "variation": "인간의 이동성을 양자물리학의 입자에 빗대는 비유의 확장"
-      }
-    ],
-    "flow_blocks": [
-      {"stage": "도입", "sentence_range": "1", "summary": "[[인간 지리]]가 점점 불분명해지고 있다", "easy_example": "예전엔 '누가 어디 산다'가 분명했지만 이제는 흐릿하다."},
-      {"stage": "전개", "sentence_range": "2~3", "summary": "잦은 이동은 [[상전이]]·양자 [[입자]]에 비유된다", "easy_example": "얼음이 녹아 물이 되듯 사람도 한곳에 굳어 있지 않는다."},
-      {"stage": "전환", "sentence_range": "4", "summary": "[[안정]]으로의 회귀는 양자 세계에선 불가능", "easy_example": "돌아가고 싶어도 예전의 정착 상태로는 돌아갈 수 없다."},
-      {"stage": "결론", "sentence_range": "5~6", "summary": "영구 [[정착]]은 어렵고 모두 '양자적 인간'이다", "easy_example": "디지털 유목민도 이주 노동자도 다 같은 흐름 속에 있다."}
-    ]
-  },
-  "sentences": [
+ "item_no": "31",
+ "theme": "불분명해지는 인간 지리 — 양자적 인간",
+ "overview": {
+  "theme_ko": "불분명해지는 인간 지리와 양자적 인간",
+  "topic": "🔎 끊임없이 이동하는 시대의 유동적인 인간 지리",
+  "stance": "중립적",
+  "stance_reason": "현상을 진단·기술하며 안정으로의 회귀는 불가능하다고 봄('that's not how things work')",
+  "structure": "주장→근거·예시",
+  "structure_reason": "인간 지리의 유동성을 주장하고 상전이·양자 비유와 다양한 이동 인구로 뒷받침한다",
+  "key_grammar": {
+   "point": "분사구문",
+   "source_sentence": "As people find themselves regularly on the move, we are experiencing a phase shift like when matter transitions from solid to liquid to gas: molecules heat up and loosen from one another, vibrating more rapidly.",
+   "explanation": [
     {
-      "id": 1,
-      "english": "Human geography is becoming unclear.",
-      "grammar": [
-        {"tag": "현재진행", "note": "지금 진행 중인 변화를 be + -ing로 표현", "spans": ["is becoming"]}
-      ],
-      "vocab": [
-        {"word": "geography", "meaning": "지리, 지리적 배치"},
-        {"word": "unclear", "meaning": "불분명한, 흐릿한"}
-      ],
-      "chunks": [
-        {"en": "Human geography is becoming unclear.", "ko": "인간 [[지리]]는 불분명해지고 있다."}
-      ],
-      "misreads": [
-        {"statement": "인간의 공간적 배치, 즉 인간 지리가 점점 불분명해지고 있다.", "verdict": "O", "trap_type": "주체대상"}
-      ],
-      "mistips": []
+     "chip": "쉽게 말하면",
+     "text": "접속사와 주어를 없애고 동사를 -ing로 바꿔 '~하면서/~한 채로' 부가 정보를 덧붙이는 구조이다."
     },
     {
-      "id": 2,
-      "english": "As people find themselves regularly on the move, we are experiencing a phase shift like when matter transitions from solid to liquid to gas: molecules heat up and loosen from one another, vibrating more rapidly.",
-      "grammar": [
-        {"tag": "부사절 접속사(as)", "note": "'~하면서/~함에 따라' 동시·이유의 부사절", "spans": ["As"]},
-        {"tag": "재귀대명사", "note": "주어와 목적어가 같아 -self로 받음", "spans": ["themselves"]},
-        {"tag": "현재진행", "note": "지금 겪고 있는 변화", "spans": ["are experiencing"]},
-        {"tag": "분사구문(동시동작)", "note": "접속사·주어 생략 후 현재분사로 '~하면서'", "spans": ["vibrating"]}
-      ],
-      "vocab": [
-        {"word": "on the move", "meaning": "이동 중인, 움직이는"},
-        {"word": "phase shift", "meaning": "상전이, 상태 변화"},
-        {"word": "transition", "meaning": "전이하다, 옮겨가다"},
-        {"word": "loosen", "meaning": "느슨해지다, 풀리다"},
-        {"word": "vibrate", "meaning": "진동하다"}
-      ],
-      "chunks": [
-        {"en": "As people find themselves regularly on the move,", "ko": "사람들이 정기적으로 [[이동하는]] 상태에 놓이면서,"},
-        {"en": "we are experiencing a phase shift", "ko": "우리는 [[상전이]]를 경험하고 있는데,"},
-        {"en": "[[like when matter transitions from solid to liquid to gas:]]", "ko": "[[마치 물질이 고체에서 액체, 기체로 전이할 때처럼:]]"},
-        {"en": "[[molecules heat up and loosen from one another, vibrating more rapidly.]]", "ko": "[[분자들이 열을 받아 서로에게서 느슨해지며, 더 빠르게 진동한다.]]"}
-      ],
-      "misreads": [
-        {"statement": "물질이 상전이할 때 분자들은 서로 더 단단히 결합하며 오히려 더 느리게 진동한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "molecules heat up and loosen from one another, vibrating more rapidly", "why": "열을 받아 느슨해지고 더 빠르게 진동한다고 했으므로 결합 강화·감속은 정반대이다."}
-      ],
-      "mistips": ["like when ~ 은 '마치 ~할 때처럼'으로, when이 이유가 아니라 비유의 시점을 이끈다.", "vibrating은 앞 절과 별개의 새 주어가 아니라 molecules의 동시동작을 나타낸다."]
+     "chip": "표지",
+     "text": "vibrating처럼 문장 뒤에 콤마와 함께 붙는 현재분사가 분사구문의 신호이다."
     },
     {
-      "id": 3,
-      "english": "One might even say that humans are becoming like particles in quantum physics, their velocity and location always in flux.",
-      "grammar": [
-        {"tag": "조동사(추측)", "note": "'~할지도 모른다'는 약한 추측", "spans": ["might"]},
-        {"tag": "명사절 접속사 that", "note": "say의 목적어절을 이끄는 that", "spans": ["that"]},
-        {"tag": "독립분사구문(being 생략)", "note": "주어(their ~)를 따로 갖는 부대상황, being이 생략됨", "spans": []}
-      ],
-      "vocab": [
-        {"word": "particle", "meaning": "입자"},
-        {"word": "quantum physics", "meaning": "양자물리학"},
-        {"word": "velocity", "meaning": "속도"},
-        {"word": "in flux", "meaning": "유동적인, 끊임없이 변하는"}
-      ],
-      "chunks": [
-        {"en": "One might even say", "ko": "혹자는 심지어 [[말할]] 수도 있다"},
-        {"en": "that humans are becoming like particles in quantum physics,", "ko": "인간이 양자물리학의 [[입자]]처럼 되어가고 있다고,"},
-        {"en": "[[their velocity and location always in flux.]]", "ko": "[[그들의 속도와 위치는 항상 유동적인 채로.]]"}
-      ],
-      "misreads": [
-        {"statement": "양자물리학의 입자처럼 인간도 속도와 위치가 항상 유동적이라고 비유한다.", "verdict": "O", "trap_type": "주체대상"},
-        {"statement": "지문은 양자물리학이 확립된 역사적 시기를 근거로 인간 지리를 설명한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "humans are becoming like particles in quantum physics", "why": "인간을 양자 입자에 비유할 뿐 물리학의 확립 시기는 언급이 없다."}
-      ],
-      "mistips": ["their velocity and location always in flux는 동사 없이 '주어 + 상태'로 된 부대상황(being 생략)이다."]
+     "chip": "의미",
+     "text": "여기서는 '분자들이 느슨해지면서, 동시에 더 빠르게 진동한다'는 동시동작을 나타낸다."
     },
     {
-      "id": 4,
-      "english": "It would be nice to return to some form of stability, but that's not how things work in a quantum world.",
-      "grammar": [
-        {"tag": "가주어-진주어", "note": "It이 가주어, to부정사가 진주어", "spans": ["It", "to return"]},
-        {"tag": "조동사(가정·완곡)", "note": "'~할 것이다'의 완곡한 추정", "spans": ["would"]},
-        {"tag": "관계부사 how", "note": "'~하는 방식'을 뜻하는 how가 이끄는 명사절", "spans": ["how"]}
-      ],
-      "vocab": [
-        {"word": "stability", "meaning": "안정, 안정성"},
-        {"word": "quantum", "meaning": "양자의"}
-      ],
-      "chunks": [
-        {"en": "It would be nice", "ko": "~하는 것은 [[좋을]] 것이다"},
-        {"en": "to return to some form of stability,", "ko": "어떤 형태의 [[안정성]]으로 돌아가는 것은,"},
-        {"en": "[[but that's not how things work in a quantum world.]]", "ko": "[[하지만 양자 세계에서는 일이 그런 식으로 돌아가지 않는다.]]"}
-      ],
-      "misreads": [
-        {"statement": "The author claims that returning to stability is how things actually work in a quantum world.", "verdict": "X", "trap_type": "필자관점", "english": true, "anchor": "that's not how things work in a quantum world", "why": "필자는 안정으로의 회귀가 양자 세계의 작동 방식이 아니라고 단언하므로 정반대이다."}
-      ],
-      "mistips": ["that's not how things work = '일이 그렇게 돌아가지 않는다', 즉 회귀가 불가능하다는 뜻이다."]
-    },
-    {
-      "id": 5,
-      "english": "Instead, the complexity of today's world makes it increasingly difficult to permanently settle anywhere.",
-      "grammar": [
-        {"tag": "명사의 소유격", "note": "'오늘날 세계의'를 나타내는 -'s", "spans": ["today's"]},
-        {"tag": "가목적어-진목적어", "note": "make + it(가목적어) + 형용사 + to부정사(진목적어)", "spans": ["makes it", "to permanently settle"]}
-      ],
-      "vocab": [
-        {"word": "complexity", "meaning": "복잡성"},
-        {"word": "increasingly", "meaning": "점점 더"},
-        {"word": "permanently", "meaning": "영구적으로"},
-        {"word": "settle", "meaning": "정착하다"}
-      ],
-      "chunks": [
-        {"en": "Instead, the complexity of today's world makes", "ko": "대신, 오늘날 세계의 [[복잡성]]은 만든다"},
-        {"en": "[[it increasingly difficult to permanently settle anywhere.]]", "ko": "[[어디에도 영구적으로 정착하는 것을 점점 더 어렵게.]]"}
-      ],
-      "misreads": [
-        {"statement": "오늘날 세계가 단순해질수록 어디든 영구적으로 정착하기가 더 어려워진다.", "verdict": "X", "trap_type": "인과조건", "anchor": "the complexity of today's world makes it increasingly difficult to permanently settle anywhere", "why": "정착을 어렵게 하는 것은 세계의 '복잡성'이지 단순화가 아니다.", "killer": true},
-        {"statement": "어디에도 영구적으로 정착하기 어려운 것은 사람들이 이동 자체를 원치 않기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "the complexity of today's world makes it increasingly difficult to permanently settle anywhere", "why": "정착이 어렵다는 방향은 맞지만 그 원인은 이동 기피가 아니라 세계의 복잡성이다."}
-      ],
-      "mistips": ["it은 가목적어이고 진짜 목적어는 to permanently settle anywhere이다."]
-    },
-    {
-      "id": 6,
-      "english": "Highly paid digital nomads and billionaires with multiple passports as well as migratory workers are all part of the diverse and growing global demographic of quantum people.",
-      "grammar": [
-        {"tag": "과거분사(형용사적)", "note": "'보수를 받는' 수동 의미로 명사를 수식", "spans": ["paid"]},
-        {"tag": "상관접속사(as well as)", "note": "'B뿐 아니라 A도'로 앞의 A에 무게", "spans": ["as well as"]},
-        {"tag": "수일치", "note": "복수 주어를 받는 복수 동사", "spans": ["are"]},
-        {"tag": "현재분사(형용사적)", "note": "'증가하는' 능동 의미로 명사 수식", "spans": ["growing"]}
-      ],
-      "vocab": [
-        {"word": "digital nomad", "meaning": "디지털 유목민"},
-        {"word": "billionaire", "meaning": "억만장자"},
-        {"word": "passport", "meaning": "여권"},
-        {"word": "migratory", "meaning": "이주하는, 이동하는"},
-        {"word": "demographic", "meaning": "인구 집단, 인구통계 집단"}
-      ],
-      "chunks": [
-        {"en": "Highly paid digital nomads and billionaires with multiple passports", "ko": "높은 보수를 받는 디지털 [[유목민]]과 여러 여권을 지닌 억만장자들,"},
-        {"en": "as well as migratory workers are all part", "ko": "그리고 [[이주]] 노동자들까지 모두 일부이다"},
-        {"en": "[[of the diverse and growing global demographic of quantum people.]]", "ko": "[[다양하고 증가하는 양자적 인간이라는 전 세계 인구 집단의.]]"}
-      ],
-      "misreads": [
-        {"statement": "'양자적 인간'이라는 인구 집단은 오직 이주 노동자만을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "Highly paid digital nomads and billionaires with multiple passports as well as migratory workers are all part of the diverse and growing global demographic of quantum people", "why": "디지털 유목민과 억만장자까지 모두 포함하므로 이주 노동자에 한정되지 않는다."},
-        {"statement": "디지털 유목민, 억만장자, 이주 노동자가 모두 양자적 인간에 속하는 것은 그들이 동일한 경제 계층이기 때문이다.", "verdict": "X", "trap_type": "인과조건", "anchor": "the diverse and growing global demographic of quantum people", "why": "지문은 이동성·다양성으로 이들을 묶을 뿐 동일 경제 계층을 근거로 들지 않는다."}
-      ],
-      "mistips": ["A as well as B are ~ 에서 동사는 앞의 A(nomads and billionaires)에 수를 맞춘다."]
+     "chip": "주의",
+     "text": "주절 주어(molecules)와 분사의 의미상 주어가 같아 생략됐고, 다르면 독립분사구문이 된다."
     }
+   ],
+   "example_analysis": "molecules ... loosen ..., vibrating more rapidly에서 접속사+주어를 생략하고 현재분사 vibrating으로 동시동작을 나타낸 분사구문이다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "As people [[1|find]] themselves regularly on the move, we [[2|are experiencing]] a phase shift like when matter [[3|transitions]] from solid to liquid to gas: molecules heat up and [[4|loosen]] from one another, [[5|vibrate]] more rapidly.",
+     "options": [
+      "① find",
+      "② are experiencing",
+      "③ transitions",
+      "④ loosen",
+      "⑤ vibrate"
+     ],
+     "answer": "⑤",
+     "fix": "vibrate → vibrating: 접속사 없이 주절과 동시동작을 나타내는 분사구문이므로 현재분사 vibrating이 옳다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "Highly [[paid/paying]] digital nomads and billionaires with multiple passports as well as migratory workers [[are/is]] all part of the diverse and [[growing/grown]] global demographic of quantum people.",
+     "options": [],
+     "answer": "paid / are / growing",
+     "fix": "nomads는 '보수를 받는' 대상이므로 과거분사 paid, 복수 주어이므로 are, demographic은 '증가하는' 능동 의미이므로 현재분사 growing이 옳다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "options": [
+      "① Human geography is becoming unclear.",
+      "② It would be nice to return to some form of stability, but that's not how things work in a quantum world.",
+      "③ Highly paying digital nomads and billionaires with multiple passports as well as migratory workers are all part of the diverse and growing global demographic of quantum people.",
+      "④ One might even say that humans are becoming like particles in quantum physics, their velocity and location always in flux.",
+      "⑤ Instead, the complexity of today's world makes it increasingly difficult to permanently settle anywhere."
+     ],
+     "answer": "Highly paying digital nomads and billionaires with multiple passports as well as migratory workers are all part of the diverse and growing global demographic of quantum people.",
+     "fix": "paying → paid: nomads가 '보수를 받는' 대상이므로 능동의 현재분사가 아니라 과거분사 paid가 옳다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "문을 닫으면서, 그녀는 방을 나갔다. (분사구문을 사용하여)",
+     "sentence": "",
+     "answer": "Closing the door, she left the room.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Closing",
+      "the",
+      "door,",
+      "she",
+      "left",
+      "the",
+      "room."
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "분자들은 열을 받아 서로에게서 느슨해지며, 더 빠르게 진동한다.",
+     "sentence": "",
+     "answer": "molecules heat up and loosen from one another, vibrating more rapidly.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "molecules",
+      "heat up",
+      "and",
+      "loosen",
+      "from one another,",
+      "vibrating",
+      "more rapidly."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "유동성·이동성",
+    "expressions": [
+     "on the move",
+     "always in flux",
+     "increasingly difficult to permanently settle"
+    ],
+    "variation": "고정된 위치가 사라지고 사람의 자리가 끊임없이 변한다는 개념의 반복"
+   },
+   {
+    "label": "양자 비유",
+    "expressions": [
+     "like particles in quantum physics",
+     "in a quantum world",
+     "quantum people"
+    ],
+    "variation": "인간의 이동성을 양자물리학의 입자에 빗대는 비유의 확장"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입",
+    "sentence_range": "1",
+    "summary": "[[인간 지리]]가 점점 불분명해지고 있다",
+    "easy_example": "예전엔 '누가 어디 산다'가 분명했지만 이제는 흐릿하다."
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "2~3",
+    "summary": "잦은 이동은 [[상전이]]·양자 [[입자]]에 비유된다",
+    "easy_example": "얼음이 녹아 물이 되듯 사람도 한곳에 굳어 있지 않는다."
+   },
+   {
+    "stage": "전환",
+    "sentence_range": "4",
+    "summary": "[[안정]]으로의 회귀는 양자 세계에선 불가능",
+    "easy_example": "돌아가고 싶어도 예전의 정착 상태로는 돌아갈 수 없다."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "5~6",
+    "summary": "영구 [[정착]]은 어렵고 모두 '양자적 인간'이다",
+    "easy_example": "디지털 유목민도 이주 노동자도 다 같은 흐름 속에 있다."
+   }
   ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Human geography is becoming unclear.",
+   "grammar": [
+    {
+     "tag": "현재진행",
+     "note": "지금 진행 중인 변화를 be + -ing로 표현",
+     "spans": [
+      "is becoming"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "geography",
+     "meaning": "지리, 지리적 배치"
+    },
+    {
+     "word": "unclear",
+     "meaning": "불분명한, 흐릿한"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Human geography is becoming unclear.",
+     "ko": "인간 [[지리]]는 [[불분명해지고]] 있다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "인간의 공간적 배치, 즉 인간 지리가 점점 불분명해지고 있다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "As people find themselves regularly on the move, we are experiencing a phase shift like when matter transitions from solid to liquid to gas: molecules heat up and loosen from one another, vibrating more rapidly.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사(as)",
+     "note": "'~하면서/~함에 따라' 동시·이유의 부사절",
+     "spans": [
+      "As"
+     ]
+    },
+    {
+     "tag": "재귀대명사",
+     "note": "주어와 목적어가 같아 -self로 받음",
+     "spans": [
+      "themselves"
+     ]
+    },
+    {
+     "tag": "현재진행",
+     "note": "지금 겪고 있는 변화",
+     "spans": [
+      "are experiencing"
+     ]
+    },
+    {
+     "tag": "분사구문(동시동작)",
+     "note": "접속사·주어 생략 후 현재분사로 '~하면서'",
+     "spans": [
+      "vibrating"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "on the move",
+     "meaning": "이동 중인, 움직이는"
+    },
+    {
+     "word": "phase shift",
+     "meaning": "상전이, 상태 변화"
+    },
+    {
+     "word": "transition",
+     "meaning": "전이하다, 옮겨가다"
+    },
+    {
+     "word": "loosen",
+     "meaning": "느슨해지다, 풀리다"
+    },
+    {
+     "word": "vibrate",
+     "meaning": "진동하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "As people find themselves regularly on the move,",
+     "ko": "사람들이 정기적으로 [[이동하는]] 상태에 [[놓이면서,]]"
+    },
+    {
+     "en": "we are experiencing a phase shift",
+     "ko": "우리는 [[상전이]]를 경험하고 있는데,"
+    },
+    {
+     "en": "[[like when matter transitions from solid to liquid to gas:]]",
+     "ko": "[[마치 물질이 고체에서 액체, 기체로 전이할 때처럼:]]"
+    },
+    {
+     "en": "[[molecules heat up and loosen from one another, vibrating more rapidly.]]",
+     "ko": "[[분자들이 열을 받아 서로에게서 느슨해지며, 더 빠르게 진동한다.]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "물질이 상전이할 때 분자들은 서로 더 단단히 결합하며 오히려 더 느리게 진동한다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "molecules heat up and loosen from one another, vibrating more rapidly",
+     "why": "열을 받아 느슨해지고 더 빠르게 진동한다고 했으므로 결합 강화·감속은 정반대이다."
+    }
+   ],
+   "mistips": [
+    "like when ~ 은 '마치 ~할 때처럼'으로, when이 이유가 아니라 비유의 시점을 이끈다.",
+    "vibrating은 앞 절과 별개의 새 주어가 아니라 molecules의 동시동작을 나타낸다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "One might even say that humans are becoming like particles in quantum physics, their velocity and location always in flux.",
+   "grammar": [
+    {
+     "tag": "조동사(추측)",
+     "note": "'~할지도 모른다'는 약한 추측",
+     "spans": [
+      "might"
+     ]
+    },
+    {
+     "tag": "명사절 접속사 that",
+     "note": "say의 목적어절을 이끄는 that",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "독립분사구문(being 생략)",
+     "note": "주어(their ~)를 따로 갖는 부대상황, being이 생략됨",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "particle",
+     "meaning": "입자"
+    },
+    {
+     "word": "quantum physics",
+     "meaning": "양자물리학"
+    },
+    {
+     "word": "velocity",
+     "meaning": "속도"
+    },
+    {
+     "word": "in flux",
+     "meaning": "유동적인, 끊임없이 변하는"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "One might even say",
+     "ko": "혹자는 심지어 [[말할]] 수도 있다"
+    },
+    {
+     "en": "that humans are becoming like particles in quantum physics,",
+     "ko": "인간이 [[양자물리학]]의 [[입자]]처럼 되어가고 있다고,"
+    },
+    {
+     "en": "[[their velocity and location always in flux.]]",
+     "ko": "[[그들의 속도와 위치는 항상 유동적인 채로.]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "양자물리학의 입자처럼 인간도 속도와 위치가 항상 유동적이라고 비유한다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    },
+    {
+     "statement": "지문은 양자물리학이 확립된 역사적 시기를 근거로 인간 지리를 설명한다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "humans are becoming like particles in quantum physics",
+     "why": "인간을 양자 입자에 비유할 뿐 물리학의 확립 시기는 언급이 없다."
+    }
+   ],
+   "mistips": [
+    "their velocity and location always in flux는 동사 없이 '주어 + 상태'로 된 부대상황(being 생략)이다."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "It would be nice to return to some form of stability, but that's not how things work in a quantum world.",
+   "grammar": [
+    {
+     "tag": "가주어-진주어",
+     "note": "It이 가주어, to부정사가 진주어",
+     "spans": [
+      "It",
+      "to return"
+     ]
+    },
+    {
+     "tag": "조동사(가정·완곡)",
+     "note": "'~할 것이다'의 완곡한 추정",
+     "spans": [
+      "would"
+     ]
+    },
+    {
+     "tag": "관계부사 how",
+     "note": "'~하는 방식'을 뜻하는 how가 이끄는 명사절",
+     "spans": [
+      "how"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "stability",
+     "meaning": "안정, 안정성"
+    },
+    {
+     "word": "quantum",
+     "meaning": "양자의"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "It would be nice",
+     "ko": "~하는 것은 [[좋을]] 것이다"
+    },
+    {
+     "en": "to return to some form of stability,",
+     "ko": "어떤 형태의 [[안정성]]으로 [[돌아가]]는 것은,"
+    },
+    {
+     "en": "[[but that's not how things work in a quantum world.]]",
+     "ko": "[[하지만 양자 세계에서는 일이 그런 식으로 돌아가지 않는다.]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "The author claims that returning to stability is how things actually work in a quantum world.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "english": true,
+     "anchor": "that's not how things work in a quantum world",
+     "why": "필자는 안정으로의 회귀가 양자 세계의 작동 방식이 아니라고 단언하므로 정반대이다."
+    }
+   ],
+   "mistips": [
+    "that's not how things work = '일이 그렇게 돌아가지 않는다', 즉 회귀가 불가능하다는 뜻이다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Instead, the complexity of today's world makes it increasingly difficult to permanently settle anywhere.",
+   "grammar": [
+    {
+     "tag": "명사의 소유격",
+     "note": "'오늘날 세계의'를 나타내는 -'s",
+     "spans": [
+      "today's"
+     ]
+    },
+    {
+     "tag": "가목적어-진목적어",
+     "note": "make + it(가목적어) + 형용사 + to부정사(진목적어)",
+     "spans": [
+      "makes it",
+      "to permanently settle"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "complexity",
+     "meaning": "복잡성"
+    },
+    {
+     "word": "increasingly",
+     "meaning": "점점 더"
+    },
+    {
+     "word": "permanently",
+     "meaning": "영구적으로"
+    },
+    {
+     "word": "settle",
+     "meaning": "정착하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Instead, the complexity of today's world makes",
+     "ko": "대신, 오늘날 세계의 [[복잡성]]은 [[만든다]]"
+    },
+    {
+     "en": "[[it increasingly difficult to permanently settle anywhere.]]",
+     "ko": "[[어디에도 영구적으로 정착하는 것을 점점 더 어렵게.]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "오늘날 세계가 단순해질수록 어디든 영구적으로 정착하기가 더 어려워진다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "the complexity of today's world makes it increasingly difficult to permanently settle anywhere",
+     "why": "정착을 어렵게 하는 것은 세계의 '복잡성'이지 단순화가 아니다.",
+     "killer": true
+    },
+    {
+     "statement": "어디에도 영구적으로 정착하기 어려운 것은 사람들이 이동 자체를 원치 않기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "the complexity of today's world makes it increasingly difficult to permanently settle anywhere",
+     "why": "정착이 어렵다는 방향은 맞지만 그 원인은 이동 기피가 아니라 세계의 복잡성이다."
+    }
+   ],
+   "mistips": [
+    "it은 가목적어이고 진짜 목적어는 to permanently settle anywhere이다."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Highly paid digital nomads and billionaires with multiple passports as well as migratory workers are all part of the diverse and growing global demographic of quantum people.",
+   "grammar": [
+    {
+     "tag": "과거분사(형용사적)",
+     "note": "'보수를 받는' 수동 의미로 명사를 수식",
+     "spans": [
+      "paid"
+     ]
+    },
+    {
+     "tag": "상관접속사(as well as)",
+     "note": "'B뿐 아니라 A도'로 앞의 A에 무게",
+     "spans": [
+      "as well as"
+     ]
+    },
+    {
+     "tag": "수일치",
+     "note": "복수 주어를 받는 복수 동사",
+     "spans": [
+      "are"
+     ]
+    },
+    {
+     "tag": "현재분사(형용사적)",
+     "note": "'증가하는' 능동 의미로 명사 수식",
+     "spans": [
+      "growing"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "digital nomad",
+     "meaning": "디지털 유목민"
+    },
+    {
+     "word": "billionaire",
+     "meaning": "억만장자"
+    },
+    {
+     "word": "passport",
+     "meaning": "여권"
+    },
+    {
+     "word": "migratory",
+     "meaning": "이주하는, 이동하는"
+    },
+    {
+     "word": "demographic",
+     "meaning": "인구 집단, 인구통계 집단"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Highly paid digital nomads and billionaires with multiple passports",
+     "ko": "높은 보수를 받는 디지털 [[유목민]]과 여러 여권을 지닌 [[억만장자들,]]"
+    },
+    {
+     "en": "as well as migratory workers are all part",
+     "ko": "그리고 [[이주]] 노동자들까지 모두 일부이다"
+    },
+    {
+     "en": "[[of the diverse and growing global demographic of quantum people.]]",
+     "ko": "[[다양하고 증가하는 양자적 인간이라는 전 세계 인구 집단의.]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "'양자적 인간'이라는 인구 집단은 오직 이주 노동자만을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "Highly paid digital nomads and billionaires with multiple passports as well as migratory workers are all part of the diverse and growing global demographic of quantum people",
+     "why": "디지털 유목민과 억만장자까지 모두 포함하므로 이주 노동자에 한정되지 않는다."
+    },
+    {
+     "statement": "디지털 유목민, 억만장자, 이주 노동자가 모두 양자적 인간에 속하는 것은 그들이 동일한 경제 계층이기 때문이다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "the diverse and growing global demographic of quantum people",
+     "why": "지문은 이동성·다양성으로 이들을 묶을 뿐 동일 경제 계층을 근거로 들지 않는다."
+    }
+   ],
+   "mistips": [
+    "A as well as B are ~ 에서 동사는 앞의 A(nomads and billionaires)에 수를 맞춘다."
+   ]
+  }
+ ]
 }

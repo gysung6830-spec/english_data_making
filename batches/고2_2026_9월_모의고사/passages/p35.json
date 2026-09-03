@@ -1,245 +1,627 @@
 {
-  "item_no": "35",
-  "theme": "디지털 트윈 — 실시간 데이터로 갱신되는 디지털 복제본",
-  "overview": {
-    "theme_ko": "실시간 데이터로 갱신되는 디지털 트윈",
-    "topic": "🔎 디지털 트윈: 모델과 센서로 만든, 실시간 데이터로 갱신되는 물리적 대상의 디지털 복제본",
-    "stance": "중립적",
-    "stance_reason": "디지털 트윈의 정의·발전·작동·활용을 설명·소개함",
-    "structure": "통념→반박(반전)",
-    "structure_reason": "Digital twins are not new ... However, faster wireless networks ... enable much more detailed and dynamic",
-    "key_grammar": {
-      "point": "부사절 접속사 when (시간·조건)",
-      "source_sentence": "When sensors collect data from a connected device, the sensor data can be used to continuously update the digital twin.",
-      "explanation": [
-        {"chip": "쉽게 말하면", "text": "when은 '~할 때/~하면'이라는 뜻으로 뒤에 '주어+동사'를 이끄는 부사절 접속사예요."},
-        {"chip": "핵심", "text": "when절은 시간·조건을 나타내며, 문장 앞에 오면 대개 콤마로 주절과 구분돼요."},
-        {"chip": "형태", "text": "When + 주어 + 동사(정동사) ~, 주절. 부사절 안에는 반드시 정동사가 있어야 해요."},
-        {"chip": "주의", "text": "during·at 같은 전치사는 뒤에 명사만 오지만, when은 '절(주어+동사)'을 이끕니다."},
-        {"chip": "확인", "text": "본문 6번 문장처럼 when은 한 문장에서 반복되어 여러 조건을 나열할 수도 있어요."}
-      ],
-      "example_analysis": "When이 이끄는 부사절(When sensors collect data ~)이 문장 앞에 와 시간·조건을 나타내고, 주절(the sensor data ~)이 뒤따른다.",
-      "drills": [
-        {
-          "kind": "밑줄형",
-          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
-          "sentence": "For instance, digital twins of physical assets such as power-generation turbines, jet engines, and train engines [[1|are becoming]] common [[2|when]] the assets [[3|is]] very valuable and [[4|when]] downtime [[5|would be]] very costly.",
-          "answer": "③",
-          "fix": "주어 the assets가 복수이므로 is가 아니라 are가 되어야 한다(주어-동사 수일치). 나머지 are becoming, when, when, would be는 원문 그대로 옳다.",
-          "options": ["① are becoming", "② when", "③ is", "④ when", "⑤ would be"],
-          "words": []
-        },
-        {
-          "kind": "네모형",
-          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
-          "sentence": "[[When/During]] sensors collect data from a connected device, the sensor data [[can be used/can be using]] [[to continuously update/to continuously updating]] the digital twin.",
-          "answer": "When / can be used / to continuously update",
-          "options": [],
-          "words": []
-        },
-        {
-          "kind": "오류찾기",
-          "question": "다음 중 어법상 틀린 문장은?",
-          "sentence": "",
-          "answer": "③ When sensors collecting data from a connected device, the sensor data can be used to continuously update the digital twin.",
-          "fix": "부사절 접속사 when이 이끄는 절에는 정동사가 필요하므로 collecting을 collect로 고쳐야 한다.",
-          "options": [
-            "① Digital twins are digital replicas of assets or activities using modeling and sensors to create digital representations.",
-            "② The digital twin becomes a real-time accurate copy of a physical object's properties and states.",
-            "③ When sensors collecting data from a connected device, the sensor data can be used to continuously update the digital twin.",
-            "④ However, faster wireless networks and the resulting availability of real-time data enable much more detailed and dynamic digital representations.",
-            "⑤ Digital twins are not new; engineering teams in various industries have used 3D renderings of computer-aided design models, asset models, and process simulations for years."
-          ],
-          "words": []
-        },
-        {
-          "kind": "영작",
-          "question": "폭풍이 다가올 때, 선원들은 배를 항구로 돌린다.",
-          "answer": "When a storm approaches, the sailors turn the boat back to the harbor.",
-          "words": ["When", "a", "storm", "approaches", "the", "sailors", "turn", "the", "boat", "back", "to", "the", "harbor"],
-          "options": [],
-          "from_passage": false
-        },
-        {
-          "kind": "영작",
-          "question": "센서가 연결된 기기로부터 데이터를 수집할 때, 그 센서 데이터는 디지털 트윈을 지속적으로 갱신하는 데 사용될 수 있다.",
-          "answer": "When sensors collect data from a connected device, the sensor data can be used to continuously update the digital twin.",
-          "words": ["When", "sensors", "collect", "data", "from", "a", "connected", "device", "the", "sensor", "data", "can", "be", "used", "to", "continuously", "update", "the", "digital", "twin"],
-          "options": [],
-          "from_passage": true
-        }
-      ]
-    },
-    "restatement_chains": [
-      {
-        "label": "디지털 복제본",
-        "expressions": ["digital replicas", "digital representations", "a real-time accurate copy"],
-        "variation": "모델·센서로 만든 표현물이 실시간의 정확한 복제본으로 구체화됨"
-      },
-      {
-        "label": "실시간 데이터 갱신",
-        "expressions": ["real-time data", "continuously update the digital twin"],
-        "variation": "실시간 데이터가 디지털 트윈을 끊임없이 갱신함"
-      }
-    ],
-    "flow_blocks": [
-      {"stage": "도입(정의)", "sentence_range": "1", "summary": "[[디지털 트윈]]은 모델·센서로 만든 디지털 복제본", "easy_example": "실제 공장을 컴퓨터 속에 똑같이 만든 쌍둥이 모형"},
-      {"stage": "전개(통념→반전)", "sentence_range": "2~3", "summary": "개념은 새롭지 않지만 [[실시간 데이터]]로 훨씬 정교해짐", "easy_example": "종이 지도 대신 실시간 내비게이션으로 바뀐 셈"},
-      {"stage": "원리", "sentence_range": "4~5", "summary": "센서 데이터가 트윈을 갱신해 [[실시간 복제본]]이 됨", "easy_example": "체온계가 계속 체온을 알려주듯 상태를 반영"},
-      {"stage": "사례·결론", "sentence_range": "6", "summary": "값비싸고 중단 손실이 큰 자산에서 흔해짐", "easy_example": "고장 나면 손해 큰 제트 엔진에 특히 유용"}
-    ]
-  },
-  "sentences": [
+ "item_no": "35",
+ "theme": "디지털 트윈 — 실시간 데이터로 갱신되는 디지털 복제본",
+ "overview": {
+  "theme_ko": "실시간 데이터로 갱신되는 디지털 트윈",
+  "topic": "🔎 디지털 트윈: 모델과 센서로 만든, 실시간 데이터로 갱신되는 물리적 대상의 디지털 복제본",
+  "stance": "중립적",
+  "stance_reason": "디지털 트윈의 정의·발전·작동·활용을 설명·소개함",
+  "structure": "통념→반박(반전)",
+  "structure_reason": "Digital twins are not new ... However, faster wireless networks ... enable much more detailed and dynamic",
+  "key_grammar": {
+   "point": "부사절 접속사 when (시간·조건)",
+   "source_sentence": "When sensors collect data from a connected device, the sensor data can be used to continuously update the digital twin.",
+   "explanation": [
     {
-      "id": 1,
-      "english": "Digital twins are digital replicas of assets or activities using modeling and sensors to create digital representations.",
-      "grammar": [
-        {"tag": "현재분사(분사구문)", "note": "using ~ 은 앞 명사구를 보충 설명하는 분사구", "spans": ["using"]},
-        {"tag": "to부정사(부사적 용법-목적)", "note": "'~을 만들기 위해'라는 목적", "spans": ["to create"]}
-      ],
-      "vocab": [
-        {"word": "replica", "meaning": "복제(물), 모형"},
-        {"word": "asset", "meaning": "자산"},
-        {"word": "modeling", "meaning": "모델링, 모형화"},
-        {"word": "representation", "meaning": "표현(물), 표상"}
-      ],
-      "chunks": [
-        {"en": "Digital twins are digital replicas", "ko": "디지털 트윈은 디지털 [[복제본]]이다"},
-        {"en": "of assets or activities", "ko": "자산이나 [[활동]]의"},
-        {"en": "using modeling and sensors", "ko": "[[모델링]]과 센서를 사용하여"},
-        {"en": "to create digital representations.", "ko": "디지털 [[표현물]]을 만들기 위해"}
-      ],
-      "misreads": [
-        {"statement": "디지털 트윈은 모델링과 센서를 이용해 자산이나 활동을 본뜬 디지털 복제본이다.", "verdict": "O", "trap_type": "주체대상"}
-      ],
-      "mistips": ["using ~ 는 앞의 명사구를 보충 설명하는 분사구로 '~을 사용하여'로 해석한다."]
+     "chip": "쉽게 말하면",
+     "text": "when은 '~할 때/~하면'이라는 뜻으로 뒤에 '주어+동사'를 이끄는 부사절 접속사예요."
     },
     {
-      "id": 2,
-      "english": "Digital twins are not new; engineering teams in various industries have used 3D renderings of computer-aided design models, asset models, and process simulations for years.",
-      "grammar": [
-        {"tag": "현재완료", "note": "수년간 계속 사용해 온 경험·계속", "spans": ["have used"]},
-        {"tag": "과거분사(합성 형용사)", "note": "computer-aided = 컴퓨터로 지원된", "spans": ["computer-aided"]}
-      ],
-      "vocab": [
-        {"word": "rendering", "meaning": "렌더링, (그래픽) 표현물"},
-        {"word": "computer-aided", "meaning": "컴퓨터 지원의"},
-        {"word": "simulation", "meaning": "시뮬레이션, 모의실험"},
-        {"word": "industry", "meaning": "산업, 업계"}
-      ],
-      "chunks": [
-        {"en": "Digital twins are not new;", "ko": "디지털 트윈은 [[새로운]] 것이 아니다;"},
-        {"en": "engineering teams in various industries have used", "ko": "여러 산업의 엔지니어링 팀들은 [[사용해]] 왔다"},
-        {"en": "3D renderings of computer-aided design models,", "ko": "컴퓨터 지원 설계 모델의 3D [[렌더링]],"},
-        {"en": "asset models, and process simulations for years.", "ko": "자산 모델, 공정 [[시뮬레이션]]을 수년간"}
-      ],
-      "misreads": [
-        {"statement": "디지털 트윈이라는 개념 자체는 새로운 것이 아니며, 여러 산업의 엔지니어링 팀이 수년간 관련 모델을 사용해 왔다.", "verdict": "O", "trap_type": "인과조건"},
-        {"statement": "Digital twins are a brand-new idea created by faster wireless networks.", "verdict": "X", "trap_type": "인과조건", "anchor": "Digital twins are not new", "why": "본문은 디지털 트윈이 새롭지 않다고 명시함.", "english": true}
-      ],
-      "mistips": ["세미콜론(;)은 두 독립절을 잇는 표시로, 앞뒤가 각각 완전한 문장이다."]
+     "chip": "핵심",
+     "text": "when절은 시간·조건을 나타내며, 문장 앞에 오면 대개 콤마로 주절과 구분돼요."
     },
     {
-      "id": 3,
-      "english": "However, faster wireless networks and the resulting availability of real-time data enable much more detailed and dynamic digital representations.",
-      "grammar": [
-        {"tag": "현재분사(형용사적 용법)", "note": "resulting = 그 결과로 생기는", "spans": ["resulting"]},
-        {"tag": "비교급 강조", "note": "much가 비교급 more detailed를 강조", "spans": ["much"]},
-        {"tag": "주어-동사 수일치", "note": "and로 이어진 복수 주어에 맞춰 enable", "spans": ["enable"]}
-      ],
-      "vocab": [
-        {"word": "wireless", "meaning": "무선의"},
-        {"word": "resulting", "meaning": "그 결과로 생기는"},
-        {"word": "availability", "meaning": "이용 가능성"},
-        {"word": "real-time", "meaning": "실시간의"},
-        {"word": "dynamic", "meaning": "역동적인"}
-      ],
-      "chunks": [
-        {"en": "However, faster wireless networks", "ko": "그러나, 더 빠른 무선 [[네트워크]]와"},
-        {"en": "and the resulting availability of real-time data", "ko": "실시간 데이터의 그에 따른 [[이용 가능성]]이"},
-        {"en": "enable much more detailed and dynamic digital representations.", "ko": "훨씬 더 상세하고 [[역동적인]] 디지털 표현물을 가능하게 한다"}
-      ],
-      "misreads": [
-        {"statement": "더 빠른 무선 네트워크는 디지털 트윈의 제작 비용을 크게 낮추어 준다.", "verdict": "X", "trap_type": "무관정보", "anchor": "enable much more detailed and dynamic digital representations", "why": "본문은 비용이 아니라 더 상세·역동적 표현을 가능하게 한다고 함."},
-        {"statement": "필자는 과거의 3D 렌더링 방식이 실시간 데이터 표현보다 우월하다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "enable much more detailed and dynamic digital representations", "why": "필자는 실시간 데이터가 훨씬 정교한 표현을 가능하게 한다고 긍정적으로 봄."}
-      ],
-      "mistips": []
+     "chip": "형태",
+     "text": "When + 주어 + 동사(정동사) ~, 주절. 부사절 안에는 반드시 정동사가 있어야 해요."
     },
     {
-      "id": 4,
-      "english": "When sensors collect data from a connected device, the sensor data can be used to continuously update the digital twin.",
-      "grammar": [
-        {"tag": "부사절 접속사 when(시간·조건)", "note": "'~할 때/~하면'으로 뒤에 절을 이끔", "spans": ["When"]},
-        {"tag": "과거분사(형용사적 용법)", "note": "connected가 device를 수식", "spans": ["connected"]},
-        {"tag": "수동태", "note": "데이터가 '사용되는' 대상", "spans": ["be used"]},
-        {"tag": "to부정사(부사적 용법-목적)", "note": "'갱신하기 위해'라는 목적", "spans": ["to continuously update"]}
-      ],
-      "vocab": [
-        {"word": "sensor", "meaning": "센서"},
-        {"word": "collect", "meaning": "수집하다"},
-        {"word": "connected", "meaning": "연결된"},
-        {"word": "continuously", "meaning": "지속적으로, 끊임없이"},
-        {"word": "update", "meaning": "갱신하다"}
-      ],
-      "chunks": [
-        {"en": "When sensors collect data", "ko": "센서가 데이터를 [[수집할]] 때"},
-        {"en": "from a connected device,", "ko": "연결된 [[기기]]로부터"},
-        {"en": "the sensor data can be used", "ko": "그 센서 데이터는 [[사용될]] 수 있다"},
-        {"en": "to continuously update the digital twin.", "ko": "디지털 트윈을 지속적으로 [[갱신하기]] 위해"}
-      ],
-      "misreads": [
-        {"statement": "센서가 수집한 데이터는 연결된 기기 자체를 갱신하는 데 사용된다.", "verdict": "X", "trap_type": "지칭", "anchor": "continuously update the digital twin", "why": "갱신되는 대상은 기기가 아니라 디지털 트윈이다."},
-        {"statement": "센서가 연결된 기기에서 데이터를 수집하는 것이 갱신의 조건으로 제시된다.", "verdict": "O", "trap_type": "구조수식"}
-      ],
-      "mistips": ["문장 앞 When절은 부사절이고, 주절은 the sensor data 이후부터 시작한다."]
+     "chip": "주의",
+     "text": "during·at 같은 전치사는 뒤에 명사만 오지만, when은 '절(주어+동사)'을 이끕니다."
     },
     {
-      "id": 5,
-      "english": "The digital twin becomes a real-time accurate copy of a physical object's properties and states.",
-      "grammar": [
-        {"tag": "명사 소유격", "note": "object's = 대상의 (소유·소속)", "spans": ["object's"]},
-        {"tag": "등위접속(and)", "note": "properties와 states를 대등하게 연결", "spans": ["and"]}
-      ],
-      "vocab": [
-        {"word": "accurate", "meaning": "정확한"},
-        {"word": "property", "meaning": "속성, 특성"},
-        {"word": "state", "meaning": "상태"},
-        {"word": "physical", "meaning": "물리적인, 실물의"}
-      ],
-      "chunks": [
-        {"en": "The digital twin becomes a real-time accurate copy", "ko": "그 디지털 트윈은 실시간의 정확한 [[복제본]]이 된다"},
-        {"en": "of a physical object's properties and states.", "ko": "물리적 대상의 속성과 [[상태]]의"}
-      ],
-      "misreads": [
-        {"statement": "디지털 트윈은 물리적 대상의 속성과 상태를 실시간으로 반영하는 복제본이 되는데, 이는 팀들이 3D 렌더링을 오래 사용해 왔기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "becomes a real-time accurate copy", "why": "실시간 복제는 3D 렌더링 경력이 아니라 실시간 데이터 덕분이다."}
-      ],
-      "mistips": []
-    },
-    {
-      "id": 6,
-      "english": "For instance, digital twins of physical assets such as power-generation turbines, jet engines, and train engines are becoming common when the assets are very valuable and when downtime would be very costly.",
-      "grammar": [
-        {"tag": "현재진행", "note": "점점 흔해지고 있는 중", "spans": ["are becoming"]},
-        {"tag": "부사절 접속사 when(시간·조건)", "note": "두 개의 when절이 조건을 나열", "spans": ["when", "when"]},
-        {"tag": "조동사 would(가정적 함의)", "note": "'~일 때 비용이 클' 상황을 가정", "spans": ["would be"]}
-      ],
-      "vocab": [
-        {"word": "power-generation", "meaning": "발전(發電)의"},
-        {"word": "turbine", "meaning": "터빈"},
-        {"word": "downtime", "meaning": "가동 중단 시간"},
-        {"word": "costly", "meaning": "비용이 많이 드는"},
-        {"word": "valuable", "meaning": "가치가 큰, 값비싼"}
-      ],
-      "chunks": [
-        {"en": "For instance, digital twins of physical assets", "ko": "예를 들어, 물리적 자산의 디지털 [[트윈]]은"},
-        {"en": "such as power-generation turbines, jet engines, and train engines", "ko": "발전 터빈, 제트 엔진, 기차 엔진 [[같은]]"},
-        {"en": "are becoming common when the assets are very valuable", "ko": "자산이 매우 [[가치 있을]] 때 흔해지고 있다"},
-        {"en": "and when downtime would be very costly.", "ko": "그리고 가동 중단이 매우 [[비쌀]] 때"}
-      ],
-      "misreads": [
-        {"statement": "발전 터빈, 제트 엔진, 기차 엔진의 디지털 트윈은 자산이 저렴하고 가동 중단 비용이 낮을 때 흔해지고 있다.", "verdict": "X", "trap_type": "인과조건", "anchor": "when the assets are very valuable and when downtime would be very costly", "why": "자산이 값비싸고 가동 중단 비용이 클 때 흔해진다고 함.", "killer": true}
-      ],
-      "mistips": ["such as 이하는 physical assets의 예시를 나열한 것이다."]
+     "chip": "확인",
+     "text": "본문 6번 문장처럼 when은 한 문장에서 반복되어 여러 조건을 나열할 수도 있어요."
     }
+   ],
+   "example_analysis": "When이 이끄는 부사절(When sensors collect data ~)이 문장 앞에 와 시간·조건을 나타내고, 주절(the sensor data ~)이 뒤따른다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "For instance, digital twins of physical assets such as power-generation turbines, jet engines, and train engines [[1|are becoming]] common [[2|when]] the assets [[3|is]] very valuable and [[4|when]] downtime [[5|would be]] very costly.",
+     "answer": "③",
+     "fix": "주어 the assets가 복수이므로 is가 아니라 are가 되어야 한다(주어-동사 수일치). 나머지 are becoming, when, when, would be는 원문 그대로 옳다.",
+     "options": [
+      "① are becoming",
+      "② when",
+      "③ is",
+      "④ when",
+      "⑤ would be"
+     ],
+     "words": []
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "[[When/During]] sensors collect data from a connected device, the sensor data [[can be used/can be using]] [[to continuously update/to continuously updating]] the digital twin.",
+     "answer": "When / can be used / to continuously update",
+     "options": [],
+     "words": []
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "answer": "③ When sensors collecting data from a connected device, the sensor data can be used to continuously update the digital twin.",
+     "fix": "부사절 접속사 when이 이끄는 절에는 정동사가 필요하므로 collecting을 collect로 고쳐야 한다.",
+     "options": [
+      "① Digital twins are digital replicas of assets or activities using modeling and sensors to create digital representations.",
+      "② The digital twin becomes a real-time accurate copy of a physical object's properties and states.",
+      "③ When sensors collecting data from a connected device, the sensor data can be used to continuously update the digital twin.",
+      "④ However, faster wireless networks and the resulting availability of real-time data enable much more detailed and dynamic digital representations.",
+      "⑤ Digital twins are not new; engineering teams in various industries have used 3D renderings of computer-aided design models, asset models, and process simulations for years."
+     ],
+     "words": []
+    },
+    {
+     "kind": "영작",
+     "question": "폭풍이 다가올 때, 선원들은 배를 항구로 돌린다.",
+     "answer": "When a storm approaches, the sailors turn the boat back to the harbor.",
+     "words": [
+      "When",
+      "a",
+      "storm",
+      "approaches",
+      "the",
+      "sailors",
+      "turn",
+      "the",
+      "boat",
+      "back",
+      "to",
+      "the",
+      "harbor"
+     ],
+     "options": [],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "센서가 연결된 기기로부터 데이터를 수집할 때, 그 센서 데이터는 디지털 트윈을 지속적으로 갱신하는 데 사용될 수 있다.",
+     "answer": "When sensors collect data from a connected device, the sensor data can be used to continuously update the digital twin.",
+     "words": [
+      "When",
+      "sensors",
+      "collect",
+      "data",
+      "from",
+      "a",
+      "connected",
+      "device",
+      "the",
+      "sensor",
+      "data",
+      "can",
+      "be",
+      "used",
+      "to",
+      "continuously",
+      "update",
+      "the",
+      "digital",
+      "twin"
+     ],
+     "options": [],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "디지털 복제본",
+    "expressions": [
+     "digital replicas",
+     "digital representations",
+     "a real-time accurate copy"
+    ],
+    "variation": "모델·센서로 만든 표현물이 실시간의 정확한 복제본으로 구체화됨"
+   },
+   {
+    "label": "실시간 데이터 갱신",
+    "expressions": [
+     "real-time data",
+     "continuously update the digital twin"
+    ],
+    "variation": "실시간 데이터가 디지털 트윈을 끊임없이 갱신함"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입(정의)",
+    "sentence_range": "1",
+    "summary": "[[디지털 트윈]]은 모델·센서로 만든 디지털 복제본",
+    "easy_example": "실제 공장을 컴퓨터 속에 똑같이 만든 쌍둥이 모형"
+   },
+   {
+    "stage": "전개(통념→반전)",
+    "sentence_range": "2~3",
+    "summary": "개념은 새롭지 않지만 [[실시간 데이터]]로 훨씬 정교해짐",
+    "easy_example": "종이 지도 대신 실시간 내비게이션으로 바뀐 셈"
+   },
+   {
+    "stage": "원리",
+    "sentence_range": "4~5",
+    "summary": "센서 데이터가 트윈을 갱신해 [[실시간 복제본]]이 됨",
+    "easy_example": "체온계가 계속 체온을 알려주듯 상태를 반영"
+   },
+   {
+    "stage": "사례·결론",
+    "sentence_range": "6",
+    "summary": "값비싸고 중단 손실이 큰 자산에서 흔해짐",
+    "easy_example": "고장 나면 손해 큰 제트 엔진에 특히 유용"
+   }
   ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Digital twins are digital replicas of assets or activities using modeling and sensors to create digital representations.",
+   "grammar": [
+    {
+     "tag": "현재분사(분사구문)",
+     "note": "using ~ 은 앞 명사구를 보충 설명하는 분사구",
+     "spans": [
+      "using"
+     ]
+    },
+    {
+     "tag": "to부정사(부사적 용법-목적)",
+     "note": "'~을 만들기 위해'라는 목적",
+     "spans": [
+      "to create"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "replica",
+     "meaning": "복제(물), 모형"
+    },
+    {
+     "word": "asset",
+     "meaning": "자산"
+    },
+    {
+     "word": "modeling",
+     "meaning": "모델링, 모형화"
+    },
+    {
+     "word": "representation",
+     "meaning": "표현(물), 표상"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Digital twins are digital replicas",
+     "ko": "디지털 트윈은 [[디지털]] [[복제본]]이다"
+    },
+    {
+     "en": "of assets or activities",
+     "ko": "자산이나 [[활동]]의"
+    },
+    {
+     "en": "using modeling and sensors",
+     "ko": "[[모델링]]과 센서를 사용하여"
+    },
+    {
+     "en": "to create digital representations.",
+     "ko": "디지털 [[표현물]]을 만들기 위해"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "디지털 트윈은 모델링과 센서를 이용해 자산이나 활동을 본뜬 디지털 복제본이다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    }
+   ],
+   "mistips": [
+    "using ~ 는 앞의 명사구를 보충 설명하는 분사구로 '~을 사용하여'로 해석한다."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "Digital twins are not new; engineering teams in various industries have used 3D renderings of computer-aided design models, asset models, and process simulations for years.",
+   "grammar": [
+    {
+     "tag": "현재완료",
+     "note": "수년간 계속 사용해 온 경험·계속",
+     "spans": [
+      "have used"
+     ]
+    },
+    {
+     "tag": "과거분사(합성 형용사)",
+     "note": "computer-aided = 컴퓨터로 지원된",
+     "spans": [
+      "computer-aided"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "rendering",
+     "meaning": "렌더링, (그래픽) 표현물"
+    },
+    {
+     "word": "computer-aided",
+     "meaning": "컴퓨터 지원의"
+    },
+    {
+     "word": "simulation",
+     "meaning": "시뮬레이션, 모의실험"
+    },
+    {
+     "word": "industry",
+     "meaning": "산업, 업계"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Digital twins are not new;",
+     "ko": "디지털 트윈은 [[새로운]] 것이 아니다;"
+    },
+    {
+     "en": "engineering teams in various industries have used",
+     "ko": "여러 산업의 [[엔지니어링]] 팀들은 [[사용해]] 왔다"
+    },
+    {
+     "en": "3D renderings of computer-aided design models,",
+     "ko": "컴퓨터 지원 설계 모델의 3D [[렌더링]],"
+    },
+    {
+     "en": "asset models, and process simulations for years.",
+     "ko": "자산 모델, 공정 [[시뮬레이션]]을 수년간"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "디지털 트윈이라는 개념 자체는 새로운 것이 아니며, 여러 산업의 엔지니어링 팀이 수년간 관련 모델을 사용해 왔다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    },
+    {
+     "statement": "Digital twins are a brand-new idea created by faster wireless networks.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "Digital twins are not new",
+     "why": "본문은 디지털 트윈이 새롭지 않다고 명시함.",
+     "english": true
+    }
+   ],
+   "mistips": [
+    "세미콜론(;)은 두 독립절을 잇는 표시로, 앞뒤가 각각 완전한 문장이다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "However, faster wireless networks and the resulting availability of real-time data enable much more detailed and dynamic digital representations.",
+   "grammar": [
+    {
+     "tag": "현재분사(형용사적 용법)",
+     "note": "resulting = 그 결과로 생기는",
+     "spans": [
+      "resulting"
+     ]
+    },
+    {
+     "tag": "비교급 강조",
+     "note": "much가 비교급 more detailed를 강조",
+     "spans": [
+      "much"
+     ]
+    },
+    {
+     "tag": "주어-동사 수일치",
+     "note": "and로 이어진 복수 주어에 맞춰 enable",
+     "spans": [
+      "enable"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "wireless",
+     "meaning": "무선의"
+    },
+    {
+     "word": "resulting",
+     "meaning": "그 결과로 생기는"
+    },
+    {
+     "word": "availability",
+     "meaning": "이용 가능성"
+    },
+    {
+     "word": "real-time",
+     "meaning": "실시간의"
+    },
+    {
+     "word": "dynamic",
+     "meaning": "역동적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "However, faster wireless networks",
+     "ko": "그러나, 더 빠른 무선 [[네트워크]]와"
+    },
+    {
+     "en": "and the resulting availability of real-time data",
+     "ko": "실시간 데이터의 그에 따른 [[이용 가능성]]이"
+    },
+    {
+     "en": "enable much more detailed and dynamic digital representations.",
+     "ko": "훨씬 더 상세하고 [[역동적인]] 디지털 표현물을 [[가능하게]] 한다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "더 빠른 무선 네트워크는 디지털 트윈의 제작 비용을 크게 낮추어 준다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "enable much more detailed and dynamic digital representations",
+     "why": "본문은 비용이 아니라 더 상세·역동적 표현을 가능하게 한다고 함."
+    },
+    {
+     "statement": "필자는 과거의 3D 렌더링 방식이 실시간 데이터 표현보다 우월하다고 본다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "enable much more detailed and dynamic digital representations",
+     "why": "필자는 실시간 데이터가 훨씬 정교한 표현을 가능하게 한다고 긍정적으로 봄."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "When sensors collect data from a connected device, the sensor data can be used to continuously update the digital twin.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사 when(시간·조건)",
+     "note": "'~할 때/~하면'으로 뒤에 절을 이끔",
+     "spans": [
+      "When"
+     ]
+    },
+    {
+     "tag": "과거분사(형용사적 용법)",
+     "note": "connected가 device를 수식",
+     "spans": [
+      "connected"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "데이터가 '사용되는' 대상",
+     "spans": [
+      "be used"
+     ]
+    },
+    {
+     "tag": "to부정사(부사적 용법-목적)",
+     "note": "'갱신하기 위해'라는 목적",
+     "spans": [
+      "to continuously update"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "sensor",
+     "meaning": "센서"
+    },
+    {
+     "word": "collect",
+     "meaning": "수집하다"
+    },
+    {
+     "word": "connected",
+     "meaning": "연결된"
+    },
+    {
+     "word": "continuously",
+     "meaning": "지속적으로, 끊임없이"
+    },
+    {
+     "word": "update",
+     "meaning": "갱신하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When sensors collect data",
+     "ko": "센서가 데이터를 [[수집할]] 때"
+    },
+    {
+     "en": "from a connected device,",
+     "ko": "연결된 [[기기]]로부터"
+    },
+    {
+     "en": "the sensor data can be used",
+     "ko": "그 센서 [[데이터]]는 [[사용될]] 수 있다"
+    },
+    {
+     "en": "to continuously update the digital twin.",
+     "ko": "디지털 트윈을 지속적으로 [[갱신하기]] 위해"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "센서가 수집한 데이터는 연결된 기기 자체를 갱신하는 데 사용된다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "continuously update the digital twin",
+     "why": "갱신되는 대상은 기기가 아니라 디지털 트윈이다."
+    },
+    {
+     "statement": "센서가 연결된 기기에서 데이터를 수집하는 것이 갱신의 조건으로 제시된다.",
+     "verdict": "O",
+     "trap_type": "구조수식"
+    }
+   ],
+   "mistips": [
+    "문장 앞 When절은 부사절이고, 주절은 the sensor data 이후부터 시작한다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "The digital twin becomes a real-time accurate copy of a physical object's properties and states.",
+   "grammar": [
+    {
+     "tag": "명사 소유격",
+     "note": "object's = 대상의 (소유·소속)",
+     "spans": [
+      "object's"
+     ]
+    },
+    {
+     "tag": "등위접속(and)",
+     "note": "properties와 states를 대등하게 연결",
+     "spans": [
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "accurate",
+     "meaning": "정확한"
+    },
+    {
+     "word": "property",
+     "meaning": "속성, 특성"
+    },
+    {
+     "word": "state",
+     "meaning": "상태"
+    },
+    {
+     "word": "physical",
+     "meaning": "물리적인, 실물의"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The digital twin becomes a real-time accurate copy",
+     "ko": "그 디지털 트윈은 실시간의 [[정확한]] [[복제본]]이 된다"
+    },
+    {
+     "en": "of a physical object's properties and states.",
+     "ko": "물리적 대상의 속성과 [[상태]]의"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "디지털 트윈은 물리적 대상의 속성과 상태를 실시간으로 반영하는 복제본이 되는데, 이는 팀들이 3D 렌더링을 오래 사용해 왔기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "becomes a real-time accurate copy",
+     "why": "실시간 복제는 3D 렌더링 경력이 아니라 실시간 데이터 덕분이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "For instance, digital twins of physical assets such as power-generation turbines, jet engines, and train engines are becoming common when the assets are very valuable and when downtime would be very costly.",
+   "grammar": [
+    {
+     "tag": "현재진행",
+     "note": "점점 흔해지고 있는 중",
+     "spans": [
+      "are becoming"
+     ]
+    },
+    {
+     "tag": "부사절 접속사 when(시간·조건)",
+     "note": "두 개의 when절이 조건을 나열",
+     "spans": [
+      "when",
+      "when"
+     ]
+    },
+    {
+     "tag": "조동사 would(가정적 함의)",
+     "note": "'~일 때 비용이 클' 상황을 가정",
+     "spans": [
+      "would be"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "power-generation",
+     "meaning": "발전(發電)의"
+    },
+    {
+     "word": "turbine",
+     "meaning": "터빈"
+    },
+    {
+     "word": "downtime",
+     "meaning": "가동 중단 시간"
+    },
+    {
+     "word": "costly",
+     "meaning": "비용이 많이 드는"
+    },
+    {
+     "word": "valuable",
+     "meaning": "가치가 큰, 값비싼"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "For instance, digital twins of physical assets",
+     "ko": "예를 들어, 물리적 자산의 디지털 [[트윈]]은"
+    },
+    {
+     "en": "such as power-generation turbines, jet engines, and train engines",
+     "ko": "발전 터빈, 제트 엔진, 기차 [[엔진]] [[같은]]"
+    },
+    {
+     "en": "are becoming common when the assets are very valuable",
+     "ko": "자산이 매우 [[가치 있을]] 때 흔해지고 있다"
+    },
+    {
+     "en": "and when downtime would be very costly.",
+     "ko": "그리고 가동 중단이 매우 [[비쌀]] 때"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "발전 터빈, 제트 엔진, 기차 엔진의 디지털 트윈은 자산이 저렴하고 가동 중단 비용이 낮을 때 흔해지고 있다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "when the assets are very valuable and when downtime would be very costly",
+     "why": "자산이 값비싸고 가동 중단 비용이 클 때 흔해진다고 함.",
+     "killer": true
+    }
+   ],
+   "mistips": [
+    "such as 이하는 physical assets의 예시를 나열한 것이다."
+   ]
+  }
+ ]
 }

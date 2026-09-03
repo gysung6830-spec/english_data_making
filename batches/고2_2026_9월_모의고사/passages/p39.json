@@ -1,304 +1,780 @@
 {
-  "item_no": "39",
-  "theme": "조직 내 배제 — 간과되지만 성과를 좌우하는 문제",
-  "overview": {
-    "theme_ko": "조직 내 배제와 그 예방의 중요성",
-    "topic": "🔎 조직적 배제가 구성원과 성과에 미치는 영향, 그리고 예방의 필요성",
-    "stance": "부정적·비판적",
-    "stance_reason": "배제는 무시되어(ignored) 예방책이 취해지지 않고, 결국 성과에 부정적 영향(in a negative way)을 준다고 봄",
-    "structure": "문제→해결(방안)",
-    "structure_reason": "배제가 무시되어 성과를 해친다는 문제를 제시한 뒤, 마지막에 Precautions need to be taken이라는 방안을 제안함",
-    "key_grammar": {
-      "point": "동격 that (The likelihood that)",
-      "source_sentence": "The likelihood that individuals who try to adapt to positive social behaviors will experience organizational exclusion decreases.",
-      "explanation": [
-        {"chip": "쉽게 말하면", "text": "'The likelihood that ~'의 that은 앞 명사 likelihood의 '내용'을 그대로 풀어 주는 동격 접속사다."},
-        {"chip": "구별", "text": "동격 that 뒤에는 '완전한 문장'이 오고, 관계대명사 that 뒤에는 주어나 목적어가 빠진 '불완전한 문장'이 온다."},
-        {"chip": "수일치 주의", "text": "동격 that절이 아무리 길어도 진짜 주어는 The likelihood(단수)여서 문장의 동사는 decreases로 받는다."},
-        {"chip": "자주 쓰는 명사", "text": "fact, idea, news, belief, likelihood, possibility처럼 '내용'을 담는 추상명사 뒤에 동격 that이 온다."}
-      ],
-      "example": "The fact that he lied surprised us.",
-      "example_analysis": "The likelihood [that ... organizational exclusion] decreases — that절이 likelihood의 내용을 설명하고, 문장 동사는 단수 주어에 맞춰 decreases이다.",
-      "drills": [
-        {
-          "kind": "밑줄형",
-          "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
-          "sentence": "The likelihood [[1|that]] individuals [[2|who]] try [[3|to adapt]] to positive social behaviors [[4|will experience]] organizational exclusion [[5|decrease]].",
-          "answer": "⑤",
-          "fix": "주어가 The likelihood(단수)이므로 decrease → decreases로 고쳐 수일치시켜야 한다.",
-          "options": ["① that", "② who", "③ to adapt", "④ will experience", "⑤ decrease"],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "네모형",
-          "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
-          "sentence": "Individuals [[react/reacts]] to organizational exclusion by trying to strengthen their basic needs, [[which/what]] [[are/is]] threatened.",
-          "answer": "react / which / are",
-          "fix": "주어 Individuals가 복수이므로 react, 앞 명사구를 보충하는 계속적 용법이므로 which, 선행사 needs가 복수이므로 are이다.",
-          "options": [],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "오류찾기",
-          "question": "다음 중 어법상 틀린 문장은?",
-          "sentence": "",
-          "answer": "② Positive social behaviors develops belonging and self-respect.",
-          "fix": "주어 behaviors가 복수이므로 develops → develop으로 고쳐야 한다.",
-          "options": [
-            "① Exclusion is a state that is ignored by the organization psychologists.",
-            "② Positive social behaviors develops belonging and self-respect.",
-            "③ However, individuals may be faced with more exclusion when they cannot adapt to a group.",
-            "④ Precautions need to be taken regarding organizational exclusion, which is very important for business.",
-            "⑤ Therefore, it is possible that precautions regarding organizational exclusion are not taken."
-          ],
-          "words": [],
-          "from_passage": true
-        },
-        {
-          "kind": "영작",
-          "question": "그가 정직하다는 소문은 사실이 아니었다. (동격 that 사용)",
-          "sentence": "",
-          "answer": "The rumor that he was honest was not true.",
-          "fix": "",
-          "options": [],
-          "words": ["The rumor", "that", "he was honest", "was not", "true"],
-          "from_passage": false
-        },
-        {
-          "kind": "영작",
-          "question": "긍정적인 사회적 행동에 적응하려 하는 개인들이 조직적 배제를 경험할 가능성은 감소한다.",
-          "sentence": "",
-          "answer": "The likelihood that individuals who try to adapt to positive social behaviors will experience organizational exclusion decreases.",
-          "fix": "",
-          "options": [],
-          "words": ["The likelihood", "that", "individuals", "who", "try to adapt to", "positive social behaviors", "will experience", "organizational exclusion", "decreases"],
-          "from_passage": true
-        }
-      ]
-    },
-    "restatement_chains": [
-      {"label": "조직적 배제", "expressions": ["organizational exclusion", "exclusion"], "variation": "무시되던 배제 → 반드시 예방해야 할 대상으로"},
-      {"label": "예방책 마련", "expressions": ["precautions regarding organizational exclusion", "Precautions need to be taken"], "variation": "취해지지 않던 예방책 → 사업에 매우 중요한 필수 조치로"}
-    ],
-    "flow_blocks": [
-      {"stage": "도입(문제)", "sentence_range": "1~2", "summary": "배제는 심리학자들에게 [[무시되는]] 상태라 예방책이 마련되지 않음", "easy_example": "고장 신호를 무시하면 정비 계획이 아예 세워지지 않는 것과 같다."},
-      {"stage": "전개", "sentence_range": "3~5", "summary": "개인은 기본 욕구 강화·긍정적 행동으로 배제 [[가능성]]을 낮추려 함", "easy_example": "새 반에서 먼저 인사하고 어울리면 따돌림 위험이 줄어드는 것과 같다."},
-      {"stage": "심화", "sentence_range": "6~8", "summary": "적응 실패로 배제가 커지면 소통이 끊겨 [[성과]]에 부정적 영향", "easy_example": "팀원이 대화에서 빠지면 프로젝트 기여도가 뚝 떨어지는 것과 같다."},
-      {"stage": "결론(방안)", "sentence_range": "9", "summary": "조직적 배제에 대한 [[예방책]]은 사업에 매우 중요함", "easy_example": "작은 균열을 미리 막는 예방 정비가 결국 회사를 지킨다."}
-    ]
-  },
-  "sentences": [
+ "item_no": "39",
+ "theme": "조직 내 배제 — 간과되지만 성과를 좌우하는 문제",
+ "overview": {
+  "theme_ko": "조직 내 배제와 그 예방의 중요성",
+  "topic": "🔎 조직적 배제가 구성원과 성과에 미치는 영향, 그리고 예방의 필요성",
+  "stance": "부정적·비판적",
+  "stance_reason": "배제는 무시되어(ignored) 예방책이 취해지지 않고, 결국 성과에 부정적 영향(in a negative way)을 준다고 봄",
+  "structure": "문제→해결(방안)",
+  "structure_reason": "배제가 무시되어 성과를 해친다는 문제를 제시한 뒤, 마지막에 Precautions need to be taken이라는 방안을 제안함",
+  "key_grammar": {
+   "point": "동격 that (The likelihood that)",
+   "source_sentence": "The likelihood that individuals who try to adapt to positive social behaviors will experience organizational exclusion decreases.",
+   "explanation": [
     {
-      "id": 1,
-      "english": "Exclusion is a state that is ignored by the organization psychologists.",
-      "grammar": [
-        {"tag": "주격 관계대명사 that", "note": "선행사 a state를 수식하는 주격 관계대명사", "spans": ["that"]},
-        {"tag": "수동태", "note": "be+p.p. 형태로 '무시되다'라는 수동의 의미", "spans": ["is ignored"]}
-      ],
-      "vocab": [
-        {"word": "exclusion", "meaning": "배제, 제외"},
-        {"word": "ignore", "meaning": "무시하다, 간과하다"},
-        {"word": "psychologist", "meaning": "심리학자"}
-      ],
-      "chunks": [
-        {"en": "Exclusion is a [[state]]", "ko": "배제는 하나의 [[상태]]이다"},
-        {"en": "that is [[ignored]] by the organization psychologists.", "ko": "조직 심리학자들에 의해 [[무시되는]]"}
-      ],
-      "misreads": [
-        {"statement": "조직 심리학자들은 배제를 적극적으로 연구하고 관리한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "ignored by the organization psychologists", "why": "배제는 조직 심리학자들이 오히려 '무시하는(ignored)' 상태로 제시된다.", "english": false},
-        {"statement": "배제는 조직 심리학자들에 의해 무시되는 상태이다.", "verdict": "O", "english": false}
-      ],
-      "mistips": []
+     "chip": "쉽게 말하면",
+     "text": "'The likelihood that ~'의 that은 앞 명사 likelihood의 '내용'을 그대로 풀어 주는 동격 접속사다."
     },
     {
-      "id": 2,
-      "english": "Therefore, it is possible that precautions regarding organizational exclusion are not taken.",
-      "grammar": [
-        {"tag": "가주어-진주어", "note": "it이 가주어, that절이 진주어인 구조", "spans": ["it"]},
-        {"tag": "명사절 접속사 that", "note": "진주어 역할을 하는 명사절을 이끎", "spans": ["that"]},
-        {"tag": "수동태", "note": "be+p.p.로 '취해지지 않는다'라는 수동", "spans": ["are not taken"]}
-      ],
-      "vocab": [
-        {"word": "precaution", "meaning": "예방책, 예방 조치"},
-        {"word": "regarding", "meaning": "~에 관하여"},
-        {"word": "organizational", "meaning": "조직의, 조직적인"}
-      ],
-      "chunks": [
-        {"en": "Therefore, it is [[possible]]", "ko": "따라서, 다음이 [[가능하다]]"},
-        {"en": "that [[precautions]] regarding organizational exclusion are not taken.", "ko": "조직적 배제에 관한 [[예방책]]이 취해지지 않는다는 것이"}
-      ],
-      "misreads": [
-        {"statement": "이 글은 조직적 배제 예방에 드는 구체적 예산 규모를 제시한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "precautions regarding organizational exclusion are not taken", "why": "예산 규모나 비용 수치는 지문에 전혀 언급되지 않는다.", "english": false}
-      ],
-      "mistips": []
+     "chip": "구별",
+     "text": "동격 that 뒤에는 '완전한 문장'이 오고, 관계대명사 that 뒤에는 주어나 목적어가 빠진 '불완전한 문장'이 온다."
     },
     {
-      "id": 3,
-      "english": "Individuals react to organizational exclusion by trying to strengthen their basic needs, which are threatened.",
-      "grammar": [
-        {"tag": "전치사 by + 동명사", "note": "by+동명사로 '~함으로써'라는 수단을 나타냄", "spans": ["by trying"]},
-        {"tag": "to부정사(부사적)", "note": "'강화하려고'라는 목적을 나타내는 to부정사", "spans": ["to strengthen"]},
-        {"tag": "관계대명사 계속적 용법(, which)", "note": "앞의 basic needs를 보충 설명하는 계속적 용법", "spans": ["which"]},
-        {"tag": "수동태", "note": "be+p.p.로 '위협받는다'라는 수동", "spans": ["are threatened"]}
-      ],
-      "vocab": [
-        {"word": "react", "meaning": "반응하다"},
-        {"word": "strengthen", "meaning": "강화하다"},
-        {"word": "threaten", "meaning": "위협하다"}
-      ],
-      "chunks": [
-        {"en": "Individuals [[react]] to organizational exclusion", "ko": "개인은 조직적 배제에 [[반응한다]]"},
-        {"en": "by trying to strengthen their basic [[needs]], which are threatened.", "ko": "위협받는 자신의 기본적 [[욕구]]를 강화하려 애씀으로써"}
-      ],
-      "misreads": [
-        {"statement": "개인은 조직적 배제에 반응하여 자신의 기본 욕구를 약화시키려 한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "trying to strengthen their basic needs", "why": "개인은 기본 욕구를 '강화(strengthen)'하려 하지 약화시키려 하지 않는다.", "english": false}
-      ],
-      "mistips": ["which are threatened는 앞의 basic needs를 보충 설명하는 계속적 용법으로 '그런데 그 욕구는'으로 푼다"]
+     "chip": "수일치 주의",
+     "text": "동격 that절이 아무리 길어도 진짜 주어는 The likelihood(단수)여서 문장의 동사는 decreases로 받는다."
     },
     {
-      "id": 4,
-      "english": "Positive social behaviors develop belonging and self-respect.",
-      "grammar": [
-        {"tag": "주어-동사 수일치", "note": "복수 주어 behaviors에 복수 동사 develop이 대응", "spans": ["behaviors develop"]},
-        {"tag": "등위접속사 and", "note": "belonging과 self-respect를 대등하게 연결", "spans": ["and"]}
-      ],
-      "vocab": [
-        {"word": "behavior", "meaning": "행동"},
-        {"word": "belonging", "meaning": "소속감"},
-        {"word": "self-respect", "meaning": "자존감, 자기존중"}
-      ],
-      "chunks": [
-        {"en": "Positive social [[behaviors]]", "ko": "긍정적인 사회적 [[행동은]]"},
-        {"en": "develop [[belonging]] and self-respect.", "ko": "[[소속감]]과 자존감을 발달시킨다"}
-      ],
-      "misreads": [
-        {"statement": "긍정적인 사회적 행동은 소속감과 자존감을 발달시킨다.", "verdict": "O", "english": false}
-      ],
-      "mistips": []
-    },
-    {
-      "id": 5,
-      "english": "The likelihood that individuals who try to adapt to positive social behaviors will experience organizational exclusion decreases.",
-      "grammar": [
-        {"tag": "동격 접속사 that", "note": "명사 likelihood의 내용을 풀어 주는 동격 that", "spans": ["that"]},
-        {"tag": "주격 관계대명사 who", "note": "선행사 individuals를 수식하는 주격 관계대명사", "spans": ["who"]},
-        {"tag": "to부정사(목적어)", "note": "try의 목적어로 쓰인 to부정사", "spans": ["to adapt"]},
-        {"tag": "주어-동사 수일치", "note": "진짜 주어 The likelihood(단수)에 동사 decreases가 대응", "spans": ["decreases"]}
-      ],
-      "vocab": [
-        {"word": "likelihood", "meaning": "가능성"},
-        {"word": "adapt", "meaning": "적응하다"},
-        {"word": "decrease", "meaning": "감소하다"}
-      ],
-      "chunks": [
-        {"en": "The [[likelihood]] that individuals", "ko": "개인들이 ~라는 [[가능성]]은"},
-        {"en": "who try to adapt to positive social [[behaviors]]", "ko": "긍정적인 사회적 [[행동]]에 적응하려 하는"},
-        {"en": "will experience organizational exclusion [[decreases]].", "ko": "조직적 배제를 경험할, 그 가능성이 [[감소한다]]"}
-      ],
-      "misreads": [
-        {"statement": "감소하는 것은 긍정적 행동에 적응하려는 개인의 수이다.", "verdict": "X", "trap_type": "구조수식", "anchor": "organizational exclusion decreases", "why": "감소하는 주체는 '배제를 경험할 가능성(likelihood)'이지 개인의 수가 아니다.", "english": false},
-        {"statement": "긍정적 사회 행동에 적응하려는 개인은 배제를 덜 겪게 된다.", "verdict": "O", "english": false}
-      ],
-      "mistips": ["주어 The likelihood와 동사 decreases가 멀리 떨어져 있으니 that절을 건너뛰고 수일치를 확인하라"]
-    },
-    {
-      "id": 6,
-      "english": "However, individuals may be faced with more exclusion when they cannot adapt to a group.",
-      "grammar": [
-        {"tag": "조동사+수동태", "note": "may be p.p. 형태로 '~될 수 있다'", "spans": ["may be faced"]},
-        {"tag": "be faced with", "note": "~에 직면하다", "spans": ["faced with"]},
-        {"tag": "부사절 접속사 when", "note": "'~할 때'라는 시간·조건의 부사절을 이끎", "spans": ["when"]}
-      ],
-      "vocab": [
-        {"word": "be faced with", "meaning": "~에 직면하다"},
-        {"word": "adapt", "meaning": "적응하다"}
-      ],
-      "chunks": [
-        {"en": "However, individuals may be [[faced]] with more exclusion", "ko": "그러나, 개인은 더 많은 배제에 [[직면할]] 수 있다"},
-        {"en": "when they cannot [[adapt]] to a group.", "ko": "그들이 집단에 [[적응하지]] 못할 때"}
-      ],
-      "misreads": [
-        {"statement": "집단에 적응하지 못하면 배제가 늘어나는데, 이는 그 개인의 능력이 부족하기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "faced with more exclusion when they cannot adapt", "why": "배제가 늘어나는 방향은 맞지만, 원인은 '집단 적응 실패'일 뿐 능력 부족은 언급되지 않는다.", "english": false}
-      ],
-      "mistips": []
-    },
-    {
-      "id": 7,
-      "english": "When excluded individuals grow away from communication and social activities, their contribution to the organization they are in may decrease.",
-      "grammar": [
-        {"tag": "부사절 접속사 when", "note": "'~할 때'라는 시간 부사절을 이끎", "spans": ["When"]},
-        {"tag": "과거분사 형용사적 용법", "note": "'배제된'이라는 뜻으로 individuals를 앞에서 수식", "spans": ["excluded"]},
-        {"tag": "grow away from", "note": "~에서 멀어지다", "spans": ["grow away from"]},
-        {"tag": "목적격 관계대명사 생략", "note": "the organization (that) they are in에서 목적격 관계대명사가 생략됨", "spans": []}
-      ],
-      "vocab": [
-        {"word": "excluded", "meaning": "배제된"},
-        {"word": "grow away from", "meaning": "~에서 멀어지다"},
-        {"word": "contribution", "meaning": "기여, 기여도"}
-      ],
-      "chunks": [
-        {"en": "When excluded individuals [[grow]] away", "ko": "배제된 개인들이 [[멀어질]] 때"},
-        {"en": "from communication and social [[activities]],", "ko": "소통과 사회적 [[활동]]으로부터"},
-        {"en": "their [[contribution]] to the organization", "ko": "그들이 속한 조직에 대한 [[기여도는]]"},
-        {"en": "they are in may [[decrease]].", "ko": "[[감소할]] 수 있다"}
-      ],
-      "misreads": [
-        {"statement": "their contribution의 they are in에서 they는 조직을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "the organization they are in", "why": "they가 가리키는 것은 배제된 개인들이며 조직이 아니다.", "english": false},
-        {"statement": "배제된 개인이 소통·사회 활동에서 멀어지면 조직에 대한 기여도가 낮아질 수 있다.", "verdict": "O", "english": false}
-      ],
-      "mistips": ["the organization (that) they are in처럼 목적격 관계대명사가 생략된 구조에 주의하라"]
-    },
-    {
-      "id": 8,
-      "english": "When this situation is not avoided, exclusion increases even more and strongly affects the performance of the employee in a negative way.",
-      "grammar": [
-        {"tag": "부사절 접속사 when", "note": "'~할 때'라는 조건·시간 부사절을 이끎", "spans": ["When"]},
-        {"tag": "수동태", "note": "be+p.p.로 '방지되지 않으면'이라는 수동", "spans": ["is not avoided"]},
-        {"tag": "등위접속사 and(동사 병렬)", "note": "increases와 affects를 대등하게 연결", "spans": ["and"]}
-      ],
-      "vocab": [
-        {"word": "avoid", "meaning": "방지하다, 피하다"},
-        {"word": "affect", "meaning": "영향을 미치다"},
-        {"word": "performance", "meaning": "성과, 수행"},
-        {"word": "employee", "meaning": "직원"}
-      ],
-      "chunks": [
-        {"en": "When this situation is not [[avoided]],", "ko": "이 상황이 [[방지되지]] 않으면"},
-        {"en": "exclusion [[increases]] even more", "ko": "배제는 훨씬 더 [[증가하고]]"},
-        {"en": "and strongly affects the [[performance]] of the employee", "ko": "직원의 [[성과]]에 강하게 영향을 미친다"},
-        {"en": "in a [[negative]] way.", "ko": "[[부정적인]] 방식으로"}
-      ],
-      "misreads": [
-        {"statement": "이 상황을 방치하면 배제가 늘어 직원의 성과가 오히려 좋아진다.", "verdict": "X", "trap_type": "인과조건", "anchor": "affects the performance of the employee in a negative way", "why": "성과에 '부정적(negative)'으로 영향을 주므로 좋아진다는 것은 틀리다.", "killer": true, "english": false}
-      ],
-      "mistips": []
-    },
-    {
-      "id": 9,
-      "english": "Precautions need to be taken regarding organizational exclusion, which is very important for business.",
-      "grammar": [
-        {"tag": "need to+동사원형", "note": "'~할 필요가 있다'라는 의미", "spans": ["need to"]},
-        {"tag": "수동태", "note": "need to be p.p.로 '취해질 필요가 있다'", "spans": ["be taken"]},
-        {"tag": "전치사 regarding", "note": "~에 관하여(전치사)", "spans": ["regarding"]},
-        {"tag": "관계대명사 계속적 용법(, which)", "note": "앞 내용을 보충 설명하는 계속적 용법", "spans": ["which"]}
-      ],
-      "vocab": [
-        {"word": "precaution", "meaning": "예방책"},
-        {"word": "regarding", "meaning": "~에 관하여"},
-        {"word": "business", "meaning": "사업, 기업"}
-      ],
-      "chunks": [
-        {"en": "Precautions need to be [[taken]]", "ko": "예방책이 [[취해질]] 필요가 있다"},
-        {"en": "regarding organizational [[exclusion]],", "ko": "조직적 [[배제]]와 관련하여"},
-        {"en": "which is very important for [[business]].", "ko": "그리고 그것은 [[사업]]에 매우 중요하다"}
-      ],
-      "misreads": [
-        {"statement": "필자는 조직적 배제가 사업에 사소한 문제여서 방치해도 된다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "Precautions need to be taken regarding organizational exclusion", "why": "필자는 배제 예방책이 사업에 매우 중요하다고 강조한다.", "english": false},
-        {"statement": "필자는 조직적 배제에 대한 예방책이 필요하다고 본다.", "verdict": "O", "english": false}
-      ],
-      "mistips": []
+     "chip": "자주 쓰는 명사",
+     "text": "fact, idea, news, belief, likelihood, possibility처럼 '내용'을 담는 추상명사 뒤에 동격 that이 온다."
     }
+   ],
+   "example": "The fact that he lied surprised us.",
+   "example_analysis": "The likelihood [that ... organizational exclusion] decreases — that절이 likelihood의 내용을 설명하고, 문장 동사는 단수 주어에 맞춰 decreases이다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "The likelihood [[1|that]] individuals [[2|who]] try [[3|to adapt]] to positive social behaviors [[4|will experience]] organizational exclusion [[5|decrease]].",
+     "answer": "⑤",
+     "fix": "주어가 The likelihood(단수)이므로 decrease → decreases로 고쳐 수일치시켜야 한다.",
+     "options": [
+      "① that",
+      "② who",
+      "③ to adapt",
+      "④ will experience",
+      "⑤ decrease"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "Individuals [[react/reacts]] to organizational exclusion by trying to strengthen their basic needs, [[which/what]] [[are/is]] threatened.",
+     "answer": "react / which / are",
+     "fix": "주어 Individuals가 복수이므로 react, 앞 명사구를 보충하는 계속적 용법이므로 which, 선행사 needs가 복수이므로 are이다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "sentence": "",
+     "answer": "② Positive social behaviors develops belonging and self-respect.",
+     "fix": "주어 behaviors가 복수이므로 develops → develop으로 고쳐야 한다.",
+     "options": [
+      "① Exclusion is a state that is ignored by the organization psychologists.",
+      "② Positive social behaviors develops belonging and self-respect.",
+      "③ However, individuals may be faced with more exclusion when they cannot adapt to a group.",
+      "④ Precautions need to be taken regarding organizational exclusion, which is very important for business.",
+      "⑤ Therefore, it is possible that precautions regarding organizational exclusion are not taken."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그가 정직하다는 소문은 사실이 아니었다. (동격 that 사용)",
+     "sentence": "",
+     "answer": "The rumor that he was honest was not true.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "The rumor",
+      "that",
+      "he was honest",
+      "was not",
+      "true"
+     ],
+     "from_passage": false
+    },
+    {
+     "kind": "영작",
+     "question": "긍정적인 사회적 행동에 적응하려 하는 개인들이 조직적 배제를 경험할 가능성은 감소한다.",
+     "sentence": "",
+     "answer": "The likelihood that individuals who try to adapt to positive social behaviors will experience organizational exclusion decreases.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "The likelihood",
+      "that",
+      "individuals",
+      "who",
+      "try to adapt to",
+      "positive social behaviors",
+      "will experience",
+      "organizational exclusion",
+      "decreases"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "조직적 배제",
+    "expressions": [
+     "organizational exclusion",
+     "exclusion"
+    ],
+    "variation": "무시되던 배제 → 반드시 예방해야 할 대상으로"
+   },
+   {
+    "label": "예방책 마련",
+    "expressions": [
+     "precautions regarding organizational exclusion",
+     "Precautions need to be taken"
+    ],
+    "variation": "취해지지 않던 예방책 → 사업에 매우 중요한 필수 조치로"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입(문제)",
+    "sentence_range": "1~2",
+    "summary": "배제는 심리학자들에게 [[무시되는]] 상태라 예방책이 마련되지 않음",
+    "easy_example": "고장 신호를 무시하면 정비 계획이 아예 세워지지 않는 것과 같다."
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "3~5",
+    "summary": "개인은 기본 욕구 강화·긍정적 행동으로 배제 [[가능성]]을 낮추려 함",
+    "easy_example": "새 반에서 먼저 인사하고 어울리면 따돌림 위험이 줄어드는 것과 같다."
+   },
+   {
+    "stage": "심화",
+    "sentence_range": "6~8",
+    "summary": "적응 실패로 배제가 커지면 소통이 끊겨 [[성과]]에 부정적 영향",
+    "easy_example": "팀원이 대화에서 빠지면 프로젝트 기여도가 뚝 떨어지는 것과 같다."
+   },
+   {
+    "stage": "결론(방안)",
+    "sentence_range": "9",
+    "summary": "조직적 배제에 대한 [[예방책]]은 사업에 매우 중요함",
+    "easy_example": "작은 균열을 미리 막는 예방 정비가 결국 회사를 지킨다."
+   }
   ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Exclusion is a state that is ignored by the organization psychologists.",
+   "grammar": [
+    {
+     "tag": "주격 관계대명사 that",
+     "note": "선행사 a state를 수식하는 주격 관계대명사",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "be+p.p. 형태로 '무시되다'라는 수동의 의미",
+     "spans": [
+      "is ignored"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "exclusion",
+     "meaning": "배제, 제외"
+    },
+    {
+     "word": "ignore",
+     "meaning": "무시하다, 간과하다"
+    },
+    {
+     "word": "psychologist",
+     "meaning": "심리학자"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Exclusion is a [[state]]",
+     "ko": "배제는 하나의 [[상태]]이다"
+    },
+    {
+     "en": "that is [[ignored]] by the organization psychologists.",
+     "ko": "조직 [[심리학자들]]에 의해 [[무시되는]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "조직 심리학자들은 배제를 적극적으로 연구하고 관리한다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "ignored by the organization psychologists",
+     "why": "배제는 조직 심리학자들이 오히려 '무시하는(ignored)' 상태로 제시된다.",
+     "english": false
+    },
+    {
+     "statement": "배제는 조직 심리학자들에 의해 무시되는 상태이다.",
+     "verdict": "O",
+     "english": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "Therefore, it is possible that precautions regarding organizational exclusion are not taken.",
+   "grammar": [
+    {
+     "tag": "가주어-진주어",
+     "note": "it이 가주어, that절이 진주어인 구조",
+     "spans": [
+      "it"
+     ]
+    },
+    {
+     "tag": "명사절 접속사 that",
+     "note": "진주어 역할을 하는 명사절을 이끎",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "be+p.p.로 '취해지지 않는다'라는 수동",
+     "spans": [
+      "are not taken"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "precaution",
+     "meaning": "예방책, 예방 조치"
+    },
+    {
+     "word": "regarding",
+     "meaning": "~에 관하여"
+    },
+    {
+     "word": "organizational",
+     "meaning": "조직의, 조직적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Therefore, it is [[possible]]",
+     "ko": "따라서, 다음이 [[가능하다]]"
+    },
+    {
+     "en": "that [[precautions]] regarding organizational exclusion are not taken.",
+     "ko": "조직적 배제에 관한 [[예방책]]이 [[취해지지]] 않는다는 것이"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 글은 조직적 배제 예방에 드는 구체적 예산 규모를 제시한다.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "anchor": "precautions regarding organizational exclusion are not taken",
+     "why": "예산 규모나 비용 수치는 지문에 전혀 언급되지 않는다.",
+     "english": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "Individuals react to organizational exclusion by trying to strengthen their basic needs, which are threatened.",
+   "grammar": [
+    {
+     "tag": "전치사 by + 동명사",
+     "note": "by+동명사로 '~함으로써'라는 수단을 나타냄",
+     "spans": [
+      "by trying"
+     ]
+    },
+    {
+     "tag": "to부정사(부사적)",
+     "note": "'강화하려고'라는 목적을 나타내는 to부정사",
+     "spans": [
+      "to strengthen"
+     ]
+    },
+    {
+     "tag": "관계대명사 계속적 용법(, which)",
+     "note": "앞의 basic needs를 보충 설명하는 계속적 용법",
+     "spans": [
+      "which"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "be+p.p.로 '위협받는다'라는 수동",
+     "spans": [
+      "are threatened"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "react",
+     "meaning": "반응하다"
+    },
+    {
+     "word": "strengthen",
+     "meaning": "강화하다"
+    },
+    {
+     "word": "threaten",
+     "meaning": "위협하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Individuals [[react]] to organizational exclusion",
+     "ko": "개인은 조직적 배제에 [[반응한다]]"
+    },
+    {
+     "en": "by trying to strengthen their basic [[needs]], which are threatened.",
+     "ko": "위협받는 자신의 기본적 [[욕구]]를 [[강화하려]] 애씀으로써"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "개인은 조직적 배제에 반응하여 자신의 기본 욕구를 약화시키려 한다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "trying to strengthen their basic needs",
+     "why": "개인은 기본 욕구를 '강화(strengthen)'하려 하지 약화시키려 하지 않는다.",
+     "english": false
+    }
+   ],
+   "mistips": [
+    "which are threatened는 앞의 basic needs를 보충 설명하는 계속적 용법으로 '그런데 그 욕구는'으로 푼다"
+   ]
+  },
+  {
+   "id": 4,
+   "english": "Positive social behaviors develop belonging and self-respect.",
+   "grammar": [
+    {
+     "tag": "주어-동사 수일치",
+     "note": "복수 주어 behaviors에 복수 동사 develop이 대응",
+     "spans": [
+      "behaviors develop"
+     ]
+    },
+    {
+     "tag": "등위접속사 and",
+     "note": "belonging과 self-respect를 대등하게 연결",
+     "spans": [
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "behavior",
+     "meaning": "행동"
+    },
+    {
+     "word": "belonging",
+     "meaning": "소속감"
+    },
+    {
+     "word": "self-respect",
+     "meaning": "자존감, 자기존중"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Positive social [[behaviors]]",
+     "ko": "긍정적인 사회적 [[행동은]]"
+    },
+    {
+     "en": "develop [[belonging]] and self-respect.",
+     "ko": "[[소속감]]과 자존감을 발달시킨다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "긍정적인 사회적 행동은 소속감과 자존감을 발달시킨다.",
+     "verdict": "O",
+     "english": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "The likelihood that individuals who try to adapt to positive social behaviors will experience organizational exclusion decreases.",
+   "grammar": [
+    {
+     "tag": "동격 접속사 that",
+     "note": "명사 likelihood의 내용을 풀어 주는 동격 that",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "주격 관계대명사 who",
+     "note": "선행사 individuals를 수식하는 주격 관계대명사",
+     "spans": [
+      "who"
+     ]
+    },
+    {
+     "tag": "to부정사(목적어)",
+     "note": "try의 목적어로 쓰인 to부정사",
+     "spans": [
+      "to adapt"
+     ]
+    },
+    {
+     "tag": "주어-동사 수일치",
+     "note": "진짜 주어 The likelihood(단수)에 동사 decreases가 대응",
+     "spans": [
+      "decreases"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "likelihood",
+     "meaning": "가능성"
+    },
+    {
+     "word": "adapt",
+     "meaning": "적응하다"
+    },
+    {
+     "word": "decrease",
+     "meaning": "감소하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The [[likelihood]] that individuals",
+     "ko": "개인들이 ~라는 [[가능성]]은"
+    },
+    {
+     "en": "who try to adapt to positive social [[behaviors]]",
+     "ko": "긍정적인 사회적 [[행동]]에 [[적응하려]] 하는"
+    },
+    {
+     "en": "will experience organizational exclusion [[decreases]].",
+     "ko": "조직적 배제를 경험할, 그 가능성이 [[감소한다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "감소하는 것은 긍정적 행동에 적응하려는 개인의 수이다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "organizational exclusion decreases",
+     "why": "감소하는 주체는 '배제를 경험할 가능성(likelihood)'이지 개인의 수가 아니다.",
+     "english": false
+    },
+    {
+     "statement": "긍정적 사회 행동에 적응하려는 개인은 배제를 덜 겪게 된다.",
+     "verdict": "O",
+     "english": false
+    }
+   ],
+   "mistips": [
+    "주어 The likelihood와 동사 decreases가 멀리 떨어져 있으니 that절을 건너뛰고 수일치를 확인하라"
+   ]
+  },
+  {
+   "id": 6,
+   "english": "However, individuals may be faced with more exclusion when they cannot adapt to a group.",
+   "grammar": [
+    {
+     "tag": "조동사+수동태",
+     "note": "may be p.p. 형태로 '~될 수 있다'",
+     "spans": [
+      "may be faced"
+     ]
+    },
+    {
+     "tag": "be faced with",
+     "note": "~에 직면하다",
+     "spans": [
+      "faced with"
+     ]
+    },
+    {
+     "tag": "부사절 접속사 when",
+     "note": "'~할 때'라는 시간·조건의 부사절을 이끎",
+     "spans": [
+      "when"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "be faced with",
+     "meaning": "~에 직면하다"
+    },
+    {
+     "word": "adapt",
+     "meaning": "적응하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "However, individuals may be [[faced]] with more exclusion",
+     "ko": "그러나, 개인은 더 많은 배제에 [[직면할]] 수 [[있다]]"
+    },
+    {
+     "en": "when they cannot [[adapt]] to a group.",
+     "ko": "그들이 집단에 [[적응하지]] 못할 때"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "집단에 적응하지 못하면 배제가 늘어나는데, 이는 그 개인의 능력이 부족하기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "faced with more exclusion when they cannot adapt",
+     "why": "배제가 늘어나는 방향은 맞지만, 원인은 '집단 적응 실패'일 뿐 능력 부족은 언급되지 않는다.",
+     "english": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 7,
+   "english": "When excluded individuals grow away from communication and social activities, their contribution to the organization they are in may decrease.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사 when",
+     "note": "'~할 때'라는 시간 부사절을 이끎",
+     "spans": [
+      "When"
+     ]
+    },
+    {
+     "tag": "과거분사 형용사적 용법",
+     "note": "'배제된'이라는 뜻으로 individuals를 앞에서 수식",
+     "spans": [
+      "excluded"
+     ]
+    },
+    {
+     "tag": "grow away from",
+     "note": "~에서 멀어지다",
+     "spans": [
+      "grow away from"
+     ]
+    },
+    {
+     "tag": "목적격 관계대명사 생략",
+     "note": "the organization (that) they are in에서 목적격 관계대명사가 생략됨",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "excluded",
+     "meaning": "배제된"
+    },
+    {
+     "word": "grow away from",
+     "meaning": "~에서 멀어지다"
+    },
+    {
+     "word": "contribution",
+     "meaning": "기여, 기여도"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When excluded individuals [[grow]] away",
+     "ko": "배제된 [[개인들]]이 [[멀어질]] 때"
+    },
+    {
+     "en": "from communication and social [[activities]],",
+     "ko": "소통과 사회적 [[활동]]으로부터"
+    },
+    {
+     "en": "their [[contribution]] to the organization",
+     "ko": "그들이 속한 조직에 대한 [[기여도는]]"
+    },
+    {
+     "en": "they are in may [[decrease]].",
+     "ko": "[[감소할]] 수 있다"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "their contribution의 they are in에서 they는 조직을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "the organization they are in",
+     "why": "they가 가리키는 것은 배제된 개인들이며 조직이 아니다.",
+     "english": false
+    },
+    {
+     "statement": "배제된 개인이 소통·사회 활동에서 멀어지면 조직에 대한 기여도가 낮아질 수 있다.",
+     "verdict": "O",
+     "english": false
+    }
+   ],
+   "mistips": [
+    "the organization (that) they are in처럼 목적격 관계대명사가 생략된 구조에 주의하라"
+   ]
+  },
+  {
+   "id": 8,
+   "english": "When this situation is not avoided, exclusion increases even more and strongly affects the performance of the employee in a negative way.",
+   "grammar": [
+    {
+     "tag": "부사절 접속사 when",
+     "note": "'~할 때'라는 조건·시간 부사절을 이끎",
+     "spans": [
+      "When"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "be+p.p.로 '방지되지 않으면'이라는 수동",
+     "spans": [
+      "is not avoided"
+     ]
+    },
+    {
+     "tag": "등위접속사 and(동사 병렬)",
+     "note": "increases와 affects를 대등하게 연결",
+     "spans": [
+      "and"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "avoid",
+     "meaning": "방지하다, 피하다"
+    },
+    {
+     "word": "affect",
+     "meaning": "영향을 미치다"
+    },
+    {
+     "word": "performance",
+     "meaning": "성과, 수행"
+    },
+    {
+     "word": "employee",
+     "meaning": "직원"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When this situation is not [[avoided]],",
+     "ko": "이 상황이 [[방지되지]] 않으면"
+    },
+    {
+     "en": "exclusion [[increases]] even more",
+     "ko": "배제는 훨씬 더 [[증가하고]]"
+    },
+    {
+     "en": "and strongly affects the [[performance]] of the employee",
+     "ko": "직원의 [[성과]]에 강하게 영향을 [[미친다]]"
+    },
+    {
+     "en": "in a [[negative]] way.",
+     "ko": "[[부정적인]] 방식으로"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 상황을 방치하면 배제가 늘어 직원의 성과가 오히려 좋아진다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "affects the performance of the employee in a negative way",
+     "why": "성과에 '부정적(negative)'으로 영향을 주므로 좋아진다는 것은 틀리다.",
+     "killer": true,
+     "english": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 9,
+   "english": "Precautions need to be taken regarding organizational exclusion, which is very important for business.",
+   "grammar": [
+    {
+     "tag": "need to+동사원형",
+     "note": "'~할 필요가 있다'라는 의미",
+     "spans": [
+      "need to"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "need to be p.p.로 '취해질 필요가 있다'",
+     "spans": [
+      "be taken"
+     ]
+    },
+    {
+     "tag": "전치사 regarding",
+     "note": "~에 관하여(전치사)",
+     "spans": [
+      "regarding"
+     ]
+    },
+    {
+     "tag": "관계대명사 계속적 용법(, which)",
+     "note": "앞 내용을 보충 설명하는 계속적 용법",
+     "spans": [
+      "which"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "precaution",
+     "meaning": "예방책"
+    },
+    {
+     "word": "regarding",
+     "meaning": "~에 관하여"
+    },
+    {
+     "word": "business",
+     "meaning": "사업, 기업"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Precautions need to be [[taken]]",
+     "ko": "예방책이 [[취해질]] 필요가 있다"
+    },
+    {
+     "en": "regarding organizational [[exclusion]],",
+     "ko": "조직적 [[배제]]와 관련하여"
+    },
+    {
+     "en": "which is very important for [[business]].",
+     "ko": "그리고 그것은 [[사업]]에 매우 [[중요하다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 조직적 배제가 사업에 사소한 문제여서 방치해도 된다고 본다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "Precautions need to be taken regarding organizational exclusion",
+     "why": "필자는 배제 예방책이 사업에 매우 중요하다고 강조한다.",
+     "english": false
+    },
+    {
+     "statement": "필자는 조직적 배제에 대한 예방책이 필요하다고 본다.",
+     "verdict": "O",
+     "english": false
+    }
+   ],
+   "mistips": []
+  }
+ ]
 }

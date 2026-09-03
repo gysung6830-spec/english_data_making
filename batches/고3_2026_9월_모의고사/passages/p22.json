@@ -215,7 +215,7 @@
    "chunks": [
     {
      "en": "Studies show that people who sit in the front row",
-     "ko": "연구들은 보여준다, [[앞줄]]에 앉는 사람들이"
+     "ko": "연구들은 [[보여준다,]] [[앞줄]]에 앉는 사람들이"
     },
     {
      "en": "[[learn and retain more than others in the audience,]]",
@@ -307,7 +307,7 @@
    "chunks": [
     {
      "en": "Those in the middle sections are the next most attentive",
-     "ko": "가운데 구역에 있는 사람들은 다음으로 가장 [[주의]] 깊고"
+     "ko": "가운데 구역에 있는 [[사람들]]은 다음으로 가장 [[주의]] 깊고"
     },
     {
      "en": "and ask the most questions,",
@@ -361,7 +361,7 @@
    "chunks": [
     {
      "en": "The side areas and back are",
-     "ko": "[[측면]] 구역들과 뒷자리는"
+     "ko": "[[측면]] 구역들과 [[뒷자리]]는"
     },
     {
      "en": "[[the least responsive and attentive.]]",
@@ -413,7 +413,7 @@
    "chunks": [
     {
      "en": "In one experiment we conducted, we placed name cards on participants' seats",
-     "ko": "우리가 수행한 한 실험에서, 우리는 참가자들의 자리에 [[이름표]]를 놓았다"
+     "ko": "우리가 수행한 한 실험에서, 우리는 [[참가자들]]의 자리에 [[이름표]]를 놓았다"
     },
     {
      "en": "[[so they could not take their usual positions.]]",
@@ -482,7 +482,7 @@
     },
     {
      "en": "and well-known back-row hermits sat in the front.",
-     "ko": "그리고 잘 알려진 뒷줄 [[은둔자]]들은 앞줄에 앉았다"
+     "ko": "그리고 잘 알려진 뒷줄 [[은둔자]]들은 앞줄에 [[앉았다]]"
     }
    ],
    "misreads": [
@@ -552,7 +552,7 @@
    "chunks": [
     {
      "en": "We found that this strategy not only increased",
-     "ko": "우리는 이 전략이 ~뿐 아니라 [[증가]]시켰음을 발견했다"
+     "ko": "우리는 이 전략이 ~뿐 아니라 [[증가]]시켰음을 [[발견했다]]"
     },
     {
      "en": "[[the participation and recall of the normally negative participants]]",
