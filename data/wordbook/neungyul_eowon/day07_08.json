@@ -1,0 +1,406 @@
+{
+  "title": "Day 7~8",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "encounter",
+      "meaning": "직면하다; 우연히 만나다; 만남"
+    },
+    {
+      "no": 2,
+      "word": "symphony",
+      "meaning": "교향곡, 심포니"
+    },
+    {
+      "no": 3,
+      "word": "perspective",
+      "meaning": "관점, 시각, 견해; 원근법"
+    },
+    {
+      "no": 4,
+      "word": "combination",
+      "meaning": "결합, 조합; 번호"
+    },
+    {
+      "no": 5,
+      "word": "enable",
+      "meaning": "...할 수 있게 하다, 가능하게 하다"
+    },
+    {
+      "no": 6,
+      "word": "amazing",
+      "meaning": "놀라운, 경탄할 만한"
+    },
+    {
+      "no": 7,
+      "word": "perfect",
+      "meaning": "완전한, 완벽한; 완전하게 하다, 완성하다"
+    },
+    {
+      "no": 8,
+      "word": "enhance",
+      "meaning": "향상하다"
+    },
+    {
+      "no": 9,
+      "word": "embrace",
+      "meaning": "껴안다; 수락하다, 받아들이다; 포옹; 수락, 받아들임"
+    },
+    {
+      "no": 10,
+      "word": "selection",
+      "meaning": "선발, 선택"
+    },
+    {
+      "no": 11,
+      "word": "compile",
+      "meaning": "편집하다; 수집하다"
+    },
+    {
+      "no": 12,
+      "word": "correspondence",
+      "meaning": "서신 왕래; 대응, 일치"
+    },
+    {
+      "no": 13,
+      "word": "enclose",
+      "meaning": "둘러싸다; 동봉하다"
+    },
+    {
+      "no": 14,
+      "word": "absurd",
+      "meaning": "어리석은, 터무니없는; 불합리한"
+    },
+    {
+      "no": 15,
+      "word": "correspond",
+      "meaning": "해당하다; 일치하다; 서신을 주고받다"
+    },
+    {
+      "no": 16,
+      "word": "company",
+      "meaning": "친구, 동료; 회사; 동석, 동행, 함께 있음"
+    },
+    {
+      "no": 17,
+      "word": "synthesize",
+      "meaning": "합성하다; 종합하다, 종합적으로 다루다"
+    },
+    {
+      "no": 18,
+      "word": "arouse",
+      "meaning": "일으키다; 깨우다"
+    },
+    {
+      "no": 19,
+      "word": "security",
+      "meaning": "안전, 보호 ; 보안, 경비; 안도, 안심"
+    },
+    {
+      "no": 20,
+      "word": "selective",
+      "meaning": "선택적인; 까다롭게 선택하는"
+    },
+    {
+      "no": 21,
+      "word": "confirmation",
+      "meaning": "확인, 확증"
+    },
+    {
+      "no": 22,
+      "word": "persuasive",
+      "meaning": "설득력이 있는"
+    },
+    {
+      "no": 23,
+      "word": "confrontation",
+      "meaning": "대립, 대결"
+    },
+    {
+      "no": 24,
+      "word": "arise",
+      "meaning": "발생하다, 일어나다; 일어나다, 기인하다; 깨다, 일어나다"
+    },
+    {
+      "no": 25,
+      "word": "complaint",
+      "meaning": "불평, 항의"
+    },
+    {
+      "no": 26,
+      "word": "aboard",
+      "meaning": "탑승하여; 안에서"
+    },
+    {
+      "no": 27,
+      "word": "atom",
+      "meaning": "원자"
+    },
+    {
+      "no": 28,
+      "word": "absolutely",
+      "meaning": "완전히, 전적으로; 그렇고 말고"
+    },
+    {
+      "no": 29,
+      "word": "abroad",
+      "meaning": "외국에, 해외로; 널리 퍼져"
+    },
+    {
+      "no": 30,
+      "word": "engagement",
+      "meaning": "약속; 약혼; 참여"
+    },
+    {
+      "no": 31,
+      "word": "perfectly",
+      "meaning": "나무랄 데 없이, 완벽하게, 완전히"
+    },
+    {
+      "no": 32,
+      "word": "compromise",
+      "meaning": "타협, 절충; 타협하다"
+    },
+    {
+      "no": 33,
+      "word": "perseverance",
+      "meaning": "끈기, 인내"
+    },
+    {
+      "no": 34,
+      "word": "permanent",
+      "meaning": "영구적인, 불변의; 오랫동안 지속되는; 정규의"
+    },
+    {
+      "no": 35,
+      "word": "permanently",
+      "meaning": "영구적으로"
+    },
+    {
+      "no": 36,
+      "word": "persistence",
+      "meaning": "고집; 영속, 지속성"
+    },
+    {
+      "no": 37,
+      "word": "enhancement",
+      "meaning": "향상"
+    },
+    {
+      "no": 38,
+      "word": "confirm",
+      "meaning": "확인하다, 확정하다; 보여주다, 확인해주다; 인정하다"
+    },
+    {
+      "no": 39,
+      "word": "amazement",
+      "meaning": "놀람"
+    },
+    {
+      "no": 40,
+      "word": "enforce",
+      "meaning": "시행하다; 강요하다"
+    },
+    {
+      "no": 41,
+      "word": "connection",
+      "meaning": "관련성; 연결, 접속"
+    },
+    {
+      "no": 42,
+      "word": "entitle",
+      "meaning": "자격을 주다; 제목을 붙이다"
+    },
+    {
+      "no": 43,
+      "word": "collapse",
+      "meaning": "붕괴되다, 무너지다; 쓰러지다; 붕괴; 쓰러짐; 실패"
+    },
+    {
+      "no": 44,
+      "word": "persistent",
+      "meaning": "지속적인; 고집하는, 끈질긴"
+    },
+    {
+      "no": 45,
+      "word": "amaze",
+      "meaning": "깜짝 놀라게 하다"
+    },
+    {
+      "no": 46,
+      "word": "atomic",
+      "meaning": "원자의, 원자력의"
+    },
+    {
+      "no": 47,
+      "word": "segregation",
+      "meaning": "차별, 분리; 분리, 격리"
+    },
+    {
+      "no": 48,
+      "word": "absolute",
+      "meaning": "완전한, 전적인, 절대적인; 확실한, 틀림없는; 전제적인, 무제한의"
+    },
+    {
+      "no": 49,
+      "word": "affordable",
+      "meaning": "감당할 수 있는"
+    },
+    {
+      "no": 50,
+      "word": "corresponding",
+      "meaning": "상응하는"
+    },
+    {
+      "no": 51,
+      "word": "select",
+      "meaning": "선택하다, 고르다"
+    },
+    {
+      "no": 52,
+      "word": "confront",
+      "meaning": "직면하다; ...에 맞서다"
+    },
+    {
+      "no": 53,
+      "word": "abnormal",
+      "meaning": "비정상적인"
+    },
+    {
+      "no": 54,
+      "word": "engage",
+      "meaning": "참여하다, 관여하다; 종사하다; 끌다, 사로잡다; 약속하다; 약혼하다"
+    },
+    {
+      "no": 55,
+      "word": "perfection",
+      "meaning": "완벽"
+    },
+    {
+      "no": 56,
+      "word": "afford",
+      "meaning": "...할 여유가 있다"
+    },
+    {
+      "no": 57,
+      "word": "segregate",
+      "meaning": "분리하다; 분리하다"
+    },
+    {
+      "no": 58,
+      "word": "separation",
+      "meaning": "분리, 분할, 구별; 별거, 이별"
+    },
+    {
+      "no": 59,
+      "word": "complain",
+      "meaning": "불평하다, 항의하다"
+    },
+    {
+      "no": 60,
+      "word": "separate",
+      "meaning": "분리된, 갈라진; 별개의, 따로따로의; 분리하다, 갈라놓다; 분리되다, 갈라지다"
+    },
+    {
+      "no": 61,
+      "word": "persuade",
+      "meaning": "설득하다, 권해서 ...하게 하다; 믿게 하다, 납득시키다"
+    },
+    {
+      "no": 62,
+      "word": "connect",
+      "meaning": "연결하다, 잇다; 관련시키다, 연관시키다; 연결하다"
+    },
+    {
+      "no": 63,
+      "word": "conform",
+      "meaning": "순응하다, 따르다"
+    },
+    {
+      "no": 64,
+      "word": "ashamed",
+      "meaning": "부끄러워하는, 창피한"
+    },
+    {
+      "no": 65,
+      "word": "combine",
+      "meaning": "결합하다; 결합되다; 겸비하다"
+    },
+    {
+      "no": 66,
+      "word": "alike",
+      "meaning": "비슷한, 서로 같은; 마찬가지로, 같게, 동등하게"
+    },
+    {
+      "no": 67,
+      "word": "composer",
+      "meaning": "작곡가"
+    },
+    {
+      "no": 68,
+      "word": "compose",
+      "meaning": "구성하다; 작곡하다, 쓰다"
+    },
+    {
+      "no": 69,
+      "word": "persuasion",
+      "meaning": "설득; 확신, 신념"
+    },
+    {
+      "no": 70,
+      "word": "secure",
+      "meaning": "안전한; 확실한; 얻다, 확보하다; 안전하게 하다, 위험으로부터보호하다"
+    },
+    {
+      "no": 71,
+      "word": "engaging",
+      "meaning": "관심을 끄는, 매력적인"
+    },
+    {
+      "no": 72,
+      "word": "synthetic",
+      "meaning": "합성한, 인조의; 종합적인"
+    },
+    {
+      "no": 73,
+      "word": "persist",
+      "meaning": "계속 ...하다, 고집하다; 지속하다, 존속하다"
+    },
+    {
+      "no": 74,
+      "word": "enforcement",
+      "meaning": "시행, 집행; 강제"
+    },
+    {
+      "no": 75,
+      "word": "ensure",
+      "meaning": "반드시 ...하게 하다; 보장하다"
+    },
+    {
+      "no": 76,
+      "word": "conformity",
+      "meaning": "따름, 순응; 일치"
+    },
+    {
+      "no": 77,
+      "word": "composition",
+      "meaning": "구성, 조립; 작문, 작곡; 작품"
+    },
+    {
+      "no": 78,
+      "word": "enclosure",
+      "meaning": "울타리를 친 장소; 포위, 둘러쌈; 동봉된 것"
+    },
+    {
+      "no": 79,
+      "word": "persevere",
+      "meaning": "노력하다, 인내하다, 견디다"
+    },
+    {
+      "no": 80,
+      "word": "enrich",
+      "meaning": "높이다, 풍부하게 하다; 부유하게 하다"
+    }
+  ]
+}

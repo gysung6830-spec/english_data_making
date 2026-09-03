@@ -1,0 +1,406 @@
+{
+  "title": "Day 35~36",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "dictation",
+      "meaning": "받아쓰기, 구술; 명령, 지시"
+    },
+    {
+      "no": 2,
+      "word": "tragic",
+      "meaning": "비극의, 비참한"
+    },
+    {
+      "no": 3,
+      "word": "addiction",
+      "meaning": "중독, 열중, 탐닉"
+    },
+    {
+      "no": 4,
+      "word": "modify",
+      "meaning": "변경하다, 수정하다; 수식하다"
+    },
+    {
+      "no": 5,
+      "word": "tragedy",
+      "meaning": "비극, 비극적 사건"
+    },
+    {
+      "no": 6,
+      "word": "coincidence",
+      "meaning": "우연; 일치"
+    },
+    {
+      "no": 7,
+      "word": "evasion",
+      "meaning": "회피, 기피"
+    },
+    {
+      "no": 8,
+      "word": "accommodation",
+      "meaning": "숙박 ; 합의, 조정"
+    },
+    {
+      "no": 9,
+      "word": "domestic",
+      "meaning": "국내의; 가정의, 가정적인"
+    },
+    {
+      "no": 10,
+      "word": "mold",
+      "meaning": "형, 틀; 곰팡이; 틀에 넣어 만들다; 형성하다"
+    },
+    {
+      "no": 11,
+      "word": "coincidentally",
+      "meaning": "우연히"
+    },
+    {
+      "no": 12,
+      "word": "contradictory",
+      "meaning": "모순되는"
+    },
+    {
+      "no": 13,
+      "word": "administer",
+      "meaning": "경영하다, 관리하다; 집행하다; 주다, 투여하다"
+    },
+    {
+      "no": 14,
+      "word": "dedicated",
+      "meaning": "헌신적인"
+    },
+    {
+      "no": 15,
+      "word": "appealing",
+      "meaning": "매력적인; 호소하는"
+    },
+    {
+      "no": 16,
+      "word": "polish",
+      "meaning": "닦다, 윤이 나게 하다; 연마하다, 세련되게 다듬다; 광택; 윤 내기; 세련"
+    },
+    {
+      "no": 17,
+      "word": "indicate",
+      "meaning": "가리키다, 지적하다; 암시하다, 나타내다"
+    },
+    {
+      "no": 18,
+      "word": "contradict",
+      "meaning": "반박하다; ...와 모순되다"
+    },
+    {
+      "no": 19,
+      "word": "incidentally",
+      "meaning": "우연히; 그건 그렇고, 그런데"
+    },
+    {
+      "no": 20,
+      "word": "indication",
+      "meaning": "표시"
+    },
+    {
+      "no": 21,
+      "word": "dictate",
+      "meaning": "받아쓰게 하다, 구술하다; 명령하다"
+    },
+    {
+      "no": 22,
+      "word": "mechanical",
+      "meaning": "기계의, 기계에 관한; 기계적인, 자동적인"
+    },
+    {
+      "no": 23,
+      "word": "minimum",
+      "meaning": "최소, 최저"
+    },
+    {
+      "no": 24,
+      "word": "diminish",
+      "meaning": "감소하다, 줄다; 감소시키다, 줄이다"
+    },
+    {
+      "no": 25,
+      "word": "contradiction",
+      "meaning": "모순; 반박"
+    },
+    {
+      "no": 26,
+      "word": "commodity",
+      "meaning": "상품, 판매상품"
+    },
+    {
+      "no": 27,
+      "word": "evade",
+      "meaning": "회피하다; 탈출하다"
+    },
+    {
+      "no": 28,
+      "word": "incidence",
+      "meaning": "발병, 발생"
+    },
+    {
+      "no": 29,
+      "word": "modest",
+      "meaning": "겸손한; 별로 많지 않은, 소박한; 단정한, 품위 있는"
+    },
+    {
+      "no": 30,
+      "word": "prominence",
+      "meaning": "명성, 유명함; 두드러짐, 현저함"
+    },
+    {
+      "no": 31,
+      "word": "addict",
+      "meaning": "중독자; 중독되게 하다"
+    },
+    {
+      "no": 32,
+      "word": "ministry",
+      "meaning": "부, 장관; 성직자"
+    },
+    {
+      "no": 33,
+      "word": "eminent",
+      "meaning": "저명한, 존경받는, 우수한"
+    },
+    {
+      "no": 34,
+      "word": "imminent",
+      "meaning": "임박한, 곧 일어날 것 같은"
+    },
+    {
+      "no": 35,
+      "word": "decay",
+      "meaning": "썩다, 부식하다; 쇠퇴하다; 부패, 부식; 쇠퇴"
+    },
+    {
+      "no": 36,
+      "word": "accidental",
+      "meaning": "우연한, 뜻밖의"
+    },
+    {
+      "no": 37,
+      "word": "casual",
+      "meaning": "느긋한, 무관심한; 격식을 차리지 않는, 평상시의; 우연한, 뜻하지 않은; 평상복"
+    },
+    {
+      "no": 38,
+      "word": "coordinate",
+      "meaning": "조직화하다; 동등하게 조정하다; 조정하다; 꾸미다; 잘 어울리다; 동등한, 동격의, 대등한; 좌표; 동등한 것; 코디, 잘 조화되어 있는 것"
+    },
+    {
+      "no": 39,
+      "word": "domination",
+      "meaning": "지배, 통치, 우세"
+    },
+    {
+      "no": 40,
+      "word": "index",
+      "meaning": "색인, 목록; 지표, 지수"
+    },
+    {
+      "no": 41,
+      "word": "expel",
+      "meaning": "추방하다, 쫓아내다"
+    },
+    {
+      "no": 42,
+      "word": "impulsive",
+      "meaning": "충동적인"
+    },
+    {
+      "no": 43,
+      "word": "invader",
+      "meaning": "침략자, 침입자"
+    },
+    {
+      "no": 44,
+      "word": "coincidental",
+      "meaning": "우연의"
+    },
+    {
+      "no": 45,
+      "word": "coincident",
+      "meaning": "일치하는; 동시에 일어나는"
+    },
+    {
+      "no": 46,
+      "word": "incident",
+      "meaning": "사건"
+    },
+    {
+      "no": 47,
+      "word": "dictator",
+      "meaning": "독재자"
+    },
+    {
+      "no": 48,
+      "word": "addicted",
+      "meaning": "중독된, 푹 빠진"
+    },
+    {
+      "no": 49,
+      "word": "minor",
+      "meaning": "작은, 적은, 덜 중요한; 단조의; 미성년자; 부전공"
+    },
+    {
+      "no": 50,
+      "word": "occasion",
+      "meaning": "때, 경우; 특별한 일"
+    },
+    {
+      "no": 51,
+      "word": "invasion",
+      "meaning": "침략, 침입; 침해, 침범"
+    },
+    {
+      "no": 52,
+      "word": "machinery",
+      "meaning": "기계류"
+    },
+    {
+      "no": 53,
+      "word": "accidentally",
+      "meaning": "우연히, 실수로"
+    },
+    {
+      "no": 54,
+      "word": "appeal",
+      "meaning": "를 끌다; 항소하다, 상고하다; 호소, 간청; 매력; 항소, 상고, 상"
+    },
+    {
+      "no": 55,
+      "word": "minimize",
+      "meaning": "최소화하다; 축소하다"
+    },
+    {
+      "no": 56,
+      "word": "domestically",
+      "meaning": "국내에서; 가정적으로"
+    },
+    {
+      "no": 57,
+      "word": "subordinate",
+      "meaning": "...을 하위에 놓다; 하위의, 하급의; 부차적인; 하급자"
+    },
+    {
+      "no": 58,
+      "word": "incidental",
+      "meaning": "부수적으로 일어나는, 부차적인"
+    },
+    {
+      "no": 59,
+      "word": "mechanic",
+      "meaning": "기계공, 수리공, 정비공"
+    },
+    {
+      "no": 60,
+      "word": "coordination",
+      "meaning": "조직화; 조정; 조화; 협동"
+    },
+    {
+      "no": 61,
+      "word": "administrative",
+      "meaning": "관리상의, 행정상의"
+    },
+    {
+      "no": 62,
+      "word": "penalize",
+      "meaning": "벌하다, 처벌하다; 불리하게 하다; 반칙자에게 페널티를 적용하다"
+    },
+    {
+      "no": 63,
+      "word": "compel",
+      "meaning": "억지로 ...하게 하다, 강요하다"
+    },
+    {
+      "no": 64,
+      "word": "dedicate",
+      "meaning": "바치다, 헌신하다"
+    },
+    {
+      "no": 65,
+      "word": "predominate",
+      "meaning": "지배적이다, 우세하다"
+    },
+    {
+      "no": 66,
+      "word": "modesty",
+      "meaning": "겸손"
+    },
+    {
+      "no": 67,
+      "word": "domain",
+      "meaning": "소유지, 영토; 영역, 범위; 도메인"
+    },
+    {
+      "no": 68,
+      "word": "minister",
+      "meaning": "성직자, 목사; 장관"
+    },
+    {
+      "no": 69,
+      "word": "mechanics",
+      "meaning": "기계학"
+    },
+    {
+      "no": 70,
+      "word": "casually",
+      "meaning": "격식 차리지 않고; 우연히, 별생각 없이"
+    },
+    {
+      "no": 71,
+      "word": "predominantly",
+      "meaning": "대부분, 주로"
+    },
+    {
+      "no": 72,
+      "word": "dedication",
+      "meaning": "헌신, 헌납, 헌정"
+    },
+    {
+      "no": 73,
+      "word": "accommodate",
+      "meaning": "숙박시키다; 수용하다; ...의 편의를 도모하다; 적응하다; 적응시키다"
+    },
+    {
+      "no": 74,
+      "word": "occasionally",
+      "meaning": "때때로, 가끔"
+    },
+    {
+      "no": 75,
+      "word": "melody",
+      "meaning": "멜로디, 선율, 가락"
+    },
+    {
+      "no": 76,
+      "word": "invade",
+      "meaning": "침략하다; 침해하다"
+    },
+    {
+      "no": 77,
+      "word": "compulsory",
+      "meaning": "강제적인, 의무적인"
+    },
+    {
+      "no": 78,
+      "word": "dominant",
+      "meaning": "지배적인, 우세한; 우성의"
+    },
+    {
+      "no": 79,
+      "word": "dominate",
+      "meaning": "지배하다, 다스리다; 두드러지다, 우세하다"
+    },
+    {
+      "no": 80,
+      "word": "pervade",
+      "meaning": "...에 널리 퍼지다, ...에 만연하다"
+    }
+  ]
+}

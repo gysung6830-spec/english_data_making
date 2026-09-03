@@ -1,0 +1,206 @@
+{
+  "title": "Day 3",
+  "source": "능률보카 수능필수",
+  "words": [
+    {
+      "no": 1,
+      "word": "confirm",
+      "meaning": "(~이 사실임을) 보여 주다; (약속 등을) 확인하다, 확정하다"
+    },
+    {
+      "no": 2,
+      "word": "supply",
+      "meaning": "공급하다; 공급(량); 보급품"
+    },
+    {
+      "no": 3,
+      "word": "acknowledge",
+      "meaning": "인정[승인]하다; 감사를 표하다"
+    },
+    {
+      "no": 4,
+      "word": "dense",
+      "meaning": "밀집한, 빽빽한; 짙은, 자욱한"
+    },
+    {
+      "no": 5,
+      "word": "demand",
+      "meaning": "요구하다; 필요로 하다; 요구; 수요(량)"
+    },
+    {
+      "no": 6,
+      "word": "widespread",
+      "meaning": "광범위한, 널리 퍼진"
+    },
+    {
+      "no": 7,
+      "word": "eventually",
+      "meaning": "결국, 마침내"
+    },
+    {
+      "no": 8,
+      "word": "corporate",
+      "meaning": "기업의; 법인의; 공동의"
+    },
+    {
+      "no": 9,
+      "word": "offense",
+      "meaning": "위반, 범죄; 모욕, 불쾌한 것; 공격"
+    },
+    {
+      "no": 10,
+      "word": "experiment",
+      "meaning": "실험, 시험; 실험하다, 시험하다"
+    },
+    {
+      "no": 11,
+      "word": "resist",
+      "meaning": "저항[반대]하다; 견디다"
+    },
+    {
+      "no": 12,
+      "word": "ignore",
+      "meaning": "무시하다, 못 본 척하다"
+    },
+    {
+      "no": 13,
+      "word": "crucial",
+      "meaning": "결정적인, 중대한"
+    },
+    {
+      "no": 14,
+      "word": "grant",
+      "meaning": "주다, 수여하다; 승인하다; 수여; 보조금"
+    },
+    {
+      "no": 15,
+      "word": "quantity",
+      "meaning": "양, 수량; 다량"
+    },
+    {
+      "no": 16,
+      "word": "overlap",
+      "meaning": "겹치다, 포개지다; 중복되다; 중복"
+    },
+    {
+      "no": 17,
+      "word": "debate",
+      "meaning": "논쟁, 토론; 논쟁하다, 토론하다"
+    },
+    {
+      "no": 18,
+      "word": "cooperate",
+      "meaning": "협력하다, 협동하다"
+    },
+    {
+      "no": 19,
+      "word": "misunderstanding",
+      "meaning": "오해; 언쟁"
+    },
+    {
+      "no": 20,
+      "word": "esteem",
+      "meaning": "존경[존중]하다, 좋게 평가하다; 존경[존중]"
+    },
+    {
+      "no": 21,
+      "word": "contain",
+      "meaning": "들어 있다, 포함하다; (감정을) 억누르다"
+    },
+    {
+      "no": 22,
+      "word": "rent",
+      "meaning": "임대료, 집세; 임대하다, 빌리다"
+    },
+    {
+      "no": 23,
+      "word": "organism",
+      "meaning": "유기체, 생물"
+    },
+    {
+      "no": 24,
+      "word": "witness",
+      "meaning": "목격자, 증인; 목격하다; 증언하다"
+    },
+    {
+      "no": 25,
+      "word": "damage",
+      "meaning": "손해, 손상; 손해[피해]를 입히다"
+    },
+    {
+      "no": 26,
+      "word": "defense",
+      "meaning": "방어(물); 변호"
+    },
+    {
+      "no": 27,
+      "word": "typical",
+      "meaning": "전형적인, 대표적인; 보통의"
+    },
+    {
+      "no": 28,
+      "word": "charity",
+      "meaning": "자선[구호] 단체; 자선 (행위); 관용"
+    },
+    {
+      "no": 29,
+      "word": "organ",
+      "meaning": "기관, 장기"
+    },
+    {
+      "no": 30,
+      "word": "deny",
+      "meaning": "부정[부인]하다; 거절하다"
+    },
+    {
+      "no": 31,
+      "word": "compose",
+      "meaning": "구성하다; 작곡하다, 작문하다"
+    },
+    {
+      "no": 32,
+      "word": "differ",
+      "meaning": "다르다; 의견을 달리하다"
+    },
+    {
+      "no": 33,
+      "word": "resource",
+      "meaning": "자원, 자산; 원천"
+    },
+    {
+      "no": 34,
+      "word": "urban",
+      "meaning": "도시의, 도시에 사는"
+    },
+    {
+      "no": 35,
+      "word": "accurate",
+      "meaning": "정확한, 정밀한"
+    },
+    {
+      "no": 36,
+      "word": "delicate",
+      "meaning": "연약한, 깨지기 쉬운; 섬세한, 우아한; 미묘한"
+    },
+    {
+      "no": 37,
+      "word": "encourage",
+      "meaning": "용기를 북돋우다; 장려하다; 조장하다"
+    },
+    {
+      "no": 38,
+      "word": "vote",
+      "meaning": "투표하다; 투표; 투표[선거]권"
+    },
+    {
+      "no": 39,
+      "word": "frequent",
+      "meaning": "잦은, 빈번한; (특정 장소에) 자주 다니다"
+    },
+    {
+      "no": 40,
+      "word": "recognize",
+      "meaning": "알아보다, 인지하다; 인정하다"
+    }
+  ]
+}

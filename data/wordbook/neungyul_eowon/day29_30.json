@@ -1,0 +1,406 @@
+{
+  "title": "Day 29~30",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "ambiguous",
+      "meaning": "모호한, 분명하지 않은"
+    },
+    {
+      "no": 2,
+      "word": "final",
+      "meaning": "최종적인, 최후의, 마지막의; 최후의 것; 결승; 기말고사"
+    },
+    {
+      "no": 3,
+      "word": "reaction",
+      "meaning": "반응; 거부 반응, 반작용"
+    },
+    {
+      "no": 4,
+      "word": "financial",
+      "meaning": "재정의, 재무의, 금융상의"
+    },
+    {
+      "no": 5,
+      "word": "location",
+      "meaning": "위치, 장소"
+    },
+    {
+      "no": 6,
+      "word": "empathy",
+      "meaning": "공감 , 감정 이입"
+    },
+    {
+      "no": 7,
+      "word": "allocation",
+      "meaning": "할당, 배당"
+    },
+    {
+      "no": 8,
+      "word": "agency",
+      "meaning": "대리점; 소속사, 에이전시; 기관"
+    },
+    {
+      "no": 9,
+      "word": "integrity",
+      "meaning": "정직, 성실; 완전무결"
+    },
+    {
+      "no": 10,
+      "word": "discharge",
+      "meaning": "해임하다; 내보내다; 방출하다; 이행하다; 해임; 퇴원; 석방; 제대; 방출, 배출; 이행"
+    },
+    {
+      "no": 11,
+      "word": "define",
+      "meaning": "규정하다, 한정하다, 명확히 하다; 정의하다"
+    },
+    {
+      "no": 12,
+      "word": "activate",
+      "meaning": "작동시키다, 활성화하다"
+    },
+    {
+      "no": 13,
+      "word": "patience",
+      "meaning": "인내, 참을성, 끈기"
+    },
+    {
+      "no": 14,
+      "word": "agenda",
+      "meaning": "의제, 안건, 협의 사항"
+    },
+    {
+      "no": 15,
+      "word": "recommendation",
+      "meaning": "권고 ; 추천"
+    },
+    {
+      "no": 16,
+      "word": "inclined",
+      "meaning": "...할 마음이 있는; ...하는 경향이 있는"
+    },
+    {
+      "no": 17,
+      "word": "actually",
+      "meaning": "실제로, 정말로, 사실상"
+    },
+    {
+      "no": 18,
+      "word": "exact",
+      "meaning": "정확한, 틀림없는; 정밀한"
+    },
+    {
+      "no": 19,
+      "word": "carriage",
+      "meaning": "마차; 운반; 객차"
+    },
+    {
+      "no": 20,
+      "word": "climate",
+      "meaning": "기후; 풍토, 풍조, 분위기"
+    },
+    {
+      "no": 21,
+      "word": "action",
+      "meaning": "활동, 행동, 행위; 작동, 움직임; 효과, 작용"
+    },
+    {
+      "no": 22,
+      "word": "navigation",
+      "meaning": "항해, 운항"
+    },
+    {
+      "no": 23,
+      "word": "sympathy",
+      "meaning": "동정, 연민; 동감, 공감, 찬성"
+    },
+    {
+      "no": 24,
+      "word": "infinite",
+      "meaning": "무한한"
+    },
+    {
+      "no": 25,
+      "word": "carrier",
+      "meaning": "운송 회사; 운반인, 운반기; 보균자, 매개체"
+    },
+    {
+      "no": 26,
+      "word": "notification",
+      "meaning": "알림, 통지"
+    },
+    {
+      "no": 27,
+      "word": "compassion",
+      "meaning": "동정, 측은하게 여기는 마음"
+    },
+    {
+      "no": 28,
+      "word": "notion",
+      "meaning": "관념, 개념, 생각"
+    },
+    {
+      "no": 29,
+      "word": "inclination",
+      "meaning": "의향, 성향; 경향"
+    },
+    {
+      "no": 30,
+      "word": "react",
+      "meaning": "반응하다; 반응을 나타내다, 반작용하다"
+    },
+    {
+      "no": 31,
+      "word": "command",
+      "meaning": "명령하다; 지휘하다; 받다; 내려다보이다; 명령, 지시; 지휘, 통제; 명령어"
+    },
+    {
+      "no": 32,
+      "word": "confine",
+      "meaning": "한정하다; 가두다, 감금하다"
+    },
+    {
+      "no": 33,
+      "word": "integration",
+      "meaning": "통합; 인종 통합"
+    },
+    {
+      "no": 34,
+      "word": "infinity",
+      "meaning": "무한, 무궁; 무한대"
+    },
+    {
+      "no": 35,
+      "word": "refine",
+      "meaning": "정제하다; 개선하다, 다듬다"
+    },
+    {
+      "no": 36,
+      "word": "mandate",
+      "meaning": "명령하다, 규정하다; 위임하다; 권한, 위임; 명령, 지시, 규정"
+    },
+    {
+      "no": 37,
+      "word": "entirely",
+      "meaning": "완전히, 전적으로"
+    },
+    {
+      "no": 38,
+      "word": "pathetic",
+      "meaning": "한심한, 형편없는; 애처로운, 가슴 아픈"
+    },
+    {
+      "no": 39,
+      "word": "notable",
+      "meaning": "주목할 만한, 탁월한"
+    },
+    {
+      "no": 40,
+      "word": "note",
+      "meaning": "메모; 짧은 편지; 기록; 주석; 음, 음표; 주목하다; 언급하다"
+    },
+    {
+      "no": 41,
+      "word": "ambiguity",
+      "meaning": "모호함"
+    },
+    {
+      "no": 42,
+      "word": "definition",
+      "meaning": "정의, 의미"
+    },
+    {
+      "no": 43,
+      "word": "intact",
+      "meaning": "온전한, 손상되지 않은"
+    },
+    {
+      "no": 44,
+      "word": "agent",
+      "meaning": "대리인, 대행사, 중개인; 에이전트; 정부 요원; 매개, 요인"
+    },
+    {
+      "no": 45,
+      "word": "refinement",
+      "meaning": "정제, 순화; 개선; 세련됨, 고상함"
+    },
+    {
+      "no": 46,
+      "word": "demanding",
+      "meaning": "많은 노력을 요하는, 힘든; 요구가 지나친"
+    },
+    {
+      "no": 47,
+      "word": "active",
+      "meaning": "활동적인; 적극적인"
+    },
+    {
+      "no": 48,
+      "word": "allocate",
+      "meaning": "할당하다, 배분하다"
+    },
+    {
+      "no": 49,
+      "word": "contact",
+      "meaning": "접촉, 연락, 교섭; 인맥, 연줄; ... 와 연락하다"
+    },
+    {
+      "no": 50,
+      "word": "exactly",
+      "meaning": "정확히, 틀림없이"
+    },
+    {
+      "no": 51,
+      "word": "demand",
+      "meaning": "요구하다, 청구하다; 요구; 수요"
+    },
+    {
+      "no": 52,
+      "word": "empathetic",
+      "meaning": "감정을 이입하는"
+    },
+    {
+      "no": 53,
+      "word": "commander",
+      "meaning": "지휘관, 사령관"
+    },
+    {
+      "no": 54,
+      "word": "carpenter",
+      "meaning": "목수"
+    },
+    {
+      "no": 55,
+      "word": "compassionate",
+      "meaning": "동정하는, 가엾게 여기는"
+    },
+    {
+      "no": 56,
+      "word": "empathize",
+      "meaning": "공감하다"
+    },
+    {
+      "no": 57,
+      "word": "locate",
+      "meaning": "...의 위치를 파악하다; ...의 위치를 ~에 정하다, 두다, 설치하다"
+    },
+    {
+      "no": 58,
+      "word": "passive",
+      "meaning": "수동적인, 소극적인; 수동태인"
+    },
+    {
+      "no": 59,
+      "word": "exactness",
+      "meaning": "정확성, 정밀성"
+    },
+    {
+      "no": 60,
+      "word": "finance",
+      "meaning": "재정, 재무; 자금; 자본을 제공하다, 자금을 융통하다"
+    },
+    {
+      "no": 61,
+      "word": "entire",
+      "meaning": "전체의; 완전한"
+    },
+    {
+      "no": 62,
+      "word": "noted",
+      "meaning": "유명한"
+    },
+    {
+      "no": 63,
+      "word": "passionate",
+      "meaning": "열렬한, 정열적인"
+    },
+    {
+      "no": 64,
+      "word": "activity",
+      "meaning": "활동, 행동; 여가 활동"
+    },
+    {
+      "no": 65,
+      "word": "notice",
+      "meaning": "주목, 주의; 게시, 공고, 안내; 통지, 통보; 알아차리다; 주목하다"
+    },
+    {
+      "no": 66,
+      "word": "confinement",
+      "meaning": "감금, 갇힘"
+    },
+    {
+      "no": 67,
+      "word": "sympathize",
+      "meaning": "동정하다, 가엾게 여기다; 공감하다, 찬성하다"
+    },
+    {
+      "no": 68,
+      "word": "navigate",
+      "meaning": "길을 찾다; 항해하다; 잘 다루다"
+    },
+    {
+      "no": 69,
+      "word": "charge",
+      "meaning": "난하다; 책임을 지우다; 채우다, 충전하다; 요금, 비용; 고발, 기"
+    },
+    {
+      "no": 70,
+      "word": "definitely",
+      "meaning": "틀림없이"
+    },
+    {
+      "no": 71,
+      "word": "patient",
+      "meaning": "참을성이 있는, 끈기 있는; 환자"
+    },
+    {
+      "no": 72,
+      "word": "local",
+      "meaning": "지역의, 지방의, 현지의; 국부의; 주민, 현지인"
+    },
+    {
+      "no": 73,
+      "word": "refined",
+      "meaning": "정제된; 개선된, 다듬어진; 세련된, 고상한"
+    },
+    {
+      "no": 74,
+      "word": "antipathy",
+      "meaning": "반감, 혐오"
+    },
+    {
+      "no": 75,
+      "word": "noticeable",
+      "meaning": "뚜렷한, 현저한"
+    },
+    {
+      "no": 76,
+      "word": "notify",
+      "meaning": "알리다, 통보하다"
+    },
+    {
+      "no": 77,
+      "word": "definite",
+      "meaning": "명확한, 확실한, 확정된"
+    },
+    {
+      "no": 78,
+      "word": "sympathetic",
+      "meaning": "동정적인, 가엾게 여기는; 호의적인, 공감하는; 호감이 가는"
+    },
+    {
+      "no": 79,
+      "word": "mandatory",
+      "meaning": "의무적인"
+    },
+    {
+      "no": 80,
+      "word": "career",
+      "meaning": "직업; 경력, 커리어; 직업적인"
+    }
+  ]
+}

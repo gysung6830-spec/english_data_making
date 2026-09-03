@@ -1,0 +1,206 @@
+{
+  "title": "Day 11",
+  "source": "능률보카 수능필수",
+  "words": [
+    {
+      "no": 1,
+      "word": "confident",
+      "meaning": "자신 있는; 확신하는"
+    },
+    {
+      "no": 2,
+      "word": "lie",
+      "meaning": "눕다; (~의 상태로) 있다; 거짓말하다; 거짓말"
+    },
+    {
+      "no": 3,
+      "word": "electronic",
+      "meaning": "전자의, 전자 공학의"
+    },
+    {
+      "no": 4,
+      "word": "scatter",
+      "meaning": "(흩)뿌리다; 흩어지다[흩어지게 하다]"
+    },
+    {
+      "no": 5,
+      "word": "uncover",
+      "meaning": "(비밀 등을) 알아내다, 폭로하다; 덮개를 열다"
+    },
+    {
+      "no": 6,
+      "word": "approximate",
+      "meaning": "대략의, 근사치인; (~에) 가깝다"
+    },
+    {
+      "no": 7,
+      "word": "produce",
+      "meaning": "생산[제조]하다; 초래하다; 농산물"
+    },
+    {
+      "no": 8,
+      "word": "considerate",
+      "meaning": "사려 깊은, 배려하는"
+    },
+    {
+      "no": 9,
+      "word": "range",
+      "meaning": "범위; 다양성; (범위가 ~에) 이르다"
+    },
+    {
+      "no": 10,
+      "word": "compensate",
+      "meaning": "보상[배상]하다; 보완[상쇄]하다"
+    },
+    {
+      "no": 11,
+      "word": "innovate",
+      "meaning": "혁신하다, 쇄신하다"
+    },
+    {
+      "no": 12,
+      "word": "boost",
+      "meaning": "신장시키다, 북돋우다; 격려, 힘, 부양책"
+    },
+    {
+      "no": 13,
+      "word": "massive",
+      "meaning": "거대한, 대규모의; 엄청난, 심각한"
+    },
+    {
+      "no": 14,
+      "word": "confidential",
+      "meaning": "비밀의, 기밀의; 신뢰받는"
+    },
+    {
+      "no": 15,
+      "word": "recover",
+      "meaning": "회복하다; 되찾다, 만회하다"
+    },
+    {
+      "no": 16,
+      "word": "entry",
+      "meaning": "입장, 등장; 출품[참가]작; 참가, 출전"
+    },
+    {
+      "no": 17,
+      "word": "string",
+      "meaning": "끈, 줄; 일련, 연속; 묶다, 끈을 달다"
+    },
+    {
+      "no": 18,
+      "word": "license",
+      "meaning": "면허(증), 인가(증); 면허를 주다, 허가하다"
+    },
+    {
+      "no": 19,
+      "word": "tackle",
+      "meaning": "(문제 등을) 다루다; 태클하다; 도구; 태클"
+    },
+    {
+      "no": 20,
+      "word": "orphan",
+      "meaning": "고아"
+    },
+    {
+      "no": 21,
+      "word": "annual",
+      "meaning": "매년의, 연례의"
+    },
+    {
+      "no": 22,
+      "word": "static",
+      "meaning": "고정된, 정적인; 잡음; 정전기"
+    },
+    {
+      "no": 23,
+      "word": "fallacy",
+      "meaning": "그릇된 생각[믿음]; (인식상의) 오류"
+    },
+    {
+      "no": 24,
+      "word": "escape",
+      "meaning": "탈출하다, 벗어나다; 탈출, 도피"
+    },
+    {
+      "no": 25,
+      "word": "dare",
+      "meaning": "감히 ~하다"
+    },
+    {
+      "no": 26,
+      "word": "misconception",
+      "meaning": "오해"
+    },
+    {
+      "no": 27,
+      "word": "lay",
+      "meaning": "놓다, 두다; (알을) 낳다"
+    },
+    {
+      "no": 28,
+      "word": "merit",
+      "meaning": "장점; 가치, 우수성"
+    },
+    {
+      "no": 29,
+      "word": "cling",
+      "meaning": "달라붙다; 매달리다; 집착하다"
+    },
+    {
+      "no": 30,
+      "word": "display",
+      "meaning": "전시[진열]하다; 드러내다; 전시; 표현, 과시"
+    },
+    {
+      "no": 31,
+      "word": "vice",
+      "meaning": "악(덕), 부도덕; 범죄 행위, 비행; 대리의"
+    },
+    {
+      "no": 32,
+      "word": "expertise",
+      "meaning": "전문 지식[기술]"
+    },
+    {
+      "no": 33,
+      "word": "considerable",
+      "meaning": "상당한, 적지 않은"
+    },
+    {
+      "no": 34,
+      "word": "regulate",
+      "meaning": "규제하다; 조절[조정]하다"
+    },
+    {
+      "no": 35,
+      "word": "liquid",
+      "meaning": "액체; 액체의; 유동성의"
+    },
+    {
+      "no": 36,
+      "word": "urge",
+      "meaning": "강력히 권하다, 재촉하다; 욕구, 충동"
+    },
+    {
+      "no": 37,
+      "word": "tenant",
+      "meaning": "세입자, 임차인"
+    },
+    {
+      "no": 38,
+      "word": "supplement",
+      "meaning": "보충(물), 보완(물); 보충하다"
+    },
+    {
+      "no": 39,
+      "word": "obscure",
+      "meaning": "모호한; 잘 알려지지 않은; 모호하게 하다"
+    },
+    {
+      "no": 40,
+      "word": "whisper",
+      "meaning": "속삭이다; 속삭임"
+    }
+  ]
+}

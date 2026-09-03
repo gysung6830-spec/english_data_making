@@ -1,0 +1,306 @@
+{
+  "title": "Day 13~14",
+  "source": "Word Master 고등 Complete",
+  "words": [
+    {
+      "no": 1,
+      "word": "expand",
+      "meaning": "넓히다, 확대하다; 팽창시키다"
+    },
+    {
+      "no": 2,
+      "word": "improvised",
+      "meaning": "즉흥의, 즉석에서 지은"
+    },
+    {
+      "no": 3,
+      "word": "cheat",
+      "meaning": "속이다, 사기 치다; 부정행위를 하다; 속임수; 사기꾼"
+    },
+    {
+      "no": 4,
+      "word": "meditate",
+      "meaning": "명상하다, 숙고하다; 꾀하다, 계획하다"
+    },
+    {
+      "no": 5,
+      "word": "comparable",
+      "meaning": "필적하는, 비교할 수 있는; 비슷한"
+    },
+    {
+      "no": 6,
+      "word": "article",
+      "meaning": "기사, 논설; 조항, 규약; 물품, 물건; 품목"
+    },
+    {
+      "no": 7,
+      "word": "peer",
+      "meaning": "동료, 또래; 동등한 사람; 동등한 것; 응시하다, 주시하다; 나타나다, 보이기 시작하다"
+    },
+    {
+      "no": 8,
+      "word": "in favor of",
+      "meaning": "~에 유리하게, ~의 이익을 위하여; ~에 찬성하여"
+    },
+    {
+      "no": 9,
+      "word": "dismissal",
+      "meaning": "해고, 해임; 묵살, 일축; 기각"
+    },
+    {
+      "no": 10,
+      "word": "go about",
+      "meaning": "~을 시작하다; 계속 ~을 하다"
+    },
+    {
+      "no": 11,
+      "word": "trade-off",
+      "meaning": "균형; 거래, 교환"
+    },
+    {
+      "no": 12,
+      "word": "addiction",
+      "meaning": "중독; 탐닉"
+    },
+    {
+      "no": 13,
+      "word": "rigidity",
+      "meaning": "단단함, 경직; 엄격"
+    },
+    {
+      "no": 14,
+      "word": "put off",
+      "meaning": "~을 미루다"
+    },
+    {
+      "no": 15,
+      "word": "contaminate",
+      "meaning": "오염시키다; 악영향을 주다"
+    },
+    {
+      "no": 16,
+      "word": "maturity",
+      "meaning": "성숙, 원숙"
+    },
+    {
+      "no": 17,
+      "word": "flexibility",
+      "meaning": "유연성, 구부리기 쉬움; 융통성"
+    },
+    {
+      "no": 18,
+      "word": "scheme",
+      "meaning": "계획, 안; 개요; 책략, 음모; 책략을 꾸미다"
+    },
+    {
+      "no": 19,
+      "word": "show off",
+      "meaning": "~을 뽐내다; 돋보이게 하다"
+    },
+    {
+      "no": 20,
+      "word": "radical",
+      "meaning": "근본적인, 기초적인; 급진적인, 과격한; 급진주의자"
+    },
+    {
+      "no": 21,
+      "word": "archaeologist",
+      "meaning": "고고학자"
+    },
+    {
+      "no": 22,
+      "word": "confine",
+      "meaning": "제한하다; 가두다; 경계; 한계"
+    },
+    {
+      "no": 23,
+      "word": "a multitude of",
+      "meaning": "다수의"
+    },
+    {
+      "no": 24,
+      "word": "default",
+      "meaning": "불이행; 기본, 디폴트; 이행하지 않다"
+    },
+    {
+      "no": 25,
+      "word": "addition",
+      "meaning": "추가, 부가; 덧셈"
+    },
+    {
+      "no": 26,
+      "word": "trace",
+      "meaning": "자취, 흔적; 극미량, 조금; 추적하다, 찾아내다"
+    },
+    {
+      "no": 27,
+      "word": "pharmacy",
+      "meaning": "약국; 약학, 약제학"
+    },
+    {
+      "no": 28,
+      "word": "every now and then",
+      "meaning": "때때로, 가끔"
+    },
+    {
+      "no": 29,
+      "word": "hypnosis",
+      "meaning": "최면 ; 최면술"
+    },
+    {
+      "no": 30,
+      "word": "comparative",
+      "meaning": "비교의, 비교에 의한; 비교적인, 상대적인"
+    },
+    {
+      "no": 31,
+      "word": "revelation",
+      "meaning": "드러냄, 폭로; 계시"
+    },
+    {
+      "no": 32,
+      "word": "intricate",
+      "meaning": "복잡한, 얽힌; 난해한"
+    },
+    {
+      "no": 33,
+      "word": "spatial",
+      "meaning": "공간의, 공간적인; 우주의"
+    },
+    {
+      "no": 34,
+      "word": "a dose of",
+      "meaning": "약간의, 일정량의"
+    },
+    {
+      "no": 35,
+      "word": "fraud",
+      "meaning": "사기, 속임수; 사기꾼, 협잡꾼"
+    },
+    {
+      "no": 36,
+      "word": "layoff",
+      "meaning": "해고"
+    },
+    {
+      "no": 37,
+      "word": "be accused of",
+      "meaning": "~으로 고소되다; ~으로 비난받다"
+    },
+    {
+      "no": 38,
+      "word": "conformity",
+      "meaning": "순응, 따름, 복종; 유사; 일치"
+    },
+    {
+      "no": 39,
+      "word": "accumulation",
+      "meaning": "축적, 누적; 축적물, 모인 돈"
+    },
+    {
+      "no": 40,
+      "word": "hypothesis",
+      "meaning": "가설; 추측"
+    },
+    {
+      "no": 41,
+      "word": "displacement",
+      "meaning": "이동; 대체; 해고, 면직"
+    },
+    {
+      "no": 42,
+      "word": "opt for",
+      "meaning": "~을 선택하다"
+    },
+    {
+      "no": 43,
+      "word": "shrub",
+      "meaning": "관목"
+    },
+    {
+      "no": 44,
+      "word": "peculiar",
+      "meaning": "이상한, 기이한; 특유한, 고유한"
+    },
+    {
+      "no": 45,
+      "word": "adjacent",
+      "meaning": "인접한, 부근의"
+    },
+    {
+      "no": 46,
+      "word": "primate",
+      "meaning": "영장류; 대주교"
+    },
+    {
+      "no": 47,
+      "word": "independent",
+      "meaning": "독립된, 자치적인; 독립심이 강한; 자율적인"
+    },
+    {
+      "no": 48,
+      "word": "go all out for",
+      "meaning": "전력을 다하다, 총력을 기울이다"
+    },
+    {
+      "no": 49,
+      "word": "tolerate",
+      "meaning": "용인하다, 너그럽게 보아주다; 참다"
+    },
+    {
+      "no": 50,
+      "word": "primary",
+      "meaning": "주된, 주요한; 제1의; 최초의, 초기의; 초보의, 초등의"
+    },
+    {
+      "no": 51,
+      "word": "hesitation",
+      "meaning": "주저, 망설임; 우유부단"
+    },
+    {
+      "no": 52,
+      "word": "declare",
+      "meaning": "선언하다; 신고하다"
+    },
+    {
+      "no": 53,
+      "word": "radial",
+      "meaning": "광선의; 방사상의, 복사형의"
+    },
+    {
+      "no": 54,
+      "word": "interpretation",
+      "meaning": "해석, 해설; 통역"
+    },
+    {
+      "no": 55,
+      "word": "in nature",
+      "meaning": "사실상, 현실적으로; 완전히"
+    },
+    {
+      "no": 56,
+      "word": "scribble",
+      "meaning": "휘갈겨 쓰다, 낙서하다; 휘갈겨쓴 글씨, 낙서"
+    },
+    {
+      "no": 57,
+      "word": "exposure",
+      "meaning": "노출, 드러냄; 접하기, 체험하기; 폭로; 적발"
+    },
+    {
+      "no": 58,
+      "word": "fluctuation",
+      "meaning": "변동, 변화; 동요, 불안정"
+    },
+    {
+      "no": 59,
+      "word": "from time to time",
+      "meaning": "이따금, 가끔"
+    },
+    {
+      "no": 60,
+      "word": "intrigue",
+      "meaning": "호기심을 자극하다; 음모를 꾸미다; 음모, 계략"
+    }
+  ]
+}

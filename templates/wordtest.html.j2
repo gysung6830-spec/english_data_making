@@ -6,8 +6,13 @@
 
 {#- 문항 표: ans=true 면 쓰는 칸에 정답이 인쇄된 '답지'가 된다 -#}
 {% macro grid(sec, ans) %}
-    <table class="ht-grid{{ ' ko' if sec.dir == 'ko2en' }}{{ ' ans' if ans }}{{ ' sparse' if sec.rows|length <= 16 }}">
-      {% if sec.dir == 'ko2en' %}
+    <table class="ht-grid{{ ' ko' if sec.dir == 'ko2en' }}{{ ' ans' if ans }}">
+      {% if sec.single %}
+      <colgroup>
+        {% if sec.dir == 'ko2en' %}<col style="width:24pt"><col><col style="width:33%">
+        {% else %}<col style="width:24pt"><col style="width:22%"><col>{% endif %}
+      </colgroup>
+      {% elif sec.dir == 'ko2en' %}
       <colgroup>
         <col style="width:20pt"><col><col style="width:88pt">
         <col style="width:16pt">
@@ -22,8 +27,8 @@
       {% endif %}
       <tbody>
       {% for l, r in sec.rows %}
-        <tr>
-          {% for q in (l, r) %}
+        <tr style="height:{{ sec.row_h_ans if ans else sec.row_h }}pt">
+          {% for q in ([l] if sec.single else [l, r]) %}
             {% if not loop.first %}<td class="ht-mid"></td>{% endif %}
             {% if q %}
           <td class="ht-no">{{ "%02d"|format(q.qno) }}</td>

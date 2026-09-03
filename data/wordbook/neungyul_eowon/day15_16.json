@@ -1,0 +1,406 @@
+{
+  "title": "Day 15~16",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "inventive",
+      "meaning": "창의력이 있는, 독창적인"
+    },
+    {
+      "no": 2,
+      "word": "genetically",
+      "meaning": "유전적으로; 유전학적으로"
+    },
+    {
+      "no": 3,
+      "word": "intervene",
+      "meaning": "중재하다, 개입하다; 끼어들다, 방해하다; 사이에 일어나다"
+    },
+    {
+      "no": 4,
+      "word": "mediate",
+      "meaning": "조정하다, 중재하다, 화해시키다"
+    },
+    {
+      "no": 5,
+      "word": "trait",
+      "meaning": "특성, 특징"
+    },
+    {
+      "no": 6,
+      "word": "creation",
+      "meaning": "창조, 창작"
+    },
+    {
+      "no": 7,
+      "word": "adventure",
+      "meaning": "모험, 색다른 경험"
+    },
+    {
+      "no": 8,
+      "word": "recreation",
+      "meaning": "재창조, 재현; 기분 전환 , 레크리에이션"
+    },
+    {
+      "no": 9,
+      "word": "gender",
+      "meaning": "성, 성별"
+    },
+    {
+      "no": 10,
+      "word": "generally",
+      "meaning": "일반적으로, 대개"
+    },
+    {
+      "no": 11,
+      "word": "advent",
+      "meaning": "도래, 출현, 등장"
+    },
+    {
+      "no": 12,
+      "word": "portray",
+      "meaning": "묘사하다, 표현하다"
+    },
+    {
+      "no": 13,
+      "word": "trail",
+      "meaning": "질질 끌다; 끌리다; 추적하다, 흔적을 쫓다; 오솔길, 작은 길; 자국, 흔적, 실마리"
+    },
+    {
+      "no": 14,
+      "word": "pregnant",
+      "meaning": "임신한; 품은, 내포하고 있는"
+    },
+    {
+      "no": 15,
+      "word": "genetics",
+      "meaning": "유전학"
+    },
+    {
+      "no": 16,
+      "word": "recruitment",
+      "meaning": "신규 모집, 신병 모집"
+    },
+    {
+      "no": 17,
+      "word": "creature",
+      "meaning": "생물, 동물; 창조물; 괴물"
+    },
+    {
+      "no": 18,
+      "word": "immediate",
+      "meaning": "즉시의, 즉각의; 시급한, 당면한"
+    },
+    {
+      "no": 19,
+      "word": "abstract",
+      "meaning": "추상적인; 이론적인; 추출하다; 요약하다; 추상; 요약, 발췌"
+    },
+    {
+      "no": 20,
+      "word": "prevention",
+      "meaning": "예방, 저지"
+    },
+    {
+      "no": 21,
+      "word": "intervention",
+      "meaning": "사이에 듦, 조정, 중재; 개입, 간섭"
+    },
+    {
+      "no": 22,
+      "word": "increase",
+      "meaning": "증가하다, 늘다; 증가시키다, 늘리다; 증가"
+    },
+    {
+      "no": 23,
+      "word": "recreate",
+      "meaning": "다시 만들어내다, 재현하다; 기분을 전환시키다"
+    },
+    {
+      "no": 24,
+      "word": "midst",
+      "meaning": "중앙, 한가운데"
+    },
+    {
+      "no": 25,
+      "word": "gentle",
+      "meaning": "온화한, 상냥한, 친절한; 적당한, 부드러운, 완만한"
+    },
+    {
+      "no": 26,
+      "word": "genuine",
+      "meaning": "진짜의, 진품의; 진실된, 진정한"
+    },
+    {
+      "no": 27,
+      "word": "generous",
+      "meaning": "관대한, 인색하지 않은; 풍부한"
+    },
+    {
+      "no": 28,
+      "word": "distract",
+      "meaning": "흐트러뜨리다, 산만하게 하다"
+    },
+    {
+      "no": 29,
+      "word": "generation",
+      "meaning": "세대, 일대; 발생"
+    },
+    {
+      "no": 30,
+      "word": "convenient",
+      "meaning": "편리한, 사용하기 쉬운; 가까운"
+    },
+    {
+      "no": 31,
+      "word": "prevent",
+      "meaning": "막다, 예방하다, 방해하다"
+    },
+    {
+      "no": 32,
+      "word": "treaty",
+      "meaning": "조약, 협정"
+    },
+    {
+      "no": 33,
+      "word": "increasingly",
+      "meaning": "점점 더, 더욱 더"
+    },
+    {
+      "no": 34,
+      "word": "recruit",
+      "meaning": "채용하다, 모집하다; 신병, 신입 사원"
+    },
+    {
+      "no": 35,
+      "word": "creator",
+      "meaning": "창조자; 조물주, 신"
+    },
+    {
+      "no": 36,
+      "word": "means",
+      "meaning": "수단, 방법"
+    },
+    {
+      "no": 37,
+      "word": "generosity",
+      "meaning": "관대함, 인심이 좋음"
+    },
+    {
+      "no": 38,
+      "word": "invent",
+      "meaning": "발명하다, 고안하다; 조작하다, 꾸며내다"
+    },
+    {
+      "no": 39,
+      "word": "pregnancy",
+      "meaning": "임신"
+    },
+    {
+      "no": 40,
+      "word": "mediation",
+      "meaning": "조정, 중재, 매개"
+    },
+    {
+      "no": 41,
+      "word": "track",
+      "meaning": "통로, 오솔길; 지나간 자국, 흔적; 철도, 선로; 경주로, 트랙; 자취를 따라가다"
+    },
+    {
+      "no": 42,
+      "word": "convention",
+      "meaning": "집회, 모임; 협정, 협약; 관습, 인습"
+    },
+    {
+      "no": 43,
+      "word": "retreat",
+      "meaning": "후퇴하다, 물러서다; 철회하다, 바꾸다; 후퇴, 퇴각; 철회"
+    },
+    {
+      "no": 44,
+      "word": "adventurous",
+      "meaning": "모험을 좋아하는, 대담한; 모험적인"
+    },
+    {
+      "no": 45,
+      "word": "inventor",
+      "meaning": "발명가"
+    },
+    {
+      "no": 46,
+      "word": "genderless",
+      "meaning": "성별 구분이 없는"
+    },
+    {
+      "no": 47,
+      "word": "gently",
+      "meaning": "다정하게, 부드럽게"
+    },
+    {
+      "no": 48,
+      "word": "avenue",
+      "meaning": "대로, 길, ...가; 수단, 방법"
+    },
+    {
+      "no": 49,
+      "word": "medieval",
+      "meaning": "중세의, 중세풍의"
+    },
+    {
+      "no": 50,
+      "word": "distraction",
+      "meaning": "주의 산만, 정신이 흐트러짐; 기분 전환, 오락 활동"
+    },
+    {
+      "no": 51,
+      "word": "attract",
+      "meaning": "끌다, 끌어당기다, 매혹하다"
+    },
+    {
+      "no": 52,
+      "word": "general",
+      "meaning": "일반적인, 보편적인; 대체적인, 대략적인; 전체적인, 전반적인; 장군, 장성, 대장"
+    },
+    {
+      "no": 53,
+      "word": "medium",
+      "meaning": "매체, 수단; 매개; 중간의; 중간정도로 구워진"
+    },
+    {
+      "no": 54,
+      "word": "immediately",
+      "meaning": "즉시, 곧"
+    },
+    {
+      "no": 55,
+      "word": "treat",
+      "meaning": "대하다, 다루다; 치료하다; 대접하다, 한턱내다; 특별한 것; 대접, 한턱"
+    },
+    {
+      "no": 56,
+      "word": "preventive",
+      "meaning": "예방의, 방지하는"
+    },
+    {
+      "no": 57,
+      "word": "extract",
+      "meaning": "뽑아내다, 추출하다; 발췌하다; 추출물; 발췌"
+    },
+    {
+      "no": 58,
+      "word": "genius",
+      "meaning": "천재"
+    },
+    {
+      "no": 59,
+      "word": "invention",
+      "meaning": "발명; 꾸며낸 이야기"
+    },
+    {
+      "no": 60,
+      "word": "generate",
+      "meaning": "생산하다, 일으키다; 발생시키다"
+    },
+    {
+      "no": 61,
+      "word": "trace",
+      "meaning": "추적하다, 자국을 따라가다; 밝혀내다, 알아내다; 자국, 자취"
+    },
+    {
+      "no": 62,
+      "word": "decrease",
+      "meaning": "감소하다, 줄다; 감소시키다, 줄이다; 감소, 축소"
+    },
+    {
+      "no": 63,
+      "word": "event",
+      "meaning": "사건; 행사, 이벤트, 종목"
+    },
+    {
+      "no": 64,
+      "word": "contraction",
+      "meaning": "수축, 축소"
+    },
+    {
+      "no": 65,
+      "word": "generalize",
+      "meaning": "일반화하다"
+    },
+    {
+      "no": 66,
+      "word": "treatment",
+      "meaning": "치료; 대우, 처우"
+    },
+    {
+      "no": 67,
+      "word": "genetic",
+      "meaning": "유전의; 유전학의"
+    },
+    {
+      "no": 68,
+      "word": "creative",
+      "meaning": "창조적인, 창의적인, 독창적인"
+    },
+    {
+      "no": 69,
+      "word": "eventually",
+      "meaning": "결국, 마침내"
+    },
+    {
+      "no": 70,
+      "word": "convenience",
+      "meaning": "편리, 편의"
+    },
+    {
+      "no": 71,
+      "word": "attractive",
+      "meaning": "매력적인, 마음을 끄는"
+    },
+    {
+      "no": 72,
+      "word": "contract",
+      "meaning": "계약을 맺다; 수축하다, 줄다; 수축시키다, 줄이다; 계약"
+    },
+    {
+      "no": 73,
+      "word": "conventional",
+      "meaning": "관습적인, 전통적인; 틀에 박힌, 상투적인"
+    },
+    {
+      "no": 74,
+      "word": "mean",
+      "meaning": "의미하다; 의도하다; 비열한, 못된, 심술궂은; 인색한; 천한, 초라한; 평균의"
+    },
+    {
+      "no": 75,
+      "word": "extraction",
+      "meaning": "추출"
+    },
+    {
+      "no": 76,
+      "word": "mediator",
+      "meaning": "조정인, 중재인, 매개자"
+    },
+    {
+      "no": 77,
+      "word": "concrete",
+      "meaning": "구체적인, 확실한; 콘크리트로만든; 콘크리트"
+    },
+    {
+      "no": 78,
+      "word": "intermediate",
+      "meaning": "중간의, 중간 단계의; 중급의; 중급자"
+    },
+    {
+      "no": 79,
+      "word": "meaning",
+      "meaning": "의미, 뜻"
+    },
+    {
+      "no": 80,
+      "word": "congenital",
+      "meaning": "선천적인; 타고난, 천성의"
+    }
+  ]
+}

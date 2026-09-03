@@ -1,0 +1,406 @@
+{
+  "title": "Day 41~42",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "aspiration",
+      "meaning": "열망, 갈망"
+    },
+    {
+      "no": 2,
+      "word": "aspire",
+      "meaning": "열망하다, 바라다"
+    },
+    {
+      "no": 3,
+      "word": "permit",
+      "meaning": "허락하다, 용인하다; 허가"
+    },
+    {
+      "no": 4,
+      "word": "comprehension",
+      "meaning": "이해"
+    },
+    {
+      "no": 5,
+      "word": "prosperous",
+      "meaning": "번영하는, 성공한"
+    },
+    {
+      "no": 6,
+      "word": "pleasing",
+      "meaning": "기쁨을 주는, 만족스러운"
+    },
+    {
+      "no": 7,
+      "word": "limitation",
+      "meaning": "제한, 한계, 규제"
+    },
+    {
+      "no": 8,
+      "word": "comprehensive",
+      "meaning": "포괄적인, 광범위한"
+    },
+    {
+      "no": 9,
+      "word": "inspire",
+      "meaning": "고무시키다, 격려하다; 불어넣다; 영감을 주다"
+    },
+    {
+      "no": 10,
+      "word": "desperately",
+      "meaning": "필사적으로; 몹시"
+    },
+    {
+      "no": 11,
+      "word": "plead",
+      "meaning": "애원하다, 간청하다; 주장하다"
+    },
+    {
+      "no": 12,
+      "word": "comprehend",
+      "meaning": "이해하다, 파악하다"
+    },
+    {
+      "no": 13,
+      "word": "limitless",
+      "meaning": "제한이 없는, 방대한"
+    },
+    {
+      "no": 14,
+      "word": "mention",
+      "meaning": "언급, 거론; 언급하다, ...에 대해 말하다"
+    },
+    {
+      "no": 15,
+      "word": "imprison",
+      "meaning": "수감하다, 감금하다"
+    },
+    {
+      "no": 16,
+      "word": "surprisingly",
+      "meaning": "놀랄 만큼, 의외로"
+    },
+    {
+      "no": 17,
+      "word": "commission",
+      "meaning": "위원회; 수수료, 커미션; 위임; 의뢰하다, 주문하다; 위임하다, 권한을 주다"
+    },
+    {
+      "no": 18,
+      "word": "textbook",
+      "meaning": "교과서, 교본"
+    },
+    {
+      "no": 19,
+      "word": "despair",
+      "meaning": "절망, 자포자기"
+    },
+    {
+      "no": 20,
+      "word": "plea",
+      "meaning": "간청, 탄원; 항변, 주장"
+    },
+    {
+      "no": 21,
+      "word": "emit",
+      "meaning": "내뿜다, 방출하다"
+    },
+    {
+      "no": 22,
+      "word": "elimination",
+      "meaning": "제거, 삭제"
+    },
+    {
+      "no": 23,
+      "word": "permission",
+      "meaning": "허가, 허락, 면허, 승인"
+    },
+    {
+      "no": 24,
+      "word": "prosper",
+      "meaning": "번영하다, 성공하다"
+    },
+    {
+      "no": 25,
+      "word": "inspiration",
+      "meaning": "영감, 자극; 고무, 격려; 격려가 되는 것"
+    },
+    {
+      "no": 26,
+      "word": "remind",
+      "meaning": "상기시키다, 일깨워주다; 생각나게 하다"
+    },
+    {
+      "no": 27,
+      "word": "certain",
+      "meaning": "확실한, 틀림없는; 일정한, 특정한; 어떤, 어느"
+    },
+    {
+      "no": 28,
+      "word": "commit",
+      "meaning": "범하다, 저지르다; 전념하다; 약속하다, 서약하다; 보내다"
+    },
+    {
+      "no": 29,
+      "word": "admit",
+      "meaning": "시인하다; 입장을 허가하다"
+    },
+    {
+      "no": 30,
+      "word": "additionally",
+      "meaning": "게다가, 추가적으로"
+    },
+    {
+      "no": 31,
+      "word": "summon",
+      "meaning": "호출하다, 소환하다; 소집하다; 내다"
+    },
+    {
+      "no": 32,
+      "word": "addition",
+      "meaning": "첨가, 추가; 덧셈"
+    },
+    {
+      "no": 33,
+      "word": "transmission",
+      "meaning": "보냄, 전송; 전도"
+    },
+    {
+      "no": 34,
+      "word": "monitor",
+      "meaning": "화면, 모니터; 감시, 감시하는 일; 감독하다, 관찰하다"
+    },
+    {
+      "no": 35,
+      "word": "comprehensible",
+      "meaning": "이해할 수 있는"
+    },
+    {
+      "no": 36,
+      "word": "promising",
+      "meaning": "유망한, 장래성이 있는"
+    },
+    {
+      "no": 37,
+      "word": "transmit",
+      "meaning": "보내다, 전송하다, 전하다; 전도하다, 투과시키다"
+    },
+    {
+      "no": 38,
+      "word": "mess",
+      "meaning": "더러움, 어수선함, 혼란 ; 어지르다, 더럽히다"
+    },
+    {
+      "no": 39,
+      "word": "render",
+      "meaning": "...을 ~한 상태로 만들다; 주다, 제공하다; 표현하다, 묘사하다"
+    },
+    {
+      "no": 40,
+      "word": "certified",
+      "meaning": "보증된, 증명된"
+    },
+    {
+      "no": 41,
+      "word": "expire",
+      "meaning": "만기가 되다, 끝나다; 소멸하다"
+    },
+    {
+      "no": 42,
+      "word": "textile",
+      "meaning": "직물, 옷감"
+    },
+    {
+      "no": 43,
+      "word": "certainty",
+      "meaning": "확실함, 확신"
+    },
+    {
+      "no": 44,
+      "word": "add",
+      "meaning": "추가하다, 늘리다; 더하다, 합하다; 덧붙여 말하다, 부언하다"
+    },
+    {
+      "no": 45,
+      "word": "texture",
+      "meaning": "감촉, 질감, 결; 짜임새, 조화"
+    },
+    {
+      "no": 46,
+      "word": "mission",
+      "meaning": "임무, 사명; 목표; 사절"
+    },
+    {
+      "no": 47,
+      "word": "pleased",
+      "meaning": "기뻐하는, 만족하는"
+    },
+    {
+      "no": 48,
+      "word": "expiration",
+      "meaning": "만료, 만기, 종결"
+    },
+    {
+      "no": 49,
+      "word": "surprising",
+      "meaning": "놀라운, 깜짝 놀랄 만한, 의외의"
+    },
+    {
+      "no": 50,
+      "word": "promise",
+      "meaning": "약속, 계약; 전망, 장래성; 약속하다; ...할 가망이 있다"
+    },
+    {
+      "no": 51,
+      "word": "limit",
+      "meaning": "제한; 경계; 한계, 극한, 최대치; 제한하다, 한정하다"
+    },
+    {
+      "no": 52,
+      "word": "admission",
+      "meaning": "입장 ; 시인, 인정; 입장료"
+    },
+    {
+      "no": 53,
+      "word": "rent",
+      "meaning": "임대료, 집세, 사용료; 임대하다, 빌려주다, 빌리다"
+    },
+    {
+      "no": 54,
+      "word": "surrender",
+      "meaning": "항복하다; 넘겨주다, 양도하다; 항복; 양도, 포기"
+    },
+    {
+      "no": 55,
+      "word": "submit",
+      "meaning": "제출하다; 복종하다"
+    },
+    {
+      "no": 56,
+      "word": "enterprise",
+      "meaning": "기업, 회사; 진취적인 정신; 사업, 계획"
+    },
+    {
+      "no": 57,
+      "word": "prison",
+      "meaning": "감옥, 교도소"
+    },
+    {
+      "no": 58,
+      "word": "enterprising",
+      "meaning": "진취적인"
+    },
+    {
+      "no": 59,
+      "word": "mental",
+      "meaning": "정신의, 마음의"
+    },
+    {
+      "no": 60,
+      "word": "commitment",
+      "meaning": "약속; 전념, 헌신; 의무, 책임"
+    },
+    {
+      "no": 61,
+      "word": "editorial",
+      "meaning": "사설, 논설; 편집의"
+    },
+    {
+      "no": 62,
+      "word": "emission",
+      "meaning": "배출"
+    },
+    {
+      "no": 63,
+      "word": "omission",
+      "meaning": "생략, 누락"
+    },
+    {
+      "no": 64,
+      "word": "limited",
+      "meaning": "제한적인, 한정된"
+    },
+    {
+      "no": 65,
+      "word": "desperate",
+      "meaning": "절박한, 필사적인; 자포자기의; 심각한, 절망적인"
+    },
+    {
+      "no": 66,
+      "word": "missionary",
+      "meaning": "선교사, 전도사; 전도의"
+    },
+    {
+      "no": 67,
+      "word": "monumental",
+      "meaning": "기념비적인, 역사적 가치를 지닌"
+    },
+    {
+      "no": 68,
+      "word": "spiritual",
+      "meaning": "정신의, 정신적인; 영적인, 종교적인"
+    },
+    {
+      "no": 69,
+      "word": "reminder",
+      "meaning": "생각나게 하는 것; 독촉장, 메모"
+    },
+    {
+      "no": 70,
+      "word": "text",
+      "meaning": "본문, 글, 텍스트; 원문; 문자 메시지를 보내다"
+    },
+    {
+      "no": 71,
+      "word": "rental",
+      "meaning": "사용료, 임대료; 임대, 대여; 임대의, 임대할 수 있는"
+    },
+    {
+      "no": 72,
+      "word": "eliminate",
+      "meaning": "제거하다, 없애다"
+    },
+    {
+      "no": 73,
+      "word": "surprise",
+      "meaning": "놀라게 하다; 놀람; 뜻밖의 일"
+    },
+    {
+      "no": 74,
+      "word": "edition",
+      "meaning": "판"
+    },
+    {
+      "no": 75,
+      "word": "editor",
+      "meaning": "편집자, 에디터"
+    },
+    {
+      "no": 76,
+      "word": "additional",
+      "meaning": "추가의, 부가적인"
+    },
+    {
+      "no": 77,
+      "word": "omit",
+      "meaning": "생략하다, 빠뜨리다"
+    },
+    {
+      "no": 78,
+      "word": "comment",
+      "meaning": "의견, 논평"
+    },
+    {
+      "no": 79,
+      "word": "certainly",
+      "meaning": "확실히"
+    },
+    {
+      "no": 80,
+      "word": "context",
+      "meaning": "배경, 정황; 문맥, 전후 관계"
+    }
+  ]
+}

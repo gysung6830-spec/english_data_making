@@ -1,0 +1,406 @@
+{
+  "title": "Day 59~60",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "citizenship",
+      "meaning": "시민권, 시민으로서의 신분"
+    },
+    {
+      "no": 2,
+      "word": "leadership",
+      "meaning": "통솔력, 지도력"
+    },
+    {
+      "no": 3,
+      "word": "resident",
+      "meaning": "거주자; 거주하는, 살고 있는"
+    },
+    {
+      "no": 4,
+      "word": "pollutant",
+      "meaning": "오염 물질"
+    },
+    {
+      "no": 5,
+      "word": "pollution",
+      "meaning": "오염, 공해"
+    },
+    {
+      "no": 6,
+      "word": "attentive",
+      "meaning": "주의 깊은, 세심한"
+    },
+    {
+      "no": 7,
+      "word": "fascination",
+      "meaning": "매력, 매혹됨"
+    },
+    {
+      "no": 8,
+      "word": "imitation",
+      "meaning": "모방, 흉내; 모조품"
+    },
+    {
+      "no": 9,
+      "word": "theorist",
+      "meaning": "이론가"
+    },
+    {
+      "no": 10,
+      "word": "journalist",
+      "meaning": "언론인, 기자"
+    },
+    {
+      "no": 11,
+      "word": "arrival",
+      "meaning": "도착"
+    },
+    {
+      "no": 12,
+      "word": "invitation",
+      "meaning": "초대"
+    },
+    {
+      "no": 13,
+      "word": "irritate",
+      "meaning": "짜증 나게 하다; 자극하다"
+    },
+    {
+      "no": 14,
+      "word": "classification",
+      "meaning": "분류, 구분"
+    },
+    {
+      "no": 15,
+      "word": "wrestle",
+      "meaning": "몸싸움하다, 레슬링을 하다"
+    },
+    {
+      "no": 16,
+      "word": "optimist",
+      "meaning": "낙관론자, 낙천주의자"
+    },
+    {
+      "no": 17,
+      "word": "optimism",
+      "meaning": "낙관론, 낙천주의"
+    },
+    {
+      "no": 18,
+      "word": "translator",
+      "meaning": "번역가; 통역사"
+    },
+    {
+      "no": 19,
+      "word": "upward",
+      "meaning": "위쪽으로"
+    },
+    {
+      "no": 20,
+      "word": "proposal",
+      "meaning": "제안; 신청; 청혼"
+    },
+    {
+      "no": 21,
+      "word": "weight",
+      "meaning": "무게, 체중"
+    },
+    {
+      "no": 22,
+      "word": "service",
+      "meaning": "서비스, 봉사"
+    },
+    {
+      "no": 23,
+      "word": "realistic",
+      "meaning": "현실적인; 진짜 같은"
+    },
+    {
+      "no": 24,
+      "word": "translation",
+      "meaning": "번역, 통역; 해석"
+    },
+    {
+      "no": 25,
+      "word": "motivate",
+      "meaning": "동기를 부여하다, 자극하다"
+    },
+    {
+      "no": 26,
+      "word": "psychologist",
+      "meaning": "심리학자"
+    },
+    {
+      "no": 27,
+      "word": "critical",
+      "meaning": "비판적인; 중대한; 위기의; 비평의"
+    },
+    {
+      "no": 28,
+      "word": "representative",
+      "meaning": "대표자; 대표하는"
+    },
+    {
+      "no": 29,
+      "word": "critic",
+      "meaning": "비평가, 평론가"
+    },
+    {
+      "no": 30,
+      "word": "simplification",
+      "meaning": "단순화, 간소화"
+    },
+    {
+      "no": 31,
+      "word": "wrestling",
+      "meaning": "레슬링"
+    },
+    {
+      "no": 32,
+      "word": "stabilize",
+      "meaning": "안정되다, 안정시키다"
+    },
+    {
+      "no": 33,
+      "word": "etiquette",
+      "meaning": "예의, 에티켓"
+    },
+    {
+      "no": 34,
+      "word": "booklet",
+      "meaning": "소책자"
+    },
+    {
+      "no": 35,
+      "word": "categorize",
+      "meaning": "분류하다"
+    },
+    {
+      "no": 36,
+      "word": "wealthy",
+      "meaning": "부유한"
+    },
+    {
+      "no": 37,
+      "word": "clarification",
+      "meaning": "명료화"
+    },
+    {
+      "no": 38,
+      "word": "likewise",
+      "meaning": "똑같이, 비슷하게"
+    },
+    {
+      "no": 39,
+      "word": "forward",
+      "meaning": "앞으로"
+    },
+    {
+      "no": 40,
+      "word": "frustration",
+      "meaning": "좌절감, 불만"
+    },
+    {
+      "no": 41,
+      "word": "introduction",
+      "meaning": "소개; 도입"
+    },
+    {
+      "no": 42,
+      "word": "otherwise",
+      "meaning": "달리, 다르게"
+    },
+    {
+      "no": 43,
+      "word": "surgery",
+      "meaning": "수술"
+    },
+    {
+      "no": 44,
+      "word": "theory",
+      "meaning": "이론, 학설"
+    },
+    {
+      "no": 45,
+      "word": "wrestler",
+      "meaning": "레슬링 선수"
+    },
+    {
+      "no": 46,
+      "word": "frustrate",
+      "meaning": "좌절감을 주다, 불만스럽게 만들다; 좌절시키다"
+    },
+    {
+      "no": 47,
+      "word": "theorize",
+      "meaning": "이론으로 만들다"
+    },
+    {
+      "no": 48,
+      "word": "leaflet",
+      "meaning": "전단"
+    },
+    {
+      "no": 49,
+      "word": "servant",
+      "meaning": "하인, 고용인"
+    },
+    {
+      "no": 50,
+      "word": "attendant",
+      "meaning": "시중드는 사람; 수행원"
+    },
+    {
+      "no": 51,
+      "word": "attention",
+      "meaning": "주목, 주의; 관심; 시중, 돌봄"
+    },
+    {
+      "no": 52,
+      "word": "simplify",
+      "meaning": "단순화하다, 간단하게 하다"
+    },
+    {
+      "no": 53,
+      "word": "classify",
+      "meaning": "분류하다, 구분하다"
+    },
+    {
+      "no": 54,
+      "word": "realization",
+      "meaning": "깨달음; 실현, 현실화"
+    },
+    {
+      "no": 55,
+      "word": "realize",
+      "meaning": "깨닫다; 실현하다"
+    },
+    {
+      "no": 56,
+      "word": "struggle",
+      "meaning": "투쟁하다, 고군분투하다; 투쟁, 분투"
+    },
+    {
+      "no": 57,
+      "word": "residential",
+      "meaning": "주택가의, 거주지의"
+    },
+    {
+      "no": 58,
+      "word": "residence",
+      "meaning": "주택, 거주지; 거주"
+    },
+    {
+      "no": 59,
+      "word": "irritation",
+      "meaning": "짜증 ; 자극"
+    },
+    {
+      "no": 60,
+      "word": "relative",
+      "meaning": "친척, 인척; 상대적인"
+    },
+    {
+      "no": 61,
+      "word": "classified",
+      "meaning": "기밀의; 주제별로 분류된"
+    },
+    {
+      "no": 62,
+      "word": "extremely",
+      "meaning": "극도로, 극히"
+    },
+    {
+      "no": 63,
+      "word": "assistant",
+      "meaning": "보조자, 조수; 보조의, 하위 직급의"
+    },
+    {
+      "no": 64,
+      "word": "halfway",
+      "meaning": "가운데쯤에, 중간에"
+    },
+    {
+      "no": 65,
+      "word": "psychological",
+      "meaning": "심리적인; 심리학의"
+    },
+    {
+      "no": 66,
+      "word": "lightweight",
+      "meaning": "가벼운"
+    },
+    {
+      "no": 67,
+      "word": "stability",
+      "meaning": "안정"
+    },
+    {
+      "no": 68,
+      "word": "realism",
+      "meaning": "현실주의; 사실성"
+    },
+    {
+      "no": 69,
+      "word": "originate",
+      "meaning": "비롯되다, 일어나다; 발명하다"
+    },
+    {
+      "no": 70,
+      "word": "simplicity",
+      "meaning": "단순, 간단"
+    },
+    {
+      "no": 71,
+      "word": "homeward",
+      "meaning": "집 쪽으로, 집으로 향하여"
+    },
+    {
+      "no": 72,
+      "word": "representation",
+      "meaning": "표시, 표현; 대리, 대변, 대표"
+    },
+    {
+      "no": 73,
+      "word": "frighten",
+      "meaning": "무섭게 하다"
+    },
+    {
+      "no": 74,
+      "word": "outweigh",
+      "meaning": "...보다 뛰어나다, 중요하다"
+    },
+    {
+      "no": 75,
+      "word": "nearly",
+      "meaning": "거의, 가까스로, 하마터면"
+    },
+    {
+      "no": 76,
+      "word": "imitative",
+      "meaning": "모방적인"
+    },
+    {
+      "no": 77,
+      "word": "consultant",
+      "meaning": "상담가, 자문 위원"
+    },
+    {
+      "no": 78,
+      "word": "strengthen",
+      "meaning": "강화하다; 강화되다"
+    },
+    {
+      "no": 79,
+      "word": "overweight",
+      "meaning": "과체중인"
+    },
+    {
+      "no": 80,
+      "word": "realize",
+      "meaning": "깨닫다; 실현하다"
+    }
+  ]
+}

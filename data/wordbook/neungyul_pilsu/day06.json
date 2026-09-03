@@ -1,0 +1,206 @@
+{
+  "title": "Day 6",
+  "source": "능률보카 수능필수",
+  "words": [
+    {
+      "no": 1,
+      "word": "operate",
+      "meaning": "작동하다, 조작하다; 운영하다; 수술하다"
+    },
+    {
+      "no": 2,
+      "word": "found",
+      "meaning": "설립하다; (~에) 기초를 두다"
+    },
+    {
+      "no": 3,
+      "word": "criterion",
+      "meaning": "표준, 기준"
+    },
+    {
+      "no": 4,
+      "word": "convince",
+      "meaning": "확신[납득]시키다; 설득하다"
+    },
+    {
+      "no": 5,
+      "word": "barely",
+      "meaning": "간신히; 거의 ~ 않다"
+    },
+    {
+      "no": 6,
+      "word": "isolate",
+      "meaning": "격리하다, 고립시키다"
+    },
+    {
+      "no": 7,
+      "word": "identical",
+      "meaning": "동일한, 일치하는"
+    },
+    {
+      "no": 8,
+      "word": "heal",
+      "meaning": "치유되다, 치료하다"
+    },
+    {
+      "no": 9,
+      "word": "secondary",
+      "meaning": "부차적인, 부수적인; 중등 교육[학교]의"
+    },
+    {
+      "no": 10,
+      "word": "gradual",
+      "meaning": "점진적인, 차츰 ~하는"
+    },
+    {
+      "no": 11,
+      "word": "exhibit",
+      "meaning": "전시하다; (감정 등을) 드러내다; 전시(품)"
+    },
+    {
+      "no": 12,
+      "word": "average",
+      "meaning": "평균; 평균의, 보통의; 평균 ~이 되다"
+    },
+    {
+      "no": 13,
+      "word": "aggressive",
+      "meaning": "공격적인; 적극적인"
+    },
+    {
+      "no": 14,
+      "word": "confuse",
+      "meaning": "혼동하다; 혼란시키다"
+    },
+    {
+      "no": 15,
+      "word": "immense",
+      "meaning": "엄청난, 막대한"
+    },
+    {
+      "no": 16,
+      "word": "seek",
+      "meaning": "찾다; 추구하다"
+    },
+    {
+      "no": 17,
+      "word": "ultimately",
+      "meaning": "궁극적으로, 결국; 근본적으로"
+    },
+    {
+      "no": 18,
+      "word": "sector",
+      "meaning": "부문, 분야, 영역"
+    },
+    {
+      "no": 19,
+      "word": "boast",
+      "meaning": "자랑하다, 뽐내다; 자랑"
+    },
+    {
+      "no": 20,
+      "word": "draft",
+      "meaning": "초고, 초안; 초안을 작성하다"
+    },
+    {
+      "no": 21,
+      "word": "flexible",
+      "meaning": "융통성 있는; (신체 등이) 유연한"
+    },
+    {
+      "no": 22,
+      "word": "current",
+      "meaning": "현재의; (물·공기의) 흐름; 경향; 전류"
+    },
+    {
+      "no": 23,
+      "word": "brilliant",
+      "meaning": "훌륭한; 명석한; 눈부신, 아주 밝은"
+    },
+    {
+      "no": 24,
+      "word": "revenue",
+      "meaning": "세입, 수입"
+    },
+    {
+      "no": 25,
+      "word": "defeat",
+      "meaning": "패배시키다; 패배; 타파"
+    },
+    {
+      "no": 26,
+      "word": "independent",
+      "meaning": "독립한; 자립심이 강한"
+    },
+    {
+      "no": 27,
+      "word": "glance",
+      "meaning": "흘끗 보다, 대충 훑어보다; 흘끗 봄"
+    },
+    {
+      "no": 28,
+      "word": "blame",
+      "meaning": "비난하다, 탓하다; 비난, 책망; 책임"
+    },
+    {
+      "no": 29,
+      "word": "general",
+      "meaning": "일반적인, 보편적인; 장군, 대장"
+    },
+    {
+      "no": 30,
+      "word": "wreck",
+      "meaning": "난파(선); 잔해; 망가뜨리다, 파괴하다"
+    },
+    {
+      "no": 31,
+      "word": "explore",
+      "meaning": "탐험[탐사]하다; 탐구[검토]하다"
+    },
+    {
+      "no": 32,
+      "word": "reject",
+      "meaning": "거절하다, 거부하다"
+    },
+    {
+      "no": 33,
+      "word": "despite",
+      "meaning": "~에도 불구하고"
+    },
+    {
+      "no": 34,
+      "word": "enrich",
+      "meaning": "풍요롭게 하다; (내용·질·가치 등을) 높이다"
+    },
+    {
+      "no": 35,
+      "word": "automatically",
+      "meaning": "자동적으로; 무의식적으로"
+    },
+    {
+      "no": 36,
+      "word": "advance",
+      "meaning": "진보하다[시키다]; 전진하다; 진보; 발전; 전진"
+    },
+    {
+      "no": 37,
+      "word": "vulnerable",
+      "meaning": "취약한, 연약한"
+    },
+    {
+      "no": 38,
+      "word": "invest",
+      "meaning": "투자하다; (시간·노력 등을) 쏟다"
+    },
+    {
+      "no": 39,
+      "word": "injured",
+      "meaning": "다친; (감정이) 상처를 받은"
+    },
+    {
+      "no": 40,
+      "word": "entire",
+      "meaning": "전체의; 완전한"
+    }
+  ]
+}

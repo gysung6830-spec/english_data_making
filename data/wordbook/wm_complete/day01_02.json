@@ -1,0 +1,306 @@
+{
+  "title": "Day 1~2",
+  "source": "Word Master 고등 Complete",
+  "words": [
+    {
+      "no": 1,
+      "word": "come up with",
+      "meaning": "~을 만들어 내다; ~을 제시하다"
+    },
+    {
+      "no": 2,
+      "word": "at first glance",
+      "meaning": "언뜻 보기에는, 처음에는"
+    },
+    {
+      "no": 3,
+      "word": "violence",
+      "meaning": "폭력; 격렬함"
+    },
+    {
+      "no": 4,
+      "word": "cannot help but do",
+      "meaning": "~하지 않을 수 없다"
+    },
+    {
+      "no": 5,
+      "word": "mislead",
+      "meaning": "오도하다; 속이다"
+    },
+    {
+      "no": 6,
+      "word": "rare",
+      "meaning": "보기 드문, 희귀한; 진귀한; 살짝 익힌"
+    },
+    {
+      "no": 7,
+      "word": "discard",
+      "meaning": "버리다, 폐기하다; 저버리다, 해고하다"
+    },
+    {
+      "no": 8,
+      "word": "abstraction",
+      "meaning": "추상 ; 추상적 개념; 추출"
+    },
+    {
+      "no": 9,
+      "word": "occupy",
+      "meaning": "차지하다; 사용하다, 점유하다"
+    },
+    {
+      "no": 10,
+      "word": "exception",
+      "meaning": "예외, 이례; 제외; 이의, 반대"
+    },
+    {
+      "no": 11,
+      "word": "wipe out",
+      "meaning": "~을 완전히 없애다"
+    },
+    {
+      "no": 12,
+      "word": "discord",
+      "meaning": "불일치, 불화; 불협화음"
+    },
+    {
+      "no": 13,
+      "word": "stir",
+      "meaning": "휘젓다, 뒤섞다; 움직이다; 자극하다, 동요시키다; 휘젓기, 뒤섞기; 동요"
+    },
+    {
+      "no": 14,
+      "word": "regulate",
+      "meaning": "규제하다, 통제하다; 조절하다"
+    },
+    {
+      "no": 15,
+      "word": "take ~ into account",
+      "meaning": "~을 고려하다, ~을 참작하다"
+    },
+    {
+      "no": 16,
+      "word": "favorable",
+      "meaning": "호의적인; 찬성하는; 유리한, 형편에 알맞은"
+    },
+    {
+      "no": 17,
+      "word": "patent",
+      "meaning": "특허; 특허의; 특허를 받다"
+    },
+    {
+      "no": 18,
+      "word": "grateful",
+      "meaning": "감사하는, 고마워하는"
+    },
+    {
+      "no": 19,
+      "word": "neglect",
+      "meaning": "무시하다, 등한시하다; 게을리하다; ~하지 않다; 무시, 경시; 부주의; 태만; 불이행"
+    },
+    {
+      "no": 20,
+      "word": "seedling",
+      "meaning": "묘목"
+    },
+    {
+      "no": 21,
+      "word": "anchor",
+      "meaning": "닻; 종합 사회자; 닻을 내려 정박시키다; 고정시키다"
+    },
+    {
+      "no": 22,
+      "word": "categorize",
+      "meaning": "분류하다, 범주에 넣다"
+    },
+    {
+      "no": 23,
+      "word": "invoke",
+      "meaning": "들다; 발동하다; 호소하다; 기원하다, 간구하다"
+    },
+    {
+      "no": 24,
+      "word": "coexist",
+      "meaning": "공존하다"
+    },
+    {
+      "no": 25,
+      "word": "assent",
+      "meaning": "동의하다, 찬성하다; 찬성; 승인"
+    },
+    {
+      "no": 26,
+      "word": "negotiator",
+      "meaning": "협상자, 교섭자"
+    },
+    {
+      "no": 27,
+      "word": "detrimental",
+      "meaning": "해로운, 불리한"
+    },
+    {
+      "no": 28,
+      "word": "execute",
+      "meaning": "실행하다, 수행하다; 처형하다, 사형하다"
+    },
+    {
+      "no": 29,
+      "word": "demonstrate",
+      "meaning": "입증하다, 증명하다; 보여 주다, 설명하다; 시위운동을 하다"
+    },
+    {
+      "no": 30,
+      "word": "colleague",
+      "meaning": "동료, 동업자"
+    },
+    {
+      "no": 31,
+      "word": "cut off",
+      "meaning": "~을 잘라 내다; ~을 차단하다, ~을 가로막다"
+    },
+    {
+      "no": 32,
+      "word": "underlie",
+      "meaning": "~의 기저를 이루다; ~의 밑에있다"
+    },
+    {
+      "no": 33,
+      "word": "superstition",
+      "meaning": "미신; 미신적 행위"
+    },
+    {
+      "no": 34,
+      "word": "underline",
+      "meaning": "밑줄을 긋다; 강조하다; 밑줄"
+    },
+    {
+      "no": 35,
+      "word": "ascend",
+      "meaning": "오르다, 상승하다; 승진하다"
+    },
+    {
+      "no": 36,
+      "word": "significant",
+      "meaning": "중요한; 의미 있는; 상당한, 아주큰"
+    },
+    {
+      "no": 37,
+      "word": "lag behind",
+      "meaning": "~보다 뒤처지다"
+    },
+    {
+      "no": 38,
+      "word": "in vain",
+      "meaning": "허사가 되어, 헛되이"
+    },
+    {
+      "no": 39,
+      "word": "at the expense of",
+      "meaning": "~을 희생하여, ~의 비용을 대가로"
+    },
+    {
+      "no": 40,
+      "word": "subconscious",
+      "meaning": "잠재의식적인; 잠재의식"
+    },
+    {
+      "no": 41,
+      "word": "acquaintance",
+      "meaning": "아는 사람, 지인; 면식, 친분; 지식, 밝음"
+    },
+    {
+      "no": 42,
+      "word": "pollinator",
+      "meaning": "수분 매개자"
+    },
+    {
+      "no": 43,
+      "word": "attribute",
+      "meaning": "~의 탓으로 돌리다; 있다고 생각하다; ~의 것이라고 생각하다; 속성, 특질"
+    },
+    {
+      "no": 44,
+      "word": "interaction",
+      "meaning": "상호 작용"
+    },
+    {
+      "no": 45,
+      "word": "expedition",
+      "meaning": "탐험, 원정; 탐험대, 원정대; 신속, 급속"
+    },
+    {
+      "no": 46,
+      "word": "deduce",
+      "meaning": "추론하다, 연역하다"
+    },
+    {
+      "no": 47,
+      "word": "violation",
+      "meaning": "위반, 위배; 방해, 침해"
+    },
+    {
+      "no": 48,
+      "word": "rust",
+      "meaning": "녹; 녹슬다, 부식시키다"
+    },
+    {
+      "no": 49,
+      "word": "keep up with",
+      "meaning": "~에 뒤처지지 않고 따라가다; 시류를 따르다; ~와 계속 연락하고지내다"
+    },
+    {
+      "no": 50,
+      "word": "irresistible",
+      "meaning": "저항할 수 없는; 너무 유혹적인"
+    },
+    {
+      "no": 51,
+      "word": "objective",
+      "meaning": "객관적인; 물체의, 물질적인; <철학> 실증적인; 목적, 목표"
+    },
+    {
+      "no": 52,
+      "word": "dangle",
+      "meaning": "매달리다, 흔들흔들하다; 따라다니다"
+    },
+    {
+      "no": 53,
+      "word": "explode",
+      "meaning": "폭발하다, 터지다; 폭발적으로증가하다"
+    },
+    {
+      "no": 54,
+      "word": "in the presence of",
+      "meaning": "~이 있을 때, ~가 있는 데서"
+    },
+    {
+      "no": 55,
+      "word": "administer",
+      "meaning": "관리하다; 집행하다; 주다; 투여하다"
+    },
+    {
+      "no": 56,
+      "word": "statue",
+      "meaning": "조각상, 상"
+    },
+    {
+      "no": 57,
+      "word": "do away with",
+      "meaning": "~을 폐지하다; ~을 처분하다"
+    },
+    {
+      "no": 58,
+      "word": "exhibit",
+      "meaning": "보이다, 보여 주다; 전시하다; 전시품; 전시회"
+    },
+    {
+      "no": 59,
+      "word": "innovate",
+      "meaning": "쇄신하다"
+    },
+    {
+      "no": 60,
+      "word": "rear",
+      "meaning": "뒤, 배후; 뒤쪽의; 기르다, 교육하다"
+    }
+  ]
+}

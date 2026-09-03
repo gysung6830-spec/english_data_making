@@ -1,0 +1,331 @@
+{
+  "title": "Day 9~10",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "withhold",
+      "meaning": "주지 않다; 유보하다"
+    },
+    {
+      "no": 2,
+      "word": "account",
+      "meaning": "계좌; 보고, 설명; 계정; 이유, 원인; 계산서; ...의 이유를 밝히다, ...을 설명하다; ...의 원인이 되다; 차지하다"
+    },
+    {
+      "no": 3,
+      "word": "dual",
+      "meaning": "둘의; 두 부분으로 된, 이중의"
+    },
+    {
+      "no": 4,
+      "word": "accompany",
+      "meaning": "...와 동행하다; ...에 수반하여 일어나다; 반주하다"
+    },
+    {
+      "no": 5,
+      "word": "automobile",
+      "meaning": "자동차"
+    },
+    {
+      "no": 6,
+      "word": "contrary",
+      "meaning": "반대의; 반대, 반대되는 것"
+    },
+    {
+      "no": 7,
+      "word": "geology",
+      "meaning": "지질학; 지질학적 특징, 지질"
+    },
+    {
+      "no": 8,
+      "word": "union",
+      "meaning": "조합; 단체, 클럽; 결합, 연합"
+    },
+    {
+      "no": 9,
+      "word": "triangular",
+      "meaning": "삼각형의; 삼자 간의"
+    },
+    {
+      "no": 10,
+      "word": "counterpart",
+      "meaning": "대응하는 사람, 상대"
+    },
+    {
+      "no": 11,
+      "word": "await",
+      "meaning": "기다리다, 대기하다"
+    },
+    {
+      "no": 12,
+      "word": "universal",
+      "meaning": "만인의, 전 인류의, 전 세계의; 보편적인"
+    },
+    {
+      "no": 13,
+      "word": "arrogant",
+      "meaning": "거만한, 오만한"
+    },
+    {
+      "no": 14,
+      "word": "contrast",
+      "meaning": "대조, 대비; 차이; 정반대의 물건; 대조하다; 대조를 이루다"
+    },
+    {
+      "no": 15,
+      "word": "withstand",
+      "meaning": "저항하다; 견디다"
+    },
+    {
+      "no": 16,
+      "word": "accumulate",
+      "meaning": "모으다, 축적하다; 모이다, 축적되다"
+    },
+    {
+      "no": 17,
+      "word": "uniform",
+      "meaning": "제복, 군복, 교복, 유니폼; 동일한, 똑같은; 일관된, 한결 같은"
+    },
+    {
+      "no": 18,
+      "word": "balance",
+      "meaning": "균형, 평형; 잔고, 잔액; 저울; 균형을 잡다; 상쇄하다; 견주어 보다"
+    },
+    {
+      "no": 19,
+      "word": "withdrawal",
+      "meaning": "철수, 물러남; 철회, 취소; 인출"
+    },
+    {
+      "no": 20,
+      "word": "geographical",
+      "meaning": "지리학의; 지리적인"
+    },
+    {
+      "no": 21,
+      "word": "multiply",
+      "meaning": "증가하다; 증가시키다; 곱하다; 번식하다"
+    },
+    {
+      "no": 22,
+      "word": "geometry",
+      "meaning": "기하학"
+    },
+    {
+      "no": 23,
+      "word": "unite",
+      "meaning": "결합하다, 연합하다"
+    },
+    {
+      "no": 24,
+      "word": "monologue",
+      "meaning": "긴 이야기; 독백"
+    },
+    {
+      "no": 25,
+      "word": "counterattack",
+      "meaning": "반격, 역습"
+    },
+    {
+      "no": 26,
+      "word": "telecommute",
+      "meaning": "재택근무하다"
+    },
+    {
+      "no": 27,
+      "word": "unify",
+      "meaning": "통일하다, 통합하다"
+    },
+    {
+      "no": 28,
+      "word": "unity",
+      "meaning": "통합, 통일; 단일성, 조화"
+    },
+    {
+      "no": 29,
+      "word": "unit",
+      "meaning": "구성 단위, 측정 단위, 유닛; 단일체, 한 개; 부문, 부"
+    },
+    {
+      "no": 30,
+      "word": "geography",
+      "meaning": "지리학; 지리, 지세"
+    },
+    {
+      "no": 31,
+      "word": "university",
+      "meaning": "대학교"
+    },
+    {
+      "no": 32,
+      "word": "withdraw",
+      "meaning": "철회하다; 그만두다; 인출하다; 물러나다, 철수하다"
+    },
+    {
+      "no": 33,
+      "word": "appointment",
+      "meaning": "약속; 임명, 지명"
+    },
+    {
+      "no": 34,
+      "word": "unification",
+      "meaning": "통일, 통합"
+    },
+    {
+      "no": 35,
+      "word": "accustom",
+      "meaning": "익숙하게 하다"
+    },
+    {
+      "no": 36,
+      "word": "multiple",
+      "meaning": "다수의, 다양한; 배수의; 배수"
+    },
+    {
+      "no": 37,
+      "word": "accustomed",
+      "meaning": "익숙해진, 습관이 된"
+    },
+    {
+      "no": 38,
+      "word": "adjustment",
+      "meaning": "수정, 조절; 적응, 순응"
+    },
+    {
+      "no": 39,
+      "word": "monoculture",
+      "meaning": "단작, 단일 재배; 단일 문화"
+    },
+    {
+      "no": 40,
+      "word": "arrogance",
+      "meaning": "거만, 오만"
+    },
+    {
+      "no": 41,
+      "word": "autobiography",
+      "meaning": "자서전"
+    },
+    {
+      "no": 42,
+      "word": "twist",
+      "meaning": "비틀기, 꼬임; 굴곡; 꼬다, 감다, 비틀다; 틀다, 삐다; 왜곡하다"
+    },
+    {
+      "no": 43,
+      "word": "universe",
+      "meaning": "우주, 만물; 전 세계"
+    },
+    {
+      "no": 44,
+      "word": "twilight",
+      "meaning": "황혼, 땅거미, 어스름; 황혼기, 쇠퇴기"
+    },
+    {
+      "no": 45,
+      "word": "controversial",
+      "meaning": "논란의 여지가 있는, 논쟁의"
+    },
+    {
+      "no": 46,
+      "word": "telegraph",
+      "meaning": "전보, 전신; ...에게 전보를 치다, 전보로 알리다; ...을 넌지시 알리다"
+    },
+    {
+      "no": 47,
+      "word": "accountant",
+      "meaning": "회계사"
+    },
+    {
+      "no": 48,
+      "word": "duplicate",
+      "meaning": "복사하다; 되풀이하다; 복사의, 복제의; 복사본, 복제품"
+    },
+    {
+      "no": 49,
+      "word": "unique",
+      "meaning": "보통이 아닌, 특별한, 독특한; 유일한, 하나밖에 없는; 특유의, 고유의"
+    },
+    {
+      "no": 50,
+      "word": "tribe",
+      "meaning": "부족, 종족"
+    },
+    {
+      "no": 51,
+      "word": "triangle",
+      "meaning": "삼각형 ; 트라이앵글; 삼각관계"
+    },
+    {
+      "no": 52,
+      "word": "multitude",
+      "meaning": "다수; 군중"
+    },
+    {
+      "no": 53,
+      "word": "controversy",
+      "meaning": "논쟁, 언쟁, 논란"
+    },
+    {
+      "no": 54,
+      "word": "duplication",
+      "meaning": "복사, 복제; 이중, 중복"
+    },
+    {
+      "no": 55,
+      "word": "trivial",
+      "meaning": "사소한, 하찮은"
+    },
+    {
+      "no": 56,
+      "word": "approach",
+      "meaning": "...에 접근하다; 다가오다; 이야기를 꺼내다; 다루다; 접근법, 해결 방법; 가까워짐, 접근"
+    },
+    {
+      "no": 57,
+      "word": "counterfeit",
+      "meaning": "위조의, 가짜의; 위조하다"
+    },
+    {
+      "no": 58,
+      "word": "abandon",
+      "meaning": "버리다, 떠나다; 포기하다"
+    },
+    {
+      "no": 59,
+      "word": "bilingual",
+      "meaning": "2개 국어를 구사할 수 있는; 2개 국어를 사용하는; 2개 국어구사자"
+    },
+    {
+      "no": 60,
+      "word": "appoint",
+      "meaning": "임명하다; 정하다"
+    },
+    {
+      "no": 61,
+      "word": "telescope",
+      "meaning": "망원경"
+    },
+    {
+      "no": 62,
+      "word": "accumulation",
+      "meaning": "축적, 쌓아올림"
+    },
+    {
+      "no": 63,
+      "word": "adjust",
+      "meaning": "맞추다, 조정하다; 적응하다"
+    },
+    {
+      "no": 64,
+      "word": "multimedia",
+      "meaning": "멀티미디어"
+    },
+    {
+      "no": 65,
+      "word": "autograph",
+      "meaning": "사인, 자필 서명; 자필 서명하다"
+    }
+  ]
+}

@@ -1,0 +1,406 @@
+{
+  "title": "Day 13~14",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "continual",
+      "meaning": "반복되는, 빈번한"
+    },
+    {
+      "no": 2,
+      "word": "institutional",
+      "meaning": "제도의, 규정된; 기관의"
+    },
+    {
+      "no": 3,
+      "word": "movement",
+      "meaning": "움직임, 이동; 진전; 운동"
+    },
+    {
+      "no": 4,
+      "word": "motive",
+      "meaning": "동기, 자극; 움직이게 하는, 원동력이 되는"
+    },
+    {
+      "no": 5,
+      "word": "retain",
+      "meaning": "보유하다, 유지하다; 기억하다"
+    },
+    {
+      "no": 6,
+      "word": "respect",
+      "meaning": "존경, 존중; 측면, 점, 사항; 존경하다, 존중하다; 준수하다, 지키다"
+    },
+    {
+      "no": 7,
+      "word": "insistence",
+      "meaning": "주장, 요구"
+    },
+    {
+      "no": 8,
+      "word": "resistant",
+      "meaning": "견디는, 내성이 있는; 반대하는, 저항하는"
+    },
+    {
+      "no": 9,
+      "word": "insistent",
+      "meaning": "고집하는, 끈질긴"
+    },
+    {
+      "no": 10,
+      "word": "entertainment",
+      "meaning": "오락, 연예; 대접, 환대"
+    },
+    {
+      "no": 11,
+      "word": "preserve",
+      "meaning": "보호하다, 보존하다; 유지하다"
+    },
+    {
+      "no": 12,
+      "word": "resist",
+      "meaning": "...에 반대하다, 저항하다; 견디다, 참다"
+    },
+    {
+      "no": 13,
+      "word": "observance",
+      "meaning": "준수"
+    },
+    {
+      "no": 14,
+      "word": "restore",
+      "meaning": "회복하다; 회복시키다; 복원하다, 복구하다; 돌려주다"
+    },
+    {
+      "no": 15,
+      "word": "expect",
+      "meaning": "기대하다, 예기하다, 기다리다; 생각하다"
+    },
+    {
+      "no": 16,
+      "word": "preservation",
+      "meaning": "보호, 보존; 유지"
+    },
+    {
+      "no": 17,
+      "word": "motivation",
+      "meaning": "동기 부여, 자극; 열의"
+    },
+    {
+      "no": 18,
+      "word": "steadily",
+      "meaning": "꾸준히"
+    },
+    {
+      "no": 19,
+      "word": "emotional",
+      "meaning": "감정의; 감정적인, 정서적인"
+    },
+    {
+      "no": 20,
+      "word": "unexpected",
+      "meaning": "예기치 않은, 뜻밖의"
+    },
+    {
+      "no": 21,
+      "word": "continue",
+      "meaning": "계속하다; 계속되다; 다시 시작하다; 재개되다"
+    },
+    {
+      "no": 22,
+      "word": "promotion",
+      "meaning": "승진, 승격; 판촉, 홍보; 촉진, 장려"
+    },
+    {
+      "no": 23,
+      "word": "existence",
+      "meaning": "존재, 실재; 생존"
+    },
+    {
+      "no": 24,
+      "word": "continuous",
+      "meaning": "끊임없는, 계속적인"
+    },
+    {
+      "no": 25,
+      "word": "continental",
+      "meaning": "대륙의, 대륙성의"
+    },
+    {
+      "no": 26,
+      "word": "preservative",
+      "meaning": "방부제"
+    },
+    {
+      "no": 27,
+      "word": "remote",
+      "meaning": "동떨어진, 외진; 먼; 희박한; 원격 조정의"
+    },
+    {
+      "no": 28,
+      "word": "observation",
+      "meaning": "관찰, 관측"
+    },
+    {
+      "no": 29,
+      "word": "consist",
+      "meaning": "...에 존재하다, ...에 있다; ...로 이루어지다, 구성되다"
+    },
+    {
+      "no": 30,
+      "word": "constitute",
+      "meaning": "구성하다; ...로 간주되다; 설립하다, 제정하다"
+    },
+    {
+      "no": 31,
+      "word": "expectation",
+      "meaning": "기대, 예상"
+    },
+    {
+      "no": 32,
+      "word": "substitute",
+      "meaning": "대체하다, 바꾸다; 대신하다; 대용품, 대리인"
+    },
+    {
+      "no": 33,
+      "word": "respective",
+      "meaning": "각각의, 저마다의, 각자의"
+    },
+    {
+      "no": 34,
+      "word": "specially",
+      "meaning": "특별히, 특별하게"
+    },
+    {
+      "no": 35,
+      "word": "superstition",
+      "meaning": "미신"
+    },
+    {
+      "no": 36,
+      "word": "insist",
+      "meaning": "주장하다, 고집하다; 요구하다"
+    },
+    {
+      "no": 37,
+      "word": "sustainable",
+      "meaning": "지속 가능한"
+    },
+    {
+      "no": 38,
+      "word": "systematic",
+      "meaning": "조직적인, 체계적인"
+    },
+    {
+      "no": 39,
+      "word": "spectacular",
+      "meaning": "장관, 구경거리"
+    },
+    {
+      "no": 40,
+      "word": "conserve",
+      "meaning": "보존하다, 보호하다"
+    },
+    {
+      "no": 41,
+      "word": "special",
+      "meaning": "특별한"
+    },
+    {
+      "no": 42,
+      "word": "specification",
+      "meaning": "열거, 명세 사항; 설명서"
+    },
+    {
+      "no": 43,
+      "word": "assistance",
+      "meaning": "보조, 도움"
+    },
+    {
+      "no": 44,
+      "word": "specific",
+      "meaning": "특정한; 구체적인, 자세한"
+    },
+    {
+      "no": 45,
+      "word": "restorative",
+      "meaning": "회복시키는"
+    },
+    {
+      "no": 46,
+      "word": "moving",
+      "meaning": "감동시키는; 움직이는, 이동하는"
+    },
+    {
+      "no": 47,
+      "word": "motionless",
+      "meaning": "움직임이 없는, 가만히 있는"
+    },
+    {
+      "no": 48,
+      "word": "respectable",
+      "meaning": "존경할 만한, 훌륭한; 꽤 괜찮은"
+    },
+    {
+      "no": 49,
+      "word": "constitution",
+      "meaning": "헌법; 체격, 체질; 구성, 구조, 조직"
+    },
+    {
+      "no": 50,
+      "word": "arrest",
+      "meaning": "체포"
+    },
+    {
+      "no": 51,
+      "word": "species",
+      "meaning": "종; 종류"
+    },
+    {
+      "no": 52,
+      "word": "reserved",
+      "meaning": "내성적인"
+    },
+    {
+      "no": 53,
+      "word": "reserve",
+      "meaning": "예약하다; 남겨 두다, 비축하다; 비축"
+    },
+    {
+      "no": 54,
+      "word": "suspicion",
+      "meaning": "의심, 혐의"
+    },
+    {
+      "no": 55,
+      "word": "spectator",
+      "meaning": "관중, 구경꾼"
+    },
+    {
+      "no": 56,
+      "word": "move",
+      "meaning": "움직이다, 이동하다; 이사하다; 진행되다; 감동시키다; 움직임, 이동; 조치, 행동"
+    },
+    {
+      "no": 57,
+      "word": "destination",
+      "meaning": "목적지, 행선지"
+    },
+    {
+      "no": 58,
+      "word": "substitution",
+      "meaning": "대리, 대체, 대용"
+    },
+    {
+      "no": 59,
+      "word": "promote",
+      "meaning": "장려하다, 촉진하다; 승진시키다; 홍보하다"
+    },
+    {
+      "no": 60,
+      "word": "spectacle",
+      "meaning": "구경거리, 장관; 안경"
+    },
+    {
+      "no": 61,
+      "word": "sustain",
+      "meaning": "유지하다, 지속시키다; 겪다, 입다; 떠받치다, 지지하다"
+    },
+    {
+      "no": 62,
+      "word": "momentary",
+      "meaning": "순간의, 찰나의"
+    },
+    {
+      "no": 63,
+      "word": "assist",
+      "meaning": "돕다, 거들다, 원조하다; 어시스트"
+    },
+    {
+      "no": 64,
+      "word": "restorable",
+      "meaning": "회복할 수 있는"
+    },
+    {
+      "no": 65,
+      "word": "inspection",
+      "meaning": "조사, 검사; 사찰, 감사"
+    },
+    {
+      "no": 66,
+      "word": "emotion",
+      "meaning": "감정, 정서"
+    },
+    {
+      "no": 67,
+      "word": "conservative",
+      "meaning": "보수적인"
+    },
+    {
+      "no": 68,
+      "word": "specialize",
+      "meaning": "전문으로 하다, 전공하다"
+    },
+    {
+      "no": 69,
+      "word": "steady",
+      "meaning": "꾸준한, 지속적인; 안정된, 흔들리지 않는"
+    },
+    {
+      "no": 70,
+      "word": "deserve",
+      "meaning": "...을 받을 만하다"
+    },
+    {
+      "no": 71,
+      "word": "cost",
+      "meaning": "비용, 값, 가격; 희생, 손실; 들다; 요하다, 희생하다, 잃게 하다"
+    },
+    {
+      "no": 72,
+      "word": "respectful",
+      "meaning": "존경하는, 공손한"
+    },
+    {
+      "no": 73,
+      "word": "specialist",
+      "meaning": "전문가"
+    },
+    {
+      "no": 74,
+      "word": "mobile",
+      "meaning": "이동성의, 이동식의; 유동적인; 움직이는 조각, 모빌; 휴대전화"
+    },
+    {
+      "no": 75,
+      "word": "reservation",
+      "meaning": "예약"
+    },
+    {
+      "no": 76,
+      "word": "obtain",
+      "meaning": "얻다, 획득하다"
+    },
+    {
+      "no": 77,
+      "word": "irresistible",
+      "meaning": "저항할 수 없는; 매력적인"
+    },
+    {
+      "no": 78,
+      "word": "destiny",
+      "meaning": "운명, 숙명"
+    },
+    {
+      "no": 79,
+      "word": "superstitious",
+      "meaning": "미신적인"
+    },
+    {
+      "no": 80,
+      "word": "destined",
+      "meaning": "...할 운명의, ...하기로 되어 있는; ...행의"
+    }
+  ]
+}

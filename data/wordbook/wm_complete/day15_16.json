@@ -1,0 +1,306 @@
+{
+  "title": "Day 15~16",
+  "source": "Word Master 고등 Complete",
+  "words": [
+    {
+      "no": 1,
+      "word": "intention",
+      "meaning": "의도, 의사; 목적; 개념, 관념"
+    },
+    {
+      "no": 2,
+      "word": "dispute",
+      "meaning": "논의, 논쟁; 분쟁; 논의하다, 논쟁하다; 분쟁을 벌이다; 이의를 제기하다, 반박하다"
+    },
+    {
+      "no": 3,
+      "word": "vulnerable",
+      "meaning": "취약한, 상처받기 쉬운; 약점이 있는"
+    },
+    {
+      "no": 4,
+      "word": "slope",
+      "meaning": "경사면, 비탈; 경사지다, 기울어지다"
+    },
+    {
+      "no": 5,
+      "word": "doctorate",
+      "meaning": "박사 학위"
+    },
+    {
+      "no": 6,
+      "word": "console",
+      "meaning": "위로하다, 위안을 주다"
+    },
+    {
+      "no": 7,
+      "word": "go off",
+      "meaning": "울리다; 발사되다, 폭발하다; 자리를 뜨다"
+    },
+    {
+      "no": 8,
+      "word": "controversy",
+      "meaning": "논란, 논쟁"
+    },
+    {
+      "no": 9,
+      "word": "pirate",
+      "meaning": "해적; 저작권 침해자; 해적 행위를 하다; 약탈하다; 저작권을 침해하다, 불법 복제하다"
+    },
+    {
+      "no": 10,
+      "word": "accompany",
+      "meaning": "동반하다, 동행하다; 수반하다, 동시에 일어나다; 반주하다"
+    },
+    {
+      "no": 11,
+      "word": "temporal",
+      "meaning": "현세의, 세속적인; 시간의; 일시적인"
+    },
+    {
+      "no": 12,
+      "word": "automate",
+      "meaning": "자동화하다; 자동 조종하다"
+    },
+    {
+      "no": 13,
+      "word": "take on",
+      "meaning": "~을 맡다, ~을 책임지다; 고용하다"
+    },
+    {
+      "no": 14,
+      "word": "foundation",
+      "meaning": "토대, 기초; 설립, 창립; 재단"
+    },
+    {
+      "no": 15,
+      "word": "disgust",
+      "meaning": "역겹게 하다, 혐오감을 유발하다; 혐오, 역겨움"
+    },
+    {
+      "no": 16,
+      "word": "accelerate",
+      "meaning": "빠르게 하다, 가속하다; 촉진하다"
+    },
+    {
+      "no": 17,
+      "word": "disrupt",
+      "meaning": "방해하다, 지장을 주다; 분열시키다, 붕괴시키다"
+    },
+    {
+      "no": 18,
+      "word": "transplant",
+      "meaning": "이식하다, 옮겨 심다; 이주하다; 이식; 이주"
+    },
+    {
+      "no": 19,
+      "word": "feel free to do",
+      "meaning": "마음 놓고 ~해도 좋다"
+    },
+    {
+      "no": 20,
+      "word": "put out",
+      "meaning": "끄다; 내다 놓다"
+    },
+    {
+      "no": 21,
+      "word": "embody",
+      "meaning": "구현하다, 구체화하다; 통합하다, 포함하다"
+    },
+    {
+      "no": 22,
+      "word": "commercial",
+      "meaning": "상업의; 영리적인; 광고"
+    },
+    {
+      "no": 23,
+      "word": "creep",
+      "meaning": "기다, 포복하다; 살금살금 움직이다"
+    },
+    {
+      "no": 24,
+      "word": "ambitious",
+      "meaning": "야망 있는; 열망하는"
+    },
+    {
+      "no": 25,
+      "word": "distract",
+      "meaning": "흩뜨리다, 산만하게 하다; 괴롭히다, 혼란시키다"
+    },
+    {
+      "no": 26,
+      "word": "opposite",
+      "meaning": "반대쪽의, 마주보고 있는; 정반대의; 반대의 사람"
+    },
+    {
+      "no": 27,
+      "word": "manipulate",
+      "meaning": "잘 다루다, 조작하다; 조종하다; 교묘하게 조작하다"
+    },
+    {
+      "no": 28,
+      "word": "ambiguous",
+      "meaning": "애매한, 모호한; 두 가지 뜻으로 해석되는"
+    },
+    {
+      "no": 29,
+      "word": "personnel",
+      "meaning": "전직원, 총인원; 인사과; 직원의; 인사의"
+    },
+    {
+      "no": 30,
+      "word": "alien",
+      "meaning": "용납되지 않는; 이질적인; 외국의, 외래의; 외계의; 외국인; 외계인"
+    },
+    {
+      "no": 31,
+      "word": "add up to",
+      "meaning": "결국 ~이 되다; 합계 ~가 되다"
+    },
+    {
+      "no": 32,
+      "word": "even",
+      "meaning": "균등한, 동일한; 일정한; 짝수의; 평평한; 고르게 하다; 균형을 맞추다; 심지어; 훨씬"
+    },
+    {
+      "no": 33,
+      "word": "anatomy",
+      "meaning": "구조; 해부, 분석; 해부학"
+    },
+    {
+      "no": 34,
+      "word": "simultaneous",
+      "meaning": "동시의, 동시에 일어나는"
+    },
+    {
+      "no": 35,
+      "word": "adhere to",
+      "meaning": "~을 고수하다, ~을 충실히 지키다"
+    },
+    {
+      "no": 36,
+      "word": "personal",
+      "meaning": "개인의, 개인적인; 사적인; 인격적인; 사람의"
+    },
+    {
+      "no": 37,
+      "word": "go over",
+      "meaning": "~을 검토하다"
+    },
+    {
+      "no": 38,
+      "word": "embed",
+      "meaning": "꽂아 넣다; 깊이 새겨 두다"
+    },
+    {
+      "no": 39,
+      "word": "transaction",
+      "meaning": "거래, 업무; 매매"
+    },
+    {
+      "no": 40,
+      "word": "drop out",
+      "meaning": "중퇴하다; 빠지다"
+    },
+    {
+      "no": 41,
+      "word": "analysis",
+      "meaning": "분석; 분해"
+    },
+    {
+      "no": 42,
+      "word": "fall on",
+      "meaning": "~에게 주어지다; ~에 해당하다; 우연히 만나다, 마주치다"
+    },
+    {
+      "no": 43,
+      "word": "hold true",
+      "meaning": "진실이다; 유효하다, 딱 들어맞다"
+    },
+    {
+      "no": 44,
+      "word": "plumber",
+      "meaning": "배관공"
+    },
+    {
+      "no": 45,
+      "word": "attract",
+      "meaning": "끌다; 유인하다, 매혹하다"
+    },
+    {
+      "no": 46,
+      "word": "auditory",
+      "meaning": "청각의, 귀의"
+    },
+    {
+      "no": 47,
+      "word": "leverage",
+      "meaning": "지레의 작용, 지렛대 사용; 이용하다; 영향력; 영향을 주다"
+    },
+    {
+      "no": 48,
+      "word": "keep track of",
+      "meaning": "~을 기록하다; ~의 자국을 뒤밟다"
+    },
+    {
+      "no": 49,
+      "word": "square",
+      "meaning": "정사각형; 광장; 정사각형의; 직각의; 제곱의; 정사각형으로 만들다"
+    },
+    {
+      "no": 50,
+      "word": "translation",
+      "meaning": "번역, 통역; 해석"
+    },
+    {
+      "no": 51,
+      "word": "interference",
+      "meaning": "방해, 훼방; 간섭, 참견, 개입"
+    },
+    {
+      "no": 52,
+      "word": "intervention",
+      "meaning": "개입, 간섭; 조정, 중재"
+    },
+    {
+      "no": 53,
+      "word": "disturb",
+      "meaning": "방해하다; 불안하게 하다; 어지럽히다"
+    },
+    {
+      "no": 54,
+      "word": "aversion",
+      "meaning": "혐오, 싫음, 반감"
+    },
+    {
+      "no": 55,
+      "word": "refrain from",
+      "meaning": "~을 삼가다"
+    },
+    {
+      "no": 56,
+      "word": "depress",
+      "meaning": "우울하게 만들다, 낙담하게 하다; 침체시키다; 약화시키다"
+    },
+    {
+      "no": 57,
+      "word": "groan",
+      "meaning": "신음하다; 불평하다; 신음 소리; 불평의 소리"
+    },
+    {
+      "no": 58,
+      "word": "crime",
+      "meaning": "범죄, 범행; 죄악"
+    },
+    {
+      "no": 59,
+      "word": "sacred",
+      "meaning": "성스러운, 신성한; 종교적인"
+    },
+    {
+      "no": 60,
+      "word": "consolidate",
+      "meaning": "강화하다, 굳히다; 통합하다, 합병하다"
+    }
+  ]
+}

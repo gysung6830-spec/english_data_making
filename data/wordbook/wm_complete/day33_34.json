@@ -1,0 +1,306 @@
+{
+  "title": "Day 33~34",
+  "source": "Word Master 고등 Complete",
+  "words": [
+    {
+      "no": 1,
+      "word": "nomad",
+      "meaning": "유목민; 방랑자"
+    },
+    {
+      "no": 2,
+      "word": "vanish",
+      "meaning": "사라지다, 자취를 감추다"
+    },
+    {
+      "no": 3,
+      "word": "trace back to",
+      "meaning": "기원을 ~로 거슬러 추적하다"
+    },
+    {
+      "no": 4,
+      "word": "constraint",
+      "meaning": "강제, 압박; 제한, 속박"
+    },
+    {
+      "no": 5,
+      "word": "crack",
+      "meaning": "금; 날카로운 소리; 금이 가다, 금이 가게 하다; 날카로운 소리를 내다"
+    },
+    {
+      "no": 6,
+      "word": "restriction",
+      "meaning": "제한; 제약, 규정"
+    },
+    {
+      "no": 7,
+      "word": "burrow",
+      "meaning": "굴, 은신처; 파다"
+    },
+    {
+      "no": 8,
+      "word": "banish",
+      "meaning": "추방하다, 유배를 보내다; 쫓아 버리다; 덜어 없애다"
+    },
+    {
+      "no": 9,
+      "word": "deed",
+      "meaning": "행위; 공적, 위업"
+    },
+    {
+      "no": 10,
+      "word": "stake",
+      "meaning": "말뚝, 화형대; 이해관계; 건 돈; 상금; 말뚝에 매다; 걸다"
+    },
+    {
+      "no": 11,
+      "word": "straightforward",
+      "meaning": "똑바른, 똑바로 향한; 정직한, 솔직한; 간단한, 쉬운"
+    },
+    {
+      "no": 12,
+      "word": "metabolic",
+      "meaning": "대사의"
+    },
+    {
+      "no": 13,
+      "word": "imprison",
+      "meaning": "투옥하다; 감금하다"
+    },
+    {
+      "no": 14,
+      "word": "spectator",
+      "meaning": "관중, 구경꾼; 방관자"
+    },
+    {
+      "no": 15,
+      "word": "specify",
+      "meaning": "명시하다, 명확히 말하다"
+    },
+    {
+      "no": 16,
+      "word": "primitive",
+      "meaning": "원시 의, 원시적인; 유치한, 소박한"
+    },
+    {
+      "no": 17,
+      "word": "nasty",
+      "meaning": "더러운, 불결한; 메스꺼운, 역겨운; 심술궂은, 악의가 있는"
+    },
+    {
+      "no": 18,
+      "word": "carbohydrate",
+      "meaning": "탄수화물"
+    },
+    {
+      "no": 19,
+      "word": "emergency",
+      "meaning": "비상 사태"
+    },
+    {
+      "no": 20,
+      "word": "agent",
+      "meaning": "대리인; 행위자, 주체; 첩자, 스파이; 요인, 동인"
+    },
+    {
+      "no": 21,
+      "word": "assault",
+      "meaning": "공격, 폭행; 공격하다, 폭행하다"
+    },
+    {
+      "no": 22,
+      "word": "emergence",
+      "meaning": "발생, 출현; 탈출"
+    },
+    {
+      "no": 23,
+      "word": "glow",
+      "meaning": "불빛; 빛나다, 빛을 내다; 홍조; 상기되다, 발개지다"
+    },
+    {
+      "no": 24,
+      "word": "devour",
+      "meaning": "게걸스레 먹다; 집어삼키다, 파괴하다"
+    },
+    {
+      "no": 25,
+      "word": "magnitude",
+      "meaning": "규모, 크기; 중요성; 위대함"
+    },
+    {
+      "no": 26,
+      "word": "diagnose",
+      "meaning": "진단하다; 원인을 분석하다"
+    },
+    {
+      "no": 27,
+      "word": "at odds with",
+      "meaning": "~와 불화하여; ~과 상충하여"
+    },
+    {
+      "no": 28,
+      "word": "detour",
+      "meaning": "우회; 우회로; 둘러 가다, 우회하다"
+    },
+    {
+      "no": 29,
+      "word": "break into",
+      "meaning": "~에 침입하다; ~하기 시작하다"
+    },
+    {
+      "no": 30,
+      "word": "evaluate",
+      "meaning": "평가하다"
+    },
+    {
+      "no": 31,
+      "word": "squeeze in",
+      "meaning": "~을 위한 짬을 내다; ~에 비집고 들어가다"
+    },
+    {
+      "no": 32,
+      "word": "rage",
+      "meaning": "격노, 분노; 격렬, 맹렬; 격노하다; 사납게 휘몰아치다"
+    },
+    {
+      "no": 33,
+      "word": "straighten out",
+      "meaning": "바로잡다"
+    },
+    {
+      "no": 34,
+      "word": "stand up to",
+      "meaning": "~에 맞서다"
+    },
+    {
+      "no": 35,
+      "word": "reap",
+      "meaning": "거두다, 수확하다"
+    },
+    {
+      "no": 36,
+      "word": "in a snap",
+      "meaning": "순식간에, 당장에"
+    },
+    {
+      "no": 37,
+      "word": "show up",
+      "meaning": "나타나다, 나타내 보이다"
+    },
+    {
+      "no": 38,
+      "word": "arbitrary",
+      "meaning": "임의의, 제멋대로인; 독단적인, 전제적인"
+    },
+    {
+      "no": 39,
+      "word": "spice",
+      "meaning": "양념, 향신료; 흥취, 묘미; 양념을치다"
+    },
+    {
+      "no": 40,
+      "word": "in an attempt to do",
+      "meaning": "~하려는 시도로, ~하려고 시도하면서"
+    },
+    {
+      "no": 41,
+      "word": "outweigh",
+      "meaning": "~보다 중요하다, 능가하다; ~보다 무겁다"
+    },
+    {
+      "no": 42,
+      "word": "copyright",
+      "meaning": "저작권; 저작권이 있는; 저작권으로 보호하다"
+    },
+    {
+      "no": 43,
+      "word": "grasp",
+      "meaning": "붙잡다, 움켜쥐다; 붙잡기; 파악하다, 이해하다; 파악, 이해"
+    },
+    {
+      "no": 44,
+      "word": "accommodate",
+      "meaning": "숙박시키다, 수용하다; 편의를도모하다; 적응하다"
+    },
+    {
+      "no": 45,
+      "word": "emphasis",
+      "meaning": "강조, 역설; 주안점"
+    },
+    {
+      "no": 46,
+      "word": "settle down",
+      "meaning": "정착하다; 진정되다"
+    },
+    {
+      "no": 47,
+      "word": "imposition",
+      "meaning": "부과, 과하기; 부과물; 세금; 부담"
+    },
+    {
+      "no": 48,
+      "word": "rest on",
+      "meaning": "~에 기초하다; ~에 달려 있다"
+    },
+    {
+      "no": 49,
+      "word": "import",
+      "meaning": "수입하다, 들여오다; 수입"
+    },
+    {
+      "no": 50,
+      "word": "propel",
+      "meaning": "나아가게 하다, 추진하다; 촉구하다, 몰아대다"
+    },
+    {
+      "no": 51,
+      "word": "constitution",
+      "meaning": "구성, 구조, 조직; 체질, 성질; 헌법; 규약"
+    },
+    {
+      "no": 52,
+      "word": "foul",
+      "meaning": "더러운, 불결한; 상스러운; 반칙의; 더럽히다; 부패하다; 반칙을범하다; 반칙, 부정행위"
+    },
+    {
+      "no": 53,
+      "word": "mass",
+      "meaning": "덩어리; 다수, 다량; 대부분; 무리, 집단; 대중; 질량; 대량의; 대중의; 대규모의"
+    },
+    {
+      "no": 54,
+      "word": "impart",
+      "meaning": "알리다, 전하다; 주다"
+    },
+    {
+      "no": 55,
+      "word": "compensate",
+      "meaning": "보상하다; 보충하다; 지불하다"
+    },
+    {
+      "no": 56,
+      "word": "beyond one’s reach",
+      "meaning": "~의 손이 닿지 않는 , ~의 힘이미치지 않는"
+    },
+    {
+      "no": 57,
+      "word": "certificate",
+      "meaning": "증명서; 자격증; 인증하다; 증명서를 주다"
+    },
+    {
+      "no": 58,
+      "word": "override",
+      "meaning": "~보다 우위에 서다, ~에 우선하다; 무시하다; 무효화하다"
+    },
+    {
+      "no": 59,
+      "word": "gasp",
+      "meaning": "헐떡거림; 숨 막힘; 헐떡거리다; 숨이 막히다"
+    },
+    {
+      "no": 60,
+      "word": "leap",
+      "meaning": "뛰다, 도약하다; 급격히 상승하다; 도약; 급증, 급등"
+    }
+  ]
+}

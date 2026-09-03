@@ -1,0 +1,306 @@
+{
+  "title": "Day 23~24",
+  "source": "Word Master 고등 Complete",
+  "words": [
+    {
+      "no": 1,
+      "word": "read between the lines",
+      "meaning": "행간을 읽다, 속뜻을 읽다"
+    },
+    {
+      "no": 2,
+      "word": "inherit",
+      "meaning": "상속받다; 물려받다"
+    },
+    {
+      "no": 3,
+      "word": "fetus",
+      "meaning": "태아"
+    },
+    {
+      "no": 4,
+      "word": "attend to",
+      "meaning": "~을 돌보다; ~에 주의를 기울이다"
+    },
+    {
+      "no": 5,
+      "word": "limb",
+      "meaning": "팔, 날개; 큰 가지"
+    },
+    {
+      "no": 6,
+      "word": "mechanical",
+      "meaning": "기계의; 기계로 작동되는; 기계학의"
+    },
+    {
+      "no": 7,
+      "word": "catastrophic",
+      "meaning": "대이변의; 파멸적인"
+    },
+    {
+      "no": 8,
+      "word": "deplete",
+      "meaning": "격감시키다; 고갈시키다"
+    },
+    {
+      "no": 9,
+      "word": "consensus",
+      "meaning": "일치, 합의"
+    },
+    {
+      "no": 10,
+      "word": "domesticate",
+      "meaning": "길들이다, 가축화하다; 재배하다"
+    },
+    {
+      "no": 11,
+      "word": "intake",
+      "meaning": "섭취, 흡입; 인원수"
+    },
+    {
+      "no": 12,
+      "word": "accordance",
+      "meaning": "일치; 부합; 수여, 인가"
+    },
+    {
+      "no": 13,
+      "word": "caterpillar",
+      "meaning": "애벌레, 모충"
+    },
+    {
+      "no": 14,
+      "word": "mysterious",
+      "meaning": "신비한; 불가사의한; 비밀의"
+    },
+    {
+      "no": 15,
+      "word": "blur",
+      "meaning": "흐림; 흐릿한 형체; 흐리게 하다, 흐려지다"
+    },
+    {
+      "no": 16,
+      "word": "look out for",
+      "meaning": "~을 조심하다, ~에 주의하다"
+    },
+    {
+      "no": 17,
+      "word": "integrate",
+      "meaning": "통합되다"
+    },
+    {
+      "no": 18,
+      "word": "equivalent",
+      "meaning": "같은; 상당하는; 같은 것; 대응물"
+    },
+    {
+      "no": 19,
+      "word": "equip",
+      "meaning": "갖추게 하다; 장비하다"
+    },
+    {
+      "no": 20,
+      "word": "overall",
+      "meaning": "전체의, 종합적인; 전체적으로, 종합적으로"
+    },
+    {
+      "no": 21,
+      "word": "statistic",
+      "meaning": "통계치, 통계량"
+    },
+    {
+      "no": 22,
+      "word": "altruist",
+      "meaning": "이타주의자"
+    },
+    {
+      "no": 23,
+      "word": "inevitability",
+      "meaning": "불가피함, 필연성"
+    },
+    {
+      "no": 24,
+      "word": "take the place of",
+      "meaning": "~을 대신하다"
+    },
+    {
+      "no": 25,
+      "word": "prompt",
+      "meaning": "즉석의, 즉각적인; 신속한, 기민한; 시간을 엄수하는; 자극하다, 촉진하다; 불어넣다"
+    },
+    {
+      "no": 26,
+      "word": "stack",
+      "meaning": "더미; 퇴적; 쌓다; 많음, 다량"
+    },
+    {
+      "no": 27,
+      "word": "be accompanied by",
+      "meaning": "~와 동반하다; ~을 수반하다"
+    },
+    {
+      "no": 28,
+      "word": "marble",
+      "meaning": "대리석; 구슬; 대리석의"
+    },
+    {
+      "no": 29,
+      "word": "drastic",
+      "meaning": "급격한; 과감한, 극단적인"
+    },
+    {
+      "no": 30,
+      "word": "make room for",
+      "meaning": "~을 위한 공간을 만들다; ~에게 자리를 양보하다"
+    },
+    {
+      "no": 31,
+      "word": "in retrospect",
+      "meaning": "돌이켜 생각해 보면"
+    },
+    {
+      "no": 32,
+      "word": "take ~ seriously",
+      "meaning": "~을 진지하게 생각하다"
+    },
+    {
+      "no": 33,
+      "word": "rip away",
+      "meaning": "~을 떼내다"
+    },
+    {
+      "no": 34,
+      "word": "at variance with",
+      "meaning": "~과 상충하는; ~와 사이가 안좋은"
+    },
+    {
+      "no": 35,
+      "word": "tame",
+      "meaning": "길들여진, 순한; 길들이다"
+    },
+    {
+      "no": 36,
+      "word": "devastating",
+      "meaning": "파괴적인, 황폐시키는"
+    },
+    {
+      "no": 37,
+      "word": "transmission",
+      "meaning": "전달; 전염; 송신; 방송"
+    },
+    {
+      "no": 38,
+      "word": "immigration",
+      "meaning": "이민, 이주; 이민자; 출입국 심사"
+    },
+    {
+      "no": 39,
+      "word": "attribute to",
+      "meaning": "~ 때문이라 여기다, ~ 덕분으로돌리다"
+    },
+    {
+      "no": 40,
+      "word": "odd",
+      "meaning": "이상한, 특이한; 가끔의; 홀수의, 한 짝의; 남은, 여분의"
+    },
+    {
+      "no": 41,
+      "word": "impoverish",
+      "meaning": "가난하게 하다; 떨어뜨리다, 저하시키다"
+    },
+    {
+      "no": 42,
+      "word": "obscure",
+      "meaning": "분명하지 않은, 모호한; 무명의; 흐릿한; 어둡게 하다; 흐릿하게하다; 모호하게 하다"
+    },
+    {
+      "no": 43,
+      "word": "souvenir",
+      "meaning": "기념품, 선물"
+    },
+    {
+      "no": 44,
+      "word": "marvel",
+      "meaning": "놀라운 일, 경이; 놀라다, 경탄하다"
+    },
+    {
+      "no": 45,
+      "word": "acoustic",
+      "meaning": "음향의; 청각의"
+    },
+    {
+      "no": 46,
+      "word": "harvest",
+      "meaning": "수확, 추수; 수확물; 수확하다; 채취하다"
+    },
+    {
+      "no": 47,
+      "word": "replete",
+      "meaning": "가득 찬, 충만한; 포식을 한"
+    },
+    {
+      "no": 48,
+      "word": "gradual",
+      "meaning": "점진적인, 서서히 일어나는"
+    },
+    {
+      "no": 49,
+      "word": "conscientious",
+      "meaning": "양심적인, 성실한"
+    },
+    {
+      "no": 50,
+      "word": "limp",
+      "meaning": "기운이 없는, 축 처진; 절뚝거리다; 느릿느릿 가다; 절뚝거림"
+    },
+    {
+      "no": 51,
+      "word": "improvise",
+      "meaning": "즉석에서 하다; 즉흥 연주를 하다"
+    },
+    {
+      "no": 52,
+      "word": "breathe",
+      "meaning": "숨을 쉬다, 호흡하다"
+    },
+    {
+      "no": 53,
+      "word": "from one’s point of view",
+      "meaning": "~의 관점에서 보면"
+    },
+    {
+      "no": 54,
+      "word": "reinforcement",
+      "meaning": "보강, 강화; 보강재"
+    },
+    {
+      "no": 55,
+      "word": "stock",
+      "meaning": "재고; 비축; 주, 증권; 가문, 혈통; 종족; 비축하다"
+    },
+    {
+      "no": 56,
+      "word": "crop",
+      "meaning": "작물; 수확량; 자르다; 수확하다; 재배하다"
+    },
+    {
+      "no": 57,
+      "word": "molecule",
+      "meaning": "분자"
+    },
+    {
+      "no": 58,
+      "word": "alley",
+      "meaning": "골목; 오솔길"
+    },
+    {
+      "no": 59,
+      "word": "trample",
+      "meaning": "짓밟다, 밟아 뭉개다; 짓밟음"
+    },
+    {
+      "no": 60,
+      "word": "indefinite",
+      "meaning": "한계가 없는, 무기한의; 분명하지 않은"
+    }
+  ]
+}

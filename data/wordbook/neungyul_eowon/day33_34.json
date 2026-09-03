@@ -1,0 +1,406 @@
+{
+  "title": "Day 33~34",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "agreeable",
+      "meaning": "기분 좋은; 동의하는, 받아들일 수 있는"
+    },
+    {
+      "no": 2,
+      "word": "alter",
+      "meaning": "달라지다, 변하다; 바꾸다, 변하게 하다"
+    },
+    {
+      "no": 3,
+      "word": "graceful",
+      "meaning": "우아한, 고상한"
+    },
+    {
+      "no": 4,
+      "word": "inflow",
+      "meaning": "유입"
+    },
+    {
+      "no": 5,
+      "word": "gratitude",
+      "meaning": "감사"
+    },
+    {
+      "no": 6,
+      "word": "descriptive",
+      "meaning": "묘사적인"
+    },
+    {
+      "no": 7,
+      "word": "contribute",
+      "meaning": "기부하다, 기증하다; ...에 기여하다, 공헌하다, 도움이 되다; 기고하다"
+    },
+    {
+      "no": 8,
+      "word": "instinct",
+      "meaning": "본능, 본성"
+    },
+    {
+      "no": 9,
+      "word": "eruption",
+      "meaning": "폭발, 분출; 폭발, 발생"
+    },
+    {
+      "no": 10,
+      "word": "guarantee",
+      "meaning": "보증, 보장; 보증서; 담보; 보장하다, 장담하다; ...을 확실하게 하다"
+    },
+    {
+      "no": 11,
+      "word": "alternately",
+      "meaning": "번갈아, 교대로"
+    },
+    {
+      "no": 12,
+      "word": "elegance",
+      "meaning": "우아함, 고상함, 기품"
+    },
+    {
+      "no": 13,
+      "word": "prescribe",
+      "meaning": "처방하다; 규정하다, 정하다"
+    },
+    {
+      "no": 14,
+      "word": "guardian",
+      "meaning": "보호자, 후견인"
+    },
+    {
+      "no": 15,
+      "word": "distinction",
+      "meaning": "구별, 차이; 탁월, 우수, 특징"
+    },
+    {
+      "no": 16,
+      "word": "route",
+      "meaning": "길, 경로; 노선, 항로; 방법, 수단"
+    },
+    {
+      "no": 17,
+      "word": "contribution",
+      "meaning": "기부, 기증; 공헌, 기여; 기고문"
+    },
+    {
+      "no": 18,
+      "word": "exclaim",
+      "meaning": "외치다, 큰 소리로 말하다"
+    },
+    {
+      "no": 19,
+      "word": "elegant",
+      "meaning": "우아한, 고상한, 세련된"
+    },
+    {
+      "no": 20,
+      "word": "erupt",
+      "meaning": "갑자기 발생하다; 분출하다"
+    },
+    {
+      "no": 21,
+      "word": "stimulate",
+      "meaning": "자극하다, 촉진하다; 격려하다, 고무하다"
+    },
+    {
+      "no": 22,
+      "word": "distinguished",
+      "meaning": "성공을 이루어낸, 존경받는, 저명한; 기품 있는, 품위 있는"
+    },
+    {
+      "no": 23,
+      "word": "stimulation",
+      "meaning": "자극, 흥분"
+    },
+    {
+      "no": 24,
+      "word": "distinct",
+      "meaning": "별개의, 다른; 독특한; 확실한, 명료한"
+    },
+    {
+      "no": 25,
+      "word": "exclamation",
+      "meaning": "외침, 절규"
+    },
+    {
+      "no": 26,
+      "word": "cooperate",
+      "meaning": "협력하다, 협동하다, 협조하다"
+    },
+    {
+      "no": 27,
+      "word": "regardless",
+      "meaning": "무관심한, 개의치 않는"
+    },
+    {
+      "no": 28,
+      "word": "collective",
+      "meaning": "집단의, 공동의"
+    },
+    {
+      "no": 29,
+      "word": "elect",
+      "meaning": "선거하다, 선출하다"
+    },
+    {
+      "no": 30,
+      "word": "interrupt",
+      "meaning": "가로막다, 방해하다; 중단시키다"
+    },
+    {
+      "no": 31,
+      "word": "prescription",
+      "meaning": "처방; 규정, 법규"
+    },
+    {
+      "no": 32,
+      "word": "attribution",
+      "meaning": "귀속되는 것; 속성, 특성"
+    },
+    {
+      "no": 33,
+      "word": "congratulation",
+      "meaning": "축하, 경축"
+    },
+    {
+      "no": 34,
+      "word": "alienate",
+      "meaning": "멀어지게 하다, 소외시키다"
+    },
+    {
+      "no": 35,
+      "word": "agreement",
+      "meaning": "협정, 계약; 동의, 합의"
+    },
+    {
+      "no": 36,
+      "word": "intelligence",
+      "meaning": "지능, 지성, 이해력; 정보, 첩보 기관"
+    },
+    {
+      "no": 37,
+      "word": "flight",
+      "meaning": "비행, 여행; 항공편"
+    },
+    {
+      "no": 38,
+      "word": "garment",
+      "meaning": "의복, 옷"
+    },
+    {
+      "no": 39,
+      "word": "float",
+      "meaning": "물 위에 뜨다; 떠서 움직이다, 떠돌다"
+    },
+    {
+      "no": 40,
+      "word": "corrupt",
+      "meaning": "부패한, 부정한; 부패시키다, 부정을 저지르게 하다"
+    },
+    {
+      "no": 41,
+      "word": "alternative",
+      "meaning": "대안의, 대체할 수 있는; 대안, 대체"
+    },
+    {
+      "no": 42,
+      "word": "disruption",
+      "meaning": "붕괴, 파열, 혼란"
+    },
+    {
+      "no": 43,
+      "word": "alteration",
+      "meaning": "변화"
+    },
+    {
+      "no": 44,
+      "word": "collection",
+      "meaning": "수집; 징수; 모금"
+    },
+    {
+      "no": 45,
+      "word": "disrupt",
+      "meaning": "방해하다, 지장을 주다; 분열시키다"
+    },
+    {
+      "no": 46,
+      "word": "operation",
+      "meaning": "수술; 사업, 영업; 작업, 조작"
+    },
+    {
+      "no": 47,
+      "word": "bankrupt",
+      "meaning": "파산한, 지불 불능의; 파산시키다; 파산자"
+    },
+    {
+      "no": 48,
+      "word": "afloat",
+      "meaning": "물에 뜬"
+    },
+    {
+      "no": 49,
+      "word": "intellect",
+      "meaning": "지성, 지력, 사고력; 지식인, 식자"
+    },
+    {
+      "no": 50,
+      "word": "grateful",
+      "meaning": "감사하는, 고마워하는"
+    },
+    {
+      "no": 51,
+      "word": "describe",
+      "meaning": "묘사하다, 기술하다"
+    },
+    {
+      "no": 52,
+      "word": "cooperation",
+      "meaning": "협력, 협동, 협조"
+    },
+    {
+      "no": 53,
+      "word": "interruption",
+      "meaning": "방해; 중단"
+    },
+    {
+      "no": 54,
+      "word": "gratification",
+      "meaning": "만족시키기; 만족감, 기쁨"
+    },
+    {
+      "no": 55,
+      "word": "alien",
+      "meaning": "외국의; 이질적인, 다른; 외계의; 외국인; 외계인, 우주인"
+    },
+    {
+      "no": 56,
+      "word": "election",
+      "meaning": "선거"
+    },
+    {
+      "no": 57,
+      "word": "instinctively",
+      "meaning": "본능적으로"
+    },
+    {
+      "no": 58,
+      "word": "proclamation",
+      "meaning": "선언"
+    },
+    {
+      "no": 59,
+      "word": "distribution",
+      "meaning": "분배, 배급; 분포; 유통"
+    },
+    {
+      "no": 60,
+      "word": "neglect",
+      "meaning": "소홀히 하다, 게을리 하다; 무시하다, 간과하다; 태만, 소홀, 방치; 무시, 경시"
+    },
+    {
+      "no": 61,
+      "word": "agree",
+      "meaning": "동의하다, 의견이 일치하다; 찬성하다, 응하다; 일치하다"
+    },
+    {
+      "no": 62,
+      "word": "intellectual",
+      "meaning": "지적인, 지성의; 지식인"
+    },
+    {
+      "no": 63,
+      "word": "instinctive",
+      "meaning": "본능적인"
+    },
+    {
+      "no": 64,
+      "word": "extinguish",
+      "meaning": "끄다; 끝내다, 소멸시키다"
+    },
+    {
+      "no": 65,
+      "word": "disgrace",
+      "meaning": "불명예, 창피"
+    },
+    {
+      "no": 66,
+      "word": "council",
+      "meaning": "협의회, 심의회; 지방 의회"
+    },
+    {
+      "no": 67,
+      "word": "flee",
+      "meaning": "재빨리 도망치다, 달아나다"
+    },
+    {
+      "no": 68,
+      "word": "prescriptive",
+      "meaning": "규정하는, 명령하는; 규범적인"
+    },
+    {
+      "no": 69,
+      "word": "operate",
+      "meaning": "작동하다; 작동시키다; 영업하다; 수술하다"
+    },
+    {
+      "no": 70,
+      "word": "overflow",
+      "meaning": "넘치다; 넘침; 초과"
+    },
+    {
+      "no": 71,
+      "word": "alternate",
+      "meaning": "는; 대안의, 대체할 수 있는; 번갈아 하다; 번갈아 나오다; ... 사"
+    },
+    {
+      "no": 72,
+      "word": "proclaim",
+      "meaning": "선언하다, 공표하다"
+    },
+    {
+      "no": 73,
+      "word": "recollection",
+      "meaning": "추억, 기억"
+    },
+    {
+      "no": 74,
+      "word": "cooperative",
+      "meaning": "협력하는, 협동의; 협동 조합의; 협동 조합"
+    },
+    {
+      "no": 75,
+      "word": "description",
+      "meaning": "묘사, 기술, 설명"
+    },
+    {
+      "no": 76,
+      "word": "claim",
+      "meaning": "주장; 요구"
+    },
+    {
+      "no": 77,
+      "word": "alternatively",
+      "meaning": "그 대신에"
+    },
+    {
+      "no": 78,
+      "word": "extinctive",
+      "meaning": "소멸성의"
+    },
+    {
+      "no": 79,
+      "word": "gracious",
+      "meaning": "친절한, 정중한; 품위 있는"
+    },
+    {
+      "no": 80,
+      "word": "subscribe",
+      "meaning": "구독하다; 서명하다, 서약하다"
+    }
+  ]
+}

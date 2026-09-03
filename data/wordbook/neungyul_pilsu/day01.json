@@ -1,0 +1,206 @@
+{
+  "title": "Day 1",
+  "source": "능률보카 수능필수",
+  "words": [
+    {
+      "no": 1,
+      "word": "merely",
+      "meaning": "단지, 그저"
+    },
+    {
+      "no": 2,
+      "word": "complicated",
+      "meaning": "복잡한"
+    },
+    {
+      "no": 3,
+      "word": "essential",
+      "meaning": "매우 중요한, 필수의; 본질적인; 필수[기본]적인 것"
+    },
+    {
+      "no": 4,
+      "word": "nevertheless",
+      "meaning": "그럼에도 불구하고"
+    },
+    {
+      "no": 5,
+      "word": "handle",
+      "meaning": "처리하다; 다루다; 손잡이"
+    },
+    {
+      "no": 6,
+      "word": "import",
+      "meaning": "수입하다; 수입(품); 중요성"
+    },
+    {
+      "no": 7,
+      "word": "illusion",
+      "meaning": "환상, 환각; 착각, 오해"
+    },
+    {
+      "no": 8,
+      "word": "include",
+      "meaning": "포함하다, 포함시키다"
+    },
+    {
+      "no": 9,
+      "word": "approach",
+      "meaning": "접근하다, 다가가다; 접근(법)"
+    },
+    {
+      "no": 10,
+      "word": "derive",
+      "meaning": "얻다, 끌어내다; 유래하다, 비롯되다"
+    },
+    {
+      "no": 11,
+      "word": "appoint",
+      "meaning": "임명[지명]하다; (시간·장소 등을) 정하다"
+    },
+    {
+      "no": 12,
+      "word": "attempt",
+      "meaning": "시도하다; 시도, 노력"
+    },
+    {
+      "no": 13,
+      "word": "comfort",
+      "meaning": "위로하다; 편하게 하다; 편안함; 위로, 위안"
+    },
+    {
+      "no": 14,
+      "word": "install",
+      "meaning": "설치하다, 설비하다"
+    },
+    {
+      "no": 15,
+      "word": "locate",
+      "meaning": "(위치를) 알아내다; (특정 위치에) 두다, 설치하다"
+    },
+    {
+      "no": 16,
+      "word": "adjust",
+      "meaning": "조정하다, 맞추다; 적응하다"
+    },
+    {
+      "no": 17,
+      "word": "promote",
+      "meaning": "증진[촉진]하다; 홍보하다; 승진시키다"
+    },
+    {
+      "no": 18,
+      "word": "breed",
+      "meaning": "새끼를 낳다, 번식하다; 사육[재배]하다; 품종"
+    },
+    {
+      "no": 19,
+      "word": "anticipate",
+      "meaning": "예상하다, 예측하다; 기대하다"
+    },
+    {
+      "no": 20,
+      "word": "exclude",
+      "meaning": "제외하다; 거부[차단]하다"
+    },
+    {
+      "no": 21,
+      "word": "various",
+      "meaning": "여러 가지의, 다양한"
+    },
+    {
+      "no": 22,
+      "word": "predict",
+      "meaning": "예언하다, 예측하다"
+    },
+    {
+      "no": 23,
+      "word": "shelter",
+      "meaning": "피난(처), 보호소; 보호하다; 피하다"
+    },
+    {
+      "no": 24,
+      "word": "barrier",
+      "meaning": "장애(물), 장벽"
+    },
+    {
+      "no": 25,
+      "word": "register",
+      "meaning": "등록하다; 기록하다, 나타내다; 등록부"
+    },
+    {
+      "no": 26,
+      "word": "ingredient",
+      "meaning": "(요리 등의) 재료, 성분; 구성 요소"
+    },
+    {
+      "no": 27,
+      "word": "severe",
+      "meaning": "심한; 혹독한; 엄한"
+    },
+    {
+      "no": 28,
+      "word": "available",
+      "meaning": "이용할[구할] 수 있는; 시간이 있는"
+    },
+    {
+      "no": 29,
+      "word": "originate",
+      "meaning": "비롯되다, 시작되다"
+    },
+    {
+      "no": 30,
+      "word": "variable",
+      "meaning": "변하기 쉬운, 변덕스러운; 변수"
+    },
+    {
+      "no": 31,
+      "word": "individual",
+      "meaning": "개개인의; 개성 있는; 개인"
+    },
+    {
+      "no": 32,
+      "word": "particular",
+      "meaning": "특정한; 특별한; 까다로운"
+    },
+    {
+      "no": 33,
+      "word": "reliable",
+      "meaning": "믿을 수 있는, 확실한"
+    },
+    {
+      "no": 34,
+      "word": "standard",
+      "meaning": "기준, 표준; 일반적인, 표준의"
+    },
+    {
+      "no": 35,
+      "word": "accuse",
+      "meaning": "고발[기소]하다; 비난하다"
+    },
+    {
+      "no": 36,
+      "word": "caution",
+      "meaning": "조심, 신중; 경고; 경고하다, 주의를 주다"
+    },
+    {
+      "no": 37,
+      "word": "bias",
+      "meaning": "선입견, 편견; 성향; 편견을 갖게 하다"
+    },
+    {
+      "no": 38,
+      "word": "organization",
+      "meaning": "조직, 기구, 단체"
+    },
+    {
+      "no": 39,
+      "word": "alternative",
+      "meaning": "대안; 대체 가능한, 대안이 되는"
+    },
+    {
+      "no": 40,
+      "word": "norm",
+      "meaning": "표준, 일반적인 것; 규범"
+    }
+  ]
+}

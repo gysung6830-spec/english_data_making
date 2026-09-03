@@ -1,0 +1,406 @@
+{
+  "title": "Day 21~22",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "injection",
+      "meaning": "주입, 주사"
+    },
+    {
+      "no": 2,
+      "word": "biographer",
+      "meaning": "전기 작가"
+    },
+    {
+      "no": 3,
+      "word": "diplomacy",
+      "meaning": "외교; 외교술, 외교적 수완"
+    },
+    {
+      "no": 4,
+      "word": "impress",
+      "meaning": "깊은 인상을 주다, 감동시키다; 찍다"
+    },
+    {
+      "no": 5,
+      "word": "district",
+      "meaning": "지구, 구역; 지역"
+    },
+    {
+      "no": 6,
+      "word": "unemployed",
+      "meaning": "실직한, 일이 없는"
+    },
+    {
+      "no": 7,
+      "word": "apply",
+      "meaning": "지원하다, 신청하다; 적용하다, 응용하다; 적용되다, 해당되다; 바르다"
+    },
+    {
+      "no": 8,
+      "word": "prestige",
+      "meaning": "명성, 위신; 명성이 있는, 명문의, 일류의"
+    },
+    {
+      "no": 9,
+      "word": "simplify",
+      "meaning": "단순화하다, 간단하게 하다"
+    },
+    {
+      "no": 10,
+      "word": "imply",
+      "meaning": "내포하다; 암시하다, 넌지시 비추다"
+    },
+    {
+      "no": 11,
+      "word": "complicated",
+      "meaning": "복잡한, 뒤얽힌"
+    },
+    {
+      "no": 12,
+      "word": "restrict",
+      "meaning": "제한하다, 한정하다"
+    },
+    {
+      "no": 13,
+      "word": "prestigious",
+      "meaning": "명성이 있는, 명문의"
+    },
+    {
+      "no": 14,
+      "word": "employee",
+      "meaning": "피고용인, 종업원"
+    },
+    {
+      "no": 15,
+      "word": "fortress",
+      "meaning": "요새, 요새 도시"
+    },
+    {
+      "no": 16,
+      "word": "subject",
+      "meaning": "주제; 학과, 과목; 주어; 피실험자, 대상; 국민; 영향받기 쉬운; 지배를 받는; 받아야 하는; 지배하다, 복종시키다"
+    },
+    {
+      "no": 17,
+      "word": "include",
+      "meaning": "포함하다, 함유하다; 넣다, 포함시키다"
+    },
+    {
+      "no": 18,
+      "word": "strait",
+      "meaning": "해협; 곤경, 궁핍"
+    },
+    {
+      "no": 19,
+      "word": "constraint",
+      "meaning": "제한, 제약"
+    },
+    {
+      "no": 20,
+      "word": "exploit",
+      "meaning": "이용하다, 착취하다; 개발하다, 활용하다; 위업, 공적"
+    },
+    {
+      "no": 21,
+      "word": "profound",
+      "meaning": "강한; 심오한; 깊은"
+    },
+    {
+      "no": 22,
+      "word": "restraint",
+      "meaning": "억제, 규제, 자제"
+    },
+    {
+      "no": 23,
+      "word": "employ",
+      "meaning": "고용하다; 사용하다"
+    },
+    {
+      "no": 24,
+      "word": "simplicity",
+      "meaning": "단순, 간단"
+    },
+    {
+      "no": 25,
+      "word": "fundamentally",
+      "meaning": "근본적으로, 기본적으로; 필수적으로"
+    },
+    {
+      "no": 26,
+      "word": "implication",
+      "meaning": "영향; 함축, 암시"
+    },
+    {
+      "no": 27,
+      "word": "fund",
+      "meaning": "기금, 자금; 자금을 제공하다"
+    },
+    {
+      "no": 28,
+      "word": "inject",
+      "meaning": "주입하다, 주사하다"
+    },
+    {
+      "no": 29,
+      "word": "comfortable",
+      "meaning": "편안한, 안락한"
+    },
+    {
+      "no": 30,
+      "word": "simplification",
+      "meaning": "단순화, 간소화"
+    },
+    {
+      "no": 31,
+      "word": "exclusion",
+      "meaning": "제외, 배제, 배척"
+    },
+    {
+      "no": 32,
+      "word": "rationality",
+      "meaning": "합리성"
+    },
+    {
+      "no": 33,
+      "word": "strain",
+      "meaning": "긴장, 피로; 부담, 중압; 노력, 분투; 노력하다, 애쓰다; 혹사시키다"
+    },
+    {
+      "no": 34,
+      "word": "restrain",
+      "meaning": "제지하다, 못하게 하다; 억누르다, 억제하다"
+    },
+    {
+      "no": 35,
+      "word": "oppress",
+      "meaning": "억압하다, 탄압하다, 박해하다"
+    },
+    {
+      "no": 36,
+      "word": "fundamental",
+      "meaning": "근본적인, 기본적인; 중요한, 필수적인"
+    },
+    {
+      "no": 37,
+      "word": "perplex",
+      "meaning": "당황하게 하다"
+    },
+    {
+      "no": 38,
+      "word": "expressive",
+      "meaning": "표현이 풍부한, 표현하는"
+    },
+    {
+      "no": 39,
+      "word": "project",
+      "meaning": "프로젝트, 계획; 계획하다; 예상하다; 투영하다, 비추다; 돌출되다"
+    },
+    {
+      "no": 40,
+      "word": "applicant",
+      "meaning": "지원자, 신청자, 응모자"
+    },
+    {
+      "no": 41,
+      "word": "conclusion",
+      "meaning": "결론; 결말, 종결; 체결"
+    },
+    {
+      "no": 42,
+      "word": "implicit",
+      "meaning": "암시된, 내포된"
+    },
+    {
+      "no": 43,
+      "word": "diplomat",
+      "meaning": "외교관"
+    },
+    {
+      "no": 44,
+      "word": "projection",
+      "meaning": "예상, 추정; 투영; 영상; 돌기, 돌출부"
+    },
+    {
+      "no": 45,
+      "word": "disclose",
+      "meaning": "들추어내다, 폭로하다; 드러내다"
+    },
+    {
+      "no": 46,
+      "word": "rate",
+      "meaning": "비율; 속도; 요금, 가격; 등급; 평가하다; 평가되다; 간주하다; 간주되다"
+    },
+    {
+      "no": 47,
+      "word": "reason",
+      "meaning": "이유; 이성, 판단력; 추리하다, 추론하다"
+    },
+    {
+      "no": 48,
+      "word": "object",
+      "meaning": "물체, 사물; 목적, 목표; 대상; 목적어; 반대하다, 반박하다"
+    },
+    {
+      "no": 49,
+      "word": "rejection",
+      "meaning": "거절, 거부"
+    },
+    {
+      "no": 50,
+      "word": "reinforcement",
+      "meaning": "강화, 증강, 보강"
+    },
+    {
+      "no": 51,
+      "word": "strict",
+      "meaning": "엄격한, 엄한; 정확한, 엄밀한"
+    },
+    {
+      "no": 52,
+      "word": "objection",
+      "meaning": "반대, 이의, 거부"
+    },
+    {
+      "no": 53,
+      "word": "complexity",
+      "meaning": "복잡성, 복잡함"
+    },
+    {
+      "no": 54,
+      "word": "ratio",
+      "meaning": "비율, 비"
+    },
+    {
+      "no": 55,
+      "word": "exclusively",
+      "meaning": "독점적으로, 오로지"
+    },
+    {
+      "no": 56,
+      "word": "reinforce",
+      "meaning": "강화하다, 증강하다"
+    },
+    {
+      "no": 57,
+      "word": "inclusion",
+      "meaning": "포함, 함유"
+    },
+    {
+      "no": 58,
+      "word": "closet",
+      "meaning": "벽장"
+    },
+    {
+      "no": 59,
+      "word": "impressive",
+      "meaning": "인상적인, 감명을 주는"
+    },
+    {
+      "no": 60,
+      "word": "impressed",
+      "meaning": "인상 깊게 생각하는, 감동을 받은"
+    },
+    {
+      "no": 61,
+      "word": "exclusive",
+      "meaning": "독점적인; 배타적인; 고급의, 고가의; 독점, 특종"
+    },
+    {
+      "no": 62,
+      "word": "oppression",
+      "meaning": "억압, 억제"
+    },
+    {
+      "no": 63,
+      "word": "fort",
+      "meaning": "요새, 성채, 보루"
+    },
+    {
+      "no": 64,
+      "word": "exclude",
+      "meaning": "제외하다, 배제하다, 배척하다; 막다; 추방하다, 쫓아내다"
+    },
+    {
+      "no": 65,
+      "word": "biology",
+      "meaning": "생물학"
+    },
+    {
+      "no": 66,
+      "word": "founder",
+      "meaning": "설립자, 창립자"
+    },
+    {
+      "no": 67,
+      "word": "conclude",
+      "meaning": "결론을 내리다; 끝나다; 끝내다"
+    },
+    {
+      "no": 68,
+      "word": "restriction",
+      "meaning": "제한, 한정"
+    },
+    {
+      "no": 69,
+      "word": "inclusive",
+      "meaning": "포함된; 포괄적인, 폭넓은"
+    },
+    {
+      "no": 70,
+      "word": "effort",
+      "meaning": "노력, 수고"
+    },
+    {
+      "no": 71,
+      "word": "complicate",
+      "meaning": "복잡하게 하다"
+    },
+    {
+      "no": 72,
+      "word": "reject",
+      "meaning": "거절하다; 불합격시키다; 불합격품, 거부된 것"
+    },
+    {
+      "no": 73,
+      "word": "reasonable",
+      "meaning": "합리적인, 이성적인; 적당한, 알맞은"
+    },
+    {
+      "no": 74,
+      "word": "complex",
+      "meaning": "복잡한; 복합의, 합성의; 건물단지, 복합건물; 복합체, 합성물; 콤플렉스, 강박관념"
+    },
+    {
+      "no": 75,
+      "word": "force",
+      "meaning": "힘; 폭력; 영향력; 병력, 군대; 억지로 ...하게 하다, 강요하다"
+    },
+    {
+      "no": 76,
+      "word": "objective",
+      "meaning": "목적, 목표; 객관적인"
+    },
+    {
+      "no": 77,
+      "word": "disclosure",
+      "meaning": "폭로, 탄로; 폭로된 비밀"
+    },
+    {
+      "no": 78,
+      "word": "constrain",
+      "meaning": "...하게 만들다, 강요하다; 억누르다, 억제하다"
+    },
+    {
+      "no": 79,
+      "word": "unemployment",
+      "meaning": "실업, 실직"
+    },
+    {
+      "no": 80,
+      "word": "fortify",
+      "meaning": "요새화하다; 강화하다; 기운을북돋우다"
+    }
+  ]
+}

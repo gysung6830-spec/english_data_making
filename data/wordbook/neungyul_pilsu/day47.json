@@ -1,0 +1,206 @@
+{
+  "title": "Day 47",
+  "source": "능률보카 수능필수",
+  "words": [
+    {
+      "no": 1,
+      "word": "cannon",
+      "meaning": "대포"
+    },
+    {
+      "no": 2,
+      "word": "recess",
+      "meaning": "휴회, 휴정; 쉬는 시간; 휴회하다"
+    },
+    {
+      "no": 3,
+      "word": "salute",
+      "meaning": "경례하다; 경의를 표하다; 경례"
+    },
+    {
+      "no": 4,
+      "word": "attorney",
+      "meaning": "변호사"
+    },
+    {
+      "no": 5,
+      "word": "enact",
+      "meaning": "(법을) 제정하다; 상연하다, 연기하다"
+    },
+    {
+      "no": 6,
+      "word": "revenge",
+      "meaning": "복수, 보복"
+    },
+    {
+      "no": 7,
+      "word": "jury",
+      "meaning": "배심원단; 심사 위원단"
+    },
+    {
+      "no": 8,
+      "word": "devastate",
+      "meaning": "철저하게 파괴하다; 엄청난 충격을 주다"
+    },
+    {
+      "no": 9,
+      "word": "shield",
+      "meaning": "방패; 보호막; 보호하다"
+    },
+    {
+      "no": 10,
+      "word": "innocent",
+      "meaning": "무죄인, 결백한; 순진한"
+    },
+    {
+      "no": 11,
+      "word": "destroy",
+      "meaning": "파괴하다; (계획·희망 등을) 망치다"
+    },
+    {
+      "no": 12,
+      "word": "lawsuit",
+      "meaning": "소송, 고소"
+    },
+    {
+      "no": 13,
+      "word": "triumph",
+      "meaning": "승리, 대성공; 승리감; 승리하다"
+    },
+    {
+      "no": 14,
+      "word": "guilty",
+      "meaning": "죄책감이 드는; 유죄의"
+    },
+    {
+      "no": 15,
+      "word": "subdue",
+      "meaning": "정복하다, 진압하다; (감정을) 억누르다"
+    },
+    {
+      "no": 16,
+      "word": "rebellion",
+      "meaning": "반란; 저항, 반항"
+    },
+    {
+      "no": 17,
+      "word": "prosecute",
+      "meaning": "기소하다, 공소를 제기하다"
+    },
+    {
+      "no": 18,
+      "word": "code",
+      "meaning": "법전; 규범; 암호, 부호; 암호[부호]화하다"
+    },
+    {
+      "no": 19,
+      "word": "verify",
+      "meaning": "입증[검증]하다, 확인하다"
+    },
+    {
+      "no": 20,
+      "word": "martial",
+      "meaning": "군대의, 전쟁의"
+    },
+    {
+      "no": 21,
+      "word": "comply",
+      "meaning": "(법·명령 등에) 따르다, 준수하다"
+    },
+    {
+      "no": 22,
+      "word": "slaughter",
+      "meaning": "(가축의) 도살; 대학살; 도살하다; 대학살하다"
+    },
+    {
+      "no": 23,
+      "word": "theft",
+      "meaning": "도둑질, 절도(죄)"
+    },
+    {
+      "no": 24,
+      "word": "criminal",
+      "meaning": "범인, 범죄자; 범죄의; 형사상의"
+    },
+    {
+      "no": 25,
+      "word": "infringe",
+      "meaning": "(법률 등을) 위반하다, (권리를) 침해하다"
+    },
+    {
+      "no": 26,
+      "word": "sue",
+      "meaning": "고소하다, 소송을 제기하다"
+    },
+    {
+      "no": 27,
+      "word": "bombard",
+      "meaning": "포격[폭격]하다; (질문·비난 등을) 퍼붓다"
+    },
+    {
+      "no": 28,
+      "word": "troop",
+      "meaning": "군대, 병력; 무리, 떼; 무리를 지어 가다"
+    },
+    {
+      "no": 29,
+      "word": "copyright",
+      "meaning": "저작권; 저작권 보호를 받는; 저작권을 얻다"
+    },
+    {
+      "no": 30,
+      "word": "summon",
+      "meaning": "(법원으로) 소환하다, 호출하다; 소집하다"
+    },
+    {
+      "no": 31,
+      "word": "legislate",
+      "meaning": "법률을 제정하다"
+    },
+    {
+      "no": 32,
+      "word": "spear",
+      "meaning": "창; (창 등으로) 찌르다"
+    },
+    {
+      "no": 33,
+      "word": "sin",
+      "meaning": "(종교·도덕상의) 죄, 죄악; 죄를 짓다"
+    },
+    {
+      "no": 34,
+      "word": "foe",
+      "meaning": "적, 원수"
+    },
+    {
+      "no": 35,
+      "word": "jail",
+      "meaning": "교도소, 감옥; 투옥[수감]하다"
+    },
+    {
+      "no": 36,
+      "word": "battlefield",
+      "meaning": "전쟁터, 싸움터"
+    },
+    {
+      "no": 37,
+      "word": "imprison",
+      "meaning": "투옥하다, 감금하다"
+    },
+    {
+      "no": 38,
+      "word": "legalize",
+      "meaning": "합법화하다"
+    },
+    {
+      "no": 39,
+      "word": "assault",
+      "meaning": "공격, 습격; 폭행(죄); 공격[습격]하다; 폭행하다"
+    },
+    {
+      "no": 40,
+      "word": "tactics",
+      "meaning": "전술(학), 병법; 술책, 책략"
+    }
+  ]
+}

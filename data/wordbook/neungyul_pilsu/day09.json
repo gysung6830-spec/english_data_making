@@ -1,0 +1,206 @@
+{
+  "title": "Day 9",
+  "source": "능률보카 수능필수",
+  "words": [
+    {
+      "no": 1,
+      "word": "domain",
+      "meaning": "영역, 분야; 소유지"
+    },
+    {
+      "no": 2,
+      "word": "commence",
+      "meaning": "시작되다[하다]"
+    },
+    {
+      "no": 3,
+      "word": "swear",
+      "meaning": "맹세하다; 욕을 하다"
+    },
+    {
+      "no": 4,
+      "word": "worthwhile",
+      "meaning": "(~할) 가치가 있는"
+    },
+    {
+      "no": 5,
+      "word": "utilize",
+      "meaning": "이용하다, 활용하다"
+    },
+    {
+      "no": 6,
+      "word": "coordinate",
+      "meaning": "조정하다, 조직화하다"
+    },
+    {
+      "no": 7,
+      "word": "compel",
+      "meaning": "강요하다, 억지로 ~하게 하다"
+    },
+    {
+      "no": 8,
+      "word": "disguise",
+      "meaning": "변장[위장]하다; 숨기다; 변장, 위장"
+    },
+    {
+      "no": 9,
+      "word": "disclose",
+      "meaning": "드러내다, 폭로하다"
+    },
+    {
+      "no": 10,
+      "word": "perspective",
+      "meaning": "견해, 관점; 원근법"
+    },
+    {
+      "no": 11,
+      "word": "gaze",
+      "meaning": "응시하다; 응시"
+    },
+    {
+      "no": 12,
+      "word": "rehearse",
+      "meaning": "예행연습[리허설]을 하다"
+    },
+    {
+      "no": 13,
+      "word": "soar",
+      "meaning": "급등하다; 날아오르다"
+    },
+    {
+      "no": 14,
+      "word": "sacrifice",
+      "meaning": "희생하다; 제물로 바치다; 희생"
+    },
+    {
+      "no": 15,
+      "word": "mature",
+      "meaning": "성숙한, 다 자란; 잘 익은; 다 자라다, 성숙해지다"
+    },
+    {
+      "no": 16,
+      "word": "thrive",
+      "meaning": "번성하다, 번영하다"
+    },
+    {
+      "no": 17,
+      "word": "passion",
+      "meaning": "열정, 정열"
+    },
+    {
+      "no": 18,
+      "word": "quote",
+      "meaning": "인용하다; 인용구[문]"
+    },
+    {
+      "no": 19,
+      "word": "brief",
+      "meaning": "짧은, 간결한; 간단히 알리다; 간단한 보고"
+    },
+    {
+      "no": 20,
+      "word": "gene",
+      "meaning": "유전자"
+    },
+    {
+      "no": 21,
+      "word": "negotiate",
+      "meaning": "협상하다, 교섭하다"
+    },
+    {
+      "no": 22,
+      "word": "comprehensive",
+      "meaning": "포괄적인, 종합적인"
+    },
+    {
+      "no": 23,
+      "word": "release",
+      "meaning": "놓아 주다, 석방하다; 발표[공개]하다; (감정을) 발산하다; 석방; 발표, 공개, 출시"
+    },
+    {
+      "no": 24,
+      "word": "comprehensible",
+      "meaning": "이해할 수 있는"
+    },
+    {
+      "no": 25,
+      "word": "fellow",
+      "meaning": "동료의, 친구의; 동료, 친구; (대학의) 특별 연구원"
+    },
+    {
+      "no": 26,
+      "word": "apparent",
+      "meaning": "명백한, 분명한; 겉보기의"
+    },
+    {
+      "no": 27,
+      "word": "constraint",
+      "meaning": "제약; 제한, 통제"
+    },
+    {
+      "no": 28,
+      "word": "engage",
+      "meaning": "참여하다, 관여하다; 고용하다; (관심을) 끌다; 약혼시키다"
+    },
+    {
+      "no": 29,
+      "word": "impair",
+      "meaning": "손상[악화]시키다"
+    },
+    {
+      "no": 30,
+      "word": "secure",
+      "meaning": "안전한, 확실한; 안전하게 하다, 지키다; 확보하다"
+    },
+    {
+      "no": 31,
+      "word": "nurture",
+      "meaning": "양육하다; 양성하다; 양육, 육성"
+    },
+    {
+      "no": 32,
+      "word": "discard",
+      "meaning": "버리다, 폐기하다"
+    },
+    {
+      "no": 33,
+      "word": "grasp",
+      "meaning": "붙잡다; 파악[이해]하다; 붙잡기; 이해(력)"
+    },
+    {
+      "no": 34,
+      "word": "ordinary",
+      "meaning": "보통의, 평범한"
+    },
+    {
+      "no": 35,
+      "word": "burden",
+      "meaning": "부담, 짐; 부담[짐]을 지우다"
+    },
+    {
+      "no": 36,
+      "word": "correlation",
+      "meaning": "연관성, 상관관계"
+    },
+    {
+      "no": 37,
+      "word": "spill",
+      "meaning": "엎지르다, 흘리다; 엎지름, 유출(물)"
+    },
+    {
+      "no": 38,
+      "word": "coexist",
+      "meaning": "동시에 존재하다, 공존하다"
+    },
+    {
+      "no": 39,
+      "word": "rotate",
+      "meaning": "회전하다[시키다]; 교대로 근무하다"
+    },
+    {
+      "no": 40,
+      "word": "imaginary",
+      "meaning": "상상의, 가상의"
+    }
+  ]
+}

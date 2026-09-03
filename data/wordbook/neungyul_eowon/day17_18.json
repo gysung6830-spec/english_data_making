@@ -1,0 +1,406 @@
+{
+  "title": "Day 17~18",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "interview",
+      "meaning": "면접; 회견하다"
+    },
+    {
+      "no": 2,
+      "word": "conductor",
+      "meaning": "지휘자; 차장"
+    },
+    {
+      "no": 3,
+      "word": "prohibit",
+      "meaning": "금지하다, 제지하다"
+    },
+    {
+      "no": 4,
+      "word": "component",
+      "meaning": "구성 요소, 성분; 구성하는"
+    },
+    {
+      "no": 5,
+      "word": "evaluation",
+      "meaning": "평가, 감정, 견적"
+    },
+    {
+      "no": 6,
+      "word": "exhibit",
+      "meaning": "전시하다, 진열하다; 보이다, 드러내다; 전시, 진열"
+    },
+    {
+      "no": 7,
+      "word": "induction",
+      "meaning": "도입, 유발; 귀납"
+    },
+    {
+      "no": 8,
+      "word": "deduct",
+      "meaning": "빼다, 공제하다"
+    },
+    {
+      "no": 9,
+      "word": "advise",
+      "meaning": "조언하다, 충고하다, 권하다"
+    },
+    {
+      "no": 10,
+      "word": "inhabitant",
+      "meaning": "주민, 거주자; 서식 동물"
+    },
+    {
+      "no": 11,
+      "word": "conquest",
+      "meaning": "정복, 극복; 획득; 점령지"
+    },
+    {
+      "no": 12,
+      "word": "valid",
+      "meaning": "유효한; 타당한, 논리적인"
+    },
+    {
+      "no": 13,
+      "word": "interviewer",
+      "meaning": "면접관, 인터뷰 진행자"
+    },
+    {
+      "no": 14,
+      "word": "visible",
+      "meaning": "눈에 보이는; 분명한, 명백한; 눈에 띄는, 두드러진"
+    },
+    {
+      "no": 15,
+      "word": "purpose",
+      "meaning": "목적, 의도, 의향"
+    },
+    {
+      "no": 16,
+      "word": "valuable",
+      "meaning": "가치 있는, 값비싼; 소중한, 귀중한; 귀중품"
+    },
+    {
+      "no": 17,
+      "word": "value",
+      "meaning": "가치; 유용성, 중요성; 높이 평가하다, 중요시하다; 평가하다"
+    },
+    {
+      "no": 18,
+      "word": "prohibition",
+      "meaning": "금지"
+    },
+    {
+      "no": 19,
+      "word": "introduce",
+      "meaning": "소개하다; 도입하다, 들여오다"
+    },
+    {
+      "no": 20,
+      "word": "advice",
+      "meaning": "조언, 충고"
+    },
+    {
+      "no": 21,
+      "word": "viewer",
+      "meaning": "시청자, 보는 사람"
+    },
+    {
+      "no": 22,
+      "word": "acquire",
+      "meaning": "획득하다, 얻다; 배우다, 얻다, 습득하다"
+    },
+    {
+      "no": 23,
+      "word": "inhibit",
+      "meaning": "억제하다, 못하게 막다"
+    },
+    {
+      "no": 24,
+      "word": "provide",
+      "meaning": "공급하다; 준비하다; 부양하다; 규정하다"
+    },
+    {
+      "no": 25,
+      "word": "availability",
+      "meaning": "유효성, 유용성"
+    },
+    {
+      "no": 26,
+      "word": "opposition",
+      "meaning": "반대; 상대방, 반대측, 야당"
+    },
+    {
+      "no": 27,
+      "word": "inquiry",
+      "meaning": "문의, 질문; 조사"
+    },
+    {
+      "no": 28,
+      "word": "compound",
+      "meaning": "혼합하다, 합성하다; 악화시키다; 혼합물, 합성물, 화합물; 합성어; 합성의"
+    },
+    {
+      "no": 29,
+      "word": "evident",
+      "meaning": "분명한, 명백한"
+    },
+    {
+      "no": 30,
+      "word": "habit",
+      "meaning": "습관, 버릇"
+    },
+    {
+      "no": 31,
+      "word": "require",
+      "meaning": "필요로 하다; 요구하다, 규정하다"
+    },
+    {
+      "no": 32,
+      "word": "position",
+      "meaning": "위치, 자리; 자세; 입장, 처지; 일자리, 직위; ...에 두다, 배치하다, 자리를 잡다"
+    },
+    {
+      "no": 33,
+      "word": "post",
+      "meaning": "우편; 직책, 직; 기둥; 게시글, 포스트; 신문의 이름; 우편물을 발송하다; 배치하다; 게시하다, 올리다"
+    },
+    {
+      "no": 34,
+      "word": "inhibition",
+      "meaning": "억제, 금지"
+    },
+    {
+      "no": 35,
+      "word": "envious",
+      "meaning": "부러워하는, 질투하는"
+    },
+    {
+      "no": 36,
+      "word": "educator",
+      "meaning": "교육자, 교사"
+    },
+    {
+      "no": 37,
+      "word": "envy",
+      "meaning": "선망, 질투; 부러워하다, 질투하다"
+    },
+    {
+      "no": 38,
+      "word": "educate",
+      "meaning": "교육하다, 가르치다"
+    },
+    {
+      "no": 39,
+      "word": "induce",
+      "meaning": "설득하여 ...하게 하다, 유도하다; 야기하다, 일으키다; 귀납하다"
+    },
+    {
+      "no": 40,
+      "word": "education",
+      "meaning": "교육"
+    },
+    {
+      "no": 41,
+      "word": "supervisor",
+      "meaning": "감독관, 관리자"
+    },
+    {
+      "no": 42,
+      "word": "oppose",
+      "meaning": "...에 반대하다; ...에 저항하다, 대립하다"
+    },
+    {
+      "no": 43,
+      "word": "habitable",
+      "meaning": "살 수 있는, 거주할 수 있는"
+    },
+    {
+      "no": 44,
+      "word": "reduce",
+      "meaning": "감소시키다, 줄이다, 낮추다"
+    },
+    {
+      "no": 45,
+      "word": "inquire",
+      "meaning": "묻다, 질문하다; 조사하다"
+    },
+    {
+      "no": 46,
+      "word": "postpone",
+      "meaning": "연기하다, 뒤로 미루다"
+    },
+    {
+      "no": 47,
+      "word": "impose",
+      "meaning": "부과하다; 강요하다"
+    },
+    {
+      "no": 48,
+      "word": "revision",
+      "meaning": "수정 , 교정, 개정; 복습"
+    },
+    {
+      "no": 49,
+      "word": "validity",
+      "meaning": "타당성"
+    },
+    {
+      "no": 50,
+      "word": "pose",
+      "meaning": "제기하다, 야기하다; 포즈를 취하다; 포즈, 자세"
+    },
+    {
+      "no": 51,
+      "word": "deduction",
+      "meaning": "공제; 추론, 연역"
+    },
+    {
+      "no": 52,
+      "word": "suppose",
+      "meaning": "추측하다, 생각하다; 가정하다, 상상하다"
+    },
+    {
+      "no": 53,
+      "word": "acquisition",
+      "meaning": "획득, 취득"
+    },
+    {
+      "no": 54,
+      "word": "validate",
+      "meaning": "입증하다; 유효하게 하다"
+    },
+    {
+      "no": 55,
+      "word": "misbehave",
+      "meaning": "버릇 없이 굴다; 나쁜 짓을 하다"
+    },
+    {
+      "no": 56,
+      "word": "behavioral",
+      "meaning": "행동의, 행동에 관한"
+    },
+    {
+      "no": 57,
+      "word": "view",
+      "meaning": "관점, 견해; 시야; 경관, 경치; ... 라고 생각하다, 간주하다; 보다"
+    },
+    {
+      "no": 58,
+      "word": "habitually",
+      "meaning": "습관적으로, 늘, 으레"
+    },
+    {
+      "no": 59,
+      "word": "behavior",
+      "meaning": "행동, 행실; 행동 방식"
+    },
+    {
+      "no": 60,
+      "word": "inhabit",
+      "meaning": "살다, 서식하다, 거주하다"
+    },
+    {
+      "no": 61,
+      "word": "conquer",
+      "meaning": "정복하다; 이기다; 극복하다"
+    },
+    {
+      "no": 62,
+      "word": "deposit",
+      "meaning": "퇴적물, 침전물; 놓다, ...에 두다; 예금하다; 퇴적시키다, 침전시"
+    },
+    {
+      "no": 63,
+      "word": "imposition",
+      "meaning": "부과, 과세"
+    },
+    {
+      "no": 64,
+      "word": "conduct",
+      "meaning": "하다, 실시하다; 인도하다, 안내하다, 이끌다; 지휘하다; 처신하다; 처신, 행동; 수행, 실시"
+    },
+    {
+      "no": 65,
+      "word": "exhibition",
+      "meaning": "전시, 전람회"
+    },
+    {
+      "no": 66,
+      "word": "introduction",
+      "meaning": "소개; 도입; 서론; 개론서"
+    },
+    {
+      "no": 67,
+      "word": "habitual",
+      "meaning": "습관적인, 상습적인"
+    },
+    {
+      "no": 68,
+      "word": "invaluable",
+      "meaning": "귀중한"
+    },
+    {
+      "no": 69,
+      "word": "vision",
+      "meaning": "시력, 시야; 통찰력, 직감력; 미래상, 비전; 환영, 환상"
+    },
+    {
+      "no": 70,
+      "word": "deduce",
+      "meaning": "추론하다, 연역하다"
+    },
+    {
+      "no": 71,
+      "word": "provided",
+      "meaning": "만약 ...이면"
+    },
+    {
+      "no": 72,
+      "word": "supervise",
+      "meaning": "감독하다, 관리하다, 지휘하다"
+    },
+    {
+      "no": 73,
+      "word": "survey",
+      "meaning": "조사; 측량; 조사하다; 측량하다"
+    },
+    {
+      "no": 74,
+      "word": "inducement",
+      "meaning": "권유, 유도"
+    },
+    {
+      "no": 75,
+      "word": "opponent",
+      "meaning": "상대, 적, 반대자"
+    },
+    {
+      "no": 76,
+      "word": "visual",
+      "meaning": "시각의; 눈으로 보는"
+    },
+    {
+      "no": 77,
+      "word": "revise",
+      "meaning": "변경하다, 고치다; 수정하다; 복습하다"
+    },
+    {
+      "no": 78,
+      "word": "habitat",
+      "meaning": "서식지, 번식지; 거주지"
+    },
+    {
+      "no": 79,
+      "word": "reduction",
+      "meaning": "감소, 축소, 삭감"
+    },
+    {
+      "no": 80,
+      "word": "available",
+      "meaning": "이용할 수 있는, 쓸모 있는, 입수할 수 있는; 시간이 있는"
+    }
+  ]
+}

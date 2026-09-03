@@ -1,0 +1,406 @@
+{
+  "title": "Day 19~20",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "form",
+      "meaning": "형태, 모양; 형식, 양식; 종류, 유형; 형성하다; 형성되다"
+    },
+    {
+      "no": 2,
+      "word": "similarity",
+      "meaning": "비슷함, 닮음; 유사점"
+    },
+    {
+      "no": 3,
+      "word": "technique",
+      "meaning": "기술, 기법, 테크닉; 기교, 솜씨"
+    },
+    {
+      "no": 4,
+      "word": "director",
+      "meaning": "감독자, 연출자, 지도자"
+    },
+    {
+      "no": 5,
+      "word": "reformer",
+      "meaning": "개혁가, 개혁론자"
+    },
+    {
+      "no": 6,
+      "word": "assemble",
+      "meaning": "모으다; 모이다; 조립하다"
+    },
+    {
+      "no": 7,
+      "word": "correct",
+      "meaning": "옳은, 올바른; 적당한; 바로잡다, 정정하다"
+    },
+    {
+      "no": 8,
+      "word": "regularity",
+      "meaning": "정기적임, 규칙적임; 규칙성"
+    },
+    {
+      "no": 9,
+      "word": "design",
+      "meaning": "디자인하다; 설계하다; 디자인; 설계, 도안; 계획"
+    },
+    {
+      "no": 10,
+      "word": "resemble",
+      "meaning": "...을 닮다, 유사하다"
+    },
+    {
+      "no": 11,
+      "word": "correction",
+      "meaning": "정정한 것; 교정"
+    },
+    {
+      "no": 12,
+      "word": "technical",
+      "meaning": "기술적인; 전문적인"
+    },
+    {
+      "no": 13,
+      "word": "regulation",
+      "meaning": "규칙, 규정; 규제, 단속"
+    },
+    {
+      "no": 14,
+      "word": "regular",
+      "meaning": "규칙적인, 정기적인; 보통의, 표준적인"
+    },
+    {
+      "no": 15,
+      "word": "resign",
+      "meaning": "사임하다; 포기하고 ...을 받아들이다"
+    },
+    {
+      "no": 16,
+      "word": "signal",
+      "meaning": "신호; 신호를 보내다, 암시하다"
+    },
+    {
+      "no": 17,
+      "word": "inform",
+      "meaning": "알리다, 통지하다"
+    },
+    {
+      "no": 18,
+      "word": "variant",
+      "meaning": "변종, 변형; 상이한, 다른; 갖가지"
+    },
+    {
+      "no": 19,
+      "word": "resignation",
+      "meaning": "사직, 사임; 체념"
+    },
+    {
+      "no": 20,
+      "word": "structure",
+      "meaning": "구조, 조직, 체계; 건축물, 구조물; 구성하다, 조직화하다"
+    },
+    {
+      "no": 21,
+      "word": "opinion",
+      "meaning": "의견, 생각, 견해"
+    },
+    {
+      "no": 22,
+      "word": "primarily",
+      "meaning": "첫째로, 주로, 본래"
+    },
+    {
+      "no": 23,
+      "word": "variable",
+      "meaning": "변동이 심한, 변덕스러운; 바뀔 수 있는; 변수"
+    },
+    {
+      "no": 24,
+      "word": "destructive",
+      "meaning": "파괴적인, 부정적인"
+    },
+    {
+      "no": 25,
+      "word": "industrial",
+      "meaning": "산업의, 산업이 발달한"
+    },
+    {
+      "no": 26,
+      "word": "structural",
+      "meaning": "구조상의, 조직상의"
+    },
+    {
+      "no": 27,
+      "word": "principle",
+      "meaning": "원리, 원칙; 신념, 주의; 방침"
+    },
+    {
+      "no": 28,
+      "word": "designation",
+      "meaning": "지정, 지명; 명칭, 호칭"
+    },
+    {
+      "no": 29,
+      "word": "designate",
+      "meaning": "지정하다; 표시하다, 나타내다; 지정된"
+    },
+    {
+      "no": 30,
+      "word": "variance",
+      "meaning": "차이, 불일치, 격차"
+    },
+    {
+      "no": 31,
+      "word": "technologist",
+      "meaning": "과학 기술자"
+    },
+    {
+      "no": 32,
+      "word": "royalty",
+      "meaning": "왕족; 인세, 사용료, 로열티"
+    },
+    {
+      "no": 33,
+      "word": "similar",
+      "meaning": "비슷한, 유사한"
+    },
+    {
+      "no": 34,
+      "word": "instructive",
+      "meaning": "유익한, 교육적인"
+    },
+    {
+      "no": 35,
+      "word": "instrumental",
+      "meaning": "도움이 되는, 중요한"
+    },
+    {
+      "no": 36,
+      "word": "prime",
+      "meaning": "가장 중요한, 최상의; 전성기"
+    },
+    {
+      "no": 37,
+      "word": "priority",
+      "meaning": "우선순위; 우선"
+    },
+    {
+      "no": 38,
+      "word": "simultaneous",
+      "meaning": "동시의"
+    },
+    {
+      "no": 39,
+      "word": "variation",
+      "meaning": "차이, 변화; 변형; 변주"
+    },
+    {
+      "no": 40,
+      "word": "instrument",
+      "meaning": "기구, 도구; 악기"
+    },
+    {
+      "no": 41,
+      "word": "industrialization",
+      "meaning": "산업화"
+    },
+    {
+      "no": 42,
+      "word": "correctly",
+      "meaning": "바르게, 정확하게"
+    },
+    {
+      "no": 43,
+      "word": "resemblance",
+      "meaning": "유사함"
+    },
+    {
+      "no": 44,
+      "word": "royal",
+      "meaning": "왕의, 왕실의; 왕립의"
+    },
+    {
+      "no": 45,
+      "word": "rectangle",
+      "meaning": "직사각형"
+    },
+    {
+      "no": 46,
+      "word": "adoption",
+      "meaning": "채택; 입양"
+    },
+    {
+      "no": 47,
+      "word": "infrastructure",
+      "meaning": "사회 기반 시설"
+    },
+    {
+      "no": 48,
+      "word": "significance",
+      "meaning": "중요성, 중대성; 의미"
+    },
+    {
+      "no": 49,
+      "word": "industrialize",
+      "meaning": "산업화하다"
+    },
+    {
+      "no": 50,
+      "word": "similarly",
+      "meaning": "유사하게, 마찬가지로"
+    },
+    {
+      "no": 51,
+      "word": "reform",
+      "meaning": "개혁하다, 개선하다; 개혁되다, 개선되다; 개혁, 개선"
+    },
+    {
+      "no": 52,
+      "word": "technically",
+      "meaning": "엄밀히 말하면; 기술적으로"
+    },
+    {
+      "no": 53,
+      "word": "destroy",
+      "meaning": "파괴하다, 손상시키다; 망치다"
+    },
+    {
+      "no": 54,
+      "word": "vary",
+      "meaning": "다르다; 달라지다; 다르게 하다, 차이를 주다"
+    },
+    {
+      "no": 55,
+      "word": "seal",
+      "meaning": "봉하다; 밀폐하다; 확정하다; 인장, 도장; 봉인; 바다표범, 물개"
+    },
+    {
+      "no": 56,
+      "word": "optional",
+      "meaning": "선택적인"
+    },
+    {
+      "no": 57,
+      "word": "directly",
+      "meaning": "곧장, 똑바로; 직접적으로; 즉시, 바로, 곧"
+    },
+    {
+      "no": 58,
+      "word": "destruction",
+      "meaning": "파괴"
+    },
+    {
+      "no": 59,
+      "word": "signify",
+      "meaning": "의미하다, 나타내다; 중요하다, 영향을 끼치다"
+    },
+    {
+      "no": 60,
+      "word": "primeval",
+      "meaning": "원시시대의, 태고의"
+    },
+    {
+      "no": 61,
+      "word": "formal",
+      "meaning": "격식을 차린; 공식적인, 정식의"
+    },
+    {
+      "no": 62,
+      "word": "instruct",
+      "meaning": "지시하다; 가르치다, 교육하다"
+    },
+    {
+      "no": 63,
+      "word": "primary",
+      "meaning": "제1의, 주요한; 최초의, 처음의, 초기의; 초등의, 초급의"
+    },
+    {
+      "no": 64,
+      "word": "variety",
+      "meaning": "다양성, 다양함"
+    },
+    {
+      "no": 65,
+      "word": "significant",
+      "meaning": "중대한, 중요한; 상당한, 현저한; 의미심장한"
+    },
+    {
+      "no": 66,
+      "word": "invariable",
+      "meaning": "변하지 않는, 불변의"
+    },
+    {
+      "no": 67,
+      "word": "technician",
+      "meaning": "기술자"
+    },
+    {
+      "no": 68,
+      "word": "region",
+      "meaning": "지역, 지방, 지대; 부분"
+    },
+    {
+      "no": 69,
+      "word": "direction",
+      "meaning": "방향; 지도, 지시; 연출, 감독"
+    },
+    {
+      "no": 70,
+      "word": "designer",
+      "meaning": "디자이너, 설계자; 유명 디자이너가 만든"
+    },
+    {
+      "no": 71,
+      "word": "erect",
+      "meaning": "똑바로 선; 세우다, 짓다"
+    },
+    {
+      "no": 72,
+      "word": "assembly",
+      "meaning": "의회, 입법부; 모임; 조립"
+    },
+    {
+      "no": 73,
+      "word": "option",
+      "meaning": "선택, 선택지; 선택의 자유; 선택 과목; 옵션"
+    },
+    {
+      "no": 74,
+      "word": "prior",
+      "meaning": "먼저의, 이전의; ...에 우선하는, 중요한"
+    },
+    {
+      "no": 75,
+      "word": "simulate",
+      "meaning": "가장하다, ...인 체하다; 모의실험 하다"
+    },
+    {
+      "no": 76,
+      "word": "primitive",
+      "meaning": "원시의, 원시적인"
+    },
+    {
+      "no": 77,
+      "word": "assign",
+      "meaning": "임명하다; 할당하다, 부여하다"
+    },
+    {
+      "no": 78,
+      "word": "informative",
+      "meaning": "유익한, 정보를 제공하는"
+    },
+    {
+      "no": 79,
+      "word": "instruction",
+      "meaning": "지시; 지침서, 설명서; 가르침, 교육"
+    },
+    {
+      "no": 80,
+      "word": "regulate",
+      "meaning": "규제하다, 규정하다; 조정하다, 조절하다"
+    }
+  ]
+}

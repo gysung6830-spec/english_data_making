@@ -1,0 +1,406 @@
+{
+  "title": "Day 47~48",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "punctual",
+      "meaning": "시간을 엄수하는, 기한을 지키는"
+    },
+    {
+      "no": 2,
+      "word": "spherical",
+      "meaning": "구 모양의"
+    },
+    {
+      "no": 3,
+      "word": "distort",
+      "meaning": "왜곡하다, 곡해하다; 비틀다, 일그러뜨리다"
+    },
+    {
+      "no": 4,
+      "word": "false",
+      "meaning": "거짓의, 가짜의; 그릇된, 틀린"
+    },
+    {
+      "no": 5,
+      "word": "distortion",
+      "meaning": "왜곡, 일그러짐"
+    },
+    {
+      "no": 6,
+      "word": "renovation",
+      "meaning": "개혁, 수선, 수리"
+    },
+    {
+      "no": 7,
+      "word": "exertion",
+      "meaning": "노력; 발휘, 행사"
+    },
+    {
+      "no": 8,
+      "word": "insertion",
+      "meaning": "삽입, 끼워넣기"
+    },
+    {
+      "no": 9,
+      "word": "torture",
+      "meaning": "고문; 심한 고통; 고문하다; 괴롭히다"
+    },
+    {
+      "no": 10,
+      "word": "refusal",
+      "meaning": "거절, 거부"
+    },
+    {
+      "no": 11,
+      "word": "central",
+      "meaning": "중심의, 중앙의; 중요한"
+    },
+    {
+      "no": 12,
+      "word": "confidential",
+      "meaning": "비밀의, 기밀의"
+    },
+    {
+      "no": 13,
+      "word": "insert",
+      "meaning": "삽입하다, 넣다; 말을 써 넣다, 덧붙이다"
+    },
+    {
+      "no": 14,
+      "word": "disappointing",
+      "meaning": "실망스러운, 실망시키는"
+    },
+    {
+      "no": 15,
+      "word": "incredibly",
+      "meaning": "대단히, 놀랍게도"
+    },
+    {
+      "no": 16,
+      "word": "temptation",
+      "meaning": "유혹"
+    },
+    {
+      "no": 17,
+      "word": "confident",
+      "meaning": "확신하고 있는; 자신만만한, 자신이 있는"
+    },
+    {
+      "no": 18,
+      "word": "innovative",
+      "meaning": "혁신적인"
+    },
+    {
+      "no": 19,
+      "word": "concentration",
+      "meaning": "집중; 집중; 농도, 농축"
+    },
+    {
+      "no": 20,
+      "word": "novelist",
+      "meaning": "소설가"
+    },
+    {
+      "no": 21,
+      "word": "damage",
+      "meaning": "손해, 손상, 훼손; 손상시키다, 손해를 입히다"
+    },
+    {
+      "no": 22,
+      "word": "incredible",
+      "meaning": "믿어지지 않는; 놀라운, 뛰어난, 엄청난"
+    },
+    {
+      "no": 23,
+      "word": "falsify",
+      "meaning": "위조하다, 왜곡하다"
+    },
+    {
+      "no": 24,
+      "word": "tradition",
+      "meaning": "전통, 관습, 전해진 것"
+    },
+    {
+      "no": 25,
+      "word": "federal",
+      "meaning": "연방제의, 연방 정부의"
+    },
+    {
+      "no": 26,
+      "word": "disappointed",
+      "meaning": "실망한"
+    },
+    {
+      "no": 27,
+      "word": "confuse",
+      "meaning": "혼동시키다, 혼란스럽게 하다; 혼동하다"
+    },
+    {
+      "no": 28,
+      "word": "deserted",
+      "meaning": "버림받은, 사람이 살지 않는"
+    },
+    {
+      "no": 29,
+      "word": "hostility",
+      "meaning": "적의, 적개심"
+    },
+    {
+      "no": 30,
+      "word": "faithful",
+      "meaning": "충실한, 신의가 두터운; 믿을 수 있는"
+    },
+    {
+      "no": 31,
+      "word": "desert",
+      "meaning": "사막; 버리다, 떠나다"
+    },
+    {
+      "no": 32,
+      "word": "renewable",
+      "meaning": "재생 가능한; 재생 가능 에너지"
+    },
+    {
+      "no": 33,
+      "word": "innovator",
+      "meaning": "혁신자, 개혁자"
+    },
+    {
+      "no": 34,
+      "word": "innovate",
+      "meaning": "혁신하다, 쇄신하다"
+    },
+    {
+      "no": 35,
+      "word": "punctuate",
+      "meaning": "구두점을 찍다"
+    },
+    {
+      "no": 36,
+      "word": "embarrass",
+      "meaning": "당황하게 하다, 난처하게 하다"
+    },
+    {
+      "no": 37,
+      "word": "confused",
+      "meaning": "혼란스러운"
+    },
+    {
+      "no": 38,
+      "word": "novel",
+      "meaning": "소설; 새로운, 기발한"
+    },
+    {
+      "no": 39,
+      "word": "assert",
+      "meaning": "단언하다; 주장하다"
+    },
+    {
+      "no": 40,
+      "word": "faith",
+      "meaning": "신뢰, 믿음; 신념, 신앙"
+    },
+    {
+      "no": 41,
+      "word": "bar",
+      "meaning": "술집, 바; 막대, 빗장; 긴 토막; 장애; 막다, 금하다"
+    },
+    {
+      "no": 42,
+      "word": "fault",
+      "meaning": "잘못, 과실; 결점, 흠"
+    },
+    {
+      "no": 43,
+      "word": "hostile",
+      "meaning": "적대적인, 비우호적인"
+    },
+    {
+      "no": 44,
+      "word": "tempt",
+      "meaning": "유혹하다; ...할 생각이 들게 하다"
+    },
+    {
+      "no": 45,
+      "word": "fidelity",
+      "meaning": "충성, 충실; 정확도, 충실도"
+    },
+    {
+      "no": 46,
+      "word": "punctuation",
+      "meaning": "구두점, 구두법"
+    },
+    {
+      "no": 47,
+      "word": "embarrassment",
+      "meaning": "당황, 난처; 골칫거리"
+    },
+    {
+      "no": 48,
+      "word": "faulty",
+      "meaning": "결점이 있는; 잘못된, 그릇된"
+    },
+    {
+      "no": 49,
+      "word": "falsehood",
+      "meaning": "거짓말, 허위"
+    },
+    {
+      "no": 50,
+      "word": "condemnation",
+      "meaning": "비난, 규탄"
+    },
+    {
+      "no": 51,
+      "word": "norm",
+      "meaning": "표준, 기준; 규범, 규준"
+    },
+    {
+      "no": 52,
+      "word": "enormous",
+      "meaning": "거대한, 엄청나게 큰, 막대한"
+    },
+    {
+      "no": 53,
+      "word": "confusion",
+      "meaning": "혼란, 혼동"
+    },
+    {
+      "no": 54,
+      "word": "confidence",
+      "meaning": "신뢰, 신용; 확신, 자신감"
+    },
+    {
+      "no": 55,
+      "word": "betrayal",
+      "meaning": "배반, 배신"
+    },
+    {
+      "no": 56,
+      "word": "vagrant",
+      "meaning": "부랑자; 방랑하는, 부랑 생활을하는"
+    },
+    {
+      "no": 57,
+      "word": "sphere",
+      "meaning": "구, 구체, 구형; 영역, 분야"
+    },
+    {
+      "no": 58,
+      "word": "defy",
+      "meaning": "반항하다, 무시하다"
+    },
+    {
+      "no": 59,
+      "word": "embarrassing",
+      "meaning": "당황하게 하는"
+    },
+    {
+      "no": 60,
+      "word": "attempt",
+      "meaning": "시도하다; 시도, 노력"
+    },
+    {
+      "no": 61,
+      "word": "renewal",
+      "meaning": "재개, 소생; 갱신, 기한 연장"
+    },
+    {
+      "no": 62,
+      "word": "serial",
+      "meaning": "연속하는, 순차적인; 연재물, 연속극"
+    },
+    {
+      "no": 63,
+      "word": "credibility",
+      "meaning": "믿을 수 있음; 신뢰성"
+    },
+    {
+      "no": 64,
+      "word": "renew",
+      "meaning": "갱신하다, ...의 기한을 연장하다; 재개하다"
+    },
+    {
+      "no": 65,
+      "word": "torment",
+      "meaning": "고통, 고뇌; 괴롭히다, 고통을주다"
+    },
+    {
+      "no": 66,
+      "word": "grant",
+      "meaning": "승인하다, 부여하다; 인정하다; 보조금"
+    },
+    {
+      "no": 67,
+      "word": "extravagant",
+      "meaning": "낭비하는, 사치스러운; 지나친, 엄청난"
+    },
+    {
+      "no": 68,
+      "word": "embarrassed",
+      "meaning": "당황한, 어색한"
+    },
+    {
+      "no": 69,
+      "word": "concentrate",
+      "meaning": "집중하다, 전념하다; 모으다, 집중시키다; 농축시키다"
+    },
+    {
+      "no": 70,
+      "word": "exert",
+      "meaning": "발휘하다, 행사하다; 노력하다"
+    },
+    {
+      "no": 71,
+      "word": "credit",
+      "meaning": "신용 ; 칭찬, 공로; 이수 학점; ... 의 공으로 돌리다; 믿다, 신용하다"
+    },
+    {
+      "no": 72,
+      "word": "disappoint",
+      "meaning": "실망시키다, 저버리다"
+    },
+    {
+      "no": 73,
+      "word": "hemisphere",
+      "meaning": "반구; 반구"
+    },
+    {
+      "no": 74,
+      "word": "refund",
+      "meaning": "환불, 반환; 환불하다, 반환하다"
+    },
+    {
+      "no": 75,
+      "word": "vague",
+      "meaning": "명확지 않은, 모호한, 막연한; 분명치 않은, 흐릿한"
+    },
+    {
+      "no": 76,
+      "word": "refuse",
+      "meaning": "거절하다"
+    },
+    {
+      "no": 77,
+      "word": "hospitable",
+      "meaning": "환대하는, 친절한, 후한"
+    },
+    {
+      "no": 78,
+      "word": "punctuality",
+      "meaning": "시간 엄수; 꼼꼼함"
+    },
+    {
+      "no": 79,
+      "word": "disappointment",
+      "meaning": "실망, 낙담"
+    },
+    {
+      "no": 80,
+      "word": "fail",
+      "meaning": "실패하다; ...하지 않다; 낙제하다; 낙제시키다; 실패, 낙제"
+    }
+  ]
+}

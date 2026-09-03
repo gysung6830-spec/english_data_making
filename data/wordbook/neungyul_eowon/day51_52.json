@@ -1,0 +1,406 @@
+{
+  "title": "Day 51~52",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "sacrifice",
+      "meaning": "희생; 제물"
+    },
+    {
+      "no": 2,
+      "word": "privately",
+      "meaning": "남몰래, 은밀히; 개인으로서"
+    },
+    {
+      "no": 3,
+      "word": "graphics",
+      "meaning": "이미지, 그림"
+    },
+    {
+      "no": 4,
+      "word": "grasp",
+      "meaning": "꽉 잡다, 움켜쥐다; 완전히 이해하다, 파악하다; 꽉 쥐기; 이해, 파악"
+    },
+    {
+      "no": 5,
+      "word": "nutritious",
+      "meaning": "영양가 있는, 영양분이 많은"
+    },
+    {
+      "no": 6,
+      "word": "bound",
+      "meaning": "...할 것 같은; ...할 의무가 있는; ...로 향하는"
+    },
+    {
+      "no": 7,
+      "word": "humiliate",
+      "meaning": "굴욕감을 주다, 자존심을 상하게 하다"
+    },
+    {
+      "no": 8,
+      "word": "charity",
+      "meaning": "자선; 자선 단체; 관대함"
+    },
+    {
+      "no": 9,
+      "word": "descend",
+      "meaning": "내려가다; 내리막이다; 내려앉다; 유래하다; 전락하다"
+    },
+    {
+      "no": 10,
+      "word": "malnutrition",
+      "meaning": "영양실조"
+    },
+    {
+      "no": 11,
+      "word": "privacy",
+      "meaning": "사생활, 혼자 있는 상태"
+    },
+    {
+      "no": 12,
+      "word": "photographic",
+      "meaning": "사진의, 사진에 의한"
+    },
+    {
+      "no": 13,
+      "word": "sectoral",
+      "meaning": "각 분야의; 부채꼴의"
+    },
+    {
+      "no": 14,
+      "word": "threat",
+      "meaning": "위협, 협박"
+    },
+    {
+      "no": 15,
+      "word": "human",
+      "meaning": "인간의, 사람의; 인간, 사람"
+    },
+    {
+      "no": 16,
+      "word": "inheritance",
+      "meaning": "상속 ; 유전적 성질, 유전"
+    },
+    {
+      "no": 17,
+      "word": "humane",
+      "meaning": "인도적인, 자비로운"
+    },
+    {
+      "no": 18,
+      "word": "legendary",
+      "meaning": "전설의; 전설적인, 유명한"
+    },
+    {
+      "no": 19,
+      "word": "humanity",
+      "meaning": "인류, 인간"
+    },
+    {
+      "no": 20,
+      "word": "escalator",
+      "meaning": "에스컬레이터"
+    },
+    {
+      "no": 21,
+      "word": "nurture",
+      "meaning": "양육, 양성; 영양분, 음식; 키우다, 양육하다; 육성하다; 품다"
+    },
+    {
+      "no": 22,
+      "word": "inherit",
+      "meaning": "물려받다, 상속하다; 물려받다, 유전되다"
+    },
+    {
+      "no": 23,
+      "word": "scale",
+      "meaning": "규모, 정도; 계급, 등급; 축척, 비율; 저울, 천칭"
+    },
+    {
+      "no": 24,
+      "word": "threaten",
+      "meaning": "협박하다, 위협하다; 위협하여 ...하게 하다"
+    },
+    {
+      "no": 25,
+      "word": "abundant",
+      "meaning": "풍부한, 많은"
+    },
+    {
+      "no": 26,
+      "word": "literate",
+      "meaning": "읽고 쓸 줄 아는"
+    },
+    {
+      "no": 27,
+      "word": "surroundings",
+      "meaning": "환경"
+    },
+    {
+      "no": 28,
+      "word": "segment",
+      "meaning": "부분, 구획; 한 조각"
+    },
+    {
+      "no": 29,
+      "word": "legend",
+      "meaning": "전설; 전설적인 인물; 범례, 기호 일람표"
+    },
+    {
+      "no": 30,
+      "word": "abundance",
+      "meaning": "풍부, 다량, 다수"
+    },
+    {
+      "no": 31,
+      "word": "nursery",
+      "meaning": "유치원, 탁아소, 아이 방; 유치원의"
+    },
+    {
+      "no": 32,
+      "word": "literary",
+      "meaning": "문학의, 문예의"
+    },
+    {
+      "no": 33,
+      "word": "bundle",
+      "meaning": "다발, 꾸러미"
+    },
+    {
+      "no": 34,
+      "word": "vote",
+      "meaning": "투표; 표; 투표권; 투표수, 득표수; 투표하다; 의결하다"
+    },
+    {
+      "no": 35,
+      "word": "thrust",
+      "meaning": "세게 밀다; 찌르다; 밀침, 찌르기; 요점, 취지"
+    },
+    {
+      "no": 36,
+      "word": "humble",
+      "meaning": "겸손한; 소박한; 낮은, 비천한; 하찮은; 겸손하게 만들다"
+    },
+    {
+      "no": 37,
+      "word": "literacy",
+      "meaning": "읽고 쓰는 능력"
+    },
+    {
+      "no": 38,
+      "word": "nutrition",
+      "meaning": "영양분"
+    },
+    {
+      "no": 39,
+      "word": "nourish",
+      "meaning": "영양분을 주다; 육성하다, 조성하다"
+    },
+    {
+      "no": 40,
+      "word": "devotional",
+      "meaning": "종교적인, 종교 의식에 관련된"
+    },
+    {
+      "no": 41,
+      "word": "devote",
+      "meaning": "헌신하다, 바치다; 전념하다"
+    },
+    {
+      "no": 42,
+      "word": "photograph",
+      "meaning": "사진; 사진을 찍다"
+    },
+    {
+      "no": 43,
+      "word": "deprive",
+      "meaning": "빼앗다, 박탈하다"
+    },
+    {
+      "no": 44,
+      "word": "nutrient",
+      "meaning": "영양소, 영양분"
+    },
+    {
+      "no": 45,
+      "word": "escalate",
+      "meaning": "악화되다; 상승하다"
+    },
+    {
+      "no": 46,
+      "word": "literal",
+      "meaning": "글자 그대로의; 원문에 충실한"
+    },
+    {
+      "no": 47,
+      "word": "sacred",
+      "meaning": "신성한; 종교적인"
+    },
+    {
+      "no": 48,
+      "word": "lecture",
+      "meaning": "강의; 훈계"
+    },
+    {
+      "no": 49,
+      "word": "heir",
+      "meaning": "상속인, 후계자"
+    },
+    {
+      "no": 50,
+      "word": "bandage",
+      "meaning": "붕대"
+    },
+    {
+      "no": 51,
+      "word": "nutritional",
+      "meaning": "영양상의"
+    },
+    {
+      "no": 52,
+      "word": "threatening",
+      "meaning": "협박하는, 위협적인; 험악한"
+    },
+    {
+      "no": 53,
+      "word": "photographer",
+      "meaning": "사진사"
+    },
+    {
+      "no": 54,
+      "word": "photography",
+      "meaning": "사진 촬영, 사진술"
+    },
+    {
+      "no": 55,
+      "word": "grab",
+      "meaning": "붙잡다, 움켜쥐다, 잡아채려고하다; 움켜쥐기, 잡아채기"
+    },
+    {
+      "no": 56,
+      "word": "surround",
+      "meaning": "둘러싸다, 에워싸다, 포위하다"
+    },
+    {
+      "no": 57,
+      "word": "devoted",
+      "meaning": "헌신적인; 전념하는"
+    },
+    {
+      "no": 58,
+      "word": "nurse",
+      "meaning": "간호사; 유모; 간호하다, 돌보다"
+    },
+    {
+      "no": 59,
+      "word": "graphic",
+      "meaning": "생생한, 사실적인; 그림의, 도표의, 그래픽의"
+    },
+    {
+      "no": 60,
+      "word": "nourishment",
+      "meaning": "영양, 음식; 육성"
+    },
+    {
+      "no": 61,
+      "word": "bond",
+      "meaning": "결속, 유대; 채권; 접착제, 본드; 굴레, 속박; 유대를 맺다; 접착시키다"
+    },
+    {
+      "no": 62,
+      "word": "intrusion",
+      "meaning": "방해; 침입, 침범"
+    },
+    {
+      "no": 63,
+      "word": "vow",
+      "meaning": "맹세"
+    },
+    {
+      "no": 64,
+      "word": "intersection",
+      "meaning": "교차로, 교차 지점; 교차, 가로지름"
+    },
+    {
+      "no": 65,
+      "word": "devotion",
+      "meaning": "헌신; 전념; 기도; 신앙"
+    },
+    {
+      "no": 66,
+      "word": "bind",
+      "meaning": "묶다; 결속시키다; 속박하다, ... 하게 하다; 제본하다"
+    },
+    {
+      "no": 67,
+      "word": "literally",
+      "meaning": "글자 그대로"
+    },
+    {
+      "no": 68,
+      "word": "humiliation",
+      "meaning": "굴욕; 창피 주기"
+    },
+    {
+      "no": 69,
+      "word": "grip",
+      "meaning": "꽉 잡음, 움켜잡는 방식; 통제권; 꽉 잡다, 움켜잡다; 사로잡다"
+    },
+    {
+      "no": 70,
+      "word": "intrude",
+      "meaning": "방해하다, 참견하다; 침입하다, 침범하다"
+    },
+    {
+      "no": 71,
+      "word": "hereditary",
+      "meaning": "유전의"
+    },
+    {
+      "no": 72,
+      "word": "descent",
+      "meaning": "하강; 저하, 전락; 내리막; 혈통, 가계"
+    },
+    {
+      "no": 73,
+      "word": "charitable",
+      "meaning": "자선의, 자선을 베푸는"
+    },
+    {
+      "no": 74,
+      "word": "humility",
+      "meaning": "겸손"
+    },
+    {
+      "no": 75,
+      "word": "lecturer",
+      "meaning": "강연자, 강사"
+    },
+    {
+      "no": 76,
+      "word": "deprivation",
+      "meaning": "박탈; 결핍"
+    },
+    {
+      "no": 77,
+      "word": "abound",
+      "meaning": "풍부하다, 많이 있다"
+    },
+    {
+      "no": 78,
+      "word": "cherish",
+      "meaning": "소중히 여기다, 아끼다"
+    },
+    {
+      "no": 79,
+      "word": "surrounding",
+      "meaning": "주변의, 주위의, 부근의"
+    },
+    {
+      "no": 80,
+      "word": "heredity",
+      "meaning": "유전"
+    }
+  ]
+}

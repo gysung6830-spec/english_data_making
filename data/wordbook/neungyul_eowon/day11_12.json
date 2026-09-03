@@ -1,0 +1,406 @@
+{
+  "title": "Day 11~12",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "affectionate",
+      "meaning": "애정 있는, 다정한"
+    },
+    {
+      "no": 2,
+      "word": "proficiency",
+      "meaning": "숙달, 능숙, 능란"
+    },
+    {
+      "no": 3,
+      "word": "transportation",
+      "meaning": "운송 , 수송"
+    },
+    {
+      "no": 4,
+      "word": "fictional",
+      "meaning": "지어낸, 허구적인"
+    },
+    {
+      "no": 5,
+      "word": "captivity",
+      "meaning": "사로잡혀 있음, 감금, 억류"
+    },
+    {
+      "no": 6,
+      "word": "factor",
+      "meaning": "요소, 요인"
+    },
+    {
+      "no": 7,
+      "word": "instance",
+      "meaning": "예, 실례, 사례, 경우"
+    },
+    {
+      "no": 8,
+      "word": "import",
+      "meaning": "수입하다; 수입"
+    },
+    {
+      "no": 9,
+      "word": "satisfy",
+      "meaning": "만족시키다"
+    },
+    {
+      "no": 10,
+      "word": "constantly",
+      "meaning": "끊임없이, 항상"
+    },
+    {
+      "no": 11,
+      "word": "manufacturer",
+      "meaning": "제조업자, 제작사"
+    },
+    {
+      "no": 12,
+      "word": "stand",
+      "meaning": "서다; ...에 있다, 있다; ...을 참다, 견디다; 입장, 처지; 받침대, 스탠드"
+    },
+    {
+      "no": 13,
+      "word": "benefit",
+      "meaning": "이익, 이점; 수당, 혜택; ...에 득이 되다; 득을 보다"
+    },
+    {
+      "no": 14,
+      "word": "receive",
+      "meaning": "받다, 수령하다; 받아들이다; 수신하다"
+    },
+    {
+      "no": 15,
+      "word": "state",
+      "meaning": "상태, 상황; 국가, 주; 진술하다, 말하다"
+    },
+    {
+      "no": 16,
+      "word": "status",
+      "meaning": "지위, 신분, 위상; 상황"
+    },
+    {
+      "no": 17,
+      "word": "stable",
+      "meaning": "안정된, 견고한; 마구간, 외양간"
+    },
+    {
+      "no": 18,
+      "word": "deficient",
+      "meaning": "부족한, 모자라는; 결함이 있는"
+    },
+    {
+      "no": 19,
+      "word": "effectively",
+      "meaning": "효과적으로; 사실상, 실제로"
+    },
+    {
+      "no": 20,
+      "word": "deficiency",
+      "meaning": "부족, 결핍; 결함"
+    },
+    {
+      "no": 21,
+      "word": "constant",
+      "meaning": "끊임없는, 계속되는; 불변의; 불변; 상수"
+    },
+    {
+      "no": 22,
+      "word": "fiction",
+      "meaning": "소설; 꾸며낸 이야기, 허구"
+    },
+    {
+      "no": 23,
+      "word": "efficient",
+      "meaning": "능률적인, 효율적인"
+    },
+    {
+      "no": 24,
+      "word": "proficient",
+      "meaning": "숙달된, 능숙한"
+    },
+    {
+      "no": 25,
+      "word": "facile",
+      "meaning": "술술 하는, 안이한; 손쉬운, 쉽게 얻은"
+    },
+    {
+      "no": 26,
+      "word": "portable",
+      "meaning": "휴대용의, 가지고 다닐 수 있는"
+    },
+    {
+      "no": 27,
+      "word": "installation",
+      "meaning": "설치"
+    },
+    {
+      "no": 28,
+      "word": "manufacture",
+      "meaning": "제조하다, 생산하다; 꾸며내다, 만들어내다; 제조, 생산"
+    },
+    {
+      "no": 29,
+      "word": "efficiency",
+      "meaning": "능률, 효율"
+    },
+    {
+      "no": 30,
+      "word": "install",
+      "meaning": "설치하다; ...을 취임시키다, 임명하다"
+    },
+    {
+      "no": 31,
+      "word": "perception",
+      "meaning": "지각 , 인지"
+    },
+    {
+      "no": 32,
+      "word": "transport",
+      "meaning": "수송하다; 수송, 운송; 운송 수단, 수송 기관"
+    },
+    {
+      "no": 33,
+      "word": "acceptable",
+      "meaning": "받아들일 수 있는"
+    },
+    {
+      "no": 34,
+      "word": "capability",
+      "meaning": "능력"
+    },
+    {
+      "no": 35,
+      "word": "statue",
+      "meaning": "상, 조각상"
+    },
+    {
+      "no": 36,
+      "word": "captive",
+      "meaning": "사로잡힌, 포로의; 포로"
+    },
+    {
+      "no": 37,
+      "word": "instantly",
+      "meaning": "곧, 당장, 즉석에서"
+    },
+    {
+      "no": 38,
+      "word": "qualification",
+      "meaning": "자격 , 자질; 자격 증명서"
+    },
+    {
+      "no": 39,
+      "word": "satisfactory",
+      "meaning": "충분한, 만족스러운"
+    },
+    {
+      "no": 40,
+      "word": "capacity",
+      "meaning": "수용량; 능력, 역량, 생산 능력"
+    },
+    {
+      "no": 41,
+      "word": "opportunity",
+      "meaning": "기회, 호기"
+    },
+    {
+      "no": 42,
+      "word": "perceive",
+      "meaning": "인지하다, 알아차리다"
+    },
+    {
+      "no": 43,
+      "word": "qualified",
+      "meaning": "자격 있는, 적임의"
+    },
+    {
+      "no": 44,
+      "word": "establishment",
+      "meaning": "기관, 단체; 설립, 제정"
+    },
+    {
+      "no": 45,
+      "word": "instant",
+      "meaning": "즉석의, 즉각적인; 인스턴트의, 즉석 요리의; 즉시, 순간, 찰나"
+    },
+    {
+      "no": 46,
+      "word": "concept",
+      "meaning": "개념, 관념"
+    },
+    {
+      "no": 47,
+      "word": "affair",
+      "meaning": "일, 문제; 일, 사건; 스캔들, 추문"
+    },
+    {
+      "no": 48,
+      "word": "accept",
+      "meaning": "수락하다, 받아들이다; 믿다, 인정하다; 구성원으로 받아들이다"
+    },
+    {
+      "no": 49,
+      "word": "defect",
+      "meaning": "결점, 결함, 결핍"
+    },
+    {
+      "no": 50,
+      "word": "recipient",
+      "meaning": "수령인, 수취인"
+    },
+    {
+      "no": 51,
+      "word": "stateswoman",
+      "meaning": "정치인"
+    },
+    {
+      "no": 52,
+      "word": "statesman",
+      "meaning": "정치인"
+    },
+    {
+      "no": 53,
+      "word": "effective",
+      "meaning": "효과적인; 시행되는"
+    },
+    {
+      "no": 54,
+      "word": "standard",
+      "meaning": "표준, 기준, 수준; 표준의; 일반적인, 보통의"
+    },
+    {
+      "no": 55,
+      "word": "exception",
+      "meaning": "예외, 제외"
+    },
+    {
+      "no": 56,
+      "word": "affective",
+      "meaning": "정서적인"
+    },
+    {
+      "no": 57,
+      "word": "reception",
+      "meaning": "환영; 안내 데스크; 수신"
+    },
+    {
+      "no": 58,
+      "word": "effect",
+      "meaning": "효과, 영향; 결과"
+    },
+    {
+      "no": 59,
+      "word": "affect",
+      "meaning": "영향을 미치다; ...인 체하다, 가장하다"
+    },
+    {
+      "no": 60,
+      "word": "receipt",
+      "meaning": "영수증; 받음, 수령"
+    },
+    {
+      "no": 61,
+      "word": "capture",
+      "meaning": "생포, 포획; 점령; 저장, 캡쳐; 붙잡다, 생포하다; 점령하다; 사로잡다; 기록하다, 담아내다"
+    },
+    {
+      "no": 62,
+      "word": "profitable",
+      "meaning": "이익이 되는, 유익한"
+    },
+    {
+      "no": 63,
+      "word": "except",
+      "meaning": "...을 제외하고, ... 이외에는"
+    },
+    {
+      "no": 64,
+      "word": "profit",
+      "meaning": "이익, 수익; 이득, 이점; ...에 득이 되다; 이익을 얻다"
+    },
+    {
+      "no": 65,
+      "word": "conceive",
+      "meaning": "생각해내다, 착상하다, 고안하다; 상상하다; 임신하다"
+    },
+    {
+      "no": 66,
+      "word": "faculty",
+      "meaning": "재능, 능력; 학부; 교수진"
+    },
+    {
+      "no": 67,
+      "word": "capable",
+      "meaning": "...할 수 있는; 유능한"
+    },
+    {
+      "no": 68,
+      "word": "participant",
+      "meaning": "참가자, 참여자"
+    },
+    {
+      "no": 69,
+      "word": "exceptional",
+      "meaning": "아주 뛰어난; 예외적인"
+    },
+    {
+      "no": 70,
+      "word": "figurative",
+      "meaning": "비유적인"
+    },
+    {
+      "no": 71,
+      "word": "occupy",
+      "meaning": "차지하다; 사용하다; 점령하다"
+    },
+    {
+      "no": 72,
+      "word": "factual",
+      "meaning": "사실에 입각한, 사실적인"
+    },
+    {
+      "no": 73,
+      "word": "substantial",
+      "meaning": "상당한, 많은; 본질적인, 중요한"
+    },
+    {
+      "no": 74,
+      "word": "satisfaction",
+      "meaning": "만족"
+    },
+    {
+      "no": 75,
+      "word": "statement",
+      "meaning": "성명; 진술, 주장"
+    },
+    {
+      "no": 76,
+      "word": "deceit",
+      "meaning": "속이기, 거짓말"
+    },
+    {
+      "no": 77,
+      "word": "deceive",
+      "meaning": "속이다, 기만하다"
+    },
+    {
+      "no": 78,
+      "word": "acceptance",
+      "meaning": "수락, 받아들임; 용인, 승인"
+    },
+    {
+      "no": 79,
+      "word": "deficit",
+      "meaning": "적자, 부족액; 결손"
+    },
+    {
+      "no": 80,
+      "word": "affection",
+      "meaning": "정, 애정"
+    }
+  ]
+}

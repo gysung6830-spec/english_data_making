@@ -1,11 +1,16 @@
-"""단어장 시험지 PDF(정답본 페이지)에서 '영단어 - 한글뜻' 목록을 뽑아 JSON 으로 저장.
+"""단어장 시험지 PDF(정답이 채워진 면)에서 '영단어 - 한글뜻' 목록을 뽑아 JSON 으로 저장.
 
 사용 예)
-    python tools/extract_wordbook.py "워드마스터_Day_3~4.pdf" --page 2 --day "Day 3~4" \
-        --out data/wordbook/day03_04.json
+    python tools/extract_wordbook.py "워드마스터_Day_3~4.pdf" --day "Day 3~4" \
+        --source "워드마스터 수능2000" --out data/wordbook/suneung2000/day03_04.json
 
-- 시험지 한 페이지가 좌/우 2단(왼쪽 No.1~40 = 영단어→뜻, 오른쪽 No.41~80 = 뜻→영단어)인
-  형식을 가정하고, 좌표(x, y)로 행을 묶어 읽는다.
+동작 방식
+- 시험지는 좌/우 2단이고, 각 단은 [번호] [제시어] [답] 세 칸이다.
+  '제시어'가 영단어인 교재도 있고 한글 뜻인 교재도 있어서, 순서가 아니라
+  **글자 종류(한글이 있으면 뜻, 알파벳뿐이면 영단어)** 로 구분한다.
+- 정답 면은 PDF 뒤쪽 절반이다(2쪽짜리 → 2쪽 / 4쪽짜리 → 3·4쪽). `--page` 로 지정도 가능.
+- 뜻이나 숙어가 다음 줄로 넘어간 항목(예: 'cannot help but' + 'do')은 번호와의
+  세로 거리로 같은 항목에 다시 붙인다.
 - 결과 JSON: {"title": ..., "source": ..., "words": [{"no":1,"word":"...","meaning":"..."}, ...]}
 """
 from __future__ import annotations
@@ -15,84 +20,103 @@ import json
 import re
 from pathlib import Path
 
+NEAR = 13.0          # 한 항목으로 볼 번호와의 세로 거리(pt)
+HEADER_GAP = 4.0     # 표 머리글(No./제시어/…) 아래로 이 정도부터 본문
 
-def _rows(page, x_split: float):
-    """페이지의 텍스트 조각을 (행 y) 기준으로 묶고, 좌/우 단으로 나눈다."""
-    import pymupdf  # noqa: F401  (pymupdf 는 PyMuPDF 패키지)
 
-    spans = []
+def _spans(page) -> list[dict]:
+    out = []
     for blk in page.get_text("dict")["blocks"]:
         for line in blk.get("lines", []):
             for sp in line["spans"]:
                 text = sp["text"].strip()
                 if text:
-                    spans.append({"x": sp["bbox"][0], "y": sp["bbox"][1],
-                                  "size": sp["size"], "text": text})
-    # y 가 가까운 조각들을 한 행으로 묶는다(같은 행이라도 글자 크기 때문에 y 가 1~3pt 어긋남)
-    spans.sort(key=lambda s: s["y"])
-    rows: list[list[dict]] = []
-    for sp in spans:
-        if rows and abs(sp["y"] - rows[-1][0]["y"]) <= 6:
-            rows[-1].append(sp)
-        else:
-            rows.append([sp])
-    out = []
-    for row in rows:
-        items = sorted(row, key=lambda s: s["x"])
-        left = [s for s in items if s["x"] < x_split]
-        right = [s for s in items if s["x"] >= x_split]
-        out.append((left, right))
+                    out.append({"x": sp["bbox"][0], "y": sp["bbox"][1], "text": text})
     return out
 
 
-def _pair(col: list[dict], eng_first: bool) -> tuple[int, str, str] | None:
-    """한 단(3조각: 번호 / 제시어 / 답)에서 (번호, 영단어, 한글뜻) 을 뽑는다."""
-    if len(col) < 3:
-        return None
-    no_txt = col[0]["text"]
-    if not re.fullmatch(r"\d{1,3}", no_txt):
-        return None
-    a, b = col[1]["text"], col[2]["text"]
-    eng, ko = (a, b) if eng_first else (b, a)
-    if not re.search(r"[A-Za-z]", eng) or not re.search(r"[가-힣]", ko):
-        return None
-    return int(no_txt), eng.strip(), ko.strip()
-
-
-def _join(head: str, tail: str) -> str:
+def _join_ko(head: str, tail: str) -> str:
     """줄바꿈으로 잘린 한글 뜻을 이어 붙인다.
 
     '눈부신 빛,' + '노려봄' → '눈부신 빛, 노려봄'   (구두점 뒤에서 끊긴 경우)
     '수치, 계산, 형' + '태'  → '수치, 계산, 형태'    (단어 중간에서 끊긴 경우)
     """
+    if not head:
+        return tail
     return f"{head} {tail}" if head.endswith((",", ";", ")", "]", ".")) else head + tail
 
 
-def extract(pdf: Path, page_no: int, x_split: float = 300.0) -> list[dict]:
+def _join_en(head: str, tail: str) -> str:
+    """줄바꿈으로 잘린 영어 표제어(주로 숙어)를 이어 붙인다."""
+    if not head:
+        return tail
+    return head + tail if head.endswith("-") else f"{head} {tail}"
+
+
+def _extract_page(page, x_split: float) -> list[dict]:
+    spans = _spans(page)
+    if not spans:
+        return []
+
+    # 표 머리글 아래부터 본문으로 본다
+    heads = [s["y"] for s in spans if s["text"] in ("No.", "제시어", "한글뜻/영단어")]
+    top = max(heads) + HEADER_GAP if heads else 0.0
+
+    body = [s for s in spans if s["y"] > top]
+    numbers = [s for s in body if re.fullmatch(r"\d{1,3}", s["text"])]
+    if not numbers:
+        return []
+    bottom = max(s["y"] for s in numbers) + NEAR
+    body = [s for s in body if s["y"] <= bottom]
+
+    # 번호마다 항목을 만들고, 나머지 조각을 같은 단에서 가장 가까운 번호에 붙인다
+    items: dict[int, dict] = {}
+    for n in numbers:
+        items[id(n)] = {"no": int(n["text"]), "side": n["x"] < x_split,
+                        "y": n["y"], "parts": []}
+    for sp in body:
+        if sp in numbers:
+            continue
+        side = sp["x"] < x_split
+        near = [n for n in numbers if (n["x"] < x_split) == side
+                and abs(n["y"] - sp["y"]) <= NEAR]
+        if not near:
+            continue
+        owner = min(near, key=lambda n: abs(n["y"] - sp["y"]))
+        items[id(owner)]["parts"].append(sp)
+
+    words = []
+    for it in items.values():
+        eng, ko = "", ""
+        for sp in sorted(it["parts"], key=lambda s: (round(s["y"], 1), s["x"])):
+            text = sp["text"]
+            if re.search(r"[가-힣]", text):
+                ko = _join_ko(ko, text)
+            elif "_" not in text and re.search(r"[A-Za-z]", text):
+                eng = _join_en(eng, text)
+        if eng and ko:
+            words.append({"no": it["no"], "word": eng, "meaning": ko})
+    return words
+
+
+def answer_pages(doc) -> list[int]:
+    """정답이 채워진 면의 페이지 번호(1-based).
+
+    시험지 PDF 는 '문제 면 → 같은 시험지의 정답 면' 순서라, 뒤쪽 절반이 정답 면이다.
+    (2쪽짜리 → 2쪽 / 4쪽짜리 → 3·4쪽)
+    """
+    n = doc.page_count
+    return list(range(n // 2 + 1, n + 1))
+
+
+def extract(pdf: Path, page_no: int | None = None, x_split: float = 300.0) -> list[dict]:
     import pymupdf
 
     doc = pymupdf.open(str(pdf))
-    page = doc[page_no - 1]
+    pages = [page_no] if page_no else answer_pages(doc)
     words: list[dict] = []
-    last: dict[str, dict | None] = {"L": None, "R": None}   # 단별 직전 항목(이어붙이기용)
-    for left, right in _rows(page, x_split):
-        for side, col, eng_first in (("L", left, True), ("R", right, False)):
-            got = _pair(col, eng_first)
-            if got:
-                item = {"no": got[0], "word": got[1], "meaning": got[2],
-                        "_y": col[0]["y"]}
-                words.append(item)
-                last[side] = item
-                continue
-            # 번호가 없는 줄 = 바로 위 항목의 뜻이 다음 줄로 넘어간 것
-            prev = last[side]
-            if not prev or not col:
-                continue
-            tail = " ".join(c["text"] for c in col).strip()
-            if re.search(r"[가-힣]", tail) and 0 < col[0]["y"] - prev["_y"] <= 12:
-                prev["meaning"] = _join(prev["meaning"], tail)
-    for w in words:
-        w.pop("_y", None)
+    for pno in pages:
+        words += _extract_page(doc[pno - 1], x_split)
     words.sort(key=lambda w: w["no"])
     return words
 
@@ -100,7 +124,8 @@ def extract(pdf: Path, page_no: int, x_split: float = 300.0) -> list[dict]:
 def main() -> None:
     ap = argparse.ArgumentParser(description="단어 시험지 PDF → 단어 JSON")
     ap.add_argument("pdf", type=Path)
-    ap.add_argument("--page", type=int, default=2, help="정답이 채워진 페이지 번호(기본 2)")
+    ap.add_argument("--page", type=int, default=None,
+                    help="정답이 채워진 페이지 번호(기본: 자동 — 뒤쪽 절반 페이지 전부)")
     ap.add_argument("--day", default="", help="범위 이름 (예: 'Day 3~4')")
     ap.add_argument("--source", default="", help="교재 이름")
     ap.add_argument("--out", type=Path, required=True)

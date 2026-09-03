@@ -1,0 +1,406 @@
+{
+  "title": "Day 5~6",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "ancient",
+      "meaning": "고대의, 옛날의"
+    },
+    {
+      "no": 2,
+      "word": "immune",
+      "meaning": "면역성을 가진; 면제된"
+    },
+    {
+      "no": 3,
+      "word": "inevitable",
+      "meaning": "피할 수 없는, 불가피한"
+    },
+    {
+      "no": 4,
+      "word": "superior",
+      "meaning": "우수한, 보다 나은; 상위의; 상급자"
+    },
+    {
+      "no": 5,
+      "word": "irrational",
+      "meaning": "비이성적인, 이성을 잃은"
+    },
+    {
+      "no": 6,
+      "word": "unlock",
+      "meaning": "열다"
+    },
+    {
+      "no": 7,
+      "word": "independence",
+      "meaning": "독립; 자립"
+    },
+    {
+      "no": 8,
+      "word": "unusual",
+      "meaning": "보통이 아닌, 흔치 않은; 유별난, 색다른"
+    },
+    {
+      "no": 9,
+      "word": "independent",
+      "meaning": "독립된, 자주의; 독립심이 강한"
+    },
+    {
+      "no": 10,
+      "word": "suggest",
+      "meaning": "제안하다; 암시하다"
+    },
+    {
+      "no": 11,
+      "word": "advanced",
+      "meaning": "진보한, 매우 앞선; 고급의, 고등의"
+    },
+    {
+      "no": 12,
+      "word": "upright",
+      "meaning": "똑바른; 수직으로 세운; 올바른, 정직한; 똑바로, 수직으로"
+    },
+    {
+      "no": 13,
+      "word": "unfortunately",
+      "meaning": "불행하게도"
+    },
+    {
+      "no": 14,
+      "word": "antique",
+      "meaning": "고대의, 옛날의; 골동품"
+    },
+    {
+      "no": 15,
+      "word": "disagreeable",
+      "meaning": "불쾌한, 싫은"
+    },
+    {
+      "no": 16,
+      "word": "discourage",
+      "meaning": "그만두게 하다, 단념시키다; 낙담시키다, 용기를 잃게 하다"
+    },
+    {
+      "no": 17,
+      "word": "suggestion",
+      "meaning": "제안; 암시, 시사"
+    },
+    {
+      "no": 18,
+      "word": "dismissal",
+      "meaning": "해고, 퇴학; 해산"
+    },
+    {
+      "no": 19,
+      "word": "immoral",
+      "meaning": "부도덕한"
+    },
+    {
+      "no": 20,
+      "word": "dismiss",
+      "meaning": "묵살하다; 해고하다, 내쫓다; 해산시키다"
+    },
+    {
+      "no": 21,
+      "word": "irrelevant",
+      "meaning": "관계가 없는, 상관없는"
+    },
+    {
+      "no": 22,
+      "word": "discard",
+      "meaning": "버리다"
+    },
+    {
+      "no": 23,
+      "word": "disability",
+      "meaning": "장애, 결함"
+    },
+    {
+      "no": 24,
+      "word": "advantage",
+      "meaning": "유리한 조건; 이점, 장점"
+    },
+    {
+      "no": 25,
+      "word": "unfair",
+      "meaning": "불공평한, 부당한"
+    },
+    {
+      "no": 26,
+      "word": "unlikely",
+      "meaning": "...할 것 같지 않은, 가망 없는"
+    },
+    {
+      "no": 27,
+      "word": "unfairness",
+      "meaning": "불공평함, 편파적임"
+    },
+    {
+      "no": 28,
+      "word": "advantageous",
+      "meaning": "유리한, 이익이 되는"
+    },
+    {
+      "no": 29,
+      "word": "advance",
+      "meaning": "전진; 진보; 전진하다; 진보하다; 진보시키다"
+    },
+    {
+      "no": 30,
+      "word": "unknown",
+      "meaning": "알려지지 않은; 무명의, 이름이 없는; 미지의 것"
+    },
+    {
+      "no": 31,
+      "word": "upside",
+      "meaning": "위쪽, 윗면"
+    },
+    {
+      "no": 32,
+      "word": "disposal",
+      "meaning": "처리, 처분, 폐기"
+    },
+    {
+      "no": 33,
+      "word": "unfortunate",
+      "meaning": "불운한, 불행한; 유감스러운"
+    },
+    {
+      "no": 34,
+      "word": "upset",
+      "meaning": "기분이 상한, 화난; 탈이 난; 상하게 하다; 뒤집어엎다"
+    },
+    {
+      "no": 35,
+      "word": "discount",
+      "meaning": "할인; 할인하다; 중요하지 않게 생각하다"
+    },
+    {
+      "no": 36,
+      "word": "uneasy",
+      "meaning": "불안한, 걱정스러운; 편치 않은, 불편한"
+    },
+    {
+      "no": 37,
+      "word": "differentiate",
+      "meaning": "구분 짓다, 구별하다"
+    },
+    {
+      "no": 38,
+      "word": "different",
+      "meaning": "다른; 여러가지의, 각색의"
+    },
+    {
+      "no": 39,
+      "word": "anticipation",
+      "meaning": "예상; 기대"
+    },
+    {
+      "no": 40,
+      "word": "inexpensive",
+      "meaning": "저렴한, 비싸지 않은"
+    },
+    {
+      "no": 41,
+      "word": "unusually",
+      "meaning": "평소와 다르게, 특이하게; 몹시, 대단히"
+    },
+    {
+      "no": 42,
+      "word": "discouraged",
+      "meaning": "낙담한, 의기소침한"
+    },
+    {
+      "no": 43,
+      "word": "antibody",
+      "meaning": "항체"
+    },
+    {
+      "no": 44,
+      "word": "illegally",
+      "meaning": "불법적으로"
+    },
+    {
+      "no": 45,
+      "word": "suffer",
+      "meaning": "겪다; ...로 괴로워하다, 앓다"
+    },
+    {
+      "no": 46,
+      "word": "disposable",
+      "meaning": "일회용"
+    },
+    {
+      "no": 47,
+      "word": "superb",
+      "meaning": "뛰어난, 멋진; 최고의"
+    },
+    {
+      "no": 48,
+      "word": "ancestral",
+      "meaning": "조상의; 대대로 내려오는"
+    },
+    {
+      "no": 49,
+      "word": "advancement",
+      "meaning": "진보, 발전; 승진"
+    },
+    {
+      "no": 50,
+      "word": "suffering",
+      "meaning": "고통"
+    },
+    {
+      "no": 51,
+      "word": "dispose",
+      "meaning": "배치하다; 처분하다, 없애다; 처리하다; 경향을 갖게 하다"
+    },
+    {
+      "no": 52,
+      "word": "difference",
+      "meaning": "차이; 의견의 차이, 불화"
+    },
+    {
+      "no": 53,
+      "word": "disorder",
+      "meaning": "무질서, 혼란; 이상, 장애"
+    },
+    {
+      "no": 54,
+      "word": "uphold",
+      "meaning": "지지하다, 옹호하다, 유지하다"
+    },
+    {
+      "no": 55,
+      "word": "disagreement",
+      "meaning": "의견 차이, 논쟁; 불일치"
+    },
+    {
+      "no": 56,
+      "word": "immunity",
+      "meaning": "면역력; 면제"
+    },
+    {
+      "no": 57,
+      "word": "unbearable",
+      "meaning": "참을 수 없는, 견딜 수 없는"
+    },
+    {
+      "no": 58,
+      "word": "ancestor",
+      "meaning": "조상, 선조"
+    },
+    {
+      "no": 59,
+      "word": "submarine",
+      "meaning": "잠수함; 해저의"
+    },
+    {
+      "no": 60,
+      "word": "antibiotic",
+      "meaning": "항생제, 항생 물질"
+    },
+    {
+      "no": 61,
+      "word": "superiority",
+      "meaning": "우수, 탁월, 우월"
+    },
+    {
+      "no": 62,
+      "word": "sovereign",
+      "meaning": "주권이 있는; 자주의, 독립의; 최고 권력의; 주권자, 군주"
+    },
+    {
+      "no": 63,
+      "word": "disappear",
+      "meaning": "사라지다, 안 보이다; 없어지다, 소멸하다"
+    },
+    {
+      "no": 64,
+      "word": "anticipate",
+      "meaning": "예상하다, 예측하다; 기대하다"
+    },
+    {
+      "no": 65,
+      "word": "superficial",
+      "meaning": "표면의, 외관상; 피상적인"
+    },
+    {
+      "no": 66,
+      "word": "disagree",
+      "meaning": "다르다; 동의하지 않다; 내용이일치하지 않다"
+    },
+    {
+      "no": 67,
+      "word": "sovereignty",
+      "meaning": "주권"
+    },
+    {
+      "no": 68,
+      "word": "suppress",
+      "meaning": "진압하다; 억제하다; 참다, 억누르다"
+    },
+    {
+      "no": 69,
+      "word": "illegal",
+      "meaning": "불법의"
+    },
+    {
+      "no": 70,
+      "word": "display",
+      "meaning": "전시하다; 보이다, 표현하다; 표시하다; 전시, 진열; 보이기, 표현; 디스플레이, 영상 출력 장치"
+    },
+    {
+      "no": 71,
+      "word": "support",
+      "meaning": "지지하다; 부양하다; 받치다; 지지, 지원; 부양; 받침"
+    },
+    {
+      "no": 72,
+      "word": "disposition",
+      "meaning": "기질; 배치, 배열"
+    },
+    {
+      "no": 73,
+      "word": "suppression",
+      "meaning": "진압, 억제"
+    },
+    {
+      "no": 74,
+      "word": "surface",
+      "meaning": "표면; 외관; 올라오다; 드러나다, 나타나다"
+    },
+    {
+      "no": 75,
+      "word": "differ",
+      "meaning": "다르다; 일치하지 않다"
+    },
+    {
+      "no": 76,
+      "word": "ease",
+      "meaning": "편안함, 안락함; 쉬움, 용이함; 편하게 하다; 완화하다"
+    },
+    {
+      "no": 77,
+      "word": "disappearance",
+      "meaning": "사라짐, 소멸; 실종"
+    },
+    {
+      "no": 78,
+      "word": "independently",
+      "meaning": "독립하여, 자주적으로"
+    },
+    {
+      "no": 79,
+      "word": "inevitably",
+      "meaning": "필연적으로, 반드시"
+    },
+    {
+      "no": 80,
+      "word": "Antarctic",
+      "meaning": "남극의; 남극"
+    }
+  ]
+}

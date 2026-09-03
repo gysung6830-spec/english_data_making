@@ -1,0 +1,306 @@
+{
+  "title": "Day 39~40",
+  "source": "Word Master 고등 Complete",
+  "words": [
+    {
+      "no": 1,
+      "word": "amount to",
+      "meaning": "~에 이르다; ~과 마찬가지다"
+    },
+    {
+      "no": 2,
+      "word": "unprecedented",
+      "meaning": "전례 없는; 새로운, 신기한"
+    },
+    {
+      "no": 3,
+      "word": "ethical",
+      "meaning": "윤리적인, 도덕의"
+    },
+    {
+      "no": 4,
+      "word": "ward off",
+      "meaning": "~을 물리치다, ~을 피하다"
+    },
+    {
+      "no": 5,
+      "word": "comprehensive",
+      "meaning": "포괄적인, 종합적인; 이해력이 있는"
+    },
+    {
+      "no": 6,
+      "word": "bring ~ to life",
+      "meaning": "~에 생명을 불어넣다, ~을 회생시키다; 재미있게 하다"
+    },
+    {
+      "no": 7,
+      "word": "anything but",
+      "meaning": "결코 ~이 아닌"
+    },
+    {
+      "no": 8,
+      "word": "profession",
+      "meaning": "직업, 전문직"
+    },
+    {
+      "no": 9,
+      "word": "scarcity",
+      "meaning": "부족, 결핍; 드묾, 희귀"
+    },
+    {
+      "no": 10,
+      "word": "surplus",
+      "meaning": "나머지; 과잉, 잉여물; 나머지의; 과잉의, 잉여의"
+    },
+    {
+      "no": 11,
+      "word": "competent",
+      "meaning": "유능한, 역량이 있는; 요구에 맞는, 충분한"
+    },
+    {
+      "no": 12,
+      "word": "emerge",
+      "meaning": "나오다, 나타나다; 드러나다, 밝혀지다"
+    },
+    {
+      "no": 13,
+      "word": "subsidy",
+      "meaning": "보조금, 장려금"
+    },
+    {
+      "no": 14,
+      "word": "stereotype",
+      "meaning": "고정 관념, 정형화된 생각; 정형화하다"
+    },
+    {
+      "no": 15,
+      "word": "intermediate",
+      "meaning": "중간의; 중급의; 중간에 있는 것; 중개인"
+    },
+    {
+      "no": 16,
+      "word": "condense",
+      "meaning": "응축하다, 압축하다; 요약하다, 간추리다"
+    },
+    {
+      "no": 17,
+      "word": "misery",
+      "meaning": "비참함, 궁핍; 불행, 고뇌"
+    },
+    {
+      "no": 18,
+      "word": "frequency",
+      "meaning": "빈도; 빈발, 잦음; 주파수; 진동수"
+    },
+    {
+      "no": 19,
+      "word": "drain",
+      "meaning": "배수하다, 빠지다; 소모시키다, 고갈시키다; 배수관, 방수로"
+    },
+    {
+      "no": 20,
+      "word": "entangle",
+      "meaning": "얽히게 하다; 말려들게 하다"
+    },
+    {
+      "no": 21,
+      "word": "toll",
+      "meaning": "통행료, 사용세; 희생, 대가; 사상자 수; 종소리; 징수하다, 부과하다; 울리다, 치다"
+    },
+    {
+      "no": 22,
+      "word": "rotation",
+      "meaning": "회전; 자전; 순환; 교대"
+    },
+    {
+      "no": 23,
+      "word": "overjoyed",
+      "meaning": "매우 기뻐하는"
+    },
+    {
+      "no": 24,
+      "word": "blow up",
+      "meaning": "폭파하다, 터뜨리다; 화를 내다"
+    },
+    {
+      "no": 25,
+      "word": "strive for",
+      "meaning": "~을 위해 노력하다"
+    },
+    {
+      "no": 26,
+      "word": "intertwine",
+      "meaning": "뒤얽다, 엮다; 엉클어지다"
+    },
+    {
+      "no": 27,
+      "word": "shovel",
+      "meaning": "삽; 삽으로 파다"
+    },
+    {
+      "no": 28,
+      "word": "condemn",
+      "meaning": "비난하다; 선고하다; 운명짓다"
+    },
+    {
+      "no": 29,
+      "word": "struggle with",
+      "meaning": "~로 고생하다, ~을 해결하려고 애쓰다"
+    },
+    {
+      "no": 30,
+      "word": "backfire",
+      "meaning": "역효과를 낳다"
+    },
+    {
+      "no": 31,
+      "word": "pesticide",
+      "meaning": "살충제, 농약"
+    },
+    {
+      "no": 32,
+      "word": "miser",
+      "meaning": "구두쇠, 자린고비"
+    },
+    {
+      "no": 33,
+      "word": "in the face of",
+      "meaning": "~에 직면하여; ~에도 불구하고"
+    },
+    {
+      "no": 34,
+      "word": "replacement",
+      "meaning": "대체, 교체; 대체자; 반환, 복직"
+    },
+    {
+      "no": 35,
+      "word": "sew",
+      "meaning": "꿰매다, 바느질하다"
+    },
+    {
+      "no": 36,
+      "word": "launch",
+      "meaning": "개시하다; 출시하다; 발사하다; 개시; 출시; 발사"
+    },
+    {
+      "no": 37,
+      "word": "bound",
+      "meaning": "경계, 한계; 경계를 긋다, 제한하다; 튀어 오르다; ~해야 하는; ~할 가능성이 큰; ~행의"
+    },
+    {
+      "no": 38,
+      "word": "voluntary",
+      "meaning": "자발적인, 임의의; 고의의, 계획적인"
+    },
+    {
+      "no": 39,
+      "word": "estate",
+      "meaning": "토지; 사유지; 재산권, 부동산권"
+    },
+    {
+      "no": 40,
+      "word": "persistence",
+      "meaning": "고집, 끈기; 지속; 영속"
+    },
+    {
+      "no": 41,
+      "word": "extraordinary",
+      "meaning": "비상한, 보통이 아닌; 별난, 놀라운"
+    },
+    {
+      "no": 42,
+      "word": "with regard to",
+      "meaning": "~과 관련하여, ~에 관해서는"
+    },
+    {
+      "no": 43,
+      "word": "textual",
+      "meaning": "원문의; 원문대로의, 문자대로의"
+    },
+    {
+      "no": 44,
+      "word": "sediment",
+      "meaning": "침전물, 퇴적물"
+    },
+    {
+      "no": 45,
+      "word": "textile",
+      "meaning": "직물, 섬유; 직물의"
+    },
+    {
+      "no": 46,
+      "word": "biosphere",
+      "meaning": "생물권"
+    },
+    {
+      "no": 47,
+      "word": "competitive",
+      "meaning": "경쟁의; 경쟁력이 있는"
+    },
+    {
+      "no": 48,
+      "word": "in respect of",
+      "meaning": "~에 관해서는"
+    },
+    {
+      "no": 49,
+      "word": "by nature",
+      "meaning": "선천적으로, 본래"
+    },
+    {
+      "no": 50,
+      "word": "sow",
+      "meaning": "뿌리다, 심다"
+    },
+    {
+      "no": 51,
+      "word": "marine",
+      "meaning": "바다의; 선박의; 해군의"
+    },
+    {
+      "no": 52,
+      "word": "stun",
+      "meaning": "기절시키다; 깜짝 놀라게 하다"
+    },
+    {
+      "no": 53,
+      "word": "segment",
+      "meaning": "단편, 조각, 부분; 나누다, 분할하다"
+    },
+    {
+      "no": 54,
+      "word": "damp",
+      "meaning": "습기 찬, 축축한; 습기, 물기; 축축하게 하다"
+    },
+    {
+      "no": 55,
+      "word": "yield to",
+      "meaning": "~에게 양보하다; ~에 굴복하다"
+    },
+    {
+      "no": 56,
+      "word": "pillar",
+      "meaning": "기둥, 지주; 대들보; 기념비"
+    },
+    {
+      "no": 57,
+      "word": "soak",
+      "meaning": "담그다, 흠뻑 적시다"
+    },
+    {
+      "no": 58,
+      "word": "extensive",
+      "meaning": "넓은, 광대한; 광범위에 걸친, 포괄적인"
+    },
+    {
+      "no": 59,
+      "word": "renowned",
+      "meaning": "저명한, 유명한"
+    },
+    {
+      "no": 60,
+      "word": "salient",
+      "meaning": "현저한, 두드러진; 핵심적인; 돌출한"
+    }
+  ]
+}

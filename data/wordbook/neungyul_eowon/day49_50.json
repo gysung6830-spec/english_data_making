@@ -1,0 +1,406 @@
+{
+  "title": "Day 49~50",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "probably",
+      "meaning": "아마도, 대개는, 십중팔구"
+    },
+    {
+      "no": 2,
+      "word": "electronics",
+      "meaning": "전자 공학; 전자 제품"
+    },
+    {
+      "no": 3,
+      "word": "insurance",
+      "meaning": "보험"
+    },
+    {
+      "no": 4,
+      "word": "subconsciously",
+      "meaning": "잠재의식 속에서"
+    },
+    {
+      "no": 5,
+      "word": "citizen",
+      "meaning": "시민; 국민"
+    },
+    {
+      "no": 6,
+      "word": "esteem",
+      "meaning": "존경하다, 존중하다; 존경, 경의"
+    },
+    {
+      "no": 7,
+      "word": "originality",
+      "meaning": "독창성, 기발함"
+    },
+    {
+      "no": 8,
+      "word": "register",
+      "meaning": "등록하다, 이름을 적다; 나타내다, 기록하다; 기록, 등록"
+    },
+    {
+      "no": 9,
+      "word": "probability",
+      "meaning": "가망성, 확률"
+    },
+    {
+      "no": 10,
+      "word": "submerge",
+      "meaning": "잠수하다, 잠기다; 잠그다; 깊이 감추다"
+    },
+    {
+      "no": 11,
+      "word": "civilization",
+      "meaning": "문명"
+    },
+    {
+      "no": 12,
+      "word": "civil",
+      "meaning": "시민의, 민간인의; 민사의"
+    },
+    {
+      "no": 13,
+      "word": "assurance",
+      "meaning": "보장, 장담; 확신, 자신감"
+    },
+    {
+      "no": 14,
+      "word": "reassurance",
+      "meaning": "안심시키기, 안심시키는 것"
+    },
+    {
+      "no": 15,
+      "word": "circular",
+      "meaning": "원형의, 둥근; 순환하는, 순회의"
+    },
+    {
+      "no": 16,
+      "word": "approving",
+      "meaning": "찬성하는, 좋다고 여기는"
+    },
+    {
+      "no": 17,
+      "word": "prove",
+      "meaning": "증명하다, 입증하다; ...로 판명되다"
+    },
+    {
+      "no": 18,
+      "word": "circuit",
+      "meaning": "순회 ; 주위, 둘레; 회로"
+    },
+    {
+      "no": 19,
+      "word": "trouble",
+      "meaning": "문제, 어려움, 곤란, 근심; 괴롭히다, 걱정시키다; 성가시게 하다, 수고스럽게 ...하도록 하다"
+    },
+    {
+      "no": 20,
+      "word": "digestive",
+      "meaning": "소화의, 소화를 돕는"
+    },
+    {
+      "no": 21,
+      "word": "stake",
+      "meaning": "돈, 지분, 내기; 말뚝"
+    },
+    {
+      "no": 22,
+      "word": "liberal",
+      "meaning": "관대한, 개방적인; 자유주의의; 인색하지 않은, 후한"
+    },
+    {
+      "no": 23,
+      "word": "emergent",
+      "meaning": "신생의, 신흥의"
+    },
+    {
+      "no": 24,
+      "word": "disturbance",
+      "meaning": "혼란, 소동; 방해; 불안, 동요"
+    },
+    {
+      "no": 25,
+      "word": "proof",
+      "meaning": "증거, 증명"
+    },
+    {
+      "no": 26,
+      "word": "donate",
+      "meaning": "기부하다, 기증하다"
+    },
+    {
+      "no": 27,
+      "word": "civilized",
+      "meaning": "문명화된, 교양 있는"
+    },
+    {
+      "no": 28,
+      "word": "thesis",
+      "meaning": "논문; 주장, 논제"
+    },
+    {
+      "no": 29,
+      "word": "original",
+      "meaning": "원래의, 최초의; 독창적인; 원형, 원작, 원본"
+    },
+    {
+      "no": 30,
+      "word": "probable",
+      "meaning": "있을 법한, 그럴듯한"
+    },
+    {
+      "no": 31,
+      "word": "conscientious",
+      "meaning": "양심적인, 성실한"
+    },
+    {
+      "no": 32,
+      "word": "disturbing",
+      "meaning": "불안하게 하는, 충격적인; 방해가 되는"
+    },
+    {
+      "no": 33,
+      "word": "digest",
+      "meaning": "소화하다; 소화되다; 이해하다; 요약, 개요"
+    },
+    {
+      "no": 34,
+      "word": "circumstance",
+      "meaning": "주위 사정, 상황; 환경, 처지"
+    },
+    {
+      "no": 35,
+      "word": "liberty",
+      "meaning": "자유; 해방, 석방"
+    },
+    {
+      "no": 36,
+      "word": "assure",
+      "meaning": "보장하다, 장담하다; ...을 확실하게 하다"
+    },
+    {
+      "no": 37,
+      "word": "merge",
+      "meaning": "결합하다, 합병하다, 융합하다"
+    },
+    {
+      "no": 38,
+      "word": "probe",
+      "meaning": "엄밀히 조사하다, 규명하다; 조사"
+    },
+    {
+      "no": 39,
+      "word": "origin",
+      "meaning": "기원, 유래; 출신"
+    },
+    {
+      "no": 40,
+      "word": "digestion",
+      "meaning": "소화, 소화력"
+    },
+    {
+      "no": 41,
+      "word": "emergency",
+      "meaning": "비상 상황"
+    },
+    {
+      "no": 42,
+      "word": "conscience",
+      "meaning": "양심, 도덕심"
+    },
+    {
+      "no": 43,
+      "word": "dose",
+      "meaning": "복용량, 투여량; ...에게 투여하다"
+    },
+    {
+      "no": 44,
+      "word": "deliver",
+      "meaning": "배달하다, 전하다; 강연하다, 연설하다; 분만하다; 분만시키다; 이행하다"
+    },
+    {
+      "no": 45,
+      "word": "anniversary",
+      "meaning": "기념일"
+    },
+    {
+      "no": 46,
+      "word": "annually",
+      "meaning": "매년, 일 년에 한 번씩"
+    },
+    {
+      "no": 47,
+      "word": "consciousness",
+      "meaning": "의식, 지각; 알고 있음, 인식"
+    },
+    {
+      "no": 48,
+      "word": "attach",
+      "meaning": "붙이다, 부착하다; 첨부하다; 소속시키다"
+    },
+    {
+      "no": 49,
+      "word": "merger",
+      "meaning": "합병"
+    },
+    {
+      "no": 50,
+      "word": "circulate",
+      "meaning": "돌다, 순환하다; 퍼지다; 유통하다, 배포하다"
+    },
+    {
+      "no": 51,
+      "word": "approve",
+      "meaning": "찬성하다, 승낙하다; 허가하다, 승인하다"
+    },
+    {
+      "no": 52,
+      "word": "insure",
+      "meaning": "보험에 들다"
+    },
+    {
+      "no": 53,
+      "word": "donation",
+      "meaning": "기부, 기증"
+    },
+    {
+      "no": 54,
+      "word": "electric",
+      "meaning": "전기의, 전기로 작동하는, 전기를 띤"
+    },
+    {
+      "no": 55,
+      "word": "orientation",
+      "meaning": "관심, 지향; 예비 교육"
+    },
+    {
+      "no": 56,
+      "word": "registry",
+      "meaning": "등기소, 등록소; 등기, 등록"
+    },
+    {
+      "no": 57,
+      "word": "liberalize",
+      "meaning": "완화하다"
+    },
+    {
+      "no": 58,
+      "word": "suburb",
+      "meaning": "교외, 도시 주변의 주택지"
+    },
+    {
+      "no": 59,
+      "word": "theme",
+      "meaning": "주제, 테마"
+    },
+    {
+      "no": 60,
+      "word": "electron",
+      "meaning": "전자"
+    },
+    {
+      "no": 61,
+      "word": "proven",
+      "meaning": "입증된"
+    },
+    {
+      "no": 62,
+      "word": "electricity",
+      "meaning": "전기, 전류"
+    },
+    {
+      "no": 63,
+      "word": "attack",
+      "meaning": "공격; 발병; 공격하다; 발병하다"
+    },
+    {
+      "no": 64,
+      "word": "hypothetical",
+      "meaning": "가설의, 가정의, 가상의"
+    },
+    {
+      "no": 65,
+      "word": "approval",
+      "meaning": "찬성, 승낙; 허가, 승인"
+    },
+    {
+      "no": 66,
+      "word": "delivery",
+      "meaning": "배달; 분만; 연설"
+    },
+    {
+      "no": 67,
+      "word": "subconscious",
+      "meaning": "잠재의식"
+    },
+    {
+      "no": 68,
+      "word": "thematic",
+      "meaning": "주제에 관한, 주제와 관련된"
+    },
+    {
+      "no": 69,
+      "word": "electrical",
+      "meaning": "전기의"
+    },
+    {
+      "no": 70,
+      "word": "registration",
+      "meaning": "등록, 신고; 등록 서류"
+    },
+    {
+      "no": 71,
+      "word": "emergence",
+      "meaning": "출현, 등장"
+    },
+    {
+      "no": 72,
+      "word": "orient",
+      "meaning": "향하게 하다; 적응시키다"
+    },
+    {
+      "no": 73,
+      "word": "reassure",
+      "meaning": "안심시키다"
+    },
+    {
+      "no": 74,
+      "word": "electronic",
+      "meaning": "전자의; 전자 공학의"
+    },
+    {
+      "no": 75,
+      "word": "circulation",
+      "meaning": "순환; 유통, 유포; 판매 부수"
+    },
+    {
+      "no": 76,
+      "word": "disturb",
+      "meaning": "방해하다; 깨뜨리다, 어지럽히다"
+    },
+    {
+      "no": 77,
+      "word": "civilize",
+      "meaning": "문명화하다"
+    },
+    {
+      "no": 78,
+      "word": "gesture",
+      "meaning": "몸짓, 제스처; 표현, 표시; 몸짓을 하다"
+    },
+    {
+      "no": 79,
+      "word": "emerge",
+      "meaning": "드러나다; 알려지다, 부각되다"
+    },
+    {
+      "no": 80,
+      "word": "civilian",
+      "meaning": "민간인"
+    }
+  ]
+}

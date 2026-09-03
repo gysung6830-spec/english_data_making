@@ -1,0 +1,406 @@
+{
+  "title": "Day 39~40",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "population",
+      "meaning": "인구; 전체 주민"
+    },
+    {
+      "no": 2,
+      "word": "discord",
+      "meaning": "불일치, 불화; 불협화음"
+    },
+    {
+      "no": 3,
+      "word": "republic",
+      "meaning": "공화국, 공화 정치 체제"
+    },
+    {
+      "no": 4,
+      "word": "consensus",
+      "meaning": "의견 일치, 합의"
+    },
+    {
+      "no": 5,
+      "word": "scent",
+      "meaning": "향기, 냄새"
+    },
+    {
+      "no": 6,
+      "word": "determined",
+      "meaning": "결연한, 단호한; 결심한"
+    },
+    {
+      "no": 7,
+      "word": "astronomy",
+      "meaning": "천문학"
+    },
+    {
+      "no": 8,
+      "word": "evoke",
+      "meaning": "일깨우다, 환기시키다"
+    },
+    {
+      "no": 9,
+      "word": "nonsense",
+      "meaning": "무의미한 말, 터무니없는 생각"
+    },
+    {
+      "no": 10,
+      "word": "belongings",
+      "meaning": "재산, 소유물"
+    },
+    {
+      "no": 11,
+      "word": "encourage",
+      "meaning": "용기를 북돋우다; 장려하다, 촉진하다, 조장하다"
+    },
+    {
+      "no": 12,
+      "word": "popular",
+      "meaning": "인기 있는; 대중적인, 대중의"
+    },
+    {
+      "no": 13,
+      "word": "sensible",
+      "meaning": "분별 있는, 현명한"
+    },
+    {
+      "no": 14,
+      "word": "resentment",
+      "meaning": "분개, 분노"
+    },
+    {
+      "no": 15,
+      "word": "vocabulary",
+      "meaning": "어휘"
+    },
+    {
+      "no": 16,
+      "word": "surge",
+      "meaning": "밀려들다, 쇄도하다; 급등하다, 급증하다; 격동, 쇄도; 급등, 급증"
+    },
+    {
+      "no": 17,
+      "word": "vocational",
+      "meaning": "직업의"
+    },
+    {
+      "no": 18,
+      "word": "fragment",
+      "meaning": "파편, 조각"
+    },
+    {
+      "no": 19,
+      "word": "resource",
+      "meaning": "자원, 물자, 자산; 자료"
+    },
+    {
+      "no": 20,
+      "word": "fraction",
+      "meaning": "부분, 일부, 소량; 분수"
+    },
+    {
+      "no": 21,
+      "word": "core",
+      "meaning": "핵심, 중심부, 중요 부분; 심, 속; 핵심의, 가장 중요한, 중심적인"
+    },
+    {
+      "no": 22,
+      "word": "publicity",
+      "meaning": "평판, 널리 알려짐; 광고, 선전, 홍보"
+    },
+    {
+      "no": 23,
+      "word": "vocation",
+      "meaning": "천직, 직업; 소명, 사명감"
+    },
+    {
+      "no": 24,
+      "word": "considerably",
+      "meaning": "많이, 상당히"
+    },
+    {
+      "no": 25,
+      "word": "disaster",
+      "meaning": "재난, 참사, 큰 불행"
+    },
+    {
+      "no": 26,
+      "word": "termination",
+      "meaning": "종결, 종료"
+    },
+    {
+      "no": 27,
+      "word": "consideration",
+      "meaning": "숙고, 고려 ; 참작, 배려"
+    },
+    {
+      "no": 28,
+      "word": "determination",
+      "meaning": "결심, 결의; 결정"
+    },
+    {
+      "no": 29,
+      "word": "grave",
+      "meaning": "무덤; 중대한, 심각한; 엄숙한, 진지한; 조각하다, 새기다"
+    },
+    {
+      "no": 30,
+      "word": "common",
+      "meaning": "일반의, 흔한, 보통의; 공통의, 공동의; 공통"
+    },
+    {
+      "no": 31,
+      "word": "disastrous",
+      "meaning": "재난의, 비참한, 불행한"
+    },
+    {
+      "no": 32,
+      "word": "accordance",
+      "meaning": "일치, 합치, 부합"
+    },
+    {
+      "no": 33,
+      "word": "consent",
+      "meaning": "승낙, 허가, 동의; 승낙하다, 동의하다"
+    },
+    {
+      "no": 34,
+      "word": "source",
+      "meaning": "근원, 원천; 원인; 출처"
+    },
+    {
+      "no": 35,
+      "word": "desire",
+      "meaning": "몹시 바라다, 원하다, 욕구하다; 욕구, 욕망, 소망"
+    },
+    {
+      "no": 36,
+      "word": "provocation",
+      "meaning": "도발, 자극"
+    },
+    {
+      "no": 37,
+      "word": "consider",
+      "meaning": "생각하다, 숙고하다; 여기다, 간주하다; 고려하다, 존중하다"
+    },
+    {
+      "no": 38,
+      "word": "senseless",
+      "meaning": "분별 없는, 무분별한, 몰상식한; 무의미한"
+    },
+    {
+      "no": 39,
+      "word": "courageous",
+      "meaning": "용기 있는"
+    },
+    {
+      "no": 40,
+      "word": "sensory",
+      "meaning": "감각의"
+    },
+    {
+      "no": 41,
+      "word": "publisher",
+      "meaning": "출판인, 출판사"
+    },
+    {
+      "no": 42,
+      "word": "determine",
+      "meaning": "결정짓다, 좌우하다; 결심하다"
+    },
+    {
+      "no": 43,
+      "word": "community",
+      "meaning": "공동체, 사회; 단체, 모임, 커뮤니티"
+    },
+    {
+      "no": 44,
+      "word": "courage",
+      "meaning": "용기, 담력"
+    },
+    {
+      "no": 45,
+      "word": "desirable",
+      "meaning": "바람직한, 가치 있는, 얻고 싶은"
+    },
+    {
+      "no": 46,
+      "word": "uncommon",
+      "meaning": "드문, 흔치 않은"
+    },
+    {
+      "no": 47,
+      "word": "provocative",
+      "meaning": "도발적인, 자극적인"
+    },
+    {
+      "no": 48,
+      "word": "sense",
+      "meaning": "의 감각; 느낌, 감정; 분별력, 감각, 센스; (단어, 어구의 의미, 뜻; 느끼다, 감지하다, 알아채다"
+    },
+    {
+      "no": 49,
+      "word": "vocal",
+      "meaning": "목소리의, 음성의; 강하게 의견을 말하는; 보컬, 노래 부분"
+    },
+    {
+      "no": 50,
+      "word": "astronaut",
+      "meaning": "우주 비행사"
+    },
+    {
+      "no": 51,
+      "word": "sensibility",
+      "meaning": "감각, 감성; 감수성"
+    },
+    {
+      "no": 52,
+      "word": "fragility",
+      "meaning": "부서지기 쉬움, 연약함"
+    },
+    {
+      "no": 53,
+      "word": "resent",
+      "meaning": "분개하다, 화를 내다"
+    },
+    {
+      "no": 54,
+      "word": "linger",
+      "meaning": "오래 머무르다, 남아 있다, 지속되다"
+    },
+    {
+      "no": 55,
+      "word": "grief",
+      "meaning": "슬픔, 비탄"
+    },
+    {
+      "no": 56,
+      "word": "resentful",
+      "meaning": "분개하는, 화난"
+    },
+    {
+      "no": 57,
+      "word": "long",
+      "meaning": "간절히 바라다; 긴, 오랜; 길게, 오래"
+    },
+    {
+      "no": 58,
+      "word": "sensational",
+      "meaning": "세상을 놀라게 하는; 선정적인"
+    },
+    {
+      "no": 59,
+      "word": "terminate",
+      "meaning": "종결하다, 끝내다; 종결되다, 끝나다"
+    },
+    {
+      "no": 60,
+      "word": "publication",
+      "meaning": "출판, 발행; 발표, 공표"
+    },
+    {
+      "no": 61,
+      "word": "advocate",
+      "meaning": "옹호하다, 지지하다; 옹호자, 지지자; 대변인, 중재인; 변호사"
+    },
+    {
+      "no": 62,
+      "word": "accord",
+      "meaning": "부합하다, 일치하다; 부여하다; 일치; 협정, 합의"
+    },
+    {
+      "no": 63,
+      "word": "accordingly",
+      "meaning": "따라서, 그러므로; 그에 맞게, 그에 따라서"
+    },
+    {
+      "no": 64,
+      "word": "communicate",
+      "meaning": "전달하다, 의사소통하다"
+    },
+    {
+      "no": 65,
+      "word": "prolong",
+      "meaning": "연장하다, 지속시키다, 늘리다"
+    },
+    {
+      "no": 66,
+      "word": "considering",
+      "meaning": "...을 고려하면"
+    },
+    {
+      "no": 67,
+      "word": "gravity",
+      "meaning": "중력, 무게; 심각함, 진지함"
+    },
+    {
+      "no": 68,
+      "word": "provoke",
+      "meaning": "유발하다; 화나게 하다; 야기하다, 선동하다"
+    },
+    {
+      "no": 69,
+      "word": "lengthen",
+      "meaning": "길게 하다; 길어지다"
+    },
+    {
+      "no": 70,
+      "word": "populate",
+      "meaning": "거주시키다; 살다, 거주하다"
+    },
+    {
+      "no": 71,
+      "word": "considerate",
+      "meaning": "사려 깊은, 배려하는"
+    },
+    {
+      "no": 72,
+      "word": "advocacy",
+      "meaning": "지지, 옹호; 변호"
+    },
+    {
+      "no": 73,
+      "word": "considerable",
+      "meaning": "상당한, 많은"
+    },
+    {
+      "no": 74,
+      "word": "sensitivity",
+      "meaning": "세심함; 민감, 예민함"
+    },
+    {
+      "no": 75,
+      "word": "fragile",
+      "meaning": "부서지기 쉬운, 깨지기 쉬운; 허약한"
+    },
+    {
+      "no": 76,
+      "word": "publish",
+      "meaning": "출판하다; 발표하다"
+    },
+    {
+      "no": 77,
+      "word": "length",
+      "meaning": "길이; 세로; 기간"
+    },
+    {
+      "no": 78,
+      "word": "longing",
+      "meaning": "갈망, 열망"
+    },
+    {
+      "no": 79,
+      "word": "communication",
+      "meaning": "의사소통, 전달, 통신"
+    },
+    {
+      "no": 80,
+      "word": "sensation",
+      "meaning": "감각; 느낌, 기분; 감동, 감흥; 세상을 놀라게 하는 것"
+    }
+  ]
+}

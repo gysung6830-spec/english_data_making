@@ -1,0 +1,406 @@
+{
+  "title": "Day 1~2",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "protective",
+      "meaning": "보호하는"
+    },
+    {
+      "no": 2,
+      "word": "utmost",
+      "meaning": "최대의, 극도의"
+    },
+    {
+      "no": 3,
+      "word": "illustration",
+      "meaning": "삽화; 예시"
+    },
+    {
+      "no": 4,
+      "word": "insight",
+      "meaning": "통찰력"
+    },
+    {
+      "no": 5,
+      "word": "protection",
+      "meaning": "보호; 방어물"
+    },
+    {
+      "no": 6,
+      "word": "recover",
+      "meaning": "회복하다; 되찾다, 회수하다"
+    },
+    {
+      "no": 7,
+      "word": "propose",
+      "meaning": "제안하다; 제시하다; 청혼하다"
+    },
+    {
+      "no": 8,
+      "word": "income",
+      "meaning": "소득, 수입"
+    },
+    {
+      "no": 9,
+      "word": "develop",
+      "meaning": "발전하다, 성장하다; 개발하다"
+    },
+    {
+      "no": 10,
+      "word": "infect",
+      "meaning": "감염시키다; 오염시키다"
+    },
+    {
+      "no": 11,
+      "word": "outstanding",
+      "meaning": "뛰어난, 아주 훌륭한, 두드러진"
+    },
+    {
+      "no": 12,
+      "word": "infectious",
+      "meaning": "전염성의; 남에게 옮기 쉬운"
+    },
+    {
+      "no": 13,
+      "word": "debate",
+      "meaning": "토론, 논쟁; 토론하다; 숙고하다, 검토하다"
+    },
+    {
+      "no": 14,
+      "word": "intake",
+      "meaning": "섭취"
+    },
+    {
+      "no": 15,
+      "word": "representative",
+      "meaning": "대표자; 하원의원; 대표하는"
+    },
+    {
+      "no": 16,
+      "word": "detection",
+      "meaning": "발견, 감지"
+    },
+    {
+      "no": 17,
+      "word": "derived",
+      "meaning": "파생된, 유래된"
+    },
+    {
+      "no": 18,
+      "word": "progressive",
+      "meaning": "진보적인; 점진적인"
+    },
+    {
+      "no": 19,
+      "word": "precaution",
+      "meaning": "조심, 경계; 예방책"
+    },
+    {
+      "no": 20,
+      "word": "purchase",
+      "meaning": "구매하다, 구입하다; 구매, 구입"
+    },
+    {
+      "no": 21,
+      "word": "premature",
+      "meaning": "시기상조의, 조급한; 너무 이른, 조기의"
+    },
+    {
+      "no": 22,
+      "word": "revival",
+      "meaning": "회복, 부활, 되살아남; 재공연, 재상연"
+    },
+    {
+      "no": 23,
+      "word": "utterly",
+      "meaning": "완전히, 철저히"
+    },
+    {
+      "no": 24,
+      "word": "remove",
+      "meaning": "제거하다; 옮기다, 이전시키다"
+    },
+    {
+      "no": 25,
+      "word": "recycling",
+      "meaning": "재활용"
+    },
+    {
+      "no": 26,
+      "word": "outline",
+      "meaning": "개요; 윤곽, 외형; 개요를 서술하다; 윤곽을 보여주다"
+    },
+    {
+      "no": 27,
+      "word": "remainder",
+      "meaning": "나머지, 잔여"
+    },
+    {
+      "no": 28,
+      "word": "research",
+      "meaning": "연구, 조사; 연구하다"
+    },
+    {
+      "no": 29,
+      "word": "depress",
+      "meaning": "낙담시키다, 우울하게 하다; 불경기로 만들다"
+    },
+    {
+      "no": 30,
+      "word": "preview",
+      "meaning": "미리 보기, 사전 검토; 시사, 시연; 예고편; 보다"
+    },
+    {
+      "no": 31,
+      "word": "record",
+      "meaning": "기록; 음반; 기록하다; 녹음하다, 녹화하다"
+    },
+    {
+      "no": 32,
+      "word": "declare",
+      "meaning": "선언하다; 신고하다"
+    },
+    {
+      "no": 33,
+      "word": "productive",
+      "meaning": "생산적인, 결실이 많은; 비옥한"
+    },
+    {
+      "no": 34,
+      "word": "progress",
+      "meaning": "진보, 발전; 진전, 진행; 전진; 진보하다, 발전하다; 전진하다"
+    },
+    {
+      "no": 35,
+      "word": "depict",
+      "meaning": "그리다; 묘사하다"
+    },
+    {
+      "no": 36,
+      "word": "revive",
+      "meaning": "소생시키다; 소생하다; 되살아나게 하다; 재공연하다, 재상연하다"
+    },
+    {
+      "no": 37,
+      "word": "profile",
+      "meaning": "윤곽, 옆얼굴; 인물 소개, 프로필; 개요"
+    },
+    {
+      "no": 38,
+      "word": "investigation",
+      "meaning": "수사; 조사"
+    },
+    {
+      "no": 39,
+      "word": "proposal",
+      "meaning": "제안; 신청; 청혼"
+    },
+    {
+      "no": 40,
+      "word": "recall",
+      "meaning": "기억해내다, 회상하다; 상기시키다; 회수하다; 기억; 소환, 회수"
+    },
+    {
+      "no": 41,
+      "word": "departure",
+      "meaning": "떠남, 출발"
+    },
+    {
+      "no": 42,
+      "word": "retire",
+      "meaning": "은퇴하다; 은퇴시키다"
+    },
+    {
+      "no": 43,
+      "word": "investigator",
+      "meaning": "수사관"
+    },
+    {
+      "no": 44,
+      "word": "detachment",
+      "meaning": "분리, 이탈; 파견"
+    },
+    {
+      "no": 45,
+      "word": "reproduction",
+      "meaning": "생식, 번식; 복제; 재생, 재현"
+    },
+    {
+      "no": 46,
+      "word": "utter",
+      "meaning": "완전한, 전적인; 말하다; 내다"
+    },
+    {
+      "no": 47,
+      "word": "protect",
+      "meaning": "보호하다, 막다, 지키다"
+    },
+    {
+      "no": 48,
+      "word": "reproductive",
+      "meaning": "생식의"
+    },
+    {
+      "no": 49,
+      "word": "demonstration",
+      "meaning": "입증, 설명"
+    },
+    {
+      "no": 50,
+      "word": "removal",
+      "meaning": "제거; 이전, 이동"
+    },
+    {
+      "no": 51,
+      "word": "invest",
+      "meaning": "투자하다"
+    },
+    {
+      "no": 52,
+      "word": "replace",
+      "meaning": "대신하다, 대체하다; 바꾸다, 교체하다"
+    },
+    {
+      "no": 53,
+      "word": "inherently",
+      "meaning": "본질적으로"
+    },
+    {
+      "no": 54,
+      "word": "demonstrate",
+      "meaning": "입증하다, 설명하다; 보여주다; 시위하다"
+    },
+    {
+      "no": 55,
+      "word": "detect",
+      "meaning": "발견하다, 알아내다"
+    },
+    {
+      "no": 56,
+      "word": "recovery",
+      "meaning": "회복; 되찾기, 회수"
+    },
+    {
+      "no": 57,
+      "word": "recycle",
+      "meaning": "재활용하다, 재생하다"
+    },
+    {
+      "no": 58,
+      "word": "depiction",
+      "meaning": "묘사, 서술"
+    },
+    {
+      "no": 59,
+      "word": "outbreak",
+      "meaning": "발생, 발발"
+    },
+    {
+      "no": 60,
+      "word": "inherent",
+      "meaning": "내재된, 고유의"
+    },
+    {
+      "no": 61,
+      "word": "outcome",
+      "meaning": "결과, 성과"
+    },
+    {
+      "no": 62,
+      "word": "predictable",
+      "meaning": "예측 가능한, 뻔한"
+    },
+    {
+      "no": 63,
+      "word": "utterance",
+      "meaning": "말, 언급된 것; 말하는 행동, 발화, 발성"
+    },
+    {
+      "no": 64,
+      "word": "detective",
+      "meaning": "탐정, 형사"
+    },
+    {
+      "no": 65,
+      "word": "retirement",
+      "meaning": "은퇴, 퇴직"
+    },
+    {
+      "no": 66,
+      "word": "investment",
+      "meaning": "투자, 투자 자금"
+    },
+    {
+      "no": 67,
+      "word": "remains",
+      "meaning": "남은 것; 유적, 유물"
+    },
+    {
+      "no": 68,
+      "word": "depressed",
+      "meaning": "우울한, 낙담한; 불경기의, 불황의"
+    },
+    {
+      "no": 69,
+      "word": "researcher",
+      "meaning": "연구원"
+    },
+    {
+      "no": 70,
+      "word": "development",
+      "meaning": "발달, 성장; 개발"
+    },
+    {
+      "no": 71,
+      "word": "derive",
+      "meaning": "이끌어내다, 얻다; ...에서 유래하다, 파생되다"
+    },
+    {
+      "no": 72,
+      "word": "depression",
+      "meaning": "우울; 불경기, 불황"
+    },
+    {
+      "no": 73,
+      "word": "infection",
+      "meaning": "감염; 오염"
+    },
+    {
+      "no": 74,
+      "word": "depart",
+      "meaning": "떠나다, 출발하다"
+    },
+    {
+      "no": 75,
+      "word": "reveal",
+      "meaning": "드러내다, 밝히다, 폭로하다"
+    },
+    {
+      "no": 76,
+      "word": "represent",
+      "meaning": "대변하다, 대표하다; 나타내다, 상징하다"
+    },
+    {
+      "no": 77,
+      "word": "declaration",
+      "meaning": "선언, 발표; 신고"
+    },
+    {
+      "no": 78,
+      "word": "production",
+      "meaning": "생산, 제조"
+    },
+    {
+      "no": 79,
+      "word": "depictive",
+      "meaning": "묘사적인"
+    },
+    {
+      "no": 80,
+      "word": "reproduce",
+      "meaning": "생식하다; 복제하다; 재생하다, 다시 만들어내다"
+    }
+  ]
+}

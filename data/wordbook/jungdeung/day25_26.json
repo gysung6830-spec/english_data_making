@@ -1,0 +1,306 @@
+{
+  "title": "Day 25~26",
+  "source": "워드마스터 중등고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "affair",
+      "meaning": "사건; 일거리, 사무, 직무"
+    },
+    {
+      "no": 2,
+      "word": "famine",
+      "meaning": "기근, 배고픔"
+    },
+    {
+      "no": 3,
+      "word": "minority",
+      "meaning": "소수, 소수 민족"
+    },
+    {
+      "no": 4,
+      "word": "descend",
+      "meaning": "계통을 잇다, 내려가다"
+    },
+    {
+      "no": 5,
+      "word": "signify",
+      "meaning": "의미하다, 나타내다"
+    },
+    {
+      "no": 6,
+      "word": "evaluate",
+      "meaning": "평가하다"
+    },
+    {
+      "no": 7,
+      "word": "heritage",
+      "meaning": "유산, 전통"
+    },
+    {
+      "no": 8,
+      "word": "sequence",
+      "meaning": "순서, 연속"
+    },
+    {
+      "no": 9,
+      "word": "alien",
+      "meaning": "외국의, 외국인의"
+    },
+    {
+      "no": 10,
+      "word": "interfere in",
+      "meaning": "~에 간섭하다, 개입하다"
+    },
+    {
+      "no": 11,
+      "word": "civilization",
+      "meaning": "문명, 문화"
+    },
+    {
+      "no": 12,
+      "word": "derive from",
+      "meaning": "~에서 유래하다, 파생하다"
+    },
+    {
+      "no": 13,
+      "word": "interpret",
+      "meaning": "해석하다, 통역하다"
+    },
+    {
+      "no": 14,
+      "word": "rid",
+      "meaning": "제거하다; 자유롭게 하다"
+    },
+    {
+      "no": 15,
+      "word": "decade",
+      "meaning": "10년간"
+    },
+    {
+      "no": 16,
+      "word": "prior",
+      "meaning": "이전의, 우선하는"
+    },
+    {
+      "no": 17,
+      "word": "break out",
+      "meaning": "(화재·전쟁 등이) 발생하다, 발발하다"
+    },
+    {
+      "no": 18,
+      "word": "contaminate",
+      "meaning": "오염시키다"
+    },
+    {
+      "no": 19,
+      "word": "sacred",
+      "meaning": "신성한, 성스러운, 종교적인"
+    },
+    {
+      "no": 20,
+      "word": "associate",
+      "meaning": "제휴하다, 연합하다, 협동하다; 동료"
+    },
+    {
+      "no": 21,
+      "word": "royal",
+      "meaning": "왕의, 왕실의"
+    },
+    {
+      "no": 22,
+      "word": "integrate",
+      "meaning": "통합하다, 단결하다"
+    },
+    {
+      "no": 23,
+      "word": "assist",
+      "meaning": "원조하다, 돕다"
+    },
+    {
+      "no": 24,
+      "word": "preserve",
+      "meaning": "보존하다, 보호하다, 지키다"
+    },
+    {
+      "no": 25,
+      "word": "disappear",
+      "meaning": "사라지다"
+    },
+    {
+      "no": 26,
+      "word": "biography",
+      "meaning": "전기, 일대기"
+    },
+    {
+      "no": 27,
+      "word": "revolution",
+      "meaning": "혁명, 변혁"
+    },
+    {
+      "no": 28,
+      "word": "remains",
+      "meaning": "유해, 유골; 나머지"
+    },
+    {
+      "no": 29,
+      "word": "devote",
+      "meaning": "바치다, 헌신하다"
+    },
+    {
+      "no": 30,
+      "word": "conserve",
+      "meaning": "보존하다"
+    },
+    {
+      "no": 31,
+      "word": "hand down",
+      "meaning": "~을 전하다, 후세에 물려주다"
+    },
+    {
+      "no": 32,
+      "word": "gradual",
+      "meaning": "점차적인, 단계적인"
+    },
+    {
+      "no": 33,
+      "word": "guard",
+      "meaning": "보호하다, 지키다; 경계, 경호원"
+    },
+    {
+      "no": 34,
+      "word": "replace",
+      "meaning": "대신하다, 대체하다"
+    },
+    {
+      "no": 35,
+      "word": "vary",
+      "meaning": "다르다; 바꾸다, 수정하다"
+    },
+    {
+      "no": 36,
+      "word": "accord",
+      "meaning": "일치, 조화; 일치하다, 화합하다"
+    },
+    {
+      "no": 37,
+      "word": "origin",
+      "meaning": "기원, 유래; 태생"
+    },
+    {
+      "no": 38,
+      "word": "keep up with",
+      "meaning": "(사람·시류 등에) 뒤떨어지지 않게 따라가다"
+    },
+    {
+      "no": 39,
+      "word": "external",
+      "meaning": "외부의, 밖의, 대외적인"
+    },
+    {
+      "no": 40,
+      "word": "missionary",
+      "meaning": "선교사, 전도사"
+    },
+    {
+      "no": 41,
+      "word": "alternative",
+      "meaning": "양자택일, 대안; 양자택일의"
+    },
+    {
+      "no": 42,
+      "word": "refuge",
+      "meaning": "피난처, 도피처; 피난, 도피"
+    },
+    {
+      "no": 43,
+      "word": "universal",
+      "meaning": "보편적인, 일반적인"
+    },
+    {
+      "no": 44,
+      "word": "endanger",
+      "meaning": "위험에 빠뜨리다"
+    },
+    {
+      "no": 45,
+      "word": "break off",
+      "meaning": "~와의 관계를 단절하다; (협상등이) 결렬되다"
+    },
+    {
+      "no": 46,
+      "word": "aware",
+      "meaning": "알아차리고 있는, 깨닫고 있는"
+    },
+    {
+      "no": 47,
+      "word": "settle",
+      "meaning": "정착하다; 해결하다"
+    },
+    {
+      "no": 48,
+      "word": "previous",
+      "meaning": "이전의, 앞의"
+    },
+    {
+      "no": 49,
+      "word": "faith",
+      "meaning": "신념, 믿음"
+    },
+    {
+      "no": 50,
+      "word": "explode",
+      "meaning": "폭발하다"
+    },
+    {
+      "no": 51,
+      "word": "propose",
+      "meaning": "제안하다, 제출하다; 청혼하다"
+    },
+    {
+      "no": 52,
+      "word": "sermon",
+      "meaning": "설교, 교훈"
+    },
+    {
+      "no": 53,
+      "word": "urge",
+      "meaning": "촉구하다, 재촉하다, 강제로 ~하게 하다"
+    },
+    {
+      "no": 54,
+      "word": "remark",
+      "meaning": "발언, 비평; (의견을) 언급하다; 알아채다"
+    },
+    {
+      "no": 55,
+      "word": "widespread",
+      "meaning": "광범위한, 널리 퍼진"
+    },
+    {
+      "no": 56,
+      "word": "conflict",
+      "meaning": "충돌, 갈등; 저항하다, 충돌하다"
+    },
+    {
+      "no": 57,
+      "word": "shortage",
+      "meaning": "부족, 결핍"
+    },
+    {
+      "no": 58,
+      "word": "approach",
+      "meaning": "접근하다, 다가가다; 접근"
+    },
+    {
+      "no": 59,
+      "word": "mummy",
+      "meaning": "미라"
+    },
+    {
+      "no": 60,
+      "word": "suggest",
+      "meaning": "제안하다; 시사하다"
+    }
+  ]
+}

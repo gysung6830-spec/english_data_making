@@ -1,0 +1,396 @@
+{
+  "title": "Day 3~4",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "externalize",
+      "meaning": "표면화하다"
+    },
+    {
+      "no": 2,
+      "word": "extracurricular",
+      "meaning": "정규 교과 과정 이외의, 과외의"
+    },
+    {
+      "no": 3,
+      "word": "foresee",
+      "meaning": "예견하다"
+    },
+    {
+      "no": 4,
+      "word": "undertake",
+      "meaning": "맡다, ...의 책임을 지다; 착수하다; 약속하다"
+    },
+    {
+      "no": 5,
+      "word": "foreseeable",
+      "meaning": "예견할 수 있는"
+    },
+    {
+      "no": 6,
+      "word": "exhaustion",
+      "meaning": "기진맥진; 소모, 고갈"
+    },
+    {
+      "no": 7,
+      "word": "interfere",
+      "meaning": "간섭하다; 방해하다"
+    },
+    {
+      "no": 8,
+      "word": "examination",
+      "meaning": "조사, 검사; 시험"
+    },
+    {
+      "no": 9,
+      "word": "overall",
+      "meaning": "전반적인; 전반적으로"
+    },
+    {
+      "no": 10,
+      "word": "misleading",
+      "meaning": "오도하는, 오해의 소지가 있는"
+    },
+    {
+      "no": 11,
+      "word": "examine",
+      "meaning": "조사하다; 시험하다; 진찰하다"
+    },
+    {
+      "no": 12,
+      "word": "misfortune",
+      "meaning": "불운, 불행, 역경"
+    },
+    {
+      "no": 13,
+      "word": "overhead",
+      "meaning": "머리 위에, 높이; 머리 위의, 머리 위를 지나는"
+    },
+    {
+      "no": 14,
+      "word": "foremost",
+      "meaning": "가장 중요한, 최고의; 선두의, 맨 앞의"
+    },
+    {
+      "no": 15,
+      "word": "external",
+      "meaning": "외부의, 밖의"
+    },
+    {
+      "no": 16,
+      "word": "explicitly",
+      "meaning": "명백하게"
+    },
+    {
+      "no": 17,
+      "word": "underlying",
+      "meaning": "근본적인, 근원적인"
+    },
+    {
+      "no": 18,
+      "word": "explore",
+      "meaning": "탐험하다; 탐구하다, 연구하다"
+    },
+    {
+      "no": 19,
+      "word": "dialogue",
+      "meaning": "대화, 문답, 회화"
+    },
+    {
+      "no": 20,
+      "word": "overwhelming",
+      "meaning": "압도적인"
+    },
+    {
+      "no": 21,
+      "word": "expand",
+      "meaning": "커지다, 팽창하다; 넓히다, 확대시키다; 확장하다"
+    },
+    {
+      "no": 22,
+      "word": "interference",
+      "meaning": "간섭, 방해"
+    },
+    {
+      "no": 23,
+      "word": "evaporate",
+      "meaning": "증발하다; 증발시키다"
+    },
+    {
+      "no": 24,
+      "word": "interact",
+      "meaning": "상호 작용하다, 서로 영향을 주다"
+    },
+    {
+      "no": 25,
+      "word": "exposure",
+      "meaning": "노출; 폭로, 탄로"
+    },
+    {
+      "no": 26,
+      "word": "exchange",
+      "meaning": "교환, 주고받기; 환전; 교환하다"
+    },
+    {
+      "no": 27,
+      "word": "international",
+      "meaning": "국제적인, 국가 간의"
+    },
+    {
+      "no": 28,
+      "word": "transfer",
+      "meaning": "이동시키다, 옮기다, 전달하다; 전근하다; 갈아타다; 전송하다; 이동, 전달; 전근, 전학; 갈아타기; 전송"
+    },
+    {
+      "no": 29,
+      "word": "mistakenly",
+      "meaning": "실수로, 틀리게"
+    },
+    {
+      "no": 30,
+      "word": "underlie",
+      "meaning": "...의 기저를 이루다, 기본이 되다"
+    },
+    {
+      "no": 31,
+      "word": "transformative",
+      "meaning": "변화시키는, 변화시키는 힘이 있는"
+    },
+    {
+      "no": 32,
+      "word": "overwhelmed",
+      "meaning": "압도된"
+    },
+    {
+      "no": 33,
+      "word": "transplantation",
+      "meaning": "이식"
+    },
+    {
+      "no": 34,
+      "word": "overlap",
+      "meaning": "겹치다, 포개지다; 중복되다, 부분적으로 일치하다; 겹침, 중복"
+    },
+    {
+      "no": 35,
+      "word": "exaggeration",
+      "meaning": "과장"
+    },
+    {
+      "no": 36,
+      "word": "transplant",
+      "meaning": "옮겨 심다; 이식하다; 이식"
+    },
+    {
+      "no": 37,
+      "word": "interaction",
+      "meaning": "상호 작용, 상호 영향"
+    },
+    {
+      "no": 38,
+      "word": "evaporation",
+      "meaning": "증발; 발산"
+    },
+    {
+      "no": 39,
+      "word": "exaggerate",
+      "meaning": "과장하다, 과장해서 말하다"
+    },
+    {
+      "no": 40,
+      "word": "overcome",
+      "meaning": "극복하다, 이겨내다; 이기다"
+    },
+    {
+      "no": 41,
+      "word": "undergo",
+      "meaning": "겪다, 경험하다"
+    },
+    {
+      "no": 42,
+      "word": "escape",
+      "meaning": "도망치다, 탈출하다; 벗어나다; 도망, 탈출; 도피"
+    },
+    {
+      "no": 43,
+      "word": "diameter",
+      "meaning": "지름, 직경"
+    },
+    {
+      "no": 44,
+      "word": "expose",
+      "meaning": "노출시키다; 드러내다; 폭로하다"
+    },
+    {
+      "no": 45,
+      "word": "explain",
+      "meaning": "설명하다, 해명하다"
+    },
+    {
+      "no": 46,
+      "word": "overwhelm",
+      "meaning": "압도하다; 당황하게 하다, 어쩔줄 모르게 하다"
+    },
+    {
+      "no": 47,
+      "word": "exhausted",
+      "meaning": "기진맥진한; 다 써 버린, 소모된, 고갈된"
+    },
+    {
+      "no": 48,
+      "word": "interpret",
+      "meaning": "통역하다; 이해하다, 파악하다; 연주하다"
+    },
+    {
+      "no": 49,
+      "word": "externally",
+      "meaning": "외부적으로, 외부에서"
+    },
+    {
+      "no": 50,
+      "word": "extraterrestrial",
+      "meaning": "지구 밖의, 외계의; 외계인, 우주인"
+    },
+    {
+      "no": 51,
+      "word": "undergraduate",
+      "meaning": "대학생, 학부생"
+    },
+    {
+      "no": 52,
+      "word": "interval",
+      "meaning": "간격; 중간 휴식 시간"
+    },
+    {
+      "no": 53,
+      "word": "overflow",
+      "meaning": "넘치다, 범람하다; ...로 넘쳐나다; 넘침, 범람; 과잉, 초과"
+    },
+    {
+      "no": 54,
+      "word": "overtake",
+      "meaning": "능가하다; 추월하다, 따라잡다; 덮치다, 압도하다"
+    },
+    {
+      "no": 55,
+      "word": "former",
+      "meaning": "이전의, 예전의; 앞의, 전자의"
+    },
+    {
+      "no": 56,
+      "word": "exposition",
+      "meaning": "설명, 해설; 전시회"
+    },
+    {
+      "no": 57,
+      "word": "mislead",
+      "meaning": "잘못 인도하다; 속이다, 오해하게 하다"
+    },
+    {
+      "no": 58,
+      "word": "explanation",
+      "meaning": "설명, 해명"
+    },
+    {
+      "no": 59,
+      "word": "interpretation",
+      "meaning": "해석, 설명"
+    },
+    {
+      "no": 60,
+      "word": "overlook",
+      "meaning": "간과하다, 못 보고 넘어가다; 눈감아 주다; ...을 내려다보다"
+    },
+    {
+      "no": 61,
+      "word": "forefather",
+      "meaning": "선조, 조상"
+    },
+    {
+      "no": 62,
+      "word": "externality",
+      "meaning": "외부적 성질; 외부 효과"
+    },
+    {
+      "no": 63,
+      "word": "extraordinary",
+      "meaning": "이상한; 비범한, 대단한"
+    },
+    {
+      "no": 64,
+      "word": "explorer",
+      "meaning": "탐험가, 답사자"
+    },
+    {
+      "no": 65,
+      "word": "interactive",
+      "meaning": "상호 작용하는, 쌍방향의"
+    },
+    {
+      "no": 66,
+      "word": "forehead",
+      "meaning": "이마"
+    },
+    {
+      "no": 67,
+      "word": "exploration",
+      "meaning": "탐험, 답사"
+    },
+    {
+      "no": 68,
+      "word": "explicit",
+      "meaning": "분명한, 명백한, 뚜렷한; 노골적인, 숨김없는"
+    },
+    {
+      "no": 69,
+      "word": "transform",
+      "meaning": "변형시키다"
+    },
+    {
+      "no": 70,
+      "word": "interpreter",
+      "meaning": "통역관"
+    },
+    {
+      "no": 71,
+      "word": "overseas",
+      "meaning": "해외로, 해외에; 해외에 있는, 외국의"
+    },
+    {
+      "no": 72,
+      "word": "exhaust",
+      "meaning": "지치게 하다; 다 써 버리다, 고갈시키다; 배기가스"
+    },
+    {
+      "no": 73,
+      "word": "mistake",
+      "meaning": "실수, 잘못; 오해하다, 잘못 판단하다"
+    },
+    {
+      "no": 74,
+      "word": "extroverted",
+      "meaning": "외향적인, 외향성의"
+    },
+    {
+      "no": 75,
+      "word": "extrovert",
+      "meaning": "외향적인 사람"
+    },
+    {
+      "no": 76,
+      "word": "transformation",
+      "meaning": "변형, 변화"
+    },
+    {
+      "no": 77,
+      "word": "dialect",
+      "meaning": "방언, 사투리"
+    },
+    {
+      "no": 78,
+      "word": "expansion",
+      "meaning": "팽창; 확장"
+    }
+  ]
+}

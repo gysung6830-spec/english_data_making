@@ -1,0 +1,306 @@
+{
+  "title": "Day 29~30",
+  "source": "워드마스터 중등고난도",
+  "words": [
+    {
+      "no": 1,
+      "word": "gravity",
+      "meaning": "중력"
+    },
+    {
+      "no": 2,
+      "word": "discover",
+      "meaning": "발견하다"
+    },
+    {
+      "no": 3,
+      "word": "browse",
+      "meaning": "검색하다, 열람하다"
+    },
+    {
+      "no": 4,
+      "word": "galaxy",
+      "meaning": "은하, 은하계"
+    },
+    {
+      "no": 5,
+      "word": "analyze",
+      "meaning": "분석하다, 분해하다"
+    },
+    {
+      "no": 6,
+      "word": "debate",
+      "meaning": "토론, 토의; 토론하다"
+    },
+    {
+      "no": 7,
+      "word": "manual",
+      "meaning": "손의, 수동의; 안내서"
+    },
+    {
+      "no": 8,
+      "word": "lunar",
+      "meaning": "달의"
+    },
+    {
+      "no": 9,
+      "word": "visual",
+      "meaning": "시각의, 눈에 보이는"
+    },
+    {
+      "no": 10,
+      "word": "astronaut",
+      "meaning": "우주 비행사"
+    },
+    {
+      "no": 11,
+      "word": "suppose",
+      "meaning": "가정하다, 상상하다; ~라고 생각하다"
+    },
+    {
+      "no": 12,
+      "word": "sort out",
+      "meaning": "~을 분류하다[선별하다]"
+    },
+    {
+      "no": 13,
+      "word": "efficiency",
+      "meaning": "효율, 능률"
+    },
+    {
+      "no": 14,
+      "word": "online",
+      "meaning": "온라인의, 인터넷의; 온라인으로"
+    },
+    {
+      "no": 15,
+      "word": "circulate",
+      "meaning": "보급시키다, 유포하다"
+    },
+    {
+      "no": 16,
+      "word": "communicate",
+      "meaning": "의사소통하다, 통신하다"
+    },
+    {
+      "no": 17,
+      "word": "tool",
+      "meaning": "(컴퓨터) 도구, 툴; 도구, 연장"
+    },
+    {
+      "no": 18,
+      "word": "bring about",
+      "meaning": "~을 불러일으키다[초래하다]"
+    },
+    {
+      "no": 19,
+      "word": "link",
+      "meaning": "링크, 연결; 연결하다"
+    },
+    {
+      "no": 20,
+      "word": "access",
+      "meaning": "접근, 접근 방법; 접근하다; 입수하다, 이용하다"
+    },
+    {
+      "no": 21,
+      "word": "electronic",
+      "meaning": "전자의"
+    },
+    {
+      "no": 22,
+      "word": "surf",
+      "meaning": "(인터넷상의) 정보를 찾아다니다; 파도타기를 하다"
+    },
+    {
+      "no": 23,
+      "word": "keep in touch with",
+      "meaning": "~와 접촉[연락]을 유지하다; 계속 접하다[알다]"
+    },
+    {
+      "no": 24,
+      "word": "automatic",
+      "meaning": "자동의"
+    },
+    {
+      "no": 25,
+      "word": "illogical",
+      "meaning": "비논리적인, 불합리한"
+    },
+    {
+      "no": 26,
+      "word": "dot",
+      "meaning": "(인터넷) 닷, 점"
+    },
+    {
+      "no": 27,
+      "word": "profile",
+      "meaning": "프로필, 인물 소개"
+    },
+    {
+      "no": 28,
+      "word": "database",
+      "meaning": "데이터베이스"
+    },
+    {
+      "no": 29,
+      "word": "substitute for",
+      "meaning": "~을 대신하다, 대리하다"
+    },
+    {
+      "no": 30,
+      "word": "enable",
+      "meaning": "할 수 있게 하다, 가능하게 하다"
+    },
+    {
+      "no": 31,
+      "word": "accelerate",
+      "meaning": "가속하다"
+    },
+    {
+      "no": 32,
+      "word": "launch",
+      "meaning": "발사하다, 쏘아 올리다; 출시하다"
+    },
+    {
+      "no": 33,
+      "word": "pause",
+      "meaning": "(이야기·행동 등의 일시적) 중단; 잠시 멈추다"
+    },
+    {
+      "no": 34,
+      "word": "activate",
+      "meaning": "활성화하다"
+    },
+    {
+      "no": 35,
+      "word": "astronomer",
+      "meaning": "천문학자"
+    },
+    {
+      "no": 36,
+      "word": "benefit",
+      "meaning": "이익"
+    },
+    {
+      "no": 37,
+      "word": "observe",
+      "meaning": "관찰하다; (규칙 등을) 따르다, 준수하다"
+    },
+    {
+      "no": 38,
+      "word": "edit",
+      "meaning": "편집하다; 교정하다"
+    },
+    {
+      "no": 39,
+      "word": "accurate",
+      "meaning": "정확한"
+    },
+    {
+      "no": 40,
+      "word": "oral",
+      "meaning": "구두의, 구술의"
+    },
+    {
+      "no": 41,
+      "word": "cut in",
+      "meaning": "남의 대화에 끼어들다, 남의 말을 자르다"
+    },
+    {
+      "no": 42,
+      "word": "solar",
+      "meaning": "태양의"
+    },
+    {
+      "no": 43,
+      "word": "combine",
+      "meaning": "결합시키다"
+    },
+    {
+      "no": 44,
+      "word": "rotate",
+      "meaning": "회전하다[시키다]; 교대하다"
+    },
+    {
+      "no": 45,
+      "word": "response",
+      "meaning": "응답, 반응"
+    },
+    {
+      "no": 46,
+      "word": "delete",
+      "meaning": "삭제하다"
+    },
+    {
+      "no": 47,
+      "word": "eclipse",
+      "meaning": "(해·달의) 식(蝕); 무색하게[빛을잃게] 하다"
+    },
+    {
+      "no": 48,
+      "word": "request",
+      "meaning": "요청, 요구; 요청하다"
+    },
+    {
+      "no": 49,
+      "word": "satellite",
+      "meaning": "위성, 인공위성"
+    },
+    {
+      "no": 50,
+      "word": "interrupt",
+      "meaning": "방해하다, 중단하다"
+    },
+    {
+      "no": 51,
+      "word": "hesitate",
+      "meaning": "주저하다, 망설이다"
+    },
+    {
+      "no": 52,
+      "word": "digital",
+      "meaning": "디지털의"
+    },
+    {
+      "no": 53,
+      "word": "remote",
+      "meaning": "먼; 외진"
+    },
+    {
+      "no": 54,
+      "word": "device",
+      "meaning": "도구, 장치"
+    },
+    {
+      "no": 55,
+      "word": "capture",
+      "meaning": "(이미지 등을) 포착하다, 붙잡다"
+    },
+    {
+      "no": 56,
+      "word": "orbit",
+      "meaning": "궤도"
+    },
+    {
+      "no": 57,
+      "word": "adjust",
+      "meaning": "조절하다, 조정하다; 적응하다"
+    },
+    {
+      "no": 58,
+      "word": "shuttle",
+      "meaning": "우주 왕복선; 왕복하다"
+    },
+    {
+      "no": 59,
+      "word": "junk",
+      "meaning": "폐물, 고물"
+    },
+    {
+      "no": 60,
+      "word": "warn",
+      "meaning": "경고하다, 주의를 주다"
+    }
+  ]
+}

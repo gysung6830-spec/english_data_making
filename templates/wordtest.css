@@ -76,9 +76,7 @@ table.ht-grid { width: 100%; border-collapse: collapse; table-layout: fixed; }
 .ht-grid td.ht-a { font-size: 9pt; color: var(--ht-gray); white-space: nowrap; }
 .ht-grid td.ht-a .ht-hint { font-weight: 800; color: #7f9689; font-size: 9pt; }
 .ht-grid td.ht-mid { border-bottom: none; width: 16pt; }
-.ht-grid tr { height: 32pt; }
-/* 회당 문항이 적을 때(60단어 교재 등)는 줄 간격을 넓혀 한 쪽을 고르게 채운다 */
-.ht-grid.sparse tr { height: 42pt; }
+/* 줄 높이는 문항 수에 맞춰 src/wordtest.py 가 계산해 인라인으로 넣는다(한 쪽을 고르게 채우도록) */
 
 /* ---- 답지: 쓰는 칸에 정답이 인쇄된 형태 ---- */
 .ht-grid.ans td.ht-a {
@@ -86,6 +84,4 @@ table.ht-grid { width: 100%; border-collapse: collapse; table-layout: fixed; }
   font-size: 8.4pt; line-height: 1.3; padding-bottom: 1pt;
 }
 .ht-grid.ans.ko td.ht-a { font-size: 9pt; white-space: nowrap; }
-.ht-grid.ans tr { height: 28pt; }
-.ht-grid.ans.sparse tr { height: 38pt; }
 .ht-akmark { color: var(--ht-green); letter-spacing: 0.04em; }

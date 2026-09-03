@@ -1,0 +1,406 @@
+{
+  "title": "Day 57~58",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "successful",
+      "meaning": "성공적인, 출세한"
+    },
+    {
+      "no": 2,
+      "word": "industrial",
+      "meaning": "산업의, 산업이 발달한"
+    },
+    {
+      "no": 3,
+      "word": "literacy",
+      "meaning": "읽고 쓰는 능력"
+    },
+    {
+      "no": 4,
+      "word": "authoritative",
+      "meaning": "권위적인"
+    },
+    {
+      "no": 5,
+      "word": "supervision",
+      "meaning": "감독, 관리"
+    },
+    {
+      "no": 6,
+      "word": "various",
+      "meaning": "다양한, 가지각색의"
+    },
+    {
+      "no": 7,
+      "word": "consideration",
+      "meaning": "숙고, 고려; 참작, 배려"
+    },
+    {
+      "no": 8,
+      "word": "authority",
+      "meaning": "권한, 권위"
+    },
+    {
+      "no": 9,
+      "word": "sensitive",
+      "meaning": "섬세한; 민감한, 예민한"
+    },
+    {
+      "no": 10,
+      "word": "successfully",
+      "meaning": "성공적으로"
+    },
+    {
+      "no": 11,
+      "word": "industrious",
+      "meaning": "근면한"
+    },
+    {
+      "no": 12,
+      "word": "assessment",
+      "meaning": "평가, 판단; 과세, 부과"
+    },
+    {
+      "no": 13,
+      "word": "boundary",
+      "meaning": "경계선"
+    },
+    {
+      "no": 14,
+      "word": "physics",
+      "meaning": "물리학"
+    },
+    {
+      "no": 15,
+      "word": "imaginative",
+      "meaning": "상상력이 풍부한, 창의적인"
+    },
+    {
+      "no": 16,
+      "word": "considerably",
+      "meaning": "많이, 상당히"
+    },
+    {
+      "no": 17,
+      "word": "considerable",
+      "meaning": "상당한, 많은; 고려해야 할, 중요한"
+    },
+    {
+      "no": 18,
+      "word": "literally",
+      "meaning": "글자 그대로"
+    },
+    {
+      "no": 19,
+      "word": "conference",
+      "meaning": "회담, 회견; 회의, 협의회"
+    },
+    {
+      "no": 20,
+      "word": "invention",
+      "meaning": "발명"
+    },
+    {
+      "no": 21,
+      "word": "creature",
+      "meaning": "생물, 동물; 창조물; 괴물"
+    },
+    {
+      "no": 22,
+      "word": "documentation",
+      "meaning": "기록, 문서화"
+    },
+    {
+      "no": 23,
+      "word": "economist",
+      "meaning": "경제학자"
+    },
+    {
+      "no": 24,
+      "word": "imaginable",
+      "meaning": "상상할 수 있는"
+    },
+    {
+      "no": 25,
+      "word": "inventor",
+      "meaning": "발명가"
+    },
+    {
+      "no": 26,
+      "word": "variety",
+      "meaning": "다양성, 다양함"
+    },
+    {
+      "no": 27,
+      "word": "literal",
+      "meaning": "글자 그대로의"
+    },
+    {
+      "no": 28,
+      "word": "politician",
+      "meaning": "정치인"
+    },
+    {
+      "no": 29,
+      "word": "comparable",
+      "meaning": "비교될 만한, 비슷한"
+    },
+    {
+      "no": 30,
+      "word": "witness",
+      "meaning": "목격자, 입회인; 증인; 목격하다; 증언하다"
+    },
+    {
+      "no": 31,
+      "word": "fitness",
+      "meaning": "건강; 적절함"
+    },
+    {
+      "no": 32,
+      "word": "respectfully",
+      "meaning": "공손히, 정중하게"
+    },
+    {
+      "no": 33,
+      "word": "sensitivity",
+      "meaning": "세심함; 민감, 예민함"
+    },
+    {
+      "no": 34,
+      "word": "inventive",
+      "meaning": "창의력이 있는, 독창적인"
+    },
+    {
+      "no": 35,
+      "word": "accuracy",
+      "meaning": "정확, 정밀"
+    },
+    {
+      "no": 36,
+      "word": "document",
+      "meaning": "서류, 문서; 기록하다"
+    },
+    {
+      "no": 37,
+      "word": "childhood",
+      "meaning": "유년기"
+    },
+    {
+      "no": 38,
+      "word": "imaginary",
+      "meaning": "상상 속에 존재하는, 가상의"
+    },
+    {
+      "no": 39,
+      "word": "respectable",
+      "meaning": "존경할 만한, 훌륭한"
+    },
+    {
+      "no": 40,
+      "word": "intelligence",
+      "meaning": "지능, 이해력"
+    },
+    {
+      "no": 41,
+      "word": "angular",
+      "meaning": "각이 진, 모난"
+    },
+    {
+      "no": 42,
+      "word": "economics",
+      "meaning": "경제학"
+    },
+    {
+      "no": 43,
+      "word": "sensible",
+      "meaning": "분별 있는, 현명한"
+    },
+    {
+      "no": 44,
+      "word": "intellectual",
+      "meaning": "지적인, 지성의"
+    },
+    {
+      "no": 45,
+      "word": "supplement",
+      "meaning": "추가, 보충; 보충하다"
+    },
+    {
+      "no": 46,
+      "word": "agreement",
+      "meaning": "협정, 계약; 동의, 합의"
+    },
+    {
+      "no": 47,
+      "word": "considerate",
+      "meaning": "사려 깊은, 배려하는"
+    },
+    {
+      "no": 48,
+      "word": "supervisor",
+      "meaning": "감독관, 관리자"
+    },
+    {
+      "no": 49,
+      "word": "economics",
+      "meaning": "경제학"
+    },
+    {
+      "no": 50,
+      "word": "literary",
+      "meaning": "문학의, 문예의"
+    },
+    {
+      "no": 51,
+      "word": "literate",
+      "meaning": "읽고 쓸 줄 아는"
+    },
+    {
+      "no": 52,
+      "word": "documentary",
+      "meaning": "다큐멘터리, 기록물"
+    },
+    {
+      "no": 53,
+      "word": "comparative",
+      "meaning": "비교의, 비교적인, 상대적인"
+    },
+    {
+      "no": 54,
+      "word": "sociable",
+      "meaning": "사교적인, 붙임성 있는"
+    },
+    {
+      "no": 55,
+      "word": "secretary",
+      "meaning": "비서"
+    },
+    {
+      "no": 56,
+      "word": "respectful",
+      "meaning": "존경하는, 공손한"
+    },
+    {
+      "no": 57,
+      "word": "interviewer",
+      "meaning": "면접관, 인터뷰 진행자"
+    },
+    {
+      "no": 58,
+      "word": "comparatively",
+      "meaning": "비교적, 어느 정도"
+    },
+    {
+      "no": 59,
+      "word": "historic",
+      "meaning": "역사적으로 중요한"
+    },
+    {
+      "no": 60,
+      "word": "fit",
+      "meaning": "건강한; 적절한; ...에 알맞다; 맞게 하다"
+    },
+    {
+      "no": 61,
+      "word": "supplementary",
+      "meaning": "보충의"
+    },
+    {
+      "no": 62,
+      "word": "ability",
+      "meaning": "할 수 있음, 능력"
+    },
+    {
+      "no": 63,
+      "word": "angle",
+      "meaning": "각도, 각; 관점; 노리다"
+    },
+    {
+      "no": 64,
+      "word": "authorize",
+      "meaning": "권한을 주다"
+    },
+    {
+      "no": 65,
+      "word": "neighborhood",
+      "meaning": "근처, 동네; 이웃 사람들"
+    },
+    {
+      "no": 66,
+      "word": "physicist",
+      "meaning": "물리학자"
+    },
+    {
+      "no": 67,
+      "word": "appearance",
+      "meaning": "외모, 외관; 출현, 출연, 등장"
+    },
+    {
+      "no": 68,
+      "word": "able",
+      "meaning": "...할 수 있는; 유능한"
+    },
+    {
+      "no": 69,
+      "word": "authorized",
+      "meaning": "권한을 받은, 허가된"
+    },
+    {
+      "no": 70,
+      "word": "interviewee",
+      "meaning": "면접 대상자"
+    },
+    {
+      "no": 71,
+      "word": "successive",
+      "meaning": "연속적인"
+    },
+    {
+      "no": 72,
+      "word": "intelligent",
+      "meaning": "영리한, 총명한"
+    },
+    {
+      "no": 73,
+      "word": "social",
+      "meaning": "사회의, 사회적인"
+    },
+    {
+      "no": 74,
+      "word": "politics",
+      "meaning": "정치"
+    },
+    {
+      "no": 75,
+      "word": "failure",
+      "meaning": "실패, 낙제"
+    },
+    {
+      "no": 76,
+      "word": "labeled",
+      "meaning": "표를 붙인, 분류한"
+    },
+    {
+      "no": 77,
+      "word": "label",
+      "meaning": "라벨, 표; 라벨을 붙이다"
+    },
+    {
+      "no": 78,
+      "word": "economical",
+      "meaning": "절약이 되는, 경제적인"
+    },
+    {
+      "no": 79,
+      "word": "economic",
+      "meaning": "경제의"
+    },
+    {
+      "no": 80,
+      "word": "privacy",
+      "meaning": "사생활, 혼자 있는 상태"
+    }
+  ]
+}

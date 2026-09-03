@@ -1,0 +1,206 @@
+{
+  "title": "Day 48",
+  "source": "능률보카 수능필수",
+  "words": [
+    {
+      "no": 1,
+      "word": "renovate",
+      "meaning": "개조[보수]하다"
+    },
+    {
+      "no": 2,
+      "word": "auction",
+      "meaning": "경매; 경매에 부치다"
+    },
+    {
+      "no": 3,
+      "word": "vendor",
+      "meaning": "행상인, 노점 상인; 판매 회사"
+    },
+    {
+      "no": 4,
+      "word": "congestion",
+      "meaning": "밀집, 혼잡, 정체"
+    },
+    {
+      "no": 5,
+      "word": "surplus",
+      "meaning": "과잉, 잉여; 흑자; 과잉의, 잉여의"
+    },
+    {
+      "no": 6,
+      "word": "wage",
+      "meaning": "임금, 급료"
+    },
+    {
+      "no": 7,
+      "word": "exclusive",
+      "meaning": "독점적인; 배타적인; 고급[고가]의; 독점 기사"
+    },
+    {
+      "no": 8,
+      "word": "incentive",
+      "meaning": "장려(책), 유인(책)"
+    },
+    {
+      "no": 9,
+      "word": "shipment",
+      "meaning": "선적, 수송; 선적물, 수송물"
+    },
+    {
+      "no": 10,
+      "word": "barter",
+      "meaning": "물물 교환하다, 교역하다; 물물 교환, 교역"
+    },
+    {
+      "no": 11,
+      "word": "grain",
+      "meaning": "곡물, 낟알; (모래·설탕 등의) 알갱이"
+    },
+    {
+      "no": 12,
+      "word": "currency",
+      "meaning": "통화, 화폐; 통용"
+    },
+    {
+      "no": 13,
+      "word": "barren",
+      "meaning": "불모의, 척박한; 열매를 맺지 않는"
+    },
+    {
+      "no": 14,
+      "word": "intersection",
+      "meaning": "교차로, 교차 지점"
+    },
+    {
+      "no": 15,
+      "word": "barn",
+      "meaning": "헛간, 외양간"
+    },
+    {
+      "no": 16,
+      "word": "loan",
+      "meaning": "대출(금), 융자(금); 빌려주다"
+    },
+    {
+      "no": 17,
+      "word": "affiliate",
+      "meaning": "제휴하다, 산하에 두다; 지부, 계열사"
+    },
+    {
+      "no": 18,
+      "word": "lease",
+      "meaning": "임대차 계약; 임대[임차]하다"
+    },
+    {
+      "no": 19,
+      "word": "enterprise",
+      "meaning": "기업(체), 회사; (모험성) 사업; 진취성"
+    },
+    {
+      "no": 20,
+      "word": "incorporate",
+      "meaning": "포함하다, 통합하다; 법인으로 만들다"
+    },
+    {
+      "no": 21,
+      "word": "monetary",
+      "meaning": "화폐의, 통화의"
+    },
+    {
+      "no": 22,
+      "word": "freight",
+      "meaning": "화물; 화물 운송; 화물을 운송하다"
+    },
+    {
+      "no": 23,
+      "word": "reap",
+      "meaning": "거두다, 수확하다"
+    },
+    {
+      "no": 24,
+      "word": "automobile",
+      "meaning": "자동차"
+    },
+    {
+      "no": 25,
+      "word": "bunch",
+      "meaning": "송이, 다발, 묶음"
+    },
+    {
+      "no": 26,
+      "word": "stack",
+      "meaning": "(물건·건초 등의) 더미, 무더기; 쌓다, 쌓이다"
+    },
+    {
+      "no": 27,
+      "word": "alliance",
+      "meaning": "동맹, 연합, 제휴"
+    },
+    {
+      "no": 28,
+      "word": "ripe",
+      "meaning": "여문, 익은, 숙성한"
+    },
+    {
+      "no": 29,
+      "word": "aircraft",
+      "meaning": "항공기, 비행기"
+    },
+    {
+      "no": 30,
+      "word": "harvest",
+      "meaning": "수확(기), 추수(기); 수확하다"
+    },
+    {
+      "no": 31,
+      "word": "vessel",
+      "meaning": "배, 선박; 용기, 그릇; 혈관"
+    },
+    {
+      "no": 32,
+      "word": "deficit",
+      "meaning": "적자; 부족(액), 결손"
+    },
+    {
+      "no": 33,
+      "word": "fund",
+      "meaning": "자금, 기금; 자금[기금]을 대다"
+    },
+    {
+      "no": 34,
+      "word": "executive",
+      "meaning": "경영진, 간부; 행정부; 경영의; 행정의"
+    },
+    {
+      "no": 35,
+      "word": "weed",
+      "meaning": "잡초; 잡초를 뽑다"
+    },
+    {
+      "no": 36,
+      "word": "debt",
+      "meaning": "빚, 부채; 은혜, 신세"
+    },
+    {
+      "no": 37,
+      "word": "collide",
+      "meaning": "충돌하다, 부딪치다; (의견 등이) 상충하다"
+    },
+    {
+      "no": 38,
+      "word": "steer",
+      "meaning": "조종하다, 몰다; 이끌다, 인도하다"
+    },
+    {
+      "no": 39,
+      "word": "malfunction",
+      "meaning": "오작동, 기능 이상; 제대로 작동하지 않다"
+    },
+    {
+      "no": 40,
+      "word": "peasant",
+      "meaning": "소작농, 농민"
+    }
+  ]
+}

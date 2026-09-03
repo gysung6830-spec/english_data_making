@@ -1,0 +1,406 @@
+{
+  "title": "Day 31~32",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "expenditure",
+      "meaning": "지출, 소비, 소모"
+    },
+    {
+      "no": 2,
+      "word": "response",
+      "meaning": "반응; 대답, 응답"
+    },
+    {
+      "no": 3,
+      "word": "identical",
+      "meaning": "동일한"
+    },
+    {
+      "no": 4,
+      "word": "voyage",
+      "meaning": "항해, 여행"
+    },
+    {
+      "no": 5,
+      "word": "previous",
+      "meaning": "이전의, 앞의, 사전의"
+    },
+    {
+      "no": 6,
+      "word": "capital",
+      "meaning": "수도, 중심지; 대문자; 자본; 대문자의; 주요한"
+    },
+    {
+      "no": 7,
+      "word": "solution",
+      "meaning": "해결, 해답; 용액, 용해"
+    },
+    {
+      "no": 8,
+      "word": "rank",
+      "meaning": "계급, 지위; 열, 줄, 정렬; 위치하다; 위치시키다; 등급을 매기다"
+    },
+    {
+      "no": 9,
+      "word": "cause",
+      "meaning": "원인, 이유; 야기하다, 초래하다"
+    },
+    {
+      "no": 10,
+      "word": "ecology",
+      "meaning": "생태학, 생태계"
+    },
+    {
+      "no": 11,
+      "word": "memorize",
+      "meaning": "암기하다, 기억하다"
+    },
+    {
+      "no": 12,
+      "word": "solvable",
+      "meaning": "해결 가능한, 풀 수 있는"
+    },
+    {
+      "no": 13,
+      "word": "psychology",
+      "meaning": "심리학; 심리"
+    },
+    {
+      "no": 14,
+      "word": "suspense",
+      "meaning": "불안, 걱정, 긴장감"
+    },
+    {
+      "no": 15,
+      "word": "responsibility",
+      "meaning": "책임, 의무"
+    },
+    {
+      "no": 16,
+      "word": "identity",
+      "meaning": "신원, 정체; 정체성, 독자성; 동일함, 일치"
+    },
+    {
+      "no": 17,
+      "word": "suspend",
+      "meaning": "일시 중지하다; 정직시키다, 정학시키다; 매달다, 걸다; 연기하다, 유보하다"
+    },
+    {
+      "no": 18,
+      "word": "neutrality",
+      "meaning": "중립 , 중립성"
+    },
+    {
+      "no": 19,
+      "word": "psychologist",
+      "meaning": "심리학자"
+    },
+    {
+      "no": 20,
+      "word": "causal",
+      "meaning": "인과 관계의"
+    },
+    {
+      "no": 21,
+      "word": "excusable",
+      "meaning": "변명이 되는, 용서할 수 있는"
+    },
+    {
+      "no": 22,
+      "word": "achievement",
+      "meaning": "업적, 공적; 성취, 달성"
+    },
+    {
+      "no": 23,
+      "word": "obvious",
+      "meaning": "분명한, 명백한"
+    },
+    {
+      "no": 24,
+      "word": "adapt",
+      "meaning": "적응시키다, 적합하게 하다; 적응하다; 각색하다, 개작하다"
+    },
+    {
+      "no": 25,
+      "word": "consumption",
+      "meaning": "소비, 사용; 섭취"
+    },
+    {
+      "no": 26,
+      "word": "resolute",
+      "meaning": "굳게 결심한, 단호한"
+    },
+    {
+      "no": 27,
+      "word": "memory",
+      "meaning": "기억, 추억; 기념, 추모; 메모리, 기억 장치"
+    },
+    {
+      "no": 28,
+      "word": "arrangement",
+      "meaning": "준비, 계획; 배열, 정리; 협정, 합의; 편곡"
+    },
+    {
+      "no": 29,
+      "word": "assumption",
+      "meaning": "가정, 추측, 추정"
+    },
+    {
+      "no": 30,
+      "word": "expend",
+      "meaning": "쓰다, 들이다"
+    },
+    {
+      "no": 31,
+      "word": "dissolve",
+      "meaning": "녹이다; 종료하다, 해산시키다; 사라지다, 흩어지다"
+    },
+    {
+      "no": 32,
+      "word": "resolve",
+      "meaning": "해결하다; 결정하다, 결심하다; 결심, 단호한 의지"
+    },
+    {
+      "no": 33,
+      "word": "expensive",
+      "meaning": "비싼"
+    },
+    {
+      "no": 34,
+      "word": "equality",
+      "meaning": "평등"
+    },
+    {
+      "no": 35,
+      "word": "analogy",
+      "meaning": "유사점, 비슷함; 비유; 유추, 추론"
+    },
+    {
+      "no": 36,
+      "word": "resolution",
+      "meaning": "결심; 결단력; 해결; 해상도"
+    },
+    {
+      "no": 37,
+      "word": "responsible",
+      "meaning": "...을 책임지고 있는, 맡고 있는; ...에 책임이 있는, 원인이 되는; 책임감 있는"
+    },
+    {
+      "no": 38,
+      "word": "equation",
+      "meaning": "방정식"
+    },
+    {
+      "no": 39,
+      "word": "solvent",
+      "meaning": "용해되는; 용해하는; 지불 능력이 있는; 용제, 용매"
+    },
+    {
+      "no": 40,
+      "word": "capitalist",
+      "meaning": "자본주의자; 자본가"
+    },
+    {
+      "no": 41,
+      "word": "sponsor",
+      "meaning": "후원자, 스폰서; 후원하다"
+    },
+    {
+      "no": 42,
+      "word": "apology",
+      "meaning": "사과, 사죄"
+    },
+    {
+      "no": 43,
+      "word": "ecologist",
+      "meaning": "생태학자"
+    },
+    {
+      "no": 44,
+      "word": "suspension",
+      "meaning": "일시적 중지; 정직, 정학"
+    },
+    {
+      "no": 45,
+      "word": "capitalism",
+      "meaning": "자본주의"
+    },
+    {
+      "no": 46,
+      "word": "via",
+      "meaning": "...을 경유하여, ...을 거쳐; ...을 매개로 하여, ...을 통해서"
+    },
+    {
+      "no": 47,
+      "word": "expense",
+      "meaning": "비용, 경비"
+    },
+    {
+      "no": 48,
+      "word": "apologetic",
+      "meaning": "사과의, 사죄하는"
+    },
+    {
+      "no": 49,
+      "word": "logical",
+      "meaning": "논리적인; 논리학의"
+    },
+    {
+      "no": 50,
+      "word": "equal",
+      "meaning": "같은, 평등한; ...와 같다, ...에 필적하다"
+    },
+    {
+      "no": 51,
+      "word": "adaptation",
+      "meaning": "각색, 개작; 적응, 적합"
+    },
+    {
+      "no": 52,
+      "word": "aptitude",
+      "meaning": "재능, 소질, 적성; 경향, 습성"
+    },
+    {
+      "no": 53,
+      "word": "presumption",
+      "meaning": "가정, 추측"
+    },
+    {
+      "no": 54,
+      "word": "remember",
+      "meaning": "기억하다; 상기하다, 생각해내다"
+    },
+    {
+      "no": 55,
+      "word": "convey",
+      "meaning": "전하다; 나르다, 수송하다"
+    },
+    {
+      "no": 56,
+      "word": "depend",
+      "meaning": "의지하다, 믿다; ...에 달려 있다"
+    },
+    {
+      "no": 57,
+      "word": "equator",
+      "meaning": "적도"
+    },
+    {
+      "no": 58,
+      "word": "respond",
+      "meaning": "반응하다; 대답하다"
+    },
+    {
+      "no": 59,
+      "word": "range",
+      "meaning": "다양한 것들; 범위; 산맥; ...에 이르다; 배열하다, 배치하다"
+    },
+    {
+      "no": 60,
+      "word": "previously",
+      "meaning": "이전에, 미리"
+    },
+    {
+      "no": 61,
+      "word": "achieve",
+      "meaning": "이루다, 성취하다, 달성하다"
+    },
+    {
+      "no": 62,
+      "word": "solve",
+      "meaning": "풀다, 해결하다"
+    },
+    {
+      "no": 63,
+      "word": "catalogue",
+      "meaning": "목록, 일람표, 카탈로그; 목록을만들다"
+    },
+    {
+      "no": 64,
+      "word": "consume",
+      "meaning": "소비하다, 쓰다; 먹다, 마시다"
+    },
+    {
+      "no": 65,
+      "word": "assume",
+      "meaning": "가정하다, 추측하다; 맡다; ...인체하다, 가장하다"
+    },
+    {
+      "no": 66,
+      "word": "ecological",
+      "meaning": "생태학의, 생태계의"
+    },
+    {
+      "no": 67,
+      "word": "attitude",
+      "meaning": "태도, 의견, 심정, 마음가짐; 자세"
+    },
+    {
+      "no": 68,
+      "word": "accusation",
+      "meaning": "비난; 고발"
+    },
+    {
+      "no": 69,
+      "word": "equally",
+      "meaning": "동등하게, 평등하게, 균등하게"
+    },
+    {
+      "no": 70,
+      "word": "equate",
+      "meaning": "동일시하다; 일치하다"
+    },
+    {
+      "no": 71,
+      "word": "logic",
+      "meaning": "논리, 논법"
+    },
+    {
+      "no": 72,
+      "word": "excuse",
+      "meaning": "용서하다, 봐주다; 변명하다; 변명이 되다; 양해를 구하다; 변명, 이유"
+    },
+    {
+      "no": 73,
+      "word": "neutral",
+      "meaning": "중립의; 중간의; 중립인 것, 중립국"
+    },
+    {
+      "no": 74,
+      "word": "obviously",
+      "meaning": "명백히, 뚜렷이"
+    },
+    {
+      "no": 75,
+      "word": "dependence",
+      "meaning": "의존, 종속"
+    },
+    {
+      "no": 76,
+      "word": "compensate",
+      "meaning": "보완하다, 상쇄하다; 보상하다, 배상하다"
+    },
+    {
+      "no": 77,
+      "word": "identify",
+      "meaning": "확인하다; 동일시하다"
+    },
+    {
+      "no": 78,
+      "word": "consumer",
+      "meaning": "소비자"
+    },
+    {
+      "no": 79,
+      "word": "apt",
+      "meaning": "...하는 경향이 있는, ...하기 쉬운; 적절한"
+    },
+    {
+      "no": 80,
+      "word": "compensation",
+      "meaning": "보충, 보완; 보상, 배상"
+    }
+  ]
+}

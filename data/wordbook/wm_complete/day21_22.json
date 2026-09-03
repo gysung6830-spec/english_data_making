@@ -1,0 +1,306 @@
+{
+  "title": "Day 21~22",
+  "source": "Word Master 고등 Complete",
+  "words": [
+    {
+      "no": 1,
+      "word": "visualize",
+      "meaning": "마음에 그리다, 상상하다; 시각화하다"
+    },
+    {
+      "no": 2,
+      "word": "latitude",
+      "meaning": "위도; 지역, 지방; 허용 범위"
+    },
+    {
+      "no": 3,
+      "word": "genetic",
+      "meaning": "유전의"
+    },
+    {
+      "no": 4,
+      "word": "make out",
+      "meaning": "~을 이해하다; 문서 등을 작성하다"
+    },
+    {
+      "no": 5,
+      "word": "owe",
+      "meaning": "빚지고 있다; ~ 덕분이다, 신세를 지고 있다; ~에게 품고 있다"
+    },
+    {
+      "no": 6,
+      "word": "at all costs",
+      "meaning": "어떤 대가를 치르더라도, 무슨 수를 써서라도"
+    },
+    {
+      "no": 7,
+      "word": "altitude",
+      "meaning": "고도, 높이; 높은 곳"
+    },
+    {
+      "no": 8,
+      "word": "immature",
+      "meaning": "미숙한; 미완성의; 미성년"
+    },
+    {
+      "no": 9,
+      "word": "flush",
+      "meaning": "붉어지다, 상기되다; 쏟아져 나오다; 홍조; 물을 왈칵 쏟음"
+    },
+    {
+      "no": 10,
+      "word": "at stake",
+      "meaning": "성패가 달려 있는, 위태로운"
+    },
+    {
+      "no": 11,
+      "word": "flesh",
+      "meaning": "살, 고기; 육체; 과육"
+    },
+    {
+      "no": 12,
+      "word": "for one’s own sake",
+      "meaning": "~ 자체를 위하여"
+    },
+    {
+      "no": 13,
+      "word": "compel",
+      "meaning": "강요하다, 억지로 시키다"
+    },
+    {
+      "no": 14,
+      "word": "draft",
+      "meaning": "원고, 초안; 밑그림; 징병, 소집; 끌기, 견인; 초안을 작성하다; 징병하다"
+    },
+    {
+      "no": 15,
+      "word": "impend",
+      "meaning": "임박하다"
+    },
+    {
+      "no": 16,
+      "word": "regime",
+      "meaning": "정권; 체제, 제도"
+    },
+    {
+      "no": 17,
+      "word": "immerse",
+      "meaning": "몰입하게 하다; 가라앉히다, 잠그다"
+    },
+    {
+      "no": 18,
+      "word": "landfill",
+      "meaning": "매립지; 매립"
+    },
+    {
+      "no": 19,
+      "word": "inhabitant",
+      "meaning": "주민, 거주자; 서식 동물"
+    },
+    {
+      "no": 20,
+      "word": "intuition",
+      "meaning": "직관; 직감"
+    },
+    {
+      "no": 21,
+      "word": "little more than",
+      "meaning": "~에 불과한, ~에 지나지 않는"
+    },
+    {
+      "no": 22,
+      "word": "dominance",
+      "meaning": "지배, 권세; 우세, 우위"
+    },
+    {
+      "no": 23,
+      "word": "dedicate",
+      "meaning": "바치다, 전념하다"
+    },
+    {
+      "no": 24,
+      "word": "envision",
+      "meaning": "마음에 그리다, 상상하다"
+    },
+    {
+      "no": 25,
+      "word": "bud",
+      "meaning": "싹을 틔우다, 발아하다; 싹, 눈; 꽃봉오리"
+    },
+    {
+      "no": 26,
+      "word": "specialize in",
+      "meaning": "~을 전문으로 하다, ~을 전공하다"
+    },
+    {
+      "no": 27,
+      "word": "estimation",
+      "meaning": "판단, 평가; 의견; 추정, 견적"
+    },
+    {
+      "no": 28,
+      "word": "an army of",
+      "meaning": "많은 ; ~ 무리"
+    },
+    {
+      "no": 29,
+      "word": "agenda",
+      "meaning": "의제, 안건"
+    },
+    {
+      "no": 30,
+      "word": "disorder",
+      "meaning": "어수선함, 무질서; 장애"
+    },
+    {
+      "no": 31,
+      "word": "empirical",
+      "meaning": "경험적인, 실증적인"
+    },
+    {
+      "no": 32,
+      "word": "abuse",
+      "meaning": "악용하다; 악용; 학대하다; 모욕하다; 학대; 모욕"
+    },
+    {
+      "no": 33,
+      "word": "optimal",
+      "meaning": "최선의, 최적의"
+    },
+    {
+      "no": 34,
+      "word": "immense",
+      "meaning": "거대한, 막대한; 엄청난"
+    },
+    {
+      "no": 35,
+      "word": "obesity",
+      "meaning": "비만, 비대"
+    },
+    {
+      "no": 36,
+      "word": "optimistic",
+      "meaning": "낙관적인, 낙관하는"
+    },
+    {
+      "no": 37,
+      "word": "coordinate",
+      "meaning": "조정하다; 조직화하다; 동격의, 동등한"
+    },
+    {
+      "no": 38,
+      "word": "minimize",
+      "meaning": "최소화하다; 과소평가하다, 얕보다"
+    },
+    {
+      "no": 39,
+      "word": "arrange",
+      "meaning": "정리하다; 배열하다; 조정하다; 준비하다"
+    },
+    {
+      "no": 40,
+      "word": "acquire",
+      "meaning": "얻다, 습득하다, 취득하다"
+    },
+    {
+      "no": 41,
+      "word": "at the sight of",
+      "meaning": "~을 보고"
+    },
+    {
+      "no": 42,
+      "word": "in stock",
+      "meaning": "비축되어, 재고로"
+    },
+    {
+      "no": 43,
+      "word": "split up",
+      "meaning": "~을 분리하다; 헤어지다"
+    },
+    {
+      "no": 44,
+      "word": "alignment",
+      "meaning": "일직선; 정돈, 정렬; 동맹, 제휴"
+    },
+    {
+      "no": 45,
+      "word": "temper",
+      "meaning": "기질, 성질; 기분; 차분함, 침착; 완화하다"
+    },
+    {
+      "no": 46,
+      "word": "rationalist",
+      "meaning": "이성주의자"
+    },
+    {
+      "no": 47,
+      "word": "optical",
+      "meaning": "눈의, 시각의; 광학의"
+    },
+    {
+      "no": 48,
+      "word": "exemplify",
+      "meaning": "예증하다; ~의 좋은 예가 되다"
+    },
+    {
+      "no": 49,
+      "word": "cue",
+      "meaning": "신호; 단서; 신호를 보내다"
+    },
+    {
+      "no": 50,
+      "word": "oblige",
+      "meaning": "의무를 지우다, 강요하다; ~에게은혜를 베풀다"
+    },
+    {
+      "no": 51,
+      "word": "flash",
+      "meaning": "번쩍임, 섬광; 번쩍이다, 비추다"
+    },
+    {
+      "no": 52,
+      "word": "make for",
+      "meaning": "~에 도움이 되다; ~ 쪽으로 가다"
+    },
+    {
+      "no": 53,
+      "word": "subsequent",
+      "meaning": "그 후의, 뒤이은; 연속되는"
+    },
+    {
+      "no": 54,
+      "word": "envelope",
+      "meaning": "봉투, 싸는 것; 외피"
+    },
+    {
+      "no": 55,
+      "word": "assessment",
+      "meaning": "평가; 평가액"
+    },
+    {
+      "no": 56,
+      "word": "capital",
+      "meaning": "자본, 자산; 수도; 대문자; 자본의, 자산의; 가장 중요한; 수도의; 대문자의"
+    },
+    {
+      "no": 57,
+      "word": "therapist",
+      "meaning": "치료 전문가, 치료사"
+    },
+    {
+      "no": 58,
+      "word": "amplify",
+      "meaning": "증폭시키다, 확대하다; 상세히설명하다"
+    },
+    {
+      "no": 59,
+      "word": "consequent",
+      "meaning": "결과로 일어나는; 필연의; 결론, 결과"
+    },
+    {
+      "no": 60,
+      "word": "be armed with",
+      "meaning": "~로 무장하다; ~을 갖추고 있다"
+    }
+  ]
+}

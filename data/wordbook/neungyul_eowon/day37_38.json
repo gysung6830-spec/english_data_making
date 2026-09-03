@@ -1,0 +1,406 @@
+{
+  "title": "Day 37~38",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "judge",
+      "meaning": "재판관, 판사; 심사위원, 심판; 판단하다; 심사하다, 판정하다; 재판하다, 판결을 내리다"
+    },
+    {
+      "no": 2,
+      "word": "injury",
+      "meaning": "상해, 부상; 손상, 훼손"
+    },
+    {
+      "no": 3,
+      "word": "passenger",
+      "meaning": "승객, 여객"
+    },
+    {
+      "no": 4,
+      "word": "expedition",
+      "meaning": "탐험"
+    },
+    {
+      "no": 5,
+      "word": "passerby",
+      "meaning": "통행인, 지나가는 사람"
+    },
+    {
+      "no": 6,
+      "word": "cast",
+      "meaning": "던지다; 드리우다; 배우를 정하다, 배역을 맡기다; 던지다, 주다; 출연진; 깁스; 주형, 거푸집; 던지기"
+    },
+    {
+      "no": 7,
+      "word": "terrorist",
+      "meaning": "테러리스트"
+    },
+    {
+      "no": 8,
+      "word": "laborer",
+      "meaning": "노동자"
+    },
+    {
+      "no": 9,
+      "word": "utilization",
+      "meaning": "활용, 이용"
+    },
+    {
+      "no": 10,
+      "word": "usage",
+      "meaning": "어법, 용법; 사용, 사용량"
+    },
+    {
+      "no": 11,
+      "word": "justify",
+      "meaning": "정당화하다, 옳다고 하다"
+    },
+    {
+      "no": 12,
+      "word": "social",
+      "meaning": "사회의, 사회적인; 사교상의, 친목의"
+    },
+    {
+      "no": 13,
+      "word": "terrify",
+      "meaning": "겁나게 하다, 무섭게 하다"
+    },
+    {
+      "no": 14,
+      "word": "laboratory",
+      "meaning": "실험실, 연구소"
+    },
+    {
+      "no": 15,
+      "word": "experiment",
+      "meaning": "실험, 시도; 실험하다, 시도하다"
+    },
+    {
+      "no": 16,
+      "word": "privileged",
+      "meaning": "특권을 가진"
+    },
+    {
+      "no": 17,
+      "word": "pace",
+      "meaning": "속도, 페이스; 걸음, 보폭"
+    },
+    {
+      "no": 18,
+      "word": "associate",
+      "meaning": "관련시켜 생각하다, 연상하다, 연관시키다; 교제하다; 동료, 친구; 준-, 부-; 제휴한, 한패의"
+    },
+    {
+      "no": 19,
+      "word": "sole",
+      "meaning": "유일한, 단 하나의"
+    },
+    {
+      "no": 20,
+      "word": "delegation",
+      "meaning": "위임; 대표단"
+    },
+    {
+      "no": 21,
+      "word": "monotony",
+      "meaning": "단조로움; 지루함"
+    },
+    {
+      "no": 22,
+      "word": "pedal",
+      "meaning": "발판, 페달; 페달을 밟다, 페달을 밟으며 가다"
+    },
+    {
+      "no": 23,
+      "word": "useless",
+      "meaning": "쓸모없는, 무익한"
+    },
+    {
+      "no": 24,
+      "word": "laborious",
+      "meaning": "힘든, 고된"
+    },
+    {
+      "no": 25,
+      "word": "intonation",
+      "meaning": "억양, 어조"
+    },
+    {
+      "no": 26,
+      "word": "terrorize",
+      "meaning": "공포에 떨게 하다"
+    },
+    {
+      "no": 27,
+      "word": "legally",
+      "meaning": "법률적으로, 합법적으로"
+    },
+    {
+      "no": 28,
+      "word": "pedestrian",
+      "meaning": "보행자; 보행자의"
+    },
+    {
+      "no": 29,
+      "word": "expert",
+      "meaning": "전문가, 숙련가; 전문가의, 숙련된"
+    },
+    {
+      "no": 30,
+      "word": "terrifying",
+      "meaning": "겁나게 하는, 아주 무서운"
+    },
+    {
+      "no": 31,
+      "word": "solely",
+      "meaning": "혼자서, 단독으로; 오로지, 단지"
+    },
+    {
+      "no": 32,
+      "word": "colleague",
+      "meaning": "동료"
+    },
+    {
+      "no": 33,
+      "word": "sociology",
+      "meaning": "사회학"
+    },
+    {
+      "no": 34,
+      "word": "legislation",
+      "meaning": "법률 제정, 입법; 법률"
+    },
+    {
+      "no": 35,
+      "word": "tune",
+      "meaning": "가락, 곡, 선율; 조율하다; 맞추다"
+    },
+    {
+      "no": 36,
+      "word": "utility",
+      "meaning": "공공 사업; 유용성, 효용"
+    },
+    {
+      "no": 37,
+      "word": "just",
+      "meaning": "올바른, 공평한; 적절한; 바로, 틀림없이; 지금 막, 방금; 단지, 그저"
+    },
+    {
+      "no": 38,
+      "word": "solitude",
+      "meaning": "혼자 있음, 고독"
+    },
+    {
+      "no": 39,
+      "word": "association",
+      "meaning": "협회, 단체; 관련, 관계"
+    },
+    {
+      "no": 40,
+      "word": "elaborate",
+      "meaning": "정교한, 정성들여 만든; 상세히 말하다; 갈고 다듬다"
+    },
+    {
+      "no": 41,
+      "word": "passage",
+      "meaning": "통로; 통행; 한 구절; 통과; 경과, 진행"
+    },
+    {
+      "no": 42,
+      "word": "broadcast",
+      "meaning": "방송하다; 방송, 방영"
+    },
+    {
+      "no": 43,
+      "word": "legislate",
+      "meaning": "법률을 제정하다, 입법하다"
+    },
+    {
+      "no": 44,
+      "word": "forecast",
+      "meaning": "예상하다, 예보하다; 예상, 예보"
+    },
+    {
+      "no": 45,
+      "word": "privilege",
+      "meaning": "특권, 특전; 영광; 특권을 주다"
+    },
+    {
+      "no": 46,
+      "word": "utensil",
+      "meaning": "도구, 기구"
+    },
+    {
+      "no": 47,
+      "word": "sociable",
+      "meaning": "사교적인, 붙임성 있는"
+    },
+    {
+      "no": 48,
+      "word": "injure",
+      "meaning": "상처 입히다, 다치게 하다; 손상시키다, 훼손하다"
+    },
+    {
+      "no": 49,
+      "word": "utilitarian",
+      "meaning": "실용적인; 실리주의의"
+    },
+    {
+      "no": 50,
+      "word": "judgment",
+      "meaning": "판단, 판정; 판결"
+    },
+    {
+      "no": 51,
+      "word": "abuse",
+      "meaning": "학대하다; 남용하다, 오용하다; 학대;; 남용, 오용"
+    },
+    {
+      "no": 52,
+      "word": "collaborative",
+      "meaning": "협력하는, 합작의"
+    },
+    {
+      "no": 53,
+      "word": "surpass",
+      "meaning": "...을 능가하다, ...보다 낫다"
+    },
+    {
+      "no": 54,
+      "word": "experienced",
+      "meaning": "경험이 있는, 노련한, 숙련된"
+    },
+    {
+      "no": 55,
+      "word": "tone",
+      "meaning": "음색, 음조, 음성; 어조, 말투; 색조"
+    },
+    {
+      "no": 56,
+      "word": "legacy",
+      "meaning": "유산, 유물, 물려받은 것"
+    },
+    {
+      "no": 57,
+      "word": "injurious",
+      "meaning": "해로운, 유해한"
+    },
+    {
+      "no": 58,
+      "word": "justified",
+      "meaning": "당연한, 정당한"
+    },
+    {
+      "no": 59,
+      "word": "expertise",
+      "meaning": "전문 지식"
+    },
+    {
+      "no": 60,
+      "word": "bypass",
+      "meaning": "우회하다; 회피하다; 건너뛰다; 우회로"
+    },
+    {
+      "no": 61,
+      "word": "peril",
+      "meaning": "위험, 모험"
+    },
+    {
+      "no": 62,
+      "word": "collaboration",
+      "meaning": "협력, 협업"
+    },
+    {
+      "no": 63,
+      "word": "broadcaster",
+      "meaning": "방송인, 아나운서; 방송국"
+    },
+    {
+      "no": 64,
+      "word": "perilous",
+      "meaning": "위험한"
+    },
+    {
+      "no": 65,
+      "word": "useful",
+      "meaning": "유용한, 쓸모 있는"
+    },
+    {
+      "no": 66,
+      "word": "justice",
+      "meaning": "정의, 공정; 사법, 재판"
+    },
+    {
+      "no": 67,
+      "word": "terror",
+      "meaning": "공포, 두려움; 테러"
+    },
+    {
+      "no": 68,
+      "word": "terrible",
+      "meaning": "무서운, 끔찍한; 심한, 대단한, 엄청난"
+    },
+    {
+      "no": 69,
+      "word": "monotonous",
+      "meaning": "단조로운, 변화 없는; 지루한"
+    },
+    {
+      "no": 70,
+      "word": "use",
+      "meaning": "사용하다, 쓰다; 사용, 이용; 용도; 쓸모, 이익"
+    },
+    {
+      "no": 71,
+      "word": "legal",
+      "meaning": "법률의; 합법적인"
+    },
+    {
+      "no": 72,
+      "word": "experimental",
+      "meaning": "실험의, 실험에 의거한; 실험적인"
+    },
+    {
+      "no": 73,
+      "word": "pastime",
+      "meaning": "오락, 놀이, 심심풀이"
+    },
+    {
+      "no": 74,
+      "word": "used",
+      "meaning": "익숙한; 중고의, 사용한"
+    },
+    {
+      "no": 75,
+      "word": "experience",
+      "meaning": "경험; 경험하다, 체험하다"
+    },
+    {
+      "no": 76,
+      "word": "loyal",
+      "meaning": "충성스러운, 충실한"
+    },
+    {
+      "no": 77,
+      "word": "utilize",
+      "meaning": "활용하다, 이용하다"
+    },
+    {
+      "no": 78,
+      "word": "loyalty",
+      "meaning": "충성, 충실"
+    },
+    {
+      "no": 79,
+      "word": "abusive",
+      "meaning": "폭력적인, 학대하는; 독설의"
+    },
+    {
+      "no": 80,
+      "word": "prejudice",
+      "meaning": "편견, 선입견; 편견을 갖게 하다"
+    }
+  ]
+}

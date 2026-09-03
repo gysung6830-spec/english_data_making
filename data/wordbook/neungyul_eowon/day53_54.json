@@ -1,0 +1,406 @@
+{
+  "title": "Day 53~54",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "voluntary",
+      "meaning": "자발적인; 자원봉사의, 무상으로 일하는"
+    },
+    {
+      "no": 2,
+      "word": "defense",
+      "meaning": "방어; 옹호, 변호, 변론"
+    },
+    {
+      "no": 3,
+      "word": "victory",
+      "meaning": "승리"
+    },
+    {
+      "no": 4,
+      "word": "contemporary",
+      "meaning": "현대의, 당대의; 동시대의, 같은 시기의; 같은 시대의 사람"
+    },
+    {
+      "no": 5,
+      "word": "anxiety",
+      "meaning": "걱정, 불안; 갈망, 열망"
+    },
+    {
+      "no": 6,
+      "word": "altitude",
+      "meaning": "고도, 높이, 해발"
+    },
+    {
+      "no": 7,
+      "word": "illusionist",
+      "meaning": "마술사"
+    },
+    {
+      "no": 8,
+      "word": "sophomore",
+      "meaning": "2학년생"
+    },
+    {
+      "no": 9,
+      "word": "convincing",
+      "meaning": "설득력 있는, 확실한"
+    },
+    {
+      "no": 10,
+      "word": "admiration",
+      "meaning": "존경, 찬양, 감탄"
+    },
+    {
+      "no": 11,
+      "word": "incorporation",
+      "meaning": "법인, 회사; 설립; 합병; 결합"
+    },
+    {
+      "no": 12,
+      "word": "tremendous",
+      "meaning": "엄청난, 막대한; 멋진, 대단한"
+    },
+    {
+      "no": 13,
+      "word": "fare",
+      "meaning": "요금, 운임"
+    },
+    {
+      "no": 14,
+      "word": "tremendously",
+      "meaning": "엄청나게"
+    },
+    {
+      "no": 15,
+      "word": "pronunciation",
+      "meaning": "발음"
+    },
+    {
+      "no": 16,
+      "word": "farewell",
+      "meaning": "작별 ; 작별의, 이별의, 송별의; 잘 가요."
+    },
+    {
+      "no": 17,
+      "word": "temporary",
+      "meaning": "일시적인; 임시의"
+    },
+    {
+      "no": 18,
+      "word": "merciful",
+      "meaning": "자비로운, 인정 많은"
+    },
+    {
+      "no": 19,
+      "word": "corporate",
+      "meaning": "회사의, 법인의; 단체의, 공동의"
+    },
+    {
+      "no": 20,
+      "word": "temporarily",
+      "meaning": "일시적으로; 임시로"
+    },
+    {
+      "no": 21,
+      "word": "mortgage",
+      "meaning": "저당, 저당 잡히기; 융자; 저당 잡히다"
+    },
+    {
+      "no": 22,
+      "word": "defenseless",
+      "meaning": "무방비의, 방어할 수 없는"
+    },
+    {
+      "no": 23,
+      "word": "adolescent",
+      "meaning": "청소년, 청년"
+    },
+    {
+      "no": 24,
+      "word": "illusive",
+      "meaning": "환영인"
+    },
+    {
+      "no": 25,
+      "word": "philosophy",
+      "meaning": "철학"
+    },
+    {
+      "no": 26,
+      "word": "numerical",
+      "meaning": "수와 관련된, 숫자로 나타낸"
+    },
+    {
+      "no": 27,
+      "word": "announcement",
+      "meaning": "발표, 공표; 알림, 공고, 고지"
+    },
+    {
+      "no": 28,
+      "word": "innumerable",
+      "meaning": "셀 수 없이 많은"
+    },
+    {
+      "no": 29,
+      "word": "mutation",
+      "meaning": "변화, 변형; 돌연변이"
+    },
+    {
+      "no": 30,
+      "word": "adolescence",
+      "meaning": "청소년기, 사춘기"
+    },
+    {
+      "no": 31,
+      "word": "philosophical",
+      "meaning": "철학의, 철학에 관련된"
+    },
+    {
+      "no": 32,
+      "word": "immigrant",
+      "meaning": "이민자, 이주자"
+    },
+    {
+      "no": 33,
+      "word": "miraculous",
+      "meaning": "기적의, 기적 같은"
+    },
+    {
+      "no": 34,
+      "word": "offend",
+      "meaning": "화나게 하다, 불쾌감을 주다; 위반하다, 죄를 범하다"
+    },
+    {
+      "no": 35,
+      "word": "convince",
+      "meaning": "확신시키다; 설득하다"
+    },
+    {
+      "no": 36,
+      "word": "fence",
+      "meaning": "울타리; 장애물; ...에 울타리를 치다; 펜싱을 하다"
+    },
+    {
+      "no": 37,
+      "word": "incorporate",
+      "meaning": "법인으로 만들다; 포함하다, 합병하다"
+    },
+    {
+      "no": 38,
+      "word": "involuntary",
+      "meaning": "자기도 모르게 하는; 원치 않는"
+    },
+    {
+      "no": 39,
+      "word": "numeral",
+      "meaning": "숫자를 나타내는; 숫자"
+    },
+    {
+      "no": 40,
+      "word": "announcer",
+      "meaning": "방송 진행자, 아나운서"
+    },
+    {
+      "no": 41,
+      "word": "marvelous",
+      "meaning": "훌륭한, 재미있는, 흥미로운"
+    },
+    {
+      "no": 42,
+      "word": "offender",
+      "meaning": "범죄자"
+    },
+    {
+      "no": 43,
+      "word": "anxious",
+      "meaning": "걱정하는, 불안해하는; 갈망하는"
+    },
+    {
+      "no": 44,
+      "word": "announce",
+      "meaning": "발표하다, 알리다"
+    },
+    {
+      "no": 45,
+      "word": "migratory",
+      "meaning": "이주하는"
+    },
+    {
+      "no": 46,
+      "word": "merchandise",
+      "meaning": "제품, 상품; 판매하다"
+    },
+    {
+      "no": 47,
+      "word": "delusive",
+      "meaning": "기만적인, 현혹하는"
+    },
+    {
+      "no": 48,
+      "word": "convict",
+      "meaning": "유죄를 선고하다; 죄수, 수형자"
+    },
+    {
+      "no": 49,
+      "word": "sophistication",
+      "meaning": "세련됨, 교양; 정교화"
+    },
+    {
+      "no": 50,
+      "word": "reputation",
+      "meaning": "평판, 명성, 명망"
+    },
+    {
+      "no": 51,
+      "word": "mercy",
+      "meaning": "자비, 관용"
+    },
+    {
+      "no": 52,
+      "word": "merciless",
+      "meaning": "무자비한, 잔인한"
+    },
+    {
+      "no": 53,
+      "word": "mutually",
+      "meaning": "서로, 상호간에, 공통으로"
+    },
+    {
+      "no": 54,
+      "word": "merchant",
+      "meaning": "상인, 무역상"
+    },
+    {
+      "no": 55,
+      "word": "victor",
+      "meaning": "승리자"
+    },
+    {
+      "no": 56,
+      "word": "admirable",
+      "meaning": "존경받을 만한, 훌륭한"
+    },
+    {
+      "no": 57,
+      "word": "commute",
+      "meaning": "통근하다; 통근"
+    },
+    {
+      "no": 58,
+      "word": "pronouncement",
+      "meaning": "선언, 공고"
+    },
+    {
+      "no": 59,
+      "word": "illusion",
+      "meaning": "착각, 오해; 환영, 환각"
+    },
+    {
+      "no": 60,
+      "word": "conviction",
+      "meaning": "유죄 판결; 확신, 신념"
+    },
+    {
+      "no": 61,
+      "word": "immigration",
+      "meaning": "이민, 이주"
+    },
+    {
+      "no": 62,
+      "word": "volunteer",
+      "meaning": "지원자, 지원병; 자원봉사자; 자진하여 하다; 자원봉사로 하다; 지원병이 되다"
+    },
+    {
+      "no": 63,
+      "word": "pronounce",
+      "meaning": "발음하다; 선언하다, 선고하다"
+    },
+    {
+      "no": 64,
+      "word": "offensive",
+      "meaning": "화나게 하는, 불쾌한; 공격의, 공격적인"
+    },
+    {
+      "no": 65,
+      "word": "defensive",
+      "meaning": "방어의, 방어적인"
+    },
+    {
+      "no": 66,
+      "word": "emigrant",
+      "meaning": "이민자, 이주자"
+    },
+    {
+      "no": 67,
+      "word": "provincial",
+      "meaning": "주의; 지방의; 편협한"
+    },
+    {
+      "no": 68,
+      "word": "delusional",
+      "meaning": "망상의"
+    },
+    {
+      "no": 69,
+      "word": "province",
+      "meaning": "주, 도; 지방; 분야"
+    },
+    {
+      "no": 70,
+      "word": "abolition",
+      "meaning": "폐지"
+    },
+    {
+      "no": 71,
+      "word": "commerce",
+      "meaning": "상업, 무역"
+    },
+    {
+      "no": 72,
+      "word": "tremble",
+      "meaning": "떨다, 떨리다; 흔들리다, 진동하다"
+    },
+    {
+      "no": 73,
+      "word": "migration",
+      "meaning": "이주, 이동"
+    },
+    {
+      "no": 74,
+      "word": "delude",
+      "meaning": "속이다, 착각하게 만들다"
+    },
+    {
+      "no": 75,
+      "word": "immigrate",
+      "meaning": "이민 오다, 이주해 오다"
+    },
+    {
+      "no": 76,
+      "word": "mortality",
+      "meaning": "사망; 죽을 운명"
+    },
+    {
+      "no": 77,
+      "word": "victorious",
+      "meaning": "승리의, 의기양양한"
+    },
+    {
+      "no": 78,
+      "word": "mutual",
+      "meaning": "상호간의, 서로의, 공통의"
+    },
+    {
+      "no": 79,
+      "word": "offense",
+      "meaning": "위반, 범죄; 무례; 공격"
+    },
+    {
+      "no": 80,
+      "word": "commercialize",
+      "meaning": "상업화하다"
+    }
+  ]
+}

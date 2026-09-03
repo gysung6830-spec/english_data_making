@@ -1,0 +1,306 @@
+{
+  "title": "Day 5~6",
+  "source": "Word Master 고등 Complete",
+  "words": [
+    {
+      "no": 1,
+      "word": "distinct",
+      "meaning": "뚜렷이 다른, 별개의; 뚜렷한, 분명한"
+    },
+    {
+      "no": 2,
+      "word": "take over",
+      "meaning": "이어받다, 인계받다; 인수하다; 장악하다"
+    },
+    {
+      "no": 3,
+      "word": "starve",
+      "meaning": "굶주리다, 굶어 죽다; 갈망하다, 갈망하게 하다"
+    },
+    {
+      "no": 4,
+      "word": "come down with",
+      "meaning": "걸리다"
+    },
+    {
+      "no": 5,
+      "word": "come into play",
+      "meaning": "작동하기 시작하다"
+    },
+    {
+      "no": 6,
+      "word": "assimilation",
+      "meaning": "동화 , 융합; 흡수"
+    },
+    {
+      "no": 7,
+      "word": "enable",
+      "meaning": "가능하게 하다; ~을 할 수 있게 하다"
+    },
+    {
+      "no": 8,
+      "word": "credit",
+      "meaning": "신용, 신뢰; 신용 거래; 공 ; 명성 ; 믿다 ; ~에게 돌리다, ~에게 있다고 믿다"
+    },
+    {
+      "no": 9,
+      "word": "deem",
+      "meaning": "여기다, 생각하다"
+    },
+    {
+      "no": 10,
+      "word": "mourn",
+      "meaning": "슬퍼하다; 애도하다"
+    },
+    {
+      "no": 11,
+      "word": "deviation",
+      "meaning": "벗어남, 일탈 , 탈선"
+    },
+    {
+      "no": 12,
+      "word": "identical",
+      "meaning": "동일한, 똑같은"
+    },
+    {
+      "no": 13,
+      "word": "doom",
+      "meaning": "운명, 파멸; 운명을 정하다"
+    },
+    {
+      "no": 14,
+      "word": "cast one’s eye on",
+      "meaning": "~에 눈길을 주다, ~을 바라보다"
+    },
+    {
+      "no": 15,
+      "word": "come into contact with",
+      "meaning": "~와 접촉하다"
+    },
+    {
+      "no": 16,
+      "word": "capture",
+      "meaning": "붙잡다, 체포하다; 사로잡다"
+    },
+    {
+      "no": 17,
+      "word": "tease",
+      "meaning": "놀리다; 곯리다, 괴롭히다; 곯리기; 곯리는 사람"
+    },
+    {
+      "no": 18,
+      "word": "rejoice",
+      "meaning": "크게 기뻐하다; 축하하다"
+    },
+    {
+      "no": 19,
+      "word": "mute",
+      "meaning": "무언의, 말없는; 말을 못하는; 소리를 줄이다"
+    },
+    {
+      "no": 20,
+      "word": "ritual",
+      "meaning": "의식, 제식; 의식의, 의례적인"
+    },
+    {
+      "no": 21,
+      "word": "scratch",
+      "meaning": "긁다; 할퀴다; 긁음; 긁힌 자국, 찰과상"
+    },
+    {
+      "no": 22,
+      "word": "brutal",
+      "meaning": "잔혹한, 무자비한; 야만적인"
+    },
+    {
+      "no": 23,
+      "word": "undermine",
+      "meaning": "기반을 약화시키다; 손상시키다"
+    },
+    {
+      "no": 24,
+      "word": "conquer",
+      "meaning": "정복하다, 이기다; 극복하다; 획득하다"
+    },
+    {
+      "no": 25,
+      "word": "account for",
+      "meaning": "차지하다; ~을 설명하다, ~을 해명하다"
+    },
+    {
+      "no": 26,
+      "word": "liberate",
+      "meaning": "자유롭게 하다, 해방하다; 석방하다"
+    },
+    {
+      "no": 27,
+      "word": "mutate",
+      "meaning": "돌연변이하다; 변형되다"
+    },
+    {
+      "no": 28,
+      "word": "televise",
+      "meaning": "TV로 방송하다, 방영하다"
+    },
+    {
+      "no": 29,
+      "word": "distrust",
+      "meaning": "불신; 의혹; 불신하다; 의심하다"
+    },
+    {
+      "no": 30,
+      "word": "withdraw",
+      "meaning": "움츠리다, 뒤로 빼다; 철수하다, 물러나다; 회수하다, 거둬들이다"
+    },
+    {
+      "no": 31,
+      "word": "infant",
+      "meaning": "유아, 소아; 유치원생; 유아용의; 초기의"
+    },
+    {
+      "no": 32,
+      "word": "bias",
+      "meaning": "편견, 선입견; 성향; 편견을 갖게하다"
+    },
+    {
+      "no": 33,
+      "word": "stalk",
+      "meaning": "줄기; 몰래 접근하다, 스토킹하다; 활보하다"
+    },
+    {
+      "no": 34,
+      "word": "sprint",
+      "meaning": "전력 질주하다; 전력 질주; 단거리 경기"
+    },
+    {
+      "no": 35,
+      "word": "ape",
+      "meaning": "유인원; 흉내 내다"
+    },
+    {
+      "no": 36,
+      "word": "portion",
+      "meaning": "일부, 부분; 몫;1인분; 분배하다"
+    },
+    {
+      "no": 37,
+      "word": "mutual",
+      "meaning": "상호 간의, 서로의"
+    },
+    {
+      "no": 38,
+      "word": "end up -ing",
+      "meaning": "결국 ~하게 되다"
+    },
+    {
+      "no": 39,
+      "word": "withhold",
+      "meaning": "억제하다, 숨기다; 보류하다, 주지 않다"
+    },
+    {
+      "no": 40,
+      "word": "distress",
+      "meaning": "고통, 괴로움; 곤란, 곤궁; 괴롭히다, 고통스럽게 하다"
+    },
+    {
+      "no": 41,
+      "word": "last but not least",
+      "meaning": "마지막으로"
+    },
+    {
+      "no": 42,
+      "word": "compliance",
+      "meaning": "준수, 따름"
+    },
+    {
+      "no": 43,
+      "word": "the chances are that",
+      "meaning": "아마 ~일 것이다, ~할 가능성이높다"
+    },
+    {
+      "no": 44,
+      "word": "maximization",
+      "meaning": "극대화"
+    },
+    {
+      "no": 45,
+      "word": "nourish",
+      "meaning": "기르다; ~에 영양분을 주다"
+    },
+    {
+      "no": 46,
+      "word": "give rise to",
+      "meaning": "~을 낳다, ~이 생기게 하다"
+    },
+    {
+      "no": 47,
+      "word": "withstand",
+      "meaning": "견디다, 버티다; 저항하다"
+    },
+    {
+      "no": 48,
+      "word": "cram",
+      "meaning": "밀어 넣다, 채워 넣다; 벼락치기공부를 하다"
+    },
+    {
+      "no": 49,
+      "word": "sustain",
+      "meaning": "지탱하게 하다, 지속하다; 유지하다"
+    },
+    {
+      "no": 50,
+      "word": "appliance",
+      "meaning": "기기; 전기 제품; 응용, 적용"
+    },
+    {
+      "no": 51,
+      "word": "forbid",
+      "meaning": "금하다; ~을 어렵게 하다"
+    },
+    {
+      "no": 52,
+      "word": "resent",
+      "meaning": "분개하다, 원망하다"
+    },
+    {
+      "no": 53,
+      "word": "put up with",
+      "meaning": "~을 참다, ~을 견디다"
+    },
+    {
+      "no": 54,
+      "word": "mindset",
+      "meaning": "사고방식, 태도"
+    },
+    {
+      "no": 55,
+      "word": "dwell on",
+      "meaning": "~을 곰곰이 생각하다; ~을 자세히 설명하다"
+    },
+    {
+      "no": 56,
+      "word": "minute",
+      "meaning": "미세한, 아주 작은; 사소한; 상세한, 철저한; 세심한; 분; 순간; 회의록"
+    },
+    {
+      "no": 57,
+      "word": "validate",
+      "meaning": "입증하다, 승인하다; 유효하게하다, 비준하다"
+    },
+    {
+      "no": 58,
+      "word": "fierce",
+      "meaning": "사나운, 잔인한; 격렬한, 맹렬한"
+    },
+    {
+      "no": 59,
+      "word": "impair",
+      "meaning": "손상시키다, 해치다"
+    },
+    {
+      "no": 60,
+      "word": "atmosphere",
+      "meaning": "대기, 공기; 분위기, 기운"
+    }
+  ]
+}

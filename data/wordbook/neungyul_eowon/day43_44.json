@@ -1,0 +1,406 @@
+{
+  "title": "Day 43~44",
+  "source": "능률보카 어원편 고등",
+  "words": [
+    {
+      "no": 1,
+      "word": "cite",
+      "meaning": "언급하다; 인용하다; 소환하다"
+    },
+    {
+      "no": 2,
+      "word": "dimension",
+      "meaning": "치수, 크기; 특성, 특질, 면; 차원"
+    },
+    {
+      "no": 3,
+      "word": "execute",
+      "meaning": "처형하다; 실행하다, 집행하다"
+    },
+    {
+      "no": 4,
+      "word": "explode",
+      "meaning": "폭발하다; 폭발시키다; 폭발적으로 증가하다"
+    },
+    {
+      "no": 5,
+      "word": "pair",
+      "meaning": "한 쌍; 한 개; 짝을 짓다, 한 쌍이 되다"
+    },
+    {
+      "no": 6,
+      "word": "suit",
+      "meaning": "...에 적합하다, 알맞다, 편리하다; ...에게 어울리다; 정장; 한 벌의 옷; 소송"
+    },
+    {
+      "no": 7,
+      "word": "measure",
+      "meaning": "조치, 대책; 척도, 기준; 양, 정도; 재다, 측정하다; 판단하다, 평가하다"
+    },
+    {
+      "no": 8,
+      "word": "emphasis",
+      "meaning": "강조, 역점, 중요시"
+    },
+    {
+      "no": 9,
+      "word": "fancy",
+      "meaning": "장식적인, 화려한; 고급의, 비싼; 좋아하다, ...이 마음에 들다"
+    },
+    {
+      "no": 10,
+      "word": "petition",
+      "meaning": "탄원, 청원, 간청; 탄원하다, 청원하다"
+    },
+    {
+      "no": 11,
+      "word": "executive",
+      "meaning": "임원, 이사, 경영진; 행정부; 집행의, 행정상의"
+    },
+    {
+      "no": 12,
+      "word": "appear",
+      "meaning": "...처럼 보이다, ...인 것 같다; 나타나다, 출현하다, 출연하다"
+    },
+    {
+      "no": 13,
+      "word": "pursuit",
+      "meaning": "추구; 추적"
+    },
+    {
+      "no": 14,
+      "word": "exciting",
+      "meaning": "흥분시키는"
+    },
+    {
+      "no": 15,
+      "word": "debt",
+      "meaning": "빚, 채무; 신세, 빚진 것"
+    },
+    {
+      "no": 16,
+      "word": "explosion",
+      "meaning": "폭발, 파열; 폭발적 증가"
+    },
+    {
+      "no": 17,
+      "word": "retailer",
+      "meaning": "소매상, 소매점"
+    },
+    {
+      "no": 18,
+      "word": "repeat",
+      "meaning": "반복하다; 따라 말하다; 말을 옮기다"
+    },
+    {
+      "no": 19,
+      "word": "tailor",
+      "meaning": "재단사; 맞추다, 맞게 하다"
+    },
+    {
+      "no": 20,
+      "word": "applaud",
+      "meaning": "박수갈채하다; 칭찬하다"
+    },
+    {
+      "no": 21,
+      "word": "obey",
+      "meaning": "복종하다, 따르다"
+    },
+    {
+      "no": 22,
+      "word": "explosive",
+      "meaning": "폭발성의, 폭발하기 쉬운, 폭발적인; 폭발물, 폭약"
+    },
+    {
+      "no": 23,
+      "word": "execution",
+      "meaning": "처형, 사형; 실행, 수행"
+    },
+    {
+      "no": 24,
+      "word": "sequential",
+      "meaning": "순차적인"
+    },
+    {
+      "no": 25,
+      "word": "repeatedly",
+      "meaning": "되풀이해서"
+    },
+    {
+      "no": 26,
+      "word": "transparency",
+      "meaning": "투명성, 투명도"
+    },
+    {
+      "no": 27,
+      "word": "transparent",
+      "meaning": "투명한, 비치는; 명쾌한, 명백한, 이해하기 쉬운"
+    },
+    {
+      "no": 28,
+      "word": "measurable",
+      "meaning": "측정할 수 있는; 주목할 만한"
+    },
+    {
+      "no": 29,
+      "word": "competitive",
+      "meaning": "경쟁력을 갖춘, 경쟁 우위에 있는; 경쟁의, 경쟁적인"
+    },
+    {
+      "no": 30,
+      "word": "competence",
+      "meaning": "능력, 역량"
+    },
+    {
+      "no": 31,
+      "word": "sequent",
+      "meaning": "다음에 오는, 연속되는"
+    },
+    {
+      "no": 32,
+      "word": "detail",
+      "meaning": "세부 사항, 사소한 것; 상세 정보; 상술하다"
+    },
+    {
+      "no": 33,
+      "word": "due",
+      "meaning": "...하기로 되어 있는; 도착 예정인; 지불되어야 할, 만기가 된; ...에 기인하는, ...의 탓인; 적합한; 회비"
+    },
+    {
+      "no": 34,
+      "word": "competent",
+      "meaning": "유능한, 역량 있는"
+    },
+    {
+      "no": 35,
+      "word": "recital",
+      "meaning": "발표회, 독주회"
+    },
+    {
+      "no": 36,
+      "word": "immense",
+      "meaning": "거대한, 매우 큰"
+    },
+    {
+      "no": 37,
+      "word": "appetizer",
+      "meaning": "식욕을 돋우는 음식, 애피타이저"
+    },
+    {
+      "no": 38,
+      "word": "excited",
+      "meaning": "신이 난, 흥분한"
+    },
+    {
+      "no": 39,
+      "word": "detailed",
+      "meaning": "상세한"
+    },
+    {
+      "no": 40,
+      "word": "pursue",
+      "meaning": "추구하다; 뒤쫓다, 추적하다"
+    },
+    {
+      "no": 41,
+      "word": "phenomenon",
+      "meaning": "현상, 사건"
+    },
+    {
+      "no": 42,
+      "word": "survivor",
+      "meaning": "생존자"
+    },
+    {
+      "no": 43,
+      "word": "citation",
+      "meaning": "인용"
+    },
+    {
+      "no": 44,
+      "word": "compete",
+      "meaning": "경쟁하다, 겨루다"
+    },
+    {
+      "no": 45,
+      "word": "sequence",
+      "meaning": "연속, 잇달아 일어남; 순서, 차례"
+    },
+    {
+      "no": 46,
+      "word": "phase",
+      "meaning": "국면, 양상, 단계; 단계적으로실행하다"
+    },
+    {
+      "no": 47,
+      "word": "dimensional",
+      "meaning": "치수의; 차원의"
+    },
+    {
+      "no": 48,
+      "word": "vivid",
+      "meaning": "생생한, 선명한"
+    },
+    {
+      "no": 49,
+      "word": "priceless",
+      "meaning": "매우 귀중한, 값을 매길 수 없는"
+    },
+    {
+      "no": 50,
+      "word": "patron",
+      "meaning": "후원자, 보호자; 고객, 단골"
+    },
+    {
+      "no": 51,
+      "word": "precious",
+      "meaning": "귀중한, 소중한; 값비싼"
+    },
+    {
+      "no": 52,
+      "word": "suitable",
+      "meaning": "적합한, 적당한"
+    },
+    {
+      "no": 53,
+      "word": "obedient",
+      "meaning": "복종하는, 순종하는"
+    },
+    {
+      "no": 54,
+      "word": "repetition",
+      "meaning": "반복, 되풀이"
+    },
+    {
+      "no": 55,
+      "word": "revenge",
+      "meaning": "복수, 원한"
+    },
+    {
+      "no": 56,
+      "word": "appreciate",
+      "meaning": "이해하다, 알다, 깨닫다; 고맙게여기다; 감상하다; 진가를 알다"
+    },
+    {
+      "no": 57,
+      "word": "appreciation",
+      "meaning": "진가의 인정, 올바른 이해; 감사; 감상"
+    },
+    {
+      "no": 58,
+      "word": "debtor",
+      "meaning": "채무자"
+    },
+    {
+      "no": 59,
+      "word": "comparative",
+      "meaning": "비교의, 비교적인, 상대적인"
+    },
+    {
+      "no": 60,
+      "word": "consequently",
+      "meaning": "그 결과로, 따라서"
+    },
+    {
+      "no": 61,
+      "word": "comparable",
+      "meaning": "비교될 만한, 비슷한; ...에 필적하는, 비길 만한"
+    },
+    {
+      "no": 62,
+      "word": "obedience",
+      "meaning": "복종, 순종; 준수"
+    },
+    {
+      "no": 63,
+      "word": "competition",
+      "meaning": "경쟁, 겨룸; 시합, 경기; 경쟁 상대"
+    },
+    {
+      "no": 64,
+      "word": "measurement",
+      "meaning": "측정, 측량; 치수"
+    },
+    {
+      "no": 65,
+      "word": "emphasize",
+      "meaning": "강조하다, 중요시하다"
+    },
+    {
+      "no": 66,
+      "word": "appearance",
+      "meaning": "외모, 외관; 출현, 출연, 등장"
+    },
+    {
+      "no": 67,
+      "word": "repetitive",
+      "meaning": "반복되는, 반복적인"
+    },
+    {
+      "no": 68,
+      "word": "consequent",
+      "meaning": "결과로 일어나는"
+    },
+    {
+      "no": 69,
+      "word": "phenomenal",
+      "meaning": "경이로운, 놀랄 만한"
+    },
+    {
+      "no": 70,
+      "word": "excitement",
+      "meaning": "흥분, 자극"
+    },
+    {
+      "no": 71,
+      "word": "survival",
+      "meaning": "생존, 잔존"
+    },
+    {
+      "no": 72,
+      "word": "applause",
+      "meaning": "박수"
+    },
+    {
+      "no": 73,
+      "word": "vital",
+      "meaning": "매우 중요한, 필수적인; 생명 유지에 필요한; 활기찬, 생기가 넘치는"
+    },
+    {
+      "no": 74,
+      "word": "patriotic",
+      "meaning": "애국적인, 애국자의"
+    },
+    {
+      "no": 75,
+      "word": "apparently",
+      "meaning": "명백히, 분명히; 외관상, 겉으로보기에"
+    },
+    {
+      "no": 76,
+      "word": "pattern",
+      "meaning": "양식, 형태, 패턴; 도안, 무늬; 본보기, 견본"
+    },
+    {
+      "no": 77,
+      "word": "patriot",
+      "meaning": "애국자"
+    },
+    {
+      "no": 78,
+      "word": "compare",
+      "meaning": "비교하다, 견주다; 비유하다"
+    },
+    {
+      "no": 79,
+      "word": "excite",
+      "meaning": "흥분시키다, 자극하다"
+    },
+    {
+      "no": 80,
+      "word": "comparison",
+      "meaning": "비교, 대조; 비유"
+    }
+  ]
+}
