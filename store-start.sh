@@ -6,8 +6,8 @@
 cd "$(dirname "$0")"
 
 # --- 관리자 비밀번호 ---------------------------------------
-# 아래 따옴표 안을 원하는 비밀번호로 바꾸세요. 12자 이상을 권합니다.
-export ADMIN_PASSWORD="${ADMIN_PASSWORD:-ortica-바꾸세요-1234}"
+# 아래 따옴표 안을 원하는 비밀번호로 바꾸세요. 영문+숫자 12자 이상, 한글은 넣지 마세요.
+export ADMIN_PASSWORD="${ADMIN_PASSWORD:-ortica-change-me-1234}"
 
 # 내 컴퓨터에서는 https 가 아니므로 로그인 쿠키 조건을 풀어 줍니다.
 export STORE_HTTPS=0
