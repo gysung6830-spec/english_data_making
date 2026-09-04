@@ -235,20 +235,150 @@ def word_count(book: dict) -> int:
 
 WORD_FILE_EXTS = {".xlsx", ".xlsm", ".csv", ".txt", ".pdf", ".tsv"}
 
+# 여러 강이 한 파일에 들어 있을 때, 강이 바뀌는 자리를 이 표시로 적어 둡니다.
+# 미리보기 상자에서 사장님이 직접 고치실 수도 있습니다.  예)  ## Day 47
+UNIT_MARK = re.compile(r"^\s*(?:#{2,}|={2,}|\[)\s*(.+?)\s*(?:\]|=*)\s*$")
 
-def _drop_header(lines: list[str]) -> list[str]:
-    """엑셀 첫 줄이 '영어 / 뜻' 같은 머리글이면 빼 줍니다."""
-    if lines and not re.search(r"[A-Za-z]", lines[0].split("\t")[0]):
-        return lines[1:]
-    return lines
+# 표 머리글 알아보기 — '강 / 영어 / 뜻' 처럼 첫 줄에 이름이 붙어 있는 파일이 많습니다
+_HEAD_UNIT = re.compile(r"강|과|day|unit|lesson|week|chapter|챕터|일차", re.I)
+_HEAD_EN = re.compile(r"영어|영단어|단어|철자|word|english|spelling|vocab", re.I)
+_HEAD_KO = re.compile(r"뜻|의미|한글|해석|국어|meaning|korean", re.I)
+
+_UNIT_LOOSE = re.compile(
+    r"(?:(?:day|unit|lesson|week|chapter|d)\s*\.?\s*)?"
+    r"\d{1,3}(?:\s*[-~]\s*\d{1,3})?"
+    r"\s*(?:강|과|일차|일|day|unit)?", re.I)
+_UNIT_WORD = re.compile(r"강|과|일차|day|unit|lesson|week|chapter", re.I)
+
+
+def looks_like_unit(s: str, strict: bool = False) -> bool:
+    """'Day 47' · '1강' · 'Unit 3' · 'Day 47~48' 처럼 강 이름으로 보이면 참.
+
+    strict 는 PDF·텍스트처럼 아무 줄이나 섞여 있는 파일에 씁니다. 숫자만 있는 줄
+    (쪽 번호일 수 있습니다) 은 빼고, Day·강 같은 낱말이 붙은 것만 셉니다.
+    """
+    s = (s or "").strip()
+    if not s or len(s) > 24 or not re.search(r"\d", s):
+        return False
+    if not _UNIT_LOOSE.fullmatch(s):
+        return False
+    return bool(_UNIT_WORD.search(s)) if strict else True
+
+
+def _is_en(s: str) -> bool:
+    return bool(re.search(r"[A-Za-z]{2}", s or ""))
+
+
+def _is_ko(s: str) -> bool:
+    return bool(re.search(r"[가-힣]", s or ""))
+
+
+def _pick_columns(rows: list[list[str]]) -> tuple[int, int, int, int]:
+    """어느 칸이 영어이고 어느 칸이 뜻이고 어느 칸이 강인지 찾습니다.
+
+    파일마다 칸 차례가 다릅니다. ('영어 | 뜻' · 'Day | 영어 | 뜻' · '영어 | 뜻 | 강')
+    머리글 이름에 기대지 않고, 값이 실제로 어떻게 생겼는지를 보고 고릅니다.
+    돌려주는 값은 (영어 칸, 뜻 칸, 강 칸, 건너뛸 머리줄 수) 입니다.
+    """
+    width = max((len(r) for r in rows), default=0)
+    if not width:
+        return -1, -1, -1, 0
+
+    def at(r, i):
+        return r[i] if i < len(r) else ""
+
+    body = rows[1:] if len(rows) > 1 else rows
+    hit_en = [sum(1 for r in body if _is_en(at(r, i))) for i in range(width)]
+    hit_ko = [sum(1 for r in body if _is_ko(at(r, i))) for i in range(width)]
+    hit_un = [sum(1 for r in body if looks_like_unit(at(r, i))) for i in range(width)]
+
+    # 'Day 1' 도 영어 글자로 보이므로, 강처럼 생긴 칸은 영어 칸 후보에서 뺍니다
+    en = max(range(width), key=lambda i: hit_en[i] - hit_ko[i] - 2 * hit_un[i])
+    ko = max(range(width),
+             key=lambda i: hit_ko[i] - 2 * hit_un[i] - (hit_en[i] if i == en else 0))
+    if ko == en or hit_en[en] == 0 or hit_ko[ko] == 0:
+        return -1, -1, -1, 0
+
+    need = max(1, len(body) // 2)
+    unit = -1
+    for i in range(width):
+        if i in (en, ko) or hit_un[i] < need:
+            continue
+        vals = [at(r, i) for r in body if at(r, i)]
+        # 'Day 1' · '1강' 처럼 낱말이 붙어 있으면 바로 강 칸으로 봅니다.
+        # 숫자만 있는 칸은 같은 값이 되풀이될 때만 강으로 봅니다.
+        # (1, 2, 3 … 처럼 줄마다 다르면 그냥 일련번호입니다)
+        worded = sum(1 for v in vals if looks_like_unit(v, strict=True))
+        if worded >= need or len(set(vals)) * 2 <= len(body):
+            unit = i
+            break
+
+    # 첫 줄이 이 모양에 맞지 않으면 ('영어 / 뜻' 같은) 머리글로 보고 건너뜁니다.
+    # 'Day 47' 한 칸만 있는 줄은 머리글이 아니라 강이 바뀌는 자리입니다.
+    head = [c for c in (rows[0] if rows else []) if c]
+    lone = len(head) == 1 and looks_like_unit(head[0])
+    fits = _is_en(at(rows[0], en)) and _is_ko(at(rows[0], ko)) if rows else False
+    skip = 0 if (lone or (len(rows) > 1 and fits)) else 1
+    return en, ko, unit, skip
+
+
+def rows_to_lines(rows: list[list[str]]) -> list[str]:
+    """표를 '영어<탭>뜻' 줄로 바꿉니다. 강이 바뀌면 '## 강이름' 줄을 끼워 넣습니다."""
+    rows = [[str(c).strip() for c in r] for r in rows]
+    rows = [r for r in rows if any(r)]
+    en_i, ko_i, un_i, skip = _pick_columns(rows)
+    if en_i < 0 or ko_i < 0:
+        return []
+
+    out, here = [], None
+    for r in rows[skip:]:
+        cell = [c for c in r if c]
+        # 단어 사이에 'Day 47' 한 칸만 있는 줄 — 여기서부터 새 강입니다
+        if len(cell) == 1 and looks_like_unit(cell[0]):
+            if cell[0] != here:
+                here = cell[0]
+                out.append(f"## {here}")
+            continue
+        en = r[en_i] if en_i < len(r) else ""
+        ko = r[ko_i] if ko_i < len(r) else ""
+        if not en or not ko or not _is_en(en):
+            continue
+        if un_i >= 0:
+            tag = r[un_i] if un_i < len(r) else ""
+            if tag and tag != here:
+                here = tag
+                out.append(f"## {here}")
+        out.append(f"{en}\t{ko}")
+    return out
+
+
+def _mark_free_text(text: str) -> str:
+    """PDF·텍스트에서 'Day 47' 처럼 혼자 있는 줄을 강 표시로 바꿔 줍니다."""
+    out = []
+    for raw in text.replace("\r", "").split("\n"):
+        line = raw.strip()
+        if line and looks_like_unit(line, strict=True):
+            out.append(f"## {line}")
+        else:
+            out.append(raw)
+    return "\n".join(out)
+
+
+def _read_note(lines: list[str], where: str) -> str:
+    units = sum(1 for x in lines if x.startswith("## "))
+    words = len(lines) - units
+    if units > 1:
+        return f"{where}에서 강 {units}개 · 단어 {words}개를 읽었습니다."
+    return f"{where}에서 {words}줄을 읽었습니다."
 
 
 def read_wordfile(filename: str, blob: bytes) -> tuple[str, str]:
     """올리신 파일에서 '영어<탭>뜻' 줄을 뽑아냅니다. (읽은 글, 안내 문구)
 
-    엑셀·CSV 는 앞 두 칸을 씁니다. PDF 는 글자가 들어 있는 파일만 읽힙니다
-    (스캔해서 사진으로 된 PDF 는 글자가 없어 못 읽습니다).
-    어느 쪽이든 사람이 눈으로 확인하고 고친 뒤 저장하도록 미리보기로 넘깁니다.
+    한 파일에 여러 강이 들어 있어도 됩니다. 시트마다 한 강이거나, '강' 칸이
+    따로 있거나, 'Day 47' 이 한 줄로 끼어 있으면 알아서 나눠 '## 강이름' 으로
+    표시해 둡니다. 어느 쪽이든 사람이 눈으로 확인하고 고친 뒤 저장하도록
+    미리보기로 넘깁니다.
     """
     ext = os.path.splitext(filename)[1].lower()
 
@@ -259,15 +389,20 @@ def read_wordfile(filename: str, blob: bytes) -> tuple[str, str]:
             return "", "엑셀을 읽는 라이브러리(openpyxl)가 없습니다. CSV 로 저장해서 올려 주세요."
         import io as _io
         wb = openpyxl.load_workbook(_io.BytesIO(blob), read_only=True, data_only=True)
-        lines = []
-        for sheet in wb.worksheets:
-            for row in sheet.iter_rows(values_only=True):
-                cells = [str(c).strip() for c in row[:2] if c is not None and str(c).strip()]
-                if len(cells) >= 2:
-                    lines.append(f"{cells[0]}\t{cells[1]}")
+        lines, sheets = [], [s for s in wb.worksheets if s.max_row]
+        for sheet in sheets:
+            rows = [[("" if c is None else str(c).strip()) for c in row[:8]]
+                    for row in sheet.iter_rows(values_only=True)]
+            part = rows_to_lines(rows)
+            if not part:
+                continue
+            # 시트 이름이 'Day 47' 같으면, 시트 하나가 강 하나입니다
+            title = (sheet.title or "").strip()
+            if len(sheets) > 1 and looks_like_unit(title) and not part[0].startswith("## "):
+                lines.append(f"## {title}")
+            lines += part
         wb.close()
-        lines = _drop_header(lines)
-        return "\n".join(lines), f"엑셀에서 {len(lines)}줄을 읽었습니다."
+        return "\n".join(lines), _read_note(lines, "엑셀")
 
     if ext == ".pdf":
         try:
@@ -283,22 +418,19 @@ def read_wordfile(filename: str, blob: bytes) -> tuple[str, str]:
         if not text.strip():
             return "", ("이 PDF 에는 글자가 없습니다. 스캔해서 사진으로 만든 PDF 는 읽을 수 없습니다. "
                         "엑셀이나 CSV 로 올려 주세요.")
-        return text, ("PDF 에서 글자를 뽑았습니다. 단어책 PDF 는 줄이 흐트러지기 쉬우니 "
-                      "아래에서 눈으로 확인하고 고쳐 주세요.")
+        return _mark_free_text(text), (
+            "PDF 에서 글자를 뽑았습니다. 단어책 PDF 는 줄이 흐트러지기 쉬우니 "
+            "아래에서 눈으로 확인하고 고쳐 주세요.")
 
     text = blob.decode("utf-8-sig", errors="replace")
     if ext in (".csv", ".tsv"):
         import csv as _csv
         import io as _io
         delim = "\t" if ext == ".tsv" else ","
-        lines = []
-        for row in _csv.reader(_io.StringIO(text), delimiter=delim):
-            cells = [c.strip() for c in row[:2] if c and c.strip()]
-            if len(cells) >= 2:
-                lines.append(f"{cells[0]}\t{cells[1]}")
-        lines = _drop_header(lines)
-        return "\n".join(lines), f"{ext[1:].upper()} 에서 {len(lines)}줄을 읽었습니다."
-    return text, "파일을 읽었습니다."
+        rows = [row[:8] for row in _csv.reader(_io.StringIO(text), delimiter=delim)]
+        lines = rows_to_lines(rows)
+        return "\n".join(lines), _read_note(lines, ext[1:].upper())
+    return _mark_free_text(text), "파일을 읽었습니다."
 
 
 def unit_id_from(name: str, taken: set[str] | None = None) -> str:
@@ -357,6 +489,43 @@ def parse_words(text: str, limit: int = 3000) -> tuple[list[dict], list[str]]:
             break
     return out, bad
 
+
+
+def parse_unit_blocks(text: str) -> list[dict]:
+    """'## 강이름' 으로 나뉜 글을 강 묶음으로 읽습니다.
+
+    표시가 하나도 없으면 통째로 한 묶음 (이름 없음) 을 돌려줍니다. 강 이름이
+    같은 묶음이 두 번 나오면 하나로 합칩니다. (엑셀에서 강이 섞여 있는 경우)
+    """
+    blocks: list[dict] = []
+    here: dict | None = None
+    buf: list[str] = []
+
+    def flush():
+        if not buf:
+            return
+        words, bad = parse_words("\n".join(buf))
+        buf.clear()
+        if not words and not bad:
+            return
+        name = here["name"] if here else ""
+        same = next((b for b in blocks if b["name"] == name and name), None)
+        if same:
+            seen = {w["en"].lower() for w in same["words"]}
+            same["words"] += [w for w in words if w["en"].lower() not in seen]
+            same["bad"] += bad
+        else:
+            blocks.append({"name": name, "words": words, "bad": bad})
+
+    for raw in (text or "").replace("\r", "").split("\n"):
+        hit = UNIT_MARK.match(raw) if raw.lstrip().startswith(("#", "=", "[")) else None
+        if hit and hit.group(1):
+            flush()
+            here = {"name": clean(hit.group(1), 60)}
+            continue
+        buf.append(raw)
+    flush()
+    return [b for b in blocks if b["words"]]
 
 # ---------------------------------------------------------------------------
 # 무료 자료실 — 회차마다 뿌리는 자료 (한줄해석 · 한줄영어 · 좌지문우해석 · 직독직해)

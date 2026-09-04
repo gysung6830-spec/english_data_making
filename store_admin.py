@@ -1106,45 +1106,77 @@ def words_upload(slug):
         flash(note or "파일에서 단어를 찾지 못했습니다.", "err")
         return redirect(url_for("admin.words_book", slug=slug))
 
-    words, bad = sc.parse_words(text)
+    blocks = sc.parse_unit_blocks(text)
+    if not blocks:
+        flash("파일에서 단어를 찾지 못했습니다. 왼쪽이 영어, 오른쪽이 뜻인지 봐 주세요.", "err")
+        return redirect(url_for("admin.words_book", slug=slug))
+
+    lines, bad = [], []
+    for blk in blocks:
+        if blk["name"]:
+            lines.append(f"## {blk['name']}")
+        lines += [f"{w['en']}\t{w['ko']}" for w in blk["words"]]
+        bad += blk["bad"]
+    found = sum(len(b["words"]) for b in blocks)
+    named = [b for b in blocks if b["name"]]
     return render_template("admin/words_preview.html", b=book, note=note, file_name=name,
-                           text="\n".join(f"{w['en']}\t{w['ko']}" for w in words),
-                           found=len(words), bad=bad,
+                           text="\n".join(lines), blocks=blocks, named=len(named),
+                           found=found, bad=bad,
                            unit_name=sc.clean(request.form.get("unit_name"), 60))
 
 
 @admin_bp.route("/words/<slug>/unit", methods=["POST"])
 def words_unit_save(slug):
-    """강 하나에 단어를 붙여 넣습니다. 있으면 덮어쓰고, 없으면 새로 만듭니다."""
+    """단어를 강에 넣습니다. 있으면 덮어쓰고, 없으면 새로 만듭니다.
+
+    글 안에 '## Day 47' 같은 표시가 있으면 그 자리에서 강을 나눠 한꺼번에 넣습니다.
+    표시가 없으면 위에 적으신 강 이름 하나에 통째로 넣습니다.
+    """
     data = sc.load_raw_words()
     book = next((b for b in data["books"] if b.get("slug") == slug), None)
     if book is None:
         abort(404)
 
-    uname = sc.clean(request.form.get("unit_name"), 60)
-    if not uname:
-        flash("강 이름을 적어 주세요. 예: Day 47 · 1강 · Unit 3", "err")
-        return redirect(url_for("admin.words_book", slug=slug))
-    # 같은 이름으로 다시 넣으면 그 강을 덮어씁니다
-    same = next((u for u in book["units"] if u.get("name") == uname), None)
-    uid = same["id"] if same else sc.unit_id_from(
-        uname, {u.get("id") for u in book["units"]})
-
-    words, bad = sc.parse_words(request.form.get("words", ""))
-    if not words:
+    text = request.form.get("words", "")
+    blocks = sc.parse_unit_blocks(text)
+    if not blocks:
         flash("단어를 읽지 못했습니다. 한 줄에 하나씩, 영어와 뜻을 탭이나 쉼표로 나눠 주세요.", "err")
         return redirect(url_for("admin.words_book", slug=slug))
 
-    unit = same
-    if unit is None:
-        unit = {"id": uid, "name": uname, "words": []}
-        book["units"].append(unit)
-    unit["name"] = uname
-    unit["words"] = words
+    typed = sc.clean(request.form.get("unit_name"), 60)
+    if len(blocks) == 1 and not blocks[0]["name"]:
+        if not typed:
+            flash("강 이름을 적어 주세요. 예: Day 47 · 1강 · Unit 3", "err")
+            return redirect(url_for("admin.words_book", slug=slug))
+        blocks[0]["name"] = typed
+
+    saved, bad = [], []
+    for blk in blocks:
+        uname = blk["name"] or typed
+        if not uname:
+            continue
+        # 같은 이름으로 다시 넣으면 그 강을 덮어씁니다
+        same = next((u for u in book["units"] if u.get("name") == uname), None)
+        unit = same
+        if unit is None:
+            unit = {"id": sc.unit_id_from(uname, {u.get("id") for u in book["units"]}),
+                    "name": uname, "words": []}
+            book["units"].append(unit)
+        unit["name"] = uname
+        unit["words"] = blk["words"]
+        saved.append((uname, len(blk["words"])))
+        bad += blk["bad"]
+
     book["units"].sort(key=lambda u: u.get("id", ""))
     sc.save_words(data)
 
-    note = f"'{uname}' 에 단어 {len(words)}개를 넣었습니다."
+    if len(saved) == 1:
+        note = f"'{saved[0][0]}' 에 단어 {saved[0][1]}개를 넣었습니다."
+    else:
+        total = sum(n for _, n in saved)
+        note = (f"강 {len(saved)}개 · 단어 {total}개를 넣었습니다 — "
+                + ", ".join(f"{u}({n})" for u, n in saved[:6])
+                + (" …" if len(saved) > 6 else ""))
     if bad:
         note += f" 읽지 못한 줄 {len(bad)}개는 건너뛰었습니다 — {', '.join(bad[:3])}"
     flash(note, "ok" if not bad else "err")

@@ -1102,6 +1102,119 @@ def test_word_file_upload():
     print("PASS  단어를 엑셀·CSV 로 올리기 → 미리보기 → 저장 (끌어다 놓기)")
 
 
+def test_whole_book_upload():
+    """단어책 전체가 담긴 한 파일을 올리면, 강을 알아서 나눠 한꺼번에 넣습니다."""
+    import io as _io
+    import openpyxl
+    a = admin()
+    a.post("/admin/words/new", data={"name": "whole book"}, follow_redirects=True)
+
+    # (1) 강 칸이 따로 있는 표 — Day | 영어 | 뜻
+    wb = openpyxl.Workbook(); ws = wb.active
+    ws.append(["Day", "영어", "뜻"])
+    rows = [("Day 1", "retain", "유지하다"), ("Day 1", "vary", "다르다"),
+            ("Day 2", "seek", "추구하다"), ("Day 2", "yield", "산출하다"),
+            ("Day 3", "grasp", "붙잡다")]
+    for r in rows:
+        ws.append(list(r))
+    buf = _io.BytesIO(); wb.save(buf)
+    page = body(a.post("/admin/words/whole-book/upload",
+                       data={"unit_name": "", "file": (_io.BytesIO(buf.getvalue()), "전체.xlsx")},
+                       content_type="multipart/form-data"))
+    assert "강 3개" in page and "단어 5개" in page
+    assert "## Day 1" in page and "## Day 3" in page
+    assert "강 3개 한꺼번에 넣기" in page
+    assert sc.word_count(sc.find_wordbook("whole-book", raw=True)) == 0   # 아직 저장 전
+
+    text = "## Day 1\nretain\t유지하다\nvary\t다르다\n## Day 2\nseek\t추구하다\n"          \
+           "yield\t산출하다\n## Day 3\ngrasp\t붙잡다"
+    done = body(a.post("/admin/words/whole-book/unit",
+                       data={"unit_name": "", "words": text}, follow_redirects=True))
+    assert "강 3개 · 단어 5개를 넣었습니다" in done
+    book = sc.find_wordbook("whole-book", raw=True)
+    assert [u["name"] for u in book["units"]] == ["Day 1", "Day 2", "Day 3"]
+    assert sc.word_count(book) == 5
+
+    # (2) 시트가 강마다 하나씩
+    wb = openpyxl.Workbook()
+    wb.remove(wb.active)
+    for day, pairs in [("Day 10", [("brisk", "활기찬")]), ("Day 11", [("cling", "매달리다")])]:
+        sh = wb.create_sheet(day)
+        sh.append(["영어", "뜻"])
+        for en, ko in pairs:
+            sh.append([en, ko])
+    buf = _io.BytesIO(); wb.save(buf)
+    assert "강 2개" in body(a.post("/admin/words/whole-book/upload",
+        data={"unit_name": "", "file": (_io.BytesIO(buf.getvalue()), "시트별.xlsx")},
+        content_type="multipart/form-data"))
+
+    # (3) 단어 사이에 'Day 47' 만 있는 줄이 끼어 있는 CSV
+    csv = "Day 47\nadept,능숙한\nDay 48\ncoarse,거친\n".encode("utf-8-sig")
+    page = body(a.post("/admin/words/whole-book/upload",
+                       data={"unit_name": "", "file": (_io.BytesIO(csv), "구분줄.csv")},
+                       content_type="multipart/form-data"))
+    assert "강 2개" in page and "## Day 48" in page       # ## Day 47 은 도움말에도 있습니다
+
+    # 강 하나짜리 파일은 예전처럼 이름을 적어 넣습니다
+    csv1 = "영어,뜻\nplain,분명한\n".encode("utf-8-sig")
+    one = body(a.post("/admin/words/whole-book/upload",
+                      data={"unit_name": "Day 99", "file": (_io.BytesIO(csv1), "한강.csv")},
+                      content_type="multipart/form-data"))
+    assert "이 강에 넣기" in one and "강 2개 한꺼번에 넣기" not in one
+    assert "plain\t분명한" in one
+
+    # 같은 이름으로 다시 넣으면 덮어씁니다 (강이 늘어나지 않습니다)
+    a.post("/admin/words/whole-book/unit",
+           data={"unit_name": "", "words": "## Day 1\nretain\t유지하다"},
+           follow_redirects=True)
+    book = sc.find_wordbook("whole-book", raw=True)
+    assert len(book["units"]) == 3 and len(book["units"][0]["words"]) == 1
+
+    a.post("/admin/words/whole-book/delete", follow_redirects=True)
+    print("PASS  단어책 전체를 한 파일로 올리기 → 강 자동 나누기")
+
+
+def test_wordfile_table_shapes():
+    """단어책 표는 파일마다 칸 차례가 다릅니다. 값 생김새로 알아봐야 합니다."""
+    def read(rows):
+        out = sc.rows_to_lines(rows)
+        return ([x[3:] for x in out if x.startswith("## ")],
+                [x for x in out if not x.startswith("## ")])
+
+    days = [[f"Day {d}", f"word{d}{i}", f"뜻{i}"] for d in (1, 2, 3) for i in range(4)]
+
+    # 강 칸이 앞 · 뒤 · 없음 — 어디에 있어도 찾아냅니다
+    assert read([["Day", "영어", "뜻"], ["Day 1", "apple", "사과"],
+                 ["Day 1", "bear", "곰"], ["Day 2", "cat", "고양이"]]) \
+        == (["Day 1", "Day 2"], ["apple\t사과", "bear\t곰", "cat\t고양이"])
+    assert read([["단어", "의미", "강"], ["apple", "사과", "1강"], ["bear", "곰", "2강"]])[0] \
+        == ["1강", "2강"]
+    assert read([["영어", "뜻"], ["apple", "사과"]]) == ([], ["apple\t사과"])
+
+    # 머리글이 없어도 됩니다. 머리글이 영어여도 데이터로 세지 않습니다
+    assert read(days)[0] == ["Day 1", "Day 2", "Day 3"]
+    assert read([["Word", "Meaning", "Unit"], ["apple", "사과", "Unit 1"]])[0] == ["Unit 1"]
+
+    # '번호' 처럼 줄마다 다른 숫자 칸은 강이 아닙니다
+    seq = [["번호", "영어", "뜻"]] + [[str(i), f"word{i}", f"뜻{i}"] for i in range(1, 6)]
+    assert read(seq)[0] == [] and len(read(seq)[1]) == 5
+    bare = [[str(i), f"word{i}", f"뜻{i}"] for i in range(1, 9)]
+    assert read(bare)[0] == [] and len(read(bare)[1]) == 8       # 머리글이 없어도 안 지웁니다
+
+    # 단어 사이에 'Day 47' 만 있는 줄
+    assert read([["Day 47"], ["apple", "사과"], ["Day 48"], ["bear", "곰"]])[0] \
+        == ["Day 47", "Day 48"]
+
+    # 강 칸과 번호 칸이 함께 있어도 뜻을 강으로 착각하지 않습니다
+    both = [["강", "번호", "영어", "뜻"], ["1강", "1", "apple", "사과"],
+            ["1강", "2", "bear", "곰"], ["2강", "1", "cat", "고양이"]]
+    assert read(both) == (["1강", "2강"], ["apple\t사과", "bear\t곰", "cat\t고양이"])
+
+    # 뜻 안의 쉼표는 그대로 둡니다
+    assert read([["영어", "뜻"], ["vary", "다르다, 달라지다"]])[1] == ["vary\t다르다, 달라지다"]
+    print("PASS  단어 표 — 강 칸이 앞·뒤·구분줄 어디에 있어도 알아봄")
+
+
 def test_pass_counts_passages():
     """프리패스는 무제한이 아니라 지문 n개까지입니다."""
     text = body(client().get("/pass"))
@@ -2429,6 +2542,8 @@ def run_all():
     test_word_quiz()
     test_word_counts_per_kind_and_cap()
     test_word_file_upload()
+    test_whole_book_upload()
+    test_wordfile_table_shapes()
     test_pass_counts_passages()
     test_my_locker()
     test_clear_sample_data()

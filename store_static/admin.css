@@ -284,3 +284,16 @@
 .dz-file{margin-top:8px; padding:6px 14px; border-radius:999px; background:var(--brand);
   color:#fff; font-size:13.5px; font-weight:700; word-break:break-all;}
 .dropzone.has .dz-title{color:var(--brand);}
+
+/* 한 파일에 여러 강이 들어 있을 때, 나눠 담을 강을 미리 보여 줍니다 */
+.unit-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.unit-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px;
+  background: #fff; font-size: 13.5px; font-weight: 600;
+}
+.unit-chip i {
+  font-style: normal; font-weight: 700; font-size: 12px;
+  padding: 1px 7px; border-radius: 999px;
+  background: var(--tint, #eef4f0); color: var(--brand, #146b4a);
+}
