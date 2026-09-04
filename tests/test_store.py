@@ -864,7 +864,7 @@ def test_admin_notice_appears_on_home():
 def test_admin_settings_change_reaches_customer():
     a = admin()
     resp = a.post("/admin/settings", data={
-        "brand": "Ortica영어", "tagline": "테스트 태그라인",
+        "brand": "오르티카영어", "tagline": "테스트 태그라인",
         "contact_email": "real@ortica.kr", "contact_phone": "010-9999-8888",
         "contact_hours": "평일 10-19", "payment_bank_name": "국민은행",
         "payment_bank_account": "111-222-333444", "payment_bank_holder": "홍길동",
@@ -1650,13 +1650,44 @@ def test_request_menu_renamed_to_jaryo():
     print("PASS  '교재 요청' → '자료 요청'")
 
 
+def test_brand_is_korean_for_search():
+    """검색은 한글로 일어납니다. 이름은 한글, 로고 그림만 영문으로 둡니다."""
+    c = client()
+    home = body(c.get("/"))
+    import json as _json
+    shipped = _json.load(open("store_data/site.json", encoding="utf-8"))
+    assert shipped["brand"] == "오르티카영어"
+    assert shipped["business"]["company"] == "오르티카영어"
+    assert shipped["brand_en"] == "Ortica"
+
+    # 로고 그림은 영문 그대로 두되, 이름은 한글로 읽히게 합니다
+    assert 'aria-label="오르티카영어"' in home
+    assert "Ortica<i>영어</i>" in home
+
+    # 검색엔진에 '오르티카'·'Ortica' 가 같은 곳임을 알려 줍니다
+    import json as _j, re as _re
+    blocks = [_j.loads(m) for m in
+              _re.findall(r'<script type="application/ld\+json">(.*?)</script>', home, _re.S)]
+    org = next(b for b in blocks if b.get("@type") == "Organization")
+    assert org["name"] == "오르티카영어"
+    assert set(org["alternateName"]) == {"Ortica", "Ortica영어", "오르티카", "오르티카 영어"}
+
+    # 메일 제목도 한글 이름을 씁니다
+    assert "[오르티카영어]" in open("store.py", encoding="utf-8").read()
+    assert "Ortica영어" not in open("store.py", encoding="utf-8").read()
+
+    # 로고에 새길 영문 이름은 관리자 화면에서 고칩니다
+    assert 'name="brand_en"' in body(admin().get("/admin/settings"))
+    print("PASS  이름은 한글 '오르티카영어' · 로고 그림만 영문")
+
+
 def test_search_result_title_is_editable():
     """검색 결과에 뜰 제목·설명을 관리자 화면에서 정할 수 있어야 합니다."""
     import re
     home = body(client().get("/"))
     title = re.search(r"<title>(.*?)</title>", home, re.S).group(1).strip()
-    assert title == "시험에 적합한 고등영어자료 : 오르티카 영어", title
-    assert 'property="og:title" content="시험에 적합한' in home   # 카톡 공유도 같은 제목
+    assert title == "오르티카영어 — 시험에 적합한 고등영어자료", title
+    assert 'property="og:title" content="오르티카영어' in home   # 카톡 공유도 같은 제목
     import re as _re
     desc = _re.search(r'name="description" content="(.*?)"', home).group(1)
     assert len(desc) <= 90, f"설명이 {len(desc)}자입니다. 검색 결과에서 잘립니다"
@@ -1814,7 +1845,7 @@ def test_admin_edits_exam_schedule():
 def test_home_updates_skip_pinned_notice():
     """맨 위 띠에 이미 뜬 고정 공지가 '새로 올라왔습니다'에 또 나오면 안 됩니다."""
     text = body(client().get("/notice"))
-    assert text.count("Ortica영어 자료 판매를 시작합니다") == 1
+    assert text.count("오르티카영어 자료 판매를 시작합니다") == 1
     print("PASS  고정 공지가 '새로 올라왔습니다'에 두 번 나오지 않음")
 
 
@@ -2571,6 +2602,7 @@ def run_all():
     test_free_kind_suggests_email_gate()
     test_seo_tags_on_public_pages()
     test_seo_verification_code_paste()
+    test_brand_is_korean_for_search()
     test_search_result_title_is_editable()
     test_sitemap_lists_free_items()
     test_lineup_offers_sample_pdf()

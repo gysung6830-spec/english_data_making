@@ -408,7 +408,7 @@ def order_deliver(order_id):
         links.append(f"· {name}\n  " + url_for("download_page", token=token, _external=True))
     link = "\n".join(links)
     sent = sc.send_mail(
-        f"[Ortica영어] 주문하신 자료입니다 ({row['order_no']})",
+        f"[오르티카영어] 주문하신 자료입니다 ({row['order_no']})",
         "\n".join([f"{row['name']}님, 입금 확인했습니다. 감사합니다.", "",
                     f"주문 : {row['product_name']}",
                     "", "아래 주소로 들어가시면 자료를 받으실 수 있습니다.", link, "",
@@ -517,7 +517,7 @@ def submission_update(sub_id):
                                issued_to=row["email"],
                                days_valid=int(reward.get("days_valid", 90)))
         sc.send_mail(
-            "[Ortica영어] 시험지 감사합니다 — 할인 쿠폰을 보내 드립니다",
+            "[오르티카영어] 시험지 감사합니다 — 할인 쿠폰을 보내 드립니다",
             "\n".join([f"{row['name']}님, {row['school']} 시험지 잘 받았습니다. 감사합니다.",
                        "",
                        f"할인 쿠폰 코드 : {code}",
@@ -1510,7 +1510,8 @@ def settings():
         return render_template("admin/settings.html", s=site)
 
     f = request.form
-    site["brand"] = sc.clean(f.get("brand"), 60) or site.get("brand", "Ortica영어")
+    site["brand"] = sc.clean(f.get("brand"), 60) or site.get("brand", "오르티카영어")
+    site["brand_en"] = sc.clean(f.get("brand_en"), 40) or site.get("brand_en", "Ortica")
     site["tagline"] = sc.clean(f.get("tagline"), 120)
     site["description"] = sc.clean(f.get("description"), 300)
     for key in ("email", "phone", "kakao_url", "kakao_label", "hours"):

@@ -96,7 +96,7 @@ def save_json(name: str, data: dict) -> None:
     tmp.replace(path)
 
 
-SITE_FALLBACK = {"brand": "Ortica영어", "contact": {}, "payment": {},
+SITE_FALLBACK = {"brand": "오르티카영어", "contact": {}, "payment": {},
                  "business": {}, "policy": {}, "pass": {}}
 CATALOG_FALLBACK = {"categories": [], "packages": [], "books": [], "products": []}
 NOTICE_FALLBACK = {"schedule": [], "notices": [], "exams": []}

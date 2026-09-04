@@ -35,7 +35,9 @@
 
 <header class="site-head">
   <div class="wrap">
-    <a class="logo" href="{{ url_for('home') }}"><svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M27 4C15.4 4 6 10.7 6 21.4c0 2.2.5 4.3 1.4 6.1l3.4-3.4c-.3-.9-.4-1.8-.4-2.7C10.4 14 17.1 8.9 25 8.3c-1.6 7.8-7.4 13-14.6 14.2l-4.9 4.9a1.6 1.6 0 1 0 2.3 2.3l3.3-3.3C20.6 27.6 27 20 27 8.9V4z" fill="currentColor"/><path d="M18.6 12.6c-2.6 1-4.8 2.7-6.3 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".55"/></svg>Ortica<span>영어</span></a>
+    {# 로고 그림은 영문 Ortica 그대로 두고, 이름은 한글 '오르티카영어' 로 읽히게 합니다.
+       검색과 소리 내어 읽기(스크린리더) 는 aria-label 을 씁니다. #}
+    <a class="logo" href="{{ url_for('home') }}" aria-label="{{ site.brand }}" title="{{ site.brand }}"><svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M27 4C15.4 4 6 10.7 6 21.4c0 2.2.5 4.3 1.4 6.1l3.4-3.4c-.3-.9-.4-1.8-.4-2.7C10.4 14 17.1 8.9 25 8.3c-1.6 7.8-7.4 13-14.6 14.2l-4.9 4.9a1.6 1.6 0 1 0 2.3 2.3l3.3-3.3C20.6 27.6 27 20 27 8.9V4z" fill="currentColor"/><path d="M18.6 12.6c-2.6 1-4.8 2.7-6.3 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".55"/></svg><span aria-hidden="true">{{ site.brand_en or 'Ortica' }}<i>영어</i></span></a>
     <nav class="nav" id="main-nav">
       <a href="{{ url_for('free') }}" class="nav-free {{ 'on' if request.endpoint in ['free','free_detail','samples'] }}">무료 자료</a>
       <a href="{{ url_for('products') }}" class="{{ 'on' if request.endpoint in ['products','product_detail','book_detail'] }}">자료 목록</a>

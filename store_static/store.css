@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Ortica영어 판매 사이트 스타일
+   오르티카영어 판매 사이트 스타일
    색·글꼴을 바꾸고 싶으면 맨 위 :root 의 값만 고치면 됩니다.
    ========================================================================== */
 /* 나눔스퀘어라운드 — 저장소에 들어 있는 파일을 그대로 씁니다.
@@ -87,7 +87,7 @@ ul{margin:0; padding-left:1.1em;}
 .site-head .wrap{position:relative;}   /* 접히는 메뉴가 이 안에 붙도록 */
 .site-head .wrap{display:flex; align-items:center; gap:24px; height:64px;}
 .logo{font-weight:800; font-size:19px; letter-spacing:-.03em; color:var(--brand); white-space:nowrap;}
-.logo span{color:var(--ink);}
+.logo i{font-style:normal; color:var(--ink);}
 .nav{display:flex; gap:22px; font-size:15px; font-weight:600; color:var(--ink-2); flex-wrap:wrap;}
 .nav a:hover{color:var(--brand);}
 .nav a.on{color:var(--brand);}

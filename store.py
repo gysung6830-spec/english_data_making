@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Ortica영어 - 영어 자료 판매 사이트 (고객 화면).
+"""오르티카영어 - 영어 자료 판매 사이트 (고객 화면).
 
 실행:
     pip install -r store_requirements.txt
@@ -609,7 +609,7 @@ def order():
         parts.append(f"쿠폰 {coupon['code']}")
     discount_note = " / ".join(parts) or "없음"
     sc.send_mail(
-        f"[Ortica영어] 새 주문 {order_no} · {items[0]['name']}"
+        f"[오르티카영어] 새 주문 {order_no} · {items[0]['name']}"
         + (f" 외 {len(items) - 1}건" if len(items) > 1 else ""),
         "\n".join([f"주문번호 : {order_no}",
                    f"상품     : {names}",
@@ -696,7 +696,7 @@ def custom():
                     json.dumps(detail, ensure_ascii=False), ts, ts))
 
     sc.send_mail(
-        f"[Ortica영어] {label} {order_no} · {wanted[:40]}",
+        f"[오르티카영어] {label} {order_no} · {wanted[:40]}",
         "\n".join([f"접수번호 : {order_no}", f"종류     : {label}",
                    f"성함     : {data['name'] or '(안 적음)'}", f"연락처   : {data['phone']}",
                    f"이메일   : {data['email']}"]
@@ -740,7 +740,7 @@ def contact():
                     json.dumps(detail, ensure_ascii=False), ts, ts))
 
     sc.send_mail(
-        f"[Ortica영어] 문의 {order_no} · {label}",
+        f"[오르티카영어] 문의 {order_no} · {label}",
         "\n".join([f"접수번호 : {order_no}", f"문의 종류 : {label}",
                     f"주문번호 : {detail['주문번호']}",
                     f"성함     : {data['name']}", f"연락처   : {data['phone'] or '-'}",
@@ -813,7 +813,7 @@ def submit():
     db.commit()
 
     sc.send_mail(
-        f"[Ortica영어] 시험지 제출 {submit_no} · {school}",
+        f"[오르티카영어] 시험지 제출 {submit_no} · {school}",
         "\n".join([f"접수번호 : {submit_no}", f"학교     : {school}",
                    f"학년     : {request.form.get('grade') or '-'}",
                    f"시험     : {request.form.get('exam_type') or '-'} "
@@ -883,7 +883,7 @@ def pass_page():
                                 "약속한 할인": early}, ensure_ascii=False), ts, ts))
 
     sc.send_mail(
-        f"[Ortica영어] 프리패스 사전 신청 {order_no} · {plan}",
+        f"[오르티카영어] 프리패스 사전 신청 {order_no} · {plan}",
         "\n".join([f"신청번호 : {order_no}",
                    f"관심 이용권 : {plan} · 사전 신청가 {picked['now']:,}원"
                    + (f" (정가 {picked['price']:,}원 − {early:,}원)" if early else ""),
@@ -1277,7 +1277,7 @@ def my_page():
         token = sc.locker_token(email)
         link = url_for("my_locker", token=token, _external=True)
         sc.send_mail(
-            f"[{sc.load_site().get('brand', 'Ortica영어')}] 내 자료함 주소",
+            f"[{sc.load_site().get('brand', '오르티카영어')}] 내 자료함 주소",
             "\n".join(["받으신 자료를 한 곳에서 다시 받으실 수 있는 주소입니다.", "",
                         link, "",
                         "이 주소는 바뀌지 않습니다. 즐겨찾기 해 두시면 언제든 다시 여실 수 있습니다.",
@@ -1424,6 +1424,6 @@ def too_large(_exc):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "5001"))
-    print(f"\n  Ortica영어 판매 사이트 → http://localhost:{port}")
+    print(f"\n  오르티카영어 판매 사이트 → http://localhost:{port}")
     print(f"  관리자 화면          → http://localhost:{port}/admin\n  (종료: Ctrl+C)\n")
     app.run(host="0.0.0.0", port=port, debug=bool(os.environ.get("STORE_DEBUG")))

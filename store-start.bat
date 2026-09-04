@@ -1,6 +1,6 @@
 @echo off
 cd /d "%~dp0"
-title Ortica영어 판매 사이트
+title 오르티카영어 판매 사이트
 
 rem ============================================================
 rem  판매 사이트를 내 컴퓨터에서 띄웁니다. 이 파일을 두 번 누르세요.
@@ -27,7 +27,7 @@ if not defined PY (
 if not defined PY goto NOPYTHON
 
 echo.
-echo   Ortica영어 판매 사이트를 시작합니다.
+echo   오르티카영어 판매 사이트를 시작합니다.
 echo.
 echo   [1/2] 필요한 라이브러리를 확인합니다. 처음 한 번은 1~2분 걸립니다.
 %PY% -m pip install -q -r store_requirements.txt

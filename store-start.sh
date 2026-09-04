@@ -13,7 +13,7 @@ export ADMIN_PASSWORD="${ADMIN_PASSWORD:-ortica-change-me-1234}"
 export STORE_HTTPS=0
 
 echo
-echo "  Ortica영어 판매 사이트를 시작합니다."
+echo "  오르티카영어 판매 사이트를 시작합니다."
 echo
 echo "  [1/2] 필요한 라이브러리를 확인합니다..."
 python3 -m pip install -q -r store_requirements.txt || {

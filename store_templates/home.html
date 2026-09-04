@@ -12,6 +12,10 @@
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": {{ site.brand|tojson }},
+  {# 사람들이 '오르티카', 'Ortica', 'Ortica영어' 로도 찾습니다. 같은 곳임을 알려 줍니다. #}
+  "alternateName": {{ [site.brand_en or 'Ortica',
+                       (site.brand_en or 'Ortica') ~ '영어',
+                       '오르티카', '오르티카 영어']|tojson }},
   "url": {{ url_for('home', _external=True)|tojson }},
   "logo": {{ url_for('static', filename='og.png', _external=True)|tojson }},
   "description": {{ site.description|tojson }}
@@ -25,6 +29,7 @@
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": {{ site.brand|tojson }},
+  "alternateName": {{ ((site.brand_en or 'Ortica') ~ '영어')|tojson }},
   "url": {{ url_for('home', _external=True)|tojson }},
   "potentialAction": {
     "@type": "SearchAction",
