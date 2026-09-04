@@ -12,3 +12,6 @@ output/*.png
 output/*.jpg
 output/*.json
 web_uploads/
+# 배포용으로 묶은 결과물(생성물이므로 저장소에 두지 않음)
+output/*.zip
+output/_all/
