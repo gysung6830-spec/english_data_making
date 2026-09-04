@@ -375,3 +375,16 @@ mark.hl1 .hln{ color:#1f4e8a; }
 .sl-demo{ display:inline-block; color:var(--green); font-weight:800; font-size:11pt;
   min-width:17px; text-align:center; }
 .g-legend .ox-en,.g-legend .ox-kill{ vertical-align:0; }
+
+/* ---- ③ 영어 한줄해석 (압축: 원문 + 어법칩 + 한 줄 해석) ------------------ */
+.ol-row{ break-inside:avoid; padding:4px 0 5px; border-bottom:1px dotted #e6ebe8; }
+.ol-row:last-child{ border-bottom:none; }
+.ol-en{ font-size:9.8pt; line-height:1.4; color:var(--ink); }
+.ol-en .ol-no{ display:inline-block; min-width:15px; height:15px; line-height:15px; text-align:center;
+  background:var(--green); color:#fff; font-weight:700; font-size:7.2pt; border-radius:5px;
+  margin-right:5px; vertical-align:1.5px; }
+.ol-g{ margin:1.5px 0 1px 20px; line-height:1.35; }
+.olg-chip{ display:inline-block; font-size:7.6pt; font-weight:700; color:var(--indigo);
+  background:var(--indigo-bg); border-radius:999px; padding:0 7px; }
+.ol-ko{ font-size:9pt; color:#3a4250; line-height:1.4; margin-left:20px; }
+.ol-ko::before{ content:"↳ "; color:var(--green); font-weight:700; }

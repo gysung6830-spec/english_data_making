@@ -15,9 +15,10 @@
   <div class="g-flow">
     <span class="gf"><span class="gf-n">1</span>지문 통째로 읽기</span><span class="gf-arr">›</span>
     <span class="gf"><span class="gf-n">2</span>어휘 리스트</span><span class="gf-arr">›</span>
-    <span class="gf"><span class="gf-n">3</span>문장별 끊어읽기 &amp; 내용 파악</span><span class="gf-arr">›</span>
-    <span class="gf"><span class="gf-n">4</span>글 정리</span><span class="gf-arr">›</span>
-    <span class="gf"><span class="gf-n">5</span>핵심 문법</span>
+    <span class="gf"><span class="gf-n">3</span>영어 한줄해석</span><span class="gf-arr">›</span>
+    <span class="gf"><span class="gf-n">4</span>문장별 끊어읽기 &amp; 내용 파악</span><span class="gf-arr">›</span>
+    <span class="gf"><span class="gf-n">5</span>글 정리</span><span class="gf-arr">›</span>
+    <span class="gf"><span class="gf-n">6</span>핵심 문법</span>
   </div>
 
   <div class="g-legend">
@@ -72,9 +73,24 @@
     </div>
   </div>
 
-  {#- ③ 문장별: 끊어읽기 빈칸 + 내용 객관식 (새 페이지) -#}
+  {#- ③ 영어 한줄해석 (한 페이지 압축 · 줄마다 어법칩) (새 페이지) -#}
   <div class="section brk">
-    <div class="sec-head"><span class="sec-no">3</span><span class="sec-title">문장별 끊어읽기 &amp; 내용 파악</span>
+    <div class="sec-head"><span class="sec-no">3</span><span class="sec-title">영어 한줄해석</span>
+      <span class="sec-desc">문장별 원문·한 줄 해석·어법칩을 한눈에 (직독직해 확인용)</span></div>
+    <div class="panel">
+      {% for it in p.lines %}
+      <div class="ol-row">
+        <div class="ol-en"><span class="ol-no">{{ it.id }}</span>{{ it.english }}</div>
+        {% if it.grammar %}<div class="ol-g">{% for g in it.grammar %}<span class="olg-chip">{{ g.tag }}</span>{% if not loop.last %} · {% endif %}{% endfor %}</div>{% endif %}
+        <div class="ol-ko">{{ it.ko_line }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {#- ④ 문장별: 끊어읽기 빈칸 + 내용 객관식 (새 페이지) -#}
+  <div class="section brk">
+    <div class="sec-head"><span class="sec-no">4</span><span class="sec-title">문장별 끊어읽기 &amp; 내용 파악</span>
       <span class="sec-desc">빈칸을 직접 해석해 채우고(어디가 빠졌는지 찾기), 문장 내용을 골라봐</span></div>
     {#- B: 문장마다 반복하던 안내를 섹션 맨 위 1회로 -#}
     <div class="sec-guide">
@@ -106,9 +122,9 @@
     </div>
   </div>
 
-  {#- ④ 글 정리 (새 페이지) -#}
+  {#- ⑤ 글 정리 (새 페이지) -#}
   <div class="section brk">
-    <div class="sec-head"><span class="sec-no">4</span><span class="sec-title">글 정리</span>
+    <div class="sec-head"><span class="sec-no">5</span><span class="sec-title">글 정리</span>
       <span class="sec-desc">문장을 다 봤으니 지문 전체를 정리해봐{% if not teacher %} (정답은 강사용){% endif %}</span></div>
 
     <div class="pcard">
@@ -147,9 +163,9 @@
     </div>
   </div>
 
-  {#- ⑤ 이 지문의 핵심 문법 (새 페이지) -#}
+  {#- ⑥ 이 지문의 핵심 문법 (새 페이지) -#}
   <div class="section brk">
-    <div class="sec-head"><span class="sec-no">5</span><span class="sec-title">이 지문의 핵심 문법</span>
+    <div class="sec-head"><span class="sec-no">6</span><span class="sec-title">이 지문의 핵심 문법</span>
       <span class="sec-desc">이 문법 하나만 확실히! (설명 빈칸 채우기 + 객관식·영작 연습)</span></div>
     <div class="kg-box">
       <div class="kg-head">🔑 <span class="kg-point">{{ p.key_grammar.point }}</span></div>

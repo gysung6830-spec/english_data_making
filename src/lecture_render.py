@@ -357,10 +357,14 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
         # 숙어·구동사를 어법칩으로 승격 + 문장 속 위치 순서(왼→오)로 정렬
         allg = list(s.grammar) + _promote_idiom_chips(s)
         og = _order_grammar(s.english, allg)
+        # 한 줄 해석(③ 영어 한줄해석용): 청크 ko 를 이어 [[ ]] 표시만 제거한 전체 문장 번역
+        ko_line = " ".join(_MARK.sub(lambda m: m.group(1), (c.ko or "")) for c in s.chunks)
+        ko_line = re.sub(r"\s+", " ", ko_line).strip()
         lines.append({
             "id": s.id,
             "english": s.english,
             "grammar": [{"tag": normalize_tag(g.tag), "note": g.note} for g in og],
+            "ko_line": ko_line,
             # 강사용: 끊어읽기(/) + 어법칩 spans 형광펜(칩 번호)을 함께 표시. 없으면 None → 끊어읽기 줄 폴백
             "english_hl": _highlight_grammar_chunked(s.chunks, og) if teacher else None,
             "chunks": chunks,
