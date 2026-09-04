@@ -301,6 +301,35 @@ def read_wordfile(filename: str, blob: bytes) -> tuple[str, str]:
     return text, "파일을 읽었습니다."
 
 
+def unit_id_from(name: str, taken: set[str] | None = None) -> str:
+    """강 이름에서 번호를 만듭니다. 'Day 47' → 47, '1강' → 01, 'Unit 3' → 03.
+
+    강 번호와 강 이름을 따로 받지 않기 위한 것입니다. 번호는 차례를 잡는 데만 쓰고
+    손님 화면에는 이름만 보입니다. 숫자가 없으면 영문·숫자만 남겨 씁니다.
+    """
+    taken = taken or set()
+    digits = re.findall(r"\d+", name or "")
+    base = f"{int(digits[0]):02d}" if digits else ""
+    if not base:
+        base = re.sub(r"[^a-z0-9]+", "-", (name or "").lower()).strip("-")[:20] or "unit"
+    uid, n = base, 2
+    while uid in taken:
+        uid, n = f"{base}-{n}", n + 1
+    return uid
+
+
+def wordbook_slug(name: str, taken: set[str] | None = None) -> str:
+    """단어장 주소 이름. 사장님이 정하실 필요가 없어 자동으로 붙입니다."""
+    taken = taken or set()
+    base = re.sub(r"[^a-z0-9]+", "-", (name or "").lower()).strip("-")[:40]
+    if len(base) < 3 or not re.search(r"[a-z]{2}", base):   # 한글 이름이면 영문이 안 남습니다
+        base = "wordbook"
+    slug, n = base, 2
+    while slug in taken:
+        slug, n = f"{base}-{n}", n + 1
+    return slug
+
+
 def parse_words(text: str, limit: int = 3000) -> tuple[list[dict], list[str]]:
     """붙여넣은 단어 목록을 읽습니다. 한 줄에 하나, 영어와 뜻을 탭·쉼표·= 로 나눕니다.
 

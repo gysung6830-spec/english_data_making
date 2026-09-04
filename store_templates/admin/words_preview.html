@@ -13,7 +13,7 @@
   <ol>
     <li>왼쪽이 영어, 오른쪽이 뜻입니다. <b>탭으로 나뉘어</b> 있습니다.</li>
     <li>잘못 읽힌 줄은 여기서 고치거나 지우시면 됩니다.</li>
-    <li>강 번호와 이름을 정하고 <b>이 강에 넣기</b>를 누르면 저장됩니다.</li>
+    <li>강 이름을 정하고 <b>이 강에 넣기</b>를 누르면 저장됩니다.</li>
   </ol>
 </div>
 
@@ -31,15 +31,10 @@
 <div class="panel">
   <h2>고치고 저장하기</h2>
   <form method="post" action="{{ url_for('admin.words_unit_save', slug=b.slug) }}">
-    <div class="form-grid">
-      <div class="adm-field">
-        <label for="unit_id">강 번호</label>
-        <input type="text" id="unit_id" name="unit_id" value="{{ unit_id }}" placeholder="01" required>
-      </div>
-      <div class="adm-field">
-        <label for="unit_name">강 이름</label>
-        <input type="text" id="unit_name" name="unit_name" value="{{ unit_name }}" placeholder="1강">
-      </div>
+    <div class="adm-field full">
+      <label for="unit_name">강 이름</label>
+      <input type="text" id="unit_name" name="unit_name" value="{{ unit_name }}"
+             placeholder="Day 47" required>
     </div>
     <div class="adm-field full">
       <label for="words">단어 {{ found }}개</label>

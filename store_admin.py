@@ -1041,17 +1041,16 @@ def words_list():
 @admin_bp.route("/words/new", methods=["POST"])
 def words_new():
     data = sc.load_raw_words()
-    slug = sc.clean(request.form.get("slug"), 60).lower()
     name = sc.clean(request.form.get("name"), 120)
-    if not sc.SLUG_RE.match(slug) or not name:
-        flash("주소 이름(영문 소문자·숫자·하이픈 3자 이상)과 단어장 이름을 적어 주세요.", "err")
+    if not name:
+        flash("단어장 이름을 적어 주세요. 예: 워드마스터 수능2000", "err")
         return redirect(url_for("admin.words_list"))
-    if any(b.get("slug") == slug for b in data["books"]):
-        flash("같은 주소 이름의 단어장이 이미 있습니다.", "err")
+    if any(b.get("name") == name for b in data["books"]):
+        flash("같은 이름의 단어장이 이미 있습니다.", "err")
         return redirect(url_for("admin.words_list"))
+    slug = sc.wordbook_slug(name, {b.get("slug") for b in data["books"]})
     data["books"].append({"slug": slug, "name": name,
                           "publisher": sc.clean(request.form.get("publisher"), 60),
-                          "grade": sc.clean(request.form.get("grade"), 20),
                           "sort": sc.to_int(request.form.get("sort"), 100),
                           "active": True, "units": []})
     sc.save_words(data)
@@ -1071,7 +1070,6 @@ def words_book(slug):
         f = request.form
         book["name"] = sc.clean(f.get("name"), 120) or book["name"]
         book["publisher"] = sc.clean(f.get("publisher"), 60)
-        book["grade"] = sc.clean(f.get("grade"), 20)
         book["sort"] = sc.to_int(f.get("sort"), 100)
         book["active"] = bool(f.get("active"))
         sc.save_words(data)
@@ -1112,7 +1110,6 @@ def words_upload(slug):
     return render_template("admin/words_preview.html", b=book, note=note, file_name=name,
                            text="\n".join(f"{w['en']}\t{w['ko']}" for w in words),
                            found=len(words), bad=bad,
-                           unit_id=sc.clean(request.form.get("unit_id"), 20),
                            unit_name=sc.clean(request.form.get("unit_name"), 60))
 
 
@@ -1124,18 +1121,21 @@ def words_unit_save(slug):
     if book is None:
         abort(404)
 
-    uid = sc.clean(request.form.get("unit_id"), 20)
-    uname = sc.clean(request.form.get("unit_name"), 60) or uid
-    if not uid:
-        flash("강 번호를 적어 주세요. 예: 01", "err")
+    uname = sc.clean(request.form.get("unit_name"), 60)
+    if not uname:
+        flash("강 이름을 적어 주세요. 예: Day 47 · 1강 · Unit 3", "err")
         return redirect(url_for("admin.words_book", slug=slug))
+    # 같은 이름으로 다시 넣으면 그 강을 덮어씁니다
+    same = next((u for u in book["units"] if u.get("name") == uname), None)
+    uid = same["id"] if same else sc.unit_id_from(
+        uname, {u.get("id") for u in book["units"]})
 
     words, bad = sc.parse_words(request.form.get("words", ""))
     if not words:
         flash("단어를 읽지 못했습니다. 한 줄에 하나씩, 영어와 뜻을 탭이나 쉼표로 나눠 주세요.", "err")
         return redirect(url_for("admin.words_book", slug=slug))
 
-    unit = next((u for u in book["units"] if u.get("id") == uid), None)
+    unit = same
     if unit is None:
         unit = {"id": uid, "name": uname, "words": []}
         book["units"].append(unit)

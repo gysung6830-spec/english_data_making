@@ -934,22 +934,26 @@ def test_full_backup_has_orders():
 def test_word_quiz():
     """단어 시험지 — 관리자가 붙여넣으면 손님이 범위·유형을 골라 뽑습니다."""
     a = admin()
-    a.post("/admin/words/new", data={"slug": "quiz-test-book", "name": "시험용 단어장",
-                                     "publisher": "테스트", "grade": "고1"},
+    # 단어장은 이름만 적으면 됩니다 (주소는 알아서 붙습니다)
+    a.post("/admin/words/new", data={"name": "quiz test book", "publisher": "테스트"},
            follow_redirects=True)
+    made = sc.load_raw_words()["books"][-1]
+    assert made["slug"] == "quiz-test-book" and "grade" not in made
     words = "\n".join(f"word{i}\t뜻{i}" for i in range(1, 13))
+    # 강도 이름 한 칸만. 번호는 이름에서 만듭니다 ('Day 47' → 47)
     r = a.post("/admin/words/quiz-test-book/unit",
-               data={"unit_id": "01", "unit_name": "1강", "words": words + "\n망한줄"},
+               data={"unit_name": "Day 47", "words": words + "\n망한줄"},
                follow_redirects=True)
     assert "단어 12개를 넣었습니다" in body(r)
     assert "읽지 못한 줄 1개" in body(r)          # 뜻이 없는 줄은 건너뜁니다
 
     # 손님 화면
-    assert "시험용 단어장" in body(client().get("/words"))
+    assert sc.load_raw_words()["books"][-1]["units"][0]["id"] == "47"
+    assert "quiz test book" in body(client().get("/words"))
     pick = body(client().get("/words/quiz-test-book"))
-    assert "1강" in pick and "12개" in pick
+    assert "Day 47" in pick and "12개" in pick
 
-    url = "/words/quiz-test-book/sheet?unit=01&kind=en_ko&kind=ko_en&kind=choice&count=4&seed=777"
+    url = "/words/quiz-test-book/sheet?unit=47&kind=en_ko&kind=ko_en&kind=choice&count=4&seed=777"
     sheet = body(client().get(url))
     # 유형마다 한 장씩, 학생용 3장 + 정답지 3장
     assert sheet.count('class="sheet"') == 3
@@ -984,13 +988,12 @@ def test_word_quiz():
 
     # 단어가 다섯 개도 안 되면 객관식은 자동으로 빠집니다
     a.post("/admin/words/quiz-test-book/unit",
-           data={"unit_id": "02", "unit_name": "2강", "words": "solo\t혼자"},
-           follow_redirects=True)
-    tiny = body(client().get("/words/quiz-test-book/sheet?unit=02&kind=choice&count=5"))
+           data={"unit_name": "Day 48", "words": "solo\t혼자"}, follow_redirects=True)
+    tiny = body(client().get("/words/quiz-test-book/sheet?unit=48&kind=choice&count=5"))
     assert 'class="w-choices"' not in tiny
 
     # ---- 손님이 단어를 하나하나 골라서 ----------------------------------
-    pick = body(client().get("/words/quiz-test-book/pick?unit=01"))
+    pick = body(client().get("/words/quiz-test-book/pick?unit=47"))
     assert "낼 단어 고르기" in pick
     assert pick.count('name="pick"') == 12          # 12개가 다 체크된 채로 나옵니다
     assert 'checked' in pick
@@ -1014,8 +1017,7 @@ def test_word_file_upload():
     """단어를 엑셀·CSV·PDF 파일로 올리면, 읽은 내용을 보여 준 뒤에 저장합니다."""
     import io as _io
     a = admin()
-    a.post("/admin/words/new", data={"slug": "file-test-book", "name": "파일 단어장"},
-           follow_redirects=True)
+    a.post("/admin/words/new", data={"name": "file test book"}, follow_redirects=True)
 
     # 엑셀 — 첫 줄 머리글은 알아서 뺍니다
     import openpyxl
@@ -1025,7 +1027,7 @@ def test_word_file_upload():
         ws.append([en, ko])
     buf = _io.BytesIO(); wb.save(buf)
     r = a.post("/admin/words/file-test-book/upload",
-               data={"unit_id": "01", "unit_name": "1강",
+               data={"unit_name": "Day 1",
                      "file": (_io.BytesIO(buf.getvalue()), "단어.xlsx")},
                content_type="multipart/form-data")
     page = body(r)
@@ -1039,7 +1041,7 @@ def test_word_file_upload():
     # CSV 도 같은 길로
     csv = "영어,뜻\nintensity,강도\nsolo,혼자\n".encode("utf-8-sig")
     assert "단어 2개" in body(a.post("/admin/words/file-test-book/upload",
-        data={"unit_id": "02", "file": (_io.BytesIO(csv), "단어.csv")},
+        data={"unit_name": "Day 2", "file": (_io.BytesIO(csv), "단어.csv")},
         content_type="multipart/form-data"))
 
     # 올릴 수 없는 형식은 반려
@@ -1050,12 +1052,17 @@ def test_word_file_upload():
 
     # 미리보기에서 확인한 내용을 저장하면 그때 들어갑니다
     a.post("/admin/words/file-test-book/unit",
-           data={"unit_id": "01", "unit_name": "1강",
-                 "words": "retain\t유지하다\nvary\t다르다"}, follow_redirects=True)
+           data={"unit_name": "Day 1", "words": "retain\t유지하다\nvary\t다르다"},
+           follow_redirects=True)
     assert sc.word_count(sc.find_wordbook("file-test-book", raw=True)) == 2
 
+    # 끌어다 놓는 자리가 있어야 합니다
+    page = body(a.get("/admin/words/file-test-book"))
+    assert 'class="dropzone"' in page and "끌어다 놓으세요" in page
+    assert "unit_id" not in page                      # 강 번호 칸은 없앴습니다
+
     a.post("/admin/words/file-test-book/delete", follow_redirects=True)
-    print("PASS  단어를 엑셀·CSV 로 올리기 → 미리보기 → 저장")
+    print("PASS  단어를 엑셀·CSV 로 올리기 → 미리보기 → 저장 (끌어다 놓기)")
 
 
 def test_pass_counts_passages():
