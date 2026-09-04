@@ -33,7 +33,7 @@
 
       <div class="field">
         <label>2. 문제 유형<span class="req">*</span>
-          <span class="hint">두 가지 이상 고르시면 번갈아 냅니다</span></label>
+          <span class="hint">고르신 유형마다 시험지가 한 장씩 나옵니다</span></label>
         <div class="check-grid col">
           {% for k, label in kinds.items() %}
             <label class="check">
@@ -45,13 +45,13 @@
       </div>
 
       <div class="field">
-        <label for="count">3. 문항 수</label>
+        <label for="count">3. 유형마다 몇 문항</label>
         <select id="count" name="count">
           {% for n in [10, 20, 25, 30, 40, 50, 100] %}
             <option value="{{ n }}" {{ 'selected' if n == 20 }}>{{ n }}문항</option>
           {% endfor %}
         </select>
-        <div class="hint">고른 범위에 단어가 모자라면 있는 만큼만 냅니다.</div>
+        <div class="hint">유형을 둘 고르고 20문항을 정하시면 20문항짜리 두 장이 나옵니다. 단어가 모자라면 있는 만큼만 냅니다.</div>
       </div>
 
       <button type="submit" class="btn btn-primary btn-block">무작위로 시험지 만들기</button>

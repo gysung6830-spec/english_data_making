@@ -1084,30 +1084,49 @@ def picked_words(book: dict, unit_ids: list[str]) -> list[dict]:
     return out
 
 
-def build_quiz(words: list[dict], kinds: list[str], count: int, seed: int) -> list[dict]:
-    """문제를 만듭니다. 씨앗(seed)이 같으면 같은 시험지가 나옵니다.
+SECTION_GUIDE = {
+    "en_ko": ("영단어 → 우리말 뜻", "다음 영단어의 우리말 뜻을 쓰세요."),
+    "ko_en": ("우리말 뜻 → 영단어", "다음 뜻에 해당하는 영단어를 쓰세요."),
+    "choice": ("영단어 → 뜻 고르기", "다음 영단어의 뜻으로 알맞은 것을 고르세요."),
+}
+ROMAN = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ"]
 
-    같은 범위로 여러 장을 뽑아 반마다 다르게 내실 수 있도록, 씨앗을 주소에 남깁니다.
+
+def build_quiz(words: list[dict], kinds: list[str], count: int, seed: int) -> list[dict]:
+    """유형마다 한 묶음씩. 씨앗(seed)이 같으면 같은 시험지가 나옵니다.
+
+    한 유형에 문항을 몰아 주는 편이 풀기 좋습니다. 단어를 유형 수만큼 나눠 담고,
+    유형마다 01번부터 새로 셉니다. 같은 단어가 두 유형에 겹쳐 나오지 않습니다.
     """
     rng = random.Random(seed)
     pool = list(words)
     rng.shuffle(pool)
-    pool = pool[:count]
 
-    quiz = []
-    for i, w in enumerate(pool, 1):
-        kind = kinds[(i - 1) % len(kinds)] if len(kinds) > 1 else kinds[0]
-        item = {"no": i, "kind": kind, "en": w["en"], "ko": w["ko"], "unit": w.get("unit", "")}
-        if kind == "choice":
-            # 보기 다섯 개 — 정답 하나와, 다른 단어의 뜻 넷
-            others = [x["ko"] for x in words if x["ko"] != w["ko"]]
-            rng.shuffle(others)
-            picks = [w["ko"]] + others[:4]
-            rng.shuffle(picks)
-            item["choices"] = picks
-            item["answer_no"] = picks.index(w["ko"]) + 1
-        quiz.append(item)
-    return quiz
+    # 단어를 유형 수만큼 고르게 나눕니다
+    share = [pool[i::len(kinds)][:count] for i in range(len(kinds))]
+
+    sections = []
+    for idx, (kind, chunk) in enumerate(zip(kinds, share)):
+        if not chunk:
+            continue
+        title, guide = SECTION_GUIDE[kind]
+        items = []
+        for no, w in enumerate(chunk, 1):
+            item = {"no": f"{no:02d}", "en": w["en"], "ko": w["ko"], "kind": kind}
+            if kind == "ko_en":
+                item["hint"] = w["en"][:1].lower()          # 첫 글자만 흘려 줍니다
+            if kind == "choice":
+                others = [x["ko"] for x in words if x["ko"] != w["ko"]]
+                rng.shuffle(others)
+                picks = [w["ko"]] + others[:4]
+                rng.shuffle(picks)
+                item["choices"] = picks
+                item["answer_no"] = picks.index(w["ko"]) + 1
+            items.append(item)
+        sections.append({"kind": kind, "roman": ROMAN[idx % len(ROMAN)],
+                         "title": title, "guide": guide, "items": items,
+                         "hinted": kind == "ko_en"})
+    return sections
 
 
 @app.route("/words")
@@ -1169,18 +1188,21 @@ def words_sheet(slug):
         words = picked_words(book, unit_ids)
     if not words:
         abort(404)
-    want = sc.to_int(request.args.get("count"), 0) or len(words)
-    count = min(want, QUIZ_MAX, len(words))
+    # count 는 '유형마다' 낼 문항 수입니다. 0 이면 고른 단어를 유형 수로 나눠 다 냅니다.
+    want = sc.to_int(request.args.get("count"), 0) or QUIZ_MAX
+    count = min(want, QUIZ_MAX)
     # 객관식은 보기를 채울 단어가 다섯 개는 있어야 합니다
     if "choice" in kinds and len(words) < 5:
         kinds = [k for k in kinds if k != "choice"] or ["en_ko"]
     seed = sc.to_int(request.args.get("seed"), 0) or random.randrange(1, 999999)
 
-    quiz = build_quiz(words, kinds, count, seed)
+    sections = build_quiz(words, kinds, count, seed)
+    if not sections:
+        abort(404)
     unit_names = [u.get("name") or u.get("id") for u in book["units"] if u["id"] in unit_ids]
     # '다른 문제로 다시' — 같은 범위·유형에 시험지 번호만 새로 뽑습니다
     again = url_for("words_sheet", slug=slug, unit=unit_ids, kind=kinds, count=count)
-    return render_template("words_sheet.html", b=book, quiz=quiz, seed=seed,
+    return render_template("words_sheet.html", b=book, sections=sections, seed=seed,
                            unit_names=unit_names, kinds=kinds, kind_labels=sc.QUIZ_KINDS,
                            again_url=again, pool=len(words))
 

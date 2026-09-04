@@ -949,14 +949,21 @@ def test_word_quiz():
     pick = body(client().get("/words/quiz-test-book"))
     assert "1강" in pick and "12개" in pick
 
-    url = "/words/quiz-test-book/sheet?unit=01&kind=en_ko&kind=ko_en&kind=choice&count=9&seed=777"
+    url = "/words/quiz-test-book/sheet?unit=01&kind=en_ko&kind=ko_en&kind=choice&count=4&seed=777"
     sheet = body(client().get(url))
-    # 학생용과 정답지 두 장, 문항 수가 같아야 합니다
-    assert sheet.count('class="q q-') == 18                     # 9문항 × 2장
-    assert sheet.count('class="q-blank"') == 6                  # 학생용 주관식 6칸이 비어 있고
-    assert sheet.count('class="q-blank filled"') == 6           # 정답지 6칸이 채워져 있습니다
-    assert sheet.count('class="q-choices"') == 6                # 객관식 3문항 × 2장
-    assert sheet.count("<li>") >= 15                            # 보기 5개 × 3문항
+    # 유형마다 한 장씩, 학생용 3장 + 정답지 3장
+    assert sheet.count('class="sheet"') == 3
+    assert sheet.count('class="sheet answer"') == 3
+    assert "1 / 6" in sheet and "6 / 6" in sheet                 # 쪽 번호
+    for roman, title in (("Ⅰ", "영단어 → 우리말 뜻"), ("Ⅱ", "우리말 뜻 → 영단어"),
+                         ("Ⅲ", "영단어 → 뜻 고르기")):
+        assert f'{roman}.' in sheet and title in sheet
+    assert "첫 글자 힌트 제공" in sheet                            # 한→영 힌트 안내
+    assert sheet.count('class="w-hint"') == 4                    # 학생용에만 첫 글자
+    assert sheet.count('class="w-ans filled"') == 8              # 정답지 두 유형이 채워짐
+    assert "ANSWER KEY" in sheet
+    assert "All rights reserved" in sheet
+    assert "이름" in sheet and "점수" in sheet
     assert "시험지 번호 777" in sheet
     assert "noindex" in sheet
 
@@ -971,7 +978,7 @@ def test_word_quiz():
            data={"unit_id": "02", "unit_name": "2강", "words": "solo\t혼자"},
            follow_redirects=True)
     tiny = body(client().get("/words/quiz-test-book/sheet?unit=02&kind=choice&count=5"))
-    assert 'class="q-choices"' not in tiny
+    assert 'class="w-choices"' not in tiny
 
     # ---- 손님이 단어를 하나하나 골라서 ----------------------------------
     pick = body(client().get("/words/quiz-test-book/pick?unit=01"))
@@ -980,10 +987,10 @@ def test_word_quiz():
     assert 'checked' in pick
     chosen = "&".join(f"pick={i}" for i in (0, 2, 4, 6))
     only = body(client().get(f"/words/quiz-test-book/sheet?{chosen}&kind=en_ko&count=0"))
-    assert only.count('class="q q-') == 8            # 고른 4개 × 2장
+    assert only.count('class="w"') == 8               # 고른 4개 × (학생용 + 정답지)
     # 고른 것보다 적게 정하면 그중에서 뽑습니다
     few = body(client().get(f"/words/quiz-test-book/sheet?{chosen}&kind=en_ko&count=2"))
-    assert few.count('class="q q-') == 4
+    assert few.count('class="w"') == 4
 
     a.post("/admin/words/quiz-test-book/delete", follow_redirects=True)
     assert "시험용 단어장" not in body(client().get("/words"))
