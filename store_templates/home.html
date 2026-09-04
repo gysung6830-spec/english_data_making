@@ -194,7 +194,7 @@
       {% if passcfg.enabled %}
       <div class="card" style="background:var(--brand-soft);border-color:#cfe4d9;">
         {% if passcfg.mode == 'preorder' %}<span class="badge badge-soft">준비 중</span>{% endif %}
-        <h2 style="font-size:22px;margin-bottom:10px;">프리패스 · 전 자료 무제한</h2>
+        <h2 style="font-size:22px;margin-bottom:10px;">프리패스 · 지문 묶음으로 사기</h2>
         <p class="muted">{{ passcfg.lead }}</p>
         {% set early_plans = passcfg.plans | selectattr('early') | map(attribute='name') | list %}
         {% if passcfg.mode == 'preorder' and passcfg.preorder_discount and early_plans %}

@@ -1,0 +1,187 @@
+{
+  "intro": {},
+  "books": [
+    {
+      "slug": "ebs-2026-tokgang-eng",
+      "name": "2026 수능특강 영어",
+      "publisher": "EBS",
+      "grade": "고3",
+      "sort": 10,
+      "active": true,
+      "units": [
+        {
+          "id": "01",
+          "name": "1강",
+          "words": [
+            {
+              "en": "retain",
+              "ko": "유지하다"
+            },
+            {
+              "en": "intensity",
+              "ko": "강도"
+            },
+            {
+              "en": "impelling",
+              "ko": "강하게 밀어붙이는"
+            },
+            {
+              "en": "reassurance",
+              "ko": "안심, 확신"
+            },
+            {
+              "en": "myriad",
+              "ko": "무수히 많은"
+            },
+            {
+              "en": "confirm",
+              "ko": "확인하다"
+            },
+            {
+              "en": "identity",
+              "ko": "정체성"
+            },
+            {
+              "en": "separate",
+              "ko": "분리된"
+            },
+            {
+              "en": "companionship",
+              "ko": "교제, 동료애"
+            },
+            {
+              "en": "solitude",
+              "ko": "고독"
+            },
+            {
+              "en": "exchange",
+              "ko": "주고받다, 교환하다"
+            },
+            {
+              "en": "conversational",
+              "ko": "대화의"
+            },
+            {
+              "en": "non-verbal",
+              "ko": "비언어적인"
+            },
+            {
+              "en": "approval",
+              "ko": "인정, 승인"
+            },
+            {
+              "en": "bodily",
+              "ko": "신체의"
+            },
+            {
+              "en": "basic",
+              "ko": "기본적인"
+            },
+            {
+              "en": "generally",
+              "ko": "일반적으로"
+            },
+            {
+              "en": "seek",
+              "ko": "추구하다"
+            },
+            {
+              "en": "extended",
+              "ko": "긴, 연장된"
+            },
+            {
+              "en": "impulse",
+              "ko": "충동"
+            }
+          ]
+        },
+        {
+          "id": "02",
+          "name": "2강",
+          "words": [
+            {
+              "en": "curiosity",
+              "ko": "호기심"
+            },
+            {
+              "en": "inquire",
+              "ko": "질문하다, 탐구하다"
+            },
+            {
+              "en": "memorize",
+              "ko": "암기하다"
+            },
+            {
+              "en": "motivated",
+              "ko": "동기부여된"
+            },
+            {
+              "en": "explore",
+              "ko": "탐구하다"
+            },
+            {
+              "en": "lifelong",
+              "ko": "평생의"
+            },
+            {
+              "en": "discourage",
+              "ko": "단념시키다"
+            },
+            {
+              "en": "abrupt",
+              "ko": "갑작스러운"
+            },
+            {
+              "en": "potential",
+              "ko": "잠재적인"
+            },
+            {
+              "en": "overlook",
+              "ko": "간과하다"
+            },
+            {
+              "en": "pressing",
+              "ko": "긴급한"
+            },
+            {
+              "en": "disappear",
+              "ko": "사라지다"
+            },
+            {
+              "en": "routine",
+              "ko": "루틴, 정해진 순서"
+            },
+            {
+              "en": "transition",
+              "ko": "변화, 전환"
+            },
+            {
+              "en": "establish",
+              "ko": "마련하다, 확립하다"
+            },
+            {
+              "en": "effective",
+              "ko": "효과적인"
+            },
+            {
+              "en": "material",
+              "ko": "자료"
+            },
+            {
+              "en": "prepared",
+              "ko": "준비된"
+            },
+            {
+              "en": "summary",
+              "ko": "요약"
+            },
+            {
+              "en": "develop",
+              "ko": "전개하다, 발전시키다"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -40,6 +40,8 @@
         🧩 오르티카 라인업</a>
       <a href="{{ url_for('admin.free_list') }}" class="{{ 'on' if request.endpoint in ['admin.free_list','admin.free_form','admin.free_files'] }}">
         🎁 무료 자료실</a>
+      <a href="{{ url_for('admin.words_list') }}" class="{{ 'on' if request.endpoint in ['admin.words_list','admin.words_book'] }}">
+        🔤 단어장</a>
       <a href="{{ url_for('admin.leads') }}" class="{{ 'on' if request.endpoint == 'admin.leads' }}">
         📧 이메일 명단</a>
       <a href="{{ url_for('admin.notices') }}" class="{{ 'on' if request.endpoint == 'admin.notices' }}">

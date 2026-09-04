@@ -931,6 +931,62 @@ def test_full_backup_has_orders():
 
 
 # ---- 7. 글꼴 · 보안 --------------------------------------------------------
+def test_word_quiz():
+    """단어 시험지 — 관리자가 붙여넣으면 손님이 범위·유형을 골라 뽑습니다."""
+    a = admin()
+    a.post("/admin/words/new", data={"slug": "quiz-test-book", "name": "시험용 단어장",
+                                     "publisher": "테스트", "grade": "고1"},
+           follow_redirects=True)
+    words = "\n".join(f"word{i}\t뜻{i}" for i in range(1, 13))
+    r = a.post("/admin/words/quiz-test-book/unit",
+               data={"unit_id": "01", "unit_name": "1강", "words": words + "\n망한줄"},
+               follow_redirects=True)
+    assert "단어 12개를 넣었습니다" in body(r)
+    assert "읽지 못한 줄 1개" in body(r)          # 뜻이 없는 줄은 건너뜁니다
+
+    # 손님 화면
+    assert "시험용 단어장" in body(client().get("/words"))
+    pick = body(client().get("/words/quiz-test-book"))
+    assert "1강" in pick and "12개" in pick
+
+    url = "/words/quiz-test-book/sheet?unit=01&kind=en_ko&kind=ko_en&kind=choice&count=9&seed=777"
+    sheet = body(client().get(url))
+    # 학생용과 정답지 두 장, 문항 수가 같아야 합니다
+    assert sheet.count('class="q q-') == 18                     # 9문항 × 2장
+    assert sheet.count('class="q-blank"') == 6                  # 학생용 주관식 6칸이 비어 있고
+    assert sheet.count('class="q-blank filled"') == 6           # 정답지 6칸이 채워져 있습니다
+    assert sheet.count('class="q-choices"') == 6                # 객관식 3문항 × 2장
+    assert sheet.count("<li>") >= 15                            # 보기 5개 × 3문항
+    assert "시험지 번호 777" in sheet
+    assert "noindex" in sheet
+
+    # 같은 번호면 같은 시험지, 번호가 없으면 매번 다릅니다
+    assert body(client().get(url)) == sheet
+    once = body(client().get(url.replace("&seed=777", "")))
+    twice = body(client().get(url.replace("&seed=777", "")))
+    assert once != twice
+
+    # 단어가 다섯 개도 안 되면 객관식은 자동으로 빠집니다
+    a.post("/admin/words/quiz-test-book/unit",
+           data={"unit_id": "02", "unit_name": "2강", "words": "solo\t혼자"},
+           follow_redirects=True)
+    tiny = body(client().get("/words/quiz-test-book/sheet?unit=02&kind=choice&count=5"))
+    assert 'class="q-choices"' not in tiny
+
+    a.post("/admin/words/quiz-test-book/delete", follow_redirects=True)
+    assert "시험용 단어장" not in body(client().get("/words"))
+    print("PASS  단어 시험지 — 붙여넣기 → 범위·유형 고르기 → 학생용 + 정답지")
+
+
+def test_pass_counts_passages():
+    """프리패스는 무제한이 아니라 지문 n개까지입니다."""
+    text = body(client().get("/pass"))
+    assert "지문 1,000개" in text and "지문 350개" in text
+    assert "무제한" not in text
+    assert "지문당" in text                      # 낱개보다 싸다는 것이 보여야 합니다
+    print("PASS  프리패스 — 지문 n개까지")
+
+
 def test_my_locker():
     """내 자료함 — 회원가입 없이, 이메일과 자료함 열쇠로 다시 받기."""
     # 주문을 하나 넣고, 관리자가 발송까지 마칩니다
@@ -2233,6 +2289,8 @@ def run_all():
     test_policy_sections_are_filled_in()
     test_request_menu_renamed_to_jaryo()
     # 예시 데이터를 지우는 테스트는 다른 테스트가 그 상품을 쓰므로 맨 뒤에 둡니다.
+    test_word_quiz()
+    test_pass_counts_passages()
     test_my_locker()
     test_clear_sample_data()
     test_contact_page()

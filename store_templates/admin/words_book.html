@@ -1,0 +1,101 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ b.name }} 단어{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <h1>{{ b.name }}</h1>
+  <p>{{ b['units']|length }}강 · 단어 {{ '{:,}'.format(total) }}개 ·
+    <a href="{{ url_for('words_book', slug=b.slug) }}" target="_blank">손님 화면에서 보기 ↗</a></p>
+</div>
+
+<div class="panel">
+  <h2>강에 단어 넣기 <span class="tag tag-on">붙여넣기 한 번</span></h2>
+  <div class="hint">
+    엑셀에서 두 칸(영어 · 뜻)을 복사해 그대로 붙여 넣으세요.
+    한 줄에 하나씩, <b>탭 · 쉼표 · =</b> 로 나눕니다. 같은 강 번호로 다시 넣으면 <b>덮어씁니다.</b>
+  </div>
+  <form method="post" action="{{ url_for('admin.words_unit_save', slug=b.slug) }}">
+    <div class="form-grid">
+      <div class="adm-field">
+        <label for="unit_id">강 번호</label>
+        <input type="text" id="unit_id" name="unit_id" placeholder="01" required>
+        <div class="tip">01, 02 … 처럼 자릿수를 맞추면 순서가 바르게 잡힙니다.</div>
+      </div>
+      <div class="adm-field">
+        <label for="unit_name">강 이름</label>
+        <input type="text" id="unit_name" name="unit_name" placeholder="1강">
+      </div>
+    </div>
+    <div class="adm-field full">
+      <label for="words">단어 목록</label>
+      <textarea id="words" name="words" rows="12" required
+                placeholder="retain&#9;유지하다&#10;intensity&#9;강도&#10;vary = 다르다, 달라지다"></textarea>
+      <div class="tip">뜻 안에 쉼표가 있어도 됩니다. 첫 번째 구분자까지만 영어로 봅니다.
+        <code>#</code> 로 시작하는 줄과 빈 줄은 건너뜁니다.</div>
+    </div>
+    <div class="form-actions"><button type="submit" class="btn btn-primary">이 강에 넣기</button></div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>지금 들어 있는 강</h2>
+  {% if b['units'] %}
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th>강</th><th>단어</th><th>맨 앞 세 개</th><th></th></tr></thead>
+        <tbody>
+        {% for u in b['units'] %}
+          <tr>
+            <td><b>{{ u.name or u.id }}</b><br><small class="muted">{{ u.id }}</small></td>
+            <td>{{ u['words']|length }}개</td>
+            <td><small class="muted">
+              {% for w in u['words'][:3] %}{{ w.en }} — {{ w.ko }}{% if not loop.last %} · {% endif %}{% endfor %}
+            </small></td>
+            <td>
+              <form method="post" action="{{ url_for('admin.words_unit_delete', slug=b.slug, uid=u.id) }}"
+                    onsubmit="return confirm('{{ u.name or u.id }} 을(를) 지울까요?');">
+                <button type="submit" class="btn btn-ghost btn-sm">지우기</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="hint">아직 넣은 강이 없습니다. 위에서 첫 강을 넣어 보세요.</div>
+  {% endif %}
+</div>
+
+<div class="panel">
+  <h2>단어장 정보</h2>
+  <form method="post">
+    <div class="form-grid">
+      <div class="adm-field"><label for="name">이름</label>
+        <input type="text" id="name" name="name" value="{{ b.name }}"></div>
+      <div class="adm-field"><label for="publisher">출판사 · 분류</label>
+        <input type="text" id="publisher" name="publisher" value="{{ b.publisher or '' }}"></div>
+      <div class="adm-field"><label for="grade">학년</label>
+        <input type="text" id="grade" name="grade" value="{{ b.grade or '' }}"></div>
+      <div class="adm-field"><label for="sort">차례</label>
+        <input type="number" id="sort" name="sort" value="{{ b.get('sort', 100) }}"></div>
+    </div>
+    <div class="adm-field">
+      <label class="check"><input type="checkbox" name="active"
+             {{ 'checked' if b.get('active', True) }}> <span>손님 화면에 보이기</span></label>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">저장</button>
+      <a class="btn btn-ghost" href="{{ url_for('admin.words_list') }}">단어장 목록</a>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>단어장 지우기</h2>
+  <form method="post" action="{{ url_for('admin.words_delete', slug=b.slug) }}"
+        onsubmit="return confirm('이 단어장을 통째로 지웁니다. 되돌릴 수 없습니다. 진행할까요?');">
+    <button type="submit" class="btn btn-ghost danger">이 단어장 지우기</button>
+  </form>
+</div>
+{% endblock %}

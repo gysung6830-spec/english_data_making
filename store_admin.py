@@ -39,7 +39,7 @@ admin_bp = Blueprint("admin", __name__, url_prefix="/admin")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 
 MANAGED_FILES = ["site.json", "products.json", "notices.json",
-                 "materials.json", "freebies.json"]
+                 "materials.json", "freebies.json", "words.json"]
 
 # 비밀번호를 여러 번 틀리면 잠시 막습니다. (한 대에서 무한정 찍어 보지 못하게)
 LOGIN_MAX_TRIES = 8
@@ -1028,6 +1028,117 @@ def material_shot_delete(mid, filename):
 
 
 # ---------------------------------------------------------------------------
+# 단어장 — 교재 단어를 강 단위로 담아 둡니다
+# ---------------------------------------------------------------------------
+@admin_bp.route("/words")
+def words_list():
+    data = sc.load_raw_words()
+    books = sorted(data["books"], key=lambda b: (b.get("sort", 100), b.get("name", "")))
+    return render_template("admin/words.html", books=books,
+                           counts={b["slug"]: sc.word_count(b) for b in books})
+
+
+@admin_bp.route("/words/new", methods=["POST"])
+def words_new():
+    data = sc.load_raw_words()
+    slug = sc.clean(request.form.get("slug"), 60).lower()
+    name = sc.clean(request.form.get("name"), 120)
+    if not sc.SLUG_RE.match(slug) or not name:
+        flash("주소 이름(영문 소문자·숫자·하이픈 3자 이상)과 단어장 이름을 적어 주세요.", "err")
+        return redirect(url_for("admin.words_list"))
+    if any(b.get("slug") == slug for b in data["books"]):
+        flash("같은 주소 이름의 단어장이 이미 있습니다.", "err")
+        return redirect(url_for("admin.words_list"))
+    data["books"].append({"slug": slug, "name": name,
+                          "publisher": sc.clean(request.form.get("publisher"), 60),
+                          "grade": sc.clean(request.form.get("grade"), 20),
+                          "sort": sc.to_int(request.form.get("sort"), 100),
+                          "active": True, "units": []})
+    sc.save_words(data)
+    flash(f"'{name}' 단어장을 만들었습니다. 이제 강마다 단어를 넣어 주세요.", "ok")
+    return redirect(url_for("admin.words_book", slug=slug))
+
+
+@admin_bp.route("/words/<slug>", methods=["GET", "POST"])
+def words_book(slug):
+    """단어장 하나 — 정보 고치기와 강 추가."""
+    data = sc.load_raw_words()
+    book = next((b for b in data["books"] if b.get("slug") == slug), None)
+    if book is None:
+        abort(404)
+
+    if request.method == "POST":
+        f = request.form
+        book["name"] = sc.clean(f.get("name"), 120) or book["name"]
+        book["publisher"] = sc.clean(f.get("publisher"), 60)
+        book["grade"] = sc.clean(f.get("grade"), 20)
+        book["sort"] = sc.to_int(f.get("sort"), 100)
+        book["active"] = bool(f.get("active"))
+        sc.save_words(data)
+        flash("단어장 정보를 저장했습니다.", "ok")
+        return redirect(url_for("admin.words_book", slug=slug))
+
+    return render_template("admin/words_book.html", b=book,
+                           total=sc.word_count(book))
+
+
+@admin_bp.route("/words/<slug>/unit", methods=["POST"])
+def words_unit_save(slug):
+    """강 하나에 단어를 붙여 넣습니다. 있으면 덮어쓰고, 없으면 새로 만듭니다."""
+    data = sc.load_raw_words()
+    book = next((b for b in data["books"] if b.get("slug") == slug), None)
+    if book is None:
+        abort(404)
+
+    uid = sc.clean(request.form.get("unit_id"), 20)
+    uname = sc.clean(request.form.get("unit_name"), 60) or uid
+    if not uid:
+        flash("강 번호를 적어 주세요. 예: 01", "err")
+        return redirect(url_for("admin.words_book", slug=slug))
+
+    words, bad = sc.parse_words(request.form.get("words", ""))
+    if not words:
+        flash("단어를 읽지 못했습니다. 한 줄에 하나씩, 영어와 뜻을 탭이나 쉼표로 나눠 주세요.", "err")
+        return redirect(url_for("admin.words_book", slug=slug))
+
+    unit = next((u for u in book["units"] if u.get("id") == uid), None)
+    if unit is None:
+        unit = {"id": uid, "name": uname, "words": []}
+        book["units"].append(unit)
+    unit["name"] = uname
+    unit["words"] = words
+    book["units"].sort(key=lambda u: u.get("id", ""))
+    sc.save_words(data)
+
+    note = f"'{uname}' 에 단어 {len(words)}개를 넣었습니다."
+    if bad:
+        note += f" 읽지 못한 줄 {len(bad)}개는 건너뛰었습니다 — {', '.join(bad[:3])}"
+    flash(note, "ok" if not bad else "err")
+    return redirect(url_for("admin.words_book", slug=slug))
+
+
+@admin_bp.route("/words/<slug>/unit/<uid>/delete", methods=["POST"])
+def words_unit_delete(slug, uid):
+    data = sc.load_raw_words()
+    book = next((b for b in data["books"] if b.get("slug") == slug), None)
+    if book is None:
+        abort(404)
+    book["units"] = [u for u in book["units"] if u.get("id") != uid]
+    sc.save_words(data)
+    flash(f"'{uid}' 강을 지웠습니다.", "ok")
+    return redirect(url_for("admin.words_book", slug=slug))
+
+
+@admin_bp.route("/words/<slug>/delete", methods=["POST"])
+def words_delete(slug):
+    data = sc.load_raw_words()
+    data["books"] = [b for b in data["books"] if b.get("slug") != slug]
+    sc.save_words(data)
+    flash("단어장을 지웠습니다.", "ok")
+    return redirect(url_for("admin.words_list"))
+
+
+# ---------------------------------------------------------------------------
 # 공지
 # ---------------------------------------------------------------------------
 # ---------------------------------------------------------------------------
@@ -1354,14 +1465,15 @@ def settings():
     pass_cfg["note"] = sc.clean(f.get("pass_note"), 500)
     pass_cfg["preorder_discount"] = max(0, sc.to_int(f.get("pass_preorder_discount"), 0))
     plans = []
-    for name, price, per, period, early, badge, desc in zip(
+    for name, price, per, period, quota, early, badge, desc in zip(
             f.getlist("plan_name"), f.getlist("plan_price"), f.getlist("plan_per_month"),
-            f.getlist("plan_period"), f.getlist("plan_early"),
+            f.getlist("plan_period"), f.getlist("plan_passages"), f.getlist("plan_early"),
             f.getlist("plan_badge"), f.getlist("plan_desc")):
         if not sc.clean(name, 40):
             continue
         plan = {"name": sc.clean(name, 40), "price": sc.to_int(price, 0),
                 "per_month": sc.to_int(per, 0), "period": sc.clean(period, 30),
+                "passages": max(0, sc.to_int(quota, 0)),
                 "early": early == "1", "desc": sc.clean(desc, 200)}
         if sc.clean(badge, 20):
             plan["badge"] = sc.clean(badge, 20)

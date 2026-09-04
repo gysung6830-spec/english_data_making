@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}단어 시험지 만들기 · {{ site.brand }}{% endblock %}
+{% block desc %}교재 단어를 강 단위로 골라 단어 시험지를 그 자리에서 뽑으실 수 있습니다. 무료입니다.{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">무료</span>
+      <h2>단어 시험지 만들기</h2>
+      <p>교재를 고르고 <b>강 단위로 범위를 잡으면</b> 그 자리에서 시험지가 나옵니다.
+        유형과 문항 수는 원하시는 대로 고르실 수 있고, <b>정답지도 함께</b> 나옵니다.
+        회원가입도 결제도 없습니다.</p>
+    </div>
+
+    {% if books %}
+      <div class="grid grid-3">
+        {% for b in books %}
+          <a class="wb-card" href="{{ url_for('words_book', slug=b.slug) }}">
+            <span class="wb-pub">{{ b.publisher or '단어장' }}</span>
+            <b>{{ b.name }}</b>
+            <span class="wb-meta">
+              {% if b.grade %}<span class="chip">{{ b.grade }}</span>{% endif %}
+              <span class="chip">{{ b['units']|length }}강</span>
+              <span class="chip">단어 {{ '{:,}'.format(b.words_total) }}개</span>
+            </span>
+            <span class="wb-go">시험지 만들기 →</span>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="card center">
+        <p class="mb-0">단어장을 준비하고 있습니다. 곧 올라옵니다.<br>
+          먼저 <a href="{{ url_for('free') }}"><b>무료 자료</b></a>를 받아 보세요.</p>
+      </div>
+    {% endif %}
+
+    <div class="alert alert-info" style="margin-top:26px;">
+      <b>찾으시는 교재가 없나요?</b>
+      <a href="{{ url_for('custom') }}">교재 이름만 적어</a> 두시면 단어를 넣어 두고 알려 드리겠습니다.
+    </div>
+  </div>
+</section>
+{% endblock %}

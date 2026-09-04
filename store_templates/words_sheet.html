@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}{{ b.name }} 단어 시험 · {{ site.brand }}{% endblock %}
+{% block jsonld %}<meta name="robots" content="noindex, nofollow">{% endblock %}
+
+{% block body %}
+<section class="section no-print">
+  <div class="wrap narrow">
+    <a class="back-link" href="{{ url_for('words_book', slug=b.slug) }}">← 범위 다시 고르기</a>
+    <div class="section-head">
+      <h2>시험지가 만들어졌습니다</h2>
+      <p>{{ unit_names|join(' · ') }} · {{ quiz|length }}문항
+        {% if pool > quiz|length %}<span class="muted">(고른 범위의 단어 {{ pool }}개 중)</span>{% endif %}
+        <br><b>인쇄</b>를 누르면 학생용과 정답지가 이어서 나옵니다.
+        PDF 로 남기시려면 인쇄 창에서 <b>대상을 'PDF로 저장'</b>으로 바꾸세요.</p>
+    </div>
+    <div class="hero-actions">
+      <button type="button" class="btn btn-primary" onclick="window.print()">인쇄 · PDF로 저장</button>
+      <a class="btn btn-ghost" href="{{ again_url }}">다른 문제로 다시</a>
+    </div>
+    <p class="muted" style="margin-top:14px;font-size:13.5px;">
+      이 주소를 그대로 저장해 두시면 <b>똑같은 시험지</b>가 다시 나옵니다. (시험지 번호 {{ seed }})</p>
+  </div>
+</section>
+
+{# ================= 학생용 ================= #}
+<article class="sheet">
+  <header class="sheet-head">
+    <div>
+      <h1>{{ b.name }} 단어 시험</h1>
+      <p>{{ unit_names|join(' · ') }} · {{ quiz|length }}문항</p>
+    </div>
+    <div class="sheet-fill">
+      <span>이름 <i></i></span>
+      <span>점수 <i></i></span>
+    </div>
+  </header>
+
+  <ol class="qlist">
+    {% for q in quiz %}
+      <li class="q q-{{ q.kind }}">
+        {% if q.kind == 'en_ko' %}
+          <span class="q-ask">{{ q.en }}</span><span class="q-blank"></span>
+        {% elif q.kind == 'ko_en' %}
+          <span class="q-ask">{{ q.ko }}</span><span class="q-blank"></span>
+        {% else %}
+          <span class="q-ask">{{ q.en }}</span>
+          <ol class="q-choices">
+            {% for c in q.choices %}<li>{{ c }}</li>{% endfor %}
+          </ol>
+          <span class="q-pick">(&nbsp;&nbsp;&nbsp;&nbsp;)</span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+  <footer class="sheet-foot">{{ site.brand }} · 시험지 번호 {{ seed }}</footer>
+</article>
+
+{# ================= 정답지 — 학생용 빈칸을 채운 판 ================= #}
+<article class="sheet answer">
+  <header class="sheet-head">
+    <div>
+      <h1>{{ b.name }} 단어 시험 <span class="ans-tag">정답</span></h1>
+      <p>{{ unit_names|join(' · ') }} · {{ quiz|length }}문항</p>
+    </div>
+    <div class="sheet-fill"><span>이름 <i></i></span><span>점수 <i></i></span></div>
+  </header>
+
+  <ol class="qlist">
+    {% for q in quiz %}
+      <li class="q q-{{ q.kind }}">
+        {% if q.kind == 'en_ko' %}
+          <span class="q-ask">{{ q.en }}</span><span class="q-blank filled">{{ q.ko }}</span>
+        {% elif q.kind == 'ko_en' %}
+          <span class="q-ask">{{ q.ko }}</span><span class="q-blank filled">{{ q.en }}</span>
+        {% else %}
+          <span class="q-ask">{{ q.en }}</span>
+          <ol class="q-choices">
+            {% for c in q.choices %}
+              <li class="{{ 'right' if loop.index == q.answer_no }}">{{ c }}</li>
+            {% endfor %}
+          </ol>
+          <span class="q-pick filled">({{ q.answer_no }})</span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+  <footer class="sheet-foot">{{ site.brand }} · 시험지 번호 {{ seed }}</footer>
+</article>
+{% endblock %}

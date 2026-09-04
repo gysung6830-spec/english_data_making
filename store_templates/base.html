@@ -39,7 +39,9 @@
     <nav class="nav" id="main-nav">
       <a href="{{ url_for('free') }}" class="nav-free {{ 'on' if request.endpoint in ['free','free_detail','samples'] }}">무료 자료</a>
       <a href="{{ url_for('products') }}" class="{{ 'on' if request.endpoint in ['products','product_detail','book_detail'] }}">자료 목록</a>
-      <a href="{{ url_for('lineup') }}" class="{{ 'on' if request.endpoint == 'lineup' }}">오르티카 라인업</a>
+      <a href="{{ url_for('words_page') }}" class="{{ 'on' if request.endpoint in ['words_page','words_book','words_sheet'] }}">단어 시험지</a>
+      <a href="{{ url_for('words_page') }}" class="{{ 'on' if request.endpoint in ['words_page','words_book','words_sheet'] }}">단어 시험지</a>
+    <a href="{{ url_for('lineup') }}" class="{{ 'on' if request.endpoint == 'lineup' }}">오르티카 라인업</a>
       {% if passcfg.enabled %}
         <a href="{{ url_for('pass_page') }}" class="{{ 'on' if request.endpoint == 'pass_page' }}">프리패스</a>
       {% endif %}

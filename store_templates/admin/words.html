@@ -1,0 +1,72 @@
+{% extends "admin/base.html" %}
+{% block title %}단어장{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <h1>단어장</h1>
+  <p>교재 단어를 강 단위로 담아 두면, 손님이 범위를 골라 <b>단어 시험지</b>를 뽑아 갑니다.</p>
+</div>
+
+<div class="steps-help">
+  <b>단어 시험지는 미끼입니다</b>
+  <ol>
+    <li>시험지를 뽑으러 왔다가 그 교재의 <b>지문분석지·워크북</b>을 보고 가시게 됩니다.</li>
+    <li>그래서 무료로 열어 두었습니다. 결제도 회원가입도 없습니다.</li>
+    <li>단어는 <b>붙여넣기 한 번</b>으로 들어갑니다. 엑셀에서 복사해 오시면 됩니다.</li>
+  </ol>
+</div>
+
+<div class="panel">
+  <h2>단어장 만들기</h2>
+  <form method="post" action="{{ url_for('admin.words_new') }}">
+    <div class="form-grid">
+      <div class="adm-field">
+        <label for="slug">주소 이름</label>
+        <input type="text" id="slug" name="slug" placeholder="ebs-2026-tokgang-eng" required>
+        <div class="tip">영문 소문자·숫자·하이픈. 주소에 들어갑니다.</div>
+      </div>
+      <div class="adm-field">
+        <label for="name">단어장 이름</label>
+        <input type="text" id="name" name="name" placeholder="2026 수능특강 영어" required>
+      </div>
+      <div class="adm-field">
+        <label for="publisher">출판사 · 분류</label>
+        <input type="text" id="publisher" name="publisher" placeholder="EBS">
+      </div>
+      <div class="adm-field">
+        <label for="grade">학년</label>
+        <input type="text" id="grade" name="grade" placeholder="고3">
+      </div>
+    </div>
+    <div class="form-actions"><button type="submit" class="btn btn-primary">만들기</button></div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>단어장 {{ books|length }}권</h2>
+  {% if books %}
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th>이름</th><th>학년</th><th>강</th><th>단어</th><th>상태</th><th></th></tr></thead>
+        <tbody>
+        {% for b in books %}
+          <tr>
+            <td><b>{{ b.name }}</b>
+              {% if b.publisher %}<br><small class="muted">{{ b.publisher }}</small>{% endif %}</td>
+            <td>{{ b.grade or '-' }}</td>
+            <td>{{ b['units']|length }}강</td>
+            <td>{{ '{:,}'.format(counts[b.slug]) }}개</td>
+            <td>{% if b.get('active', True) %}<span class="tag tag-on">보임</span>
+                {% else %}<span class="tag tag-off">숨김</span>{% endif %}</td>
+            <td><a class="btn btn-ghost btn-sm"
+                   href="{{ url_for('admin.words_book', slug=b.slug) }}">단어 넣기</a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="hint">아직 단어장이 없습니다. 위에서 하나 만들어 보세요.</div>
+  {% endif %}
+</div>
+{% endblock %}

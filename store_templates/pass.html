@@ -31,8 +31,12 @@
           {% else %}
             <div class="plan-price">{{ pl.price|won }}</div>
           {% endif %}
+          {% if pl.passages %}
+            <div class="plan-quota"><b>지문 {{ '{:,}'.format(pl.passages) }}개</b>까지 골라 받기</div>
+          {% endif %}
           <div class="plan-per">
-            {{ pl.period }} · 월 {{ pl.per_month_now|won }} 꼴
+            {{ pl.period }} · 월 {{ pl.per_month_now|won }} 꼴{% if pl.passages %}
+              · 지문당 {{ (pl.now // pl.passages)|won }}{% endif %}
           </div>
           <p class="plan-desc">{{ pl.desc }}</p>
           <a class="btn {{ 'btn-primary' if pl.badge else 'btn-ghost' }} btn-block"
@@ -97,7 +101,7 @@
                 <label class="check">
                   <input type="radio" name="plan" id="plan-{{ loop.index }}" value="{{ pl.name }}"
                          {{ 'checked' if form.plan == pl.name or (not form.plan and pl.badge) }}>
-                  <span>{{ pl.name }} · {{ pl.now|won }}{% if pl.now < pl.price %}
+                  <span>{{ pl.name }}{% if pl.passages %} · 지문 {{ '{:,}'.format(pl.passages) }}개{% endif %} · {{ pl.now|won }}{% if pl.now < pl.price %}
                     <small class="muted">(정가 {{ pl.price|won }})</small>{% endif %}</span>
                 </label>
               {% endfor %}

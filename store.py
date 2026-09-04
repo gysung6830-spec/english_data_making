@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import io
 import json
+import random
 import os
 import secrets
 from datetime import timedelta
@@ -1049,6 +1050,102 @@ def lineup_shot(mid, filename):
 
 
 # ---------------------------------------------------------------------------
+# 단어 시험지 — 범위와 유형을 골라 그 자리에서 뽑습니다 (무료)
+# ---------------------------------------------------------------------------
+QUIZ_MAX = 100          # 한 장에 넣을 수 있는 최대 문항 수
+
+
+def picked_words(book: dict, unit_ids: list[str]) -> list[dict]:
+    """고른 강의 단어를 한 줄로 모읍니다. 같은 단어가 겹치면 한 번만 넣습니다."""
+    seen, out = set(), []
+    for unit in book.get("units", []):
+        if unit.get("id") not in unit_ids:
+            continue
+        for w in unit.get("words") or []:
+            key = (w.get("en", "").lower(), w.get("ko", ""))
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append({**w, "unit": unit.get("name") or unit.get("id")})
+    return out
+
+
+def build_quiz(words: list[dict], kinds: list[str], count: int, seed: int) -> list[dict]:
+    """문제를 만듭니다. 씨앗(seed)이 같으면 같은 시험지가 나옵니다.
+
+    같은 범위로 여러 장을 뽑아 반마다 다르게 내실 수 있도록, 씨앗을 주소에 남깁니다.
+    """
+    rng = random.Random(seed)
+    pool = list(words)
+    rng.shuffle(pool)
+    pool = pool[:count]
+
+    quiz = []
+    for i, w in enumerate(pool, 1):
+        kind = kinds[(i - 1) % len(kinds)] if len(kinds) > 1 else kinds[0]
+        item = {"no": i, "kind": kind, "en": w["en"], "ko": w["ko"], "unit": w.get("unit", "")}
+        if kind == "choice":
+            # 보기 다섯 개 — 정답 하나와, 다른 단어의 뜻 넷
+            others = [x["ko"] for x in words if x["ko"] != w["ko"]]
+            rng.shuffle(others)
+            picks = [w["ko"]] + others[:4]
+            rng.shuffle(picks)
+            item["choices"] = picks
+            item["answer_no"] = picks.index(w["ko"]) + 1
+        quiz.append(item)
+    return quiz
+
+
+@app.route("/words")
+def words_page():
+    """단어 시험지 만들기 — 단어장 고르기."""
+    data = sc.load_words()
+    return render_template("words.html", books=data["books"], intro=data.get("intro", {}),
+                           kinds=sc.QUIZ_KINDS)
+
+
+@app.route("/words/<slug>")
+def words_book(slug):
+    """강을 고르고 유형·문항 수를 정하는 화면."""
+    book = sc.find_wordbook(slug)
+    if book is None:
+        abort(404)
+    return render_template("words_book.html", b=book, kinds=sc.QUIZ_KINDS,
+                           total=sc.word_count(book))
+
+
+@app.route("/words/<slug>/sheet")
+def words_sheet(slug):
+    """만들어진 시험지. 이 주소를 그대로 인쇄하시면 됩니다."""
+    book = sc.find_wordbook(slug)
+    if book is None:
+        abort(404)
+
+    unit_ids = [u for u in request.args.getlist("unit")
+                if u in {x.get("id") for x in book["units"]}]
+    if not unit_ids:
+        unit_ids = [book["units"][0]["id"]]
+    kinds = [k for k in request.args.getlist("kind") if k in sc.QUIZ_KINDS] or ["en_ko"]
+
+    words = picked_words(book, unit_ids)
+    if not words:
+        abort(404)
+    count = min(sc.to_int(request.args.get("count"), 20) or 20, QUIZ_MAX, len(words))
+    # 객관식은 보기를 채울 단어가 다섯 개는 있어야 합니다
+    if "choice" in kinds and len(words) < 5:
+        kinds = [k for k in kinds if k != "choice"] or ["en_ko"]
+    seed = sc.to_int(request.args.get("seed"), 0) or random.randrange(1, 999999)
+
+    quiz = build_quiz(words, kinds, count, seed)
+    unit_names = [u.get("name") or u.get("id") for u in book["units"] if u["id"] in unit_ids]
+    # '다른 문제로 다시' — 같은 범위·유형에 시험지 번호만 새로 뽑습니다
+    again = url_for("words_sheet", slug=slug, unit=unit_ids, kind=kinds, count=count)
+    return render_template("words_sheet.html", b=book, quiz=quiz, seed=seed,
+                           unit_names=unit_names, kinds=kinds, kind_labels=sc.QUIZ_KINDS,
+                           again_url=again, pool=len(words))
+
+
+# ---------------------------------------------------------------------------
 # 내 자료함 — 받은 자료를 한 곳에서 다시 받고 인쇄
 # ---------------------------------------------------------------------------
 def locker_rows(email: str):
@@ -1202,7 +1299,10 @@ def sitemap():
             url_for("products", _external=True), url_for("samples", _external=True),
             url_for("notice", _external=True), url_for("guide", _external=True),
             url_for("custom", _external=True), url_for("submit", _external=True),
-            url_for("contact", _external=True), url_for("my_page", _external=True)]
+            url_for("contact", _external=True), url_for("my_page", _external=True),
+            url_for("words_page", _external=True)]
+    urls += [url_for("words_book", slug=b["slug"], _external=True)
+             for b in sc.load_words()["books"]]
     urls += [url_for("free_detail", slug=x["slug"], _external=True)
              for x in sc.load_freebies()["items"]]
     urls += [url_for("book_detail", slug=b["slug"], _external=True) for b in catalog["books"]]

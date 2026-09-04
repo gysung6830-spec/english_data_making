@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}{{ b.name }} 단어 시험지 · {{ site.brand }}{% endblock %}
+{% block desc %}{{ b.name }} 단어를 강 단위로 골라 시험지를 뽑으실 수 있습니다.{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap narrow">
+    <a class="back-link" href="{{ url_for('words_page') }}">← 단어장 목록</a>
+    <div class="section-head">
+      <h2>{{ b.name }}</h2>
+      <p>{{ b['units']|length }}강 · 단어 {{ '{:,}'.format(total) }}개.
+        범위와 유형을 고르시면 시험지와 정답지가 함께 나옵니다.</p>
+    </div>
+
+    <form class="form-card" method="get" action="{{ url_for('words_sheet', slug=b.slug) }}">
+
+      <div class="field">
+        <label>1. 범위 고르기<span class="req">*</span>
+          <span class="hint">여러 강을 함께 고르시면 섞어서 냅니다</span></label>
+        <div class="unit-pick">
+          {% for u in b['units'] %}
+            <label class="unit">
+              <input type="checkbox" name="unit" value="{{ u.id }}" {{ 'checked' if loop.first }}>
+              <span><b>{{ u.name or u.id }}</b><small>{{ u['words']|length }}개</small></span>
+            </label>
+          {% endfor %}
+        </div>
+        <div class="unit-all">
+          <button type="button" class="btn btn-ghost btn-sm" data-all="1">전체 고르기</button>
+          <button type="button" class="btn btn-ghost btn-sm" data-all="0">전체 풀기</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>2. 문제 유형<span class="req">*</span>
+          <span class="hint">두 가지 이상 고르시면 번갈아 냅니다</span></label>
+        <div class="check-grid col">
+          {% for k, label in kinds.items() %}
+            <label class="check">
+              <input type="checkbox" name="kind" value="{{ k }}" {{ 'checked' if loop.first }}>
+              <span>{{ label }}</span>
+            </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="count">3. 문항 수</label>
+        <select id="count" name="count">
+          {% for n in [10, 20, 25, 30, 40, 50, 100] %}
+            <option value="{{ n }}" {{ 'selected' if n == 20 }}>{{ n }}문항</option>
+          {% endfor %}
+        </select>
+        <div class="hint">고른 범위에 단어가 모자라면 있는 만큼만 냅니다.</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">시험지 만들기</button>
+      <p class="muted" style="margin-top:14px;font-size:13.5px;">
+        같은 범위로 여러 번 누르시면 <b>매번 다른 시험지</b>가 나옵니다. 반마다 다르게 내실 수 있습니다.</p>
+    </form>
+  </div>
+</section>
+
+<script>
+(function () {
+  var form = document.querySelector('.form-card');
+  if (!form) return;
+  form.querySelectorAll('[data-all]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var on = btn.dataset.all === '1';
+      form.querySelectorAll('input[name=unit]').forEach(function (c) { c.checked = on; });
+    });
+  });
+  // 범위나 유형을 하나도 안 고르고 보내면 빈 시험지가 됩니다. 여기서 막습니다.
+  form.addEventListener('submit', function (e) {
+    var units = form.querySelectorAll('input[name=unit]:checked').length;
+    var kinds = form.querySelectorAll('input[name=kind]:checked').length;
+    if (!units || !kinds) {
+      e.preventDefault();
+      alert(!units ? '범위를 한 강 이상 골라 주세요.' : '문제 유형을 하나 이상 골라 주세요.');
+    }
+  });
+})();
+</script>
+{% endblock %}

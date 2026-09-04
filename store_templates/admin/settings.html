@@ -413,7 +413,7 @@
     짧은 요금제까지 같은 금액을 깎으면 한 달만 끊어 전부 내려받고 끝내는 쪽이 이득이 되어 버립니다.</div>
   <div class="wrapbox">
     <table class="adm-table">
-      <thead><tr><th>이름</th><th>가격</th><th>월 환산</th><th>기간</th><th>사전 할인</th>
+      <thead><tr><th>이름</th><th>가격</th><th>월 환산</th><th>기간</th><th>지문 수</th><th>사전 할인</th>
         <th>배지</th><th>설명</th></tr></thead>
       <tbody>
       {% for pl in (s['pass'].get('plans', []) + [{}]) %}
@@ -422,6 +422,8 @@
           <td><input type="number" name="plan_price" value="{{ pl.get('price','') }}" style="width:100px;"></td>
           <td><input type="number" name="plan_per_month" value="{{ pl.get('per_month','') }}" style="width:100px;"></td>
           <td><input type="text" name="plan_period" value="{{ pl.get('period','') }}" style="width:80px;"></td>
+          <td><input type="number" name="plan_passages" min="0" step="10"
+                     value="{{ pl.get('passages','') }}" style="width:90px;"></td>
           <td>
             <select name="plan_early" style="width:80px;">
               <option value="">안 함</option>

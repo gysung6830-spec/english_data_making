@@ -181,6 +181,87 @@ def grouped_materials() -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
+# 단어 시험지 — 교재 단어를 강(unit) 단위로 담아 두고, 손님이 골라 뽑습니다
+# ---------------------------------------------------------------------------
+WORDS_FALLBACK = {"intro": {}, "books": []}
+
+# 시험지에 넣을 수 있는 문제 유형
+QUIZ_KINDS = {
+    "en_ko": "영어 → 뜻 쓰기",
+    "ko_en": "뜻 → 영어 쓰기",
+    "choice": "객관식 5지선다",
+}
+
+
+def load_raw_words() -> dict:
+    """숨긴 단어장까지 전부. 관리자 화면에서 씁니다."""
+    data = load_json("words.json", WORDS_FALLBACK)
+    data.setdefault("books", [])
+    data.setdefault("intro", {})
+    for book in data["books"]:
+        book.setdefault("units", [])
+        for unit in book["units"]:
+            unit.setdefault("words", [])
+    return data
+
+
+def load_words() -> dict:
+    """고객 화면용 — 숨긴 단어장과 단어가 없는 강은 뺍니다."""
+    data = load_raw_words()
+    books = []
+    for book in data["books"]:
+        if not book.get("active", True):
+            continue
+        units = [u for u in book["units"] if u.get("words")]
+        if units:
+            total = sum(len(u["words"]) for u in units)
+            books.append({**book, "units": units, "words_total": total})
+    data["books"] = sorted(books, key=lambda b: (b.get("sort", 100), b.get("name", "")))
+    return data
+
+
+def save_words(data: dict) -> None:
+    save_json("words.json", data)
+
+
+def find_wordbook(slug: str, raw: bool = False) -> dict | None:
+    data = load_raw_words() if raw else load_words()
+    return next((b for b in data["books"] if b.get("slug") == slug), None)
+
+
+def word_count(book: dict) -> int:
+    return sum(len(u.get("words") or []) for u in book.get("units") or [])
+
+
+def parse_words(text: str, limit: int = 3000) -> tuple[list[dict], list[str]]:
+    """붙여넣은 단어 목록을 읽습니다. 한 줄에 하나, 영어와 뜻을 탭·쉼표·= 로 나눕니다.
+
+    예)  retain    유지하다
+         intensity, 강도
+         vary = 다르다, 달라지다        ← 뜻 안의 쉼표는 그대로 둡니다
+    """
+    out, bad = [], []
+    for line_no, raw in enumerate(text.replace("\r", "").split("\n"), 1):
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        for sep in ("\t", " = ", "=", ",", "|"):
+            if sep in line:
+                en, _, ko = line.partition(sep)
+                break
+        else:
+            en, ko = line, ""
+        en, ko = clean(en, 80), clean(ko, 200)
+        if not en or not ko:
+            bad.append(f"{line_no}번째 줄: {line[:40]}")
+            continue
+        out.append({"en": en, "ko": ko})
+        if len(out) >= limit:
+            break
+    return out, bad
+
+
+# ---------------------------------------------------------------------------
 # 무료 자료실 — 회차마다 뿌리는 자료 (한줄해석 · 한줄영어 · 좌지문우해석 · 직독직해)
 # ---------------------------------------------------------------------------
 FREE_KINDS = {
