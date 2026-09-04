@@ -54,9 +54,15 @@
         <div class="hint">고른 범위에 단어가 모자라면 있는 만큼만 냅니다.</div>
       </div>
 
-      <button type="submit" class="btn btn-primary btn-block">시험지 만들기</button>
+      <button type="submit" class="btn btn-primary btn-block">무작위로 시험지 만들기</button>
       <p class="muted" style="margin-top:14px;font-size:13.5px;">
         같은 범위로 여러 번 누르시면 <b>매번 다른 시험지</b>가 나옵니다. 반마다 다르게 내실 수 있습니다.</p>
+
+      <div class="pick-split">
+        <span>낼 단어를 직접 고르고 싶으시면</span>
+        <button type="submit" class="btn btn-ghost" formaction="{{ url_for('words_pick', slug=b.slug) }}">
+          단어 하나하나 골라서 만들기</button>
+      </div>
     </form>
   </div>
 </section>

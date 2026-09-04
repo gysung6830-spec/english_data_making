@@ -1055,6 +1055,20 @@ def lineup_shot(mid, filename):
 QUIZ_MAX = 100          # 한 장에 넣을 수 있는 최대 문항 수
 
 
+def flat_words(book: dict) -> list[dict]:
+    """교재의 단어를 한 줄로 펴고, 번호를 붙입니다.
+
+    손님이 고른 단어를 주소에 담을 때 이 번호를 씁니다. 강 안에서의 순서가 아니라
+    교재 전체에서의 순서라, 강을 여럿 골라도 번호가 겹치지 않습니다.
+    """
+    out = []
+    for unit in book.get("units", []):
+        for w in unit.get("words") or []:
+            out.append({**w, "unit": unit.get("name") or unit.get("id"),
+                        "unit_id": unit.get("id"), "no": len(out)})
+    return out
+
+
 def picked_words(book: dict, unit_ids: list[str]) -> list[dict]:
     """고른 강의 단어를 한 줄로 모읍니다. 같은 단어가 겹치면 한 번만 넣습니다."""
     seen, out = set(), []
@@ -1114,6 +1128,24 @@ def words_book(slug):
                            total=sc.word_count(book))
 
 
+@app.route("/words/<slug>/pick")
+def words_pick(slug):
+    """단어를 하나하나 골라 담는 화면. 빼고 싶은 것만 체크를 풀면 됩니다."""
+    book = sc.find_wordbook(slug)
+    if book is None:
+        abort(404)
+    unit_ids = [u for u in request.args.getlist("unit")
+                if u in {x.get("id") for x in book["units"]}]
+    if not unit_ids:
+        unit_ids = [u["id"] for u in book["units"]]
+    rows = [w for w in flat_words(book) if w["unit_id"] in unit_ids]
+    if not rows:
+        abort(404)
+    return render_template("words_pick.html", b=book, rows=rows, kinds=sc.QUIZ_KINDS,
+                           unit_ids=unit_ids,
+                           units=[u for u in book["units"] if u["id"] in unit_ids])
+
+
 @app.route("/words/<slug>/sheet")
 def words_sheet(slug):
     """만들어진 시험지. 이 주소를 그대로 인쇄하시면 됩니다."""
@@ -1127,10 +1159,18 @@ def words_sheet(slug):
         unit_ids = [book["units"][0]["id"]]
     kinds = [k for k in request.args.getlist("kind") if k in sc.QUIZ_KINDS] or ["en_ko"]
 
-    words = picked_words(book, unit_ids)
+    picked = [sc.to_int(x, -1) for x in request.args.getlist("pick")]
+    if picked:
+        # 손님이 단어를 하나하나 골랐습니다. 고른 것만, 고른 만큼 냅니다.
+        flat = flat_words(book)
+        words = [flat[i] for i in picked if 0 <= i < len(flat)]
+        unit_ids = sorted({w["unit_id"] for w in words})
+    else:
+        words = picked_words(book, unit_ids)
     if not words:
         abort(404)
-    count = min(sc.to_int(request.args.get("count"), 20) or 20, QUIZ_MAX, len(words))
+    want = sc.to_int(request.args.get("count"), 0) or len(words)
+    count = min(want, QUIZ_MAX, len(words))
     # 객관식은 보기를 채울 단어가 다섯 개는 있어야 합니다
     if "choice" in kinds and len(words) < 5:
         kinds = [k for k in kinds if k != "choice"] or ["en_ko"]

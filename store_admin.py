@@ -1082,6 +1082,40 @@ def words_book(slug):
                            total=sc.word_count(book))
 
 
+@admin_bp.route("/words/<slug>/upload", methods=["POST"])
+def words_upload(slug):
+    """엑셀 · CSV · PDF 를 올리면 읽어서 미리보기로 넘깁니다.
+
+    바로 저장하지 않습니다. 파일마다 모양이 달라 잘못 읽히는 줄이 있게 마련이라,
+    사람이 눈으로 확인하고 고친 뒤 저장하도록 한 단계를 둡니다.
+    """
+    data = sc.load_raw_words()
+    book = next((b for b in data["books"] if b.get("slug") == slug), None)
+    if book is None:
+        abort(404)
+
+    upload = request.files.get("file")
+    if not upload or not upload.filename:
+        flash("올릴 파일을 골라 주세요.", "err")
+        return redirect(url_for("admin.words_book", slug=slug))
+    name = os.path.basename(upload.filename).replace("\\", "")
+    if os.path.splitext(name)[1].lower() not in sc.WORD_FILE_EXTS:
+        flash(f"'{name}' 은 올릴 수 없는 형식입니다. 엑셀·CSV·PDF·텍스트만 됩니다.", "err")
+        return redirect(url_for("admin.words_book", slug=slug))
+
+    text, note = sc.read_wordfile(name, upload.read())
+    if not text.strip():
+        flash(note or "파일에서 단어를 찾지 못했습니다.", "err")
+        return redirect(url_for("admin.words_book", slug=slug))
+
+    words, bad = sc.parse_words(text)
+    return render_template("admin/words_preview.html", b=book, note=note, file_name=name,
+                           text="\n".join(f"{w['en']}\t{w['ko']}" for w in words),
+                           found=len(words), bad=bad,
+                           unit_id=sc.clean(request.form.get("unit_id"), 20),
+                           unit_name=sc.clean(request.form.get("unit_name"), 60))
+
+
 @admin_bp.route("/words/<slug>/unit", methods=["POST"])
 def words_unit_save(slug):
     """강 하나에 단어를 붙여 넣습니다. 있으면 덮어쓰고, 없으면 새로 만듭니다."""

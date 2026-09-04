@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}{{ b.name }} 단어 고르기 · {{ site.brand }}{% endblock %}
+{% block desc %}{{ b.name }} 단어를 하나하나 골라 시험지를 만드실 수 있습니다.{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap">
+    <a class="back-link" href="{{ url_for('words_book', slug=b.slug) }}">← 범위 다시 고르기</a>
+    <div class="section-head">
+      <h2>낼 단어 고르기</h2>
+      <p>{{ units | map(attribute='name') | join(' · ') }} · 단어 {{ rows|length }}개.
+        <b>전부 골라 두었습니다.</b> 빼고 싶은 단어만 체크를 풀어 주세요.</p>
+    </div>
+
+    <form method="get" action="{{ url_for('words_sheet', slug=b.slug) }}" id="pickform">
+      <div class="pick-bar">
+        <div class="pb-count"><b><span id="picked">{{ rows|length }}</span></b> / {{ rows|length }}개 골랐습니다</div>
+        <div class="pb-acts">
+          <button type="button" class="btn btn-ghost btn-sm" data-all="1">전체 고르기</button>
+          <button type="button" class="btn btn-ghost btn-sm" data-all="0">전체 풀기</button>
+        </div>
+      </div>
+
+      {% for u in units %}
+        <div class="pick-unit">
+          <div class="pu-head">
+            <b>{{ u.name or u.id }}</b>
+            <button type="button" class="btn btn-ghost btn-sm" data-unit="{{ u.id }}">이 강만 뒤집기</button>
+          </div>
+          <div class="pick-grid">
+            {% for w in rows if w.unit_id == u.id %}
+              <label class="pw">
+                <input type="checkbox" name="pick" value="{{ w.no }}" data-u="{{ u.id }}" checked>
+                <span><b>{{ w.en }}</b><small>{{ w.ko }}</small></span>
+              </label>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+
+      <div class="pick-foot">
+        <div class="field">
+          <label>문제 유형<span class="req">*</span></label>
+          <div class="check-grid col">
+            {% for k, label in kinds.items() %}
+              <label class="check">
+                <input type="checkbox" name="kind" value="{{ k }}" {{ 'checked' if loop.first }}>
+                <span>{{ label }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="field">
+          <label for="count">문항 수</label>
+          <select id="count" name="count">
+            <option value="0" selected>고른 단어 전부</option>
+            {% for n in [10, 20, 25, 30, 40, 50] %}<option value="{{ n }}">{{ n }}문항</option>{% endfor %}
+          </select>
+          <div class="hint">고른 단어보다 적게 정하시면 그중에서 무작위로 뽑습니다.</div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">시험지 만들기</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+(function () {
+  var form = document.getElementById('pickform');
+  if (!form) return;
+  var boxes = form.querySelectorAll('input[name=pick]');
+  var out = document.getElementById('picked');
+
+  function tally() { out.textContent = form.querySelectorAll('input[name=pick]:checked').length; }
+  boxes.forEach(function (b) { b.addEventListener('change', tally); });
+
+  form.querySelectorAll('[data-all]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var on = btn.dataset.all === '1';
+      boxes.forEach(function (b) { b.checked = on; });
+      tally();
+    });
+  });
+  form.querySelectorAll('[data-unit]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      form.querySelectorAll('input[data-u="' + btn.dataset.unit + '"]').forEach(function (b) {
+        b.checked = !b.checked;
+      });
+      tally();
+    });
+  });
+  form.addEventListener('submit', function (e) {
+    if (!form.querySelectorAll('input[name=pick]:checked').length) {
+      e.preventDefault(); alert('단어를 하나 이상 골라 주세요.');
+    } else if (!form.querySelectorAll('input[name=kind]:checked').length) {
+      e.preventDefault(); alert('문제 유형을 하나 이상 골라 주세요.');
+    }
+  });
+  tally();
+})();
+</script>
+{% endblock %}

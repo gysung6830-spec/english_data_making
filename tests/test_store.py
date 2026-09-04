@@ -973,9 +973,69 @@ def test_word_quiz():
     tiny = body(client().get("/words/quiz-test-book/sheet?unit=02&kind=choice&count=5"))
     assert 'class="q-choices"' not in tiny
 
+    # ---- 손님이 단어를 하나하나 골라서 ----------------------------------
+    pick = body(client().get("/words/quiz-test-book/pick?unit=01"))
+    assert "낼 단어 고르기" in pick
+    assert pick.count('name="pick"') == 12          # 12개가 다 체크된 채로 나옵니다
+    assert 'checked' in pick
+    chosen = "&".join(f"pick={i}" for i in (0, 2, 4, 6))
+    only = body(client().get(f"/words/quiz-test-book/sheet?{chosen}&kind=en_ko&count=0"))
+    assert only.count('class="q q-') == 8            # 고른 4개 × 2장
+    # 고른 것보다 적게 정하면 그중에서 뽑습니다
+    few = body(client().get(f"/words/quiz-test-book/sheet?{chosen}&kind=en_ko&count=2"))
+    assert few.count('class="q q-') == 4
+
     a.post("/admin/words/quiz-test-book/delete", follow_redirects=True)
     assert "시험용 단어장" not in body(client().get("/words"))
-    print("PASS  단어 시험지 — 붙여넣기 → 범위·유형 고르기 → 학생용 + 정답지")
+    print("PASS  단어 시험지 — 붙여넣기 → 범위·유형 · 단어 골라서 → 학생용 + 정답지")
+
+
+def test_word_file_upload():
+    """단어를 엑셀·CSV·PDF 파일로 올리면, 읽은 내용을 보여 준 뒤에 저장합니다."""
+    import io as _io
+    a = admin()
+    a.post("/admin/words/new", data={"slug": "file-test-book", "name": "파일 단어장"},
+           follow_redirects=True)
+
+    # 엑셀 — 첫 줄 머리글은 알아서 뺍니다
+    import openpyxl
+    wb = openpyxl.Workbook(); ws = wb.active
+    ws.append(["영어", "뜻"])
+    for en, ko in [("retain", "유지하다"), ("vary", "다르다, 달라지다"), ("seek", "추구하다")]:
+        ws.append([en, ko])
+    buf = _io.BytesIO(); wb.save(buf)
+    r = a.post("/admin/words/file-test-book/upload",
+               data={"unit_id": "01", "unit_name": "1강",
+                     "file": (_io.BytesIO(buf.getvalue()), "단어.xlsx")},
+               content_type="multipart/form-data")
+    page = body(r)
+    assert "읽은 내용을 확인해 주세요" in page
+    assert "단어 3개" in page                      # 머리글 한 줄이 빠졌습니다
+    assert "retain\t유지하다" in page
+    assert "영어\t뜻" not in page
+    # 아직 저장 전입니다
+    assert sc.word_count(sc.find_wordbook("file-test-book", raw=True)) == 0
+
+    # CSV 도 같은 길로
+    csv = "영어,뜻\nintensity,강도\nsolo,혼자\n".encode("utf-8-sig")
+    assert "단어 2개" in body(a.post("/admin/words/file-test-book/upload",
+        data={"unit_id": "02", "file": (_io.BytesIO(csv), "단어.csv")},
+        content_type="multipart/form-data"))
+
+    # 올릴 수 없는 형식은 반려
+    bad = a.post("/admin/words/file-test-book/upload",
+                 data={"file": (_io.BytesIO(b"x"), "몰래.exe")},
+                 content_type="multipart/form-data", follow_redirects=True)
+    assert "올릴 수 없는 형식" in body(bad)
+
+    # 미리보기에서 확인한 내용을 저장하면 그때 들어갑니다
+    a.post("/admin/words/file-test-book/unit",
+           data={"unit_id": "01", "unit_name": "1강",
+                 "words": "retain\t유지하다\nvary\t다르다"}, follow_redirects=True)
+    assert sc.word_count(sc.find_wordbook("file-test-book", raw=True)) == 2
+
+    a.post("/admin/words/file-test-book/delete", follow_redirects=True)
+    print("PASS  단어를 엑셀·CSV 로 올리기 → 미리보기 → 저장")
 
 
 def test_pass_counts_passages():
@@ -1061,6 +1121,19 @@ def test_contact_page():
     # 사이트맵에도 들어갑니다
     assert "/contact" in body(client().get("/sitemap.xml"))
     print("PASS  문의 창구 — 바로 연락 · 문의 폼 · 관리자에서 확인")
+
+
+def test_menu_has_no_duplicates():
+    """메뉴에 같은 항목이 두 번 들어가면 안 됩니다. (실제로 두 번 겪은 실수입니다)"""
+    home = body(client().get("/"))
+    head = home.split('class="nav"', 1)[1].split("</nav>", 1)[0]
+    bar = home.split('class="qb-track"', 1)[1].split("</nav>", 1)[0]
+    for where, html in (("머리말 메뉴", head), ("폰 줄띠", bar)):
+        for label in ("무료 자료", "자료 목록", "단어 시험지", "오르티카 라인업",
+                      "프리패스", "공지", "안내", "문의", "내 자료함"):
+            n = html.count(f">{label}</a>")
+            assert n == 1, f"{where} 에 '{label}' 가 {n}번 들어 있습니다"
+    print("PASS  메뉴에 같은 항목이 두 번 들어가지 않음")
 
 
 def test_mobile_quick_bar():
@@ -2290,10 +2363,12 @@ def run_all():
     test_request_menu_renamed_to_jaryo()
     # 예시 데이터를 지우는 테스트는 다른 테스트가 그 상품을 쓰므로 맨 뒤에 둡니다.
     test_word_quiz()
+    test_word_file_upload()
     test_pass_counts_passages()
     test_my_locker()
     test_clear_sample_data()
     test_contact_page()
+    test_menu_has_no_duplicates()
     test_mobile_quick_bar()
     test_nanumsquareround_font_is_served()
     test_file_path_traversal_blocked()

@@ -233,6 +233,74 @@ def word_count(book: dict) -> int:
     return sum(len(u.get("words") or []) for u in book.get("units") or [])
 
 
+WORD_FILE_EXTS = {".xlsx", ".xlsm", ".csv", ".txt", ".pdf", ".tsv"}
+
+
+def _drop_header(lines: list[str]) -> list[str]:
+    """엑셀 첫 줄이 '영어 / 뜻' 같은 머리글이면 빼 줍니다."""
+    if lines and not re.search(r"[A-Za-z]", lines[0].split("\t")[0]):
+        return lines[1:]
+    return lines
+
+
+def read_wordfile(filename: str, blob: bytes) -> tuple[str, str]:
+    """올리신 파일에서 '영어<탭>뜻' 줄을 뽑아냅니다. (읽은 글, 안내 문구)
+
+    엑셀·CSV 는 앞 두 칸을 씁니다. PDF 는 글자가 들어 있는 파일만 읽힙니다
+    (스캔해서 사진으로 된 PDF 는 글자가 없어 못 읽습니다).
+    어느 쪽이든 사람이 눈으로 확인하고 고친 뒤 저장하도록 미리보기로 넘깁니다.
+    """
+    ext = os.path.splitext(filename)[1].lower()
+
+    if ext in (".xlsx", ".xlsm"):
+        try:
+            import openpyxl
+        except ImportError:
+            return "", "엑셀을 읽는 라이브러리(openpyxl)가 없습니다. CSV 로 저장해서 올려 주세요."
+        import io as _io
+        wb = openpyxl.load_workbook(_io.BytesIO(blob), read_only=True, data_only=True)
+        lines = []
+        for sheet in wb.worksheets:
+            for row in sheet.iter_rows(values_only=True):
+                cells = [str(c).strip() for c in row[:2] if c is not None and str(c).strip()]
+                if len(cells) >= 2:
+                    lines.append(f"{cells[0]}\t{cells[1]}")
+        wb.close()
+        lines = _drop_header(lines)
+        return "\n".join(lines), f"엑셀에서 {len(lines)}줄을 읽었습니다."
+
+    if ext == ".pdf":
+        try:
+            from pypdf import PdfReader
+        except ImportError:
+            return "", "PDF 를 읽는 라이브러리가 없습니다. 엑셀이나 CSV 로 올려 주세요."
+        import io as _io
+        try:
+            reader = PdfReader(_io.BytesIO(blob))
+            text = "\n".join((page.extract_text() or "") for page in reader.pages)
+        except Exception as exc:                      # 깨진 PDF 로 화면이 죽지 않게
+            return "", f"PDF 를 읽지 못했습니다: {exc}"
+        if not text.strip():
+            return "", ("이 PDF 에는 글자가 없습니다. 스캔해서 사진으로 만든 PDF 는 읽을 수 없습니다. "
+                        "엑셀이나 CSV 로 올려 주세요.")
+        return text, ("PDF 에서 글자를 뽑았습니다. 단어책 PDF 는 줄이 흐트러지기 쉬우니 "
+                      "아래에서 눈으로 확인하고 고쳐 주세요.")
+
+    text = blob.decode("utf-8-sig", errors="replace")
+    if ext in (".csv", ".tsv"):
+        import csv as _csv
+        import io as _io
+        delim = "\t" if ext == ".tsv" else ","
+        lines = []
+        for row in _csv.reader(_io.StringIO(text), delimiter=delim):
+            cells = [c.strip() for c in row[:2] if c and c.strip()]
+            if len(cells) >= 2:
+                lines.append(f"{cells[0]}\t{cells[1]}")
+        lines = _drop_header(lines)
+        return "\n".join(lines), f"{ext[1:].upper()} 에서 {len(lines)}줄을 읽었습니다."
+    return text, "파일을 읽었습니다."
+
+
 def parse_words(text: str, limit: int = 3000) -> tuple[list[dict], list[str]]:
     """붙여넣은 단어 목록을 읽습니다. 한 줄에 하나, 영어와 뜻을 탭·쉼표·= 로 나눕니다.
 

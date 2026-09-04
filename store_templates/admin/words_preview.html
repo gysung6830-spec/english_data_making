@@ -1,0 +1,54 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ b.name }} 단어 미리보기{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <h1>읽은 내용을 확인해 주세요</h1>
+  <p><b>{{ file_name }}</b> 에서 단어 <b>{{ found }}개</b>를 읽었습니다.
+    아직 저장되지 않았습니다.</p>
+</div>
+
+<div class="steps-help">
+  <b>{{ note }}</b>
+  <ol>
+    <li>왼쪽이 영어, 오른쪽이 뜻입니다. <b>탭으로 나뉘어</b> 있습니다.</li>
+    <li>잘못 읽힌 줄은 여기서 고치거나 지우시면 됩니다.</li>
+    <li>강 번호와 이름을 정하고 <b>이 강에 넣기</b>를 누르면 저장됩니다.</li>
+  </ol>
+</div>
+
+{% if bad %}
+  <div class="panel">
+    <h2>읽지 못한 줄 {{ bad|length }}개</h2>
+    <div class="hint">영어와 뜻을 나눌 수 없어 건너뛴 줄입니다. 필요하면 아래 상자에 직접 적어 주세요.</div>
+    <ul style="margin:0;padding-left:18px;font-size:13.5px;color:var(--muted);">
+      {% for x in bad[:20] %}<li>{{ x }}</li>{% endfor %}
+      {% if bad|length > 20 %}<li>… 그 밖 {{ bad|length - 20 }}줄</li>{% endif %}
+    </ul>
+  </div>
+{% endif %}
+
+<div class="panel">
+  <h2>고치고 저장하기</h2>
+  <form method="post" action="{{ url_for('admin.words_unit_save', slug=b.slug) }}">
+    <div class="form-grid">
+      <div class="adm-field">
+        <label for="unit_id">강 번호</label>
+        <input type="text" id="unit_id" name="unit_id" value="{{ unit_id }}" placeholder="01" required>
+      </div>
+      <div class="adm-field">
+        <label for="unit_name">강 이름</label>
+        <input type="text" id="unit_name" name="unit_name" value="{{ unit_name }}" placeholder="1강">
+      </div>
+    </div>
+    <div class="adm-field full">
+      <label for="words">단어 {{ found }}개</label>
+      <textarea id="words" name="words" rows="20">{{ text }}</textarea>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">이 강에 넣기</button>
+      <a class="btn btn-ghost" href="{{ url_for('admin.words_book', slug=b.slug) }}">그만두기</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
