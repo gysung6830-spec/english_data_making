@@ -45,8 +45,6 @@
       {% endif %}
       <a href="{{ url_for('notice') }}" class="{{ 'on' if request.endpoint == 'notice' }}">공지</a>
       <a href="{{ url_for('guide') }}" class="{{ 'on' if request.endpoint in ['guide','custom','submit'] }}">안내</a>
-    <a href="{{ url_for('contact') }}" class="{{ 'on' if request.endpoint == 'contact' }}">문의</a>
-    <a href="{{ url_for('my_page') }}" class="{{ 'on' if request.endpoint in ['my_page','my_locker'] }}">내 자료함</a>
       <a href="{{ url_for('contact') }}" class="{{ 'on' if request.endpoint == 'contact' }}">문의</a>
       <a href="{{ url_for('my_page') }}" class="{{ 'on' if request.endpoint in ['my_page','my_locker'] }}">내 자료함</a>
     </nav>
@@ -82,6 +80,8 @@
     {% endif %}
     <a href="{{ url_for('notice') }}" class="{{ 'on' if request.endpoint == 'notice' }}">공지</a>
     <a href="{{ url_for('guide') }}" class="{{ 'on' if request.endpoint in ['guide','custom','submit'] }}">안내</a>
+    <a href="{{ url_for('contact') }}" class="{{ 'on' if request.endpoint == 'contact' }}">문의</a>
+    <a href="{{ url_for('my_page') }}" class="{{ 'on' if request.endpoint in ['my_page','my_locker'] }}">내 자료함</a>
   </div>
 </nav>
 
