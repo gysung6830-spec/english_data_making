@@ -54,6 +54,35 @@
           고른 단어보다 많이 적으시면 있는 만큼만 냅니다.</div>
       </div>
 
+      {# 맨 위에 넣을 것 — 모두 선택입니다. 안 적으시면 지금까지처럼 나옵니다. #}
+      <details class="head-opt">
+        <summary>3. 시험지 맨 위 꾸미기 <span class="muted">— 학원 이름 · 제목 · 날짜 (선택)</span></summary>
+        <div class="head-opt-in">
+          <div class="ho-row">
+            <label for="place">학원 · 학교 이름</label>
+            <input type="text" id="place" name="place" maxlength="40"
+                   placeholder="오르티카 영어학원" autocomplete="organization">
+          </div>
+          <div class="ho-row">
+            <label for="title">시험지 제목</label>
+            <input type="text" id="title" name="title" maxlength="60"
+                   placeholder="어휘 TEST · {{ b.name }}">
+            <span class="tip">비우시면 <b>어휘 TEST · {{ b.name }} · 범위</b> 로 나옵니다.</span>
+          </div>
+          <div class="ho-row">
+            <label for="date">날짜</label>
+            <div class="ho-date">
+              <input type="text" id="date" name="date" maxlength="30" placeholder="2026. 9. 4.">
+              <button type="button" class="btn btn-ghost btn-sm" id="today">오늘</button>
+            </div>
+            <label class="ho-check">
+              <input type="checkbox" name="dateblank" value="1">
+              빈칸으로 두기 <span class="muted">(학생이 직접 적음)</span>
+            </label>
+          </div>
+        </div>
+      </details>
+
       <button type="submit" class="btn btn-primary btn-block">무작위로 시험지 만들기</button>
       <p class="muted" style="margin-top:14px;font-size:13.5px;">
         같은 범위로 여러 번 누르시면 <b>매번 다른 시험지</b>가 나옵니다. 반마다 다르게 내실 수 있습니다.</p>
@@ -114,6 +143,52 @@
     row.querySelector('input[type=number]').addEventListener('input', tally);
   });
   tally();
+})();
+</script>
+
+<script>
+/* 시험지 맨 위 꾸미기 — '오늘' 단추와, 비어 있는 칸은 주소에 붙이지 않기.
+   한 번 적으신 학원 이름은 이 브라우저에 기억해 두었다가 다음에 채워 드립니다. */
+(function () {
+  var box = document.querySelector('.head-opt');
+  if (!box) return;
+  var form = box.closest('form');
+  var place = box.querySelector('#place');
+  var date = box.querySelector('#date');
+  var blank = box.querySelector('input[name=dateblank]');
+  var today = box.querySelector('#today');
+
+  try {
+    var kept = localStorage.getItem('ortica.sheet.place');
+    if (kept && !place.value) { place.value = kept; box.open = true; }
+  } catch (e) {}
+
+  if (today) {
+    today.addEventListener('click', function () {
+      var d = new Date();
+      date.value = d.getFullYear() + '. ' + (d.getMonth() + 1) + '. ' + d.getDate() + '.';
+      if (blank) blank.checked = false;
+      date.disabled = false;
+    });
+  }
+  function sync() {
+    if (!blank) return;
+    date.disabled = blank.checked;
+    if (blank.checked) date.value = '';
+  }
+  if (blank) blank.addEventListener('change', sync);
+  sync();
+
+  form.addEventListener('submit', function () {
+    try {
+      if (place.value.trim()) localStorage.setItem('ortica.sheet.place', place.value.trim());
+      else localStorage.removeItem('ortica.sheet.place');
+    } catch (e) {}
+    // 빈 칸은 주소에 남기지 않습니다 (?place=&title=& … 이 길게 붙지 않도록)
+    box.querySelectorAll('input[type=text]').forEach(function (el) {
+      if (!el.value.trim()) el.disabled = true;
+    });
+  });
 })();
 </script>
 {% endblock %}

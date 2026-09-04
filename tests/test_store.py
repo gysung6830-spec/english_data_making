@@ -1102,6 +1102,45 @@ def test_word_file_upload():
     print("PASS  단어를 엑셀·CSV 로 올리기 → 미리보기 → 저장 (끌어다 놓기)")
 
 
+def test_sheet_heading():
+    """시험지 맨 위 — 학원 이름 · 제목 · 날짜. 모두 선택 사항입니다."""
+    c = client()
+    slug = sc.load_words()["books"][0]["slug"]
+    unit = sc.load_words()["books"][0]["units"][0]["id"]
+
+    # 아무것도 안 적으면 지금까지처럼 나옵니다
+    plain = body(c.get(f"/words/{slug}/sheet?unit={unit}&kind=en_ko&seed=7"))
+    assert "<h1>어휘 TEST ·" in plain
+    assert "sheet-place" not in plain
+    assert "이름 <i></i>" in plain.replace("\n", " ")
+
+    # 적으면 제목이 그것으로 바뀌고, 학원 이름이 제목 위에 붙습니다
+    fancy = body(c.get(f"/words/{slug}/sheet?unit={unit}&kind=en_ko&seed=7"
+                       "&place=오르티카+영어학원&title=9월+어휘+확인&date=2026.+9.+4."))
+    assert '<div class="sheet-place">오르티카 영어학원</div>' in fancy
+    assert "<h1>9월 어휘 확인" in fancy
+    assert "2026. 9. 4." in fancy
+    assert "<h1>어휘 TEST" not in fancy        # 적어 주신 제목이 대신 들어갑니다
+    assert '<div class="sheet-sub">' in fancy   # 책 이름·범위는 작은 줄로 남습니다
+
+    # 학생용과 정답지 두 장 모두에 들어갑니다
+    assert fancy.count('<div class="sheet-place">') == 2
+
+    # 날짜를 빈칸으로 두면 학생이 적을 자리가 나옵니다
+    blank = body(c.get(f"/words/{slug}/sheet?unit={unit}&kind=en_ko&seed=7&dateblank=1"))
+    assert "날짜 <i></i>" in blank.replace("\n", " ")
+
+    # '다른 문제로 다시' 를 눌러도 제목이 그대로 따라갑니다
+    assert "place=" in fancy and "title=" in fancy
+
+    # 고르는 화면 두 곳 모두에 꾸미기 칸이 있습니다
+    for url in (f"/words/{slug}", f"/words/{slug}/pick?unit={unit}"):
+        page = body(c.get(url))
+        assert "시험지 맨 위 꾸미기" in page
+        assert 'name="place"' in page and 'name="dateblank"' in page
+    print("PASS  시험지 맨 위 — 학원 이름 · 제목 · 날짜 (선택)")
+
+
 def test_whole_book_upload():
     """단어책 전체가 담긴 한 파일을 올리면, 강을 알아서 나눠 한꺼번에 넣습니다."""
     import io as _io
@@ -2542,6 +2581,7 @@ def run_all():
     test_word_quiz()
     test_word_counts_per_kind_and_cap()
     test_word_file_upload()
+    test_sheet_heading()
     test_whole_book_upload()
     test_wordfile_table_shapes()
     test_pass_counts_passages()

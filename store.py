@@ -1216,12 +1216,25 @@ def words_sheet(slug):
     if not sections:
         abort(404)
     unit_names = [u.get("name") or u.get("id") for u in book["units"] if u["id"] in unit_ids]
-    # '다른 문제로 다시' — 같은 범위·유형에 시험지 번호만 새로 뽑습니다
+
+    # 시험지 맨 위에 넣을 것 — 모두 선택입니다. 비우면 지금까지처럼 나옵니다.
+    head = {
+        "place": sc.clean(request.args.get("place"), 40),      # 학원 · 학교 이름
+        "title": sc.clean(request.args.get("title"), 60),      # 시험지 제목
+        "date": sc.clean(request.args.get("date"), 30),        # 날짜 (적어 넣기)
+        "dateblank": request.args.get("dateblank") == "1",     # 날짜를 빈칸으로
+    }
+    if head["dateblank"]:
+        head["date"] = ""
+
+    # '다른 문제로 다시' — 같은 범위·유형·제목에 시험지 번호만 새로 뽑습니다
     again = url_for("words_sheet", slug=slug, unit=unit_ids, kind=kinds,
-                    **{f"n_{k}": v for k, v in counts.items()})
+                    **{f"n_{k}": v for k, v in counts.items()},
+                    **{k: v for k, v in head.items() if v and k != "dateblank"},
+                    **({"dateblank": "1"} if head["dateblank"] else {}))
     return render_template("words_sheet.html", b=book, sections=sections, seed=seed,
                            unit_names=unit_names, kinds=kinds, kind_labels=sc.QUIZ_KINDS,
-                           again_url=again, pool=len(words))
+                           again_url=again, pool=len(words), head=head)
 
 
 # ---------------------------------------------------------------------------

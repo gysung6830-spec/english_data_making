@@ -34,17 +34,24 @@
 
 {% macro sheet(s, page, answer) %}
 <article class="sheet{{ ' answer' if answer }}">
+  {% if head.place %}<div class="sheet-place">{{ head.place }}</div>{% endif %}
   <header class="sheet-head">
-    <h1>어휘 TEST · {{ b.name }} · {{ scope }}{% if answer %} · 정답 <span class="ans-tag">ANSWER KEY</span>{% endif %}</h1>
-    {% if answer %}
-      <div class="sheet-fill"><span class="ans-note">정답이 채워진 답지입니다</span></div>
-    {% else %}
-      <div class="sheet-fill">
+    <h1>{% if head.title %}{{ head.title }}{% else %}어휘 TEST · {{ b.name }} · {{ scope }}{% endif %}{% if answer %} · 정답 <span class="ans-tag">ANSWER KEY</span>{% endif %}</h1>
+    <div class="sheet-fill">
+      {% if answer %}
+        {% if head.date %}<span>{{ head.date }}</span>{% endif %}
+        <span class="ans-note">정답이 채워진 답지입니다</span>
+      {% else %}
+        {% if head.date %}<span>{{ head.date }}</span>
+        {% elif head.dateblank %}<span>날짜 <i></i></span>{% endif %}
         <span>이름 <i></i></span>
         <span>점수 <i class="short"></i> / {{ s['items']|length }}</span>
-      </div>
-    {% endif %}
+      {% endif %}
+    </div>
   </header>
+  {% if head.title and (b.name not in head.title) %}
+    <div class="sheet-sub">{{ b.name }} · {{ scope }}</div>
+  {% endif %}
 
   <div class="sec-head">
     <span class="sec-no">{{ s.roman }}.</span>
