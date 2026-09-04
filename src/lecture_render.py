@@ -357,9 +357,11 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
         # 숙어·구동사를 어법칩으로 승격 + 문장 속 위치 순서(왼→오)로 정렬
         allg = list(s.grammar) + _promote_idiom_chips(s)
         og = _order_grammar(s.english, allg)
-        # 한 줄 해석(③ 영어 한줄해석용): 청크 ko 를 이어 [[ ]] 표시만 제거한 전체 문장 번역
-        ko_line = " ".join(_MARK.sub(lambda m: m.group(1), (c.ko or "")) for c in s.chunks)
-        ko_line = re.sub(r"\s+", " ", ko_line).strip()
+        # 한 줄 해석(③ 영어 한줄해석용): 자연스러운 문장 번역(translation) 우선, 없으면 청크 ko 조인 폴백
+        ko_line = (getattr(s, "translation", "") or "").strip()
+        if not ko_line:
+            ko_line = " ".join(_MARK.sub(lambda m: m.group(1), (c.ko or "")) for c in s.chunks)
+            ko_line = re.sub(r"\s+", " ", ko_line).strip()
         lines.append({
             "id": s.id,
             "english": s.english,

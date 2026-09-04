@@ -25,7 +25,7 @@
     <div class="gl-col">
       <div class="gl-h">색·표시가 뜻하는 것</div>
       <div class="gl-row"><span class="gl-chip q-chip">문제</span>직접 풀어야 하는 칸(빈칸·판단·객관식)</div>
-      <div class="gl-row"><span class="gl-chip gchip-demo"><span class="gnum">1</span>어법칩</span>그 문장에서 반드시 짚어야 할 어법 — 문장 속 위치를 찾아 ○표</div>
+      <div class="gl-row"><span class="gl-chip olg-chip">어법칩</span>그 문장에서 반드시 짚어야 할 어법(③ 영어 한줄해석의 각 줄에 표시)</div>
       <div class="gl-row"><span class="gl-chip mt-demo">이렇게 읽으면 안&nbsp;돼</span>학생용에만 있는 오역 주의 팁</div>
       <div class="gl-row"><span class="gl-chip sl-demo">/</span>끊어 읽는 지점(의미 덩어리)</div>
     </div>
@@ -95,15 +95,12 @@
     {#- B: 문장마다 반복하던 안내를 섹션 맨 위 1회로 -#}
     <div class="sec-guide">
       <span class="sg-item"><span class="sg-ico">✏</span>빈칸 = 직접 해석해 채우기</span>
-      {% if not teacher %}<span class="sg-item"><span class="sg-ico">🔑</span>어법칩(❶❷…)이 문장의 어디에 쓰였는지 찾아 <b>○표</b></span>{% endif %}
       <span class="sg-item"><span class="sg-ico">⭕</span>내용 진술 판단 — 맞으면 <b class="k-o">O</b> · 틀리면 <b class="k-x">X</b> · 결론은 맞지만 근거가 틀리면 <b class="k-t">△</b>, <b>X·△는 근거를 바르게 고치기</b></span>
     </div>
     <div class="panel">
       {% for it in p.lines %}
       <div class="s-item">
-        {% if teacher and it.english_hl %}<div class="s-en"><span class="s-no">{{ it.id }}</span>{{ it.english_hl }}</div>
-        {% else %}<div class="s-en"><span class="s-no">{{ it.id }}</span>{% for c in it.chunks %}{{ c.en }}{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>{% endif %}
-        {% if it.grammar %}<div class="gram">🔑 {% for g in it.grammar %}<span class="gnum">{{ loop.index }}</span><span class="gchip">{{ g.tag }}</span>{% if teacher and g.note %} <span class="gnote">{{ g.note }}</span>{% endif %}{% if not loop.last %} &nbsp;·&nbsp; {% endif %}{% endfor %}</div>{% endif %}
+        <div class="s-en"><span class="s-no">{{ it.id }}</span>{% for c in it.chunks %}{{ c.en }}{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
         <div class="ko-box"><span class="q-chip">문제</span><span class="ko-lab">한글</span>{% for c in it.chunks %}<span class="ko-plain">{{ c.ko }}</span>{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
         {% if not teacher %}{% for t in it.mistips %}<div class="mistip"><span class="mt-chip">이렇게 읽으면 안&nbsp;돼</span>{{ t }}</div>{% endfor %}{% endif %}
         <div class="ox">

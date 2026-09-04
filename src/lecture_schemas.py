@@ -173,6 +173,7 @@ class Misread(BaseModel):
 class SentenceItem(BaseModel):
     id: int
     english: str                  # 문장 원문 전체
+    translation: str = ""         # ③ 영어 한줄해석용: 자연스러운 한글 문장 번역(과한 의역 금지). 없으면 청크 ko 조인 폴백.
     grammar: list[GrammarChip] = Field(default_factory=list)  # 어법 칩(1~3개)
     vocab: list[Vocab] = Field(default_factory=list)   # 이 문장 핵심 어휘(→ 어휘 리스트로 집계)
     chunks: list[Chunk]           # ② 끊어읽기([[ ]]로 오역 위험 단어 빈칸)
