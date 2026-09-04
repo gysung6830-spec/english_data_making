@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}내 자료함 · {{ site.brand }}{% endblock %}
+{% block desc %}받으신 자료를 다시 받고 인쇄하실 수 있습니다.{% endblock %}
+{# 남의 자료함이 검색에 잡히면 안 됩니다. #}
+{% block jsonld %}<meta name="robots" content="noindex, nofollow">{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap">
+
+    <div class="section-head">
+      <span class="eyebrow">내 자료함</span>
+      <h2>받으신 자료를 다시 받으실 수 있습니다</h2>
+      <p><b>{{ email }}</b> 로 주문하신 내역입니다.
+        이 화면 주소는 바뀌지 않습니다. <b>즐겨찾기 해 두세요.</b></p>
+    </div>
+
+    <div class="locker-top no-print">
+      <div class="lt-box">
+        <span class="lt-label">지금까지 받으신 자료</span>
+        <b>{{ paid }}건</b>
+      </div>
+      {% if tier %}
+        <div class="lt-box on">
+          <span class="lt-label">단골 할인</span>
+          <b>{{ tier.percent }}% 적용 중</b>
+        </div>
+      {% endif %}
+      {% if nxt %}
+        <div class="lt-box">
+          <span class="lt-label">{{ nxt.min - paid }}번 더 사시면</span>
+          <b>{{ nxt.percent }}% 할인</b>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if rows %}
+      <div class="locker-list">
+        {% for r in rows %}
+          <article class="lk-order">
+            <div class="lk-head">
+              <div>
+                <b>{{ r.o['product_name'] }}</b>
+                <small class="muted">{{ r.o['order_no'] }} · {{ r.o['created_at'][:10] }}</small>
+              </div>
+              <span class="tag {{ 'tag-on' if r.o['status'] == '발송완료' }}">{{ r.o['status'] }}</span>
+            </div>
+
+            {% if r.links %}
+              <ul class="lk-files">
+                {% for l in r.links %}
+                  <li>
+                    <span class="lkf-name">{{ l['product_name'] }}</span>
+                    <span class="lkf-meta muted">
+                      {{ l['max_downloads'] - l['download_count'] }}번 더 받을 수 있습니다{% if l['expires_at'] %}
+                        · {{ l['expires_at'] }}까지{% endif %}</span>
+                    <a class="btn btn-primary btn-sm no-print" href="{{ url_for('download_page', token=l['token']) }}">받기</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% elif r.o['status'] == '입금대기' %}
+              <p class="lk-wait">입금이 확인되면 여기에 받기 버튼이 생깁니다.
+                입금하셨는데 하루가 지나도 그대로면
+                <a href="{{ url_for('contact') }}">문의</a>로 알려 주세요.</p>
+            {% else %}
+              <p class="lk-wait">자료를 준비하고 있습니다. 곧 여기에 받기 버튼이 생깁니다.</p>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="card center">
+        <p class="mb-0">아직 받으신 자료가 없습니다.
+          <a href="{{ url_for('products') }}"><b>자료 목록</b></a>에서 골라 보세요.</p>
+      </div>
+    {% endif %}
+
+    <div class="print-tip no-print">
+      <b>인쇄할 때</b>
+      <ul>
+        <li><b>용지 A4 · 배율 100%</b> — '페이지에 맞춤'을 쓰면 글자가 줄어들고 여백이 어긋납니다.</li>
+        <li><b>여백 없음(또는 최소)</b> — 지면을 A4 에 꽉 차게 잡아 두었습니다.</li>
+        <li><b>양면 인쇄는 '긴 쪽으로 넘기기'</b> — 앞뒤가 뒤집히지 않습니다.</li>
+        <li>학생용과 강의용이 따로 있는 자료는 <b>학생용만 골라</b> 인쇄하세요.</li>
+        <li>받으신 파일에는 <b>구매자 표시</b>가 새겨져 있습니다. 인쇄해서 직접 가르치는 학생에게
+          나눠 주시는 것은 괜찮지만, 파일을 다른 분께 넘기시면 안 됩니다.</li>
+      </ul>
+    </div>
+
+    <div class="hero-actions no-print" style="margin-top:26px;">
+      <a class="btn btn-ghost" href="{{ url_for('products') }}">자료 더 보기</a>
+      <a class="btn btn-ghost" href="{{ url_for('free') }}">무료 자료 받기</a>
+      <a class="btn btn-ghost" href="{{ url_for('contact') }}">문의하기</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

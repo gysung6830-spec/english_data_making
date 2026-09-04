@@ -77,9 +77,12 @@
     </div>
 
     <div class="center" style="margin-top:28px;">
+      {# 이 주소를 여신 분은 본인이 맞으므로, 메일을 기다리지 않고 자료함으로 바로 갑니다. #}
+      <a class="btn btn-primary" href="{{ url_for('my_locker', token=locker) }}">내 자료함 열기</a>
       <a class="btn btn-ghost" href="{{ url_for('products') }}">다른 자료 더 보기</a>
-      <a class="btn btn-primary" href="{{ url_for('home') }}">홈으로</a>
     </div>
+    <p class="muted center" style="font-size:13px;margin-top:14px;">
+      <b>내 자료함</b>에서는 지금까지 받으신 자료를 한 곳에서 다시 받고 인쇄하실 수 있습니다.</p>
     <p class="muted center" style="font-size:13px;margin-top:16px;">
       이 주소는 이 주문에만 열리는 전용 주소입니다. 즐겨찾기 해 두셔도 됩니다.
     </p>

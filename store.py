@@ -642,7 +642,9 @@ def order_done(key):
         """SELECT token, product_name FROM downloads
            WHERE order_no = ? AND revoked_at IS NULL ORDER BY id""",
         (row["order_no"],)).fetchall()
-    return render_template("order_done.html", o=row, links=links)
+    # 이 주소를 연 분은 본인이므로, 자료함 열쇠를 바로 내어 드립니다.
+    return render_template("order_done.html", o=row, links=links,
+                           locker=sc.locker_token(row["email"]))
 
 
 # ---------------------------------------------------------------------------
@@ -1046,6 +1048,70 @@ def lineup_shot(mid, filename):
     return send_from_directory(folder, filename, max_age=86400)
 
 
+# ---------------------------------------------------------------------------
+# 내 자료함 — 받은 자료를 한 곳에서 다시 받고 인쇄
+# ---------------------------------------------------------------------------
+def locker_rows(email: str):
+    """이 이메일로 들어온 자료 주문과, 주문마다 딸린 받기 링크."""
+    db = sc.get_db()
+    orders = db.execute(
+        """SELECT * FROM orders WHERE lower(email) = ? AND kind = 'product'
+           ORDER BY id DESC""", (email.strip().lower(),)).fetchall()
+    out = []
+    for o in orders:
+        links = db.execute(
+            """SELECT token, product_name, download_count, max_downloads, expires_at
+               FROM downloads WHERE order_no = ? AND revoked_at IS NULL ORDER BY id""",
+            (o["order_no"],)).fetchall()
+        out.append({"o": o, "links": links})
+    return out
+
+
+@app.route("/my", methods=["GET", "POST"])
+def my_page():
+    """자료함 문 앞. 이메일을 적으면 그 주소로 자료함 열쇠를 보내 드립니다."""
+    if request.method == "GET":
+        return render_template("my.html", form={}, errors=[], sent=False)
+
+    if sc.too_many_submits(request, "my"):
+        return render_template("my.html", form=request.form,
+                               errors=["잠시 뒤에 다시 시도해 주세요."], sent=False), 429
+
+    email = sc.clean(request.form.get("email"), 120).lower()
+    if not sc.EMAIL_RE.match(email):
+        return render_template("my.html", form=request.form, sent=False,
+                               errors=["이메일 주소를 정확히 입력해 주세요."]), 400
+
+    # 주문이 있을 때만 실제로 보냅니다. 화면 문구는 어느 쪽이든 같습니다 —
+    # 아무 주소나 넣어 보며 "이 사람이 샀는지" 알아내지 못하게 하려는 뜻입니다.
+    if locker_rows(email):
+        token = sc.locker_token(email)
+        link = url_for("my_locker", token=token, _external=True)
+        sc.send_mail(
+            f"[{sc.load_site().get('brand', 'Ortica영어')}] 내 자료함 주소",
+            "\n".join(["받으신 자료를 한 곳에서 다시 받으실 수 있는 주소입니다.", "",
+                        link, "",
+                        "이 주소는 바뀌지 않습니다. 즐겨찾기 해 두시면 언제든 다시 여실 수 있습니다.",
+                        "주소를 아는 사람은 누구나 열 수 있으니 남에게 알려 주지 마세요."]),
+            to_addr=email)
+    return render_template("my.html", form={}, errors=[], sent=True)
+
+
+@app.route("/my/<token>")
+def my_locker(token):
+    """내 자료함. 주소를 아는 분만 열 수 있습니다 (비밀번호 없음)."""
+    email = sc.locker_email(token)
+    if not email:
+        abort(404)
+    rows = locker_rows(email)
+    paid = sum(1 for r in rows if r["o"]["status"] in ("입금확인", "발송완료"))
+    site = sc.load_site()
+    tier = sc.loyalty_tier(site, paid)          # 지금 받고 계신 단골 할인
+    nxt = sc.loyalty_next(site, paid)           # 한 번 더 사시면 올라가는 단계
+    return render_template("my_locker.html", email=email, rows=rows,
+                           paid=paid, tier=tier, nxt=nxt, token=token)
+
+
 @app.route("/d/<token>")
 def download_page(token):
     """메일로 보내 드린 링크. 이 주소를 아는 사람만 파일을 받을 수 있습니다."""
@@ -1120,6 +1186,7 @@ def robots():
         "Disallow: /admin",
         "Disallow: /d/",
         "Disallow: /order",
+        "Disallow: /my/",          # 자료함 열쇠 주소는 검색에 잡히면 안 됩니다
         "Allow: /",
         f"Sitemap: {url_for('home', _external=True).rstrip('/')}/sitemap.xml",
     ]) + "\n"
@@ -1135,7 +1202,7 @@ def sitemap():
             url_for("products", _external=True), url_for("samples", _external=True),
             url_for("notice", _external=True), url_for("guide", _external=True),
             url_for("custom", _external=True), url_for("submit", _external=True),
-            url_for("contact", _external=True)]
+            url_for("contact", _external=True), url_for("my_page", _external=True)]
     urls += [url_for("free_detail", slug=x["slug"], _external=True)
              for x in sc.load_freebies()["items"]]
     urls += [url_for("book_detail", slug=b["slug"], _external=True) for b in catalog["books"]]

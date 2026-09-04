@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}내 자료함 · {{ site.brand }}{% endblock %}
+{% block desc %}받으신 자료를 한 곳에서 다시 받고 인쇄하실 수 있습니다. 회원가입도 비밀번호도 없습니다.{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap narrow">
+
+    {% if sent %}
+      <div class="section-head center">
+        <h2>자료함 주소를 보내 드렸습니다</h2>
+      </div>
+      <div class="alert alert-info">
+        적어 주신 이메일로 <b>내 자료함 주소</b>를 보내 드렸습니다.
+        메일함에 없으면 <b>스팸함</b>도 한 번 봐 주세요.<br><br>
+        그 주소는 <b>바뀌지 않습니다.</b> 즐겨찾기 해 두시면 언제든 다시 여실 수 있습니다.
+      </div>
+      <p class="muted">주문하신 적이 없는 주소로는 메일이 가지 않습니다.
+        주문할 때 적으신 이메일이 맞는지 확인해 주세요.
+        찾기 어려우시면 <a href="{{ url_for('contact') }}"><b>문의</b></a>로 알려 주시면 찾아 드립니다.</p>
+
+    {% else %}
+      <div class="section-head">
+        <h2>내 자료함</h2>
+        <p>받으신 자료를 <b>한 곳에서 다시 받고 인쇄</b>하실 수 있습니다.
+          회원가입도 비밀번호도 없습니다. 주문할 때 적으신 이메일만 넣어 주세요.</p>
+      </div>
+
+      <div class="alert alert-info">
+        <b>이미 자료함 주소를 갖고 계시면</b> 그 주소를 바로 여시면 됩니다.
+        주문 확인 화면(주문 직후 나온 화면)에서도 바로 들어가실 수 있습니다.
+      </div>
+
+      {% if errors %}
+        <div class="alert alert-error">
+          <b>아래 내용을 확인해 주세요.</b>
+          <ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>
+        </div>
+      {% endif %}
+
+      <div class="form-card">
+        <form method="post" action="{{ url_for('my_page') }}">
+          <div class="field">
+            <label for="email">주문할 때 적으신 이메일<span class="req">*</span>
+              <span class="hint">이 주소로 자료함 주소를 보내 드립니다</span></label>
+            <input type="email" id="email" name="email" value="{{ form.email or '' }}" required
+                   placeholder="teacher@example.com">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">자료함 주소 받기</button>
+        </form>
+      </div>
+
+      <p class="muted" style="margin-top:18px;">
+        메일이 오지 않거나 이메일을 잘못 적으셨다면
+        <a href="{{ url_for('contact') }}"><b>문의</b></a>로 주문번호와 함께 알려 주세요. 바로 찾아 드립니다.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

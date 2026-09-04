@@ -1451,3 +1451,43 @@ input[type=file]{
 .cw.kakao b{color:#6b5300;}
 .cw.plain{background:var(--bg); cursor:default;}
 .cw.plain:hover{border-color:var(--line-strong);}
+
+/* ---------- 내 자료함 ---------- */
+.locker-top{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;}
+.lt-box{flex:1 1 170px; padding:14px 17px; border:1px solid var(--line); border-radius:12px;
+  background:var(--card);}
+.lt-box.on{background:var(--brand-soft); border-color:#cfe4d9;}
+.lt-label{display:block; font-size:12.5px; color:var(--muted); margin-bottom:3px;}
+.lt-box b{font-size:19px; letter-spacing:-.02em;}
+.lt-box.on b{color:var(--brand);}
+
+.locker-list{display:flex; flex-direction:column; gap:14px;}
+.lk-order{border:1px solid var(--line); border-radius:var(--radius); background:var(--card);
+  padding:18px 20px; box-shadow:var(--shadow);}
+.lk-head{display:flex; gap:12px; align-items:flex-start; justify-content:space-between;
+  padding-bottom:12px; border-bottom:1px solid var(--line);}
+.lk-head b{display:block; font-size:16.5px; line-height:1.45;}
+.lk-head small{display:block; font-size:12.5px; margin-top:3px;}
+.lk-files{list-style:none; padding:0; margin:0;}
+.lk-files li{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  padding:12px 0; border-bottom:1px solid var(--line);}
+.lk-files li:last-child{border-bottom:0; padding-bottom:0;}
+.lkf-name{flex:1 1 200px; font-weight:600; font-size:15px;}
+.lkf-meta{flex:0 0 auto; font-size:12.5px;}
+.lk-files .btn{margin-left:auto;}
+.lk-wait{margin:12px 0 0; font-size:14.5px; color:var(--muted);}
+
+.print-tip{margin-top:30px; padding:18px 22px; border:1px solid var(--line);
+  border-left:3px solid var(--brand); border-radius:0 12px 12px 0; background:var(--card);}
+.print-tip b{display:block; margin-bottom:8px;}
+.print-tip ul{margin:0; padding-left:18px;}
+.print-tip li{font-size:14.5px; color:var(--ink-2); margin-bottom:6px; line-height:1.7;}
+
+@media (max-width:640px){
+  .lk-files .btn{margin-left:0; width:100%; text-align:center;}
+  .lkf-meta{flex:1 1 100%;}
+}
+@media print{
+  .site-head, .quick-bar, .site-foot, .no-print, .notice-strip{display:none !important;}
+  .lk-order{box-shadow:none; break-inside:avoid;}
+}

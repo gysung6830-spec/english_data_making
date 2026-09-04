@@ -931,6 +931,45 @@ def test_full_backup_has_orders():
 
 
 # ---- 7. 글꼴 · 보안 --------------------------------------------------------
+def test_my_locker():
+    """내 자료함 — 회원가입 없이, 이메일과 자료함 열쇠로 다시 받기."""
+    # 주문을 하나 넣고, 관리자가 발송까지 마칩니다
+    resp = client().post("/order", data={
+        "slug": "mock-2026-06-g3-analysis", "name": "박선생",
+        "phone": "010-7777-6666", "email": "Locker@Example.com", "agree": "1"},
+        follow_redirects=True)
+    done = body(resp)
+    assert "주문이 접수되었습니다" in done
+    # 주문 확인 화면에서 자료함으로 바로 들어갈 수 있어야 합니다
+    assert "내 자료함 열기" in done
+    key = re.search(r'href="(/my/[A-Za-z0-9_-]+)"', done).group(1)
+
+    text = body(client().get(key))
+    assert "내 자료함" in text
+    assert "locker@example.com" in text            # 대소문자를 가리지 않고 찾습니다
+    assert "mock-2026-06-g3-analysis" in text or "6월 모의평가" in text
+    assert "입금이 확인되면" in text                 # 아직 발송 전
+    assert "용지 A4 · 배율 100%" in text            # 인쇄 안내
+    assert "noindex" in text                       # 남의 자료함이 검색에 잡히면 안 됩니다
+
+    # 열쇠는 바뀌지 않습니다 — 즐겨찾기 해 두고 계속 쓰시게
+    again = body(client().get(key))
+    assert "내 자료함" in again
+    assert client().get("/my/없는열쇠123").status_code == 404
+
+    # 문 앞 화면: 이메일을 넣으면 주문 여부와 상관없이 같은 문구
+    got = body(client().post("/my", data={"email": "locker@example.com"}))
+    never = body(client().post("/my", data={"email": "nobody@example.com"}))
+    assert "자료함 주소를 보내 드렸습니다" in got
+    assert "자료함 주소를 보내 드렸습니다" in never
+    assert body(client().post("/my", data={"email": "이메일아님"})) .count("정확히 입력") == 1
+
+    # 검색엔진이 열쇠 주소를 훑지 않게
+    assert "Disallow: /my/" in body(client().get("/robots.txt"))
+    assert "/my/" not in body(client().get("/sitemap.xml"))
+    print("PASS  내 자료함 — 다시 받기 · 인쇄 안내 · 열쇠 보호")
+
+
 def test_contact_page():
     """문의 창구 — 급한 분은 바로 연락, 기록이 남아야 하면 폼으로."""
     text = body(client().get("/contact"))
@@ -2194,6 +2233,7 @@ def run_all():
     test_policy_sections_are_filled_in()
     test_request_menu_renamed_to_jaryo()
     # 예시 데이터를 지우는 테스트는 다른 테스트가 그 상품을 쓰므로 맨 뒤에 둡니다.
+    test_my_locker()
     test_clear_sample_data()
     test_contact_page()
     test_mobile_quick_bar()

@@ -430,6 +430,16 @@ CREATE TABLE IF NOT EXISTS leads (
     created_at    TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_leads_created ON leads(created_at DESC);
+
+-- 내 자료함 열쇠. 이메일 하나에 열쇠 하나를 만들어 두고, 그 주소를 아는 분만
+-- 자기가 받은 자료를 다시 볼 수 있게 합니다. 회원가입·비밀번호가 없습니다.
+CREATE TABLE IF NOT EXISTS lockers (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    email         TEXT UNIQUE NOT NULL,
+    token         TEXT UNIQUE NOT NULL,
+    created_at    TEXT NOT NULL,
+    last_seen     TEXT
+);
 """
 
 # 이미 만들어진 DB 에 나중에 생긴 칸을 채워 넣습니다(있으면 건너뜀).
@@ -584,19 +594,15 @@ def paid_order_count(email: str) -> int:
     return int(row["n"] if row else 0)
 
 
-def loyalty_tier(site: dict, repeat_no: int) -> dict | None:
-    """이번이 몇 번째 구매인지에 맞는 단골 할인 단계를 돌려줍니다."""
+def loyalty_next(site: dict, repeat_no: int) -> dict | None:
+    """다음 단골 단계. '한 번 더 사시면 10%' 를 알려 주려고 씁니다."""
     cfg = (site.get("discount") or {})
     if not cfg.get("loyalty_enabled", True):
         return None
-    best = None
-    for tier in cfg.get("loyalty") or []:
-        need = to_int(tier.get("min"), 0)
-        pct = to_int(tier.get("percent"), 0)
-        if need >= 2 and pct > 0 and repeat_no >= need:
-            if best is None or need > to_int(best.get("min"), 0):
-                best = {"min": need, "percent": pct}
-    return best
+    ahead = [{"min": to_int(t.get("min"), 0), "percent": to_int(t.get("percent"), 0)}
+             for t in cfg.get("loyalty") or []
+             if to_int(t.get("min"), 0) > repeat_no and to_int(t.get("percent"), 0) > 0]
+    return min(ahead, key=lambda t: t["min"]) if ahead else None
 
 
 WATERMARK_MARKS = ["이름", "이메일", "주문번호", "브랜드", "날짜"]
@@ -859,6 +865,33 @@ def issue_download(order_row, product_slug: str, product_name: str) -> str:
         except sqlite3.IntegrityError:
             continue
     raise RuntimeError("다운로드 링크를 만들지 못했습니다")
+
+
+def locker_token(email: str) -> str:
+    """이 이메일의 자료함 열쇠. 없으면 만들고, 있으면 쓰던 것을 그대로 돌려줍니다.
+
+    한 번 만든 열쇠는 바뀌지 않습니다. 손님이 즐겨찾기 해 두고 계속 쓰시게 하려는 뜻입니다.
+    """
+    email = email.strip().lower()
+    db = get_db()
+    row = db.execute("SELECT token FROM lockers WHERE email = ?", (email,)).fetchone()
+    if row:
+        return row["token"]
+    token = secrets.token_urlsafe(20)
+    db.execute("INSERT INTO lockers (email, token, created_at) VALUES (?, ?, ?)",
+               (email, token, stamp()))
+    db.commit()
+    return token
+
+
+def locker_email(token: str) -> str:
+    """열쇠로 이메일 찾기. 없으면 빈 문자열."""
+    row = get_db().execute("SELECT email FROM lockers WHERE token = ?", (token,)).fetchone()
+    if row is None:
+        return ""
+    get_db().execute("UPDATE lockers SET last_seen = ? WHERE token = ?", (stamp(), token))
+    get_db().commit()
+    return row["email"]
 
 
 def check_download(token: str) -> tuple[sqlite3.Row | None, str]:
