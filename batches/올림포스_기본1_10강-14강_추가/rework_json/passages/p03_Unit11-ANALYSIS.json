@@ -1,0 +1,519 @@
+{
+ "item_no": "Unit11-ANALYSIS",
+ "theme": "자신을 고양하려는 욕구로 소셜미디어 반응을 확인·삭제하는 십대들의 행동",
+ "overview": {
+  "theme_ko": "자신을 고양하려는 욕구로 소셜미디어 반응을 확인하고 게시물을 삭제하는 십대들의 행동",
+  "key_grammar": {
+   "point": "would rather A than B ('B하느니 차라리 A하겠다')",
+   "source_sentence": "If the recognition is insufficient, they'd rather delete the content than suffer perceived judgement from others against their failed efforts to self-enhance.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "'would rather A than B'는 'B할 바에야 차라리 [[A하겠다]]'라는 '선택·선호'야."
+    },
+    {
+     "chip": "형태",
+     "text": "rather 뒤 A, than 뒤 B에는 둘 다 [[동사원형]]이 와 — rather delete ... than suffer ..."
+    },
+    {
+     "chip": "의미",
+     "text": "단순 비교가 아니라 'B는 싫어서 A를 택한다'는 [[선호]]를 나타내."
+    },
+    {
+     "chip": "주의",
+     "text": "'d는 [[would]]의 축약이야(had 아님) — they'd rather = they would rather."
+    },
+    {
+     "chip": "해석 요령",
+     "text": "'than B할 바에 (차라리) A한다'로, A를 택하는 이유(B 회피)를 함께 잡아."
+    }
+   ],
+   "example": "",
+   "example_analysis": "rather delete the content(A) than suffer judgement(B) — 비판을 겪느니 차라리 삭제하겠다는 선택.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "밑줄 친 부분 중 어법상 틀린 것은?",
+     "answer": "⑤",
+     "sentence": "Observation studies of teenagers [[①|using]] social media [[②|have discovered]] one peculiar behaviour in particular [[③|that]] sets them apart — teenagers will [[④|post or share]] something on social media, but then they'll monitor the post [[⑤|to gauging]] the volume of reactions.",
+     "fix": "⑤ to gauging → to gauge: 목적을 나타내는 to부정사이므로 to 뒤에는 동사원형 gauge가 와야 한다.",
+     "options": [
+      "① using",
+      "② have discovered",
+      "③ that",
+      "④ post or share",
+      "⑤ to gauging"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "네모 안에서 어법상 알맞은 것을 고르시오.",
+     "answer": "to earn / what / to self-enhance",
+     "sentence": "Their aim of posting is [[to earn/earning]] recognition for [[what/that]] they're sharing as a way [[to self-enhance/self-enhancing]].",
+     "fix": "보어 자리의 to부정사 to earn, 선행사를 포함한 관계대명사 what, 'a way to+동사원형'의 to self-enhance가 옳다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "answer": "Not getting a reaction have a negative effect on their self-esteem.",
+     "sentence": "",
+     "fix": "have → has: 동명사(구) 주어 'Not getting a reaction'은 단수 취급하므로 단수동사 has가 옳다.",
+     "options": [
+      "After a set amount of time, if the number of resulting 'Likes' and 'Shares' is too low, they'll delete the content.",
+      "Not getting a reaction have a negative effect on their self-esteem.",
+      "Sometimes within the first ten minutes!",
+      "Their aim of posting is to earn recognition for what they're sharing as a way to self-enhance.",
+      "If the recognition is insufficient, they'd rather delete the content than suffer perceived judgement from others against their failed efforts to self-enhance."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "인정이 불충분하면, 그들은 자기 고양을 위한 실패한 노력에 대해 타인이 내리는 인지된 비판을 겪느니 차라리 그 콘텐츠를 삭제하려 한다.",
+     "answer": "If the recognition is insufficient, they'd rather delete the content than suffer perceived judgement from others against their failed efforts to self-enhance.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "If",
+      "the",
+      "recognition",
+      "is",
+      "insufficient,",
+      "they'd",
+      "rather",
+      "delete",
+      "the",
+      "content",
+      "than",
+      "suffer",
+      "perceived",
+      "judgement",
+      "from",
+      "others",
+      "against",
+      "their",
+      "failed",
+      "efforts",
+      "to",
+      "self-enhance."
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "(같은 문장·구 단위 제시어) 인정이 충분하지 않으면, 그들은 자기 고양 실패에 대한 타인의 인지된 비판을 겪느니 차라리 그 콘텐츠를 삭제하려 한다.",
+     "answer": "If the recognition is insufficient, they'd rather delete the content than suffer perceived judgement from others against their failed efforts to self-enhance.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "If the recognition is insufficient,",
+      "they'd rather",
+      "delete the content",
+      "than suffer",
+      "perceived judgement",
+      "from others",
+      "against their failed efforts",
+      "to self-enhance."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "십대가 소셜미디어에서 반응(인정)을 확인하고, 반응이 적으면 게시물을 지우는 행동과 그 심리에 관한 글이야.",
+  "stance": "중립적",
+  "stance_reason": "관찰 연구 결과를 사실 중심으로 설명하며, 십대 행동을 평가보다 분석적으로 서술해.",
+  "structure": "주장→근거·예시",
+  "structure_reason": "관찰된 독특한 행동(1~3문장)을 제시하고, 그 목적·이유(4~6문장)로 설명해.",
+  "restatement_chains": [
+   {
+    "label": "인정 욕구",
+    "expressions": [
+     "earn recognition",
+     "self-enhance",
+     "self-esteem"
+    ],
+    "variation": "'인정을 얻다' → '자기 고양' → '자존감'으로 심리 동기가 이어져."
+   },
+   {
+    "label": "삭제 행동",
+    "expressions": [
+     "they'll delete the content",
+     "they'd rather delete the content than suffer"
+    ],
+    "variation": "'콘텐츠를 삭제한다'는 행동 → '비판을 겪느니 차라리 삭제한다'는 이유가 붙어 구체화돼."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입",
+    "sentence_range": "1",
+    "summary": "십대는 소셜미디어에 올린 뒤 반응의 양을 관찰하는 독특한 행동을 보인다.",
+    "easy_example": "글 올리고 좋아요가 얼마나 붙나 계속 확인하는 모습."
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "2~3",
+    "summary": "일정 시간 뒤 '좋아요·공유'가 너무 적으면 게시물을 지우는데, 때론 10분 안에도 지운다.",
+    "easy_example": "반응 없으면 금방 슬쩍 지워 버리는 것."
+   },
+   {
+    "stage": "이유",
+    "sentence_range": "4",
+    "summary": "게시의 목표는 공유한 것으로 '인정'을 받아 자신을 고양하는 것이다.",
+    "easy_example": "칭찬·인정을 받으려고 올리는 것."
+   },
+   {
+    "stage": "핵심",
+    "sentence_range": "5",
+    "summary": "인정이 부족하면 타인의 비판을 겪느니 차라리 콘텐츠를 삭제한다.",
+    "easy_example": "반응이 시원찮으면 창피 당하기 전에 지워 버리는 것."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "6",
+    "summary": "반응을 얻지 못하는 것은 그들의 자존감에 부정적 영향을 준다.",
+    "easy_example": "무반응이 마음에 상처가 되는 것."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Observation studies of teenagers using social media have discovered one peculiar behaviour in particular that sets them apart — teenagers will post or share something on social media, but then they'll monitor the post to gauge the volume of reactions.",
+   "translation": "소셜미디어를 사용하는 십대에 대한 관찰 연구는 그들을 남들과 구별 짓는 하나의 특이한 행동을 특히 발견했는데, 십대는 소셜미디어에 무언가를 올리거나 공유한 뒤 반응의 양을 가늠하기 위해 그 게시물을 관찰한다는 것이다.",
+   "grammar": [
+    {
+     "tag": "관계사 that",
+     "note": "behaviour 수식",
+     "spans": []
+    },
+    {
+     "tag": "대시 부연",
+     "note": "독특한 행동을 풀어 설명",
+     "spans": []
+    },
+    {
+     "tag": "분사(현재분사 수식)",
+     "note": "teenagers using social media = teenagers who use~ (후치수식)",
+     "spans": []
+    },
+    {
+     "tag": "공통 조동사 will",
+     "note": "will [post] or [share] — will이 두 동사에 공통",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "peculiar",
+     "meaning": "독특한, 특이한"
+    },
+    {
+     "word": "set apart",
+     "meaning": "구별 짓다"
+    },
+    {
+     "word": "gauge",
+     "meaning": "측정하다, 가늠하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[Observation studies]] of teenagers using social media",
+     "ko": "소셜미디어를 사용하는 십대에 대한 [[관찰 연구]]는"
+    },
+    {
+     "en": "have [[discovered]] one peculiar behaviour in particular",
+     "ko": "특히 하나의 독특한 행동을 [[발견했다]]"
+    },
+    {
+     "en": "[[that sets them apart]]",
+     "ko": "[[그들을 (남들과) 구별 짓는]]"
+    },
+    {
+     "en": "— teenagers will [[post]] or share something on social media,",
+     "ko": "— 십대는 소셜미디어에 무언가를 [[올리거나]] 공유하는데,"
+    },
+    {
+     "en": "but then they'll [[monitor the post to gauge the volume of reactions]].",
+     "ko": "그런 다음 [[반응의 양을 가늠하려고 그 게시물을 관찰한다]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "십대는 게시물을 올린 뒤 신경 쓰지 않는다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "올린 뒤 '반응의 양을 재려고 관찰한다(monitor to gauge)'는 게 이 글이 주목한 독특한 행동이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘using social media’를 주동사로 읽으면 안 돼 — [[teenagers using social media]]는 ‘소셜미디어를 쓰는 십대들’이고 주동사는 have discovered야.",
+    "‘that sets them apart’가 teenagers를 꾸민다고 읽으면 안 돼 — [[behaviour that sets them apart]]라서 that은 behaviour를 꾸며."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "After a set amount of time, if the number of resulting 'Likes' and 'Shares' is too low, they'll delete the content.",
+   "translation": "일정한 시간이 지난 뒤, 그 결과로 생긴 '좋아요'와 '공유'의 수가 너무 적으면 그들은 그 콘텐츠를 삭제한다.",
+   "grammar": [
+    {
+     "tag": "조건 if",
+     "note": "'~라면'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "a set amount",
+     "meaning": "일정한 양"
+    },
+    {
+     "word": "resulting",
+     "meaning": "결과로 생긴"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "After a set amount of [[time]],",
+     "ko": "일정 [[시간]] 뒤,"
+    },
+    {
+     "en": "[[if the number of resulting 'Likes' and 'Shares' is too low]],",
+     "ko": "[[그 결과로 생긴 '좋아요'와 '공유' 수가 너무 적으면]],"
+    },
+    {
+     "en": "they'll [[delete the content]].",
+     "ko": "그들은 [[콘텐츠를 삭제한다]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "반응이 적어도 게시물을 그대로 둔다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'if ... too low, they'll delete(적으면 삭제한다)'는 조건부 행동 — 반응이 적으면 지운다는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘set’을 동사로 읽으면 안 돼 — [[a set amount of time]]는 ‘정해진 양의 시간’이야."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "Sometimes within the first ten minutes!",
+   "translation": "때로는 첫 10분 이내에 삭제하기도 한다!",
+   "grammar": [
+    {
+     "tag": "생략·강조",
+     "note": "(they delete it) within ten minutes",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "within",
+     "meaning": "~ 이내에"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Sometimes [[within the first ten minutes]]!",
+     "ko": "때로는 [[첫 10분 이내에도]]!"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "삭제는 항상 오랜 시간이 지난 뒤에만 일어난다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'within the first ten minutes(10분 안에도)'라며 삭제가 매우 빠를 수 있음을 강조해 — 앞 문장을 이어받은 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "Their aim of posting is to earn recognition for what they're sharing as a way to self-enhance.",
+   "translation": "그들이 게시물을 올리는 목표는 자신을 고양하는 하나의 방법으로서 자신이 공유하는 것에 대해 인정을 얻는 것이다.",
+   "grammar": [
+    {
+     "tag": "관계사 what",
+     "note": "for의 목적어 '~하는 것'",
+     "spans": []
+    },
+    {
+     "tag": "as a way to",
+     "note": "'~하는 방법으로서'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "recognition",
+     "meaning": "인정"
+    },
+    {
+     "word": "self-enhance",
+     "meaning": "자기를 고양하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Their aim of posting is to earn [[recognition]]",
+     "ko": "그들의 게시 목표는 [[인정]]을 얻는 것이다"
+    },
+    {
+     "en": "for [[what they're sharing]]",
+     "ko": "[[자신이 공유하는 것에 대해]]"
+    },
+    {
+     "en": "as a way to [[self-enhance]].",
+     "ko": "[[자신을 고양하는]] 방법으로서."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "게시의 목표는 정보를 알리는 것이라는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "목표는 '인정을 얻어 자신을 고양(self-enhance)'하는 것 — 정보 전달이 아니라 인정 욕구가 핵심이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘what they're sharing’을 의문사절로 읽으면 안 돼 — [[what they're sharing]]은 ‘그들이 공유하는 것’이라는 관계사절이야."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "If the recognition is insufficient, they'd rather delete the content than suffer perceived judgement from others against their failed efforts to self-enhance.",
+   "translation": "인정이 불충분하면, 그들은 자기 고양을 위한 실패한 노력에 대해 타인이 내리는 인지된 비판을 겪느니 차라리 그 콘텐츠를 삭제하려 한다.",
+   "grammar": [
+    {
+     "tag": "would rather A than B",
+     "note": "'B하느니 A하겠다'",
+     "spans": []
+    },
+    {
+     "tag": "조건 if",
+     "note": "'~라면'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "insufficient",
+     "meaning": "불충분한"
+    },
+    {
+     "word": "perceived",
+     "meaning": "인지된"
+    },
+    {
+     "word": "judgement",
+     "meaning": "비판, 판단"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "If the recognition is [[insufficient]],",
+     "ko": "인정이 [[불충분]]하면,"
+    },
+    {
+     "en": "they'd [[rather delete the content than suffer perceived judgement]]",
+     "ko": "그들은 [[비판을 겪느니 차라리 콘텐츠를 삭제한다]]"
+    },
+    {
+     "en": "from others against their failed efforts to [[self-enhance]].",
+     "ko": "[[자기 고양]] 실패에 대한 타인의."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "십대는 비판을 견디며 게시물을 끝까지 남겨 둔다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'rather delete ... than suffer judgement(비판을 겪느니 삭제)'가 핵심 — 비판을 피하려고 지운다는 선택이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘A보다 B를 겪는다’로 읽으면 안 돼 — [[would rather delete than suffer]]는 ‘겪느니 차라리 삭제한다’야."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Not getting a reaction has a negative effect on their self-esteem.",
+   "translation": "반응을 얻지 못하는 것은 그들의 자존감에 부정적인 영향을 미친다.",
+   "grammar": [
+    {
+     "tag": "동명사 주어",
+     "note": "Not getting a reaction",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "self-esteem",
+     "meaning": "자존감"
+    },
+    {
+     "word": "reaction",
+     "meaning": "반응"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[Not getting a reaction]]",
+     "ko": "[[반응을 얻지 못하는 것은]]"
+    },
+    {
+     "en": "has a negative effect on their [[self-esteem]].",
+     "ko": "그들의 [[자존감]]에 부정적 영향을 준다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(함축) 반응이 없어도 십대의 자존감은 아무 영향을 받지 않는다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "함축을 놓쳤어. 'negative effect on self-esteem'은 무반응이 자존감을 '해친다'는 뜻 — 삭제 행동의 심리적 뿌리를 밝히는 마무리야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘Not getting a reaction’을 부사처럼 읽으면 안 돼 — [[Not getting a reaction]]은 동명사 주어라 ‘반응을 얻지 못하는 것이’야."
+   ]
+  }
+ ]
+}

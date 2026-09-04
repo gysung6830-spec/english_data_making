@@ -23,8 +23,8 @@
        {"kind":"밑줄형","question":"다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?","sentence":"[[1|It]] also [[2|make]] sense [[3|that]] we would develop specific mechanisms [[4|to attend]] to [[5|minimizing]] rejection and enhancing acceptance.","answer":"②","fix":"가주어 It은 3인칭 단수이므로 make가 아니라 makes(원문)로 써야 한다.","options":["① It","② make","③ that","④ to attend","⑤ minimizing"],"words":[],"from_passage":true},
        {"kind":"네모형","question":"각 네모 안에서 어법에 맞는 것을 고르시오.","sentence":"The monitoring system generally [[operates/operate]] nonconsciously until it [[detects/detect]] [[that/what]] our relational value is falling or low.","answer":"operates / detects / that","fix":"단수주어 The monitoring system → operates, it → detects, detects의 목적어절을 이끄는 접속사는 that.","options":[],"words":[],"from_passage":true},
        {"kind":"오류찾기","question":"다음 중 어법상 틀린 문장은?","sentence":"","answer":"When the alarm bell rings, the threat to our social bonds is pushing into conscious awareness and we evaluate the situation.","fix":"위협은 '밀려 올라오는' 대상이므로 능동 is pushing이 아니라 수동태 is pushed(원문)로 고쳐야 한다.","options":["① From an evolutionary perspective, self-esteem has developed as a monitoring mechanism for the quality of our relationships.","② When the alarm bell rings, the threat to our social bonds is pushing into conscious awareness and we evaluate the situation.","③ The continuous scanning is normal, a part of being human.","④ We all have an interpersonal process of searching for cues from the environment to assess our value in the social structure.","⑤ Self-esteem works as a monitoring mechanism that signals that there might be problems in people's social bonds, allowing them to adjust their behavior to enhance relationships."],"words":[],"from_passage":true},
-       {"kind":"영작","question":"네가 규칙을 어겼다는 것은 분명하다. (가주어 It ~ that 사용)","answer":"It is clear that you broke the rules.","fix":"","options":[],"words":["It","is","clear","that","you","broke","the rules"],"from_passage":false},
-       {"kind":"영작","question":"우리가 거부를 최소화하고 수용을 강화하는 데 주의를 기울이는 특정 기제를 발달시키리라는 것 또한 이치에 맞다.","answer":"It also makes sense that we would develop specific mechanisms to attend to minimizing rejection and enhancing acceptance.","fix":"","options":[],"words":["It","also","makes sense","that","we","would develop","specific mechanisms","to attend to","minimizing rejection","and","enhancing acceptance"],"from_passage":true}
+       {"kind":"영작","question":"생존에 대한 그토록 높은 가치가 관계와 밀접히 결부되어 있어서, 우리가 관계를 중심으로 내적 자원을 동원하는 방식이 우리 뇌와 몸에서 고도로 연결망을 이룰 것이라는 것은 이치에 맞다.","answer":"With such a high value for survival closely tied with relationships, it makes sense that the way we mobilize our internal resources around relationships would be highly networked in our brain and body.","fix":"","options":[],"words":["With","such a high value","for survival","closely tied with","relationships,","it makes sense that","the way","we mobilize","our internal resources","around relationships","would be","highly networked","in our brain and body."],"from_passage":true},
+       {"kind":"영작","question":"우리가 거부를 최소화하고 수용을 강화하는 데 주의를 기울이는 특정 기제를 발달시키리라는 것 또한 이치에 맞다.","answer":"It also makes sense that we would develop specific mechanisms to attend to minimizing rejection and enhancing acceptance.","fix":"","options":[],"words":["It","also","makes sense","that","we","would develop","specific mechanisms","to attend to","minimizing rejection","and","enhancing acceptance."],"from_passage":true}
      ]
    },
    "restatement_chains": [
@@ -43,6 +43,7 @@
    {
      "id": 1,
      "english": "From an evolutionary perspective, self-esteem has developed as a monitoring mechanism for the quality of our relationships.",
+     "translation": "진화적 관점에서 보면, 자존감은 우리 관계의 질을 감시하는 기제로서 발달해 왔다.",
      "grammar": [
        {"tag":"현재완료(완료)","note":"has developed = '발달해 온 상태다'","spans":["has developed"]},
        {"tag":"전치사 as(~로서)","note":"자격·역할을 나타내는 as","spans":["as"]}
@@ -57,7 +58,8 @@
        {"en":"From an evolutionary perspective,","ko":"진화의 [[관점]]에서 보면,"},
        {"en":"self-esteem has developed","ko":"자존감은 [[발달해]] 왔다"},
        {"en":"as a monitoring mechanism","ko":"하나의 감시 [[기제]]로서"},
-       {"en":"for the quality of our relationships.","ko":"우리 관계의 [[질]]을 위한."}
+       {"en":"for the quality","ko":"그 [[질]]을 위한"},
+       {"en":"of our relationships.","ko":"우리 관계의."}
      ],
      "misreads": [
        {"statement":"필자는 자존감을 진화 과정에서 발달한, 관계의 질을 감시하는 기제로 본다.","verdict":"O","trap_type":"필자관점"}
@@ -67,21 +69,23 @@
    {
      "id": 2,
      "english": "The system monitors other people's reactions to our behaviors and sends an alarm that alerts us to any possible changes in our inclusion status.",
+     "translation": "그 체계는 우리의 행동에 대한 다른 사람들의 반응을 감시하고, 우리의 소속 지위에 생길 수 있는 어떤 변화든 우리에게 알려 주는 경보를 보낸다.",
      "grammar": [
        {"tag":"주어-동사 수일치(단수)","note":"단수주어 The system에 맞춰 monitors/sends","spans":["monitors"]},
        {"tag":"등위접속사 and(동사 병렬)","note":"monitors와 sends를 대등하게 연결","spans":["and"]},
        {"tag":"주격 관계대명사 that","note":"선행사 an alarm이 alerts의 주어","spans":["that"]}
      ],
      "vocab": [
-       {"word":"reaction","meaning":"반응"},
-       {"word":"alarm","meaning":"경보"},
        {"word":"alert","meaning":"알리다, 경고하다"},
        {"word":"inclusion status","meaning":"포함(소속) 지위"}
      ],
      "chunks": [
-       {"en":"The system monitors other people's reactions to our behaviors","ko":"그 체계는 우리 행동에 대한 다른 사람들의 [[반응]]을 감시하고"},
+       {"en":"The system monitors","ko":"그 체계는 [[감시하고]]"},
+       {"en":"other people's reactions","ko":"다른 사람들의 [[반응]]을"},
+       {"en":"to our behaviors","ko":"우리 행동에 대한"},
        {"en":"and sends an alarm","ko":"그리고 [[경보]]를 보낸다"},
-       {"en":"that alerts us to any possible changes","ko":"어떤 가능한 [[변화]]든 우리에게 알려 주는"},
+       {"en":"that alerts us","ko":"우리에게 알려 주는"},
+       {"en":"to any possible changes","ko":"어떤 가능한 [[변화]]든"},
        {"en":"in our inclusion status.","ko":"우리의 [[소속]] 지위에서의."}
      ],
      "misreads": [
@@ -93,20 +97,22 @@
    {
      "id": 3,
      "english": "The monitoring system generally operates nonconsciously until it detects that our relational value is falling or low.",
+     "translation": "그 감시 체계는 우리의 관계적 가치가 떨어지고 있거나 낮다는 것을 감지하기 전까지는 대개 무의식적으로 작동한다.",
      "grammar": [
        {"tag":"시간 부사절 접속사 until","note":"'~할 때까지'","spans":["until"]},
        {"tag":"명사절 접속사 that(목적어절)","note":"detects의 목적어절을 이끎","spans":["that"]},
        {"tag":"현재진행형 is falling","note":"'떨어지고 있는' 진행 상황","spans":["is falling"]}
      ],
      "vocab": [
-       {"word":"operate","meaning":"작동하다"},
        {"word":"nonconsciously","meaning":"무의식적으로"},
        {"word":"detect","meaning":"감지하다"},
        {"word":"relational value","meaning":"관계적 가치"}
      ],
      "chunks": [
-       {"en":"The monitoring system generally operates nonconsciously","ko":"그 감시 체계는 대개 [[무의식적으로]] 작동한다"},
-       {"en":"until it detects that our relational value","ko":"우리의 [[관계적]] 가치가 ~임을 감지할 때까지"},
+       {"en":"The monitoring system generally operates","ko":"그 감시 체계는 대개 [[작동한다]]"},
+       {"en":"nonconsciously","ko":"[[무의식적으로]]"},
+       {"en":"until it detects that","ko":"그것이 ~임을 [[감지할]] 때까지"},
+       {"en":"our relational value","ko":"우리의 [[관계적]] 가치가"},
        {"en":"is falling or low.","ko":"떨어지고 있거나 [[낮다]]는 것을."}
      ],
      "misreads": [
@@ -117,6 +123,7 @@
    {
      "id": 4,
      "english": "When the alarm bell rings, the threat to our social bonds is pushed into conscious awareness and we evaluate the situation.",
+     "translation": "경보 벨이 울리면, 우리의 사회적 유대에 대한 위협이 의식적 자각으로 밀려 올라오고 우리는 그 상황을 평가한다.",
      "grammar": [
        {"tag":"시간 부사절 접속사 When","note":"'~할 때'","spans":["When"]},
        {"tag":"수동태(be+p.p.)","note":"위협이 '밀려 올라오는' 대상","spans":["is pushed"]},
@@ -130,7 +137,8 @@
      ],
      "chunks": [
        {"en":"When the alarm bell rings,","ko":"경보 벨이 [[울리면]],"},
-       {"en":"the threat to our social bonds","ko":"우리 [[사회적]] 유대에 대한 위협이"},
+       {"en":"the threat","ko":"그 [[위협]]이"},
+       {"en":"to our social bonds","ko":"우리 사회적 유대에 대한"},
        {"en":"is pushed into conscious awareness","ko":"[[의식적]] 자각으로 밀려 올라오고"},
        {"en":"and we evaluate the situation.","ko":"우리는 그 [[상황]]을 평가한다."}
      ],
@@ -142,12 +150,12 @@
    {
      "id": 5,
      "english": "Am I being accepted or am I being pushed out?",
+     "translation": "나는 받아들여지고 있는가, 아니면 밀려나고 있는가?",
      "grammar": [
        {"tag":"진행 수동태(be being p.p.)","note":"'받아들여지고/밀려나고 있는 중'","spans":["being accepted","being pushed"]},
        {"tag":"의문문 어순(도치)","note":"be동사가 주어 앞으로 나온 의문문","spans":["Am I"]}
      ],
      "vocab": [
-       {"word":"accepted","meaning":"받아들여진"},
        {"word":"push out","meaning":"밀어내다, 배제하다"}
      ],
      "chunks": [
@@ -162,18 +170,18 @@
    {
      "id": 6,
      "english": "Do I need to adjust my behaviors to fix the relationship?",
+     "translation": "나는 그 관계를 바로잡기 위해 내 행동을 조정할 필요가 있는가?",
      "grammar": [
        {"tag":"의문문(조동사 do)","note":"Do가 주어 앞에 온 의문문","spans":["Do I"]},
        {"tag":"to부정사(need to-V)","note":"need는 to부정사를 목적어로 취함","spans":["to adjust"]},
        {"tag":"to부정사 부사적 용법(목적)","note":"'~을 바로잡기 위해'","spans":["to fix"]}
      ],
      "vocab": [
-       {"word":"adjust","meaning":"조정하다"},
-       {"word":"behavior","meaning":"행동"},
-       {"word":"fix","meaning":"바로잡다, 고치다"}
+       {"word":"adjust","meaning":"조정하다"}
      ],
      "chunks": [
-       {"en":"Do I need to adjust my behaviors","ko":"나는 내 [[행동]]을 조정할 필요가 있는가"},
+       {"en":"Do I need","ko":"나는 ~할 [[필요가]] 있는가"},
+       {"en":"to adjust my behaviors","ko":"내 [[행동]]을 조정할"},
        {"en":"to fix the relationship?","ko":"그 [[관계]]를 바로잡기 위해?"}
      ],
      "misreads": [
@@ -184,6 +192,7 @@
    {
      "id": 7,
      "english": "With such a high value for survival closely tied with relationships, it makes sense that the way we mobilize our internal resources around relationships would be highly networked in our brain and body.",
+     "translation": "생존에 대한 그토록 높은 가치가 관계와 밀접히 결부되어 있기 때문에, 우리가 관계를 중심으로 내적 자원을 동원하는 방식이 우리의 뇌와 몸에서 고도로 연결망을 이루는 것은 이치에 맞다.",
      "grammar": [
        {"tag":"전치사 With(부대상황)","note":"'~한 채로, ~해서'","spans":["With"]},
        {"tag":"과거분사 형용사적 용법(후치수식)","note":"value를 뒤에서 꾸밈('결부된')","spans":["tied"]},
@@ -191,18 +200,21 @@
        {"tag":"관계부사 the way(방법)","note":"the way (that) we mobilize ~ '~하는 방식'","spans":["the way"]}
      ],
      "vocab": [
-       {"word":"survival","meaning":"생존"},
        {"word":"tied with","meaning":"~와 결부된"},
        {"word":"mobilize","meaning":"동원하다"},
        {"word":"internal resources","meaning":"내적 자원"},
        {"word":"networked","meaning":"연결망을 이룬"}
      ],
      "chunks": [
-       {"en":"With such a high value for survival","ko":"[[생존]]에 대한 그토록 높은 가치가"},
+       {"en":"With such a high value","ko":"그토록 높은 가치가"},
+       {"en":"for survival","ko":"[[생존]]에 대한"},
        {"en":"closely tied with relationships,","ko":"관계와 밀접히 [[결부되어]] 있어서,"},
        {"en":"it makes sense that","ko":"~라는 것은 [[이치에]] 맞다"},
-       {"en":"the way we mobilize our internal resources around relationships","ko":"우리가 관계를 중심으로 [[내적]] 자원을 동원하는 방식이"},
-       {"en":"would be highly networked in our brain and body.","ko":"우리 뇌와 몸에서 고도로 [[연결망을]] 이룰 것이라는."}
+       {"en":"the way we mobilize","ko":"우리가 [[동원하는]] 방식이"},
+       {"en":"our internal resources","ko":"우리의 내적 자원을"},
+       {"en":"around relationships","ko":"관계를 중심으로"},
+       {"en":"would be highly networked","ko":"고도로 [[연결망을]] 이룰 것이라는"},
+       {"en":"in our brain and body.","ko":"우리 뇌와 몸에서."}
      ],
      "misreads": [
        {"statement":"관계를 중심으로 내적 자원을 동원하는 방식이 뇌와 몸에서 서로 분리되어 작동한다는 것은 이치에 맞다.","verdict":"X","trap_type":"구조수식","anchor":"would be highly networked in our brain and body","why":"그 방식은 뇌·몸에서 '고도로 연결망을 이룬다'고 했으므로 분리되어 작동은 틀림"}
@@ -212,6 +224,7 @@
    {
      "id": 8,
      "english": "It also makes sense that we would develop specific mechanisms to attend to minimizing rejection and enhancing acceptance.",
+     "translation": "우리가 거부를 최소화하고 수용을 강화하는 데 주의를 기울이는 특정한 기제를 발달시키리라는 것 또한 이치에 맞다.",
      "grammar": [
        {"tag":"가주어-진주어(it ~ that)","note":"It은 가주어, that절이 진주어","spans":["It","that"]},
        {"tag":"to부정사 부사적 용법(목적)","note":"'~에 주의를 기울이도록'","spans":["to attend"]},
@@ -225,8 +238,11 @@
      ],
      "chunks": [
        {"en":"It also makes sense that","ko":"~라는 것 또한 [[이치에]] 맞다"},
-       {"en":"we would develop specific mechanisms","ko":"우리가 특정한 [[기제]]를 발달시키리라는"},
-       {"en":"to attend to minimizing rejection and enhancing acceptance.","ko":"[[거부]]를 최소화하고 수용을 강화하는 데 주의를 기울이도록."}
+       {"en":"we would develop","ko":"우리가 [[발달시키리라는]]"},
+       {"en":"specific mechanisms","ko":"특정한 [[기제]]를"},
+       {"en":"to attend to","ko":"~에 주의를 기울이도록"},
+       {"en":"minimizing rejection","ko":"[[거부]]를 최소화하고"},
+       {"en":"and enhancing acceptance.","ko":"[[수용]]을 강화하는."}
      ],
      "misreads": [
        {"statement":"필자는 우리가 거부를 최소화하고 수용을 강화하는 특정 기제를 발달시키는 것도 이치에 맞다고 본다.","verdict":"O","trap_type":"필자관점"}
@@ -236,6 +252,7 @@
    {
      "id": 9,
      "english": "The continuous scanning is normal, a part of being human.",
+     "translation": "이런 지속적인 탐색은 정상적이며, 인간이라는 존재의 일부이다.",
      "grammar": [
        {"tag":"동명사가 이끄는 주어","note":"The continuous scanning이 주어, 단수 취급","spans":["scanning"]},
        {"tag":"동격(콤마) 명사구","note":"scanning을 다시 설명하는 동격 명사구","spans":["a part of being human"]}
@@ -245,7 +262,8 @@
        {"word":"scanning","meaning":"탐색, 살핌"}
      ],
      "chunks": [
-       {"en":"The continuous scanning is normal,","ko":"그 지속적인 [[탐색]]은 정상적이며,"},
+       {"en":"The continuous scanning","ko":"그 지속적인 [[탐색]]은"},
+       {"en":"is normal,","ko":"[[정상적]]이며,"},
        {"en":"a part of being human.","ko":"[[인간]]이라는 존재의 일부이다."}
      ],
      "misreads": [
@@ -257,6 +275,7 @@
    {
      "id": 10,
      "english": "We all have an interpersonal process of searching for cues from the environment to assess our value in the social structure.",
+     "translation": "우리 모두는 사회 구조 속에서 우리의 가치를 가늠하기 위해 환경으로부터 단서를 찾는 대인 관계의 과정을 지닌다.",
      "grammar": [
        {"tag":"대명사 강조 all","note":"We all = '우리 모두'","spans":["all"]},
        {"tag":"동명사(전치사 of의 목적어)","note":"of 뒤 searching","spans":["searching"]},
@@ -269,9 +288,12 @@
        {"word":"social structure","meaning":"사회 구조"}
      ],
      "chunks": [
-       {"en":"We all have an interpersonal process","ko":"우리 모두는 [[대인]] 관계의 과정을 지닌다"},
-       {"en":"of searching for cues from the environment","ko":"환경으로부터 [[단서]]를 찾는"},
-       {"en":"to assess our value in the social structure.","ko":"사회 구조 속 우리의 [[가치]]를 가늠하기 위해."}
+       {"en":"We all have","ko":"우리 모두는 지닌다"},
+       {"en":"an interpersonal process","ko":"[[대인]] 관계의 과정을"},
+       {"en":"of searching for cues","ko":"[[단서]]를 찾는"},
+       {"en":"from the environment","ko":"환경으로부터"},
+       {"en":"to assess our value","ko":"우리의 [[가치]]를 가늠하기 위해"},
+       {"en":"in the social structure.","ko":"사회 [[구조]] 속."}
      ],
      "misreads": [
        {"statement":"우리 모두는 사회 구조 속 자신의 가치를 가늠하려고 환경에서 단서를 찾는 과정을 지닌다.","verdict":"O","trap_type":"주체대상"}
@@ -281,6 +303,7 @@
    {
      "id": 11,
      "english": "Self-esteem works as a monitoring mechanism that signals that there might be problems in people's social bonds, allowing them to adjust their behavior to enhance relationships.",
+     "translation": "자존감은 사람들의 사회적 유대에 문제가 있을 수 있음을 알리는 감시 기제로서 작동하여, 그들이 관계를 향상시키기 위해 행동을 조정하도록 해 준다.",
      "grammar": [
        {"tag":"전치사 as(~로서)","note":"'감시 기제로서'","spans":["as"]},
        {"tag":"주격 관계대명사 that","note":"선행사 a monitoring mechanism이 signals의 주어","spans":["that"]},
@@ -293,10 +316,13 @@
        {"word":"enhance","meaning":"향상시키다"}
      ],
      "chunks": [
-       {"en":"Self-esteem works as a monitoring mechanism","ko":"자존감은 하나의 감시 [[기제]]로서 작동한다"},
-       {"en":"that signals that there might be problems","ko":"~에 [[문제]]가 있을 수 있음을 알리는"},
-       {"en":"in people's social bonds,","ko":"사람들의 [[사회적]] 유대 속에,"},
-       {"en":"allowing them to adjust their behavior to enhance relationships.","ko":"그들이 관계를 향상시키려 [[행동]]을 조정하도록 해 주는."}
+       {"en":"Self-esteem works","ko":"자존감은 작동한다"},
+       {"en":"as a monitoring mechanism","ko":"하나의 감시 [[기제]]로서"},
+       {"en":"that signals that","ko":"~을 [[알리는]]"},
+       {"en":"there might be problems","ko":"[[문제]]가 있을 수 있음을"},
+       {"en":"in people's social bonds,","ko":"사람들의 사회적 유대 속에,"},
+       {"en":"allowing them to adjust their behavior","ko":"그들이 [[행동]]을 조정하도록 해 주는"},
+       {"en":"to enhance relationships.","ko":"관계를 [[향상시키기]] 위해."}
      ],
      "misreads": [
        {"statement":"자존감은 사회적 유대에 문제가 있을 수 있음을 알려, 사람들이 관계를 악화시키도록 행동을 조정하게 만든다.","verdict":"X","trap_type":"구조수식","anchor":"to enhance relationships","why":"행동 조정의 목적은 관계를 '향상'시키는 것이지 악화가 아님","killer":true}

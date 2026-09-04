@@ -79,23 +79,6 @@
     },
     {
      "kind": "영작",
-     "question": "이것은 그 과학자들이 오랫동안 연구해 온 곤충이다. (목적격 관계대명사 which 사용)",
-     "answer": "This is the insect which the scientists have studied for a long time.",
-     "fix": "",
-     "options": [],
-     "words": [
-      "This",
-      "is",
-      "the insect",
-      "which",
-      "the scientists",
-      "have studied",
-      "for a long time"
-     ],
-     "from_passage": false
-    },
-    {
-     "kind": "영작",
      "question": "개미들은 곰팡이에게 먹이를 주고, 그 곰팡이는 개미들이 나중에 먹는 작은 자실체로 피어난다.",
      "answer": "The ants feed the fungus, and the fungus blossoms into small fruiting bodies which the ants later eat.",
      "fix": "",
@@ -112,6 +95,27 @@
       "the ants",
       "later",
       "eat"
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "개미들 중 일부는 신선한 초목을 찾기 위해 둥지에서 나서고, 그것을 찾으면 커다란 조각을 씹어 잘라 둥지로 도로 가져온다.",
+     "answer": "Some of the ants set forth from the nest to find fresh vegetation; when they find it, they chew off large pieces that they carry back to the nest.",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Some of the ants",
+      "set forth",
+      "from the nest",
+      "to find",
+      "fresh vegetation",
+      "when they find it",
+      "they chew off",
+      "large pieces",
+      "that",
+      "they carry back",
+      "to the nest"
      ],
      "from_passage": true
     }
@@ -166,6 +170,7 @@
   {
    "id": 1,
    "english": "With millions of members in a colony, leaf-cutter ants cultivate their own food.",
+   "translation": "수백만 마리의 구성원으로 이루어진 군락에서, 잎꾼개미는 자신들의 먹이를 직접 재배한다.",
    "grammar": [
     {
      "tag": "전치사 with(부대상황)",
@@ -198,12 +203,20 @@
    ],
    "chunks": [
     {
-     "en": "With millions of members in a colony,",
-     "ko": "수백만 마리의 구성원을 가진 [[군락]]으로,"
+     "en": "With millions of members",
+     "ko": "수백만 마리의 [[구성원]]을 가진 채"
     },
     {
-     "en": "leaf-cutter ants cultivate their own food.",
-     "ko": "잎꾼개미는 자신들만의 [[먹이]]를 재배한다."
+     "en": "in a colony,",
+     "ko": "한 [[군락]] 안에서,"
+    },
+    {
+     "en": "leaf-cutter ants cultivate",
+     "ko": "[[잎꾼개미]]는 재배한다"
+    },
+    {
+     "en": "their own food.",
+     "ko": "그들 자신만의 [[먹이]]를."
     }
    ],
    "misreads": [
@@ -228,6 +241,7 @@
   {
    "id": 2,
    "english": "Just like humans, they're farmers.",
+   "translation": "꼭 인간처럼, 그들은 농부이다.",
    "grammar": [
     {
      "tag": "전치사 like(~처럼)",
@@ -246,12 +260,8 @@
    ],
    "vocab": [
     {
-     "word": "like",
-     "meaning": "~처럼 (전치사)"
-    },
-    {
-     "word": "farmer",
-     "meaning": "농부"
+     "word": "just like",
+     "meaning": "꼭 ~처럼"
     }
    ],
    "chunks": [
@@ -276,6 +286,7 @@
   {
    "id": 3,
    "english": "Some of the ants set forth from the nest to find fresh vegetation; when they find it, they chew off large pieces that they carry back to the nest.",
+   "translation": "개미들 중 일부는 신선한 초목을 찾기 위해 둥지에서 나서고, 그것을 찾으면 커다란 조각을 씹어 잘라 둥지로 도로 가져온다.",
    "grammar": [
     {
      "tag": "수량표현 Some of the(수일치)",
@@ -333,8 +344,12 @@
    ],
    "chunks": [
     {
-     "en": "Some of the ants set forth from the nest",
-     "ko": "개미들 중 일부는 둥지에서 [[나선다]]"
+     "en": "Some of the ants",
+     "ko": "개미들 중 일부는"
+    },
+    {
+     "en": "set forth from the nest",
+     "ko": "둥지에서 [[나선다]]"
     },
     {
      "en": "to find fresh vegetation;",
@@ -342,7 +357,7 @@
     },
     {
      "en": "when they find it,",
-     "ko": "그것을 [[찾으면]],"
+     "ko": "그들이 그것을 [[찾으면]],"
     },
     {
      "en": "they chew off large pieces",
@@ -350,7 +365,7 @@
     },
     {
      "en": "that they carry back to the nest.",
-     "ko": "둥지로 도로 [[가져온다]]."
+     "ko": "그것을 둥지로 도로 [[가져온다]]."
     }
    ],
    "misreads": [
@@ -369,6 +384,7 @@
   {
    "id": 4,
    "english": "However, the ants don't eat these leaves.",
+   "translation": "그러나 개미들은 이 잎을 먹지 않는다.",
    "grammar": [
     {
      "tag": "연결어(대조) However",
@@ -385,20 +401,15 @@
      ]
     }
    ],
-   "vocab": [
-    {
-     "word": "however",
-     "meaning": "그러나 (대조 연결어)"
-    },
-    {
-     "word": "these",
-     "meaning": "이(앞서 말한)"
-    }
-   ],
+   "vocab": [],
    "chunks": [
     {
-     "en": "However, the ants don't eat",
-     "ko": "그러나, 개미들은 [[먹지]] 않는다"
+     "en": "However,",
+     "ko": "그러나,"
+    },
+    {
+     "en": "the ants don't eat",
+     "ko": "개미들은 [[먹지]] 않는다"
     },
     {
      "en": "these leaves.",
@@ -419,6 +430,7 @@
   {
    "id": 5,
    "english": "Instead, smaller worker ants take the pieces of leaves, chew them into smaller pieces, and use these as fertilizer to grow fungus in large underground 'gardens.'",
+   "translation": "그 대신, 더 작은 일개미들이 잎 조각을 가져다 더 작은 조각으로 씹은 뒤, 이를 비료로 삼아 커다란 지하 '정원'에서 곰팡이를 기른다.",
    "grammar": [
     {
      "tag": "연결어 Instead",
@@ -478,20 +490,28 @@
    ],
    "chunks": [
     {
-     "en": "Instead, smaller worker ants take the pieces of leaves,",
-     "ko": "그 대신, 더 작은 [[일개미]]들이 잎 조각을 가져다,"
+     "en": "Instead, smaller worker ants",
+     "ko": "그 대신, 더 작은 [[일개미]]들이"
+    },
+    {
+     "en": "take the pieces of leaves,",
+     "ko": "잎 [[조각]]을 가져다,"
     },
     {
      "en": "chew them into smaller pieces,",
-     "ko": "그것을 더 작은 [[조각]]으로 씹어,"
+     "ko": "그것을 더 작은 조각으로 씹은 뒤,"
     },
     {
      "en": "and use these as fertilizer",
      "ko": "그리고 이것을 [[비료]]로 써서,"
     },
     {
-     "en": "to grow fungus in large underground 'gardens.'",
-     "ko": "커다란 지하 '정원'에서 [[곰팡이]]를 기른다."
+     "en": "to grow fungus",
+     "ko": "[[곰팡이]]를 기르기 위해"
+    },
+    {
+     "en": "in large underground 'gardens.'",
+     "ko": "커다란 지하 '[[정원]]'에서."
     }
    ],
    "misreads": [
@@ -510,6 +530,7 @@
   {
    "id": 6,
    "english": "The ants feed the fungus, and the fungus blossoms into small fruiting bodies which the ants later eat.",
+   "translation": "개미들은 곰팡이에게 먹이를 주고, 그 곰팡이는 개미들이 나중에 먹는 작은 자실체로 피어난다.",
    "grammar": [
     {
      "tag": "등위접속사 and",
@@ -535,10 +556,6 @@
    ],
    "vocab": [
     {
-     "word": "feed",
-     "meaning": "먹이를 주다"
-    },
-    {
      "word": "blossom into",
      "meaning": "~로 피어나다, 자라나다"
     },
@@ -553,12 +570,16 @@
      "ko": "개미들은 [[곰팡이]]에게 먹이를 주고,"
     },
     {
-     "en": "and the fungus blossoms into small fruiting bodies",
-     "ko": "곰팡이는 작은 [[자실체]]로 피어나며,"
+     "en": "and the fungus blossoms",
+     "ko": "그리고 그 곰팡이는 [[피어난다]]"
+    },
+    {
+     "en": "into small fruiting bodies",
+     "ko": "작은 [[자실체]]로"
     },
     {
      "en": "which the ants later eat.",
-     "ko": "개미들은 그것을 나중에 [[먹는다]]."
+     "ko": "개미들이 나중에 [[먹는]]."
     }
    ],
    "misreads": [
@@ -578,6 +599,7 @@
   {
    "id": 7,
    "english": "Using this successful farming strategy, the ants build enormous nests underground, something spanning hundreds of square meters.",
+   "translation": "이 성공적인 농사 전략을 이용하여, 개미들은 지하에 거대한 둥지를 짓는데, 이는 수백 제곱미터에 걸치는 규모이다.",
    "grammar": [
     {
      "tag": "분사구문(동시상황)",
@@ -606,24 +628,28 @@
     {
      "word": "farming strategy",
      "meaning": "농사 전략"
-    },
-    {
-     "word": "square meter",
-     "meaning": "제곱미터"
     }
    ],
    "chunks": [
     {
      "en": "Using this successful farming strategy,",
-     "ko": "이 성공적인 [[농사 전략]]을 이용해,"
+     "ko": "이 성공적인 [[농사 전략]]을 이용하여,"
     },
     {
-     "en": "the ants build enormous nests underground,",
-     "ko": "개미들은 지하에 [[거대한]] 둥지를 짓는데,"
+     "en": "the ants build enormous nests",
+     "ko": "개미들은 [[거대한]] 둥지를 짓는다"
     },
     {
-     "en": "something spanning hundreds of square meters.",
-     "ko": "수백 [[제곱미터]]에 걸치는 규모이다."
+     "en": "underground,",
+     "ko": "지하에,"
+    },
+    {
+     "en": "something spanning",
+     "ko": "무언가 [[걸쳐]]"
+    },
+    {
+     "en": "hundreds of square meters.",
+     "ko": "수백 [[제곱미터]]에."
     }
    ],
    "misreads": [
@@ -642,6 +668,7 @@
   {
    "id": 8,
    "english": "Just like humans, they have perfected an agricultural civilization.",
+   "translation": "꼭 인간처럼, 그들은 농업 문명을 완성해 왔다.",
    "grammar": [
     {
      "tag": "전치사 like(~처럼)",
@@ -678,8 +705,12 @@
      "ko": "꼭 [[인간]]처럼,"
     },
     {
-     "en": "they have perfected an agricultural civilization.",
-     "ko": "그들은 [[농업 문명]]을 완성해 왔다."
+     "en": "they have perfected",
+     "ko": "그들은 [[완성해 왔다]]"
+    },
+    {
+     "en": "an agricultural civilization.",
+     "ko": "[[농업 문명]]을."
     }
    ],
    "misreads": [

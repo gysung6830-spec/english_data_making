@@ -79,19 +79,22 @@
     },
     {
      "kind": "영작",
-     "question": "불확실성을 마주하는 것은 용기를 모으는 것에 관한 것이다.",
-     "answer": "Facing uncertainty is about gathering courage.",
+     "question": "통제하려는 욕구를 내려놓는 것, 즉 자각하는 것은 대체로 불확실성에 맞설 용기를 모으는 일에 관한 것이다.",
+     "answer": "Letting go of our need for control, being aware, is a lot about gathering the courage to face uncertainty.",
      "fix": "",
      "options": [],
      "words": [
-      "Facing",
-      "uncertainty",
+      "Letting go of",
+      "our need for control,",
+      "being aware,",
       "is",
-      "about",
+      "a lot about",
       "gathering",
-      "courage"
+      "the courage",
+      "to face",
+      "uncertainty."
      ],
-     "from_passage": false
+     "from_passage": true
     },
     {
      "kind": "영작",
@@ -167,6 +170,7 @@
   {
    "id": 1,
    "english": "Letting go of our need for control, being aware, is a lot about gathering the courage to face uncertainty.",
+   "translation": "통제하려는 욕구를 내려놓는 것, 즉 자각하는 것은 대체로 불확실성에 맞설 용기를 모으는 일에 관한 것이다.",
    "grammar": [
     {
      "tag": "동명사(주어)",
@@ -210,12 +214,28 @@
    ],
    "chunks": [
     {
-     "en": "Letting go of our need for control, being aware, is",
-     "ko": "우리의 [[통제 욕구]]를 내려놓는 것은, 자각하는 것은, ~이다"
+     "en": "Letting go of",
+     "ko": "내려놓는 것,"
     },
     {
-     "en": "a lot about gathering the courage to face uncertainty.",
-     "ko": "불확실성을 마주할 [[용기]]를 모으는 것에 관한 많은 것"
+     "en": "our need for control,",
+     "ko": "우리의 [[통제 욕구]]를,"
+    },
+    {
+     "en": "being aware, is",
+     "ko": "[[자각]]하는 것은, ~이다"
+    },
+    {
+     "en": "a lot about",
+     "ko": "많은 부분이 ~에 관한 것"
+    },
+    {
+     "en": "gathering the courage",
+     "ko": "[[용기]]를 모으는 것"
+    },
+    {
+     "en": "to face uncertainty.",
+     "ko": "[[불확실성]]을 마주할"
     }
    ],
    "misreads": [
@@ -232,6 +252,7 @@
   {
    "id": 2,
    "english": "Human beings want to know.",
+   "translation": "인간은 알고 싶어 한다.",
    "grammar": [
     {
      "tag": "to부정사(명사적, 목적어)",
@@ -241,20 +262,15 @@
      ]
     }
    ],
-   "vocab": [
-    {
-     "word": "human being",
-     "meaning": "인간"
-    },
-    {
-     "word": "want to",
-     "meaning": "~하기를 원하다"
-    }
-   ],
+   "vocab": [],
    "chunks": [
     {
-     "en": "Human beings want to know.",
-     "ko": "[[인간]]은 알고 싶어 한다"
+     "en": "Human beings",
+     "ko": "[[인간]]은"
+    },
+    {
+     "en": "want to know.",
+     "ko": "알고 싶어 한다"
     }
    ],
    "misreads": [
@@ -272,6 +288,7 @@
   {
    "id": 3,
    "english": "When we don't know, when things are uncertain, we often feel frightened and become inflexible.",
+   "translation": "우리가 모를 때, 즉 상황이 불확실할 때 우리는 흔히 겁을 먹고 경직된다.",
    "grammar": [
     {
      "tag": "부사절(시간·조건 When)",
@@ -311,12 +328,20 @@
    ],
    "chunks": [
     {
-     "en": "When we don't know, when things are uncertain,",
-     "ko": "우리가 모를 때, 상황이 [[불확실]]할 때,"
+     "en": "When we don't know,",
+     "ko": "우리가 모를 때,"
     },
     {
-     "en": "we often feel frightened and become inflexible.",
-     "ko": "우리는 종종 [[겁먹은]] 기분이 들고 경직된다"
+     "en": "when things are uncertain,",
+     "ko": "상황이 [[불확실]]할 때,"
+    },
+    {
+     "en": "we often feel frightened",
+     "ko": "우리는 종종 [[겁먹은]] 기분이 들고"
+    },
+    {
+     "en": "and become inflexible.",
+     "ko": "[[경직]]된다"
     }
    ],
    "misreads": [
@@ -334,6 +359,7 @@
   {
    "id": 4,
    "english": "So we pretend that things are more predictable than they really are, even though we actually live with enormous uncertainty all the time.",
+   "translation": "그래서 우리는 실제로는 늘 막대한 불확실성 속에서 살면서도, 상황이 실제보다 더 예측 가능한 척한다.",
    "grammar": [
     {
      "tag": "명사절 접속사 that(목적어절)",
@@ -378,16 +404,32 @@
    ],
    "chunks": [
     {
-     "en": "So we pretend that things are more predictable",
-     "ko": "그래서 우리는 상황이 더 [[예측 가능]]하다고 ~인 척한다"
+     "en": "So we pretend",
+     "ko": "그래서 우리는 ~인 [[척]]한다"
+    },
+    {
+     "en": "that things are",
+     "ko": "상황이 ~라고"
+    },
+    {
+     "en": "more predictable",
+     "ko": "더 [[예측 가능]]하다고"
     },
     {
      "en": "than they really are,",
      "ko": "[[실제]]보다"
     },
     {
-     "en": "even though we actually live with enormous uncertainty all the time.",
-     "ko": "비록 우리가 실제로는 늘 [[막대한]] 불확실성 속에 살지만"
+     "en": "even though we actually live",
+     "ko": "비록 우리가 실제로는 살지만"
+    },
+    {
+     "en": "with enormous uncertainty",
+     "ko": "[[막대한]] 불확실성 속에"
+    },
+    {
+     "en": "all the time.",
+     "ko": "늘"
     }
    ],
    "misreads": [
@@ -408,6 +450,7 @@
   {
    "id": 5,
    "english": "We cling to our plans and ideas about how things should be and turn out ever so desperately.",
+   "translation": "우리는 일이 어떻게 되고 어떻게 판명되어야 하는지에 대한 계획과 생각에 그토록 필사적으로 매달린다.",
    "grammar": [
     {
      "tag": "cling to",
@@ -447,12 +490,24 @@
    ],
    "chunks": [
     {
-     "en": "We cling to our plans and ideas",
-     "ko": "우리는 우리의 [[계획]]과 생각에 매달린다"
+     "en": "We cling to",
+     "ko": "우리는 ~에 [[매달린다]]"
     },
     {
-     "en": "about how things should be and turn out ever so desperately.",
-     "ko": "일이 어떻게 되고 판명되어야 하는지에 대해 그토록 [[필사적으로]]"
+     "en": "our plans and ideas",
+     "ko": "우리의 [[계획]]과 생각에"
+    },
+    {
+     "en": "about how things",
+     "ko": "일이 어떻게 ~에 대해"
+    },
+    {
+     "en": "should be and turn out",
+     "ko": "되고 판명되어야 하는지"
+    },
+    {
+     "en": "ever so desperately.",
+     "ko": "그토록 [[필사적으로]]"
     }
    ],
    "misreads": [
@@ -467,6 +522,7 @@
   {
    "id": 6,
    "english": "And there's nothing wrong with having plans.",
+   "translation": "그리고 계획을 갖는 것에는 아무런 잘못이 없다.",
    "grammar": [
     {
      "tag": "동명사(전치사의 목적어)",
@@ -487,16 +543,16 @@
     {
      "word": "there's nothing wrong with",
      "meaning": "~하는 것에 아무 잘못이 없다"
-    },
-    {
-     "word": "have plans",
-     "meaning": "계획을 가지다, 세우다"
     }
    ],
    "chunks": [
     {
-     "en": "And there's nothing wrong with having plans.",
-     "ko": "그리고 [[계획]]을 갖는 데에는 아무런 잘못도 없다"
+     "en": "And there's nothing wrong",
+     "ko": "그리고 아무런 [[잘못]]도 없다"
+    },
+    {
+     "en": "with having plans.",
+     "ko": "[[계획]]을 갖는 데에는"
     }
    ],
    "misreads": [
@@ -511,6 +567,7 @@
   {
    "id": 7,
    "english": "I think it's a beautiful thing.",
+   "translation": "나는 그것이 아름다운 일이라고 생각한다.",
    "grammar": [
     {
      "tag": "명사절(that 생략)",
@@ -518,20 +575,15 @@
      "spans": []
     }
    ],
-   "vocab": [
-    {
-     "word": "I think (that)",
-     "meaning": "나는 ~라고 생각한다"
-    },
-    {
-     "word": "a beautiful thing",
-     "meaning": "멋진, 훌륭한 것"
-    }
-   ],
+   "vocab": [],
    "chunks": [
     {
-     "en": "I think it's a beautiful thing.",
-     "ko": "나는 그것이 [[아름다운]] 것이라고 생각한다"
+     "en": "I think",
+     "ko": "나는 생각한다"
+    },
+    {
+     "en": "it's a beautiful thing.",
+     "ko": "그것이 [[아름다운]] 것이라고"
     }
    ],
    "misreads": [
@@ -550,6 +602,7 @@
   {
    "id": 8,
    "english": "But there's a difference between planning and thinking all your plans have to come to fruition.",
+   "translation": "그러나 계획하는 것과 당신의 모든 계획이 반드시 실현되어야 한다고 생각하는 것 사이에는 차이가 있다.",
    "grammar": [
     {
      "tag": "동명사(between A and B 병렬)",
@@ -583,12 +636,20 @@
    ],
    "chunks": [
     {
-     "en": "But there's a difference between planning and thinking",
-     "ko": "그러나 [[계획하는 것]]과 생각하는 것 사이에는 차이가 있다"
+     "en": "But there's a difference",
+     "ko": "그러나 [[차이]]가 있다"
     },
     {
-     "en": "all your plans have to come to fruition.",
-     "ko": "즉 당신의 모든 계획이 [[결실을 맺어야]] 한다고 생각하는 것"
+     "en": "between planning and thinking",
+     "ko": "[[계획하는 것]]과 생각하는 것 사이에"
+    },
+    {
+     "en": "all your plans",
+     "ko": "당신의 모든 [[계획]]이"
+    },
+    {
+     "en": "have to come to fruition.",
+     "ko": "[[결실을 맺어야]] 한다는"
     }
    ],
    "misreads": [
@@ -616,6 +677,7 @@
   {
    "id": 9,
    "english": "American president Eisenhower once said: 'Plans are worthless, but planning is everything.'",
+   "translation": "미국 대통령 아이젠하워는 한때 '계획은 무가치하지만, 계획하는 일은 전부다'라고 말했다.",
    "grammar": [
     {
      "tag": "동명사(주어)",
@@ -648,12 +710,20 @@
    ],
    "chunks": [
     {
-     "en": "American president Eisenhower once said:",
-     "ko": "미국 대통령 아이젠하워는 한때 [[말했다]]"
+     "en": "American president Eisenhower",
+     "ko": "미국 대통령 아이젠하워는"
     },
     {
-     "en": "'Plans are worthless, but planning is everything.'",
-     "ko": "'계획은 [[무가치]]하지만, 계획하기가 전부다'"
+     "en": "once said:",
+     "ko": "한때 [[말했다]]"
+    },
+    {
+     "en": "'Plans are worthless,",
+     "ko": "'계획은 [[무가치]]하지만,"
+    },
+    {
+     "en": "but planning is everything.'",
+     "ko": "[[계획하기]]가 전부다'"
     }
    ],
    "misreads": [
@@ -671,6 +741,7 @@
   {
    "id": 10,
    "english": "Imagine if we all used pencil instead of ink to write in our calendars and planners.",
+   "translation": "우리 모두가 달력과 일정 수첩에 쓸 때 잉크 대신 연필을 사용한다면 어떨지 상상해 보라.",
    "grammar": [
     {
      "tag": "명령문(Imagine)",
@@ -703,16 +774,8 @@
    ],
    "vocab": [
     {
-     "word": "imagine",
-     "meaning": "상상하다"
-    },
-    {
      "word": "instead of",
      "meaning": "~ 대신에"
-    },
-    {
-     "word": "calendar",
-     "meaning": "달력, 일정표"
     },
     {
      "word": "planner",
@@ -721,12 +784,24 @@
    ],
    "chunks": [
     {
-     "en": "Imagine if we all used pencil instead of ink",
-     "ko": "우리 모두가 잉크 대신 [[연필]]을 썼다고 상상해 보라"
+     "en": "Imagine if",
+     "ko": "~라면 상상해 보라"
     },
     {
-     "en": "to write in our calendars and planners.",
-     "ko": "우리의 [[달력]]과 일정 수첩에 쓰기 위해"
+     "en": "we all used pencil",
+     "ko": "우리 모두가 [[연필]]을 썼다면"
+    },
+    {
+     "en": "instead of ink",
+     "ko": "잉크 [[대신]]"
+    },
+    {
+     "en": "to write",
+     "ko": "쓰기 위해"
+    },
+    {
+     "en": "in our calendars and planners.",
+     "ko": "우리의 [[달력]]과 일정 수첩에"
     }
    ],
    "misreads": [
@@ -744,6 +819,7 @@
   {
    "id": 11,
    "english": "Both figuratively and literally.",
+   "translation": "비유적으로도, 문자 그대로도 둘 다 그렇다.",
    "grammar": [
     {
      "tag": "상관접속사(both A and B)",
@@ -766,8 +842,12 @@
    ],
    "chunks": [
     {
-     "en": "Both figuratively and literally.",
-     "ko": "[[비유적으로]]도 문자 그대로도 둘 다"
+     "en": "Both figuratively",
+     "ko": "[[비유적으로]]도"
+    },
+    {
+     "en": "and literally.",
+     "ko": "문자 그대로도 둘 다"
     }
    ],
    "misreads": [
@@ -782,6 +862,7 @@
   {
    "id": 12,
    "english": "Imagine if we could bear in mind that what we write down, what we think is going to happen, might not be what actually happens.",
+   "translation": "우리가 적어 둔 것, 즉 우리가 일어날 것이라고 생각하는 것이 실제로 일어나는 일이 아닐 수도 있음을 명심할 수 있다면 어떨지 상상해 보라.",
    "grammar": [
     {
      "tag": "bear in mind",
@@ -832,16 +913,32 @@
    ],
    "chunks": [
     {
-     "en": "Imagine if we could bear in mind that",
-     "ko": "우리가 ~을 [[명심]]할 수 있다면 상상해 보라"
+     "en": "Imagine if we could",
+     "ko": "우리가 ~할 수 있다면 상상해 보라"
     },
     {
-     "en": "what we write down, what we think is going to happen,",
-     "ko": "우리가 [[적어 둔 것]], 우리가 일어나리라 생각하는 것이"
+     "en": "bear in mind that",
+     "ko": "~을 [[명심]]할"
     },
     {
-     "en": "might not be what actually happens.",
-     "ko": "실제로 일어나는 일이 [[아닐 수도]] 있다는 것을"
+     "en": "what we write down,",
+     "ko": "우리가 [[적어 둔 것]],"
+    },
+    {
+     "en": "what we think",
+     "ko": "우리가 생각하는 것이"
+    },
+    {
+     "en": "is going to happen,",
+     "ko": "[[일어나리라]]는"
+    },
+    {
+     "en": "might not be",
+     "ko": "~이 [[아닐 수도]] 있다는 것을"
+    },
+    {
+     "en": "what actually happens.",
+     "ko": "[[실제로]] 일어나는 일"
     }
    ],
    "misreads": [
@@ -861,6 +958,7 @@
   {
    "id": 13,
    "english": "And if we could try our best to be all right with that.",
+   "translation": "그리고 우리가 그것을 괜찮게 받아들이려 최선을 다할 수 있다면 어떨까.",
    "grammar": [
     {
      "tag": "가정법(if)",
@@ -889,12 +987,20 @@
    ],
    "chunks": [
     {
-     "en": "And if we could try our best",
-     "ko": "그리고 우리가 [[최선]]을 다할 수 있다면"
+     "en": "And if we could",
+     "ko": "그리고 우리가 ~할 수 있다면"
     },
     {
-     "en": "to be all right with that.",
-     "ko": "그것을 [[괜찮게]] 여길 수 있도록"
+     "en": "try our best",
+     "ko": "[[최선]]을 다할"
+    },
+    {
+     "en": "to be all right",
+     "ko": "[[괜찮게]] 여길 수 있도록"
+    },
+    {
+     "en": "with that.",
+     "ko": "그것을"
     }
    ],
    "misreads": [

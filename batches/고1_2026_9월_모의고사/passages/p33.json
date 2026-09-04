@@ -58,13 +58,13 @@
         },
         {
           "kind": "영작",
-          "question": "그는 시험에 합격했고, 그리하여 자신이 열심히 공부했음을 입증했다. (분사구문 사용)",
+          "question": "그들은 아무것도 모방하지 않는 예술 작품을 만드는 데 성공했고, 그리하여 예술을 미메시스, 즉 단순한 모방으로 보는 고대 그리스의 관점이 예술을 충분히 정의하지 못한다는 것을 입증했다. (분사구문 사용)",
           "sentence": "",
-          "answer": "He passed the exam, thus demonstrating that he had studied hard.",
+          "answer": "They succeeded at making artwork that did not copy anything, thus demonstrating that the ancient Greek view of art as mimesis―simple copying―does not sufficiently define art.",
           "fix": "",
           "options": [],
-          "words": ["He", "passed", "the", "exam,", "thus", "demonstrating", "that", "he", "had", "studied", "hard."],
-          "from_passage": false
+          "words": ["They", "succeeded", "at", "making", "artwork", "that", "did", "not", "copy", "anything,", "thus", "demonstrating", "that", "the", "ancient", "Greek", "view", "of", "art", "as", "mimesis―simple", "copying―does", "not", "sufficiently", "define", "art."],
+          "from_passage": true
         },
         {
           "kind": "영작",
@@ -102,19 +102,20 @@
     {
       "id": 1,
       "english": "The ancient Greeks felt that the visual artist's goal was to copy visual experience.",
+      "translation": "고대 그리스인들은 시각 예술가의 목표가 시각적 경험을 모방하는 것이라고 여겼다.",
       "grammar": [
         {"tag": "명사절 접속사 that", "note": "동사 felt의 목적어절을 이끎", "spans": ["that"]},
         {"tag": "to부정사 명사적 용법 (보어)", "note": "was의 보어로 '~하는 것'", "spans": ["to copy"]}
       ],
       "vocab": [
         {"word": "ancient", "meaning": "고대의"},
-        {"word": "visual", "meaning": "시각의, 시각적인"},
-        {"word": "copy", "meaning": "모방하다, 복제하다"}
+        {"word": "visual", "meaning": "시각의, 시각적인"}
       ],
       "chunks": [
         {"en": "The ancient Greeks felt", "ko": "고대 그리스인들은 [[여겼다]]"},
         {"en": "that the visual artist's goal", "ko": "시각 예술가의 [[목표]]가"},
-        {"en": "[[was to copy visual experience.]]", "ko": "[[시각적 경험을 모방하는 것이었다고]]"}
+        {"en": "was to copy", "ko": "[[모방하는]] 것이었다고"},
+        {"en": "visual experience.", "ko": "[[시각적 경험을]]"}
       ],
       "misreads": [
         {"statement": "고대 그리스인들은 시각 예술가의 목표가 시각적 경험을 모방하는 것이라고 여겼다.", "verdict": "O", "trap_type": "주체대상"}
@@ -124,6 +125,7 @@
     {
       "id": 2,
       "english": "This approach appears in the realism of ancient Greek sculpture and pottery.",
+      "translation": "이 접근법은 고대 그리스 조각과 도기의 사실주의에서 나타난다.",
       "grammar": [
         {"tag": "주어-동사 수일치", "note": "단수 주어 approach에 3인칭 단수 appears", "spans": ["appears"]},
         {"tag": "등위접속사 and", "note": "sculpture와 pottery를 병렬 연결", "spans": ["and"]}
@@ -135,9 +137,10 @@
         {"word": "pottery", "meaning": "도기, 도자기"}
       ],
       "chunks": [
-        {"en": "This approach appears", "ko": "이 접근법은 [[나타난다]]"},
+        {"en": "This approach appears", "ko": "이 [[접근법]]은 나타난다"},
         {"en": "in the realism", "ko": "[[사실주의]] 속에"},
-        {"en": "of ancient Greek sculpture and pottery.", "ko": "고대 그리스 [[조각과 도기]]의"}
+        {"en": "of ancient Greek", "ko": "고대 그리스의"},
+        {"en": "sculpture and pottery.", "ko": "[[조각과 도기]]의"}
       ],
       "misreads": [
         {"statement": "이 접근법은 고대 그리스의 조각과 도기뿐 아니라 건축의 사실주의에서도 나타난다.", "verdict": "X", "trap_type": "무관정보", "anchor": "in the realism of ancient Greek sculpture and pottery", "why": "건축(architecture)은 지문에 없는 무관 정보이며 조각·도기만 언급됨."}
@@ -147,6 +150,7 @@
     {
       "id": 3,
       "english": "We must sadly note that, due to the action of time and weather, no paintings from ancient Greek artists exist today.",
+      "translation": "안타깝게도 우리는 시간과 날씨의 작용 때문에 고대 그리스 예술가의 회화가 오늘날 하나도 남아 있지 않다는 점에 주목해야 한다.",
       "grammar": [
         {"tag": "조동사 must", "note": "'~해야 한다'는 의무·필연", "spans": ["must"]},
         {"tag": "명사절 접속사 that", "note": "note의 목적어절을 이끎", "spans": ["that"]},
@@ -154,15 +158,17 @@
         {"tag": "부정 주어 no", "note": "no paintings ~ exist: '어떤 회화도 존재하지 않는다'", "spans": ["no paintings"]}
       ],
       "vocab": [
-        {"word": "sadly", "meaning": "안타깝게도"},
+        {"word": "note", "meaning": "주목하다, 유의하다"},
         {"word": "due to", "meaning": "~때문에"},
         {"word": "exist", "meaning": "존재하다, 현존하다"}
       ],
       "chunks": [
         {"en": "We must sadly note that,", "ko": "우리는 안타깝게도 [[주목해야 한다]]"},
-        {"en": "[[due to the action of time and weather,]]", "ko": "[[시간과 날씨의 작용 때문에]]"},
-        {"en": "no paintings from ancient Greek artists", "ko": "고대 그리스 예술가의 [[회화]]가"},
-        {"en": "exist today.", "ko": "오늘날 [[존재]]하지 않는다고"}
+        {"en": "due to the action", "ko": "그 [[작용]] 때문에"},
+        {"en": "of time and weather,", "ko": "시간과 날씨의"},
+        {"en": "no paintings", "ko": "[[어떤 회화도]]"},
+        {"en": "from ancient Greek artists", "ko": "고대 그리스 예술가의"},
+        {"en": "exist today.", "ko": "오늘날 [[존재하지 않는다]]고"}
       ],
       "misreads": [
         {"statement": "시간과 날씨의 작용 덕분에 고대 그리스의 회화가 오늘날까지 잘 보존되어 남아 있다.", "verdict": "X", "trap_type": "인과조건", "anchor": "no paintings from ancient Greek artists exist today", "why": "실제로는 회화가 하나도 남아있지 않아 원인·결과가 반대로 뒤집힘."}
@@ -172,6 +178,7 @@
     {
       "id": 4,
       "english": "We can only surmise their quality based on tales such as that of Zeuxis and Parhassios, the obvious skill in ancient Greek sculpture, and in drawings that survive on ancient Greek pottery.",
+      "translation": "우리는 제욱시스와 파라시오스의 이야기, 고대 그리스 조각의 분명한 솜씨, 그리고 고대 그리스 도기에 남아 있는 그림들에 근거해 그것들의 수준을 짐작만 할 수 있을 뿐이다.",
       "grammar": [
         {"tag": "전치사 based on", "note": "'~에 근거하여'", "spans": ["based on"]},
         {"tag": "지시대명사 that", "note": "that of ~ = the tale of ~, 앞 명사 tale의 반복을 피함", "spans": ["that of"]},
@@ -179,14 +186,19 @@
       ],
       "vocab": [
         {"word": "surmise", "meaning": "추측하다, 짐작하다"},
+        {"word": "based on", "meaning": "~에 근거하여"},
         {"word": "obvious", "meaning": "분명한, 명백한"},
         {"word": "survive", "meaning": "살아남다, 현존하다"}
       ],
       "chunks": [
-        {"en": "We can only surmise their quality", "ko": "우리는 그것들의 [[질]]을 추측만 할 수 있다"},
-        {"en": "based on tales such as that of Zeuxis and Parhassios,", "ko": "제욱시스와 파라시오스의 [[이야기]] 같은 것들에 근거해"},
-        {"en": "the obvious skill in ancient Greek sculpture,", "ko": "고대 그리스 조각의 [[분명한 솜씨]]와"},
-        {"en": "[[and in drawings that survive on ancient Greek pottery.]]", "ko": "[[고대 그리스 도기에 현존하는 그림들에 근거해]]"}
+        {"en": "We can only surmise", "ko": "우리는 오직 [[추측]]할 수 있다"},
+        {"en": "their quality", "ko": "그것들의 [[질]]을"},
+        {"en": "based on tales", "ko": "이야기에 근거해"},
+        {"en": "such as that of Zeuxis and Parhassios,", "ko": "제욱시스와 파라시오스의 그것 같은"},
+        {"en": "the obvious skill", "ko": "[[분명한 솜씨]]와"},
+        {"en": "in ancient Greek sculpture,", "ko": "고대 그리스 조각의"},
+        {"en": "and in drawings", "ko": "그리고 그림들에"},
+        {"en": "that survive on ancient Greek pottery.", "ko": "고대 그리스 도기에 [[현존하는]]"}
       ],
       "misreads": [
         {"statement": "밑줄 친 their quality의 their는 고대 그리스 조각을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "no paintings from ancient Greek artists exist today", "why": "their는 앞 문장에서 언급된, 사라져 버린 '회화(paintings)'를 가리킴.", "integrative": true}
@@ -196,6 +208,7 @@
     {
       "id": 5,
       "english": "This definition of art as copying reality has a problem, though.",
+      "translation": "하지만 예술을 현실의 모방으로 보는 이 정의에는 문제가 있다.",
       "grammar": [
         {"tag": "주어-동사 수일치", "note": "단수 주어 definition에 has", "spans": ["has"]},
         {"tag": "전치사 as", "note": "'~로서'; art as copying reality", "spans": ["as"]},
@@ -207,8 +220,10 @@
         {"word": "though", "meaning": "그렇지만 (문미 부사)"}
       ],
       "chunks": [
-        {"en": "This definition of art as copying reality has", "ko": "예술을 현실 모방으로 보는 이 [[정의]]는 지닌다"},
-        {"en": "a problem, though.", "ko": "그렇지만 [[문제]]를"}
+        {"en": "This definition of art", "ko": "예술에 대한 이 [[정의]]는"},
+        {"en": "as copying reality", "ko": "[[현실 모방]]으로서의"},
+        {"en": "has a problem,", "ko": "[[문제]]를 지닌다"},
+        {"en": "though.", "ko": "[[그렇지만]]"}
       ],
       "misreads": [
         {"statement": "필자는 예술을 현실 모방으로 규정하는 이 정의에 문제가 있다고 본다.", "verdict": "O", "trap_type": "필자관점"}
@@ -218,6 +233,7 @@
     {
       "id": 6,
       "english": "Jackson Pollock, a leader in the New York School of the 1950's, intentionally did not copy existing objects in his art.",
+      "translation": "1950년대 뉴욕 화파의 선구자였던 Jackson Pollock은 자신의 예술에서 기존의 사물을 의도적으로 모방하지 않았다.",
       "grammar": [
         {"tag": "동격", "note": "Jackson Pollock = a leader ~; 콤마로 묶인 동격 명사구", "spans": ["a leader"]},
         {"tag": "일반동사 과거 부정", "note": "did not + 동사원형(copy)", "spans": ["did not copy"]},
@@ -229,8 +245,11 @@
         {"word": "object", "meaning": "대상, 사물"}
       ],
       "chunks": [
-        {"en": "Jackson Pollock, a leader in the New York School of the 1950's,", "ko": "1950년대 [[뉴욕 화파]]의 선구자인 Jackson Pollock은"},
-        {"en": "[[intentionally did not copy existing objects]]", "ko": "[[기존 사물을 의도적으로 모방하지 않았다]]"},
+        {"en": "Jackson Pollock,", "ko": "Jackson Pollock은"},
+        {"en": "a leader in the New York School", "ko": "[[뉴욕 화파]]의 선구자인"},
+        {"en": "of the 1950's,", "ko": "1950년대의"},
+        {"en": "intentionally did not copy", "ko": "[[의도적으로]] 모방하지 않았다"},
+        {"en": "existing objects", "ko": "[[기존 사물]]을"},
         {"en": "in his art.", "ko": "자신의 [[예술]]에서"}
       ],
       "misreads": [
@@ -241,6 +260,7 @@
     {
       "id": 7,
       "english": "While painting these works, Pollock and his fellow artists would consciously avoid making marks or passages that resembled recognizable objects.",
+      "translation": "이 작품들을 그리는 동안, Pollock과 그의 동료 예술가들은 알아볼 수 있는 대상을 닮은 표시나 부분을 의식적으로 만들지 않으려 했다.",
       "grammar": [
         {"tag": "분사구문 (접속사+분사)", "note": "While + 현재분사, '~하는 동안'", "spans": ["While painting"]},
         {"tag": "조동사 would", "note": "과거의 습관·경향 '~하곤 했다'", "spans": ["would"]},
@@ -249,15 +269,17 @@
       ],
       "vocab": [
         {"word": "fellow", "meaning": "동료의"},
-        {"word": "avoid", "meaning": "피하다"},
+        {"word": "consciously", "meaning": "의식적으로"},
         {"word": "resemble", "meaning": "닮다, 비슷하다"},
         {"word": "recognizable", "meaning": "알아볼 수 있는"}
       ],
       "chunks": [
-        {"en": "While painting these works,", "ko": "이 작품들을 그리는 [[동안]]"},
-        {"en": "Pollock and his fellow artists would consciously avoid", "ko": "Pollock과 그의 동료 예술가들은 의식적으로 [[피하곤 했다]]"},
-        {"en": "[[making marks or passages]]", "ko": "[[표시나 부분을 만드는 것]]을"},
-        {"en": "that resembled recognizable objects.", "ko": "알아볼 수 있는 대상을 [[닮은]]"}
+        {"en": "While painting these works,", "ko": "이 작품들을 그리는 동안"},
+        {"en": "Pollock and his fellow artists", "ko": "Pollock과 그의 동료 예술가들은"},
+        {"en": "would consciously avoid", "ko": "[[의식적으로]] 피하곤 했다"},
+        {"en": "making marks or passages", "ko": "[[표시나 부분]]을 만드는 것을"},
+        {"en": "that resembled", "ko": "[[닮은]]"},
+        {"en": "recognizable objects.", "ko": "[[알아볼 수 있는]] 대상을"}
       ],
       "misreads": [
         {"statement": "밑줄 친 that resembled recognizable objects는 Pollock과 그의 동료 예술가들을 수식한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "marks or passages that resembled recognizable objects", "why": "관계절 that resembled ~는 바로 앞의 marks or passages를 수식함."}
@@ -267,6 +289,7 @@
     {
       "id": 8,
       "english": "They succeeded at making artwork that did not copy anything, thus demonstrating that the ancient Greek view of art as mimesis―simple copying―does not sufficiently define art.",
+      "translation": "그들은 아무것도 모방하지 않는 예술 작품을 만드는 데 성공했고, 그리하여 예술을 미메시스, 즉 단순한 모방으로 보는 고대 그리스의 관점이 예술을 충분히 정의하지 못한다는 것을 입증했다.",
       "grammar": [
         {"tag": "동명사", "note": "succeeded at + 동명사 making", "spans": ["making"]},
         {"tag": "분사구문 (결과)", "note": "thus demonstrating: 앞 절 전체를 받아 결과를 나타냄", "spans": ["demonstrating"]},
@@ -280,10 +303,13 @@
         {"word": "define", "meaning": "정의하다"}
       ],
       "chunks": [
-        {"en": "They succeeded at making artwork", "ko": "그들은 예술 작품을 만드는 데 [[성공했다]]"},
+        {"en": "They succeeded at", "ko": "그들은 성공했다"},
+        {"en": "making artwork", "ko": "예술 작품을 만드는 데"},
         {"en": "that did not copy anything,", "ko": "아무것도 [[모방하지 않는]]"},
-        {"en": "thus demonstrating that the ancient Greek view of art", "ko": "그리하여 예술을 보는 고대 그리스 [[관점]]이"},
-        {"en": "[[as mimesis―simple copying―does not sufficiently define art.]]", "ko": "[[미메시스, 즉 단순한 모방으로서 예술을 충분히 정의하지 못한다는 것을 입증하며]]"}
+        {"en": "thus demonstrating", "ko": "그리하여 [[입증하며]]"},
+        {"en": "that the ancient Greek view of art", "ko": "예술에 대한 고대 그리스의 [[관점]]이"},
+        {"en": "as mimesis―simple copying―does not", "ko": "[[미메시스, 즉 단순한 모방]]으로서 ~하지 못한다"},
+        {"en": "sufficiently define art.", "ko": "예술을 [[충분히 정의하지]] 못한다는 것을"}
       ],
       "misreads": [
         {"statement": "폴록은 예술이 곧 모방이라는 고대 그리스 관점이 예술을 온전히 규정하지 못함을 보여주었는데, 이는 그가 현실을 더 정교하게 모방했기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "did not copy anything", "why": "정의가 불충분하다는 결론은 맞지만 근거가 반대 — 정교한 모방이 아니라 '아무것도 모방하지 않아서'임."},

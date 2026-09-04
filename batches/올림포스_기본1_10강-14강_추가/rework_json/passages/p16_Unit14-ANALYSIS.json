@@ -1,0 +1,771 @@
+{
+ "item_no": "Unit14-ANALYSIS",
+ "theme": "위급 상황에서 타인의 존재로 책임감이 분산되어 발생하는 방관자 효과",
+ "overview": {
+  "theme_ko": "위급 상황에서 타인의 존재로 인해 책임감이 분산되어 발생하는 방관자 효과",
+  "key_grammar": {
+   "point": "the 비교급 ~, the 비교급 ~ ('~하면 할수록 더 …하다')",
+   "source_sentence": "For example, the more bystanders there are, the less likely any one of them will intervene.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "'the 비교급 A, the 비교급 B'는 'A할수록 (그만큼) 더 [[B하다]]'라는 비례 관계야."
+    },
+    {
+     "chip": "두 짝",
+     "text": "앞 the절은 [[조건·원인]], 뒤 the절은 그에 따른 [[결과]] — 둘은 함께 움직여."
+    },
+    {
+     "chip": "어순",
+     "text": "각 the 뒤에 비교급을 먼저 내세우고 '주어+동사'가 이어져 — the more bystanders there are …."
+    },
+    {
+     "chip": "의미",
+     "text": "여기선 '방관자가 많을수록, 개입 가능성은 더 [[낮아진다]]'는 반비례야."
+    },
+    {
+     "chip": "해석 요령",
+     "text": "'~하면 할수록 (그만큼) 더 …하다'로 두 the절을 하나로 묶어 옮겨."
+    }
+   ],
+   "example": "",
+   "example_analysis": "the more bystanders there are, the less likely any one … will intervene = '방관자가 많을수록, 누구든 개입할 가능성은 더 낮아진다'.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 문장의 밑줄 친 부분 중 어법상 틀린 것은?",
+     "answer": "④",
+     "sentence": "The [[①|problem]] with bystanders, however, does not [[②|stem]] from defects in their character [[③|that]] [[④|prevents]] them from [[⑤|helping]].",
+     "fix": "prevents → prevent (선행사가 복수 defects이므로 관계절 동사는 prevent)",
+     "options": [
+      "① problem",
+      "② stem",
+      "③ that",
+      "④ prevents",
+      "⑤ helping"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "네모 안에서 어법상 옳은 것을 고르시오.",
+     "answer": "that / constrains / more than",
+     "sentence": "Rather, the situation [[that/what]] bystanders find themselves in [[constrains/constrain]] their behavior [[more than/rather than]] we realize.",
+     "fix": "that(뒤 문장에 in의 목적어가 빠진 관계사절) · constrains(주어 the situation이 단수) · more than(정도 비교)",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장을 고르시오.",
+     "answer": "For example, the more bystanders there are, less likely any one of them will intervene.",
+     "sentence": "",
+     "fix": "less likely → the less likely ('the 비교급 ~, the 비교급 ~' 구문에서 뒤 the는 생략할 수 없다)",
+     "options": [
+      "That social psychological insight makes us uncomfortable.",
+      "Rather, the situation that bystanders find themselves in constrains their behavior more than we realize.",
+      "For example, the more bystanders there are, less likely any one of them will intervene.",
+      "But when a number of bystanders witness an emergency, responsibility apparently diffuses among them, getting weaker.",
+      "No one bystander feels enough personal responsibility to respond."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "(지문 7문장) 예를 들어, 방관자가 많을수록, 그들 중 누구든 개입할 가능성은 더 낮아진다.",
+     "answer": "For example, the more bystanders there are, the less likely any one of them will intervene.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "For",
+      "example,",
+      "the",
+      "more",
+      "bystanders",
+      "there",
+      "are,",
+      "the",
+      "less",
+      "likely",
+      "any",
+      "one",
+      "of",
+      "them",
+      "will",
+      "intervene."
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "(지문 7문장·어구 배열) 방관자가 많을수록, 그들 중 누구든 개입할 가능성은 그만큼 더 낮아진다.",
+     "answer": "For example, the more bystanders there are, the less likely any one of them will intervene.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "For example,",
+      "the more",
+      "bystanders there are,",
+      "the less likely",
+      "any one of them",
+      "will intervene."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "위급 상황에서 방관자가 반응하지 않는 것은 성격 결함이 아니라, 타인의 존재로 책임감이 분산되기 때문이라는 '방관자 효과'에 관한 글이야.",
+  "stance": "중립적",
+  "stance_reason": "사회 심리학의 방관자 효과를 사실·원리 중심으로 설명하며, 방관자를 도덕적으로 비난하기보다 상황 요인으로 분석해.",
+  "structure": "통념→반박(반전)",
+  "structure_reason": "'우리라면 다르게 행동할 것'이라는 통념(1~4문장) 뒤, '문제는 성격이 아니라 상황(책임 분산)'이라는 반박(5~10문장)으로 뒤집어.",
+  "restatement_chains": [
+   {
+    "label": "방관자의 무반응",
+    "expressions": [
+     "fail to respond",
+     "the less likely any one of them will intervene",
+     "No one bystander feels enough personal responsibility"
+    ],
+    "variation": "'반응하지 못함' → '개입 가능성 낮음' → '아무도 충분한 책임을 못 느낌'으로 이어져."
+   },
+   {
+    "label": "원인은 상황·책임 분산",
+    "expressions": [
+     "the situation that bystanders find themselves in constrains their behavior",
+     "responsibility apparently diffuses among them"
+    ],
+    "variation": "'상황이 행동을 제약' → '책임감이 그들 사이에서 분산됨'으로 원인이 구체화돼."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "통념",
+    "sentence_range": "1~2",
+    "summary": "사회 심리학에 따르면 위급 상황의 방관자가 반응하지 못하는 건 정상이며, 우리도 그럴 것이다.",
+    "easy_example": "누구라도 선뜻 못 나서는 게 보통이라는 것."
+   },
+   {
+    "stage": "반응(불편)",
+    "sentence_range": "3~4",
+    "summary": "그 통찰은 우리를 불편하게 하고, 우리는 자신은 다르게·더 잘 행동할 거라 믿고 싶어 한다.",
+    "easy_example": ""
+   },
+   {
+    "stage": "반박",
+    "sentence_range": "5~6",
+    "summary": "하지만 방관자 문제는 성격 결함이 아니라, 그들이 처한 '상황'이 생각보다 더 행동을 제약하기 때문이다.",
+    "easy_example": "사람 탓이 아니라 상황 탓이라는 반전."
+   },
+   {
+    "stage": "원리·예시",
+    "sentence_range": "7~8",
+    "summary": "방관자가 많을수록 누구도 개입하지 않으며, 혼자라면 대개 우리가 바라는 대로 도왔을 것이다.",
+    "easy_example": ""
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "9~10",
+    "summary": "다수가 목격하면 책임감이 분산·약화되어, 아무도 나설 만큼의 개인적 책임을 느끼지 못한다.",
+    "easy_example": "'누군가 하겠지' 하며 아무도 안 나서는 것."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Social psychology tells us that bystanders in emergency situations are acting normally when they fail to respond.",
+   "translation": "사회 심리학은 위급 상황의 방관자가 반응하지 못하는 것이 정상적인 행동이라고 우리에게 말해 준다.",
+   "grammar": [
+    {
+     "tag": "명사절 that",
+     "note": "tells us의 목적어",
+     "spans": []
+    },
+    {
+     "tag": "접속사 when",
+     "note": "'~할 때'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "bystander",
+     "meaning": "방관자, 구경꾼"
+    },
+    {
+     "word": "emergency",
+     "meaning": "비상, 위급"
+    },
+    {
+     "word": "respond",
+     "meaning": "반응하다, 대응하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Social [[psychology]] tells us",
+     "ko": "사회 [[심리학]]은 우리에게 말한다"
+    },
+    {
+     "en": "that [[bystanders]]",
+     "ko": "[[방관자]]가"
+    },
+    {
+     "en": "in emergency situations",
+     "ko": "위급 상황에서"
+    },
+    {
+     "en": "[[are acting normally]]",
+     "ko": "[[정상적으로 행동하는 것이라고]]"
+    },
+    {
+     "en": "[[when they fail to respond]].",
+     "ko": "[[그들이 대응하지 못할 때]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 위급 상황에서 방관자가 반드시 도와야 한다는 규범을 제시한다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'bystanders … are acting normally when they fail to respond(반응 못 하는 게 정상이다)'라는, 방관자 효과를 소개하는 주제·도입 문장이야 — 규범 제시가 아니야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "We would fail to respond as well.",
+   "translation": "우리도 마찬가지로 반응하지 못할 것이다.",
+   "grammar": [
+    {
+     "tag": "조동사 would",
+     "note": "'(그런 상황이면) ~할 것이다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "fail to",
+     "meaning": "~하지 못하다"
+    },
+    {
+     "word": "as well",
+     "meaning": "~도, 또한"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "We would",
+     "ko": "우리도"
+    },
+    {
+     "en": "[[fail to respond]]",
+     "ko": "[[대응하지 못할 것이다]]"
+    },
+    {
+     "en": "as [[well]].",
+     "ko": "[[마찬가지로]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "우리는 방관자와 달리 반드시 반응할 것이라는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'We would fail to respond as well(우리도 마찬가지로 반응 못 할 것이다)'이라고 했어 — 우리도 예외가 아니라는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "That social psychological insight makes us uncomfortable.",
+   "translation": "그 사회 심리학적 통찰은 우리를 불편하게 만든다.",
+   "grammar": [
+    {
+     "tag": "지시 That",
+     "note": "앞 통찰을 받음",
+     "spans": []
+    },
+    {
+     "tag": "make + 목적어 + 형용사",
+     "note": "'~을 …하게 만들다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "insight",
+     "meaning": "통찰"
+    },
+    {
+     "word": "uncomfortable",
+     "meaning": "불편한"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "That social psychological [[insight]]",
+     "ko": "그 사회 심리학적 [[통찰]]은"
+    },
+    {
+     "en": "makes us [[uncomfortable]].",
+     "ko": "우리를 [[불편하게]] 만든다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "그 사회 심리학적 통찰이 우리를 편안하게 만든다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'makes us uncomfortable(우리를 불편하게 만든다)'이야 — 편안이 아니라 인정하기 불편한 진실이라는 뜻.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "We like to feel we would behave differently, better.",
+   "translation": "우리는 자신이 다르게, 더 잘 행동할 것이라고 느끼고 싶어 한다.",
+   "grammar": [
+    {
+     "tag": "명사절 생략",
+     "note": "feel (that) ~",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "behave",
+     "meaning": "행동하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "We like to [[feel]]",
+     "ko": "우리는 [[느끼고]] 싶어 한다"
+    },
+    {
+     "en": "we would [[behave]]",
+     "ko": "우리가 [[행동할]] 것이라고"
+    },
+    {
+     "en": "[[differently]], better.",
+     "ko": "[[다르게]], 더 잘."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "우리는 실제로 남들과 똑같이 행동할 것이라고 인정한다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'like to feel we would behave differently, better(다르게, 더 잘 행동할 거라 믿고 싶어 한다)'는 거야 — 인정이 아니라 그렇게 '믿고 싶어' 한다는 뜻.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "The problem with bystanders, however, does not stem from defects in their character that prevent them from helping.",
+   "translation": "그러나 방관자의 문제는 그들이 돕지 못하게 막는 성격상의 결함에서 비롯되는 것이 아니다.",
+   "grammar": [
+    {
+     "tag": "관계사 that",
+     "note": "defects 수식",
+     "spans": []
+    },
+    {
+     "tag": "prevent A from -ing",
+     "note": "'A가 ~하지 못하게 하다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "stem from",
+     "meaning": "~에서 비롯되다"
+    },
+    {
+     "word": "defect",
+     "meaning": "결함"
+    },
+    {
+     "word": "character",
+     "meaning": "성격"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The [[problem]] with bystanders, however,",
+     "ko": "방관자와 관련된 [[문제]]는, 그러나,"
+    },
+    {
+     "en": "does not [[stem from]] defects",
+     "ko": "결함에서 [[비롯되지]] 않는다"
+    },
+    {
+     "en": "in their [[character]]",
+     "ko": "그들의 [[성격]]에 있는"
+    },
+    {
+     "en": "[[that prevent them from helping]].",
+     "ko": "[[그들이 돕지 못하게 막는]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 방관자 문제가 성격 결함에서 비롯된다는 것을 확인한다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'does not stem from defects in their character(성격 결함에서 비롯되지 않는다)'로 통념을 뒤집는 반박 문장이야 — 성격 탓이 아니라는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘that prevent’의 선행사를 character로 읽으면 안 돼 — 동사 prevent(복수)에 맞춰 [[that]]의 선행사는 defects야."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Rather, the situation that bystanders find themselves in constrains their behavior more than we realize.",
+   "translation": "오히려 방관자가 처한 상황이 우리가 깨닫는 것보다 더 그들의 행동을 제약한다.",
+   "grammar": [
+    {
+     "tag": "관계사 that",
+     "note": "the situation 수식",
+     "spans": []
+    },
+    {
+     "tag": "비교 more than",
+     "note": "'~보다 더'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "constrain",
+     "meaning": "제약하다"
+    },
+    {
+     "word": "find oneself in",
+     "meaning": "(어떤 상황)에 처하다"
+    },
+    {
+     "word": "realize",
+     "meaning": "깨닫다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Rather, the [[situation]]",
+     "ko": "오히려, 그 [[상황]]이"
+    },
+    {
+     "en": "[[that bystanders find themselves in]]",
+     "ko": "[[방관자가 처한]]"
+    },
+    {
+     "en": "[[constrains]] their behavior",
+     "ko": "그들의 행동을 [[제약한다]]"
+    },
+    {
+     "en": "more than we [[realize]].",
+     "ko": "우리가 [[깨닫는]] 것보다 더."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 방관자의 성격이 행동을 결정한다는 앞 내용을 보충한다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'Rather, the situation … constrains their behavior(오히려 상황이 행동을 제약한다)'로 진짜 원인을 밝히는 핵심 주장이야 — 성격이 아니라 '상황'이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘find themselves in constrains’를 한 덩어리로 읽으면 안 돼 — 관계사절은 in까지, 본동사는 [[constrains]]야."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "For example, the more bystanders there are, the less likely any one of them will intervene.",
+   "translation": "예를 들어, 방관자가 많을수록 그들 중 누구든 개입할 가능성은 더 낮아진다.",
+   "grammar": [
+    {
+     "tag": "형용사 likely + 절",
+     "note": "the less likely (that) ~ : '~할 것 같은/가능성이 있는'",
+     "spans": []
+    },
+    {
+     "tag": "the 비교급~, the 비교급~",
+     "note": "the more bystanders ~, the less likely ~ — 비례 비교(⑤)",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "intervene",
+     "meaning": "개입하다"
+    },
+    {
+     "word": "likely",
+     "meaning": "~할 것 같은"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "For example,",
+     "ko": "예를 들어,"
+    },
+    {
+     "en": "[[the more bystanders there are]],",
+     "ko": "[[방관자가 많을수록]],"
+    },
+    {
+     "en": "the less [[likely]]",
+     "ko": "그만큼 덜 [[~할 것 같은]]"
+    },
+    {
+     "en": "any one of them",
+     "ko": "그들 중 누구든"
+    },
+    {
+     "en": "will [[intervene]].",
+     "ko": "[[개입할]] 것이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "방관자가 많을수록 누군가는 더 빨리 나서서 돕는다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'the more bystanders …, the less likely any one … will intervene(많을수록 개입 가능성은 낮아진다)'는 반비례야 — 더 빨리 돕는 게 아니라 오히려 아무도 안 나서.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘the more ~, the less ~’를 따로 읽으면 안 돼 — [[the 비교급, the 비교급]]은 ‘~할수록 그만큼 덜하다’야."
+   ]
+  },
+  {
+   "id": 8,
+   "english": "A single bystander at the scene of an emergency would usually respond, just as we hope we would.",
+   "translation": "위급 상황의 현장에 방관자가 단 한 명뿐이라면, 우리가 그러길 바라는 것처럼 대개 반응할 것이다.",
+   "grammar": [
+    {
+     "tag": "가정법 would",
+     "note": "'(혼자라면) ~할 것이다'",
+     "spans": []
+    },
+    {
+     "tag": "just as",
+     "note": "'꼭 ~처럼'",
+     "spans": []
+    },
+    {
+     "tag": "반복어구 생략(대동사 would)",
+     "note": "just as we hope we would (respond) — respond 반복 생략",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "scene",
+     "meaning": "현장"
+    },
+    {
+     "word": "just as",
+     "meaning": "꼭 ~처럼"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "A [[single]] bystander",
+     "ko": "[[단 한 명]]의 방관자는"
+    },
+    {
+     "en": "at the scene",
+     "ko": "그 현장에서"
+    },
+    {
+     "en": "of an [[emergency]]",
+     "ko": "[[위급 상황]]의"
+    },
+    {
+     "en": "[[would usually respond]],",
+     "ko": "[[대개 반응할 것이다]],"
+    },
+    {
+     "en": "just as we [[hope]]",
+     "ko": "꼭 우리가 [[바라는]] 대로"
+    },
+    {
+     "en": "we would.",
+     "ko": "우리도 그럴 것처럼."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(함축) 혼자 있는 방관자도 위급 상황에서 대개 돕지 않는다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "함축을 놓쳤어. 'A single bystander would usually respond, just as we hope we would(혼자면 대개 우리가 바라는 대로 돕는다)'는 거야 — 문제는 개인이 아니라 '수(여럿)'라는 걸 암시해.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘we would’ 뒤가 비었다고 읽으면 안 돼 — [[would]] 뒤엔 respond가 생략된 대동사야."
+   ]
+  },
+  {
+   "id": 9,
+   "english": "But when a number of bystanders witness an emergency, responsibility apparently diffuses among them, getting weaker.",
+   "translation": "그러나 다수의 방관자가 위급 상황을 목격하면, 책임감이 명백히 그들 사이로 분산되면서 점점 약해진다.",
+   "grammar": [
+    {
+     "tag": "접속사 when",
+     "note": "'~할 때'",
+     "spans": []
+    },
+    {
+     "tag": "분사구문 getting",
+     "note": "'~해지면서'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "witness",
+     "meaning": "목격하다"
+    },
+    {
+     "word": "diffuse",
+     "meaning": "분산되다, 퍼지다"
+    },
+    {
+     "word": "apparently",
+     "meaning": "명백히, 보아하니"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "But when",
+     "ko": "그러나 ~할 때"
+    },
+    {
+     "en": "a [[number of]] bystanders",
+     "ko": "[[다수의]] 방관자가"
+    },
+    {
+     "en": "[[witness]] an emergency,",
+     "ko": "위급 상황을 [[목격할]],"
+    },
+    {
+     "en": "responsibility apparently [[diffuses]]",
+     "ko": "책임감이 명백히 [[분산된다]]"
+    },
+    {
+     "en": "among them,",
+     "ko": "그들 사이로,"
+    },
+    {
+     "en": "getting [[weaker]].",
+     "ko": "점점 [[약해지면서]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(지칭) 'them'은 위급 상황(emergency)들을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "지칭 오인이야. diffuses among them의 them은 앞의 'a number of bystanders(다수의 방관자)'를 가리켜 — 책임감이 방관자들 사이로 분산된다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 10,
+   "english": "No one bystander feels enough personal responsibility to respond.",
+   "translation": "어떤 한 명의 방관자도 대응할 만큼 충분한 개인적 책임감을 느끼지 못한다.",
+   "grammar": [
+    {
+     "tag": "enough ... to",
+     "note": "'~할 만큼 충분히'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "personal responsibility",
+     "meaning": "개인적 책임"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[No one bystander]]",
+     "ko": "[[어떤 한 명의 방관자도]]"
+    },
+    {
+     "en": "feels enough personal [[responsibility]]",
+     "ko": "충분한 개인적 [[책임]]을 느끼지 못한다"
+    },
+    {
+     "en": "to [[respond]].",
+     "ko": "[[대응할]] 만큼."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "각 방관자는 강한 개인적 책임감을 느껴 결국 나선다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'No one bystander feels enough personal responsibility(아무도 충분한 개인적 책임을 못 느낀다)'는 거야 — 강한 책임감이 아니라 책임 분산으로 아무도 안 나선다는 결론이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  }
+ ]
+}

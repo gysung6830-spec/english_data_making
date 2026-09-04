@@ -1,0 +1,653 @@
+{
+ "item_no": "Unit14-2",
+ "theme": "사진 간 시각적 움직임 포착 기술로 이룬 Clyde Tombaugh의 명왕성 발견",
+ "overview": {
+  "theme_ko": "사진 간 시각적 움직임 포착 기술로 이룬 Clyde Tombaugh의 명왕성 발견",
+  "key_grammar": {
+   "point": "주격 관계대명사 that (명사를 뒤에서 수식하는 관계절)",
+   "source_sentence": "He put each pair of photos on a machine that would flip back and forth between one photo and the other.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "a machine that would flip ~에서 that은 앞의 명사 a machine을 꾸며 주는 [[주격]] 관계대명사이다."
+    },
+    {
+     "chip": "역할",
+     "text": "that이 관계절 안에서 동사 would flip의 [[주어]] 역할을 하므로 주격 관계대명사이다."
+    },
+    {
+     "chip": "대신",
+     "text": "선행사가 사물(a machine)이므로 that 대신 [[which]]을 써도 된다."
+    },
+    {
+     "chip": "구별",
+     "text": "같은 형태가 5번 문장 a small dot that moved에도 나오며, 이때도 dot을 꾸미는 [[주격]] 관계대명사이다."
+    },
+    {
+     "chip": "해석",
+     "text": "that절을 앞의 [[명사]] 앞으로 당겨 '~하는 (명사)'처럼 붙여 해석한다."
+    }
+   ],
+   "example": "",
+   "example_analysis": "선행사 a machine을 that절(주격 관계절)이 뒤에서 수식 — that = 관계절 내 주어.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 문장의 밑줄 친 부분 중 어법상 틀린 것은?",
+     "answer": "③",
+     "sentence": "He [[①|identified]] that dot [[②|as]] Pluto, [[③|that]] astronomers now [[④|list]] as a [[⑤|dwarf]] planet.",
+     "fix": "that → which : 콤마(,) 뒤에서 앞의 명사(Pluto)를 보충 설명하는 계속적 용법에서는 that을 쓸 수 없고 관계대명사 which를 써야 한다.",
+     "options": [
+      "① identified",
+      "② as",
+      "③ that",
+      "④ list",
+      "⑤ dwarf"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "다음 네모 안에서 어법상 옳은 것을 고르시오.",
+     "answer": "remain / while / moves",
+     "sentence": "Stars essentially [[remain/remains]] unmoving in photos, [[while/during]] a planet [[moves/move]] from one photo to the next.",
+     "fix": "주어 Stars는 복수이므로 remain, 두 절을 잇는 대조 접속사는 while(전치사 during은 절을 이끌 수 없음), 주어 a planet은 단수이므로 moves가 옳다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장을 고르시오.",
+     "answer": "He photographed each regions of the sky twice, several days apart.",
+     "sentence": "",
+     "fix": "each regions → each region : each 뒤에는 단수명사가 오므로 region이 옳다.",
+     "options": [
+      "The ability to detect visual movement played an interesting role in the history of astronomy.",
+      "He photographed each regions of the sky twice, several days apart.",
+      "In 1930, Clyde Tombaugh was searching the skies for a possible undiscovered planet beyond Neptune.",
+      "When he came to one pair of photos, he immediately noticed one dot moving as the machine flipped back and forth.",
+      "However, how would he find a small dot that moved among all the countless unmoving dots in the sky?"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "(지문) 그는 각 쌍의 사진을 한 사진과 다른 사진 사이를 앞뒤로 뒤집어 주는 기계 위에 올려놓았다.",
+     "answer": "He put each pair of photos on a machine that would flip back and forth between one photo and the other.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "He",
+      "put",
+      "each",
+      "pair",
+      "of",
+      "photos",
+      "on",
+      "a",
+      "machine",
+      "that",
+      "would",
+      "flip",
+      "back",
+      "and",
+      "forth",
+      "between",
+      "one",
+      "photo",
+      "and",
+      "the",
+      "other"
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "(지문) 그러나 그는 하늘의 셀 수 없이 많은 움직이지 않는 점들 사이에서 움직인 작은 점 하나를 어떻게 찾을 수 있을까?",
+     "answer": "However, how would he find a small dot that moved among all the countless unmoving dots in the sky?",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "However",
+      "how",
+      "would",
+      "he",
+      "find",
+      "a",
+      "small",
+      "dot",
+      "that",
+      "moved",
+      "among",
+      "all",
+      "the",
+      "countless",
+      "unmoving",
+      "dots",
+      "in",
+      "the",
+      "sky"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "움직임을 감지하는 능력을 이용해 명왕성을 발견한 Clyde Tombaugh의 일화.",
+  "stance": "중립적",
+  "stance_reason": "발견 과정을 시간 순으로 서술하는 설명적 일화문.",
+  "structure": "시간·순서(나열)",
+  "structure_reason": "촬영→대조 원리→문제 제기→기계 활용→발견의 시간 순서로 전개.",
+  "restatement_chains": [
+   {
+    "label": "움직임 감지",
+    "expressions": [
+     "detect visual movement",
+     "noticed one dot moving"
+    ],
+    "variation": "'움직임을 감지하는 능력'이 실제로 '움직이는 한 점을 알아채는' 장면으로 실현됨."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입",
+    "sentence_range": "1",
+    "summary": "시각적 [[움직임]] 감지 능력이 천문학사에서 흥미로운 역할을 함.",
+    "easy_example": ""
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "2~3",
+    "summary": "Tombaugh가 미발견 행성을 찾으려 각 영역을 며칠 간격 두 번 [[촬영]].",
+    "easy_example": ""
+   },
+   {
+    "stage": "대조",
+    "sentence_range": "4",
+    "summary": "항성은 불변이지만 행성은 사진마다 [[이동]]한다는 원리.",
+    "easy_example": ""
+   },
+   {
+    "stage": "전환",
+    "sentence_range": "5",
+    "summary": "수많은 점 속에서 움직인 점을 어떻게 [[찾을지]] 문제 제기.",
+    "easy_example": ""
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "6~7",
+    "summary": "두 사진을 번갈아 [[뒤집는]] 기계로 움직인 점을 포착.",
+    "easy_example": ""
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "8",
+    "summary": "그 점을 [[명왕성]]으로 확인, 지금은 왜소 행성으로 분류.",
+    "easy_example": ""
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "The ability to detect visual movement played an interesting role in the history of astronomy.",
+   "translation": "시각적 움직임을 감지하는 능력은 천문학의 역사에서 흥미로운 역할을 했다.",
+   "grammar": [
+    {
+     "tag": "부정사 형용사적 용법",
+     "note": "the ability to detect: '감지하는 능력'로 명사를 수식",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "detect",
+     "meaning": "감지하다"
+    },
+    {
+     "word": "astronomy",
+     "meaning": "천문학"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The ability",
+     "ko": "그 능력은"
+    },
+    {
+     "en": "to detect visual [[movement]]",
+     "ko": "시각적 [[움직임]]을 감지하는"
+    },
+    {
+     "en": "played an [[interesting]] role",
+     "ko": "[[흥미로운]] 역할을 했다"
+    },
+    {
+     "en": "in the history of [[astronomy]].",
+     "ko": "[[천문학]]의 역사에서"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "시각적 움직임 감지 능력은 천문학에서 아무런 역할도 하지 못했다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "played an interesting role이라 했으니, 그 능력이 흥미로운 역할을 했다는 뜻 — 논지가 반대야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "In 1930, Clyde Tombaugh was searching the skies for a possible undiscovered planet beyond Neptune.",
+   "translation": "1930년에 Clyde Tombaugh는 해왕성 너머에 있을지도 모르는 미발견 행성을 찾아 하늘을 탐색하고 있었다.",
+   "grammar": [
+    {
+     "tag": "과거진행",
+     "note": "was searching: 그 시점에 진행 중이던 탐색",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "undiscovered",
+     "meaning": "미발견의"
+    },
+    {
+     "word": "Neptune",
+     "meaning": "해왕성"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In 1930, Clyde Tombaugh was [[searching]]",
+     "ko": "1930년에 Clyde Tombaugh는 [[탐색하고]] 있었다"
+    },
+    {
+     "en": "the skies",
+     "ko": "하늘을"
+    },
+    {
+     "en": "for a possible [[undiscovered]] planet",
+     "ko": "있을 법한 [[미발견]] 행성을 찾아"
+    },
+    {
+     "en": "beyond [[Neptune]].",
+     "ko": "[[해왕성]] 너머에"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "Tombaugh는 이미 발견된 행성의 위치를 재확인하려고 하늘을 봤다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "a possible undiscovered planet이니, 아직 발견 안 된 행성을 찾고 있었던 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "He photographed each region of the sky twice, several days apart.",
+   "translation": "그는 하늘의 각 영역을 며칠 간격을 두고 두 번씩 촬영했다.",
+   "grammar": [
+    {
+     "tag": "부사구",
+     "note": "several days apart: '며칠 간격으로'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "region",
+     "meaning": "영역"
+    },
+    {
+     "word": "apart",
+     "meaning": "간격을 두고"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "He [[photographed]]",
+     "ko": "그는 [[촬영했다]]"
+    },
+    {
+     "en": "each [[region]] of the sky",
+     "ko": "하늘의 각 [[영역]]을"
+    },
+    {
+     "en": "twice,",
+     "ko": "두 번,"
+    },
+    {
+     "en": "several days [[apart]].",
+     "ko": "며칠 [[간격을 두고]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "그는 하늘의 각 영역을 단 한 번만 촬영했다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "twice, several days apart이니, 며칠 간격을 두고 두 번씩 찍어 변화를 비교하려 한 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "Stars essentially remain unmoving in photos, while a planet moves from one photo to the next.",
+   "translation": "항성은 본질적으로 사진 속에서 움직이지 않는 반면, 행성은 한 사진에서 다음 사진으로 이동한다.",
+   "grammar": [
+    {
+     "tag": "대조의 접속사 while (~인 반면에)",
+     "note": "앞 절(항성 불변)과 while절(행성 이동)을 대조",
+     "spans": []
+    },
+    {
+     "tag": "현재시제",
+     "note": "일반적 사실을 나타내는 현재",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "essentially",
+     "meaning": "본질적으로"
+    },
+    {
+     "word": "unmoving",
+     "meaning": "움직이지 않는"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Stars [[essentially]] remain",
+     "ko": "항성은 [[본질적으로]] 남아 있다"
+    },
+    {
+     "en": "[[unmoving]] in photos,",
+     "ko": "사진 속에서 [[움직이지 않는]] 채로"
+    },
+    {
+     "en": "while a planet [[moves]]",
+     "ko": "반면 행성은 [[이동한다]]"
+    },
+    {
+     "en": "from one photo to the [[next]].",
+     "ko": "한 사진에서 [[다음]] 사진으로"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "항성과 행성 모두 사진에서 똑같이 자리를 옮긴다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "while이 대조를 나타내 — 항성은 안 움직이는 반면 행성만 사진마다 위치가 바뀐다는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘while’을 ‘~하는 동안’으로 읽으면 안 돼 — 여기 [[while]]은 대조 ‘~인 반면에’야."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "However, how would he find a small dot that moved among all the countless unmoving dots in the sky?",
+   "translation": "그러나 그가 하늘의 셀 수 없이 많은 움직이지 않는 점들 사이에서 움직인 작은 점 하나를 어떻게 찾을 수 있을까?",
+   "grammar": [
+    {
+     "tag": "관계대명사 that",
+     "note": "a small dot that moved: 앞의 명사를 수식하는 주격 관계사",
+     "spans": []
+    },
+    {
+     "tag": "수사의문문",
+     "note": "'어떻게 찾을까'로 문제를 던지는 형식",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "countless",
+     "meaning": "셀 수 없이 많은"
+    },
+    {
+     "word": "dot",
+     "meaning": "점"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "However, how would he [[find]]",
+     "ko": "그러나 그는 어떻게 [[찾을]] 것인가"
+    },
+    {
+     "en": "a small [[dot]]",
+     "ko": "하나의 작은 [[점]]을"
+    },
+    {
+     "en": "that [[moved]]",
+     "ko": "[[움직인]]"
+    },
+    {
+     "en": "among all the [[countless]] unmoving dots",
+     "ko": "[[수많은]] 움직이지 않는 점들 사이에서"
+    },
+    {
+     "en": "in the sky?",
+     "ko": "하늘에서"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "그는 이미 그 작은 점을 손쉽게 찾아낸 상태였다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "how would he find ~는 함축적으로 '찾기가 매우 어렵다'는 문제 제기야 — 아직 못 찾았어.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "He put each pair of photos on a machine that would flip back and forth between one photo and the other.",
+   "translation": "그는 각 쌍의 사진을 한 사진과 다른 사진 사이를 앞뒤로 뒤집어 주는 기계 위에 올려놓았다.",
+   "grammar": [
+    {
+     "tag": "관계대명사 that",
+     "note": "a machine that would flip ~: 기계를 수식하는 주격 관계사",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "flip",
+     "meaning": "뒤집다"
+    },
+    {
+     "word": "back and forth",
+     "meaning": "앞뒤로"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "He put each [[pair]] of photos",
+     "ko": "그는 각 [[쌍]]의 사진을 놓았다"
+    },
+    {
+     "en": "on a machine",
+     "ko": "기계 위에"
+    },
+    {
+     "en": "that would [[flip]] back and forth",
+     "ko": "앞뒤로 [[뒤집어]] 주는"
+    },
+    {
+     "en": "between one photo and the [[other]].",
+     "ko": "한 사진과 [[다른]] 사진 사이를"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "그 기계는 두 사진을 하나로 합쳐 겹쳐 보여 주는 장치였다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "flip back and forth between one photo and the other이니, 함축적으로 두 사진을 번갈아 뒤집어 움직인 점을 드러내는 장치야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 7,
+   "english": "When he came to one pair of photos, he immediately noticed one dot moving as the machine flipped back and forth.",
+   "translation": "그가 한 쌍의 사진에 이르렀을 때, 그는 기계가 앞뒤로 뒤집힐 때 한 점이 움직이는 것을 즉시 알아챘다.",
+   "grammar": [
+    {
+     "tag": "지각동사+O+-ing",
+     "note": "noticed one dot moving: 점이 움직이는 것을 알아챔",
+     "spans": []
+    },
+    {
+     "tag": "접속사 as",
+     "note": "'~할 때'의 뜻",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "immediately",
+     "meaning": "즉시"
+    },
+    {
+     "word": "notice",
+     "meaning": "알아채다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When he came to one [[pair]] of photos,",
+     "ko": "그가 한 [[쌍]]의 사진에 이르렀을 때,"
+    },
+    {
+     "en": "he [[immediately]] noticed",
+     "ko": "그는 [[즉시]] 알아챘다"
+    },
+    {
+     "en": "one dot [[moving]]",
+     "ko": "한 점이 [[움직이는]] 것을"
+    },
+    {
+     "en": "as the machine [[flipped]] back and forth.",
+     "ko": "기계가 앞뒤로 [[뒤집힐]] 때"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "기계를 뒤집자 모든 점이 다 함께 움직였다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "he noticed one dot moving이니, 오직 한 점만 움직였고 그래서 그것이 행성임을 알아챈 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "He identified that dot as Pluto, which astronomers now list as a dwarf planet.",
+   "translation": "그는 그 점을 명왕성으로 확인했는데, 천문학자들은 현재 그것을 왜소 행성으로 분류한다.",
+   "grammar": [
+    {
+     "tag": "계속적 용법 관계대명사 (, which)",
+     "note": "앞 내용(Pluto)을 부연 설명",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "identify",
+     "meaning": "확인하다, 식별하다"
+    },
+    {
+     "word": "dwarf planet",
+     "meaning": "왜소 행성"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "He [[identified]] that dot",
+     "ko": "그는 그 점을 [[확인했는데]]"
+    },
+    {
+     "en": "as Pluto,",
+     "ko": "명왕성으로,"
+    },
+    {
+     "en": "which astronomers now [[list]]",
+     "ko": "천문학자들이 현재 [[분류한다]]"
+    },
+    {
+     "en": "as a [[dwarf]] planet.",
+     "ko": "[[왜소]] 행성으로"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "관계사 which가 가리키는 것은 astronomers(천문학자들)이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "which는 앞의 that dot, 곧 Pluto(명왕성)를 가리켜 — 천문학자들이 그것을 왜소 행성으로 분류한다는 뜻.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    },
+    {
+     "statement": "that dot은 Tombaugh가 찾던 해왕성을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "that dot은 그가 새로 발견해 명왕성(Pluto)으로 확인한 점을 가리켜 — 해왕성은 이미 알려진 별개의 행성이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘which’를 의문사로 읽으면 안 돼 — 콤마 뒤 [[which]]는 Pluto를 보충설명(계속적 용법)이야."
+   ]
+  }
+ ]
+}

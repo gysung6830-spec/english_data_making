@@ -1,0 +1,649 @@
+{
+ "item_no": "Unit14-1",
+ "theme": "성공을 위해 자리에 없을 때 회자될 평판을 관리하는 퍼스널 브랜딩의 중요성",
+ "overview": {
+  "theme_ko": "성공을 위해 자리에 없을 때 회자될 평판을 관리하는 퍼스널 브랜딩의 중요성",
+  "key_grammar": {
+   "point": "가주어 it - 진주어 to부정사 (It ~ to-V: …하는 것이 …하다)",
+   "source_sentence": "For many it does not always feel comfortable to deliberately plan how we are going to promote ourselves and our accomplishments to others.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "'It ~ to-V'에서 It은 [[가주어]], 진짜 주어는 뒤의 to부정사구."
+    },
+    {
+     "chip": "해석",
+     "text": "it does not feel comfortable [[to plan]] ~ = '~을 계획하는 것이' 편치 않다."
+    },
+    {
+     "chip": "주의",
+     "text": "가주어 it은 '그것'이라 [[해석하지]] 않고 비워 둔다."
+    },
+    {
+     "chip": "진주어",
+     "text": "진주어 = to deliberately plan how we are going to [[promote]] ~."
+    }
+   ],
+   "example": "",
+   "example_analysis": "it = 가주어, to deliberately plan how ~ = 진주어(to부정사구).",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 ①~⑤ 중, 어법상 틀린 것은?",
+     "answer": "④",
+     "sentence": "If you cannot [[①|anticipate]] the opportunities [[②|that]] will present [[③|themselves]] to [[④|favorable]] demonstrate your brand through capability, you may not be [[⑤|prepared]] when they occur.",
+     "fix": "④ favorable → favorably: 뒤의 동사 demonstrate를 수식하므로 부사가 와야 한다.",
+     "options": [
+      "① anticipate",
+      "② that",
+      "③ themselves",
+      "④ favorable",
+      "⑤ prepared"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "다음 네모 안에서 어법상 옳은 것을 고르시오.",
+     "answer": "aware / to brand / favorable",
+     "sentence": "If you are not [[aware/awareness]] of the opportunities [[to brand/branding]] yourself, you may not be directed to leave a [[favorable/favorably]] impression.",
+     "fix": "be동사 뒤 보어는 형용사 aware, opportunities를 수식하며 목적을 나타내는 to부정사 to brand, 명사 impression을 수식하는 형용사 favorable.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장을 고르시오.",
+     "answer": "The key takeaway from this concept are awareness and anticipation.",
+     "sentence": "",
+     "fix": "are → is: 주어 The key takeaway가 단수이므로 단수 동사 is가 와야 한다.",
+     "options": [
+      "Personal branding is not something that you have to do behind the scenes.",
+      "Personal branding, however, is essential to achieving success.",
+      "The key takeaway from this concept are awareness and anticipation.",
+      "If you are not aware of the opportunities to brand yourself, you may not be directed to leave a favorable impression.",
+      "So as you begin to think about what you want to be known for, begin to be more aware of what you want people to say about you when you are not in the room as an effective way to guide your personal brand."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "(지문) 많은 사람에게, 우리 자신과 우리의 업적을 다른 사람들에게 어떻게 홍보할지 의도적으로 계획하는 일이 항상 편안하게 느껴지는 것은 아니다.",
+     "answer": "For many it does not always feel comfortable to deliberately plan how we are going to promote ourselves and our accomplishments to others.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "For",
+      "many",
+      "it",
+      "does",
+      "not",
+      "always",
+      "feel",
+      "comfortable",
+      "to",
+      "deliberately",
+      "plan",
+      "how",
+      "we",
+      "are",
+      "going",
+      "to",
+      "promote",
+      "ourselves",
+      "and",
+      "our",
+      "accomplishments",
+      "to",
+      "others"
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "(지문·가주어 it-진주어 to부정사) 우리 자신과 업적을 어떻게 홍보할지 의도적으로 계획하는 것이, 많은 이들에게 늘 편하게 느껴지지는 않는다.",
+     "answer": "For many it does not always feel comfortable to deliberately plan how we are going to promote ourselves and our accomplishments to others.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "For many",
+      "it does not always feel comfortable",
+      "to deliberately plan",
+      "how we are going to promote",
+      "ourselves and our accomplishments",
+      "to others"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "자기 홍보가 부담스럽더라도 성공에 필수인 퍼스널 브랜딩과, 부재 시 평판을 의식한 관리의 필요성.",
+  "stance": "긍정적",
+  "stance_reason": "퍼스널 브랜딩이 성공에 필수적이라며 그 중요성을 적극 옹호한다.",
+  "structure": "통념→반박(반전)",
+  "structure_reason": "자기 홍보가 편치 않다는 거리낌(1~2)을 however로 뒤집어 필수임을 주장하고(3~4) 실천을 조언(5~7).",
+  "restatement_chains": [
+   {
+    "label": "자기 홍보로서의 브랜딩",
+    "expressions": [
+     "promote ourselves and our accomplishments",
+     "brand yourself"
+    ],
+    "variation": "'자신과 업적을 홍보하기'가 뒤에서 '자신을 브랜딩하기'로 다시 진술됨."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입",
+    "sentence_range": "1~2",
+    "summary": "브랜딩은 [[남몰래]] 할 일이 아니나 자기 홍보 계획이 늘 편치는 않다.",
+    "easy_example": ""
+   },
+   {
+    "stage": "반박",
+    "sentence_range": "3~4",
+    "summary": "그러나 브랜딩은 성공에 [[필수]]이며 핵심은 인식과 예상이다.",
+    "easy_example": ""
+   },
+   {
+    "stage": "조건",
+    "sentence_range": "5~6",
+    "summary": "기회를 인식·[[예상]]하지 못하면 좋은 인상과 준비를 놓친다.",
+    "easy_example": ""
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "7",
+    "summary": "부재 시 남들이 할 말, 즉 [[평판]]을 의식해 브랜드를 이끌라.",
+    "easy_example": ""
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Personal branding is not something that you have to do behind the scenes.",
+   "translation": "퍼스널 브랜딩은 여러분이 남몰래 해야 하는 일이 아니다.",
+   "grammar": [
+    {
+     "tag": "명사절 that",
+     "note": "something that ~ 목적격 관계사",
+     "spans": []
+    },
+    {
+     "tag": "not something",
+     "note": "'~하는 것이 아니다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "behind the scenes",
+     "meaning": "남몰래, 무대 뒤에서"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Personal branding is not",
+     "ko": "퍼스널 브랜딩은 ~이 아니다"
+    },
+    {
+     "en": "[[something]]",
+     "ko": "[[무언가]]가"
+    },
+    {
+     "en": "that you have to [[do]]",
+     "ko": "여러분이 [[해야]] 하는"
+    },
+    {
+     "en": "[[behind the scenes]].",
+     "ko": "[[남몰래]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "퍼스널 브랜딩은 남들 모르게 은밀히 준비해야 하는 일이라는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "is not something you have to do behind the scenes는 '남몰래 할 일이 아니다'라는 뜻으로, 오히려 드러내 놓고 하는 것임을 함축해.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "For many it does not always feel comfortable to deliberately plan how we are going to promote ourselves and our accomplishments to others.",
+   "translation": "많은 사람에게, 우리 자신과 우리의 업적을 다른 사람들에게 어떻게 홍보할지 의도적으로 계획하는 일이 항상 편안하게 느껴지는 것은 아니다.",
+   "grammar": [
+    {
+     "tag": "가주어 it-진주어 to부정사",
+     "note": "it=가주어, to plan ~=진주어",
+     "spans": []
+    },
+    {
+     "tag": "부분부정",
+     "note": "not always = '항상 ~인 것은 아니다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "deliberately",
+     "meaning": "의도적으로"
+    },
+    {
+     "word": "promote",
+     "meaning": "홍보하다"
+    },
+    {
+     "word": "accomplishment",
+     "meaning": "업적"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "For many",
+     "ko": "많은 사람에게"
+    },
+    {
+     "en": "it does not [[always]] feel",
+     "ko": "그것은 [[항상]] 느껴지지는 않는다"
+    },
+    {
+     "en": "[[comfortable]]",
+     "ko": "[[편안하게]]"
+    },
+    {
+     "en": "to [[deliberately]] plan",
+     "ko": "[[의도적으로]] 계획하는 것이"
+    },
+    {
+     "en": "how we are going to",
+     "ko": "우리가 어떻게 ~할지"
+    },
+    {
+     "en": "[[promote]] ourselves",
+     "ko": "우리 자신을 [[홍보]]할지"
+    },
+    {
+     "en": "and our [[accomplishments]]",
+     "ko": "그리고 우리의 [[업적]]을"
+    },
+    {
+     "en": "to others.",
+     "ko": "다른 사람들에게."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "많은 사람은 자기 홍보 계획 세우기를 언제나 편안하게 느낀다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "it does not always feel comfortable은 '항상 편안하게 느껴지는 것은 아니다'라는 부분부정으로, 자기 홍보 계획이 늘 편치는 않다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘not always’를 ‘항상 아니다’(전체부정)로 읽으면 안 돼 — [[not always]]는 ‘항상 그런 건 아니다’(부분부정)야."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "Personal branding, however, is essential to achieving success.",
+   "translation": "하지만 퍼스널 브랜딩은 성공을 이루는 데 필수적이다.",
+   "grammar": [
+    {
+     "tag": "however 역접",
+     "note": "앞의 거리낌을 반전",
+     "spans": []
+    },
+    {
+     "tag": "be essential to -ing",
+     "note": "'~하는 데 필수적이다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "essential",
+     "meaning": "필수적인"
+    },
+    {
+     "word": "achieve",
+     "meaning": "이루다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Personal [[branding]], however,",
+     "ko": "하지만 퍼스널 [[브랜딩]]은"
+    },
+    {
+     "en": "is [[essential]]",
+     "ko": "[[필수적]]이다"
+    },
+    {
+     "en": "to [[achieving]] success.",
+     "ko": "성공을 [[이루는]] 데."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "however는 앞 내용을 예로 덧붙이는 연결어다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "however(하지만)는 앞의 '편치 않다'는 흐름을 뒤집어, 그럼에도 브랜딩이 성공에 필수라는 반전을 이끄는 역접 연결어야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘to achieving’의 to를 부정사로 읽으면 안 돼 — [[be essential to -ing]]의 to는 전치사(~하는 데 필수)야."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "The key takeaway from this concept is awareness and anticipation.",
+   "translation": "이 개념에서 얻어야 할 핵심은 인식과 예상이다.",
+   "grammar": [
+    {
+     "tag": "this 지칭",
+     "note": "this concept = 퍼스널 브랜딩",
+     "spans": []
+    },
+    {
+     "tag": "A and B",
+     "note": "awareness와 anticipation 병렬",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "takeaway",
+     "meaning": "핵심, 요점"
+    },
+    {
+     "word": "anticipation",
+     "meaning": "예상"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The key [[takeaway]]",
+     "ko": "주요한 [[핵심]]은"
+    },
+    {
+     "en": "from this [[concept]]",
+     "ko": "이 [[개념]]에서 나온"
+    },
+    {
+     "en": "is [[awareness]]",
+     "ko": "[[인식]]과"
+    },
+    {
+     "en": "and [[anticipation]].",
+     "ko": "그리고 [[예상]]이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "this concept는 앞서 말한 '남몰래 하는 일'을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "this concept가 가리키는 것은 앞에서 다룬 '퍼스널 브랜딩'이며, 그 핵심이 인식과 예상이라는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "If you are not aware of the opportunities to brand yourself, you may not be directed to leave a favorable impression.",
+   "translation": "만약 여러분이 자신을 브랜딩할 기회를 인식하지 못한다면, 여러분은 호의적인 인상을 남기도록 이끌리지 못할 수도 있다.",
+   "grammar": [
+    {
+     "tag": "조건 if",
+     "note": "'~하지 못하면'의 가정·조건",
+     "spans": []
+    },
+    {
+     "tag": "may not",
+     "note": "'~하지 못할 수도 있다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "opportunity",
+     "meaning": "기회"
+    },
+    {
+     "word": "favorable",
+     "meaning": "호의적인"
+    },
+    {
+     "word": "impression",
+     "meaning": "인상"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "If you are not",
+     "ko": "만약 여러분이 ~하지 못하면"
+    },
+    {
+     "en": "[[aware]] of the opportunities",
+     "ko": "그 기회를 [[인식]]하지"
+    },
+    {
+     "en": "to [[brand]] yourself,",
+     "ko": "자신을 [[브랜딩]]할"
+    },
+    {
+     "en": "you may not be [[directed]]",
+     "ko": "여러분은 [[이끌려]] 가지 못할 수도 있다"
+    },
+    {
+     "en": "to leave a [[favorable]] impression.",
+     "ko": "[[호의적인]] 인상을 남기도록."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "기회를 인식하지 못해도 좋은 인상을 남기는 데는 문제가 없다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "If you are not aware ~, you may not ~ leave a favorable impression은 '기회를 못 알아채면 좋은 인상을 못 남길 수 있다'는 조건-결과로, 인식 부족이 인상 실패로 이어진다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "If you cannot anticipate the opportunities that will present themselves to favorably demonstrate your brand through capability, you may not be prepared when they occur.",
+   "translation": "만약 여러분이 역량을 통해 여러분의 브랜드를 호의적으로 보여 줄, 스스로 나타날 기회를 예상하지 못한다면, 여러분은 그 기회가 생길 때 준비되어 있지 않을 수도 있다.",
+   "grammar": [
+    {
+     "tag": "they 지칭",
+     "note": "they = the opportunities",
+     "spans": []
+    },
+    {
+     "tag": "관계사 that",
+     "note": "opportunities that ~ 수식",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "anticipate",
+     "meaning": "예상하다"
+    },
+    {
+     "word": "demonstrate",
+     "meaning": "보여 주다"
+    },
+    {
+     "word": "capability",
+     "meaning": "역량"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "If you cannot [[anticipate]]",
+     "ko": "만약 여러분이 [[예상]]할 수 없다면"
+    },
+    {
+     "en": "the opportunities",
+     "ko": "그 기회를"
+    },
+    {
+     "en": "that will present themselves",
+     "ko": "스스로 나타날"
+    },
+    {
+     "en": "to favorably [[demonstrate]] your brand",
+     "ko": "여러분의 브랜드를 호의적으로 [[보여 줄]]"
+    },
+    {
+     "en": "through [[capability]],",
+     "ko": "[[역량]]을 통해,"
+    },
+    {
+     "en": "you may not be [[prepared]]",
+     "ko": "여러분은 [[준비]]되어 있지 않을 수도 있다"
+    },
+    {
+     "en": "when they occur.",
+     "ko": "그것들이 생길 때."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "they occur의 they는 여러분의 경쟁자들을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "they가 가리키는 것은 the opportunities(기회들)이며, 기회가 생길 때 준비되어 있지 않을 수 있다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 7,
+   "english": "So as you begin to think about what you want to be known for, begin to be more aware of what you want people to say about you when you are not in the room as an effective way to guide your personal brand.",
+   "translation": "그러므로 여러분이 무엇으로 알려지고 싶은지 생각하기 시작할 때, 여러분의 퍼스널 브랜드를 이끄는 효과적인 방법으로서 여러분이 자리에 없을 때 사람들이 여러분에 대해 무엇을 말하기를 원하는지 더 많이 인식하기 시작하라.",
+   "grammar": [
+    {
+     "tag": "what 관계대명사",
+     "note": "what you want ~ '~하는 것'",
+     "spans": []
+    },
+    {
+     "tag": "명령문 조언",
+     "note": "begin to ~ 실천 지시",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "known for",
+     "meaning": "~으로 알려진"
+    },
+    {
+     "word": "guide",
+     "meaning": "이끌다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "So as you begin to",
+     "ko": "그래서 여러분이 ~하기 시작할 때"
+    },
+    {
+     "en": "[[think]] about",
+     "ko": "[[생각하기]]"
+    },
+    {
+     "en": "what you want to be",
+     "ko": "자신이 무엇으로"
+    },
+    {
+     "en": "[[known]] for,",
+     "ko": "[[알려지]]고 싶은지,"
+    },
+    {
+     "en": "begin to be more",
+     "ko": "더 많이 ~하기 시작하라"
+    },
+    {
+     "en": "[[aware]] of",
+     "ko": "[[인식]]하기"
+    },
+    {
+     "en": "what you want people",
+     "ko": "사람들이 여러분에 대해"
+    },
+    {
+     "en": "to say about you",
+     "ko": "무엇을 말하기를 원하는지"
+    },
+    {
+     "en": "when you are not",
+     "ko": "여러분이 ~에 없을 때"
+    },
+    {
+     "en": "in the [[room]]",
+     "ko": "[[방]]"
+    },
+    {
+     "en": "as an effective way",
+     "ko": "효과적인 방법으로서"
+    },
+    {
+     "en": "to [[guide]] your personal brand.",
+     "ko": "여러분의 퍼스널 브랜드를 [[이끌]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "자리에 없을 때 남들이 하는 말은 신경 쓸 필요 없다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "사람들이 방에 없을 때 여러분에 대해 무엇을 말하길 원하는지 인식하라는 것으로, 부재 시의 평판을 미리 관리하라는 핵심 조언이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘what you want people to say’에서 people을 빼고 읽으면 안 돼 — [[want people to say]]는 ‘사람들이 말하게 하려는 것’(5형식)이야."
+   ]
+  }
+ ]
+}

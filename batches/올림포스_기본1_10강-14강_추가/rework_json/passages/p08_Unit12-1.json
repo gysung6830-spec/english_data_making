@@ -1,0 +1,632 @@
+{
+ "item_no": "Unit12-1",
+ "theme": "편의성·건강·취향 변화로 달라지거나 사라지는 것처럼 보이는 음식 조리법과 전통",
+ "overview": {
+  "theme_ko": "편의성·건강·취향의 변화로 인해 달라지거나 사라지는 것처럼 보이는 음식 조리법과 전통",
+  "key_grammar": {
+   "point": "병렬구조 (등위접속사 and/or로 연결된 대등한 요소)",
+   "source_sentence": "For example, to make a pumpkin pie, a cook used to have to first find a pumpkin of suitable size, cut it, peel it, cook it, and mash it, all before combining it with other ingredients and pouring the mixture into a crust.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "and/or는 문법적으로 [[대등한 것]]끼리 연결해 — 동사원형은 동사원형끼리, 명사는 명사끼리."
+    },
+    {
+     "chip": "찾는 법",
+     "text": "and 앞뒤를 보고 '무엇과 무엇을 묶었나'를 확인해 — find … cut … peel … cook … and [[mash]] 는 모두 동사원형."
+    },
+    {
+     "chip": "공통 요소",
+     "text": "앞의 조동사·전치사가 뒤 항목에도 [[똑같이]] 적용돼 — (used to have to) find/cut/peel/cook/mash."
+    },
+    {
+     "chip": "주의",
+     "text": "연결된 항목의 [[형태·시제]]가 어긋나면 병렬이 깨진 오류야(cut → cutting X)."
+    },
+    {
+     "chip": "해석 요령",
+     "text": "and를 만나면 '어디부터 어디까지'가 한 묶음인지 [[범위]]를 먼저 잡고 순서대로 옮겨."
+    }
+   ],
+   "example": "",
+   "example_analysis": "find … cut it, peel it, cook it, and mash it = '(used to have to)'가 다섯 동사원형에 공통으로 걸린 병렬.",
+   "drills": [
+    {
+     "kind": "어법판단(밑줄형)",
+     "question": "다음 밑줄 친 부분 중 어법상 틀린 것은?",
+     "answer": "④",
+     "sentence": "For example, [[①|to make]] a pumpkin pie, a cook used to have to first [[②|find]] a pumpkin of suitable size, cut it, [[③|peel]] it, cook it, and [[④|mashing]] it, all before combining it with other ingredients and [[⑤|pouring]] the mixture into a crust.",
+     "fix": "mashing → mash: 'used to have to'에 공통으로 걸리는 동사원형 병렬(find, cut, peel, cook, and mash)이므로 ④는 mash가 되어야 한다.",
+     "options": [
+      "① to make",
+      "② find",
+      "③ peel",
+      "④ mashing",
+      "⑤ pouring"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "어법판단(네모형)",
+     "question": "네모 안에서 어법상 옳은 것을 순서대로 고르시오.",
+     "answer": "make / cooking / to use",
+     "sentence": "Another changing food tradition is that many families no longer [[make/making]] refried beans by [[cooking/cook]] them in lard and choose instead [[to use/using]] vegetable shortening.",
+     "fix": "no longer 다음에는 조동사 없이 현재형 make, 전치사 by 뒤에는 동명사 cooking, choose는 to부정사를 목적어로 취하므로 to use가 옳다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "어법판단(오류찾기)",
+     "question": "다음 중 어법상 틀린 문장을 고르시오.",
+     "answer": "Now, cooks may choose to use canned pumpkin from the supermarket and cutting out a great deal of labor and time.",
+     "sentence": "",
+     "fix": "cutting out → cut out: 조동사 may가 [choose to use …]와 [cut out …]를 공통으로 거는 동사원형 병렬이므로 cut out이 옳다.",
+     "options": [
+      "Sometimes traditions may change or appear to end because of convenience or changes in taste.",
+      "For example, to make a pumpkin pie, a cook used to have to first find a pumpkin of suitable size, cut it, peel it, cook it, and mash it, all before combining it with other ingredients and pouring the mixture into a crust.",
+      "Now, cooks may choose to use canned pumpkin from the supermarket and cutting out a great deal of labor and time.",
+      "Another changing food tradition is that many families no longer make refried beans by cooking them in lard and choose instead to use vegetable shortening.",
+      "Perhaps this change came about because the family has come to prefer the taste of beans without lard, because concepts of healthy cooking have changed, or because someone in the family has heart disease or high cholesterol."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "예를 들어, 호박 파이를 만들려면 요리사는 다른 재료와 섞어 그 혼합물을 파이 껍질에 붓기 전에, 먼저 적당한 크기의 호박을 찾아 자르고, 껍질을 벗기고, 익히고, 으깨야 했다.",
+     "answer": "For example, to make a pumpkin pie, a cook used to have to first find a pumpkin of suitable size, cut it, peel it, cook it, and mash it, all before combining it with other ingredients and pouring the mixture into a crust.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "For",
+      "example",
+      "to",
+      "make",
+      "a",
+      "pumpkin",
+      "pie",
+      "a",
+      "cook",
+      "used to have to",
+      "first",
+      "find",
+      "a",
+      "pumpkin",
+      "of",
+      "suitable",
+      "size",
+      "cut",
+      "it",
+      "peel",
+      "it",
+      "cook",
+      "it",
+      "and",
+      "mash",
+      "it",
+      "all",
+      "before",
+      "combining",
+      "it",
+      "with",
+      "other",
+      "ingredients",
+      "and",
+      "pouring",
+      "the",
+      "mixture",
+      "into",
+      "a",
+      "crust"
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "이제 요리사들은 슈퍼마켓의 통조림 호박을 사용하기로 선택해 많은 노동과 시간을 줄일 수도 있다.",
+     "answer": "Now, cooks may choose to use canned pumpkin from the supermarket and cut out a great deal of labor and time.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Now",
+      "cooks",
+      "may",
+      "choose",
+      "to",
+      "use",
+      "canned",
+      "pumpkin",
+      "from",
+      "the",
+      "supermarket",
+      "and",
+      "cut",
+      "out",
+      "a",
+      "great",
+      "deal",
+      "of",
+      "labor",
+      "and",
+      "time"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "전통이 편의성·건강·취향의 변화 때문에 달라지거나 사라지는 것처럼 보이는 현상을, 호박파이와 콩 요리로 보여 주는 글이야.",
+  "stance": "중립적",
+  "stance_reason": "음식 전통이 왜 변하는지를 사실·예시 중심으로 설명하는 정보 전달문이야.",
+  "structure": "주장→근거·예시",
+  "structure_reason": "'전통은 편의·취향으로 변한다'는 일반 진술(1문장) 뒤, 호박파이(2~3문장)와 콩 요리(4~5문장) 두 예시로 뒷받침해.",
+  "restatement_chains": [
+   {
+    "label": "변화의 이유",
+    "expressions": [
+     "convenience or changes in taste",
+     "cut out a great deal of labor and time",
+     "concepts of healthy cooking have changed"
+    ],
+    "variation": "'편의성·취향' → '노동·시간 절약' → '건강 요리 개념 변화'로 이유가 구체화돼."
+   },
+   {
+    "label": "달라진 조리법",
+    "expressions": [
+     "appear to end",
+     "use canned pumpkin",
+     "use vegetable shortening"
+    ],
+    "variation": "'끝난 것처럼 보임' → '통조림 호박 사용' → '식물성 쇼트닝 사용'으로 변화가 이어져."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "주장",
+    "sentence_range": "1",
+    "summary": "때로 전통은 편의성이나 취향 변화 때문에 바뀌거나 끝난 것처럼 보인다.",
+    "easy_example": "번거롭거나 입맛이 바뀌면 전통 방식이 슬쩍 달라지는 것."
+   },
+   {
+    "stage": "예시1-과거",
+    "sentence_range": "2",
+    "summary": "예전엔 호박파이를 만들려면 호박을 찾아 자르고 껍질 벗기고 익히고 으깨는 모든 과정을 거쳐야 했다.",
+    "easy_example": "처음부터 생호박을 손질하던 옛 방식."
+   },
+   {
+    "stage": "예시1-현재",
+    "sentence_range": "3",
+    "summary": "이제는 통조림 호박을 써서 많은 노동과 시간을 줄일 수 있다.",
+    "easy_example": "통조림 하나로 손질 과정을 건너뛰는 것."
+   },
+   {
+    "stage": "예시2",
+    "sentence_range": "4",
+    "summary": "또 다른 변화로, 많은 가정이 돼지기름 대신 식물성 쇼트닝으로 콩 요리를 만든다.",
+    "easy_example": "라드 대신 식물성 기름을 쓰는 것."
+   },
+   {
+    "stage": "이유",
+    "sentence_range": "5",
+    "summary": "이 변화는 라드 없는 맛 선호, 건강 요리 개념 변화, 가족의 건강 문제 때문일 수 있다.",
+    "easy_example": "맛·건강·질병 등 여러 이유로 방식이 바뀐 것."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Sometimes traditions may change or appear to end because of convenience or changes in taste.",
+   "translation": "때로 전통은 편의성이나 취향의 변화 때문에 바뀌거나 사라진 것처럼 보이기도 한다.",
+   "grammar": [
+    {
+     "tag": "조동사 may",
+     "note": "'~일 수도 있다'(추측)",
+     "spans": []
+    },
+    {
+     "tag": "공통 조동사 may",
+     "note": "may [change] or [appear to end] — may가 공통",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "convenience",
+     "meaning": "편의성, 편리함"
+    },
+    {
+     "word": "appear to",
+     "meaning": "~인 것처럼 보이다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Sometimes traditions may change",
+     "ko": "때로 전통은 바뀌거나"
+    },
+    {
+     "en": "or [[appear to end]]",
+     "ko": "또는 [[끝난 것처럼 보일]] 수 있다"
+    },
+    {
+     "en": "because of [[convenience]]",
+     "ko": "[[편의성]] 때문에"
+    },
+    {
+     "en": "or [[changes]] in taste.",
+     "ko": "또는 취향의 [[변화]] 때문에."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(함축) 전통이 'appear to end'라는 것은 그 전통이 실제로 완전히 사라졌다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "함축을 놓쳤어. 'appear to end(끝난 것처럼 보인다)'는 실제 소멸이 아니라 '변형됐을 뿐'일 수 있음을 암시해 — 뒤 예시들이 '방식만 달라졌음'을 보여줘.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "For example, to make a pumpkin pie, a cook used to have to first find a pumpkin of suitable size, cut it, peel it, cook it, and mash it, all before combining it with other ingredients and pouring the mixture into a crust.",
+   "translation": "예를 들어, 호박 파이를 만들려면 요리사는 다른 재료와 섞어 그 혼합물을 파이 껍질에 붓기 전에, 먼저 적당한 크기의 호박을 찾아 자르고 껍질을 벗기고 익히고 으깨야 했다.",
+   "grammar": [
+    {
+     "tag": "used to",
+     "note": "(과거엔) ~하곤 했다",
+     "spans": []
+    },
+    {
+     "tag": "부정사 to make",
+     "note": "'~하기 위해'",
+     "spans": []
+    },
+    {
+     "tag": "병렬구조",
+     "note": "find, cut it, peel it, cook it, and mash it — 동사원형 병렬(⑤)",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "suitable",
+     "meaning": "적당한, 알맞은"
+    },
+    {
+     "word": "peel",
+     "meaning": "껍질을 벗기다"
+    },
+    {
+     "word": "mash",
+     "meaning": "으깨다"
+    },
+    {
+     "word": "ingredient",
+     "meaning": "재료"
+    },
+    {
+     "word": "crust",
+     "meaning": "(파이) 껍질"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "For example, to make",
+     "ko": "예를 들어, 만들려면"
+    },
+    {
+     "en": "a [[pumpkin pie]],",
+     "ko": "[[호박 파이]]를,"
+    },
+    {
+     "en": "a cook",
+     "ko": "요리사는"
+    },
+    {
+     "en": "used to have to first",
+     "ko": "먼저 ~해야만 했다"
+    },
+    {
+     "en": "find a pumpkin",
+     "ko": "호박을 찾아"
+    },
+    {
+     "en": "of [[suitable]] size,",
+     "ko": "[[적당한]] 크기의,"
+    },
+    {
+     "en": "cut it, peel it,",
+     "ko": "자르고, 껍질 벗기고,"
+    },
+    {
+     "en": "cook it, and mash it,",
+     "ko": "익히고, 으깨야 했다,"
+    },
+    {
+     "en": "all before combining it",
+     "ko": "그 모든 것을 섞기 전에"
+    },
+    {
+     "en": "with other [[ingredients]]",
+     "ko": "다른 [[재료]]와"
+    },
+    {
+     "en": "and pouring the mixture",
+     "ko": "그리고 혼합물을 부어"
+    },
+    {
+     "en": "into a [[crust]].",
+     "ko": "[[파이 껍질]]에."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "예전 호박파이 조리는 통조림 호박만 있으면 간단히 끝났다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'find … cut … peel … cook … and mash(찾아 자르고 벗기고 익히고 으깨기)'라는 긴 과정을 다 거쳐야 했다는 거야 — 과거의 번거로움을 강조해.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘used to have to’를 ‘~하곤 했다’로만 읽으면 안 돼 — [[used to have to]]는 ‘예전엔 ~해야만 했다’야."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "Now, cooks may choose to use canned pumpkin from the supermarket and cut out a great deal of labor and time.",
+   "translation": "이제 요리사들은 슈퍼마켓의 통조림 호박을 사용하기로 선택해 많은 노동과 시간을 줄일 수도 있다.",
+   "grammar": [
+    {
+     "tag": "조동사 may",
+     "note": "'~할 수도 있다'(선택 가능)",
+     "spans": []
+    },
+    {
+     "tag": "공통 조동사 may",
+     "note": "may [choose to use...] and [cut out...] — may가 공통",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "canned",
+     "meaning": "통조림으로 된"
+    },
+    {
+     "word": "cut out",
+     "meaning": "없애다, 줄이다"
+    },
+    {
+     "word": "a great deal of",
+     "meaning": "많은, 상당한"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Now, cooks may choose",
+     "ko": "이제, 요리사들은 선택할 수도 있다"
+    },
+    {
+     "en": "to use [[canned]] pumpkin",
+     "ko": "[[통조림]] 호박을 사용하기로"
+    },
+    {
+     "en": "from the supermarket",
+     "ko": "슈퍼마켓의"
+    },
+    {
+     "en": "and [[cut out]]",
+     "ko": "그리고 [[줄이고]]"
+    },
+    {
+     "en": "a great deal of",
+     "ko": "많은"
+    },
+    {
+     "en": "[[labor and time]].",
+     "ko": "[[노동과 시간을]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 앞의 과거 조리법을 다시 설명하는 문장이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'Now(이제)'로 시작해 과거(2문장)와 대비되는 '현재'의 간편한 방식으로 넘어가는 대조·전환 문장이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "Another changing food tradition is that many families no longer make refried beans by cooking them in lard and choose instead to use vegetable shortening.",
+   "translation": "변화하고 있는 또 다른 음식 전통은, 많은 가정이 더 이상 콩을 돼지기름에 조리해 콩 요리를 만들지 않고 대신 식물성 쇼트닝을 사용하기로 한다는 것이다.",
+   "grammar": [
+    {
+     "tag": "명사절 that",
+     "note": "is의 보어",
+     "spans": []
+    },
+    {
+     "tag": "no longer",
+     "note": "더 이상 ~ 않다",
+     "spans": []
+    },
+    {
+     "tag": "instead",
+     "note": "대신에",
+     "spans": []
+    },
+    {
+     "tag": "병렬구조",
+     "note": "[no longer make...] and [choose instead to use...] — many families에 공통",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "refried beans",
+     "meaning": "(다시 튀긴) 콩 요리"
+    },
+    {
+     "word": "lard",
+     "meaning": "돼지기름, 라드"
+    },
+    {
+     "word": "shortening",
+     "meaning": "쇼트닝(제과용 유지)"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Another changing [[food tradition]] is",
+     "ko": "변화하는 또 다른 [[음식 전통]]은"
+    },
+    {
+     "en": "that many families",
+     "ko": "많은 가정이"
+    },
+    {
+     "en": "[[no longer]] make refried beans",
+     "ko": "[[더 이상]] 콩 요리를 만들지 않고"
+    },
+    {
+     "en": "by cooking them in [[lard]]",
+     "ko": "그것을 [[돼지기름]]에 조리해"
+    },
+    {
+     "en": "and choose instead",
+     "ko": "그리고 대신 선택한다"
+    },
+    {
+     "en": "to use vegetable [[shortening]].",
+     "ko": "식물성 [[쇼트닝]]을 쓰기로."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(지칭) 'them'은 여러 가정(families)을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "지칭 오인이야. cooking them in lard의 them은 앞의 'refried beans(콩)'를 가리켜 — 콩을 라드에 조리한다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘no longer’가 choose까지 부정한다고 읽으면 안 돼 — [[no longer]]는 make만 부정하고, choose instead는 ‘대신 선택한다’야."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Perhaps this change came about because the family has come to prefer the taste of beans without lard, because concepts of healthy cooking have changed, or because someone in the family has heart disease or high cholesterol.",
+   "translation": "아마도 이 변화는 그 가족이 라드가 들어가지 않은 콩의 맛을 선호하게 되었거나, 건강한 요리에 대한 개념이 바뀌었거나, 가족 중 누군가가 심장병이나 높은 콜레스테롤을 가지고 있기 때문에 생겨났을 것이다.",
+   "grammar": [
+    {
+     "tag": "이유 because(병렬)",
+     "note": "because A, because B, or because C",
+     "spans": []
+    },
+    {
+     "tag": "came about",
+     "note": "생겨나다",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "come about",
+     "meaning": "(일이) 생기다, 일어나다"
+    },
+    {
+     "word": "come to prefer",
+     "meaning": "~을 선호하게 되다"
+    },
+    {
+     "word": "cholesterol",
+     "meaning": "콜레스테롤"
+    },
+    {
+     "word": "heart disease",
+     "meaning": "심장병"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Perhaps this [[change]] came about",
+     "ko": "아마 이 [[변화]]가 생긴 것은"
+    },
+    {
+     "en": "because the family",
+     "ko": "그 가족이"
+    },
+    {
+     "en": "has come to [[prefer]]",
+     "ko": "[[선호하게]] 되었거나"
+    },
+    {
+     "en": "the taste of beans",
+     "ko": "콩의 맛을"
+    },
+    {
+     "en": "without lard,",
+     "ko": "라드 없이,"
+    },
+    {
+     "en": "because concepts of",
+     "ko": "~에 대한 개념이"
+    },
+    {
+     "en": "[[healthy cooking]] have changed,",
+     "ko": "[[건강한 요리]]가 바뀌었거나,"
+    },
+    {
+     "en": "or because someone",
+     "ko": "또는 누군가가"
+    },
+    {
+     "en": "in the family has",
+     "ko": "가족 중에"
+    },
+    {
+     "en": "heart disease or high [[cholesterol]].",
+     "ko": "심장병이나 높은 [[콜레스테롤]]이 있기 때문일 것이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "변화의 원인은 오직 맛의 선호 하나뿐이라는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'because A, because B, or because C'로 맛·건강 개념·질병이라는 여러 이유를 나란히 제시해 — 원인이 하나가 아니야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘came about’을 ‘~에 대해 왔다’로 읽으면 안 돼 — [[come about]]은 ‘(일이) 생기다·일어나다’야."
+   ]
+  }
+ ]
+}

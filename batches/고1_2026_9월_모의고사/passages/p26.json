@@ -79,19 +79,22 @@
     },
     {
      "kind": "영작",
-     "question": "그녀는 석사 학위와 박사 학위를 둘 다 취득했다.",
-     "answer": "She earned both a master's degree and a PhD.",
+     "question": "그는 나중에 미국으로 돌아와 하버드 대학교에서 의료 인류학 석사 학위와 박사 학위를 둘 다 취득했다.",
+     "answer": "He later returned to the United States and earned both a master's degree and a PhD in medical anthropology at Harvard University.",
      "fix": "",
      "options": [],
      "words": [
-      "She",
+      "He later returned to the United States",
+      "and",
       "earned",
       "both",
       "a master's degree",
       "and",
-      "a PhD"
+      "a PhD",
+      "in medical anthropology",
+      "at Harvard University"
      ],
-     "from_passage": false
+     "from_passage": true
     },
     {
      "kind": "영작",
@@ -166,6 +169,7 @@
   {
    "id": 1,
    "english": "Paul Farmer was an American medical anthropologist and physician.",
+   "translation": "Paul Farmer는 미국의 의료인류학자이자 의사였다.",
    "grammar": [
     {
      "tag": "be동사 보어(2형식)",
@@ -194,8 +198,16 @@
    ],
    "chunks": [
     {
-     "en": "Paul Farmer was an American medical anthropologist and physician.",
-     "ko": "Paul Farmer는 미국의 [[의료인류학자]]이자 의사였다"
+     "en": "Paul Farmer was",
+     "ko": "Paul Farmer는 ~였다"
+    },
+    {
+     "en": "an American medical anthropologist",
+     "ko": "미국의 [[의료인류학자]]"
+    },
+    {
+     "en": "and physician.",
+     "ko": "그리고 [[의사]]"
     }
    ],
    "misreads": [
@@ -210,6 +222,7 @@
   {
    "id": 2,
    "english": "He was born in 1959 in Massachusetts and grew up with an early awareness of social inequality.",
+   "translation": "그는 1959년 매사추세츠에서 태어나, 사회적 불평등을 일찍부터 자각하며 자랐다.",
    "grammar": [
     {
      "tag": "수동태(be born)",
@@ -228,14 +241,6 @@
    ],
    "vocab": [
     {
-     "word": "be born",
-     "meaning": "태어나다"
-    },
-    {
-     "word": "grow up",
-     "meaning": "성장하다, 자라다"
-    },
-    {
      "word": "awareness",
      "meaning": "인식, 자각"
     },
@@ -246,12 +251,24 @@
    ],
    "chunks": [
     {
-     "en": "He was born in 1959 in Massachusetts",
-     "ko": "그는 1959년 매사추세츠에서 [[태어났다]]"
+     "en": "He was born",
+     "ko": "그는 [[태어났다]]"
     },
     {
-     "en": "and grew up with an early awareness of social inequality.",
-     "ko": "그리고 [[사회 불평등]]을 일찍부터 자각하며 자랐다"
+     "en": "in 1959 in Massachusetts",
+     "ko": "1959년 매사추세츠에서"
+    },
+    {
+     "en": "and grew up",
+     "ko": "그리고 자랐다"
+    },
+    {
+     "en": "with an early awareness",
+     "ko": "이른 [[자각]]을 가지고"
+    },
+    {
+     "en": "of social inequality.",
+     "ko": "[[사회 불평등]]에 대한"
     }
    ],
    "misreads": [
@@ -269,6 +286,7 @@
   {
    "id": 3,
    "english": "During his time at Duke University, he lived in Paris for half a year and became fluent in French, which benefited him in his future work in Haiti.",
+   "translation": "듀크 대학교 시절 그는 반년 동안 파리에서 살며 프랑스어에 유창해졌는데, 이는 이후 아이티에서의 활동에 도움이 되었다.",
    "grammar": [
     {
      "tag": "전치사 During",
@@ -308,20 +326,32 @@
    ],
    "chunks": [
     {
-     "en": "During his time at Duke University,",
-     "ko": "듀크 대학교에서 지내는 [[동안]],"
+     "en": "During his time",
+     "ko": "~ 지내는 [[동안]]"
     },
     {
-     "en": "he lived in Paris for half a year",
-     "ko": "그는 [[반년]] 동안 파리에서 살았고"
+     "en": "at Duke University,",
+     "ko": "듀크 대학교에서"
+    },
+    {
+     "en": "he lived in Paris",
+     "ko": "그는 파리에서 살았다"
+    },
+    {
+     "en": "for half a year",
+     "ko": "[[반년]] 동안"
     },
     {
      "en": "and became fluent in French,",
-     "ko": "프랑스어에 [[유창]]해졌다"
+     "ko": "그리고 프랑스어에 [[유창]]해졌다"
     },
     {
-     "en": "which benefited him in his future work in Haiti.",
-     "ko": "그리고 이는 아이티에서의 이후 [[활동]]에 그에게 도움이 되었다"
+     "en": "which benefited him",
+     "ko": "그리고 이는 그에게 도움이 되었다"
+    },
+    {
+     "en": "in his future work in Haiti.",
+     "ko": "아이티에서의 이후 [[활동]]에서"
     }
    ],
    "misreads": [
@@ -339,6 +369,7 @@
   {
    "id": 4,
    "english": "After graduating from Duke University, he began volunteer work at a hospital in Cangé, Haiti.",
+   "translation": "듀크 대학교를 졸업한 후, 그는 아이티 Cangé의 한 병원에서 자원봉사를 시작했다.",
    "grammar": [
     {
      "tag": "전치사+동명사(After graduating)",
@@ -367,12 +398,24 @@
    ],
    "chunks": [
     {
-     "en": "After graduating from Duke University,",
-     "ko": "듀크 대학교를 [[졸업한]] 후,"
+     "en": "After graduating",
+     "ko": "[[졸업한]] 후"
     },
     {
-     "en": "he began volunteer work at a hospital in Cangé, Haiti.",
-     "ko": "그는 아이티 Cangé의 한 병원에서 [[자원봉사]]를 시작했다"
+     "en": "from Duke University,",
+     "ko": "듀크 대학교를"
+    },
+    {
+     "en": "he began volunteer work",
+     "ko": "그는 [[자원봉사]]를 시작했다"
+    },
+    {
+     "en": "at a hospital",
+     "ko": "한 [[병원]]에서"
+    },
+    {
+     "en": "in Cangé, Haiti.",
+     "ko": "아이티 Cangé에 있는"
     }
    ],
    "misreads": [
@@ -391,6 +434,7 @@
   {
    "id": 5,
    "english": "He later returned to the United States and earned both a master's degree and a PhD in medical anthropology at Harvard University.",
+   "translation": "그는 나중에 미국으로 돌아와 하버드 대학교에서 의료 인류학 석사 학위와 박사 학위를 둘 다 취득했다.",
    "grammar": [
     {
      "tag": "등위접속사 and(동사 병렬)",
@@ -427,16 +471,32 @@
    ],
    "chunks": [
     {
-     "en": "He later returned to the United States",
-     "ko": "그는 나중에 [[미국]]으로 돌아왔다"
+     "en": "He later returned",
+     "ko": "그는 나중에 돌아왔다"
     },
     {
-     "en": "and earned both a master's degree and a PhD",
-     "ko": "그리고 [[석사 학위]]와 박사 학위를 모두 취득했다"
+     "en": "to the United States",
+     "ko": "[[미국]]으로"
     },
     {
-     "en": "in medical anthropology at Harvard University.",
-     "ko": "하버드 대학교에서 [[의료 인류학]] 분야로"
+     "en": "and earned both",
+     "ko": "그리고 [[둘 다]] 취득했다"
+    },
+    {
+     "en": "a master's degree",
+     "ko": "[[석사 학위]]와"
+    },
+    {
+     "en": "and a PhD",
+     "ko": "박사 학위를"
+    },
+    {
+     "en": "in medical anthropology",
+     "ko": "[[의료 인류학]] 분야로"
+    },
+    {
+     "en": "at Harvard University.",
+     "ko": "하버드 대학교에서"
     }
    ],
    "misreads": [
@@ -454,6 +514,7 @@
   {
    "id": 6,
    "english": "In 1987, he co-founded Partners In Health, an organization that works in countries like Haiti, Rwanda, and Peru to provide medical treatment and strengthen public health systems.",
+   "translation": "1987년에 그는 Partners In Health를 공동 설립했는데, 이 단체는 아이티, 르완다, 페루 같은 나라에서 의료를 제공하고 공중보건 체계를 강화하기 위해 활동한다.",
    "grammar": [
     {
      "tag": "동격(콤마+명사구)",
@@ -483,12 +544,8 @@
      "meaning": "공동 설립하다"
     },
     {
-     "word": "organization",
-     "meaning": "단체, 기관"
-    },
-    {
-     "word": "provide",
-     "meaning": "제공하다"
+     "word": "medical treatment",
+     "meaning": "의료, 치료"
     },
     {
      "word": "strengthen",
@@ -501,16 +558,28 @@
    ],
    "chunks": [
     {
-     "en": "In 1987, he co-founded Partners In Health,",
-     "ko": "1987년에 그는 Partners In Health를 [[공동 설립]]했는데,"
+     "en": "In 1987, he co-founded",
+     "ko": "1987년에 그는 [[공동 설립]]했다"
     },
     {
-     "en": "an organization that works in countries like Haiti, Rwanda, and Peru",
-     "ko": "이는 아이티, 르완다, 페루 같은 나라에서 활동하는 [[단체]]로"
+     "en": "Partners In Health,",
+     "ko": "Partners In Health를"
     },
     {
-     "en": "to provide medical treatment and strengthen public health systems.",
-     "ko": "[[의료]]를 제공하고 공중보건 체계를 강화하기 위한 것이다"
+     "en": "an organization that works",
+     "ko": "활동하는 한 [[단체]]인데"
+    },
+    {
+     "en": "in countries like Haiti, Rwanda, and Peru",
+     "ko": "아이티, 르완다, 페루 같은 나라에서"
+    },
+    {
+     "en": "to provide medical treatment",
+     "ko": "[[의료]]를 제공하기 위해"
+    },
+    {
+     "en": "and strengthen public health systems.",
+     "ko": "그리고 [[공중보건]] 체계를 강화하기 위해"
     }
    ],
    "misreads": [
@@ -538,6 +607,7 @@
   {
    "id": 7,
    "english": "Throughout his life, he wrote more than ten books and over a hundred academic papers.",
+   "translation": "평생에 걸쳐 그는 열 권이 넘는 책과 백 편이 넘는 학술 논문을 썼다.",
    "grammar": [
     {
      "tag": "전치사 Throughout",
@@ -577,12 +647,16 @@
    ],
    "chunks": [
     {
-     "en": "Throughout his life, he wrote more than ten books",
-     "ko": "평생 동안 그는 [[열 권]]이 넘는 책을 썼다"
+     "en": "Throughout his life,",
+     "ko": "[[평생]] 동안"
+    },
+    {
+     "en": "he wrote more than ten books",
+     "ko": "그는 [[열 권이 넘는]] 책을 썼다"
     },
     {
      "en": "and over a hundred academic papers.",
-     "ko": "그리고 백 편이 넘는 [[학술 논문]]도 썼다"
+     "ko": "그리고 백 편이 넘는 [[학술 논문]]도"
     }
    ],
    "misreads": [
@@ -600,6 +674,7 @@
   {
    "id": 8,
    "english": "He received many major awards during his career, and after his death, he was also honored with the WHO Director-General's Global Health Leaders Award for his lifelong work to improve health for the poor.",
+   "translation": "그는 경력 동안 여러 주요 상을 받았고, 사후에는 가난한 이들의 건강을 향상시키기 위한 평생의 노력에 대해 WHO 사무총장 글로벌 보건 리더상으로도 영예를 얻었다.",
    "grammar": [
     {
      "tag": "등위접속사 and(절 병렬)",
@@ -633,10 +708,6 @@
    ],
    "vocab": [
     {
-     "word": "award",
-     "meaning": "상"
-    },
-    {
      "word": "honor",
      "meaning": "기리다, (상을) 수여하다"
     },
@@ -655,20 +726,32 @@
    ],
    "chunks": [
     {
-     "en": "He received many major awards during his career,",
-     "ko": "그는 경력 동안 여러 주요 [[상]]을 받았고,"
+     "en": "He received many major awards",
+     "ko": "그는 여러 주요 [[상]]을 받았다"
     },
     {
-     "en": "and after his death, he was also honored",
-     "ko": "그리고 그의 사후에도 그는 또한 [[영예를 얻었다]]"
+     "en": "during his career,",
+     "ko": "그의 경력 동안"
+    },
+    {
+     "en": "and after his death,",
+     "ko": "그리고 그의 [[사후에]]"
+    },
+    {
+     "en": "he was also honored",
+     "ko": "그는 또한 [[영예를 얻었다]]"
     },
     {
      "en": "with the WHO Director-General's Global Health Leaders Award",
-     "ko": "WHO 사무총장 [[글로벌 보건 리더상]]으로"
+     "ko": "WHO 사무총장 글로벌 보건 리더상으로"
     },
     {
-     "en": "for his lifelong work to improve health for the poor.",
-     "ko": "[[가난한 이들]]의 건강을 향상시키기 위한 평생의 노력에 대해"
+     "en": "for his lifelong work",
+     "ko": "그의 [[평생의]] 노력에 대해"
+    },
+    {
+     "en": "to improve health for the poor.",
+     "ko": "[[가난한 이들]]의 건강을 향상시키기 위한"
     }
    ],
    "misreads": [

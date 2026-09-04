@@ -68,18 +68,21 @@
     },
     {
      "kind": "영작",
-     "question": "이곳이 바로 내가 태어난 도시이다. (전치사+관계대명사 in which를 사용하여)",
-     "answer": "This is the city in which I was born.",
+     "question": "우리는 놀랍게 만들어졌지만, 우리가 창조된 목적인 그 경이로움에 참여하도록 스스로를 허락하지 않는다. ('전치사+관계대명사' for which를 사용하여 영작하시오.)",
+     "answer": "We are wonderfully made, yet we don't allow ourselves to participate in the wonder for which we were created.",
      "words": [
-      "This",
-      "is",
-      "the city",
-      "in which",
-      "I",
-      "was born"
+      "We are",
+      "wonderfully made,",
+      "yet",
+      "we don't allow",
+      "ourselves",
+      "to participate in",
+      "the wonder",
+      "for which",
+      "we were created."
      ],
      "options": [],
-     "from_passage": false
+     "from_passage": true
     },
     {
      "kind": "영작",
@@ -148,6 +151,7 @@
   {
    "id": 1,
    "english": "We are wonderfully made, yet we don't allow ourselves to participate in the wonder for which we were created.",
+   "translation": "우리는 놀랍게 만들어졌지만, 우리가 창조된 목적인 그 경이로움에 참여하도록 스스로를 허락하지 않는다.",
    "grammar": [
     {
      "tag": "수동태",
@@ -206,12 +210,16 @@
    ],
    "chunks": [
     {
-     "en": "We are wonderfully [[made]], yet",
-     "ko": "우리는 놀랍게 [[만들어졌지만]],"
+     "en": "We are wonderfully [[made]],",
+     "ko": "우리는 놀랍게 [[만들어졌다]],"
     },
     {
-     "en": "we don't allow ourselves to [[participate]] in the wonder",
-     "ko": "우리는 그 경이로움에 [[참여하도록]] 스스로를 허락하지 않는다"
+     "en": "yet we don't allow [[ourselves]]",
+     "ko": "그러나 우리는 우리 [[스스로]]를 허락하지 않는다"
+    },
+    {
+     "en": "to [[participate]] in the wonder",
+     "ko": "그 경이로움에 [[참여하도록]]"
     },
     {
      "en": "[[for which we were created.]]",
@@ -231,6 +239,7 @@
   {
    "id": 2,
    "english": "Instead of moving anywhere and everywhere, most of us spend our time moving nowhere.",
+   "translation": "어디로든 모든 곳으로 움직이는 대신에, 우리 대부분은 아무 데도 가지 않으며 시간을 보낸다.",
    "grammar": [
     {
      "tag": "전치사+동명사",
@@ -264,12 +273,20 @@
    ],
    "chunks": [
     {
-     "en": "Instead of [[moving]] anywhere and everywhere,",
-     "ko": "어디로든 모든 곳으로 [[움직이는]] 대신에,"
+     "en": "Instead of [[moving]]",
+     "ko": "[[움직이는]] 대신에"
     },
     {
-     "en": "most of us spend our time [[moving nowhere.]]",
-     "ko": "대부분의 우리는 [[아무 데도 안 움직이며]] 시간을 보낸다"
+     "en": "anywhere and everywhere,",
+     "ko": "어디로든 모든 곳으로,"
+    },
+    {
+     "en": "most of us [[spend]] our time",
+     "ko": "우리 대부분은 시간을 [[보낸다]]"
+    },
+    {
+     "en": "[[moving nowhere.]]",
+     "ko": "[[아무 데도 안 움직이며]]"
     }
    ],
    "misreads": [
@@ -286,6 +303,7 @@
   {
    "id": 3,
    "english": "We occupy the same square footage of a chair for hours and hours every day.",
+   "translation": "우리는 매일 몇 시간이고 계속 의자의 같은 면적을 차지하고 있다.",
    "grammar": [
     {
      "tag": "동사 occupy",
@@ -318,12 +336,24 @@
    ],
    "chunks": [
     {
-     "en": "We [[occupy]] the same square footage of a chair",
-     "ko": "우리는 의자의 같은 [[면적]]을 차지한다"
+     "en": "We [[occupy]]",
+     "ko": "우리는 [[차지한다]]"
     },
     {
-     "en": "for hours and hours [[every day.]]",
-     "ko": "[[매일]] 몇 시간이고 계속"
+     "en": "the same square [[footage]]",
+     "ko": "같은 [[면적]]을"
+    },
+    {
+     "en": "of a chair",
+     "ko": "의자의"
+    },
+    {
+     "en": "[[for hours and hours]]",
+     "ko": "[[몇 시간이고 계속]]"
+    },
+    {
+     "en": "every day.",
+     "ko": "매일."
     }
    ],
    "misreads": [
@@ -340,6 +370,7 @@
   {
    "id": 4,
    "english": "Many kids today are being held captive by 'smart' devices like phones and tablets.",
+   "translation": "오늘날 많은 아이들이 폰과 태블릿 같은 '스마트' 기기에 사로잡혀 있다.",
    "grammar": [
     {
      "tag": "진행형 수동태(be being p.p.)",
@@ -362,22 +393,26 @@
      "meaning": "사로잡다, 포로로 붙잡다"
     },
     {
-     "word": "device",
-     "meaning": "기기, 장치"
-    },
-    {
      "word": "captive",
      "meaning": "사로잡힌 (상태의)"
     }
    ],
    "chunks": [
     {
-     "en": "Many kids today [[are being held]] captive",
-     "ko": "오늘날 많은 아이들이 [[사로잡혀 있다]]"
+     "en": "Many kids today",
+     "ko": "오늘날 많은 아이들이"
     },
     {
-     "en": "by 'smart' [[devices]] like phones and tablets.",
-     "ko": "폰과 태블릿 같은 '스마트' [[기기들]]에"
+     "en": "[[are being held]] captive",
+     "ko": "포로로 [[사로잡혀]] 있다"
+    },
+    {
+     "en": "by 'smart' [[devices]]",
+     "ko": "'스마트' [[기기]]에 의해"
+    },
+    {
+     "en": "like [[phones and tablets.]]",
+     "ko": "[[폰과 태블릿]] 같은"
     }
    ],
    "misreads": [
@@ -398,6 +433,7 @@
   {
    "id": 5,
    "english": "They are not going outside to play, they are not learning how to socialize and read physical cues from others.",
+   "translation": "그들은 놀러 밖에 나가지 않으며, 어울리는 법이나 다른 사람의 신체적 신호를 읽는 법을 배우지 못하고 있다.",
    "grammar": [
     {
      "tag": "현재진행형",
@@ -444,16 +480,28 @@
    ],
    "chunks": [
     {
-     "en": "They are not [[going]] outside to play,",
-     "ko": "그들은 밖에 나가 놀지 [[않고]],"
+     "en": "They are not [[going]] outside",
+     "ko": "그들은 밖에 [[나가지]] 않는다"
     },
     {
-     "en": "they are not learning [[how to socialize]]",
-     "ko": "그들은 [[어울리는 법]]을 배우지 않으며"
+     "en": "to play,",
+     "ko": "놀기 위해,"
     },
     {
-     "en": "and [[read physical cues]] from others.",
-     "ko": "다른 사람의 [[신체적 신호를 읽는 법]]도 배우지 않는다"
+     "en": "they are not learning",
+     "ko": "그들은 배우지 않는다"
+    },
+    {
+     "en": "[[how to socialize]]",
+     "ko": "[[어울리는 법]]을"
+    },
+    {
+     "en": "and read physical [[cues]]",
+     "ko": "그리고 신체적 [[신호]]를 읽는 법을"
+    },
+    {
+     "en": "from others.",
+     "ko": "다른 사람들의."
     }
    ],
    "misreads": [
@@ -471,6 +519,7 @@
   {
    "id": 6,
    "english": "As a result they are not learning or building their movement repertoire, the very thing that will help them learn, communicate, create, and become emotionally mature.",
+   "translation": "그 결과 그들은 배우고, 소통하고, 창조하고, 감정적으로 성숙해지도록 돕는 바로 그것인 움직임 레퍼토리를 배우거나 쌓지 못하고 있다.",
    "grammar": [
     {
      "tag": "연결어(As a result)",
@@ -514,24 +563,32 @@
     {
      "word": "emotionally mature",
      "meaning": "감정적으로 성숙한"
-    },
-    {
-     "word": "communicate",
-     "meaning": "소통하다"
     }
    ],
    "chunks": [
     {
-     "en": "As a result they are not [[learning or building]] their movement repertoire,",
-     "ko": "그 결과 그들은 자신의 움직임 레퍼토리를 [[배우거나 쌓지]] 못한다,"
+     "en": "As a result",
+     "ko": "그 결과"
+    },
+    {
+     "en": "they are not [[learning or building]]",
+     "ko": "그들은 [[배우거나 쌓지]] 못한다"
+    },
+    {
+     "en": "their movement [[repertoire]],",
+     "ko": "자신의 움직임 [[레퍼토리]]를,"
     },
     {
      "en": "the very thing [[that will help them]]",
      "ko": "바로 그것은 그들이 [[하도록 돕는]] 것이다"
     },
     {
-     "en": "learn, communicate, create, and become emotionally [[mature.]]",
-     "ko": "배우고, 소통하고, 창조하고, 감정적으로 [[성숙해지도록]]"
+     "en": "learn, communicate, create,",
+     "ko": "배우고, 소통하고, 창조하고,"
+    },
+    {
+     "en": "and become emotionally [[mature.]]",
+     "ko": "그리고 감정적으로 [[성숙해지도록]]."
     }
    ],
    "misreads": [
@@ -551,6 +608,7 @@
   {
    "id": 7,
    "english": "They are not even learning how to run, how to skip, or how to climb.",
+   "translation": "그들은 달리는 법, 깡충 뛰는 법, 오르는 법조차 배우지 못하고 있다.",
    "grammar": [
     {
      "tag": "현재진행형",
@@ -590,8 +648,16 @@
      "ko": "그들은 심지어 [[배우지]] 못한다"
     },
     {
-     "en": "[[how to run, how to skip, or how to climb.]]",
-     "ko": "[[달리는 법, 깡충 뛰는 법, 오르는 법을]]"
+     "en": "how to run,",
+     "ko": "달리는 법,"
+    },
+    {
+     "en": "how to [[skip]],",
+     "ko": "[[깡충 뛰는]] 법,"
+    },
+    {
+     "en": "or how to [[climb.]]",
+     "ko": "혹은 [[오르는]] 법을."
     }
    ],
    "misreads": [
@@ -605,6 +671,7 @@
   {
    "id": 8,
    "english": "Instead, they are learning how to live with anxiety, depression, and even diseases they were never meant to have.",
+   "translation": "대신, 그들은 불안, 우울, 그리고 그들이 결코 겪지 않아도 될 질병들과 함께 사는 법을 배우고 있다.",
    "grammar": [
     {
      "tag": "현재진행형",
@@ -645,24 +712,28 @@
     {
      "word": "be meant to",
      "meaning": "~하기로 되어 있다"
-    },
-    {
-     "word": "disease",
-     "meaning": "질병"
     }
    ],
    "chunks": [
     {
-     "en": "Instead, they are [[learning]] how to live",
-     "ko": "대신, 그들은 함께 사는 [[법을 배우고]] 있다"
+     "en": "Instead, they are [[learning]]",
+     "ko": "대신, 그들은 [[배우고]] 있다"
     },
     {
-     "en": "with [[anxiety, depression,]] and even diseases",
-     "ko": "[[불안, 우울,]] 그리고 심지어 질병과"
+     "en": "how to live with",
+     "ko": "함께 사는 법을"
+    },
+    {
+     "en": "[[anxiety, depression,]]",
+     "ko": "[[불안, 우울,]]"
+    },
+    {
+     "en": "and even diseases",
+     "ko": "그리고 심지어 질병과"
     },
     {
      "en": "they were never [[meant to have.]]",
-     "ko": "그들이 결코 [[겪지 않아도 될]]"
+     "ko": "그들이 결코 [[겪지 않아도 될]]."
     }
    ],
    "misreads": [
@@ -679,6 +750,7 @@
   {
    "id": 9,
    "english": "The point is we are getting further and further away from our design.",
+   "translation": "요점은 우리가 우리의 본래 설계로부터 점점 더 멀어지고 있다는 것이다.",
    "grammar": [
     {
      "tag": "명사절 접속사 that 생략(보어절)",
@@ -716,12 +788,20 @@
    ],
    "chunks": [
     {
-     "en": "The point is we are [[getting]]",
-     "ko": "요점은 우리가 [[되어 가고]] 있다는 것이다"
+     "en": "The point is",
+     "ko": "요점은 ~이다"
     },
     {
-     "en": "[[further and further away]] from our design.",
-     "ko": "우리의 설계로부터 [[점점 더 멀어지고]]"
+     "en": "we are [[getting]]",
+     "ko": "우리가 [[되어 가고]] 있다"
+    },
+    {
+     "en": "[[further and further away]]",
+     "ko": "[[점점 더 멀리]]"
+    },
+    {
+     "en": "from our [[design.]]",
+     "ko": "우리의 [[설계]]로부터."
     }
    ],
    "misreads": [
@@ -735,6 +815,7 @@
   {
    "id": 10,
    "english": "We were made to move―and through movement, we are meant to live extraordinary lives.",
+   "translation": "우리는 움직이도록 만들어졌고, 움직임을 통해 비범한 삶을 살도록 되어 있다.",
    "grammar": [
     {
      "tag": "be made to+동사원형",
@@ -778,12 +859,16 @@
      "ko": "우리는 [[움직이도록 만들어졌다]]―그리고"
     },
     {
-     "en": "through [[movement,]] we are meant to live",
-     "ko": "[[움직임을 통해]], 우리는 살도록 되어 있다"
+     "en": "through [[movement,]]",
+     "ko": "[[움직임을 통해]],"
+    },
+    {
+     "en": "we are [[meant to live]]",
+     "ko": "우리는 [[살도록 되어 있다]]"
     },
     {
      "en": "[[extraordinary lives.]]",
-     "ko": "[[비범한 삶을]]"
+     "ko": "[[비범한 삶을]]."
     }
    ],
    "misreads": [
@@ -800,6 +885,7 @@
   {
    "id": 11,
    "english": "Movement is life to us.",
+   "translation": "움직임은 우리에게 곧 삶이다.",
    "grammar": [
     {
      "tag": "2형식(be동사+보어)",
@@ -813,16 +899,16 @@
     {
      "word": "movement",
      "meaning": "움직임, 운동"
-    },
-    {
-     "word": "to us",
-     "meaning": "우리에게(는)"
     }
    ],
    "chunks": [
     {
-     "en": "Movement is [[life]] to us.",
-     "ko": "움직임은 우리에게 [[삶]]이다."
+     "en": "Movement is [[life]]",
+     "ko": "움직임은 [[삶]]이다"
+    },
+    {
+     "en": "to us.",
+     "ko": "우리에게."
     }
    ],
    "misreads": [

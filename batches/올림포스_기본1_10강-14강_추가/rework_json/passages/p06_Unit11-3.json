@@ -1,0 +1,699 @@
+{
+ "item_no": "Unit11-3",
+ "theme": "위험을 알리는 붉은색의 특성과 야생 동물이 이를 기피하는 현상",
+ "overview": {
+  "theme_ko": "시각적 충격과 위험을 알리는 붉은색의 특성과 야생 동물이 위장을 위해 이를 기피하는 현상",
+  "key_grammar": {
+   "point": "수동태 (be동사 + 과거분사 / to be + 과거분사: '~되다·~해지다')",
+   "source_sentence": "If we want something to be seen from a distance, such as a post box or (formerly) a telephone kiosk, we paint it red.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "수동태는 'be동사 + 과거분사'로 '~되다·~해지다'를 나타내 — 주어가 동작을 [[당하는]] 쪽이야."
+    },
+    {
+     "chip": "형태",
+     "text": "It is [[charged]] with ~ = '~로 가득 채워지다' — be(is) 뒤에 과거분사 charged가 왔어."
+    },
+    {
+     "chip": "to be+p.p.",
+     "text": "to부정사도 수동이면 to [[be seen]](보이도록)처럼 'to be + 과거분사'로 써 — something이 보여지는 대상이야."
+    },
+    {
+     "chip": "해석 요령",
+     "text": "'A가 B를 ~하다'(능동)가 아니라 'A가 ~되다·~해지다'로, 주어가 동작을 [[받는]] 의미로 옮겨."
+    }
+   ],
+   "example": "",
+   "example_analysis": "to be seen = to부정사 수동태('보이도록'), It is charged with = be+과거분사 수동태('가득 채워지다') — 둘 다 주어가 동작을 받는 쪽.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 문장의 밑줄 친 부분 중 어법상 틀린 것은?",
+     "answer": "⑤",
+     "sentence": "Perhaps it is because red is [[①|so]] obvious [[②|that]] few wild animals [[③|are]] truly red: even the so-called Red Squirrel and the Red Deer are really shades of reddish-brown [[④|that]] conceal rather than [[⑤|advertising]].",
+     "fix": "advertising → advertise : rather than은 앞뒤를 문법적으로 대등하게 연결하므로, 앞의 동사원형 conceal에 맞춰 동사원형 advertise를 써야 한다.",
+     "options": [
+      "① so",
+      "② that",
+      "③ are",
+      "④ that",
+      "⑤ advertising"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "다음 네모 안에서 어법상 옳은 것을 고르시오.",
+     "answer": "that / makes",
+     "sentence": "Of all the colours of the rainbow the one [[that/what]] [[makes/make]] the greatest impact on the eye is red.",
+     "fix": "that: 선행사 the one을 수식하는 주격 관계대명사이므로 what이 아닌 that(또는 which)을 쓴다. makes: 관계절의 주어가 the one(3인칭 단수)이므로 단수동사 makes가 옳다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장을 고르시오.",
+     "answer": "Relatively few butterflies is red either.",
+     "sentence": "",
+     "fix": "is → are : 주어 few butterflies가 복수이므로 복수동사 are를 써야 한다.",
+     "options": [
+      "There is something instantly arresting about the colour of fire and danger.",
+      "We have red fire engines, red warning lights and the Red Cross.",
+      "Relatively few butterflies is red either.",
+      "It is charged with alarm and urgency.",
+      "Perhaps it is because red is so obvious that few wild animals are truly red: even the so-called Red Squirrel and the Red Deer are really shades of reddish-brown that conceal rather than advertise."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "(지문) 무언가를 우체통이나 (예전의) 공중전화 부스처럼 멀리서 보이게 하고 싶으면, 우리는 그것을 붉게 칠한다.",
+     "answer": "If we want something to be seen from a distance, such as a post box or (formerly) a telephone kiosk, we paint it red.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "If",
+      "we",
+      "want",
+      "something",
+      "to",
+      "be",
+      "seen",
+      "from",
+      "a",
+      "distance",
+      "such",
+      "as",
+      "a",
+      "post",
+      "box",
+      "or",
+      "formerly",
+      "a",
+      "telephone",
+      "kiosk",
+      "we",
+      "paint",
+      "it",
+      "red"
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "(지문) 그것은 경고와 긴급함으로 가득 차 있다.",
+     "answer": "It is charged with alarm and urgency.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "It",
+      "is",
+      "charged",
+      "with",
+      "alarm",
+      "and",
+      "urgency"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "붉은색이 왜 눈에 가장 잘 띄고 위험을 알리는지, 그래서 야생 동물은 왜 붉은색을 피하는지에 관한 글이야.",
+  "stance": "중립적",
+  "stance_reason": "색의 특성과 동물의 위장을 사실·예시 중심으로 설명하는 정보 전달문이야.",
+  "structure": "주장→근거·예시",
+  "structure_reason": "'붉은색은 눈에 가장 띈다'는 주장(1~3문장)과 사례(4~5문장) 뒤, 그래서 야생 동물엔 드물다(6~8문장)로 이어져.",
+  "restatement_chains": [
+   {
+    "label": "붉은색 = 눈에 띔·경고",
+    "expressions": [
+     "makes the greatest impact on the eye",
+     "instantly arresting",
+     "charged with alarm and urgency",
+     "red is so obvious"
+    ],
+    "variation": "'눈에 가장 큰 영향' → '즉각 시선을 사로잡음' → '경고·긴급으로 가득' → '너무 눈에 띔'으로 강조돼."
+   },
+   {
+    "label": "야생동물은 붉은색을 피함",
+    "expressions": [
+     "few wild animals are truly red",
+     "conceal rather than advertise",
+     "Relatively few butterflies are red"
+    ],
+    "variation": "'진짜 붉은 야생동물은 드묾' → '드러내기보다 숨김' → '붉은 나비도 드묾'으로 이어져."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "주장",
+    "sentence_range": "1~3",
+    "summary": "무지개 색 중 눈에 가장 큰 영향을 주는 색은 붉은색으로, 경고·긴급의 느낌을 준다.",
+    "easy_example": "빨강을 보면 바로 위험·주의가 떠오르는 것."
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "4~5",
+    "summary": "소방차·경고등·적십자처럼, 멀리서 보이게 하려면 우리는 그것을 붉게 칠한다.",
+    "easy_example": "우체통·소방차를 빨갛게 칠하는 이유."
+   },
+   {
+    "stage": "반전",
+    "sentence_range": "6",
+    "summary": "붉은색은 너무 눈에 띄어서, 진짜 붉은 야생동물은 드물고 오히려 드러내기보다 숨긴다.",
+    "easy_example": "눈에 띄면 잡아먹히니 적갈색으로 숨는 것."
+   },
+   {
+    "stage": "부연",
+    "sentence_range": "7~8",
+    "summary": "붉은 나비도 드물고, 유럽에서 완전한 밝은 빨강은 붉은제독나비 하나뿐이다.",
+    "easy_example": "자연에서 진짜 새빨간 색은 거의 예외인 것."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Of all the colours of the rainbow the one that makes the greatest impact on the eye is red.",
+   "translation": "무지개의 모든 색 중에서 눈에 가장 큰 영향을 주는 색은 붉은색이다.",
+   "grammar": [
+    {
+     "tag": "관계사 that",
+     "note": "the one 수식",
+     "spans": []
+    },
+    {
+     "tag": "최상급 the greatest",
+     "note": "가장 큰 영향",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "impact",
+     "meaning": "영향, 충격"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Of all the colours",
+     "ko": "모든 색 중에서"
+    },
+    {
+     "en": "of the [[rainbow]]",
+     "ko": "[[무지개]]의"
+    },
+    {
+     "en": "the one that makes",
+     "ko": "만들어 내는 그 색은"
+    },
+    {
+     "en": "the greatest [[impact]]",
+     "ko": "가장 큰 [[영향]]을"
+    },
+    {
+     "en": "on the eye",
+     "ko": "눈에"
+    },
+    {
+     "en": "is [[red]].",
+     "ko": "[[붉은색]]이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "무지개 색 중 붉은색이 눈에 가장 영향을 적게 준다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'the greatest impact(가장 큰 영향)'라고 했어 — 붉은색이 눈에 가장 강하게 작용한다는 주제 문장이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘the eye is red’로 붙여 읽으면 안 돼 — 주어는 [[the one that makes the greatest impact on the eye]], 동사는 is red야."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "There is something instantly arresting about the colour of fire and danger.",
+   "translation": "불과 위험의 색에는 즉각 시선을 사로잡는 무언가가 있다.",
+   "grammar": [
+    {
+     "tag": "There is something ... about",
+     "note": "'~에는 ~한 무언가가 있다'",
+     "spans": []
+    },
+    {
+     "tag": "현재분사 arresting",
+     "note": "형용사적",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "instantly",
+     "meaning": "즉각"
+    },
+    {
+     "word": "arresting",
+     "meaning": "시선을 사로잡는"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "There is something",
+     "ko": "무언가가 있다"
+    },
+    {
+     "en": "instantly [[arresting]]",
+     "ko": "즉각 [[시선을 사로잡는]]"
+    },
+    {
+     "en": "about the [[colour]]",
+     "ko": "그 [[색]]에 대해"
+    },
+    {
+     "en": "of fire and [[danger]].",
+     "ko": "불과 [[위험]]의."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "불과 위험의 색은 사람의 시선을 거의 끌지 못한다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'instantly arresting(즉각 시선을 사로잡는)'이라고 했어 — 붉은색이 바로 눈길을 끈다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "It is charged with alarm and urgency.",
+   "translation": "그것은 경고와 긴급함으로 가득 차 있다.",
+   "grammar": [
+    {
+     "tag": "수동 be charged with",
+     "note": "'~로 가득 차다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "charged with",
+     "meaning": "~로 가득 찬"
+    },
+    {
+     "word": "alarm",
+     "meaning": "경고"
+    },
+    {
+     "word": "urgency",
+     "meaning": "긴급함"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "It is",
+     "ko": "그것은"
+    },
+    {
+     "en": "[[charged with]]",
+     "ko": "[[가득 차 있다]]"
+    },
+    {
+     "en": "[[alarm]] and",
+     "ko": "[[경고]]와"
+    },
+    {
+     "en": "[[urgency]].",
+     "ko": "[[긴급함]]으로."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(지칭) 'It'은 불과 위험을 겪은 사람을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "지칭 오인이야. It은 앞의 '붉은색(the colour)'을 가리켜 — 붉은색이 경고·긴급의 느낌을 준다는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘charged’를 ‘기소·충전되다’로 읽으면 안 돼 — [[be charged with]]는 ‘~로 가득 차 있다’야."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "We have red fire engines, red warning lights and the Red Cross.",
+   "translation": "우리에게는 붉은 소방차, 붉은 경고등, 그리고 적십자가 있다.",
+   "grammar": [
+    {
+     "tag": "병렬 명사",
+     "note": "fire engines/warning lights/Red Cross",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "fire engine",
+     "meaning": "소방차"
+    },
+    {
+     "word": "warning light",
+     "meaning": "경고등"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "We have",
+     "ko": "우리에겐 있다"
+    },
+    {
+     "en": "red fire [[engines]],",
+     "ko": "붉은 [[소방차]],"
+    },
+    {
+     "en": "red warning [[lights]]",
+     "ko": "붉은 [[경고등]]"
+    },
+    {
+     "en": "and the [[Red Cross]].",
+     "ko": "그리고 [[적십자]]가."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "붉은색은 경고·구조와 무관하게 쓰인다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "소방차·경고등·적십자를 예로 들어 — 붉은색이 '경고·위험' 신호로 쓰인다는 사례야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "If we want something to be seen from a distance, such as a post box or (formerly) a telephone kiosk, we paint it red.",
+   "translation": "무언가를 우체통이나 (예전의) 공중전화 부스처럼 멀리서 보이게 하고 싶으면, 우리는 그것을 붉게 칠한다.",
+   "grammar": [
+    {
+     "tag": "조건 if",
+     "note": "'~라면'",
+     "spans": []
+    },
+    {
+     "tag": "수동 to be seen",
+     "note": "'보이도록'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "from a distance",
+     "meaning": "멀리서"
+    },
+    {
+     "word": "kiosk",
+     "meaning": "(공중전화) 부스"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "If we want something",
+     "ko": "만약 우리가 무언가를 원한다면"
+    },
+    {
+     "en": "[[to be seen from a distance]],",
+     "ko": "[[멀리서 보이게 되기를]],"
+    },
+    {
+     "en": "such as a [[post box]]",
+     "ko": "[[우체통]]처럼"
+    },
+    {
+     "en": "or (formerly) a telephone [[kiosk]],",
+     "ko": "혹은 (예전엔) 공중전화 [[부스]],"
+    },
+    {
+     "en": "we paint it [[red]].",
+     "ko": "우리는 그것을 [[붉게]] 칠한다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "멀리서 잘 안 보이게 하려고 붉게 칠한다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'to be seen from a distance(멀리서 보이도록)'가 목적이야 — 눈에 띄게 하려고 빨갛게 칠하는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "Perhaps it is because red is so obvious that few wild animals are truly red: even the so-called Red Squirrel and the Red Deer are really shades of reddish-brown that conceal rather than advertise.",
+   "translation": "아마도 붉은색이 너무 눈에 띄기 때문에 진짜로 붉은 야생 동물이 거의 없는 것인데, 이른바 북방청서와 붉은사슴조차 실은 드러내기보다 숨기는 적갈색 색조를 띤다.",
+   "grammar": [
+    {
+     "tag": "so ... that",
+     "note": "'너무 ~해서 …하다'",
+     "spans": []
+    },
+    {
+     "tag": "A rather than B",
+     "note": "'B라기보다 A'",
+     "spans": []
+    },
+    {
+     "tag": "관계사 that",
+     "note": "reddish-brown 수식",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "obvious",
+     "meaning": "눈에 띄는"
+    },
+    {
+     "word": "conceal",
+     "meaning": "숨기다"
+    },
+    {
+     "word": "advertise",
+     "meaning": "드러내다, 광고하다"
+    },
+    {
+     "word": "rather than",
+     "meaning": "~라기보다 (오히려)"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Perhaps it is because",
+     "ko": "아마 ~ 때문일 것이다"
+    },
+    {
+     "en": "red is [[so obvious]]",
+     "ko": "붉은색이 [[너무 눈에 띄어서]]"
+    },
+    {
+     "en": "that few wild animals",
+     "ko": "야생동물이 거의 없다는"
+    },
+    {
+     "en": "are truly [[red]]:",
+     "ko": "진짜 [[붉은]]:"
+    },
+    {
+     "en": "even the so-called [[Red Squirrel]]",
+     "ko": "이른바 [[북방청서]]와"
+    },
+    {
+     "en": "and the Red Deer",
+     "ko": "붉은사슴조차"
+    },
+    {
+     "en": "are really shades",
+     "ko": "실은 색조다"
+    },
+    {
+     "en": "of [[reddish-brown]]",
+     "ko": "[[적갈색]]의"
+    },
+    {
+     "en": "[[that conceal rather than advertise]].",
+     "ko": "[[드러내기보다 숨기는]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "붉은색 이름의 동물들은 실제로도 새빨간 색이라는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "이름만 'Red'일 뿐 실제론 '적갈색(reddish-brown)'이라 '드러내기보다 숨긴다(conceal rather than advertise)'는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘so obvious’와 ‘that’을 따로 읽으면 안 돼 — [[so obvious that]]은 ‘너무 명백해서 ~하다’ 구문이야.",
+    "‘rather than’을 단순 ‘~보다’로 읽으면 안 돼 — [[conceal rather than advertise]]는 ‘드러내는 게 아니라 (오히려) 숨긴다’야."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Relatively few butterflies are red either.",
+   "translation": "붉은 나비 역시 비교적 드물다.",
+   "grammar": [
+    {
+     "tag": "either",
+     "note": "'~도 (아니다)'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "relatively",
+     "meaning": "비교적"
+    },
+    {
+     "word": "either",
+     "meaning": "(부정문에서) ~도"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[Relatively few]]",
+     "ko": "[[비교적 드문]]"
+    },
+    {
+     "en": "[[butterflies]]",
+     "ko": "[[나비]]도"
+    },
+    {
+     "en": "are red [[either]].",
+     "ko": "붉은 것은 [[마찬가지다]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "붉은 나비는 자연에 매우 흔하다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'few ... either(~도 드물다)'라고 했어 — 붉은 동물처럼 붉은 나비도 드물다는 부연이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "In Britain, and indeed, in all mainland Europe, only one species has a pattern of full-on bright red, like a splash of blood: the Red Admiral.",
+   "translation": "영국에서, 그리고 실은 유럽 본토 전체에서, 핏방울처럼 완전히 밝은 빨강 무늬를 지닌 종은 단 하나뿐이니, 바로 붉은제독나비이다.",
+   "grammar": [
+    {
+     "tag": "only one",
+     "note": "'단 하나의'",
+     "spans": []
+    },
+    {
+     "tag": "비유 like",
+     "note": "'~처럼'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "mainland",
+     "meaning": "본토의"
+    },
+    {
+     "word": "full-on",
+     "meaning": "완전한"
+    },
+    {
+     "word": "splash",
+     "meaning": "(튄) 자국"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In Britain,",
+     "ko": "영국에서,"
+    },
+    {
+     "en": "and indeed,",
+     "ko": "그리고 실은,"
+    },
+    {
+     "en": "in all [[mainland Europe]],",
+     "ko": "[[유럽 본토]] 전체에서,"
+    },
+    {
+     "en": "[[only one species]]",
+     "ko": "[[단 한 종]]만이"
+    },
+    {
+     "en": "has a pattern",
+     "ko": "무늬를 지닌다"
+    },
+    {
+     "en": "of [[full-on bright red]],",
+     "ko": "[[완전한 밝은 빨강]]의,"
+    },
+    {
+     "en": "like a splash of [[blood]]:",
+     "ko": "[[핏방울]]처럼:"
+    },
+    {
+     "en": "the [[Red Admiral]].",
+     "ko": "바로 [[붉은제독나비]]다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(함축) 유럽엔 완전한 밝은 빨강을 지닌 종이 매우 많다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "함축을 놓쳤어. 'only one species(단 한 종)'가 예외라는 뜻 — 완전한 빨강이 자연에 그만큼 드물다는, 앞 주장을 못 박는 마무리야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  }
+ ]
+}

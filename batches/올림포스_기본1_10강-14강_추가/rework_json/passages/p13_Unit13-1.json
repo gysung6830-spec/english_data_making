@@ -1,0 +1,625 @@
+{
+ "item_no": "Unit13-1",
+ "theme": "수질 정화·폐기물 처리를 위해 생물 공학적으로 설계·건설되는 인간 건설 생태계",
+ "overview": {
+  "theme_ko": "수질 정화와 폐기물 처리를 위해 생물 공학적으로 설계·건설되는 인간 건설 생태계의 기능",
+  "key_grammar": {
+   "point": "분사구문 (부사절을 -ing/-ed로 줄인 것)",
+   "source_sentence": "Marsh plants, such as cattails, when planted in ponds or canals, use and remove nutrients in water that's delivered to them as a waste or pollutant, helping clean the water.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "분사구문은 '접속사+주어'를 지우고 동사를 [[-ing/-ed]]로 바꿔 부사절을 간결히 줄인 거야."
+    },
+    {
+     "chip": "두 형태",
+     "text": "when planted = when they [[are planted]](수동, 접속사 남김), helping = and [[it helps]](능동, 결과)."
+    },
+    {
+     "chip": "의미상 주어",
+     "text": "분사의 주인은 주절 주어와 [[같아]] — 여기선 Marsh plants."
+    },
+    {
+     "chip": "접속사 남김",
+     "text": "뜻을 분명히 하려고 when·while 등 접속사를 [[남겨]] 두기도 해(when planted)."
+    },
+    {
+     "chip": "해석 요령",
+     "text": "'~할 때 / ~하면서(그 결과)'로 앞뒤 절에 자연스럽게 이어 붙여."
+    }
+   ],
+   "example": "",
+   "example_analysis": "when planted in ponds …, (marsh plants) use and remove nutrients …, helping clean the water = '심어지면 영양분을 사용·제거하고, (그 결과) 물을 정화하면서'.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
+     "answer": "④",
+     "sentence": "[[①|Specially designed]] wetland ecosystems [[②|have been constructed]] [[③|where]] bacteria and plants [[④|processes]] mine wastewater and [[⑤|help remove]] toxins from water.",
+     "fix": "processes → process: 주어 'bacteria and plants'가 복수이므로 동사도 복수형 process여야 한다.",
+     "options": [
+      "① Specially designed",
+      "② have been constructed",
+      "③ where",
+      "④ processes",
+      "⑤ help remove"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "다음 네모 안에서 어법상 알맞은 것을 골라 순서대로 쓰시오.",
+     "answer": "known / that / collect",
+     "sentence": "For example, we may construct shallow ponds or a series of canals [[known/knowing]] as bioswales [[that/what]] [[collect/collects]] runoff of surface water.",
+     "fix": "",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 문장 중 어법상 틀린 것은?",
+     "answer": "Human-constructed ecosystems are part of which is known as biological engineering.",
+     "sentence": "",
+     "fix": "which → what: 선행사를 포함하는 관계사 what이라야 'is known as ~'의 주어 역할을 하며 of의 목적어절을 이끈다.",
+     "options": [
+      "Some ecosystems, over a wide range of sites and purposes, are constructed by humans.",
+      "For example, we may construct shallow ponds or a series of canals known as bioswales that collect runoff of surface water.",
+      "Marsh plants, such as cattails, when planted in ponds or canals, use and remove nutrients in water that's delivered to them as a waste or pollutant, helping clean the water.",
+      "Other large-scale ecosystems are constructed to partially treat urban wastewater.",
+      "Human-constructed ecosystems are part of which is known as biological engineering."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "부들 같은 습지 식물은, 연못이나 수로에 심어지면, 폐기물이나 오염 물질로서 자신에게 전달되는 물속의 영양분을 사용하고 제거하여, 물을 정화하는 데 도움을 준다.",
+     "answer": "Marsh plants, such as cattails, when planted in ponds or canals, use and remove nutrients in water that's delivered to them as a waste or pollutant, helping clean the water.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Marsh",
+      "plants",
+      "such as",
+      "cattails",
+      "when",
+      "planted",
+      "in",
+      "ponds",
+      "or",
+      "canals",
+      "use",
+      "and",
+      "remove",
+      "nutrients",
+      "in",
+      "water",
+      "that's",
+      "delivered",
+      "to",
+      "them",
+      "as",
+      "a",
+      "waste",
+      "or",
+      "pollutant",
+      "helping",
+      "clean",
+      "the",
+      "water"
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "예를 들어, 우리는 얕은 연못이나, 지표수의 유출수를 모으는, 식생수로라고 알려진 일련의 수로를 건설할 수 있다.",
+     "answer": "For example, we may construct shallow ponds or a series of canals known as bioswales that collect runoff of surface water.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "For example",
+      "we",
+      "may",
+      "construct",
+      "shallow",
+      "ponds",
+      "or",
+      "a",
+      "series",
+      "of",
+      "canals",
+      "known as",
+      "bioswales",
+      "that",
+      "collect",
+      "runoff",
+      "of",
+      "surface",
+      "water"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "인간이 수질 정화·폐기물 처리 같은 목적으로 다양한 생태계를 설계·건설한다는, 생물 공학의 예에 관한 글이야.",
+  "stance": "중립적",
+  "stance_reason": "인간이 건설한 생태계의 기능을 사례 중심으로 설명하는 정보 전달문이야.",
+  "structure": "주장→근거·예시",
+  "structure_reason": "'일부 생태계는 인간이 건설한다'는 진술(1문장) 뒤, 식생수로·습지·대규모 생태계 사례(2~5문장)를 들고 '생물 공학'으로 일반화(6문장)해.",
+  "restatement_chains": [
+   {
+    "label": "인간이 건설한 생태계",
+    "expressions": [
+     "constructed by humans",
+     "Specially designed wetland ecosystems",
+     "Human-constructed ecosystems"
+    ],
+    "variation": "'인간이 건설' → '특별히 설계된 습지 생태계' → '인간이 건설한 생태계'로 반복·강조돼."
+   },
+   {
+    "label": "물 정화 기능",
+    "expressions": [
+     "collect runoff of surface water",
+     "helping clean the water",
+     "remove toxins from water",
+     "treat urban wastewater"
+    ],
+    "variation": "'지표수 모으기' → '물 정화' → '독소 제거' → '도시 폐수 처리'로 기능이 나열돼."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "주장",
+    "sentence_range": "1",
+    "summary": "매우 다양한 장소·목적으로 일부 생태계는 인간이 건설한다.",
+    "easy_example": "사람이 일부러 만든 '인공 생태계'가 있다는 것."
+   },
+   {
+    "stage": "예시1",
+    "sentence_range": "2~3",
+    "summary": "예를 들어 지표수를 모으는 식생수로를 만들고, 부들 같은 습지 식물이 오염물질 영양분을 흡수·제거해 물을 정화한다.",
+    "easy_example": "습지 식물을 심어 물을 깨끗이 하는 것."
+   },
+   {
+    "stage": "예시2",
+    "sentence_range": "4~5",
+    "summary": "박테리아·식물이 광산 폐수를 처리하는 습지, 도시 폐수를 처리하는 대규모 생태계도 건설된다.",
+    "easy_example": "폐수를 자연의 힘으로 처리하도록 설계한 것."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "6",
+    "summary": "이런 인간이 건설한 생태계는 '생물 공학'으로 불리는 것의 일부다.",
+    "easy_example": "이 모두가 '생물 공학'이라는 분야에 속하는 것."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Some ecosystems, over a wide range of sites and purposes, are constructed by humans.",
+   "translation": "일부 생태계는 매우 다양한 장소와 목적에 걸쳐 인간에 의해 건설된다.",
+   "grammar": [
+    {
+     "tag": "수동태 are constructed",
+     "note": "'건설된다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "ecosystem",
+     "meaning": "생태계"
+    },
+    {
+     "word": "a wide range of",
+     "meaning": "광범위한, 매우 다양한"
+    },
+    {
+     "word": "construct",
+     "meaning": "건설하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Some [[ecosystems]],",
+     "ko": "일부 [[생태계]]는"
+    },
+    {
+     "en": "over a wide range",
+     "ko": "넓은 범위에 걸쳐"
+    },
+    {
+     "en": "of sites and [[purposes]],",
+     "ko": "장소와 [[목적]]의,"
+    },
+    {
+     "en": "are [[constructed]]",
+     "ko": "[[건설된다]]"
+    },
+    {
+     "en": "by [[humans]].",
+     "ko": "[[인간]]에 의해."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 자연 생태계가 스스로 형성되는 과정을 설명하는 문장이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'are constructed by humans(인간에 의해 건설된다)'가 핵심 — 일부 생태계는 인간이 '만든다'는 이 글의 주제·도입 문장이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "For example, we may construct shallow ponds or a series of canals known as bioswales that collect runoff of surface water.",
+   "translation": "예를 들어, 우리는 얕은 연못이나, 지표수의 유출수를 모으는, 식생수로라고 알려진 일련의 수로를 건설할 수 있다.",
+   "grammar": [
+    {
+     "tag": "관계사 that",
+     "note": "canals 수식",
+     "spans": []
+    },
+    {
+     "tag": "분사 known as",
+     "note": "'~로 알려진'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "shallow",
+     "meaning": "얕은"
+    },
+    {
+     "word": "canal",
+     "meaning": "운하, 수로"
+    },
+    {
+     "word": "bioswale",
+     "meaning": "식생수로(빗물을 모아 거르는 수로)"
+    },
+    {
+     "word": "runoff",
+     "meaning": "흘러가는 물, 유출수"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "For example, we may [[construct]]",
+     "ko": "예를 들어, 우리는 [[건설]]할 수 있다"
+    },
+    {
+     "en": "shallow ponds",
+     "ko": "얕은 연못을"
+    },
+    {
+     "en": "or a series of [[canals]]",
+     "ko": "혹은 일련의 [[수로]]를"
+    },
+    {
+     "en": "[[known as bioswales]]",
+     "ko": "[[식생수로라고 알려진]]"
+    },
+    {
+     "en": "that collect [[runoff]]",
+     "ko": "[[유출수]]를 모으는"
+    },
+    {
+     "en": "of surface water.",
+     "ko": "지표수의."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 식생수로가 물을 오염시킨다는 문제를 지적한다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'For example(예를 들어)'로 시작해 인공 생태계의 첫 사례(지표수를 모으는 식생수로)를 드는 전개 문장이야 — 오염이 아니라 물 관리 목적이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "Marsh plants, such as cattails, when planted in ponds or canals, use and remove nutrients in water that's delivered to them as a waste or pollutant, helping clean the water.",
+   "translation": "부들 같은 습지 식물은, 연못이나 수로에 심어지면, 폐기물이나 오염 물질로서 자신에게 전달되는 물속의 영양분을 사용하고 제거하여, 물을 정화하는 데 도움을 준다.",
+   "grammar": [
+    {
+     "tag": "관계사 that",
+     "note": "water 수식",
+     "spans": []
+    },
+    {
+     "tag": "분사구문",
+     "note": "when planted ~ / helping clean the water — 분사구문(⑤)",
+     "spans": []
+    },
+    {
+     "tag": "수동태",
+     "note": "water that's delivered to them — is delivered, be+p.p.",
+     "spans": []
+    },
+    {
+     "tag": "공통 목적어",
+     "note": "[use] and [remove] nutrients — 목적어 nutrients 공통",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "marsh",
+     "meaning": "습지"
+    },
+    {
+     "word": "cattail",
+     "meaning": "부들"
+    },
+    {
+     "word": "nutrient",
+     "meaning": "영양분"
+    },
+    {
+     "word": "pollutant",
+     "meaning": "오염 물질"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Marsh plants,",
+     "ko": "습지 식물은,"
+    },
+    {
+     "en": "such as [[cattails]],",
+     "ko": "[[부들]] 같은,"
+    },
+    {
+     "en": "when [[planted]]",
+     "ko": "[[심어지면]]"
+    },
+    {
+     "en": "in ponds or canals,",
+     "ko": "연못이나 수로에,"
+    },
+    {
+     "en": "use and remove [[nutrients]]",
+     "ko": "[[영양분]]을 사용하고 제거한다"
+    },
+    {
+     "en": "in water",
+     "ko": "물속의"
+    },
+    {
+     "en": "that's delivered to them",
+     "ko": "그것들에게 전달되는"
+    },
+    {
+     "en": "as a waste or [[pollutant]],",
+     "ko": "폐기물이나 [[오염 물질]]로서,"
+    },
+    {
+     "en": "helping [[clean the water]].",
+     "ko": "물을 [[정화하는]] 데 도움을 주며."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(지칭) 'them'은 오염 물질(pollutant)을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "지칭 오인이야. delivered to them의 them은 앞의 'Marsh plants(습지 식물)'를 가리켜 — 오염물질이 식물에게 전달된다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘when planted’를 ‘심을 때’ 능동으로 읽으면 안 돼 — [[when (they are) planted]] 생략 수동이라 ‘심길 때’야."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "Specially designed wetland ecosystems have been constructed where bacteria and plants process mine wastewater and help remove toxins from water.",
+   "translation": "특별히 설계된 습지 생태계가 건설되어 왔는데, 그곳에서는 박테리아와 식물이 광산 폐수를 처리하고 물에서 독소를 제거하는 것을 돕는다.",
+   "grammar": [
+    {
+     "tag": "수동태 have been constructed",
+     "note": "'건설되어 왔다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "wetland",
+     "meaning": "습지"
+    },
+    {
+     "word": "wastewater",
+     "meaning": "폐수"
+    },
+    {
+     "word": "toxin",
+     "meaning": "독소"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Specially [[designed]] wetland ecosystems",
+     "ko": "특별히 [[설계된]] 습지 생태계가"
+    },
+    {
+     "en": "have been [[constructed]]",
+     "ko": "[[건설되어 왔다]]"
+    },
+    {
+     "en": "where bacteria and plants",
+     "ko": "그곳에서 박테리아와 식물이"
+    },
+    {
+     "en": "process mine [[wastewater]]",
+     "ko": "광산 [[폐수]]를 처리하고"
+    },
+    {
+     "en": "and help remove [[toxins]]",
+     "ko": "[[독소]]를 제거하는 것을 도우며"
+    },
+    {
+     "en": "from water.",
+     "ko": "물에서."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "특별히 설계된 습지 생태계는 광산 폐수를 더 오염시킨다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'process mine wastewater and help remove toxins(폐수를 처리하고 독소를 제거한다)'는 거야 — 오염이 아니라 정화 기능이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘where’를 ‘어디에’ 의문사로 읽으면 안 돼 — [[관계부사 where]]라 ‘~하는 그곳에서’로 앞의 생태계를 꾸며."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Other large-scale ecosystems are constructed to partially treat urban wastewater.",
+   "translation": "다른 대규모 생태계는 도시 폐수를 부분적으로 처리하기 위해 건설된다.",
+   "grammar": [
+    {
+     "tag": "부정사 to treat",
+     "note": "'처리하기 위해'",
+     "spans": []
+    },
+    {
+     "tag": "수동태",
+     "note": "are constructed — be+p.p.",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "large-scale",
+     "meaning": "대규모의"
+    },
+    {
+     "word": "partially",
+     "meaning": "부분적으로"
+    },
+    {
+     "word": "urban",
+     "meaning": "도시의"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Other [[large-scale]] ecosystems",
+     "ko": "다른 [[대규모]] 생태계가"
+    },
+    {
+     "en": "are [[constructed]]",
+     "ko": "[[건설된다]]"
+    },
+    {
+     "en": "to partially [[treat]]",
+     "ko": "부분적으로 [[처리하기]] 위해"
+    },
+    {
+     "en": "urban [[wastewater]].",
+     "ko": "도시 [[폐수]]를."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "대규모 생태계는 도시 폐수를 완전히 정화한다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'partially treat(부분적으로 처리한다)'라고 했어 — 완전 정화가 아니라 일부를 처리한다는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "Human-constructed ecosystems are part of what is known as biological engineering.",
+   "translation": "인간이 건설한 생태계는 생물 공학이라고 알려진 것의 일부이다.",
+   "grammar": [
+    {
+     "tag": "관계사 what",
+     "note": "'~라고 알려진 것'",
+     "spans": []
+    },
+    {
+     "tag": "수동태",
+     "note": "what is known as biological engineering — is known as",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "biological engineering",
+     "meaning": "생물 공학"
+    },
+    {
+     "word": "what is known as",
+     "meaning": "~라고 알려진 것"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[Human-constructed]] ecosystems",
+     "ko": "[[인간이 건설한]] 생태계는"
+    },
+    {
+     "en": "are part of",
+     "ko": "~의 일부다"
+    },
+    {
+     "en": "what is [[known as]]",
+     "ko": "[[~라고 알려진]] 것"
+    },
+    {
+     "en": "biological [[engineering]].",
+     "ko": "[[생물 공학]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(함축) 이 문장은 인간이 만든 생태계가 자연 생태계와 무관하다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "함축을 놓쳤어. 'part of what is known as biological engineering(생물 공학의 일부)'이라며 앞 사례들을 하나의 학문 분야로 묶는 일반화·결론이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘what’을 의문사 ‘무엇’으로 읽으면 안 돼 — [[what is known as ~]]는 선행사를 품은 관계사라 ‘~라고 알려진 것’이야."
+   ]
+  }
+ ]
+}

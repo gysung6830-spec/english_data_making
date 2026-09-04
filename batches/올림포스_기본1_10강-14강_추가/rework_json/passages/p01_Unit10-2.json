@@ -1,0 +1,638 @@
+{
+ "item_no": "Unit10-2",
+ "theme": "자신의 존재·정체성 확인을 위해 타인과의 교제·유대를 갈망하는 인간의 본성",
+ "overview": {
+  "theme_ko": "자신의 존재·정체성 확인을 위해 타인과의 교제·유대를 갈망하는 인간의 본성",
+  "key_grammar": {
+   "point": "need + 목적어 + to부정사 (5형식: …가 ~하도록 필요로 하다)",
+   "source_sentence": "We need other people to provide us with love, support, approval, bodily contact, reassurance, physical help and a myriad of other practical, physical and emotional needs.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "'need+목적어+to-V'는 '(목적어)가 ~하도록 [[필요로]] 한다'는 5형식 구조."
+    },
+    {
+     "chip": "구조",
+     "text": "We need other people [[to provide]] ~ = 사람들이 제공해 주도록 필요로 한다."
+    },
+    {
+     "chip": "주의",
+     "text": "to부정사의 의미상 주어는 [[목적어]](other people)이고, 제공하는 주체는 '다른 사람들'."
+    },
+    {
+     "chip": "확장",
+     "text": "같은 틀: we need others [[to confirm]] that ~ (남들이 확인해 주도록 필요로 한다)."
+    }
+   ],
+   "example": "",
+   "example_analysis": "need other people to provide = need+O(목적어)+to부정사(5형식) — people이 provide의 의미상 주어.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 문장의 밑줄 친 부분 중 어법상 틀린 것은?",
+     "answer": "④",
+     "sentence": "In a very basic sense we [[①|need]] others [[②|to confirm]] that we are there, [[③|that]] we exist and that we have an identity [[④|what]] is unique and [[⑤|separate]] from anyone else.",
+     "fix": "what → that : 선행사 an identity를 수식하는 주격 관계대명사가 필요하므로 that(또는 which)을 써야 한다. what은 선행사를 취할 수 없다.",
+     "options": [
+      "① need",
+      "② to confirm",
+      "③ that",
+      "④ what",
+      "⑤ separate"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "다음 네모 안에서 어법상 옳은 것을 고르시오.",
+     "answer": "seek / spend / sharing",
+     "sentence": "An equally impelling impulse, though, is to [[seek/seeking]] the company of others and to [[spend/spending]] extended periods of time [[sharing/share]] activities.",
+     "fix": "is to seek ~ and to spend ~ 는 to부정사끼리 병렬이므로 동사원형 seek·spend가 옳고, sharing activities는 '활동을 공유하면서'라는 분사구문이므로 sharing이 옳다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장을 고르시오.",
+     "answer": "Although the wish to be alone is often strong, its intensity vary from person to person.",
+     "sentence": "",
+     "fix": "vary → varies : 주어 its intensity가 3인칭 단수이므로 단수동사 varies를 써야 한다.",
+     "options": [
+      "An equally impelling impulse, though, is to seek the company of others and to spend extended periods of time sharing activities.",
+      "We need other people to provide us with love, support, approval, bodily contact, reassurance, physical help and a myriad of other practical, physical and emotional needs.",
+      "Although the wish to be alone is often strong, its intensity vary from person to person.",
+      "In a very basic sense we need others to confirm that we are there, that we exist and that we have an identity that is unique and separate from anyone else.",
+      "Thus, we generally cannot exist for too long without seeking companionship."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "(지문) 우리는 사랑, 지지, 인정, 신체적 접촉, 안심, 신체적 도움, 그리고 그 밖의 무수히 많은 실질적·신체적·정서적 필요를 제공해 줄 다른 사람들을 필요로 한다.",
+     "answer": "We need other people to provide us with love, support, approval, bodily contact, reassurance, physical help and a myriad of other practical, physical and emotional needs.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "We",
+      "need",
+      "other",
+      "people",
+      "to",
+      "provide",
+      "us",
+      "with",
+      "love",
+      "support",
+      "approval",
+      "bodily",
+      "contact",
+      "reassurance",
+      "physical",
+      "help",
+      "and",
+      "a",
+      "myriad",
+      "of",
+      "other",
+      "practical",
+      "physical",
+      "and",
+      "emotional",
+      "needs"
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "(지문) 아주 기본적인 의미에서 우리는 우리가 거기에 있고, 우리가 존재하며, 우리가 다른 누구와도 다른 고유한 정체성을 가지고 있다는 것을 확인해 줄 다른 사람들을 필요로 한다.",
+     "answer": "In a very basic sense we need others to confirm that we are there, that we exist and that we have an identity that is unique and separate from anyone else.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "In",
+      "a",
+      "very",
+      "basic",
+      "sense",
+      "we",
+      "need",
+      "others",
+      "to",
+      "confirm",
+      "that",
+      "we",
+      "are",
+      "there",
+      "that",
+      "we",
+      "exist",
+      "and",
+      "that",
+      "we",
+      "have",
+      "an",
+      "identity",
+      "that",
+      "is",
+      "unique",
+      "and",
+      "separate",
+      "from",
+      "anyone",
+      "else"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "인간이 혼자 있고 싶어 하면서도 존재·정체성 확인을 위해 타인과의 교제를 필요로 한다는 본성.",
+  "stance": "중립적",
+  "stance_reason": "타인을 필요로 하는 인간의 본성을 객관적으로 설명·주장하는 논설.",
+  "structure": "주장→근거·예시",
+  "structure_reason": "교제 충동을 제시하고(1~3) 그 필요의 근거(4~5)를 든 뒤 결론(6)으로 마무리.",
+  "restatement_chains": [
+   {
+    "label": "타인과의 교제 갈망",
+    "expressions": [
+     "seek the company of others",
+     "seeking companionship"
+    ],
+    "variation": "'남과 함께하려는 충동'이 마지막에 '교제 추구'로 다시 진술됨."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입",
+    "sentence_range": "1~2",
+    "summary": "혼자 있고 싶은 소망과 [[대등한]] 교제 충동이 공존한다.",
+    "easy_example": ""
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "3",
+    "summary": "교제하는 시간에 언어·비언어로 정보와 [[감정]]을 교환한다.",
+    "easy_example": ""
+   },
+   {
+    "stage": "근거",
+    "sentence_range": "4~5",
+    "summary": "타인은 실질적 [[필요]]와 존재·정체성 확인을 제공한다.",
+    "easy_example": ""
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "6",
+    "summary": "교제를 추구하지 않고는 오래 [[살아갈]] 수 없다.",
+    "easy_example": ""
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Although the wish to be alone is often strong, its intensity varies from person to person.",
+   "translation": "혼자 있고 싶은 소망이 종종 강하기는 하지만, 그 강도는 사람마다 다르다.",
+   "grammar": [
+    {
+     "tag": "양보 although",
+     "note": "'~이지만'으로 대조 도입",
+     "spans": []
+    },
+    {
+     "tag": "its 지칭",
+     "note": "its = the wish의",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "intensity",
+     "meaning": "강도"
+    },
+    {
+     "word": "vary",
+     "meaning": "(제각기) 다르다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Although the [[wish]]",
+     "ko": "비록 [[소망]]이"
+    },
+    {
+     "en": "to be [[alone]]",
+     "ko": "[[혼자]] 있으려는"
+    },
+    {
+     "en": "is often strong,",
+     "ko": "종종 강하지만,"
+    },
+    {
+     "en": "its [[intensity]] varies",
+     "ko": "그 [[강도]]는 다르다"
+    },
+    {
+     "en": "from [[person]] to person.",
+     "ko": "[[사람]]마다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "its intensity는 외로움 자체의 강도를 뜻한다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "여기서 its가 가리키는 것은 the wish to be alone(혼자 있고 싶은 소망)이며, 외로움이 아니라 그 소망의 강도가 사람마다 다르다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "An equally impelling impulse, though, is to seek the company of others and to spend extended periods of time sharing activities.",
+   "translation": "하지만 그와 똑같이 뿌리칠 수 없는 충동은 다른 사람들과 어울리며 오랜 시간을 활동을 함께 나누며 보내려는 것이다.",
+   "grammar": [
+    {
+     "tag": "병렬 to부정사",
+     "note": "to seek ~ and to spend ~ 대등 연결",
+     "spans": []
+    },
+    {
+     "tag": "though 삽입",
+     "note": "'하지만'의 역접 부사",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "impelling",
+     "meaning": "뿌리칠 수 없는"
+    },
+    {
+     "word": "impulse",
+     "meaning": "충동"
+    },
+    {
+     "word": "extended",
+     "meaning": "(길게) 늘어난, 오랜"
+    },
+    {
+     "word": "seek the company of",
+     "meaning": "~와 어울리기를 원하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "An equally [[impelling]] impulse, though,",
+     "ko": "하지만 똑같이 [[뿌리칠 수 없는]] 충동은,"
+    },
+    {
+     "en": "is to [[seek]]",
+     "ko": "[[추구하는]] 것이다"
+    },
+    {
+     "en": "the company of others",
+     "ko": "다른 사람들과 함께하기를"
+    },
+    {
+     "en": "and to spend",
+     "ko": "그리고 보내는 것을"
+    },
+    {
+     "en": "[[extended]] periods of time",
+     "ko": "[[긴]] 시간을"
+    },
+    {
+     "en": "[[sharing]] activities.",
+     "ko": "활동을 [[공유하면서]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "혼자 있으려는 욕구가 어울리려는 욕구보다 훨씬 강하다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "equally impelling(똑같이 강한)이라 했으므로 두 충동의 세기가 대등하다는 뜻이지, 고독 욕구가 더 세다는 게 아니야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘though’를 ‘비록’으로 읽으면 안 돼 — 문장 중간에 삽입된 [[though]]는 ‘하지만’이라 “하지만 똑같이 강한 충동은”이야.",
+    "‘the company’를 ‘회사’로 읽으면 안 돼 — [[seek the company of others]]는 ‘다른 사람들과 어울리기를 원하다’야."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "In these periods we exchange information and feelings in both conversational and non-verbal forms (facial expressions, eye contact, gestures, touching, and so on).",
+   "translation": "이러한 시간 동안 우리는 대화의 형태와 비언어적 형태(표정, 눈 맞춤, 몸짓, 접촉 등) 둘 다로 정보와 감정을 교환한다.",
+   "grammar": [
+    {
+     "tag": "these 지칭",
+     "note": "these periods = 교제하는 시간",
+     "spans": []
+    },
+    {
+     "tag": "both A and B",
+     "note": "대화·비언어 두 형태 모두",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "exchange",
+     "meaning": "교환하다"
+    },
+    {
+     "word": "non-verbal",
+     "meaning": "비언어적인"
+    },
+    {
+     "word": "conversational",
+     "meaning": "대화의, 대화체의"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In these [[periods]]",
+     "ko": "이 [[시간]] 동안"
+    },
+    {
+     "en": "we [[exchange]]",
+     "ko": "우리는 [[교환한다]]"
+    },
+    {
+     "en": "information and feelings",
+     "ko": "정보와 감정을"
+    },
+    {
+     "en": "in both [[conversational]]",
+     "ko": "[[대화의]] 형태와"
+    },
+    {
+     "en": "and non-verbal forms",
+     "ko": "비언어적 형태 둘 다로"
+    },
+    {
+     "en": "(facial expressions, eye contact,",
+     "ko": "(표정, 눈 맞춤,"
+    },
+    {
+     "en": "gestures, [[touching]], and so on).",
+     "ko": "몸짓, [[접촉]] 등)."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "these periods는 혼자 잠자거나 쉬는 시간을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "these periods는 앞 문장의 '남과 함께 활동을 공유하며 보내는 긴 시간'을 가리키며, 그 교제 시간에 정보·감정을 나눈다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "We need other people to provide us with love, support, approval, bodily contact, reassurance, physical help and a myriad of other practical, physical and emotional needs.",
+   "translation": "우리는 사랑, 지지, 인정, 신체적 접촉, 안심, 신체적 도움, 그리고 그 밖의 무수히 많은 실질적·신체적·정서적 필요를 제공해 줄 다른 사람들을 필요로 한다.",
+   "grammar": [
+    {
+     "tag": "need+O+to부정사",
+     "note": "사람들이 제공해 주도록 필요로 함(5형식)",
+     "spans": []
+    },
+    {
+     "tag": "myriad of",
+     "note": "무수히 많은",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "approval",
+     "meaning": "인정"
+    },
+    {
+     "word": "reassurance",
+     "meaning": "안심"
+    },
+    {
+     "word": "myriad",
+     "meaning": "무수히 많음"
+    },
+    {
+     "word": "provide A with B",
+     "meaning": "A에게 B를 제공하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "We [[need]] other people",
+     "ko": "우리는 다른 사람들을 [[필요로 한다]]"
+    },
+    {
+     "en": "to [[provide]] us with",
+     "ko": "우리에게 [[제공해 주도록]]"
+    },
+    {
+     "en": "love, support, [[approval]],",
+     "ko": "사랑, 지지, [[인정]],"
+    },
+    {
+     "en": "bodily contact, [[reassurance]],",
+     "ko": "신체적 접촉, [[안심]],"
+    },
+    {
+     "en": "physical help",
+     "ko": "신체적 도움"
+    },
+    {
+     "en": "and a [[myriad]] of",
+     "ko": "그리고 무수히 [[많은]]"
+    },
+    {
+     "en": "other practical, physical",
+     "ko": "다른 실질적, 신체적,"
+    },
+    {
+     "en": "and emotional needs.",
+     "ko": "정서적 필요를."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "다른 사람들이 우리에게 필요한 것들을 스스로 요구한다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "need other people to provide는 '~가 …해 주도록 필요로 한다'는 5형식으로, 남들이 우리에게 사랑·지지 등을 제공해 주기를 우리가 필요로 한다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘사람들에게 제공할 필요가 있다’로 읽으면 안 돼 — [[need other people to provide]]는 ‘다른 사람들이 제공해 주기를 필요로 한다’라서 provide의 주체는 other people이야."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "In a very basic sense we need others to confirm that we are there, that we exist and that we have an identity that is unique and separate from anyone else.",
+   "translation": "아주 기본적인 의미에서 우리는 우리가 거기에 있다는 것, 우리가 존재한다는 것, 그리고 우리가 다른 누구와도 다른 고유한 정체성을 가지고 있다는 것을 확인해 줄 다른 사람들을 필요로 한다.",
+   "grammar": [
+    {
+     "tag": "need+O+to부정사",
+     "note": "others가 confirm해 주도록 필요로 함",
+     "spans": []
+    },
+    {
+     "tag": "that절 나열",
+     "note": "that ~, that ~ and that ~ 병렬",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "confirm",
+     "meaning": "확인해 주다"
+    },
+    {
+     "word": "identity",
+     "meaning": "정체성"
+    },
+    {
+     "word": "separate",
+     "meaning": "구별되는"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In a very [[basic]] sense",
+     "ko": "아주 [[기본]]적인 의미에서"
+    },
+    {
+     "en": "we need others",
+     "ko": "우리는 다른 사람들을 필요로 한다"
+    },
+    {
+     "en": "to [[confirm]]",
+     "ko": "[[확인해 주도록]]"
+    },
+    {
+     "en": "that we are there,",
+     "ko": "우리가 거기 있다는 것을,"
+    },
+    {
+     "en": "that we [[exist]]",
+     "ko": "우리가 [[존재한다]]는 것을"
+    },
+    {
+     "en": "and that we have",
+     "ko": "그리고 우리가 가지고 있다는 것을"
+    },
+    {
+     "en": "an [[identity]]",
+     "ko": "[[정체성]]을"
+    },
+    {
+     "en": "that is unique and",
+     "ko": "고유하고"
+    },
+    {
+     "en": "[[separate]] from anyone else.",
+     "ko": "다른 누구와도 [[구별되는]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "우리는 남들과 똑같은 정체성을 갖기 위해 타인을 필요로 한다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "unique and separate from anyone else(고유하고 남과 구별되는)라 했으므로, 남과 같아지려는 게 아니라 '나만의 구별되는 정체성'을 확인받기 위해 타인이 필요하다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "뒤의 that절들을 따로 떼서 읽으면 안 돼 — [[that we are there, that we exist, that we have an identity]]는 모두 confirm의 목적어라 ‘~임을 확인해 주기를’이야."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Thus, we generally cannot exist for too long without seeking companionship.",
+   "translation": "따라서 우리는 대체로 교제를 추구하지 않고서는 너무 오래 존재할 수 없다.",
+   "grammar": [
+    {
+     "tag": "cannot ~ without",
+     "note": "'~하지 않고는 …할 수 없다'(이중부정)",
+     "spans": []
+    },
+    {
+     "tag": "Thus 결론",
+     "note": "앞 내용의 귀결",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "companionship",
+     "meaning": "교제, 벗함"
+    },
+    {
+     "word": "cannot ~ without -ing",
+     "meaning": "~하지 않고는 …할 수 없다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Thus, we generally",
+     "ko": "따라서 우리는 일반적으로"
+    },
+    {
+     "en": "cannot [[exist]]",
+     "ko": "[[살아갈]] 수 없다"
+    },
+    {
+     "en": "for too [[long]]",
+     "ko": "너무 [[오랫동안]]"
+    },
+    {
+     "en": "[[without seeking companionship]].",
+     "ko": "[[교제를 추구하지 않고는]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "우리는 교제 없이도 얼마든지 오래 살 수 있다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "cannot exist ~ without seeking companionship은 '교제를 추구하지 않고서는 오래 살 수 없다'는 이중부정으로, 결국 교제가 반드시 필요하다는 속뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘교제 없이 존재할 수 없다’로만 읽으면 안 돼 — [[cannot ~ without seeking]]은 이중부정이라 ‘교제를 구해야만 존재할 수 있다’는 뜻이야."
+   ]
+  }
+ ]
+}

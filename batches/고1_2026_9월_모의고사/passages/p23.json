@@ -75,23 +75,21 @@
     },
     {
      "kind": "영작",
-     "question": "내가 날개를 가지고 있다면, 너에게 날아갈 텐데. (가정법 과거)",
+     "question": "만약 우리 모두가 같은 종류의 마음을 가졌다면―오직 하나의 인간 본성만 있었다면―재난이 닥쳤을 때 우리는 멸종할 수도 있을 것이다. (가정법 과거)",
      "sentence": "",
-     "answer": "If I had wings, I would fly to you.",
+     "answer": "If we all had the same kind of mind―if there were only one human nature―then when disaster struck, we might become extinct.",
      "fix": "",
      "options": [],
      "words": [
-      "If",
-      "I",
-      "had",
-      "wings,",
-      "I",
-      "would",
-      "fly",
-      "to",
-      "you."
+      "If we all had",
+      "the same kind of mind―if",
+      "there were",
+      "only one human nature―then",
+      "when disaster struck,",
+      "we might become",
+      "extinct."
      ],
-     "from_passage": false
+     "from_passage": true
     },
     {
      "kind": "영작",
@@ -183,6 +181,7 @@
   {
    "id": 1,
    "english": "It's important for humans to have many kinds of minds, because variation is critical for the survival of a species.",
+   "translation": "인간이 여러 종류의 마음을 갖는 것은 중요한데, 변이가 종의 생존에 결정적이기 때문이다.",
    "grammar": [
     {
      "tag": "가주어 It - 진주어 to부정사",
@@ -227,12 +226,28 @@
    ],
    "chunks": [
     {
-     "en": "It's important for humans to have many kinds of minds,",
-     "ko": "인간이 [[여러 종류의 마음]]을 갖는 것은 중요하다,"
+     "en": "It's important",
+     "ko": "그것은 중요하다"
     },
     {
-     "en": "because variation is critical for the survival of a species.",
-     "ko": "왜냐하면 [[변이]]는 종의 생존에 대단히 중요하기 때문이다."
+     "en": "for humans to have",
+     "ko": "인간이 가지는 것이"
+    },
+    {
+     "en": "many kinds of [[minds]],",
+     "ko": "여러 종류의 [[마음]]을,"
+    },
+    {
+     "en": "because [[variation]]",
+     "ko": "왜냐하면 [[변이]]는"
+    },
+    {
+     "en": "is [[critical]]",
+     "ko": "결정적으로 [[중요]]하기 때문이다"
+    },
+    {
+     "en": "for the [[survival]] of a species.",
+     "ko": "종의 [[생존]]에."
     }
    ],
    "misreads": [
@@ -259,6 +274,7 @@
   {
    "id": 2,
    "english": "One of Charles Darwin's greatest insights was that variation is a prerequisite for natural selection to work.",
+   "translation": "찰스 다윈의 가장 위대한 통찰 중 하나는 변이가 자연 선택이 작동하기 위한 전제 조건이라는 것이었다.",
    "grammar": [
     {
      "tag": "부분표현 One of the + 복수명사",
@@ -299,15 +315,23 @@
    ],
    "chunks": [
     {
-     "en": "One of Charles Darwin's greatest insights was",
-     "ko": "찰스 다윈의 가장 위대한 [[통찰]] 중 하나는"
+     "en": "One of Charles Darwin's",
+     "ko": "찰스 다윈의 (것) 중 하나는"
     },
     {
-     "en": "that variation is a prerequisite",
-     "ko": "변이가 [[전제 조건]]이라는 것이었다"
+     "en": "greatest [[insights]] was",
+     "ko": "가장 위대한 [[통찰]]이었다"
     },
     {
-     "en": "for natural selection to work.",
+     "en": "that variation is",
+     "ko": "변이가 ~라는 것"
+    },
+    {
+     "en": "a [[prerequisite]]",
+     "ko": "하나의 [[전제 조건]]"
+    },
+    {
+     "en": "for [[natural selection]] to work.",
      "ko": "[[자연 선택]]이 작동하기 위한."
     }
    ],
@@ -327,6 +351,7 @@
   {
    "id": 3,
    "english": "Think about it: If there's a huge change in the environment, like a catastrophic drop in the food supply or a big increase in temperature, a species without much variation might be completely wiped out.",
+   "translation": "생각해 보라. 만약 식량 공급의 파멸적 감소나 기온의 큰 상승처럼 환경에 거대한 변화가 생긴다면, 변이가 많지 않은 종은 완전히 전멸될 수도 있다.",
    "grammar": [
     {
      "tag": "조건 부사절 접속사 if",
@@ -363,28 +388,44 @@
     {
      "word": "wipe out",
      "meaning": "완전히 없애다, 전멸시키다"
-    },
-    {
-     "word": "environment",
-     "meaning": "환경"
     }
    ],
    "chunks": [
     {
-     "en": "Think about it: If there's a huge change in the environment,",
-     "ko": "그것에 대해 생각해 보라: 만약 [[환경]]에 큰 변화가 있다면,"
+     "en": "Think about it:",
+     "ko": "그것에 대해 생각해 보라:"
     },
     {
-     "en": "like a catastrophic drop in the food supply",
-     "ko": "[[식량 공급]]의 대재앙적 감소"
+     "en": "If there's a huge change",
+     "ko": "만약 큰 변화가 있다면"
     },
     {
-     "en": "or a big increase in temperature,",
-     "ko": "또는 [[기온]]의 큰 상승 같은,"
+     "en": "in the [[environment]],",
+     "ko": "[[환경]]에,"
     },
     {
-     "en": "a species without much variation might be completely wiped out.",
-     "ko": "변이가 많지 않은 종은 완전히 [[전멸]]될 수도 있다."
+     "en": "like a [[catastrophic]] drop",
+     "ko": "[[파멸적인]] 감소와 같은"
+    },
+    {
+     "en": "in the [[food supply]]",
+     "ko": "[[식량 공급]]의"
+    },
+    {
+     "en": "or a big increase",
+     "ko": "또는 큰 증가"
+    },
+    {
+     "en": "in temperature,",
+     "ko": "기온의,"
+    },
+    {
+     "en": "a species without much [[variation]]",
+     "ko": "많은 [[변이]]가 없는 종은"
+    },
+    {
+     "en": "might be completely [[wiped out]].",
+     "ko": "완전히 [[전멸]]될 수도 있다."
     }
    ],
    "misreads": [
@@ -404,6 +445,7 @@
   {
    "id": 4,
    "english": "A species with great variation will more likely have some survivors after any catastrophe―the members who are well suited for the new environment.",
+   "translation": "큰 변이를 지닌 종은 어떤 대재앙 이후에도 몇몇 생존자, 즉 새로운 환경에 잘 적합한 구성원들을 남길 가능성이 더 크다.",
    "grammar": [
     {
      "tag": "주격 관계대명사 who",
@@ -436,16 +478,28 @@
    ],
    "chunks": [
     {
-     "en": "A species with great variation",
-     "ko": "[[큰 변이]]를 지닌 종은"
+     "en": "A species with great [[variation]]",
+     "ko": "큰 [[변이]]를 지닌 종은"
     },
     {
-     "en": "will more likely have some survivors after any catastrophe―the members",
-     "ko": "어떤 대재앙 이후에도 몇몇 [[생존자]]를 남길 가능성이 더 크다―즉 그 구성원들은"
+     "en": "will more likely have",
+     "ko": "남길 가능성이 더 크다"
     },
     {
-     "en": "who are well suited for the new environment.",
-     "ko": "새로운 환경에 잘 [[적합한]]."
+     "en": "some [[survivors]]",
+     "ko": "몇몇 [[생존자]]를"
+    },
+    {
+     "en": "after any [[catastrophe]]―the members",
+     "ko": "어떤 [[대재앙]] 이후에도―즉 그 구성원들"
+    },
+    {
+     "en": "who are well [[suited]]",
+     "ko": "잘 [[적합]]한"
+    },
+    {
+     "en": "for the new environment.",
+     "ko": "새로운 환경에."
     }
    ],
    "misreads": [
@@ -467,6 +521,7 @@
   {
    "id": 5,
    "english": "Darwin observed variation in the bodies of animals, and the same principle applies to human minds.",
+   "translation": "다윈은 동물의 몸에서 변이를 관찰했는데, 같은 원리가 인간의 마음에도 적용된다.",
    "grammar": [
     {
      "tag": "등위접속사 and",
@@ -499,12 +554,20 @@
    ],
    "chunks": [
     {
-     "en": "Darwin observed variation in the bodies of animals,",
-     "ko": "다윈은 동물의 몸에서 [[변이]]를 관찰했다,"
+     "en": "Darwin observed [[variation]]",
+     "ko": "다윈은 [[변이]]를 관찰했다"
     },
     {
-     "en": "and the same principle applies to human minds.",
-     "ko": "그리고 같은 [[원리]]가 인간의 마음에도 적용된다."
+     "en": "in the bodies of animals,",
+     "ko": "동물의 몸에서,"
+    },
+    {
+     "en": "and the same [[principle]]",
+     "ko": "그리고 같은 [[원리]]가"
+    },
+    {
+     "en": "[[applies]] to human minds.",
+     "ko": "인간의 마음에 [[적용된다]]."
     }
    ],
    "misreads": [
@@ -521,6 +584,7 @@
   {
    "id": 6,
    "english": "If we all had the same kind of mind―if there were only one human nature―then when disaster struck, we might become extinct.",
+   "translation": "만약 우리 모두가 같은 종류의 마음을 가졌다면, 즉 인간 본성이 오직 하나뿐이라면, 재난이 닥쳤을 때 우리는 멸종할 수도 있을 것이다.",
    "grammar": [
     {
      "tag": "가정법 과거",
@@ -555,15 +619,27 @@
    ],
    "chunks": [
     {
-     "en": "If we all had the same kind of mind―if there were",
-     "ko": "만약 우리 모두가 [[같은 종류의 마음]]을 가졌다면―만약"
+     "en": "If we all had",
+     "ko": "만약 우리 모두가 가졌다면"
     },
     {
-     "en": "only one human nature―then when disaster struck,",
-     "ko": "오직 하나의 [[인간 본성]]만 있었다면―그때 재난이 닥쳤을 때,"
+     "en": "[[the same kind of mind]]―if",
+     "ko": "[[같은 종류의 마음]]을―만약"
     },
     {
-     "en": "we might become extinct.",
+     "en": "there were only one",
+     "ko": "오직 하나만 있었다면"
+    },
+    {
+     "en": "[[human nature]]―then",
+     "ko": "[[인간 본성]]―그때"
+    },
+    {
+     "en": "when [[disaster]] struck,",
+     "ko": "[[재난]]이 닥쳤을 때,"
+    },
+    {
+     "en": "we might become [[extinct]].",
      "ko": "우리는 [[멸종]]할 수도 있다."
     }
    ],
@@ -583,6 +659,7 @@
   {
    "id": 7,
    "english": "Thankfully, our species has many kinds of minds, both within a single culture and across cultures, so we're less likely to be wiped out.",
+   "translation": "다행히도 우리 종은 단일 문화 안에서든 여러 문화에 걸쳐서든 여러 종류의 마음을 지니고 있어서, 우리가 전멸될 가능성은 더 적다.",
    "grammar": [
     {
      "tag": "상관접속사 both A and B",
@@ -614,10 +691,6 @@
      "meaning": "(생물의) 종"
     },
     {
-     "word": "culture",
-     "meaning": "문화"
-    },
-    {
      "word": "be likely to",
      "meaning": "~할 가능성이 있다"
     },
@@ -628,16 +701,28 @@
    ],
    "chunks": [
     {
-     "en": "Thankfully, our species has many kinds of minds,",
-     "ko": "다행히, 우리 종은 [[여러 종류의 마음]]을 지니고 있다,"
+     "en": "Thankfully, our species has",
+     "ko": "다행히, 우리 종은 지니고 있다"
     },
     {
-     "en": "both within a single culture and across cultures,",
-     "ko": "단일 [[문화]] 내에서든 여러 문화에 걸쳐서든,"
+     "en": "many kinds of [[minds]],",
+     "ko": "여러 종류의 [[마음]]을,"
     },
     {
-     "en": "so we're less likely to be wiped out.",
-     "ko": "그래서 우리는 [[전멸]]될 가능성이 더 적다."
+     "en": "both within a single [[culture]]",
+     "ko": "단일 [[문화]] 내에서든"
+    },
+    {
+     "en": "and across cultures,",
+     "ko": "그리고 여러 문화에 걸쳐서든,"
+    },
+    {
+     "en": "so we're less likely",
+     "ko": "그래서 우리는 가능성이 더 적다"
+    },
+    {
+     "en": "to be [[wiped out]].",
+     "ko": "[[전멸]]될."
     }
    ],
    "misreads": [
@@ -652,6 +737,7 @@
   {
    "id": 8,
    "english": "This variation preserves the evolvability of our species.",
+   "translation": "이 변이가 우리 종의 진화 가능성을 보존한다.",
    "grammar": [
     {
      "tag": "주어-동사 수일치",
@@ -677,11 +763,15 @@
    ],
    "chunks": [
     {
-     "en": "This variation preserves the evolvability",
-     "ko": "이 변이는 [[진화 가능성]]을 보존한다"
+     "en": "This [[variation]] preserves",
+     "ko": "이 [[변이]]는 보존한다"
     },
     {
-     "en": "of our species.",
+     "en": "the [[evolvability]]",
+     "ko": "[[진화 가능성]]을"
+    },
+    {
+     "en": "of our [[species]].",
      "ko": "우리 [[종]]의."
     }
    ],

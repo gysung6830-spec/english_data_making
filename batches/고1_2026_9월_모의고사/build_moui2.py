@@ -38,7 +38,7 @@ def mk_passage(d):
                     summary=b["summary"], easy_example=b.get("easy_example","")) for b in ov["flow_blocks"]])
     items=[]
     for s in d["sentences"]:
-        items.append(SentenceItem(id=s["id"], english=s["english"],
+        items.append(SentenceItem(id=s["id"], english=s["english"], translation=s.get("translation",""),
             grammar=[GrammarChip(tag=g["tag"], note=g.get("note",""), spans=g.get("spans",[])) for g in s.get("grammar",[])],
             vocab=[Vocab(word=v["word"], meaning=v["meaning"]) for v in s.get("vocab",[])],
             chunks=[Chunk(en=c["en"], ko=c["ko"]) for c in s["chunks"]],

@@ -1,0 +1,760 @@
+{
+ "item_no": "Unit12-3",
+ "theme": "프로젝트 팀 내 의견 차이의 긍정적 가치와 이를 조기에 해결해야 하는 리더의 역할",
+ "overview": {
+  "theme_ko": "프로젝트 팀 내 의견 차이의 긍정적 가치와, 이를 조기에 찾아 해결해야 하는 리더의 역할",
+  "key_grammar": {
+   "point": "양보의 접속사 Although ('비록 ~일지라도')",
+   "source_sentence": "Although snap decisions about project changes should be avoided, leaders should be open to new and better ways to run the project.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "although는 '비록 ~이지만'으로, 뒤 주절과 [[반대·대조]]되는 내용을 앞세워."
+    },
+    {
+     "chip": "구조",
+     "text": "Although + [주어+동사]~, [주절] — although절은 '양보', 진짜 하고 싶은 말은 [[주절]]에 있어."
+    },
+    {
+     "chip": "핵심 잡기",
+     "text": "although절은 한 발 물러서는 조건이고, 필자의 [[주장]]은 콤마 뒤 주절이야 — 주절을 놓치지 마."
+    },
+    {
+     "chip": "though/even though",
+     "text": "although = though = even though — 다 '[[비록 ~지만]]'이야(but과 함께 쓰지 않음)."
+    },
+    {
+     "chip": "해석 요령",
+     "text": "'비록 ~일지라도, (그래도) …'로 옮기고 [[주절]]의 주장을 중심으로 정리해."
+    }
+   ],
+   "example": "",
+   "example_analysis": "Although snap decisions … should be avoided(양보), leaders should be open …(주절) = '성급한 결정은 피해야 하지만, 그래도 열려 있어야 한다'.",
+   "drills": [
+    {
+     "kind": "어법판단(밑줄형)",
+     "question": "다음 문장에서 밑줄 친 부분 중, 어법상 틀린 것은?",
+     "answer": "⑤",
+     "sentence": "The team [[①|tends to look]] to the project leader [[②|to play]] the lead role in [[③|resolving]] differences, and members will generally [[④|defer to]] the leader if they believe their views [[⑤|have been giving]] due consideration.",
+     "fix": "have been giving → have been given ('견해가 마땅한 고려를 받은' 것이므로 「have been + 과거분사」 수동태)",
+     "options": [
+      "① tends to look",
+      "② to play",
+      "③ resolving",
+      "④ defer to",
+      "⑤ have been giving"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "어법판단(네모형)",
+     "question": "다음 문장의 네모 안에서 어법상 옳은 것을 순서대로 고르시오.",
+     "answer": "are found / more easily / rather than",
+     "sentence": "Second, when conflicting viewpoints [[are found/are finding]], they are [[more easily/more easy]] resolved earlier [[rather than/rather then]] later in the project.",
+     "fix": "are found(관점이 '발견되는' 수동), more easily(형용사 resolved를 꾸미는 부사), rather than('~보다는'의 고정표현).",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "어법판단(오류찾기)",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "answer": "First, different views can bring with them good ideas about the project and how it might be ran.",
+     "sentence": "",
+     "fix": "be ran → be run (how it might be run: 조동사 뒤 수동태는 「be + 과거분사」이고 run의 과거분사는 run)",
+     "options": [
+      "Project leaders should not be surprised when disagreements emerge within the team.",
+      "If they remain hidden, the leader may even want to seek them out for at least two reasons.",
+      "First, different views can bring with them good ideas about the project and how it might be ran.",
+      "Second, when conflicting viewpoints are found, they are more easily resolved earlier rather than later in the project.",
+      "Although team members may disagree about one or another aspect of the project, most simply want their ideas considered and resolved."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "프로젝트 변경에 대한 성급한 결정은 피해야 하지만, 리더는 프로젝트를 운영할 새롭고 더 나은 방법에 열려 있어야 한다.",
+     "answer": "Although snap decisions about project changes should be avoided, leaders should be open to new and better ways to run the project.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Although",
+      "snap",
+      "decisions",
+      "about",
+      "project",
+      "changes",
+      "should",
+      "be",
+      "avoided",
+      "leaders",
+      "should",
+      "be",
+      "open",
+      "to",
+      "new",
+      "and",
+      "better",
+      "ways",
+      "to",
+      "run",
+      "the",
+      "project"
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "팀원들은 프로젝트의 이런저런 측면에 대해 동의하지 않을 수 있지만, 대부분은 그저 자기 아이디어가 고려되고 해결되기를 원한다.",
+     "answer": "Although team members may disagree about one or another aspect of the project, most simply want their ideas considered and resolved.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Although",
+      "team",
+      "members",
+      "may",
+      "disagree",
+      "about",
+      "one",
+      "or",
+      "another",
+      "aspect",
+      "of",
+      "the",
+      "project",
+      "most",
+      "simply",
+      "want",
+      "their",
+      "ideas",
+      "considered",
+      "and",
+      "resolved"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "프로젝트 팀 내 의견 차이가 왜 긍정적이며, 리더가 왜 그것을 조기에 찾아 해결해야 하는지에 관한 글이야.",
+  "stance": "긍정적",
+  "stance_reason": "의견 차이를 'good ideas'를 가져오는 것으로 보고, 리더가 이를 예상·환영·해결해야 한다고 그 가치를 적극 인정해.",
+  "structure": "주장→근거·예시",
+  "structure_reason": "'리더는 이견을 예상·환영해야 한다'는 주장(1~3문장) 뒤, 두 가지 이유(4·6문장)와 팀 역학·리더 역할(7~8문장)로 뒷받침해.",
+  "restatement_chains": [
+   {
+    "label": "의견 차이",
+    "expressions": [
+     "disagreements",
+     "different views",
+     "conflicting viewpoints"
+    ],
+    "variation": "'이견' → '다양한 견해' → '상충하는 관점'으로 표현이 바뀌며 이어져."
+   },
+   {
+    "label": "리더의 대응",
+    "expressions": [
+     "seek them out",
+     "be open to new and better ways",
+     "play the lead role in resolving differences"
+    ],
+    "variation": "'이견을 찾아냄' → '새 방법에 열려 있음' → '해결에 주도적 역할'로 구체화돼."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "주장",
+    "sentence_range": "1~2",
+    "summary": "리더는 팀 내 이견에 놀라지 말고 오히려 예상해야 한다.",
+    "easy_example": "갈등이 생겨도 당연한 일로 받아들이는 태도."
+   },
+   {
+    "stage": "전개예고",
+    "sentence_range": "3",
+    "summary": "이견이 숨어 있다면 리더는 적어도 두 가지 이유로 그것을 찾아내려 할 수 있다.",
+    "easy_example": "드러나지 않은 불만도 일부러 끄집어내려는 것."
+   },
+   {
+    "stage": "이유1",
+    "sentence_range": "4~5",
+    "summary": "첫째, 다양한 견해는 좋은 아이디어를 주므로, 성급한 결정은 피하되 리더는 더 나은 방법에 열려 있어야 한다.",
+    "easy_example": "다른 의견에서 더 좋은 운영법이 나올 수 있는 것."
+   },
+   {
+    "stage": "이유2",
+    "sentence_range": "6",
+    "summary": "둘째, 상충하는 관점은 프로젝트 나중보다 이른 시기에 더 쉽게 해결된다.",
+    "easy_example": "문제는 초반에 잡아야 풀기 쉬운 것."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "7~8",
+    "summary": "팀원은 대개 자기 의견이 고려·해결되길 원하며, 자기 의견이 충분히 고려됐다고 믿으면 리더의 주도적 해결을 따른다.",
+    "easy_example": "내 말이 존중받았다고 느끼면 리더 결정을 받아들이는 것."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Project leaders should not be surprised when disagreements emerge within the team.",
+   "translation": "프로젝트 리더는 팀 내에서 의견 차이가 생겨도 놀라서는 안 된다.",
+   "grammar": [
+    {
+     "tag": "접속사 when",
+     "note": "'~할 때'",
+     "spans": []
+    },
+    {
+     "tag": "감정 형용사 surprised",
+     "note": "should not be surprised: 조동사+원형, surprised는 감정 형용사",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "disagreement",
+     "meaning": "의견 차이, 이견"
+    },
+    {
+     "word": "emerge",
+     "meaning": "나타나다, 부상하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Project leaders",
+     "ko": "프로젝트 리더는"
+    },
+    {
+     "en": "should not be [[surprised]]",
+     "ko": "[[놀라서는]] 안 된다"
+    },
+    {
+     "en": "when [[disagreements]] emerge",
+     "ko": "[[의견 차이]]가 생길 때"
+    },
+    {
+     "en": "[[within]] the team.",
+     "ko": "[[팀 안에서]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 리더가 이견을 억눌러야 한다고 조언하는 문장이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'should not be surprised(놀라지 말라)'로 이견을 자연스러운 것으로 받아들이라는, 글의 주제·주장 문장이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "In fact, they should expect them.",
+   "translation": "사실, 그들은 그런 의견 차이를 예상해야 한다.",
+   "grammar": [
+    {
+     "tag": "대명사 them",
+     "note": "= disagreements(이견)",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "in fact",
+     "meaning": "사실은"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In fact,",
+     "ko": "사실,"
+    },
+    {
+     "en": "they should [[expect]]",
+     "ko": "그들은 [[예상해야]] 한다"
+    },
+    {
+     "en": "[[them]].",
+     "ko": "[[그것들을]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(지칭) 'them'은 프로젝트 리더들을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "지칭 오인이야. expect them의 them은 앞 문장의 'disagreements(이견)'를 가리켜 — 리더가 이견을 예상해야 한다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "If they remain hidden, the leader may even want to seek them out for at least two reasons.",
+   "translation": "만약 그것들이 숨겨진 채로 있다면, 리더는 적어도 두 가지 이유로 그것들을 일부러 찾아내고 싶어 할 수도 있다.",
+   "grammar": [
+    {
+     "tag": "조건 if",
+     "note": "'~라면'",
+     "spans": []
+    },
+    {
+     "tag": "seek out",
+     "note": "찾아내다",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "remain",
+     "meaning": "(여전히) ~인 상태다"
+    },
+    {
+     "word": "at least",
+     "meaning": "적어도"
+    },
+    {
+     "word": "seek out",
+     "meaning": "찾아내다, 물색하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "If they remain [[hidden]],",
+     "ko": "그것들이 [[숨겨져]] 있다면,"
+    },
+    {
+     "en": "the leader may even",
+     "ko": "리더는 심지어 ~할 수도 있다"
+    },
+    {
+     "en": "want to [[seek]] them out",
+     "ko": "그것들을 [[찾아내고]] 싶어"
+    },
+    {
+     "en": "for at least [[two reasons]].",
+     "ko": "적어도 [[두 가지 이유]]로."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "숨은 이견은 그대로 두는 것이 최선이라는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'seek them out(그것들을 찾아낸다)'며 오히려 적극적으로 끄집어내려 한다는 거야 — 그 이유가 뒤에 둘 나와.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘seek them out’의 out을 떼어 읽으면 안 돼 — [[seek out]]은 ‘찾아내다’이고 them이 목적어야."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "First, different views can bring with them good ideas about the project and how it might be run.",
+   "translation": "첫째, 다양한 견해는 프로젝트와 그것을 어떻게 운영할지에 관한 좋은 아이디어를 함께 가져올 수 있다.",
+   "grammar": [
+    {
+     "tag": "bring with them",
+     "note": "'~을 함께 가져오다'",
+     "spans": []
+    },
+    {
+     "tag": "의문사 how",
+     "note": "'어떻게 ~하는지'",
+     "spans": []
+    },
+    {
+     "tag": "수동태 be run",
+     "note": "how it might be run — 조동사+be+p.p.",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "view",
+     "meaning": "견해, 관점"
+    },
+    {
+     "word": "run (a project)",
+     "meaning": "(프로젝트를) 운영하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "First, different [[views]]",
+     "ko": "첫째, 다양한 [[견해]]는"
+    },
+    {
+     "en": "can [[bring]] with them",
+     "ko": "그것들과 함께 [[가져올]] 수 있다"
+    },
+    {
+     "en": "good ideas about the project",
+     "ko": "프로젝트에 대한 좋은 아이디어를"
+    },
+    {
+     "en": "and how it [[might be run]].",
+     "ko": "그리고 그것을 어떻게 [[운영할지에 대한]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 리더가 두 이유를 찾는 첫 번째 이유를 제시하는 문장이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'First(첫째)'로 시작해 이유①을 여는 전개 문장이야 — 다양한 견해가 '좋은 아이디어'를 가져온다는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘bring with them’의 them을 목적어로 읽으면 안 돼 — [[bring with them good ideas]]의 목적어는 good ideas야."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Although snap decisions about project changes should be avoided, leaders should be open to new and better ways to run the project.",
+   "translation": "프로젝트 변경에 대한 성급한 결정은 피해야 하지만, 리더는 프로젝트를 운영할 새롭고 더 나은 방법에 열려 있어야 한다.",
+   "grammar": [
+    {
+     "tag": "수동 should be avoided",
+     "note": "'피해져야 한다'",
+     "spans": []
+    },
+    {
+     "tag": "be open to",
+     "note": "~에 열려 있다",
+     "spans": []
+    },
+    {
+     "tag": "양보 접속사 although",
+     "note": "Although ~ should be avoided, 주절 — 양보(⑤)",
+     "spans": []
+    },
+    {
+     "tag": "비교급 better",
+     "note": "new and better ways — 비교급",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "snap decision",
+     "meaning": "성급한 결정"
+    },
+    {
+     "word": "be open to",
+     "meaning": "~에 열려 있다, ~을 받아들일 자세가 되어 있다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Although [[snap decisions]]",
+     "ko": "비록 [[성급한 결정]]은"
+    },
+    {
+     "en": "about project changes",
+     "ko": "프로젝트 변경에 대한"
+    },
+    {
+     "en": "[[should be avoided]],",
+     "ko": "[[피해져야 하지만]],"
+    },
+    {
+     "en": "leaders should be [[open]]",
+     "ko": "리더는 [[열려]] 있어야 한다"
+    },
+    {
+     "en": "to new and better ways",
+     "ko": "새롭고 더 나은 방법에"
+    },
+    {
+     "en": "to run the project.",
+     "ko": "프로젝트를 운영할."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "성급한 결정을 피해야 하므로 리더는 새 방법을 받아들이면 안 된다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'Although ~ avoided(피해야 하지만)'는 양보일 뿐, 주절은 'should be open(열려 있어야 한다)'이야 — 성급함은 경계하되 더 나은 방법엔 열려 있으라는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "Second, when conflicting viewpoints are found, they are more easily resolved earlier rather than later in the project.",
+   "translation": "둘째, 상충하는 관점은 발견되었을 때 프로젝트의 나중보다 이른 시기에 더 쉽게 해결된다.",
+   "grammar": [
+    {
+     "tag": "접속사 when",
+     "note": "'~할 때'",
+     "spans": []
+    },
+    {
+     "tag": "수동 are found/resolved",
+     "note": "'발견·해결되다'",
+     "spans": []
+    },
+    {
+     "tag": "A rather than B",
+     "note": "'B보다 A'",
+     "spans": []
+    },
+    {
+     "tag": "비교급 more easily",
+     "note": "more easily resolved — more 비교급",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "conflicting",
+     "meaning": "상충하는"
+    },
+    {
+     "word": "viewpoint",
+     "meaning": "관점"
+    },
+    {
+     "word": "resolve",
+     "meaning": "해결하다"
+    },
+    {
+     "word": "rather than",
+     "meaning": "~보다는, ~하기보다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Second, when [[conflicting]] viewpoints",
+     "ko": "둘째, [[상충하는]] 관점이"
+    },
+    {
+     "en": "[[are found]],",
+     "ko": "[[발견되면]],"
+    },
+    {
+     "en": "they are more easily [[resolved]]",
+     "ko": "그것들은 더 쉽게 [[해결된다]]"
+    },
+    {
+     "en": "[[earlier rather than later]]",
+     "ko": "[[나중이 아니라 더 일찍]]"
+    },
+    {
+     "en": "in the project.",
+     "ko": "프로젝트에서."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "상충하는 관점은 프로젝트 후반에 다룰수록 해결하기 쉽다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'earlier rather than later(나중보다 이른 시기에)' 더 쉽게 해결된다는 거야 — 초기에 다뤄야 한다는 이유②야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘rather than’을 단순 ‘~보다’로 읽으면 안 돼 — [[earlier rather than later]]는 ‘나중이 아니라 더 일찍’이야."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Although team members may disagree about one or another aspect of the project, most simply want their ideas considered and resolved.",
+   "translation": "팀원들은 프로젝트의 이런저런 측면에 대해 동의하지 않을 수 있지만, 대부분은 그저 자기 아이디어가 고려되고 해결되기를 원할 뿐이다.",
+   "grammar": [
+    {
+     "tag": "접속사 although(양보)",
+     "note": "주절과 대조",
+     "spans": []
+    },
+    {
+     "tag": "분사 considered/resolved",
+     "note": "'고려·해결되는'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "aspect",
+     "meaning": "측면"
+    },
+    {
+     "word": "consider",
+     "meaning": "고려하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Although team members",
+     "ko": "비록 팀원들은"
+    },
+    {
+     "en": "may [[disagree]]",
+     "ko": "[[동의하지 않을]] 수 있지만"
+    },
+    {
+     "en": "about one or another [[aspect]]",
+     "ko": "이런저런 [[측면]]에 대해"
+    },
+    {
+     "en": "of the project,",
+     "ko": "프로젝트의,"
+    },
+    {
+     "en": "most simply want",
+     "ko": "대부분은 그저 원한다"
+    },
+    {
+     "en": "their ideas [[considered and resolved]].",
+     "ko": "자기 아이디어가 [[고려되고 해결되기를]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(함축) 팀원들은 자기 의견이 반드시 그대로 채택되기를 요구한다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "함축을 놓쳤어. 'want their ideas considered and resolved(고려되고 해결되기를 원한다)'는 관철이 아니라 '진지하게 다뤄지는 것' 자체를 바란다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘considered’를 동사로 읽으면 안 돼 — [[want their ideas considered]]는 ‘생각이 고려되기를 원하다’는 5형식이야."
+   ]
+  },
+  {
+   "id": 8,
+   "english": "The team tends to look to the project leader to play the lead role in resolving differences, and members will generally defer to the leader if they believe their views have been given due consideration.",
+   "translation": "팀은 프로젝트 리더가 의견 차이를 해결하는 데 주도적인 역할을 해 주기를 기대하는 경향이 있으며, 팀원들은 자신의 견해가 합당한 고려를 받았다고 믿으면 대체로 리더의 뜻에 따를 것이다.",
+   "grammar": [
+    {
+     "tag": "look to A to B",
+     "note": "'A가 B하기를 기대하다'",
+     "spans": []
+    },
+    {
+     "tag": "조건 if",
+     "note": "'~라면'",
+     "spans": []
+    },
+    {
+     "tag": "수동 have been given",
+     "note": "'주어져 왔다'",
+     "spans": []
+    },
+    {
+     "tag": "접속사 that 생략",
+     "note": "they believe (that) their views ~ — believe 뒤 that 생략",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "tend to",
+     "meaning": "~하는 경향이 있다"
+    },
+    {
+     "word": "look to",
+     "meaning": "~에게 기대하다, ~에 의지하다"
+    },
+    {
+     "word": "defer to",
+     "meaning": "~에 따르다·양보하다"
+    },
+    {
+     "word": "due consideration",
+     "meaning": "합당한 고려"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The team [[tends to look to]]",
+     "ko": "팀은 [[~에게 기대하는 경향이 있다]]"
+    },
+    {
+     "en": "the project leader",
+     "ko": "프로젝트 리더가"
+    },
+    {
+     "en": "to [[play the lead role]]",
+     "ko": "[[주도적 역할을 하기를]]"
+    },
+    {
+     "en": "in resolving differences,",
+     "ko": "의견 차이를 해결하는 데,"
+    },
+    {
+     "en": "and members will generally [[defer]]",
+     "ko": "그리고 팀원들은 대체로 [[따를]] 것이다"
+    },
+    {
+     "en": "to the leader",
+     "ko": "리더에게"
+    },
+    {
+     "en": "if they believe",
+     "ko": "그들이 믿는다면"
+    },
+    {
+     "en": "their views [[have been given]]",
+     "ko": "자기 견해가 [[받았다고]]"
+    },
+    {
+     "en": "[[due consideration]].",
+     "ko": "[[합당한 고려]]를."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "팀원들은 어떤 경우에도 리더의 결정을 따르지 않는다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'defer to the leader if they believe … due consideration(합당히 고려됐다고 믿으면 리더에게 따른다)'는 거야 — 의견이 존중됐다고 느끼면 리더를 따른다는 결론이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘look to’를 ‘~쪽을 보다’로 읽으면 안 돼 — [[look to A to do]]는 ‘A가 ~해 주기를 기대하다’야.",
+    "‘have been given due consideration’을 능동으로 읽으면 안 돼 — [[have been given]]은 ‘(견해가) 마땅한 고려를 받았다’는 수동이야."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,643 @@
+{
+ "item_no": "서술형 Practice",
+ "theme": "음악 훈련이 뇌의 음악 처리를 우반구(감정)에서 좌반구(언어)로 이동시키는 변화",
+ "overview": {
+  "theme_ko": "음악 훈련이 뇌의 음악 처리 영역을 우반구(감정)에서 좌반구(언어)로 이동시키는 신경학적 변화",
+  "key_grammar": {
+   "point": "명사절 접속사 that (동사의 목적어절·be동사의 보어절)",
+   "source_sentence": "Many studies show that musical training shifts the brain's processing of music to its left hemisphere; musicians are left-brained.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "명사절 접속사 that은 '주어+동사'를 이끌어 '~라는 것'이라는 [[하나의 명사 덩어리]]를 만들어."
+    },
+    {
+     "chip": "목적어절",
+     "text": "show that … → '…라는 것을 보여 주다' — that절 전체가 [[show의 목적어]]야."
+    },
+    {
+     "chip": "보어절",
+     "text": "같은 that이 be동사 뒤에도 와 — One explanation is that … 는 that절이 [[보어]]로 쓰인 경우야."
+    },
+    {
+     "chip": "함정",
+     "text": "이 that은 관계대명사가 아니라 접속사라, 뒤에 오는 절이 성분이 빠지지 않은 [[완전한 문장]]이야."
+    },
+    {
+     "chip": "자리 찾기",
+     "text": "타동사(show)나 be동사 뒤에 '주어+동사'가 통째로 오면 [[that 명사절]]을 의심해."
+    },
+    {
+     "chip": "해석 요령",
+     "text": "'that+완전한 절'을 '~라는 것을/~라는 것'으로 묶어 목적어·보어로 받아 옮겨."
+    }
+   ],
+   "example": "",
+   "example_analysis": "Many studies show that … = 'that+완전한 절'이 통째로 show의 목적어(명사절)로 들어간 구조이고, One explanation is that … 은 같은 that절이 보어로 쓰였다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중 어법상 틀린 것은?",
+     "answer": "④",
+     "sentence": "One explanation is [[①|that]] they [[②|have learned]] [[③|to hear]] music more like language, [[④|discerned]] a level of structural complexity [[⑤|beyond]] the grasp of ordinary listeners.",
+     "fix": "discerned → discerning (주어의 동시 동작을 잇는 분사구문이므로 현재분사)",
+     "options": [
+      "① that",
+      "② have learned",
+      "③ to hear",
+      "④ discerned",
+      "⑤ beyond"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "네모 안에서 어법상 알맞은 것을 고르시오.",
+     "answer": "trained / activates / associated",
+     "sentence": "When [[trained/training]] musicians hear music, it [[activates/activate]] the part of the brain [[associated/associating]] with language comprehension.",
+     "fix": "trained(과거분사로 musicians 수식) / activates(주어 it은 단수) / associated(the part를 뒤에서 수식하는 과거분사)",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장을 고르시오.",
+     "answer": "There is no question that learning to sing or play a musical instrument change the structure of your brain.",
+     "sentence": "",
+     "fix": "change → changes (동명사구 주어 'learning to sing or play a musical instrument'는 단수 취급)",
+     "options": [
+      "In the face of music, you are 'right-lateralised'.",
+      "There are several guesses about why this happens.",
+      "There is no question that learning to sing or play a musical instrument change the structure of your brain.",
+      "Many studies show that musical training shifts the brain's processing of music to its left hemisphere; musicians are left-brained.",
+      "When trained musicians hear music, it activates the part of the brain associated with language comprehension."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "많은 연구는 음악 훈련이 뇌의 음악 처리를 좌반구로 옮긴다는 것을 보여 준다; 음악가는 좌뇌형이다.",
+     "answer": "Many studies show that musical training shifts the brain's processing of music to its left hemisphere; musicians are left-brained.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "Many",
+      "studies",
+      "show",
+      "that",
+      "musical",
+      "training",
+      "shifts",
+      "the",
+      "brain's",
+      "processing",
+      "of",
+      "music",
+      "to",
+      "its",
+      "left",
+      "hemisphere",
+      "musicians",
+      "are",
+      "left-brained"
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "한 가지 설명은, 그들이 평범한 청취자의 이해를 넘어서는 구조적 복잡성의 수준을 분간하면서, 음악을 언어에 더 가깝게 듣는 법을 배웠다는 것이다.",
+     "answer": "One explanation is that they have learned to hear music more like language, discerning a level of structural complexity beyond the grasp of ordinary listeners.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "One",
+      "explanation",
+      "is",
+      "that",
+      "they",
+      "have",
+      "learned",
+      "to",
+      "hear",
+      "music",
+      "more",
+      "like",
+      "language",
+      "discerning",
+      "a",
+      "level",
+      "of",
+      "structural",
+      "complexity",
+      "beyond",
+      "the",
+      "grasp",
+      "of",
+      "ordinary",
+      "listeners"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "음악 훈련이 뇌의 음악 처리 부위를, 감정을 다루는 우반구에서 언어를 다루는 좌반구로 옮긴다는 신경학적 변화에 관한 글이야.",
+  "stance": "중립적",
+  "stance_reason": "연구 결과를 사실 중심으로 설명하는 정보 전달문으로, 우반구·좌반구 처리 변화를 관찰·서술해.",
+  "structure": "비교·대조",
+  "structure_reason": "훈련 없는 사람의 우반구(감정) 처리와 훈련된 음악가의 좌반구(언어) 처리를 대조하며, 그 이유를 설명해.",
+  "restatement_chains": [
+   {
+    "label": "비훈련 = 우반구·감정",
+    "expressions": [
+     "its right hemisphere",
+     "the side of the brain that deals with emotion",
+     "right-lateralised"
+    ],
+    "variation": "'우반구' → '감정을 다루는 뇌' → '우측 지배'로 같은 상태가 반복돼."
+   },
+   {
+    "label": "훈련 = 좌반구·언어",
+    "expressions": [
+     "its left hemisphere",
+     "musicians are left-brained",
+     "the part of the brain associated with language comprehension"
+    ],
+    "variation": "'좌반구' → '좌뇌형' → '언어 이해와 관련된 뇌 부위'로 구체화돼."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "주장",
+    "sentence_range": "1",
+    "summary": "노래나 악기 연주를 배우는 것이 뇌 구조를 바꾼다는 데는 의심의 여지가 없다.",
+    "easy_example": "음악을 배우면 실제로 뇌가 달라진다는 것."
+   },
+   {
+    "stage": "대조-비훈련",
+    "sentence_range": "2~3",
+    "summary": "훈련이 없으면 뇌는 주로 감정을 다루는 우반구로 음악을 처리해 '우측 지배'가 된다.",
+    "easy_example": "그냥 음악을 즐기는 사람은 감정 위주로 듣는 것."
+   },
+   {
+    "stage": "대조-훈련",
+    "sentence_range": "4",
+    "summary": "많은 연구에 따르면 음악 훈련은 음악 처리를 좌반구로 옮겨, 음악가는 좌뇌형이 된다.",
+    "easy_example": "훈련하면 음악을 '언어처럼' 분석해 듣게 되는 것."
+   },
+   {
+    "stage": "이유",
+    "sentence_range": "5~7",
+    "summary": "왜 그런지에 대한 여러 추측이 있는데, 훈련된 음악가는 음악을 언어처럼 들으며 언어 이해 뇌 부위를 활성화하기 때문이다.",
+    "easy_example": "음악의 구조적 복잡성을 언어처럼 해석하는 능력이 생긴 것."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "There is no question that learning to sing or play a musical instrument changes the structure of your brain.",
+   "translation": "노래하거나 악기를 연주하는 법을 배우는 것이 뇌의 구조를 바꾼다는 데는 의심의 여지가 없다.",
+   "grammar": [
+    {
+     "tag": "동격 that",
+     "note": "no question 뒤 내용 부연",
+     "spans": []
+    },
+    {
+     "tag": "부정사 to sing",
+     "note": "learning의 목적어",
+     "spans": []
+    },
+    {
+     "tag": "동명사 주어 수일치",
+     "note": "learning to sing or play ... changes — 동명사구 주어=단수(⑤)",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "there is no question that",
+     "meaning": "~라는 데는 의심의 여지가 없다"
+    },
+    {
+     "word": "instrument",
+     "meaning": "악기"
+    },
+    {
+     "word": "structure",
+     "meaning": "구조"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "There is no [[question]] that",
+     "ko": "~라는 데는 [[의심의 여지]]가 없다"
+    },
+    {
+     "en": "learning to sing",
+     "ko": "노래하는 법을 배우는 것은"
+    },
+    {
+     "en": "or play a musical [[instrument]]",
+     "ko": "혹은 [[악기]]를 연주하는"
+    },
+    {
+     "en": "[[changes the structure]]",
+     "ko": "[[구조를 바꾼다]]"
+    },
+    {
+     "en": "of your brain.",
+     "ko": "여러분 뇌의."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 음악 학습이 뇌에 미치는 영향이 불확실하다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'There is no question that(의심의 여지가 없다)'로 음악 학습이 뇌 구조를 바꾼다고 단언하는 주제 문장이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘learning ~’을 진행형·분사로 읽으면 안 돼 — [[동명사구가 주어]]라 단수동사 changes를 받고 ‘노래하거나 연주하는 법을 배우는 것은’이야."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "If you enjoy music but have no special training, then your brain processes it mostly through its right hemisphere, the side of the brain that deals with emotion.",
+   "translation": "여러분이 음악을 즐기지만 특별한 훈련을 받지 않았다면, 여러분의 뇌는 감정을 다루는 쪽인 우반구를 통해 주로 음악을 처리한다.",
+   "grammar": [
+    {
+     "tag": "조건 if",
+     "note": "'~라면'",
+     "spans": []
+    },
+    {
+     "tag": "관계사 that",
+     "note": "the side 수식",
+     "spans": []
+    },
+    {
+     "tag": "동격",
+     "note": "the side … = right hemisphere",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "process",
+     "meaning": "처리하다"
+    },
+    {
+     "word": "hemisphere",
+     "meaning": "(뇌) 반구"
+    },
+    {
+     "word": "deal with",
+     "meaning": "다루다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "If you enjoy music",
+     "ko": "여러분이 음악을 즐기지만"
+    },
+    {
+     "en": "but have no special [[training]],",
+     "ko": "특별한 [[훈련]]이 없다면,"
+    },
+    {
+     "en": "then your brain [[processes]] it",
+     "ko": "그러면 여러분의 뇌는 그것을 [[처리한다]]"
+    },
+    {
+     "en": "mostly through its right [[hemisphere]],",
+     "ko": "주로 우측 [[반구]]를 통해,"
+    },
+    {
+     "en": "the side of the brain",
+     "ko": "뇌의 그 부분인"
+    },
+    {
+     "en": "[[that deals with emotion]].",
+     "ko": "[[감정을 다루는]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "훈련이 없어도 뇌는 음악을 좌반구로 처리한다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'through its right hemisphere(우반구를 통해)' 처리한다고 했어 — 훈련이 없으면 '감정'을 다루는 우반구로 듣는다는 거야(좌반구는 훈련 이후).",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "In the face of music, you are 'right-lateralised'.",
+   "translation": "음악을 접할 때 여러분은 '우측 지배' 상태가 된다.",
+   "grammar": [
+    {
+     "tag": "수동태",
+     "note": "you are 'right-lateralised' — be+p.p.",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "in the face of",
+     "meaning": "~을 마주하여, 접하여"
+    },
+    {
+     "word": "right-lateralised",
+     "meaning": "우측 지배의(우반구 우세)"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In the face of [[music]],",
+     "ko": "[[음악]]을 접하면,"
+    },
+    {
+     "en": "you are [['right-lateralised']].",
+     "ko": "여러분은 [['우측 지배를 받게']] 된다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(함축) 'right-lateralised'는 여러분이 음악을 논리적으로 분석해 듣는다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "함축을 놓쳤어. 'right-lateralised(우측 지배)'는 앞의 '감정을 다루는 우반구'로 음악을 처리한다는 뜻 — 논리·언어(좌반구)가 아니라 감정 중심으로 듣는다는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "Many studies show that musical training shifts the brain's processing of music to its left hemisphere; musicians are left-brained.",
+   "translation": "많은 연구는 음악 훈련이 뇌의 음악 처리를 좌반구로 옮긴다는 것을 보여 준다. 즉, 음악가는 좌뇌형이다.",
+   "grammar": [
+    {
+     "tag": "명사절 that",
+     "note": "show의 목적어",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "shift",
+     "meaning": "옮기다, 이동시키다"
+    },
+    {
+     "word": "left-brained",
+     "meaning": "좌뇌형의"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Many studies show",
+     "ko": "많은 연구는 보여 준다"
+    },
+    {
+     "en": "that musical [[training]] shifts",
+     "ko": "음악 [[훈련]]이 옮긴다는 것을"
+    },
+    {
+     "en": "the brain's [[processing]] of music",
+     "ko": "뇌의 음악 [[처리]]를"
+    },
+    {
+     "en": "to its left [[hemisphere]];",
+     "ko": "좌측 [[반구]]로;"
+    },
+    {
+     "en": "musicians are [[left-brained]].",
+     "ko": "음악가는 [[좌뇌형]]이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 훈련이 뇌의 음악 처리를 우반구로 더 굳힌다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'shifts … to its left hemisphere(좌반구로 옮긴다)'가 핵심 — 훈련이 처리 부위를 우반구에서 '좌반구'로 이동시킨다는, 앞과 대조되는 발견 문장이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "There are several guesses about why this happens.",
+   "translation": "왜 이런 일이 일어나는지에 대해서는 몇 가지 추측이 있다.",
+   "grammar": [
+    {
+     "tag": "의문사 why",
+     "note": "'왜 ~하는지'(전치사 about의 목적어절)",
+     "spans": []
+    }
+   ],
+   "vocab": [],
+   "chunks": [
+    {
+     "en": "There are several [[guesses]]",
+     "ko": "여러 [[추측]]이 있다"
+    },
+    {
+     "en": "about [[why this happens]].",
+     "ko": "[[왜 이것이 일어나는지]]에 관한."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(지칭) 'this'는 음악이 감정을 자극하는 현상을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "지칭 오인이야. this는 앞 문장의 '음악 처리가 좌반구로 옮겨 가는(좌뇌화) 현상'을 가리켜 — 그 이유를 이제 설명해.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "One explanation is that they have learned to hear music more like language, discerning a level of structural complexity beyond the grasp of ordinary listeners.",
+   "translation": "한 가지 설명은, 그들이 평범한 청취자의 이해를 넘어서는 구조적 복잡성의 수준을 분간하면서, 음악을 언어에 더 가깝게 듣는 법을 배웠다는 것이다.",
+   "grammar": [
+    {
+     "tag": "명사절 that",
+     "note": "is의 보어",
+     "spans": []
+    },
+    {
+     "tag": "분사구문 discerning",
+     "note": "'분간하면서'",
+     "spans": []
+    },
+    {
+     "tag": "A more like B",
+     "note": "'B에 더 가깝게'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "explanation",
+     "meaning": "설명"
+    },
+    {
+     "word": "discern",
+     "meaning": "분간하다, 식별하다"
+    },
+    {
+     "word": "complexity",
+     "meaning": "복잡성"
+    },
+    {
+     "word": "grasp",
+     "meaning": "이해(력)"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "One [[explanation]] is that",
+     "ko": "한 가지 [[설명]]은 ~라는 것이다"
+    },
+    {
+     "en": "they have learned to hear",
+     "ko": "그들이 듣는 법을 배웠다는"
+    },
+    {
+     "en": "music more like language,",
+     "ko": "음악을 언어에 더 가깝게,"
+    },
+    {
+     "en": "[[discerning a level]]",
+     "ko": "[[수준을 분간하면서]]"
+    },
+    {
+     "en": "of structural [[complexity]]",
+     "ko": "구조적 [[복잡성]]의"
+    },
+    {
+     "en": "beyond the [[grasp]]",
+     "ko": "[[이해]]를 넘어선"
+    },
+    {
+     "en": "of ordinary [[listeners]].",
+     "ko": "평범한 [[청취자]]의."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 음악가가 음악을 감정으로만 느낀다는 이유를 드는 문장이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'hear music more like language(음악을 언어처럼 듣는다)'가 이유야 — 언어처럼 구조를 분석해 듣기에 좌반구가 관여한다는 설명이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘discerning’을 앞 명사 수식으로만 읽으면 안 돼 — [[discerning ~]]은 분사구문이라 ‘~을 분별하면서’로 주어의 동작을 이어줘."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "When trained musicians hear music, it activates the part of the brain associated with language comprehension.",
+   "translation": "훈련된 음악가가 음악을 들을 때, 그것은 언어 이해와 관련된 뇌 부위를 활성화한다.",
+   "grammar": [
+    {
+     "tag": "접속사 when",
+     "note": "'~할 때'",
+     "spans": []
+    },
+    {
+     "tag": "분사 associated with",
+     "note": "'~와 관련된'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "activate",
+     "meaning": "활성화하다"
+    },
+    {
+     "word": "associated with",
+     "meaning": "~와 관련된"
+    },
+    {
+     "word": "comprehension",
+     "meaning": "이해"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When [[trained]] musicians",
+     "ko": "[[훈련된]] 음악가가"
+    },
+    {
+     "en": "hear music,",
+     "ko": "음악을 들을 때,"
+    },
+    {
+     "en": "it [[activates]] the part",
+     "ko": "그것은 그 부위를 [[활성화한다]]"
+    },
+    {
+     "en": "of the brain",
+     "ko": "뇌의"
+    },
+    {
+     "en": "[[associated with language]]",
+     "ko": "[[언어와 관련된]]"
+    },
+    {
+     "en": "[[comprehension]].",
+     "ko": "[[이해]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "훈련된 음악가가 음악을 들으면 감정 관련 뇌 부위만 켜진다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'the part of the brain associated with language comprehension(언어 이해와 관련된 뇌 부위)'를 활성화한다는 거야 — 감정이 아니라 '언어' 부위가 켜진다는, 좌뇌화를 뒷받침하는 마무리야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  }
+ ]
+}

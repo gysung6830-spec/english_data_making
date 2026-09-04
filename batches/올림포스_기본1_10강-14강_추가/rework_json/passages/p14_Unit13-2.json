@@ -1,0 +1,528 @@
+{
+ "item_no": "Unit13-2",
+ "theme": "비음성 모바일 소통의 급격한 확산에 따른 대면 소통 소멸에 대한 우려",
+ "overview": {
+  "theme_ko": "비음성 모바일 소통의 급격한 확산에 따른 대면 소통 소멸에 대한 우려",
+  "key_grammar": {
+   "point": "so + 형용사/부사 + (that) 절 (강조·결과: '너무 ~해서 …하다', that 생략 가능)",
+   "source_sentence": "These communications media have become so prolific, researchers have worried that face-to-face communications could become extinct.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "so + 형용사/부사 뒤에 '(that) 주어+동사'가 오면 '너무 ~해서 [[…하다]]'라는 정도·결과야."
+    },
+    {
+     "chip": "that 생략",
+     "text": "회화·글에서 결과절의 [[that]]이 자주 생략돼 — so prolific, (that) researchers worried."
+    },
+    {
+     "chip": "정도↔결과",
+     "text": "'so prolific(너무 많음)'이 원인, 뒤 절이 그로 인한 [[결과]]야."
+    },
+    {
+     "chip": "such와 구별",
+     "text": "'so + 형용사'는 뒤에 절, 뒤에 [[명사]]가 오면 'such + (a) 명사 + that'을 써."
+    },
+    {
+     "chip": "해석 요령",
+     "text": "'너무/매우 ~해서, (그 결과) [[…하다]]'로 앞뒤를 인과로 이어."
+    }
+   ],
+   "example": "",
+   "example_analysis": "have become so prolific, (that) researchers have worried … = '너무 많아져서, (그 결과) 연구자들이 … 걱정하게 되었다'.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "밑줄 친 ①~⑤에 대응하는 다음 표현 중 어법상 옳지 않은 것은?",
+     "answer": "③",
+     "sentence": "[[①|Mobile communications have changed]] [[②|the way we interact]] with our computers and, as more time [[③|is spent]] on [[④|mobile devices]], emoticon use [[⑤|has followed]].",
+     "fix": "are spent → is spent (주어 more time이 단수이므로 is)",
+     "options": [
+      "① Mobile communications have changed",
+      "② the way we interact",
+      "③ are spent",
+      "④ mobile devices",
+      "⑤ has followed"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "네모 안에서 어법상 옳은 것을 각각 고르시오.",
+     "answer": "have / have / rather than",
+     "sentence": "Cellular phones, smartphones, tablets, and similar technologies [[have/has]] penetrated the world at an enormous rate and non-voice communications [[have/has]] become the norm [[rather than/rather then]] the rule.",
+     "fix": "복수주어 technologies·communications에는 have, 'B가 아니라 A'는 rather than.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 옳지 않은 문장을 고르시오.",
+     "answer": "In 2013, the number of mobile subscriptions almost equaled the estimated number of individuals that make up the global population in the same year.",
+     "sentence": "",
+     "fix": "make up → made up (2013년의 일이므로 과거시제)",
+     "options": [
+      "Mobile communications have changed the way we interact with our computers and, as more time is spent on mobile devices, emoticon use has followed.",
+      "Cellular phones, smartphones, tablets, and similar technologies have penetrated the world at an enormous rate and non-voice communications have become the norm rather than the rule.",
+      "In 2013, the number of mobile subscriptions almost equaled the estimated number of individuals that make up the global population in the same year.",
+      "Users of these technologies have posted, pinned, tweeted, sent and/or received billions of electronic messages through public or private (text messages, emails, etc.) means.",
+      "These communications media have become so prolific, researchers have worried that face-to-face communications could become extinct."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "이러한 통신 매체가 너무 많아져서, 연구자들은 대면 소통이 소멸할 수 있다고 우려해 왔다.",
+     "answer": "These communications media have become so prolific, researchers have worried that face-to-face communications could become extinct.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "These communications media",
+      "have become",
+      "so prolific,",
+      "researchers",
+      "have worried",
+      "that",
+      "face-to-face communications",
+      "could become",
+      "extinct."
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "통신 매체가 너무 많아진 나머지, 연구자들은 대면 소통이 소멸할 수도 있다고 우려해 왔다.",
+     "answer": "These communications media have become so prolific, researchers have worried that face-to-face communications could become extinct.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "These",
+      "communications",
+      "media",
+      "have",
+      "become",
+      "so",
+      "prolific,",
+      "researchers",
+      "have",
+      "worried",
+      "that",
+      "face-to-face",
+      "communications",
+      "could",
+      "become",
+      "extinct."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "모바일 기기·비음성 소통이 급격히 확산하면서, 대면 소통이 사라질 수 있다는 우려에 관한 글이야.",
+  "stance": "중립적",
+  "stance_reason": "비음성 소통의 확산을 통계·사실 중심으로 서술하고, 끝에 연구자들의 우려를 전달해.",
+  "structure": "주장→근거·예시",
+  "structure_reason": "'모바일이 소통 방식을 바꿨다'는 주장(1~2문장) 뒤, 2013년 통계·메시지 이용(3~4문장)을 근거로 들고 '대면 소통 소멸 우려'로 마무리(5문장)해.",
+  "restatement_chains": [
+   {
+    "label": "비음성 소통 확산",
+    "expressions": [
+     "emoticon use has followed",
+     "non-voice communications have become the norm",
+     "billions of electronic messages",
+     "so prolific"
+    ],
+    "variation": "'이모티콘 사용' → '비음성 소통이 표준' → '수십억 전자 메시지' → '너무 많아짐'으로 확산이 강조돼."
+   },
+   {
+    "label": "확산의 규모",
+    "expressions": [
+     "penetrated the world at an enormous rate",
+     "almost equaled the estimated number of individuals"
+    ],
+    "variation": "'엄청난 속도로 전 세계에 침투' → '전 세계 인구수와 거의 맞먹음'으로 규모가 구체화돼."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "주장",
+    "sentence_range": "1~2",
+    "summary": "모바일 통신이 소통 방식을 바꿔 이모티콘 같은 비음성 소통이 규칙이 아닌 표준이 되었다.",
+    "easy_example": "전화 대신 문자·이모티콘으로 소통하는 게 당연해진 것."
+   },
+   {
+    "stage": "근거",
+    "sentence_range": "3~4",
+    "summary": "2013년 모바일 가입 수가 전 세계 인구와 맞먹었고, 이용자들은 수십억 개의 전자 메시지를 주고받았다.",
+    "easy_example": "거의 모든 사람이 폰으로 메시지를 쏟아낸 것."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "5",
+    "summary": "이런 통신 매체가 너무 많아져서, 연구자들은 대면 소통이 소멸할 수 있다고 우려해 왔다.",
+    "easy_example": "온라인 소통이 넘쳐 얼굴 보고 하는 대화가 사라질까 걱정하는 것."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Mobile communications have changed the way we interact with our computers and, as more time is spent on mobile devices, emoticon use has followed.",
+   "translation": "모바일 통신은 우리가 컴퓨터와 상호작용하는 방식을 바꾸었고, 모바일 기기에 더 많은 시간이 쓰이면서 이모티콘 사용도 그 뒤를 따랐다.",
+   "grammar": [
+    {
+     "tag": "수동 is spent",
+     "note": "'소비되다'",
+     "spans": []
+    },
+    {
+     "tag": "관계부사 생략",
+     "note": "the way (that/how) we interact — the way 뒤 관계부사 생략",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "interact with",
+     "meaning": "~와 상호 작용하다"
+    },
+    {
+     "word": "emoticon",
+     "meaning": "이모티콘"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Mobile communications have [[changed]]",
+     "ko": "모바일 통신은 [[바꿨다]]"
+    },
+    {
+     "en": "[[the way we interact]]",
+     "ko": "[[우리가 상호작용하는 방식을]]"
+    },
+    {
+     "en": "with our computers",
+     "ko": "우리 컴퓨터와"
+    },
+    {
+     "en": "and, as more time",
+     "ko": "그리고, 더 많은 시간이"
+    },
+    {
+     "en": "is [[spent]] on mobile devices,",
+     "ko": "모바일 기기에 [[쓰이]]면서,"
+    },
+    {
+     "en": "emoticon use has [[followed]].",
+     "ko": "이모티콘 사용이 [[뒤따랐다]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 모바일 통신이 컴퓨터 사용을 줄였다는 문제를 지적한다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'have changed the way we interact(상호작용 방식을 바꿨다)'며 이모티콘 사용으로 이어졌다는, 글의 주제·도입 문장이야 — 사용 감소가 아니라 방식 변화야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘as’를 ‘~처럼’이나 ‘~때문에’로 읽으면 안 돼 — 여기 [[as more time is spent]]의 as는 ‘~함에 따라’야."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "Cellular phones, smartphones, tablets, and similar technologies have penetrated the world at an enormous rate and non-voice communications have become the norm rather than the rule.",
+   "translation": "휴대폰, 스마트폰, 태블릿과 유사한 기술들이 엄청난 속도로 전 세계에 침투했고, 비음성 소통이 규칙이 아니라 표준이 되었다.",
+   "grammar": [
+    {
+     "tag": "A rather than B",
+     "note": "'B가 아니라 A'",
+     "spans": []
+    },
+    {
+     "tag": "현재완료 have penetrated",
+     "note": "'침투해 왔다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "penetrate",
+     "meaning": "침투하다"
+    },
+    {
+     "word": "enormous",
+     "meaning": "엄청난"
+    },
+    {
+     "word": "norm",
+     "meaning": "표준, 기준"
+    },
+    {
+     "word": "rather than",
+     "meaning": "~가 아니라, ~보다는"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Cellular phones, smartphones,",
+     "ko": "휴대폰, 스마트폰,"
+    },
+    {
+     "en": "tablets, and similar technologies",
+     "ko": "태블릿 등 유사 기술이"
+    },
+    {
+     "en": "have [[penetrated]] the world",
+     "ko": "전 세계에 [[침투했다]]"
+    },
+    {
+     "en": "[[at an enormous rate]]",
+     "ko": "[[엄청난 속도로]]"
+    },
+    {
+     "en": "and non-voice communications",
+     "ko": "그리고 비음성 소통이"
+    },
+    {
+     "en": "have become the [[norm]]",
+     "ko": "[[표준]]이 되었다"
+    },
+    {
+     "en": "rather than the [[rule]].",
+     "ko": "[[규칙]]이 아니라."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(함축) 'the norm rather than the rule'은 비음성 소통이 여전히 예외적이라는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "함축을 놓쳤어. 'the norm(표준)이 되었다'는 건 비음성 소통이 이제 예외가 아니라 '일반적 관행'이 됐다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘the norm rather than the rule’을 비교급으로 읽으면 안 돼 — [[A rather than B]]는 ‘B가 아니라 A’야."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "In 2013, the number of mobile subscriptions almost equaled the estimated number of individuals that made up the global population in the same year.",
+   "translation": "2013년에 모바일 가입 건수는 같은 해 전 세계 인구를 구성한 추정 인구수와 거의 맞먹었다.",
+   "grammar": [
+    {
+     "tag": "관계사 that",
+     "note": "individuals 수식",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "subscription",
+     "meaning": "가입(건)"
+    },
+    {
+     "word": "estimated",
+     "meaning": "추정된"
+    },
+    {
+     "word": "make up",
+     "meaning": "구성하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In 2013,",
+     "ko": "2013년,"
+    },
+    {
+     "en": "the number of mobile [[subscriptions]]",
+     "ko": "모바일 [[가입 건수]]는"
+    },
+    {
+     "en": "[[almost equaled]]",
+     "ko": "[[거의 맞먹었다]]"
+    },
+    {
+     "en": "the [[estimated]] number of individuals",
+     "ko": "[[추정]] 인구수와"
+    },
+    {
+     "en": "that [[made up]]",
+     "ko": "[[구성한]]"
+    },
+    {
+     "en": "the global population",
+     "ko": "전 세계 인구를"
+    },
+    {
+     "en": "in the same year.",
+     "ko": "같은 해에."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "2013년 모바일 가입 건수는 세계 인구보다 훨씬 적었다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'almost equaled the estimated number of individuals(추정 인구수와 거의 같았다)'는 거야 — 훨씬 적은 게 아니라 인구수에 맞먹었다는 뜻.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘made up’을 ‘지어내다·화장하다’로 읽으면 안 돼 — [[make up]]은 여기서 ‘구성하다’라 ‘세계 인구를 구성한’이야."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "Users of these technologies have posted, pinned, tweeted, sent and/or received billions of electronic messages through public or private (text messages, emails, etc.) means.",
+   "translation": "이 기술의 이용자들은 공개적 또는 사적인 (문자 메시지, 이메일 등) 수단을 통해 수십억 개의 전자 메시지를 게시하고, 고정하고, 트윗하고, 보내거나 받았다.",
+   "grammar": [
+    {
+     "tag": "병렬 동사",
+     "note": "posted·pinned·tweeted·sent·received",
+     "spans": []
+    },
+    {
+     "tag": "공통 조동사 have",
+     "note": "have [posted, pinned, tweeted, sent, received] — have가 공통",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "means",
+     "meaning": "수단"
+    },
+    {
+     "word": "billions of",
+     "meaning": "수십억의"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Users of these technologies",
+     "ko": "이 기술 이용자들은"
+    },
+    {
+     "en": "[[have posted, pinned, tweeted,]]",
+     "ko": "[[게시하고, 고정하고, 트윗하고,]]"
+    },
+    {
+     "en": "[[sent and/or received]]",
+     "ko": "[[송·수신했다]]"
+    },
+    {
+     "en": "[[billions of]] electronic messages",
+     "ko": "[[수십억 개]]의 전자 메시지를"
+    },
+    {
+     "en": "through public or private",
+     "ko": "공개 또는 사적인"
+    },
+    {
+     "en": "(text messages, emails, etc.) [[means]].",
+     "ko": "(문자, 이메일 등) [[수단]]으로."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(지칭) 'these technologies'는 공개·사적 메시지를 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "지칭 오인이야. these technologies는 앞의 '휴대폰·스마트폰·태블릿 등'을 가리켜 — 그 이용자들이 수십억 메시지를 주고받았다는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘sent and/or received’가 have와 끊긴다고 읽으면 안 돼 — [[have + 과거분사 병렬]]이라 다섯 동사 모두 현재완료야."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "These communications media have become so prolific, researchers have worried that face-to-face communications could become extinct.",
+   "translation": "이러한 통신 매체가 너무 많아져서, 연구자들은 대면 소통이 소멸할 수도 있다고 우려해 왔다.",
+   "grammar": [
+    {
+     "tag": "명사절 that",
+     "note": "worried의 목적어",
+     "spans": []
+    },
+    {
+     "tag": "so+형용사+(that) 강조·결과",
+     "note": "so prolific, (that) researchers worried — that 생략(⑤)",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "prolific",
+     "meaning": "(수가) 많은, 왕성한"
+    },
+    {
+     "word": "extinct",
+     "meaning": "소멸한, 멸종한"
+    },
+    {
+     "word": "face-to-face",
+     "meaning": "대면의"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "These communications media",
+     "ko": "이러한 통신 매체가"
+    },
+    {
+     "en": "have become so [[prolific]],",
+     "ko": "너무 [[많아져서]],"
+    },
+    {
+     "en": "researchers have [[worried]]",
+     "ko": "연구자들은 [[우려해 왔다]]"
+    },
+    {
+     "en": "that [[face-to-face]] communications",
+     "ko": "[[대면]] 소통이"
+    },
+    {
+     "en": "could become [[extinct]].",
+     "ko": "[[소멸]]할 수 있다고."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 대면 소통이 늘어나고 있다는 새로운 사실을 소개한다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'so prolific … could become extinct(너무 많아져서 대면 소통이 소멸할 수 있다)'며 연구자들의 우려로 글을 맺는 결론 문장이야 — 대면 소통 증가가 아니라 소멸 우려야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘so prolific’ 뒤 콤마를 단순 나열로 읽으면 안 돼 — [[so + 형용사 + (that)]] 구조라 ‘너무 ~해서 그 결과 ~하다’야."
+   ]
+  }
+ ]
+}

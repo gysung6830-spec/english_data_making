@@ -57,20 +57,20 @@
         },
         {
           "kind": "영작",
-          "question": "지구가 태양 주위를 돈다는 그 생각은 혁명적이었다. (in order to가 아니라 동격 that을 사용할 것)",
+          "question": "그는 당시 통용되던 우주관, 즉 태양이 지구 주위를 돈다는 그 견해가 틀렸으며, 사실은 지구가 태양 주위를 도는 것이라고 결론지었다. (명사 the view를 부연하는 동격 that절과 it ~ that 강조구문을 사용할 것)",
           "sentence": "",
           "options": [],
-          "answer": "The idea that Earth traveled around the Sun was revolutionary.",
-          "words": ["The idea", "that", "Earth", "traveled", "around", "the Sun", "was", "revolutionary"],
-          "from_passage": false
+          "answer": "He concluded that the view of the universe accepted at the time―that the Sun traveled around Earth―was wrong, and that it was in fact Earth that traveled around the Sun.",
+          "words": ["He concluded", "that", "the view of the universe", "accepted at the time―that", "the Sun traveled around Earth―was", "wrong,", "and that", "it was in fact Earth", "that traveled around the Sun."],
+          "from_passage": true
         },
         {
           "kind": "영작",
-          "question": "유럽에서, Nicolaus Copernicus라는 이름의 16세기 폴란드 수학자가 혁명적인 생각을 제시했다.",
+          "question": "그는 당시 받아들여지던 우주관—태양이 지구 주위를 돈다는 견해—이 틀렸고, 사실 태양 주위를 도는 것은 지구라고 결론지었다. (동격 that절을 대시로 삽입해 완성할 것)",
           "sentence": "",
           "options": [],
-          "answer": "In Europe, a 16th-century Polish mathematician named Nicolaus Copernicus put forth a revolutionary idea.",
-          "words": ["In Europe,", "a", "16th-century", "Polish", "mathematician", "named", "Nicolaus Copernicus", "put forth", "a", "revolutionary", "idea."],
+          "answer": "He concluded that the view of the universe accepted at the time―that the Sun traveled around Earth―was wrong, and that it was in fact Earth that traveled around the Sun.",
+          "words": ["He", "concluded that", "the view of the universe accepted", "at the time―that", "the Sun traveled", "around Earth―was", "wrong, and that", "it was in fact", "Earth that traveled", "around the Sun."],
           "from_passage": true
         }
       ]
@@ -99,20 +99,23 @@
     {
       "id": 1,
       "english": "Even before telescopes existed, people looked out into space and tried to understand the universe.",
+      "translation": "망원경이 존재하기도 전부터, 사람들은 우주를 내다보며 우주를 이해하려고 애썼다.",
       "grammar": [
         {"tag": "부사절 접속사(시간)", "note": "before가 이끄는 시간 부사절", "spans": ["before"]},
         {"tag": "등위접속사 병렬(동사)", "note": "looked out과 tried가 and로 병렬", "spans": ["and"]},
         {"tag": "to부정사 명사적(목적어)", "note": "tried의 목적어 역할", "spans": ["to understand"]}
       ],
       "vocab": [
-        {"word": "exist", "meaning": "존재하다"},
         {"word": "telescope", "meaning": "망원경"},
+        {"word": "look out into", "meaning": "~을 내다보다"},
         {"word": "the universe", "meaning": "우주"}
       ],
       "chunks": [
         {"en": "Even before telescopes existed,", "ko": "[[망원경]]이 존재하기도 전에,"},
-        {"en": "people looked out into space", "ko": "사람들은 [[우주]]를 내다보았다"},
-        {"en": "and tried to understand the universe.", "ko": "그리고 우주를 [[이해]]하려 했다."}
+        {"en": "people looked out", "ko": "사람들은 내다보았다"},
+        {"en": "into space", "ko": "[[우주]]로"},
+        {"en": "and tried", "ko": "그리고 애썼다"},
+        {"en": "to understand the universe.", "ko": "우주를 [[이해]]하려고."}
       ],
       "misreads": [
         {"statement": "망원경이 발명된 뒤에야 사람들이 우주를 관측하기 시작했다.", "verdict": "X", "trap_type": "인과조건", "anchor": "Even before telescopes existed", "why": "망원경이 존재하기도 전에 사람들이 우주를 내다보았다고 했다."}
@@ -122,6 +125,7 @@
     {
       "id": 2,
       "english": "The Egyptians, Babylonians, Greeks, and Maya were among the first peoples to map the movements of the stars.",
+      "translation": "이집트인, 바빌로니아인, 그리스인, 그리고 마야인은 별들의 움직임을 지도로 나타낸 최초의 민족들에 속했다.",
       "grammar": [
         {"tag": "주어와 동사의 수일치", "note": "복수 주어에 복수동사 were", "spans": ["were"]},
         {"tag": "to부정사 형용사적 용법", "note": "the first peoples를 뒤에서 수식", "spans": ["to map"]},
@@ -129,13 +133,14 @@
       ],
       "vocab": [
         {"word": "map (동사)", "meaning": "~을 지도로 나타내다"},
-        {"word": "movement", "meaning": "움직임, 운동"},
-        {"word": "among", "meaning": "~ 중에, ~에 속하는"}
+        {"word": "movement", "meaning": "움직임, 운동"}
       ],
       "chunks": [
-        {"en": "The Egyptians, Babylonians, Greeks, and Maya", "ko": "[[이집트인]], 바빌로니아인, 그리스인, 마야인은"},
-        {"en": "were among the first peoples", "ko": "[[최초의]] 민족들에 속했다"},
-        {"en": "to map the movements of the stars.", "ko": "별들의 [[움직임]]을 지도로 나타낸"}
+        {"en": "The Egyptians, Babylonians, Greeks, and Maya", "ko": "[[이집트인]], 바빌로니아인, 그리스인, 그리고 마야인은"},
+        {"en": "were among", "ko": "~에 속했다"},
+        {"en": "the first peoples", "ko": "[[최초의]] 민족들"},
+        {"en": "to map the movements", "ko": "그 [[움직임]]을 지도로 나타낸"},
+        {"en": "of the stars.", "ko": "[[별]]들의."}
       ],
       "misreads": [
         {"statement": "이집트인, 바빌로니아인, 그리스인, 마야인은 별의 움직임을 지도로 나타낸 최초의 민족들에 속했다.", "verdict": "O"}
@@ -145,6 +150,7 @@
     {
       "id": 3,
       "english": "In Europe, a 16th-century Polish mathematician named Nicolaus Copernicus put forth a revolutionary idea.",
+      "translation": "유럽에서는 Nicolaus Copernicus라는 이름의 16세기 폴란드 수학자가 혁명적인 생각을 제시했다.",
       "grammar": [
         {"tag": "과거분사 후치수식", "note": "named ~가 mathematician을 뒤에서 수식", "spans": ["named"]},
         {"tag": "구동사", "note": "put forth = (생각을) 내놓다, 제시하다", "spans": ["put forth"]}
@@ -155,8 +161,11 @@
         {"word": "mathematician", "meaning": "수학자"}
       ],
       "chunks": [
-        {"en": "In Europe, a 16th-century Polish mathematician named Nicolaus Copernicus", "ko": "유럽에서, [[폴란드]] 수학자 Nicolaus Copernicus라는 사람이"},
-        {"en": "put forth a revolutionary idea.", "ko": "[[혁명적인]] 생각을 제시했다."}
+        {"en": "In Europe,", "ko": "유럽에서,"},
+        {"en": "a 16th-century Polish mathematician", "ko": "16세기 [[폴란드]] 수학자가"},
+        {"en": "named Nicolaus Copernicus", "ko": "Nicolaus Copernicus라는 이름의"},
+        {"en": "put forth", "ko": "[[제시했다]]"},
+        {"en": "a revolutionary idea.", "ko": "[[혁명적인]] 생각을."}
       ],
       "misreads": [
         {"statement": "Copernicus는 이탈리아 출신의 16세기 수학자였다.", "verdict": "X", "trap_type": "주체대상", "anchor": "Polish mathematician", "why": "Copernicus는 폴란드 수학자로 소개되며, 이탈리아 사람은 뒤의 Galileo이다.", "killer": true}
@@ -166,6 +175,7 @@
     {
       "id": 4,
       "english": "Copernicus watched the stars and took measurements by eye.",
+      "translation": "코페르니쿠스는 별을 관찰하고 맨눈으로 측정을 했다.",
       "grammar": [
         {"tag": "등위접속사 병렬(동사)", "note": "watched와 took가 and로 병렬", "spans": ["and"]}
       ],
@@ -174,8 +184,10 @@
         {"word": "by eye", "meaning": "눈대중으로, 맨눈으로"}
       ],
       "chunks": [
-        {"en": "Copernicus watched the stars", "ko": "Copernicus는 [[별]]을 관찰했다"},
-        {"en": "and took measurements by eye.", "ko": "그리고 [[맨눈]]으로 측정했다."}
+        {"en": "Copernicus watched", "ko": "Copernicus는 관찰했다"},
+        {"en": "the stars", "ko": "[[별]]을"},
+        {"en": "and took measurements", "ko": "그리고 [[측정]]을 했다"},
+        {"en": "by eye.", "ko": "[[맨눈]]으로."}
       ],
       "misreads": [
         {"statement": "Copernicus는 별을 관찰하고 맨눈으로 측정했다.", "verdict": "O"},
@@ -186,6 +198,7 @@
     {
       "id": 5,
       "english": "He concluded that the view of the universe accepted at the time―that the Sun traveled around Earth―was wrong, and that it was in fact Earth that traveled around the Sun.",
+      "translation": "그는 당시 통용되던 우주관, 즉 태양이 지구 주위를 돈다는 그 견해가 틀렸으며, 사실은 지구가 태양 주위를 도는 것이라고 결론지었다.",
       "grammar": [
         {"tag": "명사절 접속사 that(목적어절)", "note": "concluded의 목적어절을 이끎", "spans": ["that"]},
         {"tag": "과거분사 후치수식", "note": "accepted가 the view를 뒤에서 수식", "spans": ["accepted"]},
@@ -199,10 +212,12 @@
         {"word": "in fact", "meaning": "실제로, 사실은"}
       ],
       "chunks": [
-        {"en": "He concluded that the view of the universe", "ko": "그는 그 [[우주]]관이"},
-        {"en": "[[accepted at the time―that the Sun traveled around Earth―was wrong,]]", "ko": "[[당시 통용되던, 즉 태양이 지구 주위를 돈다는 그 견해가 틀렸고,]]"},
-        {"en": "and that it was in fact Earth", "ko": "사실은 [[지구]]가"},
-        {"en": "that traveled around the Sun.", "ko": "[[태양]] 주위를 도는 것이라고 결론지었다."}
+        {"en": "He concluded that", "ko": "그는 …라고 [[결론지었다]]"},
+        {"en": "the view of the universe", "ko": "그 [[우주관]]이"},
+        {"en": "[[accepted at the time―that the Sun traveled around Earth―was wrong,]]", "ko": "[[당시 받아들여지던, 즉 태양이 지구 주위를 돈다는 그것이 틀렸으며,]]"},
+        {"en": "and that it was", "ko": "그리고 ~이라고"},
+        {"en": "in fact Earth", "ko": "사실은 [[지구]]가"},
+        {"en": "that traveled around the Sun.", "ko": "[[태양]] 주위를 도는 것이었다고"}
       ],
       "misreads": [
         {"statement": "당시 받아들여지던 우주관은 지구가 태양 주위를 돈다는 것이었다.", "verdict": "X", "trap_type": "지칭", "anchor": "the Sun traveled around Earth", "why": "당시 통념은 태양이 지구 주위를 돈다는 것이었고, 지구가 도는 것은 Copernicus의 새 주장이다."}
@@ -212,6 +227,7 @@
     {
       "id": 6,
       "english": "Despite widespread objections to his ideas, he published his theory in a book.",
+      "translation": "자신의 생각에 대한 널리 퍼진 반대에도 불구하고, 그는 자신의 이론을 책으로 출판했다.",
       "grammar": [
         {"tag": "전치사(양보) Despite", "note": "명사구 앞에 쓰는 양보 전치사(≠ although)", "spans": ["Despite"]}
       ],
@@ -221,8 +237,10 @@
         {"word": "publish", "meaning": "출판하다, 발표하다"}
       ],
       "chunks": [
-        {"en": "Despite widespread objections to his ideas,", "ko": "그의 생각에 대한 널리 퍼진 [[반대]]에도 불구하고,"},
-        {"en": "he published his theory in a book.", "ko": "그는 자신의 이론을 책으로 [[출판했다]]."}
+        {"en": "Despite widespread objections", "ko": "널리 퍼진 [[반대]]에도 불구하고"},
+        {"en": "to his ideas,", "ko": "그의 [[생각]]에 대한,"},
+        {"en": "he published his theory", "ko": "그는 자신의 이론을 [[출판했다]]"},
+        {"en": "in a book.", "ko": "책으로."}
       ],
       "misreads": [
         {"statement": "널리 퍼진 반대 때문에 그는 자신의 이론을 발표하지 못했다.", "verdict": "X", "trap_type": "인과조건", "anchor": "he published his theory in a book", "why": "반대에도 불구하고 그는 이론을 책으로 발표했다고 했다."}
@@ -232,6 +250,7 @@
     {
       "id": 7,
       "english": "Later astronomers built on Copernicus' work.",
+      "translation": "후대의 천문학자들은 코페르니쿠스의 연구를 토대로 발전시켰다.",
       "grammar": [
         {"tag": "구동사", "note": "build on = ~을 토대로 발전시키다", "spans": ["built on"]}
       ],
@@ -240,8 +259,9 @@
         {"word": "build on", "meaning": "~을 토대로 발전시키다"}
       ],
       "chunks": [
-        {"en": "Later astronomers built on", "ko": "후대 [[천문학자]]들이 기반으로 삼은 것은"},
-        {"en": "Copernicus' work.", "ko": "[[Copernicus]]의 연구였다."}
+        {"en": "Later astronomers", "ko": "후대 [[천문학자]]들이"},
+        {"en": "built on", "ko": "[[토대로 삼았다]]"},
+        {"en": "Copernicus' work.", "ko": "[[Copernicus]]의 연구를."}
       ],
       "misreads": [
         {"statement": "후대 천문학자들은 Copernicus의 연구를 기반으로 삼았다.", "verdict": "O"}
@@ -251,17 +271,20 @@
     {
       "id": 8,
       "english": "Technological improvements led to the development of the telescope in the early 17th century.",
+      "translation": "기술적 향상은 17세기 초 망원경의 개발로 이어졌다.",
       "grammar": [
         {"tag": "구동사", "note": "lead to = ~로 이어지다", "spans": ["led to"]}
       ],
       "vocab": [
         {"word": "technological", "meaning": "기술적인"},
-        {"word": "improvement", "meaning": "향상, 개선"},
+        {"word": "lead to", "meaning": "~로 이어지다"},
         {"word": "development", "meaning": "개발, 발전"}
       ],
       "chunks": [
-        {"en": "Technological improvements led to the development", "ko": "[[기술]]적 향상이 개발로 이어졌다"},
-        {"en": "of the telescope in the early 17th century.", "ko": "17세기 초 [[망원경]]의."}
+        {"en": "Technological improvements", "ko": "[[기술]]적 향상이"},
+        {"en": "led to the development", "ko": "[[개발]]로 이어졌다"},
+        {"en": "of the telescope", "ko": "[[망원경]]의"},
+        {"en": "in the early 17th century.", "ko": "17세기 초."}
       ],
       "misreads": [
         {"statement": "기술의 향상이 망원경의 개발로 이어졌다.", "verdict": "O"}
@@ -271,20 +294,23 @@
     {
       "id": 9,
       "english": "Using a telescope, the Italian scientist Galileo Galilei discovered the four largest moons of Jupiter and observed craters on Earth's Moon.",
+      "translation": "망원경을 사용하여, 이탈리아 과학자 Galileo Galilei는 목성의 가장 큰 네 위성을 발견했고 지구의 달에 있는 분화구들을 관찰했다.",
       "grammar": [
         {"tag": "분사구문", "note": "수단·동시동작을 나타내는 분사구문", "spans": ["Using"]},
         {"tag": "최상급", "note": "the four largest moons", "spans": ["largest"]},
         {"tag": "등위접속사 병렬(동사)", "note": "discovered와 observed가 and로 병렬", "spans": ["and"]}
       ],
       "vocab": [
-        {"word": "discover", "meaning": "발견하다"},
         {"word": "observe", "meaning": "관찰하다"},
         {"word": "crater", "meaning": "분화구, 크레이터"}
       ],
       "chunks": [
-        {"en": "Using a telescope, the Italian scientist Galileo Galilei discovered", "ko": "[[망원경]]을 사용하여, 이탈리아 과학자 Galileo Galilei는 발견했다"},
-        {"en": "the four largest moons of Jupiter", "ko": "[[목성]]의 가장 큰 네 위성을"},
-        {"en": "and observed craters on Earth's Moon.", "ko": "그리고 지구의 달에서 [[분화구]]를 관찰했다."}
+        {"en": "Using a telescope,", "ko": "[[망원경]]을 사용하여,"},
+        {"en": "the Italian scientist Galileo Galilei", "ko": "이탈리아 과학자 Galileo Galilei가"},
+        {"en": "discovered the four largest moons", "ko": "가장 큰 네 [[위성]]을 발견했다"},
+        {"en": "of Jupiter", "ko": "[[목성]]의"},
+        {"en": "and observed craters", "ko": "그리고 [[분화구]]를 관찰했다"},
+        {"en": "on Earth's Moon.", "ko": "지구의 달에 있는."}
       ],
       "misreads": [
         {"statement": "Galileo는 지구의 가장 큰 네 개의 달을 발견했다.", "verdict": "X", "trap_type": "구조수식", "anchor": "the four largest moons of Jupiter", "why": "발견한 네 위성은 지구가 아니라 목성(Jupiter)의 것이다."}
@@ -294,6 +320,7 @@
     {
       "id": 10,
       "english": "He also confirmed that Copernicus' theory was correct.",
+      "translation": "그는 또한 코페르니쿠스의 이론이 옳다는 것을 확인했다.",
       "grammar": [
         {"tag": "명사절 접속사 that(목적어절)", "note": "confirmed의 목적어절을 이끎", "spans": ["that"]}
       ],
@@ -303,7 +330,8 @@
       ],
       "chunks": [
         {"en": "He also confirmed that", "ko": "그는 또한 …라고 [[확인했다]]"},
-        {"en": "Copernicus' theory was correct.", "ko": "[[Copernicus]]의 이론이 옳다고."}
+        {"en": "Copernicus' theory", "ko": "[[Copernicus]]의 이론이"},
+        {"en": "was correct.", "ko": "[[옳다]]고."}
       ],
       "misreads": [
         {"statement": "Galileo는 Copernicus의 이론이 옳음을 확인했을 뿐 아니라 새로운 행성도 발견했다.", "verdict": "X", "trap_type": "무관정보", "anchor": "confirmed that Copernicus' theory was correct", "why": "본문은 이론이 옳다는 확인만 언급하며 새 행성 발견은 나오지 않는다."}
@@ -313,18 +341,21 @@
     {
       "id": 11,
       "english": "Over the centuries, scientific discoveries and information from telescopes advanced our knowledge of how the universe works.",
+      "translation": "수 세기에 걸쳐, 과학적 발견과 망원경에서 얻은 정보는 우주가 작동하는 방식에 대한 우리의 지식을 발전시켰다.",
       "grammar": [
         {"tag": "등위접속사 병렬(명사)", "note": "discoveries와 information을 and로 연결", "spans": ["and"]},
         {"tag": "의문사 명사절", "note": "of의 목적어로 쓰인 how절", "spans": ["how"]}
       ],
       "vocab": [
         {"word": "advance (동사)", "meaning": "발전시키다, 진전시키다"},
-        {"word": "knowledge", "meaning": "지식"},
         {"word": "over the centuries", "meaning": "수 세기에 걸쳐"}
       ],
       "chunks": [
-        {"en": "Over the centuries, scientific discoveries and information from telescopes", "ko": "수 세기에 걸쳐, [[과학]]적 발견과 망원경에서 온 정보가"},
-        {"en": "advanced our knowledge of how the universe works.", "ko": "우주가 작동하는 방식에 대한 우리의 [[지식]]을 발전시켰다."}
+        {"en": "Over the centuries,", "ko": "수 세기에 걸쳐,"},
+        {"en": "scientific discoveries and information", "ko": "[[과학]]적 발견과 정보가"},
+        {"en": "from telescopes", "ko": "[[망원경]]에서 온"},
+        {"en": "advanced our knowledge", "ko": "우리의 [[지식]]을 발전시켰다"},
+        {"en": "of how the universe works.", "ko": "우주가 [[작동하는]] 방식에 대한."}
       ],
       "misreads": [
         {"statement": "필자는 망원경보다 맨눈 관측이 우주 이해에 더 크게 기여했다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "scientific discoveries and information from telescopes advanced our knowledge of how the universe works", "why": "필자는 망원경에서 얻은 정보가 우주 지식을 발전시켰다고 본다."},

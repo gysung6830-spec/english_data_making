@@ -1,0 +1,538 @@
+{
+ "item_no": "Unit13-ANALYSIS",
+ "theme": "연설을 공연이 아닌 의사소통으로 인식할 필요성과 실수가 주는 인간적 매력",
+ "overview": {
+  "theme_ko": "연설을 공연이 아닌 의사소통으로 인식해야 할 필요성과 실수가 주는 인간적인 매력",
+  "key_grammar": {
+   "point": "상관접속사 not A but B ('A가 아니라 B')",
+   "source_sentence": "They are not looking for a virtuoso performance, but for a well-thought-out address that communicates the speaker's ideas clearly and directly.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "'not A but B'는 A를 부정하고 B를 택해 — '[[A가 아니라 B]]'로 읽어."
+    },
+    {
+     "chip": "형태",
+     "text": "not 뒤 A, but 뒤 B에는 문법적으로 [[대등한 것]]이 와 — for a performance ↔ for an address."
+    },
+    {
+     "chip": "초점",
+     "text": "진짜 강조점은 [[B(but 뒤)]]에 있어 — 청중이 원하는 건 '공연'이 아니라 '잘 짜인 연설'."
+    },
+    {
+     "chip": "변형",
+     "text": "B, not A / not A but (rather) B 등 순서·형태가 바뀌어도 뜻은 [[같아]]."
+    },
+    {
+     "chip": "해석 요령",
+     "text": "'A가 아니라 (오히려) B'로 옮기고 [[B]]에 무게를 실어."
+    }
+   ],
+   "example": "",
+   "example_analysis": "not looking for a virtuoso performance, but for a well-thought-out address = '고난도 공연이 아니라 잘 짜인 연설을 원한다'.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 적절하지 않은 것은?",
+     "sentence": "They are not [[1|looking]] for a virtuoso performance, but [[2|for]] a [[3|well-thought-out]] address [[4|that]] [[5|communicate]] the speaker's ideas clearly and directly.",
+     "options": [
+      "① looking",
+      "② for",
+      "③ well-thought-out",
+      "④ that",
+      "⑤ communicate"
+     ],
+     "answer": "⑤",
+     "fix": "관계대명사 that의 선행사가 단수명사 address이므로 뒤의 동사는 communicate가 아니라 communicates로 써야 한다.",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "각 네모 안에서 어법에 맞는 것을 고르시오.",
+     "sentence": "One of the biggest reasons people are concerned about [[making/to make]] a mistake in a speech [[is/are]] [[that/what]] they view speechmaking as a performance rather than an act of communication.",
+     "answer": "making / is / that",
+     "options": [],
+     "words": [],
+     "fix": "",
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "options": [
+      "① One of the biggest reasons people are concerned about making a mistake in a speech is that they view speechmaking as a performance rather than an act of communication.",
+      "② They feel the audience is judging them against a scale of absolute perfection in which every misstated word or awkward gesture will count against they.",
+      "③ But speech audiences are not like judges in a violin recital or an ice-skating contest.",
+      "④ They are not looking for a virtuoso performance, but for a well-thought-out address that communicates the speaker's ideas clearly and directly.",
+      "⑤ Sometimes an error or two can actually enhance a speaker's appeal by making her or him seem more human."
+     ],
+     "answer": "They feel the audience is judging them against a scale of absolute perfection in which every misstated word or awkward gesture will count against they.",
+     "fix": "전치사 against의 목적어 자리이므로 주격 they를 목적격 them으로 고쳐야 한다.",
+     "sentence": "",
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그들은 거장의 기교를 보여 주는 공연이 아니라, 연설자의 생각을 명확하고 직접적으로 전달하는 잘 짜인 연설을 원한다. (not A but B 사용)",
+     "answer": "They are not looking for a virtuoso performance, but for a well-thought-out address that communicates the speaker's ideas clearly and directly.",
+     "words": [
+      "They",
+      "are",
+      "not",
+      "looking for",
+      "a virtuoso performance",
+      "but",
+      "for",
+      "a well-thought-out address",
+      "that",
+      "communicates",
+      "the speaker's ideas",
+      "clearly and directly"
+     ],
+     "options": [],
+     "sentence": "",
+     "fix": "",
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "청중이 원하는 것은 화려한 기교의 공연이 아니라, 화자의 생각을 분명하고 직접적으로 전달하는 잘 숙고된 연설이다. (not ~ but ~ 구조로 배열)",
+     "answer": "They are not looking for a virtuoso performance, but for a well-thought-out address that communicates the speaker's ideas clearly and directly.",
+     "words": [
+      "They",
+      "are not",
+      "looking",
+      "for",
+      "a",
+      "virtuoso",
+      "performance",
+      "but",
+      "for",
+      "a",
+      "well-thought-out",
+      "address",
+      "that",
+      "communicates",
+      "the speaker's ideas",
+      "clearly",
+      "and",
+      "directly"
+     ],
+     "options": [],
+     "sentence": "",
+     "fix": "",
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "사람들이 연설 실수를 두려워하는 이유는 연설을 '공연'으로 여기기 때문이지만, 청중은 심사위원이 아니며 오히려 실수가 인간미를 더한다는 글이야.",
+  "stance": "긍정적",
+  "stance_reason": "실수를 두려워 말라며 'enhance appeal'·'seem more human'으로 실수의 긍정적 면을 부각해.",
+  "structure": "통념→반박(반전)",
+  "structure_reason": "사람들이 연설을 완벽해야 할 '공연'으로 보는 통념(1~2문장) 뒤, 'But 청중은 심사위원이 아니다'로 반박(3~5문장)해.",
+  "restatement_chains": [
+   {
+    "label": "완벽주의 압박",
+    "expressions": [
+     "a performance",
+     "a scale of absolute perfection",
+     "judges in a violin recital or an ice-skating contest"
+    ],
+    "variation": "'공연' → '절대적 완벽의 잣대' → '연주회·스케이팅 심사위원'으로 압박이 구체화돼."
+   },
+   {
+    "label": "의사소통 본질",
+    "expressions": [
+     "an act of communication",
+     "a well-thought-out address that communicates",
+     "seem more human"
+    ],
+    "variation": "'의사소통 행위' → '생각을 전하는 잘 짜인 연설' → '더 인간적으로 보임'으로 이어져."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "통념",
+    "sentence_range": "1~2",
+    "summary": "사람들이 연설 실수를 걱정하는 큰 이유는 연설을 의사소통이 아닌 '공연'으로 보고, 완벽의 잣대로 평가받는다 느끼기 때문이다.",
+    "easy_example": "단어 하나 틀려도 감점당하는 무대처럼 여기는 것."
+   },
+   {
+    "stage": "반박",
+    "sentence_range": "3~4",
+    "summary": "하지만 청중은 연주회·스케이팅 심사위원과 달라, 화려한 공연이 아니라 생각을 명확히 전하는 잘 짜인 연설을 원한다.",
+    "easy_example": "청중은 점수 매기는 심사위원이 아니라 내용을 들으려는 사람."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "5",
+    "summary": "때로는 한두 실수가 오히려 발표자를 더 인간적으로 보이게 해 매력을 높인다.",
+    "easy_example": "살짝 실수하면 오히려 친근해 보이는 것."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "One of the biggest reasons people are concerned about making a mistake in a speech is that they view speechmaking as a performance rather than an act of communication.",
+   "translation": "사람들이 연설에서 실수하는 것을 걱정하는 가장 큰 이유 중 하나는 연설하기를 의사소통 행위가 아니라 공연으로 여기기 때문이다.",
+   "grammar": [
+    {
+     "tag": "명사절 that",
+     "note": "is의 보어(is that ~)",
+     "spans": []
+    },
+    {
+     "tag": "A rather than B",
+     "note": "'B라기보다 A'",
+     "spans": []
+    },
+    {
+     "tag": "최상급",
+     "note": "One of the biggest reasons — biggest 최상급",
+     "spans": []
+    },
+    {
+     "tag": "관계부사 생략",
+     "note": "the reasons [why] people are concerned — reasons 뒤 why 생략",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "be concerned about",
+     "meaning": "~을 걱정하다"
+    },
+    {
+     "word": "speechmaking",
+     "meaning": "연설(하기)"
+    },
+    {
+     "word": "rather than",
+     "meaning": "~라기보다, ~ 대신"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "One of the biggest [[reasons]]",
+     "ko": "가장 큰 [[이유]]들 중 하나는"
+    },
+    {
+     "en": "people are [[concerned about]]",
+     "ko": "사람들이 [[걱정하는]]"
+    },
+    {
+     "en": "making a mistake",
+     "ko": "실수하는 것을"
+    },
+    {
+     "en": "in a speech",
+     "ko": "연설에서"
+    },
+    {
+     "en": "is that they [[view]]",
+     "ko": "~은 그들이 [[여긴다는]] 것이다"
+    },
+    {
+     "en": "speechmaking",
+     "ko": "연설하기를"
+    },
+    {
+     "en": "as a performance",
+     "ko": "공연으로"
+    },
+    {
+     "en": "[[rather than an act of communication]].",
+     "ko": "[[의사소통 행위라기보다]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 연설 실수를 줄이는 구체적 방법을 알려주는 문장이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'가장 큰 이유 중 하나는 ~ 때문이다(is that ~)'로 실수를 두려워하는 '이유'를 짚는 주제·도입 문장이야 — 방법 제시가 아니야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘a performance rather than an act of communication’을 그냥 비교로 읽으면 안 돼 — [[A rather than B]]는 ‘B가 아니라 A’라 ‘의사소통이 아니라 공연으로’ 여긴다는 뜻이야."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "They feel the audience is judging them against a scale of absolute perfection in which every misstated word or awkward gesture will count against them.",
+   "translation": "그들은 잘못 말한 단어나 어색한 몸짓 하나하나가 자신에게 불리하게 작용하는 절대적 완벽이라는 잣대로 청중이 자신을 평가하고 있다고 느낀다.",
+   "grammar": [
+    {
+     "tag": "관계사 in which",
+     "note": "perfection 수식",
+     "spans": []
+    },
+    {
+     "tag": "명사절 생략",
+     "note": "feel (that) ~",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "misstated",
+     "meaning": "잘못 말한"
+    },
+    {
+     "word": "awkward",
+     "meaning": "어색한"
+    },
+    {
+     "word": "count against",
+     "meaning": "~에게 불리하게 작용하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "They feel",
+     "ko": "그들은 느낀다"
+    },
+    {
+     "en": "the audience is [[judging]] them",
+     "ko": "청중이 자신을 [[평가하고]] 있다고"
+    },
+    {
+     "en": "against a scale of [[absolute perfection]]",
+     "ko": "[[절대적 완벽]]의 잣대에 비추어"
+    },
+    {
+     "en": "in which every [[misstated]] word",
+     "ko": "그 안에서 모든 [[잘못 말한]] 단어"
+    },
+    {
+     "en": "or awkward gesture",
+     "ko": "혹은 어색한 몸짓이"
+    },
+    {
+     "en": "[[will count against them]].",
+     "ko": "[[그들에게 불리하게 작용할 것이라고]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "그들은 청중이 사소한 실수를 너그럽게 봐줄 거라 느낀다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'against a scale of absolute perfection(절대적 완벽의 잣대로)' 평가받는다고 '느낀다'는 거야 — 너그러움이 아니라 냉혹한 완벽주의 압박을 느낀다는 뜻.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘count against them’을 ‘그들에 맞서 센다’로 읽으면 안 돼 — [[count against]]는 ‘~에게 불리하게 작용하다’야."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "But speech audiences are not like judges in a violin recital or an ice-skating contest.",
+   "translation": "하지만 연설의 청중은 바이올린 연주회나 아이스 스케이팅 대회의 심사위원과 같지 않다.",
+   "grammar": [
+    {
+     "tag": "비교 not like",
+     "note": "'~와 같지 않다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "recital",
+     "meaning": "연주회"
+    },
+    {
+     "word": "contest",
+     "meaning": "대회, 시합"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "But speech audiences",
+     "ko": "하지만 연설의 청중은"
+    },
+    {
+     "en": "are [[not like]]",
+     "ko": "[[~와 같지 않다]]"
+    },
+    {
+     "en": "[[judges]] in a violin recital",
+     "ko": "바이올린 연주회의 [[심사위원]]과"
+    },
+    {
+     "en": "or an ice-skating [[contest]].",
+     "ko": "혹은 아이스 스케이팅 [[대회]]의."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 연설 청중이 심사위원처럼 엄격하다는 앞 내용을 뒷받침한다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'But(하지만)'으로 방향을 틀어 '청중은 심사위원과 다르다'고 반박하는 전환 문장이야 — 앞 완벽주의 통념을 뒤집어.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "They are not looking for a virtuoso performance, but for a well-thought-out address that communicates the speaker's ideas clearly and directly.",
+   "translation": "그들은 거장의 기교를 보여 주는 공연이 아니라, 연설자의 생각을 명확하고 직접적으로 전달하는 잘 짜인 연설을 원한다.",
+   "grammar": [
+    {
+     "tag": "관계사 that",
+     "note": "address 수식",
+     "spans": []
+    },
+    {
+     "tag": "상관접속사 not A but B",
+     "note": "not looking for a performance, but for an address(⑤)",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "virtuoso",
+     "meaning": "거장의, 고도의 기교의"
+    },
+    {
+     "word": "well-thought-out",
+     "meaning": "잘 숙고된, 잘 짜인"
+    },
+    {
+     "word": "address",
+     "meaning": "연설"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "They are not [[looking for]]",
+     "ko": "그들은 [[찾고 있는]] 게 아니라"
+    },
+    {
+     "en": "a [[virtuoso]] performance,",
+     "ko": "[[거장의 기교를 보여 주는]] 공연을,"
+    },
+    {
+     "en": "[[but for a well-thought-out address]]",
+     "ko": "[[오히려 잘 짜인 연설을]]"
+    },
+    {
+     "en": "that communicates",
+     "ko": "전달하는"
+    },
+    {
+     "en": "the speaker's ideas",
+     "ko": "연설자의 생각을"
+    },
+    {
+     "en": "[[clearly and directly]].",
+     "ko": "[[명확하고 직접적으로]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(지칭) 'They'는 연주회·스케이팅 대회의 심사위원을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "지칭 오인이야. They는 앞의 'speech audiences(연설 청중)'를 가리켜 — 청중이 원하는 건 공연이 아니라 잘 짜인 연설이라는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘not A but B’를 ‘A도 B도 아니다’로 읽으면 안 돼 — [[not looking for A but for B]]는 ‘A가 아니라 B를 찾는다’야."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Sometimes an error or two can actually enhance a speaker's appeal by making her or him seem more human.",
+   "translation": "때로는 한두 개의 실수가 오히려 그 사람을 더 인간적으로 보이게 함으로써 발표자의 매력을 실제로 높일 수 있다.",
+   "grammar": [
+    {
+     "tag": "by -ing",
+     "note": "'~함으로써'",
+     "spans": []
+    },
+    {
+     "tag": "make + 목적어 + 원형",
+     "note": "'~을 …하게 하다'",
+     "spans": []
+    },
+    {
+     "tag": "비교급",
+     "note": "seem more human — more+형용사 비교급",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "enhance",
+     "meaning": "높이다, 향상시키다"
+    },
+    {
+     "word": "appeal",
+     "meaning": "매력"
+    },
+    {
+     "word": "seem",
+     "meaning": "~처럼 보이다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Sometimes an [[error]] or two",
+     "ko": "때로는 한두 [[실수]]가"
+    },
+    {
+     "en": "can actually [[enhance]]",
+     "ko": "실제로 [[높일]] 수 있다"
+    },
+    {
+     "en": "a speaker's [[appeal]]",
+     "ko": "발표자의 [[매력]]을"
+    },
+    {
+     "en": "[[by making her or him]]",
+     "ko": "[[그 사람을 ~하게 함으로써]]"
+    },
+    {
+     "en": "seem more human.",
+     "ko": "더 인간적으로 보이게"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(함축) 실수는 발표자의 신뢰를 떨어뜨려 청중을 실망시킨다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "함축을 놓쳤어. 'enhance a speaker's appeal … seem more human(매력을 높이고 더 인간적으로 보이게)'이라며 실수의 '긍정적' 효과를 말해 — 실망이 아니라 친근함이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘make + 목적어’를 ‘~을 만든다’로 끊어 읽으면 안 돼 — [[make O seem]]은 ‘O가 ~해 보이게 하다’인 5형식이야."
+   ]
+  }
+ ]
+}

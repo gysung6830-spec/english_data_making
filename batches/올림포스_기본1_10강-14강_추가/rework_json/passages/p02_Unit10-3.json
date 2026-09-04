@@ -1,0 +1,745 @@
+{
+ "item_no": "Unit10-3",
+ "theme": "단일 재배 농업이 원치 않는 종의 번식을 도운 생태적 결과",
+ "overview": {
+  "theme_ko": "단일 재배 농업이 잡초·해충 같은 원치 않는 종의 번식을 도운 생태적 결과",
+  "key_grammar": {
+   "point": "도치: 장소·방향의 부사구나 So가 문두로 나가면 '동사+주어'로 어순이 뒤집힌다",
+   "source_sentence": "At one end of the spectrum of transformations was the forest gardening as practiced by the peoples of New Guinea and Amazonia that mimicked natural growth and left minimal traces on the land.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "장소를 뜻하는 부사구가 문장 앞으로 나오면 뒤의 '주어+동사'가 '[[동사+주어]]'로 뒤집혀 — At one end ... was the forest gardening."
+    },
+    {
+     "chip": "진짜 주어",
+     "text": "was 다음에 오는 [[the forest gardening]]이 진짜 주어라서 be동사를 단수 was로 받았어."
+    },
+    {
+     "chip": "as+과거분사",
+     "text": "as [[practiced]] by the peoples는 'as (it was) practiced'로, 앞의 the forest gardening을 수동으로 꾸며."
+    },
+    {
+     "chip": "관계사 that",
+     "text": "[[that mimicked natural growth and left minimal traces]]의 that은 the forest gardening을 꾸미는 주격 관계대명사야(New Guinea·Amazonia가 아님)."
+    },
+    {
+     "chip": "복원",
+     "text": "The forest gardening ... [[was at one end]] of the spectrum으로 되돌리면 도치되기 전 어순이 보여."
+    }
+   ],
+   "example": "",
+   "example_analysis": "부사구 At one end of the spectrum of transformations가 문두로 나가며 was the forest gardening으로 동사+주어가 도치됐고, as practiced 분사구와 that 관계절이 모두 the forest gardening을 수식한다.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "밑줄 친 부분 중 어법상 틀린 것은?",
+     "answer": "④",
+     "sentence": "Crops that [[①|ripened]] or [[②|were stored]] after [[③|harvesting]] [[④|attracting]] rats, mice, [[⑤|sparrows]], and roaches.",
+     "fix": "attracting → attracted (관계절의 수식을 받는 주어 Crops의 주동사이므로 과거시제 정동사가 와야 함)",
+     "options": [
+      "① ripened",
+      "② were stored",
+      "③ harvesting",
+      "④ attracting",
+      "⑤ sparrows"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "네모 안에서 어법상 알맞은 것을 고르시오.",
+     "answer": "was / practiced / that",
+     "sentence": "At one end of the spectrum of transformations [[was/were]] the forest gardening as [[practiced/practicing]] by the peoples of New Guinea and Amazonia [[that/what]] mimicked natural growth and left minimal traces on the land.",
+     "fix": "단수 주어 the forest gardening에 맞춰 was, 수동 관계의 과거분사 practiced, 선행사를 꾸미는 주격 관계대명사 that.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "answer": "Biologically speaking, these species suddenly became very successful, measuring by their rates of survival and reproduction.",
+     "sentence": "",
+     "fix": "measuring → measured (these species가 '측정되는' 대상이므로 과거분사 수동 형태가 옳음)",
+     "options": [
+      "At the other end was monoculture: cultivating only one species of plant or raising only one species of animal.",
+      "The beginnings of monoculture can be seen in the wheat fields of the Middle East, the rice paddies of China, and the herds of sheep and goats on the Eurasian steppe.",
+      "Biologically speaking, these species suddenly became very successful, measuring by their rates of survival and reproduction.",
+      "Water pools provided habitats for mosquitoes.",
+      "Thanks to humans, weeds and pests were also biological winners."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "변화의 스펙트럼 한쪽 끝에는, 자연적 성장을 모방하고 땅에 최소한의 흔적만 남긴, 뉴기니와 아마존 사람들이 행하던 산림 정원 가꾸기가 있었다. (도치 사용)",
+     "answer": "At one end of the spectrum of transformations was the forest gardening as practiced by the peoples of New Guinea and Amazonia that mimicked natural growth and left minimal traces on the land.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "At",
+      "one",
+      "end",
+      "of",
+      "the",
+      "spectrum",
+      "of",
+      "transformations",
+      "was",
+      "the",
+      "forest",
+      "gardening",
+      "as",
+      "practiced",
+      "by",
+      "the",
+      "peoples",
+      "of",
+      "New Guinea",
+      "and",
+      "Amazonia",
+      "that",
+      "mimicked",
+      "natural",
+      "growth",
+      "and",
+      "left",
+      "minimal",
+      "traces",
+      "on",
+      "the",
+      "land."
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "원치 않는 다른 종들도 (마찬가지로) 그랬다. (So 도치 사용)",
+     "answer": "So did other, unwanted species.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "So",
+      "did",
+      "other,",
+      "unwanted",
+      "species."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "단일 재배 농업이 재배종뿐 아니라 잡초·해충 같은 원치 않는 종까지 번성시킨 생태적 결과에 관한 글이야.",
+  "stance": "중립적",
+  "stance_reason": "현상을 사실 중심으로 설명하는 정보 전달문으로, 단일 재배의 결과를 관찰·서술해.",
+  "structure": "비교·대조",
+  "structure_reason": "스펙트럼의 한 끝(산림 정원)과 다른 끝(단일 재배)을 대조한 뒤, 단일 재배가 부른 결과를 사례로 든다.",
+  "restatement_chains": [
+   {
+    "label": "성공한 종",
+    "expressions": [
+     "these species suddenly became very successful",
+     "biological winners"
+    ],
+    "variation": "'갑자기 매우 성공적이 됨' → '생물학적 승자'로 표현이 압축돼."
+   },
+   {
+    "label": "원치 않는 종",
+    "expressions": [
+     "other, unwanted species",
+     "rats, mice, sparrows, and roaches",
+     "weeds and pests"
+    ],
+    "variation": "'원치 않는 다른 종' → '쥐·참새·바퀴' → '잡초와 해충'으로 구체화돼."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입",
+    "sentence_range": "1~2",
+    "summary": "변화의 한 끝엔 흔적을 적게 남기는 산림 정원, 다른 끝엔 한 종만 기르는 단일 재배가 있다.",
+    "easy_example": "자연 그대로 가꾸기 vs 한 작물만 왕창 심기."
+   },
+   {
+    "stage": "전개",
+    "sentence_range": "3",
+    "summary": "단일 재배의 시작은 중동 밀밭·중국 논·유라시아 목축에서 볼 수 있다.",
+    "easy_example": "옛날부터 밀·쌀·양 떼처럼 한 종을 대량으로 키운 것."
+   },
+   {
+    "stage": "핵심",
+    "sentence_range": "4~5",
+    "summary": "이 재배종들은 갑자기 크게 번성했는데, 원치 않는 다른 종들도 그랬다.",
+    "easy_example": "농사가 잘되니 덩달아 쥐·벌레도 늘어난 셈."
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "6~8",
+    "summary": "농작물은 쥐·참새·바퀴를, 물웅덩이는 모기를, 쓰레기는 파리를 끌어들였다.",
+    "easy_example": "사람이 만든 환경이 해충의 서식지가 된 것."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "9",
+    "summary": "인간 덕분에 잡초와 해충도 생물학적 승자가 되었다.",
+    "easy_example": "사람이 판을 깔아 준 덕에 해충까지 번성한 결말."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "At one end of the spectrum of transformations was the forest gardening as practiced by the peoples of New Guinea and Amazonia that mimicked natural growth and left minimal traces on the land.",
+   "translation": "변화의 스펙트럼 한쪽 끝에는 뉴기니와 아마존 사람들이 행하던 산림 정원 가꾸기가 있었는데, 그것은 자연적 성장을 모방하고 땅에 최소한의 흔적만 남겼다.",
+   "grammar": [
+    {
+     "tag": "관계사 that",
+     "note": "forest gardening 수식",
+     "spans": []
+    },
+    {
+     "tag": "분사(과거분사구)",
+     "note": "as practiced by the peoples = as (it was) practiced — forest gardening 수식(수동)",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "spectrum",
+     "meaning": "범위, 스펙트럼"
+    },
+    {
+     "word": "mimic",
+     "meaning": "모방하다"
+    },
+    {
+     "word": "trace",
+     "meaning": "흔적"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "At one [[end]] of the spectrum",
+     "ko": "한쪽 [[끝]]에, 스펙트럼의"
+    },
+    {
+     "en": "of transformations",
+     "ko": "변화의"
+    },
+    {
+     "en": "was the forest [[gardening]]",
+     "ko": "산림 [[정원 가꾸기]]가 있었다"
+    },
+    {
+     "en": "as [[practiced]] by the peoples",
+     "ko": "사람들이 [[행하던]] 대로"
+    },
+    {
+     "en": "of New Guinea and Amazonia",
+     "ko": "뉴기니와 아마존의"
+    },
+    {
+     "en": "[[that mimicked natural growth]]",
+     "ko": "[[자연적 성장을 모방한]]"
+    },
+    {
+     "en": "and left [[minimal]] traces",
+     "ko": "그리고 [[최소한의]] 흔적을 남긴"
+    },
+    {
+     "en": "on the land.",
+     "ko": "땅에."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "산림 정원은 땅에 큰 흔적을 남기는 방식이라는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'minimal traces(최소한의 흔적)'라고 했어 — 자연을 모방해 흔적을 거의 안 남기는 방식이야(단일 재배와 대조).",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "도치를 놓치면 안 돼 — [[At one end of the spectrum was the forest gardening]]에서 진짜 주어는 the forest gardening이야.",
+    "‘that’이 New Guinea·Amazonia를 꾸민다고 읽으면 안 돼 — [[that mimicked natural growth]]는 the forest gardening을 꾸며."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "At the other end was monoculture: cultivating only one species of plant or raising only one species of animal.",
+   "translation": "다른 쪽 끝에는 단일 재배가 있었는데, 오직 한 종의 식물만 재배하거나 오직 한 종의 동물만 기르는 것이었다.",
+   "grammar": [],
+   "vocab": [
+    {
+     "word": "monoculture",
+     "meaning": "단일 재배"
+    },
+    {
+     "word": "cultivate",
+     "meaning": "경작하다, 재배하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "At the other end",
+     "ko": "다른 쪽 끝에는"
+    },
+    {
+     "en": "was [[monoculture]]:",
+     "ko": "[[단일 재배]]가 있었다:"
+    },
+    {
+     "en": "[[cultivating]] only one species",
+     "ko": "오직 한 종만 [[재배하거나]]"
+    },
+    {
+     "en": "of plant",
+     "ko": "식물의"
+    },
+    {
+     "en": "or [[raising]] only one species",
+     "ko": "또는 오직 한 종만 [[기르는 것]]"
+    },
+    {
+     "en": "of animal.",
+     "ko": "동물의."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "단일 재배는 여러 종을 동시에 기르는 방식이라는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'only one species(한 종만)'가 핵심 — 오직 한 종만 기르는 게 단일 재배야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "The beginnings of monoculture can be seen in the wheat fields of the Middle East, the rice paddies of China, and the herds of sheep and goats on the Eurasian steppe.",
+   "translation": "단일 재배의 시작은 중동의 밀밭, 중국의 논, 그리고 유라시아 스텝의 양과 염소 무리에서 볼 수 있다.",
+   "grammar": [
+    {
+     "tag": "병렬 명사구",
+     "note": "밀밭/논/양·염소 무리",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "wheat",
+     "meaning": "밀"
+    },
+    {
+     "word": "paddy",
+     "meaning": "논"
+    },
+    {
+     "word": "steppe",
+     "meaning": "(유라시아) 스텝, 초원"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The beginnings",
+     "ko": "그 시작은"
+    },
+    {
+     "en": "of [[monoculture]]",
+     "ko": "[[단일 재배]]의"
+    },
+    {
+     "en": "can be [[seen]]",
+     "ko": "[[볼 수 있다]]"
+    },
+    {
+     "en": "in the [[wheat]] fields",
+     "ko": "[[밀]]밭에서"
+    },
+    {
+     "en": "of the Middle East,",
+     "ko": "중동의,"
+    },
+    {
+     "en": "the rice [[paddies]]",
+     "ko": "쌀 [[논]],"
+    },
+    {
+     "en": "of China,",
+     "ko": "중국의,"
+    },
+    {
+     "en": "and the herds",
+     "ko": "그리고 무리에서"
+    },
+    {
+     "en": "of sheep and goats",
+     "ko": "양과 염소의"
+    },
+    {
+     "en": "on the Eurasian [[steppe]].",
+     "ko": "유라시아 [[스텝]]의."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "단일 재배는 최근에야 생긴 방식이라는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "중동 밀·중국 논 등 아주 오래된 예를 들어 — 단일 재배의 '기원'이 오래됐음을 보여줘.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "Biologically speaking, these species suddenly became very successful, measured by their rates of survival and reproduction.",
+   "translation": "생물학적으로 말하면, 이 종들은 생존율과 번식률로 측정할 때 갑자기 매우 성공적이 되었다.",
+   "grammar": [
+    {
+     "tag": "분사 measured",
+     "note": "'~로 측정될 때'",
+     "spans": []
+    },
+    {
+     "tag": "Biologically speaking",
+     "note": "'생물학적으로 말하면'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "survival",
+     "meaning": "생존"
+    },
+    {
+     "word": "reproduction",
+     "meaning": "번식"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[Biologically]] speaking,",
+     "ko": "[[생물학적으로]] 말하면,"
+    },
+    {
+     "en": "these species",
+     "ko": "이 종들은"
+    },
+    {
+     "en": "suddenly became",
+     "ko": "갑자기 되었다"
+    },
+    {
+     "en": "very [[successful]],",
+     "ko": "매우 [[성공적으로]],"
+    },
+    {
+     "en": "[[measured by their rates]]",
+     "ko": "[[그것들의 비율로 측정되어]]"
+    },
+    {
+     "en": "of [[survival]] and [[reproduction]].",
+     "ko": "[[생존]]과 [[번식]]의."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(지칭) 'these species'는 잡초와 해충을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "지칭 오인이야. these species는 앞의 '단일 재배 대상(밀·쌀·양 등 재배종)'을 가리켜 — 잡초·해충은 다음 문장부터야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "So did other, unwanted species.",
+   "translation": "원치 않는 다른 종들도 그랬다.",
+   "grammar": [
+    {
+     "tag": "도치(So+동사+주어)",
+     "note": "앞 문장을 받아 '~도 그랬다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "unwanted",
+     "meaning": "원치 않는"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "So [[did]]",
+     "ko": "역시 [[그러했다]]"
+    },
+    {
+     "en": "other, [[unwanted]] species.",
+     "ko": "다른, [[원치 않는]] 종들도."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "원치 않는 종들은 단일 재배로 오히려 사라졌다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'So did(~도 그랬다)'로 앞의 '성공'을 받아 — 원치 않는 종들'도' 번성했다는, 글의 전환점이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘So did’를 ‘그래서 했다’로 읽으면 안 돼 — [[So did other, unwanted species]]는 도치라 ‘다른 원치 않는 종들도 그랬다’야."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Crops that ripened or were stored after harvesting attracted rats, mice, sparrows, and roaches.",
+   "translation": "익거나 수확 후 저장된 농작물은 쥐, 생쥐, 참새, 그리고 바퀴벌레를 끌어들였다.",
+   "grammar": [
+    {
+     "tag": "관계사 that",
+     "note": "Crops 수식",
+     "spans": []
+    },
+    {
+     "tag": "수동 were stored",
+     "note": "'저장된'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "ripen",
+     "meaning": "익다"
+    },
+    {
+     "word": "harvest",
+     "meaning": "수확하다"
+    },
+    {
+     "word": "attract",
+     "meaning": "끌어들이다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Crops that [[ripened]]",
+     "ko": "[[익은]] 농작물은"
+    },
+    {
+     "en": "or were [[stored]]",
+     "ko": "또는 [[저장된]]"
+    },
+    {
+     "en": "after [[harvesting]]",
+     "ko": "[[수확 후]]"
+    },
+    {
+     "en": "[[attracted]] rats, mice,",
+     "ko": "쥐, 생쥐를 [[끌어들였다]],"
+    },
+    {
+     "en": "sparrows, and roaches.",
+     "ko": "참새, 그리고 바퀴를."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "농작물은 해로운 동물을 전혀 끌어들이지 않았다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "익거나 저장된 농작물이 쥐·참새·바퀴를 '끌어들였다(attracted)'는, 원치 않는 종 번성의 사례야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘Crops that ripened or were stored’를 통째로 문장 끝까지 이어 읽으면 안 돼 — 이건 관계절 수식이고 주동사는 [[attracted]]라 ‘~한 작물이 쥐를 끌어들였다’야."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Water pools provided habitats for mosquitoes.",
+   "translation": "물웅덩이는 모기에게 서식지를 제공했다.",
+   "grammar": [
+    {
+     "tag": "provide A for B",
+     "note": "B에게 A를 제공하다",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "habitat",
+     "meaning": "서식지"
+    },
+    {
+     "word": "mosquito",
+     "meaning": "모기"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Water pools",
+     "ko": "물웅덩이는"
+    },
+    {
+     "en": "provided [[habitats]]",
+     "ko": "[[서식지]]를 제공했다"
+    },
+    {
+     "en": "for [[mosquitoes]].",
+     "ko": "[[모기]]에게."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "물웅덩이는 모기의 번식을 막았다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "물웅덩이가 모기에게 '서식지를 제공했다'는 거야 — 인간 환경이 해충을 늘린 또 다른 예.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "Garbage and human or animal waste attracted flies.",
+   "translation": "쓰레기와 사람 또는 동물의 배설물은 파리를 끌어들였다.",
+   "grammar": [
+    {
+     "tag": "병렬 주어",
+     "note": "Garbage and ... waste",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "garbage",
+     "meaning": "쓰레기"
+    },
+    {
+     "word": "waste",
+     "meaning": "배설물, 폐기물"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[Garbage]] and",
+     "ko": "[[쓰레기]]와"
+    },
+    {
+     "en": "human or animal [[waste]]",
+     "ko": "사람 또는 동물의 [[배설물]]은"
+    },
+    {
+     "en": "[[attracted]] flies.",
+     "ko": "파리를 [[끌어들였다]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "쓰레기와 배설물은 파리와 무관하다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'attracted flies(파리를 끌어들였다)'는 거야 — 사람이 만든 쓰레기가 해충을 부른 사례.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 9,
+   "english": "Thanks to humans, weeds and pests were also biological winners.",
+   "translation": "인간 덕분에, 잡초와 해충도 생물학적 승자가 되었다.",
+   "grammar": [
+    {
+     "tag": "Thanks to",
+     "note": "'~덕분에'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "weed",
+     "meaning": "잡초"
+    },
+    {
+     "word": "pest",
+     "meaning": "해충"
+    },
+    {
+     "word": "Thanks to",
+     "meaning": "~덕분에"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Thanks to [[humans]],",
+     "ko": "[[인간]] 덕분에,"
+    },
+    {
+     "en": "[[weeds]] and [[pests]]",
+     "ko": "[[잡초]]와 [[해충]]도"
+    },
+    {
+     "en": "were also",
+     "ko": "역시 되었다"
+    },
+    {
+     "en": "biological [[winners]].",
+     "ko": "생물학적 [[승자]]가."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(함축) 'winners(승자)'라는 표현은 잡초·해충이 인간에게 이롭다는 칭찬이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "함축을 놓쳤어. 'biological winners'는 '번식에 성공했다'는 뜻이지 이롭다는 칭찬이 아니야 — 인간이 원치 않는 종까지 번성시켰다는 반어적 마무리야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  }
+ ]
+}

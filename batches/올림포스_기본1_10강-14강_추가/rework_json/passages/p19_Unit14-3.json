@@ -1,0 +1,683 @@
+{
+ "item_no": "Unit14-3",
+ "theme": "기후 조절이라는 숲의 기능을 망각한 채 이뤄지는 근시안적 목재 남용 비판",
+ "overview": {
+  "theme_ko": "기후 조절이라는 숲의 기능을 망각한 채 이뤄지는 근시안적 목재 남용 비판",
+  "key_grammar": {
+   "point": "가정법 otherwise (otherwise + 조동사 과거: 그렇지 않다면 ~할 텐데)",
+   "source_sentence": "It's ironic to think that for purposes such as these, forests are cut down that otherwise would aid in controlling such storms.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "otherwise는 '[[그렇지 않다면]]'이라는 [[가정]]을 한 단어에 담는다."
+    },
+    {
+     "chip": "복원",
+     "text": "otherwise would aid = [[if they were not cut down]], they would aid ~."
+    },
+    {
+     "chip": "짝",
+     "text": "otherwise 뒤엔 would/could 같은 [[조동사 과거]]가 와서 가정법을 이룬다."
+    },
+    {
+     "chip": "해석",
+     "text": "베지 않았다면 그 숲이 폭풍 통제에 [[도움]]이 되었을 것이다."
+    }
+   ],
+   "example": "",
+   "example_analysis": "forests are cut down that otherwise would aid ~ = 베어지지 않았다면(가정) 도움이 됐을 것이라는 가정법.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중, 어법상 틀린 것은?",
+     "answer": "⑤",
+     "sentence": "We need to dramatically [[①|reduce]] our use of wood, not just because the supply is [[②|decreasing]], and not just because entire species of flora and fauna [[③|that]] live in forests are [[④|vanishing]], but because the forest [[⑤|perform]] an important function.",
+     "fix": "⑤ perform → performs. 주어 the forest가 3인칭 단수이므로 단수동사 performs가 옳다.",
+     "options": [
+      "① reduce",
+      "② decreasing",
+      "③ that",
+      "④ vanishing",
+      "⑤ perform"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "다음 네모 안에서 어법상 알맞은 것을 고르시오.",
+     "answer": "control / absorbing / reducing",
+     "sentence": "Forests [[control/controls]] global warming by [[absorbing/absorb]] carbon from the atmosphere and [[reducing/reduce]] greenhouse gases.",
+     "fix": "주어 Forests가 복수라 control, 'by -ing'(수단)의 병렬 구조라 absorbing·reducing이 옳다.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장을 고르시오.",
+     "answer": "They also provides oxygen for us to breathe.",
+     "sentence": "",
+     "fix": "provides → provide. 주어 They(= forests)가 복수이므로 provide가 옳다.",
+     "options": [
+      "People are cutting down forests much faster than the rate at which forests can regrow.",
+      "They also provides oxygen for us to breathe.",
+      "There are too many trivial and shortsighted uses of wood.",
+      "When a hurricane advances on a city, people board up their windows with plywood.",
+      "After the storm has passed, they discard the plywood."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "(otherwise 가정법) 이러한 목적을 위해 숲이 베어지는데, 그렇지 않았다면 그러한 폭풍을 통제하는 데 도움이 되었을 것이라 생각하면 반어적이다.",
+     "answer": "It's ironic to think that for purposes such as these, forests are cut down that otherwise would aid in controlling such storms.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "It's",
+      "ironic",
+      "to",
+      "think",
+      "that",
+      "for",
+      "purposes",
+      "such",
+      "as",
+      "these,",
+      "forests",
+      "are",
+      "cut",
+      "down",
+      "that",
+      "otherwise",
+      "would",
+      "aid",
+      "in",
+      "controlling",
+      "such",
+      "storms."
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "(구·표현 배열) 이러한 목적을 위해 숲이 베어지는데, 그렇지 않았다면 그러한 폭풍을 억제하는 데 도움이 되었을 것이라 생각하면 반어적이다.",
+     "answer": "It's ironic to think that for purposes such as these, forests are cut down that otherwise would aid in controlling such storms.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "It's ironic",
+      "to think that",
+      "for purposes",
+      "such as these,",
+      "forests",
+      "are cut down",
+      "that otherwise",
+      "would aid",
+      "in controlling",
+      "such storms."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "숲의 기후 조절 기능을 무시한 근시안적 목재 남용에 대한 비판.",
+  "stance": "부정적·비판적",
+  "stance_reason": "목재의 사소하고 근시안적인 남용을 반어적으로 비판함.",
+  "structure": "주장→근거·예시",
+  "structure_reason": "목재 사용을 줄여야 한다는 주장 뒤에 숲의 기능(근거)과 합판 사례를 제시.",
+  "restatement_chains": [
+   {
+    "label": "숲의 중요한 기능",
+    "expressions": [
+     "the forest performs an important function",
+     "control global warming"
+    ],
+    "variation": "'숲이 중요한 기능을 한다'가 '지구온난화를 억제한다'로 구체화됨."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입",
+    "sentence_range": "1",
+    "summary": "숲이 [[재성장]]하는 속도보다 훨씬 빠르게 벌목이 진행됨.",
+    "easy_example": ""
+   },
+   {
+    "stage": "주장",
+    "sentence_range": "2",
+    "summary": "목재 사용을 줄여야 하는 핵심 이유는 숲의 [[기능]] 때문.",
+    "easy_example": ""
+   },
+   {
+    "stage": "근거",
+    "sentence_range": "3~4",
+    "summary": "숲은 탄소를 [[흡수]]해 온난화를 억제하고 산소를 공급함.",
+    "easy_example": ""
+   },
+   {
+    "stage": "전환",
+    "sentence_range": "5",
+    "summary": "목재의 사소하고 [[근시안적]]인 쓰임새가 너무 많음.",
+    "easy_example": ""
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "6~7",
+    "summary": "허리케인 때 합판으로 창을 막고 폭풍 뒤엔 [[버림]].",
+    "easy_example": ""
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "8",
+    "summary": "폭풍 대비로 숲을 베는 것은 [[반어적]] — 숲이 폭풍을 억제하는데.",
+    "easy_example": ""
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "People are cutting down forests much faster than the rate at which forests can regrow.",
+   "translation": "사람들은 숲이 다시 자랄 수 있는 속도보다 훨씬 더 빠르게 숲을 베어내고 있다.",
+   "grammar": [
+    {
+     "tag": "비교급 faster than",
+     "note": "'~보다 더 빠르게' 벌목 속도와 재성장 속도를 비교",
+     "spans": []
+    },
+    {
+     "tag": "전치사+관계대명사",
+     "note": "the rate at which ~: '~하는 속도'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "regrow",
+     "meaning": "다시 자라다"
+    },
+    {
+     "word": "cut down",
+     "meaning": "베어 쓰러뜨리다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "People are [[cutting down]] forests",
+     "ko": "사람들은 숲을 [[베어내고]] 있다"
+    },
+    {
+     "en": "much [[faster]]",
+     "ko": "훨씬 더 [[빠르게]]"
+    },
+    {
+     "en": "than the rate",
+     "ko": "그 속도보다"
+    },
+    {
+     "en": "at which forests can [[regrow]].",
+     "ko": "그것으로 숲이 [[다시 자랄]] 수 있는"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "숲은 베이는 속도보다 더 빠르게 다시 자라나고 있다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "much faster than the rate at which forests can regrow이니, 재성장 속도보다 벌목이 훨씬 빠르다는 정반대 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘at which’를 따로 떼서 읽으면 안 돼 — [[the rate at which]]는 ‘숲이 다시 자라는 속도’야."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "We need to dramatically reduce our use of wood, not just because the supply is decreasing, and not just because entire species of flora and fauna that live in forests are vanishing, but because the forest performs an important function.",
+   "translation": "우리가 목재 사용을 급격히 줄여야 하는 것은, 단지 공급이 줄고 있어서도, 숲에 사는 동식물의 종 전체가 사라지고 있어서만도 아니라, 숲이 중요한 기능을 하기 때문이다.",
+   "grammar": [
+    {
+     "tag": "상관접속사 not (just) A but B",
+     "note": "'~때문만이 아니라 ~때문이다'로 진짜 이유를 강조",
+     "spans": []
+    },
+    {
+     "tag": "주격 관계대명사 that",
+     "note": "species ... that live in forests",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "dramatically",
+     "meaning": "급격하게"
+    },
+    {
+     "word": "vanish",
+     "meaning": "사라지다"
+    },
+    {
+     "word": "flora and fauna",
+     "meaning": "동식물군"
+    },
+    {
+     "word": "not just A but B",
+     "meaning": "A뿐 아니라 (진짜로는) B 때문"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "We need to dramatically [[reduce]]",
+     "ko": "우리는 급격하게 [[줄여야]] 한다"
+    },
+    {
+     "en": "our use of wood,",
+     "ko": "목재 사용을,"
+    },
+    {
+     "en": "not just because the supply is [[decreasing]],",
+     "ko": "공급이 [[감소하기]] 때문만이 아니라,"
+    },
+    {
+     "en": "and not just because",
+     "ko": "그리고 ~때문만이 아니라"
+    },
+    {
+     "en": "[[entire species of flora and fauna]]",
+     "ko": "[[동식물군 전체 종이]]"
+    },
+    {
+     "en": "that live in forests",
+     "ko": "숲에 서식하는"
+    },
+    {
+     "en": "are [[vanishing]],",
+     "ko": "[[사라지고]] 있기,"
+    },
+    {
+     "en": "but because the forest [[performs]]",
+     "ko": "하지만 숲이 [[수행하기]] 때문이다"
+    },
+    {
+     "en": "an important function.",
+     "ko": "중요한 기능을."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "목재 사용을 줄여야 하는 유일한 이유는 목재 공급이 줄기 때문이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "not just because ~ but because the forest performs an important function이니, 공급 감소만이 아니라 숲의 기능이 진짜 이유야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘not just’를 단순 부정으로 읽으면 안 돼 — [[not just A but B]]는 ‘A뿐 아니라 B도’(B에 방점)야."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "Forests control global warming by absorbing carbon from the atmosphere and reducing greenhouse gases.",
+   "translation": "숲은 대기로부터 탄소를 흡수하고 온실가스를 줄임으로써 지구온난화를 억제한다.",
+   "grammar": [
+    {
+     "tag": "by -ing",
+     "note": "'~함으로써'라는 수단",
+     "spans": []
+    },
+    {
+     "tag": "동명사 병렬",
+     "note": "absorbing ~ and reducing ~",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "absorb",
+     "meaning": "흡수하다"
+    },
+    {
+     "word": "atmosphere",
+     "meaning": "대기"
+    },
+    {
+     "word": "greenhouse gas",
+     "meaning": "온실가스"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Forests [[control]] global warming",
+     "ko": "숲은 지구온난화를 [[억제한다]]"
+    },
+    {
+     "en": "by [[absorbing]] carbon",
+     "ko": "탄소를 [[흡수함]]으로써"
+    },
+    {
+     "en": "from the atmosphere",
+     "ko": "대기로부터"
+    },
+    {
+     "en": "and [[reducing]] greenhouse gases.",
+     "ko": "그리고 온실가스를 [[줄임]]으로써"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "숲은 대기에 탄소를 내뿜어 지구온난화를 더 심화시킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "absorbing carbon과 reducing greenhouse gases이니, 탄소를 흡수하고 온실가스를 줄여 온난화를 억제한다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "They also provide oxygen for us to breathe.",
+   "translation": "그것들은 또한 우리가 숨 쉴 수 있는 산소를 공급한다.",
+   "grammar": [
+    {
+     "tag": "for + 목적격 + to부정사",
+     "note": "for us to breathe: 부정사의 의미상 주어 us",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "oxygen",
+     "meaning": "산소"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "They also [[provide]]",
+     "ko": "그것들은 또한 [[공급한다]]"
+    },
+    {
+     "en": "[[oxygen]]",
+     "ko": "[[산소]]를"
+    },
+    {
+     "en": "for us to [[breathe]].",
+     "ko": "우리가 [[숨 쉴]] 수 있도록"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "여기서 They는 온실 가스(greenhouse gases)를 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "They는 앞 문장의 숲(forests)을 가리켜 — 숲이 우리가 숨 쉴 산소를 공급한다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘for us to breathe’를 ‘~하기 위해’로만 읽으면 안 돼 — [[for us to breathe]]는 oxygen을 꾸며 ‘우리가 숨 쉴 산소’야."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "There are too many trivial and shortsighted uses of wood.",
+   "translation": "목재의 사소하고 근시안적인 쓰임새가 너무나 많다.",
+   "grammar": [
+    {
+     "tag": "There are 구문",
+     "note": "'~가 있다/많다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "trivial",
+     "meaning": "사소한"
+    },
+    {
+     "word": "shortsighted",
+     "meaning": "근시안적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "There are too [[many]]",
+     "ko": "너무 [[많이]] 있다"
+    },
+    {
+     "en": "[[trivial]] and [[shortsighted]] uses",
+     "ko": "[[사소하고]] [[근시안적인]] 쓰임새가"
+    },
+    {
+     "en": "of wood.",
+     "ko": "목재의"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "필자는 목재의 다양한 쓰임새를 긍정적으로 평가하고 있다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "trivial and shortsighted uses이라 했으니, 사소하고 근시안적인 남용이 많다고 비판하는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "When a hurricane advances on a city, people board up their windows with plywood.",
+   "translation": "허리케인이 도시로 다가오면 사람들은 합판으로 창문을 막는다.",
+   "grammar": [
+    {
+     "tag": "접속사 When",
+     "note": "'~할 때'의 시간 부사절",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "advance",
+     "meaning": "다가오다"
+    },
+    {
+     "word": "board up",
+     "meaning": "(판자로) 막다"
+    },
+    {
+     "word": "plywood",
+     "meaning": "합판"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When a hurricane [[advances]]",
+     "ko": "허리케인이 [[다가올]] 때"
+    },
+    {
+     "en": "on a city,",
+     "ko": "도시로,"
+    },
+    {
+     "en": "people [[board up]] their windows",
+     "ko": "사람들은 창문을 [[판자로 막는다]]"
+    },
+    {
+     "en": "with [[plywood]].",
+     "ko": "[[합판]]으로"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "허리케인이 다가오면 사람들은 창문을 활짝 열어 둔다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "board up their windows with plywood이니, 합판으로 창문을 막아 대비한다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘board up’을 ‘판자 위에’로 읽으면 안 돼 — [[board up]]은 ‘판자로 막다/덮다’야."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "After the storm has passed, they discard the plywood.",
+   "translation": "폭풍이 지나가고 나면 그들은 그 합판을 버린다.",
+   "grammar": [
+    {
+     "tag": "현재완료 has passed",
+     "note": "폭풍이 지나간 완료 시점",
+     "spans": []
+    },
+    {
+     "tag": "접속사 After",
+     "note": "'~한 후에'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "discard",
+     "meaning": "버리다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "After the storm has [[passed]],",
+     "ko": "폭풍이 [[지나간]] 후,"
+    },
+    {
+     "en": "they [[discard]] the [[plywood]].",
+     "ko": "그들은 그 [[합판]]을 [[버린다]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "여기서 they는 폭풍(the storm)을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "they는 앞의 사람들(people)을 가리켜 — 폭풍이 지난 뒤 사람들이 합판을 버린다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "It's ironic to think that for purposes such as these, forests are cut down that otherwise would aid in controlling such storms.",
+   "translation": "그러한 목적을 위해 숲이 베어지는데, 베지 않았더라면 오히려 그런 폭풍을 억제하는 데 도움이 되었을 숲이라는 점에서 이는 반어적이다.",
+   "grammar": [
+    {
+     "tag": "가정법 otherwise (그렇지 않다면 ~할 텐데)",
+     "note": "otherwise would aid: 베지 않았다면 도움이 됐을 것",
+     "spans": []
+    },
+    {
+     "tag": "가주어 It",
+     "note": "It's ironic to think ~",
+     "spans": []
+    },
+    {
+     "tag": "주격 관계대명사 that",
+     "note": "forests ... that otherwise would aid",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "ironic",
+     "meaning": "반어적인"
+    },
+    {
+     "word": "aid",
+     "meaning": "돕다"
+    },
+    {
+     "word": "otherwise",
+     "meaning": "그렇지 않다면"
+    },
+    {
+     "word": "such as",
+     "meaning": "~와 같은"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "It's [[ironic]] to think that",
+     "ko": "생각하면 [[반어적]]이다"
+    },
+    {
+     "en": "for [[purposes]] such as these,",
+     "ko": "이러한 [[목적]]을 위해,"
+    },
+    {
+     "en": "forests are [[cut down]]",
+     "ko": "숲이 [[베어지는데]],"
+    },
+    {
+     "en": "that otherwise would [[aid]]",
+     "ko": "그렇지 않다면 [[도움이 될]]"
+    },
+    {
+     "en": "[[in controlling such storms.]]",
+     "ko": "[[그러한 폭풍을 통제하는 데]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "숲을 베어 폭풍을 막는 것은 매우 효율적이고 합리적인 방법이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "It's ironic ~ otherwise would aid in controlling such storms이니, 숲 자체가 폭풍을 억제하는데 그 숲을 베어 대비하는 게 반어적이라는 함축이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    },
+    {
+     "statement": "otherwise는 '게다가'라는 뜻으로, 숲이 폭풍을 더 키운다는 말이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "otherwise는 가정법으로 '숲을 베지 않았다면'의 뜻 — 숲이 그대로였다면 폭풍 통제에 도움이 됐을 것이라는 함축이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘otherwise’를 ‘다른 방식으로’로 읽으면 안 돼 — [[otherwise]]는 ‘그렇지 않다면(안 베었다면)’(가정법)이야.",
+    "‘that otherwise would aid’의 선행사를 purposes로 읽으면 안 돼 — [[that]]은 (are cut down으로 떨어진) forests야."
+   ]
+  }
+ ]
+}

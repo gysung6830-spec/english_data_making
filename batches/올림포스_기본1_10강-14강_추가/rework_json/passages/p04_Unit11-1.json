@@ -1,0 +1,703 @@
+{
+ "item_no": "Unit11-1",
+ "theme": "예측 실패 시 시점을 바꿔 오류를 회피하는 비관론자들의 전략",
+ "overview": {
+  "theme_ko": "예측 실패 시 시점을 바꿔 오류를 회피하고 안전을 도모하는 비관론자들의 전략",
+  "key_grammar": {
+   "point": "명사절을 이끄는 접속사 that ('~라는 것/~라고')",
+   "source_sentence": "The reason pessimists often sound smart is that they can avoid being 'wrong' by moving the goalposts.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "접속사 that은 '주어+동사'를 묶어 '[[~라는 것/~라고]]'라는 하나의 명사 덩어리(명사절)로 만들어."
+    },
+    {
+     "chip": "자리",
+     "text": "이 that절은 문장에서 [[주어·목적어·보어]] 자리에 와 — 1문장은 is 뒤 '보어', 2·4문장은 동사(predict/said) 뒤 '목적어'."
+    },
+    {
+     "chip": "관계사와 구별",
+     "text": "that 뒤 문장이 '완전'하면 명사절(접속사), 뒤에 [[빠진 자리]]가 있으면 관계사야."
+    },
+    {
+     "chip": "생략",
+     "text": "목적어 자리 that은 자주 [[생략]]돼 — say (that) ~."
+    },
+    {
+     "chip": "해석 요령",
+     "text": "that 뒤를 '~라는 것/~라고'로 묶어 앞 동사·be에 붙여 읽어."
+    }
+   ],
+   "example": "",
+   "example_analysis": "is that they can avoid ~ : that절이 is의 '보어' 역할로, 'they가 ~할 수 있다는 것'이라는 명사 덩어리.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "다음 밑줄 친 부분 중 어법상 틀린 것은?",
+     "answer": "⑤",
+     "sentence": "When a doomer [[①|predicts]] [[②|that]] the world [[③|will end]] in five years, and it [[④|doesn't]], they just [[⑤|shifts]] the date.",
+     "fix": "shifts → shift : 주어 they가 복수이므로 동사는 원형 shift를 쓴다.",
+     "options": [
+      "① predicts",
+      "② that",
+      "③ will end",
+      "④ doesn't",
+      "⑤ shifts"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "네모 안에서 어법상 옳은 것을 고르시오.",
+     "answer": "sound / that / moving",
+     "sentence": "The reason pessimists often [[sound/sounds]] smart is [[that/what]] they can avoid being 'wrong' by [[moving/to move]] the goalposts.",
+     "fix": "주어 pessimists가 복수라 sound, is의 보어가 되는 완전한 절을 이끄는 명사절 접속사 that, 전치사 by 뒤에는 동명사 moving.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장을 고르시오.",
+     "answer": "Ehrlich will keep push this deadline back.",
+     "sentence": "",
+     "fix": "push → pushing : keep는 목적어로 동명사(-ing)를 취한다.",
+     "options": [
+      "The American biologist Paul R. Ehrlich — author of the 1968 book The Population Bomb — has been doing this for decades.",
+      "When a doomer predicts that the world will end in five years, and it doesn't, they just shift the date.",
+      "Of course, that was terribly wrong.",
+      "Ehrlich will keep push this deadline back.",
+      "A pessimistic stance is a safe one."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "비관론자들이 흔히 똑똑하게 들리는 이유는 골대를 옮김으로써 '틀림'을 피할 수 있기 때문이다.",
+     "answer": "The reason pessimists often sound smart is that they can avoid being 'wrong' by moving the goalposts.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "The",
+      "reason",
+      "pessimists",
+      "often",
+      "sound",
+      "smart",
+      "is",
+      "that",
+      "they",
+      "can",
+      "avoid",
+      "being",
+      "wrong",
+      "by",
+      "moving",
+      "the",
+      "goalposts"
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "운명론자가 세상이 5년 안에 끝날 것이라고 예측했는데 그렇게 되지 않으면, 그들은 그저 날짜를 바꿔 버린다.",
+     "answer": "When a doomer predicts that the world will end in five years, and it doesn't, they just shift the date.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "When",
+      "a",
+      "doomer",
+      "predicts",
+      "that",
+      "the",
+      "world",
+      "will",
+      "end",
+      "in",
+      "five",
+      "years",
+      "and",
+      "it",
+      "doesn't",
+      "they",
+      "just",
+      "shift",
+      "the",
+      "date"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "비관론자가 예측이 틀릴 때마다 시점을 바꿔 '틀림'을 피하는 전략과 그 안전성에 관한 글이야.",
+  "stance": "부정적·비판적",
+  "stance_reason": "avoid being wrong·moving the goalposts·keep pushing back 같은 표현으로, 비관론자의 회피 전략을 비판적으로 꼬집어.",
+  "structure": "주장→근거·예시",
+  "structure_reason": "'비관론자는 골대를 옮겨 틀림을 피한다'는 주장(1~2문장) 뒤, Ehrlich의 반복된 예측 실패(3~8문장)로 뒷받침해.",
+  "restatement_chains": [
+   {
+    "label": "예측 회피",
+    "expressions": [
+     "avoid being 'wrong' by moving the goalposts",
+     "they just shift the date",
+     "keep pushing this deadline back"
+    ],
+    "variation": "'골대를 옮겨 틀림을 피함' → '날짜를 바꿈' → '시한을 계속 미룸'으로 같은 전략이 반복돼."
+   },
+   {
+    "label": "비관 = 안전",
+    "expressions": [
+     "sound smart",
+     "a safe one"
+    ],
+    "variation": "'똑똑하게 들림' → '안전한 자세'로 비관 태도의 이점이 정리돼."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "주장",
+    "sentence_range": "1~2",
+    "summary": "비관론자가 똑똑해 보이는 이유는 골대를 옮겨 '틀림'을 피하기 때문이다.",
+    "easy_example": "예측이 빗나가면 날짜만 슬쩍 바꾸는 것."
+   },
+   {
+    "stage": "사례도입",
+    "sentence_range": "3",
+    "summary": "생물학자 Ehrlich는 수십 년째 이렇게 해 왔다.",
+    "easy_example": "유명 학자도 예측을 계속 미뤄 온 것."
+   },
+   {
+    "stage": "사례1",
+    "sentence_range": "4~5",
+    "summary": "1970년 '15년 내 종말'을 예측했지만 완전히 틀렸다.",
+    "easy_example": "종말 예언이 빗나간 것."
+   },
+   {
+    "stage": "사례2",
+    "sentence_range": "6~7",
+    "summary": "'2000년에 영국이 사라진다'고 또 예측했지만 또 틀렸다.",
+    "easy_example": "다시 한 예측도 빗나간 것."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "8~9",
+    "summary": "Ehrlich는 시한을 계속 미룰 것이고, 비관적 자세는 안전한 자세다.",
+    "easy_example": "틀려도 미루면 되니 비관은 손해 볼 게 없다는 마무리."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "The reason pessimists often sound smart is that they can avoid being 'wrong' by moving the goalposts.",
+   "translation": "비관론자들이 흔히 똑똑하게 들리는 이유는 골대를 옮김으로써 '틀림'을 피할 수 있기 때문이다.",
+   "grammar": [
+    {
+     "tag": "명사절 that",
+     "note": "is의 보어",
+     "spans": []
+    },
+    {
+     "tag": "by -ing",
+     "note": "'~함으로써'",
+     "spans": []
+    },
+    {
+     "tag": "관계부사 생략",
+     "note": "The reason [why] pessimists sound smart — reason 뒤 why 생략",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "pessimist",
+     "meaning": "비관론자"
+    },
+    {
+     "word": "move the goalposts",
+     "meaning": "(유리하게) 기준·목표를 슬쩍 바꾸다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The reason",
+     "ko": "그 이유는"
+    },
+    {
+     "en": "[[pessimists]] often sound smart",
+     "ko": "[[비관론자]]가 흔히 똑똑하게 들리는"
+    },
+    {
+     "en": "is [[that]]",
+     "ko": "[[~라는 것]]이다"
+    },
+    {
+     "en": "they can [[avoid]]",
+     "ko": "그들이 [[피할]] 수 있다는"
+    },
+    {
+     "en": "being 'wrong'",
+     "ko": "'틀린 것'이 되는 것을"
+    },
+    {
+     "en": "[[by moving the goalposts]].",
+     "ko": "[[골대를 옮김으로써]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "비관론자가 똑똑한 이유는 예측이 늘 맞기 때문이라는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "예측이 맞아서가 아니라 '골대를 옮겨 틀림을 피하기(avoid being wrong)' 때문이라는, 글의 주제야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘moving the goalposts’를 ‘골대를 옮기다’로 읽으면 안 돼 — [[move the goalposts]]는 ‘기준·목표를 슬쩍 바꾸다’야."
+   ]
+  },
+  {
+   "id": 2,
+   "english": "When a doomer predicts that the world will end in five years, and it doesn't, they just shift the date.",
+   "translation": "운명론자가 세상이 5년 안에 끝날 것이라고 예측했는데 그렇게 되지 않으면, 그들은 그저 날짜를 바꿔 버린다.",
+   "grammar": [
+    {
+     "tag": "명사절 that",
+     "note": "predicts의 목적어",
+     "spans": []
+    },
+    {
+     "tag": "대동사 doesn't",
+     "note": "end 대신",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "doomer",
+     "meaning": "운명론자, 비관론자"
+    },
+    {
+     "word": "shift",
+     "meaning": "바꾸다, 옮기다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When a [[doomer]] predicts",
+     "ko": "[[운명론자]]가 예측할 때"
+    },
+    {
+     "en": "that the world will [[end]]",
+     "ko": "세상이 [[끝날]] 것이라고"
+    },
+    {
+     "en": "in five years,",
+     "ko": "5년 안에,"
+    },
+    {
+     "en": "and [[it doesn't]],",
+     "ko": "그리고 [[그렇게 되지 않으면]],"
+    },
+    {
+     "en": "they just [[shift the date]].",
+     "ko": "그들은 그저 [[날짜를 바꾼다]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "예측이 빗나가면 비관론자는 예측을 철회한다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "예측을 철회하는 게 아니라 '날짜를 바꾼다(shift the date)'는 거야 — 틀림을 인정하지 않고 시점만 미루는 전략.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘it doesn't’를 그냥 ‘아니다’로 읽으면 안 돼 — [[it doesn't]]는 대동사라 ‘세상이 끝나지 않으면’이라는 뜻이야."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "The American biologist Paul R. Ehrlich — author of the 1968 book The Population Bomb — has been doing this for decades.",
+   "translation": "1968년 책 『인구 폭탄』의 저자인 미국 생물학자 폴 R. 에얼릭은 수십 년째 이런 일을 해 오고 있다.",
+   "grammar": [
+    {
+     "tag": "대시 동격",
+     "note": "저서 정보 부연",
+     "spans": []
+    },
+    {
+     "tag": "현재완료진행",
+     "note": "계속 해 오고 있다",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "biologist",
+     "meaning": "생물학자"
+    },
+    {
+     "word": "decade",
+     "meaning": "10년"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The American [[biologist]]",
+     "ko": "미국 [[생물학자]]"
+    },
+    {
+     "en": "Paul R. Ehrlich",
+     "ko": "폴 R. 에얼릭은"
+    },
+    {
+     "en": "— [[author]] of",
+     "ko": "— [[저자]]인데,"
+    },
+    {
+     "en": "the 1968 book",
+     "ko": "1968년 책"
+    },
+    {
+     "en": "The Population Bomb —",
+     "ko": "『인구 폭탄』의 —"
+    },
+    {
+     "en": "[[has been doing this]]",
+     "ko": "[[이 일을 해 오고 있다]]"
+    },
+    {
+     "en": "for [[decades]].",
+     "ko": "[[수십 년]]째."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(지칭) 'this'는 인구 문제를 해결하는 일을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "지칭 오인이야. this는 앞의 '예측이 틀리면 날짜를 미루는 회피 전략'을 가리켜 — 문제 해결이 아니야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "In 1970 he said that 'sometime in the next 15 years, the end will come. And by \"the end\" I mean an utter breakdown of the capacity of the planet to support humanity.'",
+   "translation": "1970년에 그는 '앞으로 15년 안 언젠가 종말이 올 것이다. 그리고 '종말'이란 인류를 지탱하는 지구 능력의 완전한 붕괴를 의미한다'고 말했다.",
+   "grammar": [
+    {
+     "tag": "명사절 that",
+     "note": "said의 목적어",
+     "spans": []
+    },
+    {
+     "tag": "동격 the end",
+     "note": "'종말'의 뜻 부연",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "utter",
+     "meaning": "완전한"
+    },
+    {
+     "word": "breakdown",
+     "meaning": "붕괴"
+    },
+    {
+     "word": "capacity",
+     "meaning": "수용력, 능력"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "In 1970 he said",
+     "ko": "1970년 그는 말했다"
+    },
+    {
+     "en": "[[that 'sometime in the next 15 years]],",
+     "ko": "[['앞으로 15년 안 언젠가]],"
+    },
+    {
+     "en": "the end will come.",
+     "ko": "종말이 올 것이라고."
+    },
+    {
+     "en": "And by \"the [[end]]\"",
+     "ko": "그리고 '[[종말]]'이란 말로"
+    },
+    {
+     "en": "I mean",
+     "ko": "내가 뜻하는 것은"
+    },
+    {
+     "en": "an utter [[breakdown]]",
+     "ko": "완전한 [[붕괴]]"
+    },
+    {
+     "en": "of the [[capacity]] of the planet",
+     "ko": "지구 [[수용력]]의"
+    },
+    {
+     "en": "to [[support]] humanity.'",
+     "ko": "인류를 [[지탱할]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "에얼릭은 종말의 시점을 애매하게 두지 않고 정확히 못박았다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'sometime in the next 15 years(15년 안 언젠가)'처럼 시점을 넓게 잡았어 — 나중에 미루기 쉽게.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "Of course, that was terribly wrong.",
+   "translation": "물론 그것은 완전히 틀렸다.",
+   "grammar": [
+    {
+     "tag": "지시 that",
+     "note": "앞 예측을 받음",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "terribly",
+     "meaning": "몹시"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Of course,",
+     "ko": "물론,"
+    },
+    {
+     "en": "that was terribly [[wrong]].",
+     "ko": "그것은 몹시 [[틀렸다]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "에얼릭의 1970년 예측은 대체로 들어맞았다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'terribly wrong(완전히 틀렸다)'이라고 못박아 — 예측이 빗나갔음을 보여줘.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "He had another go: he said that 'England will not exist in the year 2000.'",
+   "translation": "그는 또 한 번 시도해, '영국은 2000년에 존재하지 않을 것'이라고 말했다.",
+   "grammar": [
+    {
+     "tag": "명사절 that",
+     "note": "said의 목적어",
+     "spans": []
+    },
+    {
+     "tag": "have another go",
+     "note": "'다시 한 번 하다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "have another go",
+     "meaning": "또 한 번 시도하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "He [[had another go]]:",
+     "ko": "그는 [[또 한 번 시도했다]]:"
+    },
+    {
+     "en": "he said",
+     "ko": "그는 말했다"
+    },
+    {
+     "en": "that 'England will not [[exist]]",
+     "ko": "'영국이 [[존재하지]] 않을 것'이라고"
+    },
+    {
+     "en": "in the year 2000.'",
+     "ko": "2000년에."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "에얼릭은 한 번 틀린 뒤 예측을 그만두었다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'had another go(또 한 번 했다)'며 다시 예측했어 — 틀려도 계속 새 예측을 내놓는다는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘had another go’를 ‘또 갔다’로 읽으면 안 돼 — [[have another go]]는 ‘또 한 번 시도하다’야."
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Wrong again.",
+   "translation": "이번에도 틀렸다.",
+   "grammar": [
+    {
+     "tag": "생략",
+     "note": "(He was) wrong again",
+     "spans": []
+    }
+   ],
+   "vocab": [],
+   "chunks": [
+    {
+     "en": "[[Wrong again]].",
+     "ko": "[[또 틀렸다]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이번 예측은 맞았다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'Wrong again(또 틀렸다)' — 두 번째 예측도 빗나갔다는 짧은 확인이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "Ehrlich will keep pushing this deadline back.",
+   "translation": "에얼릭은 이 시한을 계속 뒤로 미룰 것이다.",
+   "grammar": [
+    {
+     "tag": "will keep -ing",
+     "note": "'계속 ~할 것이다'",
+     "spans": []
+    },
+    {
+     "tag": "push back",
+     "note": "미루다",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "deadline",
+     "meaning": "기한, 시한"
+    },
+    {
+     "word": "push back",
+     "meaning": "뒤로 미루다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Ehrlich will [[keep]]",
+     "ko": "에얼릭은 [[계속]]"
+    },
+    {
+     "en": "[[pushing this deadline back]].",
+     "ko": "[[이 시한을 뒤로 미룰 것이다]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "에얼릭은 이제 예측을 멈출 것이라는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'keep pushing this deadline back(계속 미룬다)'는 거야 — 틀릴 때마다 시한만 미루는 전략을 이어간다는 뜻.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘push back’을 ‘뒤로 밀치다’로만 읽으면 안 돼 — [[push this deadline back]]은 ‘마감을 뒤로 미루다’야."
+   ]
+  },
+  {
+   "id": 9,
+   "english": "A pessimistic stance is a safe one.",
+   "translation": "비관적 자세는 안전한 자세이다.",
+   "grammar": [
+    {
+     "tag": "보어 명사",
+     "note": "a safe one = a safe stance",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "stance",
+     "meaning": "입장, 자세"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "A pessimistic [[stance]]",
+     "ko": "비관적 [[자세]]는"
+    },
+    {
+     "en": "is a [[safe]] one.",
+     "ko": "[[안전한]] 것이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(함축) 비관적 자세가 안전하다는 것은 필자가 비관론을 권장한다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "함축을 놓쳤어. '안전하다(safe)'는 '틀려도 책임을 피할 수 있어 손해가 없다'는 반어적 비판 — 비관론을 칭찬하는 게 아니야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  }
+ ]
+}

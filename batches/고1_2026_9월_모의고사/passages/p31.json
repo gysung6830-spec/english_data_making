@@ -74,28 +74,31 @@
     },
     {
      "kind": "영작",
-     "question": "이 소문은 어떤 바이러스보다도 더 빠르게 사람들 사이로 퍼진다. (비교급 + than)",
-     "answer": "This rumor spreads faster than any virus among people.",
+     "question": "그 무엇도 엉뚱한 사람들이 그것을 좋아하는 것보다 더 빨리 나를 정 떨어지게 하지는 못하는데, 내 말은 모든 면에서 나와 거의 똑같은, 그러면서 나를 돋보이게 하지도 않는 사람들을 뜻한다. (비교급 + than)",
+     "answer": "Nothing turns me off something quicker than the wrong people liking it, by which I mean people almost identical to me in every respect, in a way that doesn't flatter me.",
      "words": [
-      "This rumor",
-      "spreads",
-      "faster than",
-      "any virus",
-      "among people"
+      "Nothing",
+      "turns me off something",
+      "quicker than",
+      "the wrong people liking it,",
+      "by which I mean",
+      "people almost identical to me",
+      "in every respect,",
+      "in a way that",
+      "doesn't flatter me."
      ],
      "options": [],
-     "from_passage": false
+     "from_passage": true
     },
     {
      "kind": "영작",
-     "question": "우리는 가족과 친구에게서, 학교와 직장에서 먹는 법을 배운다.",
-     "answer": "We learn to eat from our families and friends, at school and in work.",
+     "question": "그 무엇도 엉뚱한 사람들이 그것을 좋아하는 것보다 더 빨리 내 흥미를 잃게 하지 못한다. 내 말은 모든 면에서 나와 거의 똑같은, 나를 돋보이게 해 주지 않는 방식의 사람들이라는 뜻이다. (비교급 + than)",
+     "answer": "Nothing turns me off something quicker than the wrong people liking it, by which I mean people almost identical to me in every respect, in a way that doesn't flatter me.",
      "words": [
-      "We",
-      "learn",
-      "to eat",
-      "from our families and friends",
-      "at school and in work"
+      "Nothing turns me off something",
+      "quicker than the wrong people liking it,",
+      "by which I mean people almost identical to me in every respect,",
+      "in a way that doesn't flatter me."
      ],
      "options": [],
      "from_passage": true
@@ -149,6 +152,7 @@
   {
    "id": 1,
    "english": "Our tastes are social.",
+   "translation": "우리의 입맛은 사회적이다.",
    "grammar": [
     {
      "tag": "주어-동사 수일치",
@@ -169,16 +173,16 @@
     {
      "word": "tastes",
      "meaning": "취향, 입맛"
-    },
-    {
-     "word": "social",
-     "meaning": "사회적인"
     }
    ],
    "chunks": [
     {
-     "en": "Our tastes are [[social]].",
-     "ko": "우리의 입맛은 [[사회적]]이다."
+     "en": "Our [[tastes]] are",
+     "ko": "우리의 [[입맛]]은 ~이다"
+    },
+    {
+     "en": "[[social]].",
+     "ko": "[[사회적]]이다."
     }
    ],
    "misreads": [
@@ -192,6 +196,7 @@
   {
    "id": 2,
    "english": "Even when you first drank milk, there was the milk, yes, but there was also the person behind the milk who will have presumably either made or messed up your relationship with food for the couple of decades after that.",
+   "translation": "당신이 우유를 처음 마셨을 때조차, 우유가 있었던 것은 맞지만, 그 우유 뒤에는 그 이후 수십 년 동안 당신과 음식의 관계를 아마 만들어 주었거나 아니면 망쳐 놓았을 사람도 있었다.",
    "grammar": [
     {
      "tag": "시간 부사절(when)",
@@ -246,24 +251,40 @@
    ],
    "chunks": [
     {
-     "en": "Even when you first drank [[milk]],",
-     "ko": "당신이 처음 [[우유]]를 마셨을 때조차,"
+     "en": "Even when you first drank",
+     "ko": "당신이 처음 마셨을 때조차"
     },
     {
-     "en": "there was the [[milk]], yes,",
-     "ko": "[[우유]]가 있었다, 그렇다,"
+     "en": "[[milk]],",
+     "ko": "[[우유]]를,"
     },
     {
-     "en": "but there was also the [[person]] behind the milk",
-     "ko": "하지만 우유 뒤에 있는 [[사람]]도 있었다"
+     "en": "there was the milk, yes,",
+     "ko": "우유가 있었다, 그렇다,"
+    },
+    {
+     "en": "but there was also",
+     "ko": "하지만 또한 있었다"
+    },
+    {
+     "en": "the [[person]] behind the milk",
+     "ko": "우유 뒤의 그 [[사람]]이"
     },
     {
      "en": "[[who will have presumably either made or messed up]]",
      "ko": "[[아마 만들었거나 망쳐 놓았을]]"
     },
     {
-     "en": "your [[relationship]] with food for the couple of decades after that.",
-     "ko": "그 이후 수십 년 동안 당신의 음식과의 [[관계]]를."
+     "en": "your [[relationship]] with food",
+     "ko": "당신의 음식과의 [[관계]]를"
+    },
+    {
+     "en": "for the couple of decades",
+     "ko": "수십 년 동안"
+    },
+    {
+     "en": "after that.",
+     "ko": "그 이후."
     }
    ],
    "misreads": [
@@ -282,6 +303,7 @@
   {
    "id": 3,
    "english": "We learn to eat from our families and friends, at school and in work.",
+   "translation": "우리는 가족과 친구에게서, 그리고 학교와 직장에서 먹는 법을 배운다.",
    "grammar": [
     {
      "tag": "to부정사(명사적·목적어)",
@@ -333,6 +355,7 @@
   {
    "id": 4,
    "english": "A village develops a particular recipe for an apple pie―one that nobody outside the village likes, but who cares?",
+   "translation": "한 마을이 사과 파이를 위한 특정한 조리법을 발전시키는데, 그것은 마을 밖 누구도 좋아하지 않지만, 누가 신경 쓰겠는가?",
    "grammar": [
     {
      "tag": "부정대명사 one",
@@ -372,12 +395,20 @@
    ],
    "chunks": [
     {
-     "en": "A village develops a particular [[recipe]]",
-     "ko": "한 마을은 특정한 [[조리법]]을 발전시킨다"
+     "en": "A village develops",
+     "ko": "한 마을은 발전시킨다"
     },
     {
-     "en": "for an apple pie―one that [[nobody]] outside the village likes,",
-     "ko": "사과 파이에 대한―그 마을 밖의 [[아무도]] 좋아하지 않는 것,"
+     "en": "a particular [[recipe]]",
+     "ko": "특정한 [[조리법]]을"
+    },
+    {
+     "en": "for an apple pie―one",
+     "ko": "사과 파이를 위한―바로 그것은"
+    },
+    {
+     "en": "that [[nobody]] outside the village likes,",
+     "ko": "그 마을 밖 [[아무도]] 좋아하지 않는,"
     },
     {
      "en": "but who [[cares]]?",
@@ -398,6 +429,7 @@
   {
    "id": 5,
    "english": "We want these things not just because of what they are, but who we are.",
+   "translation": "우리가 이런 것들을 원하는 것은 단지 그것들이 무엇인지 때문이 아니라 우리가 누구인지 때문이다.",
    "grammar": [
     {
      "tag": "상관접속사(not just A but B)",
@@ -449,8 +481,8 @@
      "ko": "단지 그것들이 [[무엇인지]] 때문이 아니라,"
     },
     {
-     "en": "but who we are.",
-     "ko": "우리가 누구인지 때문이다."
+     "en": "but [[who we are]].",
+     "ko": "[[우리가 누구인지]] 때문이다."
     }
    ],
    "misreads": [
@@ -467,6 +499,7 @@
   {
    "id": 6,
    "english": "Tastes spread like this, person to person, like viruses, almost irrespective of the qualities of the food involved.",
+   "translation": "입맛은 이처럼, 사람에서 사람으로, 바이러스처럼, 관련된 음식의 특성과는 거의 상관없이 퍼진다.",
    "grammar": [
     {
      "tag": "주어-동사 수일치",
@@ -517,12 +550,20 @@
      "ko": "입맛은 이처럼 [[퍼진다]],"
     },
     {
-     "en": "person to person, like [[viruses]],",
-     "ko": "사람에서 사람으로, [[바이러스]]처럼,"
+     "en": "person to person,",
+     "ko": "사람에서 사람으로,"
     },
     {
-     "en": "[[almost irrespective of the qualities of the food involved]].",
-     "ko": "[[관련된 음식의 특성과는 거의 상관없이]]."
+     "en": "like [[viruses]],",
+     "ko": "[[바이러스]]처럼,"
+    },
+    {
+     "en": "almost irrespective of",
+     "ko": "거의 ~와 상관없이"
+    },
+    {
+     "en": "[[the qualities of the food involved]].",
+     "ko": "[[관련된 음식의 특성과는]]."
     }
    ],
    "misreads": [
@@ -539,6 +580,7 @@
   {
    "id": 7,
    "english": "We observe other people in their food lives, often judgmentally.",
+   "translation": "우리는 다른 사람들의 음식 생활을 종종 재단하듯이 관찰한다.",
    "grammar": [
     {
      "tag": "소유격 대명사 their",
@@ -593,6 +635,7 @@
   {
    "id": 8,
    "english": "Nothing turns me off something quicker than the wrong people liking it, by which I mean people almost identical to me in every respect, in a way that doesn't flatter me.",
+   "translation": "그 무엇도 엉뚱한 사람들이 그것을 좋아하는 것보다 더 빨리 내 흥미를 잃게 하지는 못하는데, 내 말은 모든 면에서 나와 거의 똑같은, 그러면서 나를 돋보이게 해 주지도 않는 사람들을 뜻한다.",
    "grammar": [
     {
      "tag": "부정 주어(Nothing)",
@@ -651,20 +694,36 @@
    ],
    "chunks": [
     {
-     "en": "Nothing turns me off something [[quicker]]",
-     "ko": "그 무엇도 나를 더 [[빨리]] 흥미 잃게 하지 못한다"
+     "en": "Nothing turns me off something",
+     "ko": "그 무엇도 나를 어떤 것에 정 떨어지게 하지 못한다"
     },
     {
-     "en": "than the wrong people [[liking]] it,",
+     "en": "[[quicker]] than",
+     "ko": "더 [[빨리]] ~보다"
+    },
+    {
+     "en": "the wrong people [[liking]] it,",
      "ko": "엉뚱한 사람들이 그것을 [[좋아하는]] 것보다,"
     },
     {
-     "en": "[[by which I mean people almost identical to me in every respect]],",
-     "ko": "[[내 말은 모든 면에서 나와 거의 똑같은 사람들이라는 뜻인데]],"
+     "en": "by which I mean",
+     "ko": "내 말인즉슨"
     },
     {
-     "en": "in a way that doesn't [[flatter]] me.",
-     "ko": "나를 [[돋보이게]] 하지 않는 방식으로."
+     "en": "people almost [[identical]] to me",
+     "ko": "나와 거의 [[똑같은]] 사람들"
+    },
+    {
+     "en": "in every respect,",
+     "ko": "모든 면에서,"
+    },
+    {
+     "en": "in a way that",
+     "ko": "~하는 방식으로"
+    },
+    {
+     "en": "doesn't [[flatter]] me.",
+     "ko": "나를 [[돋보이게]] 하지 않는."
     }
    ],
    "misreads": [
@@ -684,6 +743,7 @@
   {
    "id": 9,
    "english": "I avoided the viral chopped salad moment of 2024 by the skin of my teeth.",
+   "translation": "나는 2024년의 유행하던 다진 샐러드 열풍을 가까스로 피했다.",
    "grammar": [
     {
      "tag": "과거분사(형용사적·chopped)",
@@ -706,8 +766,8 @@
      "meaning": "입소문으로 급속히 퍼진, 유행하는"
     },
     {
-     "word": "avoid",
-     "meaning": "피하다"
+     "word": "chopped",
+     "meaning": "잘게 썬, 다진"
     },
     {
      "word": "by the skin of my teeth",
@@ -716,8 +776,16 @@
    ],
    "chunks": [
     {
-     "en": "I [[avoided]] the viral chopped salad moment of 2024",
-     "ko": "나는 2024년의 유행하던 다진 샐러드 열풍을 [[피했다]]"
+     "en": "I [[avoided]]",
+     "ko": "나는 [[피했다]]"
+    },
+    {
+     "en": "the [[viral]] chopped salad moment",
+     "ko": "그 [[유행하던]] 다진 샐러드 열풍을"
+    },
+    {
+     "en": "of 2024",
+     "ko": "2024년의"
     },
     {
      "en": "[[by the skin of my teeth]].",

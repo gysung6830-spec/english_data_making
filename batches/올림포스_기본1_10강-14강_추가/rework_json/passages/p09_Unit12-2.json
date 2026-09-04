@@ -1,0 +1,621 @@
+{
+ "item_no": "Unit12-2",
+ "theme": "가격 상승으로 소비를 억제하고 자원 보존을 유도하는, 예측이 간과한 시장 기능의 힘",
+ "overview": {
+  "theme_ko": "자원 고갈 예측이 간과하는, 가격 상승으로 소비를 억제하고 보존을 유도하는 시장 기능의 힘",
+  "key_grammar": {
+   "point": "선행사를 포함하는 관계대명사 what ('~하는 것')",
+   "source_sentence": "But what they fail to see is that if markets are allowed to do their usual duty, that is, prices rise as depletion occurs, resources will last much longer.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "관계대명사 what은 선행사(the thing)를 [[자체에 포함]]해 '~하는 것'이라는 명사 덩어리를 만들어."
+    },
+    {
+     "chip": "복원",
+     "text": "what they fail to see = the thing [[which]] they fail to see(그들이 보지 못하는 것) — what = the thing which."
+    },
+    {
+     "chip": "자리",
+     "text": "what절은 문장에서 [[주어·목적어·보어]] 자리에 와 — 여기선 is의 '주어'(문두)."
+    },
+    {
+     "chip": "구별",
+     "text": "what 뒤 문장이 [[불완전]](see의 목적어가 빔)하면 관계대명사 what, 완전하면 접속사 that·관계부사야."
+    },
+    {
+     "chip": "해석 요령",
+     "text": "'~하는 것은/것을'로 what절을 하나의 명사로 묶어 읽어."
+    }
+   ],
+   "example": "",
+   "example_analysis": "what they fail to see is that … = '그들이 보지 못하는 것은 …라는 점이다' — what절이 is의 주어.",
+   "drills": [
+    {
+     "kind": "어법판단(밑줄형)",
+     "question": "다음 문장에서 밑줄 친 부분 중 어법상 틀린 것은?",
+     "answer": "⑤",
+     "sentence": "Some studies, [[1|like]] the Limits to Growth, further [[2|assume]] [[3|that]] demand [[4|will increase]] each year, thus [[5|deplete]] resources even faster.",
+     "fix": "⑤ deplete → depleting: 앞 절(demand will increase)에 이어지는 부대상황(결과)의 분사구문이므로 현재분사 depleting이 맞아.",
+     "options": [
+      "① like",
+      "② assume",
+      "③ that",
+      "④ will increase",
+      "⑤ deplete"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "어법판단(네모형)",
+     "question": "네모 안에서 어법상 옳은 것을 고르시오.",
+     "answer": "what / are allowed / much",
+     "sentence": "But [[what/that]] they fail to see is that if markets [[are allowed/are allowing]] to do their usual duty, that is, prices rise as depletion occurs, resources will last [[much/very]] longer.",
+     "fix": "what: 뒤에 see의 목적어가 빠진 불완전한 절이라 선행사를 포함하는 관계대명사 what. are allowed: markets가 '허용되는' 대상이므로 수동태 be allowed to. much: 비교급 longer를 강조하는 부사는 much이며 very는 비교급을 못 꾸며.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "어법판단(오류찾기)",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "answer": "Forecasters which predict resource depletion often ignore or underestimate the power of markets.",
+     "sentence": "",
+     "fix": "which → who: 선행사 Forecasters가 사람이므로 주격 관계대명사 who를 써야 해.",
+     "options": [
+      "Forecasters which predict resource depletion often ignore or underestimate the power of markets.",
+      "For example, some forecasters use a current reserve index to estimate how long a resource would last.",
+      "The current reserve index divides the current known reserve of a resource by the amount currently used each period.",
+      "So, if we know of 445 billion barrels of oil, and we are currently using 15 billion barrels per year, the index indicates that we will run out of oil in about 30 years.",
+      "But what they fail to see is that if markets are allowed to do their usual duty, that is, prices rise as depletion occurs, resources will last much longer."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그러나 그들이 보지 못하는 것은, 시장이 통상적인 기능을 하도록, 즉 고갈이 진행됨에 따라 가격이 오르도록 허용된다면, 자원이 훨씬 더 오래갈 것이라는 점이다.",
+     "answer": "But what they fail to see is that if markets are allowed to do their usual duty, that is, prices rise as depletion occurs, resources will last much longer.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "But",
+      "what",
+      "they",
+      "fail",
+      "to",
+      "see",
+      "is",
+      "that",
+      "if",
+      "markets",
+      "are",
+      "allowed",
+      "to",
+      "do",
+      "their",
+      "usual",
+      "duty",
+      "that is",
+      "prices",
+      "rise",
+      "as",
+      "depletion",
+      "occurs",
+      "resources",
+      "will",
+      "last",
+      "much",
+      "longer"
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "(제시어 활용) 그러나 그들이 보지 못하는 것은, 시장이 통상적인 기능을 하도록 허용되어 고갈이 진행됨에 따라 가격이 오르면 자원이 훨씬 더 오래가리라는 점이다.",
+     "answer": "But what they fail to see is that if markets are allowed to do their usual duty, that is, prices rise as depletion occurs, resources will last much longer.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "But",
+      "what they fail to see",
+      "is that",
+      "if markets",
+      "are allowed to do",
+      "their usual duty",
+      "that is",
+      "prices rise",
+      "as depletion occurs",
+      "resources will last",
+      "much longer"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "자원 고갈을 예측하는 사람들이 간과하는 것, 즉 고갈 시 가격 상승으로 소비를 억제하고 자원을 오래 지속시키는 시장의 힘에 관한 글이야.",
+  "stance": "부정적·비판적",
+  "stance_reason": "예측자들이 시장의 힘을 'ignore or underestimate(무시·과소평가)'하고 'fail to see(보지 못한다)'라며 그들의 한계를 비판적으로 지적해.",
+  "structure": "통념→반박(반전)",
+  "structure_reason": "예측자들이 매장량 지수로 자원 고갈을 계산하는 통념(1~5문장) 뒤, 'But 시장의 가격 기능을 간과했다'는 반박(6문장)으로 뒤집어.",
+  "restatement_chains": [
+   {
+    "label": "고갈 예측 방식",
+    "expressions": [
+     "predict resource depletion",
+     "a current reserve index",
+     "run out of oil in about 30 years"
+    ],
+    "variation": "'자원 고갈 예측' → '현재 매장량 지수' → '30년 내 석유 고갈'로 구체화돼."
+   },
+   {
+    "label": "시장의 힘",
+    "expressions": [
+     "the power of markets",
+     "markets are allowed to do their usual duty",
+     "resources will last much longer"
+    ],
+    "variation": "'시장의 힘' → '시장이 통상 기능을 함' → '자원이 훨씬 오래감'으로 이어져."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "주장",
+    "sentence_range": "1",
+    "summary": "자원 고갈을 예측하는 사람들은 흔히 시장의 힘을 무시하거나 과소평가한다.",
+    "easy_example": "'자원이 곧 바닥난다'며 시장의 조절력을 빼먹는 것."
+   },
+   {
+    "stage": "통념-방법",
+    "sentence_range": "2~3",
+    "summary": "그들은 현재 매장량 지수(매장량 ÷ 기간별 사용량)로 자원이 얼마나 갈지 추정한다.",
+    "easy_example": "남은 양을 지금 쓰는 속도로 나눠 '몇 년 남았다'를 계산."
+   },
+   {
+    "stage": "통념-예",
+    "sentence_range": "4~5",
+    "summary": "석유 4,450억 배럴을 연 150억 배럴씩 쓰면 약 30년 뒤 고갈이라 보고, 일부 연구는 수요 증가로 더 빨리 고갈된다고 본다.",
+    "easy_example": "단순 계산으로 '30년, 혹은 더 빨리 끝'이라 단정하는 것."
+   },
+   {
+    "stage": "반박",
+    "sentence_range": "6",
+    "summary": "그러나 그들이 못 보는 것은, 시장이 제 기능을 해 고갈이 진행되며 가격이 오르면 자원이 훨씬 더 오래간다는 점이다.",
+    "easy_example": "비싸지면 덜 쓰고 대체하니 자원이 더 오래 버티는 것."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Forecasters who predict resource depletion often ignore or underestimate the power of markets.",
+   "translation": "자원 고갈을 예측하는 예측자들은 흔히 시장의 힘을 무시하거나 과소평가한다.",
+   "grammar": [
+    {
+     "tag": "관계사 who",
+     "note": "Forecasters 수식",
+     "spans": []
+    },
+    {
+     "tag": "공통 목적어(병렬)",
+     "note": "[ignore] or [underestimate] the power of markets — 목적어 공통",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "forecaster",
+     "meaning": "예측자, 예보자"
+    },
+    {
+     "word": "depletion",
+     "meaning": "고갈"
+    },
+    {
+     "word": "underestimate",
+     "meaning": "과소평가하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Forecasters who predict",
+     "ko": "예측자들은 예측하는"
+    },
+    {
+     "en": "resource [[depletion]]",
+     "ko": "자원 [[고갈]]을"
+    },
+    {
+     "en": "often ignore or [[underestimate]]",
+     "ko": "흔히 무시하거나 [[과소평가한다]]"
+    },
+    {
+     "en": "the power of [[markets]].",
+     "ko": "[[시장]]의 힘을."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 시장의 힘을 예측자들이 정확히 계산한다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'ignore or underestimate(무시하거나 과소평가한다)'라는 비판을 던지는 주제·주장 문장이야 — 뒤에서 그 근거를 펼쳐.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "For example, some forecasters use a current reserve index to estimate how long a resource would last.",
+   "translation": "예를 들어, 일부 예측자들은 어떤 자원이 얼마나 오래갈지 추정하기 위해 현재 매장량 지수를 사용한다.",
+   "grammar": [
+    {
+     "tag": "부정사 to estimate",
+     "note": "'추정하기 위해'",
+     "spans": []
+    },
+    {
+     "tag": "의문사 how long",
+     "note": "'얼마나 오래'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "reserve",
+     "meaning": "매장량, 비축량"
+    },
+    {
+     "word": "index",
+     "meaning": "지수"
+    },
+    {
+     "word": "estimate",
+     "meaning": "추정하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "For example, some forecasters use",
+     "ko": "예를 들어, 일부 예측자는 사용한다"
+    },
+    {
+     "en": "a current [[reserve index]]",
+     "ko": "현재의 [[매장량 지수]]를"
+    },
+    {
+     "en": "to [[estimate]] how long",
+     "ko": "얼마나 오래일지 [[추정하기]] 위해"
+    },
+    {
+     "en": "a resource would [[last]].",
+     "ko": "자원이 [[지속될]]지."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "일부 예측자들은 아무 근거 없이 자원 고갈 시점을 말한다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'a current reserve index(현재 매장량 지수)'라는 도구로 추정한다고 했어 — 나름의 계산 방법을 소개하는 예시야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "The current reserve index divides the current known reserve of a resource by the amount currently used each period.",
+   "translation": "현재 매장량 지수는 자원의 현재 알려진 매장량을 각 기간에 현재 사용되는 양으로 나눈다.",
+   "grammar": [
+    {
+     "tag": "divide A by B",
+     "note": "A를 B로 나누다",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "known reserve",
+     "meaning": "알려진 매장량"
+    },
+    {
+     "word": "divide A by B",
+     "meaning": "A를 B로 나누다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The current reserve index [[divides]]",
+     "ko": "현재 매장량 지수는 [[나눈다]]"
+    },
+    {
+     "en": "the current known [[reserve]]",
+     "ko": "현재 알려진 [[매장량]]을"
+    },
+    {
+     "en": "of a resource",
+     "ko": "자원의"
+    },
+    {
+     "en": "by the [[amount]]",
+     "ko": "[[양]]으로"
+    },
+    {
+     "en": "currently used each [[period]].",
+     "ko": "각 [[기간]]에 현재 사용되는."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "매장량 지수는 사용량에 매장량을 곱해 구한다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'divides … by …(매장량을 사용량으로 나눈다)'가 계산법이야 — 곱하는 게 아니라 나눠서 '몇 기간 갈지'를 구해.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘divide A by B’의 A와 B를 뒤바꿔 읽으면 안 돼 — [[divide A by B]]는 ‘A를 B로 나눈다’야."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "So, if we know of 445 billion barrels of oil, and we are currently using 15 billion barrels per year, the index indicates that we will run out of oil in about 30 years.",
+   "translation": "따라서 우리가 4,450억 배럴의 석유가 있음을 알고 있고 현재 연간 150억 배럴을 사용하고 있다면, 그 지수는 우리가 약 30년 후에 석유를 다 써 버릴 것임을 나타낸다.",
+   "grammar": [
+    {
+     "tag": "조건 if",
+     "note": "'~라면'",
+     "spans": []
+    },
+    {
+     "tag": "명사절 that",
+     "note": "indicates의 목적어",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "barrel",
+     "meaning": "배럴"
+    },
+    {
+     "word": "run out of",
+     "meaning": "~을 다 써 버리다"
+    },
+    {
+     "word": "indicate",
+     "meaning": "나타내다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "So, if we know of",
+     "ko": "따라서, 우리가 알고 있고"
+    },
+    {
+     "en": "445 billion barrels of [[oil]],",
+     "ko": "4,450억 배럴의 [[석유]]를,"
+    },
+    {
+     "en": "and we are currently using",
+     "ko": "그리고 현재 우리가 쓰고 있다면"
+    },
+    {
+     "en": "15 billion [[barrels]] per year,",
+     "ko": "연 150억 [[배럴]]을,"
+    },
+    {
+     "en": "the index [[indicates]]",
+     "ko": "그 지수는 [[나타낸다]]"
+    },
+    {
+     "en": "[[that we will run out of oil]]",
+     "ko": "[[우리가 석유를 다 써 버릴 것임을]]"
+    },
+    {
+     "en": "in about 30 [[years]].",
+     "ko": "약 30[[년]] 뒤에."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(지칭) 'we'는 석유를 채굴하는 특정 기업을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "지칭 오인이야. 여기서 we는 지수를 계산하는 '우리(일반)'를 가리켜 — 특정 기업이 아니라 예시 계산의 주체야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "Some studies, like the Limits to Growth, further assume that demand will increase each year, thus depleting resources even faster.",
+   "translation": "'성장의 한계'와 같은 일부 연구는 한 걸음 더 나아가 수요가 매년 증가하여 자원을 훨씬 더 빨리 고갈시킬 것이라고 가정한다.",
+   "grammar": [
+    {
+     "tag": "명사절 that",
+     "note": "assume의 목적어",
+     "spans": []
+    },
+    {
+     "tag": "비교급 강조 even",
+     "note": "'훨씬 더'",
+     "spans": []
+    },
+    {
+     "tag": "분사구문",
+     "note": "thus depleting resources even faster — 결과의 분사구문",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "assume",
+     "meaning": "가정하다"
+    },
+    {
+     "word": "demand",
+     "meaning": "수요"
+    },
+    {
+     "word": "deplete",
+     "meaning": "고갈시키다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Some studies, like",
+     "ko": "일부 연구는, ~같은"
+    },
+    {
+     "en": "the Limits to Growth,",
+     "ko": "'성장의 한계'"
+    },
+    {
+     "en": "further [[assume]]",
+     "ko": "더 나아가 [[가정한다]]"
+    },
+    {
+     "en": "[[that demand will increase]]",
+     "ko": "[[수요가 증가할 것이라고]]"
+    },
+    {
+     "en": "each year,",
+     "ko": "매년,"
+    },
+    {
+     "en": "thus depleting resources even [[faster]].",
+     "ko": "그리하여 자원을 훨씬 더 [[빨리]] 고갈시키면서."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(함축) 이 문장은 자원이 실제로 30년보다 더 빨리 고갈된다는 필자의 결론이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "함축을 놓쳤어. 이건 '일부 연구(예측자들)의 가정'을 소개한 것일 뿐, 필자의 결론이 아니야 — 바로 다음 문장에서 이 비관적 계산을 반박해.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 6,
+   "english": "But what they fail to see is that if markets are allowed to do their usual duty, that is, prices rise as depletion occurs, resources will last much longer.",
+   "translation": "그러나 그들이 보지 못하는 것은, 시장이 통상적인 기능을 하도록, 즉 고갈이 진행됨에 따라 가격이 오르도록 허용된다면, 자원이 훨씬 더 오래갈 것이라는 점이다.",
+   "grammar": [
+    {
+     "tag": "관계사 what",
+     "note": "'~하는 것'(주어절)",
+     "spans": []
+    },
+    {
+     "tag": "조건 if",
+     "note": "'~라면'",
+     "spans": []
+    },
+    {
+     "tag": "that is",
+     "note": "'즉'(부연)",
+     "spans": []
+    },
+    {
+     "tag": "수동태 be allowed",
+     "note": "if markets are allowed to ~ — be+p.p.",
+     "spans": []
+    },
+    {
+     "tag": "비교급 much longer",
+     "note": "resources will last much longer — much 강조 비교급",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "fail to",
+     "meaning": "~하지 못하다"
+    },
+    {
+     "word": "usual duty",
+     "meaning": "통상적인 기능·의무"
+    },
+    {
+     "word": "that is",
+     "meaning": "즉, 다시 말해"
+    },
+    {
+     "word": "last",
+     "meaning": "지속되다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "But [[what they fail to see]]",
+     "ko": "그러나 [[그들이 보지 못하는 것은]]"
+    },
+    {
+     "en": "is that if markets",
+     "ko": "~라는 것이다 만약 시장이"
+    },
+    {
+     "en": "are allowed to do",
+     "ko": "하도록 허용되면"
+    },
+    {
+     "en": "their [[usual duty]],",
+     "ko": "그들의 [[통상적 기능]]을,"
+    },
+    {
+     "en": "that is, [[prices]] rise",
+     "ko": "즉, [[가격]]이 오르면"
+    },
+    {
+     "en": "as depletion [[occurs]],",
+     "ko": "고갈이 [[일어남]]에 따라,"
+    },
+    {
+     "en": "resources will [[last much longer]].",
+     "ko": "자원이 [[훨씬 더 오래갈]] 것이다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 예측자들의 계산이 대체로 옳다고 인정하는 문장이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'But what they fail to see(그러나 그들이 못 보는 것)'로 시작해 예측을 뒤집는 반박·핵심 문장이야 — 가격이 오르면 소비가 줄어 자원이 더 오래간다는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘what’을 ‘무엇을’ 의문사로 읽으면 안 돼 — [[what they fail to see]]는 ‘그들이 못 보는 것’이야.",
+    "‘that is’를 ‘~인 that’으로 읽으면 안 돼 — [[that is]]는 ‘즉, 다시 말해’라는 삽입어야."
+   ]
+  }
+ ]
+}

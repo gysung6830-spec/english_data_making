@@ -56,11 +56,11 @@
        },
        {
          "kind":"영작",
-         "question":"그 실험의 놀라운 결론은 습관이 우리의 미래를 형성한다는 것이다. (is that 보어절)",
-         "answer":"The surprising conclusion of the experiment is that habits shape our future.",
-         "words":["The surprising conclusion","of the experiment","is","that","habits shape our future"],
+         "question":"스토아 철학에서 가장 매혹적이고 힘을 실어 주는 통찰 중 하나는 우리의 감정이 무작위가 아니라 우리의 판단에서 비롯된다는 것이다. (is that 보어절)",
+         "answer":"One of the most fascinating and empowering insights in Stoic philosophy is that our emotions are not random; they arise from our judgments.",
+         "words":["One of the most","fascinating and empowering insights","in Stoic philosophy","is","that","our emotions are not random","they arise from our judgments"],
          "options":[],
-         "from_passage":false
+         "from_passage":true
        },
        {
          "kind":"영작",
@@ -99,10 +99,15 @@
        {"word":"insight","meaning":"통찰(력)"},
        {"word":"arise from","meaning":"~에서 비롯되다, 생기다"}
      ],
+     "translation": "스토아 철학에서 가장 매혹적이고 힘을 실어 주는 통찰 중 하나는 우리의 감정이 무작위가 아니라 우리의 판단에서 비롯된다는 것이다.",
      "chunks": [
-       {"en":"One of the most fascinating and empowering [[insights]] in Stoic philosophy is","ko":"스토아 철학에서 가장 매혹적이고 힘을 주는 [[통찰]] 중 하나는"},
-       {"en":"that our emotions are not [[random]];","ko":"우리의 감정이 [[무작위]]가 아니라는 것;"},
-       {"en":"they arise from our [[judgments]].","ko":"그것들은 우리의 [[판단]]에서 비롯된다는 것이다."}
+       {"en":"One of","ko":"~ 중 하나는"},
+       {"en":"the most [[fascinating]] and empowering","ko":"가장 [[매혹적]]이고 힘을 주는"},
+       {"en":"[[insights]] in Stoic philosophy","ko":"스토아 철학의 [[통찰]]"},
+       {"en":"is that our emotions","ko":"~는, 우리의 감정이"},
+       {"en":"are not [[random]];","ko":"[[무작위]]가 아니라는 것이다;"},
+       {"en":"they arise","ko":"그것들은 생겨난다"},
+       {"en":"from our [[judgments]].","ko":"우리의 [[판단]]에서."}
      ],
      "misreads": [
        {"statement":"글쓴이는 우리의 감정이 우연이 아니라 우리의 판단에서 생긴다고 본다.","verdict":"O"}
@@ -120,13 +125,14 @@
      ],
      "vocab": [
        {"word":"surprising","meaning":"놀라운"},
-       {"word":"overwhelmed","meaning":"압도된, 벅찬"},
-       {"word":"anger","meaning":"분노"}
+       {"word":"overwhelmed","meaning":"압도된, 벅찬"}
      ],
+     "translation": "이것은 놀랍게 들릴 수 있는데, 특히 당신이 분노나 두려움, 슬픔에 압도되어 본 적이 있다면 더욱 그렇다.",
      "chunks": [
        {"en":"This may sound [[surprising]],","ko":"이것은 [[놀랍게]] 들릴지 모른다,"},
-       {"en":"especially if you've ever felt [[overwhelmed]]","ko":"특히 당신이 [[압도된]] 적이 있다면"},
-       {"en":"by [[anger]], fear, or sadness.","ko":"[[분노]], 두려움, 또는 슬픔에."}
+       {"en":"especially if you've","ko":"특히 당신이 ~라면"},
+       {"en":"ever felt [[overwhelmed]]","ko":"[[압도된]] 적이 있다면"},
+       {"en":"by [[anger]], fear, or sadness.","ko":"[[분노]], 두려움, 슬픔에."}
      ],
      "misreads": [
        {"statement":"글쓴이는 분노·두려움·슬픔 같은 감정이 질병을 유발한다고 경고한다.","verdict":"X","trap_type":"무관정보","anchor":"if you've ever felt overwhelmed by anger, fear, or sadness","why":"감정에 압도된 경험을 언급했을 뿐 질병을 유발한다는 내용은 없다."}
@@ -142,12 +148,13 @@
      ],
      "vocab": [
        {"word":"the Stoics","meaning":"스토아 철학자들"},
-       {"word":"automatic","meaning":"자동적인, 반사적인"},
-       {"word":"reaction","meaning":"반응"}
+       {"word":"automatic","meaning":"자동적인, 반사적인"}
      ],
+     "translation": "그러나 스토아 철학자들은 감정이 단지 자동적인 반응인 것만은 아니라고 가르쳤다.",
      "chunks": [
        {"en":"But the Stoics [[taught]]","ko":"하지만 스토아 철학자들은 [[가르쳤다]]"},
-       {"en":"that emotions aren't just [[automatic]] reactions.","ko":"감정이 단지 [[자동적인]] 반응인 것만은 아니라고."}
+       {"en":"that [[emotions]] aren't just","ko":"[[감정]]이 단지 ~인 것만은 아니라고"},
+       {"en":"[[automatic]] reactions.","ko":"[[자동적인]] 반응인 것을."}
      ],
      "misreads": [
        {"statement":"글쓴이는 결국 감정이 통제할 수 없는 자동 반응이라고 결론짓는다.","verdict":"X","trap_type":"필자관점","anchor":"emotions aren't just automatic reactions","why":"스토아는 감정이 '단지' 자동 반응인 것만은 아니라고 보므로 관점이 반대이다."}
@@ -165,9 +172,11 @@
        {"word":"shape","meaning":"형성하다, 빚다"},
        {"word":"interpret","meaning":"해석하다"}
      ],
+     "translation": "그것들(감정)은 우리가 사건을 해석하는 방식에 의해 형성된다.",
      "chunks": [
        {"en":"They're [[shaped]] by","ko":"그것들은 [[형성된다]]"},
-       {"en":"how we [[interpret]] events.","ko":"우리가 사건을 [[해석하는]] 방식에 의해."}
+       {"en":"how we [[interpret]]","ko":"우리가 [[해석하는]] 방식으로"},
+       {"en":"events.","ko":"사건을."}
      ],
      "misreads": [
        {"statement":"감정이 우리가 사건을 해석하는 방식을 만들어 낸다.","verdict":"X","trap_type":"주체대상","anchor":"They're shaped by how we interpret events","why":"감정이 해석을 만드는 것이 아니라, 해석하는 방식이 감정을 형성한다."}
@@ -188,10 +197,13 @@
        {"word":"trigger","meaning":"촉발하다, 유발하다"},
        {"word":"emotional response","meaning":"감정 반응"}
      ],
+     "translation": "그것이 작동하는 방식은 이렇다. 무언가 일어나면 당신은 그것이 무엇을 의미하는지 해석하고, 그 해석이 감정 반응을 촉발한다.",
      "chunks": [
        {"en":"Here's how it [[works]]:","ko":"그것이 [[작동하는]] 방식은 이렇다:"},
-       {"en":"something happens, you [[interpret]] what it means,","ko":"무언가 일어나고, 당신은 그것이 무엇을 의미하는지 [[해석하며]],"},
-       {"en":"[[and that interpretation triggers an emotional response]].","ko":"[[그리고 그 해석이 감정 반응을 촉발한다]]."}
+       {"en":"something happens,","ko":"무언가 일어나고,"},
+       {"en":"you [[interpret]] what it means,","ko":"당신은 그것이 의미하는 바를 [[해석하고]],"},
+       {"en":"and that [[interpretation]]","ko":"그리고 그 [[해석]]이"},
+       {"en":"[[triggers an emotional response]].","ko":"[[감정 반응을 촉발한다]]."}
      ],
      "misreads": [
        {"statement":"여기서 'that interpretation'은 앞서 일어난 사건(something happens) 자체를 가리킨다.","verdict":"X","trap_type":"지칭","anchor":"that interpretation triggers an emotional response","why":"'that interpretation'은 사건이 아니라 사건의 의미를 해석한 '그 해석'을 가리킨다."}
@@ -213,10 +225,14 @@
        {"word":"unfair","meaning":"부당한, 불공평한"},
        {"word":"threatening","meaning":"위협적인"}
      ],
+     "translation": "예를 들어, 누군가 당신을 비판하면 당신은 화가 날 수 있는데, 이는 그 말 자체 때문이 아니라 그 말을 부당하거나 위협적이라고 인식하기 때문이다.",
      "chunks": [
-       {"en":"For example: If someone [[criticizes]] you,","ko":"예를 들어: 누군가 당신을 [[비판하면]],"},
-       {"en":"you may feel [[angry]] not due to the words themselves","ko":"당신은 그 말 자체 때문이 아니라 [[화]]가 날 수 있다"},
-       {"en":"[[but because you perceive the comment as unfair or threatening]].","ko":"[[그 말을 부당하거나 위협적이라고 여기기 때문이다]]."}
+       {"en":"For example:","ko":"예를 들어:"},
+       {"en":"If someone [[criticizes]] you,","ko":"누군가 당신을 [[비판하면]],"},
+       {"en":"you may feel [[angry]]","ko":"당신은 [[화]]가 날 수 있다"},
+       {"en":"not due to the words themselves","ko":"그 말 자체 때문이 아니라"},
+       {"en":"but because you [[perceive]] the comment","ko":"그 말을 [[인식하기]] 때문에"},
+       {"en":"as [[unfair]] or threatening.","ko":"[[부당]]하거나 위협적이라고."}
      ],
      "misreads": [
        {"statement":"누군가 비판하면 화가 나는 것은 그 말(words) 자체가 무례하기 때문이다.","verdict":"X","trap_type":"인과조건","anchor":"not due to the words themselves but because you perceive the comment as unfair or threatening","why":"화의 원인은 말 자체가 아니라 그 말을 부당·위협적이라고 '해석'하기 때문이다.","killer":true}
@@ -238,10 +254,13 @@
        {"word":"define","meaning":"규정하다, 정의하다"},
        {"word":"worth","meaning":"가치"}
      ],
+     "translation": "만약 당신이 직장을 잃으면 망연자실할 수 있는데, 이는 단지 실직 그 자체 때문이 아니라 그것이 당신의 가치나 미래를 규정한다고 믿기 때문이다.",
      "chunks": [
        {"en":"If you [[lose]] a job,","ko":"만약 당신이 직장을 [[잃으면]],"},
-       {"en":"you might feel [[devastated]] not simply because of the job loss","ko":"당신은 단지 실직 때문만이 아니라 [[엄청난 충격]]을 느낄 수 있다"},
-       {"en":"[[but because you believe it defines your worth or future]].","ko":"[[그것이 당신의 가치나 미래를 규정한다고 믿기 때문이다]]."}
+       {"en":"you might feel [[devastated]]","ko":"당신은 [[엄청난 충격]]을 느낄 수 있다"},
+       {"en":"not simply because of the job loss","ko":"단지 실직 때문만이 아니라"},
+       {"en":"but because you [[believe]]","ko":"당신이 [[믿기]] 때문이다"},
+       {"en":"it [[defines]] your worth or future.","ko":"그것이 당신의 가치나 미래를 [[규정한다]]고."}
      ],
      "misreads": [
        {"statement":"실직했을 때 좌절하는 것은 맞지만, 그 이유는 단지 직장을 잃었다는 사실 자체 때문이다.","verdict":"△","trap_type":"인과조건","anchor":"not simply because of the job loss but because you believe it defines your worth or future","why":"좌절하는 진짜 이유는 실직 자체가 아니라 그것이 자기 가치를 규정한다는 믿음 때문이다."}
@@ -259,9 +278,11 @@
        {"word":"judgment","meaning":"판단"},
        {"word":"emotion","meaning":"감정"}
      ],
+     "translation": "판단을 바꾸라, 그러면 감정도 바뀐다.",
      "chunks": [
-       {"en":"Change the [[judgment]],","ko":"[[판단]]을 바꿔라, 그러면"},
-       {"en":"and you change the [[emotion]].","ko":"당신은 [[감정]]을 바꾼다."}
+       {"en":"Change the [[judgment]],","ko":"[[판단]]을 바꿔라,"},
+       {"en":"and you change","ko":"그러면 당신은 바꾼다"},
+       {"en":"the [[emotion]].","ko":"[[감정]]을."}
      ],
      "misreads": [
        {"statement":"글쓴이는 판단을 바꾸면 감정도 바뀐다고 말한다.","verdict":"O"}
@@ -281,10 +302,14 @@
        {"word":"examine","meaning":"살펴보다, 검토하다"},
        {"word":"serve","meaning":"도움이 되다, 이바지하다"}
      ],
+     "translation": "이것은 당신이 느끼는 감정을 억누르라는 뜻이 아니라, 당신이 스스로에게 들려주는 이야기를 살펴보고 당신에게 더 도움이 되는 이야기를 고른다는 뜻이다.",
      "chunks": [
-       {"en":"This doesn't mean [[suppressing]] how you feel;","ko":"이것은 당신이 느끼는 방식을 [[억누르는]] 것을 뜻하지 않는다;"},
-       {"en":"it means [[examining]] the story you tell yourself","ko":"그것은 당신이 스스로에게 들려주는 이야기를 [[살펴보는]] 것을 뜻한다"},
-       {"en":"[[and choosing one that serves you better]].","ko":"[[그리고 당신에게 더 도움이 되는 것을 고르는 것을]]."}
+       {"en":"This doesn't mean [[suppressing]]","ko":"이것은 [[억누르는]] 것을 뜻하지 않는다"},
+       {"en":"how you feel;","ko":"당신이 느끼는 방식을;"},
+       {"en":"it means [[examining]] the story","ko":"그것은 그 이야기를 [[살펴보는]] 것을 뜻한다"},
+       {"en":"you tell yourself","ko":"당신이 스스로에게 들려주는"},
+       {"en":"and [[choosing]] one","ko":"그리고 하나를 [[고르는]] 것을"},
+       {"en":"that [[serves]] you better.","ko":"당신에게 더 [[도움이 되는]]."}
      ],
      "misreads": [
        {"statement":"글쓴이는 감정을 잘 다루려면 느끼는 감정을 억눌러야 한다고 조언한다.","verdict":"X","trap_type":"구조수식","anchor":"This doesn't mean suppressing how you feel","why":"'doesn't mean suppressing'는 억누르는 것이 아니라는 부정 구조로, 감정을 억누르라는 뜻이 아니다."}

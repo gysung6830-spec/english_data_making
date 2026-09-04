@@ -56,12 +56,12 @@
     },
     {
      "kind": "영작",
-     "question": "짧은 문단은 긴 문단만큼 중요하다. (원급 비교를 사용하여)",
+     "question": "아주 작은 문단들의 연속은 너무 긴 문단만큼이나 짜증스럽다. (원급 비교 as ~ as, 고정표현 묶음 이용)",
      "sentence": "",
-     "answer": "A short paragraph is as important as a long one.",
+     "answer": "A succession of tiny paragraphs is as annoying as a paragraph that's too long.",
      "options": [],
-     "words": ["A", "short", "paragraph", "is", "as", "important", "as", "a", "long", "one."],
-     "from_passage": false
+     "words": ["A succession of", "tiny paragraphs", "is", "as annoying as", "a paragraph", "that's", "too long."],
+     "from_passage": true
     },
     {
      "kind": "영작",
@@ -90,16 +90,17 @@
   {
    "id": 1,
    "english": "Keep your paragraphs short.",
+   "translation": "문단을 짧게 유지하라.",
    "grammar": [
     {"tag": "명령문", "note": "동사원형으로 시작하는 명령문", "spans": ["Keep"]},
     {"tag": "5형식 목적격보어(형용사)", "note": "keep+O+형용사: O를 ~한 상태로 유지하다", "spans": ["short"]}
    ],
    "vocab": [
-    {"word": "paragraph", "meaning": "문단, 단락"},
     {"word": "keep ~ short", "meaning": "~을 짧게 유지하다"}
    ],
    "chunks": [
-    {"en": "Keep your paragraphs short.", "ko": "당신의 [[문단]]을 짧게 유지하라."}
+    {"en": "Keep your paragraphs", "ko": "유지하라 당신의 [[문단]]을"},
+    {"en": "short.", "ko": "[[짧게]]."}
    ],
    "misreads": [
     {"statement": "글쓴이는 문단을 짧게 유지하라고 권한다.", "verdict": "O", "trap_type": "필자관점"}
@@ -109,6 +110,7 @@
   {
    "id": 2,
    "english": "Writing is visual―it catches the eye before it has a chance to catch the brain.",
+   "translation": "글쓰기는 시각적이다―그것은 뇌를 사로잡을 기회를 얻기 전에 먼저 눈길을 끈다.",
    "grammar": [
     {"tag": "부사절(시간)", "note": "before절: 뇌를 사로잡기 전에", "spans": ["before"]},
     {"tag": "to부정사 형용사적 용법", "note": "a chance to catch: ~할 기회(명사 수식)", "spans": ["to catch"]}
@@ -118,8 +120,10 @@
     {"word": "catch the eye", "meaning": "눈길을 끌다"}
    ],
    "chunks": [
-    {"en": "Writing is visual―it catches the eye", "ko": "글쓰기는 [[시각적]]이다―그것은 눈길을 끈다"},
-    {"en": "before it has a chance to catch the brain.", "ko": "그것이 [[뇌를 사로잡을]] 기회를 갖기 전에."}
+    {"en": "Writing is visual―it", "ko": "글쓰기는 [[시각적]]이다―그것은"},
+    {"en": "catches the eye", "ko": "[[눈길]]을 끈다"},
+    {"en": "before it has a chance", "ko": "그것이 하나의 [[기회]]를 갖기 전에"},
+    {"en": "[[to catch the brain.]]", "ko": "[[뇌를 사로잡을]]."}
    ],
    "misreads": [
     {"statement": "글은 뇌를 먼저 사로잡은 다음에야 눈길을 끈다.", "verdict": "X", "trap_type": "구조수식", "anchor": "it catches the eye before it has a chance to catch the brain", "why": "글은 뇌를 사로잡기 전에 먼저 눈길을 끈다고 했다"}
@@ -129,6 +133,7 @@
   {
    "id": 3,
    "english": "Short paragraphs put air around what you write and make it look inviting, whereas a long chunk of type can discourage a reader from even starting to read.",
+   "translation": "짧은 문단은 당신이 쓰는 글 주위에 여백을 주어 매력적으로 보이게 하는 반면, 긴 활자 덩어리는 독자가 읽기 시작조차 못하게 단념시킬 수 있다.",
    "grammar": [
     {"tag": "관계대명사 what", "note": "what you write: 당신이 쓰는 것(선행사를 포함)", "spans": ["what"]},
     {"tag": "사역동사 make(5형식)", "note": "make+O+원형부정사: O가 ~하게 만들다", "spans": ["make it look"]},
@@ -143,10 +148,13 @@
     {"word": "whereas", "meaning": "반면에"}
    ],
    "chunks": [
-    {"en": "Short paragraphs put air around what you write", "ko": "짧은 문단은 당신이 [[쓰는 것]] 주위에 여백을 준다"},
-    {"en": "and make it look inviting,", "ko": "그리고 그것을 [[매력적으로 보이게]] 만든다,"},
-    {"en": "whereas a long chunk of type can discourage a reader", "ko": "반면 긴 [[활자 덩어리]]는 독자가 ~하지 못하게 막을 수 있다"},
-    {"en": "from even starting to read.", "ko": "심지어 [[읽기 시작조차]] 못하게."}
+    {"en": "Short paragraphs put air", "ko": "짧은 문단은 [[여백]]을 준다"},
+    {"en": "around [[what you write]]", "ko": "[[당신이 쓰는 것]] 주위에"},
+    {"en": "and make it look inviting,", "ko": "그리고 그것을 [[매력적]]으로 보이게 만든다,"},
+    {"en": "whereas a long chunk", "ko": "반면 긴 [[덩어리]]는"},
+    {"en": "of type", "ko": "활자의"},
+    {"en": "can discourage a reader", "ko": "독자가 ~하지 못하게 막을 수 있다"},
+    {"en": "[[from even starting to read.]]", "ko": "[[읽기 시작조차 하지]]."}
    ],
    "misreads": [
     {"statement": "긴 활자 덩어리가 글을 매력적으로 보이게 하고 독자를 끌어들인다.", "verdict": "X", "trap_type": "주체대상", "anchor": "a long chunk of type can discourage a reader from even starting to read", "why": "긴 활자 덩어리는 오히려 독자가 읽기 시작조차 못하게 막는다"},
@@ -157,6 +165,7 @@
   {
    "id": 4,
    "english": "Newspaper paragraphs should be only two or three sentences long; newspaper type is set in a narrow width, and the inches quickly add up.",
+   "translation": "신문 문단은 오직 두세 문장 길이여야 한다. 신문 활자는 좁은 폭으로 짜이며, 인치가 빠르게 늘어난다.",
    "grammar": [
     {"tag": "조동사", "note": "should be: ~여야 한다(권고)", "spans": ["should be"]},
     {"tag": "수동태", "note": "is set: 배치되다(수동)", "spans": ["is set"]},
@@ -168,9 +177,12 @@
     {"word": "add up", "meaning": "쌓이다, 늘어나다"}
    ],
    "chunks": [
-    {"en": "Newspaper paragraphs should be only two or three sentences long;", "ko": "신문 문단은 [[두세 문장]] 길이여야 한다;"},
-    {"en": "newspaper type is set in a narrow width,", "ko": "신문 활자는 [[좁은 폭]]으로 짜여 있고,"},
-    {"en": "and the inches quickly add up.", "ko": "인치가 빠르게 [[쌓인다]]."}
+    {"en": "Newspaper paragraphs should be", "ko": "신문 문단은 ~여야 한다"},
+    {"en": "only two or three", "ko": "오직 [[두세]]"},
+    {"en": "sentences long;", "ko": "문장 길이로;"},
+    {"en": "newspaper type is set", "ko": "신문 활자는 [[짜여 있고]]"},
+    {"en": "in a narrow width,", "ko": "[[좁은 폭]]으로,"},
+    {"en": "and the inches quickly add up.", "ko": "그리고 인치가 빠르게 [[쌓인다]]."}
    ],
    "misreads": [
     {"statement": "신문 문단이 두세 문장이어야 하는 이유는 인쇄 비용을 아끼기 위해서라고 설명된다.", "verdict": "X", "trap_type": "무관정보", "anchor": "newspaper type is set in a narrow width", "why": "좁은 폭 때문에 인치가 빨리 쌓여서일 뿐 인쇄 비용 언급은 없다"}
@@ -180,6 +192,7 @@
   {
    "id": 5,
    "english": "You may think such frequent paragraphing will damage the development of your point.",
+   "translation": "당신은 그런 잦은 문단 나누기가 당신 요점의 전개를 해칠 것이라고 생각할지도 모른다.",
    "grammar": [
     {"tag": "조동사", "note": "may: ~일지도 모른다(추측)", "spans": ["may"]},
     {"tag": "명사절 접속사 that 생략", "note": "think 뒤 목적어절의 접속사 that이 생략됨", "spans": []},
@@ -191,9 +204,10 @@
     {"word": "development", "meaning": "전개, 발전"}
    ],
    "chunks": [
-    {"en": "You may think", "ko": "당신은 [[생각할]]지도 모른다"},
-    {"en": "such frequent paragraphing will damage", "ko": "그렇게 [[잦은 문단 나누기]]가 손상시킬 것이라고"},
-    {"en": "the development of your point.", "ko": "당신 [[요점의 전개]]를."}
+    {"en": "You may think", "ko": "당신은 [[생각할]]지 모른다"},
+    {"en": "such frequent paragraphing", "ko": "그렇게 [[잦은]] 문단 나누기가"},
+    {"en": "will damage", "ko": "[[손상시킬]] 것이라고"},
+    {"en": "the development of your point.", "ko": "당신 [[요점]]의 전개를."}
    ],
    "misreads": [
     {"statement": "필자는 잦은 문단 나누기가 요점 전개를 해치므로 피해야 한다고 주장한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "the gains far outweigh the hazards", "why": "필자는 이득이 위험보다 훨씬 크다며 잦은 문단 나누기를 옹호한다", "integrative": true}
@@ -203,6 +217,7 @@
   {
    "id": 6,
    "english": "Obviously The New Yorker is obsessed by this fear―a reader can go for miles without relief.",
+   "translation": "분명 The New Yorker는 이런 두려움에 사로잡혀 있어서, 독자는 안도할 틈 없이 몇 마일이나 계속 읽어 나갈 수 있다.",
    "grammar": [
     {"tag": "수동태", "note": "is obsessed by: ~에 사로잡혀 있다", "spans": ["is obsessed by"]},
     {"tag": "조동사", "note": "can go: 갈 수 있다(가능)", "spans": ["can"]}
@@ -213,8 +228,10 @@
     {"word": "go for miles", "meaning": "한참(끝없이) 이어지다"}
    ],
    "chunks": [
-    {"en": "Obviously The New Yorker is obsessed by this fear―a reader", "ko": "분명 The New Yorker는 이 [[두려움]]에 사로잡혀 있고, 독자는"},
-    {"en": "can go for miles without relief.", "ko": "[[안도]] 없이 몇 마일이나 나아갈 수 있다."}
+    {"en": "Obviously The New Yorker is", "ko": "분명 The New Yorker는"},
+    {"en": "obsessed by this fear―a reader", "ko": "이 [[두려움]]에 사로잡혀 있고―독자는"},
+    {"en": "can go for miles", "ko": "몇 [[마일]]이나 나아갈 수 있다"},
+    {"en": "without relief.", "ko": "[[안도]] 없이."}
    ],
    "misreads": [
     {"statement": "여기서 'this fear'는 문단을 너무 짧게 쪼갤까 봐 하는 두려움을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "such frequent paragraphing will damage the development of your point", "why": "this fear는 잦은 문단 나누기가 요점 전개를 해칠까 하는 두려움을 가리킨다", "integrative": true}
@@ -224,6 +241,7 @@
   {
    "id": 7,
    "english": "Don't worry; the gains far outweigh the hazards.",
+   "translation": "걱정하지 마라. 이득이 위험을 훨씬 능가한다.",
    "grammar": [
     {"tag": "명령문(부정)", "note": "Don't+동사원형: ~하지 마라", "spans": ["Don't worry"]},
     {"tag": "비교 강조 부사(far)", "note": "far+outweigh: 훨씬 능가하다(정도 강조)", "spans": ["far"]}
@@ -235,7 +253,8 @@
    ],
    "chunks": [
     {"en": "Don't worry;", "ko": "[[걱정하지]] 마라;"},
-    {"en": "the gains far outweigh the hazards.", "ko": "이득이 위험을 훨씬 [[능가한다]]."}
+    {"en": "the gains far outweigh", "ko": "이득이 훨씬 [[능가한다]]"},
+    {"en": "the hazards.", "ko": "[[위험]]을."}
    ],
    "misreads": [
     {"statement": "필자는 잦은 문단 나누기의 이득이 위험보다 훨씬 크다고 본다.", "verdict": "O", "trap_type": "필자관점"}
@@ -245,16 +264,17 @@
   {
    "id": 8,
    "english": "But don't go too far.",
+   "translation": "하지만 너무 지나치지는 마라.",
    "grammar": [
     {"tag": "명령문(부정)", "note": "don't go: 가지 마라", "spans": ["don't go"]},
     {"tag": "부사(too)", "note": "too far: 너무 멀리(지나치게)", "spans": ["too far"]}
    ],
    "vocab": [
-    {"word": "go too far", "meaning": "도를 넘다, 지나치다"},
-    {"word": "far", "meaning": "(부사) 멀리"}
+    {"word": "go too far", "meaning": "도를 넘다, 지나치다"}
    ],
    "chunks": [
-    {"en": "But don't go too far.", "ko": "그러나 너무 [[멀리 가지]] 마라."}
+    {"en": "But don't go", "ko": "그러나 [[가지]] 마라"},
+    {"en": "too far.", "ko": "너무 [[멀리]]."}
    ],
    "misreads": [
     {"statement": "필자는 문단을 짧게 만들수록 무조건 더 좋다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "But don't go too far", "why": "필자는 지나치게 짧게 쪼개지는 말라고 경계한다"}
@@ -264,6 +284,7 @@
   {
    "id": 9,
    "english": "A succession of tiny paragraphs is as annoying as a paragraph that's too long.",
+   "translation": "아주 작은 문단들이 연달아 이어지는 것은 너무 긴 문단만큼이나 짜증스럽다.",
    "grammar": [
     {"tag": "수일치", "note": "단수 주어 A succession에 맞춘 is", "spans": ["is"]},
     {"tag": "원급 비교(as ~ as)", "note": "as+형용사 원급+as: ~만큼 …한", "spans": ["as annoying as"]},
@@ -276,7 +297,8 @@
    ],
    "chunks": [
     {"en": "A succession of tiny paragraphs", "ko": "아주 작은 문단들의 [[연속]]은"},
-    {"en": "is as annoying as a paragraph", "ko": "한 문단만큼이나 [[짜증스럽다]]"},
+    {"en": "is [[as annoying as]]", "ko": "[[꼭 그만큼 짜증스럽다]]"},
+    {"en": "a paragraph", "ko": "한 문단"},
     {"en": "that's too long.", "ko": "너무 [[긴]]."}
    ],
    "misreads": [
@@ -287,6 +309,7 @@
   {
    "id": 10,
    "english": "I'm thinking of all those tiny paragraphs―verbless wonders―written by modern journalists trying to make their articles quick 'n' easy.",
+   "translation": "나는 현대 기자들이 자기 기사를 빠르고 쉽게 만들려고 쓴, 그 모든 아주 작은 문단들―동사 없는 신기한 것들―을 떠올리고 있다.",
    "grammar": [
     {"tag": "동명사(전치사의 목적어)", "note": "think of+동명사/명사: ~을 생각하다", "spans": ["thinking of"]},
     {"tag": "분사 형용사적 용법(후치 수식)", "note": "과거분사 written이 tiny paragraphs를 뒤에서 수식(수동)", "spans": ["written"]},
@@ -299,9 +322,11 @@
     {"word": "wonder", "meaning": "경이(로운 것)"}
    ],
    "chunks": [
-    {"en": "I'm thinking of all those tiny paragraphs―verbless wonders―written", "ko": "나는 그 모든 아주 작은 문단들―[[동사 없는 신기한 것들]]―이 쓰인 것을 생각하고 있다"},
+    {"en": "I'm thinking of", "ko": "나는 ~을 [[생각하고]] 있다"},
+    {"en": "all those tiny paragraphs―verbless wonders―written", "ko": "그 모든 아주 작은 문단들―[[동사 없는]] 신기한 것들―이 쓰인"},
     {"en": "by modern journalists", "ko": "현대 [[기자들]]에 의해"},
-    {"en": "trying to make their articles quick 'n' easy.", "ko": "자기 기사를 [[빠르고 쉽게 만들려는]]."}
+    {"en": "trying to make their articles", "ko": "자기 기사를 만들려 [[애쓰는]]"},
+    {"en": "[[quick 'n' easy.]]", "ko": "[[빠르고 쉽게]]."}
    ],
    "misreads": [
     {"statement": "이 아주 작은 문단들은 문학 소설가들이 신중하게 쓴 것이다.", "verdict": "X", "trap_type": "주체대상", "anchor": "written by modern journalists", "why": "그 문단들은 현대 기자들이 쓴 것이라고 했다"}
@@ -311,6 +336,7 @@
   {
    "id": 11,
    "english": "Actually they make the reader's job harder by chopping up a natural train of thought.",
+   "translation": "사실 그것들은 자연스러운 사고의 흐름을 잘게 토막 냄으로써 독자의 일을 오히려 더 어렵게 만든다.",
    "grammar": [
     {"tag": "사역동사 make(5형식)", "note": "make+O+형용사(비교급): ~을 더 …하게 만들다", "spans": ["make the reader's job harder"]},
     {"tag": "비교급", "note": "harder: 더 어렵게", "spans": ["harder"]},
@@ -318,12 +344,14 @@
    ],
    "vocab": [
     {"word": "chop up", "meaning": "잘게 자르다, 토막 내다"},
-    {"word": "train of thought", "meaning": "사고의 흐름"},
-    {"word": "natural", "meaning": "자연스러운"}
+    {"word": "train of thought", "meaning": "사고의 흐름"}
    ],
    "chunks": [
-    {"en": "Actually they make the reader's job harder", "ko": "사실 그것들은 [[독자의 일]]을 더 어렵게 만든다"},
-    {"en": "by chopping up a natural train of thought.", "ko": "자연스러운 [[사고의 흐름]]을 잘게 쪼갬으로써."}
+    {"en": "Actually they make", "ko": "사실 그것들은 만든다"},
+    {"en": "the reader's job", "ko": "[[독자의 일]]을"},
+    {"en": "harder", "ko": "더 [[어렵게]]"},
+    {"en": "by chopping up", "ko": "[[잘게 쪼갬]]으로써"},
+    {"en": "a natural train of thought.", "ko": "자연스러운 [[사고의 흐름]]을."}
    ],
    "misreads": [
     {"statement": "사실 그 작은 문단들은 독자의 일을 오히려 더 쉽게 만들어 준다.", "verdict": "X", "trap_type": "주체대상", "anchor": "they make the reader's job harder", "why": "그것들은 오히려 독자의 일을 더 어렵게 만든다고 했다", "killer": true}

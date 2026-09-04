@@ -1,0 +1,591 @@
+{
+ "item_no": "Unit13-3",
+ "theme": "감정적으로 흥분한 아이의 짜증을 진정시키기 위한 포옹과 공감적 반응의 중요성",
+ "overview": {
+  "theme_ko": "감정적으로 흥분한 아이의 짜증을 진정시키기 위한 포옹과 공감적 반응의 중요성",
+  "key_grammar": {
+   "point": "부정사의 부사적 용법 · 목적 ('~하기 위해')",
+   "source_sentence": "To help them calm down, and to see reason, the best strategy is a hug and an empathic reflection of the situation to defuse the intensity of the emotion.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "to + 동사원형이 '[[~하기 위해]]'라는 '목적'을 나타내며 문장을 꾸며."
+    },
+    {
+     "chip": "위치",
+     "text": "문장 맨 앞의 'To help …,'처럼 [[콤마]]로 주절과 나뉘어 목적을 먼저 밝히기도 해."
+    },
+    {
+     "chip": "여러 개",
+     "text": "여기선 To help … / to see … / to defuse …처럼 목적 부정사가 [[여러 개]] 쓰였어."
+    },
+    {
+     "chip": "강조형",
+     "text": "'in order to'·'so as to'로 바꿔 써도 뜻은 [[같아]] — 목적을 분명히 할 때 써."
+    },
+    {
+     "chip": "해석 요령",
+     "text": "'~하기 위해 / ~하려고'로 옮기고, 그 목적을 이루는 [[수단]](주절)과 연결해."
+    }
+   ],
+   "example": "",
+   "example_analysis": "To help them calm down …, the best strategy is a hug … to defuse the intensity = '진정시키기 위해 최선의 전략은 포옹이며, (그것은) 감정 강도를 누그러뜨리기 위한 것'.",
+   "drills": [
+    {
+     "kind": "어법-밑줄",
+     "question": "다음 문장의 밑줄 친 부분 중, 어법상 틀린 것은?",
+     "answer": "②",
+     "sentence": "A spoken word will [[①|form]] a bridge between the two worlds, [[②|allowed]] the child's rational brain [[③|to help]] soothe their emotions, or at least [[④|give]] them the ability to listen to [[⑤|what]] their parents are saying.",
+     "fix": "② allowed → allowing: 앞 절과 콤마로 이어지는 분사구문이므로 능동의 현재분사 allowing이 맞아.",
+     "options": [
+      "① form",
+      "② allowed",
+      "③ to help",
+      "④ give",
+      "⑤ what"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "어법-네모",
+     "question": "다음 문장의 네모 안에서 어법상 옳은 것을 각각 고르시오.",
+     "answer": "closes / what / are made",
+     "sentence": "This is when the tantrums occur — situations in which the child [[closes/close]] in on themself and is not able to do [[what/that]] they are told — or comments [[are made/are making]] which the parents find hard to deal with.",
+     "fix": "주어 the child가 단수라 closes, 선행사 없이 '~하는 것'을 이끄는 관계대명사 what, comments가 '만들어지는' 대상이므로 수동태 are made가 옳아.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "어법-오류찾기",
+     "question": "다음 중 어법상 틀린 문장을 고르시오.",
+     "answer": "Literally, the child are outside themselves, outside their rational part.",
+     "sentence": "",
+     "fix": "the child are → the child is: 주어 'the child'는 3인칭 단수이므로 be동사는 is가 맞아.",
+     "options": [
+      "When a region of the emotional brain is overexcited due to frustration, sadness or any other intense emotion, the child is not able to contain their mood.",
+      "This is when the tantrums occur — situations in which the child closes in on themself and is not able to do what they are told — or comments are made which the parents find hard to deal with.",
+      "Literally, the child are outside themselves, outside their rational part.",
+      "To help them calm down, and to see reason, the best strategy is a hug and an empathic reflection of the situation to defuse the intensity of the emotion.",
+      "A spoken word will form a bridge between the two worlds, allowing the child's rational brain to help soothe their emotions, or at least give them the ability to listen to what their parents are saying."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그들이 진정하고 사리를 분별하도록 돕기 위해, 최선의 전략은 감정의 강도를 누그러뜨리기 위한, 상황에 대한 포옹과 공감적 반영이다.",
+     "answer": "To help them calm down, and to see reason, the best strategy is a hug and an empathic reflection of the situation to defuse the intensity of the emotion.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "To",
+      "help",
+      "them",
+      "calm",
+      "down",
+      "and",
+      "to",
+      "see",
+      "reason",
+      "the",
+      "best",
+      "strategy",
+      "is",
+      "a",
+      "hug",
+      "and",
+      "an",
+      "empathic",
+      "reflection",
+      "of",
+      "the",
+      "situation",
+      "to",
+      "defuse",
+      "the",
+      "intensity",
+      "of",
+      "the",
+      "emotion"
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "(제시어를 활용해) 그들을 진정시키고 사리를 분별하도록 돕기 위해, 최선의 전략은 감정의 강도를 누그러뜨리기 위한, 그 상황에 대한 포옹과 공감적 반영이다.",
+     "answer": "To help them calm down, and to see reason, the best strategy is a hug and an empathic reflection of the situation to defuse the intensity of the emotion.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "To help",
+      "them",
+      "calm down",
+      "and",
+      "to see reason",
+      "the best strategy",
+      "is",
+      "a hug",
+      "and",
+      "an empathic reflection",
+      "of the situation",
+      "to defuse",
+      "the intensity",
+      "of the emotion"
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "감정적으로 흥분해 짜증(tantrum)을 부리는 아이를 진정시키는 데, 포옹과 공감적 반응(그리고 한마디 말)이 가장 효과적이라는 글이야.",
+  "stance": "긍정적",
+  "stance_reason": "포옹·공감적 반영을 'the best strategy'로 제시하고, 말이 '다리'가 된다며 그 효과를 적극 권해.",
+  "structure": "문제→해결(방안)",
+  "structure_reason": "감정 흥분으로 아이가 짜증을 부리는 '문제'(1~3문장) 뒤, 포옹·공감·말이라는 '해결책'(4~5문장)을 제시해.",
+  "restatement_chains": [
+   {
+    "label": "아이의 감정 폭발",
+    "expressions": [
+     "overexcited",
+     "not able to contain their mood",
+     "the tantrums",
+     "outside their rational part"
+    ],
+    "variation": "'과도하게 흥분' → '기분을 억누르지 못함' → '짜증' → '이성 밖에 있음'으로 상태가 심화돼."
+   },
+   {
+    "label": "진정시키는 해결책",
+    "expressions": [
+     "a hug and an empathic reflection",
+     "defuse the intensity of the emotion",
+     "form a bridge between the two worlds",
+     "soothe their emotions"
+    ],
+    "variation": "'포옹과 공감적 반영' → '감정 강도 누그러뜨림' → '두 세계의 다리' → '감정 진정'으로 이어져."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "문제-원인",
+    "sentence_range": "1",
+    "summary": "좌절·슬픔 등 강렬한 감정으로 정서적 뇌가 과도하게 흥분하면, 아이는 기분을 억누르지 못한다.",
+    "easy_example": "감정이 폭발하면 스스로 못 다스리는 것."
+   },
+   {
+    "stage": "문제-양상",
+    "sentence_range": "2~3",
+    "summary": "이때 짜증이 터지는데, 아이는 자신을 가두고 들은 말을 못 하며, 말 그대로 이성 밖에 있다.",
+    "easy_example": "떼쓰는 순간엔 말이 안 통하는 상태."
+   },
+   {
+    "stage": "해결",
+    "sentence_range": "4",
+    "summary": "진정시키고 사리를 분별하게 하려면, 포옹과 공감적 반영으로 감정 강도를 누그러뜨리는 것이 최선이다.",
+    "easy_example": "혼내기보다 안아 주고 마음을 읽어 주는 것."
+   },
+   {
+    "stage": "해결-보충",
+    "sentence_range": "5",
+    "summary": "한마디 말이 두 세계에 다리를 놓아 아이의 이성적 뇌가 감정을 달래거나, 적어도 부모 말을 들을 수 있게 한다.",
+    "easy_example": "따뜻한 말 한마디가 아이를 다시 대화로 이끄는 것."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "When a region of the emotional brain is overexcited due to frustration, sadness or any other intense emotion, the child is not able to contain their mood.",
+   "translation": "정서적 뇌의 한 부위가 좌절, 슬픔, 또는 그 밖의 강렬한 감정으로 인해 과도하게 흥분하면, 아이는 자신의 기분을 억누를 수 없게 된다.",
+   "grammar": [
+    {
+     "tag": "접속사 when",
+     "note": "'~할 때'",
+     "spans": []
+    },
+    {
+     "tag": "수동 is overexcited",
+     "note": "'과도하게 흥분되다'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "overexcited",
+     "meaning": "과도하게 흥분한"
+    },
+    {
+     "word": "frustration",
+     "meaning": "좌절(감)"
+    },
+    {
+     "word": "contain",
+     "meaning": "억누르다, 담다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When a region",
+     "ko": "~할 때, 한 부위가"
+    },
+    {
+     "en": "of the [[emotional brain]]",
+     "ko": "[[정서적 뇌]]의"
+    },
+    {
+     "en": "is [[overexcited]]",
+     "ko": "[[과도하게 흥분되면]]"
+    },
+    {
+     "en": "due to [[frustration]], sadness",
+     "ko": "[[좌절]], 슬픔으로 인해"
+    },
+    {
+     "en": "or any other intense emotion,",
+     "ko": "또는 다른 강렬한 감정으로,"
+    },
+    {
+     "en": "the child is",
+     "ko": "그 아이는"
+    },
+    {
+     "en": "not able to",
+     "ko": "~할 수 없다"
+    },
+    {
+     "en": "[[contain their mood]].",
+     "ko": "[[자신의 기분을 억누를]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(지칭) 'their mood'는 부모의 기분을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "지칭 오인이야. contain their mood의 their는 앞의 'the child(아이)'를 가리켜 — 아이가 자기 기분을 억누르지 못한다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "This is when the tantrums occur — situations in which the child closes in on themself and is not able to do what they are told — or comments are made which the parents find hard to deal with.",
+   "translation": "바로 이때 짜증이 터지는데, 이는 아이가 자기 안으로 움츠러들어 들은 말을 하지 못하거나, 부모가 감당하기 힘든 말들이 튀어나오는 상황이다.",
+   "grammar": [
+    {
+     "tag": "전치사+관계 in which",
+     "note": "situations 수식",
+     "spans": []
+    },
+    {
+     "tag": "관계사 which",
+     "note": "comments 수식",
+     "spans": []
+    },
+    {
+     "tag": "관계사 what",
+     "note": "'~하는 것'",
+     "spans": []
+    },
+    {
+     "tag": "수동태",
+     "note": "comments are made / what they are told — be+p.p.",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "tantrum",
+     "meaning": "짜증, 떼쓰기"
+    },
+    {
+     "word": "close in on",
+     "meaning": "~을 옥죄다, 가두다"
+    },
+    {
+     "word": "deal with",
+     "meaning": "다루다, 감당하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "This is when",
+     "ko": "이것은 ~할 때다"
+    },
+    {
+     "en": "the [[tantrums]] occur —",
+     "ko": "[[짜증]]이 일어나는 —"
+    },
+    {
+     "en": "situations in which",
+     "ko": "상황들, 그 안에서"
+    },
+    {
+     "en": "the child [[closes in on themself]]",
+     "ko": "아이가 [[자신 안으로 움츠러들고]]"
+    },
+    {
+     "en": "and is not able to do",
+     "ko": "그리고 할 수 없는"
+    },
+    {
+     "en": "[[what they are told]] —",
+     "ko": "[[자신이 들은 것을]] —"
+    },
+    {
+     "en": "or comments are made",
+     "ko": "혹은 말이 나오는"
+    },
+    {
+     "en": "which the parents find",
+     "ko": "부모가 ~라고 여기는"
+    },
+    {
+     "en": "hard to [[deal with]].",
+     "ko": "[[감당하기]] 어렵다고."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 아이가 스스로 마음을 열고 부모 말을 잘 따르는 상황을 묘사한다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'closes in on themself and is not able to do what they are told(자신을 가두고 들은 말을 못 한다)'는 거야 — 마음을 여는 게 아니라 닫히고 통제 불능이 되는 짜증 상황이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘close in on’을 ‘~에 다가가다’로만 읽으면 안 돼 — [[close in on oneself]]는 ‘자기 안으로 움츠러들다’야.",
+    "‘which’를 앞 절 전체를 받는 걸로 읽으면 안 돼 — [[which]]의 선행사는 (수동태로 떨어진) comments야."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "Literally, the child is outside themselves, outside their rational part.",
+   "translation": "말 그대로 아이는 자기 자신 밖에, 곧 자신의 이성적인 부분 밖에 있는 것이다.",
+   "grammar": [
+    {
+     "tag": "재귀대명사 themselves",
+     "note": "주어=목적어",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "literally",
+     "meaning": "말 그대로"
+    },
+    {
+     "word": "rational",
+     "meaning": "이성적인"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[Literally]],",
+     "ko": "[[말 그대로]],"
+    },
+    {
+     "en": "the child is",
+     "ko": "그 아이는 ~있다"
+    },
+    {
+     "en": "outside [[themselves]],",
+     "ko": "[[자기 자신]] 밖에,"
+    },
+    {
+     "en": "outside their [[rational part]].",
+     "ko": "자신의 [[이성적 부분]] 밖에."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(함축) 'outside their rational part'는 아이가 논리적으로 침착하게 사고한다는 뜻이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "함축을 놓쳤어. '이성적 부분 밖에 있다'는 건 아이가 지금 이성적으로 사고하지 '못하는' 상태라는 뜻 — 그래서 논리적 설득이 안 통해.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "To help them calm down, and to see reason, the best strategy is a hug and an empathic reflection of the situation to defuse the intensity of the emotion.",
+   "translation": "아이가 진정하고 사리를 분별하도록 돕기 위한 최선의 전략은, 감정의 강도를 누그러뜨리도록 안아 주고 그 상황을 공감적으로 반영해 주는 것이다.",
+   "grammar": [
+    {
+     "tag": "명사 보어",
+     "note": "the best strategy is a hug",
+     "spans": []
+    },
+    {
+     "tag": "부정사 부사적용법(목적)",
+     "note": "To help ~, to see ~, ... to defuse ~ — 목적의 부정사(⑤)",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "empathic",
+     "meaning": "공감적인"
+    },
+    {
+     "word": "reflection",
+     "meaning": "반영, 비추기"
+    },
+    {
+     "word": "defuse",
+     "meaning": "(긴장을) 누그러뜨리다"
+    },
+    {
+     "word": "intensity",
+     "meaning": "강도"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[To help them calm down]],",
+     "ko": "[[그들을 진정시키도록 돕기 위해]],"
+    },
+    {
+     "en": "and to see [[reason]],",
+     "ko": "그리고 [[사리]]를 분별하도록,"
+    },
+    {
+     "en": "the best strategy is",
+     "ko": "최선의 전략은 ~이다"
+    },
+    {
+     "en": "a hug and",
+     "ko": "포옹과"
+    },
+    {
+     "en": "an [[empathic reflection]]",
+     "ko": "[[공감적 반영]]"
+    },
+    {
+     "en": "of the situation",
+     "ko": "그 상황에 대한"
+    },
+    {
+     "en": "to [[defuse the intensity]]",
+     "ko": "[[강도를 누그러뜨리기]] 위한"
+    },
+    {
+     "en": "of the emotion.",
+     "ko": "그 감정의."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 아이의 짜증이 왜 위험한지 그 원인을 설명한다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'the best strategy is a hug and an empathic reflection(최선의 전략은 포옹과 공감적 반영)'으로 넘어가는, 문제에서 '해결책'으로의 전환 문장이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "A spoken word will form a bridge between the two worlds, allowing the child's rational brain to help soothe their emotions, or at least give them the ability to listen to what their parents are saying.",
+   "translation": "한마디 말은 두 세계 사이에 다리를 놓아, 아이의 이성적 뇌가 감정을 달래도록 돕거나, 적어도 부모가 하는 말을 들을 수 있는 능력을 아이에게 준다.",
+   "grammar": [
+    {
+     "tag": "분사구문 allowing",
+     "note": "'~하게 하면서'",
+     "spans": []
+    },
+    {
+     "tag": "관계사 what",
+     "note": "'~하는 것'",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "form a bridge",
+     "meaning": "다리를 놓다"
+    },
+    {
+     "word": "soothe",
+     "meaning": "달래다"
+    },
+    {
+     "word": "at least",
+     "meaning": "적어도"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "A spoken word will",
+     "ko": "한마디 말은 ~할 것이다"
+    },
+    {
+     "en": "[[form a bridge]]",
+     "ko": "[[다리를 놓을]]"
+    },
+    {
+     "en": "between the two worlds,",
+     "ko": "두 세계 사이에,"
+    },
+    {
+     "en": "allowing the child's",
+     "ko": "아이의 ~가 ~하게 하면서"
+    },
+    {
+     "en": "[[rational brain]]",
+     "ko": "[[이성적 뇌]]가"
+    },
+    {
+     "en": "to help [[soothe]] their emotions,",
+     "ko": "그들의 감정을 [[달래도록]] 도와,"
+    },
+    {
+     "en": "or at least give them",
+     "ko": "혹은 적어도 그들에게 주도록"
+    },
+    {
+     "en": "the ability to listen to",
+     "ko": "~을 들을 능력을"
+    },
+    {
+     "en": "[[what their parents are saying]].",
+     "ko": "[[부모가 말하고 있는 것을]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 아이에게 말을 거는 것이 오히려 감정을 악화시킨다는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'form a bridge … help soothe their emotions(다리를 놓아 감정을 달래도록 돕는다)'는 거야 — 말이 악화가 아니라 진정과 소통의 다리가 된다는 결론이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘or ~ give’를 새 문장으로 읽으면 안 돼 — [[give]]는 앞의 ‘help soothe’와 나란히 ‘allow ~ to’에 걸리는 병렬이야."
+   ]
+  }
+ ]
+}

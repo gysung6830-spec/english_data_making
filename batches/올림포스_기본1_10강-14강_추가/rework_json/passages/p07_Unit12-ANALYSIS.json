@@ -1,0 +1,559 @@
+{
+ "item_no": "Unit12-ANALYSIS",
+ "theme": "조용한 전기차 시대에 생존을 좌우하는 청각 정보의 중요성",
+ "overview": {
+  "theme_ko": "시각이 지배적 감각이지만 조용한 전기차 시대에 생존을 좌우하는 청각 정보의 중요성",
+  "key_grammar": {
+   "point": "이중부정 (부정어 + 부정어 = 강한 긍정)",
+   "source_sentence": "But that doesn't mean our sense of hearing isn't a big deal.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "부정어가 두 번 나오면 서로 상쇄돼 결국 '[[강한 긍정]]'이 돼 — doesn't … isn't = 결국 '중요하다'."
+    },
+    {
+     "chip": "구조",
+     "text": "doesn't mean (that) our hearing [[isn't]] a big deal — mean 뒤 that절 안에 또 부정(isn't)이 숨어 있어."
+    },
+    {
+     "chip": "의미",
+     "text": "'청각이 중요하지 않다는 뜻이 아니다' = 결국 '청각도 [[중요하다]]'는 강조야."
+    },
+    {
+     "chip": "함정",
+     "text": "부정 하나만 보고 '청각은 중요하지 않다'로 읽으면 [[정반대]]로 오역해 — 두 부정을 함께 봐야 해."
+    },
+    {
+     "chip": "해석 요령",
+     "text": "부정+부정이 보이면 '[[결국 ~다]]'라는 긍정으로 정리해."
+    }
+   ],
+   "example": "",
+   "example_analysis": "doesn't mean … isn't a big deal = '중요하지 않다는 뜻이 아니다' → '청각도 매우 중요하다'는 강한 긍정.",
+   "drills": [
+    {
+     "kind": "밑줄형",
+     "question": "밑줄 친 부분 중, 어법상 틀린 것은?",
+     "answer": "③",
+     "sentence": "Vision [[①|is]] our dominant sense, and you want to [[②|look]] both ways before [[③|cross]] the street — it's the first thing parents [[④|drill]] into [[⑤|their]] children.",
+     "fix": "before는 전치사이므로 뒤에 동명사가 와야 한다: cross → crossing.",
+     "options": [
+      "① is",
+      "② look",
+      "③ cross",
+      "④ drill",
+      "⑤ their"
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "네모형",
+     "question": "네모 안에서 어법상 옳은 것을 고르시오.",
+     "answer": "that / kill / silent",
+     "sentence": "There's something [[that/what]] can sneak up and [[kill/to kill]] you today: a [[silent/silently]] electric car.",
+     "fix": "선행사 something을 받는 관계대명사 that / 조동사 can에 병렬로 이어지는 동사원형 kill / 명사 car를 수식하는 형용사 silent.",
+     "options": [],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "오류찾기",
+     "question": "다음 중 어법상 틀린 문장은?",
+     "answer": "It's a reminder that even for us in a modern city, have both cues can mean the difference between life and death.",
+     "sentence": "",
+     "fix": "have → having: 문장의 주어 자리이므로 동명사(having)가 되어야 한다.",
+     "options": [
+      "Vision is our dominant sense, and you want to look both ways before crossing the street — it's the first thing parents drill into their children.",
+      "But that doesn't mean our sense of hearing isn't a big deal.",
+      "I don't have to mention the worn-out example of cavemen and hidden saber-toothed tigers.",
+      "It's a reminder that even for us in a modern city, have both cues can mean the difference between life and death.",
+      "There's something that can sneak up and kill you today: a silent electric car."
+     ],
+     "words": [],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "하지만 그렇다고 해서 우리의 청각이 중요하지 않다는 뜻은 아니다.",
+     "answer": "But that doesn't mean our sense of hearing isn't a big deal.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "But",
+      "that",
+      "doesn't",
+      "mean",
+      "our",
+      "sense",
+      "of",
+      "hearing",
+      "isn't",
+      "a",
+      "big deal."
+     ],
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그러나 그것이 우리의 청각이 별것 아니라는 뜻은 아니다. (이중부정에 유의)",
+     "answer": "But that doesn't mean our sense of hearing isn't a big deal.",
+     "sentence": "",
+     "fix": "",
+     "options": [],
+     "words": [
+      "But that",
+      "doesn't mean",
+      "our sense of hearing",
+      "isn't",
+      "a big deal."
+     ],
+     "from_passage": true
+    }
+   ]
+  },
+  "topic": "시각이 지배적 감각이지만, 조용한 전기차가 등장한 오늘날 청각 정보 역시 생존에 필수적이라는 글이야.",
+  "stance": "긍정적",
+  "stance_reason": "청각 정보의 가치를 'big deal'·'life and death'로 강조하며 그 필요성을 적극적으로 인정해.",
+  "structure": "통념→반박(반전)",
+  "structure_reason": "'시각이 지배적 감각'이라는 통념(1문장) 뒤 'But 청각도 중요하다'로 반박(2문장)하고, 조용한 전기차 사례로 뒷받침해.",
+  "restatement_chains": [
+   {
+    "label": "청각의 중요성",
+    "expressions": [
+     "our sense of hearing isn't a big deal",
+     "depend on engine noise",
+     "having both cues"
+    ],
+    "variation": "'청각이 중요하다' → '엔진 소리에 의존' → '두 신호를 다 받음'으로 구체화돼."
+   },
+   {
+    "label": "조용한 위협",
+    "expressions": [
+     "a silent electric car",
+     "These",
+     "slow-moving electric vehicles"
+    ],
+    "variation": "'조용한 전기차' → 'These(이것들)' → '저속 전기차'로 이어져."
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "통념",
+    "sentence_range": "1",
+    "summary": "시각은 우리의 지배적 감각이고, 부모가 아이에게 가장 먼저 '양쪽을 보라'고 가르친다.",
+    "easy_example": "길 건널 때 좌우를 보라며 시각을 강조하는 것."
+   },
+   {
+    "stage": "반박",
+    "sentence_range": "2~3",
+    "summary": "그렇다고 청각이 중요하지 않은 건 아니며, 진부한 원시시대 예를 들 필요도 없다.",
+    "easy_example": "시각만이 아니라 소리도 생존에 중요하다는 반전."
+   },
+   {
+    "stage": "사례",
+    "sentence_range": "4~5",
+    "summary": "오늘날엔 조용한 전기차가 몰래 다가와 위협하는데, 엔진 소리에 의존하는 보행자에게 위험해 당국은 경고음을 의무화했다.",
+    "easy_example": "소리가 없으니 위험 → 일부러 경고음을 내게 함."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "6",
+    "summary": "현대 도시에서도 시각·청각 두 신호를 다 받는 것이 삶과 죽음을 가를 수 있다.",
+    "easy_example": "보는 것과 듣는 것 둘 다 있어야 안전한 것."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Vision is our dominant sense, and you want to look both ways before crossing the street — it's the first thing parents drill into their children.",
+   "translation": "시각은 우리의 지배적인 감각이며, 길을 건너기 전에 양쪽을 다 살펴야 한다 — 그것은 부모가 자녀에게 가장 먼저 주입하는 것이다.",
+   "grammar": [
+    {
+     "tag": "관계사 생략(목적격)",
+     "note": "the first thing (that) parents drill — that 생략",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "dominant",
+     "meaning": "지배적인"
+    },
+    {
+     "word": "drill (A into B)",
+     "meaning": "(반복해) 주입하다·훈련시키다"
+    },
+    {
+     "word": "look both ways",
+     "meaning": "양쪽을 다 살피다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Vision is our [[dominant]] sense,",
+     "ko": "시각은 우리의 [[지배적인]] 감각이고,"
+    },
+    {
+     "en": "and you want to",
+     "ko": "그리고 여러분은 ~하고자 한다"
+    },
+    {
+     "en": "[[look both ways]]",
+     "ko": "[[양쪽을 다 보고자]]"
+    },
+    {
+     "en": "before [[crossing]] the street",
+     "ko": "길을 [[건너기]] 전에"
+    },
+    {
+     "en": "— it's the first thing",
+     "ko": "— 그것은 첫 번째 것이다"
+    },
+    {
+     "en": "parents [[drill]] into their children.",
+     "ko": "부모가 아이들에게 [[주입하는]]"
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "시각은 우리 감각 중 그다지 중요하지 않은 감각이라는 내용이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'dominant sense(지배적 감각)'라고 했어 — 시각이 가장 중요하게 여겨진다는 거야(그 위에서 청각도 중요하다고 이어져).",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "But that doesn't mean our sense of hearing isn't a big deal.",
+   "translation": "하지만 그렇다고 해서 우리의 청각이 중요하지 않다는 뜻은 아니다.",
+   "grammar": [
+    {
+     "tag": "명사절 that",
+     "note": "mean의 목적어절(that 생략)",
+     "spans": []
+    },
+    {
+     "tag": "이중부정",
+     "note": "doesn't mean ... isn't a big deal — 부정+부정=강한 긍정(⑤)",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "a big deal",
+     "meaning": "중요한 것, 큰일"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "But that doesn't [[mean]]",
+     "ko": "그러나 그것은 (~라는) [[뜻]]은 아니다"
+    },
+    {
+     "en": "our sense of [[hearing]]",
+     "ko": "우리의 [[청각]]이"
+    },
+    {
+     "en": "[[isn't a big deal]].",
+     "ko": "[[중요하지 않다는 것을]]."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 시각이 청각보다 중요하다는 앞 내용을 한 번 더 강조하는 문장이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'But(그러나)'으로 방향을 틀어 '청각도 중요하다'는 이 글의 주제를 꺼내는 전환·주장 문장이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘청각이 별거 아니라는 뜻이다’로 읽으면 안 돼 — [[doesn't mean]]과 [[isn't]]의 이중부정이라 ‘청각도 중요하다’는 뜻이야."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "I don't have to mention the worn-out example of cavemen and hidden saber-toothed tigers.",
+   "translation": "원시인과 숨어 있는 검치호랑이라는 진부한 예를 굳이 언급할 필요는 없다.",
+   "grammar": [
+    {
+     "tag": "don't have to",
+     "note": "~할 필요가 없다",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "worn-out",
+     "meaning": "진부한, 낡은"
+    },
+    {
+     "word": "caveman",
+     "meaning": "원시인"
+    },
+    {
+     "word": "saber-toothed",
+     "meaning": "검치(칼 같은 송곳니)의"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "I [[don't have to]] mention",
+     "ko": "나는 언급할 [[필요가 없다]]"
+    },
+    {
+     "en": "the [[worn-out]] example",
+     "ko": "그 [[진부한]] 예를"
+    },
+    {
+     "en": "of [[cavemen]]",
+     "ko": "[[원시인]]과"
+    },
+    {
+     "en": "and hidden [[saber-toothed]] tigers.",
+     "ko": "숨어 있는 [[검치]]호랑이라는."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(함축) 필자는 원시인·검치호랑이 예가 청각의 중요성을 잘 보여줘서 자세히 설명하려 한다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "함축을 놓쳤어. 'don't have to mention the worn-out example(진부한 예는 언급할 필요도 없다)'은 그 예를 생략하고 더 현대적인 예로 넘어가겠다는 뜻이야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘언급하면 안 된다’로 읽으면 안 돼 — [[don't have to]]는 ‘언급할 필요가 없다’야."
+   ]
+  },
+  {
+   "id": 4,
+   "english": "There's something that can sneak up and kill you today: a silent electric car.",
+   "translation": "오늘날 여러분에게 몰래 다가와 여러분을 죽일 수 있는 것이 있는데, 바로 조용한 전기차다.",
+   "grammar": [
+    {
+     "tag": "관계사 that",
+     "note": "something 수식",
+     "spans": []
+    },
+    {
+     "tag": "병렬 공통 조동사 can",
+     "note": "can [sneak up and] [kill] — can이 두 동사에 공통",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "sneak up",
+     "meaning": "몰래 다가오다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "There's [[something]]",
+     "ko": "[[무언가]]가 있다"
+    },
+    {
+     "en": "that can [[sneak up]]",
+     "ko": "[[몰래 다가올]] 수 있는"
+    },
+    {
+     "en": "and kill you [[today]]:",
+     "ko": "그리고 [[오늘날]] 여러분을 죽일 수 있는:"
+    },
+    {
+     "en": "a [[silent]] electric car.",
+     "ko": "바로 [[조용한]] 전기차다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 앞의 원시시대 예를 계속 부연하는 문장이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'today(오늘날)'의 '조용한 전기차'라는 현대적 위협 사례로 넘어가는 전환 문장이야 — 콜론 뒤에서 그 정체를 밝혀.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "These pose an unanticipated but serious threat to pedestrians and bicyclists, who depend on engine noise to detect and orient to cars — so much so that the National Highway Traffic Safety Administration now requires slow-moving electric vehicles to generate a warning noise.",
+   "translation": "이것들은 보행자와 자전거 이용자에게 예상치 못한, 그러나 심각한 위협을 제기하는데, 이들은 차를 감지하고 방향을 파악하기 위해 엔진 소리에 의존한다 — 그 정도가 너무 심해서 미국 고속도로교통안전국은 이제 저속 전기차가 경고음을 내도록 의무화하고 있다.",
+   "grammar": [
+    {
+     "tag": "계속적 용법 who",
+     "note": "pedestrians and bicyclists 부연",
+     "spans": []
+    },
+    {
+     "tag": "so much so that",
+     "note": "'그 정도가 심해서 (결과)'",
+     "spans": []
+    },
+    {
+     "tag": "병렬 공통 to",
+     "note": "to [detect] and [orient to] cars — to가 두 부정사에 공통",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "unanticipated",
+     "meaning": "예상치 못한"
+    },
+    {
+     "word": "pedestrian",
+     "meaning": "보행자"
+    },
+    {
+     "word": "orient to",
+     "meaning": "~로 방향을 잡다"
+    },
+    {
+     "word": "so much so that",
+     "meaning": "그 정도가 심해서 ~하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "These pose",
+     "ko": "이것들은 제기한다"
+    },
+    {
+     "en": "an [[unanticipated]] but serious threat",
+     "ko": "[[예상치 못한]], 그러나 심각한 위협을"
+    },
+    {
+     "en": "to pedestrians and bicyclists,",
+     "ko": "보행자와 자전거 이용자에게,"
+    },
+    {
+     "en": "[[who depend on engine noise]]",
+     "ko": "[[그들은 엔진 소리에 의존한다]]"
+    },
+    {
+     "en": "to detect and [[orient to]] cars",
+     "ko": "차를 감지하고 [[방향을 잡기]] 위해"
+    },
+    {
+     "en": "— [[so much so that]]",
+     "ko": "— [[그 정도가 심해서]]"
+    },
+    {
+     "en": "the National Highway Traffic Safety Administration",
+     "ko": "미국 고속도로교통안전국이"
+    },
+    {
+     "en": "now requires slow-moving electric vehicles",
+     "ko": "이제 저속 전기차가 ~하도록 요구한다"
+    },
+    {
+     "en": "to generate a [[warning noise]].",
+     "ko": "[[경고음]]을 내도록."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "(지칭) 'These'는 앞 문장의 보행자와 자전거 이용자를 가리킨다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "지칭 오인이야. These는 앞의 '조용한 전기차(a silent electric car)'를 가리켜 — 전기차가 보행자·자전거 이용자에게 위협이라는 거야.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": [
+    "‘so much so that’을 ‘너무 많아서’로 읽으면 안 돼 — [[so much so that]]은 ‘그 정도가 너무 심해서 ~하다’야."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "It's a reminder that even for us in a modern city, having both cues can mean the difference between life and death.",
+   "translation": "그것은 현대 도시에 사는 우리에게조차 두 가지 신호를 모두 갖추는 것이 삶과 죽음의 차이를 만들 수 있음을 상기시켜 준다.",
+   "grammar": [
+    {
+     "tag": "동격 that",
+     "note": "a reminder 뒤 내용 부연",
+     "spans": []
+    },
+    {
+     "tag": "동명사 주어",
+     "note": "having both cues",
+     "spans": []
+    }
+   ],
+   "vocab": [
+    {
+     "word": "cue",
+     "meaning": "신호, 단서"
+    },
+    {
+     "word": "reminder",
+     "meaning": "상기시키는 것"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "It's a [[reminder]] that",
+     "ko": "그것은 [[상기시켜]] 주는 것이다"
+    },
+    {
+     "en": "even for us",
+     "ko": "우리에게도"
+    },
+    {
+     "en": "in a [[modern city]],",
+     "ko": "[[현대 도시]]에 있는,"
+    },
+    {
+     "en": "[[having both cues]]",
+     "ko": "[[두 신호를 다 갖는 것이]]"
+    },
+    {
+     "en": "can mean the difference",
+     "ko": "차이를 의미할 수 있다"
+    },
+    {
+     "en": "between [[life and death]].",
+     "ko": "[[삶과 죽음]] 사이의."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 문장은 새로운 위험 사례를 하나 더 추가하는 문장이다.",
+     "verdict": "X",
+     "trap_type": "",
+     "anchor": "",
+     "why": "'It's a reminder that …(~을 상기시킨다)'로 글 전체를 마무리하는 결론 문장이야 — 시각·청각 두 신호가 생사를 가른다는 요지.",
+     "killer": false,
+     "english": false,
+     "integrative": false
+    }
+   ],
+   "mistips": []
+  }
+ ]
+}
