@@ -13,7 +13,7 @@
       <h2>시험지가 만들어졌습니다</h2>
       <p>{{ scope }} ·
         {% for s in sections %}{{ s.title }} {{ s['items']|length }}문항{% if not loop.last %} · {% endif %}{% endfor %}
-        <br>학생용 {{ sections|length }}장과 정답지 {{ sections|length }}장, 모두 {{ pages }}쪽입니다.
+        <br><b>A4 세로</b> 학생용 {{ sections|length }}장과 정답지 {{ sections|length }}장, 모두 {{ pages }}쪽입니다.
         <b>인쇄</b>를 누르고, PDF 로 남기시려면 인쇄 창에서 <b>대상을 'PDF로 저장'</b>으로 바꾸세요.</p>
     </div>
     <div class="hero-actions">
@@ -21,7 +21,14 @@
       <a class="btn btn-ghost" href="{{ again_url }}">다른 문제로 다시</a>
     </div>
     <p class="muted" style="margin-top:14px;font-size:13.5px;">
-      이 주소를 저장해 두시면 <b>똑같은 시험지</b>가 다시 나옵니다. (시험지 번호 {{ seed }})</p>
+      <b>A4 세로</b>로 나옵니다. 이 주소를 저장해 두시면 <b>똑같은 시험지</b>가 다시 나옵니다.
+      (시험지 번호 {{ seed }})</p>
+    <div class="alert alert-error" id="overflow-warn" hidden>
+      <b><span class="warn-which"></span>A4 한 장을 넘칩니다.</b>
+      문항 수를 줄이시면 한 장에 들어갑니다.
+      객관식은 보기 다섯 줄이 붙어 한 장에 <b>15문항쯤</b>까지 들어갑니다.
+      <a href="{{ url_for('words_book', slug=b.slug) }}">문항 수 다시 정하기</a>
+    </div>
   </div>
 </section>
 
@@ -80,6 +87,36 @@
 </article>
 {% endmacro %}
 
-{% for s in sections %}{{ sheet(s, loop.index, false) }}{% endfor %}
-{% for s in sections %}{{ sheet(s, sections|length + loop.index, true) }}{% endfor %}
+<div class="sheet-stage">
+  {% for s in sections %}{{ sheet(s, loop.index, false) }}{% endfor %}
+  {% for s in sections %}{{ sheet(s, sections|length + loop.index, true) }}{% endfor %}
+</div>
+
+<script>
+/* A4 한 장을 넘치는 지면이 있으면 알려 줍니다. 문항 수를 줄이면 됩니다. */
+(function () {
+  var warn = document.getElementById('overflow-warn');
+  if (!warn) return;
+  // 지면 높이를 A4 한 장으로 못 박아 두고 내용이 넘치는지 재 봅니다 (재고 나서 되돌립니다)
+  var over = [...document.querySelectorAll('.sheet')].filter(function (el) {
+    var keep = [el.style.height, el.style.overflow];
+    el.style.height = '297mm';
+    el.style.overflow = 'hidden';
+    var spill = el.scrollHeight > el.clientHeight + 2;
+    el.style.height = keep[0];
+    el.style.overflow = keep[1];
+    return spill;
+  });
+  if (over.length) {
+    var names = [...new Set(over.map(function (el) {
+      var no = el.querySelector('.sec-no'), title = el.querySelector('.sec-head b');
+      return no && title ? no.textContent.trim() + ' ' + title.textContent.trim() : '';
+    }).filter(Boolean))];
+    if (names.length) {
+      warn.querySelector('.warn-which').textContent = names.join(' · ') + ' 이(가) ';
+    }
+    warn.hidden = false;
+  }
+})();
+</script>
 {% endblock %}

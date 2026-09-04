@@ -966,6 +966,11 @@ def test_word_quiz():
     assert 'class="w-no">05<' not in sheet
     assert sheet.count('class="w-ans filled"') == 8              # 정답지 두 유형이 채워짐
     assert "ANSWER KEY" in sheet
+    # A4 세로가 기본입니다
+    assert "A4 세로" in sheet
+    css = body(client().get("/static/store.css"))
+    assert "@page{size:A4 portrait; margin:13mm 12mm;}" in css
+    assert "width:210mm; min-height:297mm" in css     # 화면에서도 A4 한 장 그대로
     assert "All rights reserved" in sheet
     assert "이름" in sheet and "점수" in sheet
     assert "시험지 번호 777" in sheet
