@@ -1052,7 +1052,9 @@ def lineup_shot(mid, filename):
 # ---------------------------------------------------------------------------
 # 단어 시험지 — 범위와 유형을 골라 그 자리에서 뽑습니다 (무료)
 # ---------------------------------------------------------------------------
-QUIZ_MAX = 100          # 한 장에 넣을 수 있는 최대 문항 수
+QUIZ_MAX = 500          # 한 번에 낼 수 있는 문항 수 (유형을 다 더해서)
+# 유형마다 A4 한 장에 들어가는 만큼을 기본으로 둡니다
+QUIZ_DEFAULT = {"en_ko": 40, "ko_en": 40, "choice": 15}
 
 
 def flat_words(book: dict) -> list[dict]:
@@ -1092,7 +1094,7 @@ SECTION_GUIDE = {
 ROMAN = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ"]
 
 
-def build_quiz(words: list[dict], kinds: list[str], count: int, seed: int) -> list[dict]:
+def build_quiz(words: list[dict], kinds: list[str], counts: dict, seed: int) -> list[dict]:
     """유형마다 한 묶음씩. 씨앗(seed)이 같으면 같은 시험지가 나옵니다.
 
     고른 단어를 유형마다 다 씁니다. Day 하나(40단어)를 고르고 두 유형을 고르시면
@@ -1102,10 +1104,10 @@ def build_quiz(words: list[dict], kinds: list[str], count: int, seed: int) -> li
     """
     rng = random.Random(seed)
     share = []
-    for i in range(len(kinds)):
+    for i, kind in enumerate(kinds):
         chunk = list(words)
         random.Random(seed + i * 977).shuffle(chunk)
-        share.append(chunk[:count])
+        share.append(chunk[:counts.get(kind, len(words))])
 
     sections = []
     for idx, (kind, chunk) in enumerate(zip(kinds, share)):
@@ -1146,7 +1148,7 @@ def words_book(slug):
     if book is None:
         abort(404)
     return render_template("words_book.html", b=book, kinds=sc.QUIZ_KINDS,
-                           total=sc.word_count(book))
+                           total=sc.word_count(book), defaults=QUIZ_DEFAULT, cap=QUIZ_MAX)
 
 
 @app.route("/words/<slug>/pick")
@@ -1163,7 +1165,7 @@ def words_pick(slug):
     if not rows:
         abort(404)
     return render_template("words_pick.html", b=book, rows=rows, kinds=sc.QUIZ_KINDS,
-                           unit_ids=unit_ids,
+                           unit_ids=unit_ids, defaults=QUIZ_DEFAULT, cap=QUIZ_MAX,
                            units=[u for u in book["units"] if u["id"] in unit_ids])
 
 
@@ -1190,20 +1192,33 @@ def words_sheet(slug):
         words = picked_words(book, unit_ids)
     if not words:
         abort(404)
-    # count 는 '유형마다' 낼 문항 수입니다. 0 이면 고른 단어를 유형 수로 나눠 다 냅니다.
-    want = sc.to_int(request.args.get("count"), 0) or QUIZ_MAX
-    count = min(want, QUIZ_MAX)
+    # 유형마다 몇 문항 낼지 따로 받습니다. (n_en_ko=40&n_ko_en=40&n_choice=15)
+    # 예전 주소가 쓰던 count 는 모든 유형에 같은 수로 받아 줍니다.
+    fallback = sc.to_int(request.args.get("count"), 0)
+    counts = {}
+    for k in kinds:
+        want = sc.to_int(request.args.get(f"n_{k}"), 0) or fallback or len(words)
+        counts[k] = max(1, min(want, len(words)))
+    # 다 더해 500문항을 넘지 않게 뒤쪽 유형부터 깎습니다
+    over = sum(counts.values()) - QUIZ_MAX
+    for k in reversed(kinds):
+        if over <= 0:
+            break
+        cut = min(over, counts[k] - 1)
+        counts[k] -= cut
+        over -= cut
     # 객관식은 보기를 채울 단어가 다섯 개는 있어야 합니다
     if "choice" in kinds and len(words) < 5:
         kinds = [k for k in kinds if k != "choice"] or ["en_ko"]
     seed = sc.to_int(request.args.get("seed"), 0) or random.randrange(1, 999999)
 
-    sections = build_quiz(words, kinds, count, seed)
+    sections = build_quiz(words, kinds, counts, seed)
     if not sections:
         abort(404)
     unit_names = [u.get("name") or u.get("id") for u in book["units"] if u["id"] in unit_ids]
     # '다른 문제로 다시' — 같은 범위·유형에 시험지 번호만 새로 뽑습니다
-    again = url_for("words_sheet", slug=slug, unit=unit_ids, kind=kinds, count=count)
+    again = url_for("words_sheet", slug=slug, unit=unit_ids, kind=kinds,
+                    **{f"n_{k}": v for k, v in counts.items()})
     return render_template("words_sheet.html", b=book, sections=sections, seed=seed,
                            unit_names=unit_names, kinds=kinds, kind_labels=sc.QUIZ_KINDS,
                            again_url=again, pool=len(words))

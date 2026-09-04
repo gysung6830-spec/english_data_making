@@ -1601,3 +1601,22 @@ input[type=file]{
   border-radius:var(--radius); background:var(--card);}
 .pick-split{display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; margin-top:22px;
   padding-top:18px; border-top:1px solid var(--line); font-size:14.5px; color:var(--ink-2);}
+
+/* 유형마다 문항 수 정하기 */
+.kind-rows{display:flex; flex-direction:column; gap:8px;}
+.kind-row{display:flex; align-items:center; gap:11px; padding:11px 14px; min-height:52px;
+  border:1px solid var(--line-strong); border-radius:11px; background:var(--card); cursor:pointer;}
+.kind-row input[type=checkbox]{width:18px; height:18px; accent-color:var(--brand); flex:0 0 auto;}
+.kr-name{flex:1 1 auto; font-size:15px; font-weight:600;}
+.kr-count{flex:0 0 auto; display:flex; align-items:center; gap:5px;}
+.kr-count input{width:76px; padding:8px 10px; text-align:right; font-family:inherit;
+  font-size:14.5px; border:1px solid var(--line-strong); border-radius:8px;
+  background:var(--bg); color:var(--ink); font-variant-numeric:tabular-nums;}
+.kr-count em{font-style:normal; font-size:13px; color:var(--muted);}
+.kind-row:has(input:checked){background:var(--brand-soft); border-color:var(--brand);}
+.kind-row.off .kr-name, .kind-row.off .kr-count{opacity:.4;}
+.kind-total{margin-top:11px; font-size:14.5px; color:var(--ink-2);}
+.kind-total b{font-size:17px; color:var(--brand); font-variant-numeric:tabular-nums;}
+.kind-total.over b{color:var(--accent);}
+.kind-total.over::after{content:' — 한 번에 낼 수 있는 수를 넘었습니다'; color:var(--accent);
+  font-weight:700;}

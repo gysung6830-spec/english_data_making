@@ -40,23 +40,23 @@
 
       <div class="pick-foot">
         <div class="field">
-          <label>문제 유형<span class="req">*</span></label>
-          <div class="check-grid col">
-            {% for k, label in kinds.items() %}
-              <label class="check">
-                <input type="checkbox" name="kind" value="{{ k }}" {{ 'checked' if loop.first }}>
-                <span>{{ label }}</span>
-              </label>
-            {% endfor %}
-          </div>
+          <label>문제 유형과 문항 수<span class="req">*</span></label>
+        <div class="kind-rows">
+          {% for k, label in kinds.items() %}
+            <label class="kind-row">
+              <input type="checkbox" name="kind" value="{{ k }}" {{ 'checked' if loop.first }}>
+              <span class="kr-name">{{ label }}</span>
+              <span class="kr-count">
+                <input type="number" name="n_{{ k }}" value="{{ defaults[k] }}"
+                       min="1" max="{{ cap }}" step="1" aria-label="{{ label }} 문항 수">
+                <em>문항</em>
+              </span>
+            </label>
+          {% endfor %}
         </div>
-        <div class="field">
-          <label for="count">유형마다 몇 문항</label>
-          <select id="count" name="count">
-            <option value="0" selected>고른 단어 전부</option>
-            {% for n in [10, 20, 25, 30, 40, 50, 60] %}<option value="{{ n }}">{{ n }}문항</option>{% endfor %}
-          </select>
-          <div class="hint">고른 단어를 유형마다 다 씁니다. 여기서 정한 수보다 많으면 그중에서 무작위로 뽑습니다.</div>
+        <div class="kind-total">모두 <b><span class="kt-sum">40</span></b>문항
+          <span class="muted">· 한 번에 {{ '{:,}'.format(cap) }}문항까지</span></div>
+          <div class="hint">고른 단어보다 많이 적으시면 있는 만큼만 냅니다.</div>
         </div>
         <button type="submit" class="btn btn-primary btn-block">시험지 만들기</button>
       </div>
@@ -95,6 +95,34 @@
     } else if (!form.querySelectorAll('input[name=kind]:checked').length) {
       e.preventDefault(); alert('문제 유형을 하나 이상 골라 주세요.');
     }
+  });
+  tally();
+})();
+</script>
+
+<script>
+/* 유형을 켜고 끌 때 문항 수 칸을 함께 켜고 끄며, 모두 몇 문항인지 세어 줍니다. */
+(function () {
+  var rows = document.querySelectorAll('.kind-row');
+  var sum = document.querySelector('.kt-sum');
+  var cap = {{ cap }};
+  if (!rows.length || !sum) return;
+
+  function tally() {
+    var total = 0;
+    rows.forEach(function (row) {
+      var on = row.querySelector('input[type=checkbox]').checked;
+      var num = row.querySelector('input[type=number]');
+      row.classList.toggle('off', !on);
+      num.disabled = !on;
+      if (on) total += Math.max(0, parseInt(num.value, 10) || 0);
+    });
+    sum.textContent = total.toLocaleString();
+    sum.closest('.kind-total').classList.toggle('over', total > cap);
+  }
+  rows.forEach(function (row) {
+    row.querySelector('input[type=checkbox]').addEventListener('change', tally);
+    row.querySelector('input[type=number]').addEventListener('input', tally);
   });
   tally();
 })();

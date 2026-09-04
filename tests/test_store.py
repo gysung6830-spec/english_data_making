@@ -1013,6 +1013,43 @@ def test_word_quiz():
     print("PASS  단어 시험지 — 붙여넣기 → 범위·유형 · 단어 골라서 → 학생용 + 정답지")
 
 
+def test_word_counts_per_kind_and_cap():
+    """문항 수는 유형마다 따로. 다 더해 500문항까지."""
+    a = admin()
+    a.post("/admin/words/new", data={"name": "cap test book"}, follow_redirects=True)
+    big = "\n".join(f"w{i}\t뜻{i}" for i in range(1, 601))          # 600단어
+    a.post("/admin/words/cap-test-book/unit",
+           data={"unit_name": "Day 1", "words": big}, follow_redirects=True)
+
+    # 유형마다 따로 정한 수가 그대로 나옵니다
+    text = body(client().get("/words/cap-test-book/sheet"
+                             "?unit=01&kind=en_ko&kind=ko_en&n_en_ko=30&n_ko_en=10&seed=5"))
+    assert "총 30문항" in text and "총 10문항" in text
+    assert text.count('class="w"') == 80                  # (30 + 10) × 학생용·정답지
+
+    # 다 더해 500문항을 넘기면 뒤쪽 유형부터 깎습니다
+    over = body(client().get("/words/cap-test-book/sheet"
+                             "?unit=01&kind=en_ko&kind=ko_en&n_en_ko=400&n_ko_en=400&seed=5"))
+    import re as _re
+    got = [int(x) for x in _re.findall(r"총 (\d+)문항", over)]
+    assert sum(set(got)) == 500, got                      # 400 + 100
+    assert 400 in got and 100 in got
+
+    # 예전 주소가 쓰던 count 도 그대로 받습니다
+    old_url = body(client().get("/words/cap-test-book/sheet"
+                                "?unit=01&kind=en_ko&kind=ko_en&count=25&seed=5"))
+    assert old_url.count("총 25문항") == 4                 # 두 유형 × 학생용·정답지
+
+    # 고르는 화면에 유형마다 문항 수 칸이 있어야 합니다
+    pick = body(client().get("/words/cap-test-book"))
+    for k, n in (("en_ko", 40), ("ko_en", 40), ("choice", 15)):
+        assert f'name="n_{k}" value="{n}"' in pick, k
+    assert "500문항까지" in pick
+
+    a.post("/admin/words/cap-test-book/delete", follow_redirects=True)
+    print("PASS  유형마다 문항 수 정하기 · 한 번에 500문항까지")
+
+
 def test_word_file_upload():
     """단어를 엑셀·CSV·PDF 파일로 올리면, 읽은 내용을 보여 준 뒤에 저장합니다."""
     import io as _io
@@ -2390,6 +2427,7 @@ def run_all():
     test_request_menu_renamed_to_jaryo()
     # 예시 데이터를 지우는 테스트는 다른 테스트가 그 상품을 쓰므로 맨 뒤에 둡니다.
     test_word_quiz()
+    test_word_counts_per_kind_and_cap()
     test_word_file_upload()
     test_pass_counts_passages()
     test_my_locker()
