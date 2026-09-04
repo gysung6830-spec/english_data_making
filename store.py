@@ -1095,15 +1095,17 @@ ROMAN = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ"]
 def build_quiz(words: list[dict], kinds: list[str], count: int, seed: int) -> list[dict]:
     """유형마다 한 묶음씩. 씨앗(seed)이 같으면 같은 시험지가 나옵니다.
 
-    한 유형에 문항을 몰아 주는 편이 풀기 좋습니다. 단어를 유형 수만큼 나눠 담고,
-    유형마다 01번부터 새로 셉니다. 같은 단어가 두 유형에 겹쳐 나오지 않습니다.
+    고른 단어를 유형마다 다 씁니다. Day 하나(40단어)를 고르고 두 유형을 고르시면
+    영→한 40문항 한 장, 한→영 40문항 한 장이 나옵니다. 같은 단어를 방향만 바꿔
+    두 번 묻는 것이 단어책 시험지의 보통 모양입니다.
+    유형마다 순서를 다시 섞어, 1번부터 나란히 같은 단어가 오지 않게 합니다.
     """
     rng = random.Random(seed)
-    pool = list(words)
-    rng.shuffle(pool)
-
-    # 단어를 유형 수만큼 고르게 나눕니다
-    share = [pool[i::len(kinds)][:count] for i in range(len(kinds))]
+    share = []
+    for i in range(len(kinds)):
+        chunk = list(words)
+        random.Random(seed + i * 977).shuffle(chunk)
+        share.append(chunk[:count])
 
     sections = []
     for idx, (kind, chunk) in enumerate(zip(kinds, share)):

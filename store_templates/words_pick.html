@@ -53,10 +53,10 @@
         <div class="field">
           <label for="count">유형마다 몇 문항</label>
           <select id="count" name="count">
-            <option value="0" selected>고른 단어를 유형마다 나눠서 전부</option>
-            {% for n in [10, 20, 25, 30, 40, 50] %}<option value="{{ n }}">{{ n }}문항</option>{% endfor %}
+            <option value="0" selected>고른 단어 전부</option>
+            {% for n in [10, 20, 25, 30, 40, 50, 60] %}<option value="{{ n }}">{{ n }}문항</option>{% endfor %}
           </select>
-          <div class="hint">유형마다 몇 문항씩 낼지입니다. 고른 단어보다 적게 정하시면 그중에서 무작위로 뽑습니다.</div>
+          <div class="hint">고른 단어를 유형마다 다 씁니다. 여기서 정한 수보다 많으면 그중에서 무작위로 뽑습니다.</div>
         </div>
         <button type="submit" class="btn btn-primary btn-block">시험지 만들기</button>
       </div>

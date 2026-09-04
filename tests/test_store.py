@@ -960,6 +960,10 @@ def test_word_quiz():
         assert f'{roman}.' in sheet and title in sheet
     assert "첫 글자 힌트 제공" in sheet                            # 한→영 힌트 안내
     assert sheet.count('class="w-hint"') == 4                    # 학생용에만 첫 글자
+    # 유형마다 4문항씩 · 학생용 3장 + 정답지 3장 = 01 번이 여섯 번 나옵니다
+    assert sheet.count('class="w-no">01<') == 6
+    assert sheet.count('class="w-no">04<') == 6
+    assert 'class="w-no">05<' not in sheet
     assert sheet.count('class="w-ans filled"') == 8              # 정답지 두 유형이 채워짐
     assert "ANSWER KEY" in sheet
     assert "All rights reserved" in sheet
@@ -986,6 +990,10 @@ def test_word_quiz():
     assert pick.count('name="pick"') == 12          # 12개가 다 체크된 채로 나옵니다
     assert 'checked' in pick
     chosen = "&".join(f"pick={i}" for i in (0, 2, 4, 6))
+    # 유형 둘을 골라도 고른 단어를 저마다 다 씁니다 (Day 하나로 두 방향 시험)
+    both = body(client().get(f"/words/quiz-test-book/sheet?{chosen}&kind=en_ko&kind=ko_en&count=0"))
+    assert both.count('class="sheet"') == 2 and both.count('class="w"') == 16   # 4문항 × 2유형 × 2장
+
     only = body(client().get(f"/words/quiz-test-book/sheet?{chosen}&kind=en_ko&count=0"))
     assert only.count('class="w"') == 8               # 고른 4개 × (학생용 + 정답지)
     # 고른 것보다 적게 정하면 그중에서 뽑습니다
