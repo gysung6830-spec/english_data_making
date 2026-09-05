@@ -1363,6 +1363,26 @@ def test_pass_counts_passages():
     print("PASS  프리패스 — 지문 n개까지 · 세는 법 · 오래 쓸수록 싸게")
 
 
+class fake_post:
+    """메일이 실제로 나간 셈 치고 받는 사람과 글을 모아 둡니다."""
+
+    def __init__(self):
+        self.box = []
+
+    def __enter__(self):
+        self._keep = sc.send_mail
+        os.environ["SMTP_HOST"] = "테스트우체국"
+        def fake(subject, body, to_addr=""):
+            self.box.append({"to": to_addr, "subject": subject, "body": body})
+            return True
+        sc.send_mail = fake
+        return self
+
+    def __exit__(self, *a):
+        sc.send_mail = self._keep
+        os.environ.pop("SMTP_HOST", None)
+
+
 def _mail_log():
     with store.app.app_context():
         return sc.get_db().execute(
@@ -1441,22 +1461,41 @@ def test_mail_to_leads_and_coupons():
     page = body(a.get("/admin/mail"))
     assert "새 자료 · 소식 알리기" in page and "할인 쿠폰 뿌리기" in page
     assert "담아만 두고 안 사신 분" in page
+    # 메일 설정이 없으면 보내기 단추가 잠겨 있어야 합니다
+    assert "아직 메일을 보낼 수 없습니다" in page and "disabled" in page
+    blocked = body(a.post("/admin/mail/news", data={
+        "subject": "제목", "body": "내용", "who": "news"}, follow_redirects=True))
+    assert "한 통도 나가지 않습니다" in blocked
 
-    # 소식 보내기
-    done = body(a.post("/admin/mail/news", data={
-        "subject": "9월 학평 자료가 올라왔습니다",
-        "body": "선생님 안녕하세요.", "who": "news"}, follow_redirects=True))
-    assert "통 보냈습니다" in done
-    log = _mail_log()
-    assert log["kind"] == "news" and log["sent"] + log["failed"] >= 3
+    with fake_post() as post:
+        assert "아직 메일을 보낼 수 없습니다" not in body(a.get("/admin/mail"))
 
-    # 쿠폰 뿌리기 — 사람마다 다른 번호가 나가야 합니다
-    with store.app.app_context():
-        before = sc.get_db().execute("SELECT COUNT(*) AS n FROM coupons").fetchone()["n"]
-    a.post("/admin/mail/coupon", data={
-        "kind": "amount", "value": "3000", "days": "14", "min_amount": "10000",
-        "note": "9월 시험 대비", "who": "news",
-        "subject": "쿠폰을 보내 드립니다", "body": "안녕하세요."}, follow_redirects=True)
+        # 시험 삼아 나에게만 한 통
+        a.post("/admin/mail/news", data={
+            "subject": "시험", "body": "시험 발송", "who": "news",
+            "test": "1", "test_to": "me@example.com"}, follow_redirects=True)
+        assert len(post.box) == 1 and post.box[0]["to"] == "me@example.com"
+        post.box.clear()
+
+        # 소식 보내기
+        done = body(a.post("/admin/mail/news", data={
+            "subject": "9월 학평 자료가 올라왔습니다",
+            "body": "선생님 안녕하세요.", "who": "news"}, follow_redirects=True))
+        assert "통 보냈습니다" in done
+        assert len(post.box) >= 3
+        assert "선생님 안녕하세요." in post.box[0]["body"]
+        assert "명단에서 빼 드리겠습니다" in post.box[0]["body"]   # 수신 거부 안내
+        log = _mail_log()
+        assert log["kind"] == "news" and log["sent"] >= 3 and log["failed"] == 0
+
+        # 쿠폰 뿌리기 — 사람마다 다른 번호가 나가야 합니다
+        with store.app.app_context():
+            before = sc.get_db().execute(
+                "SELECT COUNT(*) AS n FROM coupons").fetchone()["n"]
+        a.post("/admin/mail/coupon", data={
+            "kind": "amount", "value": "3000", "days": "14", "min_amount": "10000",
+            "note": "9월 시험 대비", "who": "news",
+            "subject": "쿠폰을 보내 드립니다", "body": "안녕하세요."}, follow_redirects=True)
     with store.app.app_context():
         db = sc.get_db()
         after = db.execute("SELECT COUNT(*) AS n FROM coupons").fetchone()["n"]
@@ -1467,7 +1506,22 @@ def test_mail_to_leads_and_coupons():
     assert all("@" in (c["issued_to"] or "") for c in made), \
         "쿠폰에 받는 사람이 안 적혔습니다"
     assert _mail_log()["kind"] == "coupon"
-    print("PASS  명단에 소식·쿠폰 보내기 (사람마다 다른 번호)")
+
+    # 못 보낸 쿠폰은 도로 지웁니다 — 손에 없는 번호가 쌓이면 안 됩니다
+    os.environ["SMTP_HOST"] = "없는우체국"
+    with store.app.app_context():
+        was = sc.get_db().execute("SELECT COUNT(*) AS n FROM coupons").fetchone()["n"]
+    a.post("/admin/mail/coupon", data={
+        "kind": "amount", "value": "1000", "days": "7", "min_amount": "0",
+        "note": "실패 시험", "who": "news", "subject": "x", "body": "x"},
+        follow_redirects=True)
+    with store.app.app_context():
+        now = sc.get_db().execute("SELECT COUNT(*) AS n FROM coupons").fetchone()["n"]
+        leftover = sc.get_db().execute(
+            "SELECT COUNT(*) AS n FROM coupons WHERE note = '실패 시험'").fetchone()["n"]
+    os.environ.pop("SMTP_HOST", None)
+    assert now == was and leftover == 0, "못 보낸 쿠폰이 남았습니다"
+    print("PASS  명단에 소식·쿠폰 보내기 · 못 보낸 쿠폰은 도로 지움")
 
 
 def test_left_cart_reminder():
@@ -1496,8 +1550,11 @@ def test_left_cart_reminder():
     page = body(a.get("/admin/mail"))
     assert email in page and "1분께 알려 드리기" in page
 
-    a.post("/admin/mail/cart", data={"hours": "24"}, follow_redirects=True)
-    assert _mail_log()["kind"] == "cart"
+    with fake_post() as post:
+        a.post("/admin/mail/cart", data={"hours": "24"}, follow_redirects=True)
+        assert _mail_log()["kind"] == "cart"
+        assert len(post.box) == 1 and post.box[0]["to"] == email
+        assert "장바구니에 담아 두신 자료가 있습니다" in post.box[0]["body"]
     # 한 번 보냈으면 다시 안 나옵니다
     assert email not in body(a.get("/admin/mail"))
 

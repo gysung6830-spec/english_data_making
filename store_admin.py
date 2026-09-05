@@ -1747,12 +1747,16 @@ def mail_page():
         rows.append({"r": r, "items": picked})
     return render_template("admin/mail.html", news=news, everyone=everyone,
                            left=rows, past=past, kinds=sc.MAIL_KINDS,
-                           site=sc.load_site())
+                           ready=sc.mail_ready(), site=sc.load_site())
 
 
 @admin_bp.route("/mail/news", methods=["POST"])
 def mail_news():
     """이메일 명단에 소식·새 자료를 알립니다."""
+    if not sc.mail_ready():
+        flash("메일 설정(SMTP)이 없어 한 통도 나가지 않습니다. "
+              "배포하실 때 SMTP_HOST · SMTP_USER · SMTP_PASS 를 넣어 주세요.", "err")
+        return redirect(url_for("admin.mail_page"))
     subject = sc.clean(request.form.get("subject"), 150)
     body = sc.clean(request.form.get("body"), 4000)
     if not subject or not body:
@@ -1788,6 +1792,10 @@ def mail_news():
 @admin_bp.route("/mail/coupon", methods=["POST"])
 def mail_coupon():
     """명단에 쿠폰을 한 번에 뿌립니다. 사람마다 다른 번호가 나갑니다."""
+    if not sc.mail_ready():
+        flash("메일 설정(SMTP)이 없어 한 통도 나가지 않습니다. "
+              "배포하실 때 SMTP_HOST · SMTP_USER · SMTP_PASS 를 넣어 주세요.", "err")
+        return redirect(url_for("admin.mail_page"))
     kind = "percent" if request.form.get("kind") == "percent" else "amount"
     value = max(1, sc.to_int(request.form.get("value"), 0))
     days = max(1, sc.to_int(request.form.get("days"), 30))
@@ -1807,9 +1815,12 @@ def mail_coupon():
     site = sc.load_site()
     label = f"{value}%" if kind == "percent" else f"{value:,}원"
 
+    made_for: dict[str, str] = {}     # 누구에게 어떤 번호를 만들었는지
+
     def body_for(addr: str) -> str:
         code = sc.issue_coupon(kind, value, min_amount=min_amount, note=note,
                                issued_to=addr, days_valid=days)
+        made_for[addr] = code
         lines = [intro, "", f"쿠폰 번호 : {code}", f"할인 : {label}"]
         if min_amount:
             lines.append(f"{min_amount:,}원 이상 주문에 쓰실 수 있습니다.")
@@ -1819,9 +1830,18 @@ def mail_coupon():
                   "", "---", site.get("brand", "오르티카영어")]
         return "\n".join(x for x in lines if x is not None)
 
+    def drop(addr: str) -> None:
+        """못 보낸 쿠폰은 도로 지웁니다. 손에 없는 번호가 쌓이면 안 됩니다."""
+        code = made_for.pop(addr, "")
+        if code:
+            db = sc.get_db()
+            db.execute("DELETE FROM coupons WHERE code = ? AND used_at IS NULL", (code,))
+            db.commit()
+
     sent, failed = sc.send_batch("coupon", subject, body_for, to_list,
-                                 note=f"{note} · {label} · {days}일")
-    flash(f"쿠폰 {sent}장을 보냈습니다." + (f" {failed}통 실패." if failed else ""),
+                                 note=f"{note} · {label} · {days}일", on_fail=drop)
+    flash(f"쿠폰 {sent}장을 보냈습니다."
+          + (f" {failed}장은 못 보내서 도로 지웠습니다." if failed else ""),
           "ok" if not failed else "err")
     return redirect(url_for("admin.mail_page"))
 
@@ -1829,6 +1849,10 @@ def mail_coupon():
 @admin_bp.route("/mail/cart", methods=["POST"])
 def mail_cart():
     """담아만 두고 안 사신 분들께 한 번만 알려 드립니다."""
+    if not sc.mail_ready():
+        flash("메일 설정(SMTP)이 없어 한 통도 나가지 않습니다. "
+              "배포하실 때 SMTP_HOST · SMTP_USER · SMTP_PASS 를 넣어 주세요.", "err")
+        return redirect(url_for("admin.mail_page"))
     rows = sc.carts_to_remind(sc.to_int(request.form.get("hours"), 24))
     if not rows:
         flash("알려 드릴 분이 없습니다.", "err")

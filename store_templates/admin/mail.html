@@ -15,20 +15,23 @@
   <div class="mini"><span>지금까지 보낸 안내</span><b>{{ past|length }}회</b></div>
 </div>
 
-{% if not site.contact or not site.contact.email %}
+{% if not ready %}
   <div class="steps-help" style="background:#fff8f4;border-color:#f0d4c4;">
-    <b>먼저 메일 설정이 필요합니다</b>
-    <div>보내는 서버(SMTP)가 설정돼 있지 않으면 메일이 조용히 안 나갑니다.
+    <b>아직 메일을 보낼 수 없습니다</b>
+    <div>메일을 내보내는 우체국(<b>SMTP</b>) 설정이 없습니다. 지금 누르셔도
+      <b>한 통도 나가지 않습니다.</b> 그래서 보내기 단추를 잠가 두었습니다.<br>
       배포하실 때 <code>SMTP_HOST</code> · <code>SMTP_USER</code> ·
-      <code>SMTP_PASS</code> 를 넣어 주세요.</div>
+      <code>SMTP_PASS</code> 세 가지를 넣으시면 열립니다.</div>
   </div>
 {% endif %}
 
 <div class="panel">
   <h2>1. 새 자료 · 소식 알리기</h2>
   <div class="hint">
-    회차 자료를 올리셨을 때 한 통 보내는 것이 가장 싼 마케팅입니다.
-    <b>먼저 나에게 시험 삼아 보내 보세요.</b>
+    회차 자료를 올리셨을 때 한 통 보내는 것이 가장 싼 마케팅입니다.<br>
+    <b>보내기 전에 꼭 '시험 삼아 한 통' 을 먼저 눌러 보세요.</b>
+    메일은 한 번 나가면 되돌릴 수 없고, 받는 사람 화면에서 어떻게 보이는지는
+    실제로 받아 봐야 압니다.
   </div>
   <form method="post" action="{{ url_for('admin.mail_news') }}">
     <div class="adm-field full">
@@ -52,13 +55,13 @@
         전체 발송은 꼭 필요할 때만 쓰세요.</div>
     </div>
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary"
+      <button type="submit" class="btn btn-primary" {{ '' if ready else 'disabled' }}
               onclick="return confirm('정말 보낼까요? 되돌릴 수 없습니다.');">보내기</button>
       <span class="spacer"></span>
       <input type="hidden" name="test" value="0">
       <input type="email" name="test_to" placeholder="나에게 시험 발송할 주소"
              style="width:240px;">
-      <button type="submit" class="btn btn-ghost"
+      <button type="submit" class="btn btn-ghost" {{ '' if ready else 'disabled' }}
               onclick="this.form.test.value='1';">시험 삼아 한 통</button>
     </div>
   </form>
@@ -132,7 +135,7 @@
       <div class="tip">쿠폰 번호와 안내는 이 아래에 자동으로 붙습니다.</div>
     </div>
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary"
+      <button type="submit" class="btn btn-primary" {{ '' if ready else 'disabled' }}
               onclick="return confirm('쿠폰을 만들어 보냅니다. 되돌릴 수 없습니다. 진행할까요?');">
         쿠폰 만들어 보내기</button>
     </div>
@@ -164,7 +167,8 @@
     </div>
     <form method="post" action="{{ url_for('admin.mail_cart') }}" style="margin-top:14px;">
       <input type="hidden" name="hours" value="24">
-      <button type="submit" class="btn btn-primary">{{ left|length }}분께 알려 드리기</button>
+      <button type="submit" class="btn btn-primary" {{ '' if ready else 'disabled' }}>
+        {{ left|length }}분께 알려 드리기</button>
     </form>
   {% else %}
     <div class="hint">지금은 알려 드릴 분이 없습니다.</div>

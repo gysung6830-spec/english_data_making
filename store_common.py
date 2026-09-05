@@ -1341,12 +1341,19 @@ def lead_emails(only_news: bool = True) -> list[str]:
     return [r["e"] for r in rows if EMAIL_RE.match(r["e"] or "")]
 
 
+def mail_ready() -> bool:
+    """메일을 보낼 수 있는 상태인지. 설정이 없으면 한 통도 안 나갑니다."""
+    return bool(os.environ.get("SMTP_HOST"))
+
+
 def send_batch(kind: str, subject: str, body_for, to_list: list[str],
-               note: str = "") -> tuple[int, int]:
+               note: str = "", on_fail=None) -> tuple[int, int]:
     """여러 명에게 안내 메일을 보냅니다. (보낸 수, 실패 수)
 
     body_for(email) 이 그 사람에게 갈 글을 돌려줍니다. 사람마다 쿠폰 번호가
     다를 수 있어 이렇게 받습니다. 한 명이 막혀도 나머지는 계속 보냅니다.
+    on_fail(email) 은 못 보냈을 때 뒷정리를 하라고 부릅니다.
+    (쿠폰은 만들어 놓고 못 보내면 도로 지웁니다)
     """
     sent = failed = 0
     for addr in to_list:
@@ -1358,6 +1365,11 @@ def send_batch(kind: str, subject: str, body_for, to_list: list[str],
             sent += 1
         else:
             failed += 1
+            if on_fail:
+                try:
+                    on_fail(addr)
+                except Exception:
+                    pass
     db = get_db()
     db.execute("""INSERT INTO mailouts (kind, subject, sent, failed, note, created_at)
                   VALUES (?,?,?,?,?,?)""",
