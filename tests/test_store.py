@@ -269,10 +269,14 @@ def test_popular_order():
             "SELECT id FROM orders WHERE view_key = ?", (key,)).fetchone()
         return row[0]
 
+    # 다른 시험이 먼저 팔아 둔 것이 있을 수 있어, 늘어난 만큼으로 봅니다
+    with store.app.test_request_context():
+        base = sc.sold_counts()
+
     # 값을 안 치른 주문은 인기에 안 들어갑니다
     buy(hot, "notpaid@example.com")
     with store.app.test_request_context():
-        assert sc.sold_counts().get(hot, 0) == 0
+        assert sc.sold_counts().get(hot, 0) == base.get(hot, 0)
 
     for i in range(3):
         oid = buy(hot, f"hot{i}@example.com")
@@ -282,7 +286,9 @@ def test_popular_order():
 
     with store.app.test_request_context():
         counts = sc.sold_counts()
-    assert counts[hot] == 3 and counts[mild] == 1
+    assert counts[hot] - base.get(hot, 0) == 3
+    assert counts[mild] - base.get(mild, 0) == 1
+    assert counts[hot] > counts[mild]
 
     # 버튼이 있고, 많이 팔린 교재가 앞에 옵니다
     page = body(client().get("/products?order=popular"))
@@ -563,7 +569,8 @@ def test_order_to_download_flow():
     order_no = row[1]
     a.post(f"/admin/orders/{row[0]}/deliver")
     assert sc.sqlite3.connect(sc.DB_PATH).execute(
-        "SELECT COUNT(*) FROM downloads").fetchone()[0] == 0, "파일 없이 링크가 나갔습니다"
+        "SELECT COUNT(*) FROM downloads WHERE order_no = ?",
+        (order_no,)).fetchone()[0] == 0, "파일 없이 링크가 나갔습니다"
 
     # 파일을 올립니다.
     up = a.post(f"/admin/products/{slug}/files", data={
