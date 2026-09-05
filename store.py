@@ -599,10 +599,12 @@ def order_quote():
     items, _product, _sibling, _from_cart = order_items(catalog)
     if not items:
         abort(404)
-    q = quote_for(items,
-                  sc.clean(request.args.get("email"), 120),
+    email = sc.clean(request.args.get("email"), 120)
+    q = quote_for(items, email,
                   sc.clean(request.args.get("coupon"), 40).upper(),
                   request.args.get("nomark") == "1")
+    # 주문서까지 오셨는데 안 사고 나가시면 하루 뒤에 한 번 알려 드립니다
+    sc.remember_cart(email, [x["slug"] for x in items], q["final"])
     return {
         "subtotal": q["subtotal"],
         "extra": q["extra"],
@@ -684,6 +686,7 @@ def order():
         sc.redeem_coupon(coupon["code"], order_no)
     if from_cart:
         session.pop("cart", None)      # 주문이 들어갔으니 장바구니를 비웁니다
+    sc.cart_ordered(data["email"])     # 되살리기 메일 대상에서 뺍니다
 
     parts = [f"{r['name']} {r['percent']}%" for r in quote["rows"]]
     if coupon:

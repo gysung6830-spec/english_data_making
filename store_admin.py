@@ -1612,6 +1612,137 @@ def pass_update(pass_id):
     return redirect(url_for("admin.passes"))
 
 
+# ---------------------------------------------------------------------------
+# 안내 메일 — 명단에 보내기 · 쿠폰 뿌리기 · 장바구니 되살리기
+# ---------------------------------------------------------------------------
+@admin_bp.route("/mail")
+def mail_page():
+    db = sc.get_db()
+    news = len(sc.lead_emails(only_news=True))
+    everyone = len(sc.lead_emails(only_news=False))
+    left = sc.carts_to_remind()
+    past = db.execute("SELECT * FROM mailouts ORDER BY id DESC LIMIT 30").fetchall()
+    catalog = sc.load_catalog()
+    known = {p["slug"]: p for p in catalog["products"]}
+    rows = []
+    for r in left:
+        picked = [known[x] for x in (r["slugs"] or "").split(",") if x in known]
+        rows.append({"r": r, "items": picked})
+    return render_template("admin/mail.html", news=news, everyone=everyone,
+                           left=rows, past=past, kinds=sc.MAIL_KINDS,
+                           site=sc.load_site())
+
+
+@admin_bp.route("/mail/news", methods=["POST"])
+def mail_news():
+    """이메일 명단에 소식·새 자료를 알립니다."""
+    subject = sc.clean(request.form.get("subject"), 150)
+    body = sc.clean(request.form.get("body"), 4000)
+    if not subject or not body:
+        flash("제목과 내용을 모두 적어 주세요.", "err")
+        return redirect(url_for("admin.mail_page"))
+
+    site = sc.load_site()
+    only = request.form.get("who") != "all"
+    to_list = sc.lead_emails(only_news=only)
+    if not to_list:
+        flash("보낼 곳이 없습니다. 무료 자료실로 이메일이 쌓이면 여기서 보내실 수 있습니다.", "err")
+        return redirect(url_for("admin.mail_page"))
+
+    if request.form.get("test") == "1":       # 나에게만 한 통 보내 보기
+        to_list = [sc.clean(request.form.get("test_to"), 120).lower()]
+        if not sc.EMAIL_RE.match(to_list[0]):
+            flash("시험 삼아 보낼 이메일을 적어 주세요.", "err")
+            return redirect(url_for("admin.mail_page"))
+
+    tail = ("\n\n---\n"
+            f"{site.get('brand', '오르티카영어')}\n"
+            f"{url_for('home', _external=True)}\n"
+            "이 메일이 필요 없으시면 회신 주시면 명단에서 빼 드리겠습니다.")
+
+    sent, failed = sc.send_batch("news", subject, lambda _a: body + tail, to_list,
+                                 note=("시험 발송" if request.form.get("test") == "1"
+                                       else f"{'소식 받기 신청자' if only else '전체'}"))
+    flash(f"{sent}통 보냈습니다." + (f" {failed}통은 실패했습니다." if failed else ""),
+          "ok" if not failed else "err")
+    return redirect(url_for("admin.mail_page"))
+
+
+@admin_bp.route("/mail/coupon", methods=["POST"])
+def mail_coupon():
+    """명단에 쿠폰을 한 번에 뿌립니다. 사람마다 다른 번호가 나갑니다."""
+    kind = "percent" if request.form.get("kind") == "percent" else "amount"
+    value = max(1, sc.to_int(request.form.get("value"), 0))
+    days = max(1, sc.to_int(request.form.get("days"), 30))
+    min_amount = max(0, sc.to_int(request.form.get("min_amount"), 0))
+    note = sc.clean(request.form.get("note"), 100) or "정기 쿠폰"
+    subject = sc.clean(request.form.get("subject"), 150) or f"[{note}] 할인 쿠폰을 보내 드립니다"
+    intro = sc.clean(request.form.get("body"), 3000)
+
+    to_list = sc.lead_emails(only_news=request.form.get("who") != "all")
+    if not to_list:
+        flash("보낼 곳이 없습니다.", "err")
+        return redirect(url_for("admin.mail_page"))
+    if len(to_list) > 2000:
+        flash("한 번에 2,000명까지 보낼 수 있습니다.", "err")
+        return redirect(url_for("admin.mail_page"))
+
+    site = sc.load_site()
+    label = f"{value}%" if kind == "percent" else f"{value:,}원"
+
+    def body_for(addr: str) -> str:
+        code = sc.issue_coupon(kind, value, min_amount=min_amount, note=note,
+                               issued_to=addr, days_valid=days)
+        lines = [intro, "", f"쿠폰 번호 : {code}", f"할인 : {label}"]
+        if min_amount:
+            lines.append(f"{min_amount:,}원 이상 주문에 쓰실 수 있습니다.")
+        lines += [f"쓰실 수 있는 기간 : 오늘부터 {days}일",
+                  "", "주문서 맨 아래 '할인 쿠폰' 칸에 번호를 넣으시면 됩니다.",
+                  url_for("products", _external=True),
+                  "", "---", site.get("brand", "오르티카영어")]
+        return "\n".join(x for x in lines if x is not None)
+
+    sent, failed = sc.send_batch("coupon", subject, body_for, to_list,
+                                 note=f"{note} · {label} · {days}일")
+    flash(f"쿠폰 {sent}장을 보냈습니다." + (f" {failed}통 실패." if failed else ""),
+          "ok" if not failed else "err")
+    return redirect(url_for("admin.mail_page"))
+
+
+@admin_bp.route("/mail/cart", methods=["POST"])
+def mail_cart():
+    """담아만 두고 안 사신 분들께 한 번만 알려 드립니다."""
+    rows = sc.carts_to_remind(sc.to_int(request.form.get("hours"), 24))
+    if not rows:
+        flash("알려 드릴 분이 없습니다.", "err")
+        return redirect(url_for("admin.mail_page"))
+
+    site = sc.load_site()
+    catalog = sc.load_catalog()
+    known = {p["slug"]: p for p in catalog["products"]}
+    body_of = {}
+    for r in rows:
+        picked = [known[x]["name"] for x in (r["slugs"] or "").split(",") if x in known]
+        body_of[r["email"]] = "\n".join([
+            "장바구니에 담아 두신 자료가 있습니다.", "",
+            *[f"· {n}" for n in picked[:10]],
+            "", f"예상 금액 {sc.to_int(r['amount'], 0):,}원",
+            "", "아래 주소에서 이어서 주문하실 수 있습니다.",
+            url_for("products", _external=True),
+            "", "---", site.get("brand", "오르티카영어")])
+
+    sent, failed = sc.send_batch(
+        "cart", "장바구니에 담아 두신 자료가 있습니다",
+        lambda addr: body_of.get(addr, ""), list(body_of), note=f"{len(rows)}명")
+    db = sc.get_db()
+    db.executemany("UPDATE carts_left SET reminded_at = ? WHERE email = ?",
+                   [(sc.stamp(), e) for e in body_of])
+    db.commit()
+    flash(f"{sent}분께 알려 드렸습니다." + (f" {failed}통 실패." if failed else ""),
+          "ok" if not failed else "err")
+    return redirect(url_for("admin.mail_page"))
+
+
 @admin_bp.route("/leads")
 def leads():
     """무료 자료를 받아 가시며 남긴 이메일 명단."""

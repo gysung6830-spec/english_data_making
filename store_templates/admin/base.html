@@ -46,6 +46,8 @@
         🎫 프리패스</a>
       <a href="{{ url_for('admin.leads') }}" class="{{ 'on' if request.endpoint == 'admin.leads' }}">
         📧 이메일 명단</a>
+      <a href="{{ url_for('admin.mail_page') }}" class="{{ 'on' if request.endpoint == 'admin.mail_page' }}">
+        ✉️ 안내 메일</a>
       <a href="{{ url_for('admin.notices') }}" class="{{ 'on' if request.endpoint == 'admin.notices' }}">
         📢 공지</a>
 

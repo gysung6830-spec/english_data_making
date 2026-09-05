@@ -1,0 +1,199 @@
+{% extends "admin/base.html" %}
+{% block title %}안내 메일{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <h1>안내 메일</h1>
+  <p>무료 자료실로 모인 이메일 명단에 <b>새 자료 소식</b>과 <b>할인 쿠폰</b>을 보냅니다.
+    담아만 두고 안 사신 분께 알려 드리는 것도 여기서 합니다.</p>
+</div>
+
+<div class="mini-grid">
+  <div class="mini"><span>소식 받기 신청</span><b>{{ news }}명</b></div>
+  <div class="mini"><span>전체 명단</span><b>{{ everyone }}명</b></div>
+  <div class="mini"><span>담아만 두신 분</span><b>{{ left|length }}명</b></div>
+  <div class="mini"><span>지금까지 보낸 안내</span><b>{{ past|length }}회</b></div>
+</div>
+
+{% if not site.contact or not site.contact.email %}
+  <div class="steps-help" style="background:#fff8f4;border-color:#f0d4c4;">
+    <b>먼저 메일 설정이 필요합니다</b>
+    <div>보내는 서버(SMTP)가 설정돼 있지 않으면 메일이 조용히 안 나갑니다.
+      배포하실 때 <code>SMTP_HOST</code> · <code>SMTP_USER</code> ·
+      <code>SMTP_PASS</code> 를 넣어 주세요.</div>
+  </div>
+{% endif %}
+
+<div class="panel">
+  <h2>1. 새 자료 · 소식 알리기</h2>
+  <div class="hint">
+    회차 자료를 올리셨을 때 한 통 보내는 것이 가장 싼 마케팅입니다.
+    <b>먼저 나에게 시험 삼아 보내 보세요.</b>
+  </div>
+  <form method="post" action="{{ url_for('admin.mail_news') }}">
+    <div class="adm-field full">
+      <label for="subject">제목</label>
+      <input type="text" id="subject" name="subject" required
+             placeholder="9월 학력평가 한줄해석·좌지문우해석이 올라왔습니다">
+    </div>
+    <div class="adm-field full">
+      <label for="body">내용</label>
+      <textarea id="body" name="body" rows="9" required
+                placeholder="선생님 안녕하세요.&#10;&#10;9월 학력평가 회차 자료를 올렸습니다.&#10;· 한줄해석 · 좌지문우해석 — 무료&#10;· 지문분석지 · 17종 변형문제 — 자료 목록에서&#10;&#10;수업에 도움이 되면 좋겠습니다."></textarea>
+      <div class="tip">맨 아래에 가게 이름과 주소, 수신 거부 안내가 자동으로 붙습니다.</div>
+    </div>
+    <div class="adm-field">
+      <label>누구에게</label>
+      <label class="check"><input type="radio" name="who" value="news" checked>
+        <span>소식 받기에 동의하신 분 ({{ news }}명)</span></label>
+      <label class="check"><input type="radio" name="who" value="all">
+        <span>전체 명단 ({{ everyone }}명)</span></label>
+      <div class="tip"><b>동의하신 분에게만</b> 보내는 것이 원칙입니다.
+        전체 발송은 꼭 필요할 때만 쓰세요.</div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary"
+              onclick="return confirm('정말 보낼까요? 되돌릴 수 없습니다.');">보내기</button>
+      <span class="spacer"></span>
+      <input type="hidden" name="test" value="0">
+      <input type="email" name="test_to" placeholder="나에게 시험 발송할 주소"
+             style="width:240px;">
+      <button type="submit" class="btn btn-ghost"
+              onclick="this.form.test.value='1';">시험 삼아 한 통</button>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>2. 할인 쿠폰 뿌리기</h2>
+  <div class="hint">
+    사람마다 <b>다른 번호</b>가 나갑니다. 한 번 쓰면 그 번호는 못 씁니다.
+    시험 3주 전이나 방학 같은 비수기에 쓰시면 좋습니다.
+  </div>
+  <form method="post" action="{{ url_for('admin.mail_coupon') }}">
+    <div class="form-grid">
+      <div class="adm-field">
+        <label>할인 방식</label>
+        <label class="check"><input type="radio" name="kind" value="amount" checked>
+          <span>금액으로 깎기</span></label>
+        <label class="check"><input type="radio" name="kind" value="percent">
+          <span>퍼센트로 깎기</span></label>
+      </div>
+      <div class="adm-field">
+        <label for="value">얼마나</label>
+        <input type="text" id="value" name="value" value="3000" hidden>
+        <div class="pick" data-target="value">
+          {% for v in [2000, 3000, 5000, 10] %}
+            <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
+          {% endfor %}
+        </div>
+        <div class="tip">금액이면 원, 퍼센트면 %.</div>
+      </div>
+      <div class="adm-field">
+        <label for="min_amount">최소 주문 금액</label>
+        <input type="text" id="min_amount" name="min_amount" value="0" hidden>
+        <div class="pick" data-target="min_amount">
+          {% for v in [0, 10000, 20000, 30000] %}
+            <button class="pick-btn" data-value="{{ v }}">{{ '{:,}'.format(v) }}원</button>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="adm-field">
+        <label for="days">쓸 수 있는 기간</label>
+        <input type="text" id="days" name="days" value="30" hidden>
+        <div class="pick" data-target="days">
+          {% for v in [7, 14, 30, 60] %}
+            <button class="pick-btn" data-value="{{ v }}">{{ v }}일</button>
+          {% endfor %}
+        </div>
+        <div class="tip"><b>짧을수록 잘 씁니다.</b> 2~4주를 권합니다.</div>
+      </div>
+      <div class="adm-field">
+        <label for="note">메모 <span class="muted">(쿠폰 목록에 보입니다)</span></label>
+        <input type="text" id="note" name="note" placeholder="9월 시험 대비">
+      </div>
+      <div class="adm-field">
+        <label>누구에게</label>
+        <label class="check"><input type="radio" name="who" value="news" checked>
+          <span>소식 받기 동의 ({{ news }}명)</span></label>
+        <label class="check"><input type="radio" name="who" value="all">
+          <span>전체 ({{ everyone }}명)</span></label>
+      </div>
+    </div>
+    <div class="adm-field full">
+      <label for="c_subject">메일 제목</label>
+      <input type="text" id="c_subject" name="subject"
+             placeholder="9월 시험 대비 할인 쿠폰을 보내 드립니다">
+    </div>
+    <div class="adm-field full">
+      <label for="c_body">첫머리 인사</label>
+      <textarea id="c_body" name="body" rows="5"
+                placeholder="선생님 안녕하세요.&#10;9월 시험 준비에 보태시라고 쿠폰을 보내 드립니다."></textarea>
+      <div class="tip">쿠폰 번호와 안내는 이 아래에 자동으로 붙습니다.</div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary"
+              onclick="return confirm('쿠폰을 만들어 보냅니다. 되돌릴 수 없습니다. 진행할까요?');">
+        쿠폰 만들어 보내기</button>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>3. 담아만 두고 안 사신 분 {{ left|length }}명</h2>
+  <div class="hint">
+    주문서까지 오셔서 이메일을 적으셨는데 결제를 안 하신 분들입니다.
+    <b>하루가 지난 분만</b> 나오고, <b>한 사람에게 한 번만</b> 보냅니다.
+  </div>
+  {% if left %}
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th>이메일</th><th>담아 둔 자료</th><th>예상 금액</th><th>담은 때</th></tr></thead>
+        <tbody>
+        {% for x in left %}
+          <tr>
+            <td>{{ x.r['email'] }}</td>
+            <td><small>{% for p in x['items'][:3] %}{{ p.name }}{% if not loop.last %} · {% endif %}{% endfor %}
+              {% if x['items']|length > 3 %} 외 {{ x['items']|length - 3 }}개{% endif %}</small></td>
+            <td>{{ '{:,}'.format(x.r['amount']) }}원</td>
+            <td><small class="muted">{{ x.r['created_at'][:16].replace('T', ' ') }}</small></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <form method="post" action="{{ url_for('admin.mail_cart') }}" style="margin-top:14px;">
+      <input type="hidden" name="hours" value="24">
+      <button type="submit" class="btn btn-primary">{{ left|length }}분께 알려 드리기</button>
+    </form>
+  {% else %}
+    <div class="hint">지금은 알려 드릴 분이 없습니다.</div>
+  {% endif %}
+</div>
+
+<div class="panel">
+  <h2>보낸 기록</h2>
+  {% if past %}
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th>언제</th><th>종류</th><th>제목</th><th>보냄</th><th>실패</th><th>메모</th></tr></thead>
+        <tbody>
+        {% for m in past %}
+          <tr>
+            <td><small>{{ m['created_at'][:16].replace('T', ' ') }}</small></td>
+            <td><span class="tag">{{ kinds.get(m['kind'], m['kind']) }}</span></td>
+            <td><small>{{ m['subject'] }}</small></td>
+            <td><b>{{ m['sent'] }}</b></td>
+            <td>{% if m['failed'] %}<span style="color:#b91c1c;">{{ m['failed'] }}</span>
+                {% else %}0{% endif %}</td>
+            <td><small class="muted">{{ m['note'] }}</small></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="hint">아직 보낸 안내가 없습니다.</div>
+  {% endif %}
+</div>
+{% endblock %}

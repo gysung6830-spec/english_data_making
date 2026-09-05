@@ -807,6 +807,29 @@ CREATE TABLE IF NOT EXISTS pass_uses (
     UNIQUE (pass_id, product_slug)
 );
 
+-- 담아만 두고 사지 않은 장바구니. 하루 뒤 한 번만 알려 드립니다.
+CREATE TABLE IF NOT EXISTS carts_left (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    email         TEXT NOT NULL,
+    slugs         TEXT NOT NULL,
+    amount        INTEGER NOT NULL DEFAULT 0,
+    reminded_at   TEXT,
+    ordered_at    TEXT,
+    created_at    TEXT NOT NULL,
+    UNIQUE (email)
+);
+
+-- 보낸 안내 메일 기록. 같은 사람에게 두 번 보내지 않게 합니다.
+CREATE TABLE IF NOT EXISTS mailouts (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    kind          TEXT NOT NULL,          -- news | coupon | cart
+    subject       TEXT,
+    sent          INTEGER NOT NULL DEFAULT 0,
+    failed        INTEGER NOT NULL DEFAULT 0,
+    note          TEXT,
+    created_at    TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS lockers (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     email         TEXT UNIQUE NOT NULL,
@@ -1302,6 +1325,79 @@ def grant_pass(email: str, plan: str, quota: int, days: int,
          ts, ends, clean(order_no, 40), clean(note, 300), ts))
     get_db().commit()
     return cur.lastrowid
+
+
+# ---------------------------------------------------------------------------
+# 안내 메일 — 명단에 보내기 · 쿠폰 뿌리기 · 장바구니 되살리기
+# ---------------------------------------------------------------------------
+MAIL_KINDS = {"news": "새 자료 · 소식", "coupon": "할인 쿠폰", "cart": "장바구니 안내"}
+
+
+def lead_emails(only_news: bool = True) -> list[str]:
+    """무료 자료를 받아 가신 분들의 이메일. 같은 주소는 한 번만."""
+    where = "WHERE news = 1" if only_news else ""
+    rows = get_db().execute(
+        f"SELECT DISTINCT lower(email) AS e FROM leads {where} ORDER BY e").fetchall()
+    return [r["e"] for r in rows if EMAIL_RE.match(r["e"] or "")]
+
+
+def send_batch(kind: str, subject: str, body_for, to_list: list[str],
+               note: str = "") -> tuple[int, int]:
+    """여러 명에게 안내 메일을 보냅니다. (보낸 수, 실패 수)
+
+    body_for(email) 이 그 사람에게 갈 글을 돌려줍니다. 사람마다 쿠폰 번호가
+    다를 수 있어 이렇게 받습니다. 한 명이 막혀도 나머지는 계속 보냅니다.
+    """
+    sent = failed = 0
+    for addr in to_list:
+        try:
+            ok = send_mail(subject, body_for(addr), to_addr=addr)
+        except Exception:
+            ok = False
+        if ok:
+            sent += 1
+        else:
+            failed += 1
+    db = get_db()
+    db.execute("""INSERT INTO mailouts (kind, subject, sent, failed, note, created_at)
+                  VALUES (?,?,?,?,?,?)""",
+               (kind, clean(subject, 200), sent, failed, clean(note, 300), stamp()))
+    db.commit()
+    return sent, failed
+
+
+def remember_cart(email: str, slugs: list[str], amount: int) -> None:
+    """주문서에서 이메일만 적고 나가신 분의 장바구니를 기억해 둡니다."""
+    email = clean(email, 120).lower()
+    if not EMAIL_RE.match(email) or not slugs:
+        return
+    db = get_db()
+    db.execute("""INSERT INTO carts_left (email, slugs, amount, created_at)
+                  VALUES (?,?,?,?)
+                  ON CONFLICT(email) DO UPDATE SET
+                    slugs = excluded.slugs, amount = excluded.amount,
+                    created_at = excluded.created_at,
+                    reminded_at = NULL, ordered_at = NULL""",
+               (email, ",".join(slugs)[:2000], to_int(amount, 0), stamp()))
+    db.commit()
+
+
+def cart_ordered(email: str) -> None:
+    """값을 치르셨으면 되살리기 대상에서 뺍니다."""
+    email = clean(email, 120).lower()
+    if EMAIL_RE.match(email):
+        db = get_db()
+        db.execute("UPDATE carts_left SET ordered_at = ? WHERE email = ?", (stamp(), email))
+        db.commit()
+
+
+def carts_to_remind(hours: int = 24) -> list:
+    """담아 둔 지 hours 시간이 지났는데 아직 안 사신 분들."""
+    cut = (now_kst() - timedelta(hours=max(1, hours))).isoformat(timespec="seconds")
+    return get_db().execute(
+        """SELECT * FROM carts_left
+           WHERE ordered_at IS NULL AND reminded_at IS NULL AND created_at <= ?
+           ORDER BY created_at""", (cut,)).fetchall()
 
 
 def safe_filename(name: str) -> str:

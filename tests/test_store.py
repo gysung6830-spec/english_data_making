@@ -1363,6 +1363,99 @@ def test_pass_counts_passages():
     print("PASS  프리패스 — 지문 n개까지 · 세는 법 · 오래 쓸수록 싸게")
 
 
+def _mail_log():
+    with store.app.app_context():
+        return sc.get_db().execute(
+            "SELECT * FROM mailouts ORDER BY id DESC LIMIT 1").fetchone()
+
+
+def test_mail_to_leads_and_coupons():
+    """명단에 소식·쿠폰을 보내고, 보낸 기록이 남아야 합니다."""
+    a = admin()
+    # 무료 자료를 받아 가면서 이메일이 쌓입니다
+    free = sc.load_raw_freebies()["items"][0]
+    for i in range(3):
+        client().post(f"/free/{free['slug']}/get",
+                      data={"email": f"lead{i}@example.com", "news": "1", "agree": "1"})
+
+    page = body(a.get("/admin/mail"))
+    assert "새 자료 · 소식 알리기" in page and "할인 쿠폰 뿌리기" in page
+    assert "담아만 두고 안 사신 분" in page
+
+    # 소식 보내기
+    done = body(a.post("/admin/mail/news", data={
+        "subject": "9월 학평 자료가 올라왔습니다",
+        "body": "선생님 안녕하세요.", "who": "news"}, follow_redirects=True))
+    assert "통 보냈습니다" in done
+    log = _mail_log()
+    assert log["kind"] == "news" and log["sent"] + log["failed"] >= 3
+
+    # 쿠폰 뿌리기 — 사람마다 다른 번호가 나가야 합니다
+    with store.app.app_context():
+        before = sc.get_db().execute("SELECT COUNT(*) AS n FROM coupons").fetchone()["n"]
+    a.post("/admin/mail/coupon", data={
+        "kind": "amount", "value": "3000", "days": "14", "min_amount": "10000",
+        "note": "9월 시험 대비", "who": "news",
+        "subject": "쿠폰을 보내 드립니다", "body": "안녕하세요."}, follow_redirects=True)
+    with store.app.app_context():
+        db = sc.get_db()
+        after = db.execute("SELECT COUNT(*) AS n FROM coupons").fetchone()["n"]
+        made = db.execute("SELECT * FROM coupons WHERE note = '9월 시험 대비'").fetchall()
+    assert after - before >= 3
+    assert len({c["code"] for c in made}) == len(made), "같은 쿠폰 번호가 나갔습니다"
+    assert made[0]["value"] == 3000 and made[0]["min_amount"] == 10000
+    assert all("@" in (c["issued_to"] or "") for c in made), \
+        "쿠폰에 받는 사람이 안 적혔습니다"
+    assert _mail_log()["kind"] == "coupon"
+    print("PASS  명단에 소식·쿠폰 보내기 (사람마다 다른 번호)")
+
+
+def test_left_cart_reminder():
+    """담아만 두고 안 사신 분께 하루 뒤 한 번만 알려 드립니다."""
+    a = admin()
+    c = client()
+    c.post("/cart/add", data={"slug": "ybm-han-analysis"})
+    c.post("/cart/add", data={"slug": "ybm-han-problem"})
+    email = "left@example.com"
+    # 주문서에서 이메일을 적으면 (금액을 다시 물어볼 때) 기억해 둡니다
+    c.get(f"/order/quote?cart=1&email={email}")
+    with store.app.app_context():
+        row = sc.get_db().execute(
+            "SELECT * FROM carts_left WHERE email = ?", (email,)).fetchone()
+    assert row and row["amount"] > 0 and "ybm-han-analysis" in row["slugs"]
+
+    # 방금 담은 것은 아직 안 보냅니다 (하루가 지나야)
+    assert "지금은 알려 드릴 분이 없습니다" in body(a.get("/admin/mail"))
+
+    # 하루 지난 것으로 돌려 놓습니다
+    with store.app.app_context():
+        db = sc.get_db()
+        db.execute("UPDATE carts_left SET created_at = ? WHERE email = ?",
+                   ("2020-01-01T00:00:00+09:00", email))
+        db.commit()
+    page = body(a.get("/admin/mail"))
+    assert email in page and "1분께 알려 드리기" in page
+
+    a.post("/admin/mail/cart", data={"hours": "24"}, follow_redirects=True)
+    assert _mail_log()["kind"] == "cart"
+    # 한 번 보냈으면 다시 안 나옵니다
+    assert email not in body(a.get("/admin/mail"))
+
+    # 값을 치르시면 대상에서 빠집니다
+    c2 = client()
+    c2.post("/cart/add", data={"slug": "ybm-han-analysis"})
+    c2.get("/order/quote?cart=1&email=bought@example.com")
+    ordered = c2.post("/order", data={"cart": "1", "name": "산분",
+                                      "phone": "010-2222-3333",
+                                      "email": "bought@example.com", "agree": "1"})
+    assert ordered.status_code == 302, body(ordered)[:300]
+    with store.app.app_context():
+        row = sc.get_db().execute(
+            "SELECT * FROM carts_left WHERE email = ?", ("bought@example.com",)).fetchone()
+    assert row and row["ordered_at"], "값을 치렀는데 되살리기 대상에 남았습니다"
+    print("PASS  장바구니 두고 간 분 되살리기 (하루 뒤 · 한 번만)")
+
+
 def test_pass_quota():
     """프리패스 — 지문이 깎이고, 다 쓰면 막히고, 두 번 받아도 한 번만 깎입니다."""
     a = admin()
@@ -2925,6 +3018,8 @@ def run_all():
     test_whole_book_upload()
     test_wordfile_table_shapes()
     test_pass_counts_passages()
+    test_mail_to_leads_and_coupons()
+    test_left_cart_reminder()
     test_pass_quota()
     test_my_locker()
     test_clear_sample_data()
