@@ -61,12 +61,12 @@ p, li, .hint, .tip, .lead, small, figcaption {
 
 :root{
   --measure:46em;      /* 한글 본문 한 줄의 최대 길이 */
-  --wrap:1240px;       /* 화면 가운데 내용의 폭 */
+  --wrap:1180px;       /* 화면 가운데 내용의 폭 */
   --wrap-narrow:820px; /* 글·서식 한 칸짜리 화면 (A4 폭 794px 이 들어갑니다) */
   --gutter:clamp(20px, 2.4vw, 34px);   /* 좌우 여백 */
 }
 /* 아주 넓은 화면에서는 조금 더 벌립니다. 양옆이 허전해 보이지 않게 합니다. */
-@media (min-width:1600px){ :root{ --wrap:1360px; --wrap-narrow:880px; } }
+@media (min-width:1600px){ :root{ --wrap:1280px; --wrap-narrow:860px; } }
 
 .hero .lead, .hero-note, .hero-claim, .section-head p, .group-head p, .lineup-lead,
 .mat-tagline, .mat-subline, .sheet-note,

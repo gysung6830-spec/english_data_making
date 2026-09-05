@@ -1654,15 +1654,15 @@ def test_page_width_uses_the_screen():
     """넓은 화면에서 좌우가 허전하지 않도록, 내용 폭을 한 곳에서 정합니다."""
     css = open("store_static/store.css", encoding="utf-8").read()
     # 폭은 :root 의 값 하나로 정하고, 쓰는 곳은 그 값을 따라갑니다
-    assert "--wrap:1240px" in css and "--wrap-narrow:820px" in css
+    assert "--wrap:1180px" in css and "--wrap-narrow:820px" in css
     assert ".wrap{max-width:var(--wrap);" in css
     assert ".narrow{max-width:var(--wrap-narrow);}" in css
     assert "max-width:1080px" not in css          # 따로 박아 둔 값이 남아 있으면 안 됩니다
     # 아주 넓은 화면에서는 더 벌립니다
-    assert "@media (min-width:1600px){ :root{ --wrap:1360px;" in css
+    assert "@media (min-width:1600px){ :root{ --wrap:1280px;" in css
     # 폰에서는 좌우 20px 을 그대로 지킵니다
     assert "--gutter:clamp(20px," in css
-    print("PASS  넓은 화면에서 좌우 여백 줄이기 (내용 1240 · 1600px 이상 1360)")
+    print("PASS  넓은 화면에서 좌우 여백 줄이기 (내용 1180 · 1600px 이상 1280)")
 
 
 def test_brand_is_korean_for_search():
