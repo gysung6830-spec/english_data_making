@@ -1,0 +1,156 @@
+{% extends "admin/base.html" %}
+{% block title %}상품 일괄 만들기{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <h1>상품 일괄 만들기</h1>
+  <p>자료를 <b>압축(zip)</b> 해서 올리면, 안에 든 PDF 하나하나를 상품으로 만들어 드립니다.
+    파일까지 함께 붙습니다.</p>
+</div>
+
+{% if rows is none %}
+  <div class="steps-help">
+    <b>파일 이름에 두 가지만 들어가면 됩니다</b>
+    <ol>
+      <li><b>몇 강인지</b> — <code>3강</code> · <code>Day 3</code> · <code>5과</code> ·
+        <code>2회차</code> · <code>03_</code> 다 알아봅니다.
+        <code>3강/지문분석지.pdf</code> 처럼 <b>폴더로 나누셔도</b> 됩니다.</li>
+      <li><b>무슨 자료인지</b> — <code>지문자료 · 지문분석지 · 필생보 · 통합워크북 ·
+        서술형 · 17종변형 · 동형모의고사</code></li>
+    </ol>
+    <div style="margin-top:8px;">
+      예) <code>1강_지문분석지.pdf</code> · <code>수능특강_12강_통합워크북.pdf</code> ·
+      <code>Day 3/17종 변형문제.pdf</code>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>압축 파일 올리기</h2>
+    <form method="post" enctype="multipart/form-data">
+      <label class="dropzone" for="file" id="drop">
+        <input type="file" id="file" name="file" accept=".zip" required>
+        <b class="dz-title">압축 파일을 여기에 끌어다 놓으세요</b>
+        <span class="dz-sub">또는 눌러서 고르기 · .zip 만 됩니다</span>
+        <span class="dz-file" hidden></span>
+      </label>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">읽어 오기</button>
+        <a class="btn btn-ghost" href="{{ url_for('admin.products') }}">상품 목록</a>
+      </div>
+    </form>
+    <div class="hint" style="margin-top:12px;">
+      아직 아무것도 저장되지 않습니다. <b>무엇이 만들어질지 먼저 보여 드립니다.</b>
+      한 번에 600개까지 읽습니다.
+    </div>
+  </div>
+
+  {% if skipped %}
+    <div class="panel">
+      <h2>읽지 못한 파일 {{ skipped|length }}개</h2>
+      <ul style="margin:0;padding-left:18px;font-size:13.5px;color:var(--muted);">
+        {% for x in skipped[:20] %}<li>{{ x }}</li>{% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+{% else %}
+  <div class="steps-help">
+    <b>{{ file_name }} 에서 {{ rows|length }}개를 읽었습니다 — 강 {{ units|length }}개</b>
+    <ol>
+      <li>어느 <b>교재</b>의 자료인지 골라 주세요. 상품 이름과 분류가 거기서 나옵니다.</li>
+      <li><b>강마다 지문이 몇 개</b>인지 적어 주세요. 값이 자동으로 계산됩니다.</li>
+      <li>빼고 싶은 줄은 <b>체크를 풀면</b> 됩니다.</li>
+    </ol>
+  </div>
+
+  <form method="post" action="{{ url_for('admin.products_bulk_save') }}">
+    <input type="hidden" name="token" value="{{ token }}">
+
+    <div class="panel">
+      <h2>1. 어느 교재의 자료인가</h2>
+      <div class="adm-field full">
+        <label for="book">교재</label>
+        <select id="book" name="book" required>
+          <option value="">— 고르세요 —</option>
+          {% for b in books %}
+            <option value="{{ b.slug }}">{{ b.name }}{% if b.publisher %} · {{ b.publisher }}{% endif %}</option>
+          {% endfor %}
+        </select>
+        <div class="tip">교재가 없으면 <a href="{{ url_for('admin.book_form') }}">먼저 만들어</a> 주세요.</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>2. 강마다 지문 수</h2>
+      <div class="adm-field">
+        <label for="passages">기본값 <span class="muted">(아래에서 강마다 고칠 수 있습니다)</span></label>
+        <input type="number" id="passages" name="passages" value="6" min="1" max="200"
+               style="width:120px;">
+      </div>
+      <div class="unit-pass">
+        {% for no, unit in units %}
+          <label class="up-row">
+            <span class="up-name">{{ unit }}</span>
+            <input type="number" name="p_{{ no }}" min="1" max="200" placeholder="6"
+                   aria-label="{{ unit }} 지문 수">
+            <em>지문</em>
+          </label>
+        {% endfor %}
+      </div>
+      <div class="tip">비워 두시면 위 기본값을 씁니다.</div>
+    </div>
+
+    <div class="panel">
+      <h2>3. 만들 상품 {{ rows|length }}개</h2>
+      <div class="wrapbox">
+        <table class="adm-table">
+          <thead><tr>
+            <th style="width:44px;"><input type="checkbox" id="all" checked></th>
+            <th>강</th><th>자료</th><th>압축 안 파일</th><th style="width:90px;">크기</th>
+          </tr></thead>
+          <tbody>
+          {% for r in rows %}
+            <tr>
+              <td><input type="checkbox" name="path" value="{{ r.path }}" checked></td>
+              <td><b>{{ r.unit }}</b></td>
+              <td>{{ mats.get(r.material).name if mats.get(r.material) else r.material }}</td>
+              <td><small class="muted">{{ r.path }}</small></td>
+              <td><small class="muted">{{ '{:,}'.format((r.size / 1024)|round|int) }} KB</small></td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {% if skipped %}
+      <div class="panel">
+        <h2>건너뛴 파일 {{ skipped|length }}개</h2>
+        <div class="hint">파일 이름에서 강이나 자료를 못 읽은 것들입니다.
+          이름을 고쳐서 다시 올리시면 됩니다.</div>
+        <ul style="margin:0;padding-left:18px;font-size:13.5px;color:var(--muted);">
+          {% for x in skipped[:30] %}<li>{{ x }}</li>{% endfor %}
+          {% if skipped|length > 30 %}<li>… 그 밖 {{ skipped|length - 30 }}개</li>{% endif %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">상품 만들기</button>
+      <a class="btn btn-ghost" href="{{ url_for('admin.products_bulk') }}">다시 올리기</a>
+    </div>
+  </form>
+
+  <script>
+  (function () {
+    var all = document.getElementById('all');
+    if (!all) return;
+    all.addEventListener('change', function () {
+      document.querySelectorAll('input[name=path]').forEach(function (c) {
+        c.checked = all.checked;
+      });
+    });
+  })();
+  </script>
+{% endif %}
+{% endblock %}

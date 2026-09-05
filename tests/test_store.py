@@ -2127,6 +2127,71 @@ def test_analysis_tagline_updated():
     print("PASS  지문분석지 소개 문구")
 
 
+def test_bulk_products_from_zip():
+    """압축 하나로 상품 여러 개를 만들고, 파일까지 붙어야 합니다."""
+    import io as _io, zipfile
+    a = admin()
+
+    page = body(a.get("/admin/products/bulk"))
+    assert "압축 파일을 여기에 끌어다 놓으세요" in page
+    assert "지문분석지" in page and "17종변형" in page      # 알아보는 이름 안내
+
+    buf = _io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as zf:
+        zf.writestr("1강_지문분석지.pdf", b"%PDF-1.4 a")
+        zf.writestr("1강_17종 변형문제.pdf", b"%PDF-1.4 b")
+        zf.writestr("2강/지문분석지.pdf", b"%PDF-1.4 c")
+        zf.writestr("Day 3 통합워크북.pdf", b"%PDF-1.4 d")
+        zf.writestr("이름없는파일.pdf", b"%PDF-1.4 e")     # 못 읽는 것
+        zf.writestr("메모.txt", b"x")                      # PDF 가 아닌 것
+
+    look = body(a.post("/admin/products/bulk",
+                       data={"file": (_io.BytesIO(buf.getvalue()), "자료묶음.zip")},
+                       content_type="multipart/form-data"))
+    assert "4개를 읽었습니다" in look and "강 3개" in look
+    assert "1강" in look and "Day 3" in look
+    assert "건너뛴 파일 2개" in look
+    import re as _re
+    token = _re.search(r'name="token" value="([^"]+)"', look).group(1)
+
+    before = len(sc.load_raw_catalog()["products"])
+    done = a.post("/admin/products/bulk/save", data={
+        "token": token, "book": "ebs-2026-tokgang-eng", "passages": "6",
+        "p_1": "8",                                        # 1강만 지문 8개
+        "path": ["1강_지문분석지.pdf", "1강_17종 변형문제.pdf",
+                 "2강/지문분석지.pdf", "Day 3 통합워크북.pdf"],
+    }, follow_redirects=True)
+    assert "상품 4개를 만들고 파일 4개를 붙였습니다" in body(done)
+
+    catalog = sc.load_raw_catalog()
+    assert len(catalog["products"]) == before + 4
+    made = {p["slug"]: p for p in catalog["products"]
+            if p.get("book") == "ebs-2026-tokgang-eng" and p.get("passages") in (6, 8)}
+    one = made["ebs-2026-tokgang-eng-01-analysis"]
+    assert one["passages"] == 8 and one["price"] == 250 * 8       # 지문분석지 250원
+    assert one["materials"] == ["analysis"] and one["package"] == "analysis"
+    assert "1강 · 지문분석지" in one["name"]
+    assert made["ebs-2026-tokgang-eng-01-variants"]["price"] == 400 * 8
+    assert made["ebs-2026-tokgang-eng-02-analysis"]["passages"] == 6   # 기본값
+    assert made["ebs-2026-tokgang-eng-03-workbook"]["package"] == "problem"
+
+    # 파일이 상품 폴더에 붙었어야 합니다
+    assert len(sc.product_files("ebs-2026-tokgang-eng-01-analysis")) == 1
+
+    # 손님 화면에도 바로 보입니다
+    page = body(client().get("/products/ebs-2026-tokgang-eng-01-analysis"))
+    assert "1강 · 지문분석지" in page and "2,000원" in page
+
+    # 치우기
+    catalog["products"] = [p for p in catalog["products"]
+                           if p["slug"] not in made]
+    sc.save_catalog(catalog)
+    for slug in made:
+        import shutil as _sh
+        _sh.rmtree(sc.product_dir(slug), ignore_errors=True)
+    print("PASS  압축 하나로 상품 여러 개 만들기 (파일까지)")
+
+
 def test_admin_pricing_is_editable():
     """자료 1종이 지문 1개당 얼마인지를 화면에서 정하고, 그 값으로 계산해야 합니다."""
     a = admin()
@@ -2697,6 +2762,7 @@ def run_all():
     test_admin_not_indexed_and_login_is_standalone()
     test_login_next_cannot_leave_admin()
     test_admin_pages_open()
+    test_bulk_products_from_zip()
     test_admin_pricing_is_editable()
     test_product_form_offers_our_price()
     test_setup_checklist_guides_first_day()

@@ -718,6 +718,127 @@ def product_form(slug=None):
     return redirect(url_for("admin.products"))
 
 
+@admin_bp.route("/products/bulk", methods=["GET", "POST"])
+def products_bulk():
+    """압축 파일 하나로 상품 여러 개를 한 번에 만듭니다.
+
+    안에 든 PDF 이름에서 '몇 강' 과 '무슨 자료' 인지 읽고, 지문 수 × 자료 단가로
+    값을 계산해 상품을 만들고 파일까지 붙입니다. 저장 전에 미리 보여 드립니다.
+    """
+    catalog = sc.load_raw_catalog()
+    site = sc.load_site()
+    books = [b for b in catalog["books"] if b.get("active", True) is not False]
+    mats = sc.material_map()
+
+    if request.method == "GET":
+        return render_template("admin/products_bulk.html", books=books, mats=mats,
+                               rows=None, cfg=sc.pricing_cfg(site))
+
+    upload = request.files.get("file")
+    if not upload or not upload.filename:
+        flash("압축 파일(.zip)을 골라 주세요.", "err")
+        return redirect(url_for("admin.products_bulk"))
+    if not upload.filename.lower().endswith(".zip"):
+        flash("압축 파일(.zip)만 올릴 수 있습니다.", "err")
+        return redirect(url_for("admin.products_bulk"))
+
+    blob = upload.read()
+    rows, skipped = sc.read_zip_products(blob)
+    if not rows:
+        flash("압축 안에서 만들 수 있는 파일을 찾지 못했습니다. "
+              "파일 이름에 '3강'·'지문분석지' 처럼 강과 자료가 들어가야 합니다.", "err")
+        return render_template("admin/products_bulk.html", books=books, mats=mats,
+                               rows=None, skipped=skipped, cfg=sc.pricing_cfg(site))
+
+    # 압축은 한 번만 올리고, 미리보기에서 저장할 때 다시 씁니다
+    sc.BULK_DIR.mkdir(parents=True, exist_ok=True)
+    keep = sc.BULK_DIR / f"{sc.new_view_key()}.zip"
+    keep.write_bytes(blob)
+
+    units = sorted({(r["no"], r["unit"]) for r in rows})
+    return render_template("admin/products_bulk.html", books=books, mats=mats,
+                           rows=rows, skipped=skipped, units=units,
+                           token=keep.stem, file_name=upload.filename,
+                           cfg=sc.pricing_cfg(site))
+
+
+@admin_bp.route("/products/bulk/save", methods=["POST"])
+def products_bulk_save():
+    """미리보기에서 확인한 대로 상품을 만들고 파일을 붙입니다."""
+    import zipfile
+
+    token = re.sub(r"[^A-Za-z0-9_\-]", "", request.form.get("token", ""))[:80]
+    kept = sc.BULK_DIR / f"{token}.zip"
+    if not token or not kept.is_file():
+        flash("올리신 압축 파일을 찾지 못했습니다. 다시 올려 주세요.", "err")
+        return redirect(url_for("admin.products_bulk"))
+
+    catalog = sc.load_raw_catalog()
+    site = sc.load_site()
+    book = next((b for b in catalog["books"] if b.get("slug") == request.form.get("book")), None)
+    if book is None:
+        flash("어느 교재의 자료인지 골라 주세요.", "err")
+        return redirect(url_for("admin.products_bulk"))
+
+    rates = sc.pricing_cfg(site).get("materials") or {}
+    mats = sc.material_map()
+    packages = sc.package_map()
+    of_package = {m: pid for pid, pkg in packages.items() for m in (pkg.get("materials") or [])}
+    taken = {p.get("slug") for p in catalog["products"]}
+    default_passages = max(1, sc.to_int(request.form.get("passages"), 6))
+
+    made, files, failed = [], 0, []
+    with zipfile.ZipFile(kept) as zf:
+        for path in request.form.getlist("path"):
+            no, unit = sc.guess_unit(path)
+            mid = sc.guess_material(os.path.basename(path))
+            if not unit or mid not in mats:
+                continue
+            # 강마다 지문 수를 따로 적으셨으면 그것을 씁니다
+            passages = max(1, sc.to_int(request.form.get(f"p_{no}"), default_passages))
+            slug = sc.unique_slug(f"{book['slug']}-{no:02d}-{mid}", taken)
+            taken.add(slug)
+
+            item = {
+                "slug": slug,
+                "name": f"{book['name']} {unit} · {mats[mid]['name']}",
+                "subtitle": f"{unit} · 지문 {passages}개",
+                "category": book.get("category", ""),
+                "book": book["slug"],
+                "package": of_package.get(mid, ""),
+                "materials": [mid],
+                "passages": passages,
+                "price": int(round(rates.get(mid, 0) * passages / 100) * 100),
+                "grade": book.get("grade", ""),
+                "sort": 100 + no,
+                "active": True,
+                "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
+                "format": "PDF (A4, 인쇄용)",
+                "includes": [], "highlights": [], "covers": [],
+            }
+            catalog["products"].append(item)
+            made.append(item)
+            try:                                   # 파일을 상품 폴더에 붙입니다
+                folder = sc.product_dir(slug)
+                folder.mkdir(parents=True, exist_ok=True)
+                (folder / sc.safe_filename(os.path.basename(path))).write_bytes(zf.read(path))
+                files += 1
+            except Exception as exc:
+                failed.append(f"{path} — {exc}")
+
+    if not made:
+        flash("만들 상품을 고르지 않으셨습니다.", "err")
+        return redirect(url_for("admin.products_bulk"))
+
+    sc.save_catalog(catalog)
+    kept.unlink(missing_ok=True)
+    note = f"상품 {len(made)}개를 만들고 파일 {files}개를 붙였습니다."
+    if failed:
+        note += f" 파일 {len(failed)}개는 붙이지 못했습니다 — {failed[0]}"
+    flash(note, "ok" if not failed else "err")
+    return redirect(url_for("admin.products"))
+
+
 @admin_bp.route("/products/clear-samples", methods=["POST"])
 def clear_samples():
     """제가 넣어 둔 예시 상품·교재를 한 번에 지웁니다. 직접 만드신 것은 그대로 둡니다."""

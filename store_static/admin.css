@@ -297,3 +297,15 @@
   padding: 1px 7px; border-radius: 999px;
   background: var(--tint, #eef4f0); color: var(--brand, #146b4a);
 }
+
+/* 일괄 만들기 — 강마다 지문 수 적는 줄 */
+.unit-pass { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.up-row {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 10px; border: 1px solid var(--line); border-radius: 10px; background: #fff;
+  font-size: 13.5px;
+}
+.up-row .up-name { font-weight: 700; min-width: 46px; }
+.up-row input { width: 62px; padding: 5px 7px; font-size: 13.5px;
+  border: 1px solid var(--line-strong); border-radius: 6px; }
+.up-row em { font-style: normal; color: var(--muted); font-size: 12.5px; }

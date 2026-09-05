@@ -32,6 +32,7 @@ SUBMIT_DIR = DATA_DIR / "submissions"
 DELIVER_DIR = DATA_DIR / "deliverables"   # 상품별로 손님에게 보낼 파일
 FREE_DIR = DATA_DIR / "free"              # 무료 자료실에 올린 파일
 SHOT_DIR = DATA_DIR / "lineup"            # 라인업에 거는 자료 지면 사진
+BULK_DIR = DATA_DIR / ".bulk"             # 일괄 만들기로 올린 압축을 잠깐 두는 곳
 DB_PATH = Path(os.environ.get("STORE_DB") or (DATA_DIR / "store.db"))
 
 KST = timezone(timedelta(hours=9))
@@ -1148,6 +1149,111 @@ def shot_files(mid: str) -> list[str]:
     return sorted(f.name for f in folder.iterdir()
                   if f.is_file() and not f.name.startswith(".")
                   and f.suffix.lower() in IMAGE_EXTS)
+
+
+# 압축 파일 안의 PDF 이름에서 '몇 강' 과 '무슨 자료' 인지 읽어 냅니다.
+# 파일 이름이 제각각이라 별칭을 넉넉히 둡니다.
+MATERIAL_ALIASES = {
+    "passage": ["지문자료", "지문 자료", "원문", "본문", "passage"],
+    "analysis": ["지문분석지", "지문 분석", "분석지", "해설", "analysis"],
+    "pilsaengbo": ["필생보", "필수생존보카", "pilsaengbo"],
+    "pilsaengbo-solo": ["독학용", "필생보독학", "solo"],
+    "workbook": ["워크북", "통합워크북", "통합 영어 워크북", "workbook"],
+    "descriptive": ["서술형", "서답형", "descriptive"],
+    "variants": ["변형문제", "변형", "17종", "variants"],
+    "mocktest": ["동형모의고사", "동형", "모의고사", "mocktest"],
+}
+
+_UNIT_IN_NAME = re.compile(
+    r"(?:(day|unit|lesson|week|chapter)\s*\.?\s*(\d{1,3})"
+    r"|(\d{1,3})\s*(강|과|회차|일차|주차|단원))", re.I)
+_LEAD_NUM = re.compile(r"^\s*(\d{1,3})\s*[._\-]")
+
+
+def guess_material(name: str) -> str:
+    """파일 이름에서 무슨 자료인지 알아냅니다. 못 알아보면 빈 값."""
+    low = (name or "").lower().replace(" ", "")
+    hit, best = "", -1
+    for mid, words in MATERIAL_ALIASES.items():
+        for w in words:
+            at = low.find(w.lower().replace(" ", ""))
+            if at >= 0 and len(w) > best:      # 긴 별칭이 먼저입니다 ('변형' 보다 '17종변형')
+                hit, best = mid, len(w)
+    return hit
+
+
+def guess_unit(path: str) -> tuple[int, str]:
+    """경로에서 '몇 강' 인지 읽습니다. (번호, 보여 줄 이름) — 못 읽으면 (0, "").
+
+    폴더 이름도 함께 봅니다. '3강/지문분석지.pdf' 처럼 넣으셔도 됩니다.
+    """
+    for part in reversed((path or "").replace("\\", "/").split("/")):
+        hit = _UNIT_IN_NAME.search(part)
+        if hit:
+            if hit.group(2):                    # Day 3
+                n = int(hit.group(2))
+                return n, f"{hit.group(1).title()} {n}"
+            n = int(hit.group(3))               # 3강
+            return n, f"{n}{hit.group(4)}"
+        lead = _LEAD_NUM.match(part)
+        if lead:
+            return int(lead.group(1)), f"{int(lead.group(1))}강"
+    return 0, ""
+
+
+def safe_filename(name: str) -> str:
+    """올라온 파일 이름에서 위험한 글자를 걷어냅니다. (경로 타고 나가지 못하게)"""
+    name = os.path.basename((name or "").replace("\\", "/"))
+    name = re.sub(r"[\x00-\x1f/]+", "", name).strip().lstrip(".")
+    return name[:120] or "파일"
+
+
+def unique_slug(base: str, taken: set[str]) -> str:
+    """이미 쓰고 있는 주소 이름이면 뒤에 숫자를 붙입니다."""
+    base = re.sub(r"[^a-z0-9\-]+", "-", (base or "").lower()).strip("-")[:60] or "item"
+    slug, n = base, 2
+    while slug in taken:
+        slug, n = f"{base}-{n}", n + 1
+    return slug
+
+
+def read_zip_products(blob: bytes, limit: int = 600) -> tuple[list[dict], list[str]]:
+    """올리신 압축 파일 안을 읽어, 상품 하나하나로 만들 목록을 뽑습니다.
+
+    (읽어 낸 목록, 건너뛴 것) 을 돌려줍니다. 아직 아무것도 저장하지 않습니다.
+    """
+    import io as _io
+    import zipfile
+    rows, skipped = [], []
+    try:
+        zf = zipfile.ZipFile(_io.BytesIO(blob))
+    except Exception as exc:
+        return [], [f"압축을 열지 못했습니다: {exc}"]
+
+    with zf:
+        for info in zf.infolist():
+            name = info.filename
+            if info.is_dir() or name.startswith("__MACOSX") or "/." in f"/{name}":
+                continue
+            ext = os.path.splitext(name)[1].lower()
+            if ext not in (".pdf", ".zip", ".hwp", ".hwpx", ".docx"):
+                skipped.append(f"{name} — PDF 가 아닙니다")
+                continue
+            no, unit = guess_unit(name)
+            mid = guess_material(os.path.basename(name))
+            if not unit or not mid:
+                missing = " · ".join(x for x in
+                                     ("몇 강인지" if not unit else "",
+                                      "무슨 자료인지" if not mid else "") if x)
+                skipped.append(f"{name} — {missing} 을(를) 못 읽었습니다")
+                continue
+            rows.append({"path": name, "no": no, "unit": unit, "material": mid,
+                         "size": info.file_size})
+            if len(rows) >= limit:
+                skipped.append(f"한 번에 {limit}개까지만 읽습니다. 나머지는 다시 올려 주세요.")
+                break
+    rows.sort(key=lambda r: (r["no"], r["material"]))
+    return rows, skipped
 
 
 def product_dir(slug: str) -> Path:
