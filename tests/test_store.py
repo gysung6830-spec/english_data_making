@@ -204,11 +204,30 @@ def test_grade_filter_and_sort():
     assert "2026년 3월 학력평가 (고2)" in go2
     assert "2026학년도 6월 모의평가 (고3)" not in go2     # 고3 회차는 빠져야 합니다
 
-    # 다른 분류에서는 학년 줄이 아예 안 나오고, 주소에 붙여도 걸러지지 않습니다
-    book = body(client().get("/products?category=textbook&grade=고3"))
+    # 교과서는 학년이 아니라 과목으로 갈립니다
+    book = body(client().get("/products?category=textbook"))
     assert '<span class="filter-label">학년</span>' not in book
-    assert "능률(김성곤) 공통영어 1" in book            # 고1 교재가 그대로 남습니다
-    assert '<span class="filter-label">학년</span>' not in body(client().get("/products"))
+    assert '<span class="filter-label">과목</span>' in book
+    assert ">공통영어1</a>" in book
+    assert "능률(김성곤) 공통영어 1" in body(
+        client().get("/products?category=textbook&subject=공통영어1"))
+    # 그 분류에 없는 과목을 넣으면 아무것도 안 남습니다
+    none = body(client().get("/products?category=textbook&subject=영어2"))
+    assert "능률(김성곤) 공통영어 1" not in none
+
+    # 학년을 주소에 붙여도 교과서에서는 걸러지지 않습니다 (갈래가 과목이므로)
+    assert "능률(김성곤) 공통영어 1" in body(
+        client().get("/products?category=textbook&grade=고3"))
+
+    # 갈래가 없는 분류와 '전체' 에서는 그 줄이 아예 안 나옵니다
+    for url in ("/products", "/products?category=ebs"):
+        page = body(client().get(url))
+        assert '<span class="filter-label">학년</span>' not in page, url
+        assert '<span class="filter-label">과목</span>' not in page, url
+
+    # 다른 버튼을 눌러도 고른 갈래가 따라갑니다
+    assert "subject=%EA%B3%B5%ED%86%B5%EC%98%81%EC%96%B41" in body(
+        client().get("/products?category=textbook&subject=공통영어1"))
 
     import re
     cheap = body(client().get("/products?order=price"))
@@ -217,7 +236,21 @@ def test_grade_filter_and_sort():
     firsts = [int(re.search(r'<span class="price">([\d,]+)원</span>', c)
                   .group(1).replace(",", "")) for c in cards if "price" in c]
     assert firsts == sorted(firsts), firsts
-    print("PASS  학년 거르기(모의고사만) · 가격순 정렬")
+    # 갈래는 관리자 화면에서 켜고 끕니다
+    a = admin()
+    page = body(a.get("/admin/books"))
+    assert 'name="split"' in page and "과목으로 나눔" in page and "학년으로 나눔" in page
+    assert 'name="subject"' in body(a.get("/admin/books/neungyule-kim/edit"))
+
+    a.post("/admin/categories", data={"action": "rename", "id": "ebs",
+                                      "name": "EBS 부교재", "split": "grade"},
+           follow_redirects=True)
+    assert '<span class="filter-label">학년</span>' in body(client().get("/products?category=ebs"))
+    a.post("/admin/categories", data={"action": "rename", "id": "ebs",
+                                      "name": "EBS 부교재", "split": ""}, follow_redirects=True)
+    assert '<span class="filter-label">학년</span>' not in body(
+        client().get("/products?category=ebs"))
+    print("PASS  분류 안 갈래 — 모의고사는 학년 · 교과서는 과목")
 
 
 def test_popular_order():

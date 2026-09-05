@@ -74,6 +74,18 @@
       </div>
     </div>
     <div class="adm-field">
+      <label for="subject">과목 <span class="muted">(교과서일 때)</span></label>
+      <input type="text" id="subject" name="subject" value="{{ b.subject or '' }}" hidden>
+      <div class="pick" data-target="subject" style="margin-top:0;">
+        {% for v in subject_hints %}
+          <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
+        {% endfor %}
+        <button class="pick-btn clear" data-value="">없음</button>
+      </div>
+      <div class="tip">교과서 분류에서 <b>과목으로 거르는 줄</b>에 쓰입니다.
+        여기 적어 두신 과목만 손님 화면에 버튼으로 나옵니다.</div>
+    </div>
+    <div class="adm-field">
       <label for="sort">목록 순서</label>
       <input type="number" id="sort" name="sort" value="{{ b.sort or 100 }}">
       <div class="pick" data-target="sort">

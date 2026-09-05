@@ -75,10 +75,12 @@
               <input type="hidden" name="action" value="rename">
               <input type="hidden" name="id" value="{{ c.id }}">
               <input type="text" name="name" value="{{ c.name }}" style="width:200px;">
-              <label class="switch" style="font-size:13px;font-weight:600;">
-                <input type="checkbox" name="by_grade" value="1" {{ 'checked' if c.by_grade }}>
-                학년으로 나누기
-              </label>
+              <select name="split" style="width:auto;">
+                <option value="" {{ 'selected' if not c.split }}>안 나눔</option>
+                {% for k, label in splits.items() %}
+                  <option value="{{ k }}" {{ 'selected' if c.split == k }}>{{ label }}으로 나눔</option>
+                {% endfor %}
+              </select>
               <button class="btn btn-ghost btn-sm" type="submit">저장</button>
             </form>
           </td>
@@ -109,13 +111,17 @@
         <div class="tip">영문 소문자·숫자·하이픈. 한 번 정하면 바꾸지 마세요.</div>
       </div>
       <div class="adm-field full">
-        <label class="switch">
-          <input type="checkbox" name="by_grade" value="1">
-          학년으로 나누기
-        </label>
-        <div class="tip">켜면 손님 화면에 <b>고1 · 고2 · 고3</b> 거르기가 나옵니다.
-          모의고사처럼 학년이 갈리는 분류만 켜세요. 교과서·EBS 부교재는
-          책 이름에 이미 학년이 들어 있어 꺼 두는 것이 깔끔합니다.</div>
+        <label for="cat_split">안을 한 번 더 나누기</label>
+        <select id="cat_split" name="split" style="width:auto;">
+          <option value="">안 나눔</option>
+          {% for k, label in splits.items() %}
+            <option value="{{ k }}">{{ label }}으로 나눔</option>
+          {% endfor %}
+        </select>
+        <div class="tip">고르시면 손님 화면 <b>분류 줄 아래에 한 줄</b>이 더 나옵니다.
+          모의고사는 <b>학년</b>(고1·고2·고3), 교과서는 <b>과목</b>(공통영어1·영어1 …) 으로 갈립니다.
+          EBS 부교재처럼 갈래가 필요 없으면 '안 나눔' 으로 두세요.
+          버튼은 <b>실제로 있는 교재의 값만</b> 나옵니다.</div>
       </div>
     </div>
     <div class="form-actions">

@@ -766,7 +766,8 @@ def books():
         if p.get("book"):
             counts[p["book"]] = counts.get(p["book"], 0) + 1
     items = sorted(catalog["books"], key=lambda b: (b.get("sort", 100), b.get("name", "")))
-    return render_template("admin/books.html", items=items, catalog=catalog, counts=counts)
+    return render_template("admin/books.html", items=items, catalog=catalog, counts=counts,
+                           splits=sc.CATEGORY_SPLITS)
 
 
 @admin_bp.route("/books/new", methods=["GET", "POST"])
@@ -779,7 +780,8 @@ def book_form(slug=None):
 
     if request.method == "GET":
         return render_template("admin/book_form.html", b=existing or {"active": True, "sort": 100},
-                               catalog=catalog, errors=[], is_new=existing is None)
+                               catalog=catalog, errors=[], is_new=existing is None,
+                               subject_hints=sc.SUBJECT_HINTS)
 
     item = dict(existing or {})
     errors = []
@@ -795,6 +797,7 @@ def book_form(slug=None):
     item["publisher"] = sc.clean(request.form.get("publisher"), 60)
     item["author"] = sc.clean(request.form.get("author"), 60)
     item["grade"] = sc.clean(request.form.get("grade"), 30)
+    item["subject"] = sc.clean(request.form.get("subject"), 30)
     item["sort"] = sc.to_int(request.form.get("sort"), 100)
     item["active"] = bool(request.form.get("active"))
     item["description"] = sc.clean(request.form.get("description"), 1000)
@@ -803,7 +806,8 @@ def book_form(slug=None):
         errors.append(f"주소 이름 '{item['slug']}' 은 이미 다른 교재가 쓰고 있습니다.")
     if errors:
         return render_template("admin/book_form.html", b=item, catalog=catalog,
-                               errors=errors, is_new=existing is None), 400
+                               errors=errors, is_new=existing is None,
+                               subject_hints=sc.SUBJECT_HINTS), 400
 
     if existing is None:
         catalog["books"].append(item)
@@ -843,25 +847,28 @@ def category_save():
         elif any(c.get("id") == cid for c in catalog["categories"]):
             flash(f"'{cid}' 분류는 이미 있습니다.", "err")
         else:
+            split = request.form.get("split", "")
             catalog["categories"].append(
                 {"id": cid, "name": name,
-                 "by_grade": request.form.get("by_grade") == "1"})
+                 "split": split if split in sc.CATEGORY_SPLITS else ""})
             sc.save_catalog(catalog)
             flash(f"분류 '{name}' 을(를) 추가했습니다.", "ok")
 
     elif action == "rename":
         cid = request.form.get("id", "")
         name = sc.clean(request.form.get("name"), 40)
-        by_grade = request.form.get("by_grade") == "1"
+        split = request.form.get("split", "")
+        split = split if split in sc.CATEGORY_SPLITS else ""
         for c in catalog["categories"]:
             if c.get("id") == cid and name:
                 c["name"] = name
-                # 학년으로 갈라 볼 분류인지. 모의고사처럼 학년이 갈리는 것만 켭니다
-                c["by_grade"] = by_grade
+                # 이 분류 안을 무엇으로 한 번 더 가를지. 없으면 그 줄이 안 나옵니다
+                c["split"] = split
+                c.pop("by_grade", None)
                 sc.save_catalog(catalog)
                 flash(f"분류 '{name}' 을(를) 저장했습니다."
-                      + (" 손님 화면에 학년 거르기가 나옵니다." if by_grade
-                         else " 학년 거르기는 나오지 않습니다."), "ok")
+                      + (f" 손님 화면에 {sc.CATEGORY_SPLITS[split]} 거르기가 나옵니다."
+                         if split else " 안을 더 가르지 않습니다."), "ok")
                 break
 
     elif action == "delete":

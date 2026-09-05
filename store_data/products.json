@@ -4,22 +4,22 @@
     {
       "id": "textbook",
       "name": "교과서",
-      "by_grade": false
+      "split": "subject"
     },
     {
       "id": "mock",
       "name": "모의고사",
-      "by_grade": true
+      "split": "grade"
     },
     {
       "id": "ebs",
       "name": "EBS 부교재",
-      "by_grade": false
+      "split": ""
     },
     {
       "id": "highlighter",
       "name": "형광펜 독해",
-      "by_grade": false
+      "split": ""
     }
   ],
   "_교재안내": "books = 교재·회차 묶음. 강사는 '내가 쓰는 교재 이름'으로 찾기 때문에 이 단위가 중요합니다.",
@@ -34,7 +34,8 @@
       "sort": 5,
       "active": true,
       "description": "능률 김성곤 공통영어 1 본문 전 지문을 단원별로 분석했습니다. 진도에 맞춰 단원만 골라 쓰셔도 되고, 학기 패키지로 한 번에 받으셔도 됩니다.",
-      "sample": true
+      "sample": true,
+      "subject": "공통영어1"
     },
     {
       "slug": "ybm-han",
@@ -46,7 +47,8 @@
       "sort": 6,
       "active": true,
       "description": "YBM 한상호 공통영어 1 본문 지문 분석 세트입니다.",
-      "sample": true
+      "sample": true,
+      "subject": "공통영어1"
     },
     {
       "slug": "mock-2026-06-g3",

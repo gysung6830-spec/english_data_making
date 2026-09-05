@@ -230,21 +230,30 @@ def products():
     items = catalog["products"]
     books = sc.books_with_counts(catalog, selected)
 
-    # 학년으로 갈라 보는 것은 모의고사처럼 그럴 뜻이 있는 분류에서만 합니다.
-    # 교과서·EBS 부교재는 책 이름에 이미 학년이 들어 있어 거르기가 군더더기입니다.
-    grade_cats = {c.get("id") for c in catalog.get("categories", []) if c.get("by_grade")}
-    if selected in grade_cats:
-        grades = sorted({g for p in catalog["products"] if p.get("category") == selected
-                         for g in (p.get("grade") or "").split("~") if g.strip()})
+    # 분류 안을 한 번 더 가르는 갈래. 모의고사는 학년, 교과서는 과목으로 갈립니다.
+    # 갈래가 없는 분류(EBS 부교재 등)에서는 그 줄이 아예 나오지 않습니다.
+    by_slug = {b.get("slug"): b for b in catalog["books"]}
+    splits = {c.get("id"): (c.get("split") or "") for c in catalog.get("categories", [])}
+    field = splits.get(selected, "")
+
+    def value_of(item) -> str:
+        """자료의 갈래 값. 자료에 없으면 그 교재에서 가져옵니다."""
+        return (item.get(field) or by_slug.get(item.get("book"), {}).get(field) or "")
+
+    pick = sc.clean(request.args.get(field), 30) if field else ""
+    if field:
+        split_values = sorted({v.strip() for p in catalog["products"]
+                               if p.get("category") == selected
+                               for v in value_of(p).split("~") if v.strip()})
     else:
-        grades, grade = [], ""      # 다른 분류에서는 학년 거르기를 아예 내리고 값도 버립니다
+        split_values = []
 
     if selected:
         items = [p for p in items if p.get("category") == selected]
     if package:
         items = [p for p in items if p.get("package") == package]
-    if grade:
-        items = [p for p in items if grade in (p.get("grade") or "")]
+    if pick:
+        items = [p for p in items if pick in value_of(p)]
     if q:
         # 교재 이름·출판사로도 찾히게 합니다. ("능률" 만 쳐도 그 교재 상품이 나오도록)
         needle = q.lower()
@@ -281,7 +290,13 @@ def products():
                            groups=groups, loose=loose,
                            categories=catalog.get("categories", []), selected=selected,
                            packages=catalog.get("packages", []), selected_package=package,
-                           grades=grades, grade=grade, grade_cats=grade_cats,
+                           split_field=field,
+                           split_label=sc.CATEGORY_SPLITS.get(field, ""),
+                           split_values=split_values, split_pick=pick,
+                           # 다른 버튼을 눌러도 고른 갈래가 따라가도록 들고 다닙니다
+                           keep={field: pick} if pick else {},
+                           split_url=lambda cid: (
+                               {field: pick} if pick and splits.get(cid) == field else {}),
                            orders=PRODUCT_ORDERS, order=order,
                            no_sales_yet=(order == "popular" and not sold),
                            q=q)
