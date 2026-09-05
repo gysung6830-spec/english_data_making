@@ -1656,3 +1656,11 @@ input[type=file]{
 .ho-check{display:flex; align-items:center; gap:7px; font-size:13.5px; font-weight:500;
   color:var(--muted);}
 .ho-check input{width:18px; height:18px; flex:0 0 auto;}
+
+/* 프리패스 — 지문이 어떻게 빠지는지 한 칸에 설명합니다 */
+.quota-box{margin-top:26px; padding:16px 18px; border-radius:12px;
+  background:var(--brand-soft, #eef4f0); border:1px solid #cfe4d9;}
+.quota-box .qb-title{display:block; font-size:15px; color:var(--brand-dark, #0f5136);
+  margin-bottom:5px;}
+.quota-box p b{color:var(--brand-dark, #0f5136);}
+.quota-box p{margin:0; font-size:14.5px; line-height:1.75; color:var(--ink-2, #48505a);}

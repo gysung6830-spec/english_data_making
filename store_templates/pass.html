@@ -47,6 +47,13 @@
       {% endfor %}
     </div>
 
+    {% if cfg.quota_note %}
+      <div class="quota-box">
+        <b class="qb-title">지문은 이렇게 빠집니다</b>
+        <p>{{ cfg.quota_note|safe }}</p>
+      </div>
+    {% endif %}
+
     {% if cfg.benefits %}
     <div class="card" style="margin-top:32px;">
       <h3 style="font-size:18px;margin-bottom:14px;">프리패스에 포함되는 것</h3>

@@ -1342,12 +1342,23 @@ def test_wordfile_table_shapes():
 
 
 def test_pass_counts_passages():
-    """프리패스는 무제한이 아니라 지문 n개까지입니다."""
+    """프리패스는 무제한이 아니라 지문 n개까지이고, 세는 법이 적혀 있어야 합니다."""
+    import re as _re
     text = body(client().get("/pass"))
-    assert "지문 1,000개" in text and "지문 350개" in text
+    assert "지문 500개" in text and "지문 200개" in text and "지문 70개" in text
     assert "무제한" not in text
     assert "지문당" in text                      # 낱개보다 싸다는 것이 보여야 합니다
-    print("PASS  프리패스 — 지문 n개까지")
+
+    # '지문 1개' 가 무엇인지 화면에 적혀 있어야 합니다
+    assert "지문은 이렇게 빠집니다" in text
+    assert "그 지문의 자료 한 묶음" in text
+
+    # 오래 쓰는 요금제일수록 지문당 값이 싸야 합니다 (거꾸로면 살 이유가 없습니다)
+    per = [int(x.replace(",", "")) for x in
+           _re.findall(r"지문당 ([\d,]+)원", text)]
+    assert len(per) == 3, per
+    assert per == sorted(per, reverse=True), per
+    print("PASS  프리패스 — 지문 n개까지 · 세는 법 · 오래 쓸수록 싸게")
 
 
 def test_my_locker():
