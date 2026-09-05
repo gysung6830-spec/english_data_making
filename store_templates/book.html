@@ -17,6 +17,10 @@
       <div class="book-pub">{{ book.publisher }}{% if book.author %} · {{ book.author }}{% endif %}</div>
       <h2>{{ book.name }}</h2>
       <p>{{ book.description }}</p>
+      {% if has_units %}
+        <a class="btn btn-ghost" href="{{ url_for('book_pick', slug=book.slug) }}"
+           style="margin-top:6px;">필요한 강·자료만 골라 담기 →</a>
+      {% endif %}
     </div>
 
     {# 두 패키지를 나란히 놓아 바로 견줄 수 있게 합니다. #}

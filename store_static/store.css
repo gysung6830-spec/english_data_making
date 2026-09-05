@@ -1682,3 +1682,43 @@ input[type=file]{
 .lk-table th{text-align:left; font-size:12.5px; color:var(--muted); font-weight:600;
   padding:6px 8px; border-bottom:1px solid var(--line);}
 .lk-table td{padding:8px; border-bottom:1px solid var(--line);}
+
+/* ---------- 자료 골라 담기 (강 × 자료 종류) ---------- */
+.pick-tiers{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+.pick-tiers .pt{padding:6px 12px; border:1px solid var(--line); border-radius:999px;
+  font-size:13.5px; color:var(--muted); background:#fff;}
+.pick-tiers .pt.on{border-color:var(--brand); color:var(--brand-dark);
+  background:var(--brand-soft); font-weight:700;}
+.pick-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:#fff;}
+.pick-table{width:100%; border-collapse:collapse; font-size:14px; min-width:640px;}
+.pick-table th, .pick-table td{padding:0; border-bottom:1px solid var(--line);
+  text-align:center;}
+.pick-table thead th{padding:10px 6px; font-size:12.5px; color:var(--muted);
+  font-weight:600; background:#fafbfa; position:sticky; top:0; z-index:1;}
+.pick-table tbody tr:last-child th, .pick-table tbody tr:last-child td{border-bottom:0;}
+.pk-unit{text-align:left !important; padding:10px 12px !important; white-space:nowrap;
+  background:#fafbfa;}
+.pk-unit small{display:block; font-size:11.5px; color:var(--muted); font-weight:500;}
+.pk-col, .pk-rowall{background:none; border:0; padding:0; font:inherit; cursor:pointer;
+  color:inherit; font-weight:700; text-decoration:underline; text-underline-offset:3px;
+  text-decoration-color:var(--line-strong);}
+.pk-col:hover, .pk-rowall:hover{color:var(--brand);}
+.pk-cell{display:block; padding:11px 6px; cursor:pointer; font-size:13px;}
+.pk-cell input{display:block; margin:0 auto 4px; width:18px; height:18px;
+  accent-color:var(--brand);}
+.pk-cell:hover{background:var(--brand-soft);}
+.pk-cell.have{background:#f3f5f4; color:var(--muted); cursor:default;}
+.pk-none{display:block; padding:11px 6px; color:#c9ced2;}
+.pk-sum{text-align:right !important; padding:10px 12px !important; white-space:nowrap;
+  font-size:13px;}
+.pick-bar{position:sticky; bottom:0; display:flex; flex-wrap:wrap; gap:12px;
+  align-items:center; justify-content:space-between; margin-top:14px; padding:14px 16px;
+  background:#fff; border:1px solid var(--line); border-radius:12px;
+  box-shadow:0 -4px 16px rgba(0,0,0,.06);}
+.pick-bar .pb-right{display:flex; align-items:center; gap:12px;}
+.pick-bar .pb-total{font-size:20px; font-weight:800; letter-spacing:-.02em;}
+.pick-bar .pb-cut{font-size:13.5px;}
+@media (max-width:640px){
+  .pick-bar{flex-direction:column; align-items:stretch;}
+  .pick-bar .pb-right{justify-content:space-between;}
+}

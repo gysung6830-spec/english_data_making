@@ -362,7 +362,49 @@ def book_detail(slug):
     others = [b for b in sc.books_with_counts(catalog, book.get("category", ""))
               if b["slug"] != slug][:3]
     return render_template("book.html", book=book, items=items, lanes=lanes,
-                           rest=rest, others=others)
+                           rest=rest, others=others,
+                           has_units=any(p.get("unit") for p in items))
+
+
+@app.route("/books/<slug>/pick")
+def book_pick(slug):
+    """자료 골라 담기 — 강마다, 자료 종류마다 하나씩 고릅니다.
+
+    '3강~5강의 지문분석지와 17종 변형문제만' 처럼 필요한 것만 담으라고
+    만든 화면입니다. 많이 담을수록 값이 내려가는 것도 여기서 보여 줍니다.
+    """
+    book = find_book(slug)
+    if not book:
+        abort(404)
+    catalog = sc.load_catalog()
+    items = [p for p in catalog["products"] if p.get("book") == slug and p.get("unit")]
+    if not items:
+        # 강 단위 상품이 아직 없으면 교재 화면으로 돌려보냅니다
+        return redirect(url_for("book_detail", slug=slug))
+
+    mats = sc.material_map()
+    # 이 교재에 실제로 있는 자료만, 라인업 차례대로 세웁니다
+    order = list(mats)
+    kinds = sorted({m for p in items for m in (p.get("materials") or [])},
+                   key=lambda m: order.index(m) if m in order else 99)
+
+    rows, seen = [], {}
+    for p in items:
+        key = (sc.to_int(p.get("unit_no"), 0), p.get("unit"))
+        cell = seen.setdefault(key, {})
+        for m in (p.get("materials") or []):
+            cell[m] = p
+    for (no, unit), cell in sorted(seen.items()):
+        rows.append({"no": no, "unit": unit, "cells": cell,
+                     "passages": max((sc.to_int(x.get("passages"), 0)
+                                      for x in cell.values()), default=0)})
+
+    site = sc.load_site()
+    tiers = sorted((site.get("discount") or {}).get("count_tiers") or [],
+                   key=lambda t: sc.to_int(t.get("min"), 0))
+    return render_template("book_pick.html", book=book, rows=rows, kinds=kinds,
+                           mats=mats, tiers=tiers,
+                           cart=set(session.get("cart") or []))
 
 
 @app.route("/lineup")

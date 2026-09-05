@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% block title %}{{ book.name }} 자료 골라 담기 · {{ site.brand }}{% endblock %}
+{% block desc %}{{ book.name }} 자료를 강마다, 종류마다 필요한 것만 골라 담으실 수 있습니다.{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap">
+    <a class="back-link" href="{{ url_for('book_detail', slug=book.slug) }}">← {{ book.name }}</a>
+    <div class="section-head">
+      <h2>필요한 것만 골라 담기</h2>
+      <p>{{ book.name }} · {{ rows|length }}{{ '강' if rows else '' }}.
+        강마다, 자료 종류마다 하나씩 고르시면 됩니다.
+        {% if tiers %}<b>많이 담을수록 값이 내려갑니다.</b>{% endif %}</p>
+    </div>
+
+    {% if tiers %}
+      <div class="pick-tiers">
+        {% for t in tiers %}
+          <span class="pt" data-min="{{ t.min }}" data-percent="{{ t.percent }}">
+            {{ t.min }}개부터 <b>{{ t.percent }}%</b></span>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('cart_add') }}" id="pickform">
+      <input type="hidden" name="next" value="{{ url_for('cart') }}">
+
+      <div class="pick-wrap">
+        <table class="pick-table">
+          <thead>
+            <tr>
+              <th class="pk-unit">강</th>
+              {% for m in kinds %}
+                <th>
+                  <button type="button" class="pk-col" data-kind="{{ m }}">
+                    {{ mats[m].name if mats.get(m) else m }}</button>
+                </th>
+              {% endfor %}
+              <th class="pk-sum">줄 합계</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for r in rows %}
+            <tr data-row="{{ r.no }}">
+              <th class="pk-unit">
+                <button type="button" class="pk-rowall" data-row="{{ r.no }}">{{ r.unit }}</button>
+                <small>지문 {{ r.passages }}개</small>
+              </th>
+              {% for m in kinds %}
+                {% set p = r.cells.get(m) %}
+                <td>
+                  {% if p %}
+                    <label class="pk-cell{{ ' have' if p.slug in cart }}">
+                      <input type="checkbox" name="slug" value="{{ p.slug }}"
+                             data-kind="{{ m }}" data-row="{{ r.no }}"
+                             data-price="{{ p.price }}"
+                             {{ 'checked disabled' if p.slug in cart }}>
+                      <span>{{ '{:,}'.format(p.price) }}</span>
+                    </label>
+                  {% else %}
+                    <span class="pk-none">—</span>
+                  {% endif %}
+                </td>
+              {% endfor %}
+              <td class="pk-sum"><b class="row-sum">0</b></td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pick-bar">
+        <div class="pb-left">
+          <b><span class="pb-count">0</span>개</b> 고름
+          <span class="pb-cut muted"></span>
+        </div>
+        <div class="pb-right">
+          <span class="pb-total">0원</span>
+          <button class="btn btn-primary" type="submit" disabled>장바구니에 담기</button>
+        </div>
+      </div>
+      <p class="muted" style="font-size:13.5px;margin-top:12px;">
+        이미 장바구니에 있는 것은 <b>체크된 채로 잠겨</b> 있습니다.
+        빼시려면 <a href="{{ url_for('cart') }}">장바구니</a>에서 지우시면 됩니다.
+      </p>
+    </form>
+  </div>
+</section>
+
+<script>
+/* 고른 개수와 값을 바로 세어 줍니다. 할인은 담은 개수에 따라 붙습니다. */
+(function () {
+  var form = document.getElementById('pickform');
+  if (!form) return;
+  var boxes = form.querySelectorAll('input[name=slug]:not([disabled])');
+  var tiers = [].map.call(document.querySelectorAll('.pt'), function (el) {
+    return {min: +el.dataset.min, percent: +el.dataset.percent, el: el};
+  }).sort(function (a, b) { return a.min - b.min; });
+
+  var cnt   = form.querySelector('.pb-count');
+  var total = form.querySelector('.pb-total');
+  var cut   = form.querySelector('.pb-cut');
+  var go    = form.querySelector('button[type=submit]');
+
+  function won(n) { return n.toLocaleString('ko-KR') + '원'; }
+
+  function tally() {
+    var n = 0, sum = 0;
+    boxes.forEach(function (b) {
+      if (b.checked) { n += 1; sum += +b.dataset.price || 0; }
+    });
+    // 줄마다 합계
+    form.querySelectorAll('tr[data-row]').forEach(function (tr) {
+      var s = 0;
+      tr.querySelectorAll('input[name=slug]:checked').forEach(function (b) {
+        s += +b.dataset.price || 0;
+      });
+      tr.querySelector('.row-sum').textContent = s ? won(s) : '—';
+    });
+
+    var pct = 0;
+    tiers.forEach(function (t) {
+      t.el.classList.toggle('on', n >= t.min);
+      if (n >= t.min) pct = t.percent;
+    });
+    var off = Math.floor(sum * pct / 100);
+    cnt.textContent = n;
+    total.textContent = won(sum - off);
+    cut.textContent = pct ? '· ' + pct + '% 깎여 ' + won(off) + ' 절약' : '';
+    go.disabled = n === 0;
+  }
+
+  boxes.forEach(function (b) { b.addEventListener('change', tally); });
+
+  // 자료 이름(세로줄)을 누르면 그 자료 전체를 켜고 끕니다
+  form.querySelectorAll('.pk-col').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var pick = form.querySelectorAll(
+        'input[name=slug][data-kind="' + btn.dataset.kind + '"]:not([disabled])');
+      var on = ![].every.call(pick, function (b) { return b.checked; });
+      pick.forEach(function (b) { b.checked = on; });
+      tally();
+    });
+  });
+  // 강 이름(가로줄)을 누르면 그 강 전체를 켜고 끕니다
+  form.querySelectorAll('.pk-rowall').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var pick = form.querySelectorAll(
+        'input[name=slug][data-row="' + btn.dataset.row + '"]:not([disabled])');
+      var on = ![].every.call(pick, function (b) { return b.checked; });
+      pick.forEach(function (b) { b.checked = on; });
+      tally();
+    });
+  });
+  tally();
+})();
+</script>
+{% endblock %}

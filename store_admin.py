@@ -803,6 +803,8 @@ def products_bulk_save():
                 "slug": slug,
                 "name": f"{book['name']} {unit} · {mats[mid]['name']}",
                 "subtitle": f"{unit} · 지문 {passages}개",
+                "unit": unit,            # 골라 담기 화면에서 줄을 이 이름으로 묶습니다
+                "unit_no": no,
                 "category": book.get("category", ""),
                 "book": book["slug"],
                 "package": of_package.get(mid, ""),

@@ -2191,6 +2191,63 @@ def test_analysis_tagline_updated():
     print("PASS  지문분석지 소개 문구")
 
 
+def test_book_pick_grid():
+    """자료 골라 담기 — 강 × 자료 종류 표에서 필요한 것만 담습니다."""
+    import io as _io, zipfile
+    a = admin()
+
+    buf = _io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as zf:
+        for no in (1, 2):
+            for name in ("지문분석지", "17종 변형문제"):
+                zf.writestr(f"{no}강_{name}.pdf", b"%PDF-1.4 x")
+    look = body(a.post("/admin/products/bulk",
+                       data={"file": (_io.BytesIO(buf.getvalue()), "묶음.zip")},
+                       content_type="multipart/form-data"))
+    import re as _re
+    token = _re.search(r'name="token" value="([^"]+)"', look).group(1)
+    a.post("/admin/products/bulk/save", data={
+        "token": token, "book": "ybm-han", "passages": "10",
+        "path": ["1강_지문분석지.pdf", "1강_17종 변형문제.pdf",
+                 "2강_지문분석지.pdf", "2강_17종 변형문제.pdf"]}, follow_redirects=True)
+
+    # 교재 화면에서 골라 담기로 들어갑니다
+    assert "필요한 강·자료만 골라 담기" in body(client().get("/books/ybm-han"))
+
+    c = client()
+    page = body(c.get("/books/ybm-han/pick"))
+    assert "필요한 것만 골라 담기" in page
+    assert "1강" in page and "2강" in page                    # 줄
+    assert "지문분석지" in page and "17종 변형문제" in page      # 칸
+    assert "3개부터" in page and "10%" in page                 # 담은 개수 할인 안내
+    assert page.count('name="slug"') == 4
+
+    # 세 개를 담으면 10% 할인이 붙습니다
+    c.post("/cart/add", data={"slug": ["ybm-han-01-analysis", "ybm-han-01-variants",
+                                       "ybm-han-02-analysis"],
+                              "next": "/cart"}, follow_redirects=True)
+    q = c.get("/order/quote?cart=1").get_json()
+    assert q["subtotal"] == 250*10 + 400*10 + 250*10
+    assert q["rows"][0]["percent"] == 10
+
+    # 이미 담은 것은 잠긴 채로 보입니다
+    again = body(c.get("/books/ybm-han/pick"))
+    assert again.count("checked disabled") == 3
+
+    # 강 단위 상품이 없는 교재는 교재 화면으로 돌려보냅니다
+    assert client().get("/books/neungyule-kim/pick").status_code == 302
+
+    # 치우기
+    catalog = sc.load_raw_catalog()
+    gone = [p["slug"] for p in catalog["products"] if p.get("book") == "ybm-han" and p.get("unit")]
+    catalog["products"] = [p for p in catalog["products"] if p["slug"] not in gone]
+    sc.save_catalog(catalog)
+    import shutil as _sh
+    for slug in gone:
+        _sh.rmtree(sc.product_dir(slug), ignore_errors=True)
+    print("PASS  자료 골라 담기 — 강 × 자료 표 · 줄·칸 한꺼번에 · 값 바로 계산")
+
+
 def test_bulk_products_from_zip():
     """압축 하나로 상품 여러 개를 만들고, 파일까지 붙어야 합니다."""
     import io as _io, zipfile
@@ -2827,6 +2884,7 @@ def run_all():
     test_login_next_cannot_leave_admin()
     test_admin_pages_open()
     test_bulk_products_from_zip()
+    test_book_pick_grid()
     test_admin_pricing_is_editable()
     test_product_form_offers_our_price()
     test_setup_checklist_guides_first_day()
