@@ -59,7 +59,14 @@ p, li, .hint, .tip, .lead, small, figcaption {
   text-wrap:pretty;
 }
 
-:root{ --measure:46em; }   /* 한글 본문 한 줄의 최대 길이 */
+:root{
+  --measure:46em;      /* 한글 본문 한 줄의 최대 길이 */
+  --wrap:1240px;       /* 화면 가운데 내용의 폭 */
+  --wrap-narrow:820px; /* 글·서식 한 칸짜리 화면 (A4 폭 794px 이 들어갑니다) */
+  --gutter:clamp(20px, 2.4vw, 34px);   /* 좌우 여백 */
+}
+/* 아주 넓은 화면에서는 조금 더 벌립니다. 양옆이 허전해 보이지 않게 합니다. */
+@media (min-width:1600px){ :root{ --wrap:1360px; --wrap-narrow:880px; } }
 
 .hero .lead, .hero-note, .hero-claim, .section-head p, .group-head p, .lineup-lead,
 .mat-tagline, .mat-subline, .sheet-note,
@@ -76,8 +83,8 @@ h1,h2,h3,h4{line-height:1.35; letter-spacing:-.02em; margin:0;}
 p{margin:0 0 1em;}
 ul{margin:0; padding-left:1.1em;}
 
-.wrap{max-width:1080px; margin:0 auto; padding:0 20px;}
-.narrow{max-width:720px;}
+.wrap{max-width:var(--wrap); margin:0 auto; padding:0 var(--gutter);}
+.narrow{max-width:var(--wrap-narrow);}
 
 /* ---------- 헤더 ---------- */
 .site-head{
@@ -310,7 +317,7 @@ details.faq p:last-child{margin-bottom:0;}
 /* ---------- 공지 띠 ---------- */
 .notice-strip{
   display:flex; align-items:center; gap:10px; flex-wrap:wrap;
-  max-width:1080px; margin:16px auto 0; padding:11px 18px;
+  max-width:var(--wrap); margin:16px auto 0; padding:11px 18px;
   background:var(--card); border:1px solid var(--line); border-radius:10px;
   font-size:14.5px; box-shadow:var(--shadow);
 }
