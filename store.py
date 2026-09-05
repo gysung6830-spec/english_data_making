@@ -449,7 +449,7 @@ def cart():
     catalog = sc.load_catalog()
     items = cart_items(catalog)
     site = sc.load_site()
-    rows, auto = sc.auto_discounts(site, items, 1)
+    rows, auto = sc.auto_discounts(site, items)
     subtotal = sum(int(x.get("price", 0)) for x in items)
     # 짝이 안 맞는 상품에는 '반대쪽도 담으면 싸집니다' 를 권합니다
     suggest = []
@@ -460,6 +460,7 @@ def cart():
             suggest.append(mate)
     return render_template("cart.html", items=items, rows=rows, auto=auto,
                            subtotal=subtotal, final=subtotal - auto, suggest=suggest[:3],
+                           next_tier=sc.count_next(site, len(items)),
                            full_offer=sc.full_pack_offer(items, catalog))
 
 
@@ -517,12 +518,13 @@ def quote_for(items: list[dict], email: str, coupon_code: str,
     """주문 금액을 한 곳에서 계산합니다. 화면과 접수가 같은 값을 쓰게 하려고 나눠 두었습니다."""
     site = sc.load_site()
     subtotal = sum(int(x.get("price", 0)) for x in items)
-    repeat_no = sc.paid_order_count(email) + 1        # 이번이 몇 번째 구매인지
-    rows, auto = sc.auto_discounts(site, items, repeat_no)
+    rows, auto = sc.auto_discounts(site, items)
+    # 하나만 더 담으면 다음 단계로 넘어가는지 알려 주려고 봅니다
+    nxt = sc.count_next(site, len(items))
     coupon, coupon_cut, coupon_note = sc.check_coupon(coupon_code, subtotal - auto)
     extra = sc.no_mark_price(site) if no_mark else 0
     return {
-        "subtotal": subtotal, "rows": rows, "auto": auto, "repeat_no": repeat_no,
+        "subtotal": subtotal, "rows": rows, "auto": auto, "next_tier": nxt,
         "coupon": coupon, "coupon_cut": coupon_cut, "coupon_note": coupon_note,
         "no_mark": bool(extra), "extra": extra,
         "discount": auto + coupon_cut,
@@ -562,7 +564,7 @@ def order_quote():
         "extra": q["extra"],
         "rows": [{"name": r["name"], "amount": r["amount"], "percent": r["percent"]}
                  for r in q["rows"]],
-        "repeat_no": q["repeat_no"],
+        "next_tier": q["next_tier"],
         "coupon_ok": bool(q["coupon"]),
         "coupon_cut": q["coupon_cut"],
         "coupon_note": q["coupon_note"],
@@ -1329,11 +1331,8 @@ def my_locker(token):
         abort(404)
     rows = locker_rows(email)
     paid = sum(1 for r in rows if r["o"]["status"] in ("입금확인", "발송완료"))
-    site = sc.load_site()
-    tier = sc.loyalty_tier(site, paid)          # 지금 받고 계신 단골 할인
-    nxt = sc.loyalty_next(site, paid)           # 한 번 더 사시면 올라가는 단계
     return render_template("my_locker.html", email=email, rows=rows,
-                           paid=paid, tier=tier, nxt=nxt, token=token)
+                           paid=paid, token=token)
 
 
 @app.route("/d/<token>")

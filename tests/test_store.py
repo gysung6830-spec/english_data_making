@@ -425,7 +425,7 @@ def test_order_saves_and_multiplies_amount():
         "phone": "010-1234-5678", "email": "teacher@example.com", "agree": "1"})
     assert resp.status_code == 302
     done = body(c.get(resp.headers["Location"]))
-    assert "22,000원" in done
+    assert "14,800원" in done
     # 디지털 자료라 부수 개념이 없습니다. 대신 몇 번째 구매인지로 깎아 줍니다.
     form = body(client().get("/order?slug=mock-2026-06-g3-analysis"))
     assert 'name="quantity"' not in form
@@ -436,7 +436,7 @@ def test_order_saves_and_multiplies_amount():
 def test_order_both_packages_at_once():
     """두 패키지를 사려고 주문을 두 번 하게 만들면 안 됩니다."""
     form = body(client().get("/order?slug=mock-2026-06-g3-analysis"))
-    assert "문제 패키지도 함께 받기" in form and "+27,000원" in form
+    assert "문제 패키지도 함께 받기" in form and "+26,600원" in form
 
     c = client()
     resp = c.post("/order", data={
@@ -444,8 +444,8 @@ def test_order_both_packages_at_once():
         "phone": "010-1212-3434", "email": "both@example.com", "agree": "1"})
     assert resp.status_code == 302
     done = body(c.get(resp.headers["Location"]))
-    # 22,000 + 27,000 = 49,000 에서 묶음 할인 12% (5,880원) 가 자동으로 빠집니다
-    assert "43,120원" in done
+    # 14,800 + 26,600 = 41,400. 2개까지는 정가입니다 (3개부터 할인)
+    assert "41,400원" in done
     assert "지문 분석 패키지" in done and "문제 패키지" in done
 
     key = resp.headers["Location"].rsplit("/", 1)[-1]
@@ -528,7 +528,7 @@ def test_submission_to_coupon_to_discount():
         "slug": "mock-2026-06-g3-analysis", "name": "이선생", "phone": "010-3333-4444",
         "email": "lee@example.com", "agree": "1", "coupon": coupon[0]})
     assert resp.status_code == 302
-    assert "17,000원" in body(c2.get(resp.headers["Location"]))
+    assert "9,800원" in body(c2.get(resp.headers["Location"]))   # 14,800 − 5,000
 
     # 한 번 쓴 쿠폰은 다시 못 씁니다.
     again = client().get(f"/coupon/check?code={coupon[0]}&amount=22000").get_json()
@@ -686,8 +686,8 @@ def test_receipt_request_and_sales():
 
     page = body(a.get("/admin/sales"))
     assert "123-45-67890" in page and "세금계산서" in page
-    assert "27,000원" in page                       # 문제 패키지 결제금액
-    assert "24,545원" in page and "2,455원" in page  # 공급가액 · 부가세
+    assert "26,600원" in page                       # 문제 패키지 결제금액
+    assert "24,182원" in page and "2,418원" in page  # 공급가액 · 부가세
 
     assert a.post(f"/admin/orders/{oid}/receipt").status_code == 302
     assert "123-45-67890" not in body(a.get("/admin/sales"))   # 발행 대기에서 빠짐
@@ -1345,13 +1345,15 @@ def test_pass_counts_passages():
     """프리패스는 무제한이 아니라 지문 n개까지이고, 세는 법이 적혀 있어야 합니다."""
     import re as _re
     text = body(client().get("/pass"))
-    assert "지문 500개" in text and "지문 200개" in text and "지문 70개" in text
+    assert "지문 400개" in text and "지문 160개" in text and "지문 55개" in text
     assert "무제한" not in text
     assert "지문당" in text                      # 낱개보다 싸다는 것이 보여야 합니다
 
     # '지문 1개' 가 무엇인지 화면에 적혀 있어야 합니다
     assert "지문은 이렇게 빠집니다" in text
     assert "그 지문의 자료 한 묶음" in text
+    # 단위로 환산한 예시가 있어야 손님이 감을 잡습니다
+    assert "모의고사 7회차 + 부교재 40강 + 교과서 8과" in text
 
     # 오래 쓰는 요금제일수록 지문당 값이 싸야 합니다 (거꾸로면 살 이유가 없습니다)
     per = [int(x.replace(",", "")) for x in
@@ -1857,8 +1859,8 @@ def test_book_groups_fold_on_phone():
     # 접힌 채로도 자료 수와 최저가는 보여야 합니다
     # 값보다 '무엇이 들어가는지'가 먼저 보여야 합니다
     assert 'class="bg-mats"' in text
-    assert "패키지 2종 · 22,000원부터" in text
-    assert text.index('class="bg-mats"') < text.index("패키지 2종 · 22,000원부터")
+    assert "패키지 2종 · 14,800원부터" in text
+    assert text.index('class="bg-mats"') < text.index("패키지 2종 · 14,800원부터")
     css = body(client().get("/static/store.css"))
     assert ".bg-fold, .bg-mats{display:none;}" in css        # 넓은 화면에선 안 씀
     assert ".book-group.folded .bg-picks{display:none;}" in css
@@ -2013,78 +2015,72 @@ def test_no_emoji_on_customer_pages():
     print("PASS  고객 화면에 이모지 없음")
 
 
-# ---- 자동 할인 (묶음 · 수량) ----------------------------------------------
-def test_bundle_and_loyalty_discounts():
-    """함께 담거나, 이 사이트에서 여러 번 사면 값이 내려가야 합니다."""
+# ---- 자동 할인 (담은 개수 하나로) ----------------------------------------
+def test_count_discount():
+    """할인 규칙은 하나 — 많이 담을수록 깎입니다."""
     site = sc.load_site()
-    site["discount"] = {"bundle_enabled": True, "bundle_percent": 12,
-                        "loyalty_enabled": True,
-                        "loyalty": [{"min": 2, "percent": 5}, {"min": 4, "percent": 10}],
-                        "max_percent": 25}
+    site["discount"] = {"count_enabled": True,
+                        "count_tiers": [{"min": 3, "percent": 10},
+                                        {"min": 6, "percent": 15},
+                                        {"min": 12, "percent": 20}],
+                        "max_percent": 20}
     sc.save_site(site)
 
+    # 2개까지는 정가입니다
     q = client().get("/order/quote?slug=mock-2026-06-g3-analysis&also=1").get_json()
-    assert q["subtotal"] == 49000 and q["repeat_no"] == 1
-    assert q["rows"][0]["name"] == "두 패키지 함께" and q["rows"][0]["amount"] == 5880
-    assert q["final"] == 43120          # 첫 구매라 단골 할인은 없습니다
+    assert q["subtotal"] == 41400 and q["rows"] == [] and q["final"] == 41400
+    # 하나만 더 담으면 어떻게 되는지 알려 줘야 합니다
+    assert q["next_tier"] == {"min": 3, "percent": 10}
 
-    # 값을 치른 주문을 세 건 만들어 둡니다 → 이번이 4번째
-    email = "regular@example.com"
+    # 3개를 담으면 10%
+    c = client()
+    for slug in ("mock-2026-06-g3-analysis", "mock-2026-06-g3-problem",
+                 "mock-2026-03-g2-analysis"):
+        c.post("/cart/add", data={"slug": slug})
+    q3 = c.get("/order/quote?cart=1").get_json()
+    assert q3["rows"][0]["name"] == "3개 담기" and q3["rows"][0]["percent"] == 10
+    assert q3["final"] == q3["subtotal"] - q3["subtotal"] * 10 // 100
+    assert q3["next_tier"] == {"min": 6, "percent": 15}
+
+    # 장바구니 화면도 '몇 개만 더' 를 알려 줍니다
+    assert "3개만 더" in body(c.get("/cart"))
+
+    # 단골 할인은 없앴습니다 — 이메일을 적어도 값이 안 바뀝니다
     with store.app.app_context():
         db = sc.get_db()
-        for i in range(3):
+        for i in range(5):
             db.execute(
                 """INSERT INTO orders (order_no, kind, product_name, quantity, amount,
                                        name, phone, email, status, created_at, updated_at)
-                   VALUES (?, 'product', '지난 주문', 1, 10000, '단골', '010-0000-0000',
-                           ?, '발송완료', ?, ?)""",
-                (f"OR-OLD-{i}", email, sc.stamp(), sc.stamp()))
+                   VALUES (?, 'product', '지난 주문', 1, 10000, '옛단골', '010-0000-0000',
+                           'regular@example.com', '발송완료', ?, ?)""",
+                (f"OR-OLD-{i}", sc.stamp(), sc.stamp()))
         db.commit()
-
-    q4 = client().get(
-        f"/order/quote?slug=mock-2026-06-g3-analysis&email={email}").get_json()
-    assert q4["repeat_no"] == 4
-    assert q4["rows"][0]["name"] == "4번째 구매 · 단골"
-    assert q4["final"] == 22000 - 2200          # 10%
-
-    # 접수된 금액도 같아야 합니다
-    c = client()
-    resp = c.post("/order", data={
-        "slug": "mock-2026-06-g3-analysis", "name": "단골",
-        "phone": "010-9999-0000", "email": email, "agree": "1"})
-    assert resp.status_code == 302
-    with store.app.app_context():
-        row = sc.get_db().execute(
-            "SELECT * FROM orders WHERE email = ? AND status = '입금대기'",
-            (email,)).fetchone()
-    assert row["amount"] == 19800
-    print("PASS  묶음 할인 · 단골 할인 (몇 번째 구매인지로)")
+    same = client().get("/order/quote?slug=mock-2026-06-g3-analysis"
+                        "&email=regular@example.com").get_json()
+    assert same["final"] == same["subtotal"], "단골 할인이 아직 붙습니다"
+    print("PASS  담은 개수 할인 — 규칙 하나 · 단골 할인 없음")
 
 
-def test_loyalty_counts_only_paid_orders():
-    """주문만 넣고 안 낸 것은 단골 횟수에 안 들어가야 합니다."""
-    email = "unpaid@example.com"
-    c = client()
-    c.post("/order", data={"slug": "mock-2026-06-g3-analysis", "name": "미납",
-                           "phone": "010-1111-2222", "email": email, "agree": "1"})
-    q = client().get(f"/order/quote?slug=mock-2026-06-g3-analysis&email={email}").get_json()
-    assert q["repeat_no"] == 1, "입금 전 주문이 단골 횟수에 들어갔습니다"
-    print("PASS  값을 치른 주문만 단골로 셈")
+def test_no_loyalty_anywhere():
+    """단골 할인은 화면·설정 어디에도 남아 있으면 안 됩니다."""
+    for path in ("/cart", "/products", "/guide"):
+        assert "단골" not in body(client().get(path)), path
+    assert "discount_loyalty_enabled" not in body(admin().get("/admin/settings"))
+    assert not hasattr(sc, "loyalty_tier") and not hasattr(sc, "loyalty_next")
+    print("PASS  단골 할인 흔적 없음")
 
 
 def test_discount_has_a_ceiling():
     """실수로 너무 깎이지 않게 상한이 있어야 합니다."""
     site = sc.load_site()
-    site["discount"] = {"bundle_enabled": True, "bundle_percent": 30,
-                        "loyalty_enabled": True,
-                        "loyalty": [{"min": 2, "percent": 30}],
-                        "max_percent": 25}
+    site["discount"] = {"count_enabled": True,
+                        "count_tiers": [{"min": 2, "percent": 40}],
+                        "max_percent": 20}
     sc.save_site(site)
-    q = client().get(
-        "/order/quote?slug=mock-2026-06-g3-analysis&also=1&email=regular@example.com"
-    ).get_json()
-    assert q["final"] == q["subtotal"] - q["subtotal"] * 25 // 100
-    print("PASS  할인 상한 (겹쳐도 25%까지)")
+    q = client().get("/order/quote?slug=mock-2026-06-g3-analysis&also=1").get_json()
+    assert q["final"] == q["subtotal"] - q["subtotal"] * 20 // 100
+    print("PASS  할인 상한 (20%까지)")
 
 
 def test_order_page_shows_download_when_ready():
@@ -2132,22 +2128,28 @@ def test_analysis_tagline_updated():
 
 
 def test_admin_pricing_is_editable():
-    """지문 1개당 얼마인지를 관리자 화면에서 정하고, 그 값으로 계산해야 합니다."""
+    """자료 1종이 지문 1개당 얼마인지를 화면에서 정하고, 그 값으로 계산해야 합니다."""
     a = admin()
     text = body(a.get("/admin/pricing"))
-    assert "우리 정가" in text and "지문 1개당 얼마" in text
+    assert "우리 정가" in text and "자료 1종이 지문 1개당 얼마" in text
     assert "독학하는 학생" in text and "차별화된 자료를 찾는 강사" in text
+    # 자료 6종이 각각 칸으로 나와야 합니다
+    for mid in ("passage", "analysis", "pilsaengbo", "workbook", "descriptive", "variants"):
+        assert f'name="mat_{mid}"' in text, mid
+    # 지문이 적다고 값을 더 받는 규칙은 없앴습니다
+    assert "적은 묶음" not in text
 
     a.post("/admin/pricing", data={
-        "unit_analysis": "900", "unit_problem": "1100",
-        "small_under": "10", "small_multiplier_x10": "15",
-        "round_to": "1000", "full_pack_percent": "80"}, follow_redirects=True)
+        "mat_passage": "200", "mat_analysis": "400", "mat_pilsaengbo": "300",
+        "mat_workbook": "500", "mat_descriptive": "300", "mat_variants": "400",
+        "round_to": "100", "full_pack_percent": "80"}, follow_redirects=True)
     site = sc.load_site()
     cfg = sc.pricing_cfg(site)
-    assert cfg["units"] == {"analysis": 900, "problem": 1100}
-    assert sc.suggested_price(site, "analysis", 28) == 25000    # 900x28=25,200 → 천원 단위
-    assert sc.suggested_price(site, "problem", 20) == 22000     # 1,100x20
-    assert sc.suggested_price(site, "analysis", 5) == 7000      # 적은 묶음 1.5배
+    # 패키지 값 = 그 안에 든 자료 단가의 합
+    assert cfg["units"] == {"analysis": 900, "problem": 1200}
+    assert sc.suggested_price(site, "analysis", 28) == 25200    # 900 x 28
+    assert sc.suggested_price(site, "problem", 20) == 24000     # 1,200 x 20
+    assert sc.suggested_price(site, "analysis", 5) == 4500      # 적어도 그대로 (할증 없음)
     assert sc.suggested_price(site, "없는갈래", 28) == 0
 
     # 손님 화면에는 단가가 새어 나가면 안 됩니다
@@ -2157,19 +2159,21 @@ def test_admin_pricing_is_editable():
 
     # 원래대로 돌려 놓습니다
     a.post("/admin/pricing", data={
-        "unit_analysis": "800", "unit_problem": "950",
-        "small_under": "10", "small_multiplier_x10": "15",
-        "round_to": "1000", "full_pack_percent": "85"}, follow_redirects=True)
-    print("PASS  우리 정가(지문 1개당)를 화면에서 정하기 · 손님에겐 안 보임")
+        "mat_passage": "120", "mat_analysis": "250", "mat_pilsaengbo": "160",
+        "mat_workbook": "300", "mat_descriptive": "250", "mat_variants": "400",
+        "round_to": "100", "full_pack_percent": "85"}, follow_redirects=True)
+    assert sc.pricing_cfg(sc.load_site())["units"] == {"analysis": 530, "problem": 950}
+    print("PASS  자료 1종 단가를 화면에서 정하기 · 손님에겐 안 보임")
 
 
-def _set_discount(bundle=12, loyalty=None, cap=25):
+def _set_discount(tiers=None, cap=20):
     """할인 설정을 이 테스트가 쓰는 값으로 맞춰 둡니다.
     (다른 테스트가 바꿔 놓았을 수 있어 매번 새로 깝니다)"""
     site = sc.load_site()
-    site["discount"] = {"bundle_enabled": True, "bundle_percent": bundle,
-                        "loyalty_enabled": bool(loyalty),
-                        "loyalty": loyalty or [], "max_percent": cap}
+    site["discount"] = {"count_enabled": True, "max_percent": cap,
+                        "count_tiers": tiers or [{"min": 3, "percent": 10},
+                                                 {"min": 6, "percent": 15},
+                                                 {"min": 12, "percent": 20}]}
     sc.save_site(site)
 
 
@@ -2183,8 +2187,8 @@ def test_cart_add_view_remove():
     c.post("/cart/add", data={"slug": "ebs-2026-tokgang-eng-analysis"})
     page = body(c.get("/cart"))
     assert "능률(김성곤)" in page and "수능특강" in page
-    assert "26,000원" in page and "16,000원" in page
-    assert "42,000원" in page          # 26,000 + 16,000
+    assert "17,000원" in page and "10,600원" in page
+    assert "27,600원" in page          # 17,000 + 10,600
 
     # 같은 것을 또 담아도 한 번만 들어갑니다
     c.post("/cart/add", data={"slug": "neungyule-kim-analysis"})
@@ -2199,45 +2203,45 @@ def test_cart_add_view_remove():
     print("PASS  장바구니 담기 · 빼기 · 비우기")
 
 
-def test_cart_bundle_discount_only_on_pairs():
-    """짝이 맞는 것에만 묶음 할인이 붙어야 합니다."""
-    _set_discount(bundle=12)
+def test_cart_count_discount_steps():
+    """담은 개수가 늘 때마다 할인 단계가 올라가야 합니다."""
+    _set_discount()
     c = client()
     c.post("/cart/add", data={"slug": "neungyule-kim-analysis"})
     q1 = c.get("/order/quote?cart=1").get_json()
-    assert q1["rows"] == [], "짝이 없는데 묶음 할인이 붙었습니다"
+    assert q1["rows"] == [], "1개인데 할인이 붙었습니다"
+    assert q1["next_tier"] == {"min": 3, "percent": 10}
 
     c.post("/cart/add", data={"slug": "neungyule-kim-problem"})
-    q2 = c.get("/order/quote?cart=1").get_json()
-    assert q2["subtotal"] == 56000
-    assert q2["rows"][0]["name"] == "두 패키지 함께" and q2["rows"][0]["amount"] == 6720
-    assert q2["final"] == 49280
+    assert c.get("/order/quote?cart=1").get_json()["rows"] == []      # 2개도 정가
 
-    # 짝이 아닌 교재를 더 담아도 묶음 할인액은 그대로입니다
     c.post("/cart/add", data={"slug": "ebs-2026-tokgang-eng-analysis"})
     q3 = c.get("/order/quote?cart=1").get_json()
-    assert q3["subtotal"] == 72000
-    assert q3["rows"][0]["amount"] == 6720
-    print("PASS  묶음 할인은 짝이 맞는 값에만")
+    assert q3["subtotal"] == 17000 + 30400 + 10600
+    assert q3["rows"][0]["percent"] == 10
+    assert q3["final"] == q3["subtotal"] - q3["subtotal"] * 10 // 100
 
-
-def test_cart_two_pairs_counted():
-    """두 교재를 짝으로 담으면 '2세트' 로 세어야 합니다."""
-    _set_discount(bundle=12)
-    c = client()
-    for slug in ("neungyule-kim-analysis", "neungyule-kim-problem",
-                 "ybm-han-analysis", "ybm-han-problem"):
+    for slug in ("ybm-han-analysis", "ybm-han-problem", "mock-2026-06-g3-analysis"):
         c.post("/cart/add", data={"slug": slug})
-    q = c.get("/order/quote?cart=1").get_json()
-    assert "2세트" in q["rows"][0]["name"], q["rows"]
-    assert q["subtotal"] == 56000 + 49000
-    assert q["rows"][0]["amount"] == (56000 + 49000) * 12 // 100
-    print("PASS  짝 두 세트 묶음 할인")
+    q6 = c.get("/order/quote?cart=1").get_json()
+    assert q6["rows"][0]["name"] == "6개 담기" and q6["rows"][0]["percent"] == 15
+    assert q6["next_tier"] == {"min": 12, "percent": 20}
+    print("PASS  담은 개수가 늘면 할인 단계가 올라감")
+
+
+def test_cart_nudges_to_next_step():
+    """'몇 개만 더 담으면 얼마' 를 알려 줘야 더 담습니다."""
+    _set_discount()
+    c = client()
+    c.post("/cart/add", data={"slug": "neungyule-kim-analysis"})
+    page = body(c.get("/cart"))
+    assert "2개만 더" in page and "10% 할인" in page
+    print("PASS  '몇 개만 더 담으면' 안내")
 
 
 def test_cart_order_end_to_end():
     """장바구니로 주문하면 한 건으로 접수되고, 자료는 전부 나가야 합니다."""
-    _set_discount(bundle=12)
+    _set_discount()
     c = client()
     for slug in ("neungyule-kim-analysis", "neungyule-kim-problem"):
         c.post("/cart/add", data={"slug": slug})
@@ -2256,7 +2260,7 @@ def test_cart_order_end_to_end():
     with store.app.app_context():
         row = sc.get_db().execute(
             "SELECT * FROM orders WHERE email = 'cart@example.com'").fetchone()
-    assert row["amount"] == 49280
+    assert row["amount"] == 17000 + 30400   # 2개는 정가입니다
     assert row["product_slug"] == "neungyule-kim-analysis"
     assert row["extra_slugs"] == "neungyule-kim-problem"
 
@@ -2394,13 +2398,13 @@ def test_full_pack_offer_in_cart():
     c.post("/cart/add", data={"slug": "ebs-2026-tokgang-eng-2-analysis"})
     two = body(c.get("/cart"))
     assert "전체를 사시면 더 쌉니다" in two
-    assert "4,000원" in two                    # 16,000 x 2 - 28,000
+    assert "3,200원" in two                    # 10,600 x 2 - 18,000
     assert "전강(1~10강)" in two
 
     c.post("/cart/swap", data={"slug": "ebs-2026-tokgang-eng-all-analysis"})
     after = body(c.get("/cart"))
     assert after.count('class="cart-row"') == 1
-    assert "전강(1~10강)" in after and "28,000원" in after
+    assert "전강(1~10강)" in after and "18,000원" in after
     print("PASS  부분 여러 개 → 전체가 싸다 → 한 번에 바꾸기")
 
 
@@ -2555,7 +2559,7 @@ def test_watermark_optout_costs_extra():
     form = body(client().get("/order?slug=ybm-han-analysis"))
     assert "이름이 안 새겨진 판" in form and "+10,000원" in form
     q = client().get("/order/quote?slug=ybm-han-analysis&nomark=1").get_json()
-    assert q["extra"] == 10000 and q["final"] == 32000
+    assert q["extra"] == 10000 and q["final"] == 14800 + 10000
 
     c = client()
     c.post("/order", data={"slug": "ybm-han-analysis", "no_mark": "1", "name": "표시없이",
@@ -2564,7 +2568,7 @@ def test_watermark_optout_costs_extra():
     with store.app.app_context():
         row = sc.get_db().execute(
             "SELECT * FROM orders WHERE email = 'clean@example.com'").fetchone()
-    assert row["amount"] == 32000 and row["no_mark"] == 1
+    assert row["amount"] == 14800 + 10000 and row["no_mark"] == 1
     admin().post(f"/admin/orders/{row['id']}/deliver", follow_redirects=True)
     with store.app.app_context():
         dl = sc.get_db().execute(
@@ -2614,7 +2618,7 @@ def test_product_form_offers_our_price():
     """상품 폼에서 우리 정가로 값을 계산해 넣을 수 있어야 합니다."""
     text = body(admin().get("/admin/products/new"))
     assert "우리 정가" in text and "계산해서 넣기" in text
-    assert '"analysis": 800' in text.replace(" ", "").replace('"analysis":800', '"analysis": 800')
+    assert '"analysis": 530' in text.replace(" ", "").replace('"analysis":530', '"analysis": 530')
     print("PASS  상품 폼의 우리 정가 계산")
 
 
@@ -2660,8 +2664,8 @@ def run_all():
     test_order_saves_and_multiplies_amount()
     test_order_both_packages_at_once()
     test_order_rejects_unknown_coupon()
-    test_bundle_and_loyalty_discounts()
-    test_loyalty_counts_only_paid_orders()
+    test_count_discount()
+    test_no_loyalty_anywhere()
     test_discount_has_a_ceiling()
     test_request_needs_no_passage()
     test_custom_request_accepted()
@@ -2669,8 +2673,8 @@ def run_all():
     test_submission_to_coupon_to_discount()
     test_submission_requires_file_or_link()
     test_cart_add_view_remove()
-    test_cart_bundle_discount_only_on_pairs()
-    test_cart_two_pairs_counted()
+    test_cart_count_discount_steps()
+    test_cart_nudges_to_next_step()
     test_cart_shows_count_in_header()
     test_cart_add_only_known_products()
     test_order_to_download_flow()

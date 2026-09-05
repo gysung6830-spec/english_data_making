@@ -20,18 +20,6 @@
         <span class="lt-label">지금까지 받으신 자료</span>
         <b>{{ paid }}건</b>
       </div>
-      {% if tier %}
-        <div class="lt-box on">
-          <span class="lt-label">단골 할인</span>
-          <b>{{ tier.percent }}% 적용 중</b>
-        </div>
-      {% endif %}
-      {% if nxt %}
-        <div class="lt-box">
-          <span class="lt-label">{{ nxt.min - paid }}번 더 사시면</span>
-          <b>{{ nxt.percent }}% 할인</b>
-        </div>
-      {% endif %}
     </div>
 
     {% if rows %}

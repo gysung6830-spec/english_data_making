@@ -70,8 +70,9 @@
       {% if suggest %}
         <div class="card also-suggest">
           <h3>반대쪽 패키지도 담으면 값이 내려갑니다</h3>
-          <p class="muted">같은 교재의 두 갈래를 함께 담으면
-            <b>{{ discount.bundle_percent|default(12) }}% 묶음 할인</b>이 자동으로 붙습니다.</p>
+          <p class="muted">자료는 <b>많이 담을수록</b> 값이 내려갑니다.
+            {% if next_tier %}지금 {{ items|length }}개 — <b>{{ next_tier.min }}개부터
+            {{ next_tier.percent }}% 할인</b>입니다.{% endif %}</p>
           <form method="post" action="{{ url_for('cart_add') }}">
             <input type="hidden" name="next" value="{{ url_for('cart') }}">
             <div class="suggest-list">
@@ -101,7 +102,8 @@
         <div class="sum-row sum-final"><span>예상 금액</span><b>{{ final|won }}</b></div>
       </div>
       <p class="muted" style="font-size:13.5px;margin:-6px 0 18px;">
-        단골 할인과 쿠폰은 주문서에서 이메일을 적으시면 더 붙습니다.
+        {% if next_tier %}<b>{{ next_tier.min - items|length }}개만 더</b> 담으시면
+          {{ next_tier.percent }}% 할인이 붙습니다. {% endif %}쿠폰은 주문서에서 넣으시면 됩니다.
       </p>
 
       <a class="btn btn-primary btn-block" href="{{ url_for('order', cart=1) }}">주문서 작성하기</a>

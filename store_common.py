@@ -925,22 +925,6 @@ def full_pack_for(product: dict, catalog: dict) -> dict | None:
     return None
 
 
-def paid_order_count(email: str) -> int:
-    """이 이메일로 값을 치른 주문이 몇 건인지. 단골 할인에 씁니다.
-
-    회원가입이 없으므로 이메일을 열쇠로 씁니다.
-    입금이 확인된 주문만 셉니다. (주문만 넣고 안 낸 것은 안 칩니다)
-    """
-    email = clean(email, 120).lower()
-    if not EMAIL_RE.match(email):
-        return 0
-    row = get_db().execute(
-        """SELECT COUNT(*) AS n FROM orders
-           WHERE lower(email) = ? AND status IN ('입금확인', '발송완료')""",
-        (email,)).fetchone()
-    return int(row["n"] if row else 0)
-
-
 # 분류 안을 한 번 더 갈라 보는 갈래. 갈래가 뜻이 있는 분류에서만 켭니다.
 # 모의고사는 학년으로, 교과서는 과목으로 갈립니다. EBS 부교재처럼 갈래가
 # 필요 없는 분류는 비워 둡니다. (관리자 > 교재·분류 에서 고릅니다)
@@ -969,17 +953,6 @@ def sold_counts() -> dict[str, int]:
             if slug:
                 out[slug] = out.get(slug, 0) + 1
     return out
-
-
-def loyalty_next(site: dict, repeat_no: int) -> dict | None:
-    """다음 단골 단계. '한 번 더 사시면 10%' 를 알려 주려고 씁니다."""
-    cfg = (site.get("discount") or {})
-    if not cfg.get("loyalty_enabled", True):
-        return None
-    ahead = [{"min": to_int(t.get("min"), 0), "percent": to_int(t.get("percent"), 0)}
-             for t in cfg.get("loyalty") or []
-             if to_int(t.get("min"), 0) > repeat_no and to_int(t.get("percent"), 0) > 0]
-    return min(ahead, key=lambda t: t["min"]) if ahead else None
 
 
 WATERMARK_MARKS = ["이름", "이메일", "주문번호", "브랜드", "날짜"]
@@ -1013,8 +986,9 @@ def fill_marks(template: str | None, values: dict) -> str:
     return text.strip(" ·")
 
 
-PRICING_DEFAULTS = {"units": {}, "small_under": 10, "small_multiplier": 1.5,
-                    "round_to": 1000, "full_pack_percent": 85}
+PRICING_DEFAULTS = {"units": {}, "materials": {}, "small_under": 0,
+                    "small_multiplier": 1.0, "round_to": 100,
+                    "full_pack_percent": 85}
 
 
 def pricing_cfg(site: dict) -> dict:
@@ -1059,8 +1033,9 @@ def bundle_pairs(items: list[dict]) -> tuple[int, int]:
 
 
 def paid_order_count(email: str) -> int:
-    """이 이메일로 값을 치른 주문이 몇 건인지. 단골 할인에 씁니다.
+    """이 이메일로 값을 치른 주문이 몇 건인지.
 
+    내 자료함에서 "지금까지 받으신 자료 n건" 을 보여 줄 때 씁니다.
     회원가입이 없으므로 이메일을 열쇠로 씁니다.
     입금이 확인된 주문만 셉니다. (주문만 넣고 안 낸 것은 안 칩니다)
     """
@@ -1074,48 +1049,49 @@ def paid_order_count(email: str) -> int:
     return int(row["n"] if row else 0)
 
 
-def loyalty_tier(site: dict, repeat_no: int) -> dict | None:
-    """이번이 몇 번째 구매인지에 맞는 단골 할인 단계를 돌려줍니다."""
-    cfg = (site.get("discount") or {})
-    if not cfg.get("loyalty_enabled", True):
+def count_tier(site: dict, count: int) -> dict | None:
+    """담은 상품 개수에 맞는 할인 단계. 규칙은 이것 하나뿐입니다."""
+    cfg = site.get("discount") or {}
+    if not cfg.get("count_enabled", True):
         return None
-    best = None
-    for tier in cfg.get("loyalty") or []:
-        need = to_int(tier.get("min"), 0)
-        pct = to_int(tier.get("percent"), 0)
-        if need >= 2 and pct > 0 and repeat_no >= need:
-            if best is None or need > to_int(best.get("min"), 0):
-                best = {"min": need, "percent": pct}
-    return best
+    hit = None
+    for tier in sorted(cfg.get("count_tiers") or [], key=lambda t: to_int(t.get("min"), 0)):
+        need, pct = to_int(tier.get("min"), 0), to_int(tier.get("percent"), 0)
+        if need >= 2 and pct > 0 and count >= need:
+            hit = {"min": need, "percent": pct}
+    return hit
 
 
-def auto_discounts(site: dict, items: list[dict], repeat_no: int
+def count_next(site: dict, count: int) -> dict | None:
+    """'하나만 더 담으시면 10%' 를 알려 주려고 씁니다."""
+    cfg = site.get("discount") or {}
+    if not cfg.get("count_enabled", True):
+        return None
+    ups = [{"min": to_int(t.get("min"), 0), "percent": to_int(t.get("percent"), 0)}
+           for t in cfg.get("count_tiers") or []
+           if to_int(t.get("min"), 0) > count and to_int(t.get("percent"), 0) > 0]
+    return min(ups, key=lambda t: t["min"]) if ups else None
+
+
+def auto_discounts(site: dict, items: list[dict], repeat_no: int = 0
                    ) -> tuple[list[dict], int]:
-    """쿠폰 없이 자동으로 붙는 할인 — 묶음 할인과 단골 할인.
+    """쿠폰 없이 자동으로 붙는 할인. 지금은 '많이 담을수록' 하나뿐입니다.
 
     (할인 목록, 총 할인액) 을 돌려줍니다.
-    묶음 할인은 '짝이 맞는 상품들의 값' 에만 붙습니다.
-    너무 깊게 깎이지 않도록 합계에 상한(기본 25%)을 둡니다.
+    repeat_no 는 예전 주소·화면이 넘겨 주던 값이라 받기만 하고 쓰지 않습니다.
+    (단골 할인은 없앴습니다. 대신 정기 쿠폰을 씁니다)
     """
     cfg = site.get("discount") or {}
     subtotal = sum(to_int(x.get("price"), 0) for x in items)
     rows: list[dict] = []
 
-    percent = to_int(cfg.get("bundle_percent"), 0)
-    if cfg.get("bundle_enabled", True) and percent > 0:
-        base, pairs = bundle_pairs(items)
-        if base > 0:
-            name = "두 패키지 함께" if pairs == 1 else f"두 패키지 함께 · {pairs}세트"
-            rows.append({"name": name, "percent": percent,
-                         "amount": base * percent // 100})
-
-    tier = loyalty_tier(site, repeat_no)
+    tier = count_tier(site, len(items))
     if tier and subtotal > 0:
-        rows.append({"name": f"{repeat_no}번째 구매 · 단골", "percent": tier["percent"],
+        rows.append({"name": f"{len(items)}개 담기", "percent": tier["percent"],
                      "amount": subtotal * tier["percent"] // 100})
 
     total = sum(r["amount"] for r in rows)
-    cap = subtotal * to_int(cfg.get("max_percent"), 25) // 100
+    cap = subtotal * to_int(cfg.get("max_percent"), 20) // 100
     if total > cap:                      # 상한을 넘으면 마지막 줄에서 깎습니다
         rows[-1]["amount"] -= total - cap
         rows[-1]["capped"] = True

@@ -62,7 +62,8 @@
         <label for="note">메모 <span class="tip" style="display:inline;">선택</span></label>
         <input type="text" id="note" name="note" placeholder="예: 첫 구매 감사 쿠폰">
         <div class="pick" data-target="note">
-          {% for v in ['첫 구매 감사', '단골 할인', '시험지 감사', '학원 단체', '이벤트'] %}
+          {% for v in ['첫 구매 감사', '다시 오세요', '시험 대비 기간', '방학 특가',
+                             '시험지 감사', '학원 단체', '이벤트'] %}
             <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
           {% endfor %}
         </div>

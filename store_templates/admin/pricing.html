@@ -21,48 +21,36 @@
 
 <form method="post">
 <div class="panel">
-  <h2>1. 지문 1개당 얼마 <span class="tag tag-on">여기만 정하면 됩니다</span></h2>
-  <div class="hint">자료 갈래마다 따로 정합니다. 상품을 만들 때 이 값으로 계산해 드립니다.</div>
-  <div class="form-grid">
-    {% for pkg in packages %}
-      <div class="adm-field">
-        <label for="unit_{{ pkg.id }}">{{ pkg.name }}</label>
-        <input type="text" id="unit_{{ pkg.id }}" name="unit_{{ pkg.id }}"
-               value="{{ cfg.units.get(pkg.id, 0) }}" hidden>
-        <div class="pick" data-target="unit_{{ pkg.id }}">
-          {% for v in [600, 700, 800, 900, 950, 1000, 1100, 1200] %}
-            <button class="pick-btn" data-value="{{ v }}">{{ '{:,}'.format(v) }}원</button>
-          {% endfor %}
-        </div>
-        <div class="tip">{{ pkg.tagline }}</div>
-      </div>
-    {% endfor %}
+  <h2>1. 자료 1종이 지문 1개당 얼마 <span class="tag tag-on">여기만 정하면 됩니다</span></h2>
+  <div class="hint">
+    품이 많이 드는 자료를 비싸게 두시면 됩니다.
+    <b>패키지 값은 그 안에 든 자료 단가를 더한 값</b>으로 자동 계산됩니다.
   </div>
+  {% for pkg in packages %}
+    <h3 style="margin:16px 0 8px;font-size:15px;">{{ pkg.name }}
+      <span class="muted" style="font-weight:500;">
+        — 지문당 합계 <b>{{ '{:,}'.format(cfg.units.get(pkg.id, 0)) }}원</b></span></h3>
+    <div class="form-grid">
+      {% for mid in pkg.materials %}
+        {% set m = mats.get(mid) %}
+        <div class="adm-field">
+          <label for="mat_{{ mid }}">{{ m.no if m else '' }} {{ m.name if m else mid }}</label>
+          <input type="text" id="mat_{{ mid }}" name="mat_{{ mid }}"
+                 value="{{ cfg.materials.get(mid, 0) }}" hidden>
+          <div class="pick" data-target="mat_{{ mid }}">
+            {% for v in [100, 120, 160, 200, 250, 300, 400, 500] %}
+              <button class="pick-btn" data-value="{{ v }}">{{ v }}원</button>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
 </div>
 
 <div class="panel">
   <h2>2. 세부 규칙</h2>
   <div class="form-grid">
-    <div class="adm-field">
-      <label for="small_under">몇 지문 미만을 '적은 묶음' 으로 볼까</label>
-      <input type="text" id="small_under" name="small_under" value="{{ cfg.small_under }}" hidden>
-      <div class="pick" data-target="small_under">
-        {% for v in [0, 5, 10, 15, 20] %}
-          <button class="pick-btn" data-value="{{ v }}">{{ v }}지문</button>
-        {% endfor %}
-      </div>
-      <div class="tip">지문이 적어도 표지·편집 품은 똑같이 듭니다. 0 이면 안 씁니다.</div>
-    </div>
-    <div class="adm-field">
-      <label for="small_multiplier_x10">적은 묶음은 몇 배로</label>
-      <input type="text" id="small_multiplier_x10" name="small_multiplier_x10"
-             value="{{ (cfg.small_multiplier * 10) | round | int }}" hidden>
-      <div class="pick" data-target="small_multiplier_x10">
-        {% for v, label in [(10, '그대로'), (12, '1.2배'), (15, '1.5배'), (20, '2배')] %}
-          <button class="pick-btn" data-value="{{ v }}">{{ label }}</button>
-        {% endfor %}
-      </div>
-    </div>
     <div class="adm-field">
       <label for="round_to">끝자리 맞추기</label>
       <input type="text" id="round_to" name="round_to" value="{{ cfg.round_to }}" hidden>
@@ -112,7 +100,7 @@
     </table>
   </div>
   <div class="tip" id="small-note" hidden>
-    지금은 <b>적은 묶음</b>이라 {{ cfg.small_multiplier }}배로 잡았습니다.
+    지문이 적어도 값을 더 받지 않습니다. 작은 단위도 그대로 싸게 팝니다.
   </div>
 </div>
 

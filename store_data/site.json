@@ -53,7 +53,7 @@
         "period": "30일",
         "desc": "한 학기 중 급한 시기에만 짧게 쓰실 때",
         "early": false,
-        "passages": 70
+        "passages": 55
       },
       {
         "name": "3개월",
@@ -63,7 +63,7 @@
         "badge": "가장 추천",
         "desc": "한 학기를 통째로 준비하실 때",
         "early": false,
-        "passages": 200
+        "passages": 160
       },
       {
         "name": "12개월",
@@ -72,12 +72,12 @@
         "period": "365일",
         "desc": "학원에서 상시로 쓰실 때. 지문당 값이 가장 쌉니다",
         "early": true,
-        "passages": 500
+        "passages": 400
       }
     ],
     "preorder_discount": 30000,
     "_preorder_discount안내": "사전 신청하신 분께 여는 날 깎아 드리는 금액(원). 0 이면 할인 문구가 사라집니다. 어느 요금제에 적용할지는 아래 요금제 표의 '사전 할인' 칸에서 고릅니다.",
-    "quota_note": "지문 1개는 <b>그 지문의 자료 한 묶음</b>입니다. 지문 32개짜리 교재의 <b>지문 분석 패키지</b>를 받으시면 32개가 빠지고, <b>문제 패키지</b>까지 받으시면 64개가 빠집니다. 남은 지문 수는 <b>내 자료함</b>에서 언제든 보실 수 있습니다.",
+    "quota_note": "지문 1개는 <b>그 지문의 자료 한 묶음</b>입니다. 지문 18개짜리 모의고사 회차의 <b>지문 분석 패키지</b>를 받으시면 18개가 빠지고, <b>문제 패키지</b>까지 받으시면 36개가 빠집니다.<br>지문 400개는 <b>모의고사 7회차 + 부교재 40강 + 교과서 8과</b> 정도로, 고3을 가르치는 선생님이 1년에 쓰시는 양입니다. 남은 지문 수는 <b>내 자료함</b>에서 언제든 보실 수 있습니다.",
     "_quota_note안내": "프리패스에서 지문이 어떻게 빠지는지 설명하는 글입니다. 비우면 안 나옵니다."
   },
   "submit_reward": {
@@ -100,25 +100,23 @@
     "description": "오르티카영어(Ortica). 고등영어 지문분석지, 17종 변형문제, 동형모의고사를 교재·회차 단위로 만듭니다. 한줄해석·좌지문우해석은 무료."
   },
   "discount": {
-    "_안내": "자동으로 붙는 할인입니다. 관리자 화면 > 가게 정보 에서 고칩니다.",
-    "bundle_enabled": true,
-    "bundle_percent": 12,
-    "loyalty_enabled": true,
-    "loyalty": [
+    "_안내": "담은 상품 개수에 따라 자동으로 붙는 할인입니다. 규칙은 이 하나뿐입니다. 관리자 화면 > 가게 정보 에서 고칩니다.",
+    "count_enabled": true,
+    "count_tiers": [
       {
-        "min": 2,
-        "percent": 5
-      },
-      {
-        "min": 4,
+        "min": 3,
         "percent": 10
       },
       {
-        "min": 7,
+        "min": 6,
         "percent": 15
+      },
+      {
+        "min": 12,
+        "percent": 20
       }
     ],
-    "max_percent": 25
+    "max_percent": 20
   },
   "watermark": {
     "_안내": "받으실 때 PDF 에 새기는 문구입니다. 관리자 화면 > 가게 정보 에서 고칩니다.",
@@ -129,15 +127,24 @@
     "optout_price": 10000
   },
   "pricing": {
+    "_안내": "우리 정가입니다. 자료 1종이 지문 1개당 얼마인지만 정해 두면 상품 값이 자동으로 계산됩니다. 손님 화면에는 안 보입니다.",
+    "materials": {
+      "passage": 120,
+      "analysis": 250,
+      "pilsaengbo": 160,
+      "workbook": 300,
+      "descriptive": 250,
+      "variants": 400
+    },
     "units": {
-      "analysis": 800,
+      "analysis": 530,
       "problem": 950
     },
-    "small_under": 10,
-    "small_multiplier": 1.5,
-    "round_to": 1000,
-    "full_pack_percent": 85,
-    "_안내": "우리 정가 기준입니다. 지문 1개당 얼마인지만 정해 두면 상품 값이 자동으로 계산됩니다. 손님 화면에는 안 보입니다."
+    "round_to": 100,
+    "_소액안내": "지문이 적어도 값을 더 받지 않습니다. 작은 단위도 그대로 싸게 팝니다.",
+    "small_under": 0,
+    "small_multiplier": 1.0,
+    "full_pack_percent": 85
   },
   "brand_en": "Ortica"
 }

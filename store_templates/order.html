@@ -168,7 +168,7 @@
           </label>
         </div>
 
-        <div id="loyalty-note" class="loyalty-note" hidden></div>
+        <div id="next-tier" class="loyalty-note" hidden></div>
 
         <div class="sum-box">
           {% set start_sum = items | sum(attribute='price') %}
@@ -196,7 +196,7 @@
   var nomark = document.getElementById('no_mark');
   var email  = document.getElementById('email');
   var coupon = document.getElementById('coupon');
-  var loyal  = document.getElementById('loyalty-note');
+  var nudge  = document.getElementById('next-tier');
   var msg    = document.getElementById('coupon-msg');
   var out    = document.getElementById('total');
   var sub    = document.getElementById('sum-subtotal');
@@ -228,11 +228,12 @@
       }
       cuts.innerHTML = html;
       out.textContent = won(d.final);
-      if (d.repeat_no > 1) {
-        loyal.hidden = false;
-        loyal.innerHTML = '<b>' + d.repeat_no + '번째 구매</b>시네요. 감사합니다.';
+      if (d.next_tier) {
+        nudge.hidden = false;
+        nudge.innerHTML = '<b>' + d.next_tier.min + '개</b>부터 <b>'
+                        + d.next_tier.percent + '% 할인</b>입니다.';
       } else {
-        loyal.hidden = true;
+        nudge.hidden = true;
       }
       if (coupon.value.trim()) {
         msg.textContent = d.coupon_note;

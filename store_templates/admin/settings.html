@@ -257,42 +257,25 @@
 
   <div class="adm-field">
     <label class="check">
-      <input type="checkbox" name="discount_bundle_enabled" value="1"
-             {{ 'checked' if s.discount.get('bundle_enabled', True) }}>
-      <span><b>묶음 할인</b> — 지문 분석과 문제 패키지를 함께 담으면</span>
-    </label>
-    <input type="text" id="discount_bundle_percent" name="discount_bundle_percent"
-           value="{{ s.discount.get('bundle_percent', 12) }}" hidden>
-    <div class="pick" data-target="discount_bundle_percent">
-      <span class="pick-label">얼마나</span>
-      {% for v in [0, 5, 10, 12, 15, 20] %}
-        <button class="pick-btn" data-value="{{ v }}">{{ v }}%</button>
-      {% endfor %}
-    </div>
-    <div class="tip">함께 사면 값이 싸져야 함께 삽니다. <b>10~15%</b> 를 권합니다.</div>
-  </div>
-
-  <div class="adm-field">
-    <label class="check">
-      <input type="checkbox" name="discount_loyalty_enabled" value="1"
-             {{ 'checked' if s.discount.get('loyalty_enabled', True) }}>
-      <span><b>단골 할인</b> — 이 사이트에서 여러 번 사신 분께</span>
+      <input type="checkbox" name="discount_count_enabled" value="1"
+             {{ 'checked' if s.discount.get('count_enabled', True) }}>
+      <span><b>많이 담을수록 할인</b> — 자동으로 붙는 할인은 이것 하나뿐입니다</span>
     </label>
     <div class="tip" style="margin-top:6px;">
-      <b>몇 번째 구매인지</b>로 셉니다. 이메일이 열쇠라 회원가입이 필요 없습니다.
-      <b>입금이 확인된 주문만</b> 세기 때문에, 주문만 넣고 안 내신 건은 안 칩니다.
+      장바구니에 담은 <b>상품 개수</b>로 셉니다. 규칙이 하나라 손님이 바로 이해하고,
+      <b>한 개만 더 담으면 얼마가 싸지는지</b>를 화면에서 알려 드립니다.
     </div>
     <div class="wrapbox" style="margin-top:10px;">
       <table class="adm-table">
-        <thead><tr><th style="width:170px;">몇 번째 구매부터</th><th>몇 %</th></tr></thead>
+        <thead><tr><th style="width:170px;">몇 개부터</th><th>몇 %</th></tr></thead>
         <tbody>
-        {% for row in (s.discount.get('loyalty', []) + [{}, {}])[:5] %}
+        {% for row in (s.discount.get('count_tiers', []) + [{}, {}])[:5] %}
           <tr>
-            <td><input type="number" name="loyal_min" min="2" max="99"
-                       value="{{ row.get('min','') }}" placeholder="예: 2"
+            <td><input type="number" name="count_min" min="2" max="99"
+                       value="{{ row.get('min','') }}" placeholder="예: 3"
                        style="width:100%;"></td>
-            <td><input type="number" name="loyal_percent" min="0" max="50"
-                       value="{{ row.get('percent','') }}" placeholder="예: 5"
+            <td><input type="number" name="count_percent" min="0" max="50"
+                       value="{{ row.get('percent','') }}" placeholder="예: 10"
                        style="width:100%;"></td>
           </tr>
         {% endfor %}
@@ -300,7 +283,7 @@
       </table>
     </div>
     <div class="tip">빈 줄은 자동으로 지워집니다. 조건이 여럿이면 <b>가장 높은 단계 하나만</b> 붙습니다.
-      권장: <b>2번째 5% · 4번째 10% · 7번째 15%</b></div>
+      권장: <b>3개 10% · 6개 15% · 12개 20%</b></div>
   </div>
 
   <div class="adm-field">

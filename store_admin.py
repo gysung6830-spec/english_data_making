@@ -1570,18 +1570,18 @@ def settings():
     mark["optout_enabled"] = bool(f.get("watermark_optout_enabled"))
     mark["optout_price"] = max(0, min(200000, sc.to_int(f.get("watermark_optout_price"), 0)))
 
-    # 자동 할인 (묶음 · 수량)
+    # 자동 할인 — 담은 개수 하나뿐입니다 (단골 할인은 없앴습니다)
     disc = site.setdefault("discount", {})
-    disc["bundle_enabled"] = bool(f.get("discount_bundle_enabled"))
-    disc["bundle_percent"] = max(0, min(50, sc.to_int(f.get("discount_bundle_percent"), 0)))
-    disc["loyalty_enabled"] = bool(f.get("discount_loyalty_enabled"))
+    disc["count_enabled"] = bool(f.get("discount_count_enabled"))
     tiers = []
-    for need, pct in zip(f.getlist("loyal_min"), f.getlist("loyal_percent")):
+    for need, pct in zip(f.getlist("count_min"), f.getlist("count_percent")):
         need, pct = sc.to_int(need, 0), sc.to_int(pct, 0)
         if need >= 2 and 0 < pct <= 50:
             tiers.append({"min": need, "percent": pct})
-    disc["loyalty"] = sorted(tiers, key=lambda t: t["min"])
-    disc["max_percent"] = max(0, min(70, sc.to_int(f.get("discount_max_percent"), 25)))
+    disc["count_tiers"] = sorted(tiers, key=lambda t: t["min"])
+    disc["max_percent"] = max(0, min(70, sc.to_int(f.get("discount_max_percent"), 20)))
+    for gone in ("bundle_enabled", "bundle_percent", "loyalty_enabled", "loyalty"):
+        disc.pop(gone, None)
 
     # 시험지 제출 보상
     reward = site.setdefault("submit_reward", {})
@@ -1682,19 +1682,25 @@ def pricing():
     catalog = sc.load_raw_catalog()
     packages = list(sc.package_map().values())
 
+    # 패키지에 든 자료 목록 (지문 분석 3종 · 문제 3종)
+    mats = {m.get("id"): m for m in (sc.load_materials().get("materials") or [])}
+
     if request.method == "POST":
         cfg = sc.pricing_cfg(site)
-        units = {}
-        for pkg in packages:
-            units[pkg["id"]] = max(0, min(100000,
-                                          sc.to_int(request.form.get(f"unit_{pkg['id']}"), 0)))
-        cfg["units"] = units
-        cfg["small_under"] = max(0, min(100, sc.to_int(request.form.get("small_under"), 10)))
-        cfg["small_multiplier"] = max(1.0, min(3.0,
-                                               sc.to_int(request.form.get("small_multiplier_x10"), 15) / 10))
-        cfg["round_to"] = max(1, min(10000, sc.to_int(request.form.get("round_to"), 1000)))
+        # 자료 1종마다 지문당 단가를 받고, 패키지 값은 그 합으로 자동 계산합니다
+        rates = dict(cfg.get("materials") or {})
+        for mid in mats:
+            got = request.form.get(f"mat_{mid}")
+            if got is not None:
+                rates[mid] = max(0, min(100000, sc.to_int(got, 0)))
+        cfg["materials"] = rates
+        cfg["units"] = {pkg["id"]: sum(rates.get(m, 0) for m in (pkg.get("materials") or []))
+                        for pkg in packages}
+        cfg["round_to"] = max(1, min(10000, sc.to_int(request.form.get("round_to"), 100)))
         cfg["full_pack_percent"] = max(50, min(100,
                                                sc.to_int(request.form.get("full_pack_percent"), 85)))
+        cfg["small_under"] = 0          # 지문이 적어도 값을 더 받지 않습니다
+        cfg["small_multiplier"] = 1.0
         site["pricing"] = cfg
         sc.save_site(site)
         flash("우리 정가를 저장했습니다. 상품 만들 때 이 값으로 계산해 드립니다.", "ok")
@@ -1705,7 +1711,7 @@ def pricing():
            if r["should"] and abs(r["gap"]) >= 1000 and not r["is_full"]]
     return render_template("admin/pricing.html", rows=rows, off=off,
                            cfg=sc.pricing_cfg(site), packages=packages,
-                           package_map=sc.package_map(), site=site)
+                           mats=mats, package_map=sc.package_map(), site=site)
 
 
 @admin_bp.route("/backup")
