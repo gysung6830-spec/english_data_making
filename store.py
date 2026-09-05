@@ -185,7 +185,8 @@ def home():
                            latest_notice=notices[0] if notices else None)
 
 
-def group_by_book(items: list[dict], books: list[dict]) -> tuple[list[dict], list[dict]]:
+def group_by_book(items: list[dict], books: list[dict],
+                  sold: dict[str, int] | None = None) -> tuple[list[dict], list[dict]]:
     """같은 교재의 자료를 한 카드로 묶습니다.
 
     같은 교재가 '지문 분석'·'문제' 두 장으로 나뉘어 목록이 두 배로 길어지던 것을
@@ -207,11 +208,14 @@ def group_by_book(items: list[dict], books: list[dict]) -> tuple[list[dict], lis
         picked = sorted(picked, key=lambda p: order.get(p.get("package"), 999))
         groups.append({"book": book, "items": picked,
                        "from_price": min(p.get("price", 0) for p in picked),
-                       "passages": max(p.get("passages", 0) for p in picked)})
+                       "passages": max(p.get("passages", 0) for p in picked),
+                       # 교재 카드의 인기 = 그 교재 자료가 팔린 횟수를 다 더한 것
+                       "sold": sum((sold or {}).get(p.get("slug", ""), 0) for p in picked)})
     return groups, loose
 
 
-PRODUCT_ORDERS = {"": "추천순", "price": "가격 낮은 순", "passages": "지문 많은 순"}
+PRODUCT_ORDERS = {"": "추천순", "popular": "인기순",
+                  "price": "가격 낮은 순", "passages": "지문 많은 순"}
 
 
 @app.route("/products")
@@ -225,8 +229,16 @@ def products():
 
     items = catalog["products"]
     books = sc.books_with_counts(catalog, selected)
-    grades = sorted({g for p in catalog["products"] for g in (p.get("grade") or "").split("~")
-                     if g.strip()})
+
+    # 학년으로 갈라 보는 것은 모의고사처럼 그럴 뜻이 있는 분류에서만 합니다.
+    # 교과서·EBS 부교재는 책 이름에 이미 학년이 들어 있어 거르기가 군더더기입니다.
+    grade_cats = {c.get("id") for c in catalog.get("categories", []) if c.get("by_grade")}
+    if selected in grade_cats:
+        grades = sorted({g for p in catalog["products"] if p.get("category") == selected
+                         for g in (p.get("grade") or "").split("~") if g.strip()})
+    else:
+        grades, grade = [], ""      # 다른 분류에서는 학년 거르기를 아예 내리고 값도 버립니다
+
     if selected:
         items = [p for p in items if p.get("category") == selected]
     if package:
@@ -246,24 +258,32 @@ def products():
         books = [b for b in books
                  if needle in f"{b.get('name','')} {b.get('publisher','')} "
                               f"{b.get('author','')}".lower()]
+    sold = sc.sold_counts() if order == "popular" else {}
     if order == "price":
         items = sorted(items, key=lambda p: p.get("price", 0))
     elif order == "passages":
         items = sorted(items, key=lambda p: -p.get("passages", 0))
+    elif order == "popular":
+        # 많이 팔린 순. 같으면 지문이 많은 것을 앞에 둡니다
+        items = sorted(items, key=lambda p: (-sold.get(p.get("slug", ""), 0),
+                                             -p.get("passages", 0)))
 
-    groups, loose = group_by_book(items, books)
+    groups, loose = group_by_book(items, books, sold)
     # 교재 카드끼리도 같은 기준으로 줄을 세웁니다.
     # (묶기만 하고 두면 '가격 낮은 순'을 눌러도 화면이 그대로라 눌러 본 보람이 없습니다)
     if order == "price":
         groups = sorted(groups, key=lambda g: g["from_price"])
     elif order == "passages":
         groups = sorted(groups, key=lambda g: -g["passages"])
+    elif order == "popular":
+        groups = sorted(groups, key=lambda g: (-g["sold"], -g["passages"]))
     return render_template("products.html", items=items, books=books,
                            groups=groups, loose=loose,
                            categories=catalog.get("categories", []), selected=selected,
                            packages=catalog.get("packages", []), selected_package=package,
-                           grades=grades, grade=grade,
+                           grades=grades, grade=grade, grade_cats=grade_cats,
                            orders=PRODUCT_ORDERS, order=order,
+                           no_sales_yet=(order == "popular" and not sold),
                            q=q)
 
 

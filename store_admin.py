@@ -843,18 +843,25 @@ def category_save():
         elif any(c.get("id") == cid for c in catalog["categories"]):
             flash(f"'{cid}' 분류는 이미 있습니다.", "err")
         else:
-            catalog["categories"].append({"id": cid, "name": name})
+            catalog["categories"].append(
+                {"id": cid, "name": name,
+                 "by_grade": request.form.get("by_grade") == "1"})
             sc.save_catalog(catalog)
             flash(f"분류 '{name}' 을(를) 추가했습니다.", "ok")
 
     elif action == "rename":
         cid = request.form.get("id", "")
         name = sc.clean(request.form.get("name"), 40)
+        by_grade = request.form.get("by_grade") == "1"
         for c in catalog["categories"]:
             if c.get("id") == cid and name:
                 c["name"] = name
+                # 학년으로 갈라 볼 분류인지. 모의고사처럼 학년이 갈리는 것만 켭니다
+                c["by_grade"] = by_grade
                 sc.save_catalog(catalog)
-                flash(f"분류 이름을 '{name}' 으로 바꿨습니다.", "ok")
+                flash(f"분류 '{name}' 을(를) 저장했습니다."
+                      + (" 손님 화면에 학년 거르기가 나옵니다." if by_grade
+                         else " 학년 거르기는 나오지 않습니다."), "ok")
                 break
 
     elif action == "delete":

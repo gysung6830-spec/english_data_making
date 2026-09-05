@@ -3,19 +3,23 @@
   "categories": [
     {
       "id": "textbook",
-      "name": "교과서"
+      "name": "교과서",
+      "by_grade": false
     },
     {
       "id": "mock",
-      "name": "모의고사"
+      "name": "모의고사",
+      "by_grade": true
     },
     {
       "id": "ebs",
-      "name": "EBS 부교재"
+      "name": "EBS 부교재",
+      "by_grade": false
     },
     {
       "id": "highlighter",
-      "name": "형광펜 독해"
+      "name": "형광펜 독해",
+      "by_grade": false
     }
   ],
   "_교재안내": "books = 교재·회차 묶음. 강사는 '내가 쓰는 교재 이름'으로 찾기 때문에 이 단위가 중요합니다.",

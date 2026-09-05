@@ -75,7 +75,11 @@
               <input type="hidden" name="action" value="rename">
               <input type="hidden" name="id" value="{{ c.id }}">
               <input type="text" name="name" value="{{ c.name }}" style="width:200px;">
-              <button class="btn btn-ghost btn-sm" type="submit">이름 저장</button>
+              <label class="switch" style="font-size:13px;font-weight:600;">
+                <input type="checkbox" name="by_grade" value="1" {{ 'checked' if c.by_grade }}>
+                학년으로 나누기
+              </label>
+              <button class="btn btn-ghost btn-sm" type="submit">저장</button>
             </form>
           </td>
           <td>
@@ -103,6 +107,15 @@
         <label for="cat_id">아이디 (영문)</label>
         <input type="text" id="cat_id" name="id" placeholder="textbook">
         <div class="tip">영문 소문자·숫자·하이픈. 한 번 정하면 바꾸지 마세요.</div>
+      </div>
+      <div class="adm-field full">
+        <label class="switch">
+          <input type="checkbox" name="by_grade" value="1">
+          학년으로 나누기
+        </label>
+        <div class="tip">켜면 손님 화면에 <b>고1 · 고2 · 고3</b> 거르기가 나옵니다.
+          모의고사처럼 학년이 갈리는 분류만 켜세요. 교과서·EBS 부교재는
+          책 이름에 이미 학년이 들어 있어 꺼 두는 것이 깔끔합니다.</div>
       </div>
     </div>
     <div class="form-actions">

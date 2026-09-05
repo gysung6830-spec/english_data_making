@@ -941,6 +941,27 @@ def paid_order_count(email: str) -> int:
     return int(row["n"] if row else 0)
 
 
+def sold_counts() -> dict[str, int]:
+    """자료마다 몇 번 팔렸는지. '인기순' 으로 줄을 세울 때 씁니다.
+
+    한 주문에 여러 자료를 담으면 첫 자료는 product_slug 에, 나머지는
+    extra_slugs 에 쉼표로 이어 붙습니다. 그래서 두 칸을 함께 셉니다.
+    값을 치른 주문만 셉니다. (담아만 두고 안 낸 것은 인기가 아닙니다)
+    """
+    out: dict[str, int] = {}
+    rows = get_db().execute(
+        """SELECT product_slug, extra_slugs FROM orders
+           WHERE kind = 'product' AND status IN ('입금확인', '발송완료')""").fetchall()
+    for row in rows:
+        slugs = [row["product_slug"] or ""]
+        slugs += (row["extra_slugs"] or "").split(",")
+        for slug in slugs:
+            slug = slug.strip()
+            if slug:
+                out[slug] = out.get(slug, 0) + 1
+    return out
+
+
 def loyalty_next(site: dict, repeat_no: int) -> dict | None:
     """다음 단골 단계. '한 번 더 사시면 10%' 를 알려 주려고 씁니다."""
     cfg = (site.get("discount") or {})

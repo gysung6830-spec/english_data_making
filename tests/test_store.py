@@ -193,10 +193,22 @@ def test_products_grouped_by_book():
 
 
 def test_grade_filter_and_sort():
-    """학년 버튼과 정렬 버튼이 실제로 걸러 주고 줄 세워야 합니다."""
-    go1 = body(client().get("/products?grade=고1"))
-    assert "능률(김성곤) 공통영어 1" in go1          # 고1 교재
-    assert "2026 수능특강 영어" not in go1           # 고3 교재는 빠져야 합니다
+    """학년 버튼과 정렬 버튼이 실제로 걸러 주고 줄 세워야 합니다.
+
+    학년은 모의고사에서만 씁니다. 교과서·EBS 부교재는 책 이름에 이미 학년이
+    들어 있어 학년 거르기가 군더더기입니다.
+    """
+    mock = body(client().get("/products?category=mock"))
+    assert '<span class="filter-label">학년</span>' in mock
+    go2 = body(client().get("/products?category=mock&grade=고2"))
+    assert "2026년 3월 학력평가 (고2)" in go2
+    assert "2026학년도 6월 모의평가 (고3)" not in go2     # 고3 회차는 빠져야 합니다
+
+    # 다른 분류에서는 학년 줄이 아예 안 나오고, 주소에 붙여도 걸러지지 않습니다
+    book = body(client().get("/products?category=textbook&grade=고3"))
+    assert '<span class="filter-label">학년</span>' not in book
+    assert "능률(김성곤) 공통영어 1" in book            # 고1 교재가 그대로 남습니다
+    assert '<span class="filter-label">학년</span>' not in body(client().get("/products"))
 
     import re
     cheap = body(client().get("/products?order=price"))
@@ -205,7 +217,49 @@ def test_grade_filter_and_sort():
     firsts = [int(re.search(r'<span class="price">([\d,]+)원</span>', c)
                   .group(1).replace(",", "")) for c in cards if "price" in c]
     assert firsts == sorted(firsts), firsts
-    print("PASS  학년 거르기 · 가격순 정렬")
+    print("PASS  학년 거르기(모의고사만) · 가격순 정렬")
+
+
+def test_popular_order():
+    """'인기순' 은 실제로 값을 치른 주문 수로 줄을 세웁니다."""
+    a = admin()
+    hot = "mock-2026-03-g2-analysis"          # 이 자료를 세 번 팔아 봅니다
+    mild = "mock-2026-06-g3-analysis"
+
+    def buy(slug, email):
+        c = client()
+        r = c.post("/order", data={"slug": slug, "name": "인기테스트",
+                                   "phone": "010-1111-2222", "email": email, "agree": "1"})
+        assert r.status_code == 302
+        key = r.headers["Location"].rsplit("/", 1)[-1]
+        row = sc.sqlite3.connect(sc.DB_PATH).execute(
+            "SELECT id FROM orders WHERE view_key = ?", (key,)).fetchone()
+        return row[0]
+
+    # 값을 안 치른 주문은 인기에 안 들어갑니다
+    buy(hot, "notpaid@example.com")
+    with store.app.test_request_context():
+        assert sc.sold_counts().get(hot, 0) == 0
+
+    for i in range(3):
+        oid = buy(hot, f"hot{i}@example.com")
+        a.post(f"/admin/orders/{oid}", data={"status": "입금확인"})
+    oid = buy(mild, "mild@example.com")
+    a.post(f"/admin/orders/{oid}", data={"status": "입금확인"})
+
+    with store.app.test_request_context():
+        counts = sc.sold_counts()
+    assert counts[hot] == 3 and counts[mild] == 1
+
+    # 버튼이 있고, 많이 팔린 교재가 앞에 옵니다
+    page = body(client().get("/products?order=popular"))
+    assert ">인기순</a>" in page
+    head = page.split("찾으시는 교재가 없나요")[0]
+    names = re.findall(r'<h3><a [^>]*>([^<]+)</a></h3>', head)
+    assert names, head[:200]
+    assert names[0].startswith("2026년 3월 학력평가"), names[:3]
+    assert "아직 판매 기록이 없어" not in page          # 판 자료가 있으니 안내가 없어야 합니다
+    print("PASS  인기순 — 값을 치른 주문이 많은 자료가 앞에")
 
 
 def test_book_page_splits_lanes():
@@ -1811,7 +1865,8 @@ def test_mobile_filters_collapse():
         assert 'class="filter-toggle"' in text, path
         assert 'class="filter-sets"' in text, path
     # 고른 값이 버튼에 요약돼 보여야 합니다
-    picked = body(client().get("/products?grade=고1&order=price"))
+    # 학년은 모의고사 분류에서만 씁니다
+    picked = body(client().get("/products?category=mock&grade=고1&order=price"))
     assert "고1 · 가격 낮은 순" in picked
     print("PASS  폰에서 거르기 접기 · 고른 값 요약")
 
@@ -2542,6 +2597,7 @@ def run_all():
     test_package_filter()
     test_products_grouped_by_book()
     test_grade_filter_and_sort()
+    test_popular_order()
     test_book_page_splits_lanes()
     test_search_finds_by_publisher_and_book()
     test_share_and_branding()
