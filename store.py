@@ -566,7 +566,7 @@ def quote_for(items: list[dict], email: str, coupon_code: str,
     # 하나만 더 담으면 다음 단계로 넘어가는지 알려 주려고 봅니다
     nxt = sc.count_next(site, len(items))
     coupon, coupon_cut, coupon_note = sc.check_coupon(coupon_code, subtotal - auto)
-    extra = sc.no_mark_price(site) if no_mark else 0
+    extra = sc.no_mark_price(site, len(items)) if no_mark else 0
     return {
         "subtotal": subtotal, "rows": rows, "auto": auto, "next_tier": nxt,
         "coupon": coupon, "coupon_cut": coupon_cut, "coupon_note": coupon_note,
@@ -622,6 +622,7 @@ def order_quote():
 def order():
     """주문서. 낱개 상품 하나로도, 장바구니 통째로도 옵니다."""
     catalog = sc.load_catalog()
+    site = sc.load_site()
     items, product, sibling, from_cart = order_items(catalog)
     if not items:
         if from_cart:
@@ -632,7 +633,8 @@ def order():
     def page(form, errors, status=200, typo=""):
         return render_template("order.html", items=items, p=product, sibling=sibling,
                                books=books, from_cart=from_cart, email_typo=typo,
-                               no_mark_price=sc.no_mark_price(sc.load_site()),
+                               no_mark_price=sc.no_mark_price(site, len(items)),
+                               no_mark_rate=sc.no_mark_rate(site),
                                form=form, errors=errors), status
 
     if request.method == "GET":
@@ -1477,8 +1479,11 @@ def view_file(token, index):
         flash("이 자료는 화면에서 열 수 없습니다. 파일로 받아 주세요.", "err")
         return redirect(url_for("download_page", token=token))
     sc.count_download(token)
+    mark_off = sc.get_db().execute(
+        "SELECT no_mark FROM orders WHERE order_no = ?", (row["order_no"],)).fetchone()
     return render_template("view.html", d=row, name=name, index=index,
                            pages=pages, token=token,
+                           no_mark=bool(mark_off and mark_off["no_mark"]),
                            other=[dict(f, index=i) for i, f in enumerate(files)
                                   if i != index and f["name"].lower().endswith(".pdf")])
 

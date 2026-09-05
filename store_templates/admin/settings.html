@@ -237,14 +237,28 @@
     </div>
   </div>
   <div class="adm-field">
-    <label for="watermark_optout_price">더 받을 값</label>
+    <label for="watermark_optout_price">자료 하나당 더 받을 값</label>
     <input type="text" id="watermark_optout_price" name="watermark_optout_price"
-           value="{{ s.watermark.get('optout_price', 10000) }}" hidden>
+           value="{{ s.watermark.get('optout_price', 500) }}" hidden>
     <div class="pick" data-target="watermark_optout_price">
-      {% for v in [5000, 10000, 20000, 30000] %}
+      {% for v in [300, 500, 1000, 2000] %}
         <button class="pick-btn" data-value="{{ v }}">{{ '{:,}'.format(v) }}원</button>
       {% endfor %}
     </div>
+    <div class="tip">담은 자료 개수만큼 곱해서 붙습니다. 자료 3개면 세 배입니다.</div>
+  </div>
+  <div class="adm-field">
+    <label for="watermark_optout_max">한 주문에 최대</label>
+    <input type="text" id="watermark_optout_max" name="watermark_optout_max"
+           value="{{ s.watermark.get('optout_max', 10000) }}" hidden>
+    <div class="pick" data-target="watermark_optout_max">
+      {% for v in [5000, 10000, 20000, 0] %}
+        <button class="pick-btn" data-value="{{ v }}">
+          {{ '없음' if not v else '{:,}원'.format(v) }}</button>
+      {% endfor %}
+    </div>
+    <div class="tip">많이 사시는 분이 지나치게 부담되지 않게 여기서 끊습니다.
+      <b>0 이면 상한 없이 개수대로</b> 받습니다.</div>
   </div>
 </div>
 

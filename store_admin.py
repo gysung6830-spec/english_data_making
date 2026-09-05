@@ -2039,6 +2039,7 @@ def settings():
     mark["center"] = sc.clean(f.get("watermark_center"), 80)
     mark["optout_enabled"] = bool(f.get("watermark_optout_enabled"))
     mark["optout_price"] = max(0, min(200000, sc.to_int(f.get("watermark_optout_price"), 0)))
+    mark["optout_max"] = max(0, min(500000, sc.to_int(f.get("watermark_optout_max"), 0)))
 
     # 자료를 어떻게 내어 줄지 — 화면 인쇄 / 파일 받기
     dv = site.setdefault("delivery", {})

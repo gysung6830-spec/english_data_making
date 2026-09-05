@@ -3045,44 +3045,83 @@ def test_watermark_wording_is_editable():
 
 
 def test_watermark_optout_costs_extra():
-    """값을 더 내면 표시 없이 받을 수 있어야 합니다."""
+    """이름 없는 판은 자료당 값을 더 받고, 한 주문에 상한이 있습니다."""
     import store_watermark as wm
     if not wm.AVAILABLE:
         print("SKIP  워터마크 라이브러리 없음")
         return
     site = sc.load_site()
-    site["watermark"] = {"enabled": True, "optout_enabled": True, "optout_price": 10000,
+    site["watermark"] = {"enabled": True, "optout_enabled": True,
+                         "optout_price": 500, "optout_max": 10000,
                          "footer": "{이메일}", "center": ""}
     site["delivery"] = {"mode": "both"}
     sc.save_site(site)
 
+    # 자료 하나 — 500원
     form = body(client().get("/order?slug=ybm-han-analysis"))
-    assert "이름이 안 새겨진 판" in form and "+10,000원" in form
+    assert "이름이 안 새겨진 판" in form and "+500원" in form
+    assert "자료 1개 × 500원" in form and "한 주문에 10,000원까지" in form
     q = client().get("/order/quote?slug=ybm-han-analysis&nomark=1").get_json()
-    assert q["extra"] == 10000 and q["final"] == 14800 + 10000
+    assert q["extra"] == 500 and q["final"] == 14800 + 500
 
+    # 자료 세 개 — 세 배
     c = client()
-    c.post("/order", data={"slug": "ybm-han-analysis", "no_mark": "1", "name": "표시없이",
-                           "phone": "010-4444-5555",
-                           "email": "clean@example.com", "agree": "1"})
+    for slug in ("ybm-han-analysis", "ybm-han-problem", "neungyule-kim-analysis"):
+        c.post("/cart/add", data={"slug": slug})
+    assert c.get("/order/quote?cart=1&nomark=1").get_json()["extra"] == 1500
+
+    # 상한을 넘지 않습니다
+    assert sc.no_mark_price(site, 20) == 10000
+    assert sc.no_mark_price(site, 50) == 10000
+    no_cap = dict(site, watermark=dict(site["watermark"], optout_max=0))
+    assert sc.no_mark_price(no_cap, 50) == 25000        # 상한 0 이면 개수대로
+
+    # 실제로 주문하면 표시 없이 나옵니다
+    c2 = client()
+    c2.post("/order", data={"slug": "ybm-han-analysis", "no_mark": "1", "name": "표시없이",
+                            "phone": "010-4444-5555",
+                            "email": "clean@example.com", "agree": "1"})
     with store.app.app_context():
         row = sc.get_db().execute(
             "SELECT * FROM orders WHERE email = 'clean@example.com'").fetchone()
-    assert row["amount"] == 14800 + 10000 and row["no_mark"] == 1
+    assert row["amount"] == 14800 + 500 and row["no_mark"] == 1
+
+    folder = sc.product_dir("ybm-han-analysis")
+    folder.mkdir(parents=True, exist_ok=True)
+    from reportlab.pdfgen import canvas as rl_canvas
+    page = rl_canvas.Canvas(str(folder / "본문.pdf"))
+    page.drawString(72, 700, "clean copy")
+    page.showPage(); page.save()
     admin().post(f"/admin/orders/{row['id']}/deliver", follow_redirects=True)
     with store.app.app_context():
-        dl = sc.get_db().execute(
-            "SELECT token FROM downloads WHERE order_no = ?", (row["order_no"],)).fetchone()
+        token = sc.get_db().execute(
+            "SELECT token FROM downloads WHERE order_no = ?",
+            (row["order_no"],)).fetchone()[0]
+    idx = [f["name"] for f in sc.product_files("ybm-han-analysis")].index("본문.pdf")
+
     import io as _io
     from pypdf import PdfReader
-    text = PdfReader(_io.BytesIO(client().get(f"/d/{dl['token']}/0").data)).pages[0].extract_text()
-    assert "clean@example.com" not in text, "값을 더 냈는데 표시가 새겨졌습니다"
+    got = client().get(f"/d/{token}/{idx}")
+    text = PdfReader(_io.BytesIO(got.data)).pages[0].extract_text()
+    assert "clean@example.com" not in text, "표시 없는 판인데 이메일이 박혔습니다"
+    assert "clean copy" in text
+
+    # 화면에서 인쇄할 때도 같이 연동됩니다
+    site["delivery"] = {"mode": "view"}
+    sc.save_site(site)
+    view = body(client().get(f"/d/{token}/view/{idx}"))
+    assert "이름이 안 새겨진 판" in view
+    assert "사시는 분의 이름과 이메일이 새겨져" not in view
+
+    # 관리자 화면에서 자료당 값과 상한을 정합니다
+    setting = body(admin().get("/admin/settings"))
+    assert "자료 하나당 더 받을 값" in setting and "한 주문에 최대" in setting
 
     # 꺼 두면 주문서에 칸이 안 보여야 합니다
     site["watermark"]["optout_enabled"] = False
     sc.save_site(site)
     assert "이름이 안 새겨진 판" not in body(client().get("/order?slug=ybm-han-analysis"))
-    print("PASS  값을 더 내면 표시 없이 받기")
+    print("PASS  이름 없는 판 — 자료당 값 · 주문 상한 · 인쇄까지 연동")
 
 
 def test_email_typo_is_caught_once():

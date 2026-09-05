@@ -122,8 +122,9 @@
     "enabled": true,
     "footer": "{이름} · {이메일} · {주문번호} · {브랜드} 제공 · 재배포 금지",
     "center": "{이메일}",
-    "optout_enabled": false,
-    "optout_price": 10000
+    "optout_enabled": true,
+    "optout_price": 500,
+    "optout_max": 10000
   },
   "pricing": {
     "_안내": "우리 정가입니다. 자료 1종이 지문 1개당 얼마인지만 정해 두면 상품 값이 자동으로 계산됩니다. 손님 화면에는 안 보입니다.",
