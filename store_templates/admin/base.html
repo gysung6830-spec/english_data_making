@@ -30,6 +30,10 @@
         🎟 할인 쿠폰</a>
       <a href="{{ url_for('admin.sales') }}" class="{{ 'on' if request.endpoint == 'admin.sales' }}">
         💰 매출 · 세금</a>
+      <a href="{{ url_for('admin.metrics') }}" class="{{ 'on' if request.endpoint == 'admin.metrics' }}">
+        📈 지표</a>
+      <a href="{{ url_for('admin.checkup') }}" class="{{ 'on' if request.endpoint == 'admin.checkup' }}">
+        🔍 빠진 것 점검</a>
 
       <div class="sep">가게 꾸미기</div>
       <a href="{{ url_for('admin.products') }}" class="{{ 'on' if request.endpoint in ['admin.products','admin.product_form'] }}">

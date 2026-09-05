@@ -1615,6 +1615,123 @@ def pass_update(pass_id):
 # ---------------------------------------------------------------------------
 # 안내 메일 — 명단에 보내기 · 쿠폰 뿌리기 · 장바구니 되살리기
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# 지표 — 잘 되고 있는지 숫자로 보기
+# ---------------------------------------------------------------------------
+@admin_bp.route("/metrics")
+def metrics():
+    """단위당 평균 몇 명이 사는지. 우리가 목표로 삼은 숫자입니다."""
+    db = sc.get_db()
+    catalog = sc.load_catalog()
+    site = sc.load_site()
+    sold = sc.sold_counts()
+
+    live = [p for p in catalog["products"] if p.get("active", True)]
+    units = len(live)
+    buys = sum(sold.values())
+    avg = buys / units if units else 0
+
+    # 자료 하나를 만드는 데 드는 값 — 가격 가이드의 단가에서 거꾸로 셉니다
+    cost_p = sc.to_int(site.get("costs", {}).get("per_passage"), 3889)
+    passages = sum(sc.to_int(p.get("passages"), 0) for p in live)
+    make_cost = passages * cost_p
+
+    money = db.execute(
+        """SELECT COALESCE(SUM(amount), 0) AS total, COUNT(*) AS cnt
+           FROM orders WHERE status IN ('입금확인', '발송완료')""").fetchone()
+    net = int(money["total"] * 0.88)          # 부가세·카드 수수료를 뺀 실수령
+    need = (make_cost / (0.88 * (sum(p.get("price", 0) for p in live) or 1))
+            if make_cost else 0)
+
+    # 자료별 순위
+    by_slug = {p["slug"]: p for p in live}
+    rank = sorted(((by_slug[k], v) for k, v in sold.items() if k in by_slug),
+                  key=lambda x: -x[1])[:20]
+    never = [p for p in live if not sold.get(p["slug"])]
+
+    months = db.execute(
+        """SELECT substr(created_at, 1, 7) AS ym, COUNT(*) AS cnt,
+                  COALESCE(SUM(amount), 0) AS total
+           FROM orders WHERE status IN ('입금확인', '발송완료')
+           GROUP BY ym ORDER BY ym DESC LIMIT 12""").fetchall()
+    leads = db.execute("SELECT COUNT(DISTINCT lower(email)) AS n FROM leads").fetchone()["n"]
+    buyers = db.execute(
+        """SELECT COUNT(DISTINCT lower(email)) AS n FROM orders
+           WHERE status IN ('입금확인', '발송완료')""").fetchone()["n"]
+    passes = db.execute(
+        "SELECT COUNT(*) AS n FROM passes WHERE revoked_at IS NULL AND ends_at >= ?",
+        (sc.stamp(),)).fetchone()["n"]
+
+    return render_template(
+        "admin/metrics.html", units=units, buys=buys, avg=avg, passages=passages,
+        cost_p=cost_p, make_cost=make_cost, gross=money["total"], orders=money["cnt"],
+        net=net, need=need, rank=rank, never=never, months=months,
+        leads=leads, buyers=buyers, passes=passes,
+        turn=(leads and buyers / leads * 100) or 0)
+
+
+# ---------------------------------------------------------------------------
+# 빠진 것 점검 — 손님이 살 수 없는 상품 찾아내기
+# ---------------------------------------------------------------------------
+@admin_bp.route("/checkup")
+def checkup():
+    """상품 수가 많아지면 눈으로 못 찾습니다. 빠진 것을 한 화면에 모읍니다."""
+    catalog = sc.load_raw_catalog()
+    site = sc.load_site()
+    live = [p for p in catalog["products"] if p.get("active", True)]
+    books = {b["slug"]: b for b in catalog["books"]}
+    shots = {m["id"]: sc.shot_files(m["id"]) for m in sc.load_materials()["materials"]}
+
+    groups = [
+        {"key": "nofile", "name": "받을 파일이 없는 상품", "hurt": True,
+         "why": "손님이 사도 내어 줄 것이 없습니다. 값을 받고 못 드립니다.",
+         "items": [p for p in live if not sc.has_deliverable(p)]},
+        {"key": "noprice", "name": "값이 0원인 상품", "hurt": True,
+         "why": "공짜로 나갑니다. 값을 넣어 주세요.",
+         "items": [p for p in live if sc.to_int(p.get("price"), 0) <= 0]},
+        {"key": "nobook", "name": "교재가 없는 상품", "hurt": True,
+         "why": "자료 목록에서 묶이지 않아 따로 떨어져 보입니다.",
+         "items": [p for p in live if not books.get(p.get("book") or "")]},
+        {"key": "nopassage", "name": "지문 수가 없는 상품", "hurt": False,
+         "why": "값 계산과 프리패스 차감이 어긋납니다.",
+         "items": [p for p in live if sc.to_int(p.get("passages"), 0) <= 0]},
+        {"key": "nosample", "name": "샘플 PDF 가 없는 상품", "hurt": False,
+         "why": "미리 볼 것이 없으면 잘 안 삽니다.",
+         "items": [p for p in live
+                   if not (p.get("sample_file")
+                           and (sc.SAMPLE_DIR / p["sample_file"]).exists())]},
+        {"key": "nodesc", "name": "설명이 없는 상품", "hurt": False,
+         "why": "검색에도 안 걸리고, 무엇인지 알 수 없습니다.",
+         "items": [p for p in live if len(p.get("description") or "") < 20]},
+    ]
+    for g in groups:
+        g["items"] = g["items"][:60]
+
+    # 자료 지면 사진이 없는 라인업 자료
+    no_shot = [m for m in sc.load_materials()["materials"]
+               if m.get("active", True) and not shots.get(m["id"])]
+    # 아직 예시값 그대로인 가게 정보
+    biz = site.get("business") or {}
+    contact = site.get("contact") or {}
+    payment = site.get("payment") or {}
+    todo = []
+    for label, val, bad in (
+        ("대표자 이름", biz.get("owner"), "대표자명"),
+        ("사업자등록번호", biz.get("reg_no"), "000-00-00000"),
+        ("통신판매업 신고번호", biz.get("mailorder_no"), "제0000-지역-0000호"),
+        ("사업장 주소", biz.get("address"), "사업장 주소"),
+        ("이메일", contact.get("email"), "여기에_이메일@example.com"),
+        ("전화번호", contact.get("phone"), "010-0000-0000"),
+        ("입금 계좌", payment.get("bank_account"), ""),
+    ):
+        if not val or val == bad:
+            todo.append(label)
+
+    total = sum(len(g["items"]) for g in groups) + len(no_shot) + len(todo)
+    return render_template("admin/checkup.html", groups=groups, no_shot=no_shot,
+                           todo=todo, total=total, live=len(live))
+
+
 @admin_bp.route("/mail")
 def mail_page():
     db = sc.get_db()

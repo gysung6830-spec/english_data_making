@@ -1369,6 +1369,66 @@ def _mail_log():
             "SELECT * FROM mailouts ORDER BY id DESC LIMIT 1").fetchone()
 
 
+def test_metrics_screen():
+    """지표 — 자료 하나를 평균 몇 명이 사는지가 가장 크게 보여야 합니다."""
+    a = admin()
+    page = body(a.get("/admin/metrics"))
+    assert "자료 하나당 평균" in page
+    assert "목표 5명 (본전)" in page and "목표 34명 (월 300만원)" in page
+    assert "제작비 회수" in page and "많이 팔린 자료" in page
+    assert "한 번도 안 팔린 자료" in page
+
+    # 값을 치른 주문이 있으면 순위에 뜹니다
+    slug = "mock-2026-03-g2-analysis"
+    c = client()
+    r = c.post("/order", data={"slug": slug, "name": "지표", "phone": "010-5555-1111",
+                               "email": "metric@example.com", "agree": "1"})
+    key = r.headers["Location"].rsplit("/", 1)[-1]
+    oid = sc.sqlite3.connect(sc.DB_PATH).execute(
+        "SELECT id FROM orders WHERE view_key = ?", (key,)).fetchone()[0]
+    a.post(f"/admin/orders/{oid}", data={"status": "입금확인"}, follow_redirects=True)
+
+    page = body(a.get("/admin/metrics"))
+    assert "2026년 3월 학력평가" in page
+    # 손님 화면에는 이런 숫자가 새어 나가면 안 됩니다
+    for path in ("/", "/products", "/cart"):
+        assert "제작비 회수" not in body(client().get(path))
+    print("PASS  지표 — 단위당 평균 구매자 · 제작비 회수 · 자료별 순위")
+
+
+def test_checkup_screen():
+    """빠진 것 점검 — 손님이 못 사는 상품을 찾아 줘야 합니다."""
+    a = admin()
+    page = body(a.get("/admin/checkup"))
+    assert "빠진 것 점검" in page
+    # 파일 없는 상품은 '급함' 으로 뜹니다
+    assert "받을 파일이 없는 상품" in page and "급함" in page
+    assert "값을 받고 못 드립니다" in page
+    # 예시값 그대로인 가게 정보도 잡아 줍니다
+    site = sc.load_site()
+    keep = dict(site["business"])
+    site["business"]["reg_no"] = "000-00-00000"        # 예시값으로 되돌려 봅니다
+    sc.save_site(site)
+    page = body(a.get("/admin/checkup"))
+    assert "예시값 그대로인 가게 정보" in page and "사업자등록번호" in page
+    site = sc.load_site(); site["business"] = keep; sc.save_site(site)
+    assert "사업자등록번호" not in body(a.get("/admin/checkup"))
+
+    # 값이 0원인 상품을 하나 만들어 두면 잡힙니다
+    catalog = sc.load_raw_catalog()
+    catalog["products"].append({"slug": "zero-price-test", "name": "값 없는 자료",
+                                "price": 0, "active": True, "passages": 5,
+                                "book": "ybm-han", "package": "analysis"})
+    sc.save_catalog(catalog)
+    page = body(a.get("/admin/checkup"))
+    assert "값이 0원인 상품" in page and "값 없는 자료" in page
+
+    catalog = sc.load_raw_catalog()
+    catalog["products"] = [p for p in catalog["products"] if p["slug"] != "zero-price-test"]
+    sc.save_catalog(catalog)
+    print("PASS  빠진 것 점검 — 파일·값·교재·샘플·가게 정보")
+
+
 def test_mail_to_leads_and_coupons():
     """명단에 소식·쿠폰을 보내고, 보낸 기록이 남아야 합니다."""
     a = admin()
@@ -3018,6 +3078,8 @@ def run_all():
     test_whole_book_upload()
     test_wordfile_table_shapes()
     test_pass_counts_passages()
+    test_metrics_screen()
+    test_checkup_screen()
     test_mail_to_leads_and_coupons()
     test_left_cart_reminder()
     test_pass_quota()

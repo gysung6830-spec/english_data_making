@@ -1,0 +1,115 @@
+{% extends "admin/base.html" %}
+{% block title %}지표{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <h1>지표</h1>
+  <p>가장 중요한 숫자 하나는 <b>자료 하나를 평균 몇 명이 사는가</b>입니다.
+    이 숫자가 오르면 나머지는 따라옵니다.</p>
+</div>
+
+<div class="panel" style="background:var(--brand-soft);border-color:#cfe4d9;">
+  <h2 style="margin-bottom:4px;">자료 하나당 평균 <b style="font-size:30px;">{{ '%.1f'|format(avg) }}</b>명</h2>
+  <div class="hint" style="color:var(--brand-dark);">
+    파는 자료 {{ '{:,}'.format(units) }}개 · 팔린 횟수 모두 {{ '{:,}'.format(buys) }}번
+  </div>
+  <div class="mini-grid" style="margin-top:14px;">
+    <div class="mini"><span>목표 5명 (본전)</span>
+      <b>{{ '달성' if avg >= 5 else '%.0f%%'|format(avg / 5 * 100) }}</b></div>
+    <div class="mini"><span>목표 10명</span>
+      <b>{{ '달성' if avg >= 10 else '%.0f%%'|format(avg / 10 * 100) }}</b></div>
+    <div class="mini"><span>목표 34명 (월 300만원)</span>
+      <b>{{ '달성' if avg >= 34 else '%.0f%%'|format(avg / 34 * 100) }}</b></div>
+  </div>
+</div>
+
+<div class="mini-grid">
+  <div class="mini"><span>지금까지 매출</span><b>{{ '{:,}'.format(gross) }}원</b></div>
+  <div class="mini"><span>실수령 (세금·수수료 뒤)</span><b>{{ '{:,}'.format(net) }}원</b></div>
+  <div class="mini"><span>주문</span><b>{{ '{:,}'.format(orders) }}건</b></div>
+  <div class="mini"><span>산 사람</span><b>{{ '{:,}'.format(buyers) }}명</b></div>
+  <div class="mini"><span>이메일 명단</span><b>{{ '{:,}'.format(leads) }}명</b></div>
+  <div class="mini"><span>명단 중 산 비율</span><b>{{ '%.1f'|format(turn) }}%</b></div>
+  <div class="mini"><span>프리패스 쓰는 중</span><b>{{ passes }}명</b></div>
+  <div class="mini"><span>만든 자료 지문</span><b>{{ '{:,}'.format(passages) }}개</b></div>
+</div>
+
+<div class="panel">
+  <h2>제작비 회수</h2>
+  <div class="hint">
+    지문 1개당 만드는 값을 <b>{{ '{:,}'.format(cost_p) }}원</b>으로 잡았습니다.
+    지금까지 만든 자료 {{ '{:,}'.format(passages) }}지문 =
+    <b>{{ '{:,}'.format(make_cost) }}원</b>어치 품입니다.
+  </div>
+  <div class="mini-grid" style="margin-top:12px;">
+    <div class="mini"><span>들인 품</span><b>{{ '{:,}'.format(make_cost) }}원</b></div>
+    <div class="mini"><span>거둔 돈 (실수령)</span><b>{{ '{:,}'.format(net) }}원</b></div>
+    <div class="mini {{ 'on' if net >= make_cost }}">
+      <span>{{ '남은 것' if net >= make_cost else '아직 모자란 것' }}</span>
+      <b>{{ '{:,}'.format((net - make_cost)|abs) }}원</b></div>
+  </div>
+</div>
+
+<div class="panel">
+  <h2>많이 팔린 자료</h2>
+  {% if rank %}
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th style="width:44px;">#</th><th>자료</th><th>값</th><th>팔린 횟수</th><th>매출</th></tr></thead>
+        <tbody>
+        {% for p, n in rank %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td><b>{{ p.name }}</b></td>
+            <td>{{ '{:,}'.format(p.price) }}원</td>
+            <td><b>{{ n }}</b>번</td>
+            <td>{{ '{:,}'.format(p.price * n) }}원</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="hint">아직 팔린 자료가 없습니다. 값을 치른 주문이 들어오면 여기에 쌓입니다.</div>
+  {% endif %}
+</div>
+
+<div class="panel">
+  <h2>한 번도 안 팔린 자료 {{ never|length }}개</h2>
+  <div class="hint">
+    값이 비싸거나, 샘플이 없거나, 아무도 그 교재를 안 쓰거나 셋 중 하나입니다.
+    <b>오래 안 팔리면 값을 낮추거나 무료 자료로 돌려</b> 손님을 부르는 데 쓰세요.
+  </div>
+  {% if never %}
+    <div class="unit-pass" style="margin-top:10px;">
+      {% for p in never[:40] %}
+        <span class="up-row"><a href="{{ url_for('admin.product_form', slug=p.slug) }}">{{ p.name }}</a></span>
+      {% endfor %}
+      {% if never|length > 40 %}<span class="up-row muted">외 {{ never|length - 40 }}개</span>{% endif %}
+    </div>
+  {% endif %}
+</div>
+
+<div class="panel">
+  <h2>달마다</h2>
+  {% if months %}
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th>달</th><th>주문</th><th>매출</th><th>실수령</th></tr></thead>
+        <tbody>
+        {% for m in months %}
+          <tr>
+            <td><b>{{ m['ym'] }}</b></td>
+            <td>{{ m['cnt'] }}건</td>
+            <td>{{ '{:,}'.format(m['total']) }}원</td>
+            <td>{{ '{:,}'.format((m['total'] * 0.88)|round|int) }}원</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="hint">아직 값을 치른 주문이 없습니다.</div>
+  {% endif %}
+</div>
+{% endblock %}

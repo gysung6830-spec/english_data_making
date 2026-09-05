@@ -1,0 +1,72 @@
+{% extends "admin/base.html" %}
+{% block title %}빠진 것 점검{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <h1>빠진 것 점검</h1>
+  <p>파는 자료 {{ '{:,}'.format(live) }}개를 훑어, <b>손님이 못 사거나 안 사게 되는 것</b>을
+    모았습니다.</p>
+</div>
+
+{% if total == 0 %}
+  <div class="steps-help">
+    <b>빠진 것이 없습니다</b>
+    <div>모든 상품에 파일과 값이 들어 있고, 가게 정보도 다 채워져 있습니다.</div>
+  </div>
+{% else %}
+  <div class="steps-help" style="background:#fff8f4;border-color:#f0d4c4;">
+    <b>손볼 곳이 모두 {{ total }}군데 있습니다</b>
+    <div>빨간 것부터 고치시면 됩니다. 그건 <b>손님이 아예 못 사는</b> 것입니다.</div>
+  </div>
+{% endif %}
+
+{% if todo %}
+  <div class="panel" style="border-color:#f0c2bb;">
+    <h2>아직 예시값 그대로인 가게 정보 {{ todo|length }}개</h2>
+    <div class="hint">푸터와 주문서에 그대로 보입니다.
+      <b>손님이 보면 못 미덥습니다.</b></div>
+    <div class="unit-pass" style="margin-top:10px;">
+      {% for t in todo %}<span class="up-row">{{ t }}</span>{% endfor %}
+    </div>
+    <div class="form-actions">
+      <a class="btn btn-primary" href="{{ url_for('admin.settings') }}">가게 정보 고치러 가기</a>
+    </div>
+  </div>
+{% endif %}
+
+{% for g in groups %}
+  {% if g['items'] %}
+    <div class="panel" {% if g.hurt %}style="border-color:#f0c2bb;"{% endif %}>
+      <h2>{% if g.hurt %}<span class="tag" style="background:#fee2e2;color:#b91c1c;">급함</span>
+        {% endif %}{{ g.name }} {{ g['items']|length }}개</h2>
+      <div class="hint">{{ g.why }}</div>
+      <div class="unit-pass" style="margin-top:10px;">
+        {% for p in g['items'] %}
+          <span class="up-row">
+            <a href="{{ url_for('admin.product_form', slug=p.slug) }}">{{ p.name }}</a>
+            {% if g.key == 'nofile' %}
+              <a class="btn btn-ghost btn-sm"
+                 href="{{ url_for('admin.product_files', slug=p.slug) }}">파일 올리기</a>
+            {% endif %}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
+
+{% if no_shot %}
+  <div class="panel">
+    <h2>지면 사진이 없는 라인업 자료 {{ no_shot|length }}개</h2>
+    <div class="hint">손님은 "어떻게 생긴 자료인가"를 보고 삽니다.
+      글 설명만으로는 잘 사지 않습니다.</div>
+    <div class="unit-pass" style="margin-top:10px;">
+      {% for m in no_shot %}
+        <span class="up-row">
+          <a href="{{ url_for('admin.material_shots', mid=m.id) }}">{{ m.no }} {{ m.name }}</a>
+        </span>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+{% endblock %}
