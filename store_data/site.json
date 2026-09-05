@@ -21,8 +21,7 @@
     "owner": "대표자명",
     "reg_no": "000-00-00000",
     "mailorder_no": "제0000-지역-0000호",
-    "address": "사업장 주소",
-    "note": "아래 사업자 정보는 예시입니다. 실제 값으로 바꿔서 표시해 주세요. (store_data/site.json)"
+    "address": "사업장 주소"
   },
   "policy": {
     "_안내": "전자상거래법·개인정보보호법에 맞춘 업계 표준 문안입니다. 사업자 정보만 실제 값으로 바꾸시면 됩니다.",
@@ -141,9 +140,6 @@
       "problem": 950
     },
     "round_to": 100,
-    "_소액안내": "지문이 적어도 값을 더 받지 않습니다. 작은 단위도 그대로 싸게 팝니다.",
-    "small_under": 0,
-    "small_multiplier": 1.0,
     "full_pack_percent": 85
   },
   "brand_en": "Ortica"

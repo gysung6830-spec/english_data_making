@@ -2168,8 +2168,6 @@ def pricing():
         cfg["round_to"] = max(1, min(10000, sc.to_int(request.form.get("round_to"), 100)))
         cfg["full_pack_percent"] = max(50, min(100,
                                                sc.to_int(request.form.get("full_pack_percent"), 85)))
-        cfg["small_under"] = 0          # 지문이 적어도 값을 더 받지 않습니다
-        cfg["small_multiplier"] = 1.0
         site["pricing"] = cfg
         sc.save_site(site)
         flash("우리 정가를 저장했습니다. 상품 만들 때 이 값으로 계산해 드립니다.", "ok")

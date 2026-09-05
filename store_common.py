@@ -1036,8 +1036,7 @@ def fill_marks(template: str | None, values: dict) -> str:
     return text.strip(" ·")
 
 
-PRICING_DEFAULTS = {"units": {}, "materials": {}, "small_under": 0,
-                    "small_multiplier": 1.0, "round_to": 100,
+PRICING_DEFAULTS = {"units": {}, "materials": {}, "round_to": 100,
                     "full_pack_percent": 85}
 
 
@@ -1055,11 +1054,9 @@ def suggested_price(site: dict, package: str, passages: int) -> int:
     passages = to_int(passages, 0)
     if unit <= 0 or passages <= 0:
         return 0
+    # 지문이 적어도 값을 더 받지 않습니다. 작은 단위도 그대로 싸게 팝니다.
     raw = unit * passages
-    if passages < to_int(cfg.get("small_under"), 10):
-        # 지문이 적어도 표지·편집 품은 똑같이 듭니다.
-        raw = int(raw * float(cfg.get("small_multiplier") or 1))
-    step = max(1, to_int(cfg.get("round_to"), 1000))
+    step = max(1, to_int(cfg.get("round_to"), 100))
     return int(round(raw / step) * step)
 
 
