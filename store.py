@@ -333,8 +333,10 @@ def product_detail(slug):
     sample_ready = bool(product.get("sample_file")
                         and (sc.SAMPLE_DIR / product["sample_file"]).exists())
     full = sc.full_pack_for(product, catalog)
+    pass_on = (sc.load_site().get("pass") or {}).get("mode") == "sale"
     return render_template("product.html", p=product, book=book,
                            sibling=sibling, related=related, sample_ready=sample_ready,
+                           pass_on=pass_on,
                            full=full, full_parts=len(full.get("covers", [])) if full else 0)
 
 
@@ -946,6 +948,46 @@ def unlock_free(slug: str) -> None:
         session["free_ok"] = opened[-40:]      # 쿠키가 무한정 커지지 않게
 
 
+@app.route("/pass/use", methods=["POST"])
+def pass_use():
+    """프리패스로 자료 하나를 받습니다. 남은 지문에서 그만큼 깎입니다."""
+    slug = sc.clean(request.form.get("slug"), 60)
+    email = sc.clean(request.form.get("email"), 120).lower()
+    product = find_product(slug)
+    back = url_for("product_detail", slug=slug) if product else url_for("products")
+    if product is None:
+        abort(404)
+    if not sc.EMAIL_RE.match(email):
+        flash("이메일을 정확히 적어 주세요.", "err")
+        return redirect(back)
+
+    row = sc.active_pass(email)
+    if row is None:
+        flash("이 이메일로 쓸 수 있는 프리패스가 없습니다. "
+              "이용권을 사셨다면 신청하신 이메일 그대로 적어 주세요.", "err")
+        return redirect(back)
+
+    ok, note = sc.pass_take(row["id"], product)
+    if not ok:
+        flash(note, "err")
+        return redirect(back)
+
+    # 주문처럼 다운로드 링크를 내어 줍니다 (기록이 남아야 다시 받을 수 있습니다)
+    order_no = sc.insert_numbered(
+        """INSERT INTO orders (order_no, kind, product_slug, product_name, quantity,
+                               amount, name, phone, email, status, created_at, updated_at)
+           VALUES (?, 'product', ?, ?, 1, 0, '프리패스', '-', ?, '발송완료', ?, ?)""",
+        lambda no: (no, slug, product.get("name", "")[:200], email, sc.stamp(), sc.stamp()))
+    made = sc.get_db().execute(
+        "SELECT * FROM orders WHERE order_no = ?", (order_no,)).fetchone()
+    if sc.has_deliverable(product):
+        sc.issue_download(made, slug, product.get("name", ""))
+
+    left = sc.pass_left(sc.active_pass(email))
+    flash(f"{note} 남은 지문 {left:,}개. 내 자료함에서 받으시면 됩니다.", "ok")
+    return redirect(url_for("my_locker", token=sc.locker_token(email)))
+
+
 @app.route("/free")
 def free():
     """무료 자료실 — 회차·학년으로 걸러 봅니다."""
@@ -1331,8 +1373,11 @@ def my_locker(token):
         abort(404)
     rows = locker_rows(email)
     paid = sum(1 for r in rows if r["o"]["status"] in ("입금확인", "발송완료"))
-    return render_template("my_locker.html", email=email, rows=rows,
-                           paid=paid, token=token)
+    mypass = sc.active_pass(email)
+    return render_template("my_locker.html", email=email, rows=rows, paid=paid,
+                           token=token, mypass=mypass,
+                           pass_left=sc.pass_left(mypass),
+                           pass_uses=sc.pass_history(mypass["id"]) if mypass else [])
 
 
 @app.route("/d/<token>")

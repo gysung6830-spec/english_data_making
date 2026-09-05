@@ -1,0 +1,121 @@
+{% extends "admin/base.html" %}
+{% block title %}프리패스{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <h1>프리패스</h1>
+  <p>값을 받으신 분께 <b>지문 묶음 이용권</b>을 열어 드립니다.
+    손님은 자료 화면에서 <b>프리패스로 받기</b>를 눌러 이메일만 적으면 바로 받습니다.</p>
+</div>
+
+<div class="steps-help">
+  <b>이렇게 돌아갑니다</b>
+  <ol>
+    <li>손님이 프리패스를 신청하고 값을 보냅니다. (주문 화면에 들어옵니다)</li>
+    <li>입금을 확인하시면 여기서 <b>이용권을 열어</b> 주십니다. 안내 메일이 자동으로 나갑니다.</li>
+    <li>손님이 자료를 받을 때마다 <b>그 자료의 지문 수만큼</b> 깎입니다.</li>
+    <li>같은 자료를 다시 받아도 <b>두 번 깎이지 않습니다.</b></li>
+  </ol>
+</div>
+
+<div class="panel">
+  <h2>이용권 열어 주기</h2>
+  <form method="post" action="{{ url_for('admin.pass_new') }}">
+    <div class="form-grid">
+      <div class="adm-field">
+        <label for="email">손님 이메일</label>
+        <input type="email" id="email" name="email" required placeholder="teacher@example.com">
+        <div class="tip">신청하실 때 적으신 이메일 그대로여야 합니다.</div>
+      </div>
+      <div class="adm-field">
+        <label for="plan">요금제</label>
+        <input type="text" id="plan" name="plan" value="" placeholder="12개월" hidden>
+        <div class="pick" data-target="plan">
+          {% for pl in plans %}
+            <button class="pick-btn" data-value="{{ pl.name }}">{{ pl.name }}</button>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="adm-field">
+        <label for="quota">쓸 수 있는 지문</label>
+        <input type="text" id="quota" name="quota" value="400" hidden>
+        <div class="pick" data-target="quota">
+          {% for pl in plans %}
+            <button class="pick-btn" data-value="{{ pl.passages }}">{{ '{:,}'.format(pl.passages) }}개</button>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="adm-field">
+        <label for="days">이용 기간(일)</label>
+        <input type="text" id="days" name="days" value="365" hidden>
+        <div class="pick" data-target="days">
+          {% for v in [30, 90, 180, 365] %}
+            <button class="pick-btn" data-value="{{ v }}">{{ v }}일</button>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="adm-field">
+        <label for="order_no">주문번호 <span class="muted">(있으면)</span></label>
+        <input type="text" id="order_no" name="order_no" placeholder="OR-2026-0001">
+      </div>
+      <div class="adm-field">
+        <label for="note">메모</label>
+        <input type="text" id="note" name="note" placeholder="예: 사전 신청 할인 적용">
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">이용권 열어 주기</button>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>열어 드린 이용권 {{ rows|length }}건</h2>
+  {% if rows %}
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th>손님</th><th>요금제</th><th>지문</th><th>받아 간 자료</th>
+                   <th>기간</th><th>상태</th><th style="min-width:250px;"></th></tr></thead>
+        <tbody>
+        {% for r in rows %}
+          {% set left = r['quota'] - r['used'] %}
+          <tr>
+            <td><b>{{ r['email'] }}</b>
+              {% if r['note'] %}<br><small class="muted">{{ r['note'] }}</small>{% endif %}</td>
+            <td>{{ r['plan'] }}</td>
+            <td><b>{{ '{:,}'.format(left) }}</b> 남음
+              <br><small class="muted">{{ '{:,}'.format(r['used']) }} / {{ '{:,}'.format(r['quota']) }}</small></td>
+            <td>{{ used.get(r['id'], 0) }}개</td>
+            <td><small>{{ r['starts_at'][:10] }}<br>~ {{ r['ends_at'][:10] }}</small></td>
+            <td>
+              {% if r['revoked_at'] %}<span class="tag tag-off">끊김</span>
+              {% elif r['ends_at'] < now %}<span class="tag tag-off">기간 지남</span>
+              {% elif left <= 0 %}<span class="tag tag-off">다 씀</span>
+              {% else %}<span class="tag tag-on">쓰는 중</span>{% endif %}
+            </td>
+            <td>
+              <form class="inline-form" method="post"
+                    action="{{ url_for('admin.pass_update', pass_id=r['id']) }}">
+                <input type="hidden" name="action" value="add">
+                <input type="number" name="more_quota" placeholder="지문" min="0" style="width:74px;">
+                <input type="number" name="more_days" placeholder="일" min="0" style="width:64px;">
+                <button class="btn btn-ghost btn-sm" type="submit">더하기</button>
+              </form>
+              <form method="post" style="margin-top:5px;"
+                    action="{{ url_for('admin.pass_update', pass_id=r['id']) }}"
+                    onsubmit="return confirm('{{ r['email'] }} 님의 이용권을 {{ '살릴까요' if r['revoked_at'] else '끊을까요' }}?');">
+                <input type="hidden" name="action" value="{{ 'restore' if r['revoked_at'] else 'revoke' }}">
+                <button class="btn btn-sm {{ '' if r['revoked_at'] else 'danger' }}" type="submit">
+                  {{ '다시 살리기' if r['revoked_at'] else '끊기' }}</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="hint">아직 열어 드린 이용권이 없습니다.</div>
+  {% endif %}
+</div>
+{% endblock %}

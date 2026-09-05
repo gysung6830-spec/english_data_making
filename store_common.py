@@ -781,6 +781,32 @@ CREATE INDEX IF NOT EXISTS idx_leads_created ON leads(created_at DESC);
 
 -- 내 자료함 열쇠. 이메일 하나에 열쇠 하나를 만들어 두고, 그 주소를 아는 분만
 -- 자기가 받은 자료를 다시 볼 수 있게 합니다. 회원가입·비밀번호가 없습니다.
+CREATE TABLE IF NOT EXISTS passes (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    email         TEXT NOT NULL,
+    plan          TEXT NOT NULL,
+    quota         INTEGER NOT NULL DEFAULT 0,   -- 쓸 수 있는 지문 수
+    used          INTEGER NOT NULL DEFAULT 0,   -- 지금까지 쓴 지문 수
+    starts_at     TEXT NOT NULL,
+    ends_at       TEXT NOT NULL,
+    order_no      TEXT,
+    note          TEXT,
+    revoked_at    TEXT,
+    created_at    TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_pass_email ON passes(lower(email));
+
+-- 프리패스로 무엇을 받아 갔는지. 같은 자료를 두 번 받아도 한 번만 깎습니다.
+CREATE TABLE IF NOT EXISTS pass_uses (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    pass_id       INTEGER NOT NULL,
+    product_slug  TEXT NOT NULL,
+    product_name  TEXT,
+    passages      INTEGER NOT NULL DEFAULT 0,
+    created_at    TEXT NOT NULL,
+    UNIQUE (pass_id, product_slug)
+);
+
 CREATE TABLE IF NOT EXISTS lockers (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     email         TEXT UNIQUE NOT NULL,
@@ -1199,6 +1225,83 @@ def guess_unit(path: str) -> tuple[int, str]:
         if lead:
             return int(lead.group(1)), f"{int(lead.group(1))}강"
     return 0, ""
+
+
+# ---------------------------------------------------------------------------
+# 프리패스 — 지문 묶음 이용권
+# ---------------------------------------------------------------------------
+def active_pass(email: str) -> sqlite3.Row | None:
+    """이 이메일로 지금 쓸 수 있는 프리패스. 없으면 None.
+
+    여러 장이 있으면 만료가 가장 늦은 것을 씁니다.
+    """
+    email = clean(email, 120).lower()
+    if not EMAIL_RE.match(email):
+        return None
+    return get_db().execute(
+        """SELECT * FROM passes
+           WHERE lower(email) = ? AND revoked_at IS NULL AND ends_at >= ?
+           ORDER BY ends_at DESC LIMIT 1""", (email, stamp())).fetchone()
+
+
+def pass_left(row) -> int:
+    """남은 지문 수."""
+    if row is None:
+        return 0
+    return max(0, to_int(row["quota"], 0) - to_int(row["used"], 0))
+
+
+def pass_take(pass_id: int, product: dict) -> tuple[bool, str]:
+    """자료 하나를 프리패스로 받습니다. (되었는지, 안내문)
+
+    같은 자료를 다시 받으면 깎지 않습니다. 남은 지문이 모자라면 거절합니다.
+    """
+    db = get_db()
+    row = db.execute("SELECT * FROM passes WHERE id = ?", (pass_id,)).fetchone()
+    if row is None or row["revoked_at"] or row["ends_at"] < stamp():
+        return False, "쓸 수 있는 프리패스가 없습니다."
+
+    slug = product.get("slug") or ""
+    already = db.execute(
+        "SELECT 1 FROM pass_uses WHERE pass_id = ? AND product_slug = ?",
+        (pass_id, slug)).fetchone()
+    if already:
+        return True, "이미 받으신 자료입니다. 지문은 다시 깎이지 않습니다."
+
+    need = max(1, to_int(product.get("passages"), 0))
+    if need > pass_left(row):
+        return False, (f"남은 지문이 {pass_left(row)}개인데 이 자료는 {need}개가 필요합니다. "
+                       "낱개로 사시거나 이용권을 새로 받으시면 됩니다.")
+    db.execute("""INSERT INTO pass_uses (pass_id, product_slug, product_name,
+                                         passages, created_at)
+                  VALUES (?, ?, ?, ?, ?)""",
+               (pass_id, slug, clean(product.get("name"), 200), need, stamp()))
+    db.execute("UPDATE passes SET used = used + ? WHERE id = ?", (need, pass_id))
+    db.commit()
+    return True, f"지문 {need}개를 썼습니다."
+
+
+def pass_history(pass_id: int) -> list:
+    """이 이용권으로 받아 간 자료 목록."""
+    return get_db().execute(
+        "SELECT * FROM pass_uses WHERE pass_id = ? ORDER BY id DESC",
+        (pass_id,)).fetchall()
+
+
+def grant_pass(email: str, plan: str, quota: int, days: int,
+               order_no: str = "", note: str = "") -> int:
+    """프리패스를 내어 줍니다. 관리자 화면과 주문 처리에서 씁니다."""
+    ts = stamp()
+    # stamp() 와 같은 모양이어야 글자 그대로 크기 비교가 맞습니다
+    ends = (now_kst() + timedelta(days=max(1, days))).isoformat(timespec="seconds")
+    cur = get_db().execute(
+        """INSERT INTO passes (email, plan, quota, used, starts_at, ends_at,
+                               order_no, note, created_at)
+           VALUES (?, ?, ?, 0, ?, ?, ?, ?, ?)""",
+        (clean(email, 120).lower(), clean(plan, 60), max(0, to_int(quota, 0)),
+         ts, ends, clean(order_no, 40), clean(note, 300), ts))
+    get_db().commit()
+    return cur.lastrowid
 
 
 def safe_filename(name: str) -> str:

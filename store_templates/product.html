@@ -117,6 +117,19 @@
         <p class="muted mb-0" style="font-size:13px;margin-top:8px;">
           여러 회차를 담으면 <b>입금은 한 번</b>만 하시면 됩니다.
         </p>
+        {% if pass_on %}
+          {# 프리패스가 있으신 분은 사지 않고 지문에서 깎아 바로 받습니다 #}
+          <details class="pass-take">
+            <summary>프리패스로 받기 <span class="muted">— 지문 {{ p.passages or 1 }}개가 깎입니다</span></summary>
+            <form method="post" action="{{ url_for('pass_use') }}">
+              <input type="hidden" name="slug" value="{{ p.slug }}">
+              <label for="pass_email">이용권을 신청하신 이메일</label>
+              <input type="email" id="pass_email" name="email" required
+                     placeholder="teacher@example.com" autocomplete="email">
+              <button class="btn btn-ghost btn-block" type="submit">프리패스로 받기</button>
+            </form>
+          </details>
+        {% endif %}
         {% if full %}
           <a class="full-hint" href="{{ url_for('product_detail', slug=full.slug) }}">
             <b>{{ full.name }}</b>

@@ -20,7 +20,44 @@
         <span class="lt-label">지금까지 받으신 자료</span>
         <b>{{ paid }}건</b>
       </div>
+      {% if mypass %}
+        <div class="lt-box on">
+          <span class="lt-label">프리패스 남은 지문</span>
+          <b>{{ '{:,}'.format(pass_left) }}개</b>
+        </div>
+        <div class="lt-box">
+          <span class="lt-label">{{ mypass['plan'] }} · 이용 기간</span>
+          <b>{{ mypass['ends_at'][:10] }}까지</b>
+        </div>
+      {% endif %}
     </div>
+
+    {% if mypass %}
+      <div class="card no-print" style="margin-bottom:20px;">
+        <h3 style="font-size:17px;margin-bottom:6px;">프리패스로 받아 가신 자료</h3>
+        <p class="muted" style="font-size:13.5px;">
+          모두 {{ '{:,}'.format(mypass['used']) }}개 썼고
+          <b>{{ '{:,}'.format(pass_left) }}개</b> 남았습니다.
+          같은 자료를 다시 받으셔도 <b>지문은 깎이지 않습니다.</b></p>
+        {% if pass_uses %}
+          <div class="wrapbox">
+            <table class="lk-table">
+              <thead><tr><th>자료</th><th style="width:90px;">지문</th>
+                         <th style="width:110px;">받은 날</th></tr></thead>
+              <tbody>
+              {% for u in pass_uses %}
+                <tr><td>{{ u['product_name'] }}</td>
+                    <td>{{ u['passages'] }}개</td>
+                    <td><small class="muted">{{ u['created_at'][:10] }}</small></td></tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <p class="muted mb-0" style="font-size:13.5px;">아직 받아 가신 자료가 없습니다.</p>
+        {% endif %}
+      </div>
+    {% endif %}
 
     {% if rows %}
       <div class="locker-list">

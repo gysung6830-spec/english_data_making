@@ -26,7 +26,7 @@ import json
 import os
 import re
 import secrets
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 from flask import (Blueprint, abort, flash, redirect, render_template, request,
                    send_from_directory, session, url_for)
@@ -1534,6 +1534,80 @@ def free_clear_samples():
     sc.save_freebies(data)
     flash(f"예시 무료 자료 {gone}개를 지웠습니다.", "ok")
     return redirect(url_for("admin.free_list"))
+
+
+# ---------------------------------------------------------------------------
+# 프리패스 — 내어 주기 · 남은 지문 보기 · 끊기
+# ---------------------------------------------------------------------------
+@admin_bp.route("/passes")
+def passes():
+    db = sc.get_db()
+    rows = db.execute("SELECT * FROM passes ORDER BY id DESC LIMIT 300").fetchall()
+    used = {r["pass_id"]: r["n"] for r in db.execute(
+        "SELECT pass_id, COUNT(*) AS n FROM pass_uses GROUP BY pass_id").fetchall()}
+    cfg = sc.load_site().get("pass") or {}
+    return render_template("admin/passes.html", rows=rows, used=used,
+                           plans=cfg.get("plans") or [], now=sc.stamp())
+
+
+@admin_bp.route("/passes/new", methods=["POST"])
+def pass_new():
+    """값을 받으신 분께 프리패스를 내어 줍니다."""
+    email = sc.clean(request.form.get("email"), 120).lower()
+    if not sc.EMAIL_RE.match(email):
+        flash("이메일을 정확히 적어 주세요.", "err")
+        return redirect(url_for("admin.passes"))
+    quota = max(1, sc.to_int(request.form.get("quota"), 0))
+    days = max(1, sc.to_int(request.form.get("days"), 365))
+    plan = sc.clean(request.form.get("plan"), 60) or "프리패스"
+    sc.grant_pass(email, plan, quota, days,
+                  order_no=sc.clean(request.form.get("order_no"), 40),
+                  note=sc.clean(request.form.get("note"), 300))
+    site = sc.load_site()
+    sc.send_mail(
+        f"[{site.get('brand', '오르티카영어')}] 프리패스가 열렸습니다",
+        "\n".join([f"{plan} 이용권을 열어 드렸습니다.",
+                    f"쓰실 수 있는 지문 : {quota:,}개",
+                    f"이용 기간 : 오늘부터 {days}일",
+                    "",
+                    "자료 화면에서 '프리패스로 받기' 를 누르고 이 이메일을 적으시면",
+                    "바로 받으실 수 있습니다.",
+                    f"남은 지문은 내 자료함에서 보실 수 있습니다 — "
+                    f"{url_for('my_locker', token=sc.locker_token(email), _external=True)}"]),
+        to_addr=email)
+    flash(f"{email} 님께 {plan}({quota:,}지문 · {days}일) 을 열어 드렸습니다. "
+          "안내 메일도 보냈습니다.", "ok")
+    return redirect(url_for("admin.passes"))
+
+
+@admin_bp.route("/passes/<int:pass_id>", methods=["POST"])
+def pass_update(pass_id):
+    """지문 늘려 주기 · 기간 늘리기 · 끊기."""
+    db = sc.get_db()
+    row = db.execute("SELECT * FROM passes WHERE id = ?", (pass_id,)).fetchone()
+    if row is None:
+        abort(404)
+    action = request.form.get("action")
+
+    if action == "revoke":
+        db.execute("UPDATE passes SET revoked_at = ? WHERE id = ?", (sc.stamp(), pass_id))
+        flash("이용권을 끊었습니다. 더 이상 자료를 받을 수 없습니다.", "ok")
+    elif action == "restore":
+        db.execute("UPDATE passes SET revoked_at = NULL WHERE id = ?", (pass_id,))
+        flash("이용권을 다시 살렸습니다.", "ok")
+    elif action == "add":
+        more = max(0, sc.to_int(request.form.get("more_quota"), 0))
+        days = max(0, sc.to_int(request.form.get("more_days"), 0))
+        if more:
+            db.execute("UPDATE passes SET quota = quota + ? WHERE id = ?", (more, pass_id))
+        if days:
+            ends = max(row["ends_at"], sc.stamp())
+            new_end = (datetime.fromisoformat(ends)
+                       + timedelta(days=days)).isoformat(timespec="seconds")
+            db.execute("UPDATE passes SET ends_at = ? WHERE id = ?", (new_end, pass_id))
+        flash(f"지문 {more:,}개, 기간 {days}일을 더해 드렸습니다.", "ok")
+    db.commit()
+    return redirect(url_for("admin.passes"))
 
 
 @admin_bp.route("/leads")

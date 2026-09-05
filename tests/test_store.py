@@ -1363,6 +1363,70 @@ def test_pass_counts_passages():
     print("PASS  프리패스 — 지문 n개까지 · 세는 법 · 오래 쓸수록 싸게")
 
 
+def test_pass_quota():
+    """프리패스 — 지문이 깎이고, 다 쓰면 막히고, 두 번 받아도 한 번만 깎입니다."""
+    a = admin()
+    email = "passuser@example.com"
+
+    # 관리자가 이용권을 열어 줍니다
+    page = body(a.post("/admin/passes/new", data={
+        "email": email, "plan": "12개월", "quota": "40", "days": "365",
+        "note": "테스트"}, follow_redirects=True))
+    assert "열어 드렸습니다" in page and email in page
+
+    # 손님이 프리패스로 자료를 받습니다 (mock-2026-06-g3-analysis 는 지문 28개)
+    site = sc.load_site()
+    site["pass"]["mode"] = "sale"
+    sc.save_site(site)
+
+    detail = body(client().get("/products/mock-2026-06-g3-analysis"))
+    assert "프리패스로 받기" in detail and "지문 28개가 깎입니다" in detail
+
+    c = client()
+    got = body(c.post("/pass/use", data={"slug": "mock-2026-06-g3-analysis",
+                                         "email": email}, follow_redirects=True))
+    assert "지문 28개를 썼습니다" in got and "남은 지문 12개" in got
+    assert "프리패스 남은 지문" in got and "12개" in got
+
+    # 같은 자료를 또 받아도 깎이지 않습니다
+    again = body(c.post("/pass/use", data={"slug": "mock-2026-06-g3-analysis",
+                                           "email": email}, follow_redirects=True))
+    assert "이미 받으신 자료입니다" in again
+    with store.app.app_context():
+        assert sc.pass_left(sc.active_pass(email)) == 12
+
+    # 남은 지문보다 큰 자료는 막힙니다
+    over = body(c.post("/pass/use", data={"slug": "mock-2026-03-g2-analysis",
+                                          "email": email}, follow_redirects=True))
+    assert "남은 지문이 12개인데 이 자료는 28개가 필요합니다" in over
+
+    # 이용권이 없는 이메일은 안내를 받습니다
+    none = body(client().post("/pass/use", data={"slug": "mock-2026-06-g3-analysis",
+                                                 "email": "nopass@example.com"},
+                              follow_redirects=True))
+    assert "쓸 수 있는 프리패스가 없습니다" in none
+
+    # 관리자가 지문을 더해 주면 다시 받을 수 있습니다
+    with store.app.app_context():
+        pid = sc.active_pass(email)["id"]
+    a.post(f"/admin/passes/{pid}", data={"action": "add", "more_quota": "100",
+                                         "more_days": "0"}, follow_redirects=True)
+    ok2 = body(c.post("/pass/use", data={"slug": "mock-2026-03-g2-analysis",
+                                         "email": email}, follow_redirects=True))
+    assert "지문 28개를 썼습니다" in ok2
+
+    # 끊으면 더 못 받습니다
+    a.post(f"/admin/passes/{pid}", data={"action": "revoke"}, follow_redirects=True)
+    dead = body(c.post("/pass/use", data={"slug": "ybm-han-analysis",
+                                          "email": email}, follow_redirects=True))
+    assert "쓸 수 있는 프리패스가 없습니다" in dead
+
+    # 사전 신청 상태로 되돌리면 '프리패스로 받기' 가 사라집니다
+    site = sc.load_site(); site["pass"]["mode"] = "preorder"; sc.save_site(site)
+    assert "프리패스로 받기" not in body(client().get("/products/mock-2026-06-g3-analysis"))
+    print("PASS  프리패스 — 지문 차감 · 재다운로드 무료 · 한도 초과 차단 · 끊기")
+
+
 def test_my_locker():
     """내 자료함 — 회원가입 없이, 이메일과 자료함 열쇠로 다시 받기."""
     # 주문을 하나 넣고, 관리자가 발송까지 마칩니다
@@ -2803,6 +2867,7 @@ def run_all():
     test_whole_book_upload()
     test_wordfile_table_shapes()
     test_pass_counts_passages()
+    test_pass_quota()
     test_my_locker()
     test_clear_sample_data()
     test_contact_page()
