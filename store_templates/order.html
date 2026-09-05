@@ -138,21 +138,6 @@
           </p>
         </div>
 
-        {% if no_mark_price %}
-          <label class="also-box {{ 'on' if form.no_mark }}" id="nomark-box">
-            <input type="checkbox" name="no_mark" value="1" id="no_mark"
-                   {{ 'checked' if form.no_mark }}>
-            <span>
-              <b>표시 없는 판으로 받기</b>
-              <small>자료에는 유출을 막으려고 <b>주문번호</b>가 옅게 들어갑니다.
-                학생에게 그대로 나눠 주실 때 번호가 거슬리시면 이쪽으로 받으세요.
-                <b>인쇄하실 때도 표시 없이 나옵니다.</b><br>
-                자료 {{ items|length }}개 × {{ no_mark_rate[0]|won }}
-                {%- if no_mark_rate[1] %} · 한 주문에 {{ no_mark_rate[1]|won }}까지{% endif %}</small>
-            </span>
-            <em>+{{ no_mark_price|won }}</em>
-          </label>
-        {% endif %}
 
         <div class="field">
           <label for="coupon">할인 쿠폰 코드 <span class="hint">있으면 넣어 주세요</span></label>
@@ -196,7 +181,6 @@
   var base = {{ ('/order/quote?cart=1' if from_cart
                  else '/order/quote?slug=' ~ p.slug)|tojson }};
   var also   = document.getElementById('also');
-  var nomark = document.getElementById('no_mark');
   var email  = document.getElementById('email');
   var coupon = document.getElementById('coupon');
   var nudge  = document.getElementById('next-tier');
@@ -211,7 +195,6 @@
   function refresh() {
     var url = base
             + '&also=' + (also && also.checked ? '1' : '0')
-            + '&nomark=' + (nomark && nomark.checked ? '1' : '0')
             + '&email=' + encodeURIComponent(email ? email.value.trim() : '')
             + '&coupon=' + encodeURIComponent(coupon.value.trim());
     fetch(url).then(function (r) { return r.json(); }).then(function (d) {
@@ -221,10 +204,6 @@
         html += '<div class="sum-row cut"><span>' + r.name + ' ' + r.percent
              + '%</span><b>-' + won(r.amount) + '</b></div>';
       });
-      if (d.extra) {
-        html += '<div class="sum-row"><span>표시 없는 판</span><b>+'
-             + won(d.extra) + '</b></div>';
-      }
       if (d.coupon_cut) {
         html += '<div class="sum-row cut"><span>할인 쿠폰</span><b>-'
              + won(d.coupon_cut) + '</b></div>';
@@ -252,12 +231,6 @@
   if (also) {
     also.addEventListener('change', function () {
       also.closest('.also-box').classList.toggle('on', also.checked);
-      refresh();
-    });
-  }
-  if (nomark) {
-    nomark.addEventListener('change', function () {
-      nomark.closest('.also-box').classList.toggle('on', nomark.checked);
       refresh();
     });
   }

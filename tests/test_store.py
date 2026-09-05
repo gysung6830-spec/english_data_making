@@ -2840,10 +2840,11 @@ def test_watermark_is_order_number_only():
     found = body(admin().get(f"/admin/orders?q={row['order_no']}"))
     assert "onlyno@example.com" in found and "번호만" in found
 
-    # 화면에도 '주문번호가 새겨져 있다'고 알려 줍니다
+    # 손님 화면에는 표시 이야기를 한 마디도 안 합니다
     site["delivery"] = {"mode": "view"}; sc.save_site(site)
     view = body(client().get(f"/d/{tok}/view/0"))
-    assert "주문번호" in view and "표시 없는 판" not in view
+    for word in ("워터마크", "새겨", "표시 없는 판", "구매자 표시"):
+        assert word not in view, word
     print("PASS  워터마크는 주문번호만 — 이름·이메일은 지면에 안 찍힘")
 
 
@@ -3118,84 +3119,69 @@ def test_watermark_wording_is_editable():
     print("PASS  워터마크 문구를 관리자가 정함")
 
 
-def test_watermark_optout_costs_extra():
-    """표시 없는 판은 자료당 값을 더 받고, 한 주문에 상한이 있습니다."""
+def test_no_word_about_the_watermark():
+    """손님에게는 표시 이야기를 하지 않습니다. 값을 더 받고 빼 주는 것도 없앴습니다."""
     import store_watermark as wm
     if not wm.AVAILABLE:
         print("SKIP  워터마크 라이브러리 없음")
         return
     site = sc.load_site()
-    site["watermark"] = {"enabled": True, "optout_enabled": True,
-                         "optout_price": 500, "optout_max": 10000,
-                         "footer": "{이메일}", "center": ""}
+    site["watermark"] = {"enabled": True, "footer": "{주문번호}", "center": "{주문번호}"}
     site["delivery"] = {"mode": "both"}
     sc.save_site(site)
 
-    # 자료 하나 — 500원
-    form = body(client().get("/order?slug=ybm-han-analysis"))
-    assert "표시 없는 판으로 받기" in form and "+500원" in form
-    assert "자료 1개 × 500원" in form and "한 주문에 10,000원까지" in form
-    q = client().get("/order/quote?slug=ybm-han-analysis&nomark=1").get_json()
-    assert q["extra"] == 500 and q["final"] == 14800 + 500
-
-    # 자료 세 개 — 세 배
-    c = client()
-    for slug in ("ybm-han-analysis", "ybm-han-problem", "neungyule-kim-analysis"):
-        c.post("/cart/add", data={"slug": slug})
-    assert c.get("/order/quote?cart=1&nomark=1").get_json()["extra"] == 1500
-
-    # 상한을 넘지 않습니다
-    assert sc.no_mark_price(site, 20) == 10000
-    assert sc.no_mark_price(site, 50) == 10000
-    no_cap = dict(site, watermark=dict(site["watermark"], optout_max=0))
-    assert sc.no_mark_price(no_cap, 50) == 25000        # 상한 0 이면 개수대로
-
-    # 실제로 주문하면 표시 없이 나옵니다
-    c2 = client()
-    c2.post("/order", data={"slug": "ybm-han-analysis", "no_mark": "1", "name": "표시없이",
-                            "phone": "010-4444-5555",
-                            "email": "clean@example.com", "agree": "1"})
-    with store.app.app_context():
-        row = sc.get_db().execute(
-            "SELECT * FROM orders WHERE email = 'clean@example.com'").fetchone()
-    assert row["amount"] == 14800 + 500 and row["no_mark"] == 1
-
-    folder = sc.product_dir("ybm-han-analysis")
+    slug = "ybm-han-analysis"
+    folder = sc.product_dir(slug)
     folder.mkdir(parents=True, exist_ok=True)
     from reportlab.pdfgen import canvas as rl_canvas
     page = rl_canvas.Canvas(str(folder / "본문.pdf"))
-    page.drawString(72, 700, "clean copy")
-    page.showPage(); page.save()
+    page.drawString(72, 700, "passage one")
+    page.showPage()
+    page.save()
+
+    # 주문서 어디에도 표시 이야기가 없습니다
+    form = body(client().get(f"/order?slug={slug}"))
+    for word in ("워터마크", "표시 없는 판", "구매자 표시", "새겨", "옅게", "no_mark"):
+        assert word not in form, word
+
+    # 값을 더 받는 길 자체가 없습니다 — 체크를 흉내 내 보내도 금액이 안 늘어납니다
+    quote = client().get(f"/order/quote?slug={slug}&nomark=1&coupon=").get_json()
+    assert "extra" not in quote
+    plain = client().get(f"/order/quote?slug={slug}&coupon=").get_json()
+    assert quote["final"] == plain["final"]
+
+    client().post("/order", data={"slug": slug, "no_mark": "1", "name": "몰래",
+                                  "phone": "010-4444-5555", "email": "quiet@example.com",
+                                  "agree": "1"})
+    with store.app.app_context():
+        row = sc.get_db().execute(
+            "SELECT * FROM orders WHERE email = 'quiet@example.com'").fetchone()
+    assert row["amount"] == 14800, row["amount"]      # 더 붙은 값이 없습니다
+    assert row["no_mark"] == 0                        # 체크를 보내도 안 먹습니다
+
+    # 그래도 표시는 조용히 새겨집니다
     admin().post(f"/admin/orders/{row['id']}/deliver", follow_redirects=True)
     with store.app.app_context():
-        token = sc.get_db().execute(
-            "SELECT token FROM downloads WHERE order_no = ?",
-            (row["order_no"],)).fetchone()[0]
-    idx = [f["name"] for f in sc.product_files("ybm-han-analysis")].index("본문.pdf")
-
+        tok = sc.get_db().execute(
+            "SELECT token FROM downloads WHERE order_no = ?", (row["order_no"],)).fetchone()[0]
     import io as _io
     from pypdf import PdfReader
-    got = client().get(f"/d/{token}/{idx}")
-    text = PdfReader(_io.BytesIO(got.data)).pages[0].extract_text()
-    assert "clean@example.com" not in text, "표시 없는 판인데 이메일이 박혔습니다"
-    assert "clean copy" in text
+    text = PdfReader(_io.BytesIO(client().get(f"/d/{tok}/0").data)).pages[0].extract_text()
+    assert row["order_no"] in text
 
-    # 화면에서 인쇄할 때도 같이 연동됩니다
-    site["delivery"] = {"mode": "view"}
-    sc.save_site(site)
-    view = body(client().get(f"/d/{token}/view/{idx}"))
-    assert "표시 없는 판" in view
-    assert "<b>주문번호</b>가 옅게 새겨져" not in view
+    # 받는 화면 · 내 자료함에도 이야기가 없습니다
+    for page_body in (body(client().get(f"/d/{tok}")), body(client().get("/locker"))):
+        for word in ("워터마크", "구매자 표시", "표시 없는 판"):
+            assert word not in page_body, word
 
-    # 관리자 화면에서 자료당 값과 상한을 정합니다
-    setting = body(admin().get("/admin/settings"))
-    assert "자료 하나당 더 받을 값" in setting and "한 주문에 최대" in setting
+    # 관리자 설정에서도 값 받는 칸이 사라졌습니다
+    adm = body(admin().get("/admin/settings"))
+    assert "watermark_optout_price" not in adm and "watermark_optout_enabled" not in adm
+    assert "구매자 표시 (워터마크)" in adm            # 사장님께는 그대로 보입니다
+    assert not hasattr(sc, "no_mark_price")
 
-    # 꺼 두면 주문서에 칸이 안 보여야 합니다
-    site["watermark"]["optout_enabled"] = False
-    sc.save_site(site)
-    assert "표시 없는 판으로 받기" not in body(client().get("/order?slug=ybm-han-analysis"))
-    print("PASS  표시 없는 판 — 자료당 값 · 주문 상한 · 인쇄까지 연동")
+    site["delivery"] = {"mode": "view"}; sc.save_site(site)
+    print("PASS  손님에게는 표시 이야기 없음 · 값 받고 빼 주기 없앰")
 
 
 def test_email_typo_is_caught_once():
@@ -3302,7 +3288,7 @@ def run_all():
     test_print_only_viewer()
     test_watermark_can_be_turned_off()
     test_watermark_wording_is_editable()
-    test_watermark_optout_costs_extra()
+    test_no_word_about_the_watermark()
     test_watermark_skips_non_pdf()
     test_watermark_does_not_bloat_the_file()
     test_download_revoke_and_limit()

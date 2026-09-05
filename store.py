@@ -561,8 +561,7 @@ def cart_clear():
     return redirect(back_to(url_for("cart")))
 
 
-def quote_for(items: list[dict], email: str, coupon_code: str,
-              no_mark: bool = False) -> dict:
+def quote_for(items: list[dict], email: str, coupon_code: str) -> dict:
     """주문 금액을 한 곳에서 계산합니다. 화면과 접수가 같은 값을 쓰게 하려고 나눠 두었습니다."""
     site = sc.load_site()
     subtotal = sum(int(x.get("price", 0)) for x in items)
@@ -570,13 +569,11 @@ def quote_for(items: list[dict], email: str, coupon_code: str,
     # 하나만 더 담으면 다음 단계로 넘어가는지 알려 주려고 봅니다
     nxt = sc.count_next(site, len(items))
     coupon, coupon_cut, coupon_note = sc.check_coupon(coupon_code, subtotal - auto)
-    extra = sc.no_mark_price(site, len(items)) if no_mark else 0
     return {
         "subtotal": subtotal, "rows": rows, "auto": auto, "next_tier": nxt,
         "coupon": coupon, "coupon_cut": coupon_cut, "coupon_note": coupon_note,
-        "no_mark": bool(extra), "extra": extra,
         "discount": auto + coupon_cut,
-        "final": subtotal - auto - coupon_cut + extra,
+        "final": subtotal - auto - coupon_cut,
     }
 
 
@@ -604,14 +601,11 @@ def order_quote():
     if not items:
         abort(404)
     email = sc.clean(request.args.get("email"), 120)
-    q = quote_for(items, email,
-                  sc.clean(request.args.get("coupon"), 40).upper(),
-                  request.args.get("nomark") == "1")
+    q = quote_for(items, email, sc.clean(request.args.get("coupon"), 40).upper())
     # 주문서까지 오셨는데 안 사고 나가시면 하루 뒤에 한 번 알려 드립니다
     sc.remember_cart(email, [x["slug"] for x in items], q["final"])
     return {
         "subtotal": q["subtotal"],
-        "extra": q["extra"],
         "rows": [{"name": r["name"], "amount": r["amount"], "percent": r["percent"]}
                  for r in q["rows"]],
         "next_tier": q["next_tier"],
@@ -637,8 +631,6 @@ def order():
     def page(form, errors, status=200, typo=""):
         return render_template("order.html", items=items, p=product, sibling=sibling,
                                books=books, from_cart=from_cart, email_typo=typo,
-                               no_mark_price=sc.no_mark_price(site, len(items)),
-                               no_mark_rate=sc.no_mark_rate(site),
                                form=form, errors=errors), status
 
     if request.method == "GET":
@@ -662,8 +654,7 @@ def order():
         errors.append("증빙을 받으시려면 사업자등록번호나 휴대폰 번호를 적어 주세요.")
 
     coupon_code = sc.clean(request.form.get("coupon"), 40).upper()
-    no_mark = bool(request.form.get("no_mark"))
-    quote = quote_for(items, data["email"], coupon_code, no_mark)
+    quote = quote_for(items, data["email"], coupon_code)
     subtotal, discount = quote["subtotal"], quote["discount"]
     coupon = quote["coupon"]
     if coupon_code and coupon is None:
@@ -681,13 +672,13 @@ def order():
         """INSERT INTO orders (order_no, view_key, kind, product_slug, extra_slugs, product_name,
                                quantity, amount, discount, coupon_code, name, phone, email,
                                affiliation, depositor, message, receipt_kind, receipt_no,
-                               status, created_at, updated_at, no_mark)
-           VALUES (?, ?, 'product', ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?, ?)""",
+                               status, created_at, updated_at)
+           VALUES (?, ?, 'product', ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?)""",
         lambda no: (no, view_key, slugs[0], ",".join(slugs[1:]) or None, names[:400],
                     amount, discount,
                     coupon["code"] if coupon else None, data["name"], data["phone"],
                     data["email"], data["affiliation"], depositor, data["message"],
-                    receipt_kind, receipt_no, ts, ts, 1 if quote["no_mark"] else 0))
+                    receipt_kind, receipt_no, ts, ts))
     if coupon:
         sc.redeem_coupon(coupon["code"], order_no)
     if from_cart:
@@ -1538,11 +1529,8 @@ def view_file(token, index):
         flash("이 자료는 화면에서 열 수 없습니다. 파일로 받아 주세요.", "err")
         return redirect(url_for("download_page", token=token))
     sc.count_download(token)
-    mark_off = sc.get_db().execute(
-        "SELECT no_mark FROM orders WHERE order_no = ?", (row["order_no"],)).fetchone()
     return render_template("view.html", d=row, name=name, index=index,
                            pages=pages, token=token,
-                           no_mark=bool(mark_off and mark_off["no_mark"]),
                            other=[dict(f, index=i) for i, f in enumerate(files)
                                   if i != index and f["name"].lower().endswith(".pdf")])
 
@@ -1596,7 +1584,8 @@ def watermark_for(row, path):
         "SELECT name, no_mark, created_at FROM orders WHERE order_no = ?",
         (row["order_no"],)).fetchone()
     if order and order["no_mark"]:
-        return None                    # 표시 없는 판으로 값을 더 내신 주문
+        # 예전에 '표시 없는 판' 값을 더 내고 사신 주문입니다. 그 약속은 지킵니다.
+        return None
     marks = {
         "이름": (order["name"] if order else "") or "",
         "이메일": row["email"] or "",

@@ -2037,9 +2037,9 @@ def settings():
     mark["enabled"] = bool(f.get("watermark_enabled"))
     mark["footer"] = sc.clean(f.get("watermark_footer"), 200)
     mark["center"] = sc.clean(f.get("watermark_center"), 80)
-    mark["optout_enabled"] = bool(f.get("watermark_optout_enabled"))
-    mark["optout_price"] = max(0, min(200000, sc.to_int(f.get("watermark_optout_price"), 0)))
-    mark["optout_max"] = max(0, min(500000, sc.to_int(f.get("watermark_optout_max"), 0)))
+    # '값을 더 내면 표시 없이' 는 없앴습니다. 손님에게 표시 이야기를 아예 안 합니다.
+    for gone in ("optout_enabled", "optout_price", "optout_max"):
+        mark.pop(gone, None)
 
     # 자료를 어떻게 내어 줄지 — 화면 인쇄 / 파일 받기
     dv = site.setdefault("delivery", {})

@@ -876,7 +876,8 @@ MIGRATIONS = [
     ("orders", "extra_slugs", "TEXT"),
     # 주문 확인 화면 주소에 쓰는 열쇠. 주문번호로는 남의 주문을 못 열게 합니다.
     ("orders", "view_key", "TEXT"),
-    # 값을 더 내고 '구매자 표시 없는 판' 으로 받기로 한 주문
+    # 예전에 값을 더 내고 '표시 없는 판' 으로 사신 주문 (지금은 안 파는 선택지).
+    # 그때 하신 약속은 지켜야 하니 칸은 그대로 둡니다.
     ("orders", "no_mark", "INTEGER NOT NULL DEFAULT 0"),
 ]
 
@@ -1054,28 +1055,6 @@ WATERMARK_DEFAULTS = {
     "footer": "{주문번호}",
     "center": "{주문번호}",
 }
-
-
-def no_mark_rate(site: dict) -> tuple[int, int]:
-    """'표시 없는 판' 값 — (자료 하나당, 한 주문 상한). 꺼져 있으면 (0, 0)."""
-    cfg = site.get("watermark") or {}
-    if not cfg.get("enabled", True) or not cfg.get("optout_enabled"):
-        return 0, 0
-    return (max(0, to_int(cfg.get("optout_price"), 0)),
-            max(0, to_int(cfg.get("optout_max"), 0)))
-
-
-def no_mark_price(site: dict, count: int = 1) -> int:
-    """자료 count 개를 표시 없는 판으로 받으실 때 더 내시는 값.
-
-    자료마다 얼마씩 붙되, 한 주문에 상한을 둡니다. 많이 사시는 분이
-    지나치게 부담되지 않게 하려는 것입니다.
-    """
-    each, cap = no_mark_rate(site)
-    if each <= 0:
-        return 0
-    total = each * max(1, to_int(count, 1))
-    return min(total, cap) if cap else total
 
 
 def fill_marks(template: str | None, values: dict) -> str:
