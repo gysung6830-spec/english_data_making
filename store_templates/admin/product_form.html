@@ -391,10 +391,8 @@
     var unit = (CFG.units || {})[pkg ? pkg.value : ''] || 0;
     var n = parseInt((passages && passages.value) || '0', 10);
     if (!unit || !n) return 0;
-    var raw = unit * n;
-    if (CFG.small_under && n < CFG.small_under) raw = Math.floor(raw * CFG.small_multiplier);
-    var step = CFG.round_to || 1000;
-    return Math.round(raw / step) * step;
+    var step = CFG.round_to || 100;
+    return Math.round(unit * n / step) * step;
   }
   function paint() {
     var v = suggest();

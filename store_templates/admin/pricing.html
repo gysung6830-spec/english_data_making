@@ -163,8 +163,6 @@
   var UNITS = {{ cfg.units|tojson }};
   var NAMES = {{ (packages | map(attribute='name') | list)|tojson }};
   var IDS = {{ (packages | map(attribute='id') | list)|tojson }};
-  var SMALL_UNDER = {{ cfg.small_under }};
-  var SMALL_X = {{ cfg.small_multiplier }};
   var STEP = {{ cfg.round_to }};
   var n = document.getElementById('calc-n');
   var box = document.getElementById('calc-rows');
@@ -172,9 +170,7 @@
   function price(pkg, count) {
     var unit = UNITS[pkg] || 0;
     if (!unit || !count) return 0;
-    var raw = unit * count;
-    if (SMALL_UNDER && count < SMALL_UNDER) raw = Math.floor(raw * SMALL_X);
-    return Math.round(raw / STEP) * STEP;
+    return Math.round(unit * count / STEP) * STEP;
   }
   function won(v) { return v.toLocaleString('ko-KR') + '원'; }
 
