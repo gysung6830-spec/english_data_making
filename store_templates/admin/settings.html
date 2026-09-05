@@ -189,24 +189,31 @@
     <label for="watermark_footer">쪽 아래 한 줄</label>
     <input type="text" id="watermark_footer" name="watermark_footer"
            value="{{ s.watermark.get('footer', '') }}"
-           placeholder="{이름} · {이메일} · {주문번호} · {브랜드} 제공 · 재배포 금지">
+           placeholder="{주문번호}">
     <div class="pick" data-target="watermark_footer">
       <span class="pick-label">골라 쓰기</span>
-      <button class="pick-btn" data-value="{이름} · {이메일} · {주문번호} · {브랜드} 제공 · 재배포 금지">
-        이름 · 이메일 · 주문번호 (권장)</button>
-      <button class="pick-btn" data-value="{이메일} · {주문번호} · {브랜드} 제공 · 재배포 금지">
-        이메일만 (이름 빼기)</button>
-      <button class="pick-btn" data-value="{브랜드} · {날짜} · 재배포 금지">
+      <button class="pick-btn" data-value="{주문번호}">
+        주문번호만 (권장)</button>
+      <button class="pick-btn" data-value="{주문번호} · {브랜드} 제공 · 재배포 금지">
+        주문번호 · 재배포 금지</button>
+      <button class="pick-btn" data-value="{주문번호} · {이메일}">
+        주문번호 · 이메일</button>
+      <button class="pick-btn" data-value="{브랜드} · {날짜}">
         구매자 정보 없이</button>
+    </div>
+    <div class="tip">
+      <b>주문번호 하나면 충분합니다.</b> 지면에 이름·이메일이 없어도
+      <b>주문 목록에서 검색하면</b> 누가 산 자료인지 바로 나옵니다.
+      학생에게 그대로 나눠 주셔도 남의 개인정보가 안 딸려 갑니다.
     </div>
   </div>
 
   <div class="adm-field full">
     <label for="watermark_center">가운데 옅은 글씨 <span class="hint">비우면 안 넣습니다</span></label>
     <input type="text" id="watermark_center" name="watermark_center"
-           value="{{ s.watermark.get('center', '') }}" placeholder="{이메일}">
+           value="{{ s.watermark.get('center', '') }}" placeholder="{주문번호}">
     <div class="pick" data-target="watermark_center">
-      {% for v in ['{이메일}', '{이름}', '{주문번호}', '{브랜드}'] %}
+      {% for v in ['{주문번호}', '{이메일}', '{브랜드}'] %}
         <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
       {% endfor %}
       <button class="pick-btn clear" data-value="">안 넣음</button>
@@ -230,7 +237,7 @@
       <span><b>값을 더 내면 표시 없이 받게 하기</b></span>
     </label>
     <div class="tip" style="margin-top:6px;">
-      주문서에 <b>'이름이 안 새겨진 판으로 받기'</b> 칸이 생깁니다.
+      주문서에 <b>'표시 없는 판으로 받기'</b> 칸이 생깁니다.
       학원에서 여러 선생님이 나눠 쓰실 때 이름이 곤란한 경우가 있습니다.<br>
       ⚠️ 다만 <b>표시가 없으면 유출돼도 누가 흘렸는지 알 수 없습니다.</b>
       값을 넉넉히 잡으셔야 손해가 안 납니다.

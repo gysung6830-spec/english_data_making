@@ -2773,6 +2773,66 @@ def test_watermark_stamps_buyer_on_pdf():
     print("PASS  받은 PDF 에 구매자 표시가 새겨짐 · 화면 보기도 같은 표시")
 
 
+def test_watermark_is_order_number_only():
+    """기본 문구는 주문번호 하나입니다. 이름·이메일은 지면에 안 찍습니다."""
+    import store_watermark as wm
+    if not wm.AVAILABLE:
+        print("SKIP  워터마크 라이브러리 없음")
+        return
+
+    # 사장님이 아무것도 안 고치셨을 때 나가는 문구
+    assert sc.WATERMARK_DEFAULTS["footer"] == "{주문번호}"
+    assert sc.WATERMARK_DEFAULTS["center"] == "{주문번호}"
+    # 앞선 테스트가 임시본을 고쳐 놓으므로, 실제로 배포되는 원본을 봅니다
+    shipped = json.loads((_SRC / "site.json").read_text())["watermark"]
+    assert shipped["footer"] == "{주문번호}" and shipped["center"] == "{주문번호}"
+
+    site = sc.load_site()
+    site["watermark"] = dict(site.get("watermark") or {}, enabled=True,
+                             footer=sc.WATERMARK_DEFAULTS["footer"],
+                             center=sc.WATERMARK_DEFAULTS["center"])
+    site["delivery"] = {"mode": "both"}
+    sc.save_site(site)
+
+    slug = "ybm-han-analysis"
+    folder = sc.product_dir(slug)
+    folder.mkdir(parents=True, exist_ok=True)
+    from reportlab.pdfgen import canvas as rl_canvas
+    page = rl_canvas.Canvas(str(folder / "본문.pdf"))
+    page.drawString(72, 700, "passage one")
+    page.showPage()
+    page.save()
+
+    client().post("/order", data={"slug": slug, "name": "번호만", "phone": "010-7777-2222",
+                                  "email": "onlyno@example.com", "agree": "1"})
+    with store.app.app_context():
+        row = sc.get_db().execute(
+            "SELECT * FROM orders WHERE email = 'onlyno@example.com'").fetchone()
+    admin().post(f"/admin/orders/{row['id']}/deliver", follow_redirects=True)
+    with store.app.app_context():
+        tok = sc.get_db().execute(
+            "SELECT token FROM downloads WHERE order_no = ?", (row["order_no"],)).fetchone()[0]
+
+    import io as _io
+    from pypdf import PdfReader
+    text = PdfReader(_io.BytesIO(client().get(f"/d/{tok}/0").data)).pages[0].extract_text()
+    assert row["order_no"] in text, "주문번호가 안 찍혔습니다"
+    assert text.count(row["order_no"]) >= 2, "아래 한 줄 · 가운데 두 군데에 있어야 합니다"
+    assert "onlyno@example.com" not in text, "이메일이 지면에 새겨졌습니다"
+    assert "번호만" not in text, "이름이 지면에 새겨졌습니다"
+    assert "passage one" in text
+
+    # 그 번호로 주문 목록에서 누구인지 찾을 수 있어야 뜻이 있습니다
+    found = body(admin().get(f"/admin/orders?q={row['order_no']}"))
+    assert "onlyno@example.com" in found and "번호만" in found
+
+    # 화면에도 '주문번호가 새겨져 있다'고 알려 줍니다
+    site["delivery"] = {"mode": "view"}; sc.save_site(site)
+    view = body(client().get(f"/d/{tok}/view/0"))
+    assert "주문번호" in view and "표시 없는 판" not in view
+    print("PASS  워터마크는 주문번호만 — 이름·이메일은 지면에 안 찍힘")
+
+
 def test_print_only_viewer():
     """자료를 파일로 넘기지 않고 화면에서 보고 인쇄하게 합니다."""
     import store_watermark as wm
@@ -3045,7 +3105,7 @@ def test_watermark_wording_is_editable():
 
 
 def test_watermark_optout_costs_extra():
-    """이름 없는 판은 자료당 값을 더 받고, 한 주문에 상한이 있습니다."""
+    """표시 없는 판은 자료당 값을 더 받고, 한 주문에 상한이 있습니다."""
     import store_watermark as wm
     if not wm.AVAILABLE:
         print("SKIP  워터마크 라이브러리 없음")
@@ -3059,7 +3119,7 @@ def test_watermark_optout_costs_extra():
 
     # 자료 하나 — 500원
     form = body(client().get("/order?slug=ybm-han-analysis"))
-    assert "이름이 안 새겨진 판" in form and "+500원" in form
+    assert "표시 없는 판으로 받기" in form and "+500원" in form
     assert "자료 1개 × 500원" in form and "한 주문에 10,000원까지" in form
     q = client().get("/order/quote?slug=ybm-han-analysis&nomark=1").get_json()
     assert q["extra"] == 500 and q["final"] == 14800 + 500
@@ -3110,8 +3170,8 @@ def test_watermark_optout_costs_extra():
     site["delivery"] = {"mode": "view"}
     sc.save_site(site)
     view = body(client().get(f"/d/{token}/view/{idx}"))
-    assert "이름이 안 새겨진 판" in view
-    assert "사시는 분의 이름과 이메일이 새겨져" not in view
+    assert "표시 없는 판" in view
+    assert "<b>주문번호</b>가 옅게 새겨져" not in view
 
     # 관리자 화면에서 자료당 값과 상한을 정합니다
     setting = body(admin().get("/admin/settings"))
@@ -3120,8 +3180,8 @@ def test_watermark_optout_costs_extra():
     # 꺼 두면 주문서에 칸이 안 보여야 합니다
     site["watermark"]["optout_enabled"] = False
     sc.save_site(site)
-    assert "이름이 안 새겨진 판" not in body(client().get("/order?slug=ybm-han-analysis"))
-    print("PASS  이름 없는 판 — 자료당 값 · 주문 상한 · 인쇄까지 연동")
+    assert "표시 없는 판으로 받기" not in body(client().get("/order?slug=ybm-han-analysis"))
+    print("PASS  표시 없는 판 — 자료당 값 · 주문 상한 · 인쇄까지 연동")
 
 
 def test_email_typo_is_caught_once():
@@ -3224,6 +3284,7 @@ def run_all():
     test_order_page_shows_download_when_ready()
     test_deliver_by_external_link()
     test_watermark_stamps_buyer_on_pdf()
+    test_watermark_is_order_number_only()
     test_print_only_viewer()
     test_watermark_can_be_turned_off()
     test_watermark_wording_is_editable()

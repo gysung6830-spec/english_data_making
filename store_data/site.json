@@ -120,8 +120,8 @@
   "watermark": {
     "_안내": "받으실 때 PDF 에 새기는 문구입니다. 관리자 화면 > 가게 정보 에서 고칩니다.",
     "enabled": true,
-    "footer": "{이름} · {이메일} · {주문번호} · {브랜드} 제공 · 재배포 금지",
-    "center": "{이메일}",
+    "footer": "{주문번호}",
+    "center": "{주문번호}",
     "optout_enabled": true,
     "optout_price": 500,
     "optout_max": 10000

@@ -1024,13 +1024,15 @@ def delivery_mode(site: dict) -> str:
 WATERMARK_MARKS = ["이름", "이메일", "주문번호", "브랜드", "날짜"]
 
 WATERMARK_DEFAULTS = {
-    "footer": "{이름} · {이메일} · {주문번호} · {브랜드} 제공 · 재배포 금지",
-    "center": "{이메일}",
+    # 이름·이메일을 지면에 찍지 않습니다. 주문번호 하나면 주문 기록에서
+    # 누가 산 자료인지 바로 찾을 수 있고, 학생에게 그대로 나눠 주기도 좋습니다.
+    "footer": "{주문번호}",
+    "center": "{주문번호}",
 }
 
 
 def no_mark_rate(site: dict) -> tuple[int, int]:
-    """'이름 없는 판' 값 — (자료 하나당, 한 주문 상한). 꺼져 있으면 (0, 0)."""
+    """'표시 없는 판' 값 — (자료 하나당, 한 주문 상한). 꺼져 있으면 (0, 0)."""
     cfg = site.get("watermark") or {}
     if not cfg.get("enabled", True) or not cfg.get("optout_enabled"):
         return 0, 0
@@ -1039,7 +1041,7 @@ def no_mark_rate(site: dict) -> tuple[int, int]:
 
 
 def no_mark_price(site: dict, count: int = 1) -> int:
-    """자료 count 개를 이름 없는 판으로 받으실 때 더 내시는 값.
+    """자료 count 개를 표시 없는 판으로 받으실 때 더 내시는 값.
 
     자료마다 얼마씩 붙되, 한 주문에 상한을 둡니다. 많이 사시는 분이
     지나치게 부담되지 않게 하려는 것입니다.
