@@ -1522,71 +1522,12 @@ input[type=file]{
 .unit:has(input:checked){background:var(--brand-soft); border-color:var(--brand);}
 .unit-all{display:flex; gap:8px; margin-top:10px;}
 
-/* 시험지 지면 — 단어책 어휘 TEST 판형. 화면에서는 A4 모양 종이, 인쇄하면 그대로 A4 */
-/* A4 세로가 기본입니다. 화면에서도 A4 한 장을 그대로 보여 줍니다 —
-   보이는 대로 인쇄되도록. (210 x 297mm, 인쇄 여백 13/12mm) */
-.sheet{
-  width:210mm; min-height:297mm; margin:0 auto 26px; padding:13mm 12mm;
-  background:#fff; color:#16181c; box-shadow:var(--shadow);
-  border:1px solid var(--line); border-radius:2px;
-}
-/* 화면이 A4 보다 좁으면 종이째 줄여서 보여 줍니다. 인쇄는 언제나 A4 그대로입니다. */
-.sheet-stage{overflow-x:auto; padding-bottom:6px;}
-@media (max-width:860px){
-  .sheet-stage{--zoom:.62;}
-  .sheet{transform:scale(var(--zoom)); transform-origin:top left;
-    margin-bottom:calc(26px - 297mm * (1 - var(--zoom)));}
-}
-@media (max-width:560px){ .sheet-stage{--zoom:.44;} }
-/* 시험지 맨 위 — 학원 이름은 제목 위 작은 줄, 범위는 제목 아래 작은 줄 */
-.sheet-place{font-size:11.5px; font-weight:700; letter-spacing:.08em; color:#5a6169;
-  margin-bottom:4px;}
-.sheet-sub{font-size:11.5px; color:#5a6169; margin-top:5px;}
-.sheet-head{display:flex; gap:16px; align-items:baseline; justify-content:space-between;
-  padding-bottom:9px; border-bottom:1.6px solid #16181c;}
-.sheet-head h1{font-size:15.5px; font-weight:800; letter-spacing:-.02em; margin:0;}
-.ans-tag{font-size:11.5px; font-weight:700; letter-spacing:.06em; color:#146b4a;}
-.sheet-fill{display:flex; gap:16px; flex:0 0 auto; white-space:nowrap;}
-.sheet-fill span{font-size:12px; color:#5a6169;}
-.sheet-fill i{display:inline-block; width:76px; border-bottom:1px solid #9aa0a6; margin-left:3px;}
-.sheet-fill i.short{width:34px;}
-.ans-note{color:#146b4a; font-weight:700;}
-
-.sec-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:7px; margin:14px 0 10px;
-  padding-bottom:7px; border-bottom:1px solid #dfe2e5;}
-.sec-no{font-weight:800; font-size:14.5px;}
-.sec-head b{font-size:14.5px;}
-.sec-head small{font-size:11.5px; color:#6b727a;}
-
-.wlist{list-style:none; margin:0; padding:0; columns:2; column-gap:26px;}
-.wlist.wide{columns:1;}
-.w{break-inside:avoid; display:flex; flex-wrap:wrap; align-items:baseline; gap:6px;
-  padding:5px 0; font-size:12.5px; line-height:1.65; border-bottom:1px dotted #e4e7ea;}
-.w-no{flex:0 0 20px; color:#8a9097; font-variant-numeric:tabular-nums; font-size:11.5px;}
-.w-ask{flex:0 0 auto; max-width:47%; font-weight:600;}
-.w-ask.ko{font-weight:500;}
-.w-hint{flex:0 0 auto; color:#146b4a; font-weight:700; font-size:12px;}
-.w-ans{flex:1 1 70px; min-height:1.25em; border-bottom:1px solid #c6cbd0;}
-.w-ans.filled{border-bottom:0; color:#146b4a; font-weight:600; font-size:12px;}
-.w-pick{flex:0 0 auto; margin-left:auto; color:#5a6169; font-size:12px;}
-.w-pick.filled{color:#146b4a; font-weight:700;}
-.w-choices{list-style:none; margin:2px 0 0 26px; padding:0; flex:1 1 100%;
-  display:flex; flex-wrap:wrap; gap:2px 14px; counter-reset:cno;}
-.w-choices li{counter-increment:cno; font-size:11.5px; color:#4a5057;}
-.w-choices li::before{content:"(" counter(cno) ") "; color:#9aa0a6;}
-.w-choices li.right{color:#146b4a; font-weight:700;}
-
-.sheet-foot{display:flex; justify-content:space-between; gap:12px; margin-top:16px;
-  padding-top:8px; border-top:1px solid #e2e5e8; font-size:10.5px; color:#8a9097;}
-
+/* 시험지는 이제 서버에서 진짜 PDF 로 만듭니다 (store_sheet_pdf.py).
+   화면에서는 그 PDF 를 쪽마다 그림으로 보여 줍니다 — .viewer / .vpage 를 씁니다.
+   화면에서 A4 를 흉내 내던 .sheet 판형은 더 쓰지 않아 지웠습니다. */
 @media print{
-  @page{size:A4 portrait; margin:13mm 12mm;}
   body{background:#fff;}
   .site-head, .quick-bar, .site-foot, .no-print, .notice-strip, .toast-wrap{display:none !important;}
-  .sheet{width:auto; min-height:0; margin:0; padding:0; border:0; border-radius:0;
-    box-shadow:none; transform:none; break-after:page;}
-  .sheet-stage{overflow:visible;}
-  .sheet:last-of-type{break-after:auto;}
 }
 
 /* 단어 고르기 */
@@ -1742,5 +1683,9 @@ input[type=file]{
   .vpage:last-child{break-after:auto; page-break-after:auto;}
   .vpage img{width:100%; height:auto;}
 }
+/* 시험지 미리보기 — 만들어진 PDF 를 쪽마다 그림으로 보여 줍니다 */
+.sheet-view{max-width:840px;}
+.sheet-view .vpage{background:#fff;}
+
 .dl-item.dl-sub{margin-top:-6px; background:#fbfcfb;}
 .dl-item.dl-sub .dl-name{color:var(--muted); font-weight:500;}

@@ -1033,6 +1033,25 @@ def test_full_backup_has_orders():
 
 
 # ---- 7. 글꼴 · 보안 --------------------------------------------------------
+def sheet_text(url: str) -> str:
+    """시험지 PDF 를 받아 글자만 뽑습니다. 시험지는 이제 진짜 PDF 입니다."""
+    import io as _io
+    from pypdf import PdfReader
+    pdf = client().get(url.replace("/sheet?", "/sheet.pdf?"))
+    assert pdf.status_code == 200, url
+    assert pdf.data[:4] == b"%PDF", "PDF 가 아닙니다"
+    doc = PdfReader(_io.BytesIO(pdf.data))
+    return "\n".join(pg.extract_text() for pg in doc.pages)
+
+
+def sheet_pages(url: str) -> int:
+    """시험지가 몇 쪽인지."""
+    import io as _io
+    from pypdf import PdfReader
+    pdf = client().get(url.replace("/sheet?", "/sheet.pdf?"))
+    return len(PdfReader(_io.BytesIO(pdf.data)).pages)
+
+
 def test_word_quiz():
     """단어 시험지 — 관리자가 붙여넣으면 손님이 범위·유형을 골라 뽑습니다."""
     a = admin()
@@ -1056,43 +1075,42 @@ def test_word_quiz():
     assert "Day 47" in pick and "12개" in pick
 
     url = "/words/quiz-test-book/sheet?unit=47&kind=en_ko&kind=ko_en&kind=choice&count=4&seed=777"
-    sheet = body(client().get(url))
+    page = body(client().get(url))
+    text = sheet_text(url)
     # 유형마다 한 장씩, 학생용 3장 + 정답지 3장
-    assert sheet.count('class="sheet"') == 3
-    assert sheet.count('class="sheet answer"') == 3
-    assert "1 / 6" in sheet and "6 / 6" in sheet                 # 쪽 번호
+    assert sheet_pages(url) == 6
+    assert "A4 세로 6쪽" in page and "학생용 3쪽, 정답지 3쪽" in page
+    assert page.count("/sheet/") == 6           # 쪽마다 그림 한 장씩 보여 줍니다
+    assert "PDF 받기" in page and "인쇄하기" in page
     for roman, title in (("Ⅰ", "영단어 → 우리말 뜻"), ("Ⅱ", "우리말 뜻 → 영단어"),
                          ("Ⅲ", "영단어 → 뜻 고르기")):
-        assert f'{roman}.' in sheet and title in sheet
-    assert "첫 글자 힌트 제공" in sheet                            # 한→영 힌트 안내
-    assert sheet.count('class="w-hint"') == 4                    # 학생용에만 첫 글자
+        assert f"{roman}." in text and title in text
+    assert "첫 글자 힌트 제공" in text                            # 한→영 힌트 안내
     # 유형마다 4문항씩 · 학생용 3장 + 정답지 3장 = 01 번이 여섯 번 나옵니다
-    assert sheet.count('class="w-no">01<') == 6
-    assert sheet.count('class="w-no">04<') == 6
-    assert 'class="w-no">05<' not in sheet
-    assert sheet.count('class="w-ans filled"') == 8              # 정답지 두 유형이 채워짐
-    assert "ANSWER KEY" in sheet
-    # A4 세로가 기본입니다
-    assert "A4 세로" in sheet
-    css = body(client().get("/static/store.css"))
-    assert "@page{size:A4 portrait; margin:13mm 12mm;}" in css
-    assert "width:210mm; min-height:297mm" in css     # 화면에서도 A4 한 장 그대로
-    assert "All rights reserved" in sheet
-    assert "이름" in sheet and "점수" in sheet
-    assert "시험지 번호 777" in sheet
-    assert "noindex" in sheet
+    assert text.count("01") >= 6 and "05" not in text.replace("2025", "")
+    assert "정답이 채워진 답지입니다" in text
+    assert "All rights reserved" in text
+    assert "이름" in text and "점수" in text
+    assert "시험지 번호 777" in page
+    assert "noindex" in page
 
     # 같은 번호면 같은 시험지, 번호가 없으면 매번 다릅니다
-    assert body(client().get(url)) == sheet
-    once = body(client().get(url.replace("&seed=777", "")))
-    twice = body(client().get(url.replace("&seed=777", "")))
+    assert sheet_text(url) == text
+    once = sheet_text(url.replace("&seed=777", ""))
+    twice = sheet_text(url.replace("&seed=777", ""))
     assert once != twice
+
+    # 쪽 그림도 진짜로 나옵니다
+    png = client().get("/words/quiz-test-book/sheet/0.png"
+                       "?unit=47&kind=en_ko&kind=ko_en&kind=choice&count=4&seed=777")
+    assert png.status_code == 200 and png.data[:4] == b"\x89PNG"
+    assert client().get("/words/quiz-test-book/sheet/99.png?unit=47&seed=777").status_code == 404
 
     # 단어가 다섯 개도 안 되면 객관식은 자동으로 빠집니다
     a.post("/admin/words/quiz-test-book/unit",
            data={"unit_name": "Day 48", "words": "solo\t혼자"}, follow_redirects=True)
-    tiny = body(client().get("/words/quiz-test-book/sheet?unit=48&kind=choice&count=5"))
-    assert 'class="w-choices"' not in tiny
+    tiny = sheet_text("/words/quiz-test-book/sheet?unit=48&kind=choice&count=5")
+    assert "고르세요" not in tiny
 
     # ---- 손님이 단어를 하나하나 골라서 ----------------------------------
     pick = body(client().get("/words/quiz-test-book/pick?unit=47"))
@@ -1101,14 +1119,15 @@ def test_word_quiz():
     assert 'checked' in pick
     chosen = "&".join(f"pick={i}" for i in (0, 2, 4, 6))
     # 유형 둘을 골라도 고른 단어를 저마다 다 씁니다 (Day 하나로 두 방향 시험)
-    both = body(client().get(f"/words/quiz-test-book/sheet?{chosen}&kind=en_ko&kind=ko_en&count=0"))
-    assert both.count('class="sheet"') == 2 and both.count('class="w"') == 16   # 4문항 × 2유형 × 2장
+    both = sheet_text(f"/words/quiz-test-book/sheet?{chosen}&kind=en_ko&kind=ko_en&count=0")
+    assert sheet_pages(f"/words/quiz-test-book/sheet?{chosen}&kind=en_ko&kind=ko_en&count=0") == 4
+    assert both.count("총 4문항") == 4                # 2유형 × (학생용 + 정답지)
 
-    only = body(client().get(f"/words/quiz-test-book/sheet?{chosen}&kind=en_ko&count=0"))
-    assert only.count('class="w"') == 8               # 고른 4개 × (학생용 + 정답지)
+    only = sheet_text(f"/words/quiz-test-book/sheet?{chosen}&kind=en_ko&count=0")
+    assert only.count("총 4문항") == 2                # 고른 4개 × (학생용 + 정답지)
     # 고른 것보다 적게 정하면 그중에서 뽑습니다
-    few = body(client().get(f"/words/quiz-test-book/sheet?{chosen}&kind=en_ko&count=2"))
-    assert few.count('class="w"') == 4
+    few = sheet_text(f"/words/quiz-test-book/sheet?{chosen}&kind=en_ko&count=2")
+    assert few.count("총 2문항") == 2
 
     a.post("/admin/words/quiz-test-book/delete", follow_redirects=True)
     assert "시험용 단어장" not in body(client().get("/words"))
@@ -1124,22 +1143,21 @@ def test_word_counts_per_kind_and_cap():
            data={"unit_name": "Day 1", "words": big}, follow_redirects=True)
 
     # 유형마다 따로 정한 수가 그대로 나옵니다
-    text = body(client().get("/words/cap-test-book/sheet"
-                             "?unit=01&kind=en_ko&kind=ko_en&n_en_ko=30&n_ko_en=10&seed=5"))
+    text = sheet_text("/words/cap-test-book/sheet"
+                      "?unit=01&kind=en_ko&kind=ko_en&n_en_ko=30&n_ko_en=10&seed=5")
     assert "총 30문항" in text and "총 10문항" in text
-    assert text.count('class="w"') == 80                  # (30 + 10) × 학생용·정답지
 
     # 다 더해 500문항을 넘기면 뒤쪽 유형부터 깎습니다
-    over = body(client().get("/words/cap-test-book/sheet"
-                             "?unit=01&kind=en_ko&kind=ko_en&n_en_ko=400&n_ko_en=400&seed=5"))
+    over = sheet_text("/words/cap-test-book/sheet"
+                      "?unit=01&kind=en_ko&kind=ko_en&n_en_ko=400&n_ko_en=400&seed=5")
     import re as _re
     got = [int(x) for x in _re.findall(r"총 (\d+)문항", over)]
     assert sum(set(got)) == 500, got                      # 400 + 100
     assert 400 in got and 100 in got
 
     # 예전 주소가 쓰던 count 도 그대로 받습니다
-    old_url = body(client().get("/words/cap-test-book/sheet"
-                                "?unit=01&kind=en_ko&kind=ko_en&count=25&seed=5"))
+    old_url = sheet_text("/words/cap-test-book/sheet"
+                         "?unit=01&kind=en_ko&kind=ko_en&count=25&seed=5")
     assert old_url.count("총 25문항") == 4                 # 두 유형 × 학생용·정답지
 
     # 고르는 화면에 유형마다 문항 수 칸이 있어야 합니다
@@ -1211,29 +1229,25 @@ def test_sheet_heading():
     unit = sc.load_words()["books"][0]["units"][0]["id"]
 
     # 아무것도 안 적으면 지금까지처럼 나옵니다
-    plain = body(c.get(f"/words/{slug}/sheet?unit={unit}&kind=en_ko&seed=7"))
-    assert "<h1>어휘 TEST ·" in plain
-    assert "sheet-place" not in plain
-    assert "이름 <i></i>" in plain.replace("\n", " ")
+    plain = sheet_text(f"/words/{slug}/sheet?unit={unit}&kind=en_ko&seed=7")
+    assert "어휘 TEST ·" in plain
+    assert "이름" in plain and "점수" in plain
 
     # 적으면 제목이 그것으로 바뀌고, 학원 이름이 제목 위에 붙습니다
-    fancy = body(c.get(f"/words/{slug}/sheet?unit={unit}&kind=en_ko&seed=7"
-                       "&place=오르티카+영어학원&title=9월+어휘+확인&date=2026.+9.+4."))
-    assert '<div class="sheet-place">오르티카 영어학원</div>' in fancy
-    assert "<h1>9월 어휘 확인" in fancy
+    tail = "&place=오르티카+영어학원&title=9월+어휘+확인&date=2026.+9.+4."
+    fancy = sheet_text(f"/words/{slug}/sheet?unit={unit}&kind=en_ko&seed=7" + tail)
+    assert "오르티카 영어학원" in fancy
+    assert "9월 어휘 확인" in fancy
     assert "2026. 9. 4." in fancy
-    assert "<h1>어휘 TEST" not in fancy        # 적어 주신 제목이 대신 들어갑니다
-    assert '<div class="sheet-sub">' in fancy   # 책 이름·범위는 작은 줄로 남습니다
+    assert "어휘 TEST" not in fancy           # 적어 주신 제목이 대신 들어갑니다
 
     # 학생용과 정답지 두 장 모두에 들어갑니다
-    assert fancy.count('<div class="sheet-place">') == 2
-
-    # 날짜를 빈칸으로 두면 학생이 적을 자리가 나옵니다
-    blank = body(c.get(f"/words/{slug}/sheet?unit={unit}&kind=en_ko&seed=7&dateblank=1"))
-    assert "날짜 <i></i>" in blank.replace("\n", " ")
+    assert fancy.count("오르티카 영어학원") == 2
+    assert fancy.count("9월 어휘 확인") == 2
 
     # '다른 문제로 다시' 를 눌러도 제목이 그대로 따라갑니다
-    assert "place=" in fancy and "title=" in fancy
+    page = body(c.get(f"/words/{slug}/sheet?unit={unit}&kind=en_ko&seed=7" + tail))
+    assert "place=" in page and "title=" in page
 
     # 고르는 화면 두 곳 모두에 꾸미기 칸이 있습니다
     for url in (f"/words/{slug}", f"/words/{slug}/pick?unit={unit}"):

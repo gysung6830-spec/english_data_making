@@ -30,6 +30,7 @@ from markupsafe import Markup, escape
 
 import store_common as sc
 import store_watermark as wm
+import store_sheet_pdf as sheet_pdf
 from store_admin import admin_bp
 
 # static_url_path 를 적어 주지 않으면 폴더 이름을 따라 /store_static 이 됩니다.
@@ -1295,9 +1296,12 @@ def words_pick(slug):
                            units=[u for u in book["units"] if u["id"] in unit_ids])
 
 
-@app.route("/words/<slug>/sheet")
-def words_sheet(slug):
-    """만들어진 시험지. 이 주소를 그대로 인쇄하시면 됩니다."""
+def _sheet_spec(slug):
+    """주소에 담긴 범위·유형·문항 수를 읽어 시험지 한 벌을 짭니다.
+
+    시험지 번호(seed)가 같으면 언제 불러도 같은 시험지가 나옵니다. 그래서
+    PDF 를 받을 때도, 화면에 그림으로 띄울 때도 이 함수를 다시 부르면 됩니다.
+    """
     book = sc.find_wordbook(slug)
     if book is None:
         abort(404)
@@ -1352,15 +1356,67 @@ def words_sheet(slug):
     }
     if head["dateblank"]:
         head["date"] = ""
+    return {"book": book, "sections": sections, "seed": seed, "kinds": kinds,
+            "counts": counts, "unit_ids": unit_ids, "unit_names": unit_names,
+            "head": head, "pool": len(words)}
 
+
+def _sheet_pdf(spec) -> bytes | None:
+    """시험지 PDF 한 벌. 만들지 못하면 None."""
+    site = sc.load_site()
+    return sheet_pdf.build(spec["sections"], spec["head"], spec["book"]["name"],
+                           " · ".join(spec["unit_names"]), site.get("brand", ""),
+                           sc.now_kst().year)
+
+
+@app.route("/words/<slug>/sheet")
+def words_sheet(slug):
+    """만들어진 시험지. 화면에 보이는 그대로가 PDF 입니다."""
+    spec = _sheet_spec(slug)
+    blob = _sheet_pdf(spec)
+    pages = wm.page_count(blob) if blob else 0
+
+    args = {"unit": spec["unit_ids"], "kind": spec["kinds"], "seed": spec["seed"],
+            **{f"n_{k}": v for k, v in spec["counts"].items()},
+            **{k: v for k, v in spec["head"].items() if v and k != "dateblank"},
+            **({"dateblank": "1"} if spec["head"]["dateblank"] else {})}
     # '다른 문제로 다시' — 같은 범위·유형·제목에 시험지 번호만 새로 뽑습니다
-    again = url_for("words_sheet", slug=slug, unit=unit_ids, kind=kinds,
-                    **{f"n_{k}": v for k, v in counts.items()},
-                    **{k: v for k, v in head.items() if v and k != "dateblank"},
-                    **({"dateblank": "1"} if head["dateblank"] else {}))
-    return render_template("words_sheet.html", b=book, sections=sections, seed=seed,
-                           unit_names=unit_names, kinds=kinds, kind_labels=sc.QUIZ_KINDS,
-                           again_url=again, pool=len(words), head=head)
+    again = url_for("words_sheet", slug=slug, **{k: v for k, v in args.items() if k != "seed"})
+    return render_template("words_sheet.html", b=spec["book"], sections=spec["sections"],
+                           seed=spec["seed"], unit_names=spec["unit_names"],
+                           kinds=spec["kinds"], kind_labels=sc.QUIZ_KINDS,
+                           again_url=again, pool=spec["pool"], head=spec["head"],
+                           pages=pages, args=args,
+                           halves=(pages // 2 if pages else 0))
+
+
+@app.route("/words/<slug>/sheet.pdf")
+def words_sheet_pdf(slug):
+    """시험지를 PDF 파일로. 화면에 보이는 것과 같은 파일입니다."""
+    spec = _sheet_spec(slug)
+    blob = _sheet_pdf(spec)
+    if not blob:
+        abort(404)
+    name = (spec["head"].get("title")
+            or f"어휘TEST_{spec['book']['name']}_{'-'.join(spec['unit_names'][:3])}")
+    resp = send_file(io.BytesIO(blob), mimetype="application/pdf",
+                     as_attachment=request.args.get("open") != "1",
+                     download_name=sc.safe_filename(name) + ".pdf")
+    resp.headers["Cache-Control"] = "private, max-age=600"
+    return resp
+
+
+@app.route("/words/<slug>/sheet/<int:page>.png")
+def words_sheet_png(slug, page):
+    """시험지 한 쪽을 그림으로. 화면에 띄우는 데 씁니다."""
+    spec = _sheet_spec(slug)
+    blob = _sheet_pdf(spec)
+    png = wm.page_image(blob, page) if blob else None
+    if png is None:
+        abort(404)
+    resp = app.response_class(png, mimetype="image/png")
+    resp.headers["Cache-Control"] = "private, max-age=600"
+    return resp
 
 
 # ---------------------------------------------------------------------------

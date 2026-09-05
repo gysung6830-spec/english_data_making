@@ -2,7 +2,6 @@
 {% block title %}{{ b.name }} 어휘 TEST · {{ site.brand }}{% endblock %}
 {% block jsonld %}<meta name="robots" content="noindex, nofollow">{% endblock %}
 
-{% set pages = (sections|length) * 2 %}
 {% set scope = unit_names|join(' · ') %}
 
 {% block body %}
@@ -13,117 +12,34 @@
       <h2>시험지가 만들어졌습니다</h2>
       <p>{{ scope }} ·
         {% for s in sections %}{{ s.title }} {{ s['items']|length }}문항{% if not loop.last %} · {% endif %}{% endfor %}
-        <br><b>A4 세로</b> 학생용 {{ sections|length }}장과 정답지 {{ sections|length }}장, 모두 {{ pages }}쪽입니다.
-        <b>인쇄</b>를 누르고, PDF 로 남기시려면 인쇄 창에서 <b>대상을 'PDF로 저장'</b>으로 바꾸세요.</p>
+        {% if pages %}<br><b>A4 세로 {{ pages }}쪽</b> — 학생용 {{ halves }}쪽, 정답지 {{ halves }}쪽입니다.
+          아래 보이는 그대로 나옵니다.{% endif %}</p>
     </div>
     <div class="hero-actions">
-      <button type="button" class="btn btn-primary" onclick="window.print()">인쇄 · PDF로 저장</button>
+      <a class="btn btn-primary"
+         href="{{ url_for('words_sheet_pdf', slug=b.slug, **args) }}">PDF 받기</a>
+      <button type="button" class="btn btn-ghost" onclick="window.print()">인쇄하기</button>
       <a class="btn btn-ghost" href="{{ again_url }}">다른 문제로 다시</a>
     </div>
     <p class="muted" style="margin-top:14px;font-size:13.5px;">
-      <b>A4 세로</b>로 나옵니다. 이 주소를 저장해 두시면 <b>똑같은 시험지</b>가 다시 나옵니다.
-      (시험지 번호 {{ seed }})</p>
-    <div class="alert alert-error" id="overflow-warn" hidden>
-      <b><span class="warn-which"></span>A4 한 장을 넘칩니다.</b>
-      문항 수를 줄이시면 한 장에 들어갑니다.
-      객관식은 보기 다섯 줄이 붙어 한 장에 <b>15문항쯤</b>까지 들어갑니다.
-      <a href="{{ url_for('words_book', slug=b.slug) }}">문항 수 다시 정하기</a>
-    </div>
+      이 주소를 저장해 두시면 <b>똑같은 시험지</b>가 다시 나옵니다. (시험지 번호 {{ seed }})
+      {% if not pages %}<br><b>이 서버에서는 PDF 를 만들지 못했습니다.</b>
+        관리자에게 알려 주세요.{% endif %}
+    </p>
   </div>
 </section>
 
-{% macro sheet(s, page, answer) %}
-<article class="sheet{{ ' answer' if answer }}">
-  {% if head.place %}<div class="sheet-place">{{ head.place }}</div>{% endif %}
-  <header class="sheet-head">
-    <h1>{% if head.title %}{{ head.title }}{% else %}어휘 TEST · {{ b.name }} · {{ scope }}{% endif %}{% if answer %} · 정답 <span class="ans-tag">ANSWER KEY</span>{% endif %}</h1>
-    <div class="sheet-fill">
-      {% if answer %}
-        {% if head.date %}<span>{{ head.date }}</span>{% endif %}
-        <span class="ans-note">정답이 채워진 답지입니다</span>
-      {% else %}
-        {% if head.date %}<span>{{ head.date }}</span>
-        {% elif head.dateblank %}<span>날짜 <i></i></span>{% endif %}
-        <span>이름 <i></i></span>
-        <span>점수 <i class="short"></i> / {{ s['items']|length }}</span>
-      {% endif %}
-    </div>
-  </header>
-  {% if head.title and (b.name not in head.title) %}
-    <div class="sheet-sub">{{ b.name }} · {{ scope }}</div>
-  {% endif %}
-
-  <div class="sec-head">
-    <span class="sec-no">{{ s.roman }}.</span>
-    <b>{{ s.title }}</b>
-    <small>{% if answer %}정답이 채워진 답지입니다.{% else %}{{ s.guide }}{% endif %}
-      (총 {{ s['items']|length }}문항{% if s.hinted %} · 첫 글자 힌트 제공{% endif %})</small>
-  </div>
-
-  <ol class="wlist {{ 'wide' if s.kind == 'choice' }}">
-    {% for q in s['items'] %}
-      <li class="w">
-        <span class="w-no">{{ q.no }}</span>
-        {% if s.kind == 'en_ko' %}
-          <span class="w-ask">{{ q.en }}</span>
-          <span class="w-ans{{ ' filled' if answer }}">{{ q.ko if answer }}</span>
-        {% elif s.kind == 'ko_en' %}
-          <span class="w-ask ko">{{ q.ko }}</span>
-          {% if answer %}
-            <span class="w-ans filled">{{ q.en }}</span>
-          {% else %}
-            <span class="w-hint">{{ q.hint }}</span><span class="w-ans"></span>
-          {% endif %}
-        {% else %}
-          <span class="w-ask">{{ q.en }}</span>
-          <span class="w-pick{{ ' filled' if answer }}">({{ q.answer_no if answer else '&nbsp;&nbsp;' | safe }})</span>
-          <ol class="w-choices">
-            {% for c in q.choices %}
-              <li class="{{ 'right' if answer and loop.index == q.answer_no }}">{{ c }}</li>
-            {% endfor %}
-          </ol>
-        {% endif %}
-      </li>
+{% if pages %}
+  <div class="viewer sheet-view">
+    {% for n in range(pages) %}
+      <div class="vpage">
+        <img src="{{ url_for('words_sheet_png', slug=b.slug, page=n, **args) }}"
+             alt="{{ n + 1 }}쪽" loading="{{ 'eager' if n < 2 else 'lazy' }}"
+             width="1406" height="1988">
+        <span class="vno no-print">{{ n + 1 }} / {{ pages }}
+          {%- if n < halves %} · 학생용{% else %} · 정답지{% endif %}</span>
+      </div>
     {% endfor %}
-  </ol>
-
-  <footer class="sheet-foot">
-    <span>©{{ now.year }}. {{ site.brand }}. All rights reserved</span>
-    <span>{{ page }} / {{ pages }}</span>
-  </footer>
-</article>
-{% endmacro %}
-
-<div class="sheet-stage">
-  {% for s in sections %}{{ sheet(s, loop.index, false) }}{% endfor %}
-  {% for s in sections %}{{ sheet(s, sections|length + loop.index, true) }}{% endfor %}
-</div>
-
-<script>
-/* A4 한 장을 넘치는 지면이 있으면 알려 줍니다. 문항 수를 줄이면 됩니다. */
-(function () {
-  var warn = document.getElementById('overflow-warn');
-  if (!warn) return;
-  // 지면 높이를 A4 한 장으로 못 박아 두고 내용이 넘치는지 재 봅니다 (재고 나서 되돌립니다)
-  var over = [...document.querySelectorAll('.sheet')].filter(function (el) {
-    var keep = [el.style.height, el.style.overflow];
-    el.style.height = '297mm';
-    el.style.overflow = 'hidden';
-    var spill = el.scrollHeight > el.clientHeight + 2;
-    el.style.height = keep[0];
-    el.style.overflow = keep[1];
-    return spill;
-  });
-  if (over.length) {
-    var names = [...new Set(over.map(function (el) {
-      var no = el.querySelector('.sec-no'), title = el.querySelector('.sec-head b');
-      return no && title ? no.textContent.trim() + ' ' + title.textContent.trim() : '';
-    }).filter(Boolean))];
-    if (names.length) {
-      warn.querySelector('.warn-which').textContent = names.join(' · ') + ' 이(가) ';
-    }
-    warn.hidden = false;
-  }
-})();
-</script>
+  </div>
+{% endif %}
 {% endblock %}
