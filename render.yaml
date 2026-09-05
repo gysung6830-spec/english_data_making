@@ -8,14 +8,27 @@ services:
   - type: web
     name: ortica-store
     runtime: python
-    plan: free               # 무료. 한동안 접속이 없으면 잠들어 첫 접속이 30초쯤 느립니다.
+    # ⚠️ free 로 두면 다시 배포할 때마다 올려 둔 자료와 주문 장부가 사라집니다.
+    #    실제로 파실 거면 starter 로 올리고 아래 disk 의 '# ' 를 지우세요. (월 $7)
+    plan: free
     buildCommand: pip install -r store_requirements.txt
-    startCommand: gunicorn store:app --bind 0.0.0.0:$PORT
+    startCommand: gunicorn store:app --bind 0.0.0.0:$PORT --timeout 120
     healthCheckPath: /healthz
+    # ---- 다시 배포해도 안 지워지는 저장 공간 -------------------
+    # plan 을 starter 이상으로 바꾼 뒤 아래 네 줄 앞의 '# ' 를 지우세요.
+    # 자료 파일 · 주문 장부 · 가게 설정이 모두 여기에 쌓입니다.
+    # disk:
+    #   name: ortica-data
+    #   mountPath: /var/data
+    #   sizeGB: 1
     envVars:
       # --- 꼭 넣어야 하는 값 ---------------------------------
       - key: ADMIN_PASSWORD    # 관리자 화면(/admin) 비밀번호. 안 넣으면 관리자 화면이 잠깁니다.
         sync: false
+      # 위 disk 를 켜셨다면 이 값도 같이 켜 주세요 (앞의 '# ' 를 지우면 됩니다).
+      # 안 켜면 자료가 서버 안쪽에 쌓여, 다시 배포할 때 사라집니다.
+      # - key: STORE_DATA
+      #   value: /var/data
       # --- 자동으로 만들어지는 값 (건드리지 마세요) ----------
       - key: STORE_SECRET
         generateValue: true

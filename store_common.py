@@ -17,6 +17,7 @@ import json
 import os
 import re
 import secrets
+import shutil
 import smtplib
 import sqlite3
 from datetime import datetime, timedelta, timezone
@@ -26,7 +27,10 @@ from pathlib import Path
 from flask import current_app, g
 
 ROOT = Path(__file__).resolve().parent
-DATA_DIR = ROOT / "store_data"
+BUNDLED_DATA = ROOT / "store_data"        # 저장소에 같이 들어 있는 첫 설정
+# 인터넷 서버(Render 등)에서는 다시 배포해도 안 지워지는 디스크를 따로 붙입니다.
+# STORE_DATA 에 그 디스크 경로를 넣어 두시면 자료·주문 장부가 거기에 쌓입니다.
+DATA_DIR = Path(os.environ.get("STORE_DATA") or BUNDLED_DATA)
 SAMPLE_DIR = DATA_DIR / "samples"
 SUBMIT_DIR = DATA_DIR / "submissions"
 DELIVER_DIR = DATA_DIR / "deliverables"   # 상품별로 손님에게 보낼 파일
@@ -36,6 +40,27 @@ BULK_DIR = DATA_DIR / ".bulk"             # 일괄 만들기로 올린 압축을
 DB_PATH = Path(os.environ.get("STORE_DB") or (DATA_DIR / "store.db"))
 
 KST = timezone(timedelta(hours=9))
+
+
+def seed_data_dir() -> None:
+    """빈 디스크에 처음 올라갔을 때, 저장소의 기본 설정을 한 번만 복사합니다.
+
+    이미 무언가 들어 있으면 아무것도 건드리지 않습니다. 사장님이 올려 두신
+    자료를 다시 배포한다고 덮어쓰는 일은 없습니다.
+    """
+    if DATA_DIR == BUNDLED_DATA or not BUNDLED_DATA.exists():
+        return
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    for src in BUNDLED_DATA.iterdir():
+        if src.name.startswith(".") or src.name == "store.db":
+            continue
+        dest = DATA_DIR / src.name
+        if dest.exists():
+            continue
+        if src.is_dir():
+            shutil.copytree(src, dest)
+        else:
+            shutil.copy2(src, dest)
 
 ORDER_STATUSES = ["입금대기", "입금확인", "발송완료", "취소"]
 SUBMIT_STATUSES = ["검토대기", "승인", "반려"]

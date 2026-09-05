@@ -57,6 +57,9 @@ app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 60 * 60 * 24 * 30
 # 더 큰 자료는 구글 드라이브 링크로 거세요(관리자 > 상품 > 파일).
 app.config["MAX_CONTENT_LENGTH"] = 30 * 1024 * 1024
 
+# 인터넷 서버에 붙인 디스크가 비어 있으면, 저장소의 기본 설정을 한 번만 심습니다.
+sc.seed_data_dir()
+
 app.register_blueprint(admin_bp)
 app.teardown_appcontext(sc.close_db)
 
