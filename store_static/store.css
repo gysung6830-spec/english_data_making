@@ -1652,16 +1652,20 @@ input[type=file]{
 .pk-none{display:block; padding:11px 6px; color:#c9ced2;}
 .pk-sum{text-align:right !important; padding:10px 12px !important; white-space:nowrap;
   font-size:13px;}
-.pick-bar{position:sticky; bottom:0; display:flex; flex-wrap:wrap; gap:12px;
+/* 강 고르기 아래 막대. 단어 고르기의 .pick-bar 와 이름이 겹쳐 서로 덮어썼습니다.
+   (그쪽은 위에 붙고 이쪽은 아래에 붙어야 합니다) 그래서 이름을 나눴습니다. */
+.unit-bar{position:sticky; bottom:0; z-index:5; display:flex; flex-wrap:wrap; gap:12px;
   align-items:center; justify-content:space-between; margin-top:14px; padding:14px 16px;
   background:#fff; border:1px solid var(--line); border-radius:12px;
   box-shadow:0 -4px 16px rgba(0,0,0,.06);}
-.pick-bar .pb-right{display:flex; align-items:center; gap:12px;}
-.pick-bar .pb-total{font-size:20px; font-weight:800; letter-spacing:-.02em;}
-.pick-bar .pb-cut{font-size:13.5px;}
+.unit-bar .pb-right{display:flex; align-items:center; gap:12px;}
+.unit-bar .pb-total{font-size:20px; font-weight:800; letter-spacing:-.02em;}
+.unit-bar .pb-cut{font-size:13.5px;}
 @media (max-width:640px){
-  .pick-bar{flex-direction:column; align-items:stretch;}
-  .pick-bar .pb-right{justify-content:space-between;}
+  .unit-bar{flex-direction:column; align-items:stretch;}
+  .unit-bar .pb-right{justify-content:space-between;}
+  /* 좁은 화면에서는 표를 옆으로 밀어 봐야 하니, 밀 수 있다고 알려 줍니다 */
+  .pick-wrap{position:relative;}
 }
 
 /* ---------- 화면에서 보고 인쇄하기 ---------- */

@@ -344,6 +344,37 @@ def product_detail(slug):
                            full=full, full_parts=len(full.get("covers", [])) if full else 0)
 
 
+def unit_grid(catalog: dict, slug: str) -> dict:
+    """강(회차·과) × 자료 종류 표. 강 단위 상품이 없으면 rows 가 빕니다.
+
+    교재 화면과 골라 담기 화면이 같은 표를 씁니다.
+    """
+    items = [p for p in catalog["products"] if p.get("book") == slug and p.get("unit")]
+    if not items:
+        return {"rows": [], "kinds": [], "mats": {}, "tiers": []}
+
+    mats = sc.material_map()
+    order = list(mats)                       # 라인업 차례대로 세웁니다
+    kinds = sorted({m for p in items for m in (p.get("materials") or [])},
+                   key=lambda m: order.index(m) if m in order else 99)
+
+    seen: dict = {}
+    for p in items:
+        key = (sc.to_int(p.get("unit_no"), 0), p.get("unit"))
+        cell = seen.setdefault(key, {})
+        for m in (p.get("materials") or []):
+            cell[m] = p
+    rows = [{"no": no, "unit": unit, "cells": cell,
+             "passages": max((sc.to_int(x.get("passages"), 0)
+                              for x in cell.values()), default=0)}
+            for (no, unit), cell in sorted(seen.items())]
+
+    site = sc.load_site()
+    tiers = sorted((site.get("discount") or {}).get("count_tiers") or [],
+                   key=lambda t: sc.to_int(t.get("min"), 0))
+    return {"rows": rows, "kinds": kinds, "mats": mats, "tiers": tiers}
+
+
 @app.route("/books/<slug>")
 def book_detail(slug):
     """교재 한 권의 전용 페이지.
@@ -356,59 +387,30 @@ def book_detail(slug):
         abort(404)
     catalog = sc.load_catalog()
     items = [p for p in catalog["products"] if p.get("book") == slug]
+    # 강 단위 상품은 위쪽 표에서 고릅니다. 여기 카드로 또 늘어놓으면
+    # 같은 것이 두 번 보여 화면만 길어집니다. 전체 상품만 남깁니다.
+    whole = [p for p in items if not p.get("unit")]
     # 지문 분석 패키지 / 문제 패키지 순서로 갈라 놓습니다.
     lanes = []
     for pkg in catalog.get("packages", []):
-        picked = [p for p in items if p.get("package") == pkg["id"]]
+        picked = [p for p in whole if p.get("package") == pkg["id"]]
         if picked:
             lanes.append({**pkg, "items": picked})
-    rest = [p for p in items if not p.get("package")]
+    rest = [p for p in whole if not p.get("package")]
     others = [b for b in sc.books_with_counts(catalog, book.get("category", ""))
               if b["slug"] != slug][:3]
+    grid = unit_grid(catalog, slug)
     return render_template("book.html", book=book, items=items, lanes=lanes,
                            rest=rest, others=others,
-                           has_units=any(p.get("unit") for p in items))
+                           cart=set(session.get("cart") or []), **grid)
 
 
 @app.route("/books/<slug>/pick")
 def book_pick(slug):
-    """자료 골라 담기 — 강마다, 자료 종류마다 하나씩 고릅니다.
-
-    '3강~5강의 지문분석지와 17종 변형문제만' 처럼 필요한 것만 담으라고
-    만든 화면입니다. 많이 담을수록 값이 내려가는 것도 여기서 보여 줍니다.
-    """
-    book = find_book(slug)
-    if not book:
+    """예전 주소. 강 고르기는 이제 교재 화면 안에 있습니다."""
+    if not find_book(slug):
         abort(404)
-    catalog = sc.load_catalog()
-    items = [p for p in catalog["products"] if p.get("book") == slug and p.get("unit")]
-    if not items:
-        # 강 단위 상품이 아직 없으면 교재 화면으로 돌려보냅니다
-        return redirect(url_for("book_detail", slug=slug))
-
-    mats = sc.material_map()
-    # 이 교재에 실제로 있는 자료만, 라인업 차례대로 세웁니다
-    order = list(mats)
-    kinds = sorted({m for p in items for m in (p.get("materials") or [])},
-                   key=lambda m: order.index(m) if m in order else 99)
-
-    rows, seen = [], {}
-    for p in items:
-        key = (sc.to_int(p.get("unit_no"), 0), p.get("unit"))
-        cell = seen.setdefault(key, {})
-        for m in (p.get("materials") or []):
-            cell[m] = p
-    for (no, unit), cell in sorted(seen.items()):
-        rows.append({"no": no, "unit": unit, "cells": cell,
-                     "passages": max((sc.to_int(x.get("passages"), 0)
-                                      for x in cell.values()), default=0)})
-
-    site = sc.load_site()
-    tiers = sorted((site.get("discount") or {}).get("count_tiers") or [],
-                   key=lambda t: sc.to_int(t.get("min"), 0))
-    return render_template("book_pick.html", book=book, rows=rows, kinds=kinds,
-                           mats=mats, tiers=tiers,
-                           cart=set(session.get("cart") or []))
+    return redirect(url_for("book_detail", slug=slug) + "#pick")
 
 
 @app.route("/lineup")

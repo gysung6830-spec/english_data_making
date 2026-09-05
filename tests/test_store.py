@@ -2484,16 +2484,21 @@ def test_book_pick_grid():
         "path": ["1강_지문분석지.pdf", "1강_17종 변형문제.pdf",
                  "2강_지문분석지.pdf", "2강_17종 변형문제.pdf"]}, follow_redirects=True)
 
-    # 교재 화면에서 골라 담기로 들어갑니다
-    assert "필요한 강·자료만 골라 담기" in body(client().get("/books/ybm-han"))
-
+    # 교재에 들어가면 강 고르기가 바로 나옵니다 (따로 들어갈 필요 없이)
     c = client()
-    page = body(c.get("/books/ybm-han/pick"))
-    assert "필요한 것만 골라 담기" in page
+    page = body(c.get("/books/ybm-han"))
+    assert "필요한 강만 고르세요" in page
+    assert "모두 2강" in page
     assert "1강" in page and "2강" in page                    # 줄
     assert "지문분석지" in page and "17종 변형문제" in page      # 칸
     assert "3개부터" in page and "10%" in page                 # 담은 개수 할인 안내
-    assert page.count('name="slug"') == 4
+    # 교재 전체 상품 카드에도 name="slug" 가 있으니, 표의 칸만 셉니다
+    assert page.count('data-price=') == 4
+    # 교재 전체 상품은 강 고르기 아래에 놓입니다
+    assert page.index("필요한 강만 고르세요") < page.index("전 강을 한 번에")
+    # 예전 주소는 그 자리로 보내 줍니다
+    moved = c.get("/books/ybm-han/pick")
+    assert moved.status_code == 302 and moved.headers["Location"].endswith("#pick")
 
     # 세 개를 담으면 10% 할인이 붙습니다
     c.post("/cart/add", data={"slug": ["ybm-han-01-analysis", "ybm-han-01-variants",
@@ -2504,11 +2509,23 @@ def test_book_pick_grid():
     assert q["rows"][0]["percent"] == 10
 
     # 이미 담은 것은 잠긴 채로 보입니다
-    again = body(c.get("/books/ybm-han/pick"))
+    again = body(c.get("/books/ybm-han"))
     assert again.count("checked disabled") == 3
 
-    # 강 단위 상품이 없는 교재는 교재 화면으로 돌려보냅니다
-    assert client().get("/books/neungyule-kim/pick").status_code == 302
+    # 강 고르기 막대와 단어 고르기 막대는 이름이 달라야 합니다 (서로 덮어쓰지 않게)
+    css = body(client().get("/static/store.css"))
+    assert ".unit-bar{position:sticky; bottom:0;" in css   # 강 — 아래에 붙음
+    assert ".pick-bar{position:sticky; top:0;" in css      # 단어 — 위에 붙음
+    assert "unit-bar" in again
+    wb = sc.load_words()["books"][0]
+    words_page = body(client().get(
+        f"/words/{wb['slug']}/pick?unit={wb['units'][0]['id']}"))
+    assert "unit-bar" not in words_page and "pick-bar" in words_page
+
+    # 강 단위 상품이 없는 교재는 강 고르기 없이 패키지만 보입니다
+    plain = body(client().get("/books/neungyule-kim"))
+    assert "필요한 강만 고르세요" not in plain
+    assert "이 교재의 자료" in plain and "data-price=" not in plain
 
     # 치우기
     catalog = sc.load_raw_catalog()

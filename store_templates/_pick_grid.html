@@ -1,19 +1,6 @@
-{% extends "base.html" %}
-{% block title %}{{ book.name }} 자료 골라 담기 · {{ site.brand }}{% endblock %}
-{% block desc %}{{ book.name }} 자료를 강마다, 종류마다 필요한 것만 골라 담으실 수 있습니다.{% endblock %}
-
-{% block body %}
-<section class="section">
-  <div class="wrap">
-    <a class="back-link" href="{{ url_for('book_detail', slug=book.slug) }}">← {{ book.name }}</a>
-    <div class="section-head">
-      <h2>필요한 것만 골라 담기</h2>
-      <p>{{ book.name }} · {{ rows|length }}{{ '강' if rows else '' }}.
-        강마다, 자료 종류마다 하나씩 고르시면 됩니다.
-        {% if tiers %}<b>많이 담을수록 값이 내려갑니다.</b>{% endif %}</p>
-    </div>
-
-    {% if tiers %}
+{# 강(회차·과)을 골라 담는 표. 교재 화면 안에서 씁니다.
+   rows · kinds · mats · tiers · cart 를 넘겨받아야 합니다. #}
+{% if tiers %}
       <div class="pick-tiers">
         {% for t in tiers %}
           <span class="pt" data-min="{{ t.min }}" data-percent="{{ t.percent }}">
@@ -69,7 +56,7 @@
         </table>
       </div>
 
-      <div class="pick-bar">
+      <div class="unit-bar">
         <div class="pb-left">
           <b><span class="pb-count">0</span>개</b> 고름
           <span class="pb-cut muted"></span>
@@ -84,8 +71,6 @@
         빼시려면 <a href="{{ url_for('cart') }}">장바구니</a>에서 지우시면 됩니다.
       </p>
     </form>
-  </div>
-</section>
 
 <script>
 /* 고른 개수와 값을 바로 세어 줍니다. 할인은 담은 개수에 따라 붙습니다. */
@@ -155,4 +140,3 @@
   tally();
 })();
 </script>
-{% endblock %}
