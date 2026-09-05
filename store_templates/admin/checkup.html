@@ -20,6 +20,58 @@
   </div>
 {% endif %}
 
+<div class="panel" style="{{ 'border-color:#f0c2bb;' if store.on_server and not store.safe }}">
+  <h2>자료가 저장되는 곳
+    {% if not store.on_server %}
+      <span class="tag">내 컴퓨터</span>
+    {% elif store.safe %}
+      <span class="tag tag-on">안전</span>
+    {% else %}
+      <span class="tag" style="background:#fdecea;color:#b3261e;">위험</span>
+    {% endif %}
+  </h2>
+
+  {% if store.on_server and not store.safe %}
+    <div class="steps-help" style="background:#fff8f4;border-color:#f0d4c4;">
+      <b>지금 올리시는 자료는 다시 배포하면 사라집니다.</b>
+      <div>주문 기록 · 손님 이메일 명단 · 가게 정보도 같이 사라집니다.
+        <b>자료를 넣기 전에</b> 아래 두 가지를 해 주세요.</div>
+      <ol>
+        <li>Render → <b>Settings → Disks → Add Disk</b>
+          — Mount path <code>/var/data</code>, 크기 <b>1 GB</b></li>
+        <li>Render → <b>Environment</b> 에 <code>STORE_DATA</code> = <code>/var/data</code> 추가</li>
+      </ol>
+      둘 다 하셔야 합니다. 하나만 하면 안 됩니다.
+    </div>
+  {% elif store.safe %}
+    <div class="steps-help">
+      <b>안전합니다.</b>
+      <div>자료와 주문 기록이 따로 붙인 저장 공간에 쌓입니다.
+        코드를 고쳐 다시 배포해도 그대로 남습니다.</div>
+    </div>
+  {% endif %}
+
+  <div class="wrapbox">
+    <table class="adm-table">
+      <tbody>
+        <tr><th style="width:190px;">저장 위치</th>
+            <td><code>{{ store.path }}</code></td></tr>
+        <tr><th>다시 배포하면</th>
+            <td>{% if store.safe %}<b style="color:#146b4a;">그대로 남습니다</b>
+                {% elif store.on_server %}<b style="color:#b3261e;">전부 사라집니다</b>
+                {% else %}내 컴퓨터라 그대로 남습니다{% endif %}</td></tr>
+        <tr><th>지금 쌓인 양</th>
+            <td>{{ store.bytes|filesize }} · 파일 {{ '{:,}'.format(store.files) }}개</td></tr>
+        <tr><th>남은 자리</th>
+            <td>{{ store.free|filesize }}</td></tr>
+        <tr><th>쓰기</th>
+            <td>{% if store.writable %}됩니다{% else %}
+                <b style="color:#b3261e;">안 됩니다 — 자료를 못 올립니다</b>{% endif %}</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 {% if todo %}
   <div class="panel" style="border-color:#f0c2bb;">
     <h2>아직 예시값 그대로인 가게 정보 {{ todo|length }}개</h2>

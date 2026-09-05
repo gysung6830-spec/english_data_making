@@ -42,6 +42,39 @@ DB_PATH = Path(os.environ.get("STORE_DB") or (DATA_DIR / "store.db"))
 KST = timezone(timedelta(hours=9))
 
 
+def storage_report() -> dict:
+    """자료가 어디에 쌓이고 있는지, 다시 배포해도 남는지 알려 줍니다.
+
+    인터넷 서버에서 디스크를 안 붙이면 배포할 때마다 자료가 사라지는데,
+    화면으로는 티가 안 납니다. 그래서 사장님이 직접 확인하실 수 있게 합니다.
+    """
+    fixed = bool(os.environ.get("STORE_DATA"))
+    size = 0
+    files = 0
+    try:
+        for f in DATA_DIR.rglob("*"):
+            if f.is_file():
+                size += f.stat().st_size
+                files += 1
+    except OSError:
+        pass
+    free = None
+    try:
+        st = shutil.disk_usage(DATA_DIR)
+        free = st.free
+    except OSError:
+        pass
+    return {
+        "path": str(DATA_DIR),
+        "safe": fixed,                      # 다시 배포해도 남는가
+        "on_server": bool(os.environ.get("RENDER") or os.environ.get("RENDER_SERVICE_ID")),
+        "bytes": size,
+        "files": files,
+        "free": free,
+        "writable": os.access(DATA_DIR, os.W_OK),
+    }
+
+
 def seed_data_dir() -> None:
     """빈 디스크에 처음 올라갔을 때, 저장소의 기본 설정을 한 번만 복사합니다.
 
@@ -1542,7 +1575,9 @@ def has_deliverable(product: dict) -> bool:
     return bool(product_files(product.get("slug", "")) or product_links(product))
 
 
-def human_size(num: int) -> str:
+def human_size(num: int | None) -> str:
+    if num is None:
+        return "-"                       # 크기를 못 잰 경우 (남은 자리 등)
     for unit in ("B", "KB", "MB", "GB"):
         if num < 1024 or unit == "GB":
             return f"{num:.0f}{unit}" if unit == "B" else f"{num:.1f}{unit}"

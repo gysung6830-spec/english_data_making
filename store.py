@@ -110,7 +110,7 @@ def won(value) -> str:
 
 @app.template_filter("filesize")
 def filesize(value):
-    return sc.human_size(int(value or 0))
+    return sc.human_size(None if value is None else int(value))
 
 
 @app.template_filter("br")

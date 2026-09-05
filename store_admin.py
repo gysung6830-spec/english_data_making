@@ -1728,8 +1728,11 @@ def checkup():
             todo.append(label)
 
     total = sum(len(g["items"]) for g in groups) + len(no_shot) + len(todo)
+    store = sc.storage_report()
+    if store["on_server"] and not store["safe"]:
+        total += 1                      # 자료가 날아갈 상태면 '빠진 것' 하나로 셉니다
     return render_template("admin/checkup.html", groups=groups, no_shot=no_shot,
-                           todo=todo, total=total, live=len(live))
+                           todo=todo, total=total, live=len(live), store=store)
 
 
 @admin_bp.route("/mail")

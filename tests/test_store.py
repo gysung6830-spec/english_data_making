@@ -1445,6 +1445,38 @@ def test_metrics_screen():
     print("PASS  지표 — 단위당 평균 구매자 · 제작비 회수 · 자료별 순위")
 
 
+def test_storage_warning_when_data_would_vanish():
+    """인터넷 서버에 디스크를 안 붙이면, 자료가 날아간다고 크게 알려 줍니다."""
+    import os as _os
+    a = admin()
+
+    # 내 컴퓨터에서 볼 때 — 겁줄 필요 없습니다
+    here = body(a.get("/admin/checkup"))
+    assert "자료가 저장되는 곳" in here and "내 컴퓨터" in here
+    assert "다시 배포하면 사라집니다" not in here
+
+    # 인터넷 서버인데 디스크가 없을 때 — 빨간 경고
+    _os.environ["RENDER"] = "true"
+    try:
+        danger = body(a.get("/admin/checkup"))
+        assert "지금 올리시는 자료는 다시 배포하면 사라집니다" in danger
+        assert "STORE_DATA" in danger and "/var/data" in danger
+        assert "전부 사라집니다" in danger
+
+        # 디스크를 붙였을 때 — 안전하다고 알려 줍니다
+        _os.environ["STORE_DATA"] = str(sc.DATA_DIR)
+        safe = body(a.get("/admin/checkup"))
+        assert "안전합니다" in safe and "그대로 남습니다" in safe
+        assert "다시 배포하면 사라집니다" not in safe
+    finally:
+        _os.environ.pop("RENDER", None)
+        _os.environ.pop("STORE_DATA", None)
+
+    # 크기를 못 잰 값도 화면을 깨지 않아야 합니다
+    assert sc.human_size(None) == "-"
+    print("PASS  자료 저장되는 곳 — 날아갈 상태면 크게 알려 줌")
+
+
 def test_checkup_screen():
     """빠진 것 점검 — 손님이 못 사는 상품을 찾아 줘야 합니다."""
     a = admin()
@@ -3341,6 +3373,7 @@ def run_all():
     test_wordfile_table_shapes()
     test_pass_counts_passages()
     test_metrics_screen()
+    test_storage_warning_when_data_would_vanish()
     test_checkup_screen()
     test_mail_to_leads_and_coupons()
     test_left_cart_reminder()
