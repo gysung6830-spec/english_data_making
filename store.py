@@ -1434,9 +1434,69 @@ def download_page(token):
                                reason=reason), 404
     product = next((x for x in sc.load_catalog()["products"]
                     if x.get("slug") == row["product_slug"]), {})
-    return render_template("download.html", d=row,
-                           files=sc.product_files(row["product_slug"]),
+    site = sc.load_site()
+    files = sc.product_files(row["product_slug"])
+    mode = sc.delivery_mode(site)
+    # PDF 는 화면에서 보고 인쇄합니다. 그 밖(zip·한글 등)은 받을 수밖에 없습니다.
+    for i, f in enumerate(files):
+        f["viewable"] = f["name"].lower().endswith(".pdf")
+        f["index"] = i
+    return render_template("download.html", d=row, files=files, mode=mode,
+                           note=(site.get("delivery") or {}).get("note", ""),
                            links=sc.product_links(product), reason="")
+
+
+def _stamped_pdf(row, index):
+    """이 주문의 구매자 표시를 새긴 PDF 바이트와 파일 이름."""
+    files = sc.product_files(row["product_slug"])
+    if not 0 <= index < len(files):
+        abort(404)
+    name = files[index]["name"]
+    path = sc.product_dir(row["product_slug"]) / name
+    stamped = watermark_for(row, path)
+    if stamped is None:
+        stamped = path.read_bytes()
+    return stamped, name
+
+
+@app.route("/d/<token>/view/<int:index>")
+def view_file(token, index):
+    """화면에서 보고 바로 인쇄하는 자리. 파일을 넘기지 않습니다."""
+    row, reason = sc.check_download(token)
+    if row is None:
+        abort(404)
+    files = sc.product_files(row["product_slug"])
+    if not 0 <= index < len(files):
+        abort(404)
+    if not files[index]["name"].lower().endswith(".pdf"):
+        abort(404)
+
+    blob, name = _stamped_pdf(row, index)
+    pages = wm.page_count(blob)
+    if not pages:
+        flash("이 자료는 화면에서 열 수 없습니다. 파일로 받아 주세요.", "err")
+        return redirect(url_for("download_page", token=token))
+    sc.count_download(token)
+    return render_template("view.html", d=row, name=name, index=index,
+                           pages=pages, token=token,
+                           other=[dict(f, index=i) for i, f in enumerate(files)
+                                  if i != index and f["name"].lower().endswith(".pdf")])
+
+
+@app.route("/d/<token>/page/<int:index>/<int:page>.png")
+def view_page(token, index, page):
+    """자료 한 쪽을 그림으로. 이 주소를 아는 사람만 볼 수 있습니다."""
+    row, _ = sc.check_download(token)
+    if row is None:
+        abort(404)
+    blob, _name = _stamped_pdf(row, index)
+    img = wm.page_image(blob, page)
+    if img is None:
+        abort(404)
+    resp = send_file(io.BytesIO(img), mimetype="image/png")
+    # 중간 서버나 브라우저에 남지 않게 합니다
+    resp.headers["Cache-Control"] = "private, no-store, max-age=0"
+    return resp
 
 
 @app.route("/d/<token>/<int:index>")
@@ -1447,14 +1507,15 @@ def download_file(token, index):
     files = sc.product_files(row["product_slug"])
     if not 0 <= index < len(files):
         abort(404)
-    sc.count_download(token)
 
     name = files[index]["name"]
-    path = sc.product_dir(row["product_slug"]) / name
+    # '화면에서 보고 인쇄만' 으로 두셨으면 PDF 는 파일로 안 나갑니다
+    if sc.delivery_mode(sc.load_site()) == "view" and name.lower().endswith(".pdf"):
+        return redirect(url_for("view_file", token=token, index=index))
 
-    # 받는 그 자리에서 구매자 표시를 새깁니다. 원본 파일은 그대로 둡니다.
-    stamped = watermark_for(row, path)
-    if stamped is not None:
+    sc.count_download(token)
+    stamped, name = _stamped_pdf(row, index)
+    if name.lower().endswith(".pdf"):
         return send_file(io.BytesIO(stamped), mimetype="application/pdf",
                          as_attachment=True, download_name=name)
     return send_from_directory(sc.product_dir(row["product_slug"]), name,

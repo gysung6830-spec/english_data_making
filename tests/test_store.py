@@ -596,11 +596,19 @@ def test_order_to_download_flow():
     # 파일은 이름 순으로 매겨지므로 PDF 가 몇 번째인지 찾아서 받습니다.
     names = [f["name"] for f in sc.product_files(slug)]
     idx = names.index("지문분석지.pdf")
+
+    # 기본은 '화면에서 보고 인쇄만' 이라 PDF 는 파일로 안 나갑니다
+    assert client().get(f"/d/{dl[0]}/{idx}").status_code == 302
+    # ZIP 같은 것은 화면에서 못 여니 그대로 받습니다
+    zidx = names.index("묶음.zip")
+    assert client().get(f"/d/{dl[0]}/{zidx}").status_code == 200
+
+    # 파일로도 받게 열어 두면 예전처럼 나옵니다
+    site = sc.load_site(); site["delivery"] = {"mode": "both"}; sc.save_site(site)
     got = client().get(f"/d/{dl[0]}/{idx}")
     assert got.status_code == 200, got.status_code
     assert got.data.startswith(b"%PDF"), got.data[:20]
-    assert sc.sqlite3.connect(sc.DB_PATH).execute(
-        "SELECT download_count FROM downloads WHERE token = ?", (dl[0],)).fetchone()[0] == 1
+    site["delivery"] = {"mode": "view"}; sc.save_site(site)
 
     # 엉뚱한 토큰과 폴더 밖 요청은 막힙니다.
     assert client().get("/d/없는토큰").status_code == 404
@@ -1775,7 +1783,9 @@ def test_order_page_cannot_be_enumerated():
     # 주문번호를 찍어서는 못 엽니다. (여기가 막혀야 고객 명단이 안 샙니다)
     assert client().get(f"/order/done/{order_no}").status_code == 404
     # 열쇠를 한 글자만 바꿔도 안 됩니다.
-    assert client().get(f"/order/done/{key[:-1]}x").status_code == 404
+    # (원래 글자와 다른 것으로 바꿔야 합니다. 우연히 같으면 시험이 헛돕니다)
+    other = "y" if key[-1] == "x" else "x"
+    assert client().get(f"/order/done/{key[:-1]}{other}").status_code == 404
     print("PASS  주문 확인 화면 열거 차단")
 
 
@@ -2729,6 +2739,7 @@ def test_watermark_stamps_buyer_on_pdf():
         dl = sc.get_db().execute(
             "SELECT token FROM downloads WHERE order_no = ?", (row["order_no"],)).fetchone()
 
+    site = sc.load_site(); site["delivery"] = {"mode": "both"}; sc.save_site(site)
     got = client().get(f"/d/{dl['token']}/0")
     assert got.status_code == 200
     assert got.data.startswith(b"%PDF")
@@ -2744,7 +2755,87 @@ def test_watermark_stamps_buyer_on_pdf():
 
     # 원본 파일은 그대로여야 합니다
     assert src.stat().st_size == plain
-    print("PASS  받은 PDF 에 구매자 표시가 새겨짐")
+
+    # 화면으로 볼 때도 같은 표시가 새겨진 그림이 나옵니다
+    site["delivery"] = {"mode": "view"}; sc.save_site(site)
+    view = body(client().get(f"/d/{dl['token']}/view/0"))
+    assert "인쇄하기" in view and "1쪽" in view
+    png = client().get(f"/d/{dl['token']}/page/0/0.png")
+    assert png.status_code == 200 and png.data[:4] == b"\x89PNG"
+    assert "no-store" in png.headers.get("Cache-Control", "")
+    print("PASS  받은 PDF 에 구매자 표시가 새겨짐 · 화면 보기도 같은 표시")
+
+
+def test_print_only_viewer():
+    """자료를 파일로 넘기지 않고 화면에서 보고 인쇄하게 합니다."""
+    import store_watermark as wm
+    if not wm.AVAILABLE:
+        print("SKIP  워터마크 라이브러리 없음")
+        return
+    a = admin()
+    slug = "mock-2026-03-g2-problem"
+    folder = sc.product_dir(slug)
+    folder.mkdir(parents=True, exist_ok=True)
+    from reportlab.pdfgen import canvas as rl_canvas
+    page = rl_canvas.Canvas(str(folder / "변형문제.pdf"))
+    for n in ("첫 쪽", "둘째 쪽"):
+        page.drawString(72, 700, n)
+        page.showPage()
+    page.save()
+    (folder / "묶음.zip").write_bytes(b"PK\x03\x04zip")
+
+    c = client()
+    r = c.post("/order", data={"slug": slug, "name": "인쇄만", "phone": "010-3333-9999",
+                               "email": "printonly@example.com", "agree": "1"})
+    key = r.headers["Location"].rsplit("/", 1)[-1]
+    with store.app.app_context():
+        row = sc.get_db().execute(
+            "SELECT * FROM orders WHERE view_key = ?", (key,)).fetchone()
+    a.post(f"/admin/orders/{row['id']}/deliver", follow_redirects=True)
+    with store.app.app_context():
+        token = sc.get_db().execute(
+            "SELECT token FROM downloads WHERE order_no = ?", (row["order_no"],)).fetchone()[0]
+
+    # 받는 화면 — PDF 는 '열기', ZIP 은 '받기'
+    page1 = body(client().get(f"/d/{token}"))
+    assert "자료를 보고 인쇄하세요" in page1
+    assert "화면에서 보고 인쇄" in page1 and "변형문제.pdf" in page1
+    assert "묶음.zip" in page1
+
+    names = [f["name"] for f in sc.product_files(slug)]
+    pdf_i, zip_i = names.index("변형문제.pdf"), names.index("묶음.zip")
+
+    # PDF 를 파일로 달라고 해도 보기 화면으로 돌려보냅니다
+    got = client().get(f"/d/{token}/{pdf_i}")
+    assert got.status_code == 302 and f"/view/{pdf_i}" in got.headers["Location"]
+    # ZIP 은 화면에서 못 여니 그대로 받습니다
+    assert client().get(f"/d/{token}/{zip_i}").status_code == 200
+
+    # 보기 화면 — 쪽마다 그림
+    view = body(client().get(f"/d/{token}/view/{pdf_i}"))
+    assert "인쇄하기" in view and "2쪽" in view
+    assert view.count(f"/d/{token}/page/{pdf_i}/") == 2
+    assert 'name="robots" content="noindex' in view      # 검색에 안 걸리게
+
+    png = client().get(f"/d/{token}/page/{pdf_i}/0.png")
+    assert png.status_code == 200 and png.data[:4] == b"\x89PNG"
+    assert "no-store" in png.headers.get("Cache-Control", "")
+    assert client().get(f"/d/{token}/page/{pdf_i}/99.png").status_code == 404
+    # 열쇠가 없으면 한 쪽도 못 봅니다
+    assert client().get(f"/d/없는열쇠/page/{pdf_i}/0.png").status_code == 404
+    assert client().get(f"/d/없는열쇠/view/{pdf_i}").status_code == 404
+
+    # 인쇄하면 한 장에 한 쪽씩 나가야 합니다
+    css = body(client().get("/static/store.css"))
+    assert "@page{size:A4 portrait; margin:0;}" in css
+    assert ".vpage{margin:0;" in css and "break-after:page" in css
+
+    # 관리자 화면에서 방식을 고를 수 있습니다
+    setting = body(a.get("/admin/settings"))
+    assert "자료를 어떻게 내어 줄까" in setting
+    assert "화면에서 보고 인쇄만" in setting and "보기 + 파일 받기 둘 다" in setting
+    assert "PDF로 저장' 인쇄까지 막지는 못합니다" in setting     # 솔직하게 적어 둡니다
+    print("PASS  화면에서 보고 인쇄만 (파일은 안 넘김)")
 
 
 def test_watermark_can_be_turned_off():
@@ -2754,6 +2845,7 @@ def test_watermark_can_be_turned_off():
         return
     site = sc.load_site()
     site["watermark"] = {"enabled": False}
+    site["delivery"] = {"mode": "both"}          # 파일로 받아 보고 확인합니다
     sc.save_site(site)
 
     with store.app.app_context():
@@ -2761,11 +2853,13 @@ def test_watermark_can_be_turned_off():
             """SELECT d.token FROM downloads d JOIN orders o ON o.order_no = d.order_no
                WHERE o.email = 'mark@example.com'""").fetchone()
     got = client().get(f"/d/{dl['token']}/0")
+    assert got.status_code == 200, got.status_code
     import io as _io
     from pypdf import PdfReader
     text = PdfReader(_io.BytesIO(got.data)).pages[0].extract_text()
     assert "mark@example.com" not in text
     site["watermark"] = {"enabled": True}
+    site["delivery"] = {"mode": "view"}
     sc.save_site(site)
     print("PASS  워터마크 끄기")
 
@@ -2927,6 +3021,7 @@ def test_watermark_wording_is_editable():
     site["watermark"] = {"enabled": True,
                          "footer": "{브랜드} · {주문번호} · 무단 배포 금지",
                          "center": "{이름}"}
+    site["delivery"] = {"mode": "both"}
     sc.save_site(site)
     with store.app.app_context():
         dl = sc.get_db().execute(
@@ -2938,6 +3033,7 @@ def test_watermark_wording_is_editable():
     assert "무단 배포 금지" in text
     assert "새김이" in text                    # {이름} 이 실제 값으로
     assert "mark@example.com" not in text      # 이번 문구엔 이메일이 없습니다
+    site["delivery"] = {"mode": "view"}; sc.save_site(site)
     print("PASS  워터마크 문구를 관리자가 정함")
 
 
@@ -2950,6 +3046,7 @@ def test_watermark_optout_costs_extra():
     site = sc.load_site()
     site["watermark"] = {"enabled": True, "optout_enabled": True, "optout_price": 10000,
                          "footer": "{이메일}", "center": ""}
+    site["delivery"] = {"mode": "both"}
     sc.save_site(site)
 
     form = body(client().get("/order?slug=ybm-han-analysis"))
@@ -3081,6 +3178,7 @@ def run_all():
     test_order_page_shows_download_when_ready()
     test_deliver_by_external_link()
     test_watermark_stamps_buyer_on_pdf()
+    test_print_only_viewer()
     test_watermark_can_be_turned_off()
     test_watermark_wording_is_editable()
     test_watermark_optout_costs_extra()

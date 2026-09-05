@@ -7,19 +7,38 @@
   <div class="wrap narrow">
     {% if d %}
       <div class="section-head">
-        <h2>자료를 받으세요</h2>
+        <h2>{{ '자료를 보고 인쇄하세요' if mode == 'view' else '자료를 받으세요' }}</h2>
         <p>주문번호 <b>{{ d['order_no'] }}</b> · {{ d['product_name'] }}</p>
+        {% if mode == 'view' and note %}<p class="muted">{{ note|safe }}</p>{% endif %}
       </div>
 
       {% if files or links %}
         <div class="dl-list">
           {% for f in files %}
-            <a class="dl-item" href="{{ url_for('download_file', token=d['token'], index=loop.index0) }}">
-              <span class="dl-ico">📄</span>
-              <span class="dl-name">{{ f.name }}</span>
-              <span class="dl-size">{{ f.size | filesize }}</span>
-              <span class="btn btn-primary btn-sm">받기</span>
-            </a>
+            {% if f.viewable and mode != 'file' %}
+              <a class="dl-item" href="{{ url_for('view_file', token=d['token'], index=f.index) }}">
+                <span class="dl-ico">🖨</span>
+                <span class="dl-name">{{ f.name }}</span>
+                <span class="dl-size">화면에서 보고 인쇄</span>
+                <span class="btn btn-primary btn-sm">열기</span>
+              </a>
+              {% if mode == 'both' %}
+                <a class="dl-item dl-sub"
+                   href="{{ url_for('download_file', token=d['token'], index=f.index) }}">
+                  <span class="dl-ico">📄</span>
+                  <span class="dl-name">{{ f.name }} — 파일로 받기</span>
+                  <span class="dl-size">{{ f.size | filesize }}</span>
+                  <span class="btn btn-ghost btn-sm">받기</span>
+                </a>
+              {% endif %}
+            {% else %}
+              <a class="dl-item" href="{{ url_for('download_file', token=d['token'], index=f.index) }}">
+                <span class="dl-ico">📄</span>
+                <span class="dl-name">{{ f.name }}</span>
+                <span class="dl-size">{{ f.size | filesize }}</span>
+                <span class="btn btn-primary btn-sm">받기</span>
+              </a>
+            {% endif %}
           {% endfor %}
           {% for l in links %}
             <a class="dl-item" href="{{ l.url }}" target="_blank" rel="noopener noreferrer">

@@ -1990,7 +1990,8 @@ def schedule_save():
 def settings():
     site = sc.load_site()
     if request.method == "GET":
-        return render_template("admin/settings.html", s=site)
+        return render_template("admin/settings.html", s=site,
+                           delivery_modes=sc.DELIVERY_MODES)
 
     f = request.form
     site["brand"] = sc.clean(f.get("brand"), 60) or site.get("brand", "오르티카영어")
@@ -2038,6 +2039,12 @@ def settings():
     mark["center"] = sc.clean(f.get("watermark_center"), 80)
     mark["optout_enabled"] = bool(f.get("watermark_optout_enabled"))
     mark["optout_price"] = max(0, min(200000, sc.to_int(f.get("watermark_optout_price"), 0)))
+
+    # 자료를 어떻게 내어 줄지 — 화면 인쇄 / 파일 받기
+    dv = site.setdefault("delivery", {})
+    mode = f.get("delivery_mode", "view")
+    dv["mode"] = mode if mode in sc.DELIVERY_MODES else "view"
+    dv["note"] = sc.clean(f.get("delivery_note"), 400)
 
     # 자동 할인 — 담은 개수 하나뿐입니다 (단골 할인은 없앴습니다)
     disc = site.setdefault("discount", {})

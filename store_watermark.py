@@ -129,3 +129,44 @@ def stamp(path: Path, footer: str, diagonal: str = "") -> bytes | None:
     except Exception as exc:                           # 이상한 파일이어도 판매는 멈추지 않습니다
         log.warning("워터마크를 넣지 못했습니다 (%s): %s", path.name, exc)
         return None
+
+
+# ---------------------------------------------------------------------------
+# 화면으로 보고 인쇄하기 — 파일을 내려받지 않고 그 자리에서 씁니다
+# ---------------------------------------------------------------------------
+VIEW_DPI = 170          # 인쇄해도 글씨가 또렷한 선. 더 올리면 느려집니다
+
+
+def page_count(blob: bytes) -> int:
+    """PDF 가 몇 쪽인지. 못 읽으면 0."""
+    try:
+        import pymupdf
+    except ImportError:
+        return 0
+    try:
+        with pymupdf.open(stream=blob, filetype="pdf") as doc:
+            return doc.page_count
+    except Exception as exc:
+        log.warning("PDF 쪽수를 못 읽었습니다: %s", exc)
+        return 0
+
+
+def page_image(blob: bytes, index: int, dpi: int = VIEW_DPI) -> bytes | None:
+    """PDF 한 쪽을 그림으로 바꿉니다. 화면에 띄우고 인쇄하는 데 씁니다.
+
+    그림으로 바꾸는 이유는 손님 브라우저에 PDF 파일 자체를 넘기지 않기
+    위해서입니다. (완전히 막을 수는 없습니다. 아래 주석을 봐 주세요)
+    """
+    try:
+        import pymupdf
+    except ImportError:
+        return None
+    try:
+        with pymupdf.open(stream=blob, filetype="pdf") as doc:
+            if not 0 <= index < doc.page_count:
+                return None
+            pix = doc[index].get_pixmap(dpi=dpi)
+            return pix.tobytes("png")
+    except Exception as exc:
+        log.warning("PDF 쪽을 그림으로 못 바꿨습니다: %s", exc)
+        return None

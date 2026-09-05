@@ -1005,6 +1005,22 @@ def sold_counts() -> dict[str, int]:
     return out
 
 
+# 자료를 어떻게 내어 줄지.
+#   view  = 화면에서 보고 인쇄만 (파일은 안 넘깁니다)
+#   both  = 화면에서 보기 + 파일 받기 둘 다
+#   file  = 예전처럼 파일만 받기
+DELIVERY_MODES = {
+    "view": "화면에서 보고 인쇄만",
+    "both": "보기 + 파일 받기 둘 다",
+    "file": "파일 받기만",
+}
+
+
+def delivery_mode(site: dict) -> str:
+    mode = (site.get("delivery") or {}).get("mode", "view")
+    return mode if mode in DELIVERY_MODES else "view"
+
+
 WATERMARK_MARKS = ["이름", "이메일", "주문번호", "브랜드", "날짜"]
 
 WATERMARK_DEFAULTS = {

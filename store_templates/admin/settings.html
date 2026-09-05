@@ -255,6 +255,31 @@
     주문서에서 깎이는 금액이 줄줄이 보입니다.
   </div>
 
+  <div class="adm-field full">
+    <label>자료를 어떻게 내어 줄까</label>
+    {% for k, label in delivery_modes.items() %}
+      <label class="check">
+        <input type="radio" name="delivery_mode" value="{{ k }}"
+               {{ 'checked' if (s.delivery.mode|default('view')) == k }}>
+        <span>{{ label }}</span>
+      </label>
+    {% endfor %}
+    <div class="tip">
+      <b>화면에서 보고 인쇄만</b> — 손님은 자료를 쪽마다 그림으로 보고 그 자리에서
+      인쇄합니다. PDF 파일이 손님 컴퓨터로 넘어가지 않습니다.
+      <b>ZIP·한글 파일은 화면에서 못 열어</b> 그대로 받습니다.<br>
+      다만 <b>브라우저의 'PDF로 저장' 인쇄까지 막지는 못합니다.</b>
+      새어 나가는 것을 실제로 막는 것은 <b>워터마크</b>입니다.
+    </div>
+  </div>
+
+  <div class="adm-field full">
+    <label for="delivery_note">받는 화면에 적을 안내</label>
+    <input type="text" id="delivery_note" name="delivery_note"
+           value="{{ s.delivery.note|default('') }}"
+           placeholder="자료는 이 화면에서 바로 인쇄하실 수 있습니다.">
+  </div>
+
   <div class="adm-field">
     <label class="check">
       <input type="checkbox" name="discount_count_enabled" value="1"

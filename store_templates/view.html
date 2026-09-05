@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}{{ name }} · {{ site.brand }}{% endblock %}
+{% block robots %}<meta name="robots" content="noindex, nofollow">{% endblock %}
+
+{% block body %}
+<section class="section no-print">
+  <div class="wrap">
+    <a class="back-link" href="{{ url_for('download_page', token=token) }}">← 받은 자료 목록</a>
+    <div class="section-head">
+      <h2>{{ name }}</h2>
+      <p>모두 <b>{{ pages }}쪽</b>입니다. 아래 <b>인쇄하기</b>를 누르시면 A4 로 그대로 나옵니다.
+        이 주소를 저장해 두시면 언제든 다시 들어와 인쇄하실 수 있습니다.</p>
+    </div>
+    <div class="hero-actions">
+      <button type="button" class="btn btn-primary" onclick="window.print()">인쇄하기</button>
+      {% if other %}
+        <span class="muted" style="align-self:center;">다른 자료 :</span>
+        {% for f in other %}
+          <a class="btn btn-ghost btn-sm"
+             href="{{ url_for('view_file', token=token, index=f.index) }}">{{ f.name }}</a>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <p class="muted" style="margin-top:14px;font-size:13.5px;">
+      인쇄 창에서 <b>배율을 '기본' 또는 '실제 크기'</b>로, <b>여백은 '없음'</b>으로 두시면
+      원본 그대로 나옵니다. 자료에는 사시는 분의 이름과 이메일이 새겨져 있습니다.
+    </p>
+  </div>
+</section>
+
+<div class="viewer">
+  {% for n in range(pages) %}
+    <div class="vpage">
+      <img src="{{ url_for('view_page', token=token, index=index, page=n) }}"
+           alt="{{ n + 1 }}쪽" loading="{{ 'eager' if n < 2 else 'lazy' }}"
+           draggable="false">
+      <span class="vno no-print">{{ n + 1 }} / {{ pages }}</span>
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+/* 그림을 끌어다 놓거나 오른쪽 단추로 저장하는 것을 막습니다.
+   (마음먹으면 못 막습니다. 손이 미끄러지는 것을 줄이는 정도입니다) */
+(function () {
+  var box = document.querySelector('.viewer');
+  if (!box) return;
+  ['contextmenu', 'dragstart'].forEach(function (ev) {
+    box.addEventListener(ev, function (e) { e.preventDefault(); });
+  });
+})();
+</script>
+{% endblock %}
