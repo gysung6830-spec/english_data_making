@@ -6,8 +6,35 @@ Passage 모델로 변환하는 어댑터(analyses_to_passages)를 제공한다. 
 """
 from __future__ import annotations
 
+import re
+
 from .models import Chunk, Passage, Sentence, Vocab
 from . import renderer
+
+# 라벨 접미사: 'NN-A' 의 'A', 'NN-1' 의 '1' 등
+_LABEL_SUFFIX = re.compile(r"-\s*([A-Za-z]+|\d+)\s*$")
+
+
+def _ortica_badge(label: str) -> str:
+    """마스터 lecture_label → ORTICA 뱃지 표기.
+
+    - '01-A' → 'A'      (알파벳 접미사는 그대로)
+    - '01-1' → '1번'    (숫자 접미사는 'N번')
+    - '01-2' → '2번'
+    - '서술형 Practice' → '서술형'
+    - '논술형 Practice' → '논술형'
+    - 그 외(범위 '41~42번' 등 포함)는 라벨 그대로.
+    """
+    s = (label or "").strip()
+    if not s:
+        return ""
+    # 'xxx Practice' 꼬리 제거 (서술형/논술형 등)
+    s = re.sub(r"\s*Practice\s*$", "", s, flags=re.IGNORECASE).strip()
+    m = _LABEL_SUFFIX.search(s)
+    if m:
+        suf = m.group(1)
+        return f"{int(suf)}번" if suf.isdigit() else suf
+    return s
 
 # 폼 키 → 렌더 함수 (ORTICA 양식 그대로)
 FORMS = {
@@ -53,7 +80,7 @@ def analyses_to_passages(analyses) -> list[Passage]:
         vocab = [Vocab(word=getattr(v, "word", ""), meaning=getattr(v, "meaning", ""))
                  for v in (getattr(a, "vocab", None) or [])
                  if getattr(v, "word", "")]
-        passages.append(Passage(label=getattr(a, "lecture_label", "") or "",
+        passages.append(Passage(label=_ortica_badge(getattr(a, "lecture_label", "") or ""),
                                 title=getattr(a, "title_ko", "") or getattr(a, "title_en", "") or "",
                                 sentences=sents, vocab=vocab))
     return passages

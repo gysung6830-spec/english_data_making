@@ -622,6 +622,33 @@ def test_ortica_forms_from_master():
     print("PASS  ORTICA 4종 양식 마스터 파생(한줄해석/한줄영어/좌지문우해석/직독직해)")
 
 
+def test_ortica_badge_label():
+    # 라벨 뱃지 표기: 01-A→A, 01-1→1번, 01-2→2번, 서술형/논술형 Practice→서술형/논술형
+    from src.worksheet.forms import _ortica_badge
+    assert _ortica_badge("01-A") == "A"
+    assert _ortica_badge("01-1") == "1번"
+    assert _ortica_badge("01-2") == "2번"
+    assert _ortica_badge("01-3") == "3번"
+    assert _ortica_badge("서술형 Practice") == "서술형"
+    assert _ortica_badge("논술형 Practice") == "논술형"
+    # 범위/일반 라벨은 그대로
+    assert _ortica_badge("41~42번") == "41~42번"
+    assert _ortica_badge("18") == "18"
+    assert _ortica_badge("") == ""
+
+    # 실제 렌더 뱃지에 반영되는지 (01-A → 'A', 01-1 → '1번')
+    from src.worksheet import forms as ws_forms
+    from src.worksheet.models import Analysis, Sentence, Token
+    a1 = Analysis(title_ko="가", lecture_label="01-A",
+                  sentences=[Sentence(index=1, lines=[[Token(text="Hi.")]], translation="안녕.")])
+    a2 = Analysis(title_ko="나", lecture_label="01-1",
+                  sentences=[Sentence(index=1, lines=[[Token(text="Bye.")]], translation="잘가.")])
+    html = ws_forms.render_form_html([a1, a2], "한줄해석", doc_name="교재")
+    assert ">교재 A<" in html and ">교재 1번<" in html
+    assert "01-A" not in html and "01-1" not in html
+    print("PASS  ORTICA 라벨 뱃지(01-A→A, 01-1→1번, Practice 제거)")
+
+
 def test_verify_analyses():
     # 자동 오류검증: 원문 대조(숫자 누락) + 내부 정합성(직독직해 정렬)
     from src.worksheet import verify
