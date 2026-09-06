@@ -246,7 +246,7 @@ def step2_passage(hl):
         if role == "skip":
             parts.append(f'<span class="sk">{esc(txt)}</span>')
         else:
-            inner = _mark_sentence(txt, seg.get("tags"), role in ("yellow", "gray"))
+            inner = _mark_sentence(txt, seg.get("tags"), role == "yellow", rel_cap=1, pol_cap=1)
             cls = "m" if role == "yellow" else "g"
             # 신호어 없는 노랑 = 시험장에서 미리 잡는 신호(위치·반복어·정의) 칩 표시
             pos = seg.get("pos")
@@ -542,15 +542,17 @@ def _slash_marked(chunks, marks):
     return joined
 
 
-def _dfull_en(chunks, tags):
+def _dfull_en(chunks, tags, mark_rel=True):
     """일반 유형 ①지문 영어 — 청크별로 신호(빨강)+관계어(파랑)+±어휘 마킹 후 슬래시로 연결.
-       각 신호 태그는 그 신호어(word)가 실제로 들어있는 청크에만 적용."""
+       각 신호 태그는 그 신호어(word)가 실제로 들어있는 청크에만 적용.
+       관계어·±(mark_rel)는 근거(노랑) 문장에만 — 부연(회색)엔 붙이지 않아 '정답 신호'만 남긴다."""
     SL = ' <span class="sl">/</span> '
     out = []
     for c in chunks:
         ctags = [t for t in (tags or [])
                  if t.get("word") and re.search(re.escape(t["word"]), c, re.I)]
-        out.append(_lit_post(_mark_sentence(_lit_pre(c), ctags, mark_rel=True)))
+        out.append(_lit_post(_mark_sentence(_lit_pre(c), ctags, mark_rel=mark_rel,
+                                            rel_cap=1, pol_cap=1)))
     return SL.join(out)
 
 
@@ -585,9 +587,12 @@ def _why_yellow(raw_en, signame, is_first, is_blank):
     return "일반 진술(구체 예가 아님)"
 
 
-def direct_full_block(data):
-    """전 문장 직독직해 해석카드 — 유형별 표시(노란줄/무관이탈/이음매신호줄/요약)."""
+def direct_full_block(data, num=None):
+    """전 문장 직독직해 해석카드 — 유형별 표시(노란줄/무관이탈/이음매신호줄/요약).
+       관계어·±는 근거(노랑) 문장에만 표시(원칙: 보이는 신호는 정답과 관련된 것만).
+       어휘(30)는 낱말 자체가 초점이라 지문 관계어·± 자동 마킹을 끈다(정답 낱말 극성은 정답 설명에서)."""
     kind = data.get("kind", "general")
+    is_vocab = (num == 30)
     rows_html = ""
     n = 0
     yc = 0  # 노랑 문장 순번 → ②'노랑①②③'와 매칭
@@ -604,8 +609,9 @@ def direct_full_block(data):
         role = r.get("role", "gray")
         sigchip = ""
         if kind in ("general", "summary"):
-            # 신호(빨강)+관계어(파랑)+±어휘 자동 마킹 + 슬래시 (옛 STEP2 신호 복원)
-            en = _dfull_en(r.get("en", []), r.get("tags", []))
+            # 신호(빨강)은 항상 · 관계어(파랑)+±어휘는 근거(노랑) 문장에만(어휘 유형은 끔)
+            _mrel = (role == "yellow") and not is_vocab
+            en = _dfull_en(r.get("en", []), r.get("tags", []), mark_rel=_mrel)
             ko = _slash(r.get("ko", []))
         else:
             marks = list(r.get("marks") or r.get("mark") or [])
@@ -1072,7 +1078,7 @@ def solution_block(rec, c, idx, tno=None):
         else:
             step3_tm = "🟡 전 문장"
             step3_head = "🟡 전 문장 직독직해 — <b>형광펜(무조건 읽을) 문장</b>은 노란 줄, 슬래시(/)로 끊어 읽기"
-        step3_body = direct_full_block(dfull)
+        step3_body = direct_full_block(dfull, num)
     elif seqd:
         step3_kind = "STEP 3 · 해석 (조각 잇기)"; step3_tm = "🔗 지시어·이음매"
         step3_head = ("🔗 조각별 해석 — <b>지시어가 가리키는 것</b>과 <b>어디에 붙는지</b>로 순서를 확인"
@@ -1101,7 +1107,8 @@ def solution_block(rec, c, idx, tno=None):
         ileg = ('<div class="ilegend"><span class="yl2">노란 형광펜</span>=무조건 읽을 문장 · '
                 '<span style="color:#79828c">회색</span>=배경·예시 · '
                 '<span class="tagm why" style="margin:0">∵ 왜 노랑</span>=<b>첫 읽기에 보이는 신호</b>(연결어·주장틀·도입) · '
-                '<span class="sigc sc-red" style="margin:0;padding:1px 6px">신호</span>=근거 신호어(색줄) · 슬래시(/)=의미 단위')
+                '<span class="sigc sc-red" style="margin:0;padding:1px 6px">신호</span>=근거 신호어(색줄) · '
+                '<span class="tag rel eq" style="font-size:7px">관계어</span>·<span class="tag pos" style="font-size:7px">±</span>=<b>근거(노랑) 문장에만</b> — 정답과 무관하면 표시 안 함 · 슬래시(/)=의미 단위')
         ileg += (' · <b>어려운 문장</b>은 <span style="color:#a86b00">뜻</span> 자연해석</div>')
         recon = '<div class="reconnote">※ 원본 선지 일부 유실 → 학습용 재구성(지문·정답은 기출 그대로).</div>' if c.get("recon_opts") else ""
         return f'''<div class="qsolution"><div class="card intg">
@@ -1109,7 +1116,7 @@ def solution_block(rec, c, idx, tno=None):
       <div class="itoc"><span class="itk">📑 카드 구성</span><span class="itp"><b>①</b> 지문 <em>직독직해</em></span><span class="itsep">›</span><span class="itp"><b>②</b> 노랑만으로 {'빈칸' if is_blank else '정답'} 도출</span><span class="itsep">›</span><span class="itp"><b>③</b> 정답 <span class="itans">{circ}</span></span></div>
       <div class="isec"><span class="in">1</span>지문 — 형광펜 문장 + 직독직해{blanknote}</div>
       {ileg}
-      {direct_full_block(dfull)}
+      {direct_full_block(dfull, num)}
       <div class="isec"><span class="in">2</span>노랑만으로 {'빈칸' if is_blank else '정답'} 도출</div>
       {reason_block}
       {pline}
