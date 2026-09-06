@@ -830,6 +830,25 @@ def save_notices(data: dict) -> None:
     save_json("notices.json", data)
 
 
+# 교재를 무엇으로 나누는지는 교재마다 다릅니다. 모의고사에 '강' 이라고 적으면
+# 선생님이 못 알아보십니다. 화면에 쓸 낱말을 여기서 한 번만 정합니다.
+# word 는 그냥 부를 때, count 는 숫자 뒤에 붙일 때 씁니다.
+# ("문항 구간이 필요하세요?" / "모두 6구간")
+UNIT_WORDS = {
+    "mock":     {"word": "문항 구간", "count": "구간"},
+    "textbook": {"word": "단원", "count": "단원"},
+}
+UNIT_WORD_DEFAULT = {"word": "강", "count": "강"}
+
+
+def unit_word(book: dict | None) -> dict:
+    """이 교재를 나누는 단위를 뭐라고 부를지. (강 · 단원 · 문항 구간)
+
+    세 낱말 모두 받침이 있어 조사는 '이' 와 '과' 로 고정입니다.
+    """
+    return UNIT_WORDS.get((book or {}).get("category", ""), UNIT_WORD_DEFAULT)
+
+
 def books_with_counts(catalog: dict, category: str = "") -> list[dict]:
     """교재별로 '그 교재에 속한 상품 수 / 최저가'를 붙여 돌려줍니다."""
     result = []

@@ -437,7 +437,7 @@ def book_detail(slug):
               if b["slug"] != slug][:3]
     grid = unit_grid(catalog, slug)
     return render_template("book.html", book=book, items=items, lanes=lanes,
-                           rest=rest, others=others,
+                           rest=rest, others=others, unit_word=sc.unit_word(book),
                            cart=set(session.get("cart") or []), **grid)
 
 

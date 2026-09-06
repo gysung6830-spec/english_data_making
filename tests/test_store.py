@@ -3031,10 +3031,62 @@ def test_analysis_tagline_updated():
     print("PASS  지문분석지 소개 문구")
 
 
+def test_every_book_has_unit_checkboxes():
+    """교재에 들어가면 어디서든 골라 담을 칸이 보여야 합니다."""
+    catalog = sc.load_catalog()
+    by_book = {}
+    for p in catalog["products"]:
+        if p.get("unit"):
+            by_book.setdefault(p["book"], set()).add(p["unit"])
+
+    # 교재마다 칸 수가 제각각이어야 합니다 (올린 파일대로 만들어지므로)
+    counts = {b: len(u) for b, u in by_book.items()}
+    assert len(set(counts.values())) > 1, counts
+
+    words = {"mock": "문항 구간", "textbook": "단원", "ebs": "강"}
+    for book in catalog["books"]:
+        page = body(client().get(f"/books/{book['slug']}"))
+        units = by_book.get(book["slug"])
+        if not units:
+            # 칸이 없으면 빈 화면 대신 이유를 말해야 합니다
+            assert "나눠 팔지 않습니다" in page, book["slug"]
+            continue
+        word = words.get(book.get("category"), "강")
+        assert f"필요한 {word}만 고르세요" in page, book["slug"]
+        assert f"모두 {len(units)}" in page, (book["slug"], len(units))
+        chips = page[page.index('id="unit-chips"'):page.index('id="kind-chips"')]
+        assert chips.count('class="chip"') == len(units), book["slug"]
+
+    # 모의고사는 '강' 이 아니라 문항 번호로 나눕니다
+    mock = body(client().get("/books/mock-2026-06-g3"))
+    assert "18~20번" in mock and "41~45번" in mock and "필요한 강만" not in mock
+    # 교과서는 Lesson
+    assert "Lesson 1" in body(client().get("/books/neungyule-kim"))
+    print("PASS  교재마다 칸 수가 다른 골라 담기 (강 · 단원 · 문항 구간)")
+
+
 def test_book_pick_grid():
     """자료 골라 담기 — 강 × 자료 종류 표에서 필요한 것만 담습니다."""
     import io as _io, zipfile
     a = admin()
+
+    # 예시 자료가 든 교재를 빌려 쓰면 강 수가 바뀔 때마다 테스트가 깨집니다.
+    # 이 테스트만 쓰는 교재를 세워 두고, 끝나면 지웁니다.
+    BOOK = "pick-test-book"
+    catalog = sc.load_raw_catalog()
+    catalog["books"] = [b for b in catalog["books"] if b.get("slug") != BOOK]
+    catalog["books"].append({"slug": BOOK, "name": "고르기 테스트 교재",
+                             "category": "textbook", "grade": "고1", "active": True,
+                             "publisher": "테스트", "sort": 900})
+    # 통권 상품도 두 개 — '전 강을 한 번에' 줄이 아래에 붙는지 보려는 것입니다
+    for pkg in ("analysis", "problem"):
+        catalog["products"].append({
+            "slug": f"{BOOK}-whole-{pkg}", "name": f"고르기 테스트 교재 전 단원 · {pkg}",
+            "category": "textbook", "book": BOOK, "package": pkg,
+            "materials": ["analysis" if pkg == "analysis" else "variants"],
+            "passages": 20, "price": 20000, "grade": "고1", "sort": 100,
+            "active": True, "format": "PDF (A4, 인쇄용)"})
+    sc.save_catalog(catalog)
 
     buf = _io.BytesIO()
     with zipfile.ZipFile(buf, "w") as zf:
@@ -3047,22 +3099,22 @@ def test_book_pick_grid():
     import re as _re
     token = _re.search(r'name="token" value="([^"]+)"', look).group(1)
     a.post("/admin/products/bulk/save", data={
-        "token": token, "book": "ybm-han", "passages": "10",
+        "token": token, "book": BOOK, "passages": "10",
         "path": ["1강_지문분석지.pdf", "1강_17종 변형문제.pdf",
                  "2강_지문분석지.pdf", "2강_17종 변형문제.pdf"]}, follow_redirects=True)
 
     # 교재에 들어가면 강 고르기가 바로 나옵니다 (따로 들어갈 필요 없이)
     c = client()
-    page = body(c.get("/books/ybm-han"))
-    assert "필요한 강만 고르세요" in page
-    assert "모두 2강" in page
+    page = body(c.get(f"/books/{BOOK}"))
+    assert "필요한 단원만 고르세요" in page      # 교과서라 '강' 이 아니라 '단원'
+    assert "모두 2단원" in page
     assert "1강" in page and "2강" in page                    # 줄
     assert "3개부터" in page and "10%" in page                 # 담은 개수 할인 안내
     # 칸은 '자료 종류' 가 아니라 패키지입니다 — 2강 × 2패키지 = 네 칸
     assert page.count('data-price=') == 4
 
     # 강이 한눈에 보이는 체크 칩으로 나옵니다 (표를 안 펴도 고를 수 있게)
-    assert "어떤 강이 필요하세요?" in page and "어떤 패키지가 필요하세요?" in page
+    assert "어떤 단원이 필요하세요?" in page and "어떤 패키지가 필요하세요?" in page
     chips = page[page.index('id="unit-chips"'):page.index('id="kind-chips"')]
     assert chips.count('class="chip"') == 2                  # 1강 · 2강
     assert "1강" in chips and "2강" in chips
@@ -3070,25 +3122,25 @@ def test_book_pick_grid():
     assert kind_chips.count('class="chip"') == 2             # 분석 · 문제
     assert page.count('class="ps-all"') == 2                 # 줄마다 '전체 고르기'
     # 한 칸에 자료가 여럿이면 함께 담깁니다
-    assert 'value="ybm-han-01-analysis"' in page
+    assert f'value="{BOOK}-01-analysis"' in page
     # 칸마다 고치는 표는 접어 둡니다
     assert "칸마다 하나씩 고르기" in page and "<details" in page
     # 교재 전체 상품은 강 고르기 아래에 놓입니다
-    assert page.index("필요한 강만 고르세요") < page.index("전 강을 한 번에")
+    assert page.index("필요한 단원만 고르세요") < page.index("전체를 한 번에")
     # 예전 주소는 그 자리로 보내 줍니다
-    moved = c.get("/books/ybm-han/pick")
+    moved = c.get(f"/books/{BOOK}/pick")
     assert moved.status_code == 302 and moved.headers["Location"].endswith("#pick")
 
     # 세 개를 담으면 10% 할인이 붙습니다
-    c.post("/cart/add", data={"slug": ["ybm-han-01-analysis", "ybm-han-01-variants",
-                                       "ybm-han-02-analysis"],
+    c.post("/cart/add", data={"slug": [f"{BOOK}-01-analysis", f"{BOOK}-01-variants",
+                                       f"{BOOK}-02-analysis"],
                               "next": "/cart"}, follow_redirects=True)
     q = c.get("/order/quote?cart=1").get_json()
     assert q["subtotal"] == 250*10 + 400*10 + 250*10
     assert q["rows"][0]["percent"] == 10
 
     # 이미 담은 것은 잠긴 채로 보입니다
-    again = body(c.get("/books/ybm-han"))
+    again = body(c.get(f"/books/{BOOK}"))
     assert again.count("checked disabled") == 3
 
     # 강 고르기 막대와 단어 고르기 막대는 이름이 달라야 합니다 (서로 덮어쓰지 않게)
@@ -3101,15 +3153,25 @@ def test_book_pick_grid():
         f"/words/{wb['slug']}/pick?unit={wb['units'][0]['id']}"))
     assert "unit-bar" not in words_page and "pick-bar" in words_page
 
-    # 강 단위 상품이 없는 교재는 강 고르기 없이 패키지만 보입니다
-    plain = body(client().get("/books/neungyule-kim"))
-    assert "필요한 강만 고르세요" not in plain
-    assert "이 교재의 자료" in plain and "data-price=" not in plain
+    # 강 단위 상품이 없는 교재는 강 고르기 대신 '왜 없는지' 를 말해 줍니다
+    catalog = sc.load_raw_catalog()
+    catalog["books"].append({"slug": "no-unit-book", "name": "통권만 있는 교재",
+                             "category": "textbook", "grade": "고1", "active": True,
+                             "sort": 901})
+    sc.save_catalog(catalog)
+    plain = body(client().get("/books/no-unit-book"))
+    assert "만 고르세요" not in plain and "data-price=" not in plain
+    assert "아직 단원별로 나눠 팔지 않습니다" in plain
+    assert "자료 요청" in plain                     # 빈 화면으로 두지 않습니다
+    catalog = sc.load_raw_catalog()
+    catalog["books"] = [b for b in catalog["books"] if b.get("slug") != "no-unit-book"]
+    sc.save_catalog(catalog)
 
     # 치우기
     catalog = sc.load_raw_catalog()
-    gone = [p["slug"] for p in catalog["products"] if p.get("book") == "ybm-han" and p.get("unit")]
+    gone = [p["slug"] for p in catalog["products"] if p.get("book") == BOOK]
     catalog["products"] = [p for p in catalog["products"] if p["slug"] not in gone]
+    catalog["books"] = [b for b in catalog["books"] if b.get("slug") != BOOK]
     sc.save_catalog(catalog)
     import shutil as _sh
     for slug in gone:
@@ -3121,6 +3183,16 @@ def test_bulk_products_from_zip():
     """압축 하나로 상품 여러 개를 만들고, 파일까지 붙어야 합니다."""
     import io as _io, zipfile
     a = admin()
+
+    # 예시 자료가 쓰는 교재를 빌려 쓰면 주소가 겹쳐 테스트가 흔들립니다.
+    # 이 테스트만 쓰는 교재를 하나 만들고, 끝나면 지웁니다.
+    BOOK = "zip-test-book"
+    catalog = sc.load_raw_catalog()
+    catalog["books"] = [b for b in catalog["books"] if b.get("slug") != BOOK]
+    catalog["books"].append({"slug": BOOK, "name": "압축 테스트 교재",
+                             "category": "ebs", "grade": "고3", "active": True,
+                             "publisher": "테스트", "sort": 900})
+    sc.save_catalog(catalog)
 
     page = body(a.get("/admin/products/bulk"))
     assert "압축 파일을 여기에 끌어다 놓으세요" in page
@@ -3146,7 +3218,7 @@ def test_bulk_products_from_zip():
 
     before = len(sc.load_raw_catalog()["products"])
     done = a.post("/admin/products/bulk/save", data={
-        "token": token, "book": "ebs-2026-wansung", "passages": "6",
+        "token": token, "book": BOOK, "passages": "6",
         "p_1": "8",                                        # 1강만 지문 8개
         "path": ["1강_지문분석지.pdf", "1강_17종 변형문제.pdf",
                  "2강/지문분석지.pdf", "Day 3 통합워크북.pdf"],
@@ -3156,25 +3228,26 @@ def test_bulk_products_from_zip():
     catalog = sc.load_raw_catalog()
     assert len(catalog["products"]) == before + 4
     made = {p["slug"]: p for p in catalog["products"]
-            if p.get("book") == "ebs-2026-wansung" and p.get("passages") in (6, 8)}
-    one = made["ebs-2026-wansung-01-analysis"]
+            if p.get("book") == BOOK and p.get("passages") in (6, 8)}
+    one = made[f"{BOOK}-01-analysis"]
     assert one["passages"] == 8 and one["price"] == 250 * 8       # 지문분석지 250원
     assert one["materials"] == ["analysis"] and one["package"] == "analysis"
     assert "1강 · 지문분석지" in one["name"]
-    assert made["ebs-2026-wansung-01-variants"]["price"] == 400 * 8
-    assert made["ebs-2026-wansung-02-analysis"]["passages"] == 6   # 기본값
-    assert made["ebs-2026-wansung-03-workbook"]["package"] == "problem"
+    assert made[f"{BOOK}-01-variants"]["price"] == 400 * 8
+    assert made[f"{BOOK}-02-analysis"]["passages"] == 6           # 기본값
+    assert made[f"{BOOK}-03-workbook"]["package"] == "problem"
 
     # 파일이 상품 폴더에 붙었어야 합니다
-    assert len(sc.product_files("ebs-2026-wansung-01-analysis")) == 1
+    assert len(sc.product_files(f"{BOOK}-01-analysis")) == 1
 
     # 손님 화면에도 바로 보입니다
-    page = body(client().get("/products/ebs-2026-wansung-01-analysis"))
+    page = body(client().get(f"/products/{BOOK}-01-analysis"))
     assert "1강 · 지문분석지" in page and "2,000원" in page
 
     # 치우기
     catalog["products"] = [p for p in catalog["products"]
                            if p["slug"] not in made]
+    catalog["books"] = [b for b in catalog["books"] if b.get("slug") != BOOK]
     sc.save_catalog(catalog)
     for slug in made:
         import shutil as _sh
@@ -3936,6 +4009,7 @@ def run_all():
     test_admin_pages_open()
     test_bulk_products_from_zip()
     test_book_pick_grid()
+    test_every_book_has_unit_checkboxes()
     test_admin_pricing_is_editable()
     test_product_form_offers_our_price()
     test_setup_checklist_guides_first_day()
