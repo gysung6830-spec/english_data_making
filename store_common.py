@@ -1864,6 +1864,24 @@ def locker_token(email: str) -> str:
     return token
 
 
+def reset_locker_token(email: str) -> str:
+    """자료함 열쇠를 새로 뽑습니다. 쓰던 주소는 그 자리에서 죽습니다.
+
+    이 사이트에는 비밀번호가 없습니다. 자료함 '주소' 가 곧 열쇠입니다. 그래서
+    주소가 새어 나갔을 때 손님이 스스로 잠글 방법이 하나는 있어야 합니다.
+    """
+    email = email.strip().lower()
+    token = secrets.token_urlsafe(20)
+    db = get_db()
+    cur = db.execute("UPDATE lockers SET token = ?, created_at = ? WHERE email = ?",
+                     (token, stamp(), email))
+    if cur.rowcount == 0:                 # 아직 자료함이 없던 분이면 새로 만듭니다
+        db.execute("INSERT INTO lockers (email, token, created_at) VALUES (?, ?, ?)",
+                   (email, token, stamp()))
+    db.commit()
+    return token
+
+
 def locker_email(token: str) -> str:
     """열쇠로 이메일 찾기. 없으면 빈 문자열."""
     row = get_db().execute("SELECT email FROM lockers WHERE token = ?", (token,)).fetchone()

@@ -914,6 +914,14 @@ input[type=file]{
 .up-table td small{margin-left:5px;}
 .up-foot{margin-top:12px; font-size:13px; color:var(--muted);}
 
+/* 내 자료함 — 주소가 곧 열쇠라는 안내 · 새 주소 받기 */
+.key-box{display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+  margin-top:26px; padding:16px 18px; border:1px solid var(--line);
+  border-radius:var(--r); background:var(--card); word-break:keep-all;}
+.key-box > div{flex:1; min-width:240px;}
+.key-box b{font-size:14.5px;}
+.key-box p{margin-top:4px; font-size:13.5px; color:var(--muted); line-height:1.65;}
+
 .plan-list{list-style:none; margin:0; padding:0; display:flex;
   flex-direction:column; gap:11px;}
 .plan-list li{display:flex; flex-direction:column; gap:2px;}
@@ -1375,6 +1383,9 @@ input[type=file]{
 }
 .toast a{margin-left:auto; font-weight:800; color:var(--brand); white-space:nowrap;
   padding:6px 0;}
+/* 잘못된 일은 초록이 아니라 주황으로 알립니다 */
+.toast-wrap:has(.toast-err){background:#fdf3e8; border-bottom-color:#f0d5b4;}
+.toast-err{color:#9a4a12;}
 
 /* 장바구니 — 전체로 바꾸면 싸집니다 */
 .full-offer{margin-bottom:18px; border:1px solid #cfe4d9; background:var(--brand-soft);}

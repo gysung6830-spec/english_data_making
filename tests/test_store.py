@@ -2007,6 +2007,38 @@ def test_locker_sits_next_to_the_cart():
     print("PASS  장바구니 · 내 자료함 · 자료 보러 가기 순")
 
 
+def test_email_is_not_an_id_and_the_key_can_be_changed():
+    """이메일은 아이디가 아닙니다. 자료함 열쇠는 주소이고, 새로 받을 수 있어야 합니다."""
+    mine = "locker-owner@example.com"
+    with store.app.app_context():
+        token = sc.locker_token(mine)
+
+    # 1) 남의 이메일을 알아도 열리지 않습니다 — 메일이 그쪽으로 갈 뿐입니다
+    page = body(client().post("/my", data={"email": mine}, follow_redirects=True))
+    assert token not in page, "이메일만 넣었는데 자료함 주소가 화면에 나왔습니다"
+    assert "아이디가 아니라" in page
+
+    # 2) 열쇠는 찍어서 맞힐 수 없는 길이여야 합니다
+    assert len(token) >= 24, token
+    assert client().get("/my/" + "z" * len(token)).status_code == 404
+
+    # 3) 주소가 새어 나갔을 때 손님이 스스로 잠글 수 있어야 합니다
+    opened = body(client().get(f"/my/{token}"))
+    assert "새 주소 받기" in opened and "주소가 곧 열쇠" in opened
+    resp = client().post(f"/my/{token}/reset", follow_redirects=False)
+    assert resp.status_code == 302, resp.status_code
+    fresh = resp.headers["Location"].rstrip("/").rsplit("/", 1)[-1]
+    assert fresh != token
+    assert client().get(f"/my/{token}").status_code == 404, "옛 주소가 아직 열립니다"
+    assert client().get(f"/my/{fresh}").status_code == 200
+    with store.app.app_context():
+        assert sc.locker_email(fresh) == mine
+
+    # 4) 없는 주소로는 새 주소를 만들 수 없습니다
+    assert client().post("/my/없는주소/reset").status_code == 404
+    print("PASS  이메일은 아이디가 아님 · 자료함 열쇠 바꾸기")
+
+
 def test_no_page_promises_pdf_by_email():
     """자료는 메일로 날아오지 않습니다. 그렇게 적힌 화면이 있으면 안 됩니다."""
     # 실제 동작: 입금 확인 → 주문 화면·내 자료함에서 바로 열림. 메일은 링크 백업.
@@ -3958,6 +3990,7 @@ def run_all():
     test_contact_has_no_phone()
     test_contact_page()
     test_locker_sits_next_to_the_cart()
+    test_email_is_not_an_id_and_the_key_can_be_changed()
     test_no_page_promises_pdf_by_email()
     test_file_comes_with_the_order_no_extra_charge()
     test_css_change_reaches_the_visitor()

@@ -1673,7 +1673,7 @@ def my_page():
             f"[{sc.load_site().get('brand', '오르티카영어')}] 내 자료함 주소",
             "\n".join(["받으신 자료를 한 곳에서 다시 받으실 수 있는 주소입니다.", "",
                         link, "",
-                        "이 주소는 바뀌지 않습니다. 즐겨찾기 해 두시면 언제든 다시 여실 수 있습니다.",
+                        "이 주소는 저절로 바뀌지 않습니다. 즐겨찾기 해 두시면 언제든 다시 여실 수 있습니다.",
                         "주소를 아는 사람은 누구나 열 수 있으니 남에게 알려 주지 마세요."]),
             to_addr=email)
     return render_template("my.html", form={}, errors=[], sent=True)
@@ -1692,6 +1692,30 @@ def my_locker(token):
                            token=token, mypass=mypass, sheets=sc.my_sheets(email),
                            pass_left=sc.pass_left(mypass),
                            pass_uses=sc.pass_history(mypass["id"]) if mypass else [])
+
+
+@app.route("/my/<token>/reset", methods=["POST"])
+def my_locker_reset(token):
+    """자료함 주소가 새어 나갔을 때 — 새 주소를 받고 옛 주소를 죽입니다.
+
+    이 사이트에는 비밀번호가 없고 주소가 곧 열쇠입니다. 그래서 손님이 스스로
+    잠글 수 있는 길을 하나 열어 둡니다. 누른 그 자리에서 새 주소로 옮겨 갑니다.
+    """
+    email = sc.locker_email(token)
+    if not email:
+        abort(404)
+    fresh = sc.reset_locker_token(email)
+    link = url_for("my_locker", token=fresh, _external=True)
+    sc.send_mail(
+        f"[{sc.load_site().get('brand', '오르티카영어')}] 내 자료함 주소를 새로 바꿨습니다",
+        "\n".join(["요청하신 대로 자료함 주소를 새로 바꿨습니다.", "",
+                    link, "",
+                    "쓰시던 옛 주소는 이제 열리지 않습니다.",
+                    "이 주소를 아는 사람은 누구나 열 수 있으니 남에게 알려 주지 마세요."]),
+        to_addr=email)
+    flash("자료함 주소를 새로 바꿨습니다. 옛 주소는 이제 열리지 않습니다. "
+          "새 주소를 메일로도 보내 드렸으니 즐겨찾기를 바꿔 두세요.", "ok")
+    return redirect(url_for("my_locker", token=fresh))
 
 
 @app.route("/d/<token>")

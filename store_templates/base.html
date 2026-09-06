@@ -101,14 +101,18 @@
   </div>
 </nav>
 
-{% with notes = get_flashed_messages() %}
+{# 담았을 때만 '장바구니 보기' 를 붙입니다. 시험지를 지웠거나 자료함 주소를
+   바꿨을 때 장바구니로 가라고 하면 엉뚱합니다. #}
+{% with notes = get_flashed_messages(with_categories=true) %}
   {% if notes %}
     <div class="toast-wrap">
       <div class="wrap">
-        {% for note in notes %}
-          <div class="toast">
+        {% for kind, note in notes %}
+          <div class="toast toast-{{ kind or 'ok' }}">
             <span>{{ note }}</span>
-            <a href="{{ url_for('cart') }}">장바구니 보기 ›</a>
+            {% if kind == 'cart' %}
+              <a href="{{ url_for('cart') }}">장바구니 보기 ›</a>
+            {% endif %}
           </div>
         {% endfor %}
       </div>

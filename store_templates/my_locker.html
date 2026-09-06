@@ -12,7 +12,7 @@
       <span class="eyebrow">내 자료함</span>
       <h2>받으신 자료를 다시 받으실 수 있습니다</h2>
       <p><b>{{ email }}</b> 로 주문하신 내역입니다.
-        이 화면 주소는 바뀌지 않습니다. <b>즐겨찾기 해 두세요.</b></p>
+        이 화면 주소는 저절로 바뀌지 않습니다. <b>즐겨찾기 해 두세요.</b></p>
     </div>
 
     <div class="locker-top no-print">
@@ -152,6 +152,21 @@
         <li>인쇄해서 <b>직접 가르치는 학생에게</b> 나눠 주시는 것은 괜찮습니다.
           다만 파일을 다른 분께 넘기시거나 인터넷에 올리시면 안 됩니다.</li>
       </ul>
+    </div>
+
+    {# 비밀번호가 없는 대신, 주소가 곧 열쇠입니다. 새어 나갔을 때 스스로
+       잠글 길이 하나는 있어야 합니다. #}
+    <div class="key-box no-print">
+      <div>
+        <b>이 화면 주소가 곧 열쇠입니다.</b>
+        <p class="mb-0">회원가입도 비밀번호도 없는 대신, <b>주소를 아는 사람은 누구나</b>
+          이 자료함을 열 수 있습니다. 메신저·단톡방에 그대로 붙여 넣지 마세요.
+          혹시 남에게 알려지셨다면 아래에서 <b>새 주소</b>를 받으실 수 있습니다.</p>
+      </div>
+      <form method="post" action="{{ url_for('my_locker_reset', token=token) }}"
+            onsubmit="return confirm('새 주소를 만들고 지금 주소는 잠급니다. 즐겨찾기도 다시 해 두셔야 합니다. 계속할까요?');">
+        <button class="btn btn-ghost btn-sm" type="submit">새 주소 받기</button>
+      </form>
     </div>
 
     <div class="hero-actions no-print" style="margin-top:26px;">
