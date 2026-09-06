@@ -1082,6 +1082,9 @@ def test_word_quiz():
     assert "A4 세로 6쪽" in page and "학생용 3쪽, 정답지 3쪽" in page
     assert page.count("/sheet/") == 6           # 쪽마다 그림 한 장씩 보여 줍니다
     assert "PDF 받기" in page and "인쇄하기" in page
+    # 인쇄는 PDF 를 새 창에 열어 줍니다 (모바일 앱 안에서는 window.print 가 없습니다)
+    assert "window.print()" not in page
+    assert page.count("/sheet.pdf?") == 2 and "open=1" in page
     for roman, title in (("Ⅰ", "영단어 → 우리말 뜻"), ("Ⅱ", "우리말 뜻 → 영단어"),
                          ("Ⅲ", "영단어 → 뜻 고르기")):
         assert f"{roman}." in text and title in text
@@ -2966,6 +2969,11 @@ def test_print_only_viewer():
     # 열쇠가 없으면 한 쪽도 못 봅니다
     assert client().get(f"/d/없는열쇠/page/{pdf_i}/0.png").status_code == 404
     assert client().get(f"/d/없는열쇠/view/{pdf_i}").status_code == 404
+
+    # 카카오톡·인스타 안 브라우저는 인쇄 명령이 없습니다. 길을 알려 줍니다.
+    assert "인쇄 창이 안 열리셨나요?" in view
+    assert "다른 브라우저로 열기" in view
+    assert "onclick=\"window.print()\"" not in view     # 눌러도 조용히 아무 일 없던 것
 
     # 인쇄하면 한 장에 한 쪽씩 나가야 합니다
     css = body(client().get("/static/store.css"))
