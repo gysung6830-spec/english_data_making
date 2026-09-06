@@ -1223,7 +1223,7 @@ label.dropzone{
 }
 
 
-/* 거르기 묶음 — 넓은 화면에서는 늘 펼쳐져 있고, 폰에서는 눌러서 폅니다 */
+/* 필터링 묶음 — 넓은 화면에서는 늘 펼쳐져 있고, 폰에서는 눌러서 폅니다 */
 .filterbar{margin-bottom:8px;}
 .filter-toggle{display:none;}
 .filter-sets{display:block;}

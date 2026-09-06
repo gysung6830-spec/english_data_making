@@ -1175,7 +1175,7 @@ def pass_use():
 
 @app.route("/free")
 def free():
-    """무료 자료실 — 회차·학년으로 걸러 봅니다."""
+    """무료 자료실 — 회차·학년으로 필터링해 봅니다."""
     data = sc.load_freebies()
     grade = sc.clean(request.args.get("grade"), 10)
     kind = sc.clean(request.args.get("kind"), 20)
@@ -1183,7 +1183,7 @@ def free():
     q = sc.clean(request.args.get("q"), 60)
 
     items = [x for x in data["items"] if sc.free_ready(x)]
-    # 거르기 버튼은 준비 중인 것까지 포함해 만들어 둡니다.
+    # 필터링 버튼은 준비 중인 것까지 포함해 만들어 둡니다.
     grades = sorted({x.get("grade", "") for x in data["items"] if x.get("grade")})
     exams = sorted({x.get("exam", "") for x in data["items"] if x.get("exam")}, reverse=True)
     if grade:

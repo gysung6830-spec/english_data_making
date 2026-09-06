@@ -182,7 +182,7 @@ def test_package_filter():
     only_problem = body(client().get("/products?package=problem"))
     assert chip("variants") in only_problem
     assert chip("analysis") not in only_problem
-    print("PASS  목록에서 패키지로 거르기")
+    print("PASS  목록에서 패키지로 필터링")
 
 
 def test_products_grouped_by_book():
@@ -200,7 +200,7 @@ def test_grade_filter_and_sort():
     """학년 버튼과 정렬 버튼이 실제로 걸러 주고 줄 세워야 합니다.
 
     학년은 모의고사에서만 씁니다. 교과서·EBS 부교재는 책 이름에 이미 학년이
-    들어 있어 학년 거르기가 군더더기입니다.
+    들어 있어 학년 필터링이 군더더기입니다.
     """
     mock = body(client().get("/products?category=mock"))
     assert '<span class="filter-label">학년</span>' in mock
@@ -2425,7 +2425,7 @@ def test_admin_creates_free_item_end_to_end():
     text = body(client().get("/free"))
     assert "고2 6월 모평 한줄해석" in text
 
-    # 종류로 거르기
+    # 종류로 필터링
     assert "고2 6월 모평 한줄해석" in body(client().get("/free?kind=oneline_ko"))
     assert "고2 6월 모평 한줄해석" not in body(client().get("/free?kind=literal"))
 
@@ -2527,7 +2527,7 @@ def test_free_search_and_filters():
 
     miss = body(client().get("/free?q=없는자료이름"))
     assert "조건에 맞는 자료가 없습니다" in miss
-    print("PASS  무료 자료실 검색 · 학년 · 종류 · 시험 거르기")
+    print("PASS  무료 자료실 검색 · 학년 · 종류 · 시험 필터링")
 
 
 def test_policy_sections_are_filled_in():
@@ -2928,7 +2928,7 @@ def test_lineup_shots_upload_and_show():
 
 
 def test_mobile_filters_collapse():
-    """폰에서 거르기 버튼이 접혀 있어야 첫 화면에 자료가 보입니다."""
+    """폰에서 필터링 버튼이 접혀 있어야 첫 화면에 자료가 보입니다."""
     for path in ("/products", "/free"):
         text = body(client().get(path))
         assert 'class="filter-toggle"' in text, path
@@ -2937,7 +2937,7 @@ def test_mobile_filters_collapse():
     # 학년은 모의고사 분류에서만 씁니다
     picked = body(client().get("/products?category=mock&grade=고1&order=price"))
     assert "고1 · 가격 낮은 순" in picked
-    print("PASS  폰에서 거르기 접기 · 고른 값 요약")
+    print("PASS  폰에서 필터링 접기 · 고른 값 요약")
 
 
 def test_long_pages_have_shortcuts():

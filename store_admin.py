@@ -1042,7 +1042,7 @@ def category_save():
                 c.pop("by_grade", None)
                 sc.save_catalog(catalog)
                 flash(f"분류 '{name}' 을(를) 저장했습니다."
-                      + (f" 손님 화면에 {sc.CATEGORY_SPLITS[split]} 거르기가 나옵니다."
+                      + (f" 손님 화면에 {sc.CATEGORY_SPLITS[split]} 필터링이 나옵니다."
                          if split else " 안을 더 가르지 않습니다."), "ok")
                 break
 
