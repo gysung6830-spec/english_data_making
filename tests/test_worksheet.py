@@ -1060,6 +1060,30 @@ def test_reading_alignment_heal_off_by_one():
     print("PASS  직독직해 off-by-one 자동 교정(영어 마지막 끊기 제거)")
 
 
+def test_heal_missing_english_slashes():
+    # 영어에 끊기가 하나도 없는데 한글은 여러 조각인 짧은 문장 교정.
+    from src.worksheet.analyzer import (_heal_missing_english_slashes,
+                                        _english_chunk_count, _reading_ko_aligned)
+    from src.worksheet.models import Token
+
+    # ① 영어 토큰 수 == 한글 조각 수(3==3) → 토큰마다 slash 로 1:1 정렬(청크 대조 살림)
+    lines = [[Token(text="Keep"), Token(text="your paragraphs"), Token(text="short.")]]
+    assert _english_chunk_count(lines) == 1
+    _heal_missing_english_slashes(lines, 3)
+    assert _english_chunk_count(lines) == 3
+    assert [t.text for t in lines[0] if t.slash] == ["Keep", "your paragraphs"]
+    out = _reading_ko_aligned(lines, ["짧게 유지하라", "당신의 문단을", "짧게"])
+    assert out == "짧게 유지하라 / 당신의 문단을 / 짧게"      # 3↔3 정렬
+
+    # ② 토큰 수 != 한글 조각 수 → 끊기 안 찍고, 연속 표기로 수렴(거짓 '/' 방지)
+    lines2 = [[Token(text="Human beings"), Token(text="want"), Token(text="to know.")]]
+    _heal_missing_english_slashes(lines2, 2)               # 토큰 3 != 한글 2
+    assert _english_chunk_count(lines2) == 1
+    out2 = _reading_ko_aligned(lines2, ["인간은", "알고 싶어 한다"])
+    assert out2 == "인간은 알고 싶어 한다" and " / " not in out2  # 연속 표기
+    print("PASS  영어 slash 누락 짧은 문장 정렬(토큰 일치 시 복구/불일치 시 연속표기)")
+
+
 def test_reading_alignment_detect():
     from src.worksheet import quality
 

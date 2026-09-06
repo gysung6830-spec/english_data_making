@@ -472,6 +472,8 @@ def _reading_ko_aligned(lines: list[list[Token]], chunks: list[str]) -> str:
         chunks = _merge_ko_weighted(chunks, sizes)
     if e >= 2 and abs(len(chunks) - e) >= 2:   # 여전히 크게 어긋남 → 연속 표기(슬래시 제거)
         return " ".join(chunks)
+    if e == 1 and len(chunks) >= 2:            # 영어에 끊기 없음(모델 누락) → 거짓 '/' 방지·연속 표기
+        return " ".join(chunks)
     return " / ".join(chunks)
 
 
@@ -492,6 +494,23 @@ def _heal_reading_short_by_one(lines: list[list[Token]], n_ko: int) -> list[list
     return lines
 
 
+def _heal_missing_english_slashes(lines: list[list[Token]], n_ko: int) -> list[list[Token]]:
+    """영어에 끊기(slash)가 하나도 없는데 한글은 여러 조각인 '짧은 문장' 정렬 교정.
+
+    모델이 짧은 문장에서 영어 slash 를 통째로 빠뜨리는 실수가 잦다(예: 'Keep your
+    paragraphs short.' ↔ '짧게 유지하라 / 당신의 문단을 / 짧게'). 영어 토큰 수 == 한글
+    조각 수일 때만 토큰 경계마다 slash 를 찍어 1:1 로 맞춘다(마지막 토큰 제외). 토큰 수가
+    다르면 건드리지 않고 _reading_ko_aligned 가 연속 표기로 처리한다(거짓 '/' 방지).
+    """
+    if n_ko < 2 or _english_chunk_count(lines) != 1:
+        return lines
+    toks = [t for ln in lines for t in ln if (t.text or "").strip()]
+    if len(toks) == n_ko:
+        for t in toks[:-1]:
+            t.slash = True
+    return lines
+
+
 def _to_sentence(index: int, sa: SentenceAnalysis) -> Sentence:
     # LLM 이 여러 줄로 쪼개 보내도 한 줄로 펼쳐 자연스럽게 흐르게(화면 폭에 맞춰 자동 줄바꿈).
     flat = [_tok(t) for ln in sa.lines for t in ln.tokens]
@@ -506,6 +525,8 @@ def _to_sentence(index: int, sa: SentenceAnalysis) -> Sentence:
     # 한글이 영어보다 1개 적으면 영어 마지막 끊기를 제거해 정렬(해석 손실 없음).
     _n_ko = len([c for c in reading if c and str(c).strip()])
     lines = _heal_reading_short_by_one(lines, _n_ko)
+    # 영어에 끊기가 없는데 한글은 여러 조각인 짧은 문장: 토큰 수가 맞으면 slash 로 정렬.
+    lines = _heal_missing_english_slashes(lines, _n_ko)
     return Sentence(
         index=index,
         lines=lines,
