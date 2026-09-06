@@ -276,11 +276,25 @@ def products():
         """자료의 갈래 값. 자료에 없으면 그 교재에서 가져옵니다."""
         return (item.get(field) or by_slug.get(item.get("book"), {}).get(field) or "")
 
+    def values_of(item) -> set[str]:
+        """그 값이 가리키는 갈래들. '고1~고2' 처럼 걸친 것은 나눠 봅니다.
+
+        통째로 '들어 있나' 로 보면 안 됩니다 — '영어1' 이 '공통영어1' 안에
+        들어 있어서, 영어1 을 고르면 공통영어1 까지 딸려 나옵니다.
+        """
+        return {v.strip() for v in value_of(item).split("~") if v.strip()}
+
     pick = sc.clean(request.args.get(field), 30) if field else ""
     if field:
-        split_values = sorted({v.strip() for p in catalog["products"]
-                               if p.get("category") == selected
-                               for v in value_of(p).split("~") if v.strip()})
+        # 실제로 자료가 있는 값
+        here = {v for p in catalog["products"]
+                if p.get("category") == selected for v in values_of(p)}
+        # 분류가 미리 정해 둔 값(교과서의 공통영어1·2 · 영어1·2)이 있으면 그 차례로
+        # 먼저 놓습니다. 자료가 아직 없는 과목도 보여야 무엇을 다루는 곳인지
+        # 드러나고, 없으면 요청으로 이어집니다.
+        listed = next((c.get("values") or [] for c in catalog.get("categories", [])
+                       if c.get("id") == selected), [])
+        split_values = list(listed) + sorted(here - set(listed))
     else:
         split_values = []
 
@@ -289,7 +303,7 @@ def products():
     if package:
         items = [p for p in items if p.get("package") == package]
     if pick:
-        items = [p for p in items if pick in value_of(p)]
+        items = [p for p in items if pick in values_of(p)]
     if q:
         # 교재 이름·출판사로도 찾히게 합니다. ("능률" 만 쳐도 그 교재 상품이 나오도록)
         needle = q.lower()

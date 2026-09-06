@@ -4,7 +4,13 @@
     {
       "id": "textbook",
       "name": "교과서",
-      "split": "subject"
+      "split": "subject",
+      "values": [
+        "공통영어1",
+        "공통영어2",
+        "영어1",
+        "영어2"
+      ]
     },
     {
       "id": "mock",

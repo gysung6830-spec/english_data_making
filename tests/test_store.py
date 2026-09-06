@@ -169,6 +169,43 @@ def test_sibling_package_cross_sell():
     print("PASS  짝 패키지 서로 권하기")
 
 
+def test_textbook_subjects_are_the_four():
+    """교과서는 공통영어1 · 공통영어2 · 영어1 · 영어2 로 나눕니다."""
+    from urllib.parse import quote
+    page = body(client().get("/products?category=textbook"))
+    want = ["공통영어1", "공통영어2", "영어1", "영어2"]
+    at = [page.find("subject=" + quote(v)) for v in want]
+    assert all(i > 0 for i in at), at          # 자료가 아직 없는 과목도 보입니다
+    assert at == sorted(at), "적어 둔 차례대로 나와야 합니다"
+
+    # '영어1' 을 골랐는데 '공통영어1' 이 딸려 나오면 안 됩니다
+    one = body(client().get("/products?category=textbook&subject=영어1"))
+    assert "등록된 자료가 없습니다" in one, "이름이 겹쳐 딸려 나왔습니다"
+    common = body(client().get("/products?category=textbook&subject=공통영어1"))
+    assert "능률(김성곤) 공통영어 1" in common
+
+    # 학년처럼 '고1~고2' 로 걸친 값은 그대로 두 갈래에 다 걸립니다
+    with store.app.app_context():
+        catalog = sc.load_raw_catalog()
+    keep = {x["slug"]: x.get("grade") for x in catalog["products"]
+            if x.get("book") == "mock-2026-03-g2"}
+    for x in catalog["products"]:
+        if x.get("book") == "mock-2026-03-g2":
+            x["grade"] = "고1~고2"
+    sc.save_catalog(catalog)
+    try:
+        for g in ("고1", "고2"):
+            got = body(client().get(f"/products?category=mock&grade={g}"))
+            assert "2026년 3월 학력평가" in got, g
+    finally:
+        catalog = sc.load_raw_catalog()
+        for x in catalog["products"]:
+            if x["slug"] in keep:
+                x["grade"] = keep[x["slug"]]
+        sc.save_catalog(catalog)
+    print("PASS  교과서 과목 네 가지 · 이름이 겹쳐도 안 딸려 나옴")
+
+
 def test_package_filter():
     """패키지로 거르면 그 갈래에 든 자료만 남아야 합니다."""
     # 교재 칸에 걸리는 자료 딱지로 봅니다 (안내 문구에도 같은 말이 나오니
@@ -4299,6 +4336,7 @@ def run_all():
     test_admin_edits_exam_schedule()
     test_two_packages_per_book()
     test_sibling_package_cross_sell()
+    test_textbook_subjects_are_the_four()
     test_package_filter()
     test_products_grouped_by_book()
     test_grade_filter_and_sort()
