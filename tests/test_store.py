@@ -3058,20 +3058,21 @@ def test_every_book_has_unit_checkboxes():
         chips = page[page.index('id="unit-chips"'):]
         assert chips.count('class="ur-pick chip"') == len(units), book["slug"]
 
-    # 낱개로 파는 것은 EBS 부교재뿐입니다
-    assert set(by_book) == {b["slug"] for b in catalog["books"]
-                            if b.get("category") == "ebs" and b["slug"] in by_book}
-    assert all(b.get("category") == "ebs"
-               for b in catalog["books"] if b["slug"] in by_book), by_book
+    # 낱개로 파는 것은 EBS 부교재(강)와 교과서(단원)뿐 — 모의고사는 회차가 한 묶음
+    kinds = {b.get("category") for b in catalog["books"] if b["slug"] in by_book}
+    assert kinds <= {"ebs", "textbook"}, kinds
+    assert "mock" not in kinds
 
     # 모의고사는 한 회차씩 팝니다 — 문항 번호로 쪼개지 않습니다
     mock = body(client().get("/books/mock-2026-06-g3"))
     assert "한 회차씩" in mock and "18~20번" not in mock
     assert 'id="unit-chips"' not in mock and "고르세요" not in mock
-    # 교과서도 한 학기 통째로
+
+    # 교과서는 단원별로 고릅니다
     textbook = body(client().get("/books/neungyule-kim"))
-    assert "한 학기 분량을 통째로" in textbook and "Lesson 1" not in textbook
-    print("PASS  낱개로 파는 것은 EBS 부교재만 (모의고사는 회차 · 교과서는 학기)")
+    assert "필요한 단원만 고르세요" in textbook and "Lesson 1" in textbook
+    assert "모두 8단원" in textbook
+    print("PASS  강(부교재) · 단원(교과서) 낱개 · 모의고사는 회차 한 묶음")
 
 
 def test_book_pick_grid():
@@ -3176,7 +3177,7 @@ def test_book_pick_grid():
     sc.save_catalog(catalog)
     plain = body(client().get("/books/no-unit-book"))
     assert "만 고르세요" not in plain and "data-price=" not in plain
-    assert "한 학기 분량을 통째로" in plain      # 교과서는 통권으로 팝니다
+    assert "단원별로 나눠 팔지 않습니다" in plain     # 왜 없는지 말해 줍니다
     assert "자료 요청" in plain                     # 빈 화면으로 두지 않습니다
     catalog = sc.load_raw_catalog()
     catalog["books"] = [b for b in catalog["books"] if b.get("slug") != "no-unit-book"]
