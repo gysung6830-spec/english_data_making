@@ -1266,6 +1266,41 @@ def shot_files(mid: str) -> list[str]:
                   and f.suffix.lower() in IMAGE_EXTS)
 
 
+SHOT_THUMB_W = 560          # 첫 화면 타일에 걸 그림의 가로
+SHOT_THUMB_RATIO = 4 / 3    # 지면 윗부분만 이 비율로 자릅니다
+
+
+def shot_thumb(mid: str) -> Path | None:
+    """지면 사진의 **윗부분**만 잘라 작게 만든 판. 없으면 만들고, 있으면 그대로 씁니다.
+
+    A4 한 장을 통째로 줄이면 글씨가 뭉개져 회색 얼룩이 됩니다. 제목과 첫
+    몇 줄이 보이도록 위쪽만 잘라야 '무슨 자료인지' 가 작아도 읽힙니다.
+    원본은 건드리지 않습니다.
+    """
+    names = shot_files(mid)
+    if not names:
+        return None
+    src = shot_dir(mid) / names[0]
+    out = DATA_DIR / ".cache" / "thumb" / f"{mid}.webp"
+    try:
+        if out.exists() and out.stat().st_mtime >= src.stat().st_mtime:
+            return out
+        from PIL import Image
+        out.parent.mkdir(parents=True, exist_ok=True)
+        with Image.open(src) as im:
+            im = im.convert("RGB")
+            want_h = int(im.width / SHOT_THUMB_RATIO)
+            im = im.crop((0, 0, im.width, min(want_h, im.height)))
+            if im.width > SHOT_THUMB_W:
+                im = im.resize((SHOT_THUMB_W, round(im.height * SHOT_THUMB_W / im.width)),
+                               Image.LANCZOS)
+            im.save(out, "WEBP", quality=78, method=5)
+        return out
+    except Exception as exc:                 # 그림이 없어도 첫 화면은 떠야 합니다
+        log.warning("지면 사진을 줄이지 못했습니다 (%s): %s", mid, exc)
+        return None
+
+
 # 압축 파일 안의 PDF 이름에서 '몇 강' 과 '무슨 자료' 인지 읽어 냅니다.
 # 파일 이름이 제각각이라 별칭을 넉넉히 둡니다.
 MATERIAL_ALIASES = {

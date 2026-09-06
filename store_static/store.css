@@ -538,6 +538,18 @@ input[type=file]{
 .mat-tile .sig{align-self:flex-start; font-size:10.5px; padding:1px 8px;}
 .mat-tile b{font-size:16.5px; letter-spacing:-.02em;}
 .mat-tile small{color:var(--muted); font-size:13.5px; line-height:1.55;}
+/* 지면 사진이 있는 타일 — 사진이 위, 글이 아래. 사진이 곧 상품 설명입니다. */
+.mat-tile.has-shot{padding:0; overflow:hidden; gap:0;}
+.mt-shot{display:block; position:relative; background:#fff;
+  border-bottom:1px solid var(--line);}
+.mt-shot img{display:block; width:100%; height:auto; aspect-ratio:4/3;
+  object-fit:cover; object-position:top center;}
+/* 아래로 갈수록 옅게 — 잘린 자리가 툭 끊겨 보이지 않게 합니다. */
+.mt-shot::after{content:""; position:absolute; left:0; right:0; bottom:0; height:38%;
+  background:linear-gradient(to bottom, rgba(255,255,255,0), #fff); pointer-events:none;}
+.mt-body{display:flex; flex-direction:column; gap:6px; padding:14px 18px 18px;}
+.mat-tile.has-shot:hover .mt-shot img{transform:scale(1.02);}
+.mt-shot img{transition:transform .18s;}
 
 /* 라인업에서 한 묶음만 진한 초록으로 (시그니처 자료 지면처럼) */
 .lineup-group.dark{

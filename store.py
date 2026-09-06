@@ -176,7 +176,9 @@ def home():
     products = catalog["products"]
     notices = sc.load_notices()["notices"]
     groups = sc.grouped_materials()
-    all_materials = [m for g in groups for m in g["items"]]
+    # 지면 사진이 있는 자료는 첫 화면에 그림으로 걸어 줍니다
+    all_materials = [dict(m, shot=bool(sc.shot_files(m["id"])))
+                     for g in groups for m in g["items"]]
     # 무료 자료 — 받을 수 있는 것만 최신 세 건
     free_items = [x for x in sc.load_freebies()["items"] if sc.free_ready(x)][:3]
     free_ready_count = sum(1 for p in products
@@ -1170,6 +1172,17 @@ def lineup_shot(mid, filename):
     if target.suffix.lower() not in sc.IMAGE_EXTS:
         abort(404)
     return send_from_directory(folder, filename, max_age=86400)
+
+
+@app.route("/lineup/thumb/<mid>.webp")
+def lineup_thumb(mid):
+    """첫 화면 타일에 거는 작은 지면 사진. 지면 윗부분만 잘라 놓은 것입니다."""
+    if mid not in sc.material_map():
+        abort(404)
+    thumb = sc.shot_thumb(mid)
+    if thumb is None:
+        abort(404)
+    return send_from_directory(thumb.parent, thumb.name, max_age=86400 * 7)
 
 
 # ---------------------------------------------------------------------------

@@ -146,11 +146,20 @@
     </div>
     <div class="grid grid-4">
       {% for m in lineup_all %}
-        <a class="mat-tile" href="{{ url_for('lineup') }}#{{ m.id }}">
-          <span class="mat-no">{{ m.no }}</span>
-          {% if m.signature %}<span class="sig">SIGNATURE</span>{% endif %}
-          <b>{{ m.name }}</b>
-          <small>{{ m.tagline }}</small>
+        <a class="mat-tile{{ ' has-shot' if m.shot }}" href="{{ url_for('lineup') }}#{{ m.id }}">
+          {% if m.shot %}
+            {# 지면을 보여 주는 게 이름을 부르는 것보다 훨씬 잘 팔립니다. #}
+            <span class="mt-shot">
+              <img src="{{ url_for('lineup_thumb', mid=m.id) }}" alt="{{ m.name }} 지면"
+                   width="560" height="420" loading="lazy" decoding="async">
+            </span>
+          {% endif %}
+          <span class="mt-body">
+            <span class="mat-no">{{ m.no }}</span>
+            {% if m.signature %}<span class="sig">SIGNATURE</span>{% endif %}
+            <b>{{ m.name }}</b>
+            <small>{{ m.tagline }}</small>
+          </span>
         </a>
       {% endfor %}
     </div>

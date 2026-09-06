@@ -1853,6 +1853,40 @@ def test_locker_sits_next_to_the_cart():
     print("PASS  내 자료함이 장바구니 옆에")
 
 
+def test_home_shows_real_pages_not_just_names():
+    """첫 화면 자료 타일에 실제 지면 사진을 겁니다. 이름만 부르면 안 팔립니다."""
+    from PIL import Image
+    import io as _io
+    mid = "analysis"
+    folder = sc.shot_dir(mid)
+    folder.mkdir(parents=True, exist_ok=True)
+    src = folder / "01.png"
+    Image.new("RGB", (1076, 1369), (250, 250, 250)).save(src)
+
+    # 지면 윗부분만 잘라 작게 만든 판이 생깁니다
+    thumb = sc.shot_thumb(mid)
+    assert thumb is not None and thumb.exists()
+    with Image.open(thumb) as im:
+        assert im.width <= sc.SHOT_THUMB_W
+        assert abs(im.width / im.height - sc.SHOT_THUMB_RATIO) < 0.02   # 4:3 로 잘림
+    assert thumb.stat().st_size < src.stat().st_size, "원본보다 커졌습니다"
+    assert src.exists(), "원본을 건드리면 안 됩니다"
+
+    got = client().get(f"/lineup/thumb/{mid}.webp")
+    assert got.status_code == 200 and got.data[:4] == b"RIFF"     # webp
+    assert "max-age" in got.headers.get("Cache-Control", "")
+    assert client().get("/lineup/thumb/없는자료.webp").status_code == 404
+
+    home = body(client().get("/"))
+    assert f"/lineup/thumb/{mid}.webp" in home
+    assert 'class="mt-shot"' in home and 'loading="lazy"' in home
+    # 사진이 없는 자료는 예전처럼 글만 나옵니다
+    assert 'class="mat-tile"' in home or "has-shot" in home
+
+    src.unlink()
+    print("PASS  첫 화면 자료 타일에 실제 지면 사진")
+
+
 def test_lineup_takes_the_home_middle():
     """첫 화면 가운데는 자료 목록이 아니라 오르티카 라인업입니다."""
     home = body(client().get("/"))
@@ -3509,6 +3543,7 @@ def run_all():
     test_clear_sample_data()
     test_contact_page()
     test_locker_sits_next_to_the_cart()
+    test_home_shows_real_pages_not_just_names()
     test_lineup_takes_the_home_middle()
     test_menu_has_no_duplicates()
     test_mobile_quick_bar()
