@@ -1137,6 +1137,62 @@ def test_word_quiz():
     print("PASS  단어 시험지 — 붙여넣기 → 범위·유형 · 단어 골라서 → 학생용 + 정답지")
 
 
+def test_make_screen_four_steps():
+    """단어장 만들기 — 교재 · 어휘 · 설정 · 미리보기를 한 화면에서."""
+    a = admin()
+    a.post("/admin/words/new", data={"name": "make test book"}, follow_redirects=True)
+    for no, pairs in ((1, [("alpha", "첫째"), ("beta", "둘째"), ("gamma", "셋째")]),
+                      (2, [("delta", "넷째"), ("epsilon", "다섯째"), ("zeta", "여섯째")])):
+        a.post("/admin/words/make-test-book/unit",
+               data={"unit_name": f"{no}강",
+                     "words": "\n".join(f"{e}\t{k}" for e, k in pairs)},
+               follow_redirects=True)
+
+    page = body(client().get("/words/make-test-book/make"))
+    for step in ("STEP 1", "STEP 2", "STEP 3", "STEP 4"):
+        assert step in page, step
+    assert "교재 선택" in page and "어휘 선택" in page
+    assert "시험지 설정" in page and "미리보기" in page
+    assert "1강" in page and "2강" in page                      # 왼쪽 범위
+    assert page.count('class="w-box"') == 6                    # 단어 여섯 개
+    for label in sc.QUIZ_KINDS.values():
+        assert label in page                                    # 유형 세 가지
+    assert "담은 어휘" in page and "랜덤으로 담기" in page
+
+    # 단어장 목록에서 이 화면으로 옵니다
+    assert "/make" in body(client().get("/words"))
+
+    # ---- 단어마다 유형을 정해 시험지를 냅니다 --------------------------
+    url = ("/words/make-test-book/sheet?en_ko=0,1&ko_en=2,3&choice=4&seed=99"
+           "&title=만들기+시험")
+    text = sheet_text(url)
+    assert "만들기 시험" in text
+    assert "총 2문항" in text and "총 1문항" in text
+    # 유형마다 정해 준 단어가 그 자리에 갑니다
+    lines = text.split("Ⅱ.")
+    assert "alpha" in lines[0] and "beta" in lines[0]           # Ⅰ. 영단어 → 뜻
+    assert "셋째" in lines[1] and "넷째" in lines[1]             # Ⅱ. 뜻 → 영단어
+    assert sheet_pages(url) == 6                               # 세 유형 × 학생용·정답지
+
+    # 같은 번호면 같은 시험지
+    assert sheet_text(url) == text
+
+    # 쪽수를 물어보는 자리 (미리보기가 몇 장 걸지 정할 때 씁니다)
+    got = client().get(url.replace("/sheet?", "/sheet/pages.json?")).get_json()
+    assert got["pages"] == 6
+
+    # 시험지 화면의 링크에도 고른 단어가 그대로 실립니다
+    made = body(client().get(url))
+    assert "en_ko=0%2C1" in made or "en_ko=0,1" in made
+    assert "PDF 받기" in made
+
+    # 없는 번호는 조용히 버립니다
+    assert sheet_pages("/words/make-test-book/sheet?en_ko=0,999,-3&seed=1") == 2
+
+    a.post("/admin/words/make-test-book/delete", follow_redirects=True)
+    print("PASS  단어장 만들기 — 네 단계 · 단어마다 유형 · 바로 미리보기")
+
+
 def test_word_counts_per_kind_and_cap():
     """문항 수는 유형마다 따로. 다 더해 500문항까지."""
     a = admin()
@@ -3402,6 +3458,7 @@ def run_all():
     test_request_menu_renamed_to_jaryo()
     # 예시 데이터를 지우는 테스트는 다른 테스트가 그 상품을 쓰므로 맨 뒤에 둡니다.
     test_word_quiz()
+    test_make_screen_four_steps()
     test_word_counts_per_kind_and_cap()
     test_word_file_upload()
     test_sheet_heading()

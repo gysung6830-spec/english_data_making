@@ -16,7 +16,7 @@
     {% if books %}
       <div class="grid grid-3">
         {% for b in books %}
-          <a class="wb-card" href="{{ url_for('words_book', slug=b.slug) }}">
+          <a class="wb-card" href="{{ url_for('words_make', slug=b.slug) }}">
             <span class="wb-pub">{{ b.publisher or '단어장' }}</span>
             <b>{{ b.name }}</b>
             <span class="wb-meta">

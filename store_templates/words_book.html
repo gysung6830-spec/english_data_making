@@ -6,6 +6,11 @@
 <section class="section">
   <div class="wrap narrow">
     <a class="back-link" href="{{ url_for('words_page') }}">← 단어장 목록</a>
+    <p class="mk-jump">
+      <a class="btn btn-ghost btn-sm" href="{{ url_for('words_make', slug=b.slug) }}">
+        단어를 하나하나 골라 만들기 →</a>
+    </p>
+
     <div class="section-head">
       <h2>{{ b.name }}</h2>
       <p>{{ b['units']|length }}강 · 단어 {{ '{:,}'.format(total) }}개.

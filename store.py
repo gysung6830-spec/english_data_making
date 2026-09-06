@@ -1256,6 +1256,65 @@ def build_quiz(words: list[dict], kinds: list[str], counts: dict, seed: int) -> 
     return sections
 
 
+def build_quiz_picked(flat: list[dict], picks: dict[str, list[int]], seed: int) -> list[dict]:
+    """단어마다 유형을 따로 정해 두었을 때 쓰는 길.
+
+    picks = {"en_ko": [3, 7, 12], "ko_en": [1], "choice": [5, 9]} 처럼
+    **단어 번호**를 유형별로 받습니다. 어떤 단어를 어느 유형으로 낼지
+    선생님이 직접 정하신 것이라, 여기서는 순서만 섞고 그대로 냅니다.
+    """
+    rng = random.Random(seed)
+    pool = [flat[i] for ids in picks.values() for i in ids if 0 <= i < len(flat)]
+    sections = []
+    for idx, kind in enumerate(k for k in sc.QUIZ_KINDS if picks.get(k)):
+        chunk = [flat[i] for i in picks[kind] if 0 <= i < len(flat)]
+        if not chunk:
+            continue
+        random.Random(seed + idx * 977).shuffle(chunk)
+        title, guide = SECTION_GUIDE[kind]
+        items = []
+        for no, w in enumerate(chunk, 1):
+            item = {"no": f"{no:02d}", "en": w["en"], "ko": w["ko"], "kind": kind}
+            if kind == "ko_en":
+                item["hint"] = w["en"][:1].lower()
+            if kind == "choice":
+                # 보기는 이번 시험지에 든 단어들에서 뽑습니다. 모자라면 교재 전체에서.
+                others = [x["ko"] for x in (pool if len(pool) >= 5 else flat)
+                          if x["ko"] != w["ko"]]
+                rng.shuffle(others)
+                choose = [w["ko"]] + others[:4]
+                rng.shuffle(choose)
+                item["choices"] = choose
+                item["answer_no"] = choose.index(w["ko"]) + 1
+            items.append(item)
+        sections.append({"kind": kind, "roman": ROMAN[len(sections) % len(ROMAN)],
+                         "title": title, "guide": guide, "items": items,
+                         "hinted": kind == "ko_en"})
+    return sections
+
+
+def read_picks(flat_len: int) -> dict[str, list[int]]:
+    """주소에서 유형별 단어 번호를 읽습니다. (en_ko=0,3,7&ko_en=1,5)
+
+    같은 단어를 두 유형에 넣으실 수도 있습니다 — 방향만 바꿔 두 번 묻는
+    보통의 단어 시험지가 그렇습니다.
+    """
+    out: dict[str, list[int]] = {}
+    for kind in sc.QUIZ_KINDS:
+        raw = request.args.get(kind, "")
+        if not raw:
+            continue
+        seen, ids = set(), []
+        for part in raw.split(",")[:QUIZ_MAX]:
+            i = sc.to_int(part, -1)
+            if 0 <= i < flat_len and i not in seen:
+                seen.add(i)
+                ids.append(i)
+        if ids:
+            out[kind] = ids
+    return out
+
+
 @app.route("/words")
 def words_page():
     """단어 시험지 만들기 — 단어장 고르기."""
@@ -1272,6 +1331,26 @@ def words_book(slug):
         abort(404)
     return render_template("words_book.html", b=book, kinds=sc.QUIZ_KINDS,
                            total=sc.word_count(book), defaults=QUIZ_DEFAULT, cap=QUIZ_MAX)
+
+
+@app.route("/words/<slug>/make")
+def words_make(slug):
+    """단어 시험지 만들기 — 교재 · 어휘 · 설정 · 미리보기를 한 화면에서.
+
+    강을 고르면 단어가 뜨고, 단어마다 어느 유형으로 낼지 정합니다.
+    오른쪽에 담은 것이 쌓이고, 아래에서 바로 미리 봅니다.
+    """
+    book = sc.find_wordbook(slug)
+    if book is None:
+        abort(404)
+    rows = flat_words(book)
+    if not rows:
+        return redirect(url_for("words_book", slug=slug))
+    return render_template("words_make.html", b=book, rows=rows,
+                           units=book["units"], kinds=sc.QUIZ_KINDS,
+                           books=[x for x in sc.load_words()["books"]
+                                  if x["slug"] != slug and sc.word_count(x)],
+                           cap=QUIZ_MAX, total=len(rows))
 
 
 @app.route("/words/<slug>/pick")
@@ -1292,6 +1371,19 @@ def words_pick(slug):
                            units=[u for u in book["units"] if u["id"] in unit_ids])
 
 
+def read_head() -> dict:
+    """시험지 맨 위에 넣을 것 — 모두 선택입니다. 비우면 기본 모양으로 나옵니다."""
+    head = {
+        "place": sc.clean(request.args.get("place"), 40),      # 학원 · 학교 이름
+        "title": sc.clean(request.args.get("title"), 60),      # 시험지 제목
+        "date": sc.clean(request.args.get("date"), 30),        # 날짜 (적어 넣기)
+        "dateblank": request.args.get("dateblank") == "1",     # 날짜를 빈칸으로
+    }
+    if head["dateblank"]:
+        head["date"] = ""
+    return head
+
+
 def _sheet_spec(slug):
     """주소에 담긴 범위·유형·문항 수를 읽어 시험지 한 벌을 짭니다.
 
@@ -1307,6 +1399,24 @@ def _sheet_spec(slug):
     if not unit_ids:
         unit_ids = [book["units"][0]["id"]]
     kinds = [k for k in request.args.getlist("kind") if k in sc.QUIZ_KINDS] or ["en_ko"]
+
+    # 단어마다 유형을 정해 두셨으면(만들기 화면) 그대로 냅니다.
+    flat = flat_words(book)
+    picks = read_picks(len(flat))
+    if picks:
+        seed = sc.to_int(request.args.get("seed"), 0) or random.randrange(1, 999999)
+        sections = build_quiz_picked(flat, picks, seed)
+        if not sections:
+            abort(404)
+        used = {flat[i]["unit_id"] for ids in picks.values() for i in ids}
+        return {"book": book, "sections": sections, "seed": seed,
+                "kinds": [s["kind"] for s in sections],
+                "counts": {s["kind"]: len(s["items"]) for s in sections},
+                "unit_ids": sorted(used),
+                "unit_names": [u.get("name") or u.get("id") for u in book["units"]
+                               if u["id"] in used],
+                "head": read_head(), "pool": sum(len(v) for v in picks.values()),
+                "picks": picks}
 
     picked = [sc.to_int(x, -1) for x in request.args.getlist("pick")]
     if picked:
@@ -1343,18 +1453,9 @@ def _sheet_spec(slug):
         abort(404)
     unit_names = [u.get("name") or u.get("id") for u in book["units"] if u["id"] in unit_ids]
 
-    # 시험지 맨 위에 넣을 것 — 모두 선택입니다. 비우면 지금까지처럼 나옵니다.
-    head = {
-        "place": sc.clean(request.args.get("place"), 40),      # 학원 · 학교 이름
-        "title": sc.clean(request.args.get("title"), 60),      # 시험지 제목
-        "date": sc.clean(request.args.get("date"), 30),        # 날짜 (적어 넣기)
-        "dateblank": request.args.get("dateblank") == "1",     # 날짜를 빈칸으로
-    }
-    if head["dateblank"]:
-        head["date"] = ""
     return {"book": book, "sections": sections, "seed": seed, "kinds": kinds,
             "counts": counts, "unit_ids": unit_ids, "unit_names": unit_names,
-            "head": head, "pool": len(words)}
+            "head": read_head(), "pool": len(words), "picks": {}}
 
 
 def _sheet_pdf(spec) -> bytes | None:
@@ -1372,10 +1473,15 @@ def words_sheet(slug):
     blob = _sheet_pdf(spec)
     pages = wm.page_count(blob) if blob else 0
 
-    args = {"unit": spec["unit_ids"], "kind": spec["kinds"], "seed": spec["seed"],
-            **{f"n_{k}": v for k, v in spec["counts"].items()},
-            **{k: v for k, v in spec["head"].items() if v and k != "dateblank"},
-            **({"dateblank": "1"} if spec["head"]["dateblank"] else {})}
+    head_args = {**{k: v for k, v in spec["head"].items() if v and k != "dateblank"},
+                 **({"dateblank": "1"} if spec["head"]["dateblank"] else {})}
+    if spec["picks"]:
+        # 단어마다 유형을 정해 두신 시험지. 그 목록을 그대로 들고 다닙니다.
+        args = {"seed": spec["seed"], **head_args,
+                **{k: ",".join(str(i) for i in v) for k, v in spec["picks"].items()}}
+    else:
+        args = {"unit": spec["unit_ids"], "kind": spec["kinds"], "seed": spec["seed"],
+                **{f"n_{k}": v for k, v in spec["counts"].items()}, **head_args}
     # '다른 문제로 다시' — 같은 범위·유형·제목에 시험지 번호만 새로 뽑습니다
     again = url_for("words_sheet", slug=slug, **{k: v for k, v in args.items() if k != "seed"})
     return render_template("words_sheet.html", b=spec["book"], sections=spec["sections"],
@@ -1400,6 +1506,13 @@ def words_sheet_pdf(slug):
                      download_name=sc.safe_filename(name) + ".pdf")
     resp.headers["Cache-Control"] = "private, max-age=600"
     return resp
+
+
+@app.route("/words/<slug>/sheet/pages.json")
+def words_sheet_pages(slug):
+    """이 시험지가 몇 쪽인지. 만들기 화면이 미리보기를 몇 장 걸지 물어봅니다."""
+    blob = _sheet_pdf(_sheet_spec(slug))
+    return {"pages": wm.page_count(blob) if blob else 0}
 
 
 @app.route("/words/<slug>/sheet/<int:page>.png")
