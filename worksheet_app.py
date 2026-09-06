@@ -74,8 +74,11 @@ WORKSHEET_HTML = """
 
       <fieldset><legend>③-2 만들 산출물 <span class=hint>(분석 1회 → 선택한 자료 모두, 추가 API 없음)</span></legend>
         <label class=chk><input type=checkbox name=products value="지문분석" checked> 📘 지문분석 (분석+정리 · 원문·해석)</label>
-        <label class=chk><input type=checkbox name=products value="직독직해" checked> 📗 직독직해 (끊어읽기 대조표)</label>
-        <label class=chk><input type=checkbox name=products value="워크북" checked> 📝 워크북 (단어테스트 · 학습용 빈칸)</label>
+        <label class=chk><input type=checkbox name=products value="직독직해" checked> 📗 직독직해 (ORTICA · 의미단위 / 표시)</label>
+        <label class=chk><input type=checkbox name=products value="한줄해석"> 📗 한줄해석 (ORTICA · 영어+아래 회색박스 해석)</label>
+        <label class=chk><input type=checkbox name=products value="좌지문우해석"> 📗 좌지문우해석 (ORTICA · 좌 영어/우 해석 2단)</label>
+        <label class=chk><input type=checkbox name=products value="한줄영어"> 📗 한줄영어 (ORTICA · 영어만)</label>
+        <label class=chk><input type=checkbox name=products value="워크북"> 📝 워크북 (단어테스트 · 학습용 빈칸)</label>
         <label style="margin-top:10px">원문 텍스트 파일 <span class=hint>(선택 · 올리면 <b>자동 오류검증</b>에서 원문 대조까지 수행)</span></label>
         <input type=file name=orig accept=".txt,.text">
       </fieldset>

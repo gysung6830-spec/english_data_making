@@ -594,6 +594,34 @@ def test_webapp_start_number_keeps_ranges():
     print("PASS  웹앱 시작번호 + 장문 범위 라벨 유지(41~42·43~45)")
 
 
+def test_ortica_forms_from_master():
+    # 마스터 분석 → ORTICA 4종 양식(한줄해석/한줄영어/좌지문우해석/직독직해) HTML 파생
+    from src.worksheet import forms as ws_forms
+    from src.worksheet.models import Analysis, Sentence, Token, VocabEntry
+
+    s = Sentence(index=1, lines=[[Token(text="I love", slash=True), Token(text="you.")]],
+                 translation="나는 너를 사랑한다.")
+    s.reading_ko = "나는 사랑한다 / 너를"
+    a = Analysis(title_ko="사랑", lecture_label="18",
+                 sentences=[s], vocab=[VocabEntry("love", "사랑하다", "", "", 1)])
+
+    ps = ws_forms.analyses_to_passages([a])
+    assert ps[0].label == "18" and ps[0].title == "사랑"
+    assert ps[0].sentences[0].en == "I love you." and ps[0].sentences[0].ko == "나는 너를 사랑한다."
+    assert [(c.en, c.ko) for c in ps[0].sentences[0].chunks] == [("I love", "나는 사랑한다"), ("you.", "너를")]
+
+    # 직독직해: 영어에 ' / ' 슬래시 + 청크 대조
+    d = ws_forms.render_form_html([a], "직독직해", doc_name="교재")
+    assert 'class="slash"' in d and "I love" in d and "나는 사랑한다" in d
+    # 좌지문우해석: 2단 표
+    b = ws_forms.render_form_html([a], "좌지문우해석")
+    assert 'class="two-col"' in b and "col-en" in b and "col-ko" in b
+    # 한줄영어: 해석 없음(회색박스 없음)
+    c = ws_forms.render_form_html([a], "한줄영어")
+    assert '<div class="ko-box">' not in c and "I love you." in c   # 해석 요소 없음
+    print("PASS  ORTICA 4종 양식 마스터 파생(한줄해석/한줄영어/좌지문우해석/직독직해)")
+
+
 def test_verify_analyses():
     # 자동 오류검증: 원문 대조(숫자 누락) + 내부 정합성(직독직해 정렬)
     from src.worksheet import verify

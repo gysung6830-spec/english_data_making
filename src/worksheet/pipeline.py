@@ -746,7 +746,21 @@ def literal_from_analysis(analysis) -> list:
     return out
 
 
-PRODUCTS = ("직독직해", "지문분석", "워크북")
+PRODUCTS = ("지문분석", "워크북", "한줄해석", "한줄영어", "좌지문우해석", "직독직해")
+# ORTICA 양식(한줄해석/한줄영어/좌지문우해석/직독직해) — passage3 렌더러로 파생.
+_FORM_PRODUCTS = ("한줄해석", "한줄영어", "좌지문우해석", "직독직해")
+
+
+def _form_pdf(html: str, out_path: Path) -> bool:
+    """ORTICA 양식 HTML → PDF. Playwright(Chromium) 우선, 없으면 WeasyPrint."""
+    from . import renderer as _r
+    if _r._pdf_playwright(html, out_path):
+        return True
+    try:
+        _r._pdf_weasyprint(html, out_path)
+        return True
+    except Exception:
+        return False
 
 
 def render_products(analyses, out_stem: str | Path, products=PRODUCTS, *,
@@ -828,16 +842,18 @@ def render_products(analyses, out_stem: str | Path, products=PRODUCTS, *,
                 if f:
                     results.append(("✏️ 워크북 · 학습용(빈칸)", f))
 
-        if "직독직해" in products:
-            _progress("[직독직해] 파일 생성 중…(재분석 없음)")
-            from . import renderer_b
-            for a in analyses:
-                a.literal = literal_from_analysis(a)
-            dest = out_stem.parent / f"{out_stem.name}_직독직해.pdf"
-            renderer_b.render(analyses, dest, footer_note=footer_note)
-            _stamp_footer(dest, footer_note, meta)
-            if _pages(dest) > 0:
-                results.append(("📗 직독직해", dest))
+        # ── ORTICA 양식(한줄해석/한줄영어/좌지문우해석/직독직해) — 재분석 없음 ──
+        form_sel = [p for p in _FORM_PRODUCTS if p in products]
+        if form_sel:
+            from . import forms as ws_forms
+            for fk in form_sel:
+                _progress(f"[{fk}] 파일 생성 중…(ORTICA 양식, 재분석 없음)")
+                html = ws_forms.render_form_html(analyses, fk, doc_name=meta)
+                dest = out_stem.parent / f"{out_stem.name}_{fk}.pdf"
+                if _form_pdf(html, dest):
+                    _stamp_footer(dest, footer_note, meta)  # 저작권·교재명·페이지번호
+                    if _pages(dest) > 0:
+                        results.append((f"📗 {fk}", dest))
 
     _progress(f"산출물 {len(results)}종 생성 완료")
     return results
