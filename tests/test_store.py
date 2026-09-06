@@ -2494,6 +2494,17 @@ def test_book_pick_grid():
     assert "3개부터" in page and "10%" in page                 # 담은 개수 할인 안내
     # 교재 전체 상품 카드에도 name="slug" 가 있으니, 표의 칸만 셉니다
     assert page.count('data-price=') == 4
+
+    # 강이 한눈에 보이는 체크 칩으로 나옵니다 (표를 안 펴도 고를 수 있게)
+    assert "어떤 강이 필요하세요?" in page and "어떤 자료가 필요하세요?" in page
+    chips = page[page.index('id="unit-chips"'):page.index('id="kind-chips"')]
+    assert chips.count('class="chip"') == 2                  # 1강 · 2강
+    assert "1강" in chips and "2강" in chips
+    kind_chips = page[page.index('id="kind-chips"'):page.index("pick-tiers")]
+    assert kind_chips.count('class="chip"') == 2             # 지문분석지 · 17종 변형문제
+    assert page.count('class="ps-all"') == 2                 # 줄마다 '전체 고르기'
+    # 칸마다 고치는 표는 접어 둡니다
+    assert "칸마다 하나씩 고르기" in page and "<details" in page
     # 교재 전체 상품은 강 고르기 아래에 놓입니다
     assert page.index("필요한 강만 고르세요") < page.index("전 강을 한 번에")
     # 예전 주소는 그 자리로 보내 줍니다

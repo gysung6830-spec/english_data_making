@@ -1,84 +1,123 @@
 {# 강(회차·과)을 골라 담는 표. 교재 화면 안에서 씁니다.
    rows · kinds · mats · tiers · cart 를 넘겨받아야 합니다. #}
-{% if tiers %}
-      <div class="pick-tiers">
-        {% for t in tiers %}
-          <span class="pt" data-min="{{ t.min }}" data-percent="{{ t.percent }}">
-            {{ t.min }}개부터 <b>{{ t.percent }}%</b></span>
-        {% endfor %}
-      </div>
-    {% endif %}
+<form method="post" action="{{ url_for('cart_add') }}" id="pickform">
+  <input type="hidden" name="next" value="{{ url_for('cart') }}">
 
-    <form method="post" action="{{ url_for('cart_add') }}" id="pickform">
-      <input type="hidden" name="next" value="{{ url_for('cart') }}">
+  {# ---- 1. 강을 한눈에 골라 놓습니다 ------------------------------- #}
+  <div class="pick-step">
+    <div class="ps-head">
+      <b>어떤 강이 필요하세요?</b>
+      <button type="button" class="ps-all" data-all="unit">전체 고르기</button>
+    </div>
+    <div class="chips" id="unit-chips">
+      {% for r in rows %}
+        <button type="button" class="chip" data-row="{{ r.no }}">
+          <i class="cbox"></i>{{ r.unit }}
+        </button>
+      {% endfor %}
+    </div>
+  </div>
 
-      <div class="pick-wrap">
-        <table class="pick-table">
-          <thead>
-            <tr>
-              <th class="pk-unit">강</th>
-              {% for m in kinds %}
-                <th>
-                  <button type="button" class="pk-col" data-kind="{{ m }}">
-                    {{ mats[m].name if mats.get(m) else m }}</button>
-                </th>
-              {% endfor %}
-              <th class="pk-sum">줄 합계</th>
-            </tr>
-          </thead>
-          <tbody>
-          {% for r in rows %}
-            <tr data-row="{{ r.no }}">
-              <th class="pk-unit">
-                <button type="button" class="pk-rowall" data-row="{{ r.no }}">{{ r.unit }}</button>
-                <small>지문 {{ r.passages }}개</small>
+  {# ---- 2. 그 강에서 어떤 자료를 ---------------------------------- #}
+  <div class="pick-step">
+    <div class="ps-head">
+      <b>어떤 자료가 필요하세요?</b>
+      <button type="button" class="ps-all" data-all="kind">전체 고르기</button>
+    </div>
+    <div class="chips" id="kind-chips">
+      {% for m in kinds %}
+        <button type="button" class="chip" data-kind="{{ m }}">
+          <i class="cbox"></i>{{ mats[m].name if mats.get(m) else m }}
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if tiers %}
+    <div class="pick-tiers">
+      {% for t in tiers %}
+        <span class="pt" data-min="{{ t.min }}" data-percent="{{ t.percent }}">
+          {{ t.min }}개부터 <b>{{ t.percent }}%</b></span>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {# ---- 3. 고른 것을 표로 확인하고, 칸마다 손봅니다 ----------------- #}
+  <details class="pick-detail" id="pick-detail">
+    <summary><span class="pd-open">칸마다 하나씩 고르기</span>
+      <span class="pd-shut">표 접기</span></summary>
+
+    <div class="pick-wrap">
+      <table class="pick-table">
+        <thead>
+          <tr>
+            <th class="pk-unit">강</th>
+            {% for m in kinds %}
+              <th>
+                <button type="button" class="pk-col" data-kind="{{ m }}">
+                  {{ mats[m].name if mats.get(m) else m }}</button>
               </th>
-              {% for m in kinds %}
-                {% set p = r.cells.get(m) %}
-                <td>
-                  {% if p %}
-                    <label class="pk-cell{{ ' have' if p.slug in cart }}">
-                      <input type="checkbox" name="slug" value="{{ p.slug }}"
-                             data-kind="{{ m }}" data-row="{{ r.no }}"
-                             data-price="{{ p.price }}"
-                             {{ 'checked disabled' if p.slug in cart }}>
-                      <span>{{ '{:,}'.format(p.price) }}</span>
-                    </label>
-                  {% else %}
-                    <span class="pk-none">—</span>
-                  {% endif %}
-                </td>
-              {% endfor %}
-              <td class="pk-sum"><b class="row-sum">0</b></td>
-            </tr>
-          {% endfor %}
-          </tbody>
-        </table>
-      </div>
+            {% endfor %}
+            <th class="pk-sum">줄 합계</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for r in rows %}
+          <tr data-row="{{ r.no }}">
+            <th class="pk-unit">
+              <button type="button" class="pk-rowall" data-row="{{ r.no }}">{{ r.unit }}</button>
+              <small>지문 {{ r.passages }}개</small>
+            </th>
+            {% for m in kinds %}
+              {% set p = r.cells.get(m) %}
+              <td>
+                {% if p %}
+                  <label class="pk-cell{{ ' have' if p.slug in cart }}">
+                    <input type="checkbox" name="slug" value="{{ p.slug }}"
+                           data-kind="{{ m }}" data-row="{{ r.no }}"
+                           data-price="{{ p.price }}"
+                           {{ 'checked disabled' if p.slug in cart }}>
+                    <span>{{ '{:,}'.format(p.price) }}</span>
+                  </label>
+                {% else %}
+                  <span class="pk-none">—</span>
+                {% endif %}
+              </td>
+            {% endfor %}
+            <td class="pk-sum"><b class="row-sum">0</b></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </details>
 
-      <div class="unit-bar">
-        <div class="pb-left">
-          <b><span class="pb-count">0</span>개</b> 고름
-          <span class="pb-cut muted"></span>
-        </div>
-        <div class="pb-right">
-          <span class="pb-total">0원</span>
-          <button class="btn btn-primary" type="submit" disabled>장바구니에 담기</button>
-        </div>
-      </div>
-      <p class="muted" style="font-size:13.5px;margin-top:12px;">
-        이미 장바구니에 있는 것은 <b>체크된 채로 잠겨</b> 있습니다.
-        빼시려면 <a href="{{ url_for('cart') }}">장바구니</a>에서 지우시면 됩니다.
-      </p>
-    </form>
+  <div class="unit-bar">
+    <div class="pb-left">
+      <b><span class="pb-count">0</span>개</b> 고름
+      <span class="pb-cut muted"></span>
+    </div>
+    <div class="pb-right">
+      <span class="pb-total">0원</span>
+      <button class="btn btn-primary" type="submit" disabled>장바구니에 담기</button>
+    </div>
+  </div>
+  <p class="muted" style="font-size:13.5px;margin-top:12px;">
+    이미 장바구니에 있는 것은 <b>체크된 채로 잠겨</b> 있습니다.
+    빼시려면 <a href="{{ url_for('cart') }}">장바구니</a>에서 지우시면 됩니다.
+  </p>
+</form>
 
 <script>
-/* 고른 개수와 값을 바로 세어 줍니다. 할인은 담은 개수에 따라 붙습니다. */
+/* 강 칩 × 자료 칩 = 표의 칸. 셋이 늘 같은 것을 가리키게 맞춰 둡니다. */
 (function () {
   var form = document.getElementById('pickform');
   if (!form) return;
-  var boxes = form.querySelectorAll('input[name=slug]:not([disabled])');
-  var tiers = [].map.call(document.querySelectorAll('.pt'), function (el) {
+  var boxes = [].slice.call(form.querySelectorAll('input[name=slug]:not([disabled])'));
+  var locked = [].slice.call(form.querySelectorAll('input[name=slug][disabled]'));
+  var unitChips = [].slice.call(form.querySelectorAll('#unit-chips .chip'));
+  var kindChips = [].slice.call(form.querySelectorAll('#kind-chips .chip'));
+  var tiers = [].map.call(form.querySelectorAll('.pt'), function (el) {
     return {min: +el.dataset.min, percent: +el.dataset.percent, el: el};
   }).sort(function (a, b) { return a.min - b.min; });
 
@@ -89,12 +128,35 @@
 
   function won(n) { return n.toLocaleString('ko-KR') + '원'; }
 
+  /* 어떤 무리(한 강, 또는 한 자료)에 딸린 칸들. 이미 담은 것은 뺍니다. */
+  function group(attr, value) {
+    return boxes.filter(function (b) { return b.dataset[attr] === value; });
+  }
+  /* 셋 중 하나 — 다 켜짐 'on' · 일부 'some' · 다 꺼짐 '' */
+  function state(list) {
+    if (!list.length) return '';
+    var on = list.filter(function (b) { return b.checked; }).length;
+    return on === 0 ? '' : (on === list.length ? 'on' : 'some');
+  }
+  function mark(chip, list) {
+    var s = state(list);
+    chip.classList.toggle('on', s === 'on');
+    chip.classList.toggle('some', s === 'some');
+    chip.setAttribute('aria-pressed', s === 'on' ? 'true' : 'false');
+    // 이 강·자료가 통째로 이미 장바구니에 있으면 알려 줍니다
+    chip.classList.toggle('empty', !list.length);
+  }
+
+  function paint() {
+    unitChips.forEach(function (c) { mark(c, group('row', c.dataset.row)); });
+    kindChips.forEach(function (c) { mark(c, group('kind', c.dataset.kind)); });
+  }
+
   function tally() {
     var n = 0, sum = 0;
     boxes.forEach(function (b) {
       if (b.checked) { n += 1; sum += +b.dataset.price || 0; }
     });
-    // 줄마다 합계
     form.querySelectorAll('tr[data-row]').forEach(function (tr) {
       var s = 0;
       tr.querySelectorAll('input[name=slug]:checked').forEach(function (b) {
@@ -102,7 +164,6 @@
       });
       tr.querySelector('.row-sum').textContent = s ? won(s) : '—';
     });
-
     var pct = 0;
     tiers.forEach(function (t) {
       t.el.classList.toggle('on', n >= t.min);
@@ -113,29 +174,31 @@
     total.textContent = won(sum - off);
     cut.textContent = pct ? '· ' + pct + '% 깎여 ' + won(off) + ' 절약' : '';
     go.disabled = n === 0;
+    paint();
+  }
+
+  /* 무리를 통째로 켜고 끕니다. 반만 켜져 있으면 마저 다 켭니다. */
+  function toggle(list) {
+    var on = state(list) !== 'on';
+    list.forEach(function (b) { b.checked = on; });
+    tally();
   }
 
   boxes.forEach(function (b) { b.addEventListener('change', tally); });
-
-  // 자료 이름(세로줄)을 누르면 그 자료 전체를 켜고 끕니다
-  form.querySelectorAll('.pk-col').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var pick = form.querySelectorAll(
-        'input[name=slug][data-kind="' + btn.dataset.kind + '"]:not([disabled])');
-      var on = ![].every.call(pick, function (b) { return b.checked; });
-      pick.forEach(function (b) { b.checked = on; });
-      tally();
-    });
+  unitChips.forEach(function (c) {
+    c.addEventListener('click', function () { toggle(group('row', c.dataset.row)); });
   });
-  // 강 이름(가로줄)을 누르면 그 강 전체를 켜고 끕니다
+  kindChips.forEach(function (c) {
+    c.addEventListener('click', function () { toggle(group('kind', c.dataset.kind)); });
+  });
   form.querySelectorAll('.pk-rowall').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var pick = form.querySelectorAll(
-        'input[name=slug][data-row="' + btn.dataset.row + '"]:not([disabled])');
-      var on = ![].every.call(pick, function (b) { return b.checked; });
-      pick.forEach(function (b) { b.checked = on; });
-      tally();
-    });
+    btn.addEventListener('click', function () { toggle(group('row', btn.dataset.row)); });
+  });
+  form.querySelectorAll('.pk-col').forEach(function (btn) {
+    btn.addEventListener('click', function () { toggle(group('kind', btn.dataset.kind)); });
+  });
+  form.querySelectorAll('.ps-all').forEach(function (btn) {
+    btn.addEventListener('click', function () { toggle(boxes); });
   });
   tally();
 })();
