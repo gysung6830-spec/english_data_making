@@ -14,10 +14,13 @@ COL = {"S": "#1f7a48", "V": "#c85f2a", "O": "#3a5bd0", "C": "#7a4fd0"}
 BG = {"S": "#eaf5ee", "V": "#fdeee3", "O": "#eaf0fc", "C": "#f2ecfc"}
 
 CSS = """
-@page { size:A4; margin:11mm 11mm 13mm;
+@page { size:A4; margin:14mm 12mm 13mm;
   @bottom-center{content:"ⓒ2026.김은아영어연구소.All rights reserved   ·   " counter(page);
-    font-family:"NanumGothic","Malgun Gothic",sans-serif;font-size:8px;color:#9aa0a6;} }
-@page cover { margin:0; @bottom-center{content:"";} }
+    font-family:"NanumGothic","Malgun Gothic",sans-serif;font-size:8px;color:#9aa0a6;}
+  @top-right{content:string(chap);font-family:"NanumGothic","Malgun Gothic",sans-serif;font-size:8px;color:#b3b9bf;}
+  @top-left{content:"문장의 5형식 완전 정복";font-family:"NanumGothic","Malgun Gothic",sans-serif;font-size:8px;color:#c6ccd1;} }
+@page cover { margin:0; @bottom-center{content:"";} @top-right{content:"";} @top-left{content:"";} }
+@page front { @top-right{content:"";} @top-left{content:"";} }
 *{box-sizing:border-box;}
 body{font-family:"NanumGothic","Nanum Gothic","Malgun Gothic",sans-serif;color:#23272e;font-size:10.6px;line-height:1.55;margin:0;}
 :root{--green:#2f9e5f;--green-d:#1f7a48;--green-bg:#eef7f1;--amber:#cf8a2a;--muted:#6b7280;--line:#e2e6ea;}
@@ -40,15 +43,40 @@ b{color:#12283f;}
 .cbox h3{margin:0 0 7px;font-size:13px;color:#fff;} .cbox ul{margin:0;padding-left:16px;}
 .cbox li{font-size:11px;color:#f0faf3;margin-bottom:4px;}
 
+/* ===== 목차 ===== */
+.toc{page:front;break-after:page;padding-top:4mm;}
+.toc h1{font-size:24px;font-weight:800;color:var(--green-d);margin:0 0 3px;}
+.toc h1 .en{display:block;font-size:11px;font-weight:800;letter-spacing:3px;color:var(--green);margin-bottom:2px;}
+.toc .sub{font-size:11px;color:var(--muted);margin:0 0 20px;padding-bottom:12px;border-bottom:2px solid var(--green);}
+a.tr{display:flex;align-items:baseline;text-decoration:none;color:#23272e;font-size:12.5px;padding:11px 3px;border-bottom:1px dotted #ccd3d9;}
+a.tr .k{font-weight:800;color:var(--green-d);min-width:78px;}
+a.tr .tt2{flex:1;}
+a.tr .cc{font-size:9.5px;color:var(--muted);font-weight:700;margin:0 10px;}
+a.tr::after{content:target-counter(attr(href), page);font-weight:800;color:var(--green-d);min-width:20px;text-align:right;}
+.toc .tnote{margin-top:20px;background:var(--green-bg);border-radius:9px;padding:11px 15px;font-size:10.3px;color:#2c5d41;line-height:1.6;}
+.toc .tnote b{color:var(--green-d);}
+
 /* 섹션 */
 .sec{break-before:page;}
 .band{background:var(--green-d);color:#fff;border-radius:10px;padding:11px 16px;margin-bottom:13px;display:flex;align-items:baseline;gap:12px;}
 .band .no{font-size:19px;font-weight:800;}
-.band .tt{font-size:16px;font-weight:800;}
+.band .tt{font-size:16px;font-weight:800;string-set:chap content();}
 .band .code{font-size:11px;font-weight:700;color:#cdeed9;margin-left:auto;}
 
+/* ===== 단원 도입부 ===== */
+.uhead{background:linear-gradient(135deg,#2f9e5f 0%,#1f7a48 100%);color:#fff;border-radius:13px;padding:15px 19px 16px;margin-bottom:15px;break-inside:avoid;}
+.ubar{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:10px;margin-bottom:11px;}
+.unum{font-size:11px;font-weight:800;letter-spacing:2px;background:#fff;color:var(--green-d);padding:3px 11px;border-radius:20px;}
+.ut{font-size:18px;font-weight:800;string-set:chap content();}
+.ucode{margin-left:auto;font-size:12.5px;font-weight:800;color:#d5f0df;letter-spacing:1px;}
+.goals .gh{font-size:10.5px;font-weight:800;color:#eafff2;margin-bottom:6px;}
+.goals ul{margin:0;padding:0;list-style:none;}
+.goals li{font-size:10.6px;color:#f3fbf6;margin-bottom:4px;padding-left:19px;position:relative;line-height:1.5;}
+.goals li:last-child{margin-bottom:0;}
+.goals li::before{content:"✔";position:absolute;left:2px;color:#c6f2d6;font-weight:800;}
+
 /* ===== 핵심: 슬롯 다이어그램 ===== */
-.diawrap{border:1.5px solid var(--line);border-radius:12px;padding:13px 14px 11px;margin-bottom:12px;background:#fcfdfc;}
+.diawrap{border:1.5px solid var(--line);border-radius:12px;padding:13px 14px 11px;margin-bottom:12px;background:#fcfdfc;break-inside:avoid;}
 .dia{display:flex;gap:7px;align-items:stretch;}
 .slot{flex:1 1 auto;min-width:66px;border-radius:9px;overflow:hidden;border:2px solid #ccc;text-align:center;}
 .slot .lab{color:#fff;font-size:9px;font-weight:800;padding:3px 2px;line-height:1.25;}
@@ -96,7 +124,7 @@ b{color:#12283f;}
 .q-h .b{display:inline-block;background:var(--amber);color:#fff;font-size:9px;font-weight:800;padding:1px 8px;border-radius:8px;margin-right:6px;}
 .q{margin:0 0 7px;line-height:1.85;} .blank{display:inline-block;min-width:60px;border-bottom:1px solid #333;text-align:center;}
 .q .sel{font-weight:800;}
-.ans{background:#f6f8f7;border:1px solid var(--line);border-radius:8px;padding:9px 13px;margin-top:8px;}
+.ans{background:#f6f8f7;border:1px solid var(--line);border-radius:8px;padding:9px 13px;margin-top:8px;break-inside:avoid;}
 .ans .t{display:inline-block;background:#111827;color:#fff;font-size:10px;font-weight:800;padding:2px 10px;border-radius:5px;margin-bottom:5px;}
 .ans p{margin:3px 0;font-size:9.6px;line-height:1.65;} .ans b{color:var(--green-d);}
 
@@ -170,9 +198,26 @@ COVER = f"""
 </div></div>
 """
 
+# ============================================================ 목차
+TOC = """
+<div class="toc">
+  <h1><span class="en">CONTENTS</span>목차</h1>
+  <p class="sub">문장의 5형식 완전 정복 — 색깔 블록으로 배우는 영어 문장 구조</p>
+  <a class="tr" href="#intro"><span class="k">들어가기</span><span class="tt2">문장에도 &lsquo;형식&rsquo;이 있다</span><span class="cc">개념 · 왜 5형식?</span></a>
+  <a class="tr" href="#u1"><span class="k">UNIT 1</span><span class="tt2">1형식 · 주어 + 동사</span><span class="cc">S + V</span></a>
+  <a class="tr" href="#u2"><span class="k">UNIT 2</span><span class="tt2">2형식 · 주어 + 동사 + 보어</span><span class="cc">S + V + C</span></a>
+  <a class="tr" href="#u3"><span class="k">UNIT 3</span><span class="tt2">3형식 · 주어 + 동사 + 목적어</span><span class="cc">S + V + O</span></a>
+  <a class="tr" href="#u4"><span class="k">UNIT 4</span><span class="tt2">4형식 · 주어 + 동사 + 간접목적어 + 직접목적어</span><span class="cc">S + V + IO + DO</span></a>
+  <a class="tr" href="#u5"><span class="k">UNIT 5</span><span class="tt2">5형식 · 주어 + 동사 + 목적어 + 목적격보어</span><span class="cc">S + V + O + OC</span></a>
+  <a class="tr" href="#summary"><span class="k">총정리</span><span class="tt2">5형식 한눈에 &amp; 판별법</span><span class="cc">복습 + 종합 연습</span></a>
+  <div class="tnote"><b>이 교재는 이렇게 공부해요.</b> 각 단원은 <b>학습 목표 → 구조 그림 → 왜 배울까 → 예문(STEP 1) →
+    대표 동사(STEP 2) → 시험·암기 포인트 → 연습(STEP 3)</b> 순서예요. 하루에 한 단원씩, 순서대로 따라오면 됩니다.</div>
+</div>
+"""
+
 # ============================================================ 들어가기
 INTRO = f"""
-<div class="sec">
+<div class="sec" id="intro">
   {band("들어가기", "문장에도 '형식'이 있다", "왜 5형식?")}
   <div class="concept">영어 문장은 <b>동사</b>가 뼈대를 정해요. 같은 자리라도 동사에 따라 뒤에
   <b>목적어(~을)</b>가 오기도, <b>보어(=설명)</b>가 오기도 하죠. 성분을 <b>색</b>으로 구분하면 구조가 바로 보여요.</div>
@@ -203,28 +248,40 @@ INTRO = f"""
 </div>
 """
 
-# ============================================================ 형식 섹션
-def section(no, tt, code, flagship, why, concept, ex_rows, verb_groups, tip, exam, memo, quiz, ans):
+# ============================================================ 단원(형식 섹션)
+def uhead(n, num, tt, code, goals):
+    lis = "".join(f"<li>{g}</li>" for g in goals)
+    return (f'<div class="uhead"><div class="ubar">'
+            f'<span class="unum">UNIT {n}</span>'
+            f'<span class="ut">{num} · {tt}</span>'
+            f'<span class="ucode">{code}</span></div>'
+            f'<div class="goals"><div class="gh">이 단원에서 배울 것 — 학습 목표</div>'
+            f'<ul>{lis}</ul></div></div>')
+
+def unit(n, num, tt, code, goals, flagship, why, concept, ex_rows, verb_groups, tip, exam, memo, quiz, ans):
     return f"""
-<div class="sec">
-  {band(no, tt, code)}
+<div class="sec" id="u{n}">
+  {uhead(n, num, tt, code, goals)}
   {flagship}
   <div class="why"><span class="l">왜 배울까?</span>{why}</div>
   <div class="concept">{concept}</div>
-  <div class="h">이렇게 읽어요</div>
+  <div class="h">STEP 1 · 이렇게 읽어요</div>
   {exlines(ex_rows)}
-  <div class="h">이 형식에 잘 쓰는 동사</div>
+  <div class="h">STEP 2 · 이 형식에 잘 쓰는 동사</div>
   {verbs(verb_groups)}
   <div class="tip"><span class="l">✔ 헷갈리지 않기</span>{tip}</div>
   <div class="exam"><span class="l">시험 포인트</span>{exam}</div>
   <div class="memo"><span class="l">암기!</span>{memo}</div>
-  <div class="q-h"><span class="b">연습</span>직접 풀어보기</div>
+  <div class="q-h"><span class="b">STEP 3 · 연습</span>직접 풀어보기</div>
   {quiz}
   <div class="ans"><div class="t">정답 &amp; 해설</div>{ans}</div>
 </div>
 """
 
-S1 = section("1형식", "주어 + 동사", "S + V",
+S1 = unit(1, "1형식", "주어 + 동사", "S + V",
+    ["목적어 없이 동사만으로 끝나는 <b>완전자동사</b>를 안다",
+     "전치사구·부사 같은 <b>수식어(M)</b>를 가려내 문장에서 빼고 본다",
+     "「There is/are + 명사」가 1형식임을 안다"],
     dia([("S","주어","Birds"),("op","+"),("V","동사","sing"),("op",""),("m","","（in the sky）수식어")],
         rel="동사만으로 문장이 완성돼요. 뒤 전치사구는 <b>꾸미는 살(M)</b>이라 빼고 봐요."),
     "문장을 &lsquo;몇 형식&rsquo;으로 보는 건 <b>어디까지가 진짜 뼈대인지</b> 가려내기 위해서예요. "
@@ -246,7 +303,10 @@ S1 = section("1형식", "주어 + 동사", "S + V",
     """<p><b>1.</b> ① S=The baby / V=cried &nbsp; ② S=We / V=arrived / (at the station)</p>
        <p><b>2.</b> 1형식 (There are + 명사, in the sky는 수식어)</p>""")
 
-S2 = section("2형식", "주어 + 동사 + 보어", "S + V + C",
+S2 = unit(2, "2형식", "주어 + 동사 + 보어", "S + V + C",
+    ["<b>보어(C)</b>의 개념과 &lsquo;주어 = 보어&rsquo; 관계를 이해한다",
+     "<b>감각동사</b>(look·feel…) 뒤엔 부사가 아니라 <b>형용사</b>가 옴을 안다",
+     "be·become·get 등 <b>2형식 대표 동사</b>를 익힌다"],
     dia([("S","주어","She"),("op","+"),("V","동사","is"),("op","+"),("C","보어","a teacher")],
         rel=f'{dot("S")}She <span class="eq">=</span> {dot("C")}a teacher &nbsp;→&nbsp; <b>주어 = 보어</b> (보어=명사/형용사)'),
     "&lsquo;그녀는 이다&rsquo;만으로는 말이 안 되죠? <b>be동사·become·look</b> 같은 동사는 <b>주어가 무엇/어떠한지</b> "
@@ -269,7 +329,10 @@ S2 = section("2형식", "주어 + 동사 + 보어", "S + V + C",
     """<p><b>1.</b> ① red (The leaves = red) &nbsp; ② sweet (This cake = sweet)</p>
        <p><b>2.</b> happy — 감각동사 look 뒤엔 형용사 (happily ✗)</p>""")
 
-S3 = section("3형식", "주어 + 동사 + 목적어", "S + V + O",
+S3 = unit(3, "3형식", "주어 + 동사 + 목적어", "S + V + O",
+    ["<b>목적어(O)</b>와 <b>타동사</b>의 개념을 안다 (~을/를)",
+     "전치사 없이 목적어를 받는 동사(enter·discuss…)를 구별한다",
+     "<b>동명사·to부정사·that절</b>도 목적어가 됨을 안다"],
     dia([("S","주어","I"),("op","+"),("V","동사","love"),("op","+"),("O","목적어","you")],
         rel=f'{dot("O")}you = 동작을 받는 대상 (<b>~을/를</b>)'),
     "우리가 쓰는 문장의 <b>대부분이 3형식</b>이에요. &lsquo;누가 무엇을 ~한다&rsquo;가 가장 기본이니까요. "
@@ -291,7 +354,10 @@ S3 = section("3형식", "주어 + 동사 + 목적어", "S + V + O",
     """<p><b>1.</b> ① my homework &nbsp; ② watching movies (동명사)</p>
        <p><b>2.</b> into 삭제 → He entered the room. (enter는 타동사)</p>""")
 
-S4 = section("4형식", "주어 + 동사 + 간접목적어 + 직접목적어", "S + V + IO + DO",
+S4 = unit(4, "4형식", "주어 + 동사 + 간접목적어 + 직접목적어", "S + V + IO + DO",
+    ["<b>수여동사</b>와 간접목적어(~에게)·직접목적어(~을)를 구분한다",
+     "목적어 순서는 <b>사람 먼저, 사물 나중</b>임을 안다",
+     "4형식을 <b>3형식으로 바꾸는 법</b>(to/for/of)을 익힌다"],
     dia([("S","주어","He"),("op","+"),("V","동사","gave"),("op","+"),("O","간접목적어","me"),("op","+"),("O","직접목적어","a book")],
         rel=f'{dot("O")}me (<b>~에게</b>) &nbsp;+&nbsp; {dot("O")}a book (<b>~을</b>) &nbsp;→&nbsp; 목적어 <b>둘</b> (서로 다른 대상)'),
     "&lsquo;주다·말해주다·보내주다&rsquo;처럼 <b>누구에게 무엇을</b> 해 주는 동작은 목적어가 <b>두 개</b> 필요해요. "
@@ -316,7 +382,10 @@ S4 = section("4형식", "주어 + 동사 + 간접목적어 + 직접목적어", "
        ③ She asked me a question. → a question ( <span class="blank"></span> ) me</div>""",
     """<p><b>1.</b> ① <b>to</b> (give→to) &nbsp; ② <b>for</b> (buy→for) &nbsp; ③ <b>of</b> (ask→of)</p>""")
 
-S5 = section("5형식", "주어 + 동사 + 목적어 + 목적격보어", "S + V + O + OC",
+S5 = unit(5, "5형식", "주어 + 동사 + 목적어 + 목적격보어", "S + V + O + OC",
+    ["<b>목적격보어(OC)</b>와 &lsquo;목적어 = 보어&rsquo; 관계를 이해한다",
+     "<b>사역(make·have·let)·지각(see·hear…)</b>동사 뒤 동사원형을 안다",
+     "가장 헷갈리는 <b>4형식과 5형식</b>을 구별한다"],
     dia([("S","주어","We"),("op","+"),("V","동사","call"),("op","+"),("O","목적어","him"),("op","+"),("C","목적격보어","a genius")],
         rel=f'{dot("O")}him <span class="eq">=</span> {dot("C")}a genius &nbsp;→&nbsp; <b>목적어 = 보어</b> (같은 대상)'),
     "5형식은 &lsquo;<b>~을 …하게/…라고</b>&rsquo;처럼 <b>목적어의 상태·행동까지</b> 말해요. "
@@ -345,7 +414,7 @@ S5 = section("5형식", "주어 + 동사 + 목적어 + 목적격보어", "S + V 
 
 # ============================================================ 총정리
 SUMMARY = f"""
-<div class="sec">
+<div class="sec" id="summary">
   {band("총정리", "5형식 한눈에 & 판별법", "복습 + 종합 연습")}
   <div class="h">색으로 보는 5형식</div>
   {dia([("S","주어","Birds"),("op","+"),("V","동사","sing")], rel="1형식 · S + V")}
@@ -400,7 +469,7 @@ SUMMARY = f"""
 
 
 def build():
-    html = '<meta charset="utf-8"><style>' + CSS + '</style>' + COVER + INTRO + S1 + S2 + S3 + S4 + S5 + SUMMARY
+    html = '<meta charset="utf-8"><style>' + CSS + '</style>' + COVER + TOC + INTRO + S1 + S2 + S3 + S4 + S5 + SUMMARY
     from weasyprint import HTML
     OUT.parent.mkdir(parents=True, exist_ok=True)
     doc = HTML(string=html).render()
