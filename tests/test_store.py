@@ -973,7 +973,9 @@ def test_admin_settings_change_reaches_customer():
     a = admin()
     resp = a.post("/admin/settings", data={
         "brand": "오르티카영어", "tagline": "테스트 태그라인",
-        "contact_email": "real@ortica.kr", "contact_phone": "010-9999-8888",
+        "contact_email": "real@ortica.kr",
+        "contact_kakao_url": "https://open.kakao.com/o/g0a1w2Li",
+        "contact_kakao_label": "카카오톡 오픈채팅 문의",
         "contact_hours": "평일 10-19", "payment_bank_name": "국민은행",
         "payment_bank_account": "111-222-333444", "payment_bank_holder": "홍길동",
         "payment_notice": "곧 보내 드립니다",
@@ -991,6 +993,7 @@ def test_admin_settings_change_reaches_customer():
 
     home = body(client().get("/"))
     assert "real@ortica.kr" in home and "123-45-67890" in home
+    assert "010-9999-8888" not in home        # 전화번호는 아예 안 받습니다
     assert "7,000원 할인" in body(client().get("/submit"))
     print("PASS  가게 정보 저장 → 고객 화면 반영")
 
@@ -1881,6 +1884,38 @@ def test_my_locker():
     print("PASS  내 자료함 — 다시 받기 · 인쇄 안내 · 열쇠 보호")
 
 
+def test_contact_has_no_phone():
+    """전화번호는 안 받습니다. 오픈채팅으로 받습니다."""
+    site = sc.load_site()
+    assert "phone" not in site["contact"], site["contact"]
+    assert site["contact"]["kakao_url"].startswith("https://open.kakao.com/")
+
+    for url in ("/", "/contact", "/guide"):
+        page = body(client().get(url))
+        assert "전화 ·" not in page, url
+        assert site["contact"]["kakao_url"] in page, url
+
+    # 관리자 설정에도 전화 칸이 없습니다
+    adm = body(admin().get("/admin/settings"))
+    assert 'name="contact_phone"' not in adm
+    assert 'name="contact_kakao"' in adm
+
+    # 저장해도 전화번호가 다시 생기지 않습니다.
+    # (설정 저장은 화면 전체를 덮어쓰므로, 확인한 뒤 원래대로 돌려놓습니다)
+    keep = json.loads(json.dumps(sc.load_site()))
+    keep["contact"]["phone"] = "010-1234-5678"           # 예전 설정에 남아 있던 것처럼
+    sc.save_site(keep)
+    admin().post("/admin/settings", data={
+        "brand": site["brand"], "contact_email": site["contact"]["email"],
+        "contact_phone": "010-1234-5678",
+        "contact_kakao_url": site["contact"]["kakao_url"],
+        "contact_hours": site["contact"]["hours"]}, follow_redirects=True)
+    assert "phone" not in sc.load_site()["contact"]
+    keep["contact"].pop("phone", None)
+    sc.save_site(keep)
+    print("PASS  문의는 오픈채팅으로 · 전화번호 없음")
+
+
 def test_contact_page():
     """문의 창구 — 급한 분은 바로 연락, 기록이 남아야 하면 폼으로."""
     text = body(client().get("/contact"))
@@ -2391,6 +2426,60 @@ def test_home_previews_every_category():
     print("PASS  라인업이 분류마다 교재를 몇 권씩 미리 보여 줌")
 
 
+def test_units_follow_what_the_admin_uploaded():
+    """강 체크박스는 올리신 파일대로 만들어집니다. 교재마다 강 수가 다릅니다."""
+    import io as _io, zipfile, re as _re
+    a = admin()
+
+    def upload(book, units):
+        buf = _io.BytesIO()
+        with zipfile.ZipFile(buf, "w") as zf:
+            for no in range(1, units + 1):
+                for name in ("지문분석지", "17종 변형문제"):
+                    zf.writestr(f"{no}강_{name}.pdf", b"%PDF-1.4 x")
+        look = body(a.post("/admin/products/bulk",
+                           data={"file": (_io.BytesIO(buf.getvalue()), "묶음.zip")},
+                           content_type="multipart/form-data"))
+        token = _re.search(r'name="token" value="([^"]+)"', look).group(1)
+        paths = [f"{n}강_{m}.pdf" for n in range(1, units + 1)
+                 for m in ("지문분석지", "17종 변형문제")]
+        a.post("/admin/products/bulk/save",
+               data={"token": token, "book": book, "passages": "6", "path": paths},
+               follow_redirects=True)
+
+    upload("highlighter-basic", 18)          # 올림포스처럼 18강
+    upload("highlighter-master", 24)         # 수능특강처럼 24강
+
+    def chips(slug):
+        page = body(client().get(f"/books/{slug}"))
+        part = page[page.index('id="unit-chips"'):page.index('id="kind-chips"')]
+        return part.count('class="chip"'), page
+
+    n18, page18 = chips("highlighter-basic")
+    n24, page24 = chips("highlighter-master")
+    assert n18 == 18, n18
+    assert n24 == 24, n24
+    assert "모두 18강" in page18 and "모두 24강" in page24
+    assert "18강" in page18 and "19강" not in page18      # 18강까지만
+    assert "24강" in page24
+
+    # 강마다 두 패키지 칸이 생깁니다
+    assert page18.count("data-price=") == 18 * 2
+    assert page24.count("data-price=") == 24 * 2
+
+    # 목록에서도 강 수가 보입니다
+    lst = body(client().get("/products?category=highlighter"))
+    assert "18강" in lst and "24강" in lst
+
+    # 치우기
+    catalog = sc.load_raw_catalog()
+    catalog["products"] = [x for x in catalog["products"]
+                           if not (x.get("book", "").startswith("highlighter-")
+                                   and x.get("unit"))]
+    sc.save_catalog(catalog)
+    print("PASS  강 체크박스가 올린 파일대로 — 교재마다 강 수가 다름")
+
+
 def test_list_hides_price_until_you_open_the_book():
     """목록에서는 값부터 보여 주지 않습니다. 교재에 들어가서 값을 봅니다."""
     text = body(client().get("/products"))
@@ -2783,7 +2872,7 @@ def test_bulk_products_from_zip():
 
     before = len(sc.load_raw_catalog()["products"])
     done = a.post("/admin/products/bulk/save", data={
-        "token": token, "book": "ebs-2026-tokgang-eng", "passages": "6",
+        "token": token, "book": "ebs-2026-wansung", "passages": "6",
         "p_1": "8",                                        # 1강만 지문 8개
         "path": ["1강_지문분석지.pdf", "1강_17종 변형문제.pdf",
                  "2강/지문분석지.pdf", "Day 3 통합워크북.pdf"],
@@ -2793,20 +2882,20 @@ def test_bulk_products_from_zip():
     catalog = sc.load_raw_catalog()
     assert len(catalog["products"]) == before + 4
     made = {p["slug"]: p for p in catalog["products"]
-            if p.get("book") == "ebs-2026-tokgang-eng" and p.get("passages") in (6, 8)}
-    one = made["ebs-2026-tokgang-eng-01-analysis"]
+            if p.get("book") == "ebs-2026-wansung" and p.get("passages") in (6, 8)}
+    one = made["ebs-2026-wansung-01-analysis"]
     assert one["passages"] == 8 and one["price"] == 250 * 8       # 지문분석지 250원
     assert one["materials"] == ["analysis"] and one["package"] == "analysis"
     assert "1강 · 지문분석지" in one["name"]
-    assert made["ebs-2026-tokgang-eng-01-variants"]["price"] == 400 * 8
-    assert made["ebs-2026-tokgang-eng-02-analysis"]["passages"] == 6   # 기본값
-    assert made["ebs-2026-tokgang-eng-03-workbook"]["package"] == "problem"
+    assert made["ebs-2026-wansung-01-variants"]["price"] == 400 * 8
+    assert made["ebs-2026-wansung-02-analysis"]["passages"] == 6   # 기본값
+    assert made["ebs-2026-wansung-03-workbook"]["package"] == "problem"
 
     # 파일이 상품 폴더에 붙었어야 합니다
-    assert len(sc.product_files("ebs-2026-tokgang-eng-01-analysis")) == 1
+    assert len(sc.product_files("ebs-2026-wansung-01-analysis")) == 1
 
     # 손님 화면에도 바로 보입니다
-    page = body(client().get("/products/ebs-2026-tokgang-eng-01-analysis"))
+    page = body(client().get("/products/ebs-2026-wansung-01-analysis"))
     assert "1강 · 지문분석지" in page and "2,000원" in page
 
     # 치우기
@@ -3502,6 +3591,7 @@ def run_all():
     test_speaks_to_both_audiences()
     test_analysis_tagline_updated()
     test_new_product_appears_in_home_updates()
+    test_units_follow_what_the_admin_uploaded()
     test_list_hides_price_until_you_open_the_book()
     test_lineup_shots_upload_and_show()
     test_mobile_filters_collapse()
@@ -3620,6 +3710,7 @@ def run_all():
     test_pass_quota()
     test_my_locker()
     test_clear_sample_data()
+    test_contact_has_no_phone()
     test_contact_page()
     test_locker_sits_next_to_the_cart()
     test_home_shows_real_pages_not_just_names()

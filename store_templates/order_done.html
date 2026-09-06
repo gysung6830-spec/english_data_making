@@ -72,7 +72,9 @@
       {{ site.payment.notice }}
       <br><br>
       입금 후에도 하루가 지나도록 메일이 오지 않으면
-      <b>{{ site.contact.email }}</b> 또는 <b>{{ site.contact.phone }}</b> 으로
+      <b>{{ site.contact.email }}</b>{% if site.contact.kakao_url %} 또는
+      <a href="{{ site.contact.kakao_url }}" target="_blank" rel="noopener">카카오톡
+      오픈채팅</a>{% endif %} 으로
       주문번호 <b>{{ o['order_no'] }}</b> 와 함께 알려 주세요.
     </div>
 

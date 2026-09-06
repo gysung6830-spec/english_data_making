@@ -92,7 +92,7 @@
       <p>{{ site.policy.refund }}</p>
       <table class="spec policy-table">
         <tr><th style="width:230px;">자료 발송 전<br><small>(입금대기 · 입금확인 상태)</small></th>
-            <td><b>전액 환불</b>해 드립니다. 이메일이나 전화로 알려 주시면 됩니다.</td></tr>
+            <td><b>전액 환불</b>해 드립니다. 이메일이나 카카오톡으로 알려 주시면 됩니다.</td></tr>
         <tr><th>자료 발송 후</th>
             <td>디지털 자료 특성상 환불이 <b>제한</b>됩니다.
               <span class="muted">(전자상거래법 제17조 제2항 제5호 — 복제가 가능한 디지털 콘텐츠는
@@ -225,7 +225,11 @@
     <div class="card">
       <table class="spec" style="margin:0;">
         <tr><th>이메일</th><td>{{ site.contact.email }}</td></tr>
-        <tr><th>전화</th><td>{{ site.contact.phone }}</td></tr>
+        {% if site.contact.kakao_url %}
+          <tr><th>카카오톡</th><td>
+            <a href="{{ site.contact.kakao_url }}" target="_blank" rel="noopener">
+              {{ site.contact.kakao_label or '오픈채팅 문의' }}</a></td></tr>
+        {% endif %}
         <tr><th>운영 시간</th><td>{{ site.contact.hours }}</td></tr>
         {% if site.contact.kakao_url and '여기에' not in site.contact.kakao_url %}
         <tr><th>카카오톡</th><td><a href="{{ site.contact.kakao_url }}" target="_blank" rel="noopener">

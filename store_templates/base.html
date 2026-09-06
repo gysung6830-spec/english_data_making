@@ -177,8 +177,11 @@
       </div>
       <div>
         <h4>문의</h4>
+        {% if site.contact.kakao_url %}
+          <div><a href="{{ site.contact.kakao_url }}" target="_blank" rel="noopener">
+            {{ site.contact.kakao_label or '카카오톡 오픈채팅 문의' }}</a></div>
+        {% endif %}
         <div>이메일 · {{ site.contact.email }}</div>
-        <div>전화 · {{ site.contact.phone }}</div>
         <div>{{ site.contact.hours }}</div>
       </div>
       <div>

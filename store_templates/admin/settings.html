@@ -45,8 +45,12 @@
       <input type="text" id="contact_email" name="contact_email" value="{{ s.contact.email or '' }}">
     </div>
     <div class="adm-field">
-      <label for="contact_phone">전화</label>
-      <input type="text" id="contact_phone" name="contact_phone" value="{{ s.contact.phone or '' }}">
+      <label for="contact_kakao">카카오톡 오픈채팅 주소</label>
+      <input type="text" id="contact_kakao" name="contact_kakao"
+             value="{{ s.contact.kakao_url or '' }}"
+             placeholder="https://open.kakao.com/o/xxxxxxx">
+      <div class="tip">카카오톡 → 오픈채팅 → 채팅방 만들기 → 링크 복사.
+        <b>전화번호를 안 알려 주고도</b> 문의를 받으실 수 있습니다.</div>
     </div>
     <div class="adm-field">
       <label for="contact_kakao_url">카카오톡 오픈채팅 주소</label>

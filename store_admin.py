@@ -1721,7 +1721,8 @@ def checkup():
         ("통신판매업 신고번호", biz.get("mailorder_no"), "제0000-지역-0000호"),
         ("사업장 주소", biz.get("address"), "사업장 주소"),
         ("이메일", contact.get("email"), "여기에_이메일@example.com"),
-        ("전화번호", contact.get("phone"), "010-0000-0000"),
+        ("카카오톡 오픈채팅 주소", contact.get("kakao_url"),
+         "https://open.kakao.com/여기에_오픈채팅_주소"),
         ("입금 계좌", payment.get("bank_account"), ""),
     ):
         if not val or val == bad:
@@ -2001,8 +2002,11 @@ def settings():
     site["brand_en"] = sc.clean(f.get("brand_en"), 40) or site.get("brand_en", "Ortica")
     site["tagline"] = sc.clean(f.get("tagline"), 120)
     site["description"] = sc.clean(f.get("description"), 300)
-    for key in ("email", "phone", "kakao_url", "kakao_label", "hours"):
+    # 전화번호는 안 받습니다. 개인 번호를 손님 화면에 걸 이유가 없고,
+    # 오픈채팅이 더 빠릅니다.
+    for key in ("email", "kakao_url", "kakao_label", "hours"):
         site["contact"][key] = sc.clean(f.get(f"contact_{key}"), 200)
+    site["contact"].pop("phone", None)
     for key in ("bank_name", "bank_account", "bank_holder", "kakaopay_url", "notice"):
         site["payment"][key] = sc.clean(f.get(f"payment_{key}"), 300)
     for key in ("company", "owner", "reg_no", "mailorder_no", "address"):
