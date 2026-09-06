@@ -170,14 +170,17 @@ def test_sibling_package_cross_sell():
 
 
 def test_package_filter():
-    """패키지로 거르면 목록 카드에 그쪽 갈래만 남아야 합니다."""
+    """패키지로 거르면 그 갈래에 든 자료만 남아야 합니다."""
+    # 교재 칸에 걸리는 자료 딱지로 봅니다 (안내 문구에도 같은 말이 나오니
+    # 번호까지 붙은 딱지 모양을 그대로 찾습니다)
+    chip = lambda no, name: f'<span class="n">{no}</span>{name}'
     only_analysis = body(client().get("/products?package=analysis"))
-    assert "bg-pick pkg-analysis" in only_analysis
-    assert "bg-pick pkg-problem" not in only_analysis
+    assert chip("02", "지문분석지") in only_analysis
+    assert chip("07", "17종 변형문제") not in only_analysis
 
     only_problem = body(client().get("/products?package=problem"))
-    assert "bg-pick pkg-problem" in only_problem
-    assert "bg-pick pkg-analysis" not in only_problem
+    assert chip("07", "17종 변형문제") in only_problem
+    assert chip("02", "지문분석지") not in only_problem
     print("PASS  목록에서 패키지로 거르기")
 
 
@@ -294,7 +297,8 @@ def test_popular_order():
     page = body(client().get("/products?order=popular"))
     assert ">인기순</a>" in page
     head = page.split("찾으시는 교재가 없나요")[0]
-    names = re.findall(r'<h3><a [^>]*>([^<]+)</a></h3>', head)
+    # 교재 칸은 칸 전체가 링크라, 제목에 <a> 가 따로 없습니다
+    names = re.findall(r'class="bg-open"[\s\S]*?<h3>([^<]+)</h3>', head)
     assert names, head[:200]
     assert names[0].startswith("2026년 3월 학력평가"), names[:3]
     assert "아직 판매 기록이 없어" not in page          # 판 자료가 있으니 안내가 없어야 합니다
@@ -313,7 +317,9 @@ def test_search_finds_by_publisher_and_book():
     import re
     def names(html):                       # 검색 결과에 실제로 뜬 상품 이름만
         head = html.split("찾으시는 교재가 없나요")[0]
-        return re.findall(r"<h3><a [^>]*>([^<]+)</a></h3>", head)
+        # 교재 칸(칸 전체가 링크) 과 낱개 자료 카드(제목이 링크) 를 모두 봅니다
+        return (re.findall(r'class="bg-open"[\s\S]*?<h3>([^<]+)</h3>', head)
+                + re.findall(r"<h3><a [^>]*>([^<]+)</a></h3>", head))
 
     hit = names(body(client().get("/products?q=능률")))
     assert hit and all("능률" in n for n in hit), hit
@@ -2385,21 +2391,23 @@ def test_home_previews_every_category():
     print("PASS  라인업이 분류마다 교재를 몇 권씩 미리 보여 줌")
 
 
-def test_book_groups_fold_on_phone():
-    """폰에서 자료 목록이 열 화면씩 길어지지 않게, 교재를 한 칸으로 접습니다."""
+def test_list_hides_price_until_you_open_the_book():
+    """목록에서는 값부터 보여 주지 않습니다. 교재에 들어가서 값을 봅니다."""
     text = body(client().get("/products"))
-    assert 'class="bg-fold"' in text
-    # 접힌 채로도 자료 수와 최저가는 보여야 합니다
-    # 값보다 '무엇이 들어가는지'가 먼저 보여야 합니다
-    assert 'class="bg-mats"' in text
-    assert "패키지 2종 · 14,800원부터" in text
-    assert text.index('class="bg-mats"') < text.index("패키지 2종 · 14,800원부터")
-    css = body(client().get("/static/store.css"))
-    assert ".bg-fold, .bg-mats{display:none;}" in css        # 넓은 화면에선 안 씀
-    assert ".book-group.folded .bg-picks{display:none;}" in css
-    # 자바스크립트가 꺼져 있으면 늘 펼쳐진 채여야 합니다 (접는 표시는 스크립트가 답니다)
-    assert "book-group folded" not in text
-    print("PASS  폰에서 교재 목록 접기")
+    # 무엇이 들어 있는지는 보여 줍니다
+    assert 'class="bg-mats"' in text and 'class="bg-open"' in text
+    assert "자세히 보기 →" in text
+    # 값·담기·패키지 카드는 목록에서 사라졌습니다
+    for gone in ("원부터", "패키지 2종", 'class="bg-cart"', 'class="bg-pick"',
+                 'class="bg-fold"'):
+        assert gone not in text, gone
+    # 교재 칸을 누르면 교재 화면으로 갑니다
+    assert '/books/ybm-han"' in text or "/books/ybm-han'" in text
+
+    # 값은 교재 화면에 있습니다
+    book = body(client().get("/books/ybm-han"))
+    assert "14,800원" in book
+    print("PASS  목록은 값 대신 내용 · 값은 교재 화면에서")
 
 
 def test_lineup_shots_upload_and_show():
@@ -2686,19 +2694,20 @@ def test_book_pick_grid():
     assert "필요한 강만 고르세요" in page
     assert "모두 2강" in page
     assert "1강" in page and "2강" in page                    # 줄
-    assert "지문분석지" in page and "17종 변형문제" in page      # 칸
     assert "3개부터" in page and "10%" in page                 # 담은 개수 할인 안내
-    # 교재 전체 상품 카드에도 name="slug" 가 있으니, 표의 칸만 셉니다
+    # 칸은 '자료 종류' 가 아니라 패키지입니다 — 2강 × 2패키지 = 네 칸
     assert page.count('data-price=') == 4
 
     # 강이 한눈에 보이는 체크 칩으로 나옵니다 (표를 안 펴도 고를 수 있게)
-    assert "어떤 강이 필요하세요?" in page and "어떤 자료가 필요하세요?" in page
+    assert "어떤 강이 필요하세요?" in page and "어떤 패키지가 필요하세요?" in page
     chips = page[page.index('id="unit-chips"'):page.index('id="kind-chips"')]
     assert chips.count('class="chip"') == 2                  # 1강 · 2강
     assert "1강" in chips and "2강" in chips
     kind_chips = page[page.index('id="kind-chips"'):page.index("pick-tiers")]
-    assert kind_chips.count('class="chip"') == 2             # 지문분석지 · 17종 변형문제
+    assert kind_chips.count('class="chip"') == 2             # 분석 · 문제
     assert page.count('class="ps-all"') == 2                 # 줄마다 '전체 고르기'
+    # 한 칸에 자료가 여럿이면 함께 담깁니다
+    assert 'value="ybm-han-01-analysis"' in page
     # 칸마다 고치는 표는 접어 둡니다
     assert "칸마다 하나씩 고르기" in page and "<details" in page
     # 교재 전체 상품은 강 고르기 아래에 놓입니다
@@ -3493,7 +3502,7 @@ def run_all():
     test_speaks_to_both_audiences()
     test_analysis_tagline_updated()
     test_new_product_appears_in_home_updates()
-    test_book_groups_fold_on_phone()
+    test_list_hides_price_until_you_open_the_book()
     test_lineup_shots_upload_and_show()
     test_mobile_filters_collapse()
     test_long_pages_have_shortcuts()

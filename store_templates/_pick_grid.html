@@ -21,13 +21,13 @@
   {# ---- 2. 그 강에서 어떤 자료를 ---------------------------------- #}
   <div class="pick-step">
     <div class="ps-head">
-      <b>어떤 자료가 필요하세요?</b>
+      <b>어떤 패키지가 필요하세요?</b>
       <button type="button" class="ps-all" data-all="kind">전체 고르기</button>
     </div>
     <div class="chips" id="kind-chips">
       {% for m in kinds %}
         <button type="button" class="chip" data-kind="{{ m }}">
-          <i class="cbox"></i>{{ mats[m].name if mats.get(m) else m }}
+          <i class="cbox"></i>{{ kind_names.get(m, m) }}
         </button>
       {% endfor %}
     </div>
@@ -55,7 +55,7 @@
             {% for m in kinds %}
               <th>
                 <button type="button" class="pk-col" data-kind="{{ m }}">
-                  {{ mats[m].name if mats.get(m) else m }}</button>
+                  {{ kind_names.get(m, m) }}</button>
               </th>
             {% endfor %}
             <th class="pk-sum">줄 합계</th>
@@ -69,15 +69,18 @@
               <small>지문 {{ r.passages }}개</small>
             </th>
             {% for m in kinds %}
-              {% set p = r.cells.get(m) %}
+              {% set c = r.cells.get(m) %}
+              {% set have = c and c.slugs.split(',')|reject('in', cart)|list|length == 0 %}
               <td>
-                {% if p %}
-                  <label class="pk-cell{{ ' have' if p.slug in cart }}">
-                    <input type="checkbox" name="slug" value="{{ p.slug }}"
+                {% if c %}
+                  <label class="pk-cell{{ ' have' if have }}"
+                         title="{{ c.names|join(' · ') }}">
+                    <input type="checkbox" name="slug" value="{{ c.slugs }}"
                            data-kind="{{ m }}" data-row="{{ r.no }}"
-                           data-price="{{ p.price }}"
-                           {{ 'checked disabled' if p.slug in cart }}>
-                    <span>{{ '{:,}'.format(p.price) }}</span>
+                           data-price="{{ c.price }}"
+                           {{ 'checked disabled' if have }}>
+                    <span>{{ '{:,}'.format(c.price) }}
+                      {%- if c.count > 1 %}<small>자료 {{ c.count }}종</small>{% endif %}</span>
                   </label>
                 {% else %}
                   <span class="pk-none">—</span>

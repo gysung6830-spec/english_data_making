@@ -215,6 +215,8 @@ def group_by_book(items: list[dict], books: list[dict],
         groups.append({"book": book, "items": picked,
                        "from_price": min(p.get("price", 0) for p in picked),
                        "passages": max(p.get("passages", 0) for p in picked),
+                       # 강 단위로 고를 수 있는 교재인지 (목록에서 알려 줍니다)
+                       "units": len({p["unit"] for p in picked if p.get("unit")}),
                        # 교재 카드의 인기 = 그 교재 자료가 팔린 횟수를 다 더한 것
                        "sold": sum((sold or {}).get(p.get("slug", ""), 0) for p in picked)})
     return groups, loose
@@ -347,34 +349,47 @@ def product_detail(slug):
 
 
 def unit_grid(catalog: dict, slug: str) -> dict:
-    """강(회차·과) × 자료 종류 표. 강 단위 상품이 없으면 rows 가 빕니다.
+    """강(회차·과) × 패키지 표. 강 단위 상품이 없으면 rows 가 빕니다.
 
-    교재 화면과 골라 담기 화면이 같은 표를 씁니다.
+    칸을 '자료 종류' 가 아니라 **패키지** 로 묶습니다. 손님이 고르는 단위는
+    '3강의 문제 패키지' 이지 '3강의 통합 워크북' 이 아니기 때문입니다.
+    한 칸에 자료가 여럿이면 값을 더해 보여 주고, 담을 때 함께 담깁니다.
     """
     items = [p for p in catalog["products"] if p.get("book") == slug and p.get("unit")]
     if not items:
-        return {"rows": [], "kinds": [], "mats": {}, "tiers": []}
+        return {"rows": [], "kinds": [], "kind_names": {}, "tiers": []}
 
-    mats = sc.material_map()
-    order = list(mats)                       # 라인업 차례대로 세웁니다
-    kinds = sorted({m for p in items for m in (p.get("materials") or [])},
-                   key=lambda m: order.index(m) if m in order else 99)
+    order = [pkg["id"] for pkg in catalog.get("packages", [])]
+    names = {pkg["id"]: pkg["name"] for pkg in catalog.get("packages", [])}
+    kinds = sorted({p.get("package") for p in items if p.get("package")},
+                   key=lambda k: order.index(k) if k in order else 99)
 
     seen: dict = {}
     for p in items:
+        pkg = p.get("package")
+        if pkg not in kinds:
+            continue
         key = (sc.to_int(p.get("unit_no"), 0), p.get("unit"))
-        cell = seen.setdefault(key, {})
-        for m in (p.get("materials") or []):
-            cell[m] = p
-    rows = [{"no": no, "unit": unit, "cells": cell,
-             "passages": max((sc.to_int(x.get("passages"), 0)
-                              for x in cell.values()), default=0)}
-            for (no, unit), cell in sorted(seen.items())]
+        seen.setdefault(key, {}).setdefault(pkg, []).append(p)
+
+    rows = []
+    for (no, unit), cell in sorted(seen.items()):
+        cells = {}
+        for pkg, plist in cell.items():
+            cells[pkg] = {
+                "slugs": ",".join(x["slug"] for x in plist),
+                "price": sum(sc.to_int(x.get("price"), 0) for x in plist),
+                "count": len(plist),
+                "names": [x.get("name", "") for x in plist],
+            }
+        rows.append({"no": no, "unit": unit, "cells": cells,
+                     "passages": max((sc.to_int(x.get("passages"), 0)
+                                      for plist in cell.values() for x in plist), default=0)})
 
     site = sc.load_site()
     tiers = sorted((site.get("discount") or {}).get("count_tiers") or [],
                    key=lambda t: sc.to_int(t.get("min"), 0))
-    return {"rows": rows, "kinds": kinds, "mats": mats, "tiers": tiers}
+    return {"rows": rows, "kinds": kinds, "kind_names": names, "tiers": tiers}
 
 
 @app.route("/books/<slug>")
@@ -522,11 +537,13 @@ def cart_add():
     known = {p["slug"] for p in catalog["products"]}
     slugs = cart_slugs()
     added = 0
-    for slug in request.form.getlist("slug"):
-        slug = sc.clean(slug, 60)
-        if slug in known and slug not in slugs and len(slugs) < CART_MAX:
-            slugs.append(slug)
-            added += 1
+    # 한 칸이 자료 여러 개를 담을 때가 있어(패키지 한 칸 = 자료 3종) 쉼표로 옵니다
+    for raw in request.form.getlist("slug"):
+        for slug in sc.clean(raw, 600).split(","):
+            slug = slug.strip()
+            if slug in known and slug not in slugs and len(slugs) < CART_MAX:
+                slugs.append(slug)
+                added += 1
     save_cart(slugs)
     if added == 1:
         name = next((p["name"] for p in catalog["products"]
