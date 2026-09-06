@@ -153,7 +153,7 @@
   {
    "id": 1,
    "english": "Learning games need to be what we call 'fun enough.'",
-   "translation": "학습 게임은 이른바 '충분히 재미있는' 수준이 되어야 한다.",
+   "translation": "학습 게임은 우리가 '충분히 재미있는 것'이라고 부르는 것이 되어야 한다.",
    "grammar": [
     {
      "tag": "to부정사(보어)",
@@ -190,8 +190,8 @@
      "ko": "[[우리가 ~라고 부르는 것]]"
     },
     {
-     "en": "'[[fun enough]].'",
-     "ko": "'[[충분히 재미있는]]'"
+     "en": "'fun enough.'",
+     "ko": "'충분히 재미있는'"
     }
    ],
    "misreads": [
@@ -232,16 +232,12 @@
    ],
    "chunks": [
     {
-     "en": "Many new",
-     "ko": "많은 새로운"
+     "en": "Many new learning-game developers",
+     "ko": "많은 새로운 학습 게임 개발자들은"
     },
     {
-     "en": "learning-game [[developers]]",
-     "ko": "학습 게임 [[개발자들]]은"
-    },
-    {
-     "en": "try to [[design]]",
-     "ko": "~을 [[설계하려고]] 한다"
+     "en": "try to design",
+     "ko": "설계하려고 한다"
     },
     {
      "en": "an [[entertaining]] game.",
@@ -292,16 +288,12 @@
      "ko": "불행하게도,"
     },
     {
-     "en": "that often [[makes]] learning",
-     "ko": "그것은 흔히 학습을 [[만든다]]"
+     "en": "[[that]] often makes learning",
+     "ko": "[[그것은]] 흔히 학습을 만든다"
     },
     {
-     "en": "[[harder]]",
-     "ko": "더 [[어렵게]]"
-    },
-    {
-     "en": "rather than [[easier]].",
-     "ko": "~가 아니라 더 [[쉽게]]."
+     "en": "harder rather than easier.",
+     "ko": "더 쉽게가 [[아니라]] 더 어렵게"
     }
    ],
    "misreads": [
@@ -319,7 +311,7 @@
   {
    "id": 4,
    "english": "Remember, you are not creating the next great commercial game to entertain your learners; you are creating a learning game in which success will be measured by the achievement of learning outcomes.",
-   "translation": "명심하라, 당신은 학습자를 즐겁게 하기 위한 차세대 대작 상업용 게임을 만드는 것이 아니라, 성공이 학습 성과의 달성으로 측정되는 학습 게임을 만들고 있는 것이다.",
+   "translation": "명심하라, 당신은 학습자를 즐겁게 하기 위해 차세대의 훌륭한 상업용 게임을 만들고 있는 것이 아니라, 성공이 학습 성과의 달성으로 측정될 학습 게임을 만들고 있는 것이다.",
    "grammar": [
     {
      "tag": "현재진행형",
@@ -374,32 +366,28 @@
      "ko": "명심하라,"
     },
     {
-     "en": "you are not [[creating]]",
-     "ko": "당신은 [[만들고]] 있는 것이 아니라"
+     "en": "you are not creating",
+     "ko": "당신은 만들고 있는 것이 [[아니라]]"
     },
     {
-     "en": "the next great [[commercial]] game",
-     "ko": "차세대 대작 [[상업용]] 게임을"
+     "en": "the next great commercial game",
+     "ko": "차세대 대작 상업용 게임을"
     },
     {
-     "en": "to [[entertain]] your learners;",
-     "ko": "학습자를 [[즐겁게 하기 위한]];"
+     "en": "to entertain your learners;",
+     "ko": "학습자를 즐겁게 하기 위한;"
     },
     {
-     "en": "you are creating",
-     "ko": "당신은 만들고 있다"
-    },
-    {
-     "en": "a learning game",
-     "ko": "학습 게임을"
+     "en": "you are creating a learning game",
+     "ko": "당신은 학습 게임을 만들고 있다"
     },
     {
      "en": "[[in which success will be measured]]",
-     "ko": "[[그 안에서 성공은 측정될 것이다]]"
+     "ko": "[[그 안에서 성공이 측정될 것이다]]"
     },
     {
-     "en": "by the [[achievement]] of learning outcomes.",
-     "ko": "학습 성과의 [[달성]]으로"
+     "en": "by the achievement of learning outcomes.",
+     "ko": "학습 성과의 달성으로"
     }
    ],
    "misreads": [
@@ -474,24 +462,24 @@
    ],
    "chunks": [
     {
-     "en": "Resist the [[temptation]]",
-     "ko": "[[유혹]]에 저항하라"
+     "en": "Resist the temptation",
+     "ko": "유혹에 [[저항하라]]"
     },
     {
      "en": "to create a ton of rules,",
-     "ko": "많은 규칙을 만들려는,"
+     "ko": "많은 규칙을 만들고,"
     },
     {
-     "en": "[[pile on different game elements,]]",
-     "ko": "[[다양한 게임 요소를 잔뜩 쌓고,]]"
+     "en": "pile on different game elements,",
+     "ko": "다양한 게임 요소를 [[잔뜩 쌓고]],"
     },
     {
-     "en": "and [[incorporate]] multiple dynamics",
-     "ko": "그리고 여러 역학을 [[포함시켜라]]"
+     "en": "and incorporate multiple dynamics",
+     "ko": "여러 역학을 포함시키려는,"
     },
     {
-     "en": "to keep player [[interest]] high.",
-     "ko": "플레이어의 [[흥미]]를 높게 유지하도록"
+     "en": "to keep player interest high.",
+     "ko": "플레이어의 흥미를 높게 유지하려는"
     }
    ],
    "misreads": [
@@ -544,24 +532,16 @@
    ],
    "chunks": [
     {
-     "en": "Yes, the game",
-     "ko": "그렇다, 게임은"
+     "en": "Yes, the game should be [[engaging]]",
+     "ko": "그렇다, 게임은 [[몰입감이 있어야]] 한다"
     },
     {
-     "en": "should be [[engaging]]",
-     "ko": "[[몰입감이 있어야]] 한다"
+     "en": "with a mild level of fun,",
+     "ko": "약간의 재미의 수준으로,"
     },
     {
-     "en": "with a [[mild]] level of fun,",
-     "ko": "[[약간의]] 재미의 수준으로,"
-    },
-    {
-     "en": "but learning should be",
-     "ko": "하지만 학습이 ~여야 한다"
-    },
-    {
-     "en": "the [[goal]].",
-     "ko": "[[목표]]"
+     "en": "but learning should be the goal.",
+     "ko": "[[하지만]] 학습이 목표가 되어야 한다"
     }
    ],
    "misreads": [
@@ -615,12 +595,12 @@
    ],
    "chunks": [
     {
-     "en": "Focus on [[engagement]]",
-     "ko": "[[참여]]에 집중하라"
+     "en": "Focus on engagement",
+     "ko": "참여에 집중하라"
     },
     {
-     "en": "rather than [[entertainment.]]",
-     "ko": "[[오락]]보다는"
+     "en": "rather than entertainment.",
+     "ko": "오락이 [[아니라]]"
     }
    ],
    "misreads": [
@@ -666,20 +646,16 @@
    ],
    "chunks": [
     {
-     "en": "The [[goals]] of the game play",
-     "ko": "게임 플레이의 [[목표]]는"
+     "en": "The goals of the game play",
+     "ko": "게임 플레이의 목표는"
     },
     {
      "en": "should be",
      "ko": "~여야 한다"
     },
     {
-     "en": "[[interactivity]] and",
-     "ko": "[[상호작용성]]과"
-    },
-    {
-     "en": "[[engagement.]]",
-     "ko": "[[참여]]"
+     "en": "interactivity and engagement.",
+     "ko": "[[상호작용성]]과 참여"
     }
    ],
    "misreads": [
@@ -738,8 +714,8 @@
    ],
    "chunks": [
     {
-     "en": "Research [[shows]] that",
-     "ko": "연구는 ~을 [[보여준다]]"
+     "en": "Research shows that",
+     "ko": "연구는 ~을 보여준다"
     },
     {
      "en": "[[what makes games instructional]]",
@@ -750,16 +726,12 @@
      "ko": "~은 ~의 수준이다"
     },
     {
-     "en": "[[interactivity and engagement]]",
-     "ko": "[[상호작용성과 참여]]"
+     "en": "interactivity and engagement",
+     "ko": "상호작용성과 참여"
     },
     {
-     "en": "the learners [[have]]",
-     "ko": "학습자가 [[가지는]]"
-    },
-    {
-     "en": "with the content.",
-     "ko": "그 내용과"
+     "en": "[[the learners have with the content.]]",
+     "ko": "[[학습자가 그 내용과 갖는]]"
     }
    ],
    "misreads": [
@@ -838,20 +810,16 @@
      "ko": "학습자가 ~하도록 하는 것이"
     },
     {
-     "en": "are [[engaged]] and active",
-     "ko": "[[참여하고]] 능동적이도록"
+     "en": "are engaged and active",
+     "ko": "참여하고 능동적이도록"
     },
     {
-     "en": "is far more [[important]]",
-     "ko": "훨씬 더 [[중요하다]]"
+     "en": "is far more important",
+     "ko": "훨씬 더 중요하다"
     },
     {
-     "en": "than making sure",
-     "ko": "~하도록 하는 것보다"
-    },
-    {
-     "en": "they are [[entertained.]]",
-     "ko": "그들을 [[즐겁게]]"
+     "en": "[[than making sure they are entertained.]]",
+     "ko": "[[그들을 즐겁게 하도록 하는 것보다]]"
     }
    ],
    "misreads": [

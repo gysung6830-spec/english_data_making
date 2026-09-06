@@ -102,7 +102,7 @@
     {
       "id": 1,
       "english": "If our bodies know best, why are they easily injured when we do something so seemingly natural as running?",
-      "translation": "만약 우리 몸이 가장 잘 안다면, 왜 우리는 달리기처럼 겉보기에 아주 자연스러운 일을 할 때 쉽게 다치는가?",
+      "translation": "만약 우리 몸이 가장 잘 안다면, 왜 그것들은 우리가 달리기처럼 그토록 겉보기에 자연스러운 무언가를 할 때 쉽게 다치는가?",
       "grammar": [
         {"tag": "조건 부사절 접속사 if", "note": "'만약 ~라면'의 조건", "spans": ["If"]},
         {"tag": "의문문 주어-동사 도치", "note": "의문사 why 뒤에서 be동사가 주어 they 앞으로 도치", "spans": ["are they"]},
@@ -115,12 +115,10 @@
         {"word": "seemingly", "meaning": "겉보기에"}
       ],
       "chunks": [
-        {"en": "If our bodies", "ko": "만약 우리 몸이"},
-        {"en": "know best,", "ko": "가장 잘 [[안다면]],"},
+        {"en": "If our bodies know best,", "ko": "만약 우리 몸이 가장 잘 안다면,"},
         {"en": "why are they easily injured", "ko": "왜 그것들은 쉽게 [[다치는가]]"},
         {"en": "when we do something", "ko": "우리가 무언가를 할 때"},
-        {"en": "so seemingly natural", "ko": "그토록 겉보기에 [[자연스러운]]"},
-        {"en": "as running?", "ko": "[[달리기]]처럼?"}
+        {"en": "so seemingly natural as running?", "ko": "달리기[[처럼]] 그토록 겉보기에 자연스러운?"}
       ],
       "misreads": [
         {"statement": "몸이 가장 잘 안다면 왜 달리기처럼 자연스러운 동작에서 쉽게 다치는지 필자는 의문을 던진다.", "verdict": "O", "trap_type": "필자관점"}
@@ -143,10 +141,9 @@
       ],
       "chunks": [
         {"en": "On the one hand,", "ko": "[[한편으로]],"},
-        {"en": "running seems very easy,", "ko": "달리기는 아주 [[쉬워 보인다]],"},
-        {"en": "but that is only", "ko": "하지만 그것은 오직"},
-        {"en": "because our bodies", "ko": "우리 몸이 ~ [[때문이다]]"},
-        {"en": "are so very good at it.", "ko": "그것을 아주아주 [[잘하기]]."}
+        {"en": "running seems very easy,", "ko": "달리기는 아주 쉬워 보인다,"},
+        {"en": "but that is only because", "ko": "하지만 그것은 오직 ~ [[때문이다]]"},
+        {"en": "our bodies are so very good at it.", "ko": "우리 몸이 그것을 아주아주 잘하기."}
       ],
       "misreads": [
         {"statement": "달리기가 쉬워 보이는 것은 달리기라는 동작 자체가 원래 단순하기 때문이다.", "verdict": "X", "trap_type": "인과조건", "anchor": "because our bodies are so very good at it", "why": "쉬워 보이는 이유는 동작이 단순해서가 아니라 몸이 아주 능숙하기 때문임."}
@@ -172,10 +169,9 @@
       "chunks": [
         {"en": "The most powerful supercomputer", "ko": "가장 강력한 슈퍼컴퓨터도"},
         {"en": "on the planet", "ko": "지구상에서"},
-        {"en": "cannot administer", "ko": "[[처리]]할 수 없다"},
-        {"en": "the enormous number", "ko": "그 [[막대한]] 수의"},
-        {"en": "of computations", "ko": "[[연산]]의"},
-        {"en": "[[it takes to run,]]", "ko": "[[달리는 데 드는]],"},
+        {"en": "cannot administer", "ko": "처리할 수 없다"},
+        {"en": "the enormous number of computations", "ko": "그 막대한 수의 연산을"},
+        {"en": "[[it takes to run,]]", "ko": "[[달리는 데 드는,]]"},
         {"en": "untethered,", "ko": "[[매인 것 없이]],"},
         {"en": "on two legs.", "ko": "두 다리로."}
       ],
@@ -203,11 +199,10 @@
       ],
       "chunks": [
         {"en": "Wherever our running intelligence is,", "ko": "우리의 달리기 지능이 [[어디에 있든]],"},
-        {"en": "running is not all conscious", "ko": "달리기가 전부 [[의식되는]] 것은 아니며"},
-        {"en": "to us", "ko": "우리에게"},
-        {"en": "and is so complicated that", "ko": "그리고 너무 [[복잡해서]]"},
+        {"en": "running is not all conscious to us", "ko": "달리기가 우리에게 전부 [[의식되는]] 것은 아니며"},
+        {"en": "and is so complicated that", "ko": "그리고 너무 복잡해서"},
         {"en": "only the T-1000 Terminators", "ko": "오직 T-1000 터미네이터만이"},
-        {"en": "of our imagination", "ko": "우리 [[상상]] 속의"},
+        {"en": "of our imagination", "ko": "우리 상상 속의"},
         {"en": "are able to do it.", "ko": "그것을 할 수 있을 정도이다."}
       ],
       "misreads": [
@@ -232,11 +227,10 @@
         {"word": "complexity", "meaning": "복잡성"}
       ],
       "chunks": [
-        {"en": "Because our running knowledge", "ko": "우리의 달리기 [[지식]]이 ~ 때문에"},
+        {"en": "Because our running knowledge", "ko": "우리의 달리기 지식이 ~ 때문에"},
         {"en": "is buried so deeply", "ko": "너무 깊이 [[묻혀 있기]]"},
-        {"en": "within muscle fibres,", "ko": "[[근섬유]] 속에,"},
-        {"en": "cells and our DNA,", "ko": "세포, 그리고 우리 DNA,"},
-        {"en": "we have to accept that", "ko": "우리는 ~을 [[인정해야 한다]]"},
+        {"en": "within muscle fibres, cells and our DNA,", "ko": "근섬유, 세포, 그리고 우리 DNA 속에,"},
+        {"en": "we have to accept that", "ko": "우리는 ~을 인정해야 한다"},
         {"en": "[[we cannot fully explain its complexities.]]", "ko": "[[우리가 그 복잡성을 온전히 설명할 수 없다는 것을]]."}
       ],
       "misreads": [
@@ -258,9 +252,9 @@
         {"word": "how to", "meaning": "~하는 방법"}
       ],
       "chunks": [
-        {"en": "That doesn't mean", "ko": "그것이 [[의미]]하는 것은 아니다"},
-        {"en": "our bodies don't know", "ko": "우리 몸이 [[모른다는]]"},
-        {"en": "how to do it.", "ko": "그것을 하는 [[방법]]을."}
+        {"en": "That doesn't mean", "ko": "[[그렇다고 해서]] ~ 뜻은 아니다"},
+        {"en": "our bodies don't know", "ko": "우리 몸이 모른다는"},
+        {"en": "how to do it.", "ko": "그것을 하는 방법을."}
       ],
       "misreads": [
         {"statement": "달리기의 복잡성을 완전히 설명할 수 없다고 해서 우리 몸이 달리는 법을 모른다는 뜻은 아니다.", "verdict": "O", "trap_type": "필자관점"}
@@ -288,11 +282,9 @@
         {"en": "We may feel our way", "ko": "우리는 우리의 길을 [[더듬어 나아갈]] 수도 있다"},
         {"en": "towards understanding", "ko": "이해하는 쪽으로"},
         {"en": "the alchemy of running", "ko": "달리기의 [[비법]]을"},
-        {"en": "by learning", "ko": "배움으로써"},
-        {"en": "how to use our senses,", "ko": "우리 감각을 사용하는 법,"},
-        {"en": "getting them firing,", "ko": "그것들이 [[작동하게]] 하고,"},
-        {"en": "and seeing", "ko": "그리고 보고"},
-        {"en": "what they are capable of,", "ko": "그것들이 무엇을 [[할 수 있는지]],"},
+        {"en": "by learning how to use our senses,", "ko": "우리 감각을 사용하는 법을 배움으로써,"},
+        {"en": "getting them firing,", "ko": "그것들이 작동하게 하고,"},
+        {"en": "and seeing what they are capable of,", "ko": "그것들이 무엇을 할 수 있는지 보고,"},
         {"en": "and accepting that", "ko": "그리고 ~을 받아들임으로써"},
         {"en": "our bodies know more about running", "ko": "우리 몸이 달리기에 대해 [[더 많이]] 안다는 것"},
         {"en": "than we ever will.", "ko": "우리가 앞으로 알게 될 것보다."}

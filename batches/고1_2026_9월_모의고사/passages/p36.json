@@ -113,11 +113,10 @@
         {"word": "symmetry", "meaning": "대칭"}
       ],
       "chunks": [
-        {"en": "The central concerns", "ko": "그 [[핵심]] 관심사는"},
-        {"en": "of mathematics", "ko": "수학의"},
+        {"en": "The central concerns of mathematics", "ko": "수학의 핵심 관심사는"},
         {"en": "are not numbers,", "ko": "[[숫자]]가 아니라"},
-        {"en": "but patterns, structures,", "ko": "그러나 [[패턴]], 구조,"},
-        {"en": "symmetries and connections.", "ko": "[[대칭]]과 연결이다."}
+        {"en": "but patterns, structures,", "ko": "패턴, 구조,"},
+        {"en": "symmetries and connections.", "ko": "대칭과 연결이다."}
       ],
       "misreads": [
         {"statement": "수학의 핵심 관심사는 숫자가 아니라 패턴, 구조, 대칭, 연결이다.", "verdict": "O", "trap_type": "필자관점"}
@@ -137,10 +136,10 @@
         {"word": "daily", "meaning": "매일, 날마다"}
       ],
       "chunks": [
-        {"en": "Take, for example,", "ko": "예로 [[들어보라]],"},
-        {"en": "the Sudoku puzzles", "ko": "그 [[스도쿠 퍼즐]]을"},
-        {"en": "that appear daily", "ko": "매일 [[나타나는]]"},
-        {"en": "in newspapers.", "ko": "신문에."}
+        {"en": "Take, for example,", "ko": "예를 들어, 생각해 보라"},
+        {"en": "the Sudoku puzzles", "ko": "그 스도쿠 퍼즐을"},
+        {"en": "that appear daily", "ko": "매일 [[실리는]]"},
+        {"en": "in newspapers.", "ko": "신문에"}
       ],
       "misreads": [
         {"statement": "관계대명사 that이 가리키는 것은 newspapers이다.", "verdict": "X", "trap_type": "지칭", "anchor": "the Sudoku puzzles that appear daily in newspapers", "why": "that의 선행사는 puzzles이며 newspapers가 아니다(매일 실리는 것은 퍼즐이다)."}
@@ -166,13 +165,12 @@
       ],
       "chunks": [
         {"en": "The objective is", "ko": "그 목표는 ~이다"},
-        {"en": "to complete a 9 × 9 grid,", "ko": "9 × 9 [[격자]]를 완성하는 것"},
-        {"en": "[[starting from a few given numbers]]", "ko": "[[주어진 몇 개의 숫자에서 시작하여]]"},
-        {"en": "or clues,", "ko": "혹은 단서에서,"},
+        {"en": "to complete a 9 × 9 grid,", "ko": "9 × 9 격자를 완성하는 것"},
+        {"en": "[[starting from a few given numbers or clues]],", "ko": "[[주어진 몇 개의 숫자나 단서에서 시작하여]],"},
         {"en": "while ensuring that", "ko": "~을 [[보장하면서]]"},
         {"en": "each row, each column", "ko": "각 행, 각 열,"},
         {"en": "and each 3 × 3 block", "ko": "그리고 각 3 × 3 블록이"},
-        {"en": "contains all the digits", "ko": "모든 [[숫자]]를 포함하도록"},
+        {"en": "contains all the digits", "ko": "모든 숫자를 포함하도록"},
         {"en": "from 1 to 9", "ko": "1부터 9까지"},
         {"en": "once and only once.", "ko": "[[단 한 번씩만]]."}
       ],
@@ -201,9 +199,9 @@
         {"en": "But the numerical values", "ko": "그러나 그 [[수치적 값]]은"},
         {"en": "of the digits", "ko": "숫자들의"},
         {"en": "are irrelevant;", "ko": "[[무관하다]];"},
-        {"en": "what is important", "ko": "[[중요한]] 것은"},
+        {"en": "what is important", "ko": "중요한 것은"},
         {"en": "is that there are", "ko": "~이 있다는 것이다"},
-        {"en": "nine distinct symbols.", "ko": "아홉 개의 서로 다른 [[기호]]가."}
+        {"en": "nine distinct symbols.", "ko": "아홉 개의 서로 다른 기호가."}
       ],
       "misreads": [
         {"statement": "스도쿠에서 정말로 중요한 것은 숫자들이 지닌 수치적 값이다.", "verdict": "X", "trap_type": "주체대상", "anchor": "the numerical values of the digits are irrelevant", "why": "수치적 값은 무관하며, 중요한 것은 아홉 개의 서로 다른 기호이다.", "killer": true}
@@ -220,9 +218,9 @@
       ],
       "vocab": [],
       "chunks": [
-        {"en": "They could be", "ko": "그것들은 ~일 [[수 있다]]"},
-        {"en": "nine letters", "ko": "아홉 개의 [[글자]]"},
-        {"en": "or nine shapes.", "ko": "혹은 아홉 개의 [[모양]]."}
+        {"en": "They could be", "ko": "[[그것들은]] ~일 수 있다"},
+        {"en": "nine letters", "ko": "아홉 개의 글자"},
+        {"en": "or nine shapes.", "ko": "혹은 아홉 개의 모양."}
       ],
       "misreads": [
         {"statement": "그 아홉 개의 기호는 숫자 대신 아홉 개의 글자나 모양이어도 된다.", "verdict": "O", "trap_type": "지칭"}
@@ -242,7 +240,7 @@
       ],
       "chunks": [
         {"en": "It's the pattern", "ko": "바로 그 [[패턴]]이다"},
-        {"en": "that matters.", "ko": "[[중요한]] 것은."}
+        {"en": "that matters.", "ko": "중요한 것은."}
       ],
       "misreads": [
         {"statement": "결국 스도쿠에서 중요한 것은 숫자 자체가 아니라 패턴이다.", "verdict": "O", "trap_type": "필자관점"}
@@ -252,7 +250,7 @@
     {
       "id": 7,
       "english": "One Irish daily paper publishes these puzzles with the statement 'There's no maths involved, simply use reasoning and logic!'",
-      "translation": "한 아일랜드 일간지는 '수학은 전혀 포함되어 있지 않으니, 그저 추론과 논리만 사용하세요!'라는 문구와 함께 이 퍼즐들을 싣는다.",
+      "translation": "한 아일랜드 일간지는 이 퍼즐들을 '수학은 전혀 포함되어 있지 않으니, 그저 추론과 논리를 사용하라!'라는 문구와 함께 싣는다.",
       "grammar": [
         {"tag": "주어-동사 수일치", "note": "단수 주어 One Irish daily paper에 맞춰 publishes를 씀", "spans": ["publishes"]},
         {"tag": "과거분사 후치수식", "note": "'no maths (that is) involved'로 maths를 뒤에서 수식", "spans": ["involved"]},
@@ -265,9 +263,9 @@
         {"word": "reasoning", "meaning": "추론"}
       ],
       "chunks": [
-        {"en": "One Irish daily paper", "ko": "한 아일랜드 [[일간지]]가"},
-        {"en": "publishes these puzzles", "ko": "이 퍼즐들을 [[게재한다]]"},
-        {"en": "with the statement", "ko": "그 [[문구]]와 함께"},
+        {"en": "One Irish daily paper", "ko": "한 아일랜드 일간지가"},
+        {"en": "publishes these puzzles", "ko": "이 퍼즐들을 게재한다"},
+        {"en": "with the statement", "ko": "그 문구와 함께"},
         {"en": "'There's no maths involved,", "ko": "'포함된 [[수학]]은 전혀 없으니,"},
         {"en": "simply use reasoning and logic!'", "ko": "그저 [[추론]]과 논리를 사용하라!'"}
       ],
@@ -293,12 +291,11 @@
         {"word": "potential", "meaning": "잠재적인"}
       ],
       "chunks": [
-        {"en": "It seems that", "ko": "~인 것 [[같다]]"},
+        {"en": "It seems that", "ko": "~인 것 같다"},
         {"en": "even the idea", "ko": "그 생각조차도"},
-        {"en": "[[that something might be spoiled]]", "ko": "[[무언가가 망쳐질지도 모른다는]]"},
-        {"en": "by mathematics", "ko": "수학에 의해"},
+        {"en": "[[that something might be spoiled by mathematics]]", "ko": "[[무언가가 수학에 의해 망쳐질지도 모른다는]]"},
         {"en": "is enough to scare off", "ko": "[[겁주어 쫓아내기에]] 충분하다는"},
-        {"en": "potential solvers!", "ko": "잠재적 [[풀이자]]들을!"}
+        {"en": "potential solvers!", "ko": "잠재적 풀이자들을!"}
       ],
       "misreads": [
         {"statement": "수학이 실제로 스도쿠 퍼즐을 더 어렵고 지루하게 만들기 때문에 사람들이 겁을 먹는다.", "verdict": "X", "trap_type": "무관정보", "anchor": "even the idea that something might be spoiled by mathematics is enough to scare off potential solvers", "why": "실제가 아니라 '수학에 의해 망쳐질지도 모른다는 생각'만으로도 사람들이 겁을 먹는다.", "english": "Mathematics actually makes the puzzles harder, which scares people off."}
@@ -308,7 +305,7 @@
     {
       "id": 9,
       "english": "Could you imagine the promotion of an exhibition in the National Gallery with the slogan 'No art involved, just painting and sculpture'?",
-      "translation": "'예술은 전혀 포함되지 않고, 그저 회화와 조각뿐'이라는 슬로건으로 국립 미술관에서 열리는 전시회를 홍보하는 것을 상상할 수 있겠는가?",
+      "translation": "당신은 '예술은 전혀 포함되지 않고, 그저 회화와 조각뿐'이라는 슬로건으로 국립 미술관에서 여는 전시회의 홍보를 상상할 수 있겠는가?",
       "grammar": [
         {"tag": "조동사 could(의문)", "note": "'~을 상상할 수 있겠는가'라는 수사의문", "spans": ["Could"]},
         {"tag": "과거분사 후치수식", "note": "'No art (that is) involved'로 art를 뒤에서 수식", "spans": ["involved"]}
@@ -320,12 +317,12 @@
         {"word": "sculpture", "meaning": "조각"}
       ],
       "chunks": [
-        {"en": "Could you imagine", "ko": "당신은 [[상상할]] 수 있겠는가"},
-        {"en": "the promotion of an exhibition", "ko": "전시회의 [[홍보]]를"},
-        {"en": "in the National Gallery", "ko": "국립 [[미술관]]에서"},
-        {"en": "with the slogan", "ko": "그 [[슬로건]]과 함께"},
-        {"en": "'No art involved,", "ko": "'포함된 예술은 없고,"},
-        {"en": "just painting and sculpture'?", "ko": "그저 회화와 [[조각]]뿐'?"}
+        {"en": "Could you imagine", "ko": "당신은 상상할 수 있겠는가"},
+        {"en": "the promotion of an exhibition", "ko": "전시회의 홍보를"},
+        {"en": "in the National Gallery", "ko": "국립 미술관에서"},
+        {"en": "with the slogan", "ko": "그 슬로건과 함께"},
+        {"en": "'No art involved,", "ko": "'포함된 [[예술]]은 없고,"},
+        {"en": "just painting and sculpture'?", "ko": "그저 회화와 조각뿐'?"}
       ],
       "misreads": [
         {"statement": "미술관 슬로건 비유는, 회화와 조각이 예술이 아님을 보여 주기 위한 것이다.", "verdict": "X", "trap_type": "인과조건", "anchor": "Could you imagine the promotion of an exhibition in the National Gallery with the slogan 'No art involved, just painting and sculpture'?", "why": "회화와 조각이 곧 예술이듯 추론·논리가 곧 수학임을 보여 주려는 반어적 비유이다."}
@@ -335,7 +332,7 @@
     {
       "id": 10,
       "english": "If you can do Sudoku, you can do maths!",
-      "translation": "스도쿠를 할 수 있다면, 당신은 수학도 할 수 있다!",
+      "translation": "만약 당신이 스도쿠를 할 수 있다면, 당신은 수학을 할 수 있다!",
       "grammar": [
         {"tag": "부사절 접속사 If", "note": "조건을 나타내는 부사절을 이끎", "spans": ["If"]},
         {"tag": "조동사 can", "note": "'~할 수 있다'는 능력·가능을 나타냄", "spans": ["can"]}
@@ -345,7 +342,7 @@
         {"word": "Sudoku", "meaning": "스도쿠(숫자 배열 퍼즐)"}
       ],
       "chunks": [
-        {"en": "If you can do Sudoku,", "ko": "만약 당신이 [[스도쿠]]를 할 수 있다면,"},
+        {"en": "If you can do Sudoku,", "ko": "만약 당신이 스도쿠를 할 수 있다면,"},
         {"en": "you can do maths!", "ko": "당신은 [[수학]]을 할 수 있다!"}
       ],
       "misreads": [

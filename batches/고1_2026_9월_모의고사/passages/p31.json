@@ -177,12 +177,12 @@
    ],
    "chunks": [
     {
-     "en": "Our [[tastes]] are",
+     "en": "Our tastes are",
      "ko": "우리의 [[입맛]]은 ~이다"
     },
     {
-     "en": "[[social]].",
-     "ko": "[[사회적]]이다."
+     "en": "social.",
+     "ko": "사회적이다."
     }
    ],
    "misreads": [
@@ -196,7 +196,7 @@
   {
    "id": 2,
    "english": "Even when you first drank milk, there was the milk, yes, but there was also the person behind the milk who will have presumably either made or messed up your relationship with food for the couple of decades after that.",
-   "translation": "당신이 우유를 처음 마셨을 때조차, 우유가 있었던 것은 맞지만, 그 우유 뒤에는 그 이후 수십 년 동안 당신과 음식의 관계를 아마 만들어 주었거나 아니면 망쳐 놓았을 사람도 있었다.",
+   "translation": "당신이 우유를 처음 마셨을 때조차, 우유가 있었다, 그렇다, 하지만 그 우유 뒤에는 그 이후 수십 년 동안 당신의 음식과의 관계를 아마 만들어 놓았거나 아니면 망쳐 놓았을 사람도 있었다.",
    "grammar": [
     {
      "tag": "시간 부사절(when)",
@@ -251,40 +251,28 @@
    ],
    "chunks": [
     {
-     "en": "Even when you first drank",
-     "ko": "당신이 처음 마셨을 때조차"
-    },
-    {
-     "en": "[[milk]],",
-     "ko": "[[우유]]를,"
+     "en": "Even when you first drank milk,",
+     "ko": "당신이 우유를 처음 마셨을 때조차,"
     },
     {
      "en": "there was the milk, yes,",
      "ko": "우유가 있었다, 그렇다,"
     },
     {
-     "en": "but there was also",
-     "ko": "하지만 또한 있었다"
-    },
-    {
-     "en": "the [[person]] behind the milk",
-     "ko": "우유 뒤의 그 [[사람]]이"
+     "en": "but there was also the person behind the milk",
+     "ko": "하지만 우유 뒤에 그 [[사람]]도 있었다"
     },
     {
      "en": "[[who will have presumably either made or messed up]]",
-     "ko": "[[아마 만들었거나 망쳐 놓았을]]"
+     "ko": "[[아마 만들어 주었거나 아니면 망쳐 놓았을]]"
     },
     {
-     "en": "your [[relationship]] with food",
-     "ko": "당신의 음식과의 [[관계]]를"
+     "en": "your relationship with food",
+     "ko": "당신의 음식과의 관계를"
     },
     {
-     "en": "for the couple of decades",
-     "ko": "수십 년 동안"
-    },
-    {
-     "en": "after that.",
-     "ko": "그 이후."
+     "en": "for the couple of decades after that.",
+     "ko": "그 이후 수십 년 동안."
     }
    ],
    "misreads": [
@@ -332,15 +320,15 @@
    ],
    "chunks": [
     {
-     "en": "We learn to [[eat]]",
-     "ko": "우리는 [[먹는]] 법을 배운다"
+     "en": "We learn to eat",
+     "ko": "우리는 먹는 법을 배운다"
     },
     {
-     "en": "from our [[families]] and friends,",
-     "ko": "우리의 [[가족]]과 친구에게서,"
+     "en": "from our families and friends,",
+     "ko": "우리의 가족과 친구에게서,"
     },
     {
-     "en": "at school and in [[work]].",
+     "en": "at school and in work.",
      "ko": "학교와 [[직장]]에서."
     }
    ],
@@ -395,24 +383,20 @@
    ],
    "chunks": [
     {
-     "en": "A village develops",
-     "ko": "한 마을은 발전시킨다"
-    },
-    {
-     "en": "a particular [[recipe]]",
-     "ko": "특정한 [[조리법]]을"
+     "en": "A village develops a particular recipe",
+     "ko": "한 마을은 특정한 조리법을 발전시킨다"
     },
     {
      "en": "for an apple pie―one",
      "ko": "사과 파이를 위한―바로 그것은"
     },
     {
-     "en": "that [[nobody]] outside the village likes,",
-     "ko": "그 마을 밖 [[아무도]] 좋아하지 않는,"
+     "en": "[[that nobody outside the village likes]],",
+     "ko": "[[그 마을 밖 누구도 좋아하지 않는]],"
     },
     {
-     "en": "but who [[cares]]?",
-     "ko": "하지만 누가 [[신경 쓰나]]?"
+     "en": "but who cares?",
+     "ko": "하지만 누가 [[신경 쓰겠는가]]?"
     }
    ],
    "misreads": [
@@ -429,7 +413,7 @@
   {
    "id": 5,
    "english": "We want these things not just because of what they are, but who we are.",
-   "translation": "우리가 이런 것들을 원하는 것은 단지 그것들이 무엇인지 때문이 아니라 우리가 누구인지 때문이다.",
+   "translation": "우리는 이런 것들을 단지 그것들이 무엇인지 때문이 아니라 우리가 누구인지 때문에 원한다.",
    "grammar": [
     {
      "tag": "상관접속사(not just A but B)",
@@ -473,16 +457,16 @@
    ],
    "chunks": [
     {
-     "en": "We [[want]] these things",
-     "ko": "우리는 이것들을 [[원한다]]"
+     "en": "We want these things",
+     "ko": "우리는 이런 것들을 원한다"
     },
     {
-     "en": "not just because of [[what]] they are,",
+     "en": "not just because of what they are,",
      "ko": "단지 그것들이 [[무엇인지]] 때문이 아니라,"
     },
     {
-     "en": "but [[who we are]].",
-     "ko": "[[우리가 누구인지]] 때문이다."
+     "en": "[[but who we are]].",
+     "ko": "[[하지만 우리가 누구인지 때문이다]]."
     }
    ],
    "misreads": [
@@ -546,16 +530,16 @@
    ],
    "chunks": [
     {
-     "en": "Tastes [[spread]] like this,",
-     "ko": "입맛은 이처럼 [[퍼진다]],"
+     "en": "Tastes spread like this,",
+     "ko": "입맛은 [[이처럼]] 퍼진다,"
     },
     {
      "en": "person to person,",
      "ko": "사람에서 사람으로,"
     },
     {
-     "en": "like [[viruses]],",
-     "ko": "[[바이러스]]처럼,"
+     "en": "like viruses,",
+     "ko": "바이러스처럼,"
     },
     {
      "en": "almost irrespective of",
@@ -580,7 +564,7 @@
   {
    "id": 7,
    "english": "We observe other people in their food lives, often judgmentally.",
-   "translation": "우리는 다른 사람들의 음식 생활을 종종 재단하듯이 관찰한다.",
+   "translation": "우리는 다른 사람들을 그들의 음식 생활 속에서, 종종 재단하듯이 관찰한다.",
    "grammar": [
     {
      "tag": "소유격 대명사 their",
@@ -609,15 +593,15 @@
    ],
    "chunks": [
     {
-     "en": "We [[observe]] other people",
-     "ko": "우리는 다른 사람들을 [[관찰한다]]"
+     "en": "We observe other people",
+     "ko": "우리는 다른 사람들을 관찰한다"
     },
     {
-     "en": "in their [[food]] lives,",
-     "ko": "그들의 [[음식]] 생활 속에서,"
+     "en": "in their food lives,",
+     "ko": "그들의 음식 생활 속에서,"
     },
     {
-     "en": "often [[judgmentally]].",
+     "en": "often judgmentally.",
      "ko": "종종 [[재단하듯이]]."
     }
    ],
@@ -694,23 +678,19 @@
    ],
    "chunks": [
     {
-     "en": "Nothing turns me off something",
-     "ko": "그 무엇도 나를 어떤 것에 정 떨어지게 하지 못한다"
+     "en": "Nothing turns me off something quicker",
+     "ko": "그 무엇도 더 빨리 나를 어떤 것에 정 떨어지게 하지 못한다"
     },
     {
-     "en": "[[quicker]] than",
-     "ko": "더 [[빨리]] ~보다"
-    },
-    {
-     "en": "the wrong people [[liking]] it,",
-     "ko": "엉뚱한 사람들이 그것을 [[좋아하는]] 것보다,"
+     "en": "[[than the wrong people liking it]],",
+     "ko": "[[엉뚱한 사람들이 그것을 좋아하는 것보다]],"
     },
     {
      "en": "by which I mean",
      "ko": "내 말인즉슨"
     },
     {
-     "en": "people almost [[identical]] to me",
+     "en": "people almost identical to me",
      "ko": "나와 거의 [[똑같은]] 사람들"
     },
     {
@@ -718,12 +698,8 @@
      "ko": "모든 면에서,"
     },
     {
-     "en": "in a way that",
-     "ko": "~하는 방식으로"
-    },
-    {
-     "en": "doesn't [[flatter]] me.",
-     "ko": "나를 [[돋보이게]] 하지 않는."
+     "en": "in a way that doesn't flatter me.",
+     "ko": "나를 돋보이게 하지 않는 방식으로."
     }
    ],
    "misreads": [
@@ -776,12 +752,8 @@
    ],
    "chunks": [
     {
-     "en": "I [[avoided]]",
-     "ko": "나는 [[피했다]]"
-    },
-    {
-     "en": "the [[viral]] chopped salad moment",
-     "ko": "그 [[유행하던]] 다진 샐러드 열풍을"
+     "en": "I avoided the viral chopped salad moment",
+     "ko": "나는 그 [[유행하던]] 다진 샐러드 열풍을 피했다"
     },
     {
      "en": "of 2024",
