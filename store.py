@@ -294,8 +294,9 @@ def products():
         # 분류가 미리 정해 둔 값(교과서의 공통영어1·2 · 영어1·2)이 있으면 그 차례로
         # 먼저 놓습니다. 자료가 아직 없는 과목도 보여야 무엇을 다루는 곳인지
         # 드러나고, 없으면 요청으로 이어집니다.
-        listed = next((c.get("values") or [] for c in catalog.get("categories", [])
-                       if c.get("id") == selected), [])
+        listed = sc.split_values_of(
+            next((c for c in catalog.get("categories", [])
+                  if c.get("id") == selected), None))
         split_values = list(listed) + sorted(here - set(listed))
     else:
         split_values = []

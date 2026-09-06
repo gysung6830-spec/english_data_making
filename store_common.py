@@ -1479,6 +1479,19 @@ CATEGORY_SPLITS = {"grade": "학년", "subject": "과목"}
 # 과목 칸에서 고르기 쉽도록 미리 넣어 둔 값. 여기 없는 것도 적어 넣을 수 있습니다.
 SUBJECT_HINTS = ["공통영어1", "공통영어2", "영어1", "영어2", "영어독해와작문", "심화영어"]
 
+# 손님 화면 필터링에 늘 보여야 하는 갈래. 분류에 따로 적어 두지 않았을 때 씁니다.
+# 고등학교 영어 교과서가 나뉘는 방식은 정해져 있어서, 자료가 아직 없는 과목도
+# 보이는 편이 낫습니다 — 무엇을 다루는 곳인지 드러나고, 없으면 요청으로 이어집니다.
+SPLIT_DEFAULTS = {"subject": ["공통영어1", "공통영어2", "영어1", "영어2"]}
+
+
+def split_values_of(category: dict | None) -> list[str]:
+    """이 분류에서 먼저 보여 줄 갈래 값. 적어 두신 것이 있으면 그것을 씁니다."""
+    if not category:
+        return []
+    listed = [v for v in (category.get("values") or []) if str(v).strip()]
+    return listed or list(SPLIT_DEFAULTS.get(category.get("split") or "", []))
+
 
 def sold_counts() -> dict[str, int]:
     """자료마다 몇 번 팔렸는지. '인기순' 으로 줄을 세울 때 씁니다.

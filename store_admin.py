@@ -942,7 +942,9 @@ def books():
             counts[p["book"]] = counts.get(p["book"], 0) + 1
     items = sorted(catalog["books"], key=lambda b: (b.get("sort", 100), b.get("name", "")))
     return render_template("admin/books.html", items=items, catalog=catalog, counts=counts,
-                           splits=sc.CATEGORY_SPLITS)
+                           splits=sc.CATEGORY_SPLITS,
+                           split_hint={k: ', '.join(v)
+                                       for k, v in sc.SPLIT_DEFAULTS.items()})
 
 
 @admin_bp.route("/books/new", methods=["GET", "POST"])
@@ -1034,11 +1036,19 @@ def category_save():
         name = sc.clean(request.form.get("name"), 40)
         split = request.form.get("split", "")
         split = split if split in sc.CATEGORY_SPLITS else ""
+        values = [sc.clean(v, 30) for v in
+                  (request.form.get("values") or "").replace("·", ",").split(",")]
+        values = [v for v in values if v][:12]
         for c in catalog["categories"]:
             if c.get("id") == cid and name:
                 c["name"] = name
                 # 이 분류 안을 무엇으로 한 번 더 가를지. 없으면 그 줄이 안 나옵니다
                 c["split"] = split
+                # 손님 화면에 먼저 보여 줄 값. 비우면 실제로 있는 교재의 값만 나옵니다
+                if split and values:
+                    c["values"] = values
+                else:
+                    c.pop("values", None)
                 c.pop("by_grade", None)
                 sc.save_catalog(catalog)
                 flash(f"분류 '{name}' 을(를) 저장했습니다."

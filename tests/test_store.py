@@ -3966,6 +3966,53 @@ def _set_discount(tiers=None, cap=20):
 
 
 # ---- 장바구니 --------------------------------------------------------------
+def test_subject_filter_always_shows_four():
+    """교과서 과목 줄에는 공통영어1·2 · 영어1·2 가 늘 나와야 합니다.
+
+    갈래 값을 products.json 에 적어 두었는데, 사장님이 관리자에서 분류를 한 번
+    손보시면 그 값이 사라진 채로 저장됐습니다. 그러면 손님 화면에 자료가 있는
+    과목 하나만 남습니다. 값을 안 적어 두었을 때도 기본값이 나와야 합니다.
+    """
+    want = ["공통영어1", "공통영어2", "영어1", "영어2"]
+
+    def subjects():
+        page = body(client().get("/products?category=textbook"))
+        row = page.split(">과목<", 1)[1].split("</div>", 1)[0]
+        return [x for x in want if f">{x}<" in row]
+
+    assert subjects() == want, "적어 둔 값이 안 나옵니다"
+
+    # 분류에 값을 안 적어 두었을 때 — 라이브 원반이 이 꼴이었습니다
+    cat = sc.load_raw_catalog()
+    kept = None
+    for c in cat["categories"]:
+        if c.get("id") == "textbook":
+            kept = c.pop("values", None)
+    sc.save_catalog(cat)
+    try:
+        assert subjects() == want, "값을 안 적어 두면 기본값이 나와야 합니다"
+        # 관리자에서 적어 두시면 그 차례를 따릅니다
+        a = admin()
+        a.post("/admin/categories", data={"action": "rename", "id": "textbook",
+                                          "name": "교과서", "split": "subject",
+                                          "values": "영어2, 공통영어1"},
+               follow_redirects=True)
+        assert sc.load_raw_catalog()["categories"][0]["values"] == ["영어2", "공통영어1"]
+        page = body(client().get("/products?category=textbook"))
+        row = page.split(">과목<", 1)[1].split("</div>", 1)[0]
+        assert row.index(">영어2<") < row.index(">공통영어1<")
+    finally:
+        cat = sc.load_raw_catalog()
+        for c in cat["categories"]:
+            if c.get("id") == "textbook":
+                c["name"] = "교과서"
+                if kept:
+                    c["values"] = kept
+        sc.save_catalog(cat)
+    assert subjects() == want
+    print("PASS  교과서 과목 네 가지는 늘 나옴 (적어 두지 않아도)")
+
+
 def test_cart_shows_packages_not_parts():
     """파는 단위는 패키지입니다. 장바구니도 낱개가 아니라 묶음으로 보여야 합니다.
 
@@ -4721,6 +4768,7 @@ def run_all():
     test_submit_takes_photos_by_drag_and_drop()
     test_submission_to_coupon_to_discount()
     test_submission_requires_file_or_link()
+    test_subject_filter_always_shows_four()
     test_cart_shows_packages_not_parts()
     test_cart_add_view_remove()
     test_cart_count_discount_steps()

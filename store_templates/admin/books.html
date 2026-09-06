@@ -65,7 +65,7 @@
   <div class="hint">사이트 위쪽 메뉴와 목록 필터에 쓰이는 큰 갈래입니다. 보통 3~5개면 충분합니다.</div>
   <div class="wrapbox" style="margin-bottom:16px;">
     <table class="adm-table">
-      <thead><tr><th>아이디</th><th>화면에 보이는 이름</th><th></th></tr></thead>
+      <thead><tr><th>아이디</th><th>화면에 보이는 이름 · 안을 나눌 값</th><th></th></tr></thead>
       <tbody>
       {% for c in catalog.categories %}
         <tr>
@@ -81,6 +81,9 @@
                   <option value="{{ k }}" {{ 'selected' if c.split == k }}>{{ label }}으로 나눔</option>
                 {% endfor %}
               </select>
+              <input type="text" name="values" style="width:270px;"
+                     placeholder="{{ split_hint.get(c.split, '') or '나눌 값을 쉼표로' }}"
+                     value="{{ (c.get('values') or [])|join(', ') }}">
               <button class="btn btn-ghost btn-sm" type="submit">저장</button>
             </form>
           </td>
@@ -120,8 +123,10 @@
         </select>
         <div class="tip">고르시면 손님 화면 <b>분류 줄 아래에 한 줄</b>이 더 나옵니다.
           모의고사는 <b>학년</b>(고1·고2·고3), 교과서는 <b>과목</b>(공통영어1·영어1 …) 으로 갈립니다.
-          EBS 부교재처럼 갈래가 필요 없으면 '안 나눔' 으로 두세요.
-          버튼은 <b>실제로 있는 교재의 값만</b> 나옵니다.</div>
+          EBS 부교재처럼 갈래가 필요 없으면 '안 나눔' 으로 두세요.<br>
+          위 표의 <b>값 칸</b>에 쉼표로 적어 두시면 그 차례로 나오고,
+          <b>아직 교재가 없는 값도 보입니다</b> — 무엇을 다루는 곳인지 드러나고,
+          없으면 요청으로 이어집니다. 비워 두시면 실제로 있는 교재의 값만 나옵니다.</div>
       </div>
     </div>
     <div class="form-actions">
