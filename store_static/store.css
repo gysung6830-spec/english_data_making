@@ -578,6 +578,27 @@ input[type=file]{
 .mat-rest a:hover{color:var(--brand);}
 .mat-rest b{color:var(--brand); font-size:12.5px; margin-right:1px;}
 
+/* ---------- 파일을 끌어다 놓는 자리 ---------- */
+/* 링크를 만들 줄 모르시는 분이 많습니다. 끌어다 놓거나 눌러서 고르면 됩니다. */
+/* label.dropzone 으로 적어야 위쪽 '.field label{display:block}' 을 이깁니다 */
+label.dropzone{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+  padding:30px 20px; text-align:center; cursor:pointer; position:relative;
+  border:2px dashed var(--line-strong); border-radius:14px; background:var(--bg);
+  transition:border-color .15s, background .15s;
+}
+.dropzone:hover{border-color:var(--brand); background:var(--brand-soft);}
+.dropzone.over{border-color:var(--brand); background:var(--brand-soft);
+  border-style:solid; box-shadow:inset 0 0 0 3px rgba(20,107,74,.08);}
+.dropzone input[type=file]{position:absolute; width:1px; height:1px; opacity:0;
+  pointer-events:none;}
+.dz-title{font-size:16px; font-weight:700; color:var(--ink);}
+.dz-sub{font-size:13px; color:var(--muted); word-break:keep-all;}
+.dz-file{margin-top:8px; padding:6px 14px; border-radius:999px; background:var(--brand);
+  color:#fff; font-size:13.5px; font-weight:700; word-break:break-all;}
+.dropzone.has .dz-title{color:var(--brand);}
+@media (max-width:640px){ .dropzone{padding:24px 14px;} }
+
 /* 샘플 PDF 모아 보기 */
 .sample-list{display:flex; flex-direction:column; gap:10px;}
 

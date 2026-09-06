@@ -268,6 +268,10 @@
 .shot-foot .muted{flex:1 1 auto; font-size:12.5px; word-break:break-all;}
 .shot-foot form{margin:0;}
 
+/* 손님이 보내 주신 지문 파일 */
+.req-files{display:flex; flex-wrap:wrap; gap:5px; margin-top:5px;}
+.req-files a{text-decoration:none;}
+
 /* ---------- 파일을 끌어다 놓는 자리 ---------- */
 .dropzone{
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;

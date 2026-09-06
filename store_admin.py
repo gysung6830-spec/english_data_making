@@ -547,6 +547,15 @@ def submission_update(sub_id):
     return redirect(request.referrer or url_for("admin.submissions"))
 
 
+@admin_bp.route("/requests/<path:filename>")
+def request_file(filename):
+    """맞춤 제작 의뢰에 딸려 온 지문 파일. 폴더 밖 요청은 막습니다."""
+    target = (sc.REQUEST_DIR / filename).resolve()
+    if sc.REQUEST_DIR.resolve() not in target.parents or not target.is_file():
+        abort(404)
+    return send_from_directory(sc.REQUEST_DIR, filename, as_attachment=True)
+
+
 @admin_bp.route("/submissions/file/<path:filename>")
 def submission_file(filename):
     target = (sc.SUBMIT_DIR / filename).resolve()

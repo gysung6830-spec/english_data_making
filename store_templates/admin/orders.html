@@ -53,9 +53,19 @@
           <td>
             {{ r['product_name'] }}{% if r['quantity'] > 1 %} × {{ r['quantity'] }}{% endif %}
             {% if r['detail_json'] %}
+              {% set detail = r['detail_json']|fromjson %}
               <br><small class="muted">
-              {% for k, v in (r['detail_json']|fromjson).items() %}{{ k }}: {{ v }}<br>{% endfor %}
+              {% for k, v in detail.items() if k != '보내신 파일' %}{{ k }}: {{ v }}<br>{% endfor %}
               </small>
+              {# 손님이 올려 주신 지문 파일 — 눌러서 받으시면 됩니다 #}
+              {% if detail.get('보내신 파일') %}
+                <div class="req-files">
+                  {% for name in detail['보내신 파일'].split(', ') %}
+                    <a class="tag tag-on" href="{{ url_for('admin.request_file', filename=name) }}">
+                      📎 {{ name }}</a>
+                  {% endfor %}
+                </div>
+              {% endif %}
             {% endif %}
             {% if r['message'] %}<br><small class="muted">💬 {{ r['message'] }}</small>{% endif %}
             {% if r['receipt_kind'] %}

@@ -2726,6 +2726,61 @@ def test_list_hides_price_until_you_open_the_book():
     print("PASS  목록은 값 대신 내용 · 값은 교재 화면에서")
 
 
+def test_custom_request_takes_files_by_drag_and_drop():
+    """맞춤 제작 — 링크 대신 파일을 그 자리에서 올릴 수 있어야 합니다."""
+    import io as _io
+    form = body(client().get("/custom?mode=custom"))
+    assert 'class="dropzone"' in form and "끌어다 놓으세요" in form
+    assert 'enctype="multipart/form-data"' in form
+    assert 'name="files"' in form and "multiple" in form
+    # 끌어다 놓으면 고른 것과 똑같이 담기게 하는 자리
+    assert "dataTransfer" in form and "input.files = e.dataTransfer.files" in form
+    # '.field label{display:block}' 에 눌리지 않아야 세로로 쌓입니다
+    css = body(client().get("/static/store.css"))
+    assert "label.dropzone{" in css and "flex-direction:column" in css
+
+    c = client()
+    resp = c.post("/custom", data={
+        "mode": "custom", "wanted": "우리 학교 기출 3회분", "name": "선생",
+        "email": "drop@example.com", "agree": "1",
+        "files": [(_io.BytesIO(b"%PDF-1.4 one"), "1과.pdf"),
+                  (_io.BytesIO(b"\x89PNG\r\n\x1a\n"), "사진.png")],
+    }, content_type="multipart/form-data")
+    assert resp.status_code == 200, resp.status_code
+
+    with store.app.app_context():
+        row = sc.get_db().execute(
+            "SELECT * FROM orders WHERE email = 'drop@example.com'").fetchone()
+    detail = json.loads(row["detail_json"])
+    names = detail["보내신 파일"].split(", ")
+    assert len(names) == 2, names
+    # 이름은 우리가 다시 붙입니다 (올려 주신 이름을 그대로 쓰지 않습니다)
+    assert all(n.startswith(row["order_no"]) for n in names), names
+    assert names[0].endswith(".pdf") and names[1].endswith(".png")
+    for n in names:
+        assert (sc.REQUEST_DIR / n).is_file()
+
+    # 관리자만 받을 수 있고, 폴더 밖은 막습니다
+    a = admin()
+    got = a.get(f"/admin/requests/{names[0]}")
+    assert got.status_code == 200 and got.data.startswith(b"%PDF")
+    assert a.get("/admin/requests/..%2f..%2fsite.json").status_code == 404
+    assert client().get(f"/admin/requests/{names[0]}").status_code in (302, 401, 403)
+    assert names[0] in body(a.get("/admin/orders?kind=custom"))
+
+    # 올릴 수 없는 형식은 반려합니다
+    bad = client().post("/custom", data={
+        "mode": "custom", "wanted": "x", "name": "선생",
+        "email": "bad@example.com", "agree": "1",
+        "files": [(_io.BytesIO(b"x"), "몰래.exe")],
+    }, content_type="multipart/form-data")
+    assert bad.status_code == 400 and "올리실 수 있습니다" in body(bad)
+
+    for n in names:
+        (sc.REQUEST_DIR / n).unlink(missing_ok=True)
+    print("PASS  맞춤 제작 — 파일을 끌어다 놓아 보내기")
+
+
 def test_made_to_order_has_its_own_way_in():
     """필생보 독학용 · 동형모의고사는 미리 안 만듭니다. 신청해서 받는 길이 있어야 합니다."""
     with store.app.app_context():
@@ -4201,6 +4256,7 @@ def run_all():
     test_new_product_appears_in_home_updates()
     test_units_follow_what_the_admin_uploaded()
     test_list_hides_price_until_you_open_the_book()
+    test_custom_request_takes_files_by_drag_and_drop()
     test_made_to_order_has_its_own_way_in()
     test_sample_pdf_links_go_somewhere()
     test_lineup_shots_upload_and_show()

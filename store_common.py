@@ -37,6 +37,7 @@ DELIVER_DIR = DATA_DIR / "deliverables"   # 상품별로 손님에게 보낼 파
 FREE_DIR = DATA_DIR / "free"              # 무료 자료실에 올린 파일
 SHOT_DIR = DATA_DIR / "lineup"            # 라인업에 거는 자료 지면 사진
 BULK_DIR = DATA_DIR / ".bulk"             # 일괄 만들기로 올린 압축을 잠깐 두는 곳
+REQUEST_DIR = DATA_DIR / "requests"       # 맞춤 제작 의뢰에 딸려 온 지문 파일
 DB_PATH = Path(os.environ.get("STORE_DB") or (DATA_DIR / "store.db"))
 
 KST = timezone(timedelta(hours=9))
@@ -153,6 +154,30 @@ def seed_data_dir() -> list[str]:
 
 ORDER_STATUSES = ["입금대기", "입금확인", "발송완료", "취소"]
 SUBMIT_STATUSES = ["검토대기", "승인", "반려"]
+
+# 손님이 올리실 수 있는 형식. 사진으로 찍어 보내시는 분이 많아 이미지도 받습니다.
+UPLOAD_EXTS = {".pdf", ".jpg", ".jpeg", ".png", ".hwp", ".hwpx", ".zip"}
+UPLOAD_MAX = 5                            # 한 번에 이만큼까지
+
+
+def save_uploads(files, folder: Path, stem: str) -> tuple[list[str], list[str]]:
+    """손님이 올린 파일을 받아 둡니다. (저장한 이름들, 못 받은 이름들)
+
+    이름은 우리가 다시 붙입니다 — 올려 주신 이름을 그대로 쓰면 폴더 밖으로
+    빠져나가는 이름이 섞여 들어올 수 있습니다.
+    """
+    saved, bad = [], []
+    picked = [f for f in (files or []) if f and f.filename][:UPLOAD_MAX]
+    for i, f in enumerate(picked, 1):
+        ext = os.path.splitext(f.filename)[1].lower()
+        if ext not in UPLOAD_EXTS:
+            bad.append(f.filename)
+            continue
+        folder.mkdir(parents=True, exist_ok=True)
+        name = f"{stem}-{i:02d}{ext}"
+        f.save(folder / name)
+        saved.append(name)
+    return saved, bad
 ORDER_KIND_LABELS = {"product": "자료 주문", "custom": "맞춤 제작",
                      "mto": "주문제작 자료", "request": "자료 요청",
                      "pass": "프리패스", "inquiry": "문의"}

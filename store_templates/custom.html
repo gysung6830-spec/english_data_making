@@ -26,7 +26,8 @@
     {% endif %}
 
     <div class="form-card">
-      <form method="post" action="{{ url_for('custom') }}" id="reqform">
+      <form method="post" action="{{ url_for('custom') }}" id="reqform"
+            enctype="multipart/form-data">
 
         <div class="field">
           <label>무엇을 도와드릴까요?</label>
@@ -112,12 +113,25 @@
                    placeholder="예: 다음 주 월요일까지">
           </div>
           <div class="field">
-            <label for="file_link">지문 파일 링크</label>
+            <label for="files">지문 파일</label>
+            {# 링크를 만들 줄 모르시는 분이 많습니다. 끌어다 놓거나 눌러서 고르면
+               그 자리에서 올라갑니다. #}
+            <label class="dropzone" for="files" id="drop">
+              <input type="file" id="files" name="files" multiple
+                     accept=".pdf,.jpg,.jpeg,.png,.hwp,.hwpx,.zip">
+              <b class="dz-title">여기에 파일을 끌어다 놓으세요</b>
+              <span class="dz-sub">또는 눌러서 고르기 · PDF · 사진(JPG/PNG) · 한글(HWP) · ZIP</span>
+              <span class="dz-file" hidden></span>
+            </label>
+            <p class="muted mb-0" style="font-size:13.5px;margin-top:8px;">
+              사진으로 찍어 보내셔도 됩니다. 한 번에 5개까지, 모두 합쳐 30MB까지.
+              지금 안 올리시고 <b>나중에 메일로</b> 보내셔도 됩니다.
+            </p>
+          </div>
+          <div class="field">
+            <label for="file_link">파일이 클 때 — 공유 링크 <span class="hint">선택</span></label>
             <input type="text" id="file_link" name="file_link" value="{{ form.file_link or '' }}"
                    placeholder="구글 드라이브 / 네이버 MYBOX 공유 링크">
-            <p class="muted mb-0" style="font-size:13.5px;margin-top:6px;">
-              PDF · 사진(JPG/PNG) · 한글(HWP) 모두 됩니다. 나중에 메일로 보내셔도 됩니다.
-            </p>
           </div>
         </div>
 
@@ -173,6 +187,44 @@
     }
     radios.forEach(function (r) { r.addEventListener('change', sync); });
     sync();
+  })();
+
+  /* 파일은 끌어다 놓아도 되고, 눌러서 골라도 됩니다. */
+  (function () {
+    var drop = document.getElementById('drop');
+    if (!drop) return;
+    var input = document.getElementById('files');
+    var badge = drop.querySelector('.dz-file');
+    var title = drop.querySelector('.dz-title');
+
+    function show(list) {
+      var names = [].map.call(list || [], function (f) { return f.name; });
+      badge.textContent = names.join(' · ');
+      badge.hidden = !names.length;
+      drop.classList.toggle('has', !!names.length);
+      title.textContent = names.length
+        ? names.length + '개를 올립니다'
+        : '여기에 파일을 끌어다 놓으세요';
+    }
+    input.addEventListener('change', function () { show(input.files); });
+
+    ['dragenter', 'dragover'].forEach(function (ev) {
+      drop.addEventListener(ev, function (e) {
+        e.preventDefault(); drop.classList.add('over');
+      });
+    });
+    ['dragleave', 'drop'].forEach(function (ev) {
+      drop.addEventListener(ev, function (e) {
+        e.preventDefault();
+        if (ev === 'dragleave' && drop.contains(e.relatedTarget)) return;
+        drop.classList.remove('over');
+      });
+    });
+    drop.addEventListener('drop', function (e) {
+      if (!e.dataTransfer || !e.dataTransfer.files.length) return;
+      input.files = e.dataTransfer.files;          /* 고른 것과 똑같이 담깁니다 */
+      show(input.files);
+    });
   })();
 </script>
 {% endblock %}

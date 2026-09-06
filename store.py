@@ -862,6 +862,7 @@ def custom():
         "찾는 교재": wanted,
         "학년·과정": sc.clean(request.form.get("course"), 60) or "-",
     }
+    files, bad = [], []
     if mode == "custom":
         detail.update({
             "지문 수": sc.clean(request.form.get("passage_count"), 30) or "-",
@@ -869,6 +870,16 @@ def custom():
             "희망 마감일": sc.clean(request.form.get("due"), 40) or "-",
             "지문 파일 링크": sc.clean(request.form.get("file_link"), 300) or "-",
         })
+        # 링크를 만들 줄 모르시는 분이 많아, 파일을 그 자리에서 받습니다
+        picked = [f for f in request.files.getlist("files") if f and f.filename]
+        bad = [f.filename for f in picked
+               if os.path.splitext(f.filename)[1].lower() not in sc.UPLOAD_EXTS]
+        if bad:
+            errors.append("PDF · 사진(JPG/PNG) · 한글(HWP) · ZIP 파일만 올리실 수 있습니다.")
+        elif len(picked) > sc.UPLOAD_MAX:
+            errors.append(f"파일은 한 번에 {sc.UPLOAD_MAX}개까지 올리실 수 있습니다.")
+        else:
+            files = picked
     if mode == "mto":
         known = {m["id"]: m for m in mto_mats}
         picked = [known[x]["name"] for x in request.form.getlist("mto_pick") if x in known]
@@ -892,6 +903,15 @@ def custom():
         lambda no: (no, mode, label, data["name"], data["phone"], data["email"],
                     data["affiliation"], data["message"],
                     json.dumps(detail, ensure_ascii=False), ts, ts))
+
+    if files:
+        got, _ = sc.save_uploads(files, sc.REQUEST_DIR, order_no)
+        if got:
+            detail["보내신 파일"] = ", ".join(got)
+            sc.get_db().execute(
+                "UPDATE orders SET detail_json = ? WHERE order_no = ?",
+                (json.dumps(detail, ensure_ascii=False), order_no))
+            sc.get_db().commit()
 
     sc.send_mail(
         f"[오르티카영어] {label} {order_no} · {wanted[:40]}",
