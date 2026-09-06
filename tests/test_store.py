@@ -3049,7 +3049,8 @@ def test_every_book_has_unit_checkboxes():
         units = by_book.get(book["slug"])
         if not units:
             # 칸이 없으면 빈 화면 대신 이유를 말해야 합니다
-            assert "나눠 팔지 않습니다" in page, book["slug"]
+            assert 'class="pick-none"' in page, book["slug"]
+            assert "드립니다" in page or "팔지 않습니다" in page, book["slug"]
             continue
         word = words.get(book.get("category"), "강")
         assert f"필요한 {word}만 고르세요" in page, book["slug"]
@@ -3057,12 +3058,20 @@ def test_every_book_has_unit_checkboxes():
         chips = page[page.index('id="unit-chips"'):page.index('id="kind-chips"')]
         assert chips.count('class="chip"') == len(units), book["slug"]
 
-    # 모의고사는 '강' 이 아니라 문항 번호로 나눕니다
+    # 낱개로 파는 것은 EBS 부교재뿐입니다
+    assert set(by_book) == {b["slug"] for b in catalog["books"]
+                            if b.get("category") == "ebs" and b["slug"] in by_book}
+    assert all(b.get("category") == "ebs"
+               for b in catalog["books"] if b["slug"] in by_book), by_book
+
+    # 모의고사는 한 회차씩 팝니다 — 문항 번호로 쪼개지 않습니다
     mock = body(client().get("/books/mock-2026-06-g3"))
-    assert "18~20번" in mock and "41~45번" in mock and "필요한 강만" not in mock
-    # 교과서는 Lesson
-    assert "Lesson 1" in body(client().get("/books/neungyule-kim"))
-    print("PASS  교재마다 칸 수가 다른 골라 담기 (강 · 단원 · 문항 구간)")
+    assert "한 회차씩" in mock and "18~20번" not in mock
+    assert 'id="unit-chips"' not in mock and "고르세요" not in mock
+    # 교과서도 한 학기 통째로
+    textbook = body(client().get("/books/neungyule-kim"))
+    assert "한 학기 분량을 통째로" in textbook and "Lesson 1" not in textbook
+    print("PASS  낱개로 파는 것은 EBS 부교재만 (모의고사는 회차 · 교과서는 학기)")
 
 
 def test_book_pick_grid():
@@ -3161,7 +3170,7 @@ def test_book_pick_grid():
     sc.save_catalog(catalog)
     plain = body(client().get("/books/no-unit-book"))
     assert "만 고르세요" not in plain and "data-price=" not in plain
-    assert "아직 단원별로 나눠 팔지 않습니다" in plain
+    assert "한 학기 분량을 통째로" in plain      # 교과서는 통권으로 팝니다
     assert "자료 요청" in plain                     # 빈 화면으로 두지 않습니다
     catalog = sc.load_raw_catalog()
     catalog["books"] = [b for b in catalog["books"] if b.get("slug") != "no-unit-book"]

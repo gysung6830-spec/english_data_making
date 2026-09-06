@@ -925,8 +925,8 @@ input[type=file]{
 /* 강별 자료가 아직 없는 교재 — 빈 화면 대신 이유를 말해 줍니다 */
 .pick-none{border:1px dashed var(--line); border-radius:var(--r); padding:18px 20px;
   background:var(--card); word-break:keep-all;}
-.pick-none b{font-size:15px;}
-.pick-none p{margin-top:6px; font-size:14px; color:var(--muted); line-height:1.7;}
+.pick-none p{font-size:14.5px; color:var(--muted); line-height:1.75;}
+.pick-none b{color:var(--ink);}
 
 .plan-list{list-style:none; margin:0; padding:0; display:flex;
   flex-direction:column; gap:11px;}
