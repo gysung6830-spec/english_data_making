@@ -29,6 +29,13 @@
       "name": "시험 대비",
       "headline": "시험에 나오는 형태로 풀립니다",
       "lead": "아는 것과 시험장에서 맞히는 것은 다릅니다. 한 지문을 여러 각도로 묻고, 서술형으로 대비하고, 변형문제로 확인한 뒤, 시험지 한 회차를 돌립니다."
+    },
+    {
+      "id": "support",
+      "range": "09 — 11",
+      "name": "어휘 · 해석 받침",
+      "headline": "지문을 소화시키는 자료",
+      "lead": "분석지와 문제만으로는 안 넘어가는 학생이 있습니다. 끊어 읽는 법을 보여 주고, 그 강에 나온 어휘를 따로 뽑아 외우게 하고, 외웠는지 시험지로 확인합니다. 지문 분석 패키지와 문제 패키지 어느 쪽을 고르셔도 어휘리스트와 단어테스트는 함께 들어갑니다."
     }
   ],
   "materials": [
@@ -345,6 +352,57 @@
       ],
       "for_whom": [],
       "sample_file": ""
+    },
+    {
+      "en": "Literal Reading",
+      "signature": false,
+      "made_to_order": false,
+      "active": true,
+      "image": "",
+      "variants": [],
+      "features": [],
+      "for_whom": [],
+      "sample_file": "",
+      "id": "literal",
+      "no": "09",
+      "group": "support",
+      "name": "직독직해",
+      "tagline": "왼쪽에서 오른쪽으로, 끊어 읽는 그대로.",
+      "subline": "설명은 나중에 채웁니다."
+    },
+    {
+      "en": "Word List",
+      "signature": false,
+      "made_to_order": false,
+      "active": true,
+      "image": "",
+      "variants": [],
+      "features": [],
+      "for_whom": [],
+      "sample_file": "",
+      "id": "wordlist",
+      "no": "10",
+      "group": "support",
+      "name": "어휘리스트",
+      "tagline": "그 강에 나온 어휘만 모아 드립니다.",
+      "subline": "설명은 나중에 채웁니다."
+    },
+    {
+      "en": "Word Test",
+      "signature": false,
+      "made_to_order": false,
+      "active": true,
+      "image": "",
+      "variants": [],
+      "features": [],
+      "for_whom": [],
+      "sample_file": "",
+      "id": "wordtest",
+      "no": "11",
+      "group": "support",
+      "name": "단어테스트",
+      "tagline": "외웠는지 그 자리에서 확인합니다.",
+      "subline": "설명은 나중에 채웁니다."
     }
   ]
 }

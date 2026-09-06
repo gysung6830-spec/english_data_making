@@ -19,7 +19,7 @@
             <b>{{ kind_names.get(m, m) }}</b>
             <span class="pp-mats">
               {%- for mm in kind_mats.get(m, []) %}
-                <span class="pp-mat"><i>{{ mm.no }}</i>{{ mm.name }}</span>
+                <span class="pp-mat{{ ' both' if mm.shared }}"><i>{{ mm.no }}</i>{{ mm.name }}</span>
               {%- endfor %}
             </span>
           </span>
@@ -27,7 +27,9 @@
       {% endfor %}
     </div>
     <p class="ps-tip">패키지를 고르면 <b>모든 {{ unit_word.word }}</b>에 한꺼번에 들어갑니다.
-      아래에서 {{ unit_word.word }}마다 빼거나 더하실 수 있습니다.</p>
+      아래에서 {{ unit_word.word }}마다 빼거나 더하실 수 있습니다.
+      {% if shared_mats %}<br><b>{{ shared_mats|join(' · ') }}</b>는 두 패키지에 함께 들어 있습니다 —
+        둘 다 고르셔도 <b>한 번만</b> 값을 받습니다.{% endif %}</p>
   </div>
 
   {% if tiers %}
@@ -64,7 +66,7 @@
                        title="{{ c.names|join(' · ') }}">
                   <input type="checkbox" name="slug" value="{{ c.slugs }}"
                          data-row="{{ r.no }}" data-kind="{{ m }}"
-                         data-price="{{ c.price }}"
+                         data-slugs="{{ c.slugs }}"
                          {{ 'checked disabled' if have }}>
                   <span class="um-name">{{ kind_names.get(m, m) }}</span>
                   <span class="um-short">{{ kind_shorts.get(m, m) }}</span>
@@ -83,7 +85,7 @@
 
   <div class="unit-bar">
     <div class="pb-left">
-      <b><span class="pb-count">0</span>개</b> 고름
+      자료 <b><span class="pb-count">0</span>개</b> 고름
       <span class="pb-cut muted"></span>
     </div>
     <div class="pb-right">
@@ -102,6 +104,7 @@
 (function () {
   var form = document.getElementById('pickform');
   if (!form) return;
+  var PRICE = {{ price_of|tojson }};        /* 자료 하나하나의 값 */
   var boxes = [].slice.call(form.querySelectorAll('input[name=slug]:not([disabled])'));
   var unitChips = [].slice.call(form.querySelectorAll('.ur-pick'));
   var kindChips = [].slice.call(form.querySelectorAll('.pkg-pick'));
@@ -115,6 +118,20 @@
   var go    = form.querySelector('button[type=submit]');
 
   function won(n) { return n.toLocaleString('ko-KR') + '원'; }
+
+  /* 고른 칸들에 든 자료를 하나로 모읍니다. 두 패키지에 겹쳐 든 어휘리스트·
+     단어테스트는 여기서 저절로 한 번만 남습니다. */
+  function pickedIn(list) {
+    var seen = Object.create(null), n = 0, sum = 0;
+    list.forEach(function (b) {
+      if (!b.checked) return;
+      (b.dataset.slugs || '').split(',').forEach(function (s) {
+        if (!s || seen[s]) return;
+        seen[s] = 1; n += 1; sum += PRICE[s] || 0;
+      });
+    });
+    return {n: n, sum: sum};
+  }
 
   function byRow(no)  { return boxes.filter(function (b) { return b.dataset.row === no; }); }
   function byKind(k) {
@@ -135,17 +152,12 @@
   }
 
   function tally() {
-    var n = 0, sum = 0;
-    boxes.forEach(function (b) {
-      if (b.checked) { n += 1; sum += +b.dataset.price || 0; }
-    });
+    var all = pickedIn(boxes), n = all.n, sum = all.sum;
     form.querySelectorAll('.ur').forEach(function (row) {
-      var s = 0;
-      row.querySelectorAll('input[name=slug]:checked').forEach(function (b) {
-        s += +b.dataset.price || 0;
-      });
-      row.querySelector('.row-sum').textContent = s ? won(s) : '—';
-      row.classList.toggle('on', s > 0);
+      var got = pickedIn([].slice.call(
+        row.querySelectorAll('input[name=slug]:not([disabled])')));
+      row.querySelector('.row-sum').textContent = got.sum ? won(got.sum) : '—';
+      row.classList.toggle('on', got.sum > 0);
     });
     var pct = 0;
     tiers.forEach(function (t) {

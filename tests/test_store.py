@@ -437,7 +437,9 @@ def test_order_saves_and_multiplies_amount():
         "phone": "010-1234-5678", "email": "teacher@example.com", "agree": "1"})
     assert resp.status_code == 302
     done = body(c.get(resp.headers["Location"]))
-    assert "14,800원" in done
+    want = next(p["price"] for p in sc.load_catalog()["products"]
+                if p["slug"] == "mock-2026-06-g3-analysis")
+    assert f"{want:,}원" in done, want
     # 디지털 자료라 부수 개념이 없습니다. 대신 몇 번째 구매인지로 깎아 줍니다.
     form = body(client().get("/order?slug=mock-2026-06-g3-analysis"))
     assert 'name="quantity"' not in form
@@ -447,8 +449,10 @@ def test_order_saves_and_multiplies_amount():
 
 def test_order_both_packages_at_once():
     """두 패키지를 사려고 주문을 두 번 하게 만들면 안 됩니다."""
+    price = {p["slug"]: p["price"] for p in sc.load_catalog()["products"]}
+    one, two = price["mock-2026-06-g3-analysis"], price["mock-2026-06-g3-problem"]
     form = body(client().get("/order?slug=mock-2026-06-g3-analysis"))
-    assert "문제 패키지도 함께 받기" in form and "+26,600원" in form
+    assert "문제 패키지도 함께 받기" in form and f"+{two:,}원" in form
 
     c = client()
     resp = c.post("/order", data={
@@ -456,8 +460,8 @@ def test_order_both_packages_at_once():
         "phone": "010-1212-3434", "email": "both@example.com", "agree": "1"})
     assert resp.status_code == 302
     done = body(c.get(resp.headers["Location"]))
-    # 14,800 + 26,600 = 41,400. 2개까지는 정가입니다 (3개부터 할인)
-    assert "41,400원" in done
+    # 두 패키지를 더한 값. 2개까지는 정가입니다 (3개부터 할인)
+    assert f"{one + two:,}원" in done
     assert "지문 분석 패키지" in done and "문제 패키지" in done
 
     key = resp.headers["Location"].rsplit("/", 1)[-1]
@@ -540,7 +544,9 @@ def test_submission_to_coupon_to_discount():
         "slug": "mock-2026-06-g3-analysis", "name": "이선생", "phone": "010-3333-4444",
         "email": "lee@example.com", "agree": "1", "coupon": coupon[0]})
     assert resp.status_code == 302
-    assert "9,800원" in body(c2.get(resp.headers["Location"]))   # 14,800 − 5,000
+    want = next(p["price"] for p in sc.load_catalog()["products"]
+                if p["slug"] == "mock-2026-06-g3-analysis") - 5000
+    assert f"{want:,}원" in body(c2.get(resp.headers["Location"]))   # 쿠폰 5,000원
 
     # 한 번 쓴 쿠폰은 다시 못 씁니다.
     again = client().get(f"/coupon/check?code={coupon[0]}&amount=22000").get_json()
@@ -710,8 +716,11 @@ def test_receipt_request_and_sales():
 
     page = body(a.get("/admin/sales"))
     assert "123-45-67890" in page and "세금계산서" in page
-    assert "26,600원" in page                       # 문제 패키지 결제금액
-    assert "24,182원" in page and "2,418원" in page  # 공급가액 · 부가세
+    paid = next(p["price"] for p in sc.load_catalog()["products"]
+                if p["slug"] == "mock-2026-06-g3-problem")
+    assert f"{paid:,}원" in page                     # 문제 패키지 결제금액
+    net = round(paid / 1.1)                          # 공급가액 · 부가세
+    assert f"{net:,}원" in page and f"{paid - net:,}원" in page
 
     assert a.post(f"/admin/orders/{oid}/receipt").status_code == 302
     assert "123-45-67890" not in body(a.get("/admin/sales"))   # 발행 대기에서 빠짐
@@ -2680,8 +2689,8 @@ def test_units_follow_what_the_admin_uploaded():
     assert "24강" in page24
 
     # 강마다 두 패키지 칸이 생깁니다
-    assert page18.count("data-price=") == 18 * 2
-    assert page24.count("data-price=") == 24 * 2
+    assert page18.count('class="um pkg-') == 18 * 2
+    assert page24.count('class="um pkg-') == 24 * 2
 
     # 목록에서도 강 수가 보입니다
     lst = body(client().get("/products?category=highlighter"))
@@ -2709,9 +2718,11 @@ def test_list_hides_price_until_you_open_the_book():
     # 교재 칸을 누르면 교재 화면으로 갑니다
     assert '/books/ybm-han"' in text or "/books/ybm-han'" in text
 
-    # 값은 교재 화면에 있습니다
+    # 값은 교재 화면에 있습니다 (값 자체는 정가 설정에 따라 바뀝니다)
     book = body(client().get("/books/ybm-han"))
-    assert "14,800원" in book
+    want = next(p["price"] for p in sc.load_catalog()["products"]
+                if p["slug"] == "ybm-han-analysis")
+    assert f"{want:,}원" in book, want
     print("PASS  목록은 값 대신 내용 · 값은 교재 화면에서")
 
 
@@ -2931,8 +2942,10 @@ def test_count_discount():
     sc.save_site(site)
 
     # 2개까지는 정가입니다
+    price = {p["slug"]: p["price"] for p in sc.load_catalog()["products"]}
+    both = price["mock-2026-06-g3-analysis"] + price["mock-2026-06-g3-problem"]
     q = client().get("/order/quote?slug=mock-2026-06-g3-analysis&also=1").get_json()
-    assert q["subtotal"] == 41400 and q["rows"] == [] and q["final"] == 41400
+    assert q["subtotal"] == both and q["rows"] == [] and q["final"] == both
     # 하나만 더 담으면 어떻게 되는지 알려 줘야 합니다
     assert q["next_tier"] == {"min": 3, "percent": 10}
 
@@ -3075,6 +3088,42 @@ def test_every_book_has_unit_checkboxes():
     print("PASS  강(부교재) · 단원(교과서) 낱개 · 모의고사는 회차 한 묶음")
 
 
+def test_shared_materials_are_charged_once():
+    """어휘리스트·단어테스트는 두 패키지에 들지만, 둘 다 사도 한 번만 받습니다."""
+    catalog = sc.load_catalog()
+    pkgs = {p["id"]: p["materials"] for p in catalog["packages"]}
+    assert "literal" in pkgs["analysis"], "직독직해가 지문 분석 패키지에 없습니다"
+    for mid in ("wordlist", "wordtest"):
+        assert mid in pkgs["analysis"] and mid in pkgs["problem"], mid
+
+    with store.app.app_context():
+        grid = store.unit_grid(catalog, "ebs-2026-tokgang-eng")
+    assert grid["shared_mats"] == ["어휘리스트", "단어테스트"], grid["shared_mats"]
+    row = grid["rows"][0]
+    cells = row["cells"]
+    naive = sum(c["price"] for c in cells.values())
+    assert row["price"] < naive, "겹친 자료를 두 번 셈했습니다"
+
+    # 겹친 자료의 값만큼 정확히 차이가 나야 합니다
+    price = {p["slug"]: p["price"] for p in catalog["products"]}
+    dup = sum(price[s] for s in cells["analysis"]["slugs"].split(",")
+              if s in cells["problem"]["slugs"].split(","))
+    assert naive - row["price"] == dup and dup > 0, (naive, row["price"], dup)
+
+    # 장바구니에 두 칸을 다 담아도 겹친 자료는 한 줄만 들어갑니다
+    c = client()
+    for kind in ("analysis", "problem"):
+        c.post("/cart/add", data={"slug": cells[kind]["slugs"], "next": "/cart"})
+    q = c.get("/order/quote?cart=1").get_json()
+    assert q["subtotal"] == row["price"], (q["subtotal"], row["price"])
+
+    # 화면에도 겹친다는 것을 적어 둡니다
+    page = body(client().get("/books/ebs-2026-tokgang-eng"))
+    assert "두 패키지에 함께 들어 있습니다" in page and "한 번만" in page
+    assert "직독직해" in page and "어휘리스트" in page and "단어테스트" in page
+    print("PASS  겹쳐 든 자료는 한 번만 담기고 한 번만 셈함")
+
+
 def test_book_pick_grid():
     """자료 골라 담기 — 강 × 자료 종류 표에서 필요한 것만 담습니다."""
     import io as _io, zipfile
@@ -3121,7 +3170,7 @@ def test_book_pick_grid():
     assert "1강" in page and "2강" in page                    # 줄
     assert "3개부터" in page and "10%" in page                 # 담은 개수 할인 안내
     # 칸은 '자료 종류' 가 아니라 패키지입니다 — 2강 × 2패키지 = 네 칸
-    assert page.count('data-price=') == 4
+    assert page.count('class="um pkg-') == 4
 
     # 강이 한눈에 보이는 체크 칩으로 나옵니다 (표를 안 펴도 고를 수 있게)
     assert "어떤 단원이 필요하세요?" in page and "어떤 패키지가 필요하세요?" in page
@@ -3280,9 +3329,9 @@ def test_admin_pricing_is_editable():
     text = body(a.get("/admin/pricing"))
     assert "우리 정가" in text and "자료 1종이 지문 1개당 얼마" in text
     assert "독학하는 학생" in text and "차별화된 자료를 찾는 강사" in text
-    # 자료 6종이 각각 칸으로 나와야 합니다
-    for mid in ("passage", "analysis", "pilsaengbo", "workbook", "descriptive", "variants"):
-        assert f'name="mat_{mid}"' in text, mid
+    # 라인업에 있는 자료마다 칸이 나와야 합니다 (자료가 늘면 칸도 늡니다)
+    for m in sc.load_materials()["materials"]:
+        assert f'name="mat_{m["id"]}"' in text, m["id"]
     # 지문이 적다고 값을 더 받는 규칙은 없앴습니다
     assert "적은 묶음" not in text
 
@@ -3292,11 +3341,19 @@ def test_admin_pricing_is_editable():
         "round_to": "100", "full_pack_percent": "80"}, follow_redirects=True)
     site = sc.load_site()
     cfg = sc.pricing_cfg(site)
-    # 패키지 값 = 그 안에 든 자료 단가의 합
-    assert cfg["units"] == {"analysis": 900, "problem": 1200}
-    assert sc.suggested_price(site, "analysis", 28) == 25200    # 900 x 28
-    assert sc.suggested_price(site, "problem", 20) == 24000     # 1,200 x 20
-    assert sc.suggested_price(site, "analysis", 5) == 4500      # 적어도 그대로 (할증 없음)
+    # 패키지 값 = 그 안에 든 자료 단가의 합 (겹쳐 든 자료도 각 패키지에 들어갑니다)
+    rates = cfg["materials"]
+    want = {pkg["id"]: sum(rates.get(m, 0) for m in pkg["materials"])
+            for pkg in sc.package_map().values()}
+    assert cfg["units"] == want, (cfg["units"], want)
+    assert rates["passage"] == 200                             # 보낸 값이 들어갔습니다
+    step = cfg["round_to"]
+    def rounded(n):
+        return int(round(n / step) * step)
+    assert sc.suggested_price(site, "analysis", 28) == rounded(want["analysis"] * 28)
+    assert sc.suggested_price(site, "problem", 20) == rounded(want["problem"] * 20)
+    # 지문이 적어도 값을 더 받지 않습니다 (지문당 값이 같아야 합니다)
+    assert sc.suggested_price(site, "analysis", 5) == rounded(want["analysis"] * 5)
     assert sc.suggested_price(site, "없는갈래", 28) == 0
 
     # 손님 화면에는 단가가 새어 나가면 안 됩니다
@@ -3309,7 +3366,8 @@ def test_admin_pricing_is_editable():
         "mat_passage": "120", "mat_analysis": "250", "mat_pilsaengbo": "160",
         "mat_workbook": "300", "mat_descriptive": "250", "mat_variants": "400",
         "round_to": "100", "full_pack_percent": "85"}, follow_redirects=True)
-    assert sc.pricing_cfg(sc.load_site())["units"] == {"analysis": 530, "problem": 950}
+    back = sc.pricing_cfg(sc.load_site())
+    assert back["materials"]["passage"] == 120 and back["materials"]["variants"] == 400
     print("PASS  자료 1종 단가를 화면에서 정하기 · 손님에겐 안 보임")
 
 
@@ -3334,8 +3392,10 @@ def test_cart_add_view_remove():
     c.post("/cart/add", data={"slug": "ebs-2026-tokgang-eng-analysis"})
     page = body(c.get("/cart"))
     assert "능률(김성곤)" in page and "수능특강" in page
-    assert "17,000원" in page and "10,600원" in page
-    assert "27,600원" in page          # 17,000 + 10,600
+    price = {p["slug"]: p["price"] for p in sc.load_catalog()["products"]}
+    a, b = price["neungyule-kim-analysis"], price["ebs-2026-tokgang-eng-analysis"]
+    assert f"{a:,}원" in page and f"{b:,}원" in page
+    assert f"{a + b:,}원" in page
 
     # 같은 것을 또 담아도 한 번만 들어갑니다
     c.post("/cart/add", data={"slug": "neungyule-kim-analysis"})
@@ -3364,7 +3424,10 @@ def test_cart_count_discount_steps():
 
     c.post("/cart/add", data={"slug": "ebs-2026-tokgang-eng-analysis"})
     q3 = c.get("/order/quote?cart=1").get_json()
-    assert q3["subtotal"] == 17000 + 30400 + 10600
+    price = {p["slug"]: p["price"] for p in sc.load_catalog()["products"]}
+    assert q3["subtotal"] == sum(price[x] for x in (
+        "neungyule-kim-analysis", "neungyule-kim-problem",
+        "ebs-2026-tokgang-eng-analysis"))
     assert q3["rows"][0]["percent"] == 10
     assert q3["final"] == q3["subtotal"] - q3["subtotal"] * 10 // 100
 
@@ -3407,7 +3470,9 @@ def test_cart_order_end_to_end():
     with store.app.app_context():
         row = sc.get_db().execute(
             "SELECT * FROM orders WHERE email = 'cart@example.com'").fetchone()
-    assert row["amount"] == 17000 + 30400   # 2개는 정가입니다
+    price = {p["slug"]: p["price"] for p in sc.load_catalog()["products"]}
+    assert row["amount"] == (price["neungyule-kim-analysis"]
+                             + price["neungyule-kim-problem"])   # 2개는 정가입니다
     assert row["product_slug"] == "neungyule-kim-analysis"
     assert row["extra_slugs"] == "neungyule-kim-problem"
 
@@ -3693,15 +3758,18 @@ def test_full_pack_offer_in_cart():
     assert "전체를 사시면 더 쌉니다" not in one, "하나만 담았는데 전체를 권했습니다"
 
     c.post("/cart/add", data={"slug": "ebs-2026-tokgang-eng-2-analysis"})
+    price = {p["slug"]: p["price"] for p in sc.load_catalog()["products"]}
+    parts = price["ebs-2026-tokgang-eng-analysis"] + price["ebs-2026-tokgang-eng-2-analysis"]
+    full = price["ebs-2026-tokgang-eng-all-analysis"]
     two = body(c.get("/cart"))
     assert "전체를 사시면 더 쌉니다" in two
-    assert "3,200원" in two                    # 10,600 x 2 - 18,000
+    assert f"{parts - full:,}원" in two        # 낱개 합계 − 전강
     assert "전강(1~10강)" in two
 
     c.post("/cart/swap", data={"slug": "ebs-2026-tokgang-eng-all-analysis"})
     after = body(c.get("/cart"))
     assert after.count('class="cart-row"') == 1
-    assert "전강(1~10강)" in after and "18,000원" in after
+    assert "전강(1~10강)" in after and f"{full:,}원" in after
     print("PASS  부분 여러 개 → 전체가 싸다 → 한 번에 바꾸기")
 
 
@@ -3881,7 +3949,8 @@ def test_no_word_about_the_watermark():
     with store.app.app_context():
         row = sc.get_db().execute(
             "SELECT * FROM orders WHERE email = 'quiet@example.com'").fetchone()
-    assert row["amount"] == 14800, row["amount"]      # 더 붙은 값이 없습니다
+    want = next(p["price"] for p in sc.load_catalog()["products"] if p["slug"] == slug)
+    assert row["amount"] == want, row["amount"]       # 더 붙은 값이 없습니다
     assert row["no_mark"] == 0                        # 체크를 보내도 안 먹습니다
 
     # 그래도 표시는 조용히 새겨집니다
@@ -3942,7 +4011,8 @@ def test_product_form_offers_our_price():
     """상품 폼에서 우리 정가로 값을 계산해 넣을 수 있어야 합니다."""
     text = body(admin().get("/admin/products/new"))
     assert "우리 정가" in text and "계산해서 넣기" in text
-    assert '"analysis": 530' in text.replace(" ", "").replace('"analysis":530', '"analysis": 530')
+    unit = sc.pricing_cfg(sc.load_site())["units"]["analysis"]
+    assert f'"analysis":{unit}' in text.replace(" ", ""), unit
     print("PASS  상품 폼의 우리 정가 계산")
 
 
@@ -4028,6 +4098,7 @@ def run_all():
     test_admin_pages_open()
     test_bulk_products_from_zip()
     test_book_pick_grid()
+    test_shared_materials_are_charged_once()
     test_every_book_has_unit_checkboxes()
     test_admin_pricing_is_editable()
     test_product_form_offers_our_price()

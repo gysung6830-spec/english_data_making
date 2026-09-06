@@ -618,7 +618,7 @@ def product_from_form(form, existing: dict | None = None) -> tuple[dict, list[st
     item["sort"] = sc.to_int(form.get("sort"), 100)
     item["active"] = bool(form.get("active"))
     item["description"] = sc.clean(form.get("description"), 2000)
-    # 라인업 8종 중 이 상품에 들어가는 자료 (체크박스)
+    # 오르티카 라인업 중 이 상품에 들어가는 자료 (체크박스)
     known = set(sc.material_map())
     item["materials"] = [m for m in form.getlist("materials") if m in known]
     item["includes"] = parse_lines(form.get("includes"))
@@ -2183,10 +2183,13 @@ def pricing():
         flash("우리 정가를 저장했습니다. 상품 만들 때 이 값으로 계산해 드립니다.", "ok")
         return redirect(url_for("admin.pricing"))
 
+    # 두 패키지에 겹쳐 든 자료 — 칸을 한 번만 그리려고 미리 골라 둡니다
+    shared = [mid for mid in mats
+              if sum(1 for pkg in packages if mid in (pkg.get("materials") or [])) > 1]
     rows = per_passage_rows(catalog, site)
     off = [r for r in rows
            if r["should"] and abs(r["gap"]) >= 1000 and not r["is_full"]]
-    return render_template("admin/pricing.html", rows=rows, off=off,
+    return render_template("admin/pricing.html", rows=rows, off=off, shared=shared,
                            cfg=sc.pricing_cfg(site), packages=packages,
                            mats=mats, package_map=sc.package_map(), site=site)
 

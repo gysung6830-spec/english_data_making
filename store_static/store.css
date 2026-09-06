@@ -1684,6 +1684,10 @@ input[type=file]{
 .pkg-pick.pkg-analysis .pp-mat i{color:#3b6fd4;}
 .pkg-pick.pkg-problem .pp-mat{background:#fdeee6; color:#a3450f;}
 .pkg-pick.pkg-problem .pp-mat i{color:#c96524;}
+/* 두 패키지에 함께 든 자료 — 어느 쪽 색도 아니게 두어 '공용' 임을 보입니다 */
+.pkg-pick .pp-mat.both{background:#eef0ef; color:var(--ink-2); border:1px dashed #c7cdc9;
+  padding:2px 7px;}
+.pkg-pick .pp-mat.both i{color:var(--muted);}
 
 /* --- 밑: 강 한 줄 = 그 강의 자료 낱개 --- */
 .unit-list{border:1px solid var(--line); border-radius:12px; background:#fff;

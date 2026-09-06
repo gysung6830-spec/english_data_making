@@ -130,7 +130,10 @@
       "pilsaengbo": 160,
       "workbook": 300,
       "descriptive": 250,
-      "variants": 400
+      "variants": 400,
+      "literal": 150,
+      "wordlist": 100,
+      "wordtest": 120
     },
     "units": {
       "analysis": 530,

@@ -31,7 +31,7 @@
           </ul>
         {% else %}
           <p class="muted mb-0">첫 자료를 준비하고 있습니다.
-            그동안 <a href="{{ url_for('lineup') }}"><b>자료 8종이 어떻게 생겼는지</b></a>
+            그동안 <a href="{{ url_for('lineup') }}"><b>자료 {{ material_map|length }}종이 어떻게 생겼는지</b></a>
             먼저 보실 수 있습니다.</p>
         {% endif %}
       </div>

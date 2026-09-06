@@ -26,15 +26,44 @@
     품이 많이 드는 자료를 비싸게 두시면 됩니다.
     <b>패키지 값은 그 안에 든 자료 단가를 더한 값</b>으로 자동 계산됩니다.
   </div>
+  {# 어휘리스트처럼 두 패키지에 겹쳐 든 자료는 칸을 한 번만 그립니다.
+     같은 id 를 두 번 쓰면 눌러 넣는 버튼이 첫 칸만 고칩니다. #}
+  {% set shown = [] %}
   {% for pkg in packages %}
-    <h3 style="margin:16px 0 8px;font-size:15px;">{{ pkg.name }}
+    {% set mine = pkg.materials|reject('in', shared)|list %}
+    {% if mine %}
+      <h3 style="margin:16px 0 8px;font-size:15px;">{{ pkg.name }}
+        <span class="muted" style="font-weight:500;">
+          — 지문당 합계 <b>{{ '{:,}'.format(cfg.units.get(pkg.id, 0)) }}원</b></span></h3>
+      <div class="form-grid">
+        {% for mid in mine %}{% set _ = shown.append(mid) %}
+          {% set m = mats.get(mid) %}
+          <div class="adm-field">
+            <label for="mat_{{ mid }}">{{ m.no if m else '' }} {{ m.name if m else mid }}</label>
+            <input type="text" id="mat_{{ mid }}" name="mat_{{ mid }}"
+                   value="{{ cfg.materials.get(mid, 0) }}" hidden>
+            <div class="pick" data-target="mat_{{ mid }}">
+              {% for v in [100, 120, 160, 200, 250, 300, 400, 500] %}
+                <button class="pick-btn" data-value="{{ v }}">{{ v }}원</button>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endfor %}
+
+  {% set rest = mats.keys()|reject('in', shown)|list %}
+  {% if rest %}
+    <h3 style="margin:20px 0 8px;font-size:15px;">두 패키지에 함께 드는 자료 · 그 밖의 자료
       <span class="muted" style="font-weight:500;">
-        — 지문당 합계 <b>{{ '{:,}'.format(cfg.units.get(pkg.id, 0)) }}원</b></span></h3>
+        — 겹쳐 든 자료는 손님이 둘 다 사셔도 한 번만 받습니다</span></h3>
     <div class="form-grid">
-      {% for mid in pkg.materials %}
+      {% for mid in rest %}
         {% set m = mats.get(mid) %}
         <div class="adm-field">
-          <label for="mat_{{ mid }}">{{ m.no if m else '' }} {{ m.name if m else mid }}</label>
+          <label for="mat_{{ mid }}">{{ m.no if m else '' }} {{ m.name if m else mid }}
+            {% if mid in shared %}<span class="tag">공용</span>{% endif %}</label>
           <input type="text" id="mat_{{ mid }}" name="mat_{{ mid }}"
                  value="{{ cfg.materials.get(mid, 0) }}" hidden>
           <div class="pick" data-target="mat_{{ mid }}">
@@ -45,7 +74,7 @@
         </div>
       {% endfor %}
     </div>
-  {% endfor %}
+  {% endif %}
 </div>
 
 <div class="panel">
