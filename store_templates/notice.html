@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}공지사항 · 자료 업데이트 일정 · {{ site.brand }}{% endblock %}
-{% block desc %}새 자료가 언제 올라오는지, 무엇이 올라왔는지 여기에 정리합니다.{% endblock %}
+{% block title %}공지사항 · 시험 일정 · {{ site.brand }}{% endblock %}
+{% block desc %}학평·모평·수능 일정과, 그 시험 자료가 언제 올라오는지 정리합니다.{% endblock %}
 
 {% block body %}
 <section class="section now-sec">
@@ -44,7 +44,9 @@
               <li>
                 <span class="dday">{{ e.label }}</span>
                 <span class="dday-name">{{ e.name }}
+                  {% if not e.fixed %}<span class="ex-guess" title="교육청·평가원이 시행일을 발표하면 확정으로 바뀝니다">예상</span>{% endif %}
                   <small>{{ e.date }}{% if e.grades %} · {{ e.grades|join(' ') }}{% endif %}</small>
+                  <small class="ex-up">자료 {{ e.upload_by.strftime('%m월 %d일') }}까지</small>
                 </span>
               </li>
             {% endfor %}
@@ -52,6 +54,8 @@
         {% else %}
           <p class="muted mb-0">시험 일정을 준비하고 있습니다.</p>
         {% endif %}
+        <p class="dday-note mb-0">학평·모평·수능 일정은 <b>자동으로 채워집니다.</b>
+          시행일이 발표되면 확정 날짜로 바뀝니다.</p>
       </div>
 
     </div>
@@ -61,20 +65,33 @@
 <section class="section">
   <div class="wrap narrow">
     <div class="section-head">
-      <h2>공지사항 · 자료 업데이트 일정</h2>
-      <p>새 자료가 올라오는 주기와, 지금까지 올라온 자료를 정리해 두었습니다.</p>
+      <h2>공지사항</h2>
+      <p>자료가 올라오는 기준과, 지금까지 올라온 자료를 정리해 두었습니다.</p>
     </div>
 
-    {% if schedule %}
-    <div class="card" style="margin-bottom:32px;">
-      <h3 style="font-size:18px;margin-bottom:14px;">📅 자료 업데이트 일정</h3>
-      <table class="spec" style="margin:0;">
-        {% for s in schedule %}
-          <tr><th style="width:120px;">{{ s.when }}</th><td>{{ s.what }}</td></tr>
-        {% endfor %}
-      </table>
+    <div class="card up-rule" style="margin-bottom:32px;">
+      <h3>자료는 언제 올라오나요</h3>
+      <p class="up-line mb-0">
+        학평·모의평가·수능은 <b>시험 친 날로부터 {{ upload_days }}일 안에</b>
+        <b>지문분석 패키지</b>와 <b>문제 패키지</b>를 모두 올립니다.
+        날짜를 따로 공지하지 않아도, 시험 날짜만 보시면 언제 올라오는지 아실 수 있습니다.
+      </p>
+      {% if pending %}
+        <table class="spec up-table">
+          <thead><tr><th>방금 치른 시험</th><th>시험일</th><th>올리는 기한</th></tr></thead>
+          {% for e in pending %}
+            <tr>
+              <td>{{ e.name }}{% if e.grades %} <small class="muted">{{ e.grades|join(' ') }}</small>{% endif %}</td>
+              <td>{{ e.date }}</td>
+              <td><b>{{ e.upload_by.strftime('%m월 %d일') }}까지</b>
+                <small class="muted">{{ e.left }}일 남음</small></td>
+            </tr>
+          {% endfor %}
+        </table>
+        <p class="up-foot mb-0">기한이 지난 시험 자료는
+          <a href="{{ url_for('products') }}"><b>자료 목록</b></a>에서 바로 확인하실 수 있습니다.</p>
+      {% endif %}
     </div>
-    {% endif %}
 
     {% for n in notices %}
       <article class="notice {{ 'notice-pinned' if n.pinned }}">

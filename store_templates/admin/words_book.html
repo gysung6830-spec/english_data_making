@@ -99,8 +99,12 @@
     <div class="form-grid">
       <div class="adm-field"><label for="name">이름</label>
         <input type="text" id="name" name="name" value="{{ b.name }}"></div>
-      <div class="adm-field"><label for="publisher">출판사 · 분류</label>
-        <input type="text" id="publisher" name="publisher" value="{{ b.publisher or '' }}"></div>
+      <div class="adm-field"><label for="publisher">출판사</label>
+        <input type="text" id="publisher" name="publisher" value="{{ b.publisher or '' }}">
+        <div class="pick" data-target="publisher" style="margin-top:6px;">
+          {% for v in publishers %}<button class="pick-btn" data-value="{{ v }}">{{ v }}</button>{% endfor %}
+        </div>
+        <div class="tip">손님 화면에서 이 이름으로 묶여 보입니다.</div></div>
       <div class="adm-field"><label for="sort">차례</label>
         <input type="number" id="sort" name="sort" value="{{ b.get('sort', 100) }}"></div>
     </div>

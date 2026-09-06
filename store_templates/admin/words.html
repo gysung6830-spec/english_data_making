@@ -26,8 +26,13 @@
         <div class="tip">손님 화면에 이대로 보입니다. 주소는 알아서 붙습니다.</div>
       </div>
       <div class="adm-field">
-        <label for="publisher">출판사 <span class="muted">선택</span></label>
-        <input type="text" id="publisher" name="publisher" placeholder="이투스북">
+        <label for="publisher">출판사</label>
+        <input type="text" id="publisher" name="publisher" placeholder="EBS">
+        <div class="pick" data-target="publisher" style="margin-top:6px;">
+          {% for v in publishers %}<button class="pick-btn" data-value="{{ v }}">{{ v }}</button>{% endfor %}
+        </div>
+        <div class="tip">손님 화면에서 <b>출판사별로 묶여</b> 보입니다.
+          네 곳 말고 다른 곳이면 그냥 적으셔도 됩니다.</div>
       </div>
     </div>
     <div class="form-actions"><button type="submit" class="btn btn-primary">만들기</button></div>

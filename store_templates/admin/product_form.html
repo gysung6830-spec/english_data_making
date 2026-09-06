@@ -205,19 +205,6 @@
         {% endfor %}
       </div>
     </div>
-    <div class="adm-field">
-      <label for="delivery">발송 안내</label>
-      <input type="text" id="delivery" name="delivery"
-             value="{{ p.delivery or '입금 확인 후 영업일 기준 24시간 이내 이메일 발송' }}" hidden>
-      <div class="pick" data-target="delivery" style="margin-top:0;">
-        {% for v in ['입금 확인 후 영업일 기준 24시간 이내 이메일 발송',
-                     '입금 확인 즉시 이메일 발송',
-                     '입금 확인 후 영업일 기준 2일 이내 발송',
-                     '주문 확인 후 개별 안내'] %}
-          <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
-        {% endfor %}
-      </div>
-    </div>
     <div class="adm-field full">
       <label for="sample_file">무료 샘플 파일 이름</label>
       <input type="text" id="sample_file" name="sample_file" value="{{ p.sample_file or '' }}"

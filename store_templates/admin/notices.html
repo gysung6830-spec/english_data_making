@@ -111,36 +111,49 @@
 </div>
 
 <div class="panel">
-  <h2>시험 일정 <span class="tag tag-on">홈의 D-day</span></h2>
+  <h2>시험 일정 <span class="tag tag-on">자동</span></h2>
   <div class="hint">
-    여기 넣은 날짜로 홈 첫 화면의 <b>'D-12' 같은 남은 날짜</b>를 셉니다.
-    선생님들이 가장 자주 확인하는 정보라, 이게 맞아야 다시 찾아옵니다.
-    {% if exam_note %}<br><b style="color:#c2410c;">⚠️ 지금 들어 있는 날짜는 예시입니다.
-      실제 시행일로 고쳐 주세요.</b>{% endif %}
+    학평·모의평가·수능은 <b>손으로 넣지 않아도 자동으로 채워집니다.</b>
+    해가 바뀌어도 이 화면을 여실 일이 없습니다. 아래 표에 이미 들어 있는 날짜가
+    그것이고, 홈 첫 화면의 <b>'D-12' 같은 남은 날짜</b>도 이걸로 셉니다.<br>
+    다만 자동으로 만든 날짜는 <b class="muted">예상</b>입니다 —
+    실제 시행일은 그 해에 교육청·평가원이 발표합니다.
+    발표된 날짜와 다르면 <b>그 줄의 날짜만 고쳐서 저장</b>해 주세요. 고친 줄은
+    <b>확정</b>이 되어 예상값을 덮어씁니다.<br>
+    손님 화면에는 <b>시험 친 날로부터 {{ upload_days }}일 안에 지문분석·문제 패키지를 올린다</b>고
+    적혀 있습니다. 이 표의 날짜가 그 약속의 기준이 됩니다.
   </div>
   <form method="post" action="{{ url_for('admin.exams_save') }}">
     <div class="wrapbox">
       <table class="adm-table">
-        <thead><tr><th style="width:170px;">날짜</th><th>시험 이름</th>
+        <thead><tr><th style="width:78px;">지금</th>
+                   <th style="width:170px;">날짜</th><th>시험 이름</th>
                    <th style="width:220px;">학년</th></tr></thead>
         <tbody>
-        {% for row in (exams + [{}, {}]) %}
+        {% for row in (exams + [{}]) %}
           <tr>
+            <td>{% if row.get('name') %}
+                  {% if row.get('fixed') %}<span class="tag tag-on">확정</span>
+                  {% else %}<span class="tag">예상</span>{% endif %}
+                {% endif %}</td>
             <td><input type="date" name="exam_date" value="{{ row.get('date','') }}"
                        style="width:100%;"></td>
             <td>
               <input type="text" name="exam_name" id="exam-name-{{ loop.index0 }}"
                      value="{{ row.get('name','') }}"
                      placeholder="예: 3월 전국연합 학력평가" style="width:100%;">
-              <div class="pick" data-target="exam-name-{{ loop.index0 }}">
-                {% for v in ['3월 전국연합 학력평가', '5월 전국연합 학력평가',
-                             '6월 모의평가', '6월 전국연합 학력평가',
-                             '9월 모의평가', '10월 전국연합 학력평가',
-                             '대학수학능력시험', '1학기 중간고사', '1학기 기말고사',
-                             '2학기 중간고사', '2학기 기말고사'] %}
-                  <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
-                {% endfor %}
-              </div>
+              {# 이름은 자동으로 채워져 있습니다. 새로 한 줄 넣을 때만 도와 줍니다. #}
+              {% if not row.get('name') %}
+                <div class="pick" data-target="exam-name-{{ loop.index0 }}">
+                  {% for v in ['3월 전국연합 학력평가', '5월 전국연합 학력평가',
+                               '6월 모의평가', '6월 전국연합 학력평가',
+                               '9월 모의평가', '10월 전국연합 학력평가',
+                               '대학수학능력시험', '1학기 중간고사', '1학기 기말고사',
+                               '2학기 중간고사', '2학기 기말고사'] %}
+                    <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
+                  {% endfor %}
+                </div>
+              {% endif %}
             </td>
             <td>
               {% set outer = loop.index0 %}
@@ -165,30 +178,4 @@
   </form>
 </div>
 
-<div class="panel">
-  <h2>자료 업데이트 일정 <span class="tag tag-off">공지 화면에만</span></h2>
-  <div class="hint">공지 화면에만 나옵니다. <b>홈에는 안 나옵니다.</b>
-    "매주 월요일에 지난주 학평 올림" 처럼 <b>실제로 지킬 수 있는</b> 주기만 적으세요.
-    못 지키면 오히려 신뢰를 잃습니다. 비워 두면 이 표가 안 나옵니다.</div>
-  <datalist id="when-list">
-    {% for v in ['매주 월요일', '매주 금요일', '매월 1일', '매월 15일',
-                 '시험 3주 전', '모의고사 다음 주', '수시로'] %}
-      <option value="{{ v }}"></option>
-    {% endfor %}
-  </datalist>
-  <form method="post" action="{{ url_for('admin.schedule_save') }}">
-    {% for row in (schedule + [{'when':'','what':''}, {'when':'','what':''}]) %}
-      <div class="inline-form" style="margin-bottom:8px;">
-        <input type="text" name="when" value="{{ row.when }}" placeholder="언제 (예: 매주 월요일)"
-               style="width:200px;" list="when-list">
-        <input type="text" name="what" value="{{ row.what }}" placeholder="무엇을 (예: 지난주 학평 업로드)"
-               style="flex:1; min-width:240px;">
-      </div>
-    {% endfor %}
-    <div class="form-actions">
-      <button class="btn btn-primary" type="submit">일정 저장</button>
-      <span class="muted" style="font-size:13px;">빈 줄은 자동으로 지워집니다.</span>
-    </div>
-  </form>
-</div>
 {% endblock %}

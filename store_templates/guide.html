@@ -9,8 +9,9 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type": "Question", "name": "자료는 언제 받을 수 있나요?",
-     "acceptedAnswer": {"@type": "Answer", "text": {{ (site.payment.notice or '')|tojson }}}},
+    {"@type": "Question", "name": "자료는 언제, 어떻게 받나요?",
+     "acceptedAnswer": {"@type": "Answer",
+      "text": "입금이 확인되면 주문 화면과 내 자료함에서 바로 열립니다. 메일로 파일이 날아오는 방식이 아니라, 같은 주소를 메일로 한 번 더 알려 드리는 방식입니다."}},
     {"@type": "Question", "name": "파일은 어떤 형식인가요?",
      "acceptedAnswer": {"@type": "Answer",
       "text": "A4 인쇄 기준으로 판을 잡은 PDF입니다. 편집 없이 그대로 인쇄해 배포하실 수 있습니다."}},
@@ -39,15 +40,19 @@
     <div class="steps" style="grid-template-columns:1fr 1fr;">
       <div class="step"><b>STEP 1</b><p>자료를 고르고 주문서를 작성합니다. (회원가입 없음)</p></div>
       <div class="step"><b>STEP 2</b><p>주문 완료 화면의 계좌로 입금합니다.</p></div>
-      <div class="step"><b>STEP 3</b><p>입금이 확인되면 자료를 준비합니다.</p></div>
-      <div class="step"><b>STEP 4</b><p>주문서에 적어 주신 이메일로 PDF가 발송됩니다.</p></div>
+      <div class="step"><b>STEP 3</b><p>입금을 확인하면 바로 열어 드립니다.</p></div>
+      <div class="step"><b>STEP 4</b><p>주문 화면과 <b>내 자료함</b>에서 그 자리에서 보고 받습니다.
+        메일로도 같은 주소를 한 번 더 보내 드립니다.</p></div>
     </div>
 
     <h3 style="font-size:20px;margin:40px 0 14px;">자주 묻는 질문</h3>
 
     <details class="faq" open>
-      <summary>자료는 언제 받을 수 있나요?</summary>
-      <p>{{ site.payment.notice }} 마감이 급하시면 주문서 요청사항에 적어 주세요. 가능한 한 맞춰 드립니다.</p>
+      <summary>자료는 언제, 어떻게 받나요?</summary>
+      <p>{{ delivery_line|safe }}
+        <b>메일로 파일이 날아오는 방식이 아닙니다</b> — 주문 화면과
+        <a href="{{ url_for('my_page') }}"><b>내 자료함</b></a>에서 바로 열립니다.
+        마감이 급하시면 주문서 요청사항에 적어 주세요. 가능한 한 맞춰 드립니다.</p>
     </details>
     <details class="faq">
       <summary>파일은 어떤 형식인가요?</summary>
@@ -58,6 +63,12 @@
       <summary>학생들에게 나눠 줘도 되나요?</summary>
       <p>네. 구매하신 분이 <b>직접 가르치는 학생</b>에게 인쇄해서 배포하는 것은 자유롭게 하실 수 있습니다.
         다만 다른 강사에게 파일을 넘기거나, 온라인에 올리거나, 되파는 것은 안 됩니다.</p>
+    </details>
+    <details class="faq">
+      <summary>학평·모의고사 자료는 언제 올라오나요?</summary>
+      <p>시험 친 날로부터 <b>{{ upload_days }}일 안에</b> 지문분석 패키지와 문제 패키지를 모두 올립니다.
+        다음 시험 날짜와 올리는 기한은
+        <a href="{{ url_for('notice') }}#exams"><b>공지 · 시험 일정</b></a>에서 보실 수 있습니다.</p>
     </details>
     <details class="faq">
       <summary>원하는 교재가 목록에 없어요.</summary>
@@ -190,7 +201,7 @@
       <p><b>제3자에게 제공하지 않습니다.</b> 다만 서비스 운영을 위해 아래 업무를 위탁합니다.</p>
       <table class="spec policy-table">
         <tr><th style="width:230px;">웹사이트 호스팅</th><td>서버 운영사 (자료 보관·전송)</td></tr>
-        <tr><th>이메일 발송</th><td>메일 발송 서비스 (주문 안내·자료 발송)</td></tr>
+        <tr><th>메일 보내기</th><td>메일 발송 서비스 (주문 안내 · 자료함 주소 안내)</td></tr>
       </table>
 
       <h4 class="policy-h">4. 이용자의 권리</h4>

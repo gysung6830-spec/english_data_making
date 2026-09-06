@@ -193,7 +193,6 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
                    if m.get("sample_file") and (sc.SAMPLE_DIR / m["sample_file"]).exists()]
     mail_ok = bool(os.environ.get("SMTP_HOST") and os.environ.get("ORDER_EMAIL_TO"))
     free_ready = [x for x in sc.load_freebies()["items"] if sc.free_ready(x)]
-    exams_fixed = not sc.load_notices().get("_시험일정안내")
     seo_cfg = site.get("seo") or {}
     seo_ok = bool(seo_cfg.get("naver") or seo_cfg.get("google")
                   or seo_cfg.get("done_naver") or seo_cfg.get("done_google"))
@@ -225,10 +224,6 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
          "title": "주문 알림 메일 켜기",
          "why": "주문이 오면 바로 알 수 있고, 메일함이 주문 장부가 됩니다.",
          "url": url_for("admin.backup"), "label": "설정 방법 보기"},
-        {"done": exams_fixed,
-         "title": "시험 일정 실제 날짜로 고치기",
-         "why": "홈 첫 화면의 D-day 를 이 날짜로 셉니다. 지금은 예시 날짜가 들어 있습니다.",
-         "url": url_for("admin.notices"), "label": "공지 > 시험 일정"},
         {"done": bool(free_ready),
          "title": "무료 자료 한 건 올리기",
          "why": "한줄해석 하나만 올려도 검색으로 들어오는 문이 하나 생깁니다. "
@@ -628,7 +623,6 @@ def product_from_form(form, existing: dict | None = None) -> tuple[dict, list[st
     item["materials"] = [m for m in form.getlist("materials") if m in known]
     item["includes"] = parse_lines(form.get("includes"))
     item["highlights"] = parse_lines(form.get("highlights"))
-    item["delivery"] = sc.clean(form.get("delivery"), 200)
     item["format"] = sc.clean(form.get("format"), 100)
     item["sample_file"] = sc.clean(form.get("sample_file"), 120)
     # 이 상품이 대신하는 '부분' 상품들. (전권·전회차 상품에만 적습니다)
@@ -682,7 +676,6 @@ def product_form(slug=None):
         blank = {"active": True, "sort": 100, "includes": [],
                  "package": first.get("id", ""),
                  "materials": list(first.get("materials", [])),
-                 "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
                  "format": "PDF (A4, 인쇄용)"}
         return render_template("admin/product_form.html", p=existing or blank,
                                catalog=catalog, errors=[], is_new=existing is None,
@@ -814,7 +807,6 @@ def products_bulk_save():
                 "grade": book.get("grade", ""),
                 "sort": 100 + no,
                 "active": True,
-                "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
                 "format": "PDF (A4, 인쇄용)",
                 "includes": [], "highlights": [], "covers": [],
             }
@@ -1170,9 +1162,15 @@ def material_shot_delete(mid, filename):
 @admin_bp.route("/words")
 def words_list():
     data = sc.load_raw_words()
-    books = sorted(data["books"], key=lambda b: (b.get("sort", 100), b.get("name", "")))
+    # 손님 화면과 같은 차례로 봅니다 — 출판사 → 순서 → 이름
+    order = {name: i for i, name in enumerate(sc.WORD_PUBLISHERS)}
+    books = sorted(data["books"],
+                   key=lambda b: (order.get((b.get("publisher") or "").strip(), 99),
+                                  b.get("publisher") or "", b.get("sort", 100),
+                                  b.get("name", "")))
     return render_template("admin/words.html", books=books,
-                           counts={b["slug"]: sc.word_count(b) for b in books})
+                           counts={b["slug"]: sc.word_count(b) for b in books},
+                           publishers=sc.WORD_PUBLISHERS)
 
 
 @admin_bp.route("/words/new", methods=["POST"])
@@ -1214,7 +1212,7 @@ def words_book(slug):
         return redirect(url_for("admin.words_book", slug=slug))
 
     return render_template("admin/words_book.html", b=book,
-                           total=sc.word_count(book))
+                           total=sc.word_count(book), publishers=sc.WORD_PUBLISHERS)
 
 
 @admin_bp.route("/words/<slug>/upload", methods=["POST"])
@@ -1914,8 +1912,9 @@ def leads_csv():
 @admin_bp.route("/notices")
 def notices():
     data = sc.load_notices()
-    return render_template("admin/notices.html",
-                           exam_note=bool(data.get("_시험일정안내")), **data)
+    data.pop("exams", None)          # 화면에는 자동 일정까지 합친 쪽을 씁니다
+    return render_template("admin/notices.html", exams=sc.exam_schedule(),
+                           upload_days=sc.UPLOAD_DAYS, **data)
 
 
 @admin_bp.route("/notices/save", methods=["POST"])
@@ -1955,35 +1954,31 @@ def notice_delete(index):
 
 @admin_bp.route("/notices/exams", methods=["POST"])
 def exams_save():
-    """시험 일정 — 홈의 'D-day' 는 여기 날짜로 셉니다."""
+    """시험 시행일 확정하기.
+
+    표에는 자동으로 만든 예상 일정이 이미 채워져 있습니다. 그래서 '바뀐 줄만'
+    저장합니다 — 손 안 댄 줄까지 확정으로 굳혀 버리면 다음 해에 자동으로
+    굴러가지 않고, 예상값을 확정이라고 잘못 말하게 됩니다.
+    """
     data = sc.load_notices()
+    auto = {(r["name"], r["date"]) for r in sc.exam_schedule() if not r["fixed"]}
     rows = []
     for i, (date, name) in enumerate(zip(request.form.getlist("exam_date"),
                                          request.form.getlist("exam_name"))):
         date = sc.clean(date, 10)
         name = sc.clean(name, 60)
-        if not date or not name:
-            continue
+        if not date or not name or (name, date) in auto:
+            continue                      # 자동값 그대로면 굳이 적어 두지 않습니다
         grades = [g for g in request.form.getlist(f"exam_grades_{i}")
                   if g in ("고1", "고2", "고3")]
         rows.append({"date": date, "name": name, "grades": grades})
     rows.sort(key=lambda r: r["date"])
     data["exams"] = rows
-    data.pop("_시험일정안내", None)      # 예시 안내문은 한 번 저장하면 지웁니다
     sc.save_notices(data)
-    flash(f"시험 일정 {len(rows)}개를 저장했습니다. 홈의 D-day 가 바로 바뀝니다.", "ok")
-    return redirect(url_for("admin.notices"))
-
-
-@admin_bp.route("/notices/schedule", methods=["POST"])
-def schedule_save():
-    whens = request.form.getlist("when")
-    whats = request.form.getlist("what")
-    data = sc.load_notices()
-    data["schedule"] = [{"when": sc.clean(w, 40), "what": sc.clean(t, 200)}
-                        for w, t in zip(whens, whats) if sc.clean(w, 40) and sc.clean(t, 200)]
-    sc.save_notices(data)
-    flash("업데이트 일정을 저장했습니다.", "ok")
+    if rows:
+        flash(f"시행일 {len(rows)}개를 확정했습니다. 나머지는 예상 일정 그대로 굴러갑니다.", "ok")
+    else:
+        flash("고치신 날짜가 없어, 전부 자동 일정 그대로 둡니다.", "ok")
     return redirect(url_for("admin.notices"))
 
 

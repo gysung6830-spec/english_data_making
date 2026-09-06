@@ -86,7 +86,7 @@ def test_public_pages_open():
         ("/free", "무료 자료"),
         ("/custom", "자료 요청"),
         ("/submit", "시험지"),
-        ("/notice", "자료 업데이트 일정"),
+        ("/notice", "자료는 언제 올라오나요"),
         ("/pass", "프리패스"),
         ("/guide", "환불 규정"),
     ]:
@@ -1284,6 +1284,44 @@ def test_make_screen_four_steps():
     print("PASS  단어장 만들기 — 네 단계 · 단어마다 유형 · 바로 미리보기")
 
 
+def test_wordbooks_are_grouped_by_publisher():
+    """단어장은 EBS · 능률 · YBM · ETOOS 로 나뉘어 보여야 합니다."""
+    assert sc.WORD_PUBLISHERS == ["EBS", "능률", "YBM", "ETOOS"], sc.WORD_PUBLISHERS
+
+    a = admin()
+    a.post("/admin/words/new", data={"name": "능률 테스트 단어장", "publisher": "능률"},
+           follow_redirects=True)
+    slug = sc.load_raw_words()["books"][-1]["slug"]
+    a.post(f"/admin/words/{slug}/unit", data={
+        "unit_name": "1강", "words": "apple\t사과\nbanana\t바나나"}, follow_redirects=True)
+
+    groups = sc.words_by_publisher(sc.load_words()["books"])
+    names = [g["name"] for g in groups]
+    assert names[:4] == sc.WORD_PUBLISHERS, names   # 교재가 없어도 자리는 남습니다
+    ebs = next(g for g in groups if g["name"] == "EBS")
+    neung = next(g for g in groups if g["name"] == "능률")
+    assert ebs["count"] >= 1 and neung["count"] == 1
+    assert neung["words"] == 2
+
+    page = body(client().get("/words"))
+    for pub in sc.WORD_PUBLISHERS:
+        assert f'>{pub}<' in page or f"{pub}<span" in page, pub
+    assert "능률 테스트 단어장" in page
+    # 아직 교재가 없는 곳은 숨기지 않고, 교재를 알려 달라고 합니다
+    assert "준비하고 있습니다" in page and 'class="pub-tab' in page
+
+    # 출판사가 없는 단어장은 '그 외' 로 갑니다 (사라지면 안 됩니다)
+    a.post("/admin/words/new", data={"name": "출판사 없는 단어장", "publisher": ""},
+           follow_redirects=True)
+    etc_slug = sc.load_raw_words()["books"][-1]["slug"]
+    a.post(f"/admin/words/{etc_slug}/unit", data={
+        "unit_name": "1강", "words": "cat\t고양이"}, follow_redirects=True)
+    groups = sc.words_by_publisher(sc.load_words()["books"])
+    etc = next(g for g in groups if g["name"] == sc.WORD_PUBLISHER_ETC)
+    assert etc["count"] == 1
+    print("PASS  단어장을 출판사별로 — EBS · 능률 · YBM · ETOOS")
+
+
 def test_word_counts_per_kind_and_cap():
     """문항 수는 유형마다 따로. 다 더해 500문항까지."""
     a = admin()
@@ -1967,6 +2005,35 @@ def test_locker_sits_next_to_the_cart():
             cta.index("자료 보러 가기")]
     assert seen == sorted(seen), seen
     print("PASS  장바구니 · 내 자료함 · 자료 보러 가기 순")
+
+
+def test_no_page_promises_pdf_by_email():
+    """자료는 메일로 날아오지 않습니다. 그렇게 적힌 화면이 있으면 안 됩니다."""
+    # 실제 동작: 입금 확인 → 주문 화면·내 자료함에서 바로 열림. 메일은 링크 백업.
+    site = sc.load_site()
+    site["delivery"] = json.loads((_SRC / "site.json").read_text())["delivery"]
+    site["payment"] = json.loads((_SRC / "site.json").read_text())["payment"]
+    sc.save_site(site)
+
+    live = [x for x in sc.load_catalog()["products"] if x.get("active", True)]
+    assert live, "팔 수 있는 상품이 하나도 없습니다"
+    paths = ["/", "/guide", f"/products/{live[0]['slug']}", "/order"]
+    for path in paths:
+        page = body(client().get(path))
+        for bad in ("이메일로 PDF", "이메일로 자료를 보내", "이메일 발송",
+                    "PDF가 발송됩니다", "24시간 이내 이메일"):
+            assert bad not in page, f"{path} 에 '{bad}' 가 남아 있습니다"
+
+    # 대신 '이 화면에서 바로' 라고 말해야 합니다
+    assert "바로" in body(client().get("/guide"))
+    detail = body(client().get(f"/products/{live[0]['slug']}"))
+    assert "받는 법" in detail and "바로" in detail
+    # 상품마다 따로 적던 발송 문구는 없앴습니다 (가게 전체가 한 문장)
+    assert all("delivery" not in x for x in sc.load_raw_catalog()["products"])
+
+    line = sc.delivery_line(sc.load_site())
+    assert "바로" in line and "메일" in line
+    print("PASS  '메일로 PDF 보냄' 문구 없음 · 받는 법은 한 문장")
 
 
 def test_file_comes_with_the_order_no_extra_charge():
@@ -2680,16 +2747,73 @@ def test_home_counts_dday_to_next_exam():
     """다음 시험까지 며칠인지 홈에서 바로 보여야 합니다."""
     from datetime import timedelta
     data = sc.load_notices()
-    soon = (sc.now_kst() + timedelta(days=12)).date().isoformat()
+    # 자동 일정보다 반드시 먼저 오도록, 가장 가까운 시험보다 하루 앞에 둡니다
+    nearest = min([e["dday"] for e in sc.upcoming_exams(9)] or [30])
+    days = max(1, min(12, nearest - 1))
+    soon = (sc.now_kst() + timedelta(days=days)).date().isoformat()
     data["exams"] = [{"date": soon, "name": "테스트 학력평가", "grades": ["고1"]},
                      {"date": (sc.now_kst() - timedelta(days=3)).date().isoformat(),
                       "name": "이미 지난 시험", "grades": ["고3"]}]
     sc.save_notices(data)
 
     text = body(client().get("/"))
-    assert "D-12" in text and "테스트 학력평가" in text
+    assert f"D-{days}" in text and "테스트 학력평가" in text
     assert "이미 지난 시험" not in text          # 지난 시험은 안 나와야 합니다
     print("PASS  다음 시험까지 D-day (지난 시험은 제외)")
+
+
+def test_exam_schedule_fills_itself():
+    """학평·모평·수능은 손으로 안 넣어도 해마다 저절로 채워져야 합니다."""
+    data = sc.load_notices()
+    data["exams"] = []                       # 넣어 둔 확정일을 모두 비웁니다
+    sc.save_notices(data)
+
+    rows = sc.exam_schedule()
+    assert rows, "비워 두면 일정이 하나도 없습니다"
+    assert all(not r["fixed"] for r in rows), "손 안 댄 날짜는 '예상' 이어야 합니다"
+    names = {r["name"] for r in rows}
+    assert "대학수학능력시험" in names and "3월 전국연합 학력평가" in names
+    # 올해와 내년 두 해가 들어 있어, 연말에도 빈 화면이 안 나옵니다
+    assert len({r["date"][:4] for r in rows}) >= 2
+
+    # 규칙이 실제 시행일과 맞는지 — 2026학년도 수능은 2026-11-19(목) 입니다
+    수능 = next(r for r in sc.exam_calendar(2026) if r["name"] == "대학수학능력시험")
+    assert 수능["date"] == "2026-11-19", 수능
+
+    # 화면에도 '예상' 이라고 밝히고, 언제까지 올리는지가 함께 나옵니다
+    page = body(client().get("/notice"))
+    assert "예상" in page and f"{sc.UPLOAD_DAYS}일 안에" in page
+    assert "지문분석" in page and "문제 패키지" in page
+
+    # 기한이 지난 시험을 '올렸다' 고 단정하지 않습니다 — 아직 약속이 살아 있는 것만
+    today = sc.now_kst().date()
+    for e in sc.pending_uploads(5):
+        assert e["date"] < today.isoformat() and e["upload_by"] >= today, e
+    print("PASS  시험 일정이 저절로 채워짐 · 예상 표시 · 업로드 기한")
+
+
+def test_saving_unchanged_exams_keeps_them_automatic():
+    """표를 그대로 저장해도 예상값이 확정으로 굳으면 안 됩니다."""
+    data = sc.load_notices()
+    data["exams"] = []
+    sc.save_notices(data)
+    auto = sc.exam_schedule()
+
+    a = admin()
+    form = {"exam_date": [r["date"] for r in auto],
+            "exam_name": [r["name"] for r in auto]}
+    for i, r in enumerate(auto):
+        form[f"exam_grades_{i}"] = r["grades"]
+    a.post("/admin/notices/exams", data=form, follow_redirects=True)
+    assert sc.load_notices()["exams"] == [], "손 안 댄 줄까지 적어 두었습니다"
+
+    # 한 줄만 실제 시행일로 고치면 그 줄만 확정으로 남습니다
+    form["exam_date"] = [auto[0]["date"]] + [r["date"] for r in auto[1:]]
+    form["exam_date"][0] = "2099-01-08"
+    a.post("/admin/notices/exams", data=form, follow_redirects=True)
+    saved = sc.load_notices()["exams"]
+    assert len(saved) == 1 and saved[0]["date"] == "2099-01-08", saved
+    print("PASS  고친 줄만 확정 · 나머지는 자동 그대로")
 
 
 def test_admin_edits_exam_schedule():
@@ -2701,8 +2825,9 @@ def test_admin_edits_exam_schedule():
     saved = sc.load_notices()["exams"]
     assert saved == [{"date": "2099-05-20", "name": "아주 먼 학력평가",
                       "grades": ["고2", "고3"]}], saved
-    assert "아주 먼 학력평가" in body(client().get("/"))
-    print("PASS  관리자에서 시험 일정 고치기 → 홈 D-day 반영")
+    assert any(e["name"] == "아주 먼 학력평가" and e["fixed"]
+               for e in sc.exam_schedule()), "확정으로 안 들어갔습니다"
+    print("PASS  관리자에서 시험 일정 고치기 → 확정으로 반영")
 
 
 def test_home_updates_skip_pinned_notice():
@@ -3715,6 +3840,8 @@ def run_all():
     test_long_pages_have_shortcuts()
     test_home_updates_skip_pinned_notice()
     test_home_counts_dday_to_next_exam()
+    test_exam_schedule_fills_itself()
+    test_saving_unchanged_exams_keeps_them_automatic()
     test_admin_edits_exam_schedule()
     test_two_packages_per_book()
     test_sibling_package_cross_sell()
@@ -3813,6 +3940,7 @@ def run_all():
     test_word_quiz()
     test_save_sheet_to_my_locker()
     test_make_screen_four_steps()
+    test_wordbooks_are_grouped_by_publisher()
     test_word_counts_per_kind_and_cap()
     test_word_file_upload()
     test_sheet_heading()
@@ -3830,6 +3958,7 @@ def run_all():
     test_contact_has_no_phone()
     test_contact_page()
     test_locker_sits_next_to_the_cart()
+    test_no_page_promises_pdf_by_email()
     test_file_comes_with_the_order_no_extra_charge()
     test_css_change_reaches_the_visitor()
     test_home_shows_real_pages_not_just_names()

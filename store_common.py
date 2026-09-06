@@ -6,7 +6,7 @@
 
   store_data/site.json      가게 정보 (연락처·계좌·사업자·프리패스 가격)
   store_data/products.json  분류 · 교재 · 상품
-  store_data/notices.json   공지 · 업데이트 일정
+  store_data/notices.json   공지 · 확정된 시험 시행일
   store_data/store.db       주문 · 쿠폰 · 시험지 제출 (SQLite)
   store_data/freebies.json  무료 자료실 (한줄해석 · 한줄영어 · 좌지문우해석 …)
   store_data/submissions/   올려 주신 시험지 파일
@@ -20,7 +20,7 @@ import secrets
 import shutil
 import smtplib
 import sqlite3
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from email.message import EmailMessage
 from pathlib import Path
 
@@ -158,7 +158,7 @@ def save_json(name: str, data: dict) -> None:
 SITE_FALLBACK = {"brand": "오르티카영어", "contact": {}, "payment": {},
                  "business": {}, "policy": {}, "pass": {}}
 CATALOG_FALLBACK = {"categories": [], "packages": [], "books": [], "products": []}
-NOTICE_FALLBACK = {"schedule": [], "notices": [], "exams": []}
+NOTICE_FALLBACK = {"notices": [], "exams": []}
 
 
 def load_site() -> dict:
@@ -286,6 +286,29 @@ def save_words(data: dict) -> None:
 def find_wordbook(slug: str, raw: bool = False) -> dict | None:
     data = load_raw_words() if raw else load_words()
     return next((b for b in data["books"] if b.get("slug") == slug), None)
+
+
+# 단어장은 출판사별로 세워 둡니다. 한 줄로 늘어놓으면 교재가 늘어날수록
+# 찾기 어렵고, 선생님들은 "수능특강" 이 아니라 "EBS 것" 으로 기억하십니다.
+WORD_PUBLISHERS = ["EBS", "능률", "YBM", "ETOOS"]
+WORD_PUBLISHER_ETC = "그 외"
+
+
+def words_by_publisher(books: list[dict]) -> list[dict]:
+    """단어장을 출판사별로 묶습니다.
+
+    아직 교재가 없는 출판사도 자리를 남겨 둡니다 — 곧 올라온다는 것과,
+    없는 교재는 말씀해 주시면 넣어 드린다는 것을 알리는 자리입니다.
+    """
+    buckets: dict[str, list[dict]] = {name: [] for name in WORD_PUBLISHERS}
+    for book in books:
+        name = (book.get("publisher") or "").strip()
+        buckets.setdefault(name or WORD_PUBLISHER_ETC, []).append(book)
+    order = WORD_PUBLISHERS + [n for n in buckets if n not in WORD_PUBLISHERS]
+    return [{"name": n, "books": buckets[n],
+             "count": len(buckets[n]),
+             "words": sum(word_count(b) for b in buckets[n])}
+            for n in order]
 
 
 def word_count(book: dict) -> int:
@@ -686,9 +709,8 @@ def preorder_price(cfg: dict, plan: dict) -> int:
 
 
 def load_notices() -> dict:
-    """공지 · 자료 업데이트 일정. 고정 공지가 맨 앞, 그다음 최신순."""
+    """공지. 고정 공지가 맨 앞, 그다음 최신순."""
     data = load_json("notices.json", NOTICE_FALLBACK)
-    data.setdefault("schedule", [])
     data.setdefault("exams", [])
     items = data.get("notices", [])
     pinned = [n for n in items if n.get("pinned")]
@@ -698,25 +720,110 @@ def load_notices() -> dict:
     return data
 
 
+# ---------------------------------------------------------------------------
+# 시험 일정 — 손으로 안 넣어도 해마다 저절로 채워집니다
+# ---------------------------------------------------------------------------
+# 학평·모평·수능은 해마다 자리가 거의 같습니다. "몇 월 · 몇째 주 · 무슨 요일"
+# 규칙으로 만들어 두면 해가 바뀌어도 관리자 화면을 열 일이 없습니다.
+# 다만 실제 시행일은 교육청·평가원이 그 해에 정해 발표하므로, 규칙으로 만든
+# 날짜는 '예상'입니다. 관리자 화면에서 확정일을 넣으면 그쪽이 이깁니다.
+#
+#      (월, 몇째 주, 요일, 시험 이름, 학년)      ※ 요일 3 = 목요일
+EXAM_PLAN: list[tuple[int, int, int, str, list[str]]] = [
+    (3,  4, 3, "3월 전국연합 학력평가", ["고1", "고2", "고3"]),
+    (6,  1, 3, "6월 모의평가", ["고3"]),
+    (6,  3, 3, "6월 전국연합 학력평가", ["고1", "고2"]),
+    (7,  2, 3, "7월 전국연합 학력평가", ["고3"]),
+    (9,  1, 3, "9월 모의평가", ["고3"]),
+    (9,  3, 3, "9월 전국연합 학력평가", ["고1", "고2"]),
+    (10, 2, 3, "10월 전국연합 학력평가", ["고3"]),
+    (11, 3, 3, "대학수학능력시험", ["고3"]),
+    (11, 4, 3, "11월 전국연합 학력평가", ["고1", "고2"]),
+]
+
+# 시험을 친 날로부터 며칠 안에 지문분석·문제패키지를 올릴지. 손님에게 하는
+# 약속이자, 화면에 뜨는 '언제까지' 의 근거입니다.
+UPLOAD_DAYS = 7
+
+
+def nth_weekday(year: int, month: int, nth: int, weekday: int) -> date:
+    """그 달의 n 번째 무슨 요일. (weekday 는 월요일이 0)"""
+    first = date(year, month, 1)
+    shift = (weekday - first.weekday()) % 7
+    day = 1 + shift + (nth - 1) * 7
+    while True:                       # 그 달에 n 번째가 없으면 한 주 당깁니다
+        try:
+            return date(year, month, day)
+        except ValueError:
+            day -= 7
+
+
+def exam_calendar(year: int) -> list[dict]:
+    """그 해의 학평·모평·수능을 규칙대로 만들어 돌려줍니다 (모두 '예상')."""
+    return [{"date": nth_weekday(year, m, nth, wd).isoformat(),
+             "name": name, "grades": list(grades), "fixed": False}
+            for m, nth, wd, name, grades in EXAM_PLAN]
+
+
+def exam_schedule(years: int = 2) -> list[dict]:
+    """자동으로 만든 일정 + 관리자가 넣은 확정일을 합칩니다.
+
+    같은 해 · 같은 이름이면 관리자가 넣은 날짜가 이깁니다. 관리자가 넣은
+    시험이 규칙에 없는 이름(중간고사 등)이면 그대로 함께 실립니다.
+    """
+    this_year = now_kst().year
+    rows: dict[tuple[int, str], dict] = {}
+    for year in range(this_year, this_year + max(1, years)):
+        for row in exam_calendar(year):
+            rows[(year, row["name"])] = row
+    for row in load_notices().get("exams", []):
+        try:
+            when = datetime.strptime(row.get("date", ""), "%Y-%m-%d").date()
+        except ValueError:
+            continue
+        name = row.get("name") or ""
+        rows[(when.year, name)] = {"date": when.isoformat(), "name": name,
+                                   "grades": row.get("grades") or [], "fixed": True}
+    return sorted(rows.values(), key=lambda r: (r["date"], r["name"]))
+
+
+def _with_dday(row: dict, today: date) -> dict:
+    when = datetime.strptime(row["date"], "%Y-%m-%d").date()
+    left = (when - today).days
+    return {**row, "when": when, "dday": left,
+            "label": "오늘" if left == 0 else f"D-{left}",
+            "upload_by": when + timedelta(days=UPLOAD_DAYS)}
+
+
 def upcoming_exams(limit: int = 4) -> list[dict]:
     """다음 시험까지 며칠 남았는지. 선생님이 가장 자주 확인하는 정보입니다.
 
     지난 시험은 빼고, 가까운 순으로 돌려줍니다.
     """
     today = now_kst().date()
-    out = []
-    for exam in load_notices().get("exams", []):
-        try:
-            when = datetime.strptime(exam.get("date", ""), "%Y-%m-%d").date()
-        except ValueError:
-            continue
-        left = (when - today).days
-        if left < 0:
-            continue
-        out.append({**exam, "when": when, "dday": left,
-                    "label": "오늘" if left == 0 else f"D-{left}"})
-    out.sort(key=lambda x: x["when"])
+    out = [_with_dday(r, today) for r in exam_schedule()
+           if r["date"] >= today.isoformat()]
     return out[:limit]
+
+
+def pending_uploads(limit: int = 3) -> list[dict]:
+    """이미 치렀고, 아직 올릴 기한(시험일 + UPLOAD_DAYS)이 남은 시험.
+
+    기한이 지난 시험을 '올라왔습니다' 라고 단정하지 않습니다 — 실제로 올렸는지는
+    자료 목록이 말해 줍니다. 여기서는 아직 약속이 살아 있는 것만 보여 줍니다.
+    """
+    today = now_kst().date()
+    out = []
+    for row in reversed(exam_schedule()):
+        if row["date"] >= today.isoformat():
+            continue
+        item = _with_dday(row, today)
+        if item["upload_by"] < today:
+            continue
+        out.append({**item, "left": (item["upload_by"] - today).days})
+        if len(out) >= limit:
+            break
+    return out
 
 
 def save_notices(data: dict) -> None:
@@ -1095,6 +1202,25 @@ DELIVERY_MODES = {
 def delivery_mode(site: dict) -> str:
     mode = (site.get("delivery") or {}).get("mode", "view")
     return mode if mode in DELIVERY_MODES else "view"
+
+
+# 자료를 어떻게 받는지 — 한 곳에서만 정합니다.
+# 메일은 '보내 주는 길' 이 아니라 '링크를 한 번 더 알려 주는 백업' 입니다.
+# 입금이 확인되면 주문 화면·내 자료함에서 바로 열립니다. 상품마다 따로 적어 두면
+# 실제 동작과 어긋나므로, 여기서 만든 문장 하나를 모든 화면이 함께 씁니다.
+DELIVERY_LINES = {
+    "view": "입금이 확인되면 <b>주문 화면에서 바로 보고 인쇄</b>하실 수 있습니다.",
+    "both": "입금이 확인되면 <b>주문 화면에서 바로 보시고, PDF 파일로도 받으실 수</b> 있습니다.",
+    "file": "입금이 확인되면 <b>주문 화면에서 PDF 파일을 바로 내려받으실 수</b> 있습니다.",
+}
+DELIVERY_MAIL_NOTE = "내 자료함에도 남고, 같은 주소를 메일로도 한 번 더 보내 드립니다."
+
+
+def delivery_line(site: dict | None = None, *, mail_note: bool = True) -> str:
+    """'자료를 어떻게 받나요' 한 문장. 화면마다 다른 말을 하지 않게 합니다."""
+    site = load_site() if site is None else site
+    line = DELIVERY_LINES[delivery_mode(site)]
+    return f"{line} {DELIVERY_MAIL_NOTE}" if mail_note else line
 
 
 WATERMARK_MARKS = ["이름", "이메일", "주문번호", "브랜드", "날짜"]

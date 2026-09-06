@@ -97,6 +97,8 @@ def inject_globals():
         "inquiry_kinds": sc.INQUIRY_KINDS,
         "material_map": sc.material_map(),
         "package_map": sc.package_map(),
+        # '자료를 어떻게 받나' 는 한 곳에서만 정합니다 (화면마다 딴말 안 하게)
+        "delivery_line": sc.delivery_line(site),
     }
 
 
@@ -464,11 +466,13 @@ def lineup():
 
 @app.route("/notice")
 def notice():
-    """공지 · 자료 업데이트 일정. '지금 오르티카'(새 자료 · 다음 시험)도 여기 있습니다."""
+    """공지 · 시험 일정. '지금 오르티카'(새 자료 · 다음 시험)도 여기 있습니다."""
     data = sc.load_notices()
-    # notices.json 의 'exams' 는 원본 일정입니다. 화면에는 D-day 를 붙인 쪽을 씁니다.
-    data["exams"] = sc.upcoming_exams(3)
+    # notices.json 의 'exams' 는 확정 시행일만 담습니다. 화면에는 규칙으로 만든
+    # 예상 일정까지 합쳐, D-day 와 '언제까지 올리는지' 를 붙여서 씁니다.
+    data["exams"] = sc.upcoming_exams(4)
     return render_template("notice.html", **data,
+                           pending=sc.pending_uploads(3), upload_days=sc.UPLOAD_DAYS,
                            fresh=recent_updates(sc.load_catalog(), limit=6))
 
 
@@ -1367,7 +1371,7 @@ def words_page():
     """단어 시험지 만들기 — 단어장 고르기."""
     data = sc.load_words()
     return render_template("words.html", books=data["books"], intro=data.get("intro", {}),
-                           kinds=sc.QUIZ_KINDS)
+                           groups=sc.words_by_publisher(data["books"]), kinds=sc.QUIZ_KINDS)
 
 
 @app.route("/words/<slug>")
@@ -1815,7 +1819,7 @@ def watermark_for(row, path):
 
 @app.route("/guide")
 def guide():
-    return render_template("guide.html")
+    return render_template("guide.html", upload_days=sc.UPLOAD_DAYS)
 
 
 @app.route("/robots.txt")

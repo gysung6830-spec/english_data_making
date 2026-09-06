@@ -91,7 +91,8 @@
         {% if p.grade %}<tr><th>대상</th><td>{{ p.grade }}</td></tr>{% endif %}
         {% if p.passages %}<tr><th>지문 수</th><td>{{ p.passages }}개</td></tr>{% endif %}
         <tr><th>파일 형식</th><td>{{ p.format or 'PDF (A4, 인쇄용)' }}</td></tr>
-        <tr><th>발송</th><td>{{ p.delivery or '입금 확인 후 영업일 기준 24시간 이내 이메일 발송' }}</td></tr>
+        {# 상품마다 따로 적지 않습니다 — 받는 방법은 가게 전체가 하나입니다. #}
+        <tr><th>받는 법</th><td>{{ delivery_line|safe }}</td></tr>
         <tr><th>이용 범위</th><td>{{ site.policy.license }}</td></tr>
       </table>
     </div>
