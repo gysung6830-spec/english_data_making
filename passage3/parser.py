@@ -499,6 +499,22 @@ def _parse_sentences(body: str) -> List[Sentence]:
     return sentences
 
 
+_CHAPTER_PREFIX_RE = re.compile(
+    r"(?i)^(?:ch(?:apter)?|unit|lesson)\b.*?\s[-–—]\s+(.+)$"
+)
+
+
+def _strip_chapter_prefix(label: str) -> str:
+    """'Ch. 01 Unit 01 - 1번' 처럼 챕터/단원 접두어가 붙은 라벨에서 뒤쪽(실제
+    문항 라벨: '1번'·'수능 대비 ANALYSIS' 등)만 남긴다.
+
+    구분자는 '공백-대시-공백'으로 한정해, 챕터 번호 내부의 대시('5-1' 등)를
+    잘못 자르지 않는다. 접두어가 없으면 원래 라벨을 그대로 둔다.
+    """
+    m = _CHAPTER_PREFIX_RE.match(label or "")
+    return m.group(1).strip() if m else (label or "")
+
+
 def _clean_title(s: str) -> str:
     """제목 문자열 정리(구분자·중복 공백 정돈)."""
     s = s.replace("┃", " · ").replace("|", " · ")
@@ -526,7 +542,8 @@ def _match_header(line: str):
             return f"{num}번", _clean_title(rest)
     m = HEADER_RE3.match(line)
     if m:
-        return _clean_title(m.group(1)), _clean_title(m.group(2))
+        return _strip_chapter_prefix(_clean_title(m.group(1))), \
+            _clean_title(m.group(2))
     return None
 
 

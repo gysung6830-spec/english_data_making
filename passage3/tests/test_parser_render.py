@@ -225,6 +225,27 @@ def test_fill_chunk_meanings_count_mismatch():
     assert out[0].ko == "" and out[1].ko == ""  # 개수 안 맞으면 그대로
 
 
+def test_strip_chapter_prefix():
+    """교재 헤더 'Ch. 01 Unit 01 - 1번'에서 챕터/단원 접두어를 떼고 실제 문항
+    라벨('1번'·'수능 대비 ANALYSIS')만 남긴다. 챕터 번호 내부 대시는 안 자름."""
+    from parser import _strip_chapter_prefix as f
+    assert f("Ch. 01 Unit 01 - 수능 대비 ANALYSIS") == "수능 대비 ANALYSIS"
+    assert f("Ch. 01 Unit 01 - 1번") == "1번"
+    assert f("Chapter 3 Lesson 2 - 12번") == "12번"
+    assert f("Ch. 5-1 Unit 2 - 1번") == "1번"   # 챕터 번호 대시는 보존
+    assert f("18번") == "18번"                   # 접두어 없으면 그대로
+
+
+def test_chapter_header_label_stripped():
+    """HEADER_RE3(Ch/Unit 형식) 헤더가 파싱될 때 라벨이 접두어 없이 나온다."""
+    raw = ("Ch. 01 Unit 01 - 1번: 사과 편지\n"
+           "① I'm sorry for the late notice.\n"
+           "① 늦은 통보에 대해 사과드립니다.\n")
+    p = split_passages(raw)[0]
+    assert p.label == "1번"
+    assert "Unit" not in p.label
+
+
 def test_renderers_produce_html():
     passages = split_passages(SAMPLE)
     for fn in (render_format_a, render_format_c, render_format_b):
