@@ -695,6 +695,154 @@ def render_worksheet_files(analyses, out_stem: str | Path, layout: str = "A",
     return results
 
 
+# ---------------------------------------------------------------------------
+# 마스터 JSON → 산출물 파생 (직독직해 / 지문분석 / 워크북) — 재분석 없이 렌더만
+# ---------------------------------------------------------------------------
+_CIRCLED_RE = re.compile(r"[①-⑳]")   # ①..⑳
+_CHIP_KW = ("태", "관계", "분사", "부정사", "동명사", "접속사", "일치", "비교", "가정",
+            "병렬", "형식", "도치", "강조", "생략", "대명사", "시제", "조동사", "원형",
+            "동격", "수식", "부사절", "명사절", "형용사절", "진행", "완료", "최상", "재귀",
+            "감정", "부정어", "가목적어", "전치사", "의미상", "당위", "복합관계", "간접")
+_KEY_KW = ("관계", "분사", "가정", "비교", "도치", "강조", "형식", "부정사", "동명사", "수동")
+
+
+def literal_from_analysis(analysis) -> list:
+    """마스터 분석(문장 태깅)의 slash+reading_ko+어법으로 직독직해(B형) 데이터 생성(0 API).
+
+    영어 조각(slash 경계)과 한글 직독직해(reading_ko)를 1:1 청크로 짝짓고, 어법 Point 에서
+    어법명을 뽑아 문법 칩으로 단다. 재분석 없이 layout B 렌더에 바로 쓴다.
+    """
+    from .models import GrammarChip, LiteralSentence, LitChunk
+
+    out = []
+    for s in analysis.sentences:
+        ecs, cur = [], []
+        for line in s.lines:
+            for t in line:
+                cur.append(t.text)
+                if getattr(t, "slash", False):
+                    ecs.append(" ".join(cur)); cur = []
+        if cur:
+            ecs.append(" ".join(cur))
+        kcs = [c.strip() for c in (getattr(s, "reading_ko", "") or "").split(" / ") if c.strip()]
+        if kcs and len(kcs) == len(ecs):
+            chunks = [LitChunk(english=e, korean=k) for e, k in zip(ecs, kcs)]
+        else:
+            chunks = [LitChunk(english=" ".join(ecs), korean=getattr(s, "translation", "") or "")]
+        grams = []
+        for p in (getattr(s, "points", None) or []):
+            if getattr(p, "kind", "") != "grammar":
+                continue
+            for part in (getattr(p, "body_html", "") or "").split("<br>"):
+                name = re.sub(r"<[^>]+>", "", part)
+                name = _CIRCLED_RE.sub("", name).strip()
+                name = re.sub(r"\s*·\s*[^·]+\(X\)\s*$", "", name).strip()  # 오답형 제거
+                # 뜻풀이 note(예: '관계된다','해당된다')는 어법 칩이 아니므로 제외
+                if re.search(r"(된다|한다|이다|린다|받다|하다|진다)$", name):
+                    continue
+                if name and any(k in name for k in _CHIP_KW):
+                    grams.append(GrammarChip(point=name, key=any(k in name for k in _KEY_KW)))
+        out.append(LiteralSentence(no=s.index, chunks=chunks, grammar=grams))
+    return out
+
+
+PRODUCTS = ("직독직해", "지문분석", "워크북")
+
+
+def render_products(analyses, out_stem: str | Path, products=PRODUCTS, *,
+                    footer_note: str = "", density: str = "auto",
+                    make_student: bool = True, slevel: str = "blank",
+                    boxmode: str = "", bw: bool = False) -> list[tuple[str, Path]]:
+    """마스터 분석 하나로 선택한 산출물만 렌더(재분석 없음). 반환 [(라벨, 경로), …].
+
+      · 직독직해 : layout B(청크 대조 표) — literal_from_analysis 로 0-API 생성
+      · 지문분석 : 활용가이드 + 지문별 '분석→정리' + 원문·해석
+      · 워크북   : 단어 테스트(+정답) + 학습용(빈칸)
+    """
+    import tempfile
+
+    from pypdf import PdfReader, PdfWriter
+
+    out_stem = Path(out_stem)
+    out_stem.parent.mkdir(parents=True, exist_ok=True)
+    meta = next((a.source_name for a in analyses if getattr(a, "source_name", "")), "")
+    products = set(products)
+
+    def _pages(p: Path) -> int:
+        try:
+            return len(PdfReader(str(p)).pages)
+        except Exception:
+            return 0
+
+    def _concat(parts: list[Path], dest: Path) -> Path | None:
+        parts = [p for p in parts if p and _pages(p) > 0]
+        if not parts:
+            return None
+        w = PdfWriter()
+        for p in parts:
+            w.append(str(p))
+        with open(dest, "wb") as f:
+            w.write(f)
+        _stamp_footer(dest, footer_note, meta)
+        return dest
+
+    def _rw(subj, path, **kw):
+        render_worksheet(subj if isinstance(subj, list) else [subj], path,
+                         footer_note=footer_note, include_guide=False,
+                         boxmode=boxmode, bw=bw, **kw)
+        return path
+
+    results: list[tuple[str, Path]] = []
+    with tempfile.TemporaryDirectory() as d:
+        dd = Path(d)
+
+        if "지문분석" in products:
+            _progress("[지문분석] 파일 생성 중…")
+            gp = dd / "guide.pdf"
+            render_worksheet(analyses, gp, footer_note=footer_note,
+                             include_guide=True, only_guide=True, bw=bw)
+            parts = [gp]
+            for i, a in enumerate(analyses):
+                parts.append(_rw(a, dd / f"ab_{i}.pdf", density=density,
+                                 student=False, only_front=True, only_summary=True))
+            f = _concat(parts, out_stem.parent / f"{out_stem.name}_지문분석.pdf")
+            if f:
+                results.append(("📘 지문분석 (분석+정리)", f))
+            src = _rw(analyses, dd / "src.pdf", only_source=True)
+            f2 = _concat([src], out_stem.parent / f"{out_stem.name}_원문해석.pdf")
+            if f2:
+                results.append(("📖 원문·해석", f2))
+
+        if "워크북" in products:
+            _progress("[워크북] 파일 생성 중…")
+            if any(getattr(a, "vocab", None) for a in analyses):
+                tp = _rw(analyses, dd / "test.pdf", only_test=True)
+                ap = _rw(analyses, dd / "ans.pdf", only_answer=True)
+                f = _concat([tp, ap], out_stem.parent / f"{out_stem.name}_워크북_단어테스트.pdf")
+                if f:
+                    results.append(("📝 워크북 · 단어테스트(+정답)", f))
+            if make_student:
+                sp = _rw(analyses, dd / "stu.pdf", density=density, student=True,
+                         slevel=slevel, only_front=True)
+                f = _concat([sp], out_stem.parent / f"{out_stem.name}_워크북_학습용.pdf")
+                if f:
+                    results.append(("✏️ 워크북 · 학습용(빈칸)", f))
+
+        if "직독직해" in products:
+            _progress("[직독직해] 파일 생성 중…(재분석 없음)")
+            from . import renderer_b
+            for a in analyses:
+                a.literal = literal_from_analysis(a)
+            dest = out_stem.parent / f"{out_stem.name}_직독직해.pdf"
+            renderer_b.render(analyses, dest, footer_note=footer_note)
+            _stamp_footer(dest, footer_note, meta)
+            if _pages(dest) > 0:
+                results.append(("📗 직독직해", dest))
+
+    _progress(f"산출물 {len(results)}종 생성 완료")
+    return results
+
+
 def _stamp_footer(path: Path, footer_note: str = "", meta: str = "") -> None:
     """완성된 PDF 하단 여백에 저작권(왼쪽)·교재명·단원(가운데)·페이지 번호(오른쪽)를 찍는다.
 

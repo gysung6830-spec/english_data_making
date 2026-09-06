@@ -499,8 +499,8 @@ def test_webapp_worksheet_flow():
             "files": (io.BytesIO(b"x"), "s_ws.pdf")}
     r = c.post("/build", data=data, content_type="multipart/form-data")
     assert r.status_code == 200 and "완료".encode("utf-8") in r.data
-    # 섹션별 '별도 파일'이 나온다(분석+정리 / 학습용)
-    assert "분석+정리".encode("utf-8") in r.data and "학습용".encode("utf-8") in r.data
+    # 산출물(기본 지문분석)이 나온다
+    assert "지문분석".encode("utf-8") in r.data
     # 폼에 '시작 문항 번호(자동 증가)' 입력이 있다
     assert "start_no".encode("utf-8") in c.get("/").data
     print("PASS  웹앱 학습지 플로우(worksheet_app, 목) — 섹션별 별도 파일 추출")
@@ -531,10 +531,10 @@ def test_webapp_start_number_autoincrement():
         p.write_bytes(b"%PDF-1.4\n%%EOF")     # 렌더 생략(가짜 PDF)
         return [("📘 분석+정리", p)]
 
-    orig_build, orig_files = wa.ws_pipeline.build_analyses_for_file, wa.ws_pipeline.render_worksheet_files
+    orig_build, orig_files = wa.ws_pipeline.build_analyses_for_file, wa.ws_pipeline.render_products
     orig_assess = wa.ws_quality.assess
     wa.ws_pipeline.build_analyses_for_file = fake_build
-    wa.ws_pipeline.render_worksheet_files = fake_files
+    wa.ws_pipeline.render_products = fake_files
     wa.ws_quality.assess = lambda *a, **k: {"ok": True, "reasons": []}
     try:
         c = wa.app.test_client()
@@ -544,7 +544,7 @@ def test_webapp_start_number_autoincrement():
         c.post("/build", data=data, content_type="multipart/form-data")
     finally:
         wa.ws_pipeline.build_analyses_for_file = orig_build
-        wa.ws_pipeline.render_worksheet_files = orig_files
+        wa.ws_pipeline.render_products = orig_files
         wa.ws_quality.assess = orig_assess
     assert captured.get("labels") == ["30", "31", "32"], captured
     print("PASS  웹앱 수동 시작 문항 번호(30→30·31·32 자동 증가)")
@@ -575,10 +575,10 @@ def test_webapp_start_number_keeps_ranges():
         p.write_bytes(b"%PDF-1.4\n%%EOF")
         return [("📘 분석+정리", p)]
 
-    orig_build, orig_files = wa.ws_pipeline.build_analyses_for_file, wa.ws_pipeline.render_worksheet_files
+    orig_build, orig_files = wa.ws_pipeline.build_analyses_for_file, wa.ws_pipeline.render_products
     orig_assess = wa.ws_quality.assess
     wa.ws_pipeline.build_analyses_for_file = fake_build
-    wa.ws_pipeline.render_worksheet_files = fake_files
+    wa.ws_pipeline.render_products = fake_files
     wa.ws_quality.assess = lambda *a, **k: {"ok": True, "reasons": []}
     try:
         c = wa.app.test_client()
@@ -587,11 +587,35 @@ def test_webapp_start_number_keeps_ranges():
         c.post("/build", data=data, content_type="multipart/form-data")
     finally:
         wa.ws_pipeline.build_analyses_for_file = orig_build
-        wa.ws_pipeline.render_worksheet_files = orig_files
+        wa.ws_pipeline.render_products = orig_files
         wa.ws_quality.assess = orig_assess
     # 39, 40, 41~42, 43~45 — 범위가 41,42 로 납작해지지 않음
     assert captured.get("labels") == ["39", "40", "41~42", "43~45"], captured
     print("PASS  웹앱 시작번호 + 장문 범위 라벨 유지(41~42·43~45)")
+
+
+def test_verify_analyses():
+    # 자동 오류검증: 원문 대조(숫자 누락) + 내부 정합성(직독직해 정렬)
+    from src.worksheet import verify
+    from src.worksheet.models import Analysis, Sentence, Token
+
+    # 원문엔 500 이 있는데 결과에서 빠짐 → error
+    a = Analysis(lecture_label="18", sentences=[
+        Sentence(index=1, lines=[[Token(text="We print"), Token(text="copies.")]],
+                 translation="우리는 인쇄한다.")])
+    a.sentences[0].reading_ko = "우리는 인쇄한다 / 부수를"   # 영어 1조각 vs 한글 2조각 → warn
+    orig = "[18번]\nWe print 500 copies.\n"
+    res = verify.verify_analyses([a], orig)
+    assert res["checked_original"] is True
+    msgs = " ".join(f["msg"] for f in res["findings"])
+    assert "숫자 누락" in msgs and "500" in msgs        # 원문 대조 숫자 누락
+    assert res["counts"]["error"] >= 1 and res["ok"] is False
+    assert "정렬 어긋남" in msgs                          # 직독직해 정렬 warn
+
+    # 원문 없이 = 내부 정합성만
+    res2 = verify.verify_analyses([a], "")
+    assert res2["checked_original"] is False
+    print("PASS  자동 오류검증(원문 대조 숫자 + 직독직해 정렬)")
 
 
 def test_render_worksheet_files_separate(tmp_path):

@@ -22,6 +22,7 @@ from src.client import ClaudeClient
 from src.worksheet import pipeline as ws_pipeline
 from src.worksheet import quality as ws_quality
 from src.worksheet import serialize as ws_serialize
+from src.worksheet import verify as ws_verify
 from src.worksheet.pipeline import Header as WsHeader
 from web_common import (ALLOWED, BASE_CSS, UPLOAD_DIR, OUTPUT_DIR, _safe_name,
                         cfg, make_app, render_result)
@@ -69,6 +70,14 @@ WORKSHEET_HTML = """
         <label style="margin-top:10px">저장 파일명 (지문명) <span class=hint>(비우면 올린 파일 이름)</span></label>
         <input type=text name=basename placeholder="예: 2027수능특강_30번">
         <div class=hint>저장 이름: <b>(지문명)_포인트박스</b> · 영문 제목과 한글 부제는 지문 내용을 보고 <b>자동으로</b> 붙습니다.</div>
+      </fieldset>
+
+      <fieldset><legend>③-2 만들 산출물 <span class=hint>(분석 1회 → 선택한 자료 모두, 추가 API 없음)</span></legend>
+        <label class=chk><input type=checkbox name=products value="지문분석" checked> 📘 지문분석 (분석+정리 · 원문·해석)</label>
+        <label class=chk><input type=checkbox name=products value="직독직해" checked> 📗 직독직해 (끊어읽기 대조표)</label>
+        <label class=chk><input type=checkbox name=products value="워크북" checked> 📝 워크북 (단어테스트 · 학습용 빈칸)</label>
+        <label style="margin-top:10px">원문 텍스트 파일 <span class=hint>(선택 · 올리면 <b>자동 오류검증</b>에서 원문 대조까지 수행)</span></label>
+        <input type=file name=orig accept=".txt,.text">
       </fieldset>
 
       <label>④ Anthropic API 키
@@ -292,6 +301,19 @@ def build_route():
     start_raw = (request.form.get("start_no") or "").strip()
     start_no = int(start_raw) if start_raw.isdigit() else None
 
+    # 만들 산출물(체크박스). 아무것도 안 고르면 지문분석 기본.
+    products = [p for p in request.form.getlist("products") if p in ws_pipeline.PRODUCTS]
+    if not products:
+        products = ["지문분석"]
+    # 검증용 원문(선택): 있으면 자동 오류검증에서 원문 대조까지.
+    orig_f = request.files.get("orig")
+    orig_text = ""
+    if orig_f and orig_f.filename:
+        try:
+            orig_text = orig_f.read().decode("utf-8-sig", errors="ignore")
+        except Exception:
+            orig_text = ""
+
     # 영문 제목·한글 부제는 지문 내용에서 자동 생성(사용자 입력 아님). 날짜는 사용하지 않음.
     base_header = WsHeader(lecture_label="", strength=strength)
     raw_name = (request.form.get("basename") or "").strip()
@@ -347,17 +369,24 @@ def build_route():
             else:
                 stem = _safe_name(Path(f.filename).stem)
             make_student = getattr(cfg.design, "make_student", True)
-            ws_pipeline._progress(f"지문 {len(analyses)}개 분석 완료 → 별도 파일 추출 중…")
-            # 섹션별 '별도 파일 4종'으로 추출:
-            #   ①분석+정리(지문별 인접)  ②단어테스트+정답  ③학습용  ④원문·해석
-            made = ws_pipeline.render_worksheet_files(
-                analyses, OUTPUT_DIR / stem, layout=layout, footer_note=footer,
+            # ── 자동 오류검증(마스터 분석) — 원문 올렸으면 원문 대조까지 ──
+            vr = ws_verify.verify_analyses(analyses, orig_text)
+            ws_pipeline._progress(
+                f"자동 오류검증: 오류 {vr['counts']['error']} · 의심 {vr['counts']['warn']}"
+                + (" (원문 대조 포함)" if vr['checked_original'] else " (내부 정합성만)"))
+            # ── 마스터 1회 분석 → 선택 산출물만 파생(추가 API 없음) ──
+            ws_pipeline._progress(f"지문 {len(analyses)}개 → 산출물 생성: {', '.join(products)}")
+            made = ws_pipeline.render_products(
+                analyses, OUTPUT_DIR / stem, products=products, footer_note=footer,
                 density=density, make_student=make_student,
                 slevel=getattr(cfg.design, "student_level", "blank"),
                 boxmode=getattr(cfg.design, "box_align", "even"),
                 bw=getattr(cfg.design, "print_mode", True))   # 웹앱 기본=인쇄용(흑백 친화)
             ws_pipeline._progress(f"저장 완료 → {len(made)}개 파일")
             outfiles = [{"label": lbl, "out": p.name} for lbl, p in made]
+            # 검증 결과를 결과 화면에 함께(오류=검수 필수, 의심=참고)
+            verify_lines = [f"[{x['level'].upper()}] {x['where']} — {x['msg']}"
+                            for x in vr["findings"][:20]]
             # 분석 데이터(JSON) 저장 — 나중에 제목·헤더만 고쳐 재출력할 때 재분석(API) 없이 씀.
             try:
                 json_name = f"{stem}_분석데이터.json"
@@ -374,6 +403,13 @@ def build_route():
             if not mock and getattr(cfg.quality, "auto_flag", True):
                 verdict = ws_quality.assess(analyses, min_sentences=cfg.quality.min_sentences)
                 flag, reasons = (not verdict["ok"]), verdict["reasons"]
+            # 자동 오류검증 결과 병합: 원문 누락·숫자 등 error 가 있으면 '검수 필수'
+            if vr["counts"]["error"] > 0:
+                flag = True
+            if verify_lines:
+                head = (f"🔎 자동검증 오류 {vr['counts']['error']}·의심 {vr['counts']['warn']}"
+                        + ("" if vr["checked_original"] else " (원문 미첨부 → 내부 정합성만)"))
+                reasons = [head] + verify_lines + list(reasons)
             results.append({"name": f.filename + note, "ok": True,
                             "flag": flag, "reasons": reasons, "files": outfiles})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
