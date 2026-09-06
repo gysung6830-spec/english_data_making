@@ -1151,13 +1151,23 @@ def test_make_screen_four_steps():
     page = body(client().get("/words/make-test-book/make"))
     for step in ("STEP 1", "STEP 2", "STEP 3", "STEP 4"):
         assert step in page, step
-    assert "교재 선택" in page and "어휘 선택" in page
-    assert "시험지 설정" in page and "미리보기" in page
-    assert "1강" in page and "2강" in page                      # 왼쪽 범위
-    assert page.count('class="w-box"') == 6                    # 단어 여섯 개
+    # 기본 순서 — 교재 → 강 → 유형별 문항 수 → 설정·미리보기
+    # (머리말 소개글에도 같은 말이 나오니 제목 표시를 그대로 찾습니다)
+    order = ["<b>교재 선택</b>", "<b>강 선택</b>", "<b>유형별 문항 수</b>",
+             "<b>시험지 설정 · 미리보기</b>"]
+    seen = [page.index(x) for x in order]
+    assert seen == sorted(seen), seen
+    assert "1강" in page and "2강" in page                      # 강 칩
+    assert page.count('class="chip u-chip"') == 2
     for label in sc.QUIZ_KINDS.values():
         assert label in page                                    # 유형 세 가지
-    assert "담은 어휘" in page and "랜덤으로 담기" in page
+    assert page.count('class="k-n"') == 3                       # 유형마다 문항 수 칸
+    assert 'value="40"' in page and 'value="15"' in page        # 기본값
+
+    # 단어 하나하나 고르기는 접어 두었습니다 (기본 길이 아닙니다)
+    assert "단어를 하나하나 고르기" in page and "<details" in page
+    assert page.count('class="w-box"') == 6                    # 펴면 단어 여섯 개
+    assert page.index("유형별 문항 수") < page.index("단어를 하나하나 고르기")
 
     # 단어장 목록에서 이 화면으로 옵니다
     assert "/make" in body(client().get("/words"))

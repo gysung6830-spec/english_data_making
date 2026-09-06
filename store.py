@@ -1350,7 +1350,7 @@ def words_make(slug):
                            units=book["units"], kinds=sc.QUIZ_KINDS,
                            books=[x for x in sc.load_words()["books"]
                                   if x["slug"] != slug and sc.word_count(x)],
-                           cap=QUIZ_MAX, total=len(rows))
+                           cap=QUIZ_MAX, total=len(rows), defaults=QUIZ_DEFAULT)
 
 
 @app.route("/words/<slug>/pick")

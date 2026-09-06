@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{ b.name }} 시험지 만들기 · {{ site.brand }}{% endblock %}
-{% block desc %}{{ b.name }} 단어로 어휘 시험지를 만듭니다. 강을 고르고, 단어마다 유형을 정하고, 바로 미리 봅니다.{% endblock %}
+{% block desc %}{{ b.name }} 단어로 어휘 시험지를 만듭니다. 강을 고르고 유형별 문항 수만 정하면 바로 나옵니다.{% endblock %}
 
 {% block body %}
 <section class="section">
@@ -27,48 +27,74 @@
       </div>
     </div>
 
-    {# ================= STEP 2 — 어휘 ================= #}
+    {# ================= STEP 2 — 범위 ================= #}
     <div class="mk-step">
       <div class="mk-head">
         <span class="mk-no">STEP 2</span>
-        <b>어휘 선택</b>
-        <span class="mk-hint">낼 단어를 고르고, 단어마다 <b>어떤 유형으로 낼지</b> 정합니다.</span>
+        <b>강 선택</b>
+        <span class="mk-hint">시험 범위입니다. 여러 강을 함께 고르셔도 됩니다.</span>
+        <span class="mk-now"><span id="pool-n">0</span>단어
+          <small><span id="unit-on">0</span> / {{ units|length }}강</small></span>
+      </div>
+      <div class="chips" id="unit-chips">
+        {% for u in units %}
+          <button type="button" class="chip u-chip" data-unit="{{ u.id }}"
+                  data-n="{{ (u.words or [])|length }}">
+            <i class="cbox"></i>{{ u.name or u.id }}
+            <small>{{ (u.words or [])|length }}</small>
+          </button>
+        {% endfor %}
+      </div>
+      <button type="button" class="mk-mini" id="unit-all" style="margin-top:10px;">전체 고르기</button>
+    </div>
+
+    {# ================= STEP 3 — 유형별 문항 수 ================= #}
+    <div class="mk-step">
+      <div class="mk-head">
+        <span class="mk-no">STEP 3</span>
+        <b>유형별 문항 수</b>
+        <span class="mk-hint">낼 유형을 켜고 몇 문항씩 낼지 정합니다.</span>
+        <span class="mk-now">모두 <span id="total-q">0</span>문항
+          <small>한 번에 {{ '{:,}'.format(cap) }}문항까지</small></span>
+      </div>
+      <div class="mk-kinds">
+        {% for k, label in kinds.items() %}
+          <div class="mk-krow" data-kind="{{ k }}">
+            <label class="mk-kon">
+              <input type="checkbox" class="k-on" data-kind="{{ k }}"
+                     {{ 'checked' if k != 'choice' }}>
+              <span>{{ label }}</span>
+            </label>
+            <div class="mk-kn">
+              <button type="button" class="kn-step" data-kind="{{ k }}" data-d="-5">−</button>
+              <input type="number" class="k-n" data-kind="{{ k }}" min="1" max="{{ cap }}"
+                     value="{{ defaults.get(k, 20) }}">
+              <button type="button" class="kn-step" data-kind="{{ k }}" data-d="5">+</button>
+              <span class="muted">문항</span>
+            </div>
+            <span class="mk-kwarn" data-warn="{{ k }}"></span>
+          </div>
+        {% endfor %}
       </div>
 
-      <div class="mk-cols">
-        {# ---- 왼쪽 : 범위 ---- #}
-        <div class="mk-col mk-units">
-          <div class="mk-col-head">
-            <b>출제 범위</b>
-            <span class="muted"><span id="unit-on">0</span> / {{ units|length }}</span>
-          </div>
-          <div class="mk-unit-list">
-            {% for u in units %}
-              <label class="mk-unit">
-                <input type="checkbox" class="u-box" value="{{ u.id }}">
-                <span>{{ u.name or u.id }}</span>
-                <small>{{ (u.words or [])|length }}</small>
-              </label>
-            {% endfor %}
-          </div>
-          <button type="button" class="mk-mini" id="unit-all">전체</button>
-        </div>
-
-        {# ---- 가운데 : 단어 ---- #}
-        <div class="mk-col mk-words">
-          <div class="mk-col-head">
-            <b>단어</b>
-            <span class="muted"><span id="word-shown">0</span>개 보임</span>
-          </div>
-
+      {# ---- 필요하실 때만 : 단어를 하나하나 ---- #}
+      <details class="pick-detail mk-hand" id="hand">
+        <summary><span class="pd-open">단어를 하나하나 고르기</span>
+          <span class="pd-shut">직접 고르기 닫기</span></summary>
+        <div class="mk-hand-in">
+          <p class="muted" style="margin:0 0 10px;font-size:13.5px;">
+            여기서 단어를 고르시면 <b>위 문항 수 대신</b> 고르신 것만 나갑니다.
+            쉬운 단어는 객관식으로, 꼭 외울 단어는 영어 쓰기로 — 이렇게 섞으실 때 쓰세요.
+          </p>
           <div class="mk-brush">
-            <span class="muted">고른 단어를 →</span>
+            <span class="muted">체크한 단어를 →</span>
             {% for k, label in kinds.items() %}
-              <button type="button" class="mk-kind k-{{ k }}" data-set="{{ k }}">{{ label }}</button>
+              <button type="button" class="mk-kind" data-set="{{ k }}">{{ label }}</button>
             {% endfor %}
             <button type="button" class="mk-kind k-off" data-set="">빼기</button>
+            <span class="mk-hand-n"><b id="hand-n">0</b>개 직접 고름</span>
+            <button type="button" class="mk-mini" id="hand-clear">직접 고른 것 비우기</button>
           </div>
-
           <div class="mk-word-wrap">
             <table class="mk-word-table">
               <thead>
@@ -85,7 +111,7 @@
                     <td class="w-ko">{{ w.ko }}</td>
                     <td class="w-kind">
                       {% for k in kinds %}
-                        <button type="button" class="w-pick p-{{ k }}" data-kind="{{ k }}"
+                        <button type="button" class="w-pick" data-kind="{{ k }}"
                                 title="{{ kinds[k] }}">{{ '뜻' if k == 'en_ko' else ('영' if k == 'ko_en' else '고') }}</button>
                       {% endfor %}
                     </td>
@@ -93,41 +119,20 @@
                 {% endfor %}
               </tbody>
             </table>
-            <p class="mk-empty" id="word-empty">왼쪽에서 <b>강을 고르시면</b> 단어가 나옵니다.</p>
-          </div>
-
-          <div class="mk-bulk">
-            <input type="number" id="rand-n" min="1" max="{{ cap }}" placeholder="문항 수">
-            <button type="button" class="btn btn-ghost btn-sm" id="rand-add">랜덤으로 담기</button>
-            <button type="button" class="btn btn-ghost btn-sm" id="all-add">전체 담기</button>
-            <button type="button" class="btn btn-ghost btn-sm" id="clear-add">전부 빼기</button>
+            <p class="mk-empty" id="word-empty">위에서 <b>강을 고르시면</b> 단어가 나옵니다.</p>
           </div>
         </div>
-
-        {# ---- 오른쪽 : 담은 것 ---- #}
-        <div class="mk-col mk-basket">
-          <div class="mk-col-head">
-            <b>담은 어휘</b>
-            <span class="muted"><span id="basket-n">0</span> / {{ cap }}</span>
-          </div>
-          <div class="mk-tally">
-            {% for k, label in kinds.items() %}
-              <div class="mk-tal t-{{ k }}"><span>{{ label }}</span><b data-tally="{{ k }}">0</b></div>
-            {% endfor %}
-          </div>
-          <div class="mk-basket-list" id="basket-list"></div>
-          <p class="mk-empty" id="basket-empty">아직 담은 단어가 없습니다.</p>
-        </div>
-      </div>
+      </details>
     </div>
 
-    {# ================= STEP 3 — 설정 ================= #}
-    <div class="mk-step">
+    {# ================= STEP 4 — 설정 · 미리보기 ================= #}
+    <div class="mk-step" id="step4">
       <div class="mk-head">
-        <span class="mk-no">STEP 3</span>
-        <b>시험지 설정</b>
-        <span class="mk-hint">모두 <b>선택 사항</b>입니다. 비우셔도 됩니다.</span>
+        <span class="mk-no">STEP 4</span>
+        <b>시험지 설정 · 미리보기</b>
+        <span class="mk-hint">설정은 모두 <b>선택 사항</b>입니다. 여기 보이는 그대로 A4로 나옵니다.</span>
       </div>
+
       <div class="mk-set">
         <div class="ho-row">
           <label for="title">시험지 제목</label>
@@ -150,21 +155,12 @@
           </label>
         </div>
       </div>
-    </div>
-
-    {# ================= STEP 4 — 미리보기 ================= #}
-    <div class="mk-step" id="step4">
-      <div class="mk-head">
-        <span class="mk-no">STEP 4</span>
-        <b>미리보기</b>
-        <span class="mk-hint">여기 보이는 그대로 <b>A4</b>로 나옵니다.</span>
-      </div>
 
       <div class="mk-go">
         <a class="btn btn-primary" id="go-pdf" href="#" hidden>PDF 받기</a>
         <a class="btn btn-ghost" id="go-print" href="#" target="_blank" rel="noopener" hidden>인쇄하기</a>
-        <button type="button" class="btn btn-ghost" id="go-reroll" hidden>다른 순서로 섞기</button>
-        <span class="muted" id="go-note">단어를 담으시면 여기에 시험지가 나옵니다.</span>
+        <button type="button" class="btn btn-ghost" id="go-reroll" hidden>다른 문제로 다시</button>
+        <span class="muted" id="go-note">강을 고르시면 여기에 시험지가 나옵니다.</span>
       </div>
 
       <div class="mk-preview" id="preview"></div>
@@ -173,49 +169,95 @@
 </section>
 
 <script>
-/* 단어 시험지 만들기 — 네 단계가 한 화면에 있습니다.
-   고르실 때마다 주소를 새로 짜서, 그 주소로 미리보기 그림을 불러옵니다.
-   그래서 화면에 보이는 것과 PDF 가 늘 같습니다. */
+/* 단어 시험지 만들기.
+   기본 길 — 교재 → 강 → 유형별 문항 수. 이것만 정하시면 바로 나옵니다.
+   필요하실 때만 '단어를 하나하나 고르기' 를 펴서 단어마다 유형을 정하시면,
+   그때는 문항 수 대신 고르신 것이 나갑니다. */
 (function () {
   var SLUG = {{ b.slug|tojson }};
   var CAP = {{ cap }};
   var KINDS = {{ kinds.keys()|list|tojson }};
   var rows = [].slice.call(document.querySelectorAll('#word-rows tr'));
-  var chosen = {};                       // 단어번호 -> 유형
+  var chosen = {};                        // 직접 고르기 : 단어번호 -> 유형
   var seed = Math.floor(Math.random() * 999999) + 1;
 
   var $ = function (id) { return document.getElementById(id); };
   var shown = function () { return rows.filter(function (r) { return !r.hidden; }); };
-  var count = function () { return Object.keys(chosen).length; };
+  var handN = function () { return Object.keys(chosen).length; };
 
-  /* ---- 왼쪽 : 강을 고르면 그 강의 단어만 보입니다 ---- */
-  var uboxes = [].slice.call(document.querySelectorAll('.u-box'));
-  function filter() {
-    var on = uboxes.filter(function (b) { return b.checked; })
-                   .map(function (b) { return b.value; });
+  /* ---- STEP 2 : 강 ---- */
+  var chips = [].slice.call(document.querySelectorAll('.u-chip'));
+  function units() {
+    return chips.filter(function (c) { return c.classList.contains('on'); })
+                .map(function (c) { return c.dataset.unit; });
+  }
+  function pool() {
+    return chips.filter(function (c) { return c.classList.contains('on'); })
+                .reduce(function (n, c) { return n + (+c.dataset.n || 0); }, 0);
+  }
+  function filterWords() {
+    var on = units();
     rows.forEach(function (r) { r.hidden = on.indexOf(r.dataset.unit) < 0; });
-    $('unit-on').textContent = on.length;
-    $('word-shown').textContent = shown().length;
     $('word-empty').hidden = on.length > 0;
     $('w-all').checked = false;
   }
-  uboxes.forEach(function (b) { b.addEventListener('change', filter); });
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      c.classList.toggle('on');
+      c.setAttribute('aria-pressed', c.classList.contains('on') ? 'true' : 'false');
+      filterWords(); refresh();
+    });
+  });
   $('unit-all').addEventListener('click', function () {
-    var on = !uboxes.every(function (b) { return b.checked; });
-    uboxes.forEach(function (b) { b.checked = on; });
-    filter();
+    var on = !chips.every(function (c) { return c.classList.contains('on'); });
+    chips.forEach(function (c) {
+      c.classList.toggle('on', on);
+      c.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    filterWords(); refresh();
   });
 
-  /* ---- 가운데 : 단어마다 유형 ---- */
-  function setKind(i, kind) {
-    if (kind) {
-      if (!chosen[i] && count() >= CAP) { return false; }
-      chosen[i] = kind;
-    } else {
-      delete chosen[i];
-    }
-    return true;
+  /* ---- STEP 3 : 유형별 문항 수 ---- */
+  function kindOn(k) {
+    return document.querySelector('.k-on[data-kind="' + k + '"]').checked;
   }
+  function kindN(k) {
+    var el = document.querySelector('.k-n[data-kind="' + k + '"]');
+    return Math.max(1, Math.min(CAP, parseInt(el.value || '1', 10) || 1));
+  }
+  document.querySelectorAll('.k-on, .k-n').forEach(function (el) {
+    el.addEventListener('change', refresh);
+    el.addEventListener('input', refresh);
+  });
+  document.querySelectorAll('.kn-step').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var el = document.querySelector('.k-n[data-kind="' + btn.dataset.kind + '"]');
+      el.value = Math.max(1, Math.min(CAP, (parseInt(el.value || '0', 10) || 0) + (+btn.dataset.d)));
+      document.querySelector('.k-on[data-kind="' + btn.dataset.kind + '"]').checked = true;
+      refresh();
+    });
+  });
+
+  /* 고른 강에 든 단어보다 많이 내실 수는 없습니다. 조용히 줄이고 알려 드립니다. */
+  function counts() {
+    var have = pool(), out = {}, left = CAP;
+    KINDS.forEach(function (k) {
+      var warn = document.querySelector('[data-warn="' + k + '"]');
+      warn.textContent = '';
+      if (!kindOn(k) || !have) { return; }
+      var want = kindN(k), n = Math.min(want, have, left);
+      if (n <= 0) { warn.textContent = '자리가 없습니다'; return; }
+      if (n < want) {
+        warn.textContent = (n === have ? '이 범위에 ' + have + '단어뿐입니다'
+                                       : '모두 ' + CAP + '문항까지') + ' → ' + n + '문항';
+      }
+      out[k] = n;
+      left -= n;
+    });
+    return out;
+  }
+
+  /* ---- 직접 고르기 ---- */
   function paintRow(r) {
     var k = chosen[r.dataset.i];
     r.classList.toggle('on', !!k);
@@ -223,99 +265,55 @@
       btn.classList.toggle('on', btn.dataset.kind === k);
     });
   }
-
   rows.forEach(function (r) {
     r.querySelectorAll('.w-pick').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var i = r.dataset.i;
-        setKind(i, chosen[i] === btn.dataset.kind ? '' : btn.dataset.kind);
+        if (chosen[i] === btn.dataset.kind) { delete chosen[i]; }
+        else if (handN() < CAP || chosen[i]) { chosen[i] = btn.dataset.kind; }
         paintRow(r); refresh();
       });
     });
   });
-
   $('w-all').addEventListener('change', function () {
     var on = $('w-all').checked;
     shown().forEach(function (r) { r.querySelector('.w-box').checked = on; });
   });
-
-  /* 위 유형 단추 — 체크한 줄을 통째로 그 유형으로 (체크가 없으면 보이는 줄 전부) */
   document.querySelectorAll('.mk-kind').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var list = shown().filter(function (r) { return r.querySelector('.w-box').checked; });
       if (!list.length) { list = shown(); }
-      var full = false;
       list.forEach(function (r) {
-        if (!setKind(r.dataset.i, btn.dataset.set)) { full = true; }
+        if (!btn.dataset.set) { delete chosen[r.dataset.i]; }
+        else if (handN() < CAP || chosen[r.dataset.i]) { chosen[r.dataset.i] = btn.dataset.set; }
         paintRow(r);
       });
-      if (full) { note('한 번에 ' + CAP + '문항까지 담을 수 있습니다.'); }
       refresh();
     });
   });
-
-  /* ---- 한 번에 담기 ---- */
-  $('all-add').addEventListener('click', function () {
-    shown().forEach(function (r) { setKind(r.dataset.i, 'en_ko'); paintRow(r); });
-    refresh();
-  });
-  $('clear-add').addEventListener('click', function () {
+  $('hand-clear').addEventListener('click', function () {
     chosen = {}; rows.forEach(paintRow); refresh();
   });
-  $('rand-add').addEventListener('click', function () {
-    var n = parseInt($('rand-n').value || '0', 10);
-    var pool = shown().slice();
-    if (!n || !pool.length) { return; }
-    for (var i = pool.length - 1; i > 0; i--) {          // 섞기
-      var j = Math.floor(Math.random() * (i + 1));
-      var t = pool[i]; pool[i] = pool[j]; pool[j] = t;
-    }
-    pool.slice(0, n).forEach(function (r) {
-      setKind(r.dataset.i, 'en_ko'); paintRow(r);
-    });
-    refresh();
-  });
 
-  /* ---- 오른쪽 : 담은 것 ---- */
-  function drawBasket() {
-    var box = $('basket-list');
-    var by = {};
-    KINDS.forEach(function (k) { by[k] = []; });
-    rows.forEach(function (r) {
-      var k = chosen[r.dataset.i];
-      if (k) { by[k].push(r); }
-    });
-    var html = '';
-    KINDS.forEach(function (k) {
-      by[k].forEach(function (r) {
-        html += '<div class="mk-item i-' + k + '" data-i="' + r.dataset.i + '">'
-             + '<b>' + r.querySelector('.w-en').textContent + '</b>'
-             + '<span>' + r.querySelector('.w-ko').textContent + '</span>'
-             + '<button type="button" aria-label="빼기">×</button></div>';
-      });
-      document.querySelector('[data-tally="' + k + '"]').textContent = by[k].length;
-    });
-    box.innerHTML = html;
-    $('basket-empty').hidden = count() > 0;
-    $('basket-n').textContent = count();
-    box.querySelectorAll('button').forEach(function (x) {
-      x.addEventListener('click', function () {
-        var i = x.parentNode.dataset.i;
-        delete chosen[i];
-        rows.forEach(function (r) { if (r.dataset.i === i) { paintRow(r); } });
-        refresh();
-      });
-    });
-  }
-
-  /* ---- 주소 짓기 · 미리보기 ---- */
+  /* ---- 주소 짓기 ---- */
   function query() {
     var parts = [];
-    KINDS.forEach(function (k) {
-      var ids = rows.filter(function (r) { return chosen[r.dataset.i] === k; })
-                    .map(function (r) { return r.dataset.i; });
-      if (ids.length) { parts.push(k + '=' + ids.join(',')); }
-    });
+    if (handN()) {
+      // 직접 고르신 것이 있으면 그것만 나갑니다
+      KINDS.forEach(function (k) {
+        var ids = rows.filter(function (r) { return chosen[r.dataset.i] === k; })
+                      .map(function (r) { return r.dataset.i; });
+        if (ids.length) { parts.push(k + '=' + ids.join(',')); }
+      });
+    } else {
+      var c = counts(), on = units();
+      if (!on.length || !Object.keys(c).length) { return ''; }
+      on.forEach(function (u) { parts.push('unit=' + encodeURIComponent(u)); });
+      Object.keys(c).forEach(function (k) {
+        parts.push('kind=' + k); parts.push('n_' + k + '=' + c[k]);
+      });
+    }
+    if (!parts.length) { return ''; }
     parts.push('seed=' + seed);
     [['title', $('title')], ['place', $('place')]].forEach(function (p) {
       if (p[1].value.trim()) {
@@ -329,21 +327,20 @@
     return parts.join('&');
   }
 
+  /* ---- 미리보기 ---- */
   var timer = null;
   function preview() {
-    var box = $('preview');
-    var on = count() > 0;
-    ['go-pdf', 'go-print', 'go-reroll'].forEach(function (id) { $(id).hidden = !on; });
-    if (!on) { box.innerHTML = ''; $('go-note').hidden = false; return; }
-    $('go-note').hidden = true;
-    var q = query();
+    var box = $('preview'), q = query();
+    ['go-pdf', 'go-print', 'go-reroll'].forEach(function (id) { $(id).hidden = !q; });
+    $('go-note').hidden = !!q;
+    if (!q) { box.innerHTML = ''; return; }
     $('go-pdf').href = '/words/' + SLUG + '/sheet.pdf?' + q;
     $('go-print').href = '/words/' + SLUG + '/sheet.pdf?open=1&' + q;
-    // 몇 쪽인지 먼저 물어보고 그만큼만 겁니다. (없는 쪽을 찔러 보면 404 가 쌓입니다)
+    // 몇 쪽인지 먼저 물어보고 그만큼만 겁니다
     fetch('/words/' + SLUG + '/sheet/pages.json?' + q)
       .then(function (r) { return r.json(); })
       .then(function (d) {
-        if (q !== query()) { return; }        // 그 사이 또 바뀌었으면 버립니다
+        if (q !== query()) { return; }
         var html = '';
         for (var n = 0; n < (d.pages || 0); n++) {
           html += '<div class="mk-page"><img alt="' + (n + 1) + '쪽" '
@@ -355,15 +352,26 @@
   }
   function later() { clearTimeout(timer); timer = setTimeout(preview, 400); }
 
-  function note(msg) { $('go-note').hidden = false; $('go-note').textContent = msg; }
-  function refresh() { drawBasket(); later(); }
+  function refresh() {
+    var c = counts(), sum = 0;
+    Object.keys(c).forEach(function (k) { sum += c[k]; });
+    $('pool-n').textContent = pool();
+    $('unit-on').textContent = units().length;
+    $('hand-n').textContent = handN();
+    // 직접 고르신 것이 있으면 그 수가 곧 문항 수입니다
+    $('total-q').textContent = handN() || sum;
+    document.querySelectorAll('.mk-kinds').forEach(function (el) {
+      el.classList.toggle('muted-off', handN() > 0);
+    });
+    $('hand').classList.toggle('using', handN() > 0);
+    later();
+  }
 
   ['title', 'place', 'date'].forEach(function (id) {
     $(id).addEventListener('input', later);
   });
   $('dateblank').addEventListener('change', function () {
-    $('date').disabled = $('dateblank').checked;
-    later();
+    $('date').disabled = $('dateblank').checked; later();
   });
   $('today').addEventListener('click', function () {
     var d = new Date();
@@ -384,8 +392,8 @@
   } catch (e) { /* 저장이 막힌 브라우저도 있습니다 */ }
 
   // 처음 들어오시면 1강만 켜 둡니다
-  if (uboxes.length) { uboxes[0].checked = true; }
-  filter(); refresh();
+  if (chips.length) { chips[0].classList.add('on'); chips[0].setAttribute('aria-pressed', 'true'); }
+  filterWords(); refresh();
 })();
 </script>
 {% endblock %}
