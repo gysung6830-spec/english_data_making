@@ -542,13 +542,12 @@ input[type=file]{
 .mat-tile.has-shot{padding:0; overflow:hidden; gap:0;}
 .mt-shot{display:block; position:relative; background:#fff;
   border-bottom:1px solid var(--line);}
-/* 잘라 둔 그림 그대로의 비율(3:4)로 겁니다. contain 이라 어떤 경우에도
-   눌리거나 늘어나지 않습니다. 지면 전체를 보여 줄 필요는 없습니다 —
+/* 그림은 잘라 둔 그대로 겁니다. 비율을 CSS 로 못 박지 않아, 흰 여백도
+   눌림도 생기지 않습니다. 지면 전체를 보여 줄 필요는 없습니다 —
    윗부분만 제 비율로 보이는 편이 훨씬 낫습니다. */
-.mt-shot img{display:block; width:100%; height:auto; aspect-ratio:3/4;
-  object-fit:contain; object-position:top center; transition:transform .18s;}
+.mt-shot img{display:block; width:100%; height:auto; transition:transform .18s;}
 /* 아래로 갈수록 옅게 — 잘린 자리가 툭 끊겨 보이지 않게 합니다. */
-.mt-shot::after{content:""; position:absolute; left:0; right:0; bottom:0; height:26%;
+.mt-shot::after{content:""; position:absolute; left:0; right:0; bottom:0; height:22%;
   background:linear-gradient(to bottom, rgba(255,255,255,0), #fff); pointer-events:none;}
 .mt-body{display:flex; flex-direction:column; gap:6px; padding:14px 18px 18px;}
 .mat-tile.has-shot:hover .mt-shot img{transform:scale(1.02);}

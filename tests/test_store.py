@@ -1958,12 +1958,15 @@ def test_contact_page():
 
 
 def test_locker_sits_next_to_the_cart():
-    """산 자료를 다시 받는 곳은 장바구니 옆에 있어야 눈에 띕니다."""
+    """오른쪽 위는 장바구니 · 내 자료함 · 자료 보러 가기 순입니다."""
     home = body(client().get("/"))
-    cta = home.split('class="head-cta"', 1)[1].split("</div>", 1)[0]
-    assert 'class="locker-link' in cta and "내 자료함" in cta
-    assert cta.index("내 자료함") < cta.index("장바구니")     # 장바구니 왼쪽
-    print("PASS  내 자료함이 장바구니 옆에")
+    cta = home.split('class="head-cta"', 1)[1].split("</header>", 1)[0]
+    assert 'class="cart-link' in cta and 'class="locker-link' in cta
+    seen = [cta.index('aria-label="장바구니"'),
+            cta.index('aria-label="내 자료함"'),
+            cta.index("자료 보러 가기")]
+    assert seen == sorted(seen), seen
+    print("PASS  장바구니 · 내 자료함 · 자료 보러 가기 순")
 
 
 def test_file_comes_with_the_order_no_extra_charge():
@@ -2072,8 +2075,8 @@ def test_home_shows_real_pages_not_just_names():
     thumb = sc.shot_thumb(mid)
     assert thumb is not None and thumb.exists()
     with Image.open(thumb) as im:
-        assert im.width <= sc.SHOT_THUMB_W
-        # 어떤 원본이 와도 정확히 같은 비율이어야 합니다 (눌리거나 늘어나면 안 됨)
+        assert im.width == sc.SHOT_THUMB_W
+        # 세로가 긴 원본은 3:4 로 딱 맞춰 잘립니다 (흰 여백이 남으면 안 됩니다)
         assert abs(im.width / im.height - sc.SHOT_THUMB_RATIO) < 0.005
         assert im.height > im.width, "세로가 긴 지면 모양이어야 합니다"
     assert thumb.stat().st_size < src.stat().st_size, "원본보다 커졌습니다"
@@ -2084,18 +2087,26 @@ def test_home_shows_real_pages_not_just_names():
     assert "max-age" in got.headers.get("Cache-Control", "")
     assert client().get("/lineup/thumb/없는자료.webp").status_code == 404
 
-    # 가로가 긴 원본이 와도 같은 비율로 나옵니다 (여백을 두지, 늘이지 않습니다)
-    Image.new("RGB", (1200, 500), (240, 240, 240)).save(src)
+    # 조금 짧은 원본은 좌우를 살짝 잘라 3:4 를 맞춥니다 (흰 여백 없이)
+    Image.new("RGB", (1076, 1300), (240, 240, 240)).save(src)
     thumb.unlink()
     with Image.open(sc.shot_thumb(mid)) as im:
         assert abs(im.width / im.height - sc.SHOT_THUMB_RATIO) < 0.005
 
+    # 많이 짧은 원본은 글자가 잘리니, 그 그림만 짧게 둡니다 (자르지도 늘이지도 않음)
+    Image.new("RGB", (1200, 500), (240, 240, 240)).save(src)
+    sc.shot_thumb(mid).unlink()
+    with Image.open(sc.shot_thumb(mid)) as im:
+        assert im.width == sc.SHOT_THUMB_W
+        assert im.height == round(500 * sc.SHOT_THUMB_W / 1200)   # 원본 비율 그대로
+
     home = body(client().get("/"))
     assert f"/lineup/thumb/{mid}.webp" in home
     assert 'class="mt-shot"' in home and 'loading="lazy"' in home
-    # 그림이 눌리지 않게 잘라 둔 비율 그대로 겁니다
+    # 비율을 CSS 로 못 박지 않습니다 — 그래야 흰 여백도 눌림도 없습니다
     css = body(client().get("/static/store.css"))
-    assert "aspect-ratio:3/4" in css and "object-fit:contain" in css
+    assert ".mt-shot img{display:block; width:100%; height:auto;" in css
+    assert "aspect-ratio:3/4" not in css
     # 사진이 없는 자료는 예전처럼 글만 나옵니다
     assert 'class="mat-tile"' in home or "has-shot" in home
 

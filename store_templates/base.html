@@ -55,17 +55,6 @@
       {% endif %}
     </nav>
     <div class="head-cta">
-      {# 산 자료를 다시 받는 자리. 장바구니와 나란히 두어야 눈에 띕니다. #}
-      <a class="locker-link {{ 'on' if request.endpoint in ['my_page','my_locker'] }}"
-         href="{{ url_for('my_page') }}" aria-label="내 자료함" title="내 자료함">
-        <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
-          <path d="M4 7.5 12 4l8 3.5v9L12 20l-8-3.5z" fill="none" stroke="currentColor"
-                stroke-width="1.8" stroke-linejoin="round"/>
-          <path d="M4 7.5 12 11l8-3.5M12 11v9" fill="none" stroke="currentColor"
-                stroke-width="1.8" stroke-linejoin="round"/>
-        </svg>
-        <span>내 자료함</span>
-      </a>
       <a class="cart-link {{ 'has' if cart_count }}" href="{{ url_for('cart') }}"
          aria-label="장바구니">
         <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
@@ -76,6 +65,17 @@
           <circle cx="17" cy="19.2" r="1.4" fill="currentColor"/>
         </svg>
         {% if cart_count %}<span class="cart-count">{{ cart_count }}</span>{% endif %}
+      </a>
+      {# 산 자료를 다시 받는 자리. 장바구니 다음에 둡니다. #}
+      <a class="locker-link {{ 'on' if request.endpoint in ['my_page','my_locker'] }}"
+         href="{{ url_for('my_page') }}" aria-label="내 자료함" title="내 자료함">
+        <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
+          <path d="M4 7.5 12 4l8 3.5v9L12 20l-8-3.5z" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M4 7.5 12 11l8-3.5M12 11v9" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        <span>내 자료함</span>
       </a>
       <a class="btn btn-primary btn-sm" href="{{ url_for('products') }}">자료 보러 가기</a>
     </div>

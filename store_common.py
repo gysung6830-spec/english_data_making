@@ -1288,6 +1288,7 @@ SHOT_THUMB_W = 560          # 첫 화면 타일에 걸 그림의 가로
 # 가로로 넓게 자르면 '종이' 로 안 보이고 띠처럼 보입니다. 세로가 긴 3:4 로
 # 잘라야 지면 그대로의 느낌이 납니다.
 SHOT_THUMB_RATIO = 3 / 4
+SHOT_THUMB_CROP = 0.12      # 좌우를 이만큼까지만 잘라 냅니다 (더 필요하면 안 자릅니다)
 
 
 def shot_thumb(mid: str) -> Path | None:
@@ -1311,12 +1312,21 @@ def shot_thumb(mid: str) -> Path | None:
         h = round(w / SHOT_THUMB_RATIO)
         with Image.open(src) as im:
             im = im.convert("RGB")
-            # 가로를 먼저 맞추고, 남는 아래쪽을 잘라 냅니다. 원본이 짧으면
-            # 흰 여백이 남습니다 — 늘리거나 눌러서 비율을 망가뜨리지 않습니다.
-            im = im.resize((w, max(1, round(im.height * w / im.width))), Image.LANCZOS)
-            page = Image.new("RGB", (w, h), (255, 255, 255))
-            page.paste(im.crop((0, 0, w, min(h, im.height))), (0, 0))
-            page.save(out, "WEBP", quality=78, method=5)
+            # 빈 자리 없이 꽉 채웁니다. 세로가 긴 원본은 가로를 맞추고 아래를
+            # 잘라 내고, 가로가 긴 원본은 세로를 맞추고 좌우를 잘라 냅니다.
+            # 어느 쪽이든 비율은 그대로라 눌리거나 늘어나지 않습니다.
+            if im.width * h >= im.height * w:            # 원본이 더 납작함
+                nh, nw = h, max(w, round(im.width * h / im.height))
+            else:                                        # 원본이 더 길쭉함
+                nw, nh = w, max(h, round(im.height * w / im.width))
+            # 좌우를 너무 많이 잘라 내면 글자가 잘립니다. 그럴 바에는 그 그림만
+            # 짧게 두는 편이 낫습니다 (흰 여백을 두지도, 글자를 자르지도 않게).
+            if (nw - w) / w > SHOT_THUMB_CROP:
+                nw = w
+                nh = max(1, round(im.height * w / im.width))
+            im = im.resize((nw, nh), Image.LANCZOS)
+            left = (nw - w) // 2                         # 좌우는 가운데, 위는 그대로
+            im.crop((left, 0, left + w, min(h, nh))).save(out, "WEBP", quality=78, method=5)
         return out
     except Exception as exc:                 # 그림이 없어도 첫 화면은 떠야 합니다
         log.warning("지면 사진을 줄이지 못했습니다 (%s): %s", mid, exc)
