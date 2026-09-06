@@ -75,25 +75,71 @@ def storage_report() -> dict:
     }
 
 
-def seed_data_dir() -> None:
-    """빈 디스크에 처음 올라갔을 때, 저장소의 기본 설정을 한 번만 복사합니다.
+SEED_COPY = ".seeded"          # 저장소에서 마지막으로 내려 준 판 (비교용)
+# 저장소가 아니라 사장님이 만드는 것들. 새 판이 나와도 절대 안 건드립니다.
+YOURS = {"store.db", "products.json", "freebies.json", "notices.json",
+         "words.json", "site.json", "deliverables", "samples", "submissions", "free"}
 
-    이미 무언가 들어 있으면 아무것도 건드리지 않습니다. 사장님이 올려 두신
-    자료를 다시 배포한다고 덮어쓰는 일은 없습니다.
+
+def _same(a: Path, b: Path) -> bool:
+    """두 파일(또는 폴더)이 같은지. 하나라도 없으면 다릅니다."""
+    if a.is_file() and b.is_file():
+        return a.read_bytes() == b.read_bytes()
+    if a.is_dir() and b.is_dir():
+        names = sorted(x.name for x in a.iterdir())
+        if names != sorted(x.name for x in b.iterdir()):
+            return False
+        return all(_same(a / n, b / n) for n in names)
+    return False
+
+
+def _put(src: Path, dest: Path) -> None:
+    if dest.is_dir():
+        shutil.rmtree(dest)
+    elif dest.exists():
+        dest.unlink()
+    (shutil.copytree if src.is_dir() else shutil.copy2)(src, dest)
+
+
+def seed_data_dir() -> list[str]:
+    """빈 디스크에 기본 설정을 깔고, 그 뒤로는 '손 안 댄 것' 만 새 판으로 갱신합니다.
+
+    렌더처럼 디스크를 따로 붙여 쓰면, 한 번 깔린 파일은 새로 배포해도 그대로
+    남습니다. 사장님이 올려 두신 자료를 덮어쓰지 않으려는 뜻이라 옳습니다.
+    그런데 자료 라인업 정의처럼 제가 코드와 함께 고치는 것까지 얼어붙어,
+    화면은 새것인데 내용은 옛것인 상태가 됩니다.
+
+    그래서 마지막으로 내려 준 판을 .seeded 에 남겨 두고 비교합니다.
+    디스크의 것이 그 판과 똑같으면 = 사장님이 손댄 적이 없으면 새 판으로
+    바꿉니다. 한 글자라도 고치셨으면 그대로 둡니다.
+    돌려주는 값은 이번에 새로 갱신된 이름들입니다.
     """
     if DATA_DIR == BUNDLED_DATA or not BUNDLED_DATA.exists():
-        return
+        return []
     DATA_DIR.mkdir(parents=True, exist_ok=True)
+    kept = DATA_DIR / SEED_COPY
+    kept.mkdir(exist_ok=True)
+    fresh = []
     for src in BUNDLED_DATA.iterdir():
-        if src.name.startswith(".") or src.name == "store.db":
+        if src.name.startswith(".") or src.name in YOURS:
             continue
-        dest = DATA_DIR / src.name
-        if dest.exists():
-            continue
-        if src.is_dir():
-            shutil.copytree(src, dest)
-        else:
-            shutil.copy2(src, dest)
+        dest, mark = DATA_DIR / src.name, kept / src.name
+        if not dest.exists():                       # 처음 올라간 것
+            _put(src, dest)
+        elif not _same(src, mark) and _same(dest, mark):
+            _put(src, dest)                         # 손 안 댄 것만 새 판으로
+            fresh.append(src.name)
+        elif not _same(dest, mark):
+            continue                                # 고치셨으니 그대로 둡니다
+        if not _same(src, mark):
+            _put(src, mark)
+    # 사장님 몫은 처음 한 번만 깔고, 그 뒤로는 절대 안 건드립니다
+    for name in YOURS:
+        src, dest = BUNDLED_DATA / name, DATA_DIR / name
+        if src.exists() and not dest.exists() and name != "store.db":
+            _put(src, dest)
+    return fresh
+
 
 ORDER_STATUSES = ["입금대기", "입금확인", "발송완료", "취소"]
 SUBMIT_STATUSES = ["검토대기", "승인", "반려"]

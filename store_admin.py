@@ -851,6 +851,42 @@ def clear_samples():
     return redirect(url_for("admin.products"))
 
 
+@admin_bp.route("/products/refresh-samples", methods=["POST"])
+def refresh_samples():
+    """예시 상품·교재만 저장소의 최신판으로 다시 깝니다.
+
+    상품 목록은 사장님 파일이라 새로 배포해도 저절로 바뀌지 않습니다 — 올려
+    두신 자료를 덮어쓰면 안 되니까요. 그런데 그 안의 '예시' 는 제가 만든
+    것이고, 자료 종류가 늘거나 값이 바뀌면 예전 예시가 화면에서 어긋납니다.
+    그래서 예시만 골라 새 것으로 바꿉니다. 직접 만드신 것은 손대지 않습니다.
+    """
+    import json
+    src = sc.BUNDLED_DATA / "products.json"
+    if not src.is_file():
+        flash("저장소에 예시 자료가 없습니다.", "err")
+        return redirect(url_for("admin.products"))
+    fresh = json.loads(src.read_text(encoding="utf-8"))
+    catalog = sc.load_raw_catalog()
+    mine_p = [p for p in catalog["products"] if not p.get("sample")]
+    mine_b = [b for b in catalog["books"] if not b.get("sample")]
+    taken_p = {p.get("slug") for p in mine_p}
+    taken_b = {b.get("slug") for b in mine_b}
+    new_p = [p for p in fresh.get("products", [])
+             if p.get("sample") and p.get("slug") not in taken_p]
+    new_b = [b for b in fresh.get("books", [])
+             if b.get("sample") and b.get("slug") not in taken_b]
+    catalog["products"] = mine_p + new_p
+    catalog["books"] = mine_b + new_b
+    # 자료 종류·패키지 정의는 제 몫이라 통째로 새 것을 씁니다
+    for key in ("categories", "packages"):
+        if fresh.get(key):
+            catalog[key] = fresh[key]
+    sc.save_catalog(catalog)
+    flash(f"예시를 최신판으로 바꿨습니다 — 교재 {len(new_b)}권 · 상품 {len(new_p)}개. "
+          f"직접 만드신 교재 {len(mine_b)}권 · 상품 {len(mine_p)}개는 그대로입니다.", "ok")
+    return redirect(url_for("admin.products"))
+
+
 @admin_bp.route("/products/<slug>/toggle", methods=["POST"])
 def product_toggle(slug):
     catalog = sc.load_raw_catalog()

@@ -59,7 +59,7 @@ app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 60 * 60 * 24 * 30
 app.config["MAX_CONTENT_LENGTH"] = 30 * 1024 * 1024
 
 # 인터넷 서버에 붙인 디스크가 비어 있으면, 저장소의 기본 설정을 한 번만 심습니다.
-sc.seed_data_dir()
+SEED_FRESH = sc.seed_data_dir()      # 이번 배포에서 새로 갱신된 기본 자료
 
 app.register_blueprint(admin_bp)
 app.teardown_appcontext(sc.close_db)

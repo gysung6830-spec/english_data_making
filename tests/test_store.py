@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import io
 import json
+import pathlib
 import os
 import re
 import shutil
@@ -3377,6 +3378,82 @@ def test_bulk_products_from_zip():
     print("PASS  압축 하나로 상품 여러 개 만들기 (파일까지)")
 
 
+def test_disk_keeps_your_files_but_refreshes_the_rest():
+    """디스크를 붙여 쓸 때 — 사장님 파일은 지키고, 손 안 댄 기본값만 새로 깝니다."""
+    import shutil, tempfile
+    room = pathlib.Path(tempfile.mkdtemp())
+    bundle, disk = room / "bundle", room / "disk"
+    (bundle / "lineup" / "passage").mkdir(parents=True)
+    (bundle / "lineup" / "passage" / "01.webp").write_bytes(b"A")
+    (bundle / "materials.json").write_text('{"v":1}', encoding="utf-8")
+    (bundle / "products.json").write_text('{"p":1}', encoding="utf-8")
+    keep_bundle, keep_dir = sc.BUNDLED_DATA, sc.DATA_DIR
+    try:
+        sc.BUNDLED_DATA, sc.DATA_DIR = bundle, disk
+
+        assert sc.seed_data_dir() == []                       # 첫 배포
+        assert (disk / "materials.json").read_text() == '{"v":1}'
+
+        # 저장소에서 자료 정의를 고쳐 다시 배포 — 손 안 댔으니 새 판으로
+        (bundle / "materials.json").write_text('{"v":2}', encoding="utf-8")
+        shutil.rmtree(bundle / "lineup" / "passage")
+        (bundle / "lineup" / "oneline-ko").mkdir()
+        (bundle / "lineup" / "oneline-ko" / "01.webp").write_bytes(b"A")
+        assert sorted(sc.seed_data_dir()) == ["lineup", "materials.json"]
+        assert (disk / "materials.json").read_text() == '{"v":2}'
+        # 이름이 바뀐 지면 사진 폴더도 따라옵니다
+        assert (disk / "lineup" / "oneline-ko").is_dir()
+        assert not (disk / "lineup" / "passage").exists()
+
+        # 사장님이 고치신 뒤에는 새 판이 와도 그대로 둡니다
+        (disk / "materials.json").write_text('{"v":"내가 고침"}', encoding="utf-8")
+        (bundle / "materials.json").write_text('{"v":3}', encoding="utf-8")
+        assert sc.seed_data_dir() == []
+        assert (disk / "materials.json").read_text() == '{"v":"내가 고침"}'
+
+        # 상품·주문처럼 사장님 몫은 어떤 경우에도 안 건드립니다
+        (disk / "products.json").write_text('{"내 상품":1}', encoding="utf-8")
+        (bundle / "products.json").write_text('{"p":99}', encoding="utf-8")
+        sc.seed_data_dir()
+        assert (disk / "products.json").read_text() == '{"내 상품":1}'
+        assert "products.json" in sc.YOURS and "store.db" in sc.YOURS
+    finally:
+        sc.BUNDLED_DATA, sc.DATA_DIR = keep_bundle, keep_dir
+        shutil.rmtree(room, ignore_errors=True)
+    print("PASS  디스크 — 사장님 파일은 지키고 기본값만 갱신")
+
+
+def test_admin_can_reload_the_examples():
+    """예시가 옛날 것으로 남으면, 관리자 화면에서 최신판으로 바꿀 수 있어야 합니다."""
+    a = admin()
+    catalog = sc.load_raw_catalog()
+    # 직접 만드신 상품 하나를 섞어 둡니다 (이건 살아남아야 합니다)
+    catalog["products"].append({"slug": "mine-keep-me", "name": "내가 만든 자료",
+                                "category": "mock", "price": 9000, "active": True})
+    # 예시를 옛날 것처럼 망가뜨려 둡니다
+    for p in catalog["products"]:
+        if p.get("sample"):
+            p["price"] = 1
+    sc.save_catalog(catalog)
+
+    page = body(a.get("/admin/products"))
+    assert "예시를 최신판으로 바꾸기" in page
+    assert a.post("/admin/products/refresh-samples",
+                  follow_redirects=True).status_code == 200
+
+    after = sc.load_raw_catalog()
+    assert any(p["slug"] == "mine-keep-me" for p in after["products"]), "내 상품이 사라졌습니다"
+    junk = [p for p in after["products"] if p.get("sample") and p.get("price") == 1]
+    assert not junk, "옛 예시가 남아 있습니다"
+    # 자료 종류·패키지 정의도 저장소의 것으로 맞춰집니다
+    assert {m for pkg in after["packages"] for m in pkg["materials"]} >= {
+        "oneline-ko", "wordlist"}
+
+    after["products"] = [p for p in after["products"] if p["slug"] != "mine-keep-me"]
+    sc.save_catalog(after)
+    print("PASS  예시만 최신판으로 다시 깔기")
+
+
 def test_admin_pricing_is_editable():
     """자료 1종이 지문 1개당 얼마인지를 화면에서 정하고, 그 값으로 계산해야 합니다."""
     a = admin()
@@ -4155,6 +4232,8 @@ def run_all():
     test_book_pick_grid()
     test_shared_materials_are_charged_once()
     test_every_book_has_unit_checkboxes()
+    test_disk_keeps_your_files_but_refreshes_the_rest()
+    test_admin_can_reload_the_examples()
     test_admin_pricing_is_editable()
     test_product_form_offers_our_price()
     test_setup_checklist_guides_first_day()
