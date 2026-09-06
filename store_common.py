@@ -1284,7 +1284,10 @@ def shot_files(mid: str) -> list[str]:
 
 
 SHOT_THUMB_W = 560          # 첫 화면 타일에 걸 그림의 가로
-SHOT_THUMB_RATIO = 4 / 3    # 지면 윗부분만 이 비율로 자릅니다
+# 지면 윗부분을 이 비율(가로:세로)로 자릅니다. A4 는 세로로 긴 종이라,
+# 가로로 넓게 자르면 '종이' 로 안 보이고 띠처럼 보입니다. 세로가 긴 3:4 로
+# 잘라야 지면 그대로의 느낌이 납니다.
+SHOT_THUMB_RATIO = 3 / 4
 
 
 def shot_thumb(mid: str) -> Path | None:
@@ -1304,14 +1307,16 @@ def shot_thumb(mid: str) -> Path | None:
             return out
         from PIL import Image
         out.parent.mkdir(parents=True, exist_ok=True)
+        w = SHOT_THUMB_W
+        h = round(w / SHOT_THUMB_RATIO)
         with Image.open(src) as im:
             im = im.convert("RGB")
-            want_h = int(im.width / SHOT_THUMB_RATIO)
-            im = im.crop((0, 0, im.width, min(want_h, im.height)))
-            if im.width > SHOT_THUMB_W:
-                im = im.resize((SHOT_THUMB_W, round(im.height * SHOT_THUMB_W / im.width)),
-                               Image.LANCZOS)
-            im.save(out, "WEBP", quality=78, method=5)
+            # 가로를 먼저 맞추고, 남는 아래쪽을 잘라 냅니다. 원본이 짧으면
+            # 흰 여백이 남습니다 — 늘리거나 눌러서 비율을 망가뜨리지 않습니다.
+            im = im.resize((w, max(1, round(im.height * w / im.width))), Image.LANCZOS)
+            page = Image.new("RGB", (w, h), (255, 255, 255))
+            page.paste(im.crop((0, 0, w, min(h, im.height))), (0, 0))
+            page.save(out, "WEBP", quality=78, method=5)
         return out
     except Exception as exc:                 # 그림이 없어도 첫 화면은 떠야 합니다
         log.warning("지면 사진을 줄이지 못했습니다 (%s): %s", mid, exc)

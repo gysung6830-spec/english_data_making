@@ -23,6 +23,7 @@ import random
 import os
 import secrets
 from datetime import timedelta
+from pathlib import Path
 
 from flask import (Flask, abort, flash, redirect, render_template, request,
                    send_file, send_from_directory, session, url_for)
@@ -97,6 +98,22 @@ def inject_globals():
         "material_map": sc.material_map(),
         "package_map": sc.package_map(),
     }
+
+
+@app.template_global("asset")
+def asset(filename: str) -> str:
+    """정적 파일 주소에 '언제 고쳤는지' 를 붙입니다.
+
+    브라우저는 store.css 를 30일 동안 붙들고 있습니다. 그래서 디자인을 고쳐
+    올려도 손님 화면은 예전 그대로였습니다(그림 비율이 어긋나 보이던 이유).
+    파일이 바뀌면 주소가 바뀌니, 바뀐 것만 새로 받아 갑니다.
+    """
+    path = Path(app.static_folder or "") / filename
+    try:
+        stamp = int(path.stat().st_mtime)
+    except OSError:
+        stamp = 0
+    return url_for("static", filename=filename, v=stamp)
 
 
 @app.template_filter("won")

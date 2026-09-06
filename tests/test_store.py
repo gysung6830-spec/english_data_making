@@ -1963,6 +1963,34 @@ def test_locker_sits_next_to_the_cart():
     print("PASS  내 자료함이 장바구니 옆에")
 
 
+def test_css_change_reaches_the_visitor():
+    """디자인을 고쳐 올리면 손님 화면에도 바로 보여야 합니다.
+
+    store.css 는 30일 캐시라, 주소가 그대로면 브라우저가 예전 것을 계속
+    씁니다. 화면이 실제로 어긋나 보인 적이 있어 테스트로 못박습니다.
+    """
+    import re as _re
+    home = body(client().get("/"))
+    m = _re.search(r'href="(/static/store\.css\?v=(\d+))"', home)
+    assert m, "store.css 주소에 v= 가 없습니다"
+    first = m.group(2)
+    assert client().get(m.group(1)).status_code == 200
+
+    # 파일을 고치면 주소가 바뀝니다
+    css = Path(store.app.static_folder) / "store.css"
+    old = css.stat().st_mtime
+    try:
+        os.utime(css, (old + 120, old + 120))
+        again = _re.search(r'store\.css\?v=(\d+)', body(client().get("/"))).group(1)
+        assert again != first, "고쳐도 주소가 그대로입니다"
+    finally:
+        os.utime(css, (old, old))
+
+    # 아이콘 같은 다른 정적 파일도 같은 길을 씁니다
+    assert "/static/favicon.svg?v=" in home
+    print("PASS  디자인을 고치면 손님 화면에도 바로 반영")
+
+
 def test_home_shows_real_pages_not_just_names():
     """첫 화면 자료 타일에 실제 지면 사진을 겁니다. 이름만 부르면 안 팔립니다."""
     from PIL import Image
@@ -1978,7 +2006,9 @@ def test_home_shows_real_pages_not_just_names():
     assert thumb is not None and thumb.exists()
     with Image.open(thumb) as im:
         assert im.width <= sc.SHOT_THUMB_W
-        assert abs(im.width / im.height - sc.SHOT_THUMB_RATIO) < 0.02   # 4:3 로 잘림
+        # 어떤 원본이 와도 정확히 같은 비율이어야 합니다 (눌리거나 늘어나면 안 됨)
+        assert abs(im.width / im.height - sc.SHOT_THUMB_RATIO) < 0.005
+        assert im.height > im.width, "세로가 긴 지면 모양이어야 합니다"
     assert thumb.stat().st_size < src.stat().st_size, "원본보다 커졌습니다"
     assert src.exists(), "원본을 건드리면 안 됩니다"
 
@@ -1987,9 +2017,18 @@ def test_home_shows_real_pages_not_just_names():
     assert "max-age" in got.headers.get("Cache-Control", "")
     assert client().get("/lineup/thumb/없는자료.webp").status_code == 404
 
+    # 가로가 긴 원본이 와도 같은 비율로 나옵니다 (여백을 두지, 늘이지 않습니다)
+    Image.new("RGB", (1200, 500), (240, 240, 240)).save(src)
+    thumb.unlink()
+    with Image.open(sc.shot_thumb(mid)) as im:
+        assert abs(im.width / im.height - sc.SHOT_THUMB_RATIO) < 0.005
+
     home = body(client().get("/"))
     assert f"/lineup/thumb/{mid}.webp" in home
     assert 'class="mt-shot"' in home and 'loading="lazy"' in home
+    # 그림이 눌리지 않게 잘라 둔 비율 그대로 겁니다
+    css = body(client().get("/static/store.css"))
+    assert "aspect-ratio:3/4" in css and "object-fit:contain" in css
     # 사진이 없는 자료는 예전처럼 글만 나옵니다
     assert 'class="mat-tile"' in home or "has-shot" in home
 
@@ -3713,6 +3752,7 @@ def run_all():
     test_contact_has_no_phone()
     test_contact_page()
     test_locker_sits_next_to_the_cart()
+    test_css_change_reaches_the_visitor()
     test_home_shows_real_pages_not_just_names()
     test_lineup_takes_the_home_middle()
     test_menu_has_no_duplicates()
