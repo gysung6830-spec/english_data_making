@@ -15,23 +15,32 @@
     </div>
 
     {% if items %}
+      {# 파는 단위는 패키지입니다. 담긴 자료를 낱개로 늘어놓지 않고 묶음으로
+         보여 주고, 빼는 것도 묶음째입니다. #}
       <div class="cart-list">
-        {% for it in items %}
-          {% set pkg = package_map.get(it.package) %}
+        {% for g in groups %}
           <div class="cart-row">
             <div class="cr-main">
-              {% if pkg %}<span class="pkg-tag pkg-{{ pkg.id }}">{{ pkg.name }}</span>{% endif %}
-              <a class="cr-name" href="{{ url_for('product_detail', slug=it.slug) }}">{{ it.name }}</a>
-              <div class="chips">
-                {% if it.grade %}<span class="chip">{{ it.grade }}</span>{% endif %}
-                {% if it.passages %}<span class="chip">지문 {{ it.passages }}개</span>{% endif %}
-                {% if it.materials %}<span class="chip">자료 {{ it.materials|length }}종</span>{% endif %}
+              {% if g.package %}
+                <span class="pkg-tag pkg-{{ g.package.id }}">{{ g.package.name }}</span>
+              {% endif %}
+              <span class="cr-name">{{ g.label or g.name }}</span>
+              <div class="cr-where">
+                {{ g.book }}{% if g.unit %} · <b>{{ g.unit }}</b>{% endif %}
               </div>
+              {% if g.package %}
+                <div class="mat-chips">
+                  {% for mid in g.mats %}
+                    {% set m = material_map.get(mid) %}
+                    {% if m %}<span class="mat-chip pk-{{ material_pkg.get(mid, '') }}">{{ m.name }}</span>{% endif %}
+                  {% endfor %}
+                </div>
+              {% endif %}
             </div>
             <div class="cr-side">
-              <b>{{ it.price|won }}</b>
+              <b>{{ g.price|won }}</b>
               <form method="post" action="{{ url_for('cart_remove') }}">
-                <input type="hidden" name="slug" value="{{ it.slug }}">
+                <input type="hidden" name="slug" value="{{ g.slugs }}">
                 <button class="cr-del" type="submit">빼기</button>
               </form>
             </div>
@@ -71,7 +80,7 @@
         <div class="card also-suggest">
           <h3>반대쪽 패키지도 담으면 값이 내려갑니다</h3>
           <p class="muted">자료는 <b>많이 담을수록</b> 값이 내려갑니다.
-            {% if next_tier %}지금 {{ items|length }}개 — <b>{{ next_tier.min }}개부터
+            {% if next_tier %}지금 {{ picked }}{{ pick_word }} — <b>{{ next_tier.min }}{{ pick_word }}부터
             {{ next_tier.percent }}% 할인</b>입니다.{% endif %}</p>
           <form method="post" action="{{ url_for('cart_add') }}">
             <input type="hidden" name="next" value="{{ url_for('cart') }}">
@@ -94,7 +103,8 @@
       {% endif %}
 
       <div class="sum-box">
-        <div class="sum-row"><span>자료 {{ items|length }}개</span><b>{{ subtotal|won }}</b></div>
+        <div class="sum-row"><span>패키지 {{ groups|length }}묶음 ·
+          {{ picked }}{{ pick_word }}</span><b>{{ subtotal|won }}</b></div>
         {% for r in rows %}
           <div class="sum-row cut"><span>{{ r.name }} {{ r.percent }}%</span>
             <b>-{{ r.amount|won }}</b></div>

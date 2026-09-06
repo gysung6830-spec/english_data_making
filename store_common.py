@@ -186,6 +186,20 @@ ORDER_KIND_LABELS = {"product": "자료 주문", "custom": "맞춤 제작",
 MTO_DAYS = 1
 
 
+def package_label(pack: dict | None, count: int) -> str:
+    """칸에 걸 이름 — "'꼼꼼한' 지문분석 8종 패키지".
+
+    종수는 부르는 쪽에서 셉니다. 교재마다 들어 있는 자료가 다르고,
+    적어 둔 수와 실제로 받으시는 수가 다르면 안 되기 때문입니다.
+    """
+    if not pack:
+        return ""
+    adj = (pack.get("adj") or "").strip()
+    core = (pack.get("core") or pack.get("short") or pack.get("name") or "").strip()
+    head = f"\u2018{adj}\u2019 " if adj else ""
+    return f"{head}{core} {count}종 패키지"
+
+
 def material_package() -> dict[str, str]:
     """자료가 어느 패키지에 드는지. 화면에서 딱지 색을 가르는 데 씁니다.
 

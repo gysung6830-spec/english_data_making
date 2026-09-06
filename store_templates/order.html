@@ -17,39 +17,44 @@
     {% endif %}
 
     <div class="form-card">
-      {% for it in items %}
-        {% set pkg = package_map.get(it.package) %}
-        {% set bk = books.get(it.book) %}
+      {# 장바구니와 같은 단위로 — 파는 것은 패키지이지 자료 낱개가 아닙니다 #}
+      {% for g in groups %}
+        {% set first = g['items'][0] %}
+        {% set bk = books.get(first.book) %}
         <div class="order-item">
           <div class="oi-top">
-            {% if pkg %}<span class="pkg-tag pkg-{{ pkg.id }}">{{ pkg.name }}</span>{% endif %}
-            <b>{{ bk.name if bk else it.name }}</b>
+            {% if g.package %}
+              <span class="pkg-tag pkg-{{ g.package.id }}">{{ g.package.name }}</span>
+            {% endif %}
+            <b>{{ g.label or g.name }}</b>
+          </div>
+          <div class="cr-where">
+            {{ g.book }}{% if g.unit %} · <b>{{ g.unit }}</b>{% endif %}
           </div>
           <div class="chips">
             {% if bk and bk.publisher %}<span class="chip">{{ bk.publisher }}</span>{% endif %}
-            {% if it.grade %}<span class="chip">{{ it.grade }}</span>{% endif %}
-            {% if it.passages %}<span class="chip">지문 {{ it.passages }}개</span>{% endif %}
-            {% if it.materials %}<span class="chip">자료 {{ it.materials|length }}종</span>{% endif %}
+            {% if first.grade %}<span class="chip">{{ first.grade }}</span>{% endif %}
+            {% if first.passages %}<span class="chip">지문 {{ first.passages }}개</span>{% endif %}
             <span class="chip">PDF</span>
           </div>
-          {% if it.materials %}
-            <div class="mat-chips">
-              {% for mid in it.materials %}
-                {% set m = material_map.get(mid) %}
-                {% if m %}<span class="mat-chip pk-{{ material_pkg.get(mid, '') }}">{{ m.name }}</span>{% endif %}
-              {% endfor %}
-            </div>
-          {% endif %}
+          <div class="mat-chips">
+            {% for mid in g.mats %}
+              {% set m = material_map.get(mid) %}
+              {% if m %}<span class="mat-chip pk-{{ material_pkg.get(mid, '') }}">{{ m.name }}</span>{% endif %}
+            {% endfor %}
+          </div>
           <div class="oi-price">
-            <span>{{ it.price|won }}</span>
-            <a href="{{ url_for('product_detail', slug=it.slug) }}">자료 다시 보기 ›</a>
+            <span>{{ g.price|won }}</span>
+            {% if not g.package %}
+              <a href="{{ url_for('product_detail', slug=first.slug) }}">자료 다시 보기 ›</a>
+            {% endif %}
           </div>
         </div>
       {% endfor %}
 
       {% if from_cart %}
         <p class="muted" style="margin:-8px 0 20px;font-size:14px;">
-          자료 {{ items|length }}개를 함께 주문합니다.
+          패키지 {{ groups|length }}묶음을 함께 주문합니다.
           <a href="{{ url_for('cart') }}"><b>장바구니에서 고치기 ›</b></a>
         </p>
       {% endif %}
@@ -212,8 +217,8 @@
       out.textContent = won(d.final);
       if (d.next_tier) {
         nudge.hidden = false;
-        nudge.innerHTML = '<b>' + d.next_tier.min + '개</b>부터 <b>'
-                        + d.next_tier.percent + '% 할인</b>입니다.';
+        nudge.innerHTML = '<b>' + d.next_tier.min + (d.pick_word || '개')
+                        + '</b>부터 <b>' + d.next_tier.percent + '% 할인</b>입니다.';
       } else {
         nudge.hidden = true;
       }

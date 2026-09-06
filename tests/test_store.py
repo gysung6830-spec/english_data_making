@@ -3966,6 +3966,68 @@ def _set_discount(tiers=None, cap=20):
 
 
 # ---- 장바구니 --------------------------------------------------------------
+def test_cart_shows_packages_not_parts():
+    """파는 단위는 패키지입니다. 장바구니도 낱개가 아니라 묶음으로 보여야 합니다.
+
+    한 강을 담으면 자료 여러 종이 한꺼번에 들어갑니다. 그것을 한 줄씩 늘어놓고
+    낱개로 빼게 두면, 팔지 않는 조합을 손님이 만들 수 있게 됩니다.
+    """
+    cat = sc.load_catalog()
+    known = {x["slug"]: x for x in cat["products"]}
+    packs = {x["id"]: x for x in cat["packages"]}
+    book, unit = "ybm-han", "Lesson 1"
+    of = {}
+    for pid, pack in packs.items():
+        of[pid] = [x["slug"] for m in pack["materials"]
+                   for x in cat["products"]
+                   if x.get("book") == book and x.get("unit") == unit
+                   and x.get("materials") == [m]]
+        assert len(of[pid]) == len(pack["materials"]), pid
+
+    c = client()
+    c.post("/cart/add", data={"slug": ",".join(of["analysis"])})
+    page = body(c.get("/cart"))
+    assert page.count('class="cart-row"') == 1, "8종이 여덟 줄로 늘어섰습니다"
+    assert f"지문분석 {len(packs['analysis']['materials'])}종 패키지" in page
+    assert "Lesson 1" in page
+    # 담긴 자료는 딱지로 다 보입니다
+    mats = {m["id"]: m["name"] for m in sc.load_materials()["materials"]}
+    for mid in packs["analysis"]["materials"]:
+        assert mats[mid] in page, mid
+
+    # 두 패키지를 다 담아도 두 줄. 겹치는 자료 값은 한 번만 붙습니다
+    c.post("/cart/add", data={"slug": ",".join(of["problem"])})
+    page = body(c.get("/cart"))
+    assert page.count('class="cart-row"') == 2, page.count('class="cart-row"')
+    both = {s for pid in of for s in of[pid]}
+    want = sum(known[s]["price"] for s in both)
+    assert f"{want:,}원" in page
+    # 겹치는 자료도 두 묶음 딱지에 모두 적힙니다 (실제로 받으시는 것이니까요)
+    shared = set(packs["analysis"]["materials"]) & set(packs["problem"]["materials"])
+    assert shared, "겹치는 자료가 없으면 이 시험은 뜻이 없습니다"
+    for mid in shared:
+        assert page.count(mats[mid]) >= 2, mid
+
+    # 한 묶음을 빼면 그 묶음만 빠지고, 남는 묶음은 온전해야 합니다
+    row = page.split('class="cart-row"', 1)[1]
+    slugs = row.split('name="slug" value="', 1)[1].split('"', 1)[0]
+    assert "," in slugs, "빼기가 자료 하나만 지우고 있습니다"
+    c.post("/cart/remove", data={"slug": slugs})
+    left = body(c.get("/cart"))
+    assert left.count('class="cart-row"') == 1
+    # 남은 묶음에서 겹치는 자료가 딸려 나가면 안 됩니다
+    for mid in packs["problem"]["materials"]:
+        assert mats[mid] in left, mid
+    assert f"{sum(known[s]['price'] for s in of['problem']):,}원" in left
+
+    # 주문서도 같은 단위로 보여 줍니다
+    order = body(c.get("/order?cart=1"))
+    assert order.count('class="order-item"') == 1
+    assert f"문제 {len(packs['problem']['materials'])}종 패키지" in order
+    c.post("/cart/clear")
+    print("PASS  장바구니·주문서는 패키지 단위 · 빼기도 묶음째")
+
+
 def test_cart_add_view_remove():
     """여러 회차를 담고, 빼고, 비울 수 있어야 합니다."""
     c = client()
@@ -4659,6 +4721,7 @@ def run_all():
     test_submit_takes_photos_by_drag_and_drop()
     test_submission_to_coupon_to_discount()
     test_submission_requires_file_or_link()
+    test_cart_shows_packages_not_parts()
     test_cart_add_view_remove()
     test_cart_count_discount_steps()
     test_cart_nudges_to_next_step()

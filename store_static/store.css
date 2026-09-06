@@ -2161,3 +2161,8 @@ label.dropzone{
 .study-jump b{display:block; font-size:15.5px; color:var(--brand-dark); margin-bottom:5px;}
 .study-jump p{margin:0; font-size:14px; color:var(--ink-2); line-height:1.65;
   word-break:keep-all;}
+
+/* 장바구니 — 한 줄이 패키지 한 묶음입니다 */
+.cr-where{font-size:13.5px; color:var(--muted); margin-top:3px;}
+.cr-where b{color:var(--ink-2); font-weight:700;}
+.cart-row .mat-chips{margin-top:9px;}

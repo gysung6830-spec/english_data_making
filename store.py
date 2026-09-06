@@ -473,10 +473,10 @@ def unit_grid(catalog: dict, slug: str) -> dict:
     # 칸에 걸 이름 — "'꼼꼼한' 지문분석 8종 패키지". 종수는 이 교재에 실제로
     # 들어 있는 자료만 셉니다. 적어 둔 수와 받는 수가 다르면 안 되니까요.
     kind_labels, kind_briefs = {}, {}
+    by_id = {x["id"]: x for x in (catalog.get("packages") or [])}
     for kind in kinds:
         n = len(kind_mats.get(kind, []))
-        head = f"\u2018{adjs[kind]}\u2019 " if adjs.get(kind) else ""
-        kind_labels[kind] = f"{head}{cores[kind]} {n}종 패키지"
+        kind_labels[kind] = sc.package_label(by_id.get(kind), n)
         kind_briefs[kind] = f"{cores[kind]} {n}종"
 
     return {"rows": rows, "kinds": kinds, "kind_names": names, "kind_shorts": shorts,
@@ -594,6 +594,103 @@ def cart_items(catalog: dict | None = None) -> list[dict]:
     return items
 
 
+def cart_groups(items: list[dict], catalog: dict | None = None) -> list[dict]:
+    """장바구니를 파는 단위(패키지)대로 묶습니다.
+
+    자료는 하나하나가 상품이지만, 우리는 그것을 낱개로 팔지 않습니다. 담기는
+    것도 패키지 한 칸이므로 장바구니에서도 그렇게 보여야 합니다. 한 묶음이
+    한 줄이고, 빼는 것도 묶음째입니다.
+
+    같은 강에서 두 패키지를 다 고르시면 어휘리스트·단어테스트가 겹칩니다.
+    겹치는 자료는 먼저 나오는 묶음에 한 번만 넣어 값이 두 번 붙지 않게 하고,
+    묶음 이름에는 실제로 받으시는 종수를 적습니다.
+    """
+    catalog = catalog or sc.load_catalog()
+    packages = sorted(catalog.get("packages") or [], key=lambda x: x.get("sort", 999))
+    books = {b["slug"]: b for b in catalog.get("books") or []}
+
+    order, bucket = [], {}
+    for item in items:
+        key = (item.get("book") or "", item.get("unit") or "")
+        if key not in bucket:
+            bucket[key] = []
+            order.append(key)
+        bucket[key].append(item)
+
+    groups = []
+    for key in order:
+        here = bucket[key]
+        book, unit = key
+        mine = {mid: it for it in here for mid in (it.get("materials") or [])}
+        left = dict(mine)
+
+        def add(pack, take, mats):
+            # 딱지는 '받으시는 자료' 를 그대로 보여 줍니다. 겹치는 자료는 값만
+            # 한 번 받을 뿐 두 패키지에 다 들어 있어서, 둘 다 적어야 맞습니다.
+            groups.append({
+                "package": pack,
+                "book_id": book,
+                "name": (pack.get("name") if pack else take[0]["name"]),
+                "label": sc.package_label(pack, len(mats)) if pack else take[0]["name"],
+                "book": books.get(book, {}).get("name") or book,
+                "unit": unit,
+                "items": take,
+                "mats": mats,
+                "count": len(mats),
+                "price": sum(int(x.get("price", 0)) for x in take),
+                "slugs": ",".join(x["slug"] for x in take),
+            })
+
+        if book and unit:
+            for pack in packages:
+                need = list(pack.get("materials") or [])
+                if not need or not set(need) <= set(mine):
+                    continue                       # 다 갖춰졌을 때만 묶음으로 봅니다
+                take = [left.pop(mid) for mid in need if mid in left]
+                if take:
+                    add(pack, take, need)
+        # 묶음에 안 들어간 것은 낱개로 (따로 파는 자료 · 교재 통째 상품)
+        seen = set()
+        for it in here:
+            mids = it.get("materials") or []
+            if it["slug"] in seen or (mids and not any(m in left for m in mids)):
+                continue
+            seen.add(it["slug"])
+            for m in mids:
+                left.pop(m, None)
+            add(None, [it], list(mids))
+    return groups
+
+
+def cart_without(items: list[dict], drop: set[str], catalog: dict) -> list[str]:
+    """한 묶음을 뺀 뒤에 남아야 할 자료 목록.
+
+    어휘리스트·단어테스트는 두 패키지에 함께 들어 있습니다. 그래서 한 묶음을
+    그냥 지우면 남은 묶음에서까지 그 자료가 빠져 버립니다. 남는 묶음이
+    무엇을 담고 있어야 하는지를 다시 세어, 딸려 나가지 않게 합니다.
+    """
+    # 강별 자료(자료 한 종짜리 상품)만 봅니다. 교재 통째 상품은 여러 종을 한
+    # 상품에 담고 있어 같은 자리를 놓고 다투기 때문입니다.
+    where = {}
+    for prod in catalog["products"]:
+        mids = prod.get("materials") or []
+        if len(mids) == 1 and prod.get("unit"):
+            where[(prod.get("book") or "", prod["unit"], mids[0])] = prod["slug"]
+
+    keep = []
+    for g in cart_groups(items, catalog):
+        if set(g["slugs"].split(",")) <= drop:      # 이 묶음을 빼신 것입니다
+            continue
+        if g["package"] and g["unit"]:
+            # 겹치는 자료가 딸려 나갔으면 여기서 도로 채워집니다
+            for mid in g["mats"]:
+                slug = where.get((g["book_id"], g["unit"], mid))
+                if slug:
+                    keep.append(slug)
+        keep += [x["slug"] for x in g["items"]]
+    return keep
+
+
 def sibling_of(product: dict, catalog: dict) -> dict | None:
     """같은 교재의 반대쪽 패키지."""
     return next((x for x in catalog["products"]
@@ -623,7 +720,8 @@ def cart():
         mate = sibling_of(item, catalog)
         if mate and mate["slug"] not in have and mate["slug"] not in {s["slug"] for s in suggest}:
             suggest.append(mate)
-    return render_template("cart.html", items=items, rows=rows, auto=auto,
+    return render_template("cart.html", items=items, groups=cart_groups(items, catalog),
+                           rows=rows, auto=auto,
                            subtotal=subtotal, final=subtotal - auto, suggest=suggest[:3],
                            next_tier=sc.count_next(site, sc.unit_count(items)),
                            picked=sc.unit_count(items),
@@ -656,8 +754,10 @@ def cart_add():
 
 @app.route("/cart/remove", methods=["POST"])
 def cart_remove():
-    slug = sc.clean(request.form.get("slug"), 60)
-    save_cart([x for x in cart_slugs() if x != slug])
+    # 패키지 한 묶음이 자료 여러 개라, 담을 때처럼 뺄 때도 쉼표로 옵니다
+    drop = {x.strip() for x in sc.clean(request.form.get("slug"), 600).split(",") if x.strip()}
+    catalog = sc.load_catalog()
+    save_cart(cart_without(cart_items(catalog), drop, catalog))
     return redirect(back_to(url_for("cart")))
 
 
@@ -692,6 +792,7 @@ def quote_for(items: list[dict], email: str, coupon_code: str) -> dict:
     coupon, coupon_cut, coupon_note = sc.check_coupon(coupon_code, subtotal - auto)
     return {
         "subtotal": subtotal, "rows": rows, "auto": auto, "next_tier": nxt,
+        "pick_word": sc.count_word(items),          # 강 · 단원 · 회차 — 교재마다 다릅니다
         "coupon": coupon, "coupon_cut": coupon_cut, "coupon_note": coupon_note,
         "discount": auto + coupon_cut,
         "final": subtotal - auto - coupon_cut,
@@ -730,6 +831,7 @@ def order_quote():
         "rows": [{"name": r["name"], "amount": r["amount"], "percent": r["percent"]}
                  for r in q["rows"]],
         "next_tier": q["next_tier"],
+        "pick_word": q["pick_word"],
         "coupon_ok": bool(q["coupon"]),
         "coupon_cut": q["coupon_cut"],
         "coupon_note": q["coupon_note"],
@@ -750,7 +852,9 @@ def order():
     books = {b["slug"]: b for b in catalog["books"]}
 
     def page(form, errors, status=200, typo=""):
-        return render_template("order.html", items=items, p=product, sibling=sibling,
+        return render_template("order.html", items=items,
+                               groups=cart_groups(items, catalog),
+                               p=product, sibling=sibling,
                                books=books, from_cart=from_cart, email_typo=typo,
                                form=form, errors=errors), status
 
