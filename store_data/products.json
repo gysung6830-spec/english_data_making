@@ -19723,7 +19723,9 @@
         "wordlist",
         "wordtest"
       ],
-      "sort": 10
+      "sort": 10,
+      "adj": "꼼꼼한",
+      "core": "지문분석"
     },
     {
       "id": "problem",
@@ -19738,7 +19740,9 @@
         "wordlist",
         "wordtest"
       ],
-      "sort": 20
+      "sort": 20,
+      "adj": "출제예상",
+      "core": "문제"
     }
   ]
 }

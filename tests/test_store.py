@@ -3199,10 +3199,13 @@ def test_shared_materials_are_charged_once():
     q = c.get("/order/quote?cart=1").get_json()
     assert q["subtotal"] == row["price"], (q["subtotal"], row["price"])
 
-    # 화면에도 겹친다는 것을 적어 둡니다
+    # 겹친다는 설명은 화면에 적지 않습니다 (값이 알아서 한 번만 붙으니까요)
     page = body(client().get("/books/ebs-2026-tokgang-eng"))
-    assert "두 패키지에 함께 들어 있습니다" in page and "한 번만" in page
+    assert "두 패키지에 함께 들어 있습니다" not in page
     assert "직독직해" in page and "어휘리스트" in page and "단어테스트" in page
+    # 칸 이름은 몇 종이 들어가는지까지 적습니다
+    assert "\u2018꼼꼼한\u2019 지문분석 8종 패키지" in page
+    assert "\u2018출제예상\u2019 문제 5종 패키지" in page
     print("PASS  겹쳐 든 자료는 한 번만 담기고 한 번만 셈함")
 
 

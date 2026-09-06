@@ -1722,15 +1722,11 @@ input[type=file]{
 .pkg-pick.pkg-analysis .pp-mat i{color:#3b6fd4;}
 .pkg-pick.pkg-problem .pp-mat{background:#fdeee6; color:#a3450f;}
 .pkg-pick.pkg-problem .pp-mat i{color:#c96524;}
-/* 두 패키지에 함께 든 자료 — 어느 쪽 색도 아니게 두어 '공용' 임을 보입니다 */
-.pkg-pick .pp-mat.both{background:#eef0ef; color:var(--ink-2); border:1px dashed #c7cdc9;
-  padding:2px 7px;}
-.pkg-pick .pp-mat.both i{color:var(--muted);}
 
 /* --- 밑: 강 한 줄 = 그 강의 자료 낱개 --- */
 .unit-list{border:1px solid var(--line); border-radius:12px; background:#fff;
   overflow:hidden;}
-.ur{display:grid; grid-template-columns:145px 1fr 92px; gap:12px; align-items:center;
+.ur{display:grid; grid-template-columns:130px 1fr 92px; gap:10px; align-items:center;
   padding:9px 14px; border-bottom:1px solid var(--line);}
 .ur:last-child{border-bottom:0;}
 .ur.on{background:var(--brand-soft);}
@@ -1745,6 +1741,7 @@ input[type=file]{
   font-size:13px; font-weight:600; color:var(--ink-2); background:#fff;
   border:1px solid var(--line-strong); border-radius:9px; cursor:pointer;
   white-space:nowrap; transition:background .12s, border-color .12s;}
+.um-name{overflow:hidden; text-overflow:ellipsis;}
 .um input{width:16px; height:16px; margin:0; accent-color:var(--brand); cursor:pointer;}
 .um-short{display:none;}
 .um-won{font-weight:800; color:var(--ink); letter-spacing:-.01em;}

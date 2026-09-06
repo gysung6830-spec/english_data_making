@@ -16,10 +16,10 @@
         <button type="button" class="pkg-pick pkg-{{ m }} chip" data-kind="{{ m }}">
           <i class="cbox"></i>
           <span class="pp-body">
-            <b>{{ kind_names.get(m, m) }}</b>
+            <b>{{ kind_labels.get(m) or kind_names.get(m, m) }}</b>
             <span class="pp-mats">
               {%- for mm in kind_mats.get(m, []) %}
-                <span class="pp-mat{{ ' both' if mm.shared }}"><i>{{ mm.no }}</i>{{ mm.name }}</span>
+                <span class="pp-mat"><i>{{ mm.no }}</i>{{ mm.name }}</span>
               {%- endfor %}
             </span>
           </span>
@@ -27,9 +27,7 @@
       {% endfor %}
     </div>
     <p class="ps-tip">패키지를 고르면 <b>모든 {{ unit_word.word }}</b>에 한꺼번에 들어갑니다.
-      아래에서 {{ unit_word.word }}마다 빼거나 더하실 수 있습니다.
-      {% if shared_mats %}<br><b>{{ shared_mats|join(' · ') }}</b>는 두 패키지에 함께 들어 있습니다 —
-        둘 다 고르셔도 <b>한 번만</b> 값을 받습니다.{% endif %}</p>
+      아래에서 {{ unit_word.word }}마다 빼거나 더하실 수 있습니다.</p>
   </div>
 
   {% if tiers %}
@@ -68,8 +66,8 @@
                          data-row="{{ r.no }}" data-kind="{{ m }}"
                          data-slugs="{{ c.slugs }}"
                          {{ 'checked disabled' if have }}>
-                  <span class="um-name">{{ kind_names.get(m, m) }}</span>
-                  <span class="um-short">{{ kind_shorts.get(m, m) }}</span>
+                  <span class="um-name">{{ kind_labels.get(m) or kind_names.get(m, m) }}</span>
+                  <span class="um-short">{{ kind_briefs.get(m) or kind_shorts.get(m, m) }}</span>
                   <b class="um-won">{{ '{:,}'.format(c.price) }}</b>
                 </label>
               {% else %}

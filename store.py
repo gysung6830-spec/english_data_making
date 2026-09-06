@@ -388,11 +388,15 @@ def unit_grid(catalog: dict, slug: str) -> dict:
     items = [p for p in catalog["products"] if p.get("book") == slug and p.get("unit")]
     if not items:
         return {"rows": [], "kinds": [], "kind_names": {}, "kind_shorts": {},
+                "kind_labels": {}, "kind_briefs": {},
                 "kind_mats": {}, "shared_mats": [], "price_of": {}, "tiers": []}
 
     packages = catalog.get("packages", [])
     names = {pkg["id"]: pkg["name"] for pkg in packages}
     shorts = {pkg["id"]: pkg.get("short") or pkg["name"] for pkg in packages}
+    adjs = {pkg["id"]: pkg.get("adj", "") for pkg in packages}
+    cores = {pkg["id"]: pkg.get("core") or pkg.get("short") or pkg["name"]
+             for pkg in packages}
     of_pkg = {pkg["id"]: list(pkg.get("materials") or []) for pkg in packages}
     mats = sc.material_map()
 
@@ -448,7 +452,17 @@ def unit_grid(catalog: dict, slug: str) -> dict:
     site = sc.load_site()
     tiers = sorted((site.get("discount") or {}).get("count_tiers") or [],
                    key=lambda t: sc.to_int(t.get("min"), 0))
+    # 칸에 걸 이름 — "'꼼꼼한' 지문분석 8종 패키지". 종수는 이 교재에 실제로
+    # 들어 있는 자료만 셉니다. 적어 둔 수와 받는 수가 다르면 안 되니까요.
+    kind_labels, kind_briefs = {}, {}
+    for kind in kinds:
+        n = len(kind_mats.get(kind, []))
+        head = f"\u2018{adjs[kind]}\u2019 " if adjs.get(kind) else ""
+        kind_labels[kind] = f"{head}{cores[kind]} {n}종 패키지"
+        kind_briefs[kind] = f"{cores[kind]} {n}종"
+
     return {"rows": rows, "kinds": kinds, "kind_names": names, "kind_shorts": shorts,
+            "kind_labels": kind_labels, "kind_briefs": kind_briefs,
             "kind_mats": kind_mats,
             "shared_mats": [(mats.get(m) or {}).get("name", m) for m in sorted(shared)],
             "price_of": price_of, "tiers": tiers}
