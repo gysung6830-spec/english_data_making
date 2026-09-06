@@ -1474,7 +1474,22 @@ def full_pack_for(product: dict, catalog: dict) -> dict | None:
 # 분류 안을 한 번 더 갈라 보는 갈래. 갈래가 뜻이 있는 분류에서만 켭니다.
 # 모의고사는 학년으로, 교과서는 과목으로 갈립니다. EBS 부교재처럼 갈래가
 # 필요 없는 분류는 비워 둡니다. (관리자 > 교재·분류 에서 고릅니다)
-CATEGORY_SPLITS = {"grade": "학년", "subject": "과목"}
+CATEGORY_SPLITS = {"grade": "학년", "subject": "과목",
+                   "year": "시행년도", "month": "시행월"}
+
+# 모의고사 시행월. 3·6·9·10월 학력평가와 6·9월 모의평가, 그리고 수능입니다.
+EXAM_MONTHS = ["3월", "6월", "9월", "10월", "수능"]
+EXAM_YEAR_FROM = 2024          # 이보다 앞선 회차는 팔지 않습니다
+
+
+def exam_years() -> list[str]:
+    """골라 볼 수 있는 시행년도. 2024년부터 다음 학년도까지, 최근 것을 앞에.
+
+    다음 해를 함께 내는 것은 '2027학년도 수능' 처럼 한 해 앞선 이름이
+    먼저 붙기 때문입니다.
+    """
+    last = now_kst().year + 1
+    return [f"{y}년" for y in range(last, EXAM_YEAR_FROM - 1, -1)]
 
 # 과목 칸에서 고르기 쉽도록 미리 넣어 둔 값. 여기 없는 것도 적어 넣을 수 있습니다.
 SUBJECT_HINTS = ["공통영어1", "공통영어2", "영어1", "영어2", "영어독해와작문", "심화영어"]
@@ -1482,15 +1497,68 @@ SUBJECT_HINTS = ["공통영어1", "공통영어2", "영어1", "영어2", "영어
 # 손님 화면 필터링에 늘 보여야 하는 갈래. 분류에 따로 적어 두지 않았을 때 씁니다.
 # 고등학교 영어 교과서가 나뉘는 방식은 정해져 있어서, 자료가 아직 없는 과목도
 # 보이는 편이 낫습니다 — 무엇을 다루는 곳인지 드러나고, 없으면 요청으로 이어집니다.
-SPLIT_DEFAULTS = {"subject": ["공통영어1", "공통영어2", "영어1", "영어2"]}
+SPLIT_DEFAULTS = {"subject": ["공통영어1", "공통영어2", "영어1", "영어2"],
+                  "month": EXAM_MONTHS}
 
 
-def split_values_of(category: dict | None) -> list[str]:
-    """이 분류에서 먼저 보여 줄 갈래 값. 적어 두신 것이 있으면 그것을 씁니다."""
+def category_splits(category: dict | None) -> list[str]:
+    """이 분류를 몇 갈래로 더 가를지. 여러 줄이면 위에서부터 그 차례로 나옵니다.
+
+    'splits' 에 여럿 적어 두면 그대로, 없으면 예전처럼 'split' 하나만 봅니다.
+    """
     if not category:
         return []
-    listed = [v for v in (category.get("values") or []) if str(v).strip()]
-    return listed or list(SPLIT_DEFAULTS.get(category.get("split") or "", []))
+    many = [x for x in (category.get("splits") or []) if x in CATEGORY_SPLITS]
+    if many:
+        return many
+    one = category.get("split") or ""
+    return [one] if one in CATEGORY_SPLITS else []
+
+
+def split_values_of(category: dict | None, field: str = "") -> list[str]:
+    """이 갈래에서 먼저 보여 줄 값. 적어 두신 것이 있으면 그것을 씁니다."""
+    if not category:
+        return []
+    field = field or (category_splits(category) or [""])[0]
+    listed = [v for v in ((category.get("values") or {}).get(field)
+                          if isinstance(category.get("values"), dict)
+                          else category.get("values") or []) if str(v).strip()]
+    if listed:
+        return listed
+    if field == "year":
+        return exam_years()
+    return list(SPLIT_DEFAULTS.get(field, []))
+
+
+_YEAR_RE = re.compile(r"(20\d{2})\s*(?:학년도|년)")
+_SLUG_YM_RE = re.compile(r"-(20\d{2})-(\d{2})(?:-|$)")
+
+
+def exam_of(book: dict, field: str) -> str:
+    """교재에서 시행년도·시행월을 읽습니다. 적어 두지 않았으면 이름에서 셉니다.
+
+    자료가 846개라 하나하나 적어 넣게 할 수 없습니다. '2026학년도 6월 모의평가'
+    처럼 이름에 이미 들어 있는 것을 그대로 씁니다. 관리자에서 적어 두시면
+    적어 두신 쪽이 이깁니다.
+    """
+    said = str(book.get(field) or "").strip()
+    if said:
+        return said if said.endswith(("년", "월")) or said == "수능" else (
+            f"{said}년" if field == "year" else f"{said}월")
+
+    name, slug = str(book.get("name") or ""), str(book.get("slug") or "")
+    if field == "year":
+        hit = _YEAR_RE.search(name) or _SLUG_YM_RE.search(slug)
+        return f"{hit.group(1)}년" if hit else ""
+    if field == "month":
+        if "수능" in name:
+            return "수능"
+        hit = re.search(r"(\d{1,2})\s*월", name) or _SLUG_YM_RE.search(slug)
+        if not hit:
+            return ""
+        month = int(hit.group(1) if hit.re is not _SLUG_YM_RE else hit.group(2))
+        return "수능" if month == 11 else f"{month}월"
+    return ""
 
 
 def sold_counts() -> dict[str, int]:

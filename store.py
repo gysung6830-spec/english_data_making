@@ -268,45 +268,51 @@ def products():
     items = [p for p in catalog["products"] if not p.get("taste")]
     books = sc.books_with_counts(catalog, selected)
 
-    # 분류 안을 한 번 더 가르는 갈래. 모의고사는 학년, 교과서는 과목으로 갈립니다.
-    # 갈래가 없는 분류(EBS 부교재 등)에서는 그 줄이 아예 나오지 않습니다.
+    # 분류 안을 한 번 더 가르는 갈래. 모의고사는 학년·시행년도·시행월,
+    # 교과서는 과목으로 갈립니다. 갈래가 없는 분류에서는 그 줄이 안 나옵니다.
     by_slug = {b.get("slug"): b for b in catalog["books"]}
-    splits = {c.get("id"): (c.get("split") or "") for c in catalog.get("categories", [])}
-    field = splits.get(selected, "")
+    cat_of = {c.get("id"): c for c in catalog.get("categories", [])}
+    fields = sc.category_splits(cat_of.get(selected))
 
-    def value_of(item) -> str:
+    def value_of(item, field) -> str:
         """자료의 갈래 값. 자료에 없으면 그 교재에서 가져옵니다."""
-        return (item.get(field) or by_slug.get(item.get("book"), {}).get(field) or "")
+        book = by_slug.get(item.get("book"), {})
+        if field in ("year", "month"):
+            # 시행년도·시행월은 교재 이름에 이미 들어 있어 굳이 적어 두지 않습니다
+            return str(item.get(field) or "") or sc.exam_of(book, field)
+        return str(item.get(field) or "") or str(book.get(field) or "")
 
-    def values_of(item) -> set[str]:
+    def values_of(item, field) -> set[str]:
         """그 값이 가리키는 갈래들. '고1~고2' 처럼 걸친 것은 나눠 봅니다.
 
         통째로 '들어 있나' 로 보면 안 됩니다 — '영어1' 이 '공통영어1' 안에
         들어 있어서, 영어1 을 고르면 공통영어1 까지 딸려 나옵니다.
         """
-        return {v.strip() for v in value_of(item).split("~") if v.strip()}
+        return {v.strip() for v in value_of(item, field).split("~") if v.strip()}
 
-    pick = sc.clean(request.args.get(field), 30) if field else ""
-    if field:
-        # 실제로 자료가 있는 값
+    # 지금 고르신 갈래들. 다른 버튼을 눌러도 따라다닙니다.
+    picks = {f: sc.clean(request.args.get(f), 30) for f in fields}
+    picks = {f: v for f, v in picks.items() if v}
+
+    rows = []
+    for field in fields:
         here = {v for p in catalog["products"]
-                if p.get("category") == selected for v in values_of(p)}
-        # 분류가 미리 정해 둔 값(교과서의 공통영어1·2 · 영어1·2)이 있으면 그 차례로
-        # 먼저 놓습니다. 자료가 아직 없는 과목도 보여야 무엇을 다루는 곳인지
-        # 드러나고, 없으면 요청으로 이어집니다.
-        listed = sc.split_values_of(
-            next((c for c in catalog.get("categories", [])
-                  if c.get("id") == selected), None))
-        split_values = list(listed) + sorted(here - set(listed))
-    else:
-        split_values = []
+                if p.get("category") == selected for v in values_of(p, field)}
+        # 분류가 미리 정해 둔 값이 있으면 그 차례로 먼저 놓습니다. 자료가 아직
+        # 없는 값도 보여야 무엇을 다루는 곳인지 드러나고, 없으면 요청으로 이어집니다.
+        listed = sc.split_values_of(cat_of.get(selected), field)
+        rows.append({"field": field,
+                     "label": sc.CATEGORY_SPLITS.get(field, field),
+                     "values": list(listed) + sorted(here - set(listed)),
+                     "pick": picks.get(field, "")})
+    rows = [r for r in rows if r["values"]]
 
     if selected:
         items = [p for p in items if p.get("category") == selected]
     if package:
         items = [p for p in items if p.get("package") == package]
-    if pick:
-        items = [p for p in items if pick in values_of(p)]
+    for field, want in picks.items():
+        items = [p for p in items if want in values_of(p, field)]
     if q:
         # 교재 이름·출판사로도 찾히게 합니다. ("능률" 만 쳐도 그 교재 상품이 나오도록)
         needle = q.lower()
@@ -343,13 +349,15 @@ def products():
                            groups=groups, loose=loose,
                            categories=catalog.get("categories", []), selected=selected,
                            packages=catalog.get("packages", []), selected_package=package,
-                           split_field=field,
-                           split_label=sc.CATEGORY_SPLITS.get(field, ""),
-                           split_values=split_values, split_pick=pick,
+                           filter_rows=rows,
                            # 다른 버튼을 눌러도 고른 갈래가 따라가도록 들고 다닙니다
-                           keep={field: pick} if pick else {},
-                           split_url=lambda cid: (
-                               {field: pick} if pick and splits.get(cid) == field else {}),
+                           keep=picks,
+                           # 분류를 옮기면 그 분류에 없는 갈래는 떨어뜨립니다
+                           split_url=lambda cid: {
+                               f: v for f, v in picks.items()
+                               if f in sc.category_splits(cat_of.get(cid))},
+                           without=lambda drop: {f: v for f, v in picks.items()
+                                                 if f != drop},
                            orders=PRODUCT_ORDERS, order=order,
                            no_sales_yet=(order == "popular" and not sold),
                            q=q)

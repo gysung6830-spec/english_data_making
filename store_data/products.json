@@ -4,18 +4,26 @@
     {
       "id": "textbook",
       "name": "교과서",
-      "split": "subject",
-      "values": [
-        "공통영어1",
-        "공통영어2",
-        "영어1",
-        "영어2"
+      "values": {
+        "subject": [
+          "공통영어1",
+          "공통영어2",
+          "영어1",
+          "영어2"
+        ]
+      },
+      "splits": [
+        "subject"
       ]
     },
     {
       "id": "mock",
       "name": "모의고사",
-      "split": "grade"
+      "splits": [
+        "grade",
+        "year",
+        "month"
+      ]
     },
     {
       "id": "ebs",

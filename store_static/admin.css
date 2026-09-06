@@ -326,3 +326,7 @@
 .nav-rare[open] > summary::after{content:' ▴';}
 .nav-rare > summary:hover{color:rgba(255,255,255,.72);}
 .nav-rare a{display:block;}
+
+/* 분류를 무엇으로 더 나눌지 — 여럿 고를 수 있어 체크박스로 둡니다 */
+.split-picks{display:inline-flex; gap:12px; flex-wrap:wrap; align-items:center;}
+.split-picks .check{margin:0; font-size:13.5px; white-space:nowrap;}

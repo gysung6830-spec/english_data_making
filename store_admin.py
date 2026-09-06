@@ -973,8 +973,8 @@ def books():
     items = sorted(catalog["books"], key=lambda b: (b.get("sort", 100), b.get("name", "")))
     return render_template("admin/books.html", items=items, catalog=catalog, counts=counts,
                            splits=sc.CATEGORY_SPLITS,
-                           split_hint={k: ', '.join(v)
-                                       for k, v in sc.SPLIT_DEFAULTS.items()})
+                           now_splits=sc.category_splits,
+                           )
 
 
 @admin_bp.route("/books/new", methods=["GET", "POST"])
@@ -988,7 +988,9 @@ def book_form(slug=None):
     if request.method == "GET":
         return render_template("admin/book_form.html", b=existing or {"active": True, "sort": 100},
                                catalog=catalog, errors=[], is_new=existing is None,
-                               subject_hints=sc.SUBJECT_HINTS)
+                               subject_hints=sc.SUBJECT_HINTS,
+                               year_hints=sc.exam_years(),
+                               month_hints=sc.EXAM_MONTHS)
 
     item = dict(existing or {})
     errors = []
@@ -1005,6 +1007,9 @@ def book_form(slug=None):
     item["author"] = sc.clean(request.form.get("author"), 60)
     item["grade"] = sc.clean(request.form.get("grade"), 30)
     item["subject"] = sc.clean(request.form.get("subject"), 30)
+    # 모의고사 필터링용. 비워 두시면 교재 이름에서 읽습니다.
+    item["year"] = sc.clean(request.form.get("year"), 10)
+    item["month"] = sc.clean(request.form.get("month"), 10)
     item["sort"] = sc.to_int(request.form.get("sort"), 100)
     item["active"] = bool(request.form.get("active"))
     item["description"] = sc.clean(request.form.get("description"), 1000)
@@ -1054,10 +1059,9 @@ def category_save():
         elif any(c.get("id") == cid for c in catalog["categories"]):
             flash(f"'{cid}' 분류는 이미 있습니다.", "err")
         else:
-            split = request.form.get("split", "")
-            catalog["categories"].append(
-                {"id": cid, "name": name,
-                 "split": split if split in sc.CATEGORY_SPLITS else ""})
+            chosen = [x for x in request.form.getlist("splits")
+                      if x in sc.CATEGORY_SPLITS]
+            catalog["categories"].append({"id": cid, "name": name, "splits": chosen})
             sc.save_catalog(catalog)
             flash(f"분류 '{name}' 을(를) 추가했습니다.", "ok")
 
@@ -1066,24 +1070,23 @@ def category_save():
         name = sc.clean(request.form.get("name"), 40)
         split = request.form.get("split", "")
         split = split if split in sc.CATEGORY_SPLITS else ""
-        values = [sc.clean(v, 30) for v in
-                  (request.form.get("values") or "").replace("·", ",").split(",")]
-        values = [v for v in values if v][:12]
+        # 이 분류 안을 무엇으로 한 번 더 가를지. 여럿 고르면 줄이 여럿 나옵니다.
+        chosen = [x for x in request.form.getlist("splits") if x in sc.CATEGORY_SPLITS]
         for c in catalog["categories"]:
             if c.get("id") == cid and name:
                 c["name"] = name
-                # 이 분류 안을 무엇으로 한 번 더 가를지. 없으면 그 줄이 안 나옵니다
-                c["split"] = split
-                # 손님 화면에 먼저 보여 줄 값. 비우면 실제로 있는 교재의 값만 나옵니다
-                if split and values:
-                    c["values"] = values
+                if chosen:
+                    c["splits"] = chosen
                 else:
-                    c.pop("values", None)
+                    c.pop("splits", None)
+                c.pop("split", None)              # 예전 한 갈래짜리 칸은 씁니다
                 c.pop("by_grade", None)
                 sc.save_catalog(catalog)
                 flash(f"분류 '{name}' 을(를) 저장했습니다."
-                      + (f" 손님 화면에 {sc.CATEGORY_SPLITS[split]} 필터링이 나옵니다."
-                         if split else " 안을 더 가르지 않습니다."), "ok")
+                      + (" 손님 화면에 "
+                         + " · ".join(sc.CATEGORY_SPLITS[x] for x in chosen)
+                         + " 필터링이 나옵니다." if chosen else " 안을 더 가르지 않습니다."),
+                      "ok")
                 break
 
     elif action == "delete":

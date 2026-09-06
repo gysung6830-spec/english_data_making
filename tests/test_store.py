@@ -303,18 +303,20 @@ def test_grade_filter_and_sort():
     firsts = [int(re.search(r'<span class="price">([\d,]+)원</span>', c)
                   .group(1).replace(",", "")) for c in cards if "price" in c]
     assert firsts == sorted(firsts), firsts
-    # 갈래는 관리자 화면에서 켜고 끕니다
+    # 갈래는 관리자 화면에서 켜고 끕니다 (여럿 고를 수 있어 체크박스입니다)
     a = admin()
     page = body(a.get("/admin/books"))
-    assert 'name="split"' in page and "과목으로 나눔" in page and "학년으로 나눔" in page
+    assert 'name="splits"' in page
+    for label in ("학년", "과목", "시행년도", "시행월"):
+        assert f"<span>{label}</span>" in page, label
     assert 'name="subject"' in body(a.get("/admin/books/neungyule-kim/edit"))
 
     a.post("/admin/categories", data={"action": "rename", "id": "ebs",
-                                      "name": "EBS 부교재", "split": "grade"},
+                                      "name": "EBS 부교재", "splits": "grade"},
            follow_redirects=True)
     assert '<span class="filter-label">학년</span>' in body(client().get("/products?category=ebs"))
     a.post("/admin/categories", data={"action": "rename", "id": "ebs",
-                                      "name": "EBS 부교재", "split": ""}, follow_redirects=True)
+                                      "name": "EBS 부교재"}, follow_redirects=True)
     assert '<span class="filter-label">학년</span>' not in body(
         client().get("/products?category=ebs"))
     print("PASS  분류 안 갈래 — 모의고사는 학년 · 교과서는 과목")
@@ -4015,6 +4017,58 @@ def _set_discount(tiers=None, cap=20):
 
 
 # ---- 장바구니 --------------------------------------------------------------
+def test_mock_filters_by_year_and_month():
+    """모의고사는 학년 · 시행년도 · 시행월 세 줄로 좁힐 수 있어야 합니다.
+
+    회차가 쌓이면 '몇 년 몇 월 것' 으로 찾습니다. 교재 846개를 눈으로
+    훑게 두면 안 됩니다.
+    """
+    import re
+    page = body(client().get("/products?category=mock"))
+    rows = dict(re.findall(r'<span class="filter-label">([^<]+)</span>(.*?)</div>',
+                           page, re.S))
+    assert set(rows) >= {"학년", "시행년도", "시행월"}, list(rows)
+
+    years = re.findall(r'>(\d{4}년)</a>', rows["시행년도"])
+    assert years[-1] == "2024년", years          # 2024년부터
+    assert years == sorted(years, reverse=True)   # 최근 것이 앞에
+    for m in ("3월", "6월", "9월", "10월", "수능"):
+        assert f">{m}</a>" in rows["시행월"], m
+
+    # 교재 이름에 든 것을 그대로 읽습니다 — 하나하나 적어 넣지 않아도 됩니다
+    books = {b["slug"]: b for b in sc.load_catalog()["books"]}
+    assert sc.exam_of(books["mock-2026-06-g3"], "year") == "2026년"
+    assert sc.exam_of(books["mock-2026-06-g3"], "month") == "6월"
+    assert sc.exam_of(books["mock-2026-03-g2"], "month") == "3월"
+    assert sc.exam_of({"name": "2027학년도 수능"}, "month") == "수능"
+    assert sc.exam_of({"name": "2027학년도 수능"}, "year") == "2027년"
+
+    def count(url):
+        got = body(client().get(url))
+        m = re.search(r'교재 (\d+)권', got)
+        return int(m.group(1)) if m else 0
+
+    assert count("/products?category=mock") == 2
+    assert count("/products?category=mock&month=6월") == 1
+    assert count("/products?category=mock&month=3월") == 1
+    assert count("/products?category=mock&month=수능") == 0
+    # 세 줄을 겹쳐 걸 수 있습니다
+    assert count("/products?category=mock&year=2026년&month=6월&grade=고3") == 1
+    assert count("/products?category=mock&year=2026년&month=6월&grade=고2") == 0
+
+    # 고른 것은 다른 버튼을 눌러도 따라다닙니다
+    picked = body(client().get("/products?category=mock&month=6월&grade=고3"))
+    assert "month=6%EC%9B%94" in picked and "grade=%EA%B3%A03" in picked
+    # 갈래가 다른 분류로 옮기면 안 맞는 것은 떨어집니다
+    assert "month=6%EC%9B%94" not in picked.split('>교과서</a>', 1)[0].rsplit('<a', 1)[-1]
+
+    # 관리자에서 교재마다 따로 적어 두실 수도 있습니다
+    a = admin()
+    form = body(a.get("/admin/books/mock-2026-06-g3/edit"))
+    assert "시행년도" in form and "시행월" in form and "이름에서 알아서" in form
+    print("PASS  모의고사 — 학년 · 시행년도 · 시행월로 좁히기")
+
+
 def test_subject_filter_always_shows_four():
     """교과서 과목 줄에는 공통영어1·2 · 영어1·2 가 늘 나와야 합니다.
 
@@ -4040,13 +4094,12 @@ def test_subject_filter_always_shows_four():
     sc.save_catalog(cat)
     try:
         assert subjects() == want, "값을 안 적어 두면 기본값이 나와야 합니다"
-        # 관리자에서 적어 두시면 그 차례를 따릅니다
-        a = admin()
-        a.post("/admin/categories", data={"action": "rename", "id": "textbook",
-                                          "name": "교과서", "split": "subject",
-                                          "values": "영어2, 공통영어1"},
-               follow_redirects=True)
-        assert sc.load_raw_catalog()["categories"][0]["values"] == ["영어2", "공통영어1"]
+        # products.json 에 적어 두면 그 차례를 따릅니다
+        cat2 = sc.load_raw_catalog()
+        for c in cat2["categories"]:
+            if c.get("id") == "textbook":
+                c["values"] = {"subject": ["영어2", "공통영어1"]}
+        sc.save_catalog(cat2)
         page = body(client().get("/products?category=textbook"))
         row = page.split(">과목<", 1)[1].split("</div>", 1)[0]
         assert row.index(">영어2<") < row.index(">공통영어1<")
@@ -4055,8 +4108,9 @@ def test_subject_filter_always_shows_four():
         for c in cat["categories"]:
             if c.get("id") == "textbook":
                 c["name"] = "교과서"
-                if kept:
-                    c["values"] = kept
+                c["values"] = kept if kept else None
+                if not kept:
+                    c.pop("values", None)
         sc.save_catalog(cat)
     assert subjects() == want
     print("PASS  교과서 과목 네 가지는 늘 나옴 (적어 두지 않아도)")
@@ -4817,6 +4871,7 @@ def run_all():
     test_submit_takes_photos_by_drag_and_drop()
     test_submission_to_coupon_to_discount()
     test_submission_requires_file_or_link()
+    test_mock_filters_by_year_and_month()
     test_subject_filter_always_shows_four()
     test_cart_shows_packages_not_parts()
     test_cart_add_view_remove()
