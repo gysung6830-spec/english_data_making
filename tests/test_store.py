@@ -610,14 +610,17 @@ def test_order_to_download_flow():
     names = [f["name"] for f in sc.product_files(slug)]
     idx = names.index("지문분석지.pdf")
 
-    # 기본은 '화면에서 보고 인쇄만' 이라 PDF 는 파일로 안 나갑니다
-    assert client().get(f"/d/{dl[0]}/{idx}").status_code == 302
-    # ZIP 같은 것은 화면에서 못 여니 그대로 받습니다
+    # 기본은 '보기 + 파일 받기 둘 다' 입니다. 파일을 달라면 그대로 줍니다.
+    got = client().get(f"/d/{dl[0]}/{idx}")
+    assert got.status_code == 200, got.status_code
+    # ZIP 같은 것은 화면에서 못 여니 언제나 그대로 받습니다
     zidx = names.index("묶음.zip")
     assert client().get(f"/d/{dl[0]}/{zidx}").status_code == 200
 
-    # 파일로도 받게 열어 두면 예전처럼 나옵니다
-    site = sc.load_site(); site["delivery"] = {"mode": "both"}; sc.save_site(site)
+    # '화면 인쇄만' 으로 잠그면 PDF 는 파일로 안 나갑니다
+    site = sc.load_site(); site["delivery"] = {"mode": "view"}; sc.save_site(site)
+    assert client().get(f"/d/{dl[0]}/{idx}").status_code == 302
+    site["delivery"] = {"mode": "both"}; sc.save_site(site)
     got = client().get(f"/d/{dl[0]}/{idx}")
     assert got.status_code == 200, got.status_code
     assert got.data.startswith(b"%PDF"), got.data[:20]
@@ -1961,6 +1964,70 @@ def test_locker_sits_next_to_the_cart():
     assert 'class="locker-link' in cta and "내 자료함" in cta
     assert cta.index("내 자료함") < cta.index("장바구니")     # 장바구니 왼쪽
     print("PASS  내 자료함이 장바구니 옆에")
+
+
+def test_file_comes_with_the_order_no_extra_charge():
+    """산 자료는 파일로도 그냥 드립니다. 대신 주문번호가 새겨져 나갑니다."""
+    import store_watermark as wm
+    if not wm.AVAILABLE:
+        print("SKIP  워터마크 라이브러리 없음")
+        return
+    # 배포되는 기본값이 '보기 + 파일 받기 둘 다' 여야 합니다
+    # (앞선 테스트가 임시본을 고쳐 놓으므로 원본을 봅니다)
+    shipped = json.loads((_SRC / "site.json").read_text())["delivery"]
+    assert shipped["mode"] == "both", shipped
+    assert "파일" in shipped["note"]
+    site = sc.load_site()
+    site["delivery"] = dict(shipped)
+    # 표시 설정도 배포되는 기본값으로 되돌려 놓고 봅니다
+    site["watermark"] = json.loads((_SRC / "site.json").read_text())["watermark"]
+    sc.save_site(site)
+
+    # 이 시점에 실제로 살아 있는 상품 하나를 씁니다 (앞 테스트가 지웠을 수 있습니다)
+    live = [x for x in sc.load_catalog()["products"]
+            if x.get("active", True) and sc.to_int(x.get("price"), 0) > 0]
+    assert live, "팔 수 있는 상품이 하나도 없습니다"
+    prod = live[0]
+    slug = prod["slug"]
+    folder = sc.product_dir(slug)
+    folder.mkdir(parents=True, exist_ok=True)
+    from reportlab.pdfgen import canvas as rl_canvas
+    page = rl_canvas.Canvas(str(folder / "본문.pdf"))
+    page.drawString(72, 700, "passage one")
+    page.showPage()
+    page.save()
+
+    c = client()
+    resp = c.post("/order", data={"slug": slug, "name": "받는이", "phone": "010-2222-3333",
+                                  "email": "getfile@example.com", "agree": "1"})
+    with store.app.app_context():
+        row = sc.get_db().execute(
+            "SELECT * FROM orders WHERE email = 'getfile@example.com'").fetchone()
+    assert row is not None, (resp.status_code, body(resp)[:400])
+    amount = row["amount"]
+    admin().post(f"/admin/orders/{row['id']}/deliver", follow_redirects=True)
+    with store.app.app_context():
+        tok = sc.get_db().execute(
+            "SELECT token FROM downloads WHERE order_no = ?", (row["order_no"],)).fetchone()[0]
+
+    # 값을 더 받지 않습니다 — 상품 값 그대로입니다
+    assert amount == prod["price"], (amount, prod["price"])
+
+    # 받는 화면에 '보고 인쇄' 와 '파일로 받기' 가 나란히 있습니다
+    page_html = body(c.get(f"/d/{tok}"))
+    assert "화면에서 보고 인쇄" in page_html and "파일로 받기" in page_html
+
+    names = [f["name"] for f in sc.product_files(slug)]
+    idx = names.index("본문.pdf")
+    got = c.get(f"/d/{tok}/{idx}")
+    assert got.status_code == 200 and got.data[:4] == b"%PDF"
+
+    # 파일에도 주문번호가 새겨져 나갑니다
+    import io as _io
+    from pypdf import PdfReader
+    text = PdfReader(_io.BytesIO(got.data)).pages[0].extract_text()
+    assert row["order_no"] in text
+    print("PASS  파일도 그냥 드림 · 대신 주문번호가 새겨짐")
 
 
 def test_css_change_reaches_the_visitor():
@@ -3752,6 +3819,7 @@ def run_all():
     test_contact_has_no_phone()
     test_contact_page()
     test_locker_sits_next_to_the_cart()
+    test_file_comes_with_the_order_no_extra_charge()
     test_css_change_reaches_the_visitor()
     test_home_shows_real_pages_not_just_names()
     test_lineup_takes_the_home_middle()
