@@ -437,15 +437,17 @@ def opts_block(opts, answer, choices=None):
         jd = o.get("jd") or ("✔ 정답" if ok else "✘")
         if ok and jd.startswith("✔") and "정답" not in jd:
             jd = "✔ 정답 · " + jd[1:].strip()
-        # 영어 원문 선지(주제·제목·빈칸 등)면 '영어 + 한글 뜻'으로, 한글 선지(요지)면 한글만
-        en = (choices or {}).get(str(n)) if choices else None
-        en_official = bool(en and re.search(r"[A-Za-z]{3,}", en))
+        # 선지 본문은 검증된 content opts(tx)를 사용(은행 choices는 추출 과정에서 잘릴 수 있음).
+        # 영어 원문 선지(주제·제목·빈칸·어휘 등)면 '영어 + 한글 뜻', 한글 선지(요지)면 한글만.
+        tx = o.get("tx", "")
+        tx_plain = re.sub(r"<[^>]+>", "", tx)
+        en_official = bool(re.search(r"[A-Za-z]{3,}", tx_plain))
         ko = o.get("ko", "")
         if en_official:
-            main = f'<span class="tx en">{esc(en)}</span>'
+            main = f'<span class="tx en">{tx}</span>'
             ko_html = f'<span class="oko">{esc(ko)}</span>' if ko else ""
         else:
-            main = f'<span class="tx">{o.get("tx","")}</span>'
+            main = f'<span class="tx">{tx}</span>'
             ko_html = ""
         badge = '<span class="okflag">정답</span>' if ok else ""
         lis.append(f'<div class="{cls}"><span class="n">{CIRCLED[n-1] if n else "·"}</span>'
@@ -517,14 +519,23 @@ def _mk_underline(text, marks):
     return out
 
 
+# 청크 내부의 리터럴 '/'(어휘쌍 compensate/prepare, and/or 등)를 청크 구분 슬래시와
+# 헷갈리지 않게 별도 표시. 태그(</span>)의 '/'를 건드리지 않도록 자리표시자 사용.
+_SLOT = ""
+def _lit_pre(text):
+    return re.sub(r"\s*/\s*", _SLOT, text) if text else text
+def _lit_post(html):
+    return html.replace(_SLOT, '<span class="litsl">/</span>')
+
+
 def _slash(chunks):
     SL = ' <span class="sl">/</span> '
-    return SL.join(esc(c) for c in chunks)
+    return SL.join(_lit_post(esc(_lit_pre(c))) for c in chunks)
 
 
 def _slash_marked(chunks, marks):
     SL = ' <span class="sl">/</span> '
-    joined = SL.join(esc(c) for c in chunks)
+    joined = SL.join(_lit_post(esc(_lit_pre(c))) for c in chunks)
     for expr, kind in (marks or []):
         cls = _UCLS.get(kind, "uref")
         joined = joined.replace(esc(expr), f'<span class="{cls}">{esc(expr)}</span>', 1)
@@ -539,8 +550,39 @@ def _dfull_en(chunks, tags):
     for c in chunks:
         ctags = [t for t in (tags or [])
                  if t.get("word") and re.search(re.escape(t["word"]), c, re.I)]
-        out.append(_mark_sentence(c, ctags, mark_rel=True))
+        out.append(_lit_post(_mark_sentence(_lit_pre(c), ctags, mark_rel=True)))
     return SL.join(out)
+
+
+# ── '왜 노랑' = 첫 읽기에 즉시 보이는 표면 신호로만 근거를 댄다(주제문·결론 같은 사후판정 금지) ──
+_FRAME_PATS = [
+    (re.compile(r'\b(a\s+)?(study|studies|research|researchers|data|evidence|experiments?|findings?)\b.{0,25}\b(show|shows|showed|suggest|suggests|indicate|indicates|found|find|reveal|reveals|demonstrate|prove|confirm)', re.I), "연구·근거 프레임(Studies show…)"),
+    (re.compile(r'\bwe\s+(found|observed|conducted|discovered|argue|show|propose|noticed|realized)\b', re.I), "필자 주장 프레임(We…)"),
+    (re.compile(r'\b(experts?|scientists?|scholars?|psychologists?|economists?)\b.{0,18}\b(say|argue|believe|agree|claim|note|point out|suggest)', re.I), "전문가 인용 프레임"),
+    (re.compile(r'\bthe\s+(point|key|goal|problem|issue|question|answer|truth|reality|fact|reason|lesson)\s+is\b', re.I), "핵심 명시(the … is)"),
+    (re.compile(r'\bwhat\s+(matters|counts|is\s+important|is\s+key)\b', re.I), "핵심 명시(what matters)"),
+    (re.compile(r'\bthis\s+(is\s+why|means|shows|suggests|explains)\b', re.I), "귀결 프레임(this …)"),
+]
+_WHY_STRONG = {"역접": "역접 신호 — 앞을 뒤집는 핵심", "대조": "대조 신호 — 초점", "당위": "당위 신호 — 필자 주장",
+               "강조": "강조 신호 — 필자가 힘줌", "조건": "조건 신호 — 핵심 조건", "결론": "결론 신호"}
+_WHY_WEAK = {"인과": "인과 신호", "결과": "결과 신호", "열거": "열거 신호 — 강조 확장",
+             "비교": "비교 신호", "예시": "일반 진술"}
+
+
+def _why_yellow(raw_en, signame, is_first, is_blank):
+    """이 문장을 '처음 읽는 순간' 무엇을 보고 노랑으로 고르는가 — 표면 신호만."""
+    if is_blank:
+        return "빈칸 직접 근거"
+    if signame in _WHY_STRONG:
+        return _WHY_STRONG[signame]
+    for pat, lab in _FRAME_PATS:
+        if pat.search(raw_en or ""):
+            return lab
+    if signame in _WHY_WEAK:
+        return _WHY_WEAK[signame]
+    if is_first:
+        return "도입 — 화제 제시(먼저 읽어 방향 잡기)"
+    return "일반 진술(구체 예가 아님)"
 
 
 def direct_full_block(data):
@@ -599,13 +641,17 @@ def direct_full_block(data):
         entag = ""
         if role == "yellow":
             rowcls += " y"
+            _raw_en = " ".join(r.get("en", []))   # 마킹 전 원문 — 첫 읽기 신호 탐지용
             en = f'<span class="yl">{en}</span>'
+            _first = (yc == 0)
             _yi = _CIRC[yc] if yc < len(_CIRC) else f"{yc+1}"
             yc += 1
-            btag = f"🟡 노랑{_yi}" + (" · 끝문장" if r.get("end") else "")
-            if r.get("blank"):
-                btag = f"🟡 노랑{_yi} 근거({r['blank']})"
-            entag = f'{sigchip}<span class="tagm ry">{btag}</span>'
+            # ∵ 왜 노랑 — '처음 읽는 순간 보이는 신호'로만 근거를 댄다(주제문·결론 등 사후판정 금지)
+            _sname = (r.get("sig") or {}).get("name", "")
+            _why = _why_yellow(_raw_en, _sname, _first, r.get("blank"))
+            btag = f"🟡 노랑{_yi}"
+            entag = (f'{sigchip}<span class="tagm ry">{btag}</span>'
+                     f'<span class="tagm why">∵ {esc(_why)}</span>')
         elif role in ("gray", "given") and kind not in ("seq",):
             en = f'<span class="dim">{en}</span>'
             _rt = r.get("note") or ("배경" if role != "given" else "")
@@ -1054,7 +1100,8 @@ def solution_block(rec, c, idx, tno=None):
         blanknote = ' <span class="blanknote">(빈칸 <span class="bkmini">___</span> 채우기)</span>' if is_blank else ''
         ileg = ('<div class="ilegend"><span class="yl2">노란 형광펜</span>=무조건 읽을 문장 · '
                 '<span style="color:#79828c">회색</span>=배경·예시 · '
-                '<span class="sigc sc-red" style="margin:0;padding:1px 6px">신호</span>=왜 노랑인지(신호어 색줄) · 슬래시(/)=의미 단위')
+                '<span class="tagm why" style="margin:0">∵ 왜 노랑</span>=<b>첫 읽기에 보이는 신호</b>(연결어·주장틀·도입) · '
+                '<span class="sigc sc-red" style="margin:0;padding:1px 6px">신호</span>=근거 신호어(색줄) · 슬래시(/)=의미 단위')
         ileg += (' · <b>어려운 문장</b>은 <span style="color:#a86b00">뜻</span> 자연해석</div>')
         recon = '<div class="reconnote">※ 원본 선지 일부 유실 → 학습용 재구성(지문·정답은 기출 그대로).</div>' if c.get("recon_opts") else ""
         return f'''<div class="qsolution"><div class="card intg">
@@ -1766,6 +1813,7 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .dfull .en .dim{ color:#79828c; }
 .dfull .yl{ background:#ffe680; color:#23272e; border-radius:2px; padding:1px 2px; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
 .dfull .sl{ color:#3f83c4; font-weight:800; padding:0 3px; }
+.dfull .litsl{ color:#98a0a8; font-weight:600; padding:0; }
 .dfull .uref{ border-bottom:2px solid #2f6fb0; color:#194e7e; font-weight:700; }
 .dfull .uconj{ border-bottom:2px solid var(--trap); color:#8f2f28; font-weight:700; }
 .dfull .utime{ border-bottom:2px solid var(--ink); color:#12543d; font-weight:700; }
@@ -1782,6 +1830,7 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .dfull .natline{ font-size:9px; color:#8a6a00; background:#fffaf0; border-left:2px solid var(--must-line); border-radius:0 4px 4px 0; padding:2px 8px; margin-top:3px; } .dfull .natline b{ color:#a86b00; }
 .dfull .tagm{ display:inline-block; font-size:7.3px; font-weight:800; border-radius:8px; padding:0 5px; margin-left:4px; vertical-align:1px; }
 .dfull .tagm.ry{ color:#8a6a00; background:#fff4d1; } .dfull .tagm.rg{ color:#5f6870; background:#eef0f2; } .dfull .tagm.rs{ color:#8a929b; background:#f2f4f6; }
+.dfull .tagm.why{ color:#12543d; background:#e2f0e9; border:1px solid #bcdccb; }
 .dfull .row.irr{ background:#fdecea; border-radius:5px; padding:3px 6px 3px 23px; }
 .dfull .row.irr .en{ color:#8f2f28; font-weight:600; }
 .dfull .irrmark{ color:#fff; background:var(--trap); border-radius:5px; font-size:7.3px; font-weight:800; padding:1px 6px; margin-left:4px; }
@@ -1903,6 +1952,7 @@ u.vund{ text-decoration:underline; text-decoration-thickness:1.5px; text-underli
 .dchl .en{ font-size:10.2px; line-height:1.95; color:#23272e; }
 .dchl .ko{ font-size:9.6px; line-height:1.95; color:#23272e; margin-top:2px; }
 .dchl .sl{ color:#3f83c4; font-weight:800; padding:0 3px; }
+.dchl .litsl{ color:#98a0a8; font-weight:600; padding:0; }
 .hl0,.hl1,.hl2,.hl3,.hl4{ color:#23272e; padding:1px 4px; border-radius:3px; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
 .hl0{ background:#c9e0ec; } .hl1{ background:#c7e0da; } .hl2{ background:#e8dfb2; } .hl3{ background:#e2dac8; } .hl4{ background:#d5ddb9; }
 .dchl .opt-line{ margin-top:7px; padding-top:7px; border-top:1px dashed var(--line); font-size:9.3px; }
