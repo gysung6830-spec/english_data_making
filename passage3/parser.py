@@ -502,17 +502,25 @@ def _parse_sentences(body: str) -> List[Sentence]:
 _CHAPTER_PREFIX_RE = re.compile(
     r"(?i)^(?:ch(?:apter)?|unit|lesson)\b.*?\s[-–—]\s+(.+)$"
 )
+# '서술형 Practice' / '논술형 Practice' 등 '…형 Practice' → '…형'
+_PRACTICE_SUFFIX_RE = re.compile(r"(?i)^(.+형)\s+Practice\.?\s*$")
 
 
 def _strip_chapter_prefix(label: str) -> str:
-    """'Ch. 01 Unit 01 - 1번' 처럼 챕터/단원 접두어가 붙은 라벨에서 뒤쪽(실제
-    문항 라벨: '1번'·'수능 대비 ANALYSIS' 등)만 남긴다.
+    """교재 헤더 라벨을 실제 문항 라벨만 남게 다듬는다.
 
-    구분자는 '공백-대시-공백'으로 한정해, 챕터 번호 내부의 대시('5-1' 등)를
-    잘못 자르지 않는다. 접두어가 없으면 원래 라벨을 그대로 둔다.
+    - 'Ch. 01 Unit 01 - 1번' → '1번' : 챕터/단원 접두어 제거. 구분자는
+      '공백-대시-공백'으로 한정해 챕터 번호 내부 대시('5-1' 등)는 보존.
+    - '서술형 Practice' → '서술형', '논술형 Practice' → '논술형' :
+      '…형 Practice' 꼬리의 'Practice' 제거.
+    접두어/꼬리가 없으면 원래 라벨을 그대로 둔다.
     """
-    m = _CHAPTER_PREFIX_RE.match(label or "")
-    return m.group(1).strip() if m else (label or "")
+    label = label or ""
+    m = _CHAPTER_PREFIX_RE.match(label)
+    if m:
+        label = m.group(1).strip()
+    label = _PRACTICE_SUFFIX_RE.sub(r"\1", label).strip()
+    return label
 
 
 def _clean_title(s: str) -> str:

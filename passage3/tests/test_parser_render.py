@@ -234,6 +234,10 @@ def test_strip_chapter_prefix():
     assert f("Chapter 3 Lesson 2 - 12번") == "12번"
     assert f("Ch. 5-1 Unit 2 - 1번") == "1번"   # 챕터 번호 대시는 보존
     assert f("18번") == "18번"                   # 접두어 없으면 그대로
+    # '…형 Practice' 꼬리의 'Practice' 제거(접두어와 함께도)
+    assert f("서술형 Practice") == "서술형"
+    assert f("논술형 Practice") == "논술형"
+    assert f("Ch. 01 Unit 01 - 서술형 Practice") == "서술형"
 
 
 def test_chapter_header_label_stripped():
