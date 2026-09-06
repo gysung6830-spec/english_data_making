@@ -2385,6 +2385,79 @@ def test_mobile_quick_bar():
     print("PASS  폰에서 카테고리 줄띠")
 
 
+def test_word_study_screen():
+    """화면에서 한 문제씩 푸는 자리 — 뜻 고르기 · 철자 채우기 · 소리 · 오답 시험지."""
+    import json as _json
+    a = admin()
+    a.post("/admin/words/new", data={"name": "study test book", "publisher": "EBS"},
+           follow_redirects=True)
+    slug = "study-test-book"
+    a.post(f"/admin/words/{slug}/unit", data={
+        "unit_name": "Day 1",
+        "words": "\n".join(f"word{i}\t뜻{i}번" for i in range(12))},
+        follow_redirects=True)
+
+    page = body(client().get(f"/words/{slug}/study?n=8&seed=42"))
+    deck = _json.loads(page.split('id="sq-deck">', 1)[1].split("</script>", 1)[0]
+                       .replace("\\u003c", "<"))
+    assert len(deck) == 8, len(deck)
+
+    kinds = {q["kind"] for q in deck}
+    assert kinds == {"choice", "spell"}, kinds
+    for q in deck:
+        assert q["en"] and q["ko"]
+        assert "no" in q                      # 틀린 것을 시험지로 넘길 때 쓰는 번호
+        if q["kind"] == "choice":
+            assert len(q["choices"]) == 5 and len(set(q["choices"])) == 5
+            assert q["choices"][q["answer"]] == q["ko"]       # 정답이 보기 안에 있어야
+        else:
+            keys = set(q["keys"])
+            # 알파벳이 아닌 글자(빈칸·붙임표·숫자)는 화면에 미리 채워 두므로 자판에 없습니다
+            need = {c for c in q["en"].lower() if c.isascii() and c.isalpha()}
+            assert need <= keys, (q["en"], q["keys"])          # 답을 칠 수 있어야
+            assert len(keys) > len(need)                        # 미끼도 섞여야
+            assert q["vowels"] and set(q["vowels"]) <= keys
+
+    # 소리는 브라우저에 든 목소리로 냅니다 — 파일을 따로 받지 않습니다
+    assert "speechSynthesis" in page
+    assert "en-US" in page and "ko-KR" in page
+    # 철자 문제에서 영단어를 들으면 오답으로 둡니다
+    assert "영단어 듣기는 오답으로 기록돼요" in page
+
+    # 틀린 것만 다시 — 번호로 골라 다시 냅니다
+    only = ",".join(str(q["no"]) for q in deck[:3])
+    again = body(client().get(f"/words/{slug}/study?only={only}"))
+    deck2 = _json.loads(again.split('id="sq-deck">', 1)[1].split("</script>", 1)[0]
+                        .replace("\\u003c", "<"))
+    assert len(deck2) == 3
+    assert {q["no"] for q in deck2} == {q["no"] for q in deck[:3]}
+
+    # 틀린 단어가 그대로 시험지 PDF 로 넘어갑니다 (이미 있던 길을 씁니다)
+    picks = "&".join(f"pick={q['no']}" for q in deck[:3])
+    sheet = client().get(f"/words/{slug}/sheet?kind=en_ko&n_en_ko=3&{picks}")
+    assert sheet.status_code == 200
+    pdf = client().get(f"/words/{slug}/sheet.pdf?kind=en_ko&n_en_ko=3&{picks}")
+    assert pdf.status_code == 200 and pdf.data[:4] == b"%PDF"
+
+    # 시험지 만드는 화면에서 들어가는 길이 있어야 합니다
+    book = body(client().get(f"/words/{slug}"))
+    assert f"/words/{slug}/study" in book and "화면에서 바로 풀어 보기" in book
+
+    a.post(f"/admin/words/{slug}/delete", follow_redirects=True)
+    print("PASS  단어 풀기 — 뜻 고르기 · 철자 · 오답 시험지")
+
+
+def test_hidden_really_hides():
+    """display 를 정해 둔 자리도 hidden 이면 숨어야 합니다.
+
+    .sq-choices{display:grid} 가 브라우저 기본 [hidden] 규칙을 이겨서,
+    철자 문제에 앞 문제의 보기가 그대로 남아 있던 일이 있었습니다.
+    """
+    css = body(client().get("/static/store.css"))
+    assert "[hidden]{display:none !important;}" in css
+    print("PASS  hidden 은 display 규칙을 이김")
+
+
 def test_policy_tables_stack_on_phone():
     """폰에서 규정 표가 두 칸으로 서면 오른쪽이 좁아 두세 글자씩 끊깁니다."""
     guide = body(client().get("/guide"))
@@ -4560,6 +4633,8 @@ def run_all():
     test_lineup_takes_the_home_middle()
     test_menu_has_no_duplicates()
     test_mobile_quick_bar()
+    test_word_study_screen()
+    test_hidden_really_hides()
     test_policy_tables_stack_on_phone()
     test_nanumsquareround_font_is_served()
     test_file_path_traversal_blocked()

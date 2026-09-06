@@ -1,0 +1,374 @@
+{% extends "base.html" %}
+{% block title %}{{ b.name }} 단어 풀기 · {{ site.brand }}{% endblock %}
+{% block desc %}{{ b.name }} 단어를 화면에서 한 문제씩 풀어 보세요. 틀린 단어는 그대로 시험지로 뽑을 수 있습니다.{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap narrow">
+
+    <div class="sq-top">
+      <div class="sq-step">
+        <span class="sq-label" id="sq-label">QUESTION 1 / {{ deck|length }}</span>
+        <span class="sq-bar"><i id="sq-fill"></i></span>
+      </div>
+      <div class="sq-tools">
+        <button type="button" class="sq-tool" id="sq-sound" aria-pressed="true">소리 켬</button>
+        <a class="sq-tool" href="{{ again_url }}">처음부터</a>
+      </div>
+    </div>
+
+    <div class="sq-play" id="sq-play">
+      <div class="sq-card" id="sq-card">
+        <p class="sq-ask" id="sq-ask"></p>
+        <b class="sq-word" id="sq-word"></b>
+        <p class="sq-unit muted" id="sq-unit"></p>
+        <div class="sq-say" id="sq-say"></div>
+        <p class="sq-warn" id="sq-warn" hidden>영단어 듣기는 오답으로 기록돼요.</p>
+      </div>
+
+      {# 뜻 고르기 #}
+      <ol class="sq-choices" id="sq-choices"></ol>
+
+      {# 철자 채우기 #}
+      <div class="sq-spell" id="sq-spell" hidden>
+        <div class="sq-boxes" id="sq-boxes"></div>
+        <p class="sq-tip">화면의 알파벳이나 실제 키보드로 입력하세요.</p>
+        <div class="sq-keys" id="sq-keys"></div>
+        <div class="sq-acts">
+          <button type="button" class="sq-act" id="sq-back">한 글자 지우기</button>
+          <button type="button" class="sq-act go" id="sq-ok" disabled>확인</button>
+          <button type="button" class="sq-act" id="sq-skip">모르겠어요 · 다음 단어</button>
+        </div>
+      </div>
+
+      <p class="sq-mark" id="sq-mark" hidden></p>
+    </div>
+
+    {# 다 풀고 나서 #}
+    <div class="sq-done" id="sq-done" hidden>
+      <div class="sq-score">
+        <span class="sq-score-n"><b id="sq-hit">0</b> / {{ deck|length }}</span>
+        <p class="muted mb-0" id="sq-say-done"></p>
+      </div>
+      <div class="sq-wrongbox" id="sq-wrongbox" hidden>
+        <h3>틀린 단어</h3>
+        <ul class="sq-wrong" id="sq-wrong"></ul>
+      </div>
+      <div class="sq-again">
+        <a class="btn btn-primary" id="sq-retry" href="#" hidden>틀린 것만 다시 풀기</a>
+        <a class="btn btn-ghost" href="{{ again_url }}">처음부터 다시</a>
+      </div>
+      <div class="sq-print" id="sq-print" hidden>
+        <h3>틀린 단어로 시험지 만들기</h3>
+        <p class="muted">방금 틀린 단어만 모아 <b>시험지와 정답지</b>를 뽑습니다.
+          그대로 인쇄해 다시 풀어 보시거나 학생에게 나눠 주시면 됩니다.</p>
+        <a class="btn btn-primary" id="sq-sheet" href="#">틀린 단어 시험지 만들기 →</a>
+      </div>
+      <p class="sq-foot muted">
+        <a href="{{ url_for('words_book', slug=b.slug) }}">← {{ b.name }} 다른 범위 고르기</a>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<script type="application/json" id="sq-deck">{{ deck|tojson }}</script>
+<script>
+(function () {
+  var deck = JSON.parse(document.getElementById('sq-deck').textContent);
+  if (!deck.length) return;
+  var SHEET = {{ url_for('words_sheet', slug=b.slug)|tojson }};
+  var STUDY = {{ url_for('words_study', slug=b.slug)|tojson }};
+  var $ = function (id) { return document.getElementById(id); };
+
+  var idx = 0, hit = 0, wrong = [], locked = false, typed = [], heard = false;
+
+  /* ---- 소리 ---------------------------------------------------------- */
+  /* 브라우저에 들어 있는 목소리를 씁니다. 따로 파일을 받지 않습니다. */
+  var sound = true;
+  try { sound = localStorage.getItem('sq-sound') !== 'off'; } catch (e) {}
+  var voices = [];
+  function loadVoices() { try { voices = speechSynthesis.getVoices() || []; } catch (e) {} }
+  if (window.speechSynthesis) {
+    loadVoices();
+    speechSynthesis.onvoiceschanged = loadVoices;
+  }
+  function voiceFor(lang) {
+    var want = lang.slice(0, 2);
+    for (var i = 0; i < voices.length; i++) {
+      if ((voices[i].lang || '').toLowerCase().replace('_', '-').indexOf(want) === 0) {
+        return voices[i];
+      }
+    }
+    return null;
+  }
+  function say(text, lang) {
+    if (!sound || !window.speechSynthesis || !text) return;
+    try {
+      speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = lang;
+      var v = voiceFor(lang);
+      if (v) u.voice = v;
+      u.rate = lang.indexOf('en') === 0 ? 0.9 : 1;
+      speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+  function paintSound() {
+    var btn = $('sq-sound');
+    btn.textContent = sound ? '소리 켬' : '소리 끔';
+    btn.setAttribute('aria-pressed', sound ? 'true' : 'false');
+    btn.classList.toggle('off', !sound);
+  }
+  $('sq-sound').addEventListener('click', function () {
+    sound = !sound;
+    try { localStorage.setItem('sq-sound', sound ? 'on' : 'off'); } catch (e) {}
+    if (!sound && window.speechSynthesis) speechSynthesis.cancel();
+    paintSound();
+  });
+  paintSound();
+
+  /* ---- 한 문제 그리기 ------------------------------------------------- */
+  function q() { return deck[idx]; }
+
+  var started = false;
+  function render() {
+    var it = q();
+    locked = false; heard = false; typed = [];
+    /* 철자 문제는 자판까지 있어 화면이 길어집니다. 폰에서 다음 문제로 넘어갈 때
+       문제 카드가 화면 위로 밀려나 있지 않도록 맨 위로 되돌립니다. */
+    if (started) window.scrollTo(0, 0);
+    started = true;
+    $('sq-label').textContent =
+      (it.kind === 'spell' ? 'SPELLING ' : 'QUESTION ') + (idx + 1) + ' / ' + deck.length;
+    $('sq-fill').style.width = ((idx) / deck.length * 100) + '%';
+    $('sq-mark').hidden = true;
+    $('sq-mark').className = 'sq-mark';
+    $('sq-unit').textContent = it.unit || '';
+    $('sq-warn').hidden = it.kind !== 'spell';
+
+    if (it.kind === 'choice') {
+      $('sq-ask').textContent = '다음 영단어의 뜻은?';
+      $('sq-word').textContent = it.en;
+      $('sq-word').className = 'sq-word en';
+      $('sq-say').innerHTML = '<button type="button" class="sq-listen" data-say="en">단어 듣기</button>';
+      $('sq-choices').hidden = false;
+      $('sq-spell').hidden = true;
+      drawChoices(it);
+      say(it.en, 'en-US');
+    } else {
+      $('sq-ask').textContent = '다음 뜻에 알맞은 영어 철자를 완성하세요.';
+      $('sq-word').textContent = it.ko;
+      $('sq-word').className = 'sq-word ko';
+      $('sq-say').innerHTML =
+        '<button type="button" class="sq-listen" data-say="ko">뜻 듣기</button>' +
+        '<button type="button" class="sq-listen warn" data-say="spell">영단어 듣기</button>';
+      $('sq-choices').hidden = true;
+      $('sq-spell').hidden = false;
+      drawSpell(it);
+      say(it.ko, 'ko-KR');
+    }
+  }
+
+  $('sq-say').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-say]');
+    if (!b || locked) return;
+    var it = q();
+    if (b.dataset.say === 'en') say(it.en, 'en-US');
+    else if (b.dataset.say === 'ko') say(it.ko, 'ko-KR');
+    else {
+      /* 철자 문제에서 영단어를 들려주면 답을 알려 주는 셈이라 오답으로 둡니다 */
+      heard = true;
+      b.classList.add('used');
+      say(it.en, 'en-US');
+    }
+  });
+
+  /* ---- 뜻 고르기 ------------------------------------------------------ */
+  var NUM = ['①', '②', '③', '④', '⑤'];
+  function drawChoices(it) {
+    var ol = $('sq-choices');
+    ol.innerHTML = '';
+    it.choices.forEach(function (ko, i) {
+      var li = document.createElement('li');
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'sq-choice';
+      b.dataset.i = i;
+      b.innerHTML = '<span class="sq-no">' + NUM[i] + '</span><span>' + esc(ko) + '</span>';
+      li.appendChild(b);
+      ol.appendChild(li);
+    });
+  }
+  $('sq-choices').addEventListener('click', function (e) {
+    var b = e.target.closest('.sq-choice');
+    if (!b || locked) return;
+    var it = q(), got = +b.dataset.i, ok = got === it.answer;
+    locked = true;
+    b.classList.add(ok ? 'right' : 'wrong');
+    if (!ok) {
+      $('sq-choices').children[it.answer].firstChild.classList.add('right');
+    }
+    score(ok, it);
+    setTimeout(next, ok ? 700 : 1600);
+  });
+
+  /* ---- 철자 채우기 ---------------------------------------------------- */
+  var slots = [];                     /* 글자를 넣을 자리. 빈칸·붙임표는 미리 채워 둡니다 */
+  function drawSpell(it) {
+    slots = [];
+    var boxes = $('sq-boxes');
+    boxes.innerHTML = '';
+    for (var i = 0; i < it.en.length; i++) {
+      var ch = it.en[i], fixed = !/[a-z]/i.test(ch);
+      var d = document.createElement('span');
+      d.className = 'sq-box' + (fixed ? ' fixed' : '');
+      d.textContent = fixed ? (ch === ' ' ? '·' : ch) : '';
+      boxes.appendChild(d);
+      slots.push({el: d, fixed: fixed, want: ch.toLowerCase()});
+    }
+    var keys = $('sq-keys');
+    keys.innerHTML = '';
+    it.keys.forEach(function (c) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'sq-key' + (it.vowels.indexOf(c) >= 0 ? ' vowel' : '');
+      b.dataset.k = c;
+      b.textContent = c;
+      keys.appendChild(b);
+    });
+    paintBoxes();
+  }
+  function openSlot() {
+    for (var i = 0; i < slots.length; i++) {
+      if (!slots[i].fixed && typed[i] === undefined) return i;
+    }
+    return -1;
+  }
+  function paintBoxes() {
+    var here = openSlot();
+    slots.forEach(function (s, i) {
+      if (s.fixed) return;
+      s.el.textContent = typed[i] || '';
+      s.el.classList.toggle('on', i === here);
+      s.el.classList.toggle('has', !!typed[i]);
+    });
+    $('sq-ok').disabled = openSlot() !== -1;
+  }
+  function put(c) {
+    if (locked) return;
+    var i = openSlot();
+    if (i === -1) return;
+    typed[i] = c;
+    paintBoxes();
+  }
+  function back() {
+    if (locked) return;
+    for (var i = slots.length - 1; i >= 0; i--) {
+      if (!slots[i].fixed && typed[i] !== undefined) { delete typed[i]; break; }
+    }
+    paintBoxes();
+  }
+  $('sq-keys').addEventListener('click', function (e) {
+    var b = e.target.closest('.sq-key');
+    if (b) put(b.dataset.k);
+  });
+  $('sq-back').addEventListener('click', back);
+  $('sq-ok').addEventListener('click', check);
+  $('sq-skip').addEventListener('click', function () { if (!locked) give(); });
+
+  document.addEventListener('keydown', function (e) {
+    if ($('sq-spell').hidden || $('sq-done').hidden === false || locked) return;
+    if (e.key === 'Backspace') { e.preventDefault(); back(); }
+    else if (e.key === 'Enter') { e.preventDefault(); if (!$('sq-ok').disabled) check(); }
+    else if (/^[a-zA-Z]$/.test(e.key)) { e.preventDefault(); put(e.key.toLowerCase()); }
+  });
+
+  function said() {
+    return slots.map(function (s, i) {
+      return s.fixed ? s.want : (typed[i] || '');
+    }).join('');
+  }
+  function check() {
+    if (locked) return;
+    var it = q(), ok = said() === it.en.toLowerCase() && !heard;
+    locked = true;
+    slots.forEach(function (s, i) {
+      if (s.fixed) return;
+      s.el.classList.add(typed[i] === s.want ? 'right' : 'wrong');
+    });
+    if (said() !== it.en.toLowerCase()) showAnswer(it);
+    score(ok, it);
+    setTimeout(next, ok ? 700 : 1600);
+  }
+  function give() {
+    var it = q();
+    locked = true;
+    showAnswer(it);
+    score(false, it);
+    setTimeout(next, 1600);
+  }
+  function showAnswer(it) {
+    slots.forEach(function (s, i) {
+      if (!s.fixed) { s.el.textContent = s.want; s.el.classList.add('shown'); }
+    });
+    say(it.en, 'en-US');
+  }
+
+  /* ---- 채점과 넘기기 --------------------------------------------------- */
+  function score(ok, it) {
+    var m = $('sq-mark');
+    m.hidden = false;
+    m.className = 'sq-mark ' + (ok ? 'right' : 'wrong');
+    m.textContent = ok ? '맞았습니다' : (it.kind === 'choice' ? '정답: ' + it.choices[it.answer]
+                                                             : '정답: ' + it.en);
+    if (ok) hit++;
+    else wrong.push(it);
+  }
+  function next() {
+    idx++;
+    if (idx >= deck.length) return finish();
+    render();
+  }
+
+  function finish() {
+    $('sq-play').hidden = true;
+    $('sq-fill').style.width = '100%';
+    $('sq-label').textContent = '다 풀었습니다 · ' + deck.length + '문제';
+    $('sq-done').hidden = false;
+    $('sq-hit').textContent = hit;
+    $('sq-say-done').textContent =
+      wrong.length === 0 ? '한 문제도 안 틀리셨습니다.'
+      : wrong.length <= 2 ? '거의 다 맞히셨습니다. 틀린 것만 한 번 더 보시면 됩니다.'
+      : '틀린 단어를 모아 두었습니다. 아래에서 다시 푸시거나 시험지로 뽑으실 수 있습니다.';
+
+    if (wrong.length) {
+      $('sq-wrongbox').hidden = false;
+      var ul = $('sq-wrong');
+      ul.innerHTML = '';
+      wrong.forEach(function (it) {
+        var li = document.createElement('li');
+        li.innerHTML = '<b>' + esc(it.en) + '</b><span>' + esc(it.ko) + '</span>';
+        ul.appendChild(li);
+      });
+      var nos = wrong.map(function (it) { return it.no; });
+      var retry = $('sq-retry');
+      retry.hidden = false;
+      retry.href = STUDY + '?only=' + nos.join(',') + '&kind=choice&kind=spell';
+      $('sq-print').hidden = false;
+      $('sq-sheet').href = SHEET + '?kind=en_ko&n_en_ko=' + nos.length +
+        '&' + nos.map(function (n) { return 'pick=' + n; }).join('&');
+    }
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c];
+    });
+  }
+
+  render();
+})();
+</script>
+{% endblock %}

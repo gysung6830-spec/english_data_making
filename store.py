@@ -1459,6 +1459,91 @@ def build_quiz_picked(flat: list[dict], picks: dict[str, list[int]], seed: int) 
     return sections
 
 
+STUDY_KINDS = {"choice": "뜻 고르기", "spell": "철자 채우기"}
+STUDY_MAX = 40            # 한 판에 이만큼까지. 더 길면 지칩니다
+SPELL_MAX_LEN = 14        # 이보다 긴 단어는 철자로 내지 않습니다 — 손이 아픕니다
+SPELL_KEYS = 10           # 화면 자판에 놓을 글자 수
+VOWELS = "aeiou"
+
+
+def _letters(word: str) -> str:
+    """철자 문제로 쓸 수 있는 알파벳만."""
+    return "".join(c for c in word.lower() if c.isascii() and c.isalpha())
+
+
+def _decoys(answer: str, pool: list[dict], rng) -> list[str]:
+    """객관식 미끼 뜻 넷.
+
+    같은 강 단어에서 뽑되, 뜻이 같거나 첫 글자가 같은 것은 피합니다.
+    '유지하다' 옆에 '유지되다' 가 붙으면 문제가 아니라 시비가 됩니다.
+    """
+    head = answer[:1]
+    far = [x["ko"] for x in pool if x["ko"] != answer and x["ko"][:1] != head]
+    near = [x["ko"] for x in pool if x["ko"] != answer and x["ko"][:1] == head]
+    rng.shuffle(far)
+    rng.shuffle(near)
+    seen, out = {answer}, []
+    for ko in far + near:                     # 멀리 있는 것부터, 모자라면 가까운 것도
+        if ko in seen:
+            continue
+        seen.add(ko)
+        out.append(ko)
+        if len(out) == 4:
+            break
+    return out
+
+
+def _keypad(answer: str, pool: list[dict], rng) -> list[str]:
+    """화면 자판 — 답에 든 글자에 미끼 글자를 섞습니다.
+
+    자음과 모음을 갈라 놓으면 눈이 훨씬 덜 헤맵니다. 화면에서도 모음 쪽에
+    옅은 색을 깝니다.
+    """
+    need = sorted(set(_letters(answer)))
+    extra = [c for c in "abcdefghijklmnopqrstuvwxyz" if c not in need]
+    rng.shuffle(extra)
+    keys = set(need) | set(extra[:max(0, SPELL_KEYS - len(need))])
+    cons = sorted(c for c in keys if c not in VOWELS)
+    vows = sorted(c for c in keys if c in VOWELS)
+    return cons + vows
+
+
+def build_deck(words: list[dict], kinds: list[str], count: int, seed: int) -> list[dict]:
+    """화면에서 한 문제씩 푸는 한 판.
+
+    words 는 flat_words() 로 편 것이라 'no'(교재 안 번호)가 붙어 있습니다.
+    틀린 것을 모아 시험지 PDF 로 뽑을 때 그 번호를 그대로 씁니다.
+    """
+    rng = random.Random(seed)
+    pool = [w for w in words if w.get("en") and w.get("ko")]
+    if len(pool) < 5:                          # 보기 다섯 개를 못 채웁니다
+        kinds = [k for k in kinds if k != "choice"]
+    if not kinds or not pool:
+        return []
+
+    order = list(pool)
+    rng.shuffle(order)
+    order = order[:max(1, min(count, STUDY_MAX))]
+
+    deck = []
+    for i, w in enumerate(order):
+        kind = kinds[i % len(kinds)]
+        if kind == "spell" and len(_letters(w["en"])) > SPELL_MAX_LEN:
+            kind = "choice" if "choice" in kinds else kind
+        q = {"no": w.get("no", i), "en": w["en"], "ko": w["ko"],
+             "unit": w.get("unit", ""), "kind": kind}
+        if kind == "choice":
+            picks = [w["ko"]] + _decoys(w["ko"], pool, rng)
+            rng.shuffle(picks)
+            q["choices"] = picks
+            q["answer"] = picks.index(w["ko"])
+        else:
+            q["keys"] = _keypad(w["en"], pool, rng)
+            q["vowels"] = [c for c in q["keys"] if c in VOWELS]
+        deck.append(q)
+    return deck
+
+
 def read_picks(flat_len: int) -> dict[str, list[int]]:
     """주소에서 유형별 단어 번호를 읽습니다. (en_ko=0,3,7&ko_en=1,5)
 
@@ -1535,6 +1620,46 @@ def words_pick(slug):
     return render_template("words_pick.html", b=book, rows=rows, kinds=sc.QUIZ_KINDS,
                            unit_ids=unit_ids, defaults=QUIZ_DEFAULT, cap=QUIZ_MAX,
                            units=[u for u in book["units"] if u["id"] in unit_ids])
+
+
+@app.route("/words/<slug>/study")
+def words_study(slug):
+    """화면에서 한 문제씩 푸는 자리. 뜻 고르기와 철자 채우기.
+
+    회원가입도 로그인도 없습니다. 푼 기록은 그 브라우저에만 남고,
+    틀린 단어는 그대로 시험지 PDF 로 넘어갑니다.
+    """
+    book = sc.find_wordbook(slug)
+    if book is None:
+        abort(404)
+    ids = {u.get("id") for u in book["units"]}
+    unit_ids = [u for u in request.args.getlist("unit") if u in ids]
+    if not unit_ids:
+        unit_ids = [book["units"][0]["id"]] if book["units"] else []
+    kinds = [k for k in request.args.getlist("kind") if k in STUDY_KINDS] or ["choice", "spell"]
+    count = sc.to_int(request.args.get("n"), 0) or 10
+
+    rows = [w for w in flat_words(book) if w["unit_id"] in unit_ids]
+    # 틀린 것만 다시 풀 때 — 아까 틀린 단어 번호만 넘어옵니다
+    only = [sc.to_int(x, -1) for x in request.args.get("only", "").split(",") if x]
+    if only:
+        keep = set(only)
+        rows = [w for w in flat_words(book) if w["no"] in keep]
+        count = len(rows)
+    if not rows:
+        return redirect(url_for("words_book", slug=slug))
+
+    seed = sc.to_int(request.args.get("seed"), 0) or random.randrange(1, 999999)
+    deck = build_deck(rows, kinds, count, seed)
+    if not deck:
+        return redirect(url_for("words_book", slug=slug))
+
+    names = [u.get("name") or u.get("id") for u in book["units"] if u["id"] in unit_ids]
+    again = url_for("words_study", slug=slug, unit=unit_ids, kind=kinds, n=count)
+    return render_template("words_study.html", b=book, deck=deck, seed=seed,
+                           unit_ids=unit_ids, unit_names=names, kinds=kinds,
+                           kind_labels=STUDY_KINDS, again_url=again,
+                           pool=len(rows), only=bool(only))
 
 
 def read_head() -> dict:

@@ -11,6 +11,17 @@
         단어를 하나하나 골라 만들기 →</a>
     </p>
 
+    {# 인쇄 말고 화면에서 바로 풀고 싶은 분을 위한 자리 #}
+    <div class="study-jump">
+      <div>
+        <b>화면에서 바로 풀어 보기</b>
+        <p>뜻 고르기와 철자 채우기를 한 문제씩. 소리로 읽어 주고,
+          <b>틀린 단어는 그대로 시험지로 뽑을 수 있습니다.</b></p>
+      </div>
+      <a class="btn btn-primary btn-sm" id="study-go"
+         href="{{ url_for('words_study', slug=b.slug) }}">단어 풀기 →</a>
+    </div>
+
     <div class="section-head">
       <h2>{{ b.name }}</h2>
       <p>{{ b['units']|length }}강 · 단어 {{ '{:,}'.format(total) }}개.
@@ -194,6 +205,29 @@
       if (!el.value.trim()) el.disabled = true;
     });
   });
+})();
+</script>
+
+<script>
+/* '단어 풀기' 는 위에서 체크하신 강을 그대로 들고 갑니다. */
+(function () {
+  var go = document.getElementById('study-go');
+  if (!go) return;
+  var base = go.getAttribute('href');
+  function sync() {
+    var on = [].filter.call(document.querySelectorAll('input[name=unit]'),
+                            function (el) { return el.checked; });
+    go.href = base + (on.length
+      ? '?' + on.map(function (el) { return 'unit=' + encodeURIComponent(el.value); }).join('&')
+      : '');
+  }
+  document.querySelectorAll('input[name=unit]').forEach(function (el) {
+    el.addEventListener('change', sync);
+  });
+  document.querySelectorAll('[data-all]').forEach(function (b) {
+    b.addEventListener('click', function () { setTimeout(sync, 0); });
+  });
+  sync();
 })();
 </script>
 {% endblock %}
