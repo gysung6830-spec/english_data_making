@@ -1697,19 +1697,28 @@ input[type=file]{
 .ur-name{font-size:14.5px; font-weight:700; white-space:nowrap;}
 .ur-pick small{font-size:11.5px; font-weight:500; color:var(--muted); white-space:nowrap;}
 .ur-pick:hover .ur-name{color:var(--brand);}
-.ur-mats{display:flex; flex-wrap:wrap; gap:6px; min-width:0;}
-.um{display:inline-flex; align-items:center; gap:5px; padding:5px 9px 5px 7px;
-  font-size:12.5px; font-weight:600; color:var(--ink-2); background:#fff;
-  border:1px solid var(--line-strong); border-radius:8px; cursor:pointer;
+.ur-mats{display:flex; flex-wrap:wrap; gap:8px; min-width:0;}
+/* 파는 단위 = 패키지. 한 칸이 곧 한 상품입니다. */
+.um{display:inline-flex; align-items:center; gap:8px; padding:7px 12px 7px 9px;
+  font-size:13px; font-weight:600; color:var(--ink-2); background:#fff;
+  border:1px solid var(--line-strong); border-radius:9px; cursor:pointer;
   white-space:nowrap; transition:background .12s, border-color .12s;}
-.um input{width:15px; height:15px; margin:0; accent-color:var(--brand); cursor:pointer;}
-.um-no{font-style:normal; font-weight:800; font-size:10.5px; color:var(--muted);}
+.um input{width:16px; height:16px; margin:0; accent-color:var(--brand); cursor:pointer;}
+.um-short{display:none;}
+.um-won{font-weight:800; color:var(--ink); letter-spacing:-.01em;}
+.um-won::after{content:"원"; font-size:11px; font-weight:600; color:var(--muted);
+  margin-left:1px;}
 .um:hover{border-color:var(--brand);}
 .um:has(input:checked){border-color:var(--brand); background:var(--brand-soft);
   color:var(--brand-dark);}
-.um:has(input:checked) .um-no{color:var(--brand);}
+.um:has(input:checked) .um-won{color:var(--brand-dark);}
 .um.have{background:#f3f5f4; color:var(--muted); cursor:default; border-style:dashed;}
 .um.have input{cursor:default;}
+.um.um-none{border-style:dashed; color:#c9ced2; cursor:default;
+  justify-content:center; min-width:96px;}
+/* 패키지마다 왼쪽에 색 띠 하나 — 위 칸과 같은 색으로 묶어 봅니다 */
+.um.pkg-analysis{box-shadow:inset 3px 0 0 #9dbdea;}
+.um.pkg-problem{box-shadow:inset 3px 0 0 #eaa87e;}
 .ur-sum{text-align:right; font-size:13px; color:var(--muted); white-space:nowrap;}
 .ur.on .ur-sum{color:var(--ink); font-weight:700;}
 
@@ -1718,8 +1727,10 @@ input[type=file]{
   .ur{grid-template-columns:1fr auto; gap:6px 10px; padding:11px 13px;}
   .ur-mats{grid-column:1 / -1;}
   .ur-sum{text-align:right;}
-  .um-name{display:none;}          /* 좁으면 번호만 — 위 패키지 칸에 이름이 있습니다 */
-  .um{padding:6px 9px;}
+  /* 좁으면 '지문 분석 패키지' 대신 '분석' — 이름은 위 칸에 적혀 있습니다 */
+  .um-name{display:none;}
+  .um-short{display:inline;}
+  .um{flex:1; justify-content:flex-start; padding:8px 10px;}
 }
 
 /* 강 고르기 아래 막대. 단어 고르기의 .pick-bar 와 이름이 겹쳐 서로 덮어썼습니다.

@@ -3135,12 +3135,15 @@ def test_book_pick_grid():
     assert page.count('class="ps-all"') == 2                 # 줄마다 '전체 고르기'
     # 한 칸에 자료가 여럿이면 함께 담깁니다
     assert f'value="{BOOK}-01-analysis"' in page
-    # 자료는 강 줄 안에 낱개로 펼쳐 둡니다 (접어 두면 아무도 안 펴 봅니다)
+    # 파는 단위는 패키지입니다 — 줄 안에도 패키지 칸만 (접는 표는 없습니다)
     assert "<details" not in page and "칸마다 하나씩 고르기" not in page
-    assert page.count('class="um ') == 4                     # 2강 × 자료 2종
-    assert 'data-mid="analysis"' in page and 'data-mid="variants"' in page
-    # 패키지 칸에는 무엇이 들어 있는지 적혀 있습니다
-    assert "지문분석지" in page and "17종 변형문제" in page
+    assert page.count('class="um pkg-') == 4                 # 2강 × 패키지 2종
+    assert 'data-kind="analysis"' in page and 'data-kind="problem"' in page
+    # 자료를 낱개로 체크하게 두지 않습니다 (지문분석지만 빼는 것은 안 되니까)
+    assert "data-mid=" not in page
+    # 무엇이 들어 있는지는 위 패키지 칸에 적어 둡니다
+    top = page[page.index('id="kind-chips"'):page.index('id="unit-chips"')]
+    assert "지문분석지" in top and "17종 변형문제" in top
     # 교재 전체 상품은 강 고르기 아래에 놓입니다
     assert page.index("필요한 단원만 고르세요") < page.index("전체를 한 번에")
     # 예전 주소는 그 자리로 보내 줍니다

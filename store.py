@@ -370,18 +370,22 @@ def product_detail(slug):
 def unit_grid(catalog: dict, slug: str) -> dict:
     """강(회차·과) 한 줄 = 그 강에 있는 자료 낱개들.
 
-    손님은 두 걸음으로 고릅니다. 위에서 **패키지**(지문 분석 · 문제)를 고르면
-    모든 강에서 그 자료들이 한꺼번에 켜지고, 아래 강 목록에서 **강마다** 필요한
-    것만 손봅니다. 그래서 줄 안에는 자료를 낱개로 펼쳐 둡니다 — 접어 두면
-    아무도 안 펴 보고, 결국 통째로만 사게 됩니다.
+    파는 단위는 **패키지**입니다. 지문 분석 패키지에서 '지문분석지만 빼기' 같은
+    것은 안 됩니다. 그래서 줄 안에도 패키지 칸만 둡니다 — 못 고르는 것을
+    체크칸으로 그려 놓으면 눌러 보고 나서야 아는, 못 미더운 화면이 됩니다.
+    무엇이 들어 있는지는 위 패키지 칸에 적어 둡니다.
+
+    손님은 두 걸음으로 고릅니다. 위에서 패키지를 고르면 모든 강에 한꺼번에
+    들어가고, 아래 강 목록에서 강마다 빼거나 더합니다.
     """
     items = [p for p in catalog["products"] if p.get("book") == slug and p.get("unit")]
     if not items:
-        return {"rows": [], "kinds": [], "kind_names": {},
+        return {"rows": [], "kinds": [], "kind_names": {}, "kind_shorts": {},
                 "kind_mats": {}, "kind_mat_ids": {}, "tiers": []}
 
     order = [pkg["id"] for pkg in catalog.get("packages", [])]
     names = {pkg["id"]: pkg["name"] for pkg in catalog.get("packages", [])}
+    shorts = {pkg["id"]: pkg.get("short") or pkg["name"] for pkg in catalog.get("packages", [])}
     kinds = sorted({p.get("package") for p in items if p.get("package")},
                    key=lambda k: order.index(k) if k in order else 99)
     mats = sc.material_map()
@@ -437,7 +441,7 @@ def unit_grid(catalog: dict, slug: str) -> dict:
     site = sc.load_site()
     tiers = sorted((site.get("discount") or {}).get("count_tiers") or [],
                    key=lambda t: sc.to_int(t.get("min"), 0))
-    return {"rows": rows, "kinds": kinds, "kind_names": names,
+    return {"rows": rows, "kinds": kinds, "kind_names": names, "kind_shorts": shorts,
             "kind_mats": kind_mats, "kind_mat_ids": kind_mat_ids, "tiers": tiers}
 
 

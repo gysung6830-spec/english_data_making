@@ -54,17 +54,25 @@
             {% if r.passages %}<small>지문 {{ r.passages }}개</small>{% endif %}
           </button>
           <div class="ur-mats">
-            {% for it in r['items'] %}
-              {% set have = it.slug in cart %}
-              <label class="um pkg-{{ it.pkg }}{{ ' have' if have }}"
-                     title="{{ it.name }} · {{ '{:,}'.format(it.price) }}원">
-                <input type="checkbox" name="slug" value="{{ it.slug }}"
-                       data-row="{{ r.no }}" data-price="{{ it.price }}"
-                       data-mid="{{ it.mid }}"
-                       {{ 'checked disabled' if have }}>
-                <i class="um-no">{{ it.no }}</i>
-                <span class="um-name">{{ it.name }}</span>
-              </label>
+            {# 파는 단위는 패키지입니다. 못 고르는 자료를 체크칸으로 그려 두면
+               눌러 보고 나서야 아는 화면이 됩니다. #}
+            {% for m in kinds %}
+              {% set c = r.cells.get(m) %}
+              {% if c %}
+                {% set have = c.slugs.split(',')|reject('in', cart)|list|length == 0 %}
+                <label class="um pkg-{{ m }}{{ ' have' if have }}"
+                       title="{{ c.names|join(' · ') }}">
+                  <input type="checkbox" name="slug" value="{{ c.slugs }}"
+                         data-row="{{ r.no }}" data-kind="{{ m }}"
+                         data-price="{{ c.price }}"
+                         {{ 'checked disabled' if have }}>
+                  <span class="um-name">{{ kind_names.get(m, m) }}</span>
+                  <span class="um-short">{{ kind_shorts.get(m, m) }}</span>
+                  <b class="um-won">{{ '{:,}'.format(c.price) }}</b>
+                </label>
+              {% else %}
+                <span class="um um-none">—</span>
+              {% endif %}
             {% endfor %}
           </div>
           <div class="ur-sum"><b class="row-sum">—</b></div>
@@ -94,7 +102,6 @@
 (function () {
   var form = document.getElementById('pickform');
   if (!form) return;
-  var PKG = {{ kind_mat_ids|tojson }};          /* 패키지 → 그 안의 자료 이름들 */
   var boxes = [].slice.call(form.querySelectorAll('input[name=slug]:not([disabled])'));
   var unitChips = [].slice.call(form.querySelectorAll('.ur-pick'));
   var kindChips = [].slice.call(form.querySelectorAll('.pkg-pick'));
@@ -110,9 +117,8 @@
   function won(n) { return n.toLocaleString('ko-KR') + '원'; }
 
   function byRow(no)  { return boxes.filter(function (b) { return b.dataset.row === no; }); }
-  function byKind(k)  {
-    var want = PKG[k] || [];
-    return boxes.filter(function (b) { return want.indexOf(b.dataset.mid) >= 0; });
+  function byKind(k) {
+    return boxes.filter(function (b) { return b.dataset.kind === k; });
   }
   /* 다 켜짐 'on' · 일부 'some' · 다 꺼짐 '' */
   function state(list) {
