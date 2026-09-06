@@ -440,10 +440,10 @@ def unit_grid(catalog: dict, slug: str) -> dict:
     # 패키지마다 무엇이 들어 있는지 — 위쪽 패키지 칸에 적어 줍니다
     kind_mats = {}
     for kind in kinds:
-        kind_mats[kind] = [{"no": (mats.get(m) or {}).get("no", ""),
-                            "name": (mats.get(m) or {}).get("name", m),
+        kind_mats[kind] = [{"no": mats[m].get("no", ""), "name": mats[m]["name"],
                             "shared": m in shared}
-                           for m in of_pkg.get(kind, []) if m in have_mids]
+                           for m in of_pkg.get(kind, [])
+                           if m in have_mids and m in mats and mats[m].get("name")]
 
     site = sc.load_site()
     tiers = sorted((site.get("discount") or {}).get("count_tiers") or [],
@@ -591,7 +591,9 @@ def cart():
             suggest.append(mate)
     return render_template("cart.html", items=items, rows=rows, auto=auto,
                            subtotal=subtotal, final=subtotal - auto, suggest=suggest[:3],
-                           next_tier=sc.count_next(site, len(items)),
+                           next_tier=sc.count_next(site, sc.unit_count(items)),
+                           picked=sc.unit_count(items),
+                           pick_word=sc.count_word(items),
                            full_offer=sc.full_pack_offer(items, catalog))
 
 
@@ -652,7 +654,7 @@ def quote_for(items: list[dict], email: str, coupon_code: str) -> dict:
     subtotal = sum(int(x.get("price", 0)) for x in items)
     rows, auto = sc.auto_discounts(site, items)
     # 하나만 더 담으면 다음 단계로 넘어가는지 알려 주려고 봅니다
-    nxt = sc.count_next(site, len(items))
+    nxt = sc.count_next(site, sc.unit_count(items))
     coupon, coupon_cut, coupon_note = sc.check_coupon(coupon_code, subtotal - auto)
     return {
         "subtotal": subtotal, "rows": rows, "auto": auto, "next_tier": nxt,

@@ -2809,19 +2809,23 @@ def test_lineup_shots_upload_and_show():
     import io as _io
     a = admin()
     png = (b"\x89PNG\r\n\x1a\n" + b"0" * 60)          # 내용은 상관없습니다
+    before = sc.shot_files("analysis")          # 이미 걸려 있던 지면이 있을 수 있습니다
     resp = a.post("/admin/materials/analysis/shots",
                   data={"files": [(_io.BytesIO(png), "지면.png"),
                                   (_io.BytesIO(png), "지면2.PNG")]},
                   content_type="multipart/form-data", follow_redirects=True)
     assert resp.status_code == 200 and "2장을 올렸습니다" in body(resp)
-    # 올린 순서대로 번호가 붙습니다
-    assert sc.shot_files("analysis") == ["01.png", "02.png"]
+    # 올린 순서대로, 뒤 번호를 이어 붙입니다
+    now = sc.shot_files("analysis")
+    added = [f for f in now if f not in before]
+    assert len(added) == 2 and all(f.endswith(".png") for f in added), now
+    first, second = added
 
     text = body(client().get("/lineup"))
-    assert "/lineup/shot/analysis/01.png" in text
-    assert "실제 자료 지면 1 / 2" in text
+    assert f"/lineup/shot/analysis/{first}" in text
+    assert f"실제 자료 지면 {len(now)} / {len(now)}" in text
 
-    pic = client().get("/lineup/shot/analysis/01.png")
+    pic = client().get(f"/lineup/shot/analysis/{first}")
     assert pic.status_code == 200 and pic.data.startswith(b"\x89PNG")
     # 폴더 밖 · 사진이 아닌 파일 요청은 막습니다
     assert client().get("/lineup/shot/analysis/..%2f..%2fsite.json").status_code == 404
@@ -2833,9 +2837,9 @@ def test_lineup_shots_upload_and_show():
                  content_type="multipart/form-data", follow_redirects=True)
     assert "올릴 수 없는 형식" in body(bad)
 
-    a.post("/admin/materials/analysis/shots/01.png/delete", follow_redirects=True)
-    a.post("/admin/materials/analysis/shots/02.png/delete", follow_redirects=True)
-    assert sc.shot_files("analysis") == []
+    for name in added:
+        a.post(f"/admin/materials/analysis/shots/{name}/delete", follow_redirects=True)
+    assert sc.shot_files("analysis") == before
     print("PASS  자료 지면 사진 올리기 → 라인업 → 지우기")
 
 
@@ -3246,7 +3250,7 @@ def test_book_pick_grid():
     assert "필요한 단원만 고르세요" in page      # 교과서라 '강' 이 아니라 '단원'
     assert "모두 2단원" in page
     assert "1강" in page and "2강" in page                    # 줄
-    assert "3개부터" in page and "10%" in page                 # 담은 개수 할인 안내
+    assert "3단원부터" in page and "10%" in page               # 담은 강 수 할인 안내
     # 칸은 '자료 종류' 가 아니라 패키지입니다 — 2강 × 2패키지 = 네 칸
     assert page.count('class="um pkg-') == 4
 
@@ -3277,13 +3281,16 @@ def test_book_pick_grid():
     moved = c.get(f"/books/{BOOK}/pick")
     assert moved.status_code == 302 and moved.headers["Location"].endswith("#pick")
 
-    # 세 개를 담으면 10% 할인이 붙습니다
+    # 할인은 파일 수가 아니라 강(단원) 수로 셉니다.
+    # 파일 세 개라도 두 단원이면 아직 할인이 없습니다.
     c.post("/cart/add", data={"slug": [f"{BOOK}-01-analysis", f"{BOOK}-01-variants",
                                        f"{BOOK}-02-analysis"],
                               "next": "/cart"}, follow_redirects=True)
     q = c.get("/order/quote?cart=1").get_json()
     assert q["subtotal"] == 250*10 + 400*10 + 250*10
-    assert q["rows"][0]["percent"] == 10
+    assert q["rows"] == [], "두 단원인데 할인이 붙었습니다"
+    assert q["next_tier"] == {"min": 3, "percent": 10}
+    assert "1단원만 더" in body(c.get("/cart"))
 
     # 이미 담은 것은 잠긴 채로 보입니다
     again = body(c.get(f"/books/{BOOK}"))
@@ -3416,6 +3423,14 @@ def test_disk_keeps_your_files_but_refreshes_the_rest():
 
         assert sc.seed_data_dir() == []                       # 첫 배포
         assert (disk / "materials.json").read_text() == '{"v":1}'
+
+        # 이미 깔려 있는데 견줄 판이 없던 경우 (예전 방식으로 깔린 디스크)
+        (disk / "materials.json").write_text('{"v":0}', encoding="utf-8")
+        shutil.rmtree(disk / sc.SEED_COPY)
+        assert sc.seed_data_dir() == ["materials.json"]
+        assert (disk / "materials.json").read_text() == '{"v":1}', "새 판을 못 받았습니다"
+        # 있던 것은 버리지 않고 남겨 둡니다
+        assert (disk / sc.SEED_COPY / "materials.json.before").read_text() == '{"v":0}'
 
         # 저장소에서 자료 정의를 고쳐 다시 배포 — 손 안 댔으니 새 판으로
         (bundle / "materials.json").write_text('{"v":2}', encoding="utf-8")

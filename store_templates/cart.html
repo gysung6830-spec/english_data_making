@@ -102,7 +102,7 @@
         <div class="sum-row sum-final"><span>예상 금액</span><b>{{ final|won }}</b></div>
       </div>
       <p class="muted" style="font-size:13.5px;margin:-6px 0 18px;">
-        {% if next_tier %}<b>{{ next_tier.min - items|length }}개만 더</b> 담으시면
+        {% if next_tier %}<b>{{ next_tier.min - picked }}{{ pick_word }}만 더</b> 담으시면
           {{ next_tier.percent }}% 할인이 붙습니다. {% endif %}쿠폰은 주문서에서 넣으시면 됩니다.
       </p>
 

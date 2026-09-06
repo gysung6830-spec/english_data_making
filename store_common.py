@@ -124,15 +124,25 @@ def seed_data_dir() -> list[str]:
         if src.name.startswith(".") or src.name in YOURS:
             continue
         dest, mark = DATA_DIR / src.name, kept / src.name
-        if not dest.exists():                       # 처음 올라간 것
+        if not dest.exists():                       # 디스크가 비어 있던 자리
             _put(src, dest)
-        elif not _same(src, mark) and _same(dest, mark):
-            _put(src, dest)                         # 손 안 댄 것만 새 판으로
-            fresh.append(src.name)
-        elif not _same(dest, mark):
+        elif not mark.exists():
+            # 견줄 판이 아직 없는 첫 배포입니다. 여기 남은 것은 자료 정의처럼
+            # 제가 코드와 함께 고치는 것들뿐이라(사장님 몫은 YOURS 로 이미 빼
+            # 두었습니다) 새 판을 씁니다. 혹시 몰라 있던 것은 .seeded 에
+            # '<이름>.before' 로 남겨 둡니다.
+            if not _same(src, dest):
+                _put(dest, kept / (src.name + ".before"))
+                _put(src, dest)
+                fresh.append(src.name)
+        elif _same(dest, mark):                     # 손 안 대셨으면 새 판으로
+            if not _same(src, dest):
+                _put(src, dest)
+                fresh.append(src.name)
+        else:
             continue                                # 고치셨으니 그대로 둡니다
-        if not _same(src, mark):
-            _put(src, mark)
+        _put(src, mark)
+
     # 사장님 몫은 처음 한 번만 깔고, 그 뒤로는 절대 안 건드립니다
     for name in YOURS:
         src, dest = BUNDLED_DATA / name, DATA_DIR / name
@@ -1411,8 +1421,41 @@ def paid_order_count(email: str) -> int:
     return int(row["n"] if row else 0)
 
 
+def unit_count(items: list[dict]) -> int:
+    """몇 강어치를 담으셨는지. 할인은 파일 수가 아니라 **강 수**로 셉니다.
+
+    한 강의 지문 분석 패키지를 담으면 파일은 여섯 개가 들어옵니다. 그런데 산
+    것은 '3강 하나' 입니다. 파일 수로 세면 한 강만 담아도 최고 할인이 붙어,
+    많이 살수록 깎아 준다는 말이 거짓말이 됩니다.
+    """
+    seen = set()
+    for x in items:
+        unit = x.get("unit")
+        seen.add((x.get("book"), unit) if unit else ("", x.get("slug")))
+    return len(seen)
+
+
+def all_units(items: list[dict]) -> bool:
+    """담은 것이 모두 강 단위인지. 화면에 '강' 이라 적을지 '개' 라 적을지 가릅니다."""
+    return bool(items) and all(x.get("unit") for x in items)
+
+
+def count_word(items: list[dict]) -> str:
+    """담은 것을 뭐라고 셀지. 교재 종류가 섞이면 그냥 '개' 로 셉니다.
+
+    교과서는 단원, 모의고사는 회차라 부르는데 장바구니에는 섞여 들어옵니다.
+    한 종류만 담으셨을 때만 그 교재의 말로 세어 드립니다.
+    """
+    if not all_units(items):
+        return "개"
+    kinds = {x.get("category") for x in items}
+    if len(kinds) != 1:
+        return "개"
+    return unit_word({"category": kinds.pop()})["count"]
+
+
 def count_tier(site: dict, count: int) -> dict | None:
-    """담은 상품 개수에 맞는 할인 단계. 규칙은 이것 하나뿐입니다."""
+    """담은 강 수에 맞는 할인 단계. 규칙은 이것 하나뿐입니다."""
     cfg = site.get("discount") or {}
     if not cfg.get("count_enabled", True):
         return None
@@ -1447,9 +1490,10 @@ def auto_discounts(site: dict, items: list[dict], repeat_no: int = 0
     subtotal = sum(to_int(x.get("price"), 0) for x in items)
     rows: list[dict] = []
 
-    tier = count_tier(site, len(items))
+    n = unit_count(items)
+    tier = count_tier(site, n)
     if tier and subtotal > 0:
-        rows.append({"name": f"{len(items)}개 담기", "percent": tier["percent"],
+        rows.append({"name": f"{n}{count_word(items)} 담기", "percent": tier["percent"],
                      "amount": subtotal * tier["percent"] // 100})
 
     total = sum(r["amount"] for r in rows)

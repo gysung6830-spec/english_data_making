@@ -36,7 +36,7 @@
     <div class="pick-tiers">
       {% for t in tiers %}
         <span class="pt" data-min="{{ t.min }}" data-percent="{{ t.percent }}">
-          {{ t.min }}개부터 <b>{{ t.percent }}%</b></span>
+          {{ t.min }}{{ unit_word.count }}부터 <b>{{ t.percent }}%</b></span>
       {% endfor %}
     </div>
   {% endif %}
@@ -85,7 +85,7 @@
 
   <div class="unit-bar">
     <div class="pb-left">
-      자료 <b><span class="pb-count">0</span>개</b> 고름
+      <b><span class="pb-count">0</span>{{ unit_word.count }}</b> 고름<span class="pb-files muted"></span>
       <span class="pb-cut muted"></span>
     </div>
     <div class="pb-right">
@@ -120,17 +120,21 @@
   function won(n) { return n.toLocaleString('ko-KR') + '원'; }
 
   /* 고른 칸들에 든 자료를 하나로 모읍니다. 두 패키지에 겹쳐 든 어휘리스트·
-     단어테스트는 여기서 저절로 한 번만 남습니다. */
+     단어테스트는 여기서 저절로 한 번만 남습니다.
+     할인은 파일 수가 아니라 **강 수** 로 셉니다 — 한 강을 담으면 파일은
+     여섯 개가 들어오지만 산 것은 한 강이니까요. */
   function pickedIn(list) {
-    var seen = Object.create(null), n = 0, sum = 0;
+    var seen = Object.create(null), rows = Object.create(null);
+    var files = 0, sum = 0, n = 0;
     list.forEach(function (b) {
       if (!b.checked) return;
+      if (!rows[b.dataset.row]) { rows[b.dataset.row] = 1; n += 1; }
       (b.dataset.slugs || '').split(',').forEach(function (s) {
         if (!s || seen[s]) return;
-        seen[s] = 1; n += 1; sum += PRICE[s] || 0;
+        seen[s] = 1; files += 1; sum += PRICE[s] || 0;
       });
     });
-    return {n: n, sum: sum};
+    return {n: n, files: files, sum: sum};
   }
 
   function byRow(no)  { return boxes.filter(function (b) { return b.dataset.row === no; }); }
@@ -153,6 +157,8 @@
 
   function tally() {
     var all = pickedIn(boxes), n = all.n, sum = all.sum;
+    form.querySelector('.pb-files').textContent =
+      all.files ? ' · 자료 ' + all.files + '개' : '';
     form.querySelectorAll('.ur').forEach(function (row) {
       var got = pickedIn([].slice.call(
         row.querySelectorAll('input[name=slug]:not([disabled])')));
