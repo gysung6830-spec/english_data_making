@@ -66357,33 +66357,38 @@
   "opts": [
    {
     "n": 1,
-    "tx": "‘good’ bugs that like to eat the more ①destructive pests",
+    "tx": "destructive",
     "verdict": "x",
-    "jd": "✘ 적절 — 이로운 벌레가 잡아먹는 대상은 ‘더 파괴적인(destructive)’ 해충이 맞아 문맥에 부합"
+    "jd": "✘ 적절 — 이로운 벌레가 잡아먹는 대상은 ‘더 파괴적인(destructive)’ 해충이 맞아 문맥에 부합",
+    "ko": "파괴적인"
    },
    {
     "n": 2,
-    "tx": "you are ②altering the ecosystem of an area that existed on its own",
+    "tx": "altering",
     "verdict": "x",
-    "jd": "✘ 적절 — 아무것도 심기 전부터 존재하던 생태계를 ‘바꾸는(altering)’ 것이 맞음"
+    "jd": "✘ 적절 — 아무것도 심기 전부터 존재하던 생태계를 ‘바꾸는(altering)’ 것이 맞음",
+    "ko": "바꾸는, 변경하는"
    },
    {
     "n": 3,
-    "tx": "wave after wave of pests are ③overtaking your plants",
+    "tx": "overtaking",
     "verdict": "x",
-    "jd": "✘ 적절 — 새 정원 초기엔 해충이 식물을 ‘장악하는(overtaking)’ 듯 느껴진다는 맥락에 부합(‘This is normal’로 자연 연결)"
+    "jd": "✘ 적절 — 새 정원 초기엔 해충이 식물을 ‘장악하는(overtaking)’ 듯 느껴진다는 맥락에 부합(‘This is normal’로 자연 연결)",
+    "ko": "장악하는, 압도하는"
    },
    {
     "n": 4,
-    "tx": "to ④allow the plants, pollinators, and even the annoying pests to balance out",
+    "tx": "allow",
     "verdict": "x",
-    "jd": "✘ 적절 — 환경과 함께 작동해 서로 ‘균형을 이루도록 허용(allow)’하는 것이 목표와 일치"
+    "jd": "✘ 적절 — 환경과 함께 작동해 서로 ‘균형을 이루도록 허용(allow)’하는 것이 목표와 일치",
+    "ko": "~하도록 허용하다"
    },
    {
     "n": 5,
-    "tx": "will only further these initial imbalances and ⑤shorten the process of helping your garden grow better on its own",
+    "tx": "shorten",
     "verdict": "ok",
-    "jd": "✔ 정답 — ‘오직 불균형을 심화시키고(further)’와 등위로 이어지는 결과는 부정적이어야 하는데, ‘⑤shorten(단축)’은 오히려 자생을 앞당기는 긍정적 결과라 모순. 제거는 자생 과정을 ‘지연·연장(lengthen·prolong)’시킨다가 맞아 문맥상 부적절"
+    "jd": "✔ 정답 — ‘오직 불균형을 심화시키고(further)’와 등위로 이어지는 결과는 부정적이어야 하는데, ‘⑤shorten(단축)’은 오히려 자생을 앞당기는 긍정적 결과라 모순. 제거는 자생 과정을 ‘지연·연장(lengthen·prolong)’시킨다가 맞아 문맥상 부적절",
+    "ko": "단축하다"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> shorten→lengthen(자생 과정을 지연시킴) · <span class=\"xo\">①</span>destructive <span class=\"xo\">②</span>altering <span class=\"xo\">③</span>overtaking <span class=\"xo\">④</span>allow 모두 문맥 적절",
