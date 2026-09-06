@@ -649,6 +649,24 @@ def test_ortica_badge_label():
     print("PASS  ORTICA 라벨 뱃지(01-A→A, 01-1→1번, Practice 제거)")
 
 
+def test_detect_style_and_rule():
+    # 지문 문체 자동 판별: 편지·안내문 → formal(합니다체), 설명문 → plain(한다체)
+    from src.worksheet import analyzer
+    letter = ("Dear Mrs. Rabinowitz, It was very kind of you to offer refreshments. "
+              "I feel terrible for the inconvenience. Regards, Martin")
+    expo = ("Photosynthesis converts light into energy. It occurs in chloroplasts. "
+            "The reaction produces oxygen as a byproduct of the process.")
+    assert analyzer.detect_style(letter) == "formal"
+    assert analyzer.detect_style(expo) == "plain"
+
+    # 문체별 프롬프트 규칙이 실제로 갈리는지(합니다체 통일 vs 한다체 통일)
+    pf = analyzer.analyze_prompt("It was kind of you.", 1, "full", [], style="formal")
+    pp = analyzer.analyze_prompt("It occurs in cells.", 1, "full", [], style="plain")
+    assert "합니다체" in pf and "당신/당신의" in pf and "한다체" not in pf.split("합니다체")[0][-40:]
+    assert "평서체(한다체" in pp
+    print("PASS  문체 자동 판별 + 문체별 프롬프트 규칙(합니다체/한다체 통일)")
+
+
 def test_verify_analyses():
     # 자동 오류검증: 원문 대조(숫자 누락) + 내부 정합성(직독직해 정렬)
     from src.worksheet import verify

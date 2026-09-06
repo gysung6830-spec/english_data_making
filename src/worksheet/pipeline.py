@@ -68,11 +68,15 @@ def analyze_text(client: "ClaudeClient", raw_text: str, header: Header,
     with_literal=True 면 직독직해(레이아웃 B: 청크·핵심 문법·핵심 단어)도 생성한다.
     """
     texts = splitter.split_sentences(raw_text)
+    # 문체(합니다체/한다체)는 지문 원문으로 '한 번' 정해 모든 문장에 같은 값을 넘긴다.
+    # (문장별 독립 호출이 지문 전체 문체를 못 보므로 여기서 통일한다.)
+    style = analyzer.detect_style(raw_text)
 
     def one(i_text):
         i, text = i_text
         s = analyzer.analyze_sentence(client, text, i + 1,
-                                      strength=header.strength, max_retries=max_retries)
+                                      strength=header.strength, max_retries=max_retries,
+                                      style=style)
         # 어법 요소를 (1)(2)…로 번호 매겨 오른쪽 '어법 Point' 박스로(내용 TMI 없음).
         gp = point_builder.build_grammar_point(s)
         s.points = [gp] if gp else []

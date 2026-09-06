@@ -118,7 +118,55 @@ def _strength_rule(strength: str) -> str:
     )
 
 
-def analyze_prompt(text: str, index: int, strength: str, hints: list[str]) -> str:
+# 편지·안내문·연설처럼 상대에게 직접 말 거는 글의 표지(합니다체로 통일)
+_LETTER_MARKERS = re.compile(
+    r"\b(dear|sincerely|regards|yours (truly|sincerely|faithfully)|"
+    r"to whom it may concern|warm(est)? regards|kind regards|best wishes)\b", re.I)
+
+
+def detect_style(text: str) -> str:
+    """지문 장르로 문체를 한 번 결정: 'formal'(합니다체) 또는 'plain'(한다체).
+
+    문장별 독립 분석이라 각 문장은 지문 전체를 못 본다. 지문 원문(raw_text) 하나로
+    문체를 정해 모든 문장 호출에 같은 값을 넘겨야 한 지문 안에서 종결어미·2인칭이
+    일관된다. 편지·안내문·연설처럼 상대에게 말 거는 글이면 formal, 그 외 설명·논설·
+    서사문이면 plain.
+    """
+    t = text or ""
+    if _LETTER_MARKERS.search(t):
+        return "formal"
+    low = t.lower()
+    you = len(re.findall(r"\b(you|your|yours|you're|you'd|you've|you'll)\b", low))
+    words = max(1, len(re.findall(r"[A-Za-z']+", low)))
+    # 2인칭 밀도가 높고(요청·안내문 등) 충분히 등장하면 상대에게 말하는 글로 간주
+    if you >= 3 and you / words > 0.03:
+        return "formal"
+    return "plain"
+
+
+def _style_rule(style: str) -> str:
+    """한 지문 안에서 문체·호칭을 통일시키는 규칙(translation·reading_ko 공통)."""
+    if style == "formal":
+        return (
+            "- ⚠️ 문체·호칭 통일(translation·reading_ko 공통, 지문 전체에서 동일): 이 지문은 "
+            "편지·안내문·연설 등 '상대에게 말하는 글'입니다. "
+            "① 종결어미는 언제나 '합니다체(…입니다/…합니다/…했습니다/…하십시오)'로 통일하고 "
+            "한다체(…이다/…한다/…했다)와 절대 섞지 마세요. "
+            "② 2인칭 you·your 는 언제나 '당신/당신의'로 옮기고 '여러분·귀하·너' 등으로 문장마다 바꾸지 마세요. "
+            "③ 1인칭은 I=저, we=저희, my=제/저의 로 통일합니다. "
+            "④ 호칭·서명(Dear …/Sincerely 등)은 관례 표현을 쓰되 위 문체와 어긋나지 않게 하세요.\n"
+        )
+    return (
+        "- ⚠️ 문체·호칭 통일(translation·reading_ko 공통, 지문 전체에서 동일): 이 지문은 "
+        "설명·논설·서사문입니다. "
+        "① 종결어미는 '평서체(한다체: …이다/…한다/…했다)'로 통일하고 합니다체와 절대 섞지 마세요. "
+        "② 일반 독자를 가리키는 you 는 한 지문 안에서 하나(기본 '당신')로 고정하고 문장마다 바꾸지 마세요. "
+        "③ 1인칭 대명사도 한 가지로 통일합니다.\n"
+    )
+
+
+def analyze_prompt(text: str, index: int, strength: str, hints: list[str],
+                   style: str = "plain") -> str:
     hint_block = ""
     if hints:
         hint_block = "\n[규칙기반 힌트(참고용, 틀리면 무시)]\n- " + "\n- ".join(hints) + "\n"
@@ -225,6 +273,7 @@ def analyze_prompt(text: str, index: int, strength: str, hints: list[str]) -> st
         "- underline: 특정 표현을 밑줄로 강조할 때만 true.\n"
         + _strength_rule(strength) +
         "- translation: 이 문장의 자연스러운 한국어 해석(직독직해체).\n"
+        + _style_rule(style) +
         "- gloss_en / gloss_ko: 직역만으로는 뜻이 안 통하고 '맥락을 알아야 풀리는' 함축 문장일 때만, 그 함축 의미를 "
         "쉬운 영어 한 문장(gloss_en)과 한글 한 문장(gloss_ko)으로 '병기'. 아니면 둘 다 빈 문자열.\n"
         "- badge: 서술형 출제 후보면 '서'. (빈출은 뱃지 대신 노란 형광 hl='y' 로 표시)\n"
@@ -478,16 +527,19 @@ def analyze_sentence(
     index: int,
     strength: str = STRENGTH_FULL,
     max_retries: int = 1,
+    style: str = "plain",
 ) -> Sentence:
     """LLM 로 문장 1개를 태깅하여 Sentence 반환 (points 는 point_builder 가 채움).
 
     강도='없음'이어도 해석(translation)은 필요하므로 LLM 을 호출하되 태깅만 생략한다.
+    style 은 지문 단위로 정한 문체('formal'=합니다체 / 'plain'=한다체)로, 한 지문의
+    모든 문장에 같은 값을 넘겨 종결어미·2인칭을 일관되게 한다(detect_style).
     (API 없이 배관만 볼 때는 pipeline.analyze_text_rule_only 를 쓴다.)
     """
     hints = rule_hints(text) if strength != STRENGTH_NONE else []
     sa = client.structured(
         system=SYSTEM,
-        prompt=analyze_prompt(text, index, strength, hints),
+        prompt=analyze_prompt(text, index, strength, hints, style=style),
         model_cls=SentenceAnalysis,
         max_tokens=4000,
         max_retries=max_retries,
