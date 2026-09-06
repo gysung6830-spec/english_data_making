@@ -703,7 +703,7 @@
       "category": "mock",
       "package": "analysis",
       "name": "맛보기 · 모의고사 5지문 지문 분석 패키지",
-      "subtitle": "부담 없이 품질만 확인해 보세요",
+      "subtitle": "5지문만 담았습니다. 값보다 품질을 먼저 보세요",
       "price": 3800,
       "passages": 5,
       "grade": "고2~고3",
@@ -727,7 +727,8 @@
       ],
       "format": "PDF (A4, 인쇄용)",
       "sample_file": "sample_analysis.pdf",
-      "sample": true
+      "sample": true,
+      "taste": true
     },
     {
       "slug": "ebs-2026-tokgang-eng-01-oneline-ko",

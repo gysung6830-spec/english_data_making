@@ -261,7 +261,9 @@ def products():
     order = request.args.get("order", "")
     q = sc.clean(request.args.get("q"), 60)
 
-    items = catalog["products"]
+    # 맛보기는 자료 목록에 안 겁니다. '무엇을 만드는지' 를 보고 나서 한 번
+    # 써 보는 것이라, 오르티카 라인업 쪽에 있어야 말이 됩니다.
+    items = [p for p in catalog["products"] if not p.get("taste")]
     books = sc.books_with_counts(catalog, selected)
 
     # 분류 안을 한 번 더 가르는 갈래. 모의고사는 학년, 교과서는 과목으로 갈립니다.
@@ -518,6 +520,8 @@ def lineup():
                            groups=sc.grouped_materials(),
                            cat_preview=category_preview(sc.load_catalog()),
                            shots=shots, mto_days=sc.MTO_DAYS,
+                           tastes=[p for p in sc.load_catalog()["products"]
+                                   if p.get("taste")],
                            ready_samples=ready, sample_count=len(ready))
 
 

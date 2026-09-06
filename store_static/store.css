@@ -599,6 +599,24 @@ label.dropzone{
 .dropzone.has .dz-title{color:var(--brand);}
 @media (max-width:640px){ .dropzone{padding:24px 14px;} }
 
+/* 맛보기 — 값을 치르고 한 번 써 보는 자리 */
+.taste-list{display:flex; flex-direction:column; gap:12px; margin-bottom:16px;}
+.taste{display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+  padding:20px 22px; background:var(--card); border:1px solid var(--brand);
+  border-radius:var(--r); box-shadow:0 2px 10px rgba(20,107,74,.06);}
+.taste-head{flex:1; min-width:250px; word-break:keep-all;}
+.taste-head > b{display:block; font-size:17.5px; letter-spacing:-.02em; margin:6px 0 4px;}
+.taste-head p{font-size:14px; color:var(--muted);}
+.taste-head .chips{margin-top:10px;}
+.taste-buy{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+.taste-buy .price{font-size:22px; font-weight:800; letter-spacing:-.03em;}
+.taste-more{font-size:13.5px; color:var(--muted); white-space:nowrap;}
+.taste-more:hover{color:var(--brand);}
+@media (max-width:640px){
+  .taste{padding:18px;}
+  .taste-buy{width:100%; justify-content:space-between;}
+}
+
 /* 샘플 PDF 모아 보기 */
 .sample-list{display:flex; flex-direction:column; gap:10px;}
 

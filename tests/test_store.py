@@ -2836,6 +2836,35 @@ def test_made_to_order_has_its_own_way_in():
     print("PASS  주문제작 자료 — 신청 → 내 자료함 → 이메일")
 
 
+def test_taster_lives_on_the_lineup_not_the_list():
+    """맛보기는 '무엇을 만드는지' 를 본 그 자리에 있어야 합니다."""
+    taste = [p for p in sc.load_catalog()["products"] if p.get("taste")]
+    assert taste, "맛보기 상품이 없습니다"
+    one = taste[0]
+
+    # 자료 목록에는 안 겁니다 (낱개 자료로 떠돌지 않게)
+    listing = body(client().get("/products"))
+    assert one["name"] not in listing
+    assert f'value="{one["slug"]}"' not in listing
+
+    # 라인업의 '사기 전에' 자리에 있고, 거기서 바로 담깁니다
+    page = body(client().get("/lineup"))
+    assert 'class="taste"' in page and one["name"] in page
+    assert f'value="{one["slug"]}"' in page
+    head = page.index('id="samples"')
+    assert head < page.index('class="taste"'), "맛보기가 그 자리 밖에 있습니다"
+
+    # 눌러 담으면 장바구니에 들어갑니다
+    c = client()
+    c.post("/cart/add", data={"slug": one["slug"], "next": "/cart"}, follow_redirects=True)
+    assert one["name"] in body(c.get("/cart"))
+    c.post("/cart/clear")
+
+    # 상품 화면은 그대로 열립니다 (링크를 받아 오신 분도 사실 수 있게)
+    assert client().get(f"/products/{one['slug']}").status_code == 200
+    print("PASS  맛보기는 라인업에 · 자료 목록에는 없음")
+
+
 def test_sample_pdf_links_go_somewhere():
     """'자료 샘플 PDF' 를 눌렀는데 아무 일도 안 일어나면 안 됩니다."""
     home = body(client().get("/"))
@@ -2849,7 +2878,7 @@ def test_sample_pdf_links_go_somewhere():
         assert page.count('class="mat-sample"') >= len(ready)
     else:
         # 아직 없으면 없다고 말하고, 대신 볼 것으로 보냅니다
-        assert "샘플 PDF를 준비하고 있습니다" in page
+        assert "샘플 PDF는 준비하고 있습니다" in page or "샘플 PDF를 준비하고 있습니다" in page
         assert "무료 자료 받으러 가기" in page
 
     # 첫날 체크리스트가 몇 종이 비었는지 세어 줍니다
@@ -4258,6 +4287,7 @@ def run_all():
     test_list_hides_price_until_you_open_the_book()
     test_custom_request_takes_files_by_drag_and_drop()
     test_made_to_order_has_its_own_way_in()
+    test_taster_lives_on_the_lineup_not_the_list()
     test_sample_pdf_links_go_somewhere()
     test_lineup_shots_upload_and_show()
     test_mobile_filters_collapse()
