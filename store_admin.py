@@ -282,7 +282,13 @@ def orders():
     counts = {s: 0 for s in sc.ORDER_STATUSES}
     for row in db.execute("SELECT status, COUNT(*) c FROM orders GROUP BY status"):
         counts[row["status"]] = row["c"]
+    # 메일이 안 나가는 동안 손님이 자료함을 못 엽니다. 주소를 여기서 바로
+    # 복사해 카카오톡으로 보내 주실 수 있게 함께 넘깁니다.
+    locker_of = {r["id"]: url_for("my_locker", token=sc.locker_token(r["email"]),
+                                  _external=True)
+                 for r in rows if r["email"] and r["kind"] == "product"}
     return render_template("admin/orders.html", rows=rows, statuses=sc.ORDER_STATUSES,
+                           locker_of=locker_of, mail_ready=sc.mail_ready(),
                            kinds=sc.ORDER_KIND_LABELS, selected=status,
                            selected_kind=kind, q=q, counts=counts)
 

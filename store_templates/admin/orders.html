@@ -97,6 +97,13 @@
                 <button class="btn btn-primary btn-sm" type="submit">📤 자료 보내기</button>
               </form>
             {% endif %}
+            {# 메일이 안 나갈 때 손님이 자료함을 못 엽니다. 주소를 복사해
+               카카오톡으로 보내 주시면 됩니다. #}
+            {% if locker_of.get(r['id']) %}
+              <button type="button" class="btn btn-ghost btn-sm adm-copy"
+                      data-copy="{{ locker_of[r['id']] }}"
+                      style="margin-bottom:7px;">🔑 자료함 주소 복사</button>
+            {% endif %}
             <form class="inline-form" method="post"
                   action="{{ url_for('admin.order_update', order_id=r['id']) }}">
               <select name="status">
@@ -118,4 +125,37 @@
     <div class="empty"><b>해당하는 주문이 없습니다.</b>검색 조건을 바꿔 보세요.</div>
   {% endif %}
 </div>
+
+{% if not mail_ready %}
+  <div class="steps-help" style="background:#fff8f4;border-color:#f0d4c4;">
+    <b>지금은 자동 메일이 나가지 않습니다</b>
+    <div>'📤 자료 보내기' 를 눌러도 손님께 메일이 가지 않습니다. 대신
+      <b>🔑 자료함 주소 복사</b> 를 눌러 카카오톡으로 보내 주세요. 그 주소로
+      들어가면 산 자료를 모두 받으실 수 있습니다.<br>
+      Render 설정에 <code>SMTP_HOST</code> · <code>SMTP_USER</code> ·
+      <code>SMTP_PASS</code> 를 넣으시면 자동으로 나갑니다.</div>
+  </div>
+{% endif %}
+
+<script>
+/* 주소를 눌러 복사 — 카카오톡에 그대로 붙여 넣으시면 됩니다 */
+(function () {
+  document.querySelectorAll('.adm-copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var text = b.dataset.copy, was = b.textContent;
+      var done = function () {
+        b.textContent = '복사했습니다';
+        setTimeout(function () { b.textContent = was; }, 1800);
+      };
+      if (navigator.clipboard) { navigator.clipboard.writeText(text).then(done, done); }
+      else {
+        var t = document.createElement('textarea');
+        t.value = text; document.body.appendChild(t); t.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(t);
+      }
+    });
+  });
+})();
+</script>
 {% endblock %}

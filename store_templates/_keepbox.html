@@ -1,0 +1,38 @@
+{# 자료함 주소를 눈에 보이게 두고 한 번에 복사하는 칸.
+   부르실 때 keep_url 을 넘겨 주세요. 비밀번호가 없는 사이트라 이 주소가
+   곧 열쇠입니다. 즐겨찾기하라는 말만으로는 폰에서 거의 아무도 안 합니다. #}
+<div class="keep-box">
+  <b class="keep-title">이 주소가 자료함 열쇠입니다 — 저장해 두세요</b>
+  <div class="keep-row">
+    <input type="text" class="keep-url" value="{{ keep_url }}" readonly
+           aria-label="내 자료함 주소" onclick="this.select()">
+    <button type="button" class="btn btn-primary btn-sm keep-copy">주소 복사</button>
+  </div>
+  <p class="keep-tip">
+    이 주소는 <b>저절로 바뀌지 않습니다.</b> 즐겨찾기에 넣거나, 나에게 보내는
+    카카오톡·메모장에 붙여 두시면 언제든 다시 여실 수 있습니다.
+    <b>주소를 아는 사람은 누구나 열 수 있으니</b> 남에게 알려 주지 마세요.
+  </p>
+</div>
+<script>
+(function () {
+  document.querySelectorAll('.keep-copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var box = btn.closest('.keep-row').querySelector('.keep-url');
+      box.select();
+      box.setSelectionRange(0, 99999);          /* 폰에서도 다 잡히게 */
+      var done = function () {
+        btn.textContent = '복사했습니다';
+        setTimeout(function () { btn.textContent = '주소 복사'; }, 1800);
+      };
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(box.value).then(done, function () {
+          try { document.execCommand('copy'); done(); } catch (e) {}
+        });
+      } else {
+        try { document.execCommand('copy'); done(); } catch (e) {}
+      }
+    });
+  });
+})();
+</script>

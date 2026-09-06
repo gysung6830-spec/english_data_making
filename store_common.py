@@ -1608,13 +1608,18 @@ DELIVERY_LINES = {
     "file": "입금이 확인되면 <b>주문 화면에서 PDF 파일을 바로 내려받으실 수</b> 있습니다.",
 }
 DELIVERY_MAIL_NOTE = "내 자료함에도 남고, 같은 주소를 메일로도 한 번 더 보내 드립니다."
+# 메일 설정이 아직 없을 때. 못 보내면서 보낸다고 하면 손님은 오지 않을 메일을
+# 기다립니다. 자료함은 어느 쪽이든 열리므로 그것만 말합니다.
+DELIVERY_NO_MAIL_NOTE = "내 자료함에도 남아, 언제든 다시 받으실 수 있습니다."
 
 
 def delivery_line(site: dict | None = None, *, mail_note: bool = True) -> str:
     """'자료를 어떻게 받나요' 한 문장. 화면마다 다른 말을 하지 않게 합니다."""
     site = load_site() if site is None else site
     line = DELIVERY_LINES[delivery_mode(site)]
-    return f"{line} {DELIVERY_MAIL_NOTE}" if mail_note else line
+    if not mail_note:
+        return line
+    return f"{line} {DELIVERY_MAIL_NOTE if mail_ready() else DELIVERY_NO_MAIL_NOTE}"
 
 
 WATERMARK_MARKS = ["이름", "이메일", "주문번호", "브랜드", "날짜"]

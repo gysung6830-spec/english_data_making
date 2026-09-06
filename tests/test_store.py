@@ -2085,17 +2085,63 @@ def test_my_locker():
     assert "내 자료함" in again
     assert client().get("/my/없는열쇠123").status_code == 404
 
-    # 문 앞 화면: 이메일을 넣으면 주문 여부와 상관없이 같은 문구
+    # 문 앞 화면: 이메일을 넣으면 주문 여부와 상관없이 같은 문구가 나와야 합니다.
+    # (다르면 아무 주소나 넣어 보며 '이 사람이 샀는지' 를 알아낼 수 있습니다)
+    import os as _os
     got = body(client().post("/my", data={"email": "locker@example.com"}))
     never = body(client().post("/my", data={"email": "nobody@example.com"}))
-    assert "자료함 주소를 보내 드렸습니다" in got
-    assert "자료함 주소를 보내 드렸습니다" in never
+    assert got == never, "산 사람과 안 산 사람에게 다른 화면이 나갑니다"
+
+    # 메일을 못 보내는 동안에는 '보냈습니다' 라고 하면 안 됩니다 —
+    # 오지 않을 메일을 기다리게 됩니다
+    assert not sc.mail_ready()
+    assert "보내 드렸습니다" not in got
+    assert "메일 대신 바로 보내 드리겠습니다" in got and "문의" in got
+
+    # 메일이 나갈 수 있으면 예전대로 안내합니다
+    _os.environ["SMTP_HOST"] = "smtp.example.com"
+    try:
+        ok = body(client().post("/my", data={"email": "locker@example.com"}))
+        none2 = body(client().post("/my", data={"email": "nobody@example.com"}))
+        assert "자료함 주소를 보내 드렸습니다" in ok
+        assert ok == none2, "여기서도 두 화면이 같아야 합니다"
+    finally:
+        _os.environ.pop("SMTP_HOST", None)
+
     assert body(client().post("/my", data={"email": "이메일아님"})) .count("정확히 입력") == 1
+
+    # 주소가 곧 열쇠라, 눈에 보이게 내놓고 한 번에 복사하게 합니다
+    assert "keep-box" in text and 'class="keep-url"' in text
+    assert key in text, "자료함 주소가 화면에 안 보입니다"
 
     # 검색엔진이 열쇠 주소를 훑지 않게
     assert "Disallow: /my/" in body(client().get("/robots.txt"))
     assert "/my/" not in body(client().get("/sitemap.xml"))
-    print("PASS  내 자료함 — 다시 받기 · 인쇄 안내 · 열쇠 보호")
+    print("PASS  내 자료함 — 다시 받기 · 주소 저장 · 열쇠 보호 · 못 보낼 땐 사실대로")
+
+
+def test_owner_can_hand_out_locker_link():
+    """메일이 안 나가는 동안에도 사장님이 자료함 주소를 건네실 수 있어야 합니다.
+
+    손님이 자료함을 못 열면 산 자료를 못 받습니다. 메일이 막혀 있으면 관리자
+    화면에서 주소를 복사해 카카오톡으로 보내 주는 길이 있어야 합니다.
+    """
+    import re as _re
+    page = body(admin().get("/admin/orders"))
+    assert "자료함 주소 복사" in page
+
+    # 화면에 걸린 주소는 그 주문한 분의 자료함으로 실제로 열려야 합니다
+    links = _re.findall(r'data-copy="([^"]+)"', page)
+    assert links, "복사할 주소가 하나도 없습니다"
+    token = links[0].rstrip("/").rsplit("/", 1)[-1]
+    opened = client().get(f"/my/{token}")
+    assert opened.status_code == 200, opened.status_code
+    assert "내 자료함" in body(opened)
+
+    # 메일이 막혀 있다는 것도 사장님께 알려 드립니다
+    assert not sc.mail_ready()
+    assert "자동 메일이 나가지 않습니다" in page
+    print("PASS  메일이 막혀도 자료함 주소를 건네줄 수 있음")
 
 
 def test_contact_has_no_phone():
@@ -2241,8 +2287,16 @@ def test_no_page_promises_pdf_by_email():
     # 상품마다 따로 적던 발송 문구는 없앴습니다 (가게 전체가 한 문장)
     assert all("delivery" not in x for x in sc.load_raw_catalog()["products"])
 
+    # 한 문장으로 말하되, 메일이 나갈 수 있을 때만 메일 이야기를 합니다
+    import os as _os
     line = sc.delivery_line(sc.load_site())
-    assert "바로" in line and "메일" in line
+    assert "바로" in line and "자료함" in line
+    assert "메일" not in line, "메일을 못 보내는데 보낸다고 합니다"
+    _os.environ["SMTP_HOST"] = "smtp.example.com"
+    try:
+        assert "메일" in sc.delivery_line(sc.load_site())
+    finally:
+        _os.environ.pop("SMTP_HOST", None)
     print("PASS  '메일로 PDF 보냄' 문구 없음 · 받는 법은 한 문장")
 
 
@@ -4959,6 +5013,7 @@ def run_all():
     test_pass_quota()
     test_my_locker()
     test_clear_sample_data()
+    test_owner_can_hand_out_locker_link()
     test_contact_has_no_phone()
     test_contact_page()
     test_locker_sits_next_to_the_cart()

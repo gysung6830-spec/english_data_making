@@ -11,9 +11,12 @@
     <div class="section-head">
       <span class="eyebrow">내 자료함</span>
       <h2>받으신 자료를 다시 받으실 수 있습니다</h2>
-      <p><b>{{ email }}</b> 로 주문하신 내역입니다.
-        이 화면 주소는 저절로 바뀌지 않습니다. <b>즐겨찾기 해 두세요.</b></p>
+      <p><b>{{ email }}</b> 로 주문하신 내역입니다.</p>
     </div>
+
+    {% with keep_url = url_for('my_locker', token=token, _external=True) %}
+      {% include "_keepbox.html" %}
+    {% endwith %}
 
     <div class="locker-top no-print">
       <div class="lt-box">

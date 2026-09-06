@@ -26,7 +26,8 @@
           {% endfor %}
         </div>
         <p class="hero-note mb-0">메일을 기다리지 않으셔도 됩니다 — 위에서 바로 열립니다.
-          같은 링크를 이메일로도 한 번 더 보내 드렸고, 받는 기한은 30일입니다.</p>
+          {% if mail_ready %}같은 링크를 이메일로도 한 번 더 보내 드렸고,{% endif %}
+          받는 기한은 30일입니다.</p>
       </div>
     {% else %}
       <div class="wait-box">
@@ -78,16 +79,18 @@
       주문번호 <b>{{ o['order_no'] }}</b> 와 함께 알려 주세요.
     </div>
 
-    <div class="center" style="margin-top:28px;">
-      {# 이 주소를 여신 분은 본인이 맞으므로, 메일을 기다리지 않고 자료함으로 바로 갑니다. #}
+    {# 이 주소를 여신 분은 본인이 맞으므로, 메일을 기다리지 않고 자료함으로 바로 갑니다.
+       이 화면을 닫으면 다시 찾기 어려우니, 주소를 눈에 보이게 내놓습니다. #}
+    {% with keep_url = url_for('my_locker', token=locker, _external=True) %}
+      {% include "_keepbox.html" %}
+    {% endwith %}
+
+    <div class="center" style="margin-top:22px;">
       <a class="btn btn-primary" href="{{ url_for('my_locker', token=locker) }}">내 자료함 열기</a>
       <a class="btn btn-ghost" href="{{ url_for('products') }}">다른 자료 더 보기</a>
     </div>
     <p class="muted center" style="font-size:13px;margin-top:14px;">
       <b>내 자료함</b>에서는 지금까지 받으신 자료를 한 곳에서 다시 받고 인쇄하실 수 있습니다.</p>
-    <p class="muted center" style="font-size:13px;margin-top:16px;">
-      이 주소는 이 주문에만 열리는 전용 주소입니다. 즐겨찾기 해 두셔도 됩니다.
-    </p>
   </div>
 </section>
 {% endblock %}

@@ -2166,3 +2166,16 @@ label.dropzone{
 .cr-where{font-size:13.5px; color:var(--muted); margin-top:3px;}
 .cr-where b{color:var(--ink-2); font-weight:700;}
 .cart-row .mat-chips{margin-top:9px;}
+
+/* 자료함 주소를 저장해 두시라고 내놓는 칸. 비밀번호가 없어 이 주소가 열쇠입니다 */
+.keep-box{background:var(--brand-soft); border:1px solid #cfe4d9; border-radius:14px;
+  padding:18px 20px; margin:22px 0;}
+.keep-title{display:block; font-size:15.5px; color:var(--brand-dark); margin-bottom:10px;}
+.keep-row{display:flex; gap:8px; flex-wrap:wrap;}
+.keep-url{flex:1 1 260px; min-width:0; font:inherit; font-size:13.5px;
+  padding:11px 13px; border-radius:10px; border:1px solid var(--line-strong);
+  background:#fff; color:var(--ink-2);}
+.keep-copy{flex:0 0 auto;}
+.keep-tip{margin:10px 0 0; font-size:13px; color:var(--ink-2); line-height:1.7;
+  word-break:keep-all;}
+@media (max-width:640px){ .keep-copy{width:100%;} }

@@ -101,6 +101,8 @@ def inject_globals():
         "material_pkg": sc.material_package(),
         # '자료를 어떻게 받나' 는 한 곳에서만 정합니다 (화면마다 딴말 안 하게)
         "delivery_line": sc.delivery_line(site),
+        # 메일이 나갈 수 있는지 — '보내 드렸습니다' 같은 말을 걸러 내는 데 씁니다
+        "mail_ready": sc.mail_ready(),
         # 아직 안 채운 예시값을 손님 화면에 내보내지 않기 위한 판별
         "filled": lambda v: not sc.is_placeholder(v),
     }
@@ -2006,20 +2008,26 @@ def locker_rows(email: str):
 def my_page():
     """자료함 문 앞. 이메일을 적으면 그 주소로 자료함 열쇠를 보내 드립니다."""
     if request.method == "GET":
-        return render_template("my.html", form={}, errors=[], sent=False)
+        return render_template("my.html", form={}, errors=[], sent=False,
+                               mail_ready=sc.mail_ready())
 
     if sc.too_many_submits(request, "my"):
         return render_template("my.html", form=request.form,
-                               errors=["잠시 뒤에 다시 시도해 주세요."], sent=False), 429
+                               errors=["잠시 뒤에 다시 시도해 주세요."], sent=False, mail_ready=sc.mail_ready()), 429
 
     email = sc.clean(request.form.get("email"), 120).lower()
     if not sc.EMAIL_RE.match(email):
-        return render_template("my.html", form=request.form, sent=False,
+        return render_template("my.html", form=request.form, sent=False, mail_ready=sc.mail_ready(),
                                errors=["이메일 주소를 정확히 입력해 주세요."]), 400
+
+    # 메일을 낼 수 있는지는 이메일과 상관없는 조건이라, 먼저 봐도 새어 나가는
+    # 것이 없습니다. 못 보내는데 '보냈습니다' 라고 하면 손님은 오지 않을 메일을
+    # 기다립니다. 그 경우에는 다른 길을 알려 드립니다.
+    ready = sc.mail_ready()
 
     # 주문이 있을 때만 실제로 보냅니다. 화면 문구는 어느 쪽이든 같습니다 —
     # 아무 주소나 넣어 보며 "이 사람이 샀는지" 알아내지 못하게 하려는 뜻입니다.
-    if locker_rows(email):
+    if ready and locker_rows(email):
         token = sc.locker_token(email)
         link = url_for("my_locker", token=token, _external=True)
         sc.send_mail(
@@ -2029,7 +2037,7 @@ def my_page():
                         "이 주소는 저절로 바뀌지 않습니다. 즐겨찾기 해 두시면 언제든 다시 여실 수 있습니다.",
                         "주소를 아는 사람은 누구나 열 수 있으니 남에게 알려 주지 마세요."]),
             to_addr=email)
-    return render_template("my.html", form={}, errors=[], sent=True)
+    return render_template("my.html", form={}, errors=[], sent=True, mail_ready=ready)
 
 
 @app.route("/my/<token>")
