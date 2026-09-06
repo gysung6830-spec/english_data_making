@@ -1638,73 +1638,89 @@ input[type=file]{
   padding:6px 8px; border-bottom:1px solid var(--line);}
 .lk-table td{padding:8px; border-bottom:1px solid var(--line);}
 
-/* ---------- 자료 골라 담기 (강 × 자료 종류) ---------- */
-.pick-tiers{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+/* ---------- 자료 골라 담기 — 위에서 패키지, 밑에서 강 ---------- */
+.pick-tiers{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
 .pick-tiers .pt{padding:6px 12px; border:1px solid var(--line); border-radius:999px;
   font-size:13.5px; color:var(--muted); background:#fff;}
 .pick-tiers .pt.on{border-color:var(--brand); color:var(--brand-dark);
   background:var(--brand-soft); font-weight:700;}
-.pick-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:#fff;}
-.pick-table{width:100%; border-collapse:collapse; font-size:14px; min-width:640px;}
-.pick-table th, .pick-table td{padding:0; border-bottom:1px solid var(--line);
-  text-align:center;}
-.pick-table thead th{padding:10px 6px; font-size:12.5px; color:var(--muted);
-  font-weight:600; background:#fafbfa; position:sticky; top:0; z-index:1;}
-.pick-table tbody tr:last-child th, .pick-table tbody tr:last-child td{border-bottom:0;}
-.pk-unit{text-align:left !important; padding:10px 12px !important; white-space:nowrap;
-  background:#fafbfa;}
-.pk-unit small{display:block; font-size:11.5px; color:var(--muted); font-weight:500;}
-.pk-col, .pk-rowall{background:none; border:0; padding:0; font:inherit; cursor:pointer;
-  color:inherit; font-weight:700; text-decoration:underline; text-underline-offset:3px;
-  text-decoration-color:var(--line-strong);}
-.pk-col:hover, .pk-rowall:hover{color:var(--brand);}
-.pk-cell{display:block; padding:11px 6px; cursor:pointer; font-size:13px;}
-.pk-cell input{display:block; margin:0 auto 4px; width:18px; height:18px;
-  accent-color:var(--brand);}
-.pk-cell:hover{background:var(--brand-soft);}
-.pk-cell.have{background:#f3f5f4; color:var(--muted); cursor:default;}
-.pk-none{display:block; padding:11px 6px; color:#c9ced2;}
-.pk-sum{text-align:right !important; padding:10px 12px !important; white-space:nowrap;
-  font-size:13px;}
-/* ---------- 강 고르기 — 칩으로 한눈에 ---------- */
-.pick-step{margin-bottom:18px;}
+
+.pick-step{margin-bottom:22px;}
 .ps-head{display:flex; align-items:baseline; justify-content:space-between; gap:12px;
-  margin-bottom:9px;}
+  margin-bottom:10px;}
 .ps-head b{font-size:15.5px;}
 .ps-all{background:none; border:0; padding:4px 2px; font:inherit; font-size:13.5px;
   color:var(--brand); cursor:pointer; text-decoration:underline; text-underline-offset:3px;}
-.chips{display:flex; flex-wrap:wrap; gap:8px;}
-.chips .chip{display:inline-flex; align-items:center; gap:7px; min-height:42px;
-  padding:0 14px 0 11px; font:inherit; font-size:14.5px; font-weight:600;
-  color:var(--ink); background:#fff; border:1px solid var(--line-strong);
-  border-radius:10px; cursor:pointer; transition:background .12s, border-color .12s;}
-.chips .chip:hover{border-color:var(--brand);}
-/* 네모 체크칸. 켜지면 브랜드 색으로 차고 ✓ 가 그려집니다. */
-.chips .cbox{position:relative; width:18px; height:18px; flex:0 0 18px;
-  border:1.6px solid #b9c0c6; border-radius:5px; background:#fff;}
-.chips .chip.on{background:var(--brand-soft); border-color:var(--brand); color:var(--brand-dark);}
-.chips .chip.on .cbox{background:var(--brand); border-color:var(--brand);}
-.chips .chip.on .cbox::after{content:""; position:absolute; left:5.5px; top:1.5px;
-  width:4px; height:9px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(43deg);}
-/* 일부만 고른 강 — 가운데 줄 하나 */
-.chips .chip.some{border-color:var(--brand); color:var(--brand-dark);}
-.chips .chip.some .cbox{background:var(--brand); border-color:var(--brand);}
-.chips .chip.some .cbox::after{content:""; position:absolute; left:3px; top:6.5px;
-  width:10px; height:0; border-top:2.4px solid #fff;}
-.chips .chip.empty{opacity:.45; pointer-events:none;}
+.ps-tip{margin:10px 0 0; font-size:13px; color:var(--muted); word-break:keep-all;}
 
-/* 표는 접어 둡니다. 칸마다 손보실 때만 펴시면 됩니다. */
-.pick-detail{margin:4px 0 0;}
-.pick-detail > summary{display:inline-flex; align-items:center; gap:6px; padding:8px 2px;
-  font-size:14px; color:var(--muted); cursor:pointer; list-style:none;}
-.pick-detail > summary::-webkit-details-marker{display:none;}
-.pick-detail > summary::before{content:"▸"; font-size:11px;}
-.pick-detail[open] > summary::before{content:"▾";}
-.pick-detail > summary:hover{color:var(--brand);}
-.pick-detail .pd-shut{display:none;}
-.pick-detail[open] .pd-open{display:none;}
-.pick-detail[open] .pd-shut{display:inline;}
-.pick-detail .pick-wrap{margin-top:8px;}
+/* 네모 체크칸. 켜지면 브랜드 색으로 차고 ✓ 가, 반만 켜지면 줄 하나가 그려집니다. */
+.cbox{position:relative; display:inline-block; width:18px; height:18px; flex:0 0 18px;
+  border:1.6px solid #b9c0c6; border-radius:5px; background:#fff;}
+.chip.on .cbox, .chip.some .cbox{background:var(--brand); border-color:var(--brand);}
+.chip.on .cbox::after{content:""; position:absolute; left:5.5px; top:1.5px;
+  width:4px; height:9px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(43deg);}
+.chip.some .cbox::after{content:""; position:absolute; left:3px; top:6.5px;
+  width:10px; height:0; border-top:2.4px solid #fff;}
+.chip.empty{opacity:.45; pointer-events:none;}
+
+/* --- 위: 패키지 두 칸. 무엇이 들어 있는지까지 적어 둡니다 --- */
+.pkg-picks{display:grid; gap:12px;
+  grid-template-columns:repeat(auto-fit, minmax(270px, 1fr));}
+.pkg-pick{display:flex; align-items:flex-start; gap:11px; padding:14px 16px;
+  text-align:left; font:inherit; color:var(--ink); background:#fff;
+  border:1px solid var(--line-strong); border-radius:12px; cursor:pointer;
+  transition:background .12s, border-color .12s;}
+.pkg-pick:hover{border-color:var(--brand);}
+.pkg-pick.on, .pkg-pick.some{border-color:var(--brand); background:var(--brand-soft);}
+.pkg-pick .cbox{margin-top:2px;}
+.pp-body{display:flex; flex-direction:column; gap:8px; min-width:0;}
+.pp-body > b{font-size:16px; letter-spacing:-.02em;}
+.pp-mats{display:flex; flex-wrap:wrap; gap:5px;}
+.pp-mat{display:inline-flex; align-items:center; gap:4px; padding:3px 8px;
+  font-size:12px; font-weight:600; color:var(--ink-2); background:#f3f1ec;
+  border-radius:6px; white-space:nowrap;}
+.pp-mat i{font-style:normal; font-weight:800; font-size:10.5px; color:var(--brand);}
+.pkg-pick.pkg-analysis .pp-mat{background:#e6f0fb; color:#1e4bb8;}
+.pkg-pick.pkg-analysis .pp-mat i{color:#3b6fd4;}
+.pkg-pick.pkg-problem .pp-mat{background:#fdeee6; color:#a3450f;}
+.pkg-pick.pkg-problem .pp-mat i{color:#c96524;}
+
+/* --- 밑: 강 한 줄 = 그 강의 자료 낱개 --- */
+.unit-list{border:1px solid var(--line); border-radius:12px; background:#fff;
+  overflow:hidden;}
+.ur{display:grid; grid-template-columns:145px 1fr 92px; gap:12px; align-items:center;
+  padding:9px 14px; border-bottom:1px solid var(--line);}
+.ur:last-child{border-bottom:0;}
+.ur.on{background:var(--brand-soft);}
+.ur-pick{display:flex; align-items:center; gap:9px; padding:6px 4px; font:inherit;
+  color:var(--ink); background:none; border:0; cursor:pointer; text-align:left;}
+.ur-name{font-size:14.5px; font-weight:700; white-space:nowrap;}
+.ur-pick small{font-size:11.5px; font-weight:500; color:var(--muted); white-space:nowrap;}
+.ur-pick:hover .ur-name{color:var(--brand);}
+.ur-mats{display:flex; flex-wrap:wrap; gap:6px; min-width:0;}
+.um{display:inline-flex; align-items:center; gap:5px; padding:5px 9px 5px 7px;
+  font-size:12.5px; font-weight:600; color:var(--ink-2); background:#fff;
+  border:1px solid var(--line-strong); border-radius:8px; cursor:pointer;
+  white-space:nowrap; transition:background .12s, border-color .12s;}
+.um input{width:15px; height:15px; margin:0; accent-color:var(--brand); cursor:pointer;}
+.um-no{font-style:normal; font-weight:800; font-size:10.5px; color:var(--muted);}
+.um:hover{border-color:var(--brand);}
+.um:has(input:checked){border-color:var(--brand); background:var(--brand-soft);
+  color:var(--brand-dark);}
+.um:has(input:checked) .um-no{color:var(--brand);}
+.um.have{background:#f3f5f4; color:var(--muted); cursor:default; border-style:dashed;}
+.um.have input{cursor:default;}
+.ur-sum{text-align:right; font-size:13px; color:var(--muted); white-space:nowrap;}
+.ur.on .ur-sum{color:var(--ink); font-weight:700;}
+
+@media (max-width:820px){
+  /* 폰에서는 강 이름 · 자료 · 값을 위아래로 쌓습니다 */
+  .ur{grid-template-columns:1fr auto; gap:6px 10px; padding:11px 13px;}
+  .ur-mats{grid-column:1 / -1;}
+  .ur-sum{text-align:right;}
+  .um-name{display:none;}          /* 좁으면 번호만 — 위 패키지 칸에 이름이 있습니다 */
+  .um{padding:6px 9px;}
+}
 
 /* 강 고르기 아래 막대. 단어 고르기의 .pick-bar 와 이름이 겹쳐 서로 덮어썼습니다.
    (그쪽은 위에 붙고 이쪽은 아래에 붙어야 합니다) 그래서 이름을 나눴습니다. */
@@ -1718,8 +1734,6 @@ input[type=file]{
 @media (max-width:640px){
   .unit-bar{flex-direction:column; align-items:stretch;}
   .unit-bar .pb-right{justify-content:space-between;}
-  /* 좁은 화면에서는 표를 옆으로 밀어 봐야 하니, 밀 수 있다고 알려 줍니다 */
-  .pick-wrap{position:relative;}
 }
 
 /* ---------- 화면에서 보고 인쇄하기 ---------- */
@@ -1913,6 +1927,3 @@ input[type=file]{
   border-top:1px solid var(--line); background:#fafbfa;}
 .bg-arrow{color:var(--brand); font-weight:700; white-space:nowrap;}
 .bg-open:hover .bg-arrow{text-decoration:underline; text-underline-offset:3px;}
-.pk-cell span small{display:block; margin-top:2px; font-size:11px; color:var(--muted);
-  font-weight:500;}
-.pk-cell.have span small, .pk-cell:has(input:checked) span small{color:inherit; opacity:.75;}

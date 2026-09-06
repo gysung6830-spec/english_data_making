@@ -2668,8 +2668,8 @@ def test_units_follow_what_the_admin_uploaded():
 
     def chips(slug):
         page = body(client().get(f"/books/{slug}"))
-        part = page[page.index('id="unit-chips"'):page.index('id="kind-chips"')]
-        return part.count('class="chip"'), page
+        part = page[page.index('id="unit-chips"'):]
+        return part.count('class="ur-pick chip"'), page
 
     n18, page18 = chips("highlighter-basic")
     n24, page24 = chips("highlighter-master")
@@ -3055,8 +3055,8 @@ def test_every_book_has_unit_checkboxes():
         word = words.get(book.get("category"), "강")
         assert f"필요한 {word}만 고르세요" in page, book["slug"]
         assert f"모두 {len(units)}" in page, (book["slug"], len(units))
-        chips = page[page.index('id="unit-chips"'):page.index('id="kind-chips"')]
-        assert chips.count('class="chip"') == len(units), book["slug"]
+        chips = page[page.index('id="unit-chips"'):]
+        assert chips.count('class="ur-pick chip"') == len(units), book["slug"]
 
     # 낱개로 파는 것은 EBS 부교재뿐입니다
     assert set(by_book) == {b["slug"] for b in catalog["books"]
@@ -3124,16 +3124,22 @@ def test_book_pick_grid():
 
     # 강이 한눈에 보이는 체크 칩으로 나옵니다 (표를 안 펴도 고를 수 있게)
     assert "어떤 단원이 필요하세요?" in page and "어떤 패키지가 필요하세요?" in page
-    chips = page[page.index('id="unit-chips"'):page.index('id="kind-chips"')]
-    assert chips.count('class="chip"') == 2                  # 1강 · 2강
+    chips = page[page.index('id="unit-chips"'):]
+    assert chips.count('class="ur-pick chip"') == 2          # 1강 · 2강
     assert "1강" in chips and "2강" in chips
-    kind_chips = page[page.index('id="kind-chips"'):page.index("pick-tiers")]
-    assert kind_chips.count('class="chip"') == 2             # 분석 · 문제
+    kind_chips = page[page.index('id="kind-chips"'):page.index('id="unit-chips"')]
+    assert kind_chips.count("pkg-pick") == 2                 # 분석 · 문제
+    # 위가 패키지, 밑이 강 — 차례가 뒤바뀌면 안 됩니다
+    assert page.index('id="kind-chips"') < page.index('id="unit-chips"')
     assert page.count('class="ps-all"') == 2                 # 줄마다 '전체 고르기'
     # 한 칸에 자료가 여럿이면 함께 담깁니다
     assert f'value="{BOOK}-01-analysis"' in page
-    # 칸마다 고치는 표는 접어 둡니다
-    assert "칸마다 하나씩 고르기" in page and "<details" in page
+    # 자료는 강 줄 안에 낱개로 펼쳐 둡니다 (접어 두면 아무도 안 펴 봅니다)
+    assert "<details" not in page and "칸마다 하나씩 고르기" not in page
+    assert page.count('class="um ') == 4                     # 2강 × 자료 2종
+    assert 'data-mid="analysis"' in page and 'data-mid="variants"' in page
+    # 패키지 칸에는 무엇이 들어 있는지 적혀 있습니다
+    assert "지문분석지" in page and "17종 변형문제" in page
     # 교재 전체 상품은 강 고르기 아래에 놓입니다
     assert page.index("필요한 단원만 고르세요") < page.index("전체를 한 번에")
     # 예전 주소는 그 자리로 보내 줍니다

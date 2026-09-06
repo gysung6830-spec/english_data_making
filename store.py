@@ -368,20 +368,24 @@ def product_detail(slug):
 
 
 def unit_grid(catalog: dict, slug: str) -> dict:
-    """강(회차·과) × 패키지 표. 강 단위 상품이 없으면 rows 가 빕니다.
+    """강(회차·과) 한 줄 = 그 강에 있는 자료 낱개들.
 
-    칸을 '자료 종류' 가 아니라 **패키지** 로 묶습니다. 손님이 고르는 단위는
-    '3강의 문제 패키지' 이지 '3강의 통합 워크북' 이 아니기 때문입니다.
-    한 칸에 자료가 여럿이면 값을 더해 보여 주고, 담을 때 함께 담깁니다.
+    손님은 두 걸음으로 고릅니다. 위에서 **패키지**(지문 분석 · 문제)를 고르면
+    모든 강에서 그 자료들이 한꺼번에 켜지고, 아래 강 목록에서 **강마다** 필요한
+    것만 손봅니다. 그래서 줄 안에는 자료를 낱개로 펼쳐 둡니다 — 접어 두면
+    아무도 안 펴 보고, 결국 통째로만 사게 됩니다.
     """
     items = [p for p in catalog["products"] if p.get("book") == slug and p.get("unit")]
     if not items:
-        return {"rows": [], "kinds": [], "kind_names": {}, "tiers": []}
+        return {"rows": [], "kinds": [], "kind_names": {},
+                "kind_mats": {}, "kind_mat_ids": {}, "tiers": []}
 
     order = [pkg["id"] for pkg in catalog.get("packages", [])]
     names = {pkg["id"]: pkg["name"] for pkg in catalog.get("packages", [])}
     kinds = sorted({p.get("package") for p in items if p.get("package")},
                    key=lambda k: order.index(k) if k in order else 99)
+    mats = sc.material_map()
+    mat_no = {mid: m.get("no", "") for mid, m in mats.items()}
 
     seen: dict = {}
     for p in items:
@@ -391,24 +395,50 @@ def unit_grid(catalog: dict, slug: str) -> dict:
         key = (sc.to_int(p.get("unit_no"), 0), p.get("unit"))
         seen.setdefault(key, {}).setdefault(pkg, []).append(p)
 
+    def one(p: dict) -> dict:
+        mid = (p.get("materials") or [""])[0]
+        m = mats.get(mid) or {}
+        return {"slug": p["slug"], "mid": mid, "no": m.get("no", ""),
+                "name": m.get("name") or p.get("name", ""),
+                "pkg": p.get("package", ""),
+                "signature": bool(m.get("signature")),
+                "price": sc.to_int(p.get("price"), 0)}
+
     rows = []
     for (no, unit), cell in sorted(seen.items()):
         cells = {}
         for pkg, plist in cell.items():
+            picks = sorted((one(x) for x in plist), key=lambda x: x["no"])
             cells[pkg] = {
-                "slugs": ",".join(x["slug"] for x in plist),
-                "price": sum(sc.to_int(x.get("price"), 0) for x in plist),
-                "count": len(plist),
-                "names": [x.get("name", "") for x in plist],
+                "slugs": ",".join(x["slug"] for x in picks),
+                "price": sum(x["price"] for x in picks),
+                "count": len(picks),
+                "names": [x["name"] for x in picks],
+                "items": picks,
             }
         rows.append({"no": no, "unit": unit, "cells": cells,
+                     "items": [x for pkg in kinds for x in cells.get(pkg, {}).get("items", [])],
+                     "price": sum(c["price"] for c in cells.values()),
                      "passages": max((sc.to_int(x.get("passages"), 0)
                                       for plist in cell.values() for x in plist), default=0)})
+
+    # 패키지마다 어떤 자료가 들어가는지 — 위쪽 패키지 칸에 적고,
+    # 화면에서 '이 패키지 전부' 를 한 번에 켤 때도 씁니다.
+    kind_mats, kind_mat_ids = {}, {}
+    for pkg in catalog.get("packages", []):
+        if pkg["id"] not in kinds:
+            continue
+        have = [mid for mid in (pkg.get("materials") or []) if mid in mat_no]
+        kind_mats[pkg["id"]] = [{"no": mat_no[mid],
+                                 "name": (mats.get(mid) or {}).get("name", mid)}
+                                for mid in have]
+        kind_mat_ids[pkg["id"]] = have
 
     site = sc.load_site()
     tiers = sorted((site.get("discount") or {}).get("count_tiers") or [],
                    key=lambda t: sc.to_int(t.get("min"), 0))
-    return {"rows": rows, "kinds": kinds, "kind_names": names, "tiers": tiers}
+    return {"rows": rows, "kinds": kinds, "kind_names": names,
+            "kind_mats": kind_mats, "kind_mat_ids": kind_mat_ids, "tiers": tiers}
 
 
 @app.route("/books/<slug>")
