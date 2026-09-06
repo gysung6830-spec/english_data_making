@@ -991,7 +991,22 @@ def test_mock_exam_excludes_practical():
     # 모의고사가 아닌 경우(교재 단원 등)는 감지 안 됨 → 제외 로직 미적용
     assert _is_mock_exam(["10-1", "10-2", "10-A"]) is False
     assert _is_mock_exam(["1", "2", "3"]) is False
-    print("PASS  모의고사 형식 감지 + 27·28(안내문) 제외")
+
+    # 원문 → 경계분리 통합 경로: 18~45(41~42·43~45 범위 포함) 원문이
+    #   ① 41~42·43~45 를 각각 '한 장문'으로 유지하고(41,42,43,44,45 로 안 쪼갬)
+    #   ② 모의고사로 감지되어 27·28 만 빠지는지 확인.
+    from src.worksheet.pipeline import _problem_spans
+    nums = [str(n) for n in range(18, 41)] + ["41~42", "43~45"]
+    raw = "\n".join(f"[{n}번]\nEnglish reading passage number {n} with enough words here.\n"
+                    for n in nums)
+    labels = [lb for lb, _ in _problem_spans(raw)]
+    assert labels == nums, labels                       # 범위가 개별 번호로 안 쪼개짐
+    assert "41~42" in labels and "43~45" in labels
+    assert not any(x in labels for x in ["41", "42", "43", "44", "45"])
+    assert _is_mock_exam(labels) is True
+    survived = [lb for lb in labels if lb not in _MOCK_EXCLUDE]
+    assert survived == [n for n in nums if n not in ("27", "28")]
+    print("PASS  모의고사 형식 감지 + 27·28(안내문) 제외 + 41~42·43~45 장문 유지")
 
 
 def test_merge_contractions():
