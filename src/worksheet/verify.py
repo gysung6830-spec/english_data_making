@@ -39,6 +39,19 @@ def _slash_chunks(sent) -> int:
     return sum(1 for t in toks if getattr(t, "slash", False)) + 1
 
 
+# be동사(계사)만 달랑 남은 직독직해 조각 — 보어와 붙어야 자연스러운데 붕 뜬 어색 표기.
+_BARE_COPULA = re.compile(r"^~?(이다|이었다|입니다|였습니다|이었습니다|되어야\s*한다|"
+                          r"이어야\s*한다|일\s*수\s*있다|일\s*수\s*있습니다)$")
+
+
+def _bare_copula_chunks(sent) -> list[str]:
+    """'이다·이었다·되어야 한다·~일 수 있습니다'처럼 계사만 홀로 된 '중간' 조각을 찾는다."""
+    rk = getattr(sent, "reading_ko", "") or ""
+    cs = [c.strip() for c in rk.split(" / ") if c.strip()]
+    return [c for j, c in enumerate(cs)
+            if j < len(cs) - 1 and _BARE_COPULA.match(c)]
+
+
 def verify_analyses(analyses: list[Analysis], original_text: str = "") -> dict:
     """분석 결과를 검증한다. original_text 가 있으면 원문 대조까지 수행.
 
@@ -91,6 +104,10 @@ def verify_analyses(analyses: list[Analysis], original_text: str = "") -> dict:
             if not (getattr(s, "translation", "") or "").strip():
                 findings.append({"level": "warn", "where": f"{where} {s.index}문장",
                                  "msg": "해석(translation) 비어있음"})
+            cop = _bare_copula_chunks(s)
+            if cop:
+                findings.append({"level": "warn", "where": f"{where} {s.index}문장",
+                                 "msg": f"be동사 단독 조각(어색): '{cop[0]}' — 보어와 한 조각으로"})
             tx = [t.text for line in s.lines for t in line]
             for i in range(1, len(tx)):
                 cur = (tx[i] or "").strip()

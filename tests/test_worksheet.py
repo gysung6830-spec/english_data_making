@@ -691,6 +691,31 @@ def test_verify_analyses():
     print("PASS  자동 오류검증(원문 대조 숫자 + 직독직해 정렬)")
 
 
+def test_verify_bare_copula():
+    # be동사(계사)만 홀로 남은 직독직해 조각을 어색 표기로 잡는다.
+    from src.worksheet import verify
+    from src.worksheet.models import Analysis, Sentence, Token
+
+    # '가장 강력한 끌개는 / ~이다 / 우리의 신념 체계' — 계사가 붕 뜬 조각(중간)
+    s = Sentence(index=1, lines=[[Token(text="the strongest attractor", slash=True),
+                                  Token(text="is", slash=True),
+                                  Token(text="our belief system")]],
+                 translation="가장 강력한 끌개는 우리의 신념 체계이다.")
+    s.reading_ko = "가장 강력한 끌개는 / ~이다 / 우리의 신념 체계"
+    res = verify.verify_analyses([Analysis(lecture_label="22", sentences=[s])], "")
+    msgs = " ".join(f["msg"] for f in res["findings"])
+    assert "be동사 단독 조각" in msgs and "~이다" in msgs
+
+    # 계사가 보어와 붙어 한 조각이면(정상) 경고 없음
+    s2 = Sentence(index=1, lines=[[Token(text="the strongest attractor", slash=True),
+                                   Token(text="is our belief system")]],
+                  translation="가장 강력한 끌개는 우리의 신념 체계이다.")
+    s2.reading_ko = "가장 강력한 끌개는 / 우리의 신념 체계이다"
+    res2 = verify.verify_analyses([Analysis(lecture_label="22", sentences=[s2])], "")
+    assert "be동사 단독 조각" not in " ".join(f["msg"] for f in res2["findings"])
+    print("PASS  be동사 단독 조각(어색 직독직해) 검출")
+
+
 def test_render_worksheet_files_separate(tmp_path):
     # 섹션별 '별도 파일 4종' 추출: 분석정리 / 단어테스트 / 학습용 / 원문해석
     from src.worksheet.pipeline import render_worksheet_files
