@@ -100,6 +100,48 @@
       </div>
     {% endif %}
 
+    {# ---- 만들어 두신 단어 시험지 ---- #}
+    <div class="lk-sheets" id="sheets">
+      <div class="section-head" style="margin:34px 0 14px;">
+        <h3 style="font-size:20px;margin:0 0 6px;">만들어 두신 단어 시험지
+          {% if sheets %}<span class="muted" style="font-weight:500;">{{ sheets|length }}장</span>{% endif %}</h3>
+        <p style="margin:0;">눌러 보시면 <b>그때 그 시험지가 그대로</b> 다시 나옵니다.
+          문제 순서까지 같습니다.</p>
+      </div>
+      {% if sheets %}
+        <div class="lk-sheet-list">
+          {% for x in sheets %}
+            <div class="lk-sheet">
+              <div class="ls-body">
+                <b>{{ x['title'] }}</b>
+                <small>{{ x['book_name'] }}{% if x['scope'] %} · {{ x['scope'] }}{% endif %}
+                  · {{ x['questions'] }}문항{% if x['pages'] %} · {{ x['pages'] }}쪽{% endif %}
+                  <span class="muted">· 담은 날 {{ x['created_at'][:10] }}</span></small>
+              </div>
+              <div class="ls-acts no-print">
+                <a class="btn btn-ghost btn-sm"
+                   href="{{ url_for('words_sheet', slug=x['book_slug']) }}?{{ x['args'] }}">열기</a>
+                <a class="btn btn-primary btn-sm"
+                   href="{{ url_for('words_sheet_pdf', slug=x['book_slug']) }}?{{ x['args'] }}">PDF</a>
+                <form method="post" style="display:inline;"
+                      action="{{ url_for('my_sheet_delete', token=token, sheet_id=x['id']) }}"
+                      onsubmit="return confirm('이 시험지를 지울까요?');">
+                  <button class="ls-del" type="submit" aria-label="지우기">×</button>
+                </form>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="empty">
+          <b>아직 담아 두신 시험지가 없습니다.</b>
+          <div style="margin-top:8px;">
+            <a class="btn btn-ghost btn-sm" href="{{ url_for('words_page') }}">단어 시험지 만들러 가기</a>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
     <div class="print-tip no-print">
       <b>인쇄할 때</b>
       <ul>

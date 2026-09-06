@@ -1887,3 +1887,28 @@ input[type=file]{
   .mk-now{margin-left:0; text-align:left;}
   .w-ko{display:none;}
 }
+
+/* ---------- 만들어 두신 단어 시험지 (내 자료함) ---------- */
+.lk-sheet-list{display:flex; flex-direction:column; gap:8px;}
+.lk-sheet{display:flex; flex-wrap:wrap; align-items:center; gap:12px; padding:14px 16px;
+  background:#fff; border:1px solid var(--line); border-radius:12px;}
+.ls-body{flex:1 1 240px; min-width:0;}
+.ls-body b{display:block; font-size:15.5px; letter-spacing:-.01em;}
+.ls-body small{display:block; margin-top:3px; font-size:13px; color:var(--ink-2);}
+.ls-acts{display:flex; align-items:center; gap:7px;}
+.ls-del{width:30px; height:30px; padding:0; font:inherit; font-size:17px; line-height:1;
+  color:var(--muted); cursor:pointer; background:none; border:1px solid transparent;
+  border-radius:8px;}
+.ls-del:hover{color:#b3261e; border-color:#f0c2bb;}
+
+/* 시험지 저장 칸 (만들기 화면) */
+.mk-save{margin:0 0 18px; padding:16px 18px; background:var(--brand-soft);
+  border:1px solid var(--brand); border-radius:12px;}
+.mk-save > b{font-size:15.5px;}
+.mk-save p{margin:6px 0 12px; font-size:13.5px;}
+.mk-save-row{display:flex; flex-wrap:wrap; gap:8px;}
+.mk-save-row input{flex:1 1 220px; min-width:0; height:42px; padding:0 12px; font:inherit;
+  font-size:15px; background:#fff; border:1px solid var(--line-strong); border-radius:9px;}
+.mk-save-msg{margin:10px 0 0 !important; font-size:13.5px; color:#b3261e;}
+.mk-save-msg.ok{color:var(--brand-dark);}
+.mk-save-msg a{text-decoration:underline; text-underline-offset:3px;}

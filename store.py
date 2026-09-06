@@ -1521,6 +1521,57 @@ def words_sheet_pdf(slug):
     return resp
 
 
+def sheet_name(spec) -> str:
+    """저장할 때 붙는 이름 — 시험지 제목과 날짜로 알아보실 수 있게.
+
+    제목을 안 적으셨으면 교재와 범위로 짓습니다.
+    """
+    title = spec["head"].get("title") or (
+        f"어휘 TEST · {spec['book']['name']} · {' · '.join(spec['unit_names'][:3])}")
+    day = spec["head"].get("date") or sc.now_kst().strftime("%Y. %-m. %-d.")
+    return f"{title} ({day})"[:120]
+
+
+@app.route("/words/<slug>/save", methods=["POST"])
+def words_sheet_save(slug):
+    """만든 시험지를 자료함에 담습니다. 파일이 아니라 만드는 법을 적어 둡니다."""
+    if sc.too_many_submits(request, "sheet-save"):
+        return {"ok": False, "msg": "잠시 뒤에 다시 해 주세요."}, 429
+    email = sc.clean(request.form.get("email"), 120).lower()
+    if not sc.EMAIL_RE.match(email):
+        return {"ok": False, "msg": "이메일 주소를 정확히 적어 주세요."}, 400
+    args = sc.clean(request.form.get("args"), 4000)
+    if not args:
+        return {"ok": False, "msg": "저장할 시험지가 없습니다."}, 400
+
+    # 주소를 그대로 다시 읽어, 진짜 만들어지는 시험지인지 확인합니다
+    with app.test_request_context(f"/words/{slug}/sheet?{args}"):
+        spec = _sheet_spec(slug)
+        blob = _sheet_pdf(spec)
+        name = sheet_name(spec)
+        scope = " · ".join(spec["unit_names"])
+        questions = sum(len(x["items"]) for x in spec["sections"])
+    pages = wm.page_count(blob) if blob else 0
+
+    sid = sc.save_sheet(email, name, slug, spec["book"]["name"], scope,
+                        args, questions, pages)
+    # 자료함 열쇠를 보내 드릴 수 있게 명단에도 남깁니다 (소식 받기는 따로 켜야 합니다)
+    sc.add_lead(email, slug="words-sheet", title="단어 시험지 저장")
+    return {"ok": True, "id": sid, "name": name,
+            "locker": url_for("my_locker", token=sc.locker_token(email))}
+
+
+@app.route("/my/<token>/sheet/<int:sheet_id>/delete", methods=["POST"])
+def my_sheet_delete(token, sheet_id):
+    """자료함에서 시험지 하나 지우기."""
+    email = sc.locker_email(token)
+    if not email:
+        abort(404)
+    if sc.drop_sheet(sheet_id, email):
+        flash("시험지를 지웠습니다.", "ok")
+    return redirect(url_for("my_locker", token=token) + "#sheets")
+
+
 @app.route("/words/<slug>/sheet/pages.json")
 def words_sheet_pages(slug):
     """이 시험지가 몇 쪽인지. 만들기 화면이 미리보기를 몇 장 걸지 물어봅니다."""
@@ -1600,7 +1651,7 @@ def my_locker(token):
     paid = sum(1 for r in rows if r["o"]["status"] in ("입금확인", "발송완료"))
     mypass = sc.active_pass(email)
     return render_template("my_locker.html", email=email, rows=rows, paid=paid,
-                           token=token, mypass=mypass,
+                           token=token, mypass=mypass, sheets=sc.my_sheets(email),
                            pass_left=sc.pass_left(mypass),
                            pass_uses=sc.pass_history(mypass["id"]) if mypass else [])
 

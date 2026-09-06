@@ -888,6 +888,23 @@ CREATE TABLE IF NOT EXISTS mailouts (
     created_at    TEXT NOT NULL
 );
 
+-- 만들어 두신 단어 시험지. 파일이 아니라 '만드는 법' 을 적어 둡니다.
+-- 시험지 번호(seed)까지 들어 있어, 언제 다시 열어도 똑같은 시험지가 나옵니다.
+-- 그래서 저장 공간을 한 톨도 안 씁니다.
+CREATE TABLE IF NOT EXISTS sheets (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    email         TEXT NOT NULL,
+    title         TEXT NOT NULL,
+    book_slug     TEXT NOT NULL,
+    book_name     TEXT,
+    scope         TEXT,
+    args          TEXT NOT NULL,
+    questions     INTEGER NOT NULL DEFAULT 0,
+    pages         INTEGER NOT NULL DEFAULT 0,
+    created_at    TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS sheets_by_email ON sheets (email, id DESC);
+
 CREATE TABLE IF NOT EXISTS lockers (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     email         TEXT UNIQUE NOT NULL,
@@ -1638,6 +1655,55 @@ def issue_download(order_row, product_slug: str, product_name: str) -> str:
         except sqlite3.IntegrityError:
             continue
     raise RuntimeError("다운로드 링크를 만들지 못했습니다")
+
+
+# ---------------------------------------------------------------------------
+# 만들어 두신 단어 시험지
+# ---------------------------------------------------------------------------
+SHEET_KEEP = 200            # 한 분당 이만큼까지 모아 둡니다
+
+
+def save_sheet(email: str, title: str, book_slug: str, book_name: str,
+               scope: str, args: str, questions: int, pages: int) -> int:
+    """시험지 하나를 자료함에 담습니다. 같은 것을 두 번 담으면 날짜만 새로 씁니다."""
+    email = email.strip().lower()
+    db = get_db()
+    same = db.execute(
+        "SELECT id FROM sheets WHERE email = ? AND book_slug = ? AND args = ?",
+        (email, book_slug, args)).fetchone()
+    now = stamp()
+    if same:
+        db.execute("UPDATE sheets SET title = ?, created_at = ? WHERE id = ?",
+                   (title, now, same["id"]))
+        db.commit()
+        return same["id"]
+    cur = db.execute(
+        """INSERT INTO sheets (email, title, book_slug, book_name, scope, args,
+                               questions, pages, created_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        (email, title, book_slug, book_name, scope, args, questions, pages, now))
+    # 너무 오래 쌓이면 옛것부터 지웁니다
+    db.execute("""DELETE FROM sheets WHERE email = ? AND id NOT IN
+                  (SELECT id FROM sheets WHERE email = ? ORDER BY id DESC LIMIT ?)""",
+               (email, email, SHEET_KEEP))
+    db.commit()
+    return cur.lastrowid
+
+
+def my_sheets(email: str) -> list:
+    """이 분이 담아 두신 시험지. 최근 것부터."""
+    return get_db().execute(
+        "SELECT * FROM sheets WHERE email = ? ORDER BY id DESC",
+        (email.strip().lower(),)).fetchall()
+
+
+def drop_sheet(sheet_id: int, email: str) -> bool:
+    """내 시험지 하나 지우기. 남의 것은 못 지웁니다."""
+    db = get_db()
+    cur = db.execute("DELETE FROM sheets WHERE id = ? AND email = ?",
+                     (to_int(sheet_id, 0), email.strip().lower()))
+    db.commit()
+    return cur.rowcount > 0
 
 
 def locker_token(email: str) -> str:

@@ -1137,6 +1137,75 @@ def test_word_quiz():
     print("PASS  단어 시험지 — 붙여넣기 → 범위·유형 · 단어 골라서 → 학생용 + 정답지")
 
 
+def test_save_sheet_to_my_locker():
+    """만든 시험지를 자료함에 담고, 언제든 똑같이 다시 꺼냅니다."""
+    a = admin()
+    a.post("/admin/words/new", data={"name": "save test book"}, follow_redirects=True)
+    a.post("/admin/words/save-test-book/unit",
+           data={"unit_name": "3강",
+                 "words": "\n".join(f"w{i}\t뜻{i}" for i in range(1, 21))},
+           follow_redirects=True)
+
+    args = "unit=03&kind=en_ko&n_en_ko=10&seed=4242&title=9월 어휘 확인&date=2026. 9. 5."
+    c = client()
+
+    # 이메일이 없거나 이상하면 안 담습니다
+    assert c.post("/words/save-test-book/save",
+                  data={"email": "not-a-mail", "args": args}).status_code == 400
+    assert c.post("/words/save-test-book/save",
+                  data={"email": "keep@example.com", "args": ""}).status_code == 400
+
+    got = c.post("/words/save-test-book/save",
+                 data={"email": "Keep@Example.com", "args": args}).get_json()
+    assert got["ok"]
+    # 이름은 시험지 제목과 날짜로 — 나중에 알아보실 수 있게
+    assert got["name"] == "9월 어휘 확인 (2026. 9. 5.)"
+    assert "/my/" in got["locker"]
+
+    # 같은 것을 또 담아도 줄이 늘지 않습니다 (날짜만 새로 씀)
+    c.post("/words/save-test-book/save",
+           data={"email": "keep@example.com", "args": args})
+    with store.app.app_context():
+        rows = sc.my_sheets("keep@example.com")
+    assert len(rows) == 1, [dict(r) for r in rows]
+    assert rows[0]["questions"] == 10 and rows[0]["pages"] == 2
+    assert rows[0]["book_name"] == "save test book" and rows[0]["scope"] == "3강"
+
+    # 내 자료함에 보입니다
+    locker = body(c.get(got["locker"]))
+    assert "만들어 두신 단어 시험지" in locker
+    assert "9월 어휘 확인 (2026. 9. 5.)" in locker
+    assert "10문항" in locker and "2쪽" in locker
+    assert "/words/save-test-book/sheet.pdf?" in locker
+
+    # 눌러 보면 그때 그 시험지가 그대로 나옵니다
+    again = sheet_text(f"/words/save-test-book/sheet?{args}")
+    assert "9월 어휘 확인" in again and "2026. 9. 5." in again
+    assert again == sheet_text(f"/words/save-test-book/sheet?{args}")
+
+    # 제목을 안 적으면 교재와 범위로 이름을 짓습니다
+    plain = c.post("/words/save-test-book/save",
+                   data={"email": "keep@example.com",
+                         "args": "unit=03&kind=en_ko&n_en_ko=5&seed=7"}).get_json()
+    assert plain["name"].startswith("어휘 TEST · save test book · 3강 (")
+
+    # 지우기 — 내 것만
+    with store.app.app_context():
+        rows = sc.my_sheets("keep@example.com")
+        token = sc.locker_token("keep@example.com")
+    c.post(f"/my/{token}/sheet/{rows[0]['id']}/delete", follow_redirects=True)
+    with store.app.app_context():
+        assert len(sc.my_sheets("keep@example.com")) == 1
+        assert not sc.drop_sheet(rows[0]["id"], "other@example.com")
+
+    # 만들기 화면에 담기 단추가 있습니다
+    page = body(c.get("/words/save-test-book/make"))
+    assert "내 자료함에 저장" in page and 'id="save-email"' in page
+
+    a.post("/admin/words/save-test-book/delete", follow_redirects=True)
+    print("PASS  단어 시험지 저장 — 제목·날짜로 이름 · 내 자료함에서 다시 꺼내기")
+
+
 def test_make_screen_four_steps():
     """단어장 만들기 — 교재 · 어휘 · 설정 · 미리보기를 한 화면에서."""
     a = admin()
@@ -3526,6 +3595,7 @@ def run_all():
     test_request_menu_renamed_to_jaryo()
     # 예시 데이터를 지우는 테스트는 다른 테스트가 그 상품을 쓰므로 맨 뒤에 둡니다.
     test_word_quiz()
+    test_save_sheet_to_my_locker()
     test_make_screen_four_steps()
     test_word_counts_per_kind_and_cap()
     test_word_file_upload()
