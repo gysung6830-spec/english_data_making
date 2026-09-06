@@ -538,6 +538,138 @@ def rows_to_lines(rows: list[list[str]]) -> list[str]:
     return out
 
 
+def _pdf_rows(blob: bytes) -> list[list[str]]:
+    """PDF 한 벌을 '한 줄 = 칸 여럿' 인 표로 폅니다.
+
+    글자를 나오는 차례대로 읽으면 단어와 뜻이 따로 떨어져 버립니다. 인쇄된
+    자리(좌표)를 보고, 같은 높이에 있는 것을 한 줄로 묶고 사이가 벌어진 데서
+    칸을 나눕니다. 그래야 두 칸으로 짜인 단어책도 제대로 읽힙니다.
+    """
+    try:
+        import pymupdf
+    except ImportError:
+        try:
+            import fitz as pymupdf
+        except ImportError:
+            return []
+    import io as _io
+
+    rows: list[list[str]] = []
+    with pymupdf.open(stream=_io.BytesIO(blob), filetype="pdf") as doc:
+        for page in doc:
+            # (x0, y0, x1, y1, 낱말, …) — 낱말마다 인쇄된 자리가 함께 옵니다
+            words = page.get_text("words")
+            if not words:
+                continue
+            lines: dict[int, list] = {}
+            for w in words:
+                x0, y0, x1, y1, text = w[0], w[1], w[2], w[3], w[4]
+                if not text.strip():
+                    continue
+                lines.setdefault(round(y0 / 3), []).append((x0, x1, y1 - y0, text))
+            for key in sorted(lines):
+                items = sorted(lines[key])
+                cells, buf, prev_end = [], [], None
+                for x0, x1, height, text in items:
+                    # 글자 높이만큼 벌어졌으면 다른 칸으로 봅니다 (낱말 사이 빈칸보다 넓음)
+                    if prev_end is not None and x0 - prev_end > max(6.0, height * 0.9):
+                        cells.append(" ".join(buf))
+                        buf = []
+                    buf.append(text)
+                    prev_end = x1
+                if buf:
+                    cells.append(" ".join(buf))
+                rows.append(cells)
+    return rows
+
+
+# 표 맨 윗줄에 흔히 붙는 이름들. 이런 줄은 단어가 아니라 머리글입니다.
+_HEAD_WORDS = {"no", "번호", "순번", "day", "강", "unit", "과", "차시", "품사",
+               "영어", "단어", "어휘", "word", "words", "english", "spelling",
+               "뜻", "의미", "해석", "뜻풀이", "meaning", "korean", "definition"}
+
+
+def _is_header(cells: list[str]) -> bool:
+    """'No | Word | Meaning' 같은 머리줄이면 참. 단어로 읽으면 안 됩니다."""
+    if len(cells) < 2:
+        return False
+    return all(c.strip().lower().strip(".:") in _HEAD_WORDS for c in cells)
+
+
+def _looks_like_sentence(en: str) -> bool:
+    """단어가 아니라 예문으로 보이면 참.
+
+    단어책은 표제어 아래에 예문을 함께 싣는 일이 많습니다. 그것까지 단어로
+    읽으면 지워야 할 줄이 단어 수만큼 늘어납니다. 'give up' · 'in spite of'
+    같은 숙어는 남기고, 문장으로 보이는 것만 뺍니다.
+    """
+    en = (en or "").strip()
+    if en.endswith((".", "!", "?")) and not en.endswith(("etc.", "e.g.", "i.e.")):
+        return True
+    return len(en.split()) >= 5
+
+
+def _pairs_from_rows(rows: list[list[str]]) -> tuple[list[str], int]:
+    """표에서 '영어<탭>뜻' 을 집어냅니다. 한 줄에 두 쌍이 있어도 둘 다 가져옵니다.
+
+    단어책은 한 쪽을 두 칸으로 나눠 찍는 일이 흔합니다. 그런 줄은
+    [영어, 뜻, 영어, 뜻] 으로 들어오므로, 왼쪽부터 훑으며 영어 다음에
+    우리말이 오는 자리를 모두 짝지어 냅니다. 줄 맨 앞에 'Day 47' 이 붙어
+    되풀이되는 표도 그 칸을 강으로 읽습니다.
+    """
+    out, here, dropped = [], None, 0
+    for r in rows:
+        cells = [c.strip() for c in r if c and c.strip()]
+        if not cells or _is_header(cells):
+            continue
+        # 'Day 47' 한 칸만 있는 줄 — 여기서부터 새 강입니다
+        if len(cells) == 1 and looks_like_unit(cells[0], strict=True):
+            if cells[0] != here:
+                here = cells[0]
+                out.append(f"## {here}")
+            continue
+        # 줄 맨 앞이 'Day 47' 이면 그 줄부터가 그 강입니다 (강 칸이 있는 표)
+        if len(cells) >= 3 and looks_like_unit(cells[0], strict=True):
+            if cells[0] != here:
+                here = cells[0]
+                out.append(f"## {here}")
+            cells = cells[1:]
+        i = 0
+        while i < len(cells) - 1:
+            en, ko = cells[i], cells[i + 1]
+            if _is_en(en) and not _is_ko(en) and _is_ko(ko):
+                if _looks_like_sentence(en):
+                    dropped += 1
+                else:
+                    out.append(f"{en}\t{ko}")
+                i += 2
+            else:
+                i += 1
+    return out, dropped
+
+
+def _pair_orphans(text: str) -> str:
+    """영어만 있는 줄 다음에 우리말만 있는 줄이 오면 한 줄로 붙입니다.
+
+    좌표를 못 읽는 PDF 나, 단어와 뜻을 줄 바꿔 적어 둔 텍스트 파일을 살립니다.
+    """
+    lines = [x.strip() for x in text.replace("\r", "").split("\n")]
+    out, i = [], 0
+    while i < len(lines):
+        one = lines[i]
+        two = lines[i + 1] if i + 1 < len(lines) else ""
+        if (one and two and not one.startswith("## ")
+                and _is_en(one) and not _is_ko(one)
+                and _is_ko(two) and not _is_en(two)
+                and not looks_like_unit(one, strict=True)):
+            out.append(f"{one}\t{two}")
+            i += 2
+            continue
+        out.append(lines[i])
+        i += 1
+    return "\n".join(out)
+
+
 def _mark_free_text(text: str) -> str:
     """PDF·텍스트에서 'Day 47' 처럼 혼자 있는 줄을 강 표시로 바꿔 줍니다."""
     out = []
@@ -591,20 +723,36 @@ def read_wordfile(filename: str, blob: bytes) -> tuple[str, str]:
         return "\n".join(lines), _read_note(lines, "엑셀")
 
     if ext == ".pdf":
+        # 1) 인쇄된 자리를 보고 읽습니다. 두 칸으로 짜인 단어책까지 이쪽에서 풀립니다.
+        try:
+            rows = _pdf_rows(blob)
+        except Exception:                             # 깨진 PDF 로 화면이 죽지 않게
+            rows = []                                 # 아래 글자만 뽑는 길로 넘어갑니다
+        lines, dropped = _pairs_from_rows(rows) if rows else ([], 0)
+        if lines:
+            note = _read_note(lines, "PDF")
+            if dropped:
+                note += f" 예문으로 보이는 {dropped}줄은 뺐습니다."
+            return "\n".join(lines), note
+
+        # 2) 자리를 못 읽으면 글자만 뽑아 보고, 떨어진 영어·뜻을 짝지어 줍니다.
+        text = ""
         try:
             from pypdf import PdfReader
-        except ImportError:
-            return "", "PDF 를 읽는 라이브러리가 없습니다. 엑셀이나 CSV 로 올려 주세요."
-        import io as _io
-        try:
+            import io as _io
             reader = PdfReader(_io.BytesIO(blob))
             text = "\n".join((page.extract_text() or "") for page in reader.pages)
-        except Exception as exc:                      # 깨진 PDF 로 화면이 죽지 않게
+        except ImportError:
+            pass
+        except Exception as exc:
             return "", f"PDF 를 읽지 못했습니다: {exc}"
         if not text.strip():
-            return "", ("이 PDF 에는 글자가 없습니다. 스캔해서 사진으로 만든 PDF 는 읽을 수 없습니다. "
-                        "엑셀이나 CSV 로 올려 주세요.")
-        return _mark_free_text(text), (
+            flat = " ".join(c for r in rows for c in r)
+            if not flat.strip():
+                return "", ("이 PDF 에는 글자가 없습니다. 스캔해서 사진으로 만든 PDF 는 "
+                            "읽을 수 없습니다. 엑셀이나 CSV 로 올려 주세요.")
+            text = "\n".join(" ".join(r) for r in rows)
+        return _mark_free_text(_pair_orphans(text)), (
             "PDF 에서 글자를 뽑았습니다. 단어책 PDF 는 줄이 흐트러지기 쉬우니 "
             "아래에서 눈으로 확인하고 고쳐 주세요.")
 
@@ -616,7 +764,7 @@ def read_wordfile(filename: str, blob: bytes) -> tuple[str, str]:
         rows = [row[:8] for row in _csv.reader(_io.StringIO(text), delimiter=delim)]
         lines = rows_to_lines(rows)
         return "\n".join(lines), _read_note(lines, ext[1:].upper())
-    return _mark_free_text(text), "파일을 읽었습니다."
+    return _mark_free_text(_pair_orphans(text)), "파일을 읽었습니다."
 
 
 def unit_id_from(name: str, taken: set[str] | None = None) -> str:

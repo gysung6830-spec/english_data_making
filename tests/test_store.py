@@ -2385,6 +2385,127 @@ def test_mobile_quick_bar():
     print("PASS  폰에서 카테고리 줄띠")
 
 
+def _wordbook_pdf(shape: str) -> bytes:
+    """시험에 쓸 단어책 PDF 를 그 자리에서 만듭니다 (진짜 인쇄물과 같은 모양).
+
+    shape — one: 한 칸짜리 · two: 두 칸으로 나눈 쪽 · unit: 강 칸이 있는 표 ·
+            example: 예문이 딸린 쪽 · blank: 글자가 없는(스캔한) 쪽
+    """
+    import io as _io
+    from reportlab.lib.pagesizes import A4
+    from reportlab.pdfgen import canvas
+    import store_sheet_pdf as sp
+    face, _bold = sp._fonts()
+    W, H = A4
+    buf = _io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=A4)
+    words = [("retain", "유지하다"), ("intensity", "강도"), ("give up", "포기하다"),
+             ("fertile", "비옥한"), ("glacier", "빙하"), ("separate", "분리된")]
+
+    if shape == "blank":                          # 스캔해서 사진만 든 쪽
+        c.setFillColorRGB(.8, .8, .8)
+        c.rect(60, 400, 400, 300, fill=1, stroke=0)
+        c.save()
+        return buf.getvalue()
+
+    c.setFont(face, 11)
+    if shape == "two":                            # 왼쪽·오른쪽 두 칸
+        c.drawString(50, H - 50, "Day 47")
+        half = (len(words) + 1) // 2
+        for col, chunk in enumerate((words[:half], words[half:])):
+            x, y = 50 + col * 270, H - 80
+            for en, ko in chunk:
+                c.drawString(x, y, en)
+                c.drawString(x + 130, y, ko)
+                y -= 22
+    elif shape == "unit":                         # 줄마다 'Day 47' 이 붙는 표
+        y = H - 60
+        c.drawString(50, y, "Day"); c.drawString(130, y, "영어")
+        c.drawString(300, y, "뜻"); y -= 22
+        for i, (en, ko) in enumerate(words):
+            c.drawString(50, y, f"Day {47 if i < 3 else 48}")
+            c.drawString(130, y, en)
+            c.drawString(300, y, ko)
+            y -= 22
+    elif shape == "example":                      # 표제어 아래에 예문이 붙는 쪽
+        y = H - 60
+        c.drawString(50, y, "Day 47"); y -= 26
+        for en, ko in words[:3]:
+            c.drawString(50, y, en); c.drawString(220, y, ko); y -= 15
+            c.drawString(66, y, f"The {en} thing happens here.")
+            c.drawString(320, y, "이것은 예문입니다."); y -= 24
+    else:                                         # one — 번호 · 영어 · 뜻
+        y = H - 60
+        c.drawString(60, y, "Day 47"); y -= 24
+        for i, (en, ko) in enumerate(words, 1):
+            c.drawString(60, y, str(i))
+            c.drawString(90, y, en)
+            c.drawString(250, y, ko)
+            y -= 20
+    c.save()
+    return buf.getvalue()
+
+
+def test_word_pdf_is_actually_read():
+    """단어책 PDF 를 실제로 읽어내야 합니다.
+
+    글자를 나오는 차례대로만 읽으면 단어와 뜻이 따로 떨어져 한 개도 못 읽습니다.
+    인쇄된 자리를 보고 같은 높이끼리 묶어야 두 칸짜리 단어책까지 읽힙니다.
+    """
+    want = {"retain": "유지하다", "give up": "포기하다", "glacier": "빙하"}
+
+    for shape in ("one", "two", "unit"):
+        text, note = sc.read_wordfile("책.pdf", _wordbook_pdf(shape))
+        rows, warn = sc.parse_words(text)
+        got = {r["en"]: r["ko"] for r in rows}
+        assert len(rows) == 6, (shape, len(rows), text)
+        assert not warn, (shape, warn)
+        for en, ko in want.items():
+            assert got.get(en) == ko, (shape, en, got)
+        assert "PDF" in note
+
+    # 강이 나뉘어 있으면 '## 강이름' 으로 표시해 둡니다
+    two = sc.read_wordfile("책.pdf", _wordbook_pdf("two"))[0]
+    assert "## Day 47" in two
+    unit = sc.read_wordfile("책.pdf", _wordbook_pdf("unit"))[0]
+    assert "## Day 47" in unit and "## Day 48" in unit
+    assert "Day\t영어" not in unit                  # 머리줄을 단어로 읽으면 안 됩니다
+
+    # 예문은 빼고 표제어만 — 안 그러면 지울 줄이 단어 수만큼 늘어납니다
+    ex, note = sc.read_wordfile("책.pdf", _wordbook_pdf("example"))
+    rows, _ = sc.parse_words(ex)
+    assert len(rows) == 3, rows
+    assert "예문" in note
+    assert not any("happens here" in r["en"] for r in rows)
+    # 숙어는 예문이 아닙니다
+    for phrase in ("give up", "in spite of", "in the long run"):
+        assert not sc._looks_like_sentence(phrase), phrase
+    assert sc._looks_like_sentence("The soil retains water well.")
+
+    # 스캔해서 사진만 든 PDF 는 못 읽는다고 분명히 말해 줍니다
+    blank, note = sc.read_wordfile("책.pdf", _wordbook_pdf("blank"))
+    assert blank == "" and "스캔" in note
+
+    # 관리자 화면에서 올리면 미리보기를 거쳐 그대로 저장됩니다
+    a = admin()
+    a.post("/admin/words/new", data={"name": "pdf read book"}, follow_redirects=True)
+    up = a.post("/admin/words/pdf-read-book/upload", data={
+        "file": (io.BytesIO(_wordbook_pdf("two")), "단어책.pdf"), "unit_name": ""},
+        content_type="multipart/form-data")
+    page = body(up)
+    assert "읽은 내용을 확인해 주세요" in page
+    assert "retain" in page and "유지하다" in page
+    a.post("/admin/words/pdf-read-book/unit",
+           data={"unit_name": "", "words": sc.read_wordfile("x.pdf", _wordbook_pdf("two"))[0]},
+           follow_redirects=True)
+    book = sc.find_wordbook("pdf-read-book")
+    assert sc.word_count(book) == 6, book
+    assert book["units"][0]["name"] == "Day 47"
+
+    a.post("/admin/words/pdf-read-book/delete", follow_redirects=True)
+    print("PASS  단어책 PDF 를 실제로 읽어냄 (두 칸 · 강 칸 · 예문 · 스캔)")
+
+
 def test_word_study_screen():
     """화면에서 한 문제씩 푸는 자리 — 뜻 고르기 · 철자 채우기 · 소리 · 오답 시험지."""
     import json as _json
@@ -4633,6 +4754,7 @@ def run_all():
     test_lineup_takes_the_home_middle()
     test_menu_has_no_duplicates()
     test_mobile_quick_bar()
+    test_word_pdf_is_actually_read()
     test_word_study_screen()
     test_hidden_really_hides()
     test_policy_tables_stack_on_phone()

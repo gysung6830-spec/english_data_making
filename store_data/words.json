@@ -182,6 +182,14 @@
           ]
         }
       ]
+    },
+    {
+      "slug": "pdf-upload-book",
+      "name": "pdf upload book",
+      "publisher": "",
+      "sort": 100,
+      "active": true,
+      "units": []
     }
   ]
 }

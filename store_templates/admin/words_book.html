@@ -17,9 +17,12 @@
       <li>강 칸이 따로 있는 표 — <code>Day | 영어 | 뜻</code> 또는 <code>영어 | 뜻 | 강</code></li>
       <li>시트가 강마다 하나씩 — 시트 이름이 <code>Day 47</code> 처럼 되어 있을 때</li>
       <li>단어 사이에 <code>Day 47</code> 만 있는 줄이 끼어 있을 때</li>
+      <li>PDF 를 <b>한 쪽에 두 칸</b>으로 나눠 찍었을 때 — 인쇄된 자리를 보고 읽습니다</li>
     </ul>
     첫 줄이 '영어 / 뜻' 같은 머리글이면 알아서 뺍니다.
-    PDF 는 <b>글자가 들어 있는 파일만</b> 읽힙니다. 스캔해서 사진으로 만든 PDF 는 못 읽습니다.
+    표제어 아래에 <b>예문</b>이 붙어 있으면 예문은 빼고 단어만 가져옵니다.
+    PDF 는 <b>글자가 들어 있는 파일만</b> 읽힙니다. 스캔하거나 사진으로 찍어 만든 PDF 는
+    글자가 없어서 못 읽습니다 — 그럴 때는 엑셀이나 CSV 로 올려 주세요.
   </div>
   <form method="post" action="{{ url_for('admin.words_upload', slug=b.slug) }}"
         enctype="multipart/form-data" id="upform">
