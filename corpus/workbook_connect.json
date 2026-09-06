@@ -1736,5 +1736,144 @@
    "④: 'Critics'가 넣을 문장의 비평가 주제를 이어 재료 활용에 대한 관심을 서술"
   ],
   "answer_label": "③"
+ },
+ {
+  "key": "2027-09|36",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "That’s",
+    "kind": "지시어",
+    "note": "That’s가 주어진 글의 '고객 관리가 중요하다'는 메시지를 받으며, 상충하는 '빠름' 신호를 새로 제시"
+   },
+   {
+    "marker": "Such mixed signals",
+    "kind": "지시어",
+    "note": "Such mixed signals가 (B)의 상충하는 두 신호(고객 관리 vs 빠름)를 받아 문제로 정리"
+   },
+   {
+    "marker": "compensation ... one aspect",
+    "kind": "연결어",
+    "note": "(C)의 질문 'what should be rewarded?'에 '한 측면 보상'으로 답하며 마무리"
+   }
+  ],
+  "chain": [
+   "(B): That’s가 주어진 글의 '고객 관리가 중요하다'는 메시지를 받으며, 상충하는 '빠름' 신호를 새로 제시",
+   "(C): Such mixed signals가 (B)의 상충하는 두 신호(고객 관리 vs 빠름)를 받아 문제로 정리",
+   "(A): (C)의 질문 'what should be rewarded?'에 '한 측면 보상'으로 답하며 마무리"
+  ],
+  "answer_label": "(B)-(C)-(A)"
+ },
+ {
+  "key": "2027-09|37",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "Every salmon river",
+    "kind": "지시어",
+    "note": "Every salmon river가 주어진 글의 '40개의 서로 다른 강 수계'를 받아, 강마다 요구하는 물고기가 다름을 설명"
+   },
+   {
+    "marker": "But whatever the manifestation of difference",
+    "kind": "연결어",
+    "note": "the manifestation of difference가 (C)의 '강마다 생긴 연어의 차이'를 받고 But으로 전환"
+   },
+   {
+    "marker": "And ... once favorable individuals were found",
+    "kind": "연결어",
+    "note": "And와 favorable individuals가 (A)의 '더 빨리 자라는 연어(우량 개체)'를 이어받아 신품종 창출로 확장하며 마무리"
+   }
+  ],
+  "chain": [
+   "(C): Every salmon river가 주어진 글의 '40개의 서로 다른 강 수계'를 받아, 강마다 요구하는 물고기가 다름을 설명",
+   "(A): the manifestation of difference가 (C)의 '강마다 생긴 연어의 차이'를 받고 But으로 전환",
+   "(B): And와 favorable individuals가 (A)의 '더 빨리 자라는 연어(우량 개체)'를 이어받아 신품종 창출로 확장하며 마무리"
+  ],
+  "answer_label": "(C)-(A)-(B)"
+ },
+ {
+  "key": "2027-09|38",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "governments, rather than scientists",
+    "kind": "지시어",
+    "note": "'시민 과학(과학자를 도움)'과 대비되는 '시민 참여'를 정의 — 뒤의 'Examples'가 지칭할 대상"
+   },
+   {
+    "marker": "helping scientists",
+    "kind": "지시어",
+    "note": "②: 여기서 정의되는 것은 '시민 과학' — 시민 참여 정의문이 끼면 어긋남"
+   },
+   {
+    "marker": "such projects",
+    "kind": "지시어",
+    "note": "③: 'such projects'가 앞의 시민 과학 프로젝트를 받아 매끄럽게 이어짐"
+   },
+   {
+    "marker": "They do so",
+    "kind": "지시어",
+    "note": "④: 'They do so'가 앞 자원봉사자를 받아 과학 활동으로 이어짐 — 삽입 자리 아님"
+   },
+   {
+    "marker": "Examples include",
+    "kind": "지시어",
+    "note": "정답 ⑤: 이 예들(재난·공공 서비스)은 과학이 아니라 '시민 참여'의 예 → 넣을 문장(정의)이 바로 앞에 와야 지칭이 성립"
+   }
+  ],
+  "chain": [
+   "넣을 문장: '시민 과학(과학자를 도움)'과 대비되는 '시민 참여'를 정의 — 뒤의 'Examples'가 지칭할 대상",
+   "①: ①: 인터넷·모바일이 시민 과학 확산을 도왔다는 배경 — 단절 없음",
+   "②: ②: 여기서 정의되는 것은 '시민 과학' — 시민 참여 정의문이 끼면 어긋남",
+   "③: ③: 'such projects'가 앞의 시민 과학 프로젝트를 받아 매끄럽게 이어짐",
+   "④: ④: 'They do so'가 앞 자원봉사자를 받아 과학 활동으로 이어짐 — 삽입 자리 아님",
+   "⑤: 정답 ⑤: 이 예들(재난·공공 서비스)은 과학이 아니라 '시민 참여'의 예 → 넣을 문장(정의)이 바로 앞에 와야 지칭이 성립"
+  ],
+  "answer_label": "⑤"
+ },
+ {
+  "key": "2027-09|39",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "However",
+    "kind": "연결어",
+    "note": "However가 앞의 '멜로디 집중'을 반전하고, '다양성·대조'가 뒤 '반복과 다양성의 균형'으로 이어짐"
+   },
+   {
+    "marker": "variety and contrasting elements",
+    "kind": "지시어",
+    "note": "However가 앞의 '멜로디 집중'을 반전하고, '다양성·대조'가 뒤 '반복과 다양성의 균형'으로 이어짐"
+   },
+   {
+    "marker": "focus on melodic lines",
+    "kind": "지시어",
+    "note": "②: 'For instance'가 ① 주의 한계의 예시 — '멜로디 집중'을 강조 (넣을 문장 However가 반전할 대상)"
+   },
+   {
+    "marker": "balance between repetition and diversity",
+    "kind": "지시어",
+    "note": "정답 ③: 넣을 문장의 '다양성 필요'를 받아 '반복과 다양성의 균형'으로 이어짐 — 삽입 없이는 멜로디 집중(②)에서 균형 논의로 논리가 비약"
+   },
+   {
+    "marker": "this unfolding",
+    "kind": "지시어",
+    "note": "④: 'this unfolding'이 ③ 뒤의 '자연스러운 전개'를 받아 매끄럽게 이어짐 — 삽입 자리 아님"
+   },
+   {
+    "marker": "Such contrasts",
+    "kind": "지시어",
+    "note": "⑤: 'Such contrasts'가 ④의 contrasts를 받아 이어짐 — 역접 문장이 들어갈 단절 없음"
+   }
+  ],
+  "chain": [
+   "넣을 문장: However가 앞의 '멜로디 집중'을 반전하고, '다양성·대조'가 뒤 '반복과 다양성의 균형'으로 이어짐",
+   "①: ①: 앞 문장(집중 배분)과 인과로 이어짐 — 역접이 끼어들 자리 없음",
+   "②: ②: 'For instance'가 ① 주의 한계의 예시 — '멜로디 집중'을 강조 (넣을 문장 However가 반전할 대상)",
+   "③: 정답 ③: 넣을 문장의 '다양성 필요'를 받아 '반복과 다양성의 균형'으로 이어짐 — 삽입 없이는 멜로디 집중(②)에서 균형 논의로 논리가 비약",
+   "④: ④: 'this unfolding'이 ③ 뒤의 '자연스러운 전개'를 받아 매끄럽게 이어짐 — 삽입 자리 아님",
+   "⑤: ⑤: 'Such contrasts'가 ④의 contrasts를 받아 이어짐 — 역접 문장이 들어갈 단절 없음"
+  ],
+  "answer_label": "③"
  }
 ]
