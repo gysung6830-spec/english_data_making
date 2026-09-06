@@ -1333,6 +1333,16 @@ input[type=file]{
   border-radius:999px; background:var(--accent); color:#fff;
   font-size:11px; font-weight:800; line-height:17px; text-align:center;
 }
+/* 내 자료함 — 장바구니 바로 옆. 산 자료를 다시 받는 자리라 글자도 같이 둡니다. */
+.locker-link{display:inline-flex; align-items:center; gap:7px; height:40px; padding:0 12px;
+  border:1px solid var(--line-strong); border-radius:10px; color:var(--ink-2);
+  font-size:14px; font-weight:600; white-space:nowrap;}
+.locker-link:hover{color:var(--brand); border-color:var(--brand);}
+.locker-link.on{color:var(--brand-dark); background:var(--brand-soft); border-color:var(--brand);}
+@media (max-width:900px){
+  .locker-link{padding:0; width:40px; justify-content:center; border-color:transparent;}
+  .locker-link span{display:none;}          /* 좁은 화면에선 그림만 */
+}
 
 /* 장바구니 화면 */
 .cart-list{display:flex; flex-direction:column; gap:10px; margin-bottom:20px;}

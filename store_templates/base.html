@@ -38,20 +38,34 @@
     {# 로고 그림은 영문 Ortica 그대로 두고, 이름은 한글 '오르티카영어' 로 읽히게 합니다.
        검색과 소리 내어 읽기(스크린리더) 는 aria-label 을 씁니다. #}
     <a class="logo" href="{{ url_for('home') }}" aria-label="{{ site.brand }}" title="{{ site.brand }}"><svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M27 4C15.4 4 6 10.7 6 21.4c0 2.2.5 4.3 1.4 6.1l3.4-3.4c-.3-.9-.4-1.8-.4-2.7C10.4 14 17.1 8.9 25 8.3c-1.6 7.8-7.4 13-14.6 14.2l-4.9 4.9a1.6 1.6 0 1 0 2.3 2.3l3.3-3.3C20.6 27.6 27 20 27 8.9V4z" fill="currentColor"/><path d="M18.6 12.6c-2.6 1-4.8 2.7-6.3 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".55"/></svg><span aria-hidden="true">{{ site.brand_en or 'Ortica' }}<i>영어</i></span></a>
+    {# 위 메뉴는 손님이 가장 많이 찾는 여섯 가지만 둡니다. 나머지(교과서 ·
+       형광펜 독해 · 공지 · 문의 · 라인업)는 첫 화면 가운데와 발밑에 있습니다. #}
     <nav class="nav" id="main-nav">
       <a href="{{ url_for('free') }}" class="nav-free {{ 'on' if request.endpoint in ['free','free_detail','samples'] }}">무료 자료</a>
-      <a href="{{ url_for('products') }}" class="{{ 'on' if request.endpoint in ['products','product_detail','book_detail'] }}">자료 목록</a>
-      <a href="{{ url_for('words_page') }}" class="{{ 'on' if request.endpoint in ['words_page','words_book','words_sheet'] }}">단어 시험지</a>
-      <a href="{{ url_for('lineup') }}" class="{{ 'on' if request.endpoint == 'lineup' }}">오르티카 라인업</a>
+      <a href="{{ url_for('words_page') }}" class="{{ 'on' if request.endpoint in ['words_page','words_book','words_make','words_pick','words_sheet'] }}">단어 시험지</a>
+      {% for cid in ['mock', 'ebs'] %}
+        {% for c in nav_categories %}{% if c.id == cid %}
+          <a href="{{ url_for('products', category=c.id) }}"
+             class="{{ 'on' if request.args.get('category') == c.id }}">{{ c.name }}</a>
+        {% endif %}{% endfor %}
+      {% endfor %}
+      <a href="{{ url_for('guide') }}" class="{{ 'on' if request.endpoint in ['guide','custom','submit'] }}">이용 안내</a>
       {% if passcfg.enabled %}
         <a href="{{ url_for('pass_page') }}" class="{{ 'on' if request.endpoint == 'pass_page' }}">프리패스</a>
       {% endif %}
-      <a href="{{ url_for('notice') }}" class="{{ 'on' if request.endpoint == 'notice' }}">공지</a>
-      <a href="{{ url_for('guide') }}" class="{{ 'on' if request.endpoint in ['guide','custom','submit'] }}">안내</a>
-      <a href="{{ url_for('contact') }}" class="{{ 'on' if request.endpoint == 'contact' }}">문의</a>
-      <a href="{{ url_for('my_page') }}" class="{{ 'on' if request.endpoint in ['my_page','my_locker'] }}">내 자료함</a>
     </nav>
     <div class="head-cta">
+      {# 산 자료를 다시 받는 자리. 장바구니와 나란히 두어야 눈에 띕니다. #}
+      <a class="locker-link {{ 'on' if request.endpoint in ['my_page','my_locker'] }}"
+         href="{{ url_for('my_page') }}" aria-label="내 자료함" title="내 자료함">
+        <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
+          <path d="M4 7.5 12 4l8 3.5v9L12 20l-8-3.5z" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M4 7.5 12 11l8-3.5M12 11v9" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        <span>내 자료함</span>
+      </a>
       <a class="cart-link {{ 'has' if cart_count }}" href="{{ url_for('cart') }}"
          aria-label="장바구니">
         <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
@@ -70,22 +84,20 @@
 
 {# 폰에서는 메뉴를 누르지 않아도 갈 곳이 다 보이도록, 옆으로 미는 줄띠를 답니다. #}
 <nav class="quick-bar" aria-label="바로가기">
+  {# 위 메뉴와 같은 여섯 가지. 좁은 화면에서 손가락으로 밀어 고릅니다. #}
   <div class="qb-track">
     <a href="{{ url_for('free') }}" class="qb-free {{ 'on' if request.endpoint in ['free','free_detail','samples'] }}">무료 자료</a>
-    <a href="{{ url_for('products') }}" class="{{ 'on' if request.endpoint in ['products','product_detail','book_detail'] and not request.args.get('category') }}">자료 목록</a>
-    {% for c in nav_categories %}
-      <a href="{{ url_for('products', category=c.id) }}"
-         class="{{ 'on' if request.args.get('category') == c.id }}">{{ c.name }}</a>
+    <a href="{{ url_for('words_page') }}" class="{{ 'on' if request.endpoint in ['words_page','words_book','words_make','words_pick','words_sheet'] }}">단어 시험지</a>
+    {% for cid in ['mock', 'ebs'] %}
+      {% for c in nav_categories %}{% if c.id == cid %}
+        <a href="{{ url_for('products', category=c.id) }}"
+           class="{{ 'on' if request.args.get('category') == c.id }}">{{ c.name }}</a>
+      {% endif %}{% endfor %}
     {% endfor %}
-    <a href="{{ url_for('words_page') }}" class="{{ 'on' if request.endpoint in ['words_page','words_book','words_sheet'] }}">단어 시험지</a>
-    <a href="{{ url_for('lineup') }}" class="{{ 'on' if request.endpoint == 'lineup' }}">오르티카 라인업</a>
+    <a href="{{ url_for('guide') }}" class="{{ 'on' if request.endpoint in ['guide','custom','submit'] }}">이용 안내</a>
     {% if passcfg.enabled %}
       <a href="{{ url_for('pass_page') }}" class="{{ 'on' if request.endpoint == 'pass_page' }}">프리패스</a>
     {% endif %}
-    <a href="{{ url_for('notice') }}" class="{{ 'on' if request.endpoint == 'notice' }}">공지</a>
-    <a href="{{ url_for('guide') }}" class="{{ 'on' if request.endpoint in ['guide','custom','submit'] }}">안내</a>
-    <a href="{{ url_for('contact') }}" class="{{ 'on' if request.endpoint == 'contact' }}">문의</a>
-    <a href="{{ url_for('my_page') }}" class="{{ 'on' if request.endpoint in ['my_page','my_locker'] }}">내 자료함</a>
   </div>
 </nav>
 

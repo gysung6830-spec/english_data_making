@@ -1817,9 +1817,10 @@ def test_contact_page():
         assert label in text, label
     assert "주문번호" in text                       # 자료 미도착 문의를 바로 찾기 위해
 
-    # 메뉴 · 폰 줄띠 · 바닥글에서 갈 수 있어야 합니다
+    # 위 메뉴는 여섯 가지만 둡니다. 문의는 발밑과 이용 안내에서 갑니다.
     home = body(client().get("/"))
-    assert home.count('href="/contact"') >= 3
+    assert home.count('href="/contact"') >= 1                  # 바닥글
+    assert 'href="/contact"' in body(client().get("/guide"))
 
     # 내용을 안 적으면 반려
     bad = client().post("/contact", data={"topic": "order", "name": "홍길동",
@@ -1843,27 +1844,50 @@ def test_contact_page():
     print("PASS  문의 창구 — 바로 연락 · 문의 폼 · 관리자에서 확인")
 
 
+def test_locker_sits_next_to_the_cart():
+    """산 자료를 다시 받는 곳은 장바구니 옆에 있어야 눈에 띕니다."""
+    home = body(client().get("/"))
+    cta = home.split('class="head-cta"', 1)[1].split("</div>", 1)[0]
+    assert 'class="locker-link' in cta and "내 자료함" in cta
+    assert cta.index("내 자료함") < cta.index("장바구니")     # 장바구니 왼쪽
+    print("PASS  내 자료함이 장바구니 옆에")
+
+
+def test_lineup_takes_the_home_middle():
+    """첫 화면 가운데는 자료 목록이 아니라 오르티카 라인업입니다."""
+    home = body(client().get("/"))
+    assert "오르티카 라인업 보기" in home                    # 맨 위 두 번째 단추
+    assert "라인업 자세히 보기" in home                      # 가운데 단추
+    assert home.index("오르티카 라인업 보기") < home.index("라인업 자세히 보기")
+    assert "자료 목록 보기" in home                          # 목록도 갈 수 있게 남겨 둡니다
+    print("PASS  첫 화면 가운데가 오르티카 라인업")
+
+
 def test_menu_has_no_duplicates():
     """메뉴에 같은 항목이 두 번 들어가면 안 됩니다. (실제로 두 번 겪은 실수입니다)"""
     home = body(client().get("/"))
     head = home.split('class="nav"', 1)[1].split("</nav>", 1)[0]
     bar = home.split('class="qb-track"', 1)[1].split("</nav>", 1)[0]
     for where, html in (("머리말 메뉴", head), ("폰 줄띠", bar)):
-        for label in ("무료 자료", "자료 목록", "단어 시험지", "오르티카 라인업",
-                      "프리패스", "공지", "안내", "문의", "내 자료함"):
+        for label in ("무료 자료", "단어 시험지", "모의고사", "EBS 부교재",
+                      "이용 안내", "프리패스"):
             n = html.count(f">{label}</a>")
             assert n == 1, f"{where} 에 '{label}' 가 {n}번 들어 있습니다"
-    print("PASS  메뉴에 같은 항목이 두 번 들어가지 않음")
+        # 여섯 가지만 둡니다. 나머지는 첫 화면 가운데와 발밑에 있습니다.
+        for gone in ("자료 목록", "오르티카 라인업", "공지", "문의", "내 자료함",
+                     "교과서", "형광펜 독해"):
+            assert f">{gone}</a>" not in html, f"{where} 에 '{gone}' 가 남아 있습니다"
+    print("PASS  메뉴는 여섯 가지 · 같은 항목이 두 번 안 들어감")
 
 
 def test_mobile_quick_bar():
     """폰에서 메뉴를 누르지 않아도 갈 곳이 다 보여야 합니다."""
     home = body(client().get("/"))
     assert 'class="quick-bar"' in home
-    # 무료 자료 · 자료 목록 · 분류 4종 · 라인업 · 프리패스 · 공지 · 안내
+    # 위 메뉴와 같은 여섯 가지
     track = home.split('class="qb-track"', 1)[1].split("</nav>", 1)[0]
-    for word in ("무료 자료", "자료 목록", "교과서", "모의고사", "EBS 부교재",
-                 "형광펜 독해", "오르티카 라인업", "프리패스", "공지", "안내"):
+    for word in ("무료 자료", "단어 시험지", "모의고사", "EBS 부교재",
+                 "이용 안내", "프리패스"):
         assert word in track, word
     # 지금 보고 있는 자리를 표시해 줍니다
     picked = body(client().get("/products?category=mock"))
@@ -3484,6 +3508,8 @@ def run_all():
     test_my_locker()
     test_clear_sample_data()
     test_contact_page()
+    test_locker_sits_next_to_the_cart()
+    test_lineup_takes_the_home_middle()
     test_menu_has_no_duplicates()
     test_mobile_quick_bar()
     test_nanumsquareround_font_is_served()
