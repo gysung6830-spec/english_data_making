@@ -944,16 +944,52 @@ def test_clear_sample_data():
     print("PASS  예시 데이터 한 번에 지우기 (내 상품은 남김)")
 
 
+def test_admin_menu_is_short():
+    """관리자 메뉴는 자주 여는 것만 밖에 나와 있어야 합니다.
+
+    19개가 한 줄로 늘어서 있으면 메뉴가 벽이 됩니다. 겹치는 화면은 합치고,
+    한 번 해 두면 그만인 것은 접어 두었습니다.
+    """
+    page = body(admin().get("/admin"))
+    nav = page[page.index('adm-nav'):page.index('adm-side-foot')]
+    daily, rare = nav.split("가끔 여는 것", 1)
+
+    # 밖에 나와 있는 것 — 매일·매주 여는 것만
+    for must in ("오늘 할 일", "주문 · 문의", "시험지 · 쿠폰", "매출 · 지표",
+                 "상품", "교재 · 분류", "오르티카 라인업", "무료 자료실",
+                 "단어장", "공지", "메일 · 명단"):
+        assert must in daily, must
+    assert daily.count('</a>') == 11, daily.count('</a>')
+
+    # 접힌 칸 — 한 번 해 두면 그만인 것
+    for later in ("가게 정보", "가격 가이드", "빠진 것 점검", "검색 등록", "백업"):
+        assert later in rare, later
+
+    # 합친 화면은 메뉴에서 사라졌습니다 (주소로 확인 — 이름은 합친 쪽에 남아 있습니다)
+    for gone in ("/admin/metrics", "/admin/coupons", "/admin/leads"):
+        assert gone not in nav, gone
+
+    # 그래도 옛 주소로 오시면 합쳐진 자리로 보내 드립니다
+    a = admin()
+    for old, new in [("/admin/metrics", "/admin/sales"),
+                     ("/admin/coupons", "/admin/submissions"),
+                     ("/admin/leads", "/admin/mail")]:
+        resp = a.get(old)
+        assert resp.status_code == 302 and resp.headers["Location"].endswith(new), old
+    print("PASS  관리자 메뉴 11개 · 가끔 쓰는 것은 접어 둠")
+
+
 def test_admin_pages_open():
     a = admin()
     for path, must in [
         ("/admin", "오늘 할 일"),
         ("/admin/orders", "주문 · 문의"),
         ("/admin/submissions", "시험지 제출"),
-        ("/admin/coupons", "할인 쿠폰"),
+        ("/admin/submissions", "쿠폰 목록"),        # 쿠폰은 시험지 화면으로 합쳤습니다
         ("/admin/products", "새 상품 만들기"),
         ("/admin/books", "교재 · 분류"),
         ("/admin/sales", "월별 매출"),
+        ("/admin/mail", "이메일 명단"),             # 명단은 메일 화면으로 합쳤습니다
         ("/admin/products/mock-2026-06-g3-analysis/files", "손님에게 보낼 파일"),
         ("/admin/materials", "오르티카 라인업"),
         ("/admin/materials/analysis", "특징 묶음 제목"),
@@ -984,7 +1020,7 @@ def test_admin_forms_offer_buttons_not_typing():
     for label in ("평가원", "EBS", "능률(NE)", "고1~고2"):
         assert label in bookform, label
 
-    coupon = body(a.get("/admin/coupons"))
+    coupon = body(a.get("/admin/submissions"))     # 쿠폰 만들기는 여기로 옮겼습니다
     for label in ("5,000원", "10%", "석 달", "기한 없음", "첫 구매 감사"):
         assert label in coupon, label
 
@@ -1734,13 +1770,21 @@ def _mail_log():
 
 
 def test_metrics_screen():
-    """지표 — 자료 하나를 평균 몇 명이 사는지가 가장 크게 보여야 합니다."""
+    """매출 화면 하나에 돈과 지표가 다 있어야 합니다.
+
+    전에는 '매출·세금' 과 '지표' 가 따로 있으면서 달마다 표를 똑같은 질의로
+    두 번 그렸습니다. 한 화면으로 합쳤습니다.
+    """
     a = admin()
-    page = body(a.get("/admin/metrics"))
-    assert "자료 하나당 평균" in page
-    assert "목표 5명 (본전)" in page and "목표 34명 (월 300만원)" in page
-    assert "제작비 회수" in page and "많이 팔린 자료" in page
+    page = body(a.get("/admin/sales"))
+    assert "매출 · 지표" in page
+    assert "자료 하나당 평균" in page and "실수령" in page
+    assert "월별 매출" in page and "많이 팔린 자료" in page
     assert "한 번도 안 팔린 자료" in page
+    # 없던 값을 읽어 늘 같은 숫자만 내던 '제작비 회수' 칸은 뺐습니다
+    assert "제작비 회수" not in page
+    # 지표 화면은 없앴습니다. 옛 주소는 여기로 옵니다
+    assert a.get("/admin/metrics").headers["Location"].endswith("/admin/sales")
 
     # 값을 치른 주문이 있으면 순위에 뜹니다
     slug = "mock-2026-03-g2-analysis"
@@ -1752,12 +1796,12 @@ def test_metrics_screen():
         "SELECT id FROM orders WHERE view_key = ?", (key,)).fetchone()[0]
     a.post(f"/admin/orders/{oid}", data={"status": "입금확인"}, follow_redirects=True)
 
-    page = body(a.get("/admin/metrics"))
+    page = body(a.get("/admin/sales"))
     assert "2026년 3월 학력평가" in page
     # 손님 화면에는 이런 숫자가 새어 나가면 안 됩니다
     for path in ("/", "/products", "/cart"):
-        assert "제작비 회수" not in body(client().get(path))
-    print("PASS  지표 — 단위당 평균 구매자 · 제작비 회수 · 자료별 순위")
+        assert "실수령" not in body(client().get(path))
+    print("PASS  매출 한 화면 — 돈 · 단위당 평균 · 자료별 순위")
 
 
 def test_storage_warning_when_data_would_vanish():
@@ -2066,7 +2110,12 @@ def test_contact_has_no_phone():
     # 관리자 설정에도 전화 칸이 없습니다
     adm = body(admin().get("/admin/settings"))
     assert 'name="contact_phone"' not in adm
-    assert 'name="contact_kakao"' in adm
+    # 오픈채팅 주소 칸은 하나뿐이어야 합니다. 똑같이 생긴 칸이 두 개 있었는데
+    # 위쪽 것은 저장할 때 아무도 안 읽어, 적어 넣어도 사라졌습니다.
+    assert adm.count('카카오톡 오픈채팅 주소') == 1, adm.count('카카오톡 오픈채팅 주소')
+    assert 'name="contact_kakao_url"' in adm
+    assert 'name="contact_kakao"' not in adm.replace('name="contact_kakao_url"', '') \
+                                          .replace('name="contact_kakao_label"', '')
 
     # 저장해도 전화번호가 다시 생기지 않습니다.
     # (설정 저장은 화면 전체를 덮어쓰므로, 확인한 뒤 원래대로 돌려놓습니다)
@@ -2722,7 +2771,7 @@ def test_free_gated_item_needs_email():
     assert "받으실 파일" in body(ok)
     assert c.get("/free/2026-03-goh3-literal/file/0").status_code == 200
 
-    rows = body(admin().get("/admin/leads"))
+    rows = body(admin().get("/admin/mail"))        # 명단은 메일 화면 안에 있습니다
     assert "teacher@school.com" in rows and "고3 3월 학력평가 직독직해" in rows
     print("PASS  직독직해는 이메일 받고 내어 주기")
 
@@ -2730,7 +2779,7 @@ def test_free_gated_item_needs_email():
 def test_free_notify_collects_email():
     c = client()
     c.post("/free/notify", data={"email": "alarm@school.com"}, follow_redirects=True)
-    assert "alarm@school.com" in body(admin().get("/admin/leads"))
+    assert "alarm@school.com" in body(admin().get("/admin/mail"))
     assert "alarm@school.com" in body(admin().get("/admin/leads.csv"))
     print("PASS  새 자료 알림 신청")
 
@@ -4796,6 +4845,7 @@ def run_all():
     test_login_blocks_repeated_guesses()
     test_admin_not_indexed_and_login_is_standalone()
     test_login_next_cannot_leave_admin()
+    test_admin_menu_is_short()
     test_admin_pages_open()
     test_bulk_products_from_zip()
     test_book_pick_grid()

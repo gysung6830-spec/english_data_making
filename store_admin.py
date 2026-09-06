@@ -238,7 +238,9 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
         {"done": mail_ok,
          "title": "주문 알림 메일 켜기",
          "why": "주문이 오면 바로 알 수 있고, 메일함이 주문 장부가 됩니다.",
-         "url": url_for("admin.backup"), "label": "설정 방법 보기"},
+         # 백업 화면에는 메일 설정 이야기가 없습니다. 설정 안내가 실제로 적힌
+         # 메일 화면으로 보냅니다.
+         "url": url_for("admin.mail_page"), "label": "메일 화면 열기"},
         {"done": bool(free_ready),
          "title": "무료 자료 한 건 올리기",
          "why": "한줄해석 하나만 올려도 검색으로 들어오는 문이 하나 생깁니다. "
@@ -469,8 +471,32 @@ def sales():
            WHERE receipt_kind IS NOT NULL AND receipt_kind != '' AND receipt_done = 0
              AND status IN ('입금확인', '발송완료')
            ORDER BY id DESC""").fetchall()
-    return render_template("admin/sales.html", months=months, pending=pending,
-                           receipt_kinds=sc.RECEIPT_KINDS)
+    # 지표도 여기서 함께 봅니다. 따로 화면을 두었더니 같은 질의를 두 번 하고,
+    # 손님이 볼 숫자를 두 군데서 찾아야 했습니다.
+    catalog = sc.load_catalog()
+    sold = sc.sold_counts()
+    live = [x for x in catalog["products"] if x.get("active", True)]
+    by_slug = {x["slug"]: x for x in live}
+    rank = sorted(((by_slug[k], v) for k, v in sold.items() if k in by_slug),
+                  key=lambda x: -x[1])[:20]
+    never = [x for x in live if not sold.get(x["slug"])]
+    money = db.execute(
+        """SELECT COALESCE(SUM(amount), 0) AS total, COUNT(*) AS cnt
+           FROM orders WHERE status IN ('입금확인', '발송완료')""").fetchone()
+    leads = db.execute("SELECT COUNT(DISTINCT lower(email)) AS n FROM leads").fetchone()["n"]
+    buyers = db.execute(
+        """SELECT COUNT(DISTINCT lower(email)) AS n FROM orders
+           WHERE status IN ('입금확인', '발송완료')""").fetchone()["n"]
+    units = len(live)
+    buys = sum(sold.values())
+
+    return render_template(
+        "admin/sales.html", months=months, pending=pending,
+        receipt_kinds=sc.RECEIPT_KINDS,
+        avg=(buys / units if units else 0), units=units, buys=buys,
+        gross=money["total"], orders=money["cnt"], net=int(money["total"] * 0.88),
+        leads=leads, buyers=buyers, rank=rank, never=never,
+        turn=(leads and buyers / leads * 100) or 0)
 
 
 @admin_bp.route("/orders/<int:order_id>/receipt", methods=["POST"])
@@ -500,8 +526,13 @@ def submissions():
     for row in sc.get_db().execute("SELECT status, COUNT(*) c FROM submissions GROUP BY status"):
         counts[row["status"]] = row["c"]
     reward = sc.load_site().get("submit_reward", {})
+    # 쿠폰은 여기서 나옵니다. 시험지를 '승인' 하면 자동으로 만들어지므로,
+    # 만들어진 쿠폰 목록도 같은 화면에 두어야 오간 것이 한눈에 보입니다.
+    coupons = sc.get_db().execute(
+        "SELECT * FROM coupons ORDER BY id DESC LIMIT 200").fetchall()
     return render_template("admin/submissions.html", rows=rows, statuses=sc.SUBMIT_STATUSES,
-                           selected=status, counts=counts, reward=reward)
+                           selected=status, counts=counts, reward=reward,
+                           coupons=coupons, today=sc.now_kst().date().isoformat())
 
 
 @admin_bp.route("/submissions/<int:sub_id>", methods=["POST"])
@@ -587,10 +618,9 @@ def coupons():
                                    issued_to=sc.clean(request.form.get("issued_to"), 120),
                                    days_valid=sc.to_int(request.form.get("days_valid"), 90))
             flash(f"쿠폰 {code} 을(를) 만들었습니다. 손님에게 이 코드를 알려 주세요.", "ok")
-        return redirect(url_for("admin.coupons"))
+        return redirect(url_for("admin.submissions"))
 
-    rows = db.execute("SELECT * FROM coupons ORDER BY id DESC LIMIT 300").fetchall()
-    return render_template("admin/coupons.html", rows=rows, today=sc.now_kst().date().isoformat())
+    return redirect(url_for("admin.submissions"))
 
 
 @admin_bp.route("/coupons/<int:coupon_id>/delete", methods=["POST"])
@@ -1688,54 +1718,8 @@ def pass_update(pass_id):
 # ---------------------------------------------------------------------------
 @admin_bp.route("/metrics")
 def metrics():
-    """단위당 평균 몇 명이 사는지. 우리가 목표로 삼은 숫자입니다."""
-    db = sc.get_db()
-    catalog = sc.load_catalog()
-    site = sc.load_site()
-    sold = sc.sold_counts()
-
-    live = [p for p in catalog["products"] if p.get("active", True)]
-    units = len(live)
-    buys = sum(sold.values())
-    avg = buys / units if units else 0
-
-    # 자료 하나를 만드는 데 드는 값 — 가격 가이드의 단가에서 거꾸로 셉니다
-    cost_p = sc.to_int(site.get("costs", {}).get("per_passage"), 3889)
-    passages = sum(sc.to_int(p.get("passages"), 0) for p in live)
-    make_cost = passages * cost_p
-
-    money = db.execute(
-        """SELECT COALESCE(SUM(amount), 0) AS total, COUNT(*) AS cnt
-           FROM orders WHERE status IN ('입금확인', '발송완료')""").fetchone()
-    net = int(money["total"] * 0.88)          # 부가세·카드 수수료를 뺀 실수령
-    need = (make_cost / (0.88 * (sum(p.get("price", 0) for p in live) or 1))
-            if make_cost else 0)
-
-    # 자료별 순위
-    by_slug = {p["slug"]: p for p in live}
-    rank = sorted(((by_slug[k], v) for k, v in sold.items() if k in by_slug),
-                  key=lambda x: -x[1])[:20]
-    never = [p for p in live if not sold.get(p["slug"])]
-
-    months = db.execute(
-        """SELECT substr(created_at, 1, 7) AS ym, COUNT(*) AS cnt,
-                  COALESCE(SUM(amount), 0) AS total
-           FROM orders WHERE status IN ('입금확인', '발송완료')
-           GROUP BY ym ORDER BY ym DESC LIMIT 12""").fetchall()
-    leads = db.execute("SELECT COUNT(DISTINCT lower(email)) AS n FROM leads").fetchone()["n"]
-    buyers = db.execute(
-        """SELECT COUNT(DISTINCT lower(email)) AS n FROM orders
-           WHERE status IN ('입금확인', '발송완료')""").fetchone()["n"]
-    passes = db.execute(
-        "SELECT COUNT(*) AS n FROM passes WHERE revoked_at IS NULL AND ends_at >= ?",
-        (sc.stamp(),)).fetchone()["n"]
-
-    return render_template(
-        "admin/metrics.html", units=units, buys=buys, avg=avg, passages=passages,
-        cost_p=cost_p, make_cost=make_cost, gross=money["total"], orders=money["cnt"],
-        net=net, need=need, rank=rank, never=never, months=months,
-        leads=leads, buyers=buyers, passes=passes,
-        turn=(leads and buyers / leads * 100) or 0)
+    """지표는 매출 화면으로 합쳤습니다. 옛 주소로 들어오시면 그리로 보냅니다."""
+    return redirect(url_for("admin.sales"))
 
 
 # ---------------------------------------------------------------------------
@@ -1819,7 +1803,8 @@ def mail_page():
         rows.append({"r": r, "items": picked})
     return render_template("admin/mail.html", news=news, everyone=everyone,
                            left=rows, past=past, kinds=sc.MAIL_KINDS,
-                           ready=sc.mail_ready(), site=sc.load_site())
+                           ready=sc.mail_ready(), site=sc.load_site(),
+                           leads=sc.lead_rows(500))
 
 
 @admin_bp.route("/mail/news", methods=["POST"])
@@ -1958,10 +1943,8 @@ def mail_cart():
 
 @admin_bp.route("/leads")
 def leads():
-    """무료 자료를 받아 가시며 남긴 이메일 명단."""
-    rows = sc.lead_rows(500)
-    news = [r for r in rows if r["news"]]
-    return render_template("admin/leads.html", rows=rows, news_count=len(news))
+    """명단은 메일 화면으로 합쳤습니다. 옛 주소로 들어오시면 그리로 보냅니다."""
+    return redirect(url_for("admin.mail_page"))
 
 
 @admin_bp.route("/leads.csv")

@@ -17,25 +17,21 @@
       🛠 관리자 화면
       <small>{{ site.brand }}</small>
     </a>
+    {# 메뉴는 '얼마나 자주 여느냐' 로 줄을 세웁니다. 겹치는 화면은 합쳤고,
+       한 번 해 두면 그만인 것은 접어 두었습니다. #}
     <nav class="adm-nav">
       <a href="{{ url_for('admin.dashboard') }}" class="{{ 'on' if request.endpoint == 'admin.dashboard' }}">
         🏠 오늘 할 일</a>
 
-      <div class="sep">매일 하는 일</div>
+      <div class="sep">매일 보는 것</div>
       <a href="{{ url_for('admin.orders') }}" class="{{ 'on' if request.endpoint == 'admin.orders' }}">
         🧾 주문 · 문의</a>
-      <a href="{{ url_for('admin.submissions') }}" class="{{ 'on' if request.endpoint == 'admin.submissions' }}">
-        📄 시험지 제출</a>
-      <a href="{{ url_for('admin.coupons') }}" class="{{ 'on' if request.endpoint == 'admin.coupons' }}">
-        🎟 할인 쿠폰</a>
-      <a href="{{ url_for('admin.sales') }}" class="{{ 'on' if request.endpoint == 'admin.sales' }}">
-        💰 매출 · 세금</a>
-      <a href="{{ url_for('admin.metrics') }}" class="{{ 'on' if request.endpoint == 'admin.metrics' }}">
-        📈 지표</a>
-      <a href="{{ url_for('admin.checkup') }}" class="{{ 'on' if request.endpoint == 'admin.checkup' }}">
-        🔍 빠진 것 점검</a>
+      <a href="{{ url_for('admin.submissions') }}" class="{{ 'on' if request.endpoint in ['admin.submissions','admin.coupons'] }}">
+        📄 시험지 · 쿠폰</a>
+      <a href="{{ url_for('admin.sales') }}" class="{{ 'on' if request.endpoint in ['admin.sales','admin.metrics'] }}">
+        💰 매출 · 지표</a>
 
-      <div class="sep">가게 꾸미기</div>
+      <div class="sep">자료 올리기</div>
       <a href="{{ url_for('admin.products') }}" class="{{ 'on' if request.endpoint in ['admin.products','admin.product_form'] }}">
         📦 상품</a>
       <a href="{{ url_for('admin.books') }}" class="{{ 'on' if request.endpoint in ['admin.books','admin.book_form'] }}">
@@ -46,24 +42,31 @@
         🎁 무료 자료실</a>
       <a href="{{ url_for('admin.words_list') }}" class="{{ 'on' if request.endpoint in ['admin.words_list','admin.words_book'] }}">
         🔤 단어장</a>
-      <a href="{{ url_for('admin.passes') }}" class="{{ 'on' if request.endpoint == 'admin.passes' }}">
-        🎫 프리패스</a>
-      <a href="{{ url_for('admin.leads') }}" class="{{ 'on' if request.endpoint == 'admin.leads' }}">
-        📧 이메일 명단</a>
-      <a href="{{ url_for('admin.mail_page') }}" class="{{ 'on' if request.endpoint == 'admin.mail_page' }}">
-        ✉️ 안내 메일</a>
       <a href="{{ url_for('admin.notices') }}" class="{{ 'on' if request.endpoint == 'admin.notices' }}">
         📢 공지</a>
+      <a href="{{ url_for('admin.mail_page') }}" class="{{ 'on' if request.endpoint in ['admin.mail_page','admin.leads'] }}">
+        ✉️ 메일 · 명단</a>
 
-      <div class="sep">처음 한 번만</div>
-      <a href="{{ url_for('admin.settings') }}" class="{{ 'on' if request.endpoint == 'admin.settings' }}">
-        ⚙️ 가게 정보</a>
-      <a href="{{ url_for('admin.pricing') }}" class="{{ 'on' if request.endpoint == 'admin.pricing' }}">
-        🏷 가격 가이드</a>
-      <a href="{{ url_for('admin.seo') }}" class="{{ 'on' if request.endpoint == 'admin.seo' }}">
-        🔍 검색 등록</a>
-      <a href="{{ url_for('admin.backup') }}" class="{{ 'on' if request.endpoint == 'admin.backup' }}">
-        💾 백업</a>
+      {# 한 번 해 두면 다시 열 일이 드문 것들. 접어 둡니다. #}
+      {% set rare = ['admin.settings', 'admin.pricing', 'admin.checkup',
+                     'admin.passes', 'admin.seo', 'admin.backup'] %}
+      <details class="nav-rare" {{ 'open' if request.endpoint in rare }}>
+        <summary>가끔 여는 것</summary>
+        <a href="{{ url_for('admin.settings') }}" class="{{ 'on' if request.endpoint == 'admin.settings' }}">
+          ⚙️ 가게 정보</a>
+        <a href="{{ url_for('admin.pricing') }}" class="{{ 'on' if request.endpoint == 'admin.pricing' }}">
+          🏷 가격 가이드</a>
+        <a href="{{ url_for('admin.checkup') }}" class="{{ 'on' if request.endpoint == 'admin.checkup' }}">
+          🔍 빠진 것 점검</a>
+        {% if passcfg.enabled %}
+          <a href="{{ url_for('admin.passes') }}" class="{{ 'on' if request.endpoint == 'admin.passes' }}">
+            🎫 프리패스</a>
+        {% endif %}
+        <a href="{{ url_for('admin.seo') }}" class="{{ 'on' if request.endpoint == 'admin.seo' }}">
+          🔍 검색 등록</a>
+        <a href="{{ url_for('admin.backup') }}" class="{{ 'on' if request.endpoint == 'admin.backup' }}">
+          💾 백업</a>
+      </details>
     </nav>
     <div class="adm-side-foot">
       <a href="{{ url_for('home') }}" target="_blank" rel="noopener">고객 화면 보기 ↗</a><br>

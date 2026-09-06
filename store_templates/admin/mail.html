@@ -1,9 +1,9 @@
 {% extends "admin/base.html" %}
-{% block title %}안내 메일{% endblock %}
+{% block title %}메일 · 명단{% endblock %}
 
 {% block body %}
 <div class="adm-head">
-  <h1>안내 메일</h1>
+  <h1>메일 · 명단</h1>
   <p>무료 자료실로 모인 이메일 명단에 <b>새 자료 소식</b>과 <b>할인 쿠폰</b>을 보냅니다.
     담아만 두고 안 사신 분께 알려 드리는 것도 여기서 합니다.</p>
 </div>
@@ -198,6 +198,47 @@
     </div>
   {% else %}
     <div class="hint">아직 보낸 안내가 없습니다.</div>
+  {% endif %}
+</div>
+
+{# ---- 이메일 명단 -------------------------------------------------------
+   보낼 곳과 보내는 일이 다른 화면에 있으면, 누구에게 가는지 모른 채 누르게
+   됩니다. 명단을 같은 화면 아래에 둡니다. #}
+<div class="panel">
+  <div class="row">
+    <h2 style="margin:0;">이메일 명단 {{ leads|length }}명</h2>
+    <div class="spacer"></div>
+    <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.leads_csv') }}">엑셀로 내려받기</a>
+  </div>
+  <div class="hint">무료 자료를 받으며 남겨 주신 주소입니다.
+    광고성 메일은 제목 앞에 <b>(광고)</b> 를 붙여야 합니다 — 자료 알림만 보내면 해당되지 않습니다.</div>
+  {% if leads %}
+    <div class="wrapbox" style="margin-top:12px;">
+      <table class="adm-table">
+        <thead><tr><th>이메일</th><th>성함</th><th>받아 간 자료</th>
+                   <th>알림</th><th>남긴 날짜</th></tr></thead>
+        <tbody>
+        {% for r in leads %}
+          <tr>
+            <td><b>{{ r['email'] }}</b></td>
+            <td class="muted">{{ r['name'] or '-' }}</td>
+            <td><small>{{ r['title'] or '-' }}</small></td>
+            <td>{% if r['news'] %}<span class="tag tag-on">신청</span>{% else %}
+                <span class="tag tag-off">-</span>{% endif %}</td>
+            <td class="muted"><small>{{ r['created_at'][:16].replace('T', ' ') }}</small></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty">
+      <b>아직 남겨 주신 이메일이 없습니다.</b>
+      무료 자료를 올리면 여기에 쌓입니다.
+      <div style="margin-top:16px;">
+        <a class="btn btn-primary btn-sm" href="{{ url_for('admin.free_list') }}">무료 자료 올리러 가기</a>
+      </div>
+    </div>
   {% endif %}
 </div>
 {% endblock %}
