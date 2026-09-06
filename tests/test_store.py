@@ -4,7 +4,7 @@
 API 키도, 인터넷도 필요 없습니다. 실제 데이터 대신 임시 폴더를 씁니다.
 
 검증 항목:
-  - 고객 페이지가 모두 열리는지 (교재별 페이지·공지·프리패스·시험지 나눔 포함)
+  - 고객 페이지가 모두 열리는지 (교재별 페이지·공지·프리패스·시험지 보내기 포함)
   - 주문서 입력값 검증과 금액 계산
   - 자료 요청(지문 없이) / 맞춤 제작 두 경로
   - 시험지 제출 → 관리자 승인 → 쿠폰 발급 → 주문에서 할인 적용까지 한 줄로
@@ -575,12 +575,16 @@ def test_request_requires_wanted():
 
 
 def test_submit_takes_photos_by_drag_and_drop():
-    """시험지 나눔 — 사진 여러 장을 끌어다 놓아 보낼 수 있어야 합니다."""
+    """시험지 보내기 — 폰으로 찍거나 끌어다 놓아 여러 장을 보낼 수 있어야 합니다."""
     import io as _io
     page = body(client().get("/submit"))
-    assert 'class="dropzone"' in page and "끌어다 놓으세요" in page
+    assert 'class="dropzone"' in page and "끌어다 놓기" in page
     assert 'name="files"' in page and "multiple" in page
-    assert "input.files = e.dataTransfer.files" in page      # 끌어다 놓은 것이 담깁니다
+    assert "add(e.dataTransfer.files)" in page            # 끌어다 놓은 것이 담깁니다
+    # 폰에서 바로 찍을 수 있어야 하고, 찍은 사진은 앞의 것에 이어 붙습니다
+    assert 'capture="environment"' in page and 'id="shot"' in page
+    assert "사진 찍기" in page
+    assert "new DataTransfer()" in page                  # 이어 붙이는 자리
     # 쿠폰은 메일로 가니 이메일은 꼭 받습니다
     email = page[page.index('id="email"'):page.index('id="email"') + 200]
     assert "required" in email
@@ -620,7 +624,7 @@ def test_submit_takes_photos_by_drag_and_drop():
 
     for n in names:
         (sc.SUBMIT_DIR / n).unlink(missing_ok=True)
-    print("PASS  시험지 나눔 — 여러 장 끌어다 놓기")
+    print("PASS  시험지 보내기 — 찍거나 끌어다 놓아 여러 장")
 
 
 # ---- 4. 시험지 제출 → 쿠폰 → 할인 (한 줄로) -------------------------------
@@ -2858,11 +2862,12 @@ def test_custom_request_takes_files_by_drag_and_drop():
     """맞춤 제작 — 링크 대신 파일을 그 자리에서 올릴 수 있어야 합니다."""
     import io as _io
     form = body(client().get("/custom?mode=custom"))
-    assert 'class="dropzone"' in form and "끌어다 놓으세요" in form
+    assert 'class="dropzone"' in form and "끌어다 놓기" in form
     assert 'enctype="multipart/form-data"' in form
     assert 'name="files"' in form and "multiple" in form
     # 끌어다 놓으면 고른 것과 똑같이 담기게 하는 자리
-    assert "dataTransfer" in form and "input.files = e.dataTransfer.files" in form
+    assert "dataTransfer" in form and "add(e.dataTransfer.files)" in form
+    assert 'capture="environment"' in form                # 폰에서 바로 찍기
     # '.field label{display:block}' 에 눌리지 않아야 세로로 쌓입니다
     css = body(client().get("/static/store.css"))
     assert "label.dropzone{" in css and "flex-direction:column" in css

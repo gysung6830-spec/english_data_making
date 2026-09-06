@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}시험지 나눔 — 더 정확한 자료를 만드는 데 씁니다 | {{ site.brand }}{% endblock %}
+{% block title %}시험지 보내고 할인받기 — 더 정확한 자료를 만드는 데 씁니다 | {{ site.brand }}{% endblock %}
 {% block desc %}{{ reward.lead }}{% endblock %}
 
 {% block body %}
@@ -22,8 +22,8 @@
 
     {% else %}
       <div class="section-head">
-        <span class="eyebrow">시험지 나눔</span>
-        <h2>{{ (reward.headline or '학교 시험지를 나눠 주시면, 더 정확한 자료로 돌려드립니다')|br }}</h2>
+        <span class="eyebrow">시험지 보내고 할인받기</span>
+        <h2>{{ (reward.headline or '학교 시험지를 보내 주시면, 더 정확한 자료로 돌려드립니다')|br }}</h2>
         <p>{{ reward.lead }}</p>
       </div>
 
@@ -107,15 +107,22 @@
           <div class="field">
             <label for="files">시험지 파일</label>
             <label class="dropzone" for="files" id="drop">
-              <input type="file" id="files" name="files" multiple
+              <input type="file" id="files" name="files" multiple data-max="5"
                      accept=".pdf,.jpg,.jpeg,.png,.hwp,.hwpx,.zip">
-              <b class="dz-title">여기에 시험지를 끌어다 놓으세요</b>
-              <span class="dz-sub">또는 눌러서 고르기 · PDF · 사진(JPG/PNG) · 한글(HWP) · ZIP</span>
+              {# 폰에서 바로 찍을 수 있는 자리. 찍은 사진은 위에 이어 붙습니다. #}
+              <input type="file" id="shot" accept="image/*" capture="environment"
+                     multiple hidden>
+              <b class="dz-title">시험지를 올려 주세요</b>
+              <span class="dz-sub">눌러서 고르거나 끌어다 놓기 · PDF · 사진(JPG/PNG) · 한글(HWP) · ZIP</span>
               <span class="dz-file" hidden></span>
+              <span class="dz-btns">
+                <button type="button" class="dz-cam" id="dz-cam">📷 사진 찍기</button>
+                <button type="button" class="dz-clear" id="dz-clear" hidden>지우기</button>
+              </span>
             </label>
             <p class="muted mb-0" style="font-size:13.5px;margin-top:8px;">
-              <b>사진으로 찍어 올리셔도 됩니다.</b> 여러 장이면 한 번에 다섯 장까지,
-              모두 합쳐 30MB까지.
+              <b>폰으로 찍어서 올리셔도 됩니다.</b> 여러 장이면 나눠 찍으셔도 되고,
+              찍을 때마다 아래에 쌓입니다. 다섯 장까지, 모두 합쳐 30MB까지.
             </p>
           </div>
           <div class="field">

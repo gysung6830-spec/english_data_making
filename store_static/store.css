@@ -599,7 +599,25 @@ label.dropzone{
 .dz-file{margin-top:8px; padding:6px 14px; border-radius:999px; background:var(--brand);
   color:#fff; font-size:13.5px; font-weight:700; word-break:break-all;}
 .dropzone.has .dz-title{color:var(--brand);}
-@media (max-width:640px){ .dropzone{padding:24px 14px;} }
+.dropzone.too-many{border-color:var(--accent);}
+.dropzone.too-many .dz-title{color:var(--accent);}
+/* 찍기 · 지우기 단추. label 안에 있어서 눌러도 파일 창이 안 열리게 JS 로 막습니다 */
+.dz-btns{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; justify-content:center;}
+.dz-cam, .dz-clear{
+  font:inherit; font-size:13.5px; font-weight:700; cursor:pointer;
+  padding:8px 16px; border-radius:999px; border:1px solid var(--line-strong);
+  background:#fff; color:var(--ink-2);
+}
+.dz-cam{border-color:var(--brand); color:var(--brand);}
+.dz-cam:hover{background:var(--brand); color:#fff;}
+/* 마우스를 쓰는 화면에는 카메라가 없습니다. 눌러도 파일 창만 열려 헷갈리니 감춥니다 */
+@media (hover: hover) and (pointer: fine){ .dz-cam{display:none;} }
+.dz-clear:hover{border-color:var(--accent); color:var(--accent);}
+@media (max-width:640px){
+  .dropzone{padding:24px 14px;}
+  /* 폰에서는 찍는 쪽이 먼저입니다 — 단추를 크고 또렷하게 */
+  .dz-cam{padding:11px 22px; font-size:15px; background:var(--brand); color:#fff;}
+}
 
 /* 맛보기 — 값을 치르고 한 번 써 보는 자리 */
 .taste-list{display:flex; flex-direction:column; gap:12px; margin-bottom:16px;}
