@@ -2781,6 +2781,29 @@ def test_made_to_order_has_its_own_way_in():
     print("PASS  주문제작 자료 — 신청 → 내 자료함 → 이메일")
 
 
+def test_sample_pdf_links_go_somewhere():
+    """'자료 샘플 PDF' 를 눌렀는데 아무 일도 안 일어나면 안 됩니다."""
+    home = body(client().get("/"))
+    assert "lineup#samples" in home                    # 바닥글에서 가리키는 자리
+    page = body(client().get("/lineup"))
+    assert 'id="samples"' in page, "가리키는 자리가 없습니다"
+
+    ready = [m for m in sc.load_materials()["materials"]
+             if m.get("sample_file") and (sc.SAMPLE_DIR / m["sample_file"]).exists()]
+    if ready:
+        assert page.count('class="mat-sample"') >= len(ready)
+    else:
+        # 아직 없으면 없다고 말하고, 대신 볼 것으로 보냅니다
+        assert "샘플 PDF를 준비하고 있습니다" in page
+        assert "무료 자료 받으러 가기" in page
+
+    # 첫날 체크리스트가 몇 종이 비었는지 세어 줍니다
+    setup = body(admin().get("/admin"))
+    assert "자료 샘플 PDF 올리기" in setup
+    assert "자료마다 지면 사진과 설명 채우기" in setup
+    print("PASS  샘플 PDF 자리 · 빈 자료 세어 주기")
+
+
 def test_lineup_shots_upload_and_show():
     """지면 사진을 관리자에서 올리면 오르티카 라인업에 바로 걸려야 합니다."""
     import io as _io
@@ -4161,6 +4184,7 @@ def run_all():
     test_units_follow_what_the_admin_uploaded()
     test_list_hides_price_until_you_open_the_book()
     test_made_to_order_has_its_own_way_in()
+    test_sample_pdf_links_go_somewhere()
     test_lineup_shots_upload_and_show()
     test_mobile_filters_collapse()
     test_long_pages_have_shortcuts()

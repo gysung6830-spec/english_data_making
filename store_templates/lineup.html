@@ -177,6 +177,43 @@
 </section>
 {% endfor %}
 
+{# 바닥글과 첫 화면이 '자료 샘플 PDF' 로 이 자리를 가리킵니다. 자리가 없으면
+   눌러도 아무 일이 안 일어나고, 그게 가장 나쁩니다. #}
+<section class="section section-soft" id="samples">
+  <div class="wrap narrow">
+    <div class="section-head">
+      <span class="eyebrow">사기 전에</span>
+      <h2>자료 샘플 PDF</h2>
+      {% if sample_count %}
+        <p>실제로 보내 드리는 파일과 <b>같은 판형</b>입니다. 회원가입 없이 바로 받으실 수 있습니다.</p>
+      {% else %}
+        <p>지금은 샘플 PDF를 준비하고 있습니다.
+          그동안 <b>무료 자료실</b>에서 실제로 만든 파일을 그대로 받아 보실 수 있고,
+          이 화면 위쪽에 <b>자료마다 실제 지면 사진</b>을 올려 두었습니다.</p>
+      {% endif %}
+    </div>
+    {% if sample_count %}
+      <div class="sample-list">
+        {% for g in groups %}{% for m in g['items'] %}
+          {% if m.sample_file and m.sample_file in ready_samples %}
+            <a class="mat-sample" href="{{ url_for('sample_download', filename=m.sample_file) }}">
+              <span class="ms-tag">무료</span>
+              <span class="ms-text"><b>{{ m.no }} {{ m.name }}</b>
+                <small>{{ m.tagline }}</small></span>
+              <span class="ms-go">받기 ↓</span>
+            </a>
+          {% endif %}
+        {% endfor %}{% endfor %}
+      </div>
+    {% else %}
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ url_for('free') }}">무료 자료 받으러 가기</a>
+        <a class="btn btn-ghost" href="{{ url_for('contact') }}">궁금한 점 물어보기</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
 <section class="section">
   <div class="wrap">
     <div class="section-head">

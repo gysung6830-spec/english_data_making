@@ -578,6 +578,9 @@ input[type=file]{
 .mat-rest a:hover{color:var(--brand);}
 .mat-rest b{color:var(--brand); font-size:12.5px; margin-right:1px;}
 
+/* 샘플 PDF 모아 보기 */
+.sample-list{display:flex; flex-direction:column; gap:10px;}
+
 /* 라인업에서 한 묶음만 진한 초록으로 (시그니처 자료 지면처럼) */
 .lineup-group.dark{
   background:#123227; color:#e6efe9; border-top:0;

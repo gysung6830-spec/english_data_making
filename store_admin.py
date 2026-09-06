@@ -193,8 +193,11 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
     biz_ok = bool(business.get("reg_no")) and "0000" not in business["reg_no"]
     mine = [p for p in products if not p.get("sample")]
     with_files = [p for p in products if sc.has_deliverable(p)]
-    with_sample = [m for m in sc.load_materials()["materials"]
+    mats = sc.load_materials()["materials"]
+    with_sample = [m for m in mats
                    if m.get("sample_file") and (sc.SAMPLE_DIR / m["sample_file"]).exists()]
+    # 지면 사진도 설명도 없는 자료 — 라인업에서 초라하게 비어 보입니다
+    thin = [m for m in mats if not sc.shot_files(m["id"]) or not (m.get("features") or [])]
     mail_ok = bool(os.environ.get("SMTP_HOST") and os.environ.get("ORDER_EMAIL_TO"))
     free_ready = [x for x in sc.load_freebies()["items"] if sc.free_ready(x)]
     seo_cfg = site.get("seo") or {}
@@ -221,8 +224,16 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
          "url": url_for("admin.products"), "label": "상품 > 📁 파일"},
         {"done": bool(with_sample),
          "title": "자료 샘플 PDF 올리기",
-         "why": "사기 전에 눈으로 봐야 지갑이 열립니다. 매출에 가장 크게 영향을 줍니다. "
-                "PDF를 store_data/samples/ 에 넣고, 라인업의 자료마다 골라 주세요.",
+         "why": (f"사기 전에 눈으로 봐야 지갑이 열립니다. 지금 {len(mats)}종 가운데 "
+                 f"{len(with_sample)}종만 샘플이 있습니다. 무료 자료는 실물을 받아 보는데 "
+                 f"유료 자료는 못 보면, 값이 아니라 '몰라서' 안 삽니다."),
+         "url": url_for("admin.materials"), "label": "오르티카 라인업 열기"},
+        {"done": not thin,
+         "title": "자료마다 지면 사진과 설명 채우기",
+         "why": (("다 채우셨습니다." if not thin else
+                  f"{len(thin)}종이 비어 있습니다 — {' · '.join(m['name'] for m in thin[:4])}"
+                  f"{' 외' if len(thin) > 4 else ''}. 잘 적어 둔 자료 옆에 빈 칸이 있으면, "
+                  f"그 하나 때문에 전체가 만들다 만 것으로 보입니다.")),
          "url": url_for("admin.materials"), "label": "오르티카 라인업 열기"},
         {"done": mail_ok,
          "title": "주문 알림 메일 켜기",
