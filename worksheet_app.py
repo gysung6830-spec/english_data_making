@@ -44,8 +44,8 @@ WORKSHEET_HTML = """
   <div class=card>
     <h1>✏️ 구문 분석 학습지</h1>
     <div class=sub>지문을 문장 단위로 쪼개 <b>구문 태깅 + 해석 + 포인트 박스</b> 학습지를 만듭니다.</div>
-    <div class=hint style="margin:-8px 0 8px">이미 분석한 결과의 <b>제목만</b> 바꾸려면 →
-      <a class=dl href="{{ url_for('retitle') }}">🧩 분석 데이터(JSON)로 제목 수정 (API 재분석 없음)</a></div>
+    <div class=hint style="margin:-8px 0 8px">이미 분석한 <b>JSON</b>이 있으면(위 ①은 사진·PDF만) →
+      <a class=dl href="{{ url_for('retitle') }}">🧩 분석 데이터(JSON)로 산출물 뽑기 · 제목 수정 (API 없음)</a></div>
     <form id=f method=post action="{{ url_for('build') }}" enctype=multipart/form-data>
 
       <label>① 지문 파일 (사진·PDF·HWP·TXT, 여러 개 가능)</label>
@@ -128,9 +128,10 @@ RETITLE_HTML = """
 </style></head>
 <body><div class=wrap>
   <div class=card>
-    <h1>🧩 제목만 수정하기</h1>
+    <h1>🧩 분석 데이터(JSON)로 뽑기</h1>
     <div class=sub>이미 분석한 결과(<b>분석 데이터 JSON</b>)를 올리면, <b>재분석(API 비용) 없이</b>
-      제목·주제·문항번호만 고쳐 학습지를 다시 뽑습니다.</div>
+      원하는 산출물(지문분석·직독직해·한줄해석·좌지문우해석·한줄영어·워크북)을 뽑고,
+      필요하면 제목·주제·문항번호도 함께 고칩니다.</div>
     {% if err %}<div class=err>{{ err }}</div>{% endif %}
     <form id=f method=post action="{{ url_for('retitle_load') }}" enctype=multipart/form-data>
       <label>분석 데이터 파일 (…_분석데이터.json)</label>
@@ -191,6 +192,14 @@ RETITLE_EDIT_HTML = """
         <input type=text name="summary_easy_{{ i }}" value="{{ a.summary_easy }}">
       </fieldset>
       {% endfor %}
+      <fieldset><legend>만들 산출물 <span class=hint>(분석 데이터 재사용 · 추가 API 없음)</span></legend>
+        <label class=chk><input type=checkbox name=products value="지문분석" checked> 📘 지문분석 (분석+정리 · 원문·해석)</label>
+        <label class=chk><input type=checkbox name=products value="직독직해" checked> 📗 직독직해 (ORTICA · 의미단위 / 표시)</label>
+        <label class=chk><input type=checkbox name=products value="한줄해석"> 📗 한줄해석 (ORTICA · 영어+아래 회색박스 해석)</label>
+        <label class=chk><input type=checkbox name=products value="좌지문우해석"> 📗 좌지문우해석 (ORTICA · 좌 영어/우 해석 2단)</label>
+        <label class=chk><input type=checkbox name=products value="한줄영어"> 📗 한줄영어 (ORTICA · 영어만)</label>
+        <label class=chk><input type=checkbox name=products value="워크북"> 📝 워크북 (단어테스트 · 학습용 빈칸)</label>
+      </fieldset>
       <label style="margin-top:14px">저장 파일명 <span class=hint>(비우면 기존 이름)</span></label>
       <input type=text name=basename value="{{ basename }}" placeholder="예: 2027수능특강_30번">
       <div class=row>
@@ -261,21 +270,26 @@ def retitle_build_route():
             a.source_name = raw_name
     stem = custom_base or _safe_name(analyses[0].source_name or "passage")
 
+    # 만들 산출물(체크박스). 아무것도 안 고르면 지문분석 기본.
+    products = [p for p in request.form.getlist("products") if p in ws_pipeline.PRODUCTS]
+    if not products:
+        products = ["지문분석"]
+
     footer = cfg.design.footer_note or "(C)2026.Ortica영어.All rights reserved"
     make_student = getattr(cfg.design, "make_student", True)
-    out = OUTPUT_DIR / f"{stem}_포인트박스.pdf"
     try:
-        ws_pipeline.render_worksheet_pair(
-            analyses, out, layout="A", footer_note=footer, density="auto",
-            make_student=make_student,
+        # 마스터 분석 데이터 재사용 → 선택 산출물 모두 파생(추가 API 없음)
+        made = ws_pipeline.render_products(
+            analyses, OUTPUT_DIR / stem, products=products, footer_note=footer,
+            density="auto", make_student=make_student,
             slevel=getattr(cfg.design, "student_level", "blank"),
             boxmode=getattr(cfg.design, "box_align", "even"),
             bw=getattr(cfg.design, "print_mode", True))   # 웹앱 기본=인쇄용(흑백 친화)
     except Exception as e:
         traceback.print_exc()
         return render_result([{"name": stem, "ok": False, "error": str(e)}])
+    outfiles = [{"label": lbl, "out": p.name} for lbl, p in made]
     # 수정본도 JSON 재저장(다음 수정에 이어서 쓸 수 있게)
-    outfiles = [{"label": "✏️ 교사용+학생용(합본)" if make_student else "✏️ 교사용", "out": out.name}]
     try:
         json_name = f"{stem}_분석데이터.json"
         (OUTPUT_DIR / json_name).write_text(
@@ -283,7 +297,7 @@ def retitle_build_route():
         outfiles.append({"label": "🧩 분석 데이터(JSON · 제목 재수정용)", "out": json_name})
     except Exception:
         traceback.print_exc()
-    note = f" (지문 {len(analyses)}개 · 제목 수정 · API 미사용)"
+    note = f" (지문 {len(analyses)}개 · 데이터 재사용 · API 미사용)"
     return render_result([{"name": stem + note, "ok": True, "flag": False,
                            "reasons": [], "files": outfiles}])
 
