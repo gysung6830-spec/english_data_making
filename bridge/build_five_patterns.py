@@ -80,6 +80,17 @@ b{color:#12283f;}
 .tip .l{font-weight:800;color:var(--amber);margin-right:5px;}
 .tip b{color:#7a4a12;background:#fbe6c8;padding:0 2px;border-radius:3px;}
 
+/* 왜 배울까 / 시험 포인트 / 암기 */
+.why{background:#eef4fc;border-left:4px solid #3a5bd0;border-radius:0 9px 9px 0;padding:9px 13px;margin:0 0 12px;font-size:10.3px;line-height:1.6;}
+.why .l{display:inline-block;font-weight:800;color:#fff;background:#3a5bd0;font-size:9.5px;padding:2px 9px;border-radius:9px;margin-bottom:4px;}
+.why .cmp{margin-top:3px;} .why .cmp .en{font-weight:800;color:#12283f;} .why .cmp .a{color:#3a5bd0;font-weight:800;}
+.exam{background:#fdeef0;border-left:4px solid #cd5049;border-radius:0 9px 9px 0;padding:8px 13px;font-size:10px;margin:2px 0 8px;line-height:1.6;}
+.exam .l{display:inline-block;font-weight:800;color:#fff;background:#cd5049;font-size:9.5px;padding:2px 9px;border-radius:9px;margin-right:6px;}
+.exam b{color:#a3352f;background:#fbe0de;padding:0 2px;border-radius:3px;}
+.memo{background:#eef7f1;border-left:4px solid var(--green-d);border-radius:0 9px 9px 0;padding:8px 13px;font-size:10px;margin:2px 0 11px;line-height:1.6;}
+.memo .l{display:inline-block;font-weight:800;color:#fff;background:var(--green-d);font-size:9.5px;padding:2px 9px;border-radius:9px;margin-right:6px;}
+.memo b{color:var(--green-d);background:#dcefe3;padding:0 3px;border-radius:3px;}
+
 /* 연습 */
 .q-h{font-weight:800;font-size:11px;color:var(--amber);margin:12px 0 6px;}
 .q-h .b{display:inline-block;background:var(--amber);color:#fff;font-size:9px;font-weight:800;padding:1px 8px;border-radius:8px;margin-right:6px;}
@@ -178,21 +189,35 @@ INTRO = f"""
   {dia([("S","주어","We"),("op","+"),("V","동사","call"),("op","+"),("O","목적어","him"),("op","+"),("C","목적격보어","a genius")], rel=f'⑤ 5형식 — {dot("O")}him <span class="eq">=</span> {dot("C")}a genius (목적어=보어)')}
 
   <div class="tip"><span class="l">핵심 한 줄</span>보어(C)는 &lsquo;<b>= 관계로 설명</b>&rsquo;, 목적어(O)는 &lsquo;<b>~을/를 받는 대상</b>&rsquo;. 이 둘만 구별하면 끝!</div>
+
+  <div style="break-inside:avoid;">
+  <div class="h">그런데 왜 굳이 형식을 배울까?</div>
+  <div class="why" style="margin-bottom:0;"><span class="l">이유 하나면 충분해요</span>
+    <b>같은 동사라도 형식이 바뀌면 뜻이 완전히 달라지기 때문</b>이에요. 형식을 모르면 해석이 틀려요.
+    <div class="cmp"><span class="en">She made me a cake.</span> → <span class="a">4형식</span> · 나<b>에게</b> 케이크<b>를</b> 만들어 줬다</div>
+    <div class="cmp"><span class="en">She made me happy.</span> → <span class="a">5형식</span> · 나<b>를</b> 행복하<b>게</b> 만들었다</div>
+    <div class="cmp"><span class="en">I found the book.</span> → <span class="a">3형식</span> · 그 책<b>을</b> 찾았다 &nbsp;／&nbsp;
+      <span class="en">I found the book easy.</span> → <span class="a">5형식</span> · 그 책<b>이</b> 쉽다<b>고</b> 느꼈다</div>
+    이렇게 <b>동사가 문장 구조를 결정</b>해요. 그래서 &lsquo;몇 형식인지&rsquo; 보는 눈이 <b>정확한 해석과 서술형·어법 문제</b>의 열쇠예요.</div>
+  </div>
 </div>
 """
 
 # ============================================================ 형식 섹션
-def section(no, tt, code, flagship, concept, ex_rows, verb_groups, tip, quiz, ans):
+def section(no, tt, code, flagship, why, concept, ex_rows, verb_groups, tip, exam, memo, quiz, ans):
     return f"""
 <div class="sec">
   {band(no, tt, code)}
   {flagship}
+  <div class="why"><span class="l">왜 배울까?</span>{why}</div>
   <div class="concept">{concept}</div>
   <div class="h">이렇게 읽어요</div>
   {exlines(ex_rows)}
   <div class="h">이 형식에 잘 쓰는 동사</div>
   {verbs(verb_groups)}
   <div class="tip"><span class="l">✔ 헷갈리지 않기</span>{tip}</div>
+  <div class="exam"><span class="l">시험 포인트</span>{exam}</div>
+  <div class="memo"><span class="l">암기!</span>{memo}</div>
   <div class="q-h"><span class="b">연습</span>직접 풀어보기</div>
   {quiz}
   <div class="ans"><div class="t">정답 &amp; 해설</div>{ans}</div>
@@ -202,6 +227,9 @@ def section(no, tt, code, flagship, concept, ex_rows, verb_groups, tip, quiz, an
 S1 = section("1형식", "주어 + 동사", "S + V",
     dia([("S","주어","Birds"),("op","+"),("V","동사","sing"),("op",""),("m","","（in the sky）수식어")],
         rel="동사만으로 문장이 완성돼요. 뒤 전치사구는 <b>꾸미는 살(M)</b>이라 빼고 봐요."),
+    "문장을 &lsquo;몇 형식&rsquo;으로 보는 건 <b>어디까지가 진짜 뼈대인지</b> 가려내기 위해서예요. "
+    "1형식을 알면 <b>The sun rises in the east</b> 같은 문장에서 <b>in the east(수식어)를 지우고</b> "
+    "&lsquo;해가 뜬다&rsquo;라는 핵심만 딱 잡을 수 있어요. 긴 문장도 <b>주어·동사부터</b> 찾는 습관이 여기서 시작돼요.",
     "1형식은 <b>주어 + 동사</b>만으로 뜻이 끝나요. 목적어가 필요 없는 <b>완전자동사</b>이고, "
     "「<b>There is/are + 명사</b>」(~이 있다)도 1형식이에요.",
     [("<span class='S'>The sun</span> <span class='V'>rises</span> <span class='M'>in the east</span>.", "해가 (동쪽에서) 뜬다."),
@@ -209,6 +237,10 @@ S1 = section("1형식", "주어 + 동사", "S + V",
      ("<span class='V'>There is</span> <span class='S'>a book</span> <span class='M'>on the desk</span>.", "(책상 위에) 책이 있다.")],
     [("", ["go","come","run","walk","sleep","live","arrive","happen","appear","rise","exist","fly","cry"])],
     "<b>전치사구</b>(in the east…)는 수식어! 형식을 셀 땐 괄호 치고 빼세요. &lsquo;~을/를&rsquo;로 받는 목적어가 없으면 1형식.",
+    "<b>수식어(전치사구·부사)를 지운 뒤 형식을 판단</b>하는 문제가 자주 나와요. &lsquo;There is/are + 명사&rsquo;도 "
+    "1형식이라는 걸 <b>꼭</b> 물어봐요. 목적어가 없는데 1형식이 아니라고 착각하지 않기.",
+    "① <b>완전자동사</b>(go, come, live, arrive, happen, rise…)는 목적어 없이 끝난다. "
+    "② <b>There is/are + 명사 = 1형식</b>. ③ 전치사구·부사는 <b>수식어(M)</b> → 형식 계산에서 제외.",
     """<div class="q">1) S·V를 찾고 수식어는 ( )로 묶으세요. &nbsp;① The baby cried. &nbsp;② We arrived at the station.</div>
        <div class="q">2) 몇 형식? &nbsp; There are many stars in the sky. → ( <span class="blank"></span> )형식</div>""",
     """<p><b>1.</b> ① S=The baby / V=cried &nbsp; ② S=We / V=arrived / (at the station)</p>
@@ -217,6 +249,9 @@ S1 = section("1형식", "주어 + 동사", "S + V",
 S2 = section("2형식", "주어 + 동사 + 보어", "S + V + C",
     dia([("S","주어","She"),("op","+"),("V","동사","is"),("op","+"),("C","보어","a teacher")],
         rel=f'{dot("S")}She <span class="eq">=</span> {dot("C")}a teacher &nbsp;→&nbsp; <b>주어 = 보어</b> (보어=명사/형용사)'),
+    "&lsquo;그녀는 이다&rsquo;만으로는 말이 안 되죠? <b>be동사·become·look</b> 같은 동사는 <b>주어가 무엇/어떠한지</b> "
+    "설명해 주는 말이 꼭 필요해요. 그래서 <b>보어(C)</b>를 &lsquo;<b>=</b>&rsquo;로 읽어야 뜻이 통해요. "
+    "<b>She looks tired = 그녀는 피곤한 상태다</b>처럼, 2형식을 알면 감각동사를 &lsquo;~하게 보인다/들린다&rsquo;로 정확히 해석해요.",
     "2형식은 <b>주어 + 동사 + 보어(C)</b>. 동사만으로 부족해서 <b>주어를 설명</b>하는 보어가 와요. "
     "<b>주어 = 보어</b> 관계가 성립하고, 보어 자리엔 <b>명사</b>(무엇)나 <b>형용사</b>(어떠하다)가 와요.",
     [("<span class='S'>He</span> <span class='V'>became</span> <span class='C'>famous</span>.", "그는 유명해졌다. (He = famous)"),
@@ -225,6 +260,10 @@ S2 = section("2형식", "주어 + 동사 + 보어", "S + V + C",
     [("상태·변화", ["be(am/are/is)","become","get","grow","turn","remain","stay"]),
      ("감각동사 (+형용사)", ["look","sound","smell","taste","feel","seem","appear"])],
     "<b>감각동사</b>(look, feel…) 뒤엔 <b>부사가 아니라 형용사</b>! &nbsp;You look <b>happy</b>(○) / happily(✗). &lsquo;주어=보어&rsquo;면 2형식.",
+    "<b>감각동사 뒤 형용사 vs 부사</b> 고르기가 단골 문제! (look happy○ / happily✗) "
+    "또 <b>주어=보어</b>인지 물어 2형식과 1·3형식을 구별시켜요. become·get·turn(변하다) 뒤 형용사도 자주 나와요.",
+    "① <b>감각동사(look·sound·smell·taste·feel) + 형용사</b> — 부사 쓰면 오답! "
+    "② 상태·변화 동사: <b>be·become·get·grow·turn·remain·stay</b>. ③ 판별 열쇠: <b>주어 = 보어</b>.",
     """<div class="q">1) 보어에 밑줄. &nbsp;① The leaves turned red. &nbsp;② This cake smells sweet.</div>
        <div class="q">2) 알맞은 것에 ○: &nbsp; She looks ( <span class="sel">happy</span> / happily ).</div>""",
     """<p><b>1.</b> ① red (The leaves = red) &nbsp; ② sweet (This cake = sweet)</p>
@@ -233,6 +272,9 @@ S2 = section("2형식", "주어 + 동사 + 보어", "S + V + C",
 S3 = section("3형식", "주어 + 동사 + 목적어", "S + V + O",
     dia([("S","주어","I"),("op","+"),("V","동사","love"),("op","+"),("O","목적어","you")],
         rel=f'{dot("O")}you = 동작을 받는 대상 (<b>~을/를</b>)'),
+    "우리가 쓰는 문장의 <b>대부분이 3형식</b>이에요. &lsquo;누가 무엇을 ~한다&rsquo;가 가장 기본이니까요. "
+    "3형식을 알면 목적어 자리에 <b>단어뿐 아니라 동명사·to부정사·that절</b>(덩어리)도 올 수 있다는 걸 이해하게 돼요. "
+    "그래야 <b>I enjoy playing soccer</b>처럼 긴 목적어도 &lsquo;~하는 것을&rsquo;로 묶어 해석해요.",
     "3형식은 <b>주어 + 동사 + 목적어(O)</b>. 동작을 <b>받는 대상(~을/를)</b>이 목적어이고, 이런 동사를 <b>타동사</b>라 해요. "
     "목적어 자리엔 명사·대명사·<b>동명사·to부정사·that절</b>도 올 수 있어요.",
     [("<span class='S'>She</span> <span class='V'>reads</span> <span class='O'>books</span>.", "그녀는 책을 읽는다."),
@@ -240,6 +282,10 @@ S3 = section("3형식", "주어 + 동사 + 목적어", "S + V + O",
      ("<span class='S'>He</span> <span class='V'>said</span> <span class='O'>that he was tired</span>.", "그는 피곤하다고 말했다. (that절)")],
     [("", ["love","like","have","read","make","eat","want","know","meet","buy","use","find"])],
     "&lsquo;~을/를&rsquo;이 있으면 대개 3형식. 단, <b>discuss·marry·enter·reach·resemble·answer</b>는 전치사 없이 목적어를 바로! (discuss <b>about</b> it ✗)",
+    "<b>전치사가 필요 없는 타동사</b>에 전치사를 붙이는 오답을 자주 물어요 "
+    "(enter <b>into</b>✗, discuss <b>about</b>✗). 목적어로 쓴 <b>동명사/to부정사</b>를 찾는 문제도 나와요.",
+    "① <b>전치사 없이 바로 목적어</b>: <u>discuss · marry · enter · reach · resemble · answer</u> (앞글자 &lsquo;<b>디마엔리리앤</b>&rsquo;). "
+    "② 목적어 자리 = 명사·대명사·<b>동명사·to부정사·that절</b>.",
     """<div class="q">1) 목적어에 밑줄. &nbsp;① I finished my homework. &nbsp;② They enjoy watching movies.</div>
        <div class="q">2) 틀린 곳 고치기: &nbsp; He entered <span class="sel">into</span> the room. → <span class="blank"></span></div>""",
     """<p><b>1.</b> ① my homework &nbsp; ② watching movies (동명사)</p>
@@ -248,6 +294,9 @@ S3 = section("3형식", "주어 + 동사 + 목적어", "S + V + O",
 S4 = section("4형식", "주어 + 동사 + 간접목적어 + 직접목적어", "S + V + IO + DO",
     dia([("S","주어","He"),("op","+"),("V","동사","gave"),("op","+"),("O","간접목적어","me"),("op","+"),("O","직접목적어","a book")],
         rel=f'{dot("O")}me (<b>~에게</b>) &nbsp;+&nbsp; {dot("O")}a book (<b>~을</b>) &nbsp;→&nbsp; 목적어 <b>둘</b> (서로 다른 대상)'),
+    "&lsquo;주다·말해주다·보내주다&rsquo;처럼 <b>누구에게 무엇을</b> 해 주는 동작은 목적어가 <b>두 개</b> 필요해요. "
+    "4형식을 알면 <b>He gave me a book</b>을 &lsquo;나에게 / 책을&rsquo; 두 덩어리로 정확히 끊어 읽고, "
+    "이걸 <b>3형식(gave a book to me)으로 바꾸는 시험 문제</b>까지 풀 수 있어요.",
     "4형식은 <b>주어 + 동사 + 간접목적어(IO, ~에게) + 직접목적어(DO, ~을)</b>. &lsquo;주다&rsquo;류 <b>수여동사</b>에 쓰이고 "
     "목적어가 <b>사람(에게) + 사물(을)</b> 두 개예요. 순서는 <b>사람 먼저, 사물 나중</b>.",
     [("<span class='S'>She</span> <span class='V'>told</span> <span class='O'>us</span> <span class='O'>a story</span>.", "그녀는 우리에게 이야기를 해 줬다."),
@@ -257,6 +306,10 @@ S4 = section("4형식", "주어 + 동사 + 간접목적어 + 직접목적어", "
      ("for로 바꿈", ["buy","make","get","cook","find"]),
      ("of로 바꿈", ["ask"])],
     "4형식 → <b>3형식</b> 전환: 사물을 앞으로, 사람 앞에 전치사! <b>대부분 to</b> · buy·make·get·cook → <b>for</b> · ask → <b>of</b>.",
+    "<b>4형식 → 3형식 전환 시 전치사(to/for/of) 고르기</b>가 최다 빈출! 동사에 맞는 전치사를 물어봐요. "
+    "또 4형식 문장을 <b>5형식과 구별</b>(두 목적어가 다른 대상인가?)하는 문제도 나와요.",
+    "3형식 전환 전치사 3그룹 — ① <b>to</b>: give·tell·send·show·teach·lend·offer &nbsp; "
+    "② <b>for</b>: buy·make·get·cook·find &nbsp; ③ <b>of</b>: ask. 순서는 <b>사람(에게) → 사물(을)</b>.",
     """<div class="q">1) 3형식으로 바꿀 때 전치사는?<br>
        &nbsp;&nbsp;① He gave me a book. → a book ( <span class="blank"></span> ) me &nbsp;
        ② I bought him a gift. → a gift ( <span class="blank"></span> ) him &nbsp;
@@ -266,6 +319,9 @@ S4 = section("4형식", "주어 + 동사 + 간접목적어 + 직접목적어", "
 S5 = section("5형식", "주어 + 동사 + 목적어 + 목적격보어", "S + V + O + OC",
     dia([("S","주어","We"),("op","+"),("V","동사","call"),("op","+"),("O","목적어","him"),("op","+"),("C","목적격보어","a genius")],
         rel=f'{dot("O")}him <span class="eq">=</span> {dot("C")}a genius &nbsp;→&nbsp; <b>목적어 = 보어</b> (같은 대상)'),
+    "5형식은 &lsquo;<b>~을 …하게/…라고</b>&rsquo;처럼 <b>목적어의 상태·행동까지</b> 말해요. "
+    "이걸 알아야 <b>She made me happy(나를 행복하게)</b>와 <b>She made me a cake(나에게 케이크를=4형식)</b>를 헷갈리지 않아요. "
+    "특히 <b>사역·지각동사 뒤 동사원형</b>(let me go)은 5형식을 모르면 절대 해석·작문이 안 돼서 <b>고등 문법의 핵심</b>이에요.",
     "5형식은 <b>주어 + 동사 + 목적어(O) + 목적격보어(OC)</b>. 목적격보어가 <b>목적어를 설명</b>해서 <b>목적어 = 보어</b>가 돼요. "
     "보어 자리엔 명사·형용사·<b>to부정사</b>, <b>사역(make·have·let)·지각(see·hear·feel·watch)</b> 동사면 <b>동사원형</b>이 와요.",
     [("<span class='S'>She</span> <span class='V'>made</span> <span class='O'>me</span> <span class='C'>happy</span>.", "그녀는 나를 행복하게 했다. (me = happy)"),
@@ -276,6 +332,10 @@ S5 = section("5형식", "주어 + 동사 + 목적어 + 목적격보어", "S + V 
      ("사역·지각 (+원형)", ["make","have","let","see","hear","feel","watch"])],
     "<b>4형식 vs 5형식</b> — 두 말이 &lsquo;~에게 ~을&rsquo;(다른 대상)이면 4형식, <b>O=보어</b>(같은 대상)면 5형식! "
     "He made me <u>a cake</u>(4형식) ↔ He made me <u>happy</u>(5형식).",
+    "<b>사역·지각동사 뒤 동사원형</b> 고르기가 최다 빈출! (let me <b>go</b>○ / to go✗, saw him <b>run</b>○). "
+    "want·tell·ask 뒤엔 반대로 <b>to부정사</b>(want you <b>to</b> stay). <b>4형식 vs 5형식</b> 구별도 자주 나와요.",
+    "① <b>사역 make·have·let + 동사원형</b>. ② <b>지각 see·hear·feel·watch + 원형/-ing</b>. "
+    "③ <b>want·ask·tell·allow·expect + O + to부정사</b>. ④ 판별 열쇠: <b>목적어 = 목적격보어</b>.",
     """<div class="q">1) 목적격보어에 밑줄. &nbsp;① The news made us sad. &nbsp;② They elected him president.</div>
        <div class="q">2) 알맞은 것에 ○: &nbsp; My mom let me ( <span class="sel">go</span> / to go ) out.</div>
        <div class="q">3) 몇 형식? &nbsp; She found the book easy. → ( <span class="blank"></span> )형식</div>""",
@@ -306,6 +366,23 @@ SUMMARY = f"""
     </tbody>
   </table>
   <div class="tip"><span class="l">가장 헷갈리는 것</span><b>2 vs 3</b>: 주어=뒤말이면 2형식, ~을/를이면 3형식. &nbsp; <b>4 vs 5</b>: 두 목적어가 다르면 4형식, O=보어면 5형식.</div>
+
+  <div class="h">시험 포인트 총정리 — 이건 꼭 나온다</div>
+  <div class="exam"><span class="l">빈출 5선</span>
+    ① <b>감각동사 + 형용사</b> (look happy○ / happily✗) &nbsp;
+    ② <b>enter·discuss·marry…에 전치사 금지</b> &nbsp;
+    ③ <b>4형식→3형식 전치사 to/for/of</b> 고르기 &nbsp;
+    ④ <b>사역·지각동사 + 동사원형</b> (let me go○ / to go✗) &nbsp;
+    ⑤ <b>주어진 문장의 형식 판별</b> (특히 4 vs 5, 2 vs 3).</div>
+
+  <div class="h">암기 체크리스트 — 다 외웠나요?</div>
+  <div class="memo"><span class="l">이것만은 외우기</span>
+    □ <b>2형식 감각동사</b>: look·sound·smell·taste·feel (+형용사) &nbsp;
+    □ <b>3형식 전치사 없는 타동사</b>: discuss·marry·enter·reach·resemble·answer &nbsp;
+    □ <b>4형식 전환 전치사</b>: to(give·tell·send·show·teach·lend) / for(buy·make·get·cook) / of(ask) &nbsp;
+    □ <b>5형식 사역동사</b>: make·have·let (+원형) &nbsp;
+    □ <b>5형식 지각동사</b>: see·hear·feel·watch (+원형/-ing) &nbsp;
+    □ <b>5형식 to부정사동사</b>: want·ask·tell·allow·expect (+ O + to부정사)</div>
 
   <div class="q-h"><span class="b">종합 연습</span>각 문장은 몇 형식일까요?</div>
   <div class="q">1) The train arrived late. → ( <span class="blank"></span> ) &nbsp;&nbsp; 2) She is a famous singer. → ( <span class="blank"></span> )</div>
