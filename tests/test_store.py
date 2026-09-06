@@ -2179,14 +2179,12 @@ def test_home_shows_real_pages_not_just_names():
     src = folder / "01.png"
     Image.new("RGB", (1076, 1369), (250, 250, 250)).save(src)
 
-    # 지면 윗부분만 잘라 작게 만든 판이 생깁니다
+    # 가로만 맞춰 줄인 판이 생깁니다 (비율은 원본 그대로 — 자르는 일은 화면이 합니다)
     thumb = sc.shot_thumb(mid)
     assert thumb is not None and thumb.exists()
     with Image.open(thumb) as im:
         assert im.width == sc.SHOT_THUMB_W
-        # 세로가 긴 원본은 3:4 로 딱 맞춰 잘립니다 (흰 여백이 남으면 안 됩니다)
-        assert abs(im.width / im.height - sc.SHOT_THUMB_RATIO) < 0.005
-        assert im.height > im.width, "세로가 긴 지면 모양이어야 합니다"
+        assert im.height == round(1369 * sc.SHOT_THUMB_W / 1076)
     assert thumb.stat().st_size < src.stat().st_size, "원본보다 커졌습니다"
     assert src.exists(), "원본을 건드리면 안 됩니다"
 
@@ -2195,28 +2193,29 @@ def test_home_shows_real_pages_not_just_names():
     assert "max-age" in got.headers.get("Cache-Control", "")
     assert client().get("/lineup/thumb/없는자료.webp").status_code == 404
 
-    # 조금 짧은 원본은 좌우를 살짝 잘라 3:4 를 맞춥니다 (흰 여백 없이)
-    Image.new("RGB", (1076, 1300), (240, 240, 240)).save(src)
+    # 가로가 긴 원본도 그대로 — 눌리거나 늘어나지 않습니다
+    Image.new("RGB", (1200, 500), (240, 240, 240)).save(src)
     thumb.unlink()
     with Image.open(sc.shot_thumb(mid)) as im:
-        assert abs(im.width / im.height - sc.SHOT_THUMB_RATIO) < 0.005
+        assert im.width == sc.SHOT_THUMB_W
+        assert im.height == round(500 * sc.SHOT_THUMB_W / 1200)
 
-    # 많이 짧은 원본은 글자가 잘리니, 그 그림만 짧게 둡니다 (자르지도 늘이지도 않음)
-    Image.new("RGB", (1200, 500), (240, 240, 240)).save(src)
+    # 아주 긴 지면은 아래를 잘라 파일만 키우지 않습니다
+    Image.new("RGB", (1000, 4000), (240, 240, 240)).save(src)
     sc.shot_thumb(mid).unlink()
     with Image.open(sc.shot_thumb(mid)) as im:
-        assert im.width == sc.SHOT_THUMB_W
-        assert im.height == round(500 * sc.SHOT_THUMB_W / 1200)   # 원본 비율 그대로
+        assert im.height == sc.SHOT_THUMB_MAX_H
 
     home = body(client().get("/"))
     assert f"/lineup/thumb/{mid}.webp" in home
     assert 'class="mt-shot"' in home and 'loading="lazy"' in home
-    # 비율을 CSS 로 못 박지 않습니다 — 그래야 흰 여백도 눌림도 없습니다
+    # 타일 창은 어느 사진이 와도 같은 크기 — 줄이 들쭉날쭉해지지 않습니다
     css = body(client().get("/static/store.css"))
-    assert ".mt-shot img{display:block; width:100%; height:auto;" in css
-    assert "aspect-ratio:3/4" not in css
-    # 사진이 없는 자료는 예전처럼 글만 나옵니다
-    assert 'class="mat-tile"' in home or "has-shot" in home
+    assert ".mt-shot{aspect-ratio:3/4; overflow:hidden;}" in css
+    assert "object-fit:cover; object-position:left top" in css
+    # 지면 사진이 없는 자료는 타일에 안 걸고, 아래 한 줄로 적습니다
+    assert 'class="mat-rest"' in home and 'class="mat-tile"' not in home.replace(
+        'class="mat-tile has-shot"', "")
 
     src.unlink()
     print("PASS  첫 화면 자료 타일에 실제 지면 사진")

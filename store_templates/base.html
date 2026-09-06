@@ -185,8 +185,9 @@
           <div><a href="{{ site.contact.kakao_url }}" target="_blank" rel="noopener">
             {{ site.contact.kakao_label or '카카오톡 오픈채팅 문의' }}</a></div>
         {% endif %}
-        <div>이메일 · {{ site.contact.email }}</div>
-        <div>{{ site.contact.hours }}</div>
+        {% if filled(site.contact.email) %}
+          <div>이메일 · {{ site.contact.email }}</div>{% endif %}
+        {% if site.contact.hours %}<div>{{ site.contact.hours }}</div>{% endif %}
       </div>
       <div>
         <h4>바로가기</h4>
@@ -207,11 +208,18 @@
       <a href="{{ url_for('guide') }}#privacy">개인정보 처리방침</a>
       <a href="{{ url_for('guide') }}#license">이용 범위</a>
     </div>
+    {# 아직 안 채운 칸은 아예 안 씁니다. '대표 대표자명 · 사업자등록번호 000-00-00000'
+       이 화면에 남아 있으면, 자료를 보기도 전에 미덥지 않아집니다. #}
     <div class="biz">
-      {{ site.business.company }} · 대표 {{ site.business.owner }} ·
-      사업자등록번호 {{ site.business.reg_no }} ·
-      통신판매업신고 {{ site.business.mailorder_no }}<br>
-      {{ site.business.address }}<br>
+      {% set biz = [] %}
+      {% if filled(site.business.company) %}{% set _ = biz.append(site.business.company) %}{% endif %}
+      {% if filled(site.business.owner) %}{% set _ = biz.append('대표 ' ~ site.business.owner) %}{% endif %}
+      {% if filled(site.business.reg_no) %}
+        {% set _ = biz.append('사업자등록번호 ' ~ site.business.reg_no) %}{% endif %}
+      {% if filled(site.business.mailorder_no) %}
+        {% set _ = biz.append('통신판매업신고 ' ~ site.business.mailorder_no) %}{% endif %}
+      {% if biz %}{{ biz|join(' · ') }}<br>{% endif %}
+      {% if filled(site.business.address) %}{{ site.business.address }}<br>{% endif %}
       © {{ now.year }} {{ site.brand }}. All rights reserved.
     </div>
   </div>

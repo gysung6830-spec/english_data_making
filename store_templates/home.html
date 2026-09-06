@@ -80,8 +80,8 @@
         <a class="btn btn-ghost" href="{{ url_for('lineup') }}">오르티카 라인업 보기</a>
       </div>
       <p class="hero-note">
-        회원가입도, 로그인도 없습니다.<br>
-        지금 {{ product_count }}종을 판매 중이고,<br>
+        회원가입도, 로그인도 없습니다.
+        {%- if sold_books %} 지금 <b>교재 {{ sold_books }}권</b>을 다루고 있고,{% endif %}
         찾는 교재가 없으면 <a href="{{ url_for('custom') }}"><b>이름만 적어</b></a> 두시면 됩니다.
       </p>
     </div>
@@ -141,28 +141,34 @@
     <div class="section-head">
       <span class="eyebrow">오르티카 라인업</span>
       <h2>우리가 만드는 자료 {{ lineup_all|length }}종</h2>
-      <p>지문을 읽히는 자료부터 시험지 한 회차까지. 무엇이 어떻게 다른지
-        하나하나 적어 두었습니다. <b>눌러 보시면 실제 지면</b>이 나옵니다.</p>
+      <p>지문을 읽히는 자료부터 시험지 한 회차까지. 눌러 보시면 <b>실제 지면</b>이 나옵니다.</p>
     </div>
+    {# 지면 사진이 있는 자료만 겁니다. 사진 없는 칸을 섞으면 빈 상자가 생기고,
+       만들다 만 화면으로 보입니다. 나머지는 아래 한 줄로 적습니다. #}
     <div class="grid grid-4">
-      {% for m in lineup_all %}
-        <a class="mat-tile{{ ' has-shot' if m.shot }}" href="{{ url_for('lineup') }}#{{ m.id }}">
-          {% if m.shot %}
-            {# 지면을 보여 주는 게 이름을 부르는 것보다 훨씬 잘 팔립니다. #}
-            <span class="mt-shot">
-              <img src="{{ url_for('lineup_thumb', mid=m.id) }}" alt="{{ m.name }} 지면"
-                   loading="lazy" decoding="async">
-            </span>
-          {% endif %}
+      {% for m in lineup_all if m.shot %}
+        <a class="mat-tile has-shot" href="{{ url_for('lineup') }}#{{ m.id }}">
+          <span class="mt-shot">
+            <img src="{{ url_for('lineup_thumb', mid=m.id) }}" alt="{{ m.name }} 지면"
+                 loading="lazy" decoding="async">
+          </span>
           <span class="mt-body">
             <span class="mat-no">{{ m.no }}</span>
-            {% if m.signature %}<span class="sig">SIGNATURE</span>{% endif %}
+            {% if m.signature %}<span class="sig">시그니처</span>{% endif %}
             <b>{{ m.name }}</b>
             <small>{{ m.tagline }}</small>
           </span>
         </a>
       {% endfor %}
     </div>
+    {% set rest = lineup_all|rejectattr('shot')|list %}
+    {% if rest %}
+      <p class="mat-rest">
+        {%- for m in rest %}<a href="{{ url_for('lineup') }}#{{ m.id }}">
+          <b>{{ m.no }}</b> {{ m.name }}</a>{% if not loop.last %} · {% endif %}{% endfor %}
+        도 함께 만듭니다.
+      </p>
+    {% endif %}
 
     <div class="hero-actions" style="margin-top:22px;">
       <a class="btn btn-primary" href="{{ url_for('lineup') }}">라인업 자세히 보기</a>
@@ -187,19 +193,17 @@
   </div>
 </section>
 
-<section class="section">
+{# 카드 넷을 나란히 세우면 '템플릿' 처럼 보입니다. 순서가 있는 일이니
+   한 줄로 이어 놓는 편이 읽기도 쉽고, 화면도 조용해집니다. #}
+<section class="section section-tight">
   <div class="wrap">
-    <div class="section-head">
-      <h2>주문은 이렇게 진행됩니다</h2>
-      <p>회원가입 없이, 주문서 한 장이면 됩니다.</p>
-    </div>
-    <div class="steps">
-      <div class="step"><b>STEP 1</b><p>자료를 고르고 주문서를 작성합니다.</p></div>
-      <div class="step"><b>STEP 2</b><p>안내된 계좌로 입금합니다.</p></div>
-      <div class="step"><b>STEP 3</b><p>입금을 확인하면 바로 열어 드립니다.</p></div>
-      <div class="step"><b>STEP 4</b><p><b>주문 화면에서 그 자리에서</b> 보고 받습니다.
-        메일을 기다리지 않으셔도 됩니다.</p></div>
-    </div>
+    <ol class="flow">
+      <li><b>자료를 고르고</b> 주문서를 씁니다 <span class="muted">— 회원가입 없음</span></li>
+      <li>안내된 <b>계좌로 입금</b>합니다</li>
+      <li>입금을 확인하면 <b>바로 열어 드립니다</b></li>
+      <li><b>주문 화면에서 그 자리에서</b> 보고 받습니다
+        <span class="muted">— 메일을 기다리지 않으셔도 됩니다</span></li>
+    </ol>
   </div>
 </section>
 

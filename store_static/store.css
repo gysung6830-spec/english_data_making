@@ -157,6 +157,8 @@ ul{margin:0; padding-left:1.1em;}
 .section + .section{border-top:1px solid var(--line);}
 .section-soft{background:var(--brand-soft);}
 .section-soft + .section{border-top:0;}
+/* 한 줄짜리 안내는 넓은 여백을 쓸 이유가 없습니다 */
+.section-tight{padding:30px 0;}
 .section-head{margin-bottom:32px;}
 .section-head h2{font-size:28px; font-weight:800; margin-bottom:8px;}
 .section-head p{color:var(--ink-2); margin:0;}
@@ -257,6 +259,23 @@ textarea{min-height:110px; resize:vertical;}
 .step{background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px;}
 .step b{display:block; font-size:13px; color:var(--brand); margin-bottom:5px;}
 .step p{margin:0; font-size:14.5px; color:var(--ink-2);}
+
+/* 순서가 있는 일은 카드로 흩어 놓지 않고 한 줄로 잇습니다 */
+.flow{list-style:none; margin:0; padding:0; counter-reset:flow;
+  display:flex; flex-wrap:wrap; gap:10px 26px; align-items:center;
+  font-size:15px; color:var(--ink-2); word-break:keep-all;}
+.flow li{position:relative; display:flex; align-items:baseline; gap:9px;
+  counter-increment:flow;}
+.flow li::before{content:counter(flow); flex:0 0 auto; width:22px; height:22px;
+  align-self:center; display:grid; place-items:center; font-size:12px; font-weight:800;
+  color:#fff; background:var(--brand); border-radius:50%;}
+.flow li + li::after{content:""; position:absolute; left:-17px; top:50%; width:8px;
+  height:1px; background:var(--line-strong);}
+.flow b{color:var(--ink);}
+@media (max-width:820px){
+  .flow{flex-direction:column; align-items:flex-start; gap:12px;}
+  .flow li + li::after{display:none;}
+}
 
 /* ---------- 표 (관리자) ---------- */
 .table{width:100%; border-collapse:collapse; font-size:14px; background:#fff;}
@@ -542,15 +561,22 @@ input[type=file]{
 .mat-tile.has-shot{padding:0; overflow:hidden; gap:0;}
 .mt-shot{display:block; position:relative; background:#fff;
   border-bottom:1px solid var(--line);}
-/* 그림은 잘라 둔 그대로 겁니다. 비율을 CSS 로 못 박지 않아, 흰 여백도
-   눌림도 생기지 않습니다. 지면 전체를 보여 줄 필요는 없습니다 —
-   윗부분만 제 비율로 보이는 편이 훨씬 낫습니다. */
-.mt-shot img{display:block; width:100%; height:auto; transition:transform .18s;}
+/* 타일마다 같은 크기의 창으로 지면 왼쪽 위를 보여 줍니다. cover 라서 늘어나거나
+   눌리지 않고, 창을 꽉 채우니 흰 여백도 없습니다. 가운데가 아니라 왼쪽을 잡는
+   이유는, 글이 왼쪽에서 시작해서 줄 첫머리가 살아야 읽히기 때문입니다. */
+.mt-shot{aspect-ratio:3/4; overflow:hidden;}
+.mt-shot img{display:block; width:100%; height:100%;
+  object-fit:cover; object-position:left top; transition:transform .18s;}
 /* 아래로 갈수록 옅게 — 잘린 자리가 툭 끊겨 보이지 않게 합니다. */
 .mt-shot::after{content:""; position:absolute; left:0; right:0; bottom:0; height:22%;
   background:linear-gradient(to bottom, rgba(255,255,255,0), #fff); pointer-events:none;}
 .mt-body{display:flex; flex-direction:column; gap:6px; padding:14px 18px 18px;}
 .mat-tile.has-shot:hover .mt-shot img{transform:scale(1.02);}
+/* 지면 사진이 아직 없는 자료 — 빈 칸을 만드는 대신 한 줄로 적습니다 */
+.mat-rest{margin-top:14px; font-size:14px; color:var(--muted); word-break:keep-all;}
+.mat-rest a{color:var(--ink-2);}
+.mat-rest a:hover{color:var(--brand);}
+.mat-rest b{color:var(--brand); font-size:12.5px; margin-right:1px;}
 
 /* 라인업에서 한 묶음만 진한 초록으로 (시그니처 자료 지면처럼) */
 .lineup-group.dark{

@@ -718,6 +718,17 @@ def preorder_price(cfg: dict, plan: dict) -> int:
     return max(0, price - to_int(cfg.get("preorder_discount"), 0))
 
 
+# 아직 안 채운 예시값. 손님 화면에 그대로 나가면 만들다 만 사이트로 보입니다.
+PLACEHOLDER_MARKS = ("example", "여기에", "0000", "○○", "대표자명", "예금주명",
+                     "사업장 주소", "제0000")
+
+
+def is_placeholder(value: str | None) -> bool:
+    """아직 예시값인지. 맞으면 손님 화면에서는 감춥니다."""
+    text = (value or "").strip()
+    return not text or any(mark in text for mark in PLACEHOLDER_MARKS)
+
+
 def load_notices() -> dict:
     """공지. 고정 공지가 맨 앞, 그다음 최신순."""
     data = load_json("notices.json", NOTICE_FALLBACK)
@@ -1460,15 +1471,15 @@ SHOT_THUMB_W = 560          # 첫 화면 타일에 걸 그림의 가로
 # 가로로 넓게 자르면 '종이' 로 안 보이고 띠처럼 보입니다. 세로가 긴 3:4 로
 # 잘라야 지면 그대로의 느낌이 납니다.
 SHOT_THUMB_RATIO = 3 / 4
-SHOT_THUMB_CROP = 0.12      # 좌우를 이만큼까지만 잘라 냅니다 (더 필요하면 안 자릅니다)
+SHOT_THUMB_MAX_H = 900      # 이보다 긴 지면은 아래를 잘라 둡니다 (파일 크기)
 
 
 def shot_thumb(mid: str) -> Path | None:
-    """지면 사진의 **윗부분**만 잘라 작게 만든 판. 없으면 만들고, 있으면 그대로 씁니다.
+    """지면 사진을 첫 화면 타일에 걸 만큼 작게 줄인 판. 원본은 안 건드립니다.
 
-    A4 한 장을 통째로 줄이면 글씨가 뭉개져 회색 얼룩이 됩니다. 제목과 첫
-    몇 줄이 보이도록 위쪽만 잘라야 '무슨 자료인지' 가 작아도 읽힙니다.
-    원본은 건드리지 않습니다.
+    자르는 일은 화면(CSS)이 합니다. 여기서는 가로만 맞춰 줄이고 비율은 그대로
+    둡니다 — 서버에서 미리 잘라 두면, 원본이 짧은 사진과 긴 사진이 서로 다른
+    모양으로 나와 타일 줄이 들쭉날쭉해집니다.
     """
     names = shot_files(mid)
     if not names:
@@ -1481,24 +1492,13 @@ def shot_thumb(mid: str) -> Path | None:
         from PIL import Image
         out.parent.mkdir(parents=True, exist_ok=True)
         w = SHOT_THUMB_W
-        h = round(w / SHOT_THUMB_RATIO)
         with Image.open(src) as im:
             im = im.convert("RGB")
-            # 빈 자리 없이 꽉 채웁니다. 세로가 긴 원본은 가로를 맞추고 아래를
-            # 잘라 내고, 가로가 긴 원본은 세로를 맞추고 좌우를 잘라 냅니다.
-            # 어느 쪽이든 비율은 그대로라 눌리거나 늘어나지 않습니다.
-            if im.width * h >= im.height * w:            # 원본이 더 납작함
-                nh, nw = h, max(w, round(im.width * h / im.height))
-            else:                                        # 원본이 더 길쭉함
-                nw, nh = w, max(h, round(im.height * w / im.width))
-            # 좌우를 너무 많이 잘라 내면 글자가 잘립니다. 그럴 바에는 그 그림만
-            # 짧게 두는 편이 낫습니다 (흰 여백을 두지도, 글자를 자르지도 않게).
-            if (nw - w) / w > SHOT_THUMB_CROP:
-                nw = w
-                nh = max(1, round(im.height * w / im.width))
-            im = im.resize((nw, nh), Image.LANCZOS)
-            left = (nw - w) // 2                         # 좌우는 가운데, 위는 그대로
-            im.crop((left, 0, left + w, min(h, nh))).save(out, "WEBP", quality=78, method=5)
+            h = max(1, round(im.height * w / im.width))
+            # 아주 긴 지면은 아래쪽을 잘라 파일만 키우지 않게 합니다.
+            # (어차피 타일에는 윗부분만 보입니다)
+            im.resize((w, h), Image.LANCZOS).crop((0, 0, w, min(h, SHOT_THUMB_MAX_H))) \
+              .save(out, "WEBP", quality=78, method=5)
         return out
     except Exception as exc:                 # 그림이 없어도 첫 화면은 떠야 합니다
         log.warning("지면 사진을 줄이지 못했습니다 (%s): %s", mid, exc)

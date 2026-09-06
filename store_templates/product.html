@@ -71,7 +71,7 @@
             {% if m %}
               <li>
                 <b>{{ m.no }} {{ m.name }}</b>
-                {% if m.signature %}<span class="sig">SIGNATURE</span>{% endif %}
+                {% if m.signature %}<span class="sig">시그니처</span>{% endif %}
                 {% if m.made_to_order %}<span class="mto">주문제작</span>{% endif %}
                 {% if m.tagline %}<br><span class="muted" style="font-size:14.5px;">{{ m.tagline }}</span>{% endif %}
                 <br><a class="mat-link" href="{{ url_for('lineup') }}#{{ m.id }}">

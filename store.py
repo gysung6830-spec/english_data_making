@@ -99,6 +99,8 @@ def inject_globals():
         "package_map": sc.package_map(),
         # '자료를 어떻게 받나' 는 한 곳에서만 정합니다 (화면마다 딴말 안 하게)
         "delivery_line": sc.delivery_line(site),
+        # 아직 안 채운 예시값을 손님 화면에 내보내지 않기 위한 판별
+        "filled": lambda v: not sc.is_placeholder(v),
     }
 
 
@@ -202,7 +204,12 @@ def home():
     free_items = [x for x in sc.load_freebies()["items"] if sc.free_ready(x)][:3]
     free_ready_count = sum(1 for p in products
                            if p.get("sample_file") and (sc.SAMPLE_DIR / p["sample_file"]).exists())
-    return render_template("home.html", product_count=len(products),
+    # 예시로 넣어 둔 것은 세지 않습니다. 실제로 파는 것이 없는데 숫자를 크게
+    # 적어 두면, 자료를 열어 본 손님이 바로 알아챕니다.
+    mine = [p for p in products if not p.get("sample")]
+    return render_template("home.html",
+                           sold_books=len({p.get("book") for p in mine if p.get("book")}),
+                           sold_count=len(mine),
                            lineup_groups=groups, lineup_all=all_materials,
                            material_total=len(all_materials),
                            free_items=free_items, free_ready_count=free_ready_count,
