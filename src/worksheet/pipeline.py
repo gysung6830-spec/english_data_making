@@ -806,56 +806,66 @@ def render_products(analyses, out_stem: str | Path, products=PRODUCTS, *,
                          boxmode=boxmode, bw=bw, **kw)
         return path
 
+    sel = [p for p in PRODUCTS if p in products]
+    _progress(f"산출물 생성 시작 — {', '.join(sel)} (지문 {len(analyses)}개, 재분석 없음)")
+
+    def _done(label, p):
+        results.append((label, p))
+        _progress(f"  ✓ {label} → {p.name} ({_pages(p)}p)")
+
     results: list[tuple[str, Path]] = []
     with tempfile.TemporaryDirectory() as d:
         dd = Path(d)
 
         if "지문분석" in products:
-            _progress("[지문분석] 파일 생성 중…")
+            _progress("[지문분석] 렌더 중… (활용가이드 + 지문별 분석→정리)")
             gp = dd / "guide.pdf"
             render_worksheet(analyses, gp, footer_note=footer_note,
                              include_guide=True, only_guide=True, bw=bw)
             parts = [gp]
             for i, a in enumerate(analyses):
+                _progress(f"  · 지문분석 {i + 1}/{len(analyses)} ({a.lecture_label or i + 1}) 렌더…")
                 parts.append(_rw(a, dd / f"ab_{i}.pdf", density=density,
                                  student=False, only_front=True, only_summary=True))
             f = _concat(parts, out_stem.parent / f"{out_stem.name}_지문분석.pdf")
             if f:
-                results.append(("📘 지문분석 (분석+정리)", f))
+                _done("📘 지문분석 (분석+정리)", f)
             src = _rw(analyses, dd / "src.pdf", only_source=True)
             f2 = _concat([src], out_stem.parent / f"{out_stem.name}_원문해석.pdf")
             if f2:
-                results.append(("📖 원문·해석", f2))
+                _done("📖 원문·해석", f2)
 
         if "워크북" in products:
-            _progress("[워크북] 파일 생성 중…")
+            _progress("[워크북] 렌더 중… (단어테스트 + 학습용 빈칸)")
             if any(getattr(a, "vocab", None) for a in analyses):
                 tp = _rw(analyses, dd / "test.pdf", only_test=True)
                 ap = _rw(analyses, dd / "ans.pdf", only_answer=True)
                 f = _concat([tp, ap], out_stem.parent / f"{out_stem.name}_워크북_단어테스트.pdf")
                 if f:
-                    results.append(("📝 워크북 · 단어테스트(+정답)", f))
+                    _done("📝 워크북 · 단어테스트(+정답)", f)
+            else:
+                _progress("  · (핵심 어휘가 없어 단어테스트는 건너뜀)")
             if make_student:
                 sp = _rw(analyses, dd / "stu.pdf", density=density, student=True,
                          slevel=slevel, only_front=True)
                 f = _concat([sp], out_stem.parent / f"{out_stem.name}_워크북_학습용.pdf")
                 if f:
-                    results.append(("✏️ 워크북 · 학습용(빈칸)", f))
+                    _done("✏️ 워크북 · 학습용(빈칸)", f)
 
         # ── ORTICA 양식(한줄해석/한줄영어/좌지문우해석/직독직해) — 재분석 없음 ──
         form_sel = [p for p in _FORM_PRODUCTS if p in products]
         if form_sel:
             from . import forms as ws_forms
             for fk in form_sel:
-                _progress(f"[{fk}] 파일 생성 중…(ORTICA 양식, 재분석 없음)")
+                _progress(f"[{fk}] 렌더 중… (ORTICA 양식, {len(analyses)}지문)")
                 html = ws_forms.render_form_html(analyses, fk, doc_name=meta)
                 dest = out_stem.parent / f"{out_stem.name}_{fk}.pdf"
                 if _form_pdf(html, dest):
                     _stamp_footer(dest, footer_note, meta)  # 저작권·교재명·페이지번호
                     if _pages(dest) > 0:
-                        results.append((f"📗 {fk}", dest))
+                        _done(f"📗 {fk}", dest)
 
-    _progress(f"산출물 {len(results)}종 생성 완료")
+    _progress(f"✅ 산출물 {len(results)}종 생성 완료")
     return results
 
 
