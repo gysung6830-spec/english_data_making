@@ -534,8 +534,11 @@ input[type=file]{
   font-size:12.5px; font-weight:700; color:var(--brand-dark); background:var(--brand-soft);
   border-radius:6px; padding:4px 10px;
 }
-.mat-chip .n{color:var(--brand); margin-right:4px;}
-.mat-chip.sig-chip{background:#fdf3e2; color:#8a5a12;}
+.mat-chip .n{color:currentColor; opacity:.72; margin-right:4px; font-weight:800;}
+/* 딱지 색은 '어느 패키지에 드는가' 로 가릅니다. 위 패키지 칸과 같은 색이라
+   훑기만 해도 무엇이 읽는 자료이고 무엇이 푸는 자료인지 갈립니다. */
+.mat-chip.pk-analysis{background:#e9f1fc; color:#1e4bb8;}
+.mat-chip.pk-problem{background:#fdeee6; color:#a3450f;}
 
 @media (max-width:860px){
   .lineup-hero{padding:44px 0 40px;}

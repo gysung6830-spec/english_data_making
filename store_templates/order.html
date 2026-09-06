@@ -36,7 +36,7 @@
             <div class="mat-chips">
               {% for mid in it.materials %}
                 {% set m = material_map.get(mid) %}
-                {% if m %}<span class="mat-chip {{ 'sig-chip' if m.signature }}">
+                {% if m %}<span class="mat-chip pk-{{ material_pkg.get(mid, '') }}">
                   <span class="n">{{ m.no }}</span>{{ m.name }}</span>{% endif %}
               {% endfor %}
             </div>

@@ -186,6 +186,19 @@ ORDER_KIND_LABELS = {"product": "자료 주문", "custom": "맞춤 제작",
 MTO_DAYS = 1
 
 
+def material_package() -> dict[str, str]:
+    """자료가 어느 패키지에 드는지. 화면에서 딱지 색을 가르는 데 씁니다.
+
+    두 패키지에 겹쳐 든 자료(어휘리스트·단어테스트)는 먼저 나오는 쪽으로
+    묶습니다. 색이 셋이 되면 무슨 뜻인지 아무도 못 알아봅니다.
+    """
+    out: dict[str, str] = {}
+    for pkg in load_catalog().get("packages", []):
+        for mid in pkg.get("materials") or []:
+            out.setdefault(mid, pkg["id"])
+    return out
+
+
 def made_to_order_materials() -> list[dict]:
     """미리 만들어 두지 않고, 신청을 받아 만드는 자료."""
     return [m for m in load_materials()["materials"]

@@ -206,6 +206,31 @@ def test_textbook_subjects_are_the_four():
     print("PASS  교과서 과목 네 가지 · 이름이 겹쳐도 안 딸려 나옴")
 
 
+def test_material_chips_are_coloured_by_package():
+    """자료 딱지 색은 시그니처가 아니라 '어느 패키지에 드는가' 로 갈립니다."""
+    with store.app.app_context():
+        where = sc.material_package()
+    pkgs = {p["id"]: p["materials"] for p in sc.load_catalog()["packages"]}
+    assert where["analysis"] == "analysis" and where["variants"] == "problem"
+    # 두 패키지에 겹쳐 든 자료는 먼저 나오는 쪽으로 묶습니다 (색이 셋이 되면 안 됩니다)
+    for mid in ("wordlist", "wordtest"):
+        assert mid in pkgs["analysis"] and mid in pkgs["problem"]
+        assert where[mid] == "analysis", mid
+
+    page = body(client().get("/products?category=ebs"))
+    assert "mat-chip pk-analysis" in page and "mat-chip pk-problem" in page
+    assert "sig-chip" not in page, "시그니처로 색을 가르던 것이 남아 있습니다"
+
+    css = body(client().get("/static/store.css"))
+    assert ".mat-chip.pk-analysis" in css and ".mat-chip.pk-problem" in css
+    assert ".mat-chip.sig-chip" not in css
+    # 두 색이 서로 달라야 갈립니다
+    a = css.split(".mat-chip.pk-analysis{")[1].split("}")[0]
+    b = css.split(".mat-chip.pk-problem{")[1].split("}")[0]
+    assert a != b, (a, b)
+    print("PASS  자료 딱지 색을 패키지로 가름")
+
+
 def test_package_filter():
     """패키지로 거르면 그 갈래에 든 자료만 남아야 합니다."""
     # 교재 칸에 걸리는 자료 딱지로 봅니다 (안내 문구에도 같은 말이 나오니
@@ -4337,6 +4362,7 @@ def run_all():
     test_two_packages_per_book()
     test_sibling_package_cross_sell()
     test_textbook_subjects_are_the_four()
+    test_material_chips_are_coloured_by_package()
     test_package_filter()
     test_products_grouped_by_book()
     test_grade_filter_and_sort()

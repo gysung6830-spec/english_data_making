@@ -56,7 +56,7 @@
               <p>{{ lane.tagline }}</p>
               <div class="lane-mats">
                 {%- for mid in lane.materials %}{% set m = material_map.get(mid) %}
-                  {%- if m %}<a class="mat-chip {{ 'sig-chip' if m.signature }}"
+                  {%- if m %}<a class="mat-chip pk-{{ material_pkg.get(mid, '') }}"
                       href="{{ url_for('lineup') }}#{{ m.id }}"><span class="n">{{ m.no }}</span>{{ m.name }}</a>{% endif %}
                 {%- endfor %}
               </div>

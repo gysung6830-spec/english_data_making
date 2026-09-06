@@ -97,6 +97,8 @@ def inject_globals():
         "inquiry_kinds": sc.INQUIRY_KINDS,
         "material_map": sc.material_map(),
         "package_map": sc.package_map(),
+        # 자료 딱지 색을 패키지로 가릅니다 (분석은 파랑 · 문제는 주황)
+        "material_pkg": sc.material_package(),
         # '자료를 어떻게 받나' 는 한 곳에서만 정합니다 (화면마다 딴말 안 하게)
         "delivery_line": sc.delivery_line(site),
         # 아직 안 채운 예시값을 손님 화면에 내보내지 않기 위한 판별

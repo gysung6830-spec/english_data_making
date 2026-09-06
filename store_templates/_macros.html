@@ -16,7 +16,7 @@
       {% for mid in p.materials %}
         {% set m = material_map.get(mid) %}
         {% if m %}
-          <span class="mat-chip {{ 'sig-chip' if m.signature }}">
+          <span class="mat-chip pk-{{ material_pkg.get(mid, '') }}">
             <span class="n">{{ m.no }}</span>{{ m.name }}</span>
         {% endif %}
       {% endfor %}
@@ -76,7 +76,7 @@
         <div class="bg-mats">
           {% for mid in mat_ids %}
             {% set m = material_map.get(mid) %}
-            {% if m %}<span class="mat-chip {{ 'sig-chip' if m.signature }}">
+            {% if m %}<span class="mat-chip pk-{{ material_pkg.get(mid, '') }}">
               <span class="n">{{ m.no }}</span>{{ m.name }}</span>{% endif %}
           {% endfor %}
         </div>
