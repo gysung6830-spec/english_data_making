@@ -125,7 +125,6 @@
   "pricing": {
     "_안내": "우리 정가입니다. 자료 1종이 지문 1개당 얼마인지만 정해 두면 상품 값이 자동으로 계산됩니다. 손님 화면에는 안 보입니다.",
     "materials": {
-      "passage": 120,
       "analysis": 250,
       "pilsaengbo": 160,
       "workbook": 300,
@@ -133,7 +132,10 @@
       "variants": 400,
       "literal": 150,
       "wordlist": 100,
-      "wordtest": 120
+      "wordtest": 120,
+      "oneline-ko": 40,
+      "oneline-en": 40,
+      "side": 40
     },
     "units": {
       "analysis": 530,

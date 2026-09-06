@@ -109,21 +109,20 @@ def test_categories_include_textbook():
 
 
 def test_lineup_shows_all_materials():
-    """보내 주신 라인업 8종이 그룹별로 다 나와야 합니다."""
+    """라인업에 있는 자료가 그룹별로 하나도 빠짐없이 나와야 합니다."""
     text = body(client().get("/lineup"))
-    for name in ("지문자료", "지문분석지", "필생보", "필생보 · 독학용", "통합 영어 워크북",
-                 "서술형 대비 교재", "17종 변형문제", "동형모의고사 2회"):
-        assert name in text, name
-    for group in ("지문 이해", "시그니처 자료", "시험 대비"):
+    mats = sc.load_materials()["materials"]
+    for m in mats:
+        assert m["name"] in text, m["name"]
+    for group in ("지문 이해", "시그니처 자료", "시험 대비", "어휘"):
         assert group in text, group
+    # 번호는 1부터 빠짐없이 이어져야 합니다 (자료를 더해도 어긋나지 않게)
+    assert [m["no"] for m in mats] == [f"{i:02d}" for i in range(1, len(mats) + 1)]
     assert "필자의 생각이 보이는 영어독해" in text              # 시그니처 묶음 제목
     assert 'lineup-group dark' in text                          # 그 묶음만 진한 배경
     assert "SIGNATURE" in text and "주문제작자료" in text        # 표시
     assert "읽고 · 뜯어보고" in text                             # 머리말
-    # 지문자료의 세 판형
-    for v in ("원문만", "위아래 해석", "좌우 해석"):
-        assert v in text, v
-    print("PASS  오르티카 라인업 8종 · 묶음 · 표시 노출")
+    print(f"PASS  오르티카 라인업 {len(mats)}종 · 묶음 · 표시 노출")
 
 
 def test_home_reflects_lineup():
@@ -144,7 +143,7 @@ def test_two_packages_per_book():
 
     analysis = body(client().get("/products/mock-2026-06-g3-analysis"))
     assert "지문 분석 패키지" in analysis
-    for name in ("지문자료", "지문분석지", "필생보"):
+    for name in ("한줄해석", "한줄영어", "좌지문우해석", "지문분석지", "필생보"):
         assert name in own(analysis), name
     for name in ("통합 영어 워크북", "17종 변형문제", "서술형 대비 교재"):
         assert name not in own(analysis), f"분석 패키지에 {name} 이 섞였습니다"
@@ -153,7 +152,7 @@ def test_two_packages_per_book():
     assert "문제 패키지" in problem
     for name in ("통합 영어 워크북", "서술형 대비 교재", "17종 변형문제"):
         assert name in own(problem), name
-    for name in ("지문자료", "필생보"):
+    for name in ("한줄해석", "좌지문우해석", "필생보"):
         assert name not in own(problem), f"문제 패키지에 {name} 이 섞였습니다"
     assert "/lineup#variants" in problem      # 라인업 설명으로 이어지는 링크
     print("PASS  교재마다 분석 · 문제 패키지 두 갈래")
@@ -173,14 +172,15 @@ def test_package_filter():
     """패키지로 거르면 그 갈래에 든 자료만 남아야 합니다."""
     # 교재 칸에 걸리는 자료 딱지로 봅니다 (안내 문구에도 같은 말이 나오니
     # 번호까지 붙은 딱지 모양을 그대로 찾습니다)
-    chip = lambda no, name: f'<span class="n">{no}</span>{name}'
+    mats = sc.material_map()
+    chip = lambda mid: f'<span class="n">{mats[mid]["no"]}</span>{mats[mid]["name"]}'
     only_analysis = body(client().get("/products?package=analysis"))
-    assert chip("02", "지문분석지") in only_analysis
-    assert chip("07", "17종 변형문제") not in only_analysis
+    assert chip("analysis") in only_analysis
+    assert chip("variants") not in only_analysis
 
     only_problem = body(client().get("/products?package=problem"))
-    assert chip("07", "17종 변형문제") in only_problem
-    assert chip("02", "지문분석지") not in only_problem
+    assert chip("variants") in only_problem
+    assert chip("analysis") not in only_problem
     print("PASS  목록에서 패키지로 거르기")
 
 
@@ -906,8 +906,8 @@ def test_admin_creates_product_visible_on_site():
 
 def test_admin_edits_material_and_site_reflects():
     a = admin()
-    resp = a.post("/admin/materials/passage", data={
-        "no": "01", "name": "지문자료", "en": "Passage", "group": "understand",
+    resp = a.post("/admin/materials/oneline-ko", data={
+        "no": "01", "name": "한줄해석", "en": "Line-by-line KO", "group": "understand",
         "tagline": "테스트로 바꾼 한 줄 소개", "active": "1",
         "variant_name": ["원문만", ""], "variant_desc": ["설명", ""],
         "feature_title": ["새 특징"], "feature_body": ["새 특징 설명"],
@@ -3391,8 +3391,8 @@ def test_admin_pricing_is_editable():
     assert "적은 묶음" not in text
 
     a.post("/admin/pricing", data={
-        "mat_passage": "200", "mat_analysis": "400", "mat_pilsaengbo": "300",
-        "mat_workbook": "500", "mat_descriptive": "300", "mat_variants": "400",
+        "mat_analysis": "400", "mat_pilsaengbo": "300", "mat_workbook": "500",
+        "mat_descriptive": "300", "mat_variants": "400",
         "round_to": "100", "full_pack_percent": "80"}, follow_redirects=True)
     site = sc.load_site()
     cfg = sc.pricing_cfg(site)
@@ -3401,7 +3401,7 @@ def test_admin_pricing_is_editable():
     want = {pkg["id"]: sum(rates.get(m, 0) for m in pkg["materials"])
             for pkg in sc.package_map().values()}
     assert cfg["units"] == want, (cfg["units"], want)
-    assert rates["passage"] == 200                             # 보낸 값이 들어갔습니다
+    assert rates["analysis"] == 400                            # 보낸 값이 들어갔습니다
     step = cfg["round_to"]
     def rounded(n):
         return int(round(n / step) * step)
@@ -3418,11 +3418,11 @@ def test_admin_pricing_is_editable():
 
     # 원래대로 돌려 놓습니다
     a.post("/admin/pricing", data={
-        "mat_passage": "120", "mat_analysis": "250", "mat_pilsaengbo": "160",
-        "mat_workbook": "300", "mat_descriptive": "250", "mat_variants": "400",
+        "mat_analysis": "250", "mat_pilsaengbo": "160", "mat_workbook": "300",
+        "mat_descriptive": "250", "mat_variants": "400",
         "round_to": "100", "full_pack_percent": "85"}, follow_redirects=True)
     back = sc.pricing_cfg(sc.load_site())
-    assert back["materials"]["passage"] == 120 and back["materials"]["variants"] == 400
+    assert back["materials"]["analysis"] == 250 and back["materials"]["variants"] == 400
     print("PASS  자료 1종 단가를 화면에서 정하기 · 손님에겐 안 보임")
 
 

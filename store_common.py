@@ -1508,7 +1508,12 @@ def shot_thumb(mid: str) -> Path | None:
 # 압축 파일 안의 PDF 이름에서 '몇 강' 과 '무슨 자료' 인지 읽어 냅니다.
 # 파일 이름이 제각각이라 별칭을 넉넉히 둡니다.
 MATERIAL_ALIASES = {
-    "passage": ["지문자료", "지문 자료", "원문", "본문", "passage"],
+    "oneline-ko": ["한줄해석", "한 줄 해석", "위아래해석", "oneline_ko"],
+    "oneline-en": ["한줄영어", "한 줄 영어", "원문만", "원문", "본문", "oneline_en"],
+    "side": ["좌지문우해석", "좌우해석", "좌지문", "side"],
+    "literal": ["직독직해", "끊어읽기", "literal"],
+    "wordlist": ["어휘리스트", "어휘 리스트", "단어리스트", "wordlist"],
+    "wordtest": ["단어테스트", "단어 테스트", "어휘시험지", "단어시험지", "wordtest"],
     "analysis": ["지문분석지", "지문 분석", "분석지", "해설", "analysis"],
     "pilsaengbo": ["필생보", "필수생존보카", "pilsaengbo"],
     "pilsaengbo-solo": ["독학용", "필생보독학", "solo"],

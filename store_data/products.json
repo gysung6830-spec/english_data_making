@@ -149,10 +149,12 @@
       "sort": 10,
       "active": true,
       "materials": [
-        "passage",
+        "oneline-ko",
+        "oneline-en",
+        "side",
+        "literal",
         "analysis",
         "pilsaengbo",
-        "literal",
         "wordlist",
         "wordtest"
       ],
@@ -202,10 +204,12 @@
       "sort": 20,
       "active": true,
       "materials": [
-        "passage",
+        "oneline-ko",
+        "oneline-en",
+        "side",
+        "literal",
         "analysis",
         "pilsaengbo",
-        "literal",
         "wordlist",
         "wordtest"
       ],
@@ -255,10 +259,12 @@
       "sort": 30,
       "active": true,
       "materials": [
-        "passage",
+        "oneline-ko",
+        "oneline-en",
+        "side",
+        "literal",
         "analysis",
         "pilsaengbo",
-        "literal",
         "wordlist",
         "wordtest"
       ],
@@ -310,10 +316,12 @@
       "sort": 40,
       "active": true,
       "materials": [
-        "passage",
+        "oneline-ko",
+        "oneline-en",
+        "side",
+        "literal",
         "analysis",
         "pilsaengbo",
-        "literal",
         "wordlist",
         "wordtest"
       ],
@@ -363,10 +371,12 @@
       "sort": 50,
       "active": true,
       "materials": [
-        "passage",
+        "oneline-ko",
+        "oneline-en",
+        "side",
+        "literal",
         "analysis",
         "pilsaengbo",
-        "literal",
         "wordlist",
         "wordtest"
       ],
@@ -390,10 +400,12 @@
       "sort": 51,
       "active": true,
       "materials": [
-        "passage",
+        "oneline-ko",
+        "oneline-en",
+        "side",
+        "literal",
         "analysis",
         "pilsaengbo",
-        "literal",
         "wordlist",
         "wordtest"
       ],
@@ -417,10 +429,12 @@
       "sort": 52,
       "active": true,
       "materials": [
-        "passage",
+        "oneline-ko",
+        "oneline-en",
+        "side",
+        "literal",
         "analysis",
         "pilsaengbo",
-        "literal",
         "wordlist",
         "wordtest"
       ],
@@ -475,10 +489,12 @@
       "sort": 60,
       "active": true,
       "materials": [
-        "passage",
+        "oneline-ko",
+        "oneline-en",
+        "side",
+        "literal",
         "analysis",
         "pilsaengbo",
-        "literal",
         "wordlist",
         "wordtest"
       ],
@@ -528,10 +544,12 @@
       "sort": 70,
       "active": true,
       "materials": [
-        "passage",
+        "oneline-ko",
+        "oneline-en",
+        "side",
+        "literal",
         "analysis",
         "pilsaengbo",
-        "literal",
         "wordlist",
         "wordtest"
       ],
@@ -581,10 +599,12 @@
       "sort": 80,
       "active": true,
       "materials": [
-        "passage",
+        "oneline-ko",
+        "oneline-en",
+        "side",
+        "literal",
         "analysis",
         "pilsaengbo",
-        "literal",
         "wordlist",
         "wordtest"
       ],
@@ -636,10 +656,12 @@
       "sort": 90,
       "active": true,
       "materials": [
-        "passage",
+        "oneline-ko",
+        "oneline-en",
+        "side",
+        "literal",
         "analysis",
         "pilsaengbo",
-        "literal",
         "wordlist",
         "wordtest"
       ],
@@ -689,10 +711,12 @@
       "active": true,
       "badge": "처음이시면",
       "materials": [
-        "passage",
+        "oneline-ko",
+        "oneline-en",
+        "side",
+        "literal",
         "analysis",
         "pilsaengbo",
-        "literal",
         "wordlist",
         "wordtest"
       ],
@@ -706,21 +730,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-01-passage",
+      "slug": "ebs-2026-tokgang-eng-01-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 1강 · 지문자료",
+      "name": "2026 수능특강 영어 1강 · 한줄해석",
       "subtitle": "1강 · 지문 6개",
       "unit": "1강",
       "unit_no": 1,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 101,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 1강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-01-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 1강 · 한줄영어",
+      "subtitle": "1강 · 지문 6개",
+      "unit": "1강",
+      "unit_no": 1,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 101,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 1강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-01-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 1강 · 좌지문우해석",
+      "subtitle": "1강 · 지문 6개",
+      "unit": "1강",
+      "unit_no": 1,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 101,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 1강 지문 6개의 지문자료 입니다.",
@@ -844,21 +914,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-02-passage",
+      "slug": "ebs-2026-tokgang-eng-02-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 2강 · 지문자료",
+      "name": "2026 수능특강 영어 2강 · 한줄해석",
       "subtitle": "2강 · 지문 6개",
       "unit": "2강",
       "unit_no": 2,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 102,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 2강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-02-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 2강 · 한줄영어",
+      "subtitle": "2강 · 지문 6개",
+      "unit": "2강",
+      "unit_no": 2,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 102,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 2강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-02-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 2강 · 좌지문우해석",
+      "subtitle": "2강 · 지문 6개",
+      "unit": "2강",
+      "unit_no": 2,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 102,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 2강 지문 6개의 지문자료 입니다.",
@@ -982,21 +1098,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-03-passage",
+      "slug": "ebs-2026-tokgang-eng-03-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 3강 · 지문자료",
+      "name": "2026 수능특강 영어 3강 · 한줄해석",
       "subtitle": "3강 · 지문 6개",
       "unit": "3강",
       "unit_no": 3,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 103,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 3강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-03-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 3강 · 한줄영어",
+      "subtitle": "3강 · 지문 6개",
+      "unit": "3강",
+      "unit_no": 3,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 103,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 3강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-03-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 3강 · 좌지문우해석",
+      "subtitle": "3강 · 지문 6개",
+      "unit": "3강",
+      "unit_no": 3,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 103,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 3강 지문 6개의 지문자료 입니다.",
@@ -1120,21 +1282,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-04-passage",
+      "slug": "ebs-2026-tokgang-eng-04-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 4강 · 지문자료",
+      "name": "2026 수능특강 영어 4강 · 한줄해석",
       "subtitle": "4강 · 지문 6개",
       "unit": "4강",
       "unit_no": 4,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 104,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 4강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-04-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 4강 · 한줄영어",
+      "subtitle": "4강 · 지문 6개",
+      "unit": "4강",
+      "unit_no": 4,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 104,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 4강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-04-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 4강 · 좌지문우해석",
+      "subtitle": "4강 · 지문 6개",
+      "unit": "4강",
+      "unit_no": 4,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 104,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 4강 지문 6개의 지문자료 입니다.",
@@ -1258,21 +1466,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-05-passage",
+      "slug": "ebs-2026-tokgang-eng-05-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 5강 · 지문자료",
+      "name": "2026 수능특강 영어 5강 · 한줄해석",
       "subtitle": "5강 · 지문 6개",
       "unit": "5강",
       "unit_no": 5,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 105,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 5강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-05-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 5강 · 한줄영어",
+      "subtitle": "5강 · 지문 6개",
+      "unit": "5강",
+      "unit_no": 5,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 105,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 5강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-05-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 5강 · 좌지문우해석",
+      "subtitle": "5강 · 지문 6개",
+      "unit": "5강",
+      "unit_no": 5,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 105,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 5강 지문 6개의 지문자료 입니다.",
@@ -1396,21 +1650,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-06-passage",
+      "slug": "ebs-2026-tokgang-eng-06-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 6강 · 지문자료",
+      "name": "2026 수능특강 영어 6강 · 한줄해석",
       "subtitle": "6강 · 지문 6개",
       "unit": "6강",
       "unit_no": 6,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 106,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 6강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-06-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 6강 · 한줄영어",
+      "subtitle": "6강 · 지문 6개",
+      "unit": "6강",
+      "unit_no": 6,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 106,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 6강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-06-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 6강 · 좌지문우해석",
+      "subtitle": "6강 · 지문 6개",
+      "unit": "6강",
+      "unit_no": 6,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 106,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 6강 지문 6개의 지문자료 입니다.",
@@ -1534,21 +1834,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-07-passage",
+      "slug": "ebs-2026-tokgang-eng-07-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 7강 · 지문자료",
+      "name": "2026 수능특강 영어 7강 · 한줄해석",
       "subtitle": "7강 · 지문 6개",
       "unit": "7강",
       "unit_no": 7,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 107,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 7강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-07-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 7강 · 한줄영어",
+      "subtitle": "7강 · 지문 6개",
+      "unit": "7강",
+      "unit_no": 7,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 107,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 7강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-07-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 7강 · 좌지문우해석",
+      "subtitle": "7강 · 지문 6개",
+      "unit": "7강",
+      "unit_no": 7,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 107,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 7강 지문 6개의 지문자료 입니다.",
@@ -1672,21 +2018,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-08-passage",
+      "slug": "ebs-2026-tokgang-eng-08-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 8강 · 지문자료",
+      "name": "2026 수능특강 영어 8강 · 한줄해석",
       "subtitle": "8강 · 지문 6개",
       "unit": "8강",
       "unit_no": 8,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 108,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 8강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-08-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 8강 · 한줄영어",
+      "subtitle": "8강 · 지문 6개",
+      "unit": "8강",
+      "unit_no": 8,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 108,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 8강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-08-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 8강 · 좌지문우해석",
+      "subtitle": "8강 · 지문 6개",
+      "unit": "8강",
+      "unit_no": 8,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 108,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 8강 지문 6개의 지문자료 입니다.",
@@ -1810,21 +2202,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-09-passage",
+      "slug": "ebs-2026-tokgang-eng-09-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 9강 · 지문자료",
+      "name": "2026 수능특강 영어 9강 · 한줄해석",
       "subtitle": "9강 · 지문 6개",
       "unit": "9강",
       "unit_no": 9,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 109,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 9강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-09-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 9강 · 한줄영어",
+      "subtitle": "9강 · 지문 6개",
+      "unit": "9강",
+      "unit_no": 9,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 109,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 9강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-09-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 9강 · 좌지문우해석",
+      "subtitle": "9강 · 지문 6개",
+      "unit": "9강",
+      "unit_no": 9,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 109,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 9강 지문 6개의 지문자료 입니다.",
@@ -1948,21 +2386,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-10-passage",
+      "slug": "ebs-2026-tokgang-eng-10-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 10강 · 지문자료",
+      "name": "2026 수능특강 영어 10강 · 한줄해석",
       "subtitle": "10강 · 지문 6개",
       "unit": "10강",
       "unit_no": 10,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 110,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 10강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-10-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 10강 · 한줄영어",
+      "subtitle": "10강 · 지문 6개",
+      "unit": "10강",
+      "unit_no": 10,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 110,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 10강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-10-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 10강 · 좌지문우해석",
+      "subtitle": "10강 · 지문 6개",
+      "unit": "10강",
+      "unit_no": 10,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 110,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 10강 지문 6개의 지문자료 입니다.",
@@ -2086,21 +2570,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-11-passage",
+      "slug": "ebs-2026-tokgang-eng-11-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 11강 · 지문자료",
+      "name": "2026 수능특강 영어 11강 · 한줄해석",
       "subtitle": "11강 · 지문 6개",
       "unit": "11강",
       "unit_no": 11,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 111,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 11강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-11-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 11강 · 한줄영어",
+      "subtitle": "11강 · 지문 6개",
+      "unit": "11강",
+      "unit_no": 11,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 111,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 11강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-11-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 11강 · 좌지문우해석",
+      "subtitle": "11강 · 지문 6개",
+      "unit": "11강",
+      "unit_no": 11,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 111,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 11강 지문 6개의 지문자료 입니다.",
@@ -2224,21 +2754,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-12-passage",
+      "slug": "ebs-2026-tokgang-eng-12-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 12강 · 지문자료",
+      "name": "2026 수능특강 영어 12강 · 한줄해석",
       "subtitle": "12강 · 지문 6개",
       "unit": "12강",
       "unit_no": 12,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 112,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 12강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-12-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 12강 · 한줄영어",
+      "subtitle": "12강 · 지문 6개",
+      "unit": "12강",
+      "unit_no": 12,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 112,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 12강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-12-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 12강 · 좌지문우해석",
+      "subtitle": "12강 · 지문 6개",
+      "unit": "12강",
+      "unit_no": 12,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 112,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 12강 지문 6개의 지문자료 입니다.",
@@ -2362,21 +2938,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-13-passage",
+      "slug": "ebs-2026-tokgang-eng-13-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 13강 · 지문자료",
+      "name": "2026 수능특강 영어 13강 · 한줄해석",
       "subtitle": "13강 · 지문 6개",
       "unit": "13강",
       "unit_no": 13,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 113,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 13강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-13-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 13강 · 한줄영어",
+      "subtitle": "13강 · 지문 6개",
+      "unit": "13강",
+      "unit_no": 13,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 113,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 13강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-13-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 13강 · 좌지문우해석",
+      "subtitle": "13강 · 지문 6개",
+      "unit": "13강",
+      "unit_no": 13,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 113,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 13강 지문 6개의 지문자료 입니다.",
@@ -2500,21 +3122,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-14-passage",
+      "slug": "ebs-2026-tokgang-eng-14-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 14강 · 지문자료",
+      "name": "2026 수능특강 영어 14강 · 한줄해석",
       "subtitle": "14강 · 지문 6개",
       "unit": "14강",
       "unit_no": 14,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 114,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 14강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-14-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 14강 · 한줄영어",
+      "subtitle": "14강 · 지문 6개",
+      "unit": "14강",
+      "unit_no": 14,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 114,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 14강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-14-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 14강 · 좌지문우해석",
+      "subtitle": "14강 · 지문 6개",
+      "unit": "14강",
+      "unit_no": 14,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 114,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 14강 지문 6개의 지문자료 입니다.",
@@ -2638,21 +3306,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-15-passage",
+      "slug": "ebs-2026-tokgang-eng-15-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 15강 · 지문자료",
+      "name": "2026 수능특강 영어 15강 · 한줄해석",
       "subtitle": "15강 · 지문 6개",
       "unit": "15강",
       "unit_no": 15,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 115,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 15강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-15-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 15강 · 한줄영어",
+      "subtitle": "15강 · 지문 6개",
+      "unit": "15강",
+      "unit_no": 15,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 115,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 15강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-15-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 15강 · 좌지문우해석",
+      "subtitle": "15강 · 지문 6개",
+      "unit": "15강",
+      "unit_no": 15,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 115,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 15강 지문 6개의 지문자료 입니다.",
@@ -2776,21 +3490,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-16-passage",
+      "slug": "ebs-2026-tokgang-eng-16-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 16강 · 지문자료",
+      "name": "2026 수능특강 영어 16강 · 한줄해석",
       "subtitle": "16강 · 지문 6개",
       "unit": "16강",
       "unit_no": 16,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 116,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 16강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-16-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 16강 · 한줄영어",
+      "subtitle": "16강 · 지문 6개",
+      "unit": "16강",
+      "unit_no": 16,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 116,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 16강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-16-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 16강 · 좌지문우해석",
+      "subtitle": "16강 · 지문 6개",
+      "unit": "16강",
+      "unit_no": 16,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 116,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 16강 지문 6개의 지문자료 입니다.",
@@ -2914,21 +3674,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-17-passage",
+      "slug": "ebs-2026-tokgang-eng-17-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 17강 · 지문자료",
+      "name": "2026 수능특강 영어 17강 · 한줄해석",
       "subtitle": "17강 · 지문 6개",
       "unit": "17강",
       "unit_no": 17,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 117,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 17강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-17-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 17강 · 한줄영어",
+      "subtitle": "17강 · 지문 6개",
+      "unit": "17강",
+      "unit_no": 17,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 117,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 17강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-17-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 17강 · 좌지문우해석",
+      "subtitle": "17강 · 지문 6개",
+      "unit": "17강",
+      "unit_no": 17,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 117,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 17강 지문 6개의 지문자료 입니다.",
@@ -3052,21 +3858,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-18-passage",
+      "slug": "ebs-2026-tokgang-eng-18-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 18강 · 지문자료",
+      "name": "2026 수능특강 영어 18강 · 한줄해석",
       "subtitle": "18강 · 지문 6개",
       "unit": "18강",
       "unit_no": 18,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 118,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 18강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-18-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 18강 · 한줄영어",
+      "subtitle": "18강 · 지문 6개",
+      "unit": "18강",
+      "unit_no": 18,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 118,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 18강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-18-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 18강 · 좌지문우해석",
+      "subtitle": "18강 · 지문 6개",
+      "unit": "18강",
+      "unit_no": 18,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 118,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 18강 지문 6개의 지문자료 입니다.",
@@ -3190,21 +4042,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-19-passage",
+      "slug": "ebs-2026-tokgang-eng-19-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 19강 · 지문자료",
+      "name": "2026 수능특강 영어 19강 · 한줄해석",
       "subtitle": "19강 · 지문 6개",
       "unit": "19강",
       "unit_no": 19,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 119,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 19강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-19-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 19강 · 한줄영어",
+      "subtitle": "19강 · 지문 6개",
+      "unit": "19강",
+      "unit_no": 19,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 119,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 19강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-19-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 19강 · 좌지문우해석",
+      "subtitle": "19강 · 지문 6개",
+      "unit": "19강",
+      "unit_no": 19,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 119,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 19강 지문 6개의 지문자료 입니다.",
@@ -3328,21 +4226,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-20-passage",
+      "slug": "ebs-2026-tokgang-eng-20-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 20강 · 지문자료",
+      "name": "2026 수능특강 영어 20강 · 한줄해석",
       "subtitle": "20강 · 지문 6개",
       "unit": "20강",
       "unit_no": 20,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 120,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 20강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-20-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 20강 · 한줄영어",
+      "subtitle": "20강 · 지문 6개",
+      "unit": "20강",
+      "unit_no": 20,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 120,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 20강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-20-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 20강 · 좌지문우해석",
+      "subtitle": "20강 · 지문 6개",
+      "unit": "20강",
+      "unit_no": 20,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 120,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 20강 지문 6개의 지문자료 입니다.",
@@ -3466,21 +4410,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-21-passage",
+      "slug": "ebs-2026-tokgang-eng-21-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 21강 · 지문자료",
+      "name": "2026 수능특강 영어 21강 · 한줄해석",
       "subtitle": "21강 · 지문 6개",
       "unit": "21강",
       "unit_no": 21,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 121,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 21강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-21-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 21강 · 한줄영어",
+      "subtitle": "21강 · 지문 6개",
+      "unit": "21강",
+      "unit_no": 21,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 121,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 21강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-21-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 21강 · 좌지문우해석",
+      "subtitle": "21강 · 지문 6개",
+      "unit": "21강",
+      "unit_no": 21,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 121,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 21강 지문 6개의 지문자료 입니다.",
@@ -3604,21 +4594,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-22-passage",
+      "slug": "ebs-2026-tokgang-eng-22-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 22강 · 지문자료",
+      "name": "2026 수능특강 영어 22강 · 한줄해석",
       "subtitle": "22강 · 지문 6개",
       "unit": "22강",
       "unit_no": 22,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 122,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 22강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-22-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 22강 · 한줄영어",
+      "subtitle": "22강 · 지문 6개",
+      "unit": "22강",
+      "unit_no": 22,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 122,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 22강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-22-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 22강 · 좌지문우해석",
+      "subtitle": "22강 · 지문 6개",
+      "unit": "22강",
+      "unit_no": 22,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 122,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 22강 지문 6개의 지문자료 입니다.",
@@ -3742,21 +4778,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-23-passage",
+      "slug": "ebs-2026-tokgang-eng-23-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 23강 · 지문자료",
+      "name": "2026 수능특강 영어 23강 · 한줄해석",
       "subtitle": "23강 · 지문 6개",
       "unit": "23강",
       "unit_no": 23,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 123,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 23강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-23-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 23강 · 한줄영어",
+      "subtitle": "23강 · 지문 6개",
+      "unit": "23강",
+      "unit_no": 23,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 123,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 23강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-23-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 23강 · 좌지문우해석",
+      "subtitle": "23강 · 지문 6개",
+      "unit": "23강",
+      "unit_no": 23,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 123,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 23강 지문 6개의 지문자료 입니다.",
@@ -3880,21 +4962,67 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-eng-24-passage",
+      "slug": "ebs-2026-tokgang-eng-24-oneline-ko",
       "category": "ebs",
       "book": "ebs-2026-tokgang-eng",
       "package": "analysis",
-      "name": "2026 수능특강 영어 24강 · 지문자료",
+      "name": "2026 수능특강 영어 24강 · 한줄해석",
       "subtitle": "24강 · 지문 6개",
       "unit": "24강",
       "unit_no": 24,
-      "price": 700,
+      "price": 200,
       "passages": 6,
       "grade": "고3",
       "sort": 124,
       "active": true,
       "materials": [
-        "passage"
+        "oneline-ko"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 24강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-24-oneline-en",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 24강 · 한줄영어",
+      "subtitle": "24강 · 지문 6개",
+      "unit": "24강",
+      "unit_no": 24,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 124,
+      "active": true,
+      "materials": [
+        "oneline-en"
+      ],
+      "includes": [],
+      "description": "2026 수능특강 영어 24강 지문 6개의 지문자료 입니다.",
+      "highlights": [],
+      "format": "PDF (A4, 인쇄용)",
+      "sample": true
+    },
+    {
+      "slug": "ebs-2026-tokgang-eng-24-side",
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-eng",
+      "package": "analysis",
+      "name": "2026 수능특강 영어 24강 · 좌지문우해석",
+      "subtitle": "24강 · 지문 6개",
+      "unit": "24강",
+      "unit_no": 24,
+      "price": 200,
+      "passages": 6,
+      "grade": "고3",
+      "sort": 124,
+      "active": true,
+      "materials": [
+        "side"
       ],
       "includes": [],
       "description": "2026 수능특강 영어 24강 지문 6개의 지문자료 입니다.",
@@ -4018,8 +5146,8 @@
       "sample": true
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-01-passage",
-      "name": "2026 수능특강 영어독해연습 1강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-01-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 1강 · 한줄해석",
       "subtitle": "1강 · 지문 6개",
       "unit": "1강",
       "unit_no": 1,
@@ -4027,10 +5155,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 101,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-01-oneline-en",
+      "name": "2026 수능특강 영어독해연습 1강 · 한줄영어",
+      "subtitle": "1강 · 지문 6개",
+      "unit": "1강",
+      "unit_no": 1,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 101,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-01-side",
+      "name": "2026 수능특강 영어독해연습 1강 · 좌지문우해석",
+      "subtitle": "1강 · 지문 6개",
+      "unit": "1강",
+      "unit_no": 1,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 101,
       "active": true,
@@ -4156,8 +5330,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-02-passage",
-      "name": "2026 수능특강 영어독해연습 2강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-02-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 2강 · 한줄해석",
       "subtitle": "2강 · 지문 6개",
       "unit": "2강",
       "unit_no": 2,
@@ -4165,10 +5339,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 102,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-02-oneline-en",
+      "name": "2026 수능특강 영어독해연습 2강 · 한줄영어",
+      "subtitle": "2강 · 지문 6개",
+      "unit": "2강",
+      "unit_no": 2,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 102,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-02-side",
+      "name": "2026 수능특강 영어독해연습 2강 · 좌지문우해석",
+      "subtitle": "2강 · 지문 6개",
+      "unit": "2강",
+      "unit_no": 2,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 102,
       "active": true,
@@ -4294,8 +5514,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-03-passage",
-      "name": "2026 수능특강 영어독해연습 3강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-03-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 3강 · 한줄해석",
       "subtitle": "3강 · 지문 6개",
       "unit": "3강",
       "unit_no": 3,
@@ -4303,10 +5523,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 103,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-03-oneline-en",
+      "name": "2026 수능특강 영어독해연습 3강 · 한줄영어",
+      "subtitle": "3강 · 지문 6개",
+      "unit": "3강",
+      "unit_no": 3,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 103,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-03-side",
+      "name": "2026 수능특강 영어독해연습 3강 · 좌지문우해석",
+      "subtitle": "3강 · 지문 6개",
+      "unit": "3강",
+      "unit_no": 3,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 103,
       "active": true,
@@ -4432,8 +5698,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-04-passage",
-      "name": "2026 수능특강 영어독해연습 4강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-04-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 4강 · 한줄해석",
       "subtitle": "4강 · 지문 6개",
       "unit": "4강",
       "unit_no": 4,
@@ -4441,10 +5707,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 104,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-04-oneline-en",
+      "name": "2026 수능특강 영어독해연습 4강 · 한줄영어",
+      "subtitle": "4강 · 지문 6개",
+      "unit": "4강",
+      "unit_no": 4,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 104,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-04-side",
+      "name": "2026 수능특강 영어독해연습 4강 · 좌지문우해석",
+      "subtitle": "4강 · 지문 6개",
+      "unit": "4강",
+      "unit_no": 4,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 104,
       "active": true,
@@ -4570,8 +5882,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-05-passage",
-      "name": "2026 수능특강 영어독해연습 5강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-05-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 5강 · 한줄해석",
       "subtitle": "5강 · 지문 6개",
       "unit": "5강",
       "unit_no": 5,
@@ -4579,10 +5891,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 105,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-05-oneline-en",
+      "name": "2026 수능특강 영어독해연습 5강 · 한줄영어",
+      "subtitle": "5강 · 지문 6개",
+      "unit": "5강",
+      "unit_no": 5,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 105,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-05-side",
+      "name": "2026 수능특강 영어독해연습 5강 · 좌지문우해석",
+      "subtitle": "5강 · 지문 6개",
+      "unit": "5강",
+      "unit_no": 5,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 105,
       "active": true,
@@ -4708,8 +6066,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-06-passage",
-      "name": "2026 수능특강 영어독해연습 6강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-06-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 6강 · 한줄해석",
       "subtitle": "6강 · 지문 6개",
       "unit": "6강",
       "unit_no": 6,
@@ -4717,10 +6075,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 106,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-06-oneline-en",
+      "name": "2026 수능특강 영어독해연습 6강 · 한줄영어",
+      "subtitle": "6강 · 지문 6개",
+      "unit": "6강",
+      "unit_no": 6,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 106,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-06-side",
+      "name": "2026 수능특강 영어독해연습 6강 · 좌지문우해석",
+      "subtitle": "6강 · 지문 6개",
+      "unit": "6강",
+      "unit_no": 6,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 106,
       "active": true,
@@ -4846,8 +6250,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-07-passage",
-      "name": "2026 수능특강 영어독해연습 7강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-07-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 7강 · 한줄해석",
       "subtitle": "7강 · 지문 6개",
       "unit": "7강",
       "unit_no": 7,
@@ -4855,10 +6259,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 107,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-07-oneline-en",
+      "name": "2026 수능특강 영어독해연습 7강 · 한줄영어",
+      "subtitle": "7강 · 지문 6개",
+      "unit": "7강",
+      "unit_no": 7,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 107,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-07-side",
+      "name": "2026 수능특강 영어독해연습 7강 · 좌지문우해석",
+      "subtitle": "7강 · 지문 6개",
+      "unit": "7강",
+      "unit_no": 7,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 107,
       "active": true,
@@ -4984,8 +6434,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-08-passage",
-      "name": "2026 수능특강 영어독해연습 8강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-08-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 8강 · 한줄해석",
       "subtitle": "8강 · 지문 6개",
       "unit": "8강",
       "unit_no": 8,
@@ -4993,10 +6443,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 108,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-08-oneline-en",
+      "name": "2026 수능특강 영어독해연습 8강 · 한줄영어",
+      "subtitle": "8강 · 지문 6개",
+      "unit": "8강",
+      "unit_no": 8,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 108,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-08-side",
+      "name": "2026 수능특강 영어독해연습 8강 · 좌지문우해석",
+      "subtitle": "8강 · 지문 6개",
+      "unit": "8강",
+      "unit_no": 8,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 108,
       "active": true,
@@ -5122,8 +6618,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-09-passage",
-      "name": "2026 수능특강 영어독해연습 9강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-09-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 9강 · 한줄해석",
       "subtitle": "9강 · 지문 6개",
       "unit": "9강",
       "unit_no": 9,
@@ -5131,10 +6627,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 109,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-09-oneline-en",
+      "name": "2026 수능특강 영어독해연습 9강 · 한줄영어",
+      "subtitle": "9강 · 지문 6개",
+      "unit": "9강",
+      "unit_no": 9,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 109,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-09-side",
+      "name": "2026 수능특강 영어독해연습 9강 · 좌지문우해석",
+      "subtitle": "9강 · 지문 6개",
+      "unit": "9강",
+      "unit_no": 9,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 109,
       "active": true,
@@ -5260,8 +6802,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-10-passage",
-      "name": "2026 수능특강 영어독해연습 10강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-10-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 10강 · 한줄해석",
       "subtitle": "10강 · 지문 6개",
       "unit": "10강",
       "unit_no": 10,
@@ -5269,10 +6811,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 110,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-10-oneline-en",
+      "name": "2026 수능특강 영어독해연습 10강 · 한줄영어",
+      "subtitle": "10강 · 지문 6개",
+      "unit": "10강",
+      "unit_no": 10,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 110,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-10-side",
+      "name": "2026 수능특강 영어독해연습 10강 · 좌지문우해석",
+      "subtitle": "10강 · 지문 6개",
+      "unit": "10강",
+      "unit_no": 10,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 110,
       "active": true,
@@ -5398,8 +6986,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-11-passage",
-      "name": "2026 수능특강 영어독해연습 11강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-11-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 11강 · 한줄해석",
       "subtitle": "11강 · 지문 6개",
       "unit": "11강",
       "unit_no": 11,
@@ -5407,10 +6995,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 111,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-11-oneline-en",
+      "name": "2026 수능특강 영어독해연습 11강 · 한줄영어",
+      "subtitle": "11강 · 지문 6개",
+      "unit": "11강",
+      "unit_no": 11,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 111,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-11-side",
+      "name": "2026 수능특강 영어독해연습 11강 · 좌지문우해석",
+      "subtitle": "11강 · 지문 6개",
+      "unit": "11강",
+      "unit_no": 11,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 111,
       "active": true,
@@ -5536,8 +7170,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-12-passage",
-      "name": "2026 수능특강 영어독해연습 12강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-12-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 12강 · 한줄해석",
       "subtitle": "12강 · 지문 6개",
       "unit": "12강",
       "unit_no": 12,
@@ -5545,10 +7179,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 112,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-12-oneline-en",
+      "name": "2026 수능특강 영어독해연습 12강 · 한줄영어",
+      "subtitle": "12강 · 지문 6개",
+      "unit": "12강",
+      "unit_no": 12,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 112,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-12-side",
+      "name": "2026 수능특강 영어독해연습 12강 · 좌지문우해석",
+      "subtitle": "12강 · 지문 6개",
+      "unit": "12강",
+      "unit_no": 12,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 112,
       "active": true,
@@ -5674,8 +7354,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-13-passage",
-      "name": "2026 수능특강 영어독해연습 13강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-13-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 13강 · 한줄해석",
       "subtitle": "13강 · 지문 6개",
       "unit": "13강",
       "unit_no": 13,
@@ -5683,10 +7363,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 113,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-13-oneline-en",
+      "name": "2026 수능특강 영어독해연습 13강 · 한줄영어",
+      "subtitle": "13강 · 지문 6개",
+      "unit": "13강",
+      "unit_no": 13,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 113,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-13-side",
+      "name": "2026 수능특강 영어독해연습 13강 · 좌지문우해석",
+      "subtitle": "13강 · 지문 6개",
+      "unit": "13강",
+      "unit_no": 13,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 113,
       "active": true,
@@ -5812,8 +7538,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-14-passage",
-      "name": "2026 수능특강 영어독해연습 14강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-14-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 14강 · 한줄해석",
       "subtitle": "14강 · 지문 6개",
       "unit": "14강",
       "unit_no": 14,
@@ -5821,10 +7547,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 114,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-14-oneline-en",
+      "name": "2026 수능특강 영어독해연습 14강 · 한줄영어",
+      "subtitle": "14강 · 지문 6개",
+      "unit": "14강",
+      "unit_no": 14,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 114,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-14-side",
+      "name": "2026 수능특강 영어독해연습 14강 · 좌지문우해석",
+      "subtitle": "14강 · 지문 6개",
+      "unit": "14강",
+      "unit_no": 14,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 114,
       "active": true,
@@ -5950,8 +7722,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-15-passage",
-      "name": "2026 수능특강 영어독해연습 15강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-15-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 15강 · 한줄해석",
       "subtitle": "15강 · 지문 6개",
       "unit": "15강",
       "unit_no": 15,
@@ -5959,10 +7731,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 115,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-15-oneline-en",
+      "name": "2026 수능특강 영어독해연습 15강 · 한줄영어",
+      "subtitle": "15강 · 지문 6개",
+      "unit": "15강",
+      "unit_no": 15,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 115,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-15-side",
+      "name": "2026 수능특강 영어독해연습 15강 · 좌지문우해석",
+      "subtitle": "15강 · 지문 6개",
+      "unit": "15강",
+      "unit_no": 15,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 115,
       "active": true,
@@ -6088,8 +7906,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-16-passage",
-      "name": "2026 수능특강 영어독해연습 16강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-16-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 16강 · 한줄해석",
       "subtitle": "16강 · 지문 6개",
       "unit": "16강",
       "unit_no": 16,
@@ -6097,10 +7915,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 116,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-16-oneline-en",
+      "name": "2026 수능특강 영어독해연습 16강 · 한줄영어",
+      "subtitle": "16강 · 지문 6개",
+      "unit": "16강",
+      "unit_no": 16,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 116,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-16-side",
+      "name": "2026 수능특강 영어독해연습 16강 · 좌지문우해석",
+      "subtitle": "16강 · 지문 6개",
+      "unit": "16강",
+      "unit_no": 16,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 116,
       "active": true,
@@ -6226,8 +8090,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-17-passage",
-      "name": "2026 수능특강 영어독해연습 17강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-17-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 17강 · 한줄해석",
       "subtitle": "17강 · 지문 6개",
       "unit": "17강",
       "unit_no": 17,
@@ -6235,10 +8099,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 117,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-17-oneline-en",
+      "name": "2026 수능특강 영어독해연습 17강 · 한줄영어",
+      "subtitle": "17강 · 지문 6개",
+      "unit": "17강",
+      "unit_no": 17,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 117,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-17-side",
+      "name": "2026 수능특강 영어독해연습 17강 · 좌지문우해석",
+      "subtitle": "17강 · 지문 6개",
+      "unit": "17강",
+      "unit_no": 17,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 117,
       "active": true,
@@ -6364,8 +8274,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-18-passage",
-      "name": "2026 수능특강 영어독해연습 18강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-18-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 18강 · 한줄해석",
       "subtitle": "18강 · 지문 6개",
       "unit": "18강",
       "unit_no": 18,
@@ -6373,10 +8283,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 118,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-18-oneline-en",
+      "name": "2026 수능특강 영어독해연습 18강 · 한줄영어",
+      "subtitle": "18강 · 지문 6개",
+      "unit": "18강",
+      "unit_no": 18,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 118,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-18-side",
+      "name": "2026 수능특강 영어독해연습 18강 · 좌지문우해석",
+      "subtitle": "18강 · 지문 6개",
+      "unit": "18강",
+      "unit_no": 18,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 118,
       "active": true,
@@ -6502,8 +8458,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-19-passage",
-      "name": "2026 수능특강 영어독해연습 19강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-19-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 19강 · 한줄해석",
       "subtitle": "19강 · 지문 6개",
       "unit": "19강",
       "unit_no": 19,
@@ -6511,10 +8467,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 119,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-19-oneline-en",
+      "name": "2026 수능특강 영어독해연습 19강 · 한줄영어",
+      "subtitle": "19강 · 지문 6개",
+      "unit": "19강",
+      "unit_no": 19,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 119,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-19-side",
+      "name": "2026 수능특강 영어독해연습 19강 · 좌지문우해석",
+      "subtitle": "19강 · 지문 6개",
+      "unit": "19강",
+      "unit_no": 19,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 119,
       "active": true,
@@ -6640,8 +8642,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-tokgang-dokhae-20-passage",
-      "name": "2026 수능특강 영어독해연습 20강 · 지문자료",
+      "slug": "ebs-2026-tokgang-dokhae-20-oneline-ko",
+      "name": "2026 수능특강 영어독해연습 20강 · 한줄해석",
       "subtitle": "20강 · 지문 6개",
       "unit": "20강",
       "unit_no": 20,
@@ -6649,10 +8651,56 @@
       "book": "ebs-2026-tokgang-dokhae",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 6,
-      "price": 700,
+      "price": 200,
+      "grade": "고3",
+      "sort": 120,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-20-oneline-en",
+      "name": "2026 수능특강 영어독해연습 20강 · 한줄영어",
+      "subtitle": "20강 · 지문 6개",
+      "unit": "20강",
+      "unit_no": 20,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 6,
+      "price": 200,
+      "grade": "고3",
+      "sort": 120,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-tokgang-dokhae-20-side",
+      "name": "2026 수능특강 영어독해연습 20강 · 좌지문우해석",
+      "subtitle": "20강 · 지문 6개",
+      "unit": "20강",
+      "unit_no": 20,
+      "category": "ebs",
+      "book": "ebs-2026-tokgang-dokhae",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 6,
+      "price": 200,
       "grade": "고3",
       "sort": 120,
       "active": true,
@@ -6778,8 +8826,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-wansung-01-passage",
-      "name": "2026 수능완성 영어 1강 · 지문자료",
+      "slug": "ebs-2026-wansung-01-oneline-ko",
+      "name": "2026 수능완성 영어 1강 · 한줄해석",
       "subtitle": "1강 · 지문 8개",
       "unit": "1강",
       "unit_no": 1,
@@ -6787,10 +8835,56 @@
       "book": "ebs-2026-wansung",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 8,
-      "price": 1000,
+      "price": 300,
+      "grade": "고3",
+      "sort": 101,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-01-oneline-en",
+      "name": "2026 수능완성 영어 1강 · 한줄영어",
+      "subtitle": "1강 · 지문 8개",
+      "unit": "1강",
+      "unit_no": 1,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 8,
+      "price": 300,
+      "grade": "고3",
+      "sort": 101,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-01-side",
+      "name": "2026 수능완성 영어 1강 · 좌지문우해석",
+      "subtitle": "1강 · 지문 8개",
+      "unit": "1강",
+      "unit_no": 1,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 8,
+      "price": 300,
       "grade": "고3",
       "sort": 101,
       "active": true,
@@ -6916,8 +9010,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-wansung-02-passage",
-      "name": "2026 수능완성 영어 2강 · 지문자료",
+      "slug": "ebs-2026-wansung-02-oneline-ko",
+      "name": "2026 수능완성 영어 2강 · 한줄해석",
       "subtitle": "2강 · 지문 8개",
       "unit": "2강",
       "unit_no": 2,
@@ -6925,10 +9019,56 @@
       "book": "ebs-2026-wansung",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 8,
-      "price": 1000,
+      "price": 300,
+      "grade": "고3",
+      "sort": 102,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-02-oneline-en",
+      "name": "2026 수능완성 영어 2강 · 한줄영어",
+      "subtitle": "2강 · 지문 8개",
+      "unit": "2강",
+      "unit_no": 2,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 8,
+      "price": 300,
+      "grade": "고3",
+      "sort": 102,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-02-side",
+      "name": "2026 수능완성 영어 2강 · 좌지문우해석",
+      "subtitle": "2강 · 지문 8개",
+      "unit": "2강",
+      "unit_no": 2,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 8,
+      "price": 300,
       "grade": "고3",
       "sort": 102,
       "active": true,
@@ -7054,8 +9194,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-wansung-03-passage",
-      "name": "2026 수능완성 영어 3강 · 지문자료",
+      "slug": "ebs-2026-wansung-03-oneline-ko",
+      "name": "2026 수능완성 영어 3강 · 한줄해석",
       "subtitle": "3강 · 지문 8개",
       "unit": "3강",
       "unit_no": 3,
@@ -7063,10 +9203,56 @@
       "book": "ebs-2026-wansung",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 8,
-      "price": 1000,
+      "price": 300,
+      "grade": "고3",
+      "sort": 103,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-03-oneline-en",
+      "name": "2026 수능완성 영어 3강 · 한줄영어",
+      "subtitle": "3강 · 지문 8개",
+      "unit": "3강",
+      "unit_no": 3,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 8,
+      "price": 300,
+      "grade": "고3",
+      "sort": 103,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-03-side",
+      "name": "2026 수능완성 영어 3강 · 좌지문우해석",
+      "subtitle": "3강 · 지문 8개",
+      "unit": "3강",
+      "unit_no": 3,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 8,
+      "price": 300,
       "grade": "고3",
       "sort": 103,
       "active": true,
@@ -7192,8 +9378,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-wansung-04-passage",
-      "name": "2026 수능완성 영어 4강 · 지문자료",
+      "slug": "ebs-2026-wansung-04-oneline-ko",
+      "name": "2026 수능완성 영어 4강 · 한줄해석",
       "subtitle": "4강 · 지문 8개",
       "unit": "4강",
       "unit_no": 4,
@@ -7201,10 +9387,56 @@
       "book": "ebs-2026-wansung",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 8,
-      "price": 1000,
+      "price": 300,
+      "grade": "고3",
+      "sort": 104,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-04-oneline-en",
+      "name": "2026 수능완성 영어 4강 · 한줄영어",
+      "subtitle": "4강 · 지문 8개",
+      "unit": "4강",
+      "unit_no": 4,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 8,
+      "price": 300,
+      "grade": "고3",
+      "sort": 104,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-04-side",
+      "name": "2026 수능완성 영어 4강 · 좌지문우해석",
+      "subtitle": "4강 · 지문 8개",
+      "unit": "4강",
+      "unit_no": 4,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 8,
+      "price": 300,
       "grade": "고3",
       "sort": 104,
       "active": true,
@@ -7330,8 +9562,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-wansung-05-passage",
-      "name": "2026 수능완성 영어 5강 · 지문자료",
+      "slug": "ebs-2026-wansung-05-oneline-ko",
+      "name": "2026 수능완성 영어 5강 · 한줄해석",
       "subtitle": "5강 · 지문 8개",
       "unit": "5강",
       "unit_no": 5,
@@ -7339,10 +9571,56 @@
       "book": "ebs-2026-wansung",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 8,
-      "price": 1000,
+      "price": 300,
+      "grade": "고3",
+      "sort": 105,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-05-oneline-en",
+      "name": "2026 수능완성 영어 5강 · 한줄영어",
+      "subtitle": "5강 · 지문 8개",
+      "unit": "5강",
+      "unit_no": 5,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 8,
+      "price": 300,
+      "grade": "고3",
+      "sort": 105,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-05-side",
+      "name": "2026 수능완성 영어 5강 · 좌지문우해석",
+      "subtitle": "5강 · 지문 8개",
+      "unit": "5강",
+      "unit_no": 5,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 8,
+      "price": 300,
       "grade": "고3",
       "sort": 105,
       "active": true,
@@ -7468,8 +9746,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-wansung-06-passage",
-      "name": "2026 수능완성 영어 6강 · 지문자료",
+      "slug": "ebs-2026-wansung-06-oneline-ko",
+      "name": "2026 수능완성 영어 6강 · 한줄해석",
       "subtitle": "6강 · 지문 8개",
       "unit": "6강",
       "unit_no": 6,
@@ -7477,10 +9755,56 @@
       "book": "ebs-2026-wansung",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 8,
-      "price": 1000,
+      "price": 300,
+      "grade": "고3",
+      "sort": 106,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-06-oneline-en",
+      "name": "2026 수능완성 영어 6강 · 한줄영어",
+      "subtitle": "6강 · 지문 8개",
+      "unit": "6강",
+      "unit_no": 6,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 8,
+      "price": 300,
+      "grade": "고3",
+      "sort": 106,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-06-side",
+      "name": "2026 수능완성 영어 6강 · 좌지문우해석",
+      "subtitle": "6강 · 지문 8개",
+      "unit": "6강",
+      "unit_no": 6,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 8,
+      "price": 300,
       "grade": "고3",
       "sort": 106,
       "active": true,
@@ -7606,8 +9930,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-wansung-07-passage",
-      "name": "2026 수능완성 영어 7강 · 지문자료",
+      "slug": "ebs-2026-wansung-07-oneline-ko",
+      "name": "2026 수능완성 영어 7강 · 한줄해석",
       "subtitle": "7강 · 지문 8개",
       "unit": "7강",
       "unit_no": 7,
@@ -7615,10 +9939,56 @@
       "book": "ebs-2026-wansung",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 8,
-      "price": 1000,
+      "price": 300,
+      "grade": "고3",
+      "sort": 107,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-07-oneline-en",
+      "name": "2026 수능완성 영어 7강 · 한줄영어",
+      "subtitle": "7강 · 지문 8개",
+      "unit": "7강",
+      "unit_no": 7,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 8,
+      "price": 300,
+      "grade": "고3",
+      "sort": 107,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-07-side",
+      "name": "2026 수능완성 영어 7강 · 좌지문우해석",
+      "subtitle": "7강 · 지문 8개",
+      "unit": "7강",
+      "unit_no": 7,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 8,
+      "price": 300,
       "grade": "고3",
       "sort": 107,
       "active": true,
@@ -7744,8 +10114,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-wansung-08-passage",
-      "name": "2026 수능완성 영어 8강 · 지문자료",
+      "slug": "ebs-2026-wansung-08-oneline-ko",
+      "name": "2026 수능완성 영어 8강 · 한줄해석",
       "subtitle": "8강 · 지문 8개",
       "unit": "8강",
       "unit_no": 8,
@@ -7753,10 +10123,56 @@
       "book": "ebs-2026-wansung",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 8,
-      "price": 1000,
+      "price": 300,
+      "grade": "고3",
+      "sort": 108,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-08-oneline-en",
+      "name": "2026 수능완성 영어 8강 · 한줄영어",
+      "subtitle": "8강 · 지문 8개",
+      "unit": "8강",
+      "unit_no": 8,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 8,
+      "price": 300,
+      "grade": "고3",
+      "sort": 108,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-08-side",
+      "name": "2026 수능완성 영어 8강 · 좌지문우해석",
+      "subtitle": "8강 · 지문 8개",
+      "unit": "8강",
+      "unit_no": 8,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 8,
+      "price": 300,
       "grade": "고3",
       "sort": 108,
       "active": true,
@@ -7882,8 +10298,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-wansung-09-passage",
-      "name": "2026 수능완성 영어 9강 · 지문자료",
+      "slug": "ebs-2026-wansung-09-oneline-ko",
+      "name": "2026 수능완성 영어 9강 · 한줄해석",
       "subtitle": "9강 · 지문 8개",
       "unit": "9강",
       "unit_no": 9,
@@ -7891,10 +10307,56 @@
       "book": "ebs-2026-wansung",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 8,
-      "price": 1000,
+      "price": 300,
+      "grade": "고3",
+      "sort": 109,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-09-oneline-en",
+      "name": "2026 수능완성 영어 9강 · 한줄영어",
+      "subtitle": "9강 · 지문 8개",
+      "unit": "9강",
+      "unit_no": 9,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 8,
+      "price": 300,
+      "grade": "고3",
+      "sort": 109,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-09-side",
+      "name": "2026 수능완성 영어 9강 · 좌지문우해석",
+      "subtitle": "9강 · 지문 8개",
+      "unit": "9강",
+      "unit_no": 9,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 8,
+      "price": 300,
       "grade": "고3",
       "sort": 109,
       "active": true,
@@ -8020,8 +10482,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-wansung-10-passage",
-      "name": "2026 수능완성 영어 10강 · 지문자료",
+      "slug": "ebs-2026-wansung-10-oneline-ko",
+      "name": "2026 수능완성 영어 10강 · 한줄해석",
       "subtitle": "10강 · 지문 8개",
       "unit": "10강",
       "unit_no": 10,
@@ -8029,10 +10491,56 @@
       "book": "ebs-2026-wansung",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 8,
-      "price": 1000,
+      "price": 300,
+      "grade": "고3",
+      "sort": 110,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-10-oneline-en",
+      "name": "2026 수능완성 영어 10강 · 한줄영어",
+      "subtitle": "10강 · 지문 8개",
+      "unit": "10강",
+      "unit_no": 10,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 8,
+      "price": 300,
+      "grade": "고3",
+      "sort": 110,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-10-side",
+      "name": "2026 수능완성 영어 10강 · 좌지문우해석",
+      "subtitle": "10강 · 지문 8개",
+      "unit": "10강",
+      "unit_no": 10,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 8,
+      "price": 300,
       "grade": "고3",
       "sort": 110,
       "active": true,
@@ -8158,8 +10666,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-wansung-11-passage",
-      "name": "2026 수능완성 영어 11강 · 지문자료",
+      "slug": "ebs-2026-wansung-11-oneline-ko",
+      "name": "2026 수능완성 영어 11강 · 한줄해석",
       "subtitle": "11강 · 지문 8개",
       "unit": "11강",
       "unit_no": 11,
@@ -8167,10 +10675,56 @@
       "book": "ebs-2026-wansung",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 8,
-      "price": 1000,
+      "price": 300,
+      "grade": "고3",
+      "sort": 111,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-11-oneline-en",
+      "name": "2026 수능완성 영어 11강 · 한줄영어",
+      "subtitle": "11강 · 지문 8개",
+      "unit": "11강",
+      "unit_no": 11,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 8,
+      "price": 300,
+      "grade": "고3",
+      "sort": 111,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-11-side",
+      "name": "2026 수능완성 영어 11강 · 좌지문우해석",
+      "subtitle": "11강 · 지문 8개",
+      "unit": "11강",
+      "unit_no": 11,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 8,
+      "price": 300,
       "grade": "고3",
       "sort": 111,
       "active": true,
@@ -8296,8 +10850,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-wansung-12-passage",
-      "name": "2026 수능완성 영어 12강 · 지문자료",
+      "slug": "ebs-2026-wansung-12-oneline-ko",
+      "name": "2026 수능완성 영어 12강 · 한줄해석",
       "subtitle": "12강 · 지문 8개",
       "unit": "12강",
       "unit_no": 12,
@@ -8305,10 +10859,56 @@
       "book": "ebs-2026-wansung",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 8,
-      "price": 1000,
+      "price": 300,
+      "grade": "고3",
+      "sort": 112,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-12-oneline-en",
+      "name": "2026 수능완성 영어 12강 · 한줄영어",
+      "subtitle": "12강 · 지문 8개",
+      "unit": "12강",
+      "unit_no": 12,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 8,
+      "price": 300,
+      "grade": "고3",
+      "sort": 112,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-12-side",
+      "name": "2026 수능완성 영어 12강 · 좌지문우해석",
+      "subtitle": "12강 · 지문 8개",
+      "unit": "12강",
+      "unit_no": 12,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 8,
+      "price": 300,
       "grade": "고3",
       "sort": 112,
       "active": true,
@@ -8434,8 +11034,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-wansung-13-passage",
-      "name": "2026 수능완성 영어 13강 · 지문자료",
+      "slug": "ebs-2026-wansung-13-oneline-ko",
+      "name": "2026 수능완성 영어 13강 · 한줄해석",
       "subtitle": "13강 · 지문 8개",
       "unit": "13강",
       "unit_no": 13,
@@ -8443,10 +11043,56 @@
       "book": "ebs-2026-wansung",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 8,
-      "price": 1000,
+      "price": 300,
+      "grade": "고3",
+      "sort": 113,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-13-oneline-en",
+      "name": "2026 수능완성 영어 13강 · 한줄영어",
+      "subtitle": "13강 · 지문 8개",
+      "unit": "13강",
+      "unit_no": 13,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 8,
+      "price": 300,
+      "grade": "고3",
+      "sort": 113,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-13-side",
+      "name": "2026 수능완성 영어 13강 · 좌지문우해석",
+      "subtitle": "13강 · 지문 8개",
+      "unit": "13강",
+      "unit_no": 13,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 8,
+      "price": 300,
       "grade": "고3",
       "sort": 113,
       "active": true,
@@ -8572,8 +11218,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-wansung-14-passage",
-      "name": "2026 수능완성 영어 14강 · 지문자료",
+      "slug": "ebs-2026-wansung-14-oneline-ko",
+      "name": "2026 수능완성 영어 14강 · 한줄해석",
       "subtitle": "14강 · 지문 8개",
       "unit": "14강",
       "unit_no": 14,
@@ -8581,10 +11227,56 @@
       "book": "ebs-2026-wansung",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 8,
-      "price": 1000,
+      "price": 300,
+      "grade": "고3",
+      "sort": 114,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-14-oneline-en",
+      "name": "2026 수능완성 영어 14강 · 한줄영어",
+      "subtitle": "14강 · 지문 8개",
+      "unit": "14강",
+      "unit_no": 14,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 8,
+      "price": 300,
+      "grade": "고3",
+      "sort": 114,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-14-side",
+      "name": "2026 수능완성 영어 14강 · 좌지문우해석",
+      "subtitle": "14강 · 지문 8개",
+      "unit": "14강",
+      "unit_no": 14,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 8,
+      "price": 300,
       "grade": "고3",
       "sort": 114,
       "active": true,
@@ -8710,8 +11402,8 @@
       "covers": []
     },
     {
-      "slug": "ebs-2026-wansung-15-passage",
-      "name": "2026 수능완성 영어 15강 · 지문자료",
+      "slug": "ebs-2026-wansung-15-oneline-ko",
+      "name": "2026 수능완성 영어 15강 · 한줄해석",
       "subtitle": "15강 · 지문 8개",
       "unit": "15강",
       "unit_no": 15,
@@ -8719,10 +11411,56 @@
       "book": "ebs-2026-wansung",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 8,
-      "price": 1000,
+      "price": 300,
+      "grade": "고3",
+      "sort": 115,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-15-oneline-en",
+      "name": "2026 수능완성 영어 15강 · 한줄영어",
+      "subtitle": "15강 · 지문 8개",
+      "unit": "15강",
+      "unit_no": 15,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 8,
+      "price": 300,
+      "grade": "고3",
+      "sort": 115,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ebs-2026-wansung-15-side",
+      "name": "2026 수능완성 영어 15강 · 좌지문우해석",
+      "subtitle": "15강 · 지문 8개",
+      "unit": "15강",
+      "unit_no": 15,
+      "category": "ebs",
+      "book": "ebs-2026-wansung",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 8,
+      "price": 300,
       "grade": "고3",
       "sort": 115,
       "active": true,
@@ -8848,8 +11586,8 @@
       "covers": []
     },
     {
-      "slug": "neungyule-kim-01-passage",
-      "name": "능률(김성곤) 공통영어 1 Lesson 1 · 지문자료",
+      "slug": "neungyule-kim-01-oneline-ko",
+      "name": "능률(김성곤) 공통영어 1 Lesson 1 · 한줄해석",
       "subtitle": "Lesson 1 · 지문 4개",
       "unit": "Lesson 1",
       "unit_no": 1,
@@ -8857,10 +11595,56 @@
       "book": "neungyule-kim",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 101,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-01-oneline-en",
+      "name": "능률(김성곤) 공통영어 1 Lesson 1 · 한줄영어",
+      "subtitle": "Lesson 1 · 지문 4개",
+      "unit": "Lesson 1",
+      "unit_no": 1,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 101,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-01-side",
+      "name": "능률(김성곤) 공통영어 1 Lesson 1 · 좌지문우해석",
+      "subtitle": "Lesson 1 · 지문 4개",
+      "unit": "Lesson 1",
+      "unit_no": 1,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 101,
       "active": true,
@@ -8986,8 +11770,8 @@
       "covers": []
     },
     {
-      "slug": "neungyule-kim-02-passage",
-      "name": "능률(김성곤) 공통영어 1 Lesson 2 · 지문자료",
+      "slug": "neungyule-kim-02-oneline-ko",
+      "name": "능률(김성곤) 공통영어 1 Lesson 2 · 한줄해석",
       "subtitle": "Lesson 2 · 지문 4개",
       "unit": "Lesson 2",
       "unit_no": 2,
@@ -8995,10 +11779,56 @@
       "book": "neungyule-kim",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 102,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-02-oneline-en",
+      "name": "능률(김성곤) 공통영어 1 Lesson 2 · 한줄영어",
+      "subtitle": "Lesson 2 · 지문 4개",
+      "unit": "Lesson 2",
+      "unit_no": 2,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 102,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-02-side",
+      "name": "능률(김성곤) 공통영어 1 Lesson 2 · 좌지문우해석",
+      "subtitle": "Lesson 2 · 지문 4개",
+      "unit": "Lesson 2",
+      "unit_no": 2,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 102,
       "active": true,
@@ -9124,8 +11954,8 @@
       "covers": []
     },
     {
-      "slug": "neungyule-kim-03-passage",
-      "name": "능률(김성곤) 공통영어 1 Lesson 3 · 지문자료",
+      "slug": "neungyule-kim-03-oneline-ko",
+      "name": "능률(김성곤) 공통영어 1 Lesson 3 · 한줄해석",
       "subtitle": "Lesson 3 · 지문 4개",
       "unit": "Lesson 3",
       "unit_no": 3,
@@ -9133,10 +11963,56 @@
       "book": "neungyule-kim",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 103,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-03-oneline-en",
+      "name": "능률(김성곤) 공통영어 1 Lesson 3 · 한줄영어",
+      "subtitle": "Lesson 3 · 지문 4개",
+      "unit": "Lesson 3",
+      "unit_no": 3,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 103,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-03-side",
+      "name": "능률(김성곤) 공통영어 1 Lesson 3 · 좌지문우해석",
+      "subtitle": "Lesson 3 · 지문 4개",
+      "unit": "Lesson 3",
+      "unit_no": 3,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 103,
       "active": true,
@@ -9262,8 +12138,8 @@
       "covers": []
     },
     {
-      "slug": "neungyule-kim-04-passage",
-      "name": "능률(김성곤) 공통영어 1 Lesson 4 · 지문자료",
+      "slug": "neungyule-kim-04-oneline-ko",
+      "name": "능률(김성곤) 공통영어 1 Lesson 4 · 한줄해석",
       "subtitle": "Lesson 4 · 지문 4개",
       "unit": "Lesson 4",
       "unit_no": 4,
@@ -9271,10 +12147,56 @@
       "book": "neungyule-kim",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 104,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-04-oneline-en",
+      "name": "능률(김성곤) 공통영어 1 Lesson 4 · 한줄영어",
+      "subtitle": "Lesson 4 · 지문 4개",
+      "unit": "Lesson 4",
+      "unit_no": 4,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 104,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-04-side",
+      "name": "능률(김성곤) 공통영어 1 Lesson 4 · 좌지문우해석",
+      "subtitle": "Lesson 4 · 지문 4개",
+      "unit": "Lesson 4",
+      "unit_no": 4,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 104,
       "active": true,
@@ -9400,8 +12322,8 @@
       "covers": []
     },
     {
-      "slug": "neungyule-kim-05-passage",
-      "name": "능률(김성곤) 공통영어 1 Lesson 5 · 지문자료",
+      "slug": "neungyule-kim-05-oneline-ko",
+      "name": "능률(김성곤) 공통영어 1 Lesson 5 · 한줄해석",
       "subtitle": "Lesson 5 · 지문 4개",
       "unit": "Lesson 5",
       "unit_no": 5,
@@ -9409,10 +12331,56 @@
       "book": "neungyule-kim",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 105,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-05-oneline-en",
+      "name": "능률(김성곤) 공통영어 1 Lesson 5 · 한줄영어",
+      "subtitle": "Lesson 5 · 지문 4개",
+      "unit": "Lesson 5",
+      "unit_no": 5,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 105,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-05-side",
+      "name": "능률(김성곤) 공통영어 1 Lesson 5 · 좌지문우해석",
+      "subtitle": "Lesson 5 · 지문 4개",
+      "unit": "Lesson 5",
+      "unit_no": 5,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 105,
       "active": true,
@@ -9538,8 +12506,8 @@
       "covers": []
     },
     {
-      "slug": "neungyule-kim-06-passage",
-      "name": "능률(김성곤) 공통영어 1 Lesson 6 · 지문자료",
+      "slug": "neungyule-kim-06-oneline-ko",
+      "name": "능률(김성곤) 공통영어 1 Lesson 6 · 한줄해석",
       "subtitle": "Lesson 6 · 지문 4개",
       "unit": "Lesson 6",
       "unit_no": 6,
@@ -9547,10 +12515,56 @@
       "book": "neungyule-kim",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 106,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-06-oneline-en",
+      "name": "능률(김성곤) 공통영어 1 Lesson 6 · 한줄영어",
+      "subtitle": "Lesson 6 · 지문 4개",
+      "unit": "Lesson 6",
+      "unit_no": 6,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 106,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-06-side",
+      "name": "능률(김성곤) 공통영어 1 Lesson 6 · 좌지문우해석",
+      "subtitle": "Lesson 6 · 지문 4개",
+      "unit": "Lesson 6",
+      "unit_no": 6,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 106,
       "active": true,
@@ -9676,8 +12690,8 @@
       "covers": []
     },
     {
-      "slug": "neungyule-kim-07-passage",
-      "name": "능률(김성곤) 공통영어 1 Lesson 7 · 지문자료",
+      "slug": "neungyule-kim-07-oneline-ko",
+      "name": "능률(김성곤) 공통영어 1 Lesson 7 · 한줄해석",
       "subtitle": "Lesson 7 · 지문 4개",
       "unit": "Lesson 7",
       "unit_no": 7,
@@ -9685,10 +12699,56 @@
       "book": "neungyule-kim",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 107,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-07-oneline-en",
+      "name": "능률(김성곤) 공통영어 1 Lesson 7 · 한줄영어",
+      "subtitle": "Lesson 7 · 지문 4개",
+      "unit": "Lesson 7",
+      "unit_no": 7,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 107,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-07-side",
+      "name": "능률(김성곤) 공통영어 1 Lesson 7 · 좌지문우해석",
+      "subtitle": "Lesson 7 · 지문 4개",
+      "unit": "Lesson 7",
+      "unit_no": 7,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 107,
       "active": true,
@@ -9814,8 +12874,8 @@
       "covers": []
     },
     {
-      "slug": "neungyule-kim-08-passage",
-      "name": "능률(김성곤) 공통영어 1 Lesson 8 · 지문자료",
+      "slug": "neungyule-kim-08-oneline-ko",
+      "name": "능률(김성곤) 공통영어 1 Lesson 8 · 한줄해석",
       "subtitle": "Lesson 8 · 지문 4개",
       "unit": "Lesson 8",
       "unit_no": 8,
@@ -9823,10 +12883,56 @@
       "book": "neungyule-kim",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 108,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-08-oneline-en",
+      "name": "능률(김성곤) 공통영어 1 Lesson 8 · 한줄영어",
+      "subtitle": "Lesson 8 · 지문 4개",
+      "unit": "Lesson 8",
+      "unit_no": 8,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 108,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "neungyule-kim-08-side",
+      "name": "능률(김성곤) 공통영어 1 Lesson 8 · 좌지문우해석",
+      "subtitle": "Lesson 8 · 지문 4개",
+      "unit": "Lesson 8",
+      "unit_no": 8,
+      "category": "textbook",
+      "book": "neungyule-kim",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 108,
       "active": true,
@@ -9952,8 +13058,8 @@
       "covers": []
     },
     {
-      "slug": "ybm-han-01-passage",
-      "name": "YBM(한상호) 공통영어 1 Lesson 1 · 지문자료",
+      "slug": "ybm-han-01-oneline-ko",
+      "name": "YBM(한상호) 공통영어 1 Lesson 1 · 한줄해석",
       "subtitle": "Lesson 1 · 지문 4개",
       "unit": "Lesson 1",
       "unit_no": 1,
@@ -9961,10 +13067,56 @@
       "book": "ybm-han",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 101,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-01-oneline-en",
+      "name": "YBM(한상호) 공통영어 1 Lesson 1 · 한줄영어",
+      "subtitle": "Lesson 1 · 지문 4개",
+      "unit": "Lesson 1",
+      "unit_no": 1,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 101,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-01-side",
+      "name": "YBM(한상호) 공통영어 1 Lesson 1 · 좌지문우해석",
+      "subtitle": "Lesson 1 · 지문 4개",
+      "unit": "Lesson 1",
+      "unit_no": 1,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 101,
       "active": true,
@@ -10090,8 +13242,8 @@
       "covers": []
     },
     {
-      "slug": "ybm-han-02-passage",
-      "name": "YBM(한상호) 공통영어 1 Lesson 2 · 지문자료",
+      "slug": "ybm-han-02-oneline-ko",
+      "name": "YBM(한상호) 공통영어 1 Lesson 2 · 한줄해석",
       "subtitle": "Lesson 2 · 지문 4개",
       "unit": "Lesson 2",
       "unit_no": 2,
@@ -10099,10 +13251,56 @@
       "book": "ybm-han",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 102,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-02-oneline-en",
+      "name": "YBM(한상호) 공통영어 1 Lesson 2 · 한줄영어",
+      "subtitle": "Lesson 2 · 지문 4개",
+      "unit": "Lesson 2",
+      "unit_no": 2,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 102,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-02-side",
+      "name": "YBM(한상호) 공통영어 1 Lesson 2 · 좌지문우해석",
+      "subtitle": "Lesson 2 · 지문 4개",
+      "unit": "Lesson 2",
+      "unit_no": 2,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 102,
       "active": true,
@@ -10228,8 +13426,8 @@
       "covers": []
     },
     {
-      "slug": "ybm-han-03-passage",
-      "name": "YBM(한상호) 공통영어 1 Lesson 3 · 지문자료",
+      "slug": "ybm-han-03-oneline-ko",
+      "name": "YBM(한상호) 공통영어 1 Lesson 3 · 한줄해석",
       "subtitle": "Lesson 3 · 지문 4개",
       "unit": "Lesson 3",
       "unit_no": 3,
@@ -10237,10 +13435,56 @@
       "book": "ybm-han",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 103,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-03-oneline-en",
+      "name": "YBM(한상호) 공통영어 1 Lesson 3 · 한줄영어",
+      "subtitle": "Lesson 3 · 지문 4개",
+      "unit": "Lesson 3",
+      "unit_no": 3,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 103,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-03-side",
+      "name": "YBM(한상호) 공통영어 1 Lesson 3 · 좌지문우해석",
+      "subtitle": "Lesson 3 · 지문 4개",
+      "unit": "Lesson 3",
+      "unit_no": 3,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 103,
       "active": true,
@@ -10366,8 +13610,8 @@
       "covers": []
     },
     {
-      "slug": "ybm-han-04-passage",
-      "name": "YBM(한상호) 공통영어 1 Lesson 4 · 지문자료",
+      "slug": "ybm-han-04-oneline-ko",
+      "name": "YBM(한상호) 공통영어 1 Lesson 4 · 한줄해석",
       "subtitle": "Lesson 4 · 지문 4개",
       "unit": "Lesson 4",
       "unit_no": 4,
@@ -10375,10 +13619,56 @@
       "book": "ybm-han",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 104,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-04-oneline-en",
+      "name": "YBM(한상호) 공통영어 1 Lesson 4 · 한줄영어",
+      "subtitle": "Lesson 4 · 지문 4개",
+      "unit": "Lesson 4",
+      "unit_no": 4,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 104,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-04-side",
+      "name": "YBM(한상호) 공통영어 1 Lesson 4 · 좌지문우해석",
+      "subtitle": "Lesson 4 · 지문 4개",
+      "unit": "Lesson 4",
+      "unit_no": 4,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 104,
       "active": true,
@@ -10504,8 +13794,8 @@
       "covers": []
     },
     {
-      "slug": "ybm-han-05-passage",
-      "name": "YBM(한상호) 공통영어 1 Lesson 5 · 지문자료",
+      "slug": "ybm-han-05-oneline-ko",
+      "name": "YBM(한상호) 공통영어 1 Lesson 5 · 한줄해석",
       "subtitle": "Lesson 5 · 지문 4개",
       "unit": "Lesson 5",
       "unit_no": 5,
@@ -10513,10 +13803,56 @@
       "book": "ybm-han",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 105,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-05-oneline-en",
+      "name": "YBM(한상호) 공통영어 1 Lesson 5 · 한줄영어",
+      "subtitle": "Lesson 5 · 지문 4개",
+      "unit": "Lesson 5",
+      "unit_no": 5,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 105,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-05-side",
+      "name": "YBM(한상호) 공통영어 1 Lesson 5 · 좌지문우해석",
+      "subtitle": "Lesson 5 · 지문 4개",
+      "unit": "Lesson 5",
+      "unit_no": 5,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 105,
       "active": true,
@@ -10642,8 +13978,8 @@
       "covers": []
     },
     {
-      "slug": "ybm-han-06-passage",
-      "name": "YBM(한상호) 공통영어 1 Lesson 6 · 지문자료",
+      "slug": "ybm-han-06-oneline-ko",
+      "name": "YBM(한상호) 공통영어 1 Lesson 6 · 한줄해석",
       "subtitle": "Lesson 6 · 지문 4개",
       "unit": "Lesson 6",
       "unit_no": 6,
@@ -10651,10 +13987,56 @@
       "book": "ybm-han",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 106,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-06-oneline-en",
+      "name": "YBM(한상호) 공통영어 1 Lesson 6 · 한줄영어",
+      "subtitle": "Lesson 6 · 지문 4개",
+      "unit": "Lesson 6",
+      "unit_no": 6,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 106,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-06-side",
+      "name": "YBM(한상호) 공통영어 1 Lesson 6 · 좌지문우해석",
+      "subtitle": "Lesson 6 · 지문 4개",
+      "unit": "Lesson 6",
+      "unit_no": 6,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 106,
       "active": true,
@@ -10780,8 +14162,8 @@
       "covers": []
     },
     {
-      "slug": "ybm-han-07-passage",
-      "name": "YBM(한상호) 공통영어 1 Lesson 7 · 지문자료",
+      "slug": "ybm-han-07-oneline-ko",
+      "name": "YBM(한상호) 공통영어 1 Lesson 7 · 한줄해석",
       "subtitle": "Lesson 7 · 지문 4개",
       "unit": "Lesson 7",
       "unit_no": 7,
@@ -10789,10 +14171,56 @@
       "book": "ybm-han",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 107,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-07-oneline-en",
+      "name": "YBM(한상호) 공통영어 1 Lesson 7 · 한줄영어",
+      "subtitle": "Lesson 7 · 지문 4개",
+      "unit": "Lesson 7",
+      "unit_no": 7,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 107,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-07-side",
+      "name": "YBM(한상호) 공통영어 1 Lesson 7 · 좌지문우해석",
+      "subtitle": "Lesson 7 · 지문 4개",
+      "unit": "Lesson 7",
+      "unit_no": 7,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 107,
       "active": true,
@@ -10918,8 +14346,8 @@
       "covers": []
     },
     {
-      "slug": "ybm-han-08-passage",
-      "name": "YBM(한상호) 공통영어 1 Lesson 8 · 지문자료",
+      "slug": "ybm-han-08-oneline-ko",
+      "name": "YBM(한상호) 공통영어 1 Lesson 8 · 한줄해석",
       "subtitle": "Lesson 8 · 지문 4개",
       "unit": "Lesson 8",
       "unit_no": 8,
@@ -10927,10 +14355,56 @@
       "book": "ybm-han",
       "package": "analysis",
       "materials": [
-        "passage"
+        "oneline-ko"
       ],
       "passages": 4,
-      "price": 500,
+      "price": 200,
+      "grade": "고1",
+      "sort": 108,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-08-oneline-en",
+      "name": "YBM(한상호) 공통영어 1 Lesson 8 · 한줄영어",
+      "subtitle": "Lesson 8 · 지문 4개",
+      "unit": "Lesson 8",
+      "unit_no": 8,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "oneline-en"
+      ],
+      "passages": 4,
+      "price": 200,
+      "grade": "고1",
+      "sort": 108,
+      "active": true,
+      "sample": true,
+      "format": "PDF (A4, 인쇄용)",
+      "includes": [],
+      "highlights": [],
+      "covers": []
+    },
+    {
+      "slug": "ybm-han-08-side",
+      "name": "YBM(한상호) 공통영어 1 Lesson 8 · 좌지문우해석",
+      "subtitle": "Lesson 8 · 지문 4개",
+      "unit": "Lesson 8",
+      "unit_no": 8,
+      "category": "textbook",
+      "book": "ybm-han",
+      "package": "analysis",
+      "materials": [
+        "side"
+      ],
+      "passages": 4,
+      "price": 200,
       "grade": "고1",
       "sort": 108,
       "active": true,
@@ -16240,10 +19714,12 @@
       "tagline": "읽고 뜯어보는 자료",
       "desc": "지문을 읽히고, 시험에 나오는 포인트를 짚어 주고, 손으로 채우게 하는 자료입니다. 수업에서도, 혼자 볼 때도 씁니다.",
       "materials": [
-        "passage",
+        "oneline-ko",
+        "oneline-en",
+        "side",
+        "literal",
         "analysis",
         "pilsaengbo",
-        "literal",
         "wordlist",
         "wordtest"
       ],
