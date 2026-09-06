@@ -1,0 +1,3602 @@
+[
+{
+"w": "illusion",
+"m": "착각, 환상",
+"pos": "n",
+"f": 5
+},
+{
+"w": "accommodate",
+"m": "수용하다, 맞추다",
+"pos": "v",
+"f": 4
+},
+{
+"w": "appreciation",
+"m": "감사; 감상, 진가 인식",
+"pos": "n",
+"f": 4
+},
+{
+"w": "autonomy",
+"m": "자율성",
+"pos": "n",
+"f": 4
+},
+{
+"w": "implement",
+"m": "시행하다, 실행하다",
+"pos": "v",
+"f": 4
+},
+{
+"w": "in terms of",
+"m": "~의 측면에서",
+"pos": "phr",
+"f": 4
+},
+{
+"w": "predator",
+"m": "포식자",
+"pos": "n",
+"f": 4
+},
+{
+"w": "reinforce",
+"m": "강화하다",
+"pos": "v",
+"f": 4
+},
+{
+"w": "trade-off",
+"m": "절충, 상충 관계",
+"pos": "n",
+"f": 4
+},
+{
+"w": "classification",
+"m": "분류",
+"pos": "n",
+"f": 3
+},
+{
+"w": "constitute",
+"m": "구성하다, ~이 되다",
+"pos": "v",
+"f": 3
+},
+{
+"w": "convey",
+"m": "전달하다",
+"pos": "v",
+"f": 3
+},
+{
+"w": "cue",
+"m": "단서, 신호",
+"pos": "n",
+"f": 3
+},
+{
+"w": "distinguish A from B",
+"m": "A를 B와 구별하다",
+"pos": "phr",
+"f": 3
+},
+{
+"w": "facilitate",
+"m": "촉진하다, 용이하게 하다",
+"pos": "v",
+"f": 3
+},
+{
+"w": "give rise to",
+"m": "~을 일으키다, 초래하다",
+"pos": "phr",
+"f": 3
+},
+{
+"w": "manipulate",
+"m": "조작하다, 다루다",
+"pos": "v",
+"f": 3
+},
+{
+"w": "partition",
+"m": "칸막이, 분할",
+"pos": "n",
+"f": 3
+},
+{
+"w": "relevant",
+"m": "관련 있는",
+"pos": "adj",
+"f": 3
+},
+{
+"w": "rely on",
+"m": "~에 의존하다",
+"pos": "phr",
+"f": 3
+},
+{
+"w": "retain",
+"m": "유지하다, 보유하다",
+"pos": "v",
+"f": 3
+},
+{
+"w": "sacrifice",
+"m": "희생; 희생하다",
+"pos": "n",
+"f": 3
+},
+{
+"w": "time-consuming",
+"m": "시간이 많이 드는",
+"pos": "adj",
+"f": 3
+},
+{
+"w": "a handful of",
+"m": "소수의",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "abandon",
+"m": "버리다, 포기하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "absorption",
+"m": "흡수",
+"pos": "n",
+"f": 2
+},
+{
+"w": "acceptance",
+"m": "수용, 받아들임",
+"pos": "n",
+"f": 2
+},
+{
+"w": "account for",
+"m": "~을 설명하다; 차지하다",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "accumulate",
+"m": "축적하다, 쌓이다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "acknowledge",
+"m": "인정하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "acquire",
+"m": "획득하다, 습득하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "afford",
+"m": "제공하다, 주다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "alternative",
+"m": "대안적인; 대안",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "anonymity",
+"m": "익명성",
+"pos": "n",
+"f": 2
+},
+{
+"w": "anthropologist",
+"m": "인류학자",
+"pos": "n",
+"f": 2
+},
+{
+"w": "apart from",
+"m": "~외에도, ~은 별개로",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "apply to",
+"m": "~에 적용되다",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "archive",
+"m": "기록 보관소, 자료실",
+"pos": "n",
+"f": 2
+},
+{
+"w": "artefact",
+"m": "인공물, 가공품",
+"pos": "n",
+"f": 2
+},
+{
+"w": "aspiration",
+"m": "열망, 포부",
+"pos": "n",
+"f": 2
+},
+{
+"w": "at stake",
+"m": "걸려 있는, 위태로운",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "attend to",
+"m": "~에 주의를 기울이다",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "authoritative",
+"m": "권위 있는",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "availability",
+"m": "이용 가능성",
+"pos": "n",
+"f": 2
+},
+{
+"w": "back and forth",
+"m": "앞뒤로, 이리저리",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "be directed toward",
+"m": "~로 향하다, 이끌리다",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "be subject to",
+"m": "~에 영향받다, ~을 겪다",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "become accustomed to",
+"m": "~에 익숙해지다",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "bottom line",
+"m": "핵심, 요점; 수익",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "categorize",
+"m": "분류하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "circulate",
+"m": "유포되다, 순환하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "cognition",
+"m": "인지, 인식",
+"pos": "n",
+"f": 2
+},
+{
+"w": "compensate for",
+"m": "~을 보완하다, 보상하다",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "conform to",
+"m": "~에 순응하다, 따르다",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "consciousness",
+"m": "의식",
+"pos": "n",
+"f": 2
+},
+{
+"w": "consensus",
+"m": "합의, 의견 일치",
+"pos": "n",
+"f": 2
+},
+{
+"w": "conservation",
+"m": "보존, 보호",
+"pos": "n",
+"f": 2
+},
+{
+"w": "conserve",
+"m": "아끼다, 보존하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "consistent",
+"m": "일관된",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "constrain",
+"m": "제약하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "consult",
+"m": "상담하다, 자문하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "contribute to",
+"m": "~에 기여하다",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "conventional",
+"m": "관습적인, 전통적인",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "conversely",
+"m": "반대로, 역으로",
+"pos": "adv",
+"f": 2
+},
+{
+"w": "cooperate",
+"m": "협력하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "critical thinking",
+"m": "비판적 사고",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "cultivate",
+"m": "기르다, 함양하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "decline",
+"m": "쇠퇴, 감소",
+"pos": "n",
+"f": 2
+},
+{
+"w": "departure",
+"m": "이탈, 벗어남; 떠남",
+"pos": "n",
+"f": 2
+},
+{
+"w": "detect",
+"m": "감지하다, 발견하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "devise",
+"m": "고안하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "discipline",
+"m": "학문 분야; 규율",
+"pos": "n",
+"f": 2
+},
+{
+"w": "distinct from",
+"m": "~와 구별되는",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "distinction",
+"m": "구별, 차이",
+"pos": "n",
+"f": 2
+},
+{
+"w": "distinctive",
+"m": "독특한, 특징적인",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "diverse",
+"m": "다양한",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "domain",
+"m": "영역",
+"pos": "n",
+"f": 2
+},
+{
+"w": "downside",
+"m": "단점, 불리한 면",
+"pos": "n",
+"f": 2
+},
+{
+"w": "ecosystem",
+"m": "생태계",
+"pos": "n",
+"f": 2
+},
+{
+"w": "evolve",
+"m": "진화하다, 발전하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "exceed",
+"m": "초과하다, 넘어서다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "expend",
+"m": "소비하다, 들이다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "exploit",
+"m": "악용하다, 이용하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "glacier",
+"m": "빙하",
+"pos": "n",
+"f": 2
+},
+{
+"w": "hallmark",
+"m": "특징, 상징",
+"pos": "n",
+"f": 2
+},
+{
+"w": "have implications for",
+"m": "~에 영향을 미치다",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "hypothesis",
+"m": "가설",
+"pos": "n",
+"f": 2
+},
+{
+"w": "identify with",
+"m": "~와 동일시하다",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "in principle",
+"m": "원칙적으로",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "in spite of",
+"m": "~에도 불구하고",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "independent of",
+"m": "~와 무관한",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "inevitably",
+"m": "필연적으로, 불가피하게",
+"pos": "adv",
+"f": 2
+},
+{
+"w": "innovation",
+"m": "혁신",
+"pos": "n",
+"f": 2
+},
+{
+"w": "insight",
+"m": "통찰",
+"pos": "n",
+"f": 2
+},
+{
+"w": "interfere with",
+"m": "~을 방해하다",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "intervention",
+"m": "개입, 중재",
+"pos": "n",
+"f": 2
+},
+{
+"w": "invaluable",
+"m": "매우 귀중한",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "involuntary",
+"m": "무의식적인, 비자발적인",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "irrelevant",
+"m": "무관한, 무의미한",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "metaphor",
+"m": "은유",
+"pos": "n",
+"f": 2
+},
+{
+"w": "migrate",
+"m": "이주하다, 이동하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "migration",
+"m": "이주, 이동",
+"pos": "n",
+"f": 2
+},
+{
+"w": "misleading",
+"m": "오해를 부르는, 현혹시키는",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "misperception",
+"m": "오해, 오인",
+"pos": "n",
+"f": 2
+},
+{
+"w": "modify",
+"m": "수정하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "no matter how",
+"m": "아무리 ~해도",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "nostalgia",
+"m": "향수, 그리움",
+"pos": "n",
+"f": 2
+},
+{
+"w": "objectivity",
+"m": "객관성",
+"pos": "n",
+"f": 2
+},
+{
+"w": "obsession",
+"m": "집착, 강박",
+"pos": "n",
+"f": 2
+},
+{
+"w": "offset",
+"m": "상쇄하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "offspring",
+"m": "자손",
+"pos": "n",
+"f": 2
+},
+{
+"w": "overlap",
+"m": "겹치다, 중복되다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "overlooked",
+"m": "간과된",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "ownership",
+"m": "소유(권)",
+"pos": "n",
+"f": 2
+},
+{
+"w": "paradigm",
+"m": "패러다임, 인식의 틀",
+"pos": "n",
+"f": 2
+},
+{
+"w": "passive",
+"m": "수동적인",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "perceive",
+"m": "지각하다, 인식하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "persuasive",
+"m": "설득력 있는",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "pitch",
+"m": "음정, 음높이",
+"pos": "n",
+"f": 2
+},
+{
+"w": "precision",
+"m": "정밀성, 정확성",
+"pos": "n",
+"f": 2
+},
+{
+"w": "predominate",
+"m": "지배하다, 우세하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "premise",
+"m": "전제",
+"pos": "n",
+"f": 2
+},
+{
+"w": "preservation",
+"m": "보존",
+"pos": "n",
+"f": 2
+},
+{
+"w": "prevailing",
+"m": "지배적인, 우세한",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "prioritize",
+"m": "우선시하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "productivity",
+"m": "생산성",
+"pos": "n",
+"f": 2
+},
+{
+"w": "profitable",
+"m": "수익성 있는, 유익한",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "proliferation",
+"m": "급증, 확산",
+"pos": "n",
+"f": 2
+},
+{
+"w": "prolong",
+"m": "연장하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "put a premium on",
+"m": "~을 중시하다",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "redirect",
+"m": "(방향을) 돌리다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "regardless of",
+"m": "~에 상관없이",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "regularity",
+"m": "규칙성",
+"pos": "n",
+"f": 2
+},
+{
+"w": "regulate",
+"m": "규제하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "remarkably",
+"m": "현저하게, 놀랍도록",
+"pos": "adv",
+"f": 2
+},
+{
+"w": "resemble",
+"m": "닮다, 유사하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "reside",
+"m": "거주하다, (성질이) 존재하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "rest on",
+"m": "~에 근거하다",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "restricted",
+"m": "제한된",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "salient",
+"m": "두드러진, 현저한",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "scattered",
+"m": "흩어진, 산재한",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "significance",
+"m": "중요성, 의미",
+"pos": "n",
+"f": 2
+},
+{
+"w": "socialization",
+"m": "사회화",
+"pos": "n",
+"f": 2
+},
+{
+"w": "status",
+"m": "지위",
+"pos": "n",
+"f": 2
+},
+{
+"w": "straightforward",
+"m": "간단명료한, 솔직한",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "subjectivity",
+"m": "주관성",
+"pos": "n",
+"f": 2
+},
+{
+"w": "superficial",
+"m": "피상적인, 표면적인",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "territory",
+"m": "영역, 영토",
+"pos": "n",
+"f": 2
+},
+{
+"w": "to a large extent",
+"m": "상당 부분, 크게",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "uncover",
+"m": "밝혀내다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "unprecedented",
+"m": "전례 없는",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "utilize",
+"m": "활용하다",
+"pos": "v",
+"f": 2
+},
+{
+"w": "validity",
+"m": "타당성, 유효성",
+"pos": "n",
+"f": 2
+},
+{
+"w": "vital",
+"m": "필수적인, 매우 중요한",
+"pos": "adj",
+"f": 2
+},
+{
+"w": "wilderness",
+"m": "야생, 황야",
+"pos": "n",
+"f": 2
+},
+{
+"w": "with regard to",
+"m": "~에 관하여",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "with respect to",
+"m": "~에 관하여",
+"pos": "phr",
+"f": 2
+},
+{
+"w": "yield",
+"m": "산출, 수확; 산출하다",
+"pos": "n",
+"f": 2
+},
+{
+"w": "a marked contrast",
+"m": "뚜렷한 대조",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "a modicum of",
+"m": "약간의, 소량의",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "a multitude of",
+"m": "다수의, 수많은",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "abatement",
+"m": "저감, 감소",
+"pos": "n",
+"f": 1
+},
+{
+"w": "abstract",
+"m": "추상적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "accelerate",
+"m": "가속화하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "acceleration",
+"m": "가속",
+"pos": "n",
+"f": 1
+},
+{
+"w": "accommodation",
+"m": "숙박(시설)",
+"pos": "n",
+"f": 1
+},
+{
+"w": "accommodations",
+"m": "숙소, 숙박 시설",
+"pos": "n",
+"f": 1
+},
+{
+"w": "accordingly",
+"m": "따라서, 그에 맞춰",
+"pos": "adv",
+"f": 1
+},
+{
+"w": "account of",
+"m": "~에 대한 설명",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "accumulated",
+"m": "축적된",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "acquaintance",
+"m": "아는 사람, 지인",
+"pos": "n",
+"f": 1
+},
+{
+"w": "acquiesce to",
+"m": "~을 묵인하다, 따르다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "acquisition",
+"m": "획득, 습득",
+"pos": "n",
+"f": 1
+},
+{
+"w": "actualize",
+"m": "실현하다, 구현하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "adaptability",
+"m": "적응력",
+"pos": "n",
+"f": 1
+},
+{
+"w": "adaptive",
+"m": "적응적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "address",
+"m": "(문제를) 다루다, 해결하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "address (a problem)",
+"m": "(문제를) 다루다, 처리하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "adjustment",
+"m": "조정, 적응",
+"pos": "n",
+"f": 1
+},
+{
+"w": "admiration",
+"m": "감탄, 존경",
+"pos": "n",
+"f": 1
+},
+{
+"w": "adolescence",
+"m": "청소년기",
+"pos": "n",
+"f": 1
+},
+{
+"w": "adverse effect",
+"m": "악영향, 부작용",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "aesthetic",
+"m": "미적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "aesthetically",
+"m": "미학적으로",
+"pos": "adv",
+"f": 1
+},
+{
+"w": "afterlife",
+"m": "사후 세계",
+"pos": "n",
+"f": 1
+},
+{
+"w": "agenda",
+"m": "의제, 목표",
+"pos": "n",
+"f": 1
+},
+{
+"w": "aggregate",
+"m": "집합시키다, 모으다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "aggregation",
+"m": "집합, 모임",
+"pos": "n",
+"f": 1
+},
+{
+"w": "ahead of its time",
+"m": "시대를 앞선",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "alert",
+"m": "기민한, 정신이 초롱초롱한",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "all along",
+"m": "내내, 처음부터",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "altruistic",
+"m": "이타적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "ambiguous",
+"m": "모호한, 애매한",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "amidst",
+"m": "~의 한가운데에",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "amorphous",
+"m": "무정형의, 형태가 없는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "analogy",
+"m": "유추, 비유",
+"pos": "n",
+"f": 1
+},
+{
+"w": "anecdotal evidence",
+"m": "일화적 증거",
+"pos": "n",
+"f": 1
+},
+{
+"w": "animate",
+"m": "활기를 불어넣다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "antagonistic",
+"m": "적대적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "anticipate",
+"m": "예상하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "antithetical",
+"m": "대립되는, 정반대의",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "appeal to",
+"m": "~의 마음에 들다, 호소하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "apprentice",
+"m": "견습생, 도제",
+"pos": "n",
+"f": 1
+},
+{
+"w": "approximation",
+"m": "근접, 근사치",
+"pos": "n",
+"f": 1
+},
+{
+"w": "archaic",
+"m": "고풍의, 옛날의",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "arise",
+"m": "생기다, 발생하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "aristocrat",
+"m": "귀족",
+"pos": "n",
+"f": 1
+},
+{
+"w": "armed with",
+"m": "~로 무장한",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "around the clock",
+"m": "24시간 내내",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "as a matter of course",
+"m": "당연히",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "as a whole",
+"m": "전체로서",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "as opposed to",
+"m": "~와 대조적으로",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "aspect",
+"m": "측면",
+"pos": "n",
+"f": 1
+},
+{
+"w": "aspire to",
+"m": "~을 열망하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "aspiring",
+"m": "장차 ~가 되려는, 포부가 있는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "assertion",
+"m": "주장, 단언",
+"pos": "n",
+"f": 1
+},
+{
+"w": "assess",
+"m": "평가하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "assessment",
+"m": "평가",
+"pos": "n",
+"f": 1
+},
+{
+"w": "assimilate",
+"m": "동화되다, 흡수하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "assume responsibility",
+"m": "책임을 지다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "assumption",
+"m": "가정",
+"pos": "n",
+"f": 1
+},
+{
+"w": "asymmetry",
+"m": "비대칭",
+"pos": "n",
+"f": 1
+},
+{
+"w": "at best",
+"m": "기껏해야, 잘해야",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "at each other's expense",
+"m": "서로를 희생시켜",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "at rest",
+"m": "정지 상태에 있는",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "at the core of",
+"m": "~의 핵심에",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "at the whim of",
+"m": "~에 좌우되는",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "at will",
+"m": "마음대로, 임의로",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "at worst",
+"m": "최악의 경우",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "attachment",
+"m": "애착; 부착",
+"pos": "n",
+"f": 1
+},
+{
+"w": "attainment",
+"m": "성취, 달성",
+"pos": "n",
+"f": 1
+},
+{
+"w": "attentive to",
+"m": "~에 주의를 기울이는",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "attribute A to B",
+"m": "A를 B의 것으로 여기다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "autobiographical",
+"m": "자서전적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "back-and-forth",
+"m": "주고받기, 오고 감",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "backbone",
+"m": "근간, 중추",
+"pos": "n",
+"f": 1
+},
+{
+"w": "barrier",
+"m": "장벽",
+"pos": "n",
+"f": 1
+},
+{
+"w": "basin",
+"m": "수조; 유역",
+"pos": "n",
+"f": 1
+},
+{
+"w": "be accustomed to",
+"m": "~에 익숙하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be associated with",
+"m": "~와 연관되다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be bent on",
+"m": "~에 열중하다, 골몰하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be called upon to",
+"m": "~하도록 요구받다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be confronted with",
+"m": "~에 직면하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be constituted by",
+"m": "~로 구성되다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be correlated with",
+"m": "~와 상관관계가 있다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be deaf to",
+"m": "~에 귀 기울이지 않다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be devoted to",
+"m": "~에 전념하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be displaced",
+"m": "밀려나다, 대체되다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be drawn into",
+"m": "~에 빠져들다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be drawn to",
+"m": "~에 끌리다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be embodied in",
+"m": "~에 구현되어 있다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be endowed with",
+"m": "~을 부여받다, 타고나다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be exposed to",
+"m": "~에 노출되다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be locked into",
+"m": "~에 갇히다, 얽매이다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be mediated by",
+"m": "~에 의해 매개되다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be open to",
+"m": "~에 열려 있다, 받아들이다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be oriented to",
+"m": "~에 맞춰지다, 지향하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be rooted in",
+"m": "~에 뿌리를 두다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be stripped of",
+"m": "~이 제거되다, 벗겨지다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be succeeded by",
+"m": "~로 뒤이어지다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "be tied to",
+"m": "~에 결부되다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "bereft",
+"m": "잃은, 빼앗긴",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "betrayal",
+"m": "누설, 배신",
+"pos": "n",
+"f": 1
+},
+{
+"w": "bias",
+"m": "편향",
+"pos": "n",
+"f": 1
+},
+{
+"w": "biased",
+"m": "편향된",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "bifurcation",
+"m": "분기, 갈라짐",
+"pos": "n",
+"f": 1
+},
+{
+"w": "bizarre",
+"m": "기이한, 별난",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "blend into",
+"m": "~에 섞여 들다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "blunt",
+"m": "무딘; 직설적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "boil down to",
+"m": "결국 ~로 귀결되다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "border on",
+"m": "~에 가깝다, 거의 ~이다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "bounded",
+"m": "한정된, 경계가 있는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "boycott",
+"m": "불매하다, 보이콧하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "breadth / depth",
+"m": "폭 / 깊이",
+"pos": "n",
+"f": 1
+},
+{
+"w": "break down",
+"m": "무너지다, 성립하지 않다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "breakthrough",
+"m": "획기적 발전, 돌파구",
+"pos": "n",
+"f": 1
+},
+{
+"w": "bring about",
+"m": "초래하다, 가져오다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "bring to bear",
+"m": "작용시키다, 발휘하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "built-in",
+"m": "내장된, 타고난",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "bulky",
+"m": "부피가 큰",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "burdensome",
+"m": "부담스러운",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "bureaucratic",
+"m": "관료적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "burned out",
+"m": "탈진한",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "burnout",
+"m": "탈진, 번아웃",
+"pos": "n",
+"f": 1
+},
+{
+"w": "by definition",
+"m": "정의상, 당연히",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "by extension",
+"m": "더 나아가, 확장하면",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "cajole",
+"m": "구슬리다, 달래다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "call for",
+"m": "요구하다, 필요로 하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "call on",
+"m": "~에게 요청하다, 부탁하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "canopy",
+"m": "수관, 잎으로 된 덮개",
+"pos": "n",
+"f": 1
+},
+{
+"w": "catastrophe",
+"m": "재앙, 참사",
+"pos": "n",
+"f": 1
+},
+{
+"w": "celebrated",
+"m": "유명한, 저명한",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "celestial bodies",
+"m": "천체",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "centerpiece",
+"m": "중심, 핵심",
+"pos": "n",
+"f": 1
+},
+{
+"w": "centralized",
+"m": "중앙집권적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "circulation",
+"m": "유통, 순환",
+"pos": "n",
+"f": 1
+},
+{
+"w": "cite",
+"m": "인용하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "civic",
+"m": "시민의",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "clarify",
+"m": "명확히 하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "classify",
+"m": "분류하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "close-knit",
+"m": "긴밀히 결속된",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "code of conduct",
+"m": "행동 규범",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "cognitive",
+"m": "인지적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "cognizant",
+"m": "인식하는, 알고 있는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "coherent",
+"m": "일관된, 논리 정연한",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "cohesion",
+"m": "결속(력), 응집",
+"pos": "n",
+"f": 1
+},
+{
+"w": "cohesive",
+"m": "응집력 있는, 통일된",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "coincide",
+"m": "일치하다, 동시에 일어나다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "collective",
+"m": "집단적인, 공동의",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "colony",
+"m": "군집, 집단; 식민지",
+"pos": "n",
+"f": 1
+},
+{
+"w": "come across",
+"m": "우연히 마주치다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "come into play",
+"m": "작용하다, 영향을 미치다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "come under the influence of",
+"m": "~의 영향을 받다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "come up with",
+"m": "~을 생각해 내다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "commentary",
+"m": "논평, 해설",
+"pos": "n",
+"f": 1
+},
+{
+"w": "commercialize",
+"m": "상업화하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "commit oneself to",
+"m": "~에 전념하다, 몰두하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "commitment",
+"m": "약속, 전념, 헌신",
+"pos": "n",
+"f": 1
+},
+{
+"w": "companionship",
+"m": "동료애, 교우 관계",
+"pos": "n",
+"f": 1
+},
+{
+"w": "comparable",
+"m": "비슷한, 견줄 만한",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "compatibility",
+"m": "양립성, 호환성",
+"pos": "n",
+"f": 1
+},
+{
+"w": "compatible with",
+"m": "~와 양립하는, 호환되는",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "compelling argument",
+"m": "설득력 있는 주장",
+"pos": "n",
+"f": 1
+},
+{
+"w": "compensate",
+"m": "보상하다, 보완하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "compensation",
+"m": "보상, 보완",
+"pos": "n",
+"f": 1
+},
+{
+"w": "complement",
+"m": "보완하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "complexity",
+"m": "복잡성",
+"pos": "n",
+"f": 1
+},
+{
+"w": "compliment",
+"m": "칭찬",
+"pos": "n",
+"f": 1
+},
+{
+"w": "composition",
+"m": "구성, 성분; 작문",
+"pos": "n",
+"f": 1
+},
+{
+"w": "compound",
+"m": "악화시키다, 가중시키다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "comprehend",
+"m": "이해하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "conceal",
+"m": "감추다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "conceive of",
+"m": "~을 생각해내다, 상상하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "conception",
+"m": "구상, 개념 정립",
+"pos": "n",
+"f": 1
+},
+{
+"w": "condense into",
+"m": "~으로 압축되다, 응축되다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "conducive to",
+"m": "~에 도움이 되는",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "confine oneself to",
+"m": "~에 국한하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "conflicted",
+"m": "갈등하는, 내적 갈등을 겪는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "conflicting",
+"m": "상충하는, 모순되는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "conform",
+"m": "순응하다, 따르다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "conformity",
+"m": "동조, 순응",
+"pos": "n",
+"f": 1
+},
+{
+"w": "confront",
+"m": "직면하다, 맞서다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "congested",
+"m": "혼잡한, 붐비는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "connotation",
+"m": "함축, 내포된 의미",
+"pos": "n",
+"f": 1
+},
+{
+"w": "consequently",
+"m": "결과적으로",
+"pos": "adv",
+"f": 1
+},
+{
+"w": "considerable",
+"m": "상당한, 많은",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "consist in",
+"m": "~에 있다, ~에 존재하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "conspicuous",
+"m": "눈에 띄는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "constructive",
+"m": "건설적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "consumable",
+"m": "소비될 수 있는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "contaminant",
+"m": "오염 물질",
+"pos": "n",
+"f": 1
+},
+{
+"w": "contaminated",
+"m": "오염된",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "contemplation",
+"m": "사색, 관조",
+"pos": "n",
+"f": 1
+},
+{
+"w": "contentious",
+"m": "논쟁적인, 다툼이 많은",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "continuum",
+"m": "연속체",
+"pos": "n",
+"f": 1
+},
+{
+"w": "controversy",
+"m": "논란",
+"pos": "n",
+"f": 1
+},
+{
+"w": "convention",
+"m": "관습, 관례; 대회",
+"pos": "n",
+"f": 1
+},
+{
+"w": "conventional wisdom",
+"m": "통념, 사회적 통설",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "convergence",
+"m": "수렴, 집중",
+"pos": "n",
+"f": 1
+},
+{
+"w": "convert",
+"m": "변환하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "coordinate",
+"m": "조정하다, 조율하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "coordination",
+"m": "조화, 협응, 조정",
+"pos": "n",
+"f": 1
+},
+{
+"w": "cope with",
+"m": "~에 대처하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "correlate with",
+"m": "~와 상관관계가 있다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "correspond to",
+"m": "~에 상응하다, 일치하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "correspondence",
+"m": "상응, 대응 관계; 서신",
+"pos": "n",
+"f": 1
+},
+{
+"w": "counsel against",
+"m": "~을 하지 말라고 조언하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "counterpart",
+"m": "상대방, 대응물",
+"pos": "n",
+"f": 1
+},
+{
+"w": "court (v.)",
+"m": "구애하다, 얻으려 하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "craftsmanship",
+"m": "장인정신, 솜씨",
+"pos": "n",
+"f": 1
+},
+{
+"w": "credibility",
+"m": "신뢰성",
+"pos": "n",
+"f": 1
+},
+{
+"w": "credible",
+"m": "신뢰할 만한",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "criterion",
+"m": "기준",
+"pos": "n",
+"f": 1
+},
+{
+"w": "critique",
+"m": "비판, 비평",
+"pos": "n",
+"f": 1
+},
+{
+"w": "crucial",
+"m": "결정적인, 중요한",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "current affairs",
+"m": "시사 문제",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "customize",
+"m": "맞춤 제작하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "cutting-edge",
+"m": "최첨단의",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "debilitated",
+"m": "쇠약해진",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "decry",
+"m": "비난하다, 헐뜯다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "dedicated to",
+"m": "~에 전념하는",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "deliberative",
+"m": "심사숙고하는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "delicate",
+"m": "섬세한, 손상되기 쉬운",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "deliverance",
+"m": "구원, 해방",
+"pos": "n",
+"f": 1
+},
+{
+"w": "democratise",
+"m": "대중화하다, 민주화하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "democratize",
+"m": "대중화하다, 민주화하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "demographic",
+"m": "인구통계학적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "demonstrate",
+"m": "보여주다, 입증하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "depart from",
+"m": "~에서 벗어나다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "departure from",
+"m": "~에서 벗어남, 이탈",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "dependence",
+"m": "의존",
+"pos": "n",
+"f": 1
+},
+{
+"w": "depict",
+"m": "묘사하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "derive A from B",
+"m": "B에서 A를 얻다/이끌어내다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "derive from",
+"m": "~에서 비롯되다, 유래하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "descendant",
+"m": "후손",
+"pos": "n",
+"f": 1
+},
+{
+"w": "desensitized",
+"m": "둔감해진",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "deteriorated",
+"m": "악화된, 낡은",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "deterioration",
+"m": "악화, 쇠퇴",
+"pos": "n",
+"f": 1
+},
+{
+"w": "deterministic",
+"m": "결정론적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "devalue",
+"m": "가치를 떨어뜨리다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "deviate from",
+"m": "~에서 벗어나다, 일탈하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "deviation",
+"m": "벗어남, 일탈, 편차",
+"pos": "n",
+"f": 1
+},
+{
+"w": "devote to",
+"m": "~에 바치다, 쏟다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "differentiate",
+"m": "구별하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "differentiation",
+"m": "차별화, 구별",
+"pos": "n",
+"f": 1
+},
+{
+"w": "diffuse",
+"m": "분산된, 흐릿한; 확산되다",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "diffusion",
+"m": "확산, 전파",
+"pos": "n",
+"f": 1
+},
+{
+"w": "digitization",
+"m": "디지털화",
+"pos": "n",
+"f": 1
+},
+{
+"w": "diminished",
+"m": "줄어든, 약화된",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "diminishing",
+"m": "줄어드는, 감소하는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "discern",
+"m": "식별하다, 분간하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "disclose",
+"m": "공개하다, 누설하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "disclosure",
+"m": "공개, 정보 공개",
+"pos": "n",
+"f": 1
+},
+{
+"w": "discriminate A from B",
+"m": "A를 B와 구별하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "discriminate between",
+"m": "~을 구별하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "discrimination",
+"m": "차별",
+"pos": "n",
+"f": 1
+},
+{
+"w": "disengagement",
+"m": "이탈, 벗어남",
+"pos": "n",
+"f": 1
+},
+{
+"w": "disincentive",
+"m": "억제 요인, 방해 요인",
+"pos": "n",
+"f": 1
+},
+{
+"w": "dismissal",
+"m": "무시, 일축, 해고",
+"pos": "n",
+"f": 1
+},
+{
+"w": "disorient",
+"m": "방향 감각을 잃게 하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "disparate",
+"m": "이질적인, 서로 다른",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "disposal",
+"m": "처분, 폐기",
+"pos": "n",
+"f": 1
+},
+{
+"w": "dispose of",
+"m": "~을 처리하다, 버리다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "dispose one to",
+"m": "~하는 성향을 갖게 하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "disquieting",
+"m": "불안하게 하는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "disregard",
+"m": "무시, 경시; 무시하다",
+"pos": "n",
+"f": 1
+},
+{
+"w": "disseminate",
+"m": "퍼뜨리다, 유포하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "distorted",
+"m": "왜곡된",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "distress",
+"m": "괴로움, 고통",
+"pos": "n",
+"f": 1
+},
+{
+"w": "diverge from",
+"m": "~에서 갈라지다, 벗어나다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "divergence",
+"m": "갈라짐, 차이",
+"pos": "n",
+"f": 1
+},
+{
+"w": "diversification",
+"m": "다양화",
+"pos": "n",
+"f": 1
+},
+{
+"w": "diversify",
+"m": "다양화하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "divert attention",
+"m": "주의를 딴 데로 돌리다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "divorce oneself from",
+"m": "~에서 벗어나다, 분리하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "document",
+"m": "기록하다, 입증하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "dominant",
+"m": "지배적인, 우세한",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "downstream / upstream",
+"m": "하류의 / 상류의",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "draft",
+"m": "초안을 작성하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "drain",
+"m": "물을 빼다, 배수하다; 고갈시키다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "draw out",
+"m": "이끌어내다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "drawn-out",
+"m": "오래 끄는, 질질 끄는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "durability",
+"m": "내구성",
+"pos": "n",
+"f": 1
+},
+{
+"w": "ease (fears)",
+"m": "(두려움을) 덜다, 완화하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "eclipse",
+"m": "일식, 월식; 가리다, 능가하다",
+"pos": "n",
+"f": 1
+},
+{
+"w": "ecological",
+"m": "생태의",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "efficacy",
+"m": "효능, 효험",
+"pos": "n",
+"f": 1
+},
+{
+"w": "effortful",
+"m": "노력이 드는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "effortlessly",
+"m": "손쉽게, 힘들이지 않고",
+"pos": "adv",
+"f": 1
+},
+{
+"w": "egalitarianism",
+"m": "평등주의",
+"pos": "n",
+"f": 1
+},
+{
+"w": "egregious",
+"m": "극악한, 매우 나쁜",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "elaborate",
+"m": "정교한, 복잡한",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "elevate",
+"m": "격상시키다, 높이다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "elicit",
+"m": "이끌어내다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "eliminate",
+"m": "없애다, 제거하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "elimination",
+"m": "제거, 배제",
+"pos": "n",
+"f": 1
+},
+{
+"w": "embedded in",
+"m": "~에 자리 잡은, 내재된",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "embodied in",
+"m": "~에 구현된",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "embody",
+"m": "구현하다, 구체화하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "embrace",
+"m": "받아들이다, 아우르다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "emerge",
+"m": "등장하다, 나타나다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "emergent",
+"m": "새로 생겨나는, 창발적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "empathy",
+"m": "공감",
+"pos": "n",
+"f": 1
+},
+{
+"w": "empirical world",
+"m": "경험적 세계",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "endure",
+"m": "견디다, 참다; 지속되다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "enduring",
+"m": "지속되는, 오래가는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "engage in",
+"m": "~에 참여하다, 종사하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "engage with",
+"m": "~에 관여하다, 씨름하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "enhance",
+"m": "향상시키다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "enlightened",
+"m": "계몽된, 깨우친",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "enrich",
+"m": "풍요롭게 하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "entail",
+"m": "수반하다, 필요로 하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "entanglement",
+"m": "얽힘, 연루",
+"pos": "n",
+"f": 1
+},
+{
+"w": "enthusiast",
+"m": "애호가, 열광자",
+"pos": "n",
+"f": 1
+},
+{
+"w": "entrench",
+"m": "고착시키다, 확고히 하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "envious",
+"m": "부러워하는, 시기하는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "envision",
+"m": "마음속에 그리다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "equilibrium",
+"m": "균형, 평형",
+"pos": "n",
+"f": 1
+},
+{
+"w": "equip A with B",
+"m": "A에 B를 갖추게 하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "estimate",
+"m": "추정하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "evade",
+"m": "피하다, 회피하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "evince",
+"m": "드러내다, 나타내다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "exaggerate",
+"m": "과장하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "exclusion",
+"m": "배제, 소외",
+"pos": "n",
+"f": 1
+},
+{
+"w": "execution",
+"m": "실행",
+"pos": "n",
+"f": 1
+},
+{
+"w": "exert influence on",
+"m": "~에 영향을 미치다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "exhibit",
+"m": "보이다, 나타내다; 전시하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "expertise",
+"m": "전문 지식",
+"pos": "n",
+"f": 1
+},
+{
+"w": "exploitation",
+"m": "이용, 개발, 착취",
+"pos": "n",
+"f": 1
+},
+{
+"w": "exposure",
+"m": "노출",
+"pos": "n",
+"f": 1
+},
+{
+"w": "extract",
+"m": "추출하다, 끌어내다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "fabrication",
+"m": "제작, 제조; 날조",
+"pos": "n",
+"f": 1
+},
+{
+"w": "fall behind",
+"m": "뒤처지다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "fall prey to",
+"m": "~의 먹이가 되다, ~에 희생되다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "familiarity",
+"m": "친숙함, 익숙함",
+"pos": "n",
+"f": 1
+},
+{
+"w": "famine",
+"m": "기근",
+"pos": "n",
+"f": 1
+},
+{
+"w": "fanciful",
+"m": "기발한, 상상력이 풍부한",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "faux pas",
+"m": "실수, 결례",
+"pos": "n",
+"f": 1
+},
+{
+"w": "favorable",
+"m": "유리한, 호의적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "feasible",
+"m": "실현 가능한",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "find expression in",
+"m": "~로 표현되다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "find oneself in",
+"m": "(어떤 상황에) 처하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "fine-tune",
+"m": "미세 조정하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "fine-tuning",
+"m": "미세 조정",
+"pos": "n",
+"f": 1
+},
+{
+"w": "fixate on",
+"m": "~에 집착하다, 고정되다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "flawed",
+"m": "결함이 있는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "flee",
+"m": "도망치다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "flourish",
+"m": "번창하다, 번성하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "fluency",
+"m": "유창함, 능숙함",
+"pos": "n",
+"f": 1
+},
+{
+"w": "follow through on",
+"m": "~을 끝까지 해내다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "for its own sake",
+"m": "그 자체를 위해",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "for lack of",
+"m": "~이 부족하여",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "foraging",
+"m": "먹이 찾기",
+"pos": "n",
+"f": 1
+},
+{
+"w": "foreground (v.)",
+"m": "부각시키다, 전면에 내세우다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "foresee",
+"m": "예견하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "form an attachment to",
+"m": "~에 애착을 형성하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "formulate",
+"m": "(생각을) 정리해 표현하다, 만들다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "foster",
+"m": "기르다, 함양하다, 촉진하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "fragmented",
+"m": "분열된, 파편화된",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "fraud",
+"m": "사기",
+"pos": "n",
+"f": 1
+},
+{
+"w": "freight",
+"m": "화물, 화물 운송",
+"pos": "n",
+"f": 1
+},
+{
+"w": "from the perspective of",
+"m": "~의 관점에서",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "fusion",
+"m": "융합",
+"pos": "n",
+"f": 1
+},
+{
+"w": "gain currency",
+"m": "통용되다, 널리 받아들여지다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "gain insight into",
+"m": "~에 대한 통찰을 얻다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "generalization",
+"m": "일반화",
+"pos": "n",
+"f": 1
+},
+{
+"w": "generic",
+"m": "일반적인, 포괄적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "get around",
+"m": "~을 우회하다, 피하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "get by with",
+"m": "~으로 그럭저럭 해내다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "get in the way",
+"m": "방해가 되다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "get the hang of",
+"m": "~의 요령을 익히다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "give away",
+"m": "양도하다, 거저 주다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "give leeway to",
+"m": "~에게 여지를 주다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "given",
+"m": "~을 고려하면",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "go a long way towards",
+"m": "~에 크게 기여하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "go hand-in-hand",
+"m": "함께 가다, 병행되다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "go into decline",
+"m": "쇠퇴하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "go into effect",
+"m": "효력을 발휘하다, 시행되다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "goal-oriented",
+"m": "목표 지향적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "gold standard",
+"m": "최고 기준",
+"pos": "n",
+"f": 1
+},
+{
+"w": "grasp",
+"m": "이해, 파악",
+"pos": "n",
+"f": 1
+},
+{
+"w": "gratify",
+"m": "만족시키다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "have a tendency to",
+"m": "~하는 경향이 있다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "have recourse to",
+"m": "~에 의지하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "heighten",
+"m": "높이다, 고조시키다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "heredity",
+"m": "유전",
+"pos": "n",
+"f": 1
+},
+{
+"w": "heritage",
+"m": "유산",
+"pos": "n",
+"f": 1
+},
+{
+"w": "hibernation",
+"m": "동면",
+"pos": "n",
+"f": 1
+},
+{
+"w": "hierarchical",
+"m": "위계적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "hold in common",
+"m": "공동으로 소유하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "hollow out",
+"m": "속을 비게 하다, 공동화하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "hurdle",
+"m": "장애물",
+"pos": "n",
+"f": 1
+},
+{
+"w": "husbandry",
+"m": "사육, 경영",
+"pos": "n",
+"f": 1
+},
+{
+"w": "hype",
+"m": "과대 선전",
+"pos": "n",
+"f": 1
+},
+{
+"w": "hypothesize",
+"m": "가설을 세우다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "idiosyncratic",
+"m": "특이한, 독특한",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "idle",
+"m": "공회전하다; 게으른, 놀고 있는",
+"pos": "v",
+"f": 1
+},
+{
+"w": "illustrative",
+"m": "잘 보여주는, 예시적인",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "imbalance",
+"m": "불균형",
+"pos": "n",
+"f": 1
+},
+{
+"w": "imitate",
+"m": "모방하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "immerse",
+"m": "몰입시키다, 담그다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "immobile",
+"m": "움직이지 않는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "immoral",
+"m": "부도덕한",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "impair",
+"m": "손상시키다, 약화시키다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "impartiality",
+"m": "공평성, 공정성",
+"pos": "n",
+"f": 1
+},
+{
+"w": "imperceptible",
+"m": "감지할 수 없는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "imperceptibly",
+"m": "감지할 수 없게",
+"pos": "adv",
+"f": 1
+},
+{
+"w": "implications",
+"m": "영향, 함의",
+"pos": "n",
+"f": 1
+},
+{
+"w": "imply",
+"m": "암시하다, 함축하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "impose order on",
+"m": "~에 질서를 부여하다",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "improbable",
+"m": "있을 법하지 않은",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "in a favourable light",
+"m": "호의적으로",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "in a row",
+"m": "연달아, 연속으로",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "in a vacuum",
+"m": "고립된 상태에서, 진공 속에서",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "in accordance with",
+"m": "~에 따라",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "in an orderly fashion",
+"m": "질서 있게",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "in comparison to",
+"m": "~에 비해",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "in contrast to",
+"m": "~와 대조적으로",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "in good faith",
+"m": "선의로",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "in keeping with",
+"m": "~와 일치하는, 부합하는",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "in line with",
+"m": "~와 일치하는, 부합하는",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "in proportion to",
+"m": "~에 비례하여",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "in return",
+"m": "그 대가로, 답례로",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "in the event of",
+"m": "~이 발생할 경우",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "in the face of",
+"m": "~에 직면하여, ~에도 불구하고",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "in the first place",
+"m": "애초에",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "in transit",
+"m": "이동 중인, 운송 중인",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "incentive",
+"m": "유인, 동기",
+"pos": "n",
+"f": 1
+},
+{
+"w": "incoherent",
+"m": "일관성 없는, 앞뒤가 안 맞는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "incorporate",
+"m": "포함하다, 통합하다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "indication",
+"m": "표시, 징후",
+"pos": "n",
+"f": 1
+},
+{
+"w": "indifferent",
+"m": "무관심한",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "inequality",
+"m": "불평등",
+"pos": "n",
+"f": 1
+},
+{
+"w": "inert",
+"m": "생기 없는, 불활성의",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "inextricably",
+"m": "뗄 수 없게",
+"pos": "adv",
+"f": 1
+},
+{
+"w": "inextricably associated with",
+"m": "불가분하게 연관된",
+"pos": "phr",
+"f": 1
+},
+{
+"w": "influential",
+"m": "영향력 있는",
+"pos": "adj",
+"f": 1
+},
+{
+"w": "infrastructure",
+"m": "기반 시설",
+"pos": "n",
+"f": 1
+},
+{
+"w": "inhabit",
+"m": "~에 살다, 깃들다",
+"pos": "v",
+"f": 1
+},
+{
+"w": "inherent in",
+"m": "~에 내재된",
+"pos": "phr",
+"f": 1
+}
+]
