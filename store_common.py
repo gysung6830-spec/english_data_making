@@ -98,7 +98,17 @@ def seed_data_dir() -> None:
 ORDER_STATUSES = ["입금대기", "입금확인", "발송완료", "취소"]
 SUBMIT_STATUSES = ["검토대기", "승인", "반려"]
 ORDER_KIND_LABELS = {"product": "자료 주문", "custom": "맞춤 제작",
-                     "request": "자료 요청", "pass": "프리패스", "inquiry": "문의"}
+                     "mto": "주문제작 자료", "request": "자료 요청",
+                     "pass": "프리패스", "inquiry": "문의"}
+
+# 주문제작 자료를 며칠 안에 드리는지. 화면에 적는 약속이자 관리자 화면의 기준입니다.
+MTO_DAYS = 1
+
+
+def made_to_order_materials() -> list[dict]:
+    """미리 만들어 두지 않고, 신청을 받아 만드는 자료."""
+    return [m for m in load_materials()["materials"]
+            if m.get("made_to_order") and m.get("active", True)]
 
 # 문의 종류 — 무엇에 관한 문의인지 골라 주시면 답이 빨라집니다.
 INQUIRY_KINDS = {

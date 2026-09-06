@@ -61,6 +61,9 @@
   <a class="todo {{ 'hot' if todo.발송 else 'zero' }}"
      href="{{ url_for('admin.orders', kind='product', status='입금확인') }}">
     <b>{{ todo.발송 }}</b><small>자료 보낼 주문</small></a>
+  <a class="todo {{ 'hot' if todo.주문제작 else 'zero' }}"
+     href="{{ url_for('admin.orders', kind='mto', status='입금대기') }}">
+    <b>{{ todo.주문제작 }}</b><small>만들 주문제작 자료 <b>(1일 내)</b></small></a>
   <a class="todo {{ 'hot' if todo.문의답변 else 'zero' }}"
      href="{{ url_for('admin.orders', status='입금대기') }}">
     <b>{{ todo.문의답변 }}</b><small>답할 문의 · 요청</small></a>

@@ -103,6 +103,19 @@
         </div>
         {% if m.tagline %}<p class="mat-tagline">{{ m.tagline }}</p>{% endif %}
         {% if m.subline %}<p class="mat-subline">{{ m.subline }}</p>{% endif %}
+        {% if m.made_to_order %}
+          {# 미리 만들어 두지 않는 자료입니다. 어떻게 받는지 그 자리에서 말해 줍니다. #}
+          <div class="mto-box">
+            <div>
+              <b>이 자료는 신청을 받아 만듭니다.</b>
+              <p class="mb-0">쓰실 교재·범위에 맞춰 그때 만들어야 하는 자료입니다.
+                신청하시면 <b>{{ mto_days }}일 안에</b> 만들어
+                <b>내 자료함</b>에 넣어 두고 이메일로 알려 드립니다.</p>
+            </div>
+            <a class="btn btn-primary btn-sm"
+               href="{{ url_for('custom', mode='mto', mat=m.id) }}">신청하기</a>
+          </div>
+        {% endif %}
 
         {% set pics = shots.get(m.id, []) %}
         {% if pics %}

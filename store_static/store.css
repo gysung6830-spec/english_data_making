@@ -926,6 +926,15 @@ input[type=file]{
 .pick-none{border:1px dashed var(--line); border-radius:var(--r); padding:18px 20px;
   background:var(--card); word-break:keep-all;}
 .pick-none p{font-size:14.5px; color:var(--muted); line-height:1.75;}
+
+/* 주문제작 자료 — 미리 만들어 두지 않는다는 것과, 받는 길을 함께 보여 줍니다 */
+.mto-box{display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+  margin:14px 0 18px; padding:15px 18px; border:1px dashed #d9c9a8;
+  border-radius:var(--r); background:#fdfaf2; word-break:keep-all;}
+.mto-box > div{flex:1; min-width:240px;}
+.mto-box b{font-size:14.5px;}
+.mto-box p{margin-top:5px; font-size:13.5px; color:var(--muted); line-height:1.7;}
+.mto-box .btn{white-space:nowrap;}
 .pick-none b{color:var(--ink);}
 
 .plan-list{list-style:none; margin:0; padding:0; display:flex;

@@ -146,6 +146,10 @@ def dashboard():
     todo = {
         "입금확인": one("SELECT COUNT(*) FROM orders WHERE kind='product' AND status='입금대기'"),
         "발송": one("SELECT COUNT(*) FROM orders WHERE kind='product' AND status='입금확인'"),
+        # 주문제작은 하루 안에 만들어 드린다고 적어 두었습니다. 놓치면 안 되니
+        # 따로 셉니다.
+        "주문제작": one("SELECT COUNT(*) FROM orders WHERE kind='mto'"
+                    " AND status='입금대기'"),
         "문의답변": one("SELECT COUNT(*) FROM orders WHERE kind IN ('request','custom','pass')"
                     " AND status='입금대기'"),
         "시험지검토": one("SELECT COUNT(*) FROM submissions WHERE status='검토대기'"),

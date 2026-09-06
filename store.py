@@ -496,7 +496,7 @@ def lineup():
     return render_template("lineup.html", intro=data.get("intro", {}),
                            groups=sc.grouped_materials(),
                            cat_preview=category_preview(sc.load_catalog()),
-                           shots=shots,
+                           shots=shots, mto_days=sc.MTO_DAYS,
                            ready_samples=ready, sample_count=len(ready))
 
 
@@ -816,12 +816,20 @@ def custom():
 
     request : 찾는 교재 이름만 적어 두면, 그 교재를 만든 뒤 연락드립니다. (지문 불필요)
     custom  : 내 지문을 보내 같은 형식으로 제작을 의뢰합니다.
+    mto     : 미리 만들어 두지 않는 자료(필생보 독학용 · 동형모의고사)를 신청합니다.
     """
-    default_mode = "request" if request.args.get("mode") != "custom" else "custom"
+    MODES = ("request", "custom", "mto")
+    mto_mats = sc.made_to_order_materials()
+    want = request.args.get("mode")
+    default_mode = want if want in MODES else "request"
     if request.method == "GET":
-        return render_template("custom.html", form={"mode": default_mode}, errors=[])
+        return render_template("custom.html", errors=[], mto_mats=mto_mats,
+                               mto_days=sc.MTO_DAYS,
+                               form={"mode": default_mode,
+                                     "mto_pick": request.args.get("mat", "")})
 
-    mode = "custom" if request.form.get("mode") == "custom" else "request"
+    mode = request.form.get("mode")
+    mode = mode if mode in MODES else "request"
     if sc.too_many_submits(request, "custom"):
         return render_template("custom.html", form=request.form,
                                errors=["잠시 뒤에 다시 시도해 주세요."]), 429
@@ -838,12 +846,20 @@ def custom():
             "희망 마감일": sc.clean(request.form.get("due"), 40) or "-",
             "지문 파일 링크": sc.clean(request.form.get("file_link"), 300) or "-",
         })
+    if mode == "mto":
+        known = {m["id"]: m for m in mto_mats}
+        picked = [known[x]["name"] for x in request.form.getlist("mto_pick") if x in known]
+        detail["신청 자료"] = ", ".join(picked) or "-"
+        if not picked:
+            errors.append("어떤 자료를 만들어 드릴지 골라 주세요.")
     if not wanted:
         errors.append("어떤 교재·회차를 찾으시는지 적어 주세요.")
     if errors:
-        return render_template("custom.html", form=request.form, errors=errors), 400
+        return render_template("custom.html", form=request.form, errors=errors,
+                               mto_mats=mto_mats, mto_days=sc.MTO_DAYS), 400
 
-    label = "자료 요청" if mode == "request" else "맞춤 제작 의뢰"
+    label = {"request": "자료 요청", "custom": "맞춤 제작 의뢰",
+             "mto": "주문제작 자료 신청"}[mode]
     ts = sc.stamp()
     order_no = sc.insert_numbered(
         """INSERT INTO orders (order_no, kind, product_name, quantity, amount,
@@ -861,7 +877,9 @@ def custom():
                    f"이메일   : {data['email']}"]
                   + [f"{k} : {v}" for k, v in detail.items()]
                   + [f"요청사항 : {data['message'] or '-'}", f"접수시각 : {ts}"]))
-    return render_template("custom_done.html", order_no=order_no, mode=mode, wanted=wanted)
+    return render_template("custom_done.html", order_no=order_no, mode=mode,
+                           wanted=wanted, mto_days=sc.MTO_DAYS,
+                           picked=detail.get("신청 자료", ""))
 
 
 @app.route("/contact", methods=["GET", "POST"])

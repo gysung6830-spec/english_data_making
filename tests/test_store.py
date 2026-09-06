@@ -2726,6 +2726,61 @@ def test_list_hides_price_until_you_open_the_book():
     print("PASS  목록은 값 대신 내용 · 값은 교재 화면에서")
 
 
+def test_made_to_order_has_its_own_way_in():
+    """필생보 독학용 · 동형모의고사는 미리 안 만듭니다. 신청해서 받는 길이 있어야 합니다."""
+    with store.app.app_context():
+        mto = sc.made_to_order_materials()
+    ids = {m["id"] for m in mto}
+    assert ids == {"pilsaengbo-solo", "mocktest"}, ids
+    # 미리 만들어 두지 않으므로 상품 목록에도 없어야 합니다
+    sold = {x for p in sc.load_catalog()["products"] for x in (p.get("materials") or [])}
+    assert not (ids & sold), ids & sold
+
+    # 라인업에서 왜 없는지와 어떻게 받는지를 그 자리에서 알려 줍니다
+    page = body(client().get("/lineup"))
+    assert page.count('class="mto-box"') == len(mto)
+    assert "신청을 받아 만듭니다" in page and f"{sc.MTO_DAYS}일 안에" in page
+    assert "내 자료함" in page and "mode=mto" in page
+
+    # 신청 화면은 고른 자료가 미리 체크된 채로 열립니다
+    form = body(client().get("/custom?mode=mto&mat=mocktest"))
+    assert "주문제작 자료 신청" in form
+    assert 'value="mocktest"' in form and "checked" in form
+    assert f"{sc.MTO_DAYS}일 안에 만들어 드립니다" in form
+
+    # 무엇을 만들지 안 고르면 반려합니다
+    bad = client().post("/custom", data={
+        "mode": "mto", "wanted": "2026 수능특강 3강", "name": "선생",
+        "email": "mto@example.com", "agree": "1"})
+    assert bad.status_code == 400 and "골라 주세요" in body(bad)
+
+    resp = client().post("/custom", data={
+        "mode": "mto", "mto_pick": ["mocktest", "pilsaengbo-solo"],
+        "wanted": "2026 수능특강 3~5강", "name": "선생", "phone": "010-1111-2222",
+        "email": "mto@example.com", "agree": "1"})
+    assert resp.status_code == 200
+    done = body(resp)
+    assert "주문제작 신청이 접수되었습니다" in done
+    assert "동형모의고사" in done and "내 자료함" in done
+    assert f"{sc.MTO_DAYS}일 안에" in done
+
+    with store.app.app_context():
+        row = sc.get_db().execute(
+            "SELECT * FROM orders WHERE email = 'mto@example.com'").fetchone()
+    assert row["kind"] == "mto" and row["product_name"] == "주문제작 자료 신청"
+    detail = json.loads(row["detail_json"])
+    assert "동형모의고사 2회" in detail["신청 자료"]
+    assert "필생보 · 독학용" in detail["신청 자료"]
+    assert sc.ORDER_KIND_LABELS["mto"] == "주문제작 자료"
+
+    # 관리자 화면에도 뜨고, 첫 화면 할 일에 따로 셉니다 (하루 약속이라 놓치면 안 됩니다)
+    a = admin()
+    assert "2026 수능특강 3~5강" in body(a.get("/admin/orders?kind=mto"))
+    home = body(a.get("/admin"))
+    assert "만들 주문제작 자료" in home and "kind=mto" in home
+    print("PASS  주문제작 자료 — 신청 → 내 자료함 → 이메일")
+
+
 def test_lineup_shots_upload_and_show():
     """지면 사진을 관리자에서 올리면 오르티카 라인업에 바로 걸려야 합니다."""
     import io as _io
@@ -4029,6 +4084,7 @@ def run_all():
     test_new_product_appears_in_home_updates()
     test_units_follow_what_the_admin_uploaded()
     test_list_hides_price_until_you_open_the_book()
+    test_made_to_order_has_its_own_way_in()
     test_lineup_shots_upload_and_show()
     test_mobile_filters_collapse()
     test_long_pages_have_shortcuts()
