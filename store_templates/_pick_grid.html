@@ -19,7 +19,7 @@
             <b>{{ kind_labels.get(m) or kind_names.get(m, m) }}</b>
             <span class="pp-mats">
               {%- for mm in kind_mats.get(m, []) %}
-                <span class="pp-mat"><i>{{ mm.no }}</i>{{ mm.name }}</span>
+                <span class="pp-mat">{{ mm.name }}</span>
               {%- endfor %}
             </span>
           </span>

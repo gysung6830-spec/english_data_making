@@ -1,0 +1,43 @@
+{# 파일을 끌어다 놓는 자리. 맞춤 제작 의뢰와 시험지 나눔이 함께 씁니다.
+   화면에 id="drop"(감싸는 label)과 id="files"(input)가 있어야 합니다. #}
+<script>
+(function () {
+  var drop = document.getElementById('drop');
+  var input = document.getElementById('files');
+  if (!drop || !input) return;
+  var badge = drop.querySelector('.dz-file');
+  var title = drop.querySelector('.dz-title');
+  var first = title ? title.textContent : '';
+
+  function show(list) {
+    var names = [].map.call(list || [], function (f) { return f.name; });
+    if (badge) {
+      badge.textContent = names.join(' · ');
+      badge.hidden = !names.length;
+    }
+    drop.classList.toggle('has', !!names.length);
+    if (title) {
+      title.textContent = names.length ? names.length + '개를 올립니다' : first;
+    }
+  }
+  input.addEventListener('change', function () { show(input.files); });
+
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) {
+      e.preventDefault(); drop.classList.add('over');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) {
+      e.preventDefault();
+      if (ev === 'dragleave' && drop.contains(e.relatedTarget)) return;
+      drop.classList.remove('over');
+    });
+  });
+  drop.addEventListener('drop', function (e) {
+    if (!e.dataTransfer || !e.dataTransfer.files.length) return;
+    input.files = e.dataTransfer.files;        /* 고른 것과 똑같이 담깁니다 */
+    show(input.files);
+  });
+})();
+</script>

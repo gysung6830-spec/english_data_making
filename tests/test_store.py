@@ -235,8 +235,9 @@ def test_package_filter():
     """패키지로 거르면 그 갈래에 든 자료만 남아야 합니다."""
     # 교재 칸에 걸리는 자료 딱지로 봅니다 (안내 문구에도 같은 말이 나오니
     # 번호까지 붙은 딱지 모양을 그대로 찾습니다)
+    # 딱지에는 번호 없이 이름만 붙습니다
     mats = sc.material_map()
-    chip = lambda mid: f'<span class="n">{mats[mid]["no"]}</span>{mats[mid]["name"]}'
+    chip = lambda mid: f'pk-{sc.material_package()[mid]}">{mats[mid]["name"]}'
     only_analysis = body(client().get("/products?package=analysis"))
     assert chip("analysis") in only_analysis
     assert chip("variants") not in only_analysis
@@ -573,13 +574,63 @@ def test_request_requires_wanted():
     print("PASS  교재 이름 없으면 반려")
 
 
+def test_submit_takes_photos_by_drag_and_drop():
+    """시험지 나눔 — 사진 여러 장을 끌어다 놓아 보낼 수 있어야 합니다."""
+    import io as _io
+    page = body(client().get("/submit"))
+    assert 'class="dropzone"' in page and "끌어다 놓으세요" in page
+    assert 'name="files"' in page and "multiple" in page
+    assert "input.files = e.dataTransfer.files" in page      # 끌어다 놓은 것이 담깁니다
+    # 쿠폰은 메일로 가니 이메일은 꼭 받습니다
+    email = page[page.index('id="email"'):page.index('id="email"') + 200]
+    assert "required" in email
+    assert "쿠폰 코드를 이 주소로 보내 드립니다" in page
+
+    c = client()
+    resp = c.post("/submit", data={
+        "school": "여러장고", "grade": "고2", "exam_type": "기말고사",
+        "files": [(_io.BytesIO(b"%PDF-1.4 a"), "1쪽.pdf"),
+                  (_io.BytesIO(b"\x89PNG\r\n\x1a\n"), "2쪽.png"),
+                  (_io.BytesIO(b"\x89PNG\r\n\x1a\n"), "3쪽.png")],
+        "name": "박선생", "phone": "010-5555-6666", "email": "many@example.com",
+        "agree": "1", "agree_source": "1"}, content_type="multipart/form-data")
+    assert resp.status_code == 200 and "시험지 잘 받았습니다" in body(resp)
+
+    with store.app.app_context():
+        row = sc.get_db().execute(
+            "SELECT * FROM submissions WHERE email = 'many@example.com'").fetchone()
+    names = row["file_name"].split(", ")
+    assert len(names) == 3, names
+    assert all(n.startswith(row["submit_no"]) for n in names), names   # 이름은 우리가 붙입니다
+    for n in names:
+        assert (sc.SUBMIT_DIR / n).is_file()
+
+    # 관리자 화면에 올라온 만큼 다 걸리고, 눌러 받을 수 있습니다
+    a = admin()
+    listed = body(a.get("/admin/submissions"))
+    for n in names:
+        assert n in listed, n
+    assert a.get(f"/admin/submissions/file/{names[0]}").status_code in (200, 302)
+
+    # 파일도 링크도 없으면 반려합니다
+    none = client().post("/submit", data={
+        "school": "빈손고", "name": "홍", "phone": "010-1-2",
+        "email": "none@example.com", "agree": "1", "agree_source": "1"})
+    assert none.status_code == 400 and "올리거나" in body(none)
+
+    for n in names:
+        (sc.SUBMIT_DIR / n).unlink(missing_ok=True)
+    print("PASS  시험지 나눔 — 여러 장 끌어다 놓기")
+
+
 # ---- 4. 시험지 제출 → 쿠폰 → 할인 (한 줄로) -------------------------------
 def test_submission_to_coupon_to_discount():
     c = client()
     resp = c.post("/submit", data={
         "school": "대치고등학교", "grade": "고3", "exam_type": "중간고사",
         "exam_term": "2026년 1학기", "scope": "수능특강 1~5강",
-        "file": (io.BytesIO(b"%PDF-1.4 fake"), "exam.pdf"),
+        "files": [(io.BytesIO(b"%PDF-1.4 fake"), "exam.pdf"),
+                  (io.BytesIO(b"\x89PNG\r\n\x1a\n"), "2쪽.png")],
         "name": "이선생", "phone": "010-3333-4444", "email": "lee@example.com",
         "agree": "1", "agree_source": "1"},
         content_type="multipart/form-data")
@@ -2040,7 +2091,7 @@ def test_contact_page():
         assert label in text, label
     assert "주문번호" in text                       # 자료 미도착 문의를 바로 찾기 위해
 
-    # 위 메뉴는 여섯 가지만 둡니다. 문의는 발밑과 이용 안내에서 갑니다.
+    # 위 메뉴에 문의는 없습니다. 발밑과 이용 안내에서 갑니다.
     home = body(client().get("/"))
     assert home.count('href="/contact"') >= 1                  # 바닥글
     assert 'href="/contact"' in body(client().get("/guide"))
@@ -2301,14 +2352,14 @@ def test_menu_has_no_duplicates():
     bar = home.split('class="qb-track"', 1)[1].split("</nav>", 1)[0]
     for where, html in (("머리말 메뉴", head), ("폰 줄띠", bar)):
         for label in ("무료 자료", "단어 시험지", "모의고사", "EBS 부교재",
-                      "이용 안내", "프리패스"):
+                      "할인쿠폰", "이용 안내", "프리패스"):
             n = html.count(f">{label}</a>")
             assert n == 1, f"{where} 에 '{label}' 가 {n}번 들어 있습니다"
-        # 여섯 가지만 둡니다. 나머지는 첫 화면 가운데와 발밑에 있습니다.
+        # 이만큼만 둡니다. 나머지는 첫 화면 가운데와 발밑에 있습니다.
         for gone in ("자료 목록", "오르티카 라인업", "공지", "문의", "내 자료함",
                      "교과서", "형광펜 독해"):
             assert f">{gone}</a>" not in html, f"{where} 에 '{gone}' 가 남아 있습니다"
-    print("PASS  메뉴는 여섯 가지 · 같은 항목이 두 번 안 들어감")
+    print("PASS  메뉴 일곱 가지 · 같은 항목이 두 번 안 들어감")
 
 
 def test_mobile_quick_bar():
@@ -4391,6 +4442,7 @@ def run_all():
     test_request_needs_no_passage()
     test_custom_request_accepted()
     test_request_requires_wanted()
+    test_submit_takes_photos_by_drag_and_drop()
     test_submission_to_coupon_to_discount()
     test_submission_requires_file_or_link()
     test_cart_add_view_remove()

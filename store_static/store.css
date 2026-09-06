@@ -534,7 +534,6 @@ input[type=file]{
   font-size:12.5px; font-weight:700; color:var(--brand-dark); background:var(--brand-soft);
   border-radius:6px; padding:4px 10px;
 }
-.mat-chip .n{color:currentColor; opacity:.72; margin-right:4px; font-weight:800;}
 /* 딱지 색은 '어느 패키지에 드는가' 로 가릅니다. 위 패키지 칸과 같은 색이라
    훑기만 해도 무엇이 읽는 자료이고 무엇이 푸는 자료인지 갈립니다. */
 .mat-chip.pk-analysis{background:#e9f1fc; color:#1e4bb8;}
@@ -1756,14 +1755,11 @@ label.dropzone{
 .pp-body{display:flex; flex-direction:column; gap:8px; min-width:0;}
 .pp-body > b{font-size:16px; letter-spacing:-.02em;}
 .pp-mats{display:flex; flex-wrap:wrap; gap:5px;}
-.pp-mat{display:inline-flex; align-items:center; gap:4px; padding:3px 8px;
+.pp-mat{display:inline-flex; align-items:center; padding:3px 8px;
   font-size:12px; font-weight:600; color:var(--ink-2); background:#f3f1ec;
   border-radius:6px; white-space:nowrap;}
-.pp-mat i{font-style:normal; font-weight:800; font-size:10.5px; color:var(--brand);}
 .pkg-pick.pkg-analysis .pp-mat{background:#e6f0fb; color:#1e4bb8;}
-.pkg-pick.pkg-analysis .pp-mat i{color:#3b6fd4;}
 .pkg-pick.pkg-problem .pp-mat{background:#fdeee6; color:#a3450f;}
-.pkg-pick.pkg-problem .pp-mat i{color:#c96524;}
 
 /* --- 밑: 강 한 줄 = 그 강의 자료 낱개 --- */
 .unit-list{border:1px solid var(--line); border-radius:12px; background:#fff;

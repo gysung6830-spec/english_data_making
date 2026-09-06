@@ -188,43 +188,6 @@
     radios.forEach(function (r) { r.addEventListener('change', sync); });
     sync();
   })();
-
-  /* 파일은 끌어다 놓아도 되고, 눌러서 골라도 됩니다. */
-  (function () {
-    var drop = document.getElementById('drop');
-    if (!drop) return;
-    var input = document.getElementById('files');
-    var badge = drop.querySelector('.dz-file');
-    var title = drop.querySelector('.dz-title');
-
-    function show(list) {
-      var names = [].map.call(list || [], function (f) { return f.name; });
-      badge.textContent = names.join(' · ');
-      badge.hidden = !names.length;
-      drop.classList.toggle('has', !!names.length);
-      title.textContent = names.length
-        ? names.length + '개를 올립니다'
-        : '여기에 파일을 끌어다 놓으세요';
-    }
-    input.addEventListener('change', function () { show(input.files); });
-
-    ['dragenter', 'dragover'].forEach(function (ev) {
-      drop.addEventListener(ev, function (e) {
-        e.preventDefault(); drop.classList.add('over');
-      });
-    });
-    ['dragleave', 'drop'].forEach(function (ev) {
-      drop.addEventListener(ev, function (e) {
-        e.preventDefault();
-        if (ev === 'dragleave' && drop.contains(e.relatedTarget)) return;
-        drop.classList.remove('over');
-      });
-    });
-    drop.addEventListener('drop', function (e) {
-      if (!e.dataTransfer || !e.dataTransfer.files.length) return;
-      input.files = e.dataTransfer.files;          /* 고른 것과 똑같이 담깁니다 */
-      show(input.files);
-    });
-  })();
 </script>
+{% include "_dropzone.html" %}
 {% endblock %}

@@ -49,7 +49,8 @@
              class="{{ 'on' if request.args.get('category') == c.id }}">{{ c.name }}</a>
         {% endif %}{% endfor %}
       {% endfor %}
-      <a href="{{ url_for('guide') }}" class="{{ 'on' if request.endpoint in ['guide','custom','submit'] }}">이용 안내</a>
+      <a href="{{ url_for('submit') }}" class="{{ 'on' if request.endpoint == 'submit' }}">할인쿠폰</a>
+      <a href="{{ url_for('guide') }}" class="{{ 'on' if request.endpoint in ['guide','custom'] }}">이용 안내</a>
       {% if passcfg.enabled %}
         <a href="{{ url_for('pass_page') }}" class="{{ 'on' if request.endpoint == 'pass_page' }}">프리패스</a>
       {% endif %}
@@ -84,7 +85,7 @@
 
 {# 폰에서는 메뉴를 누르지 않아도 갈 곳이 다 보이도록, 옆으로 미는 줄띠를 답니다. #}
 <nav class="quick-bar" aria-label="바로가기">
-  {# 위 메뉴와 같은 여섯 가지. 좁은 화면에서 손가락으로 밀어 고릅니다. #}
+  {# 위 메뉴와 같은 것들. 좁은 화면에서 손가락으로 밀어 고릅니다. #}
   <div class="qb-track">
     <a href="{{ url_for('free') }}" class="qb-free {{ 'on' if request.endpoint in ['free','free_detail','samples'] }}">무료 자료</a>
     <a href="{{ url_for('words_page') }}" class="{{ 'on' if request.endpoint in ['words_page','words_book','words_make','words_pick','words_sheet'] }}">단어 시험지</a>
@@ -94,7 +95,8 @@
            class="{{ 'on' if request.args.get('category') == c.id }}">{{ c.name }}</a>
       {% endif %}{% endfor %}
     {% endfor %}
-    <a href="{{ url_for('guide') }}" class="{{ 'on' if request.endpoint in ['guide','custom','submit'] }}">이용 안내</a>
+    <a href="{{ url_for('submit') }}" class="{{ 'on' if request.endpoint == 'submit' }}">할인쿠폰</a>
+    <a href="{{ url_for('guide') }}" class="{{ 'on' if request.endpoint in ['guide','custom'] }}">이용 안내</a>
     {% if passcfg.enabled %}
       <a href="{{ url_for('pass_page') }}" class="{{ 'on' if request.endpoint == 'pass_page' }}">프리패스</a>
     {% endif %}

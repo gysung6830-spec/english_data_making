@@ -105,20 +105,25 @@
           </div>
 
           <div class="field">
-            <label for="file">시험지 파일</label>
-            <input type="file" id="file" name="file"
-                   accept=".pdf,.jpg,.jpeg,.png,.hwp,.hwpx,.zip">
-            <p class="muted mb-0" style="font-size:13.5px;margin-top:6px;">
-              PDF · 사진(JPG/PNG) · 한글(HWP) · ZIP · 최대 25MB.
-              사진으로 찍어 올리셔도 됩니다.
+            <label for="files">시험지 파일</label>
+            <label class="dropzone" for="files" id="drop">
+              <input type="file" id="files" name="files" multiple
+                     accept=".pdf,.jpg,.jpeg,.png,.hwp,.hwpx,.zip">
+              <b class="dz-title">여기에 시험지를 끌어다 놓으세요</b>
+              <span class="dz-sub">또는 눌러서 고르기 · PDF · 사진(JPG/PNG) · 한글(HWP) · ZIP</span>
+              <span class="dz-file" hidden></span>
+            </label>
+            <p class="muted mb-0" style="font-size:13.5px;margin-top:8px;">
+              <b>사진으로 찍어 올리셔도 됩니다.</b> 여러 장이면 한 번에 다섯 장까지,
+              모두 합쳐 30MB까지.
             </p>
           </div>
           <div class="field">
-            <label for="file_link">또는 파일 링크</label>
+            <label for="file_link">파일이 클 때 — 공유 링크 <span class="hint">선택</span></label>
             <input type="text" id="file_link" name="file_link" value="{{ form.file_link or '' }}"
                    placeholder="구글 드라이브 / 네이버 MYBOX 공유 링크">
             <p class="muted mb-0" style="font-size:13.5px;margin-top:6px;">
-              파일이 크면 링크로 주셔도 됩니다. 둘 중 하나만 있으면 됩니다.
+              파일과 링크 <b>둘 중 하나만</b> 있으면 됩니다.
             </p>
           </div>
 
@@ -165,4 +170,6 @@
     {% endif %}
   </div>
 </section>
+
+{% include "_dropzone.html" %}
 {% endblock %}

@@ -44,9 +44,14 @@
           <td><small>{{ r['scope'] or '-' }}</small>
             {% if r['message'] %}<br><small class="muted">💬 {{ r['message'] }}</small>{% endif %}</td>
           <td>
+            {# 여러 장을 나눠 올리실 수 있어, 올라온 만큼 다 겁니다 #}
             {% if r['file_name'] %}
-              <a class="btn btn-ghost btn-sm"
-                 href="{{ url_for('admin.submission_file', filename=r['file_name']) }}">내려받기</a>
+              <div class="req-files">
+                {% for name in r['file_name'].split(', ') %}
+                  <a class="tag tag-on"
+                     href="{{ url_for('admin.submission_file', filename=name) }}">📎 {{ name }}</a>
+                {% endfor %}
+              </div>
             {% endif %}
             {% if r['file_link'] %}
               <div style="margin-top:5px;"><a href="{{ r['file_link'] }}" target="_blank"

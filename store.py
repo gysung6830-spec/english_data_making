@@ -991,7 +991,6 @@ def contact():
 # ---------------------------------------------------------------------------
 # 시험지 제출 → 할인 쿠폰
 # ---------------------------------------------------------------------------
-SUBMIT_EXTS = {".pdf", ".jpg", ".jpeg", ".png", ".hwp", ".hwpx", ".zip"}
 
 
 @app.route("/submit", methods=["GET", "POST"])
@@ -1012,12 +1011,14 @@ def submit():
         errors.append("학교 이름을 적어 주세요.")
 
     file_link = sc.clean(request.form.get("file_link"), 300)
-    upload = request.files.get("file")
-    saved_name = ""
-    if upload and upload.filename:
-        ext = os.path.splitext(upload.filename)[1].lower()
-        if ext not in SUBMIT_EXTS:
+    # 시험지는 여러 장을 사진으로 찍어 보내시는 분이 많습니다
+    uploads = [f for f in request.files.getlist("files") if f and f.filename]
+    if uploads:
+        if any(os.path.splitext(f.filename)[1].lower() not in sc.UPLOAD_EXTS
+               for f in uploads):
             errors.append("PDF · 사진(JPG/PNG) · 한글(HWP) · ZIP 파일만 올릴 수 있습니다.")
+        elif len(uploads) > sc.UPLOAD_MAX:
+            errors.append(f"파일은 한 번에 {sc.UPLOAD_MAX}장까지 올리실 수 있습니다.")
     elif not file_link:
         errors.append("시험지 파일을 올리거나, 파일이 있는 링크를 적어 주세요.")
     if not request.form.get("agree_source"):
@@ -1031,11 +1032,8 @@ def submit():
     while sc.get_db().execute("SELECT 1 FROM submissions WHERE submit_no = ?",
                               (submit_no,)).fetchone():
         submit_no = sc.new_submit_no()
-    if upload and upload.filename:
-        ext = os.path.splitext(upload.filename)[1].lower()
-        sc.SUBMIT_DIR.mkdir(parents=True, exist_ok=True)
-        saved_name = f"{submit_no}{ext}"
-        upload.save(sc.SUBMIT_DIR / saved_name)
+    saved, _ = sc.save_uploads(uploads, sc.SUBMIT_DIR, submit_no)
+    saved_name = ", ".join(saved)
 
     ts = sc.stamp()
     db = sc.get_db()
