@@ -853,13 +853,25 @@ label.dropzone{
 /* 이용 안내 — 규정 표와 허용·금지 상자 */
 .policy-table{margin:14px 0 0; width:100%;}
 .policy-table th{
-  text-align:left; vertical-align:top; font-size:14px; font-weight:700;
+  width:230px; text-align:left; vertical-align:top; font-size:14px; font-weight:700;
   color:var(--ink-2); padding:11px 14px 11px 0; border-top:1px solid var(--line);
 }
+.policy-table.narrow th{width:150px;}
 .policy-table td{
   font-size:14.5px; line-height:1.7; padding:11px 0; border-top:1px solid var(--line);
 }
 .policy-table th small{display:block; font-weight:400; color:var(--muted); font-size:12.5px;}
+/* 폰에서는 두 칸이 나란히 서면 오른쪽이 너무 좁아 두세 글자씩 끊깁니다.
+   좁은 화면에서는 제목을 위에, 내용을 아래에 둡니다. */
+@media (max-width: 640px){
+  .policy-table, .policy-table tbody, .policy-table tr,
+  .policy-table th, .policy-table td{display:block; width:auto;}
+  .policy-table tr{border-top:1px solid var(--line); padding:12px 0;}
+  .policy-table th, .policy-table.narrow th{
+    width:auto; border-top:0; padding:0 0 4px; font-size:14.5px; color:var(--ink);
+  }
+  .policy-table td{border-top:0; padding:0;}
+}
 .policy-h{font-size:15.5px; font-weight:800; margin:22px 0 6px; color:var(--ink);}
 .policy-box{border-radius:11px; padding:16px 18px; border:1px solid var(--line);}
 .policy-box > b{display:block; font-size:15px; margin-bottom:8px;}

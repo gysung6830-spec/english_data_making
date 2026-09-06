@@ -2381,6 +2381,21 @@ def test_mobile_quick_bar():
     print("PASS  폰에서 카테고리 줄띠")
 
 
+def test_policy_tables_stack_on_phone():
+    """폰에서 규정 표가 두 칸으로 서면 오른쪽이 좁아 두세 글자씩 끊깁니다."""
+    guide = body(client().get("/guide"))
+    # 칸 너비를 태그 안에 박아 두면 좁은 화면에서 못 풉니다
+    table = guide.split('class="spec policy-table', 1)[1]
+    assert 'style="width:' not in table.split("</table>", 1)[0]
+    css = body(client().get("/static/store.css"))
+    narrow = css.split("@media (max-width: 640px)")
+    stacked = [b for b in narrow[1:] if ".policy-table th" in b]
+    assert stacked, "좁은 화면에서 규정 표를 쌓는 규칙이 없습니다"
+    rule = stacked[0]
+    assert "display:block" in rule and "width:auto" in rule
+    print("PASS  폰에서 규정 표는 위아래로 쌓임")
+
+
 def test_nanumsquareround_font_is_served():
     """모든 글자가 나눔스퀘어라운드로 나와야 합니다(외부 CDN 없이 자체 제공)."""
     css = body(client().get("/static/store.css"))
@@ -4540,6 +4555,7 @@ def run_all():
     test_lineup_takes_the_home_middle()
     test_menu_has_no_duplicates()
     test_mobile_quick_bar()
+    test_policy_tables_stack_on_phone()
     test_nanumsquareround_font_is_served()
     test_file_path_traversal_blocked()
     print("\n판매 사이트 테스트 통과 ✅")

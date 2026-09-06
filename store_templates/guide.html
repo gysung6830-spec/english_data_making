@@ -102,7 +102,7 @@
     <div class="card">
       <p>{{ site.policy.refund }}</p>
       <table class="spec policy-table">
-        <tr><th style="width:230px;">자료 발송 전<br><small>(입금대기 · 입금확인 상태)</small></th>
+        <tr><th>자료 발송 전<br><small>(입금대기 · 입금확인 상태)</small></th>
             <td><b>전액 환불</b>해 드립니다. 이메일이나 카카오톡으로 알려 주시면 됩니다.</td></tr>
         <tr><th>자료 발송 후</th>
             <td>디지털 자료 특성상 환불이 <b>제한</b>됩니다.
@@ -169,8 +169,8 @@
         자료가 이메일로 가고, 입금하신 분을 알아보려면 성함이 필요합니다.
         <b>연락처는 안 적으셔도 됩니다.</b> 적어 주시면 문제가 생겼을 때 곧바로 연락드릴 수 있습니다.
         소속은 받지 않습니다.</p>
-      <table class="spec policy-table">
-        <tr><th style="width:150px;">주문</th>
+      <table class="spec policy-table narrow">
+        <tr><th>주문</th>
             <td><b>성함</b> · <b>이메일</b> · (선택) 연락처 · (선택) 입금자명
               <br><span class="muted">자료 발송(이메일) · 입금하신 분 확인(성함) ·
                 문제가 생겼을 때 연락(연락처)</span></td></tr>
@@ -191,7 +191,7 @@
       <h4 class="policy-h">2. 보유 기간</h4>
       <p>{{ site.policy.privacy }}</p>
       <table class="spec policy-table">
-        <tr><th style="width:230px;">계약 · 청약철회 기록</th><td>5년 (전자상거래법)</td></tr>
+        <tr><th>계약 · 청약철회 기록</th><td>5년 (전자상거래법)</td></tr>
         <tr><th>대금 결제 · 재화 공급 기록</th><td>5년 (전자상거래법)</td></tr>
         <tr><th>소비자 불만 · 분쟁처리 기록</th><td>3년 (전자상거래법)</td></tr>
         <tr><th>무료 자료 · 알림 신청 이메일</th><td>수신거부를 알려 주시면 <b>즉시 파기</b></td></tr>
@@ -200,7 +200,7 @@
       <h4 class="policy-h">3. 제3자 제공 · 처리위탁</h4>
       <p><b>제3자에게 제공하지 않습니다.</b> 다만 서비스 운영을 위해 아래 업무를 위탁합니다.</p>
       <table class="spec policy-table">
-        <tr><th style="width:230px;">웹사이트 호스팅</th><td>서버 운영사 (자료 보관·전송)</td></tr>
+        <tr><th>웹사이트 호스팅</th><td>서버 운영사 (자료 보관·전송)</td></tr>
         <tr><th>메일 보내기</th><td>메일 발송 서비스 (주문 안내 · 자료함 주소 안내)</td></tr>
       </table>
 
@@ -218,8 +218,8 @@
         비밀번호로 잠가 두었습니다. 자료 전송 구간은 암호화(HTTPS)합니다.</p>
 
       <h4 class="policy-h">7. 개인정보 보호책임자</h4>
-      <table class="spec policy-table">
-        <tr><th style="width:150px;">책임자</th>
+      <table class="spec policy-table narrow">
+        <tr><th>책임자</th>
             <td>{{ site.business.owner }}
               {%- if site.policy.manager and site.policy.manager != site.business.owner %}
                 ({{ site.policy.manager }}){% endif %}</td></tr>
