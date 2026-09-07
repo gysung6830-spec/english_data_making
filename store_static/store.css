@@ -1828,6 +1828,9 @@ label.dropzone{
 .um-name{overflow:hidden; text-overflow:ellipsis;}
 .um input{width:16px; height:16px; margin:0; accent-color:var(--brand); cursor:pointer;}
 .um-short{display:none;}
+/* 담기 전에 몇 문제인지 — 이름과 값 사이에 조용히 둡니다 */
+.um-q{flex:0 0 auto; font-size:11.5px; font-weight:700; color:#a3450f;
+  background:#fdeee6; padding:2px 7px; border-radius:999px; white-space:nowrap;}
 .um-won{font-weight:800; color:var(--ink); letter-spacing:-.01em;}
 .um-won::after{content:"원"; font-size:11px; font-weight:600; color:var(--muted);
   margin-left:1px;}

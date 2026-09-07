@@ -459,10 +459,15 @@ def unit_grid(catalog: dict, slug: str) -> dict:
                            key=lambda p: (mats.get(mid_of(p)) or {}).get("no", ""))
             if not picks:
                 continue
+            # 담기 전에 몇 문제인지 보여 드립니다. 이 강의 지문 수 × 지문당 문항 수.
+            passages = max((sc.to_int(p.get("passages"), 0) for p in picks), default=0)
+            questions = sc.question_count(
+                {"passages": passages, "materials": [mid_of(p) for p in picks]}, mats)
             cells[kind] = {
                 "slugs": ",".join(p["slug"] for p in picks),
                 "price": sum(sc.to_int(p.get("price"), 0) for p in picks),
                 "count": len(picks),
+                "questions": questions,
                 "names": [(mats.get(mid_of(p)) or {}).get("name") or p.get("name", "")
                           for p in picks],
                 "shared": [mid_of(p) for p in picks if mid_of(p) in shared],

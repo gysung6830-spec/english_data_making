@@ -64,10 +64,14 @@
                        title="{{ c.names|join(' · ') }}">
                   <input type="checkbox" name="slug" value="{{ c.slugs }}"
                          data-row="{{ r.no }}" data-kind="{{ m }}"
-                         data-slugs="{{ c.slugs }}"
+                         data-slugs="{{ c.slugs }}" data-q="{{ c.questions }}"
                          {{ 'checked disabled' if have }}>
                   <span class="um-name">{{ kind_labels.get(m) or kind_names.get(m, m) }}</span>
                   <span class="um-short">{{ kind_briefs.get(m) or kind_shorts.get(m, m) }}</span>
+                  {# 담기 전에 몇 문제인지. 넓은 화면·폰 어디서나 보입니다. #}
+                  {% if c.questions %}
+                    <span class="um-q">{{ '{:,}'.format(c.questions) }}문제</span>
+                  {% endif %}
                   <b class="um-won">{{ '{:,}'.format(c.price) }}</b>
                 </label>
               {% else %}
@@ -126,16 +130,17 @@
      여섯 개가 들어오지만 산 것은 한 강이니까요. */
   function pickedIn(list) {
     var seen = Object.create(null), rows = Object.create(null);
-    var files = 0, sum = 0, n = 0;
+    var files = 0, sum = 0, n = 0, q = 0;
     list.forEach(function (b) {
       if (!b.checked) return;
       if (!rows[b.dataset.row]) { rows[b.dataset.row] = 1; n += 1; }
+      q += parseInt(b.dataset.q || '0', 10);       /* 담기 전에 몇 문제인지 */
       (b.dataset.slugs || '').split(',').forEach(function (s) {
         if (!s || seen[s]) return;
         seen[s] = 1; files += 1; sum += PRICE[s] || 0;
       });
     });
-    return {n: n, files: files, sum: sum};
+    return {n: n, files: files, sum: sum, q: q};
   }
 
   function byRow(no)  { return boxes.filter(function (b) { return b.dataset.row === no; }); }
@@ -159,7 +164,8 @@
   function tally() {
     var all = pickedIn(boxes), n = all.n, sum = all.sum;
     form.querySelector('.pb-files').textContent =
-      all.files ? ' · 자료 ' + all.files + '개' : '';
+      (all.files ? ' · 자료 ' + all.files + '개' : '')
+      + (all.q ? ' · 문제 ' + all.q.toLocaleString() + '개' : '');
     form.querySelectorAll('.ur').forEach(function (row) {
       var got = pickedIn([].slice.call(
         row.querySelectorAll('input[name=slug]:not([disabled])')));

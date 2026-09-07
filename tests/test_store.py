@@ -3363,6 +3363,16 @@ def test_question_count_is_spelled_out():
     # 값을 안 보여 주는 목록 카드에는 단가를 붙이지 않습니다
     assert "원꼴" not in listed
 
+    # 담기 전에 — 강 고르는 표의 문제 패키지 칸에 몇 문제인지 적혀 있어야 합니다
+    grid = store.unit_grid(cat, "ybm-han")
+    cell = grid["rows"][0]["cells"]["problem"]
+    assert cell["questions"] == 4 * 40, cell["questions"]
+    assert grid["rows"][0]["cells"]["analysis"]["questions"] == 0
+    book = body(client().get("/books/ybm-han"))
+    assert f'class="um-q">{cell["questions"]}문제' in book
+    assert f'data-q="{cell["questions"]}"' in book        # 고르면 합계에 더해집니다
+    assert "all.q ? ' · 문제 '" in book
+
     # 지문당 문항 수는 관리자에서 고칠 수 있어야 합니다
     form = body(admin().get("/admin/materials/variants"))
     assert 'name="per_passage"' in form and 'value="17"' in form
