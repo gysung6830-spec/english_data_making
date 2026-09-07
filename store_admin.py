@@ -1760,6 +1760,50 @@ def metrics():
     return redirect(url_for("admin.sales"))
 
 
+@admin_bp.route("/traffic")
+def traffic():
+    """손님 발자국 — 어디서 와서 무엇을 보다 어디서 나가시는지.
+
+    무엇이 안 팔리는지는 매출 화면이 말해 줍니다. 그런데 '왜 안 팔리는지' 는
+    거기 없습니다. 들어와서 자료 상세까지는 오는데 장바구니에서 멈춘다면 값이
+    문제이고, 목록에서 멈춘다면 이름이나 사진이 문제입니다. 그 자리를 보려고
+    만든 화면입니다.
+    """
+    days = sc.to_int(request.args.get("days"), 30)
+    days = days if days in (7, 30, 90) else 30
+
+    catalog = sc.load_catalog()
+    cat_names = {c["id"]: c.get("name", c["id"]) for c in catalog.get("categories", [])}
+    prod_names = {p["slug"]: p.get("name", p["slug"]) for p in catalog["products"]}
+    book_names = {b["slug"]: b.get("name", b["slug"]) for b in catalog.get("books", [])}
+    free_names = {x["slug"]: x.get("title", x["slug"])
+                  for x in sc.load_freebies()["items"]}
+    words = {b["slug"]: b.get("name", b["slug"])
+             for b in (sc.load_words().get("books") or [])}
+    named = {**words, **free_names, **book_names, **prod_names}
+
+    def label_rows(rows, names=None):
+        for r in rows:
+            r["name"] = (names or {}).get(r["key"], r["key"])
+        return rows
+
+    return render_template(
+        "admin/traffic.html", days=days,
+        live=sc.visits_now(), live_min=sc.VISIT_LIVE_MIN,
+        today=sc.visits_span(1), week=sc.visits_span(7), span=sc.visits_span(days),
+        by_day=sc.visits_by_day(14),
+        pages=[{**r, "name": sc.page_label(r["key"])}
+               for r in sc.visits_top("endpoint", days, 10)],
+        actions=[{**r, "name": sc.page_label(r["key"])}
+                 for r in sc.visits_top("endpoint", days, 8, kind="action")],
+        cats=label_rows(sc.visits_top("cat", days, 8), cat_names),
+        items=label_rows(sc.visits_top("slug", days, 10), named),
+        queries=sc.visits_top("q", days, 12),
+        refs=sc.visits_top("ref", days, 8),
+        funnel=sc.visits_funnel(days),
+        keep_days=sc.VISIT_KEEP_DAYS)
+
+
 # ---------------------------------------------------------------------------
 # 빠진 것 점검 — 손님이 살 수 없는 상품 찾아내기
 # ---------------------------------------------------------------------------

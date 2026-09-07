@@ -81,6 +81,48 @@ def security_headers(resp):
     return resp
 
 
+@app.after_request
+def track_visit(resp):
+    """손님이 어느 화면을 보셨는지 한 줄 남깁니다.
+
+    누구인지는 안 남깁니다. 화면 주소와 시각, 그리고 같은 날 같은 분을 한 번만
+    세기 위한 뒤섞은 표뿐입니다. 관리자 화면·파일 내려받기·기계가 읽는 주소는
+    세지 않고, 사람이 아닌 접속(크롤러)도 걸러 냅니다.
+
+    발자국을 남기다 실패해도 손님 화면은 그대로 나가야 합니다. 통계 때문에
+    가게 문이 닫히면 안 됩니다.
+    """
+    endpoint = (request.endpoint or "").split(".")[-1]
+    if (request.blueprint == "admin" or not endpoint
+            or endpoint in sc.VISIT_SKIP or resp.status_code >= 400):
+        return resp
+    action = endpoint in sc.VISIT_ACTIONS and request.method == "POST"
+    if not action and request.method != "GET":
+        return resp
+    if not action and not resp.content_type.startswith("text/html"):
+        return resp
+    if sc.is_bot(request.headers.get("User-Agent", "")):
+        return resp
+
+    try:
+        day = sc.now_kst().date().isoformat()
+        # 인터넷 서버는 대리 서버 뒤에 있어, remote_addr 로는 모두가 한 사람이
+        # 되어 버립니다. 폼 남용 막기에서 쓰던 것과 같은 길로 잡습니다.
+        vid = sc.visit_id(app.secret_key, sc.client_ip(request),
+                          request.headers.get("User-Agent", ""), day)
+        sc.record_visit(
+            endpoint=endpoint, vid=vid, kind="action" if action else "page",
+            cat=sc.clean(request.args.get("category"), 40),
+            slug=sc.clean(request.view_args.get("slug") if request.view_args else "", 80),
+            q=sc.clean(request.args.get("q"), 60),
+            ref=sc.ref_source(request.referrer or "", request.host))
+        if secrets.randbelow(300) == 0:            # 이따금 오래된 것을 치웁니다
+            sc.prune_visits()
+    except Exception:                              # noqa: BLE001
+        app.logger.exception("발자국을 못 남겼습니다")
+    return resp
+
+
 @app.context_processor
 def inject_globals():
     site = sc.load_site()

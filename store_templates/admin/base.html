@@ -30,6 +30,8 @@
         📄 시험지 · 쿠폰</a>
       <a href="{{ url_for('admin.sales') }}" class="{{ 'on' if request.endpoint in ['admin.sales','admin.metrics'] }}">
         💰 매출 · 지표</a>
+      <a href="{{ url_for('admin.traffic') }}" class="{{ 'on' if request.endpoint == 'admin.traffic' }}">
+        👣 손님 발자국</a>
 
       <div class="sep">자료 올리기</div>
       <a href="{{ url_for('admin.products') }}" class="{{ 'on' if request.endpoint in ['admin.products','admin.product_form'] }}">

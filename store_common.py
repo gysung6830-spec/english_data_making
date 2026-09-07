@@ -13,6 +13,7 @@
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -1363,6 +1364,21 @@ CREATE TABLE IF NOT EXISTS sheets (
 );
 CREATE INDEX IF NOT EXISTS sheets_by_email ON sheets (email, id DESC);
 
+CREATE TABLE IF NOT EXISTS visits (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    at            TEXT NOT NULL,
+    day           TEXT NOT NULL,
+    vid           TEXT NOT NULL,
+    endpoint      TEXT NOT NULL,
+    kind          TEXT NOT NULL DEFAULT 'page',
+    cat           TEXT,
+    slug          TEXT,
+    q             TEXT,
+    ref           TEXT
+);
+CREATE INDEX IF NOT EXISTS visits_at ON visits (at);
+CREATE INDEX IF NOT EXISTS visits_day ON visits (day);
+
 CREATE TABLE IF NOT EXISTS lockers (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     email         TEXT UNIQUE NOT NULL,
@@ -2586,3 +2602,218 @@ def validate_contact(form) -> tuple[dict, list[str]]:
     if not form.get("agree"):
         errors.append("개인정보 수집·이용에 동의해 주셔야 접수됩니다.")
     return data, errors
+
+
+# ---------------------------------------------------------------------------
+# 발자국 — 손님이 어느 화면을 보시는지
+#
+# 무엇을 만들지, 어디에 값을 쓸지 정하려면 '무엇이 안 팔리나' 만으로는 모자랍니다.
+# 들어와서 무엇을 보다가 어디서 나가는지가 있어야 고칠 데가 보입니다.
+#
+# 남기는 것은 화면 주소와 시각뿐입니다. 누구인지는 안 남깁니다. 같은 날 같은
+# 분을 한 사람으로 세기 위한 표(vid)는 그날 하루만 쓰는 뒤섞은 값이라, 그것으로
+# 사람을 되찾을 수 없고 다음 날이면 아무 값과도 이어지지 않습니다.
+# ---------------------------------------------------------------------------
+VISIT_KEEP_DAYS = 180                 # 이만큼 지난 발자국은 지웁니다
+VISIT_LIVE_MIN = 5                    # '지금 보고 계신 분' 을 세는 시간
+
+# 사람이 아닌 것들. 이것까지 세면 숫자가 다 거짓말이 됩니다.
+_BOT_RE = re.compile(
+    r"bot|crawl|spider|slurp|curl|wget|python-requests|httpx|urllib|werkzeug|"
+    r"okhttp|java/|go-http|node-fetch|axios|postman|monitor|"
+    r"preview|fetch|scan|headless|lighthouse|pingdom|uptime",
+    re.I)
+
+# 발자국을 안 남기는 화면 — 파일 내려받기·기계가 읽는 주소·관리자
+VISIT_SKIP = {
+    "healthz", "robots", "sitemap", "static",
+    "download_file", "view_file", "view_page", "free_file", "sample_download",
+    "lineup_shot", "lineup_thumb", "words_sheet_pdf", "words_sheet_png",
+    "words_sheet_pages", "coupon_check", "order_quote",
+}
+
+# 눌러서 '무엇을 하신' 자리. 화면 보기와 따로 셉니다.
+VISIT_ACTIONS = {"cart_add", "cart_remove", "cart_swap", "cart_clear",
+                 "free_get", "contact", "submit", "custom", "order",
+                 "words_sheet_save", "pass_use", "free_notify"}
+
+# 화면 이름을 사람 말로. 통계에 endpoint 이름이 그대로 뜨면 아무도 못 읽습니다.
+PAGE_LABELS = {
+    "home": "첫 화면",
+    "products": "자료 목록",
+    "product_detail": "자료 상세",
+    "book_detail": "교재 화면",
+    "book_pick": "강 고르기",
+    "lineup": "오르티카 라인업",
+    "free": "무료 자료실",
+    "free_detail": "무료 자료 한 건",
+    "cart": "장바구니",
+    "order": "주문서",
+    "order_done": "주문 완료",
+    "words_page": "단어 시험지",
+    "words_book": "단어책 한 권",
+    "words_pick": "범위 고르기",
+    "words_make": "시험지 만들기",
+    "words_sheet": "시험지 보기",
+    "words_study": "단어 풀기",
+    "my_page": "내 자료함 찾기",
+    "my_locker": "내 자료함",
+    "download_page": "자료 받는 화면",
+    "contact": "문의",
+    "notice": "공지 · 시험 일정",
+    "guide": "이용 안내",
+    "custom": "주문제작 신청",
+    "submit": "시험지 보내기",
+    "pass_page": "프리패스",
+    "samples": "샘플",
+    "cart_add": "🛒 자료 담기",
+    "cart_remove": "🛒 자료 빼기",
+    "cart_swap": "🛒 자료 바꾸기",
+    "cart_clear": "🛒 장바구니 비우기",
+    "free_get": "🎁 무료 자료 받기",
+    "free_notify": "🔔 새 자료 알림 신청",
+    "words_sheet_save": "💾 단어 시험지 저장",
+    "pass_use": "🎫 프리패스 사용",
+}
+
+
+def page_label(endpoint: str) -> str:
+    return PAGE_LABELS.get(endpoint or "", endpoint or "(모름)")
+
+
+def visit_id(secret: str, ip: str, agent: str, day: str) -> str:
+    """같은 날 같은 분을 한 사람으로 세기 위한 표.
+
+    주소(IP)를 그대로 두지 않고 그날 하루치 소금과 함께 뒤섞습니다. 되돌릴 수
+    없고, 날이 바뀌면 어제 값과 이어지지 않습니다. 사람을 좇기 위한 것이 아니라
+    '오늘 몇 분이 오셨나' 를 세기 위한 것입니다.
+    """
+    raw = f"{secret}|{day}|{ip}|{agent}".encode("utf-8", "ignore")
+    return hashlib.sha256(raw).hexdigest()[:16]
+
+
+def is_bot(agent: str) -> bool:
+    return not agent or bool(_BOT_RE.search(agent))
+
+
+def record_visit(*, endpoint: str, vid: str, kind: str = "page",
+                 cat: str = "", slug: str = "", q: str = "", ref: str = "") -> None:
+    """발자국 한 줄. 화면 주소와 시각만 남습니다."""
+    now = now_kst()
+    get_db().execute(
+        """INSERT INTO visits (at, day, vid, endpoint, kind, cat, slug, q, ref)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        (now.isoformat(timespec="seconds"), now.date().isoformat(), vid,
+         endpoint[:60], kind[:10], cat[:40], slug[:80], q[:60], ref[:40]))
+    get_db().commit()
+
+
+def prune_visits(days: int = VISIT_KEEP_DAYS) -> int:
+    """오래된 발자국은 지웁니다. 무료 서버의 디스크는 넉넉하지 않습니다."""
+    cut = (now_kst() - timedelta(days=days)).date().isoformat()
+    db = get_db()
+    n = db.execute("DELETE FROM visits WHERE day < ?", (cut,)).rowcount
+    db.commit()
+    return n
+
+
+def ref_source(referrer: str, my_host: str = "") -> str:
+    """어디서 오셨는지. 주소 전체가 아니라 '어느 집' 인지만 남깁니다."""
+    if not referrer:
+        return "직접 · 즐겨찾기"
+    host = re.sub(r"^https?://", "", referrer).split("/")[0].split(":")[0].lower()
+    mine = (my_host or "").split(":")[0].lower()    # 들어온 주소에는 포트가 붙습니다
+    if mine and (host == mine or host.endswith("." + mine)):
+        return ""                                   # 우리 사이트 안에서 옮겨 다닌 것
+    known = [("naver", "네이버"), ("google", "구글"), ("daum", "다음"),
+             ("kakao", "카카오톡"), ("instagram", "인스타그램"),
+             ("facebook", "페이스북"), ("youtube", "유튜브"),
+             ("band.us", "밴드"), ("tistory", "티스토리"), ("blog", "블로그"),
+             ("bing", "빙"), ("orbi", "오르비")]
+    for needle, name in known:
+        if needle in host:
+            return name
+    return host[:40]
+
+
+def visits_now(minutes: int = VISIT_LIVE_MIN) -> int:
+    """지금 보고 계신 분. 최근 몇 분 안에 발자국이 있는 분을 셉니다."""
+    since = (now_kst() - timedelta(minutes=minutes)).isoformat(timespec="seconds")
+    row = get_db().execute(
+        "SELECT COUNT(DISTINCT vid) AS n FROM visits WHERE at >= ?", (since,)).fetchone()
+    return row["n"] if row else 0
+
+
+def visits_span(days: int = 1) -> dict:
+    """오늘·이번 주처럼 한 토막 동안 몇 분이 오셨고 몇 번 보셨는지."""
+    since = (now_kst() - timedelta(days=days - 1)).date().isoformat()
+    row = get_db().execute(
+        """SELECT COUNT(DISTINCT vid) AS people, COUNT(*) AS views
+           FROM visits WHERE day >= ? AND kind = 'page'""", (since,)).fetchone()
+    act = get_db().execute(
+        "SELECT COUNT(*) AS n FROM visits WHERE day >= ? AND kind = 'action'",
+        (since,)).fetchone()
+    return {"people": row["people"] if row else 0,
+            "views": row["views"] if row else 0,
+            "actions": act["n"] if act else 0}
+
+
+def visits_by_day(days: int = 14) -> list[dict]:
+    """날마다 몇 분이 오셨는지. 그래프 하나가 표 열 줄보다 낫습니다."""
+    since = (now_kst() - timedelta(days=days - 1)).date()
+    rows = {r["day"]: r for r in get_db().execute(
+        """SELECT day, COUNT(DISTINCT vid) AS people, COUNT(*) AS views
+           FROM visits WHERE day >= ? AND kind = 'page'
+           GROUP BY day""", (since.isoformat(),))}
+    out = []
+    for i in range(days):                          # 아무도 안 온 날도 빈칸으로 둡니다
+        d = (since + timedelta(days=i)).isoformat()
+        r = rows.get(d)
+        out.append({"day": d, "label": d[5:].replace("-", "/"),
+                    "people": r["people"] if r else 0,
+                    "views": r["views"] if r else 0})
+    return out
+
+
+def visits_top(field: str, days: int = 30, limit: int = 12,
+               kind: str = "page") -> list[dict]:
+    """무엇을 많이 보셨는지. field 는 endpoint · cat · slug · q · ref."""
+    if field not in ("endpoint", "cat", "slug", "q", "ref"):
+        raise ValueError("셀 수 없는 칸입니다")
+    since = (now_kst() - timedelta(days=days - 1)).date().isoformat()
+    where = "day >= ? AND kind = ? AND {0} <> ''".format(field)
+    rows = get_db().execute(
+        f"""SELECT {field} AS key, COUNT(*) AS views,
+                   COUNT(DISTINCT vid) AS people
+            FROM visits WHERE {where}
+            GROUP BY {field} ORDER BY views DESC LIMIT ?""",
+        (since, kind, limit)).fetchall()
+    return [{"key": r["key"], "views": r["views"], "people": r["people"]}
+            for r in rows]
+
+
+# 사는 데까지 오는 길. 어느 칸에서 손님이 줄어드는지 보려고 셉니다.
+VISIT_FUNNEL = [
+    ("자료를 보러 옴", ("products", "book_detail", "lineup", "home"), "page"),
+    ("자료를 들여다봄", ("product_detail", "book_detail", "book_pick"), "page"),
+    ("장바구니에 담음", ("cart_add",), "action"),
+    ("주문서까지 감", ("order",), "page"),
+    ("주문을 마침", ("order_done",), "page"),
+]
+
+
+def visits_funnel(days: int = 30) -> list[dict]:
+    """어느 칸에서 손님이 줄어드는지. 줄어드는 칸이 고칠 자리입니다."""
+    since = (now_kst() - timedelta(days=days - 1)).date().isoformat()
+    out, first = [], 0
+    for label, endpoints, kind in VISIT_FUNNEL:
+        marks = ",".join("?" * len(endpoints))
+        row = get_db().execute(
+            f"""SELECT COUNT(DISTINCT vid) AS n FROM visits
+                WHERE day >= ? AND kind = ? AND endpoint IN ({marks})""",
+            (since, kind, *endpoints)).fetchone()
+        n = row["n"] if row else 0
+        first = first or n
+        out.append({"label": label, "people": n,
+                    "percent": round(n / first * 100) if first else 0})
+    return out

@@ -947,6 +947,133 @@ def test_clear_sample_data():
     print("PASS  예시 데이터 한 번에 지우기 (내 상품은 남김)")
 
 
+def _wipe_visits():
+    with store.app.app_context():
+        sc.get_db().execute("DELETE FROM visits")
+        sc.get_db().commit()
+
+
+PHONE = {"User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2) Safari/605"}
+
+
+def _visits():
+    with store.app.app_context():
+        return [dict(r) for r in sc.get_db().execute(
+            "SELECT * FROM visits ORDER BY id")]
+
+
+def test_footprints_count_people_not_files():
+    """손님이 어느 화면을 보셨는지 남기되, 누구인지는 안 남겨야 합니다."""
+    _wipe_visits()
+    c = client()
+    c.get("/", headers=PHONE)
+    c.get("/products?category=mock", headers=PHONE)
+    c.get("/products?q=수능특강", headers=PHONE)
+    c.get("/products/neungyule-kim-analysis", headers=PHONE)
+    c.post("/cart/add", data={"slug": "neungyule-kim-analysis"}, headers=PHONE)
+
+    rows = _visits()
+    seen = [(r["endpoint"], r["kind"]) for r in rows]
+    assert ("home", "page") in seen and ("cart_add", "action") in seen
+    assert [r["cat"] for r in rows if r["cat"]] == ["mock"]
+    assert [r["q"] for r in rows if r["q"]] == ["수능특강"]
+    assert "neungyule-kim-analysis" in [r["slug"] for r in rows]
+
+    # 남는 것은 화면 주소와 시각뿐입니다. 주소(IP)도 이메일도 안 남습니다.
+    assert set(rows[0]) == {"id", "at", "day", "vid", "endpoint", "kind",
+                            "cat", "slug", "q", "ref"}
+    # 표는 그날치 소금으로 뒤섞은 값이라, 날이 바뀌면 이어지지 않습니다
+    a = sc.visit_id("소금", "1.2.3.4", "브라우저", "2026-09-07")
+    b = sc.visit_id("소금", "1.2.3.4", "브라우저", "2026-09-08")
+    assert a != b and "1.2.3.4" not in a and len(a) == 16
+    assert a == sc.visit_id("소금", "1.2.3.4", "브라우저", "2026-09-07")
+
+    # 세지 않는 것 — 관리자 · 기계가 읽는 주소 · 파일 · 사람 아닌 접속
+    _wipe_visits()
+    admin().get("/admin/traffic")
+    client().get("/robots.txt", headers=PHONE)
+    client().get("/healthz", headers=PHONE)
+    client().get("/sitemap.xml", headers=PHONE)
+    client().get("/", headers={"User-Agent": "Googlebot/2.1 (+http://google.com)"})
+    client().get("/", headers={"User-Agent": "python-requests/2.31"})
+    client().get("/", headers={"User-Agent": ""})
+    client().get("/", headers={})          # 시험 도구(Werkzeug)도 사람이 아닙니다
+    assert _visits() == [], _visits()
+
+    # 없는 주소(404)도 안 셉니다 — 있지도 않은 화면이 인기 화면이 되면 안 됩니다
+    client().get("/없는화면", headers=PHONE)
+    assert _visits() == []
+    print("PASS  발자국은 화면만 · 누구인지는 안 남김")
+
+
+def test_footprints_tell_where_people_come_from():
+    """어디서 오셨는지. 우리 사이트 안에서 옮겨 다닌 것은 안 셉니다."""
+    assert sc.ref_source("https://search.naver.com/x", "ortica.com") == "네이버"
+    assert sc.ref_source("https://www.google.co.kr/", "ortica.com") == "구글"
+    assert sc.ref_source("", "ortica.com") == "직접 · 즐겨찾기"
+    # 우리 집 안에서 옮겨 다닌 것 (포트가 붙어 들어와도 알아봐야 합니다)
+    assert sc.ref_source("https://ortica.com/lineup", "ortica.com:5000") == ""
+    assert sc.ref_source("https://www.ortica.com/x", "ortica.com") == ""
+    # 이름만 비슷한 남의 집은 우리 집이 아닙니다
+    assert sc.ref_source("https://notortica.com/x", "ortica.com") == "notortica.com"
+
+    _wipe_visits()
+    c = client()
+    c.get("/", headers=PHONE, environ_base={"HTTP_REFERER": "https://m.search.naver.com/s"})
+    c.get("/lineup", headers=PHONE, environ_base={"HTTP_REFERER": "http://localhost/"})
+    with store.app.app_context():
+        refs = {r["key"]: r["views"] for r in sc.visits_top("ref", 7)}
+    assert refs == {"네이버": 1}, refs
+    print("PASS  어디서 오셨나 · 우리 안에서 옮긴 것은 안 셈")
+
+
+def test_footprints_show_where_people_stop():
+    """사는 데까지 어느 칸에서 줄어드는지 — 고칠 자리를 찾는 데 씁니다."""
+    _wipe_visits()
+    c = client()
+    c.get("/products", headers=PHONE)
+    c.get("/products/neungyule-kim-analysis", headers=PHONE)
+    c.post("/cart/add", data={"slug": "neungyule-kim-analysis"}, headers=PHONE)
+    with store.app.app_context():
+        steps = {f["label"]: f["people"] for f in sc.visits_funnel(7)}
+        assert steps["자료를 보러 옴"] == 1
+        assert steps["자료를 들여다봄"] == 1
+        assert steps["장바구니에 담음"] == 1
+        assert steps["주문서까지 감"] == 0, "안 간 칸을 갔다고 하면 안 됩니다"
+        # 오래된 발자국은 저절로 지워집니다
+        sc.get_db().execute(
+            """INSERT INTO visits (at, day, vid, endpoint, kind, cat, slug, q, ref)
+               VALUES ('2020-01-01T00:00:00', '2020-01-01', 'x', 'home', 'page',
+                       '', '', '', '')""")
+        sc.get_db().commit()
+        assert sc.prune_visits() == 1
+        assert not [r for r in _visits() if r["day"] == "2020-01-01"]
+    print("PASS  사는 데까지 · 오래된 발자국 치우기")
+
+
+def test_admin_traffic_screen_reads_at_a_glance():
+    """통계 화면은 숫자만이 아니라 '무엇을 고칠지' 를 말해 줘야 합니다."""
+    _wipe_visits()
+    c = client()
+    for _ in range(3):
+        c.get("/products?category=mock", headers=PHONE)
+    c.get("/products?q=고1 3월", headers=PHONE)
+
+    page = body(admin().get("/admin/traffic"))
+    assert "손님 발자국" in page
+    assert "지금 보고 계신 분" in page
+    assert "모의고사" in page, "분류 이름을 사람 말로 보여야 합니다"
+    assert "고1 3월" in page, "찾으신 말이 있어야 다음에 만들 자료를 압니다"
+    assert "자료 목록" in page and "products" not in page.split("많이 본 화면")[1][:600]
+    assert "누구인지는 안 남깁니다" in page
+    # 기간을 바꿔 볼 수 있어야 합니다
+    for d in (7, 30, 90):
+        assert f"days={d}" in page
+    assert admin().get("/admin/traffic?days=999").status_code == 200
+    _wipe_visits()
+    print("PASS  관리자 통계 화면")
+
+
 def test_admin_menu_is_short():
     """관리자 메뉴는 자주 여는 것만 밖에 나와 있어야 합니다.
 
@@ -959,10 +1086,10 @@ def test_admin_menu_is_short():
 
     # 밖에 나와 있는 것 — 매일·매주 여는 것만
     for must in ("오늘 할 일", "주문 · 문의", "시험지 · 쿠폰", "매출 · 지표",
-                 "상품", "교재 · 분류", "오르티카 라인업", "무료 자료실",
-                 "단어장", "공지", "메일 · 명단"):
+                 "손님 발자국", "상품", "교재 · 분류", "오르티카 라인업",
+                 "무료 자료실", "단어장", "공지", "메일 · 명단"):
         assert must in daily, must
-    assert daily.count('</a>') == 11, daily.count('</a>')
+    assert daily.count('</a>') == 12, daily.count('</a>')
 
     # 접힌 칸 — 한 번 해 두면 그만인 것
     for later in ("가게 정보", "가격 가이드", "빠진 것 점검", "검색 등록", "백업"):
@@ -5242,6 +5369,10 @@ def run_all():
     test_login_blocks_repeated_guesses()
     test_admin_not_indexed_and_login_is_standalone()
     test_login_next_cannot_leave_admin()
+    test_footprints_count_people_not_files()
+    test_footprints_tell_where_people_come_from()
+    test_footprints_show_where_people_stop()
+    test_admin_traffic_screen_reads_at_a_glance()
     test_admin_menu_is_short()
     test_admin_pages_open()
     test_bulk_products_from_zip()
