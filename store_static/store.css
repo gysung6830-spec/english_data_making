@@ -2230,3 +2230,12 @@ label.dropzone{
 .type-note .type-chip{margin-right:2px;}
 .killer-tag{display:inline-block; padding:3px 10px; border-radius:999px;
   background:#3b1f14; color:#fff; font-size:12px; font-weight:800; white-space:nowrap;}
+
+/* 자료 딱지 안의 '킬러' 표시. 사는 자리에서도 보여야 하는 말이라
+   라인업까지 들어가지 않아도 눈에 걸리게 둡니다. */
+.chip-killer{font-style:normal; font-weight:800; font-size:10px; letter-spacing:.02em;
+  margin-left:5px; padding:1px 5px; border-radius:4px;
+  background:#3b1f14; color:#fff; vertical-align:1px;}
+/* 패키지 상자 — 이 묶음이 무엇을 덮는지 한 줄 */
+.pp-covers{display:block; margin-top:8px; font-size:12.5px; line-height:1.6;
+  color:var(--ink-2); word-break:keep-all;}

@@ -57,7 +57,9 @@
               <div class="lane-mats">
                 {%- for mid in lane.materials %}{% set m = material_map.get(mid) %}
                   {%- if m %}<a class="mat-chip pk-{{ material_pkg.get(mid, '') }}"
-                      href="{{ url_for('lineup') }}#{{ m.id }}">{{ m.name }}</a>{% endif %}
+                      href="{{ url_for('lineup') }}#{{ m.id }}"
+                      {%- if m.killer %} title="킬러문항 — {{ m.types_head or '학교가 변별하려고 쓰는 자리' }}"{% endif %}>
+                      {{- m.name }}{% if m.killer %}<i class="chip-killer">킬러</i>{% endif %}</a>{% endif %}
                 {%- endfor %}
               </div>
             </div>

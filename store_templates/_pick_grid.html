@@ -19,9 +19,17 @@
             <b>{{ kind_labels.get(m) or kind_names.get(m, m) }}</b>
             <span class="pp-mats">
               {%- for mm in kind_mats.get(m, []) %}
-                <span class="pp-mat">{{ mm.name }}</span>
+                <span class="pp-mat">{{ mm.name }}
+                  {%- if mm.killer %}<i class="chip-killer">킬러</i>{% endif %}</span>
               {%- endfor %}
             </span>
+            {# 이 패키지가 무엇을 덮는지 한 줄. 라인업까지 안 들어가셔도 보이게. #}
+            {% set heads = kind_mats.get(m, []) | selectattr('types_head') | list %}
+            {% if heads %}
+              <span class="pp-covers">
+                {%- for mm in heads %}{% if not loop.first %} · {% endif %}{{ mm.types_head }}{% endfor %}
+              </span>
+            {% endif %}
           </span>
         </button>
       {% endfor %}

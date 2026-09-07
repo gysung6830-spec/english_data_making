@@ -3357,6 +3357,22 @@ def test_all_types_are_listed_with_killers_marked():
     # 첫 화면 타일에도 딱지가 붙습니다
     assert "killer-tag" in body(client().get("/"))
 
+    # 사는 자리에서도 보여야 합니다 — 라인업까지 들어가는 손님은 많지 않습니다
+    cat2 = sc.load_catalog()
+    of = [x["slug"] for mid in ["workbook", "descriptive", "variants", "wordlist", "wordtest"]
+          for x in cat2["products"]
+          if x.get("book") == "ybm-han" and x.get("unit") == "Lesson 1"
+          and x.get("materials") == [mid]]
+    cc = client()
+    cc.post("/cart/add", data={"slug": ",".join(of)})
+    for url in ("/books/ybm-han", "/cart", "/order?cart=1", "/products?category=textbook"):
+        got = body(cc.get(url))
+        assert "chip-killer" in got, url
+    # 패키지 고르는 상자에는 이 묶음이 무엇을 덮는지 한 줄
+    book = body(cc.get("/books/ybm-han"))
+    assert "pp-covers" in book and "변별" in book and "경우의 수" in book
+    cc.post("/cart/clear")
+
     # 관리자에서 유형과 킬러를 고칠 수 있어야 합니다
     a = admin()
     form = body(a.get("/admin/materials/variants"))
