@@ -4170,6 +4170,43 @@ def test_subject_filter_always_shows_four():
     print("PASS  교과서 과목 네 가지는 늘 나옴 (적어 두지 않아도)")
 
 
+def test_cart_asks_you_to_compare_not_claims():
+    """다 더한 값을 무엇과 견줄지 알려 주되, 값이 얼마라고 주장하지 않아야 합니다.
+
+    학원비도 선생님 시간도 우리가 입증할 수 없는 값입니다. 숫자를 못 박으면
+    부당표시가 되고, 학원 선생님도 우리 손님이라 때려서도 안 됩니다.
+    """
+    cat = sc.load_catalog()
+    of = {}
+    for pid, pack in {x["id"]: x for x in cat["packages"]}.items():
+        of[pid] = [x["slug"] for m in pack["materials"] for x in cat["products"]
+                   if x.get("book") == "ybm-han" and x.get("unit") == "Lesson 1"
+                   and x.get("materials") == [m]]
+
+    c = client()
+    c.post("/cart/add", data={"slug": ",".join(of["analysis"])})
+    one = body(c.get("/cart"))
+    assert "worth-box" not in one, "한 묶음만 담았는데 '다 더한 값' 이 나옵니다"
+
+    c.post("/cart/add", data={"slug": ",".join(of["problem"])})
+    two = body(c.get("/cart"))
+    assert "worth-box" in two
+    assert "학원 한 달 수강료와 견줘 보세요" in two
+    assert "자료를 찾고 만드는 시간과 견줘 보세요" in two
+
+    # 우리가 모르는 값을 숫자로 말하면 안 됩니다
+    for claim in ("학원비 3", "학원 월 ", "무조건", "100%", "최저가", "시간을 절약해 드립니다"):
+        assert claim not in two, claim
+
+    # 교재 화면에서는 '다 더한 값' 이야기를 하지 않습니다 (그 교재 값뿐이라)
+    book = body(client().get("/books/ybm-han"))
+    assert "찾아 헤매는 시간" in book
+    assert "학원" not in book, "교재 화면에서는 학원 이야기를 안 합니다"
+
+    c.post("/cart/clear")
+    print("PASS  다 더한 값은 견주시라고만 · 숫자로 주장하지 않음")
+
+
 def test_cart_shows_packages_not_parts():
     """파는 단위는 패키지입니다. 장바구니도 낱개가 아니라 묶음으로 보여야 합니다.
 
@@ -4927,6 +4964,7 @@ def run_all():
     test_submission_requires_file_or_link()
     test_mock_filters_by_year_and_month()
     test_subject_filter_always_shows_four()
+    test_cart_asks_you_to_compare_not_claims()
     test_cart_shows_packages_not_parts()
     test_cart_add_view_remove()
     test_cart_count_discount_steps()

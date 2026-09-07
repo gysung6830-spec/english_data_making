@@ -731,7 +731,12 @@ def cart():
         mate = sibling_of(item, catalog)
         if mate and mate["slug"] not in have and mate["slug"] not in {s["slug"] for s in suggest}:
             suggest.append(mate)
+    # 몇 갈래(교과서·모의고사·부교재)를 아울러 담으셨는지 — 문구를 고르는 데 씁니다
+    by_slug = {b["slug"]: b for b in catalog["books"]}
+    book_kinds = len({by_slug.get(x.get("book"), {}).get("category")
+                      for x in items if x.get("book")} - {None})
     return render_template("cart.html", items=items, groups=cart_groups(items, catalog),
+                           book_kinds=book_kinds,
                            rows=rows, auto=auto,
                            subtotal=subtotal, final=subtotal - auto, suggest=suggest[:3],
                            next_tier=sc.count_next(site, sc.unit_count(items)),
