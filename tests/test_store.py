@@ -3369,9 +3369,14 @@ def test_all_types_are_listed_with_killers_marked():
     for url in ("/books/ybm-han", "/cart", "/order?cart=1", "/products?category=textbook"):
         got = body(cc.get(url))
         assert "chip-killer" in got, url
-    # 패키지 고르는 상자에는 이 묶음이 무엇을 덮는지 한 줄
+    # 패키지 고르는 상자에는 지문 하나를 몇 문제로 훑는지 한 줄.
+    # 자료 이름을 낱낱이 읊는 것보다 다 더한 수 하나가 셉니다 (변형 17 + 서술형 23)
     book = body(cc.get("/books/ybm-han"))
-    assert "pp-covers" in book and "변별" in book and "경우의 수" in book
+    assert "pp-covers" in book and "지문 하나에 <b>40문제</b>" in book
+    assert "경우의 수에 킬러까지" in book
+    # 문항 수를 안 세는 분석 패키지에는 이 줄이 안 붙습니다 (0문제라 할 수 없으니)
+    box = book.split('data-kind="analysis"', 1)[1].split("</button>", 1)[0]
+    assert "pp-covers" not in box
     cc.post("/cart/clear")
 
     # 관리자에서 유형과 킬러를 고칠 수 있어야 합니다

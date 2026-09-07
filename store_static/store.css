@@ -2236,6 +2236,7 @@ label.dropzone{
 .chip-killer{font-style:normal; font-weight:800; font-size:10px; letter-spacing:.02em;
   margin-left:5px; padding:1px 5px; border-radius:4px;
   background:#3b1f14; color:#fff; vertical-align:1px;}
-/* 패키지 상자 — 이 묶음이 무엇을 덮는지 한 줄 */
-.pp-covers{display:block; margin-top:8px; font-size:12.5px; line-height:1.6;
+/* 패키지 상자 — 지문 하나를 몇 문제로 훑는지 한 줄. 수가 눈에 먼저 들게 */
+.pp-covers{display:block; margin-top:8px; font-size:13px; line-height:1.6;
   color:var(--ink-2); word-break:keep-all;}
+.pp-covers b{color:var(--ink); font-weight:800;}

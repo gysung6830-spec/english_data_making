@@ -484,6 +484,7 @@ def unit_grid(catalog: dict, slug: str) -> dict:
                             "shared": m in shared,
                             # 사는 자리에서도 '무엇을 덮는 자료인지' 가 보여야 합니다
                             "killer": bool(mats[m].get("killer")),
+                            "per_passage": sc.to_int(mats[m].get("per_passage"), 0),
                             "types_head": mats[m].get("types_head", "")}
                            for m in of_pkg.get(kind, [])
                            if m in have_mids and m in mats and mats[m].get("name")]
