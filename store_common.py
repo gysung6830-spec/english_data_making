@@ -1847,34 +1847,41 @@ SHOT_THUMB_W = 560          # 첫 화면 타일에 걸 그림의 가로
 # 가로로 넓게 자르면 '종이' 로 안 보이고 띠처럼 보입니다. 세로가 긴 3:4 로
 # 잘라야 지면 그대로의 느낌이 납니다.
 SHOT_THUMB_RATIO = 3 / 4
-SHOT_THUMB_MAX_H = 900      # 이보다 긴 지면은 아래를 잘라 둡니다 (파일 크기)
+# 지면의 가로 가운데 얼마만큼을 타일에 담을지. 원본 사진이 자료마다 모양이
+# 달라서(거의 정사각인 것도, 길쭉한 한 쪽짜리도 있습니다) 그대로 걸면 어떤
+# 타일은 확대되고 어떤 타일은 한 쪽이 통째로 들어가 글씨가 깨알이 됩니다.
+# 원본 가로의 이만큼만 잘라 쓰면 어느 자료든 글씨 크기가 같아집니다.
+SHOT_THUMB_CROP = 0.66
+SHOT_THUMB_VER = 2          # 자르는 방식이 바뀌면 올립니다 (묵혀 둔 그림 새로 만들기)
 
 
 def shot_thumb(mid: str) -> Path | None:
-    """지면 사진을 첫 화면 타일에 걸 만큼 작게 줄인 판. 원본은 안 건드립니다.
+    """지면 사진을 첫 화면 타일에 걸 만큼 잘라 줄인 판. 원본은 안 건드립니다.
 
-    자르는 일은 화면(CSS)이 합니다. 여기서는 가로만 맞춰 줄이고 비율은 그대로
-    둡니다 — 서버에서 미리 잘라 두면, 원본이 짧은 사진과 긴 사진이 서로 다른
-    모양으로 나와 타일 줄이 들쭉날쭉해집니다.
+    원본 왼쪽 위에서 같은 비율만큼 잘라 3:4 로 맞춥니다. 그래야 자료마다
+    글씨 크기가 같고, 타일 줄도 가지런합니다. 글을 왼쪽에서부터 잡는 것은
+    줄 첫머리가 살아야 읽히기 때문입니다.
     """
     names = shot_files(mid)
     if not names:
         return None
     src = shot_dir(mid) / names[0]
-    out = DATA_DIR / ".cache" / "thumb" / f"{mid}.webp"
+    out = DATA_DIR / ".cache" / "thumb" / f"{mid}-{SHOT_THUMB_VER}.webp"
     try:
         if out.exists() and out.stat().st_mtime >= src.stat().st_mtime:
             return out
         from PIL import Image
         out.parent.mkdir(parents=True, exist_ok=True)
-        w = SHOT_THUMB_W
         with Image.open(src) as im:
             im = im.convert("RGB")
-            h = max(1, round(im.height * w / im.width))
-            # 아주 긴 지면은 아래쪽을 잘라 파일만 키우지 않게 합니다.
-            # (어차피 타일에는 윗부분만 보입니다)
-            im.resize((w, h), Image.LANCZOS).crop((0, 0, w, min(h, SHOT_THUMB_MAX_H))) \
-              .save(out, "WEBP", quality=78, method=5)
+            cw = max(1, round(im.width * SHOT_THUMB_CROP))
+            ch = max(1, round(cw / SHOT_THUMB_RATIO))
+            # 원본이 짧으면 있는 만큼만 자릅니다. 모자란 비율은 화면에서 채웁니다.
+            box = (0, 0, min(cw, im.width), min(ch, im.height))
+            w = SHOT_THUMB_W
+            cut = im.crop(box)
+            h = max(1, round(cut.height * w / cut.width))
+            cut.resize((w, h), Image.LANCZOS).save(out, "WEBP", quality=80, method=5)
         return out
     except Exception as exc:                 # 그림이 없어도 첫 화면은 떠야 합니다
         log.warning("지면 사진을 줄이지 못했습니다 (%s): %s", mid, exc)

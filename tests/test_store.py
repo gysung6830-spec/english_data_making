@@ -2402,12 +2402,13 @@ def test_home_shows_real_pages_not_just_names():
     src = folder / "01.png"
     Image.new("RGB", (1076, 1369), (250, 250, 250)).save(src)
 
-    # 가로만 맞춰 줄인 판이 생깁니다 (비율은 원본 그대로 — 자르는 일은 화면이 합니다)
+    # 원본 왼쪽 위에서 같은 비율만큼 잘라 3:4 로 맞춘 판이 생깁니다.
+    # (원본 모양대로 두면 자료마다 글씨 크기가 달라집니다)
     thumb = sc.shot_thumb(mid)
     assert thumb is not None and thumb.exists()
     with Image.open(thumb) as im:
         assert im.width == sc.SHOT_THUMB_W
-        assert im.height == round(1369 * sc.SHOT_THUMB_W / 1076)
+        assert abs(im.width / im.height - sc.SHOT_THUMB_RATIO) < 0.01
     assert thumb.stat().st_size < src.stat().st_size, "원본보다 커졌습니다"
     assert src.exists(), "원본을 건드리면 안 됩니다"
 
@@ -2416,18 +2417,14 @@ def test_home_shows_real_pages_not_just_names():
     assert "max-age" in got.headers.get("Cache-Control", "")
     assert client().get("/lineup/thumb/없는자료.webp").status_code == 404
 
-    # 가로가 긴 원본도 그대로 — 눌리거나 늘어나지 않습니다
-    Image.new("RGB", (1200, 500), (240, 240, 240)).save(src)
-    thumb.unlink()
-    with Image.open(sc.shot_thumb(mid)) as im:
-        assert im.width == sc.SHOT_THUMB_W
-        assert im.height == round(500 * sc.SHOT_THUMB_W / 1200)
-
-    # 아주 긴 지면은 아래를 잘라 파일만 키우지 않습니다
-    Image.new("RGB", (1000, 4000), (240, 240, 240)).save(src)
-    sc.shot_thumb(mid).unlink()
-    with Image.open(sc.shot_thumb(mid)) as im:
-        assert im.height == sc.SHOT_THUMB_MAX_H
+    # 원본이 가로로 넓든 세로로 길든 타일은 같은 모양으로 나옵니다
+    for size in ((1200, 500), (1000, 4000)):
+        Image.new("RGB", size, (240, 240, 240)).save(src)
+        sc.shot_thumb(mid).unlink()
+        with Image.open(sc.shot_thumb(mid)) as im:
+            assert im.width == sc.SHOT_THUMB_W
+            # 원본이 잘라야 할 만큼 길지 않으면 있는 만큼만 — 나머지는 화면이 채웁니다
+            assert im.width / im.height >= sc.SHOT_THUMB_RATIO - 0.01, (size, im.size)
 
     home = body(client().get("/"))
     assert f"/lineup/thumb/{mid}.webp" in home
@@ -3318,6 +3315,34 @@ def test_sample_pdf_links_go_somewhere():
     assert "자료 샘플 PDF 올리기" in setup
     assert "자료마다 지면 사진과 설명 채우기" in setup
     print("PASS  샘플 PDF 자리 · 빈 자료 세어 주기")
+
+
+def test_home_tiles_share_one_magnification():
+    """첫 화면 자료 타일은 자료마다 글씨 크기가 같아야 합니다.
+
+    원본 지면 사진이 자료마다 모양이 다릅니다(거의 정사각인 것도, 길쭉한 한
+    쪽짜리도). 그대로 걸면 어떤 타일은 확대되고 어떤 타일은 한 쪽이 통째로
+    들어가 글씨가 깨알이 됩니다. 같은 비율만큼 잘라 배율을 맞춥니다.
+    """
+    from PIL import Image
+    shapes, scales = [], []
+    for m in sc.load_materials()["materials"]:
+        thumb = sc.shot_thumb(m["id"])
+        if not thumb:
+            continue
+        with Image.open(thumb) as im:
+            shapes.append(round(im.width / im.height, 2))
+        with Image.open(sc.shot_dir(m["id"]) / sc.shot_files(m["id"])[0]) as src:
+            # 원본 가로의 몇 분의 몇이 타일에 담기는지 — 이게 곧 글씨 크기입니다
+            scales.append(round(sc.SHOT_THUMB_W / (src.width * sc.SHOT_THUMB_CROP), 3))
+    assert len(shapes) >= 3, "지면 사진이 있는 자료가 너무 적어 잴 수 없습니다"
+
+    # 모양이 다 같아야 타일 줄이 가지런합니다
+    assert max(shapes) - min(shapes) <= 0.01, shapes
+    assert abs(shapes[0] - sc.SHOT_THUMB_RATIO) <= 0.01, shapes[0]
+    # 배율도 거의 같아야 합니다 (원본 가로가 비슷하면 완전히 같아집니다)
+    assert max(scales) / min(scales) <= 1.2, scales
+    print("PASS  첫 화면 타일 — 자료마다 같은 모양 · 같은 배율")
 
 
 def test_lineup_shows_a_slice_not_the_whole_page():
@@ -4942,6 +4967,7 @@ def run_all():
     test_made_to_order_has_its_own_way_in()
     test_taster_lives_on_the_lineup_not_the_list()
     test_sample_pdf_links_go_somewhere()
+    test_home_tiles_share_one_magnification()
     test_lineup_shows_a_slice_not_the_whole_page()
     test_lineup_shots_upload_and_show()
     test_mobile_filters_collapse()
