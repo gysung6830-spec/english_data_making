@@ -30,6 +30,9 @@ def parse_range(rg):
         if m: out+=list(range(int(m.group(1)), int(m.group(2))+1))
         elif part.isdigit(): out.append(int(part))
     return out
+def fmt_range(rg):  # "1~2" -> "1-2문장", "3" -> "3문장"
+    s=re.sub(r"\s*[~–]\s*", "-", str(rg or "").strip())
+    return (s+"문장") if s else ""
 def kw_map(p):  # 문장 id -> 영어 핵심 키워드(최대 2)
     m={}
     for s in p["sentences"]:
@@ -84,6 +87,7 @@ table.flow td{border:1px solid var(--line); padding:4px 6px; font-size:9pt; vert
 .flow .snum{color:var(--green); font-weight:800; margin-right:3px;}
 .flow .kw-en{color:var(--indigo); font-weight:700;}
 .flow .sum-blank{height:22px;}
+.flow .hd{background:var(--green-bg); color:var(--green-d); font-weight:800; font-size:8.4pt; text-align:center;}
 .rest .lab{display:inline-block; font-weight:700; color:var(--green-d); min-width:96px;}
 .small{font-size:8pt; color:var(--sub);}
 .kw{color:var(--amber);}
@@ -96,11 +100,11 @@ def card(p, ans):
     ov=p["overview"]; no=esc(p["item_no"].strip()); ti=esc(ov["theme_ko"])
     km=kw_map(p)
     h=[f'<div class="card"><div class="c-h"><span class="c-no">{no}</span><span class="c-ti">{ti}</span></div>']
-    # ① 흐름 정리 (문장별 영어 핵심어 활용)
-    h.append('<div class="row"><span class="q">①</span>글의 흐름을 단계별로 정리하기 <span class="small">— 문장별 핵심어(영어)를 활용해 내용을 채우세요</span></div>')
-    h.append('<table class="flow">')
+    h.append('<table class="flow"><tr>'
+             '<td class="hd st">단계 · 문장</td><td class="hd kwc">핵심어(영어)</td>'
+             '<td class="hd">내용 정리 <span class="small">(핵심 위주 · 문장 연결 고민 · 한글 가능)</span></td></tr>')
     for b in ov["flow_blocks"]:
-        stg=esc(b["stage"]); rg=esc(b["sentence_range"])
+        stg=esc(b["stage"]); rg=fmt_range(b["sentence_range"])
         kws=[]
         for sid in parse_range(b["sentence_range"]):
             if sid in km:
@@ -112,31 +116,15 @@ def card(p, ans):
             cell='<div class="sum-blank"></div>'
         h.append(f'<tr><td class="st">{stg}<div class="rg">{rg}</div></td><td class="kwc">{kwc}</td><td>{cell}</td></tr>')
     h.append('</table>')
-    # ② 핵심 반복 표현
-    h.append('<div class="row rest"><span class="q">②</span>핵심 반복·재진술 표현 정리')
-    for c in ov["restatement_chains"]:
-        lab=esc(c["label"])
-        if ans:
-            val=f'<span class="ans-v">{esc(" / ".join(c["expressions"]))}</span>'
-        else:
-            val='<span class="blk wide"></span>'
-        h.append(f'<div style="margin-top:3px;"><span class="lab">{lab}</span> {val}</div>')
-    h.append('</div>')
-    # ③ 한 줄 요약
-    if ans:
-        summ=f'<span class="ans-v">{clean_topic(ov["topic"])}</span>'
-        h.append(f'<div class="row"><span class="q">③</span>한 줄 요약 {summ}</div>')
-    else:
-        h.append('<div class="row"><span class="q">③</span>한 줄 요약<span class="blk wide"></span></div>')
     h.append('</div>')
     return "".join(h)
 
 def build(ans, out):
     badge='정답' if ans else '학생용'
     bcls='ans' if ans else 'stu'
-    hint=('<div class="hintbar">필생보의 ⑤ 글정리를 참고해, 지문마다 <b>흐름 단계</b>를 스스로 채우며 내용을 정리하세요. '
-          '가운데 칸의 <b>문장별 핵심어(영어)</b>를 단서로 활용하세요.</div>') if not ans else \
-         '<div class="hintbar">아래는 학습지의 <b>정답·모범 정리</b>입니다.</div>'
+    hint=('<div class="hintbar">가운데 칸의 <b>핵심어(영어)</b>를 활용해 각 단계 내용을 정리하세요(<b>한글로 적어도 됩니다</b>). '
+          '해석을 <b>그대로 옮기지 말고 핵심 위주</b>로 간추리고, <b>문장·단계 사이의 연결</b>을 생각하며 쓰세요.</div>') if not ans else \
+         '<div class="hintbar">아래는 <b>정답·모범 정리</b>입니다. 해석 나열이 아니라 핵심 위주로 간추리고 흐름의 연결을 살렸습니다.</div>'
     body=[f'<div class="doc-h"><span class="t">{TITLE}</span><span class="badge {bcls}">{badge}</span></div>', hint]
     for p in P: body.append(card(p, ans))
     doc=f'<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><style>{CSS}</style></head><body>{"".join(body)}</body></html>'
