@@ -4582,11 +4582,39 @@ def test_cart_order_end_to_end():
 
 
 def test_cart_shows_count_in_header():
+    """딱지의 수는 장바구니에 보이는 줄 수와 같아야 합니다.
+
+    한 강의 분석 패키지는 상품 여덟 개로 담깁니다. 그런데 담은 것은 '1강의
+    패키지 하나' 입니다. 딱지에 8이 뜨면 여덟 번 담은 줄 알고 놀랍니다.
+    """
     c = client()
     assert 'class="cart-count"' not in body(c.get("/"))
     c.post("/cart/add", data={"slug": "neungyule-kim-analysis"})
     assert '<span class="cart-count">1</span>' in body(c.get("/"))
-    print("PASS  머리말에 장바구니 개수")
+    c.post("/cart/clear")
+
+    # 한 강 · 분석 패키지 = 상품 여덟 개 → 딱지는 1
+    cat = sc.load_catalog()
+    pack = next(x for x in cat["packages"] if x["id"] == "analysis")
+    unit = [x["slug"] for mid in pack["materials"] for x in cat["products"]
+            if x.get("book") == "ybm-han" and x.get("unit") == "Lesson 1"
+            and x.get("materials") == [mid]]
+    assert len(unit) == 8, unit
+    c.post("/cart/add", data={"slug": ",".join(unit)})
+    page = body(c.get("/"))
+    assert '<span class="cart-count">1</span>' in page, "딱지가 파일 수를 세고 있습니다"
+    assert body(c.get("/cart")).count('class="cr-name"') == 1
+
+    # 같은 강에 문제 패키지까지 담으면 줄이 둘 — 딱지도 둘
+    prob = next(x for x in cat["packages"] if x["id"] == "problem")
+    more = [x["slug"] for mid in prob["materials"] for x in cat["products"]
+            if x.get("book") == "ybm-han" and x.get("unit") == "Lesson 1"
+            and x.get("materials") == [mid]]
+    c.post("/cart/add", data={"slug": ",".join(more)})
+    assert '<span class="cart-count">2</span>' in body(c.get("/"))
+    assert body(c.get("/cart")).count('class="cr-name"') == 2
+    c.post("/cart/clear")
+    print("PASS  머리말 딱지는 담은 묶음 수")
 
 
 def test_cart_add_only_known_products():

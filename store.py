@@ -92,7 +92,7 @@ def inject_globals():
         "passcfg": site.get("pass", {}),
         # 'discount' 도 예약어는 아니지만 같은 자리에 두어 화면에서 바로 씁니다.
         "discount": site.get("discount", {}),
-        "cart_count": len(cart_slugs()),
+        "cart_count": cart_count(),
         "order_kinds": sc.ORDER_KIND_LABELS,
         "inquiry_kinds": sc.INQUIRY_KINDS,
         "material_map": sc.material_map(),
@@ -620,6 +620,19 @@ def cart_items(catalog: dict | None = None) -> list[dict]:
     if len(items) != len(cart_slugs()):
         save_cart([x["slug"] for x in items])
     return items
+
+
+def cart_count() -> int:
+    """머리말 장바구니 딱지에 걸 수 — 담은 **묶음** 수.
+
+    자료는 하나하나가 상품이지만 담기는 것도 빠지는 것도 묶음 한 칸입니다.
+    한 강의 분석 패키지를 담았을 뿐인데 딱지에 8이 뜨면, 여덟 번 담은 줄 알고
+    놀라서 장바구니를 열어 봅니다. 장바구니에 보이는 줄 수와 같아야 합니다.
+    """
+    if not cart_slugs():
+        return 0
+    catalog = sc.load_catalog()
+    return len(cart_groups(cart_items(catalog), catalog))
 
 
 def cart_groups(items: list[dict], catalog: dict | None = None) -> list[dict]:
