@@ -3296,15 +3296,25 @@ def test_taster_is_given_away_not_sold():
     assert page.index('id="samples"') < page.index("taste-free")
     assert '/free/taste-one-passage' in page
 
-    # 값을 치르는 자리는 그 화면에서 사라졌습니다
+    # 값을 치르는 자리는 아예 없어졌습니다
     assert "taste-buy" not in page and "taste-list" not in page
-    paid = [p for p in sc.load_catalog()["products"] if p.get("taste")]
-    for one in paid:
-        assert one["name"] not in page, "맛보기를 아직 팔고 있습니다"
-        assert f'value="{one["slug"]}"' not in page
-        # 링크를 받아 오신 분은 그대로 사실 수 있습니다 (주소는 안 죽입니다)
-        assert client().get(f"/products/{one['slug']}").status_code == 200
-        assert one["name"] not in body(client().get("/products"))
+    assert not [x for x in sc.load_catalog()["products"] if x.get("taste")]
+
+    # 팔던 맛보기 상품은 손님 화면 어디에도 안 뜹니다. 자료 파일은 배포해도
+    # 안 덮이는 디스크에 있어서, 파일에서 지우는 것만으로는 안 내려갑니다.
+    dead = next(x for x in sc.load_raw_catalog()["products"]
+                if x["slug"] in sc.RETIRED_SLUGS)
+    assert dead.get("active", True), "코드로 내리는 길이 실제로 막고 있는지 봅니다"
+    for url in ("/lineup", "/products", "/products?category=mock", "/"):
+        got = body(client().get(url))
+        assert dead["slug"] not in got and dead["name"] not in got, url
+    assert client().get(f"/products/{dead['slug']}").status_code == 404
+    # 옛 주소로 담으려 해도 안 담깁니다
+    cc = client()
+    cc.post("/cart/add", data={"slug": dead["slug"]}, follow_redirects=True)
+    assert "담긴 자료가 없습니다" in body(cc.get("/cart"))
+    # 관리자에서는 보입니다 — 거기서 지우실 수 있어야 합니다
+    assert dead["name"] in body(a.get("/admin/products"))
 
     # 눌러 가면 이메일을 적고 받는 자리가 열립니다
     got = client().get("/free/taste-one-passage")

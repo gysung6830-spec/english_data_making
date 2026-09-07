@@ -320,11 +320,22 @@ def save_catalog(catalog: dict) -> None:
     save_json("products.json", catalog)
 
 
+# 손님 화면에서 내린 상품. 자료 파일은 배포해도 안 덮이는 디스크에 있어서,
+# 파일에서 지워도 이미 돌아가는 사이트에는 그대로 남습니다. 코드로 내려야
+# 확실히 내려갑니다. 관리자 화면에서는 그대로 보이니 거기서 지우시면 됩니다.
+RETIRED_SLUGS = {
+    # 맛보기는 값을 치르는 것에서 받아 가는 것으로 바꿨습니다.
+    # 라인업 '사기 전에' 자리의 무료 맛보기가 이 자리를 대신합니다.
+    "taste-analysis",
+}
+
+
 def load_catalog() -> dict:
-    """고객에게 보여 줄 것만. 숨김(active=false) 항목은 빠집니다."""
+    """고객에게 보여 줄 것만. 숨김(active=false)·내린 상품은 빠집니다."""
     catalog = load_raw_catalog()
     catalog["products"] = sorted(
-        [p for p in catalog["products"] if p.get("active", True)],
+        [p for p in catalog["products"]
+         if p.get("active", True) and p.get("slug") not in RETIRED_SLUGS],
         key=lambda p: (p.get("sort", 100), p.get("name", "")),
     )
     catalog["books"] = sorted(
