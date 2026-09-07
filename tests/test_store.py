@@ -3320,6 +3320,26 @@ def test_sample_pdf_links_go_somewhere():
     print("PASS  샘플 PDF 자리 · 빈 자료 세어 주기")
 
 
+def test_lineup_shows_a_slice_not_the_whole_page():
+    """지면은 윗부분만 잘라 보여 주고, 아래는 옅게 지웁니다.
+
+    통째로 펼치면 여백까지 다 드러나 밋밋하고 아래가 뚝 끊겨 보입니다.
+    한 장짜리 자료만 통째로 나오던 탓에 자료마다 인상이 달랐습니다.
+    """
+    css = body(client().get("/static/store.css"))
+    block = css.split(".mat-shots .mat-shot a{", 1)[1].split("@media", 1)[0]
+    assert "overflow:hidden" in block
+    assert "object-fit:cover" in block and "height:440px" in block
+    # 잘린 자리를 옅게 지우는 규칙
+    assert "linear-gradient(to bottom, rgba(255,255,255,0), #fff)" in block
+    # 한 장뿐이라고 통째로 보여 주던 예외는 없앴습니다
+    assert ".mat-shots:not(.one) .mat-shot img" not in css
+    # 대신 눌러서 원본을 볼 수 있어야 합니다
+    page = body(client().get("/lineup"))
+    assert "눌러서 크게" in css and "/lineup/shot/" in page
+    print("PASS  지면은 윗부분만 · 아래는 옅게 · 눌러서 원본")
+
+
 def test_lineup_shots_upload_and_show():
     """지면 사진을 관리자에서 올리면 오르티카 라인업에 바로 걸려야 합니다."""
     import io as _io
@@ -4922,6 +4942,7 @@ def run_all():
     test_made_to_order_has_its_own_way_in()
     test_taster_lives_on_the_lineup_not_the_list()
     test_sample_pdf_links_go_somewhere()
+    test_lineup_shows_a_slice_not_the_whole_page()
     test_lineup_shots_upload_and_show()
     test_mobile_filters_collapse()
     test_long_pages_have_shortcuts()

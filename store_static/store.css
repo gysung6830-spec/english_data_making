@@ -481,19 +481,32 @@ input[type=file]{
 .mat-shots.one{display:block; overflow:visible;}
 .mat-shots .mat-shot{flex:0 0 78%; max-width:520px;}
 .mat-shots.one .mat-shot{flex:none; max-width:none;}
-/* 지면마다 세로 길이가 달라 들쭉날쭉해 보입니다. 윗부분을 같은 높이로 잘라
-   가지런히 놓고, 누르면 원래 크기로 열립니다. 한 장뿐이면 통째로 보여 줍니다. */
-.mat-shots:not(.one) .mat-shot img{height:380px; object-fit:cover; object-position:top center;}
-.mat-shots .mat-shot a{display:block; position:relative;}
-.mat-shots:not(.one) .mat-shot a::after{
+/* 지면은 윗부분만 같은 높이로 잘라 보여 줍니다. 통째로 펼치면 여백까지 다
+   드러나 밋밋하고, 아래가 뚝 끊겨 보입니다. 아래로 갈수록 옅게 지워 두면
+   '이어진다' 는 느낌이 남습니다. 다 보고 싶으시면 눌러서 원본을 여십니다.
+   한 장이든 여러 장이든 같은 창으로 놓아 자료마다 인상이 달라지지 않게 합니다. */
+.mat-shots .mat-shot a{
+  display:block; position:relative; overflow:hidden; background:#fff;
+  border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow);
+}
+.mat-shots .mat-shot img{
+  height:440px; object-fit:cover; object-position:left top;
+  border:0; border-radius:0; box-shadow:none;
+}
+/* 잘린 자리가 툭 끊겨 보이지 않게 — 홈 타일과 같은 방식입니다 */
+.mat-shots .mat-shot a::before{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:24%;
+  background:linear-gradient(to bottom, rgba(255,255,255,0), #fff); pointer-events:none;
+}
+.mat-shots .mat-shot a::after{
   content:'눌러서 크게'; position:absolute; right:10px; bottom:10px;
   padding:5px 10px; border-radius:999px; font-size:12px; font-weight:700;
   background:rgba(17,24,20,.72); color:#fff; opacity:0; transition:opacity .15s;
 }
 .mat-shots .mat-shot a:hover::after, .mat-shots .mat-shot a:focus-visible::after{opacity:1;}
 @media (max-width:640px){
-  .mat-shots:not(.one) .mat-shot img{height:300px;}
-  .mat-shots:not(.one) .mat-shot a::after{opacity:1;}   /* 폰에는 hover 가 없습니다 */
+  .mat-shots .mat-shot img{height:330px;}
+  .mat-shots .mat-shot a::after{opacity:1;}   /* 폰에는 hover 가 없습니다 */
 }
 .mat-shot{margin:0 0 14px;}
 .mat-shot img{
