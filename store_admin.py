@@ -1524,7 +1524,9 @@ def freebie_from_form(form, existing: dict | None = None) -> tuple[dict, list[st
     item["grade"] = sc.clean(form.get("grade"), 20)
     item["exam"] = sc.clean(form.get("exam"), 60)
     item["kinds"] = [k for k in form.getlist("kinds") if k in sc.FREE_KINDS]
-    if not item["kinds"]:
+    # 맛보기는 한 지문에 자료를 전부 얹은 것이라 종류를 고를 것이 없습니다.
+    item["taste"] = bool(form.get("taste"))
+    if not item["kinds"] and not item["taste"]:
         errors.append("어떤 형식의 자료인지 하나 이상 골라 주세요.")
     gate = sc.clean(form.get("gate"), 10)
     item["gate"] = gate if gate in ("open", "email") else sc.suggested_gate(item["kinds"])

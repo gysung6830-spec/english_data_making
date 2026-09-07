@@ -209,45 +209,27 @@
       <h2>자료 샘플 PDF</h2>
       {% if sample_count %}
         <p>실제로 보내 드리는 파일과 <b>같은 판형</b>입니다. 회원가입 없이 바로 받으실 수 있습니다.
-          {% if tastes %}더 보고 정하고 싶으시면 <b>맛보기</b>로 한 회분만 써 보셔도 됩니다.{% endif %}</p>
-      {% elif tastes %}
-        <p>샘플 PDF는 준비하고 있습니다. 그 전에 <b>맛보기</b>로 몇 지문만 먼저 써 보실 수 있고,
-          <b>무료 자료실</b>에서는 실제로 만든 파일을 그대로 받아 보실 수 있습니다.</p>
+          {% if taste %}한 지문을 <b>자료 전부로</b> 훑어 놓은 맛보기도 그냥 가져가시면 됩니다.{% endif %}</p>
+      {% elif taste %}
+        <p>자료마다 따로 받는 샘플은 준비하고 있습니다. 그 전에 <b>한 지문을 자료 전부로</b>
+          훑어 놓은 맛보기를 그냥 가져가 보세요. 말로 읽는 것보다 빠릅니다.</p>
       {% else %}
         <p>지금은 샘플 PDF를 준비하고 있습니다.
           그동안 <b>무료 자료실</b>에서 실제로 만든 파일을 그대로 받아 보실 수 있고,
           이 화면 위쪽에 <b>자료마다 실제 지면 사진</b>을 올려 두었습니다.</p>
       {% endif %}
     </div>
-    {% if tastes %}
-      {# 맛보기 — 값을 치르고 한 번 써 보는 자리. 무엇을 만드는지 다 보신
-         바로 그 자리에 두어야 '그럼 한 번 써 볼까' 가 됩니다. #}
-      <div class="taste-list">
-        {% for t in tastes %}
-          <div class="taste">
-            <div class="taste-head">
-              {% if t.badge %}<span class="badge">{{ t.badge }}</span>{% endif %}
-              <b>{{ t.name }}</b>
-              {% if t.subtitle %}<p class="mb-0">{{ t.subtitle }}</p>{% endif %}
-              <div class="chips">
-                {% if t.grade %}<span class="chip">{{ t.grade }}</span>{% endif %}
-                {% if t.passages %}<span class="chip">지문 {{ t.passages }}개</span>{% endif %}
-                {% if t.materials %}<span class="chip">자료 {{ t.materials|length }}종</span>{% endif %}
-              </div>
-            </div>
-            <div class="taste-buy">
-              <span class="price">{{ t.price|won }}</span>
-              <form method="post" action="{{ url_for('cart_add') }}">
-                <input type="hidden" name="slug" value="{{ t.slug }}">
-                <input type="hidden" name="next" value="{{ url_for('cart') }}">
-                <button class="btn btn-primary" type="submit">담기</button>
-              </form>
-              <a class="taste-more" href="{{ url_for('product_detail', slug=t.slug) }}">
-                자세히 보기 →</a>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
+    {% if taste %}
+      {# 맛보기 — 무엇을 만드는지 다 보신 바로 그 자리. 여기서 손님이 바라는
+         것은 '한 번 받아 보기' 이지 '한 번 사 보기' 가 아닙니다. #}
+      <a class="taste-free" href="{{ url_for('free_detail', slug=taste.slug) }}">
+        <span class="tf-tag">무료</span>
+        <span class="tf-text">
+          <b>{{ taste.title }}</b>
+          {% if taste.summary %}<small>{{ taste.summary }}</small>{% endif %}
+        </span>
+        <span class="tf-go">받아가기 →</span>
+      </a>
     {% endif %}
 
     {% if sample_count %}
@@ -265,7 +247,7 @@
       </div>
     {% endif %}
     <div class="hero-actions" style="margin-top:18px;">
-      <a class="btn {{ 'btn-ghost' if tastes else 'btn-primary' }}" href="{{ url_for('free') }}">
+      <a class="btn {{ 'btn-ghost' if taste else 'btn-primary' }}" href="{{ url_for('free') }}">
         무료 자료 받으러 가기</a>
       <a class="btn btn-ghost" href="{{ url_for('contact') }}">궁금한 점 물어보기</a>
     </div>

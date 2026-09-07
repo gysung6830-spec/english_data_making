@@ -936,6 +936,19 @@ def free_kind_names(item: dict) -> list[str]:
     return [FREE_KINDS[k] for k in (item or {}).get("kinds", []) if k in FREE_KINDS]
 
 
+def taste_freebie(items=None) -> dict | None:
+    """라인업에 걸 '맛보기' — 한 지문을 자료 전부로 훑어 놓은 무료 파일.
+
+    값을 치르고 맛보라는 것은 앞뒤가 안 맞습니다. 무엇을 만드는지 다 보여 준
+    바로 그 자리에서 손님이 바라는 것은 '한 번 받아 보기' 이지 '한 번 사 보기'
+    가 아닙니다. 파일이 실제로 올라와 있는 것만 내놓습니다 — 눌렀는데 없는
+    것이 가장 나쁩니다.
+    """
+    items = load_freebies()["items"] if items is None else items
+    ready = [x for x in items if x.get("taste") and free_ready(x)]
+    return ready[0] if ready else None
+
+
 def suggested_gate(kinds) -> str:
     """직독직해가 들어 있으면 이메일을 받고, 아니면 그냥 내어 주는 것을 권합니다."""
     return "email" if set(kinds or []) & FREE_KINDS_GATED else "open"

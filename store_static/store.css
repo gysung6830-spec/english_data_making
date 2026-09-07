@@ -636,21 +636,29 @@ label.dropzone{
 }
 
 /* 맛보기 — 값을 치르고 한 번 써 보는 자리 */
-.taste-list{display:flex; flex-direction:column; gap:12px; margin-bottom:16px;}
-.taste{display:flex; align-items:center; gap:20px; flex-wrap:wrap;
-  padding:20px 22px; background:var(--card); border:1px solid var(--brand);
-  border-radius:var(--r); box-shadow:0 2px 10px rgba(20,107,74,.06);}
-.taste-head{flex:1; min-width:250px; word-break:keep-all;}
-.taste-head > b{display:block; font-size:17.5px; letter-spacing:-.02em; margin:6px 0 4px;}
-.taste-head p{font-size:14px; color:var(--muted);}
-.taste-head .chips{margin-top:10px;}
-.taste-buy{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
-.taste-buy .price{font-size:22px; font-weight:800; letter-spacing:-.03em;}
-.taste-more{font-size:13.5px; color:var(--muted); white-space:nowrap;}
-.taste-more:hover{color:var(--brand);}
+/* 맛보기 — 한 지문을 자료 전부로 훑어 놓은 무료 파일. 자료마다 따로 받는
+   샘플보다 앞에 서야 하므로 한 치수 크고, 테두리를 브랜드 색으로 씁니다. */
+.taste-free{display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+  margin-bottom:16px; padding:20px 22px; background:var(--card);
+  border:1px solid var(--brand); border-radius:var(--r);
+  box-shadow:0 2px 10px rgba(20,107,74,.06);
+  transition:border-color .15s, transform .15s;}
+.taste-free:hover{transform:translateY(-1px); box-shadow:0 4px 16px rgba(20,107,74,.1);}
+.tf-tag{flex:0 0 auto; font-size:12px; font-weight:800; color:#fff;
+  background:var(--brand); border-radius:999px; padding:3px 10px;}
+.tf-text{display:flex; flex-direction:column; gap:4px; min-width:0;
+  flex:1; word-break:keep-all;}
+.tf-text b{font-size:17px; letter-spacing:-.02em; color:var(--brand-dark);}
+.tf-text small{font-size:13.5px; color:var(--ink-2); line-height:1.6;}
+.tf-go{margin-left:auto; font-weight:800; font-size:15px; color:var(--brand);
+  white-space:nowrap;}
 @media (max-width:640px){
-  .taste{padding:18px;}
-  .taste-buy{width:100%; justify-content:space-between;}
+  /* 폰에서는 '무료 + 이름' 이 한 줄, '받아가기' 가 그 밑. 눌러 갈 곳보다
+     무엇을 받는지가 먼저 읽혀야 합니다. */
+  .taste-free{padding:18px; gap:10px 12px;}
+  .tf-tag{order:1; align-self:flex-start; margin-top:2px;}
+  .tf-text{order:2; flex:1 1 60%;}
+  .tf-go{order:3; flex:1 0 100%; margin-left:0; text-align:right;}
 }
 
 /* 샘플 PDF 모아 보기 */

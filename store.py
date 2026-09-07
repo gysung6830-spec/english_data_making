@@ -565,8 +565,7 @@ def lineup():
                            groups=sc.grouped_materials(),
                            cat_preview=category_preview(sc.load_catalog()),
                            shots=shots, mto_days=sc.MTO_DAYS,
-                           tastes=[p for p in sc.load_catalog()["products"]
-                                   if p.get("taste")],
+                           taste=sc.taste_freebie(),
                            ready_samples=ready, sample_count=len(ready))
 
 

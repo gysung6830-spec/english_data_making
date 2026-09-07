@@ -3266,33 +3266,51 @@ def test_made_to_order_has_its_own_way_in():
     print("PASS  주문제작 자료 — 신청 → 내 자료함 → 이메일")
 
 
-def test_taster_lives_on_the_lineup_not_the_list():
-    """맛보기는 '무엇을 만드는지' 를 본 그 자리에 있어야 합니다."""
-    taste = [p for p in sc.load_catalog()["products"] if p.get("taste")]
-    assert taste, "맛보기 상품이 없습니다"
-    one = taste[0]
+def test_taster_is_given_away_not_sold():
+    """맛보기는 값을 치르는 것이 아니라 받아 가는 것입니다.
 
-    # 자료 목록에는 안 겁니다 (낱개 자료로 떠돌지 않게)
-    listing = body(client().get("/products"))
-    assert one["name"] not in listing
-    assert f'value="{one["slug"]}"' not in listing
+    무엇을 만드는지 다 보여 준 그 자리에서 손님이 바라는 것은 '한 번 받아
+    보기' 이지 '한 번 사 보기' 가 아닙니다. 게다가 분석 8종 가운데 넷은
+    무료 자료실에서 이미 그냥 드리고 있어, 값을 매기면 앞뒤가 안 맞습니다.
+    """
+    a = admin()
+    # 맛보기로 표시하면 종류를 안 골라도 저장됩니다 (한 지문에 자료 전부라서)
+    a.post("/admin/free/new", data={
+        "slug": "taste-one-passage", "title": "맛보기 · 한 지문 전 자료",
+        "summary": "지문 하나를 자료 여덟 가지로 훑어 놓았습니다",
+        "gate": "email", "taste": "1", "active": "1"}, follow_redirects=True)
+    item = sc.find_freebie("taste-one-passage", raw=True)
+    assert item and item["taste"] and not item["kinds"]
 
-    # 라인업의 '사기 전에' 자리에 있고, 거기서 바로 담깁니다
+    # 파일이 아직 없으면 라인업에 안 걸립니다 — 눌렀는데 없는 것이 가장 나쁩니다
+    assert sc.taste_freebie() is None
+    assert "taste-free" not in body(client().get("/lineup"))
+
+    a.post("/admin/free/taste-one-passage/files",
+           data={"files": (io.BytesIO(b"%PDF-1.4 taste"), "taste.pdf")},
+           content_type="multipart/form-data", follow_redirects=True)
+
+    # 이제 '사기 전에' 자리에 무료로 걸립니다
     page = body(client().get("/lineup"))
-    assert 'class="taste"' in page and one["name"] in page
-    assert f'value="{one["slug"]}"' in page
-    head = page.index('id="samples"')
-    assert head < page.index('class="taste"'), "맛보기가 그 자리 밖에 있습니다"
+    assert "taste-free" in page and "맛보기 · 한 지문 전 자료" in page
+    assert page.index('id="samples"') < page.index("taste-free")
+    assert '/free/taste-one-passage' in page
 
-    # 눌러 담으면 장바구니에 들어갑니다
-    c = client()
-    c.post("/cart/add", data={"slug": one["slug"], "next": "/cart"}, follow_redirects=True)
-    assert one["name"] in body(c.get("/cart"))
-    c.post("/cart/clear")
+    # 값을 치르는 자리는 그 화면에서 사라졌습니다
+    assert "taste-buy" not in page and "taste-list" not in page
+    paid = [p for p in sc.load_catalog()["products"] if p.get("taste")]
+    for one in paid:
+        assert one["name"] not in page, "맛보기를 아직 팔고 있습니다"
+        assert f'value="{one["slug"]}"' not in page
+        # 링크를 받아 오신 분은 그대로 사실 수 있습니다 (주소는 안 죽입니다)
+        assert client().get(f"/products/{one['slug']}").status_code == 200
+        assert one["name"] not in body(client().get("/products"))
 
-    # 상품 화면은 그대로 열립니다 (링크를 받아 오신 분도 사실 수 있게)
-    assert client().get(f"/products/{one['slug']}").status_code == 200
-    print("PASS  맛보기는 라인업에 · 자료 목록에는 없음")
+    # 눌러 가면 이메일을 적고 받는 자리가 열립니다
+    got = client().get("/free/taste-one-passage")
+    assert got.status_code == 200 and "맛보기 · 한 지문 전 자료" in body(got)
+    a.post("/admin/free/taste-one-passage/delete", follow_redirects=True)
+    print("PASS  맛보기는 파는 것이 아니라 받아 가는 것")
 
 
 def test_sample_pdf_links_go_somewhere():
@@ -5107,7 +5125,7 @@ def run_all():
     test_list_hides_price_until_you_open_the_book()
     test_custom_request_takes_files_by_drag_and_drop()
     test_made_to_order_has_its_own_way_in()
-    test_taster_lives_on_the_lineup_not_the_list()
+    test_taster_is_given_away_not_sold()
     test_sample_pdf_links_go_somewhere()
     test_all_types_are_listed_with_killers_marked()
     test_question_count_is_spelled_out()
