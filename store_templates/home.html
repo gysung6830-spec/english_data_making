@@ -155,6 +155,7 @@
           <span class="mt-body">
             <span class="mat-no">{{ m.no }}</span>
             {% if m.signature %}<span class="sig">시그니처</span>{% endif %}
+            {% if m.killers %}<span class="killer-tag">킬러문항 포함</span>{% endif %}
             <b>{{ m.name }}</b>
             <small>{{ m.tagline }}</small>
           </span>

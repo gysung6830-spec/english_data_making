@@ -1205,6 +1205,27 @@ def material_form(mid):
     item["group"] = sc.clean(f.get("group"), 40)
     item["tagline"] = sc.clean(f.get("tagline"), 200)
     item["subline"] = sc.clean(f.get("subline"), 600)
+    # 문제 유형과 그중 킬러문항. 손님 화면에 낱낱이 펼쳐 보여 줍니다.
+    def _list(name, cap):
+        out, seen = [], set()
+        for x in (f.get(name) or "").replace("\n", ",").split(","):
+            x = sc.clean(x, 40)
+            if x and x not in seen:
+                seen.add(x)
+                out.append(x)
+        return out[:cap]
+
+    types = _list("types", 40)
+    if types:
+        item["types"] = types
+    else:
+        item.pop("types", None)
+    killers = [x for x in _list("killers", 40) if x in types]
+    if killers:
+        item["killers"] = killers
+    else:
+        item.pop("killers", None)
+
     # 지문 하나에 몇 문제가 붙는지. 손님 화면에서 지문 수와 곱해 보여 줍니다.
     per = sc.to_int(f.get("per_passage"), 0)
     if per > 0:

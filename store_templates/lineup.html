@@ -104,9 +104,30 @@
           {% if m.per_passage %}
             <span class="per-p">지문당 {{ m.per_passage }}문제</span>
           {% endif %}
+          {% if m.killers %}<span class="killer-tag">킬러문항 포함</span>{% endif %}
         </div>
         {% if m.tagline %}<p class="mat-tagline">{{ m.tagline }}</p>{% endif %}
-        {% if m.subline %}<p class="mat-subline">{{ m.subline }}</p>{% endif %}
+        {% if m.subline and not m.types %}<p class="mat-subline">{{ m.subline }}</p>{% endif %}
+
+        {# 유형을 낱낱이 펼쳐 놓습니다. '모든 경우의 수를 담았다' 는 말보다
+           17개를 세어 보이는 편이 셉니다. 그중 어려운 유형은 표시해 둡니다. #}
+        {% if m.types %}
+          <div class="type-box">
+            <b class="type-head">{{ m.types|length }}종을 다 냅니다 — 시험에 나올 수 있는 경우의 수</b>
+            <div class="type-chips">
+              {% for t in m.types %}
+                <span class="type-chip{{ ' killer' if t in (m.killers or []) }}">{{ t }}</span>
+              {% endfor %}
+            </div>
+            {% if m.killers %}
+              <p class="type-note">
+                <span class="type-chip killer">칠한 것</span>
+                은 <b>킬러문항</b>입니다. 학생이 가장 많이 틀리고, 학교가 변별하려고 쓰는
+                자리입니다. {{ m.killers|length }}종을 빼지 않고 다 넣었습니다.
+              </p>
+            {% endif %}
+          </div>
+        {% endif %}
         {% if m.made_to_order %}
           {# 미리 만들어 두지 않는 자료입니다. 어떻게 받는지 그 자리에서 말해 줍니다. #}
           <div class="mto-box">

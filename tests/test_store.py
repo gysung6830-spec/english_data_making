@@ -3317,6 +3317,44 @@ def test_sample_pdf_links_go_somewhere():
     print("PASS  샘플 PDF 자리 · 빈 자료 세어 주기")
 
 
+def test_all_types_are_listed_with_killers_marked():
+    """'모든 경우의 수를 담았다' 는 말보다 17종을 세어 보이는 편이 셉니다.
+
+    킬러문항이 들어 있다는 것도 말로만 하지 않고, 열일곱 중 어느 것이
+    킬러인지 짚어 줍니다. 그래야 손님이 세어 보고 믿습니다.
+    """
+    m = sc.material_map()["variants"]
+    assert len(m["types"]) == 17, len(m["types"])
+    assert m["killers"], "킬러문항을 하나도 안 짚었습니다"
+    # 킬러는 반드시 열일곱 안에 있어야 합니다 — 없는 유형을 칠할 수 없습니다
+    assert set(m["killers"]) <= set(m["types"]), set(m["killers"]) - set(m["types"])
+
+    page = body(client().get("/lineup"))
+    for t in m["types"]:
+        assert f'class="type-chip">{t}<' in page or \
+               f'class="type-chip killer">{t}<' in page, t
+    for k in m["killers"]:
+        assert f'class="type-chip killer">{k}<' in page, k
+    assert "17종을 다 냅니다" in page and "킬러문항" in page
+
+    # 자료 이름 옆과 첫 화면 타일에 딱지가 붙습니다
+    assert page.count("killer-tag") >= 1
+    assert "killer-tag" in body(client().get("/"))
+
+    # 관리자에서 유형과 킬러를 고칠 수 있어야 합니다
+    a = admin()
+    form = body(a.get("/admin/materials/variants"))
+    assert 'name="types"' in form and 'name="killers"' in form
+    assert "빈칸추론" in form
+
+    # 유형을 안 적어 둔 자료는 아무 말도 안 합니다 (없는 것을 지어내지 않게)
+    plain = sc.material_map()["oneline-ko"]
+    assert not plain.get("types") and not plain.get("killers")
+    head = page.split('id="oneline-ko"', 1)[1].split("</article>", 1)[0]
+    assert "killer-tag" not in head and "type-chip" not in head
+    print("PASS  17종을 낱낱이 · 킬러문항은 짚어서")
+
+
 def test_question_count_is_spelled_out():
     """'17종 변형문제' 가 몇 문제인지 화면에 적혀 있어야 합니다.
 
@@ -5029,6 +5067,7 @@ def run_all():
     test_made_to_order_has_its_own_way_in()
     test_taster_lives_on_the_lineup_not_the_list()
     test_sample_pdf_links_go_somewhere()
+    test_all_types_are_listed_with_killers_marked()
     test_question_count_is_spelled_out()
     test_home_tiles_share_one_magnification()
     test_lineup_shows_a_slice_not_the_whole_page()

@@ -38,6 +38,22 @@
       <div class="tip">자료 이름 바로 아래 굵게 나옵니다.</div>
     </div>
     <div class="adm-field full">
+      <label for="types">문제 유형 <span class="muted">(쉼표로)</span></label>
+      <textarea id="types" name="types" style="min-height:60px;"
+                placeholder="주제, 제목, 함의추론, 빈칸추론 …">{{ (m.types or [])|join(', ') }}</textarea>
+      <div class="tip">적어 두시면 손님 화면에 <b>낱낱이 펼쳐</b> 보여 드립니다.
+        '모든 경우의 수를 담았다' 는 말보다 17개를 세어 보이는 편이 셉니다.</div>
+    </div>
+
+    <div class="adm-field full">
+      <label for="killers">그중 킬러문항 <span class="muted">(쉼표로 · 위 유형과 똑같이 적어야 표시됩니다)</span></label>
+      <input type="text" id="killers" name="killers" value="{{ (m.killers or [])|join(', ') }}"
+             placeholder="빈칸추론, 순서 배열, 문장 삽입">
+      <div class="tip">여기 적은 유형은 손님 화면에서 <b>진하게 칠해</b> 나오고,
+        자료 이름 옆에 <b>'킬러문항 포함'</b> 딱지가 붙습니다.</div>
+    </div>
+
+    <div class="adm-field full">
       <label for="per_passage">지문당 문항 수 <span class="muted">(문제 자료일 때)</span></label>
       <input type="number" id="per_passage" name="per_passage" min="0" max="200"
              value="{{ m.per_passage or '' }}" style="width:140px;">
