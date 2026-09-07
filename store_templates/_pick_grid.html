@@ -32,8 +32,9 @@
               <span class="pp-covers">지문 하나에 <b>{{ per }}문제</b> —
                 나올 수 있는 경우의 수{% if has_killer %}에 킬러까지{% else %}를{% endif %}
                 다 모았습니다</span>
-            {% elif kind_covers.get(m) %}
-              <span class="pp-covers">{{ kind_covers[m] }}</span>
+            {% elif kind_covers.get(m) and kind_covers[m][1] %}
+              {% set head, tail = kind_covers[m] %}
+              <span class="pp-covers">{% if head %}<b>{{ head }}</b> — {% endif %}{{ tail }}</span>
             {% endif %}
           </span>
         </button>

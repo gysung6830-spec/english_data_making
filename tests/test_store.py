@@ -3377,7 +3377,9 @@ def test_all_types_are_listed_with_killers_marked():
     # 문항을 못 세는 분석 패키지는 수 대신 무슨 순서인지로 말합니다.
     # '좌지문우해석' 같은 이름만 늘어놓으면 무엇을 받는지 가늠이 안 됩니다.
     box = book.split('data-kind="analysis"', 1)[1].split("</button>", 1)[0]
-    assert "읽고 · 끊고" in box and "문제" not in box.split('class="pp-covers"', 1)[1]
+    line = box.split('class="pp-covers"', 1)[1]
+    assert "<b>능동적 분석 독해</b>" in line, "핵심어는 굵게 — 문제 패키지의 문항 수 자리"
+    assert "읽고 · 끊고" in line and "문제" not in line
     cc.post("/cart/clear")
 
     # 관리자에서 유형과 킬러를 고칠 수 있어야 합니다

@@ -500,9 +500,12 @@ def unit_grid(catalog: dict, slug: str) -> dict:
         n = len(kind_mats.get(kind, []))
         kind_labels[kind] = sc.package_label(by_id.get(kind), n)
         kind_briefs[kind] = f"{cores[kind]} {n}종"
-        # 문항 수를 못 세는 패키지는 무엇이 들었는지 말로 풀어 줍니다
-        kind_covers[kind] = ((by_id.get(kind) or {}).get("covers")
-                             or sc.PKG_COVERS.get(kind, ""))
+        # 문항 수를 못 세는 패키지는 무엇이 들었는지 말로 풀어 줍니다.
+        # (핵심어, 풀이) 두 토막 — 화면에서 핵심어만 굵게 나갑니다.
+        pkg = by_id.get(kind) or {}
+        kind_covers[kind] = (pkg.get("covers_head") or "",
+                             pkg.get("covers") or "") \
+            if pkg.get("covers") else sc.PKG_COVERS.get(kind, ("", ""))
 
     return {"rows": rows, "kinds": kinds, "kind_names": names, "kind_shorts": shorts,
             "kind_labels": kind_labels, "kind_briefs": kind_briefs,
