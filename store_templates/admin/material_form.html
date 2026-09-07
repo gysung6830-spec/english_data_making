@@ -38,6 +38,14 @@
       <div class="tip">자료 이름 바로 아래 굵게 나옵니다.</div>
     </div>
     <div class="adm-field full">
+      <label for="types_head">유형 묶음 제목</label>
+      <input type="text" id="types_head" name="types_head" value="{{ m.types_head or '' }}"
+             placeholder="17종 — 시험에 나올 수 있는 경우의 수를 다 냅니다">
+      <div class="tip">아래 유형들 위에 굵게 나옵니다. 자료마다 하는 일이 다르니
+        <b>같은 말을 쓰지 마세요</b> — 비워 두면 'N종을 다 냅니다' 로만 나옵니다.</div>
+    </div>
+
+    <div class="adm-field full">
       <label for="types">문제 유형 <span class="muted">(쉼표로)</span></label>
       <textarea id="types" name="types" style="min-height:60px;"
                 placeholder="주제, 제목, 함의추론, 빈칸추론 …">{{ (m.types or [])|join(', ') }}</textarea>

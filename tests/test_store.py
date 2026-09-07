@@ -3330,7 +3330,7 @@ def test_all_types_are_listed_with_killers_marked():
     for t in m["types"]:
         assert f'class="type-chip">{t}<' in page or \
                f'class="type-chip killer">{t}<' in page, t
-    assert "17종을 다 냅니다" in page
+    assert "경우의 수" in page.split('id="variants"', 1)[1].split("</article>", 1)[0]
 
     # 킬러문항은 객관식이 아니라 서술형입니다 — 손으로 쓰게 하는 자리
     desc = sc.material_map()["descriptive"]
@@ -3338,6 +3338,13 @@ def test_all_types_are_listed_with_killers_marked():
     assert not m.get("killer"), "변형문제(객관식)에 킬러가 붙었습니다"
     block = page.split('id="descriptive"', 1)[1].split("</article>", 1)[0]
     assert "killer-tag" in block and "여기가 킬러문항입니다" in block
+    # 두 자료가 하는 일이 다릅니다 — 머리말이 같으면 그게 안 보입니다
+    vhead = page.split('id="variants"', 1)[1].split("</article>", 1)[0]
+    import re as _re
+    heads = _re.findall(r'class="type-head">([^<]+)<', page)
+    assert len(set(heads)) == len(heads), heads
+    assert "경우의 수" not in block, "서술형까지 '경우의 수' 라고 합니다"
+    assert "변별" in block
     # 어느 유형이 킬러인지 하나씩 짚지는 않습니다 — 급을 매기면 나머지가
     # 쉬워 보이고, 학교마다 어려운 자리도 다릅니다
     assert "type-chip killer" not in page, "유형에 급을 매기고 있습니다"

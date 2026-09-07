@@ -113,7 +113,9 @@
            17개를 세어 보이는 편이 셉니다. 그중 어려운 유형은 표시해 둡니다. #}
         {% if m.types %}
           <div class="type-box">
-            <b class="type-head">{{ m.types|length }}종을 다 냅니다 — 시험에 나올 수 있는 경우의 수</b>
+            {# 자료마다 하는 일이 다릅니다. 변형문제는 경우의 수를 덮고,
+               서술형은 가르는 자리를 덮습니다. 머리말이 같으면 그게 안 보입니다. #}
+            <b class="type-head">{{ m.types_head or (m.types|length ~ '종을 다 냅니다') }}</b>
             <div class="type-chips">
               {% for t in m.types %}<span class="type-chip">{{ t }}</span>{% endfor %}
             </div>

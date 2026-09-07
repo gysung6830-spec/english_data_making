@@ -1215,6 +1215,7 @@ def material_form(mid):
                 out.append(x)
         return out[:cap]
 
+    item["types_head"] = sc.clean(f.get("types_head"), 120)
     types = _list("types", 40)
     if types:
         item["types"] = types
