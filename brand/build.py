@@ -1076,6 +1076,10 @@ def build_all() -> list[Path]:
          build_cover_backdrop(2400, 1350), 2400, 1350)
     # 글자가 들어간 판 — 배너·썸네일처럼 위에 아무것도 안 얹히는 자리용
     emit(made, "cover-branded-1200x900.png", build_cover(1200, 900), 1200, 900)
+    # 글자가 들어간 판을 모바일 홈 커버 규격으로도 뽑아 둔다. 네이버가 이 위에
+    # 제목을 또 얹으므로 겹칠 수 있다 — 겹치는 게 싫으면 backdrop 쪽을 쓴다.
+    for w, h in ((1600, 1200), (2400, 1350), (1080, 1080)):
+        emit(made, f"cover-branded-{w}x{h}.png", build_cover(w, h), w, h)
     # 배경이 깔린 판 — 그냥 올려도 어디서나 보인다
     emit(made, "logo-horizontal-solid-light.png",
          build_logo_horizontal(1200, 300, transparent=False), 1200, 300)
