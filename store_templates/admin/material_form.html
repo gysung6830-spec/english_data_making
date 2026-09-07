@@ -46,7 +46,20 @@
     </div>
 
     <div class="adm-field full">
-      <label for="killers">그중 킬러문항 <span class="muted">(쉼표로 · 위 유형과 똑같이 적어야 표시됩니다)</span></label>
+      <label class="check"><input type="checkbox" name="killer" value="1"
+             {{ 'checked' if m.killer }}> <span>이 자료가 <b>킬러문항 구간</b>입니다</span></label>
+      <div class="tip">켜면 유형을 <b>모두</b> 칠하고, 자료 이름 옆에 '킬러문항' 딱지를 붙입니다.
+        아래 '한 줄 설명' 이 그 밑에 나옵니다.</div>
+    </div>
+
+    <div class="adm-field full">
+      <label for="killer_note">킬러문항 한 줄 설명</label>
+      <input type="text" id="killer_note" name="killer_note" value="{{ m.killer_note or '' }}"
+             placeholder="내신에서 학생을 가르는 자리는 여기입니다.">
+    </div>
+
+    <div class="adm-field full">
+      <label for="killers">그중 킬러문항만 짚기 <span class="muted">(쉼표로 · 위 유형과 똑같이 적어야 표시됩니다)</span></label>
       <input type="text" id="killers" name="killers" value="{{ (m.killers or [])|join(', ') }}"
              placeholder="빈칸추론, 순서 배열, 문장 삽입">
       <div class="tip">여기 적은 유형은 손님 화면에서 <b>진하게 칠해</b> 나오고,

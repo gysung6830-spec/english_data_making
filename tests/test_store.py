@@ -3325,26 +3325,33 @@ def test_all_types_are_listed_with_killers_marked():
     """
     m = sc.material_map()["variants"]
     assert len(m["types"]) == 17, len(m["types"])
-    assert m["killers"], "킬러문항을 하나도 안 짚었습니다"
-    # 킬러는 반드시 열일곱 안에 있어야 합니다 — 없는 유형을 칠할 수 없습니다
-    assert set(m["killers"]) <= set(m["types"]), set(m["killers"]) - set(m["types"])
 
     page = body(client().get("/lineup"))
     for t in m["types"]:
         assert f'class="type-chip">{t}<' in page or \
                f'class="type-chip killer">{t}<' in page, t
-    for k in m["killers"]:
-        assert f'class="type-chip killer">{k}<' in page, k
-    assert "17종을 다 냅니다" in page and "킬러문항" in page
+    assert "17종을 다 냅니다" in page
 
-    # 자료 이름 옆과 첫 화면 타일에 딱지가 붙습니다
-    assert page.count("killer-tag") >= 1
+    # 킬러문항은 객관식이 아니라 서술형입니다 — 손으로 쓰게 하는 자리
+    desc = sc.material_map()["descriptive"]
+    assert desc.get("killer") and desc.get("types")
+    assert not m.get("killer") and not m.get("killers"), "변형문제(객관식)에 킬러가 붙었습니다"
+    block = page.split('id="descriptive"', 1)[1].split("</article>", 1)[0]
+    assert "killer-tag" in block and "여기가 킬러문항입니다" in block
+    for t in desc["types"]:
+        assert f'class="type-chip killer">{t}<' in block, t
+    # 변형문제 쪽에는 안 붙습니다
+    vblock = page.split('id="variants"', 1)[1].split("</article>", 1)[0]
+    assert "killer-tag" not in vblock and "type-chip killer" not in vblock
+
+    # 첫 화면 타일에도 딱지가 붙습니다
     assert "killer-tag" in body(client().get("/"))
 
     # 관리자에서 유형과 킬러를 고칠 수 있어야 합니다
     a = admin()
     form = body(a.get("/admin/materials/variants"))
     assert 'name="types"' in form and 'name="killers"' in form
+    assert 'name="killer"' in form and 'name="killer_note"' in form
     assert "빈칸추론" in form
 
     # 유형을 안 적어 둔 자료는 아무 말도 안 합니다 (없는 것을 지어내지 않게)

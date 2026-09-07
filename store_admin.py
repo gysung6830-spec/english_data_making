@@ -1220,6 +1220,9 @@ def material_form(mid):
         item["types"] = types
     else:
         item.pop("types", None)
+    # 자료 통째가 킬러 구간일 때 (서술형처럼)
+    item["killer"] = bool(f.get("killer"))
+    item["killer_note"] = sc.clean(f.get("killer_note"), 200)
     killers = [x for x in _list("killers", 40) if x in types]
     if killers:
         item["killers"] = killers

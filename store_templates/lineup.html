@@ -104,7 +104,7 @@
           {% if m.per_passage %}
             <span class="per-p">지문당 {{ m.per_passage }}문제</span>
           {% endif %}
-          {% if m.killers %}<span class="killer-tag">킬러문항 포함</span>{% endif %}
+          {% if m.killer or m.killers %}<span class="killer-tag">킬러문항</span>{% endif %}
         </div>
         {% if m.tagline %}<p class="mat-tagline">{{ m.tagline }}</p>{% endif %}
         {% if m.subline and not m.types %}<p class="mat-subline">{{ m.subline }}</p>{% endif %}
@@ -116,10 +116,12 @@
             <b class="type-head">{{ m.types|length }}종을 다 냅니다 — 시험에 나올 수 있는 경우의 수</b>
             <div class="type-chips">
               {% for t in m.types %}
-                <span class="type-chip{{ ' killer' if t in (m.killers or []) }}">{{ t }}</span>
+                <span class="type-chip{{ ' killer' if m.killer or t in (m.killers or []) }}">{{ t }}</span>
               {% endfor %}
             </div>
-            {% if m.killers %}
+            {% if m.killer_note %}
+              <p class="type-note"><b>여기가 킬러문항입니다.</b> {{ m.killer_note }}</p>
+            {% elif m.killers %}
               <p class="type-note">
                 <span class="type-chip killer">칠한 것</span>
                 은 <b>킬러문항</b>입니다. 학생이 가장 많이 틀리고, 학교가 변별하려고 쓰는
