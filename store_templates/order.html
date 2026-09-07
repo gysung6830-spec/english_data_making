@@ -37,8 +37,6 @@
             {% if first.passages %}<span class="chip">지문 {{ first.passages }}개</span>{% endif %}
             {% set qn = qcount({'passages': first.passages, 'materials': g.mats}) %}
             {% if qn %}<span class="chip chip-q">문제 {{ '{:,}'.format(qn) }}개</span>{% endif %}
-            {% set wq = won_per_q(g.price, qn) %}
-            {% if wq %}<span class="chip">문제당 {{ '{:,}'.format(wq) }}원꼴</span>{% endif %}
             <span class="chip">PDF</span>
           </div>
           <div class="mat-chips">

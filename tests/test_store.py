@@ -25,7 +25,8 @@ from pathlib import Path
 
 # 실제 store_data 를 건드리지 않도록, 복사본을 만들어 그쪽을 보게 합니다.
 _TMP = Path(tempfile.mkdtemp())
-_SRC = Path(__file__).resolve().parent.parent / "store_data"
+_ROOT = Path(__file__).resolve().parent.parent
+_SRC = _ROOT / "store_data"
 
 
 def _skip_real_files(folder, names):
@@ -3421,18 +3422,18 @@ def test_question_count_is_spelled_out():
     line = body(client().get("/lineup"))
     assert "지문당 17문제" in line and "지문당 23문제" in line
 
-    # 문제 하나에 얼마인지도 함께 — 값이 커 보이는 것을 눌러 줍니다
-    assert sc.won_per_question(pack["price"], sc.question_count(pack)) == round(
-        pack["price"] / (pack["passages"] * 40))
-    assert "문제 하나에" in detail and "원꼴" in detail
-    # 문제가 없는 자료에는 단가도 안 나옵니다 (0 으로 나눌 수 없습니다)
-    assert sc.won_per_question(10000, 0) == 0
-    assert sc.won_per_question(0, 100) == 0
-    plain = body(client().get("/products/mock-2026-06-g3-analysis"))
-    assert "원꼴" not in plain and "이 자료에" not in plain
+    # 문제 수는 세어 주되 '문제당 얼마' 는 어디에도 안 씁니다.
+    # 낱개 단가를 적어 두면 시중 문제집과 자릿수로 견주게 됩니다. 우리가 파는 것은
+    # 문제 개수가 아니라 '그 학교 그 지문에서 나올 경우의 수' 라 그 견줌에서 집니다.
+    assert not hasattr(sc, "won_per_question")
+    for page in (detail, listed):
+        assert "원꼴" not in page and "문제 하나에" not in page
+    for tpl in ("cart.html", "order.html", "product.html"):
+        assert "원꼴" not in (_ROOT / "store_templates" / tpl).read_text()
 
-    # 값을 안 보여 주는 목록 카드에는 단가를 붙이지 않습니다
-    assert "원꼴" not in listed
+    # 문제 수를 못 세는 자료에는 아무 말도 안 합니다
+    plain = body(client().get("/products/mock-2026-06-g3-analysis"))
+    assert "이 자료에" not in plain
 
     # 담기 전에 — 강 고르는 표의 문제 패키지 칸에 몇 문제인지 적혀 있어야 합니다
     grid = store.unit_grid(cat, "ybm-han")
@@ -3447,7 +3448,7 @@ def test_question_count_is_spelled_out():
     # 지문당 문항 수는 관리자에서 고칠 수 있어야 합니다
     form = body(admin().get("/admin/materials/variants"))
     assert 'name="per_passage"' in form and 'value="17"' in form
-    print("PASS  '17종' 이 몇 문제인지 · 문제 하나에 얼마인지")
+    print("PASS  '17종' 이 몇 문제인지 (문제당 단가는 안 씀)")
 
 
 def test_home_tiles_share_one_magnification():
