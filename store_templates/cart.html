@@ -27,6 +27,12 @@
               <span class="cr-name">{{ g.label or g.name }}</span>
               <div class="cr-where">
                 {{ g.book }}{% if g.unit %} · <b>{{ g.unit }}</b>{% endif %}
+                {% set qn = qcount({'passages': g['items'][0].passages, 'materials': g.mats}) %}
+                {% if qn %}
+                  · 문제 <b>{{ '{:,}'.format(qn) }}개</b>
+                  {%- set wq = won_per_q(g.price, qn) %}
+                  {%- if wq %} <span class="muted">(문제당 {{ '{:,}'.format(wq) }}원꼴)</span>{% endif %}
+                {% endif %}
               </div>
               {% if g.package %}
                 <div class="mat-chips">

@@ -3350,10 +3350,23 @@ def test_question_count_is_spelled_out():
     line = body(client().get("/lineup"))
     assert "지문당 17문제" in line and "지문당 23문제" in line
 
+    # 문제 하나에 얼마인지도 함께 — 값이 커 보이는 것을 눌러 줍니다
+    assert sc.won_per_question(pack["price"], sc.question_count(pack)) == round(
+        pack["price"] / (pack["passages"] * 40))
+    assert "문제 하나에" in detail and "원꼴" in detail
+    # 문제가 없는 자료에는 단가도 안 나옵니다 (0 으로 나눌 수 없습니다)
+    assert sc.won_per_question(10000, 0) == 0
+    assert sc.won_per_question(0, 100) == 0
+    plain = body(client().get("/products/mock-2026-06-g3-analysis"))
+    assert "원꼴" not in plain and "이 자료에" not in plain
+
+    # 값을 안 보여 주는 목록 카드에는 단가를 붙이지 않습니다
+    assert "원꼴" not in listed
+
     # 지문당 문항 수는 관리자에서 고칠 수 있어야 합니다
     form = body(admin().get("/admin/materials/variants"))
     assert 'name="per_passage"' in form and 'value="17"' in form
-    print("PASS  '17종' 이 몇 문제인지 곱해서 적음")
+    print("PASS  '17종' 이 몇 문제인지 · 문제 하나에 얼마인지")
 
 
 def test_home_tiles_share_one_magnification():

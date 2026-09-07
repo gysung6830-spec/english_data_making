@@ -214,6 +214,17 @@ def question_count(item: dict, mats: dict | None = None) -> int:
                for mid in (item.get("materials") or []))
 
 
+def won_per_question(price: int, questions: int) -> int:
+    """문제 하나에 얼마인지. 어림수라 화면에서는 '꼴' 을 붙여 씁니다.
+
+    나누는 단위가 크면 단가가 작아 보입니다. '27,800원' 은 망설여지지만
+    '문제 하나에 25원' 은 안 망설여집니다. 워크북·어휘 문항은 아직 안 세므로
+    실제 단가는 이보다 낮습니다 — 부풀리는 쪽이 아니라 깎는 쪽이라 괜찮습니다.
+    """
+    price, questions = to_int(price, 0), to_int(questions, 0)
+    return round(price / questions) if price > 0 and questions > 0 else 0
+
+
 def material_package() -> dict[str, str]:
     """자료가 어느 패키지에 드는지. 화면에서 딱지 색을 가르는 데 씁니다.
 

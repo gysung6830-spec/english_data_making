@@ -2211,3 +2211,4 @@ label.dropzone{
 .per-p{display:inline-block; padding:3px 10px; border-radius:999px;
   background:#fdeee6; color:#a3450f; font-size:12.5px; font-weight:800;
   white-space:nowrap;}
+.q-count small{display:block; margin-top:3px; font-size:13px; color:var(--muted);}
