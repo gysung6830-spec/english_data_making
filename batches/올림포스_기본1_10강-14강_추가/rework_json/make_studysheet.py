@@ -19,6 +19,12 @@ FONTFACE=f"""
 
 order=json.load(open(SC+"/order.json"))
 P=[json.load(open(SC+"/passages/"+fn)) for fn in order]
+# 정답 개조식 노트(있으면 사용): { item_no: [note,...] }
+NOTES={}
+_np=SC+"/answer_notes.json"
+if os.path.exists(_np):
+    try: NOTES=json.load(open(_np))
+    except Exception: NOTES={}
 
 CIRC="①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳"
 def circ(n): return CIRC[n-1] if 1<=n<=len(CIRC) else f"({n})"
@@ -91,6 +97,7 @@ table.flow td{border:1px solid var(--line); padding:4px 6px; font-size:9pt; vert
 .rest .lab{display:inline-block; font-weight:700; color:var(--green-d); min-width:96px;}
 .small{font-size:8pt; color:var(--sub);}
 .kw{color:var(--amber);}
+.note{font-weight:600; line-height:1.55;}
 """.replace("__FOOT__", FOOT).replace("__FONTS__", FONTFACE)
 
 STANCES="긍정적 · 부정적·비판적 · 중립적"
@@ -103,7 +110,8 @@ def card(p, ans):
     h.append('<table class="flow"><tr>'
              '<td class="hd st">단계 · 문장</td><td class="hd kwc">핵심어(영어)</td>'
              '<td class="hd">내용 정리 <span class="small">(핵심 위주 · 문장 연결 고민 · 한글 가능)</span></td></tr>')
-    for b in ov["flow_blocks"]:
+    notes=NOTES.get(no) or NOTES.get(p["item_no"]) or []
+    for i,b in enumerate(ov["flow_blocks"]):
         stg=esc(b["stage"]); rg=fmt_range(b["sentence_range"])
         kws=[]
         for sid in parse_range(b["sentence_range"]):
@@ -111,7 +119,8 @@ def card(p, ans):
                 kws.append(f'<span class="kwrow"><span class="snum">{circ(sid)}</span><span class="kw-en">{esc(" · ".join(km[sid]))}</span></span>')
         kwc="".join(kws) or '<span class="small">—</span>'
         if ans:
-            cell=f'<span class="ans-v2">{keyed(b["summary"])}</span>'
+            note=notes[i] if i < len(notes) else re.sub(r"\[\[(.+?)\]\]", r"\1", b["summary"])
+            cell=f'<span class="ans-v2 note">{esc(note)}</span>'
         else:
             cell='<div class="sum-blank"></div>'
         h.append(f'<tr><td class="st">{stg}<div class="rg">{rg}</div></td><td class="kwc">{kwc}</td><td>{cell}</td></tr>')
