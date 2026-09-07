@@ -4198,10 +4198,13 @@ def test_cart_asks_you_to_compare_not_claims():
     for claim in ("학원비 3", "학원 월 ", "무조건", "100%", "최저가", "시간을 절약해 드립니다"):
         assert claim not in two, claim
 
-    # 교재 화면에서는 '다 더한 값' 이야기를 하지 않습니다 (그 교재 값뿐이라)
-    book = body(client().get("/books/ybm-han"))
-    assert "찾아 헤매는 시간" in book
-    assert "학원" not in book, "교재 화면에서는 학원 이야기를 안 합니다"
+    # 값이 보이는 화면에는 어디든 같은 두 줄이 붙습니다 — 한 곳에서 만들어 씁니다
+    for url in ("/books/ybm-han", "/products/ybm-han-analysis"):
+        page = body(client().get(url))
+        assert "학원 한 달 수강료와 견줘 보세요" in page, url
+        assert "자료를 찾고 만드는 시간과 견줘 보세요" in page, url
+        # 그 교재 값만 나오는 화면이라 '다 더한 값' 이라고 하면 안 됩니다
+        assert "다 더한" not in page and "아우른" not in page, url
 
     c.post("/cart/clear")
     print("PASS  다 더한 값은 견주시라고만 · 숫자로 주장하지 않음")

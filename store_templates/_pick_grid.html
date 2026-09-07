@@ -91,12 +91,8 @@
       <button class="btn btn-primary" type="submit" disabled>장바구니에 담기</button>
     </div>
   </div>
-  {# 여기서는 이 교재 값만 나오므로 '다 더한 값' 이야기를 할 수 없습니다.
-     대신 어느 교재에서나 참인 것 — 찾고 만드는 시간 — 만 말합니다. #}
-  <p class="time-worth">
-    좋은 자료를 <b>찾아 헤매는 시간</b>과 직접 만드는 시간을 아끼세요.
-    담아서 그대로 쓰시면 됩니다.
-  </p>
+  {# 합계 바로 아래. 여기서는 이 교재 값만 나오므로 '다 더한 값' 이라 하지 않습니다. #}
+  {% include "_worth.html" %}
 
   <p class="muted" style="font-size:13.5px;margin-top:12px;">
     이미 장바구니에 있는 것은 <b>체크된 채로 잠겨</b> 있습니다.
