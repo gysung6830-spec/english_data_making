@@ -1223,11 +1223,7 @@ def material_form(mid):
     # 자료 통째가 킬러 구간일 때 (서술형처럼)
     item["killer"] = bool(f.get("killer"))
     item["killer_note"] = sc.clean(f.get("killer_note"), 200)
-    killers = [x for x in _list("killers", 40) if x in types]
-    if killers:
-        item["killers"] = killers
-    else:
-        item.pop("killers", None)
+    item.pop("killers", None)      # 유형을 하나씩 짚지는 않습니다
 
     # 지문 하나에 몇 문제가 붙는지. 손님 화면에서 지문 수와 곱해 보여 줍니다.
     per = sc.to_int(f.get("per_passage"), 0)

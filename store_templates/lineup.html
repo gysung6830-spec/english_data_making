@@ -104,7 +104,7 @@
           {% if m.per_passage %}
             <span class="per-p">지문당 {{ m.per_passage }}문제</span>
           {% endif %}
-          {% if m.killer or m.killers %}<span class="killer-tag">킬러문항</span>{% endif %}
+          {% if m.killer %}<span class="killer-tag">킬러문항</span>{% endif %}
         </div>
         {% if m.tagline %}<p class="mat-tagline">{{ m.tagline }}</p>{% endif %}
         {% if m.subline and not m.types %}<p class="mat-subline">{{ m.subline }}</p>{% endif %}
@@ -115,18 +115,12 @@
           <div class="type-box">
             <b class="type-head">{{ m.types|length }}종을 다 냅니다 — 시험에 나올 수 있는 경우의 수</b>
             <div class="type-chips">
-              {% for t in m.types %}
-                <span class="type-chip{{ ' killer' if m.killer or t in (m.killers or []) }}">{{ t }}</span>
-              {% endfor %}
+              {% for t in m.types %}<span class="type-chip">{{ t }}</span>{% endfor %}
             </div>
+            {# 어느 유형이 킬러인지 하나씩 짚지는 않습니다. 급을 매기면 나머지가
+               쉬워 보이고, 학교마다 어려운 자리도 다릅니다. 있다고만 말합니다. #}
             {% if m.killer_note %}
               <p class="type-note"><b>여기가 킬러문항입니다.</b> {{ m.killer_note }}</p>
-            {% elif m.killers %}
-              <p class="type-note">
-                <span class="type-chip killer">칠한 것</span>
-                은 <b>킬러문항</b>입니다. 학생이 가장 많이 틀리고, 학교가 변별하려고 쓰는
-                자리입니다. {{ m.killers|length }}종을 빼지 않고 다 넣었습니다.
-              </p>
             {% endif %}
           </div>
         {% endif %}

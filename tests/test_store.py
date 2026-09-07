@@ -3335,14 +3335,17 @@ def test_all_types_are_listed_with_killers_marked():
     # 킬러문항은 객관식이 아니라 서술형입니다 — 손으로 쓰게 하는 자리
     desc = sc.material_map()["descriptive"]
     assert desc.get("killer") and desc.get("types")
-    assert not m.get("killer") and not m.get("killers"), "변형문제(객관식)에 킬러가 붙었습니다"
+    assert not m.get("killer"), "변형문제(객관식)에 킬러가 붙었습니다"
     block = page.split('id="descriptive"', 1)[1].split("</article>", 1)[0]
     assert "killer-tag" in block and "여기가 킬러문항입니다" in block
+    # 어느 유형이 킬러인지 하나씩 짚지는 않습니다 — 급을 매기면 나머지가
+    # 쉬워 보이고, 학교마다 어려운 자리도 다릅니다
+    assert "type-chip killer" not in page, "유형에 급을 매기고 있습니다"
     for t in desc["types"]:
-        assert f'class="type-chip killer">{t}<' in block, t
-    # 변형문제 쪽에는 안 붙습니다
+        assert f'class="type-chip">{t}<' in block, t
+    # 변형문제 쪽에는 딱지가 안 붙습니다
     vblock = page.split('id="variants"', 1)[1].split("</article>", 1)[0]
-    assert "killer-tag" not in vblock and "type-chip killer" not in vblock
+    assert "killer-tag" not in vblock
 
     # 첫 화면 타일에도 딱지가 붙습니다
     assert "killer-tag" in body(client().get("/"))
@@ -3350,16 +3353,16 @@ def test_all_types_are_listed_with_killers_marked():
     # 관리자에서 유형과 킬러를 고칠 수 있어야 합니다
     a = admin()
     form = body(a.get("/admin/materials/variants"))
-    assert 'name="types"' in form and 'name="killers"' in form
-    assert 'name="killer"' in form and 'name="killer_note"' in form
+    assert 'name="types"' in form and 'name="killer_note"' in form
+    assert 'name="killers"' not in form, "유형을 하나씩 짚는 칸은 없앴습니다"
     assert "빈칸추론" in form
 
     # 유형을 안 적어 둔 자료는 아무 말도 안 합니다 (없는 것을 지어내지 않게)
     plain = sc.material_map()["oneline-ko"]
-    assert not plain.get("types") and not plain.get("killers")
+    assert not plain.get("types") and not plain.get("killer")
     head = page.split('id="oneline-ko"', 1)[1].split("</article>", 1)[0]
     assert "killer-tag" not in head and "type-chip" not in head
-    print("PASS  17종을 낱낱이 · 킬러문항은 짚어서")
+    print("PASS  유형은 낱낱이 · 킬러는 있다고만")
 
 
 def test_question_count_is_spelled_out():

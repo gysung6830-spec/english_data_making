@@ -2225,8 +2225,6 @@ label.dropzone{
 .type-chip{display:inline-block; padding:5px 11px; border-radius:999px;
   font-size:13px; font-weight:600; white-space:nowrap;
   background:#fff; border:1px solid var(--line); color:var(--ink-2);}
-/* 킬러문항 — 학생이 가장 많이 틀리는 자리. 눈에 띄게 둡니다 */
-.type-chip.killer{background:#fdeee6; border-color:#f0c9b6; color:#a3450f; font-weight:800;}
 .type-note{margin:12px 0 0; font-size:13.5px; color:var(--ink-2); line-height:1.9;
   word-break:keep-all;}
 .type-note .type-chip{margin-right:2px;}
