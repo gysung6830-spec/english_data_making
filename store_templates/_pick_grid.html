@@ -23,14 +23,17 @@
                   {%- if mm.killer %}<i class="chip-killer">킬러</i>{% endif %}</span>
               {%- endfor %}
             </span>
-            {# 이 패키지가 지문 하나를 몇 문제로 훑는지 한 줄. 자료를 낱낱이
-               읊는 것보다 다 더한 수 하나가 셉니다. 라인업까지 안 들어가셔도 보이게. #}
+            {# 이 패키지가 지문 하나를 어떻게 훑는지 한 줄. 문항을 세는 패키지는
+               다 더한 수 하나가 세고, 못 세는 패키지는 무슨 순서인지가 셉니다.
+               라인업까지 안 들어가셔도 여기서 보이게. #}
             {% set per = kind_mats.get(m, []) | sum(attribute='per_passage') %}
             {% if per %}
               {% set has_killer = kind_mats.get(m, []) | selectattr('killer') | list %}
               <span class="pp-covers">지문 하나에 <b>{{ per }}문제</b> —
                 나올 수 있는 경우의 수{% if has_killer %}에 킬러까지{% else %}를{% endif %}
                 다 모았습니다</span>
+            {% elif kind_covers.get(m) %}
+              <span class="pp-covers">{{ kind_covers[m] }}</span>
             {% endif %}
           </span>
         </button>

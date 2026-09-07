@@ -3374,9 +3374,10 @@ def test_all_types_are_listed_with_killers_marked():
     book = body(cc.get("/books/ybm-han"))
     assert "pp-covers" in book and "지문 하나에 <b>40문제</b>" in book
     assert "경우의 수에 킬러까지" in book
-    # 문항 수를 안 세는 분석 패키지에는 이 줄이 안 붙습니다 (0문제라 할 수 없으니)
+    # 문항을 못 세는 분석 패키지는 수 대신 무슨 순서인지로 말합니다.
+    # '좌지문우해석' 같은 이름만 늘어놓으면 무엇을 받는지 가늠이 안 됩니다.
     box = book.split('data-kind="analysis"', 1)[1].split("</button>", 1)[0]
-    assert "pp-covers" not in box
+    assert "읽고 · 끊고" in box and "문제" not in box.split('class="pp-covers"', 1)[1]
     cc.post("/cart/clear")
 
     # 관리자에서 유형과 킬러를 고칠 수 있어야 합니다

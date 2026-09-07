@@ -419,7 +419,7 @@ def unit_grid(catalog: dict, slug: str) -> dict:
     items = [p for p in catalog["products"] if p.get("book") == slug and p.get("unit")]
     if not items:
         return {"rows": [], "kinds": [], "kind_names": {}, "kind_shorts": {},
-                "kind_labels": {}, "kind_briefs": {},
+                "kind_labels": {}, "kind_briefs": {}, "kind_covers": {},
                 "kind_mats": {}, "shared_mats": [], "price_of": {}, "tiers": []}
 
     packages = catalog.get("packages", [])
@@ -494,15 +494,19 @@ def unit_grid(catalog: dict, slug: str) -> dict:
                    key=lambda t: sc.to_int(t.get("min"), 0))
     # 칸에 걸 이름 — "'꼼꼼한' 지문분석 8종 패키지". 종수는 이 교재에 실제로
     # 들어 있는 자료만 셉니다. 적어 둔 수와 받는 수가 다르면 안 되니까요.
-    kind_labels, kind_briefs = {}, {}
+    kind_labels, kind_briefs, kind_covers = {}, {}, {}
     by_id = {x["id"]: x for x in (catalog.get("packages") or [])}
     for kind in kinds:
         n = len(kind_mats.get(kind, []))
         kind_labels[kind] = sc.package_label(by_id.get(kind), n)
         kind_briefs[kind] = f"{cores[kind]} {n}종"
+        # 문항 수를 못 세는 패키지는 무엇이 들었는지 말로 풀어 줍니다
+        kind_covers[kind] = ((by_id.get(kind) or {}).get("covers")
+                             or sc.PKG_COVERS.get(kind, ""))
 
     return {"rows": rows, "kinds": kinds, "kind_names": names, "kind_shorts": shorts,
             "kind_labels": kind_labels, "kind_briefs": kind_briefs,
+            "kind_covers": kind_covers,
             "kind_mats": kind_mats,
             "shared_mats": [(mats.get(m) or {}).get("name", m) for m in sorted(shared)],
             "price_of": price_of, "tiers": tiers}
