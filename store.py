@@ -99,6 +99,8 @@ def inject_globals():
         "package_map": sc.package_map(),
         # 자료 딱지 색을 패키지로 가릅니다 (분석은 파랑 · 문제는 주황)
         "material_pkg": sc.material_package(),
+        # 지문 수 × 자료마다 정해 둔 지문당 문항 수 = 이 상품에 든 문제 수
+        "qcount": sc.question_count,
         # '자료를 어떻게 받나' 는 한 곳에서만 정합니다 (화면마다 딴말 안 하게)
         "delivery_line": sc.delivery_line(site),
         # 메일이 나갈 수 있는지 — '보내 드렸습니다' 같은 말을 걸러 내는 데 씁니다

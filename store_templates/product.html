@@ -99,6 +99,10 @@
 
     <aside>
       <div class="card buybox">
+        {% set qn = qcount(p) %}
+        {% if qn %}
+          <p class="q-count">이 자료에 <b>{{ '{:,}'.format(qn) }}문제</b>가 들어 있습니다.</p>
+        {% endif %}
         <div class="price-row">
           <span class="price">{{ p.price|won }}</span>
           {% if p.list_price and p.list_price > p.price %}

@@ -2202,3 +2202,12 @@ label.dropzone{
 .worth-box ul{margin:0; padding-left:17px; font-size:14px; color:var(--ink-2);
   line-height:1.85; word-break:keep-all;}
 
+
+/* 문제 수 딱지 — '17종 변형문제' 라는 이름만으로는 몇 문제인지 모릅니다 */
+.chip.chip-q{background:#fdeee6; color:#a3450f; font-weight:700;}
+.q-count{margin:0 0 10px; font-size:14.5px; color:var(--ink-2); word-break:keep-all;}
+.q-count b{color:var(--accent); font-size:16px;}
+/* 라인업 — 지문 하나에 몇 문제가 붙는지 */
+.per-p{display:inline-block; padding:3px 10px; border-radius:999px;
+  background:#fdeee6; color:#a3450f; font-size:12.5px; font-weight:800;
+  white-space:nowrap;}

@@ -38,6 +38,16 @@
       <div class="tip">자료 이름 바로 아래 굵게 나옵니다.</div>
     </div>
     <div class="adm-field full">
+      <label for="per_passage">지문당 문항 수 <span class="muted">(문제 자료일 때)</span></label>
+      <input type="number" id="per_passage" name="per_passage" min="0" max="200"
+             value="{{ m.per_passage or '' }}" style="width:140px;">
+      <div class="tip">지문 하나에 몇 문제가 붙는지 적어 두시면, 손님 화면에
+        <b>지문 수 × 이 수</b>로 '문제 1,120개' 처럼 나옵니다.
+        '17종 변형문제' 라는 이름만으로는 몇 문제인지 가늠이 안 됩니다.
+        <b>비워 두시면 안 나옵니다.</b></div>
+    </div>
+
+    <div class="adm-field full">
       <label for="subline">초록 상자 문구</label>
       <textarea id="subline" name="subline" style="min-height:60px;">{{ m.subline or '' }}</textarea>
       <div class="tip">'보기 쉬운 어법 표시와 지칭 디자인…' 처럼 구성 요소를 한 줄로 훑는 문장. 비워도 됩니다.</div>

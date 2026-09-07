@@ -100,6 +100,10 @@
           {% if m.en %}<span class="mat-en">{{ m.en }}</span>{% endif %}
           {% if m.signature %}<span class="sig">시그니처</span>{% endif %}
           {% if m.made_to_order %}<span class="mto">주문제작자료</span>{% endif %}
+          {# 지문 하나에 몇 문제가 붙는지 — 이름만으로는 가늠이 안 됩니다 #}
+          {% if m.per_passage %}
+            <span class="per-p">지문당 {{ m.per_passage }}문제</span>
+          {% endif %}
         </div>
         {% if m.tagline %}<p class="mat-tagline">{{ m.tagline }}</p>{% endif %}
         {% if m.subline %}<p class="mat-subline">{{ m.subline }}</p>{% endif %}

@@ -200,6 +200,20 @@ def package_label(pack: dict | None, count: int) -> str:
     return f"{head}{core} {count}종 패키지"
 
 
+def question_count(item: dict, mats: dict | None = None) -> int:
+    """이 상품에 든 문제 수. 지문 수 × 자료마다 정해 둔 지문당 문항 수입니다.
+
+    '17종 변형문제' 처럼 이름만 봐서는 몇 문제인지 알 수 없습니다. 지문이 28개면
+    변형문제만 476문제인데, 그 수를 안 적으면 손님은 가늠하지 못합니다.
+    """
+    passages = to_int(item.get("passages"), 0)
+    if not passages:
+        return 0
+    mats = mats if mats is not None else material_map()
+    return sum(passages * to_int((mats.get(mid) or {}).get("per_passage"), 0)
+               for mid in (item.get("materials") or []))
+
+
 def material_package() -> dict[str, str]:
     """자료가 어느 패키지에 드는지. 화면에서 딱지 색을 가르는 데 씁니다.
 

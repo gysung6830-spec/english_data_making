@@ -3317,6 +3317,45 @@ def test_sample_pdf_links_go_somewhere():
     print("PASS  샘플 PDF 자리 · 빈 자료 세어 주기")
 
 
+def test_question_count_is_spelled_out():
+    """'17종 변형문제' 가 몇 문제인지 화면에 적혀 있어야 합니다.
+
+    이름만으로는 가늠이 안 됩니다. 지문이 28개면 변형문제만 476문제입니다.
+    지문 수 × 자료마다 정해 둔 지문당 문항 수로 셉니다.
+    """
+    mats = sc.material_map()
+    assert mats["variants"]["per_passage"] == 17
+    assert mats["descriptive"]["per_passage"] == 23
+
+    # 지문 4개짜리 변형문제 = 68문제
+    cat = sc.load_catalog()
+    one = next(x for x in cat["products"] if x["slug"] == "ybm-han-01-variants")
+    assert one["passages"] == 4
+    assert sc.question_count(one) == 68
+
+    # 문제 패키지는 든 자료를 다 더합니다 (변형 17 + 서술형 23 = 지문당 40)
+    pack = next(x for x in cat["products"] if x["slug"] == "mock-2026-06-g3-problem")
+    assert sc.question_count(pack) == pack["passages"] * 40
+
+    # 지문당 문항 수를 안 적어 둔 자료만 든 상품은 0 — 아무 말도 안 합니다
+    only = next(x for x in cat["products"] if x["slug"] == "mock-2026-06-g3-analysis")
+    assert sc.question_count(only) == 0
+
+    # 손님 화면에 실제로 나와야 합니다
+    detail = body(client().get("/products/mock-2026-06-g3-problem"))
+    assert f"{pack['passages'] * 40:,}문제" in detail
+    listed = body(client().get("/products?category=mock"))
+    assert f"문제 {pack['passages'] * 40:,}개" in listed
+    # 라인업에는 지문 하나에 몇 문제인지
+    line = body(client().get("/lineup"))
+    assert "지문당 17문제" in line and "지문당 23문제" in line
+
+    # 지문당 문항 수는 관리자에서 고칠 수 있어야 합니다
+    form = body(admin().get("/admin/materials/variants"))
+    assert 'name="per_passage"' in form and 'value="17"' in form
+    print("PASS  '17종' 이 몇 문제인지 곱해서 적음")
+
+
 def test_home_tiles_share_one_magnification():
     """첫 화면 자료 타일은 자료마다 글씨 크기가 같아야 합니다.
 
@@ -4967,6 +5006,7 @@ def run_all():
     test_made_to_order_has_its_own_way_in()
     test_taster_lives_on_the_lineup_not_the_list()
     test_sample_pdf_links_go_somewhere()
+    test_question_count_is_spelled_out()
     test_home_tiles_share_one_magnification()
     test_lineup_shows_a_slice_not_the_whole_page()
     test_lineup_shots_upload_and_show()

@@ -35,6 +35,8 @@
             {% if bk and bk.publisher %}<span class="chip">{{ bk.publisher }}</span>{% endif %}
             {% if first.grade %}<span class="chip">{{ first.grade }}</span>{% endif %}
             {% if first.passages %}<span class="chip">지문 {{ first.passages }}개</span>{% endif %}
+            {% set qn = qcount({'passages': first.passages, 'materials': g.mats}) %}
+            {% if qn %}<span class="chip chip-q">문제 {{ '{:,}'.format(qn) }}개</span>{% endif %}
             <span class="chip">PDF</span>
           </div>
           <div class="mat-chips">

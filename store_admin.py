@@ -1205,6 +1205,12 @@ def material_form(mid):
     item["group"] = sc.clean(f.get("group"), 40)
     item["tagline"] = sc.clean(f.get("tagline"), 200)
     item["subline"] = sc.clean(f.get("subline"), 600)
+    # 지문 하나에 몇 문제가 붙는지. 손님 화면에서 지문 수와 곱해 보여 줍니다.
+    per = sc.to_int(f.get("per_passage"), 0)
+    if per > 0:
+        item["per_passage"] = min(per, 200)
+    else:
+        item.pop("per_passage", None)
     item["sheet_note"] = sc.clean(f.get("sheet_note"), 800)
     item["features_headline"] = sc.clean(f.get("features_headline"), 120)
     item["image"] = sc.clean(f.get("image"), 120)
