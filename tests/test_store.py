@@ -1051,6 +1051,48 @@ def test_footprints_show_where_people_stop():
     print("PASS  사는 데까지 · 오래된 발자국 치우기")
 
 
+def test_traffic_numbers_never_reach_customers():
+    """통계는 관리자 화면에서만 보여야 합니다.
+
+    손님이 '지금 3명이 보고 있습니다' 를 보면 장사가 안 되는 것까지 같이
+    보입니다. 세는 것과 보여 주는 것은 다른 일이라, 세더라도 손님 화면에는
+    한 숫자도 새면 안 됩니다.
+    """
+    _wipe_visits()
+    c = client()
+    for _ in range(3):
+        c.get("/", headers=PHONE)
+        c.get("/products?q=수능특강", headers=PHONE)
+    c.post("/cart/add", data={"slug": "neungyule-kim-analysis"}, headers=PHONE)
+
+    # 잠겨 있어야 합니다 — 로그인 없이는 못 봅니다
+    for url in ("/admin/traffic", "/admin/traffic?days=7"):
+        got = client().get(url)
+        assert got.status_code == 302, url
+        assert "/admin/login" in got.headers.get("Location", ""), url
+
+    # 손님 화면 어디에도 숫자가 안 나옵니다
+    words = ("발자국", "지금 보고 계신", "오신 분", "본 화면", "사는 데까지",
+             "많이 본 화면", "찾으신 말", "어디서 오셨나", "visits")
+    for url in ("/", "/products", "/products?category=mock", "/lineup", "/free",
+                "/notice", "/guide", "/cart", "/words", "/contact",
+                "/books/ybm-han", "/products/neungyule-kim-analysis",
+                "/sitemap.xml", "/robots.txt"):
+        page = body(c.get(url, headers=PHONE))
+        for w in words:
+            assert w not in page, f"{url} 에 '{w}' 가 새어 나갑니다"
+
+    # 통계를 읽는 길은 관리자 화면 하나뿐이어야 합니다
+    src = (_ROOT / "store.py").read_text() + (_ROOT / "store_common.py").read_text()
+    for fn in ("visits_now", "visits_span", "visits_top", "visits_funnel",
+               "visits_by_day"):
+        assert f"sc.{fn}(" not in src, f"손님 쪽 코드가 {fn} 를 읽고 있습니다"
+    for tpl in (_ROOT / "store_templates").glob("*.html"):
+        assert "visits" not in tpl.read_text(), tpl.name
+    _wipe_visits()
+    print("PASS  통계는 관리자 화면에서만")
+
+
 def test_admin_traffic_screen_reads_at_a_glance():
     """통계 화면은 숫자만이 아니라 '무엇을 고칠지' 를 말해 줘야 합니다."""
     _wipe_visits()
@@ -5372,6 +5414,7 @@ def run_all():
     test_footprints_count_people_not_files()
     test_footprints_tell_where_people_come_from()
     test_footprints_show_where_people_stop()
+    test_traffic_numbers_never_reach_customers()
     test_admin_traffic_screen_reads_at_a_glance()
     test_admin_menu_is_short()
     test_admin_pages_open()
