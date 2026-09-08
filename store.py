@@ -1279,8 +1279,16 @@ def pass_page():
         price = sc.to_int(pl.get("price"), 0)
         per = sc.to_int(pl.get("per_month"), 0)
         # 깎인 값으로 사면 월 환산도 그만큼 내려갑니다. 정가 기준 숫자를 그대로 두면 앞뒤가 맞지 않습니다.
+        # 값만 있으면 비싼지 싼지 알 수 없습니다. 이 지문 수가 무엇을 덮는지,
+        # 같은 분량을 낱개로 사면 얼마인지를 카탈로그에서 세어 붙입니다.
+        quota = sc.to_int(pl.get("passages"), 0)
+        alone = sc.plan_alone_price(quota)
         plans.append(dict(pl, now=now,
-                          per_month_now=round(per * now / price) if price and now < price else per))
+                          per_month_now=round(per * now / price) if price and now < price else per,
+                          covers=sc.plan_covers(quota),
+                          # 우리가 쌀 때만 견줍니다. 안 싸면 견줄 말이 없습니다.
+                          alone=alone if alone > now else 0,
+                          save=alone - now if alone > now else 0))
     # early = 깎아 드리는 금액. early_names = 그 할인이 붙는 요금제 이름들.
     discounted = [pl for pl in plans if pl["now"] < pl["price"]]
     early = sc.to_int(cfg.get("preorder_discount"), 0) if discounted else 0

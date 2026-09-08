@@ -34,6 +34,11 @@
           {% if pl.passages %}
             <div class="plan-quota"><b>지문 {{ '{:,}'.format(pl.passages) }}개</b>까지 골라 받기</div>
           {% endif %}
+          {% if pl.covers %}<p class="plan-covers">{{ pl.covers }}</p>{% endif %}
+          {% if pl.alone %}
+            <p class="plan-alone">낱개로 사시면 약 <s>{{ pl.alone|won }}</s>
+              — <b>{{ pl.save|won }}</b> 아끼십니다</p>
+          {% endif %}
           <div class="plan-per">
             {{ pl.period }} · 월 {{ pl.per_month_now|won }} 꼴{% if pl.passages %}
               · 지문당 {{ (pl.now // pl.passages)|won }}{% endif %}
@@ -46,6 +51,10 @@
         </div>
       {% endfor %}
     </div>
+
+    {% if cfg.closing %}
+      <p class="pass-closing">{{ cfg.closing }}</p>
+    {% endif %}
 
     {% if cfg.quota_note %}
       <div class="quota-box">

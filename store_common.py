@@ -311,7 +311,37 @@ RETIRED_COPY = {
     # 무엇이 돌아오는지는 적었지만 '무엇은 안 돌아오는지' 를 안 적어,
     # 시험지를 고쳐서 돌려주는 줄 아시는 분이 생길 수 있었습니다.
     '자료의 정확도는 학교가 실제로 어떻게 내는지를 얼마나 아느냐에서 갈립니다. 보내 주신 시험지는 그 학교 출제 경향을 읽고, 동형 모의고사와 변형문제의 난이도·유형을 맞추는 데 씁니다. 보내 주신 분께는 할인 쿠폰을 드립니다.': '자료의 정확도는 학교가 실제로 어떻게 내는지를 얼마나 아느냐에서 갈립니다. 보내 주신 시험지는 그 학교 출제 경향을 읽어, 앞으로 만드는 동형 모의고사와 변형문제의 난이도·유형을 맞추는 데 씁니다. 보내 주신 시험지를 고쳐서 돌려드리는 것은 아니고, 할인 쿠폰을 드립니다.',
+    # 프리패스 — '지문 묶음' 이 무슨 말인지 아무도 모릅니다. 그리고 이 이용권이
+    # 파는 것은 값보다 '시험 때마다 살지 말지 고민하지 않는 것' 입니다.
+    '필요할 때마다 사지 말고, 지문 묶음으로 여세요': '한 번 열어 두면, 시험 때마다 고르기만 하면 됩니다',
+    '프리패스는 정해진 지문 수만큼 자료를 골라 받는 이용권입니다. 교재도 회차도 마음대로 고르실 수 있고, 낱개로 사시는 것보다 지문당 값이 쌉니다.': '프리패스는 정해진 지문 수만큼 자료를 골라 가시는 이용권입니다. 교재도 회차도 마음대로 고르시고, 기간 중 새로 올라오는 자료도 같은 묶음에서 가져가십니다. 낱개로 사시는 것보다 지문당 값이 절반 아래입니다.',
 }
+
+
+# 우리가 처음 넣었던 프리패스 요금제. 지문 수가 시험 한 번도 못 치를 만큼
+# 적었습니다 — 강사는 한 강에 분석과 문제를 둘 다 쓰시므로 지문이 두 번
+# 빠지는데, 그것을 안 세고 잡은 수였습니다. 값이 아니라 분량이 틀렸습니다.
+RETIRED_PLANS = {
+    "1개월": {"price": 49000, "per_month": 49000, "passages": 110},
+    # 바로 위에 '한 학기를 통째로' 가 나오므로 같은 말을 또 하지 않습니다
+    "3개월": {"price": 99000, "per_month": 33000, "passages": 260,
+              "desc": "가장 많이 고르시는 요금제입니다"},
+    "12개월": {"price": 220000, "per_month": 18333, "passages": 660},
+}
+_OLD_PLANS = {"1개월": (39000, 55), "3개월": (99000, 160), "12개월": (220000, 400)}
+
+PASS_CLOSING = ("시험 때마다 살지 말지 고민하지 않게 됩니다. "
+                "이미 열어 두셨으니 고르기만 하시면 됩니다.")
+
+
+def _is_retired_plans(plans) -> bool:
+    """우리가 심어 둔 그 요금제 그대로인지. 하나라도 다르면 손대지 않습니다."""
+    if not plans or len(plans) != len(_OLD_PLANS):
+        return False
+    return all(
+        _OLD_PLANS.get(pl.get("name")) == (to_int(pl.get("price"), 0),
+                                           to_int(pl.get("passages"), 0))
+        for pl in plans)
 
 
 def load_site() -> dict:
@@ -322,6 +352,13 @@ def load_site() -> dict:
     for key in ("headline", "lead"):
         if reward.get(key) in RETIRED_COPY:
             reward[key] = RETIRED_COPY[reward[key]]
+    cfg = site.get("pass") or {}
+    for key in ("headline", "lead"):
+        if cfg.get(key) in RETIRED_COPY:
+            cfg[key] = RETIRED_COPY[cfg[key]]
+    if _is_retired_plans(cfg.get("plans")):
+        cfg["plans"] = [dict(pl, **RETIRED_PLANS[pl["name"]]) for pl in cfg["plans"]]
+        cfg.setdefault("closing", PASS_CLOSING)
     # 계좌번호처럼 공개하기 꺼려지는 값은 환경변수로 덮어쓸 수 있습니다.
     if os.environ.get("BANK_ACCOUNT"):
         site["payment"]["bank_account"] = os.environ["BANK_ACCOUNT"]
@@ -2841,3 +2878,112 @@ def visits_funnel(days: int = 30) -> list[dict]:
         out.append({"label": label, "people": n,
                     "percent": round(n / first * 100) if first else 0})
     return out
+
+
+# ---------------------------------------------------------------------------
+# 프리패스가 무엇을 덮는지 — 값만 있으면 견줄 수가 없습니다
+#
+# '99,000원' 은 비싼지 싼지 알 수 없습니다. '한 학기를 통째로, 낱개로 사시면
+# 213,000원' 이라야 판단이 섭니다. 문구를 손으로 적어 두면 지문 수를 고치는
+# 순간 거짓말이 되므로, 실제 카탈로그에서 세어 만듭니다.
+# ---------------------------------------------------------------------------
+# 중간고사 한 번의 범위. 사장님 말씀 그대로입니다 —
+# "교과서 2과 · 모의고사 1회 · 부교재 3~4강".
+EXAM_ROUND = {"textbook": 2, "mock": 1, "ebs": 3.5}
+
+
+def passages_per_unit() -> dict[str, float]:
+    """분류마다 강(단원·회차) 하나에 지문이 몇 개인지. 카탈로그에서 셉니다."""
+    catalog = load_catalog()
+    books = {b["slug"]: b for b in catalog.get("books", [])}
+    seen: dict[str, dict] = {}
+    for p in catalog["products"]:
+        cat = books.get(p.get("book") or "", {}).get("category")
+        n = to_int(p.get("passages"), 0)
+        if not cat or not n:
+            continue
+        seen.setdefault(cat, {})[(p.get("book"), p.get("unit") or p["slug"])] = n
+    out = {}
+    for cat, units in seen.items():
+        vals = sorted(units.values())
+        out[cat] = vals[len(vals) // 2]              # 중앙값
+    return out
+
+
+def exam_round_passages() -> int:
+    """시험 한 번을 준비하는 데 프리패스에서 빠지는 지문 수.
+
+    강사는 한 강에 분석 패키지와 문제 패키지를 둘 다 씁니다. 그래서 지문이
+    두 번 빠집니다 — 이것을 안 세면 '지문 55개' 가 시험 한 번도 못 치릅니다.
+    """
+    per = passages_per_unit()
+    one = sum(per.get(cat, 0) * mult for cat, mult in EXAM_ROUND.items())
+    return int(round(one * 2))                       # 분석 + 문제
+
+
+def piece_price_per_passage() -> int:
+    """낱개로 살 때 지문 하나에 얼마인지 (한 패키지 기준, 정가 중앙값)."""
+    catalog = load_catalog()
+    packs = {p["id"]: p for p in catalog.get("packages", [])}
+    units: dict = {}
+    for p in catalog["products"]:
+        if len(p.get("materials") or []) != 1 or not p.get("unit"):
+            continue
+        units.setdefault((p.get("book"), p["unit"]), []).append(p)
+    rates: dict[str, list[float]] = {}
+    for ps in units.values():
+        n = max(to_int(x.get("passages"), 0) for x in ps)
+        if not n:
+            continue
+        for pid, pk in packs.items():
+            mine = [x for x in ps if x["materials"][0] in pk["materials"]]
+            if len(mine) < len(pk["materials"]) - 1:
+                continue                             # 거의 다 갖춘 강만 셉니다
+            rates.setdefault(pid, []).append(sum(to_int(x.get("price"), 0) for x in mine) / n)
+    # 패키지마다 지문당 값이 다릅니다(분석이 쌉니다). 손님은 둘을 섞어 쓰시는데,
+    # 비싼 쪽으로 세면 우리가 유리해 보입니다. 싼 쪽으로 셉니다.
+    mids = [sorted(v)[len(v) // 2] for v in rates.values() if v]
+    return int(round(min(mids))) if mids else 0
+
+
+def plan_alone_price(passages: int, site: dict | None = None) -> int:
+    """같은 분량을 낱개로 사면 얼마인지. 많이 살 때의 수량 할인까지 쳐 줍니다.
+
+    할인 없는 정가와 견주면 우리가 유리해 보이지만, 실제로 그만큼 사시는
+    분은 수량 할인을 받습니다. 우리에게 불리한 쪽으로 세야 견줌이 정직합니다.
+    """
+    passages = to_int(passages, 0)
+    per = piece_price_per_passage()
+    if not passages or not per:
+        return 0
+    site = site or load_site()
+    tiers = (site.get("discount") or {}).get("count_tiers") or []
+    best = max((to_int(t.get("percent"), 0) for t in tiers), default=0)
+    return int(round(passages * per * (100 - best) / 100 / 1000)) * 1000
+
+
+def plan_covers(passages: int) -> str:
+    """이 지문 수가 무엇을 덮는지 한 줄. 시험 리듬으로 말해야 가늠이 됩니다."""
+    passages, one = to_int(passages, 0), exam_round_passages()
+    if not passages or not one:
+        return ""
+    rounds = passages / one
+    if rounds >= 3.5:
+        return "1년 내내 — 시험 네 번에 모의고사까지"
+    if rounds >= 1.7:
+        return "한 학기를 통째로 — 중간고사와 기말고사 둘 다"
+    if rounds >= 0.9:
+        tb, ebs = EXAM_ROUND["textbook"], EXAM_ROUND["ebs"]
+        return (f"시험 한 번을 통째로 — 교과서 {_units_word(tb)}과 + 모의고사 1회 "
+                f"+ 부교재 {_units_word(ebs)}강, 분석도 문제도")
+    # 시험 한 번에 모자랄 때. 부풀리지 않고 있는 그대로 셉니다.
+    mock = passages_per_unit().get("mock", 0) * 2
+    n = round(passages / mock) if mock else 0
+    if n >= 1:
+        return f"모의고사 {n}회분 — 분석도 문제도"
+    return "급할 때 한 단원씩"
+
+
+def _units_word(n: float) -> str:
+    """3.5 는 '3~4' 로. 소수점이 붙은 강 수는 아무도 안 씁니다."""
+    return f"{n:g}" if float(n).is_integer() else f"{int(n)}~{int(n) + 1}"

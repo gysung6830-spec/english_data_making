@@ -453,7 +453,7 @@ def test_pass_preorder_discount():
     assert "12개월권을 사전 신청하시면" in text and "30,000원을 깎아 드립니다" in text
     assert "정가 220,000원" in text and "190,000원" in text      # 12개월 — 깎임
     assert "정가 99,000원" not in text and "69,000원" not in text   # 3개월 — 정가 그대로
-    assert "39,000원" in text and "정가 39,000원" not in text       # 1개월 — 정가 그대로
+    assert "49,000원" in text and "정가 49,000원" not in text       # 1개월 — 정가 그대로
     assert text.count("사전 신청 −30,000원") == 1
     # 월 환산도 깎인 값 기준이어야 합니다 (220,000 → 190,000 이면 18,333 → 15,833)
     assert "월 15,833원 꼴" in text and "월 18,333원 꼴" not in text
@@ -1141,8 +1141,7 @@ def test_submit_page_promises_only_a_coupon():
     # 돌아가는 사이트의 자료 파일에는 옛 문구가 이미 심겨 있습니다. 파일을
     # 고치는 것만으로는 안 내려가니, 토씨가 같을 때만 코드가 바로잡습니다.
     for bad, good in sc.RETIRED_COPY.items():
-        assert "더 정확한 자료로" in bad or "보내 주신 분께는" in bad, bad
-        assert "더 정확한 자료로" not in good
+        assert bad != good and "더 정확한 자료로" not in good
     raw = sc.load_json("site.json", {})
     keep = raw["submit_reward"]["headline"]
     raw["submit_reward"]["headline"] = "학교 시험지를 나눠 주시면, 더 정확한 자료로 돌려드립니다"
@@ -1938,19 +1937,64 @@ def test_wordfile_table_shapes():
     print("PASS  단어 표 — 강 칸이 앞·뒤·구분줄 어디에 있어도 알아봄")
 
 
+def test_pass_shows_what_each_plan_covers():
+    """값만 있으면 비싼지 싼지 알 수 없습니다.
+
+    '99,000원' 은 판단이 안 서고, '한 학기를 통째로 · 낱개로 사시면 184,000원'
+    이라야 섭니다. 문구를 손으로 적어 두면 지문 수를 고치는 순간 거짓말이
+    되므로, 실제 카탈로그에서 세어 만듭니다.
+    """
+    text = body(client().get("/pass"))
+    assert "시험 한 번을 통째로" in text            # 1개월
+    assert "한 학기를 통째로" in text               # 3개월
+    assert "1년 내내" in text                       # 12개월
+    assert "낱개로 사시면 약" in text and "아끼십니다" in text
+    assert "이미 열어 두셨으니 고르기만" in text     # 바닥 한 줄
+    assert "지문 묶음으로 여세요" not in text        # 무슨 말인지 모릅니다
+
+    # 강사는 한 강에 분석과 문제를 둘 다 쓰시므로 지문이 두 번 빠집니다.
+    # 이것을 안 세면 '시험 한 번' 이 절반짜리가 됩니다.
+    one = sc.exam_round_passages()
+    assert one > 100, one
+    assert sc.plan_covers(one).startswith("시험 한 번")
+    assert sc.plan_covers(one * 2).startswith("한 학기")
+    assert sc.plan_covers(one * 4).startswith("1년")
+    assert sc.plan_covers(0) == ""
+
+    # 견줌은 우리에게 불리한 쪽으로 셉니다 — 낱개 정가가 아니라 수량 할인가로,
+    # 지문당 값이 싼 패키지(분석) 기준으로.
+    per = sc.piece_price_per_passage()
+    site = sc.load_site()
+    best = max((t["percent"] for t in
+                (site.get("discount") or {}).get("count_tiers") or []), default=0)
+    assert sc.plan_alone_price(100) == round(100 * per * (100 - best) / 100 / 1000) * 1000
+
+    # 낱개가 더 싸면 견줄 말이 없으니 아예 안 붙입니다
+    plans = [pl for pl in site["pass"]["plans"]]
+    for pl in plans:
+        alone = sc.plan_alone_price(pl["passages"])
+        if alone <= pl["price"]:
+            assert f"낱개로 사시면 약 {alone:,}원" not in text, pl["name"]
+
+    # 오래 쓰는 요금제일수록 지문당이 싸야 하고, 시험 리듬을 온전히 덮어야 합니다
+    for pl in plans:
+        assert pl["passages"] >= one * 0.9, f"{pl['name']} 이 시험 한 번도 못 치릅니다"
+    print("PASS  프리패스 — 무엇을 덮는지 · 낱개로 사면 얼마인지")
+
+
 def test_pass_counts_passages():
     """프리패스는 무제한이 아니라 지문 n개까지이고, 세는 법이 적혀 있어야 합니다."""
     import re as _re
     text = body(client().get("/pass"))
-    assert "지문 400개" in text and "지문 160개" in text and "지문 55개" in text
+    assert "지문 660개" in text and "지문 260개" in text and "지문 110개" in text
     assert "무제한" not in text
     assert "지문당" in text                      # 낱개보다 싸다는 것이 보여야 합니다
 
     # '지문 1개' 가 무엇인지 화면에 적혀 있어야 합니다
     assert "지문은 이렇게 빠집니다" in text
     assert "그 지문의 자료 한 묶음" in text
-    # 단위로 환산한 예시가 있어야 손님이 감을 잡습니다
-    assert "모의고사 7회차 + 부교재 40강 + 교과서 8과" in text
+    # 분석과 문제를 둘 다 받으면 두 번 빠진다는 것 (여기서 지문 수가 갈립니다)
+    assert "56개가 빠집니다" in text
 
     # 오래 쓰는 요금제일수록 지문당 값이 싸야 합니다 (거꾸로면 살 이유가 없습니다)
     per = [int(x.replace(",", "")) for x in
@@ -5528,6 +5572,7 @@ def run_all():
     test_sheet_heading()
     test_whole_book_upload()
     test_wordfile_table_shapes()
+    test_pass_shows_what_each_plan_covers()
     test_pass_counts_passages()
     test_metrics_screen()
     test_storage_warning_when_data_would_vanish()

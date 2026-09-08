@@ -1628,6 +1628,16 @@ label.dropzone{
 /* 프리패스 — 요금제마다 받을 수 있는 지문 수 */
 .plan-quota{margin:6px 0 2px; font-size:14.5px; color:var(--ink-2);}
 .plan-quota b{color:var(--brand); font-size:16px;}
+/* 이 지문 수가 무엇을 덮는지 — 값만 있으면 비싼지 싼지 가늠이 안 됩니다 */
+.plan-covers{margin:8px 0 0; font-size:13.5px; line-height:1.6; color:var(--ink-2);
+  word-break:keep-all;}
+/* 같은 분량을 낱개로 사면 얼마인지. 아끼는 돈을 굵게 세웁니다. */
+.plan-alone{margin:8px 0 0; font-size:13px; color:var(--muted); word-break:keep-all;}
+.plan-alone s{opacity:.75;}
+.plan-alone b{color:var(--brand-dark); font-weight:800; font-size:14px;}
+/* 값 밑에 한 줄 — 이 이용권이 파는 것은 값이 아니라 '고민 안 함' 입니다 */
+.pass-closing{max-width:600px; margin:26px auto 0; text-align:center;
+  font-size:16px; line-height:1.75; color:var(--ink-2); word-break:keep-all;}
 
 /* ---------- 단어 시험지 ---------- */
 .wb-card{display:flex; flex-direction:column; gap:7px; padding:20px 22px; background:var(--card);
