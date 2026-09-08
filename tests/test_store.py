@@ -2559,7 +2559,23 @@ def test_css_change_reaches_the_visitor():
 
     # 아이콘 같은 다른 정적 파일도 같은 길을 씁니다
     assert "/static/favicon.svg?v=" in home
-    print("PASS  디자인을 고치면 손님 화면에도 바로 반영")
+
+    # 관리자 화면도 마찬가지입니다. 여기를 빠뜨려 통계 화면이 판이 깨진 채로
+    # 나온 적이 있습니다 — 화면은 새것인데 CSS 만 예전 것이었습니다.
+    adm = body(admin().get("/admin/traffic"))
+    assert "/static/admin.css?v=" in adm, "관리자 CSS 주소에 v= 가 없습니다"
+    assert "/static/store.css?v=" in adm
+
+    # 서식 어디에도 v= 없는 CSS·아이콘 링크가 남아 있으면 안 됩니다
+    for tpl in sorted((_ROOT / "store_templates").rglob("*.html")):
+        text = tpl.read_text()
+        for line in text.splitlines():
+            if "url_for('static'" not in line:
+                continue
+            assert ("stylesheet" not in line and 'rel="icon"' not in line
+                    and "apple-touch-icon" not in line), \
+                f"{tpl.name}: {line.strip()[:80]} — asset() 를 쓰셔야 합니다"
+    print("PASS  디자인을 고치면 손님·관리자 화면에 바로 반영")
 
 
 def test_home_shows_real_pages_not_just_names():
