@@ -1116,6 +1116,51 @@ def test_admin_traffic_screen_reads_at_a_glance():
     print("PASS  관리자 통계 화면")
 
 
+def test_submit_page_promises_only_a_coupon():
+    """시험지를 보내 주시면 무엇이 돌아오는지, 지킬 수 있는 것만 적어야 합니다.
+
+    '더 정확한 자료로 돌려드립니다' 는 보내 주신 그 시험지를 고쳐서 돌려주는
+    것처럼 읽힙니다. 실제로 돌아가는 것은 할인 쿠폰이고, 시험지는 앞으로
+    만드는 자료의 난이도·유형을 맞추는 데 씁니다.
+    """
+    page = body(client().get("/submit"))
+    assert "할인 쿠폰으로 돌려드립니다" in page
+    assert "더 정확한 자료로 돌려" not in page, "못 지킬 약속입니다"
+    assert "나눠 주시면" not in page, "보내 주시는 것이지 나눠 주시는 것이 아닙니다"
+    # 무엇이 돌아오는지 · 무엇은 안 돌아오는지를 둘 다 적습니다
+    assert "고쳐서 돌려드리는 것은 아니" in page
+    assert "앞으로 만드는" in page
+    assert "재배포하지 않습니다" in page
+
+    # 자료 파일과 서식 기본값이 서로 딴말을 하면 안 됩니다
+    head = sc.load_site()["submit_reward"]["headline"]
+    assert "돌려드립니다" in head and "정확한 자료로" not in head
+    tpl = (_ROOT / "store_templates" / "submit.html").read_text()
+    assert head in tpl, "자료 파일이 비면 서식 기본값이 나오는데, 둘이 다릅니다"
+
+    # 돌아가는 사이트의 자료 파일에는 옛 문구가 이미 심겨 있습니다. 파일을
+    # 고치는 것만으로는 안 내려가니, 토씨가 같을 때만 코드가 바로잡습니다.
+    for bad, good in sc.RETIRED_COPY.items():
+        assert "더 정확한 자료로" in bad or "보내 주신 분께는" in bad, bad
+        assert "더 정확한 자료로" not in good
+    raw = sc.load_json("site.json", {})
+    keep = raw["submit_reward"]["headline"]
+    raw["submit_reward"]["headline"] = "학교 시험지를 나눠 주시면, 더 정확한 자료로 돌려드립니다"
+    sc.save_json("site.json", raw)
+    try:
+        assert sc.load_site()["submit_reward"]["headline"] == \
+            "학교 시험지를 보내 주시면, 할인 쿠폰으로 돌려드립니다"
+        assert "나눠 주시면" not in body(client().get("/submit"))
+        # 사장님이 손수 쓰신 글은 건드리지 않습니다
+        raw["submit_reward"]["headline"] = "시험지 주시면 쿠폰 드려요"
+        sc.save_json("site.json", raw)
+        assert sc.load_site()["submit_reward"]["headline"] == "시험지 주시면 쿠폰 드려요"
+    finally:
+        raw["submit_reward"]["headline"] = keep
+        sc.save_json("site.json", raw)
+    print("PASS  시험지 보내기 — 돌아오는 것은 쿠폰")
+
+
 def test_admin_menu_is_short():
     """관리자 메뉴는 자주 여는 것만 밖에 나와 있어야 합니다.
 
@@ -5432,6 +5477,7 @@ def run_all():
     test_footprints_show_where_people_stop()
     test_traffic_numbers_never_reach_customers()
     test_admin_traffic_screen_reads_at_a_glance()
+    test_submit_page_promises_only_a_coupon()
     test_admin_menu_is_short()
     test_admin_pages_open()
     test_bulk_products_from_zip()
