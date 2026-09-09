@@ -160,11 +160,11 @@ def sec_head(n,t,d=""):
 def passage_html(p, teacher):
     ov=p["overview"]; no=esc(p["item_no"].strip()); ti=esc(ov["theme_ko"]); sents=p["sentences"]
     h=[f'<div class="psg"><div class="p-h"><span class="p-no">{no}</span><span class="p-ti">{ti}</span><span class="p-src">올림포스 독해 기본1</span></div>']
-    # ① 원문 + ② 어휘 (같은 페이지)
+    # ① 원문 (page 1)
     h.append('<div class="sec">'+sec_head(1,"원문"))
     body=" ".join(f'<span class="sn">{s["id"]}</span>{esc(s["english"])}' for s in sents)
     h.append(f'<div class="panel orig">{body}</div></div>')
-    # ② 어휘
+    # ② 어휘 (page 1)
     h.append('<div class="sec" style="margin-top:8px;">'+sec_head(2,"어휘 리스트"))
     seen=set(); rows=[]
     for s in sents:
@@ -173,14 +173,32 @@ def passage_html(p, teacher):
             if not w or w.lower() in seen: continue
             seen.add(w.lower()); rows.append(f'<div class="row"><span class="w">{esc(w)}</span> <span class="m">{esc(v.get("meaning",""))}</span></div>')
     h.append(f'<div class="panel voc">{"".join(rows)}</div></div>')
-    # ③ 해석연습 (page break)
-    h.append('<div class="sec brk">'+sec_head(3,"해석 연습","직독직해에서 핵심(오역 위험) 부분만 채우기 · 영어에 어법칩 형광펜"))
+    # ③ 글의 구조도 (page 1, 같은 페이지)
+    h.append('<div class="sec" style="margin-top:8px;">'+sec_head(3,"글의 구조도 파악","핵심어(영어)를 단서로 각 단계 내용을 기호로 정리(→ ⇒ ↔ = + ↑↓)"))
+    km=kw_map(p); notes=NOTES.get(no) or NOTES.get(p["item_no"]) or []
+    h.append('<div class="panel"><table class="flow"><tr>'
+             '<td class="hd stg">단계 · 문장</td><td class="hd kwc">핵심어(영어)</td><td class="hd">내용 정리(기호 활용)</td></tr>')
+    for i,b in enumerate(ov["flow_blocks"]):
+        kws=[]
+        for sid in parse_range(b["sentence_range"]):
+            if sid in km:
+                kws.append(f'<span class="kwrow"><span class="snum">{circ(sid)}</span><span class="kw-en">{esc(" · ".join(km[sid]))}</span></span>')
+        kwc="".join(kws) or '<span style="color:var(--sub);font-size:8pt;">—</span>'
+        if teacher:
+            note=notes[i] if i < len(notes) else re.sub(r"\[\[(.+?)\]\]", r"\1", b["summary"])
+            cell=f'<span class="note">{esc(note)}</span>'
+        else:
+            cell='<div class="sumblank"></div>'
+        h.append(f'<tr><td class="stg">{esc(b["stage"])}<span class="rg">{fmt_range(b["sentence_range"])}</span></td><td class="kwc">{kwc}</td><td>{cell}</td></tr>')
+    h.append('</table></div></div>')
+    # ④ 해석연습 (page break)
+    h.append('<div class="sec brk">'+sec_head(4,"해석 연습","직독직해에서 핵심(오역 위험) 부분만 채우기 · 영어에 어법칩 형광펜"))
     h.append('<div class="panel">')
     for s in sents:
         h.append(f'<div class="s"><div class="en"><span class="n">{s["id"]}</span>{hl_en(s)}</div><div class="ko">{ko_line(s, teacher)}</div></div>')
     h.append('</div></div>')
-    # ④ 어법칩 (page break)
-    h.append('<div class="sec brk">'+sec_head(4,"어법칩","문장별 원문·핵심 어법(형광펜=어법 표지)"))
+    # ⑤ 어법칩 (page break)
+    h.append('<div class="sec brk">'+sec_head(5,"어법칩","문장별 원문·핵심 어법(형광펜=어법 표지)"))
     h.append('<div class="panel">')
     for s in sents:
         chips=s.get("grammar",[])
@@ -192,8 +210,8 @@ def passage_html(p, teacher):
             if teacher and g.get("note"): inner.append(f'<span class="gnote">{esc(g["note"])}</span> ')
         h.append(f'<div class="gl">{"".join(inner)}</div></div>')
     h.append('</div></div>')
-    # ⑤ ox (page break)
-    h.append('<div class="sec brk">'+sec_head(5,"O / X / △ 내용 판단","맞으면 O·틀리면 X·결론만 맞으면 △, X·△는 근거 고치기"))
+    # ⑥ ox (page break)
+    h.append('<div class="sec brk">'+sec_head(6,"O / X / △ 내용 판단","맞으면 O·틀리면 X·결론만 맞으면 △, X·△는 근거 고치기"))
     h.append('<div class="panel">')
     for s in sents:
         ms=s.get("misreads",[])
@@ -215,24 +233,6 @@ def passage_html(p, teacher):
                          '<div class="pick"><span class="lab">내 판단</span><b class="k-o">O</b><b class="k-x">X</b><b class="k-t">△</b><span class="fixline"></span></div></div>')
         h.append('</div>')
     h.append('</div></div>')
-    # ⑥ 글의 구조도 (page break)
-    h.append('<div class="sec brk">'+sec_head(6,"글의 구조도 파악","핵심어(영어)를 단서로 각 단계 내용을 기호로 정리(→ ⇒ ↔ = + ↑↓)"))
-    km=kw_map(p); notes=NOTES.get(no) or NOTES.get(p["item_no"]) or []
-    h.append('<div class="panel"><table class="flow"><tr>'
-             '<td class="hd stg">단계 · 문장</td><td class="hd kwc">핵심어(영어)</td><td class="hd">내용 정리(기호 활용)</td></tr>')
-    for i,b in enumerate(ov["flow_blocks"]):
-        kws=[]
-        for sid in parse_range(b["sentence_range"]):
-            if sid in km:
-                kws.append(f'<span class="kwrow"><span class="snum">{circ(sid)}</span><span class="kw-en">{esc(" · ".join(km[sid]))}</span></span>')
-        kwc="".join(kws) or '<span style="color:var(--sub);font-size:8pt;">—</span>'
-        if teacher:
-            note=notes[i] if i < len(notes) else re.sub(r"\[\[(.+?)\]\]", r"\1", b["summary"])
-            cell=f'<span class="note">{esc(note)}</span>'
-        else:
-            cell='<div class="sumblank"></div>'
-        h.append(f'<tr><td class="stg">{esc(b["stage"])}<span class="rg">{fmt_range(b["sentence_range"])}</span></td><td class="kwc">{kwc}</td><td>{cell}</td></tr>')
-    h.append('</table></div></div>')
     h.append('</div>')
     return "".join(h)
 
