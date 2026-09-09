@@ -43,11 +43,24 @@ body{font-family:'NanumSquareRound',"Malgun Gothic",sans-serif; color:#22262b; f
 .en{font-size:9.7pt; line-height:1.5;}
 .en .n{display:inline-block; min-width:15px; height:15px; line-height:15px; text-align:center;
   background:var(--green); color:#fff; font-weight:700; font-size:7.2pt; border-radius:5px; margin-right:6px; vertical-align:1.5px;}
-.wr{margin:4px 0 0 21px; border-bottom:1px solid #c7cec8; height:16px;}
-.wr+.wr{margin-top:9px;}
-.ko{margin:3px 0 0 21px; font-size:9pt; color:var(--indigo); font-weight:600; line-height:1.5;}
+.ko{margin:4px 0 0 21px; font-size:9.2pt; color:#3a4250; line-height:1.7;}
 .ko::before{content:"↳ "; color:var(--green); font-weight:800;}
+.sl{color:#b9c2ba; font-weight:700; padding:0 2px;}
+.fill{display:inline-block; min-width:66px; border-bottom:1.4px solid var(--green); vertical-align:-1px;}
+.key{color:var(--indigo); font-weight:800; border-bottom:1.4px solid var(--indigo);}
 """).replace("__FOOT__",FOOT).replace("__FONTS__",FONTFACE)
+
+_MK=re.compile(r"\[\[(.+?)\]\]")
+def ko_line(s, ans):
+    parts=[]
+    for c in s.get("chunks",[]):
+        ko=c.get("ko","") or ""
+        if ans:
+            seg=_MK.sub(r'<b class="key">\1</b>', esc(ko))
+        else:
+            seg=_MK.sub('<span class="fill"></span>', esc(ko))
+        parts.append(seg)
+    return ' <span class="sl">/</span> '.join(parts)
 
 def card(p, ans):
     no=esc(p["item_no"].strip()); ti=esc(p["overview"]["theme_ko"])
@@ -55,19 +68,15 @@ def card(p, ans):
     for s in p["sentences"]:
         h.append('<div class="s">')
         h.append(f'<div class="en"><span class="n">{s["id"]}</span>{esc(s["english"])}</div>')
-        if ans:
-            tr=(s.get("translation") or "").strip()
-            h.append(f'<div class="ko">{esc(tr)}</div>')
-        else:
-            h.append('<div class="wr"></div><div class="wr"></div>')
+        h.append(f'<div class="ko">{ko_line(s, ans)}</div>')
         h.append('</div>')
     h.append('</div>')
     return "".join(h)
 
 def build(ans, out):
     badge='정답' if ans else '문제(학생용)'; bcls='ans' if ans else 'stu'
-    hint=('<div class="hintbar">각 문장을 <b>정확히 해석</b>해 아래 줄에 쓰세요. 구문 구조(주어·동사·수식 관계)를 놓치지 말 것.</div>') if not ans \
-         else '<div class="hintbar">아래는 <b>모범 해석</b>입니다(구문 구조가 드러나는 해석).</div>'
+    hint=('<div class="hintbar">아래 직독직해에서 <b>빈칸(오역 위험·핵심 부분)만</b> 채우세요. 나머지는 참고용으로 채워져 있습니다.</div>') if not ans \
+         else '<div class="hintbar">아래는 <b>정답</b>입니다. 파란 밑줄이 채워야 할 <b>핵심 부분</b>입니다.</div>'
     body=[f'<div class="doc-h"><span class="t">{TITLE}</span><span class="badge {bcls}">{badge}</span></div>', hint]
     for p in P: body.append(card(p, ans))
     doc=f'<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><style>{CSS}</style></head><body>{"".join(body)}</body></html>'
