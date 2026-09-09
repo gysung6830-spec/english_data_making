@@ -318,30 +318,10 @@ RETIRED_COPY = {
 }
 
 
-# 우리가 처음 넣었던 프리패스 요금제. 지문 수가 시험 한 번도 못 치를 만큼
-# 적었습니다 — 강사는 한 강에 분석과 문제를 둘 다 쓰시므로 지문이 두 번
-# 빠지는데, 그것을 안 세고 잡은 수였습니다. 값이 아니라 분량이 틀렸습니다.
-RETIRED_PLANS = {
-    "1개월": {"price": 49000, "per_month": 49000, "passages": 110},
-    # 바로 위에 '한 학기를 통째로' 가 나오므로 같은 말을 또 하지 않습니다
-    "3개월": {"price": 99000, "per_month": 33000, "passages": 260,
-              "desc": "가장 많이 고르시는 요금제입니다"},
-    "12개월": {"price": 220000, "per_month": 18333, "passages": 660},
-}
-_OLD_PLANS = {"1개월": (39000, 55), "3개월": (99000, 160), "12개월": (220000, 400)}
+_OLD_PASS_HEAD = "필요할 때마다 사지 말고, 지문 묶음으로 여세요"
 
 PASS_CLOSING = ("시험 때마다 살지 말지 고민하지 않게 됩니다. "
                 "이미 열어 두셨으니 고르기만 하시면 됩니다.")
-
-
-def _is_retired_plans(plans) -> bool:
-    """우리가 심어 둔 그 요금제 그대로인지. 하나라도 다르면 손대지 않습니다."""
-    if not plans or len(plans) != len(_OLD_PLANS):
-        return False
-    return all(
-        _OLD_PLANS.get(pl.get("name")) == (to_int(pl.get("price"), 0),
-                                           to_int(pl.get("passages"), 0))
-        for pl in plans)
 
 
 def load_site() -> dict:
@@ -356,8 +336,7 @@ def load_site() -> dict:
     for key in ("headline", "lead"):
         if cfg.get(key) in RETIRED_COPY:
             cfg[key] = RETIRED_COPY[cfg[key]]
-    if _is_retired_plans(cfg.get("plans")):
-        cfg["plans"] = [dict(pl, **RETIRED_PLANS[pl["name"]]) for pl in cfg["plans"]]
+    if cfg.get("headline") == RETIRED_COPY.get(_OLD_PASS_HEAD, ""):
         cfg.setdefault("closing", PASS_CLOSING)
     # 계좌번호처럼 공개하기 꺼려지는 값은 환경변수로 덮어쓸 수 있습니다.
     if os.environ.get("BANK_ACCOUNT"):

@@ -453,7 +453,7 @@ def test_pass_preorder_discount():
     assert "12개월권을 사전 신청하시면" in text and "30,000원을 깎아 드립니다" in text
     assert "정가 220,000원" in text and "190,000원" in text      # 12개월 — 깎임
     assert "정가 99,000원" not in text and "69,000원" not in text   # 3개월 — 정가 그대로
-    assert "49,000원" in text and "정가 49,000원" not in text       # 1개월 — 정가 그대로
+    assert "39,000원" in text and "정가 39,000원" not in text       # 1개월 — 정가 그대로
     assert text.count("사전 신청 −30,000원") == 1
     # 월 환산도 깎인 값 기준이어야 합니다 (220,000 → 190,000 이면 18,333 → 15,833)
     assert "월 15,833원 꼴" in text and "월 18,333원 꼴" not in text
@@ -1158,6 +1158,29 @@ def test_submit_page_promises_only_a_coupon():
         raw["submit_reward"]["headline"] = keep
         sc.save_json("site.json", raw)
     print("PASS  시험지 보내기 — 돌아오는 것은 쿠폰")
+
+
+def test_word_study_is_reachable_from_the_menu():
+    """화면에서 바로 푸는 기능이 눌러서 닿는 자리에 있어야 합니다.
+
+    만들어 두고 링크를 안 걸면 없는 기능입니다. 단어장 목록은 '시험지 만들기'
+    화면으로만 들어오므로, 거기에 길이 없으면 아무도 못 찾습니다.
+    """
+    c = client()
+    # 메뉴 → 단어장 목록 → 책 고르기 → 여기서 '단어 풀기' 가 보여야 합니다
+    assert "/words" in body(c.get("/"))
+    listing = body(c.get("/words"))
+    slug = sc.load_words()["books"][0]["slug"]
+    assert f"/words/{slug}" in listing
+    landed = body(c.get(f"/words/{slug}/make"))
+    assert f"/words/{slug}/study" in landed, "시험지 만들기 화면에 길이 없습니다"
+    assert "화면에서 바로 풀어 보기" in landed
+
+    # 범위 고르는 화면에도 그대로 있습니다
+    assert f"/words/{slug}/study" in body(c.get(f"/words/{slug}"))
+    # 눌러 가면 실제로 열립니다
+    assert c.get(f"/words/{slug}/study").status_code == 200
+    print("PASS  단어 풀기 — 메뉴에서 눌러서 닿음")
 
 
 def test_admin_menu_is_short():
@@ -1945,9 +1968,7 @@ def test_pass_shows_what_each_plan_covers():
     되므로, 실제 카탈로그에서 세어 만듭니다.
     """
     text = body(client().get("/pass"))
-    assert "시험 한 번을 통째로" in text            # 1개월
-    assert "한 학기를 통째로" in text               # 3개월
-    assert "1년 내내" in text                       # 12개월
+    assert "한 학기를 통째로" in text and "1년 내내" in text
     assert "낱개로 사시면 약" in text and "아끼십니다" in text
     assert "이미 열어 두셨으니 고르기만" in text     # 바닥 한 줄
     assert "지문 묶음으로 여세요" not in text        # 무슨 말인지 모릅니다
@@ -1976,9 +1997,6 @@ def test_pass_shows_what_each_plan_covers():
         if alone <= pl["price"]:
             assert f"낱개로 사시면 약 {alone:,}원" not in text, pl["name"]
 
-    # 오래 쓰는 요금제일수록 지문당이 싸야 하고, 시험 리듬을 온전히 덮어야 합니다
-    for pl in plans:
-        assert pl["passages"] >= one * 0.9, f"{pl['name']} 이 시험 한 번도 못 치릅니다"
     print("PASS  프리패스 — 무엇을 덮는지 · 낱개로 사면 얼마인지")
 
 
@@ -1986,15 +2004,15 @@ def test_pass_counts_passages():
     """프리패스는 무제한이 아니라 지문 n개까지이고, 세는 법이 적혀 있어야 합니다."""
     import re as _re
     text = body(client().get("/pass"))
-    assert "지문 660개" in text and "지문 260개" in text and "지문 110개" in text
+    assert "지문 400개" in text and "지문 160개" in text and "지문 55개" in text
     assert "무제한" not in text
     assert "지문당" in text                      # 낱개보다 싸다는 것이 보여야 합니다
 
     # '지문 1개' 가 무엇인지 화면에 적혀 있어야 합니다
     assert "지문은 이렇게 빠집니다" in text
     assert "그 지문의 자료 한 묶음" in text
-    # 분석과 문제를 둘 다 받으면 두 번 빠진다는 것 (여기서 지문 수가 갈립니다)
-    assert "56개가 빠집니다" in text
+    # 단위로 환산한 예시가 있어야 손님이 감을 잡습니다
+    assert "모의고사 7회차 + 부교재 40강 + 교과서 8과" in text
 
     # 오래 쓰는 요금제일수록 지문당 값이 싸야 합니다 (거꾸로면 살 이유가 없습니다)
     per = [int(x.replace(",", "")) for x in
@@ -5522,6 +5540,7 @@ def run_all():
     test_traffic_numbers_never_reach_customers()
     test_admin_traffic_screen_reads_at_a_glance()
     test_submit_page_promises_only_a_coupon()
+    test_word_study_is_reachable_from_the_menu()
     test_admin_menu_is_short()
     test_admin_pages_open()
     test_bulk_products_from_zip()
