@@ -180,16 +180,17 @@ def passage_html(p, teacher):
         h.append(f'<div class="s"><div class="en"><span class="n">{s["id"]}</span>{hl_en(s)}</div><div class="ko">{ko_line(s, teacher)}</div></div>')
     h.append('</div></div>')
     # ④ 어법칩 (page break)
-    h.append('<div class="sec brk">'+sec_head(4,"어법칩","문장별 핵심 어법"))
+    h.append('<div class="sec brk">'+sec_head(4,"어법칩","문장별 원문·핵심 어법(형광펜=어법 표지)"))
     h.append('<div class="panel">')
     for s in sents:
         chips=s.get("grammar",[])
         if not chips: continue
-        inner=[f'<span class="n">{s["id"]}</span>']
+        h.append(f'<div class="sen"><span class="sn2">{s["id"]}</span>{hl_en(s)}</div><div class="grp">')
+        inner=[]
         for g in chips:
             inner.append(f'<span class="chip">{esc(g.get("tag",""))}</span>')
             if teacher and g.get("note"): inner.append(f'<span class="gnote">{esc(g["note"])}</span> ')
-        h.append(f'<div class="gl">{"".join(inner)}</div>')
+        h.append(f'<div class="gl">{"".join(inner)}</div></div>')
     h.append('</div></div>')
     # ⑤ ox (page break)
     h.append('<div class="sec brk">'+sec_head(5,"O / X / △ 내용 판단","맞으면 O·틀리면 X·결론만 맞으면 △, X·△는 근거 고치기"))
