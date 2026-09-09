@@ -217,14 +217,35 @@ table.flow{width:100%; border-collapse:collapse;}
 def sec_head(n,t,d=""):
     return f'<div class="sec-h"><span class="sec-n">{n}</span><span class="sec-t">{t}</span><span class="sec-d">{d}</span></div>'
 
-def passage_html(p, teacher):
-    ov=p["overview"]; no=esc(p["item_no"].strip()); ti=esc(ov["theme_ko"]); sents=p["sentences"]
-    h=[f'<div class="psg"><div class="p1"><div class="p-h"><span class="p-no">{no}</span><span class="p-ti">{ti}</span><span class="p-src">올림포스 독해 기본1</span></div><div class="p1body">']
-    # ① 원문 (page 1)
+def phead(p):
+    no=esc(p["item_no"].strip()); ti=esc(p["overview"]["theme_ko"])
+    return f'<div class="p-h"><span class="p-no">{no}</span><span class="p-ti">{ti}</span><span class="p-src">올림포스 독해 기본1</span></div>'
+
+def _first_pos(raw, spans):
+    best=None
+    for sp in (spans or []):
+        e=str(sp).strip()
+        if not e: continue
+        m=re.search(_bpat(e), raw, re.IGNORECASE)
+        if m: best=m.start() if best is None else min(best, m.start())
+    return best
+def ordered_grammar(s):
+    """어법칩을 '문장에 나온 순서'대로 정렬(첫 span 위치 기준). 위치를 못 찾으면 원래 순서로 뒤에."""
+    raw=s.get("english","") or ""
+    items=list(enumerate(s.get("grammar",[])))
+    def key(ig):
+        idx,g=ig; p=_first_pos(raw, g.get("spans"))
+        return (0,p,idx) if p is not None else (1,0,idx)
+    return [g for _,g in sorted(items, key=key)]
+
+# ---- 섹션별 렌더(복수지문은 섹션 묶음 단위로 지문1→지문2→… 반복) ----
+def render_overview(p, teacher):
+    """목차 1 원문 · 2 어휘 · 6 글의 구조도 (한 페이지, 세로 꽉 채움)."""
+    ov=p["overview"]; no=esc(p["item_no"].strip()); sents=p["sentences"]
+    h=['<div class="psg"><div class="p1">'+phead(p)+'<div class="p1body">']
     h.append('<div class="sec">'+sec_head(1,"원문"))
     body=" ".join(f'<span class="sn">{s["id"]}</span>{esc(s["english"])}' for s in sents)
     h.append(f'<div class="panel orig">{body}</div></div>')
-    # ② 어휘 (page 1)
     h.append('<div class="sec" style="margin-top:8px;">'+sec_head(2,"어휘 리스트"))
     seen=set(); rows=[]
     for s in sents:
@@ -233,8 +254,7 @@ def passage_html(p, teacher):
             if not w or w.lower() in seen: continue
             seen.add(w.lower()); rows.append(f'<div class="row"><span class="w">{esc(w)}</span> <span class="m">{esc(v.get("meaning",""))}</span></div>')
     h.append(f'<div class="panel voc">{"".join(rows)}</div></div>')
-    # ③ 글의 구조도 (page 1, 같은 페이지)
-    h.append('<div class="sec" style="margin-top:8px;">'+sec_head(3,"글의 구조도 파악","핵심어(영어)를 단서로 각 단계 내용을 기호로 정리(→ ⇒ ↔ = + ↑↓)"))
+    h.append('<div class="sec" style="margin-top:8px;">'+sec_head(6,"글의 구조도 파악","핵심어(영어)를 단서로 각 단계 내용을 기호로 정리(→ ⇒ ↔ = + ↑↓)"))
     km=kw_map(p); notes=NOTES.get(no) or NOTES.get(p["item_no"]) or []
     h.append('<div class="panel"><table class="flow"><tr>'
              '<td class="hd stg">단계 · 문장</td><td class="hd kwc">핵심어(영어)</td><td class="hd">내용 정리(기호 활용)</td></tr>')
@@ -253,18 +273,22 @@ def passage_html(p, teacher):
             cell='<div class="sumblank"></div>'
         h.append(f'<tr><td class="stg">{esc(b["stage"])}<span class="rg">{fmt_range(b["sentence_range"])}</span></td><td class="kwc">{kwc}</td><td>{cell}</td></tr>')
     h.append('</table></div></div>')
-    h.append('</div></div>')  # close p1body, p1 (1페이지: 원문·어휘·구조도)
-    # ④ 해석연습 (page break) — 영어 청크 / 슬래시 + 어법 형광펜, 한글 핵심 빈칸
-    h.append('<div class="sec brk">'+sec_head(4,"해석 연습","영어는 청크마다 / 끊어읽기 · 어법칩 형광펜 / 한글은 오역 위험 핵심 어구 빈칸"))
-    h.append('<div class="panel">')
-    for s in sents:
+    h.append('</div></div></div>')  # p1body, p1, psg
+    return "".join(h)
+
+def render_trans(p, teacher):
+    """목차 3 해석 연습 — 영어 청크 / 끊어읽기 + 어법 형광펜, 한글 핵심 빈칸."""
+    h=['<div class="psg">'+phead(p)+'<div class="sec">'+sec_head(3,"해석 연습","영어는 청크마다 / 끊어읽기 · 어법칩 형광펜 / 한글은 오역 위험 핵심 어구 빈칸")+'<div class="panel">']
+    for s in p["sentences"]:
         h.append(f'<div class="s"><div class="en"><span class="n">{s["id"]}</span>{en_practice(s)}</div><div class="ko">{ko_line(s, teacher)}</div></div>')
-    h.append('</div></div>')
-    # ⑤ 어법칩 (page break)
-    h.append('<div class="sec brk">'+sec_head(5,"어법칩","문장별 원문·핵심 어법(형광펜=어법 표지)"))
-    h.append('<div class="panel">')
-    for s in sents:
-        chips=s.get("grammar",[])
+    h.append('</div></div></div>')
+    return "".join(h)
+
+def render_grammar(p, teacher):
+    """목차 4 어법칩 — 문장에 나온 순서대로."""
+    h=['<div class="psg">'+phead(p)+'<div class="sec">'+sec_head(4,"어법칩","문장별 원문·핵심 어법(형광펜=어법 표지) · 문장에 나온 순서")+'<div class="panel">']
+    for s in p["sentences"]:
+        chips=ordered_grammar(s)
         if not chips: continue
         h.append(f'<div class="sen"><span class="sn2">{s["id"]}</span>{hl_en(s)}</div><div class="grp">')
         inner=[]
@@ -272,11 +296,13 @@ def passage_html(p, teacher):
             inner.append(f'<span class="chip">{esc(g.get("tag",""))}</span>')
             if teacher and g.get("note"): inner.append(f'<span class="gnote">{esc(g["note"])}</span> ')
         h.append(f'<div class="gl">{"".join(inner)}</div></div>')
-    h.append('</div></div>')
-    # ⑥ ox (page break)
-    h.append('<div class="sec brk">'+sec_head(6,"O / X / △ 내용 판단","맞으면 O·틀리면 X·결론만 맞으면 △, X·△는 근거 고치기"))
-    h.append('<div class="panel">')
-    for s in sents:
+    h.append('</div></div></div>')
+    return "".join(h)
+
+def render_ox(p, teacher):
+    """목차 5 O/X/△ 내용 판단."""
+    h=['<div class="psg">'+phead(p)+'<div class="sec">'+sec_head(5,"O / X / △ 내용 판단","맞으면 O·틀리면 X·결론만 맞으면 △, X·△는 근거 고치기")+'<div class="panel">']
+    for s in p["sentences"]:
         ms=s.get("misreads",[])
         if not ms: continue
         h.append(f'<div class="sen"><span class="sn2">{s["id"]}</span>{esc(s["english"])}</div><div class="grp">')
@@ -295,15 +321,15 @@ def passage_html(p, teacher):
                 h.append(f'<div class="ox"><div class="stx">{stmt}</div>'
                          '<div class="pick"><span class="lab">내 판단</span><b class="k-o">O</b><b class="k-x">X</b><b class="k-t">△</b><span class="fixline"></span></div></div>')
         h.append('</div>')
-    h.append('</div></div>')
-    h.append('</div>')
+    h.append('</div></div></div>')
     return "".join(h)
 
 def build(teacher, out):
-    badge='강사용' if teacher else '학생용'
-    body=[f'<div class="p-h" style="border-bottom:none;margin-bottom:0;"></div>']
     body=[]
-    for p in P: body.append(passage_html(p, teacher))
+    for p in P: body.append(render_overview(p, teacher))   # 목차 1·2·6 (지문별 1페이지)
+    for p in P: body.append(render_trans(p, teacher))       # 목차 3 해석연습
+    for p in P: body.append(render_grammar(p, teacher))     # 목차 4 어법칩
+    for p in P: body.append(render_ox(p, teacher))          # 목차 5 O/X/△
     doc=f'<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><style>{CSS}</style></head><body>{"".join(body)}</body></html>'
     HTML(string=doc).write_pdf(out)
     d=fitz.open(out); n=d.page_count; d.close(); return n

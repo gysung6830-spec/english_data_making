@@ -220,15 +220,15 @@
     },
     {
      "en": "to detect visual [[movement]]",
-     "ko": "시각적 [[움직임]]을 감지하는"
+     "ko": "[[시각적 움직임을 감지하는]]"
     },
     {
      "en": "played an [[interesting]] role",
-     "ko": "[[흥미로운]] 역할을 했다"
+     "ko": "[[흥미로운 역할을 했다]]"
     },
     {
      "en": "in the history of [[astronomy]].",
-     "ko": "[[천문학]]의 역사에서"
+     "ko": "천문학의 역사에서"
     }
    ],
    "misreads": [
@@ -269,7 +269,7 @@
    "chunks": [
     {
      "en": "In 1930, Clyde Tombaugh was [[searching]]",
-     "ko": "1930년에 Clyde Tombaugh는 [[탐색하고]] 있었다"
+     "ko": "1930년에 Clyde Tombaugh는 [[탐색하고 있었다]]"
     },
     {
      "en": "the skies",
@@ -277,11 +277,11 @@
     },
     {
      "en": "for a possible [[undiscovered]] planet",
-     "ko": "있을 법한 [[미발견]] 행성을 찾아"
+     "ko": "[[있을 법한 미발견 행성을 찾아]]"
     },
     {
      "en": "beyond [[Neptune]].",
-     "ko": "[[해왕성]] 너머에"
+     "ko": "해왕성 너머에"
     }
    ],
    "misreads": [
@@ -322,11 +322,11 @@
    "chunks": [
     {
      "en": "He [[photographed]]",
-     "ko": "그는 [[촬영했다]]"
+     "ko": "그는 촬영했다"
     },
     {
      "en": "each [[region]] of the sky",
-     "ko": "하늘의 각 [[영역]]을"
+     "ko": "하늘의 각 영역을"
     },
     {
      "en": "twice,",
@@ -334,7 +334,7 @@
     },
     {
      "en": "several days [[apart]].",
-     "ko": "며칠 [[간격을 두고]]"
+     "ko": "[[며칠 간격을 두고]]"
     }
    ],
    "misreads": [
@@ -380,19 +380,19 @@
    "chunks": [
     {
      "en": "Stars [[essentially]] remain",
-     "ko": "항성은 [[본질적으로]] 남아 있다"
+     "ko": "항성은 본질적으로 남아 있다"
     },
     {
      "en": "[[unmoving]] in photos,",
-     "ko": "사진 속에서 [[움직이지 않는]] 채로"
+     "ko": "사진 속에서 [[움직이지 않는 채로]]"
     },
     {
      "en": "while a planet [[moves]]",
-     "ko": "반면 행성은 [[이동한다]]"
+     "ko": "[[반면 행성은 이동한다]]"
     },
     {
      "en": "from one photo to the [[next]].",
-     "ko": "한 사진에서 [[다음]] 사진으로"
+     "ko": "한 사진에서 다음 사진으로"
     }
    ],
    "misreads": [
@@ -424,7 +424,7 @@
     {
      "tag": "수사의문문",
      "note": "'어떻게 찾을까'로 문제를 던지는 형식",
-     "spans": []
+     "spans": ["how would he find"]
     }
    ],
    "vocab": [
@@ -440,11 +440,11 @@
    "chunks": [
     {
      "en": "However, how would he [[find]]",
-     "ko": "그러나 그는 어떻게 [[찾을]] 것인가"
+     "ko": "그러나 그는 [[어떻게 찾을 것인가]]"
     },
     {
      "en": "a small [[dot]]",
-     "ko": "하나의 작은 [[점]]을"
+     "ko": "하나의 작은 점을"
     },
     {
      "en": "that [[moved]]",
@@ -452,7 +452,7 @@
     },
     {
      "en": "among all the [[countless]] unmoving dots",
-     "ko": "[[수많은]] 움직이지 않는 점들 사이에서"
+     "ko": "[[수많은 움직이지 않는 점들 사이에서]]"
     },
     {
      "en": "in the sky?",
@@ -497,7 +497,7 @@
    "chunks": [
     {
      "en": "He put each [[pair]] of photos",
-     "ko": "그는 각 [[쌍]]의 사진을 놓았다"
+     "ko": "그는 각 쌍의 사진을 놓았다"
     },
     {
      "en": "on a machine",
@@ -505,11 +505,11 @@
     },
     {
      "en": "that would [[flip]] back and forth",
-     "ko": "앞뒤로 [[뒤집어]] 주는"
+     "ko": "[[앞뒤로 뒤집어 주는]]"
     },
     {
      "en": "between one photo and the [[other]].",
-     "ko": "한 사진과 [[다른]] 사진 사이를"
+     "ko": "한 사진과 [[다른 사진 사이를]]"
     }
    ],
    "misreads": [
@@ -555,19 +555,19 @@
    "chunks": [
     {
      "en": "When he came to one [[pair]] of photos,",
-     "ko": "그가 한 [[쌍]]의 사진에 이르렀을 때,"
+     "ko": "그가 한 쌍의 사진에 이르렀을 때,"
     },
     {
      "en": "he [[immediately]] noticed",
-     "ko": "그는 [[즉시]] 알아챘다"
+     "ko": "그는 즉시 알아챘다"
     },
     {
      "en": "one dot [[moving]]",
-     "ko": "한 점이 [[움직이는]] 것을"
+     "ko": "[[한 점이 움직이는 것을]]"
     },
     {
      "en": "as the machine [[flipped]] back and forth.",
-     "ko": "기계가 앞뒤로 [[뒤집힐]] 때"
+     "ko": "기계가 앞뒤로 [[뒤집힐 때]]"
     }
    ],
    "misreads": [
@@ -616,11 +616,11 @@
     },
     {
      "en": "which astronomers now [[list]]",
-     "ko": "천문학자들이 현재 [[분류한다]]"
+     "ko": "[[천문학자들이 현재 분류한다]]"
     },
     {
      "en": "as a [[dwarf]] planet.",
-     "ko": "[[왜소]] 행성으로"
+     "ko": "[[왜소 행성으로]]"
     }
    ],
    "misreads": [

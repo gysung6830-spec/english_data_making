@@ -174,7 +174,9 @@
     {
      "tag": "관계사 생략(목적격)",
      "note": "the first thing (that) parents drill — that 생략",
-     "spans": []
+     "spans": [
+      "first thing"
+     ]
     }
    ],
    "vocab": [
@@ -194,7 +196,7 @@
    "chunks": [
     {
      "en": "Vision is our [[dominant]] sense,",
-     "ko": "시각은 우리의 [[지배적인]] 감각이고,"
+     "ko": "시각은 우리의 [[지배적인 감각]]이고,"
     },
     {
      "en": "and you want to",
@@ -206,7 +208,7 @@
     },
     {
      "en": "before [[crossing]] the street",
-     "ko": "길을 [[건너기]] 전에"
+     "ko": "길을 건너기 전에"
     },
     {
      "en": "— it's the first thing",
@@ -214,7 +216,7 @@
     },
     {
      "en": "parents [[drill]] into their children.",
-     "ko": "부모가 아이들에게 [[주입하는]]"
+     "ko": "[[부모가 아이들에게 주입하는]]"
     }
    ],
    "misreads": [
@@ -239,7 +241,9 @@
     {
      "tag": "명사절 that",
      "note": "mean의 목적어절(that 생략)",
-     "spans": []
+     "spans": [
+      "mean"
+     ]
     },
     {
      "tag": "이중부정",
@@ -256,11 +260,11 @@
    "chunks": [
     {
      "en": "But that doesn't [[mean]]",
-     "ko": "그러나 그것은 (~라는) [[뜻]]은 아니다"
+     "ko": "그러나 그것은 (~라는) [[뜻은 아니다]]"
     },
     {
      "en": "our sense of [[hearing]]",
-     "ko": "우리의 [[청각]]이"
+     "ko": "우리의 청각이"
     },
     {
      "en": "[[isn't a big deal]].",
@@ -311,19 +315,19 @@
    "chunks": [
     {
      "en": "I [[don't have to]] mention",
-     "ko": "나는 언급할 [[필요가 없다]]"
+     "ko": "나는 [[언급할 필요가 없다]]"
     },
     {
      "en": "the [[worn-out]] example",
-     "ko": "그 [[진부한]] 예를"
+     "ko": "그 [[진부한 예]]를"
     },
     {
      "en": "of [[cavemen]]",
-     "ko": "[[원시인]]과"
+     "ko": "원시인과"
     },
     {
      "en": "and hidden [[saber-toothed]] tigers.",
-     "ko": "숨어 있는 [[검치]]호랑이라는."
+     "ko": "숨어 있는 검치호랑이라는."
     }
    ],
    "misreads": [
@@ -367,19 +371,19 @@
    "chunks": [
     {
      "en": "There's [[something]]",
-     "ko": "[[무언가]]가 있다"
+     "ko": "무언가가 있다"
     },
     {
      "en": "that can [[sneak up]]",
-     "ko": "[[몰래 다가올]] 수 있는"
+     "ko": "[[몰래 다가올 수 있는]]"
     },
     {
      "en": "and kill you [[today]]:",
-     "ko": "그리고 [[오늘날]] 여러분을 죽일 수 있는:"
+     "ko": "그리고 오늘날 [[여러분을 죽일 수 있는]]:"
     },
     {
      "en": "a [[silent]] electric car.",
-     "ko": "바로 [[조용한]] 전기차다."
+     "ko": "바로 조용한 전기차다."
     }
    ],
    "misreads": [
@@ -442,7 +446,7 @@
     },
     {
      "en": "an [[unanticipated]] but serious threat",
-     "ko": "[[예상치 못한]], 그러나 심각한 위협을"
+     "ko": "예상치 못한, 그러나 심각한 위협을"
     },
     {
      "en": "to pedestrians and bicyclists,",
@@ -454,7 +458,7 @@
     },
     {
      "en": "to detect and [[orient to]] cars",
-     "ko": "차를 감지하고 [[방향을 잡기]] 위해"
+     "ko": "[[차를 감지하고 방향을 잡기]] 위해"
     },
     {
      "en": "— [[so much so that]]",
@@ -470,7 +474,7 @@
     },
     {
      "en": "to generate a [[warning noise]].",
-     "ko": "[[경고음]]을 내도록."
+     "ko": "경고음을 내도록."
     }
    ],
    "misreads": [
@@ -518,7 +522,7 @@
    "chunks": [
     {
      "en": "It's a [[reminder]] that",
-     "ko": "그것은 [[상기시켜]] 주는 것이다"
+     "ko": "그것은 [[상기시켜 주는 것]]이다"
     },
     {
      "en": "even for us",
@@ -526,7 +530,7 @@
     },
     {
      "en": "in a [[modern city]],",
-     "ko": "[[현대 도시]]에 있는,"
+     "ko": "현대 도시에 있는,"
     },
     {
      "en": "[[having both cues]]",
@@ -538,7 +542,7 @@
     },
     {
      "en": "between [[life and death]].",
-     "ko": "[[삶과 죽음]] 사이의."
+     "ko": "[[삶과 죽음 사이의]]."
     }
    ],
    "misreads": [

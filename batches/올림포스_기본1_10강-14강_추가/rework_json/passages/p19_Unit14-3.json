@@ -209,11 +209,11 @@
    "chunks": [
     {
      "en": "People are [[cutting down]] forests",
-     "ko": "사람들은 숲을 [[베어내고]] 있다"
+     "ko": "사람들은 숲을 베어내고 있다"
     },
     {
      "en": "much [[faster]]",
-     "ko": "훨씬 더 [[빠르게]]"
+     "ko": "[[훨씬 더 빠르게]]"
     },
     {
      "en": "than the rate",
@@ -221,7 +221,7 @@
     },
     {
      "en": "at which forests can [[regrow]].",
-     "ko": "그것으로 숲이 [[다시 자랄]] 수 있는"
+     "ko": "[[그것으로 숲이 다시 자랄 수 있는]]"
     }
    ],
    "misreads": [
@@ -277,7 +277,7 @@
    "chunks": [
     {
      "en": "We need to dramatically [[reduce]]",
-     "ko": "우리는 급격하게 [[줄여야]] 한다"
+     "ko": "우리는 급격하게 줄여야 한다"
     },
     {
      "en": "our use of wood,",
@@ -285,7 +285,7 @@
     },
     {
      "en": "not just because the supply is [[decreasing]],",
-     "ko": "공급이 [[감소하기]] 때문만이 아니라,"
+     "ko": "[[공급이 감소하기 때문만이 아니라]],"
     },
     {
      "en": "and not just because",
@@ -293,19 +293,19 @@
     },
     {
      "en": "[[entire species of flora and fauna]]",
-     "ko": "[[동식물군 전체 종이]]"
+     "ko": "동식물군 전체 종이"
     },
     {
      "en": "that live in forests",
-     "ko": "숲에 서식하는"
+     "ko": "[[숲에 서식하는]]"
     },
     {
      "en": "are [[vanishing]],",
-     "ko": "[[사라지고]] 있기,"
+     "ko": "사라지고 있기,"
     },
     {
      "en": "but because the forest [[performs]]",
-     "ko": "하지만 숲이 [[수행하기]] 때문이다"
+     "ko": "[[하지만 숲이 수행하기 때문이다]]"
     },
     {
      "en": "an important function.",
@@ -365,7 +365,7 @@
     },
     {
      "en": "by [[absorbing]] carbon",
-     "ko": "탄소를 [[흡수함]]으로써"
+     "ko": "[[탄소를 흡수함]]으로써"
     },
     {
      "en": "from the atmosphere",
@@ -373,7 +373,7 @@
     },
     {
      "en": "and [[reducing]] greenhouse gases.",
-     "ko": "그리고 온실가스를 [[줄임]]으로써"
+     "ko": "그리고 [[온실가스를 줄임]]으로써"
     }
    ],
    "misreads": [
@@ -410,15 +410,15 @@
    "chunks": [
     {
      "en": "They also [[provide]]",
-     "ko": "그것들은 또한 [[공급한다]]"
+     "ko": "[[그것들은]] 또한 공급한다"
     },
     {
      "en": "[[oxygen]]",
-     "ko": "[[산소]]를"
+     "ko": "산소를"
     },
     {
      "en": "for us to [[breathe]].",
-     "ko": "우리가 [[숨 쉴]] 수 있도록"
+     "ko": "[[우리가 숨 쉴 수 있도록]]"
     }
    ],
    "misreads": [
@@ -461,11 +461,11 @@
    "chunks": [
     {
      "en": "There are too [[many]]",
-     "ko": "너무 [[많이]] 있다"
+     "ko": "너무 많이 있다"
     },
     {
      "en": "[[trivial]] and [[shortsighted]] uses",
-     "ko": "[[사소하고]] [[근시안적인]] 쓰임새가"
+     "ko": "[[사소하고 근시안적인]] 쓰임새가"
     },
     {
      "en": "of wood.",
@@ -514,7 +514,7 @@
    "chunks": [
     {
      "en": "When a hurricane [[advances]]",
-     "ko": "허리케인이 [[다가올]] 때"
+     "ko": "[[허리케인이 다가올 때]]"
     },
     {
      "en": "on a city,",
@@ -526,7 +526,7 @@
     },
     {
      "en": "with [[plywood]].",
-     "ko": "[[합판]]으로"
+     "ko": "합판으로"
     }
    ],
    "misreads": [
@@ -570,11 +570,11 @@
    "chunks": [
     {
      "en": "After the storm has [[passed]],",
-     "ko": "폭풍이 [[지나간]] 후,"
+     "ko": "[[폭풍이 지나간 후]],"
     },
     {
      "en": "they [[discard]] the [[plywood]].",
-     "ko": "그들은 그 [[합판]]을 [[버린다]]"
+     "ko": "[[그들은]] 그 합판을 버린다"
     }
    ],
    "misreads": [
@@ -633,11 +633,11 @@
    "chunks": [
     {
      "en": "It's [[ironic]] to think that",
-     "ko": "생각하면 [[반어적]]이다"
+     "ko": "생각하면 반어적이다"
     },
     {
      "en": "for [[purposes]] such as these,",
-     "ko": "이러한 [[목적]]을 위해,"
+     "ko": "이러한 목적을 위해,"
     },
     {
      "en": "forests are [[cut down]]",
@@ -645,7 +645,7 @@
     },
     {
      "en": "that otherwise would [[aid]]",
-     "ko": "그렇지 않다면 [[도움이 될]]"
+     "ko": "[[그렇지 않다면 도움이 될]]"
     },
     {
      "en": "[[in controlling such storms.]]",

@@ -210,7 +210,7 @@
     {
      "tag": "관계부사 생략",
      "note": "The reason [why] pessimists sound smart — reason 뒤 why 생략",
-     "spans": []
+     "spans": ["reason"]
     }
    ],
    "vocab": [
@@ -230,7 +230,7 @@
     },
     {
      "en": "[[pessimists]] often sound smart",
-     "ko": "[[비관론자]]가 흔히 똑똑하게 들리는"
+     "ko": "비관론자가 흔히 똑똑하게 들리는"
     },
     {
      "en": "is [[that]]",
@@ -238,11 +238,11 @@
     },
     {
      "en": "they can [[avoid]]",
-     "ko": "그들이 [[피할]] 수 있다는"
+     "ko": "그들이 피할 수 있다는"
     },
     {
      "en": "being 'wrong'",
-     "ko": "'틀린 것'이 되는 것을"
+     "ko": "[['틀린 것'이 되는 것을]]"
     },
     {
      "en": "[[by moving the goalposts]].",
@@ -294,11 +294,11 @@
    "chunks": [
     {
      "en": "When a [[doomer]] predicts",
-     "ko": "[[운명론자]]가 예측할 때"
+     "ko": "운명론자가 예측할 때"
     },
     {
      "en": "that the world will [[end]]",
-     "ko": "세상이 [[끝날]] 것이라고"
+     "ko": "[[세상이 끝날 것이라고]]"
     },
     {
      "en": "in five years,",
@@ -358,7 +358,7 @@
    "chunks": [
     {
      "en": "The American [[biologist]]",
-     "ko": "미국 [[생물학자]]"
+     "ko": "미국 생물학자"
     },
     {
      "en": "Paul R. Ehrlich",
@@ -366,7 +366,7 @@
     },
     {
      "en": "— [[author]] of",
-     "ko": "— [[저자]]인데,"
+     "ko": "— 저자인데,"
     },
     {
      "en": "the 1968 book",
@@ -382,7 +382,7 @@
     },
     {
      "en": "for [[decades]].",
-     "ko": "[[수십 년]]째."
+     "ko": "[[수십 년째]]."
     }
    ],
    "misreads": [
@@ -444,7 +444,7 @@
     },
     {
      "en": "And by \"the [[end]]\"",
-     "ko": "그리고 '[[종말]]'이란 말로"
+     "ko": "그리고 '종말'이란 말로"
     },
     {
      "en": "I mean",
@@ -452,15 +452,15 @@
     },
     {
      "en": "an utter [[breakdown]]",
-     "ko": "완전한 [[붕괴]]"
+     "ko": "[[완전한 붕괴]]"
     },
     {
      "en": "of the [[capacity]] of the planet",
-     "ko": "지구 [[수용력]]의"
+     "ko": "지구 수용력의"
     },
     {
      "en": "to [[support]] humanity.'",
-     "ko": "인류를 [[지탱할]]."
+     "ko": "[[인류를 지탱할]]."
     }
    ],
    "misreads": [
@@ -501,7 +501,7 @@
     },
     {
      "en": "that was terribly [[wrong]].",
-     "ko": "그것은 몹시 [[틀렸다]]."
+     "ko": "[[그것은 몹시 틀렸다]]."
     }
    ],
    "misreads": [
@@ -551,7 +551,7 @@
     },
     {
      "en": "that 'England will not [[exist]]",
-     "ko": "'영국이 [[존재하지]] 않을 것'이라고"
+     "ko": "[['영국이 존재하지 않을 것'이라고]]"
     },
     {
      "en": "in the year 2000.'",
@@ -582,7 +582,7 @@
     {
      "tag": "생략",
      "note": "(He was) wrong again",
-     "spans": []
+     "spans": ["Wrong"]
     }
    ],
    "vocab": [],
@@ -635,7 +635,7 @@
    "chunks": [
     {
      "en": "Ehrlich will [[keep]]",
-     "ko": "에얼릭은 [[계속]]"
+     "ko": "에얼릭은 계속"
     },
     {
      "en": "[[pushing this deadline back]].",
@@ -678,11 +678,11 @@
    "chunks": [
     {
      "en": "A pessimistic [[stance]]",
-     "ko": "비관적 [[자세]]는"
+     "ko": "비관적 자세는"
     },
     {
      "en": "is a [[safe]] one.",
-     "ko": "[[안전한]] 것이다."
+     "ko": "[[안전한 것이다]]."
     }
    ],
    "misreads": [

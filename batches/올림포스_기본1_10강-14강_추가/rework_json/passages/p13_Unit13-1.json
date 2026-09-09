@@ -227,7 +227,7 @@
    "chunks": [
     {
      "en": "Some [[ecosystems]],",
-     "ko": "일부 [[생태계]]는"
+     "ko": "일부 생태계는"
     },
     {
      "en": "over a wide range",
@@ -235,7 +235,7 @@
     },
     {
      "en": "of sites and [[purposes]],",
-     "ko": "장소와 [[목적]]의,"
+     "ko": "장소와 목적의,"
     },
     {
      "en": "are [[constructed]]",
@@ -243,7 +243,7 @@
     },
     {
      "en": "by [[humans]].",
-     "ko": "[[인간]]에 의해."
+     "ko": "[[인간에 의해]]."
     }
    ],
    "misreads": [
@@ -297,7 +297,7 @@
    "chunks": [
     {
      "en": "For example, we may [[construct]]",
-     "ko": "예를 들어, 우리는 [[건설]]할 수 있다"
+     "ko": "예를 들어, 우리는 건설할 수 있다"
     },
     {
      "en": "shallow ponds",
@@ -305,7 +305,7 @@
     },
     {
      "en": "or a series of [[canals]]",
-     "ko": "혹은 일련의 [[수로]]를"
+     "ko": "혹은 일련의 수로를"
     },
     {
      "en": "[[known as bioswales]]",
@@ -313,7 +313,7 @@
     },
     {
      "en": "that collect [[runoff]]",
-     "ko": "[[유출수]]를 모으는"
+     "ko": "[[유출수를 모으는]]"
     },
     {
      "en": "of surface water.",
@@ -385,7 +385,7 @@
     },
     {
      "en": "such as [[cattails]],",
-     "ko": "[[부들]] 같은,"
+     "ko": "부들 같은,"
     },
     {
      "en": "when [[planted]]",
@@ -397,7 +397,7 @@
     },
     {
      "en": "use and remove [[nutrients]]",
-     "ko": "[[영양분]]을 사용하고 제거한다"
+     "ko": "영양분을 사용하고 제거한다"
     },
     {
      "en": "in water",
@@ -405,15 +405,15 @@
     },
     {
      "en": "that's delivered to them",
-     "ko": "그것들에게 전달되는"
+     "ko": "[[그것들에게 전달되는]]"
     },
     {
      "en": "as a waste or [[pollutant]],",
-     "ko": "폐기물이나 [[오염 물질]]로서,"
+     "ko": "폐기물이나 오염 물질로서,"
     },
     {
      "en": "helping [[clean the water]].",
-     "ko": "물을 [[정화하는]] 데 도움을 주며."
+     "ko": "[[물을 정화하는 데 도움을 주며]]."
     }
    ],
    "misreads": [
@@ -460,7 +460,7 @@
    "chunks": [
     {
      "en": "Specially [[designed]] wetland ecosystems",
-     "ko": "특별히 [[설계된]] 습지 생태계가"
+     "ko": "특별히 설계된 습지 생태계가"
     },
     {
      "en": "have been [[constructed]]",
@@ -472,11 +472,11 @@
     },
     {
      "en": "process mine [[wastewater]]",
-     "ko": "광산 [[폐수]]를 처리하고"
+     "ko": "[[광산 폐수를 처리하고]]"
     },
     {
      "en": "and help remove [[toxins]]",
-     "ko": "[[독소]]를 제거하는 것을 도우며"
+     "ko": "[[독소를 제거하는 것을 도우며]]"
     },
     {
      "en": "from water.",
@@ -532,7 +532,7 @@
    "chunks": [
     {
      "en": "Other [[large-scale]] ecosystems",
-     "ko": "다른 [[대규모]] 생태계가"
+     "ko": "다른 대규모 생태계가"
     },
     {
      "en": "are [[constructed]]",
@@ -540,11 +540,11 @@
     },
     {
      "en": "to partially [[treat]]",
-     "ko": "부분적으로 [[처리하기]] 위해"
+     "ko": "[[부분적으로 처리하기 위해]]"
     },
     {
      "en": "urban [[wastewater]].",
-     "ko": "도시 [[폐수]]를."
+     "ko": "도시 폐수를."
     }
    ],
    "misreads": [
@@ -598,11 +598,11 @@
     },
     {
      "en": "what is [[known as]]",
-     "ko": "[[~라고 알려진]] 것"
+     "ko": "[[~라고 알려진 것]]"
     },
     {
      "en": "biological [[engineering]].",
-     "ko": "[[생물 공학]]."
+     "ko": "생물 공학."
     }
    ],
    "misreads": [

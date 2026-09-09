@@ -199,7 +199,7 @@
    "chunks": [
     {
      "en": "We all understand [[differently]]",
-     "ko": "우리는 모두 [[다르게]] 이해한다"
+     "ko": "우리는 모두 [[다르게 이해한다]]"
     },
     {
      "en": "— this much",
@@ -207,7 +207,7 @@
     },
     {
      "en": "is [[obvious]].",
-     "ko": "[[분명하다]]."
+     "ko": "분명하다."
     }
    ],
    "misreads": [
@@ -239,22 +239,24 @@
     {
      "tag": "관계부사 생략",
      "note": "The reason [why] we understand differently — reason 뒤 why 생략",
-     "spans": []
+     "spans": [
+      "reason"
+     ]
     }
    ],
    "vocab": [],
    "chunks": [
     {
      "en": "The reason we understand [[differently]]",
-     "ko": "우리가 [[다르게]] 이해하는 이유는"
+     "ko": "우리가 [[다르게 이해하는]] 이유는"
     },
     {
      "en": "is that our [[memories]]",
-     "ko": "우리의 [[기억]]이"
+     "ko": "우리의 기억이"
     },
     {
      "en": "are [[different]].",
-     "ko": "[[다르기]] 때문이다."
+     "ko": "[[다르기 때문이다]]."
     }
    ],
    "misreads": [
@@ -293,11 +295,11 @@
    "chunks": [
     {
      "en": "Our [[experiences]]",
-     "ko": "우리의 [[경험]]은"
+     "ko": "우리의 경험은"
     },
     {
      "en": "[[simply]] are not [[yours]].",
-     "ko": "[[결코]] [[여러분의 것]]이 아니다."
+     "ko": "[[결코 여러분의 것이 아니다]]."
     }
    ],
    "misreads": [
@@ -358,15 +360,15 @@
     },
     {
      "en": "we must [[find]]",
-     "ko": "우리는 [[찾아야]] 한다"
+     "ko": "우리는 찾아야 한다"
     },
     {
      "en": "the [[closest]] item",
-     "ko": "가장 [[가까운]] 항목을"
+     "ko": "[[가장 가까운 항목]]을"
     },
     {
      "en": "in [[memory]]",
-     "ko": "[[기억]] 속에서"
+     "ko": "기억 속에서"
     },
     {
      "en": "[[to which it relates]].",
@@ -444,7 +446,7 @@
    "chunks": [
     {
      "en": "Schank and Abelson [[claimed]]",
-     "ko": "섄크와 에이벌슨은 [[주장했다]]"
+     "ko": "섄크와 에이벌슨은 주장했다"
     },
     {
      "en": "that understanding required one",
@@ -460,19 +462,19 @@
     },
     {
      "en": "to create [[expectations]]",
-     "ko": "[[예상]]을 만들 것을"
+     "ko": "예상을 만들 것을"
     },
     {
      "en": "for what events were likely to take place,",
-     "ko": "어떤 사건이 일어날 법한지에 대해,"
+     "ko": "[[어떤 사건이 일어날 법한지]]에 대해,"
     },
     {
      "en": "so that new events could be [[understood]]",
-     "ko": "그리하여 새로운 사건이 [[이해될]] 수 있도록"
+     "ko": "그리하여 새로운 사건이 [[이해될 수 있도록]]"
     },
     {
      "en": "in terms of [[what was normal]].",
-     "ko": "[[무엇이 정상인지]]의 관점에서."
+     "ko": "무엇이 정상인지의 관점에서."
     }
    ],
    "misreads": [
@@ -521,7 +523,9 @@
     {
      "tag": "목적격 관계대명사 생략",
      "note": "the story [which] he was about to hear — 목적격 관계대명사 생략",
-     "spans": []
+     "spans": [
+      "story"
+     ]
     }
    ],
    "vocab": [
@@ -561,7 +565,7 @@
     },
     {
      "en": "his cocktail party [[script]]",
-     "ko": "자신의 칵테일파티 [[대본]]을"
+     "ko": "자신의 칵테일파티 대본을"
     },
     {
      "en": "which told him about",
@@ -581,7 +585,7 @@
     },
     {
      "en": "to [[guide]] his understanding",
-     "ko": "자신의 이해를 [[이끌었다]]"
+     "ko": "자신의 이해를 이끌었다"
     },
     {
      "en": "of the story",

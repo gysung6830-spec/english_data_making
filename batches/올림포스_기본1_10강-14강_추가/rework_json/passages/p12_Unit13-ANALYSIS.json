@@ -197,7 +197,7 @@
     {
      "tag": "관계부사 생략",
      "note": "the reasons [why] people are concerned — reasons 뒤 why 생략",
-     "spans": []
+     "spans": ["reasons"]
     }
    ],
    "vocab": [
@@ -217,11 +217,11 @@
    "chunks": [
     {
      "en": "One of the biggest [[reasons]]",
-     "ko": "가장 큰 [[이유]]들 중 하나는"
+     "ko": "가장 큰 [[이유들 중 하나는]]"
     },
     {
      "en": "people are [[concerned about]]",
-     "ko": "사람들이 [[걱정하는]]"
+     "ko": "사람들이 걱정하는"
     },
     {
      "en": "making a mistake",
@@ -233,7 +233,7 @@
     },
     {
      "en": "is that they [[view]]",
-     "ko": "~은 그들이 [[여긴다는]] 것이다"
+     "ko": "~은 그들이 여긴다는 것이다"
     },
     {
      "en": "speechmaking",
@@ -277,7 +277,7 @@
     {
      "tag": "명사절 생략",
      "note": "feel (that) ~",
-     "spans": []
+     "spans": ["feel"]
     }
    ],
    "vocab": [
@@ -301,15 +301,15 @@
     },
     {
      "en": "the audience is [[judging]] them",
-     "ko": "청중이 자신을 [[평가하고]] 있다고"
+     "ko": "청중이 자신을 평가하고 있다고"
     },
     {
      "en": "against a scale of [[absolute perfection]]",
-     "ko": "[[절대적 완벽]]의 잣대에 비추어"
+     "ko": "[[절대적 완벽의 잣대에 비추어]]"
     },
     {
      "en": "in which every [[misstated]] word",
-     "ko": "그 안에서 모든 [[잘못 말한]] 단어"
+     "ko": "그 안에서 모든 잘못 말한 단어"
     },
     {
      "en": "or awkward gesture",
@@ -368,11 +368,11 @@
     },
     {
      "en": "[[judges]] in a violin recital",
-     "ko": "바이올린 연주회의 [[심사위원]]과"
+     "ko": "바이올린 연주회의 심사위원과"
     },
     {
      "en": "or an ice-skating [[contest]].",
-     "ko": "혹은 아이스 스케이팅 [[대회]]의."
+     "ko": "혹은 아이스 스케이팅 대회의."
     }
    ],
    "misreads": [
@@ -422,11 +422,11 @@
    "chunks": [
     {
      "en": "They are not [[looking for]]",
-     "ko": "그들은 [[찾고 있는]] 게 아니라"
+     "ko": "그들은 [[찾고 있는 게 아니라]]"
     },
     {
      "en": "a [[virtuoso]] performance,",
-     "ko": "[[거장의 기교를 보여 주는]] 공연을,"
+     "ko": "거장의 기교를 보여 주는 공연을,"
     },
     {
      "en": "[[but for a well-thought-out address]]",
@@ -442,7 +442,7 @@
     },
     {
      "en": "[[clearly and directly]].",
-     "ko": "[[명확하고 직접적으로]]."
+     "ko": "명확하고 직접적으로."
     }
    ],
    "misreads": [
@@ -499,15 +499,15 @@
    "chunks": [
     {
      "en": "Sometimes an [[error]] or two",
-     "ko": "때로는 한두 [[실수]]가"
+     "ko": "때로는 한두 실수가"
     },
     {
      "en": "can actually [[enhance]]",
-     "ko": "실제로 [[높일]] 수 있다"
+     "ko": "실제로 높일 수 있다"
     },
     {
      "en": "a speaker's [[appeal]]",
-     "ko": "발표자의 [[매력]]을"
+     "ko": "발표자의 매력을"
     },
     {
      "en": "[[by making her or him]]",
@@ -515,7 +515,7 @@
     },
     {
      "en": "seem more human.",
-     "ko": "더 인간적으로 보이게"
+     "ko": "[[더 인간적으로 보이게]]"
     }
    ],
    "misreads": [

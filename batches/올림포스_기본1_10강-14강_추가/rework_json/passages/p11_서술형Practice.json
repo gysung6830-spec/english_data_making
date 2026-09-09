@@ -243,7 +243,7 @@
    "chunks": [
     {
      "en": "There is no [[question]] that",
-     "ko": "~라는 데는 [[의심의 여지]]가 없다"
+     "ko": "~라는 데는 [[의심의 여지가 없다]]"
     },
     {
      "en": "learning to sing",
@@ -251,7 +251,7 @@
     },
     {
      "en": "or play a musical [[instrument]]",
-     "ko": "혹은 [[악기]]를 연주하는"
+     "ko": "혹은 악기를 연주하는"
     },
     {
      "en": "[[changes the structure]]",
@@ -300,7 +300,10 @@
     {
      "tag": "동격",
      "note": "the side … = right hemisphere",
-     "spans": []
+     "spans": [
+      "right hemisphere",
+      "the side"
+     ]
     }
    ],
    "vocab": [
@@ -324,15 +327,15 @@
     },
     {
      "en": "but have no special [[training]],",
-     "ko": "특별한 [[훈련]]이 없다면,"
+     "ko": "[[특별한 훈련이 없다면]],"
     },
     {
      "en": "then your brain [[processes]] it",
-     "ko": "그러면 여러분의 뇌는 그것을 [[처리한다]]"
+     "ko": "그러면 여러분의 뇌는 그것을 처리한다"
     },
     {
      "en": "mostly through its right [[hemisphere]],",
-     "ko": "주로 우측 [[반구]]를 통해,"
+     "ko": "주로 우측 반구를 통해,"
     },
     {
      "en": "the side of the brain",
@@ -383,7 +386,7 @@
    "chunks": [
     {
      "en": "In the face of [[music]],",
-     "ko": "[[음악]]을 접하면,"
+     "ko": "[[음악을 접하면]],"
     },
     {
      "en": "you are [['right-lateralised']].",
@@ -434,19 +437,19 @@
     },
     {
      "en": "that musical [[training]] shifts",
-     "ko": "음악 [[훈련]]이 옮긴다는 것을"
+     "ko": "[[음악 훈련이 옮긴다는 것을]]"
     },
     {
      "en": "the brain's [[processing]] of music",
-     "ko": "뇌의 음악 [[처리]]를"
+     "ko": "뇌의 음악 처리를"
     },
     {
      "en": "to its left [[hemisphere]];",
-     "ko": "좌측 [[반구]]로;"
+     "ko": "[[좌측 반구로]];"
     },
     {
      "en": "musicians are [[left-brained]].",
-     "ko": "음악가는 [[좌뇌형]]이다."
+     "ko": "음악가는 좌뇌형이다."
     }
    ],
    "misreads": [
@@ -480,7 +483,7 @@
    "chunks": [
     {
      "en": "There are several [[guesses]]",
-     "ko": "여러 [[추측]]이 있다"
+     "ko": "여러 추측이 있다"
     },
     {
      "en": "about [[why this happens]].",
@@ -549,7 +552,7 @@
    "chunks": [
     {
      "en": "One [[explanation]] is that",
-     "ko": "한 가지 [[설명]]은 ~라는 것이다"
+     "ko": "한 가지 설명은 ~라는 것이다"
     },
     {
      "en": "they have learned to hear",
@@ -565,15 +568,15 @@
     },
     {
      "en": "of structural [[complexity]]",
-     "ko": "구조적 [[복잡성]]의"
+     "ko": "구조적 복잡성의"
     },
     {
      "en": "beyond the [[grasp]]",
-     "ko": "[[이해]]를 넘어선"
+     "ko": "[[이해를 넘어선]]"
     },
     {
      "en": "of ordinary [[listeners]].",
-     "ko": "평범한 [[청취자]]의."
+     "ko": "평범한 청취자의."
     }
    ],
    "misreads": [
@@ -629,7 +632,7 @@
    "chunks": [
     {
      "en": "When [[trained]] musicians",
-     "ko": "[[훈련된]] 음악가가"
+     "ko": "[[훈련된 음악가가]]"
     },
     {
      "en": "hear music,",
@@ -637,7 +640,7 @@
     },
     {
      "en": "it [[activates]] the part",
-     "ko": "그것은 그 부위를 [[활성화한다]]"
+     "ko": "그것은 그 부위를 활성화한다"
     },
     {
      "en": "of the brain",
@@ -649,7 +652,7 @@
     },
     {
      "en": "[[comprehension]].",
-     "ko": "[[이해]]."
+     "ko": "이해."
     }
    ],
    "misreads": [

@@ -250,15 +250,15 @@
     },
     {
      "en": "or [[appear to end]]",
-     "ko": "또는 [[끝난 것처럼 보일]] 수 있다"
+     "ko": "또는 [[끝난 것처럼 보일 수 있다]]"
     },
     {
      "en": "because of [[convenience]]",
-     "ko": "[[편의성]] 때문에"
+     "ko": "편의성 때문에"
     },
     {
      "en": "or [[changes]] in taste.",
-     "ko": "또는 취향의 [[변화]] 때문에."
+     "ko": "또는 [[취향의 변화]] 때문에."
     }
    ],
    "misreads": [
@@ -325,7 +325,7 @@
     },
     {
      "en": "a [[pumpkin pie]],",
-     "ko": "[[호박 파이]]를,"
+     "ko": "호박 파이를,"
     },
     {
      "en": "a cook",
@@ -333,7 +333,7 @@
     },
     {
      "en": "used to have to first",
-     "ko": "먼저 ~해야만 했다"
+     "ko": "[[먼저 ~해야만 했다]]"
     },
     {
      "en": "find a pumpkin",
@@ -341,15 +341,15 @@
     },
     {
      "en": "of [[suitable]] size,",
-     "ko": "[[적당한]] 크기의,"
+     "ko": "적당한 크기의,"
     },
     {
      "en": "cut it, peel it,",
-     "ko": "자르고, 껍질 벗기고,"
+     "ko": "[[자르고, 껍질 벗기고]],"
     },
     {
      "en": "cook it, and mash it,",
-     "ko": "익히고, 으깨야 했다,"
+     "ko": "[[익히고, 으깨야 했다]],"
     },
     {
      "en": "all before combining it",
@@ -357,7 +357,7 @@
     },
     {
      "en": "with other [[ingredients]]",
-     "ko": "다른 [[재료]]와"
+     "ko": "다른 재료와"
     },
     {
      "en": "and pouring the mixture",
@@ -365,7 +365,7 @@
     },
     {
      "en": "into a [[crust]].",
-     "ko": "[[파이 껍질]]에."
+     "ko": "파이 껍질에."
     }
    ],
    "misreads": [
@@ -421,7 +421,7 @@
     },
     {
      "en": "to use [[canned]] pumpkin",
-     "ko": "[[통조림]] 호박을 사용하기로"
+     "ko": "[[통조림 호박을 사용하기로]]"
     },
     {
      "en": "from the supermarket",
@@ -429,7 +429,7 @@
     },
     {
      "en": "and [[cut out]]",
-     "ko": "그리고 [[줄이고]]"
+     "ko": "[[그리고 줄이고]]"
     },
     {
      "en": "a great deal of",
@@ -437,7 +437,7 @@
     },
     {
      "en": "[[labor and time]].",
-     "ko": "[[노동과 시간을]]."
+     "ko": "노동과 시간을."
     }
    ],
    "misreads": [
@@ -497,7 +497,7 @@
    "chunks": [
     {
      "en": "Another changing [[food tradition]] is",
-     "ko": "변화하는 또 다른 [[음식 전통]]은"
+     "ko": "변화하는 또 다른 음식 전통은"
     },
     {
      "en": "that many families",
@@ -505,11 +505,11 @@
     },
     {
      "en": "[[no longer]] make refried beans",
-     "ko": "[[더 이상]] 콩 요리를 만들지 않고"
+     "ko": "[[더 이상 콩 요리를 만들지 않고]]"
     },
     {
      "en": "by cooking them in [[lard]]",
-     "ko": "그것을 [[돼지기름]]에 조리해"
+     "ko": "[[그것을 돼지기름에 조리해]]"
     },
     {
      "en": "and choose instead",
@@ -517,7 +517,7 @@
     },
     {
      "en": "to use vegetable [[shortening]].",
-     "ko": "식물성 [[쇼트닝]]을 쓰기로."
+     "ko": "[[식물성 쇼트닝을 쓰기로]]."
     }
    ],
    "misreads": [
@@ -573,7 +573,7 @@
    "chunks": [
     {
      "en": "Perhaps this [[change]] came about",
-     "ko": "아마 이 [[변화]]가 생긴 것은"
+     "ko": "아마 이 변화가 생긴 것은"
     },
     {
      "en": "because the family",
@@ -581,7 +581,7 @@
     },
     {
      "en": "has come to [[prefer]]",
-     "ko": "[[선호하게]] 되었거나"
+     "ko": "[[선호하게 되었거나]]"
     },
     {
      "en": "the taste of beans",
@@ -597,7 +597,7 @@
     },
     {
      "en": "[[healthy cooking]] have changed,",
-     "ko": "[[건강한 요리]]가 바뀌었거나,"
+     "ko": "[[건강한 요리가 바뀌었거나]],"
     },
     {
      "en": "or because someone",
@@ -609,7 +609,7 @@
     },
     {
      "en": "heart disease or high [[cholesterol]].",
-     "ko": "심장병이나 높은 [[콜레스테롤]]이 있기 때문일 것이다."
+     "ko": "[[심장병이나 높은 콜레스테롤]]이 있기 때문일 것이다."
     }
    ],
    "misreads": [

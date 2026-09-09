@@ -210,11 +210,11 @@
    "chunks": [
     {
      "en": "Social [[psychology]] tells us",
-     "ko": "사회 [[심리학]]은 우리에게 말한다"
+     "ko": "사회 심리학은 우리에게 말한다"
     },
     {
      "en": "that [[bystanders]]",
-     "ko": "[[방관자]]가"
+     "ko": "방관자가"
     },
     {
      "en": "in emergency situations",
@@ -321,11 +321,11 @@
    "chunks": [
     {
      "en": "That social psychological [[insight]]",
-     "ko": "그 사회 심리학적 [[통찰]]은"
+     "ko": "그 사회 심리학적 통찰은"
     },
     {
      "en": "makes us [[uncomfortable]].",
-     "ko": "우리를 [[불편하게]] 만든다."
+     "ko": "[[우리를 불편하게 만든다]]."
     }
    ],
    "misreads": [
@@ -350,7 +350,7 @@
     {
      "tag": "명사절 생략",
      "note": "feel (that) ~",
-     "spans": []
+     "spans": ["feel"]
     }
    ],
    "vocab": [
@@ -362,15 +362,15 @@
    "chunks": [
     {
      "en": "We like to [[feel]]",
-     "ko": "우리는 [[느끼고]] 싶어 한다"
+     "ko": "우리는 느끼고 싶어 한다"
     },
     {
      "en": "we would [[behave]]",
-     "ko": "우리가 [[행동할]] 것이라고"
+     "ko": "[[우리가 행동할 것이라고]]"
     },
     {
      "en": "[[differently]], better.",
-     "ko": "[[다르게]], 더 잘."
+     "ko": "[[다르게, 더 잘]]."
     }
    ],
    "misreads": [
@@ -420,15 +420,15 @@
    "chunks": [
     {
      "en": "The [[problem]] with bystanders, however,",
-     "ko": "방관자와 관련된 [[문제]]는, 그러나,"
+     "ko": "방관자와 관련된 문제는, 그러나,"
     },
     {
      "en": "does not [[stem from]] defects",
-     "ko": "결함에서 [[비롯되지]] 않는다"
+     "ko": "[[결함에서 비롯되지 않는다]]"
     },
     {
      "en": "in their [[character]]",
-     "ko": "그들의 [[성격]]에 있는"
+     "ko": "그들의 성격에 있는"
     },
     {
      "en": "[[that prevent them from helping]].",
@@ -484,7 +484,7 @@
    "chunks": [
     {
      "en": "Rather, the [[situation]]",
-     "ko": "오히려, 그 [[상황]]이"
+     "ko": "오히려, 그 상황이"
     },
     {
      "en": "[[that bystanders find themselves in]]",
@@ -492,11 +492,11 @@
     },
     {
      "en": "[[constrains]] their behavior",
-     "ko": "그들의 행동을 [[제약한다]]"
+     "ko": "[[그들의 행동을 제약한다]]"
     },
     {
      "en": "more than we [[realize]].",
-     "ko": "우리가 [[깨닫는]] 것보다 더."
+     "ko": "[[우리가 깨닫는 것보다 더]]."
     }
    ],
    "misreads": [
@@ -552,7 +552,7 @@
     },
     {
      "en": "the less [[likely]]",
-     "ko": "그만큼 덜 [[~할 것 같은]]"
+     "ko": "[[그만큼 덜 ~할 것 같은]]"
     },
     {
      "en": "any one of them",
@@ -560,7 +560,7 @@
     },
     {
      "en": "will [[intervene]].",
-     "ko": "[[개입할]] 것이다."
+     "ko": "개입할 것이다."
     }
    ],
    "misreads": [
@@ -597,7 +597,7 @@
     {
      "tag": "반복어구 생략(대동사 would)",
      "note": "just as we hope we would (respond) — respond 반복 생략",
-     "spans": []
+     "spans": ["we would"]
     }
    ],
    "vocab": [
@@ -613,7 +613,7 @@
    "chunks": [
     {
      "en": "A [[single]] bystander",
-     "ko": "[[단 한 명]]의 방관자는"
+     "ko": "[[단 한 명의 방관자는]]"
     },
     {
      "en": "at the scene",
@@ -621,7 +621,7 @@
     },
     {
      "en": "of an [[emergency]]",
-     "ko": "[[위급 상황]]의"
+     "ko": "위급 상황의"
     },
     {
      "en": "[[would usually respond]],",
@@ -629,11 +629,11 @@
     },
     {
      "en": "just as we [[hope]]",
-     "ko": "꼭 우리가 [[바라는]] 대로"
+     "ko": "꼭 우리가 바라는 대로"
     },
     {
      "en": "we would.",
-     "ko": "우리도 그럴 것처럼."
+     "ko": "[[우리도 그럴 것처럼]]."
     }
    ],
    "misreads": [
@@ -689,15 +689,15 @@
     },
     {
      "en": "a [[number of]] bystanders",
-     "ko": "[[다수의]] 방관자가"
+     "ko": "[[다수의 방관자가]]"
     },
     {
      "en": "[[witness]] an emergency,",
-     "ko": "위급 상황을 [[목격할]],"
+     "ko": "위급 상황을 목격할,"
     },
     {
      "en": "responsibility apparently [[diffuses]]",
-     "ko": "책임감이 명백히 [[분산된다]]"
+     "ko": "[[책임감이 명백히 분산된다]]"
     },
     {
      "en": "among them,",
@@ -705,7 +705,7 @@
     },
     {
      "en": "getting [[weaker]].",
-     "ko": "점점 [[약해지면서]]."
+     "ko": "[[점점 약해지면서]]."
     }
    ],
    "misreads": [
@@ -746,11 +746,11 @@
     },
     {
      "en": "feels enough personal [[responsibility]]",
-     "ko": "충분한 개인적 [[책임]]을 느끼지 못한다"
+     "ko": "충분한 개인적 책임을 느끼지 못한다"
     },
     {
      "en": "to [[respond]].",
-     "ko": "[[대응할]] 만큼."
+     "ko": "[[대응할 만큼]]."
     }
    ],
    "misreads": [

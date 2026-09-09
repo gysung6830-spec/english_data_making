@@ -202,7 +202,7 @@
     {
      "tag": "공통 목적어(병렬)",
      "note": "[ignore] or [underestimate] the power of markets — 목적어 공통",
-     "spans": []
+     "spans": ["ignore", "underestimate"]
     }
    ],
    "vocab": [
@@ -226,15 +226,15 @@
     },
     {
      "en": "resource [[depletion]]",
-     "ko": "자원 [[고갈]]을"
+     "ko": "자원 고갈을"
     },
     {
      "en": "often ignore or [[underestimate]]",
-     "ko": "흔히 무시하거나 [[과소평가한다]]"
+     "ko": "흔히 [[무시하거나 과소평가한다]]"
     },
     {
      "en": "the power of [[markets]].",
-     "ko": "[[시장]]의 힘을."
+     "ko": "[[시장의 힘을]]."
     }
    ],
    "misreads": [
@@ -288,15 +288,15 @@
     },
     {
      "en": "a current [[reserve index]]",
-     "ko": "현재의 [[매장량 지수]]를"
+     "ko": "현재의 매장량 지수를"
     },
     {
      "en": "to [[estimate]] how long",
-     "ko": "얼마나 오래일지 [[추정하기]] 위해"
+     "ko": "얼마나 오래일지 [[추정하기 위해]]"
     },
     {
      "en": "a resource would [[last]].",
-     "ko": "자원이 [[지속될]]지."
+     "ko": "[[자원이 지속될지]]."
     }
    ],
    "misreads": [
@@ -337,11 +337,11 @@
    "chunks": [
     {
      "en": "The current reserve index [[divides]]",
-     "ko": "현재 매장량 지수는 [[나눈다]]"
+     "ko": "현재 매장량 지수는 나눈다"
     },
     {
      "en": "the current known [[reserve]]",
-     "ko": "현재 알려진 [[매장량]]을"
+     "ko": "[[현재 알려진 매장량을]]"
     },
     {
      "en": "of a resource",
@@ -349,11 +349,11 @@
     },
     {
      "en": "by the [[amount]]",
-     "ko": "[[양]]으로"
+     "ko": "양으로"
     },
     {
      "en": "currently used each [[period]].",
-     "ko": "각 [[기간]]에 현재 사용되는."
+     "ko": "[[각 기간에 현재 사용되는]]."
     }
    ],
    "misreads": [
@@ -409,7 +409,7 @@
     },
     {
      "en": "445 billion barrels of [[oil]],",
-     "ko": "4,450억 배럴의 [[석유]]를,"
+     "ko": "4,450억 배럴의 석유를,"
     },
     {
      "en": "and we are currently using",
@@ -417,11 +417,11 @@
     },
     {
      "en": "15 billion [[barrels]] per year,",
-     "ko": "연 150억 [[배럴]]을,"
+     "ko": "연 150억 배럴을,"
     },
     {
      "en": "the index [[indicates]]",
-     "ko": "그 지수는 [[나타낸다]]"
+     "ko": "그 지수는 나타낸다"
     },
     {
      "en": "[[that we will run out of oil]]",
@@ -429,7 +429,7 @@
     },
     {
      "en": "in about 30 [[years]].",
-     "ko": "약 30[[년]] 뒤에."
+     "ko": "[[약 30년 뒤에]]."
     }
    ],
    "misreads": [
@@ -492,7 +492,7 @@
     },
     {
      "en": "further [[assume]]",
-     "ko": "더 나아가 [[가정한다]]"
+     "ko": "더 나아가 가정한다"
     },
     {
      "en": "[[that demand will increase]]",
@@ -504,7 +504,7 @@
     },
     {
      "en": "thus depleting resources even [[faster]].",
-     "ko": "그리하여 자원을 훨씬 더 [[빨리]] 고갈시키면서."
+     "ko": "그리하여 [[자원을 훨씬 더 빨리 고갈시키면서]]."
     }
    ],
    "misreads": [
@@ -581,19 +581,19 @@
     },
     {
      "en": "are allowed to do",
-     "ko": "하도록 허용되면"
+     "ko": "[[하도록 허용되면]]"
     },
     {
      "en": "their [[usual duty]],",
-     "ko": "그들의 [[통상적 기능]]을,"
+     "ko": "그들의 통상적 기능을,"
     },
     {
      "en": "that is, [[prices]] rise",
-     "ko": "즉, [[가격]]이 오르면"
+     "ko": "즉, 가격이 오르면"
     },
     {
      "en": "as depletion [[occurs]],",
-     "ko": "고갈이 [[일어남]]에 따라,"
+     "ko": "고갈이 일어남에 따라,"
     },
     {
      "en": "resources will [[last much longer]].",

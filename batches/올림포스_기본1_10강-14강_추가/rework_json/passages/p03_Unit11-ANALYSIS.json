@@ -228,11 +228,11 @@
    "chunks": [
     {
      "en": "[[Observation studies]] of teenagers using social media",
-     "ko": "소셜미디어를 사용하는 십대에 대한 [[관찰 연구]]는"
+     "ko": "[[소셜미디어를 사용하는 십대에 대한]] 관찰 연구는"
     },
     {
      "en": "have [[discovered]] one peculiar behaviour in particular",
-     "ko": "특히 하나의 독특한 행동을 [[발견했다]]"
+     "ko": "특히 하나의 독특한 행동을 발견했다"
     },
     {
      "en": "[[that sets them apart]]",
@@ -240,7 +240,7 @@
     },
     {
      "en": "— teenagers will [[post]] or share something on social media,",
-     "ko": "— 십대는 소셜미디어에 무언가를 [[올리거나]] 공유하는데,"
+     "ko": "— 십대는 소셜미디어에 무언가를 올리거나 공유하는데,"
     },
     {
      "en": "but then they'll [[monitor the post to gauge the volume of reactions]].",
@@ -288,7 +288,7 @@
    "chunks": [
     {
      "en": "After a set amount of [[time]],",
-     "ko": "일정 [[시간]] 뒤,"
+     "ko": "[[일정 시간 뒤]],"
     },
     {
      "en": "[[if the number of resulting 'Likes' and 'Shares' is too low]],",
@@ -296,7 +296,7 @@
     },
     {
      "en": "they'll [[delete the content]].",
-     "ko": "그들은 [[콘텐츠를 삭제한다]]."
+     "ko": "그들은 콘텐츠를 삭제한다."
     }
    ],
    "misreads": [
@@ -323,7 +323,7 @@
     {
      "tag": "생략·강조",
      "note": "(they delete it) within ten minutes",
-     "spans": []
+     "spans": ["within"]
     }
    ],
    "vocab": [
@@ -381,7 +381,7 @@
    "chunks": [
     {
      "en": "Their aim of posting is to earn [[recognition]]",
-     "ko": "그들의 게시 목표는 [[인정]]을 얻는 것이다"
+     "ko": "그들의 게시 목표는 [[인정을 얻는 것이다]]"
     },
     {
      "en": "for [[what they're sharing]]",
@@ -389,7 +389,7 @@
     },
     {
      "en": "as a way to [[self-enhance]].",
-     "ko": "[[자신을 고양하는]] 방법으로서."
+     "ko": "[[자신을 고양하는 방법으로서]]."
     }
    ],
    "misreads": [
@@ -441,7 +441,7 @@
    "chunks": [
     {
      "en": "If the recognition is [[insufficient]],",
-     "ko": "인정이 [[불충분]]하면,"
+     "ko": "인정이 불충분하면,"
     },
     {
      "en": "they'd [[rather delete the content than suffer perceived judgement]]",
@@ -449,7 +449,7 @@
     },
     {
      "en": "from others against their failed efforts to [[self-enhance]].",
-     "ko": "[[자기 고양]] 실패에 대한 타인의."
+     "ko": "[[자기 고양 실패에 대한 타인의]]."
     }
    ],
    "misreads": [
@@ -496,7 +496,7 @@
     },
     {
      "en": "has a negative effect on their [[self-esteem]].",
-     "ko": "그들의 [[자존감]]에 부정적 영향을 준다."
+     "ko": "그들의 자존감에 [[부정적 영향을 준다]]."
     }
    ],
    "misreads": [

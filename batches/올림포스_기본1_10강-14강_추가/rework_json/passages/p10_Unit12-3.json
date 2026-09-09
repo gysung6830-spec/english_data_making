@@ -232,15 +232,15 @@
     },
     {
      "en": "should not be [[surprised]]",
-     "ko": "[[놀라서는]] 안 된다"
+     "ko": "[[놀라서는 안 된다]]"
     },
     {
      "en": "when [[disagreements]] emerge",
-     "ko": "[[의견 차이]]가 생길 때"
+     "ko": "[[의견 차이가 생길 때]]"
     },
     {
      "en": "[[within]] the team.",
-     "ko": "[[팀 안에서]]."
+     "ko": "팀 안에서."
     }
    ],
    "misreads": [
@@ -281,7 +281,7 @@
     },
     {
      "en": "they should [[expect]]",
-     "ko": "그들은 [[예상해야]] 한다"
+     "ko": "그들은 예상해야 한다"
     },
     {
      "en": "[[them]].",
@@ -335,7 +335,7 @@
    "chunks": [
     {
      "en": "If they remain [[hidden]],",
-     "ko": "그것들이 [[숨겨져]] 있다면,"
+     "ko": "그것들이 [[숨겨져 있다면]],"
     },
     {
      "en": "the leader may even",
@@ -343,11 +343,11 @@
     },
     {
      "en": "want to [[seek]] them out",
-     "ko": "그것들을 [[찾아내고]] 싶어"
+     "ko": "그것들을 [[찾아내고 싶어]]"
     },
     {
      "en": "for at least [[two reasons]].",
-     "ko": "적어도 [[두 가지 이유]]로."
+     "ko": "적어도 두 가지 이유로."
     }
    ],
    "misreads": [
@@ -400,11 +400,11 @@
    "chunks": [
     {
      "en": "First, different [[views]]",
-     "ko": "첫째, 다양한 [[견해]]는"
+     "ko": "첫째, 다양한 견해는"
     },
     {
      "en": "can [[bring]] with them",
-     "ko": "그것들과 함께 [[가져올]] 수 있다"
+     "ko": "[[그것들과 함께 가져올 수 있다]]"
     },
     {
      "en": "good ideas about the project",
@@ -412,7 +412,7 @@
     },
     {
      "en": "and how it [[might be run]].",
-     "ko": "그리고 그것을 어떻게 [[운영할지에 대한]]."
+     "ko": "그리고 그것을 [[어떻게 운영할지에 대한]]."
     }
    ],
    "misreads": [
@@ -470,7 +470,7 @@
    "chunks": [
     {
      "en": "Although [[snap decisions]]",
-     "ko": "비록 [[성급한 결정]]은"
+     "ko": "비록 성급한 결정은"
     },
     {
      "en": "about project changes",
@@ -482,7 +482,7 @@
     },
     {
      "en": "leaders should be [[open]]",
-     "ko": "리더는 [[열려]] 있어야 한다"
+     "ko": "리더는 [[열려 있어야 한다]]"
     },
     {
      "en": "to new and better ways",
@@ -554,15 +554,15 @@
    "chunks": [
     {
      "en": "Second, when [[conflicting]] viewpoints",
-     "ko": "둘째, [[상충하는]] 관점이"
+     "ko": "둘째, 상충하는 관점이"
     },
     {
      "en": "[[are found]],",
-     "ko": "[[발견되면]],"
+     "ko": "발견되면,"
     },
     {
      "en": "they are more easily [[resolved]]",
-     "ko": "그것들은 더 쉽게 [[해결된다]]"
+     "ko": "그것들은 [[더 쉽게 해결된다]]"
     },
     {
      "en": "[[earlier rather than later]]",
@@ -622,11 +622,11 @@
     },
     {
      "en": "may [[disagree]]",
-     "ko": "[[동의하지 않을]] 수 있지만"
+     "ko": "[[동의하지 않을 수 있지만]]"
     },
     {
      "en": "about one or another [[aspect]]",
-     "ko": "이런저런 [[측면]]에 대해"
+     "ko": "이런저런 측면에 대해"
     },
     {
      "en": "of the project,",
@@ -680,7 +680,7 @@
     {
      "tag": "접속사 that 생략",
      "note": "they believe (that) their views ~ — believe 뒤 that 생략",
-     "spans": []
+     "spans": ["believe"]
     }
    ],
    "vocab": [
@@ -720,7 +720,7 @@
     },
     {
      "en": "and members will generally [[defer]]",
-     "ko": "그리고 팀원들은 대체로 [[따를]] 것이다"
+     "ko": "그리고 팀원들은 대체로 따를 것이다"
     },
     {
      "en": "to the leader",
@@ -732,11 +732,11 @@
     },
     {
      "en": "their views [[have been given]]",
-     "ko": "자기 견해가 [[받았다고]]"
+     "ko": "[[자기 견해가 받았다고]]"
     },
     {
      "en": "[[due consideration]].",
-     "ko": "[[합당한 고려]]를."
+     "ko": "합당한 고려를."
     }
    ],
    "misreads": [
