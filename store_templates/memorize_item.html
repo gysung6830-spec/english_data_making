@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{ item.title or '지문' }} · {{ b.name }} · {{ site.brand }}{% endblock %}
-{% block desc %}{{ b.name }} {{ unit.name }} 지문을 직독직해 · 지문이해 · 지문암기 · 문법 네 갈래로 공부합니다.{% endblock %}
+{% block desc %}{{ b.name }} {{ unit.name }} 지문을 내용이해 → 직독직해 → 빈칸채우기 차례로 공부합니다. 문장마다 해석과 소리, 문법 짚기까지.{% endblock %}
 
 {% block body %}
 <section class="section">
@@ -18,14 +18,26 @@
     {# 한 지문을 네 갈래로. 단위는 언제나 '문장' 이거나 '의미 덩어리' 입니다 —
        낱말로 내려가면 지문 공부가 아니라 단어 공부가 됩니다. #}
     <div class="mem-tabs" role="tablist">
-      <button type="button" class="mt on" data-tab="chunk">직독직해</button>
-      <button type="button" class="mt" data-tab="read">지문이해</button>
-      <button type="button" class="mt" data-tab="blank">지문암기</button>
-      {% if has_grammar %}<button type="button" class="mt" data-tab="gram">문법</button>{% endif %}
+      <button type="button" class="mt on" data-tab="read" data-step="1">내용이해</button>
+      <button type="button" class="mt" data-tab="chunk" data-step="2">직독직해</button>
+      <button type="button" class="mt" data-tab="blank" data-step="3">빈칸채우기</button>
+      {% if has_grammar %}<button type="button" class="mt" data-tab="gram" data-step="4">문법</button>{% endif %}
+    </div>
+
+    {# 어디까지 했는지 — 브라우저에만 남습니다. 서버로 아무것도 안 보냅니다. #}
+    <div class="quest" id="quest">
+      <span class="q-label">오늘의 퀘스트</span>
+      <span class="q-dot" data-step="1" title="내용이해">1</span>
+      <span class="q-dot" data-step="2" title="직독직해">2</span>
+      <span class="q-dot" data-step="3" title="빈칸채우기">3</span>
+      {% if has_grammar %}<span class="q-dot" data-step="4" title="문법">4</span>{% endif %}
+      <span class="q-note" id="q-note"></span>
+      <div class="spacer"></div>
+      <span class="q-streak" id="q-streak" hidden></span>
     </div>
 
     {# ---- 1. 직독직해 — 끊어 읽고, 덩어리째 뜻을 얹습니다 ------------------ #}
-    <div class="mem-pane" id="pane-chunk">
+    <div class="mem-pane" id="pane-chunk" hidden>
       <p class="hint">앞에서 뒤로, <b>끊어진 자리마다 한 번씩 쉬며</b> 읽으세요.
         덩어리를 누르면 그 덩어리의 뜻이 열립니다.</p>
       <div class="mem-tools">
@@ -51,11 +63,47 @@
       {% endfor %}
     </div>
 
-    {# ---- 2. 지문이해 — 문장을 흐름대로 세웁니다 --------------------------- #}
-    <div class="mem-pane" id="pane-read" hidden>
+    {# ---- 1. 내용이해 — 영어를 붙잡기 전에 '무슨 이야기인지' 부터 -------- #}
+    <div class="mem-pane" id="pane-read">
+      <p class="hint">영어를 붙잡기 전에 <b>무슨 이야기인지</b>부터 머리에 넣습니다.
+        내용을 알고 읽는 것과 모르고 읽는 것은 속도가 다릅니다.</p>
+
+      {% if terms %}
+        <div class="term-box">
+          <b class="term-head">먼저 이 말부터</b>
+          {% for t in terms %}
+            <details class="term">
+              <summary>{{ t.word }}</summary>
+              <p>{{ t.note }}</p>
+            </details>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <h3 class="mem-h3">1) 우리말로 읽어 보기</h3>
+      <ol class="ko-list">
+        {% for r in rows %}
+          <li class="ko-row">
+            <span class="sent-no">{{ r.no }}</span>
+            <div class="sent-body">
+              <p class="ko-ko">{{ r.ko or r.en }}</p>
+              <p class="ko-en" hidden>{{ r.en }}</p>
+            </div>
+            <button type="button" class="sent-say" data-en="{{ r.en }}" aria-label="이 문장 듣기">🔊</button>
+          </li>
+        {% endfor %}
+      </ol>
+      <button type="button" class="btn btn-ghost btn-sm" id="en-all">영어도 함께 보기</button>
+
+      {% if item.summary %}
+        <div class="mem-summary"><b>한 줄 요약</b><p>{{ item.summary }}</p></div>
+      {% endif %}
+
       {% if rows|length >= 3 %}
-        <p class="hint">글이 흘러가는 <b>차례대로</b> 문장을 누르세요.
-          연결어와 지시어(this·so·however)가 실마리입니다.</p>
+        <h3 class="mem-h3">2) 이야기 차례 세우기</h3>
+        <p class="hint">글이 흘러가는 <b>차례대로</b> 누르세요.
+          '그래서 · 그러나 · 이런' 같은 말이 실마리입니다.
+          <b>이걸 다 세우면 내용을 외운 것입니다.</b></p>
         <div class="mem-tools">
           <button type="button" class="btn btn-ghost btn-sm" id="ord-reset">다시 섞기</button>
           <div class="spacer"></div>
@@ -64,29 +112,6 @@
         <ol class="ord-done" id="ord-done"></ol>
         <div class="ord-pool" id="ord-pool"></div>
         <div class="mem-score" id="ord-score" hidden></div>
-      {% else %}
-        <p class="empty">문장이 적어 차례 맞추기는 건너뜁니다.</p>
-      {% endif %}
-
-      <div class="mem-full">
-        <h3>지문 전체와 해석</h3>
-        <ol class="sent-list">
-          {% for r in rows %}
-            <li class="sent">
-              <span class="sent-no">{{ r.no }}</span>
-              <div class="sent-body">
-                <p class="sent-en">{{ r.en }}</p>
-                {% if r.ko %}<p class="sent-ko" hidden>{{ r.ko }}</p>{% endif %}
-              </div>
-              <button type="button" class="sent-say" data-en="{{ r.en }}" aria-label="이 문장 듣기">🔊</button>
-            </li>
-          {% endfor %}
-        </ol>
-        <button type="button" class="btn btn-ghost btn-sm" id="ko-all">해석 모두 보기</button>
-      </div>
-
-      {% if item.summary %}
-        <div class="mem-summary"><b>한 줄 요약</b><p>{{ item.summary }}</p></div>
       {% endif %}
     </div>
 
@@ -155,10 +180,71 @@
 (function () {
   var LEVELS = {{ levels|tojson }};
   var SENTS = {{ rows|map(attribute='en')|list|tojson }};
+  var KOS = {{ rows|map(attribute='ko')|list|tojson }};
   var STOP = {{ stopwords|tojson }};
+  var KEY = 'ortica.quest.' + {{ (b.slug ~ '/' ~ unit.id ~ '/' ~ item.id)|tojson }};
+
+  /* ---- 퀘스트 ----
+     어디까지 했는지는 이 브라우저에만 남습니다. 이름도 성적도 서버로 안 갑니다.
+     그래서 개인정보가 생기지 않습니다 — 지운 순간 아무 데도 안 남습니다. */
+  function today() { return new Date().toISOString().slice(0, 10); }
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { return {}; }
+  }
+  function paint() {
+    var got = load();
+    document.querySelectorAll('.q-dot').forEach(function (d) {
+      d.classList.toggle('on', !!got['s' + d.dataset.step]);
+    });
+    var n = document.querySelectorAll('.q-dot.on').length;
+    var all = document.querySelectorAll('.q-dot').length;
+    document.getElementById('q-note').textContent =
+      n === all ? '이 지문 끝냈습니다 · 다음 지문으로' : n + ' / ' + all + ' 깼습니다';
+    var st = streak();
+    var box = document.getElementById('q-streak');
+    box.hidden = st < 2;
+    box.textContent = '🔥 ' + st + '일 이어서';
+  }
+  function streak() {
+    try {
+      var days = JSON.parse(localStorage.getItem('ortica.days') || '[]');
+      var n = 0, d = new Date();
+      for (;;) {
+        var key = d.toISOString().slice(0, 10);
+        if (days.indexOf(key) < 0) break;
+        n++; d.setDate(d.getDate() - 1);
+      }
+      return n;
+    } catch (e) { return 0; }
+  }
+  function clear(step, msg) {
+    var got = load();
+    if (got['s' + step]) { paint(); return; }
+    got['s' + step] = today();
+    try {
+      localStorage.setItem(KEY, JSON.stringify(got));
+      var days = JSON.parse(localStorage.getItem('ortica.days') || '[]');
+      if (days.indexOf(today()) < 0) {
+        days.push(today());
+        localStorage.setItem('ortica.days', JSON.stringify(days.slice(-400)));
+      }
+    } catch (e) { /* 사생활 보호 모드 등 — 못 남겨도 학습은 그대로 됩니다 */ }
+    paint();
+    var d = document.querySelector('.q-dot[data-step="' + step + '"]');
+    if (d) { d.classList.add('pop'); setTimeout(function () { d.classList.remove('pop'); }, 700); }
+    if (msg) toast(msg);
+  }
+  function toast(text) {
+    var t = document.createElement('div');
+    t.className = 'q-toast'; t.textContent = text;
+    document.body.appendChild(t);
+    setTimeout(function () { t.classList.add('go'); }, 20);
+    setTimeout(function () { t.remove(); }, 2600);
+  }
+  paint();
 
   /* ---- 갈래 바꾸기 ---- */
-  var PANES = {chunk: 'pane-chunk', read: 'pane-read', blank: 'pane-blank', gram: 'pane-gram'};
+  var PANES = {read: 'pane-read', chunk: 'pane-chunk', blank: 'pane-blank', gram: 'pane-gram'};
   document.querySelectorAll('.mt').forEach(function (b) {
     b.addEventListener('click', function () {
       document.querySelectorAll('.mt').forEach(function (x) { x.classList.remove('on'); });
@@ -169,6 +255,8 @@
       });
       if (b.dataset.tab === 'blank' && !document.querySelector('#blank-list .bl')) build();
       if (b.dataset.tab === 'read' && !document.querySelector('#ord-pool .ord')) shuffle();
+      if (b.dataset.tab === 'gram') clear(4, '문법까지 봤습니다');
+      window.scrollTo({top: 0, behavior: 'smooth'});
     });
   });
 
@@ -187,28 +275,15 @@
   var sayAll = document.getElementById('say-all');
   sayAll && sayAll.addEventListener('click', function () { say(SENTS.join(' ')); });
 
-  /* ---- 1. 직독직해 ---- */
-  document.querySelectorAll('.ck').forEach(function (c) {
-    c.addEventListener('click', function () {
-      var i = c.querySelector('i');
-      if (i) i.hidden = !i.hidden;
-      else {                                   /* 덩어리 뜻이 없으면 문장 해석을 엽니다 */
-        var ko = c.closest('.ck-body').querySelector('.ck-ko');
-        if (ko) ko.hidden = !ko.hidden;
-      }
-    });
-  });
-  var ckAll = document.getElementById('ck-all');
-  ckAll && ckAll.addEventListener('click', function () {
-    var all = document.querySelectorAll('.ck i, .ck-ko');
-    var show = false;
-    all.forEach(function (x) { if (x.hidden) show = true; });
-    all.forEach(function (x) { x.hidden = !show; });
-    ckAll.textContent = show ? '뜻 모두 숨기기' : '뜻 모두 보기';
+  /* ---- 1. 내용이해 ---- */
+  var enAll = document.getElementById('en-all');
+  enAll && enAll.addEventListener('click', function () {
+    var ens = document.querySelectorAll('.ko-en');
+    var show = ens.length && ens[0].hidden;
+    ens.forEach(function (x) { x.hidden = !show; });
+    enAll.textContent = show ? '영어 숨기기' : '영어도 함께 보기';
   });
 
-  /* ---- 2. 지문이해 — 차례 맞추기 ----
-     낱말이 아니라 문장을 옮깁니다. 글의 흐름을 봐야 풀리도록. */
   var pool = document.getElementById('ord-pool');
   var done = document.getElementById('ord-done');
   var picked = 0;
@@ -218,15 +293,15 @@
     pool.innerHTML = ''; done.innerHTML = '';
     document.getElementById('ord-score').hidden = true;
     document.getElementById('ord-n').textContent = '0';
-    var order = SENTS.map(function (s, i) { return i; });
-    for (var i = order.length - 1; i > 0; i--) {          /* 섞기 */
+    var order = KOS.map(function (s, i) { return i; });
+    for (var i = order.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
       var t = order[i]; order[i] = order[j]; order[j] = t;
     }
     order.forEach(function (i) {
       var b = document.createElement('button');
       b.type = 'button'; b.className = 'ord'; b.dataset.i = i;
-      b.textContent = SENTS[i];
+      b.textContent = KOS[i] || SENTS[i];          /* 내용이해는 우리말로 세웁니다 */
       b.addEventListener('click', function () { pick(b); });
       pool.appendChild(b);
     });
@@ -241,54 +316,76 @@
     picked++;
     b.remove();
     var li = document.createElement('li');
-    li.textContent = SENTS[want];
+    li.textContent = KOS[want] || SENTS[want];
     done.appendChild(li);
     document.getElementById('ord-n').textContent = picked;
-    if (picked === SENTS.length) {
+    if (picked === KOS.length) {
       var box = document.getElementById('ord-score');
       box.hidden = false; box.className = 'mem-score all';
-      box.innerHTML = '<b>다 세우셨습니다.</b> 이제 지문암기로 넘어가 보세요.';
+      box.innerHTML = '<b>내용을 다 세우셨습니다.</b> 이제 직독직해로 넘어가 보세요.';
+      clear(1, '1단계 깼습니다 — 내용이해');
     }
   }
   var reset = document.getElementById('ord-reset');
   reset && reset.addEventListener('click', shuffle);
 
-  document.querySelectorAll('.sent-en').forEach(function (p) {
-    p.addEventListener('click', function () {
-      var ko = p.parentNode.querySelector('.sent-ko');
-      if (ko) ko.hidden = !ko.hidden;
+  /* ---- 2. 직독직해 ---- */
+  var opened = 0;
+  document.querySelectorAll('.ck').forEach(function (c) {
+    c.addEventListener('click', function () {
+      var i = c.querySelector('i');
+      if (i) i.hidden = !i.hidden;
+      else {
+        var ko = c.closest('.ck-body').querySelector('.ck-ko');
+        if (ko) ko.hidden = !ko.hidden;
+      }
+      opened++;
+      if (opened >= Math.min(8, document.querySelectorAll('.ck').length)) {
+        clear(2, '2단계 깼습니다 — 직독직해');
+      }
     });
   });
-  var koAll = document.getElementById('ko-all');
-  koAll && koAll.addEventListener('click', function () {
-    var kos = document.querySelectorAll('.sent-ko');
-    var show = kos.length && kos[0].hidden;
-    kos.forEach(function (k) { k.hidden = !show; });
-    koAll.textContent = show ? '해석 모두 숨기기' : '해석 모두 보기';
+  var ckAll = document.getElementById('ck-all');
+  ckAll && ckAll.addEventListener('click', function () {
+    var all = document.querySelectorAll('.ck i, .ck-ko');
+    var show = false;
+    all.forEach(function (x) { if (x.hidden) show = true; });
+    all.forEach(function (x) { x.hidden = !show; });
+    ckAll.textContent = show ? '뜻 모두 숨기기' : '뜻 모두 보기';
+    if (show) clear(2, '2단계 깼습니다 — 직독직해');
   });
 
-  /* ---- 3. 지문암기 — 빈칸 ----
+  /* ---- 3. 빈칸채우기 ----
      가릴 값어치가 큰 낱말부터 가립니다. 기능어(the·of·is)부터 가리면
      실력이 아니라 눈치를 시험하게 됩니다. */
+  function level() {
+    var on = document.querySelector('.lv.on');
+    var no = on ? parseInt(on.dataset.no, 10) : 2;
+    return LEVELS.filter(function (x) { return x.no === no; })[0] || LEVELS[1];
+  }
+  function isContent(word) {
+    var bare = word.replace(/[^A-Za-z'-]/g, '').toLowerCase();
+    return bare && STOP.indexOf(bare) < 0;
+  }
   function score(word) {
     var bare = word.replace(/[^A-Za-z'-]/g, '').toLowerCase();
     if (!bare) return -1;
-    return (STOP.indexOf(bare) >= 0 ? 0 : 100) + bare.length;
-  }
-  function ratio() {
-    var on = document.querySelector('.lv.on');
-    return on ? parseFloat(on.dataset.ratio) : 0.3;
+    return (isContent(word) ? 100 : 0) + bare.length;
   }
   function build() {
     var list = document.getElementById('blank-list');
-    var r = ratio();
+    var lv = level();
     list.innerHTML = '';
     SENTS.forEach(function (sent, si) {
       var parts = sent.split(/(\s+)/);
       var idx = [];
-      parts.forEach(function (w, i) { if (score(w) > 0) idx.push(i); });
+      parts.forEach(function (w, i) {
+        if (score(w) < 0) return;                        /* 숫자·기호는 안 가립니다 */
+        if (lv.scope === 'content' && !isContent(w)) return;
+        idx.push(i);
+      });
       idx.sort(function (a, b) { return score(parts[b]) - score(parts[a]); });
-      var take = Math.max(1, Math.round(idx.length * r));
+      var take = Math.max(1, Math.round(idx.length * lv.ratio));
       var hide = {};
       idx.slice(0, take).forEach(function (i) { hide[i] = true; });
 
@@ -304,10 +401,17 @@
            틀린 곳이 어디인지 흐려집니다. */
         var m = w.match(/^([^A-Za-z]*)(.*?)([^A-Za-z]*)$/);
         if (m[1]) body.appendChild(document.createTextNode(m[1]));
+        if (lv.hint === 'first' && m[2].length > 1) {
+          var lead = document.createElement('span');
+          lead.className = 'bl-lead'; lead.textContent = m[2][0];
+          body.appendChild(lead);
+        }
         var inp = document.createElement('input');
         inp.type = 'text'; inp.className = 'bl-in';
         inp.dataset.want = m[2];
-        inp.size = Math.max(3, m[2].length);
+        if (lv.hint === 'first') { inp.dataset.want = m[2].slice(1); inp.size = Math.max(2, m[2].length - 1); }
+        else if (lv.hint === 'len') { inp.size = Math.max(3, m[2].length); }
+        else { inp.size = 6; inp.classList.add('wide'); }
         inp.setAttribute('aria-label', (si + 1) + '번 문장 빈칸');
         inp.autocapitalize = 'off'; inp.autocomplete = 'off'; inp.spellcheck = false;
         body.appendChild(inp);
@@ -327,10 +431,7 @@
       });
     });
     document.getElementById('score').hidden = true;
-    var lv = document.querySelector('.lv.on');
-    var meta = LEVELS.filter(function (x) { return x.no == (lv && lv.dataset.no); })[0];
-    document.getElementById('lv-name').textContent =
-      meta ? meta.name + ' — ' + meta.desc : '';
+    document.getElementById('lv-name').textContent = lv.name + ' — ' + lv.desc;
   }
   document.querySelectorAll('.lv').forEach(function (b) {
     b.addEventListener('click', function () {
@@ -344,7 +445,7 @@
     var ins = document.querySelectorAll('.bl-in');
     var right = 0;
     ins.forEach(function (inp) {
-      var ok = tidy(inp.value) === tidy(inp.dataset.want) && tidy(inp.value) !== '';
+      var ok = tidy(inp.value) === tidy(inp.dataset.want) && tidy(inp.dataset.want) !== '';
       inp.classList.toggle('ok', ok);
       inp.classList.toggle('no', !ok);
       if (ok) { right++; return; }
@@ -353,15 +454,20 @@
     var box = document.getElementById('score');
     var pct = ins.length ? Math.round(right / ins.length * 100) : 0;
     box.hidden = false;
-    box.className = 'mem-score' + (pct === 100 ? ' all' : '');
+    box.className = 'mem-score' + (pct >= 80 ? ' all' : '');
     box.innerHTML = '<b>' + right + ' / ' + ins.length + '</b> 맞히셨습니다 (' + pct + '%). ' +
       (pct === 100 ? '난이도를 한 단계 올려 보세요.'
                    : '<span class="muted">틀린 칸에는 답을 채워 두었습니다.</span>');
     box.scrollIntoView({behavior: 'smooth', block: 'center'});
+    if (pct >= 80) clear(3, '3단계 깼습니다 — 빈칸채우기 ' + pct + '%');
   });
   document.getElementById('peek').addEventListener('click', function () {
     document.getElementById('blank-list').classList.toggle('peek');
   });
+
+  /* 내용이해 칸은 처음부터 열려 있습니다. 갈래를 눌러야만 준비하면 첫 화면이
+     빈 채로 있게 됩니다 — 여기서 한 번 불러 둡니다. */
+  shuffle();
 })();
 </script>
 {% endblock %}

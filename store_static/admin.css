@@ -404,3 +404,10 @@
   .db-x{font-size:9.5px;}
   .db:not(:nth-child(3n+1)) .db-x{visibility:hidden;}
 }
+
+/* 덩어리 해석 넣기 — 영어 덩어리 옆에 우리말 칸 */
+.ck-edit{display:flex; flex-direction:column; gap:8px; margin-top:12px;}
+.ck-line{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+.ck-line b{flex:0 0 46%; min-width:220px; font-weight:500; font-size:15px;
+  padding:8px 12px; background:#eef4f1; border-radius:8px;}
+.ck-line input[type=text]{flex:1; min-width:200px;}

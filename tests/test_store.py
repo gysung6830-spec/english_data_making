@@ -2937,8 +2937,10 @@ def test_passage_memorizing_reads_then_blanks():
 
     import html as _html
     page = body(c.get(f"/memorize/{b['slug']}/{b['units'][0]['id']}/{first['id']}"))
-    for tab in ("직독직해", "지문이해", "지문암기"):
+    for tab in ("내용이해", "직독직해", "빈칸채우기"):
         assert tab in page, tab
+    # 차례가 중요합니다 — 내용부터 알고 영어로 갑니다
+    assert page.index("내용이해") < page.index("직독직해") < page.index("빈칸채우기")
     # 단위가 낱말이 아니라 의미 덩어리·문장이어야 합니다
     assert "ck-row" in page and "ord-pool" in page
     plain = _html.unescape(page)                        # 따옴표는 escape 되어 나갑니다
@@ -2948,6 +2950,30 @@ def test_passage_memorizing_reads_then_blanks():
         assert f'data-no="{lv["no"]}"' in page, lv
     assert "sent-say" in page                           # 소리 내어 읽기
 
+    # 내용이해는 우리말이 먼저입니다. 차례 세우기도 우리말 문장으로 합니다.
+    assert "우리말로 읽어 보기" in page and "이야기 차례 세우기" in page
+    assert "먼저 이 말부터" in page                     # 어려운 개념 풀이
+    for t in first.get("terms") or []:
+        assert t["word"] in plain and t["note"][:20] in plain, t["word"]
+    assert first.get("terms"), "첫 지문에 풀어 둔 말이 없습니다"
+
+    # 퀘스트 — 브라우저에만 남습니다. 서버로 아무것도 안 보냅니다.
+    assert "오늘의 퀘스트" in page and "localStorage" in page
+    assert "q-dot" in page
+
+    # 빈칸 난이도 — 힌트를 먼저 거두고, 그다음 범위를 넓힙니다
+    lv = sc.BLANK_LEVELS
+    assert len(lv) == 6
+    assert [x["hint"] for x in lv] == ["first", "len", "len", "none", "none", "none"]
+    assert [x["scope"] for x in lv] == ["content"] * 4 + ["all"] * 2
+    rank = lambda x: ({"content": 0, "all": 1}[x["scope"]],
+                      {"first": 0, "len": 1, "none": 2}[x["hint"]], x["ratio"])
+    for a, b2 in zip(lv, lv[1:]):
+        assert rank(a) < rank(b2), (a["name"], b2["name"])   # 뒤로 갈수록 어려워야 합니다
+        # 한 단계에 두 가지가 한꺼번에 어려워지면 거기서 벽이 섭니다
+        moved = (a["scope"] != b2["scope"]) + (a["hint"] != b2["hint"])
+        assert moved <= 1, (a["name"], b2["name"])
+
     # 직독직해 — 문장을 의미 덩어리로 끊습니다
     ck = sc.auto_chunks("The city council has announced a plan to turn the old "
                         "railway line into a walking path.")
@@ -2955,6 +2981,11 @@ def test_passage_memorizing_reads_then_blanks():
         "The city council has announced a plan to turn the old railway line " \
         "into a walking path.".split(), ck
     assert all(len(c.split()) >= 2 for c in ck), ck    # 한 낱말짜리 조각은 안 만듭니다
+    # 덩어리 해석은 영어 차례 그대로여야 합니다 (예시 지문에 다 붙여 두었습니다)
+    every = [c for u in b["units"] for x in u["items"]
+             for sn in x["sentences"] for c in (sn.get("chunks") or [])]
+    assert every and all(c["ko"].strip() for c in every), "덩어리 해석이 빈 곳이 있습니다"
+
     # 손으로 '/' 를 넣어 두시면 그쪽이 이깁니다
     saved = {"en": "A b c d.", "chunks": [{"en": "A b", "ko": "가"}, {"en": "c d.", "ko": "나"}]}
     assert sc.chunk_pairs(saved) == [{"en": "A b", "ko": "가"}, {"en": "c d.", "ko": "나"}]

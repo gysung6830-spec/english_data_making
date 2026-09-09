@@ -1839,6 +1839,7 @@ def memorize_item(slug, unit_id, item_id):
     return render_template(
         "memorize_item.html", b=book, unit=unit, item=item, rows=rows,
         has_grammar=any(r["grammar"] for r in rows),
+        terms=item.get("terms") or [],
         levels=sc.BLANK_LEVELS, no=where + 1, total=len(flat),
         prev=flat[where - 1] if where else None,
         next=flat[where + 1] if where + 1 < len(flat) else None,

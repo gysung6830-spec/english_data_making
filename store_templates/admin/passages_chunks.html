@@ -1,0 +1,49 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ item.title }} 직독직해{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <div class="row">
+    <div>
+      <h1>덩어리 해석</h1>
+      <p>{{ b.name }} · {{ unit.name }} · <b>{{ item.title or '지문' }}</b></p>
+    </div>
+    <div class="spacer"></div>
+    <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.passages_book', slug=b.slug) }}">← 지문 목록</a>
+  </div>
+</div>
+
+<div class="steps-help">
+  <b>문장 해석과 덩어리 해석은 다릅니다</b>
+  <ol>
+    <li>문장 해석은 <b>읽기 좋은 우리말</b>이라야 합니다. 이미 넣어 두신 그것입니다.</li>
+    <li>덩어리 해석은 <b>영어 차례 그대로</b>여야 합니다. 우리말 어순으로 다듬으면
+      눈이 다시 뒤로 갑니다 — 그러면 직독직해가 아닙니다.</li>
+    <li>예: <code>at the edge of your ability,</code> → <b>가장자리에서 / 네 능력의</b>
+      (○) &nbsp; 네 능력의 가장자리에서 (✕)</li>
+    <li>비워 두시면 그 문장은 <b>영어 덩어리만</b> 보이고 문장 해석이 아래 붙습니다.</li>
+  </ol>
+</div>
+
+<form method="post">
+  {% for r in rows %}
+    <div class="panel">
+      <h2 style="font-size:16px;">{{ r.no }}. {{ r.en }}</h2>
+      {% if r.ko %}<div class="hint">{{ r.ko }}</div>{% endif %}
+      <div class="ck-edit">
+        {% for c in r.chunks %}
+          <div class="ck-line">
+            <b>{{ c.en }}</b>
+            <input type="text" name="k{{ r.no - 1 }}_{{ loop.index0 }}" value="{{ c.ko }}"
+                   placeholder="이 덩어리만 끊어서">
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+  <div class="form-actions">
+    <button class="btn btn-primary" type="submit">담기</button>
+    <a class="btn btn-ghost" href="{{ url_for('admin.passages_book', slug=b.slug) }}">그만두기</a>
+  </div>
+</form>
+{% endblock %}

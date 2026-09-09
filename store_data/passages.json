@@ -22,15 +22,65 @@
               "sentences": [
                 {
                   "en": "Dear Residents, My name is Kari Patterson, and I'm the manager of the River View Apartments.",
-                  "ko": "주민들께, 제 이름은 Kari Patterson이고, 저는 River View 아파트의 관리인입니다."
+                  "ko": "주민들께, 제 이름은 Kari Patterson이고, 저는 River View 아파트의 관리인입니다.",
+                  "chunks": [
+                    {
+                      "en": "Dear Residents,",
+                      "ko": "주민 여러분께,"
+                    },
+                    {
+                      "en": "My name is Kari Patterson,",
+                      "ko": "제 이름은 Kari Patterson이고,"
+                    },
+                    {
+                      "en": "and I'm the manager of the River View Apartments.",
+                      "ko": "저는 관리인입니다 / River View 아파트의."
+                    }
+                  ]
                 },
                 {
                   "en": "It's time to take advantage of the sunny weather to make our community more beautiful.",
-                  "ko": "우리 커뮤니티를 더욱 아름답게 만들기 위해 화창한 날씨를 이용할 때입니다."
+                  "ko": "우리 커뮤니티를 더욱 아름답게 만들기 위해 화창한 날씨를 이용할 때입니다.",
+                  "chunks": [
+                    {
+                      "en": "It's time",
+                      "ko": "때입니다"
+                    },
+                    {
+                      "en": "to take advantage of the sunny weather",
+                      "ko": "이용할 / 이 화창한 날씨를"
+                    },
+                    {
+                      "en": "to make our community more beautiful.",
+                      "ko": "만들기 위해 / 우리 동네를 더 아름답게."
+                    }
+                  ]
                 },
                 {
                   "en": "On Saturday, July 13 at 9 a.m., residents will meet in the north parking lot.",
-                  "ko": "7월 13일 토요일 오전 9시에, 주민들은 북쪽 주차장에서 만날 예정입니다."
+                  "ko": "7월 13일 토요일 오전 9시에, 주민들은 북쪽 주차장에서 만날 예정입니다.",
+                  "chunks": [
+                    {
+                      "en": "On Saturday,",
+                      "ko": "토요일에,"
+                    },
+                    {
+                      "en": "July 13",
+                      "ko": "7월 13일"
+                    },
+                    {
+                      "en": "at 9 a.m.,",
+                      "ko": "오전 9시에,"
+                    },
+                    {
+                      "en": "residents will meet",
+                      "ko": "주민들이 모입니다"
+                    },
+                    {
+                      "en": "in the north parking lot.",
+                      "ko": "북쪽 주차장에서."
+                    }
+                  ]
                 },
                 {
                   "en": "We will divide into teams to plant flowers and small trees, pull weeds, and put colorful decorations on the lawn.",
@@ -40,19 +90,101 @@
                       "tag": "to부정사",
                       "note": "'~하기 위해' 로 읽습니다. plant · pull · put 셋이 나란히 걸립니다."
                     }
+                  ],
+                  "chunks": [
+                    {
+                      "en": "We will divide",
+                      "ko": "우리는 나눌 것입니다"
+                    },
+                    {
+                      "en": "into teams",
+                      "ko": "팀으로"
+                    },
+                    {
+                      "en": "to plant flowers",
+                      "ko": "심기 위해 / 꽃을"
+                    },
+                    {
+                      "en": "and small trees,",
+                      "ko": "그리고 작은 나무를,"
+                    },
+                    {
+                      "en": "pull weeds,",
+                      "ko": "잡초를 뽑고,"
+                    },
+                    {
+                      "en": "and put colorful decorations",
+                      "ko": "그리고 놓기 위해 / 다채로운 장식을"
+                    },
+                    {
+                      "en": "on the lawn.",
+                      "ko": "잔디밭 위에."
+                    }
                   ]
                 },
                 {
                   "en": "Please join us for this year's Gardening Day, and remember no special skills or tools are required.",
-                  "ko": "올해 정원 가꾸기 날에 우리와 함께해 주시고, 특별한 기술이나 도구는 필요하지 않다는 것을 기억하세요."
+                  "ko": "올해 정원 가꾸기 날에 우리와 함께해 주시고, 특별한 기술이나 도구는 필요하지 않다는 것을 기억하세요.",
+                  "chunks": [
+                    {
+                      "en": "Please join us",
+                      "ko": "함께해 주세요"
+                    },
+                    {
+                      "en": "for this year's Gardening Day,",
+                      "ko": "올해 정원 가꾸기 날에,"
+                    },
+                    {
+                      "en": "and remember no special skills",
+                      "ko": "그리고 기억하세요 / 특별한 기술이"
+                    },
+                    {
+                      "en": "or tools are required.",
+                      "ko": "또는 도구가 필요 없다는 것을."
+                    }
+                  ]
                 },
                 {
                   "en": "Last year, we had a great time working together, so come out and make this year's event even better!",
-                  "ko": "작년에 우리는 함께 일하며 즐거운 시간을 보냈으니, 나오셔서 올해 행사를 더 멋지게 만들어 주세요!"
+                  "ko": "작년에 우리는 함께 일하며 즐거운 시간을 보냈으니, 나오셔서 올해 행사를 더 멋지게 만들어 주세요!",
+                  "chunks": [
+                    {
+                      "en": "Last year,",
+                      "ko": "작년에,"
+                    },
+                    {
+                      "en": "we had a great time working together,",
+                      "ko": "우리는 즐거운 시간을 보냈습니다 / 함께 일하며,"
+                    },
+                    {
+                      "en": "so come out",
+                      "ko": "그러니 나오세요"
+                    },
+                    {
+                      "en": "and make this year's event even better!",
+                      "ko": "그리고 만들어 주세요 / 올해 행사를 더 멋지게!"
+                    }
+                  ]
                 },
                 {
                   "en": "Warm regards, Kari Patterson",
-                  "ko": "따뜻한 마음을 담아, Kari Patterson"
+                  "ko": "따뜻한 마음을 담아, Kari Patterson",
+                  "chunks": [
+                    {
+                      "en": "Warm regards,",
+                      "ko": "따뜻한 마음을 담아,"
+                    },
+                    {
+                      "en": "Kari Patterson",
+                      "ko": "Kari Patterson 드림"
+                    }
+                  ]
+                }
+              ],
+              "terms": [
+                {
+                  "word": "커뮤니티(community)",
+                  "note": "여기서는 '지역 사회' 가 아니라 그냥 '우리 아파트 사람들' 입니다. 같은 곳에 사는 사람 무리를 뜻합니다."
                 }
               ]
             },
@@ -70,11 +202,27 @@
                       "tag": "접속사 that",
                       "note": "believe 의 목적어가 that 이하 문장 통째입니다."
                     }
+                  ],
+                  "chunks": [
+                    {
+                      "en": "Many people believe",
+                      "ko": "많은 사람들이 믿습니다"
+                    },
+                    {
+                      "en": "that talent is something you are born with.",
+                      "ko": "재능이란 / 타고나는 것이라고."
+                    }
                   ]
                 },
                 {
                   "en": "Research on expert performance suggests otherwise.",
-                  "ko": "전문가의 수행에 관한 연구는 그렇지 않다고 말한다."
+                  "ko": "전문가의 수행에 관한 연구는 그렇지 않다고 말한다.",
+                  "chunks": [
+                    {
+                      "en": "Research on expert performance suggests otherwise.",
+                      "ko": "전문가의 수행에 관한 연구는 / 그렇지 않다고 말합니다."
+                    }
+                  ]
                 },
                 {
                   "en": "When scientists studied musicians, athletes, and chess players, they found that the strongest predictor of skill was not natural ability but the number of hours spent in deliberate practice.",
@@ -88,11 +236,43 @@
                       "tag": "최상급",
                       "note": "the strongest predictor — 무엇들 가운데 가장인지는 of skill 이 정합니다."
                     }
+                  ],
+                  "chunks": [
+                    {
+                      "en": "When scientists studied musicians,",
+                      "ko": "과학자들이 연구했을 때 / 음악가와,"
+                    },
+                    {
+                      "en": "athletes, and chess players,",
+                      "ko": "운동선수와 체스 선수를,"
+                    },
+                    {
+                      "en": "they found",
+                      "ko": "그들은 알아냈습니다"
+                    },
+                    {
+                      "en": "that the strongest predictor of skill was not natural ability",
+                      "ko": "기량을 가장 잘 예측하는 것은 / 타고난 능력이 아니라"
+                    },
+                    {
+                      "en": "but the number of hours spent",
+                      "ko": "들인 시간의 양이라는 것을"
+                    },
+                    {
+                      "en": "in deliberate practice.",
+                      "ko": "의도적 연습에."
+                    }
                   ]
                 },
                 {
                   "en": "Deliberate practice is not simply repeating what you already do well.",
-                  "ko": "의도적 연습은 이미 잘하는 것을 단순히 반복하는 것이 아니다."
+                  "ko": "의도적 연습은 이미 잘하는 것을 단순히 반복하는 것이 아니다.",
+                  "chunks": [
+                    {
+                      "en": "Deliberate practice is not simply repeating what you already do well.",
+                      "ko": "의도적 연습이란 / 단순히 되풀이하는 것이 아닙니다 / 이미 잘하는 것을."
+                    }
+                  ]
                 },
                 {
                   "en": "It means working at the edge of your ability, where mistakes are frequent and feedback is immediate.",
@@ -102,15 +282,75 @@
                       "tag": "관계대명사",
                       "note": "where 앞의 the edge of your ability 를 뒤 문장이 통째로 꾸밉니다."
                     }
+                  ],
+                  "chunks": [
+                    {
+                      "en": "It means working",
+                      "ko": "그것은 뜻합니다 / 애쓰는 것을"
+                    },
+                    {
+                      "en": "at the edge of your ability,",
+                      "ko": "가장자리에서 / 자기 능력의,"
+                    },
+                    {
+                      "en": "where mistakes are frequent",
+                      "ko": "그곳에서는 실수가 잦고"
+                    },
+                    {
+                      "en": "and feedback is immediate.",
+                      "ko": "그리고 되돌아오는 말이 즉각적입니다."
+                    }
                   ]
                 },
                 {
                   "en": "This kind of practice is uncomfortable, which is why most people avoid it.",
-                  "ko": "이런 종류의 연습은 불편하며, 그것이 대부분의 사람들이 그것을 피하는 이유이다."
+                  "ko": "이런 종류의 연습은 불편하며, 그것이 대부분의 사람들이 그것을 피하는 이유이다.",
+                  "chunks": [
+                    {
+                      "en": "This kind of practice is uncomfortable,",
+                      "ko": "이런 종류의 연습은 불편합니다,"
+                    },
+                    {
+                      "en": "which is why most people avoid it.",
+                      "ko": "그래서 대부분의 사람이 그것을 피합니다."
+                    }
+                  ]
                 },
                 {
                   "en": "Those who tolerate the discomfort improve steadily, while those who stay in their comfort zone stop growing.",
-                  "ko": "그 불편함을 견디는 사람들은 꾸준히 향상되지만, 편안한 영역에 머무는 사람들은 성장을 멈춘다."
+                  "ko": "그 불편함을 견디는 사람들은 꾸준히 향상되지만, 편안한 영역에 머무는 사람들은 성장을 멈춘다.",
+                  "chunks": [
+                    {
+                      "en": "Those who tolerate the discomfort improve steadily,",
+                      "ko": "그 불편을 견디는 사람들은 / 꾸준히 나아지고,"
+                    },
+                    {
+                      "en": "while those",
+                      "ko": "반면 사람들은"
+                    },
+                    {
+                      "en": "who stay",
+                      "ko": "머무는"
+                    },
+                    {
+                      "en": "in their comfort zone stop growing.",
+                      "ko": "편안한 자리에 / 성장을 멈춥니다."
+                    }
+                  ]
+                }
+              ],
+              "terms": [
+                {
+                  "word": "의도적 연습",
+                  "note": "그냥 오래 하는 것이 아니라, 안 되는 것을 골라 하는 연습입니다. 농구로 치면 잘 넣는 자리에서 백 번 던지는 것이 아니라, 자꾸 빗나가는 자리에서 던지고 곧바로 자세를 고치는 것입니다."
+                },
+                {
+                  "word": "예측하는 것 (predictor)",
+                  "note": "'무엇을 보면 결과를 알 수 있는가' 입니다. 키를 보면 몸무게를 대충 알 수 있듯, 여기서는 '연습 시간을 보면 실력을 알 수 있다' 는 말입니다."
+                },
+                {
+                  "word": "편안한 자리 (comfort zone)",
+                  "note": "이미 잘해서 실수가 안 나오는 범위입니다. 여기 머물면 마음은 편한데 늘지는 않습니다."
                 }
               ]
             }
@@ -134,11 +374,43 @@
                       "tag": "to부정사",
                       "note": "a plan 을 꾸밉니다. '~하려는 계획' 으로 읽습니다."
                     }
+                  ],
+                  "chunks": [
+                    {
+                      "en": "The city council has announced a plan",
+                      "ko": "시의회가 계획을 발표했습니다"
+                    },
+                    {
+                      "en": "to turn the old railway line",
+                      "ko": "바꾸는 / 그 오래된 철도 노선을"
+                    },
+                    {
+                      "en": "into a walking path.",
+                      "ko": "산책로로."
+                    }
                   ]
                 },
                 {
                   "en": "The line has been unused since 1998, and parts of it are now covered with weeds.",
-                  "ko": "그 노선은 1998년 이후로 사용되지 않았고, 일부는 이제 잡초로 덮여 있다."
+                  "ko": "그 노선은 1998년 이후로 사용되지 않았고, 일부는 이제 잡초로 덮여 있다.",
+                  "chunks": [
+                    {
+                      "en": "The line has been unused",
+                      "ko": "그 노선은 쓰이지 않았습니다"
+                    },
+                    {
+                      "en": "since 1998,",
+                      "ko": "1998년부터,"
+                    },
+                    {
+                      "en": "and parts of it are now covered",
+                      "ko": "그리고 일부는 지금 덮여 있습니다"
+                    },
+                    {
+                      "en": "with weeds.",
+                      "ko": "잡초로."
+                    }
+                  ]
                 },
                 {
                   "en": "Under the new plan, the rails will be removed and replaced with a smooth surface suitable for walking and cycling.",
@@ -148,19 +420,101 @@
                       "tag": "수동태",
                       "note": "선로가 '치워지고 대체되는' 쪽입니다. 누가 하는지는 안 밝힙니다."
                     }
+                  ],
+                  "chunks": [
+                    {
+                      "en": "Under the new plan,",
+                      "ko": "새 계획에 따르면,"
+                    },
+                    {
+                      "en": "the rails will be removed",
+                      "ko": "선로는 치워지고"
+                    },
+                    {
+                      "en": "and replaced",
+                      "ko": "그리고 대체될 것입니다"
+                    },
+                    {
+                      "en": "with a smooth surface suitable",
+                      "ko": "매끄러운 노면으로 / 알맞은"
+                    },
+                    {
+                      "en": "for walking",
+                      "ko": "걷기에"
+                    },
+                    {
+                      "en": "and cycling.",
+                      "ko": "그리고 자전거 타기에."
+                    }
                   ]
                 },
                 {
                   "en": "Local shop owners expect that visitors will bring new business to the area.",
-                  "ko": "지역 상점 주인들은 방문객들이 이 지역에 새로운 사업을 가져올 것으로 기대한다."
+                  "ko": "지역 상점 주인들은 방문객들이 이 지역에 새로운 사업을 가져올 것으로 기대한다.",
+                  "chunks": [
+                    {
+                      "en": "Local shop owners expect",
+                      "ko": "지역 상점 주인들은 기대합니다"
+                    },
+                    {
+                      "en": "that visitors will bring new business",
+                      "ko": "방문객들이 새 장사를 가져올 것이라고"
+                    },
+                    {
+                      "en": "to the area.",
+                      "ko": "이 지역에."
+                    }
+                  ]
                 },
                 {
                   "en": "Some residents, however, worry about noise and litter.",
-                  "ko": "그러나 일부 주민들은 소음과 쓰레기를 걱정한다."
+                  "ko": "그러나 일부 주민들은 소음과 쓰레기를 걱정한다.",
+                  "chunks": [
+                    {
+                      "en": "Some residents,",
+                      "ko": "일부 주민들은,"
+                    },
+                    {
+                      "en": "however, worry",
+                      "ko": "그러나, 걱정합니다"
+                    },
+                    {
+                      "en": "about noise",
+                      "ko": "소음을"
+                    },
+                    {
+                      "en": "and litter.",
+                      "ko": "그리고 쓰레기를."
+                    }
+                  ]
                 },
                 {
                   "en": "The council will hold a public meeting next month to hear these concerns before construction begins.",
-                  "ko": "시의회는 공사가 시작되기 전에 이러한 우려를 듣기 위해 다음 달 공청회를 열 것이다."
+                  "ko": "시의회는 공사가 시작되기 전에 이러한 우려를 듣기 위해 다음 달 공청회를 열 것이다.",
+                  "chunks": [
+                    {
+                      "en": "The council will hold a public meeting next month",
+                      "ko": "시의회는 공청회를 열 것입니다 / 다음 달에"
+                    },
+                    {
+                      "en": "to hear these concerns",
+                      "ko": "듣기 위해 / 이런 우려를"
+                    },
+                    {
+                      "en": "before construction begins.",
+                      "ko": "공사가 시작되기 전에."
+                    }
+                  ]
+                }
+              ],
+              "terms": [
+                {
+                  "word": "시의회",
+                  "note": "시의 일을 정하는 사람들의 모임입니다. 시장이 혼자 정하지 않고 여기서 의논해 정합니다."
+                },
+                {
+                  "word": "공청회",
+                  "note": "정하기 전에 주민들 말을 들어 보는 자리입니다. 이 지문에서는 '소음·쓰레기가 걱정' 이라는 말을 듣는 자리입니다."
                 }
               ]
             }

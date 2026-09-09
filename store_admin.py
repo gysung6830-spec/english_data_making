@@ -1392,6 +1392,70 @@ def passages_item_save(slug):
     return redirect(url_for("admin.passages_book", slug=slug))
 
 
+@admin_bp.route("/passages/<slug>/chunks/<unit_id>/<item_id>", methods=["GET", "POST"])
+def passages_chunks(slug, unit_id, item_id):
+    """덩어리마다 해석을 붙입니다 — 직독직해용.
+
+    문장 해석은 '읽기 좋은 우리말' 이라야 하지만, 덩어리 해석은 다릅니다.
+    영어 차례 그대로 끊어 읽는 연습이므로 우리말 어순으로 다듬으면 안 됩니다.
+    다듬는 순간 눈이 다시 뒤로 갑니다.
+    """
+    data = sc.load_raw_passages()
+    book = next((b for b in data["books"] if b.get("slug") == slug), None)
+    if book is None:
+        abort(404)
+    found = sc.find_passage(book, unit_id, item_id)
+    if found is None:
+        abort(404)
+    unit, item = found
+
+    if request.method == "POST":
+        for i, sent in enumerate(item["sentences"]):
+            ens = [c["en"] for c in sc.chunk_pairs(sent)]
+            kos = [sc.clean(request.form.get(f"k{i}_{j}"), 200) for j in range(len(ens))]
+            if any(kos):
+                sent["chunks"] = [{"en": e, "ko": k} for e, k in zip(ens, kos)]
+            else:
+                sent.pop("chunks", None)
+        sc.save_passages(data)
+        done = sum(1 for s in item["sentences"] for c in (s.get("chunks") or []) if c.get("ko"))
+        flash(f"덩어리 해석 {done}개를 담았습니다.", "ok")
+        return redirect(url_for("admin.passages_book", slug=slug))
+
+    rows = [{"no": i + 1, "en": s.get("en", ""), "ko": s.get("ko", ""),
+             "chunks": sc.chunk_pairs(s)} for i, s in enumerate(item["sentences"])]
+    return render_template("admin/passages_chunks.html", b=book, unit=unit, item=item,
+                           rows=rows)
+
+
+@admin_bp.route("/passages/<slug>/terms/<unit_id>/<item_id>", methods=["POST"])
+def passages_terms(slug, unit_id, item_id):
+    """내용 이해를 막는 우리말 개념을 풀어 둡니다.
+
+    '의도적 연습' 처럼 해석은 됐는데 뜻이 안 잡히는 말이 있습니다. 영어가
+    아니라 그 말 때문에 지문이 안 읽히는 것이라, 예를 들어 풀어 줍니다.
+    """
+    data = sc.load_raw_passages()
+    book = next((b for b in data["books"] if b.get("slug") == slug), None)
+    if book is None:
+        abort(404)
+    found = sc.find_passage(book, unit_id, item_id)
+    if found is None:
+        abort(404)
+    _unit, item = found
+    terms = []
+    for word, note in zip(request.form.getlist("term"), request.form.getlist("note")):
+        word, note = sc.clean(word, 60), sc.clean(note, 400)
+        if word and note:
+            terms.append({"word": word, "note": note})
+    item["terms"] = terms
+    if not terms:
+        item.pop("terms", None)
+    sc.save_passages(data)
+    flash(f"어려운 말 {len(terms)}개를 풀어 두었습니다.", "ok")
+    return redirect(url_for("admin.passages_book", slug=slug))
+
+
 @admin_bp.route("/passages/<slug>/grammar/<unit_id>/<item_id>", methods=["GET", "POST"])
 def passages_grammar(slug, unit_id, item_id):
     """이 지문의 문장마다 문법 자리를 짚습니다.

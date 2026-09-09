@@ -69,6 +69,9 @@
             <td class="num">{{ x.sentences|length }}</td>
             <td>
               <a class="btn btn-ghost btn-sm"
+                 href="{{ url_for('admin.passages_chunks', slug=b.slug, unit_id=u.id, item_id=x.id) }}">
+                덩어리 해석{% set ck = x.sentences|map(attribute='chunks')|select|list|length %}{% if ck %} ({{ ck }}){% endif %}</a>
+              <a class="btn btn-ghost btn-sm"
                  href="{{ url_for('admin.passages_grammar', slug=b.slug, unit_id=u.id, item_id=x.id) }}">
                 문법 짚기{% set n = x.sentences|map(attribute='grammar')|select|list|length %}{% if n %} ({{ n }}){% endif %}</a>
               <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener"
