@@ -1428,6 +1428,47 @@ def passages_chunks(slug, unit_id, item_id):
                            rows=rows)
 
 
+@admin_bp.route("/passages/<slug>/brief/<unit_id>/<item_id>", methods=["GET", "POST"])
+def passages_brief(slug, unit_id, item_id):
+    """지문 줄거리 — 줄글 말고 흐름으로.
+
+    학생은 다섯 줄짜리 설명을 안 읽습니다. 토막을 내고 외울 낱말만 도드라지게
+    해야 눈에 걸립니다. *별표* 로 감싸시면 굵게 나갑니다.
+    """
+    data = sc.load_raw_passages()
+    book = next((b for b in data["books"] if b.get("slug") == slug), None)
+    if book is None:
+        abort(404)
+    found = sc.find_passage(book, unit_id, item_id)
+    if found is None:
+        abort(404)
+    unit, item = found
+
+    if request.method == "POST":
+        beats = []
+        for tag, text in zip(request.form.getlist("tag"), request.form.getlist("text")):
+            text = sc.clean(text, 200)
+            if text:
+                beats.append({"tag": sc.clean(tag, 12), "text": text})
+        brief = {"hook": sc.clean(request.form.get("hook"), 120),
+                 "beats": beats,
+                 "keys": [k.strip() for k in
+                          sc.clean(request.form.get("keys"), 200).split(",") if k.strip()]}
+        if brief["hook"] or beats or brief["keys"]:
+            item["brief"] = brief
+            item.pop("intro", None)
+        else:
+            item.pop("brief", None)
+        sc.save_passages(data)
+        flash(f"줄거리를 담았습니다. 토막 {len(beats)}개.", "ok")
+        return redirect(url_for("admin.passages_book", slug=slug))
+
+    br = sc.brief_of(item)
+    rows = br["beats"] + [{"tag": "", "text": ""} for _ in range(8 - len(br["beats"]))]
+    return render_template("admin/passages_brief.html", b=book, unit=unit, item=item,
+                           brief=br, rows=rows, tags=sc.BEAT_TAGS)
+
+
 @admin_bp.route("/passages/<slug>/terms/<unit_id>/<item_id>", methods=["POST"])
 def passages_terms(slug, unit_id, item_id):
     """내용 이해를 막는 우리말 개념을 풀어 둡니다.

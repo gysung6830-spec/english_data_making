@@ -168,6 +168,13 @@ def asset(filename: str) -> str:
     return url_for("static", filename=filename, v=stamp)
 
 
+@app.template_filter("keys")
+def keys_filter(text):
+    """*별표* 로 감싼 말을 굵게. 지문 줄거리에서 외울 낱말을 짚는 데 씁니다."""
+    from markupsafe import Markup
+    return Markup(sc.emphasize(text))
+
+
 @app.template_filter("won")
 def won(value) -> str:
     """12000 -> '12,000원'"""
@@ -1844,6 +1851,7 @@ def memorize_item(slug, unit_id, item_id):
         has_grammar=any(r["marks"] for r in rows),
         mark_total=sum(len(r["marks"]) for r in rows),
         terms=item.get("terms") or [],
+        brief=sc.brief_of(item),
         # 덩어리 맞추기에 쓸 우리말 조각 — 섞어 내려면 통째로 넘겨야 합니다
         chunk_rows=[{"no": r["no"], "chunks": r["chunks"]} for r in rows
                     if any(c["ko"] for c in r["chunks"])],

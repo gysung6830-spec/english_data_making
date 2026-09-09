@@ -93,10 +93,30 @@
       <p class="hint">영어를 붙잡기 전에 <b>무슨 이야기인지</b>부터 머리에 넣습니다.
         내용을 알고 읽는 것과 모르고 읽는 것은 속도가 다릅니다.</p>
 
-      {% if item.intro %}
+      {% if brief.beats or brief.plain %}
         <div class="brief">
           <b class="brief-head">이 지문, 이런 이야기예요</b>
-          <p>{{ item.intro }}</p>
+          {% if brief.hook %}<p class="brief-hook">{{ brief.hook|keys }}</p>{% endif %}
+          {% if brief.beats %}
+            {# 줄글은 안 읽힙니다. 흐름을 토막 내고 화살표로 이어 줍니다. #}
+            <ol class="beats">
+              {% for b in brief.beats %}
+                <li class="beat">
+                  <span class="beat-no">{{ loop.index }}</span>
+                  {% if b.tag %}<span class="beat-tag">{{ b.tag }}</span>{% endif %}
+                  <span class="beat-text">{{ b.text|keys }}</span>
+                </li>
+              {% endfor %}
+            </ol>
+          {% else %}
+            <p>{{ brief.plain }}</p>
+          {% endif %}
+          {% if brief.keywords %}
+            <div class="brief-keys">
+              <span class="bk-label">이 낱말만 기억하세요</span>
+              {% for k in brief.keywords %}<span class="bk">{{ k }}</span>{% endfor %}
+            </div>
+          {% endif %}
         </div>
       {% endif %}
 

@@ -69,6 +69,9 @@
             <td class="num">{{ x.sentences|length }}</td>
             <td>
               <a class="btn btn-ghost btn-sm"
+                 href="{{ url_for('admin.passages_brief', slug=b.slug, unit_id=u.id, item_id=x.id) }}">
+                줄거리{% if x.brief and x.brief.beats %} ({{ x.brief.beats|length }}){% endif %}</a>
+              <a class="btn btn-ghost btn-sm"
                  href="{{ url_for('admin.passages_chunks', slug=b.slug, unit_id=u.id, item_id=x.id) }}">
                 덩어리 해석{% set ck = x.sentences|map(attribute='chunks')|select|list|length %}{% if ck %} ({{ ck }}){% endif %}</a>
               <a class="btn btn-ghost btn-sm"

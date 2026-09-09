@@ -2959,10 +2959,21 @@ def test_passage_memorizing_reads_then_blanks():
         assert f'data-no="{lv["no"]}"' in page, lv
     assert "sent-say" in page                           # 소리 내어 읽기
 
-    # 시작하기 전에 무슨 이야기인지 편한 말로 알려 줍니다
+    # 시작하기 전에 무슨 이야기인지. 줄글이 아니라 흐름으로 — 학생은 다섯 줄짜리
+    # 설명을 안 읽습니다. 외울 낱말은 도드라지게 합니다.
     assert "이 지문, 이런 이야기예요" in page
-    assert first.get("intro"), "첫 지문에 안내글이 없습니다"
-    assert first["intro"][:24] in plain
+    br = sc.brief_of(first)
+    assert br["beats"], "첫 지문에 줄거리 토막이 없습니다"
+    assert br["hook"] and br["keywords"]
+    assert "beat-tag" in page and "brief-hook" in page
+    for beat in br["beats"]:
+        assert beat["tag"] and beat["text"]
+        assert sc.emphasize(beat["text"]) in plain, beat
+    assert '<b class="key">' in page, "외울 낱말이 도드라지지 않습니다"
+    # 별표는 굵게 바뀌고, 태그는 그대로 나가면 안 됩니다
+    assert sc.emphasize("재능은 *타고난다*") == '재능은 <b class="key">타고난다</b>'
+    assert "<script>" not in sc.emphasize("<script>alert(1)</script>")
+    assert "*" not in page.split("brief-hook")[1][:200]
 
     # 직독직해는 보여 주는 것이 아니라 맞춰 보는 자리입니다
     assert "맞춰 보기" in page and "보면서 읽기" in page
@@ -3200,6 +3211,44 @@ def test_admin_marks_grammar_only_after_checking():
     assert not sc.find_passage_book(slug, raw=True)["units"][0]["items"][0]["sentences"][0].get("grammar")
     a.post(f"/admin/passages/{slug}/delete", follow_redirects=True)
     print("PASS  문법은 확인해 담은 것만 나감")
+
+
+def test_admin_writes_the_brief_as_a_flow():
+    """줄거리는 줄글이 아니라 흐름 토막으로 넣습니다."""
+    a = admin()
+    a.post("/admin/passages/new", data={"name": "brief test book"}, follow_redirects=True)
+    slug = "brief-test-book"
+    a.post(f"/admin/passages/{slug}/item", data={
+        "unit_name": "1강", "title": "줄거리 시험",
+        "body": "A cat sat. The dog ran.", "trans": "고양이가 앉았다. 개가 달렸다."},
+        follow_redirects=True)
+    book = sc.find_passage_book(slug, raw=True)
+    u, x = book["units"][0], book["units"][0]["items"][0]
+
+    form = body(a.get(f"/admin/passages/{slug}/brief/{u['id']}/{x['id']}"))
+    assert "줄글은 학생이 안 읽습니다" in form and "별표" in form
+    a.post(f"/admin/passages/{slug}/brief/{u['id']}/{x['id']}", data={
+        "hook": "*고양이*와 개 이야기",
+        "tag": ["앞", "뒤", ""], "text": ["고양이가 *앉았다*", "개가 *달렸다*", ""],
+        "keys": "cat, dog"}, follow_redirects=True)
+
+    got = sc.brief_of(sc.find_passage_book(slug, raw=True)["units"][0]["items"][0])
+    assert got["hook"] == "*고양이*와 개 이야기"
+    assert len(got["beats"]) == 2, got["beats"]     # 빈 줄은 안 담깁니다
+    assert got["beats"][0] == {"tag": "앞", "text": "고양이가 *앉았다*"}
+    assert got["keywords"] == ["cat", "dog"]
+
+    page = body(client().get(f"/memorize/{slug}/{u['id']}/{x['id']}"))
+    assert '<b class="key">고양이</b>' in page and '<b class="key">앉았다</b>' in page
+    assert "beat-tag" in page and ">cat<" in page
+
+    # 다 비우면 줄거리 상자가 사라집니다
+    a.post(f"/admin/passages/{slug}/brief/{u['id']}/{x['id']}",
+           data={"hook": "", "tag": [], "text": [], "keys": ""}, follow_redirects=True)
+    assert "이 지문, 이런 이야기예요" not in body(
+        client().get(f"/memorize/{slug}/{u['id']}/{x['id']}"))
+    a.post(f"/admin/passages/{slug}/delete", follow_redirects=True)
+    print("PASS  줄거리는 흐름 토막 · 외울 낱말은 도드라지게")
 
 
 def test_sample_wordbooks_are_enough_to_try_it():
@@ -6030,6 +6079,7 @@ def run_all():
     test_passage_memorizing_reads_then_blanks()
     test_admin_puts_a_passage_in_by_pasting()
     test_admin_marks_grammar_only_after_checking()
+    test_admin_writes_the_brief_as_a_flow()
     test_sample_wordbooks_are_enough_to_try_it()
     test_study_and_sheet_share_one_wordbook()
     test_word_study_screen()

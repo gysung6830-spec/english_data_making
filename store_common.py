@@ -3581,3 +3581,32 @@ def mark_sentence(sentence: str, marks: list[dict]) -> list[dict]:
     if at < len(sentence):
         out.append({"mark": False, "text": sentence[at:]})
     return out
+
+
+# ---------------------------------------------------------------------------
+# 지문 줄거리 — 줄글은 안 읽힙니다
+#
+# 학생은 다섯 줄짜리 설명을 안 읽습니다. 흐름을 토막 내고, 외울 낱말만 도드라지게
+# 해야 눈에 걸립니다. 사장님은 *별표* 로 감싸기만 하시면 됩니다.
+# ---------------------------------------------------------------------------
+_KEY_RE = re.compile(r"\*([^*\n]{1,40})\*")
+
+# 토막마다 붙는 이름표. 흐름이 어떤 자리인지 한눈에 잡히게.
+BEAT_TAGS = ["통념", "반전", "핵심", "까닭", "결과", "예시", "문제", "해결",
+             "주장", "근거", "대비", "정리"]
+
+
+def emphasize(text: str) -> str:
+    """*별표* 로 감싼 말을 도드라지게. 먼저 이스케이프하고 나중에 표시를 붙입니다."""
+    safe = (text or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    return _KEY_RE.sub(r'<b class="key">\1</b>', safe)
+
+
+def brief_of(item: dict) -> dict:
+    """지문 줄거리. 토막이 없으면 옛 줄글이라도 내어 줍니다."""
+    brief = item.get("brief") or {}
+    beats = [b for b in (brief.get("beats") or []) if (b.get("text") or "").strip()]
+    # 'keys' 로 두면 서식에서 brief.keys 가 dict 메서드로 잡힙니다. 이름을 피합니다.
+    return {"hook": brief.get("hook", ""), "beats": beats,
+            "keywords": [k for k in (brief.get("keys") or []) if k.strip()],
+            "plain": "" if beats else (item.get("intro") or "")}

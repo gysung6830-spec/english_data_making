@@ -416,3 +416,11 @@
 .gr-group{margin-top:14px; padding-left:12px; border-left:3px solid var(--brand, #146b4a);}
 .gr-gname{display:block; font-size:13px; color:#146b4a; margin-bottom:8px;}
 .gr-group .gr-pick{margin-bottom:8px;}
+
+/* 줄거리 토막 넣기 */
+.beat-edit{display:flex; flex-direction:column; gap:8px; margin-top:12px;}
+.beat-line{display:flex; align-items:center; gap:10px;}
+.beat-i{flex:0 0 22px; text-align:center; font-size:12.5px; font-weight:800;
+  color:#8a9490;}
+.beat-tag-in{flex:0 0 110px !important;}
+.beat-line input[type=text]{flex:1;}
