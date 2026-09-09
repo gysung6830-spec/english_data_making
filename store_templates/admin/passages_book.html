@@ -1,0 +1,86 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ b.name }} 지문{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <div class="row">
+    <div>
+      <h1>{{ b.name }}</h1>
+      <p>{{ b.publisher }} · 지문 {{ items }}개 · 문장 {{ '{:,}'.format(sents) }}개</p>
+    </div>
+    <div class="spacer"></div>
+    <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.passages_list') }}">← 교재 목록</a>
+    <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener"
+       href="{{ url_for('memorize_book', slug=b.slug) }}">손님 화면 보기 ↗</a>
+  </div>
+</div>
+
+<div class="panel">
+  <h2>지문 넣기</h2>
+  <div class="hint">본문과 해석을 통째로 붙여넣으세요. <b>문장으로 잘라</b> 짝지어 드립니다.</div>
+  <form method="post" action="{{ url_for('admin.passages_item_save', slug=b.slug) }}">
+    <div class="form-grid">
+      <div class="adm-field">
+        <label for="unit_name">강</label>
+        <input type="text" id="unit_name" name="unit_name" list="units" placeholder="1강" required>
+        <datalist id="units">
+          {% for u in b['units'] %}<option value="{{ u.name }}">{% endfor %}
+        </datalist>
+      </div>
+      <div class="adm-field">
+        <label for="title">지문 제목 <span class="tip" style="display:inline;">손님 화면에 걸립니다</span></label>
+        <input type="text" id="title" name="title" placeholder="Gardening Day 안내">
+      </div>
+      <div class="adm-field">
+        <label for="source">출처</label>
+        <input type="text" id="source" name="source" placeholder="2024년 6월 18번">
+      </div>
+    </div>
+    <div class="adm-field full">
+      <label for="body">본문 (영어) <span style="color:#c2410c">*</span></label>
+      <textarea id="body" name="body" rows="7" required
+                placeholder="Dear Residents, My name is Kari Patterson, and I'm the manager of ..."></textarea>
+    </div>
+    <div class="adm-field full">
+      <label for="trans">해석 <span class="tip" style="display:inline;">비워 두셔도 됩니다</span></label>
+      <textarea id="trans" name="trans" rows="7"
+                placeholder="주민들께, 제 이름은 Kari Patterson이고 ..."></textarea>
+    </div>
+    <div class="adm-field full">
+      <label for="summary">한 줄 요약 <span class="tip" style="display:inline;">비워 두셔도 됩니다</span></label>
+      <input type="text" id="summary" name="summary" placeholder="정원 가꾸기 행사 안내">
+    </div>
+    <div class="form-actions"><button class="btn btn-primary" type="submit">지문 넣기</button></div>
+  </form>
+</div>
+
+{% for u in b['units'] %}
+  <div class="panel">
+    <h2>{{ u.name }} <span class="tag">지문 {{ u['items']|length }}개</span></h2>
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th>지문</th><th>출처</th><th class="num">문장</th><th></th></tr></thead>
+        <tbody>
+        {% for x in u['items'] %}
+          <tr>
+            <td><b>{{ x.title or '지문' }}</b>
+              <div class="muted" style="font-size:13px;">{{ x.sentences[0].en[:70] }}…</div></td>
+            <td>{{ x.source or '—' }}</td>
+            <td class="num">{{ x.sentences|length }}</td>
+            <td>
+              <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener"
+                 href="{{ url_for('memorize_item', slug=b.slug, unit_id=u.id, item_id=x.id) }}">보기 ↗</a>
+              <form method="post" style="display:inline;"
+                    action="{{ url_for('admin.passages_item_delete', slug=b.slug, unit_id=u.id, item_id=x.id) }}"
+                    onsubmit="return confirm('이 지문을 지울까요?');">
+                <button class="btn btn-ghost btn-sm" type="submit">지우기</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}

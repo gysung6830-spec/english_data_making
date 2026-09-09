@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}지문 암기 — 읽고 외우기 · {{ site.brand }}{% endblock %}
+{% block desc %}지문을 문장마다 해석과 함께 읽고, 빈칸 5단계로 외웁니다. 소리로 들어 보고 그 자리에서 채점까지. 무료입니다.{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">무료 · 회원가입 없음</span>
+      <h2>지문 암기</h2>
+      <p>지문을 <b>문장마다 해석과 함께</b> 읽고, 빈칸을 채워 외웁니다.
+        소리로 들어 보고 그 자리에서 채점까지 됩니다.</p>
+    </div>
+
+    <div class="mem-steps">
+      <div class="ms">
+        <span class="ms-no">1</span>
+        <b>본문 분석</b>
+        <p>문장을 누르면 해석이 열립니다. 한 문장씩 또는 통째로 들어 보세요.</p>
+      </div>
+      <div class="ms">
+        <span class="ms-no">2</span>
+        <b>본문 암기</b>
+        <p>빈칸을 채웁니다. 난이도 5단계로 조금씩 지워 나갑니다.</p>
+      </div>
+    </div>
+
+    <div class="sw" style="margin-bottom:18px;">
+      <span class="sw-tag">함께</span>
+      <b>단어 학습</b>
+      <p>지문에 나온 단어부터 잡고 싶으시면 이쪽입니다. 뜻 고르기와 철자 채우기.</p>
+      <a href="{{ url_for('study_page') }}">단어 학습 →</a>
+    </div>
+
+    <div class="study-kinds">
+      {% for lv in levels %}
+        <span class="chip">{{ lv.no }}단계 {{ lv.name }}</span>
+      {% endfor %}
+    </div>
+
+    {% if books %}
+      <nav class="pub-nav" aria-label="출판사">
+        {% for g in groups %}
+          <a class="pub-tab {{ 'empty' if not g.books }}" href="#pub-{{ loop.index }}">
+            {{ g.name }}<span class="pub-n">{{ g.count }}</span></a>
+        {% endfor %}
+      </nav>
+
+      {% for g in groups %}
+        <div class="pub-sec" id="pub-{{ loop.index }}">
+          <div class="pub-head">
+            <h3>{{ g.name }}</h3>
+            {% if g.books %}<span class="muted">교재 {{ g.count }}권</span>{% endif %}
+          </div>
+          {% if g.books %}
+            <div class="grid grid-3">
+              {% for b in g.books %}
+                <a class="wb-card" href="{{ url_for('memorize_book', slug=b.slug) }}">
+                  <span class="wb-pub">{{ b.publisher or '교재' }}</span>
+                  <b>{{ b.name }}</b>
+                  <span class="wb-meta">
+                    {% if b.grade %}<span class="chip">{{ b.grade }}</span>{% endif %}
+                    <span class="chip">{{ b['units']|length }}강</span>
+                    <span class="chip">지문 {{ b.items_total }}개</span>
+                  </span>
+                  <span class="wb-go">읽고 외우기 →</span>
+                </a>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="pub-empty">
+              <b>{{ g.name }} 교재는 준비하고 있습니다.</b>
+              <span>필요하신 교재 이름만 적어 주시면 지문을 넣어 두고 알려 드리겠습니다.</span>
+              <a class="btn btn-ghost btn-sm" href="{{ url_for('custom') }}">교재 알려 주기</a>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="pub-empty">
+        <b>지문을 넣고 있습니다.</b>
+        <span>필요하신 교재 이름만 적어 주시면 그 교재부터 넣고 알려 드리겠습니다.</span>
+        <a class="btn btn-ghost btn-sm" href="{{ url_for('custom') }}">교재 알려 주기</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

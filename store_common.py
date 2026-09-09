@@ -80,7 +80,8 @@ def storage_report() -> dict:
 SEED_COPY = ".seeded"          # 저장소에서 마지막으로 내려 준 판 (비교용)
 # 저장소가 아니라 사장님이 만드는 것들. 새 판이 나와도 절대 안 건드립니다.
 YOURS = {"store.db", "products.json", "freebies.json", "notices.json",
-         "words.json", "site.json", "deliverables", "samples", "submissions", "free"}
+         "words.json", "passages.json", "site.json",
+         "deliverables", "samples", "submissions", "free"}
 
 
 def _same(a: Path, b: Path) -> bool:
@@ -2995,3 +2996,167 @@ def plan_covers(passages: int) -> str:
 def _units_word(n: float) -> str:
     """3.5 는 '3~4' 로. 소수점이 붙은 강 수는 아무도 안 씁니다."""
     return f"{n:g}" if float(n).is_integer() else f"{int(n)}~{int(n) + 1}"
+
+
+# ---------------------------------------------------------------------------
+# 지문 암기 — 본문을 문장 단위로 담아 두고, 읽히고 외우게 합니다
+#
+# 단어장이 교재 → 강 → 단어라면, 이쪽은 교재 → 강 → 지문 → 문장입니다.
+# 자료(PDF)는 인쇄해서 푸는 것이고, 이것은 화면에서 지문 자체를 씹는 자리라
+# 데이터를 따로 둡니다.
+# ---------------------------------------------------------------------------
+PASSAGES_FALLBACK = {"intro": {}, "books": []}
+
+# 빈칸 난이도 — 문장에서 몇 할을 가릴지. 1단계는 눈으로 훑고, 5단계는 거의 다
+# 지웁니다. 값을 고르게 벌려 놓아야 '한 단계 올렸는데 갑자기 어려워짐' 이 없습니다.
+BLANK_LEVELS = [
+    {"no": 1, "name": "맛보기", "ratio": 0.15, "desc": "굵직한 낱말만 가립니다"},
+    {"no": 2, "name": "쉬움", "ratio": 0.30, "desc": "내용어 위주로 가립니다"},
+    {"no": 3, "name": "보통", "ratio": 0.50, "desc": "절반을 가립니다"},
+    {"no": 4, "name": "어려움", "ratio": 0.75, "desc": "뼈대만 남깁니다"},
+    {"no": 5, "name": "통암기", "ratio": 1.00, "desc": "전부 가립니다"},
+]
+
+# 가릴 값어치가 적은 낱말. 이런 것부터 가리면 실력이 아니라 눈치를 시험합니다.
+STOPWORDS = {
+    "a", "an", "the", "and", "or", "but", "if", "of", "to", "in", "on", "at",
+    "for", "with", "by", "from", "as", "is", "are", "was", "were", "be", "been",
+    "am", "do", "does", "did", "have", "has", "had", "will", "would", "can",
+    "could", "may", "might", "shall", "should", "must", "that", "this", "these",
+    "those", "it", "its", "he", "she", "they", "we", "you", "i", "his", "her",
+    "their", "our", "your", "my", "me", "him", "them", "us", "not", "no", "so",
+    "than", "then", "there", "here", "what", "which", "who", "when", "where",
+    "how", "why", "all", "any", "some", "up", "out", "about", "into", "over",
+}
+
+# 마침표가 찍혀도 문장이 안 끝나는 것들. 뒤에 반드시 이름이 오는 호칭은
+# 언제나 이어 붙이고, 문장 끝에 올 수도 있는 것(9 a.m. / etc.)은 다음 조각이
+# 소문자로 시작할 때만 이어 붙입니다 — 대문자로 시작하면 새 문장입니다.
+_ABBR_TITLE = {"mr", "mrs", "ms", "dr", "prof", "st", "jr", "sr", "fig", "no", "vs"}
+_ABBR_MAYBE = {"etc", "e.g", "i.e", "a.m", "p.m", "u.s", "u.k", "approx", "vol"}
+_SENT_END = re.compile(r'(?<=[.!?])["\')\]]*\s+')
+
+
+def split_sentences(text: str) -> list[str]:
+    """영어 본문을 문장으로 나눕니다.
+
+    'Mr. Kim' 이나 '9 a.m.' 의 마침표에서 끊으면 문장이 토막 납니다. 끊을 자리
+    앞이 그런 줄임말이면 도로 붙입니다.
+    """
+    text = re.sub(r"\s+", " ", (text or "").replace(" ", " ")).strip()
+    if not text:
+        return []
+    out: list[str] = []
+    for part in _SENT_END.split(text):
+        part = part.strip()
+        if not part:
+            continue
+        if out:
+            tail = re.split(r"[\s(]", out[-1].rstrip('."\')]'))[-1].lower().rstrip(".")
+            starts_lower = part[:1].islower()
+            join = (tail in _ABBR_TITLE
+                    or (tail in _ABBR_MAYBE and starts_lower)
+                    or starts_lower                     # 소문자로 시작하면 이어지는 말입니다
+                    or len(out[-1].split()) < 2)        # 문장이라기엔 너무 짧은 조각
+            if join:
+                out[-1] = f"{out[-1]} {part}"
+                continue
+        out.append(part)
+    return out
+
+
+def split_korean(text: str) -> list[str]:
+    """해석을 문장으로 나눕니다. 영어 문장과 하나씩 짝지어 붙일 때 씁니다."""
+    text = re.sub(r"\s+", " ", (text or "")).strip()
+    if not text:
+        return []
+    return [s.strip() for s in re.split(r'(?<=[.!?])\s+', text) if s.strip()]
+
+
+def pair_sentences(en_text: str, ko_text: str = "") -> tuple[list[dict], str]:
+    """영어 본문과 해석을 문장끼리 짝지읍니다.
+
+    수가 안 맞는 일이 흔합니다(우리말은 두 문장으로 풀어 쓰기도 하니까요).
+    그럴 때 억지로 맞추면 엉뚱한 해석이 붙으므로, 앞에서부터 맞을 만큼만
+    붙이고 몇 개가 남았는지 말해 줍니다.
+    """
+    ens, kos = split_sentences(en_text), split_korean(ko_text)
+    rows = [{"en": e, "ko": kos[i] if i < len(kos) else ""} for i, e in enumerate(ens)]
+    note = ""
+    if kos and len(kos) != len(ens):
+        note = (f"영어 {len(ens)}문장 · 해석 {len(kos)}문장으로 수가 다릅니다. "
+                "앞에서부터 짝지었으니 어긋난 곳은 손으로 고쳐 주세요.")
+    return rows, note
+
+
+def blank_score(word: str) -> int:
+    """가릴 값어치. 큰 것부터 가립니다 — 내용어를 먼저, 기능어를 나중에."""
+    bare = re.sub(r"[^A-Za-z'-]", "", word).lower()
+    if not bare:
+        return -1                                   # 숫자·기호는 안 가립니다
+    if bare in STOPWORDS:
+        return len(bare)                            # 기능어는 맨 뒤로
+    return 100 + len(bare)
+
+
+def next_id(taken) -> str:
+    """'01', '02' … 다음 번호. 이미 있는 것과 안 겹치게."""
+    used = {str(x) for x in (taken or [])}
+    n = 1
+    while f"{n:02d}" in used:
+        n += 1
+    return f"{n:02d}"
+
+
+def load_raw_passages() -> dict:
+    data = load_json("passages.json", PASSAGES_FALLBACK)
+    data.setdefault("books", [])
+    data.setdefault("intro", {})
+    return data
+
+
+def load_passages() -> dict:
+    """고객 화면용 — 숨긴 교재와 문장이 없는 지문은 뺍니다."""
+    data = load_raw_passages()
+    books = []
+    for book in data["books"]:
+        if not book.get("active", True):
+            continue
+        units = []
+        for unit in book.get("units", []):
+            items = [x for x in unit.get("items", []) if x.get("sentences")]
+            if items:
+                units.append({**unit, "items": items})
+        if units:
+            books.append({**book, "units": units,
+                          "items_total": sum(len(u["items"]) for u in units)})
+    data["books"] = sorted(books, key=lambda b: (b.get("sort", 100), b.get("name", "")))
+    return data
+
+
+def save_passages(data: dict) -> None:
+    save_json("passages.json", data)
+
+
+def find_passage_book(slug: str, raw: bool = False) -> dict | None:
+    data = load_raw_passages() if raw else load_passages()
+    return next((b for b in data["books"] if b.get("slug") == slug), None)
+
+
+def find_passage(book: dict, unit_id: str, item_id: str) -> tuple[dict, dict] | None:
+    for unit in book.get("units", []):
+        if unit.get("id") != unit_id:
+            continue
+        for item in unit.get("items", []):
+            if item.get("id") == item_id:
+                return unit, item
+    return None
+
+
+def passage_count(book: dict) -> int:
+    return sum(len(u.get("items", [])) for u in book.get("units", []))
+
+
+def sentence_count(book: dict) -> int:
+    return sum(len(x.get("sentences", []))
+               for u in book.get("units", []) for x in u.get("items", []))

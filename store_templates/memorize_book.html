@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ b.name }} 지문 암기 · {{ site.brand }}{% endblock %}
+{% block desc %}{{ b.name }} 지문을 문장마다 해석과 함께 읽고 빈칸으로 외웁니다.{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap narrow">
+    <a class="back-link" href="{{ url_for('memorize_page') }}">← 지문 암기</a>
+    <div class="section-head">
+      <span class="eyebrow">{{ b.publisher }}</span>
+      <h2>{{ b.name }}</h2>
+      <p>{{ b['units']|length }}강 · 지문 {{ items }}개 · 문장 {{ '{:,}'.format(sentences) }}개.
+        지문을 고르시면 <b>읽기</b>와 <b>빈칸 암기</b>가 한 화면에서 됩니다.</p>
+    </div>
+
+    {% for u in b['units'] %}
+      <div class="unit-block">
+        <h3 class="unit-name">{{ u.name }}<span class="muted"> · 지문 {{ u['items']|length }}개</span></h3>
+        <div class="pass-list">
+          {% for x in u['items'] %}
+            <a class="pass-row"
+               href="{{ url_for('memorize_item', slug=b.slug, unit_id=u.id, item_id=x.id) }}">
+              <span class="pr-no">{{ loop.index }}</span>
+              <span class="pr-text">
+                <b>{{ x.title or '지문' }}</b>
+                {% if x.source %}<small>{{ x.source }}</small>{% endif %}
+              </span>
+              <span class="pr-n">{{ x.sentences|length }}문장</span>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

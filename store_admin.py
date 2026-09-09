@@ -1310,6 +1310,112 @@ def words_list():
                            publishers=sc.WORD_PUBLISHERS)
 
 
+# ---------------------------------------------------------------------------
+# 지문 — 본문을 문장 단위로 담아 두는 자리
+# ---------------------------------------------------------------------------
+@admin_bp.route("/passages")
+def passages_list():
+    data = sc.load_raw_passages()
+    order = {name: i for i, name in enumerate(sc.WORD_PUBLISHERS)}
+    books = sorted(data["books"],
+                   key=lambda b: (order.get((b.get("publisher") or "").strip(), 99),
+                                  b.get("sort", 100), b.get("name", "")))
+    return render_template("admin/passages.html", books=books,
+                           counts={b["slug"]: sc.passage_count(b) for b in books},
+                           sents={b["slug"]: sc.sentence_count(b) for b in books},
+                           publishers=sc.WORD_PUBLISHERS)
+
+
+@admin_bp.route("/passages/new", methods=["POST"])
+def passages_new():
+    data = sc.load_raw_passages()
+    name = sc.clean(request.form.get("name"), 120)
+    if not name:
+        flash("교재 이름을 적어 주세요. 예: 2026 수능특강 영어", "err")
+        return redirect(url_for("admin.passages_list"))
+    if any(b.get("name") == name for b in data["books"]):
+        flash("같은 이름의 교재가 이미 있습니다.", "err")
+        return redirect(url_for("admin.passages_list"))
+    slug = sc.wordbook_slug(name, {b.get("slug") for b in data["books"]})
+    data["books"].append({"slug": slug, "name": name,
+                          "publisher": sc.clean(request.form.get("publisher"), 60),
+                          "grade": sc.clean(request.form.get("grade"), 20),
+                          "sort": 100, "active": True, "units": []})
+    sc.save_passages(data)
+    flash(f"'{name}' 교재를 만들었습니다. 이제 지문을 넣어 주세요.", "ok")
+    return redirect(url_for("admin.passages_book", slug=slug))
+
+
+@admin_bp.route("/passages/<slug>")
+def passages_book(slug):
+    book = sc.find_passage_book(slug, raw=True)
+    if book is None:
+        abort(404)
+    return render_template("admin/passages_book.html", b=book,
+                           items=sc.passage_count(book),
+                           sents=sc.sentence_count(book))
+
+
+@admin_bp.route("/passages/<slug>/item", methods=["POST"])
+def passages_item_save(slug):
+    """지문 하나를 붙여넣기로 넣습니다.
+
+    본문과 해석을 통째로 붙여넣으면 문장으로 잘라 짝지어 줍니다. 문장을 하나씩
+    입력하게 하면 지문 하나 넣는 데 스무 번을 눌러야 해서 아무도 안 씁니다.
+    """
+    data = sc.load_raw_passages()
+    book = next((b for b in data["books"] if b.get("slug") == slug), None)
+    if book is None:
+        abort(404)
+    unit_name = sc.clean(request.form.get("unit_name"), 60) or "1강"
+    body = (request.form.get("body") or "").strip()
+    rows, note = sc.pair_sentences(body, request.form.get("trans") or "")
+    if not rows:
+        flash("본문을 붙여넣어 주세요. 문장으로 잘라 넣어 드립니다.", "err")
+        return redirect(url_for("admin.passages_book", slug=slug))
+
+    unit = next((u for u in book["units"] if u.get("name") == unit_name), None)
+    if unit is None:
+        unit = {"id": sc.next_id([u.get("id") for u in book["units"]]),
+                "name": unit_name, "items": []}
+        book["units"].append(unit)
+    unit.setdefault("items", [])
+    unit["items"].append({
+        "id": sc.next_id([x.get("id") for x in unit["items"]]),
+        "title": sc.clean(request.form.get("title"), 120),
+        "source": sc.clean(request.form.get("source"), 80),
+        "summary": sc.clean(request.form.get("summary"), 400),
+        "sentences": rows})
+    sc.save_passages(data)
+    flash(f"'{unit_name}' 에 지문을 넣었습니다. 문장 {len(rows)}개." + (f" {note}" if note else ""),
+          "ok" if not note else "err")
+    return redirect(url_for("admin.passages_book", slug=slug))
+
+
+@admin_bp.route("/passages/<slug>/item/<unit_id>/<item_id>/delete", methods=["POST"])
+def passages_item_delete(slug, unit_id, item_id):
+    data = sc.load_raw_passages()
+    book = next((b for b in data["books"] if b.get("slug") == slug), None)
+    if book is None:
+        abort(404)
+    for unit in book["units"]:
+        if unit.get("id") == unit_id:
+            unit["items"] = [x for x in unit.get("items", []) if x.get("id") != item_id]
+    book["units"] = [u for u in book["units"] if u.get("items")]
+    sc.save_passages(data)
+    flash("지문을 지웠습니다.", "ok")
+    return redirect(url_for("admin.passages_book", slug=slug))
+
+
+@admin_bp.route("/passages/<slug>/delete", methods=["POST"])
+def passages_delete(slug):
+    data = sc.load_raw_passages()
+    data["books"] = [b for b in data["books"] if b.get("slug") != slug]
+    sc.save_passages(data)
+    flash("교재를 지웠습니다.", "ok")
+    return redirect(url_for("admin.passages_list"))
+
+
 @admin_bp.route("/words/refresh-samples", methods=["POST"])
 def words_refresh_samples():
     """예시 단어장만 저장소의 최신판으로 다시 깝니다.

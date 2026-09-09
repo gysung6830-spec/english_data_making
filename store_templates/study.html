@@ -28,6 +28,14 @@
       </div>
     </div>
 
+    {# 지문 암기로 가는 길. 단어를 외운 손님이 다음에 할 일입니다. #}
+    <div class="sw" style="margin-bottom:18px;">
+      <span class="sw-tag">이어서</span>
+      <b>지문 암기</b>
+      <p>단어를 외우셨으면 지문을 통째로. 문장마다 해석을 보고, 빈칸 5단계로 외웁니다.</p>
+      <a href="{{ url_for('memorize_page') }}">지문 암기 →</a>
+    </div>
+
     <div class="study-kinds">
       {% for key, name in kinds.items() %}
         <span class="chip chip-{{ key }}">{{ name }}</span>

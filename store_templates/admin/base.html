@@ -44,6 +44,8 @@
         🎁 무료 자료실</a>
       <a href="{{ url_for('admin.words_list') }}" class="{{ 'on' if request.endpoint in ['admin.words_list','admin.words_book'] }}">
         🔤 단어장</a>
+      <a href="{{ url_for('admin.passages_list') }}" class="{{ 'on' if request.endpoint in ['admin.passages_list','admin.passages_book'] }}">
+        📖 지문</a>
       <a href="{{ url_for('admin.notices') }}" class="{{ 'on' if request.endpoint == 'admin.notices' }}">
         📢 공지</a>
       <a href="{{ url_for('admin.mail_page') }}" class="{{ 'on' if request.endpoint in ['admin.mail_page','admin.leads'] }}">

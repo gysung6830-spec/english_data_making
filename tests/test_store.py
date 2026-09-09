@@ -1211,9 +1211,9 @@ def test_admin_menu_is_short():
     # 밖에 나와 있는 것 — 매일·매주 여는 것만
     for must in ("오늘 할 일", "주문 · 문의", "시험지 · 쿠폰", "매출 · 지표",
                  "손님 발자국", "상품", "교재 · 분류", "오르티카 라인업",
-                 "무료 자료실", "단어장", "공지", "메일 · 명단"):
+                 "무료 자료실", "단어장", "지문", "공지", "메일 · 명단"):
         assert must in daily, must
-    assert daily.count('</a>') == 12, daily.count('</a>')
+    assert daily.count('</a>') == 13, daily.count('</a>')
 
     # 접힌 칸 — 한 번 해 두면 그만인 것
     for later in ("가게 정보", "가격 가이드", "빠진 것 점검", "검색 등록", "백업"):
@@ -2914,6 +2914,85 @@ def test_word_pdf_is_actually_read():
 
     a.post("/admin/words/pdf-read-book/delete", follow_redirects=True)
     print("PASS  단어책 PDF 를 실제로 읽어냄 (두 칸 · 강 칸 · 예문 · 스캔)")
+
+
+def test_passage_memorizing_reads_then_blanks():
+    """지문 암기 — 문장마다 해석을 보고, 빈칸 5단계로 외웁니다."""
+    books = sc.load_passages()["books"]
+    assert books, "예시 지문이 없습니다"
+    b = books[0]
+    assert sc.passage_count(b) >= 3 and sc.sentence_count(b) >= 15
+    for u in b["units"]:
+        for x in u["items"]:
+            assert x["sentences"], x
+            # 해석이 문장마다 하나씩 붙어 있어야 눌러서 볼 수 있습니다
+            assert all(s["ko"].strip() for s in x["sentences"]), x["title"]
+            assert all(s["en"].strip() for s in x["sentences"]), x["title"]
+
+    c = client()
+    assert b["name"] in body(c.get("/memorize"))
+    listing = body(c.get(f"/memorize/{b['slug']}"))
+    first = b["units"][0]["items"][0]
+    assert first["title"] in listing
+
+    import html as _html
+    page = body(c.get(f"/memorize/{b['slug']}/{b['units'][0]['id']}/{first['id']}"))
+    assert "본문 분석" in page and "본문 암기" in page
+    plain = _html.unescape(page)                        # 따옴표는 escape 되어 나갑니다
+    assert first["sentences"][0]["en"] in plain
+    assert first["sentences"][0]["ko"] in plain         # 해석은 접혀 있되 실려 있습니다
+    for lv in sc.BLANK_LEVELS:                          # 난이도 5단계
+        assert f'data-no="{lv["no"]}"' in page, lv
+    assert "sent-say" in page                           # 소리 내어 읽기
+
+    # 문장 나누기 — 줄임말의 마침표에서 끊으면 문장이 토막 납니다
+    got = sc.split_sentences("Mr. Kim came at 9 a.m. He left. It was fine.")
+    assert got == ["Mr. Kim came at 9 a.m.", "He left.", "It was fine."], got
+    # 해석 수가 안 맞으면 억지로 맞추지 않고 말해 줍니다
+    rows, note = sc.pair_sentences("A cat sat. A dog ran.", "고양이가 앉았다.")
+    assert [r["ko"] for r in rows] == ["고양이가 앉았다.", ""] and "수가 다릅니다" in note
+
+    # 가릴 낱말은 내용어부터 — 기능어(the·of)부터 가리면 눈치 시험이 됩니다
+    assert sc.blank_score("community") > sc.blank_score("the")
+    assert sc.blank_score("13") == -1                   # 숫자는 안 가립니다
+
+    # 단어 학습과 서로 오갈 수 있어야 합니다
+    assert 'href="/memorize"' in body(c.get("/study"))
+    assert 'href="/study"' in body(c.get("/memorize"))
+    print("PASS  지문 암기 — 읽고(해석·소리) 외우기(빈칸 5단계)")
+
+
+def test_admin_puts_a_passage_in_by_pasting():
+    """본문과 해석을 통째로 붙여넣으면 문장으로 잘라 짝지어 줘야 합니다."""
+    a = admin()
+    a.post("/admin/passages/new", data={"name": "paste test book", "publisher": "EBS"},
+           follow_redirects=True)
+    slug = "paste-test-book"
+    got = a.post(f"/admin/passages/{slug}/item", data={
+        "unit_name": "3강", "title": "붙여넣기 시험", "source": "2025년 3월 20번",
+        "body": "A cat sat on the mat. The dog ran away. Rain fell all night.",
+        "trans": "고양이가 매트 위에 앉았다. 개가 달아났다. 비가 밤새 내렸다."},
+        follow_redirects=True)
+    assert got.status_code == 200
+
+    book = sc.find_passage_book(slug, raw=True)
+    unit = book["units"][0]
+    item = unit["items"][0]
+    assert unit["name"] == "3강" and item["title"] == "붙여넣기 시험"
+    assert len(item["sentences"]) == 3
+    assert item["sentences"][1] == {"en": "The dog ran away.", "ko": "개가 달아났다."}
+
+    # 손님 화면에 그대로 뜹니다
+    page = body(client().get(f"/memorize/{slug}/{unit['id']}/{item['id']}"))
+    assert "A cat sat on the mat." in page and "고양이가 매트 위에 앉았다." in page
+
+    # 지우면 사라집니다
+    a.post(f"/admin/passages/{slug}/item/{unit['id']}/{item['id']}/delete",
+           follow_redirects=True)
+    assert sc.passage_count(sc.find_passage_book(slug, raw=True)) == 0
+    a.post(f"/admin/passages/{slug}/delete", follow_redirects=True)
+    assert sc.find_passage_book(slug, raw=True) is None
+    print("PASS  지문 넣기 — 붙여넣으면 문장으로 잘라 짝지음")
 
 
 def test_sample_wordbooks_are_enough_to_try_it():
@@ -5740,6 +5819,8 @@ def run_all():
     test_menu_has_no_duplicates()
     test_mobile_quick_bar()
     test_word_pdf_is_actually_read()
+    test_passage_memorizing_reads_then_blanks()
+    test_admin_puts_a_passage_in_by_pasting()
     test_sample_wordbooks_are_enough_to_try_it()
     test_study_and_sheet_share_one_wordbook()
     test_word_study_screen()

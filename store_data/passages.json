@@ -1,0 +1,132 @@
+{
+  "intro": {},
+  "books": [
+    {
+      "slug": "ebs-2026-tokgang-eng",
+      "name": "2026 수능특강 영어",
+      "publisher": "EBS",
+      "grade": "고3",
+      "sort": 10,
+      "active": true,
+      "sample": true,
+      "units": [
+        {
+          "id": "01",
+          "name": "1강",
+          "items": [
+            {
+              "id": "01",
+              "title": "Gardening Day 안내",
+              "source": "2024년 6월 18번",
+              "summary": "아파트 정원 가꾸기 행사 안내와 참여 요청",
+              "sentences": [
+                {
+                  "en": "Dear Residents, My name is Kari Patterson, and I'm the manager of the River View Apartments.",
+                  "ko": "주민들께, 제 이름은 Kari Patterson이고, 저는 River View 아파트의 관리인입니다."
+                },
+                {
+                  "en": "It's time to take advantage of the sunny weather to make our community more beautiful.",
+                  "ko": "우리 커뮤니티를 더욱 아름답게 만들기 위해 화창한 날씨를 이용할 때입니다."
+                },
+                {
+                  "en": "On Saturday, July 13 at 9 a.m., residents will meet in the north parking lot.",
+                  "ko": "7월 13일 토요일 오전 9시에, 주민들은 북쪽 주차장에서 만날 예정입니다."
+                },
+                {
+                  "en": "We will divide into teams to plant flowers and small trees, pull weeds, and put colorful decorations on the lawn.",
+                  "ko": "우리는 팀을 나누어 꽃과 작은 나무를 심고, 잡초를 뽑고, 잔디밭에 다채로운 장식을 할 것입니다."
+                },
+                {
+                  "en": "Please join us for this year's Gardening Day, and remember no special skills or tools are required.",
+                  "ko": "올해 정원 가꾸기 날에 우리와 함께해 주시고, 특별한 기술이나 도구는 필요하지 않다는 것을 기억하세요."
+                },
+                {
+                  "en": "Last year, we had a great time working together, so come out and make this year's event even better!",
+                  "ko": "작년에 우리는 함께 일하며 즐거운 시간을 보냈으니, 나오셔서 올해 행사를 더 멋지게 만들어 주세요!"
+                },
+                {
+                  "en": "Warm regards, Kari Patterson",
+                  "ko": "따뜻한 마음을 담아, Kari Patterson"
+                }
+              ]
+            },
+            {
+              "id": "02",
+              "title": "재능보다 의도적 연습",
+              "source": "2024년 9월 22번",
+              "summary": "기량을 가르는 것은 타고난 재능이 아니라 의도적 연습의 시간",
+              "sentences": [
+                {
+                  "en": "Many people believe that talent is something you are born with.",
+                  "ko": "많은 사람들은 재능이 타고나는 것이라고 믿는다."
+                },
+                {
+                  "en": "Research on expert performance suggests otherwise.",
+                  "ko": "전문가의 수행에 관한 연구는 그렇지 않다고 말한다."
+                },
+                {
+                  "en": "When scientists studied musicians, athletes, and chess players, they found that the strongest predictor of skill was not natural ability but the number of hours spent in deliberate practice.",
+                  "ko": "과학자들이 음악가, 운동선수, 체스 선수를 연구했을 때, 그들은 기량을 가장 잘 예측하는 것이 타고난 능력이 아니라 의도적 연습에 쓴 시간의 양이라는 것을 발견했다."
+                },
+                {
+                  "en": "Deliberate practice is not simply repeating what you already do well.",
+                  "ko": "의도적 연습은 이미 잘하는 것을 단순히 반복하는 것이 아니다."
+                },
+                {
+                  "en": "It means working at the edge of your ability, where mistakes are frequent and feedback is immediate.",
+                  "ko": "그것은 실수가 잦고 피드백이 즉각적인, 자기 능력의 가장자리에서 애쓰는 것을 뜻한다."
+                },
+                {
+                  "en": "This kind of practice is uncomfortable, which is why most people avoid it.",
+                  "ko": "이런 종류의 연습은 불편하며, 그것이 대부분의 사람들이 그것을 피하는 이유이다."
+                },
+                {
+                  "en": "Those who tolerate the discomfort improve steadily, while those who stay in their comfort zone stop growing.",
+                  "ko": "그 불편함을 견디는 사람들은 꾸준히 향상되지만, 편안한 영역에 머무는 사람들은 성장을 멈춘다."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "02",
+          "name": "2강",
+          "items": [
+            {
+              "id": "01",
+              "title": "폐선로를 산책로로",
+              "source": "2024년 3월 25번",
+              "summary": "폐철로를 산책로로 바꾸는 계획과 찬반",
+              "sentences": [
+                {
+                  "en": "The city council has announced a plan to turn the old railway line into a walking path.",
+                  "ko": "시의회는 오래된 철도 노선을 산책로로 바꾸는 계획을 발표했다."
+                },
+                {
+                  "en": "The line has been unused since 1998, and parts of it are now covered with weeds.",
+                  "ko": "그 노선은 1998년 이후로 사용되지 않았고, 일부는 이제 잡초로 덮여 있다."
+                },
+                {
+                  "en": "Under the new plan, the rails will be removed and replaced with a smooth surface suitable for walking and cycling.",
+                  "ko": "새 계획에 따르면, 선로는 제거되고 걷기와 자전거 타기에 적합한 매끄러운 노면으로 대체될 것이다."
+                },
+                {
+                  "en": "Local shop owners expect that visitors will bring new business to the area.",
+                  "ko": "지역 상점 주인들은 방문객들이 이 지역에 새로운 사업을 가져올 것으로 기대한다."
+                },
+                {
+                  "en": "Some residents, however, worry about noise and litter.",
+                  "ko": "그러나 일부 주민들은 소음과 쓰레기를 걱정한다."
+                },
+                {
+                  "en": "The council will hold a public meeting next month to hear these concerns before construction begins.",
+                  "ko": "시의회는 공사가 시작되기 전에 이러한 우려를 듣기 위해 다음 달 공청회를 열 것이다."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

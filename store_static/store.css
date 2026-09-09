@@ -2280,3 +2280,100 @@ label.dropzone{
 .pp-covers{display:block; margin-top:8px; font-size:13px; line-height:1.6;
   color:var(--ink-2); word-break:keep-all;}
 .pp-covers b{color:var(--ink); font-weight:800;}
+
+/* ==========================================================================
+   지문 암기 — 읽고(본문 분석), 빈칸으로 외우기(본문 암기)
+   ========================================================================== */
+.mem-steps{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  gap:12px; margin-bottom:18px;}
+.ms{position:relative; padding:18px 20px 18px 54px; background:var(--card);
+  border:1px solid var(--line); border-radius:12px;}
+.ms-no{position:absolute; left:18px; top:18px; width:24px; height:24px;
+  display:flex; align-items:center; justify-content:center; border-radius:50%;
+  background:var(--brand); color:#fff; font-size:13px; font-weight:800;}
+.ms b{display:block; font-size:16.5px; letter-spacing:-.02em; margin-bottom:4px;}
+.ms p{font-size:13.5px; color:var(--ink-2); margin:0; word-break:keep-all;}
+
+.mem-head{display:flex; align-items:flex-end; gap:16px; flex-wrap:wrap;
+  margin-bottom:16px;}
+.mem-head h2{font-size:26px; margin:4px 0 0;}
+.mem-tabs{display:flex; gap:6px; margin-left:auto;}
+.mt{padding:9px 16px; border:1px solid var(--line-strong); background:var(--card);
+  border-radius:999px; font-size:14.5px; font-weight:700; color:var(--ink-2);}
+.mt.on{background:var(--brand); border-color:var(--brand); color:#fff;}
+
+.mem-tools{display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin-bottom:12px;}
+.mem-tools .spacer{margin-left:auto;}
+.mt-label{font-size:13.5px; color:var(--muted); font-weight:700;}
+.lv-pick{display:flex; gap:4px;}
+.lv{width:34px; height:34px; border:1px solid var(--line-strong); background:var(--card);
+  border-radius:9px; font-weight:800; font-size:14px; color:var(--ink-2);}
+.lv.on{background:var(--brand); border-color:var(--brand); color:#fff;}
+.lv-name{font-size:13px; color:var(--muted);}
+
+/* 문장 목록 — 번호 · 본문 · 소리 */
+.sent-list{list-style:none; margin:0; padding:0; display:flex;
+  flex-direction:column; gap:2px;}
+.sent{display:flex; gap:12px; align-items:flex-start; padding:12px 14px;
+  border-radius:10px;}
+.sent:nth-child(odd){background:var(--card);}
+.sent-no{flex:0 0 auto; width:22px; height:22px; margin-top:2px; border-radius:6px;
+  display:flex; align-items:center; justify-content:center; font-size:12px;
+  font-weight:800; background:var(--brand-soft); color:var(--brand-dark);}
+.sent-body{flex:1; min-width:0;}
+.sent-en{margin:0; font-size:16px; line-height:1.75; cursor:pointer;}
+.sent-ko{margin:6px 0 0; font-size:14.5px; line-height:1.7; color:var(--ink-2);
+  padding-left:10px; border-left:2px solid var(--line-strong);}
+.sent-say{flex:0 0 auto; border:0; background:none; font-size:15px; opacity:.45;
+  cursor:pointer; padding:2px 4px;}
+.sent-say:hover{opacity:1;}
+
+.mem-summary{margin-top:16px; padding:14px 16px; background:var(--brand-soft);
+  border:1px solid #cfe4d9; border-radius:10px;}
+.mem-summary b{display:block; font-size:13.5px; color:var(--brand-dark); margin-bottom:4px;}
+.mem-summary p{margin:0; font-size:14.5px; line-height:1.7;}
+
+/* 빈칸 */
+.bl-body{font-size:16px; line-height:2.4;}
+/* 빈칸은 문장 안에 끼어 있어야 합니다. 위 input[type=text] 의 width:100% 가
+   더 셉니다(선택자가 무겁습니다). 그래서 여기서도 형태를 함께 적습니다. */
+input[type=text].bl-in{display:inline-block; width:auto; min-width:52px;
+  padding:1px 7px; font-size:15px; font-family:inherit; vertical-align:baseline;
+  border:0; border-bottom:2px solid var(--brand); background:var(--brand-soft);
+  border-radius:5px 5px 0 0; text-align:center;}
+input[type=text].bl-in:focus{outline:none; background:#fff;
+  border-bottom-color:var(--brand-dark); box-shadow:none;}
+input[type=text].bl-in.ok{background:#e8f6ee; border-bottom-color:#1a7f4b; color:#125c36;}
+input[type=text].bl-in.no{background:#fdf2f0; border-bottom-color:#c2410c;
+  color:#8c2f16; font-weight:700;}
+#blank-list.peek .bl-in{background:#fff; border-bottom-style:dashed;}
+#blank-list.peek .bl-in::after{content:attr(data-want);}
+.mem-score{margin-top:16px; padding:14px 16px; border-radius:10px;
+  background:#fff8ed; border:1px solid #f0d9ac; font-size:15px;}
+.mem-score.all{background:var(--brand-soft); border-color:#cfe4d9;}
+.mem-score b{font-size:18px; color:var(--brand-dark);}
+
+.mem-move{display:flex; align-items:center; margin-top:26px;}
+.mem-move .spacer{margin-left:auto;}
+
+/* 교재 안 지문 목록 */
+.unit-block{margin-bottom:26px;}
+.unit-name{font-size:17px; margin:0 0 10px;}
+.pass-list{display:flex; flex-direction:column; gap:8px;}
+.pass-row{display:flex; align-items:center; gap:14px; padding:14px 16px;
+  background:var(--card); border:1px solid var(--line); border-radius:10px;}
+.pass-row:hover{border-color:var(--brand);}
+.pr-no{flex:0 0 auto; width:24px; height:24px; border-radius:7px; font-size:12px;
+  font-weight:800; display:flex; align-items:center; justify-content:center;
+  background:var(--brand-soft); color:var(--brand-dark);}
+.pr-text{flex:1; min-width:0; display:flex; flex-direction:column; gap:2px;}
+.pr-text b{font-size:15.5px; letter-spacing:-.02em;}
+.pr-text small{font-size:13px; color:var(--muted);}
+.pr-n{flex:0 0 auto; font-size:13px; color:var(--muted); white-space:nowrap;}
+@media (max-width:640px){
+  .mem-head{align-items:flex-start;}
+  .mem-tabs{margin-left:0; width:100%;}
+  .mt{flex:1;}
+  .bl-body{line-height:2.6;}
+}

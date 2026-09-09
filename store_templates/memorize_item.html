@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+{% block title %}{{ item.title or '지문 암기' }} · {{ b.name }} · {{ site.brand }}{% endblock %}
+{% block desc %}{{ b.name }} {{ unit.name }} 지문을 문장마다 해석과 함께 읽고, 빈칸 5단계로 외웁니다.{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap narrow">
+    <a class="back-link" href="{{ url_for('memorize_book', slug=b.slug) }}">← {{ b.name }}</a>
+
+    <div class="mem-head">
+      <div>
+        <span class="eyebrow">{{ unit.name }} · {{ no }} / {{ total }}</span>
+        <h2>{{ item.title or '지문' }}</h2>
+        {% if item.source %}<p class="muted mb-0">{{ item.source }}</p>{% endif %}
+      </div>
+      <div class="mem-tabs" role="tablist">
+        <button type="button" class="mt on" data-tab="read">본문 분석</button>
+        <button type="button" class="mt" data-tab="blank">본문 암기</button>
+      </div>
+    </div>
+
+    {# ---- 1. 본문 분석 — 문장마다 해석을 켰다 껐다 ------------------------- #}
+    <div class="mem-pane" id="pane-read">
+      <div class="mem-tools">
+        <button type="button" class="btn btn-ghost btn-sm" id="ko-all">해석 모두 보기</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="say-all">전체 듣기</button>
+      </div>
+      <ol class="sent-list">
+        {% for s in item.sentences %}
+          <li class="sent" data-en="{{ s.en }}">
+            <span class="sent-no">{{ loop.index }}</span>
+            <div class="sent-body">
+              <p class="sent-en">{{ s.en }}</p>
+              {% if s.ko %}<p class="sent-ko" hidden>{{ s.ko }}</p>{% endif %}
+            </div>
+            <button type="button" class="sent-say" aria-label="이 문장 듣기">🔊</button>
+          </li>
+        {% endfor %}
+      </ol>
+      {% if item.summary %}
+        <div class="mem-summary"><b>한 줄 요약</b><p>{{ item.summary }}</p></div>
+      {% endif %}
+    </div>
+
+    {# ---- 2. 본문 암기 — 빈칸을 채웁니다 ---------------------------------- #}
+    <div class="mem-pane" id="pane-blank" hidden>
+      <div class="mem-tools">
+        <span class="mt-label">난이도</span>
+        <div class="lv-pick">
+          {% for lv in levels %}
+            <button type="button" class="lv {{ 'on' if lv.no == 2 }}"
+                    data-ratio="{{ lv.ratio }}" data-no="{{ lv.no }}"
+                    title="{{ lv.desc }}">{{ lv.no }}</button>
+          {% endfor %}
+        </div>
+        <span class="lv-name" id="lv-name"></span>
+        <div class="spacer"></div>
+        <button type="button" class="btn btn-ghost btn-sm" id="peek">잠깐 보기</button>
+        <button type="button" class="btn btn-primary btn-sm" id="grade">채점하기</button>
+      </div>
+      <p class="hint" id="blank-hint">빈칸을 채우고 <b>채점하기</b>를 누르세요.
+        칸에서 <b>Tab</b> 이나 <b>Enter</b> 로 다음 칸으로 넘어갑니다.</p>
+      <ol class="sent-list" id="blank-list"></ol>
+      <div class="mem-score" id="score" hidden></div>
+    </div>
+
+    <div class="mem-move">
+      {% if prev %}
+        <a class="btn btn-ghost btn-sm"
+           href="{{ url_for('memorize_item', slug=b.slug, unit_id=prev[0].id, item_id=prev[1].id) }}">
+          ← 앞 지문</a>
+      {% endif %}
+      <div class="spacer"></div>
+      {% if next %}
+        <a class="btn btn-primary btn-sm"
+           href="{{ url_for('memorize_item', slug=b.slug, unit_id=next[0].id, item_id=next[1].id) }}">
+          다음 지문 →</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var LEVELS = {{ levels|tojson }};
+  var SENTS = {{ item.sentences|map(attribute='en')|list|tojson }};
+  var STOP = {{ stopwords|tojson }};
+
+  /* ---- 탭 ---- */
+  document.querySelectorAll('.mt').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.mt').forEach(function (x) { x.classList.remove('on'); });
+      b.classList.add('on');
+      var blank = b.dataset.tab === 'blank';
+      document.getElementById('pane-read').hidden = blank;
+      document.getElementById('pane-blank').hidden = !blank;
+      if (blank && !document.querySelector('#blank-list .bl')) build();
+    });
+  });
+
+  /* ---- 해석 켜기·끄기 ---- */
+  document.querySelectorAll('.sent-en').forEach(function (p) {
+    p.addEventListener('click', function () {
+      var ko = p.parentNode.querySelector('.sent-ko');
+      if (ko) ko.hidden = !ko.hidden;
+    });
+  });
+  var koAll = document.getElementById('ko-all');
+  koAll && koAll.addEventListener('click', function () {
+    var kos = document.querySelectorAll('.sent-ko');
+    var show = kos.length && kos[0].hidden;
+    kos.forEach(function (k) { k.hidden = !show; });
+    koAll.textContent = show ? '해석 모두 숨기기' : '해석 모두 보기';
+  });
+
+  /* ---- 소리 내어 읽기 ---- */
+  function say(text) {
+    if (!window.speechSynthesis) return;
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US'; u.rate = 0.92;
+    speechSynthesis.speak(u);
+  }
+  document.querySelectorAll('.sent-say').forEach(function (b) {
+    b.addEventListener('click', function () { say(b.closest('.sent').dataset.en); });
+  });
+  var sayAll = document.getElementById('say-all');
+  sayAll && sayAll.addEventListener('click', function () { say(SENTS.join(' ')); });
+
+  /* ---- 빈칸 만들기 ----
+     가릴 값어치가 큰 낱말부터 가립니다. 기능어(the·of·is)부터 가리면
+     실력이 아니라 눈치를 시험하게 됩니다. 문장마다 따로 세어, 짧은 문장이
+     통째로 지워지는 일이 없게 합니다. */
+  function score(word) {
+    var bare = word.replace(/[^A-Za-z'-]/g, '').toLowerCase();
+    if (!bare) return -1;
+    return (STOP.indexOf(bare) >= 0 ? 0 : 100) + bare.length;
+  }
+  function ratio() {
+    var on = document.querySelector('.lv.on');
+    return on ? parseFloat(on.dataset.ratio) : 0.3;
+  }
+  function build() {
+    var list = document.getElementById('blank-list');
+    var r = ratio();
+    list.innerHTML = '';
+    SENTS.forEach(function (sent, si) {
+      var parts = sent.split(/(\s+)/);
+      var idx = [];
+      parts.forEach(function (w, i) { if (score(w) > 0) idx.push(i); });
+      idx.sort(function (a, b) { return score(parts[b]) - score(parts[a]); });
+      var take = Math.max(1, Math.round(idx.length * r));
+      var hide = {};
+      idx.slice(0, take).forEach(function (i) { hide[i] = true; });
+
+      var li = document.createElement('li');
+      li.className = 'sent bl';
+      var no = document.createElement('span');
+      no.className = 'sent-no'; no.textContent = si + 1;
+      var body = document.createElement('div');
+      body.className = 'sent-body bl-body';
+      parts.forEach(function (w, i) {
+        if (!hide[i]) {
+          body.appendChild(document.createTextNode(w));
+          return;
+        }
+        /* 낱말에 붙은 쉼표·마침표는 남겨 둡니다. 그것까지 받아쓰게 하면
+           틀린 곳이 어디인지 흐려집니다. */
+        var m = w.match(/^([^A-Za-z]*)(.*?)([^A-Za-z]*)$/);
+        if (m[1]) body.appendChild(document.createTextNode(m[1]));
+        var inp = document.createElement('input');
+        inp.type = 'text'; inp.className = 'bl-in';
+        inp.dataset.want = m[2];
+        inp.size = Math.max(3, m[2].length);
+        inp.setAttribute('aria-label', (si + 1) + '번 문장 빈칸');
+        inp.autocapitalize = 'off'; inp.autocomplete = 'off'; inp.spellcheck = false;
+        body.appendChild(inp);
+        if (m[3]) body.appendChild(document.createTextNode(m[3]));
+      });
+      li.appendChild(no); li.appendChild(body);
+      var say1 = document.createElement('button');
+      say1.type = 'button'; say1.className = 'sent-say'; say1.textContent = '🔊';
+      say1.addEventListener('click', function () { say(sent); });
+      li.appendChild(say1);
+      list.appendChild(li);
+    });
+    /* Enter 로 다음 칸 */
+    var ins = list.querySelectorAll('.bl-in');
+    ins.forEach(function (inp, i) {
+      inp.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); (ins[i + 1] || inp).focus(); }
+      });
+    });
+    document.getElementById('score').hidden = true;
+    var lv = document.querySelector('.lv.on');
+    var meta = LEVELS.filter(function (x) { return x.no == (lv && lv.dataset.no); })[0];
+    document.getElementById('lv-name').textContent =
+      meta ? meta.name + ' — ' + meta.desc : '';
+  }
+  document.querySelectorAll('.lv').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.lv').forEach(function (x) { x.classList.remove('on'); });
+      b.classList.add('on');
+      build();
+    });
+  });
+
+  /* ---- 채점 ---- */
+  function tidy(v) { return (v || '').trim().toLowerCase().replace(/[^a-z'-]/g, ''); }
+  document.getElementById('grade').addEventListener('click', function () {
+    var ins = document.querySelectorAll('.bl-in');
+    var right = 0;
+    ins.forEach(function (inp) {
+      var ok = tidy(inp.value) === tidy(inp.dataset.want) && tidy(inp.value) !== '';
+      inp.classList.toggle('ok', ok);
+      inp.classList.toggle('no', !ok);
+      if (ok) { right++; return; }
+      inp.value = inp.dataset.want;                 /* 틀린 칸은 답을 보여 줍니다 */
+    });
+    var box = document.getElementById('score');
+    var pct = ins.length ? Math.round(right / ins.length * 100) : 0;
+    box.hidden = false;
+    box.className = 'mem-score' + (pct === 100 ? ' all' : '');
+    box.innerHTML = '<b>' + right + ' / ' + ins.length + '</b> 맞히셨습니다 (' + pct + '%). ' +
+      (pct === 100 ? '난이도를 한 단계 올려 보세요.'
+                   : '<span class="muted">틀린 칸에는 답을 채워 두었습니다.</span>');
+    box.scrollIntoView({behavior: 'smooth', block: 'center'});
+  });
+  document.getElementById('peek').addEventListener('click', function () {
+    var list = document.getElementById('blank-list');
+    list.classList.toggle('peek');
+  });
+})();
+</script>
+{% endblock %}

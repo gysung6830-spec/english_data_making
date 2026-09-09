@@ -1788,6 +1788,56 @@ def study_page():
                            kinds=STUDY_KINDS)
 
 
+# ---------------------------------------------------------------------------
+# 지문 암기 — 본문을 읽히고, 빈칸으로 외우게 합니다
+# ---------------------------------------------------------------------------
+@app.route("/memorize")
+def memorize_page():
+    """지문 암기 — 교재 고르기."""
+    data = sc.load_passages()
+    return render_template("memorize.html", books=data["books"],
+                           groups=sc.words_by_publisher(data["books"]),
+                           levels=sc.BLANK_LEVELS)
+
+
+@app.route("/memorize/<slug>")
+def memorize_book(slug):
+    """교재 하나 — 강과 지문 고르기."""
+    book = sc.find_passage_book(slug)
+    if book is None:
+        abort(404)
+    return render_template("memorize_book.html", b=book,
+                           items=sc.passage_count(book),
+                           sentences=sc.sentence_count(book))
+
+
+@app.route("/memorize/<slug>/<unit_id>/<item_id>")
+def memorize_item(slug, unit_id, item_id):
+    """지문 하나 — 읽고(본문 분석), 외웁니다(빈칸 채우기).
+
+    지문은 자료의 뿌리입니다. 해석지를 인쇄해 주는 것으로 끝내지 않고 그
+    자리에서 외우게 하면, 자료를 사기 전에 우리 지문 손질을 먼저 겪습니다.
+    """
+    book = sc.find_passage_book(slug)
+    if book is None:
+        abort(404)
+    found = sc.find_passage(book, unit_id, item_id)
+    if found is None:
+        abort(404)
+    unit, item = found
+    # 앞뒤 지문 — 한 강을 죽 훑을 수 있게
+    flat = [(u, x) for u in book["units"] for x in u["items"]]
+    where = next(i for i, (u, x) in enumerate(flat)
+                 if u["id"] == unit_id and x["id"] == item_id)
+    return render_template(
+        "memorize_item.html", b=book, unit=unit, item=item,
+        levels=sc.BLANK_LEVELS, no=where + 1, total=len(flat),
+        prev=flat[where - 1] if where else None,
+        next=flat[where + 1] if where + 1 < len(flat) else None,
+        # 빈칸을 화면에서 만들므로 '가릴 값어치가 적은 낱말' 목록을 넘겨 줍니다
+        stopwords=sorted(sc.STOPWORDS))
+
+
 @app.route("/words/<slug>")
 def words_book(slug):
     """강을 고르고 유형·문항 수를 정하는 화면."""
