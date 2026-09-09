@@ -225,12 +225,12 @@
     {
      "tag": "조동사 may",
      "note": "'~일 수도 있다'(추측)",
-     "spans": []
+     "spans": ["may"]
     },
     {
      "tag": "공통 조동사 may",
      "note": "may [change] or [appear to end] — may가 공통",
-     "spans": []
+     "spans": ["may"]
     }
    ],
    "vocab": [
@@ -283,17 +283,17 @@
     {
      "tag": "used to",
      "note": "(과거엔) ~하곤 했다",
-     "spans": []
+     "spans": ["used to"]
     },
     {
      "tag": "부정사 to make",
      "note": "'~하기 위해'",
-     "spans": []
+     "spans": ["to make"]
     },
     {
      "tag": "병렬구조",
      "note": "find, cut it, peel it, cook it, and mash it — 동사원형 병렬(⑤)",
-     "spans": []
+     "spans": ["and mash it"]
     }
    ],
    "vocab": [
@@ -392,12 +392,12 @@
     {
      "tag": "조동사 may",
      "note": "'~할 수도 있다'(선택 가능)",
-     "spans": []
+     "spans": ["may"]
     },
     {
      "tag": "공통 조동사 may",
      "note": "may [choose to use...] and [cut out...] — may가 공통",
-     "spans": []
+     "spans": ["may"]
     }
    ],
    "vocab": [
@@ -462,22 +462,22 @@
     {
      "tag": "명사절 that",
      "note": "is의 보어",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "no longer",
      "note": "더 이상 ~ 않다",
-     "spans": []
+     "spans": ["no longer"]
     },
     {
      "tag": "instead",
      "note": "대신에",
-     "spans": []
+     "spans": ["instead"]
     },
     {
      "tag": "병렬구조",
      "note": "[no longer make...] and [choose instead to use...] — many families에 공통",
-     "spans": []
+     "spans": ["and"]
     }
    ],
    "vocab": [
@@ -544,12 +544,12 @@
     {
      "tag": "이유 because(병렬)",
      "note": "because A, because B, or because C",
-     "spans": []
+     "spans": ["because", "because", "or because"]
     },
     {
      "tag": "came about",
      "note": "생겨나다",
-     "spans": []
+     "spans": ["came about"]
     }
    ],
    "vocab": [

@@ -207,12 +207,12 @@
     {
      "tag": "접속사 when",
      "note": "'~할 때'",
-     "spans": []
+     "spans": ["when"]
     },
     {
      "tag": "감정 형용사 surprised",
      "note": "should not be surprised: 조동사+원형, surprised는 감정 형용사",
-     "spans": []
+     "spans": ["surprised"]
     }
    ],
    "vocab": [
@@ -265,7 +265,7 @@
     {
      "tag": "대명사 them",
      "note": "= disagreements(이견)",
-     "spans": []
+     "spans": ["them"]
     }
    ],
    "vocab": [
@@ -310,12 +310,12 @@
     {
      "tag": "조건 if",
      "note": "'~라면'",
-     "spans": []
+     "spans": ["If"]
     },
     {
      "tag": "seek out",
      "note": "찾아내다",
-     "spans": []
+     "spans": ["seek", "out"]
     }
    ],
    "vocab": [
@@ -374,17 +374,17 @@
     {
      "tag": "bring with them",
      "note": "'~을 함께 가져오다'",
-     "spans": []
+     "spans": ["bring with them"]
     },
     {
      "tag": "의문사 how",
      "note": "'어떻게 ~하는지'",
-     "spans": []
+     "spans": ["how"]
     },
     {
      "tag": "수동태 be run",
      "note": "how it might be run — 조동사+be+p.p.",
-     "spans": []
+     "spans": ["be run"]
     }
    ],
    "vocab": [
@@ -439,22 +439,22 @@
     {
      "tag": "수동 should be avoided",
      "note": "'피해져야 한다'",
-     "spans": []
+     "spans": ["should be avoided"]
     },
     {
      "tag": "be open to",
      "note": "~에 열려 있다",
-     "spans": []
+     "spans": ["be open to"]
     },
     {
      "tag": "양보 접속사 although",
      "note": "Although ~ should be avoided, 주절 — 양보(⑤)",
-     "spans": []
+     "spans": ["Although"]
     },
     {
      "tag": "비교급 better",
      "note": "new and better ways — 비교급",
-     "spans": []
+     "spans": ["better"]
     }
    ],
    "vocab": [
@@ -515,22 +515,22 @@
     {
      "tag": "접속사 when",
      "note": "'~할 때'",
-     "spans": []
+     "spans": ["when"]
     },
     {
      "tag": "수동 are found/resolved",
      "note": "'발견·해결되다'",
-     "spans": []
+     "spans": ["are found", "resolved"]
     },
     {
      "tag": "A rather than B",
      "note": "'B보다 A'",
-     "spans": []
+     "spans": ["rather than"]
     },
     {
      "tag": "비교급 more easily",
      "note": "more easily resolved — more 비교급",
-     "spans": []
+     "spans": ["more easily"]
     }
    ],
    "vocab": [
@@ -597,12 +597,12 @@
     {
      "tag": "접속사 although(양보)",
      "note": "주절과 대조",
-     "spans": []
+     "spans": ["Although"]
     },
     {
      "tag": "분사 considered/resolved",
      "note": "'고려·해결되는'",
-     "spans": []
+     "spans": ["considered", "resolved"]
     }
    ],
    "vocab": [
@@ -665,17 +665,17 @@
     {
      "tag": "look to A to B",
      "note": "'A가 B하기를 기대하다'",
-     "spans": []
+     "spans": ["look to", "to play"]
     },
     {
      "tag": "조건 if",
      "note": "'~라면'",
-     "spans": []
+     "spans": ["if"]
     },
     {
      "tag": "수동 have been given",
      "note": "'주어져 왔다'",
-     "spans": []
+     "spans": ["have been given"]
     },
     {
      "tag": "접속사 that 생략",

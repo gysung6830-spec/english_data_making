@@ -185,7 +185,9 @@
     {
      "tag": "대시 부연",
      "note": "this much is obvious 덧붙임",
-     "spans": []
+     "spans": [
+      "—"
+     ]
     }
    ],
    "vocab": [
@@ -230,7 +232,9 @@
     {
      "tag": "명사절 that",
      "note": "is의 보어",
-     "spans": []
+     "spans": [
+      "that"
+     ]
     },
     {
      "tag": "관계부사 생략",
@@ -275,7 +279,9 @@
     {
      "tag": "be동사 강조",
      "note": "simply are not",
-     "spans": []
+     "spans": [
+      "simply are not"
+     ]
     }
    ],
    "vocab": [
@@ -316,17 +322,23 @@
     {
      "tag": "전치사+관계대명사 to which",
      "note": "item을 수식",
-     "spans": []
+     "spans": [
+      "to which"
+     ]
     },
     {
      "tag": "In order to",
      "note": "'~하기 위해'",
-     "spans": []
+     "spans": [
+      "In order to"
+     ]
     },
     {
      "tag": "최상급",
      "note": "the closest item — 최상급",
-     "spans": []
+     "spans": [
+      "closest"
+     ]
     }
    ],
    "vocab": [
@@ -385,22 +397,30 @@
     {
      "tag": "명사절 that",
      "note": "claimed의 목적어",
-     "spans": []
+     "spans": [
+      "that"
+     ]
     },
     {
      "tag": "so that",
      "note": "'~하도록/그 결과'",
-     "spans": []
+     "spans": [
+      "so that"
+     ]
     },
     {
      "tag": "관계사 what",
      "note": "'~하는 것'",
-     "spans": []
+     "spans": [
+      "what"
+     ]
     },
     {
      "tag": "수동태",
      "note": "could be understood — 조동사+be+p.p.",
-     "spans": []
+     "spans": [
+      "be understood"
+     ]
     }
    ],
    "vocab": [
@@ -480,17 +500,23 @@
     {
      "tag": "관계사 which",
      "note": "script 부연",
-     "spans": []
+     "spans": [
+      "which"
+     ]
     },
     {
      "tag": "관계사 what",
      "note": "'~하는 것'",
-     "spans": []
+     "spans": [
+      "what"
+     ]
     },
     {
      "tag": "수동태(진행)",
      "note": "a story ... was being told — be being p.p.",
-     "spans": []
+     "spans": [
+      "was being told"
+     ]
     },
     {
      "tag": "목적격 관계대명사 생략",

@@ -206,17 +206,24 @@
     {
      "tag": "동격 that",
      "note": "no question 뒤 내용 부연",
-     "spans": []
+     "spans": [
+      "that"
+     ]
     },
     {
      "tag": "부정사 to sing",
      "note": "learning의 목적어",
-     "spans": []
+     "spans": [
+      "to sing"
+     ]
     },
     {
      "tag": "동명사 주어 수일치",
      "note": "learning to sing or play ... changes — 동명사구 주어=단수(⑤)",
-     "spans": []
+     "spans": [
+      "learning",
+      "changes"
+     ]
     }
    ],
    "vocab": [
@@ -279,12 +286,16 @@
     {
      "tag": "조건 if",
      "note": "'~라면'",
-     "spans": []
+     "spans": [
+      "If"
+     ]
     },
     {
      "tag": "관계사 that",
      "note": "the side 수식",
-     "spans": []
+     "spans": [
+      "that"
+     ]
     },
     {
      "tag": "동격",
@@ -354,7 +365,9 @@
     {
      "tag": "수동태",
      "note": "you are 'right-lateralised' — be+p.p.",
-     "spans": []
+     "spans": [
+      "are 'right-lateralised'"
+     ]
     }
    ],
    "vocab": [
@@ -399,7 +412,9 @@
     {
      "tag": "명사절 that",
      "note": "show의 목적어",
-     "spans": []
+     "spans": [
+      "that"
+     ]
     }
    ],
    "vocab": [
@@ -456,7 +471,9 @@
     {
      "tag": "의문사 why",
      "note": "'왜 ~하는지'(전치사 about의 목적어절)",
-     "spans": []
+     "spans": [
+      "why"
+     ]
     }
    ],
    "vocab": [],
@@ -492,17 +509,23 @@
     {
      "tag": "명사절 that",
      "note": "is의 보어",
-     "spans": []
+     "spans": [
+      "that"
+     ]
     },
     {
      "tag": "분사구문 discerning",
      "note": "'분간하면서'",
-     "spans": []
+     "spans": [
+      "discerning"
+     ]
     },
     {
      "tag": "A more like B",
      "note": "'B에 더 가깝게'",
-     "spans": []
+     "spans": [
+      "more like"
+     ]
     }
    ],
    "vocab": [
@@ -577,12 +600,16 @@
     {
      "tag": "접속사 when",
      "note": "'~할 때'",
-     "spans": []
+     "spans": [
+      "When"
+     ]
     },
     {
      "tag": "분사 associated with",
      "note": "'~와 관련된'",
-     "spans": []
+     "spans": [
+      "associated with"
+     ]
     }
    ],
    "vocab": [

@@ -200,12 +200,12 @@
     {
      "tag": "명사절 that",
      "note": "is의 보어",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "by -ing",
      "note": "'~함으로써'",
-     "spans": []
+     "spans": ["by moving"]
     },
     {
      "tag": "관계부사 생략",
@@ -273,12 +273,12 @@
     {
      "tag": "명사절 that",
      "note": "predicts의 목적어",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "대동사 doesn't",
      "note": "end 대신",
-     "spans": []
+     "spans": ["doesn't"]
     }
    ],
    "vocab": [
@@ -337,12 +337,12 @@
     {
      "tag": "대시 동격",
      "note": "저서 정보 부연",
-     "spans": []
+     "spans": ["—", "—"]
     },
     {
      "tag": "현재완료진행",
      "note": "계속 해 오고 있다",
-     "spans": []
+     "spans": ["has been doing"]
     }
    ],
    "vocab": [
@@ -407,12 +407,12 @@
     {
      "tag": "명사절 that",
      "note": "said의 목적어",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "동격 the end",
      "note": "'종말'의 뜻 부연",
-     "spans": []
+     "spans": ["the end"]
     }
    ],
    "vocab": [
@@ -485,7 +485,7 @@
     {
      "tag": "지시 that",
      "note": "앞 예측을 받음",
-     "spans": []
+     "spans": ["that"]
     }
    ],
    "vocab": [
@@ -526,12 +526,12 @@
     {
      "tag": "명사절 that",
      "note": "said의 목적어",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "have another go",
      "note": "'다시 한 번 하다'",
-     "spans": []
+     "spans": ["had another go"]
     }
    ],
    "vocab": [
@@ -614,12 +614,12 @@
     {
      "tag": "will keep -ing",
      "note": "'계속 ~할 것이다'",
-     "spans": []
+     "spans": ["will keep", "pushing"]
     },
     {
      "tag": "push back",
      "note": "미루다",
-     "spans": []
+     "spans": ["pushing", "back"]
     }
    ],
    "vocab": [
@@ -666,7 +666,7 @@
     {
      "tag": "보어 명사",
      "note": "a safe one = a safe stance",
-     "spans": []
+     "spans": ["one"]
     }
    ],
    "vocab": [

@@ -173,12 +173,12 @@
     {
      "tag": "명사절 that",
      "note": "something that ~ 목적격 관계사",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "not something",
      "note": "'~하는 것이 아니다'",
-     "spans": []
+     "spans": ["not something"]
     }
    ],
    "vocab": [
@@ -227,12 +227,12 @@
     {
      "tag": "가주어 it-진주어 to부정사",
      "note": "it=가주어, to plan ~=진주어",
-     "spans": []
+     "spans": ["it", "to deliberately plan"]
     },
     {
      "tag": "부분부정",
      "note": "not always = '항상 ~인 것은 아니다'",
-     "spans": []
+     "spans": ["not always"]
     }
    ],
    "vocab": [
@@ -307,12 +307,12 @@
     {
      "tag": "however 역접",
      "note": "앞의 거리낌을 반전",
-     "spans": []
+     "spans": ["however"]
     },
     {
      "tag": "be essential to -ing",
      "note": "'~하는 데 필수적이다'",
-     "spans": []
+     "spans": ["essential to achieving"]
     }
    ],
    "vocab": [
@@ -363,12 +363,12 @@
     {
      "tag": "this 지칭",
      "note": "this concept = 퍼스널 브랜딩",
-     "spans": []
+     "spans": ["this"]
     },
     {
      "tag": "A and B",
      "note": "awareness와 anticipation 병렬",
-     "spans": []
+     "spans": ["and"]
     }
    ],
    "vocab": [
@@ -421,12 +421,12 @@
     {
      "tag": "조건 if",
      "note": "'~하지 못하면'의 가정·조건",
-     "spans": []
+     "spans": ["If"]
     },
     {
      "tag": "may not",
      "note": "'~하지 못할 수도 있다'",
-     "spans": []
+     "spans": ["may not"]
     }
    ],
    "vocab": [
@@ -487,12 +487,12 @@
     {
      "tag": "they 지칭",
      "note": "they = the opportunities",
-     "spans": []
+     "spans": ["they"]
     },
     {
      "tag": "관계사 that",
      "note": "opportunities that ~ 수식",
-     "spans": []
+     "spans": ["that"]
     }
    ],
    "vocab": [
@@ -561,12 +561,12 @@
     {
      "tag": "what 관계대명사",
      "note": "what you want ~ '~하는 것'",
-     "spans": []
+     "spans": ["what"]
     },
     {
      "tag": "명령문 조언",
      "note": "begin to ~ 실천 지시",
-     "spans": []
+     "spans": ["begin to be"]
     }
    ],
    "vocab": [

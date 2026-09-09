@@ -188,12 +188,12 @@
     {
      "tag": "비교급 faster than",
      "note": "'~보다 더 빠르게' 벌목 속도와 재성장 속도를 비교",
-     "spans": []
+     "spans": ["faster", "than"]
     },
     {
      "tag": "전치사+관계대명사",
      "note": "the rate at which ~: '~하는 속도'",
-     "spans": []
+     "spans": ["at which"]
     }
    ],
    "vocab": [
@@ -248,12 +248,12 @@
     {
      "tag": "상관접속사 not (just) A but B",
      "note": "'~때문만이 아니라 ~때문이다'로 진짜 이유를 강조",
-     "spans": []
+     "spans": ["not just", "but"]
     },
     {
      "tag": "주격 관계대명사 that",
      "note": "species ... that live in forests",
-     "spans": []
+     "spans": ["that"]
     }
    ],
    "vocab": [
@@ -336,12 +336,12 @@
     {
      "tag": "by -ing",
      "note": "'~함으로써'라는 수단",
-     "spans": []
+     "spans": ["by absorbing"]
     },
     {
      "tag": "동명사 병렬",
      "note": "absorbing ~ and reducing ~",
-     "spans": []
+     "spans": ["absorbing", "reducing"]
     }
    ],
    "vocab": [
@@ -398,7 +398,7 @@
     {
      "tag": "for + 목적격 + to부정사",
      "note": "for us to breathe: 부정사의 의미상 주어 us",
-     "spans": []
+     "spans": ["for us", "to breathe"]
     }
    ],
    "vocab": [
@@ -445,7 +445,7 @@
     {
      "tag": "There are 구문",
      "note": "'~가 있다/많다'",
-     "spans": []
+     "spans": ["There are"]
     }
    ],
    "vocab": [
@@ -494,7 +494,7 @@
     {
      "tag": "접속사 When",
      "note": "'~할 때'의 시간 부사절",
-     "spans": []
+     "spans": ["When"]
     }
    ],
    "vocab": [
@@ -553,12 +553,12 @@
     {
      "tag": "현재완료 has passed",
      "note": "폭풍이 지나간 완료 시점",
-     "spans": []
+     "spans": ["has passed"]
     },
     {
      "tag": "접속사 After",
      "note": "'~한 후에'",
-     "spans": []
+     "spans": ["After"]
     }
    ],
    "vocab": [
@@ -599,17 +599,17 @@
     {
      "tag": "가정법 otherwise (그렇지 않다면 ~할 텐데)",
      "note": "otherwise would aid: 베지 않았다면 도움이 됐을 것",
-     "spans": []
+     "spans": ["otherwise", "would"]
     },
     {
      "tag": "가주어 It",
      "note": "It's ironic to think ~",
-     "spans": []
+     "spans": ["It's"]
     },
     {
      "tag": "주격 관계대명사 that",
      "note": "forests ... that otherwise would aid",
-     "spans": []
+     "spans": ["that"]
     }
    ],
    "vocab": [

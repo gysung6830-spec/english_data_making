@@ -203,12 +203,12 @@
     {
      "tag": "접속사 when",
      "note": "'~할 때'",
-     "spans": []
+     "spans": ["When"]
     },
     {
      "tag": "수동 is overexcited",
      "note": "'과도하게 흥분되다'",
-     "spans": []
+     "spans": ["is overexcited"]
     }
    ],
    "vocab": [
@@ -281,22 +281,22 @@
     {
      "tag": "전치사+관계 in which",
      "note": "situations 수식",
-     "spans": []
+     "spans": ["in which"]
     },
     {
      "tag": "관계사 which",
      "note": "comments 수식",
-     "spans": []
+     "spans": ["which"]
     },
     {
      "tag": "관계사 what",
      "note": "'~하는 것'",
-     "spans": []
+     "spans": ["what"]
     },
     {
      "tag": "수동태",
      "note": "comments are made / what they are told — be+p.p.",
-     "spans": []
+     "spans": ["are made", "are told"]
     }
    ],
    "vocab": [
@@ -376,7 +376,7 @@
     {
      "tag": "재귀대명사 themselves",
      "note": "주어=목적어",
-     "spans": []
+     "spans": ["themselves"]
     }
    ],
    "vocab": [
@@ -429,12 +429,12 @@
     {
      "tag": "명사 보어",
      "note": "the best strategy is a hug",
-     "spans": []
+     "spans": ["is a hug"]
     },
     {
      "tag": "부정사 부사적용법(목적)",
      "note": "To help ~, to see ~, ... to defuse ~ — 목적의 부정사(⑤)",
-     "spans": []
+     "spans": ["To help", "to see", "to defuse"]
     }
    ],
    "vocab": [
@@ -511,12 +511,12 @@
     {
      "tag": "분사구문 allowing",
      "note": "'~하게 하면서'",
-     "spans": []
+     "spans": ["allowing"]
     },
     {
      "tag": "관계사 what",
      "note": "'~하는 것'",
-     "spans": []
+     "spans": ["what"]
     }
    ],
    "vocab": [

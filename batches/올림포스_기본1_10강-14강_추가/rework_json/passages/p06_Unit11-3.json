@@ -186,12 +186,12 @@
     {
      "tag": "관계사 that",
      "note": "the one 수식",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "최상급 the greatest",
      "note": "가장 큰 영향",
-     "spans": []
+     "spans": ["the greatest"]
     }
    ],
    "vocab": [
@@ -250,12 +250,12 @@
     {
      "tag": "There is something ... about",
      "note": "'~에는 ~한 무언가가 있다'",
-     "spans": []
+     "spans": ["There is something", "about"]
     },
     {
      "tag": "현재분사 arresting",
      "note": "형용사적",
-     "spans": []
+     "spans": ["arresting"]
     }
    ],
    "vocab": [
@@ -308,7 +308,7 @@
     {
      "tag": "수동 be charged with",
      "note": "'~로 가득 차다'",
-     "spans": []
+     "spans": ["is charged with"]
     }
    ],
    "vocab": [
@@ -367,7 +367,7 @@
     {
      "tag": "병렬 명사",
      "note": "fire engines/warning lights/Red Cross",
-     "spans": []
+     "spans": ["and"]
     }
    ],
    "vocab": [
@@ -420,12 +420,12 @@
     {
      "tag": "조건 if",
      "note": "'~라면'",
-     "spans": []
+     "spans": ["If"]
     },
     {
      "tag": "수동 to be seen",
      "note": "'보이도록'",
-     "spans": []
+     "spans": ["to be seen"]
     }
    ],
    "vocab": [
@@ -482,17 +482,17 @@
     {
      "tag": "so ... that",
      "note": "'너무 ~해서 …하다'",
-     "spans": []
+     "spans": ["so obvious", "that"]
     },
     {
      "tag": "A rather than B",
      "note": "'B라기보다 A'",
-     "spans": []
+     "spans": ["rather than"]
     },
     {
      "tag": "관계사 that",
      "note": "reddish-brown 수식",
-     "spans": []
+     "spans": ["that"]
     }
    ],
    "vocab": [
@@ -576,7 +576,7 @@
     {
      "tag": "either",
      "note": "'~도 (아니다)'",
-     "spans": []
+     "spans": ["either"]
     }
    ],
    "vocab": [
@@ -625,12 +625,12 @@
     {
      "tag": "only one",
      "note": "'단 하나의'",
-     "spans": []
+     "spans": ["only one"]
     },
     {
      "tag": "비유 like",
      "note": "'~처럼'",
-     "spans": []
+     "spans": ["like"]
     }
    ],
    "vocab": [

@@ -244,7 +244,7 @@
     {
      "tag": "이중부정",
      "note": "doesn't mean ... isn't a big deal — 부정+부정=강한 긍정(⑤)",
-     "spans": []
+     "spans": ["doesn't", "isn't"]
     }
    ],
    "vocab": [
@@ -291,7 +291,7 @@
     {
      "tag": "don't have to",
      "note": "~할 필요가 없다",
-     "spans": []
+     "spans": ["don't have to"]
     }
    ],
    "vocab": [
@@ -350,12 +350,12 @@
     {
      "tag": "관계사 that",
      "note": "something 수식",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "병렬 공통 조동사 can",
      "note": "can [sneak up and] [kill] — can이 두 동사에 공통",
-     "spans": []
+     "spans": ["can", "and"]
     }
    ],
    "vocab": [
@@ -404,17 +404,17 @@
     {
      "tag": "계속적 용법 who",
      "note": "pedestrians and bicyclists 부연",
-     "spans": []
+     "spans": ["who"]
     },
     {
      "tag": "so much so that",
      "note": "'그 정도가 심해서 (결과)'",
-     "spans": []
+     "spans": ["so much so that"]
     },
     {
      "tag": "병렬 공통 to",
      "note": "to [detect] and [orient to] cars — to가 두 부정사에 공통",
-     "spans": []
+     "spans": ["to detect", "and"]
     }
    ],
    "vocab": [
@@ -497,12 +497,12 @@
     {
      "tag": "동격 that",
      "note": "a reminder 뒤 내용 부연",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "동명사 주어",
      "note": "having both cues",
-     "spans": []
+     "spans": ["having"]
     }
    ],
    "vocab": [

@@ -193,22 +193,22 @@
     {
      "tag": "관계사 that",
      "note": "behaviour 수식",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "대시 부연",
      "note": "독특한 행동을 풀어 설명",
-     "spans": []
+     "spans": ["—"]
     },
     {
      "tag": "분사(현재분사 수식)",
      "note": "teenagers using social media = teenagers who use~ (후치수식)",
-     "spans": []
+     "spans": ["using"]
     },
     {
      "tag": "공통 조동사 will",
      "note": "will [post] or [share] — will이 두 동사에 공통",
-     "spans": []
+     "spans": ["will"]
     }
    ],
    "vocab": [
@@ -272,7 +272,7 @@
     {
      "tag": "조건 if",
      "note": "'~라면'",
-     "spans": []
+     "spans": ["if"]
     }
    ],
    "vocab": [
@@ -360,12 +360,12 @@
     {
      "tag": "관계사 what",
      "note": "for의 목적어 '~하는 것'",
-     "spans": []
+     "spans": ["what"]
     },
     {
      "tag": "as a way to",
      "note": "'~하는 방법으로서'",
-     "spans": []
+     "spans": ["as a way to"]
     }
    ],
    "vocab": [
@@ -416,12 +416,12 @@
     {
      "tag": "would rather A than B",
      "note": "'B하느니 A하겠다'",
-     "spans": []
+     "spans": ["rather", "than"]
     },
     {
      "tag": "조건 if",
      "note": "'~라면'",
-     "spans": []
+     "spans": ["If"]
     }
    ],
    "vocab": [
@@ -476,7 +476,7 @@
     {
      "tag": "동명사 주어",
      "note": "Not getting a reaction",
-     "spans": []
+     "spans": ["getting"]
     }
    ],
    "vocab": [

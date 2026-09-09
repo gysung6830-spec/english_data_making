@@ -182,17 +182,17 @@
     {
      "tag": "명사절 that",
      "note": "is의 보어(is that ~)",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "A rather than B",
      "note": "'B라기보다 A'",
-     "spans": []
+     "spans": ["rather than"]
     },
     {
      "tag": "최상급",
      "note": "One of the biggest reasons — biggest 최상급",
-     "spans": []
+     "spans": ["biggest"]
     },
     {
      "tag": "관계부사 생략",
@@ -272,7 +272,7 @@
     {
      "tag": "관계사 in which",
      "note": "perfection 수식",
-     "spans": []
+     "spans": ["in which"]
     },
     {
      "tag": "명사절 생략",
@@ -344,7 +344,7 @@
     {
      "tag": "비교 not like",
      "note": "'~와 같지 않다'",
-     "spans": []
+     "spans": ["not like"]
     }
    ],
    "vocab": [
@@ -397,12 +397,12 @@
     {
      "tag": "관계사 that",
      "note": "address 수식",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "상관접속사 not A but B",
      "note": "not looking for a performance, but for an address(⑤)",
-     "spans": []
+     "spans": ["not", "but"]
     }
    ],
    "vocab": [
@@ -469,17 +469,17 @@
     {
      "tag": "by -ing",
      "note": "'~함으로써'",
-     "spans": []
+     "spans": ["making"]
     },
     {
      "tag": "make + 목적어 + 원형",
      "note": "'~을 …하게 하다'",
-     "spans": []
+     "spans": ["making", "seem"]
     },
     {
      "tag": "비교급",
      "note": "seem more human — more+형용사 비교급",
-     "spans": []
+     "spans": ["more"]
     }
    ],
    "vocab": [

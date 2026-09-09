@@ -200,12 +200,12 @@
     {
      "tag": "관계사 that",
      "note": "forest gardening 수식",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "분사(과거분사구)",
      "note": "as practiced by the peoples = as (it was) practiced — forest gardening 수식(수동)",
-     "spans": []
+     "spans": ["practiced"]
     }
    ],
    "vocab": [
@@ -336,7 +336,7 @@
     {
      "tag": "병렬 명사구",
      "note": "밀밭/논/양·염소 무리",
-     "spans": []
+     "spans": ["and"]
     }
    ],
    "vocab": [
@@ -417,12 +417,12 @@
     {
      "tag": "분사 measured",
      "note": "'~로 측정될 때'",
-     "spans": []
+     "spans": ["measured"]
     },
     {
      "tag": "Biologically speaking",
      "note": "'생물학적으로 말하면'",
-     "spans": []
+     "spans": ["Biologically speaking"]
     }
    ],
    "vocab": [
@@ -483,7 +483,7 @@
     {
      "tag": "도치(So+동사+주어)",
      "note": "앞 문장을 받아 '~도 그랬다'",
-     "spans": []
+     "spans": ["So did"]
     }
    ],
    "vocab": [
@@ -526,12 +526,12 @@
     {
      "tag": "관계사 that",
      "note": "Crops 수식",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "수동 were stored",
      "note": "'저장된'",
-     "spans": []
+     "spans": ["were stored"]
     }
    ],
    "vocab": [
@@ -594,7 +594,7 @@
     {
      "tag": "provide A for B",
      "note": "B에게 A를 제공하다",
-     "spans": []
+     "spans": ["provided", "for"]
     }
    ],
    "vocab": [
@@ -643,7 +643,7 @@
     {
      "tag": "병렬 주어",
      "note": "Garbage and ... waste",
-     "spans": []
+     "spans": ["and"]
     }
    ],
    "vocab": [
@@ -692,7 +692,7 @@
     {
      "tag": "Thanks to",
      "note": "'~덕분에'",
-     "spans": []
+     "spans": ["Thanks to"]
     }
    ],
    "vocab": [

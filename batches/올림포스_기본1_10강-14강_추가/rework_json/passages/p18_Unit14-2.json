@@ -200,7 +200,7 @@
     {
      "tag": "부정사 형용사적 용법",
      "note": "the ability to detect: '감지하는 능력'로 명사를 수식",
-     "spans": []
+     "spans": ["to detect"]
     }
    ],
    "vocab": [
@@ -253,7 +253,7 @@
     {
      "tag": "과거진행",
      "note": "was searching: 그 시점에 진행 중이던 탐색",
-     "spans": []
+     "spans": ["was searching"]
     }
    ],
    "vocab": [
@@ -306,7 +306,7 @@
     {
      "tag": "부사구",
      "note": "several days apart: '며칠 간격으로'",
-     "spans": []
+     "spans": ["several days apart"]
     }
    ],
    "vocab": [
@@ -359,12 +359,12 @@
     {
      "tag": "대조의 접속사 while (~인 반면에)",
      "note": "앞 절(항성 불변)과 while절(행성 이동)을 대조",
-     "spans": []
+     "spans": ["while"]
     },
     {
      "tag": "현재시제",
      "note": "일반적 사실을 나타내는 현재",
-     "spans": []
+     "spans": ["remain", "moves"]
     }
    ],
    "vocab": [
@@ -419,7 +419,7 @@
     {
      "tag": "관계대명사 that",
      "note": "a small dot that moved: 앞의 명사를 수식하는 주격 관계사",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "수사의문문",
@@ -481,7 +481,7 @@
     {
      "tag": "관계대명사 that",
      "note": "a machine that would flip ~: 기계를 수식하는 주격 관계사",
-     "spans": []
+     "spans": ["that"]
     }
    ],
    "vocab": [
@@ -534,12 +534,12 @@
     {
      "tag": "지각동사+O+-ing",
      "note": "noticed one dot moving: 점이 움직이는 것을 알아챔",
-     "spans": []
+     "spans": ["noticed", "moving"]
     },
     {
      "tag": "접속사 as",
      "note": "'~할 때'의 뜻",
-     "spans": []
+     "spans": ["as"]
     }
    ],
    "vocab": [
@@ -592,7 +592,7 @@
     {
      "tag": "계속적 용법 관계대명사 (, which)",
      "note": "앞 내용(Pluto)을 부연 설명",
-     "spans": []
+     "spans": ["which"]
     }
    ],
    "vocab": [

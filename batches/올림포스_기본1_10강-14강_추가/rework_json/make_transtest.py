@@ -19,6 +19,30 @@ order=json.load(open(SC+"/order.json"))
 P=[json.load(open(SC+"/passages/"+fn)) for fn in order]
 def esc(s): return html.escape(str(s or ""))
 
+def _bpat(e):  # 단어 경계(알파벳 양끝) 지키는 패턴
+    left = r"(?<![A-Za-z])" if e[:1].isalpha() else ""
+    right = r"(?![A-Za-z])" if e[-1:].isalpha() else ""
+    return left + re.escape(e) + right
+
+def hl_en(s):
+    """영어 원문에서 어법칩 spans 부분에 형광펜만(라벨 없이)."""
+    text = esc(s.get("english",""))
+    spans = []
+    for g in s.get("grammar",[]):
+        for sp in (g.get("spans") or []):
+            e = esc(str(sp)).strip()
+            if e: spans.append(e)
+    toks = {}
+    for i, e in enumerate(sorted(set(spans), key=lambda x: -len(x))):
+        m = re.search(_bpat(e), text, re.IGNORECASE)
+        if not m: continue
+        t = f"\x00h{i}\x00"
+        toks[t] = f'<mark class="hlg3">{text[m.start():m.end()]}</mark>'
+        text = text[:m.start()] + t + text[m.end():]
+    for t, h in toks.items():
+        text = text.replace(t, h)
+    return text
+
 CSS=("""
 __FONTS__
 @page{ size:A4; margin:13mm 12mm 13mm 12mm;
@@ -48,6 +72,7 @@ body{font-family:'NanumSquareRound',"Malgun Gothic",sans-serif; color:#22262b; f
 .sl{color:#b9c2ba; font-weight:700; padding:0 2px;}
 .fill{display:inline-block; min-width:66px; border-bottom:1.4px solid var(--green); vertical-align:-1px;}
 .key{color:var(--indigo); font-weight:800; border-bottom:1.4px solid var(--indigo);}
+mark.hlg3{ background:#d8d5f0; padding:0 1px; border-radius:2px; color:inherit; }
 """).replace("__FOOT__",FOOT).replace("__FONTS__",FONTFACE)
 
 _MK=re.compile(r"\[\[(.+?)\]\]")
@@ -67,7 +92,7 @@ def card(p, ans):
     h=[f'<div class="card"><div class="c-h"><span class="c-no">{no}</span><span class="c-ti">{ti}</span></div>']
     for s in p["sentences"]:
         h.append('<div class="s">')
-        h.append(f'<div class="en"><span class="n">{s["id"]}</span>{esc(s["english"])}</div>')
+        h.append(f'<div class="en"><span class="n">{s["id"]}</span>{hl_en(s)}</div>')
         h.append(f'<div class="ko">{ko_line(s, ans)}</div>')
         h.append('</div>')
     h.append('</div>')

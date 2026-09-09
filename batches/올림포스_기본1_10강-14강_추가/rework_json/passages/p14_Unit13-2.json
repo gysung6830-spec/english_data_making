@@ -177,7 +177,7 @@
     {
      "tag": "수동 is spent",
      "note": "'소비되다'",
-     "spans": []
+     "spans": ["is spent"]
     },
     {
      "tag": "관계부사 생략",
@@ -245,12 +245,12 @@
     {
      "tag": "A rather than B",
      "note": "'B가 아니라 A'",
-     "spans": []
+     "spans": ["rather than"]
     },
     {
      "tag": "현재완료 have penetrated",
      "note": "'침투해 왔다'",
-     "spans": []
+     "spans": ["have penetrated"]
     }
    ],
    "vocab": [
@@ -325,7 +325,7 @@
     {
      "tag": "관계사 that",
      "note": "individuals 수식",
-     "spans": []
+     "spans": ["that"]
     }
    ],
    "vocab": [
@@ -396,12 +396,12 @@
     {
      "tag": "병렬 동사",
      "note": "posted·pinned·tweeted·sent·received",
-     "spans": []
+     "spans": ["posted", "pinned", "tweeted", "sent", "received"]
     },
     {
      "tag": "공통 조동사 have",
      "note": "have [posted, pinned, tweeted, sent, received] — have가 공통",
-     "spans": []
+     "spans": ["have"]
     }
    ],
    "vocab": [
@@ -464,12 +464,12 @@
     {
      "tag": "명사절 that",
      "note": "worried의 목적어",
-     "spans": []
+     "spans": ["that"]
     },
     {
      "tag": "so+형용사+(that) 강조·결과",
      "note": "so prolific, (that) researchers worried — that 생략(⑤)",
-     "spans": []
+     "spans": ["so"]
     }
    ],
    "vocab": [
