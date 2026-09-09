@@ -3248,8 +3248,10 @@ def chunk_pairs(sentence: dict) -> list[dict]:
 GRAMMAR_RULES = [
     ("관계대명사", r"\b(?:[a-z]+)\s+(who|whom|which|that)\s+(?=\w)",
      "앞의 명사를 뒤 문장이 통째로 꾸밉니다. 관계사 앞에서 한 번 끊어 읽으세요."),
-    ("관계부사", r"\b(where|when|why)\s+(?=\w+\s+\w)",
-     "장소·때·이유를 받아 뒤 문장이 꾸밉니다."),
+    ("관계부사", r"[a-z]{3,},?\s+(where|when|why)\s+(?=\w+\s+\w)",
+     "앞의 명사(장소·때·이유)를 뒤 문장이 꾸밉니다. 문장 맨 앞의 When 과는 다릅니다."),
+    ("부사절 접속사", r"^\s*(When|While|After|Before|Since|Although|Though|Because|If|Unless)\b",
+     "이 절이 끝나는 자리까지가 곁가지입니다. 주절이 어디서 시작하는지 찾으세요."),
     ("분사구문", r",\s+(\w+ing)\b",
      "접속사와 주어를 지우고 -ing 로 이어 붙인 자리입니다. '~하면서/~해서' 로 읽습니다."),
     ("수동태", r"\b(?:am|is|are|was|were|be|been|being)\s+\w+(?:ed|en)\b",
@@ -3287,4 +3289,69 @@ def grammar_hints(sentence: str) -> list[dict]:
     for tag, pattern, note in GRAMMAR_RULES:
         if re.search(pattern, sentence or "", re.I):
             out.append({"tag": tag, "note": note})
+    return out
+
+
+def grammar_span(sentence: str, tag: str) -> tuple[int, int] | None:
+    """그 문법이 문장의 어느 자리인지. 형광펜을 칠 자리입니다."""
+    for name, pattern, _note in GRAMMAR_RULES:
+        if name != tag:
+            continue
+        m = re.search(pattern, sentence or "", re.I)
+        if not m:
+            return None
+        # 규칙이 괄호로 짚어 둔 자리가 있으면 그쪽만 칠합니다. 앞 명사까지
+        # 물고 오면 무엇을 물은 것인지 흐려집니다 (ability, where → where).
+        return (m.span(1) if m.groups() and m.group(1) else m.span())
+    return None
+
+
+def grammar_quiz(sentence: str, marked: list[dict], choices: int = 4) -> list[dict]:
+    """형광펜 칠 자리와, 그 자리에서 낼 객관식 보기.
+
+    무엇이 있는지 미리 알려 주면 읽고 지나갈 뿐입니다. 자리만 칠해 두고
+    '이게 뭐냐' 를 묻는 편이, 문장을 다시 들여다보게 만듭니다.
+
+    겹치는 자리는 앞의 것만 씁니다 — 형광펜이 겹치면 어느 쪽을 물은 것인지
+    알 수 없습니다.
+    """
+    tags = [t for t, _, _ in GRAMMAR_RULES]
+    out, taken = [], []
+    for g in marked or []:
+        tag = g.get("tag", "")
+        at = grammar_span(sentence, tag)
+        if at is None:
+            continue
+        if any(at[0] < end and start < at[1] for start, end in taken):
+            continue                                  # 이미 칠한 자리와 겹칩니다
+        taken.append(at)
+        # 오답 보기는 늘 같은 것이 나와야 합니다 — 새로 고칠 때마다 바뀌면
+        # 답을 외운 것인지 아는 것인지 가릴 수 없습니다.
+        seed = hashlib.sha256(f"{sentence}|{tag}".encode()).hexdigest()
+        others = sorted((t for t in tags if t != tag),
+                        key=lambda t: hashlib.sha256((seed + t).encode()).hexdigest())
+        picks = [tag] + others[:max(0, choices - 1)]
+        picks.sort(key=lambda t: hashlib.sha256((seed + "|" + t).encode()).hexdigest())
+        # 형광펜 양 끝의 빈칸은 빼 둡니다 — 칠한 자리가 어디까지인지 흐려집니다
+        start, end = at
+        while start < end and sentence[start].isspace():
+            start += 1
+        while end > start and sentence[end - 1].isspace():
+            end -= 1
+        out.append({"tag": tag, "note": g.get("note", ""),
+                    "start": start, "end": end,
+                    "text": sentence[start:end], "choices": picks})
+    return sorted(out, key=lambda x: x["start"])
+
+
+def mark_sentence(sentence: str, marks: list[dict]) -> list[dict]:
+    """문장을 '보통 글 / 형광펜 자리' 토막으로 나눕니다. 화면이 그대로 그립니다."""
+    out, at = [], 0
+    for i, m in enumerate(marks):
+        if m["start"] > at:
+            out.append({"mark": False, "text": sentence[at:m["start"]]})
+        out.append({"mark": True, "no": i, "text": sentence[m["start"]:m["end"]]})
+        at = m["end"]
+    if at < len(sentence):
+        out.append({"mark": False, "text": sentence[at:]})
     return out

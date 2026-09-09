@@ -1833,12 +1833,16 @@ def memorize_item(slug, unit_id, item_id):
     # 따로 만들면 같은 문장이 세 군데서 어긋나기 시작합니다.
     rows = []
     for i, sent in enumerate(item["sentences"], 1):
+        marks = sc.grammar_quiz(sent.get("en", ""), sent.get("grammar"))
         rows.append({"no": i, "en": sent.get("en", ""), "ko": sent.get("ko", ""),
                      "chunks": sc.chunk_pairs(sent),
-                     "grammar": sent.get("grammar") or []})
+                     "grammar": sent.get("grammar") or [],
+                     "marks": marks,
+                     "parts": sc.mark_sentence(sent.get("en", ""), marks)})
     return render_template(
         "memorize_item.html", b=book, unit=unit, item=item, rows=rows,
-        has_grammar=any(r["grammar"] for r in rows),
+        has_grammar=any(r["marks"] for r in rows),
+        mark_total=sum(len(r["marks"]) for r in rows),
         terms=item.get("terms") or [],
         levels=sc.BLANK_LEVELS, no=where + 1, total=len(flat),
         prev=flat[where - 1] if where else None,

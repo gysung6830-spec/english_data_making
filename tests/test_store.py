@@ -2998,7 +2998,24 @@ def test_passage_memorizing_reads_then_blanks():
     assert marked, "예시 지문에 문법 자리가 하나도 없습니다"
     u0, x0, _ = marked[0]
     gram = body(c.get(f"/memorize/{b['slug']}/{u0['id']}/{x0['id']}"))
-    assert "문법" in gram and "gr-point" in gram
+    # 무엇이 있는지 미리 알려 주지 않습니다. 자리만 칠하고 '이게 뭐냐' 를 묻습니다.
+    assert "gr-mark" in gram and "이건 어떤 문법일까요?" in gram
+    assert "gr-choices" in gram
+    tags = {t for t, _, _ in sc.GRAMMAR_RULES}
+    for sn in x0["sentences"]:
+        for m in sc.grammar_quiz(sn["en"], sn.get("grammar")):
+            assert m["text"] and m["text"] in sn["en"], m
+            assert m["text"] == m["text"].strip()      # 형광펜 양 끝에 빈칸이 없어야
+            assert m["tag"] in m["choices"] and len(m["choices"]) == 4, m
+            assert len(set(m["choices"])) == 4 and set(m["choices"]) <= tags, m
+            # 보기 차례는 늘 같아야 합니다 (새로 고칠 때마다 바뀌면 외운 것과 못 가립니다)
+            again = sc.grammar_quiz(sn["en"], sn.get("grammar"))
+            assert [q["choices"] for q in again] == \
+                [q["choices"] for q in sc.grammar_quiz(sn["en"], sn.get("grammar"))]
+    # 형광펜이 겹치면 어느 쪽을 물은 것인지 알 수 없습니다
+    two = sc.grammar_quiz("It means working at the edge of your ability, where mistakes are frequent.",
+                          [{"tag": "관계부사", "note": ""}, {"tag": "관계부사", "note": ""}])
+    assert len(two) == 1, two
     # 기계가 짚어 주되, 담은 것만 나갑니다
     hints = sc.grammar_hints("Many people believe that talent is something you are born with.")
     assert any(h["tag"] == "접속사 that" for h in hints), hints
