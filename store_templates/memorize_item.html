@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}{{ item.title or '지문 암기' }} · {{ b.name }} · {{ site.brand }}{% endblock %}
-{% block desc %}{{ b.name }} {{ unit.name }} 지문을 문장마다 해석과 함께 읽고, 빈칸 5단계로 외웁니다.{% endblock %}
+{% block title %}{{ item.title or '지문' }} · {{ b.name }} · {{ site.brand }}{% endblock %}
+{% block desc %}{{ b.name }} {{ unit.name }} 지문을 직독직해 · 지문이해 · 지문암기 · 문법 네 갈래로 공부합니다.{% endblock %}
 
 {% block body %}
 <section class="section">
@@ -13,36 +13,84 @@
         <h2>{{ item.title or '지문' }}</h2>
         {% if item.source %}<p class="muted mb-0">{{ item.source }}</p>{% endif %}
       </div>
-      <div class="mem-tabs" role="tablist">
-        <button type="button" class="mt on" data-tab="read">본문 분석</button>
-        <button type="button" class="mt" data-tab="blank">본문 암기</button>
-      </div>
     </div>
 
-    {# ---- 1. 본문 분석 — 문장마다 해석을 켰다 껐다 ------------------------- #}
-    <div class="mem-pane" id="pane-read">
+    {# 한 지문을 네 갈래로. 단위는 언제나 '문장' 이거나 '의미 덩어리' 입니다 —
+       낱말로 내려가면 지문 공부가 아니라 단어 공부가 됩니다. #}
+    <div class="mem-tabs" role="tablist">
+      <button type="button" class="mt on" data-tab="chunk">직독직해</button>
+      <button type="button" class="mt" data-tab="read">지문이해</button>
+      <button type="button" class="mt" data-tab="blank">지문암기</button>
+      {% if has_grammar %}<button type="button" class="mt" data-tab="gram">문법</button>{% endif %}
+    </div>
+
+    {# ---- 1. 직독직해 — 끊어 읽고, 덩어리째 뜻을 얹습니다 ------------------ #}
+    <div class="mem-pane" id="pane-chunk">
+      <p class="hint">앞에서 뒤로, <b>끊어진 자리마다 한 번씩 쉬며</b> 읽으세요.
+        덩어리를 누르면 그 덩어리의 뜻이 열립니다.</p>
       <div class="mem-tools">
-        <button type="button" class="btn btn-ghost btn-sm" id="ko-all">해석 모두 보기</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="ck-all">뜻 모두 보기</button>
         <button type="button" class="btn btn-ghost btn-sm" id="say-all">전체 듣기</button>
       </div>
-      <ol class="sent-list">
-        {% for s in item.sentences %}
-          <li class="sent" data-en="{{ s.en }}">
-            <span class="sent-no">{{ loop.index }}</span>
-            <div class="sent-body">
-              <p class="sent-en">{{ s.en }}</p>
-              {% if s.ko %}<p class="sent-ko" hidden>{{ s.ko }}</p>{% endif %}
+      {% for r in rows %}
+        <div class="ck-sent">
+          <span class="sent-no">{{ r.no }}</span>
+          <div class="ck-body">
+            <div class="ck-row">
+              {% for c in r.chunks %}
+                <span class="ck" {% if c.ko %}data-ko="{{ c.ko }}"{% endif %}>
+                  <b>{{ c.en }}</b>
+                  {% if c.ko %}<i hidden>{{ c.ko }}</i>{% endif %}
+                </span>
+              {% endfor %}
             </div>
-            <button type="button" class="sent-say" aria-label="이 문장 듣기">🔊</button>
-          </li>
-        {% endfor %}
-      </ol>
+            {% if r.ko %}<p class="ck-ko" hidden>{{ r.ko }}</p>{% endif %}
+          </div>
+          <button type="button" class="sent-say" data-en="{{ r.en }}" aria-label="이 문장 듣기">🔊</button>
+        </div>
+      {% endfor %}
+    </div>
+
+    {# ---- 2. 지문이해 — 문장을 흐름대로 세웁니다 --------------------------- #}
+    <div class="mem-pane" id="pane-read" hidden>
+      {% if rows|length >= 3 %}
+        <p class="hint">글이 흘러가는 <b>차례대로</b> 문장을 누르세요.
+          연결어와 지시어(this·so·however)가 실마리입니다.</p>
+        <div class="mem-tools">
+          <button type="button" class="btn btn-ghost btn-sm" id="ord-reset">다시 섞기</button>
+          <div class="spacer"></div>
+          <span class="ord-count"><b id="ord-n">0</b> / {{ rows|length }}</span>
+        </div>
+        <ol class="ord-done" id="ord-done"></ol>
+        <div class="ord-pool" id="ord-pool"></div>
+        <div class="mem-score" id="ord-score" hidden></div>
+      {% else %}
+        <p class="empty">문장이 적어 차례 맞추기는 건너뜁니다.</p>
+      {% endif %}
+
+      <div class="mem-full">
+        <h3>지문 전체와 해석</h3>
+        <ol class="sent-list">
+          {% for r in rows %}
+            <li class="sent">
+              <span class="sent-no">{{ r.no }}</span>
+              <div class="sent-body">
+                <p class="sent-en">{{ r.en }}</p>
+                {% if r.ko %}<p class="sent-ko" hidden>{{ r.ko }}</p>{% endif %}
+              </div>
+              <button type="button" class="sent-say" data-en="{{ r.en }}" aria-label="이 문장 듣기">🔊</button>
+            </li>
+          {% endfor %}
+        </ol>
+        <button type="button" class="btn btn-ghost btn-sm" id="ko-all">해석 모두 보기</button>
+      </div>
+
       {% if item.summary %}
         <div class="mem-summary"><b>한 줄 요약</b><p>{{ item.summary }}</p></div>
       {% endif %}
     </div>
 
-    {# ---- 2. 본문 암기 — 빈칸을 채웁니다 ---------------------------------- #}
+    {# ---- 3. 지문암기 — 빈칸을 채웁니다 ------------------------------------ #}
     <div class="mem-pane" id="pane-blank" hidden>
       <div class="mem-tools">
         <span class="mt-label">난이도</span>
@@ -58,11 +106,34 @@
         <button type="button" class="btn btn-ghost btn-sm" id="peek">잠깐 보기</button>
         <button type="button" class="btn btn-primary btn-sm" id="grade">채점하기</button>
       </div>
-      <p class="hint" id="blank-hint">빈칸을 채우고 <b>채점하기</b>를 누르세요.
+      <p class="hint">빈칸을 채우고 <b>채점하기</b>를 누르세요.
         칸에서 <b>Tab</b> 이나 <b>Enter</b> 로 다음 칸으로 넘어갑니다.</p>
       <ol class="sent-list" id="blank-list"></ol>
       <div class="mem-score" id="score" hidden></div>
     </div>
+
+    {# ---- 4. 문법 — 이 지문에 실제로 들어 있는 것만 ------------------------ #}
+    {% if has_grammar %}
+      <div class="mem-pane" id="pane-gram" hidden>
+        <p class="hint">문법책을 옮겨 놓은 것이 아닙니다.
+          <b>이 지문의 이 문장에</b> 들어 있어서 짚는 것입니다.</p>
+        {% for r in rows if r.grammar %}
+          <div class="gr-item">
+            <div class="gr-sent">
+              <span class="sent-no">{{ r.no }}</span>
+              <p>{{ r.en }}</p>
+            </div>
+            {% if r.ko %}<p class="gr-ko">{{ r.ko }}</p>{% endif %}
+            {% for g in r.grammar %}
+              <div class="gr-point">
+                <b class="gr-tag">{{ g.tag }}</b>
+                <p>{{ g.note }}</p>
+              </div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
 
     <div class="mem-move">
       {% if prev %}
@@ -83,22 +154,105 @@
 <script>
 (function () {
   var LEVELS = {{ levels|tojson }};
-  var SENTS = {{ item.sentences|map(attribute='en')|list|tojson }};
+  var SENTS = {{ rows|map(attribute='en')|list|tojson }};
   var STOP = {{ stopwords|tojson }};
 
-  /* ---- 탭 ---- */
+  /* ---- 갈래 바꾸기 ---- */
+  var PANES = {chunk: 'pane-chunk', read: 'pane-read', blank: 'pane-blank', gram: 'pane-gram'};
   document.querySelectorAll('.mt').forEach(function (b) {
     b.addEventListener('click', function () {
       document.querySelectorAll('.mt').forEach(function (x) { x.classList.remove('on'); });
       b.classList.add('on');
-      var blank = b.dataset.tab === 'blank';
-      document.getElementById('pane-read').hidden = blank;
-      document.getElementById('pane-blank').hidden = !blank;
-      if (blank && !document.querySelector('#blank-list .bl')) build();
+      Object.keys(PANES).forEach(function (k) {
+        var el = document.getElementById(PANES[k]);
+        if (el) el.hidden = (k !== b.dataset.tab);
+      });
+      if (b.dataset.tab === 'blank' && !document.querySelector('#blank-list .bl')) build();
+      if (b.dataset.tab === 'read' && !document.querySelector('#ord-pool .ord')) shuffle();
     });
   });
 
-  /* ---- 해석 켜기·끄기 ---- */
+  /* ---- 소리 내어 읽기 ---- */
+  function say(text) {
+    if (!window.speechSynthesis) return;
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US'; u.rate = 0.92;
+    speechSynthesis.speak(u);
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.sent-say');
+    if (b && b.dataset.en) say(b.dataset.en);
+  });
+  var sayAll = document.getElementById('say-all');
+  sayAll && sayAll.addEventListener('click', function () { say(SENTS.join(' ')); });
+
+  /* ---- 1. 직독직해 ---- */
+  document.querySelectorAll('.ck').forEach(function (c) {
+    c.addEventListener('click', function () {
+      var i = c.querySelector('i');
+      if (i) i.hidden = !i.hidden;
+      else {                                   /* 덩어리 뜻이 없으면 문장 해석을 엽니다 */
+        var ko = c.closest('.ck-body').querySelector('.ck-ko');
+        if (ko) ko.hidden = !ko.hidden;
+      }
+    });
+  });
+  var ckAll = document.getElementById('ck-all');
+  ckAll && ckAll.addEventListener('click', function () {
+    var all = document.querySelectorAll('.ck i, .ck-ko');
+    var show = false;
+    all.forEach(function (x) { if (x.hidden) show = true; });
+    all.forEach(function (x) { x.hidden = !show; });
+    ckAll.textContent = show ? '뜻 모두 숨기기' : '뜻 모두 보기';
+  });
+
+  /* ---- 2. 지문이해 — 차례 맞추기 ----
+     낱말이 아니라 문장을 옮깁니다. 글의 흐름을 봐야 풀리도록. */
+  var pool = document.getElementById('ord-pool');
+  var done = document.getElementById('ord-done');
+  var picked = 0;
+  function shuffle() {
+    if (!pool) return;
+    picked = 0;
+    pool.innerHTML = ''; done.innerHTML = '';
+    document.getElementById('ord-score').hidden = true;
+    document.getElementById('ord-n').textContent = '0';
+    var order = SENTS.map(function (s, i) { return i; });
+    for (var i = order.length - 1; i > 0; i--) {          /* 섞기 */
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = order[i]; order[i] = order[j]; order[j] = t;
+    }
+    order.forEach(function (i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'ord'; b.dataset.i = i;
+      b.textContent = SENTS[i];
+      b.addEventListener('click', function () { pick(b); });
+      pool.appendChild(b);
+    });
+  }
+  function pick(b) {
+    var want = picked;
+    if (parseInt(b.dataset.i, 10) !== want) {
+      b.classList.add('no');
+      setTimeout(function () { b.classList.remove('no'); }, 600);
+      return;
+    }
+    picked++;
+    b.remove();
+    var li = document.createElement('li');
+    li.textContent = SENTS[want];
+    done.appendChild(li);
+    document.getElementById('ord-n').textContent = picked;
+    if (picked === SENTS.length) {
+      var box = document.getElementById('ord-score');
+      box.hidden = false; box.className = 'mem-score all';
+      box.innerHTML = '<b>다 세우셨습니다.</b> 이제 지문암기로 넘어가 보세요.';
+    }
+  }
+  var reset = document.getElementById('ord-reset');
+  reset && reset.addEventListener('click', shuffle);
+
   document.querySelectorAll('.sent-en').forEach(function (p) {
     p.addEventListener('click', function () {
       var ko = p.parentNode.querySelector('.sent-ko');
@@ -113,24 +267,9 @@
     koAll.textContent = show ? '해석 모두 숨기기' : '해석 모두 보기';
   });
 
-  /* ---- 소리 내어 읽기 ---- */
-  function say(text) {
-    if (!window.speechSynthesis) return;
-    speechSynthesis.cancel();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = 'en-US'; u.rate = 0.92;
-    speechSynthesis.speak(u);
-  }
-  document.querySelectorAll('.sent-say').forEach(function (b) {
-    b.addEventListener('click', function () { say(b.closest('.sent').dataset.en); });
-  });
-  var sayAll = document.getElementById('say-all');
-  sayAll && sayAll.addEventListener('click', function () { say(SENTS.join(' ')); });
-
-  /* ---- 빈칸 만들기 ----
+  /* ---- 3. 지문암기 — 빈칸 ----
      가릴 값어치가 큰 낱말부터 가립니다. 기능어(the·of·is)부터 가리면
-     실력이 아니라 눈치를 시험하게 됩니다. 문장마다 따로 세어, 짧은 문장이
-     통째로 지워지는 일이 없게 합니다. */
+     실력이 아니라 눈치를 시험하게 됩니다. */
   function score(word) {
     var bare = word.replace(/[^A-Za-z'-]/g, '').toLowerCase();
     if (!bare) return -1;
@@ -160,10 +299,7 @@
       var body = document.createElement('div');
       body.className = 'sent-body bl-body';
       parts.forEach(function (w, i) {
-        if (!hide[i]) {
-          body.appendChild(document.createTextNode(w));
-          return;
-        }
+        if (!hide[i]) { body.appendChild(document.createTextNode(w)); return; }
         /* 낱말에 붙은 쉼표·마침표는 남겨 둡니다. 그것까지 받아쓰게 하면
            틀린 곳이 어디인지 흐려집니다. */
         var m = w.match(/^([^A-Za-z]*)(.*?)([^A-Za-z]*)$/);
@@ -180,11 +316,10 @@
       li.appendChild(no); li.appendChild(body);
       var say1 = document.createElement('button');
       say1.type = 'button'; say1.className = 'sent-say'; say1.textContent = '🔊';
-      say1.addEventListener('click', function () { say(sent); });
+      say1.dataset.en = sent;
       li.appendChild(say1);
       list.appendChild(li);
     });
-    /* Enter 로 다음 칸 */
     var ins = list.querySelectorAll('.bl-in');
     ins.forEach(function (inp, i) {
       inp.addEventListener('keydown', function (e) {
@@ -204,8 +339,6 @@
       build();
     });
   });
-
-  /* ---- 채점 ---- */
   function tidy(v) { return (v || '').trim().toLowerCase().replace(/[^a-z'-]/g, ''); }
   document.getElementById('grade').addEventListener('click', function () {
     var ins = document.querySelectorAll('.bl-in');
@@ -215,7 +348,7 @@
       inp.classList.toggle('ok', ok);
       inp.classList.toggle('no', !ok);
       if (ok) { right++; return; }
-      inp.value = inp.dataset.want;                 /* 틀린 칸은 답을 보여 줍니다 */
+      inp.value = inp.dataset.want;
     });
     var box = document.getElementById('score');
     var pct = ins.length ? Math.round(right / ins.length * 100) : 0;
@@ -227,8 +360,7 @@
     box.scrollIntoView({behavior: 'smooth', block: 'center'});
   });
   document.getElementById('peek').addEventListener('click', function () {
-    var list = document.getElementById('blank-list');
-    list.classList.toggle('peek');
+    document.getElementById('blank-list').classList.toggle('peek');
   });
 })();
 </script>

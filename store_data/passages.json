@@ -34,7 +34,13 @@
                 },
                 {
                   "en": "We will divide into teams to plant flowers and small trees, pull weeds, and put colorful decorations on the lawn.",
-                  "ko": "우리는 팀을 나누어 꽃과 작은 나무를 심고, 잡초를 뽑고, 잔디밭에 다채로운 장식을 할 것입니다."
+                  "ko": "우리는 팀을 나누어 꽃과 작은 나무를 심고, 잡초를 뽑고, 잔디밭에 다채로운 장식을 할 것입니다.",
+                  "grammar": [
+                    {
+                      "tag": "to부정사",
+                      "note": "'~하기 위해' 로 읽습니다. plant · pull · put 셋이 나란히 걸립니다."
+                    }
+                  ]
                 },
                 {
                   "en": "Please join us for this year's Gardening Day, and remember no special skills or tools are required.",
@@ -58,7 +64,13 @@
               "sentences": [
                 {
                   "en": "Many people believe that talent is something you are born with.",
-                  "ko": "많은 사람들은 재능이 타고나는 것이라고 믿는다."
+                  "ko": "많은 사람들은 재능이 타고나는 것이라고 믿는다.",
+                  "grammar": [
+                    {
+                      "tag": "접속사 that",
+                      "note": "believe 의 목적어가 that 이하 문장 통째입니다."
+                    }
+                  ]
                 },
                 {
                   "en": "Research on expert performance suggests otherwise.",
@@ -66,7 +78,17 @@
                 },
                 {
                   "en": "When scientists studied musicians, athletes, and chess players, they found that the strongest predictor of skill was not natural ability but the number of hours spent in deliberate practice.",
-                  "ko": "과학자들이 음악가, 운동선수, 체스 선수를 연구했을 때, 그들은 기량을 가장 잘 예측하는 것이 타고난 능력이 아니라 의도적 연습에 쓴 시간의 양이라는 것을 발견했다."
+                  "ko": "과학자들이 음악가, 운동선수, 체스 선수를 연구했을 때, 그들은 기량을 가장 잘 예측하는 것이 타고난 능력이 아니라 의도적 연습에 쓴 시간의 양이라는 것을 발견했다.",
+                  "grammar": [
+                    {
+                      "tag": "관계부사",
+                      "note": "When 이 이끄는 때 부사절입니다. 주절은 they found 부터입니다."
+                    },
+                    {
+                      "tag": "최상급",
+                      "note": "the strongest predictor — 무엇들 가운데 가장인지는 of skill 이 정합니다."
+                    }
+                  ]
                 },
                 {
                   "en": "Deliberate practice is not simply repeating what you already do well.",
@@ -74,7 +96,13 @@
                 },
                 {
                   "en": "It means working at the edge of your ability, where mistakes are frequent and feedback is immediate.",
-                  "ko": "그것은 실수가 잦고 피드백이 즉각적인, 자기 능력의 가장자리에서 애쓰는 것을 뜻한다."
+                  "ko": "그것은 실수가 잦고 피드백이 즉각적인, 자기 능력의 가장자리에서 애쓰는 것을 뜻한다.",
+                  "grammar": [
+                    {
+                      "tag": "관계대명사",
+                      "note": "where 앞의 the edge of your ability 를 뒤 문장이 통째로 꾸밉니다."
+                    }
+                  ]
                 },
                 {
                   "en": "This kind of practice is uncomfortable, which is why most people avoid it.",
@@ -100,7 +128,13 @@
               "sentences": [
                 {
                   "en": "The city council has announced a plan to turn the old railway line into a walking path.",
-                  "ko": "시의회는 오래된 철도 노선을 산책로로 바꾸는 계획을 발표했다."
+                  "ko": "시의회는 오래된 철도 노선을 산책로로 바꾸는 계획을 발표했다.",
+                  "grammar": [
+                    {
+                      "tag": "to부정사",
+                      "note": "a plan 을 꾸밉니다. '~하려는 계획' 으로 읽습니다."
+                    }
+                  ]
                 },
                 {
                   "en": "The line has been unused since 1998, and parts of it are now covered with weeds.",
@@ -108,7 +142,13 @@
                 },
                 {
                   "en": "Under the new plan, the rails will be removed and replaced with a smooth surface suitable for walking and cycling.",
-                  "ko": "새 계획에 따르면, 선로는 제거되고 걷기와 자전거 타기에 적합한 매끄러운 노면으로 대체될 것이다."
+                  "ko": "새 계획에 따르면, 선로는 제거되고 걷기와 자전거 타기에 적합한 매끄러운 노면으로 대체될 것이다.",
+                  "grammar": [
+                    {
+                      "tag": "수동태",
+                      "note": "선로가 '치워지고 대체되는' 쪽입니다. 누가 하는지는 안 밝힙니다."
+                    }
+                  ]
                 },
                 {
                   "en": "Local shop owners expect that visitors will bring new business to the area.",

@@ -3160,3 +3160,119 @@ def passage_count(book: dict) -> int:
 def sentence_count(book: dict) -> int:
     return sum(len(x.get("sentences", []))
                for u in book.get("units", []) for x in u.get("items", []))
+
+
+# ---------------------------------------------------------------------------
+# 직독직해 — 문장을 의미 덩어리로 끊습니다
+#
+# 지문 공부는 낱말 공부가 아닙니다. 단위가 낱말로 내려가는 순간 앞에서 뒤로
+# 읽는 훈련이 아니라 빈칸 맞히기가 되어 버립니다. 그래서 끊는 단위를
+# '의미가 한 덩이로 잡히는 자리' 로 둡니다.
+# ---------------------------------------------------------------------------
+# 이 낱말들 앞에서 끊습니다. 앞에서 뒤로 읽을 때 여기서 숨을 쉬게 됩니다.
+_CHUNK_BEFORE = {
+    # 전치사 (of 는 앞말에 딱 붙어 다녀 끊으면 오히려 어색합니다)
+    "in", "on", "at", "for", "with", "from", "to", "by", "about", "into",
+    "through", "during", "before", "after", "under", "over", "between",
+    "among", "against", "without", "within", "toward", "towards", "across",
+    # 관계사 · 접속사
+    "who", "whom", "whose", "which", "that", "where", "when", "while",
+    "because", "although", "though", "since", "unless", "if", "so", "but",
+    "and", "or", "as", "than", "whether",
+}
+CHUNK_MARK = "/"                     # 관리자가 손으로 끊을 때 쓰는 표
+_MIN_CHUNK = 2                       # 이보다 짧은 덩어리는 앞에 붙입니다
+
+
+def auto_chunks(sentence: str) -> list[str]:
+    """문장을 의미 덩어리로 끊습니다.
+
+    쉼표 뒤와 전치사·관계사·접속사 앞에서 끊습니다. 완벽하지는 않습니다 —
+    손으로 '/' 를 넣어 두시면 그쪽이 언제나 이깁니다. 자동은 '어디서 숨을
+    쉬는지' 를 익히는 데까지가 몫입니다.
+    """
+    words = (sentence or "").split()
+    if not words:
+        return []
+    chunks: list[list[str]] = [[]]
+    for i, w in enumerate(words):
+        bare = re.sub(r"[^A-Za-z']", "", w).lower()
+        cut = i > 0 and bare in _CHUNK_BEFORE
+        # 쉼표·세미콜론 뒤에서도 끊습니다 (앞 덩어리에 쉼표를 남긴 채로)
+        if i > 0 and re.search(r"[,;:]$", words[i - 1]):
+            cut = True
+        if cut and len(chunks[-1]) >= _MIN_CHUNK:
+            chunks.append([])
+        chunks[-1].append(w)
+    out = [" ".join(c) for c in chunks if c]
+    # 맨 뒤가 너무 짧으면 앞에 붙입니다 ('with.' 하나만 남는 일이 없게)
+    if len(out) > 1 and len(out[-1].split()) < _MIN_CHUNK:
+        tail = out.pop()
+        out[-1] = f"{out[-1]} {tail}"
+    return out
+
+
+def split_chunks(text: str) -> list[str]:
+    """'/' 로 끊어 적어 주신 것을 덩어리로. 없으면 빈 목록."""
+    parts = [p.strip() for p in (text or "").split(CHUNK_MARK)]
+    parts = [p for p in parts if p]
+    return parts if len(parts) > 1 else []
+
+
+def chunk_pairs(sentence: dict) -> list[dict]:
+    """한 문장의 직독직해 줄. 손으로 끊어 두신 것이 있으면 그것을 씁니다."""
+    saved = sentence.get("chunks") or []
+    if saved:
+        return [{"en": c.get("en", ""), "ko": c.get("ko", "")} for c in saved if c.get("en")]
+    return [{"en": c, "ko": ""} for c in auto_chunks(sentence.get("en", ""))]
+
+
+# ---------------------------------------------------------------------------
+# 문법 — 이 지문에 실제로 들어 있는 것만 짚습니다
+#
+# 문법책을 옮겨 놓는 자리가 아닙니다. 지금 읽는 문장에 그것이 있으니까 짚는
+# 것이고, 없는 지문에서는 이 자리가 아예 안 열립니다.
+# ---------------------------------------------------------------------------
+GRAMMAR_RULES = [
+    ("관계대명사", r"\b(?:[a-z]+)\s+(who|whom|which|that)\s+(?=\w)",
+     "앞의 명사를 뒤 문장이 통째로 꾸밉니다. 관계사 앞에서 한 번 끊어 읽으세요."),
+    ("관계부사", r"\b(where|when|why)\s+(?=\w+\s+\w)",
+     "장소·때·이유를 받아 뒤 문장이 꾸밉니다."),
+    ("분사구문", r",\s+(\w+ing)\b",
+     "접속사와 주어를 지우고 -ing 로 이어 붙인 자리입니다. '~하면서/~해서' 로 읽습니다."),
+    ("수동태", r"\b(?:am|is|are|was|were|be|been|being)\s+\w+(?:ed|en)\b",
+     "행위를 '당하는' 쪽이 주어입니다. 누가 했는지는 by 뒤에 나오거나 아예 생략됩니다."),
+    ("to부정사", r"\bto\s+[a-z]{2,}\b",
+     "'~하기 위해 / ~하는 것 / ~할' 셋 중 무엇인지 자리로 가립니다."),
+    ("비교급", r"\b(?:\w+er|more\s+\w+)\s+than\b",
+     "무엇과 무엇을 견주는지 than 뒤를 먼저 보세요."),
+    ("최상급", r"\bthe\s+(?:\w+est|most\s+\w+)\b",
+     "범위(in·of·among)가 어디까지인지 함께 봅니다."),
+    ("가정법", r"\bif\b[^.]*\b(?:would|could|might|should)\b",
+     "실제가 아닌 일을 말합니다. 시제가 한 칸 뒤로 물러납니다."),
+    ("가주어 it", r"\bIt\s+(?:is|was|seems|appears)\b[^.]*\bthat\b",
+     "It 은 자리만 잡고, 진짜 주어는 that 뒤에 있습니다."),
+    ("사역·지각동사", r"\b(?:make|makes|made|let|lets|have|has|had|help|helps|"
+                    r"see|sees|saw|hear|hears|heard|watch|watches|watched)\s+"
+                    r"(?:\w+)\s+(?!to\b)[a-z]+\b",
+     "목적어 뒤에 to 없는 동사원형이 옵니다."),
+    ("so ~ that", r"\bso\s+\w+\s+that\b",
+     "'너무 ~해서 …하다'. 원인과 결과가 한 문장에 들어 있습니다."),
+    ("동명사 주어", r"^\s*\w+ing\s+\w+[^.]*\b(?:is|was|are|were)\b",
+     "-ing 가 주어 자리에 왔습니다. 단수로 받습니다."),
+    ("접속사 that", r"\b(?:believe|think|know|say|show|find|suggest|mean|hope)\w*\s+that\b",
+     "that 이하 문장 통째가 동사의 목적어입니다. 이 that 은 해석하지 않습니다."),
+]
+
+
+def grammar_hints(sentence: str) -> list[dict]:
+    """문장에 들어 있어 보이는 문법 자리. 관리자에서 골라 담으시라고 내놓습니다.
+
+    기계가 짚는 것이라 틀릴 수 있습니다. 그래서 바로 손님 화면에 걸지 않고,
+    사장님이 확인해 담으신 것만 나갑니다.
+    """
+    out = []
+    for tag, pattern, note in GRAMMAR_RULES:
+        if re.search(pattern, sentence or "", re.I):
+            out.append({"tag": tag, "note": note})
+    return out

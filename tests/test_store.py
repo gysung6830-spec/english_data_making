@@ -2937,13 +2937,41 @@ def test_passage_memorizing_reads_then_blanks():
 
     import html as _html
     page = body(c.get(f"/memorize/{b['slug']}/{b['units'][0]['id']}/{first['id']}"))
-    assert "본문 분석" in page and "본문 암기" in page
+    for tab in ("직독직해", "지문이해", "지문암기"):
+        assert tab in page, tab
+    # 단위가 낱말이 아니라 의미 덩어리·문장이어야 합니다
+    assert "ck-row" in page and "ord-pool" in page
     plain = _html.unescape(page)                        # 따옴표는 escape 되어 나갑니다
     assert first["sentences"][0]["en"] in plain
     assert first["sentences"][0]["ko"] in plain         # 해석은 접혀 있되 실려 있습니다
     for lv in sc.BLANK_LEVELS:                          # 난이도 5단계
         assert f'data-no="{lv["no"]}"' in page, lv
     assert "sent-say" in page                           # 소리 내어 읽기
+
+    # 직독직해 — 문장을 의미 덩어리로 끊습니다
+    ck = sc.auto_chunks("The city council has announced a plan to turn the old "
+                        "railway line into a walking path.")
+    assert len(ck) >= 3 and " ".join(ck).split() == \
+        "The city council has announced a plan to turn the old railway line " \
+        "into a walking path.".split(), ck
+    assert all(len(c.split()) >= 2 for c in ck), ck    # 한 낱말짜리 조각은 안 만듭니다
+    # 손으로 '/' 를 넣어 두시면 그쪽이 이깁니다
+    saved = {"en": "A b c d.", "chunks": [{"en": "A b", "ko": "가"}, {"en": "c d.", "ko": "나"}]}
+    assert sc.chunk_pairs(saved) == [{"en": "A b", "ko": "가"}, {"en": "c d.", "ko": "나"}]
+    assert sc.split_chunks("A b / c d.") == ["A b", "c d."]
+    assert sc.split_chunks("끊은 데가 없음") == []
+
+    # 문법 — 이 지문에 실제로 든 것만. 담은 것이 없으면 갈래가 안 열립니다
+    marked = [(u, x, i) for u in b["units"] for x in u["items"]
+              for i, sn in enumerate(x["sentences"]) if sn.get("grammar")]
+    assert marked, "예시 지문에 문법 자리가 하나도 없습니다"
+    u0, x0, _ = marked[0]
+    gram = body(c.get(f"/memorize/{b['slug']}/{u0['id']}/{x0['id']}"))
+    assert "문법" in gram and "gr-point" in gram
+    # 기계가 짚어 주되, 담은 것만 나갑니다
+    hints = sc.grammar_hints("Many people believe that talent is something you are born with.")
+    assert any(h["tag"] == "접속사 that" for h in hints), hints
+    assert sc.grammar_hints("The dog ran.") == []
 
     # 문장 나누기 — 줄임말의 마침표에서 끊으면 문장이 토막 납니다
     got = sc.split_sentences("Mr. Kim came at 9 a.m. He left. It was fine.")
@@ -2993,6 +3021,43 @@ def test_admin_puts_a_passage_in_by_pasting():
     a.post(f"/admin/passages/{slug}/delete", follow_redirects=True)
     assert sc.find_passage_book(slug, raw=True) is None
     print("PASS  지문 넣기 — 붙여넣으면 문장으로 잘라 짝지음")
+
+
+def test_admin_marks_grammar_only_after_checking():
+    """기계가 짚은 문법은 사장님이 확인해 담으신 것만 손님 화면에 나가야 합니다."""
+    a = admin()
+    a.post("/admin/passages/new", data={"name": "gram test book"}, follow_redirects=True)
+    slug = "gram-test-book"
+    a.post(f"/admin/passages/{slug}/item", data={
+        "unit_name": "1강", "title": "문법 시험",
+        "body": "Many people believe that the plan will work. The dog ran away.",
+        "trans": "많은 사람들은 그 계획이 통할 것이라고 믿는다. 개가 달아났다."},
+        follow_redirects=True)
+    book = sc.find_passage_book(slug, raw=True)
+    u, x = book["units"][0], book["units"][0]["items"][0]
+
+    # 담기 전에는 문법 갈래가 안 열립니다
+    page = body(client().get(f"/memorize/{slug}/{u['id']}/{x['id']}"))
+    assert 'data-tab="gram"' not in page
+
+    form = body(a.get(f"/admin/passages/{slug}/grammar/{u['id']}/{x['id']}"))
+    assert "접속사 that" in form, "기계가 짚어 주지 않았습니다"
+    a.post(f"/admin/passages/{slug}/grammar/{u['id']}/{x['id']}",
+           data={"g0": "접속사 that", "n0_접속사 that": "that 이하가 통째로 목적어입니다."},
+           follow_redirects=True)
+
+    after = sc.find_passage_book(slug, raw=True)["units"][0]["items"][0]
+    assert after["sentences"][0]["grammar"] == [
+        {"tag": "접속사 that", "note": "that 이하가 통째로 목적어입니다."}]
+    assert not after["sentences"][1].get("grammar")     # 안 고른 문장은 비어 있습니다
+    page = body(client().get(f"/memorize/{slug}/{u['id']}/{x['id']}"))
+    assert 'data-tab="gram"' in page and "that 이하가 통째로 목적어입니다." in page
+
+    # 체크를 풀면 다시 사라집니다
+    a.post(f"/admin/passages/{slug}/grammar/{u['id']}/{x['id']}", data={}, follow_redirects=True)
+    assert not sc.find_passage_book(slug, raw=True)["units"][0]["items"][0]["sentences"][0].get("grammar")
+    a.post(f"/admin/passages/{slug}/delete", follow_redirects=True)
+    print("PASS  문법은 확인해 담은 것만 나감")
 
 
 def test_sample_wordbooks_are_enough_to_try_it():
@@ -5821,6 +5886,7 @@ def run_all():
     test_word_pdf_is_actually_read()
     test_passage_memorizing_reads_then_blanks()
     test_admin_puts_a_passage_in_by_pasting()
+    test_admin_marks_grammar_only_after_checking()
     test_sample_wordbooks_are_enough_to_try_it()
     test_study_and_sheet_share_one_wordbook()
     test_word_study_screen()

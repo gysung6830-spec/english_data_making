@@ -1,0 +1,54 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ item.title }} 문법{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <div class="row">
+    <div>
+      <h1>문법 짚기</h1>
+      <p>{{ b.name }} · {{ unit.name }} · <b>{{ item.title or '지문' }}</b></p>
+    </div>
+    <div class="spacer"></div>
+    <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.passages_book', slug=b.slug) }}">← 지문 목록</a>
+  </div>
+</div>
+
+<div class="steps-help">
+  <b>기계가 먼저 찾고, 사장님이 확인해 담습니다</b>
+  <ol>
+    <li>문장마다 <b>있어 보이는 문법 자리</b>를 찾아 두었습니다. 맞는 것만 체크하세요.</li>
+    <li>설명은 고쳐 쓰실 수 있습니다. 손님 화면에는 <b>담으신 것만</b> 나갑니다.</li>
+    <li>하나도 안 담으시면 손님 화면에 <b>문법 갈래가 아예 안 열립니다.</b></li>
+  </ol>
+</div>
+
+<form method="post">
+  {% for r in rows %}
+    <div class="panel">
+      <h2 style="font-size:16px;">{{ r.no }}. {{ r.en }}</h2>
+      {% if r.ko %}<div class="hint">{{ r.ko }}</div>{% endif %}
+      {% if r.hints %}
+        <div class="check-grid" style="flex-direction:column; gap:12px; margin-top:12px;">
+          {% for h in r.hints %}
+            <div class="gr-pick">
+              <label class="check">
+                <input type="checkbox" name="g{{ r.no - 1 }}" value="{{ h.tag }}"
+                       {{ 'checked' if h.on }}>
+                <span><b>{{ h.tag }}</b></span>
+              </label>
+              <input type="text" name="n{{ r.no - 1 }}_{{ h.tag }}" value="{{ h.note }}"
+                     placeholder="손님에게 보여 줄 설명">
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="hint" style="margin-top:10px;">짚을 만한 자리를 못 찾았습니다.</p>
+      {% endif %}
+    </div>
+  {% endfor %}
+  <div class="form-actions">
+    <button class="btn btn-primary" type="submit">담기</button>
+    <a class="btn btn-ghost" href="{{ url_for('admin.passages_book', slug=b.slug) }}">그만두기</a>
+  </div>
+</form>
+{% endblock %}

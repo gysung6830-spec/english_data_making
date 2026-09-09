@@ -1829,8 +1829,16 @@ def memorize_item(slug, unit_id, item_id):
     flat = [(u, x) for u in book["units"] for x in u["items"]]
     where = next(i for i, (u, x) in enumerate(flat)
                  if u["id"] == unit_id and x["id"] == item_id)
+    # 문장마다 '덩어리 · 해석 · 문법' 을 미리 붙여 넘깁니다. 화면에서 세 벌
+    # 따로 만들면 같은 문장이 세 군데서 어긋나기 시작합니다.
+    rows = []
+    for i, sent in enumerate(item["sentences"], 1):
+        rows.append({"no": i, "en": sent.get("en", ""), "ko": sent.get("ko", ""),
+                     "chunks": sc.chunk_pairs(sent),
+                     "grammar": sent.get("grammar") or []})
     return render_template(
-        "memorize_item.html", b=book, unit=unit, item=item,
+        "memorize_item.html", b=book, unit=unit, item=item, rows=rows,
+        has_grammar=any(r["grammar"] for r in rows),
         levels=sc.BLANK_LEVELS, no=where + 1, total=len(flat),
         prev=flat[where - 1] if where else None,
         next=flat[where + 1] if where + 1 < len(flat) else None,

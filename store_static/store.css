@@ -2377,3 +2377,53 @@ input[type=text].bl-in.no{background:#fdf2f0; border-bottom-color:#c2410c;
   .mt{flex:1;}
   .bl-body{line-height:2.6;}
 }
+
+/* ---- 직독직해 — 덩어리째 읽고, 덩어리째 뜻을 얹습니다 ---- */
+.ck-sent{display:flex; gap:12px; align-items:flex-start; padding:14px;
+  border-radius:10px;}
+.ck-sent:nth-child(odd){background:var(--card);}
+.ck-body{flex:1; min-width:0;}
+.ck-row{display:flex; flex-wrap:wrap; gap:6px 10px;}
+.ck{display:inline-flex; flex-direction:column; gap:2px; padding:4px 10px 5px;
+  border-radius:8px; background:var(--brand-soft); cursor:pointer;
+  border-bottom:2px solid transparent;}
+.ck:hover{border-bottom-color:var(--brand);}
+.ck b{font-weight:500; font-size:16px; line-height:1.6;}
+.ck i{font-style:normal; font-size:13.5px; color:var(--brand-dark); line-height:1.5;}
+.ck-ko{margin:10px 0 0; font-size:14.5px; line-height:1.7; color:var(--ink-2);
+  padding-left:10px; border-left:2px solid var(--line-strong);}
+
+/* ---- 지문이해 — 문장을 차례대로 세웁니다 ---- */
+.ord-count{font-size:14px; color:var(--muted);}
+.ord-count b{color:var(--brand-dark); font-size:16px;}
+.ord-done{margin:0 0 14px; padding-left:22px; display:flex; flex-direction:column;
+  gap:6px;}
+.ord-done li{font-size:15px; line-height:1.7; color:var(--brand-dark);}
+.ord-pool{display:flex; flex-direction:column; gap:8px;}
+.ord{text-align:left; padding:13px 15px; font-size:15px; line-height:1.65;
+  font-family:inherit; background:var(--card); border:1px solid var(--line-strong);
+  border-radius:10px; color:var(--ink); word-break:keep-all;}
+.ord:hover{border-color:var(--brand);}
+.ord.no{background:#fdf2f0; border-color:#c2410c; color:#8c2f16;}
+.mem-full{margin-top:26px; padding-top:22px; border-top:1px solid var(--line);}
+.mem-full h3{font-size:16px; margin:0 0 10px;}
+
+/* ---- 문법 — 이 지문의 이 문장에 들어 있는 것 ---- */
+.gr-item{padding:16px 18px; margin-bottom:12px; background:var(--card);
+  border:1px solid var(--line); border-radius:12px;}
+.gr-sent{display:flex; gap:10px; align-items:flex-start;}
+.gr-sent p{margin:0; font-size:16px; line-height:1.7;}
+.gr-ko{margin:8px 0 0 32px; font-size:14px; color:var(--ink-2); line-height:1.7;}
+.gr-point{margin:12px 0 0 32px; padding-left:12px;
+  border-left:3px solid var(--brand);}
+.gr-tag{display:inline-block; font-size:13px; color:var(--brand-dark);
+  margin-bottom:3px;}
+.gr-point p{margin:0; font-size:14.5px; line-height:1.75; color:var(--ink-2);
+  word-break:keep-all;}
+.gr-pick{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
+.gr-pick .check{flex:0 0 150px;}
+.gr-pick input[type=text]{flex:1; min-width:220px;}
+@media (max-width:640px){
+  .ck b{font-size:15.5px;}
+  .gr-ko, .gr-point{margin-left:0;}
+}

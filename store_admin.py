@@ -1392,6 +1392,53 @@ def passages_item_save(slug):
     return redirect(url_for("admin.passages_book", slug=slug))
 
 
+@admin_bp.route("/passages/<slug>/grammar/<unit_id>/<item_id>", methods=["GET", "POST"])
+def passages_grammar(slug, unit_id, item_id):
+    """이 지문의 문장마다 문법 자리를 짚습니다.
+
+    기계가 먼저 찾아 내놓고, 사장님이 확인해 담으신 것만 손님 화면에 나갑니다.
+    문법책을 옮겨 놓는 자리가 아니라 '이 문장에 이것이 있다' 고 짚는 자리라,
+    틀린 것을 그대로 내보내면 안 됩니다.
+    """
+    data = sc.load_raw_passages()
+    book = next((b for b in data["books"] if b.get("slug") == slug), None)
+    if book is None:
+        abort(404)
+    found = sc.find_passage(book, unit_id, item_id)
+    if found is None:
+        abort(404)
+    unit, item = found
+
+    if request.method == "POST":
+        for i, sent in enumerate(item["sentences"]):
+            picked = request.form.getlist(f"g{i}")
+            notes = {t: sc.clean(request.form.get(f"n{i}_{t}"), 300) for t in picked}
+            known = {tag: note for tag, _, note in sc.GRAMMAR_RULES}
+            sent["grammar"] = [{"tag": t, "note": notes.get(t) or known.get(t, "")}
+                               for t in picked if t in known]
+            if not sent["grammar"]:
+                sent.pop("grammar", None)
+        sc.save_passages(data)
+        n = sum(len(s.get("grammar") or []) for s in item["sentences"])
+        flash(f"문법 {n}자리를 담았습니다." if n else "담은 문법 자리를 모두 비웠습니다.", "ok")
+        return redirect(url_for("admin.passages_book", slug=slug))
+
+    rows = []
+    for i, sent in enumerate(item["sentences"]):
+        have = {g.get("tag"): g.get("note", "") for g in (sent.get("grammar") or [])}
+        hints = sc.grammar_hints(sent.get("en", ""))
+        seen = {h["tag"] for h in hints}
+        # 이미 담아 두신 것은 기계가 못 찾아도 그대로 보여야 지울 수 있습니다
+        for tag, note in have.items():
+            if tag not in seen:
+                hints.append({"tag": tag, "note": note})
+        rows.append({"no": i + 1, "en": sent.get("en", ""), "ko": sent.get("ko", ""),
+                     "hints": [{**h, "on": h["tag"] in have,
+                                "note": have.get(h["tag"]) or h["note"]} for h in hints]})
+    return render_template("admin/passages_grammar.html", b=book, unit=unit, item=item,
+                           rows=rows, i_index=range(len(item["sentences"])))
+
+
 @admin_bp.route("/passages/<slug>/item/<unit_id>/<item_id>/delete", methods=["POST"])
 def passages_item_delete(slug, unit_id, item_id):
     data = sc.load_raw_passages()

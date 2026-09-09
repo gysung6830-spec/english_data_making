@@ -68,6 +68,9 @@
             <td>{{ x.source or '—' }}</td>
             <td class="num">{{ x.sentences|length }}</td>
             <td>
+              <a class="btn btn-ghost btn-sm"
+                 href="{{ url_for('admin.passages_grammar', slug=b.slug, unit_id=u.id, item_id=x.id) }}">
+                문법 짚기{% set n = x.sentences|map(attribute='grammar')|select|list|length %}{% if n %} ({{ n }}){% endif %}</a>
               <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener"
                  href="{{ url_for('memorize_item', slug=b.slug, unit_id=u.id, item_id=x.id) }}">보기 ↗</a>
               <form method="post" style="display:inline;"
