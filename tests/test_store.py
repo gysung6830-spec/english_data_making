@@ -2950,16 +2950,27 @@ def test_sample_wordbooks_are_enough_to_try_it():
     a = admin()
     a.post("/admin/words/new", data={"name": "keep me words"}, follow_redirects=True)
     assert "예시 단어장 불러오기" in body(a.get("/admin/words"))
+    assert not sc.stale_sample_words(), "지금은 최신판인데 뒤처졌다고 합니다"
     raw = sc.load_raw_words()
     for b in raw["books"]:
         if b.get("sample"):
-            b["units"] = []                              # 예시를 망가뜨려 둡니다
+            b["units"] = b["units"][:1]                  # 예시를 옛 판인 척 줄입니다
+            b.pop("sample", None)                        # 옛 판에는 이 표시가 없었습니다
     sc.save_words(raw)
-    assert sc.word_count(sc.find_wordbook(books[0]["slug"], raw=True)) == 0
+    # 뒤처지면 관리자 화면이 눈에 띄게 알려 줘야 합니다 (모르면 '예시가 없다' 가 됩니다)
+    late = sc.stale_sample_words()
+    assert len(late) == 2, late
+    page = body(a.get("/admin/words"))
+    assert "예시 단어장이 옛 판입니다" in page and "alert-warn" in page
     a.post("/admin/words/refresh-samples", follow_redirects=True)
     after = sc.load_raw_words()
     assert any(b["slug"] == "keep-me-words" for b in after["books"]), "내 단어장이 사라졌습니다"
-    assert sc.word_count(sc.find_wordbook(books[0]["slug"], raw=True)) >= 40
+    # 옛 판에 'sample' 표시가 없어도 새 판으로 바뀌어야 합니다 (주소가 같으면 우리 것)
+    for b in books:
+        assert sc.word_count(sc.find_wordbook(b["slug"], raw=True)) == \
+            sum(len(u["words"]) for u in b["units"]), b["slug"]
+    assert not sc.stale_sample_words()
+    assert "예시 단어장이 옛 판입니다" not in body(a.get("/admin/words"))
     a.post("/admin/words/keep-me-words/delete", follow_redirects=True)
     print("PASS  예시 단어장 — 눌러 보면 실제로 돌아감 · 관리자에서 다시 깔기")
 

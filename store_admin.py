@@ -1306,6 +1306,7 @@ def words_list():
                                   b.get("name", "")))
     return render_template("admin/words.html", books=books,
                            counts={b["slug"]: sc.word_count(b) for b in books},
+                           stale=sc.stale_sample_words(),
                            publishers=sc.WORD_PUBLISHERS)
 
 
@@ -1324,11 +1325,14 @@ def words_refresh_samples():
         flash("저장소에 예시 단어장이 없습니다.", "err")
         return redirect(url_for("admin.words_list"))
     fresh = json.loads(src.read_text(encoding="utf-8"))
+    new = [b for b in fresh.get("books", []) if b.get("sample")]
+    # 예전에 내려 준 예시에는 'sample' 표시가 없었습니다. 표시만 보고 가르면
+    # 그때 깔린 옛 예시가 '사장님 것' 으로 남아 새 판이 안 들어옵니다.
+    # 주소 이름이 예시와 같으면 우리가 깐 것이니 새 판으로 바꿉니다.
+    ours = {b.get("slug") for b in new}
     data = sc.load_raw_words()
-    mine = [b for b in data["books"] if not b.get("sample")]
-    taken = {b.get("slug") for b in mine}
-    new = [b for b in fresh.get("books", [])
-           if b.get("sample") and b.get("slug") not in taken]
+    mine = [b for b in data["books"]
+            if not b.get("sample") and b.get("slug") not in ours]
     data["books"] = new + mine
     sc.save_words(data)
     n = sum(sc.word_count(b) for b in new)

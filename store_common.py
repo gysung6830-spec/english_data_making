@@ -463,6 +463,35 @@ def load_words() -> dict:
     return data
 
 
+def bundled_sample_words() -> list[dict]:
+    """저장소에 들어 있는 예시 단어장. 디스크의 것과 견주는 데 씁니다."""
+    src = BUNDLED_DATA / "words.json"
+    if not src.is_file():
+        return []
+    try:
+        return [b for b in json.loads(src.read_text(encoding="utf-8")).get("books", [])
+                if b.get("sample")]
+    except (OSError, ValueError):
+        return []
+
+
+def stale_sample_words() -> list[dict]:
+    """디스크의 예시 단어장이 저장소 것보다 뒤처져 있는지.
+
+    단어장은 사장님 파일이라 새로 배포해도 저절로 안 바뀝니다. 그래서 예시를
+    고쳐 올려도 화면은 옛것 그대로인데, 그것을 아무도 알려 주지 않으면
+    '예시가 없다' 로 보입니다. 뒤처진 것만 골라 돌려줍니다.
+    """
+    here = {b.get("slug"): b for b in load_raw_words().get("books", [])}
+    out = []
+    for b in bundled_sample_words():
+        mine = here.get(b.get("slug"))
+        if mine is None or word_count(mine) != word_count(b):
+            out.append({"name": b.get("name", ""), "words": word_count(b),
+                        "now": word_count(mine) if mine else 0})
+    return out
+
+
 def save_words(data: dict) -> None:
     save_json("words.json", data)
 

@@ -18,6 +18,26 @@
   </div>
 </div>
 
+{# 단어장은 배포해도 안 덮이는 파일입니다. 예시를 고쳐 올려도 화면은 옛것
+   그대로인데, 알려 주지 않으면 '예시가 없다' 로 보입니다. #}
+{% if stale %}
+  <div class="alert alert-warn">
+    <b>예시 단어장이 옛 판입니다.</b>
+    <ul style="margin:8px 0 10px; padding-left:18px;">
+      {% for x in stale %}
+        <li>{{ x.name }} —
+          {% if x.now %}지금 {{ '{:,}'.format(x.now) }}단어{% else %}아직 없음{% endif %}
+          → <b>{{ '{:,}'.format(x.words) }}단어</b></li>
+      {% endfor %}
+    </ul>
+    <p style="margin:0 0 10px;">단어장은 사장님 파일이라 새로 배포해도 저절로 안 바뀝니다.
+      아래 단추를 누르시면 예시만 최신판으로 깔고, <b>직접 만드신 단어장은 그대로 둡니다.</b></p>
+    <form method="post" action="{{ url_for('admin.words_refresh_samples') }}">
+      <button class="btn btn-primary btn-sm" type="submit">예시 단어장 불러오기</button>
+    </form>
+  </div>
+{% endif %}
+
 <div class="steps-help">
   <b>단어 시험지는 미끼입니다</b>
   <ol>
