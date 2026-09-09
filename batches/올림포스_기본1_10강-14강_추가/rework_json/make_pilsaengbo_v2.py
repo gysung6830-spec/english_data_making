@@ -9,7 +9,7 @@ SC="/tmp/claude-0/-home-user-english-data-making/3e2ff8b7-89bb-5341-95ca-4062ce9
 _HERE=os.path.dirname(os.path.abspath(__file__))
 FONTDIR=(_HERE+"/fonts") if os.path.exists(_HERE+"/fonts/NanumSquareRoundR.ttf") \
     else "/tmp/claude-0/-home-user-english-data-making/3e2ff8b7-89bb-5341-95ca-4062ce95757b/scratchpad/fonts"
-FOOT="© 2026. ortica영어. All rights reserved."
+FOOT="© 2026. 오르티카잉. All rights reserved."
 TITLE="올림포스 독해 기본1 (10강-14강) · 필생보"
 FONTFACE=f"""
 @font-face{{ font-family:'NanumSquareRound'; font-weight:400; src:url('file://{FONTDIR}/NanumSquareRoundR.ttf'); }}
@@ -51,19 +51,32 @@ def _bpat(e):
     r=r"(?![A-Za-z])" if e[-1:].isalpha() else ""
     return l+re.escape(e)+r
 def hl_en(s):
-    text=esc(s.get("english","")); spans=[]
+    """어법칩 표지(spans)만 형광펜. 칩별로 span을 '왼→오 순차'로 찾아(앞 span 뒤에서) 잘못된 위치를 방지."""
+    raw=s.get("english","") or ""
+    marks=[]
     for g in s.get("grammar",[]):
+        pos=0
         for sp in (g.get("spans") or []):
-            e=esc(str(sp)).strip()
-            if e: spans.append(e)
-    toks={}
-    for i,e in enumerate(sorted(set(spans), key=lambda x:-len(x))):
-        m=re.search(_bpat(e), text, re.IGNORECASE)
-        if not m: continue
-        t=f"\x00h{i}\x00"; toks[t]=f'<mark class="hl">{text[m.start():m.end()]}</mark>'
-        text=text[:m.start()]+t+text[m.end():]
-    for t,htm in toks.items(): text=text.replace(t,htm)
-    return text
+            e=str(sp).strip()
+            if not e: continue
+            m=re.search(_bpat(e), raw[pos:], re.IGNORECASE)
+            if m:
+                st,en=pos+m.start(), pos+m.end(); pos=en
+            else:
+                m2=re.search(_bpat(e), raw, re.IGNORECASE)
+                if not m2: continue
+                st,en=m2.start(), m2.end()
+            marks.append((st,en))
+    marks.sort()
+    merged=[]
+    for st,en in marks:
+        if merged and st<merged[-1][1]: continue  # 겹치면 건너뜀
+        merged.append((st,en))
+    out=[]; i=0
+    for st,en in merged:
+        out.append(esc(raw[i:st])); out.append('<mark class="hl">'+esc(raw[st:en])+'</mark>'); i=en
+    out.append(esc(raw[i:]))
+    return "".join(out)
 
 # ---- ③ 직독직해 빈칸(핵심 부분만) ----
 def _blank(m):
@@ -89,6 +102,8 @@ body{font-family:'NanumSquareRound',"Malgun Gothic",sans-serif; color:#22262b; f
 :root{--green:#2c6444;--green-d:#1f4d33;--green-bg:#e7f0ea;--green-soft:#eef5f0;
   --indigo:#575495;--indigo-bg:#ecebf4;--amber:#a9781f;--red:#a83c2c;--line:#d7ddd6;--sub:#5c636b;}
 .psg{break-before:page;} .psg:first-of-type{break-before:auto;}
+.p1{height:270mm; display:flex; flex-direction:column;}
+.p1body{flex:1 1 auto; display:flex; flex-direction:column; justify-content:space-between;}
 .p-h{display:flex; align-items:baseline; gap:8px; border-bottom:2.5px solid var(--green); padding-bottom:4px; margin-bottom:6px;}
 .p-no{background:var(--green); color:#fff; font-weight:800; font-size:8.6pt; padding:1px 9px; border-radius:20px; white-space:nowrap;}
 .p-ti{font-size:11pt; font-weight:800; color:var(--green-d); line-height:1.35;}
@@ -152,6 +167,7 @@ table.flow{width:100%; border-collapse:collapse;}
 .flow .kw-en{color:var(--indigo); font-weight:700;}
 .flow .sumblank{height:24px;}
 .flow .note{font-weight:600; line-height:1.55; color:var(--indigo);}
+.flow .eg{margin-top:4px; font-size:8.2pt; color:var(--amber); line-height:1.5;}
 """).replace("__FOOT__",FOOT).replace("__FONTS__",FONTFACE)
 
 def sec_head(n,t,d=""):
@@ -159,7 +175,7 @@ def sec_head(n,t,d=""):
 
 def passage_html(p, teacher):
     ov=p["overview"]; no=esc(p["item_no"].strip()); ti=esc(ov["theme_ko"]); sents=p["sentences"]
-    h=[f'<div class="psg"><div class="p-h"><span class="p-no">{no}</span><span class="p-ti">{ti}</span><span class="p-src">올림포스 독해 기본1</span></div>']
+    h=[f'<div class="psg"><div class="p1"><div class="p-h"><span class="p-no">{no}</span><span class="p-ti">{ti}</span><span class="p-src">올림포스 독해 기본1</span></div><div class="p1body">']
     # ① 원문 (page 1)
     h.append('<div class="sec">'+sec_head(1,"원문"))
     body=" ".join(f'<span class="sn">{s["id"]}</span>{esc(s["english"])}' for s in sents)
@@ -186,11 +202,14 @@ def passage_html(p, teacher):
         kwc="".join(kws) or '<span style="color:var(--sub);font-size:8pt;">—</span>'
         if teacher:
             note=notes[i] if i < len(notes) else re.sub(r"\[\[(.+?)\]\]", r"\1", b["summary"])
-            cell=f'<span class="note">{esc(note)}</span>'
+            eg=(b.get("easy_example") or "").strip()
+            egh=f'<div class="eg">💡 쉬운 예 · {esc(eg)}</div>' if eg else ''
+            cell=f'<span class="note">{esc(note)}</span>{egh}'
         else:
             cell='<div class="sumblank"></div>'
         h.append(f'<tr><td class="stg">{esc(b["stage"])}<span class="rg">{fmt_range(b["sentence_range"])}</span></td><td class="kwc">{kwc}</td><td>{cell}</td></tr>')
     h.append('</table></div></div>')
+    h.append('</div></div>')  # close p1body, p1 (1페이지: 원문·어휘·구조도)
     # ④ 해석연습 (page break)
     h.append('<div class="sec brk">'+sec_head(4,"해석 연습","직독직해에서 핵심(오역 위험) 부분만 채우기 · 영어에 어법칩 형광펜"))
     h.append('<div class="panel">')

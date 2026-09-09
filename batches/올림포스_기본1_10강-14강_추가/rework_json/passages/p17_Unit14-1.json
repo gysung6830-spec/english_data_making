@@ -142,25 +142,25 @@
     "stage": "도입",
     "sentence_range": "1~2",
     "summary": "브랜딩은 [[남몰래]] 할 일이 아니나 자기 홍보 계획이 늘 편치는 않다.",
-    "easy_example": ""
+    "easy_example": "나를 알리는 일이 쑥스럽게 느껴지는 것."
    },
    {
     "stage": "반박",
     "sentence_range": "3~4",
     "summary": "그러나 브랜딩은 성공에 [[필수]]이며 핵심은 인식과 예상이다.",
-    "easy_example": ""
+    "easy_example": "그래도 성공하려면 기회를 알아보고 미리 대비해야 한다는 것."
    },
    {
     "stage": "조건",
     "sentence_range": "5~6",
     "summary": "기회를 인식·[[예상]]하지 못하면 좋은 인상과 준비를 놓친다.",
-    "easy_example": ""
+    "easy_example": "기회를 못 알아채면 좋은 인상 남길 순간을 놓치는 것."
    },
    {
     "stage": "결론",
     "sentence_range": "7",
     "summary": "부재 시 남들이 할 말, 즉 [[평판]]을 의식해 브랜드를 이끌라.",
-    "easy_example": ""
+    "easy_example": "내가 없는 자리에서 사람들이 나를 어떻게 말할지 신경 쓰는 것."
    }
   ]
  },

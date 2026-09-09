@@ -7,7 +7,7 @@ SC="/tmp/claude-0/-home-user-english-data-making/3e2ff8b7-89bb-5341-95ca-4062ce9
 _HERE=os.path.dirname(os.path.abspath(__file__))
 FONTDIR=(_HERE+"/fonts") if os.path.exists(_HERE+"/fonts/NanumSquareRoundR.ttf") \
     else "/tmp/claude-0/-home-user-english-data-making/3e2ff8b7-89bb-5341-95ca-4062ce95757b/scratchpad/fonts"
-FOOT="© 2026. Ortica영어. All rights reserved."
+FOOT="© 2026. 오르티카잉. All rights reserved."
 TITLE="고1 2026년 9월 모의고사 · O/X/△ 내용 판단 학습지"
 FONTFACE=f"""
 @font-face{{ font-family:'NanumSquareRound'; font-weight:400; src:url('file://{FONTDIR}/NanumSquareRoundR.ttf'); }}

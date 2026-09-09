@@ -145,37 +145,37 @@
     "stage": "도입",
     "sentence_range": "1",
     "summary": "숲이 [[재성장]]하는 속도보다 훨씬 빠르게 벌목이 진행됨.",
-    "easy_example": ""
+    "easy_example": "다시 자라는 속도보다 베는 속도가 더 빠른 것."
    },
    {
     "stage": "주장",
     "sentence_range": "2",
     "summary": "목재 사용을 줄여야 하는 핵심 이유는 숲의 [[기능]] 때문.",
-    "easy_example": ""
+    "easy_example": "숲이 하는 역할 때문에 나무를 아껴야 한다는 것."
    },
    {
     "stage": "근거",
     "sentence_range": "3~4",
     "summary": "숲은 탄소를 [[흡수]]해 온난화를 억제하고 산소를 공급함.",
-    "easy_example": ""
+    "easy_example": "숲이 탄소를 빨아들이고 산소를 내주는 것."
    },
    {
     "stage": "전환",
     "sentence_range": "5",
     "summary": "목재의 사소하고 [[근시안적]]인 쓰임새가 너무 많음.",
-    "easy_example": ""
+    "easy_example": "별것 아닌 일에 나무를 마구 쓰는 것."
    },
    {
     "stage": "사례",
     "sentence_range": "6~7",
     "summary": "허리케인 때 합판으로 창을 막고 폭풍 뒤엔 [[버림]].",
-    "easy_example": ""
+    "easy_example": "폭풍 때 잠깐 창을 막고는 그냥 버리는 것."
    },
    {
     "stage": "결론",
     "sentence_range": "8",
     "summary": "폭풍 대비로 숲을 베는 것은 [[반어적]] — 숲이 폭풍을 억제하는데.",
-    "easy_example": ""
+    "easy_example": "폭풍 막으려 벤 숲이 사실 폭풍을 막아 줄 숲이었던 것."
    }
   ]
  },

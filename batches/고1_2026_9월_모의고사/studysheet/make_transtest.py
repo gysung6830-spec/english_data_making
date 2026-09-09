@@ -7,7 +7,7 @@ SC="/tmp/claude-0/-home-user-english-data-making/3e2ff8b7-89bb-5341-95ca-4062ce9
 _HERE=os.path.dirname(os.path.abspath(__file__))
 FONTDIR=(_HERE+"/fonts") if os.path.exists(_HERE+"/fonts/NanumSquareRoundR.ttf") \
     else "/tmp/claude-0/-home-user-english-data-making/3e2ff8b7-89bb-5341-95ca-4062ce95757b/scratchpad/fonts"
-FOOT="© 2026. ortica영어. All rights reserved."
+FOOT="© 2026. 오르티카잉. All rights reserved."
 TITLE="고1 2026년 9월 모의고사 · 해석 시험지"
 
 FONTFACE=f"""
@@ -25,23 +25,32 @@ def _bpat(e):  # 단어 경계(알파벳 양끝) 지키는 패턴
     return left + re.escape(e) + right
 
 def hl_en(s):
-    """영어 원문에서 어법칩 spans 부분에 형광펜만(라벨 없이)."""
-    text = esc(s.get("english",""))
-    spans = []
+    """영어 원문에서 어법칩 spans 부분만 형광펜(라벨 없이). 칩별 span을 왼→오 순차 탐색."""
+    raw = s.get("english","") or ""
+    marks = []
     for g in s.get("grammar",[]):
+        pos = 0
         for sp in (g.get("spans") or []):
-            e = esc(str(sp)).strip()
-            if e: spans.append(e)
-    toks = {}
-    for i, e in enumerate(sorted(set(spans), key=lambda x: -len(x))):
-        m = re.search(_bpat(e), text, re.IGNORECASE)
-        if not m: continue
-        t = f"\x00h{i}\x00"
-        toks[t] = f'<mark class="hlg3">{text[m.start():m.end()]}</mark>'
-        text = text[:m.start()] + t + text[m.end():]
-    for t, h in toks.items():
-        text = text.replace(t, h)
-    return text
+            e = str(sp).strip()
+            if not e: continue
+            m = re.search(_bpat(e), raw[pos:], re.IGNORECASE)
+            if m:
+                st, en = pos+m.start(), pos+m.end(); pos = en
+            else:
+                m2 = re.search(_bpat(e), raw, re.IGNORECASE)
+                if not m2: continue
+                st, en = m2.start(), m2.end()
+            marks.append((st, en))
+    marks.sort()
+    merged = []
+    for st, en in marks:
+        if merged and st < merged[-1][1]: continue
+        merged.append((st, en))
+    out = []; i = 0
+    for st, en in merged:
+        out.append(esc(raw[i:st])); out.append('<mark class="hlg3">'+esc(raw[st:en])+'</mark>'); i = en
+    out.append(esc(raw[i:]))
+    return "".join(out)
 
 CSS=("""
 __FONTS__

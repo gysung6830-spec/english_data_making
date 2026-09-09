@@ -252,24 +252,38 @@ def _highlight_grammar_only(english: str, grammar) -> Markup:
     - 긴 구절 먼저 매칭해 짧은 구절이 잘리는 것을 방지하고, 단어 경계를 지킨다.
     - 매칭이 없으면 원문(이스케이프)만 반환.
     """
-    text = str(escape(english or ""))
-    spans = []
-    for g in grammar:
+    raw = english or ""
+    marks = []
+    for g in grammar:  # 칩별로 span 을 왼→오 순차 탐색(앞 span 뒤에서) → 잘못된 위치 방지
+        pos = 0
         for sp in getattr(g, "spans", []) or []:
-            e = str(escape(sp)).strip()
-            if e:
-                spans.append(e)
-    tokens: dict[str, str] = {}
-    for i, e in enumerate(sorted(set(spans), key=lambda s: -len(s))):
-        mm = re.search(_boundary_pat(e), text, re.IGNORECASE)
-        if not mm:
+            e = str(sp).strip()
+            if not e:
+                continue
+            mm = re.search(_boundary_pat(e), raw[pos:], re.IGNORECASE)
+            if mm:
+                st, en = pos + mm.start(), pos + mm.end()
+                pos = en
+            else:
+                m2 = re.search(_boundary_pat(e), raw, re.IGNORECASE)
+                if not m2:
+                    continue
+                st, en = m2.start(), m2.end()
+            marks.append((st, en))
+    marks.sort()
+    merged: list[tuple[int, int]] = []
+    for st, en in marks:
+        if merged and st < merged[-1][1]:
             continue
-        tok = f"\x00h{i}\x00"
-        tokens[tok] = f'<mark class="hlg3">{text[mm.start():mm.end()]}</mark>'
-        text = text[:mm.start()] + tok + text[mm.end():]
-    for tok, html in tokens.items():
-        text = text.replace(tok, html)
-    return Markup(text)
+        merged.append((st, en))
+    out = []
+    i = 0
+    for st, en in merged:
+        out.append(str(escape(raw[i:st])))
+        out.append('<mark class="hlg3">' + str(escape(raw[st:en])) + '</mark>')
+        i = en
+    out.append(str(escape(raw[i:])))
+    return Markup("".join(out))
 
 
 def _highlight_grammar_chunked(chunks, grammar) -> Markup | None:
