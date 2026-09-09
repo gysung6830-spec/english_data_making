@@ -1309,6 +1309,34 @@ def words_list():
                            publishers=sc.WORD_PUBLISHERS)
 
 
+@admin_bp.route("/words/refresh-samples", methods=["POST"])
+def words_refresh_samples():
+    """예시 단어장만 저장소의 최신판으로 다시 깝니다.
+
+    단어장은 사장님 파일이라 새로 배포해도 저절로 바뀌지 않습니다 — 넣어
+    두신 단어를 덮어쓰면 안 되니까요. 그런데 그 안의 '예시' 는 제가 만든
+    것이라, 화면을 시험해 보시려면 다시 깔 길이 있어야 합니다.
+    직접 만드신 단어장은 손대지 않습니다.
+    """
+    import json
+    src = sc.BUNDLED_DATA / "words.json"
+    if not src.is_file():
+        flash("저장소에 예시 단어장이 없습니다.", "err")
+        return redirect(url_for("admin.words_list"))
+    fresh = json.loads(src.read_text(encoding="utf-8"))
+    data = sc.load_raw_words()
+    mine = [b for b in data["books"] if not b.get("sample")]
+    taken = {b.get("slug") for b in mine}
+    new = [b for b in fresh.get("books", [])
+           if b.get("sample") and b.get("slug") not in taken]
+    data["books"] = new + mine
+    sc.save_words(data)
+    n = sum(sc.word_count(b) for b in new)
+    flash(f"예시 단어장 {len(new)}권 · 단어 {n:,}개를 최신판으로 깔았습니다. "
+          "직접 만드신 단어장은 그대로 있습니다.", "ok")
+    return redirect(url_for("admin.words_list"))
+
+
 @admin_bp.route("/words/new", methods=["POST"])
 def words_new():
     data = sc.load_raw_words()

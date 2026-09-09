@@ -2916,6 +2916,54 @@ def test_word_pdf_is_actually_read():
     print("PASS  단어책 PDF 를 실제로 읽어냄 (두 칸 · 강 칸 · 예문 · 스캔)")
 
 
+def test_sample_wordbooks_are_enough_to_try_it():
+    """예시 단어장은 '눌러 보면 실제로 돌아가는' 만큼 들어 있어야 합니다.
+
+    단어가 몇 개뿐이면 뜻 고르기의 오답 보기를 못 만들고, 범위를 골라 볼
+    수도 없어 화면이 도는지 알 수 없습니다.
+    """
+    books = [b for b in sc.load_words()["books"] if b.get("sample")]
+    assert len(books) >= 2, "예시 단어장이 모자랍니다"
+    for b in books:
+        words = [w for u in b["units"] for w in u["words"]]
+        assert len(b["units"]) >= 2, b["slug"]          # 범위를 골라 볼 수 있게
+        assert len(words) >= 40, (b["slug"], len(words))
+        assert b.get("publisher"), b["slug"]
+        ens = [w["en"] for w in words]
+        assert len(ens) == len(set(ens)), "같은 단어가 두 번 들었습니다"
+        for w in words:
+            assert w["ko"].strip() and w["en"].strip(), w
+            # 철자 채우기는 영문자만 낼 수 있습니다
+            assert all(c.isascii() for c in w["en"]), w["en"]
+
+    # 화면 두 곳에서 다 보이고, 실제로 풀립니다
+    c = client()
+    for b in books:
+        assert b["name"] in body(c.get("/study")), b["name"]
+        assert b["name"] in body(c.get("/words")), b["name"]
+        ids = [u["id"] for u in b["units"]]
+        page = body(c.get(f"/words/{b['slug']}/study?"
+                          + "&".join(f"unit={i}" for i in ids) + "&n=10"))
+        assert "문제" in page and b["name"] in page
+
+    # 관리자에서 예시만 다시 깔 수 있어야 합니다 (내 단어장은 그대로)
+    a = admin()
+    a.post("/admin/words/new", data={"name": "keep me words"}, follow_redirects=True)
+    assert "예시 단어장 불러오기" in body(a.get("/admin/words"))
+    raw = sc.load_raw_words()
+    for b in raw["books"]:
+        if b.get("sample"):
+            b["units"] = []                              # 예시를 망가뜨려 둡니다
+    sc.save_words(raw)
+    assert sc.word_count(sc.find_wordbook(books[0]["slug"], raw=True)) == 0
+    a.post("/admin/words/refresh-samples", follow_redirects=True)
+    after = sc.load_raw_words()
+    assert any(b["slug"] == "keep-me-words" for b in after["books"]), "내 단어장이 사라졌습니다"
+    assert sc.word_count(sc.find_wordbook(books[0]["slug"], raw=True)) >= 40
+    a.post("/admin/words/keep-me-words/delete", follow_redirects=True)
+    print("PASS  예시 단어장 — 눌러 보면 실제로 돌아감 · 관리자에서 다시 깔기")
+
+
 def test_study_and_sheet_share_one_wordbook():
     """단어 학습과 단어 시험지는 같은 단어를 봐야 합니다.
 
@@ -5681,6 +5729,7 @@ def run_all():
     test_menu_has_no_duplicates()
     test_mobile_quick_bar()
     test_word_pdf_is_actually_read()
+    test_sample_wordbooks_are_enough_to_try_it()
     test_study_and_sheet_share_one_wordbook()
     test_word_study_screen()
     test_hidden_really_hides()

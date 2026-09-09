@@ -6,8 +6,8 @@
       "name": "2026 수능특강 영어",
       "publisher": "EBS",
       "grade": "고3",
-      "sort": 10,
       "active": true,
+      "sample": true,
       "units": [
         {
           "id": "01",
@@ -19,79 +19,79 @@
             },
             {
               "en": "intensity",
-              "ko": "강도"
+              "ko": "강도, 강렬함"
             },
             {
-              "en": "impelling",
-              "ko": "강하게 밀어붙이는"
+              "en": "fertile",
+              "ko": "비옥한"
             },
             {
-              "en": "reassurance",
-              "ko": "안심, 확신"
-            },
-            {
-              "en": "myriad",
-              "ko": "무수히 많은"
-            },
-            {
-              "en": "confirm",
-              "ko": "확인하다"
-            },
-            {
-              "en": "identity",
-              "ko": "정체성"
+              "en": "glacier",
+              "ko": "빙하"
             },
             {
               "en": "separate",
-              "ko": "분리된"
+              "ko": "분리하다"
             },
             {
-              "en": "companionship",
-              "ko": "교제, 동료애"
+              "en": "abandon",
+              "ko": "버리다, 포기하다"
             },
             {
-              "en": "solitude",
-              "ko": "고독"
+              "en": "adequate",
+              "ko": "충분한, 적절한"
             },
             {
-              "en": "exchange",
-              "ko": "주고받다, 교환하다"
+              "en": "bias",
+              "ko": "편견"
             },
             {
-              "en": "conversational",
-              "ko": "대화의"
+              "en": "coherent",
+              "ko": "일관성 있는"
             },
             {
-              "en": "non-verbal",
-              "ko": "비언어적인"
+              "en": "deliberate",
+              "ko": "의도적인"
             },
             {
-              "en": "approval",
-              "ko": "인정, 승인"
+              "en": "eliminate",
+              "ko": "제거하다"
             },
             {
-              "en": "bodily",
-              "ko": "신체의"
+              "en": "feasible",
+              "ko": "실현 가능한"
             },
             {
-              "en": "basic",
-              "ko": "기본적인"
+              "en": "genuine",
+              "ko": "진짜의"
             },
             {
-              "en": "generally",
-              "ko": "일반적으로"
+              "en": "hostile",
+              "ko": "적대적인"
             },
             {
-              "en": "seek",
-              "ko": "추구하다"
+              "en": "implicit",
+              "ko": "암시적인"
             },
             {
-              "en": "extended",
-              "ko": "긴, 연장된"
+              "en": "justify",
+              "ko": "정당화하다"
             },
             {
-              "en": "impulse",
-              "ko": "충동"
+              "en": "linger",
+              "ko": "오래 남다, 머뭇거리다"
+            },
+            {
+              "en": "mutual",
+              "ko": "서로의, 상호간의"
+            },
+            {
+              "en": "neutral",
+              "ko": "중립적인"
+            },
+            {
+              "en": "obscure",
+              "ko": "모호한; 가리다"
             }
           ]
         },
@@ -105,91 +105,437 @@
             },
             {
               "en": "inquire",
-              "ko": "질문하다, 탐구하다"
+              "ko": "묻다, 탐구하다"
             },
             {
-              "en": "memorize",
-              "ko": "암기하다"
+              "en": "persist",
+              "ko": "계속되다, 고집하다"
             },
             {
-              "en": "motivated",
-              "ko": "동기부여된"
+              "en": "prevail",
+              "ko": "우세하다, 만연하다"
             },
             {
-              "en": "explore",
-              "ko": "탐구하다"
+              "en": "rigid",
+              "ko": "엄격한, 뻣뻣한"
             },
             {
-              "en": "lifelong",
-              "ko": "평생의"
+              "en": "scarce",
+              "ko": "부족한, 드문"
             },
             {
-              "en": "discourage",
-              "ko": "단념시키다"
+              "en": "subtle",
+              "ko": "미묘한"
             },
             {
-              "en": "abrupt",
-              "ko": "갑작스러운"
+              "en": "tedious",
+              "ko": "지루한"
             },
             {
-              "en": "potential",
-              "ko": "잠재적인"
+              "en": "undermine",
+              "ko": "약화시키다"
             },
             {
-              "en": "overlook",
-              "ko": "간과하다"
+              "en": "vulnerable",
+              "ko": "취약한"
             },
             {
-              "en": "pressing",
-              "ko": "긴급한"
+              "en": "accumulate",
+              "ko": "축적하다"
             },
             {
-              "en": "disappear",
-              "ko": "사라지다"
+              "en": "boost",
+              "ko": "끌어올리다, 촉진하다"
             },
             {
-              "en": "routine",
-              "ko": "루틴, 정해진 순서"
+              "en": "compel",
+              "ko": "강요하다"
             },
             {
-              "en": "transition",
-              "ko": "변화, 전환"
+              "en": "decline",
+              "ko": "감소하다; 거절하다"
             },
             {
-              "en": "establish",
-              "ko": "마련하다, 확립하다"
+              "en": "evident",
+              "ko": "분명한"
             },
             {
-              "en": "effective",
-              "ko": "효과적인"
+              "en": "fluctuate",
+              "ko": "변동하다"
             },
             {
-              "en": "material",
-              "ko": "자료"
+              "en": "harsh",
+              "ko": "가혹한, 거친"
             },
             {
-              "en": "prepared",
-              "ko": "준비된"
+              "en": "inherent",
+              "ko": "내재된"
             },
             {
-              "en": "summary",
-              "ko": "요약"
+              "en": "manipulate",
+              "ko": "조작하다"
             },
             {
-              "en": "develop",
-              "ko": "전개하다, 발전시키다"
+              "en": "notion",
+              "ko": "개념, 생각"
+            }
+          ]
+        },
+        {
+          "id": "03",
+          "name": "3강",
+          "words": [
+            {
+              "en": "optimal",
+              "ko": "최적의"
+            },
+            {
+              "en": "peculiar",
+              "ko": "독특한, 이상한"
+            },
+            {
+              "en": "reluctant",
+              "ko": "꺼리는, 마지못한"
+            },
+            {
+              "en": "sustain",
+              "ko": "지탱하다, 유지하다"
+            },
+            {
+              "en": "trigger",
+              "ko": "촉발하다"
+            },
+            {
+              "en": "utilize",
+              "ko": "활용하다"
+            },
+            {
+              "en": "vital",
+              "ko": "필수적인"
+            },
+            {
+              "en": "weary",
+              "ko": "지친"
+            },
+            {
+              "en": "yield",
+              "ko": "산출하다; 양보하다"
+            },
+            {
+              "en": "ambiguous",
+              "ko": "애매한"
+            },
+            {
+              "en": "benevolent",
+              "ko": "자애로운"
+            },
+            {
+              "en": "contradict",
+              "ko": "모순되다, 반박하다"
+            },
+            {
+              "en": "diminish",
+              "ko": "줄어들다"
+            },
+            {
+              "en": "endure",
+              "ko": "견디다"
+            },
+            {
+              "en": "foster",
+              "ko": "촉진하다, 기르다"
+            },
+            {
+              "en": "grasp",
+              "ko": "파악하다; 움켜쥐다"
+            },
+            {
+              "en": "hinder",
+              "ko": "방해하다"
+            },
+            {
+              "en": "impose",
+              "ko": "부과하다"
+            },
+            {
+              "en": "integrate",
+              "ko": "통합하다"
+            },
+            {
+              "en": "query",
+              "ko": "질문; 질문하다"
+            }
+          ]
+        },
+        {
+          "id": "04",
+          "name": "4강",
+          "words": [
+            {
+              "en": "legitimate",
+              "ko": "정당한, 합법적인"
+            },
+            {
+              "en": "magnify",
+              "ko": "확대하다"
+            },
+            {
+              "en": "negotiate",
+              "ko": "협상하다"
+            },
+            {
+              "en": "obstacle",
+              "ko": "장애물"
+            },
+            {
+              "en": "paradox",
+              "ko": "역설"
+            },
+            {
+              "en": "quantify",
+              "ko": "수량화하다"
+            },
+            {
+              "en": "refine",
+              "ko": "정제하다, 다듬다"
+            },
+            {
+              "en": "speculate",
+              "ko": "추측하다"
+            },
+            {
+              "en": "tolerate",
+              "ko": "참다, 견디다"
+            },
+            {
+              "en": "unify",
+              "ko": "통합하다"
+            },
+            {
+              "en": "verify",
+              "ko": "확인하다, 입증하다"
+            },
+            {
+              "en": "withstand",
+              "ko": "견뎌내다"
+            },
+            {
+              "en": "accelerate",
+              "ko": "가속하다"
+            },
+            {
+              "en": "breach",
+              "ko": "위반; 위반하다"
+            },
+            {
+              "en": "cease",
+              "ko": "중단하다"
+            },
+            {
+              "en": "dispute",
+              "ko": "논쟁하다; 분쟁"
+            },
+            {
+              "en": "exclude",
+              "ko": "제외하다"
+            },
+            {
+              "en": "fragment",
+              "ko": "조각, 파편"
+            },
+            {
+              "en": "hazard",
+              "ko": "위험 요소"
+            },
+            {
+              "en": "immerse",
+              "ko": "몰두시키다, 담그다"
             }
           ]
         }
       ]
     },
     {
-      "slug": "pdf-upload-book",
-      "name": "pdf upload book",
-      "publisher": "",
-      "sort": 100,
+      "slug": "ebs-2026-wansung-eng",
+      "name": "2026 수능완성 영어",
+      "publisher": "EBS",
+      "grade": "고3",
       "active": true,
-      "units": []
+      "sample": true,
+      "units": [
+        {
+          "id": "01",
+          "name": "1강",
+          "words": [
+            {
+              "en": "prompt",
+              "ko": "촉발하다; 즉각적인"
+            },
+            {
+              "en": "restrain",
+              "ko": "억제하다"
+            },
+            {
+              "en": "severe",
+              "ko": "심각한, 혹독한"
+            },
+            {
+              "en": "temporary",
+              "ko": "일시적인"
+            },
+            {
+              "en": "uniform",
+              "ko": "획일적인; 제복"
+            },
+            {
+              "en": "vague",
+              "ko": "모호한"
+            },
+            {
+              "en": "widespread",
+              "ko": "널리 퍼진"
+            },
+            {
+              "en": "abundant",
+              "ko": "풍부한"
+            },
+            {
+              "en": "barrier",
+              "ko": "장벽"
+            },
+            {
+              "en": "confine",
+              "ko": "제한하다, 가두다"
+            },
+            {
+              "en": "deprive",
+              "ko": "박탈하다"
+            },
+            {
+              "en": "emerge",
+              "ko": "나타나다, 드러나다"
+            },
+            {
+              "en": "fatigue",
+              "ko": "피로"
+            },
+            {
+              "en": "gratitude",
+              "ko": "감사"
+            },
+            {
+              "en": "heritage",
+              "ko": "유산"
+            },
+            {
+              "en": "illusion",
+              "ko": "착각, 환상"
+            },
+            {
+              "en": "intuition",
+              "ko": "직관"
+            },
+            {
+              "en": "keen",
+              "ko": "예리한, 열망하는"
+            },
+            {
+              "en": "literal",
+              "ko": "문자 그대로의"
+            },
+            {
+              "en": "modest",
+              "ko": "겸손한; 적당한"
+            }
+          ]
+        },
+        {
+          "id": "02",
+          "name": "2강",
+          "words": [
+            {
+              "en": "nurture",
+              "ko": "양육하다, 기르다"
+            },
+            {
+              "en": "obedience",
+              "ko": "복종"
+            },
+            {
+              "en": "plausible",
+              "ko": "그럴듯한"
+            },
+            {
+              "en": "quest",
+              "ko": "탐구, 추구"
+            },
+            {
+              "en": "reinforce",
+              "ko": "강화하다"
+            },
+            {
+              "en": "stimulate",
+              "ko": "자극하다"
+            },
+            {
+              "en": "thrive",
+              "ko": "번성하다"
+            },
+            {
+              "en": "undergo",
+              "ko": "겪다"
+            },
+            {
+              "en": "vanish",
+              "ko": "사라지다"
+            },
+            {
+              "en": "wander",
+              "ko": "배회하다"
+            },
+            {
+              "en": "anticipate",
+              "ko": "예상하다"
+            },
+            {
+              "en": "breakthrough",
+              "ko": "돌파구"
+            },
+            {
+              "en": "conform",
+              "ko": "순응하다"
+            },
+            {
+              "en": "dedicate",
+              "ko": "헌신하다, 바치다"
+            },
+            {
+              "en": "enhance",
+              "ko": "향상시키다"
+            },
+            {
+              "en": "fulfill",
+              "ko": "이행하다, 충족시키다"
+            },
+            {
+              "en": "gaze",
+              "ko": "응시하다"
+            },
+            {
+              "en": "halt",
+              "ko": "멈추다; 정지"
+            },
+            {
+              "en": "imitate",
+              "ko": "모방하다"
+            },
+            {
+              "en": "intervene",
+              "ko": "개입하다"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

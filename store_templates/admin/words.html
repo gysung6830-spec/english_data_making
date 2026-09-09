@@ -3,8 +3,19 @@
 
 {% block body %}
 <div class="adm-head">
-  <h1>단어장</h1>
-  <p>교재 단어를 강 단위로 담아 두면, 손님이 범위를 골라 <b>단어 시험지</b>를 뽑아 갑니다.</p>
+  <div class="row">
+    <div>
+      <h1>단어장</h1>
+      <p>교재 단어를 강 단위로 담아 두면, 손님이 범위를 골라 <b>단어 시험지</b>를 뽑고
+        <b>화면에서 바로</b> 풉니다. 두 화면이 이 단어를 함께 씁니다.</p>
+    </div>
+    <div class="spacer"></div>
+    {# 넣어 두신 단어는 새로 배포해도 안 덮입니다. 예시만 다시 깔 길을 둡니다. #}
+    <form method="post" action="{{ url_for('admin.words_refresh_samples') }}"
+          onsubmit="return confirm('예시 단어장만 최신판으로 다시 깝니다. 직접 만드신 단어장은 그대로 있습니다. 계속할까요?');">
+      <button class="btn btn-ghost btn-sm" type="submit">예시 단어장 불러오기</button>
+    </form>
+  </div>
 </div>
 
 <div class="steps-help">
