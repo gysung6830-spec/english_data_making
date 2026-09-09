@@ -2916,6 +2916,58 @@ def test_word_pdf_is_actually_read():
     print("PASS  단어책 PDF 를 실제로 읽어냄 (두 칸 · 강 칸 · 예문 · 스캔)")
 
 
+def test_study_and_sheet_share_one_wordbook():
+    """단어 학습과 단어 시험지는 같은 단어를 봐야 합니다.
+
+    한쪽에만 있는 단어가 생기면, 화면에서 푼 것을 시험지로 뽑을 수 없고
+    틀린 단어를 다시 낼 수도 없습니다. 두 화면이 단어장 하나를 함께 씁니다.
+    PDF 로 올린 단어도 마찬가지여야 합니다 — 올리는 길이 하나이기 때문입니다.
+    """
+    a = admin()
+    a.post("/admin/words/new", data={"name": "shared word book", "publisher": "EBS"},
+           follow_redirects=True)
+    slug = "shared-word-book"
+    # 올리는 길은 하나 — PDF 하나만 올리고 두 화면을 다 봅니다
+    a.post(f"/admin/words/{slug}/unit",
+           data={"unit_name": "", "words": sc.read_wordfile("책.pdf", _wordbook_pdf("unit"))[0]},
+           follow_redirects=True)
+
+    book = sc.find_wordbook(slug)
+    words = {(w["en"], w["ko"]) for u in book["units"] for w in u["words"]}
+    assert len(words) == 6, words
+    assert [u["name"] for u in book["units"]] == ["Day 47", "Day 48"]
+
+    c = client()
+    # 두 화면 모두 같은 단어장을 읽습니다 (읽는 함수가 하나여야 합니다)
+    assert store.flat_words(book) == store.flat_words(sc.find_wordbook(slug))
+    ids = [u["id"] for u in book["units"]]
+    sheet = body(c.get(f"/words/{slug}"))
+    study = body(c.get(f"/words/{slug}/study?" + "&".join(f"unit={i}" for i in ids) + "&n=6"))
+    for name in ("Day 47", "Day 48"):
+        assert name in sheet, name                 # 시험지는 강을 골라 뽑습니다
+    # 학습 화면에 실린 단어는 모두 그 단어장에서 온 것이어야 합니다
+    for en, ko in words:
+        assert en in study, en
+
+    # 올린 단어를 고치면 두 화면에 함께 반영됩니다 (한쪽만 옛것이면 안 됩니다)
+    a.post(f"/admin/words/{slug}/unit",
+           data={"unit_name": "Day 49", "words": "keen\t예리한"}, follow_redirects=True)
+    again = sc.find_wordbook(slug)
+    assert sc.word_count(again) == 7
+    assert "Day 49" in body(c.get(f"/words/{slug}"))   # 시험지 범위에 새 강이 섭니다
+    new_id = [u["id"] for u in again["units"] if u["name"] == "Day 49"][0]
+    assert "keen" in body(c.get(f"/words/{slug}/study?unit={new_id}&n=1"))
+
+    # 단어 학습 목록과 시험지 목록에 같은 책이 서고, 서로 오갈 수 있습니다
+    for url in ("/study", "/words"):
+        assert "shared word book" in body(c.get(url)), url
+    assert 'href="/study"' in body(c.get("/words"))
+    assert 'href="/words"' in body(c.get("/study"))
+
+    a.post(f"/admin/words/{slug}/delete", follow_redirects=True)
+    print("PASS  단어 학습 · 시험지가 단어장 하나를 함께 씀 (PDF 로 올린 것도)")
+
+
 def test_word_study_screen():
     """화면에서 한 문제씩 푸는 자리 — 뜻 고르기 · 철자 채우기 · 소리 · 오답 시험지."""
     import json as _json
@@ -5629,6 +5681,7 @@ def run_all():
     test_menu_has_no_duplicates()
     test_mobile_quick_bar()
     test_word_pdf_is_actually_read()
+    test_study_and_sheet_share_one_wordbook()
     test_word_study_screen()
     test_hidden_really_hides()
     test_policy_tables_stack_on_phone()

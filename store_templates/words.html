@@ -13,6 +13,21 @@
         회원가입도 결제도 없습니다.</p>
     </div>
 
+    {# 같은 단어장을 화면에서 바로 풀 수도 있습니다. 두 화면은 단어를 함께 씁니다. #}
+    <div class="study-ways">
+      <div class="sw on">
+        <span class="sw-tag">지금 여기</span>
+        <b>시험지 뽑기</b>
+        <p>인쇄해서 학생에게 나눠 주실 때.</p>
+      </div>
+      <div class="sw">
+        <span class="sw-tag">화면으로</span>
+        <b>바로 풀기</b>
+        <p>같은 단어를 폰에서 한 문제씩. 틀린 것만 시험지로 뽑을 수 있습니다.</p>
+        <a href="{{ url_for('study_page') }}">단어 학습 →</a>
+      </div>
+    </div>
+
     {# 출판사로 먼저 나눕니다. 선생님들은 교재 이름보다 'EBS 것' 으로 기억하십니다. #}
     <nav class="pub-nav" aria-label="출판사">
       {% for g in groups %}
