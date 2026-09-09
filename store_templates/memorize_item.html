@@ -36,37 +36,69 @@
       <span class="q-streak" id="q-streak" hidden></span>
     </div>
 
-    {# ---- 1. 직독직해 — 끊어 읽고, 덩어리째 뜻을 얹습니다 ------------------ #}
+    {# ---- 2. 직독직해 — 덩어리마다 우리말을 맞춰 봅니다 ------------------ #}
     <div class="mem-pane" id="pane-chunk" hidden>
-      <p class="hint">앞에서 뒤로, <b>끊어진 자리마다 한 번씩 쉬며</b> 읽으세요.
-        덩어리를 누르면 그 덩어리의 뜻이 열립니다.</p>
-      <div class="mem-tools">
-        <button type="button" class="btn btn-ghost btn-sm" id="ck-all">뜻 모두 보기</button>
-        <button type="button" class="btn btn-ghost btn-sm" id="say-all">전체 듣기</button>
+      <div class="mem-tabs sub" role="tablist">
+        <button type="button" class="mt2 on" data-sub="test">맞춰 보기</button>
+        <button type="button" class="mt2" data-sub="see">보면서 읽기</button>
       </div>
-      {% for r in rows %}
-        <div class="ck-sent">
-          <span class="sent-no">{{ r.no }}</span>
-          <div class="ck-body">
-            <div class="ck-row">
-              {% for c in r.chunks %}
-                <span class="ck" {% if c.ko %}data-ko="{{ c.ko }}"{% endif %}>
-                  <b>{{ c.en }}</b>
-                  {% if c.ko %}<i hidden>{{ c.ko }}</i>{% endif %}
-                </span>
-              {% endfor %}
-            </div>
-            {% if r.ko %}<p class="ck-ko" hidden>{{ r.ko }}</p>{% endif %}
+
+      {# 2-1. 맞추기 — 영어 덩어리 차례대로, 우리말 조각을 골라 채웁니다 #}
+      <div id="sub-test">
+        {% if chunk_rows %}
+          <p class="hint">영어 덩어리를 <b>앞에서 뒤로</b> 읽으며, 그 자리에 맞는
+            우리말 조각을 고르세요. 우리말 어순으로 바꾸지 말고
+            <b>영어 차례 그대로</b>입니다.</p>
+          <div class="mem-tools">
+            <button type="button" class="btn btn-ghost btn-sm" id="ck-reset">다시 섞기</button>
+            <div class="spacer"></div>
+            <span class="ord-count"><b id="ck-n">0</b> / <span id="ck-all-n">0</span> 맞춤</span>
           </div>
-          <button type="button" class="sent-say" data-en="{{ r.en }}" aria-label="이 문장 듣기">🔊</button>
+          <div id="ck-test"></div>
+          <div class="mem-score" id="ck-score" hidden></div>
+        {% else %}
+          <p class="empty">이 지문은 아직 덩어리 해석이 없어 맞추기를 건너뜁니다.</p>
+        {% endif %}
+      </div>
+
+      {# 2-2. 그냥 보면서 읽기 #}
+      <div id="sub-see" hidden>
+        <p class="hint">덩어리를 누르면 그 덩어리의 뜻이 열립니다.</p>
+        <div class="mem-tools">
+          <button type="button" class="btn btn-ghost btn-sm" id="ck-all">뜻 모두 보기</button>
+          <button type="button" class="btn btn-ghost btn-sm" id="say-all">전체 듣기</button>
         </div>
-      {% endfor %}
+        {% for r in rows %}
+          <div class="ck-sent">
+            <span class="sent-no">{{ r.no }}</span>
+            <div class="ck-body">
+              <div class="ck-row">
+                {% for c in r.chunks %}
+                  <span class="ck">
+                    <b>{{ c.en }}</b>
+                    {% if c.ko %}<i hidden>{{ c.ko }}</i>{% endif %}
+                  </span>
+                {% endfor %}
+              </div>
+              {% if r.ko %}<p class="ck-ko" hidden>{{ r.ko }}</p>{% endif %}
+            </div>
+            <button type="button" class="sent-say" data-en="{{ r.en }}" aria-label="이 문장 듣기">🔊</button>
+          </div>
+        {% endfor %}
+      </div>
     </div>
 
     {# ---- 1. 내용이해 — 영어를 붙잡기 전에 '무슨 이야기인지' 부터 -------- #}
     <div class="mem-pane" id="pane-read">
       <p class="hint">영어를 붙잡기 전에 <b>무슨 이야기인지</b>부터 머리에 넣습니다.
         내용을 알고 읽는 것과 모르고 읽는 것은 속도가 다릅니다.</p>
+
+      {% if item.intro %}
+        <div class="brief">
+          <b class="brief-head">이 지문, 이런 이야기예요</b>
+          <p>{{ item.intro }}</p>
+        </div>
+      {% endif %}
 
       {% if terms %}
         <div class="term-box">
@@ -276,6 +308,7 @@
       });
       if (b.dataset.tab === 'blank' && !document.querySelector('#blank-list .bl')) build();
       if (b.dataset.tab === 'read' && !document.querySelector('#ord-pool .ord')) shuffle();
+      if (b.dataset.tab === 'chunk' && !document.querySelector('#ck-test .ck-spot')) ckBuild();
 
       window.scrollTo({top: 0, behavior: 'smooth'});
     });
@@ -350,9 +383,103 @@
   var reset = document.getElementById('ord-reset');
   reset && reset.addEventListener('click', shuffle);
 
-  /* ---- 2. 직독직해 ---- */
-  var opened = 0;
-  document.querySelectorAll('.ck').forEach(function (c) {
+  /* ---- 2. 직독직해 ----
+     보여 주기만 하면 눈으로 훑고 지나갑니다. 영어 덩어리 자리마다 우리말
+     조각을 맞춰 넣게 해야, 어디서 끊고 어느 차례로 읽는지가 몸에 붙습니다.
+     맞추는 단위는 낱말이 아니라 언제나 '의미 덩어리' 입니다. */
+  var CK = {{ chunk_rows|tojson }};
+  document.querySelectorAll('.mt2').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.mt2').forEach(function (x) { x.classList.remove('on'); });
+      b.classList.add('on');
+      document.getElementById('sub-test').hidden = (b.dataset.sub !== 'test');
+      document.getElementById('sub-see').hidden = (b.dataset.sub !== 'see');
+    });
+  });
+
+  var ckAt = 0, ckHit = 0, ckSpots = [];
+  function ckBuild() {
+    var box = document.getElementById('ck-test');
+    if (!box) return;
+    box.innerHTML = '';
+    ckAt = 0; ckHit = 0; ckSpots = [];
+    CK.forEach(function (row) {
+      var line = document.createElement('div');
+      line.className = 'ck-sent';
+      var no = document.createElement('span');
+      no.className = 'sent-no'; no.textContent = row.no;
+      var body = document.createElement('div');
+      body.className = 'ck-body';
+      var strip = document.createElement('div');
+      strip.className = 'ck-row';
+      row.chunks.forEach(function (c) {
+        var cell = document.createElement('span');
+        cell.className = 'ck ck-spot';
+        var en = document.createElement('b');
+        en.textContent = c.en;
+        var slot = document.createElement('i');
+        slot.className = 'ck-slot'; slot.textContent = '?';
+        cell.appendChild(en); cell.appendChild(slot);
+        strip.appendChild(cell);
+        ckSpots.push({cell: cell, slot: slot, ko: c.ko});
+      });
+      body.appendChild(strip);
+      line.appendChild(no); line.appendChild(body);
+      box.appendChild(line);
+    });
+    /* 우리말 조각은 섞어서 아래에 늘어놓습니다 */
+    var pool = document.createElement('div');
+    pool.className = 'ko-pool'; pool.id = 'ko-pool';
+    var order = ckSpots.map(function (s, i) { return i; });
+    for (var i = order.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = order[i]; order[i] = order[j]; order[j] = t;
+    }
+    order.forEach(function (i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'ko-piece'; b.dataset.i = i;
+      b.textContent = ckSpots[i].ko;
+      b.addEventListener('click', function () { ckPick(b); });
+      pool.appendChild(b);
+    });
+    box.appendChild(pool);
+    document.getElementById('ck-all-n').textContent = ckSpots.length;
+    document.getElementById('ck-n').textContent = '0';
+    document.getElementById('ck-score').hidden = true;
+    ckMark();
+  }
+  function ckMark() {                                /* 지금 채울 자리를 짚어 줍니다 */
+    ckSpots.forEach(function (s, i) { s.cell.classList.toggle('now', i === ckAt); });
+    if (ckSpots[ckAt]) {
+      ckSpots[ckAt].cell.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+    }
+  }
+  function ckPick(b) {
+    var i = parseInt(b.dataset.i, 10);
+    if (i !== ckAt) {
+      b.classList.add('no');
+      setTimeout(function () { b.classList.remove('no'); }, 600);
+      return;
+    }
+    var spot = ckSpots[ckAt];
+    spot.slot.textContent = spot.ko;
+    spot.cell.classList.add('got');
+    b.remove();
+    ckHit++; ckAt++;
+    document.getElementById('ck-n').textContent = ckHit;
+    if (ckAt >= ckSpots.length) {
+      var box = document.getElementById('ck-score');
+      box.hidden = false; box.className = 'mem-score all';
+      box.innerHTML = '<b>끝까지 맞추셨습니다.</b> 이제 빈칸채우기로 넘어가 보세요.';
+      clear(2, '2단계 깼습니다 — 직독직해');
+      return;
+    }
+    ckMark();
+  }
+  var ckReset = document.getElementById('ck-reset');
+  ckReset && ckReset.addEventListener('click', ckBuild);
+
+  document.querySelectorAll('#sub-see .ck').forEach(function (c) {
     c.addEventListener('click', function () {
       var i = c.querySelector('i');
       if (i) i.hidden = !i.hidden;
@@ -360,20 +487,15 @@
         var ko = c.closest('.ck-body').querySelector('.ck-ko');
         if (ko) ko.hidden = !ko.hidden;
       }
-      opened++;
-      if (opened >= Math.min(8, document.querySelectorAll('.ck').length)) {
-        clear(2, '2단계 깼습니다 — 직독직해');
-      }
     });
   });
   var ckAll = document.getElementById('ck-all');
   ckAll && ckAll.addEventListener('click', function () {
-    var all = document.querySelectorAll('.ck i, .ck-ko');
+    var all = document.querySelectorAll('#sub-see .ck i, .ck-ko');
     var show = false;
     all.forEach(function (x) { if (x.hidden) show = true; });
     all.forEach(function (x) { x.hidden = !show; });
     ckAll.textContent = show ? '뜻 모두 숨기기' : '뜻 모두 보기';
-    if (show) clear(2, '2단계 깼습니다 — 직독직해');
   });
 
   /* ---- 3. 빈칸채우기 ----

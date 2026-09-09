@@ -1844,6 +1844,9 @@ def memorize_item(slug, unit_id, item_id):
         has_grammar=any(r["marks"] for r in rows),
         mark_total=sum(len(r["marks"]) for r in rows),
         terms=item.get("terms") or [],
+        # 덩어리 맞추기에 쓸 우리말 조각 — 섞어 내려면 통째로 넘겨야 합니다
+        chunk_rows=[{"no": r["no"], "chunks": r["chunks"]} for r in rows
+                    if any(c["ko"] for c in r["chunks"])],
         levels=sc.BLANK_LEVELS, no=where + 1, total=len(flat),
         prev=flat[where - 1] if where else None,
         next=flat[where + 1] if where + 1 < len(flat) else None,
@@ -1913,18 +1916,38 @@ def words_study(slug):
     unit_ids = [u for u in request.args.getlist("unit") if u in ids]
     if not unit_ids:
         unit_ids = [book["units"][0]["id"]] if book["units"] else []
-    kinds = [k for k in request.args.getlist("kind") if k in STUDY_KINDS] or ["choice", "spell"]
+    kinds = [k for k in request.args.getlist("kind") if k in STUDY_KINDS]
+    mode = request.args.get("mode", "")
     count = sc.to_int(request.args.get("n"), 0) or 10
+    only_raw = request.args.get("only", "")
+
+    # 아무것도 안 고르고 들어오시면 먼저 무엇을 어떻게 할지 정합니다.
+    # 뜻만 볼지 철자까지 쓸지, 아니면 깜빡이로 훑을지는 사람마다 다릅니다.
+    if not kinds and mode not in ("flash",) and not only_raw:
+        return render_template("words_setup.html", b=book, kinds=STUDY_KINDS,
+                               total=sc.word_count(book), cap=QUIZ_MAX)
+
+    kinds = kinds or ["choice", "spell"]        # 틀린 것만 다시 풀 때는 둘 다 냅니다
 
     rows = [w for w in flat_words(book) if w["unit_id"] in unit_ids]
     # 틀린 것만 다시 풀 때 — 아까 틀린 단어 번호만 넘어옵니다
-    only = [sc.to_int(x, -1) for x in request.args.get("only", "").split(",") if x]
+    only = [sc.to_int(x, -1) for x in only_raw.split(",") if x]
     if only:
         keep = set(only)
         rows = [w for w in flat_words(book) if w["no"] in keep]
         count = len(rows)
     if not rows:
         return redirect(url_for("words_book", slug=slug))
+
+    # 깜빡이 — 문제를 푸는 것이 아니라 눈으로 훑는 자리입니다. 뜻만 스쳐
+    # 지나가게 두면, 풀기 전에 낯을 익히는 데 씁니다.
+    if mode == "flash":
+        names0 = [u.get("name") or u.get("id") for u in book["units"] if u["id"] in unit_ids]
+        pack = rows[:] if count >= len(rows) else random.Random(
+            sc.to_int(request.args.get("seed"), 0) or 7).sample(rows, count)
+        return render_template("words_flash.html", b=book, words=pack,
+                               scope=" · ".join(names0) or book["name"],
+                               back=url_for("words_study", slug=slug))
 
     seed = sc.to_int(request.args.get("seed"), 0) or random.randrange(1, 999999)
     deck = build_deck(rows, kinds, count, seed)

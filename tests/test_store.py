@@ -1170,17 +1170,26 @@ def test_word_study_is_reachable_from_the_menu():
     # 머리말에 제 자리가 있어야 합니다 — 내 자료함과 같은 층, 그림 단추로.
     home = body(c.get("/"))
     assert 'class="study-link' in home and 'href="/study"' in home
-    assert 'aria-label="단어 학습"' in home
+    assert 'aria-label="학습"' in home                 # 단어와 지문을 함께 담는 자리
     head = home[home.index("head-cta"):home.index("</header>")]
     for must in ("/cart", "/study", "/my"):                # 장바구니 · 단어 학습 · 자료함
         assert must in head, must
 
     # 그 자리를 누르면 교재를 고르는 화면이 열립니다
     study = body(c.get("/study"))
-    assert "단어 학습" in study and "화면에서 풀기" in study
-    assert "시험지 뽑기" in study, "인쇄하는 길과 헷갈리지 않게 갈라 줘야 합니다"
+    for must in ("단어 학습", "지문 암기", "시험지 뽑기"):
+        assert must in study, must                     # 세 갈래를 맨 위에서 가름
     slug0 = sc.load_words()["books"][0]["slug"]
     assert f"/words/{slug0}/study" in study, "책 카드가 바로 풀기로 가야 합니다"
+
+    # 무엇을 어떻게 할지 먼저 고릅니다 — 뜻만 볼지, 철자까지 쓸지, 깜빡이로 훑을지
+    setup = body(c.get(f"/words/{slug0}/study"))
+    for way in ("뜻 고르기", "철자 채우기", "둘 다 섞기", "깜빡이"):
+        assert way in setup, way
+    quiz = body(c.get(f"/words/{slug0}/study?kind=choice&n=5"))
+    assert "sq-choices" in quiz and "뜻 고르기" not in quiz.split("sq-play")[0][-400:]
+    flash = body(c.get(f"/words/{slug0}/study?mode=flash&n=5"))
+    assert "fl-card" in flash and "깜빡이" in flash
 
     # 메뉴 → 단어장 목록 → 책 고르기 → 여기서도 '단어 풀기' 가 보여야 합니다
     assert "/words" in home
@@ -2950,6 +2959,19 @@ def test_passage_memorizing_reads_then_blanks():
         assert f'data-no="{lv["no"]}"' in page, lv
     assert "sent-say" in page                           # 소리 내어 읽기
 
+    # 시작하기 전에 무슨 이야기인지 편한 말로 알려 줍니다
+    assert "이 지문, 이런 이야기예요" in page
+    assert first.get("intro"), "첫 지문에 안내글이 없습니다"
+    assert first["intro"][:24] in plain
+
+    # 직독직해는 보여 주는 것이 아니라 맞춰 보는 자리입니다
+    assert "맞춰 보기" in page and "보면서 읽기" in page
+    assert "우리말 어순으로 바꾸지 말고" in page
+    # 맞출 자리와 우리말 조각은 문장 수만큼 있어야 합니다
+    n = sum(len(sn.get("chunks") or []) for sn in first["sentences"])
+    assert n >= 10, n
+    assert page.count('"en":') >= n or "chunk_rows" in page or "ck-test" in page
+
     # 내용이해는 우리말이 먼저입니다. 차례 세우기도 우리말 문장으로 합니다.
     assert "우리말로 읽어 보기" in page and "이야기 차례 세우기" in page
     assert "먼저 이 말부터" in page                     # 어려운 개념 풀이
@@ -3206,7 +3228,7 @@ def test_sample_wordbooks_are_enough_to_try_it():
         assert b["name"] in body(c.get("/study")), b["name"]
         assert b["name"] in body(c.get("/words")), b["name"]
         ids = [u["id"] for u in b["units"]]
-        page = body(c.get(f"/words/{b['slug']}/study?"
+        page = body(c.get(f"/words/{b['slug']}/study?kind=choice&"
                           + "&".join(f"unit={i}" for i in ids) + "&n=10"))
         assert "문제" in page and b["name"] in page
 
@@ -3265,7 +3287,8 @@ def test_study_and_sheet_share_one_wordbook():
     assert store.flat_words(book) == store.flat_words(sc.find_wordbook(slug))
     ids = [u["id"] for u in book["units"]]
     sheet = body(c.get(f"/words/{slug}"))
-    study = body(c.get(f"/words/{slug}/study?" + "&".join(f"unit={i}" for i in ids) + "&n=6"))
+    study = body(c.get(f"/words/{slug}/study?kind=choice&"
+                       + "&".join(f"unit={i}" for i in ids) + "&n=6"))
     for name in ("Day 47", "Day 48"):
         assert name in sheet, name                 # 시험지는 강을 골라 뽑습니다
     # 학습 화면에 실린 단어는 모두 그 단어장에서 온 것이어야 합니다
@@ -3279,7 +3302,7 @@ def test_study_and_sheet_share_one_wordbook():
     assert sc.word_count(again) == 7
     assert "Day 49" in body(c.get(f"/words/{slug}"))   # 시험지 범위에 새 강이 섭니다
     new_id = [u["id"] for u in again["units"] if u["name"] == "Day 49"][0]
-    assert "keen" in body(c.get(f"/words/{slug}/study?unit={new_id}&n=1"))
+    assert "keen" in body(c.get(f"/words/{slug}/study?kind=spell&unit={new_id}&n=1"))
 
     # 단어 학습 목록과 시험지 목록에 같은 책이 서고, 서로 오갈 수 있습니다
     for url in ("/study", "/words"):
@@ -3303,7 +3326,7 @@ def test_word_study_screen():
         "words": "\n".join(f"word{i}\t뜻{i}번" for i in range(12))},
         follow_redirects=True)
 
-    page = body(client().get(f"/words/{slug}/study?n=8&seed=42"))
+    page = body(client().get(f"/words/{slug}/study?kind=choice&kind=spell&n=8&seed=42"))
     deck = _json.loads(page.split('id="sq-deck">', 1)[1].split("</script>", 1)[0]
                        .replace("\\u003c", "<"))
     assert len(deck) == 8, len(deck)
