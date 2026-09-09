@@ -1774,6 +1774,20 @@ def words_page():
                            groups=sc.words_by_publisher(data["books"]), kinds=sc.QUIZ_KINDS)
 
 
+@app.route("/study")
+def study_page():
+    """단어 학습 — 화면에서 바로 푸는 자리.
+
+    시험지 만들기(인쇄)와는 하는 일이 다릅니다. 뽑아서 푸는 것이 아니라
+    폰으로 그 자리에서 푸는 것이라, 같은 메뉴 안에 묻어 두면 아무도 못
+    찾습니다. 머리말 아이콘으로 따로 냅니다.
+    """
+    data = sc.load_words()
+    return render_template("study.html", books=data["books"],
+                           groups=sc.words_by_publisher(data["books"]),
+                           kinds=STUDY_KINDS)
+
+
 @app.route("/words/<slug>")
 def words_book(slug):
     """강을 고르고 유형·문항 수를 정하는 화면."""

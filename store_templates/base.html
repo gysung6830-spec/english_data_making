@@ -67,6 +67,20 @@
         </svg>
         {% if cart_count %}<span class="cart-count">{{ cart_count }}</span>{% endif %}
       </a>
+      {# 단어 학습 — 인쇄가 아니라 폰으로 그 자리에서 푸는 자리. 시험지 메뉴
+         안에 묻어 두면 아무도 못 찾아, 따로 냅니다. #}
+      <a class="study-link {{ 'on' if request.endpoint in ['study_page','words_study'] }}"
+         href="{{ url_for('study_page') }}" aria-label="단어 학습" title="단어 학습">
+        <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
+          <path d="M12 6.6C10.4 5.3 8.4 4.7 6 4.7c-.9 0-1.7.1-2.4.2v13c.7-.1 1.5-.2 2.4-.2
+                   2.4 0 4.4.6 6 1.9 1.6-1.3 3.6-1.9 6-1.9.9 0 1.7.1 2.4.2v-13c-.7-.1-1.5-.2-2.4-.2
+                   -2.4 0-4.4.6-6 1.9z"
+                fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M12 6.6v13" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        </svg>
+        <span>단어 학습</span>
+      </a>
+
       {# 산 자료를 다시 받는 자리. 장바구니 다음에 둡니다. #}
       <a class="locker-link {{ 'on' if request.endpoint in ['my_page','my_locker'] }}"
          href="{{ url_for('my_page') }}" aria-label="내 자료함" title="내 자료함">
@@ -194,6 +208,7 @@
       <div>
         <h4>바로가기</h4>
         <div><a href="{{ url_for('free') }}">무료 자료실</a></div>
+        <div><a href="{{ url_for('study_page') }}">단어 학습</a></div>
         <div><a href="{{ url_for('lineup') }}#samples">자료 샘플 PDF</a></div>
         <div><a href="{{ url_for('products') }}">자료 목록</a></div>
         <div><a href="{{ url_for('lineup') }}">오르티카 라인업</a></div>

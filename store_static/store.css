@@ -1447,15 +1447,35 @@ label.dropzone{
   font-size:11px; font-weight:800; line-height:17px; text-align:center;
 }
 /* 내 자료함 — 장바구니 바로 옆. 산 자료를 다시 받는 자리라 글자도 같이 둡니다. */
-.locker-link{display:inline-flex; align-items:center; gap:7px; height:40px; padding:0 12px;
+.locker-link,
+.study-link{display:inline-flex; align-items:center; gap:7px; height:40px; padding:0 12px;
   border:1px solid var(--line-strong); border-radius:10px; color:var(--ink-2);
   font-size:14px; font-weight:600; white-space:nowrap;}
-.locker-link:hover{color:var(--brand); border-color:var(--brand);}
-.locker-link.on{color:var(--brand-dark); background:var(--brand-soft); border-color:var(--brand);}
+.locker-link:hover,
+.study-link:hover{color:var(--brand); border-color:var(--brand);}
+.locker-link.on,
+.study-link.on{color:var(--brand-dark); background:var(--brand-soft); border-color:var(--brand);}
 @media (max-width:900px){
-  .locker-link{padding:0; width:40px; justify-content:center; border-color:transparent;}
-  .locker-link span{display:none;}          /* 좁은 화면에선 그림만 */
+  .locker-link,
+  .study-link{padding:0; width:40px; justify-content:center; border-color:transparent;}
+  .locker-link span,
+  .study-link span{display:none;}          /* 좁은 화면에선 그림만 */
 }
+
+/* 단어 학습 — 인쇄해서 푸는 길과 화면에서 푸는 길을 먼저 갈라 줍니다 */
+.study-ways{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+  gap:12px; margin-bottom:18px;}
+.sw{padding:16px 18px; background:var(--card); border:1px solid var(--line);
+  border-radius:12px;}
+.sw.on{border-color:var(--brand); background:var(--brand-soft);}
+.sw-tag{display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:.02em;
+  color:var(--muted); margin-bottom:6px;}
+.sw.on .sw-tag{color:var(--brand-dark);}
+.sw b{display:block; font-size:16.5px; letter-spacing:-.02em; margin-bottom:4px;}
+.sw p{font-size:13.5px; color:var(--ink-2); margin:0; word-break:keep-all;}
+.sw a{display:inline-block; margin-top:8px; font-size:13.5px; font-weight:700;
+  color:var(--brand);}
+.study-kinds{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px;}
 
 /* 장바구니 화면 */
 .cart-list{display:flex; flex-direction:column; gap:10px; margin-bottom:20px;}

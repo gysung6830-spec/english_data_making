@@ -1167,8 +1167,23 @@ def test_word_study_is_reachable_from_the_menu():
     화면으로만 들어오므로, 거기에 길이 없으면 아무도 못 찾습니다.
     """
     c = client()
-    # 메뉴 → 단어장 목록 → 책 고르기 → 여기서 '단어 풀기' 가 보여야 합니다
-    assert "/words" in body(c.get("/"))
+    # 머리말에 제 자리가 있어야 합니다 — 내 자료함과 같은 층, 그림 단추로.
+    home = body(c.get("/"))
+    assert 'class="study-link' in home and 'href="/study"' in home
+    assert 'aria-label="단어 학습"' in home
+    head = home[home.index("head-cta"):home.index("</header>")]
+    for must in ("/cart", "/study", "/my"):                # 장바구니 · 단어 학습 · 자료함
+        assert must in head, must
+
+    # 그 자리를 누르면 교재를 고르는 화면이 열립니다
+    study = body(c.get("/study"))
+    assert "단어 학습" in study and "화면에서 풀기" in study
+    assert "시험지 뽑기" in study, "인쇄하는 길과 헷갈리지 않게 갈라 줘야 합니다"
+    slug0 = sc.load_words()["books"][0]["slug"]
+    assert f"/words/{slug0}/study" in study, "책 카드가 바로 풀기로 가야 합니다"
+
+    # 메뉴 → 단어장 목록 → 책 고르기 → 여기서도 '단어 풀기' 가 보여야 합니다
+    assert "/words" in home
     listing = body(c.get("/words"))
     slug = sc.load_words()["books"][0]["slug"]
     assert f"/words/{slug}" in listing
@@ -1180,7 +1195,7 @@ def test_word_study_is_reachable_from_the_menu():
     assert f"/words/{slug}/study" in body(c.get(f"/words/{slug}"))
     # 눌러 가면 실제로 열립니다
     assert c.get(f"/words/{slug}/study").status_code == 200
-    print("PASS  단어 풀기 — 메뉴에서 눌러서 닿음")
+    print("PASS  단어 학습 — 머리말 그림 단추 · 시험지 화면 둘 다에서 닿음")
 
 
 def test_admin_menu_is_short():
