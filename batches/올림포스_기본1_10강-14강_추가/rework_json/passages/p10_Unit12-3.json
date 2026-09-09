@@ -379,7 +379,8 @@
     {
      "tag": "의문사 how",
      "note": "'어떻게 ~하는지'",
-     "spans": ["how"]
+     "spans": ["how"],
+     "role": "전치사 about의 목적어절"
     },
     {
      "tag": "수동태 be run",
@@ -680,7 +681,8 @@
     {
      "tag": "접속사 that 생략",
      "note": "they believe (that) their views ~ — believe 뒤 that 생략",
-     "spans": ["believe"]
+     "spans": ["believe"],
+     "role": "believe의 목적어절"
     }
    ],
    "vocab": [

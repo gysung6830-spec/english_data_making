@@ -182,7 +182,8 @@
     {
      "tag": "관계부사 생략",
      "note": "the way (that/how) we interact — the way 뒤 관계부사 생략",
-     "spans": ["way"]
+     "spans": ["way"],
+     "antecedent": "the way"
     }
    ],
    "vocab": [
@@ -325,7 +326,8 @@
     {
      "tag": "관계사 that",
      "note": "individuals 수식",
-     "spans": ["that"]
+     "spans": ["that"],
+     "antecedent": "individuals"
     }
    ],
    "vocab": [
@@ -464,7 +466,8 @@
     {
      "tag": "명사절 that",
      "note": "worried의 목적어",
-     "spans": ["that"]
+     "spans": ["that"],
+     "role": "worried의 목적어절"
     },
     {
      "tag": "so+형용사+(that) 강조·결과",

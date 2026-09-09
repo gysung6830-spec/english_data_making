@@ -208,7 +208,8 @@
      "note": "no question 뒤 내용 부연",
      "spans": [
       "that"
-     ]
+     ],
+     "role": "question과 동격절"
     },
     {
      "tag": "부정사 to sing",
@@ -295,7 +296,8 @@
      "note": "the side 수식",
      "spans": [
       "that"
-     ]
+     ],
+     "antecedent": "the side"
     },
     {
      "tag": "동격",
@@ -417,7 +419,8 @@
      "note": "show의 목적어",
      "spans": [
       "that"
-     ]
+     ],
+     "role": "show의 목적어절"
     }
    ],
    "vocab": [
@@ -476,7 +479,8 @@
      "note": "'왜 ~하는지'(전치사 about의 목적어절)",
      "spans": [
       "why"
-     ]
+     ],
+     "role": "전치사 about의 목적어절"
     }
    ],
    "vocab": [],
@@ -514,7 +518,8 @@
      "note": "is의 보어",
      "spans": [
       "that"
-     ]
+     ],
+     "role": "is의 보어절"
     },
     {
      "tag": "분사구문 discerning",

@@ -503,7 +503,14 @@
     {
      "tag": "that절 나열",
      "note": "that ~, that ~ and that ~ 병렬",
-     "spans": ["that"]
+     "spans": ["that"],
+     "role": "confirm의 목적어절"
+    },
+    {
+     "tag": "관계사 that",
+     "note": "an identity 수식(주격 관계대명사)",
+     "spans": ["that"],
+     "antecedent": "an identity"
     }
    ],
    "vocab": [

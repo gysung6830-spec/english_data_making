@@ -200,7 +200,8 @@
     {
      "tag": "명사절 that",
      "note": "is의 보어",
-     "spans": ["that"]
+     "spans": ["that"],
+     "role": "is의 보어절"
     },
     {
      "tag": "by -ing",
@@ -210,7 +211,8 @@
     {
      "tag": "관계부사 생략",
      "note": "The reason [why] pessimists sound smart — reason 뒤 why 생략",
-     "spans": ["reason"]
+     "spans": ["reason"],
+     "antecedent": "The reason"
     }
    ],
    "vocab": [
@@ -273,7 +275,8 @@
     {
      "tag": "명사절 that",
      "note": "predicts의 목적어",
-     "spans": ["that"]
+     "spans": ["that"],
+     "role": "predicts의 목적어절"
     },
     {
      "tag": "대동사 doesn't",
@@ -407,7 +410,8 @@
     {
      "tag": "명사절 that",
      "note": "said의 목적어",
-     "spans": ["that"]
+     "spans": ["that"],
+     "role": "said의 목적어절"
     },
     {
      "tag": "동격 the end",
@@ -526,7 +530,8 @@
     {
      "tag": "명사절 that",
      "note": "said의 목적어",
-     "spans": ["that"]
+     "spans": ["that"],
+     "role": "said의 목적어절"
     },
     {
      "tag": "have another go",

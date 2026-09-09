@@ -193,7 +193,8 @@
     {
      "tag": "전치사+관계대명사",
      "note": "the rate at which ~: '~하는 속도'",
-     "spans": ["at which"]
+     "spans": ["at which"],
+     "antecedent": "the rate"
     }
    ],
    "vocab": [
@@ -253,7 +254,8 @@
     {
      "tag": "주격 관계대명사 that",
      "note": "species ... that live in forests",
-     "spans": ["that"]
+     "spans": ["that"],
+     "antecedent": "flora and fauna"
     }
    ],
    "vocab": [
@@ -607,9 +609,16 @@
      "spans": ["It's"]
     },
     {
+     "tag": "명사절 접속사 that",
+     "note": "think that ~: 진주어 to think의 목적어절을 이끄는 명사절 접속사",
+     "spans": ["think that"],
+     "role": "think의 목적어절"
+    },
+    {
      "tag": "주격 관계대명사 that",
-     "note": "forests ... that otherwise would aid",
-     "spans": ["that"]
+     "note": "forests ... that otherwise would aid (are cut down으로 선행사와 떨어짐)",
+     "spans": ["that otherwise"],
+     "antecedent": "forests"
     }
    ],
    "vocab": [

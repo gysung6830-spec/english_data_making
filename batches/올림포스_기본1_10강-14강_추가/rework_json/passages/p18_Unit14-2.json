@@ -419,7 +419,8 @@
     {
      "tag": "관계대명사 that",
      "note": "a small dot that moved: 앞의 명사를 수식하는 주격 관계사",
-     "spans": ["that"]
+     "spans": ["that"],
+     "antecedent": "a small dot"
     },
     {
      "tag": "수사의문문",
@@ -481,7 +482,8 @@
     {
      "tag": "관계대명사 that",
      "note": "a machine that would flip ~: 기계를 수식하는 주격 관계사",
-     "spans": ["that"]
+     "spans": ["that"],
+     "antecedent": "a machine"
     }
    ],
    "vocab": [
@@ -592,7 +594,8 @@
     {
      "tag": "계속적 용법 관계대명사 (, which)",
      "note": "앞 내용(Pluto)을 부연 설명",
-     "spans": ["which"]
+     "spans": ["which"],
+     "antecedent": "Pluto"
     }
    ],
    "vocab": [

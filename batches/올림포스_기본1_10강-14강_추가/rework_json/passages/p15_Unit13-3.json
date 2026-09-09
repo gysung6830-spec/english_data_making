@@ -279,19 +279,28 @@
    "translation": "바로 이때 짜증이 터지는데, 이는 아이가 자기 안으로 움츠러들어 들은 말을 하지 못하거나, 부모가 감당하기 힘든 말들이 튀어나오는 상황이다.",
    "grammar": [
     {
+     "tag": "명사절 when",
+     "note": "This is의 보어절 — '~할 때(인 상황)'",
+     "spans": ["when"],
+     "role": "This is의 보어절"
+    },
+    {
      "tag": "전치사+관계 in which",
      "note": "situations 수식",
-     "spans": ["in which"]
+     "spans": ["in which"],
+     "antecedent": "situations"
     },
     {
      "tag": "관계사 which",
      "note": "comments 수식",
-     "spans": ["which"]
+     "spans": ["which"],
+     "antecedent": "comments"
     },
     {
      "tag": "관계사 what",
      "note": "'~하는 것'",
-     "spans": ["what"]
+     "spans": ["what"],
+     "role": "'~하는 것'(선행사 포함 명사절), do의 목적어절"
     },
     {
      "tag": "수동태",
@@ -516,7 +525,8 @@
     {
      "tag": "관계사 what",
      "note": "'~하는 것'",
-     "spans": ["what"]
+     "spans": ["what"],
+     "role": "'~하는 것'(선행사 포함 명사절), listen to의 목적어절"
     }
    ],
    "vocab": [

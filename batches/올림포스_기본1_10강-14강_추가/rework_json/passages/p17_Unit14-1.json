@@ -171,9 +171,10 @@
    "translation": "퍼스널 브랜딩은 여러분이 남몰래 해야 하는 일이 아니다.",
    "grammar": [
     {
-     "tag": "명사절 that",
-     "note": "something that ~ 목적격 관계사",
-     "spans": ["that"]
+     "tag": "관계대명사 that (목적격)",
+     "note": "something that ~ 목적격 관계사, do의 목적어",
+     "spans": ["that"],
+     "antecedent": "something"
     },
     {
      "tag": "not something",
@@ -233,6 +234,12 @@
      "tag": "부분부정",
      "note": "not always = '항상 ~인 것은 아니다'",
      "spans": ["not always"]
+    },
+    {
+     "tag": "간접의문 how",
+     "note": "how we are going to promote ~: plan의 목적어절",
+     "spans": ["how"],
+     "role": "plan의 목적어절"
     }
    ],
    "vocab": [
@@ -492,7 +499,8 @@
     {
      "tag": "관계사 that",
      "note": "opportunities that ~ 수식",
-     "spans": ["that"]
+     "spans": ["that"],
+     "antecedent": "the opportunities"
     }
    ],
    "vocab": [
@@ -559,9 +567,16 @@
    "translation": "그러므로 여러분이 무엇으로 알려지고 싶은지 생각하기 시작할 때, 여러분의 퍼스널 브랜드를 이끄는 효과적인 방법으로서 여러분이 자리에 없을 때 사람들이 여러분에 대해 무엇을 말하기를 원하는지 더 많이 인식하기 시작하라.",
    "grammar": [
     {
-     "tag": "what 관계대명사",
-     "note": "what you want ~ '~하는 것'",
-     "spans": ["what"]
+     "tag": "what 관계대명사 (선행사 포함)",
+     "note": "what you want to be known for: '~하는 것'",
+     "spans": ["what you want to be"],
+     "role": "'~하는 것'(선행사 포함 명사절), think about의 목적어절"
+    },
+    {
+     "tag": "what 관계대명사 (선행사 포함)",
+     "note": "what you want people to say about you: '~하는 것'",
+     "spans": ["what you want people"],
+     "role": "'~하는 것'(선행사 포함 명사절), aware of의 목적어절"
     },
     {
      "tag": "명령문 조언",

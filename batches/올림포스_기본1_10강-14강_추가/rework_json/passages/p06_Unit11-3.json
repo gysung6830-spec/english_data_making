@@ -186,6 +186,7 @@
     {
      "tag": "관계사 that",
      "note": "the one 수식",
+     "antecedent": "the one",
      "spans": ["that"]
     },
     {
@@ -492,6 +493,7 @@
     {
      "tag": "관계사 that",
      "note": "reddish-brown 수식",
+     "antecedent": "reddish-brown",
      "spans": ["that"]
     }
    ],

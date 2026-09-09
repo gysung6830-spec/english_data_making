@@ -232,6 +232,7 @@
     {
      "tag": "명사절 that",
      "note": "is의 보어",
+     "role": "보어절",
      "spans": [
       "that"
      ]
@@ -239,6 +240,7 @@
     {
      "tag": "관계부사 생략",
      "note": "The reason [why] we understand differently — reason 뒤 why 생략",
+     "antecedent": "The reason",
      "spans": [
       "reason"
      ]
@@ -324,6 +326,7 @@
     {
      "tag": "전치사+관계대명사 to which",
      "note": "item을 수식",
+     "antecedent": "the closest item",
      "spans": [
       "to which"
      ]
@@ -399,6 +402,7 @@
     {
      "tag": "명사절 that",
      "note": "claimed의 목적어",
+     "role": "claimed의 목적어절",
      "spans": [
       "that"
      ]
@@ -413,8 +417,17 @@
     {
      "tag": "관계사 what",
      "note": "'~하는 것'",
+     "role": "'~하는 것'(선행사 포함 명사절)",
      "spans": [
       "what"
+     ]
+    },
+    {
+     "tag": "간접의문 what",
+     "note": "what events were likely to take place — 간접의문(어떤 사건이)",
+     "role": "for의 목적어절",
+     "spans": [
+      "what events"
      ]
     },
     {
@@ -502,6 +515,7 @@
     {
      "tag": "관계사 which",
      "note": "script 부연",
+     "antecedent": "his cocktail party script",
      "spans": [
       "which"
      ]
@@ -509,6 +523,7 @@
     {
      "tag": "관계사 what",
      "note": "'~하는 것'",
+     "role": "'~하는 것'(선행사 포함 명사절), about의 목적어절",
      "spans": [
       "what"
      ]
@@ -523,6 +538,7 @@
     {
      "tag": "목적격 관계대명사 생략",
      "note": "the story [which] he was about to hear — 목적격 관계대명사 생략",
+     "antecedent": "the story",
      "spans": [
       "story"
      ]

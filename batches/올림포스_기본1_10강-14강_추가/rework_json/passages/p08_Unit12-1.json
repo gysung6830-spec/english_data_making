@@ -462,6 +462,7 @@
     {
      "tag": "명사절 that",
      "note": "is의 보어",
+     "role": "보어절",
      "spans": ["that"]
     },
     {

@@ -50,6 +50,10 @@ def _bpat(e):
     l=r"(?<![A-Za-z])" if e[:1].isalpha() else ""
     r=r"(?![A-Za-z])" if e[-1:].isalpha() else ""
     return l+re.escape(e)+r
+def _span_is_antecedent(g, e):
+    """생략형 관계사처럼 표지 span 이 곧 선행사 명사인 경우 → 보라 형광펜에서 제외(초록 선행사로만)."""
+    a=(g.get("antecedent") or "").strip().lower()
+    return bool(a) and e.lower() in a
 def _hl_marks(s):
     """어법칩 spans → 형광펜 구간 목록(겹침 없음, 위치 오름차순).
     칩 안에서는 span을 왼→오 순차로 찾고(상관어구 both~and 등 순서 보존),
@@ -73,6 +77,7 @@ def _hl_marks(s):
         for sp in (g.get("spans") or []):
             e=str(sp).strip()
             if not e: continue
+            if _span_is_antecedent(g, e): continue  # 생략형 표지=선행사 → 보라 제외
             hit=find_free(e, pos)          # 앞 span 뒤에서(순서 보존) 빈 구간
             if hit is None: hit=find_free(e, 0)  # 없으면 문장 전체에서 빈 구간
             if hit is None: continue
@@ -121,6 +126,46 @@ def en_practice(s):
     """④ 해석연습 영어: 청크 사이 / 슬래시 + 어법칩 형광펜."""
     raw=s.get("english","") or ""
     return _render_en(raw, _hl_marks(s), _chunk_bounds(s, raw))
+
+def _grammar_marks(s):
+    """어법칩 spans(보라 hl) + 관계사 선행사(초록 ha)를 겹치지 않게 표시."""
+    raw=s.get("english","") or ""
+    occupied=[False]*len(raw); marks=[]
+    def free(a,b): return not any(occupied[a:b])
+    def claim(a,b,cls):
+        for k in range(a,b): occupied[k]=True
+        marks.append((a,b,cls))
+    def find_free(e,start):
+        while True:
+            m=re.search(_bpat(e), raw[start:], re.IGNORECASE)
+            if not m: return None
+            a,b=start+m.start(), start+m.end()
+            if free(a,b): return (a,b)
+            start=a+1
+    for g in s.get("grammar",[]):        # 1) 어법 표지
+        pos=0
+        for sp in (g.get("spans") or []):
+            e=str(sp).strip()
+            if not e: continue
+            if _span_is_antecedent(g, e): continue  # 생략형 표지=선행사 → 초록으로만
+            hit=find_free(e,pos)
+            if hit is None: hit=find_free(e,0)
+            if hit is None: continue
+            claim(hit[0],hit[1],"hl"); pos=hit[1]
+    for g in s.get("grammar",[]):        # 2) 관계사 선행사(꾸밈 대상)
+        a=(g.get("antecedent") or "").strip()
+        if not a: continue
+        hit=find_free(a,0)
+        if hit: claim(hit[0],hit[1],"ha")
+    marks.sort()
+    return marks
+def hl_en_gram(s):
+    """④ 어법칩 영어: 어법 표지(보라) + 선행사(초록) 형광펜."""
+    raw=s.get("english","") or ""
+    out=[]; i=0
+    for a,b,cls in _grammar_marks(s):
+        out.append(esc(raw[i:a])); out.append(f'<mark class="{cls}">'+esc(raw[a:b])+'</mark>'); i=b
+    out.append(esc(raw[i:])); return "".join(out)
 
 # ---- ④ 직독직해 빈칸(핵심 부분만) ----
 def _blank(m):
@@ -182,6 +227,11 @@ mark.hl{background:#d8d5f0; padding:0 1px; border-radius:2px; color:inherit;}
 .gl .n{display:inline-block; min-width:15px; height:15px; line-height:15px; text-align:center; background:var(--green); color:#fff; font-weight:700; font-size:7.2pt; border-radius:5px; margin-right:6px; vertical-align:1.5px;}
 .chip{display:inline-block; background:var(--indigo-bg); color:var(--indigo); font-weight:800; font-size:8pt; padding:0 7px; border-radius:999px; margin:0 3px 2px 0;}
 .gnote{color:#3a4250; font-size:8.6pt;}
+mark.ha{background:#dcefe2; padding:0 1px; border-radius:2px; color:inherit; box-shadow:inset 0 -2px 0 #7fae90;}
+.rel,.nc{margin:2px 0 0 10px; font-size:8.6pt; line-height:1.55; color:#3a4250;}
+.rel b,.nc b{color:var(--indigo); font-weight:800;}
+.rel .arr,.nc .arr{color:var(--sub); font-weight:800; margin:0 4px;}
+.rel .ante{background:#dcefe2; color:var(--green-d); font-weight:800; border-radius:3px; padding:0 5px; box-shadow:inset 0 -2px 0 #7fae90;}
 /* ⑤ ox */
 .k-o{color:var(--green-d);} .k-x{color:var(--red);} .k-t{color:var(--amber);}
 .sen{margin:7px 0 2px; padding:3px 0 3px 8px; border-left:3px solid var(--green-bg); font-size:9.5pt; line-height:1.5;}
@@ -285,17 +335,27 @@ def render_trans(p, teacher):
     return "".join(h)
 
 def render_grammar(p, teacher):
-    """목차 4 어법칩 — 문장에 나온 순서대로."""
-    h=['<div class="psg">'+phead(p)+'<div class="sec">'+sec_head(4,"어법칩","문장별 원문·핵심 어법(형광펜=어법 표지) · 문장에 나온 순서")+'<div class="panel">']
+    """목차 4 어법칩 — 문장에 나온 순서대로. 관계사는 선행사(꾸밈 대상), 명사절 접속사는 역할 표시."""
+    h=['<div class="psg">'+phead(p)+'<div class="sec">'+sec_head(4,"어법칩","문장 순서 · 형광펜=어법 표지 · 초록=관계사가 꾸미는 선행사 · 명사절 접속사는 역할 표시")+'<div class="panel">']
     for s in p["sentences"]:
         chips=ordered_grammar(s)
         if not chips: continue
-        h.append(f'<div class="sen"><span class="sn2">{s["id"]}</span>{hl_en(s)}</div><div class="grp">')
+        h.append(f'<div class="sen"><span class="sn2">{s["id"]}</span>{hl_en_gram(s)}</div><div class="grp">')
         inner=[]
         for g in chips:
             inner.append(f'<span class="chip">{esc(g.get("tag",""))}</span>')
             if teacher and g.get("note"): inner.append(f'<span class="gnote">{esc(g["note"])}</span> ')
-        h.append(f'<div class="gl">{"".join(inner)}</div></div>')
+        h.append(f'<div class="gl">{"".join(inner)}</div>')
+        # 관계사 → 선행사 / 명사절 접속사 → 역할
+        for g in chips:
+            tag=esc(g.get("tag",""))
+            ante=(g.get("antecedent") or "").strip()
+            role=(g.get("role") or "").strip()
+            if ante:
+                h.append(f'<div class="rel">↳ <b>{tag}</b> <span class="arr">→ 꾸밈</span> <span class="ante">{esc(ante)}</span></div>')
+            elif role:
+                h.append(f'<div class="nc">↳ <b>{tag}</b> <span class="arr">▷ 명사절</span> {esc(role)}</div>')
+        h.append('</div>')
     h.append('</div></div></div>')
     return "".join(h)
 

@@ -200,7 +200,8 @@
     {
      "tag": "관계사 that",
      "note": "forest gardening 수식",
-     "spans": ["that"]
+     "spans": ["that"],
+     "antecedent": "the forest gardening"
     },
     {
      "tag": "분사(과거분사구)",
@@ -526,7 +527,8 @@
     {
      "tag": "관계사 that",
      "note": "Crops 수식",
-     "spans": ["that"]
+     "spans": ["that"],
+     "antecedent": "Crops"
     },
     {
      "tag": "수동 were stored",

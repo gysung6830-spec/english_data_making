@@ -185,7 +185,8 @@
     {
      "tag": "명사절 that",
      "note": "tells us의 목적어",
-     "spans": ["that"]
+     "spans": ["that"],
+     "role": "tells의 목적어절"
     },
     {
      "tag": "접속사 when",
@@ -350,7 +351,8 @@
     {
      "tag": "명사절 생략",
      "note": "feel (that) ~",
-     "spans": ["feel"]
+     "spans": ["feel"],
+     "role": "feel의 목적어절"
     }
    ],
    "vocab": [
@@ -395,7 +397,8 @@
     {
      "tag": "관계사 that",
      "note": "defects 수식",
-     "spans": ["that"]
+     "spans": ["that"],
+     "antecedent": "defects"
     },
     {
      "tag": "prevent A from -ing",
@@ -459,7 +462,8 @@
     {
      "tag": "관계사 that",
      "note": "the situation 수식",
-     "spans": ["that"]
+     "spans": ["that"],
+     "antecedent": "the situation"
     },
     {
      "tag": "비교 more than",
@@ -598,6 +602,12 @@
      "tag": "반복어구 생략(대동사 would)",
      "note": "just as we hope we would (respond) — respond 반복 생략",
      "spans": ["we would"]
+    },
+    {
+     "tag": "명사절 생략",
+     "note": "hope (that) we would — hope 뒤 that 생략",
+     "spans": ["hope"],
+     "role": "hope의 목적어절"
     }
    ],
    "vocab": [

@@ -268,7 +268,8 @@
     {
      "tag": "관계사 that",
      "note": "canals 수식",
-     "spans": ["that"]
+     "spans": ["that"],
+     "antecedent": "canals"
     },
     {
      "tag": "분사 known as",
@@ -342,7 +343,8 @@
     {
      "tag": "관계사 that",
      "note": "water 수식",
-     "spans": ["that"]
+     "spans": ["that"],
+     "antecedent": "water"
     },
     {
      "tag": "분사구문",
@@ -441,6 +443,12 @@
      "tag": "수동태 have been constructed",
      "note": "'건설되어 왔다'",
      "spans": ["have been constructed"]
+    },
+    {
+     "tag": "관계부사 where",
+     "note": "wetland ecosystems 수식 — '~하는 그곳에서'",
+     "spans": ["where"],
+     "antecedent": "wetland ecosystems"
     }
    ],
    "vocab": [
@@ -569,7 +577,8 @@
     {
      "tag": "관계사 what",
      "note": "'~라고 알려진 것'",
-     "spans": ["what"]
+     "spans": ["what"],
+     "role": "'~하는 것'(선행사 포함 명사절), of의 목적어절"
     },
     {
      "tag": "수동태",

@@ -193,7 +193,8 @@
     {
      "tag": "관계사 that",
      "note": "behaviour 수식",
-     "spans": ["that"]
+     "spans": ["that"],
+     "antecedent": "one peculiar behaviour"
     },
     {
      "tag": "대시 부연",
@@ -360,7 +361,8 @@
     {
      "tag": "관계사 what",
      "note": "for의 목적어 '~하는 것'",
-     "spans": ["what"]
+     "spans": ["what"],
+     "role": "'~하는 것'(선행사 포함 명사절), 전치사 for의 목적어절"
     },
     {
      "tag": "as a way to",

@@ -197,7 +197,8 @@
     {
      "tag": "관계사 who",
      "note": "Forecasters 수식",
-     "spans": ["who"]
+     "spans": ["who"],
+     "antecedent": "Forecasters"
     },
     {
      "tag": "공통 목적어(병렬)",
@@ -264,7 +265,8 @@
     {
      "tag": "의문사 how long",
      "note": "'얼마나 오래'",
-     "spans": ["how long"]
+     "spans": ["how long"],
+     "role": "estimate의 목적어절"
     }
    ],
    "vocab": [
@@ -385,7 +387,8 @@
     {
      "tag": "명사절 that",
      "note": "indicates의 목적어",
-     "spans": ["that"]
+     "spans": ["that"],
+     "role": "indicates의 목적어절"
     }
    ],
    "vocab": [
@@ -454,7 +457,8 @@
     {
      "tag": "명사절 that",
      "note": "assume의 목적어",
-     "spans": ["that"]
+     "spans": ["that"],
+     "role": "assume의 목적어절"
     },
     {
      "tag": "비교급 강조 even",
@@ -529,7 +533,14 @@
     {
      "tag": "관계사 what",
      "note": "'~하는 것'(주어절)",
-     "spans": ["what"]
+     "spans": ["what"],
+     "role": "'~하는 것'(선행사 포함 명사절), is의 주어절"
+    },
+    {
+     "tag": "명사절 접속사 that",
+     "note": "is의 보어절(is that ~)",
+     "spans": ["that"],
+     "role": "is의 보어절"
     },
     {
      "tag": "조건 if",

@@ -182,7 +182,8 @@
     {
      "tag": "명사절 that",
      "note": "is의 보어(is that ~)",
-     "spans": ["that"]
+     "spans": ["that"],
+     "role": "is의 보어절"
     },
     {
      "tag": "A rather than B",
@@ -197,7 +198,8 @@
     {
      "tag": "관계부사 생략",
      "note": "the reasons [why] people are concerned — reasons 뒤 why 생략",
-     "spans": ["reasons"]
+     "spans": ["reasons"],
+     "antecedent": "reasons"
     }
    ],
    "vocab": [
@@ -272,12 +274,14 @@
     {
      "tag": "관계사 in which",
      "note": "perfection 수식",
-     "spans": ["in which"]
+     "spans": ["in which"],
+     "antecedent": "a scale of absolute perfection"
     },
     {
      "tag": "명사절 생략",
      "note": "feel (that) ~",
-     "spans": ["feel"]
+     "spans": ["feel"],
+     "role": "feel의 목적어절"
     }
    ],
    "vocab": [
@@ -397,7 +401,8 @@
     {
      "tag": "관계사 that",
      "note": "address 수식",
-     "spans": ["that"]
+     "spans": ["that"],
+     "antecedent": "a well-thought-out address"
     },
     {
      "tag": "상관접속사 not A but B",
