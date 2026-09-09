@@ -102,7 +102,7 @@
     {
       "id": 1,
       "english": "The ancient Greeks felt that the visual artist's goal was to copy visual experience.",
-      "translation": "고대 그리스인들은 시각 예술가의 목표가 시각적 경험을 모방하는 것이라고 여겼다.",
+      "translation": "고대 그리스인들은 시각 예술가의 목표가 시각적 경험을 모방하는 것이었다고 느꼈다.",
       "grammar": [
         {"tag": "명사절 접속사 that", "note": "동사 felt의 목적어절을 이끎", "spans": ["that"]},
         {"tag": "to부정사 명사적 용법 (보어)", "note": "was의 보어로 '~하는 것'", "spans": ["to copy"]}
@@ -124,7 +124,7 @@
     {
       "id": 2,
       "english": "This approach appears in the realism of ancient Greek sculpture and pottery.",
-      "translation": "이 접근법은 고대 그리스 조각과 도기의 사실주의에서 나타난다.",
+      "translation": "이 접근법은 고대 그리스 조각과 도기의 사실주의 속에서 나타난다.",
       "grammar": [
         {"tag": "주어-동사 수일치", "note": "단수 주어 approach에 3인칭 단수 appears", "spans": ["appears"]},
         {"tag": "등위접속사 and", "note": "sculpture와 pottery를 병렬 연결", "spans": ["and"]}
@@ -148,7 +148,7 @@
     {
       "id": 3,
       "english": "We must sadly note that, due to the action of time and weather, no paintings from ancient Greek artists exist today.",
-      "translation": "우리는 안타깝게도, 시간과 날씨의 작용 때문에 고대 그리스 예술가의 회화가 오늘날 하나도 존재하지 않는다는 점에 주목해야 한다.",
+      "translation": "우리는 안타깝게도, 시간과 날씨의 작용 때문에, 고대 그리스 예술가들로부터의 어떤 회화도 오늘날 존재하지 않는다는 것을 주목해야 한다.",
       "grammar": [
         {"tag": "조동사 must", "note": "'~해야 한다'는 의무·필연", "spans": ["must"]},
         {"tag": "명사절 접속사 that", "note": "note의 목적어절을 이끎", "spans": ["that"]},
@@ -174,7 +174,7 @@
     {
       "id": 4,
       "english": "We can only surmise their quality based on tales such as that of Zeuxis and Parhassios, the obvious skill in ancient Greek sculpture, and in drawings that survive on ancient Greek pottery.",
-      "translation": "우리는 그것들의 수준을 제욱시스와 파라시오스의 이야기 같은 이야기들, 고대 그리스 조각의 분명한 솜씨, 그리고 고대 그리스 도기에 남아 있는 그림들에 근거해 오직 짐작할 수 있을 뿐이다.",
+      "translation": "우리는 그것들의 수준을 제욱시스와 파라시오스의 그것 같은 이야기들, 고대 그리스 조각의 분명한 솜씨, 그리고 고대 그리스 도기에 현존하는 그림들에 근거해 오직 짐작할 수 있을 뿐이다.",
       "grammar": [
         {"tag": "전치사 based on", "note": "'~에 근거하여'", "spans": ["based on"]},
         {"tag": "지시대명사 that", "note": "that of ~ = the tale of ~, 앞 명사 tale의 반복을 피함", "spans": ["that of"]},
@@ -203,7 +203,7 @@
     {
       "id": 5,
       "english": "This definition of art as copying reality has a problem, though.",
-      "translation": "하지만 예술을 현실을 모방하는 것으로 보는 이 정의는 문제를 지닌다.",
+      "translation": "현실을 모방하는 것으로서의 예술에 대한 이 정의는 문제를 지닌다, 그렇지만.",
       "grammar": [
         {"tag": "주어-동사 수일치", "note": "단수 주어 definition에 has", "spans": ["has"]},
         {"tag": "전치사 as", "note": "'~로서'; art as copying reality", "spans": ["as"]},
@@ -228,7 +228,7 @@
     {
       "id": 6,
       "english": "Jackson Pollock, a leader in the New York School of the 1950's, intentionally did not copy existing objects in his art.",
-      "translation": "1950년대 뉴욕 화파의 선구자였던 Jackson Pollock은 자신의 예술에서 기존의 사물을 의도적으로 모방하지 않았다.",
+      "translation": "Jackson Pollock은, 1950년대 뉴욕 화파의 한 선구자로서, 자신의 예술에서 기존의 사물을 의도적으로 모방하지 않았다.",
       "grammar": [
         {"tag": "동격", "note": "Jackson Pollock = a leader ~; 콤마로 묶인 동격 명사구", "spans": ["a leader"]},
         {"tag": "일반동사 과거 부정", "note": "did not + 동사원형(copy)", "spans": ["did not copy"]},

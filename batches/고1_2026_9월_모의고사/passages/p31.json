@@ -196,7 +196,7 @@
   {
    "id": 2,
    "english": "Even when you first drank milk, there was the milk, yes, but there was also the person behind the milk who will have presumably either made or messed up your relationship with food for the couple of decades after that.",
-   "translation": "당신이 우유를 처음 마셨을 때조차, 우유가 있었다, 그렇다, 하지만 그 우유 뒤에는 그 이후 수십 년 동안 당신의 음식과의 관계를 아마 만들어 놓았거나 아니면 망쳐 놓았을 사람도 있었다.",
+   "translation": "당신이 처음 우유를 마셨을 때조차, 우유가 있었다, 그렇다, 하지만 그 우유 뒤에는 아마 그 이후 수십 년 동안 당신의 음식과의 관계를 만들어 놓았거나 아니면 망쳐 놓았을 사람도 있었다.",
    "grammar": [
     {
      "tag": "시간 부사절(when)",
@@ -291,7 +291,7 @@
   {
    "id": 3,
    "english": "We learn to eat from our families and friends, at school and in work.",
-   "translation": "우리는 가족과 친구에게서, 그리고 학교와 직장에서 먹는 법을 배운다.",
+   "translation": "우리는 우리의 가족과 친구에게서, 학교에서 그리고 직장에서 먹는 것을 배운다.",
    "grammar": [
     {
      "tag": "to부정사(명사적·목적어)",
@@ -343,7 +343,7 @@
   {
    "id": 4,
    "english": "A village develops a particular recipe for an apple pie―one that nobody outside the village likes, but who cares?",
-   "translation": "한 마을이 사과 파이를 위한 특정한 조리법을 발전시키는데, 그것은 마을 밖 누구도 좋아하지 않지만, 누가 신경 쓰겠는가?",
+   "translation": "한 마을이 사과 파이를 위한 특정한 조리법을 발전시킨다―그 마을 밖 누구도 좋아하지 않는 것을, 하지만 누가 신경 쓰는가?",
    "grammar": [
     {
      "tag": "부정대명사 one",
@@ -413,7 +413,7 @@
   {
    "id": 5,
    "english": "We want these things not just because of what they are, but who we are.",
-   "translation": "우리는 이런 것들을 단지 그것들이 무엇인지 때문이 아니라 우리가 누구인지 때문에 원한다.",
+   "translation": "우리는 이런 것들을 단지 그것들이 무엇인지 때문이 아니라, 우리가 누구인지 때문에 원한다.",
    "grammar": [
     {
      "tag": "상관접속사(not just A but B)",
@@ -619,7 +619,7 @@
   {
    "id": 8,
    "english": "Nothing turns me off something quicker than the wrong people liking it, by which I mean people almost identical to me in every respect, in a way that doesn't flatter me.",
-   "translation": "그 무엇도 엉뚱한 사람들이 그것을 좋아하는 것보다 더 빨리 내 흥미를 잃게 하지는 못하는데, 내 말은 모든 면에서 나와 거의 똑같은, 그러면서 나를 돋보이게 해 주지도 않는 사람들을 뜻한다.",
+   "translation": "그 무엇도 엉뚱한 사람들이 그것을 좋아하는 것보다 더 빨리 나를 어떤 것에 정 떨어지게 하지는 못하는데, 그것으로 내가 뜻하는 것은 모든 면에서 나와 거의 똑같은, 나를 돋보이게 하지 않는 방식의 사람들이다.",
    "grammar": [
     {
      "tag": "부정 주어(Nothing)",
@@ -719,7 +719,7 @@
   {
    "id": 9,
    "english": "I avoided the viral chopped salad moment of 2024 by the skin of my teeth.",
-   "translation": "나는 2024년의 유행하던 다진 샐러드 열풍을 가까스로 피했다.",
+   "translation": "나는 2024년의 그 유행하는 다진 샐러드 순간을 가까스로 피했다.",
    "grammar": [
     {
      "tag": "과거분사(형용사적·chopped)",

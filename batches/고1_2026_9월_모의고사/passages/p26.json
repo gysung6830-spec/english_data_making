@@ -169,7 +169,7 @@
   {
    "id": 1,
    "english": "Paul Farmer was an American medical anthropologist and physician.",
-   "translation": "Paul Farmer는 미국의 의료인류학자이자 의사였다.",
+   "translation": "Paul Farmer는 한 미국의 의료인류학자이자 의사였다.",
    "grammar": [
     {
      "tag": "be동사 보어(2형식)",
@@ -218,7 +218,7 @@
   {
    "id": 2,
    "english": "He was born in 1959 in Massachusetts and grew up with an early awareness of social inequality.",
-   "translation": "그는 1959년 매사추세츠에서 태어났고, 사회적 불평등에 대한 이른 자각을 지니고 자랐다.",
+   "translation": "그는 1959년에 매사추세츠에서 태어났고 사회적 불평등에 대한 이른 자각을 가지고 자랐다.",
    "grammar": [
     {
      "tag": "수동태(be born)",
@@ -278,7 +278,7 @@
   {
    "id": 3,
    "english": "During his time at Duke University, he lived in Paris for half a year and became fluent in French, which benefited him in his future work in Haiti.",
-   "translation": "듀크 대학교에서 지내는 동안, 그는 반년 동안 파리에서 살았고 프랑스어에 유창해졌는데, 이것은 이후 아이티에서의 그의 활동에서 그에게 도움이 되었다.",
+   "translation": "듀크 대학교에서의 그의 시간 동안, 그는 반년 동안 파리에서 살았고 프랑스어에 유창해졌으며, 그것은 아이티에서의 그의 미래 활동에서 그에게 도움이 되었다.",
    "grammar": [
     {
      "tag": "전치사 During",
@@ -357,7 +357,7 @@
   {
    "id": 4,
    "english": "After graduating from Duke University, he began volunteer work at a hospital in Cangé, Haiti.",
-   "translation": "듀크 대학교를 졸업한 후, 그는 아이티 Cangé의 한 병원에서 자원봉사를 시작했다.",
+   "translation": "듀크 대학교로부터 졸업한 후, 그는 아이티 Cangé의 한 병원에서 자원봉사를 시작했다.",
    "grammar": [
     {
      "tag": "전치사+동명사(After graduating)",
@@ -414,7 +414,7 @@
   {
    "id": 5,
    "english": "He later returned to the United States and earned both a master's degree and a PhD in medical anthropology at Harvard University.",
-   "translation": "그는 나중에 미국으로 돌아왔고, 하버드 대학교에서 의료 인류학 석사 학위와 박사 학위를 둘 다 취득했다.",
+   "translation": "그는 나중에 미국으로 돌아왔고 의료 인류학의 석사 학위와 박사 학위 둘 다를 하버드 대학교에서 취득했다.",
    "grammar": [
     {
      "tag": "등위접속사 and(동사 병렬)",
@@ -486,7 +486,7 @@
   {
    "id": 6,
    "english": "In 1987, he co-founded Partners In Health, an organization that works in countries like Haiti, Rwanda, and Peru to provide medical treatment and strengthen public health systems.",
-   "translation": "1987년에 그는 Partners In Health를 공동 설립했는데, 이는 아이티, 르완다, 페루 같은 나라들에서 의료를 제공하고 공중보건 체계를 강화하기 위해 활동하는 한 단체이다.",
+   "translation": "1987년에 그는 Partners In Health를 공동 설립했는데, 그것은 아이티, 르완다, 페루 같은 나라들에서 의료를 제공하고 공중보건 체계를 강화하기 위해 활동하는 한 단체이다.",
    "grammar": [
     {
      "tag": "동격(콤마+명사구)",
@@ -579,7 +579,7 @@
   {
    "id": 7,
    "english": "Throughout his life, he wrote more than ten books and over a hundred academic papers.",
-   "translation": "평생에 걸쳐 그는 열 권이 넘는 책과 백 편이 넘는 학술 논문을 썼다.",
+   "translation": "그의 평생에 걸쳐, 그는 열 권이 넘는 책과 백 편이 넘는 학술 논문을 썼다.",
    "grammar": [
     {
      "tag": "전치사 Throughout",
@@ -646,7 +646,7 @@
   {
    "id": 8,
    "english": "He received many major awards during his career, and after his death, he was also honored with the WHO Director-General's Global Health Leaders Award for his lifelong work to improve health for the poor.",
-   "translation": "그는 경력 동안 여러 주요 상을 받았고, 그의 사후에는 가난한 이들의 건강을 향상시키기 위한 그의 평생의 노력에 대해 WHO 사무총장 글로벌 보건 리더상으로도 영예를 얻었다.",
+   "translation": "그는 그의 경력 동안 여러 주요 상을 받았고, 그의 사후에는, 가난한 이들의 건강을 향상시키기 위한 그의 평생의 노력에 대해 WHO 사무총장의 글로벌 보건 리더상으로도 영예를 얻었다.",
    "grammar": [
     {
      "tag": "등위접속사 and(절 병렬)",

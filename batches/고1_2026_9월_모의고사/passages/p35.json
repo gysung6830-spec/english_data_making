@@ -210,7 +210,7 @@
   {
    "id": 1,
    "english": "Our number one criterion for how we care for our pets should be, \"Is this what they actually need? How is it impacting them?\" rather than, \"What do I want?\"",
-   "translation": "우리가 반려동물을 돌보는 방식에 대한 우리의 최우선 기준은, '내가 원하는 것은 무엇인가?'가 아니라 '이것이 그들이 실제로 필요로 하는 것인가? 그것이 그들에게 어떻게 영향을 미치고 있는가?'여야 한다.",
+   "translation": "우리가 우리의 반려동물을 돌보는 방식에 대한 우리의 최우선 기준은, '이것이 그들이 실제로 필요로 하는 것인가? 그것이 그들에게 어떻게 영향을 미치고 있는가?'여야 하며, '내가 원하는 것은 무엇인가?'라기보다는 그래야 한다.",
    "grammar": [
     {
      "tag": "명사절 접속사(의문사 how)",
@@ -299,7 +299,7 @@
   {
    "id": 2,
    "english": "For example, we have encountered many dog owners who bathe their dogs religiously multiple times a week because they want to avoid the 'doggy' smell, but veterinary dermatologists warn against such practices, as they are not good for a dog's skin.",
-   "translation": "예를 들어, 우리는 '개 냄새'를 피하고 싶어서 일주일에 여러 번 규칙적으로 자기 개를 목욕시키는 많은 개 주인들을 만나 왔지만, 수의 피부과 전문의들은 그러한 관행에 반대하는데, 그것이 개의 피부에 좋지 않기 때문이다.",
+   "translation": "예를 들어, 우리는 자신의 개를 규칙적으로 일주일에 여러 번 목욕시키는 많은 개 주인들을 만나 왔는데, 그들이 '개' 냄새를 피하고 싶어 하기 때문이지만, 수의 피부과 전문의들은 그러한 관행에 반대하는데, 그것들이 개의 피부에 좋지 않기 때문이다.",
    "grammar": [
     {
      "tag": "현재완료",
@@ -420,7 +420,7 @@
   {
    "id": 3,
    "english": "If someone is really concerned about their dog's smell they can use waterless shampoo and thoroughly brush their dog every day but keep the baths down to once or twice a week at most.",
-   "translation": "만약 누군가가 자기 개의 냄새에 대해 정말로 걱정한다면, 그들은 물 없는 샴푸를 사용하고 매일 자기 개를 꼼꼼히 빗질하되, 목욕은 기껏해야 일주일에 한두 번으로 줄일 수 있다.",
+   "translation": "만약 누군가가 자신의 개의 냄새에 대해 정말로 걱정한다면, 그들은 물 없는 샴푸를 사용하고 매일 자신의 개를 꼼꼼히 빗질하되, 목욕은 기껏해야 일주일에 한두 번으로 낮춰 유지할 수 있다.",
    "grammar": [
     {
      "tag": "부사절 접속사 If",
@@ -522,7 +522,7 @@
   {
    "id": 4,
    "english": "Unless they have a skin condition for which a vet has prescribed medicated baths, most dogs don't need to be bathed on a regular basis.",
-   "translation": "수의사가 약용 목욕을 처방한 피부 질환을 그들이 가지고 있지 않는 한, 대부분의 개는 정기적으로 목욕될 필요가 없다.",
+   "translation": "수의사가 그것에 대해 약용 목욕을 처방한 피부 질환을 그들이 가지고 있지 않는 한, 대부분의 개는 정기적으로 목욕될 필요가 없다.",
    "grammar": [
     {
      "tag": "부사절 접속사 Unless",
@@ -619,7 +619,7 @@
   {
    "id": 5,
    "english": "Even dogs with thick, heavy coats generally only need baths every 6 to 8 weeks.",
-   "translation": "두껍고 무거운 털을 가진 개조차도 일반적으로 6주에서 8주마다 목욕이 필요할 뿐이다.",
+   "translation": "두껍고 무거운 털을 가진 개조차도 일반적으로 6주에서 8주마다 목욕만을 필요로 한다.",
    "grammar": [
     {
      "tag": "전치사구 후치수식(with)",

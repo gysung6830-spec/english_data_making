@@ -181,7 +181,7 @@
   {
    "id": 1,
    "english": "It's important for humans to have many kinds of minds, because variation is critical for the survival of a species.",
-   "translation": "인간이 여러 종류의 마음을 갖는 것은 중요한데, 변이가 종의 생존에 결정적이기 때문이다.",
+   "translation": "인간이 여러 종류의 마음을 갖는 것은 중요한데, 왜냐하면 변이가 하나의 종의 생존에 결정적이기 때문이다.",
    "grammar": [
     {
      "tag": "가주어 It - 진주어 to부정사",
@@ -270,7 +270,7 @@
   {
    "id": 2,
    "english": "One of Charles Darwin's greatest insights was that variation is a prerequisite for natural selection to work.",
-   "translation": "찰스 다윈의 가장 위대한 통찰 중 하나는 변이가 자연 선택이 작동하기 위한 전제 조건이라는 것이었다.",
+   "translation": "찰스 다윈의 가장 위대한 통찰들 중 하나는 변이가 자연 선택이 작동하기 위한 하나의 전제 조건이라는 것이었다.",
    "grammar": [
     {
      "tag": "부분표현 One of the + 복수명사",
@@ -343,7 +343,7 @@
   {
    "id": 3,
    "english": "Think about it: If there's a huge change in the environment, like a catastrophic drop in the food supply or a big increase in temperature, a species without much variation might be completely wiped out.",
-   "translation": "생각해 보라: 만약 환경에 거대한 변화가 생긴다면, 이를테면 식량 공급의 파멸적 감소나 기온의 큰 상승처럼, 변이가 많지 않은 종은 완전히 전멸될 수도 있다.",
+   "translation": "그것에 대해 생각해 보라: 만약 환경에 거대한 변화가 있다면, 식량 공급의 파멸적 감소나 기온의 큰 증가와 같은, 많은 변이를 갖지 않은 종은 완전히 전멸될 수도 있다.",
    "grammar": [
     {
      "tag": "조건 부사절 접속사 if",
@@ -433,7 +433,7 @@
   {
    "id": 4,
    "english": "A species with great variation will more likely have some survivors after any catastrophe―the members who are well suited for the new environment.",
-   "translation": "큰 변이를 지닌 종은 어떤 대재앙 이후에도 몇몇 생존자를 남길 가능성이 더 큰데, 곧 새로운 환경에 잘 적합한 구성원들이다.",
+   "translation": "큰 변이를 지닌 종은 어떤 대재앙 이후에 몇몇 생존자를 가질 가능성이 더 큰데―새로운 환경에 잘 적합한 그 구성원들이다.",
    "grammar": [
     {
      "tag": "주격 관계대명사 who",
@@ -505,7 +505,7 @@
   {
    "id": 5,
    "english": "Darwin observed variation in the bodies of animals, and the same principle applies to human minds.",
-   "translation": "다윈은 동물의 몸에서 변이를 관찰했는데, 같은 원리가 인간의 마음에 적용된다.",
+   "translation": "다윈은 동물의 몸에서 변이를 관찰했고, 그리고 같은 원리가 인간의 마음에 적용된다.",
    "grammar": [
     {
      "tag": "등위접속사 and",
@@ -568,7 +568,7 @@
   {
    "id": 6,
    "english": "If we all had the same kind of mind―if there were only one human nature―then when disaster struck, we might become extinct.",
-   "translation": "만약 우리 모두가 같은 종류의 마음을 가졌다면―만약 인간 본성이 오직 하나뿐이라면―그때 재난이 닥쳤을 때 우리는 멸종할 수도 있을 것이다.",
+   "translation": "만약 우리 모두가 같은 종류의 마음을 가졌다면―만약 오직 하나의 인간 본성만 있었다면―그때 재난이 닥쳤을 때, 우리는 멸종할 수도 있을 것이다.",
    "grammar": [
     {
      "tag": "가정법 과거",
@@ -639,7 +639,7 @@
   {
    "id": 7,
    "english": "Thankfully, our species has many kinds of minds, both within a single culture and across cultures, so we're less likely to be wiped out.",
-   "translation": "다행히도 우리 종은 여러 종류의 마음을, 단일 문화 안에서든 여러 문화에 걸쳐서든, 지니고 있어서, 우리가 전멸될 가능성은 더 적다.",
+   "translation": "다행히도, 우리 종은 여러 종류의 마음을, 단일 문화 안에서든 여러 문화에 걸쳐서든, 가지고 있고, 그래서 우리는 전멸될 가능성이 더 적다.",
    "grammar": [
     {
      "tag": "상관접속사 both A and B",
@@ -717,7 +717,7 @@
   {
    "id": 8,
    "english": "This variation preserves the evolvability of our species.",
-   "translation": "이 변이가 우리 종의 진화 가능성을 보존한다.",
+   "translation": "이 변이는 우리 종의 진화 가능성을 보존한다.",
    "grammar": [
     {
      "tag": "주어-동사 수일치",

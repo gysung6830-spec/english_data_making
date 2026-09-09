@@ -153,7 +153,7 @@
     {
       "id": 3,
       "english": "If you wanted your voice to be heard by the public, you had to work within their limits, conforming to the strict expectations of either print or broadcast media.",
-      "translation": "만약 당신이 당신의 목소리가 대중에게 들려지기를 원했다면, 당신은 그들의 한계 안에서 일해야 했으며, 인쇄 매체나 방송 매체 둘 중 하나의 엄격한 기대에 순응해야 했다.",
+      "translation": "만약 당신이 당신의 목소리가 대중에 의해 들려지기를 원했다면, 당신은 그들의 한계 안에서 일해야 했고, 인쇄 매체나 방송 매체 둘 중 하나의 엄격한 기대에 순응해야 했다.",
       "grammar": [
         {"tag": "부사절 접속사 if", "note": "조건절 '만약 ~라면'", "spans": ["If"]},
         {"tag": "to부정사 수동태", "note": "want+목적어+to be p.p., '목소리가 들려지기를'", "spans": ["to be heard"]},
@@ -204,7 +204,7 @@
     {
       "id": 5,
       "english": "The playing field is now level, and public access is democratized.",
-      "translation": "이제 경쟁의 장이 공평해졌고, 대중의 접근이 민주화되었다.",
+      "translation": "그 경쟁의 장은 이제 대등하고, 대중의 접근은 민주화되어 있다.",
       "grammar": [
         {"tag": "수동태", "note": "is democratized, be+p.p. '민주화되다'", "spans": ["is democratized"]},
         {"tag": "등위접속사 and", "note": "두 절을 대등하게 연결", "spans": ["and"]}
@@ -229,7 +229,7 @@
     {
       "id": 6,
       "english": "Anybody and everybody can become a public figure on the new communicative platforms, meaning that nobody's left to enforce the old rules.",
-      "translation": "누구나 다 새로운 소통 플랫폼에서 공인이 될 수 있으며, 이는 옛 규칙을 강제할 사람이 아무도 남지 않았음을 의미한다.",
+      "translation": "누구나 그리고 모두가 새로운 소통 플랫폼에서 공인이 될 수 있으며, 이는 아무도 옛 규칙을 시행하도록 남겨져 있지 않음을 의미한다.",
       "grammar": [
         {"tag": "조동사 can", "note": "가능 '~할 수 있다'", "spans": ["can"]},
         {"tag": "분사구문", "note": "meaning that ~, 앞 절의 결과 '그 결과 ~을 의미한다'", "spans": ["meaning"]},
@@ -256,7 +256,7 @@
     {
       "id": 7,
       "english": "TV presenters and journalists might not have been able to use slang, but content creators can.",
-      "translation": "TV 진행자와 기자들은 속어를 사용할 수 없었을지도 모르지만, 콘텐츠 크리에이터들은 사용할 수 있다.",
+      "translation": "TV 진행자들과 기자들은 속어를 사용할 수 없었을지도 모르지만, 콘텐츠 크리에이터들은 할 수 있다.",
       "grammar": [
         {"tag": "조동사+완료 (might have p.p.)", "note": "might not have been, 과거에 대한 추측 '~할 수 없었을지도 모른다'", "spans": ["might not have been"]},
         {"tag": "be able to", "note": "'~할 수 있다', 여기서 완료형·부정과 결합", "spans": ["able to use"]},
@@ -281,7 +281,7 @@
     {
       "id": 8,
       "english": "We regularly use words like 'function' and 'side-eye,' and our influence both legitimizes these terms and gives them a large platform to spread quicker than they could have before.",
-      "translation": "우리는 'function'과 'side-eye' 같은 단어를 정기적으로 사용하며, 우리의 영향력은 이 용어들을 정당화할 뿐만 아니라 그것들이 이전에 그럴 수 있었던 것보다 더 빠르게 퍼질 큰 발판을 그것들에게 제공한다.",
+      "translation": "우리는 정기적으로 'function'과 'side-eye' 같은 단어들을 사용하며, 우리의 영향력은 이 용어들을 정당화하기도 하고 그것들에게 그것들이 이전에 그럴 수 있었던 것보다 더 빠르게 퍼질 큰 발판을 주기도 한다.",
       "grammar": [
         {"tag": "주어-동사 수일치", "note": "단수주어 our influence → legitimizes, gives", "spans": ["legitimizes"]},
         {"tag": "상관접속사 both A and B", "note": "both+동사구+and+동사구, 'A뿐만 아니라 B도'", "spans": ["both", "and"]},
@@ -311,7 +311,7 @@
     {
       "id": 9,
       "english": "Content creators also come from a greater variety of backgrounds than people working in traditional media.",
-      "translation": "콘텐츠 크리에이터들은 또한 전통 매체에서 일하는 사람들보다 더 다양한 배경 출신이다.",
+      "translation": "콘텐츠 크리에이터들은 또한 전통 매체에서 일하는 사람들보다 더 다양한 배경들에서 나온다.",
       "grammar": [
         {"tag": "비교급 than", "note": "a greater variety ... than, '~보다 더 다양한'", "spans": ["greater", "than"]},
         {"tag": "현재분사 후치수식", "note": "people working in traditional media, '~에서 일하는 사람들'", "spans": ["working"]}

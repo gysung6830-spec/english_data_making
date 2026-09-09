@@ -170,7 +170,7 @@
   {
    "id": 1,
    "english": "Letting go of our need for control, being aware, is a lot about gathering the courage to face uncertainty.",
-   "translation": "우리의 통제 욕구를 내려놓는 것, 즉 자각하는 것은 대체로 불확실성을 마주할 용기를 모으는 것에 관한 것이다.",
+   "translation": "우리의 통제에 대한 욕구를 내려놓는 것, 즉 자각하는 것은 대체로 불확실성을 마주할 용기를 모으는 것에 관한 것이다.",
    "grammar": [
     {
      "tag": "동명사(주어)",
@@ -284,7 +284,7 @@
   {
    "id": 3,
    "english": "When we don't know, when things are uncertain, we often feel frightened and become inflexible.",
-   "translation": "우리가 모를 때, 즉 상황이 불확실할 때 우리는 흔히 겁을 먹고 경직된다.",
+   "translation": "우리가 모를 때, 상황이 불확실할 때, 우리는 흔히 겁을 먹고 융통성이 없어진다.",
    "grammar": [
     {
      "tag": "부사절(시간·조건 When)",
@@ -355,7 +355,7 @@
   {
    "id": 4,
    "english": "So we pretend that things are more predictable than they really are, even though we actually live with enormous uncertainty all the time.",
-   "translation": "그래서 우리는, 비록 실제로는 늘 막대한 불확실성 속에서 살고 있음에도, 상황이 실제로 그러한 것보다 더 예측 가능한 척한다.",
+   "translation": "그래서 우리는 상황이 실제로 그러한 것보다 더 예측 가능하다고 가장한다, 비록 우리가 실제로는 늘 막대한 불확실성과 함께 살고 있음에도 불구하고.",
    "grammar": [
     {
      "tag": "명사절 접속사 that(목적어절)",
@@ -442,7 +442,7 @@
   {
    "id": 5,
    "english": "We cling to our plans and ideas about how things should be and turn out ever so desperately.",
-   "translation": "우리는 일이 어떻게 되고 어떻게 판명되어야 하는지에 대한 계획과 생각에 그토록 필사적으로 매달린다.",
+   "translation": "우리는 일이 어떻게 되어야 하고 판명되어야 하는지에 대한 우리의 계획과 생각에 그토록 필사적으로 매달린다.",
    "grammar": [
     {
      "tag": "cling to",
@@ -514,7 +514,7 @@
   {
    "id": 6,
    "english": "And there's nothing wrong with having plans.",
-   "translation": "그리고 계획을 갖는 것에는 아무런 잘못이 없다.",
+   "translation": "그리고 계획을 갖는 것에 잘못된 것은 아무것도 없다.",
    "grammar": [
     {
      "tag": "동명사(전치사의 목적어)",
@@ -559,7 +559,7 @@
   {
    "id": 7,
    "english": "I think it's a beautiful thing.",
-   "translation": "나는 그것이 아름다운 일이라고 생각한다.",
+   "translation": "나는 그것이 아름다운 것이라고 생각한다.",
    "grammar": [
     {
      "tag": "명사절(that 생략)",
@@ -594,7 +594,7 @@
   {
    "id": 8,
    "english": "But there's a difference between planning and thinking all your plans have to come to fruition.",
-   "translation": "그러나 계획하는 것과 당신의 모든 계획이 반드시 실현되어야 한다고 생각하는 것 사이에는 차이가 있다.",
+   "translation": "그러나 계획하는 것과, 당신의 모든 계획이 결실을 맺어야 한다고 생각하는 것 사이에는 차이가 있다.",
    "grammar": [
     {
      "tag": "동명사(between A and B 병렬)",
@@ -669,7 +669,7 @@
   {
    "id": 9,
    "english": "American president Eisenhower once said: 'Plans are worthless, but planning is everything.'",
-   "translation": "미국 대통령 아이젠하워는 한때 '계획은 무가치하지만, 계획하는 일은 전부다'라고 말했다.",
+   "translation": "미국 대통령 아이젠하워는 한때 말했다: '계획은 무가치하지만, 계획하기는 전부다.'",
    "grammar": [
     {
      "tag": "동명사(주어)",
@@ -854,7 +854,7 @@
   {
    "id": 12,
    "english": "Imagine if we could bear in mind that what we write down, what we think is going to happen, might not be what actually happens.",
-   "translation": "우리가 적어 둔 것, 즉 우리가 일어날 것이라고 생각하는 것이 실제로 일어나는 일이 아닐 수도 있음을 명심할 수 있다면 어떨지 상상해 보라.",
+   "translation": "상상해 보라, 만약 우리가, 우리가 적어 두는 것, 우리가 일어날 것이라고 생각하는 것이, 실제로 일어나는 것이 아닐 수도 있음을 명심할 수 있다면.",
    "grammar": [
     {
      "tag": "bear in mind",
@@ -946,7 +946,7 @@
   {
    "id": 13,
    "english": "And if we could try our best to be all right with that.",
-   "translation": "그리고 우리가 그것을 괜찮게 여기려고 최선을 다할 수 있다면 어떨까.",
+   "translation": "그리고 만약 우리가 그것을 괜찮게 여기도록 최선을 다할 수 있다면 어떨까.",
    "grammar": [
     {
      "tag": "가정법(if)",

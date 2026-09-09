@@ -90,7 +90,7 @@
   {
    "id": 1,
    "english": "To understand how breathing affects athletic performance, we first need to understand how the body makes energy from air and food.",
-   "translation": "호흡이 운동 수행에 어떻게 영향을 미치는지 이해하려면, 우리는 먼저 몸이 공기와 음식으로부터 어떻게 에너지를 만드는지 이해할 필요가 있다.",
+   "translation": "호흡이 운동 수행에 어떻게 영향을 미치는지 이해하기 위해, 우리는 먼저 몸이 공기와 음식으로부터 에너지를 어떻게 만드는지 이해할 필요가 있다.",
    "grammar": [
     {"tag": "to부정사 부사적 용법(목적)", "note": "'~하기 위해' 목적을 나타내는 부사적 to부정사", "spans": ["To understand"]},
     {"tag": "의문사절(간접의문문)", "note": "how이 이끄는 명사절이 첫 understand의 목적어", "spans": ["how"]},
@@ -117,7 +117,7 @@
   {
    "id": 2,
    "english": "There are two options: with oxygen, a process known as aerobic respiration, and without it, which is called anaerobic respiration.",
-   "translation": "두 가지 선택지가 있다: 산소를 이용하는, 유산소 호흡이라고 알려진 과정과, 산소 없이 하는, 무산소 호흡이라고 불리는 것이다.",
+   "translation": "두 가지 선택지가 있다: 산소와 함께, 유산소 호흡이라고 알려진 과정, 그리고 그것 없이, 무산소 호흡이라고 불리는 것이다.",
    "grammar": [
     {"tag": "수일치", "note": "복수 주어 two options에 맞춘 be동사 are", "spans": ["are"]},
     {"tag": "분사 형용사적 용법(후치 수식)", "note": "과거분사 known이 앞의 a process를 뒤에서 수식(수동)", "spans": ["known"]},
@@ -146,7 +146,7 @@
   {
    "id": 3,
    "english": "Anaerobic energy is generated only with glucose (a simple sugar), and it's quicker and easier for our bodies to access.",
-   "translation": "무산소 에너지는 오직 포도당(단순한 당)으로만 만들어지며, 그것은 우리 몸이 이용하기에 더 빠르고 더 쉽다.",
+   "translation": "무산소 에너지는 오직 포도당(단순한 당)과 함께 만들어지며, 그것은 우리 몸이 이용하기에 더 빠르고 더 쉽다.",
    "grammar": [
     {"tag": "수동태", "note": "is generated: 만들어지다(수동)", "spans": ["is generated"]},
     {"tag": "비교급", "note": "quicker and easier: 더 빠르고 더 쉬운", "spans": ["quicker and easier"]},
@@ -171,7 +171,7 @@
   {
    "id": 4,
    "english": "It's a kind of backup system and turbo boost when the body doesn't have enough oxygen.",
-   "translation": "그것은 몸에 충분한 산소가 없을 때 일종의 예비 시스템이자 순간 가속 장치이다.",
+   "translation": "그것은 몸이 충분한 산소를 가지고 있지 않을 때 일종의 예비 시스템이자 순간 가속 장치이다.",
    "grammar": [
     {"tag": "부사절(시간·조건)", "note": "when이 이끄는 부사절: ~할 때", "spans": ["when"]},
     {"tag": "수량형용사", "note": "enough+명사: 충분한 ~", "spans": ["enough"]}
@@ -192,7 +192,7 @@
   {
    "id": 5,
    "english": "But anaerobic energy is inefficient and can be toxic, creating too much lactic acid.",
-   "translation": "하지만 무산소 에너지는 비효율적이고 유독할 수 있으며, 너무 많은 젖산을 만들어낸다.",
+   "translation": "하지만 무산소 에너지는 비효율적이고 유독할 수 있으며, 그 결과 너무 많은 젖산을 만들어낸다.",
    "grammar": [
     {"tag": "조동사", "note": "can be: ~일 수 있다(가능성)", "spans": ["can be"]},
     {"tag": "분사구문(결과)", "note": "creating: 그 결과 ~을 만들어내며(능동)", "spans": ["creating"]}
@@ -215,7 +215,7 @@
   {
    "id": 6,
    "english": "The sickness, muscle weakness, and sweating you experience after you've pushed it too hard at the gym is the feeling of anaerobic overload.",
-   "translation": "당신이 체육관에서 너무 심하게 몰아붙인 뒤에 겪는 메스꺼움, 근육 약화, 그리고 땀 흘림은 무산소 과부하의 느낌이다.",
+   "translation": "당신이 체육관에서 그것을 너무 심하게 몰아붙인 뒤에 겪는 메스꺼움, 근육 약화, 그리고 땀 흘림은 무산소 과부하의 느낌이다.",
    "grammar": [
     {"tag": "목적격 관계대명사 생략", "note": "sweating 뒤 you 앞에 관계대명사(that)가 생략되어 앞 명사구를 수식", "spans": []},
     {"tag": "현재완료", "note": "you've pushed: 완료(~해 온 결과)", "spans": ["you've pushed"]},
@@ -241,7 +241,7 @@
   {
    "id": 7,
    "english": "This process explains why the first few minutes of an intense workout are often so miserable.",
-   "translation": "이 과정은 왜 격렬한 운동의 첫 몇 분이 종종 그토록 괴로운지를 설명해 준다.",
+   "translation": "이 과정은 왜 격렬한 운동의 첫 몇 분이 종종 그토록 괴로운지를 설명한다.",
    "grammar": [
     {"tag": "의문사절(간접의문문)", "note": "why절이 explains의 목적어", "spans": ["why"]},
     {"tag": "수일치", "note": "복수 주어 the first few minutes에 맞춘 are", "spans": ["are"]}
@@ -264,7 +264,7 @@
   {
    "id": 8,
    "english": "Our lungs and respiratory system haven't caught up to supply the oxygen our bodies need, and so the body has to use anaerobic respiration.",
-   "translation": "우리의 폐와 호흡계가 몸이 필요로 하는 산소를 공급할 만큼 아직 따라잡지 못했고, 그래서 몸은 무산소 호흡을 사용해야 한다.",
+   "translation": "우리의 폐와 호흡계는 우리 몸이 필요로 하는 산소를 공급하기 위해 아직 따라잡지 못했고, 그래서 몸은 무산소 호흡을 사용해야 한다.",
    "grammar": [
     {"tag": "현재완료", "note": "haven't caught up: 아직 따라잡지 못했다(완료)", "spans": ["haven't caught up"]},
     {"tag": "to부정사 부사적 용법(목적)", "note": "to supply: 공급하기 위해", "spans": ["to supply"]},
@@ -291,7 +291,7 @@
   {
    "id": 9,
    "english": "This also explains why, after we're warmed up, exercise feels easier.",
-   "translation": "이것은 또한 왜, 우리가 몸을 푼 뒤에는, 운동이 더 쉽게 느껴지는지를 설명한다.",
+   "translation": "이것은 또한 왜, 우리가 몸이 풀린 뒤에, 운동이 더 쉽게 느껴지는지를 설명한다.",
    "grammar": [
     {"tag": "의문사절(간접의문문)", "note": "why절이 explains의 목적어", "spans": ["why"]},
     {"tag": "부사절(시간)", "note": "after절: 준비운동이 된 후에", "spans": ["after"]},
@@ -313,7 +313,7 @@
   {
    "id": 10,
    "english": "The body has switched from anaerobic to aerobic respiration.",
-   "translation": "몸이 무산소 호흡에서 유산소 호흡으로 전환한 것이다.",
+   "translation": "몸은 무산소에서 유산소 호흡으로 전환했다.",
    "grammar": [
     {"tag": "현재완료", "note": "has switched: 전환을 완료했다(완료)", "spans": ["has switched"]},
     {"tag": "전치사구(from A to B)", "note": "from ~ to ~: A에서 B로", "spans": ["from anaerobic to aerobic"]}

@@ -99,7 +99,7 @@
        {"word":"insight","meaning":"통찰(력)"},
        {"word":"arise from","meaning":"~에서 비롯되다, 생기다"}
      ],
-     "translation": "스토아 철학에서 가장 매혹적이고 힘을 실어 주는 통찰 중 하나는 우리의 감정이 무작위적이지 않다는 것이다; 그것들은 우리의 판단에서 생겨난다.",
+     "translation": "스토아 철학에서 가장 매혹적이고 힘을 실어 주는 통찰 중 하나는 우리의 감정이 무작위적이지 않다는 것이다; 그것들은 우리의 판단으로부터 생겨난다.",
      "chunks": [
        {"en":"One of the most fascinating and empowering insights","ko":"가장 매혹적이고 힘을 주는 통찰 중 하나는"},
        {"en":"in Stoic philosophy","ko":"스토아 철학에서"},
@@ -125,7 +125,7 @@
        {"word":"surprising","meaning":"놀라운"},
        {"word":"overwhelmed","meaning":"압도된, 벅찬"}
      ],
-     "translation": "이것은 놀랍게 들릴 수 있는데, 특히 당신이 분노나 두려움, 슬픔에 압도되었다고 느껴 본 적이 있다면 그렇다.",
+     "translation": "이것은 놀랍게 들릴 수 있다, 특히 당신이 분노, 두려움, 또는 슬픔에 압도되었다고 느껴 본 적이 있다면.",
      "chunks": [
        {"en":"This may sound surprising,","ko":"이것은 놀랍게 들릴 수 있다,"},
        {"en":"especially if you've ever felt","ko":"특히 당신이 ~ 느껴 본 적이 있다면"},
@@ -169,7 +169,7 @@
        {"word":"shape","meaning":"형성하다, 빚다"},
        {"word":"interpret","meaning":"해석하다"}
      ],
-     "translation": "그것들(감정)은 우리가 사건을 해석하는 방식에 의해 형성된다.",
+     "translation": "그것들은 우리가 사건을 해석하는 방식에 의해 형성된다.",
      "chunks": [
        {"en":"They're shaped by","ko":"그것들은 ~에 의해 [[형성된다]]"},
        {"en":"how we interpret events.","ko":"우리가 사건을 해석하는 방식으로."}
@@ -193,7 +193,7 @@
        {"word":"trigger","meaning":"촉발하다, 유발하다"},
        {"word":"emotional response","meaning":"감정 반응"}
      ],
-     "translation": "그것이 작동하는 방식은 이렇다. 무언가 일어나고, 당신은 그것이 무엇을 의미하는지 해석하며, 그 해석이 감정 반응을 촉발한다.",
+     "translation": "여기 그것이 어떻게 작동하는지가 있다: 무언가 일어나고, 당신은 그것이 무엇을 의미하는지 해석하고, 그리고 그 해석이 감정 반응을 촉발한다.",
      "chunks": [
        {"en":"Here's how it works:","ko":"그것이 작동하는 방식은 이렇다:"},
        {"en":"something happens,","ko":"무언가 일어나고,"},
@@ -221,7 +221,7 @@
        {"word":"unfair","meaning":"부당한, 불공평한"},
        {"word":"threatening","meaning":"위협적인"}
      ],
-     "translation": "예를 들어, 누군가 당신을 비판하면 당신은 화가 날 수 있는데, 이는 그 말 자체 때문이 아니라 그 말을 부당하거나 위협적이라고 인식하기 때문이다.",
+     "translation": "예를 들어: 만약 누군가 당신을 비판하면, 당신은 화가 날 수 있다, 그 말 자체 때문이 아니라 당신이 그 말을 부당하거나 위협적이라고 인식하기 때문에.",
      "chunks": [
        {"en":"For example:","ko":"예를 들어:"},
        {"en":"If someone criticizes you,","ko":"누군가 당신을 비판하면,"},
@@ -250,7 +250,7 @@
        {"word":"define","meaning":"규정하다, 정의하다"},
        {"word":"worth","meaning":"가치"}
      ],
-     "translation": "만약 당신이 직장을 잃으면 망연자실할 수 있는데, 이는 단지 실직 그 자체 때문이 아니라 그것이 당신의 가치나 미래를 규정한다고 믿기 때문이다.",
+     "translation": "만약 당신이 직장을 잃으면, 당신은 망연자실할 수 있다, 단지 실직 때문이 아니라 당신이 그것이 당신의 가치나 미래를 규정한다고 믿기 때문에.",
      "chunks": [
        {"en":"If you lose a job,","ko":"만약 당신이 직장을 잃으면,"},
        {"en":"you might feel devastated","ko":"당신은 [[망연자실]]할 수 있다"},
@@ -297,7 +297,7 @@
        {"word":"examine","meaning":"살펴보다, 검토하다"},
        {"word":"serve","meaning":"도움이 되다, 이바지하다"}
      ],
-     "translation": "이것은 당신이 느끼는 방식을 억누르는 것을 뜻하지 않는다; 그것은 당신이 스스로에게 들려주는 이야기를 살펴보고 당신에게 더 도움이 되는 것을 고르는 것을 뜻한다.",
+     "translation": "이것은 당신이 느끼는 방식을 억누르는 것을 의미하지 않는다; 그것은 당신이 당신 자신에게 들려주는 이야기를 살펴보고 당신에게 더 도움이 되는 것을 고르는 것을 의미한다.",
      "chunks": [
        {"en":"This doesn't mean suppressing","ko":"이것은 [[억누르는]] 것을 뜻하지 않는다"},
        {"en":"how you feel;","ko":"당신이 느끼는 방식을;"},

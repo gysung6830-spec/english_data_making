@@ -43,7 +43,7 @@
    {
      "id": 1,
      "english": "From an evolutionary perspective, self-esteem has developed as a monitoring mechanism for the quality of our relationships.",
-     "translation": "진화적 관점에서 보면, 자존감은 우리 관계의 질에 대한 감시 기제로서 발달해 왔다.",
+     "translation": "진화적 관점에서, 자존감은 우리의 관계의 질을 위한 하나의 감시 기제로서 발달해 왔다.",
      "grammar": [
        {"tag":"현재완료(완료)","note":"has developed = '발달해 온 상태다'","spans":["has developed"]},
        {"tag":"전치사 as(~로서)","note":"자격·역할을 나타내는 as","spans":["as"]}
@@ -68,7 +68,7 @@
    {
      "id": 2,
      "english": "The system monitors other people's reactions to our behaviors and sends an alarm that alerts us to any possible changes in our inclusion status.",
-     "translation": "그 체계는 우리의 행동에 대한 다른 사람들의 반응을 감시하고, 우리의 소속 지위에 생길 수 있는 어떤 변화든 우리에게 알려 주는 경보를 보낸다.",
+     "translation": "그 체계는 우리의 행동에 대한 다른 사람들의 반응을 감시하고, 우리에게 우리의 소속 지위에서의 어떤 가능한 변화든 경고해 주는 경보를 보낸다.",
      "grammar": [
        {"tag":"주어-동사 수일치(단수)","note":"단수주어 The system에 맞춰 monitors/sends","spans":["monitors"]},
        {"tag":"등위접속사 and(동사 병렬)","note":"monitors와 sends를 대등하게 연결","spans":["and"]},
@@ -95,7 +95,7 @@
    {
      "id": 3,
      "english": "The monitoring system generally operates nonconsciously until it detects that our relational value is falling or low.",
-     "translation": "그 감시 체계는 우리의 관계적 가치가 떨어지고 있거나 낮다는 것을 감지하기 전까지는 대개 무의식적으로 작동한다.",
+     "translation": "그 감시 체계는 그것이 우리의 관계적 가치가 떨어지고 있거나 낮다는 것을 감지할 때까지는 일반적으로 무의식적으로 작동한다.",
      "grammar": [
        {"tag":"시간 부사절 접속사 until","note":"'~할 때까지'","spans":["until"]},
        {"tag":"명사절 접속사 that(목적어절)","note":"detects의 목적어절을 이끎","spans":["that"]},
@@ -121,7 +121,7 @@
    {
      "id": 4,
      "english": "When the alarm bell rings, the threat to our social bonds is pushed into conscious awareness and we evaluate the situation.",
-     "translation": "경보 벨이 울리면, 우리의 사회적 유대에 대한 위협이 의식적 자각 속으로 밀려 들어가고 우리는 그 상황을 평가한다.",
+     "translation": "경보 벨이 울릴 때, 우리의 사회적 유대에 대한 위협은 의식적 자각 속으로 밀려 들어가고 우리는 그 상황을 평가한다.",
      "grammar": [
        {"tag":"시간 부사절 접속사 When","note":"'~할 때'","spans":["When"]},
        {"tag":"수동태(be+p.p.)","note":"위협이 '밀려 올라오는' 대상","spans":["is pushed"]},
@@ -147,7 +147,7 @@
    {
      "id": 5,
      "english": "Am I being accepted or am I being pushed out?",
-     "translation": "나는 받아들여지고 있는가, 아니면 밀려나고 있는가?",
+     "translation": "나는 받아들여지고 있는가, 아니면 나는 밀려나고 있는가?",
      "grammar": [
        {"tag":"진행 수동태(be being p.p.)","note":"'받아들여지고/밀려나고 있는 중'","spans":["being accepted","being pushed"]},
        {"tag":"의문문 어순(도치)","note":"be동사가 주어 앞으로 나온 의문문","spans":["Am I"]}
@@ -167,7 +167,7 @@
    {
      "id": 6,
      "english": "Do I need to adjust my behaviors to fix the relationship?",
-     "translation": "나는 그 관계를 바로잡기 위해 내 행동을 조정할 필요가 있는가?",
+     "translation": "나는 그 관계를 바로잡기 위해 나의 행동을 조정할 필요가 있는가?",
      "grammar": [
        {"tag":"의문문(조동사 do)","note":"Do가 주어 앞에 온 의문문","spans":["Do I"]},
        {"tag":"to부정사(need to-V)","note":"need는 to부정사를 목적어로 취함","spans":["to adjust"]},
@@ -188,7 +188,7 @@
    {
      "id": 7,
      "english": "With such a high value for survival closely tied with relationships, it makes sense that the way we mobilize our internal resources around relationships would be highly networked in our brain and body.",
-     "translation": "생존에 대한 그토록 높은 가치가 관계와 밀접히 결부되어 있어서, 우리가 관계를 중심으로 내적 자원을 동원하는 방식이 우리의 뇌와 몸에서 고도로 연결망을 이룰 것이라는 것은 이치에 맞다.",
+     "translation": "생존에 대한 그토록 높은 가치가 관계와 밀접히 결부된 채로, 우리가 관계를 중심으로 우리의 내적 자원을 동원하는 방식이 우리의 뇌와 몸에서 고도로 연결망을 이룰 것이라는 것은 이치에 맞다.",
      "grammar": [
        {"tag":"전치사 With(부대상황)","note":"'~한 채로, ~해서'","spans":["With"]},
        {"tag":"과거분사 형용사적 용법(후치수식)","note":"value를 뒤에서 꾸밈('결부된')","spans":["tied"]},
@@ -218,7 +218,7 @@
    {
      "id": 8,
      "english": "It also makes sense that we would develop specific mechanisms to attend to minimizing rejection and enhancing acceptance.",
-     "translation": "우리가 거부를 최소화하고 수용을 강화하는 데 주의를 기울이는 특정한 기제를 발달시키리라는 것 또한 이치에 맞다.",
+     "translation": "우리가 거부를 최소화하는 것과 수용을 강화하는 것에 주의를 기울이기 위한 특정한 기제를 발달시키리라는 것 또한 이치에 맞다.",
      "grammar": [
        {"tag":"가주어-진주어(it ~ that)","note":"It은 가주어, that절이 진주어","spans":["It","that"]},
        {"tag":"to부정사 부사적 용법(목적)","note":"'~에 주의를 기울이도록'","spans":["to attend"]},
@@ -244,7 +244,7 @@
    {
      "id": 9,
      "english": "The continuous scanning is normal, a part of being human.",
-     "translation": "이런 지속적인 탐색은 정상적이며, 인간이라는 존재의 일부이다.",
+     "translation": "그 지속적인 탐색은 정상적이며, 인간인 것의 일부이다.",
      "grammar": [
        {"tag":"동명사가 이끄는 주어","note":"The continuous scanning이 주어, 단수 취급","spans":["scanning"]},
        {"tag":"동격(콤마) 명사구","note":"scanning을 다시 설명하는 동격 명사구","spans":["a part of being human"]}
@@ -267,7 +267,7 @@
    {
      "id": 10,
      "english": "We all have an interpersonal process of searching for cues from the environment to assess our value in the social structure.",
-     "translation": "우리 모두는 사회 구조 속에서 우리의 가치를 가늠하기 위해 환경으로부터 단서를 찾는 대인 관계의 과정을 지닌다.",
+     "translation": "우리 모두는 사회 구조 속에서 우리의 가치를 가늠하기 위해 환경으로부터 단서를 찾는 하나의 대인 관계의 과정을 지닌다.",
      "grammar": [
        {"tag":"대명사 강조 all","note":"We all = '우리 모두'","spans":["all"]},
        {"tag":"동명사(전치사 of의 목적어)","note":"of 뒤 searching","spans":["searching"]},
@@ -294,7 +294,7 @@
    {
      "id": 11,
      "english": "Self-esteem works as a monitoring mechanism that signals that there might be problems in people's social bonds, allowing them to adjust their behavior to enhance relationships.",
-     "translation": "자존감은 사람들의 사회적 유대에 문제가 있을 수 있음을 알리는 감시 기제로서 작동하여, 그들이 관계를 향상시키기 위해 행동을 조정하도록 해 준다.",
+     "translation": "자존감은 사람들의 사회적 유대에 문제가 있을 수 있음을 알리는 하나의 감시 기제로서 작동하여, 그들이 관계를 향상시키기 위해 그들의 행동을 조정하도록 해 준다.",
      "grammar": [
        {"tag":"전치사 as(~로서)","note":"'감시 기제로서'","spans":["as"]},
        {"tag":"주격 관계대명사 that","note":"선행사 a monitoring mechanism이 signals의 주어","spans":["that"]},
