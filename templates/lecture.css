@@ -293,6 +293,7 @@ mark{ padding:0 1px; border-radius:2px; color:inherit; }
 mark.hl0{ background:#fff2a1; } mark.hl1{ background:#cfe0ff; }
 /* 어법 형광펜(강사용): 어법칩과 같은 보라(indigo) 계열. 위첨자=어법칩 번호 */
 mark.hlg{ background:#dedcef; }
+mark.hlg3{ background:#d8d5f0; padding:0 1px; border-radius:2px; }
 mark.hlg .hln{ color:var(--indigo); }
 mark .hln{ font-size:6.6pt; font-weight:800; color:#8a6d1f; vertical-align:0.5em;
   margin-right:1px; line-height:1; }

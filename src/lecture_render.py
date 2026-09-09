@@ -245,6 +245,33 @@ def _highlight_grammar(english: str, grammar) -> Markup | None:
     return Markup(text)
 
 
+def _highlight_grammar_only(english: str, grammar) -> Markup:
+    """③ 영어 한줄해석용: 문장에서 어법칩 spans 부분에 '형광펜만' 긋는다(칩 번호·라벨 없음).
+
+    - spans 가 눈에 보이는 표지가 있는 칩만 표시(생략·당위 should 등 spans=[] 은 표시 없음).
+    - 긴 구절 먼저 매칭해 짧은 구절이 잘리는 것을 방지하고, 단어 경계를 지킨다.
+    - 매칭이 없으면 원문(이스케이프)만 반환.
+    """
+    text = str(escape(english or ""))
+    spans = []
+    for g in grammar:
+        for sp in getattr(g, "spans", []) or []:
+            e = str(escape(sp)).strip()
+            if e:
+                spans.append(e)
+    tokens: dict[str, str] = {}
+    for i, e in enumerate(sorted(set(spans), key=lambda s: -len(s))):
+        mm = re.search(_boundary_pat(e), text, re.IGNORECASE)
+        if not mm:
+            continue
+        tok = f"\x00h{i}\x00"
+        tokens[tok] = f'<mark class="hlg3">{text[mm.start():mm.end()]}</mark>'
+        text = text[:mm.start()] + tok + text[mm.end():]
+    for tok, html in tokens.items():
+        text = text.replace(tok, html)
+    return Markup(text)
+
+
 def _highlight_grammar_chunked(chunks, grammar) -> Markup | None:
     """끊어읽기 조각(chunks)을 ' / '로 이으면서 각 조각 안에서 어법칩 spans 를 형광펜 표시.
 
@@ -367,6 +394,8 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
             "english": s.english,
             "grammar": [{"tag": normalize_tag(g.tag), "note": g.note} for g in og],
             "ko_line": ko_line,
+            # ③ 영어 한줄해석: 어법칩 span 부분에 형광펜만(칩 번호·라벨 없음)
+            "english_hl3": _highlight_grammar_only(s.english, og),
             # 강사용: 끊어읽기(/) + 어법칩 spans 형광펜(칩 번호)을 함께 표시. 없으면 None → 끊어읽기 줄 폴백
             "english_hl": _highlight_grammar_chunked(s.chunks, og) if teacher else None,
             "chunks": chunks,
