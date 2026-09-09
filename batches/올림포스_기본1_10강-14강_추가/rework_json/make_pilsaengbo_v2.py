@@ -191,8 +191,9 @@ body{font-family:'NanumSquareRound',"Malgun Gothic",sans-serif; color:#22262b; f
 :root{--green:#2c6444;--green-d:#1f4d33;--green-bg:#e7f0ea;--green-soft:#eef5f0;
   --indigo:#575495;--indigo-bg:#ecebf4;--amber:#a9781f;--red:#a83c2c;--line:#d7ddd6;--sub:#5c636b;}
 .psg{break-before:page;} .psg:first-of-type{break-before:auto;}
-.p1{height:270mm; display:flex; flex-direction:column;}
-.p1body{flex:1 1 auto; display:flex; flex-direction:column; justify-content:space-between;}
+.p1{min-height:256mm; display:flex; flex-direction:column;}
+.p1body{flex:1 1 auto; display:flex; flex-direction:column;}
+.p1spacer{flex:1 1 0; min-height:4px;}
 .p-h{display:flex; align-items:baseline; gap:8px; border-bottom:2.5px solid var(--green); padding-bottom:4px; margin-bottom:6px;}
 .p-no{background:var(--green); color:#fff; font-weight:800; font-size:8.6pt; padding:1px 9px; border-radius:20px; white-space:nowrap;}
 .p-ti{font-size:11pt; font-weight:800; color:var(--green-d); line-height:1.35;}
@@ -202,12 +203,12 @@ body{font-family:'NanumSquareRound',"Malgun Gothic",sans-serif; color:#22262b; f
 .sec-h{display:flex; align-items:center; gap:7px; margin:2px 0 6px;}
 .sec-n{background:var(--green-d); color:#fff; font-weight:800; font-size:8.6pt; width:20px; height:20px; line-height:20px; text-align:center; border-radius:50%;}
 .sec-t{font-size:11pt; font-weight:800; color:var(--green-d);} .sec-d{font-size:8pt; color:var(--sub);}
-.panel{border:1px solid var(--line); border-radius:9px; padding:8px 11px;}
+.panel{border:1px solid var(--line); border-radius:9px; padding:7px 11px;}
 /* ① 원문 */
-.orig{font-size:10.3pt; line-height:1.85; color:#1c2024;}
+.orig{font-size:9.8pt; line-height:1.55; color:#1c2024;}
 .orig .sn{font-size:6.8pt; font-weight:800; color:var(--green); vertical-align:0.5em; margin:0 2px 0 1px;}
 /* ② 어휘 */
-.voc{columns:2; column-gap:22px; font-size:9.3pt; line-height:1.7;}
+.voc{columns:2; column-gap:22px; font-size:9.1pt; line-height:1.5;}
 .voc .w{font-weight:800; color:var(--green-d);} .voc .m{color:#3a4250;}
 .voc .row{break-inside:avoid;}
 /* ③ 해석연습 */
@@ -251,7 +252,7 @@ mark.ha{background:#dcefe2; padding:0 1px; border-radius:2px; color:inherit; box
 .why .cue{background:var(--green-soft); border-radius:3px; padding:0 3px; color:var(--green-d);} .why .typ{color:var(--indigo); font-weight:700; font-size:7.8pt;}
 /* ⑥ 글의 구조도 */
 table.flow{width:100%; border-collapse:collapse;}
-.flow td{border:1px solid var(--line); padding:5px 7px; font-size:9pt; vertical-align:top;}
+.flow td{border:1px solid var(--line); padding:4px 6px; font-size:8.8pt; vertical-align:top;}
 .flow .hd{background:var(--green-bg); color:var(--green-d); font-weight:800; font-size:8.4pt; text-align:center;}
 .flow .stg{background:var(--green-soft); font-weight:700; color:var(--green-d); white-space:nowrap; width:78px; text-align:center;}
 .flow .stg .rg{display:block; color:var(--sub); font-size:8pt; font-weight:400;}
@@ -261,7 +262,7 @@ table.flow{width:100%; border-collapse:collapse;}
 .flow .kw-en{color:var(--indigo); font-weight:700;}
 .flow .sumblank{height:24px;}
 .flow .note{font-weight:600; line-height:1.55; color:var(--indigo);}
-.flow .eg{margin-top:4px; font-size:8.2pt; color:var(--amber); line-height:1.5;}
+.flow .eg{margin-top:3px; font-size:7.9pt; color:var(--amber); line-height:1.45;}
 """).replace("__FOOT__",FOOT).replace("__FONTS__",FONTFACE)
 
 def sec_head(n,t,d=""):
@@ -296,7 +297,8 @@ def render_overview(p, teacher):
     h.append('<div class="sec">'+sec_head(1,"원문"))
     body=" ".join(f'<span class="sn">{s["id"]}</span>{esc(s["english"])}' for s in sents)
     h.append(f'<div class="panel orig">{body}</div></div>')
-    h.append('<div class="sec" style="margin-top:8px;">'+sec_head(2,"어휘 리스트"))
+    h.append('<div class="p1spacer"></div>')
+    h.append('<div class="sec">'+sec_head(2,"어휘 리스트"))
     seen=set(); rows=[]
     for s in sents:
         for v in s.get("vocab",[]):
@@ -304,7 +306,8 @@ def render_overview(p, teacher):
             if not w or w.lower() in seen: continue
             seen.add(w.lower()); rows.append(f'<div class="row"><span class="w">{esc(w)}</span> <span class="m">{esc(v.get("meaning",""))}</span></div>')
     h.append(f'<div class="panel voc">{"".join(rows)}</div></div>')
-    h.append('<div class="sec" style="margin-top:8px;">'+sec_head(6,"글의 구조도 파악","핵심어(영어)를 단서로 각 단계 내용을 기호로 정리(→ ⇒ ↔ = + ↑↓)"))
+    h.append('<div class="p1spacer"></div>')
+    h.append('<div class="sec">'+sec_head(6,"글의 구조도 파악","핵심어(영어)를 단서로 각 단계 내용을 기호로 정리(→ ⇒ ↔ = + ↑↓)"))
     km=kw_map(p); notes=NOTES.get(no) or NOTES.get(p["item_no"]) or []
     h.append('<div class="panel"><table class="flow"><tr>'
              '<td class="hd stg">단계 · 문장</td><td class="hd kwc">핵심어(영어)</td><td class="hd">내용 정리(기호 활용)</td></tr>')
