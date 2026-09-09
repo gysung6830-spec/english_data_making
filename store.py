@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""오르티카영어 - 영어 자료 판매 사이트 (고객 화면).
+"""오르티카잉 - 영어 자료 판매 사이트 (고객 화면).
 
 실행:
     pip install -r store_requirements.txt
@@ -317,7 +317,7 @@ def products():
     q = sc.clean(request.args.get("q"), 60)
 
     # 맛보기는 자료 목록에 안 겁니다. '무엇을 만드는지' 를 보고 나서 한 번
-    # 써 보는 것이라, 오르티카 라인업 쪽에 있어야 말이 됩니다.
+    # 써 보는 것이라, 오르티카잉 라인업 쪽에 있어야 말이 됩니다.
     items = [p for p in catalog["products"] if not p.get("taste")]
     books = sc.books_with_counts(catalog, selected)
 
@@ -604,7 +604,7 @@ def book_pick(slug):
 
 @app.route("/lineup")
 def lineup():
-    """오르티카 라인업 — 우리가 만드는 자료를 한 장에 보여 주는 페이지."""
+    """오르티카잉 라인업 — 우리가 만드는 자료를 한 장에 보여 주는 페이지."""
     data = sc.load_materials()
     # 샘플 파일이 실제로 올라와 있는 자료에만 받기 버튼을 답니다.
     ready = {m["sample_file"] for m in data["materials"]
@@ -620,7 +620,7 @@ def lineup():
 
 @app.route("/notice")
 def notice():
-    """공지 · 시험 일정. '지금 오르티카'(새 자료 · 다음 시험)도 여기 있습니다."""
+    """공지 · 시험 일정. '지금 오르티카잉'(새 자료 · 다음 시험)도 여기 있습니다."""
     data = sc.load_notices()
     # notices.json 의 'exams' 는 확정 시행일만 담습니다. 화면에는 규칙으로 만든
     # 예상 일정까지 합쳐, D-day 와 '언제까지 올리는지' 를 붙여서 씁니다.
@@ -1010,7 +1010,7 @@ def order():
         parts.append(f"쿠폰 {coupon['code']}")
     discount_note = " / ".join(parts) or "없음"
     sc.send_mail(
-        f"[오르티카영어] 새 주문 {order_no} · {items[0]['name']}"
+        f"[오르티카잉] 새 주문 {order_no} · {items[0]['name']}"
         + (f" 외 {len(items) - 1}건" if len(items) > 1 else ""),
         "\n".join([f"주문번호 : {order_no}",
                    f"상품     : {names}",
@@ -1133,7 +1133,7 @@ def custom():
             sc.get_db().commit()
 
     sc.send_mail(
-        f"[오르티카영어] {label} {order_no} · {wanted[:40]}",
+        f"[오르티카잉] {label} {order_no} · {wanted[:40]}",
         "\n".join([f"접수번호 : {order_no}", f"종류     : {label}",
                    f"성함     : {data['name'] or '(안 적음)'}", f"연락처   : {data['phone']}",
                    f"이메일   : {data['email']}"]
@@ -1179,7 +1179,7 @@ def contact():
                     json.dumps(detail, ensure_ascii=False), ts, ts))
 
     sc.send_mail(
-        f"[오르티카영어] 문의 {order_no} · {label}",
+        f"[오르티카잉] 문의 {order_no} · {label}",
         "\n".join([f"접수번호 : {order_no}", f"문의 종류 : {label}",
                     f"주문번호 : {detail['주문번호']}",
                     f"성함     : {data['name']}", f"연락처   : {data['phone'] or '-'}",
@@ -1250,7 +1250,7 @@ def submit():
     db.commit()
 
     sc.send_mail(
-        f"[오르티카영어] 시험지 제출 {submit_no} · {school}",
+        f"[오르티카잉] 시험지 제출 {submit_no} · {school}",
         "\n".join([f"접수번호 : {submit_no}", f"학교     : {school}",
                    f"학년     : {request.form.get('grade') or '-'}",
                    f"시험     : {request.form.get('exam_type') or '-'} "
@@ -1328,7 +1328,7 @@ def pass_page():
                                 "약속한 할인": early}, ensure_ascii=False), ts, ts))
 
     sc.send_mail(
-        f"[오르티카영어] 프리패스 사전 신청 {order_no} · {plan}",
+        f"[오르티카잉] 프리패스 사전 신청 {order_no} · {plan}",
         "\n".join([f"신청번호 : {order_no}",
                    f"관심 이용권 : {plan} · 사전 신청가 {picked['now']:,}원"
                    + (f" (정가 {picked['price']:,}원 − {early:,}원)" if early else ""),
@@ -2224,7 +2224,7 @@ def my_page():
         token = sc.locker_token(email)
         link = url_for("my_locker", token=token, _external=True)
         sc.send_mail(
-            f"[{sc.load_site().get('brand', '오르티카영어')}] 내 자료함 주소",
+            f"[{sc.load_site().get('brand', '오르티카잉')}] 내 자료함 주소",
             "\n".join(["받으신 자료를 한 곳에서 다시 받으실 수 있는 주소입니다.", "",
                         link, "",
                         "이 주소는 저절로 바뀌지 않습니다. 즐겨찾기 해 두시면 언제든 다시 여실 수 있습니다.",
@@ -2261,7 +2261,7 @@ def my_locker_reset(token):
     fresh = sc.reset_locker_token(email)
     link = url_for("my_locker", token=fresh, _external=True)
     sc.send_mail(
-        f"[{sc.load_site().get('brand', '오르티카영어')}] 내 자료함 주소를 새로 바꿨습니다",
+        f"[{sc.load_site().get('brand', '오르티카잉')}] 내 자료함 주소를 새로 바꿨습니다",
         "\n".join(["요청하신 대로 자료함 주소를 새로 바꿨습니다.", "",
                     link, "",
                     "쓰시던 옛 주소는 이제 열리지 않습니다.",
@@ -2457,6 +2457,6 @@ def too_large(_exc):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "5001"))
-    print(f"\n  오르티카영어 판매 사이트 → http://localhost:{port}")
+    print(f"\n  오르티카잉 판매 사이트 → http://localhost:{port}")
     print(f"  관리자 화면          → http://localhost:{port}/admin\n  (종료: Ctrl+C)\n")
     app.run(host="0.0.0.0", port=port, debug=bool(os.environ.get("STORE_DEBUG")))

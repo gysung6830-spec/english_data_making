@@ -227,14 +227,14 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
          "why": (f"사기 전에 눈으로 봐야 지갑이 열립니다. 지금 {len(mats)}종 가운데 "
                  f"{len(with_sample)}종만 샘플이 있습니다. 무료 자료는 실물을 받아 보는데 "
                  f"유료 자료는 못 보면, 값이 아니라 '몰라서' 안 삽니다."),
-         "url": url_for("admin.materials"), "label": "오르티카 라인업 열기"},
+         "url": url_for("admin.materials"), "label": "오르티카잉 라인업 열기"},
         {"done": not thin,
          "title": "자료마다 지면 사진과 설명 채우기",
          "why": (("다 채우셨습니다." if not thin else
                   f"{len(thin)}종이 비어 있습니다 — {' · '.join(m['name'] for m in thin[:4])}"
                   f"{' 외' if len(thin) > 4 else ''}. 잘 적어 둔 자료 옆에 빈 칸이 있으면, "
                   f"그 하나 때문에 전체가 만들다 만 것으로 보입니다.")),
-         "url": url_for("admin.materials"), "label": "오르티카 라인업 열기"},
+         "url": url_for("admin.materials"), "label": "오르티카잉 라인업 열기"},
         {"done": mail_ok,
          "title": "주문 알림 메일 켜기",
          "why": "주문이 오면 바로 알 수 있고, 메일함이 주문 장부가 됩니다.",
@@ -426,7 +426,7 @@ def order_deliver(order_id):
         links.append(f"· {name}\n  " + url_for("download_page", token=token, _external=True))
     link = "\n".join(links)
     sent = sc.send_mail(
-        f"[오르티카영어] 주문하신 자료입니다 ({row['order_no']})",
+        f"[오르티카잉] 주문하신 자료입니다 ({row['order_no']})",
         "\n".join([f"{row['name']}님, 입금 확인했습니다. 감사합니다.", "",
                     f"주문 : {row['product_name']}",
                     "", "아래 주소로 들어가시면 자료를 받으실 수 있습니다.", link, "",
@@ -564,7 +564,7 @@ def submission_update(sub_id):
                                issued_to=row["email"],
                                days_valid=int(reward.get("days_valid", 90)))
         sc.send_mail(
-            "[오르티카영어] 시험지 감사합니다 — 할인 쿠폰을 보내 드립니다",
+            "[오르티카잉] 시험지 감사합니다 — 할인 쿠폰을 보내 드립니다",
             "\n".join([f"{row['name']}님, {row['school']} 시험지 잘 받았습니다. 감사합니다.",
                        "",
                        f"할인 쿠폰 코드 : {code}",
@@ -678,7 +678,7 @@ def product_from_form(form, existing: dict | None = None) -> tuple[dict, list[st
     item["sort"] = sc.to_int(form.get("sort"), 100)
     item["active"] = bool(form.get("active"))
     item["description"] = sc.clean(form.get("description"), 2000)
-    # 오르티카 라인업 중 이 상품에 들어가는 자료 (체크박스)
+    # 오르티카잉 라인업 중 이 상품에 들어가는 자료 (체크박스)
     known = set(sc.material_map())
     item["materials"] = [m for m in form.getlist("materials") if m in known]
     item["includes"] = parse_lines(form.get("includes"))
@@ -1110,7 +1110,7 @@ def category_save():
 
 
 # ---------------------------------------------------------------------------
-# 오르티카 라인업
+# 오르티카잉 라인업
 # ---------------------------------------------------------------------------
 def parse_pairs(titles, bodies) -> list[dict]:
     """'제목 / 설명' 두 줄짜리 항목들을 모읍니다. 제목이 비면 그 줄은 버립니다."""
@@ -1253,7 +1253,7 @@ def material_form(mid):
 
 @admin_bp.route("/materials/<mid>/shots", methods=["GET", "POST"])
 def material_shots(mid):
-    """자료 지면 사진 올리기. 여기서 올리면 오르티카 라인업에 바로 걸립니다."""
+    """자료 지면 사진 올리기. 여기서 올리면 오르티카잉 라인업에 바로 걸립니다."""
     data = sc.load_materials()
     item = next((m for m in data["materials"] if m.get("id") == mid), None)
     if item is None:
@@ -1276,7 +1276,7 @@ def material_shots(mid):
             upload.save(folder / f"{start + saved:02d}{ext}")
             saved += 1
         if saved:
-            flash(f"지면 사진 {saved}장을 올렸습니다. 오르티카 라인업에 바로 걸렸습니다.", "ok")
+            flash(f"지면 사진 {saved}장을 올렸습니다. 오르티카잉 라인업에 바로 걸렸습니다.", "ok")
         return redirect(url_for("admin.material_shots", mid=mid))
 
     return render_template("admin/material_shots.html", m=item, files=sc.shot_files(mid))
@@ -2003,7 +2003,7 @@ def pass_new():
                   note=sc.clean(request.form.get("note"), 300))
     site = sc.load_site()
     sc.send_mail(
-        f"[{site.get('brand', '오르티카영어')}] 프리패스가 열렸습니다",
+        f"[{site.get('brand', '오르티카잉')}] 프리패스가 열렸습니다",
         "\n".join([f"{plan} 이용권을 열어 드렸습니다.",
                     f"쓰실 수 있는 지문 : {quota:,}개",
                     f"이용 기간 : 오늘부터 {days}일",
@@ -2216,7 +2216,7 @@ def mail_news():
             return redirect(url_for("admin.mail_page"))
 
     tail = ("\n\n---\n"
-            f"{site.get('brand', '오르티카영어')}\n"
+            f"{site.get('brand', '오르티카잉')}\n"
             f"{url_for('home', _external=True)}\n"
             "이 메일이 필요 없으시면 회신 주시면 명단에서 빼 드리겠습니다.")
 
@@ -2266,7 +2266,7 @@ def mail_coupon():
         lines += [f"쓰실 수 있는 기간 : 오늘부터 {days}일",
                   "", "주문서 맨 아래 '할인 쿠폰' 칸에 번호를 넣으시면 됩니다.",
                   url_for("products", _external=True),
-                  "", "---", site.get("brand", "오르티카영어")]
+                  "", "---", site.get("brand", "오르티카잉")]
         return "\n".join(x for x in lines if x is not None)
 
     def drop(addr: str) -> None:
@@ -2309,7 +2309,7 @@ def mail_cart():
             "", f"예상 금액 {sc.to_int(r['amount'], 0):,}원",
             "", "아래 주소에서 이어서 주문하실 수 있습니다.",
             url_for("products", _external=True),
-            "", "---", site.get("brand", "오르티카영어")])
+            "", "---", site.get("brand", "오르티카잉")])
 
     sent, failed = sc.send_batch(
         "cart", "장바구니에 담아 두신 자료가 있습니다",
@@ -2428,7 +2428,7 @@ def settings():
                            delivery_modes=sc.DELIVERY_MODES)
 
     f = request.form
-    site["brand"] = sc.clean(f.get("brand"), 60) or site.get("brand", "오르티카영어")
+    site["brand"] = sc.clean(f.get("brand"), 60) or site.get("brand", "오르티카잉")
     site["brand_en"] = sc.clean(f.get("brand_en"), 40) or site.get("brand_en", "Ortica")
     site["tagline"] = sc.clean(f.get("tagline"), 120)
     site["description"] = sc.clean(f.get("description"), 300)
@@ -2665,7 +2665,7 @@ def backup_full():
         if sc.DB_PATH.exists():                       # 장부 원본 (되살릴 때 이것만 있으면 됩니다)
             z.write(sc.DB_PATH, "store.db")
         z.writestr("읽어주세요.txt",
-                   f"오르티카 영어 전체 백업 · {sc.stamp()}\n\n"
+                   f"오르티카잉 영어 전체 백업 · {sc.stamp()}\n\n"
                    "· 설정/ 안의 파일들 → 관리자 > 백업 에서 '되돌리기'로 올리면 복구됩니다.\n"
                    "  (되돌리기는 json 파일 하나를 받으므로, 관리자 > 백업 의 '설정만 받기'로\n"
                    "   받은 파일을 쓰시는 편이 간단합니다.)\n"

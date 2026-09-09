@@ -127,19 +127,19 @@
     {
       "slug": "highlighter-basic",
       "category": "highlighter",
-      "publisher": "오르티카영어",
+      "publisher": "오르티카잉",
       "author": "자체 제작",
       "name": "형광펜 독해 BASIC",
       "grade": "고1~고2",
       "sort": 60,
       "active": true,
-      "description": "지문에서 반드시 짚어야 할 자리를 형광펜으로 표시해 두는 오르티카 자체 교재입니다. 처음 구문을 잡는 학생용입니다.",
+      "description": "지문에서 반드시 짚어야 할 자리를 형광펜으로 표시해 두는 오르티카잉 자체 교재입니다. 처음 구문을 잡는 학생용입니다.",
       "sample": true
     },
     {
       "slug": "highlighter-master",
       "category": "highlighter",
-      "publisher": "오르티카영어",
+      "publisher": "오르티카잉",
       "author": "자체 제작",
       "name": "형광펜 독해 MASTER",
       "grade": "고2~고3",

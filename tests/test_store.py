@@ -84,7 +84,7 @@ def test_public_pages_open():
     for path, must in [
         ("/", "지문분석지"),
         ("/products", "자료 목록"),
-        ("/lineup", "오르티카 라인업"),
+        ("/lineup", "오르티카잉 라인업"),
         ("/free", "무료 자료"),
         ("/custom", "자료 요청"),
         ("/submit", "시험지"),
@@ -124,12 +124,12 @@ def test_lineup_shows_all_materials():
     assert 'lineup-group dark' in text                          # 그 묶음만 진한 배경
     assert "SIGNATURE" in text and "주문제작자료" in text        # 표시
     assert "읽고 · 뜯어보고" in text                             # 머리말
-    print(f"PASS  오르티카 라인업 {len(mats)}종 · 묶음 · 표시 노출")
+    print(f"PASS  오르티카잉 라인업 {len(mats)}종 · 묶음 · 표시 노출")
 
 
 def test_home_reflects_lineup():
     text = body(client().get("/"))
-    assert "고등영어자료는" in text and "오르티카" in text          # 머리말
+    assert "고등영어자료는" in text and "오르티카잉" in text          # 머리말
     assert "곁에 두는 선생님 같은 자료" in text                     # 학생 쪽
     assert "이것만 해도 충분하다는 확신" in text                    # 선생님 쪽
     assert "평가원 9개년의 설계 원리" in text
@@ -825,7 +825,7 @@ def test_receipt_request_and_sales():
 
     resp = c.post("/order", data={
         "slug": "mock-2026-06-g3-problem", "name": "학원장", "phone": "010-7777-8888",
-        "email": "academy@example.com", "affiliation": "오르티카학원", "agree": "1",
+        "email": "academy@example.com", "affiliation": "오르티카잉학원", "agree": "1",
         "receipt_kind": "tax_invoice", "receipt_no": "123-45-67890"})
     assert resp.status_code == 302
     key = resp.headers["Location"].rsplit("/", 1)[-1]
@@ -898,7 +898,7 @@ def test_admin_not_indexed_and_login_is_standalone():
 
     login = body(client().get("/admin/login"))
     assert 'name="robots"' in login and "noindex" in login
-    assert "오르티카 라인업" not in login       # 고객 메뉴가 딸려 나오지 않아야 함
+    assert "오르티카잉 라인업" not in login       # 고객 메뉴가 딸려 나오지 않아야 함
 
     robots = body(client().get("/robots.txt"))
     assert "Disallow: /admin" in robots and "Disallow: /d/" in robots
@@ -1219,7 +1219,7 @@ def test_admin_menu_is_short():
 
     # 밖에 나와 있는 것 — 매일·매주 여는 것만
     for must in ("오늘 할 일", "주문 · 문의", "시험지 · 쿠폰", "매출 · 지표",
-                 "손님 발자국", "상품", "교재 · 분류", "오르티카 라인업",
+                 "손님 발자국", "상품", "교재 · 분류", "오르티카잉 라인업",
                  "무료 자료실", "단어장", "지문", "공지", "메일 · 명단"):
         assert must in daily, must
     assert daily.count('</a>') == 13, daily.count('</a>')
@@ -1254,7 +1254,7 @@ def test_admin_pages_open():
         ("/admin/sales", "월별 매출"),
         ("/admin/mail", "이메일 명단"),             # 명단은 메일 화면으로 합쳤습니다
         ("/admin/products/mock-2026-06-g3-analysis/files", "손님에게 보낼 파일"),
-        ("/admin/materials", "오르티카 라인업"),
+        ("/admin/materials", "오르티카잉 라인업"),
         ("/admin/materials/analysis", "특징 묶음 제목"),
         ("/admin/notices", "새 공지 쓰기"),
         ("/admin/settings", "입금 계좌"),
@@ -1332,7 +1332,7 @@ def test_admin_edits_material_and_site_reflects():
     assert resp.status_code == 302
     text = body(client().get("/lineup"))
     assert "테스트로 바꾼 한 줄 소개" in text and "새 특징" in text
-    print("PASS  오르티카 라인업 수정 → 고객 화면 반영")
+    print("PASS  오르티카잉 라인업 수정 → 고객 화면 반영")
 
 
 def test_admin_product_materials_saved():
@@ -1401,14 +1401,14 @@ def test_admin_notice_appears_on_home():
 def test_admin_settings_change_reaches_customer():
     a = admin()
     resp = a.post("/admin/settings", data={
-        "brand": "오르티카영어", "tagline": "테스트 태그라인",
+        "brand": "오르티카잉", "tagline": "테스트 태그라인",
         "contact_email": "real@ortica.kr",
         "contact_kakao_url": "https://open.kakao.com/o/g0a1w2Li",
         "contact_kakao_label": "카카오톡 오픈채팅 문의",
         "contact_hours": "평일 10-19", "payment_bank_name": "국민은행",
         "payment_bank_account": "111-222-333444", "payment_bank_holder": "홍길동",
         "payment_notice": "곧 보내 드립니다",
-        "business_company": "오르티카", "business_owner": "홍길동",
+        "business_company": "오르티카잉", "business_owner": "홍길동",
         "business_reg_no": "123-45-67890", "business_mailorder_no": "제2026-서울-1234호",
         "business_address": "서울시", "policy_refund": "환불규정", "policy_license": "이용범위",
         "policy_privacy": "개인정보", "pass_enabled": "1", "pass_mode": "preorder",
@@ -1848,15 +1848,15 @@ def test_sheet_heading():
     assert "이름" in plain and "점수" in plain
 
     # 적으면 제목이 그것으로 바뀌고, 학원 이름이 제목 위에 붙습니다
-    tail = "&place=오르티카+영어학원&title=9월+어휘+확인&date=2026.+9.+4."
+    tail = "&place=오르티카잉+영어학원&title=9월+어휘+확인&date=2026.+9.+4."
     fancy = sheet_text(f"/words/{slug}/sheet?unit={unit}&kind=en_ko&seed=7" + tail)
-    assert "오르티카 영어학원" in fancy
+    assert "오르티카잉 영어학원" in fancy
     assert "9월 어휘 확인" in fancy
     assert "2026. 9. 4." in fancy
     assert "어휘 TEST" not in fancy           # 적어 주신 제목이 대신 들어갑니다
 
     # 학생용과 정답지 두 장 모두에 들어갑니다
-    assert fancy.count("오르티카 영어학원") == 2
+    assert fancy.count("오르티카잉 영어학원") == 2
     assert fancy.count("9월 어휘 확인") == 2
 
     # '다른 문제로 다시' 를 눌러도 제목이 그대로 따라갑니다
@@ -2759,13 +2759,13 @@ def test_home_shows_real_pages_not_just_names():
 
 
 def test_lineup_takes_the_home_middle():
-    """첫 화면 가운데는 자료 목록이 아니라 오르티카 라인업입니다."""
+    """첫 화면 가운데는 자료 목록이 아니라 오르티카잉 라인업입니다."""
     home = body(client().get("/"))
-    assert "오르티카 라인업 보기" in home                    # 맨 위 두 번째 단추
+    assert "오르티카잉 라인업 보기" in home                    # 맨 위 두 번째 단추
     assert "라인업 자세히 보기" in home                      # 가운데 단추
-    assert home.index("오르티카 라인업 보기") < home.index("라인업 자세히 보기")
+    assert home.index("오르티카잉 라인업 보기") < home.index("라인업 자세히 보기")
     assert "자료 목록 보기" in home                          # 목록도 갈 수 있게 남겨 둡니다
-    print("PASS  첫 화면 가운데가 오르티카 라인업")
+    print("PASS  첫 화면 가운데가 오르티카잉 라인업")
 
 
 def test_menu_has_no_duplicates():
@@ -2779,7 +2779,7 @@ def test_menu_has_no_duplicates():
             n = html.count(f">{label}</a>")
             assert n == 1, f"{where} 에 '{label}' 가 {n}번 들어 있습니다"
         # 이만큼만 둡니다. 나머지는 첫 화면 가운데와 발밑에 있습니다.
-        for gone in ("자료 목록", "오르티카 라인업", "공지", "문의", "내 자료함",
+        for gone in ("자료 목록", "오르티카잉 라인업", "공지", "문의", "내 자료함",
                      "교과서", "형광펜 독해"):
             assert f">{gone}</a>" not in html, f"{where} 에 '{gone}' 가 남아 있습니다"
     print("PASS  메뉴 일곱 가지 · 같은 항목이 두 번 안 들어감")
@@ -3753,29 +3753,84 @@ def test_brand_is_korean_for_search():
     home = body(c.get("/"))
     import json as _json
     shipped = _json.load(open("store_data/site.json", encoding="utf-8"))
-    assert shipped["brand"] == "오르티카영어"
-    assert shipped["business"]["company"] == "오르티카영어"
+    assert shipped["brand"] == "오르티카잉"
+    assert shipped["business"]["company"] == "오르티카잉"
     assert shipped["brand_en"] == "Ortica"
 
     # 로고 그림은 영문 그대로 두되, 이름은 한글로 읽히게 합니다
-    assert 'aria-label="오르티카영어"' in home
-    assert "Ortica<i>영어</i>" in home
+    assert 'aria-label="오르티카잉"' in home
+    assert "Ortica<i>English</i>" in home
 
-    # 검색엔진에 '오르티카'·'Ortica' 가 같은 곳임을 알려 줍니다
+    # 검색엔진에 '오르티카잉'·'Ortica' 가 같은 곳임을 알려 줍니다
     import json as _j, re as _re
     blocks = [_j.loads(m) for m in
               _re.findall(r'<script type="application/ld\+json">(.*?)</script>', home, _re.S)]
     org = next(b for b in blocks if b.get("@type") == "Organization")
-    assert org["name"] == "오르티카영어"
-    assert set(org["alternateName"]) == {"Ortica", "Ortica영어", "오르티카", "오르티카 영어"}
+    assert org["name"] == "오르티카잉"
+    assert set(org["alternateName"]) == {"Ortica English", "Ortica",
+                                        "오르티카잉글리시", "오르티카", "오르티카영어"}
 
     # 메일 제목도 한글 이름을 씁니다
-    assert "[오르티카영어]" in open("store.py", encoding="utf-8").read()
+    assert "[오르티카잉]" in open("store.py", encoding="utf-8").read()
     assert "Ortica영어" not in open("store.py", encoding="utf-8").read()
 
     # 로고에 새길 영문 이름은 관리자 화면에서 고칩니다
     assert 'name="brand_en"' in body(admin().get("/admin/settings"))
-    print("PASS  이름은 한글 '오르티카영어' · 로고 그림만 영문")
+    print("PASS  이름은 한글 '오르티카잉' · 로고 글자만 영문")
+
+
+def test_old_brand_is_renamed_even_on_the_live_disk():
+    """상호를 바꾸면 이미 저장된 글에서도 같이 바뀌어야 합니다.
+
+    자료 파일은 배포해도 안 덮이는 디스크에 있어서, 파일만 고쳐서는 이미
+    돌아가는 사이트에 안 내려갑니다. 읽을 때마다 바꿔야 확실히 바뀝니다.
+    """
+    import store_common as sc
+
+    # 조사까지 같이 고칩니다. 받침이 생겼으니까요.
+    assert sc.rename_brand("오르티카영어") == "오르티카잉"
+    assert sc.rename_brand("고등영어자료는 오르티카로 정착") == "고등영어자료는 오르티카잉으로 정착"
+    assert sc.rename_brand("오르티카영어가 만듭니다") == "오르티카잉이 만듭니다"
+    assert sc.rename_brand("저작권은 오르티카영어에 있으며") == "저작권은 오르티카잉에 있으며"
+    assert sc.rename_brand("오르티카영어를 찾으셨나요") == "오르티카잉을 찾으셨나요"
+    assert sc.rename_brand("오르티카영어(Ortica)") == "오르티카잉(Ortica)"
+
+    # 사업자등록 상호는 그대로 둡니다. 사업자 정보란에는 등록증에 적힌
+    # 이름이 그대로 있어야 합니다.
+    assert sc.rename_brand("오르티카잉글리시") == "오르티카잉글리시"
+    assert sc.BRAND_LEGAL == "오르티카잉글리시"
+
+    # 이미 바뀐 글은 두 번 바꾸지 않습니다
+    assert sc.rename_brand("오르티카잉 라인업") == "오르티카잉 라인업"
+    assert sc.rename_brand(sc.rename_brand("오르티카영어")) == "오르티카잉"
+
+    # 조사 뒤에 또 한글이 오면 조사가 아니라 낱말입니다
+    assert sc.rename_brand("오르티카라인업") == "오르티카잉라인업"
+    assert sc.rename_brand("오르티카 영어학원") == "오르티카잉 영어학원"
+
+    # 글·목록·표를 통째로 훑습니다
+    assert sc.rename_brand({"a": ["오르티카영어", 3], "b": None}) == \
+        {"a": ["오르티카잉", 3], "b": None}
+
+    # 옛 이름이 그대로 심긴 디스크를 흉내 내 봅니다
+    keep = sc.load_site()
+    try:
+        stale = json.loads(json.dumps(keep))
+        stale["brand"] = "오르티카영어"
+        stale["tagline"] = "고등영어자료는 오르티카로 정착"
+        stale["policy"]["license"] = "저작권은 오르티카영어에 있으며"
+        sc.save_site(stale)
+
+        fresh = sc.load_site()
+        assert fresh["brand"] == "오르티카잉"
+        assert fresh["tagline"] == "고등영어자료는 오르티카잉으로 정착"
+        assert fresh["policy"]["license"] == "저작권은 오르티카잉에 있으며"
+
+        home = body(client().get("/"))
+        assert "오르티카잉" in home and "오르티카영어" not in home
+    finally:
+        sc.save_site(keep)
+    print("PASS  옛 상호는 읽을 때마다 새 상호로 (조사까지)")
 
 
 def test_search_result_title_is_editable():
@@ -3783,18 +3838,18 @@ def test_search_result_title_is_editable():
     import re
     home = body(client().get("/"))
     title = re.search(r"<title>(.*?)</title>", home, re.S).group(1).strip()
-    assert title == "오르티카영어 — 시험에 적합한 고등영어자료", title
-    assert 'property="og:title" content="오르티카영어' in home   # 카톡 공유도 같은 제목
+    assert title == "오르티카잉 — 시험에 적합한 고등영어자료", title
+    assert 'property="og:title" content="오르티카잉' in home   # 카톡 공유도 같은 제목
     import re as _re
     desc = _re.search(r'name="description" content="(.*?)"', home).group(1)
     assert len(desc) <= 90, f"설명이 {len(desc)}자입니다. 검색 결과에서 잘립니다"
 
     a = admin()
-    a.post("/admin/seo", data={"seo_title": "바꾼 제목 : 오르티카 영어",
+    a.post("/admin/seo", data={"seo_title": "바꾼 제목 : 오르티카잉",
                                "seo_description": "바꾼 설명입니다.",
                                "naver": "", "google": ""}, follow_redirects=True)
     home = body(client().get("/"))
-    assert "<title>바꾼 제목 : 오르티카 영어</title>" in home
+    assert "<title>바꾼 제목 : 오르티카잉</title>" in home
     assert 'name="description" content="바꾼 설명입니다."' in home
     # 관리자 화면에 미리보기가 있어야 합니다
     assert "이렇게 뜹니다" in body(a.get("/admin/seo"))
@@ -3803,22 +3858,22 @@ def test_search_result_title_is_editable():
 
 # ---- 올 때마다 바뀌는 자리 -------------------------------------------------
 def test_notice_shows_live_now_section():
-    """'지금 오르티카'(새 자료 · 다음 시험)는 공지 화면에 둡니다."""
+    """'지금 오르티카잉'(새 자료 · 다음 시험)는 공지 화면에 둡니다."""
     text = body(client().get("/notice"))
-    assert "지금 오르티카" in text
+    assert "지금 오르티카잉" in text
     assert "새로 올라왔습니다" in text and "다음 시험까지" in text
     # 자료 올리는 일정을 약속하지 않기로 했습니다
     assert "이렇게 올립니다" not in text
     # 첫 화면은 가볍게 — 같은 자리를 두 번 두지 않습니다
     home = body(client().get("/"))
-    assert "지금 오르티카" not in home
+    assert "지금 오르티카잉" not in home
     # 다만 히어로의 D-day 배지는 공지의 시험 일정으로 이어져야 합니다
     assert 'href="/notice#exams"' in home
-    print("PASS  공지에 '지금 오르티카' — 새 자료 · 다음 시험 D-day")
+    print("PASS  공지에 '지금 오르티카잉' — 새 자료 · 다음 시험 D-day")
 
 
 def test_home_previews_every_category():
-    """분류마다 교재를 몇 권씩 미리 보여 주는 자리는 오르티카 라인업입니다."""
+    """분류마다 교재를 몇 권씩 미리 보여 주는 자리는 오르티카잉 라인업입니다."""
     text = body(client().get("/lineup"))
     assert "어떤 자료가 있나" in text
     for name in ("교과서", "모의고사", "EBS 부교재", "형광펜 독해"):
@@ -4290,7 +4345,7 @@ def test_lineup_shows_a_slice_not_the_whole_page():
 
 
 def test_lineup_shots_upload_and_show():
-    """지면 사진을 관리자에서 올리면 오르티카 라인업에 바로 걸려야 합니다."""
+    """지면 사진을 관리자에서 올리면 오르티카잉 라인업에 바로 걸려야 합니다."""
     import io as _io
     a = admin()
     png = (b"\x89PNG\r\n\x1a\n" + b"0" * 60)          # 내용은 상관없습니다
@@ -4443,7 +4498,7 @@ def test_admin_edits_exam_schedule():
 def test_home_updates_skip_pinned_notice():
     """맨 위 띠에 이미 뜬 고정 공지가 '새로 올라왔습니다'에 또 나오면 안 됩니다."""
     text = body(client().get("/notice"))
-    assert text.count("오르티카영어 자료 판매를 시작합니다") == 1
+    assert text.count("오르티카잉 자료 판매를 시작합니다") == 1
     print("PASS  고정 공지가 '새로 올라왔습니다'에 두 번 나오지 않음")
 
 
@@ -4595,7 +4650,7 @@ def test_speaks_to_both_audiences():
     # 첫 화면은 히어로 한 문단으로 두 쪽을 다 부릅니다
     home = body(client().get("/"))
     assert "혼자 공부하는 학생에게는" in home and "가르치는 선생님에게는" in home
-    # 자세한 두 갈래 안내는 오르티카 라인업에 있습니다
+    # 자세한 두 갈래 안내는 오르티카잉 라인업에 있습니다
     text = body(client().get("/lineup"))
     assert "혼자 공부하는 학생" in text and "가르치는 선생님" in text
     assert "필생보 독학용" in text          # 학생 쪽 길
@@ -6037,6 +6092,7 @@ def run_all():
     test_seo_verification_code_paste()
     test_page_width_uses_the_screen()
     test_brand_is_korean_for_search()
+    test_old_brand_is_renamed_even_on_the_live_disk()
     test_search_result_title_is_editable()
     test_sitemap_lists_free_items()
     test_lineup_offers_sample_pdf()

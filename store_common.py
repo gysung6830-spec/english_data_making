@@ -289,7 +289,41 @@ def save_json(name: str, data: dict) -> None:
     tmp.replace(path)
 
 
-SITE_FALLBACK = {"brand": "오르티카영어", "contact": {}, "payment": {},
+# ── 상호 ──────────────────────────────────────────────────────────────
+# 오르티카영어 → 오르티카잉. 사업자등록 상호는 '오르티카잉글리시' 이고,
+# 화면에 보이는 이름은 그것을 줄인 '오르티카잉' 하나로 통일합니다.
+#
+# 자료 파일은 배포해도 안 덮이는 디스크에 있어서, 파일만 고쳐서는 이미
+# 돌아가는 사이트에 안 내려갑니다. 그래서 읽을 때마다 바꿉니다.
+#   · 이미 '오르티카잉' 인 글은 안 건드립니다(뒤에 '잉' 이 오면 안 잡음).
+#     사업자등록 상호인 '오르티카잉글리시' 도 그래서 그대로 남습니다.
+#     사업자 정보란에는 등록증에 적힌 이름이 그대로 있어야 하니까요.
+#   · 받침 없는 이름(오르티카)에서 받침 있는 이름(오르티카잉)으로 바뀌므로
+#     뒤에 붙는 조사도 같이 고칩니다. 오르티카로 → 오르티카잉으로.
+#   · 조사 뒤에 또 한글이 오면 조사가 아니라 낱말입니다. 그때는 안 고칩니다.
+#     오르티카라인업 → 오르티카잉라인업 (오르티카잉이라인업 이 아니라)
+BRAND_NAME = "오르티카잉"
+BRAND_LEGAL = "오르티카잉글리시"          # 사업자등록증에 적힌 상호
+_BRAND_OLD_RE = re.compile(
+    r"오르티카(?!잉)(?:영어|English)?(?:([로가는를와])(?![가-힣]))?")
+_JOSA = {"로": "으로", "가": "이", "는": "은", "를": "을", "와": "과"}
+
+
+def rename_brand(value):
+    """저장된 글 속의 옛 상호를 새 상호로. 글·목록·표를 통째로 훑습니다."""
+    if isinstance(value, str):
+        if "오르티카" not in value:
+            return value
+        return _BRAND_OLD_RE.sub(
+            lambda m: BRAND_NAME + _JOSA.get(m.group(1) or "", ""), value)
+    if isinstance(value, list):
+        return [rename_brand(v) for v in value]
+    if isinstance(value, dict):
+        return {k: rename_brand(v) for k, v in value.items()}
+    return value
+
+
+SITE_FALLBACK = {"brand": BRAND_NAME, "contact": {}, "payment": {},
                  "business": {}, "policy": {}, "pass": {}}
 CATALOG_FALLBACK = {"categories": [], "packages": [], "books": [], "products": []}
 NOTICE_FALLBACK = {"notices": [], "exams": []}
@@ -326,7 +360,7 @@ PASS_CLOSING = ("시험 때마다 살지 말지 고민하지 않게 됩니다. "
 
 
 def load_site() -> dict:
-    site = load_json("site.json", SITE_FALLBACK)
+    site = rename_brand(load_json("site.json", SITE_FALLBACK))
     for key in ("contact", "payment", "business", "policy", "pass"):
         site.setdefault(key, {})
     reward = site.get("submit_reward") or {}
@@ -351,7 +385,7 @@ def save_site(site: dict) -> None:
 
 def load_raw_catalog() -> dict:
     """숨긴 항목까지 전부. 관리자 화면에서 씁니다."""
-    catalog = load_json("products.json", CATALOG_FALLBACK)
+    catalog = rename_brand(load_json("products.json", CATALOG_FALLBACK))
     for key in ("categories", "packages", "books", "products"):
         catalog.setdefault(key, [])
     catalog["packages"] = sorted(catalog["packages"], key=lambda x: x.get("sort", 100))
@@ -391,8 +425,8 @@ MATERIALS_FALLBACK = {"intro": {}, "groups": [], "materials": []}
 
 
 def load_materials() -> dict:
-    """오르티카 라인업(지문자료 · 지문분석지 · 워크북 …)."""
-    data = load_json("materials.json", MATERIALS_FALLBACK)
+    """오르티카잉 라인업(지문자료 · 지문분석지 · 워크북 …)."""
+    data = rename_brand(load_json("materials.json", MATERIALS_FALLBACK))
     for key in ("groups", "materials"):
         data.setdefault(key, [])
     data.setdefault("intro", {})
@@ -1096,7 +1130,7 @@ def is_placeholder(value: str | None) -> bool:
 
 def load_notices() -> dict:
     """공지. 고정 공지가 맨 앞, 그다음 최신순."""
-    data = load_json("notices.json", NOTICE_FALLBACK)
+    data = rename_brand(load_json("notices.json", NOTICE_FALLBACK))
     data.setdefault("exams", [])
     items = data.get("notices", [])
     pinned = [n for n in items if n.get("pinned")]
@@ -2714,7 +2748,7 @@ PAGE_LABELS = {
     "product_detail": "자료 상세",
     "book_detail": "교재 화면",
     "book_pick": "강 고르기",
-    "lineup": "오르티카 라인업",
+    "lineup": "오르티카잉 라인업",
     "free": "무료 자료실",
     "free_detail": "무료 자료 한 건",
     "cart": "장바구니",
