@@ -27,20 +27,25 @@
     <div class="panel">
       <h2 style="font-size:16px;">{{ r.no }}. {{ r.en }}</h2>
       {% if r.ko %}<div class="hint">{{ r.ko }}</div>{% endif %}
-      {% if r.hints %}
-        <div class="check-grid" style="flex-direction:column; gap:12px; margin-top:12px;">
-          {% for h in r.hints %}
-            <div class="gr-pick">
-              <label class="check">
-                <input type="checkbox" name="g{{ r.no - 1 }}" value="{{ h.tag }}"
-                       {{ 'checked' if h.on }}>
-                <span><b>{{ h.tag }}</b></span>
-              </label>
-              <input type="text" name="n{{ r.no - 1 }}_{{ h.tag }}" value="{{ h.note }}"
-                     placeholder="손님에게 보여 줄 설명">
-            </div>
-          {% endfor %}
-        </div>
+      {% if r.groups %}
+        <div class="hint" style="margin-top:10px;">찾은 자리 {{ r.found }}개 ·
+          담은 것 <b>{{ r.on }}개</b></div>
+        {% for g in r.groups %}
+          <div class="gr-group">
+            <b class="gr-gname">{{ g.name }}</b>
+            {% for h in g.hints %}
+              <div class="gr-pick">
+                <label class="check">
+                  <input type="checkbox" name="g{{ r.no - 1 }}" value="{{ h.tag }}"
+                         {{ 'checked' if h.on }}>
+                  <span><b>{{ h.tag }}</b></span>
+                </label>
+                <input type="text" name="n{{ r.no - 1 }}_{{ h.tag }}" value="{{ h.note }}"
+                       placeholder="손님에게 보여 줄 설명">
+              </div>
+            {% endfor %}
+          </div>
+        {% endfor %}
       {% else %}
         <p class="hint" style="margin-top:10px;">짚을 만한 자리를 못 찾았습니다.</p>
       {% endif %}

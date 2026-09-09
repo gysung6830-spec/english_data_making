@@ -1477,7 +1477,8 @@ def passages_grammar(slug, unit_id, item_id):
         for i, sent in enumerate(item["sentences"]):
             picked = request.form.getlist(f"g{i}")
             notes = {t: sc.clean(request.form.get(f"n{i}_{t}"), 300) for t in picked}
-            known = {tag: note for tag, _, note in sc.GRAMMAR_RULES}
+            known = {tag: note for _g, tag, _p, note in sc.GRAMMAR_RULES}
+            known.update(sc.GRAMMAR_PHRASES)
             sent["grammar"] = [{"tag": t, "note": notes.get(t) or known.get(t, "")}
                                for t in picked if t in known]
             if not sent["grammar"]:
@@ -1496,11 +1497,20 @@ def passages_grammar(slug, unit_id, item_id):
         for tag, note in have.items():
             if tag not in seen:
                 hints.append({"tag": tag, "note": note})
+        # 갈래로 묶어 보여 줍니다. 쉰 줄이 한 덩어리로 늘어서면 못 고릅니다.
+        picked = [{**h, "on": h["tag"] in have,
+                   "group": h.get("group") or sc.grammar_group(h["tag"]),
+                   "note": have.get(h["tag"]) or h["note"]} for h in hints]
+        groups = []
+        for name in sc.GRAMMAR_GROUPS:
+            mine = [h for h in picked if h["group"] == name]
+            if mine:
+                groups.append({"name": name, "hints": mine})
         rows.append({"no": i + 1, "en": sent.get("en", ""), "ko": sent.get("ko", ""),
-                     "hints": [{**h, "on": h["tag"] in have,
-                                "note": have.get(h["tag"]) or h["note"]} for h in hints]})
+                     "groups": groups, "found": len(picked),
+                     "on": sum(1 for h in picked if h["on"])})
     return render_template("admin/passages_grammar.html", b=book, unit=unit, item=item,
-                           rows=rows, i_index=range(len(item["sentences"])))
+                           rows=rows)
 
 
 @admin_bp.route("/passages/<slug>/item/<unit_id>/<item_id>/delete", methods=["POST"])

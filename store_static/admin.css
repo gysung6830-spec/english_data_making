@@ -411,3 +411,8 @@
 .ck-line b{flex:0 0 46%; min-width:220px; font-weight:500; font-size:15px;
   padding:8px 12px; background:#eef4f1; border-radius:8px;}
 .ck-line input[type=text]{flex:1; min-width:200px;}
+
+/* 어법 짚기 — 갈래로 묶어 봅니다. 쉰 줄이 한 덩어리면 못 고릅니다. */
+.gr-group{margin-top:14px; padding-left:12px; border-left:3px solid var(--brand, #146b4a);}
+.gr-gname{display:block; font-size:13px; color:#146b4a; margin-bottom:8px;}
+.gr-group .gr-pick{margin-bottom:8px;}

@@ -3245,64 +3245,284 @@ def chunk_pairs(sentence: dict) -> list[dict]:
 # 문법책을 옮겨 놓는 자리가 아닙니다. 지금 읽는 문장에 그것이 있으니까 짚는
 # 것이고, 없는 지문에서는 이 자리가 아예 안 열립니다.
 # ---------------------------------------------------------------------------
+# 갈래를 먼저 나눕니다. 오답 보기를 같은 갈래에서 뽑아야 시험이 됩니다 —
+# '관계부사' 의 오답으로 '수동태' 를 내놓으면 몰라도 찍힙니다.
+GRAMMAR_GROUPS = ["관계사", "준동사", "절·접속", "동사 어형",
+                  "구문·강조", "비교·부정·기타", "숙어·표현"]
+
+# (갈래, 이름, 찾는 자리, 손님에게 보여 줄 설명)
+# 괄호로 짚은 자리만 형광펜을 칩니다. 앞말까지 물고 오면 그것을 묻는 것처럼
+# 보입니다. 기계가 찾는 것이라 틀릴 수 있어, 관리자에서 확인해 담은 것만 나갑니다.
 GRAMMAR_RULES = [
-    ("관계대명사", r"\b[a-z]{2,},?\s+(who|whom|which|that)\s+(?=\w)",
+    # ---- 1. 관계사 ----------------------------------------------------
+    ("관계사", "관계대명사", r"\b[a-z]{2,},?\s+(who|whom|which|that)\s+(?=\w)",
      "앞의 명사를 뒤 문장이 통째로 꾸밉니다. 관계사 앞에서 한 번 끊어 읽으세요."),
-    ("관계부사", r"[a-z]{3,},?\s+(where|when|why)\s+(?=\w+\s+\w)",
-     "앞의 명사(장소·때·이유)를 뒤 문장이 꾸밉니다. 문장 맨 앞의 When 과는 다릅니다."),
-    ("부사절 접속사", r"^\s*(When|While|After|Before|Since|Although|Though|Because|If|Unless)\b",
-     "이 절이 끝나는 자리까지가 곁가지입니다. 주절이 어디서 시작하는지 찾으세요."),
-    ("분사구문", r",\s+(\w+ing)\b",
-     "접속사와 주어를 지우고 -ing 로 이어 붙인 자리입니다. '~하면서/~해서' 로 읽습니다."),
-    ("수동태", r"\b(?:am|is|are|was|were|be|been|being)\s+\w+(?:ed|en)\b",
-     "행위를 '당하는' 쪽이 주어입니다. 누가 했는지는 by 뒤에 나오거나 아예 생략됩니다."),
-    ("to부정사", r"\bto\s+[a-z]{2,}\b",
-     "'~하기 위해 / ~하는 것 / ~할' 셋 중 무엇인지 자리로 가립니다."),
-    ("비교급", r"\b(?:\w+er|more\s+\w+)\s+than\b",
-     "무엇과 무엇을 견주는지 than 뒤를 먼저 보세요."),
-    ("최상급", r"\bthe\s+(?:\w+est|most\s+\w+)\b",
-     "범위(in·of·among)가 어디까지인지 함께 봅니다."),
-    ("가정법", r"\bif\b[^.]*?\b((?:would|could|might|should)\s+\w+)",
-     "if 절이 실제가 아닌 일을 말하고, 여기가 그 결과입니다. 시제가 한 칸 뒤로 물러납니다."),
-    ("가주어 it", r"\b(It)\s+(?:is|was|seems|appears)\b[^.]*\bthat\b",
-     "이 It 은 자리만 잡고 있습니다. 진짜 주어는 뒤의 that 이하입니다."),
-    ("사역·지각동사", r"\b(?:make|makes|made|let|lets|have|has|had|help|helps|"
-                    r"see|sees|saw|hear|hears|heard|watch|watches|watched)\s+"
-                    r"(?:\w+)\s+(?!to\b)[a-z]+\b",
-     "목적어 뒤에 to 없는 동사원형이 옵니다."),
-    ("so ~ that", r"\bso\s+\w+\s+that\b",
-     "'너무 ~해서 …하다'. 원인과 결과가 한 문장에 들어 있습니다."),
-    ("동명사 주어", r"^\s*(\w+ing)\s+\w+[^.]*\b(?:is|was|are|were)\b",
+    ("관계사", "관계대명사 소유격", r"\b(whose)\s+\w+",
+     "'그 사람의 ~' 로 읽습니다. whose 뒤에는 관사 없이 명사가 바로 옵니다."),
+    ("관계사", "목적격 관계대명사 생략",
+     r"\b(?:the|a|an|his|her|their|my|your|our|this|that|these|those)\s+\w+\s+"
+     r"((?:I|you|he|she|we|they|it)\s+\w+)",
+     "명사 뒤에 '주어+동사' 가 바로 붙었습니다. 사이에 that/which 가 빠져 있습니다."),
+    ("관계사", "관계부사", r"[a-z]{3,},?\s+(where|when|why|how)\s+(?=\w+\s+\w)",
+     "앞의 명사(장소·때·이유·방법)를 뒤 문장이 꾸밉니다. 문장 맨 앞의 When 과는 다릅니다."),
+    ("관계사", "전치사 + 관계대명사",
+     r"\b((?:in|on|at|for|to|with|from|by|about|of)\s+(?:which|whom))\b",
+     "관계사절 안에 있던 전치사가 앞으로 나왔습니다. 뒤 문장에서 그 자리가 비어 있습니다."),
+    ("관계사", "관계대명사 what",
+     r"\b(?:is|are|was|were|know|knows|knew|see|saw|do|does|did|means|meant|about|repeating)\s+(what)\b",
+     "what 은 선행사를 품고 있습니다. '~하는 것' 으로 읽고, 앞에 꾸밀 명사를 찾지 마세요."),
+    ("관계사", "복합관계사",
+     r"\b(whatever|whoever|whomever|whichever|whenever|wherever|however)\b",
+     "'~하는 무엇이든 / 언제든' 입니다. 명사절이거나 양보의 부사절입니다."),
+    ("관계사", "계속적 용법", r",\s+(which|who)\b",
+     "쉼표가 있으면 앞을 한정하지 않고 덧붙여 설명합니다. '그런데 그것은' 으로 이어 읽습니다."),
+
+    # ---- 2. 준동사 ----------------------------------------------------
+    ("준동사", "분사구문", r",\s+((?:not\s+)?\w+ing)\b",
+     "접속사와 주어를 지우고 -ing 로 이어 붙였습니다. '~하면서 / ~해서' 로 읽습니다."),
+    ("준동사", "과거분사 분사구문", r",\s+(\w+ed)\s+(?:by|in|with|to|as)\b",
+     "-ed 로 시작하는 분사구문입니다. 주어가 '당하는' 쪽입니다."),
+    ("준동사", "분사의 후치수식",
+     r"\b(?:the|a|an)\s+\w+\s+(\w+ing|\w+ed)\s+(?:by|in|with|on|at|for)\b",
+     "명사 뒤에서 분사가 꾸밉니다. 여기가 동사인 줄 알면 문장이 어긋납니다."),
+    ("준동사", "감정분사",
+     r"\b(interesting|interested|boring|bored|exciting|excited|surprising|surprised|"
+     r"amazing|amazed|confusing|confused|tiring|tired|frustrating|frustrated|"
+     r"satisfying|satisfied|disappointing|disappointed|embarrassing|embarrassed|"
+     r"shocking|shocked|annoying|annoyed|pleasing|pleased)\b",
+     "-ing 는 '~하게 하는', -ed 는 '~한 느낌이 든' 입니다. 누가 느끼는 쪽인지 보세요."),
+    ("준동사", "to부정사 (명사적)",
+     r"\b(?:want|hope|decide|plan|need|try|promise|refuse|agree|learn|choose|"
+     r"expect|wish|fail|manage|seem|appear)\w*\s+(to\s+\w+)",
+     "'~하는 것을' 로 읽습니다. 동사의 목적어 자리입니다."),
+    ("준동사", "to부정사 (형용사적)",
+     r"\b(?:plan|chance|time|way|ability|right|effort|reason|attempt|need|thing)s?\s+(to\s+\w+)",
+     "앞의 명사를 꾸밉니다. '~할 …' 로 읽습니다."),
+    ("준동사", "to부정사 (부사적)", r"\b(in order to\s+\w+|so as to\s+\w+)",
+     "'~하기 위해' 입니다. 목적을 나타냅니다."),
+    ("준동사", "to부정사 의미상 주어",
+     r"\b((?:for|of)\s+\w+\s+to\s+\w+)\b",
+     "to 앞의 'for/of + 사람' 이 그 동작을 하는 주인입니다. 문장 주어와 다릅니다."),
+    ("준동사", "동명사 주어", r"^\s*(\w+ing)\s+[^.]*\b(?:is|was|are|were)\b",
      "이 -ing 가 주어입니다. 동사는 단수로 받습니다."),
-    ("접속사 that", r"\b(?:believe|think|know|say|show|find|suggest|mean|hope)\w*\s+(that)\b",
+    ("준동사", "동명사 목적어",
+     r"\b(?:enjoy|finish|avoid|mind|suggest|consider|admit|deny|keep|practice|"
+     r"quit|imagine|risk|stop|delay)\w*\s+(\w+ing)\b",
+     "이 동사들은 뒤에 to부정사가 아니라 -ing 를 받습니다."),
+    ("준동사", "동명사 보어", r"\b(?:is|are|was|were)\s+((?!(?:something|nothing|anything|everything|thing|things|king|ring|spring|during|being|morning|evening|ceiling|building)\b)\w+ing)\b(?!\s+(?:by|to|at|in))",
+     "진행형인지, '~하는 것이다' 라는 동명사 보어인지 가려야 합니다."),
+
+    # ---- 3. 절·접속 ---------------------------------------------------
+    ("절·접속", "명사절 that",
+     r"\b(?:believe|think|know|say|show|find|suggest|mean|hope|argue|report|expect|"
+     r"agree|admit|realize|assume|claim|notice|prove|explain)\w*\s+(that)\b",
      "that 이하 문장 통째가 동사의 목적어입니다. 이 that 은 해석하지 않습니다."),
+    ("절·접속", "명사절 의문사",
+     r"\b(?:know|wonder|ask|tell|show|explain|understand|decide|remember)\w*\s+"
+     r"(what|who|when|where|why|how)\b",
+     "의문사가 이끄는 명사절입니다. 뒤는 '주어+동사' 차례입니다(의문문 어순 아님)."),
+    ("절·접속", "명사절 whether·if",
+     r"\b(?:know|wonder|ask|see|decide|doubt|depends?)\w*\s+(whether|if)\b",
+     "'~인지 아닌지' 입니다. 조건의 if 와 헷갈리지 마세요."),
+    ("절·접속", "부사절 접속사",
+     r"^\s*(When|While|After|Before|Since|Although|Though|Because|If|Unless|As)\b",
+     "이 절이 끝나는 자리까지가 곁가지입니다. 주절이 어디서 시작하는지 찾으세요."),
+    ("절·접속", "상관접속사",
+     r"\b(both\s+\w+\s+and|not only[^,.]{0,40}?but(?:\s+also)?|either\s+\w+\s+or|"
+     r"neither\s+\w+\s+nor)\b",
+     "짝을 이루는 접속사입니다. 앞뒤에 같은 모양(품사·구조)이 와야 합니다."),
+    ("절·접속", "접속사 vs 전치사",
+     r"\b(because of|due to|owing to|in spite of|despite|during|thanks to)\b",
+     "뒤에 '주어+동사' 가 아니라 명사가 옵니다. because·while·though 와 짝지어 외우세요."),
+    ("절·접속", "so ~ that", r"\b(so\s+\w+\s+that|such\s+(?:a\s+)?\w+\s+\w+\s+that)\b",
+     "'너무 ~해서 …하다'. 원인과 결과가 한 문장에 들어 있습니다."),
+    ("절·접속", "동격 that",
+     r"\b(?:fact|idea|belief|news|thought|opinion|possibility|evidence|claim|"
+     r"conclusion|hope|feeling)\s+(that)\b",
+     "앞 명사의 내용을 that 이하가 그대로 풀어 줍니다. 관계대명사가 아닙니다."),
+
+    # ---- 4. 동사 어형 -------------------------------------------------
+    ("동사 어형", "수동태",
+     r"\b((?:am|is|are|was|were|be|been|being)\s+\w+(?:ed|en))\b",
+     "행위를 '당하는' 쪽이 주어입니다. 누가 했는지는 by 뒤에 나오거나 아예 생략됩니다."),
+    ("동사 어형", "완료수동태", r"\b(?:have|has|had)\s+(been\s+\w+(?:ed|en))\b",
+     "'그때까지 ~되어 온' 입니다. 완료와 수동이 겹쳐 있습니다."),
+    ("동사 어형", "완료시제",
+     r"\b((?:have|has|had)\s+(?:\w+ed|been|gone|done|seen|taken|made|written|given))\b",
+     "과거 어느 때부터 지금까지 이어진 일입니다. 단순과거와 쓰임이 다릅니다."),
+    ("동사 어형", "진행시제", r"\b((?:am|is|are|was|were)\s+(?!(?:something|nothing|anything|everything|thing|things|king|ring|spring|during|being|morning|evening|ceiling|building)\b)\w+ing)\b",
+     "그때 한창 하고 있던 일입니다."),
+    ("동사 어형", "완료진행", r"\b((?:have|has|had)\s+been\s+(?!(?:something|nothing|anything|everything|thing|things|king|ring|spring|during|being|morning|evening|ceiling|building)\b)\w+ing)\b",
+     "그때까지 계속해 오던 일입니다. 기간을 나타내는 말과 자주 붙습니다."),
+    ("동사 어형", "수일치",
+     r"\b(?:one|each|every|either|neither|the number)\s+of\s+(?:the\s+)?\w+\s+"
+     r"(is|was|has|does)\b",
+     "of 뒤의 복수 명사에 끌려가면 안 됩니다. 진짜 주어는 앞의 단수입니다."),
+    ("동사 어형", "조동사 + have p.p.",
+     r"\b((?:must|should|could|would|might|may|cannot|can't)\s+have\s+\w+(?:ed|en|ne))\b",
+     "지난 일에 대한 짐작·후회입니다. '~했음이 틀림없다 / ~했어야 했다'."),
+    ("동사 어형", "당위 should 생략",
+     r"\b(?:insist|demand|suggest|propose|request|recommend|order|require)\w*\s+"
+     r"that\s+\w+\s+((?:not\s+)?[a-z]+)\b",
+     "주장·요구·제안 뒤의 that 절에는 (should) 가 숨어 있어 동사원형이 옵니다."),
+    ("동사 어형", "대동사",
+     r"\b((?:do|does|did)\s+(?:so|too)|(?:So|Neither|Nor)\s+(?:do|does|did|is|are|was|were|can|will))\b",
+     "앞에 나온 동사를 그대로 되풀이하지 않고 대신 받은 것입니다."),
+
+    # ---- 5. 구문·강조 -------------------------------------------------
+    ("구문·강조", "도치",
+     r"^\s*((?:Never|Rarely|Seldom|Hardly|Scarcely|Little|Not only|Only)\b[^,]{0,40}?)\s+"
+     r"(?:do|does|did|is|are|was|were|have|has|had|can|will)\b",
+     "부정어·only 가 문두로 나오면 그 뒤가 의문문 차례가 됩니다."),
+    ("구문·강조", "강조구문 It ~ that",
+     r"\b(It\s+(?:is|was))\s+(?!clear|important|possible|necessary|true|likely|easy|hard)"
+     r"[^.]{0,60}?\bthat\b",
+     "It 과 that 을 지워도 문장이 됩니다. 그 사이의 말을 힘주어 말하는 것입니다."),
+    ("구문·강조", "가주어 - 진주어",
+     r"\b(It)\s+(?:is|was|seems|appears)\s+(?:\w+\s+){0,3}?(?:that|to)\b",
+     "이 It 은 자리만 잡고 있습니다. 진짜 주어는 뒤의 that·to 이하입니다."),
+    ("구문·강조", "가목적어 - 진목적어",
+     r"\b(?:make|makes|made|find|finds|found|think|thinks|thought|consider)\s+(it)\s+"
+     r"\w+\s+(?:to|that)\b",
+     "이 it 도 자리만 잡고 있습니다. 진짜 목적어는 뒤의 to·that 이하입니다."),
+    ("구문·강조", "사역·지각동사",
+     r"\b((?:make|makes|made|let|lets|help|helps|helped|see|sees|saw|hear|"
+     r"hears|heard|watch|watches|watched|feel|feels|felt)\s+"
+     r"(?:(?:the|a|an|our|your|their|his|her|its|this|that|these|those)\s+)?\w+\s+"
+     r"(?!to\b|a\b|an\b|the\b|and\b|of\b|in\b|on\b|at\b|for\b|with\b|from\b|more\b|less\b)"
+     r"[a-z]{2,}(?:ing)?)\b",
+     "목적어 뒤에 to 없는 동사원형이 옵니다. 지각동사는 -ing 도 옵니다."),
+    ("구문·강조", "5형식 목적격보어",
+     r"\b(?:make|makes|made|keep|keeps|kept|find|found|call|called|leave|left|"
+     r"consider|considers|considered)\s+(?:(?:the|a|an|our|your|their|his|her|its|this|that|these|those)\s+)?\w+\s+"
+     r"((?:more\s+|less\s+)?"
+     r"(?!to\b|a\b|an\b|the\b|and\b|of\b|in\b|on\b|at\b|for\b|with\b|that\b|from\b)"
+     r"[a-z]{3,})\b",
+     "목적어 뒤의 이 말이 목적어의 상태를 설명합니다. 부사가 아니라 형용사 자리입니다."),
+
+    # ---- 6. 비교·부정·기타 ---------------------------------------------
+    ("비교·부정·기타", "원급 as ~ as", r"\b(as\s+\w+\s+as)\b",
+     "'…만큼 ~한' 입니다. 사이에는 형용사·부사의 원래 꼴이 들어갑니다."),
+    ("비교·부정·기타", "비교급", r"\b(\w+er\s+than|more\s+\w+\s+than|less\s+\w+\s+than)\b",
+     "무엇과 무엇을 견주는지 than 뒤를 먼저 보세요."),
+    ("비교·부정·기타", "최상급", r"\b(the\s+(?:\w+est|most\s+\w+))\b",
+     "범위(in·of·among)가 어디까지인지 함께 봅니다."),
+    ("비교·부정·기타", "비교급 강조",
+     r"\b((?:much|far|even|still|a lot|by far)\s+(?:\w+er|more\s+\w+))\b",
+     "비교급 앞에는 very 가 못 옵니다. much·far·even 이 그 자리를 맡습니다."),
+    ("비교·부정·기타", "the 비교급, the 비교급",
+     r"\b(the\s+(?:\w+er|more\s+\w+)[^,.]{0,40},\s*the\s+(?:\w+er|more\s+\w+))",
+     "'~할수록 더 …하다' 입니다. 두 절이 짝을 이룹니다."),
+    ("비교·부정·기타", "가정법",
+     r"\bif\b[^.]{0,80}?\b((?:would|could|might|should)\s+\w+)",
+     "if 절이 실제가 아닌 일을 말하고, 여기가 그 결과입니다. 시제가 한 칸 뒤로 물러납니다."),
+    ("비교·부정·기타", "가정법 과거완료",
+     r"\b((?:would|could|might)\s+have\s+\w+(?:ed|en|ne))\b[^.]{0,60}\bif\b|"
+     r"\bif\b[^.]{0,60}\bhad\s+\w+(?:ed|en)\b[^.]{0,40}?\b((?:would|could|might)\s+have\s+\w+)",
+     "지난 일을 돌이켜 '그랬다면 ~했을 텐데' 라고 말합니다."),
+    ("비교·부정·기타", "otherwise·without 가정법",
+     r"\b(otherwise|without\s+\w+|but for\s+\w+)\b[^.]{0,60}\b(?:would|could|might)\b",
+     "if 가 없어도 가정법입니다. '그렇지 않으면 / ~가 없다면' 이 조건을 대신합니다."),
+    ("비교·부정·기타", "부분부정",
+     r"\b(not\s+(?:all|always|every|necessarily|both|entirely|completely))\b",
+     "'전부 아니다' 가 아니라 '다 그런 것은 아니다' 입니다."),
+    ("비교·부정·기타", "수량 표현",
+     r"\b((?:a\s+)?(?:many|much|few|little)\b|a number of|the number of|"
+     r"plenty of|a great deal of|a couple of)\b",
+     "셀 수 있는 것과 없는 것에 따라 쓰는 말이 갈립니다. a few/few, a little/little 도 뜻이 다릅니다."),
+    ("비교·부정·기타", "재귀대명사",
+     r"\b(myself|yourself|himself|herself|itself|ourselves|yourselves|themselves)\b",
+     "주어와 목적어가 같으면 재귀, 빼도 문장이 되면 강조 용법입니다."),
 ]
+
+# 7. 숙어·구동사·고정표현 — 뜻이 낱말 합보다 먼 것만 담습니다.
+GRAMMAR_PHRASES = {
+    "take advantage of": "~을 이용하다 (기회로 삼다)",
+    "make up for": "~을 벌충하다",
+    "make up": "~을 이루다 · 지어내다",
+    "come up with": "(생각을) 떠올리다",
+    "put up with": "~을 참고 견디다",
+    "look forward to": "~을 기대하다 (to 뒤에 -ing)",
+    "get rid of": "~을 없애다",
+    "run out of": "~이 다 떨어지다",
+    "give up": "포기하다",
+    "give in": "굴복하다",
+    "carry out": "(계획을) 실행하다",
+    "bring about": "~을 일으키다",
+    "figure out": "알아내다",
+    "point out": "지적하다",
+    "turn out": "~인 것으로 드러나다",
+    "end up": "결국 ~하게 되다",
+    "keep up with": "~을 따라가다",
+    "cope with": "~에 대처하다",
+    "deal with": "~을 다루다",
+    "account for": "~을 설명하다 · 차지하다",
+    "result in": "~을 낳다 (결과)",
+    "result from": "~에서 비롯되다 (원인)",
+    "lead to": "~로 이어지다",
+    "depend on": "~에 달려 있다",
+    "consist of": "~로 이루어지다",
+    "be likely to": "~할 것 같다",
+    "be supposed to": "~하기로 되어 있다",
+    "be about to": "막 ~하려던 참이다",
+    "used to": "예전에는 ~했다 (지금은 아님)",
+    "be used to": "~에 익숙하다 (뒤에 -ing)",
+    "no longer": "더 이상 ~아닌",
+    "as well as": "~뿐 아니라 (앞쪽에 힘이 있음)",
+    "rather than": "~라기보다는",
+    "in terms of": "~의 면에서",
+    "in addition to": "~에 더하여 (뒤에 명사)",
+    "regardless of": "~와 상관없이",
+    "at the expense of": "~을 희생하여",
+    "on behalf of": "~을 대신하여",
+    "by no means": "결코 ~아닌",
+    "let alone": "~은커녕",
+}
+_PHRASE_RE = {k: re.compile(r"\b" + re.escape(k).replace(r"\ ", r"\s+") + r"\b", re.I)
+              for k in GRAMMAR_PHRASES}
+
+
+def grammar_group(tag: str) -> str:
+    for group, name, _p, _n in GRAMMAR_RULES:
+        if name == tag:
+            return group
+    return "숙어·표현" if tag in GRAMMAR_PHRASES else ""
 
 
 def grammar_hints(sentence: str) -> list[dict]:
-    """문장에 들어 있어 보이는 문법 자리. 관리자에서 골라 담으시라고 내놓습니다.
+    """문장에 들어 있어 보이는 어법 자리. 관리자에서 골라 담으시라고 내놓습니다.
 
     기계가 짚는 것이라 틀릴 수 있습니다. 그래서 바로 손님 화면에 걸지 않고,
-    사장님이 확인해 담으신 것만 나갑니다.
+    사장님이 확인해 담으신 것만 나갑니다. 넉넉히 내놓고 사람이 거르는 쪽이,
+    아껴 내놓고 놓치는 쪽보다 낫습니다.
     """
     out = []
-    for tag, pattern, note in GRAMMAR_RULES:
+    for group, tag, pattern, note in GRAMMAR_RULES:
         if re.search(pattern, sentence or "", re.I):
-            out.append({"tag": tag, "note": note})
+            out.append({"group": group, "tag": tag, "note": note})
+    for phrase, note in GRAMMAR_PHRASES.items():
+        if _PHRASE_RE[phrase].search(sentence or ""):
+            out.append({"group": "숙어·표현", "tag": phrase, "note": note})
     return out
 
 
 def grammar_span(sentence: str, tag: str) -> tuple[int, int] | None:
-    """그 문법이 문장의 어느 자리인지. 형광펜을 칠 자리입니다."""
-    for name, pattern, _note in GRAMMAR_RULES:
+    """그 어법이 문장의 어느 자리인지. 형광펜을 칠 자리입니다."""
+    if tag in _PHRASE_RE:
+        m = _PHRASE_RE[tag].search(sentence or "")
+        return m.span() if m else None
+    for _group, name, pattern, _note in GRAMMAR_RULES:
         if name != tag:
             continue
         m = re.search(pattern, sentence or "", re.I)
         if not m:
             return None
-        # 규칙이 괄호로 짚어 둔 자리가 있으면 그쪽만 칠합니다. 앞 명사까지
-        # 물고 오면 무엇을 물은 것인지 흐려집니다 (ability, where → where).
-        return (m.span(1) if m.groups() and m.group(1) else m.span())
+        # 규칙이 괄호로 짚어 둔 자리가 있으면 그쪽만 칠합니다. 앞말까지 물고
+        # 오면 그것을 묻는 것처럼 보입니다 (believe that → that).
+        for g in range(1, (m.lastindex or 0) + 1):
+            if m.group(g):
+                return m.span(g)
+        return m.span()
     return None
 
 
@@ -3315,7 +3535,6 @@ def grammar_quiz(sentence: str, marked: list[dict], choices: int = 4) -> list[di
     겹치는 자리는 앞의 것만 씁니다 — 형광펜이 겹치면 어느 쪽을 물은 것인지
     알 수 없습니다.
     """
-    tags = [t for t, _, _ in GRAMMAR_RULES]
     out, taken = [], []
     for g in marked or []:
         tag = g.get("tag", "")
@@ -3325,11 +3544,18 @@ def grammar_quiz(sentence: str, marked: list[dict], choices: int = 4) -> list[di
         if any(at[0] < end and start < at[1] for start, end in taken):
             continue                                  # 이미 칠한 자리와 겹칩니다
         taken.append(at)
-        # 오답 보기는 늘 같은 것이 나와야 합니다 — 새로 고칠 때마다 바뀌면
-        # 답을 외운 것인지 아는 것인지 가릴 수 없습니다.
+        # 오답은 **같은 갈래**에서 뽑습니다. '관계부사' 의 오답으로 '수동태' 를
+        # 내놓으면 몰라도 찍힙니다. 같은 갈래가 모자랄 때만 다른 데서 채웁니다.
+        # 그리고 늘 같은 것이 나와야 합니다 — 새로 고칠 때마다 바뀌면 답을
+        # 외운 것인지 아는 것인지 가릴 수 없습니다.
+        group = grammar_group(tag)
+        same = [n for g, n, _p, _t in GRAMMAR_RULES if g == group and n != tag]
+        if group == "숙어·표현":
+            same = [k for k in GRAMMAR_PHRASES if k != tag]
+        rest = [n for _g, n, _p, _t in GRAMMAR_RULES if n != tag and n not in same]
         seed = hashlib.sha256(f"{sentence}|{tag}".encode()).hexdigest()
-        others = sorted((t for t in tags if t != tag),
-                        key=lambda t: hashlib.sha256((seed + t).encode()).hexdigest())
+        pick = lambda xs: sorted(xs, key=lambda t: hashlib.sha256((seed + t).encode()).hexdigest())
+        others = pick(same) + pick(rest)
         picks = [tag] + others[:max(0, choices - 1)]
         picks.sort(key=lambda t: hashlib.sha256((seed + "|" + t).encode()).hexdigest())
         # 형광펜 양 끝의 빈칸은 빼 둡니다 — 칠한 자리가 어디까지인지 흐려집니다

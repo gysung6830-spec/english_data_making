@@ -3001,7 +3001,7 @@ def test_passage_memorizing_reads_then_blanks():
     # 무엇이 있는지 미리 알려 주지 않습니다. 자리만 칠하고 '이게 뭐냐' 를 묻습니다.
     assert "gr-mark" in gram and "이건 어떤 문법일까요?" in gram
     assert "gr-choices" in gram
-    tags = {t for t, _, _ in sc.GRAMMAR_RULES}
+    tags = {t for _g, t, _p, _n in sc.GRAMMAR_RULES} | set(sc.GRAMMAR_PHRASES)
     for sn in x0["sentences"]:
         for m in sc.grammar_quiz(sn["en"], sn.get("grammar")):
             assert m["text"] and m["text"] in sn["en"], m
@@ -3009,6 +3009,10 @@ def test_passage_memorizing_reads_then_blanks():
             assert len(m["text"].split()) <= 3, m      # 딱 그 문법 자리만 칠합니다
             assert m["tag"] in m["choices"] and len(m["choices"]) == 4, m
             assert len(set(m["choices"])) == 4 and set(m["choices"]) <= tags, m
+            # 오답은 같은 갈래에서 — 다른 갈래에서 뽑으면 몰라도 찍힙니다
+            mine = sc.grammar_group(m["tag"])
+            same = [c for c in m["choices"] if sc.grammar_group(c) == mine]
+            assert len(same) == 4, (m["tag"], mine, m["choices"])
             # 보기 차례는 늘 같아야 합니다 (새로 고칠 때마다 바뀌면 외운 것과 못 가립니다)
             again = sc.grammar_quiz(sn["en"], sn.get("grammar"))
             assert [q["choices"] for q in again] == \
@@ -3018,28 +3022,73 @@ def test_passage_memorizing_reads_then_blanks():
                           [{"tag": "관계부사", "note": ""}, {"tag": "관계부사", "note": ""}])
     assert len(two) == 1, two
 
+    # 사장님이 주신 어법 목록이 갈래대로 다 들어 있는지
+    assert sc.GRAMMAR_GROUPS == ["관계사", "준동사", "절·접속", "동사 어형",
+                                 "구문·강조", "비교·부정·기타", "숙어·표현"]
+    per = {}
+    for g, t, _p, note in sc.GRAMMAR_RULES:
+        assert g in sc.GRAMMAR_GROUPS and note.strip(), (g, t)
+        per[g] = per.get(g, 0) + 1
+    for g in sc.GRAMMAR_GROUPS[:-1]:
+        assert per.get(g, 0) >= 5, (g, per.get(g))   # 오답 보기를 뽑을 만큼
+    assert len(sc.GRAMMAR_PHRASES) >= 30
+    assert all(v.strip() for v in sc.GRAMMAR_PHRASES.values())
+
     # 규칙마다 '딱 그 문법 자리' 만 칠하는지 하나씩 봅니다
     for tag, sent, want in [
-            ("접속사 that", "Many people believe that talent is born.", "that"),
+            ("명사절 that", "Many people believe that talent is born.", "that"),
             ("관계대명사", "It is hard, which is why people avoid it.", "which"),
             ("관계부사", "the edge of your ability, where mistakes are frequent", "where"),
             ("부사절 접속사", "When scientists studied it, they found the answer.", "When"),
+            ("강조구문 It ~ that", "It was John that broke the window.", "It was"),
             ("분사구문", "He left the room, humming a quiet tune.", "humming"),
             ("수동태", "The rails will be removed soon.", "be removed"),
-            ("to부정사", "a plan to turn the line into a path", "to turn"),
+            ("to부정사 (형용사적)", "a plan to turn the line into a path", "to turn"),
             ("비교급", "This road is wider than the old one.", "wider than"),
             ("최상급", "It was the strongest predictor of skill.", "the strongest"),
             ("가정법", "If he had money, he would buy the house.", "would buy"),
-            ("가주어 it", "It is clear that the plan will work.", "It"),
+            ("가주어 - 진주어", "It is clear that the plan will work.", "It"),
             ("사역·지각동사", "The teacher made him repeat the sentence.", "made him repeat"),
             ("so ~ that", "The book was so long that nobody finished it.", "so long that"),
-            ("동명사 주어", "Reading old letters is a quiet pleasure.", "Reading")]:
+            ("동명사 주어", "Reading old letters is a quiet pleasure.", "Reading"),
+            # 사장님이 주신 어법 목록대로 갈래마다 하나씩
+            ("관계대명사 소유격", "I met a boy whose father is a pilot.", "whose"),
+            ("전치사 + 관계대명사", "the room in which he slept", "in which"),
+            ("관계대명사 what", "This is what you need.", "what"),
+            ("복합관계사", "Whoever comes will be welcome.", "Whoever"),
+            ("계속적 용법", "He was late, which annoyed her.", "which"),
+            ("감정분사", "The film was boring to everyone.", "boring"),
+            ("to부정사 (명사적)", "They decided to leave early.", "to leave"),
+            ("to부정사 (부사적)", "He ran in order to catch the bus.", "in order to catch"),
+            ("to부정사 의미상 주어", "It is easy for him to swim.", "for him to swim"),
+            ("동명사 목적어", "She avoided meeting him.", "meeting"),
+            ("명사절 의문사", "Nobody knows what happened.", "what"),
+            ("명사절 whether·if", "I wonder whether it rains.", "whether"),
+            ("상관접속사", "It is both cheap and fast.", "both cheap and"),
+            ("접속사 vs 전치사", "It closed because of the rain.", "because of"),
+            ("동격 that", "The fact that he lied hurt her.", "that"),
+            ("완료수동태", "The road has been repaired.", "been repaired"),
+            ("완료시제", "He has finished the work.", "has finished"),
+            ("진행시제", "She is reading a long book.", "is reading"),
+            ("완료진행", "They have been waiting for an hour.", "have been waiting"),
+            ("수일치", "Each of the boys is ready.", "is"),
+            ("조동사 + have p.p.", "He must have missed the train.", "must have missed"),
+            ("대동사", "So do I.", "So do"),
+            ("도치", "Never had he seen such a thing.", "Never"),
+            ("가목적어 - 진목적어", "They made it clear that he was wrong.", "it"),
+            ("5형식 목적격보어", "The noise made the room unbearable.", "unbearable"),
+            ("원급 as ~ as", "It is as cold as ice.", "as cold as"),
+            ("비교급 강조", "This is much better than that.", "much better"),
+            ("부분부정", "Not all birds can fly.", "Not all"),
+            ("재귀대명사", "He hurt himself badly.", "himself"),
+            ("take advantage of", "We take advantage of the sale.", "take advantage of"),
+            ("so ~ that", "The book was so long that nobody finished it.", "so long that")]:
         at = sc.grammar_span(sent, tag)
         assert at, tag
         assert sent[at[0]:at[1]] == want, (tag, sent[at[0]:at[1]])
     # 기계가 짚어 주되, 담은 것만 나갑니다
     hints = sc.grammar_hints("Many people believe that talent is something you are born with.")
-    assert any(h["tag"] == "접속사 that" for h in hints), hints
+    assert any(h["tag"] == "명사절 that" for h in hints), hints
     assert sc.grammar_hints("The dog ran.") == []
 
     # 문장 나누기 — 줄임말의 마침표에서 끊으면 문장이 토막 납니다
@@ -3110,14 +3159,16 @@ def test_admin_marks_grammar_only_after_checking():
     assert 'data-tab="gram"' not in page
 
     form = body(a.get(f"/admin/passages/{slug}/grammar/{u['id']}/{x['id']}"))
-    assert "접속사 that" in form, "기계가 짚어 주지 않았습니다"
+    assert "명사절 that" in form, "기계가 짚어 주지 않았습니다"
+    for group in ("절·접속", "관계사"):                  # 갈래로 묶어 보여 줍니다
+        assert group in form, group
     a.post(f"/admin/passages/{slug}/grammar/{u['id']}/{x['id']}",
-           data={"g0": "접속사 that", "n0_접속사 that": "that 이하가 통째로 목적어입니다."},
+           data={"g0": "명사절 that", "n0_명사절 that": "that 이하가 통째로 목적어입니다."},
            follow_redirects=True)
 
     after = sc.find_passage_book(slug, raw=True)["units"][0]["items"][0]
     assert after["sentences"][0]["grammar"] == [
-        {"tag": "접속사 that", "note": "that 이하가 통째로 목적어입니다."}]
+        {"tag": "명사절 that", "note": "that 이하가 통째로 목적어입니다."}]
     assert not after["sentences"][1].get("grammar")     # 안 고른 문장은 비어 있습니다
     page = body(client().get(f"/memorize/{slug}/{u['id']}/{x['id']}"))
     assert 'data-tab="gram"' in page and "that 이하가 통째로 목적어입니다." in page

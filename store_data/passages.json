@@ -54,6 +54,16 @@
                       "en": "to make our community more beautiful.",
                       "ko": "만들기 위해 / 우리 동네를 더 아름답게."
                     }
+                  ],
+                  "grammar": [
+                    {
+                      "tag": "take advantage of",
+                      "note": "~을 이용하다 (기회로 삼다)"
+                    },
+                    {
+                      "tag": "5형식 목적격보어",
+                      "note": "목적어 뒤의 이 말이 목적어의 상태를 설명합니다. 부사가 아니라 형용사 자리입니다."
+                    }
                   ]
                 },
                 {
@@ -85,12 +95,6 @@
                 {
                   "en": "We will divide into teams to plant flowers and small trees, pull weeds, and put colorful decorations on the lawn.",
                   "ko": "우리는 팀을 나누어 꽃과 작은 나무를 심고, 잡초를 뽑고, 잔디밭에 다채로운 장식을 할 것입니다.",
-                  "grammar": [
-                    {
-                      "tag": "to부정사",
-                      "note": "'~하기 위해' 로 읽습니다. plant · pull · put 셋이 나란히 걸립니다."
-                    }
-                  ],
                   "chunks": [
                     {
                       "en": "We will divide",
@@ -141,6 +145,12 @@
                     {
                       "en": "or tools are required.",
                       "ko": "또는 도구가 필요 없다는 것을."
+                    }
+                  ],
+                  "grammar": [
+                    {
+                      "tag": "수동태",
+                      "note": "행위를 '당하는' 쪽이 주어입니다. 누가 했는지는 by 뒤에 나오거나 아예 생략됩니다."
                     }
                   ]
                 },
@@ -199,8 +209,8 @@
                   "ko": "많은 사람들은 재능이 타고나는 것이라고 믿는다.",
                   "grammar": [
                     {
-                      "tag": "접속사 that",
-                      "note": "believe 의 목적어가 that 이하 문장 통째입니다."
+                      "tag": "명사절 that",
+                      "note": "that 이하 문장 통째가 동사의 목적어입니다. 이 that 은 해석하지 않습니다."
                     }
                   ],
                   "chunks": [
@@ -230,11 +240,11 @@
                   "grammar": [
                     {
                       "tag": "부사절 접속사",
-                      "note": "When 절은 곁가지입니다. 주절은 they found 부터 시작합니다."
+                      "note": "이 절이 끝나는 자리까지가 곁가지입니다. 주절이 어디서 시작하는지 찾으세요."
                     },
                     {
                       "tag": "최상급",
-                      "note": "the strongest predictor — 무엇들 가운데 가장인지는 of skill 이 정합니다."
+                      "note": "범위(in·of·among)가 어디까지인지 함께 봅니다."
                     }
                   ],
                   "chunks": [
@@ -272,6 +282,12 @@
                       "en": "Deliberate practice is not simply repeating what you already do well.",
                       "ko": "의도적 연습이란 / 단순히 되풀이하는 것이 아닙니다 / 이미 잘하는 것을."
                     }
+                  ],
+                  "grammar": [
+                    {
+                      "tag": "관계대명사 what",
+                      "note": "what 은 선행사를 품고 있습니다. '~하는 것' 으로 읽고, 앞에 꾸밀 명사를 찾지 마세요."
+                    }
                   ]
                 },
                 {
@@ -280,7 +296,7 @@
                   "grammar": [
                     {
                       "tag": "관계부사",
-                      "note": "where 앞의 the edge of your ability 를 뒤 문장이 통째로 꾸밉니다."
+                      "note": "앞의 명사(장소·때·이유·방법)를 뒤 문장이 꾸밉니다. 문장 맨 앞의 When 과는 다릅니다."
                     }
                   ],
                   "chunks": [
@@ -314,6 +330,12 @@
                       "en": "which is why most people avoid it.",
                       "ko": "그래서 대부분의 사람이 그것을 피합니다."
                     }
+                  ],
+                  "grammar": [
+                    {
+                      "tag": "계속적 용법",
+                      "note": "쉼표가 있으면 앞을 한정하지 않고 덧붙여 설명합니다. '그런데 그것은' 으로 이어 읽습니다."
+                    }
                   ]
                 },
                 {
@@ -335,6 +357,12 @@
                     {
                       "en": "in their comfort zone stop growing.",
                       "ko": "편안한 자리에 / 성장을 멈춥니다."
+                    }
+                  ],
+                  "grammar": [
+                    {
+                      "tag": "관계대명사",
+                      "note": "앞의 명사를 뒤 문장이 통째로 꾸밉니다. 관계사 앞에서 한 번 끊어 읽으세요."
                     }
                   ]
                 }
@@ -371,8 +399,12 @@
                   "ko": "시의회는 오래된 철도 노선을 산책로로 바꾸는 계획을 발표했다.",
                   "grammar": [
                     {
-                      "tag": "to부정사",
-                      "note": "a plan 을 꾸밉니다. '~하려는 계획' 으로 읽습니다."
+                      "tag": "to부정사 (형용사적)",
+                      "note": "앞의 명사를 꾸밉니다. '~할 …' 로 읽습니다."
+                    },
+                    {
+                      "tag": "완료시제",
+                      "note": "과거 어느 때부터 지금까지 이어진 일입니다. 단순과거와 쓰임이 다릅니다."
                     }
                   ],
                   "chunks": [
@@ -410,6 +442,12 @@
                       "en": "with weeds.",
                       "ko": "잡초로."
                     }
+                  ],
+                  "grammar": [
+                    {
+                      "tag": "완료수동태",
+                      "note": "'그때까지 ~되어 온' 입니다. 완료와 수동이 겹쳐 있습니다."
+                    }
                   ]
                 },
                 {
@@ -418,7 +456,7 @@
                   "grammar": [
                     {
                       "tag": "수동태",
-                      "note": "선로가 '치워지고 대체되는' 쪽입니다. 누가 하는지는 안 밝힙니다."
+                      "note": "행위를 '당하는' 쪽이 주어입니다. 누가 했는지는 by 뒤에 나오거나 아예 생략됩니다."
                     }
                   ],
                   "chunks": [
@@ -463,6 +501,12 @@
                     {
                       "en": "to the area.",
                       "ko": "이 지역에."
+                    }
+                  ],
+                  "grammar": [
+                    {
+                      "tag": "명사절 that",
+                      "note": "that 이하 문장 통째가 동사의 목적어입니다. 이 that 은 해석하지 않습니다."
                     }
                   ]
                 },
