@@ -18,8 +18,32 @@ FONTFACE=f"""
 """
 order=json.load(open(SC+"/order.json"))
 P=[json.load(open(SC+"/passages/"+fn)) for fn in order]
+NOTES={}
+if os.path.exists(SC+"/answer_notes.json"):
+    try: NOTES=json.load(open(SC+"/answer_notes.json"))
+    except Exception: NOTES={}
 def esc(s): return html.escape(str(s or ""))
 _MK=re.compile(r"\[\[(.+?)\]\]")
+
+# ---- ⑥ 글의 구조도: 흐름 단계 표 ----
+CIRC="①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳"
+def circ(n): return CIRC[n-1] if 1<=n<=len(CIRC) else f"({n})"
+def parse_range(rg):
+    out=[]
+    for part in re.split(r"[,\s]+", str(rg or "").strip()):
+        m=re.match(r"^(\d+)\s*[~\-–]\s*(\d+)$", part)
+        if m: out+=list(range(int(m.group(1)), int(m.group(2))+1))
+        elif part.isdigit(): out.append(int(part))
+    return out
+def fmt_range(rg):
+    s=re.sub(r"\s*[~–]\s*","-",str(rg or "").strip())
+    return (s+"문장") if s else ""
+def kw_map(p):
+    m={}
+    for s in p["sentences"]:
+        ws=[v["word"] for v in s.get("vocab",[]) if v.get("word") and any(c.isascii() and c.isalpha() for c in v["word"])][:2]
+        if ws: m[s["id"]]=ws
+    return m
 
 # ---- 어법칩 형광펜(영어 원문) ----
 def _bpat(e):
@@ -116,6 +140,18 @@ mark.hl{background:#d8d5f0; padding:0 1px; border-radius:2px; color:inherit;}
 .kill{color:var(--red); font-weight:800; font-size:7.6pt; margin-left:5px;}
 .why{margin:3px 0 0 12px; font-size:8.6pt; color:#3a4250; line-height:1.5;}
 .why .cue{background:var(--green-soft); border-radius:3px; padding:0 3px; color:var(--green-d);} .why .typ{color:var(--indigo); font-weight:700; font-size:7.8pt;}
+/* ⑥ 글의 구조도 */
+table.flow{width:100%; border-collapse:collapse;}
+.flow td{border:1px solid var(--line); padding:5px 7px; font-size:9pt; vertical-align:top;}
+.flow .hd{background:var(--green-bg); color:var(--green-d); font-weight:800; font-size:8.4pt; text-align:center;}
+.flow .stg{background:var(--green-soft); font-weight:700; color:var(--green-d); white-space:nowrap; width:78px; text-align:center;}
+.flow .stg .rg{display:block; color:var(--sub); font-size:8pt; font-weight:400;}
+.flow .kwc{width:31%; background:#fbfcfb;}
+.flow .kwrow{display:block; line-height:1.55; font-size:8.4pt;}
+.flow .snum{color:var(--green); font-weight:800; margin-right:3px;}
+.flow .kw-en{color:var(--indigo); font-weight:700;}
+.flow .sumblank{height:24px;}
+.flow .note{font-weight:600; line-height:1.55; color:var(--indigo);}
 """).replace("__FOOT__",FOOT).replace("__FONTS__",FONTFACE)
 
 def sec_head(n,t,d=""):
@@ -178,6 +214,24 @@ def passage_html(p, teacher):
                          '<div class="pick"><span class="lab">내 판단</span><b class="k-o">O</b><b class="k-x">X</b><b class="k-t">△</b><span class="fixline"></span></div></div>')
         h.append('</div>')
     h.append('</div></div>')
+    # ⑥ 글의 구조도 (page break)
+    h.append('<div class="sec brk">'+sec_head(6,"글의 구조도 파악","핵심어(영어)를 단서로 각 단계 내용을 기호로 정리(→ ⇒ ↔ = + ↑↓)"))
+    km=kw_map(p); notes=NOTES.get(no) or NOTES.get(p["item_no"]) or []
+    h.append('<div class="panel"><table class="flow"><tr>'
+             '<td class="hd stg">단계 · 문장</td><td class="hd kwc">핵심어(영어)</td><td class="hd">내용 정리(기호 활용)</td></tr>')
+    for i,b in enumerate(ov["flow_blocks"]):
+        kws=[]
+        for sid in parse_range(b["sentence_range"]):
+            if sid in km:
+                kws.append(f'<span class="kwrow"><span class="snum">{circ(sid)}</span><span class="kw-en">{esc(" · ".join(km[sid]))}</span></span>')
+        kwc="".join(kws) or '<span style="color:var(--sub);font-size:8pt;">—</span>'
+        if teacher:
+            note=notes[i] if i < len(notes) else re.sub(r"\[\[(.+?)\]\]", r"\1", b["summary"])
+            cell=f'<span class="note">{esc(note)}</span>'
+        else:
+            cell='<div class="sumblank"></div>'
+        h.append(f'<tr><td class="stg">{esc(b["stage"])}<span class="rg">{fmt_range(b["sentence_range"])}</span></td><td class="kwc">{kwc}</td><td>{cell}</td></tr>')
+    h.append('</table></div></div>')
     h.append('</div>')
     return "".join(h)
 
