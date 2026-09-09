@@ -70,12 +70,18 @@ body{font-family:'NanumSquareRound',"Malgun Gothic",sans-serif; color:#22262b; f
 .ko{margin:4px 0 0 21px; font-size:9.2pt; color:#3a4250; line-height:1.7;}
 .ko::before{content:"↳ "; color:var(--green); font-weight:800;}
 .sl{color:#b9c2ba; font-weight:700; padding:0 2px;}
-.fill{display:inline-block; min-width:66px; border-bottom:1.4px solid var(--green); vertical-align:-1px;}
+.fill{display:inline-block; min-width:34px; border-bottom:1.4px solid var(--green); vertical-align:-1px;}
 .key{color:var(--indigo); font-weight:800; border-bottom:1.4px solid var(--indigo);}
 mark.hlg3{ background:#d8d5f0; padding:0 1px; border-radius:2px; color:inherit; }
 """).replace("__FOOT__",FOOT).replace("__FONTS__",FONTFACE)
 
 _MK=re.compile(r"\[\[(.+?)\]\]")
+def _blank(m):
+    # 빈칸 폭을 정답(숨긴 어구) 길이에 비례하게 — 한글 1자≈11px, 여백 포함, 34~240px
+    inner = re.sub(r'&[a-zA-Z#0-9]+;', 'x', m.group(1))
+    w = min(240, max(34, round(len(inner)*11)+14))
+    return f'<span class="fill" style="min-width:{w}px"></span>'
+
 def ko_line(s, ans):
     parts=[]
     for c in s.get("chunks",[]):
@@ -83,7 +89,7 @@ def ko_line(s, ans):
         if ans:
             seg=_MK.sub(r'<b class="key">\1</b>', esc(ko))
         else:
-            seg=_MK.sub('<span class="fill"></span>', esc(ko))
+            seg=_MK.sub(_blank, esc(ko))
         parts.append(seg)
     return ' <span class="sl">/</span> '.join(parts)
 
