@@ -50,38 +50,82 @@ def _bpat(e):
     l=r"(?<![A-Za-z])" if e[:1].isalpha() else ""
     r=r"(?![A-Za-z])" if e[-1:].isalpha() else ""
     return l+re.escape(e)+r
-def hl_en(s):
-    """어법칩 표지(spans)만 형광펜. 칩별로 span을 '왼→오 순차'로 찾아(앞 span 뒤에서) 잘못된 위치를 방지."""
+def _hl_marks(s):
+    """어법칩 spans → 형광펜 구간 목록(겹침 없음, 위치 오름차순).
+    칩 안에서는 span을 왼→오 순차로 찾고(상관어구 both~and 등 순서 보존),
+    이미 칠해진 구간은 건너뛰어(occupied) 칩끼리 같은 단어를 뺏는 오류를 코드로 차단."""
     raw=s.get("english","") or ""
+    occupied=[False]*len(raw)
     marks=[]
+    def free(st,en): return not any(occupied[st:en])
+    def claim(st,en):
+        for k in range(st,en): occupied[k]=True
+        marks.append((st,en))
+    def find_free(e, start):
+        while True:
+            m=re.search(_bpat(e), raw[start:], re.IGNORECASE)
+            if not m: return None
+            st,en=start+m.start(), start+m.end()
+            if free(st,en): return (st,en)
+            start=st+1
     for g in s.get("grammar",[]):
         pos=0
         for sp in (g.get("spans") or []):
             e=str(sp).strip()
             if not e: continue
-            m=re.search(_bpat(e), raw[pos:], re.IGNORECASE)
-            if m:
-                st,en=pos+m.start(), pos+m.end(); pos=en
-            else:
-                m2=re.search(_bpat(e), raw, re.IGNORECASE)
-                if not m2: continue
-                st,en=m2.start(), m2.end()
-            marks.append((st,en))
+            hit=find_free(e, pos)          # 앞 span 뒤에서(순서 보존) 빈 구간
+            if hit is None: hit=find_free(e, 0)  # 없으면 문장 전체에서 빈 구간
+            if hit is None: continue
+            claim(*hit); pos=hit[1]
     marks.sort()
-    merged=[]
-    for st,en in marks:
-        if merged and st<merged[-1][1]: continue  # 겹치면 건너뜀
-        merged.append((st,en))
+    return marks
+def _render_en(raw, marks, slashes):
+    """raw를 형광펜(marks) + 청크 슬래시(slashes 오프셋)로 렌더. marks는 겹침 없음."""
+    marks=sorted(marks)
+    # 슬래시가 형광펜 구간 내부에 걸리면 그 구간 끝으로 밀기
+    adj=[]
+    for off in sorted(set(slashes)):
+        for st,en in marks:
+            if st<off<en: off=en; break
+        if 0<off<len(raw): adj.append(off)
+    adj=sorted(set(adj))
+    def emit(a,b):
+        out=[]; i=a
+        for off in adj:
+            if a<off<b:
+                out.append(esc(raw[i:off])); out.append(' <span class="sl">/</span> '); i=off
+        out.append(esc(raw[i:b])); return "".join(out)
     out=[]; i=0
-    for st,en in merged:
-        out.append(esc(raw[i:st])); out.append('<mark class="hl">'+esc(raw[st:en])+'</mark>'); i=en
-    out.append(esc(raw[i:]))
+    for st,en in marks:
+        out.append(emit(i,st)); out.append('<mark class="hl">'+esc(raw[st:en])+'</mark>'); i=en
+    out.append(emit(i,len(raw)))
     return "".join(out)
+def _chunk_bounds(s, raw):
+    """청크 사이(en 기준) 슬래시를 넣을 오프셋 목록."""
+    ends=[]; pos=0
+    for c in s.get("chunks",[]):
+        t=_MK.sub(r"\1", c.get("en","") or "").strip()
+        if not t: continue
+        m=re.search(re.escape(t), raw[pos:])
+        if not m:  # 공백 차이 흡수
+            t2=re.sub(r"\s+", r"\\s+", re.escape(re.sub(r"\s+"," ",t)))
+            m=re.search(t2, raw[pos:])
+            if not m: continue
+        pos=pos+m.end(); ends.append(pos)
+    return ends[:-1]  # 마지막 청크 뒤에는 슬래시 없음
+def hl_en(s):
+    """어법칩 형광펜만(슬래시 없음) — ⑤ 어법칩용."""
+    raw=s.get("english","") or ""
+    return _render_en(raw, _hl_marks(s), [])
+def en_practice(s):
+    """④ 해석연습 영어: 청크 사이 / 슬래시 + 어법칩 형광펜."""
+    raw=s.get("english","") or ""
+    return _render_en(raw, _hl_marks(s), _chunk_bounds(s, raw))
 
-# ---- ③ 직독직해 빈칸(핵심 부분만) ----
+# ---- ④ 직독직해 빈칸(핵심 부분만) ----
 def _blank(m):
     inner=re.sub(r'&[a-zA-Z#0-9]+;','x',m.group(1))
-    w=min(240,max(34,round(len(inner)*11)+14))
+    w=min(240,max(30,round(len(inner)*13)+10))  # 정답 글자 수에 비례(한글 1자≈13px)
     return f'<span class="fill" style="min-width:{w}px"></span>'
 def ko_line(s, teacher):
     parts=[]
@@ -210,11 +254,11 @@ def passage_html(p, teacher):
         h.append(f'<tr><td class="stg">{esc(b["stage"])}<span class="rg">{fmt_range(b["sentence_range"])}</span></td><td class="kwc">{kwc}</td><td>{cell}</td></tr>')
     h.append('</table></div></div>')
     h.append('</div></div>')  # close p1body, p1 (1페이지: 원문·어휘·구조도)
-    # ④ 해석연습 (page break)
-    h.append('<div class="sec brk">'+sec_head(4,"해석 연습","직독직해에서 핵심(오역 위험) 부분만 채우기 · 영어에 어법칩 형광펜"))
+    # ④ 해석연습 (page break) — 영어 청크 / 슬래시 + 어법 형광펜, 한글 핵심 빈칸
+    h.append('<div class="sec brk">'+sec_head(4,"해석 연습","영어는 청크마다 / 끊어읽기 · 어법칩 형광펜 / 한글은 오역 위험 핵심 어구 빈칸"))
     h.append('<div class="panel">')
     for s in sents:
-        h.append(f'<div class="s"><div class="en"><span class="n">{s["id"]}</span>{hl_en(s)}</div><div class="ko">{ko_line(s, teacher)}</div></div>')
+        h.append(f'<div class="s"><div class="en"><span class="n">{s["id"]}</span>{en_practice(s)}</div><div class="ko">{ko_line(s, teacher)}</div></div>')
     h.append('</div></div>')
     # ⑤ 어법칩 (page break)
     h.append('<div class="sec brk">'+sec_head(5,"어법칩","문장별 원문·핵심 어법(형광펜=어법 표지)"))

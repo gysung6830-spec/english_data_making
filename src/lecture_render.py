@@ -253,32 +253,46 @@ def _highlight_grammar_only(english: str, grammar) -> Markup:
     - 매칭이 없으면 원문(이스케이프)만 반환.
     """
     raw = english or ""
-    marks = []
-    for g in grammar:  # 칩별로 span 을 왼→오 순차 탐색(앞 span 뒤에서) → 잘못된 위치 방지
+    occupied = [False] * len(raw)
+    marks: list[tuple[int, int]] = []
+
+    def free(st: int, en: int) -> bool:
+        return not any(occupied[st:en])
+
+    def claim(st: int, en: int) -> None:
+        for k in range(st, en):
+            occupied[k] = True
+        marks.append((st, en))
+
+    def find_free(e: str, start: int):
+        # 칩 안에서는 앞 span 뒤(start)부터 순차 탐색(상관어구 순서 보존),
+        # 이미 칠한 구간은 건너뛰어 칩끼리 같은 단어를 뺏는 오류를 차단.
+        while True:
+            mm = re.search(_boundary_pat(e), raw[start:], re.IGNORECASE)
+            if not mm:
+                return None
+            st, en = start + mm.start(), start + mm.end()
+            if free(st, en):
+                return (st, en)
+            start = st + 1
+
+    for g in grammar:
         pos = 0
         for sp in getattr(g, "spans", []) or []:
             e = str(sp).strip()
             if not e:
                 continue
-            mm = re.search(_boundary_pat(e), raw[pos:], re.IGNORECASE)
-            if mm:
-                st, en = pos + mm.start(), pos + mm.end()
-                pos = en
-            else:
-                m2 = re.search(_boundary_pat(e), raw, re.IGNORECASE)
-                if not m2:
-                    continue
-                st, en = m2.start(), m2.end()
-            marks.append((st, en))
+            hit = find_free(e, pos)
+            if hit is None:
+                hit = find_free(e, 0)
+            if hit is None:
+                continue
+            claim(*hit)
+            pos = hit[1]
     marks.sort()
-    merged: list[tuple[int, int]] = []
-    for st, en in marks:
-        if merged and st < merged[-1][1]:
-            continue
-        merged.append((st, en))
     out = []
     i = 0
-    for st, en in merged:
+    for st, en in marks:
         out.append(str(escape(raw[i:st])))
         out.append('<mark class="hlg3">' + str(escape(raw[st:en])) + '</mark>')
         i = en
