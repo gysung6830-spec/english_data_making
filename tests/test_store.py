@@ -3006,6 +3006,7 @@ def test_passage_memorizing_reads_then_blanks():
         for m in sc.grammar_quiz(sn["en"], sn.get("grammar")):
             assert m["text"] and m["text"] in sn["en"], m
             assert m["text"] == m["text"].strip()      # 형광펜 양 끝에 빈칸이 없어야
+            assert len(m["text"].split()) <= 3, m      # 딱 그 문법 자리만 칠합니다
             assert m["tag"] in m["choices"] and len(m["choices"]) == 4, m
             assert len(set(m["choices"])) == 4 and set(m["choices"]) <= tags, m
             # 보기 차례는 늘 같아야 합니다 (새로 고칠 때마다 바뀌면 외운 것과 못 가립니다)
@@ -3016,6 +3017,26 @@ def test_passage_memorizing_reads_then_blanks():
     two = sc.grammar_quiz("It means working at the edge of your ability, where mistakes are frequent.",
                           [{"tag": "관계부사", "note": ""}, {"tag": "관계부사", "note": ""}])
     assert len(two) == 1, two
+
+    # 규칙마다 '딱 그 문법 자리' 만 칠하는지 하나씩 봅니다
+    for tag, sent, want in [
+            ("접속사 that", "Many people believe that talent is born.", "that"),
+            ("관계대명사", "It is hard, which is why people avoid it.", "which"),
+            ("관계부사", "the edge of your ability, where mistakes are frequent", "where"),
+            ("부사절 접속사", "When scientists studied it, they found the answer.", "When"),
+            ("분사구문", "He left the room, humming a quiet tune.", "humming"),
+            ("수동태", "The rails will be removed soon.", "be removed"),
+            ("to부정사", "a plan to turn the line into a path", "to turn"),
+            ("비교급", "This road is wider than the old one.", "wider than"),
+            ("최상급", "It was the strongest predictor of skill.", "the strongest"),
+            ("가정법", "If he had money, he would buy the house.", "would buy"),
+            ("가주어 it", "It is clear that the plan will work.", "It"),
+            ("사역·지각동사", "The teacher made him repeat the sentence.", "made him repeat"),
+            ("so ~ that", "The book was so long that nobody finished it.", "so long that"),
+            ("동명사 주어", "Reading old letters is a quiet pleasure.", "Reading")]:
+        at = sc.grammar_span(sent, tag)
+        assert at, tag
+        assert sent[at[0]:at[1]] == want, (tag, sent[at[0]:at[1]])
     # 기계가 짚어 주되, 담은 것만 나갑니다
     hints = sc.grammar_hints("Many people believe that talent is something you are born with.")
     assert any(h["tag"] == "접속사 that" for h in hints), hints

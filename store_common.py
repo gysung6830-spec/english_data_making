@@ -3246,7 +3246,7 @@ def chunk_pairs(sentence: dict) -> list[dict]:
 # 것이고, 없는 지문에서는 이 자리가 아예 안 열립니다.
 # ---------------------------------------------------------------------------
 GRAMMAR_RULES = [
-    ("관계대명사", r"\b(?:[a-z]+)\s+(who|whom|which|that)\s+(?=\w)",
+    ("관계대명사", r"\b[a-z]{2,},?\s+(who|whom|which|that)\s+(?=\w)",
      "앞의 명사를 뒤 문장이 통째로 꾸밉니다. 관계사 앞에서 한 번 끊어 읽으세요."),
     ("관계부사", r"[a-z]{3,},?\s+(where|when|why)\s+(?=\w+\s+\w)",
      "앞의 명사(장소·때·이유)를 뒤 문장이 꾸밉니다. 문장 맨 앞의 When 과는 다릅니다."),
@@ -3262,19 +3262,19 @@ GRAMMAR_RULES = [
      "무엇과 무엇을 견주는지 than 뒤를 먼저 보세요."),
     ("최상급", r"\bthe\s+(?:\w+est|most\s+\w+)\b",
      "범위(in·of·among)가 어디까지인지 함께 봅니다."),
-    ("가정법", r"\bif\b[^.]*\b(?:would|could|might|should)\b",
-     "실제가 아닌 일을 말합니다. 시제가 한 칸 뒤로 물러납니다."),
-    ("가주어 it", r"\bIt\s+(?:is|was|seems|appears)\b[^.]*\bthat\b",
-     "It 은 자리만 잡고, 진짜 주어는 that 뒤에 있습니다."),
+    ("가정법", r"\bif\b[^.]*?\b((?:would|could|might|should)\s+\w+)",
+     "if 절이 실제가 아닌 일을 말하고, 여기가 그 결과입니다. 시제가 한 칸 뒤로 물러납니다."),
+    ("가주어 it", r"\b(It)\s+(?:is|was|seems|appears)\b[^.]*\bthat\b",
+     "이 It 은 자리만 잡고 있습니다. 진짜 주어는 뒤의 that 이하입니다."),
     ("사역·지각동사", r"\b(?:make|makes|made|let|lets|have|has|had|help|helps|"
                     r"see|sees|saw|hear|hears|heard|watch|watches|watched)\s+"
                     r"(?:\w+)\s+(?!to\b)[a-z]+\b",
      "목적어 뒤에 to 없는 동사원형이 옵니다."),
     ("so ~ that", r"\bso\s+\w+\s+that\b",
      "'너무 ~해서 …하다'. 원인과 결과가 한 문장에 들어 있습니다."),
-    ("동명사 주어", r"^\s*\w+ing\s+\w+[^.]*\b(?:is|was|are|were)\b",
-     "-ing 가 주어 자리에 왔습니다. 단수로 받습니다."),
-    ("접속사 that", r"\b(?:believe|think|know|say|show|find|suggest|mean|hope)\w*\s+that\b",
+    ("동명사 주어", r"^\s*(\w+ing)\s+\w+[^.]*\b(?:is|was|are|were)\b",
+     "이 -ing 가 주어입니다. 동사는 단수로 받습니다."),
+    ("접속사 that", r"\b(?:believe|think|know|say|show|find|suggest|mean|hope)\w*\s+(that)\b",
      "that 이하 문장 통째가 동사의 목적어입니다. 이 that 은 해석하지 않습니다."),
 ]
 
