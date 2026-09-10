@@ -1,6 +1,42 @@
 {% extends "base.html" %}
 {% block title %}{{ item.title }} 무료 PDF | {{ site.brand }}{% endblock %}
-{% block desc %}{{ item.title }} PDF — {{ site.brand }}에서 회원가입 없이 무료로 받으실 수 있습니다.{% endblock %}
+{% block desc %}{{ item.title }} PDF 무료 내려받기{% if span %} · {{ span }} 전 지문{% endif %}{% if facts.pages %} · A4 {{ facts.pages }}쪽{% endif %}. 회원가입 없이 바로 받으실 수 있습니다.{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": {{ item.title|tojson }},
+  "description": {{ (blurb[0] if blurb else item.title)|tojson }},
+  "url": {{ url_for('free_detail', slug=item.slug, _external=True)|tojson }},
+  "inLanguage": "ko",
+  "isAccessibleForFree": true,
+  "learningResourceType": {{ (kind_names|join(', '))|tojson }},
+  "educationalLevel": {{ (item.grade or '고등')|tojson }},
+  "encodingFormat": "application/pdf",
+  {%- if pdf_name %}
+  "url": {{ url_for('free_pdf', slug=item.slug, filename=pdf_name, _external=True)|tojson }},
+  {%- endif %}
+  "provider": {"@type": "Organization", "name": {{ site.brand|tojson }},
+               "url": {{ url_for('home', _external=True)|tojson }}}
+}
+</script>
+{% if faq %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for f in faq %}
+    {"@type": "Question", "name": {{ f.q|tojson }},
+     "acceptedAnswer": {"@type": "Answer", "text": {{ f.a|tojson }}}}{{ "," if not loop.last }}
+    {%- endfor %}
+  ]
+}
+</script>
+{% endif %}
+{% endblock %}
 
 {% block body %}
 <section class="section">
@@ -27,6 +63,22 @@
         </div>
         <figcaption>PDF 첫 쪽입니다</figcaption>
       </figure>
+    {% endif %}
+
+    {% if facts.pages or span %}
+      <div class="fact-strip">
+        {% if span %}<div class="ft"><b>{{ span }}</b><small>다루는 문항</small></div>{% endif %}
+        {% if facts.passages %}<div class="ft"><b>{{ facts.passages }}개</b><small>지문</small></div>{% endif %}
+        {% if facts.pages %}<div class="ft"><b>A4 {{ facts.pages }}쪽</b><small>분량</small></div>{% endif %}
+        {% if facts.words %}<div class="ft"><b>{{ '{:,}'.format(facts.words) }}개</b><small>영어 낱말</small></div>{% endif %}
+      </div>
+    {% endif %}
+
+    {# 검색엔진이 읽을 글입니다. 회차마다 다른 사실이 들어가 있습니다. #}
+    {% if blurb %}
+      <div class="free-say">
+        {% for line in blurb %}<p>{{ line }}</p>{% endfor %}
+      </div>
     {% endif %}
 
     {% for e in errors %}<div class="alert alert-error">{{ e }}</div>{% endfor %}
@@ -91,6 +143,33 @@
           <button class="btn btn-primary btn-block" type="submit">
             {{ '이 주소 그대로 받기' if typo else '무료로 받기' }}</button>
         </form>
+      </div>
+    {% endif %}
+
+    {% if siblings %}
+      <div class="subhead" style="margin-top:40px;">
+        <h3>같은 회차의 다른 자료</h3>
+        <p class="muted mb-0">{{ item.exam }} {{ item.grade }} 자료입니다. 모두 무료입니다.</p>
+      </div>
+      <div class="sib-list">
+        {% for x in siblings %}
+          <a class="sib" href="{{ url_for('free_detail', slug=x.slug) }}">
+            <b>{{ x.title }}</b>
+            <span>{% if x.gate == 'email' %}이메일 적고 받기{% else %}바로 받기{% endif %} →</span>
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if faq %}
+      <div class="subhead" style="margin-top:40px;"><h3>자주 묻는 것</h3></div>
+      <div class="faq">
+        {% for f in faq %}
+          <details class="faq-q"{{ ' open' if loop.first }}>
+            <summary>{{ f.q }}</summary>
+            <p>{{ f.a }}</p>
+          </details>
+        {% endfor %}
       </div>
     {% endif %}
 

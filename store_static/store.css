@@ -2748,3 +2748,35 @@ input[type=text].ty-in{display:block; width:100%; max-width:340px; margin:0 auto
   padding:13px 16px; font-size:19px; text-align:center; letter-spacing:.06em;
   border:1px solid var(--line,#e5e7eb); border-radius:12px;}
 input[type=text].ty-in:focus{outline:2px solid var(--brand,#166534); outline-offset:-1px;}
+
+/* ---- 무료 자료 상세 — 사실 띠 · 글 · 문답 ----------------------------- */
+.fact-strip{display:flex; gap:26px; flex-wrap:wrap; margin:6px 0 22px; padding:16px 20px;
+  border-radius:12px; background:var(--brand-soft,#eef7f1); border:1px solid #cfe4d9;}
+.ft{display:flex; flex-direction:column;}
+.ft b{font-size:19px; color:var(--brand-dark,#14532d); letter-spacing:-.02em;}
+.ft small{font-size:12px; color:var(--muted,#6b7280); margin-top:2px;}
+.free-say{margin:0 0 26px;}
+.free-say p{margin:0 0 12px; line-height:1.8; color:var(--ink-2,#4b5563);}
+.free-say p:first-child{color:var(--ink,#111827); font-weight:600;}
+
+.sib-list{display:grid; grid-template-columns:repeat(2,1fr); gap:10px;}
+.sib{display:flex; align-items:center; gap:12px; padding:15px 18px; text-decoration:none;
+  color:inherit; border:1px solid var(--line,#e5e7eb); border-radius:12px; background:#fff;
+  transition:.15s;}
+.sib:hover{border-color:var(--brand,#166534); transform:translateY(-1px);}
+.sib b{flex:1; font-size:14.5px; font-weight:600; word-break:keep-all;}
+.sib span{font-size:12.5px; color:var(--brand,#166534); white-space:nowrap;}
+
+.faq{border-top:1px solid var(--line,#e5e7eb);}
+.faq-q{border-bottom:1px solid var(--line,#e5e7eb);}
+.faq-q summary{padding:16px 2px; cursor:pointer; font-weight:600; list-style:none;
+  display:flex; align-items:center; gap:10px;}
+.faq-q summary::-webkit-details-marker{display:none;}
+.faq-q summary::before{content:"＋"; color:var(--brand,#166534); font-weight:800;}
+.faq-q[open] summary::before{content:"−";}
+.faq-q p{margin:0 0 16px 24px; line-height:1.8; color:var(--ink-2,#4b5563);}
+@media (max-width:600px){
+  .fact-strip{gap:18px; padding:14px 16px;}
+  .ft b{font-size:17px;}
+  .sib-list{grid-template-columns:1fr;}
+}

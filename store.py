@@ -1463,17 +1463,32 @@ def free():
                            kinds=sc.FREE_KINDS, sample_count=lineup_samples)
 
 
+def free_page(item: dict, slug: str) -> dict:
+    """무료 자료 한 건의 화면 재료.
+
+    제목과 그림만 있으면 검색엔진이 읽을 것이 없습니다. 올리신 PDF 에서
+    센 값으로 페이지마다 다른 글을 만들어 붙입니다.
+    """
+    facts = sc.free_facts(slug)
+    return {
+        "item": item, "files": sc.free_files(slug), "links": sc.free_links(item),
+        "kind_names": sc.free_kind_names(item),
+        "opened": (item.get("gate") != "email" or free_unlocked(slug)),
+        "cover": sc.free_cover(slug) is not None, "typo": False,
+        "facts": facts, "span": sc.number_span(facts.get("numbers") or []),
+        "blurb": sc.free_blurb(item, facts), "faq": sc.free_faq(item, facts),
+        "siblings": sc.free_siblings(item),
+        "pdf_name": sc.free_pdf_name(slug),
+        "related": sc.auto_related(item),
+    }
+
+
 @app.route("/free/<slug>")
 def free_detail(slug):
     item = sc.find_freebie(slug)
     if item is None:
         abort(404)
-    return render_template(
-        "free_detail.html", item=item, files=sc.free_files(slug),
-        links=sc.free_links(item), kind_names=sc.free_kind_names(item),
-        opened=(item.get("gate") != "email" or free_unlocked(slug)),
-        cover=sc.free_cover(slug) is not None, typo=False,
-        related=sc.auto_related(item), errors=[], form={})
+    return render_template("free_detail.html", **free_page(item, slug), errors=[], form={})
 
 
 @app.route("/free/<slug>/get", methods=["POST"])
@@ -1498,12 +1513,10 @@ def free_get(slug):
         errors.append("이메일 수집·이용에 동의해 주셔야 받으실 수 있습니다.")
 
     if errors:
-        return render_template(
-            "free_detail.html", item=item, files=sc.free_files(slug),
-            links=sc.free_links(item), kind_names=sc.free_kind_names(item),
-            opened=False, cover=sc.free_cover(slug) is not None,
-            typo=bool(sc.email_typo(email)),
-            related=sc.auto_related(item), errors=errors, form=request.form), 400
+        return render_template("free_detail.html",
+                               **{**free_page(item, slug), "opened": False,
+                                  "typo": bool(sc.email_typo(email))},
+                               errors=errors, form=request.form), 400
 
     sc.add_lead(email, name=sc.clean(request.form.get("name"), 50), slug=slug,
                 title=item.get("title", ""), news=bool(request.form.get("news")))
@@ -1543,6 +1556,20 @@ def free_cover_img(slug):
     if cover is None:
         abort(404)
     return send_from_directory(cover.parent, cover.name, max_age=86400 * 7)
+
+
+@app.route("/free/<slug>/pdf/<path:filename>")
+def free_pdf(slug, filename):
+    """검색엔진이 훑어 갈 수 있는 PDF 주소.
+
+    받기 단추(첨부로 내려받기)와 달리 화면에서 바로 열립니다. 구글은 PDF 안의
+    글도 읽어서 색인하므로, 자료 자체가 검색에 걸리는 문이 하나 더 생깁니다.
+    이메일을 받는 자료는 내주지 않습니다.
+    """
+    if sc.free_pdf_name(slug) != filename:
+        abort(404)
+    return send_from_directory(sc.free_dir(slug), filename, max_age=86400,
+                               mimetype="application/pdf")
 
 
 @app.route("/free/<slug>/file/<int:index>")
@@ -2546,14 +2573,27 @@ def sitemap():
             url_for("words_page", _external=True)]
     urls += [url_for("words_book", slug=b["slug"], _external=True)
              for b in sc.load_words()["books"]]
-    urls += [url_for("free_detail", slug=x["slug"], _external=True)
-             for x in sc.load_freebies()["items"]]
+    freebies = sc.load_freebies()["items"]
+    urls += [url_for("free_detail", slug=x["slug"], _external=True) for x in freebies]
+    # 자료 PDF 도 올립니다. 구글은 PDF 안의 글까지 읽으므로 검색에 걸리는
+    # 문이 하나 더 생깁니다. 이메일을 받는 자료는 빠집니다.
+    for x in freebies:
+        name = sc.free_pdf_name(x.get("slug", ""))
+        if name:
+            urls.append(url_for("free_pdf", slug=x["slug"], filename=name, _external=True))
     urls += [url_for("book_detail", slug=b["slug"], _external=True) for b in catalog["books"]]
     urls += [url_for("product_detail", slug=p["slug"], _external=True)
              for p in catalog["products"]]
+    # 주소는 url_for 가 이미 감싸 줍니다. 여기서는 XML 에서 뜻이 있는 글자
+    # (& < >)만 막아 줍니다 — 자료 이름이 주소에 들어가니까요.
+    from markupsafe import escape
+
+    def safe(u: str) -> str:
+        return str(escape(u))
+
     body = ('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-            + "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls)
+            + "".join(f"  <url><loc>{safe(u)}</loc></url>\n" for u in urls)
             + "</urlset>\n")
     return body, 200, {"Content-Type": "application/xml; charset=utf-8"}
 

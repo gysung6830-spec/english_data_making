@@ -1388,6 +1388,147 @@ def auto_related(item: dict, products=None, limit: int = 3) -> list[dict]:
     return [p for *_, p in scored[:max(0, limit)]]
 
 
+# ── 검색에 걸릴 글을 PDF 에서 뽑아 씁니다 ─────────────────────────────
+# 자료 페이지에 제목과 그림만 있으면 검색엔진이 읽을 것이 없습니다. 그렇다고
+# 회차마다 손으로 소개글을 쓰실 수도 없고요. 올리신 PDF 를 읽어 '쪽수 · 문항
+# 번호 · 낱말 수' 같은 사실을 뽑고, 그것으로 페이지마다 다른 글을 만듭니다.
+# 지어낸 말이 아니라 실제 파일에서 센 값이라 틀릴 일이 없습니다.
+FREE_FACTS_VER = 1
+_QNUM_RE = re.compile(r"(?m)^\s*(\d{1,2})\s*[.)]")
+
+
+def free_facts(slug: str) -> dict:
+    """무료 자료 PDF 에서 센 값. {pages, numbers, passages, words}"""
+    pdfs = [f for f in free_files(slug) if f["name"].lower().endswith(".pdf")]
+    if not pdfs:
+        return {}
+    src = free_dir(slug) / pdfs[0]["name"]
+    out = DATA_DIR / ".cache" / "facts" / f"{free_dir(slug).name}-{FREE_FACTS_VER}.json"
+    try:
+        if out.exists() and out.stat().st_mtime >= src.stat().st_mtime:
+            return json.loads(out.read_text(encoding="utf-8"))
+        import fitz as pymupdf
+        text, pages = [], 0
+        with pymupdf.open(src) as doc:
+            pages = doc.page_count
+            for page in doc:
+                text.append(page.get_text())
+        body = "\n".join(text)
+        # 모의고사 문항은 18~45번입니다. 그 범위의 번호만 셉니다.
+        nums = sorted({int(n) for n in _QNUM_RE.findall(body) if 18 <= int(n) <= 45})
+        facts = {"pages": pages, "numbers": nums, "passages": len(nums),
+                 "words": len(re.findall(r"[A-Za-z][A-Za-z'-]+", body))}
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(facts, ensure_ascii=False), encoding="utf-8")
+        return facts
+    except Exception as exc:
+        log.warning("자료를 세지 못했습니다 (%s): %s", slug, exc)
+        return {}
+
+
+def number_span(numbers) -> str:
+    """[18,19,...,45] → '18~45번'. 띄엄띄엄이면 개수만 말합니다."""
+    if not numbers:
+        return ""
+    lo, hi = numbers[0], numbers[-1]
+    if len(numbers) == hi - lo + 1:
+        return f"{lo}~{hi}번"
+    return f"{lo}~{hi}번 가운데 {len(numbers)}문항"
+
+
+FREE_KIND_USE = {
+    "oneline_ko": ("문장마다 바로 아래에 한 줄 해석을 붙여 두었습니다.",
+                   "수업 전에 훑어보시거나, 학생에게 그대로 나눠 주시기 좋습니다. "
+                   "해석을 찾느라 지문과 해설을 오가지 않아도 됩니다."),
+    "oneline_en": ("해석 없이 영어 원문만 한 줄씩 끊어 놓았습니다.",
+                   "먼저 읽히고 나서 해석을 보여 주실 때 씁니다. "
+                   "학생이 스스로 끊어 읽어 본 뒤에 맞춰 볼 수 있습니다."),
+    "side": ("왼쪽에 영어 원문, 오른쪽에 우리말 해석을 나란히 놓았습니다.",
+             "지문 하나가 한 쪽에 다 들어가서 수업 중에 넘길 일이 없습니다. "
+             "눈이 좌우로만 움직이면 됩니다."),
+    "literal": ("끊어 읽은 자리마다 우리말을 맞춰 놓은 직독직해입니다.",
+                "앞에서부터 읽어 내려가는 연습에 씁니다. "
+                "구조를 따로 그려 가며 보지 않아도 문장이 어디서 갈리는지 보입니다."),
+}
+
+
+def free_blurb(item: dict, facts: dict | None = None) -> list[str]:
+    """자료 페이지에 붙일 글. 회차마다 다른 사실이 들어갑니다."""
+    facts = free_facts(item.get("slug", "")) if facts is None else facts
+    kinds = [k for k in (item.get("kinds") or []) if k in FREE_KINDS]
+    grade, exam = item.get("grade", ""), item.get("exam", "")
+    names = " · ".join(FREE_KINDS[k] for k in kinds) or "자료"
+
+    head = " ".join(x for x in [grade, exam, names] if x) + "입니다."
+    span = number_span(facts.get("numbers") or [])
+    bits = []
+    if span:
+        bits.append(f"{span} 지문을 모두 담았습니다")
+    if facts.get("pages"):
+        bits.append(f"A4 {facts['pages']}쪽")
+    if facts.get("words"):
+        bits.append(f"영어 낱말 {facts['words']:,}개")
+    if bits:
+        head += " " + " · ".join(bits) + "."
+
+    lines = [head]
+    for k in kinds:
+        what, how = FREE_KIND_USE.get(k, ("", ""))
+        if what:
+            lines.append(what + " " + how)
+    lines.append("회원가입도 결제도 없습니다. "
+                 + ("이메일 주소만 적으시면 바로 내려받으실 수 있습니다."
+                    if item.get("gate") == "email"
+                    else "받기를 누르시면 그 자리에서 내려받습니다."))
+    return lines
+
+
+def free_faq(item: dict, facts: dict | None = None) -> list[dict]:
+    """자주 묻는 것. 검색 결과에 문답이 그대로 걸리기도 합니다."""
+    facts = free_facts(item.get("slug", "")) if facts is None else facts
+    kinds = [k for k in (item.get("kinds") or []) if k in FREE_KINDS]
+    names = " · ".join(FREE_KINDS[k] for k in kinds) or "자료"
+    exam = item.get("exam", "이 회차")
+    span = number_span(facts.get("numbers") or [])
+    out = [
+        {"q": f"{item.get('title', names)}은 정말 무료인가요?",
+         "a": ("네, 무료입니다. 회원가입도 결제도 없습니다. "
+               + ("이메일 주소만 적으시면 바로 받으실 수 있고, 받으신 뒤에 광고를 "
+                  "보내지 않습니다." if item.get("gate") == "email"
+                  else "받기를 누르시면 그 자리에서 PDF 가 내려받아집니다."))},
+        {"q": "몇 번 문항까지 들어 있나요?",
+         "a": (f"{exam}의 {span} 지문이 모두 들어 있습니다."
+               + (f" A4 {facts['pages']}쪽 분량입니다." if facts.get("pages") else "")
+               if span else f"{exam} 지문을 모두 담았습니다.")},
+        {"q": "수업에 써도 되나요?",
+         "a": ("네. 인쇄해서 학생에게 나눠 주셔도 되고, 화면에 띄워 수업하셔도 됩니다. "
+               "다만 파일을 다시 판매하시는 것만 삼가 주세요.")},
+    ]
+    if "literal" not in kinds:
+        out.append({"q": "직독직해도 있나요?",
+                    "a": "네, 같은 회차의 직독직해도 무료로 올려 두었습니다. "
+                         "이메일 주소만 적으시면 바로 받으실 수 있습니다."})
+    return out
+
+
+def free_siblings(item: dict, items=None) -> list[dict]:
+    """같은 회차 · 같은 학년의 다른 자료. 서로 오갈 수 있게 겁니다."""
+    items = load_freebies()["items"] if items is None else items
+    key, grade = exam_key_of(item), item.get("grade", "")
+    return [x for x in items
+            if x.get("slug") != item.get("slug") and free_ready(x)
+            and exam_key_of(x) == key and x.get("grade", "") == grade]
+
+
+def free_pdf_name(slug: str) -> str:
+    """검색엔진이 훑어 갈 수 있는 PDF 하나. 이메일을 받는 자료는 안 내줍니다."""
+    item = find_freebie(slug)
+    if item is None or item.get("gate") == "email":
+        return ""
+    pdfs = [f["name"] for f in free_files(slug) if f["name"].lower().endswith(".pdf")]
+    return pdfs[0] if pdfs else ""
+
+
 def preorder_price(cfg: dict, plan: dict) -> int:
     """사전 신청가. 정가에서 pass.preorder_discount 만큼 깎습니다.
 

@@ -4110,6 +4110,108 @@ def test_word_study_starts_with_flash_and_offers_games():
     print("PASS  단어 학습 — 깜빡이가 맨 앞 · 게임 셋 · 개수는 스펙트럼")
 
 
+def _exam_pdf(kind: str = "한줄해석", first: int = 18, last: int = 45) -> bytes:
+    """진짜 회차 해석지처럼 문항 번호가 붙은 PDF."""
+    import io as _io
+    from reportlab.lib.pagesizes import A4
+    from reportlab.pdfgen import canvas
+    import store_sheet_pdf as sp
+    face, _bold = sp._fonts()
+    W, H = A4
+    buf = _io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=A4)
+    y = H - 60
+    for no in range(first, last + 1):
+        if y < 90:
+            c.showPage(); y = H - 60
+        c.setFont(face, 10.5)
+        c.drawString(45, y, f"{no}. The city plans to turn an unused rail line into a path.")
+        c.drawString(52, y - 13, "그 도시는 쓰지 않는 철길을 산책로로 바꾸려고 한다.")
+        y -= 34
+    c.save()
+    return buf.getvalue()
+
+
+def test_free_page_has_something_for_search_to_read():
+    """제목과 그림만 있으면 검색엔진이 읽을 것이 없습니다.
+
+    회차마다 소개글을 손으로 쓰실 수도 없으니, 올리신 PDF 에서 센 값으로
+    페이지마다 다른 글을 만들어 붙입니다.
+    """
+    a = admin()
+    n = "고1 2026년 9월 모의고사 한줄해석.pdf"
+    a.post("/admin/free/upload", data={"files": [(io.BytesIO(_exam_pdf()), n)]},
+           content_type="multipart/form-data", follow_redirects=True)
+    slug = "2026-09-goh1-oneline-ko"
+
+    # PDF 에서 실제로 세어 냅니다 — 지어낸 값이 아닙니다
+    facts = sc.free_facts(slug)
+    assert facts["pages"] >= 1
+    assert facts["numbers"][0] == 18 and facts["numbers"][-1] == 45
+    assert facts["passages"] == 28 and facts["words"] > 100
+    assert sc.number_span(facts["numbers"]) == "18~45번"
+    assert sc.number_span([18, 20, 45]) == "18~45번 가운데 3문항"
+    assert sc.free_facts("없는자료") == {}          # 없으면 조용히 빈 값
+
+    page = body(client().get(f"/free/{slug}"))
+    korean = len(re.findall(r"[가-힣]", re.sub(r"<[^>]+>", " ", page)))
+    assert korean > 400, korean                     # 읽을 글이 있어야 합니다
+    for must in ("18~45번", "A4", "지문", "회원가입도 결제도 없습니다"):
+        assert must in page, must
+
+    # 자주 묻는 것 — 검색 결과에 문답이 걸리도록 표시까지 답니다
+    assert "자주 묻는 것" in page and "FAQPage" in page
+    assert "LearningResource" in page and '"isAccessibleForFree": true' in page
+
+    # 같은 회차의 다른 자료로 오갈 수 있어야 합니다
+    for other in ("한줄영어", "좌지문우해석", "직독직해"):
+        a.post("/admin/free/upload", data={
+            "files": [(io.BytesIO(_exam_pdf(other)), f"고1 2026년 9월 모의고사 {other}.pdf")]},
+            content_type="multipart/form-data", follow_redirects=True)
+    page = body(client().get(f"/free/{slug}"))
+    assert "같은 회차의 다른 자료" in page
+    assert page.count('class="sib"') == 3
+    print("PASS  무료 자료 페이지 — PDF 에서 센 값으로 읽을 글 만들기")
+
+
+def test_open_pdf_is_crawlable_but_the_gated_one_is_not():
+    """구글은 PDF 안의 글도 읽습니다. 검색에 걸리는 문을 하나 더 냅니다."""
+    a = admin()
+    for kind in ("한줄해석", "직독직해"):
+        n = f"고2 2026년 6월 모의고사 {kind}.pdf"
+        a.post("/admin/free/upload", data={"files": [(io.BytesIO(_exam_pdf(kind)), n)]},
+               content_type="multipart/form-data", follow_redirects=True)
+    open_slug, gated_slug = "2026-06-goh2-oneline-ko", "2026-06-goh2-literal"
+
+    name = sc.free_pdf_name(open_slug)
+    assert name and name.endswith(".pdf")
+    assert sc.free_pdf_name(gated_slug) == ""       # 이메일 받는 자료는 안 내줍니다
+
+    c = client()
+    got = c.get(f"/free/{open_slug}/pdf/{name}")
+    assert got.status_code == 200
+    assert got.headers["Content-Type"].startswith("application/pdf")
+    assert "attachment" not in got.headers.get("Content-Disposition", "")
+
+    # 이메일 받는 자료는 주소를 알아도 안 열립니다
+    assert c.get(f"/free/{gated_slug}/pdf/고2 2026년 6월 모의고사 직독직해.pdf").status_code == 404
+    # 폴더 밖으로 나가려는 요청도 막습니다
+    assert c.get(f"/free/{open_slug}/pdf/../../../store.py").status_code in (301, 308, 404)
+
+    # 사이트맵에 자료 PDF 가 들어가고, 이메일 받는 것은 빠집니다
+    import xml.dom.minidom
+    sm = c.get("/sitemap.xml")
+    assert sm.status_code == 200
+    locs = [x.firstChild.data for x in
+            xml.dom.minidom.parseString(sm.data).getElementsByTagName("loc")]
+    pdfs = [l for l in locs if "/pdf/" in l]
+    assert any(open_slug in l for l in pdfs), pdfs[:3]
+    assert not any(gated_slug in l for l in pdfs)
+    # 주소는 한 번만 감싸져 있어야 합니다 (두 번 감싸면 안 열립니다)
+    assert not any("%25" in l for l in pdfs)
+    print("PASS  그냥 주는 PDF 는 검색이 훑고, 이메일 받는 것은 막힘")
+
+
 def test_free_kind_suggests_email_gate():
     """직독직해가 들어가면 이메일 받기를 기본으로 잡아야 합니다."""
     assert sc.suggested_gate(["oneline_ko"]) == "open"
@@ -6588,6 +6690,8 @@ def run_all():
     test_free_notify_collects_email()
     test_admin_creates_free_item_end_to_end()
     test_free_kind_suggests_email_gate()
+    test_free_page_has_something_for_search_to_read()
+    test_open_pdf_is_crawlable_but_the_gated_one_is_not()
     test_free_page_shows_all_four_kinds_with_a_page_shot()
     test_free_filters_by_year_and_round()
     test_a_bad_email_cannot_take_the_gated_file()
