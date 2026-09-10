@@ -193,11 +193,8 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
     bank_ok = bool(payment.get("bank_account")) and "0000" not in payment["bank_account"]
     biz_ok = bool(business.get("reg_no")) and "0000" not in business["reg_no"]
     mine = [p for p in products if not p.get("sample")]
-    with_files = [p for p in products if sc.has_deliverable(p)]
     mine_with_files = [p for p in mine if sc.has_deliverable(p)]
     mats = sc.load_materials()["materials"]
-    with_sample = [m for m in mats
-                   if m.get("sample_file") and (sc.SAMPLE_DIR / m["sample_file"]).exists()]
     # 지면 사진도 설명도 없는 자료 — 라인업에서 초라하게 비어 보입니다
     thin = [m for m in mats if not sc.shot_files(m["id"]) or not (m.get("features") or [])]
     mail_ok = bool(os.environ.get("SMTP_HOST") and os.environ.get("ORDER_EMAIL_TO"))
