@@ -16,21 +16,28 @@
     </div>
 
     {# 한 지문을 네 갈래로. 단위는 언제나 '문장' 이거나 '의미 덩어리' 입니다 —
-       낱말로 내려가면 지문 공부가 아니라 단어 공부가 됩니다. #}
-    <div class="mem-tabs" role="tablist">
-      <button type="button" class="mt on" data-tab="read" data-step="1">내용이해</button>
-      <button type="button" class="mt" data-tab="chunk" data-step="2">직독직해</button>
-      <button type="button" class="mt" data-tab="blank" data-step="3">빈칸채우기</button>
-      {% if has_grammar %}<button type="button" class="mt" data-tab="gram" data-step="4">문법</button>{% endif %}
+       낱말로 내려가면 지문 공부가 아니라 단어 공부가 됩니다.
+
+       판 하나가 다섯 화면쯤 됩니다. 탭 줄이 위로 흘러가 버리면 다음 갈래로
+       가려고 맨 위까지 되올라와야 해서, 화면에 붙여 둡니다. 어디까지 했는지도
+       탭 안에 표시해 줄 하나를 없앴습니다. #}
+    <div class="mem-bar" id="memBar">
+      <div class="mem-tabs" role="tablist">
+        <button type="button" class="mt on" data-tab="read" data-step="1">
+          <i class="mt-no">1</i>내용이해</button>
+        <button type="button" class="mt" data-tab="chunk" data-step="2">
+          <i class="mt-no">2</i>직독직해</button>
+        <button type="button" class="mt" data-tab="blank" data-step="3">
+          <i class="mt-no">3</i>빈칸채우기</button>
+        {% if has_grammar %}
+          <button type="button" class="mt" data-tab="gram" data-step="4">
+            <i class="mt-no">4</i>문법</button>
+        {% endif %}
+      </div>
     </div>
 
     {# 어디까지 했는지 — 브라우저에만 남습니다. 서버로 아무것도 안 보냅니다. #}
     <div class="quest" id="quest">
-      <span class="q-label">오늘의 퀘스트</span>
-      <span class="q-dot" data-step="1" title="내용이해">1</span>
-      <span class="q-dot" data-step="2" title="직독직해">2</span>
-      <span class="q-dot" data-step="3" title="빈칸채우기">3</span>
-      {% if has_grammar %}<span class="q-dot" data-step="4" title="문법">4</span>{% endif %}
       <span class="q-note" id="q-note"></span>
       <div class="spacer"></div>
       <span class="q-streak" id="q-streak" hidden></span>
@@ -89,6 +96,8 @@
           </div>
         {% endfor %}
       </div>
+    
+      <button type="button" class="mem-next" data-go="blank">빈칸채우기로 넘어가기 →</button>
     </div>
 
     {# ---- 1. 내용이해 — 영어를 붙잡기 전에 '무슨 이야기인지' 부터 -------- #}
@@ -168,6 +177,8 @@
         <div class="ord-pool" id="ord-pool"></div>
         <div class="mem-score" id="ord-score" hidden></div>
       {% endif %}
+    
+      <button type="button" class="mem-next" data-go="chunk">직독직해로 넘어가기 →</button>
     </div>
 
     {# ---- 3. 지문암기 — 빈칸을 채웁니다 ------------------------------------ #}
@@ -190,6 +201,8 @@
         칸에서 <b>Tab</b> 이나 <b>Enter</b> 로 다음 칸으로 넘어갑니다.</p>
       <ol class="sent-list" id="blank-list"></ol>
       <div class="mem-score" id="score" hidden></div>
+    
+      {% if has_grammar %}<button type="button" class="mem-next" data-go="gram">문법으로 넘어가기 →</button>{% endif %}
     </div>
 
     {# ---- 4. 문법 — 형광펜 자리를 눌러 '이게 뭔지' 맞힙니다 --------------- #}
@@ -270,13 +283,22 @@
   }
   function paint() {
     var got = load();
-    document.querySelectorAll('.q-dot').forEach(function (d) {
-      d.classList.toggle('on', !!got['s' + d.dataset.step]);
+    /* 깬 갈래는 번호 대신 체크로. 줄 하나를 없애고 탭이 그 일을 합니다. */
+    document.querySelectorAll('.mt').forEach(function (t) {
+      var done = !!got['s' + t.dataset.step];
+      t.classList.toggle('done', done);
+      var no = t.querySelector('.mt-no');
+      if (no) no.textContent = done ? '✓' : t.dataset.step;
     });
-    var n = document.querySelectorAll('.q-dot.on').length;
-    var all = document.querySelectorAll('.q-dot').length;
+    var n = document.querySelectorAll('.mt.done').length;
+    var all = document.querySelectorAll('.mt').length;
     document.getElementById('q-note').textContent =
       n === all ? '이 지문 끝냈습니다 · 다음 지문으로' : n + ' / ' + all + ' 깼습니다';
+    // 이미 깬 갈래로 가는 단추는 '다시' 라고 적어 둡니다
+    document.querySelectorAll('.mem-next').forEach(function (b2) {
+      var t = document.querySelector('.mt[data-tab="' + b2.dataset.go + '"]');
+      b2.classList.toggle('again', !!(t && t.classList.contains('done')));
+    });
     var st = streak();
     var box = document.getElementById('q-streak');
     box.hidden = st < 2;
@@ -327,7 +349,7 @@
       }
     } catch (e) { /* 사생활 보호 모드 등 — 못 남겨도 학습은 그대로 됩니다 */ }
     paint();
-    var d = document.querySelector('.q-dot[data-step="' + step + '"]');
+    var d = document.querySelector('.mt[data-step="' + step + '"]');
     if (d) { d.classList.add('pop'); setTimeout(function () { d.classList.remove('pop'); }, 700); }
     if (msg) toast(msg);
   }
@@ -342,20 +364,56 @@
 
   /* ---- 갈래 바꾸기 ---- */
   var PANES = {read: 'pane-read', chunk: 'pane-chunk', blank: 'pane-blank', gram: 'pane-gram'};
-  document.querySelectorAll('.mt').forEach(function (b) {
-    b.addEventListener('click', function () {
-      document.querySelectorAll('.mt').forEach(function (x) { x.classList.remove('on'); });
-      b.classList.add('on');
-      Object.keys(PANES).forEach(function (k) {
-        var el = document.getElementById(PANES[k]);
-        if (el) el.hidden = (k !== b.dataset.tab);
-      });
-      if (b.dataset.tab === 'blank' && !document.querySelector('#blank-list .bl')) build();
-      if (b.dataset.tab === 'read' && !document.querySelector('#ord-pool .ord')) shuffle();
-      if (b.dataset.tab === 'chunk' && !document.querySelector('#ck-test .ck-spot')) ckBuild();
 
-      window.scrollTo({top: 0, behavior: 'smooth'});
+  function go(tab) {
+    var tabBtn = document.querySelector('.mt[data-tab="' + tab + '"]');
+    if (!tabBtn) return;
+    document.querySelectorAll('.mt').forEach(function (x) { x.classList.remove('on'); });
+    tabBtn.classList.add('on');
+    Object.keys(PANES).forEach(function (k) {
+      var el = document.getElementById(PANES[k]);
+      if (el) el.hidden = (k !== tab);
     });
+    if (tab === 'blank' && !document.querySelector('#blank-list .bl')) build();
+    if (tab === 'read' && !document.querySelector('#ord-pool .ord')) shuffle();
+    if (tab === 'chunk' && !document.querySelector('#ck-test .ck-spot')) ckBuild();
+
+    /* 새로 연 판의 첫 줄이 붙어 있는 탭 줄 바로 아래에 오게 합니다.
+       탭 줄을 기준으로 재면 이미 붙어 있어서 제자리걸음이 됩니다. */
+    var pane = document.getElementById(PANES[tab]);
+    if (!pane) return;
+    var bar = document.getElementById('memBar');
+    var room = headRoom() + (bar ? bar.getBoundingClientRect().height : 0) + 8;
+    var top = window.scrollY + pane.getBoundingClientRect().top - room;
+    window.scrollTo({top: Math.max(0, top), behavior: 'smooth'});
+  }
+  /* 위에 이미 붙어 있는 줄이 화면 폭에 따라 다릅니다 — 폰에서는 분류 띠가
+     하나 더 붙습니다. 재서 그 아래에 세웁니다. 숫자로 박아 두면 글꼴이나
+     메뉴가 조금만 바뀌어도 가려집니다. */
+  function headRoom() {
+    var top = 0;
+    ['.site-head', '.quick-bar'].forEach(function (sel) {
+      var n = document.querySelector(sel);
+      if (n && getComputedStyle(n).position === 'sticky') {
+        top += n.getBoundingClientRect().height;
+      }
+    });
+    return Math.round(top);
+  }
+  function fitBar() {
+    var bar = document.getElementById('memBar');
+    if (bar) bar.style.top = headRoom() + 'px';
+  }
+  fitBar();
+  window.addEventListener('resize', fitBar);
+
+  document.querySelectorAll('.mt').forEach(function (b) {
+    b.addEventListener('click', function () { go(b.dataset.tab); });
+  });
+  /* 판 끝에서 그 자리로 다음 갈래를 부릅니다. 다 하고 나서 맨 위까지
+     되올라오게 하면 아무도 안 넘어갑니다. */
+  document.querySelectorAll('.mem-next').forEach(function (b) {
+    b.addEventListener('click', function () { go(b.dataset.go); });
   });
 
   /* ---- 소리 내어 읽기 ---- */

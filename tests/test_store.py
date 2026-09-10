@@ -3002,8 +3002,18 @@ def test_passage_memorizing_reads_then_blanks():
     assert first.get("terms"), "첫 지문에 풀어 둔 말이 없습니다"
 
     # 퀘스트 — 브라우저에만 남습니다. 서버로 아무것도 안 보냅니다.
-    assert "오늘의 퀘스트" in page and "localStorage" in page
-    assert "q-dot" in page
+    assert "localStorage" in page and 'id="q-note"' in page
+    # 어디까지 했는지는 탭 안에 표시합니다. 줄을 따로 두면 자리만 먹습니다.
+    assert page.count('class="mt-no"') >= 3
+
+    # 판 하나가 다섯 화면쯤 됩니다. 탭 줄이 흘러가면 다음 갈래로 가려고
+    # 맨 위까지 되올라와야 해서 화면에 붙여 둡니다.
+    assert 'id="memBar"' in page
+    css = body(client().get("/static/store.css"))
+    assert ".mem-bar{position:sticky" in css
+    # 판 끝에서도 그 자리로 다음 갈래를 부를 수 있어야 합니다
+    for go in ("chunk", "blank", "gram"):
+        assert f'class="mem-next" data-go="{go}"' in page, go
 
     # 빈칸 난이도 — 힌트를 먼저 거두고, 그다음 범위를 넓힙니다
     lv = sc.BLANK_LEVELS

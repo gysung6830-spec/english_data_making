@@ -2307,10 +2307,35 @@ a.fk:hover{border-color:var(--brand); transform:translateY(-2px);
 .mem-head{display:flex; align-items:flex-end; gap:16px; flex-wrap:wrap;
   margin-bottom:16px;}
 .mem-head h2{font-size:26px; margin:4px 0 0;}
-.mem-tabs{display:flex; gap:6px; margin-left:auto;}
-.mt{padding:9px 16px; border:1px solid var(--line-strong); background:var(--card);
-  border-radius:999px; font-size:14.5px; font-weight:700; color:var(--ink-2);}
+/* 판 하나가 다섯 화면쯤 됩니다. 탭 줄이 흘러가면 다음 갈래로 가려고
+   맨 위까지 되올라와야 해서, 화면에 붙여 둡니다. */
+.mem-bar{position:sticky; top:60px; z-index:40; margin:0 -4px 12px; padding:8px 4px;
+  background:linear-gradient(var(--bg,#fbfaf7) 78%, transparent);}
+.mem-tabs{display:flex; gap:6px;}
+.mt{flex:1; min-width:0; display:flex; align-items:center; justify-content:center;
+  gap:6px; padding:10px 12px; border:1px solid var(--line-strong); background:var(--card);
+  border-radius:999px; font-size:14px; font-weight:700; color:var(--ink-2);
+  white-space:nowrap; cursor:pointer;}
+.mt-no{flex:0 0 auto; width:18px; height:18px; border-radius:50%; font-style:normal;
+  font-size:11px; font-weight:800; display:flex; align-items:center;
+  justify-content:center; background:var(--line); color:var(--muted);}
+.mt.done .mt-no{background:var(--brand-soft); color:var(--brand-dark);}
 .mt.on{background:var(--brand); border-color:var(--brand); color:#fff;}
+.mt.on .mt-no{background:rgba(255,255,255,.24); color:#fff;}
+.mt.pop{transform:scale(1.06);}
+
+/* 판 끝에서 그 자리로 다음 갈래를 부릅니다 */
+.mem-next{display:block; width:100%; margin:26px 0 4px; padding:15px 18px;
+  border:1px dashed var(--brand); border-radius:12px; background:var(--brand-soft);
+  color:var(--brand-dark); font-size:15px; font-weight:800; font-family:inherit;
+  cursor:pointer; transition:.15s;}
+.mem-next:hover{background:var(--brand); border-style:solid; color:#fff;}
+.mem-next.again{border-color:var(--line-strong); background:var(--card);
+  color:var(--ink-2); font-weight:700;}
+@media (max-width:520px){
+  .mt{padding:10px 4px; font-size:12.5px; gap:4px;}
+  .mt-no{width:16px; height:16px; font-size:10px;}
+}
 
 .mem-tools{display:flex; align-items:center; gap:10px; flex-wrap:wrap;
   margin-bottom:12px;}
@@ -2439,7 +2464,7 @@ input[type=text].bl-in.no{background:#fdf2f0; border-bottom-color:#c2410c;
 }
 
 /* ---- 퀘스트 — 어디까지 했는지. 이 브라우저에만 남습니다 ---- */
-.quest{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:14px 0 18px;
+.quest{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:0 0 16px;
   padding:11px 14px; background:var(--card); border:1px solid var(--line);
   border-radius:10px;}
 .quest .spacer{margin-left:auto;}
