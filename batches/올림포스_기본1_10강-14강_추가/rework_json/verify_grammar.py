@@ -1,103 +1,136 @@
 # -*- coding: utf-8 -*-
-"""어법칩 정합성 검증 — 특히 관계대명사 주격/목적격 혼동과 생략(무엇이 생략됐는지) 오류를 코드로 차단.
+"""어법칩 정합성 검증 — 이번 작업에서 나온 어법칩 오류 유형을 '코드로' 전수 차단.
 
-규칙(고신뢰):
-  · 관계대명사(who/which/that) 뒤에 '주어로 시작하는 말'(대명사·관사·소유격·지시사)이 오면 목적격,
-    그렇지 않으면(동사/부사+동사) 주격. whom은 항상 목적격. whose는 소유격.
-  · 주격 관계대명사는 생략 불가 → '주격 … 생략' 태그는 오류.
-  · 생략(목적격 관대/관계부사)은 선행사 뒤에 '주어(S)'가 이어져야 함.
-  · 관계사 칩은 antecedent 필요, 명사절 칩은 role 필요(구조 검증).
-import 해서 check_passages(P)로 쓰거나 단독 실행."""
+검증하는 오류 유형(이 세션에서 실제로 나왔던 것들):
+  1) 형광펜이 엉뚱한 곳/안 그어짐:  span·선행사(antecedent)가 문장 영어에 '그대로' 없으면 오류.
+  2) 시험 나올 어법칩인데 형광펜 표시 안 됨:  spans 비어 있으면 경고.
+  3) 관계사 선행사 누락:  관계대명사(주격/목적격)·전치사+관계대명사·관계부사·생략형은 antecedent 필요.
+  4) 명사절 접속사 역할 누락 / 관계사와 혼동:  명사절·간접의문·동격은 role 필요, antecedent 있으면 오류.
+  5) 관계대명사 주격/목적격 혼동:  관계사 뒤가 동사면 주격, 새 주어면 목적격(whom=목적격)과 태그 대조.
+  6) 불가능한 생략:  '주격 관계대명사 생략'은 불가.  목적격 관대 생략인데 선행사 뒤가 동사면 오류.
+
+import 해서 check_passages(P) 로 쓰거나 단독 실행.
+errors 는 렌더 중단, warns 는 경고만."""
 import re
 
-SUBJ_START = {  # 관계사 뒤 이게 오면 관계사절의 '새 주어' → 관계사는 목적격
+SUBJ_START = {  # 관계사 뒤 이게 오면 관계사절의 '새 주어' → 목적격
     "i","you","he","she","it","we","they","one","people","someone","everyone","nobody",
     "my","your","his","her","its","our","their","one's",
     "the","a","an","this","that","these","those","some","many","most","much","each","every",
     "any","no","all","both","either","neither","another","such","few","several","various","other",
 }
-REL_PRON = {"who","whom","which","that"}
-REL_ADV  = {"where","when","why","how"}
-VERB_AUX = {  # 관계사 뒤 이게 오면 관계사절에 주어가 없음 → 관계사는 주격
+VERB_AUX = {  # 관계사 뒤 이게 오면 절에 주어가 없음 → 주격
     "is","are","was","were","be","been","being","am","'s","'re",
     "has","have","had","'ve","do","does","did",
     "can","could","will","would","shall","should","may","might","must",
 }
+REL_PRON = {"who","whom","which","that"}
+REL_ADV  = {"where","when","why","how"}
+
+def _found(term, raw):
+    """term 이 raw(영어)에 단어경계 지켜 존재하나(형광펜 렌더러와 동일 기준)."""
+    t=(term or "").strip()
+    if not t: return True
+    l = r"(?<![A-Za-z])" if t[:1].isalpha() else ""
+    r = r"(?![A-Za-z])" if t[-1:].isalpha() else ""
+    return re.search(l+re.escape(t)+r, raw, re.I) is not None
 
 def _tokens_after(raw, marker, start=0):
     m = re.search(r'(?<![A-Za-z])'+re.escape(marker)+r'(?![A-Za-z])', raw[start:], re.I)
-    if not m: return None, None
-    end = start + m.end()
-    toks = re.findall(r"[A-Za-z][A-Za-z'\-]*", raw[end:])
-    return toks, end
+    if not m: return None
+    toks = re.findall(r"[A-Za-z][A-Za-z'\-]*", raw[start+m.end():])
+    return toks
 
 def _first(toks):
     return (toks[0].lower() if toks else "")
 
 def derive_rel_case(raw, marker, antecedent=""):
-    """관계대명사 격 추정: '목적격'|'주격'|'' (관계부사/소유격/불확실)."""
+    """관계대명사 격 추정: '목적격'|'주격'|'' (관계부사/소유격/전치사+관대/불확실은 '')."""
     mk = marker.strip().lower()
     if mk == "whom": return "목적격"
-    if mk == "whose": return ""      # 소유격
-    if mk in REL_ADV: return ""       # 관계부사
-    if " " in mk: return ""           # 전치사+관계대명사 등
+    if mk == "whose": return ""
+    if mk in REL_ADV: return ""
+    if " " in mk: return ""
     if mk not in REL_PRON: return ""
-    # 선행사 뒤에서 관계사 찾기(정확한 위치 앵커)
     start = 0
     if antecedent:
         am = re.search(re.escape(antecedent), raw, re.I)
         if am: start = am.start()
-    toks, _ = _tokens_after(raw, marker, start)
-    if toks is None:
-        toks, _ = _tokens_after(raw, marker, 0)
+    toks = _tokens_after(raw, marker, start)
+    if toks is None: toks = _tokens_after(raw, marker, 0)
     nxt = _first(toks)
     if not nxt: return ""
-    # 고신뢰만 판정: 주어시작어→목적격, 조동사/be/do→주격. 그 외(맨명사 등)는 판정보류('')
     if nxt in SUBJ_START: return "목적격"
     if nxt in VERB_AUX:   return "주격"
     return ""
 
 def check_passages(P):
-    """P: [passage dict]. 반환: (errors, warns) 문자열 리스트."""
     errors=[]; warns=[]
     for d in P:
         it=d.get("item_no","?").strip()
         for s in d["sentences"]:
             raw=s["english"]; sid=s["id"]
             for g in s.get("grammar",[]):
-                tag=g.get("tag","") or ""; spans=g.get("spans") or []
+                tag=g.get("tag","") or ""
+                spans=g.get("spans") or []
                 ante=(g.get("antecedent") or "").strip()
                 role=(g.get("role") or "").strip()
-                is_rel = "관계" in tag
-                is_omit = "생략" in tag
-                is_noun = ("명사절" in tag) or ("that절" in tag) or ("간접의문" in tag)
                 loc=f"{it} S{sid} {tag!r}"
-                # 구조 검증
-                if is_rel and not is_omit and "what" not in tag.lower():
+                is_rel   = "관계" in tag
+                is_omit  = "생략" in tag
+                is_what  = "what" in tag.lower()
+                is_reladv= "관계부사" in tag
+                is_prep  = "전치사+관계" in tag
+                is_noun  = ("명사절" in tag) or ("that절" in tag) or ("간접의문" in tag)
+                is_appos = "동격" in tag
+
+                # 1) span 이 영어에 실재하는가(형광펜 실패 방지)
+                for sp in spans:
+                    if str(sp).strip() and not _found(sp, raw):
+                        errors.append(f"{loc}: span {sp!r} 이 문장 영어에 없음 → 형광펜 실패")
+                # 2) 형광펜 표시 안 됨(경고)
+                if not [sp for sp in spans if str(sp).strip()]:
+                    warns.append(f"{loc}: spans 비어 있음 → 형광펜 표시 안 됨")
+                # 1') 선행사가 영어에 실재하는가
+                if ante and not _found(ante, raw):
+                    errors.append(f"{loc}: 선행사 {ante!r} 이 문장 영어에 없음")
+
+                # 3) 관계사 선행사 필요(what·계속적 절부연 제외는 경고)
+                if is_rel and not is_what:
                     if not ante:
-                        warns.append(f"{loc}: 관계사인데 antecedent 없음")
-                if is_noun and not role:
-                    warns.append(f"{loc}: 명사절인데 role 없음")
-                # 주격 생략 불가
-                if is_omit and "주격" in tag:
-                    errors.append(f"{loc}: '주격' 관계대명사 생략은 불가(주격은 생략 못함)")
-                # 생략: 선행사 뒤에 주어가 와야 목적격 관대/관계부사 생략이 성립
-                if is_omit and ("목적격" in tag or "관계대명사" in tag):
-                    toks,_=_tokens_after(raw, ante or (spans[0] if spans else ""), 0)
-                    nxt=_first(toks)
-                    if nxt in VERB_AUX:  # 선행사 뒤 바로 동사 → 목적격 생략 아님(주격/다른 구조)
-                        errors.append(f"{loc}: 목적격 관대 생략인데 선행사 뒤가 동사({nxt!r}) → 생략 성립 안 함")
-                # 관계대명사 격 검증
-                if is_rel and not is_omit and spans:
+                        # 주격/목적격/전치사+관대/관계부사/생략형은 선행사가 있어야 함
+                        if any(k in tag for k in ("주격","목적격","전치사+관계","관계부사")) or is_omit:
+                            errors.append(f"{loc}: 관계사인데 선행사(antecedent) 없음")
+                        else:
+                            warns.append(f"{loc}: 관계사인데 선행사(antecedent) 없음")
+
+                # 4) 명사절/간접의문은 role 필요, 동격은 role 권장 아님(명사구 동격 존재).
+                #    명사절·동격 모두 antecedent 는 금지(관계사와 혼동 방지).
+                if is_noun and not is_rel and not role:
+                    warns.append(f"{loc}: 명사절/간접의문인데 role(역할) 없음")
+                if (is_noun or is_appos) and not is_rel and ante:
+                    errors.append(f"{loc}: 명사절/동격에 선행사가 있음 → 관계사와 혼동")
+
+                # 5) 관계대명사 주격/목적격 혼동
+                if is_rel and not is_omit and not is_what and not is_prep and not is_reladv and spans:
                     mk=str(spans[0]).strip()
                     derived=derive_rel_case(raw, mk, ante)
                     if derived:
                         if "목적격" in tag and derived=="주격":
-                            errors.append(f"{loc}: 태그는 목적격인데 구조상 주격(rel {mk!r} 뒤=동사)")
+                            errors.append(f"{loc}: 태그=목적격인데 구조상 주격(rel {mk!r} 뒤=동사)")
                         if "주격" in tag and derived=="목적격":
-                            errors.append(f"{loc}: 태그는 주격인데 구조상 목적격(rel {mk!r} 뒤=주어)")
-                        if mk.lower()=="whom" and "주격" in tag:
-                            errors.append(f"{loc}: whom은 목적격")
+                            errors.append(f"{loc}: 태그=주격인데 구조상 목적격(rel {mk!r} 뒤=새 주어)")
+                    if mk.lower()=="whom" and "주격" in tag:
+                        errors.append(f"{loc}: whom 은 목적격")
+
+                # 6) 불가능한/부정합 생략
+                if is_omit and "주격" in tag:
+                    errors.append(f"{loc}: '주격 관계대명사 생략'은 불가(주격은 생략 못함)")
+                if is_omit and ("목적격" in tag):
+                    toks=_tokens_after(raw, ante or (spans[0] if spans else ""), 0)
+                    nxt=_first(toks or [])
+                    if nxt in VERB_AUX:
+                        errors.append(f"{loc}: 목적격 관대 생략인데 선행사 뒤가 동사({nxt!r}) → 생략 성립 안 함")
     return errors, warns
 
 if __name__=="__main__":
