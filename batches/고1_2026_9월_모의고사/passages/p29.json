@@ -92,10 +92,10 @@
    "english": "To understand how breathing affects athletic performance, we first need to understand how the body makes energy from air and food.",
    "translation": "호흡이 운동 수행에 어떻게 영향을 미치는지 이해하기 위해, 우리는 먼저 몸이 공기와 음식으로부터 에너지를 어떻게 만드는지 이해할 필요가 있다.",
    "grammar": [
-    {"tag": "to부정사 부사적 용법(목적)", "note": "'~하기 위해' 목적을 나타내는 부사적 to부정사", "spans": ["To understand"]},
-    {"tag": "의문사절(간접의문문)", "note": "how이 이끄는 명사절이 첫 understand의 목적어", "role": "understand의 목적어절", "spans": ["how"]},
-    {"tag": "need+to부정사", "note": "need to-V: ~할 필요가 있다", "spans": ["to understand"]},
-    {"tag": "의문사절(간접의문문)", "note": "how이 이끄는 명사절이 뒤 understand의 목적어", "role": "understand의 목적어절", "spans": ["how"]}
+    {"tag": "to부정사 부사적 용법(목적)", "note": "'~하기 위해' 목적을 나타내는 부사적 to부정사", "spans": ["To understand how breathing"]},
+    {"tag": "의문사절(간접의문문)", "note": "how이 이끄는 명사절이 첫 understand의 목적어", "role": "understand의 목적어절", "spans": ["how breathing"]},
+    {"tag": "need+to부정사", "note": "need to-V: ~할 필요가 있다", "spans": ["need to understand"]},
+    {"tag": "의문사절(간접의문문)", "note": "how이 이끄는 명사절이 뒤 understand의 목적어", "role": "understand의 목적어절", "spans": ["how the"]}
    ],
    "vocab": [
     {"word": "affect", "meaning": "영향을 미치다"},
@@ -163,9 +163,7 @@
     {"en": "and it's quicker and easier", "ko": "그리고 그것은 더 빠르고 더 쉽다"},
     {"en": "[[for our bodies to access.]]", "ko": "[[우리 몸이 이용하기에.]]"}
    ],
-   "misreads": [
-    {"statement": "포도당은 우리 몸에 가장 건강한 에너지원이라고 언급된다.", "verdict": "X", "trap_type": "무관정보", "anchor": "generated only with glucose (a simple sugar)", "why": "포도당은 무산소 에너지의 재료일 뿐 가장 건강한 원천이라는 언급은 없다"}
-   ],
+   "misreads": [],
    "mistips": []
   },
   {

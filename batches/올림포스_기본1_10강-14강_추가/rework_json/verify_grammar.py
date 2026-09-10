@@ -92,6 +92,15 @@ def check_passages(P):
                 for sp in spans:
                     if str(sp).strip() and not _found(sp, raw):
                         errors.append(f"{loc}: span {sp!r} 이 문장 영어에 없음 → 형광펜 실패")
+                # 1'') 단일 span 위치 모호(여러 번 등장) → 형광펜 오배치 위험(선행사·복수 span 은 코드가 위치 특정하므로 예외)
+                _ne=[str(sp).strip() for sp in spans if str(sp).strip()]
+                if len(_ne)==1 and not ante:
+                    e=_ne[0]
+                    l=r"(?<![A-Za-z])" if e[:1].isalpha() else ""
+                    r=r"(?![A-Za-z])" if e[-1:].isalpha() else ""
+                    n=len(re.findall(l+re.escape(e)+r, raw, re.I))
+                    if n>1:
+                        errors.append(f"{loc}: 단일 span {e!r} 이 문장에 {n}번 등장(위치 모호) → span 을 유일하게(앞뒤 한 단어 포함 등)")
                 # 2) 형광펜 표시 안 됨(경고)
                 if not [sp for sp in spans if str(sp).strip()]:
                     warns.append(f"{loc}: spans 비어 있음 → 형광펜 표시 안 됨")

@@ -206,8 +206,7 @@
         {"en": "are able to do it.", "ko": "그것을 할 수 있을 정도이다."}
       ],
       "misreads": [
-        {"statement": "so complicated that only the T-1000 Terminators ~에서 that절은 앞의 conscious를 수식하는 관계절이다.", "verdict": "X", "trap_type": "구조수식", "anchor": "so complicated that only the T-1000 Terminators of our imagination are able to do it", "why": "so ~ that의 결과 부사절이지 conscious를 수식하는 관계절이 아님."},
-        {"statement": "달리기의 복잡성 때문에 실제 로봇 T-1000이 인간을 대신해 달리기 훈련에 이용된다.", "verdict": "X", "trap_type": "무관정보", "anchor": "the T-1000 Terminators of our imagination", "why": "of our imagination(상상 속)일 뿐 실제 로봇 이용은 지문에 없는 무관 정보."}
+        {"statement": "so complicated that only the T-1000 Terminators ~에서 that절은 앞의 conscious를 수식하는 관계절이다.", "verdict": "X", "trap_type": "구조수식", "anchor": "so complicated that only the T-1000 Terminators of our imagination are able to do it", "why": "so ~ that의 결과 부사절이지 conscious를 수식하는 관계절이 아님."}
       ],
       "mistips": ["not all conscious: 부분부정으로 '전부 의식되는 것은 아니다'(전혀 아니다가 아님)."]
     },

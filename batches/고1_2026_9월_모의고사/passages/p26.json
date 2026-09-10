@@ -420,7 +420,7 @@
      "tag": "등위접속사 and(동사 병렬)",
      "note": "returned와 earned를 연결한다.",
      "spans": [
-      "and"
+      "and earned"
      ]
     },
     {
@@ -632,16 +632,7 @@
      "ko": "그리고 백 편이 넘는 학술 논문도"
     }
    ],
-   "misreads": [
-    {
-     "statement": "그는 평생 학술 논문을 먼저 출간한 뒤에 책을 썼다.",
-     "verdict": "X",
-     "trap_type": "무관정보",
-     "anchor": "he wrote more than ten books and over a hundred academic papers",
-     "why": "책과 논문의 집필 순서는 본문에 언급되지 않는다.",
-     "english": false
-    }
-   ],
+   "misreads": [],
    "mistips": []
   },
   {

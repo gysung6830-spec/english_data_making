@@ -246,7 +246,7 @@
      "tag": "전치사+동명사",
      "note": "Instead of moving, 전치사 of 뒤 동명사",
      "spans": [
-      "moving"
+      "of moving"
      ]
     },
     {
@@ -412,13 +412,6 @@
     {
      "statement": "오늘날 많은 아이들이 폰·태블릿 같은 '스마트' 기기에 사로잡혀 있다.",
      "verdict": "O"
-    },
-    {
-     "statement": "아이들은 스마트 기기 때문에 시력이 점점 나빠지고 있다.",
-     "verdict": "X",
-     "trap_type": "무관정보",
-     "anchor": "being held captive by 'smart' devices",
-     "why": "본문은 시력 문제를 언급하지 않으며, 기기에 사로잡혀 밖에서 놀지 못한다고만 말한다."
     }
    ],
    "mistips": []

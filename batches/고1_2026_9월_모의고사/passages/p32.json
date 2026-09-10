@@ -131,9 +131,7 @@
        {"en":"especially if you've ever felt","ko":"특히 당신이 ~ 느껴 본 적이 있다면"},
        {"en":"overwhelmed by anger, fear, or sadness.","ko":"분노, 두려움, 슬픔에 [[압도되어]]."}
      ],
-     "misreads": [
-       {"statement":"글쓴이는 분노·두려움·슬픔 같은 감정이 질병을 유발한다고 경고한다.","verdict":"X","trap_type":"무관정보","anchor":"if you've ever felt overwhelmed by anger, fear, or sadness","why":"감정에 압도된 경험을 언급했을 뿐 질병을 유발한다는 내용은 없다."}
-     ],
+     "misreads": [],
      "mistips": []
    },
    {
@@ -267,7 +265,7 @@
      "id": 8,
      "english": "Change the judgment, and you change the emotion.",
      "grammar": [
-       {"tag":"명령문(동사원형)","note":"주어 없이 동사원형으로 시작하는 명령문","spans":["Change"]},
+       {"tag":"명령문(동사원형)","note":"주어 없이 동사원형으로 시작하는 명령문","spans":["Change the judgment"]},
        {"tag":"명령문 + and(~하라, 그러면)","note":"'명령문, and ...'은 '~하면 …한다'","spans":["and"]}
      ],
      "vocab": [

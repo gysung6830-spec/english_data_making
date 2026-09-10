@@ -150,7 +150,7 @@
      "translation": "나는 받아들여지고 있는가, 아니면 나는 밀려나고 있는가?",
      "grammar": [
        {"tag":"진행 수동태(be being p.p.)","note":"'받아들여지고/밀려나고 있는 중'","spans":["being accepted","being pushed"]},
-       {"tag":"의문문 어순(도치)","note":"be동사가 주어 앞으로 나온 의문문","spans":["Am I"]}
+       {"tag":"의문문 어순(도치)","note":"be동사가 주어 앞으로 나온 의문문","spans":["Am I being accepted"]}
      ],
      "vocab": [
        {"word":"push out","meaning":"밀어내다, 배제하다"}
@@ -190,7 +190,7 @@
      "english": "With such a high value for survival closely tied with relationships, it makes sense that the way we mobilize our internal resources around relationships would be highly networked in our brain and body.",
      "translation": "생존에 대한 그토록 높은 가치가 관계와 밀접히 결부된 채로, 우리가 관계를 중심으로 우리의 내적 자원을 동원하는 방식이 우리의 뇌와 몸에서 고도로 연결망을 이룰 것이라는 것은 이치에 맞다.",
      "grammar": [
-       {"tag":"전치사 With(부대상황)","note":"'~한 채로, ~해서'","spans":["With"]},
+       {"tag":"전치사 With(부대상황)","note":"'~한 채로, ~해서'","spans":["With such"]},
        {"tag":"과거분사 형용사적 용법(후치수식)","note":"value를 뒤에서 꾸밈('결부된')","spans":["tied"]},
        {"tag":"가주어-진주어(it ~ that)","note":"it은 가주어, that절이 진주어","spans":["it","that"]},
        {"tag":"관계부사 the way(방법)","note":"the way (that) we mobilize ~ '~하는 방식'","antecedent":"the way","spans":["the way"]}

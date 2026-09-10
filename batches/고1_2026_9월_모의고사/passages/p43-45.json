@@ -166,8 +166,7 @@
         {"en": "and put him in a shiny golden cage.", "ko": "그리고 그를 반짝이는 금빛 새장에 [[넣었다]]"}
       ],
       "misreads": [
-        {"statement": "상인은 Tuti를 아껴서 반짝이는 금빛 새장에 넣었다.", "verdict": "O", "trap_type": "주체대상"},
-        {"statement": "상인은 Tuti만을 위해 금빛 새장을 특별히 주문 제작해 선물했다.", "verdict": "X", "trap_type": "무관정보", "anchor": "put him in a shiny golden cage", "why": "그를 금빛 새장에 넣었을 뿐, 주문 제작했다는 내용은 없다."}
+        {"statement": "상인은 Tuti를 아껴서 반짝이는 금빛 새장에 넣었다.", "verdict": "O", "trap_type": "주체대상"}
       ],
       "mistips": ["put은 과거형도 put이므로 앞의 loved와 함께 과거시제로 읽는다."]
     },
@@ -287,7 +286,7 @@
       "grammar": [
         {"tag": "전치사구 At the end of", "note": "'~이 끝날 무렵'의 시간 표현", "spans": ["At the end of"]},
         {"tag": "과거시제 병렬", "note": "found와 repeated가 and로 연결된 과거", "spans": ["found", "repeated"]},
-        {"tag": "소유격 Tuti's", "note": "Tuti's exact words, '-'s로 소유 표시", "spans": ["Tuti's"]}
+        {"tag": "소유격 Tuti's", "note": "Tuti's exact words, '-'s로 소유 표시", "spans": ["Tuti's exact"]}
       ],
       "vocab": [
         {"word": "at the end of", "meaning": "~이 끝날 무렵에"},

@@ -293,13 +293,6 @@
      "statement": "필자는 긍정적·부정적 생각 모두 그에 상응하는 결과를 낳을 수 있다고 본다.",
      "verdict": "O",
      "trap_type": "인과조건"
-    },
-    {
-     "statement": "이 글은 끌어당김의 법칙이 언제 처음 제안되었는지 그 역사적 기원을 설명한다.",
-     "verdict": "X",
-     "trap_type": "무관정보",
-     "anchor": "Perhaps you have heard of the Law of Attraction",
-     "why": "법칙의 기원·역사는 언급되지 않고 그 내용만 소개함."
     }
    ],
    "mistips": [
@@ -662,7 +655,7 @@
      "note": "what+명사로 '어떤 ~인지'의 명사절",
      "role": "Consider의 목적어절('어떤 제한적 신념인지')",
      "spans": [
-      "what"
+      "what limiting"
      ]
     },
     {

@@ -217,7 +217,7 @@
      "note": "'how+주어+동사'가 전치사 for의 목적어인 명사절을 이끎",
      "role": "전치사 for의 목적어절",
      "spans": [
-      "how"
+      "for how"
      ]
     },
     {
@@ -225,7 +225,7 @@
      "note": "선행사를 포함하여 '~하는 것'이라는 명사절을 이끎",
      "role": "'~하는 것'(선행사 포함 명사절); be동사의 보어절",
      "spans": [
-      "what"
+      "what they"
      ]
     },
     {
@@ -506,16 +506,6 @@
      "trap_type": "구조수식",
      "anchor": "thoroughly brush their dog every day but keep the baths down to once or twice a week at most",
      "why": "'매일'은 빗질에 해당하며 목욕은 주 1~2회로 제한하라고 했다."
-    },
-    {
-     "statement": "필자는 개 냄새가 걱정되면 매일 목욕시키는 것이 최선이라고 본다.",
-     "verdict": "X",
-     "trap_type": "필자관점",
-     "anchor": "keep the baths down to once or twice a week at most",
-     "why": "필자는 목욕을 주 1~2회로 줄이라고 권하므로, 매일 목욕이 최선이라는 것은 필자 관점과 반대다.",
-     "killer": false,
-     "english": false,
-     "integrative": false
     }
    ],
    "mistips": [

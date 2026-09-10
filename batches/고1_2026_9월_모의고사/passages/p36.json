@@ -279,8 +279,8 @@
       "english": "It seems that even the idea that something might be spoiled by mathematics is enough to scare off potential solvers!",
       "translation": "무언가가 수학에 의해 망쳐질지도 모른다는 그 생각조차도 잠재적인 풀이자들을 겁주어 쫓아내기에 충분한 것처럼 보인다!",
       "grammar": [
-        {"tag": "명사절 접속사 that", "note": "It seems that ~ 구문에서 진주어절을 이끎", "role": "It seems의 진주어절", "spans": ["that"]},
-        {"tag": "동격 that", "note": "the idea의 구체적 내용을 설명하는 동격절을 이끎", "role": "the idea와 동격절", "spans": ["that"]},
+        {"tag": "명사절 접속사 that", "note": "It seems that ~ 구문에서 진주어절을 이끎", "role": "It seems의 진주어절", "spans": ["seems that"]},
+        {"tag": "동격 that", "note": "the idea의 구체적 내용을 설명하는 동격절을 이끎", "role": "the idea와 동격절", "spans": ["idea that"]},
         {"tag": "조동사+수동태(might be p.p.)", "note": "'망쳐질지도 모른다'는 추측+수동", "spans": ["be spoiled"]},
         {"tag": "to부정사(enough to)", "note": "'~하기에 충분한'이라는 부사적 용법", "spans": ["to scare"]}
       ],
@@ -335,7 +335,7 @@
       "translation": "만약 당신이 스도쿠를 할 수 있다면, 당신은 수학을 할 수 있다!",
       "grammar": [
         {"tag": "부사절 접속사 If", "note": "조건을 나타내는 부사절을 이끎", "spans": ["If"]},
-        {"tag": "조동사 can", "note": "'~할 수 있다'는 능력·가능을 나타냄", "spans": ["can"]}
+        {"tag": "조동사 can", "note": "'~할 수 있다'는 능력·가능을 나타냄", "spans": ["can do Sudoku"]}
       ],
       "vocab": [
         {"word": "maths", "meaning": "수학(=math)"},

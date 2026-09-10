@@ -338,7 +338,7 @@
       "translation": "이것은 속어가 한때 그 성장을 제한했던 경제적·사회적 장벽을 더 자연스럽게 넘어설 수 있음을 의미한다.",
       "grammar": [
         {"tag": "지시대명사 This", "note": "앞 문장 전체 내용을 받음", "spans": ["This"]},
-        {"tag": "명사절 접속사 that", "note": "means의 목적어절을 이끎", "role": "means의 목적어절", "spans": ["that"]},
+        {"tag": "명사절 접속사 that", "note": "means의 목적어절을 이끎", "role": "means의 목적어절", "spans": ["means that"]},
         {"tag": "조동사 can", "note": "가능 '~할 수 있다'", "spans": ["can"]},
         {"tag": "주격 관계대명사 that", "note": "barriers that once limited, 주격 관계대명사", "antecedent": "the economic and social barriers", "spans": ["that"]}
       ],
@@ -365,7 +365,7 @@
       "translation": "이전에 우리를 지리적으로 연결하던 느슨한 사회적 관계망은 온라인에서 그저 더 강할 뿐이고, 밈은 이제 빠른 속도로 전달된다.",
       "grammar": [
         {"tag": "주격 관계대명사 that", "note": "networks that previously connected, 주격 관계대명사", "antecedent": "The loose social networks", "spans": ["that"]},
-        {"tag": "주어-동사 수일치", "note": "복수주어 The loose social networks → are", "spans": ["are"]},
+        {"tag": "주어-동사 수일치", "note": "복수주어 The loose social networks → are", "spans": ["are simply"]},
         {"tag": "수동태", "note": "memes are transmitted, be+p.p. '전달되다'", "spans": ["transmitted"]},
         {"tag": "등위접속사 and", "note": "두 절을 대등하게 연결", "spans": ["and"]}
       ],

@@ -209,7 +209,7 @@
      "tag": "there is/are 구문(유도부사)",
      "note": "there was 뒤에 실제 주어가 옴",
      "spans": [
-      "there was"
+      "there was the"
      ]
     },
     {
@@ -305,7 +305,7 @@
      "tag": "등위접속사(A and B)",
      "note": "families and friends, school and work를 대등하게 연결",
      "spans": [
-      "and"
+      "and friends"
      ]
     }
    ],
@@ -401,15 +401,7 @@
      "ko": "하지만 누가 [[신경 쓰겠는가]]?"
     }
    ],
-   "misreads": [
-    {
-     "statement": "글쓴이는 사과 파이가 그 마을을 대표하는 가장 유명한 음식이라고 설명한다.",
-     "verdict": "X",
-     "trap_type": "무관정보",
-     "anchor": "A village develops a particular recipe for an apple pie",
-     "why": "사과 파이는 취향이 사람 따라 형성되는 한 예시일 뿐 대표 음식이라는 언급은 없다."
-    }
-   ],
+   "misreads": [],
    "mistips": []
   },
   {

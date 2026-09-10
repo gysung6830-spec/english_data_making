@@ -318,7 +318,7 @@
      "tag": "현재진행형",
      "note": "are (not) creating, 진행 중인 상황 강조",
      "spans": [
-      "creating"
+      "not creating"
      ]
     },
     {
@@ -504,7 +504,7 @@
      "tag": "조동사 should",
      "note": "should be, '~여야 한다(당위)'",
      "spans": [
-      "should be"
+      "should be engaging"
      ]
     },
     {
@@ -771,7 +771,7 @@
      "tag": "동명사 주어",
      "note": "making sure ...가 주어, 단수 취급 → is",
      "spans": [
-      "making"
+      "making sure the"
      ]
     },
     {

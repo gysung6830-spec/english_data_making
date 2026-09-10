@@ -290,7 +290,7 @@
      "tag": "부사절(시간·조건 When)",
      "note": "When ~ 상황을 나타내는 부사절.",
      "spans": [
-      "When"
+      "When we"
      ]
     },
     {
@@ -723,16 +723,7 @@
      "ko": "[[계획하기]]가 전부다'"
     }
    ],
-   "misreads": [
-    {
-     "statement": "아이젠하워는 대통령 재임 시절 전쟁을 겪으며 이 말을 남겼다고 본문은 설명한다.",
-     "verdict": "X",
-     "trap_type": "무관정보",
-     "anchor": "American president Eisenhower once said",
-     "why": "발언한 시기·배경은 본문에 언급되지 않는다.",
-     "english": false
-    }
-   ],
+   "misreads": [],
    "mistips": []
   },
   {
@@ -881,7 +872,7 @@
      "note": "~하는 것, 명사절을 이끈다.",
      "role": "'~하는 것'(선행사 포함 명사절, 주어절)",
      "spans": [
-      "what"
+      "what we write"
      ]
     },
     {

@@ -182,9 +182,7 @@
     {"en": "in a narrow width,", "ko": "좁은 폭으로,"},
     {"en": "and the inches quickly add up.", "ko": "그리고 인치가 빠르게 [[쌓인다]]."}
    ],
-   "misreads": [
-    {"statement": "신문 문단이 두세 문장이어야 하는 이유는 인쇄 비용을 아끼기 위해서라고 설명된다.", "verdict": "X", "trap_type": "무관정보", "anchor": "newspaper type is set in a narrow width", "why": "좁은 폭 때문에 인치가 빨리 쌓여서일 뿐 인쇄 비용 언급은 없다"}
-   ],
+   "misreads": [],
    "mistips": []
   },
   {

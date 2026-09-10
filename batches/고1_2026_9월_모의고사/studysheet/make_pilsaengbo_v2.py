@@ -50,11 +50,41 @@ def parse_range(rg):
 def fmt_range(rg):
     s=re.sub(r"\s*[~–]\s*","-",str(rg or "").strip())
     return (s+"문장") if s else ""
+_KW_STOP={
+ "the","a","an","of","to","in","on","for","and","or","but","so","as","that","this","these","those",
+ "with","by","from","at","is","are","was","were","be","been","being","am","it","its","they","them",
+ "their","we","our","us","you","your","he","she","him","his","her","i","my","me","not","no","nor",
+ "than","rather","well","given","ton","tons","what","call","calls","called","such","more","most","very",
+ "too","also","about","into","onto","over","under","then","thus","here","there","which","who","whom",
+ "whose","when","where","why","how","if","because","while","although","though","each","every","some",
+ "any","all","both","either","neither","many","much","few","one","two","do","does","did","have","has",
+ "had","can","could","will","would","shall","should","may","might","must","up","out","off","down","away",
+ "again","just","only","even","still","yet","own","get","got","make","made","let","lot","kind","sort",
+}
+def _kw_tokens(text):
+    """영어 내용어 토큰(기능어·짧은 단어 제외)."""
+    return [w.lower() for w in re.findall(r"[A-Za-z][A-Za-z'\-]*", text or "")
+            if len(w)>2 and w.lower() not in _KW_STOP]
 def kw_map(p):
+    """핵심어(영어) 기준: 지문 전체에서 '반복되는 내용어'를 우선(주제 개념), 기능어·연결어구 제외.
+    각 문장에서 vocab 후보를 지문 빈도로 점수화해 상위 1~2개만."""
+    from collections import Counter
+    freq=Counter()
+    for s in p["sentences"]: freq.update(_kw_tokens(s.get("english","")))
     m={}
     for s in p["sentences"]:
-        ws=[v["word"] for v in s.get("vocab",[]) if v.get("word") and any(c.isascii() and c.isalpha() for c in v["word"])][:2]
-        if ws: m[s["id"]]=ws
+        cands=[]
+        for v in s.get("vocab",[]):
+            w=(v.get("word") or "").strip()
+            toks=_kw_tokens(w)
+            if not toks: continue                 # 순수 기능어·연결어구 → 제외
+            score=max(freq.get(t,0) for t in toks) # 지문 내 최다 반복 토큰 점수
+            cands.append((score, len(w), w))
+        if not cands: continue
+        cands.sort(key=lambda x:(-x[0], -x[1]))   # 반복 많은 것 → 긴 것 순
+        picks=[w for sc,_,w in cands if sc>=2][:2] # 2회 이상 반복(주제어) 우선
+        if not picks: picks=[cands[0][2]]         # 없으면 가장 내용어다운 1개
+        m[s["id"]]=picks
     return m
 
 # ---- 어법칩 형광펜(영어 원문) ----
@@ -66,6 +96,12 @@ def _span_is_antecedent(g, e):
     """생략형 관계사처럼 표지 span 이 곧 선행사 명사인 경우 → 보라 형광펜에서 제외(초록 선행사로만)."""
     a=(g.get("antecedent") or "").strip().lower()
     return bool(a) and e.lower() in a
+def _ante_anchor(g, raw):
+    """관계사 칩이면 선행사 뒤 위치에서 표지를 찾도록 시작 위치 반환(위치 모호성 방지)."""
+    a=(g.get("antecedent") or "").strip()
+    if not a: return 0
+    m=re.search(_bpat(a), raw, re.IGNORECASE)
+    return m.end() if m else 0
 def _hl_marks(s):
     """어법칩 spans → 형광펜 구간 목록(겹침 없음, 위치 오름차순).
     칩 안에서는 span을 왼→오 순차로 찾고(상관어구 both~and 등 순서 보존),
@@ -85,12 +121,12 @@ def _hl_marks(s):
             if free(st,en): return (st,en)
             start=st+1
     for g in s.get("grammar",[]):
-        pos=0
+        pos=_ante_anchor(g, raw)   # 관계사는 선행사 뒤에서 표지를 찾아 위치 모호성 제거
         for sp in (g.get("spans") or []):
             e=str(sp).strip()
             if not e: continue
             if _span_is_antecedent(g, e): continue  # 생략형 표지=선행사 → 보라 제외
-            hit=find_free(e, pos)          # 앞 span 뒤에서(순서 보존) 빈 구간
+            hit=find_free(e, pos)          # 선행사/앞 span 뒤에서(순서 보존) 빈 구간
             if hit is None: hit=find_free(e, 0)  # 없으면 문장 전체에서 빈 구간
             if hit is None: continue
             claim(*hit); pos=hit[1]
@@ -156,7 +192,7 @@ def _grammar_marks(s):
             if free(a,b): return (a,b)
             start=a+1
     for g in s.get("grammar",[]):        # 1) 어법 표지
-        pos=0
+        pos=_ante_anchor(g, raw)         # 관계사는 선행사 뒤에서 표지 탐색
         for sp in (g.get("spans") or []):
             e=str(sp).strip()
             if not e: continue
@@ -204,9 +240,21 @@ body{font-family:'NanumSquareRound',"Malgun Gothic",sans-serif; color:#22262b; f
 :root{--green:#2c6444;--green-d:#1f4d33;--green-bg:#e7f0ea;--green-soft:#eef5f0;
   --indigo:#575495;--indigo-bg:#ecebf4;--amber:#a9781f;--red:#a83c2c;--line:#d7ddd6;--sub:#5c636b;}
 .psg{break-before:page;} .psg:first-of-type{break-before:auto;}
-.p1{min-height:256mm; display:flex; flex-direction:column;}
+.p1{--ovsc:1; min-height:256mm; display:flex; flex-direction:column;}
 .p1body{flex:1 1 auto; display:flex; flex-direction:column;}
 .p1spacer{flex:1 1 0; min-height:4px;}
+/* 목차 1·2·3(원문·어휘·구조도) 한 페이지 보장: 지문별 --ovsc 로 폰트/여백 축소(shrink-to-fit) */
+.p1 .sec-t{font-size:calc(11pt*var(--ovsc));}
+.p1 .sec-d{font-size:calc(8pt*var(--ovsc));}
+.p1 .p-ti{font-size:calc(11pt*var(--ovsc));}
+.p1 .panel{padding:calc(7px*var(--ovsc)) calc(11px*var(--ovsc));}
+.p1 .orig{font-size:calc(9.8pt*var(--ovsc));}
+.p1 .voc{font-size:calc(9.1pt*var(--ovsc));}
+.p1 .flow td{font-size:calc(8.8pt*var(--ovsc)); padding:calc(4px*var(--ovsc)) calc(6px*var(--ovsc));}
+.p1 .flow .hd{font-size:calc(8.4pt*var(--ovsc));}
+.p1 .flow .kwrow{font-size:calc(8.4pt*var(--ovsc));}
+.p1 .flow .eg{font-size:calc(7.9pt*var(--ovsc));}
+.p1 .flow .stg .rg{font-size:calc(8pt*var(--ovsc));}
 .p-h{display:flex; align-items:baseline; gap:8px; border-bottom:2.5px solid var(--green); padding-bottom:4px; margin-bottom:6px;}
 .p-no{background:var(--green); color:#fff; font-weight:800; font-size:8.6pt; padding:1px 9px; border-radius:20px; white-space:nowrap;}
 .p-ti{font-size:11pt; font-weight:800; color:var(--green-d); line-height:1.35;}
@@ -303,10 +351,11 @@ def ordered_grammar(s):
     return [g for _,g in sorted(items, key=key)]
 
 # ---- 섹션별 렌더(복수지문은 섹션 묶음 단위로 지문1→지문2→… 반복) ----
-def render_overview(p, teacher):
-    """목차 1 원문 · 2 어휘 · 6 글의 구조도 (한 페이지, 세로 꽉 채움)."""
+def render_overview(p, teacher, scale=1.0):
+    """목차 1 원문 · 2 어휘 · 3 글의 구조도 — 항상 한 페이지(shrink-to-fit: scale 로 폰트·여백 축소)."""
     ov=p["overview"]; no=esc(p["item_no"].strip()); sents=p["sentences"]
-    h=['<div class="psg"><div class="p1">'+phead(p)+'<div class="p1body">']
+    st=f' style="--ovsc:{scale:.3f}"' if scale and scale<0.999 else ''
+    h=[f'<div class="psg"><div class="p1"{st}>'+phead(p)+'<div class="p1body">']
     h.append('<div class="sec">'+sec_head(1,"원문"))
     body=" ".join(f'<span class="sn">{s["id"]}</span>{esc(s["english"])}' for s in sents)
     h.append(f'<div class="panel orig">{body}</div></div>')
@@ -320,7 +369,7 @@ def render_overview(p, teacher):
             seen.add(w.lower()); rows.append(f'<div class="row"><span class="w">{esc(w)}</span> <span class="m">{esc(v.get("meaning",""))}</span></div>')
     h.append(f'<div class="panel voc">{"".join(rows)}</div></div>')
     h.append('<div class="p1spacer"></div>')
-    h.append('<div class="sec">'+sec_head(6,"글의 구조도 파악","핵심어(영어)를 단서로 각 단계 내용을 기호로 정리(→ ⇒ ↔ = + ↑↓)"))
+    h.append('<div class="sec">'+sec_head(3,"글의 구조도 파악","핵심어(영어)를 단서로 각 단계 내용을 기호로 정리(→ ⇒ ↔ = + ↑↓)"))
     km=kw_map(p); notes=NOTES.get(no) or NOTES.get(p["item_no"]) or []
     h.append('<div class="panel"><table class="flow"><tr>'
              '<td class="hd stg">단계 · 문장</td><td class="hd kwc">핵심어(영어)</td><td class="hd">내용 정리(기호 활용)</td></tr>')
@@ -346,7 +395,7 @@ def render_trans(p, teacher):
     """목차 3 해석 연습 — 영어 청크 / 끊어읽기 + 어법 형광펜, 한글 핵심 빈칸."""
     _desc=("영어에 / 끊어읽기 표시(정답) · 어법칩 형광펜 · 한글은 오역 위험 핵심 어구" if teacher
            else "영어에 직접 / 끊어읽기 표시하며 해석 · 한글 빈칸(오역 위험 핵심) 채우기")
-    h=['<div class="psg">'+phead(p)+'<div class="sec">'+sec_head(3,"해석 연습",_desc)+'<div class="panel">']
+    h=['<div class="psg">'+phead(p)+'<div class="sec">'+sec_head(4,"해석 연습",_desc)+'<div class="panel">']
     for s in p["sentences"]:
         h.append(f'<div class="s"><div class="en"><span class="n">{s["id"]}</span>{en_practice(s, teacher)}</div><div class="ko">{ko_line(s, teacher)}</div></div>')
     h.append('</div></div></div>')
@@ -354,7 +403,7 @@ def render_trans(p, teacher):
 
 def render_grammar(p, teacher):
     """목차 4 어법칩 — 문장에 나온 순서대로. 관계사는 선행사(꾸밈 대상), 명사절 접속사는 역할 표시."""
-    h=['<div class="psg">'+phead(p)+'<div class="sec">'+sec_head(4,"어법칩","문장 순서 · 형광펜=어법 표지 · 초록=관계사가 꾸미는 선행사 · 명사절 접속사는 역할 표시")+'<div class="panel">']
+    h=['<div class="psg">'+phead(p)+'<div class="sec">'+sec_head(5,"어법칩","문장 순서 · 형광펜=어법 표지 · 초록=관계사가 꾸미는 선행사 · 명사절 접속사는 역할 표시")+'<div class="panel">']
     for s in p["sentences"]:
         chips=ordered_grammar(s)
         if not chips: continue
@@ -379,7 +428,7 @@ def render_grammar(p, teacher):
 
 def render_ox(p, teacher):
     """목차 5 O/X/△ 내용 판단."""
-    h=['<div class="psg">'+phead(p)+'<div class="sec">'+sec_head(5,"O / X / △ 내용 판단","맞으면 O·틀리면 X·결론만 맞으면 △, X·△는 근거 고치기")+'<div class="panel">']
+    h=['<div class="psg">'+phead(p)+'<div class="sec">'+sec_head(6,"O / X / △ 내용 판단","맞으면 O·틀리면 X·결론만 맞으면 △, X·△는 근거 고치기")+'<div class="panel">']
     for s in p["sentences"]:
         ms=s.get("misreads",[])
         if not ms: continue
@@ -402,12 +451,36 @@ def render_ox(p, teacher):
     h.append('</div></div></div>')
     return "".join(h)
 
+import tempfile
+def _overview_pages(p, teacher, scale):
+    """지문 하나의 목차1·2·3(overview)만 렌더해서 페이지 수 측정."""
+    doc=f'<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><style>{CSS}</style></head><body>{render_overview(p, teacher, scale)}</body></html>'
+    fd,tmp=tempfile.mkstemp(suffix=".pdf"); os.close(fd)
+    try:
+        HTML(string=doc).write_pdf(tmp)
+        d=fitz.open(tmp); n=d.page_count; d.close()
+    finally:
+        try: os.remove(tmp)
+        except OSError: pass
+    return n
+_SCALES=[1.0,0.95,0.90,0.86,0.82,0.78,0.74,0.70,0.66,0.62,0.58,0.54,0.50]
+def _fit_scale(p, teacher):
+    """목차1·2·3 이 '한 페이지'에 들어오는 가장 큰 scale 을 찾는다(shrink-to-fit)."""
+    for sc in _SCALES:
+        if _overview_pages(p, teacher, sc)<=1:
+            return sc
+    return _SCALES[-1]
+
 def build(teacher, out):
+    scales={}
+    for p in P:
+        sc=_fit_scale(p, teacher); scales[p["item_no"]]=sc
+        if sc<1.0: print(f"  · {p['item_no'].strip()} overview scale={sc}")
     body=[]
-    for p in P: body.append(render_overview(p, teacher))   # 목차 1·2·6 (지문별 1페이지)
-    for p in P: body.append(render_trans(p, teacher))       # 목차 3 해석연습
-    for p in P: body.append(render_grammar(p, teacher))     # 목차 4 어법칩
-    for p in P: body.append(render_ox(p, teacher))          # 목차 5 O/X/△
+    for p in P: body.append(render_overview(p, teacher, scales[p["item_no"]]))  # 목차 1·2·3 (지문별 1페이지 보장)
+    for p in P: body.append(render_trans(p, teacher))       # 목차 4 해석연습
+    for p in P: body.append(render_grammar(p, teacher))     # 목차 5 어법칩
+    for p in P: body.append(render_ox(p, teacher))          # 목차 6 O/X/△
     doc=f'<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><style>{CSS}</style></head><body>{"".join(body)}</body></html>'
     HTML(string=doc).write_pdf(out)
     d=fitz.open(out); n=d.page_count; d.close(); return n

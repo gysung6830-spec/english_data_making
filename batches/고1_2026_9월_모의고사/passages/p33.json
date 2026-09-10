@@ -140,9 +140,7 @@
         {"en": "in the realism", "ko": "사실주의 속에"},
         {"en": "of ancient Greek sculpture and pottery.", "ko": "고대 그리스 조각과 도기의"}
       ],
-      "misreads": [
-        {"statement": "이 접근법은 고대 그리스의 조각과 도기뿐 아니라 건축의 사실주의에서도 나타난다.", "verdict": "X", "trap_type": "무관정보", "anchor": "in the realism of ancient Greek sculpture and pottery", "why": "건축(architecture)은 지문에 없는 무관 정보이며 조각·도기만 언급됨."}
-      ],
+      "misreads": [],
       "mistips": []
     },
     {
@@ -286,7 +284,7 @@
       "grammar": [
         {"tag": "동명사", "note": "succeeded at + 동명사 making", "spans": ["making"]},
         {"tag": "분사구문 (결과)", "note": "thus demonstrating: 앞 절 전체를 받아 결과를 나타냄", "spans": ["demonstrating"]},
-        {"tag": "명사절 접속사 that", "note": "demonstrating의 목적어절을 이끎", "role": "demonstrating의 목적어절", "spans": ["that"]},
+        {"tag": "명사절 접속사 that", "note": "demonstrating의 목적어절을 이끎", "role": "demonstrating의 목적어절", "spans": ["demonstrating that"]},
         {"tag": "주어-동사 수일치", "note": "단수 주어 the ancient Greek view에 does", "spans": ["does"]}
       ],
       "vocab": [
