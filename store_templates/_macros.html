@@ -3,6 +3,12 @@
   {% if p.badge %}<span class="badge">{{ p.badge }}</span>{% endif %}
   {% set pkg = package_map.get(p.package) %}
   {% if pkg %}<span class="pkg-tag pkg-{{ pkg.id }}">{{ pkg.name }}</span>{% endif %}
+  {# 지면 사진은 파는 PDF 의 세 쪽째입니다. 설명 열 줄보다 이게 낫습니다. #}
+  {% if p.shot %}
+    <a class="pc-shot" href="{{ url_for('product_detail', slug=p.slug) }}" tabindex="-1" aria-hidden="true">
+      <img src="{{ url_for('product_thumb_img', slug=p.slug) }}" alt="" loading="lazy">
+    </a>
+  {% endif %}
   <h3><a href="{{ url_for('product_detail', slug=p.slug) }}">{{ p.name }}</a></h3>
   <div class="sub">{{ p.subtitle }}</div>
   <div class="chips">

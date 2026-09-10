@@ -1491,6 +1491,15 @@ def free_notify():
     return redirect(back + "?ok=1")
 
 
+@app.route("/products/<slug>/thumb.webp")
+def product_thumb_img(slug):
+    """상품 타일에 거는 지면 사진 — 파는 PDF 의 세 쪽째입니다."""
+    thumb = sc.product_thumb(slug)
+    if thumb is None:
+        abort(404)
+    return send_from_directory(thumb.parent, thumb.name, max_age=86400 * 7)
+
+
 @app.route("/free/<slug>/cover.webp")
 def free_cover_img(slug):
     """미리보기 — 올린 PDF 의 첫 쪽입니다. 이메일을 받는 자료도 첫 쪽은 보입니다.
@@ -1802,14 +1811,26 @@ def words_page():
 
 @app.route("/study")
 def study_page():
-    """단어 학습 — 화면에서 바로 푸는 자리.
+    """학습 — 두 갈래만 보여 줍니다.
 
-    시험지 만들기(인쇄)와는 하는 일이 다릅니다. 뽑아서 푸는 것이 아니라
-    폰으로 그 자리에서 푸는 것이라, 같은 메뉴 안에 묻어 두면 아무도 못
-    찾습니다. 머리말 아이콘으로 따로 냅니다.
+    낱말이냐 문장이냐. 처음 들어온 학생에게 물어야 할 것은 그 하나뿐입니다.
+    교재 목록을 여기 늘어놓으면 무엇을 고르는 자리인지부터 흐려집니다.
     """
+    words = sc.load_words()
+    passages = sc.load_passages()
+    return render_template(
+        "study.html", kinds=STUDY_KINDS, levels=sc.BLANK_LEVELS,
+        word_books=len(words["books"]),
+        word_total=sum(sc.to_int(b.get("words_total"), 0) for b in words["books"]),
+        passage_books=len(passages["books"]),
+        passage_total=sum(sc.passage_count(b) for b in passages["books"]))
+
+
+@app.route("/study/words")
+def study_words():
+    """단어 학습 — 단어장 고르기. 화면에서 바로 푸는 자리입니다."""
     data = sc.load_words()
-    return render_template("study.html", books=data["books"],
+    return render_template("study_words.html", books=data["books"],
                            groups=sc.words_by_publisher(data["books"]),
                            kinds=STUDY_KINDS)
 
@@ -1819,11 +1840,42 @@ def study_page():
 # ---------------------------------------------------------------------------
 @app.route("/memorize")
 def memorize_page():
-    """지문 암기 — 교재 고르기."""
+    """지문 학습 — 자료 목록에서 지문을 찾습니다.
+
+    출판사로 가르는 것은 단어장 이야기였습니다. 지문은 '어느 자료의
+    지문인가' 로 찾는 것이 맞아서, 자료 목록과 같은 분류로 세웁니다.
+    """
     data = sc.load_passages()
-    return render_template("memorize.html", books=data["books"],
-                           groups=sc.words_by_publisher(data["books"]),
-                           levels=sc.BLANK_LEVELS)
+    q = sc.clean(request.args.get("q"), 60)
+    cat = sc.clean(request.args.get("category"), 20)
+
+    catalog = sc.load_catalog()
+    book_cat = {b.get("slug"): b.get("category", "") for b in catalog["books"]}
+    cats = [c for c in catalog.get("categories", [])]
+
+    books = data["books"]
+    if q:
+        needle = q.lower()
+        books = [b for b in books
+                 if needle in f"{b.get('name','')} {b.get('publisher','')} "
+                              f"{b.get('grade','')}".lower()]
+    if cat:
+        books = [b for b in books if book_cat.get(b.get("slug"), "") == cat]
+
+    groups = []
+    for c in cats:
+        mine = [b for b in books if book_cat.get(b.get("slug"), "") == c["id"]]
+        groups.append({"id": c["id"], "name": c.get("name", c["id"]),
+                       "books": mine, "count": len(mine)})
+    loose = [b for b in books if book_cat.get(b.get("slug"), "") not in
+             {c["id"] for c in cats}]
+    if loose:
+        groups.append({"id": "", "name": "그 밖의 교재", "books": loose,
+                       "count": len(loose)})
+
+    return render_template("memorize.html", books=books, groups=groups,
+                           cats=cats, category=cat, q=q,
+                           total=len(data["books"]), levels=sc.BLANK_LEVELS)
 
 
 @app.route("/memorize/<slug>")

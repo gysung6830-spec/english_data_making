@@ -939,9 +939,11 @@ def test_clear_sample_data():
         "price": "10000", "active": "1", "package": "analysis"})
     assert a.post("/admin/products/clear-samples").status_code == 302
 
-    left = sc.load_raw_catalog()["products"]
-    assert [p["slug"] for p in left] == ["my-real-product"]
-    assert not sc.load_raw_catalog()["books"]
+    # 예시만 없어지고 직접 만드신 것은 그대로여야 합니다
+    left = sc.load_raw_catalog()
+    assert "my-real-product" in {p["slug"] for p in left["products"]}
+    assert not [p for p in left["products"] if p.get("sample")]
+    assert not [b for b in left["books"] if b.get("sample")]
     # 예시가 없어지면 경고 상자도 사라집니다.
     assert "지금 사이트에 보이는 상품은 예시입니다" not in body(a.get("/admin"))
     print("PASS  예시 데이터 한 번에 지우기 (내 상품은 남김)")
@@ -1175,12 +1177,19 @@ def test_word_study_is_reachable_from_the_menu():
     for must in ("/cart", "/study", "/my"):                # 장바구니 · 단어 학습 · 자료함
         assert must in head, must
 
-    # 그 자리를 누르면 교재를 고르는 화면이 열립니다
+    # 그 자리를 누르면 물을 것 하나만 나옵니다 — 낱말이냐 문장이냐
     study = body(c.get("/study"))
-    for must in ("단어 학습", "지문 암기", "시험지 뽑기"):
-        assert must in study, must                     # 세 갈래를 맨 위에서 가름
+    for must in ("단어 학습", "지문 학습"):
+        assert must in study, must
+    # 교재 목록은 여기 늘어놓지 않습니다. 고르는 자리가 흐려집니다.
+    assert "/study/words" in study and "/memorize" in study
+    assert "wb-card" not in study
+    assert "시험지 뽑기" not in study                    # 그건 단어 시험지 쪽 일입니다
+
+    # 단어 학습을 눌러야 단어장이 나옵니다
+    picks = body(c.get("/study/words"))
     slug0 = sc.load_words()["books"][0]["slug"]
-    assert f"/words/{slug0}/study" in study, "책 카드가 바로 풀기로 가야 합니다"
+    assert f"/words/{slug0}/study" in picks, "책 카드가 바로 풀기로 가야 합니다"
 
     # 무엇을 어떻게 할지 먼저 고릅니다 — 뜻만 볼지, 철자까지 쓸지, 깜빡이로 훑을지
     setup = body(c.get(f"/words/{slug0}/study"))
@@ -1249,7 +1258,7 @@ def test_admin_pages_open():
         ("/admin/orders", "주문 · 문의"),
         ("/admin/submissions", "시험지 제출"),
         ("/admin/submissions", "쿠폰 목록"),        # 쿠폰은 시험지 화면으로 합쳤습니다
-        ("/admin/products", "새 상품 만들기"),
+        ("/admin/products", "끌어다 놓으세요"),
         ("/admin/books", "교재 · 분류"),
         ("/admin/sales", "월별 매출"),
         ("/admin/mail", "이메일 명단"),             # 명단은 메일 화면으로 합쳤습니다
@@ -3274,7 +3283,7 @@ def test_sample_wordbooks_are_enough_to_try_it():
     # 화면 두 곳에서 다 보이고, 실제로 풀립니다
     c = client()
     for b in books:
-        assert b["name"] in body(c.get("/study")), b["name"]
+        assert b["name"] in body(c.get("/study/words")), b["name"]
         assert b["name"] in body(c.get("/words")), b["name"]
         ids = [u["id"] for u in b["units"]]
         page = body(c.get(f"/words/{b['slug']}/study?kind=choice&"
@@ -3354,7 +3363,7 @@ def test_study_and_sheet_share_one_wordbook():
     assert "keen" in body(c.get(f"/words/{slug}/study?kind=spell&unit={new_id}&n=1"))
 
     # 단어 학습 목록과 시험지 목록에 같은 책이 서고, 서로 오갈 수 있습니다
-    for url in ("/study", "/words"):
+    for url in ("/study/words", "/words"):
         assert "shared word book" in body(c.get(url)), url
     assert 'href="/study"' in body(c.get("/words"))
     assert 'href="/words"' in body(c.get("/study"))
@@ -3761,6 +3770,159 @@ def test_free_shows_recent_paid_items_without_picking():
     page = body(client().get("/free/2026-07-goh1-oneline-ko"))
     assert picked[0]["name"][:20] in page
     print("PASS  함께 보여 줄 유료 자료는 최근 올린 것에서 자동으로")
+
+
+def _paged_pdf(text: str, pages: int = 9) -> bytes:
+    import fitz as pymupdf
+    doc = pymupdf.open()
+    for i in range(pages):
+        doc.new_page().insert_text((60, 80), f"{text} - page {i + 1}", fontsize=12)
+    out = doc.tobytes()
+    doc.close()
+    return out
+
+
+def test_product_upload_reads_the_filename():
+    """파는 PDF 도 끌어다 놓으면 상품이 되어야 합니다.
+
+    분류 · 교재 · 패키지 · 값을 하나씩 고르는 것은 회차마다 되풀이되는
+    일입니다. 이름에 이미 다 적혀 있으니 거기서 읽습니다.
+    """
+    # 분류는 사장님이 정하신 규칙 그대로입니다
+    assert sc.guess_product_category("능률 공통영어1 3강 지문분석지.pdf") == "textbook"
+    assert sc.guess_product_category("YBM 영어2 5강 워크북.pdf") == "textbook"
+    assert sc.guess_product_category("고1 2026년 9월 모의고사 지문분석지.pdf") == "mock"
+    assert sc.guess_product_category("2026 수능특강 영어 5강 변형문제.pdf") == "ebs"
+    # '수능특강' 은 교재 이름이지 시험 이름이 아닙니다
+    assert sc.guess_product_category("수능특강 영어독해연습 3강 필생보.pdf") == "ebs"
+
+    got = sc.read_product_name("능률(김성곤) 공통영어1 3강 지문분석지.pdf")
+    assert got["category"] == "textbook" and got["package"] == "analysis"
+    assert got["unit_no"] == 3 and got["material"] == "analysis"
+    # 'analysis' 는 자료 이름이자 패키지 이름이라, 주소에 'pack' 을 넣어 가릅니다
+    assert got["slug"] == "neungyule-kim-03-pack-analysis"
+    assert not got["missing"]
+
+    # 자료 이름을 길게 적은 쪽을 먼저 걷어내야 교재 이름이 온전합니다
+    assert sc.read_product_name("새책 2강 통합워크북.pdf")["book_name"] == "새책"
+
+    a = admin()
+    names = ["능률(김성곤) 공통영어1 3강 지문분석지.pdf", "능률(김성곤) 공통영어1 3강 필생보.pdf",
+             "능률(김성곤) 공통영어1 4강 지문분석지.pdf", "고1 2026년 9월 모의고사 지문분석지.pdf"]
+    resp = a.post("/admin/products/upload", data={
+        "files": [(io.BytesIO(_paged_pdf(n)), n) for n in names]},
+        content_type="multipart/form-data", follow_redirects=True)
+    assert resp.status_code == 200
+
+    cat = sc.load_raw_catalog()
+    by = {p["slug"]: p for p in cat["products"]}
+    three = by["neungyule-kim-03-pack-analysis"]
+    # 자료 1종만 놓아도 패키지가 되고, 다음 것을 놓으면 거기에 더해집니다
+    assert three["materials"] == ["analysis", "pilsaengbo"]
+    assert three["package"] == "analysis" and three["book"] == "neungyule-kim"
+    assert three["price"] > by["neungyule-kim-04-pack-analysis"]["price"]
+    assert not three.get("description")            # 설명은 안 받습니다
+
+    # 교재가 없으면 교재도 같이 만듭니다
+    books = {b["slug"]: b for b in cat["books"]}
+    assert "mock-2026-09-g1" in books
+    assert books["mock-2026-09-g1"]["category"] == "mock"
+
+    # 강이 둘 이상 쌓이면 전권 상품이 저절로
+    full = by.get("neungyule-kim-analysis-full")
+    assert full and set(full["covers"]) == {"neungyule-kim-03-pack-analysis",
+                                            "neungyule-kim-04-pack-analysis"}
+    assert full["price"] < full["list_price"]      # 낱개 합보다 싸야 뜻이 있습니다
+    print("PASS  상품 — PDF 를 놓으면 분류 · 교재 · 패키지 · 값까지 알아서")
+
+
+def test_product_upload_never_overwrites_a_hand_made_product():
+    """손으로 만드신 상품을 말없이 덮어쓰면 안 됩니다."""
+    a = admin()
+    a.post("/admin/products/new", data={
+        "slug": "sonmade-01-pack-analysis", "name": "손으로 만든 상품",
+        "book": "neungyule-kim", "package": "analysis", "price": "9900",
+        "passages": "6", "active": "1"}, follow_redirects=True)
+    before = sc.load_raw_catalog()
+    mine = next(p for p in before["products"] if p["slug"] == "sonmade-01-pack-analysis")
+    assert not mine.get("by_drop")
+
+    resp = a.post("/admin/products/upload", data={"files": [
+        (io.BytesIO(_paged_pdf("x")), "sonmade 1강 지문분석지.pdf")]},
+        content_type="multipart/form-data", follow_redirects=True)
+    page = body(resp)
+    assert "이미 쓰고 있는 주소" in page
+    after = next(p for p in sc.load_raw_catalog()["products"]
+                 if p["slug"] == "sonmade-01-pack-analysis")
+    assert after["name"] == "손으로 만든 상품" and after["price"] == 9900
+    print("PASS  손으로 만든 상품은 안 덮어씀")
+
+
+def test_sample_is_the_first_six_pages_and_the_shot_is_page_three():
+    """샘플도 지면 사진도 파는 PDF 에서 바로 뽑습니다."""
+    a = admin()
+    a.post("/admin/products/upload", data={"files": [
+        (io.BytesIO(_paged_pdf("샘플시험", 9)), "샘플교재 2강 17종 변형문제.pdf")]},
+        content_type="multipart/form-data", follow_redirects=True)
+    item = next(p for p in sc.load_raw_catalog()["products"]
+                if p["slug"].startswith("saempeulgyojae-02-pack"))
+
+    import fitz as pymupdf
+    smp = sc.SAMPLE_DIR / item["sample_file"]
+    assert smp.exists()
+    with pymupdf.open(smp) as doc:
+        assert doc.page_count == 6                  # 1~6쪽만
+        assert "page 1" in doc[0].get_text()
+        assert "page 6" in doc[-1].get_text()
+
+    shot = sc.product_thumb(item["slug"])
+    assert shot and shot.exists() and item.get("shot") is True
+    from PIL import Image
+    with Image.open(shot) as im:
+        assert im.width == sc.PRODUCT_THUMB_W
+        assert abs(im.height / im.width - 4 / 3) < 0.02      # 타일 줄이 가지런하게
+
+    c = client()
+    assert c.get(f"/products/{item['slug']}/thumb.webp").status_code == 200
+    page = body(c.get(f"/products/{item['slug']}"))
+    assert f"/products/{item['slug']}/thumb.webp" in page and "실제 지면입니다" in page
+
+    # 쪽수가 모자란 PDF 도 터지지 않아야 합니다
+    a.post("/admin/products/upload", data={"files": [
+        (io.BytesIO(_paged_pdf("짧은것", 2)), "짧은교재 1강 서술형.pdf")]},
+        content_type="multipart/form-data", follow_redirects=True)
+    short = next(p for p in sc.load_raw_catalog()["products"]
+                 if p["slug"].startswith("jjaleungyojae-01-pack"))
+    with pymupdf.open(sc.SAMPLE_DIR / short["sample_file"]) as doc:
+        assert doc.page_count == 2
+    assert sc.product_thumb(short["slug"]) is not None
+    print("PASS  샘플은 앞 여섯 쪽 · 지면 사진은 세 쪽째")
+
+
+def test_mock_books_run_newest_first():
+    """모의고사는 최근 회차가 맨 위, 부교재는 올린 차례대로입니다."""
+    order = ["2026-03", "2026-11", "2026-09"]
+    a = admin()
+    for ym in order:
+        y, m = ym.split("-")
+        name = f"고2 {y}년 {int(m)}월 학력평가 지문분석지.pdf"
+        a.post("/admin/products/upload", data={"files": [(io.BytesIO(_paged_pdf(name)), name)]},
+               content_type="multipart/form-data", follow_redirects=True)
+
+    books = [b for b in sc.load_catalog()["books"] if b.get("category") == "mock"]
+    stamps = [sc.exam_stamp(b) for b in books if sc.exam_stamp(b)]
+    assert stamps == sorted(stamps, reverse=True), [b["name"] for b in books]
+    # 글자로 세면 11월이 3월 뒤로 갑니다
+    names = [b["name"] for b in books]
+    assert names.index("2026년 11월 학력평가 (고2)") < names.index("2026년 3월 학력평가 (고2)")
+
+    # 부교재는 올린 차례 그대로 — 뒤에 올린 것이 뒤에 섭니다
+    for n in ("첫교재 1강 필생보.pdf", "둘째교재 1강 필생보.pdf"):
+        a.post("/admin/products/upload", data={"files": [(io.BytesIO(_paged_pdf(n)), n)]},
+               content_type="multipart/form-data", follow_redirects=True)
+    ebs = [b["name"] for b in sc.load_catalog()["books"] if b.get("category") == "ebs"]
+    assert ebs.index("첫교재") < ebs.index("둘째교재"), ebs
+    print("PASS  모의고사는 최근 회차 · 부교재는 올린 차례")
 
 
 def test_free_kind_suggests_email_gate():
@@ -6234,6 +6396,10 @@ def run_all():
     test_free_notify_collects_email()
     test_admin_creates_free_item_end_to_end()
     test_free_kind_suggests_email_gate()
+    test_product_upload_reads_the_filename()
+    test_product_upload_never_overwrites_a_hand_made_product()
+    test_sample_is_the_first_six_pages_and_the_shot_is_page_three()
+    test_mock_books_run_newest_first()
     test_free_upload_reads_the_filename_and_files_it()
     test_free_preview_is_the_first_page_of_the_pdf()
     test_free_list_puts_the_newest_round_first()

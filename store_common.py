@@ -17,6 +17,7 @@ import hashlib
 import json
 import os
 import re
+import hashlib
 import logging
 import secrets
 import shutil
@@ -394,6 +395,10 @@ def load_raw_catalog() -> dict:
     for key in ("categories", "packages", "books", "products"):
         catalog.setdefault(key, [])
     catalog["packages"] = sorted(catalog["packages"], key=lambda x: x.get("sort", 100))
+    # 교재 차례를 여기서 한 번에 잡습니다. 모의고사는 최근 회차가 맨 위,
+    # 나머지는 올리신 차례 그대로입니다. (파이썬 정렬은 같은 값끼리 순서를
+    # 흐트러뜨리지 않아서, 뒤에 붙인 것이 뒤에 남습니다)
+    catalog["books"] = sorted(catalog["books"], key=book_order_key)
     return catalog
 
 
@@ -419,10 +424,9 @@ def load_catalog() -> dict:
          if p.get("active", True) and p.get("slug") not in RETIRED_SLUGS],
         key=lambda p: (p.get("sort", 100), p.get("name", "")),
     )
-    catalog["books"] = sorted(
-        [b for b in catalog["books"] if b.get("active", True)],
-        key=lambda b: (b.get("sort", 100), b.get("name", "")),
-    )
+    # 교재 차례는 load_raw_catalog 에서 이미 잡아 두었습니다. 여기서 다시
+    # sort 로 세우면 모의고사 회차 차례가 도로 흐트러집니다.
+    catalog["books"] = [b for b in catalog["books"] if b.get("active", True)]
     return catalog
 
 
@@ -1522,6 +1526,178 @@ def books_with_counts(catalog: dict, category: str = "") -> list[dict]:
     return result
 
 
+# ---------------------------------------------------------------------------
+# 상품 파일 이름 읽기 — PDF 를 놓으면 분류·교재·패키지·값까지 알아서
+# ---------------------------------------------------------------------------
+# 한글은 주소에 못 씁니다. 그렇다고 뜻 없는 번호를 붙이면 검색에도 안 걸리고
+# 사장님도 못 알아보십니다. 소리 나는 대로 로마자로 옮겨 주소를 만듭니다.
+_CHO = ["g", "kk", "n", "d", "tt", "r", "m", "b", "pp", "s", "ss", "", "j", "jj",
+        "ch", "k", "t", "p", "h"]
+_JUNG = ["a", "ae", "ya", "yae", "eo", "e", "yeo", "ye", "o", "wa", "wae", "oe",
+         "yo", "u", "wo", "we", "wi", "yu", "eu", "ui", "i"]
+_JONG = ["", "k", "k", "k", "n", "n", "n", "t", "l", "l", "l", "l", "l", "l", "l",
+         "l", "m", "p", "p", "t", "t", "ng", "t", "t", "k", "t", "p", "t"]
+
+
+def romanize(text: str) -> str:
+    """한글을 소리 나는 대로 로마자로. 주소 이름을 만들 때만 씁니다."""
+    out = []
+    for ch in text or "":
+        code = ord(ch) - 0xAC00
+        if 0 <= code <= 11171:
+            out.append(_CHO[code // 588] + _JUNG[(code % 588) // 28] + _JONG[code % 28])
+        else:
+            out.append(ch)
+    return "".join(out)
+
+
+def slugify_ko(text: str, limit: int = 48) -> str:
+    """한글이 섞인 이름을 주소로 쓸 수 있는 모양으로."""
+    slug = re.sub(r"[^a-z0-9]+", "-", romanize(text or "").lower()).strip("-")
+    return slug[:limit].strip("-")
+
+
+# 분류를 가르는 말. 사장님이 정하신 규칙 그대로입니다.
+#   공통영어1 · 공통영어2 · 영어1 · 영어2 가 있으면 교과서
+#   학년 + 해·달 + 모의고사류가 있으면 모의고사
+#   나머지는 전부 부교재
+TEXTBOOK_SUBJECTS = ["공통영어1", "공통영어2", "영어1", "영어2"]
+MOCK_WORDS = ["모의고사", "학력평가", "학평", "모의평가", "모평", "전국연합", "수능시험"]
+PASSAGE_DEFAULTS = {"mock": 28, "textbook": 6, "ebs": 6}
+
+
+def guess_subject(name: str) -> str:
+    """교과서 과목. '공통영어 1' 처럼 띄어 쓰셔도 읽습니다."""
+    low = _flat(name)
+    for subject in TEXTBOOK_SUBJECTS:
+        if _flat(subject) in low:
+            return subject
+    return ""
+
+
+def guess_product_category(name: str) -> str:
+    """분류를 알아냅니다 — 교과서 · 모의고사 · 부교재."""
+    if guess_subject(name):
+        return "textbook"
+    low = _flat(name)
+    year, month = guess_exam_round(name)
+    if any(_flat(w) in low for w in MOCK_WORDS) and month:
+        return "mock"
+    return "ebs"
+
+
+def default_passages(category: str, site=None) -> int:
+    """한 상품에 몇 지문쯤 들어가는지. 관리자 > 값 설정에서 바꾸실 수 있습니다."""
+    cfg = (pricing_cfg(site or load_site()).get("passages") or {})
+    return max(1, to_int(cfg.get(category), PASSAGE_DEFAULTS.get(category, 6)))
+
+
+def _strip_known(stem: str, material: str, unit: str) -> str:
+    """파일 이름에서 읽어 낸 말들을 걷어내면 남는 것이 교재 이름입니다."""
+    left = stem
+    words = sorted({w for ws in MATERIAL_ALIASES.values() for w in ws},
+                   key=len, reverse=True)   # '통합워크북' 을 '워크북' 보다 먼저
+    for w in words:
+        left = re.sub(re.escape(w), " ", left, flags=re.I)
+    left = re.sub(r"\d{1,3}\s*(강|과|회차|일차|주차|단원)", " ", left)
+    left = re.sub(r"(?:day|unit|lesson|week|chapter)\s*\.?\s*\d{1,3}", " ", left, flags=re.I)
+    left = re.sub(r"[_\-–—.]+", " ", left)
+    return re.sub(r"\s{2,}", " ", left).strip(" -_·")
+
+
+def read_product_name(filename: str, catalog=None, site=None) -> dict:
+    """파일 이름 하나를 읽어 '어느 교재의 무슨 자료인지' 로 풀어 놓습니다.
+
+    분류도 교재도 패키지도 값도 여기서 정해집니다. 사장님이 고르실 것은
+    없습니다 — 이름에 이미 다 적혀 있으니까요.
+    """
+    catalog = load_raw_catalog() if catalog is None else catalog
+    site = load_site() if site is None else site
+    stem = os.path.splitext(os.path.basename(filename or ""))[0]
+
+    material = guess_material(stem)
+    unit_no, unit = guess_unit(stem)
+    category = guess_product_category(stem)
+    grade = guess_free_grade(stem)
+    subject = guess_subject(stem)
+    year, month = guess_exam_round(stem)
+
+    packages = package_map()
+    of_package = {m: pid for pid, pkg in packages.items()
+                  for m in (pkg.get("materials") or [])}
+    package = of_package.get(material, "")
+
+    # 교재 — 이름에서 읽어 낸 말들을 걷어낸 나머지입니다
+    book_name = _strip_known(stem, material, unit)
+    if category == "mock":
+        etype = exam_type_of(stem, grade, month)
+        book_name = " ".join(x for x in [exam_label(year, month, etype),
+                                         f"({grade})" if grade else ""] if x) or book_name
+        book_slug = f"mock-{year:04d}-{month:02d}" + (f"-g{grade[-1]}" if grade else "")
+    else:
+        book_slug = slugify_ko(book_name) or f"book-{hashlib.sha1(book_name.encode()).hexdigest()[:8]}"
+
+    book = find_book_like(catalog, book_name, book_slug)
+    if book:
+        book_slug, book_name = book["slug"], book.get("name") or book_name
+        category = book.get("category") or category
+        grade = grade or book.get("grade", "")
+
+    passages = default_passages(category, site)
+    missing = []
+    if not material:
+        missing.append("자료 종류")
+    if not book_name:
+        missing.append("교재 이름")
+
+    pkg_name = (packages.get(package) or {}).get("name", "")
+    # 'analysis' 는 자료 이름이면서 패키지 이름이기도 합니다. 그냥 이어 붙이면
+    # 낱개로 만든 상품(…-03-analysis)과 주소가 겹쳐 남의 상품을 덮어씁니다.
+    slug_parts = ([book_slug] + ([f"{unit_no:02d}"] if unit_no else [])
+                  + (["pack", package] if package else []))
+    return {
+        "category": category, "book_slug": book_slug, "book_name": book_name,
+        "book_is_new": book is None, "grade": grade, "subject": subject,
+        "year": year, "month": month,
+        "unit_no": unit_no, "unit": unit, "material": material, "package": package,
+        "package_name": pkg_name, "passages": passages,
+        "name": " ".join(x for x in [book_name, unit, "·" if unit else "", pkg_name] if x),
+        "slug": "-".join(x for x in slug_parts if x),
+        "source": os.path.basename(filename or ""), "missing": missing,
+    }
+
+
+def find_book_like(catalog: dict, name: str, slug: str) -> dict | None:
+    """이미 있는 교재인지 찾습니다. 주소가 같거나 이름이 사실상 같으면 그것입니다."""
+    want = _flat(name)
+    for book in catalog.get("books", []):
+        if book.get("slug") == slug:
+            return book
+    if not want:
+        return None
+    for book in catalog.get("books", []):
+        have = _flat(book.get("name", ""))
+        if have and (have == want or have in want or want in have):
+            return book
+    return None
+
+
+def exam_stamp(book: dict) -> int:
+    """모의고사 교재의 회차를 숫자로. 202609 처럼 나옵니다."""
+    year, month = guess_exam_round(f"{book.get('name', '')} {book.get('exam', '')}")
+    if not (year and month):
+        year = to_int(book.get("year"), 0)
+        month = to_int(book.get("month"), 0)
+    return year * 100 + month if year and month else 0
+
+
+def book_order_key(book: dict):
+    """교재 차례. 모의고사는 최근 회차가 맨 위, 나머지는 올리신 차례대로입니다."""
+    if book.get("category") == "mock":
+        return (0, -exam_stamp(book))
+    return (0, to_int(book.get("sort"), 100))
+
+
 def package_map() -> dict:
     """판매 단위 두 갈래 — 지문 분석 패키지 / 문제 패키지."""
     return {p["id"]: p for p in load_raw_catalog()["packages"]}
@@ -2576,6 +2752,65 @@ def product_files(slug: str) -> list[dict]:
         if path.is_file() and not path.name.startswith("."):
             out.append({"name": path.name, "size": path.stat().st_size})
     return out
+
+
+# ── 샘플 PDF 와 지면 사진 — 올리신 파일에서 바로 뽑습니다 ──────────────
+# 샘플을 따로 만들어 올리는 일이 없어야 합니다. 파는 파일의 앞쪽 몇 쪽이
+# 곧 샘플이고, 가운데 한 쪽이 곧 지면 사진입니다.
+SAMPLE_PAGES = 6              # 샘플로 잘라 줄 쪽수 (1쪽부터)
+THUMB_PAGE = 3                # 지면 사진으로 쓸 쪽 (모자라면 마지막 쪽)
+PRODUCT_THUMB_VER = 1
+PRODUCT_THUMB_W = 520
+
+
+def cut_sample(src: Path, out: Path, pages: int = SAMPLE_PAGES) -> int:
+    """PDF 앞쪽 몇 쪽만 잘라 샘플을 만듭니다. 만든 쪽수를 돌려줍니다."""
+    try:
+        import fitz as pymupdf
+        out.parent.mkdir(parents=True, exist_ok=True)
+        with pymupdf.open(src) as doc:
+            last = min(max(1, pages), doc.page_count) - 1
+            if last < 0:
+                return 0
+            sample = pymupdf.open()
+            sample.insert_pdf(doc, from_page=0, to_page=last)
+            sample.save(out, garbage=3, deflate=True)
+            n = sample.page_count
+            sample.close()
+        return n
+    except Exception as exc:
+        log.warning("샘플을 자르지 못했습니다 (%s): %s", src.name, exc)
+        return 0
+
+
+def product_thumb(slug: str, page: int = THUMB_PAGE) -> Path | None:
+    """상품 타일에 거는 지면 사진 — 파는 PDF 의 그 쪽을 그대로 찍은 것입니다."""
+    pdfs = [f for f in product_files(slug) if f["name"].lower().endswith(".pdf")]
+    if not pdfs:
+        return None
+    src = product_dir(slug) / pdfs[0]["name"]
+    out = DATA_DIR / ".cache" / "product" / f"{product_dir(slug).name}-{PRODUCT_THUMB_VER}.webp"
+    try:
+        if out.exists() and out.stat().st_mtime >= src.stat().st_mtime:
+            return out
+        import fitz as pymupdf
+        from PIL import Image
+        out.parent.mkdir(parents=True, exist_ok=True)
+        with pymupdf.open(src) as doc:
+            if not doc.page_count:
+                return None
+            at = min(max(1, page), doc.page_count) - 1
+            pg = doc[at]
+            zoom = PRODUCT_THUMB_W / max(1.0, pg.rect.width)
+            pix = pg.get_pixmap(matrix=pymupdf.Matrix(zoom, zoom), alpha=False)
+            im = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+        # 3:4 로 윗부분만. 타일 줄이 가지런해야 눈이 편합니다.
+        im = im.crop((0, 0, im.width, min(im.height, round(im.width * 4 / 3))))
+        im.save(out, "WEBP", quality=80, method=5)
+        return out
+    except Exception as exc:
+        log.warning("지면 사진을 만들지 못했습니다 (%s): %s", slug, exc)
+        return None
 
 
 def product_links(product: dict) -> list[dict]:

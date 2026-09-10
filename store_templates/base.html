@@ -69,7 +69,7 @@
       </a>
       {# 단어 학습 — 인쇄가 아니라 폰으로 그 자리에서 푸는 자리. 시험지 메뉴
          안에 묻어 두면 아무도 못 찾아, 따로 냅니다. #}
-      <a class="study-link {{ 'on' if request.endpoint in ['study_page','words_study','memorize_page','memorize_book','memorize_item'] }}"
+      <a class="study-link {{ 'on' if request.endpoint in ['study_page','study_words','words_study','memorize_page','memorize_book','memorize_item'] }}"
          href="{{ url_for('study_page') }}" aria-label="학습" title="학습">
         <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
           <path d="M12 6.6C10.4 5.3 8.4 4.7 6 4.7c-.9 0-1.7.1-2.4.2v13c.7-.1 1.5-.2 2.4-.2

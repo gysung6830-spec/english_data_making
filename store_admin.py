@@ -685,10 +685,11 @@ def product_from_form(form, existing: dict | None = None) -> tuple[dict, list[st
     item["highlights"] = parse_lines(form.get("highlights"))
     item["format"] = sc.clean(form.get("format"), 100)
     item["sample_file"] = sc.clean(form.get("sample_file"), 120)
-    # 이 상품이 대신하는 '부분' 상품들. (전권·전회차 상품에만 적습니다)
+    # 이 상품이 대신하는 '부분' 상품들. 이제 손으로 고르지 않고 강이 쌓이면
+    # 저절로 잡히므로, 폼에서 안 보내와도 있던 값을 그대로 둡니다.
     known = {p.get("slug") for p in sc.load_raw_catalog()["products"]}
-    item["covers"] = [x for x in form.getlist("covers")
-                      if x in known and x != item["slug"]]
+    covers = form.getlist("covers") if form.getlist("covers") else (item.get("covers") or [])
+    item["covers"] = [x for x in covers if x in known and x != item["slug"]]
     # 만든 날짜 — 홈의 '새로 올라왔습니다' 에 이 순서로 나옵니다.
     item.setdefault("added", sc.now_kst().date().isoformat())
     return item, errors
@@ -705,6 +706,10 @@ def products():
               for x in items if x.get("slug")}
     return render_template("admin/products.html", items=items, catalog=catalog,
                            sample_ready=ready, file_counts=counts,
+                           filed=session.pop("product_filed", []),
+                           mats=sc.material_map(),
+                           cat_names={c["id"]: c.get("name", c["id"])
+                                      for c in catalog.get("categories", [])},
                            sample_count=len([x for x in items if x.get("sample")]))
 
 
@@ -768,6 +773,166 @@ def product_form(slug=None):
         catalog["products"] = [item if p is existing else p for p in catalog["products"]]
         flash(f"상품 '{item['name']}' 을(를) 저장했습니다.", "ok")
     sc.save_catalog(catalog)
+    return redirect(url_for("admin.products"))
+
+
+def _sync_full_packs(catalog: dict, site: dict, touched: set[str]) -> int:
+    """전권·전회차 상품을 손으로 만들지 않습니다. 강이 둘 이상 쌓이면 저절로.
+
+    '전권 상품인가요' 를 물어보는 것은 너무 까다롭습니다. 같은 교재·같은
+    패키지의 강이 둘 이상 모이면 그 자리에서 묶음 상품을 만들고, 강이
+    늘어나면 값과 지문 수를 다시 셈합니다.
+    """
+    cfg = sc.pricing_cfg(site)
+    percent = max(1, min(100, sc.to_int(cfg.get("full_pack_percent"), 85)))
+    by_slug = {p.get("slug"): p for p in catalog["products"]}
+    books = {b.get("slug"): b for b in catalog["books"]}
+    made = 0
+
+    for key in sorted(touched):
+        book_slug, package = key
+        # 끌어다 놓아 만든 상품만 셉니다. 예전 방식으로 만든 낱개 상품까지
+        # 끌어들이면 같은 강이 두 번 잡혀 지문 수와 값이 부풀어 오릅니다.
+        parts = [p for p in catalog["products"]
+                 if p.get("book") == book_slug and p.get("package") == package
+                 and p.get("unit_no") and p.get("by_drop") and not p.get("covers")]
+        if len(parts) < 2:
+            continue
+        book = books.get(book_slug) or {}
+        pkg_name = (sc.package_map().get(package) or {}).get("name", "")
+        slug = f"{book_slug}-{package}-full"
+        price = int(round(sum(sc.to_int(p.get("price"), 0) for p in parts)
+                          * percent / 100 / 100) * 100)
+        item = by_slug.get(slug) or {"slug": slug, "sort": 1, "active": True,
+                                     "format": "PDF (A4, 인쇄용)", "full_auto": True,
+                                     "added": sc.now_kst().date().isoformat(),
+                                     "includes": [], "highlights": []}
+        if slug not in by_slug:
+            catalog["products"].append(item)
+            by_slug[slug] = item
+            made += 1
+        item.update({
+            "name": f"{book.get('name', book_slug)} 전권 · {pkg_name}",
+            "subtitle": f"{len(parts)}강 모두 · 지문 {sum(sc.to_int(p.get('passages'), 0) for p in parts)}개",
+            "category": book.get("category", ""), "book": book_slug,
+            "package": package, "grade": book.get("grade", ""),
+            "passages": sum(sc.to_int(p.get("passages"), 0) for p in parts),
+            "materials": sorted({m for p in parts for m in (p.get("materials") or [])},
+                                key=lambda m: list(sc.material_map()).index(m)
+                                if m in sc.material_map() else 99),
+            "covers": [p["slug"] for p in parts],
+            "list_price": sum(sc.to_int(p.get("price"), 0) for p in parts),
+            "price": price,
+        })
+    return made
+
+
+@admin_bp.route("/products/upload", methods=["POST"])
+def products_upload():
+    """PDF 를 끌어다 놓으면 상품이 됩니다. 고르실 것이 없습니다.
+
+    파일 이름에서 분류·교재·강·자료 종류를 읽어, 없으면 교재까지 만들고,
+    같은 강의 같은 패키지면 한 상품에 자료를 더합니다. 샘플은 앞 여섯 쪽,
+    지면 사진은 세 쪽째를 그대로 씁니다.
+    """
+    catalog = sc.load_raw_catalog()
+    site = sc.load_site()
+    rates = sc.pricing_cfg(site).get("materials") or {}
+    by_slug = {p.get("slug"): p for p in catalog["products"]}
+    book_slugs = {b.get("slug") for b in catalog["books"]}
+    filed, skipped, touched = [], [], set()
+
+    for upload in request.files.getlist("files"):
+        if not upload or not upload.filename:
+            continue
+        name = sc.safe_filename(upload.filename)
+        if os.path.splitext(name)[1].lower() not in sc.DELIVER_EXTS:
+            skipped.append(name)
+            continue
+
+        read = sc.read_product_name(name, catalog, site)
+        if read["missing"] or not read["slug"]:
+            filed.append({**read, "file": name, "ok": False})
+            continue
+
+        # 교재가 없으면 여기서 만듭니다. 따로 등록하실 것 없습니다.
+        if read["book_slug"] not in book_slugs:
+            book = {"slug": read["book_slug"], "name": read["book_name"],
+                    "category": read["category"], "grade": read["grade"],
+                    "sort": 100 + len(catalog["books"]), "active": True}
+            if read["subject"]:
+                book["subject"] = read["subject"]
+            if read["category"] == "mock":
+                book.update({"publisher": "교육청" if read["month"] in (3, 5, 7, 10) else "평가원",
+                             "year": read["year"], "month": read["month"]})
+            catalog["books"].append(book)
+            book_slugs.add(book["slug"])
+
+        item = by_slug.get(read["slug"])
+        if item is not None and not item.get("by_drop"):
+            # 손으로 만드신 상품을 말없이 덮어쓰지 않습니다
+            filed.append({**read, "file": name, "ok": False,
+                          "missing": ["이미 쓰고 있는 주소"]})
+            continue
+        if item is None:
+            item = {"slug": read["slug"], "materials": [], "includes": [],
+                    "highlights": [], "sort": 100 + (read["unit_no"] or 0),
+                    "active": True, "format": "PDF (A4, 인쇄용)", "by_drop": True,
+                    "added": sc.now_kst().date().isoformat()}
+            catalog["products"].append(item)
+            by_slug[read["slug"]] = item
+        # 자료 1종만 놓아도 패키지 상품이 되고, 다음 것을 놓으면 거기에 더해집니다
+        mats = list(item.get("materials") or [])
+        if read["material"] and read["material"] not in mats:
+            mats.append(read["material"])
+        order = list(sc.material_map())
+        mats.sort(key=lambda m: order.index(m) if m in order else 99)
+
+        passages = sc.to_int(item.get("passages"), 0) or read["passages"]
+        item.update({
+            "name": read["name"], "category": read["category"],
+            "book": read["book_slug"], "package": read["package"],
+            "grade": read["grade"], "materials": mats, "passages": passages,
+            "subtitle": f"{read['unit'] or '전체'} · 지문 {passages}개 · 자료 {len(mats)}종",
+            "price": int(round(sum(rates.get(m, 0) for m in mats) * passages / 100) * 100),
+        })
+        if read["unit_no"]:
+            item["unit"], item["unit_no"] = read["unit"], read["unit_no"]
+
+        folder = sc.product_dir(item["slug"])
+        folder.mkdir(parents=True, exist_ok=True)
+        upload.save(folder / name)
+
+        # 샘플은 앞 여섯 쪽, 지면 사진은 세 쪽째 — 따로 만들어 올리실 것 없습니다
+        if name.lower().endswith(".pdf") and not item.get("sample_file"):
+            out = sc.SAMPLE_DIR / f"{item['slug']}.pdf"
+            if sc.cut_sample(folder / name, out):
+                item["sample_file"] = out.name
+        item["shot"] = sc.product_thumb(item["slug"]) is not None
+
+        touched.add((read["book_slug"], read["package"]))
+        filed.append({**read, "file": name, "ok": True,
+                      "price": item["price"], "materials": mats})
+
+    packs = _sync_full_packs(catalog, site, touched) if touched else 0
+    if any(f["ok"] for f in filed):
+        sc.save_catalog(catalog)
+    session["product_filed"] = filed[:60]
+
+    good = [f for f in filed if f["ok"]]
+    bad = [f for f in filed if not f["ok"]]
+    if good:
+        note = f"파일 {len(good)}개를 상품으로 넣었습니다."
+        if packs:
+            note += f" 전권 상품 {packs}개도 저절로 만들어졌습니다."
+        flash(note, "ok")
+    if bad:
+        flash(f"{len(bad)}개는 파일 이름에서 자료 종류를 못 읽어 건너뛰었습니다. "
+              "'지문분석지' · '17종 변형문제' 처럼 자료 이름을 넣어 주세요.", "err")
+    if skipped:
+        flash(f"{', '.join(skipped[:3])} 은(는) 올릴 수 없는 형식이라 건너뛰었습니다.", "err")
+    if not filed:
+        flash("올릴 파일을 골라 주세요.", "err")
     return redirect(url_for("admin.products"))
 
 

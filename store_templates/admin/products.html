@@ -6,13 +6,81 @@
   <div class="row">
     <div>
       <h1>상품</h1>
-      <p>여기서 저장하면 <b>고객 화면에 바로 반영</b>됩니다. 파일을 따로 고칠 필요 없습니다.</p>
+      <p>PDF 를 끌어다 놓기만 하시면 됩니다. <b>분류 · 교재 · 패키지 · 값까지 알아서 잡습니다.</b></p>
     </div>
     <div class="spacer"></div>
-    <a class="btn btn-ghost" href="{{ url_for('admin.products_bulk') }}">압축으로 한꺼번에 만들기</a>
-    <a class="btn btn-primary" href="{{ url_for('admin.product_form') }}">＋ 새 상품 만들기</a>
+    <a class="btn btn-ghost" href="{{ url_for('admin.products_bulk') }}">압축(.zip)으로</a>
+    <a class="btn btn-ghost" href="{{ url_for('admin.product_form') }}">손으로 하나 만들기</a>
   </div>
 </div>
+
+{# ---- 끌어다 놓기 ----------------------------------------------------- #}
+<form class="panel drop-panel" method="post" enctype="multipart/form-data"
+      action="{{ url_for('admin.products_upload') }}" id="dropForm">
+  <div class="dropzone" id="dropZone">
+    <input type="file" name="files" id="dropInput" multiple accept=".pdf,.zip,.hwp,.hwpx,.docx,.pptx" hidden>
+    <div class="dz-mark">📦</div>
+    <b class="dz-head">여기에 파는 PDF 를 끌어다 놓으세요</b>
+    <p class="dz-sub">한 번에 몇 개든 됩니다. 놓으면 바로 상품이 됩니다.</p>
+    <button class="btn btn-primary" type="button" id="dropPick">파일 고르기</button>
+    <div class="dz-busy" hidden><span class="dz-spin"></span> 올리는 중입니다…</div>
+  </div>
+
+  <div class="dz-rule">
+    <b>파일 이름에 교재 · 강 · 자료 종류만 있으면 됩니다</b>
+    <div class="dz-eg">
+      <code>능률(김성곤) 공통영어1 3강 지문분석지.pdf</code>
+      <code>2026 수능특강 영어 5강 17종 변형문제.pdf</code>
+      <code>고1 2026년 9월 모의고사 지문분석지.pdf</code>
+    </div>
+    <div class="dz-chips">
+      <span class="dzc"><i>교과서</i>공통영어1 · 공통영어2 · 영어1 · 영어2 가 있으면</span>
+      <span class="dzc"><i>모의고사</i>학년 + 해·달 + 모의고사·학력평가가 있으면</span>
+      <span class="dzc"><i>부교재</i>나머지 전부</span>
+    </div>
+    <div class="hint">
+      교재가 없으면 <b>교재도 같이 만듭니다.</b> 같은 강에 자료를 하나 더 놓으면
+      새 상품을 만들지 않고 <b>그 패키지에 자료를 더합니다.</b> 값도 다시 셈하고요.
+      한 교재에 강이 둘 이상 쌓이면 <b>전권 상품이 저절로</b> 생깁니다.
+      샘플은 앞 <b>여섯 쪽</b>, 지면 사진은 <b>세 쪽째</b>를 그대로 씁니다.
+    </div>
+  </div>
+</form>
+
+{% if filed %}
+  <div class="panel">
+    <h2>방금 올린 {{ filed|length }}개</h2>
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th>파일</th><th>이렇게 읽었습니다</th><th>분류 · 교재</th>
+                   <th>자료</th><th>값</th><th></th></tr></thead>
+        <tbody>
+        {% for f in filed %}
+          <tr class="{{ '' if f.ok else 'row-bad' }}">
+            <td><small class="code">{{ f.file }}</small></td>
+            <td>
+              <b>{{ f.name or f.file }}</b>
+              {% if not f.ok %}
+                <br><span class="tag" style="background:#fdeceb;color:#b91c1c;">
+                  {{ f.missing|join(' · ') }} 를 못 읽어 건너뛰었습니다</span>
+              {% endif %}
+            </td>
+            <td><small>{{ cat_names.get(f.category, f.category) }}</small>
+              <br><small class="muted">{{ f.book_name }}
+                {%- if f.book_is_new %} <span class="tag tag-on">새 교재</span>{% endif %}</small></td>
+            <td>{% for m in (f.materials or []) %}
+                  <span class="tag">{{ mats.get(m, {}).get('name', m) }}</span>
+                {% endfor %}</td>
+            <td>{% if f.ok %}<b>{{ '{:,}'.format(f.price) }}원</b>{% endif %}</td>
+            <td>{% if f.ok %}<a class="btn btn-ghost btn-sm"
+                   href="{{ url_for('admin.product_form', slug=f.slug) }}">고치기</a>{% endif %}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endif %}
 
 {% if sample_count %}
   <div class="panel" style="border:1px solid #f0d4c4; background:#fff8f4;">
@@ -34,16 +102,6 @@
   </div>
 {% endif %}
 
-<div class="steps-help">
-  <b>순서가 헷갈리시면</b>
-  <ol>
-    <li><a href="{{ url_for('admin.books') }}"><b>교재 · 분류</b></a>에서 교재를 먼저 만듭니다. (예: 2026 9월 모의평가)</li>
-    <li>여기서 그 교재에 속한 상품을 만듭니다. (예: 전지문 세트 22,000원)</li>
-    <li><b>📁 파일</b> 에 손님에게 보낼 자료를 올립니다. 이게 실제로 팔리는 물건입니다.</li>
-    <li>샘플 PDF는 <b>🧩 오르티카잉 라인업</b>의 자료마다 답니다.
-      <code>store_data/samples/</code> 에 파일을 넣고 버튼으로 고르시면 됩니다.</li>
-  </ol>
-</div>
 
 <div class="panel">
   {% if items %}
@@ -120,4 +178,6 @@
     </div>
   {% endif %}
 </div>
+
+<script src="{{ asset('dropzone.js') }}"></script>
 {% endblock %}

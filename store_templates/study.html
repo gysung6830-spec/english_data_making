@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}학습 — 단어와 지문 · {{ site.brand }}{% endblock %}
-{% block desc %}단어는 뜻 고르기·철자·깜빡이로, 지문은 내용이해·직독직해·빈칸채우기로. 폰에서 바로, 무료로 하실 수 있습니다.{% endblock %}
+{% block desc %}단어는 뜻 고르기·철자·깜빡이로, 지문은 내용이해·직독직해·빈칸채우기로. 폰에서 바로, 회원가입 없이 무료입니다.{% endblock %}
 
 {% block body %}
 <section class="section">
@@ -8,83 +8,42 @@
     <div class="section-head">
       <span class="eyebrow">무료 · 회원가입 없음</span>
       <h2>학습</h2>
-      <p>폰에서 바로 하실 수 있습니다. <b>단어</b>부터 잡고 <b>지문</b>으로 넘어가세요.</p>
+      <p>폰에서 바로 하실 수 있습니다. 무엇을 외우실 건가요?</p>
     </div>
 
-    {# 두 갈래를 맨 위에서 갈라 줍니다. 하나는 낱말, 하나는 문장입니다. #}
-    <div class="study-ways">
-      <div class="sw on">
-        <span class="sw-tag">낱말</span>
+    {# 물을 것은 하나뿐입니다 — 낱말이냐 문장이냐. #}
+    <div class="two-ways">
+      <a class="tw" href="{{ url_for('study_words') }}">
+        <span class="tw-mark">🔤</span>
+        <span class="tw-tag">낱말</span>
         <b>단어 학습</b>
-        <p>뜻 고르기 · 철자 채우기 · 깜빡이. 틀린 단어는 그대로 시험지로 뽑습니다.</p>
-      </div>
-      <div class="sw">
-        <span class="sw-tag">문장</span>
-        <b>지문 암기</b>
-        <p>내용이해 → 직독직해 → 빈칸채우기. 지문에 든 어법도 찾아 맞힙니다.</p>
-        <a href="{{ url_for('memorize_page') }}">지문 암기 →</a>
-      </div>
-      <div class="sw">
-        <span class="sw-tag">종이로</span>
-        <b>시험지 뽑기</b>
-        <p>인쇄해서 학생에게 나눠 주실 때. 같은 단어를 씁니다.</p>
-        <a href="{{ url_for('words_page') }}">단어 시험지 만들기 →</a>
-      </div>
+        <p>뜻 고르기 · 철자 채우기 · 깜빡이.<br>틀린 단어는 그대로 시험지로 뽑습니다.</p>
+        <span class="tw-meta">
+          {% if word_books %}단어장 {{ word_books }}권 · 단어 {{ '{:,}'.format(word_total) }}개
+          {% else %}준비하고 있습니다{% endif %}</span>
+        <span class="tw-go">단어 외우러 가기 →</span>
+      </a>
+      <a class="tw" href="{{ url_for('memorize_page') }}">
+        <span class="tw-mark">📖</span>
+        <span class="tw-tag">문장</span>
+        <b>지문 학습</b>
+        <p>내용이해 → 직독직해 → 빈칸채우기.<br>지문에 든 어법도 찾아 맞힙니다.</p>
+        <span class="tw-meta">
+          {% if passage_books %}교재 {{ passage_books }}권 · 지문 {{ '{:,}'.format(passage_total) }}개
+          {% else %}준비하고 있습니다{% endif %}</span>
+        <span class="tw-go">지문 외우러 가기 →</span>
+      </a>
     </div>
 
-    <div class="study-kinds">
-      {% for key, name in kinds.items() %}
-        <span class="chip chip-{{ key }}">{{ name }}</span>
-      {% endfor %}
-      <span class="chip">소리로 읽어 주기</span>
-      <span class="chip">오답 시험지</span>
+    <div class="study-kinds" style="margin-top:26px;">
+      {% for key, name in kinds.items() %}<span class="chip chip-{{ key }}">{{ name }}</span>{% endfor %}
+      <span class="chip">깜빡이</span>
+      {% for lv in levels %}<span class="chip">빈칸 {{ lv.no }}단계</span>{% endfor %}
     </div>
-
-    {# 출판사로 먼저 나눕니다. 선생님들은 교재 이름보다 'EBS 것' 으로 기억하십니다. #}
-    <nav class="pub-nav" aria-label="출판사">
-      {% for g in groups %}
-        <a class="pub-tab {{ 'empty' if not g.books }}" href="#pub-{{ loop.index }}">
-          {{ g.name }}<span class="pub-n">{{ g.count }}</span></a>
-      {% endfor %}
-    </nav>
-
-    {% for g in groups %}
-      <div class="pub-sec" id="pub-{{ loop.index }}">
-        <div class="pub-head">
-          <h3>{{ g.name }}</h3>
-          {% if g.books %}
-            <span class="muted">교재 {{ g.count }}권 · 단어 {{ '{:,}'.format(g.words) }}개</span>
-          {% endif %}
-        </div>
-        {% if g.books %}
-          <div class="grid grid-3">
-            {% for b in g.books %}
-              <a class="wb-card" href="{{ url_for('words_study', slug=b.slug) }}">
-                <span class="wb-pub">{{ b.publisher or '단어장' }}</span>
-                <b>{{ b.name }}</b>
-                <span class="wb-meta">
-                  {% if b.grade %}<span class="chip">{{ b.grade }}</span>{% endif %}
-                  <span class="chip">{{ b['units']|length }}강</span>
-                  <span class="chip">단어 {{ '{:,}'.format(b.words_total) }}개</span>
-                </span>
-                <span class="wb-go">바로 풀기 →</span>
-              </a>
-            {% endfor %}
-          </div>
-        {% else %}
-          {# 빈 자리를 숨기지 않습니다. 무엇을 넣을 예정인지 보여야 요청이 들어옵니다. #}
-          <div class="pub-empty">
-            <b>{{ g.name }} 교재는 준비하고 있습니다.</b>
-            <span>필요하신 교재 이름만 적어 주시면 단어를 넣어 두고 알려 드리겠습니다.</span>
-            <a class="btn btn-ghost btn-sm" href="{{ url_for('custom') }}">교재 알려 주기</a>
-          </div>
-        {% endif %}
-      </div>
-    {% endfor %}
 
     <div class="alert alert-info" style="margin-top:26px;">
-      <b>찾으시는 교재가 없나요?</b>
-      <a href="{{ url_for('custom') }}">교재 이름만 적어</a> 두시면 단어를 넣어 두고 알려 드리겠습니다.
+      <b>인쇄해서 나눠 주시려면</b>
+      <a href="{{ url_for('words_page') }}">단어 시험지 만들기</a>로 가세요. 같은 단어장을 씁니다.
     </div>
   </div>
 </section>

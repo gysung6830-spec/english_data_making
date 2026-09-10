@@ -54,7 +54,15 @@
       <h1>{{ p.name }}</h1>
       <div class="sub">{{ p.subtitle }}</div>
 
-      <p>{{ p.description }}</p>
+      {# 설명 대신 지면입니다. 파는 PDF 의 세 쪽째를 그대로 보여 줍니다. #}
+      {% if p.shot %}
+        <figure class="pd-shot">
+          <img src="{{ url_for('product_thumb_img', slug=p.slug) }}"
+               alt="{{ p.name }} 지면" loading="lazy" width="520">
+          <figcaption>실제 지면입니다{% if sample_ready %} · 앞 여섯 쪽은 아래에서 받아 보실 수 있습니다{% endif %}</figcaption>
+        </figure>
+      {% endif %}
+      {% if p.description %}<p>{{ p.description }}</p>{% endif %}
 
       {% if p.highlights %}
         <h3 style="font-size:18px;margin:28px 0 12px;">이런 점이 좋습니다</h3>
