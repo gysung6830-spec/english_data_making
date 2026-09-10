@@ -38,11 +38,29 @@
     if (better) { try { localStorage.setItem(key, String(value)); } catch (e) {} }
     return { was: was, better: better };
   }
-  function finish(head, body) {
+  function finish(head, body, stats) {
     done.hidden = false;
     doneHead.textContent = head;
     doneBody.textContent = body;
+    card(head, stats);
     done.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  /* 다 하고 나서 그림 한 장. 저장하거나 그대로 보내실 수 있습니다. */
+  function card(head, stats) {
+    var box = document.getElementById('gameCard');
+    if (!box || !window.OrticaCard) return;
+    box.dataset.made = '';                    // 다시 하면 새 기록으로 다시 그립니다
+    var info = {};
+    try { info = JSON.parse(document.getElementById('gameInfo').textContent); }
+    catch (e) { /* 없어도 카드는 그립니다 */ }
+    OrticaCard.attach(box, {
+      brand: info.brand, site: info.site, kind: info.kind,
+      title: info.title, scope: info.scope,
+      big: String(head).split('·').pop().trim() || head,
+      say: info.kind + ' 기록',
+      stats: stats || []
+    });
   }
 
   /* ── 짝 맞추기 ─────────────────────────────────────────────────── */
@@ -79,7 +97,8 @@
               r && r.was != null
                 ? (r.better ? '지난 기록 ' + r.was + '번보다 빨랐습니다.'
                             : '가장 잘하셨을 때는 ' + r.was + '번이었습니다.')
-                : (flips <= best ? '아주 잘하셨습니다.' : '한 번 더 하시면 더 줄어듭니다.'));
+                : (flips <= best ? '아주 잘하셨습니다.' : '한 번 더 하시면 더 줄어듭니다.'),
+              [['뒤집은 횟수', flips], ['맞힌 짝', pairs], ['가장 잘한 것', (r && r.was != null ? Math.min(r.was, flips) : flips) + '번']]);
           }
         } else {
           lock = true;
@@ -110,7 +129,8 @@
           r && r.was != null
             ? (r.better ? '지난 기록 ' + r.was + '점을 넘었습니다.'
                         : '가장 잘하셨을 때는 ' + r.was + '점이었습니다.')
-            : '한 번 더 하시면 더 오릅니다.');
+            : '한 번 더 하시면 더 오릅니다.',
+          [['점수', score], ['푼 문제', at], ['가장 잘한 것', (r && r.was != null ? Math.max(r.was, score) : score) + '점']]);
       }
     }, 1000);
     B.textContent = String(left);
@@ -169,7 +189,8 @@
           r && r.was != null
             ? (r.better ? '지난 기록 ' + r.was + '초보다 빨랐습니다.'
                         : '가장 빨랐을 때는 ' + r.was + '초였습니다.')
-            : (secs <= best ? '손이 빠르십니다.' : '한 번 더 하시면 줄어듭니다.'));
+            : (secs <= best ? '손이 빠르십니다.' : '한 번 더 하시면 줄어듭니다.'),
+          [['걸린 시간', secs + '초'], ['맞힌 개수', hits], ['가장 빠른 것', (r && r.was != null ? Math.min(r.was, secs) : secs) + '초']]);
         return;
       }
       var me = order[at];

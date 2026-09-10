@@ -2780,3 +2780,19 @@ input[type=text].ty-in:focus{outline:2px solid var(--brand,#166534); outline-off
   .ft b{font-size:17px;}
   .sib-list{grid-template-columns:1fr;}
 }
+
+/* ---- 학습 결과 카드 ---------------------------------------------------- */
+.result-card{margin:26px 0 6px; padding:22px; border-radius:16px; text-align:center;
+  background:#fff; border:1px solid var(--line,#e5e7eb);}
+.result-card[hidden]{display:none !important;}
+.rc-head{margin:0 0 4px; font-size:18px;}
+.rc-say{margin:0 0 16px; font-size:13px;}
+.rc-canvas{display:block; width:100%; max-width:300px; height:auto; margin:0 auto 16px;
+  border-radius:12px; border:1px solid var(--line,#e5e7eb);
+  box-shadow:0 8px 24px rgba(15,32,24,.10);}
+.rc-acts{display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+@media (max-width:520px){
+  .result-card{padding:18px 14px;}
+  .rc-canvas{max-width:240px;}
+  .rc-acts .btn{flex:1; min-width:130px;}
+}

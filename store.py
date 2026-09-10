@@ -2112,6 +2112,9 @@ def words_study(slug):
     return render_template("words_study.html", b=book, deck=deck, seed=seed,
                            unit_ids=unit_ids, unit_names=names, kinds=kinds,
                            kind_labels=STUDY_KINDS, again_url=again,
+                           scope=" · ".join(names) or book["name"],
+                           card_kind=" · ".join(STUDY_KINDS[k] for k in kinds
+                                                if k in STUDY_KINDS) or "단어 학습",
                            pool=len(rows), only=bool(only))
 
 

@@ -4078,6 +4078,43 @@ def test_free_page_offers_packages_not_single_files():
     print("PASS  함께 보여 줄 유료 자료는 패키지로")
 
 
+def test_result_card_is_offered_and_keeps_nothing():
+    """다 하고 나면 그림 한 장으로 남길 수 있어야 합니다.
+
+    학생이 카톡·인스타에 올리면 그게 곧 우리 자료 소개입니다. 대신 이름도
+    성적도 서버로 안 보냅니다 — 브라우저 안에서 그리고 끝이라 개인정보가
+    생기지 않습니다.
+    """
+    css = body(client().get("/static/resultcard.js"))
+    assert "OrticaCard" in css
+    # 서버로 아무것도 안 보냅니다
+    for sent in ("fetch(", "XMLHttpRequest", "navigator.sendBeacon", "new WebSocket"):
+        assert sent not in css, sent
+    assert "canvas.toBlob" in css and "navigator.share" in css
+
+    c = client()
+    slug = sc.load_words()["books"][0]["slug"]
+    pages = [
+        (f"/words/{slug}/study?kind=choice&n=5", "sq-result"),
+        (f"/words/{slug}/study?mode=game&game=match&n=8", "gameCard"),
+    ]
+    book = sc.load_passages()["books"][0]
+    unit = book["units"][0]
+    pages.append((f"/memorize/{book['slug']}/{unit['id']}/{unit['items'][0]['id']}", "memCard"))
+
+    for url, box in pages:
+        page = body(c.get(url))
+        assert f'id="{box}"' in page, url
+        assert "resultcard.js" in page, url
+        # 카드를 부르는 글보다 먼저 실려야 합니다. 안 그러면 조용히 안 그려집니다.
+        after = "wordgame.js" if "wordgame.js" in page else "OrticaCard.attach"
+        assert page.index("resultcard.js") < page.index(after), url
+
+    # 게임은 카드 그리는 일을 바깥 글에 두었습니다
+    assert "OrticaCard.attach" in body(c.get("/static/wordgame.js"))
+    print("PASS  학습 결과 카드 — 세 자리 모두 · 서버로는 아무것도 안 보냄")
+
+
 def test_word_study_starts_with_flash_and_offers_games():
     """낯부터 익히는 것이 순서입니다. 그리고 놀 자리도 있어야 합니다."""
     c = client()
@@ -6697,6 +6734,7 @@ def run_all():
     test_a_bad_email_cannot_take_the_gated_file()
     test_free_page_offers_packages_not_single_files()
     test_word_study_starts_with_flash_and_offers_games()
+    test_result_card_is_offered_and_keeps_nothing()
     test_product_upload_reads_the_filename()
     test_product_upload_also_fills_the_lineup()
     test_product_upload_never_overwrites_a_hand_made_product()

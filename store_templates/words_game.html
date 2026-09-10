@@ -43,6 +43,7 @@
         <button class="btn btn-primary" type="button" id="retry">한 번 더</button>
         <a class="btn btn-ghost" href="{{ back }}">다른 방식으로</a>
       </div>
+      <div class="result-card" id="gameCard"></div>
     </div>
 
     <p class="muted" style="margin-top:22px;font-size:13px;">
@@ -52,5 +53,9 @@
 
 <script id="gameWords" type="application/json">{{ words|map(attribute='en')|list|tojson }}</script>
 <script id="gameMeans" type="application/json">{{ words|map(attribute='ko')|list|tojson }}</script>
+<script id="gameInfo" type="application/json">{{ {
+  "brand": site.brand, "site": request.host, "kind": info.name,
+  "title": b.name, "scope": scope}|tojson }}</script>
+<script src="{{ asset('resultcard.js') }}"></script>
 <script src="{{ asset('wordgame.js') }}"></script>
 {% endblock %}
