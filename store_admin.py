@@ -887,6 +887,7 @@ def products_upload():
         if read["missing"] or not read["slug"]:
             filed.append({**read, "file": name, "ok": False})
             continue
+        origin = read["category"] == "origin"
 
         # 교재가 없으면 여기서 만듭니다. 따로 등록하실 것 없습니다.
         if read["book_slug"] not in book_slugs:
@@ -895,7 +896,8 @@ def products_upload():
                     "sort": 100 + len(catalog["books"]), "active": True}
             if read["subject"]:
                 book["subject"] = read["subject"]
-            if read["category"] == "mock":
+            if read["category"] in ("mock", "origin"):
+                book["category"] = "mock"          # 교재는 회차, 상품만 원본입니다
                 book.update({"publisher": "교육청" if read["month"] in (3, 5, 7, 10) else "평가원",
                              "year": read["year"], "month": read["month"]})
             catalog["books"].append(book)
@@ -914,23 +916,38 @@ def products_upload():
                     "added": sc.now_kst().date().isoformat()}
             catalog["products"].append(item)
             by_slug[read["slug"]] = item
-        # 자료 1종만 놓아도 패키지 상품이 되고, 다음 것을 놓으면 거기에 더해집니다
-        mats = list(item.get("materials") or [])
-        if read["material"] and read["material"] not in mats:
-            mats.append(read["material"])
-        order = list(sc.material_map())
-        mats.sort(key=lambda m: order.index(m) if m in order else 99)
+        if origin:
+            # 시험지 원본 — 우리가 만든 것이 아니라 값을 안 붙입니다.
+            # 문제지 · 해설 · 듣기를 한 칸에 모읍니다.
+            kinds = list(item.get("origins") or [])
+            if read["origin_kind"] and read["origin_kind"] not in kinds:
+                kinds.append(read["origin_kind"])
+            order0 = list(sc.ORIGIN_KINDS)
+            kinds.sort(key=lambda k: order0.index(k) if k in order0 else 99)
+            item.update({
+                "name": read["name"], "category": "origin", "book": read["book_slug"],
+                "package": "", "grade": read["grade"], "materials": [],
+                "origins": kinds, "free": True, "price": 0, "passages": 0,
+                "subtitle": " · ".join(sc.origin_kind_names(item)) or "시험지 원본",
+            })
+        else:
+            # 자료 1종만 놓아도 패키지 상품이 되고, 다음 것을 놓으면 거기에 더해집니다
+            mats = list(item.get("materials") or [])
+            if read["material"] and read["material"] not in mats:
+                mats.append(read["material"])
+            order = list(sc.material_map())
+            mats.sort(key=lambda m: order.index(m) if m in order else 99)
 
-        passages = sc.to_int(item.get("passages"), 0) or read["passages"]
-        item.update({
-            "name": read["name"], "category": read["category"],
-            "book": read["book_slug"], "package": read["package"],
-            "grade": read["grade"], "materials": mats, "passages": passages,
-            "subtitle": f"{read['unit'] or '전체'} · 지문 {passages}개 · 자료 {len(mats)}종",
-            "price": int(round(sum(rates.get(m, 0) for m in mats) * passages / 100) * 100),
-        })
-        if read["unit_no"]:
-            item["unit"], item["unit_no"] = read["unit"], read["unit_no"]
+            passages = sc.to_int(item.get("passages"), 0) or read["passages"]
+            item.update({
+                "name": read["name"], "category": read["category"],
+                "book": read["book_slug"], "package": read["package"],
+                "grade": read["grade"], "materials": mats, "passages": passages,
+                "subtitle": f"{read['unit'] or '전체'} · 지문 {passages}개 · 자료 {len(mats)}종",
+                "price": int(round(sum(rates.get(m, 0) for m in mats) * passages / 100) * 100),
+            })
+            if read["unit_no"]:
+                item["unit"], item["unit_no"] = read["unit"], read["unit_no"]
 
         folder = sc.product_dir(item["slug"])
         folder.mkdir(parents=True, exist_ok=True)
@@ -949,9 +966,15 @@ def products_upload():
             lineup_touched |= fill_lineup_from(read["material"], folder / name,
                                               item.get("sample_file", ""))
 
+        if origin:
+            # 원본은 회차 상품이라 강이 없습니다. 전권 상품도 안 만듭니다.
+            filed.append({**read, "file": name, "ok": True, "price": 0,
+                          "materials": [], "origins": item.get("origins") or []})
+            continue
+
         touched.add((read["book_slug"], read["package"]))
         filed.append({**read, "file": name, "ok": True,
-                      "price": item["price"], "materials": mats})
+                      "price": item["price"], "materials": mats, "origins": []})
 
     packs = _sync_full_packs(catalog, site, touched) if touched else 0
     if lineup_touched:

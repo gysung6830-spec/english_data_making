@@ -2800,3 +2800,4 @@ input[type=text].ty-in:focus{outline:2px solid var(--brand,#166534); outline-off
 .round-head h3 a:hover{color:var(--brand); text-decoration:underline;}
 a.chip-go{text-decoration:none; color:inherit;}
 a.chip-go:hover{background:var(--brand-soft); color:var(--brand-dark);}
+.free-price{color:var(--brand,#146b4a);}

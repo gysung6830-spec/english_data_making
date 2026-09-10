@@ -398,6 +398,7 @@ def load_raw_catalog() -> dict:
     # 교재 차례를 여기서 한 번에 잡습니다. 모의고사는 최근 회차가 맨 위,
     # 나머지는 올리신 차례 그대로입니다. (파이썬 정렬은 같은 값끼리 순서를
     # 흐트러뜨리지 않아서, 뒤에 붙인 것이 뒤에 남습니다)
+    ensure_origin_category(catalog)
     for book in catalog["books"]:
         book["name"] = unify_exam_words(book.get("name", ""))
     catalog["books"] = sorted(catalog["books"], key=book_order_key)
@@ -1828,12 +1829,17 @@ def unit_word(book: dict | None) -> dict:
 
 
 def books_with_counts(catalog: dict, category: str = "") -> list[dict]:
-    """교재별로 '그 교재에 속한 상품 수 / 최저가'를 붙여 돌려줍니다."""
+    """교재별로 '그 교재에 속한 상품 수 / 최저가'를 붙여 돌려줍니다.
+
+    분류는 교재가 아니라 그 교재에 달린 상품으로 봅니다. 한 회차에 해석
+    자료(모의고사)와 시험지 원본(모의고사 원본)이 함께 달리기 때문입니다.
+    """
     result = []
     for book in catalog["books"]:
-        if category and book.get("category") != category:
-            continue
         items = [p for p in catalog["products"] if p.get("book") == book["slug"]]
+        if category:
+            items = [p for p in items
+                     if (p.get("category") or book.get("category")) == category]
         if not items:
             continue
         result.append({**book, "count": len(items),
@@ -1931,6 +1937,27 @@ def read_product_name(filename: str, catalog=None, site=None) -> dict:
     site = load_site() if site is None else site
     stem = os.path.splitext(os.path.basename(filename or ""))[0]
 
+    # 시험지 원본이면 자료 종류도 패키지도 없습니다. 그냥 회차 하나입니다.
+    if is_origin(stem):
+        year, month = guess_exam_round(stem)
+        grade = guess_free_grade(stem)
+        book_name = " ".join(x for x in [exam_label(year, month),
+                                         f"({grade})" if grade else ""] if x)
+        book_slug = f"mock-{year:04d}-{month:02d}" + (f"-g{grade[-1]}" if grade else "")
+        book = find_book_like(catalog, book_name, book_slug)
+        if book:
+            book_slug, book_name = book["slug"], book.get("name") or book_name
+        return {
+            "category": "origin", "book_slug": book_slug, "book_name": book_name,
+            "book_is_new": book is None, "grade": grade, "subject": "",
+            "year": year, "month": month, "unit_no": 0, "unit": "",
+            "material": "", "package": "", "package_name": "",
+            "origin_kind": guess_origin_kind(stem), "passages": 0,
+            "name": f"{book_name} 원본",
+            "slug": f"{book_slug}-origin",
+            "source": os.path.basename(filename or ""), "missing": [],
+        }
+
     material = guess_material(stem)
     unit_no, unit = guess_unit(stem)
     category = guess_product_category(stem)
@@ -1975,7 +2002,7 @@ def read_product_name(filename: str, catalog=None, site=None) -> dict:
         "book_is_new": book is None, "grade": grade, "subject": subject,
         "year": year, "month": month,
         "unit_no": unit_no, "unit": unit, "material": material, "package": package,
-        "package_name": pkg_name, "passages": passages,
+        "package_name": pkg_name, "passages": passages, "origin_kind": "",
         "name": " ".join(x for x in [book_name, unit, "·" if unit else "", pkg_name] if x),
         "slug": "-".join(x for x in slug_parts if x),
         "source": os.path.basename(filename or ""), "missing": missing,
@@ -2011,6 +2038,75 @@ def book_order_key(book: dict):
     if book.get("category") == "mock":
         return (0, -exam_stamp(book))
     return (0, to_int(book.get("sort"), 100))
+
+
+# ── 모의고사 원본 ─────────────────────────────────────────────────────
+# 해석 자료 옆에 시험지 원본이 있어야 선생님이 한 번에 챙기십니다. 우리가
+# 만든 것이 아니니 값을 붙이지 않습니다 — 그냥 받아 가시게 둡니다.
+ORIGIN_CATEGORY = {"id": "origin", "name": "모의고사 원본",
+                   "splits": ["grade", "year", "month"]}
+ORIGIN_KINDS = {
+    "paper": "문제지",
+    "answer": "정답 · 해설",
+    "listen": "듣기 파일",
+    "script": "듣기 대본",
+}
+ORIGIN_ALIASES = {
+    "answer": ["정답해설", "정답 해설", "해설지", "정답지", "정답및해설", "해설", "정답"],
+    "script": ["듣기대본", "듣기 대본", "대본", "스크립트"],
+    "listen": ["듣기파일", "듣기 파일", "듣기평가", "듣기", "mp3", "음원"],
+    "paper": ["문제지", "시험지", "원본", "기출"],   # 그냥 '문제' 는 변형문제와 겹칩니다
+}
+_ORIGIN_HINT = ("원본", "문제지", "시험지", "기출", "정답", "해설", "듣기", "대본")
+
+
+def guess_origin_kind(name: str) -> str:
+    """원본 파일이 문제지인지 해설인지 듣기인지. 못 알아보면 빈 값."""
+    low = _flat(name)
+    hit, best = "", -1
+    for kind, words in ORIGIN_ALIASES.items():
+        for w in words:
+            if _flat(w) in low and len(w) > best:      # 긴 별칭이 먼저입니다
+                hit, best = kind, len(w)
+    return hit
+
+
+def is_origin(name: str) -> bool:
+    """시험지 원본으로 볼 파일인지. 회차가 있고 원본 냄새가 나야 합니다."""
+    low = _flat(name)
+    if any(w in low for w in _TEXTBOOK_WORDS):
+        return False
+    if not guess_exam_round(name)[1] or not guess_origin_kind(name):
+        return False
+    # 우리가 만든 자료 이름이 함께 있으면 원본이 아닙니다. 다만 '모의고사' 는
+    # 시험 이름이면서 '동형모의고사' 라는 자료 이름이기도 해서, 그 하나만
+    # 걸린 것은 시험 이름으로 봅니다.
+    mat = guess_material(name)
+    if mat == "mocktest":
+        return "동형" not in low
+    return not mat
+
+
+def ensure_origin_category(catalog: dict) -> None:
+    """분류 목록에 '모의고사 원본' 이 없으면 넣어 둡니다.
+
+    자료 파일은 배포해도 안 덮이는 디스크에 있어서, 파일에만 적어 두면 이미
+    돌아가는 사이트에는 안 생깁니다.
+    """
+    cats = catalog.setdefault("categories", [])
+    if not any(c.get("id") == ORIGIN_CATEGORY["id"] for c in cats):
+        cats.append(json.loads(json.dumps(ORIGIN_CATEGORY)))
+
+
+def origin_kind_names(product: dict) -> list[str]:
+    """이 원본에 들어 있는 것들. ['문제지', '정답 · 해설'] 처럼."""
+    return [ORIGIN_KINDS[k] for k in (product or {}).get("origins", [])
+            if k in ORIGIN_KINDS]
+
+
+def is_free_product(product: dict) -> bool:
+    """값 없이 그냥 내어 주는 상품인지. 원본이 그렇습니다."""
+    return bool((product or {}).get("free")) or (product or {}).get("category") == "origin"
 
 
 def package_map() -> dict:

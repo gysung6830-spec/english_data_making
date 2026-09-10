@@ -3894,6 +3894,78 @@ def test_product_upload_also_fills_the_lineup():
     print("PASS  파는 PDF 하나로 라인업 샘플 · 지면 사진까지")
 
 
+def test_mock_originals_get_their_own_free_category():
+    """해석 자료 옆에 시험지 원본이 있어야 한 번에 챙기십니다.
+
+    우리가 만든 것이 아니니 값을 안 붙이고, 장바구니도 안 태웁니다.
+    """
+    # 원본인지 알아보는 눈
+    assert sc.is_origin("고1 2026년 9월 모의고사 문제지.pdf")
+    assert sc.is_origin("고3 2024년 시행 수능 원본.pdf")
+    assert sc.guess_origin_kind("고1 2026년 9월 모의고사 정답및해설.pdf") == "answer"
+    assert sc.guess_origin_kind("고2 2026년 3월 모의고사 듣기대본.pdf") == "script"
+    # 우리가 만든 자료는 원본이 아닙니다
+    assert not sc.is_origin("고1 2026년 9월 모의고사 한줄해석.pdf")
+    assert not sc.is_origin("2026 수능특강 영어 5강 17종 변형문제.pdf")
+    # '모의고사' 는 시험 이름이자 '동형모의고사' 라는 자료 이름이기도 합니다
+    assert not sc.is_origin("고1 2026년 9월 모의고사 동형모의고사.pdf")
+    # 회차가 없으면 원본이 아닙니다
+    assert not sc.is_origin("고1 3강 문제지.pdf")
+
+    # 분류가 없어도 코드가 넣어 줍니다 (자료 파일은 배포해도 안 덮이니까요)
+    assert any(c["id"] == "origin" for c in sc.load_catalog()["categories"])
+
+    a = admin()
+    names = ["고1 2027년 9월 모의고사 문제지.pdf", "고1 2027년 9월 모의고사 정답해설.pdf",
+             "고1 2027년 9월 모의고사 듣기대본.pdf", "고1 2027년 9월 모의고사 지문분석지.pdf"]
+    a.post("/admin/products/upload", data={
+        "files": [(io.BytesIO(_paged_pdf(n)), n) for n in names]},
+        content_type="multipart/form-data", follow_redirects=True)
+
+    by = {p["slug"]: p for p in sc.load_raw_catalog()["products"]}
+    origin = by["mock-2027-09-g1-origin"]
+    # 문제지 · 해설 · 듣기가 한 칸에 모입니다
+    assert origin["origins"] == ["paper", "answer", "script"]
+    assert origin["category"] == "origin" and origin["price"] == 0 and origin["free"] is True
+    assert sc.origin_kind_names(origin) == ["문제지", "정답 · 해설", "듣기 대본"]
+    assert sc.is_free_product(origin)
+    # 해석 자료는 따로, 값이 붙습니다
+    assert by["mock-2027-09-g1-pack-analysis"]["price"] > 0
+    assert not sc.is_free_product(by["mock-2027-09-g1-pack-analysis"])
+
+    c = client()
+    page = body(c.get("/products/mock-2027-09-g1-origin"))
+    assert "무료" in page
+    assert "장바구니에 담기" not in page and "바로 주문하기" not in page
+    assert "/products/mock-2027-09-g1-origin/file/0" in page
+
+    # 값 없는 것만 그냥 내어 줍니다. 파는 자료는 주문을 거쳐야 합니다.
+    got = c.get("/products/mock-2027-09-g1-origin/file/0")
+    assert got.status_code == 200
+    assert c.get("/products/mock-2027-09-g1-pack-analysis/file/0").status_code == 404
+    assert c.get("/products/mock-2027-09-g1-origin/file/99").status_code == 404
+
+    # 분류로 걸러도 나옵니다. 교재는 회차 하나인데 상품이 둘로 갈립니다.
+    listing = body(c.get("/products?category=origin"))
+    assert "2027년 9월 모의고사" in listing
+    assert "모의고사 원본" in listing and "무료" in listing
+    # 원본에는 패키지가 없으니 고르는 줄도 안 냅니다
+    assert 'class="filters pkg-filters"' not in listing
+    assert 'class="filters pkg-filters"' in body(c.get("/products?category=mock"))
+
+    # 한 회차에 자료가 둘로 갈립니다 — 분류마다 제 것만 셉니다
+    cat = sc.load_catalog()
+    counts = {c0["id"]: next((b0["count"] for b0 in sc.books_with_counts(cat, c0["id"])
+                              if b0["slug"] == "mock-2027-09-g1"), 0)
+              for c0 in cat["categories"]}
+    assert counts["origin"] == 1 and counts["mock"] == 1, counts
+
+    # 그 회차 교재 화면에서는 둘 다 보입니다
+    book_page = body(c.get("/books/mock-2027-09-g1"))
+    assert "원본" in book_page and "지문 분석 패키지" in book_page
+    print("PASS  모의고사 원본 — 값 없이 그냥 받는 분류")
+
+
 def test_product_upload_never_overwrites_a_hand_made_product():
     """손으로 만드신 상품을 말없이 덮어쓰면 안 됩니다."""
     a = admin()
@@ -6808,6 +6880,7 @@ def run_all():
     test_result_card_is_offered_and_keeps_nothing()
     test_product_upload_reads_the_filename()
     test_product_upload_also_fills_the_lineup()
+    test_mock_originals_get_their_own_free_category()
     test_product_upload_never_overwrites_a_hand_made_product()
     test_sample_is_the_first_six_pages_and_the_shot_is_page_three()
     test_mock_books_run_newest_first()

@@ -390,6 +390,8 @@ def products():
                                              -p.get("passages", 0)))
 
     groups, loose = group_by_book(items, books, sold)
+    # 고를 패키지가 실제로 있을 때만 그 줄을 냅니다 (원본에는 없습니다)
+    has_packages = any(p.get("package") for p in items)
     # 교재 카드끼리도 같은 기준으로 줄을 세웁니다.
     # (묶기만 하고 두면 '가격 낮은 순'을 눌러도 화면이 그대로라 눌러 본 보람이 없습니다)
     if order == "price":
@@ -411,7 +413,7 @@ def products():
                                if f in sc.category_splits(cat_of.get(cid))},
                            without=lambda drop: {f: v for f, v in picks.items()
                                                  if f != drop},
-                           orders=PRODUCT_ORDERS, order=order,
+                           orders=PRODUCT_ORDERS, order=order, has_packages=has_packages,
                            no_sales_yet=(order == "popular" and not sold),
                            q=q)
 
@@ -448,9 +450,12 @@ def product_detail(slug):
                         and (sc.SAMPLE_DIR / product["sample_file"]).exists())
     full = sc.full_pack_for(product, catalog)
     pass_on = (sc.load_site().get("pass") or {}).get("mode") == "sale"
+    free = sc.is_free_product(product)
     return render_template("product.html", p=product, book=book,
                            sibling=sibling, related=related, sample_ready=sample_ready,
-                           pass_on=pass_on,
+                           pass_on=pass_on, free=free,
+                           files=sc.product_files(slug) if free else [],
+                           origin_names=sc.origin_kind_names(product),
                            full=full, full_parts=len(full.get("covers", [])) if full else 0)
 
 
@@ -1533,6 +1538,24 @@ def free_notify():
         return redirect(back + "?bad=1")
     sc.add_lead(email, slug="", title="새 자료 알림 신청", news=True)
     return redirect(back + "?ok=1")
+
+
+@app.route("/products/<slug>/file/<int:index>")
+def product_free_file(slug, index):
+    """값 없이 내어 주는 상품의 파일. 시험지 원본이 그렇습니다.
+
+    파는 자료는 주문을 거쳐 자료함에서만 나갑니다. 여기는 원본처럼 값이
+    없는 것만 지나갈 수 있습니다.
+    """
+    product = next((p for p in sc.load_catalog()["products"]
+                    if p.get("slug") == slug), None)
+    if product is None or not sc.is_free_product(product):
+        abort(404)
+    files = sc.product_files(slug)
+    if not 0 <= index < len(files):
+        abort(404)
+    return send_from_directory(sc.product_dir(slug), files[index]["name"],
+                               as_attachment=True)
 
 
 @app.route("/products/<slug>/thumb.webp")

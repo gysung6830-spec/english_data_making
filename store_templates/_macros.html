@@ -31,11 +31,15 @@
     </div>
   {% endif %}
   <div class="price-row">
+    {% if p.free or p.category == 'origin' %}
+      <span class="price free-price">무료</span>
+    {% else %}
     <span class="price">{{ p.price|won }}</span>
     {% if p.list_price and p.list_price > p.price %}
       <span class="price-was">{{ p.list_price|won }}</span>
       <span class="price-off">{{ ((1 - p.price / p.list_price) * 100)|round|int }}% ↓</span>
     {% endif %}
+      {% endif %}
   </div>
   <div class="pc-act">
     <a class="btn btn-ghost" href="{{ url_for('product_detail', slug=p.slug) }}">자세히 보기</a>

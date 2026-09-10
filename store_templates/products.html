@@ -7,10 +7,15 @@
 <section class="section">
   <div class="wrap">
     <div class="section-head">
-      <h2>자료 목록</h2>
+      <h2>{{ '모의고사 원본' if selected == 'origin' else '자료 목록' }}</h2>
+      {% if selected == 'origin' %}
+        <p>시험을 주관한 곳에서 낸 <b>문제지 · 정답 · 해설 · 듣기</b>입니다.
+          우리가 만든 것이 아니라 <b>값을 붙이지 않습니다.</b> 그냥 받아 가세요.</p>
+      {% else %}
       <p>교재 한 권마다 <b>지문 분석 패키지</b>와 <b>문제 패키지</b> 두 가지가 있습니다.
         어떤 자료가 들어가는지는 카드에 적어 두었고,
         자료 하나하나는 <a href="{{ url_for('lineup') }}"><b>오르티카잉 라인업</b></a>에서 보실 수 있습니다.</p>
+      {% endif %}
     </div>
 
     <form class="searchbar" method="get" action="{{ url_for('products') }}">
@@ -69,6 +74,8 @@
         </div>
       {% endfor %}
   
+      {# 시험지 원본에는 패키지가 없습니다. 고를 것이 없는 줄은 안 냅니다. #}
+      {% if has_packages %}
       <div class="filters pkg-filters">
         <span class="filter-label">패키지</span>
         <a class="filter {{ 'on' if not selected_package }}"
@@ -78,6 +85,7 @@
              href="{{ url_for('products', category=selected, package=pkg.id, order=order, q=q, **keep) }}">{{ pkg.name }}</a>
         {% endfor %}
       </div>
+      {% endif %}
   
       <div class="filters">
         <span class="filter-label">정렬</span>
