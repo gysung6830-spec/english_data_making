@@ -4244,6 +4244,15 @@ def test_word_study_starts_with_flash_and_offers_games():
     assert 'type="range"' in setup and 'id="n"' in setup
     total = sc.word_count(sc.find_wordbook(slug))
     assert f'max="{total}"' in setup
+    # 한 칸씩 매끄럽게 움직여야 합니다. 다섯 칸씩 뛰면 낱말 수가 5의 배수가
+    # 아닐 때 '전부' 를 아예 못 고릅니다.
+    assert 'step="1"' in setup
+    # 끌지 않고 한 번에 고르는 길도 둡니다
+    assert 'id="nQuick"' in setup and 'data-n="all"' in setup
+    for v in (10, 20, 30, 50):
+        assert f'data-n="{v}"' in setup, v
+    # 숫자는 슬라이더 위에 둡니다. 옆에 두면 끄는 동안 손가락에 가립니다.
+    assert setup.index('id="nOut"') < setup.index('type="range"')
 
     # 게임이 실제로 열립니다
     for gid in sc.WORD_GAMES:

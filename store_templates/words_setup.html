@@ -83,13 +83,22 @@
       </div>
 
       <div class="field">
-        <label for="n">3. 몇 개 <span class="hint">고른 범위 안에서</span></label>
-        <div class="spectrum">
-          <input type="range" id="n" name="n" min="5" max="{{ total }}" step="5" value="20">
-          <output id="nOut" for="n">20개</output>
-        </div>
-        <div class="spec-scale">
-          <span>5개</span><span id="nMax">{{ total }}개</span>
+        <label for="n">3. 몇 개 풀까요</label>
+        <div class="spec">
+          {# 숫자를 슬라이더 위에 둡니다. 옆에 두면 끄는 동안 손가락에 가립니다. #}
+          <div class="spec-top">
+            <output id="nOut" for="n">20<i>개</i></output>
+            <span class="spec-of" id="nOf"></span>
+          </div>
+          <input type="range" id="n" name="n" min="5" max="{{ total }}" step="1" value="20">
+          <div class="spec-ends"><span>5개</span><span id="nMax">{{ total }}개</span></div>
+          {# 끌지 않고 한 번에 고르실 수 있게. 대부분 여기서 끝납니다. #}
+          <div class="spec-quick" id="nQuick">
+            {% for v in [10, 20, 30, 50] %}
+              <button type="button" data-n="{{ v }}">{{ v }}</button>
+            {% endfor %}
+            <button type="button" data-n="all" class="all">전부</button>
+          </div>
         </div>
       </div>
 
@@ -114,6 +123,8 @@
   var n = document.getElementById('n');
   var out = document.getElementById('nOut');
   var nMax = document.getElementById('nMax');
+  var nOf = document.getElementById('nOf');
+  var quick = document.getElementById('nQuick');
 
   function scope() {
     var sum = 0;
@@ -123,6 +134,24 @@
     });
     return sum;
   }
+  function show() {
+    var v = +n.value, min = +n.min, max = +n.max;
+    if (out) out.innerHTML = v + '<i>개</i>';
+    /* 지나온 만큼 트랙을 채웁니다 — 얼마쯤 왔는지 눈으로 보이게 */
+    n.style.setProperty('--fill', (max > min ? (v - min) / (max - min) * 100 : 100) + '%');
+    if (nOf) nOf.textContent = v >= max ? '고른 범위를 다 풉니다'
+                                        : '고른 범위 ' + max + '개 가운데';
+    if (quick) {
+      /* 20개가 곧 전부일 때 두 칸이 같이 켜지면 고장 난 것처럼 보입니다.
+         전부면 '전부' 쪽만 켭니다. */
+      [].forEach.call(quick.children, function (b) {
+        var all = b.dataset.n === 'all';
+        var want = all ? max : +b.dataset.n;
+        b.hidden = !all && want > max;
+        b.classList.toggle('on', v === want && (all || v < max));
+      });
+    }
+  }
   function resize() {
     var max = Math.max(5, scope());
     n.max = max;
@@ -131,9 +160,14 @@
     if (+n.value < 5) n.value = 5;
     show();
   }
-  function show() { if (out) out.textContent = n.value + '개'; }
 
   n.addEventListener('input', show);
+  if (quick) quick.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-n]');
+    if (!b) return;
+    n.value = b.dataset.n === 'all' ? n.max : Math.min(+b.dataset.n, +n.max);
+    show();
+  });
   document.querySelectorAll('input[name=unit]').forEach(function (u) {
     u.addEventListener('change', resize);
   });
