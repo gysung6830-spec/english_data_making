@@ -4153,6 +4153,40 @@ def test_free_page_offers_packages_not_single_files():
     print("PASS  함께 보여 줄 유료 자료는 패키지로")
 
 
+def test_word_rain_makes_you_know_the_word():
+    """게임이라도 단어를 알아야 이겨야 합니다.
+
+    짝 맞추기(카드 뒤집기)를 뺀 까닭입니다 — 카드가 어디 있었는지만 외우면
+    단어를 몰라도 이겼습니다.
+    """
+    assert "match" not in sc.WORD_GAMES
+    assert list(sc.WORD_GAMES)[0] == "rain"
+    assert sc.WORD_GAMES["rain"]["name"] == "단어 비"
+
+    js = body(client().get("/static/wordgame.js"))
+    assert "짝 맞추기" not in js and "function match(" not in js
+    # 어느 것이 답인지 표시하면 안 됩니다
+    assert "classList.toggle('on'" not in js
+    # 글자끼리 겹치면 못 읽습니다 — 자리를 나눠 떨어뜨립니다
+    assert "LANES" in js and "freeLane" in js
+    # 목숨 · 연속 · 빨라지기가 다 있어야 겨룰 맛이 납니다
+    for must in ("lives", "combo", "function speed(", "requestAnimationFrame"):
+        assert must in js, must
+
+    c = client()
+    slug = sc.load_words()["books"][0]["slug"]
+    page = body(c.get(f"/words/{slug}/study?mode=game&game=rain&n=12"))
+    assert 'data-game="rain"' in page
+    assert sc.WORD_GAMES["rain"]["how"] in page          # 어떻게 하는 놀이인지
+    # 판은 글에서 만듭니다
+    assert "이 뜻을 찾으세요" in js and "rnSky" in js
+    # 설정 화면에도 새 이름으로 섭니다
+    setup = body(c.get(f"/words/{slug}/study"))
+    assert 'value="game:rain"' in setup and "단어 비" in setup
+    assert "짝 맞추기" not in setup
+    print("PASS  단어 비 — 답을 표시하지 않으니 단어를 알아야 이김")
+
+
 def test_result_card_is_offered_and_keeps_nothing():
     """다 하고 나면 그림 한 장으로 남길 수 있어야 합니다.
 
@@ -4218,7 +4252,10 @@ def test_word_study_starts_with_flash_and_offers_games():
         assert 'id="board"' in page and f'data-game="{gid}"' in page
         assert "gameWords" in page and "wordgame.js" in page
     # 모르는 게임 이름으로 와도 첫 게임으로 엽니다
-    assert 'data-game="match"' in body(c.get(f"/words/{slug}/study?mode=game&game=zzz"))
+    assert 'data-game="rain"' in body(c.get(f"/words/{slug}/study?mode=game&game=zzz"))
+    # 짝 맞추기는 뺐습니다 — 카드 위치만 외우면 단어를 몰라도 이겼습니다
+    assert "match" not in sc.WORD_GAMES
+    assert "짝 맞추기" not in body(c.get("/static/wordgame.js"))
     print("PASS  단어 학습 — 깜빡이가 맨 앞 · 게임 셋 · 개수는 스펙트럼")
 
 
@@ -6877,6 +6914,7 @@ def run_all():
     test_a_bad_email_cannot_take_the_gated_file()
     test_free_page_offers_packages_not_single_files()
     test_word_study_starts_with_flash_and_offers_games()
+    test_word_rain_makes_you_know_the_word()
     test_result_card_is_offered_and_keeps_nothing()
     test_product_upload_reads_the_filename()
     test_product_upload_also_fills_the_lineup()

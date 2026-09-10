@@ -2715,17 +2715,27 @@ input[type=text].bl-in.wide{min-width:74px;}
 .g-done p{margin:0 0 14px; color:var(--ink-2,#4b5563);}
 .g-done .hero-actions{justify-content:center;}
 
-/* 짝 맞추기 */
-.g-match{display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
-.mc{aspect-ratio:3/2.2; border:1px solid var(--line,#e5e7eb); border-radius:12px;
-  background:var(--brand,#166534); cursor:pointer; padding:8px; transition:.18s;
-  display:flex; align-items:center; justify-content:center;}
-.mc-face{opacity:0; font-size:14px; font-weight:700; line-height:1.35; word-break:keep-all;}
-.mc.on{background:#fff;}
-.mc.on .mc-face{opacity:1;}
-.mc.gone{background:var(--brand-soft,#eef7f1); border-style:dashed; cursor:default;}
-.mc.gone .mc-face{opacity:.45;}
-@media (max-width:520px){ .g-match{grid-template-columns:repeat(3,1fr);} .mc-face{font-size:12px;} }
+/* 단어 비 — 떨어지는 단어를 터뜨립니다 */
+.g-rain{position:relative;}
+.rn-sky{position:relative; height:320px; border-radius:14px; overflow:hidden;
+  background:linear-gradient(#f4f8f6, #fff); border:1px solid var(--line,#e5e7eb);}
+.rn-drop{position:absolute; top:-10%; max-width:24%; overflow:hidden;
+  text-overflow:ellipsis; padding:9px 15px; border-radius:999px;
+  border:1px solid var(--line,#e5e7eb); background:#fff; cursor:pointer;
+  font-size:15px; font-weight:700; white-space:nowrap; transition:.16s;
+  box-shadow:0 2px 8px rgba(15,32,24,.07);}
+.rn-drop.pop{transform:scale(1.5); opacity:0;}
+.rn-drop.fell{background:#fdeceb; border-color:#f3c4c1; color:#b91c1c; opacity:0;}
+.rn-drop.miss{animation:rnShake .3s;}
+@keyframes rnShake{25%{transform:translateX(-5px);}75%{transform:translateX(5px);}}
+.rn-ask{margin-top:14px; text-align:center; font-size:13px; color:var(--muted,#6b7280);}
+.rn-ask b{display:block; margin-top:4px; font-size:30px; color:var(--ink,#1a1d21);
+  letter-spacing:-.02em; word-break:keep-all;}
+@media (max-width:520px){
+  .rn-sky{height:260px;}
+  .rn-drop{font-size:12px; padding:6px 9px; max-width:23%;}
+  .rn-ask b{font-size:24px;}
+}
 
 /* 1분 스피드 */
 .sp-word{text-align:center; font-size:34px; font-weight:800; margin:26px 0 22px;

@@ -63,53 +63,145 @@
     });
   }
 
-  /* ── 짝 맞추기 ─────────────────────────────────────────────────── */
-  function match() {
-    AL.textContent = '뒤집은 횟수'; BL.textContent = '남은 짝'; CL.textContent = '맞힌 짝';
-    var pairs = Math.min(8, EN.length);
-    var pick = shuffle(EN.map(function (w, i) { return i; })).slice(0, pairs);
-    var cards = shuffle(pick.map(function (i) { return { i: i, side: 'en' }; })
-      .concat(pick.map(function (i) { return { i: i, side: 'ko' }; })));
+  /* ── 단어 비 ───────────────────────────────────────────────────
+     단어가 위에서 떨어집니다. 아래 뜻에 맞는 것을 눌러 터뜨리세요.
+     카드 위치를 외우는 게임이 아니라 단어를 알아야 하는 게임입니다. */
+  function rain() {
+    AL.textContent = '점수'; BL.textContent = '목숨'; CL.textContent = '연속';
+    board.className = 'g-board g-rain';
+    board.innerHTML = '<div class="rn-sky" id="rnSky"></div>' +
+                      '<div class="rn-ask">이 뜻을 찾으세요' +
+                      '<b id="rnWant">…</b></div>';
+    var sky = document.getElementById('rnSky');
+    var want = document.getElementById('rnWant');
 
-    var flips = 0, found = 0, open = [], lock = false;
-    A.textContent = '0'; B.textContent = String(pairs); C.textContent = '0';
-    board.className = 'g-board g-match';
-    board.innerHTML = '';
+    var score = 0, combo = 0, lives = 3, cleared = 0;
+    var drops = [], target = null, alive = true, last = 0, spawnAt = 0;
+    var order = shuffle(EN.map(function (_, i) { return i; }));
+    var at = 0;
+    A.textContent = '0'; B.textContent = '❤❤❤'; C.textContent = '0';
 
-    cards.forEach(function (c) {
-      var node = el('button', 'mc');
-      node.type = 'button';
-      node.appendChild(el('span', 'mc-face', c.side === 'en' ? EN[c.i] : KO[c.i]));
-      node.addEventListener('click', function () {
-        if (lock || node.classList.contains('on') || node.classList.contains('gone')) return;
-        node.classList.add('on');
-        open.push({ c: c, node: node });
-        if (open.length < 2) return;
-        flips++; A.textContent = String(flips);
-        var a = open[0], b2 = open[1];
-        if (a.c.i === b2.c.i && a.c.side !== b2.c.side) {
-          a.node.classList.add('gone'); b2.node.classList.add('gone');
-          open = []; found++;
-          C.textContent = String(found); B.textContent = String(pairs - found);
-          if (found === pairs) {
-            var r = keep('flips', flips, false);
-            finish('다 맞히셨습니다 · ' + flips + '번 만에',
-              r && r.was != null
-                ? (r.better ? '지난 기록 ' + r.was + '번보다 빨랐습니다.'
-                            : '가장 잘하셨을 때는 ' + r.was + '번이었습니다.')
-                : (flips <= best ? '아주 잘하셨습니다.' : '한 번 더 하시면 더 줄어듭니다.'),
-              [['뒤집은 횟수', flips], ['맞힌 짝', pairs], ['가장 잘한 것', (r && r.was != null ? Math.min(r.was, flips) : flips) + '번']]);
-          }
-        } else {
-          lock = true;
-          setTimeout(function () {
-            a.node.classList.remove('on'); b2.node.classList.remove('on');
-            open = []; lock = false;
-          }, 700);
-        }
+    function speed() { return 0.020 + Math.min(0.045, cleared * 0.0016); }
+    function gap() { return Math.max(700, 1600 - cleared * 45); }
+
+    /* 아무 데나 떨어뜨리면 글자끼리 겹쳐 못 읽습니다. 자리를 넷으로 나누고,
+       그 가운데 가장 비어 있는 자리에 내려 줍니다. */
+    var LANES = [4, 28, 52, 74];
+
+    function freeLane() {
+      var best = 0, room = -1;
+      LANES.forEach(function (x, i) {
+        var mine = drops.filter(function (d) { return d.lane === i; });
+        var top = mine.length ? Math.min.apply(null, mine.map(function (d) { return d.y; })) : 999;
+        if (top > room) { room = top; best = i; }
       });
-      board.appendChild(node);
-    });
+      return best;
+    }
+
+    function spawn(startY) {
+      if (drops.length >= 6) return;
+      var me = order[at % order.length]; at++;
+      var lane = freeLane();
+      var node = el('button', 'rn-drop', EN[me]);
+      node.type = 'button';
+      node.style.left = LANES[lane] + '%';
+      node.addEventListener('click', function () { hit(one); });
+      var one = { i: me, y: (startY == null ? -10 : startY), lane: lane, node: node };
+      node.style.top = one.y + '%';
+      sky.appendChild(node);
+      drops.push(one);
+      if (!target) aim();
+    }
+
+    function aim() {
+      // 어느 것이 답인지 표시하지 않습니다. 표시하면 단어를 몰라도 이겨서,
+      // 카드 뒤집기 게임을 뺀 것과 같은 일이 됩니다.
+      target = drops.length ? drops[Math.floor(Math.random() * drops.length)] : null;
+      want.textContent = target ? KO[target.i] : '…';
+    }
+
+    function drop(one, why) {
+      one.node.classList.add(why);
+      var node = one.node;
+      setTimeout(function () { if (node.parentNode) node.parentNode.removeChild(node); }, 260);
+      drops = drops.filter(function (d) { return d !== one; });
+      // 다 터뜨려 빈 하늘이 되면 곧바로 하나 내려 줍니다. 안 그러면 다음
+      // 것이 나올 때까지 '…' 만 뜬 채로 몇 초를 기다리게 됩니다.
+      if (!drops.length && alive) { spawn(); spawnAt = performance.now() + gap(); }
+      if (one === target) { target = null; aim(); }
+    }
+
+    function hit(one) {
+      if (!alive) return;
+      if (one !== target) {
+        combo = 0; C.textContent = '0';
+        one.node.classList.add('miss');
+        setTimeout(function () { one.node.classList.remove('miss'); }, 300);
+        return;
+      }
+      combo++; cleared++;
+      score += 10 * Math.min(5, combo);
+      A.textContent = String(score); C.textContent = String(combo);
+      drop(one, 'pop');
+    }
+
+    function lose(one) {
+      lives--; combo = 0;
+      B.textContent = '❤'.repeat(Math.max(0, lives)) || '—';
+      C.textContent = '0';
+      drop(one, 'fell');
+      if (lives <= 0) over();
+    }
+
+    function over() {
+      alive = false;
+      drops.forEach(function (d) { if (d.node.parentNode) d.node.parentNode.removeChild(d.node); });
+      drops = [];
+      var r = keep('score', score, true);
+      finish('끝 · ' + score + '점',
+        r && r.was != null
+          ? (r.better ? '지난 기록 ' + r.was + '점을 넘었습니다.'
+                      : '가장 잘하셨을 때는 ' + r.was + '점이었습니다.')
+          : '한 번 더 하시면 더 오릅니다.',
+        [['점수', score], ['터뜨린 단어', cleared],
+         ['가장 잘한 것', (r && r.was != null ? Math.max(r.was, score) : score) + '점']]);
+    }
+
+    function tick(now) {
+      if (!alive) return;
+      if (!last) last = now;
+      var dt = Math.min(60, now - last);
+      last = now;
+      if (now > spawnAt) { spawn(); spawnAt = now + gap(); }
+      var step = speed() * dt;
+      drops.slice().forEach(function (one) {
+        one.y += step;
+        one.node.style.top = one.y + '%';
+        if (one.y >= 88) lose(one);
+      });
+      requestAnimationFrame(tick);
+    }
+    // 처음부터 여럿 떠 있어야 고르는 맛이 납니다. 하나뿐이면 그냥 누르면 됩니다.
+    // 높이를 엇갈리게 두어 한 줄로 나란히 서지 않게 합니다.
+    [10, -12, -34, -56].forEach(function (y) { spawn(y); });
+    requestAnimationFrame(tick);
+
+    /* 시험에서 눌러 볼 수 있게 지금 상태를 내어 줍니다 */
+    board.pick = function (right) {
+      var one = right ? target : drops.filter(function (d) { return d !== target; })[0];
+      if (!one) return false;
+      one.node.click();
+      return true;
+    };
+    board.sink = function () {
+      if (!drops.length || !alive) return false;
+      lose(drops[0]);
+      return true;
+    };
+    board.state = function () {
+      return { drops: drops.length, lives: lives, combo: combo, score: score,
+               alive: alive, want: target ? KO[target.i] : '' };
+    };
   }
 
   /* ── 1분 스피드 ────────────────────────────────────────────────── */
@@ -223,7 +315,7 @@
     ask();
   }
 
-  var start = { match: match, speed: speed, type: typing }[kind] || match;
+  var start = { rain: rain, speed: speed, type: typing }[kind] || rain;
   function run() { done.hidden = true; start(); }
   document.getElementById('again').addEventListener('click', run);
   document.getElementById('retry').addEventListener('click', run);
