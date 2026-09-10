@@ -203,12 +203,16 @@
     {
      "tag": "접속사 when",
      "note": "'~할 때'",
-     "spans": ["When"]
+     "spans": [
+      "When"
+     ]
     },
     {
      "tag": "수동 is overexcited",
      "note": "'과도하게 흥분되다'",
-     "spans": ["is overexcited"]
+     "spans": [
+      "is overexcited"
+     ]
     }
    ],
    "vocab": [
@@ -281,31 +285,42 @@
     {
      "tag": "명사절 when",
      "note": "This is의 보어절 — '~할 때(인 상황)'",
-     "spans": ["when"],
+     "spans": [
+      "when"
+     ],
      "role": "This is의 보어절"
     },
     {
-     "tag": "전치사+관계 in which",
+     "tag": "전치사+관계대명사 in which",
      "note": "situations 수식",
-     "spans": ["in which"],
+     "spans": [
+      "in which"
+     ],
      "antecedent": "situations"
     },
     {
-     "tag": "관계사 which",
+     "tag": "목적격 관계대명사 which",
      "note": "comments 수식",
-     "spans": ["which"],
+     "spans": [
+      "which"
+     ],
      "antecedent": "comments"
     },
     {
      "tag": "관계사 what",
      "note": "'~하는 것'",
-     "spans": ["what"],
+     "spans": [
+      "what"
+     ],
      "role": "'~하는 것'(선행사 포함 명사절), do의 목적어절"
     },
     {
      "tag": "수동태",
      "note": "comments are made / what they are told — be+p.p.",
-     "spans": ["are made", "are told"]
+     "spans": [
+      "are made",
+      "are told"
+     ]
     }
    ],
    "vocab": [
@@ -385,7 +400,9 @@
     {
      "tag": "재귀대명사 themselves",
      "note": "주어=목적어",
-     "spans": ["themselves"]
+     "spans": [
+      "themselves"
+     ]
     }
    ],
    "vocab": [
@@ -438,12 +455,18 @@
     {
      "tag": "명사 보어",
      "note": "the best strategy is a hug",
-     "spans": ["is a hug"]
+     "spans": [
+      "is a hug"
+     ]
     },
     {
      "tag": "부정사 부사적용법(목적)",
      "note": "To help ~, to see ~, ... to defuse ~ — 목적의 부정사(⑤)",
-     "spans": ["To help", "to see", "to defuse"]
+     "spans": [
+      "To help",
+      "to see",
+      "to defuse"
+     ]
     }
    ],
    "vocab": [
@@ -520,12 +543,16 @@
     {
      "tag": "분사구문 allowing",
      "note": "'~하게 하면서'",
-     "spans": ["allowing"]
+     "spans": [
+      "allowing"
+     ]
     },
     {
      "tag": "관계사 what",
      "note": "'~하는 것'",
-     "spans": ["what"],
+     "spans": [
+      "what"
+     ],
      "role": "'~하는 것'(선행사 포함 명사절), listen to의 목적어절"
     }
    ],

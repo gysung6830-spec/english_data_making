@@ -198,15 +198,19 @@
    "translation": "변화의 스펙트럼 한쪽 끝에는 뉴기니와 아마존 사람들이 행하던 산림 정원 가꾸기가 있었는데, 그것은 자연적 성장을 모방하고 땅에 최소한의 흔적만 남겼다.",
    "grammar": [
     {
-     "tag": "관계사 that",
+     "tag": "주격 관계대명사 that",
      "note": "forest gardening 수식",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "antecedent": "the forest gardening"
     },
     {
      "tag": "분사(과거분사구)",
      "note": "as practiced by the peoples = as (it was) practiced — forest gardening 수식(수동)",
-     "spans": ["practiced"]
+     "spans": [
+      "practiced"
+     ]
     }
    ],
    "vocab": [
@@ -337,7 +341,9 @@
     {
      "tag": "병렬 명사구",
      "note": "밀밭/논/양·염소 무리",
-     "spans": ["and"]
+     "spans": [
+      "and"
+     ]
     }
    ],
    "vocab": [
@@ -418,12 +424,16 @@
     {
      "tag": "분사 measured",
      "note": "'~로 측정될 때'",
-     "spans": ["measured"]
+     "spans": [
+      "measured"
+     ]
     },
     {
      "tag": "Biologically speaking",
      "note": "'생물학적으로 말하면'",
-     "spans": ["Biologically speaking"]
+     "spans": [
+      "Biologically speaking"
+     ]
     }
    ],
    "vocab": [
@@ -484,7 +494,9 @@
     {
      "tag": "도치(So+동사+주어)",
      "note": "앞 문장을 받아 '~도 그랬다'",
-     "spans": ["So did"]
+     "spans": [
+      "So did"
+     ]
     }
    ],
    "vocab": [
@@ -525,15 +537,19 @@
    "translation": "익거나 수확 후 저장된 농작물은 쥐, 생쥐, 참새, 그리고 바퀴벌레를 끌어들였다.",
    "grammar": [
     {
-     "tag": "관계사 that",
+     "tag": "주격 관계대명사 that",
      "note": "Crops 수식",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "antecedent": "Crops"
     },
     {
      "tag": "수동 were stored",
      "note": "'저장된'",
-     "spans": ["were stored"]
+     "spans": [
+      "were stored"
+     ]
     }
    ],
    "vocab": [
@@ -596,7 +612,10 @@
     {
      "tag": "provide A for B",
      "note": "B에게 A를 제공하다",
-     "spans": ["provided", "for"]
+     "spans": [
+      "provided",
+      "for"
+     ]
     }
    ],
    "vocab": [
@@ -645,7 +664,9 @@
     {
      "tag": "병렬 주어",
      "note": "Garbage and ... waste",
-     "spans": ["and"]
+     "spans": [
+      "and"
+     ]
     }
    ],
    "vocab": [
@@ -694,7 +715,9 @@
     {
      "tag": "Thanks to",
      "note": "'~덕분에'",
-     "spans": ["Thanks to"]
+     "spans": [
+      "Thanks to"
+     ]
     }
    ],
    "vocab": [

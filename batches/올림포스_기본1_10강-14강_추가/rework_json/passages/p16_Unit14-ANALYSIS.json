@@ -185,13 +185,17 @@
     {
      "tag": "명사절 that",
      "note": "tells us의 목적어",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "role": "tells의 목적어절"
     },
     {
      "tag": "접속사 when",
      "note": "'~할 때'",
-     "spans": ["when"]
+     "spans": [
+      "when"
+     ]
     }
    ],
    "vocab": [
@@ -252,7 +256,9 @@
     {
      "tag": "조동사 would",
      "note": "'(그런 상황이면) ~할 것이다'",
-     "spans": ["would"]
+     "spans": [
+      "would"
+     ]
     }
    ],
    "vocab": [
@@ -301,12 +307,17 @@
     {
      "tag": "지시 That",
      "note": "앞 통찰을 받음",
-     "spans": ["That"]
+     "spans": [
+      "That"
+     ]
     },
     {
      "tag": "make + 목적어 + 형용사",
      "note": "'~을 …하게 만들다'",
-     "spans": ["makes", "uncomfortable"]
+     "spans": [
+      "makes",
+      "uncomfortable"
+     ]
     }
    ],
    "vocab": [
@@ -351,7 +362,9 @@
     {
      "tag": "명사절 생략",
      "note": "feel (that) ~",
-     "spans": ["feel"],
+     "spans": [
+      "feel"
+     ],
      "role": "feel의 목적어절"
     }
    ],
@@ -395,15 +408,20 @@
    "translation": "그러나 방관자의 문제는 그들이 돕지 못하게 막는 성격상의 결함에서 비롯되는 것이 아니다.",
    "grammar": [
     {
-     "tag": "관계사 that",
+     "tag": "주격 관계대명사 that",
      "note": "defects 수식",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "antecedent": "defects"
     },
     {
      "tag": "prevent A from -ing",
      "note": "'A가 ~하지 못하게 하다'",
-     "spans": ["prevent", "from"]
+     "spans": [
+      "prevent",
+      "from"
+     ]
     }
    ],
    "vocab": [
@@ -460,15 +478,19 @@
    "translation": "오히려 방관자가 처한 상황이 우리가 깨닫는 것보다 더 그들의 행동을 제약한다.",
    "grammar": [
     {
-     "tag": "관계사 that",
+     "tag": "목적격 관계대명사 that",
      "note": "the situation 수식",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "antecedent": "the situation"
     },
     {
      "tag": "비교 more than",
      "note": "'~보다 더'",
-     "spans": ["more than"]
+     "spans": [
+      "more than"
+     ]
     }
    ],
    "vocab": [
@@ -527,12 +549,17 @@
     {
      "tag": "형용사 likely + 절",
      "note": "the less likely (that) ~ : '~할 것 같은/가능성이 있는'",
-     "spans": ["likely"]
+     "spans": [
+      "likely"
+     ]
     },
     {
      "tag": "the 비교급~, the 비교급~",
      "note": "the more bystanders ~, the less likely ~ — 비례 비교(⑤)",
-     "spans": ["the more", "the less"]
+     "spans": [
+      "the more",
+      "the less"
+     ]
     }
    ],
    "vocab": [
@@ -591,22 +618,30 @@
     {
      "tag": "가정법 would",
      "note": "'(혼자라면) ~할 것이다'",
-     "spans": ["would"]
+     "spans": [
+      "would"
+     ]
     },
     {
      "tag": "just as",
      "note": "'꼭 ~처럼'",
-     "spans": ["just as"]
+     "spans": [
+      "just as"
+     ]
     },
     {
      "tag": "반복어구 생략(대동사 would)",
      "note": "just as we hope we would (respond) — respond 반복 생략",
-     "spans": ["we would"]
+     "spans": [
+      "we would"
+     ]
     },
     {
      "tag": "명사절 생략",
      "note": "hope (that) we would — hope 뒤 that 생략",
-     "spans": ["hope"],
+     "spans": [
+      "hope"
+     ],
      "role": "hope의 목적어절"
     }
    ],
@@ -670,12 +705,16 @@
     {
      "tag": "접속사 when",
      "note": "'~할 때'",
-     "spans": ["when"]
+     "spans": [
+      "when"
+     ]
     },
     {
      "tag": "분사구문 getting",
      "note": "'~해지면서'",
-     "spans": ["getting"]
+     "spans": [
+      "getting"
+     ]
     }
    ],
    "vocab": [
@@ -740,7 +779,10 @@
     {
      "tag": "enough ... to",
      "note": "'~할 만큼 충분히'",
-     "spans": ["enough", "to respond"]
+     "spans": [
+      "enough",
+      "to respond"
+     ]
     }
    ],
    "vocab": [

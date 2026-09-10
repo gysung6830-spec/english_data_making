@@ -2,7 +2,7 @@
 """올림포스 10-14강 필생보 v2 — 5섹션 구조.
 ① 원문  ② 어휘리스트  (page)  ③ 해석연습(빈칸)+어법 형광펜  (page)  ④ 어법칩 목록  (page)  ⑤ O/X/△ 학습지.
 학생용/강사용 각각 출력."""
-import json, os, html, re
+import json, os, html, re, sys
 from weasyprint import HTML
 import fitz
 SC="/tmp/claude-0/-home-user-english-data-making/3e2ff8b7-89bb-5341-95ca-4062ce95757b/scratchpad/olrw"
@@ -22,6 +22,18 @@ NOTES={}
 if os.path.exists(SC+"/answer_notes.json"):
     try: NOTES=json.load(open(SC+"/answer_notes.json"))
     except Exception: NOTES={}
+# --- 어법칩 정합성 검증(관계대명사 주격/목적격·생략 오류를 렌더 전에 차단) ---
+sys.path.insert(0,_HERE)
+try:
+    from verify_grammar import check_passages
+    _errs,_warns=check_passages(P)
+    for w in _warns: print("  ⚠ 어법 경고:",w)
+    if _errs:
+        for e in _errs: print("  ❌ 어법 오류:",e)
+        sys.exit(f"어법칩 정합성 오류 {len(_errs)}건 → 렌더 중단(데이터 수정 필요)")
+    print(f"어법 검증 통과(오류 0, 경고 {len(_warns)})")
+except ImportError:
+    print("※ verify_grammar 미발견 → 어법 검증 건너뜀")
 def esc(s): return html.escape(str(s or ""))
 _MK=re.compile(r"\[\[(.+?)\]\]")
 
@@ -122,10 +134,11 @@ def hl_en(s):
     """어법칩 형광펜만(슬래시 없음) — ⑤ 어법칩용."""
     raw=s.get("english","") or ""
     return _render_en(raw, _hl_marks(s), [])
-def en_practice(s):
-    """④ 해석연습 영어: 청크 사이 / 슬래시 + 어법칩 형광펜."""
+def en_practice(s, teacher):
+    """③ 해석연습 영어: 강사용은 청크 / 끊어읽기(정답), 학생용은 슬래시 없음(끊어읽기=학생 몫). 형광펜은 공통."""
     raw=s.get("english","") or ""
-    return _render_en(raw, _hl_marks(s), _chunk_bounds(s, raw))
+    slashes=_chunk_bounds(s, raw) if teacher else []
+    return _render_en(raw, _hl_marks(s), slashes)
 
 def _grammar_marks(s):
     """어법칩 spans(보라 hl) + 관계사 선행사(초록 ha)를 겹치지 않게 표시."""
@@ -331,9 +344,11 @@ def render_overview(p, teacher):
 
 def render_trans(p, teacher):
     """목차 3 해석 연습 — 영어 청크 / 끊어읽기 + 어법 형광펜, 한글 핵심 빈칸."""
-    h=['<div class="psg">'+phead(p)+'<div class="sec">'+sec_head(3,"해석 연습","영어는 청크마다 / 끊어읽기 · 어법칩 형광펜 / 한글은 오역 위험 핵심 어구 빈칸")+'<div class="panel">']
+    _desc=("영어에 / 끊어읽기 표시(정답) · 어법칩 형광펜 · 한글은 오역 위험 핵심 어구" if teacher
+           else "영어에 직접 / 끊어읽기 표시하며 해석 · 한글 빈칸(오역 위험 핵심) 채우기")
+    h=['<div class="psg">'+phead(p)+'<div class="sec">'+sec_head(3,"해석 연습",_desc)+'<div class="panel">']
     for s in p["sentences"]:
-        h.append(f'<div class="s"><div class="en"><span class="n">{s["id"]}</span>{en_practice(s)}</div><div class="ko">{ko_line(s, teacher)}</div></div>')
+        h.append(f'<div class="s"><div class="en"><span class="n">{s["id"]}</span>{en_practice(s, teacher)}</div><div class="ko">{ko_line(s, teacher)}</div></div>')
     h.append('</div></div></div>')
     return "".join(h)
 

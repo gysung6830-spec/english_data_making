@@ -188,12 +188,17 @@
     {
      "tag": "비교급 faster than",
      "note": "'~보다 더 빠르게' 벌목 속도와 재성장 속도를 비교",
-     "spans": ["faster", "than"]
+     "spans": [
+      "faster",
+      "than"
+     ]
     },
     {
-     "tag": "전치사+관계대명사",
+     "tag": "전치사+관계대명사 at which",
      "note": "the rate at which ~: '~하는 속도'",
-     "spans": ["at which"],
+     "spans": [
+      "at which"
+     ],
      "antecedent": "the rate"
     }
    ],
@@ -249,12 +254,17 @@
     {
      "tag": "상관접속사 not (just) A but B",
      "note": "'~때문만이 아니라 ~때문이다'로 진짜 이유를 강조",
-     "spans": ["not just", "but"]
+     "spans": [
+      "not just",
+      "but"
+     ]
     },
     {
      "tag": "주격 관계대명사 that",
      "note": "species ... that live in forests",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "antecedent": "flora and fauna"
     }
    ],
@@ -338,12 +348,17 @@
     {
      "tag": "by -ing",
      "note": "'~함으로써'라는 수단",
-     "spans": ["by absorbing"]
+     "spans": [
+      "by absorbing"
+     ]
     },
     {
      "tag": "동명사 병렬",
      "note": "absorbing ~ and reducing ~",
-     "spans": ["absorbing", "reducing"]
+     "spans": [
+      "absorbing",
+      "reducing"
+     ]
     }
    ],
    "vocab": [
@@ -400,7 +415,10 @@
     {
      "tag": "for + 목적격 + to부정사",
      "note": "for us to breathe: 부정사의 의미상 주어 us",
-     "spans": ["for us", "to breathe"]
+     "spans": [
+      "for us",
+      "to breathe"
+     ]
     }
    ],
    "vocab": [
@@ -447,7 +465,9 @@
     {
      "tag": "There are 구문",
      "note": "'~가 있다/많다'",
-     "spans": ["There are"]
+     "spans": [
+      "There are"
+     ]
     }
    ],
    "vocab": [
@@ -496,7 +516,9 @@
     {
      "tag": "접속사 When",
      "note": "'~할 때'의 시간 부사절",
-     "spans": ["When"]
+     "spans": [
+      "When"
+     ]
     }
    ],
    "vocab": [
@@ -555,12 +577,16 @@
     {
      "tag": "현재완료 has passed",
      "note": "폭풍이 지나간 완료 시점",
-     "spans": ["has passed"]
+     "spans": [
+      "has passed"
+     ]
     },
     {
      "tag": "접속사 After",
      "note": "'~한 후에'",
-     "spans": ["After"]
+     "spans": [
+      "After"
+     ]
     }
    ],
    "vocab": [
@@ -601,23 +627,32 @@
     {
      "tag": "가정법 otherwise (그렇지 않다면 ~할 텐데)",
      "note": "otherwise would aid: 베지 않았다면 도움이 됐을 것",
-     "spans": ["otherwise", "would"]
+     "spans": [
+      "otherwise",
+      "would"
+     ]
     },
     {
      "tag": "가주어 It",
      "note": "It's ironic to think ~",
-     "spans": ["It's"]
+     "spans": [
+      "It's"
+     ]
     },
     {
      "tag": "명사절 접속사 that",
      "note": "think that ~: 진주어 to think의 목적어절을 이끄는 명사절 접속사",
-     "spans": ["think that"],
+     "spans": [
+      "think that"
+     ],
      "role": "think의 목적어절"
     },
     {
      "tag": "주격 관계대명사 that",
      "note": "forests ... that otherwise would aid (are cut down으로 선행사와 떨어짐)",
-     "spans": ["that otherwise"],
+     "spans": [
+      "that otherwise"
+     ],
      "antecedent": "forests"
     }
    ],

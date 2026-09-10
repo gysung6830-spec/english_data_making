@@ -171,15 +171,19 @@
    "translation": "퍼스널 브랜딩은 여러분이 남몰래 해야 하는 일이 아니다.",
    "grammar": [
     {
-     "tag": "관계대명사 that (목적격)",
+     "tag": "목적격 관계대명사 that",
      "note": "something that ~ 목적격 관계사, do의 목적어",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "antecedent": "something"
     },
     {
      "tag": "not something",
      "note": "'~하는 것이 아니다'",
-     "spans": ["not something"]
+     "spans": [
+      "not something"
+     ]
     }
    ],
    "vocab": [
@@ -228,17 +232,24 @@
     {
      "tag": "가주어 it-진주어 to부정사",
      "note": "it=가주어, to plan ~=진주어",
-     "spans": ["it", "to deliberately plan"]
+     "spans": [
+      "it",
+      "to deliberately plan"
+     ]
     },
     {
      "tag": "부분부정",
      "note": "not always = '항상 ~인 것은 아니다'",
-     "spans": ["not always"]
+     "spans": [
+      "not always"
+     ]
     },
     {
      "tag": "간접의문 how",
      "note": "how we are going to promote ~: plan의 목적어절",
-     "spans": ["how"],
+     "spans": [
+      "how"
+     ],
      "role": "plan의 목적어절"
     }
    ],
@@ -314,12 +325,16 @@
     {
      "tag": "however 역접",
      "note": "앞의 거리낌을 반전",
-     "spans": ["however"]
+     "spans": [
+      "however"
+     ]
     },
     {
      "tag": "be essential to -ing",
      "note": "'~하는 데 필수적이다'",
-     "spans": ["essential to achieving"]
+     "spans": [
+      "essential to achieving"
+     ]
     }
    ],
    "vocab": [
@@ -370,12 +385,16 @@
     {
      "tag": "this 지칭",
      "note": "this concept = 퍼스널 브랜딩",
-     "spans": ["this"]
+     "spans": [
+      "this"
+     ]
     },
     {
      "tag": "A and B",
      "note": "awareness와 anticipation 병렬",
-     "spans": ["and"]
+     "spans": [
+      "and"
+     ]
     }
    ],
    "vocab": [
@@ -428,12 +447,16 @@
     {
      "tag": "조건 if",
      "note": "'~하지 못하면'의 가정·조건",
-     "spans": ["If"]
+     "spans": [
+      "If"
+     ]
     },
     {
      "tag": "may not",
      "note": "'~하지 못할 수도 있다'",
-     "spans": ["may not"]
+     "spans": [
+      "may not"
+     ]
     }
    ],
    "vocab": [
@@ -494,12 +517,16 @@
     {
      "tag": "they 지칭",
      "note": "they = the opportunities",
-     "spans": ["they"]
+     "spans": [
+      "they"
+     ]
     },
     {
-     "tag": "관계사 that",
+     "tag": "주격 관계대명사 that",
      "note": "opportunities that ~ 수식",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "antecedent": "the opportunities"
     }
    ],
@@ -569,19 +596,25 @@
     {
      "tag": "what 관계대명사 (선행사 포함)",
      "note": "what you want to be known for: '~하는 것'",
-     "spans": ["what you want to be"],
+     "spans": [
+      "what you want to be"
+     ],
      "role": "'~하는 것'(선행사 포함 명사절), think about의 목적어절"
     },
     {
      "tag": "what 관계대명사 (선행사 포함)",
      "note": "what you want people to say about you: '~하는 것'",
-     "spans": ["what you want people"],
+     "spans": [
+      "what you want people"
+     ],
      "role": "'~하는 것'(선행사 포함 명사절), aware of의 목적어절"
     },
     {
      "tag": "명령문 조언",
      "note": "begin to ~ 실천 지시",
-     "spans": ["begin to be"]
+     "spans": [
+      "begin to be"
+     ]
     }
    ],
    "vocab": [

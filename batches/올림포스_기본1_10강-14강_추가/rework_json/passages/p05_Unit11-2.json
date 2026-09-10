@@ -513,7 +513,7 @@
    "translation": "그래서 칵테일파티에 관한 이야기가 이야기되고 있을 때, 이해하는 사람은 칵테일파티에서 보통 무슨 일이 일어나는지를 그에게 알려 주는 자신의 칵테일파티 대본을 꺼내어, 그 대본을 사용해 자신이 곧 들으려는 이야기의 이해를 이끌었다.",
    "grammar": [
     {
-     "tag": "관계사 which",
+     "tag": "주격 관계대명사 which",
      "note": "script 부연",
      "antecedent": "his cocktail party script",
      "spans": [

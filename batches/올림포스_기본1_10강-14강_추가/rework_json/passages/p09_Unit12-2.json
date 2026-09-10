@@ -195,15 +195,20 @@
    "translation": "자원 고갈을 예측하는 예측자들은 흔히 시장의 힘을 무시하거나 과소평가한다.",
    "grammar": [
     {
-     "tag": "관계사 who",
+     "tag": "주격 관계대명사 who",
      "note": "Forecasters 수식",
-     "spans": ["who"],
+     "spans": [
+      "who"
+     ],
      "antecedent": "Forecasters"
     },
     {
      "tag": "공통 목적어(병렬)",
      "note": "[ignore] or [underestimate] the power of markets — 목적어 공통",
-     "spans": ["ignore", "underestimate"]
+     "spans": [
+      "ignore",
+      "underestimate"
+     ]
     }
    ],
    "vocab": [
@@ -260,12 +265,16 @@
     {
      "tag": "부정사 to estimate",
      "note": "'추정하기 위해'",
-     "spans": ["to estimate"]
+     "spans": [
+      "to estimate"
+     ]
     },
     {
      "tag": "의문사 how long",
      "note": "'얼마나 오래'",
-     "spans": ["how long"],
+     "spans": [
+      "how long"
+     ],
      "role": "estimate의 목적어절"
     }
    ],
@@ -323,7 +332,10 @@
     {
      "tag": "divide A by B",
      "note": "A를 B로 나누다",
-     "spans": ["divides", "by"]
+     "spans": [
+      "divides",
+      "by"
+     ]
     }
    ],
    "vocab": [
@@ -382,12 +394,16 @@
     {
      "tag": "조건 if",
      "note": "'~라면'",
-     "spans": ["if"]
+     "spans": [
+      "if"
+     ]
     },
     {
      "tag": "명사절 that",
      "note": "indicates의 목적어",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "role": "indicates의 목적어절"
     }
    ],
@@ -457,18 +473,24 @@
     {
      "tag": "명사절 that",
      "note": "assume의 목적어",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "role": "assume의 목적어절"
     },
     {
      "tag": "비교급 강조 even",
      "note": "'훨씬 더'",
-     "spans": ["even"]
+     "spans": [
+      "even"
+     ]
     },
     {
      "tag": "분사구문",
      "note": "thus depleting resources even faster — 결과의 분사구문",
-     "spans": ["depleting"]
+     "spans": [
+      "depleting"
+     ]
     }
    ],
    "vocab": [
@@ -533,34 +555,46 @@
     {
      "tag": "관계사 what",
      "note": "'~하는 것'(주어절)",
-     "spans": ["what"],
+     "spans": [
+      "what"
+     ],
      "role": "'~하는 것'(선행사 포함 명사절), is의 주어절"
     },
     {
      "tag": "명사절 접속사 that",
      "note": "is의 보어절(is that ~)",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "role": "is의 보어절"
     },
     {
      "tag": "조건 if",
      "note": "'~라면'",
-     "spans": ["if"]
+     "spans": [
+      "if"
+     ]
     },
     {
      "tag": "that is",
      "note": "'즉'(부연)",
-     "spans": ["that is"]
+     "spans": [
+      "that is"
+     ]
     },
     {
      "tag": "수동태 be allowed",
      "note": "if markets are allowed to ~ — be+p.p.",
-     "spans": ["are allowed"]
+     "spans": [
+      "are allowed"
+     ]
     },
     {
      "tag": "비교급 much longer",
      "note": "resources will last much longer — much 강조 비교급",
-     "spans": ["much longer"]
+     "spans": [
+      "much longer"
+     ]
     }
    ],
    "vocab": [

@@ -207,7 +207,9 @@
     {
      "tag": "수동태 are constructed",
      "note": "'건설된다'",
-     "spans": ["are constructed"]
+     "spans": [
+      "are constructed"
+     ]
     }
    ],
    "vocab": [
@@ -266,15 +268,19 @@
    "translation": "예를 들어, 우리는 얕은 연못이나, 지표수의 유출수를 모으는, 식생수로라고 알려진 일련의 수로를 건설할 수 있다.",
    "grammar": [
     {
-     "tag": "관계사 that",
+     "tag": "주격 관계대명사 that",
      "note": "canals 수식",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "antecedent": "canals"
     },
     {
      "tag": "분사 known as",
      "note": "'~로 알려진'",
-     "spans": ["known"]
+     "spans": [
+      "known"
+     ]
     }
    ],
    "vocab": [
@@ -341,25 +347,34 @@
    "translation": "부들 같은 습지 식물은, 연못이나 수로에 심어지면, 폐기물이나 오염 물질로서 자신에게 전달되는 물속의 영양분을 사용하고 제거하여, 물을 정화하는 데 도움을 준다.",
    "grammar": [
     {
-     "tag": "관계사 that",
+     "tag": "주격 관계대명사 that",
      "note": "water 수식",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "antecedent": "water"
     },
     {
      "tag": "분사구문",
      "note": "when planted ~ / helping clean the water — 분사구문(⑤)",
-     "spans": ["when planted", "helping"]
+     "spans": [
+      "when planted",
+      "helping"
+     ]
     },
     {
      "tag": "수동태",
      "note": "water that's delivered to them — is delivered, be+p.p.",
-     "spans": ["that's delivered"]
+     "spans": [
+      "that's delivered"
+     ]
     },
     {
      "tag": "공통 목적어",
      "note": "[use] and [remove] nutrients — 목적어 nutrients 공통",
-     "spans": ["use and remove nutrients"]
+     "spans": [
+      "use and remove nutrients"
+     ]
     }
    ],
    "vocab": [
@@ -442,12 +457,16 @@
     {
      "tag": "수동태 have been constructed",
      "note": "'건설되어 왔다'",
-     "spans": ["have been constructed"]
+     "spans": [
+      "have been constructed"
+     ]
     },
     {
      "tag": "관계부사 where",
      "note": "wetland ecosystems 수식 — '~하는 그곳에서'",
-     "spans": ["where"],
+     "spans": [
+      "where"
+     ],
      "antecedent": "wetland ecosystems"
     }
    ],
@@ -515,12 +534,16 @@
     {
      "tag": "부정사 to treat",
      "note": "'처리하기 위해'",
-     "spans": ["to partially treat"]
+     "spans": [
+      "to partially treat"
+     ]
     },
     {
      "tag": "수동태",
      "note": "are constructed — be+p.p.",
-     "spans": ["are constructed"]
+     "spans": [
+      "are constructed"
+     ]
     }
    ],
    "vocab": [
@@ -577,13 +600,17 @@
     {
      "tag": "관계사 what",
      "note": "'~라고 알려진 것'",
-     "spans": ["what"],
+     "spans": [
+      "what"
+     ],
      "role": "'~하는 것'(선행사 포함 명사절), of의 목적어절"
     },
     {
      "tag": "수동태",
      "note": "what is known as biological engineering — is known as",
-     "spans": ["is known as"]
+     "spans": [
+      "is known as"
+     ]
     }
    ],
    "vocab": [

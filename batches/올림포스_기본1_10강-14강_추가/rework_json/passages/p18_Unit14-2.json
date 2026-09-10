@@ -200,7 +200,9 @@
     {
      "tag": "부정사 형용사적 용법",
      "note": "the ability to detect: '감지하는 능력'로 명사를 수식",
-     "spans": ["to detect"]
+     "spans": [
+      "to detect"
+     ]
     }
    ],
    "vocab": [
@@ -253,7 +255,9 @@
     {
      "tag": "과거진행",
      "note": "was searching: 그 시점에 진행 중이던 탐색",
-     "spans": ["was searching"]
+     "spans": [
+      "was searching"
+     ]
     }
    ],
    "vocab": [
@@ -306,7 +310,9 @@
     {
      "tag": "부사구",
      "note": "several days apart: '며칠 간격으로'",
-     "spans": ["several days apart"]
+     "spans": [
+      "several days apart"
+     ]
     }
    ],
    "vocab": [
@@ -359,12 +365,17 @@
     {
      "tag": "대조의 접속사 while (~인 반면에)",
      "note": "앞 절(항성 불변)과 while절(행성 이동)을 대조",
-     "spans": ["while"]
+     "spans": [
+      "while"
+     ]
     },
     {
      "tag": "현재시제",
      "note": "일반적 사실을 나타내는 현재",
-     "spans": ["remain", "moves"]
+     "spans": [
+      "remain",
+      "moves"
+     ]
     }
    ],
    "vocab": [
@@ -417,15 +428,19 @@
    "translation": "그러나 그가 하늘의 셀 수 없이 많은 움직이지 않는 점들 사이에서 움직인 작은 점 하나를 어떻게 찾을 수 있을까?",
    "grammar": [
     {
-     "tag": "관계대명사 that",
+     "tag": "주격 관계대명사 that",
      "note": "a small dot that moved: 앞의 명사를 수식하는 주격 관계사",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "antecedent": "a small dot"
     },
     {
      "tag": "수사의문문",
      "note": "'어떻게 찾을까'로 문제를 던지는 형식",
-     "spans": ["how would he find"]
+     "spans": [
+      "how would he find"
+     ]
     }
    ],
    "vocab": [
@@ -480,9 +495,11 @@
    "translation": "그는 각 쌍의 사진을 한 사진과 다른 사진 사이를 앞뒤로 뒤집어 주는 기계 위에 올려놓았다.",
    "grammar": [
     {
-     "tag": "관계대명사 that",
+     "tag": "주격 관계대명사 that",
      "note": "a machine that would flip ~: 기계를 수식하는 주격 관계사",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "antecedent": "a machine"
     }
    ],
@@ -536,12 +553,17 @@
     {
      "tag": "지각동사+O+-ing",
      "note": "noticed one dot moving: 점이 움직이는 것을 알아챔",
-     "spans": ["noticed", "moving"]
+     "spans": [
+      "noticed",
+      "moving"
+     ]
     },
     {
      "tag": "접속사 as",
      "note": "'~할 때'의 뜻",
-     "spans": ["as"]
+     "spans": [
+      "as"
+     ]
     }
    ],
    "vocab": [
@@ -592,9 +614,11 @@
    "translation": "그는 그 점을 명왕성으로 확인했는데, 천문학자들은 현재 그것을 왜소 행성으로 분류한다.",
    "grammar": [
     {
-     "tag": "계속적 용법 관계대명사 (, which)",
+     "tag": "계속적 용법 목적격 관계대명사 which",
      "note": "앞 내용(Pluto)을 부연 설명",
-     "spans": ["which"],
+     "spans": [
+      "which"
+     ],
      "antecedent": "Pluto"
     }
    ],

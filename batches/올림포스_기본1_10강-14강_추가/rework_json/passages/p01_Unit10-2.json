@@ -201,12 +201,16 @@
     {
      "tag": "양보 although",
      "note": "'~이지만'으로 대조 도입",
-     "spans": ["Although"]
+     "spans": [
+      "Although"
+     ]
     },
     {
      "tag": "its 지칭",
      "note": "its = the wish의",
-     "spans": ["its"]
+     "spans": [
+      "its"
+     ]
     }
    ],
    "vocab": [
@@ -263,12 +267,17 @@
     {
      "tag": "병렬 to부정사",
      "note": "to seek ~ and to spend ~ 대등 연결",
-     "spans": ["to seek", "to spend"]
+     "spans": [
+      "to seek",
+      "to spend"
+     ]
     },
     {
      "tag": "though 삽입",
      "note": "'하지만'의 역접 부사",
-     "spans": ["though"]
+     "spans": [
+      "though"
+     ]
     }
    ],
    "vocab": [
@@ -340,12 +349,17 @@
     {
      "tag": "these 지칭",
      "note": "these periods = 교제하는 시간",
-     "spans": ["these"]
+     "spans": [
+      "these"
+     ]
     },
     {
      "tag": "both A and B",
      "note": "대화·비언어 두 형태 모두",
-     "spans": ["both", "and"]
+     "spans": [
+      "both",
+      "and"
+     ]
     }
    ],
    "vocab": [
@@ -414,12 +428,17 @@
     {
      "tag": "need+O+to부정사",
      "note": "사람들이 제공해 주도록 필요로 함(5형식)",
-     "spans": ["need", "to provide"]
+     "spans": [
+      "need",
+      "to provide"
+     ]
     },
     {
      "tag": "myriad of",
      "note": "무수히 많은",
-     "spans": ["myriad of"]
+     "spans": [
+      "myriad of"
+     ]
     }
    ],
    "vocab": [
@@ -498,18 +517,25 @@
     {
      "tag": "need+O+to부정사",
      "note": "others가 confirm해 주도록 필요로 함",
-     "spans": ["need", "to confirm"]
+     "spans": [
+      "need",
+      "to confirm"
+     ]
     },
     {
      "tag": "that절 나열",
      "note": "that ~, that ~ and that ~ 병렬",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "role": "confirm의 목적어절"
     },
     {
-     "tag": "관계사 that",
+     "tag": "주격 관계대명사 that",
      "note": "an identity 수식(주격 관계대명사)",
-     "spans": ["that"],
+     "spans": [
+      "that"
+     ],
      "antecedent": "an identity"
     }
    ],
@@ -589,12 +615,17 @@
     {
      "tag": "cannot ~ without",
      "note": "'~하지 않고는 …할 수 없다'(이중부정)",
-     "spans": ["cannot", "without"]
+     "spans": [
+      "cannot",
+      "without"
+     ]
     },
     {
      "tag": "Thus 결론",
      "note": "앞 내용의 귀결",
-     "spans": ["Thus"]
+     "spans": [
+      "Thus"
+     ]
     }
    ],
    "vocab": [
