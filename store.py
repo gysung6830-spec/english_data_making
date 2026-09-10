@@ -1400,23 +1400,33 @@ def free():
     data = sc.load_freebies()
     grade = sc.clean(request.args.get("grade"), 10)
     kind = sc.clean(request.args.get("kind"), 20)
-    exam = sc.clean(request.args.get("exam"), 60)
+    year = sc.clean(request.args.get("year"), 4)
+    rnd = sc.clean(request.args.get("round"), 4)
     q = sc.clean(request.args.get("q"), 60)
 
     items = [x for x in data["items"] if sc.free_ready(x)]
     # 필터링 버튼은 준비 중인 것까지 포함해 만들어 둡니다.
     grades = sorted({x.get("grade", "") for x in data["items"] if x.get("grade")})
-    # 회차 단추도 최근 것이 앞입니다. '11월' 이 '3월' 뒤로 가면 안 되니
-    # 글자가 아니라 해·달로 셉니다.
-    exams = [e for _, e in sorted(
-        {(sc.exam_key(*sc.guess_exam_round(x["exam"])), x["exam"])
-         for x in data["items"] if x.get("exam")}, reverse=True)]
+    # 회차를 통째로 늘어놓으면 해가 쌓일수록 단추가 벽이 됩니다.
+    # 시행년도로 한 번, 그 안의 회차(3 · 6 · 9 · 10월 · 수능)로 또 한 번 가릅니다.
+    rounds = {sc.guess_exam_round(x["exam"]) for x in data["items"] if x.get("exam")}
+    rounds = {(y, m) for y, m in rounds if y and m}
+    years = sorted({str(y) for y, _ in rounds}, reverse=True)
+    months = sorted({m for y, m in rounds if not year or str(y) == year},
+                    key=lambda m: sc.MOCK_ROUND_ORDER.index(m)
+                    if m in sc.MOCK_ROUND_ORDER else 99)
+    round_names = [(str(m), sc.round_name(m)) for m in months]
+
     if grade:
         items = [x for x in items if x.get("grade") == grade]
     if kind in sc.FREE_KINDS:
         items = [x for x in items if kind in (x.get("kinds") or [])]
-    if exam:
-        items = [x for x in items if x.get("exam") == exam]
+    if year:
+        items = [x for x in items
+                 if str(sc.guess_exam_round(x.get("exam", ""))[0]) == year]
+    if rnd:
+        items = [x for x in items
+                 if str(sc.guess_exam_round(x.get("exam", ""))[1]) == rnd]
     if q:
         needle = q.lower()
         items = [x for x in items
@@ -1430,11 +1440,26 @@ def free():
                          if m.get("sample_file")
                          and (sc.SAMPLE_DIR / m["sample_file"]).exists())
 
+    # 종류마다 실제로 올라와 있는 자료 하나를 골라 지면을 걸어 둡니다.
+    # 무엇인지 모르는 채로 이름만 넉 줄 늘어놓는 것보다 낫습니다.
+    ready = [x for x in data["items"] if sc.free_ready(x)]
+    kind_cards = []
+    for kid, kname in sc.FREE_KINDS.items():
+        mine = [x for x in ready if kid in (x.get("kinds") or [])]
+        shot = next((x["slug"] for x in mine if sc.free_cover(x["slug"])), "")
+        kind_cards.append({"id": kid, "name": kname, "slug": shot,
+                           "desc": sc.FREE_KIND_DESC.get(kid, ""),
+                           "gate": "email" if kid in sc.FREE_KINDS_GATED else "open"})
+
     return render_template("free.html", intro=data.get("intro", {}), items=items,
+                           kind_cards=kind_cards,
+                           round_label=sc.round_name(sc.to_int(rnd, 0)),
                            rounds=sc.free_rounds(items),
                            total=len([x for x in data["items"] if sc.free_ready(x)]),
                            coming=coming, grades=grades, grade=grade, kind=kind,
-                           exams=exams, exam=exam, q=q,
+                           years=years, year=year, round_names=round_names, round=rnd,
+                           q=q, covers={x["slug"] for x in items
+                                        if sc.free_cover(x["slug"]) is not None},
                            kinds=sc.FREE_KINDS, sample_count=lineup_samples)
 
 
@@ -1447,7 +1472,7 @@ def free_detail(slug):
         "free_detail.html", item=item, files=sc.free_files(slug),
         links=sc.free_links(item), kind_names=sc.free_kind_names(item),
         opened=(item.get("gate") != "email" or free_unlocked(slug)),
-        cover=sc.free_cover(slug) is not None,
+        cover=sc.free_cover(slug) is not None, typo=False,
         related=sc.auto_related(item), errors=[], form={})
 
 
@@ -1463,7 +1488,12 @@ def free_get(slug):
     if sc.too_many_submits(request, "free"):
         errors.append("잠시 뒤에 다시 시도해 주세요. 짧은 시간에 너무 많이 보내셨습니다.")
     elif not sc.EMAIL_RE.match(email):
-        errors.append("이메일 주소를 정확히 적어 주세요. 예: teacher@school.com")
+        errors.append("받으실 수 없는 주소입니다. 다시 한 번 봐 주세요. 예: teacher@school.com")
+    elif sc.email_typo(email):
+        # 막지 않고 여쭙습니다. 그대로 쓰시겠다면 한 번 더 누르시면 됩니다.
+        if not request.form.get("keep_email"):
+            errors.append(f"혹시 {sc.email_typo(email)} 아니신가요? "
+                          "맞으시면 고쳐 적어 주시고, 그대로 쓰시려면 한 번 더 눌러 주세요.")
     elif not request.form.get("agree"):
         errors.append("이메일 수집·이용에 동의해 주셔야 받으실 수 있습니다.")
 
@@ -1472,6 +1502,7 @@ def free_get(slug):
             "free_detail.html", item=item, files=sc.free_files(slug),
             links=sc.free_links(item), kind_names=sc.free_kind_names(item),
             opened=False, cover=sc.free_cover(slug) is not None,
+            typo=bool(sc.email_typo(email)),
             related=sc.auto_related(item), errors=errors, form=request.form), 400
 
     sc.add_lead(email, name=sc.clean(request.form.get("name"), 50), slug=slug,
@@ -2002,8 +2033,9 @@ def words_study(slug):
 
     # 아무것도 안 고르고 들어오시면 먼저 무엇을 어떻게 할지 정합니다.
     # 뜻만 볼지 철자까지 쓸지, 아니면 깜빡이로 훑을지는 사람마다 다릅니다.
-    if not kinds and mode not in ("flash",) and not only_raw:
+    if not kinds and mode not in ("flash", "game") and not only_raw:
         return render_template("words_setup.html", b=book, kinds=STUDY_KINDS,
+                               games=sc.WORD_GAMES,
                                total=sc.word_count(book), cap=QUIZ_MAX)
 
     kinds = kinds or ["choice", "spell"]        # 틀린 것만 다시 풀 때는 둘 다 냅니다
@@ -2020,6 +2052,21 @@ def words_study(slug):
 
     # 깜빡이 — 문제를 푸는 것이 아니라 눈으로 훑는 자리입니다. 뜻만 스쳐
     # 지나가게 두면, 풀기 전에 낯을 익히는 데 씁니다.
+    # 게임 — 재미로 끌어들이는 자리입니다. 문제를 푼다는 느낌이 안 나야
+    # 한 번 더 하게 됩니다. 세 가지를 골라 두었습니다.
+    if mode == "game":
+        game = request.args.get("game", "")
+        if game not in sc.WORD_GAMES:
+            game = next(iter(sc.WORD_GAMES))
+        names0 = [u.get("name") or u.get("id") for u in book["units"] if u["id"] in unit_ids]
+        picked = rows[:] if count >= len(rows) else random.Random(
+            sc.to_int(request.args.get("seed"), 0) or 11).sample(rows, count)
+        return render_template("words_game.html", b=book, words=picked,
+                               game=game, info=sc.WORD_GAMES[game],
+                               games=sc.WORD_GAMES,
+                               scope=" · ".join(names0) or book["name"],
+                               back=url_for("words_study", slug=slug))
+
     if mode == "flash":
         names0 = [u.get("name") or u.get("id") for u in book["units"] if u["id"] in unit_ids]
         pack = rows[:] if count >= len(rows) else random.Random(

@@ -197,7 +197,7 @@ def test_textbook_subjects_are_the_four():
     try:
         for g in ("고1", "고2"):
             got = body(client().get(f"/products?category=mock&grade={g}"))
-            assert "2026년 3월 학력평가" in got, g
+            assert "2026년 3월 모의고사" in got, g
     finally:
         catalog = sc.load_raw_catalog()
         for x in catalog["products"]:
@@ -269,7 +269,7 @@ def test_grade_filter_and_sort():
     mock = body(client().get("/products?category=mock"))
     assert '<span class="filter-label">학년</span>' in mock
     go2 = body(client().get("/products?category=mock&grade=고2"))
-    assert "2026년 3월 학력평가 (고2)" in go2
+    assert "2026년 3월 모의고사 (고2)" in go2
     assert "2026학년도 6월 모의평가 (고3)" not in go2     # 고3 회차는 빠져야 합니다
 
     # 교과서는 학년이 아니라 과목으로 갈립니다
@@ -367,7 +367,7 @@ def test_popular_order():
     # 교재 칸은 칸 전체가 링크라, 제목에 <a> 가 따로 없습니다
     names = re.findall(r'class="bg-open"[\s\S]*?<h3>([^<]+)</h3>', head)
     assert names, head[:200]
-    assert names[0].startswith("2026년 3월 학력평가"), names[:3]
+    assert names[0].startswith("2026년 3월 모의고사"), names[:3]
     assert "아직 판매 기록이 없어" not in page          # 판 자료가 있으니 안내가 없어야 합니다
     print("PASS  인기순 — 값을 치른 주문이 많은 자료가 앞에")
 
@@ -417,8 +417,8 @@ def test_share_and_branding():
 
 def test_book_page_lists_only_its_products():
     text = body(client().get("/books/mock-2026-06-g3"))
-    assert "2026학년도 6월 모의평가" in text
-    assert "3월 학력평가" not in text.split("같은 분류의 다른 교재")[0]
+    assert "2026학년도 6월 모의고사" in text
+    assert "3월 모의고사" not in text.split("같은 분류의 다른 교재")[0]
     print("PASS  교재별 페이지가 해당 교재 자료만 보여 줌")
 
 
@@ -2109,7 +2109,7 @@ def test_metrics_screen():
     a.post(f"/admin/orders/{oid}", data={"status": "입금확인"}, follow_redirects=True)
 
     page = body(a.get("/admin/sales"))
-    assert "2026년 3월 학력평가" in page
+    assert "2026년 3월 모의고사" in page
     # 손님 화면에는 이런 숫자가 새어 나가면 안 됩니다
     for path in ("/", "/products", "/cart"):
         assert "실수령" not in body(client().get(path))
@@ -2385,7 +2385,9 @@ def test_my_locker():
     text = body(client().get(key))
     assert "내 자료함" in text
     assert "locker@example.com" in text            # 대소문자를 가리지 않고 찾습니다
-    assert "mock-2026-06-g3-analysis" in text or "6월 모의평가" in text
+    # 주문 장부에 적힌 이름은 그때 그대로 남습니다 — 용어를 통일해도 안 바뀝니다
+    assert ("mock-2026-06-g3-analysis" in text
+            or "6월 모의고사" in text or "6월 모의평가" in text)
     assert "입금이 확인되면" in text                 # 아직 발송 전
     assert "용지 A4 · 배율 100%" in text            # 인쇄 안내
     assert "noindex" in text                       # 남의 자료함이 검색에 잡히면 안 됩니다
@@ -3554,7 +3556,7 @@ def test_free_list_hides_items_without_files():
     _put_free_file("2026-03-goh1-oneline")
     text = body(client().get("/free"))
     assert "무료로 받기" in text
-    assert "고1 3월 학력평가 한줄해석" in text
+    assert "고1 3월 모의고사 한줄해석" in text
     print("PASS  무료 자료실 — 파일 있는 것만 목록에")
 
 
@@ -3580,7 +3582,7 @@ def test_free_gated_item_needs_email():
     assert c.get("/free/2026-03-goh3-literal/file/0").status_code == 302
 
     bad = c.post("/free/2026-03-goh3-literal/get", data={"email": "엉터리", "agree": "1"})
-    assert bad.status_code == 400 and "정확히 적어" in body(bad)
+    assert bad.status_code == 400 and "받으실 수 없는 주소" in body(bad)
 
     ok = c.post("/free/2026-03-goh3-literal/get",
                 data={"email": "teacher@school.com", "agree": "1", "news": "1"},
@@ -3589,7 +3591,7 @@ def test_free_gated_item_needs_email():
     assert c.get("/free/2026-03-goh3-literal/file/0").status_code == 200
 
     rows = body(admin().get("/admin/mail"))        # 명단은 메일 화면 안에 있습니다
-    assert "teacher@school.com" in rows and "고3 3월 학력평가 직독직해" in rows
+    assert "teacher@school.com" in rows and "고3 3월 모의고사 직독직해" in rows
     print("PASS  직독직해는 이메일 받고 내어 주기")
 
 
@@ -3605,24 +3607,24 @@ def test_admin_creates_free_item_end_to_end():
     """관리자 화면에서 만든 무료 자료가 고객 화면에 그대로 나와야 합니다."""
     a = admin()
     resp = a.post("/admin/free/new", data={
-        "slug": "test-free-item", "title": "고2 6월 모평 한줄해석",
-        "summary": "전 지문 한 줄 해석", "grade": "고2", "exam": "2026년 6월 모의평가",
+        "slug": "test-free-item", "title": "고2 6월 모의고사 한줄해석",
+        "summary": "전 지문 한 줄 해석", "grade": "고2", "exam": "2026년 6월 모의고사",
         "kinds": ["oneline_ko"], "gate": "open", "date": "2026-06-05",
         "body": "설명입니다.", "active": "1"}, follow_redirects=True)
     assert resp.status_code == 200
     # 파일이 없으면 아직 '곧 올라옵니다'
     assert "무료로 받기" not in body(client().get("/free")).split("곧 올라옵니다")[0] \
-        or "고2 6월 모평 한줄해석" in body(client().get("/free"))
+        or "고2 6월 모의고사 한줄해석" in body(client().get("/free"))
     _put_free_file("test-free-item")
     text = body(client().get("/free"))
-    assert "고2 6월 모평 한줄해석" in text
+    assert "고2 6월 모의고사 한줄해석" in text
 
     # 종류로 필터링
-    assert "고2 6월 모평 한줄해석" in body(client().get("/free?kind=oneline_ko"))
-    assert "고2 6월 모평 한줄해석" not in body(client().get("/free?kind=literal"))
+    assert "고2 6월 모의고사 한줄해석" in body(client().get("/free?kind=oneline_ko"))
+    assert "고2 6월 모의고사 한줄해석" not in body(client().get("/free?kind=literal"))
 
     a.post("/admin/free/test-free-item/delete", follow_redirects=True)
-    assert "고2 6월 모평 한줄해석" not in body(client().get("/free"))
+    assert "고2 6월 모의고사 한줄해석" not in body(client().get("/free"))
     print("PASS  관리자에서 무료 자료 만들기 → 고객 화면 → 지우기")
 
 
@@ -3643,20 +3645,28 @@ def test_free_upload_reads_the_filename_and_files_it():
     채워 만들게 하면 아무도 안 올립니다.
     """
     # 먼저 읽는 눈부터
-    got = sc.read_free_name("고1 2026년 3월 학력평가 한줄해석.pdf")
+    got = sc.read_free_name("고1 2026년 3월 모의고사 한줄해석.pdf")
     assert got["slug"] == "2026-03-goh1-oneline-ko"
     assert got["grade"] == "고1" and got["kinds"] == ["oneline_ko"]
-    assert got["exam"] == "2026년 3월 학력평가" and got["gate"] == "open"
+    assert got["exam"] == "2026년 3월 모의고사" and got["gate"] == "open"
     assert not got["missing"]
 
     # 순서가 뒤죽박죽이어도, 밑줄이어도 읽습니다
     assert sc.read_free_name("2026-03 고2 직독직해.pdf")["slug"] == "2026-03-goh2-literal"
     assert sc.read_free_name("고3_9월_좌지문우해석.pdf")["slug"].endswith("goh3-side")
 
-    # 시험 이름은 안 적으셔도 됩니다 — 학년과 달로 짐작합니다
-    assert "모의평가" in sc.read_free_name("고3 9월 한줄영어.pdf")["exam"]
-    assert "수능" in sc.read_free_name("고3 11월 한줄영어.pdf")["exam"]
-    assert "학력평가" in sc.read_free_name("고1 9월 한줄영어.pdf")["exam"]
+    # 부르는 이름은 '모의고사' 하나로 맞춥니다. 학평도 모평도 전국연합도 같습니다.
+    assert sc.read_free_name("고3 9월 한줄영어.pdf")["exam"].endswith("9월 모의고사")
+    assert sc.read_free_name("고1 3월 학평 한줄영어.pdf")["exam"].endswith("3월 모의고사")
+    assert sc.unify_exam_words("2026년 3월 전국연합 학력평가") == "2026년 3월 모의고사"
+    # 수능은 달을 안 적어도 회차로 잡힙니다 — 늘 11월입니다
+    assert sc.read_free_name("고3 2024년 시행 수능 한줄영어.pdf")["exam"] == "2024년 수능"
+    assert sc.read_free_name("고3 2024 수능 한줄해석.pdf")["slug"] == "2024-11-goh3-oneline-ko"
+    # '2026학년도' 는 2025년에 치릅니다
+    assert sc.guess_exam_round("2026학년도 6월 모의평가") == (2025, 6)
+    # 수능특강은 교재입니다. 시험으로 보면 안 됩니다.
+    assert not sc.is_suneung("2026 수능특강 영어 5강")
+    assert sc.guess_product_category("2026 수능특강 영어 5강 변형문제.pdf") == "ebs"
 
     # 직독직해만 이메일을 받습니다
     assert sc.read_free_name("고1 3월 직독직해.pdf")["gate"] == "email"
@@ -3668,7 +3678,7 @@ def test_free_upload_reads_the_filename_and_files_it():
 
     # 이제 진짜로 올려 봅니다
     a = admin()
-    names = ["고1 2026년 5월 학력평가 한줄해석.pdf", "고1 2026년 5월 학력평가 직독직해.pdf",
+    names = ["고1 2026년 5월 모의고사 한줄해석.pdf", "고1 2026년 5월 모의고사 직독직해.pdf",
              "고3 5월 좌지문우해석.pdf", "무슨파일인지모를것.pdf"]
     resp = a.post("/admin/free/upload", data={
         "files": [(io.BytesIO(_real_pdf(n)), n) for n in names]},
@@ -3676,7 +3686,7 @@ def test_free_upload_reads_the_filename_and_files_it():
     assert resp.status_code == 200
     page = body(resp)
     assert "방금 올린 4개" in page
-    assert "고1 2026년 5월 학력평가 한줄해석" in page
+    assert "고1 2026년 5월 모의고사 한줄해석" in page
     assert "못 읽었습니다" in page                       # 마지막 하나는 손이 필요합니다
 
     raw = {x["slug"]: x for x in sc.load_raw_freebies()["items"]}
@@ -3690,7 +3700,7 @@ def test_free_upload_reads_the_filename_and_files_it():
 
     # 파일이 실제로 붙었고, 손님이 바로 받으실 수 있습니다
     assert sc.free_files("2026-05-goh1-oneline-ko")
-    assert "고1 2026년 5월 학력평가 한줄해석" in body(client().get("/free"))
+    assert "고1 2026년 5월 모의고사 한줄해석" in body(client().get("/free"))
 
     # 설명도 한 줄 요약도 안 받습니다
     assert not raw["2026-05-goh1-oneline-ko"].get("summary")
@@ -3723,22 +3733,25 @@ def test_free_preview_is_the_first_page_of_the_pdf():
 def test_free_list_puts_the_newest_round_first():
     """시험이 끝난 날 찾아오시면 맨 위가 그 회차여야 합니다."""
     a = admin()
-    for name in ["고1 2026년 3월 학력평가 한줄해석.pdf",
-                 "고1 2026년 11월 학력평가 한줄해석.pdf",
-                 "고1 2026년 9월 학력평가 한줄해석.pdf"]:
+    for name in ["고1 2026년 3월 모의고사 한줄해석.pdf",
+                 "고1 2026년 시행 수능 한줄해석.pdf",
+                 "고1 2026년 9월 모의고사 한줄해석.pdf"]:
         a.post("/admin/free/upload", data={"files": [(io.BytesIO(_real_pdf(name)), name)]},
                content_type="multipart/form-data", follow_redirects=True)
 
     text = body(client().get("/free"))
-    # 위쪽 회차 고르는 단추도 최근 것이 앞입니다
+    # 회차를 통째로 늘어놓지 않고 시행년도 · 시행회차 둘로 가릅니다
     picks = text[:text.index('class="round-head"')]
-    assert picks.index("2026년 11월") < picks.index("2026년 9월") < picks.index("2026년 3월")
+    assert "시행년도" in picks and "시행회차" in picks
+    assert "2026년" not in picks.split("시행회차")[1]     # 회차 줄에는 해가 없어야
+    for label in ("3월", "9월", "수능"):
+        assert f">{label}</a>" in picks, label
 
     # 목록도 그렇습니다. 글자로 세면 '11월' 이 '3월' 뒤로 갑니다.
     heads = re.findall(r'class="round-head">\s*<h3>(.*?)</h3>', text, re.S)
     assert heads == sorted(heads, key=lambda h: sc.exam_key(*sc.guess_exam_round(h)),
                            reverse=True), heads
-    assert heads[0].startswith("2026년 11월"), heads
+    assert heads[0] == "2026년 수능", heads      # 수능이 그해 맨 앞 회차입니다
     # '최신 회차' 표는 맨 위 회차에만, 그리고 두 번째 회차보다 위에 붙습니다
     listing = text[text.index('class="round-head"'):]
     assert listing.count("최신 회차") == 1
@@ -3755,7 +3768,7 @@ def test_free_shows_recent_paid_items_without_picking():
     """함께 보여 줄 유료 자료를 손으로 고르지 않습니다."""
     a = admin()
     a.post("/admin/free/upload", data={
-        "files": [(io.BytesIO(_real_pdf("x")), "고1 2026년 7월 학력평가 한줄해석.pdf")]},
+        "files": [(io.BytesIO(_real_pdf("x")), "고1 2026년 7월 모의고사 한줄해석.pdf")]},
         content_type="multipart/form-data", follow_redirects=True)
     item = sc.find_freebie("2026-07-goh1-oneline-ko")
     assert item is not None and not item.get("related")
@@ -3901,20 +3914,21 @@ def test_sample_is_the_first_six_pages_and_the_shot_is_page_three():
 
 def test_mock_books_run_newest_first():
     """모의고사는 최근 회차가 맨 위, 부교재는 올린 차례대로입니다."""
-    order = ["2026-03", "2026-11", "2026-09"]
     a = admin()
-    for ym in order:
-        y, m = ym.split("-")
-        name = f"고2 {y}년 {int(m)}월 학력평가 지문분석지.pdf"
+    for name in ["고2 2026년 3월 모의고사 지문분석지.pdf",
+                 "고2 2026년 시행 수능 지문분석지.pdf",
+                 "고2 2026년 9월 모의고사 지문분석지.pdf"]:
         a.post("/admin/products/upload", data={"files": [(io.BytesIO(_paged_pdf(name)), name)]},
                content_type="multipart/form-data", follow_redirects=True)
 
     books = [b for b in sc.load_catalog()["books"] if b.get("category") == "mock"]
     stamps = [sc.exam_stamp(b) for b in books if sc.exam_stamp(b)]
     assert stamps == sorted(stamps, reverse=True), [b["name"] for b in books]
-    # 글자로 세면 11월이 3월 뒤로 갑니다
+    # 수능도 회차입니다 — 11월로 잡혀 그해 맨 앞에 섭니다
     names = [b["name"] for b in books]
-    assert names.index("2026년 11월 학력평가 (고2)") < names.index("2026년 3월 학력평가 (고2)")
+    assert "2026년 수능 (고2)" in names, names
+    assert names.index("2026년 수능 (고2)") < names.index("2026년 9월 모의고사 (고2)")
+    assert names.index("2026년 9월 모의고사 (고2)") < names.index("2026년 3월 모의고사 (고2)")
 
     # 부교재는 올린 차례 그대로 — 뒤에 올린 것이 뒤에 섭니다
     for n in ("첫교재 1강 필생보.pdf", "둘째교재 1강 필생보.pdf"):
@@ -3923,6 +3937,133 @@ def test_mock_books_run_newest_first():
     ebs = [b["name"] for b in sc.load_catalog()["books"] if b.get("category") == "ebs"]
     assert ebs.index("첫교재") < ebs.index("둘째교재"), ebs
     print("PASS  모의고사는 최근 회차 · 부교재는 올린 차례")
+
+
+def test_free_page_shows_all_four_kinds_with_a_page_shot():
+    """넉 장을 다 내고, 어떻게 생겼는지 지면으로 보여 줍니다."""
+    a = admin()
+    names = [f"고1 2026년 9월 모의고사 {k}.pdf"
+             for k in ("한줄해석", "한줄영어", "좌지문우해석", "직독직해")]
+    a.post("/admin/free/upload", data={
+        "files": [(io.BytesIO(_real_pdf(n)), n) for n in names]},
+        content_type="multipart/form-data", follow_redirects=True)
+
+    text = body(client().get("/free"))
+    for kind in ("한줄해석", "한줄영어", "좌지문우해석", "직독직해"):
+        assert kind in text, kind
+    # 종류마다 실제 자료의 첫 쪽이 걸려야 합니다
+    assert text.count("fk-img") == 4, text.count("fk-img")
+    assert "/cover.webp" in text
+    # 직독직해만 이메일을 받습니다
+    assert "이메일 적고 받기" in text and text.count("바로 받기") >= 3
+    # 무료 자료는 모의고사만 냅니다. 찾기 예시에 교재 이름이 있으면 안 됩니다.
+    assert "수능특강" not in text
+    print("PASS  무료 자료 — 넉 장 모두 · 종류마다 지면 한 장")
+
+
+def test_free_filters_by_year_and_round():
+    """회차를 통째로 늘어놓지 않고 시행년도 · 시행회차로 가릅니다."""
+    a = admin()
+    for n in ["고1 2026년 3월 모의고사 한줄해석.pdf",
+              "고1 2026년 9월 모의고사 한줄해석.pdf",
+              "고3 2024년 시행 수능 한줄해석.pdf"]:
+        a.post("/admin/free/upload", data={"files": [(io.BytesIO(_real_pdf(n)), n)]},
+               content_type="multipart/form-data", follow_redirects=True)
+
+    text = body(client().get("/free"))
+    assert "시행년도" in text and "시행회차" in text
+    assert ">2026년</a>" in text and ">2024년</a>" in text
+    for label in ("3월", "9월", "수능"):
+        assert f">{label}</a>" in text, label
+
+    # 해를 고르면 그 해의 회차만 남습니다
+    y2024 = body(client().get("/free?year=2024"))
+    heads = re.findall(r'class="round-head">\s*<h3>(.*?)</h3>', y2024, re.S)
+    assert heads == ["2024년 수능"], heads
+    assert ">3월</a>" not in y2024.split("시행회차")[1].split("</div>")[0]
+
+    # 회차만 골라도 걸러집니다
+    only9 = body(client().get("/free?round=9"))
+    heads = re.findall(r'class="round-head">\s*<h3>(.*?)</h3>', only9, re.S)
+    assert all("9월" in h for h in heads), heads
+    print("PASS  무료 자료 — 시행년도 · 시행회차로 가름")
+
+
+def test_a_bad_email_cannot_take_the_gated_file():
+    """받을 수 없는 주소로는 못 가져가야 합니다. 기다리다 끝나니까요."""
+    a = admin()
+    n = "고3 2026년 9월 모의고사 직독직해.pdf"
+    a.post("/admin/free/upload", data={"files": [(io.BytesIO(_real_pdf(n)), n)]},
+           content_type="multipart/form-data", follow_redirects=True)
+    slug = "2026-09-goh3-literal"
+    assert sc.find_freebie(slug)["gate"] == "email"
+
+    c = client()
+    for bad in ("한글@네이버.com", ".a@b.com", "a@-b.com", "a@b_c.com", "a@b.c",
+                "a..b@c.com", "a@b..com", "abc", "a@b"):
+        resp = c.post(f"/free/{slug}/get",
+                      data={"email": bad, "agree": "1"}, follow_redirects=False)
+        assert resp.status_code == 400, bad
+        assert "받으실 수 없는 주소" in body(resp), bad
+        assert "받으실 파일" not in body(resp), bad
+
+    # 흔한 오타는 막지 않고 여쭙습니다
+    ask = c.post(f"/free/{slug}/get", data={"email": "me@gmial.com", "agree": "1"})
+    assert ask.status_code == 400 and "me@gmail.com 아니신가요" in body(ask)
+    assert "이 주소 그대로 받기" in body(ask)
+    # 그대로 쓰시겠다면 한 번 더 누르시면 됩니다
+    keep = c.post(f"/free/{slug}/get",
+                  data={"email": "me@gmial.com", "agree": "1", "keep_email": "1"},
+                  follow_redirects=True)
+    assert "받으실 파일" in body(keep)
+
+    # 이메일을 받는 까닭은 '품이 들어서' 가 아니라 '다음 회차를 보내 드리려고'
+    page = body(client().get(f"/free/{slug}"))
+    assert "회차마다 이어서 만듭니다" in page
+    assert "품이 많이" not in page
+    print("PASS  틀린 이메일로는 못 받아감 · 오타는 여쭙기")
+
+
+def test_free_page_offers_packages_not_single_files():
+    """무료 자료 옆에 낱개 자료 하나를 걸면 '이게 다인가' 싶어집니다."""
+    item = {"grade": "고1"}
+    picked = sc.auto_related(item, limit=3)
+    assert picked
+    for p in picked:
+        assert len(p.get("materials") or []) > 1 or p.get("covers"), p["name"]
+    print("PASS  함께 보여 줄 유료 자료는 패키지로")
+
+
+def test_word_study_starts_with_flash_and_offers_games():
+    """낯부터 익히는 것이 순서입니다. 그리고 놀 자리도 있어야 합니다."""
+    c = client()
+    slug = sc.load_words()["books"][0]["slug"]
+    setup = body(c.get(f"/words/{slug}/study"))
+
+    # 깜빡이가 맨 앞이고, 처음부터 골라져 있습니다
+    ways = re.findall(r'<input type="radio" name="way" value="([a-z:]+)"', setup)
+    assert ways[0] == "flash", ways
+    assert 'value="flash" checked' in setup
+
+    # 게임 세 가지
+    for gid, game in sc.WORD_GAMES.items():
+        assert f'value="game:{gid}"' in setup, gid
+        assert game["name"] in setup
+
+    # 몇 개를 풀지는 슬라이더로. 고른 범위 안에서만 고르게 합니다.
+    assert 'type="range"' in setup and 'id="n"' in setup
+    total = sc.word_count(sc.find_wordbook(slug))
+    assert f'max="{total}"' in setup
+
+    # 게임이 실제로 열립니다
+    for gid in sc.WORD_GAMES:
+        page = body(c.get(f"/words/{slug}/study?mode=game&game={gid}&n=12"))
+        assert sc.WORD_GAMES[gid]["name"] in page, gid
+        assert 'id="board"' in page and f'data-game="{gid}"' in page
+        assert "gameWords" in page and "wordgame.js" in page
+    # 모르는 게임 이름으로 와도 첫 게임으로 엽니다
+    assert 'data-game="match"' in body(c.get(f"/words/{slug}/study?mode=game&game=zzz"))
+    print("PASS  단어 학습 — 깜빡이가 맨 앞 · 게임 셋 · 개수는 스펙트럼")
 
 
 def test_free_kind_suggests_email_gate():
@@ -4007,14 +4148,14 @@ def test_free_search_and_filters():
     _put_free_file("2026-03-goh2-side")
 
     hit = body(client().get("/free?q=한줄해석"))
-    assert "고1 3월 학력평가 한줄해석" in hit
-    assert "고2 3월 학력평가 좌지문우해석" not in hit
+    assert "고1 3월 모의고사 한줄해석" in hit
+    assert "고2 3월 모의고사 좌지문우해석" not in hit
 
     by_grade = body(client().get("/free?grade=고2"))
-    assert "좌지문우해석" in by_grade and "고1 3월 학력평가 한줄해석" not in by_grade
+    assert "좌지문우해석" in by_grade and "고1 3월 모의고사 한줄해석" not in by_grade
 
     by_exam = body(client().get("/free?exam=2026년 3월 학력평가"))
-    assert "고1 3월 학력평가 한줄해석" in by_exam
+    assert "고1 3월 모의고사 한줄해석" in by_exam
 
     miss = body(client().get("/free?q=없는자료이름"))
     assert "조건에 맞는 자료가 없습니다" in miss
@@ -4828,7 +4969,7 @@ def test_new_product_appears_in_home_updates():
 def test_order_page_shows_what_you_are_buying():
     """주문서에서 무엇을 사는지 칩으로 한눈에 보여야 합니다."""
     text = body(client().get("/order?slug=mock-2026-06-g3-analysis"))
-    assert "2026학년도 6월 모의평가" in text      # 교재·회차
+    assert "2026학년도 6월 모의고사" in text      # 교재·회차
     assert "고3" in text and "지문 28개" in text   # 학년 · 분량
     assert "지문 분석 패키지" in text
     assert "지문자료" in text and 'class="mat-chip' in text   # 들어가는 자료
@@ -6396,6 +6537,11 @@ def run_all():
     test_free_notify_collects_email()
     test_admin_creates_free_item_end_to_end()
     test_free_kind_suggests_email_gate()
+    test_free_page_shows_all_four_kinds_with_a_page_shot()
+    test_free_filters_by_year_and_round()
+    test_a_bad_email_cannot_take_the_gated_file()
+    test_free_page_offers_packages_not_single_files()
+    test_word_study_starts_with_flash_and_offers_games()
     test_product_upload_reads_the_filename()
     test_product_upload_never_overwrites_a_hand_made_product()
     test_sample_is_the_first_six_pages_and_the_shot_is_page_three()

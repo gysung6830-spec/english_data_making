@@ -398,6 +398,8 @@ def load_raw_catalog() -> dict:
     # 교재 차례를 여기서 한 번에 잡습니다. 모의고사는 최근 회차가 맨 위,
     # 나머지는 올리신 차례 그대로입니다. (파이썬 정렬은 같은 값끼리 순서를
     # 흐트러뜨리지 않아서, 뒤에 붙인 것이 뒤에 남습니다)
+    for book in catalog["books"]:
+        book["name"] = unify_exam_words(book.get("name", ""))
     catalog["books"] = sorted(catalog["books"], key=book_order_key)
     return catalog
 
@@ -1015,6 +1017,23 @@ def parse_unit_blocks(text: str) -> list[dict]:
     return [b for b in blocks if b["words"]]
 
 # ---------------------------------------------------------------------------
+# 단어 게임 — 흥미를 붙이는 자리입니다. 문제를 푼다는 느낌이 나면 안 됩니다.
+# 세 가지만 둡니다. 고를 것이 많으면 고르다가 지칩니다.
+WORD_GAMES = {
+    "match": {"name": "짝 맞추기", "mark": "🃏",
+              "lead": "카드를 뒤집어 단어와 뜻을 짝지어 주세요.",
+              "how": "뒤집어서 짝이 맞으면 사라집니다. 몇 번 만에 다 없애는지 겨뤄 보세요.",
+              "best": 12},
+    "speed": {"name": "1분 스피드", "mark": "⚡",
+              "lead": "1분 안에 몇 개나 맞히실 수 있나요?",
+              "how": "연달아 맞히면 점수가 배로 붙습니다. 틀리면 배수가 처음으로.",
+              "best": 30},
+    "type": {"name": "철자 타자", "mark": "⌨️",
+             "lead": "뜻을 보고 철자를 칩니다. 시간이 재집니다.",
+             "how": "다 치면 저절로 넘어갑니다. 한 글자씩 맞을 때마다 초록으로 바뀝니다.",
+             "best": 15},
+}
+
 # 무료 자료실 — 회차마다 뿌리는 자료 (한줄해석 · 한줄영어 · 좌지문우해석 · 직독직해)
 # ---------------------------------------------------------------------------
 FREE_KINDS = {
@@ -1024,7 +1043,15 @@ FREE_KINDS = {
     "literal": "직독직해",
 }
 
-# 이메일을 받고 내어 주는 것이 기본인 자료. (품이 많이 든 자료입니다)
+FREE_KIND_DESC = {
+    "oneline_ko": "문장마다 한 줄 해석.<br>수업 전에 훑기 좋습니다",
+    "oneline_en": "해석 없이 영어만<br>한 줄씩. 먼저 읽힐 때",
+    "side": "왼쪽 영어 · 오른쪽 해석.<br>지문 하나가 한 쪽에",
+    "literal": "끊어 읽은 자리마다 해석.<br>구조가 눈에 들어옵니다",
+}
+
+# 이메일을 적고 받는 자료. 아껴서가 아니라, 회차마다 이어서 만드는 것이라
+# 다음 회차를 만드는 대로 보내 드리려는 것입니다.
 FREE_KINDS_GATED = {"literal"}
 
 FREEBIE_FALLBACK = {"intro": {}, "items": []}
@@ -1035,6 +1062,9 @@ def load_raw_freebies() -> dict:
     data = load_json("freebies.json", FREEBIE_FALLBACK)
     data.setdefault("items", [])
     data.setdefault("intro", {})
+    for item in data["items"]:
+        item["exam"] = unify_exam_words(item.get("exam", ""))
+        item["title"] = unify_exam_words(item.get("title", ""))
     return data
 
 
@@ -1102,13 +1132,15 @@ KIND_CODE = {"oneline_ko": "oneline-ko", "oneline_en": "oneline-en",
 
 # 시험 이름. 안 적혀 있으면 학년과 달로 짐작합니다 — 고3 6·9월은 평가원,
 # 11월은 수능, 나머지는 교육청 학력평가입니다. 해마다 같습니다.
-FREE_EXAM_TYPES = {
-    "학력평가": ["학력평가", "학평", "전국연합"],
-    "모의평가": ["모의평가", "모평", "평가원"],
-    "수능": ["수능시험", "대학수학능력"],
-    "모의고사": ["모의고사", "모고"],
-}
-_TEXTBOOK_WORDS = ("수능특강", "수능완성", "올림포스", "교과서")
+# 한 해에 다섯 번입니다 — 3 · 6 · 9 · 10월과 수능. 수능은 11월에 봅니다.
+# 학력평가 · 모의평가 · 전국연합 … 부르는 이름이 여럿이지만 학생에게는
+# 다 '모의고사' 입니다. 화면에서는 그 한 마디로 통일합니다.
+MOCK_ROUNDS = {3: "3월", 6: "6월", 9: "9월", 10: "10월", 11: "수능"}
+MOCK_ROUND_ORDER = [3, 6, 9, 10, 11]
+FREE_EXAM_WORDS = ["학력평가", "학평", "전국연합", "모의평가", "모평", "평가원",
+                   "모의고사", "모고"]
+_SUNEUNG_WORDS = ("수능", "대학수학능력", "수학능력시험")
+_TEXTBOOK_WORDS = ("수능특강", "수능완성", "수능기출", "올림포스", "교과서")
 
 _FREE_YM = re.compile(r"(20\d{2})\s*[년.\-_/]\s*(0?[1-9]|1[0-2])(?![0-9])")
 _FREE_YEAR = re.compile(r"(20\d{2})")
@@ -1139,39 +1171,62 @@ def guess_free_grade(name: str) -> str:
     return ""
 
 
+# 부르는 이름을 하나로 맞춥니다. 학력평가 · 모의평가 · 전국연합 …
+# 학생에게는 다 '모의고사' 입니다.
+_UNIFY_RE = re.compile(r"(?:전국연합\s*)?(?:학력평가|학평|모의평가|모평|전국연합)")
+
+
+def unify_exam_words(text: str) -> str:
+    """'2026년 3월 학력평가' → '2026년 3월 모의고사'."""
+    return _UNIFY_RE.sub("모의고사", text) if text else text
+
+
+def is_suneung(name: str) -> bool:
+    """'수능' 이라고 적혀 있는지. 수능특강·수능완성은 교재이지 시험이 아닙니다."""
+    low = _flat(name)
+    if any(w in low for w in _TEXTBOOK_WORDS):
+        return False
+    return any(w in low for w in _SUNEUNG_WORDS)
+
+
 def guess_exam_round(name: str) -> tuple[int, int]:
     """파일 이름에서 (해, 달). 못 읽으면 (0, 0).
 
     '2026년 3월' 도 '2026-03' 도 '3월' 도 읽습니다. 해가 없으면 올해로 봅니다.
+    수능은 달을 안 적는 것이 보통이라 11월로 봅니다 — 늘 11월에 봅니다.
     """
     text = name or ""
+    # '2026학년도' 는 2025년에 치릅니다. 시행년도로 바꿔 놓고 읽습니다.
+    school_year = re.search(r"(20\d{2})\s*학년도", text)
+    if school_year:
+        text = text.replace(school_year.group(0), str(int(school_year.group(1)) - 1) + "년")
     hit = _FREE_YM.search(text)
     if hit:
         return int(hit.group(1)), int(hit.group(2))
     month = _FREE_MONTH.search(text)
-    if not month:
-        return 0, 0
     year = _FREE_YEAR.search(text)
+    if not month:
+        # '고3 2024년 시행 수능' 처럼 달이 없어도 수능이면 회차입니다
+        if is_suneung(text) and year:
+            return int(year.group(1)), 11
+        if is_suneung(text):
+            return now_kst().year, 11
+        return 0, 0
     return int(year.group(1)) if year else now_kst().year, int(month.group(1))
 
 
-def exam_type_of(name: str, grade: str, month: int) -> str:
-    """무슨 시험인지. 이름에 적혀 있으면 그대로, 없으면 학년·달로 짐작합니다."""
-    low = _flat(name)
-    if not any(w in low for w in _TEXTBOOK_WORDS):
-        for label, words in FREE_EXAM_TYPES.items():
-            if any(_flat(w) in low for w in words):
-                return label
-    if grade == "고3":
-        if month in (6, 9):
-            return "모의평가"
-        if month == 11:
-            return "수능"
-    return "학력평가"
+def round_name(month: int) -> str:
+    """회차 이름. 11월은 '수능', 나머지는 '3월' 처럼 달로 부릅니다."""
+    return MOCK_ROUNDS.get(to_int(month, 0), f"{month}월" if month else "")
 
 
-def exam_label(year: int, month: int, kind: str) -> str:
-    return f"{year}년 {month}월 {kind}" if year and month else ""
+def exam_label(year: int, month: int, kind: str = "") -> str:
+    """'2026년 3월 모의고사' · '2026년 수능'. 부르는 이름을 하나로 맞춥니다."""
+    if not (year and month):
+        return ""
+    if to_int(month, 0) == 11:
+        return f"{year}년 수능"
+    return f"{year}년 {round_name(month)} 모의고사"
 
 
 def exam_key(year: int, month: int) -> str:
@@ -1197,7 +1252,6 @@ def read_free_name(filename: str) -> dict:
     kind = guess_free_kind(stem)
     grade = guess_free_grade(stem)
     year, month = guess_exam_round(stem)
-    etype = exam_type_of(stem, grade, month)
 
     missing = []
     if not kind:
@@ -1210,11 +1264,11 @@ def read_free_name(filename: str) -> dict:
     key = exam_key(year, month)
     parts = [key or now_kst().date().isoformat(),
              GRADE_CODE.get(grade, "etc"), KIND_CODE.get(kind, "etc")]
-    title = " ".join(x for x in [grade, exam_label(year, month, etype),
+    title = " ".join(x for x in [grade, exam_label(year, month),
                                  FREE_KINDS.get(kind, "")] if x) or stem[:120]
     return {
         "slug": "-".join(parts), "title": title, "grade": grade,
-        "exam": exam_label(year, month, etype), "exam_key": key,
+        "exam": exam_label(year, month), "exam_key": key,
         "kinds": [kind] if kind else [],
         "gate": "email" if kind in FREE_KINDS_GATED else "open",
         "missing": missing, "source": os.path.basename(filename or ""),
@@ -1322,11 +1376,16 @@ def auto_related(item: dict, products=None, limit: int = 3) -> list[dict]:
     grade = (item or {}).get("grade") or ""
     scored = []
     for at, p in enumerate(products):
-        if not p.get("active", True):
+        if not p.get("active", True) or p.get("taste"):
             continue
-        scored.append((1 if grade and p.get("grade") == grade else 0, at, p))
-    scored.sort(key=lambda t: (t[0], t[1]), reverse=True)
-    return [p for _, _, p in scored[:max(0, limit)]]
+        # 우리가 파는 단위는 패키지입니다. 낱개 자료 하나를 걸어 두면
+        # '이게 다인가' 싶어서 오히려 덜 팔립니다.
+        pack = 2 if p.get("covers") else (1 if len(p.get("materials") or []) > 1 else 0)
+        if not pack:
+            continue
+        scored.append((pack, 1 if grade and p.get("grade") == grade else 0, at, p))
+    scored.sort(key=lambda t: (t[1], t[0], t[2]), reverse=True)
+    return [p for *_, p in scored[:max(0, limit)]]
 
 
 def preorder_price(cfg: dict, plan: dict) -> int:
@@ -1562,7 +1621,7 @@ def slugify_ko(text: str, limit: int = 48) -> str:
 #   학년 + 해·달 + 모의고사류가 있으면 모의고사
 #   나머지는 전부 부교재
 TEXTBOOK_SUBJECTS = ["공통영어1", "공통영어2", "영어1", "영어2"]
-MOCK_WORDS = ["모의고사", "학력평가", "학평", "모의평가", "모평", "전국연합", "수능시험"]
+MOCK_WORDS = FREE_EXAM_WORDS
 PASSAGE_DEFAULTS = {"mock": 28, "textbook": 6, "ebs": 6}
 
 
@@ -1581,7 +1640,8 @@ def guess_product_category(name: str) -> str:
         return "textbook"
     low = _flat(name)
     year, month = guess_exam_round(name)
-    if any(_flat(w) in low for w in MOCK_WORDS) and month:
+    # 수능도 시험 회차입니다. 달을 안 적어도 11월로 잡힙니다.
+    if month and (is_suneung(name) or any(_flat(w) in low for w in MOCK_WORDS)):
         return "mock"
     return "ebs"
 
@@ -1630,8 +1690,7 @@ def read_product_name(filename: str, catalog=None, site=None) -> dict:
     # 교재 — 이름에서 읽어 낸 말들을 걷어낸 나머지입니다
     book_name = _strip_known(stem, material, unit)
     if category == "mock":
-        etype = exam_type_of(stem, grade, month)
-        book_name = " ".join(x for x in [exam_label(year, month, etype),
+        book_name = " ".join(x for x in [exam_label(year, month),
                                          f"({grade})" if grade else ""] if x) or book_name
         book_slug = f"mock-{year:04d}-{month:02d}" + (f"-g{grade[-1]}" if grade else "")
     else:
@@ -3094,7 +3153,32 @@ def send_mail(subject: str, body: str, to_addr: str = "") -> bool:
 # 입력값 확인
 # ---------------------------------------------------------------------------
 PHONE_RE = re.compile(r"^[0-9\-\+\s]{9,20}$")
-EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+# 자료가 메일로 나가는 자리가 있어서, 주소가 틀리면 손님은 기다리다 끝납니다.
+# 앞이 점으로 시작하거나 점이 둘 붙거나, 도메인에 밑줄이 들었거나 맨 끝이
+# 한 글자면 받을 수 없는 주소입니다. 한글 주소도 실제로는 안 갑니다.
+EMAIL_RE = re.compile(
+    r"^(?!\.)(?!.*\.\.)[A-Za-z0-9!#$%&'*+/=?^_`{|}~.-]{1,64}(?<!\.)"
+    r"@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,}$")
+
+# 손이 미끄러진 자리. 막지는 않고 '이거 아닌가요' 하고 여쭙습니다.
+EMAIL_TYPOS = {
+    "gmial.com": "gmail.com", "gmai.com": "gmail.com", "gmail.co": "gmail.com",
+    "gmail.con": "gmail.com", "gamil.com": "gmail.com", "gnail.com": "gmail.com",
+    "naver.co": "naver.com", "naver.con": "naver.com", "nate.co": "nate.com",
+    "navr.com": "naver.com", "hanmail.ne": "hanmail.net", "hamail.net": "hanmail.net",
+    "daum.ne": "daum.net", "kakao.co": "kakao.com", "outlook.co": "outlook.com",
+    "hotmail.co": "hotmail.com", "icloud.co": "icloud.com",
+}
+
+
+def email_typo(email: str) -> str:
+    """흔한 오타면 고친 주소를, 아니면 빈 값을 돌려줍니다."""
+    email = (email or "").strip().lower()
+    if "@" not in email:
+        return ""
+    local, _, domain = email.rpartition("@")
+    fixed = EMAIL_TYPOS.get(domain)
+    return f"{local}@{fixed}" if fixed else ""
 SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9\-]{1,58}[a-z0-9]$")
 
 

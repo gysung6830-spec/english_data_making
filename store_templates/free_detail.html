@@ -59,8 +59,10 @@
     {% else %}
       <div class="form-card get-box">
         <h2>이메일만 적으면 바로 받으실 수 있습니다</h2>
-        <p class="muted">품이 많이 들어간 자료라 받아 가시는 분만 확인하고 있습니다.
-          받으신 뒤에 광고를 보내지 않습니다.</p>
+        <p class="muted">이 자료는 <b>회차마다 이어서 만듭니다.</b>
+          적어 두시면 다음 회차가 나오는 대로 보내 드립니다 — 그때 또 찾아오지
+          않으셔도 되게요. 광고는 보내지 않고, 받기 싫어지시면 메일 맨 아래
+          한 번으로 끊으실 수 있습니다.</p>
         <form method="post" action="{{ url_for('free_get', slug=item.slug) }}">
           <div class="field">
             <label for="email">이메일 주소<span class="req">*</span></label>
@@ -85,7 +87,9 @@
               <span>새 회차 자료가 올라오면 알려 주세요.</span>
             </label>
           </div>
-          <button class="btn btn-primary btn-block" type="submit">무료로 받기</button>
+          {% if typo %}<input type="hidden" name="keep_email" value="1">{% endif %}
+          <button class="btn btn-primary btn-block" type="submit">
+            {{ '이 주소 그대로 받기' if typo else '무료로 받기' }}</button>
         </form>
       </div>
     {% endif %}

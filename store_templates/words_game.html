@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}{{ info.name }} — {{ b.name }} 단어 게임 · {{ site.brand }}{% endblock %}
+{% block desc %}{{ b.name }} 단어로 {{ info.name }}. {{ info.lead }} 회원가입 없이 무료입니다.{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap narrow">
+    <a class="back-link" href="{{ back }}">← 다시 고르기</a>
+
+    <div class="game-head">
+      <span class="g-mark">{{ info.mark }}</span>
+      <h2>{{ info.name }}</h2>
+      <p>{{ info.how }}</p>
+      <div class="chips">
+        <span class="chip">{{ scope }}</span>
+        <span class="chip">단어 {{ words|length }}개</span>
+      </div>
+    </div>
+
+    <div class="g-switch">
+      {% for gid, g in games.items() %}
+        <a class="gs {{ 'on' if gid == game }}"
+           href="{{ url_for('words_study', slug=b.slug, mode='game', game=gid,
+                            n=words|length, unit=request.args.getlist('unit')) }}">
+          {{ g.mark }} {{ g.name }}</a>
+      {% endfor %}
+    </div>
+
+    <div class="g-board" id="board" data-game="{{ game }}"
+         data-best="{{ info.best }}"></div>
+
+    <div class="g-bar">
+      <div class="g-stat"><b id="gA">0</b><small id="gAL">점수</small></div>
+      <div class="g-stat"><b id="gB">0</b><small id="gBL">남은 시간</small></div>
+      <div class="g-stat"><b id="gC">0</b><small id="gCL">연속</small></div>
+      <button class="btn btn-ghost btn-sm" type="button" id="again">다시 하기</button>
+    </div>
+
+    <div class="g-done" id="done" hidden>
+      <b id="doneHead"></b>
+      <p id="doneBody"></p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" type="button" id="retry">한 번 더</button>
+        <a class="btn btn-ghost" href="{{ back }}">다른 방식으로</a>
+      </div>
+    </div>
+
+    <p class="muted" style="margin-top:22px;font-size:13px;">
+      기록은 이 브라우저에만 남습니다. 보내지도, 모으지도 않습니다.</p>
+  </div>
+</section>
+
+<script id="gameWords" type="application/json">{{ words|map(attribute='en')|list|tojson }}</script>
+<script id="gameMeans" type="application/json">{{ words|map(attribute='ko')|list|tojson }}</script>
+<script src="{{ asset('wordgame.js') }}"></script>
+{% endblock %}

@@ -926,15 +926,25 @@ label.dropzone{
 .policy-box.no{background:#fdf6f4; border-color:#f0d4c4;}
 .policy-box.no > b{color:#8c2f16;}
 
-/* 무료 자료 — 세 종류 소개 띠 */
-.free-kinds{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:26px;}
+/* 무료 자료 — 네 종류 소개 띠. 지면을 한 장씩 걸어 둡니다 */
+.free-kinds{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:26px;}
 .fk{
   background:var(--brand-soft); border:1px solid #cfe4d9; border-radius:12px;
   padding:16px 18px; display:flex; flex-direction:column; gap:5px;
+  text-decoration:none; color:inherit; transition:.15s;
 }
+a.fk:hover{border-color:var(--brand); transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(15,32,24,.08);}
 .fk b{font-size:16px; color:var(--brand-dark); letter-spacing:-.02em;}
 .fk span{font-size:13.5px; color:var(--ink-2); line-height:1.55;}
-@media (max-width:720px){
+.fk-img{display:block; margin:-4px -4px 6px; border-radius:8px; overflow:hidden;
+  border:1px solid #cfe4d9; background:#fff; line-height:0;}
+.fk-img img{width:100%; aspect-ratio:3/2; object-fit:cover; object-position:top center;}
+.fk-gate{margin-top:auto; padding-top:8px; font-style:normal; font-size:12px;
+  font-weight:700; color:#3730a3;}
+.fk-gate.open{color:var(--brand-dark);}
+@media (max-width:900px){ .free-kinds{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:520px){
   .free-kinds{grid-template-columns:1fr;}
   .fk span br{display:none;}
 }
@@ -2663,3 +2673,78 @@ input[type=text].bl-in.wide{min-width:74px;}
   border:1px solid var(--line,#e5e7eb); border-radius:12px; background:#fff;
   box-shadow:0 8px 24px rgba(15,32,24,.09);}
 .pd-shot figcaption{margin-top:9px; font-size:12px; color:var(--muted,#6b7280);}
+
+/* ---- 단어 학습 고르기 — 갈래 머리말 · 게임 · 스펙트럼 ------------------ */
+.way-head{display:block; margin:16px 0 8px; font-size:12px; font-weight:700;
+  letter-spacing:.02em; color:var(--muted,#6b7280);}
+.way-head:first-of-type{margin-top:4px;}
+.way-games{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+.way-game .way-body b{display:flex; align-items:center; gap:7px;}
+.wg-mark{font-style:normal; font-size:17px;}
+@media (max-width:640px){ .way-games{grid-template-columns:1fr;} }
+
+.spectrum{display:flex; align-items:center; gap:14px;}
+.spectrum input[type=range]{flex:1; min-width:0; accent-color:var(--brand,#166534);
+  height:26px;}
+.spectrum output{min-width:64px; text-align:right; font-weight:800; font-size:19px;
+  color:var(--brand,#166534); font-variant-numeric:tabular-nums;}
+.spec-scale{display:flex; justify-content:space-between; margin-top:2px;
+  font-size:12px; color:var(--muted,#6b7280);}
+
+/* ---- 단어 게임 --------------------------------------------------------- */
+.game-head{text-align:center; margin-bottom:18px;}
+.game-head .g-mark{font-size:34px; line-height:1;}
+.game-head h2{margin:8px 0 4px;}
+.game-head p{margin:0 0 12px; color:var(--muted,#6b7280); font-size:14px;}
+.game-head .chips{justify-content:center;}
+.g-switch{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:18px;}
+.gs{padding:7px 14px; border:1px solid var(--line,#e5e7eb); border-radius:999px;
+  background:#fff; font-size:13px; text-decoration:none; color:inherit;}
+.gs.on{background:var(--brand,#166534); border-color:var(--brand,#166534); color:#fff;
+  font-weight:700;}
+.g-board{min-height:280px;}
+.g-bar{display:flex; align-items:center; gap:18px; margin-top:18px; padding-top:16px;
+  border-top:1px solid var(--line,#e5e7eb); flex-wrap:wrap;}
+.g-stat{display:flex; flex-direction:column;}
+.g-stat b{font-size:22px; font-variant-numeric:tabular-nums;}
+.g-stat small{font-size:11px; color:var(--muted,#6b7280);}
+.g-bar .btn{margin-left:auto;}
+.g-done{margin-top:20px; padding:22px; border-radius:14px; text-align:center;
+  background:var(--brand-soft,#eef7f1); border:1px solid #cfe4d9;}
+.g-done b{display:block; font-size:22px; margin-bottom:6px;}
+.g-done p{margin:0 0 14px; color:var(--ink-2,#4b5563);}
+.g-done .hero-actions{justify-content:center;}
+
+/* 짝 맞추기 */
+.g-match{display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
+.mc{aspect-ratio:3/2.2; border:1px solid var(--line,#e5e7eb); border-radius:12px;
+  background:var(--brand,#166534); cursor:pointer; padding:8px; transition:.18s;
+  display:flex; align-items:center; justify-content:center;}
+.mc-face{opacity:0; font-size:14px; font-weight:700; line-height:1.35; word-break:keep-all;}
+.mc.on{background:#fff;}
+.mc.on .mc-face{opacity:1;}
+.mc.gone{background:var(--brand-soft,#eef7f1); border-style:dashed; cursor:default;}
+.mc.gone .mc-face{opacity:.45;}
+@media (max-width:520px){ .g-match{grid-template-columns:repeat(3,1fr);} .mc-face{font-size:12px;} }
+
+/* 1분 스피드 */
+.sp-word{text-align:center; font-size:34px; font-weight:800; margin:26px 0 22px;
+  letter-spacing:-.02em;}
+.sp-opts{display:grid; grid-template-columns:repeat(2,1fr); gap:10px;}
+.sp-opt{padding:18px 14px; border:1px solid var(--line,#e5e7eb); border-radius:12px;
+  background:#fff; font-size:15px; cursor:pointer; word-break:keep-all;}
+.sp-opt.good{background:var(--brand,#166534); border-color:var(--brand,#166534); color:#fff;}
+.sp-opt.bad{background:#fdeceb; border-color:#f3c4c1; color:#b91c1c;}
+@media (max-width:520px){ .sp-word{font-size:27px;} .sp-opts{grid-template-columns:1fr;} }
+
+/* 철자 타자 */
+.ty-ko{text-align:center; font-size:24px; font-weight:800; margin:26px 0 16px;}
+.ty-hint{display:flex; justify-content:center; gap:5px; margin-bottom:18px;}
+.ty-hint i{font-style:normal; width:22px; height:30px; border-bottom:2px solid #d1d5db;
+  text-align:center; font-size:19px; font-weight:700; color:transparent;}
+.ty-hint i.ok{color:var(--brand,#166534); border-bottom-color:var(--brand,#166534);}
+.ty-hint i.no{color:#b91c1c; border-bottom-color:#b91c1c;}
+input[type=text].ty-in{display:block; width:100%; max-width:340px; margin:0 auto;
+  padding:13px 16px; font-size:19px; text-align:center; letter-spacing:.06em;
+  border:1px solid var(--line,#e5e7eb); border-radius:12px;}
+input[type=text].ty-in:focus{outline:2px solid var(--brand,#166534); outline-offset:-1px;}
