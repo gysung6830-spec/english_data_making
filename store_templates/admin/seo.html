@@ -4,13 +4,14 @@
 {% block body %}
 <div class="adm-head">
   <h1>검색 등록</h1>
-  <p>네이버·구글에서 우리 자료가 검색되게 만드는 화면입니다. <b>한 번만 해 두면 됩니다.</b></p>
+  <p>네이버·구글·빙에서 우리 자료가 검색되게 만드는 화면입니다. <b>한 번만 해 두면 됩니다.</b></p>
 </div>
 
 <div class="steps-help">
   <b>왜 해야 하냐면</b>
   <ol>
-    <li>등록하지 않으면 네이버·구글이 <b>이 사이트가 있는 줄도 모릅니다.</b></li>
+    <li>등록하지 않으면 검색엔진이 <b>이 사이트가 있는 줄도 모릅니다.</b>
+      특히 <b>빙은 스스로 찾아오지 않습니다.</b> 등록이 곧 전부입니다.</li>
     <li>등록해도 검색에 뜨기까지 <b>2주에서 3개월</b> 걸립니다. 그래서 빨리 해 두는 편이 좋습니다.</li>
     <li>지금 검색에 걸릴 수 있는 페이지가 <b>{{ page_count }}장</b> 있습니다.
       무료 자료를 한 건 올릴 때마다 한 장씩 늘어납니다.</li>
@@ -117,7 +118,40 @@
 </div>
 
 <div class="panel">
-  <h2>3단계 — 다음(카카오)</h2>
+  <h2>3단계 — 빙(Bing) <span class="tag" style="background:#e0edff;color:#1e40af;">안 걸리던 이유</span></h2>
+  <div class="hint">
+    빙은 <b>스스로 찾아오지 않습니다.</b> 등록하지 않으면 몇 년이 지나도 안 걸립니다.
+    윈도우 검색창 · 엣지 브라우저 · ChatGPT 의 웹검색이 모두 빙을 씁니다.
+  </div>
+  <ol class="seo-steps">
+    <li><a href="https://www.bing.com/webmasters" target="_blank" rel="noopener">
+      빙 웹마스터도구</a> 접속 → 로그인 (구글·마이크로소프트 계정 다 됩니다)</li>
+    <li>구글 서치콘솔을 이미 하셨다면 <b>「Import from Google Search Console」</b> 를 누르세요.
+      확인 코드도 사이트맵도 <b>한 번에 넘어옵니다.</b> 안 하셨으면 아래로 가세요.</li>
+    <li><b>Add site manually</b> 에 아래 주소를 붙여 넣기
+      <div class="copybox"><code>{{ home_url }}</code></div></li>
+    <li>확인 방법에서 <b>「Add meta tag to your default page」</b> 를 고르고,
+      나온 줄을 아래 칸에 붙여 넣으세요.</li>
+    <li>저장한 뒤 빙 화면에서 <b>Verify</b> → <b>Sitemaps</b> 에 아래 주소 제출
+      <div class="copybox"><code>{{ home_url }}/sitemap.xml</code></div></li>
+  </ol>
+  <div class="adm-field">
+    <label for="bing">빙 확인 코드</label>
+    <input type="text" id="bing" name="bing" value="{{ seo.bing or '' }}"
+           placeholder='<meta name="msvalidate.01" content="..."> 통째로 붙여 넣으셔도 됩니다'>
+    <div class="tip">
+      ✅ 넣고 저장하면 <b>XML 파일 방식</b>도 같이 열립니다
+      ({{ home_url }}/BingSiteAuth.xml). 빙이 둘 중 어느 쪽을 물어도 통과합니다.
+    </div>
+  </div>
+  <label class="check">
+    <input type="checkbox" name="done_bing" value="1" {{ 'checked' if seo.done_bing }}>
+    <span>빙 확인 + 사이트맵 제출까지 끝냈습니다</span>
+  </label>
+</div>
+
+<div class="panel">
+  <h2>4단계 — 다음(카카오)</h2>
   <div class="hint">확인 코드가 필요 없습니다. 주소만 넣으면 끝입니다.</div>
   <ol class="seo-steps">
     <li><a href="https://register.search.daum.net/index.daum" target="_blank" rel="noopener">
@@ -133,6 +167,35 @@
   </div>
 </div>
 </form>
+
+<div class="panel" style="border:1px solid #bfdbfe; background:#f5f9ff;">
+  <h2>지금 곧바로 두드리기 (IndexNow)</h2>
+  <div class="hint">
+    사이트맵은 <b>"여기 있으니 언젠가 와 보세요"</b> 고, 이것은 <b>"지금 왔다 가세요"</b> 입니다.
+    빙·네이버·얀덱스가 함께 쓰는 길이라, 누르면 보통 <b>몇 시간 안에</b> 훑으러 옵니다.
+    무료 자료를 올리실 때는 <b>제가 알아서 누릅니다.</b> 아래 단추는 지금 있는 것 전부를 한 번에 알립니다.
+  </div>
+  <table class="adm-table">
+    <tbody>
+      <tr><td><b>알릴 주소</b></td><td>{{ page_count }}장 (자료 · 상품 · 교재 · PDF 까지)</td></tr>
+      <tr><td><b>열쇠 파일</b></td>
+        <td><a href="{{ indexnow_url }}" target="_blank" rel="noopener">{{ indexnow_url }}</a>
+          — 검색엔진이 "정말 주인이 맞나" 를 여기서 확인합니다. 손대지 마세요.</td></tr>
+      <tr><td><b>마지막으로 알린 때</b></td>
+        <td>{{ pinged_at or '아직 없습니다' }}</td></tr>
+    </tbody>
+  </table>
+  <form method="post" action="{{ url_for('admin.seo_ping') }}">
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit" {{ '' if indexnow_ready else 'disabled' }}>
+        지금 빙 · 네이버에 알리기</button>
+      {% if not indexnow_ready %}
+        <span class="hint" style="display:inline;">내 컴퓨터에서는 알릴 수 없습니다.
+          인터넷에 올라간 주소에서 눌러 주세요.</span>
+      {% endif %}
+    </div>
+  </form>
+</div>
 
 <div class="panel">
   <h2>이미 해 둔 것 — 손대실 필요 없습니다</h2>
@@ -151,6 +214,10 @@
         <td>구글 검색 결과에 <b>가격이 함께</b> 뜨게 하는 표시입니다.</td></tr>
       <tr><td><b>공유 썸네일(og)</b></td>
         <td>카톡·밴드에 링크를 붙이면 그림과 설명이 뜹니다.</td></tr>
+      <tr><td><b>IndexNow 알림</b></td>
+        <td>무료 자료를 올리면 <b>그 자리에서</b> 빙·네이버에 새 주소를 알립니다.</td></tr>
+      <tr><td><b>빙 확인 파일</b></td>
+        <td>위에 빙 코드를 넣으면 <code>/BingSiteAuth.xml</code> 도 같이 열립니다.</td></tr>
     </tbody>
   </table>
 </div>

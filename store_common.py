@@ -17,15 +17,18 @@ import hashlib
 import json
 import os
 import re
-import hashlib
 import logging
 import secrets
 import shutil
 import smtplib
 import sqlite3
+import threading
+import urllib.error
+import urllib.request
 from datetime import date, datetime, timedelta, timezone
 from email.message import EmailMessage
 from pathlib import Path
+from urllib.parse import urlparse
 
 from flask import current_app, g
 
@@ -468,6 +471,79 @@ def grouped_materials() -> list[dict]:
         out.append({"id": "", "range": "", "name": "그 밖의 자료",
                     "headline": "", "lead": "", "items": orphan})
     return out
+
+
+# ---------------------------------------------------------------------------
+# 검색엔진에 곧바로 알리기 (IndexNow)
+#
+# 빙(Bing)·네이버·얀덱스가 함께 쓰는 약속입니다. 자료를 올린 그 자리에서
+# "이 주소가 새로 생겼습니다" 하고 알려 주면 몇 시간 안에 훑으러 옵니다.
+# 알리지 않으면, 새로 만든 작은 사이트는 몇 달이 지나도 찾아오지 않습니다.
+# 사이트맵은 "여기 있으니 언젠가 와 보세요" 고, 이것은 "지금 왔다 가세요" 입니다.
+#
+# 열쇠는 아무 글자나 되지만, 같은 열쇠를 우리 사이트에 파일로 걸어 두어야
+# "그 사이트 주인이 맞다" 가 증명됩니다. → store.py 의 /<열쇠>.txt
+# ---------------------------------------------------------------------------
+INDEXNOW_API = "https://api.indexnow.org/indexnow"
+INDEXNOW_MAX = 10000              # 한 번에 보낼 수 있는 주소 수 (약속에 적힌 값)
+INDEXNOW_TIMEOUT = 8              # 검색엔진이 늦게 답해도 자료 올리기는 안 기다립니다
+
+
+def indexnow_key() -> str:
+    """이 사이트의 IndexNow 열쇠. 없으면 만들어 저장합니다.
+
+    load_site() 가 아니라 원본을 직접 읽습니다. load_site 는 환경변수로 받은
+    계좌번호를 얹어 주는데, 그대로 저장하면 파일에 계좌번호가 남습니다.
+    """
+    raw = load_json("site.json", SITE_FALLBACK)
+    seo = dict(raw.get("seo") or {})
+    key = re.sub(r"[^a-f0-9]", "", str(seo.get("indexnow") or "").lower())
+    if len(key) != 32:
+        key = secrets.token_hex(16)
+        seo["indexnow"] = key
+        raw["seo"] = seo
+        save_json("site.json", raw)
+    return key
+
+
+def indexnow_ready(home: str) -> bool:
+    """알릴 수 있는 주소인지. 내 컴퓨터에서 돌 때는 알리지 않습니다."""
+    host = (urlparse(home).hostname or "").lower()
+    return bool(host) and host not in ("localhost", "127.0.0.1", "::1") \
+        and not host.endswith(".local") and "." in host
+
+
+def ping_indexnow(urls, home: str, reason: str = "") -> bool:
+    """새로 생긴 주소를 빙·네이버에 알립니다.
+
+    인터넷이 막혀도 자료 올리기는 끝나야 하므로, 딴 갈래로 보내고 곧장 돌아옵니다.
+    """
+    urls = [u for u in dict.fromkeys(urls) if str(u).startswith("http")][:INDEXNOW_MAX]
+    home = (home or "").rstrip("/")
+    if not urls or not indexnow_ready(home):
+        log.info("IndexNow 건너뜀 — 주소 %d개 · %s", len(urls), home or "(주소 없음)")
+        return False
+
+    key = indexnow_key()
+    body = json.dumps({
+        "host": urlparse(home).hostname,
+        "key": key,
+        "keyLocation": f"{home}/{key}.txt",
+        "urlList": urls,
+    }, ensure_ascii=False).encode("utf-8")
+
+    def send() -> None:
+        req = urllib.request.Request(
+            INDEXNOW_API, data=body, method="POST",
+            headers={"Content-Type": "application/json; charset=utf-8"})
+        try:
+            with urllib.request.urlopen(req, timeout=INDEXNOW_TIMEOUT) as resp:
+                log.info("IndexNow %s — 주소 %d개 알림 (%s)", resp.status, len(urls), reason)
+        except Exception as exc:
+            log.warning("IndexNow 못 보냄 (%s) — 주소 %d개 (%s)", exc, len(urls), reason)
+
+    threading.Thread(target=send, daemon=True).start()
+    return True
 
 
 # ---------------------------------------------------------------------------

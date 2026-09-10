@@ -202,6 +202,7 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
     seo_cfg = site.get("seo") or {}
     seo_ok = bool(seo_cfg.get("naver") or seo_cfg.get("google")
                   or seo_cfg.get("done_naver") or seo_cfg.get("done_google"))
+    bing_ok = bool(seo_cfg.get("bing") or seo_cfg.get("done_bing"))
 
     return [
         {"done": email_ok and bank_ok,
@@ -245,6 +246,11 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
          "title": "네이버 · 구글에 사이트 등록하기",
          "why": "등록하지 않으면 검색엔진이 이 사이트가 있는 줄도 모릅니다. "
                 "검색에 뜨기까지 2주~3개월 걸리니 일찍 해 두세요.",
+         "url": url_for("admin.seo"), "label": "검색 등록 열기"},
+        {"done": bing_ok,
+         "title": "빙(Bing)에 사이트 등록하기",
+         "why": "빙은 스스로 찾아오지 않습니다. 등록해야 걸립니다. "
+                "윈도우 검색창과 ChatGPT 검색이 빙을 씁니다.",
          "url": url_for("admin.seo"), "label": "검색 등록 열기"},
     ]
 
@@ -2024,6 +2030,19 @@ def free_list():
                            sample_count=len([x for x in items if x.get("sample")]))
 
 
+def ping_new_pages(slugs: list[str], reason: str) -> None:
+    """새로 생긴 무료 자료 주소를 빙·네이버에 곧바로 알립니다.
+
+    자료를 올린 그날 검색에 걸리게 하는 유일한 길입니다. 사이트맵만 걸어
+    두면 빙은 몇 달 뒤에나 옵니다. 실패해도 자료 올리기에는 지장이 없습니다.
+    """
+    home_url = url_for("home", _external=True).rstrip("/")
+    urls = [url_for("free", _external=True)]
+    for slug in dict.fromkeys(slugs):
+        urls.append(url_for("free_detail", slug=slug, _external=True))
+    sc.ping_indexnow(urls, home_url, reason=reason)
+
+
 @admin_bp.route("/free/upload", methods=["POST"])
 def free_upload():
     """PDF 를 끌어다 놓으면 끝. 파일 이름을 읽어 알아서 갈라 넣습니다.
@@ -2074,6 +2093,7 @@ def free_upload():
         sc.save_freebies(data)
         for one in filed:                       # 미리보기를 미리 만들어 둡니다
             sc.free_cover(one["slug"])
+        ping_new_pages([one["slug"] for one in filed], "무료 자료 올림")
     session["free_filed"] = filed[:60]
 
     if made or added:
@@ -2834,9 +2854,11 @@ def seo():
             seo_cfg["description"] = sc.clean(request.form.get("seo_description"), 200)
         seo_cfg["naver"] = verify_code(request.form.get("naver"))
         seo_cfg["google"] = verify_code(request.form.get("google"))
+        seo_cfg["bing"] = verify_code(request.form.get("bing"))
         seo_cfg["done_naver"] = bool(request.form.get("done_naver"))
         seo_cfg["done_google"] = bool(request.form.get("done_google"))
         seo_cfg["done_daum"] = bool(request.form.get("done_daum"))
+        seo_cfg["done_bing"] = bool(request.form.get("done_bing"))
         site["seo"] = seo_cfg
         sc.save_site(site)
         flash("검색 등록 정보를 저장했습니다.", "ok")
@@ -2846,10 +2868,42 @@ def seo():
     freebies = sc.load_freebies()["items"]
     page_count = (9 + len(catalog["products"]) + len(catalog["books"])
                   + len([x for x in freebies if x.get("active", True)]))
+    home_url = url_for("home", _external=True).rstrip("/")
+    key = sc.indexnow_key()
     return render_template("admin/seo.html", seo=site.get("seo") or {},
-                           home_url=url_for("home", _external=True).rstrip("/"),
+                           home_url=home_url,
                            page_count=page_count,
-                           free_count=len(freebies))
+                           free_count=len(freebies),
+                           indexnow_key=key,
+                           indexnow_url=f"{home_url}/{key}.txt",
+                           indexnow_ready=sc.indexnow_ready(home_url),
+                           pinged_at=(site.get("seo") or {}).get("pinged_at", ""))
+
+
+@admin_bp.route("/seo/ping", methods=["POST"])
+def seo_ping():
+    """지금 곧바로 빙·네이버에 "우리 사이트 훑어 가세요" 를 보냅니다.
+
+    사이트맵을 내는 것과 다릅니다. 사이트맵은 걸어 두고 기다리는 것이고,
+    이것은 그 자리에서 두드리는 것입니다. 빙은 보통 몇 시간 안에 옵니다.
+    """
+    from store import sitemap_urls
+
+    home_url = url_for("home", _external=True).rstrip("/")
+    urls = sitemap_urls()
+    if sc.ping_indexnow(urls, home_url, reason="관리자가 직접 누름"):
+        site = sc.load_site()
+        seo_cfg = dict(site.get("seo") or {})
+        seo_cfg["pinged_at"] = sc.now_kst().isoformat(timespec="minutes")
+        seo_cfg["pinged_count"] = len(urls)
+        site["seo"] = seo_cfg
+        sc.save_site(site)
+        flash(f"주소 {len(urls)}개를 빙·네이버에 알렸습니다. "
+              "보통 몇 시간 안에 훑으러 옵니다.", "ok")
+    else:
+        flash("지금은 알릴 수 없습니다. 인터넷에 올라간 주소에서만 됩니다 "
+              "(내 컴퓨터에서는 건너뜁니다).", "err")
+    return redirect(url_for("admin.seo"))
 
 
 # ---------------------------------------------------------------------------

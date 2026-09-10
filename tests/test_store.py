@@ -21,6 +21,7 @@ import os
 import re
 import shutil
 import tempfile
+import time
 from pathlib import Path
 
 # 실제 store_data 를 건드리지 않도록, 복사본을 만들어 그쪽을 보게 합니다.
@@ -68,9 +69,15 @@ def client():
     return store.app.test_client()
 
 
-def admin():
+def admin(base_url: str = ""):
+    """관리자로 로그인한 손. base_url 을 주면 그 주소에서 로그인합니다.
+
+    (열쇠는 주소마다 따로 붙습니다. 인터넷 주소에서만 되는 것을 볼 때 씁니다)
+    """
     c = client()
-    assert c.post("/admin/login", data={"password": "test1234"}).status_code == 302
+    extra = {"base_url": base_url} if base_url else {}
+    assert c.post("/admin/login", data={"password": "test1234"},
+                  **extra).status_code == 302
     return c
 
 
@@ -4496,6 +4503,151 @@ def test_seo_verification_code_paste():
     print("PASS  검색 등록 확인 코드 붙여넣기")
 
 
+def test_bing_verification_and_key_file():
+    """빙에 안 걸리던 까닭은 빙에게 알린 적이 없어서입니다.
+
+    확인 코드(meta) · 확인 파일(XML) · IndexNow 열쇠 파일 세 갈래를 다 엽니다.
+    """
+    a = admin()
+    # 코드를 넣기 전에는 XML 파일이 없어야 합니다 (아무나 넣을 수 있으면 안 됩니다)
+    assert client().get("/BingSiteAuth.xml").status_code == 404
+
+    a.post("/admin/seo", data={
+        "bing": '<meta name="msvalidate.01" content="BINGCODE7788" />'},
+        follow_redirects=True)
+    home = body(client().get("/"))
+    assert 'name="msvalidate.01" content="BINGCODE7788"' in home
+
+    xml = body(client().get("/BingSiteAuth.xml"))
+    assert "<user>BINGCODE7788</user>" in xml
+
+    # IndexNow 열쇠 파일 — 맞는 열쇠만 열립니다
+    key = sc.indexnow_key()
+    assert len(key) == 32
+    resp = client().get(f"/{key}.txt")
+    assert resp.status_code == 200 and body(resp).strip() == key
+    assert client().get("/0123456789abcdef0123456789abcdef.txt").status_code == 404
+    # robots.txt 는 열쇠 규칙에 가로채이면 안 됩니다
+    assert "Disallow: /admin" in body(client().get("/robots.txt"))
+    print("PASS  빙 확인 코드 · 확인 파일 · IndexNow 열쇠 파일")
+
+
+def test_robots_names_bingbot():
+    """빙은 자기 이름이 적힌 칸을 봅니다. 규칙은 * 와 같아야 합니다."""
+    robots = body(client().get("/robots.txt"))
+    for agent in ("User-agent: *", "User-agent: bingbot",
+                  "User-agent: Googlebot", "User-agent: Yeti"):
+        assert agent in robots, agent
+    assert robots.count("Disallow: /admin") == 4
+    assert "Sitemap: " in robots
+    print("PASS  robots.txt 가 빙·구글·네이버를 이름으로 부름")
+
+
+def test_indexnow_ping_payload(monkeypatch=None):
+    """IndexNow 알림이 약속대로 만들어지는지. 진짜로 보내지는 않습니다."""
+    import json as _json
+    import urllib.request as _u
+
+    # 내 컴퓨터 주소로는 보내지 않습니다 (남의 사이트를 알리는 꼴이 됩니다)
+    assert not sc.indexnow_ready("http://localhost:5000")
+    assert not sc.indexnow_ready("http://127.0.0.1:5000")
+    assert sc.indexnow_ready("https://ortica-store.onrender.com")
+
+    seen = {}
+
+    class _Fake:
+        status = 200
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+
+    real = _u.urlopen
+    _u.urlopen = lambda req, timeout=None: (
+        seen.update(url=req.full_url, method=req.get_method(),
+                    payload=_json.loads(req.data.decode())) or _Fake())
+    try:
+        ok = sc.ping_indexnow(
+            ["https://ortica-store.onrender.com/free/a",
+             "https://ortica-store.onrender.com/free",
+             "https://ortica-store.onrender.com/free"],   # 겹치는 것은 한 번만
+            "https://ortica-store.onrender.com/", reason="테스트")
+        assert ok
+        for _ in range(50):                    # 딴 갈래로 보내므로 잠깐 기다립니다
+            if seen:
+                break
+            time.sleep(0.05)
+    finally:
+        _u.urlopen = real
+
+    assert seen["url"] == sc.INDEXNOW_API and seen["method"] == "POST"
+    load = seen["payload"]
+    assert load["host"] == "ortica-store.onrender.com"
+    assert load["key"] == sc.indexnow_key()
+    assert load["keyLocation"].endswith(f"/{load['key']}.txt")
+    assert load["urlList"] == ["https://ortica-store.onrender.com/free/a",
+                               "https://ortica-store.onrender.com/free"]
+    print("PASS  IndexNow 알림 — 빙·네이버에 새 주소 알리기")
+
+
+def test_seo_ping_button_tells_bing():
+    """관리자가 단추를 누르면 사이트 전체를 빙에 알려야 합니다."""
+    import json as _json
+    import urllib.request as _u
+
+    seen = {}
+
+    class _Fake:
+        status = 200
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+
+    real = _u.urlopen
+    _u.urlopen = lambda req, timeout=None: (
+        seen.update(payload=_json.loads(req.data.decode())) or _Fake())
+    live = "https://ortica-store.onrender.com"
+    try:
+        a = admin(base_url=live)
+        resp = a.post("/admin/seo/ping", follow_redirects=True, base_url=live)
+        for _ in range(60):
+            if seen:
+                break
+            time.sleep(0.05)
+    finally:
+        _u.urlopen = real
+
+    assert "빙·네이버에 알렸습니다" in body(resp)
+    load = seen["payload"]
+    assert load["host"] == "ortica-store.onrender.com"
+    assert f"{live}/" in load["urlList"]           # 첫 화면
+    assert f"{live}/free" in load["urlList"]       # 무료 자료실
+    assert len(load["urlList"]) > 10
+    # 누른 때를 적어 두어야 언제 알렸는지 화면에서 보입니다
+    assert (sc.load_site().get("seo") or {}).get("pinged_at")
+    print("PASS  '지금 알리기' 단추 — 사이트 전체를 빙에 알림")
+
+
+def test_free_upload_pings_search_engines():
+    """무료 자료를 올리면 그 자리에서 검색엔진을 두드려야 합니다.
+
+    이것이 없으면 자료를 올려도 빙은 몇 달 뒤에나 옵니다.
+    """
+    calls = []
+    real = sc.ping_indexnow
+    sc.ping_indexnow = lambda urls, home, reason="": calls.append((list(urls), reason)) or True
+    try:
+        a = admin()
+        a.post("/admin/free/upload", data={
+            "files": [(io.BytesIO(_real_pdf("빙 알림 시험")),
+                       "고1 2026년 9월 모의고사 한줄해석.pdf")]},
+            content_type="multipart/form-data", follow_redirects=True)
+    finally:
+        sc.ping_indexnow = real
+    assert calls, "자료를 올렸는데 검색엔진에 알리지 않았습니다"
+    urls, reason = calls[0]
+    assert any(u.endswith("/free") for u in urls)
+    assert any("/free/" in u for u in urls)
+    print("PASS  무료 자료를 올리면 곧바로 빙·네이버에 알림")
+
+
 def test_sitemap_lists_free_items():
     _put_free_file("2026-03-goh1-oneline")
     xml = body(client().get("/sitemap.xml"))
@@ -6947,6 +7099,11 @@ def run_all():
     test_free_shows_recent_paid_items_without_picking()
     test_seo_tags_on_public_pages()
     test_seo_verification_code_paste()
+    test_bing_verification_and_key_file()
+    test_robots_names_bingbot()
+    test_indexnow_ping_payload()
+    test_seo_ping_button_tells_bing()
+    test_free_upload_pings_search_engines()
     test_page_width_uses_the_screen()
     test_brand_is_korean_for_search()
     test_old_brand_is_renamed_even_on_the_live_disk()

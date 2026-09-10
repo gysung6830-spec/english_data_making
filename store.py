@@ -2600,22 +2600,30 @@ def guide():
 
 @app.route("/robots.txt")
 def robots():
-    """검색엔진에게 관리자 화면과 다운로드 주소는 훑지 말라고 알려 줍니다."""
-    body = "\n".join([
-        "User-agent: *",
+    """검색엔진에게 관리자 화면과 다운로드 주소는 훑지 말라고 알려 줍니다.
+
+    빙(bingbot)은 이름을 따로 불러 줍니다. 규칙은 * 와 같지만, 자기 이름이
+    적힌 칸이 있으면 빙 웹마스터도구가 "이 사이트가 나를 막지 않는다" 를
+    한눈에 보여 줘서, 사람이 확인하기 쉽습니다.
+    """
+    rules = [
         "Disallow: /admin",
         "Disallow: /d/",
         "Disallow: /order",
         "Disallow: /my/",          # 자료함 열쇠 주소는 검색에 잡히면 안 됩니다
         "Allow: /",
-        f"Sitemap: {url_for('home', _external=True).rstrip('/')}/sitemap.xml",
-    ]) + "\n"
+    ]
+    lines = []
+    for agent in ("*", "bingbot", "Googlebot", "Yeti"):   # Yeti 는 네이버입니다
+        lines += [f"User-agent: {agent}", *rules, ""]
+    lines.append(
+        f"Sitemap: {url_for('home', _external=True).rstrip('/')}/sitemap.xml")
+    body = "\n".join(lines) + "\n"
     return body, 200, {"Content-Type": "text/plain; charset=utf-8"}
 
 
-@app.route("/sitemap.xml")
-def sitemap():
-    """네이버·구글이 상품과 교재 페이지를 찾아가도록 목록을 내어 줍니다."""
+def sitemap_urls() -> list[str]:
+    """검색엔진에게 알릴 주소 전부. sitemap.xml 과 IndexNow 알림이 함께 씁니다."""
     catalog = sc.load_catalog()
     urls = [url_for("home", _external=True), url_for("free", _external=True),
             url_for("lineup", _external=True),
@@ -2638,6 +2646,13 @@ def sitemap():
     urls += [url_for("book_detail", slug=b["slug"], _external=True) for b in catalog["books"]]
     urls += [url_for("product_detail", slug=p["slug"], _external=True)
              for p in catalog["products"]]
+    return list(dict.fromkeys(urls))
+
+
+@app.route("/sitemap.xml")
+def sitemap():
+    """네이버·구글·빙이 상품과 교재 페이지를 찾아가도록 목록을 내어 줍니다."""
+    urls = sitemap_urls()
     # 주소는 url_for 가 이미 감싸 줍니다. 여기서는 XML 에서 뜻이 있는 글자
     # (& < >)만 막아 줍니다 — 자료 이름이 주소에 들어가니까요.
     from markupsafe import escape
@@ -2649,6 +2664,33 @@ def sitemap():
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
             + "".join(f"  <url><loc>{safe(u)}</loc></url>\n" for u in urls)
             + "</urlset>\n")
+    return body, 200, {"Content-Type": "application/xml; charset=utf-8"}
+
+
+@app.route("/<key>.txt")
+def indexnow_key_file(key: str):
+    """IndexNow 열쇠 파일.
+
+    빙에게 "이 주소가 새로 생겼다" 고 알릴 때, 빙은 정말 이 사이트 주인이
+    보낸 것인지 이 파일을 열어 확인합니다. 열쇠가 맞을 때만 내어 줍니다.
+    (robots.txt 처럼 이름이 정해진 주소는 Flask 가 먼저 잡아 갑니다)
+    """
+    if key and key == sc.indexnow_key():
+        return key, 200, {"Content-Type": "text/plain; charset=utf-8"}
+    abort(404)
+
+
+@app.route("/BingSiteAuth.xml")
+def bing_site_auth():
+    """빙 웹마스터도구의 'XML 파일 올리기' 방식.
+
+    관리자 > 검색 등록에 빙 확인 코드를 넣어 두면 이 파일이 살아납니다.
+    meta 태그 방식과 둘 중 아무거나 쓰시면 됩니다.
+    """
+    code = ((sc.load_site().get("seo") or {}).get("bing") or "").strip()
+    if not code:
+        abort(404)
+    body = (f'<?xml version="1.0"?>\n<users><user>{escape(code)}</user></users>\n')
     return body, 200, {"Content-Type": "application/xml; charset=utf-8"}
 
 
