@@ -93,31 +93,38 @@
       <p class="search-note" style="margin-top:20px;">
         {% if q or grade or kind or exam %}찾은 자료 {{ items|length }}개 / 전체 {{ total }}개
         {% else %}무료 자료 {{ items|length }}개{% endif %}</p>
-      <div class="grid grid-3">
-        {% for x in items %}
-          <article class="product-card free-card">
-            <span class="badge badge-soft">무료</span>
-            <h3><a href="{{ url_for('free_detail', slug=x.slug) }}">{{ x.title }}</a></h3>
-            <div class="sub">{{ x.summary }}</div>
-            <div class="chips">
-              {% if x.grade %}<span class="chip">{{ x.grade }}</span>{% endif %}
-              {% if x.exam %}<span class="chip">{{ x.exam }}</span>{% endif %}
-              <span class="chip">PDF</span>
-            </div>
-            <div class="mat-chips">
-              {% for k in x.kinds %}
-                {% if k in kinds %}<span class="mat-chip">{{ kinds[k] }}</span>{% endif %}
-              {% endfor %}
-            </div>
-            <div class="free-way">
-              {% if x.gate == 'email' %}이메일만 적으면 바로 받으실 수 있습니다
-              {%- else %}받기를 누르면 바로 내려받습니다{% endif %}
-            </div>
-            <a class="btn btn-primary btn-block"
-               href="{{ url_for('free_detail', slug=x.slug) }}">무료로 받기</a>
-          </article>
-        {% endfor %}
-      </div>
+      {# 회차로 묶어 최근 것을 맨 위에 둡니다. 시험이 끝난 날 찾아오시는
+         분이 맨 위에서 바로 그 회차를 보게 하려는 것입니다. #}
+      {% for r in rounds %}
+        <div class="round-head">
+          <h3>{{ r.name }}</h3>
+          {% if loop.first %}<span class="round-new">최신 회차</span>{% endif %}
+          <span class="round-n">{{ r['items']|length }}개</span>
+        </div>
+        <div class="grid grid-3">
+          {% for x in r['items'] %}
+            <article class="product-card free-card">
+              <span class="badge badge-soft">무료</span>
+              <h3><a href="{{ url_for('free_detail', slug=x.slug) }}">{{ x.title }}</a></h3>
+              <div class="chips">
+                {% if x.grade %}<span class="chip">{{ x.grade }}</span>{% endif %}
+                <span class="chip">PDF</span>
+              </div>
+              <div class="mat-chips">
+                {% for k in x.kinds %}
+                  {% if k in kinds %}<span class="mat-chip">{{ kinds[k] }}</span>{% endif %}
+                {% endfor %}
+              </div>
+              <div class="free-way">
+                {% if x.gate == 'email' %}이메일만 적으면 바로 받으실 수 있습니다
+                {%- else %}받기를 누르면 바로 내려받습니다{% endif %}
+              </div>
+              <a class="btn btn-primary btn-block"
+                 href="{{ url_for('free_detail', slug=x.slug) }}">무료로 받기</a>
+            </article>
+          {% endfor %}
+        </div>
+      {% endfor %}
     {% else %}
       <div class="card center">
         <h3 class="mb-0">{% if q or grade or kind or exam %}조건에 맞는 자료가 없습니다
@@ -138,7 +145,7 @@
         {% for x in coming %}
           <div class="coming-item">
             <b>{{ x.title }}</b>
-            <span class="muted">{{ x.summary }}</span>
+            <span class="muted">{{ x.exam or '' }}</span>
           </div>
         {% endfor %}
       </div>

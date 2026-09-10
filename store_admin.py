@@ -1784,15 +1784,80 @@ def words_delete(slug):
 @admin_bp.route("/free")
 def free_list():
     data = sc.load_raw_freebies()
-    items = sorted(data["items"], key=lambda x: (x.get("date", ""), x.get("slug", "")),
-                   reverse=True)
+    items = sorted(data["items"], key=sc.free_sort_key, reverse=True)
     ready = {x["slug"]: len(sc.free_files(x["slug"])) + len(sc.free_links(x))
              for x in items if x.get("slug")}
     leads = sc.get_db().execute("SELECT COUNT(*) AS n FROM leads").fetchone()["n"]
     return render_template("admin/free.html", items=items, ready=ready,
                            kinds=sc.FREE_KINDS, intro=data.get("intro", {}),
-                           lead_count=leads,
+                           lead_count=leads, rounds=sc.free_rounds(items),
+                           filed=session.pop("free_filed", []),
                            sample_count=len([x for x in items if x.get("sample")]))
+
+
+@admin_bp.route("/free/upload", methods=["POST"])
+def free_upload():
+    """PDF 를 끌어다 놓으면 끝. 파일 이름을 읽어 알아서 갈라 넣습니다.
+
+    한 회차에 학년 셋 × 자료 넉 장이면 열두 개입니다. 그걸 하나씩 칸을
+    채워 만드는 것은 할 일이 아닙니다. 이름에 이미 다 적혀 있으니까요.
+    """
+    data = sc.load_raw_freebies()
+    by_slug = {x.get("slug"): x for x in data["items"]}
+    made, added, filed, skipped, fix = 0, 0, [], [], []
+
+    for upload in request.files.getlist("files"):
+        if not upload or not upload.filename:
+            continue
+        name = os.path.basename(upload.filename).replace("\\", "")
+        if os.path.splitext(name)[1].lower() not in sc.DELIVER_EXTS:
+            skipped.append(name)
+            continue
+
+        read = sc.read_free_name(name)
+        item = by_slug.get(read["slug"])
+        if item is None:
+            item = {"slug": read["slug"], "title": read["title"],
+                    "grade": read["grade"], "exam": read["exam"],
+                    "exam_key": read["exam_key"], "kinds": read["kinds"],
+                    "gate": read["gate"], "date": sc.now_kst().date().isoformat(),
+                    "file_links": [], "related": [],
+                    # 못 읽은 자리가 있으면 숨긴 채로 둡니다. 반쯤 만들어진 것이
+                    # 손님 화면에 뜨는 것보다 관리자 화면에서 눈에 띄는 게 낫습니다.
+                    "active": not read["missing"]}
+            data["items"].append(item)
+            by_slug[read["slug"]] = item
+            made += 1
+        else:
+            added += 1
+        # 이미 있던 자료라도 이메일 여부는 종류를 따라갑니다
+        item["gate"] = "email" if set(item.get("kinds") or []) & sc.FREE_KINDS_GATED else "open"
+
+        folder = sc.free_dir(item["slug"])
+        folder.mkdir(parents=True, exist_ok=True)
+        upload.save(folder / name)
+        filed.append({"file": name, "slug": item["slug"], "title": item["title"],
+                      "gate": item["gate"], "missing": read["missing"]})
+        if read["missing"]:
+            fix.append(item["slug"])
+
+    if filed:
+        sc.save_freebies(data)
+        for one in filed:                       # 미리보기를 미리 만들어 둡니다
+            sc.free_cover(one["slug"])
+    session["free_filed"] = filed[:60]
+
+    if made or added:
+        flash(f"파일 {len(filed)}개를 올렸습니다. 새로 만든 자료 {made}개, "
+              f"이미 있던 자료에 더한 것 {added}개입니다.", "ok")
+    if fix:
+        flash(f"{len(fix)}개는 파일 이름에서 다 못 읽어 숨긴 채로 두었습니다. "
+              "아래에서 고쳐 주세요.", "err")
+    if skipped:
+        flash(f"{', '.join(skipped[:3])} 은(는) 올릴 수 없는 형식이라 건너뛰었습니다.", "err")
+    if not filed and not skipped:
+        flash("올릴 파일을 골라 주세요.", "err")
+    return redirect(url_for("admin.free_list"))
 
 
 @admin_bp.route("/free/intro", methods=["POST"])
@@ -1820,9 +1885,9 @@ def freebie_from_form(form, existing: dict | None = None) -> tuple[dict, list[st
     item["title"] = sc.clean(form.get("title"), 120)
     if not item["title"]:
         errors.append("자료 이름을 적어 주세요.")
-    item["summary"] = sc.clean(form.get("summary"), 200)
     item["grade"] = sc.clean(form.get("grade"), 20)
     item["exam"] = sc.clean(form.get("exam"), 60)
+    item["exam_key"] = sc.exam_key(*sc.guess_exam_round(item["exam"]))
     item["kinds"] = [k for k in form.getlist("kinds") if k in sc.FREE_KINDS]
     # 맛보기는 한 지문에 자료를 전부 얹은 것이라 종류를 고를 것이 없습니다.
     item["taste"] = bool(form.get("taste"))
@@ -1831,10 +1896,8 @@ def freebie_from_form(form, existing: dict | None = None) -> tuple[dict, list[st
     gate = sc.clean(form.get("gate"), 10)
     item["gate"] = gate if gate in ("open", "email") else sc.suggested_gate(item["kinds"])
     item["date"] = sc.clean(form.get("date"), 10) or sc.now_kst().date().isoformat()
-    item["body"] = sc.clean(form.get("body"), 3000)
-    item["image"] = sc.clean(form.get("image"), 120)
-    known = {p.get("slug") for p in sc.load_raw_catalog()["products"]}
-    item["related"] = [x for x in form.getlist("related") if x in known]
+    # 설명도 한줄 요약도 안 받습니다. 미리보기(PDF 첫 쪽)가 대신 말해 줍니다.
+    # 함께 보여 줄 유료 자료도 손으로 고르지 않고 최근 올린 것에서 뽑습니다.
     item["active"] = bool(form.get("active"))
     return item, errors
 
@@ -1846,18 +1909,14 @@ def free_form(slug=None):
     existing = next((x for x in data["items"] if x.get("slug") == slug), None)
     if slug and existing is None:
         abort(404)
-    catalog = sc.load_raw_catalog()
 
     def page(item, errors, status=200):
         return render_template("admin/free_form.html", x=item, errors=errors,
                                is_new=existing is None, kinds=sc.FREE_KINDS,
-                               gated=sc.FREE_KINDS_GATED,
-                               products=catalog["products"],
-                               shots=[f.name for f in sorted((sc.ROOT / "store_static" / "free").glob("*"))
-                                      if f.is_file() and not f.name.startswith(".")]), status
+                               gated=sc.FREE_KINDS_GATED), status
 
     if request.method == "GET":
-        blank = {"active": True, "gate": "open", "kinds": [], "related": [],
+        blank = {"active": True, "gate": "open", "kinds": [],
                  "date": sc.now_kst().date().isoformat()}
         body, _ = page(existing or blank, [])
         return body

@@ -424,3 +424,34 @@
   color:#8a9490;}
 .beat-tag-in{flex:0 0 110px !important;}
 .beat-line input[type=text]{flex:1;}
+
+/* ---- 무료 자료 끌어다 놓기 ------------------------------------------- */
+.drop-panel{padding:0; overflow:hidden;}
+.dropzone{padding:34px 20px 30px; text-align:center; border:2px dashed #cfd8d3;
+  border-radius:12px; margin:16px; background:#fbfdfc; transition:.15s;}
+.dropzone.over{border-color:var(--brand,#166534); background:#f0f7f3; transform:scale(1.005);}
+.dropzone.busy{opacity:.6; pointer-events:none;}
+.dz-mark{font-size:34px; line-height:1;}
+.dz-head{display:block; font-size:18px; margin:10px 0 2px;}
+.dz-sub{margin:0 0 14px; color:#6b7280; font-size:13px;}
+.dz-busy{margin-top:14px; font-size:13px; color:#6b7280;}
+.dz-spin{display:inline-block; width:12px; height:12px; margin-right:6px;
+  border:2px solid #cfd8d3; border-top-color:var(--brand,#166534);
+  border-radius:50%; animation:dzspin .8s linear infinite; vertical-align:-1px;}
+@keyframes dzspin{to{transform:rotate(360deg);}}
+.dz-rule{padding:0 20px 20px;}
+.dz-rule > b{display:block; font-size:14px; margin-bottom:10px;}
+.dz-chips{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;}
+.dzc{display:inline-flex; align-items:center; gap:8px; font-size:13px;
+  background:#f4f6f5; border-radius:999px; padding:6px 14px 6px 6px;}
+.dzc i{font-style:normal; font-size:11px; font-weight:700; color:#fff;
+  background:var(--brand,#166534); border-radius:999px; padding:3px 9px;}
+.dz-eg{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px;}
+.dz-eg code{font-size:12px; background:#fff; border:1px solid #e5e7eb;
+  border-radius:6px; padding:5px 9px; color:#374151;}
+tr.row-bad{background:#fffaf9;}
+@media (max-width:560px){
+  .dropzone{padding:26px 12px; margin:12px;}
+  .dz-head{font-size:16px;}
+  .dz-eg code{font-size:11px;}
+}

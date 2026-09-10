@@ -6,21 +6,73 @@
   <div class="row">
     <div>
       <h1>무료 자료실</h1>
-      <p>회차마다 뿌리는 자료입니다. 여기 올리면 <b>고객 화면 '무료 자료'</b> 에 바로 나옵니다.</p>
+      <p>PDF 를 끌어다 놓기만 하시면 됩니다. <b>파일 이름을 읽어 알아서 갈라 넣습니다.</b></p>
     </div>
     <div class="spacer"></div>
-    <a class="btn btn-primary" href="{{ url_for('admin.free_form') }}">＋ 무료 자료 올리기</a>
+    <a class="btn btn-ghost" href="{{ url_for('admin.free_form') }}">손으로 하나 만들기</a>
   </div>
 </div>
 
-<div class="steps-help">
-  <b>무료 자료가 왜 중요하냐면</b>
-  <ol>
-    <li><b>검색으로 들어오는 문</b>입니다. "고1 3월 학평 한줄해석" 같은 말로 찾아옵니다.</li>
-    <li>회차마다 하나씩 올리면 검색에 걸리는 페이지가 그만큼 늘어납니다.</li>
-    <li>공짜로 받아 본 분이 <b>같은 지문의 유료 자료</b>를 사십니다. 아래 '함께 보여 줄 유료 자료'를 꼭 골라 주세요.</li>
-  </ol>
-</div>
+{# ---- 끌어다 놓기 ----------------------------------------------------- #}
+<form class="panel drop-panel" method="post" enctype="multipart/form-data"
+      action="{{ url_for('admin.free_upload') }}" id="dropForm">
+  <div class="dropzone" id="dropZone">
+    <input type="file" name="files" id="dropInput" multiple accept=".pdf,.zip,.hwp,.hwpx,.docx,.pptx" hidden>
+    <div class="dz-mark">📄</div>
+    <b class="dz-head">여기에 PDF 를 끌어다 놓으세요</b>
+    <p class="dz-sub">한 번에 몇 개든 됩니다. 놓으면 바로 올라갑니다.</p>
+    <button class="btn btn-primary" type="button" id="dropPick">파일 고르기</button>
+    <div class="dz-busy" hidden><span class="dz-spin"></span> 올리는 중입니다…</div>
+  </div>
+
+  <div class="dz-rule">
+    <b>파일 이름에 이 셋만 들어 있으면 됩니다</b>
+    <div class="dz-chips">
+      <span class="dzc"><i>학년</i>고1 · 고2 · 고3</span>
+      <span class="dzc"><i>회차</i>2026년 3월 · 2026-03 · 9월</span>
+      <span class="dzc"><i>종류</i>한줄해석 · 한줄영어 · 좌지문우해석 · 직독직해</span>
+    </div>
+    <div class="dz-eg">
+      <code>고1 2026년 3월 학력평가 한줄해석.pdf</code>
+      <code>2026-03 고2 직독직해.pdf</code>
+      <code>고3_9월_좌지문우해석.pdf</code>
+    </div>
+    <div class="hint">순서는 아무래도 좋습니다. 시험 이름은 안 적으셔도 되고요 —
+      고3 6·9월은 평가원, 11월은 수능, 나머지는 학력평가로 알아서 답니다.
+      <b>직독직해만 이메일을 받고</b> 나머지 셋은 그냥 내어 줍니다.</div>
+  </div>
+</form>
+
+{# ---- 방금 올린 것 ---------------------------------------------------- #}
+{% if filed %}
+  <div class="panel">
+    <h2>방금 올린 {{ filed|length }}개</h2>
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th>파일</th><th>이렇게 읽었습니다</th><th>받는 방법</th><th></th></tr></thead>
+        <tbody>
+        {% for f in filed %}
+          <tr class="{{ 'row-bad' if f.missing }}">
+            <td><small class="code">{{ f.file }}</small></td>
+            <td>
+              <b>{{ f.title }}</b>
+              {% if f.missing %}
+                <br><span class="tag" style="background:#fdeceb;color:#b91c1c;">
+                  {{ f.missing|join(' · ') }} 를 못 읽었습니다 — 숨겨 두었습니다</span>
+              {% endif %}
+            </td>
+            <td>{% if f.gate == 'email' %}
+                  <span class="tag" style="background:#eef2ff;color:#3730a3;">📧 이메일</span>
+                {% else %}<span class="tag tag-on">✅ 그냥</span>{% endif %}</td>
+            <td><a class="btn btn-ghost btn-sm"
+                   href="{{ url_for('admin.free_form', slug=f.slug) }}">고치기</a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endif %}
 
 {% if sample_count %}
   <div class="panel" style="border:1px solid #f0d4c4; background:#fff8f4;">
@@ -33,80 +85,78 @@
   </div>
 {% endif %}
 
-<div class="panel">
-  {% if items %}
-  <div class="wrapbox">
-    <table class="adm-table">
-      <thead><tr><th>날짜</th><th>자료</th><th>학년 · 회차</th><th>종류</th>
-                 <th>받는 방법</th><th>상태</th><th style="min-width:230px;"></th></tr></thead>
-      <tbody>
-      {% for x in items %}
-        <tr>
-          <td class="muted"><small>{{ x.date }}</small></td>
-          <td>
-            <b>{{ x.title }}</b>
-            {% if x.sample %}<span class="tag" style="background:#fdece2;color:#a3450f;">예시</span>{% endif %}
-            <br><small class="muted">{{ x.summary or '' }}</small>
-            <br><small class="code">{{ x.slug }}</small>
-          </td>
-          <td>
-            <small>{{ x.grade or '-' }}</small>
-            <br><small class="muted">{{ x.exam or '' }}</small>
-          </td>
-          <td>
-            {% for k in x.kinds %}
-              {% if k in kinds %}<span class="tag">{{ kinds[k] }}</span>{% endif %}
-            {% endfor %}
-          </td>
-          <td>
-            {% if x.gate == 'email' %}
-              <span class="tag" style="background:#eef2ff;color:#3730a3;">📧 이메일</span>
-            {% else %}<span class="tag tag-on">✅ 그냥</span>{% endif %}
-          </td>
-          <td>
-            {% if x.active is not defined or x.active %}
-              <span class="tag tag-on">보이는 중</span>
-            {% else %}<span class="tag tag-off">숨김</span>{% endif %}
-            {% if not ready.get(x.slug) %}
-              <br><span class="tag" style="background:#fdeceb;color:#b91c1c;">파일 없음</span>
-            {% endif %}
-          </td>
-          <td>
-            <div class="inline-form">
-              <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.free_form', slug=x.slug) }}">고치기</a>
-              <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.free_files', slug=x.slug) }}">
-                📁 파일{% if ready.get(x.slug) %} {{ ready[x.slug] }}{% endif %}</a>
-              <a class="btn btn-ghost btn-sm" href="{{ url_for('free_detail', slug=x.slug) }}"
-                 target="_blank" rel="noopener">보기 ↗</a>
-              <form method="post" action="{{ url_for('admin.free_toggle', slug=x.slug) }}">
-                <button class="btn btn-ghost btn-sm" type="submit">
-                  {{ '숨기기' if (x.active is not defined or x.active) else '다시 노출' }}</button>
-              </form>
-              <form method="post" action="{{ url_for('admin.free_delete', slug=x.slug) }}"
-                    onsubmit="return confirm('{{ x.title }} 을(를) 지울까요?');">
-                <button class="btn btn-sm danger" type="submit">지우기</button>
-              </form>
-            </div>
-          </td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-  </div>
-  {% else %}
+{# ---- 회차별 목록 ----------------------------------------------------- #}
+{% if rounds %}
+  {% for r in rounds %}
+    <div class="panel">
+      <h2>{{ r.name }} <span class="tag">{{ r['items']|length }}개</span></h2>
+      <div class="wrapbox">
+        <table class="adm-table">
+          <thead><tr><th>자료</th><th>학년</th><th>종류</th>
+                     <th>받는 방법</th><th>상태</th><th style="min-width:230px;"></th></tr></thead>
+          <tbody>
+          {% for x in r['items'] %}
+            <tr>
+              <td>
+                <b>{{ x.title }}</b>
+                {% if x.sample %}<span class="tag" style="background:#fdece2;color:#a3450f;">예시</span>{% endif %}
+                <br><small class="code">{{ x.slug }}</small>
+              </td>
+              <td><small>{{ x.grade or '-' }}</small></td>
+              <td>
+                {% for k in x.kinds %}
+                  {% if k in kinds %}<span class="tag">{{ kinds[k] }}</span>{% endif %}
+                {% endfor %}
+              </td>
+              <td>
+                {% if x.gate == 'email' %}
+                  <span class="tag" style="background:#eef2ff;color:#3730a3;">📧 이메일</span>
+                {% else %}<span class="tag tag-on">✅ 그냥</span>{% endif %}
+              </td>
+              <td>
+                {% if x.active is not defined or x.active %}
+                  <span class="tag tag-on">보이는 중</span>
+                {% else %}<span class="tag tag-off">숨김</span>{% endif %}
+                {% if not ready.get(x.slug) %}
+                  <br><span class="tag" style="background:#fdeceb;color:#b91c1c;">파일 없음</span>
+                {% endif %}
+              </td>
+              <td>
+                <div class="inline-form">
+                  <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.free_form', slug=x.slug) }}">고치기</a>
+                  <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.free_files', slug=x.slug) }}">
+                    📁 파일{% if ready.get(x.slug) %} {{ ready[x.slug] }}{% endif %}</a>
+                  <a class="btn btn-ghost btn-sm" href="{{ url_for('free_detail', slug=x.slug) }}"
+                     target="_blank" rel="noopener">보기 ↗</a>
+                  <form method="post" action="{{ url_for('admin.free_toggle', slug=x.slug) }}">
+                    <button class="btn btn-ghost btn-sm" type="submit">
+                      {{ '숨기기' if (x.active is not defined or x.active) else '다시 노출' }}</button>
+                  </form>
+                  <form method="post" action="{{ url_for('admin.free_delete', slug=x.slug) }}"
+                        onsubmit="return confirm('{{ x.title }} 을(를) 지울까요?');">
+                    <button class="btn btn-sm danger" type="submit">지우기</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="panel">
     <div class="empty">
       <b>아직 올린 무료 자료가 없습니다.</b>
       한줄해석 하나만 올려도 검색으로 들어오는 문이 하나 생깁니다.
-      <div style="margin-top:16px;">
-        <a class="btn btn-primary btn-sm" href="{{ url_for('admin.free_form') }}">첫 자료 올리기</a>
-      </div>
     </div>
-  {% endif %}
-</div>
+  </div>
+{% endif %}
 
 <div class="panel">
   <h2>받아 가신 분 이메일 {{ lead_count }}개</h2>
-  <div class="hint">이메일을 적고 받는 자료(직독직해 등)와 '알림 신청'으로 모인 명단입니다.</div>
+  <div class="hint">직독직해처럼 이메일을 적고 받는 자료와 '알림 신청'으로 모인 명단입니다.</div>
   <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.leads') }}">명단 보기</a>
 </div>
 
@@ -122,7 +172,7 @@
       <label for="headline">큰 제목</label>
       <input type="text" id="headline" name="headline" value="{{ intro.headline or '' }}"
              placeholder="모의고사 회차 자료, 무료로 공개합니다">
-      <div class="tip">줄을 바꾸고 싶은 자리에 <b>|</b> 를 넣으세요. 예: <code>읽고 · 뜯어보고 | 시험에 나올 문제만 풉니다</code><br>한글은 자동 줄나눔이 어색해질 때가 있어서, 손으로 잡을 수 있게 열어 두었습니다.</div>
+      <div class="tip">줄을 바꾸고 싶은 자리에 <b>|</b> 를 넣으세요.</div>
     </div>
     <div class="adm-field">
       <label for="lead">설명</label>
@@ -137,4 +187,44 @@
     </div>
   </form>
 </div>
+
+<script>
+(function () {
+  var form = document.getElementById('dropForm');
+  var zone = document.getElementById('dropZone');
+  var input = document.getElementById('dropInput');
+  var pick = document.getElementById('dropPick');
+  if (!form || !zone || !input) return;
+  var busy = zone.querySelector('.dz-busy');
+
+  function send() {
+    if (!input.files || !input.files.length) return;
+    zone.classList.add('busy');
+    if (busy) busy.hidden = false;
+    form.submit();
+  }
+
+  pick.addEventListener('click', function () { input.click(); });
+  input.addEventListener('change', send);
+
+  // 화면 어디에 놓아도 브라우저가 파일을 열어 버리지 않게 막습니다
+  ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(function (n) {
+    document.addEventListener(n, function (e) { e.preventDefault(); });
+  });
+  ['dragenter', 'dragover'].forEach(function (n) {
+    zone.addEventListener(n, function () { zone.classList.add('over'); });
+  });
+  ['dragleave', 'drop'].forEach(function (n) {
+    zone.addEventListener(n, function () { zone.classList.remove('over'); });
+  });
+  zone.addEventListener('drop', function (e) {
+    var files = e.dataTransfer && e.dataTransfer.files;
+    if (!files || !files.length) return;
+    var box = new DataTransfer();
+    for (var i = 0; i < files.length; i++) box.items.add(files[i]);
+    input.files = box.files;
+    send();
+  });
+})();
+</script>
 {% endblock %}

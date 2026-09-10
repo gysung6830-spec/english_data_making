@@ -17,6 +17,7 @@ import hashlib
 import json
 import os
 import re
+import logging
 import secrets
 import shutil
 import smtplib
@@ -26,6 +27,10 @@ from email.message import EmailMessage
 from pathlib import Path
 
 from flask import current_app, g
+
+# 요청 밖(그림 만들기 등)에서도 남길 수 있는 기록. current_app 은 요청 안에서만
+# 쓸 수 있어서, 그 바깥에서 부르면 그 자리에서 터집니다.
+log = logging.getLogger("ortica")
 
 ROOT = Path(__file__).resolve().parent
 BUNDLED_DATA = ROOT / "store_data"        # 저장소에 같이 들어 있는 첫 설정
@@ -1032,9 +1037,8 @@ def load_raw_freebies() -> dict:
 def load_freebies() -> dict:
     """고객 화면용 — 숨긴 것은 빼고, 최신 날짜가 위로 옵니다."""
     data = load_raw_freebies()
-    data["items"] = sorted(
-        [x for x in data["items"] if x.get("active", True)],
-        key=lambda x: (x.get("date", ""), x.get("slug", "")), reverse=True)
+    data["items"] = sorted([x for x in data["items"] if x.get("active", True)],
+                           key=free_sort_key, reverse=True)
     return data
 
 
@@ -1070,6 +1074,149 @@ def suggested_gate(kinds) -> str:
     return "email" if set(kinds or []) & FREE_KINDS_GATED else "open"
 
 
+# ── 파일 이름만 보고 알아서 정리하기 ──────────────────────────────────
+# 무료 자료는 회차마다 같은 것을 만들어 올립니다. 그때마다 학년·시험·종류를
+# 손으로 고르는 것은 품이 아깝습니다. 파일 이름에 이미 다 적혀 있으니까요.
+FREE_ALIASES = {
+    "oneline_ko": ["한줄해석", "한줄 해석", "한 줄 해석", "위아래해석",
+                   "onelineko", "oneline_ko", "oneline-ko"],
+    "oneline_en": ["한줄영어", "한줄 영어", "한 줄 영어", "영어원문", "원문만",
+                   "onelineen", "oneline_en", "oneline-en"],
+    "side": ["좌지문우해석", "좌지문 우해석", "좌우해석", "좌지문", "side"],
+    "literal": ["직독직해", "직독 직해", "끊어읽기", "끊어 읽기", "literal"],
+}
+
+# 학년. '고3' 도 'goh3' 도 '3학년' 도 같은 말로 봅니다.
+FREE_GRADES = {
+    "고3": ["고3", "고 3", "고등3", "3학년", "goh3", "go3", "gou3"],
+    "고2": ["고2", "고 2", "고등2", "2학년", "goh2", "go2", "gou2"],
+    "고1": ["고1", "고 1", "고등1", "1학년", "예비고1", "goh1", "go1", "gou1"],
+}
+GRADE_CODE = {"고1": "goh1", "고2": "goh2", "고3": "goh3"}
+KIND_CODE = {"oneline_ko": "oneline-ko", "oneline_en": "oneline-en",
+             "side": "side", "literal": "literal"}
+
+# 시험 이름. 안 적혀 있으면 학년과 달로 짐작합니다 — 고3 6·9월은 평가원,
+# 11월은 수능, 나머지는 교육청 학력평가입니다. 해마다 같습니다.
+FREE_EXAM_TYPES = {
+    "학력평가": ["학력평가", "학평", "전국연합"],
+    "모의평가": ["모의평가", "모평", "평가원"],
+    "수능": ["수능시험", "대학수학능력"],
+    "모의고사": ["모의고사", "모고"],
+}
+_TEXTBOOK_WORDS = ("수능특강", "수능완성", "올림포스", "교과서")
+
+_FREE_YM = re.compile(r"(20\d{2})\s*[년.\-_/]\s*(0?[1-9]|1[0-2])(?![0-9])")
+_FREE_YEAR = re.compile(r"(20\d{2})")
+_FREE_MONTH = re.compile(r"(?:^|[^0-9])(0?[1-9]|1[0-2])\s*월")
+
+
+def _flat(text: str) -> str:
+    return re.sub(r"\s+", "", (text or "")).lower()
+
+
+def guess_free_kind(name: str) -> str:
+    """파일 이름에서 무슨 자료인지. 못 알아보면 빈 값."""
+    low = _flat(name)
+    hit, best = "", -1
+    for kind, words in FREE_ALIASES.items():
+        for w in words:
+            if _flat(w) in low and len(w) > best:   # 긴 별칭이 먼저입니다
+                hit, best = kind, len(w)
+    return hit
+
+
+def guess_free_grade(name: str) -> str:
+    """파일 이름에서 몇 학년인지. 못 알아보면 빈 값."""
+    low = _flat(name)
+    for grade, words in FREE_GRADES.items():
+        if any(_flat(w) in low for w in words):
+            return grade
+    return ""
+
+
+def guess_exam_round(name: str) -> tuple[int, int]:
+    """파일 이름에서 (해, 달). 못 읽으면 (0, 0).
+
+    '2026년 3월' 도 '2026-03' 도 '3월' 도 읽습니다. 해가 없으면 올해로 봅니다.
+    """
+    text = name or ""
+    hit = _FREE_YM.search(text)
+    if hit:
+        return int(hit.group(1)), int(hit.group(2))
+    month = _FREE_MONTH.search(text)
+    if not month:
+        return 0, 0
+    year = _FREE_YEAR.search(text)
+    return int(year.group(1)) if year else now_kst().year, int(month.group(1))
+
+
+def exam_type_of(name: str, grade: str, month: int) -> str:
+    """무슨 시험인지. 이름에 적혀 있으면 그대로, 없으면 학년·달로 짐작합니다."""
+    low = _flat(name)
+    if not any(w in low for w in _TEXTBOOK_WORDS):
+        for label, words in FREE_EXAM_TYPES.items():
+            if any(_flat(w) in low for w in words):
+                return label
+    if grade == "고3":
+        if month in (6, 9):
+            return "모의평가"
+        if month == 11:
+            return "수능"
+    return "학력평가"
+
+
+def exam_label(year: int, month: int, kind: str) -> str:
+    return f"{year}년 {month}월 {kind}" if year and month else ""
+
+
+def exam_key(year: int, month: int) -> str:
+    """회차를 앞뒤로 세울 때 쓰는 열쇠. 글자 그대로 비교하면 최신이 뒤입니다."""
+    return f"{year:04d}-{month:02d}" if year and month else ""
+
+
+def exam_key_of(item: dict) -> str:
+    """이미 저장된 자료의 회차 열쇠. 없으면 적어 둔 시험 이름에서 읽습니다."""
+    key = (item or {}).get("exam_key") or ""
+    if re.fullmatch(r"\d{4}-\d{2}", key):
+        return key
+    return exam_key(*guess_exam_round((item or {}).get("exam", "")))
+
+
+def read_free_name(filename: str) -> dict:
+    """파일 이름 하나를 읽어 무료 자료 한 칸으로 만듭니다.
+
+    못 읽은 자리는 빈 값으로 두고 `missing` 에 무엇이 빠졌는지 적어 둡니다.
+    빠진 것이 있으면 숨긴 채로 올려 두고, 관리자 화면에서 고치시게 합니다.
+    """
+    stem = os.path.splitext(os.path.basename(filename or ""))[0]
+    kind = guess_free_kind(stem)
+    grade = guess_free_grade(stem)
+    year, month = guess_exam_round(stem)
+    etype = exam_type_of(stem, grade, month)
+
+    missing = []
+    if not kind:
+        missing.append("자료 종류")
+    if not grade:
+        missing.append("학년")
+    if not (year and month):
+        missing.append("시험 회차")
+
+    key = exam_key(year, month)
+    parts = [key or now_kst().date().isoformat(),
+             GRADE_CODE.get(grade, "etc"), KIND_CODE.get(kind, "etc")]
+    title = " ".join(x for x in [grade, exam_label(year, month, etype),
+                                 FREE_KINDS.get(kind, "")] if x) or stem[:120]
+    return {
+        "slug": "-".join(parts), "title": title, "grade": grade,
+        "exam": exam_label(year, month, etype), "exam_key": key,
+        "kinds": [kind] if kind else [],
+        "gate": "email" if kind in FREE_KINDS_GATED else "open",
+        "missing": missing, "source": os.path.basename(filename or ""),
+    }
+
+
 def free_dir(slug: str) -> Path:
     safe = re.sub(r"[^a-z0-9\-]", "", (slug or "").lower())[:60]
     if not safe:
@@ -1101,6 +1248,81 @@ def free_links(item: dict) -> list[dict]:
 def free_ready(item: dict) -> bool:
     """내어 줄 것이 하나라도 있는지."""
     return bool(free_files(item.get("slug", "")) or free_links(item))
+
+
+FREE_COVER_VER = 1            # 만드는 법이 바뀌면 올립니다 (묵은 그림 버리기)
+FREE_COVER_W = 620            # 미리보기 가로. 폰에서 두 배로 봐도 안 뭉갭니다
+
+
+def free_cover(slug: str) -> Path | None:
+    """미리보기 그림 — 올린 PDF 의 첫 쪽을 그대로 찍은 것입니다.
+
+    자료가 어떻게 생겼는지는 설명보다 첫 쪽이 더 잘 말합니다. 손님이 궁금한
+    것도 '어떤 판인가' 하나뿐이고요. 한 번 만들면 캐시에 두고 다시 씁니다.
+    """
+    pdfs = [f for f in free_files(slug) if f["name"].lower().endswith(".pdf")]
+    if not pdfs:
+        return None
+    src = free_dir(slug) / pdfs[0]["name"]
+    out = DATA_DIR / ".cache" / "free" / f"{free_dir(slug).name}-{FREE_COVER_VER}.webp"
+    try:
+        if out.exists() and out.stat().st_mtime >= src.stat().st_mtime:
+            return out
+        import fitz as pymupdf
+        from PIL import Image
+        out.parent.mkdir(parents=True, exist_ok=True)
+        with pymupdf.open(src) as doc:
+            if not doc.page_count:
+                return None
+            page = doc[0]
+            zoom = FREE_COVER_W / max(1.0, page.rect.width)
+            pix = page.get_pixmap(matrix=pymupdf.Matrix(zoom, zoom), alpha=False)
+            im = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+        im.save(out, "WEBP", quality=82, method=5)
+        return out
+    except Exception as exc:            # 그림이 안 나와도 자료는 받으실 수 있어야 합니다
+        log.warning("미리보기를 만들지 못했습니다 (%s): %s", slug, exc)
+        return None
+
+
+def free_sort_key(item: dict):
+    """최근 회차가 먼저. 같은 회차면 학년 순, 그다음 자료 종류 순입니다."""
+    order, grades = list(FREE_KINDS), list(GRADE_CODE)
+    kinds = (item or {}).get("kinds") or []
+    kind_at = min((order.index(k) for k in kinds if k in order), default=len(order))
+    grade = (item or {}).get("grade") or ""
+    grade_at = grades.index(grade) if grade in grades else len(grades)
+    return (exam_key_of(item), -grade_at, -kind_at, item.get("date", ""))
+
+
+def free_rounds(items) -> list[dict]:
+    """회차로 묶어 돌려줍니다. 최근 회차가 맨 위입니다."""
+    rounds = {}
+    for x in items:
+        key = exam_key_of(x)
+        box = rounds.setdefault(key, {"key": key, "name": x.get("exam") or "회차 미정",
+                                      "items": []})
+        box["items"].append(x)
+    for box in rounds.values():
+        box["items"].sort(key=free_sort_key, reverse=True)
+    return sorted(rounds.values(), key=lambda b: b["key"], reverse=True)
+
+
+def auto_related(item: dict, products=None, limit: int = 3) -> list[dict]:
+    """함께 보여 줄 유료 자료 — 손으로 고르지 않고 최근 올린 것에서 고릅니다.
+
+    같은 학년이면 앞세우고, 그다음은 늦게 올린 것부터입니다. 목록 뒤쪽이
+    나중에 넣은 자료라 그 차례를 그대로 씁니다.
+    """
+    products = load_catalog()["products"] if products is None else products
+    grade = (item or {}).get("grade") or ""
+    scored = []
+    for at, p in enumerate(products):
+        if not p.get("active", True):
+            continue
+        scored.append((1 if grade and p.get("grade") == grade else 0, at, p))
+    scored.sort(key=lambda t: (t[0], t[1]), reverse=True)
+    return [p for _, _, p in scored[:max(0, limit)]]
 
 
 def preorder_price(cfg: dict, plan: dict) -> int:

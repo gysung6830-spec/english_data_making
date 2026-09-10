@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{ item.title }} 무료 PDF | {{ site.brand }}{% endblock %}
-{% block desc %}{{ item.summary }} — {{ site.brand }}에서 무료로 받으실 수 있습니다.{% endblock %}
+{% block desc %}{{ item.title }} PDF — {{ site.brand }}에서 회원가입 없이 무료로 받으실 수 있습니다.{% endblock %}
 
 {% block body %}
 <section class="section">
@@ -10,7 +10,6 @@
     <div class="free-head">
       <span class="badge badge-soft">무료</span>
       <h1>{{ item.title }}</h1>
-      <p class="lead">{{ item.summary }}</p>
       <div class="chips">
         {% if item.grade %}<span class="chip">{{ item.grade }}</span>{% endif %}
         {% if item.exam %}<span class="chip">{{ item.exam }}</span>{% endif %}
@@ -19,17 +18,15 @@
       </div>
     </div>
 
-    {% if item.image %}
-      <img class="free-shot" src="{{ url_for('static', filename='free/' ~ item.image) }}"
-           alt="{{ item.title }} 지면 미리보기" loading="lazy">
-    {% endif %}
-
-    {% if item.body %}
-      <div class="card free-body">
-        {% for line in item.body.split('\n') %}
-          {% if line.strip() %}<p>{{ line }}</p>{% endif %}
-        {% endfor %}
-      </div>
+    {# 설명은 안 답니다. 자료가 어떻게 생겼는지는 첫 쪽이 더 잘 말합니다. #}
+    {% if cover %}
+      <figure class="free-cover">
+        <div class="fc-box">
+          <img src="{{ url_for('free_cover_img', slug=item.slug) }}"
+               alt="{{ item.title }} 첫 쪽" loading="lazy" width="620">
+        </div>
+        <figcaption>PDF 첫 쪽입니다</figcaption>
+      </figure>
     {% endif %}
 
     {% for e in errors %}<div class="alert alert-error">{{ e }}</div>{% endfor %}
@@ -95,7 +92,7 @@
 
     {% if related %}
       <div class="subhead" style="margin-top:40px;">
-        <h3>이 지문의 유료 자료</h3>
+        <h3>요즘 올라온 유료 자료</h3>
         <p class="muted mb-0">같은 지문을 분석지 · 변형문제 · 동형모의고사까지 만들어 두었습니다.</p>
       </div>
       <div class="grid grid-2">

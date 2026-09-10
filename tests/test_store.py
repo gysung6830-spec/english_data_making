@@ -3617,6 +3617,152 @@ def test_admin_creates_free_item_end_to_end():
     print("PASS  관리자에서 무료 자료 만들기 → 고객 화면 → 지우기")
 
 
+def _real_pdf(text: str = "sample") -> bytes:
+    """진짜 PDF 한 장. 미리보기가 나오는지 보려면 흉내로는 안 됩니다."""
+    import fitz as pymupdf
+    doc = pymupdf.open()
+    doc.new_page().insert_text((60, 90), text, fontsize=14)
+    out = doc.tobytes()
+    doc.close()
+    return out
+
+
+def test_free_upload_reads_the_filename_and_files_it():
+    """PDF 를 끌어다 놓으면 이름을 읽어 알아서 갈라 넣어야 합니다.
+
+    한 회차에 학년 셋 × 자료 넉 장이면 열두 개입니다. 그걸 하나씩 칸을
+    채워 만들게 하면 아무도 안 올립니다.
+    """
+    # 먼저 읽는 눈부터
+    got = sc.read_free_name("고1 2026년 3월 학력평가 한줄해석.pdf")
+    assert got["slug"] == "2026-03-goh1-oneline-ko"
+    assert got["grade"] == "고1" and got["kinds"] == ["oneline_ko"]
+    assert got["exam"] == "2026년 3월 학력평가" and got["gate"] == "open"
+    assert not got["missing"]
+
+    # 순서가 뒤죽박죽이어도, 밑줄이어도 읽습니다
+    assert sc.read_free_name("2026-03 고2 직독직해.pdf")["slug"] == "2026-03-goh2-literal"
+    assert sc.read_free_name("고3_9월_좌지문우해석.pdf")["slug"].endswith("goh3-side")
+
+    # 시험 이름은 안 적으셔도 됩니다 — 학년과 달로 짐작합니다
+    assert "모의평가" in sc.read_free_name("고3 9월 한줄영어.pdf")["exam"]
+    assert "수능" in sc.read_free_name("고3 11월 한줄영어.pdf")["exam"]
+    assert "학력평가" in sc.read_free_name("고1 9월 한줄영어.pdf")["exam"]
+
+    # 직독직해만 이메일을 받습니다
+    assert sc.read_free_name("고1 3월 직독직해.pdf")["gate"] == "email"
+    for name in ("고1 3월 한줄해석.pdf", "고1 3월 한줄영어.pdf", "고1 3월 좌지문우해석.pdf"):
+        assert sc.read_free_name(name)["gate"] == "open", name
+
+    # 못 읽으면 무엇이 빠졌는지 적어 둡니다
+    assert sc.read_free_name("대충지은이름.pdf")["missing"] == ["자료 종류", "학년", "시험 회차"]
+
+    # 이제 진짜로 올려 봅니다
+    a = admin()
+    names = ["고1 2026년 5월 학력평가 한줄해석.pdf", "고1 2026년 5월 학력평가 직독직해.pdf",
+             "고3 5월 좌지문우해석.pdf", "무슨파일인지모를것.pdf"]
+    resp = a.post("/admin/free/upload", data={
+        "files": [(io.BytesIO(_real_pdf(n)), n) for n in names]},
+        content_type="multipart/form-data", follow_redirects=True)
+    assert resp.status_code == 200
+    page = body(resp)
+    assert "방금 올린 4개" in page
+    assert "고1 2026년 5월 학력평가 한줄해석" in page
+    assert "못 읽었습니다" in page                       # 마지막 하나는 손이 필요합니다
+
+    raw = {x["slug"]: x for x in sc.load_raw_freebies()["items"]}
+    assert raw["2026-05-goh1-oneline-ko"]["gate"] == "open"
+    assert raw["2026-05-goh1-literal"]["gate"] == "email"
+    assert raw["2026-05-goh1-oneline-ko"]["active"] is True
+    # 다 못 읽은 것은 숨긴 채로 둡니다. 반쯤 만들어진 것이 손님 화면에 뜨면 안 됩니다.
+    bad = next(x for x in sc.load_raw_freebies()["items"] if x["slug"].endswith("-etc-etc"))
+    assert bad["active"] is False
+    assert bad["title"] not in body(client().get("/free"))
+
+    # 파일이 실제로 붙었고, 손님이 바로 받으실 수 있습니다
+    assert sc.free_files("2026-05-goh1-oneline-ko")
+    assert "고1 2026년 5월 학력평가 한줄해석" in body(client().get("/free"))
+
+    # 설명도 한 줄 요약도 안 받습니다
+    assert not raw["2026-05-goh1-oneline-ko"].get("summary")
+    assert not raw["2026-05-goh1-oneline-ko"].get("body")
+    print("PASS  무료 자료 — PDF 를 놓으면 이름을 읽어 알아서 갈라 넣음")
+
+
+def test_free_preview_is_the_first_page_of_the_pdf():
+    """미리보기는 손으로 올리는 그림이 아니라 PDF 첫 쪽입니다."""
+    slug = "2026-04-goh2-side"
+    a = admin()
+    a.post("/admin/free/upload", data={
+        "files": [(io.BytesIO(_real_pdf("first page here")), "고2 4월 좌지문우해석.pdf")]},
+        content_type="multipart/form-data", follow_redirects=True)
+    assert sc.find_freebie(slug) is not None
+
+    cover = sc.free_cover(slug)
+    assert cover is not None and cover.exists() and cover.stat().st_size > 500
+
+    c = client()
+    img = c.get(f"/free/{slug}/cover.webp")
+    assert img.status_code == 200 and img.data[:4] == b"RIFF"
+
+    page = body(c.get(f"/free/{slug}"))
+    assert f"/free/{slug}/cover.webp" in page
+    assert "PDF 첫 쪽입니다" in page
+    print("PASS  미리보기는 PDF 첫 쪽 · 설명 대신 지면을 보여 줌")
+
+
+def test_free_list_puts_the_newest_round_first():
+    """시험이 끝난 날 찾아오시면 맨 위가 그 회차여야 합니다."""
+    a = admin()
+    for name in ["고1 2026년 3월 학력평가 한줄해석.pdf",
+                 "고1 2026년 11월 학력평가 한줄해석.pdf",
+                 "고1 2026년 9월 학력평가 한줄해석.pdf"]:
+        a.post("/admin/free/upload", data={"files": [(io.BytesIO(_real_pdf(name)), name)]},
+               content_type="multipart/form-data", follow_redirects=True)
+
+    text = body(client().get("/free"))
+    # 위쪽 회차 고르는 단추도 최근 것이 앞입니다
+    picks = text[:text.index('class="round-head"')]
+    assert picks.index("2026년 11월") < picks.index("2026년 9월") < picks.index("2026년 3월")
+
+    # 목록도 그렇습니다. 글자로 세면 '11월' 이 '3월' 뒤로 갑니다.
+    heads = re.findall(r'class="round-head">\s*<h3>(.*?)</h3>', text, re.S)
+    assert heads == sorted(heads, key=lambda h: sc.exam_key(*sc.guess_exam_round(h)),
+                           reverse=True), heads
+    assert heads[0].startswith("2026년 11월"), heads
+    # '최신 회차' 표는 맨 위 회차에만, 그리고 두 번째 회차보다 위에 붙습니다
+    listing = text[text.index('class="round-head"'):]
+    assert listing.count("최신 회차") == 1
+    assert listing.index("최신 회차") < listing.index(heads[1])
+
+    # 회차 안에서는 학년 · 자료 종류 차례입니다
+    order = [x["title"] for x in sc.load_freebies()["items"]]
+    keys = [sc.exam_key_of(x) for x in sc.load_freebies()["items"]]
+    assert keys == sorted(keys, reverse=True), order
+    print("PASS  무료 자료실 — 최근 회차가 맨 위")
+
+
+def test_free_shows_recent_paid_items_without_picking():
+    """함께 보여 줄 유료 자료를 손으로 고르지 않습니다."""
+    a = admin()
+    a.post("/admin/free/upload", data={
+        "files": [(io.BytesIO(_real_pdf("x")), "고1 2026년 7월 학력평가 한줄해석.pdf")]},
+        content_type="multipart/form-data", follow_redirects=True)
+    item = sc.find_freebie("2026-07-goh1-oneline-ko")
+    assert item is not None and not item.get("related")
+
+    picked = sc.auto_related(item, limit=3)
+    assert picked, "최근 자료가 하나도 안 뽑혔습니다"
+    assert len(picked) <= 3
+    # 같은 학년을 앞세웁니다
+    same = [p for p in picked if p.get("grade") == "고1"]
+    assert same, [p.get("grade") for p in picked]
+    # 손님 화면에도 그대로 나옵니다
+    page = body(client().get("/free/2026-07-goh1-oneline-ko"))
+    assert picked[0]["name"][:20] in page
+    print("PASS  함께 보여 줄 유료 자료는 최근 올린 것에서 자동으로")
+
+
 def test_free_kind_suggests_email_gate():
     """직독직해가 들어가면 이메일 받기를 기본으로 잡아야 합니다."""
     assert sc.suggested_gate(["oneline_ko"]) == "open"
@@ -6088,6 +6234,10 @@ def run_all():
     test_free_notify_collects_email()
     test_admin_creates_free_item_end_to_end()
     test_free_kind_suggests_email_gate()
+    test_free_upload_reads_the_filename_and_files_it()
+    test_free_preview_is_the_first_page_of_the_pdf()
+    test_free_list_puts_the_newest_round_first()
+    test_free_shows_recent_paid_items_without_picking()
     test_seo_tags_on_public_pages()
     test_seo_verification_code_paste()
     test_page_width_uses_the_screen()

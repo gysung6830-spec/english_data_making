@@ -1406,7 +1406,11 @@ def free():
     items = [x for x in data["items"] if sc.free_ready(x)]
     # 필터링 버튼은 준비 중인 것까지 포함해 만들어 둡니다.
     grades = sorted({x.get("grade", "") for x in data["items"] if x.get("grade")})
-    exams = sorted({x.get("exam", "") for x in data["items"] if x.get("exam")}, reverse=True)
+    # 회차 단추도 최근 것이 앞입니다. '11월' 이 '3월' 뒤로 가면 안 되니
+    # 글자가 아니라 해·달로 셉니다.
+    exams = [e for _, e in sorted(
+        {(sc.exam_key(*sc.guess_exam_round(x["exam"])), x["exam"])
+         for x in data["items"] if x.get("exam")}, reverse=True)]
     if grade:
         items = [x for x in items if x.get("grade") == grade]
     if kind in sc.FREE_KINDS:
@@ -1427,6 +1431,7 @@ def free():
                          and (sc.SAMPLE_DIR / m["sample_file"]).exists())
 
     return render_template("free.html", intro=data.get("intro", {}), items=items,
+                           rounds=sc.free_rounds(items),
                            total=len([x for x in data["items"] if sc.free_ready(x)]),
                            coming=coming, grades=grades, grade=grade, kind=kind,
                            exams=exams, exam=exam, q=q,
@@ -1438,13 +1443,12 @@ def free_detail(slug):
     item = sc.find_freebie(slug)
     if item is None:
         abort(404)
-    catalog = sc.load_catalog()
-    related = [p for p in catalog["products"] if p.get("slug") in (item.get("related") or [])]
     return render_template(
         "free_detail.html", item=item, files=sc.free_files(slug),
         links=sc.free_links(item), kind_names=sc.free_kind_names(item),
         opened=(item.get("gate") != "email" or free_unlocked(slug)),
-        related=related, errors=[], form={})
+        cover=sc.free_cover(slug) is not None,
+        related=sc.auto_related(item), errors=[], form={})
 
 
 @app.route("/free/<slug>/get", methods=["POST"])
@@ -1467,7 +1471,8 @@ def free_get(slug):
         return render_template(
             "free_detail.html", item=item, files=sc.free_files(slug),
             links=sc.free_links(item), kind_names=sc.free_kind_names(item),
-            opened=False, related=[], errors=errors, form=request.form), 400
+            opened=False, cover=sc.free_cover(slug) is not None,
+            related=sc.auto_related(item), errors=errors, form=request.form), 400
 
     sc.add_lead(email, name=sc.clean(request.form.get("name"), 50), slug=slug,
                 title=item.get("title", ""), news=bool(request.form.get("news")))
@@ -1484,6 +1489,20 @@ def free_notify():
         return redirect(back + "?bad=1")
     sc.add_lead(email, slug="", title="새 자료 알림 신청", news=True)
     return redirect(back + "?ok=1")
+
+
+@app.route("/free/<slug>/cover.webp")
+def free_cover_img(slug):
+    """미리보기 — 올린 PDF 의 첫 쪽입니다. 이메일을 받는 자료도 첫 쪽은 보입니다.
+
+    무엇인지 안 보여 주고 이메일부터 달라고 하면 아무도 안 적습니다.
+    """
+    if sc.find_freebie(slug) is None:
+        abort(404)
+    cover = sc.free_cover(slug)
+    if cover is None:
+        abort(404)
+    return send_from_directory(cover.parent, cover.name, max_age=86400 * 7)
 
 
 @app.route("/free/<slug>/file/<int:index>")

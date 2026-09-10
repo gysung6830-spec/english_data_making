@@ -29,12 +29,6 @@
         "고1 3월 학평 한줄해석" 처럼 학년 · 시험 · 종류를 다 넣는 편이 좋습니다.</div>
     </div>
 
-    <div class="adm-field full">
-      <label for="summary">한 줄 설명</label>
-      <input type="text" id="summary" name="summary" value="{{ x.summary or '' }}"
-             placeholder="예: 18~45번 전 지문 · 문장마다 한 줄 해석 · A4 12쪽">
-    </div>
-
     <div class="adm-field">
       <label for="grade">학년</label>
       <input type="text" id="grade" name="grade" value="{{ x.grade or '' }}" hidden>
@@ -98,53 +92,22 @@
 </div>
 
 <div class="panel">
-  <h2>3. 설명 · 미리보기</h2>
+  <h2>3. 미리보기 · 함께 보여 줄 자료</h2>
+  <div class="hint">
+    <b>둘 다 손댈 것이 없습니다.</b> 미리보기는 올리신 PDF 의 첫 쪽을 그대로 씁니다.
+    함께 보여 줄 유료 자료는 최근에 올린 것 중에서 같은 학년을 앞세워 자동으로 답니다.
+  </div>
   <div class="form-grid">
-    <div class="adm-field full">
-      <label for="body">자료 설명 <span class="tip" style="display:inline;">한 줄에 한 문장씩</span></label>
-      <textarea id="body" name="body" rows="5"
-                placeholder="어떤 자료인지, 어떻게 쓰면 좋은지 적어 주세요.">{{ x.body or '' }}</textarea>
-    </div>
-    <div class="adm-field">
-      <label for="image">미리보기 그림</label>
-      <input type="text" id="image" name="image" value="{{ x.image or '' }}" hidden>
-      <div class="pick" data-target="image" style="margin-top:0;">
-        {% for f in shots %}<button class="pick-btn" data-value="{{ f }}">{{ f }}</button>{% endfor %}
-        <button class="pick-btn clear" data-value="">안 넣음</button>
-      </div>
-      <div class="tip">지면 사진을 <code>store_static/free/</code> 폴더에 넣으면 여기 버튼으로 나옵니다.</div>
-    </div>
     <div class="adm-field">
       <label for="date">올린 날짜</label>
       <input type="date" id="date" name="date" value="{{ x.date or '' }}">
-      <div class="tip">최근 날짜가 목록 맨 위로 올라옵니다.</div>
+      <div class="tip">목록 차례는 <b>시험 회차</b>가 정합니다. 이 날짜는 같은 회차 안에서만 씁니다.</div>
     </div>
   </div>
 </div>
 
 <div class="panel">
-  <h2>4. 함께 보여 줄 유료 자료 <span class="tag tag-on">돈이 되는 자리</span></h2>
-  <div class="hint">
-    공짜로 받으러 온 분에게 <b>같은 지문의 유료 자료</b>를 바로 보여 줍니다.
-    안 고르시면 '자료 목록 보기' 버튼만 나옵니다.
-  </div>
-  {% if products %}
-    <div class="check-grid" style="gap:10px 18px;">
-      {% for p in products %}
-        <label class="check">
-          <input type="checkbox" name="related" value="{{ p.slug }}"
-                 {{ 'checked' if p.slug in (x.related or []) }}>
-          <span>{{ p.name }}</span>
-        </label>
-      {% endfor %}
-    </div>
-  {% else %}
-    <div class="empty">등록된 상품이 아직 없습니다.</div>
-  {% endif %}
-</div>
-
-<div class="panel">
-  <h2>5. 주소 · 노출</h2>
+  <h2>4. 주소 · 노출</h2>
   <div class="form-grid">
     <div class="adm-field">
       <label for="slug">주소 이름 <span style="color:#c2410c">*</span></label>

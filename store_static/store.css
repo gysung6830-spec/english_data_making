@@ -2595,3 +2595,32 @@ input[type=text].bl-in.wide{min-width:74px;}
   .beat{flex-wrap:wrap;}
   .beat-text{flex:1 1 100%; padding-left:32px;}
 }
+
+/* ---- 무료 자료 미리보기 — PDF 첫 쪽 -----------------------------------
+   A4 한 장을 통째로 세우면 받기 단추가 화면 밖으로 밀려납니다. 윗부분만
+   보이게 잘라 두고, 아래는 흐리게 덮어 '더 있다' 는 것만 알립니다. */
+.free-cover{margin:0 0 26px;}
+.free-cover .fc-box{position:relative; max-width:620px; margin:0 auto;
+  border:1px solid var(--line,#e5e7eb); border-radius:12px; overflow:hidden;
+  box-shadow:0 8px 26px rgba(15,32,24,.10); background:#fff;}
+.free-cover img{display:block; width:100%; max-height:460px;
+  object-fit:cover; object-position:top center;}
+.free-cover .fc-box::after{content:""; position:absolute; left:0; right:0; bottom:0;
+  height:90px; pointer-events:none;
+  background:linear-gradient(to bottom, rgba(255,255,255,0), #fff);}
+.free-cover figcaption{margin-top:10px; font-size:12px; text-align:center;
+  color:var(--muted,#6b7280);}
+@media (max-width:520px){ .free-cover img{max-height:360px;} }
+
+/* ---- 무료 자료실 — 회차로 묶기 ---------------------------------------- */
+.round-head{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+  margin:34px 0 14px; padding-bottom:10px; border-bottom:1px solid var(--line,#e5e7eb);}
+.round-head:first-of-type{margin-top:20px;}
+.round-head h3{margin:0; font-size:20px;}
+.round-new{font-size:11px; font-weight:700; color:#fff; border-radius:999px;
+  padding:3px 10px; background:var(--brand,#166534);}
+.round-n{margin-left:auto; font-size:13px; color:var(--muted,#6b7280);}
+@media (max-width:520px){
+  .round-head h3{font-size:17px;}
+  .round-n{margin-left:0;}
+}
