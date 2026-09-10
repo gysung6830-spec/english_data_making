@@ -122,7 +122,8 @@
          분이 맨 위에서 바로 그 회차를 보게 하려는 것입니다. #}
       {% for r in rounds %}
         <div class="round-head">
-          <h3>{{ r.name }}</h3>
+          <h3>{% if r.key %}<a href="{{ url_for('free_round', key=r.key) }}">{{ r.name }}</a>
+            {%- else %}{{ r.name }}{% endif %}</h3>
           {% if loop.first %}<span class="round-new">최신 회차</span>{% endif %}
           <span class="round-n">{{ r['items']|length }}개</span>
         </div>

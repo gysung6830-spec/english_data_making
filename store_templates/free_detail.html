@@ -2,6 +2,8 @@
 {% block title %}{{ item.title }} 무료 PDF | {{ site.brand }}{% endblock %}
 {% block desc %}{{ item.title }} PDF 무료 내려받기{% if span %} · {{ span }} 전 지문{% endif %}{% if facts.pages %} · A4 {{ facts.pages }}쪽{% endif %}. 회원가입 없이 바로 받으실 수 있습니다.{% endblock %}
 
+{% if cover %}{% block ogimage %}{{ url_for('free_og_img', slug=item.slug, _external=True) }}{% endblock %}{% endif %}
+
 {% block jsonld %}
 <script type="application/ld+json">
 {
@@ -48,7 +50,11 @@
       <h1>{{ item.title }}</h1>
       <div class="chips">
         {% if item.grade %}<span class="chip">{{ item.grade }}</span>{% endif %}
-        {% if item.exam %}<span class="chip">{{ item.exam }}</span>{% endif %}
+        {% if item.exam %}
+          {% set rk = item.exam_key or '' %}
+          {% if rk %}<a class="chip chip-go" href="{{ url_for('free_round', key=rk) }}">{{ item.exam }}</a>
+          {% else %}<span class="chip">{{ item.exam }}</span>{% endif %}
+        {% endif %}
         {% for k in kind_names %}<span class="chip chip-brand">{{ k }}</span>{% endfor %}
         <span class="chip">PDF</span>
       </div>

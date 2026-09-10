@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}{{ r.name }} 무료 자료 — 한줄해석 · 한줄영어 · 좌지문우해석 · 직독직해 | {{ site.brand }}{% endblock %}
+{% block desc %}{{ r.name }} 전 지문 해석 자료를 무료로 공개합니다. 한줄해석 · 한줄영어 · 좌지문우해석 · 직독직해 PDF, 회원가입 없이 바로 받으실 수 있습니다.{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ (r.name ~ ' 무료 자료')|tojson }},
+  "url": {{ url_for('free_round', key=r.key, _external=True)|tojson }},
+  "isPartOf": {"@type": "WebSite", "name": {{ site.brand|tojson }},
+               "url": {{ url_for('home', _external=True)|tojson }}},
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": {{ r['items']|length }},
+    "itemListElement": [
+      {%- for x in r['items'] %}
+      {"@type": "ListItem", "position": {{ loop.index }},
+       "url": {{ url_for('free_detail', slug=x.slug, _external=True)|tojson }},
+       "name": {{ x.title|tojson }}}{{ "," if not loop.last }}
+      {%- endfor %}
+    ]
+  }
+}
+</script>
+{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="wrap">
+    <a class="back-link" href="{{ url_for('free') }}">← 무료 자료실</a>
+
+    <div class="section-head">
+      <span class="lineup-eyebrow">회차 자료 · 무료</span>
+      <h2>{{ r.name }}<br>전 지문 자료</h2>
+      <p>이 회차의 지문을 <b>한줄해석 · 한줄영어 · 좌지문우해석 · 직독직해</b>로
+        만들어 두었습니다. 회원가입도 결제도 없습니다.</p>
+    </div>
+
+    {# 학년으로 갈라 놓습니다. 찾아오시는 분은 자기 학년만 필요합니다. #}
+    {% for g in r.grades %}
+      <div class="round-head">
+        <h3>{{ g.name }}</h3>
+        <span class="round-n">{{ g['items']|length }}개</span>
+      </div>
+      <div class="grid grid-3">
+        {% for x in g['items'] %}
+          <article class="product-card free-card">
+            {% if x.slug in covers %}
+              <a class="pc-shot" href="{{ url_for('free_detail', slug=x.slug) }}"
+                 tabindex="-1" aria-hidden="true">
+                <img src="{{ url_for('free_cover_img', slug=x.slug) }}" alt="" loading="lazy">
+              </a>
+            {% endif %}
+            <span class="badge badge-soft">무료</span>
+            <h3><a href="{{ url_for('free_detail', slug=x.slug) }}">{{ x.title }}</a></h3>
+            <div class="mat-chips">
+              {% for k in x.kinds %}
+                {% if k in kinds %}<span class="mat-chip">{{ kinds[k] }}</span>{% endif %}
+              {% endfor %}
+            </div>
+            <div class="free-way">
+              {% if x.gate == 'email' %}이메일만 적으면 바로 받으실 수 있습니다
+              {%- else %}받기를 누르면 바로 내려받습니다{% endif %}
+            </div>
+            <a class="btn btn-primary btn-block"
+               href="{{ url_for('free_detail', slug=x.slug) }}">무료로 받기</a>
+          </article>
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+    {# 검색엔진이 읽을 글. 회차마다 다른 이름과 숫자가 들어갑니다. #}
+    <div class="free-say" style="margin-top:34px;">
+      <h3 style="font-size:19px;margin:0 0 12px;">{{ r.name }} 자료, 이렇게 씁니다</h3>
+      {% for k in r.kinds %}
+        <p><b>{{ kinds[k] }}</b> — {{ kind_desc[k]|replace('<br>', ' ')|safe }}.
+          {% if k in gated %}이메일 주소만 적으시면 바로 받으실 수 있습니다.
+          {%- else %}받기를 누르시면 그 자리에서 내려받습니다.{% endif %}</p>
+      {% endfor %}
+      <p>{{ r.name }}가 끝난 뒤 수업에서 바로 쓰시라고 만든 자료입니다.
+        인쇄해서 학생에게 나눠 주셔도 되고, 화면에 띄워 수업하셔도 됩니다.
+        다만 파일을 다시 판매하시는 것만 삼가 주세요.</p>
+    </div>
+
+    {% if others %}
+      <div class="subhead" style="margin-top:40px;">
+        <h3>다른 회차</h3>
+        <p class="muted mb-0">지난 회차 자료도 그대로 두었습니다.</p>
+      </div>
+      <div class="sib-list">
+        {% for k in others %}
+          <a class="sib" href="{{ url_for('free_round', key=k) }}">
+            <b>{{ k[:4] }}년 {{ round_name(k[5:]|int) }}</b>
+            <span>보러 가기 →</span>
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1558,6 +1558,33 @@ def free_cover_img(slug):
     return send_from_directory(cover.parent, cover.name, max_age=86400 * 7)
 
 
+@app.route("/free/round/<key>")
+def free_round(key):
+    """회차 하나만 담은 페이지.
+
+    '2026년 9월 모의고사 해석지' 로 찾아오시는 분이 가장 많은데, 그 말에
+    맞는 페이지가 없으면 목록의 물음표 주소로는 검색에 잘 안 걸립니다.
+    """
+    box = sc.free_round(key)
+    if box is None:
+        abort(404)
+    return render_template("free_round.html", r=box, kinds=sc.FREE_KINDS,
+                           kind_desc=sc.FREE_KIND_DESC, gated=sc.FREE_KINDS_GATED,
+                           covers={x["slug"] for x in box["items"]
+                                   if sc.free_cover(x["slug"]) is not None},
+                           others=[k for k in sc.free_round_keys() if k != box["key"]][:6],
+                           round_name=sc.round_name)
+
+
+@app.route("/free/<slug>/og.jpg")
+def free_og_img(slug):
+    """단톡방·검색에 붙는 미리보기 그림. 실제 지면이 들어갑니다."""
+    og = sc.free_og(slug)
+    if og is None:
+        abort(404)
+    return send_from_directory(og.parent, og.name, max_age=86400 * 7)
+
+
 @app.route("/free/<slug>/pdf/<path:filename>")
 def free_pdf(slug, filename):
     """검색엔진이 훑어 갈 수 있는 PDF 주소.
@@ -2578,6 +2605,7 @@ def sitemap():
              for b in sc.load_words()["books"]]
     freebies = sc.load_freebies()["items"]
     urls += [url_for("free_detail", slug=x["slug"], _external=True) for x in freebies]
+    urls += [url_for("free_round", key=k, _external=True) for k in sc.free_round_keys()]
     # 자료 PDF 도 올립니다. 구글은 PDF 안의 글까지 읽으므로 검색에 걸리는
     # 문이 하나 더 생깁니다. 이메일을 받는 자료는 빠집니다.
     for x in freebies:

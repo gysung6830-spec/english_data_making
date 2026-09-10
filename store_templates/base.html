@@ -11,7 +11,8 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:url" content="{{ request.url }}">
-<meta property="og:image" content="{{ url_for('static', filename='og.png', _external=True) }}">
+{# 단톡방에 주소를 올리면 붙는 그림. 자료 페이지는 실제 지면을 씁니다. #}
+<meta property="og:image" content="{% block ogimage %}{{ url_for('static', filename='og.png', _external=True) }}{% endblock %}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">

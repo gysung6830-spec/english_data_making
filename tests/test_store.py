@@ -3748,7 +3748,8 @@ def test_free_list_puts_the_newest_round_first():
         assert f">{label}</a>" in picks, label
 
     # 목록도 그렇습니다. 글자로 세면 '11월' 이 '3월' 뒤로 갑니다.
-    heads = re.findall(r'class="round-head">\s*<h3>(.*?)</h3>', text, re.S)
+    heads = [re.sub(r"<[^>]+>", "", h).strip() for h in
+             re.findall(r'class="round-head">\s*<h3>(.*?)</h3>', text, re.S)]
     assert heads == sorted(heads, key=lambda h: sc.exam_key(*sc.guess_exam_round(h)),
                            reverse=True), heads
     assert heads[0] == "2026년 수능", heads      # 수능이 그해 맨 앞 회차입니다
@@ -4022,13 +4023,15 @@ def test_free_filters_by_year_and_round():
 
     # 해를 고르면 그 해의 회차만 남습니다
     y2024 = body(client().get("/free?year=2024"))
-    heads = re.findall(r'class="round-head">\s*<h3>(.*?)</h3>', y2024, re.S)
+    heads = [re.sub(r"<[^>]+>", "", h).strip() for h in
+             re.findall(r'class="round-head">\s*<h3>(.*?)</h3>', y2024, re.S)]
     assert heads == ["2024년 수능"], heads
     assert ">3월</a>" not in y2024.split("시행회차")[1].split("</div>")[0]
 
     # 회차만 골라도 걸러집니다
     only9 = body(client().get("/free?round=9"))
-    heads = re.findall(r'class="round-head">\s*<h3>(.*?)</h3>', only9, re.S)
+    heads = [re.sub(r"<[^>]+>", "", h).strip() for h in
+             re.findall(r'class="round-head">\s*<h3>(.*?)</h3>', only9, re.S)]
     assert all("9월" in h for h in heads), heads
     print("PASS  무료 자료 — 시행년도 · 시행회차로 가름")
 
@@ -4247,6 +4250,72 @@ def test_open_pdf_is_crawlable_but_the_gated_one_is_not():
     # 주소는 한 번만 감싸져 있어야 합니다 (두 번 감싸면 안 열립니다)
     assert not any("%25" in l for l in pdfs)
     print("PASS  그냥 주는 PDF 는 검색이 훑고, 이메일 받는 것은 막힘")
+
+
+def test_each_round_gets_a_page_of_its_own():
+    """'2026년 9월 모의고사 해석지' 로 찾아오시면 그 회차 페이지가 있어야 합니다.
+
+    목록의 물음표 주소(?year=&round=)로는 검색에 잘 안 걸립니다.
+    """
+    a = admin()
+    for kind in ("한줄해석", "한줄영어", "직독직해"):
+        for g in ("고1", "고2"):
+            n = f"{g} 2026년 9월 모의고사 {kind}.pdf"
+            a.post("/admin/free/upload", data={"files": [(io.BytesIO(_exam_pdf(kind)), n)]},
+                   content_type="multipart/form-data", follow_redirects=True)
+
+    box = sc.free_round("2026-09")
+    assert box and box["name"] == "2026년 9월 모의고사"
+    assert [g["name"] for g in box["grades"]] == ["고1", "고2"]
+    assert sc.free_round_key("2026-13") == "" and sc.free_round_key("아무거나") == ""
+    assert sc.free_round("2026-13") is None
+
+    c = client()
+    page = body(c.get("/free/round/2026-09"))
+    assert "2026년 9월 모의고사" in page
+    for kind in ("한줄해석", "한줄영어", "직독직해"):
+        assert kind in page, kind
+    korean = len(re.findall(r"[가-힣]", re.sub(r"<[^>]+>", " ", page)))
+    assert korean > 400, korean
+    assert "ItemList" in page                       # 검색엔진에 목록임을 알립니다
+    assert c.get("/free/round/9999-99").status_code == 404
+
+    # 목록의 회차 제목에서 그 회차로 들어갈 수 있어야 합니다
+    listing = body(c.get("/free"))
+    assert 'href="/free/round/2026-09"' in listing
+    # 자료 상세에서도
+    assert 'href="/free/round/2026-09"' in body(c.get("/free/2026-09-goh1-oneline-ko"))
+
+    # 사이트맵에도 올라갑니다
+    assert "/free/round/2026-09" in body(c.get("/sitemap.xml"))
+    print("PASS  회차마다 제 페이지 하나 · 사이트맵에도")
+
+
+def test_shared_link_shows_the_real_page_not_a_stock_picture():
+    """단톡방에 주소를 올리면 붙는 그림이 늘 같으면 아무도 안 누릅니다."""
+    a = admin()
+    n = "고3 2026년 10월 모의고사 좌지문우해석.pdf"
+    a.post("/admin/free/upload", data={"files": [(io.BytesIO(_exam_pdf("좌지문우해석")), n)]},
+           content_type="multipart/form-data", follow_redirects=True)
+    slug = "2026-10-goh3-side"
+
+    og = sc.free_og(slug)
+    assert og is not None and og.exists()
+    from PIL import Image
+    with Image.open(og) as im:
+        assert (im.width, im.height) == (sc.OG_W, sc.OG_H)   # 카톡·검색이 바라는 판
+        assert im.format == "JPEG"                            # webp 는 안 붙는 곳이 있습니다
+
+    c = client()
+    got = c.get(f"/free/{slug}/og.jpg")
+    assert got.status_code == 200
+    assert got.headers["Content-Type"].startswith("image/jpeg")
+
+    page = body(c.get(f"/free/{slug}"))
+    assert f"/free/{slug}/og.jpg" in page
+    # 다른 화면은 그대로 기본 그림을 씁니다
+    assert "og.png" in body(c.get("/"))
+    print("PASS  단톡방에 붙는 그림은 그 자료의 실제 지면")
 
 
 def test_free_kind_suggests_email_gate():
@@ -6727,6 +6796,8 @@ def run_all():
     test_free_notify_collects_email()
     test_admin_creates_free_item_end_to_end()
     test_free_kind_suggests_email_gate()
+    test_each_round_gets_a_page_of_its_own()
+    test_shared_link_shows_the_real_page_not_a_stock_picture()
     test_free_page_has_something_for_search_to_read()
     test_open_pdf_is_crawlable_but_the_gated_one_is_not()
     test_free_page_shows_all_four_kinds_with_a_page_shot()

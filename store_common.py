@@ -1529,6 +1529,121 @@ def free_pdf_name(slug: str) -> str:
     return pdfs[0] if pdfs else ""
 
 
+# ── 카톡에 붙는 그림 ──────────────────────────────────────────────────
+# 자료 주소를 단톡방에 올리면 미리보기 그림이 붙습니다. 그 자리가 늘 같은
+# 기본 그림이면 아무도 안 누릅니다. 실제 지면을 넣어 무엇인지 보이게 합니다.
+OG_W, OG_H, OG_VER = 1200, 630, 1
+
+
+def korean_ttf() -> Path | None:
+    """PDF 만들 때 쓰려고 이미 풀어 둔 한글 글꼴. 그림에도 같이 씁니다."""
+    try:
+        import store_sheet_pdf as sp
+        sp._fonts()                                   # 없으면 여기서 만들어 둡니다
+        ttf = sp.CACHE_DIR / (Path(sp.FACES["B"][0]).stem + ".ttf")
+        return ttf if ttf.exists() else None
+    except Exception:
+        return None
+
+
+def free_og(slug: str) -> Path | None:
+    """단톡방·검색에 붙는 1200×630 그림. 왼쪽에 이름, 오른쪽에 실제 지면."""
+    item = find_freebie(slug)
+    cover = free_cover(slug)
+    if item is None or cover is None:
+        return None
+    out = DATA_DIR / ".cache" / "og" / f"{free_dir(slug).name}-{OG_VER}.jpg"
+    try:
+        if out.exists() and out.stat().st_mtime >= cover.stat().st_mtime:
+            return out
+        from PIL import Image, ImageDraw, ImageFont
+        out.parent.mkdir(parents=True, exist_ok=True)
+        card = Image.new("RGB", (OG_W, OG_H), "#fbfdfc")
+        draw = ImageDraw.Draw(card)
+        draw.rectangle([0, 0, OG_W, 10], fill="#146b4a")
+
+        # 오른쪽에 지면 — 윗부분만 보이게 잘라 세웁니다
+        with Image.open(cover) as page:
+            page = page.convert("RGB")
+            h = OG_H - 96
+            w = max(1, round(page.width * h / page.height))
+            page = page.resize((w, h), Image.LANCZOS)
+            box = page.crop((0, 0, min(w, 380), h))
+            card.paste(box, (OG_W - box.width - 56, 48))
+            draw.rectangle([OG_W - box.width - 57, 47,
+                            OG_W - 55, 48 + box.height], outline="#dfe6e2", width=2)
+
+        ttf = korean_ttf()
+        def font(size):
+            return ImageFont.truetype(str(ttf), size) if ttf else ImageFont.load_default()
+
+        left, y = 72, 120
+        draw.text((left, y), load_site().get("brand", ""), font=font(34), fill="#146b4a")
+        y += 76
+        # 이름은 길면 접습니다
+        words, line, lines = (item.get("title") or "").split(" "), "", []
+        for w in words:
+            t = (line + " " + w).strip()
+            if draw.textlength(t, font=font(52)) > OG_W - box.width - 150 and line:
+                lines.append(line); line = w
+            else:
+                line = t
+        if line:
+            lines.append(line)
+        for one in lines[:3]:
+            draw.text((left, y), one, font=font(52), fill="#1a1d21")
+            y += 68
+        facts = free_facts(slug)
+        span = number_span(facts.get("numbers") or [])
+        bits = [x for x in [span, f"A4 {facts['pages']}쪽" if facts.get("pages") else "",
+                            "무료"] if x]
+        draw.text((left, y + 16), "  ·  ".join(bits), font=font(30), fill="#6b7280")
+        card.save(out, "JPEG", quality=86, optimize=True)
+        return out
+    except Exception as exc:
+        log.warning("공유 그림을 만들지 못했습니다 (%s): %s", slug, exc)
+        return None
+
+
+def free_round_key(key: str) -> str:
+    """'2026-09' 처럼 생긴 회차 열쇠만 받습니다."""
+    key = (key or "").strip()
+    return key if re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])", key) else ""
+
+
+def free_round(key: str) -> dict | None:
+    """회차 하나 — 그 회차의 무료 자료를 학년별로 묶어 돌려줍니다.
+
+    '2026년 9월 모의고사 해석지' 로 찾아오시는 분이 가장 많습니다. 그런
+    말에는 그 회차만 담긴 페이지 하나가 있어야 걸립니다.
+    """
+    key = free_round_key(key)
+    if not key:
+        return None
+    mine = [x for x in load_freebies()["items"]
+            if exam_key_of(x) == key and free_ready(x)]
+    if not mine:
+        return None
+    year, month = int(key[:4]), int(key[5:])
+    grades = []
+    for g in list(GRADE_CODE) + [""]:
+        rows = sorted([x for x in mine if (x.get("grade") or "") == g],
+                      key=free_sort_key, reverse=True)
+        if rows:
+            grades.append({"name": g or "학년 안 나눔", "items": rows})
+    return {"key": key, "year": year, "month": month,
+            "name": exam_label(year, month), "items": mine, "grades": grades,
+            "kinds": sorted({k for x in mine for k in (x.get("kinds") or [])},
+                            key=lambda k: list(FREE_KINDS).index(k)
+                            if k in FREE_KINDS else 9)}
+
+
+def free_round_keys() -> list[str]:
+    """자료가 실제로 올라와 있는 회차들. 최근 것이 앞입니다."""
+    keys = {exam_key_of(x) for x in load_freebies()["items"] if free_ready(x)}
+    return sorted({k for k in keys if free_round_key(k)}, reverse=True)
+
+
 def preorder_price(cfg: dict, plan: dict) -> int:
     """사전 신청가. 정가에서 pass.preorder_discount 만큼 깎습니다.
 
