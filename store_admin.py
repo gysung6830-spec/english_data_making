@@ -27,6 +27,7 @@ import os
 import re
 import secrets
 from datetime import datetime, timedelta
+from pathlib import Path
 
 from flask import (Blueprint, abort, flash, redirect, render_template, request,
                    send_from_directory, session, url_for)
@@ -193,6 +194,7 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
     biz_ok = bool(business.get("reg_no")) and "0000" not in business["reg_no"]
     mine = [p for p in products if not p.get("sample")]
     with_files = [p for p in products if sc.has_deliverable(p)]
+    mine_with_files = [p for p in mine if sc.has_deliverable(p)]
     mats = sc.load_materials()["materials"]
     with_sample = [m for m in mats
                    if m.get("sample_file") and (sc.SAMPLE_DIR / m["sample_file"]).exists()]
@@ -213,27 +215,23 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
          "title": "사업자 정보 넣기",
          "why": "온라인으로 팔면 상호·사업자등록번호를 화면에 적어야 합니다.",
          "url": url_for("admin.settings"), "label": "사업자 정보 열기"},
-        {"done": bool(mine),
-         "title": "내 상품 등록하기",
-         "why": (f"지금 보이는 {len(products)}개는 제가 넣어 둔 견본입니다. 실제 자료로 바꿔 주세요."
-                 if not mine else "실제 자료를 등록하셨습니다."),
+        # 상품 만들기 · 파일 올리기 · 샘플 · 지면 사진을 넷으로 나눠 두었었는데,
+        # 이제 파일 하나를 끌어다 놓으면 넷이 한꺼번에 됩니다. 한 줄로 합칩니다.
+        {"done": bool(mine_with_files),
+         "title": "파는 PDF 를 끌어다 놓기",
+         "why": ("파일 이름에서 분류 · 교재 · 패키지 · 값을 읽어 상품이 됩니다. "
+                 "샘플(앞 여섯 쪽)과 지면 사진(세 쪽째)도 같이 만들어 붙습니다. "
+                 + (f"지금 보이는 {len(products)}개는 제가 넣어 둔 견본입니다."
+                    if not mine else
+                    ("아직 파일이 붙은 상품이 없습니다. 파일이 없으면 주문이 와도 못 보냅니다."
+                     if not mine_with_files else ""))),
          "url": url_for("admin.products"), "label": "상품 화면 열기"},
-        {"done": bool(with_files),
-         "title": "상품에 판매할 파일 올리기",
-         "why": "이 파일이 실제로 팔리는 물건입니다. 없으면 주문이 와도 보낼 수 없습니다.",
-         "url": url_for("admin.products"), "label": "상품 > 📁 파일"},
-        {"done": bool(with_sample),
-         "title": "자료 샘플 PDF 올리기",
-         "why": (f"사기 전에 눈으로 봐야 지갑이 열립니다. 지금 {len(mats)}종 가운데 "
-                 f"{len(with_sample)}종만 샘플이 있습니다. 무료 자료는 실물을 받아 보는데 "
-                 f"유료 자료는 못 보면, 값이 아니라 '몰라서' 안 삽니다."),
-         "url": url_for("admin.materials"), "label": "오르티카잉 라인업 열기"},
         {"done": not thin,
-         "title": "자료마다 지면 사진과 설명 채우기",
+         "title": "자료 종류마다 설명 채우기",
          "why": (("다 채우셨습니다." if not thin else
                   f"{len(thin)}종이 비어 있습니다 — {' · '.join(m['name'] for m in thin[:4])}"
-                  f"{' 외' if len(thin) > 4 else ''}. 잘 적어 둔 자료 옆에 빈 칸이 있으면, "
-                  f"그 하나 때문에 전체가 만들다 만 것으로 보입니다.")),
+                  f"{' 외' if len(thin) > 4 else ''}. 샘플과 지면 사진은 PDF 를 끌어다 놓으실 때 "
+                  f"저절로 붙습니다. 남은 것은 '이 자료가 무엇인지' 한 줄뿐입니다.")),
          "url": url_for("admin.materials"), "label": "오르티카잉 라인업 열기"},
         {"done": mail_ok,
          "title": "주문 알림 메일 켜기",
@@ -776,6 +774,43 @@ def product_form(slug=None):
     return redirect(url_for("admin.products"))
 
 
+def fill_lineup_from(mid: str, pdf: Path, sample_name: str) -> bool:
+    """라인업의 그 자료 칸에 샘플 PDF 와 지면 사진을 채웁니다. 비어 있을 때만.
+
+    같은 파일을 두 군데에 올리시게 할 까닭이 없습니다. 손수 올려 두신 것은
+    건드리지 않습니다 — 하나라도 채웠으면 True.
+    """
+    data = sc.load_materials()
+    mat = next((m for m in data["materials"] if m.get("id") == mid), None)
+    if mat is None:
+        return False
+    did = False
+
+    have = mat.get("sample_file")
+    if sample_name and not (have and (sc.SAMPLE_DIR / have).exists()):
+        mat["sample_file"] = sample_name
+        sc.save_materials(data)
+        did = True
+
+    if not sc.shot_files(mid):
+        try:
+            import fitz as pymupdf
+            from PIL import Image
+            folder = sc.shot_dir(mid)
+            folder.mkdir(parents=True, exist_ok=True)
+            with pymupdf.open(pdf) as doc:
+                at = min(sc.THUMB_PAGE, doc.page_count) - 1
+                page = doc[max(0, at)]
+                zoom = 900 / max(1.0, page.rect.width)
+                pix = page.get_pixmap(matrix=pymupdf.Matrix(zoom, zoom), alpha=False)
+                Image.frombytes("RGB", (pix.width, pix.height), pix.samples).save(
+                    folder / "01_지면.webp", "WEBP", quality=84, method=5)
+            did = True
+        except Exception as exc:
+            sc.log.warning("라인업 지면 사진을 만들지 못했습니다 (%s): %s", mid, exc)
+    return did
+
+
 def _sync_full_packs(catalog: dict, site: dict, touched: set[str]) -> int:
     """전권·전회차 상품을 손으로 만들지 않습니다. 강이 둘 이상 쌓이면 저절로.
 
@@ -841,6 +876,7 @@ def products_upload():
     by_slug = {p.get("slug"): p for p in catalog["products"]}
     book_slugs = {b.get("slug") for b in catalog["books"]}
     filed, skipped, touched = [], [], set()
+    lineup_touched = False
 
     for upload in request.files.getlist("files"):
         if not upload or not upload.filename:
@@ -909,12 +945,20 @@ def products_upload():
             if sc.cut_sample(folder / name, out):
                 item["sample_file"] = out.name
         item["shot"] = sc.product_thumb(item["slug"]) is not None
+        # 라인업(자료 종류 소개)의 샘플과 지면 사진도 같은 파일에서 채웁니다.
+        # 같은 것을 두 번 올리시게 할 까닭이 없습니다. 비어 있을 때만 넣고,
+        # 손수 올려 두신 것은 건드리지 않습니다.
+        if read["material"] and name.lower().endswith(".pdf"):
+            lineup_touched |= fill_lineup_from(read["material"], folder / name,
+                                              item.get("sample_file", ""))
 
         touched.add((read["book_slug"], read["package"]))
         filed.append({**read, "file": name, "ok": True,
                       "price": item["price"], "materials": mats})
 
     packs = _sync_full_packs(catalog, site, touched) if touched else 0
+    if lineup_touched:
+        flash("올리신 파일에서 라인업의 샘플 PDF 와 지면 사진도 함께 채웠습니다.", "ok")
     if any(f["ok"] for f in filed):
         sc.save_catalog(catalog)
     session["product_filed"] = filed[:60]

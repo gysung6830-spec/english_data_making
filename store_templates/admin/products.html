@@ -8,9 +8,6 @@
       <h1>상품</h1>
       <p>PDF 를 끌어다 놓기만 하시면 됩니다. <b>분류 · 교재 · 패키지 · 값까지 알아서 잡습니다.</b></p>
     </div>
-    <div class="spacer"></div>
-    <a class="btn btn-ghost" href="{{ url_for('admin.products_bulk') }}">압축(.zip)으로</a>
-    <a class="btn btn-ghost" href="{{ url_for('admin.product_form') }}">손으로 하나 만들기</a>
   </div>
 </div>
 
@@ -43,6 +40,12 @@
       새 상품을 만들지 않고 <b>그 패키지에 자료를 더합니다.</b> 값도 다시 셈하고요.
       한 교재에 강이 둘 이상 쌓이면 <b>전권 상품이 저절로</b> 생깁니다.
       샘플은 앞 <b>여섯 쪽</b>, 지면 사진은 <b>세 쪽째</b>를 그대로 씁니다.
+      라인업의 샘플 PDF 와 지면 사진도 <b>같은 파일에서 함께</b> 채웁니다.
+    </div>
+    <div class="dz-other">
+      다른 방법이 필요하시면 —
+      <a href="{{ url_for('admin.products_bulk') }}">압축(.zip)으로 한꺼번에</a> ·
+      <a href="{{ url_for('admin.product_form') }}">손으로 하나 만들기</a>
     </div>
   </div>
 </form>

@@ -920,8 +920,8 @@ def test_setup_checklist_guides_first_day():
     """첫날 관리자 화면이 '무엇부터 하라'를 순서로 보여 줘야 합니다."""
     text = body(admin().get("/admin"))
     assert "문 열기까지" in text and "단계 남았습니다" in text
-    for step in ("연락처와 입금 계좌 넣기", "내 상품 등록하기",
-                 "상품에 판매할 파일 올리기", "자료 샘플 PDF 올리기",
+    for step in ("연락처와 입금 계좌 넣기", "파는 PDF 를 끌어다 놓기",
+                 "자료 종류마다 설명 채우기",
                  "무료 자료 한 건 올리기", "네이버 · 구글에 사이트 등록하기"):
         assert step in text, step
     assert "지금 사이트에 보이는 상품은 예시입니다" in text     # 예시 데이터 경고 상자
@@ -3849,6 +3849,50 @@ def test_product_upload_reads_the_filename():
     print("PASS  상품 — PDF 를 놓으면 분류 · 교재 · 패키지 · 값까지 알아서")
 
 
+def test_product_upload_also_fills_the_lineup():
+    """같은 파일을 두 군데에 올리시게 할 까닭이 없습니다.
+
+    라인업(자료 종류 소개)의 샘플 PDF 와 지면 사진도 파는 PDF 에서 채웁니다.
+    """
+    mid = "mocktest"
+    data = sc.load_materials()
+    mat = next(m for m in data["materials"] if m["id"] == mid)
+    mat["sample_file"] = ""
+    sc.save_materials(data)
+    folder = sc.shot_dir(mid)
+    if folder.is_dir():
+        for f in folder.iterdir():
+            f.unlink()
+    assert not sc.shot_files(mid)
+
+    a = admin()
+    n = "라인업채움교재 1강 동형모의고사.pdf"
+    resp = a.post("/admin/products/upload", data={"files": [(io.BytesIO(_paged_pdf("지면", 9)), n)]},
+                  content_type="multipart/form-data", follow_redirects=True)
+    assert "라인업의 샘플 PDF 와 지면 사진도 함께 채웠습니다" in body(resp)
+
+    after = next(m for m in sc.load_materials()["materials"] if m["id"] == mid)
+    assert after["sample_file"] and (sc.SAMPLE_DIR / after["sample_file"]).exists()
+    assert sc.shot_files(mid), "지면 사진이 안 붙었습니다"
+
+    # 손님 화면 라인업에 바로 걸립니다
+    page = body(client().get("/lineup"))
+    assert f"{after['name']} 샘플 PDF" in page
+
+    # 손수 올려 두신 것은 안 건드립니다
+    data = sc.load_materials()
+    mat = next(m for m in data["materials"] if m["id"] == mid)
+    mat["sample_file"] = "analysis-sample.pdf"
+    sc.save_materials(data)
+    (sc.SAMPLE_DIR / "analysis-sample.pdf").write_bytes(b"%PDF-1.4 mine\n")
+    a.post("/admin/products/upload", data={
+        "files": [(io.BytesIO(_paged_pdf("또", 9)), "라인업채움교재 2강 동형모의고사.pdf")]},
+        content_type="multipart/form-data", follow_redirects=True)
+    kept = next(m for m in sc.load_materials()["materials"] if m["id"] == mid)
+    assert kept["sample_file"] == "analysis-sample.pdf"
+    print("PASS  파는 PDF 하나로 라인업 샘플 · 지면 사진까지")
+
+
 def test_product_upload_never_overwrites_a_hand_made_product():
     """손으로 만드신 상품을 말없이 덮어쓰면 안 됩니다."""
     a = admin()
@@ -4139,7 +4183,12 @@ def test_lineup_offers_sample_pdf():
     assert got.status_code == 200 and got.data.startswith(b"%PDF")
 
     # 파일이 없는 자료에는 버튼이 붙지 않아야 합니다
-    assert "필생보 샘플 PDF" not in text
+    data = sc.load_materials()
+    bare = next(m for m in data["materials"] if m["id"] == "mocktest")
+    bare["sample_file"] = ""
+    sc.save_materials(data)
+    text = body(client().get("/lineup"))
+    assert f"{bare['name']} 샘플 PDF" not in text
     print("PASS  라인업 자료마다 샘플 PDF")
 
 
@@ -4599,8 +4648,10 @@ def test_sample_pdf_links_go_somewhere():
 
     # 첫날 체크리스트가 몇 종이 비었는지 세어 줍니다
     setup = body(admin().get("/admin"))
-    assert "자료 샘플 PDF 올리기" in setup
-    assert "자료마다 지면 사진과 설명 채우기" in setup
+    assert "자료 종류마다 설명 채우기" in setup
+    # 샘플과 지면 사진은 이제 손으로 올리는 일이 아닙니다
+    assert "자료 샘플 PDF 올리기" not in setup
+    assert "상품에 판매할 파일 올리기" not in setup
     print("PASS  샘플 PDF 자리 · 빈 자료 세어 주기")
 
 
@@ -6543,6 +6594,7 @@ def run_all():
     test_free_page_offers_packages_not_single_files()
     test_word_study_starts_with_flash_and_offers_games()
     test_product_upload_reads_the_filename()
+    test_product_upload_also_fills_the_lineup()
     test_product_upload_never_overwrites_a_hand_made_product()
     test_sample_is_the_first_six_pages_and_the_shot_is_page_three()
     test_mock_books_run_newest_first()

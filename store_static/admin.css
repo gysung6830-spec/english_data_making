@@ -455,3 +455,6 @@ tr.row-bad{background:#fffaf9;}
   .dz-head{font-size:16px;}
   .dz-eg code{font-size:11px;}
 }
+.dz-other{margin-top:14px; padding-top:12px; border-top:1px dashed #e5e7eb;
+  font-size:12.5px; color:#6b7280;}
+.dz-other a{color:#374151;}
