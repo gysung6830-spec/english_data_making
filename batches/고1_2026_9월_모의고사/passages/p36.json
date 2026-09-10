@@ -129,7 +129,7 @@
       "translation": "예를 들어, 신문에 매일 나타나는 그 스도쿠 퍼즐들을 예로 들어 보라.",
       "grammar": [
         {"tag": "명령문", "note": "동사원형 Take로 시작하는 명령문", "spans": ["Take"]},
-        {"tag": "주격 관계대명사 that", "note": "선행사 the Sudoku puzzles를 수식하는 관계사절을 이끎", "spans": ["that"]}
+        {"tag": "주격 관계대명사 that", "note": "선행사 the Sudoku puzzles를 수식하는 관계사절을 이끎", "antecedent": "the Sudoku puzzles", "spans": ["that"]}
       ],
       "vocab": [
         {"word": "appear", "meaning": "나타나다, 실리다"},
@@ -154,7 +154,7 @@
         {"tag": "to부정사(보어)", "note": "be동사의 보어로 쓰인 명사적 용법", "spans": ["to complete"]},
         {"tag": "분사구문", "note": "'~하면서'라는 부대상황을 나타내는 현재분사", "spans": ["starting"]},
         {"tag": "접속사+분사(while ensuring)", "note": "'~하는 것을 보장하면서'로, while 뒤 분사구문", "spans": ["ensuring"]},
-        {"tag": "명사절 접속사 that", "note": "ensuring의 목적어인 명사절을 이끎", "spans": ["that"]},
+        {"tag": "명사절 접속사 that", "note": "ensuring의 목적어인 명사절을 이끎", "role": "ensuring의 목적어절", "spans": ["that"]},
         {"tag": "주어-동사 수일치", "note": "each+단수 취급이라 단수 동사 contains를 씀", "spans": ["contains"]}
       ],
       "vocab": [
@@ -185,8 +185,8 @@
       "english": "But the numerical values of the digits are irrelevant; what is important is that there are nine distinct symbols.",
       "translation": "그러나 그 숫자들의 수치적 값들은 무관하며, 중요한 것은 아홉 개의 서로 다른 기호들이 있다는 것이다.",
       "grammar": [
-        {"tag": "관계대명사 what", "note": "'~한 것'이라는 명사절을 이끌어 주어 역할을 함", "spans": ["what"]},
-        {"tag": "명사절 접속사 that", "note": "be동사의 보어인 명사절을 이끎", "spans": ["that"]},
+        {"tag": "관계대명사 what", "note": "'~한 것'이라는 명사절을 이끌어 주어 역할을 함", "role": "'~하는 것'(선행사 포함 명사절); 주어절", "spans": ["what"]},
+        {"tag": "명사절 접속사 that", "note": "be동사의 보어인 명사절을 이끎", "role": "be동사의 보어절", "spans": ["that"]},
         {"tag": "유도부사 there", "note": "'there+be동사+주어' 구문, 뒤의 복수 주어에 are를 맞춤", "spans": ["there"]}
       ],
       "vocab": [
@@ -279,8 +279,8 @@
       "english": "It seems that even the idea that something might be spoiled by mathematics is enough to scare off potential solvers!",
       "translation": "무언가가 수학에 의해 망쳐질지도 모른다는 그 생각조차도 잠재적인 풀이자들을 겁주어 쫓아내기에 충분한 것처럼 보인다!",
       "grammar": [
-        {"tag": "명사절 접속사 that", "note": "It seems that ~ 구문에서 진주어절을 이끎", "spans": ["that"]},
-        {"tag": "동격 that", "note": "the idea의 구체적 내용을 설명하는 동격절을 이끎", "spans": ["that"]},
+        {"tag": "명사절 접속사 that", "note": "It seems that ~ 구문에서 진주어절을 이끎", "role": "It seems의 진주어절", "spans": ["that"]},
+        {"tag": "동격 that", "note": "the idea의 구체적 내용을 설명하는 동격절을 이끎", "role": "the idea와 동격절", "spans": ["that"]},
         {"tag": "조동사+수동태(might be p.p.)", "note": "'망쳐질지도 모른다'는 추측+수동", "spans": ["be spoiled"]},
         {"tag": "to부정사(enough to)", "note": "'~하기에 충분한'이라는 부사적 용법", "spans": ["to scare"]}
       ],

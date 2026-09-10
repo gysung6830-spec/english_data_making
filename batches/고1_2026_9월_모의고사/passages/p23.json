@@ -282,6 +282,7 @@
     {
      "tag": "명사절 접속사 that (보어절)",
      "note": "was의 보어절을 이끎",
+     "role": "was의 보어절",
      "spans": [
       "that"
      ]
@@ -437,7 +438,8 @@
    "grammar": [
     {
      "tag": "주격 관계대명사 who",
-     "note": "선행사 the members를 수식",
+     "note": "선행사 the members를 수식(who 뒤 are — 동사)",
+     "antecedent": "the members",
      "spans": [
       "who"
      ]

@@ -135,7 +135,7 @@
    "english": "Short paragraphs put air around what you write and make it look inviting, whereas a long chunk of type can discourage a reader from even starting to read.",
    "translation": "짧은 문단은 당신이 쓰는 것 주위에 여백을 주고 그것을 매력적으로 보이게 만든다, 반면 긴 활자 덩어리는 독자가 읽기를 시작하는 것조차 단념시킬 수 있다.",
    "grammar": [
-    {"tag": "관계대명사 what", "note": "what you write: 당신이 쓰는 것(선행사를 포함)", "spans": ["what"]},
+    {"tag": "관계대명사 what", "note": "what you write: 당신이 쓰는 것(선행사를 포함)", "role": "'~하는 것'(선행사 포함 명사절, 전치사 around의 목적어절)", "spans": ["what"]},
     {"tag": "사역동사 make(5형식)", "note": "make+O+원형부정사: O가 ~하게 만들다", "spans": ["make it look"]},
     {"tag": "접속사(대조) whereas", "note": "whereas: ~인 반면에", "spans": ["whereas"]},
     {"tag": "조동사", "note": "can discourage: ~할 수 있다", "spans": ["can"]},
@@ -193,7 +193,7 @@
    "translation": "당신은 그런 잦은 문단 나누기가 당신 요점의 전개를 해칠 것이라고 생각할지도 모른다.",
    "grammar": [
     {"tag": "조동사", "note": "may: ~일지도 모른다(추측)", "spans": ["may"]},
-    {"tag": "명사절 접속사 that 생략", "note": "think 뒤 목적어절의 접속사 that이 생략됨", "spans": []},
+    {"tag": "명사절 접속사 that 생략", "note": "think 뒤 목적어절의 접속사 that이 생략됨", "role": "think의 목적어절", "spans": ["think"]},
     {"tag": "시제(미래)", "note": "will damage: 손상시킬 것이다", "spans": ["will damage"]}
    ],
    "vocab": [
@@ -285,7 +285,7 @@
    "grammar": [
     {"tag": "수일치", "note": "단수 주어 A succession에 맞춘 is", "spans": ["is"]},
     {"tag": "원급 비교(as ~ as)", "note": "as+형용사 원급+as: ~만큼 …한", "spans": ["as annoying as"]},
-    {"tag": "관계대명사 주격 that", "note": "that's too long: 앞의 a paragraph를 수식", "spans": ["that's"]}
+    {"tag": "관계대명사 주격 that", "note": "that's too long: 앞의 a paragraph를 수식", "antecedent": "a paragraph", "spans": ["that's"]}
    ],
    "vocab": [
     {"word": "succession", "meaning": "연속, 잇따름"},

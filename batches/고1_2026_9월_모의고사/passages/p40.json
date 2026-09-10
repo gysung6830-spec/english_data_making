@@ -72,7 +72,7 @@
      "grammar": [
        {"tag":"주어-동사 수일치(단수)","note":"단수주어 The system에 맞춰 monitors/sends","spans":["monitors"]},
        {"tag":"등위접속사 and(동사 병렬)","note":"monitors와 sends를 대등하게 연결","spans":["and"]},
-       {"tag":"주격 관계대명사 that","note":"선행사 an alarm이 alerts의 주어","spans":["that"]}
+       {"tag":"주격 관계대명사 that","note":"선행사 an alarm이 alerts의 주어","antecedent":"an alarm","spans":["that"]}
      ],
      "vocab": [
        {"word":"alert","meaning":"알리다, 경고하다"},
@@ -98,7 +98,7 @@
      "translation": "그 감시 체계는 그것이 우리의 관계적 가치가 떨어지고 있거나 낮다는 것을 감지할 때까지는 일반적으로 무의식적으로 작동한다.",
      "grammar": [
        {"tag":"시간 부사절 접속사 until","note":"'~할 때까지'","spans":["until"]},
-       {"tag":"명사절 접속사 that(목적어절)","note":"detects의 목적어절을 이끎","spans":["that"]},
+       {"tag":"명사절 접속사 that(목적어절)","note":"detects의 목적어절을 이끎","role":"detects의 목적어절","spans":["that"]},
        {"tag":"현재진행형 is falling","note":"'떨어지고 있는' 진행 상황","spans":["is falling"]}
      ],
      "vocab": [
@@ -193,7 +193,7 @@
        {"tag":"전치사 With(부대상황)","note":"'~한 채로, ~해서'","spans":["With"]},
        {"tag":"과거분사 형용사적 용법(후치수식)","note":"value를 뒤에서 꾸밈('결부된')","spans":["tied"]},
        {"tag":"가주어-진주어(it ~ that)","note":"it은 가주어, that절이 진주어","spans":["it","that"]},
-       {"tag":"관계부사 the way(방법)","note":"the way (that) we mobilize ~ '~하는 방식'","spans":["the way"]}
+       {"tag":"관계부사 the way(방법)","note":"the way (that) we mobilize ~ '~하는 방식'","antecedent":"the way","spans":["the way"]}
      ],
      "vocab": [
        {"word":"tied with","meaning":"~와 결부된"},
@@ -297,7 +297,7 @@
      "translation": "자존감은 사람들의 사회적 유대에 문제가 있을 수 있음을 알리는 하나의 감시 기제로서 작동하여, 그들이 관계를 향상시키기 위해 그들의 행동을 조정하도록 해 준다.",
      "grammar": [
        {"tag":"전치사 as(~로서)","note":"'감시 기제로서'","spans":["as"]},
-       {"tag":"주격 관계대명사 that","note":"선행사 a monitoring mechanism이 signals의 주어","spans":["that"]},
+       {"tag":"주격 관계대명사 that","note":"선행사 a monitoring mechanism이 signals의 주어","antecedent":"a monitoring mechanism","spans":["that"]},
        {"tag":"분사구문(결과) allowing","note":"'그래서 ~하게 한다'는 결과를 나타냄","spans":["allowing"]},
        {"tag":"to부정사 부사적 용법(목적)","note":"'관계를 향상시키기 위해'","spans":["to enhance"]}
      ],

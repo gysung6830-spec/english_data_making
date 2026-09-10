@@ -104,7 +104,7 @@
       "english": "The ancient Greeks felt that the visual artist's goal was to copy visual experience.",
       "translation": "고대 그리스인들은 시각 예술가의 목표가 시각적 경험을 모방하는 것이었다고 느꼈다.",
       "grammar": [
-        {"tag": "명사절 접속사 that", "note": "동사 felt의 목적어절을 이끎", "spans": ["that"]},
+        {"tag": "명사절 접속사 that", "note": "동사 felt의 목적어절을 이끎", "role": "felt의 목적어절", "spans": ["that"]},
         {"tag": "to부정사 명사적 용법 (보어)", "note": "was의 보어로 '~하는 것'", "spans": ["to copy"]}
       ],
       "vocab": [
@@ -151,7 +151,7 @@
       "translation": "우리는 안타깝게도, 시간과 날씨의 작용 때문에, 고대 그리스 예술가들로부터의 어떤 회화도 오늘날 존재하지 않는다는 것을 주목해야 한다.",
       "grammar": [
         {"tag": "조동사 must", "note": "'~해야 한다'는 의무·필연", "spans": ["must"]},
-        {"tag": "명사절 접속사 that", "note": "note의 목적어절을 이끎", "spans": ["that"]},
+        {"tag": "명사절 접속사 that", "note": "note의 목적어절을 이끎", "role": "note의 목적어절", "spans": ["that"]},
         {"tag": "전치사 due to", "note": "'~때문에'; 뒤에 명사구가 옴", "spans": ["due to"]},
         {"tag": "부정 주어 no", "note": "no paintings ~ exist: '어떤 회화도 존재하지 않는다'", "spans": ["no paintings"]}
       ],
@@ -178,7 +178,7 @@
       "grammar": [
         {"tag": "전치사 based on", "note": "'~에 근거하여'", "spans": ["based on"]},
         {"tag": "지시대명사 that", "note": "that of ~ = the tale of ~, 앞 명사 tale의 반복을 피함", "spans": ["that of"]},
-        {"tag": "주격 관계대명사 that", "note": "선행사 drawings를 수식", "spans": ["that survive"]}
+        {"tag": "주격 관계대명사 that", "note": "선행사 drawings를 수식", "antecedent": "drawings", "spans": ["that survive"]}
       ],
       "vocab": [
         {"word": "surmise", "meaning": "추측하다, 짐작하다"},
@@ -259,7 +259,7 @@
         {"tag": "분사구문 (접속사+분사)", "note": "While + 현재분사, '~하는 동안'", "spans": ["While painting"]},
         {"tag": "조동사 would", "note": "과거의 습관·경향 '~하곤 했다'", "spans": ["would"]},
         {"tag": "동명사", "note": "avoid는 동명사를 목적어로 취함(making)", "spans": ["making"]},
-        {"tag": "주격 관계대명사 that", "note": "선행사 marks or passages를 수식", "spans": ["that"]}
+        {"tag": "주격 관계대명사 that", "note": "선행사 marks or passages를 수식", "antecedent": "marks or passages", "spans": ["that"]}
       ],
       "vocab": [
         {"word": "fellow", "meaning": "동료의"},
@@ -286,7 +286,7 @@
       "grammar": [
         {"tag": "동명사", "note": "succeeded at + 동명사 making", "spans": ["making"]},
         {"tag": "분사구문 (결과)", "note": "thus demonstrating: 앞 절 전체를 받아 결과를 나타냄", "spans": ["demonstrating"]},
-        {"tag": "명사절 접속사 that", "note": "demonstrating의 목적어절을 이끎", "spans": ["that"]},
+        {"tag": "명사절 접속사 that", "note": "demonstrating의 목적어절을 이끎", "role": "demonstrating의 목적어절", "spans": ["that"]},
         {"tag": "주어-동사 수일치", "note": "단수 주어 the ancient Greek view에 does", "spans": ["does"]}
       ],
       "vocab": [

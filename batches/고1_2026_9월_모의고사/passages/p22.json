@@ -212,8 +212,9 @@
      ]
     },
     {
-     "tag": "관계대명사 계속적 용법",
-     "note": "콤마 뒤 which가 the Law of Attraction를 보충 설명(that 불가)",
+     "tag": "주격 관계대명사(계속적 용법)",
+     "note": "콤마 뒤 which가 the Law of Attraction를 보충 설명(that 불가); which 뒤 states — 절의 주어",
+     "antecedent": "the Law of Attraction",
      "spans": [
       "which"
      ]
@@ -221,6 +222,7 @@
     {
      "tag": "명사절 접속사 that",
      "note": "states의 목적어절 두 개를 and로 병렬 연결",
+     "role": "states의 목적어절(두 개를 and로 병렬)",
      "spans": [
       "that",
       "that"
@@ -312,6 +314,7 @@
     {
      "tag": "명사절 접속사 that (보어절)",
      "note": "is의 보어절을 이끎",
+     "role": "is의 보어절",
      "spans": [
       "that"
      ]
@@ -319,7 +322,10 @@
     {
      "tag": "목적격 관계대명사 생략",
      "note": "all (that) we have to do에서 목적격 관계대명사 생략",
-     "spans": []
+     "antecedent": "all",
+     "spans": [
+      "all"
+     ]
     },
     {
      "tag": "보어 원형부정사",
@@ -397,6 +403,7 @@
     {
      "tag": "가주어 It - 진주어 that절",
      "note": "It은 가주어, that절이 진주어",
+     "role": "It(가주어)의 진주어절(주어 역할)",
      "spans": [
       "It is",
       "that"
@@ -405,6 +412,7 @@
     {
      "tag": "명사절 접속사 that 병렬",
      "note": "진주어 that절 두 개를 and로 병렬",
+     "role": "It(가주어)의 진주어절(and로 병렬된 두 번째)",
      "spans": [
       "and",
       "that"
@@ -520,6 +528,7 @@
     {
      "tag": "관계대명사 what",
      "note": "선행사를 포함해 '~하는 것'; images of what you want",
+     "role": "'~하는 것'(선행사 포함 명사절); 전치사 of의 목적어절",
      "spans": [
       "what"
      ]
@@ -527,6 +536,7 @@
     {
      "tag": "명사절 접속사 that",
      "note": "affirm의 목적어절을 이끎",
+     "role": "affirm의 목적어절",
      "spans": [
       "that"
      ]
@@ -650,6 +660,7 @@
     {
      "tag": "관계형용사 what",
      "note": "what+명사로 '어떤 ~인지'의 명사절",
+     "role": "Consider의 목적어절('어떤 제한적 신념인지')",
      "spans": [
       "what"
      ]
@@ -657,6 +668,7 @@
     {
      "tag": "주격 관계대명사 that",
      "note": "선행사 limiting beliefs를 수식(복수→contradict)",
+     "antecedent": "limiting beliefs",
      "spans": [
       "that"
      ]

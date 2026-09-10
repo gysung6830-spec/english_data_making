@@ -360,6 +360,7 @@
     {
      "tag": "명사절 접속사 that(목적어절)",
      "note": "pretend의 목적어절을 이끈다.",
+     "role": "pretend의 목적어절",
      "spans": [
       "that"
      ]
@@ -454,6 +455,7 @@
     {
      "tag": "의문사절(how)",
      "note": "about의 목적어절, 방법·상태를 나타낸다.",
+     "role": "전치사 about의 목적어절",
      "spans": [
       "how"
      ]
@@ -564,7 +566,10 @@
     {
      "tag": "명사절(that 생략)",
      "note": "think 뒤 목적어절에서 접속사 that이 생략됨.",
-     "spans": []
+     "role": "think의 목적어절",
+     "spans": [
+      "think"
+     ]
     }
    ],
    "vocab": [],
@@ -866,6 +871,7 @@
     {
      "tag": "명사절 접속사 that",
      "note": "bear in mind의 목적어절을 이끈다.",
+     "role": "bear in mind의 목적어절",
      "spans": [
       "that"
      ]
@@ -873,6 +879,7 @@
     {
      "tag": "관계대명사 what(선행사 포함)",
      "note": "~하는 것, 명사절을 이끈다.",
+     "role": "'~하는 것'(선행사 포함 명사절, 주어절)",
      "spans": [
       "what"
      ]

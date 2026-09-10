@@ -315,6 +315,7 @@
     {
      "tag": "목적격 관계대명사 that",
      "note": "선행사 large pieces를 carry의 목적어로 받음",
+     "antecedent": "large pieces",
      "spans": [
       "that"
      ]
@@ -541,6 +542,7 @@
     {
      "tag": "목적격 관계대명사 which",
      "note": "선행사 small fruiting bodies를 eat의 목적어로 받음",
+     "antecedent": "small fruiting bodies",
      "spans": [
       "which"
      ]

@@ -91,7 +91,7 @@
        {"tag":"부분표현 One of+복수명사(단수 취급)","note":"주어의 핵심은 One이라 단수 취급","spans":["One of"]},
        {"tag":"최상급(the most+형용사)","note":"the most fascinating: '가장 매혹적인'","spans":["most"]},
        {"tag":"주어-동사 수일치","note":"단수 주어 One에 맞춰 is","spans":["is"]},
-       {"tag":"명사절 접속사 that(보어절)","note":"is 뒤 that절 전체가 주격보어","spans":["that"]}
+       {"tag":"명사절 접속사 that(보어절)","note":"is 뒤 that절 전체가 주격보어","role":"is의 보어절(주어 insights의 내용)","spans":["that"]}
      ],
      "vocab": [
        {"word":"fascinating","meaning":"매혹적인, 흥미로운"},
@@ -140,7 +140,7 @@
      "id": 3,
      "english": "But the Stoics taught that emotions aren't just automatic reactions.",
      "grammar": [
-       {"tag":"명사절 접속사 that(목적어)","note":"taught의 목적어절을 이끎","spans":["that"]},
+       {"tag":"명사절 접속사 that(목적어)","note":"taught의 목적어절을 이끎","role":"taught의 목적어절","spans":["that"]},
        {"tag":"부분부정/강조(not just)","note":"aren't just: '단지 ~인 것만은 아니다'","spans":["aren't just"]}
      ],
      "vocab": [
@@ -163,7 +163,7 @@
      "english": "They're shaped by how we interpret events.",
      "grammar": [
        {"tag":"수동태(be+p.p.)","note":"They're shaped by: '~에 의해 형성된다'","spans":["shaped by"]},
-       {"tag":"의문사절(how)","note":"how we interpret events: '우리가 사건을 해석하는 방식'","spans":["how"]}
+       {"tag":"의문사절(how)","note":"how we interpret events: '우리가 사건을 해석하는 방식'","role":"전치사 by의 목적어절","spans":["how"]}
      ],
      "vocab": [
        {"word":"shape","meaning":"형성하다, 빚다"},
@@ -183,8 +183,8 @@
      "id": 5,
      "english": "Here's how it works: something happens, you interpret what it means, and that interpretation triggers an emotional response.",
      "grammar": [
-       {"tag":"의문사절(how)","note":"how it works: '그것이 작동하는 방식'","spans":["how"]},
-       {"tag":"명사절(what)","note":"what it means: '그것이 무엇을 의미하는지'","spans":["what"]},
+       {"tag":"의문사절(how)","note":"how it works: '그것이 작동하는 방식'","role":"Here's의 실질적 주어절(작동 방식)","spans":["how"]},
+       {"tag":"명사절(what)","note":"what it means: '그것이 무엇을 의미하는지'","role":"interpret의 목적어절","spans":["what"]},
        {"tag":"지시형용사 that","note":"that interpretation: 앞의 해석을 가리킴","spans":["that interpretation"]},
        {"tag":"주어-동사 수일치","note":"단수 주어 that interpretation에 triggers","spans":["triggers"]}
      ],
@@ -289,7 +289,7 @@
      "english": "This doesn't mean suppressing how you feel; it means examining the story you tell yourself and choosing one that serves you better.",
      "grammar": [
        {"tag":"동명사(목적어)","note":"mean/means의 목적어로 쓰인 동명사","spans":["suppressing","examining","choosing"]},
-       {"tag":"주격 관계대명사(that)","note":"one that serves you better에서 one을 수식","spans":["that"]},
+       {"tag":"주격 관계대명사(that)","note":"one that serves you better에서 one을 수식","antecedent":"one","spans":["that"]},
        {"tag":"재귀대명사(yourself)","note":"you tell yourself: '스스로에게 들려주다'","spans":["yourself"]}
      ],
      "vocab": [

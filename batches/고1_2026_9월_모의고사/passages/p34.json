@@ -157,7 +157,7 @@
       "grammar": [
         {"tag": "최상급", "note": "the most + 형용사로 '가장 ~한'", "spans": ["most powerful"]},
         {"tag": "조동사 cannot", "note": "'~할 수 없다'는 불가능", "spans": ["cannot"]},
-        {"tag": "목적격 관계대명사 생략", "note": "computations 뒤 관계대명사(that) 생략; it takes의 목적어", "spans": ["computations it takes"]},
+        {"tag": "목적격 관계대명사 생략", "note": "computations 뒤 관계대명사(that) 생략; it takes의 목적어", "antecedent": "computations", "spans": ["computations it takes"]},
         {"tag": "to부정사 (부사적)", "note": "it takes ~ to run: '달리는 데 (연산이) 든다'", "spans": ["to run"]}
       ],
       "vocab": [
@@ -186,7 +186,7 @@
       "english": "Wherever our running intelligence is, running is not all conscious to us and is so complicated that only the T-1000 Terminators of our imagination are able to do it.",
       "translation": "우리의 달리기 지능이 어디에 있든, 달리기는 우리에게 전부 의식되는 것은 아니며 너무 복잡해서 오직 우리 상상 속의 T-1000 터미네이터만이 그것을 할 수 있다.",
       "grammar": [
-        {"tag": "복합관계부사 wherever", "note": "'어디에 ~이든'의 양보 부사절", "spans": ["Wherever"]},
+        {"tag": "복합관계사 wherever(양보 부사절)", "note": "'어디에 ~이든'의 양보 부사절; 선행사를 포함하므로 별도 선행사 없음", "spans": ["Wherever"]},
         {"tag": "부분부정 not all", "note": "'전부 ~인 것은 아니다'의 부분 부정", "spans": ["not all"]},
         {"tag": "so~that 결과", "note": "'너무 …해서 ~하다'의 결과", "spans": ["so complicated that"]},
         {"tag": "be able to", "note": "'~할 수 있다'의 능력", "spans": ["are able to"]}
@@ -219,7 +219,7 @@
         {"tag": "이유 부사절 접속사 because", "note": "'~때문에'의 원인", "spans": ["Because"]},
         {"tag": "수동태", "note": "be buried '묻혀 있다'", "spans": ["buried"]},
         {"tag": "have to", "note": "'~해야 한다'의 의무", "spans": ["have to"]},
-        {"tag": "명사절 접속사 that", "note": "accept의 목적어절을 이끎", "spans": ["that"]}
+        {"tag": "명사절 접속사 that", "note": "accept의 목적어절을 이끎", "role": "accept의 목적어절", "spans": ["that"]}
       ],
       "vocab": [
         {"word": "buried", "meaning": "묻힌"},
@@ -244,7 +244,7 @@
       "translation": "그것이 우리 몸이 그것을 하는 방법을 모른다는 것을 뜻하지는 않는다.",
       "grammar": [
         {"tag": "지시대명사 That", "note": "앞 문장 내용 전체를 받는 주어", "spans": ["That"]},
-        {"tag": "명사절 접속사 that 생략", "note": "mean 뒤 목적어절에서 접속사 that 생략(표지 없음)", "spans": []},
+        {"tag": "명사절 접속사 that 생략", "note": "mean 뒤 목적어절에서 접속사 that 생략(동사 mean에 표시)", "role": "mean의 목적어절", "spans": ["mean"]},
         {"tag": "의문사 + to부정사", "note": "how to do '~하는 방법'", "spans": ["how to do"]}
       ],
       "vocab": [
@@ -268,7 +268,7 @@
       "grammar": [
         {"tag": "조동사 may", "note": "'~할 수도 있다'의 가능성", "spans": ["may"]},
         {"tag": "수단의 by + 동명사", "note": "'~함으로써'의 방법", "spans": ["by learning"]},
-        {"tag": "의문사 명사절 what", "note": "seeing의 목적어절 what they are capable of", "spans": ["what"]},
+        {"tag": "의문사 명사절 what", "note": "seeing의 목적어절 what they are capable of", "role": "seeing의 목적어절", "spans": ["what"]},
         {"tag": "동명사 병렬구조", "note": "learning·getting·seeing·accepting이 병렬", "spans": ["getting"]},
         {"tag": "비교급 more~than", "note": "'~보다 더 많이 안다'", "spans": ["more"]}
       ],

@@ -178,6 +178,7 @@
     {
      "tag": "전치사+관계대명사(for which)",
      "note": "the wonder를 수식; we were created for the wonder",
+     "antecedent": "the wonder",
      "spans": [
       "for which"
      ]
@@ -524,8 +525,9 @@
      ]
     },
     {
-     "tag": "관계대명사 that",
-     "note": "the very thing을 수식하는 주격 관계대명사",
+     "tag": "주격 관계대명사 that",
+     "note": "the very thing을 수식하는 주격 관계대명사(that 뒤 will help — 동사)",
+     "antecedent": "the very thing",
      "spans": [
       "that"
      ]
@@ -678,7 +680,10 @@
     {
      "tag": "목적격 관계대명사 생략",
      "note": "diseases (which) they were never meant to have — 목적격 관계대명사 생략",
-     "spans": []
+     "antecedent": "diseases",
+     "spans": [
+      "diseases"
+     ]
     },
     {
      "tag": "be meant to",
@@ -743,7 +748,10 @@
     {
      "tag": "명사절 접속사 that 생략(보어절)",
      "note": "The point is (that) we are ... — 보어절 that 생략",
-     "spans": []
+     "role": "is의 보어절",
+     "spans": [
+      "is"
+     ]
     },
     {
      "tag": "현재진행형",

@@ -165,6 +165,7 @@
     {
      "tag": "관계대명사 what",
      "note": "선행사를 포함한 what; call의 목적어이자 be동사의 보어절",
+     "role": "'~하는 것'(선행사 포함 명사절); call의 목적어절이자 be동사의 보어절",
      "spans": [
       "what"
      ]
@@ -330,6 +331,7 @@
     {
      "tag": "전치사+관계대명사",
      "note": "in which=in a learning game, 뒤에 완전한 절",
+     "antecedent": "a learning game",
      "spans": [
       "in which"
      ]
@@ -681,6 +683,7 @@
     {
      "tag": "명사절 접속사 that",
      "note": "shows의 목적어절을 이끎",
+     "role": "shows의 목적어절",
      "spans": [
       "that"
      ]
@@ -688,6 +691,7 @@
     {
      "tag": "관계대명사 what",
      "note": "선행사 포함; makes의 주어이자 절 전체가 is의 주어",
+     "role": "'~하는 것'(선행사 포함 명사절); 절 전체가 is의 주어절",
      "spans": [
       "what"
      ]
@@ -695,7 +699,10 @@
     {
      "tag": "목적격 관계대명사 생략",
      "note": "engagement (which) the learners have — 목적격 관계대명사가 생략됨",
-     "spans": []
+     "antecedent": "interactivity and engagement",
+     "spans": [
+      "engagement"
+     ]
     }
    ],
    "vocab": [

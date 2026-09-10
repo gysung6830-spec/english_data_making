@@ -498,6 +498,7 @@
     {
      "tag": "주격 관계대명사 that",
      "note": "organization을 수식, 뒤 동사 works.",
+     "antecedent": "an organization",
      "spans": [
       "that"
      ]

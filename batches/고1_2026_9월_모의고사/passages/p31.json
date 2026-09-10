@@ -230,6 +230,7 @@
     {
      "tag": "주격 관계대명사(who)",
      "note": "선행사 the person을 수식하는 주격 관계사",
+     "antecedent": "the person",
      "spans": [
       "who"
      ]
@@ -355,6 +356,7 @@
     {
      "tag": "목적격 관계대명사(that)",
      "note": "one that nobody ... likes에서 likes의 목적어",
+     "antecedent": "one",
      "spans": [
       "that"
      ]
@@ -433,6 +435,7 @@
     {
      "tag": "관계대명사 what",
      "note": "what they are: '그것들이 무엇인지'",
+     "role": "'~하는 것'(선행사 포함 명사절), because of의 목적어절",
      "spans": [
       "what"
      ]
@@ -440,6 +443,7 @@
     {
      "tag": "의문사절/명사절(who)",
      "note": "who we are: '우리가 누구인지'",
+     "role": "'우리가 누구인지'를 뜻하는 명사절(because of의 목적어절)",
      "spans": [
       "who"
      ]
@@ -645,14 +649,16 @@
     },
     {
      "tag": "전치사+관계대명사(by which)",
-     "note": "앞 내용을 받아 부연 설명",
+     "note": "선행사 the wrong people을 받아 부연 설명",
+     "antecedent": "the wrong people",
      "spans": [
       "by which"
      ]
     },
     {
-     "tag": "관계대명사(that)",
-     "note": "a way that doesn't flatter me에서 way를 수식",
+     "tag": "주격 관계대명사(that)",
+     "note": "a way that doesn't flatter me에서 way를 수식(that이 절의 주어)",
+     "antecedent": "a way",
      "spans": [
       "that"
      ]
