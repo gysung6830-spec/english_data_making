@@ -103,9 +103,7 @@
     {"en": "in your [[blood]]", "ko": "당신의 [[혈액]] 속에"},
     {"en": "as time [[awake]] increases.", "ko": "[[깨어 있는]] 시간이 늘어날수록."}
    ],
-   "misreads": [
-    {"statement": "이 화학물질은 혈액 속에 쌓이면서 동시에 당신의 혈압을 높인다.", "verdict": "X", "trap_type": "무관정보", "anchor": "builds up in your blood as time awake increases", "why": "본문은 혈액 속에 쌓인다고만 하며, 혈압을 높인다는 내용은 어디에도 없다."}
-   ]
+   "misreads": []
   },
   {
    "id": 4,

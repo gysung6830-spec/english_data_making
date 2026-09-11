@@ -128,9 +128,7 @@
     {"en": "require [[amounts]] of energy", "ko": "많은 [[양]]의 에너지를 필요로 하는데"},
     {"en": "that is only possible to [[produce]] with fossil energy.", "ko": "그것은 화석 에너지로만 [[생산]] 가능하다."}
    ],
-   "misreads": [
-    {"statement": "콘크리트와 강철은 재생 에너지 설비에서 가장 많은 비용을 차지하는 요소다.", "verdict": "X", "trap_type": "무관정보", "anchor": "production of concrete structures and steel elements", "why": "본문은 이들 생산에 화석 에너지가 필요하다고만 했지, 비용 비중이 가장 크다고는 하지 않았다."}
-   ],
+   "misreads": [],
    "mistips": ["require의 주어를 energy로 읽으면 안 돼 — 주어는 '[[production]] ... of concrete structures and steel elements'야."]
   },
   {

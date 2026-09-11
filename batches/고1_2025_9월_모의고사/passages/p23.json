@@ -132,9 +132,7 @@
     {"en": "or changing [[sounds]] that are normally outside the range", "ko": "또는 보통 범위 밖에 있는 [[소리]]를 바꾸는 것과 같이"},
     {"en": "of what human ears can hear into audible [[signals]].", "ko": "인간의 귀가 들을 수 있는, 들리는 [[신호]]로"}
    ],
-   "misreads": [
-    {"statement": "자외선 스펙트럼에 기반한 가시 이미지는 인간의 귀가 들을 수 있는 소리보다 더 정확하다.", "verdict": "X", "trap_type": "무관정보", "anchor": "creating visible images based on the ultraviolet spectrum of light", "why": "본문은 감각 범위 확장의 예시일 뿐, 이미지와 소리의 정확성을 비교한 언급은 없음.", "english": "Ultraviolet images are more accurate than the sounds humans can hear."}
-   ],
+   "misreads": [],
    "mistips": ["'what human ears can hear'를 의문사 '무엇을'로 읽으면 안 돼 — (바르게는) 인간의 귀가 들을 수 [[있는 것]]."]
   },
   {

@@ -188,9 +188,7 @@
     {"en":"to [[develop]] your class","ko":"당신의 수업을 [[전개하]]기 위해"},
     {"en":"with an effective [[start]].","ko":"효과적인 [[출발]]로"}
    ],
-   "misreads": [
-    {"statement":"필자는 시작 루틴이 학생의 학업 성적을 직접 올린다고 명시한다.","verdict":"X","trap_type":"무관정보","anchor":"establish an opening routine to develop your class","why":"성적 향상은 언급이 없고, 효과적 출발로 수업을 전개하는 것을 말할 뿐임"}
-   ],
+   "misreads": [],
    "mistips": ["establish an opening routine 를 '루틴을 없애라'로 읽으면 안 돼 — (바르게는) [[루틴을 마련·확립하라]]"]
   }
  ]

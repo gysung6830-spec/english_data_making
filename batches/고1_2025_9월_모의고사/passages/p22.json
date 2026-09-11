@@ -97,9 +97,7 @@
     {"en":"These activities help [[improve]]","ko":"이런 활동들은 [[향상시키]]는 것을 돕는다"},
     {"en":"strength, [[flexibility]], and endurance.","ko":"강인함, [[유연성]], 내구력을"}
    ],
-   "misreads": [
-    {"statement":"이 활동들은 근력·유연성·지구력뿐 아니라 시력도 향상시킨다고 한다.","verdict":"X","trap_type":"무관정보","anchor":"improve strength, flexibility, and endurance","why":"시력 향상은 언급이 없고 근력·유연성·지구력만 제시됨"}
-   ]
+   "misreads": []
   },
   {
    "id": 4,

@@ -173,8 +173,7 @@
     {"en": "then the number [[quoted]] here is fine.", "ko": "그러면 여기 [[인용된]] 숫자로 괜찮다."}
    ],
    "misreads": [
-    {"statement": "내일 태양이 몇 분에 뜰지에만 관심 있다면, 여기 인용된 숫자로는 부족하다.", "verdict": "X", "trap_type": "인과조건", "anchor": "then the number quoted here is fine", "why": "그 정도 목적이라면 인용된 숫자로 '괜찮다(fine)'고 했으므로 부족하지 않다."},
-    {"statement": "여기 인용된 숫자는 일출 시각뿐 아니라 일몰 시각까지 정확히 알려준다.", "verdict": "X", "trap_type": "무관정보", "anchor": "what minute the sun will rise tomorrow", "why": "본문은 일출(rise) 시각만 언급하며, 일몰 시각까지 알려준다는 내용은 없다."}
+    {"statement": "내일 태양이 몇 분에 뜰지에만 관심 있다면, 여기 인용된 숫자로는 부족하다.", "verdict": "X", "trap_type": "인과조건", "anchor": "then the number quoted here is fine", "why": "그 정도 목적이라면 인용된 숫자로 '괜찮다(fine)'고 했으므로 부족하지 않다."}
    ]
   },
   {

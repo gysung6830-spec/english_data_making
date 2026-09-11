@@ -185,9 +185,7 @@
     {"en": "they [[believe]] they will be happy", "ko": "그들은 자신이 행복할 것이라 [[믿는]]다"},
     {"en": "for the [[rest]] of their lives.", "ko": "그들의 [[남은]] 인생 동안."}
    ],
-   "misreads": [
-    {"statement": "아이들은 원하던 장난감을 얻기 위해 오랫동안 부모를 조른다.", "verdict": "X", "trap_type": "무관정보", "anchor": "When they get what they've longed for", "why": "본문은 원하던 것을 '얻은 뒤'의 믿음만 다루며, 조르는 과정은 언급되지 않았다."}
-   ]
+   "misreads": []
   },
   {
    "id": 8,

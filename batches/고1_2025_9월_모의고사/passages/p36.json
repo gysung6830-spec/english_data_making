@@ -198,8 +198,7 @@
     {"en": "without taking in any [[freshwater]] at all.", "ko": "[[담수]]를 전혀 섭취하지 않고"}
    ],
    "misreads": [
-    {"statement": "사막 거북은 담수를 전혀 마시지 않고도 1년을 버틸 수 있다.", "verdict": "O"},
-    {"statement": "A desert tortoise must drink freshwater every month.", "verdict": "X", "trap_type": "인과조건", "anchor": "can go a full year without taking in any freshwater at all", "why": "1년 내내 담수를 전혀 섭취하지 않고도 지낼 수 있음", "english": true, "killer": false}
+    {"statement": "사막 거북은 담수를 전혀 마시지 않고도 1년을 버틸 수 있다.", "verdict": "O"}
    ]
   },
   {
@@ -222,7 +221,6 @@
     {"en": "not to stop and help the [[slow-movers]] across the road.", "ko": "멈춰서 그 [[느림보]]들이 도로를 건너도록 돕지 말라고"}
    ],
    "misreads": [
-    {"statement": "공원 순찰대원들은 거북이 도로를 빨리 건너도록 도로에 먹이를 놓아 둔다.", "verdict": "X", "trap_type": "무관정보", "anchor": "remind visitors not to stop and help the slow-movers across the road", "why": "본문엔 먹이 얘기가 없고 방문객에게 돕지 말라고 상기시킬 뿐임", "killer": false},
     {"statement": "필자는 방문객이 거북을 도로 건너편으로 옮겨 주는 것을 권장한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "remind visitors not to stop and help the slow-movers across the road", "why": "필자는 오히려 돕지 말라(not to stop and help)는 입장을 전함", "killer": false}
    ]
   },

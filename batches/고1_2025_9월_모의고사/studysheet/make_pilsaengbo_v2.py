@@ -240,9 +240,10 @@ body{font-family:'NanumSquareRound',"Malgun Gothic",sans-serif; color:#22262b; f
 :root{--green:#2c6444;--green-d:#1f4d33;--green-bg:#e7f0ea;--green-soft:#eef5f0;
   --indigo:#575495;--indigo-bg:#ecebf4;--amber:#a9781f;--red:#a83c2c;--line:#d7ddd6;--sub:#5c636b;}
 .psg{break-before:page;} .psg:first-of-type{break-before:auto;}
-.p1{--ovsc:1; min-height:256mm; display:flex; flex-direction:column;}
-.p1body{flex:1 1 auto; display:flex; flex-direction:column;}
-.p1spacer{flex:1 1 0; min-height:4px;}
+/* 목차1·2·3: 일반 블록 흐름(위정렬). 한 페이지 보장은 지문별 shrink-to-fit(scale)이 담당.
+   flex min-height 채움은 WeasyPrint 분할 오류로 과축소·큰 여백을 유발해 폐기. */
+.p1{--ovsc:1;}
+.p1 .sec + .sec{margin-top:calc(9px*var(--ovsc));}
 /* 목차 1·2·3(원문·어휘·구조도) 한 페이지 보장: 지문별 --ovsc 로 폰트/여백 축소(shrink-to-fit) */
 .p1 .sec-t{font-size:calc(11pt*var(--ovsc));}
 .p1 .sec-d{font-size:calc(8pt*var(--ovsc));}
@@ -355,11 +356,10 @@ def render_overview(p, teacher, scale=1.0):
     """목차 1 원문 · 2 어휘 · 3 글의 구조도 — 항상 한 페이지(shrink-to-fit: scale 로 폰트·여백 축소)."""
     ov=p["overview"]; no=esc(p["item_no"].strip()); sents=p["sentences"]
     st=f' style="--ovsc:{scale:.3f}"' if scale and scale<0.999 else ''
-    h=[f'<div class="psg"><div class="p1"{st}>'+phead(p)+'<div class="p1body">']
+    h=[f'<div class="psg"><div class="p1"{st}>'+phead(p)]
     h.append('<div class="sec">'+sec_head(1,"원문"))
     body=" ".join(f'<span class="sn">{s["id"]}</span>{esc(s["english"])}' for s in sents)
     h.append(f'<div class="panel orig">{body}</div></div>')
-    h.append('<div class="p1spacer"></div>')
     h.append('<div class="sec">'+sec_head(2,"어휘 리스트"))
     seen=set(); rows=[]
     for s in sents:
@@ -368,7 +368,6 @@ def render_overview(p, teacher, scale=1.0):
             if not w or w.lower() in seen: continue
             seen.add(w.lower()); rows.append(f'<div class="row"><span class="w">{esc(w)}</span> <span class="m">{esc(v.get("meaning",""))}</span></div>')
     h.append(f'<div class="panel voc">{"".join(rows)}</div></div>')
-    h.append('<div class="p1spacer"></div>')
     h.append('<div class="sec">'+sec_head(3,"글의 구조도 파악","핵심어(영어)를 단서로 각 단계 내용을 기호로 정리(→ ⇒ ↔ = + ↑↓)"))
     km=kw_map(p); notes=NOTES.get(no) or NOTES.get(p["item_no"]) or []
     h.append('<div class="panel"><table class="flow"><tr>'
@@ -388,7 +387,7 @@ def render_overview(p, teacher, scale=1.0):
             cell='<div class="sumblank"></div>'
         h.append(f'<tr><td class="stg">{esc(b["stage"])}<span class="rg">{fmt_range(b["sentence_range"])}</span></td><td class="kwc">{kwc}</td><td>{cell}</td></tr>')
     h.append('</table></div></div>')
-    h.append('</div></div></div>')  # p1body, p1, psg
+    h.append('</div></div>')  # p1, psg
     return "".join(h)
 
 def render_trans(p, teacher):

@@ -168,9 +168,7 @@
     {"en": "The [[camera]], like the human eye,", "ko": "[[카메라]]는, 인간의 눈처럼,"},
     {"en": "sees only [[shapes]] and colors.", "ko": "오직 [[형태]]와 색깔만을 본다."}
    ],
-   "misreads": [
-    {"statement": "카메라는 인간의 눈보다 형태와 색을 더 정확하게 볼 수 있다.", "verdict": "X", "trap_type": "무관정보", "anchor": "sees only shapes and colors", "why": "카메라가 형태와 색만 본다고 했을 뿐, 눈보다 더 정확하다는 언급은 없다."}
-   ]
+   "misreads": []
   },
   {
    "id": 7,

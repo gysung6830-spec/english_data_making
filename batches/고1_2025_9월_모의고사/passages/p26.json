@@ -51,9 +51,7 @@
    "chunks": [
     {"en": "Roger Payne was born in [[Manhattan]] in 1935.", "ko": "Roger Payne은 1935년 [[맨해튼]]에서 태어났다"}
    ],
-   "misreads": [
-    {"statement": "Roger Payne은 1935년 맨해튼에서 태어났다.", "verdict": "O"}
-   ],
+   "misreads": [],
    "mistips": []
   },
   {
@@ -184,9 +182,7 @@
     {"en": "worldwide, including the Voyage of the [[Odyssey]]", "ko": "전 세계적으로, Voyage of the [[Odyssey]]를 포함하여"},
     {"en": "from 2000 to 2005, which studied ocean [[pollution]].", "ko": "2000년부터 2005년까지의, 그런데 그것은 해양 [[오염]]을 연구했다"}
    ],
-   "misreads": [
-    {"statement": "Voyage of the Odyssey는 해양 오염이 아니라 고래의 의사소통을 연구했다.", "verdict": "X", "trap_type": "주체대상", "anchor": "the Voyage of the Odyssey from 2000 to 2005, which studied ocean pollution", "why": "이 항해가 연구한 대상은 '해양 오염'이므로 의사소통 연구라는 진술은 틀림.", "english": "The Voyage of the Odyssey studied whale communication, not ocean pollution."}
-   ],
+   "misreads": [],
    "mistips": []
   },
   {

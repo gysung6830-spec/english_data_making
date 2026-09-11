@@ -154,8 +154,7 @@
     {"en": "\"automata [[studies]].\"", "ko": "'자동 장치 [[연구]]'라는"}
    ],
    "misreads": [
-    {"statement": "'인공지능'이라는 용어를 처음 만들어낸 사람은 Alan Turing 이다.", "verdict": "X", "trap_type": "주체대상", "anchor": "MIT professor John McCarthy coined \"artificial intelligence,\"", "why": "용어를 만든 사람은 Turing 이 아니라 McCarthy 임", "killer": false},
-    {"statement": "McCarthy 가 '인공지능'이라는 표현을 만든 것은 맞지만, 그것은 Turing 이 쓰던 표현을 대체하기 위해서였다.", "verdict": "△", "trap_type": "무관정보", "anchor": "replacing the previously used expression \"automata studies.\"", "why": "대체된 것은 Turing 의 표현이 아니라 '자동 장치 연구(automata studies)'임", "killer": false}
+    {"statement": "'인공지능'이라는 용어를 처음 만들어낸 사람은 Alan Turing 이다.", "verdict": "X", "trap_type": "주체대상", "anchor": "MIT professor John McCarthy coined \"artificial intelligence,\"", "why": "용어를 만든 사람은 Turing 이 아니라 McCarthy 임", "killer": false}
    ]
   },
   {

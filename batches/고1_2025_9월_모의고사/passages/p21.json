@@ -203,9 +203,7 @@
     {"en":"and most heavier atoms are [[older]]","ko":"대부분의 더 무거운 원자는 더 [[오래되]]었다"},
     {"en":"than the Sun and [[Earth]].","ko":"[[태양]]과 지구보다"}
    ],
-   "misreads": [
-    {"statement":"이 글은 더 무거운 원자일수록 인체 건강에 해롭다고 설명한다.","verdict":"X","trap_type":"무관정보","anchor":"most heavier atoms are older than the Sun and Earth","why":"무게와 건강 해로움은 언급이 없고, 오직 원자의 '나이'만 비교함"}
-   ]
+   "misreads": []
   },
   {
    "id": 9,

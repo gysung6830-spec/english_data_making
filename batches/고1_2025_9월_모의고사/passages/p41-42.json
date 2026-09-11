@@ -123,9 +123,7 @@
     {"en": "[[chances]] are you would feel", "ko": "당신은 느낄 [[가능성]]이 있다"},
     {"en": "the salesperson didn't [[care]].", "ko": "그 판매원이 [[신경]] 쓰지 않는다고."}
    ],
-   "misreads": [
-    {"statement": "패션 판매원은 다른 업종보다 이 표현을 특히 자주 사용한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "a fashion salesperson approached you", "why": "본문은 패션 판매원을 예로 들 뿐, 업종 간 사용 빈도를 비교하지는 않는다."}
-   ]
+   "misreads": []
   },
   {
    "id": 5,

@@ -57,9 +57,7 @@
     {"en": "of high school [[students]] on that afternoon,", "ko": "그날 오후에 [[고등학생들]]로,"},
     {"en": "Dave was [[thirsty]].", "ko": "Dave는 [[목이 말랐다]]."}
    ],
-   "misreads": [
-    {"statement": "식당이 붐빈 것은 Dave 때문이었다.", "verdict": "X", "trap_type": "주체대상", "anchor": "the cafeteria was full of high school students", "why": "식당을 가득 채운 것은 고등학생들이며 Dave와는 무관하다.", "killer": false, "english": false, "integrative": false}
-   ],
+   "misreads": [],
    "mistips": ["'While ~'을 '잠깐'으로 읽으면 안 돼 — 여기선 '[[~하는 동안]]'의 대조 접속사"]
   },
   {

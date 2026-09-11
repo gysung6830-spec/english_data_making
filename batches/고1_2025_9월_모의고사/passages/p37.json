@@ -90,9 +90,7 @@
    "chunks": [
     {"en": "What [[happens]]?", "ko": "무슨 일이 [[일어날까]]?"}
    ],
-   "misreads": [
-    {"statement": "이제 무슨 일이 일어나는지 묻는 질문이다.", "verdict": "O"}
-   ]
+   "misreads": []
   },
   {
    "id": 4,
