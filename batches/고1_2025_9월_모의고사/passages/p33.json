@@ -44,8 +44,8 @@
    "id": 1,
    "english": "One of the things that makes uncertainty difficult for members of the public to appreciate is that the significance of uncertainty is relative.",
    "grammar": [
-    {"tag": "관계대명사 that", "note": "the things 수식", "spans": ["that"]},
-    {"tag": "주어-동사 수일치 One ~ is", "note": "단수 주어 + is", "spans": ["is"]}
+    {"tag": "주격 관계대명사 that", "note": "the things 수식(that makes ~)", "antecedent": "the things", "spans": ["that"]},
+    {"tag": "주어-동사 수일치 One ~ is", "note": "단수 주어 One + is", "spans": ["appreciate is"]}
    ],
    "vocab": [
     {"word": "uncertainty", "meaning": "불확실성"},
@@ -92,7 +92,7 @@
    "english": "This seems relatively precise; after all, using six significant digits means I know the distance to an accuracy of one part in a million or so.",
    "grammar": [
     {"tag": "동명사 주어 using", "note": "using ~ 가 주어", "spans": ["using"]},
-    {"tag": "목적어절 means (that)", "note": "that 생략된 명사절", "spans": ["means"]}
+    {"tag": "목적어절 means (that)", "note": "that 생략된 명사절", "role": "means의 목적어절", "spans": ["means"]}
    ],
    "vocab": [
     {"word": "relatively", "meaning": "상대적으로"},
@@ -137,8 +137,8 @@
    "id": 5,
    "english": "Whether or not the quoted number is \"precise\" therefore depends on what I'm intending to do with it.",
    "grammar": [
-    {"tag": "명사절 주어 whether", "note": "~인지 아닌지가 주어", "spans": ["Whether or not"]},
-    {"tag": "관계대명사 what", "note": "선행사 포함, on의 목적어", "spans": ["what"]}
+    {"tag": "명사절 주어 whether", "note": "~인지 아닌지가 주어", "role": "주어절", "spans": ["Whether or not"]},
+    {"tag": "관계대명사 what", "note": "선행사 포함, on의 목적어", "role": "on의 목적어절, '~하는 것'(선행사 포함 명사절)", "spans": ["what"]}
    ],
    "vocab": [
     {"word": "quoted number", "meaning": "인용된 숫자"},
@@ -160,7 +160,7 @@
    "english": "If I care only about what minute the sun will rise tomorrow, then the number quoted here is fine.",
    "grammar": [
     {"tag": "조건 부사절 if", "note": "만약 ~라면", "spans": ["If"]},
-    {"tag": "의문사절 what minute", "note": "about의 목적어절", "spans": ["what minute"]}
+    {"tag": "의문사절 what minute", "note": "about의 목적어절", "role": "about의 목적어절", "spans": ["what minute"]}
    ],
    "vocab": [
     {"word": "care about", "meaning": "~에 관심을 두다"},

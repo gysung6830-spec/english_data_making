@@ -43,7 +43,7 @@
    "id": 1,
    "english": "A morally good person is one who does morally bad actions significantly less often than most and does morally good ones significantly more often than most.",
    "grammar": [
-    {"tag": "주격 관계대명사 who", "note": "one who does ~: ~하는 사람", "spans": ["who"]},
+    {"tag": "주격 관계대명사 who", "note": "one who does ~: ~하는 사람", "spans": ["who"], "antecedent": "one"},
     {"tag": "비교 less/more often than", "note": "less often than most: 대부분보다 덜 자주", "spans": ["less often than most"]}
    ],
    "vocab": [
@@ -108,7 +108,7 @@
    "id": 4,
    "english": "A person who unintentionally prevents harm to others and does not harm them simply because things do not turn out as she intends is not morally good.",
    "grammar": [
-    {"tag": "주격 관계대명사 who", "note": "A person who ~: ~하는 사람", "spans": ["who"]},
+    {"tag": "주격 관계대명사 who", "note": "A person who ~: ~하는 사람", "spans": ["who"], "antecedent": "A person"},
     {"tag": "이유 접속사 because", "note": "because things do not turn out ~: ~ 때문에", "spans": ["because"]},
     {"tag": "turn out(결과)", "note": "turn out as she intends: 그녀가 의도한 대로 되다", "spans": ["turn out"]}
    ],
@@ -181,7 +181,7 @@
    "id": 7,
    "english": "A person who always tries to prevent harm but never does, is not generally thought of as morally good.",
    "grammar": [
-    {"tag": "주격 관계대명사 who", "note": "A person who ~: ~하는 사람", "spans": ["who"]},
+    {"tag": "주격 관계대명사 who", "note": "A person who ~: ~하는 사람", "spans": ["who"], "antecedent": "A person"},
     {"tag": "수동태 be thought of as", "note": "is not thought of as ~: ~로 여겨지지 않다", "spans": ["thought of as"]}
    ],
    "vocab": [
@@ -202,7 +202,7 @@
    "id": 8,
    "english": "Of such a person, it may be said that she means well; but, contrary to Kant, some results are necessary before she is regarded as morally good.",
    "grammar": [
-    {"tag": "가주어 it + that절", "note": "it may be said that ~: ~라고 말할 수 있다", "spans": ["it may be said"]},
+    {"tag": "가주어 it + that절", "note": "it may be said that ~: ~라고 말할 수 있다", "spans": ["it may be said"], "role": "진주어절(it 이 가리키는 that절)"},
     {"tag": "전치사구 contrary to", "note": "contrary to Kant: 칸트와는 달리", "spans": ["contrary to"]},
     {"tag": "시간 접속사 before", "note": "before she is regarded ~: ~여겨지기 전에", "spans": ["before"]}
    ],

@@ -65,7 +65,7 @@
    "english": "In viewing a scene, we establish unconscious hierarchies that reflect our functional relationship to objects and our momentary priorities.",
    "grammar": [
     {"tag": "전치사+동명사", "note": "In+동명사: ~할 때/~하면서", "spans": ["In viewing"]},
-    {"tag": "주격 관계대명사 that", "note": "선행사 hierarchies 를 수식", "spans": ["that"]}
+    {"tag": "주격 관계대명사 that", "note": "선행사 hierarchies 를 수식", "spans": ["that"], "antecedent": "hierarchies"}
    ],
    "vocab": [
     {"word": "establish", "meaning": "확립하다, 세우다"},
@@ -135,8 +135,8 @@
    "id": 5,
    "english": "The functional relationship we have with objects creates visual expectations that interfere with our ability to see \"like a camera.\"",
    "grammar": [
-    {"tag": "목적격 관계대명사 생략", "note": "relationship (that) we have with objects", "spans": ["relationship we have"]},
-    {"tag": "주격 관계대명사 that", "note": "선행사 visual expectations 수식", "spans": ["that interfere"]}
+    {"tag": "목적격 관계대명사 생략", "note": "relationship (that) we have with objects", "spans": ["relationship we have"], "antecedent": "functional relationship"},
+    {"tag": "주격 관계대명사 that", "note": "선행사 visual expectations 수식", "spans": ["that interfere"], "antecedent": "visual expectations"}
    ],
    "vocab": [
     {"word": "functional relationship", "meaning": "기능적 관계"},
@@ -176,7 +176,7 @@
    "id": 7,
    "english": "It documents the world impartially through a lens that is similar to the eye.",
    "grammar": [
-    {"tag": "주격 관계대명사 that", "note": "선행사 a lens 를 수식", "spans": ["that"]}
+    {"tag": "주격 관계대명사 that", "note": "선행사 a lens 를 수식", "spans": ["that"], "antecedent": "a lens"}
    ],
    "vocab": [
     {"word": "document", "meaning": "기록하다"},
@@ -224,7 +224,7 @@
    "english": "And because of their flatness, photographs often contain areas that appear as unrecognizable colors and shapes.",
    "grammar": [
     {"tag": "전치사구 because of", "note": "~때문에(뒤에 명사)", "spans": ["because of"]},
-    {"tag": "주격 관계대명사 that", "note": "선행사 areas 를 수식", "spans": ["that appear"]}
+    {"tag": "주격 관계대명사 that", "note": "선행사 areas 를 수식", "spans": ["that appear"], "antecedent": "areas"}
    ],
    "vocab": [
     {"word": "flatness", "meaning": "평면성"},

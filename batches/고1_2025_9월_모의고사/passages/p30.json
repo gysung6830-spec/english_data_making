@@ -44,7 +44,7 @@
      "english": "For a species born in a time when resources were limited and dangers were great, our natural tendency to share and cooperate is complicated when resources are plenty and outside dangers are few.",
      "grammar": [
        {"tag":"분사 born","note":"born in a time가 species를 후치수식","spans":["born"]},
-       {"tag":"관계부사 when","note":"a time을 수식하는 when절","spans":["when"]}
+       {"tag":"관계부사 when","note":"a time을 수식하는 when절","antecedent":"a time","spans":["when resources were"]}
      ],
      "vocab": [
        {"word":"tendency","meaning":"성향, 경향"},
@@ -68,7 +68,7 @@
      "id": 2,
      "english": "When we have less, we tend to be more open to sharing what we have.",
      "grammar": [
-       {"tag":"관계대명사 what","note":"선행사 포함 what, sharing의 목적어","spans":["what"]},
+       {"tag":"관계대명사 what","note":"선행사 포함 what, sharing의 목적어","role":"sharing의 목적어절('~하는 것')","spans":["what"]},
        {"tag":"비교급 more","note":"more open, more+형용사","spans":["more"]}
      ],
      "vocab": [

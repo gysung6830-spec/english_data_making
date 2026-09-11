@@ -176,7 +176,7 @@
    "english": "This is the force called friction, which tends to slow down moving things by acting in the direction opposite to movement, that is backwards.",
    "grammar": [
     {"tag": "과거분사 후치수식", "note": "the force called friction: 마찰력이라 불리는 힘", "spans": ["called"]},
-    {"tag": "계속적 용법 which", "note": "which tends to ~: 그리고 그것은 ~", "spans": ["which"]},
+    {"tag": "계속적 용법 which", "note": "which tends to ~: 그리고 그것은 ~", "spans": ["which"], "antecedent": "the force called friction"},
     {"tag": "by+동명사(수단)", "note": "by acting ~: 작용함으로써", "spans": ["by acting"]}
    ],
    "vocab": [
@@ -201,7 +201,7 @@
    "english": "Even without the brakes on, there are other friction forces acting on you and your bicycle, which also slow you down.",
    "grammar": [
     {"tag": "현재분사 후치수식", "note": "forces acting on you ~: 명사를 뒤에서 꾸미는 -ing구", "spans": ["acting on you and your bicycle"]},
-    {"tag": "계속적 용법 which", "note": "which also slow you down: 그리고 그것도 ~", "spans": ["which"]}
+    {"tag": "계속적 용법 which", "note": "which also slow you down: 그리고 그것도 ~", "spans": ["which"], "antecedent": "other friction forces"}
    ],
    "vocab": [
     {"word": "friction force", "meaning": "마찰력"},
@@ -240,7 +240,7 @@
    "id": 11,
    "english": "Another is air resistance, which you can feel, pushing you backwards as you and the bicycle move forwards.",
    "grammar": [
-    {"tag": "계속적 용법 which(삽입)", "note": "which you can feel: 삽입된 관계절", "spans": ["which you can feel"]},
+    {"tag": "계속적 용법 which(삽입)", "note": "which you can feel: 삽입된 관계절", "spans": ["which you can feel"], "antecedent": "air resistance"},
     {"tag": "현재분사 후치수식", "note": "pushing you backwards: air resistance 를 이어 설명", "spans": ["pushing"]}
    ],
    "vocab": [
@@ -263,7 +263,7 @@
    "english": "When you apply these ideas to something around you, like a cart, you can see what could be generating friction: mainly the axles rubbing on the body as they rotate.",
    "grammar": [
     {"tag": "시간 접속사 When", "note": "When you apply ~: ~할 때", "spans": ["When"]},
-    {"tag": "의문사절 목적어 what", "note": "see what could be generating ~: 무엇이 ~하는지", "spans": ["what could be generating"]},
+    {"tag": "의문사절 목적어 what", "note": "see what could be generating ~: 무엇이 ~하는지", "spans": ["what could be generating"], "role": "see의 목적어절"},
     {"tag": "현재분사 후치수식", "note": "the axles rubbing on the body: 본체에 닿는 축들", "spans": ["rubbing on the body"]}
    ],
    "vocab": [

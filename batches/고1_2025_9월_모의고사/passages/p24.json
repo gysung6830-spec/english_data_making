@@ -160,7 +160,7 @@
    "english": "Consequently, the correlation between animal experimentation and medical discovery is the result of legal necessity, not evidence that animal experimentation led to medical advances.",
    "grammar": [
     {"tag": "A, not B (대조)", "note": "'A이지 B가 아니다'로 대비", "spans": ["not evidence"]},
-    {"tag": "동격의 that", "note": "evidence 의 내용을 that절이 설명", "spans": ["that"]}
+    {"tag": "동격의 that", "note": "evidence 의 내용을 that절이 설명", "role": "evidence와 동격절", "spans": ["that"]}
    ],
    "vocab": [
     {"word": "consequently", "meaning": "따라서, 결과적으로"},
@@ -183,7 +183,7 @@
    "english": "Moreover, several influential physicians have offered historical evidence that animal experimentation has not been as responsible for biomedical discovery as defenders suggest.",
    "grammar": [
     {"tag": "원급 비교 (as ~ as)", "note": "'옹호자가 주장하는 만큼 ~하지는 않다'", "spans": ["as responsible", "as defenders"]},
-    {"tag": "동격의 that", "note": "evidence 의 내용을 that절이 설명", "spans": ["that"]}
+    {"tag": "동격의 that", "note": "evidence 의 내용을 that절이 설명", "role": "evidence와 동격절", "spans": ["that"]}
    ],
    "vocab": [
     {"word": "influential", "meaning": "영향력 있는"},

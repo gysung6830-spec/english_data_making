@@ -64,7 +64,7 @@
    "id": 2,
    "english": "When you breathe, for example, only some of the atoms that you inhale are exhaled in your next breath.",
    "grammar": [
-    {"tag":"목적격 관계대명사 that","note":"the atoms that you inhale: 목적격 that","spans":["that"]},
+    {"tag":"목적격 관계대명사 that","note":"the atoms that you inhale: 목적격 that","antecedent":"the atoms","spans":["that"]},
     {"tag":"수동태","note":"are exhaled: 내쉬어진다(수동)","spans":["are exhaled"]}
    ],
    "vocab": [
@@ -107,7 +107,7 @@
    "id": 4,
    "english": "You don't \"own\" the atoms that make up your body; you borrow them.",
    "grammar": [
-    {"tag":"주격 관계대명사 that","note":"the atoms that make up: 주격 that","spans":["that"]},
+    {"tag":"주격 관계대명사 that","note":"the atoms that make up: 주격 that","antecedent":"the atoms","spans":["that"]},
     {"tag":"세미콜론 대조","note":"; 소유(own) vs 빌림(borrow) 대조","spans":[";"]}
    ],
    "vocab": [
@@ -190,7 +190,7 @@
    "english": "The origin of the lightest atoms goes back to the origin of the universe, and most heavier atoms are older than the Sun and Earth.",
    "grammar": [
     {"tag":"비교급 + than","note":"older than: ~보다 오래된","spans":["older than"]},
-    {"tag":"등위접속사 and(문장 연결)","note":"and most heavier ~: 두 절을 연결","spans":["and"]}
+    {"tag":"등위접속사 and(문장 연결)","note":"and most heavier ~: 두 절을 연결","spans":["and most"]}
    ],
    "vocab": [
     {"word":"origin","meaning":"기원"},
@@ -211,7 +211,7 @@
    "id": 9,
    "english": "There are atoms in your body that have existed since the first moments of time, circulating throughout the universe among limitless forms, both living and nonliving.",
    "grammar": [
-    {"tag":"주격 관계대명사 that(완료)","note":"atoms that have existed: ~해 온 원자","spans":["that"]},
+    {"tag":"주격 관계대명사 that(완료)","note":"atoms that have existed: ~해 온 원자","antecedent":"atoms in your body","spans":["that"]},
     {"tag":"분사구문(circulating)","note":"circulating ~: 동시동작 '순환하면서'","spans":["circulating"]},
     {"tag":"both A and B","note":"both living and nonliving: A와 B 둘 다","spans":["both"]}
    ],
@@ -255,7 +255,7 @@
    "english": "There will be many who will follow you.",
    "grammar": [
     {"tag":"There will be ~","note":"~가 있을 것이다(미래)","spans":["There will be"]},
-    {"tag":"주격 관계대명사 who","note":"many who will follow: 사람 선행사 + who","spans":["who"]}
+    {"tag":"주격 관계대명사 who","note":"many who will follow: 사람 선행사 + who","antecedent":"many","spans":["who"]}
    ],
    "vocab": [
     {"word":"many","meaning":"많은 이들, 다수"},

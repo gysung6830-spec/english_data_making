@@ -42,7 +42,7 @@
    "english": "For many centuries, humans have taken advantage of tools that translate and bring into our perception natural phenomena that we can't perceive with our senses.",
    "grammar": [
     {"tag": "현재완료 (have p.p.)", "note": "과거부터 지금까지 이어져 온 일을 나타냄", "spans": ["have taken"]},
-    {"tag": "관계대명사 that (목적격)", "note": "natural phenomena 를 뒤에서 꾸며 주는 관계절", "spans": ["that"]}
+    {"tag": "관계대명사 that (목적격)", "note": "natural phenomena 를 뒤에서 꾸며 주는 관계절", "antecedent": "natural phenomena", "spans": ["that we can't"]}
    ],
    "vocab": [
     {"word": "take advantage of", "meaning": "~을 이용하다"},
@@ -66,7 +66,7 @@
    "id": 2,
    "english": "In some cases, this consists of simply amplifying signals that feed into our normal sensory inputs (e.g., telescopes can bring into clear view that which is too far away for our eyes to perceive on their own).",
    "grammar": [
-    {"tag": "that which (선행사 포함 관계대명사)", "note": "that which = the thing which, '~한 것'", "spans": ["that which"]},
+    {"tag": "that which (선행사 포함 관계대명사)", "note": "that which = the thing which, '~한 것'", "role": "'~하는 것'(선행사 포함), bring into clear view의 목적어", "spans": ["that which"]},
     {"tag": "의미상 주어 for + to부정사", "note": "to perceive 의 주체를 for our eyes 로 나타냄", "spans": ["for our eyes to perceive"]}
    ],
    "vocab": [
@@ -93,7 +93,7 @@
    "english": "Other instruments turn signals that we cannot perceive into ones that we can observe.",
    "grammar": [
     {"tag": "turn A into B (전환)", "note": "A를 B로 바꾸다 — A와 B의 방향에 주의", "spans": ["turn", "into"]},
-    {"tag": "관계대명사 that (목적격)", "note": "signals / ones 를 각각 뒤에서 수식", "spans": ["that"]}
+    {"tag": "관계대명사 that (목적격)", "note": "signals / ones 를 각각 뒤에서 수식", "antecedent": "signals", "spans": ["signals that", "ones that"]}
    ],
    "vocab": [
     {"word": "instrument", "meaning": "도구, 기구"},
@@ -116,7 +116,7 @@
    "grammar": [
     {"tag": "동명사 병렬 (creating ... or changing)", "note": "such as 뒤에 두 동명사가 or 로 연결", "spans": ["creating", "changing"]},
     {"tag": "분사 based on (과거분사 수식)", "note": "images 를 뒤에서 꾸며 '~에 기반한'", "spans": ["based on"]},
-    {"tag": "관계대명사 what", "note": "선행사 없이 '~하는 것'을 이끔", "spans": ["what"]}
+    {"tag": "관계대명사 what", "note": "선행사 없이 '~하는 것'을 이끔", "role": "'~하는 것'(선행사 포함 명사절), 전치사 of의 목적어절", "spans": ["what"]}
    ],
    "vocab": [
     {"word": "expand", "meaning": "확장하다, 넓히다"},
@@ -141,8 +141,8 @@
    "id": 5,
    "english": "Alternatively, some instruments measure properties for which we have no sensory capacity at all and change them into that which we can observe.",
    "grammar": [
-    {"tag": "전치사 + 관계대명사 (for which)", "note": "for + which 로 '그것에 대해 ~인 (속성)'", "spans": ["for which"]},
-    {"tag": "that which (선행사 포함 관계대명사)", "note": "that which = '~하는 것'", "spans": ["that which"]}
+    {"tag": "전치사 + 관계대명사 (for which)", "note": "for + which 로 '그것에 대해 ~인 (속성)'", "antecedent": "properties", "spans": ["for which"]},
+    {"tag": "that which (선행사 포함 관계대명사)", "note": "that which = '~하는 것'", "role": "'~하는 것'(선행사 포함), change them into의 목적어", "spans": ["that which"]}
    ],
    "vocab": [
     {"word": "alternatively", "meaning": "그렇지 않으면, 대안으로"},

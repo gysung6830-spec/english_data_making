@@ -43,7 +43,7 @@
    "id": 1,
    "english": "\"May I help you?\" are the worst four words that a retail salesperson can utter because they don't encourage the customer to talk and put them on the defensive.",
    "grammar": [
-    {"tag": "관계대명사 that", "note": "선행사 words 를 수식하는 절을 이끈다", "spans": ["that"]},
+    {"tag": "목적격 관계대명사 that", "note": "선행사 words 를 수식하는 절을 이끈다(뒤에 새 주어 salesperson)", "spans": ["that"], "antecedent": "worst four words"},
     {"tag": "병렬 don't A and B", "note": "encourage ~ and put ~ 이 don't 에 병렬로 걸린다", "spans": ["encourage", "put"]}
    ],
    "vocab": [
@@ -69,7 +69,7 @@
    "english": "The four words usually draw out a negative response that stops cold a sales transaction.",
    "grammar": [
     {"tag": "구동사 draw out", "note": "'~을 끌어내다'", "spans": ["draw out"]},
-    {"tag": "관계대명사 that", "note": "선행사 response 를 수식", "spans": ["that"]}
+    {"tag": "주격 관계대명사 that", "note": "선행사 response 를 수식(뒤에 동사 stops)", "spans": ["that"], "antecedent": "negative response"}
    ],
    "vocab": [
     {"word": "draw out", "meaning": "끌어내다, 유도하다"},
@@ -90,7 +90,7 @@
    "english": "Examples of better questions to use when approaching customers are \"Is there anything in particular that you are looking for?\" and \"Are you shopping for a gift?\"",
    "grammar": [
     {"tag": "분사 approaching", "note": "when + 분사(~할 때)", "spans": ["approaching"]},
-    {"tag": "관계대명사 that", "note": "선행사 anything 을 수식", "spans": ["that"]}
+    {"tag": "목적격 관계대명사 that", "note": "선행사 anything 을 수식(뒤에 새 주어 you)", "spans": ["that"], "antecedent": "anything in particular"}
    ],
    "vocab": [
     {"word": "approach", "meaning": "다가가다, 접근하다"},
@@ -131,7 +131,7 @@
    "id": 5,
    "english": "This line is a rote approach that is so overused by untrained and uninterested salespeople.",
    "grammar": [
-    {"tag": "관계대명사 that", "note": "선행사 approach 를 수식", "spans": ["that"]},
+    {"tag": "주격 관계대명사 that", "note": "선행사 approach 를 수식(뒤에 동사 is)", "spans": ["that"], "antecedent": "rote approach"},
     {"tag": "수동태 is overused", "note": "so + 과거분사(수동)", "spans": ["overused"]}
    ],
    "vocab": [
@@ -171,7 +171,7 @@
    "id": 7,
    "english": "The very meaning of the question \"May I help you?\" implies that the customer is in trouble of some sort and needs rescuing.",
    "grammar": [
-    {"tag": "명사절 that", "note": "implies 의 목적어절을 이끈다", "spans": ["that"]},
+    {"tag": "명사절 that", "note": "implies 의 목적어절을 이끈다", "spans": ["that"], "role": "implies의 목적어절"},
     {"tag": "동명사 rescuing", "note": "needs + 동명사(수동 의미)", "spans": ["needs rescuing"]}
    ],
    "vocab": [
@@ -228,7 +228,7 @@
    "english": "The subconscious thought by the customer is often \"I'm smart enough to figure out what I want, and I don't need your help \"",
    "grammar": [
     {"tag": "enough to부정사", "note": "형용사 + enough to-V(~할 만큼 충분히)", "spans": ["enough to"]},
-    {"tag": "관계대명사 what", "note": "figure out 의 목적어절", "spans": ["what"]}
+    {"tag": "관계대명사 what", "note": "figure out 의 목적어절", "spans": ["what"], "role": "figure out의 목적어절('~하는 것', 선행사 포함 명사절)"}
    ],
    "vocab": [
     {"word": "subconscious", "meaning": "잠재의식의"},
@@ -267,7 +267,7 @@
    "english": "The approach has to promote a comfortable environment that makes customers feel there is no rush.",
    "grammar": [
     {"tag": "사역동사 make+원형부정사", "note": "makes + 목적어 + feel(원형부정사)", "spans": ["makes customers feel"]},
-    {"tag": "관계대명사 that", "note": "선행사 environment 를 수식", "spans": ["that"]}
+    {"tag": "주격 관계대명사 that", "note": "선행사 environment 를 수식(뒤에 동사 makes)", "spans": ["that"], "antecedent": "comfortable environment"}
    ],
    "vocab": [
     {"word": "promote", "meaning": "조성하다, 촉진하다"},
@@ -306,7 +306,7 @@
    "id": 14,
    "english": "In situations where customers really do want to look around on their own, salespeople should give customers their business cards and keep themselves accessible in case customers have questions or concerns.",
    "grammar": [
-    {"tag": "관계부사 where", "note": "선행사 situations 를 수식", "spans": ["where"]},
+    {"tag": "관계부사 where", "note": "선행사 situations 를 수식", "spans": ["where"], "antecedent": "situations"},
     {"tag": "재귀대명사 themselves", "note": "주어 salespeople 과 동일 대상", "spans": ["themselves"]},
     {"tag": "in case 절", "note": "'~할 경우에 대비하여'", "spans": ["in case"]}
    ],

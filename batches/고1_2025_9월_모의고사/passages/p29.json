@@ -150,7 +150,7 @@
      "id": 6,
      "english": "That's true, for example, of gazelles, which for thousands of years were the most frequently hunted game species in some parts of the Fertile Crescent.",
      "grammar": [
-       {"tag":"계속적 which","note":"콤마 뒤 which가 gazelles를 부연","spans":["which"]},
+       {"tag":"계속적 which","note":"콤마 뒤 which가 gazelles를 부연","antecedent":"gazelles","spans":["which"]},
        {"tag":"최상급 the most","note":"the most frequently hunted 최상급","spans":["the most"]}
      ],
      "vocab": [
@@ -172,7 +172,7 @@
      "id": 7,
      "english": "There is no mammal species that the first settled peoples of that area had more opportunity to domesticate than gazelles.",
      "grammar": [
-       {"tag":"관계대명사 that","note":"목적격 that, domesticate의 목적어","spans":["that"]},
+       {"tag":"목적격 관계대명사 that","note":"목적격 that, domesticate의 목적어","antecedent":"mammal species","spans":["that the"]},
        {"tag":"비교 more than","note":"more opportunity ~ than gazelles","spans":["more","than"]}
      ],
      "vocab": [
@@ -213,7 +213,7 @@
      "english": "Just imagine trying to herd an animal that runs away, blindly hits itself against walls, can leap up to nearly 30 feet, and can run at a speed of 50 miles per hour",
      "grammar": [
        {"tag":"동명사 목적어","note":"trying to herd, imagine의 목적어 동명사","spans":["trying"]},
-       {"tag":"관계대명사 that","note":"that이 animal 수식, 여러 동사 병렬","spans":["that"]}
+       {"tag":"주격 관계대명사 that","note":"that이 animal 수식, 여러 동사 병렬","antecedent":"an animal","spans":["that"]}
      ],
      "vocab": [
        {"word":"herd","meaning":"(가축을) 몰다"},

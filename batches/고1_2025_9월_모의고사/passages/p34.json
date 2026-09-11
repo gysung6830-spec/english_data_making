@@ -113,7 +113,7 @@
    "id": 4,
    "english": "For instance, production of concrete structures and steel elements require amounts of energy that is only possible to produce with fossil energy.",
    "grammar": [
-    {"tag": "주격 관계대명사 that", "note": "that is only possible ~는 amounts of energy를 수식", "spans": ["that"]},
+    {"tag": "주격 관계대명사 that", "note": "that is only possible ~는 amounts of energy를 수식", "antecedent": "amounts of energy", "spans": ["that"]},
     {"tag": "to부정사(난이형용사)", "note": "possible to produce = '생산하기에 가능한'", "spans": ["to produce"]}
    ],
    "vocab": [
@@ -137,7 +137,7 @@
    "id": 5,
    "english": "Production of solar panels requires scarce and expensive minerals which must be excavated, again requiring the use of fossil fuels.",
    "grammar": [
-    {"tag": "관계대명사+조동사 수동", "note": "which must be excavated = '발굴되어야 하는'(수동)", "spans": ["which", "excavated"]},
+    {"tag": "주격 관계대명사+조동사 수동", "note": "which must be excavated = '발굴되어야 하는'(수동), minerals 수식", "antecedent": "minerals", "spans": ["which", "excavated"]},
     {"tag": "분사구문(연속동작)", "note": "again requiring ~ = '그리고 (또다시) ~을 필요로 하면서'", "spans": ["requiring"]}
    ],
    "vocab": [
@@ -202,7 +202,7 @@
    "id": 8,
    "english": "Heinberg remarks that the cost of building this new energy infrastructure is seldom counted in transition proposals, which tend to focus just on energy supply requirements.",
    "grammar": [
-    {"tag": "계속적 용법 which", "note": "which는 앞의 transition proposals를 부연 설명", "spans": ["which"]},
+    {"tag": "계속적 용법 관계대명사 which", "note": "which는 앞의 transition proposals를 부연 설명", "antecedent": "transition proposals", "spans": ["which"]},
     {"tag": "수동태+빈도부사", "note": "is seldom counted = '좀처럼 계산되지 않는다'", "spans": ["is", "counted"]}
    ],
    "vocab": [

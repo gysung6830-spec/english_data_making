@@ -463,7 +463,7 @@ def _overview_pages(p, teacher, scale):
         try: os.remove(tmp)
         except OSError: pass
     return n
-_SCALES=[1.0,0.95,0.90,0.86,0.82,0.78,0.74,0.70,0.66,0.62,0.58,0.54,0.50]
+_SCALES=[1.0,0.95,0.90,0.86,0.82,0.78,0.74,0.70,0.66,0.62,0.58,0.54,0.50,0.46,0.42,0.38]
 def _fit_scale(p, teacher):
     """목차1·2·3 이 '한 페이지'에 들어오는 가장 큰 scale 을 찾는다(shrink-to-fit)."""
     for sc in _SCALES:

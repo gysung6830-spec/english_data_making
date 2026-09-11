@@ -81,7 +81,7 @@
    "id": 3,
    "english": "In 1967, he discovered that humpback whales make long and complex sounds.",
    "grammar": [
-    {"tag": "명사절 접속사 that", "note": "discovered 의 목적어절을 이끔", "spans": ["that"]}
+    {"tag": "명사절 접속사 that", "note": "discovered 의 목적어절을 이끔", "role": "discovered의 목적어절", "spans": ["that"]}
    ],
    "vocab": [
     {"word": "discover", "meaning": "발견하다"},
@@ -122,7 +122,7 @@
    "id": 5,
    "english": "Then in 1970, he released an album Songs of the Humpback Whale, which became a surprise hit and helped start the global \"Save the Whales\" movement.",
    "grammar": [
-    {"tag": "계속적 용법 관계대명사 which", "note": "콤마 뒤 which 가 앞 앨범을 부연 설명", "spans": ["which"]},
+    {"tag": "계속적 용법 관계대명사 which", "note": "콤마 뒤 which 가 앞 앨범을 부연 설명", "antecedent": "an album Songs of the Humpback Whale", "spans": ["which"]},
     {"tag": "help + (to) 동사원형", "note": "help 뒤에 원형 start 가 옴", "spans": ["helped start"]}
    ],
    "vocab": [
@@ -171,7 +171,7 @@
    "english": "Over his career, he led more than 100 research trips worldwide, including the Voyage of the Odyssey from 2000 to 2005, which studied ocean pollution.",
    "grammar": [
     {"tag": "전치사 including (~을 포함하여)", "note": "앞의 research trips 의 예를 덧붙임", "spans": ["including"]},
-    {"tag": "계속적 용법 관계대명사 which", "note": "콤마 뒤 which 가 앞 항해를 부연", "spans": ["which"]}
+    {"tag": "계속적 용법 관계대명사 which", "note": "콤마 뒤 which 가 앞 항해를 부연", "antecedent": "the Voyage of the Odyssey", "spans": ["which"]}
    ],
    "vocab": [
     {"word": "career", "meaning": "경력, 생애"},

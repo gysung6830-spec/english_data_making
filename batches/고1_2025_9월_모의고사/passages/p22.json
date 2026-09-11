@@ -44,7 +44,7 @@
    "english": "The act of gardening itself is a fantastic form of physical activity.",
    "grammar": [
     {"tag":"재귀대명사 강조 itself","note":"gardening itself: 원예 '그 자체'","spans":["itself"]},
-    {"tag":"전치사구 수식","note":"form of physical activity: ~의 형태","spans":["of"]}
+    {"tag":"전치사구 수식","note":"form of physical activity: ~의 형태","spans":["of physical activity"]}
    ],
    "vocab": [
     {"word":"gardening","meaning":"원예, 정원 가꾸기"},
@@ -126,7 +126,7 @@
    "id": 5,
    "english": "Gardening is particularly beneficial for those who find traditional exercise challenging.",
    "grammar": [
-    {"tag":"관계대명사 who","note":"those who find ~: ~하는 사람들","spans":["who"]},
+    {"tag":"주격 관계대명사 who","note":"those who find ~: 주격 who(사람 선행사)","antecedent":"those","spans":["who"]},
     {"tag":"5형식 find + O + C","note":"find traditional exercise challenging: O를 C라고 여기다","spans":["find traditional exercise challenging"]}
    ],
    "vocab": [
@@ -249,7 +249,7 @@
    "id": 11,
    "english": "Studies have shown that spending time in nature, even in a small garden, can elevate mood, improve cognition, and lessen depression symptoms.",
    "grammar": [
-    {"tag":"동명사 주어(that절 내)","note":"spending time in nature: ~하는 것이","spans":["spending time in nature"]},
+    {"tag":"동명사 주어(that절 내)","note":"spending time in nature: ~하는 것이","role":"'shown'의 목적어절 안 주어(동명사구)","spans":["spending time in nature"]},
     {"tag":"동사 병렬 can + 원형","note":"elevate ~, improve ~, and lessen ~: 원형 병렬","spans":["elevate","improve","lessen"]}
    ],
    "vocab": [

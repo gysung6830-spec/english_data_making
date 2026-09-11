@@ -130,7 +130,7 @@
    "id": 5,
    "english": "Thus, this molecule may be what your body uses to keep track of lost sleep and to trigger sleep when needed.",
    "grammar": [
-    {"tag": "관계대명사 what", "note": "선행사 포함, be의 보어절", "spans": ["what"]},
+    {"tag": "관계대명사 what", "note": "선행사 포함, be의 보어절", "role": "보어절, '~하는 것'(선행사 포함 명사절)", "spans": ["what"]},
     {"tag": "to부정사 목적", "note": "~하기 위해", "spans": ["to keep", "to trigger"]}
    ],
    "vocab": [
@@ -154,8 +154,8 @@
    "id": 6,
    "english": "An accumulation of adenosine and other factors might explain why, after several nights of less than optimal amounts of sleep, you build up a sleep debt that you must make up by sleeping longer than normal.",
    "grammar": [
-    {"tag": "의문사절 why", "note": "explain의 목적어절", "spans": ["why"]},
-    {"tag": "관계대명사 that", "note": "sleep debt 수식", "spans": ["that"]},
+    {"tag": "의문사절 why", "note": "explain의 목적어절", "role": "explain의 목적어절", "spans": ["why"]},
+    {"tag": "목적격 관계대명사 that", "note": "a sleep debt 수식(that you must make up)", "antecedent": "a sleep debt", "spans": ["that"]},
     {"tag": "비교급 than", "note": "~보다 더", "spans": ["longer than"]}
    ],
    "vocab": [

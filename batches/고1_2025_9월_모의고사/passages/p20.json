@@ -86,7 +86,7 @@
    "id": 3,
    "english": "It's no wonder that students are late for class; they have little reason to be on time.",
    "grammar": [
-    {"tag":"It's no wonder that ~","note":"「~은 놀랄 일이 아니다」, that절이 진짜 내용","spans":["It's no wonder that"]},
+    {"tag":"It's no wonder that ~","note":"「~은 놀랄 일이 아니다」, that절이 진짜 내용","role":"진주어절(It은 가주어)","spans":["It's no wonder that"]},
     {"tag":"세미콜론 병치","note":"; 앞뒤 두 문장을 이어 원인·부연을 연결","spans":[";"]}
    ],
    "vocab": [

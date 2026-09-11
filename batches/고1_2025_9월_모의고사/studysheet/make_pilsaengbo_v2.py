@@ -5,12 +5,12 @@
 import json, os, html, re, sys
 from weasyprint import HTML
 import fitz
-SC="/tmp/claude-0/-home-user-english-data-making/3e2ff8b7-89bb-5341-95ca-4062ce95757b/scratchpad/moui2"
+SC="/tmp/claude-0/-home-user-english-data-making/3e2ff8b7-89bb-5341-95ca-4062ce95757b/scratchpad/moui1"
 _HERE=os.path.dirname(os.path.abspath(__file__))
 FONTDIR=(_HERE+"/fonts") if os.path.exists(_HERE+"/fonts/NanumSquareRoundR.ttf") \
     else "/tmp/claude-0/-home-user-english-data-making/3e2ff8b7-89bb-5341-95ca-4062ce95757b/scratchpad/fonts"
 FOOT="© 2026. 오르티카잉. All rights reserved."
-TITLE="고1 2026년 9월 모의고사 · 필생보"
+TITLE="고1 2025년 9월 모의고사 · 필생보"
 FONTFACE=f"""
 @font-face{{ font-family:'NanumSquareRound'; font-weight:400; src:url('file://{FONTDIR}/NanumSquareRoundR.ttf'); }}
 @font-face{{ font-family:'NanumSquareRound'; font-weight:700; src:url('file://{FONTDIR}/NanumSquareRoundB.ttf'); }}
@@ -331,7 +331,7 @@ def sec_head(n,t,d=""):
 
 def phead(p):
     no=esc(p["item_no"].strip()); ti=esc(p["overview"]["theme_ko"])
-    return f'<div class="p-h"><span class="p-no">{no}</span><span class="p-ti">{ti}</span><span class="p-src">고1 2026 9월 모의고사</span></div>'
+    return f'<div class="p-h"><span class="p-no">{no}</span><span class="p-ti">{ti}</span><span class="p-src">고1 2025 9월 모의고사</span></div>'
 
 def _first_pos(raw, spans):
     best=None
@@ -486,6 +486,6 @@ def build(teacher, out):
     d=fitz.open(out); n=d.page_count; d.close(); return n
 
 for teacher,suf in [(False,"학생용"),(True,"강사용")]:
-    out=f"{SC}/고1_2026_9월_필생보v2_{suf}.pdf"
+    out=f"{SC}/고1_2025_9월_필생보v2_{suf}.pdf"
     print(f"{suf}: {build(teacher,out)}p")
 print("PILSAENGBO v2 OK")

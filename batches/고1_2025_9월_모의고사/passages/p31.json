@@ -44,7 +44,7 @@
    "id": 1,
    "english": "Whether we feel happy or sad, content or discontent, is not determined merely by each individual successive moment of life experience ─ a good thing happens and I'm happy, a bad thing happens and I'm sad.",
    "grammar": [
-    {"tag": "명사절 주어(whether)", "note": "'~인지 아닌지'라는 Whether절 전체가 주어이고 단수 취급해 is", "spans": ["Whether", "is"]},
+    {"tag": "명사절 주어(whether)", "note": "'~인지 아닌지'라는 Whether절 전체가 주어이고 단수 취급해 is", "role": "주어절", "spans": ["Whether", "is"]},
     {"tag": "수동태 부정", "note": "is not determined = '결정되지 않는다'(수동)", "spans": ["is", "determined"]}
    ],
    "vocab": [
@@ -91,7 +91,7 @@
    "english": "As humans, we adjust ─ to new information and events both good and bad ─ and return to our personal default level of well-being.",
    "grammar": [
     {"tag": "상관구조 both A and B", "note": "both good and bad = '좋은 것과 나쁜 것 둘 다'", "spans": ["both", "and"]},
-    {"tag": "삽입구(─ ─)", "note": "두 대시 사이는 삽입 — adjust의 대상을 설명", "spans": []}
+    {"tag": "삽입구(─ ─)", "note": "두 대시 사이는 삽입 — adjust의 대상을 설명", "spans": ["to new information and events both good and bad"]}
    ],
    "vocab": [
     {"word": "adjust", "meaning": "적응하다, 조정하다"},
@@ -172,7 +172,7 @@
    "id": 7,
    "english": "When they get what they've longed for, they believe they will be happy for the rest of their lives.",
    "grammar": [
-    {"tag": "관계대명사 what", "note": "what they've longed for = '그들이 간절히 원해온 것'(선행사 포함)", "spans": ["what"]},
+    {"tag": "관계대명사 what", "note": "what they've longed for = '그들이 간절히 원해온 것'(선행사 포함)", "role": "get의 목적어절, '~하는 것'(선행사 포함 명사절)", "spans": ["what"]},
     {"tag": "현재완료", "note": "they've longed for = '(그동안) 간절히 원해왔다'", "spans": ["they've longed"]}
    ],
    "vocab": [
