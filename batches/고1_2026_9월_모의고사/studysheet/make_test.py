@@ -41,6 +41,18 @@ def chunk_units(s):
         units[-1]=re.sub(r'\s*[.]\s*$','',units[-1])   # 마지막 어구의 끝 마침표 제거
     return [u for u in units if u]
 
+def refine_units(units, maxw=3):
+    """긴 어구(maxw 초과)는 반으로 쪼갬 → 조각 수를 늘려 난이도를 조금 올림(중상)."""
+    out=[]
+    for u in units:
+        w=u.split()
+        if len(w)<=maxw:
+            out.append(u)
+        else:
+            mid=(len(w)+1)//2
+            out.append(" ".join(w[:mid])); out.append(" ".join(w[mid:]))
+    return out
+
 def scramble_units(units, seed):
     """어구 순서를 섞음(원래 순서와 다르게)."""
     idx=list(range(len(units))); rnd=random.Random(seed)
@@ -111,7 +123,7 @@ def part1_q(p, teacher):
     h=json.load(open(SC+"/hard/"+it+".json"))
     s=sent_of(p, h["sentence_id"]); raw=s["english"]
     ko=h.get("translation","")
-    units=chunk_units(s)
+    units=refine_units(chunk_units(s))
     shuffled=scramble_units(units, seed=seed_of("p1"+it))
     chips="".join(f'<span class="chip">{esc(w)}</span>' for w in shuffled)
     parts=[f'<div class="q"><div class="qh"><span class="qno">{esc(it)}</span>'
