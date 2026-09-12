@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-"""고1 2026 9월 — 지문별 '가장 까다로운 문장' 직독직해 + 해석 포인트 + 지문 요약 PDF.
+"""고1 2026 9월 — 지문별 '가장 까다로운 문장' 직독직해 + 해석 포인트 + 지문 이해하기 PDF.
 
-한 지문당 한 카드:
-  ① 끊어읽기(영어 /)   ② 직독직해(영어→한글, 청크별)
-  ③ 핵심 골격          ④ 오역 주의(이 부분 오역 가능성 있음)
-  ⑤ 동사 병렬구조(있을 때)  ⑥ 전치사+관계대명사(있을 때)
-  ⑦ 해석               ⑧ 지문 한눈에(지문 단어로, 지문 순서대로)
+한 지문당 한 카드(가독성 위해 4블록으로 압축, 중복 제거):
+  ① 직독직해(영어→한글, 청크별 표)      ← 끊어읽기/골격을 이 표 하나로 통합
+  ② 해석(자연스러운 번역)
+  ③ 해석 포인트(오역 주의 · 동사 병렬구조 · 전치사+관계대명사) — 있는 것만, 한 상자에
+  ④ 지문 이해하기(학생에게 설명하는 구어체) — explain/<item>.json
 
-직독직해(②)·지문 한눈에(⑧)는 passage 의 chunks·flow_blocks 에서 자동 생성.
-오역 주의·병렬·전치사+관계대명사(④~⑥)는 hard2/<item>.json 에서 읽음."""
+직독직해는 passage 의 chunks 로 자동 생성.
+오역/병렬/전치사+관계대명사는 hard2/<item>.json, 지문 이해하기는 explain/<item>.json."""
 import json, os, html, re
 from weasyprint import HTML
 import fitz
@@ -32,108 +32,89 @@ def sent_of(item, sid):
         if s["id"]==sid: return s
     return None
 
-def chunked_en(s):
-    """끊어읽기: 청크 경계마다 / 표시."""
-    raw=s["english"]; ends=[]; pos=0
-    for c in s.get("chunks",[]):
-        t=strip_mk(c.get("en","")).strip()
-        if not t: continue
-        m=re.search(re.escape(t), raw[pos:])
-        if not m: continue
-        pos=pos+m.end(); ends.append(pos)
-    ends=ends[:-1]; out=[]; i=0
-    for off in ends:
-        out.append(esc(raw[i:off])); out.append(' <span class="sl">/</span> '); i=off
-    out.append(esc(raw[i:])); return "".join(out)
-
 def literal_rows(s):
-    """직독직해: 청크별 영어→한글 (passage chunks 에서 자동)."""
-    rows=[]
+    """직독직해: 청크별 영어→한글 (passage chunks 에서 자동). 홀짝 줄무늬로 가독성↑."""
+    rows=[]; i=0
     for c in s.get("chunks",[]):
         en=strip_mk(c.get("en","")).strip()
         ko=strip_mk(c.get("ko","")).strip()
         if not en: continue
-        rows.append(f'<tr><td class="le">{esc(en)}</td><td class="lk">{esc(ko)}</td></tr>')
+        zc=" z" if i%2 else ""
+        rows.append(f'<tr class="lr{zc}"><td class="le">{esc(en)}</td><td class="lk">{esc(ko)}</td></tr>')
+        i+=1
     return "".join(rows)
 
-def explain_rows(item):
-    """지문 한눈에: flow_blocks(stage→summary) 를 지문 순서대로, 지문 단어로."""
+def talk_html(item):
+    """지문 이해하기: explain/<item>.json 의 구어체 문단. 없으면 flow_blocks 로 대체."""
+    p=SC+"/explain/"+item+".json"
+    if os.path.exists(p):
+        t=json.load(open(p)).get("talk") or []
+        return "".join(f"<p>{esc(x)}</p>" for x in t if str(x).strip())
     out=[]
     for b in P[item]["overview"].get("flow_blocks",[]):
-        stg=esc(b.get("stage","")); sm=esc(strip_mk(b.get("summary","")).strip())
-        if not sm: continue
-        out.append(f'<li><span class="stg">{stg}</span> {sm}</li>')
+        sm=strip_mk(b.get("summary","")).strip()
+        if sm: out.append(f"<p>{esc(sm)}</p>")
     return "".join(out)
 
 CSS=("""
 __FONTS__
 @page{ size:A4; margin:14mm 13mm; @bottom-center{ content:"__FOOT__"; font-size:7.5pt; color:#9aa29a; } }
 *{box-sizing:border-box;}
-body{font-family:'NanumSquareRound',"Malgun Gothic",sans-serif; color:#22262b; font-size:10pt; margin:0;}
-:root{--green:#2c6444;--green-d:#1f4d33;--green-bg:#e7f0ea;--green-soft:#eef5f0;--indigo:#575495;--indigo-bg:#ecebf4;--amber:#a9781f;--amber-bg:#fbf2de;--rose:#b0434f;--rose-bg:#fbe9ea;--line:#d7ddd6;--sub:#5c636b;}
+body{font-family:'NanumSquareRound',"Malgun Gothic",sans-serif; color:#23272c; font-size:10pt; margin:0;}
+:root{--green:#2c6444;--green-d:#1f4d33;--green-bg:#e7f0ea;--indigo:#575495;--amber:#a9781f;--rose:#b0434f;--line:#d7ddd6;--sub:#5c636b;--paper:#faf9f6;}
 .doc-h{font-size:14pt;font-weight:800;color:var(--green-d);border-bottom:2.5px solid var(--green);padding-bottom:5px;margin-bottom:4px;}
 .doc-d{font-size:8.6pt;color:var(--sub);margin-bottom:12px;}
 .card{border:1px solid var(--line);border-radius:10px;padding:11px 13px 12px;margin-bottom:12px;break-inside:avoid;}
-.c-h{display:flex;align-items:baseline;gap:8px;margin-bottom:7px;}
+.c-h{display:flex;align-items:baseline;gap:8px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid #edf0ec;}
 .c-no{background:var(--green);color:#fff;font-weight:800;font-size:8.6pt;padding:1px 9px;border-radius:20px;white-space:nowrap;}
 .c-ti{font-size:10.5pt;font-weight:800;color:var(--green-d);}
 .c-sn{margin-left:auto;font-size:8pt;color:var(--sub);}
-.en{font-size:10pt;line-height:1.7;background:var(--green-soft);border-radius:7px;padding:7px 10px;}
-.sl{color:#9fb6a6;font-weight:800;padding:0 1px;}
-.lab{display:inline-block;font-size:8pt;font-weight:800;color:#fff;background:var(--indigo);border-radius:5px;padding:1px 7px;margin:9px 0 3px;}
-.lab.g{background:var(--green);} .lab.a{background:var(--amber);} .lab.r{background:var(--rose);}
-.lit{width:100%;border-collapse:collapse;margin-top:2px;}
-.lit td{vertical-align:top;padding:3px 7px;border-bottom:1px solid #eef0ed;font-size:9.2pt;line-height:1.5;}
-.lit .le{width:54%;color:#2b3036;}
-.lit .lk{width:46%;color:var(--green-d);font-weight:700;}
-.skel{font-size:9.3pt;color:#2b2f6b;font-style:italic;background:#f4f4fb;border-radius:6px;padding:5px 9px;}
-.warn{font-size:9.3pt;line-height:1.55;color:#3a4250;background:var(--rose-bg);border-radius:6px;padding:6px 10px;}
-.warn .sp{font-weight:800;color:var(--rose);}
-.tip{font-size:9.3pt;line-height:1.55;color:#3a4250;background:var(--amber-bg);border-radius:6px;padding:6px 10px;}
-.tip .sp{font-weight:800;color:var(--amber);}
+.lab{display:inline-block;font-size:8pt;font-weight:800;color:#fff;background:var(--indigo);border-radius:5px;padding:1px 8px;margin:10px 0 4px;}
+.lab.g{background:var(--green);} .lab.a{background:var(--amber);}
+.lab:first-of-type{margin-top:2px;}
+.lit{width:100%;border-collapse:collapse;margin-top:2px;border:1px solid #e8ebe7;border-radius:6px;overflow:hidden;}
+.lit td{vertical-align:top;padding:4px 9px;font-size:9.3pt;line-height:1.5;}
+.lit .lr.z{background:var(--paper);}
+.lit .le{width:52%;color:#2b3036;border-right:1px solid #ecefec;}
+.lit .lk{width:48%;color:var(--green-d);font-weight:700;}
 .trans{font-size:9.8pt;line-height:1.6;color:var(--green-d);font-weight:700;background:var(--green-bg);border-radius:6px;padding:6px 10px;}
-.flow{margin:2px 0 0;padding:0;list-style:none;}
-.flow li{font-size:9.2pt;line-height:1.55;color:#2c3138;padding:3px 0 3px 0;border-bottom:1px dashed #e4e8e3;}
-.flow li:last-child{border-bottom:none;}
-.flow .stg{display:inline-block;font-weight:800;color:var(--indigo);font-size:8.4pt;background:var(--indigo-bg);border-radius:4px;padding:0 6px;margin-right:5px;}
+.pts{border:1px solid #ecdcc0;background:#fdf8ef;border-radius:6px;padding:4px 11px;}
+.pt{font-size:9.2pt;line-height:1.5;color:#3a4250;padding:5px 0;border-bottom:1px dashed #eadfca;}
+.pt:last-child{border-bottom:none;}
+.pt .k{display:inline-block;font-size:7.8pt;font-weight:800;color:#fff;background:var(--amber);border-radius:4px;padding:0 6px;margin-right:6px;vertical-align:1px;}
+.pt .k.r{background:var(--rose);}
+.pt .sp{font-weight:800;color:var(--rose);}
+.talk{font-size:9.5pt;line-height:1.62;color:#2c3138;background:#f3f6f3;border-left:3px solid var(--green);border-radius:0 7px 7px 0;padding:7px 12px;}
+.talk p{margin:0 0 5px;}
+.talk p:last-child{margin-bottom:0;}
 """).replace("__FOOT__",FOOT).replace("__FONTS__",FONTFACE)
 
 def card(h, h2):
     item=h["item_no"]; ov=P[item]["overview"]; s=sent_of(item, h["sentence_id"])
     parts=[f'<div class="card"><div class="c-h"><span class="c-no">{esc(item)}</span>'
-           f'<span class="c-ti">{esc(ov["theme_ko"])}</span><span class="c-sn">{esc(str(h["sentence_id"]))}번 문장</span></div>']
-    # ① 끊어읽기
-    parts.append('<div class="lab g">끊어읽기</div>')
-    parts.append(f'<div class="en">{chunked_en(s)}</div>')
-    # ② 직독직해
+           f'<span class="c-ti">{esc(ov["theme_ko"])}</span><span class="c-sn">최고난도 · {esc(str(h["sentence_id"]))}번 문장</span></div>']
+    # ① 직독직해
     parts.append('<div class="lab g">직독직해</div>')
     parts.append(f'<table class="lit">{literal_rows(s)}</table>')
-    # ③ 핵심 골격
-    if h.get("skeleton"):
-        parts.append('<div class="lab">핵심 골격</div>')
-        parts.append(f'<div class="skel">{esc(h["skeleton"])}</div>')
-    # ④ 오역 주의
-    mt=(h2 or {}).get("mistrans") or {}
-    if mt.get("span") or mt.get("note"):
-        sp=esc(mt.get("span","")); note=esc(mt.get("note",""))
-        parts.append('<div class="lab r">오역 주의</div>')
-        parts.append(f'<div class="warn"><span class="sp">“{sp}”</span> — 이 부분 오역 가능성 있음. {note}</div>')
-    # ⑤ 동사 병렬구조
-    par=(h2 or {}).get("parallel")
-    if par:
-        parts.append('<div class="lab a">동사 병렬구조</div>')
-        parts.append(f'<div class="tip">{esc(par)}</div>')
-    # ⑥ 전치사+관계대명사
-    pr=(h2 or {}).get("prep_rel")
-    if pr:
-        parts.append('<div class="lab a">전치사+관계대명사</div>')
-        parts.append(f'<div class="tip">{esc(pr)}</div>')
-    # ⑦ 해석
+    # ② 해석
     parts.append('<div class="lab g">해석</div>')
     parts.append(f'<div class="trans">{esc(h.get("translation",""))}</div>')
-    # ⑧ 지문 한눈에
-    parts.append('<div class="lab">지문 한눈에</div>')
-    parts.append(f'<ul class="flow">{explain_rows(item)}</ul>')
+    # ③ 해석 포인트 (오역 주의 · 병렬 · 전치사+관계대명사) — 있는 것만, 한 상자
+    h2=h2 or {}; pts=[]
+    mt=h2.get("mistrans") or {}
+    if mt.get("span") or mt.get("note"):
+        pts.append(f'<div class="pt"><span class="k r">오역 주의</span>'
+                   f'<span class="sp">“{esc(mt.get("span",""))}”</span> {esc(mt.get("note",""))}</div>')
+    if h2.get("parallel"):
+        pts.append(f'<div class="pt"><span class="k">동사 병렬구조</span>{esc(h2["parallel"])}</div>')
+    if h2.get("prep_rel"):
+        pts.append(f'<div class="pt"><span class="k">전치사+관계대명사</span>{esc(h2["prep_rel"])}</div>')
+    if pts:
+        parts.append('<div class="lab a">해석 포인트</div>')
+        parts.append('<div class="pts">'+"".join(pts)+'</div>')
+    # ④ 지문 이해하기 (구어체)
+    parts.append('<div class="lab">지문 이해하기</div>')
+    parts.append(f'<div class="talk">{talk_html(item)}</div>')
     parts.append('</div>')
     return "".join(parts)
 
@@ -142,7 +123,8 @@ def load2(it):
     p=SC+"/hard2/"+it+".json"
     return json.load(open(p)) if os.path.exists(p) else None
 H=[(json.load(open(SC+"/hard/"+it+".json")), load2(it)) for it in items if os.path.exists(SC+"/hard/"+it+".json")]
-body=[f'<div class="doc-h">{TITLE}</div><div class="doc-d">지문마다 가장 해석이 까다로운 문장 1개 · 직독직해 → 오역 주의·병렬·전치사+관계대명사 → 해석 → 지문 한눈에</div>']
+body=[f'<div class="doc-h">{TITLE}</div>'
+      f'<div class="doc-d">지문마다 가장 해석이 까다로운 문장 1개 · 직독직해 → 해석 → 해석 포인트(오역·병렬·전치사+관계대명사) → 지문 이해하기</div>']
 for h,h2 in H: body.append(card(h,h2))
 doc=f'<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><style>{CSS}</style></head><body>{"".join(body)}</body></html>'
 out=SC+"/고1_2026_9월_최고난도문장_해석법.pdf"
