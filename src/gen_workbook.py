@@ -1018,7 +1018,7 @@ def solution_block(rec, c, idx, tno=None):
     insert_en = None
     if seqtype == "삽입":
         _sd = c.get("seq_direct") or {}
-        _p = next((p for p in _sd.get("pieces", []) if p.get("label") == "넣을 문장"), None)
+        _p = next((p for p in _sd.get("pieces", []) if (p.get("label") or "").startswith("넣을 문장")), None)
         if _p:
             insert_en = _p.get("en")
     mug = c.get("mugwan") if num == 35 else None
@@ -1181,7 +1181,7 @@ def render_spread(rec, c, idx, tno=None):
     insert_en = None
     if seqtype == "삽입":
         _sd = c.get("seq_direct") or {}
-        _p = next((p for p in _sd.get("pieces", []) if p.get("label") == "넣을 문장"), None)
+        _p = next((p for p in _sd.get("pieces", []) if (p.get("label") or "").startswith("넣을 문장")), None)
         if _p:
             insert_en = _p.get("en")
     if seqtype:

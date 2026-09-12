@@ -65338,7 +65338,8 @@
     "w": "hold a mirror up to",
     "m": "~을 거울처럼 비추다, 그대로 반영하다"
    }
-  ]
+  ],
+  "uline": "holding a mirror up to society"
  },
  {
   "key": "2027-09|22",
@@ -68864,12 +68865,12 @@
     "pos": "첫문장"
    },
    {
-    "t": "Websites, smartphone apps, and social media have been instrumental in expanding the reach and impact of a diversity of citizen science projects across time and geographical zones.",
+    "t": "( ① ) Websites, smartphone apps, and social media have been instrumental in expanding the reach and impact of a diversity of citizen science projects across time and geographical zones.",
     "role": "skip",
     "tags": []
    },
    {
-    "t": "Citizen science involves local people helping scientists carry out a scientific project at scale.",
+    "t": "( ② ) Citizen science involves local people helping scientists carry out a scientific project at scale.",
     "role": "yellow",
     "tags": [
      {
@@ -68879,17 +68880,17 @@
     ]
    },
    {
-    "t": "Currently, thousands of such projects have been set up all over the world, whereby volunteers help out in a number of research areas, including biodiversity, air quality, astronomy, and environmental issues.",
+    "t": "( ③ ) Currently, thousands of such projects have been set up all over the world, whereby volunteers help out in a number of research areas, including biodiversity, air quality, astronomy, and environmental issues.",
     "role": "gray",
     "tags": []
    },
    {
-    "t": "They do so by participating in scientific activities such as monitoring plants and wildlife, collecting air and water samples, categorizing galaxies, and analyzing DNA sequences.",
+    "t": "( ④ ) They do so by participating in scientific activities such as monitoring plants and wildlife, collecting air and water samples, categorizing galaxies, and analyzing DNA sequences.",
     "role": "skip",
     "tags": []
    },
    {
-    "t": "Examples include setting up and managing a website that offers local services for community disasters and creating an emergency response team when a disaster occurs.",
+    "t": "( ⑤ ) Examples include setting up and managing a website that offers local services for community disasters and creating an emergency response team when a disaster occurs.",
     "role": "yellow",
     "tags": [
      {
@@ -69189,12 +69190,12 @@
     "pos": "첫문장"
    },
    {
-    "t": "The human mind has an attention limit, beyond which music is most likely to be perceived as lacking order or direction.",
+    "t": "( ① ) The human mind has an attention limit, beyond which music is most likely to be perceived as lacking order or direction.",
     "role": "gray",
     "tags": []
    },
    {
-    "t": "For instance, if the intention is to focus on melodic lines, then one should avoid making too many contrasting timbre variations while the melodies are unfolding; otherwise, the timbre may distract attention away from the pitch.",
+    "t": "( ② ) For instance, if the intention is to focus on melodic lines, then one should avoid making too many contrasting timbre variations while the melodies are unfolding; otherwise, the timbre may distract attention away from the pitch.",
     "role": "gray",
     "tags": [
      {
@@ -69204,7 +69205,7 @@
     ]
    },
    {
-    "t": "One of the most difficult issues in the practice of composition is to find the right balance between repetition and diversity: a well-balanced piece of music should unfold naturally to listeners.",
+    "t": "( ③ ) One of the most difficult issues in the practice of composition is to find the right balance between repetition and diversity: a well-balanced piece of music should unfold naturally to listeners.",
     "role": "yellow",
     "tags": [
      {
@@ -69214,12 +69215,12 @@
     ]
    },
    {
-    "t": "In most Western musical styles, this unfolding results from a network of relationships between musical attributes that combine in different ways to create situations where contrasts can take place.",
+    "t": "( ④ ) In most Western musical styles, this unfolding results from a network of relationships between musical attributes that combine in different ways to create situations where contrasts can take place.",
     "role": "gray",
     "tags": []
    },
    {
-    "t": "Such contrasts are normally preceded by a preparatory stage, which builds upon the listener's expectations.",
+    "t": "( ⑤ ) Such contrasts are normally preceded by a preparatory stage, which builds upon the listener's expectations.",
     "role": "skip",
     "tags": [],
     "pos": "끝문장"
