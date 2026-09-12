@@ -1,0 +1,10 @@
+{
+ "item_no": "21",
+ "sentence_id": 6,
+ "mistrans": {
+  "span": "the very thing",
+  "note": "the very thing을 별개의 새 목적어나 '매우 중요한 것'으로 읽으면 틀린다. 여기서 very는 '바로 그'를 뜻하는 강조어로, the very thing은 앞의 their movement repertoire를 다시 가리키는 동격어구('바로 그것')이다."
+ },
+ "parallel": "that will help them 뒤의 learn, communicate, create, and become emotionally mature 네 개가 모두 help의 목적격보어(원형부정사)로 them에 걸리는 4중 병렬이다. 마지막 become만 따로 떼어 읽으면 틀리고, '그들이 배우고·소통하고·창조하고·감정적으로 성숙해지도록 도울'로 네 개를 나란히 them의 동작으로 읽어야 한다.",
+ "prep_rel": null
+}

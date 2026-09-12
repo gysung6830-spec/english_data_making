@@ -1,0 +1,10 @@
+{
+  "item_no": "40",
+  "sentence_id": 7,
+  "mistrans": {
+    "span": "closely tied with relationships",
+    "note": "tied를 문장의 정동사로 보아 '높은 가치가 관계를 밀접히 묶었다'로 옮기면 틀린다. tied는 앞의 value를 꾸미는 과거분사이므로, '생존에 대한 그토록 높은 가치가 관계와 밀접히 결부된 채로(결부되어 있다 보니)'라는 부대상황으로 읽는다."
+  },
+  "parallel": null,
+  "prep_rel": null
+}

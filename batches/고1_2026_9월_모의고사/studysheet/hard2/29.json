@@ -1,0 +1,10 @@
+{
+  "item_no": "29",
+  "sentence_id": 6,
+  "mistrans": {
+    "span": "sweating you experience",
+    "note": "sweating 뒤를 '땀을 흘리고 당신은 겪는다'처럼 끊어 읽으면 틀린다. sweating 다음에 목적격 관계대명사 that이 생략된 것으로, '당신이 (체육관에서 무리한 뒤에) 겪는 메스꺼움·근육 약화·땀'처럼 앞의 세 명사를 뒤에서 수식한다."
+  },
+  "parallel": null,
+  "prep_rel": null
+}

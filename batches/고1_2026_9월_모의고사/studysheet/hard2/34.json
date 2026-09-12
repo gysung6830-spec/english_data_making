@@ -1,0 +1,10 @@
+{
+  "item_no": "34",
+  "sentence_id": 7,
+  "mistrans": {
+    "span": "feel our way",
+    "note": "'우리의 길을 느끼다'처럼 직역하면 틀린다 → feel one's way는 '(조심조심) 더듬어 나아가다'라는 숙어이므로, '(달리기의 비법을 이해하는 쪽으로) 더듬어 나아가다'로 읽어야 한다."
+  },
+  "parallel": "전치사 by 뒤에 learning / getting / seeing / (and) accepting 네 개의 동명사(구)가 병렬로 걸려 모두 '~함으로써'에 이어진다. 문장에 and가 두 번(…and seeing…, and accepting…) 나와 마지막 두 개만 병렬로 착각하기 쉬운데, 네 동명사 모두 by의 목적어로 대등하게 연결됨에 주의한다. getting them firing의 them은 앞의 our senses를 가리킨다.",
+  "prep_rel": null
+}

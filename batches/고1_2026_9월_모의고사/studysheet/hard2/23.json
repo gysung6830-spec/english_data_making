@@ -1,0 +1,10 @@
+{
+ "item_no": "23",
+ "sentence_id": 6,
+ "mistrans": {
+  "span": "If we all had the same kind of mind",
+  "note": "과거형 had를 '(과거에) 가졌었다면'으로 읽으면 틀린다. 현재 사실의 반대를 가정하는 가정법 과거이므로 '(지금) 만약 우리 모두가 같은 종류의 마음을 가지고 있다면'으로 읽고, 주절 might become도 '멸종할 수도 있을 것이다'로 받아야 한다."
+ },
+ "parallel": null,
+ "prep_rel": null
+}

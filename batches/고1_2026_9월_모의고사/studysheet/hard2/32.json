@@ -1,0 +1,10 @@
+{
+  "item_no": "32",
+  "sentence_id": 6,
+  "mistrans": {
+    "span": "the words themselves",
+    "note": "themselves를 '그들 자신'처럼 사람을 가리키는 말로 옮기면 틀린다 → 여기 themselves는 the words를 강조하는 재귀대명사(강조 용법)이므로 '그 말 그 자체'로 읽어야 한다. 화의 원인이 '말 자체'가 아님을 강조하는 표현이다."
+  },
+  "parallel": null,
+  "prep_rel": null
+}

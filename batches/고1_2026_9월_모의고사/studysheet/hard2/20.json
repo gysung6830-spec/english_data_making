@@ -1,0 +1,10 @@
+{
+ "item_no": "20",
+ "sentence_id": 4,
+ "mistrans": {
+  "span": "to entertain your learners",
+  "note": "to entertain your learners를 not creating에 붙여 '즐겁게 하려고 만드는 게 아니다'처럼 부정의 목적으로 읽으면 틀린다. 앞의 the next great commercial game을 꾸미는 형용사적 용법이므로 '학습자를 즐겁게 하기 위한 (상업용) 게임'으로 읽어야 한다."
+ },
+ "parallel": "세미콜론(;)을 기준으로 'you are not creating A'와 'you are creating B'가 대등하게 병렬·대조된다. 두 절의 동사가 똑같이 (are) creating이라 'A를 만드는 게 아니라 B를 만드는 것이다'로 이어 읽어야 하며, 앞 절만 보고 '아무 게임도 안 만든다'로 끊어 읽으면 틀린다.",
+ "prep_rel": "in which = in a learning game(선행사 a learning game). 전치사+관계대명사라 뒤에 완전한 절(success will be measured ~)이 오고, in+선행사로 풀어 '그 학습 게임 안에서 성공이 학습 성과의 달성으로 측정될'처럼 a learning game을 수식하는 것으로 읽는다."
+}

@@ -1,0 +1,10 @@
+{
+  "item_no": "24",
+  "sentence_id": 12,
+  "mistrans": {
+    "span": "might not be what actually happens",
+    "note": "might not을 '실제로 일어나는 일이 결코 아니다'라는 완전부정으로 읽으면 틀린다. might not be는 부분부정이므로 '실제로 일어나는 일과 반드시 일치하지는 않을 수도 있다'로 읽어야 한다."
+  },
+  "parallel": null,
+  "prep_rel": null
+}

@@ -1,0 +1,10 @@
+{
+  "item_no": "37",
+  "sentence_id": 5,
+  "mistrans": {
+    "span": "it was in fact Earth that traveled around the Sun",
+    "note": "it ~ that 강조구문이므로 '그것은 사실 태양 주위를 돈 지구였다'처럼 직역하면 틀린다. '사실 태양 주위를 도는 것은 (다름 아닌) 지구였다'로 Earth를 강조해 읽어야 한다."
+  },
+  "parallel": "concluded 뒤에 목적어절 that이 두 개 and로 병렬된다: ① that the view ... was wrong, ② and that it was in fact Earth .... 둘 다 concluded에 걸린다. 'and that ~'을 바로 앞의 was wrong이나 대시 속 동격절에 잇는다고 오해하면 범위가 틀리므로, 멀리 있는 concluded에 걸어 '그는 ①…가 틀렸고 ②…라고 결론지었다'로 묶어 읽는다.",
+  "prep_rel": null
+}

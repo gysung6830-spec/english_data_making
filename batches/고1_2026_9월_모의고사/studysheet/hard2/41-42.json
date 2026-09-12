@@ -1,0 +1,10 @@
+{
+  "item_no": "41-42",
+  "sentence_id": 8,
+  "mistrans": {
+    "span": "than they could have before",
+    "note": "could have를 '이전에 가지고 있었다'처럼 have를 본동사로 보면 틀린다. could have 뒤에 spread가 생략된 형태이므로, '그것들(용어들)이 이전에 퍼질 수 있었던 것보다 (더 빠르게)'로 읽는다."
+  },
+  "parallel": "상관접속사 both A and B가 단수주어 our influence에 걸리는 두 동사구를 병렬한다: A=both legitimizes these terms(이 용어들을 정당화한다), B=gives them a large platform to spread ~ before(그것들에 더 빠르게 퍼질 큰 발판을 준다). 단수주어라 legitimizes·gives 둘 다 -s가 붙는다. both를 these terms에 붙이거나 B를 새로운 문장으로 오해하지 말고, '정당화할 뿐 아니라 ~ 발판도 준다'처럼 한 주어의 두 동작으로 읽으며, B는 문장 끝 before까지 길게 이어진다.",
+  "prep_rel": null
+}

@@ -1,0 +1,10 @@
+{
+  "item_no": "39",
+  "sentence_id": 7,
+  "mistrans": {
+    "span": "something spanning hundreds of square meters",
+    "note": "'무언가가 수백 제곱미터에 걸친다'라는 새 문장(새 주어)으로 보면 틀린다. something은 앞의 enormous nests를 부연하는 동격 명사구이고 spanning은 something을 뒤에서 꾸미는 현재분사이므로, '(그 둥지는) 수백 제곱미터에 걸치는 규모인'으로 붙여 읽는다."
+  },
+  "parallel": null,
+  "prep_rel": null
+}

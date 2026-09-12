@@ -1,0 +1,10 @@
+{
+  "item_no": "33",
+  "sentence_id": 8,
+  "mistrans": {
+    "span": "does not sufficiently define art",
+    "note": "바로 앞 대시 속 simple copying을 주어로 보아 '단순한 모방이 예술을 정의하지 못한다'로 읽으면 틀린다 → 진짜 주어는 멀리 있는 the ancient Greek view(단수라 does)이고 simple copying은 mimesis를 풀어 준 삽입이므로, '예술을 미메시스로 보는 그 관점이 예술을 충분히 정의하지는 못한다'로 읽어야 한다."
+  },
+  "parallel": null,
+  "prep_rel": null
+}
