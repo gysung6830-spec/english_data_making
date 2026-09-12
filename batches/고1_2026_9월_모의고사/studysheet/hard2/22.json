@@ -6,5 +6,9 @@
   "note": "think를 '생각한다'는 본동사로 보아 all we have to do를 따로 끊으면 틀린다. all (that) we have to do(우리가 해야 할 전부)가 주어이고 is 뒤 to가 생략된 원형부정사 think가 보어라서 '우리가 해야 할 전부는 (무언가를) 생각하는 것'으로 읽어야 한다."
  },
  "parallel": "is 뒤 보어에서 think about과 visualize가 or로 병렬되며 공통 목적어는 something이다. something을 visualize에만 붙이거나 'think about or visualize'를 한 덩어리로 뭉뚱그리면 틀리고, '무언가를 생각하거나 (무언가를) 시각화하는 것'처럼 두 동사에 같은 목적어를 걸어 읽어야 한다.",
- "prep_rel": null
+ "prep_rel": null,
+ "parallel_spans": [
+  "think about",
+  "visualize"
+ ]
 }

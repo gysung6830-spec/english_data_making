@@ -6,5 +6,9 @@
     "note": "능동으로 읽어 '대부분의 개는 목욕할 필요가 없다'로 옮기기 쉽지만, 'need to be+p.p.'의 수동형이므로 '(개가) 정기적으로 목욕될 필요가 없다'로 읽어야 한다."
   },
   "parallel": null,
-  "prep_rel": "for which의 선행사는 a skin condition이다. 전치사+관계대명사이므로 for which = for + 선행사(a skin condition), 즉 '그 피부 질환에 대해'로 풀어 '수의사가 그 질환에 대해 약용 목욕을 처방한 (피부 질환)'으로 읽는다."
+  "prep_rel": "for which는 for + which인데, 이때 which는 바로 앞의 선행사 a skin condition(피부 질환)을 가리켜요. 그러니 which 자리에 선행사를 도로 넣어 'for a skin condition(그 피부 질환에 대해)'으로 바꿔 읽으면, '수의사가 그 피부 질환에 대해 약용 목욕을 처방한 (바로 그) 피부 질환'이라는 뜻이 돼요.",
+  "prep_rel_spans": [
+    "for which",
+    "a skin condition"
+  ]
 }

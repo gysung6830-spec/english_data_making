@@ -6,5 +6,6 @@
     "note": "'그것을 좋아하는 엉뚱한 사람들'처럼 people을 꾸미는 명사구로 옮기면 틀린다 → liking은 동명사이고 the wrong people이 그 의미상 주어이므로 '엉뚱한 사람들이 그것을 좋아하는 것'으로 읽어야 한다. than의 비교 대상은 '사람들'이 아니라 '그들이 그것을 좋아하는 상황'이다."
   },
   "parallel": null,
-  "prep_rel": "by which는 '전치사 by + 관계대명사 which'로, which의 선행사는 앞의 the wrong people(liking it)이다. by which = by them/by that로 풀어 '그 말로 내가 뜻하는 바는 ~'처럼 읽으면 된다. 즉 '내 말인즉슨 ~'으로 이어 앞의 the wrong people을 부연 설명하는 구조이다."
+  "prep_rel": "by which는 '전치사 by + 관계대명사 which'예요. 여기서 which가 가리키는 선행사는 바로 앞의 the wrong people(엉뚱한 사람들)이에요. which를 선행사로 바꿔 'by the wrong people'로 보면 돼요. 그래서 'by which I mean ~'은 '내 말인즉슨 (그 엉뚱한 사람들은) ~한 사람들이다'처럼, 앞의 the wrong people을 풀어서 부연 설명하는 구조예요.",
+  "prep_rel_spans": ["by which", "the wrong people"]
 }

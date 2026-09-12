@@ -6,5 +6,6 @@
     "note": "put air around를 '글 주위에 공기를 넣다'로 직역하면 틀린다. 여기서는 '글 둘레에 여백(여유 공간)을 두다'라는 뜻으로 읽어야 한다."
   },
   "parallel": "주어 Short paragraphs에 동사 put ~ and make ~ 두 개가 and로 병렬된다. 'put air around what you write'와 'make it look inviting'이 각각 한 덩어리이고 둘 다 주어는 Short paragraphs다. make의 주어를 what you write로 잘못 잡으면 틀린다.",
+  "parallel_spans": ["put air around what you write", "make it look inviting"],
   "prep_rel": null
 }

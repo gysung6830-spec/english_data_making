@@ -6,5 +6,6 @@
     "note": "co-를 빠뜨리고 '그가 (혼자) 설립했다'로 옮기면 틀린다. co-founded는 '공동으로 설립했다'라는 뜻이므로 단독 설립이 아님에 주의해야 한다."
   },
   "parallel": "'to provide medical treatment and strengthen public health systems'에서 and는 provide와 strengthen을 병렬한다. 두 번째 to가 생략됐을 뿐 strengthen도 목적의 to provide에 걸려 '의료를 제공하고 (공중보건 체계를) 강화하기 위해'로 한 덩어리로 묶인다. strengthen을 앞의 works와 연결된 별개 동사로 보면 틀린다.",
+  "parallel_spans": ["provide medical treatment", "strengthen public health systems"],
   "prep_rel": null
 }
