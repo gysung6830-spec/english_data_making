@@ -32,8 +32,22 @@ def sent_of(item, sid):
         if s["id"]==sid: return s
     return None
 
+def literal_en(s):
+    """직독직해 영어: 문장 그대로, 청크 경계마다 / (줄 단위 표가 아니라 흐르는 문장)."""
+    raw=s["english"]; ends=[]; pos=0
+    for c in s.get("chunks",[]):
+        t=strip_mk(c.get("en","")).strip()
+        if not t: continue
+        m=re.search(re.escape(t), raw[pos:])
+        if not m: continue
+        pos=pos+m.end(); ends.append(pos)
+    ends=ends[:-1]; out=[]; i=0
+    for off in ends:
+        out.append(esc(raw[i:off])); out.append(' <span class="sl">/</span> '); i=off
+    out.append(esc(raw[i:])); return "".join(out)
+
 def literal_ko(s):
-    """직독직해: 한글 청크만 / 로 이어 붙임(영어 없음)."""
+    """직독직해 한글: 청크 한글을 / 로 이어 붙인 흐르는 문장."""
     parts=[]
     for c in s.get("chunks",[]):
         ko=strip_mk(c.get("ko","")).strip()
@@ -98,8 +112,10 @@ body{font-family:'NanumSquareRound',"Malgun Gothic",sans-serif; color:#23272c; f
 .lab{display:inline-block;font-size:8pt;font-weight:800;color:#fff;background:var(--indigo);border-radius:5px;padding:1px 8px;margin:10px 0 4px;}
 .lab.g{background:var(--green);} .lab.a{background:var(--amber);}
 .lab:first-of-type{margin-top:2px;}
-.lit{font-size:10pt;line-height:1.85;color:var(--green-d);font-weight:700;background:#f2f6f2;border-radius:7px;padding:7px 11px;}
-.sl{color:#9db3a4;font-weight:800;padding:0 2px;}
+.lit{background:#f2f6f2;border-radius:7px;padding:7px 11px;}
+.lit-en{font-size:9.8pt;line-height:1.8;color:#2b3036;padding-bottom:5px;margin-bottom:5px;border-bottom:1px dashed #d5e0d7;}
+.lit-ko{font-size:9.8pt;line-height:1.8;color:var(--green-d);font-weight:700;}
+.sl{color:#8fb49c;font-weight:800;padding:0 2px;}
 .trans{font-size:9.8pt;line-height:1.6;color:var(--green-d);font-weight:700;background:var(--green-bg);border-radius:6px;padding:6px 10px;}
 .pts{border:1px solid #e6e3d6;background:#fbfaf5;border-radius:6px;padding:7px 11px;}
 .eng{font-size:9.7pt;line-height:1.85;color:#2b3036;padding-bottom:6px;margin-bottom:4px;border-bottom:1px dashed #e4e2d5;}
@@ -123,9 +139,10 @@ def card(h, h2):
     h2=h2 or {}
     parts=[f'<div class="card"><div class="c-h"><span class="c-no">{esc(item)}</span>'
            f'<span class="c-ti">{esc(ov["theme_ko"])}</span><span class="c-sn">최고난도 · {esc(str(h["sentence_id"]))}번 문장</span></div>']
-    # ① 직독직해 (한글만 /)
+    # ① 직독직해 (영어 문장 / + 한글 문장 /, 줄 단위 표 아님)
     parts.append('<div class="lab g">직독직해</div>')
-    parts.append(f'<div class="lit">{literal_ko(s)}</div>')
+    parts.append(f'<div class="lit"><div class="lit-en">{literal_en(s)}</div>'
+                 f'<div class="lit-ko">{literal_ko(s)}</div></div>')
     # ② 해석
     parts.append('<div class="lab g">해석</div>')
     parts.append(f'<div class="trans">{esc(h.get("translation",""))}</div>')
@@ -161,7 +178,7 @@ def load2(it):
     return json.load(open(p)) if os.path.exists(p) else None
 H=[(json.load(open(SC+"/hard/"+it+".json")), load2(it)) for it in items if os.path.exists(SC+"/hard/"+it+".json")]
 body=[f'<div class="doc-h">{TITLE}</div>'
-      f'<div class="doc-d">지문마다 가장 해석이 까다로운 문장 1개 · 직독직해(한글) → 해석 → 해석 포인트(영어 형광펜) → 지문 이해하기</div>']
+      f'<div class="doc-d">지문마다 가장 해석이 까다로운 문장 1개 · 직독직해(영어·한글 /) → 해석 → 해석 포인트(영어 형광펜) → 지문 이해하기</div>']
 for h,h2 in H: body.append(card(h,h2))
 doc=f'<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><style>{CSS}</style></head><body>{"".join(body)}</body></html>'
 out=SC+"/고1_2026_9월_최고난도문장_해석법.pdf"
