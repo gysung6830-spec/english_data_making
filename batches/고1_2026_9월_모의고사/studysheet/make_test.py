@@ -6,9 +6,13 @@ Part 2 순서배열 : 주어진 문장 뒤에 (A)(B)(C) 덩어리를 섞어 제�
 
 정답은 검증된 원문(최고난도 문장·지문 문장 순서)에서 기계적으로 생성 → 항상 정확.
 학생용/정답 두 파일 출력."""
-import json, os, html, re, random
+import json, os, html, re, random, hashlib
 from weasyprint import HTML
 import fitz
+def seed_of(s):  # 실행마다 바뀌는 hash() 대신 안정적 시드
+    return int(hashlib.md5(s.encode("utf-8")).hexdigest()[:8], 16)
+_MK=re.compile(r"\[\[(.+?)\]\]")
+def strip_mk(s): return _MK.sub(r"\1", s or "")
 SC=os.path.dirname(os.path.abspath(__file__))
 FONTDIR=SC+"/fonts"
 FOOT="© 2026. 오르티카잉. All rights reserved."
@@ -26,18 +30,24 @@ def sent_of(p, sid):
         if s["id"]==sid: return s
     return None
 
-# ---------- Part 1: 배열영작 ----------
-def scramble_words(sentence, seed):
-    """문장을 단어로 쪼개 섞음. 끝 마침표는 제거(끝 힌트 방지)."""
-    s=sentence.strip()
-    s=re.sub(r'[.]\s*$','',s)          # 문장 끝 마침표만 제거
-    toks=[t for t in s.split() if t]
-    order=list(range(len(toks)))
-    rnd=random.Random(seed)
-    for _ in range(20):
-        rnd.shuffle(order)
-        if order!=list(range(len(toks))) or len(toks)<2: break
-    return [toks[i] for i in order], toks  # (섞인 것, 원래 순서)
+# ---------- Part 1: 배열영작 (어구/청크 단위 = 중 난이도) ----------
+def chunk_units(s):
+    """문장의 의미 단위(청크) 목록. 표시용으로 끝 마침표만 제거."""
+    units=[]
+    for c in s.get("chunks",[]):
+        t=strip_mk(c.get("en","")).strip()
+        if t: units.append(t)
+    if units:
+        units[-1]=re.sub(r'\s*[.]\s*$','',units[-1])   # 마지막 어구의 끝 마침표 제거
+    return [u for u in units if u]
+
+def scramble_units(units, seed):
+    """어구 순서를 섞음(원래 순서와 다르게)."""
+    idx=list(range(len(units))); rnd=random.Random(seed)
+    for _ in range(30):
+        rnd.shuffle(idx)
+        if idx!=list(range(len(units))) or len(units)<2: break
+    return [units[i] for i in idx]
 
 # ---------- Part 2: 순서배열 ----------
 def split3(lst):
@@ -81,7 +91,7 @@ body{font-family:'NanumSquareRound',"Malgun Gothic",sans-serif; color:#23272c; f
 .ko{font-size:9.8pt;line-height:1.55;color:#222;background:#f2f6f2;border-radius:6px;padding:6px 10px;margin-bottom:7px;}
 .ko b{color:var(--green-d);}
 .bank{display:flex;flex-wrap:wrap;gap:5px 6px;padding:7px 9px;border:1px dashed #b9c3bb;border-radius:7px;background:var(--paper);}
-.chip{display:inline-block;font-size:9.3pt;background:#fff;border:1px solid #d3dbd3;border-radius:6px;padding:2px 8px;color:#2b3036;}
+.chip{display:inline-block;font-size:9.3pt;background:#fff;border:1px solid #cdd7ce;border-radius:6px;padding:3px 9px;color:#2b3036;box-shadow:0 1px 0 #eef1ee;}
 .wr{margin-top:8px;border-bottom:1.4px solid #c9c7be;height:15px;}
 .wr2{margin-top:14px;}
 .intro{font-size:9.6pt;line-height:1.6;color:#23272c;background:#eef3fb;border-left:3px solid var(--indigo);border-radius:0 6px 6px 0;padding:6px 10px;margin-bottom:8px;}
@@ -101,10 +111,11 @@ def part1_q(p, teacher):
     h=json.load(open(SC+"/hard/"+it+".json"))
     s=sent_of(p, h["sentence_id"]); raw=s["english"]
     ko=h.get("translation","")
-    shuffled,orig=scramble_words(raw, seed=hash("p1"+it)&0xffffffff)
+    units=chunk_units(s)
+    shuffled=scramble_units(units, seed=seed_of("p1"+it))
     chips="".join(f'<span class="chip">{esc(w)}</span>' for w in shuffled)
     parts=[f'<div class="q"><div class="qh"><span class="qno">{esc(it)}</span>'
-           f'<span class="qti">{esc(theme(p))}</span><span class="qtag">배열영작</span></div>']
+           f'<span class="qti">{esc(theme(p))}</span><span class="qtag">배열영작 · 어구배열</span></div>']
     parts.append(f'<div class="ko"><b>우리말</b> · {esc(ko)}</div>')
     parts.append(f'<div class="bank">{chips}</div>')
     if teacher:
@@ -116,7 +127,7 @@ def part1_q(p, teacher):
 
 def part2_q(p, teacher):
     it=p["item_no"].strip()
-    intro,shown,ans=order_problem(p, seed=hash("p2"+it)&0xffffffff)
+    intro,shown,ans=order_problem(p, seed=seed_of("p2"+it))
     parts=[f'<div class="q"><div class="qh"><span class="qno">{esc(it)}</span>'
            f'<span class="qti">{esc(theme(p))}</span><span class="qtag">순서배열</span></div>']
     parts.append(f'<div class="intro"><b>주어진 글</b><br>{esc(intro)}</div>')
@@ -133,8 +144,8 @@ def build(teacher, out):
     ver="정답" if teacher else "학생용"
     body=[f'<div class="doc-h">고1 2026년 9월 모의고사 · 배열영작 &amp; 순서배열 시험지 <span style="font-size:9pt;color:#b06;">[{ver}]</span></div>'
           f'<div class="doc-d">최고난도 문장 20개 배열영작 · 지문 20개 순서배열</div>']
-    body.append('<div class="part">Part 1. 배열영작 — 우리말에 맞게 주어진 영어 단어를 순서대로 배열하시오.</div>')
-    body.append('<div class="guide">※ 문장 끝 마침표는 스스로 붙이고, 대문자/문장부호도 알맞게 쓰시오.</div>')
+    body.append('<div class="part">Part 1. 배열영작 — 우리말에 맞게 주어진 어구를 순서대로 배열해 문장을 완성하시오.</div>')
+    body.append('<div class="guide">※ 의미 단위(어구) 단위로 제시됩니다. 어구를 순서대로 이어 쓰고, 끝 마침표는 스스로 붙이시오.</div>')
     for p in P: body.append(part1_q(p, teacher))
     body.append('<div class="part" style="break-before:page;">Part 2. 순서배열 — 주어진 글 다음에 이어질 순서로 가장 적절한 것을 배열하시오.</div>')
     body.append('<div class="guide">※ (A)(B)(C)를 글의 흐름에 맞게 배열하시오.</div>')
