@@ -1,0 +1,13 @@
+{
+  "item_no": "43-45",
+  "sentence_id": 7,
+  "difficulty": "so ~ that 결과구문 + imagine의 목적어로 온 동명사(letting him out) + for fear of + 동명사(losing) 이유구 + but 이후 과거 동사 병렬(promised to deliver / left to go)의 다층 구조",
+  "skeleton": "The merchant loved his parrot so much that he couldn't imagine ... , but he promised ... and left ... (상인은 앵무새를 너무 사랑해서 ~을 상상할 수 없었지만, 약속하고 떠났다)",
+  "steps": [
+    "1. 골격 찾기: 큰 뼈대는 'A so much that B, but C and D'. A=상인이 앵무새를 너무 사랑해서 / B=상상할 수 없었다 / but 뒤 C=약속했다 / D=떠났다. so ~ that은 '너무 ~해서 …하다'(정도·결과).",
+    "2. that절 속 목적어 처리: couldn't imagine 뒤 목적어는 동명사 letting him out of the cage('그를 새장 밖으로 내보내는 것'). imagine은 to부정사가 아니라 동명사를 목적어로 취함.",
+    "3. 이유구 for fear of losing him 붙이기: 전치사 of 뒤에 동명사 losing → '그를 잃을까 두려워(서)'. letting을 꺼리는 이유를 덧붙이는 부사구.",
+    "4. but 이후 병렬·직독→자연스럽게: promised to deliver the message(메시지를 전하겠다고 약속했다)와 then left to go on his trip(여행을 떠났다)은 과거 동사 병렬. 전체: '상인은 앵무새를 너무 사랑해서 / 잃을까 두려워 / 새장 밖으로 내보내는 것은 상상도 못 했지만 / 메시지를 전하겠다 약속하고 / 여행을 떠났다'."
+  ],
+  "translation": "상인은 앵무새를 너무나 사랑한 나머지, 그를 잃을까 두려워 새장 밖으로 내보내는 것은 상상조차 할 수 없었지만, 그 메시지를 전하겠다고 약속하고는 여행을 떠났다."
+}

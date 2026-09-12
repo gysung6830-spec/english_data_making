@@ -1,0 +1,14 @@
+{
+  "item_no": "35",
+  "sentence_id": 4,
+  "difficulty": "문두 Unless(=if ~ not) 예외 조건절 + 전치사+관계대명사 for which(선행사 a skin condition) + 주절의 need to be p.p. 수동 부정사 — 예외 조건을 거꾸로 읽기 쉬움",
+  "skeleton": "Most dogs don't need to be bathed. (단, 예외: Unless they have a skin condition ~)",
+  "steps": [
+    "1. 골격 찾기: 주절 주어 most dogs / 동사 don't need / 목적어 to be bathed(정기적으로). 문두 Unless절은 전부 조건 덩어리이므로 먼저 괄호 치고 주절부터 잡는다.",
+    "2. 문두 조건절 처리: Unless = if ~ not. 'Unless they have a skin condition'은 '그들(개)이 피부 질환을 가지고 있지 않는 한' = 질환이 있는 경우만 예외가 된다.",
+    "3. for which 관계절 풀기: for which의 선행사는 a skin condition. 원래 'a vet has prescribed medicated baths for the condition(그 질환에 대해)'에서 for+목적어가 which로 빠져 앞으로 나간 것 → '수의사가 (그 질환에 대해) 약용 목욕을 처방한 (피부 질환)'.",
+    "4. 수동태 need to be bathed: dogs는 목욕을 '하는' 주체가 아니라 '당하는' 대상이므로 need 뒤에 수동 to be bathed. don't need to be bathed = '목욕될 필요가 없다'.",
+    "5. 직독 → 자연스럽게: 약용 목욕을 처방받은 피부 질환이라는 예외가 없으면, 대부분의 개는 정기 목욕이 필요 없다로 정리한다."
+  ],
+  "translation": "수의사가 약용 목욕을 처방한 피부 질환이 있는 경우가 아니라면, 대부분의 개는 정기적으로 목욕될 필요가 없다."
+}

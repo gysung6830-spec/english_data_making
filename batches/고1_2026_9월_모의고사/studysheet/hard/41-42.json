@@ -1,0 +1,13 @@
+{
+  "item_no": "41-42",
+  "sentence_id": 8,
+  "difficulty": "상관접속사 both A and B가 두 '동사구'(legitimizes these terms / gives them a large platform)를 병렬로 묶음 + to부정사(to spread) 형용사 수식 + 비교급 than they could have before에서 동사 spread 생략(could have [spread])",
+  "skeleton": "our influence both legitimizes these terms and gives them a platform (우리의 영향력은 이 용어들을 정당화하기도 하고 발판을 주기도 한다)",
+  "steps": [
+    "1. 골격 찾기: 앞 절 We regularly use words (like 'function' and 'side-eye')는 단순한 '우리는 ~ 단어를 쓴다'. and 뒤 본론의 주어는 our influence(단수), 동사는 both A and B로 묶인 두 개.",
+    "2. both A and B 병렬 확인: both legitimizes these terms / and gives them a large platform — 주어 our influence에 걸리는 두 동사구. 단수주어라 legitimizes, gives 둘 다 -s. '정당화할 뿐 아니라 ~ 발판을 주기도 한다'.",
+    "3. 수식·생략 처리: a large platform을 to spread(퍼질)가 뒤에서 꾸밈. them/they는 these terms(용어들). 비교급 quicker than they could have before에서 could have 뒤에 spread가 생략 → '이전에 그럴(퍼질) 수 있었던 것보다 더 빠르게'.",
+    "4. 직독→자연스럽게: '우리의 영향력은 / 이 용어들을 정당화하기도 하고 / 그것들에게 큰 발판을 주기도 한다 / (그것들이) 예전에 퍼질 수 있었던 것보다 더 빠르게 퍼지도록'."
+  ],
+  "translation": "우리는 'function'과 'side-eye' 같은 단어들을 정기적으로 쓰며, 우리의 영향력은 이 용어들을 정당화할 뿐 아니라 그것들이 예전에 퍼질 수 있었던 것보다 더 빠르게 퍼질 큰 발판까지 제공한다."
+}

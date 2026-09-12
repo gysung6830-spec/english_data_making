@@ -1,0 +1,13 @@
+{
+  "item_no": "24",
+  "sentence_id": 12,
+  "difficulty": "that절의 주어가 'what ~, what ~' 두 개의 관계대명사 명사절(두 번째는 'we think' 삽입)이고, 동사가 멀리 떨어진 might not be, 보어도 what절 — 중첩된 what절 + 부분부정",
+  "skeleton": "Imagine if we could bear in mind [that (주어) might not be (보어)].",
+  "steps": [
+    "1. 골격 찾기: 명령문 Imagine + 가정 if we could bear in mind(명심하다) + 그 목적어절 that절. that절 안에서 진짜 주어·동사·보어를 찾는 것이 핵심.",
+    "2. that절의 주어 묶기: 'what we write down'(우리가 적어 두는 것)과 'what we think is going to happen'(우리가 일어날 거라 생각하는 것)이 콤마로 나란히 놓인 한 덩어리 주어. 두 번째 what절은 'what ... is going to happen' 사이에 'we think'가 삽입된 형태로, '우리가 ~라고 생각하는 것'으로 푼다.",
+    "3. 동사·보어 연결: 긴 주어 뒤의 동사는 might not be, 보어는 또 하나의 what절 'what actually happens'(실제로 일어나는 일). might not은 부분부정이라 '반드시 ~인 것은 아니다'.",
+    "4. 직독 → 자연스럽게: 우리가 적어 두는 것, 즉 우리가 일어나리라 생각하는 것이 = 실제로 일어나는 일과 반드시 같지는 않을 수 있다 — 이 점을 명심할 수 있다면, 이라고 상상해 보라."
+  ],
+  "translation": "우리가 적어 두는 것, 즉 우리가 일어날 거라고 생각하는 것이 실제로 일어나는 일과 반드시 일치하지는 않을 수도 있음을 우리가 명심할 수 있다면 어떨지 상상해 보라."
+}

@@ -1,0 +1,13 @@
+{
+ "item_no": "22",
+ "sentence_id": 2,
+ "difficulty": "is의 보어절 that 속에 다시 'all (that) we have to do is (to) think ...' 구조가 들어감 — 목적격 관계대명사 생략 + be동사 뒤 원형부정사 + think about/visualize 두 동사 병렬",
+ "skeleton": "The common flaw (...) is [that we believe [ all (we have to do) is think about or visualize something ]]",
+ "steps": [
+  "1. 골격 찾기: 주어 The common flaw / 수식어 in our understanding of this law / 동사 is / 보어 that절 → '흔한 결함은 ~라는 것이다'.",
+  "2. 수식·생략 처리: that we believe 뒤에 또 하나의 절이 목적어로 온다. all we have to do는 all (that) we have to do에서 목적격 관계대명사 that이 생략된 것 → '우리가 해야 할 전부'.",
+  "3. 어려운 구문 풀기: 'all we have to do IS think'에서 주어에 do가 있으므로 be동사 뒤 to가 생략된 원형부정사(think)가 보어다. think about or visualize는 두 동사의 병렬이고 공통 목적어는 something. to manifest it은 목적('그것을 실현하기 위해').",
+  "4. 직독→자연스럽게: '이 법칙에 대한 흔한 결함은, 우리가 해야 할 전부가 그것을 실현하기 위해 무언가를 생각하거나 시각화하는 것뿐이라고 믿는다는 점이다.'"
+ ],
+ "translation": "이 법칙에 대한 우리의 이해에서 흔한 결함은, 우리가 해야 할 전부는 그것을 실현하기 위해 무언가를 생각하거나 시각화하는 것뿐이라고 믿는다는 것이다."
+}

@@ -1,0 +1,14 @@
+{
+  "item_no": "34",
+  "sentence_id": 7,
+  "difficulty": "전치사 by에 네 개의 동명사(learning·getting·seeing·accepting)가 병렬로 걸리고, 각 동명사 안에 의문사절(how to use, what they are capable of)·지각 유발 구문(get them firing)·명사절 that절이 내포되며, 끝에 비교급+생략 'more ~ than we ever will(know)'이 오는 긴 병렬 문장",
+  "skeleton": "We may feel our way towards understanding the alchemy of running by learning ..., getting ..., seeing ..., and accepting ....",
+  "steps": [
+    "1. 골격 찾기: 주어 We / 동사 may feel / 목적어 our way(feel one's way '더듬어 나아가다') / towards understanding the alchemy of running(~을 이해하는 쪽으로).",
+    "2. 수단의 by 찾기: 'by + 동명사'는 '~함으로써'. 여기서 by 뒤에 네 동명사가 and로 묶여 병렬 — learning / getting / seeing / (and) accepting 모두 '~함으로써'에 나란히 걸린다.",
+    "3. 각 동명사 속 내포 풀기: learning how to use our senses(감각 쓰는 법을 배움) / getting them firing(them=senses, get+목적어+-ing '작동하게 함') / seeing what they are capable of(그것들이 무엇을 할 수 있는지 봄) / accepting that ...(~을 받아들임).",
+    "4. 마지막 비교급·생략 처리: accepting 뒤 that절의 핵심은 our bodies know more about running than we ever will — than 뒤에 반복되는 know가 생략됨(= than we ever will know). '우리 몸이 달리기에 대해 우리가 앞으로 알게 될 것보다 더 많이 안다'.",
+    "5. 직독 → 자연스럽게: '우리는 / 감각 쓰는 법을 배우고 / 그것들을 작동하게 하고 / 그것들이 무엇을 할 수 있는지 보고 / 우리 몸이 달리기에 대해 우리가 앞으로 알게 될 것보다 더 많이 안다는 것을 받아들임으로써 / 달리기의 비법을 이해하는 쪽으로 더듬어 나아갈 수 있을지도 모른다.'"
+  ],
+  "translation": "우리는 감각을 사용하는 법을 배우고, 그것들을 작동하게 하고, 그것들이 무엇을 할 수 있는지 보고, 우리 몸이 달리기에 대해 우리가 앞으로 알게 될 것보다 더 많이 안다는 것을 받아들임으로써, 달리기의 비법을 이해하는 쪽으로 우리의 길을 더듬어 나아갈 수 있을지도 모른다."
+}

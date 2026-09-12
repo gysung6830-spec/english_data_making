@@ -1,0 +1,14 @@
+{
+  "item_no": "32",
+  "sentence_id": 6,
+  "difficulty": "비대칭 상관어구 'not due to + 명사구 ~ but because + 절' (A와 B의 품사·구조가 다름) + perceive A as B 구문이 B절 안에 내포됨",
+  "skeleton": "you may feel angry not due to the words but because you perceive the comment as unfair.",
+  "steps": [
+    "1. 골격 찾기: (조건절 If someone criticizes you 뒤) 주절 주어 you / 동사 may feel / 보어 angry. 'not ~ but ~'은 feel angry의 '이유'를 두 가지로 대조하는 부사 자리.",
+    "2. 상관어구 짝 찾기: 'not A but B'로 묶되, A와 B의 모양이 다름에 주의 — A = due to the words themselves(전치사구 '~ 때문에'), B = because you perceive ...(이유 접속사절). '말 그 자체 때문이 아니라 ~라고 인식하기 때문에'.",
+    "3. 내포 구문 풀기: B절 안은 perceive A as B('A를 B로 여기다') 구조 — perceive the comment as unfair or threatening = '그 말을 부당하거나 위협적이라고 인식하다'.",
+    "4. themselves 처리: the words themselves의 themselves는 '말 그 자체'를 강조하는 재귀대명사(강조 용법).",
+    "5. 직독 → 자연스럽게: '누군가 당신을 비판하면 / 화가 날 수 있는데 / 그 말 자체 때문이 아니라 / 당신이 그 말을 부당하거나 위협적이라고 받아들이기 때문이다.' — 화의 원인은 '말'이 아니라 '해석'임을 대조로 드러냄."
+  ],
+  "translation": "예를 들어, 누군가 당신을 비판하면 당신은 화가 날 수 있는데, 그 말 자체 때문이 아니라 당신이 그 말을 부당하거나 위협적이라고 인식하기 때문이다."
+}

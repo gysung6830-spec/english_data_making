@@ -1,0 +1,14 @@
+{
+  "item_no": "36",
+  "sentence_id": 3,
+  "difficulty": "보어 to부정사(to complete) 뒤에 분사구 starting from ~가 콤마로 삽입되고, while ensuring that절 안에서 세 개의 each 주어(row/column/block)가 단수동사 contains를 공유 — 삽입 + 병렬 주어 + 수일치",
+  "skeleton": "The objective is to complete a 9 × 9 grid.",
+  "steps": [
+    "1. 골격 찾기: 주어 The objective / 동사 is / 보어 to complete a 9 × 9 grid(9×9 격자를 완성하는 것). 나머지는 전부 이 '완성'에 딸린 수식이다.",
+    "2. 삽입 분사구 처리: 'starting from a few given numbers or clues'는 콤마로 삽입된 분사구문으로 complete하는 방식을 부연 → '주어진 몇 개의 숫자나 단서에서 시작하여'. 앞뒤 콤마를 괄호로 묶고 읽으면 골격이 다시 보인다.",
+    "3. while ensuring that 연결: 'while ensuring that ~'은 '~을 보장하면서'. ensuring의 목적어가 that절이다.",
+    "4. that절 내부 병렬·수일치: that절의 주어는 each row, each column, each 3 × 3 block 세 개가 and로 병렬된 한 덩어리. each+명사는 단수 취급이라 공통 동사가 단수 contains. '각 행·열·3×3 블록이 1~9를 once and only once(단 한 번씩만) 포함하도록'.",
+    "5. 직독 → 자연스럽게: 주어진 단서에서 시작해, 각 행·열·3×3 블록에 1~9가 딱 한 번씩만 들어가도록 보장하면서 9×9 격자를 완성하는 것이 목표다."
+  ],
+  "translation": "그 목표는, 주어진 몇 개의 숫자나 단서에서 시작하여, 각 행, 각 열, 각 3 × 3 블록이 1부터 9까지의 모든 숫자를 단 한 번씩만 포함하도록 보장하면서, 9 × 9 격자를 완성하는 것이다."
+}

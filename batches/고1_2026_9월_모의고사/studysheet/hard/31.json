@@ -1,0 +1,14 @@
+{
+  "item_no": "31",
+  "sentence_id": 8,
+  "difficulty": "부정 주어 Nothing + 'quicker than ~' 비교급(사실상 최상급) + than 뒤 동명사의 의미상 주어(the wrong people liking it) + 전치사+관계대명사 by which 삽입 부연 + a way that 관계절이 겹친 문장",
+  "skeleton": "Nothing turns me off something quicker than the wrong people liking it.",
+  "steps": [
+    "1. 골격 찾기: 주어 Nothing / 동사 turns / 목적어 me + off something(=turn A off B, 'A를 B에 정 떨어지게 하다'). 'quicker'는 동사를 꾸미는 부사(비교급).",
+    "2. 비교 짝 맞추기: 'quicker than'으로 묶어 '~보다 더 빨리'. than 뒤 비교 대상은 the wrong people liking it(동명사구) — the wrong people이 liking의 의미상 주어라 '엉뚱한 사람들이 그것을 좋아하는 것'으로 읽는다.",
+    "3. 부정 주어 처리: 'Nothing ~ quicker than A'는 '그 무엇도 A보다 빨리 ~하지 못한다' = '가장 빨리 ~하는 것은 바로 A'라는 사실상 최상급 의미.",
+    "4. 삽입 부연 풀기: ', by which I mean ...'은 앞의 the wrong people을 받아 부연하는 전치사+관계대명사(by which = and by them). '내가 그 말로 뜻하는 바는 ~'로 이어 붙인다.",
+    "5. 겹친 수식 처리 → 자연스럽게: people (who are) almost identical to me in every respect에 'in a way that doesn't flatter me'(나를 돋보이게 해 주지도 않는 식으로)를 덧붙여 마무리. 직독: '그 무엇도 / 엉뚱한 사람들이 그것을 좋아하는 것보다 / 더 빨리 / 나를 정 떨어지게 하지 못하는데 / 내 말은 / 모든 면에서 나와 거의 똑같으면서 / 나를 돋보이게 하지도 않는 사람들을 뜻한다.'"
+  ],
+  "translation": "그 무엇도 엉뚱한 사람들이 그것을 좋아하는 것보다 더 빨리 나를 어떤 것에 정 떨어지게 하지는 못하는데, 내 말인즉 모든 면에서 나와 거의 똑같으면서 나를 돋보이게 해 주지도 않는 사람들을 뜻한다."
+}

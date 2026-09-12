@@ -1,0 +1,14 @@
+{
+  "item_no": "33",
+  "sentence_id": 8,
+  "difficulty": "succeeded at + 동명사 + 관계절, 이어 결과의 분사구문 'thus demonstrating that ~' + 그 that절 안에 대시(―)로 동격 삽입(mimesis―simple copying―)이 끼어 주어 view와 동사 does가 멀리 떨어진 문장",
+  "skeleton": "They succeeded at making artwork, thus demonstrating that the view does not define art.",
+  "steps": [
+    "1. 골격 찾기: 주어 They / 동사 succeeded / at making artwork(succeed at + 동명사). 'that did not copy anything'은 artwork를 꾸미는 관계절.",
+    "2. 분사구문 처리: 콤마 뒤 'thus demonstrating ~'은 주절 전체(they succeeded ~)를 의미상 주어로 받는 '결과'의 분사구문 = and this thus demonstrated. '그리하여 ~을 입증하며/입증했다'.",
+    "3. 목적어절 열기: demonstrating that ~의 that은 명사절 접속사. that절의 주어는 the ancient Greek view of art as mimesis('예술을 미메시스로 보는 고대 그리스의 관점').",
+    "4. 삽입(대시) 걷어내기: mimesis 뒤 ―simple copying―은 mimesis를 풀어 준 동격 삽입. 이 대시 구간을 잠시 빼면 주어 view와 동사 does not ... define art가 바로 연결됨(단수 주어 view → does).",
+    "5. 직독 → 자연스럽게: '그들은 아무것도 모방하지 않는 작품을 만드는 데 성공했고 / 그리하여 / 예술을 미메시스, 즉 단순한 모방으로 보는 고대 그리스의 관점이 / 예술을 충분히 정의하지는 못함을 / 입증했다.'"
+  ],
+  "translation": "그들은 아무것도 모방하지 않는 예술 작품을 만드는 데 성공했고, 그리하여 예술을 미메시스, 즉 단순한 모방으로 보는 고대 그리스의 관점이 예술을 충분히 정의하지는 못한다는 것을 입증했다."
+}

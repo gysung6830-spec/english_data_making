@@ -1,0 +1,14 @@
+{
+  "item_no": "37",
+  "sentence_id": 5,
+  "difficulty": "concluded that(목적어절①) … and that(목적어절②)의 병렬 + 주어 the view 뒤 accepted 후치수식 + 대시로 삽입된 동격 that절 + 목적어절②가 it was … Earth that … 강조구문 — that이 네 번 나와 역할 구분이 관건",
+  "skeleton": "He concluded [that the view was wrong] and [that it was Earth that traveled around the Sun].",
+  "steps": [
+    "1. 골격 찾기: 주어 He / 동사 concluded / 목적어 = that절 두 개가 and로 병렬(concluded that ~ , and that ~). 먼저 이 두 덩어리로 크게 나눈다.",
+    "2. 첫 목적어절의 주어부: 'the view of the universe accepted at the time'. accepted는 the view를 뒤에서 꾸미는 과거분사(당시 받아들여지던 우주관). 이 긴 주어의 본동사는 저 멀리 있는 was (wrong).",
+    "3. 대시 삽입 동격 that절: ―that the Sun traveled around Earth―는 앞 the view의 '내용'을 풀어 준 동격절(관계절 아님: 뒤 문장이 완전함). 삽입이므로 빼고 읽으면 'the view ... was wrong'이 또렷해진다 → '즉 태양이 지구 주위를 돈다는'.",
+    "4. 둘째 목적어절의 강조구문: 'and that it was in fact Earth that traveled around the Sun'은 it ~ that 강조구문으로 Earth를 강조 → '그리고 사실 태양 주위를 도는 것은 지구였다고'. 여기 that은 강조구문의 that이다.",
+    "5. 직독 → 자연스럽게: 그는 ①당시 통념(태양이 지구를 돈다)이 틀렸고 ②사실은 지구가 태양을 도는 것이라고 결론지었다로 두 결론을 묶는다."
+  ],
+  "translation": "그는 당시 받아들여지던 우주관, 즉 태양이 지구 주위를 돈다는 그 견해가 틀렸으며, 사실은 태양 주위를 도는 것이 지구라고 결론지었다."
+}

@@ -1,0 +1,14 @@
+{
+  "item_no": "26",
+  "sentence_id": 6,
+  "difficulty": "고유명사 뒤 콤마 동격(an organization) + 주격 관계대명사 that절이 그 동격어를 수식 + 목적의 to부정사에서 provide와 strengthen이 to를 공유하며 병렬(두 번째 to 생략)",
+  "skeleton": "he co-founded Partners In Health[, an organization (that works ... to provide ... and strengthen ...)].",
+  "steps": [
+    "1. 골격 찾기: 주어 he / 동사 co-founded(공동 설립했다) / 목적어 Partners In Health. co-는 '공동으로'라는 뜻이므로 단독 설립이 아님에 주의.",
+    "2. 동격 처리: 콤마 뒤 'an organization'은 Partners In Health를 다시 설명하는 동격어. 'Partners In Health = 한 단체'로 읽는다.",
+    "3. 관계절 방향 잡기: 'that works in countries like Haiti, Rwanda, and Peru'는 that의 선행사 an organization을 꾸밈. works의 주어가 that(=단체)임을 확인.",
+    "4. 목적 to부정사 병렬 풀기: 'to provide medical treatment and strengthen public health systems'에서 and는 provide와 (to)strengthen을 병렬. 두 번째 to가 생략됐을 뿐 둘 다 '~하기 위해'로 묶인다.",
+    "5. 직독 → 자연스럽게: 그는 Partners In Health를 공동 설립했는데, 이 단체는 의료를 제공하고 공중 보건 체계를 강화하기 위해 아이티, 르완다, 페루 같은 나라들에서 활동한다."
+  ],
+  "translation": "1987년에 그는 Partners In Health를 공동으로 설립했는데, 이 단체는 의료를 제공하고 공중 보건 체계를 강화하기 위해 아이티, 르완다, 페루 같은 나라들에서 활동하는 조직이다."
+}

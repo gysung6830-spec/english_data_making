@@ -1,0 +1,13 @@
+{
+ "item_no": "20",
+ "sentence_id": 4,
+ "difficulty": "세미콜론(;) 앞뒤의 'A를 만드는 게 아니라 B를 만드는 것이다' 대조 + 전치사+관계대명사 in which(뒤에 완전한 절)가 a learning game을 수식",
+ "skeleton": "you are not creating [the next great commercial game]; you are creating [a learning game] (in which success will be measured ...)",
+ "steps": [
+  "1. 골격 찾기: 세미콜론으로 두 절이 대조됨. 둘 다 '주어 you + 동사 are (not) creating + 목적어 game'. 'you are NOT creating A ; you ARE creating B' → 'A를 만드는 게 아니라 B를 만드는 것이다'로 읽는다.",
+  "2. 수식·목적 처리: 앞 절의 to entertain your learners는 to부정사(목적·형용사적)로 the next great commercial game을 꾸밈('학습자를 즐겁게 하기 위한 ~ 게임').",
+  "3. 어려운 구문 풀기: in which = in a learning game. 전치사+관계대명사라 뒤에 완전한 절(success will be measured by the achievement of learning outcomes)이 오며, 그 절이 a learning game을 수식한다 → '그 (게임) 안에서 성공이 학습 성과의 달성으로 측정될'.",
+  "4. 직독→자연스럽게: '명심하라, 당신은 학습자를 즐겁게 하려는 상업용 게임이 아니라, 그 안에서 성공이 학습 성과의 달성으로 측정되는 학습 게임을 만들고 있는 것이다.'"
+ ],
+ "translation": "명심하라, 당신은 학습자를 즐겁게 하기 위한 차세대의 훌륭한 상업용 게임을 만들고 있는 것이 아니라, 성공이 학습 성과의 달성으로 측정될 학습 게임을 만들고 있는 것이다."
+}

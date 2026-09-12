@@ -1,0 +1,13 @@
+{
+ "item_no": "21",
+ "sentence_id": 6,
+ "difficulty": "movement repertoire를 다시 설명하는 동격어구(the very thing) + 주격 관계대명사 that + help+목적어+원형부정사에 걸리는 4중 병렬(learn, communicate, create, become)",
+ "skeleton": "they are not learning or building [their movement repertoire], [the very thing] (that will help them learn, communicate, create, and become ...)",
+ "steps": [
+  "1. 골격 찾기: As a result(그 결과) 뒤 주어 they / 동사 are not learning or building(진행형 두 동사 병렬) / 목적어 their movement repertoire.",
+  "2. 수식·동격 처리: 콤마 뒤 the very thing은 앞의 their movement repertoire를 다시 풀어 설명하는 동격어구('바로 그것').",
+  "3. 어려운 구문 풀기: that will help them ~에서 that은 the very thing을 꾸미는 주격 관계대명사. help them 뒤는 원형부정사라서 them이 하는 일로 learn, communicate, create, and become emotionally mature 네 개가 병렬로 이어진다('그들이 배우고, 소통하고, 창조하고, 감정적으로 성숙해지도록 도울').",
+  "4. 직독→자연스럽게: '그 결과 그들은 움직임 레퍼토리를 배우거나 쌓지 못하는데, 그것은 그들이 배우고 소통하고 창조하고 감정적으로 성숙해지도록 도와줄 바로 그것이다.'"
+ ],
+ "translation": "그 결과 그들은 자신의 움직임 레퍼토리를 배우거나 쌓고 있지 못하는데, 그것은 그들이 배우고, 소통하고, 창조하고, 감정적으로 성숙해지도록 도와줄 바로 그것이다."
+}

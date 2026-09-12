@@ -1,0 +1,13 @@
+{
+  "item_no": "39",
+  "sentence_id": 7,
+  "difficulty": "문두 분사구문(Using ~) + 콤마 뒤 'something spanning ~'을 새 문장/새 주어로 오해하기 쉬움(사실은 enormous nests를 부연하는 동격 명사구, spanning은 something을 뒤에서 꾸미는 현재분사)",
+  "skeleton": "the ants build enormous nests (개미들이 거대한 둥지를 짓는다)",
+  "steps": [
+    "1. 골격 찾기: 주어 the ants / 동사 build / 목적어 enormous nests (+ 부사 underground). '개미들은 지하에 거대한 둥지를 짓는다'가 문장의 중심.",
+    "2. 문두 분사구문 처리: Using this successful farming strategy는 주어 the ants와 같은 주어를 가진 분사구문 → '이 성공적인 농사 전략을 이용하여'. 문장의 주어가 아니라 배경·수단을 까는 부분.",
+    "3. 콤마 뒤 동격 풀기: 두 번째 콤마 뒤 something spanning ~ 은 마침표 없는 한 문장 속 '동격 명사구'로, 앞의 enormous nests를 다시 설명함. spanning은 접속사·정동사가 아니라 something을 뒤에서 꾸미는 현재분사('~에 걸치는').",
+    "4. 직독→자연스럽게: '이 전략을 이용해 / 개미들은 지하에 거대한 둥지를 짓는다 / (그것은) 수백 제곱미터에 걸치는 것이다'로 끊어 붙인다."
+  ],
+  "translation": "이 성공적인 농사 전략을 이용하여, 개미들은 지하에 거대한 둥지를 짓는데, 그것은 수백 제곱미터에 걸치는 규모이다."
+}

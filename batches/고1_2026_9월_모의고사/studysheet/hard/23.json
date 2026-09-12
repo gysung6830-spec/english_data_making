@@ -1,0 +1,13 @@
+{
+ "item_no": "23",
+ "sentence_id": 6,
+ "difficulty": "가정법 과거(If+had/were ~ 주절 might become) + 대시(―)로 삽입된 부연 if절 + 주절 안에 다시 when 시간절이 끼어듦",
+ "skeleton": "If we all had the same kind of mind (―if there were only one human nature―) then (when disaster struck) we might become extinct",
+ "steps": [
+  "1. 골격 찾기: 조건절 If we all had the same kind of mind + 주절 we might become extinct. '만약 ~라면 ~할 수도 있을 것이다'의 큰 틀을 먼저 잡는다.",
+  "2. 삽입 처리: 대시(―) 사이의 if there were only one human nature는 앞 조건을 바꿔 말한 삽입절(같은 가정의 부연)이므로 괄호 치듯 떼어 읽는다.",
+  "3. 어려운 구문 풀기: had·were·might는 형태는 과거지만 '현재 사실의 반대'를 가정하는 가정법 과거(be동사는 수와 무관하게 were). 주절 앞 then 뒤의 when disaster struck는 주절 속에 삽입된 시간 부사절 → '재난이 닥쳤을 때'.",
+  "4. 직독→자연스럽게: '만약 우리 모두가 같은 종류의 마음을 가졌다면―즉 인간 본성이 오직 하나뿐이라면―재난이 닥쳤을 때 우리는 멸종할 수도 있을 것이다.'"
+ ],
+ "translation": "만약 우리 모두가 같은 종류의 마음을 가졌다면―만약 오직 하나의 인간 본성만 있었다면―그때 재난이 닥쳤을 때, 우리는 멸종할 수도 있을 것이다."
+}

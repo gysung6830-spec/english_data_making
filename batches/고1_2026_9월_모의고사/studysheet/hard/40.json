@@ -1,0 +1,13 @@
+{
+  "item_no": "40",
+  "sentence_id": 7,
+  "difficulty": "문두 With 부대상황(+ 과거분사 tied 후치수식) + 가주어 it ~ 진주어 that절 + that절 안의 긴 주어(the way we mobilize ~ around relationships)와 멀리 떨어진 동사 would be networked",
+  "skeleton": "it makes sense that [the way ... would be networked] (~하는 방식이 연결망을 이룰 것이라는 것은 이치에 맞다)",
+  "steps": [
+    "1. 골격 찾기: 주절은 it makes sense that ~ = '~라는 것은 이치에 맞다'. 맨 앞 it은 해석하지 않는 가주어, 진짜 주어는 뒤의 that절.",
+    "2. 문두 With구 처리: With such a high value for survival closely tied with relationships는 부대상황 '~한 채로/~하다 보니'. tied는 value를 뒤에서 꾸미는 과거분사('관계와 밀접히 결부된') → '생존에 대한 그토록 높은 가치가 관계와 밀접히 결부되어 있어서'.",
+    "3. 진주어 that절 속 골격 잡기: 주어는 the way (we mobilize our internal resources around relationships) = '우리가 관계를 중심으로 내적 자원을 동원하는 방식'. the way 뒤에는 관계부사(that/in which)가 생략됨. 이 긴 주어의 동사는 멀리 있는 would be highly networked.",
+    "4. 직독→자연스럽게: '생존의 높은 가치가 관계와 얽혀 있어서 / 우리가 관계를 중심으로 내적 자원을 동원하는 방식이 / 뇌와 몸에서 고도로 연결망을 이룰 것이라는 건 / 이치에 맞다'로 마무리."
+  ],
+  "translation": "생존에 대한 그토록 높은 가치가 관계와 밀접히 결부되어 있다 보니, 우리가 관계를 중심으로 내적 자원을 동원하는 방식이 우리의 뇌와 몸에서 고도로 연결망을 이룰 것이라는 점은 이치에 맞다."
+}
